@@ -1,3 +1,7 @@
+2004-01-01
+    * Merged Curt's changes for MSW compilation
+
+
 2003-12-29
     * Added events sample (in etc)
     * Ran convert-repo on darcs source code repository

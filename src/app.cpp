@@ -12,8 +12,11 @@
 
 
 #include "wx.h"
-#ifndef WIN32
-#include <sys/time.h>
+
+#ifdef WIN32
+#  include <time.h>
+#else
+#  include <sys/time.h>
 #endif
 
 #if defined(__cplusplus)
