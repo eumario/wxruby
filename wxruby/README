@@ -33,12 +33,18 @@ We have some unresolved issues with MS Windows.
 --------------------------------------------------------------------
 INSTALL FROM SOURCE
 
-	From the src/ directory:
+From the src/ directory:
 	
 	> ruby extconf.rb
 	> make     [[[or nmake, depending on your platform]]]
 	> ruby install.rb
 
+Note that on some systems you may need to be root to do the 
+install step. As an alternative, you may be able to copy 
+wxruby.so to a directory that you have rights in, and include 
+that directory in the Ruby library search path. Hopefully 
+later we can describe that process in more detail in each 
+platform-specific README that has this issue.
 
 --------------------------------------------------------------------
 CONTENTS
