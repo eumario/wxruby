@@ -95,6 +95,9 @@ other information for specific platforms:
   README.osx
   README.mingw
   README.mswin
+  
+We have not yet attempted or heard reports of attempted builds with 
+other compilers (such as Borland), or other platforms.
 
 --------------------------------------------------------------------
 KNOWN PROBLEMS
