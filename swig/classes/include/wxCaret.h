@@ -10,7 +10,7 @@ class wxCaret
 public:
    wxCaret() ;
    wxCaret(wxWindow*  window , int  width , int  height ) ;
-   wxCaret(wxWindowBase*  window , const wxSize&  size ) ;
+  wxCaret(wxWindow*  window , const wxSize&  size );
   bool Create(wxWindowBase*  window , int  width , int  height ) ;
   bool Create(wxWindowBase*  window , const wxSize&  size ) ;
   static int GetBlinkTime() ;

@@ -38,6 +38,10 @@ bool GcIsDeleted(void *ptr)
 	else return true;
 }
 
+void GcFreefunc(void *)
+{
+
+}
 
 %} 
 

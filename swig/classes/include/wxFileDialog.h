@@ -8,7 +8,7 @@
 class wxFileDialog : public wxDialog
 {
 public:
-   wxFileDialog(wxWindow*  parent , const wxString&  message = "Choose, const wxString&  defaultDir = "", const wxString&  defaultFile = "", const wxString&  wildcard = "*.*", long  style = 0, const wxPoint&  pos = wxDefaultPosition) ;
+   wxFileDialog(wxWindow*  parent , const wxString&  message = "Choose", const wxString&  defaultDir = "", const wxString&  defaultFile = "", const wxString&  wildcard = "*.*", long  style = 0, const wxPoint&  pos = wxDefaultPosition) ;
   virtual  ~wxFileDialog() ;
   wxString GetDirectory() const;
   wxString GetFilename() const;

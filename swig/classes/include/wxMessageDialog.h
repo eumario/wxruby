@@ -8,7 +8,7 @@
 class wxMessageDialog : public wxDialog
 {
 public:
-   wxMessageDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = "Message, long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
+   wxMessageDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = "Message", long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
   virtual  ~wxMessageDialog() ;
   int ShowModal() ;
 };

@@ -26,67 +26,83 @@ extern swig_class cWxCommandEvent;
 extern swig_class cWxIdleEvent;
 extern swig_class cWxPaintEvent;
 extern swig_class cWxUpdateUIEvent;
+extern swig_class cWxSizeEvent;
+extern swig_class cWxKeyEvent; 
 
-static int calendarEvents[] = 
+static const wxEventType *calendarEvents[] = 
 {
-    wxEVT_CALENDAR_SEL_CHANGED,
-    wxEVT_CALENDAR_DAY_CHANGED,
-    wxEVT_CALENDAR_MONTH_CHANGED,
-    wxEVT_CALENDAR_YEAR_CHANGED,
-    wxEVT_CALENDAR_DOUBLECLICKED,
-    wxEVT_CALENDAR_WEEKDAY_CLICKED,
-    -1
+    &wxEVT_CALENDAR_SEL_CHANGED,
+    &wxEVT_CALENDAR_DAY_CHANGED,
+    &wxEVT_CALENDAR_MONTH_CHANGED,
+    &wxEVT_CALENDAR_YEAR_CHANGED,
+    &wxEVT_CALENDAR_DOUBLECLICKED,
+    &wxEVT_CALENDAR_WEEKDAY_CLICKED,
+    (const wxEventType *)0
 };
 
-static int closeEvents[] =
+static const wxEventType *closeEvents[] =
 {
-    wxEVT_CLOSE_WINDOW,
-    -1
+    &wxEVT_CLOSE_WINDOW,
+    (const wxEventType *)0
 };
 
-static int commandEvents[] = 
+static const wxEventType *commandEvents[] = 
 {
-    wxEVT_COMMAND_BUTTON_CLICKED,
-    wxEVT_COMMAND_CHECKBOX_CLICKED,
-    wxEVT_COMMAND_CHOICE_SELECTED,
-    wxEVT_COMMAND_LISTBOX_SELECTED,
-    wxEVT_COMMAND_LISTBOX_DOUBLECLICKED,
-    wxEVT_COMMAND_CHECKLISTBOX_TOGGLED,
-    wxEVT_COMMAND_TEXT_UPDATED,
-    wxEVT_COMMAND_TEXT_ENTER,
-    wxEVT_COMMAND_TEXT_URL,
-    wxEVT_COMMAND_TEXT_MAXLEN,
-    wxEVT_COMMAND_MENU_SELECTED,
-    wxEVT_COMMAND_SLIDER_UPDATED,
-    wxEVT_COMMAND_RADIOBOX_SELECTED,
-    wxEVT_COMMAND_RADIOBUTTON_SELECTED,
-    wxEVT_COMMAND_SCROLLBAR_UPDATED,
-    wxEVT_COMMAND_VLBOX_SELECTED,
-    wxEVT_COMMAND_COMBOBOX_SELECTED,
-    wxEVT_COMMAND_TOOL_RCLICKED,
-    wxEVT_COMMAND_TOOL_ENTER,
-    wxEVT_COMMAND_SPINCTRL_UPDATED,
-    -1
+    &wxEVT_COMMAND_BUTTON_CLICKED,
+    &wxEVT_COMMAND_CHECKBOX_CLICKED,
+    &wxEVT_COMMAND_CHOICE_SELECTED,
+    &wxEVT_COMMAND_LISTBOX_SELECTED,
+    &wxEVT_COMMAND_LISTBOX_DOUBLECLICKED,
+    &wxEVT_COMMAND_CHECKLISTBOX_TOGGLED,
+    &wxEVT_COMMAND_TEXT_UPDATED,
+    &wxEVT_COMMAND_TEXT_ENTER,
+    &wxEVT_COMMAND_TEXT_URL,
+    &wxEVT_COMMAND_TEXT_MAXLEN,
+    &wxEVT_COMMAND_MENU_SELECTED,
+    &wxEVT_COMMAND_SLIDER_UPDATED,
+    &wxEVT_COMMAND_RADIOBOX_SELECTED,
+    &wxEVT_COMMAND_RADIOBUTTON_SELECTED,
+    &wxEVT_COMMAND_SCROLLBAR_UPDATED,
+    &wxEVT_COMMAND_VLBOX_SELECTED,
+    &wxEVT_COMMAND_COMBOBOX_SELECTED,
+    &wxEVT_COMMAND_TOOL_RCLICKED,
+    &wxEVT_COMMAND_TOOL_ENTER,
+    &wxEVT_COMMAND_SPINCTRL_UPDATED,
+    (const wxEventType *)0
 };
 
-static int idleEvents[] =
+static const wxEventType *idleEvents[] =
 {
-    wxEVT_IDLE,
-    -1
+    &wxEVT_IDLE,
+    (const wxEventType *)0
 };
 
-static int paintEvents[] = 
+static const wxEventType *paintEvents[] = 
 {
-    wxEVT_PAINT,
-    -1
+    &wxEVT_PAINT,
+    (const wxEventType *)0
 };
 
-static int updateUIEvents[] =
-{
-    wxEVT_UPDATE_UI,
-    -1
+static const wxEventType *updateUIEvents[] =
+{  
+    &wxEVT_UPDATE_UI,
+    (const wxEventType *)0
 };
 
+static const wxEventType *sizeEvents[] = 
+{
+    &wxEVT_SIZE,
+    (const wxEventType *)0
+};
+
+static const wxEventType *keyEvents [] = 
+{
+    &wxEVT_CHAR,
+    &wxEVT_CHAR_HOOK,
+    &wxEVT_KEY_DOWN,
+    &wxEVT_KEY_UP,
+    (const wxEventType *)0
+};
 
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
@@ -114,8 +130,15 @@ public:
             cEvent = cWxPaintEvent.klass;
         else if(IsEventInMap(type, updateUIEvents))
             cEvent = cWxUpdateUIEvent.klass;
+        else if(IsEventInMap(type, sizeEvents))
+            cEvent = cWxSizeEvent.klass;
+        else if(IsEventInMap(type, keyEvents))
+            cEvent = cWxKeyEvent.klass;
         else
+        {
+            printf("Unknown event type %d\n",type);
             cEvent = cWxEvent.klass;
+	}
             
         static VALUE vevent;
         vevent = Data_Wrap_Struct(cEvent, 0, 0, 0);
@@ -125,10 +148,10 @@ public:
         rb_funcall(cb->m_func, rb_intern("call"),1,vevent);
     }
     
-    bool IsEventInMap(int type, int map[])
+    bool IsEventInMap(int type, const wxEventType *map[])
     {
-        for(int i=0; map[i] >= 0; ++i)
-            if(type == map[i])
+        for(int i=0; map[i] != NULL; ++i)
+            if(type == *map[i])
                 return true;
         return false;
     }
@@ -264,6 +287,26 @@ static VALUE evt_window_create(int argc, VALUE *argv, VALUE self)
     return internal_evt_no_parameters(argc, argv, self, wxEVT_CREATE);
 }
 
+static VALUE evt_size(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SIZE);
+}
+
+static VALUE evt_key_down(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_KEY_DOWN);
+}
+
+static VALUE evt_key_up(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_KEY_UP);
+}
+
+static VALUE evt_char(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_CHAR);
+}
+
 %}
 
 %init %{
@@ -277,11 +320,14 @@ static VALUE evt_window_create(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_year", VALUEFUNC(evt_calendar_year), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_weekday_clicked", VALUEFUNC(evt_calendar_weekday_clicked), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_idle", VALUEFUNC(evt_idle), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_size", VALUEFUNC(evt_size), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_show", VALUEFUNC(evt_show), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_update_ui", VALUEFUNC(evt_update_ui), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_window_create", VALUEFUNC(evt_window_create), -1);
 
     rb_define_method(cWxEvtHandler.klass, "evt_paint", VALUEFUNC(evt_paint), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_close", VALUEFUNC(evt_close), -1);
-
+    rb_define_method(cWxEvtHandler.klass, "evt_key_down", VALUEFUNC(evt_key_down), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_key_up", VALUEFUNC(evt_key_up), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_char", VALUEFUNC(evt_char), -1);
 %}

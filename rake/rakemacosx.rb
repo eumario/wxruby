@@ -12,6 +12,7 @@ use_wx_config
 
 $cpp = "g++"
 $ld = "g++"
+$swig_options += " -D__WXMAC__ "
 
 =begin
     CONFIG['CC'] = "g++"

@@ -110,12 +110,22 @@ $fixes =
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator , const wxString&  name = "button")' =>
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "button")',
     },
+    'wxCaret'=>
+    {
+    'wxCaret(wxWindowBase*  window , const wxSize&  size )'=>	    
+    'wxCaret(wxWindow*  window , const wxSize&  size )',	    
+    },
     'wxCheckBox' =>
     {
     'wxCheckBox(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val , const wxString&  name = "checkBox")' =>
     'wxCheckBox(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val = wxDefaultValidator, const wxString&  name = "checkBox")',
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val , const wxString&  name = "checkBox")' =>
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val = wxDefaultValidator, const wxString&  name = "checkBox")',
+    },
+    'wxCheckListBox'=>
+    {
+    'wxCheckListBox(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")'=>
+    'wxCheckListBox(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize& size, int  n =0 , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")'
     },
     'wxChoice' =>
     {
@@ -127,6 +137,24 @@ $fixes =
     'void SetLoggingOff(bool  loggingOff ) const' =>
     'void SetLoggingOff(bool  loggingOff )',
     },
+    'wxComboBox'=>
+    {
+    'wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")'=>
+    'wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")',
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")'=>
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")'
+    },
+    'wxConfigBase' =>
+    {
+    'wxConfigBase(const wxString&  appName = wxEmptyString, const wxString&  vendorName = wxEmptyString, const wxString&  localFilename = wxEmptyString, const wxString&  globalFilename = wxEmptyString, long style = 0, wxMBConv& conv = wxConvUTF8)'=>
+     'wxConfigBase(const wxString&  appName = wxEmptyString, const wxString&  vendorName = wxEmptyString)',
+    'uint  GetNumberOfEntries(bool  bRecursive = false) const'=>
+    'int  GetNumberOfEntries(bool  bRecursive = false) const',
+    'uint GetNumberOfGroups(bool  bRecursive = false) const'=>
+    'int GetNumberOfGroups(bool  bRecursive = false) const',
+    'const wxString& GetPath() const'=>
+    'wxString GetPath() const',
+    },
     'wxControl' =>
     {
     'wxString& GetLabel()' =>
@@ -136,6 +164,12 @@ $fixes =
     {
     'void DrawArc(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , double  xc , double  yc )' =>
     'void DrawArc(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , wxCoord  xc , wxCoord  yc )',
+    },
+    # Working around a SWIG issue...
+    'wxCursor'=>
+    {
+    'wxCursor(const char  bits[] , int  width , int   height , int  hotSpotX = -1, int  hotSpotY = -1, const char  maskBits[] = NULL)'=>
+    '//wxCursor(const char  bits[] , int  width , int   height , int  hotSpotX = -1, int  hotSpotY = -1, const char  maskBits[] = NULL)',
     },
     'wxDialog' =>
     {
@@ -160,10 +194,49 @@ $fixes =
     '',
     'wxIcon(const wxIconLocation&  loc )' =>
     '',
+    'wxIcon(const wxString&  name , long  type , int desiredWidth = -1, int desiredHeight = -1)'=>
+    'wxIcon(const wxString&  name , long  type = wxBITMAP_TYPE_ANY, int desiredWidth = -1, int desiredHeight = -1)',
     'bool LoadFile(const wxString&  name , long  type )' =>
     'bool LoadFile(const wxString&  name , wxBitmapType  type )',
     'bool SaveFile(const wxString&  name , int  type , wxPalette*  palette = NULL)' =>
     'bool SaveFile(const wxString&  name , wxBitmapType  type , wxPalette*  palette = NULL)',
+    },
+    'wxImage'=>
+    {
+    'bool Destroy()'=>
+    'void Destroy()',
+    # SWIG 1.3.22 Workaround
+    'wxImage(int  width , int  height , bool clear = true)'=>
+    'wxImage(int  width , int  height)',
+    'bool Create(int  width , int  height , bool clear = true)'=>
+    'void Create(int  width , int  height )',
+    },
+    'wxListBox'=>
+    {
+    'wxListBox(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")'=>
+    'wxListBox(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n = 0 , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")',
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")'=>
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")',
+    },
+    #
+    # NSK - the following are protected, but since we don't have a 
+    # mechanism to mark that yet, I'll just wipe them out for now
+    #
+    'wxListCtrl'=>
+    {
+    'virtual wxListItemAttr * OnGetItemAttr(long  item )'=>
+    '//virtual wxListItemAttr * OnGetItemAttr(long  item )',
+    'virtual int OnGetItemImage(long  item )'=> 
+    '//virtual int OnGetItemImage(long  item )', 
+    'virtual wxString OnGetItemText(long  item , long  column )'=>
+    '//virtual wxString OnGetItemText(long  item , long  column )',
+    },
+    'wxMask'=>
+    {
+    'wxMask(const \helpref{wxBitmap wxbitmap )'=>
+    'wxMask(const wxBitmap & wxbitmap )',
+    'wxMask(const \helpref{wxBitmap wxbitmap , const \helpref{wxColour wxcolour )'=>
+    'wxMask(const wxBitmap & wxbitmap , const wxColour &wxcolour )',
     },
     'wxMenu' =>
     {
@@ -173,6 +246,13 @@ $fixes =
     'void PrependSeparator()',
     'void UpdateUI(wxEvtHandler* source = NULL) const' =>
     'void UpdateUI(wxEvtHandler* source = NULL)',
+    },
+    'wxNotebook'=>
+    {
+    'wxNotebook(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString&  name = "notebook")'=>
+    'wxNotebook(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString&  name = "notebook")',
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size , long style = 0, const wxString&  name = "notebook")'=>
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize&  size , long style , const wxString&  name = "notebook")'
     },
     'wxPanel' =>
     {
@@ -193,6 +273,8 @@ $fixes =
     'virtual bool SetBackgroundColour(const wxColour&  colour )',
     'virtual void SetForegroundColour(const wxColour&  colour )' =>
     'virtual bool SetForegroundColour(const wxColour&  colour )',
+    'void SetCaret(wxCaret * caret ) const'=>
+    'void SetCaret(wxCaret * caret )',
     'virtual void SetCursor(const wxCursor& cursor )' =>
     'virtual bool SetCursor(const wxCursor& cursor )',
     'virtual void SetPalette(wxPalette*  palette )' =>
@@ -227,6 +309,7 @@ $need_virtual_destructor =
     'wxCloseEvent',
     'wxCommandEvent',
     'wxControl',
+    'wxCursor',
     'wxGDIObject',
     'wxPaintDC',
     'wxPaintEvent',
@@ -271,6 +354,9 @@ class WxParameter
         @value = node.entity.attrs['value']
         if(@value)
             @value.gsub!(/``/, '"')
+	    if (/^[\"]/ =~ @value) and not ( /^[\"].*[\"]/ =~ @value)
+                @value = "#{@value}\""
+            end
         end
     end
     

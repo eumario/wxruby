@@ -15,6 +15,7 @@ $classes_dir = File.join($swig_dir, 'classes')
 $original_h_dir = File.join($classes_dir, 'include')
 
 $swig_cmd = "swig"
+$swig_options = " -noruntime -noextern "
 
 def wx_config(opt)
     shell = Config::CONFIG["SHELL"]
@@ -136,7 +137,7 @@ def create_swig_helper_task(base_name)
     swig_file = special_swig_file(base_name)
     
     file(cpp_file => swig_file) do |t|
-        do_swig(swig_file, cpp_file, "-noruntime -noextern")
+        do_swig(swig_file, cpp_file, $swig_options)
         post_process(cpp_file, "fixmodule.rb")
     end
     return cpp_file
@@ -148,7 +149,7 @@ def create_normal_swig_task(base_name)
     h_file = original_h_file(base_name)
     
     file(cpp_file => [swig_file, h_file] + shared_swig_files) do |t|
-        do_swig(swig_file, cpp_file, "-noruntime -noextern")
+        do_swig(swig_file, cpp_file, $swig_options)
         post_process(cpp_file, "fixmodule.rb")
         fixdeleting = File.join($swig_dir, "fixdeleting.rb")
         sh "ruby #{fixdeleting} #{cpp_file}"

@@ -8,7 +8,7 @@
 class wxTextEntryDialog : public wxDialog
 {
 public:
-   wxTextEntryDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = "Please, const wxString&  defaultValue = "", long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
+   wxTextEntryDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = "Please", const wxString&  defaultValue = "", long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
   virtual  ~wxTextEntryDialog() ;
   wxString GetValue() const;
   void SetValue(const wxString&  value ) ;

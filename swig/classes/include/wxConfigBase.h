@@ -8,7 +8,7 @@
 class wxConfigBase
 {
 public:
-   wxConfigBase(const wxString&  appName = wxEmptyString, const wxString&  vendorName = wxEmptyString, const wxString&  localFilename = wxEmptyString, const wxString&  globalFilename = wxEmptyString, long style = 0, wxMBConv& conv = wxConvUTF8) ;
+  wxConfigBase(const wxString&  appName = wxEmptyString, const wxString&  vendorName = wxEmptyString);
   virtual  ~wxConfigBase() ;
   static wxConfigBase * Create() ;
   void DontCreateOnDemand() ;
@@ -24,9 +24,9 @@ public:
   bool GetFirstEntry(wxString&  str , long&  index ) const;
   bool GetNextGroup(wxString&  str , long&  index ) const;
   bool GetNextEntry(wxString&  str , long&  index ) const;
-  uint  GetNumberOfEntries(bool  bRecursive = false) const;
-  uint GetNumberOfGroups(bool  bRecursive = false) const;
-  const wxString& GetPath() const;
+  int  GetNumberOfEntries(bool  bRecursive = false) const;
+  int GetNumberOfGroups(bool  bRecursive = false) const;
+  wxString GetPath() const;
   wxString GetVendorName() const;
   bool HasEntry(wxString&  strName ) const;
   bool HasGroup(const wxString&  strName ) const;

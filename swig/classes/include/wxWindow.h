@@ -115,7 +115,7 @@ public:
   //void SetAccessible(wxAccessible*  accessible );
   void SetAutoLayout(bool  autoLayout ) ;
   virtual bool SetBackgroundColour(const wxColour&  colour );
-  void SetCaret(wxCaret * caret ) const;
+  void SetCaret(wxCaret * caret );
   virtual void SetClientSize(int  width , int  height ) ;
   virtual void SetClientSize(const wxSize&  size ) ;
   void SetContainingSizer(wxSizer*  sizer ) ;

@@ -58,6 +58,12 @@
 	$1 = (TYPE($input) == T_STRING);
 }
 
+
+%typemap(typecheck) wxString const & {
+	$1 = (TYPE($input) == T_STRING);
+}
+
+
 %typemap(typecheck) wxString *{
 	$1 = (TYPE($input) == T_STRING);
 }
@@ -127,5 +133,43 @@
 }
 
 %apply int { wxDateTime::WeekDay  }
+
+##############################################################
+
+
+%typemap(in,numinputs=1) (int n, const wxString choices []) (wxString *arr)
+{
+  if (($input = Qnil) || (TYPE($input) != T_ARRAY))
+  {
+    $1 = 0;
+    $2 = NULL;
+  }
+  else
+  {
+    arr = new wxString[RARRAY($input)->len];
+    for (int i = 0; i < RARRAY($input)->len; i++)
+    {
+        arr[i] = STR2CSTR(rb_ary_entry($input,i));
+    }
+    $1 = RARRAY($input)->len;
+    $2 = arr;
+  }
+}
+
+%typemap(default,numinputs=1) (int n, const wxString choices[]) 
+{
+    $1 = 0;
+    $2 = NULL;
+}
+
+%typemap(freearg) (intn , const wxString choices[])
+{
+    if ($2 != NULL) delete [] $2;
+}
+
+%typemap(typecheck) (int n , const wxString choices[])
+{
+   $1 = (TYPE($input) == T_ARRAY);
+}
 
 ##############################################################

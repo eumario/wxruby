@@ -3,6 +3,9 @@
 #   as part of the wxRuby project
 
 %module(directors="1") wxRubyConstants
+%{
+#include <wx/gdicmn.h>
+%}
 
 %include "common.i"
 
@@ -686,63 +689,6 @@ enum wxHitTest
 // Don't do parent client adjustments (for implementation only)
 #define wxSIZE_NO_ADJUSTMENTS   0x0008
 
-// ----------------------------------------------------------------------------
-// GDI descriptions
-// ----------------------------------------------------------------------------
-
-enum
-{
-    // Text font families
-    wxDEFAULT    = 70,
-    wxDECORATIVE,
-    wxROMAN,
-    wxSCRIPT,
-    wxSWISS,
-    wxMODERN,
-    wxTELETYPE,  /* @@@@ */
-
-    // Proportional or Fixed width fonts (not yet used)
-    wxVARIABLE   = 80,
-    wxFIXED,
-
-    wxNORMAL     = 90,
-    wxLIGHT,
-    wxBOLD,
-    // Also wxNORMAL for normal (non-italic text)
-    wxITALIC,
-    wxSLANT,
-
-    // Pen styles
-    wxSOLID      =   100,
-    wxDOT,
-    wxLONG_DASH,
-    wxSHORT_DASH,
-    wxDOT_DASH,
-    wxUSER_DASH,
-
-    wxTRANSPARENT,
-
-    // Brush & Pen Stippling. Note that a stippled pen cannot be dashed!!
-    // Note also that stippling a Pen IS meaningfull, because a Line is
-    wxSTIPPLE_MASK_OPAQUE, //mask is used for blitting monochrome using text fore and back ground colors
-    wxSTIPPLE_MASK,        //mask is used for masking areas in the stipple bitmap (TO DO)
-    // drawn with a Pen, and without any Brush -- and it can be stippled.
-    wxSTIPPLE =          110,
-    wxBDIAGONAL_HATCH,
-    wxCROSSDIAG_HATCH,
-    wxFDIAGONAL_HATCH,
-    wxCROSS_HATCH,
-    wxHORIZONTAL_HATCH,
-    wxVERTICAL_HATCH,
-
-    wxJOIN_BEVEL =     120,
-    wxJOIN_MITER,
-    wxJOIN_ROUND,
-
-    wxCAP_ROUND =      130,
-    wxCAP_PROJECTING,
-    wxCAP_BUTT
-};
 
 // VZ: why doesn't it start with "wx"? FIXME
 #define IS_HATCH(s)    ((s)>=wxBDIAGONAL_HATCH && (s)<=wxVERTICAL_HATCH)
@@ -1159,6 +1105,70 @@ enum wxBitmapType
     wxBITMAP_TYPE_MACCURSOR_RESOURCE,
     wxBITMAP_TYPE_ANY = 50
 };
+
+
+%constant wxDD_NEW_DIR_BUTTON = 0x0080 
+/*
+ * Just include the font encodings
+ */
+// ----------------------------------------------------------------------------
+// GDI descriptions
+// ----------------------------------------------------------------------------
+
+enum
+{
+    // Text font families
+    wxDEFAULT    = 70,
+    wxDECORATIVE,
+    wxROMAN,
+    wxSCRIPT,
+    wxSWISS,
+    wxMODERN,
+    wxTELETYPE,  /* @@@@ */
+
+    // Proportional or Fixed width fonts (not yet used)
+    wxVARIABLE   = 80,
+    wxFIXED,
+
+    wxNORMAL     = 90,
+    wxLIGHT,
+    wxBOLD,
+    // Also wxNORMAL for normal (non-italic text)
+    wxITALIC,
+    wxSLANT,
+
+    // Pen styles
+    wxSOLID      =   100,
+    wxDOT,
+    wxLONG_DASH,
+    wxSHORT_DASH,
+    wxDOT_DASH,
+    wxUSER_DASH,
+
+    wxTRANSPARENT,
+
+    // Brush & Pen Stippling. Note that a stippled pen cannot be dashed!!
+    // Note also that stippling a Pen IS meaningfull, because a Line is
+    wxSTIPPLE_MASK_OPAQUE, //mask is used for blitting monochrome using text fore and back ground colors
+    wxSTIPPLE_MASK,        //mask is used for masking areas in the stipple bitmap (TO DO)
+    // drawn with a Pen, and without any Brush -- and it can be stippled.
+    wxSTIPPLE =          110,
+    wxBDIAGONAL_HATCH,
+    wxCROSSDIAG_HATCH,
+    wxFDIAGONAL_HATCH,
+    wxCROSS_HATCH,
+    wxHORIZONTAL_HATCH,
+    wxVERTICAL_HATCH,
+
+    wxJOIN_BEVEL =     120,
+    wxJOIN_MITER,
+    wxJOIN_ROUND,
+
+    wxCAP_ROUND =      130,
+    wxCAP_PROJECTING,
+    wxCAP_BUTT
+};
+
  
 // Standard cursors
 enum wxStockCursor
@@ -1225,3 +1235,33 @@ enum wxStockCursor
 %constant wxBorder wxSIMPLE_BORDER = wxBORDER_SIMPLE;
 %constant wxBorder wxSTATIC_BORDER = wxBORDER_STATIC;
 %constant wxBorder wxNO_BORDER = wxBORDER_NONE;
+
+
+    // Text font families
+%constant int FONTFAMILY_DEFAULT =    wxDEFAULT;
+%constant int FONTFAMILY_DECORATIVE =     wxDECORATIVE;
+%constant int FONTFAMILY_ROMAN =     wxROMAN;
+%constant int FONTFAMILY_SCRIPT =     wxSCRIPT;
+%constant int FONTFAMILY_SWISS =    wxSWISS;
+%constant int FONTFAMILY_MODERN =     wxMODERN;
+%constant int FONTFAMILY_TELETYPE =    wxTELETYPE;  /* @@@@ */
+
+%constant int FONTWEIGHT_NORMAL =     wxNORMAL;
+%constant int FONTWEIGHT_LIGHT =     wxLIGHT;
+%constant int FONTWEIGHT_BOLD =     wxBOLD;
+%constant int FONTSTYLE_NORMAL =     wxNORMAL;
+%constant int FONTSTYLE_ITALIC =   wxITALIC;
+%constant int FONTSTYLE_SLANT =     wxSLANT;
+    // Pen styles
+%constant int SOLID       =    wxSOLID;
+%constant int DOT         =    wxDOT;
+%constant int LONG_DASH   =    wxLONG_DASH;
+%constant int SHORT_DASH  =    wxSHORT_DASH;
+%constant int DOT_DASH    =    wxDOT_DASH;
+%constant int USER_DASH   =    wxUSER_DASH;
+%constant int TRANSPARENT =    wxTRANSPARENT;
+
+%constant wxCursor* STANDARD_CURSOR =wxSTANDARD_CURSOR;
+%constant wxCursor* HOURGLASS_CURSOR = wxHOURGLASS_CURSOR;
+%constant wxCursor* CROSS_CURSOR =  wxCROSS_CURSOR;
+
