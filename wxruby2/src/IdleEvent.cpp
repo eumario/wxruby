@@ -753,7 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "IdleEvent.h"
+#include "src/IdleEvent.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

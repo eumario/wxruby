@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Menu.h"
+#include "src/Menu.h"
 
 SwigDirector_wxMenu::SwigDirector_wxMenu(VALUE self, wxString const &title, long style, bool disown): wxMenu(title, style), Swig::Director(self, disown) {
     

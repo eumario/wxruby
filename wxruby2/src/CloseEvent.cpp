@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CloseEvent.h"
+#include "src/CloseEvent.h"
 
 SwigDirector_wxCloseEvent::SwigDirector_wxCloseEvent(VALUE self, WXTYPE commandEventType, int id, bool disown): wxCloseEvent(commandEventType, id), Swig::Director(self, disown) {
     

@@ -18,6 +18,7 @@
 #include <wx/grid.h>
 #include <wx/laywin.h>
 #include <wx/process.h>
+#include <wx/tglbtn.h>
 %}
 
 %module(directors="1") wxEventHandlers;

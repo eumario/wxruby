@@ -204,3 +204,30 @@
 }
 
 ##############################################################
+
+%typemap(in) wxEdge {
+	$1 = (wxEdge)NUM2INT($input);
+}
+
+%typemap(out) wxEdge {
+    $result = INT2NUM((int)$1);
+}
+
+%typemap(typecheck) wxEdge {
+	$1 = TYPE($input) == T_NUMBER;
+}
+
+%typemap(in) wxRelationship {
+	$1 = (wxRelationship)NUM2INT($input);
+}
+
+%typemap(out) wxRelationship {
+    $result = INT2NUM((int)$1);
+}
+
+%typemap(typecheck) wxRelationship {
+	$1 = TYPE($input) == T_NUMBER;
+}
+
+
+##############################################################

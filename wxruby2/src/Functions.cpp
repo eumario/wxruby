@@ -810,7 +810,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Functions.h"
+#include "src/Functions.h"
 
 static VALUE
 _wrap_wxInitAllImageHandlers(int argc, VALUE *argv, VALUE self) {

@@ -847,7 +847,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "App.h"
+#include "src/App.h"
 
 SwigDirector_App::SwigDirector_App(VALUE self, bool disown): wxRubyApp(), Swig::Director(self, disown) {
     

@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Object.h"
+#include "src/Object.h"
 
 SwigDirector_wxObject::SwigDirector_wxObject(VALUE self, bool disown): wxObject(), Swig::Director(self, disown) {
     

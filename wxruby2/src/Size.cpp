@@ -764,7 +764,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Size.h"
+#include "src/Size.h"
 
 static VALUE
 _wrap_new_wxSize__SWIG_0(int argc, VALUE *argv, VALUE self) {

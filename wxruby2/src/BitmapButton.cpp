@@ -758,7 +758,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "BitmapButton.h"
+#include "src/BitmapButton.h"
 
 SwigDirector_wxBitmapButton::SwigDirector_wxBitmapButton(VALUE self, bool disown): wxBitmapButton(), Swig::Director(self, disown) {
     

@@ -5,14 +5,12 @@
 
 %module(directors="1") wxFlexGridSizer
 
-#ifdef __WXMAC__
 %ignore wxFlexGridSizer::GetFlexibleDirection;
 %ignore wxFlexGridSizer::GetNonFlexibleDirection;
 %ignore wxFlexGridSizer::SetFlexibleDirection;
 %ignore wxFlexGridSizer::SetNonFlexibleDirection;
 %ignore wxFlexGridSizer::GetNonFlexibleGrowMode;
 %ignore wxFlexGridSizer::SetNonFlexibleGrowMode;
-#endif
  
 
 %include "include/wxFlexGridSizer.h"
