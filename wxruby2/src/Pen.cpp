@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -510,6 +513,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #ifdef __cplusplus
 }
 #endif
+
+
+#if defined(__WXMSWIN__) || defined(__WXMAC__)
 
 
 /* -------- TYPES TABLE (BEGIN) -------- */
@@ -1467,3 +1473,13 @@ mWxPen = mWx;
     cWxPen.destroy = (void (*)(void *)) free_wxPen;
 }
 
+            #else
+            #ifdef __cplusplus
+            extern "C"
+            #endif
+            SWIGEXPORT(void) Init_wxPen(void) {
+static bool initialized;
+if(initialized) return;
+initialized = true;
+            }
+            #endif    

@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -514,11 +517,7 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_wxSize swig_types[0] 
-#define  SWIGTYPE_p_wxWindow swig_types[1] 
-#define  SWIGTYPE_p_wxSpinCtrl swig_types[2] 
-#define  SWIGTYPE_p_wxPoint swig_types[3] 
-static swig_type_info *swig_types[5];
+static swig_type_info *swig_types[1];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -564,10 +563,6 @@ void GcFreefunc(void *);
 
 #include <wx/spinctrl.h>
 
-
-extern swig_class cWxControl;
-swig_class cWxSpinCtrl;
-static void free_wxSpinCtrl(wxSpinCtrl *);
 /***********************************************************************
  * director.swg
  *
@@ -761,434 +756,11 @@ namespace Swig {
 
 #include "SpinCtrl.h"
 
-static VALUE
-_wrap_new_wxSpinCtrl__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (wxSpinCtrl *)new wxSpinCtrl();
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_wxSpinCtrl_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_wxSpinCtrl_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxSpinCtrl);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_wxSpinCtrl__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxWindow *arg1 = (wxWindow *) 0 ;
-    wxWindowID arg2 = (wxWindowID) -1 ;
-    wxString const &arg3_defvalue = wxEmptyString ;
-    wxString *arg3 = (wxString *) &arg3_defvalue ;
-    wxPoint const &arg4_defvalue = wxDefaultPosition ;
-    wxPoint *arg4 = (wxPoint *) &arg4_defvalue ;
-    wxSize const &arg5_defvalue = wxDefaultSize ;
-    wxSize *arg5 = (wxSize *) &arg5_defvalue ;
-    long arg6 = (long) wxSP_ARROW_KEYS ;
-    int arg7 = (int) 0 ;
-    int arg8 = (int) 100 ;
-    int arg9 = (int) 0 ;
-    wxString const &arg10_defvalue = _T("wxSpinCtrl") ;
-    wxString *arg10 = (wxString *) &arg10_defvalue ;
-    wxSpinCtrl *result;
-    
-    if ((argc < 1) || (argc > 10))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    if (argc > 1) {
-        arg2 = NUM2INT(argv[1]);
-    }
-    if (argc > 2) {
-        {
-            arg3 = new wxString(STR2CSTR(argv[2]));
-        }
-    }
-    if (argc > 3) {
-        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
-    }
-    if (argc > 4) {
-        SWIG_ConvertPtr(argv[4], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
-    }
-    if (argc > 5) {
-        arg6 = NUM2LONG(argv[5]);
-    }
-    if (argc > 6) {
-        arg7 = NUM2INT(argv[6]);
-    }
-    if (argc > 7) {
-        arg8 = NUM2INT(argv[7]);
-    }
-    if (argc > 8) {
-        arg9 = NUM2INT(argv[8]);
-    }
-    if (argc > 9) {
-        {
-            arg10 = new wxString(STR2CSTR(argv[9]));
-        }
-    }
-    result = (wxSpinCtrl *)new wxSpinCtrl(arg1,arg2,(wxString const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,arg7,arg8,arg9,(wxString const &)*arg10);
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE _wrap_new_wxSpinCtrl(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[10];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 10); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 0) {
-        return _wrap_new_wxSpinCtrl__SWIG_0(nargs, args, self);
-    }
-    if ((argc >= 1) && (argc <= 10)) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            if (argc <= 1) {
-                return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-            }
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                if (argc <= 2) {
-                    return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                }
-                {
-                    _v = (TYPE(argv[2]) == T_STRING);
-                }
-                if (_v) {
-                    if (argc <= 3) {
-                        return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                    }
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        if (argc <= 4) {
-                            return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                        }
-                        {
-                            void *ptr;
-                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            if (argc <= 5) {
-                                return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                            }
-                            {
-                                _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
-                            }
-                            if (_v) {
-                                if (argc <= 6) {
-                                    return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                                }
-                                {
-                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
-                                }
-                                if (_v) {
-                                    if (argc <= 7) {
-                                        return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                                    }
-                                    {
-                                        _v = ((TYPE(argv[7]) == T_FIXNUM) || (TYPE(argv[7]) == T_BIGNUM)) ? 1 : 0;
-                                    }
-                                    if (_v) {
-                                        if (argc <= 8) {
-                                            return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                                        }
-                                        {
-                                            _v = ((TYPE(argv[8]) == T_FIXNUM) || (TYPE(argv[8]) == T_BIGNUM)) ? 1 : 0;
-                                        }
-                                        if (_v) {
-                                            if (argc <= 9) {
-                                                return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                                            }
-                                            {
-                                                _v = (TYPE(argv[9]) == T_STRING);
-                                            }
-                                            if (_v) {
-                                                return _wrap_new_wxSpinCtrl__SWIG_1(nargs, args, self);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxSpinCtrl'");
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_Create(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindowID arg3 = (wxWindowID) -1 ;
-    wxString const &arg4_defvalue = wxEmptyString ;
-    wxString *arg4 = (wxString *) &arg4_defvalue ;
-    wxPoint const &arg5_defvalue = wxDefaultPosition ;
-    wxPoint *arg5 = (wxPoint *) &arg5_defvalue ;
-    wxSize const &arg6_defvalue = wxDefaultSize ;
-    wxSize *arg6 = (wxSize *) &arg6_defvalue ;
-    long arg7 = (long) wxSP_ARROW_KEYS ;
-    int arg8 = (int) 0 ;
-    int arg9 = (int) 100 ;
-    int arg10 = (int) 0 ;
-    wxString const &arg11_defvalue = _T("wxSpinCtrl") ;
-    wxString *arg11 = (wxString *) &arg11_defvalue ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 10))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    if (argc > 1) {
-        arg3 = NUM2INT(argv[1]);
-    }
-    if (argc > 2) {
-        {
-            arg4 = new wxString(STR2CSTR(argv[2]));
-        }
-    }
-    if (argc > 3) {
-        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
-    }
-    if (argc > 4) {
-        SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
-    }
-    if (argc > 5) {
-        arg7 = NUM2LONG(argv[5]);
-    }
-    if (argc > 6) {
-        arg8 = NUM2INT(argv[6]);
-    }
-    if (argc > 7) {
-        arg9 = NUM2INT(argv[7]);
-    }
-    if (argc > 8) {
-        arg10 = NUM2INT(argv[8]);
-    }
-    if (argc > 9) {
-        {
-            arg11 = new wxString(STR2CSTR(argv[9]));
-        }
-    }
-    result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,arg8,arg9,arg10,(wxString const &)*arg11);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_SetValue__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    wxString *arg2 = 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]));
-    }
-    (arg1)->SetValue((wxString const &)*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_SetValue__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    int arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    arg2 = NUM2INT(argv[0]);
-    (arg1)->SetValue(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE _wrap_wxSpinCtrl_SetValue(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSpinCtrl, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxSpinCtrl_SetValue__SWIG_1(nargs, args, self);
-            }
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSpinCtrl, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING);
-            }
-            if (_v) {
-                return _wrap_wxSpinCtrl_SetValue__SWIG_0(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxSpinCtrl_SetValue'");
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_GetValue(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    result = (int)((wxSpinCtrl const *)arg1)->GetValue();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_SetRange(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    int arg2 ;
-    int arg3 ;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    arg2 = NUM2INT(argv[0]);
-    arg3 = NUM2INT(argv[1]);
-    (arg1)->SetRange(arg2,arg3);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_SetSelection(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    long arg2 ;
-    long arg3 ;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    arg2 = NUM2LONG(argv[0]);
-    arg3 = NUM2LONG(argv[1]);
-    (arg1)->SetSelection(arg2,arg3);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_GetMin(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    result = (int)((wxSpinCtrl const *)arg1)->GetMin();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxSpinCtrl_GetMax(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    result = (int)((wxSpinCtrl const *)arg1)->GetMax();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static void
-free_wxSpinCtrl(wxSpinCtrl *arg1) {
-    //delete arg1;
-}
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0, 0},{"_p_wxSize", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxSpinCtrl[] = {{"_p_wxSpinCtrl", 0, "wxSpinCtrl *", 0, 0, 0, 0},{"_p_wxSpinCtrl", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
-_swigt__p_wxSize, 
-_swigt__p_wxWindow, 
-_swigt__p_wxSpinCtrl, 
-_swigt__p_wxPoint, 
 0
 };
 
@@ -1213,22 +785,5 @@ mWxSpinCtrl = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    
-    extern void Init_wxControl();
-    Init_wxControl();
-    //extern swig_class cWxControl;
-    cWxSpinCtrl.klass = rb_define_class_under(mWxSpinCtrl, "SpinCtrl", cWxControl.klass);
-    SWIG_TypeClientData(SWIGTYPE_p_wxSpinCtrl, (void *) &cWxSpinCtrl);
-    rb_define_alloc_func(cWxSpinCtrl.klass, _wrap_wxSpinCtrl_allocate);
-    rb_define_method(cWxSpinCtrl.klass, "initialize", VALUEFUNC(_wrap_new_wxSpinCtrl), -1);
-    rb_define_method(cWxSpinCtrl.klass, "create", VALUEFUNC(_wrap_wxSpinCtrl_Create), -1);
-    rb_define_method(cWxSpinCtrl.klass, "set_value", VALUEFUNC(_wrap_wxSpinCtrl_SetValue), -1);
-    rb_define_method(cWxSpinCtrl.klass, "get_value", VALUEFUNC(_wrap_wxSpinCtrl_GetValue), -1);
-    rb_define_method(cWxSpinCtrl.klass, "set_range", VALUEFUNC(_wrap_wxSpinCtrl_SetRange), -1);
-    rb_define_method(cWxSpinCtrl.klass, "set_selection", VALUEFUNC(_wrap_wxSpinCtrl_SetSelection), -1);
-    rb_define_method(cWxSpinCtrl.klass, "get_min", VALUEFUNC(_wrap_wxSpinCtrl_GetMin), -1);
-    rb_define_method(cWxSpinCtrl.klass, "get_max", VALUEFUNC(_wrap_wxSpinCtrl_GetMax), -1);
-    cWxSpinCtrl.mark = 0;
-    cWxSpinCtrl.destroy = (void (*)(void *)) free_wxSpinCtrl;
 }
 

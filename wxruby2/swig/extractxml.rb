@@ -2,22 +2,7 @@ xml_file = ARGV[0]
 input_dir = File.dirname(xml_file)
 output_dir = File.join(input_dir, "classes/include")
 
-require 'nqxml/treeparser'
-
-def isTagStart(node, name)
-    entity = node.entity
-    return (entity.class == NQXML::Tag &&
-        entity.isTagStart && 
-        entity.name == name)
-end
-
-def isTagEnd(node, name)
-    entity = node.entity
-    #puts("isTagEnd(#{entity})")
-    return (entity.class == NQXML::Tag &&
-        entity.isTagEnd && 
-        entity.name == name)
-end
+require 'rexml/document'
 
 $pure_virtuals =
 {
@@ -636,9 +621,9 @@ $event_fixes = {
 
 class WxParameter
     def initialize(node)
-        @parameter_type = node.entity.attrs['type']
-        @name = node.entity.attrs['name']
-        @value = node.entity.attrs['value']
+        @parameter_type = node.attributes['type']
+        @name = node.attributes['name']
+        @value = node.attributes['value']
         if(@value)
             @value.gsub!(/``/, '"')
 	    if (/^[\"]/ =~ @value) and not ( /^[\"].*[\"]/ =~ @value)
@@ -664,15 +649,11 @@ class WxMethod
         # sometimes the member name is right and the
         # function name is wrong, so use the member name
         @name = function_name
-        @return_type = node.entity.attrs['type']
-        @suffix = node.entity.attrs['suffix']
+        @return_type = node.attributes['type']
+        @suffix = node.attributes['suffix']
         @parameters = []
-        node.children.each do | function_info |
-            if(isTagStart(function_info, 'parameters'))
-                function_info.children.each do | parameter |
-                    @parameters << WxParameter.new(parameter)
-                end
-            end
+        node.each_element('parameters/parameter') do | parameter |
+          @parameters << WxParameter.new(parameter)
         end
     end
     
@@ -700,75 +681,72 @@ class WxClass
     attr_reader :name
     
     def initialize(node)
-        @name = node.entity.attrs['name']
+        @name = node.attributes['name']
         @parents = []
         @members = []
-        node.children.each do | class_info |
-            if(isTagStart(class_info, 'parents'))
+puts("Class: #{@name}: #{node.xpath}")
+        node.each_element do | class_info | 
+            if(class_info.xpath =~ /parents$/)
                 load_parent_classes(class_info)
-            elsif(isTagStart(class_info, 'members'))
+            end
+            if(class_info.xpath =~ /members$/)
                 load_class_members(class_info)
-            elsif(isTagStart(class_info,'events'))
+            end
+            if(class_info.xpath =~ /events$/)
                 load_events(class_info)
-            else
-                #puts(class_info.entity)
             end
         end
     end
 
     def load_parent_classes(parents_node)
-        parents_node.children.each do | parent |
-            if(isTagStart(parent, 'classref'))
-               # NSK - filter out non-wx base classes we don't care about.
-	       if (parent.entity.attrs['name'].index('wx') == 0)
-                 @parents << (parent.entity.attrs['name'])
-	       end
+        parents_node.each_element('classref') do | parent |
+#          if(parent.xpath =~ /classref$/)
+            # NSK - filter out non-wx base classes we don't care about.
+            name = parent.attributes['name']
+            if (name.index('wx') == 0)
+              @parents << name
             end
+ #         end
         end
     end
     
     def load_class_members(class_info)
-        class_info.children.each do | member |
-            if(isTagStart(member, 'member'))
-                function_name = member.entity.attrs['name']
-                member.children.each do | function |
-                    if(isTagStart(function, 'function'))
-                        load_function(function, function_name)
-                    end
-                end
-            end
+      class_info.each_element('member') do | member |
+        function_name = member.attributes['name']
+        member.each_element('function') do | function |
+                load_function(function, function_name)
         end
+      end
     end
     
     def load_function(node, function_name)
-        m = WxMethod.new(node, function_name)
-        if(!m.name)
-            return
-        end
-        if(m.name == @name || m.name == "~#{@name}")
-            m.clear_type
-        end
-        if(m.name.index('operator') == 0 ||
-                m.name == 'new' ||
-                m.name == 'delete')
-            return
-        end
-        @members << m
+      m = WxMethod.new(node, function_name)
+      if(!m.name)
+          return
+      end
+      if(m.name == @name || m.name == "~#{@name}")
+          m.clear_type
+      end
+      if(m.name.index('operator') == 0 ||
+              m.name == 'new' ||
+              m.name == 'delete')
+          return
+      end
+      @members << m
+      #puts("Method: #{m.to_s}")
     end
 
     def load_events(class_info)
-         class_info.children.each do | member |
-            if(isTagStart(member, 'event'))
-                evt_id = ""
-                event_name = member.entity.attrs['name']
-                member.children.each do|child|
-                    if (/wxEVT[A-Z_]*/ =~ child.entity.text)
-                        evt_id = $&
-                    end
-                end
-                $events[event_name] = WxEvent.new(event_name,evt_id)
-            end
+      class_info.each_element('event') do | member |
+        evt_id = ""
+        event_name = member.attributes['name']
+        member.each do|child|
+          if (/wxEVT[A-Z_]*/ =~ child.value)
+            evt_id = $&
+          end
         end
+        $events[event_name] = WxEvent.new(event_name,evt_id)
+      end
     end
 
   
@@ -816,45 +794,27 @@ def puts_banner(out, filename, start)
     out.puts
 end
 
-begin
-    file = File.new(xml_file)
-    puts("Parsing #{file.path}...may take a few MINUTES...")
-    # Creating a TreeParser parses the input. We immediately
-    # ask for the Document object.
-    $doc = NQXML::TreeParser.new(file).document
-rescue NQXML::ParserError => ex
-    puts
-    puts "parser error on line #{ex.line()}," +
-        " col #{ex.column()}: #{$!}"
-end
+file = File.new(xml_file)
+puts("Parsing #{file.path}...may take a few MINUTES...")
+$doc = REXML::Document.new(file)
 
-# Print the entities in the document's prolog.
-#$doc.prolog.each { | entity | puts entity.to_s }
-
-# Do something with the nodes in the document.
 parents = []
-rootNode = $doc.rootNode
-#puts "The root entity is #{rootNode.entity}"
-rootNode.children.each do | node |
-    #puts("--->#{node.entity}")
-    if(isTagStart(node, 'class'))
-        c = WxClass.new(node)
-        if(c.parent)
-            parents << "    '#{c.name}' => '#{c.parent}',"
-        end
-        h = "#{c.name}.h"
-        #puts("writing #{h}")
-        #print('.'); $stdout.flush
-        file = File.join(output_dir, h)
-        File.open(file, "w") do | out |
-            puts_banner(out, h, "//")
-            out.puts("#if !defined(_#{c.name}_h_)")
-            out.puts("#define _#{c.name}_h_")
-            out.puts(c.to_s)
-            out.puts("#endif")
-        end
-    else
-        #puts("Skipping #{node.entity}")
+$doc.elements.each('classes/class') do | element |
+    #puts element.attributes['name']
+    c = WxClass.new(element)
+    if(c.parent)
+        parents << "    '#{c.name}' => '#{c.parent}',"
+    end
+    h = "#{c.name}.h"
+    #puts("writing #{h}")
+    #print('.'); $stdout.flush
+    file = File.join(output_dir, h)
+    File.open(file, "w") do | out |
+        puts_banner(out, h, "//")
+        out.puts("#if !defined(_#{c.name}_h_)")
+        out.puts("#define _#{c.name}_h_")
+        out.puts(c.to_s)
+        out.puts("#endif")
     end
 end
 
@@ -889,3 +849,4 @@ if($need_virtual_destructor.size > 0)
 end
 
 #puts
+ 
