@@ -8,9 +8,27 @@
 class wxStringClientData : public wxClientData
 {
 public:
+	/**
+	 * \brief Empty constructor. 
+	*/
+
    wxStringClientData() ;
+	/**
+	 * \brief Create client data with string. 
+	 * \param const wxString&   
+	*/
+
    wxStringClientData(const wxString&  data ) ;
+	/**
+	 * \brief Get string client data. 
+	*/
+
   const wxString& GetData() const;
+	/**
+	 * \brief Set string client data. 
+	 * \param const wxString&   
+	*/
+
   void SetData(const wxString&  data ) ;
 };
 

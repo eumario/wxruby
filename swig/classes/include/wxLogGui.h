@@ -8,6 +8,10 @@
 class wxLogGui : public wxLog
 {
 public:
+	/**
+	 * \brief Default constructor. 
+	*/
+
    wxLogGui() ;
 };
 

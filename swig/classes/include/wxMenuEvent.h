@@ -8,8 +8,27 @@
 class wxMenuEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param WXTYPE   
+	 * \param int   
+	 * \param wxDC*   
+	*/
+
    wxMenuEvent(WXTYPE  id = 0, int  id = 0, wxDC*  dc = NULL) ;
+	/**
+	 * \brief Returns the menu identifier associated with the event. This method should be
+only used with the   events. 
+	*/
+
   int GetMenuId() const;
+	/**
+	 * \brief Returns   if the menu which is being opened or closed is a popup menu, 
+  if it is a normal one.
+
+This method should be only used with the   and   events. 
+	*/
+
   bool IsPopup() const;
 };
 

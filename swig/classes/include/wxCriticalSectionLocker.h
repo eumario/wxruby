@@ -8,7 +8,17 @@
 class wxCriticalSectionLocker
 {
 public:
+	/**
+	 * \brief Constructs a wxCriticalSectionLocker object associated with given
+  and enters it. 
+	 * \param wxCriticalSection&   
+	*/
+
    wxCriticalSectionLocker(wxCriticalSection&  criticalsection ) ;
+	/**
+	 * \brief Destructor leaves the critical section. 
+	*/
+
   virtual  ~wxCriticalSectionLocker() ;
 };
 

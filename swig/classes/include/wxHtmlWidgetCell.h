@@ -8,6 +8,12 @@
 class wxHtmlWidgetCell : public wxHtmlCell
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param wxWindow*   
+	 * \param int   
+	*/
+
    wxHtmlWidgetCell(wxWindow*  wnd , int  w = 0) ;
 };
 

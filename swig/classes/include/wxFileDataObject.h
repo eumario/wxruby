@@ -8,7 +8,16 @@
 class wxFileDataObject : public wxDataObjectSimple
 {
 public:
+	/**
+	 * \brief adds a file to the file list represented by this data object. 
+	 * \param const wxString&   
+	*/
+
   virtual void AddFile(const wxString&  file ) ;
+	/**
+	 * \brief Returns the   of file names. 
+	*/
+
   const wxArrayString&  GetFilenames() const;
 };
 

@@ -8,6 +8,12 @@
 class wxLogStream : public wxLog
 {
 public:
+	/**
+	 * \brief Constructs a log target which sends all the log messages to the given
+output stream. If it is  , the messages are sent to  . 
+	 * \param std::ostream   
+	*/
+
    wxLogStream(std::ostream  *ostr = NULL) ;
 };
 

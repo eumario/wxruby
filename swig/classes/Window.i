@@ -15,6 +15,7 @@
 %feature("nodirector") wxWindow::SetPalette;
 %ignore wxWindow::SetPalette;
 
+%ignore wxWindow::Clear;
 %ignore wxWindow::GetAccessible;
 %ignore wxWindow::GetTextExtent;
 %ignore wxWindow::GetFont;

@@ -8,11 +8,41 @@
 class wxAcceleratorEntry
 {
 public:
+	/**
+	 * \brief Default constructor. 
+	*/
+
    wxAcceleratorEntry() ;
+	/**
+	 * \brief Constructor. 
+	 * \param int  
+	 * \param int  
+	 * \param int  
+	*/
+
    wxAcceleratorEntry(int  flags , int  keyCode , int  cmd ) ;
+	/**
+	 * \brief Returns the command identifier for the accelerator table entry. 
+	*/
+
   int GetCommand() const;
+	/**
+	 * \brief Returns the flags for the accelerator table entry. 
+	*/
+
   int GetFlags() const;
+	/**
+	 * \brief Returns the keycode for the accelerator table entry. 
+	*/
+
   int GetKeyCode() const;
+	/**
+	 * \brief Sets the accelerator entry parameters. 
+	 * \param int  
+	 * \param int  
+	 * \param int  
+	*/
+
   void Set(int  flags , int  keyCode , int  cmd ) ;
 };
 

@@ -8,6 +8,10 @@
 class wxLogNull : public wxLog
 {
 public:
+	/**
+	 * \brief Suspends logging. 
+	*/
+
    wxLogNull() ;
 };
 

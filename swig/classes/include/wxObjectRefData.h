@@ -8,7 +8,15 @@
 class wxObjectRefData
 {
 public:
+	/**
+	 * \brief Default constructor. Initialises the   member to 1. 
+	*/
+
    wxObjectRefData() ;
+	/**
+	 * \brief Destructor. 
+	*/
+
   virtual  ~wxObjectRefData() ;
 };
 

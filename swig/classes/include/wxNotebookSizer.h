@@ -8,7 +8,16 @@
 class wxNotebookSizer : public wxSizer
 {
 public:
+	/**
+	 * \brief Constructor. It takes an associated notebook as its only parameter. 
+	 * \param wxNotebook*   
+	*/
+
    wxNotebookSizer(wxNotebook*  notebook ) ;
+	/**
+	 * \brief Returns the notebook associated with the sizer. 
+	*/
+
   wxNotebook* GetNotebook() ;
 };
 

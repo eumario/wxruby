@@ -8,7 +8,16 @@
 class wxGridCellTextEditor : public wxGridCellEditor
 {
 public:
+	/**
+	 * \brief Default constructor. 
+	*/
+
    wxGridCellTextEditor() ;
+	/**
+	 * \brief The parameters string format is &quot;n&quot; where n is a number representing the maximum width. 
+	 * \param const wxString&   
+	*/
+
   void SetParameters(const wxString&  params ) ;
 };
 

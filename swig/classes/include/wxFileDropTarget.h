@@ -8,8 +8,28 @@
 class wxFileDropTarget : public wxDropTarget
 {
 public:
+	/**
+	 * \brief Constructor. 
+	*/
+
    wxFileDropTarget() ;
+	/**
+	 * \brief See  . This function is implemented
+appropriately for files, and calls  . 
+	 * \param long   
+	 * \param long   
+	 * \param const void   
+	 * \param size_t   
+	*/
+
   virtual bool OnDrop(long  x , long  y , const void  *data , size_t  size ) ;
+	/**
+	 * \brief Override this function to receive dropped files. 
+	 * \param wxCoord   
+	 * \param wxCoord   
+	 * \param const wxArrayString&   
+	*/
+
   virtual bool OnDropFiles(wxCoord  x , wxCoord  y , const wxArrayString&  filenames ) ;
 };
 

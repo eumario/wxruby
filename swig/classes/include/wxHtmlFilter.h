@@ -8,8 +8,26 @@
 class wxHtmlFilter : public wxObject
 {
 public:
+	/**
+	 * \brief Constructor. 
+	*/
+
    wxHtmlFilter() ;
+	/**
+	 * \brief Returns true if this filter is capable of reading file  .
+
+Example: 
+	 * \param const wxFSFile&   
+	*/
+
   bool CanRead(const wxFSFile&  file ) ;
+	/**
+	 * \brief Reads the file and returns string with HTML document.
+
+Example: 
+	 * \param const wxFSFile&   
+	*/
+
   wxString ReadFile(const wxFSFile&  file ) ;
 };
 

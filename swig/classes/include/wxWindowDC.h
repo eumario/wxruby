@@ -8,6 +8,11 @@
 class wxWindowDC : public wxDC
 {
 public:
+	/**
+	 * \brief Constructor. Pass a pointer to the window on which you wish to paint. 
+	 * \param wxWindow*  
+	*/
+
    wxWindowDC(wxWindow*  window ) ;
   // the following were missing from the xml
   virtual ~wxWindowDC();

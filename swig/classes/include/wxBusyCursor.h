@@ -8,7 +8,16 @@
 class wxBusyCursor
 {
 public:
+	/**
+	 * \brief Constructs a busy cursor object, calling  . 
+	 * \param wxCursor*  
+	*/
+
    wxBusyCursor(wxCursor* cursor = wxHOURGLASS_CURSOR) ;
+	/**
+	 * \brief Destroys the busy cursor object, calling  . 
+	*/
+
   virtual  ~wxBusyCursor() ;
 };
 

@@ -7,6 +7,11 @@
 %include "common.i"
 
 %{
+
+#ifdef __WXMAC__
+#define Init_wx Init_WxFramework
+#endif
+
 #include <wx/hashmap.h>
 
 WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);

@@ -8,6 +8,12 @@
 class wxSocketOutputStream : public wxOutputStream
 {
 public:
+	/**
+	 * \brief Creates a new write-only socket stream using the specified initialized
+socket connection. 
+	 * \param wxSocketBase&  
+	*/
+
    wxSocketOutputStream(wxSocketBase&  s ) ;
 };
 

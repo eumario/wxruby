@@ -8,8 +8,28 @@
 class wxDCClipper
 {
 public:
+	/**
+	 * \brief  
+	 * \param wxDC&   
+	 * \param wxCoord   
+	 * \param wxCoord   
+	 * \param wxCoord   
+	 * \param wxCoord   
+	*/
+
    wxDCClipper(wxDC&  dc , wxCoord  x , wxCoord  y , wxCoord  w , wxCoord  h ) ;
+	/**
+	 * \brief Constructor: sets the the clipping region for the given device context to the
+specified rectangle. 
+	 * \param wxDC&   
+	 * \param const wxRect&  
+	*/
+
    wxDCClipper(wxDC&  dc , const wxRect&  rect ) ;
+	/**
+	 * \brief Destructor: destroys the clipping region set in the constructor. 
+	*/
+
   virtual  ~wxDCClipper() ;
 };
 

@@ -8,6 +8,11 @@
 class wxFilterOutputStream : public wxOutputStream
 {
 public:
+	/**
+	 * \brief Initializes a &quot;filter&quot; stream. 
+	 * \param wxOutputStream&  
+	*/
+
    wxFilterOutputStream(wxOutputStream&  stream ) ;
 };
 

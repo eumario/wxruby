@@ -8,9 +8,30 @@
 class wxSocketClient : public wxSocketBase
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param wxSocketFlags  
+	*/
+
    wxSocketClient(wxSocketFlags flags = wxSOCKET_NONE) ;
+	/**
+	 * \brief Destructor. Please see  . 
+	*/
+
   virtual  ~wxSocketClient() ;
+	/**
+	 * \brief  
+	 * \param wxSockAddress&  
+	 * \param bool  
+	*/
+
   bool Connect(wxSockAddress&  address , bool wait = true) ;
+	/**
+	 * \brief  
+	 * \param long  
+	 * \param long  
+	*/
+
   bool WaitOnConnect(long seconds = -1, long milliseconds = 0) ;
 };
 

@@ -8,6 +8,10 @@
 class wxLayoutConstraints : public wxObject
 {
 public:
+	/**
+	 * \brief Constructor. 
+	*/
+
    wxLayoutConstraints() ;
   // the following were missing from the xml
   wxIndividualLayoutConstraint bottom,height,left,right,top,width;

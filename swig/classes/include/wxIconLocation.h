@@ -8,6 +8,11 @@
 class wxIconLocation
 {
 public:
+	/**
+	 * \brief Returns   if the object is valid, i.e. was properly initialized, and 
+  otherwise. 
+	*/
+
   bool IsOk() const;
 };
 

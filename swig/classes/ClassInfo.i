@@ -5,5 +5,9 @@
 
 %module(directors="1") wxClassInfo
 
+%feature("nodirector") wxClassInfo;
+
+%ignore wxClassInfo::wxClassInfo;
+
 %include "include/wxClassInfo.h"
 

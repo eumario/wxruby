@@ -8,8 +8,24 @@
 class wxPrivateDropTarget : public wxDropTarget
 {
 public:
+	/**
+	 * \brief  
+	*/
+
    wxPrivateDropTarget() ;
+	/**
+	 * \brief You have to override OnDrop to get at the data.
+The string ID identifies the format of clipboard or DnD data. A word
+processor would e.g. add a wxTextDataObject and a wxPrivateDataObject
+to the clipboard - the latter with the Id &quot;WXWORD_FORMAT&quot;. 
+	 * \param const wxString&   
+	*/
+
   void SetId(const wxString&  id ) ;
+	/**
+	 * \brief  
+	*/
+
   virtual wxString GetId() const;
 };
 

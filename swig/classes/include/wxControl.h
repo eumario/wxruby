@@ -8,8 +8,22 @@
 class wxControl : public wxWindow
 {
 public:
+	/**
+	 * \brief Simulates the effect of the user issuing a command to the item. See  . 
+	 * \param wxCommandEvent&   
+	*/
+
   void Command(wxCommandEvent&  event ) ;
+	/**
+	 * \brief Returns the control's text. 
+	*/
+
   wxString GetLabel();
+	/**
+	 * \brief Sets the item's text. 
+	 * \param const wxString&   
+	*/
+
   void SetLabel(const wxString&  label ) ;
   // the following were missing from the xml
   virtual ~wxControl();
