@@ -18,34 +18,34 @@ static VALUE GcRubyHash = Qnil;
 
 void GcMapPtrToValue(void *ptr, VALUE val)
 {
-	if (GcRubyHash == Qnil)
-	{
-		rb_global_variable(&GcRubyHash);
-		GcRubyHash = rb_hash_new();
-	}
-	rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
+    if (GcRubyHash == Qnil)
+    {
+        rb_global_variable(&GcRubyHash);
+        GcRubyHash = rb_hash_new();
+    }
+    rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
 }
 
 VALUE GcGetValueFromPtr(void *ptr)
 {
-	if (GcRubyHash == Qnil)
-	{
-		rb_global_variable(&GcRubyHash);
-		GcRubyHash = rb_hash_new();
-	}
-	return rb_hash_aref(GcRubyHash, INT2NUM((int)ptr));
+    if (GcRubyHash == Qnil)
+    {
+        rb_global_variable(&GcRubyHash);
+        GcRubyHash = rb_hash_new();
+    }
+    return rb_hash_aref(GcRubyHash, INT2NUM((int)ptr));
 }
 
 void GcMarkDeleted(void *ptr)
 {
-	DeletedHash[ptr] = true;
+    DeletedHash[ptr] = true;
 }
 
 bool GcIsDeleted(void *ptr)
 {
-	if (DeletedHash.find(ptr) == DeletedHash.end())
-		return false;
-	else return true;
+    if (DeletedHash.find(ptr) == DeletedHash.end())
+        return false;
+    else return true;
 }
 
 void GcFreefunc(void *)

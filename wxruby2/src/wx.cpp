@@ -89,16 +89,13 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
-#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
-#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7+ */
-#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
+#    else /* These definitions should work for Ruby 1.7 */
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -735,34 +732,34 @@ static VALUE GcRubyHash = Qnil;
 
 void GcMapPtrToValue(void *ptr, VALUE val)
 {
-	if (GcRubyHash == Qnil)
-	{
-		rb_global_variable(&GcRubyHash);
-		GcRubyHash = rb_hash_new();
-	}
-	rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
+    if (GcRubyHash == Qnil)
+    {
+        rb_global_variable(&GcRubyHash);
+        GcRubyHash = rb_hash_new();
+    }
+    rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
 }
 
 VALUE GcGetValueFromPtr(void *ptr)
 {
-	if (GcRubyHash == Qnil)
-	{
-		rb_global_variable(&GcRubyHash);
-		GcRubyHash = rb_hash_new();
-	}
-	return rb_hash_aref(GcRubyHash, INT2NUM((int)ptr));
+    if (GcRubyHash == Qnil)
+    {
+        rb_global_variable(&GcRubyHash);
+        GcRubyHash = rb_hash_new();
+    }
+    return rb_hash_aref(GcRubyHash, INT2NUM((int)ptr));
 }
 
 void GcMarkDeleted(void *ptr)
 {
-	DeletedHash[ptr] = true;
+    DeletedHash[ptr] = true;
 }
 
 bool GcIsDeleted(void *ptr)
 {
-	if (DeletedHash.find(ptr) == DeletedHash.end())
-		return false;
-	else return true;
+    if (DeletedHash.find(ptr) == DeletedHash.end())
+        return false;
+    else return true;
 }
 
 void GcFreefunc(void *)
@@ -954,7 +951,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "wx.h"
+#include "src/wx.h"
 
 static VALUE
 _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
