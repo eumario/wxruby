@@ -1,3 +1,8 @@
+2004-01-07
+    * Added Curt's README.mswin
+    * Merged yet another WIN32 patch from Curt (extconf.rb)
+
+
 2004-01-02
     * Merged another WIN32 patch from Curt
     

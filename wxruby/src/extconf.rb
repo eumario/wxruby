@@ -64,18 +64,16 @@ elsif have_library("kernel32")
     $WXLIBDIR="#$WXDIR/lib"
     $INCTEMP="#$WXDIR/lib/msw#{$DEBUGPOSTFIX}"
     $WXLIB="#$WXLIBDIR/wxmsw#{$DEBUGPOSTFIX}.lib"
-    $CFLAGS += " -Fdwxruby.pdb -I#$WXINC -I#$INCTEMP #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
+    $CFLAGS += " -I#$WXINC -I#$INCTEMP #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
     $CFLAGS += " -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /D__WINDOWS__ -D__WXMSW__"
     $libs += " gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib"
     $libs += " uuid.lib odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib winmm.lib"
     if $DEBUG
 	$CFLAGS = $CFLAGS.gsub(/-MD/," /MDd");
 	$CFLAGS += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1"
-	$LDFLAGS = " -link -incremental:no -pdb:wxruby.pdb -debug -dll $(LIBPATH) -def:$(DEFFILE) "
 	$libs += " #$WXLIBDIR/pngd.lib #$WXLIBDIR/zlibd.lib #$WXLIBDIR/jpegd.lib"
 	$libs += " #$WXLIBDIR/tiffd.lib #$WXLIB"
     else
-	# Release Build has not yet been tested
 	$CFLAGS += " -DNDEBUG"
 	$libs += " #$WXLIBDIR/png.lib #$WXLIBDIR/zlib.lib #$WXLIBDIR/jpeg.lib"
 	$libs += " #$WXLIBDIR/tiff.lib #$WXLIB"
