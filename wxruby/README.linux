@@ -1,0 +1,23 @@
+README.linux for wxRuby version 0.1 (ALPHA)
+   Released under the wxWindows 2 license (see LICENSE)
+   This file last updated 2003-08-24
+
+--------------------------------------------------------------------
+INTRODUCTION
+
+wxRuby is an extension library for the Ruby language that
+gives access to the wxWindows cross-platform, native-widget, 
+GUI toolkit. 
+
+The wxRuby project website is:
+  http://rubyforge.org/projects/wxruby/
+
+For general wxRuby information, see the main README file
+
+
+--------------------------------------------------------------------
+LINUX INFORMATION
+
+None at this time.
+
+Debian GNU/Linux is the primary development platform for wxRuby.
