@@ -155,12 +155,12 @@ WxGauge::SetValue(VALUE self,VALUE vpos)
 
 VALUE WxGauge::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxGague
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxGague()
     {
        WxGauge::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxGague x;

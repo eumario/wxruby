@@ -241,12 +241,12 @@ WxRegion::init0(const wxRegion &region)
 
 VALUE WxRegion::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxRegion
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxRegion()
     {
        WxRegion::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxRegion x;

@@ -91,15 +91,15 @@ WxCursor::init0(wxCursor *cursor)
 
 VALUE WxCursor::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxCursor
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxCursor()
     {
        WxCursor::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxCursor x;
 
 //-----------------------------------------------------------------------------------
 void WxBusyCursor::DefineClass()

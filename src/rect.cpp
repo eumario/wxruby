@@ -91,12 +91,12 @@ WxRect::init0(const wxRect &rect)
 
 VALUE WxRect::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxRect
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxRect()
     {
        WxRect::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxRect x;

@@ -99,12 +99,12 @@ WxFontDialog::GetFontData(VALUE self)
 
 VALUE WxFontDialog::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxFontDialog
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxFontDialog()
     {
        WxFontDialog::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxFontDialog x;

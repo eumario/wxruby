@@ -116,12 +116,12 @@ WxColourData::GetCustomColour(VALUE self,VALUE vi)
 
 VALUE WxColourData::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxColourData
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxColourData()
     {
        WxColourData::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxColourData x;

@@ -93,15 +93,15 @@ WxLog::Resume(VALUE self)
 
 VALUE WxLog::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxLog
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxLog()
     {
        WxLog::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxLog x;
 
 //--------------------------------------------------------------------
 void WxLogTextCtrl::DefineClass()

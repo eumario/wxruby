@@ -105,15 +105,15 @@ WxCalendarDateAttr::GetBackgroundColour(VALUE self)
 }
 VALUE WxCalendarDateAttr::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxDateAttr
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxDateAttr()
     {
        WxCalendarDateAttr::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxDateAttr x;
 
 //---------------------------------------------
 

@@ -267,12 +267,12 @@ WxSlider::SetValue(VALUE self,VALUE vvalue)
 
 VALUE WxSlider::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxSlider
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxSlider()
     {
        WxSlider::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxSlider x;

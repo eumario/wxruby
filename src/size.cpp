@@ -120,12 +120,12 @@ WxSize::y(VALUE self)
 
 VALUE WxSize::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxSize
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxSize()
     {
        WxSize::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxSize x;

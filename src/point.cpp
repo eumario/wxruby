@@ -71,12 +71,12 @@ WxPoint::init0(const wxPoint &point)
 
 VALUE WxPoint::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxPoint
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxPoint()
     {
        WxPoint::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxPoint x;

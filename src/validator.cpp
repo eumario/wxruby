@@ -132,12 +132,12 @@ WxValidator::init0(wxValidator *validator)
 
 VALUE WxValidator::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxValidator
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxValidator()
     {
        WxValidator::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxValidator x;

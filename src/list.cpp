@@ -65,15 +65,15 @@ WxList::init0(wxList *list)
 
 VALUE WxList::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxList
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxList()
     {
        WxList::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxList x;
 
 //-------------------------------------------------------------------------------------------------
 void WxImageList::DefineClass()

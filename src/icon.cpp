@@ -189,12 +189,12 @@ WxIcon::init0(const wxIcon &icon)
 
 VALUE WxIcon::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxIcon
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxIcon()
     {
        WxIcon::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxIcon x;

@@ -102,12 +102,12 @@ WxPalette::Ok(VALUE self)
 
 VALUE WxPalette::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxPalette
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxPalette()
     {
        WxPalette::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxPalette x;

@@ -75,12 +75,12 @@ WxMessageDialog::ShowModal(VALUE self)
 
 VALUE WxMessageDialog::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxMessageDialog
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxMessageDialog()
     {
        WxMessageDialog::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxMessageDialog x;

@@ -205,15 +205,15 @@ WxIndividualLayoutConstraint::Absolute(VALUE self,VALUE vvalue)
 
 VALUE WxIndividualLayoutConstraint::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxIndividualLayoutConstraint
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxIndividualLayoutConstraint()
     {
        WxIndividualLayoutConstraint::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxIndividualLayoutConstraint x;
 
 //-----------------------------------------------------------------------------------------
 void WxLayoutConstraints::DefineClass()

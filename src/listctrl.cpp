@@ -693,15 +693,15 @@ WxListCtrl::RefreshItems(VALUE self,VALUE vitem,VALUE vitemTo)
 
 VALUE WxListCtrl::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxListCtrl
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxListCtrl()
     {
        WxListCtrl::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxListCtrl x;
 
 //-----------------------------------------------------------------------------------
 wxListItemAttr *

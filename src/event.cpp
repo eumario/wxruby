@@ -89,15 +89,15 @@ WxEvent::GetEventType(VALUE self)
 VALUE WxEvent::rubyClass;
 
 
-class ZAutoDefine
+class ZAutoDefineWxEvent
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxEvent()
     {
        WxEvent::DefineClass();
     }
 };
-static ZAutoDefine x1;
+static ZAutoDefineWxEvent x1;
 
 //--------------------------------------------------------------------------------
 

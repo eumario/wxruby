@@ -93,15 +93,15 @@ WxTreeItemData::SetId(VALUE self,VALUE vid)
 VALUE WxTreeItemData::rubyClass;
 
 
-class ZAutoDefine
+class ZAutoDefineWxTreeItemData
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxTreeItemData()
     {
        WxTreeItemData::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxTreeItemData x;
 
 //----------------------------------------------------------------------------------
 void WxTreeCtrl::DefineClass()

@@ -533,12 +533,12 @@ WxToolBar::GetMaxCols(VALUE self)
 
 VALUE WxToolBar::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxToolBar
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxToolBar()
     {
        WxToolBar::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxToolBar x;

@@ -252,12 +252,12 @@ WxPen::SetWidth(VALUE self,VALUE vwidth)
 
 VALUE WxPen::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxPen
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxPen()
     {
        WxPen::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxPen x;

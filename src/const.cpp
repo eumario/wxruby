@@ -14,6 +14,7 @@
 #include "wx.h"
 #include "wx/fdrepdlg.h"
 #include "wx/html/htmlwin.h"
+#include "wx/html/htmprint.h"
 #include "wx/tglbtn.h"
 #include "wx/calctrl.h"
 #include "wx/artprov.h"
@@ -1149,5 +1150,8 @@ void SetConstants() {
     rb_define_const(mWx,"DRAG_ALLOW_MOVE", INT2NUM(wxDrag_AllowMove));
     rb_define_const(mWx,"DRAG_DEFAULT_MOVE", INT2NUM(wxDrag_DefaultMove));
     
-
+    // From wx/html/htmprint.h
+    rb_define_const(mWx,"PAGE_ODD", INT2NUM(wxPAGE_ODD));
+    rb_define_const(mWx,"PAGE_EVEN", INT2NUM(wxPAGE_EVEN));
+    rb_define_const(mWx,"PAGE_ALL", INT2NUM(wxPAGE_ALL));
 }

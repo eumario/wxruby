@@ -67,12 +67,12 @@ WxMask::init0(wxMask *mask)
 
 VALUE WxMask::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxMask
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxMask()
     {
        WxMask::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxMask x;

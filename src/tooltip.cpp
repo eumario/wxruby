@@ -97,12 +97,12 @@ WxToolTip::init0(wxToolTip *tooltip)
 
 VALUE WxToolTip::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxToolTip
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxToolTip()
     {
        WxToolTip::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxToolTip x;

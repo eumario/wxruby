@@ -142,12 +142,12 @@ WxArtProvider::RemoveProvider(VALUE self,VALUE vprovider)
 
 VALUE WxArtProvider::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxArtProvider
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxArtProvider()
     {
        WxArtProvider::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxArtProvider x;

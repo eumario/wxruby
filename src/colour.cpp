@@ -97,12 +97,12 @@ WxColour::init0(const wxColour &colour)
 
 VALUE WxColour::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxColour
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxColour()
     {
        WxColour::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxColour x;
