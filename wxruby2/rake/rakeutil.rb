@@ -39,6 +39,8 @@ end
 
 def delete_files_in(dir)
     Dir[File.join(dir, "*")].each do |f| 
-        force_delete(f) 
+	if !(f =~ /CVS/)
+        	force_delete(f) 
+	end
     end
 end

@@ -484,66 +484,11 @@ static VALUE mWxRubyConstants;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
-
-
-class wxRbCallback : public wxObject 
-{
-    DECLARE_ABSTRACT_CLASS(wxRbCallback);
-public:
-    wxRbCallback(VALUE func) { m_func = func; }
-    wxRbCallback(const wxRbCallback &other) { m_func = other.m_func; }
- 
-    void GenericEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxEvent;
-        EventThunker(event, cWxEvent.klass);
-    }
-    
-    void CalendarEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxCalendarEvent;
-        EventThunker(event, cWxCalendarEvent.klass);
-    }
-    
-    void CloseEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxCloseEvent;
-        EventThunker(event, cWxCloseEvent.klass);
-    }
-    
-    void CommandEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxCommandEvent;
-        EventThunker(event, cWxCommandEvent.klass);
-    }
-    
-    void PaintEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxPaintEvent;
-        EventThunker(event, cWxPaintEvent.klass);
-    }
-    
-    void UpdateUIEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxUpdateUIEvent;
-        EventThunker(event, cWxUpdateUIEvent.klass);
-    }
-    
-    void EventThunker(wxEvent &event, VALUE cEvent)
-    {
-        static VALUE vevent;
-        vevent = Data_Wrap_Struct(cEvent, 0, 0, 0);
-        DATA_PTR(vevent) = &event;
-        
-        wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
-        rb_funcall(cb->m_func, rb_intern("call"),1,vevent);
-    }
-                                                                                
-    VALUE       m_func;
-};
 
 /***********************************************************************
  * director.swg
@@ -1382,6 +1327,21 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"PRINT_MODE_PREVIEW", INT2NUM(wxPRINT_MODE_PREVIEW));
     rb_define_const(mWxRubyConstants,"PRINT_MODE_FILE", INT2NUM(wxPRINT_MODE_FILE));
     rb_define_const(mWxRubyConstants,"PRINT_MODE_PRINTER", INT2NUM(wxPRINT_MODE_PRINTER));
+    rb_define_const(mWxRubyConstants,"TE_NO_VSCROLL", INT2NUM(0x0002));
+    rb_define_const(mWxRubyConstants,"TE_AUTO_SCROLL", INT2NUM(0x0008));
+    rb_define_const(mWxRubyConstants,"TE_READONLY", INT2NUM(0x0010));
+    rb_define_const(mWxRubyConstants,"TE_MULTILINE", INT2NUM(0x0020));
+    rb_define_const(mWxRubyConstants,"TE_PROCESS_TAB", INT2NUM(0x0040));
+    rb_define_const(mWxRubyConstants,"TE_LEFT", INT2NUM(0x0000));
+    rb_define_const(mWxRubyConstants,"TE_RICH", INT2NUM(0x0080));
+    rb_define_const(mWxRubyConstants,"TE_PROCESS_ENTER", INT2NUM(0x0400));
+    rb_define_const(mWxRubyConstants,"TE_PASSWORD", INT2NUM(0x0800));
+    rb_define_const(mWxRubyConstants,"TE_AUTO_URL", INT2NUM(0x1000));
+    rb_define_const(mWxRubyConstants,"TE_NOHIDESEL", INT2NUM(0x2000));
+    rb_define_const(mWxRubyConstants,"TE_DONTWRAP", INT2NUM(0x40000000));
+    rb_define_const(mWxRubyConstants,"TE_LINEWRAP", INT2NUM(0x4000));
+    rb_define_const(mWxRubyConstants,"TE_WORDWRAP", INT2NUM(0x0000));
+    rb_define_const(mWxRubyConstants,"TE_RICH2", INT2NUM(0x8000));
     rb_define_const(mWxRubyConstants,"BITMAP_TYPE_INVALID", INT2NUM(wxBITMAP_TYPE_INVALID));
     rb_define_const(mWxRubyConstants,"BITMAP_TYPE_BMP", INT2NUM(wxBITMAP_TYPE_BMP));
     rb_define_const(mWxRubyConstants,"BITMAP_TYPE_BMP_RESOURCE", INT2NUM(wxBITMAP_TYPE_BMP_RESOURCE));

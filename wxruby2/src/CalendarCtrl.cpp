@@ -493,6 +493,8 @@ static VALUE mWxCalendarCtrl;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -612,18 +614,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("CalendarCtrl.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("CalendarCtrl.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -700,18 +699,6 @@ namespace Swig {
 
 #include "CalendarCtrl.h"
 
-SwigDirector_wxCalendarCtrl::SwigDirector_wxCalendarCtrl(VALUE self, bool disown): wxCalendarCtrl(), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxCalendarCtrl::SwigDirector_wxCalendarCtrl(VALUE self, wxWindow *parent, wxWindowID id, wxDateTime const &date, wxPoint const &pos, wxSize const &size, long style, wxString const &name, bool disown): wxCalendarCtrl(parent, id, date, pos, size, style, name), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxCalendarCtrl_allocate(VALUE self) {
@@ -731,25 +718,23 @@ _wrap_wxCalendarCtrl_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxCalendarCtrl(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindowID arg3 ;
-    wxDateTime const &arg4_defvalue = wxDefaultDateTime ;
-    wxDateTime *arg4 = (wxDateTime *) &arg4_defvalue ;
-    wxPoint const &arg5_defvalue = wxDefaultPosition ;
-    wxPoint *arg5 = (wxPoint *) &arg5_defvalue ;
-    wxSize const &arg6_defvalue = wxDefaultSize ;
-    wxSize *arg6 = (wxSize *) &arg6_defvalue ;
-    long arg7 = (long) wxCAL_SHOW_HOLIDAYS ;
-    wxString const &arg8_defvalue = wxCalendarNameStr ;
-    wxString *arg8 = (wxString *) &arg8_defvalue ;
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxWindowID arg2 ;
+    wxDateTime const &arg3_defvalue = wxDefaultDateTime ;
+    wxDateTime *arg3 = (wxDateTime *) &arg3_defvalue ;
+    wxPoint const &arg4_defvalue = wxDefaultPosition ;
+    wxPoint *arg4 = (wxPoint *) &arg4_defvalue ;
+    wxSize const &arg5_defvalue = wxDefaultSize ;
+    wxSize *arg5 = (wxSize *) &arg5_defvalue ;
+    long arg6 = (long) wxCAL_SHOW_HOLIDAYS ;
+    wxString const &arg7_defvalue = wxCalendarNameStr ;
+    wxString *arg7 = (wxString *) &arg7_defvalue ;
     wxCalendarCtrl *result;
     
     if ((argc < 2) || (argc > 7))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    arg2 = NUM2INT(argv[1]);
     if (argc > 2) {
         {
             int y = NUM2INT(rb_funcall(argv[2], rb_intern("year"), 0));
@@ -764,31 +749,24 @@ _wrap_new_wxCalendarCtrl(int argc, VALUE *argv, VALUE self) {
             wxDateTime::wxDateTime_t min = (wxDateTime::wxDateTime_t)rMinute;
             wxDateTime::wxDateTime_t s = (wxDateTime::wxDateTime_t)rSecond;
             
-            arg4 = new wxDateTime(d, mon, y, h, min, s, 0);
+            arg3 = new wxDateTime(d, mon, y, h, min, s, 0);
         }
     }
     if (argc > 3) {
-        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 4) {
-        SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[4], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 5) {
-        arg7 = NUM2LONG(argv[5]);
+        arg6 = NUM2LONG(argv[5]);
     }
     if (argc > 6) {
         {
-            arg8 = new wxString(STR2CSTR(argv[6]));
+            arg7 = new wxString(STR2CSTR(argv[6]));
         }
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxCalendarCtrl *)new SwigDirector_wxCalendarCtrl(arg1,arg2,arg3,(wxDateTime const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const &)*arg8,0);
-        
-    } else {
-        result = (wxCalendarCtrl *)new wxCalendarCtrl(arg2,arg3,(wxDateTime const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const &)*arg8);
-        
-    }
+    result = (wxCalendarCtrl *)new wxCalendarCtrl(arg1,arg2,(wxDateTime const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const &)*arg7);
     DATA_PTR(self) = result;
     return self;
 }
@@ -856,15 +834,7 @@ _wrap_wxCalendarCtrl_Create(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxCalendarCtrl(wxCalendarCtrl *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxCalendarCtrl*)arg1;
-    printf("CalendarCtrl.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxCalendarCtrl_SetDate(int argc, VALUE *argv, VALUE self) {
@@ -1231,22 +1201,6 @@ _wrap_wxCalendarCtrl_HitTest(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxCalendarCtrl(int argc, VALUE *argv, VALUE self) {
-    wxCalendarCtrl *arg1 = (wxCalendarCtrl *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxCalendarCtrl, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1294,7 +1248,6 @@ mWxCalendarCtrl = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxCalendarCtrl, "disown_wxCalendarCtrl", VALUEFUNC(_wrap_disown_wxCalendarCtrl), -1);
     
     extern void Init_wxControl();
     Init_wxControl();

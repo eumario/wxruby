@@ -491,6 +491,8 @@ static VALUE mWxBitmap;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -610,18 +612,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("Bitmap.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("Bitmap.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -811,6 +810,7 @@ free_wxBitmap(wxBitmap *arg1) {
         return;
     }
     printf("deleting %p\n", director);
+    fflush(stdout);
     delete arg1;
 }
 static VALUE

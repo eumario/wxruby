@@ -15,7 +15,19 @@
 %typemap(in) wxString* {
 	$1 = new wxString(STR2CSTR($input));
 }
+/**
+%typemap(freearg) wxString & {
+	delete $1;
+}
 
+%typemap(freearg) const wxString& {
+	delete $1;
+}
+
+%typemap(freearg) wxString* {
+	delete $1;
+}
+*/
 %typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2($1.c_str());";
 
 %typemap(directorin) wxString *, const wxString * "TODO: $1_name->c_str()";
@@ -39,16 +51,17 @@
 }
 
 %typemap(typecheck) wxString {
-	$1 = TYPE($input) == T_STRING;
+	$1 = (TYPE($input) == T_STRING);
 }
 
 %typemap(typecheck) wxString & {
-	$1 = TYPE($input) == T_STRING;
+	$1 = (TYPE($input) == T_STRING);
 }
 
 %typemap(typecheck) wxString *{
-	$1 = TYPE($input) == T_STRING;
+	$1 = (TYPE($input) == T_STRING);
 }
+
 ##############################################################
 
 %typemap(in) void* {

@@ -14,12 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxMenuBar : public wxMenuBar, public Swig::Director {
-
-public:
-    SwigDirector_wxMenuBar(VALUE self, long style = 0, bool disown = 0);
-    SwigDirector_wxMenuBar(VALUE self, int n, wxMenu *menus[], wxString const titles[], bool disown = 0);
-};
-
-
 #endif

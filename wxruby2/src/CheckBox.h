@@ -14,12 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxCheckBox : public wxCheckBox, public Swig::Director {
-
-public:
-    SwigDirector_wxCheckBox(VALUE self, bool disown = 0);
-    SwigDirector_wxCheckBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &val = wxDefaultValidator, wxString const &name = "checkBox", bool disown = 0);
-};
-
-
 #endif

@@ -486,6 +486,8 @@ static VALUE mWxCloseEvent;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -602,18 +604,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("CloseEvent.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("CloseEvent.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -690,12 +689,6 @@ namespace Swig {
 
 #include "CloseEvent.h"
 
-SwigDirector_wxCloseEvent::SwigDirector_wxCloseEvent(VALUE self, WXTYPE commandEventType, int id, bool disown): wxCloseEvent(commandEventType, id), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxCloseEvent_allocate(VALUE self) {
@@ -715,32 +708,23 @@ _wrap_wxCloseEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxCloseEvent(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    WXTYPE arg2 = (WXTYPE) 0 ;
-    int arg3 = (int) 0 ;
+    WXTYPE arg1 = (WXTYPE) 0 ;
+    int arg2 = (int) 0 ;
     wxCloseEvent *result;
     
     if ((argc < 0) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
     if (argc > 0) {
         {
             WXTYPE * ptr;
             SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_WXTYPE, 1);
-            if (ptr) arg2 = *ptr;
+            if (ptr) arg1 = *ptr;
         }
     }
     if (argc > 1) {
-        arg3 = NUM2INT(argv[1]);
+        arg2 = NUM2INT(argv[1]);
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxCloseEvent *)new SwigDirector_wxCloseEvent(arg1,arg2,arg3,0);
-        
-    } else {
-        result = (wxCloseEvent *)new wxCloseEvent(arg2,arg3);
-        
-    }
+    result = (wxCloseEvent *)new wxCloseEvent(arg1,arg2);
     DATA_PTR(self) = result;
     return self;
 }
@@ -827,32 +811,8 @@ _wrap_wxCloseEvent_Veto(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxCloseEvent(wxCloseEvent *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxCloseEvent*)arg1;
-    printf("CloseEvent.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
-static VALUE
-_wrap_disown_wxCloseEvent(int argc, VALUE *argv, VALUE self) {
-    wxCloseEvent *arg1 = (wxCloseEvent *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxCloseEvent, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -886,7 +846,6 @@ mWxCloseEvent = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxCloseEvent, "disown_wxCloseEvent", VALUEFUNC(_wrap_disown_wxCloseEvent), -1);
     
     extern void Init_wxEvent();
     Init_wxEvent();

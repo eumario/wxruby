@@ -14,11 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxIcon : public wxIcon, public Swig::Director {
-
-public:
-    SwigDirector_wxIcon(VALUE self, wxString const &name, long type, int desiredWidth = -1, int desiredHeight = -1, bool disown = 0);
-};
-
-
 #endif

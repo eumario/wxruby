@@ -207,6 +207,7 @@ class MyFrame < Frame
     end
 
 	def onAllowYearUpdate(event)
+		p event
         event.enable( get_menu_bar().is_checked(Calendar_Cal_Month))
     end
 

@@ -647,6 +647,8 @@ VALUE mWx;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -659,6 +661,17 @@ WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
 
 static GcHashMap GcHash;
 static DeletedHashMap DeletedHash;
+static VALUE GcRubyHash = Qnil;
+
+void GcMapPtrToValue(void *ptr, VALUE val)
+{
+	if (GcRubyHash == Qnil)
+	{
+		rb_global_variable(&GcRubyHash);
+		GcRubyHash = rb_hash_new();
+	}
+	rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
+}
 
 void GcMarkDeleted(void *ptr)
 {

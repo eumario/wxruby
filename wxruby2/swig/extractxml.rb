@@ -344,7 +344,10 @@ class WxClass
     def load_parent_classes(parents_node)
         parents_node.children.each do | parent |
             if(isTagStart(parent, 'classref'))
-               @parents << (parent.entity.attrs['name'])
+               # NSK - filter out non-wx base classes we don't care about.
+	       if (parent.entity.attrs['name'].index('wx') == 0)
+                 @parents << (parent.entity.attrs['name'])
+	       end
             end
         end
     end

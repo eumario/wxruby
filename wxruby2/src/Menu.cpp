@@ -490,6 +490,8 @@ static VALUE mWxMenu;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -606,18 +608,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("Menu.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("Menu.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -694,18 +693,6 @@ namespace Swig {
 
 #include "Menu.h"
 
-SwigDirector_wxMenu::SwigDirector_wxMenu(VALUE self, wxString const &title, long style, bool disown): wxMenu(title, style), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxMenu::SwigDirector_wxMenu(VALUE self, long style, bool disown): wxMenu(style), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxMenu_allocate(VALUE self) {
@@ -725,31 +712,22 @@ _wrap_wxMenu_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxMenu(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxString const &arg2_defvalue = "" ;
-    wxString *arg2 = (wxString *) &arg2_defvalue ;
-    long arg3 = (long) 0 ;
+    wxString const &arg1_defvalue = "" ;
+    wxString *arg1 = (wxString *) &arg1_defvalue ;
+    long arg2 = (long) 0 ;
     wxMenu *result;
     
     if ((argc < 0) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
     if (argc > 0) {
         {
-            arg2 = new wxString(STR2CSTR(argv[0]));
+            arg1 = new wxString(STR2CSTR(argv[0]));
         }
     }
     if (argc > 1) {
-        arg3 = NUM2LONG(argv[1]);
+        arg2 = NUM2LONG(argv[1]);
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxMenu *)new SwigDirector_wxMenu(arg1,(wxString const &)*arg2,arg3,0);
-        
-    } else {
-        result = (wxMenu *)new wxMenu((wxString const &)*arg2,arg3);
-        
-    }
+    result = (wxMenu *)new wxMenu((wxString const &)*arg1,arg2);
     DATA_PTR(self) = result;
     return self;
 }
@@ -757,15 +735,7 @@ _wrap_new_wxMenu(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxMenu(wxMenu *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxMenu*)arg1;
-    printf("Menu.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxMenu_Append(int argc, VALUE *argv, VALUE self) {
@@ -1149,7 +1119,7 @@ static VALUE _wrap_wxMenu_FindItem(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                _v = TYPE(argv[1]) == T_STRING;
+                _v = (TYPE(argv[1]) == T_STRING);
             }
             if (_v) {
                 return _wrap_wxMenu_FindItem__SWIG_0(nargs, args, self);
@@ -1357,14 +1327,14 @@ static VALUE _wrap_wxMenu_Insert(int nargs, VALUE *args, VALUE self) {
                 }
                 if (_v) {
                     {
-                        _v = TYPE(argv[3]) == T_STRING;
+                        _v = (TYPE(argv[3]) == T_STRING);
                     }
                     if (_v) {
                         if (argc <= 4) {
                             return _wrap_wxMenu_Insert__SWIG_1(nargs, args, self);
                         }
                         {
-                            _v = TYPE(argv[4]) == T_STRING;
+                            _v = (TYPE(argv[4]) == T_STRING);
                         }
                         if (_v) {
                             if (argc <= 5) {
@@ -1581,14 +1551,14 @@ static VALUE _wrap_wxMenu_Prepend(int nargs, VALUE *args, VALUE self) {
             }
             if (_v) {
                 {
-                    _v = TYPE(argv[2]) == T_STRING;
+                    _v = (TYPE(argv[2]) == T_STRING);
                 }
                 if (_v) {
                     if (argc <= 3) {
                         return _wrap_wxMenu_Prepend__SWIG_1(nargs, args, self);
                     }
                     {
-                        _v = TYPE(argv[3]) == T_STRING;
+                        _v = (TYPE(argv[3]) == T_STRING);
                     }
                     if (_v) {
                         if (argc <= 4) {
@@ -1832,22 +1802,6 @@ _wrap_wxMenu_UpdateUI(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxMenu(int argc, VALUE *argv, VALUE self) {
-    wxMenu *arg1 = (wxMenu *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1892,7 +1846,6 @@ mWxMenu = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxMenu, "disown_wxMenu", VALUEFUNC(_wrap_disown_wxMenu), -1);
     
     extern void Init_wxEvtHandler();
     Init_wxEvtHandler();

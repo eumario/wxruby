@@ -5,7 +5,7 @@
 
 #if !defined(_wxTextCtrl_h_)
 #define _wxTextCtrl_h_
-class wxTextCtrl : public streambuf
+class wxTextCtrl : public wxControl
 {
 public:
    wxTextCtrl() ;

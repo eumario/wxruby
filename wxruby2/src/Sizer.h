@@ -14,11 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxSizer : public wxSizer, public Swig::Director {
-
-public:
-    SwigDirector_wxSizer(VALUE self, bool disown = 0);
-};
-
-
 #endif

@@ -485,6 +485,8 @@ static VALUE mWxGDIObject;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -601,18 +603,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("GDIObject.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("GDIObject.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -689,12 +688,6 @@ namespace Swig {
 
 #include "GDIObject.h"
 
-SwigDirector_wxGDIObject::SwigDirector_wxGDIObject(VALUE self, bool disown): wxGDIObject(), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxGDIObject_allocate(VALUE self) {
@@ -714,20 +707,11 @@ _wrap_wxGDIObject_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxGDIObject(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
     wxGDIObject *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxGDIObject *)new SwigDirector_wxGDIObject(arg1,0);
-        
-    } else {
-        result = (wxGDIObject *)new wxGDIObject();
-        
-    }
+    result = (wxGDIObject *)new wxGDIObject();
     DATA_PTR(self) = result;
     return self;
 }
@@ -735,32 +719,8 @@ _wrap_new_wxGDIObject(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxGDIObject(wxGDIObject *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxGDIObject*)arg1;
-    printf("GDIObject.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
-static VALUE
-_wrap_disown_wxGDIObject(int argc, VALUE *argv, VALUE self) {
-    wxGDIObject *arg1 = (wxGDIObject *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxGDIObject, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -792,7 +752,6 @@ mWxGDIObject = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxGDIObject, "disown_wxGDIObject", VALUEFUNC(_wrap_disown_wxGDIObject), -1);
     
     extern void Init_wxObject();
     Init_wxObject();

@@ -485,6 +485,8 @@ static VALUE mWxPaintEvent;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -601,18 +603,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("PaintEvent.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("PaintEvent.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -689,12 +688,6 @@ namespace Swig {
 
 #include "PaintEvent.h"
 
-SwigDirector_wxPaintEvent::SwigDirector_wxPaintEvent(VALUE self, int id, bool disown): wxPaintEvent(id), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxPaintEvent_allocate(VALUE self) {
@@ -714,24 +707,15 @@ _wrap_wxPaintEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxPaintEvent(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    int arg2 = (int) 0 ;
+    int arg1 = (int) 0 ;
     wxPaintEvent *result;
     
     if ((argc < 0) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
     if (argc > 0) {
-        arg2 = NUM2INT(argv[0]);
+        arg1 = NUM2INT(argv[0]);
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxPaintEvent *)new SwigDirector_wxPaintEvent(arg1,arg2,0);
-        
-    } else {
-        result = (wxPaintEvent *)new wxPaintEvent(arg2);
-        
-    }
+    result = (wxPaintEvent *)new wxPaintEvent(arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -739,32 +723,8 @@ _wrap_new_wxPaintEvent(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxPaintEvent(wxPaintEvent *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxPaintEvent*)arg1;
-    printf("PaintEvent.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
-static VALUE
-_wrap_disown_wxPaintEvent(int argc, VALUE *argv, VALUE self) {
-    wxPaintEvent *arg1 = (wxPaintEvent *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxPaintEvent, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -796,7 +756,6 @@ mWxPaintEvent = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxPaintEvent, "disown_wxPaintEvent", VALUEFUNC(_wrap_disown_wxPaintEvent), -1);
     
     extern void Init_wxEvent();
     Init_wxEvent();

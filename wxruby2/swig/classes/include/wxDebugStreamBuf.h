@@ -5,7 +5,7 @@
 
 #if !defined(_wxDebugStreamBuf_h_)
 #define _wxDebugStreamBuf_h_
-class wxDebugStreamBuf : public streambuf
+class wxDebugStreamBuf
 {
 public:
 };
