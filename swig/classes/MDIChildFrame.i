@@ -11,5 +11,10 @@
 
 %ignore wxMDIChildFrame::wxMDIChildFrame();
 
+#ifdef __WXMAC__
+%ignore wxMdiChildFrame::GetWindowMenu;
+%ignore wxMdiChildFrame::SetWindowMenu;
+#endif
+
 %include "include/wxMDIChildFrame.h"
 
