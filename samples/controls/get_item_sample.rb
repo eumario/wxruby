@@ -1,3 +1,5 @@
+# Written by Nobuaki Arima
+
 require 'wxruby'
 
 ID = 1
