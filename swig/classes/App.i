@@ -248,6 +248,7 @@ printf("n\n");
 
 ///////////////////////////////////////////////////
 extern "C" void Init_wxRubyStockObjects();
+extern "C" void Init_wxRubyEventTypes();
 
 class wxRubyApp : public wxApp
 {
@@ -284,6 +285,8 @@ public:
     
     virtual bool OnInitGui()
     {
+        Init_wxRubyEventTypes();
+        
         printf("OnInitGui before\n");
         bool result = wxApp::OnInitGui();
         printf("OnInitGui after\n");

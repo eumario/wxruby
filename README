@@ -20,6 +20,9 @@ WHATS NEW:
 - MS Windows compilation fixes [Nick]
 - Avoid dynamic_cast, hopefully to avoid need for RTTI [Kevin]
 - Major README updates [Kevin]
+- Added support for EvtHandler#connnect, but note that the
+  event that comes back is a C++ wxEvent object, so you 
+  cannot call any methods in any event subclass. [Kevin]
 
 
   

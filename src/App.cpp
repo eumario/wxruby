@@ -780,6 +780,7 @@ printf("n\n");
 
 ///////////////////////////////////////////////////
 extern "C" void Init_wxRubyStockObjects();
+extern "C" void Init_wxRubyEventTypes();
 
 class wxRubyApp : public wxApp
 {
@@ -816,6 +817,8 @@ public:
     
     virtual bool OnInitGui()
     {
+        Init_wxRubyEventTypes();
+        
         printf("OnInitGui before\n");
         bool result = wxApp::OnInitGui();
         printf("OnInitGui after\n");
@@ -1769,8 +1772,7 @@ _wrap_disown_App(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxRubyApp, 1);
     {
-        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
-if(!director) printf("OOPS! Not a director!\n");
+Swig::Director *director = (Swig::Director*)(arg1);
         if (director) director->swig_disown();
     }
     
