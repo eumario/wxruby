@@ -1,7 +1,5 @@
 - Remove memory debug output
 
-- Change callback hash to be non-ruby, so gc will work properly
-
 - Add mark/free handling to typemap methods
 
 - Add support for overloaded constructors (and fix calendar sample)
@@ -10,6 +8,8 @@
 - NOTE: Any method that returns an object (rather 
   than an object reference or pointer) is currently 
   being removed by swig. ARGH!
+
+- Add support for evt_xxx(:method) as an alternative
 
 - Remove debugging output for director constructors/destructors
 
