@@ -489,6 +489,8 @@ static VALUE mWxCheckBox;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -605,18 +607,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("CheckBox.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("CheckBox.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -693,34 +692,13 @@ namespace Swig {
 
 #include "CheckBox.h"
 
-SwigDirector_wxCheckBox::SwigDirector_wxCheckBox(VALUE self, bool disown): wxCheckBox(), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxCheckBox::SwigDirector_wxCheckBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos, wxSize const &size, long style, wxValidator const &val, wxString const &name, bool disown): wxCheckBox(parent, id, label, pos, size, style, val, name), Swig::Director(self, disown) {
-    
-}
-
-
-
 static VALUE
 _wrap_new_wxCheckBox__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
     wxCheckBox *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxCheckBox *)new SwigDirector_wxCheckBox(arg1,0);
-        
-    } else {
-        result = (wxCheckBox *)new wxCheckBox();
-        
-    }
+    result = (wxCheckBox *)new wxCheckBox();
     DATA_PTR(self) = result;
     return self;
 }
@@ -745,54 +723,45 @@ _wrap_wxCheckBox_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxCheckBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindowID arg3 ;
-    wxString *arg4 = 0 ;
-    wxPoint const &arg5_defvalue = wxDefaultPosition ;
-    wxPoint *arg5 = (wxPoint *) &arg5_defvalue ;
-    wxSize const &arg6_defvalue = wxDefaultSize ;
-    wxSize *arg6 = (wxSize *) &arg6_defvalue ;
-    long arg7 = (long) 0 ;
-    wxValidator const &arg8_defvalue = wxDefaultValidator ;
-    wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
-    wxString const &arg9_defvalue = "checkBox" ;
-    wxString *arg9 = (wxString *) &arg9_defvalue ;
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxWindowID arg2 ;
+    wxString *arg3 = 0 ;
+    wxPoint const &arg4_defvalue = wxDefaultPosition ;
+    wxPoint *arg4 = (wxPoint *) &arg4_defvalue ;
+    wxSize const &arg5_defvalue = wxDefaultSize ;
+    wxSize *arg5 = (wxSize *) &arg5_defvalue ;
+    long arg6 = (long) 0 ;
+    wxValidator const &arg7_defvalue = wxDefaultValidator ;
+    wxValidator *arg7 = (wxValidator *) &arg7_defvalue ;
+    wxString const &arg8_defvalue = "checkBox" ;
+    wxString *arg8 = (wxString *) &arg8_defvalue ;
     wxCheckBox *result;
     
     if ((argc < 3) || (argc > 8))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    arg2 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg3 = new wxString(STR2CSTR(argv[2]));
     }
     if (argc > 3) {
-        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 4) {
-        SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[4], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 5) {
-        arg7 = NUM2LONG(argv[5]);
+        arg6 = NUM2LONG(argv[5]);
     }
     if (argc > 6) {
-        SWIG_ConvertPtr(argv[6], (void **) &arg8, SWIGTYPE_p_wxValidator, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[6], (void **) &arg7, SWIGTYPE_p_wxValidator, 1); if (arg7 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 7) {
         {
-            arg9 = new wxString(STR2CSTR(argv[7]));
+            arg8 = new wxString(STR2CSTR(argv[7]));
         }
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxCheckBox *)new SwigDirector_wxCheckBox(arg1,arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9,0);
-        
-    } else {
-        result = (wxCheckBox *)new wxCheckBox(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
-        
-    }
+    result = (wxCheckBox *)new wxCheckBox(arg1,arg2,(wxString const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxValidator const &)*arg7,(wxString const &)*arg8);
     DATA_PTR(self) = result;
     return self;
 }
@@ -800,35 +769,37 @@ _wrap_new_wxCheckBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_wxCheckBox(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[9];
+    VALUE argv[8];
     int ii;
     
     argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 9); ii++) {
+    for (ii = 0; (ii < argc) && (ii < 8); ii++) {
         argv[ii] = args[ii];
     }
-    if (argc == 1) {
-        int _v;
-        _v = 1;
-        if (_v) {
-            return _wrap_new_wxCheckBox__SWIG_0(nargs, args, self);
-        }
+    if (argc == 0) {
+        return _wrap_new_wxCheckBox__SWIG_0(nargs, args, self);
     }
-    if ((argc >= 4) && (argc <= 9)) {
+    if ((argc >= 3) && (argc <= 8)) {
         int _v;
-        _v = 1;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+        }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                    _v = (TYPE(argv[2]) == T_STRING);
                 }
                 if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_new_wxCheckBox__SWIG_1(nargs, args, self);
+                    }
                     {
-                        _v = TYPE(argv[3]) == T_STRING;
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
                     }
                     if (_v) {
                         if (argc <= 4) {
@@ -836,41 +807,32 @@ static VALUE _wrap_new_wxCheckBox(int nargs, VALUE *args, VALUE self) {
                         }
                         {
                             void *ptr;
-                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
                         }
                         if (_v) {
                             if (argc <= 5) {
                                 return _wrap_new_wxCheckBox__SWIG_1(nargs, args, self);
                             }
                             {
-                                void *ptr;
-                                _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                                _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
                             }
                             if (_v) {
                                 if (argc <= 6) {
                                     return _wrap_new_wxCheckBox__SWIG_1(nargs, args, self);
                                 }
                                 {
-                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                    void *ptr;
+                                    _v = (NIL_P(argv[6]) || (TYPE(argv[6]) == T_DATA && SWIG_ConvertPtr(argv[6], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
                                 }
                                 if (_v) {
                                     if (argc <= 7) {
                                         return _wrap_new_wxCheckBox__SWIG_1(nargs, args, self);
                                     }
                                     {
-                                        void *ptr;
-                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                        _v = (TYPE(argv[7]) == T_STRING);
                                     }
                                     if (_v) {
-                                        if (argc <= 8) {
-                                            return _wrap_new_wxCheckBox__SWIG_1(nargs, args, self);
-                                        }
-                                        {
-                                            _v = TYPE(argv[8]) == T_STRING;
-                                        }
-                                        if (_v) {
-                                            return _wrap_new_wxCheckBox__SWIG_1(nargs, args, self);
-                                        }
+                                        return _wrap_new_wxCheckBox__SWIG_1(nargs, args, self);
                                     }
                                 }
                             }
@@ -888,15 +850,7 @@ static VALUE _wrap_new_wxCheckBox(int nargs, VALUE *args, VALUE self) {
 
 static void
 free_wxCheckBox(wxCheckBox *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxCheckBox*)arg1;
-    printf("CheckBox.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxCheckBox_Create(int argc, VALUE *argv, VALUE self) {
@@ -995,22 +949,6 @@ _wrap_wxCheckBox_SetValue(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxCheckBox(int argc, VALUE *argv, VALUE self) {
-    wxCheckBox *arg1 = (wxCheckBox *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxCheckBox, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1050,7 +988,6 @@ mWxCheckBox = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxCheckBox, "disown_wxCheckBox", VALUEFUNC(_wrap_disown_wxCheckBox), -1);
     
     extern void Init_wxControl();
     Init_wxControl();

@@ -14,11 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxGDIObject : public wxGDIObject, public Swig::Director {
-
-public:
-    SwigDirector_wxGDIObject(VALUE self, bool disown = 0);
-};
-
-
 #endif

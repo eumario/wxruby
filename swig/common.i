@@ -23,6 +23,8 @@
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 %}
 
 %include "typedefs.i"

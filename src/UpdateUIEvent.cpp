@@ -485,6 +485,8 @@ static VALUE mWxUpdateUIEvent;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -601,18 +603,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("UpdateUIEvent.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("UpdateUIEvent.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -689,12 +688,6 @@ namespace Swig {
 
 #include "UpdateUIEvent.h"
 
-SwigDirector_wxUpdateUIEvent::SwigDirector_wxUpdateUIEvent(VALUE self, wxWindowID commandId, bool disown): wxUpdateUIEvent(commandId), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxUpdateUIEvent_allocate(VALUE self) {
@@ -714,24 +707,15 @@ _wrap_wxUpdateUIEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxUpdateUIEvent(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxWindowID arg2 = (wxWindowID) 0 ;
+    wxWindowID arg1 = (wxWindowID) 0 ;
     wxUpdateUIEvent *result;
     
     if ((argc < 0) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
     if (argc > 0) {
-        arg2 = NUM2INT(argv[0]);
+        arg1 = NUM2INT(argv[0]);
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxUpdateUIEvent *)new SwigDirector_wxUpdateUIEvent(arg1,arg2,0);
-        
-    } else {
-        result = (wxUpdateUIEvent *)new wxUpdateUIEvent(arg2);
-        
-    }
+    result = (wxUpdateUIEvent *)new wxUpdateUIEvent(arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -884,32 +868,8 @@ _wrap_wxUpdateUIEvent_SetText(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxUpdateUIEvent(wxUpdateUIEvent *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxUpdateUIEvent*)arg1;
-    printf("UpdateUIEvent.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
-static VALUE
-_wrap_disown_wxUpdateUIEvent(int argc, VALUE *argv, VALUE self) {
-    wxUpdateUIEvent *arg1 = (wxUpdateUIEvent *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxUpdateUIEvent, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -941,7 +901,6 @@ mWxUpdateUIEvent = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxUpdateUIEvent, "disown_wxUpdateUIEvent", VALUEFUNC(_wrap_disown_wxUpdateUIEvent), -1);
     
     extern void Init_wxCommandEvent();
     Init_wxCommandEvent();

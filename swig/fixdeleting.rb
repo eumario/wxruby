@@ -16,7 +16,6 @@ this_module = File.basename(ARGV[0])
 
 File.open(ARGV[0], "w") do | out |
     File.foreach(broken) do | line |
-    
         if(line.index("SwigDirector_") == 0)
             matches = Regexp.new('_(\w+)').match(line)
             $class_name = matches[1]
@@ -31,21 +30,25 @@ File.open(ARGV[0], "w") do | out |
         
         if(line.index("Director(VALUE self,"))
             lines = [line]
-            lines << '    printf("' + this_module + '" " new Director %p\n", this);'
-            lines << '    if(alive == Qnil)'
-            lines << '    {'
-            lines << '        rb_global_variable(&alive);'
-            lines << '        alive = rb_hash_new();'
-            lines << '    }'
-            lines << '    rb_hash_aset(alive, INT2NUM((int)this), self);'
+	    lines << '    printf("' + this_module + '" " new Director %p\n", this);'
+	    #lines << '    if(alive == Qnil)'
+	    #lines << '    {'
+	    #lines << '        rb_global_variable(&alive);'
+	    #lines << '        alive = rb_hash_new();'
+	    #lines << '    }'
+	    #lines << '    rb_hash_aset(alive, INT2NUM((int)this), self);'
+	    lines << '    fflush(stdout);'
+	    lines << '    GcMapPtrToValue(this,self);'
             line = lines.join("\n")    
         end
         
         if(line.index("~Director()"))
             lines = [line]
             lines << '    printf("' + this_module + '" " ~Director %p\n", this);'
+	    lines << '    fflush(stdout);'
 	    #lines << '    rb_hash_aset(alive, INT2NUM((int)this), Qnil);'
 	    lines << '    GcMarkDeleted(this);'
+
             line = lines.join("\n")
         end
         
@@ -61,8 +64,17 @@ File.open(ARGV[0], "w") do | out |
             lines << "        return;"
             lines << "    }"
             lines << "    printf(\"deleting %p\\n\", director);"
+	    lines << "    fflush(stdout);"
             lines << "    delete arg1;"
             line = lines.join("\n")
+	#
+	# HACK! If we don't have the latest version of SWIG, 
+	# classes with no virtual methods will not be wrapped.
+	# For now, since we can't protect those classes, don't
+	# let the GC delete them either
+	#
+	elsif (line.index(/delete arg1/))
+		line = "    //delete arg1;"
         end
         
         # replace dynamic_cast with 

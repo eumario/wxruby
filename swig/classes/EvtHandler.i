@@ -181,7 +181,7 @@ static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self,
     return Qnil;
 }
 
-static VALUE connect(int argc, VALUE *argv, VALUE self) 
+static VALUE connect_fnc(int argc, VALUE *argv, VALUE self) 
 {
     if (argc != 3)
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)", argc);
@@ -267,7 +267,7 @@ static VALUE evt_window_create(int argc, VALUE *argv, VALUE self)
 %}
 
 %init %{
-    rb_define_method(cWxEvtHandler.klass, "connect", VALUEFUNC(connect), -1);
+    rb_define_method(cWxEvtHandler.klass, "connect", VALUEFUNC(connect_fnc), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_menu", VALUEFUNC(evt_menu), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_choice", VALUEFUNC(evt_choice), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar", VALUEFUNC(evt_calendar), -1);

@@ -486,6 +486,8 @@ static VALUE mWxPaintDC;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -602,18 +604,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("PaintDC.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("PaintDC.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -690,12 +689,6 @@ namespace Swig {
 
 #include "PaintDC.h"
 
-SwigDirector_wxPaintDC::SwigDirector_wxPaintDC(VALUE self, wxWindow *window, bool disown): wxPaintDC(window), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxPaintDC_allocate(VALUE self) {
@@ -715,22 +708,13 @@ _wrap_wxPaintDC_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxPaintDC(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxWindow *arg1 = (wxWindow *) 0 ;
     wxPaintDC *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxPaintDC *)new SwigDirector_wxPaintDC(arg1,arg2,0);
-        
-    } else {
-        result = (wxPaintDC *)new wxPaintDC(arg2);
-        
-    }
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    result = (wxPaintDC *)new wxPaintDC(arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -738,32 +722,8 @@ _wrap_new_wxPaintDC(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxPaintDC(wxPaintDC *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxPaintDC*)arg1;
-    printf("PaintDC.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
-static VALUE
-_wrap_disown_wxPaintDC(int argc, VALUE *argv, VALUE self) {
-    wxPaintDC *arg1 = (wxPaintDC *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxPaintDC, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -797,7 +757,6 @@ mWxPaintDC = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxPaintDC, "disown_wxPaintDC", VALUEFUNC(_wrap_disown_wxPaintDC), -1);
     
     extern void Init_wxWindowDC();
     Init_wxWindowDC();

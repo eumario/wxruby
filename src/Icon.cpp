@@ -487,6 +487,8 @@ static VALUE mWxIcon;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -603,18 +605,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("Icon.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("Icon.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -691,12 +690,6 @@ namespace Swig {
 
 #include "Icon.h"
 
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, wxString const &name, long type, int desiredWidth, int desiredHeight, bool disown): wxIcon(name, type, desiredWidth, desiredHeight), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxIcon_allocate(VALUE self) {
@@ -716,34 +709,25 @@ _wrap_wxIcon_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxIcon(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxString *arg2 = 0 ;
-    long arg3 ;
+    wxString *arg1 = 0 ;
+    long arg2 ;
+    int arg3 = (int) -1 ;
     int arg4 = (int) -1 ;
-    int arg5 = (int) -1 ;
     wxIcon *result;
     
     if ((argc < 2) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    arg1 = self;
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]));
     }
-    arg3 = NUM2LONG(argv[1]);
+    arg2 = NUM2LONG(argv[1]);
     if (argc > 2) {
-        arg4 = NUM2INT(argv[2]);
+        arg3 = NUM2INT(argv[2]);
     }
     if (argc > 3) {
-        arg5 = NUM2INT(argv[3]);
+        arg4 = NUM2INT(argv[3]);
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxIcon *)new SwigDirector_wxIcon(arg1,(wxString const &)*arg2,arg3,arg4,arg5,0);
-        
-    } else {
-        result = (wxIcon *)new wxIcon((wxString const &)*arg2,arg3,arg4,arg5);
-        
-    }
+    result = (wxIcon *)new wxIcon((wxString const &)*arg1,arg2,arg3,arg4);
     DATA_PTR(self) = result;
     return self;
 }
@@ -766,15 +750,7 @@ _wrap_wxIcon_CopyFromBitmap(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxIcon(wxIcon *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxIcon*)arg1;
-    printf("Icon.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxIcon_GetDepth(int argc, VALUE *argv, VALUE self) {
@@ -911,22 +887,6 @@ _wrap_wxIcon_SetWidth(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxIcon(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -965,7 +925,6 @@ mWxIcon = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxIcon, "disown_wxIcon", VALUEFUNC(_wrap_disown_wxIcon), -1);
     
     extern void Init_wxBitmap();
     Init_wxBitmap();

@@ -503,6 +503,8 @@ static VALUE mWxWindow;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -637,18 +639,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("Window.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("Window.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -1750,7 +1749,7 @@ static VALUE _wrap_new_wxWindow(int nargs, VALUE *args, VALUE self) {
                                     return _wrap_new_wxWindow__SWIG_1(nargs, args, self);
                                 }
                                 {
-                                    _v = TYPE(argv[6]) == T_STRING;
+                                    _v = (TYPE(argv[6]) == T_STRING);
                                 }
                                 if (_v) {
                                     return _wrap_new_wxWindow__SWIG_1(nargs, args, self);
@@ -1778,6 +1777,7 @@ free_wxWindow(wxWindow *arg1) {
         return;
     }
     printf("deleting %p\n", director);
+    fflush(stdout);
     delete arg1;
 }
 static VALUE
@@ -2400,7 +2400,7 @@ static VALUE _wrap_wxWindow_FindWindow(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                _v = TYPE(argv[1]) == T_STRING;
+                _v = (TYPE(argv[1]) == T_STRING);
             }
             if (_v) {
                 return _wrap_wxWindow_FindWindow__SWIG_1(nargs, args, self);
@@ -4931,7 +4931,7 @@ static VALUE _wrap_wxWindow_SetToolTip(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                _v = TYPE(argv[1]) == T_STRING;
+                _v = (TYPE(argv[1]) == T_STRING);
             }
             if (_v) {
                 return _wrap_wxWindow_SetToolTip__SWIG_0(nargs, args, self);

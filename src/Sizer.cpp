@@ -490,6 +490,8 @@ static VALUE mWxSizer;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -606,18 +608,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("Sizer.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("Sizer.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -694,23 +693,9 @@ namespace Swig {
 
 #include "Sizer.h"
 
-SwigDirector_wxSizer::SwigDirector_wxSizer(VALUE self, bool disown): wxSizer(), Swig::Director(self, disown) {
-    
-}
-
-
-
 static void
 free_wxSizer(wxSizer *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxSizer*)arg1;
-    printf("Sizer.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxSizer_Add__SWIG_0(int argc, VALUE *argv, VALUE self) {
@@ -2073,22 +2058,6 @@ _wrap_wxSizer_SetVirtualSizeHints(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxSizer(int argc, VALUE *argv, VALUE self) {
-    wxSizer *arg1 = (wxSizer *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -2133,7 +2102,6 @@ mWxSizer = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxSizer, "disown_wxSizer", VALUEFUNC(_wrap_disown_wxSizer), -1);
     
     extern void Init_wxObject();
     Init_wxObject();

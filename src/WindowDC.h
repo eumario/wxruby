@@ -14,11 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxWindowDC : public wxWindowDC, public Swig::Director {
-
-public:
-    SwigDirector_wxWindowDC(VALUE self, wxWindow *window, bool disown = 0);
-};
-
-
 #endif

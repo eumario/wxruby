@@ -14,15 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxBrush : public wxBrush, public Swig::Director {
-
-public:
-    SwigDirector_wxBrush(VALUE self, bool disown = 0);
-    SwigDirector_wxBrush(VALUE self, wxColour const &colour, int style, bool disown = 0);
-    SwigDirector_wxBrush(VALUE self, wxString const &colourName, int style, bool disown = 0);
-    SwigDirector_wxBrush(VALUE self, wxBitmap const &stippleBitmap, bool disown = 0);
-    SwigDirector_wxBrush(VALUE self, wxBrush const &brush, bool disown = 0);
-};
-
-
 #endif

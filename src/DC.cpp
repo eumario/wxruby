@@ -499,6 +499,8 @@ static VALUE mWxDC;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -615,18 +617,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("DC.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("DC.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -703,23 +702,9 @@ namespace Swig {
 
 #include "DC.h"
 
-SwigDirector_wxDC::SwigDirector_wxDC(VALUE self, bool disown): wxDC(), Swig::Director(self, disown) {
-    
-}
-
-
-
 static void
 free_wxDC(wxDC *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxDC*)arg1;
-    printf("DC.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxDC_BeginDrawing(int argc, VALUE *argv, VALUE self) {
@@ -3587,22 +3572,6 @@ _wrap_wxDC_StartDoc(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxDC(int argc, VALUE *argv, VALUE self) {
-    wxDC *arg1 = (wxDC *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxDC, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -3662,7 +3631,6 @@ mWxDC = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxDC, "disown_wxDC", VALUEFUNC(_wrap_disown_wxDC), -1);
     
     extern void Init_wxObject();
     Init_wxObject();

@@ -487,6 +487,8 @@ static VALUE mWxObject;
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+
 
 
 #include <wx/datetime.h>
@@ -602,18 +604,15 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
     printf("Object.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
+    fflush(stdout);
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
     printf("Object.cpp" " ~Director %p\n", this);
+    fflush(stdout);
     GcMarkDeleted(this);
       }
 
@@ -690,18 +689,6 @@ namespace Swig {
 
 #include "Object.h"
 
-SwigDirector_wxObject::SwigDirector_wxObject(VALUE self, bool disown): wxObject(), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxObject::SwigDirector_wxObject(VALUE self, wxObject const &other, bool disown): wxObject(other), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxObject_allocate(VALUE self) {
@@ -721,20 +708,11 @@ _wrap_wxObject_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxObject(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
     wxObject *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxObject *)new SwigDirector_wxObject(arg1,0);
-        
-    } else {
-        result = (wxObject *)new wxObject();
-        
-    }
+    result = (wxObject *)new wxObject();
     DATA_PTR(self) = result;
     return self;
 }
@@ -742,15 +720,7 @@ _wrap_new_wxObject(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxObject(wxObject *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxObject*)arg1;
-    printf("Object.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxObject_GetClassInfo(int argc, VALUE *argv, VALUE self) {
@@ -845,22 +815,6 @@ _wrap_wxObject_UnRef(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxObject(int argc, VALUE *argv, VALUE self) {
-    wxObject *arg1 = (wxObject *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxObject, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -896,7 +850,6 @@ mWxObject = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxObject, "disown_wxObject", VALUEFUNC(_wrap_disown_wxObject), -1);
     
     cWxObject.klass = rb_define_class_under(mWxObject, "Object", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_wxObject, (void *) &cWxObject);

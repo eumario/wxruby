@@ -14,11 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxPaintEvent : public wxPaintEvent, public Swig::Director {
-
-public:
-    SwigDirector_wxPaintEvent(VALUE self, int id = 0, bool disown = 0);
-};
-
-
 #endif
