@@ -527,16 +527,17 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxValidator swig_types[7] 
 #define  SWIGTYPE_p_wxWindow swig_types[8] 
 #define  SWIGTYPE_p_wxPoint swig_types[9] 
-#define  SWIGTYPE_p_wxCursor swig_types[10] 
-#define  SWIGTYPE_p_wxString swig_types[11] 
-#define  SWIGTYPE_p_wxEvtHandler swig_types[12] 
-#define  SWIGTYPE_p_wxFont swig_types[13] 
-#define  SWIGTYPE_p_wxLayoutConstraints swig_types[14] 
-#define  SWIGTYPE_p_wxAcceleratorTable swig_types[15] 
-#define  SWIGTYPE_p_wxRegion swig_types[16] 
-#define  SWIGTYPE_p_wxSize swig_types[17] 
-#define  SWIGTYPE_p_int swig_types[18] 
-static swig_type_info *swig_types[20];
+#define  SWIGTYPE_p_wxDC swig_types[10] 
+#define  SWIGTYPE_p_wxCursor swig_types[11] 
+#define  SWIGTYPE_p_wxString swig_types[12] 
+#define  SWIGTYPE_p_wxEvtHandler swig_types[13] 
+#define  SWIGTYPE_p_wxFont swig_types[14] 
+#define  SWIGTYPE_p_wxLayoutConstraints swig_types[15] 
+#define  SWIGTYPE_p_wxAcceleratorTable swig_types[16] 
+#define  SWIGTYPE_p_wxRegion swig_types[17] 
+#define  SWIGTYPE_p_wxSize swig_types[18] 
+#define  SWIGTYPE_p_int swig_types[19] 
+static swig_type_info *swig_types[21];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -569,6 +570,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -579,24 +581,24 @@ void GcFreefunc(void *);
 
 #include <wx/datetime.h>
 
-VALUE wxWindow_paint(wxWindow *self){
-        static VALUE paintDC = Qnil;
-        rb_global_variable(&paintDC);
-
-        if(rb_block_given_p()) 
-        {
-            // avoid quoted constant inside rb_intern because
-            // it will be "fixed" by our post-swig processing
-            char* PAINTDC_CLASS = "PaintDC";
-            VALUE cPaintDC = rb_ivar_get(mWx, rb_intern(PAINTDC_CLASS));
-            
-            VALUE rubySelf = SWIG_NewPointerObj((void *) self, SWIGTYPE_p_wxWindow, 0);
-            paintDC = rb_funcall(cPaintDC, rb_intern("new"), 1, rubySelf);
-            rb_yield(paintDC);
-            paintDC = Qnil;
-        }
-        return Qnil;
+VALUE wxWindow_this_should_never_be_called(wxWindow *self,wxDC *tmp){
+	    return Qnil;
     }
+VALUE wxWindow_paint(wxWindow *self){   
+	   wxWindow *ptr = self;
+	
+	   if(rb_block_given_p()) 
+	   {
+	      wxPaintDC dc(ptr);
+	      
+	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxDC, 0);	      
+	      rb_yield(dcVal);
+	
+	      DATA_PTR(dcVal) = NULL;
+	   }
+	   return Qnil;	
+   
+  }
 
 extern swig_class cWxEvtHandler;
 swig_class cWxWindow;
@@ -708,16 +710,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("Window.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("Window.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -792,7 +798,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Window.h"
+#include "src/Window.h"
 
 SwigDirector_wxWindow::SwigDirector_wxWindow(VALUE self, bool disown): wxWindow(), Swig::Director(self, disown) {
     
@@ -1844,14 +1850,20 @@ static VALUE _wrap_new_wxWindow(int nargs, VALUE *args, VALUE self) {
 static void
 free_wxWindow(wxWindow *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxWindow*)arg1;
+#ifdef wxDEBUG
     printf("Window.cpp" " Checking %p\n", director);
+#endif
     if (GcIsDeleted(director))
     {
+#ifdef wxDEBUG
         printf("%p is already dead!\n", director);
+#endif
         return;
     }
+#ifdef wxDEBUG
     printf("deleting %p\n", director);
     fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE
@@ -5293,6 +5305,24 @@ _wrap_wxWindow_WarpPointer(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_wxWindow_this_should_never_be_called(int argc, VALUE *argv, VALUE self) {
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxDC *arg2 = (wxDC *) 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxDC, 1);
+    result = (VALUE)wxWindow_this_should_never_be_called(arg1,arg2);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_wxWindow_paint(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
     VALUE result;
@@ -5340,6 +5370,7 @@ static swig_type_info _swigt__p_wxToolTip[] = {{"_p_wxToolTip", 0, "wxToolTip *"
 static swig_type_info _swigt__p_wxValidator[] = {{"_p_wxValidator", 0, "wxValidator *", 0, 0, 0, 0},{"_p_wxValidator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxDC[] = {{"_p_wxDC", 0, "wxDC *", 0, 0, 0, 0},{"_p_wxDC", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxCursor[] = {{"_p_wxCursor", 0, "wxCursor *", 0, 0, 0, 0},{"_p_wxCursor", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0, 0, 0, 0},{"_p_wxString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxEvtHandler[] = {{"_p_wxEvtHandler", 0, "wxEvtHandler *", 0, 0, 0, 0},{"_p_wxWindow", _p_wxWindowTo_p_wxEvtHandler, 0, 0, 0, 0, 0},{"_p_wxEvtHandler", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -5361,6 +5392,7 @@ _swigt__p_wxToolTip,
 _swigt__p_wxValidator, 
 _swigt__p_wxWindow, 
 _swigt__p_wxPoint, 
+_swigt__p_wxDC, 
 _swigt__p_wxCursor, 
 _swigt__p_wxString, 
 _swigt__p_wxEvtHandler, 
@@ -5524,6 +5556,7 @@ mWxWindow = mWx;
     rb_define_method(cWxWindow.klass, "update", VALUEFUNC(_wrap_wxWindow_Update), -1);
     rb_define_method(cWxWindow.klass, "validate", VALUEFUNC(_wrap_wxWindow_Validate), -1);
     rb_define_method(cWxWindow.klass, "warp_pointer", VALUEFUNC(_wrap_wxWindow_WarpPointer), -1);
+    rb_define_method(cWxWindow.klass, "this_should_never_be_called", VALUEFUNC(_wrap_wxWindow_this_should_never_be_called), -1);
     rb_define_method(cWxWindow.klass, "paint", VALUEFUNC(_wrap_wxWindow_paint), -1);
     cWxWindow.mark = 0;
     cWxWindow.destroy = (void (*)(void *)) free_wxWindow;

@@ -39,18 +39,22 @@ File.open(ARGV[0], "w") do | out |
         
         if(line.index("Director(VALUE self,"))
             lines = [line]
-	    			lines << '    printf("' + this_module + '" " new Director %p\n", this);'
-	    			lines << '    fflush(stdout);'
-	    			lines << '    GcMapPtrToValue(this,self);'
+	    lines << '#ifdef wxDEBUG'
+	    lines << '    printf("' + this_module + '" " new Director %p\n", this);'
+	    lines << '    fflush(stdout);'
+	    lines << '#endif'
+	    lines << '    GcMapPtrToValue(this,self);'
             line = lines.join("\n")    
         end
         
         if(line.index("~Director()"))
             lines = [line]
+	    lines << '#ifdef wxDEBUG'
             lines << '    printf("' + this_module + '" " ~Director %p\n", this);'
-	    			lines << '    fflush(stdout);'
-	    			#lines << '    rb_hash_aset(alive, INT2NUM((int)this), Qnil);'
-	    			lines << '    GcMarkDeleted(this);'
+	    lines << '    fflush(stdout);'
+	    lines << '#endif'
+	    #lines << '    rb_hash_aset(alive, INT2NUM((int)this), Qnil);'
+	    lines << '    GcMarkDeleted(this);'
 
             line = lines.join("\n")
         end
@@ -58,14 +62,20 @@ File.open(ARGV[0], "w") do | out |
         if($class_name && line.index("delete arg1"))
             lines = []
             lines << "    Swig::Director* director = (Swig::Director*)(SwigDirector_#{$class_name}*)arg1;"
+	    lines << '#ifdef wxDEBUG'
             lines << '    printf("' + this_module + '" " Checking %p\n", director);'
-	    			lines << "    if (GcIsDeleted(director))"
+	    lines << '#endif'
+	    lines << "    if (GcIsDeleted(director))"
             lines << "    {"
+	    lines << '#ifdef wxDEBUG'
             lines << "        printf(\"%p is already dead!\\n\", director);"
+	    lines << '#endif'
             lines << "        return;"
             lines << "    }"
+	    lines << '#ifdef wxDEBUG'
             lines << "    printf(\"deleting %p\\n\", director);"
-	    			lines << "    fflush(stdout);"
+	    lines << "    fflush(stdout);"
+	    lines << '#endif'
             lines << "    delete arg1;"
             line = lines.join("\n")
 	#

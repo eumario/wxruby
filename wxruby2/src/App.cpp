@@ -555,6 +555,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -594,41 +595,61 @@ public:
 
     virtual ~wxRubyApp()
     {
+#ifdef wxDEBUG    
         printf("~wxRubyApp\n");
+#endif	
     }
 
     int main_loop()
     {
         static int argc = 1;
         static char *argv[] = {"wxruby", NULL};
-
+#ifdef wxDEBUG
         printf("Calling wxEntry, this=%p\n", this);
+#endif
+
 #ifdef __WXMSW__
+
+#if wxMINOR_VERSION == 4
 		    extern int  wxEntry(WXHINSTANCE hInstance,
             WXHINSTANCE WXUNUSED(hPrevInstance),
             char *lpCmdLine,
             int nCmdShow,
             bool enterLoop);
-        printf("Module handle = %d\n",GetModuleHandle(NULL));
-		    wxEntry(GetModuleHandle(NULL),0,"",true,true);
+	    wxEntry(GetModuleHandle(NULL),0,"",true,true);
+#else
+		    extern int wxEntry(HINSTANCE hInstance,
+                        HINSTANCE WXUNUSED(hPrevInstance),
+                        wxCmdLineArgType WXUNUSED(pCmdLine),
+                        int nCmdShow);
+	    wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
+#endif
+        
+	
 		
 #else     
         wxEntry((const int)argc,(char **)argv);
 #endif        
 		
-
+#ifdef wxDEBUG
         printf("returned from wxEntry...\n");
+#endif	
         rb_gc_start();
+#ifdef wxDEBUG	
         printf("survived gc\n");
+#endif	
         return 0;
     }
     
     virtual bool OnInitGui()
     {
-        
+#ifdef wxDEBUG        
         printf("OnInitGui before\n");
+#endif	
         bool result = wxApp::OnInitGui();
+#ifdef wxDEBUG	
         printf("OnInitGui after\n");
+#endif	
         if(result)
         {
             Init_wxRubyEventTypes();
@@ -639,9 +660,14 @@ public:
 
     virtual int OnExit()
     {
+#ifdef wxDEBUG    
         printf("OnExit...\n");
+#endif	
         rb_gc_start();
+#ifdef wxDEBUG	
         printf("survived gc\n");
+#endif
+
 #if !wxCHECK_VERSION(2,5,0)
         wxTheApp = 0;
 #endif
@@ -649,9 +675,13 @@ public:
         SetTopWindow(0);
         if ( oldlog )
         {
-            printf("Deleting oldlog...\n");
+#ifdef wxDEBUG
+	    printf("Deleting oldlog...\n");
+#endif	    
             delete oldlog;
+#ifdef wxDEBUG	    
             printf("worked\n");
+#endif	    
         }
         return 0;
     }
@@ -772,16 +802,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("App.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("App.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -856,7 +890,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "App.h"
+#include "src/App.h"
 
 SwigDirector_App::SwigDirector_App(VALUE self, bool disown): wxRubyApp(), Swig::Director(self, disown) {
     
@@ -1028,14 +1062,20 @@ wxRubyApp::app_ptr = self;
 static void
 free_wxRubyApp(wxRubyApp *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_App*)arg1;
+#ifdef wxDEBUG
     printf("App.cpp" " Checking %p\n", director);
+#endif
     if (GcIsDeleted(director))
     {
+#ifdef wxDEBUG
         printf("%p is already dead!\n", director);
+#endif
         return;
     }
+#ifdef wxDEBUG
     printf("deleting %p\n", director);
     fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE

@@ -556,6 +556,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -677,16 +678,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("Panel.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("Panel.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -761,7 +766,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Panel.h"
+#include "src/Panel.h"
 
 SwigDirector_wxPanel::SwigDirector_wxPanel(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, long style, wxString const &name, bool disown): wxPanel(parent, id, pos, size, style, name), Swig::Director(self, disown) {
     
@@ -850,14 +855,20 @@ _wrap_new_wxPanel(int argc, VALUE *argv, VALUE self) {
 static void
 free_wxPanel(wxPanel *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxPanel*)arg1;
+#ifdef wxDEBUG
     printf("Panel.cpp" " Checking %p\n", director);
+#endif
     if (GcIsDeleted(director))
     {
+#ifdef wxDEBUG
         printf("%p is already dead!\n", director);
+#endif
         return;
     }
+#ifdef wxDEBUG
     printf("deleting %p\n", director);
     fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE

@@ -713,6 +713,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -959,7 +960,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "wx.h"
+#include "src/wx.h"
 
 static VALUE
 _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
