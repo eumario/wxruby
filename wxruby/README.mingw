@@ -1,4 +1,4 @@
-README for wxRuby version 0.3.0 (EARLY BETA)
+README for wxRuby version 0.4.0 (EARLY BETA)
    Released under the wxWidgets 2 license (see LICENSE)
    This file last updated 2003-04-17
 
@@ -7,7 +7,7 @@ README for wxRuby version 0.3.0 (EARLY BETA)
 INTRODUCTION
 
 wxRuby is an extension library for the Ruby language that
-gives access to the wxWidgets (formerly known as wxWindows)
+gives access to the wxWindows 2.4.x (also known as wxWidgets)
 cross-platform, native-widget, GUI toolkit. 
 
 The wxRuby project website is:
