@@ -18,7 +18,7 @@ class SwigDirector_wxButton : public wxButton, public Swig::Director {
 
 public:
     SwigDirector_wxButton(VALUE self, bool disown = false);
-    SwigDirector_wxButton(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = "button", bool disown = false);
+    SwigDirector_wxButton(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = "button", bool disown = false);
 };
 
 

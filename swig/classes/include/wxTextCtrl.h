@@ -58,6 +58,8 @@ public:
   virtual void Undo() ;
   void WriteText(const wxString&   text ) ;
   long XYToPosition(long  x , long  y ) ;
+  // the following were missing from the xml
+  void operator<<(const char *);;
 };
 
 

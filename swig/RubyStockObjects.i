@@ -42,14 +42,14 @@
 %constant wxColour* const   wxLIGHT_GREY;
                                                                                 
 #// 'Null' objects
-%constant wxBitmap const  wxNullBitmap;
-%constant wxIcon const    wxNullIcon;
-%constant wxCursor const  wxNullCursor;
-%constant wxPen const     wxNullPen;
-%constant wxBrush const   wxNullBrush;
-%constant wxPalette const wxNullPalette;
-%constant wxFont const    wxNullFont;
-%constant wxColour const  wxNullColour;
+%constant wxBitmap const  NULL_BITMAP = wxNullBitmap;
+%constant wxIcon const    NULL_ICON = wxNullIcon;
+%constant wxCursor const  NULL_CURSOR = wxNullCursor;
+%constant wxPen const     NULL_PEN = wxNullPen;
+%constant wxBrush const   NULL_BRUSH = wxNullBrush;
+%constant wxPalette const NULL_PALETTE = wxNullPalette;
+%constant wxFont const    NULL_FONT = wxNullFont;
+%constant wxColour const  NULL_COLOUR = wxNullColour;
 
 %constant wxCursor const* wxSTANDARD_CURSOR;
 %constant wxCursor const* wxHOURGLASS_CURSOR;

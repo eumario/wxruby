@@ -515,9 +515,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxSize swig_types[0] 
-#define  SWIGTYPE_p_wxCursor swig_types[1] 
-#define  SWIGTYPE_p_wxPoint swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxPoint swig_types[1] 
+static swig_type_info *swig_types[3];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -531,9 +530,6 @@ static void SWIG_AsVal(VALUE obj, int *val)
 {
     *val = (int) NUM2INT(obj);
 }
-
-
-#include <wx/gdicmn.h>
 
 
 #  undef GetClassName
@@ -555,10 +551,20 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
 #include <wx/datetime.h>
+
+
+#include <wx/gdicmn.h>
+#include <wx/fdrepdlg.h>
+#include <wx/artprov.h>
+
+
+
+
 
 /***********************************************************************
  * director.swg
@@ -749,12 +755,10 @@ namespace Swig {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0, 0},{"_p_wxSize", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxCursor[] = {{"_p_wxCursor", 0, "wxCursor *", 0, 0, 0, 0},{"_p_wxCursor", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxSize, 
-_swigt__p_wxCursor, 
 _swigt__p_wxPoint, 
 0
 };
@@ -814,11 +818,9 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"CENTER", INT2NUM(wxCENTER));
     rb_define_const(mWxRubyConstants,"CENTER_FRAME", INT2NUM(0x0000));
     rb_define_const(mWxRubyConstants,"CENTRE_ON_SCREEN", INT2NUM(0x0002));
-    rb_define_const(mWxRubyConstants,"CENTER_ON_SCREEN", INT2NUM(0x0002));
     rb_define_const(mWxRubyConstants,"HORIZONTAL", INT2NUM(wxHORIZONTAL));
     rb_define_const(mWxRubyConstants,"VERTICAL", INT2NUM(wxVERTICAL));
     rb_define_const(mWxRubyConstants,"BOTH", INT2NUM(wxBOTH));
-    rb_define_const(mWxRubyConstants,"LEFT", INT2NUM(wxLEFT));
     rb_define_const(mWxRubyConstants,"RIGHT", INT2NUM(wxRIGHT));
     rb_define_const(mWxRubyConstants,"UP", INT2NUM(wxUP));
     rb_define_const(mWxRubyConstants,"DOWN", INT2NUM(wxDOWN));
@@ -856,6 +858,17 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"BORDER_SUNKEN", INT2NUM(wxBORDER_SUNKEN));
     rb_define_const(mWxRubyConstants,"BORDER_DOUBLE", INT2NUM(wxBORDER_DOUBLE));
     rb_define_const(mWxRubyConstants,"BORDER_MASK", INT2NUM(wxBORDER_MASK));
+    rb_define_const(mWxRubyConstants,"OPEN", INT2NUM(wxOPEN));
+    rb_define_const(mWxRubyConstants,"SAVE", INT2NUM(wxSAVE));
+    rb_define_const(mWxRubyConstants,"OVERWRITE_PROMPT", INT2NUM(wxOVERWRITE_PROMPT));
+    rb_define_const(mWxRubyConstants,"HIDE_READONLY", INT2NUM(wxHIDE_READONLY));
+    rb_define_const(mWxRubyConstants,"FILE_MUST_EXIST", INT2NUM(wxFILE_MUST_EXIST));
+    rb_define_const(mWxRubyConstants,"MULTIPLE", INT2NUM(wxMULTIPLE));
+    rb_define_const(mWxRubyConstants,"CHANGE_DIR", INT2NUM(wxCHANGE_DIR));
+    rb_define_const(mWxRubyConstants,"FR_REPLACEDIALOG", INT2NUM(wxFR_REPLACEDIALOG));
+    rb_define_const(mWxRubyConstants,"FR_NOUPDOWN", INT2NUM(wxFR_NOUPDOWN));
+    rb_define_const(mWxRubyConstants,"FR_NOMATCHCASE", INT2NUM(wxFR_NOMATCHCASE));
+    rb_define_const(mWxRubyConstants,"FR_NOWHOLEWORD", INT2NUM(wxFR_NOWHOLEWORD));
     rb_define_const(mWxRubyConstants,"VSCROLL", INT2NUM(0x80000000));
     rb_define_const(mWxRubyConstants,"HSCROLL", INT2NUM(0x40000000));
     rb_define_const(mWxRubyConstants,"CAPTION", INT2NUM(0x20000000));
@@ -924,10 +937,18 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"CB_DROPDOWN", INT2NUM(0x0020));
     rb_define_const(mWxRubyConstants,"RA_LEFTTORIGHT", INT2NUM(0x0001));
     rb_define_const(mWxRubyConstants,"RA_TOPTOBOTTOM", INT2NUM(0x0002));
+    rb_define_const(mWxRubyConstants,"RA_SPECIFY_COLS", INT2NUM(0x0004));
+    rb_define_const(mWxRubyConstants,"RA_SPECIFY_ROWS", INT2NUM(0x0008));
+    rb_define_const(mWxRubyConstants,"RA_HORIZONTAL", INT2NUM(0x0004));
+    rb_define_const(mWxRubyConstants,"RA_VERTICAL", INT2NUM(0x0008));
     rb_define_const(mWxRubyConstants,"RB_GROUP", INT2NUM(0x0004));
     rb_define_const(mWxRubyConstants,"RB_SINGLE", INT2NUM(0x0008));
+    rb_define_const(mWxRubyConstants,"GA_HORIZONTAL", INT2NUM(0x0004));
+    rb_define_const(mWxRubyConstants,"GA_VERTICAL", INT2NUM(0x0008));
     rb_define_const(mWxRubyConstants,"GA_PROGRESSBAR", INT2NUM(0x0010));
     rb_define_const(mWxRubyConstants,"GA_SMOOTH", INT2NUM(0x0020));
+    rb_define_const(mWxRubyConstants,"SL_HORIZONTAL", INT2NUM(0x0004));
+    rb_define_const(mWxRubyConstants,"SL_VERTICAL", INT2NUM(0x0008));
     rb_define_const(mWxRubyConstants,"SL_NOTIFY_DRAG", INT2NUM(0x0000));
     rb_define_const(mWxRubyConstants,"SL_TICKS", INT2NUM(0x0010));
     rb_define_const(mWxRubyConstants,"SL_AUTOTICKS", INT2NUM(0x0010));
@@ -964,6 +985,8 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"TC_BOTTOM", INT2NUM(0x0080));
     rb_define_const(mWxRubyConstants,"TC_MULTILINE", INT2NUM(0x0100));
     rb_define_const(mWxRubyConstants,"TC_OWNERDRAW", INT2NUM(0x0200));
+    rb_define_const(mWxRubyConstants,"TB_HORIZONTAL", INT2NUM(0x0004));
+    rb_define_const(mWxRubyConstants,"TB_VERTICAL", INT2NUM(0x0008));
     rb_define_const(mWxRubyConstants,"TB_3DBUTTONS", INT2NUM(0x0010));
     rb_define_const(mWxRubyConstants,"TB_FLAT", INT2NUM(0x0020));
     rb_define_const(mWxRubyConstants,"TB_DOCKABLE", INT2NUM(0x0040));
@@ -1441,6 +1464,26 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"CURSOR_COPY_ARROW", INT2NUM(wxCURSOR_COPY_ARROW));
     rb_define_const(mWxRubyConstants,"CURSOR_ARROWWAIT", INT2NUM(wxCURSOR_ARROWWAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_MAX", INT2NUM(wxCURSOR_MAX));
+    rb_define_const(mWxRubyConstants,"LC_VRULES", INT2NUM(0x0001));
+    rb_define_const(mWxRubyConstants,"LC_HRULES", INT2NUM(0x0002));
+    rb_define_const(mWxRubyConstants,"LC_ICON", INT2NUM(0x0004));
+    rb_define_const(mWxRubyConstants,"LC_SMALL_ICON", INT2NUM(0x0008));
+    rb_define_const(mWxRubyConstants,"LC_LIST", INT2NUM(0x0010));
+    rb_define_const(mWxRubyConstants,"LC_REPORT", INT2NUM(0x0020));
+    rb_define_const(mWxRubyConstants,"LC_ALIGN_TOP", INT2NUM(0x0040));
+    rb_define_const(mWxRubyConstants,"LC_ALIGN_LEFT", INT2NUM(0x0080));
+    rb_define_const(mWxRubyConstants,"LC_AUTOARRANGE", INT2NUM(0x0100));
+    rb_define_const(mWxRubyConstants,"LC_VIRTUAL", INT2NUM(0x0200));
+    rb_define_const(mWxRubyConstants,"LC_EDIT_LABELS", INT2NUM(0x0400));
+    rb_define_const(mWxRubyConstants,"LC_NO_HEADER", INT2NUM(0x0800));
+    rb_define_const(mWxRubyConstants,"LC_NO_SORT_HEADER", INT2NUM(0x1000));
+    rb_define_const(mWxRubyConstants,"LC_SINGLE_SEL", INT2NUM(0x2000));
+    rb_define_const(mWxRubyConstants,"LC_SORT_ASCENDING", INT2NUM(0x4000));
+    rb_define_const(mWxRubyConstants,"LC_SORT_DESCENDING", INT2NUM(0x8000));
+    rb_define_const(mWxRubyConstants,"LC_MASK_TYPE", INT2NUM((0x0004|0x0008|0x0010|0x0020)));
+    rb_define_const(mWxRubyConstants,"LC_MASK_ALIGN", INT2NUM((0x0040|0x0080)));
+    rb_define_const(mWxRubyConstants,"LC_MASK_SORT", INT2NUM((0x4000|0x8000)));
+    rb_define_const(mWxRubyConstants,"LC_USER_TEXT", INT2NUM(0x0200));
     rb_define_const(mWxRubyConstants,"DEFAULT_SIZE", SWIG_NewPointerObj((void *) &wxDefaultSize, SWIGTYPE_p_wxSize, 0));
     rb_define_const(mWxRubyConstants,"DEFAULT_POSITION", SWIG_NewPointerObj((void *) &wxDefaultPosition, SWIGTYPE_p_wxPoint, 0));
     rb_define_const(mWxRubyConstants,"DOUBLE_BORDER", INT2NUM(wxBORDER_DOUBLE));
@@ -1470,8 +1513,64 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"DOT_DASH", INT2NUM(wxDOT_DASH));
     rb_define_const(mWxRubyConstants,"USER_DASH", INT2NUM(wxUSER_DASH));
     rb_define_const(mWxRubyConstants,"TRANSPARENT", INT2NUM(wxTRANSPARENT));
-    rb_define_const(mWxRubyConstants,"STANDARD_CURSOR", SWIG_NewPointerObj((void *) wxSTANDARD_CURSOR, SWIGTYPE_p_wxCursor,0));
-    rb_define_const(mWxRubyConstants,"HOURGLASS_CURSOR", SWIG_NewPointerObj((void *) wxHOURGLASS_CURSOR, SWIGTYPE_p_wxCursor,0));
-    rb_define_const(mWxRubyConstants,"CROSS_CURSOR", SWIG_NewPointerObj((void *) wxCROSS_CURSOR, SWIGTYPE_p_wxCursor,0));
+    rb_define_const(mWxRubyConstants,"FILE_SELECTOR_DEFAULT_WILDCARD_STR", rb_str_new2("*.*"));
+    rb_define_const(mWxRubyConstants,"ART_TOOLBAR", rb_str_new2("wxART_TOOLBAR_C"));
+    rb_define_const(mWxRubyConstants,"ART_MENU", rb_str_new2("wxART_MENU_C"));
+    rb_define_const(mWxRubyConstants,"ART_FRAME_ICON", rb_str_new2("wxART_FRAME_ICON_C"));
+    rb_define_const(mWxRubyConstants,"ART_CMN_DIALOG", rb_str_new2("wxART_CMN_DIALOG_C"));
+    rb_define_const(mWxRubyConstants,"ART_HELP_BROWSER", rb_str_new2("wxART_HELP_BROWSER_C"));
+    rb_define_const(mWxRubyConstants,"ART_MESSAGE_BOX", rb_str_new2("wxART_MESSAGE_BOX_C"));
+    rb_define_const(mWxRubyConstants,"ART_OTHER", rb_str_new2("wxART_OTHER_C"));
+    rb_define_const(mWxRubyConstants,"ART_ADD_BOOKMARK", rb_str_new2("wxART_ADD_BOOKMARK"));
+    rb_define_const(mWxRubyConstants,"ART_DEL_BOOKMARK", rb_str_new2("wxART_DEL_BOOKMARK"));
+    rb_define_const(mWxRubyConstants,"ART_HELP_SIDE_PANEL", rb_str_new2("wxART_HELP_SIDE_PANEL"));
+    rb_define_const(mWxRubyConstants,"ART_HELP_SETTINGS", rb_str_new2("wxART_HELP_SETTINGS"));
+    rb_define_const(mWxRubyConstants,"ART_HELP_BOOK", rb_str_new2("wxART_HELP_BOOK"));
+    rb_define_const(mWxRubyConstants,"ART_HELP_FOLDER", rb_str_new2("wxART_HELP_FOLDER"));
+    rb_define_const(mWxRubyConstants,"ART_HELP_PAGE", rb_str_new2("wxART_HELP_PAGE"));
+    rb_define_const(mWxRubyConstants,"ART_GO_BACK", rb_str_new2("wxART_GO_BACK"));
+    rb_define_const(mWxRubyConstants,"ART_GO_FORWARD", rb_str_new2("wxART_GO_FORWARD"));
+    rb_define_const(mWxRubyConstants,"ART_GO_UP", rb_str_new2("wxART_GO_UP"));
+    rb_define_const(mWxRubyConstants,"ART_GO_DOWN", rb_str_new2("wxART_GO_DOWN"));
+    rb_define_const(mWxRubyConstants,"ART_GO_TO_PARENT", rb_str_new2("wxART_GO_TO_PARENT"));
+    rb_define_const(mWxRubyConstants,"ART_GO_HOME", rb_str_new2("wxART_GO_HOME"));
+    rb_define_const(mWxRubyConstants,"ART_FILE_OPEN", rb_str_new2("wxART_FILE_OPEN"));
+    rb_define_const(mWxRubyConstants,"ART_PRINT", rb_str_new2("wxART_PRINT"));
+    rb_define_const(mWxRubyConstants,"ART_HELP", rb_str_new2("wxART_HELP"));
+    rb_define_const(mWxRubyConstants,"ART_TIP", rb_str_new2("wxART_TIP"));
+    rb_define_const(mWxRubyConstants,"ART_REPORT_VIEW", rb_str_new2("wxART_REPORT_VIEW"));
+    rb_define_const(mWxRubyConstants,"ART_LIST_VIEW", rb_str_new2("wxART_LIST_VIEW"));
+    rb_define_const(mWxRubyConstants,"ART_NEW_DIR", rb_str_new2("wxART_NEW_DIR"));
+    rb_define_const(mWxRubyConstants,"ART_FOLDER", rb_str_new2("wxART_FOLDER"));
+    rb_define_const(mWxRubyConstants,"ART_GO_DIR_UP", rb_str_new2("wxART_GO_DIR_UP"));
+    rb_define_const(mWxRubyConstants,"ART_EXECUTABLE_FILE", rb_str_new2("wxART_EXECUTABLE_FILE"));
+    rb_define_const(mWxRubyConstants,"ART_NORMAL_FILE", rb_str_new2("wxART_NORMAL_FILE"));
+    rb_define_const(mWxRubyConstants,"ART_TICK_MARK", rb_str_new2("wxART_TICK_MARK"));
+    rb_define_const(mWxRubyConstants,"ART_CROSS_MARK", rb_str_new2("wxART_CROSS_MARK"));
+    rb_define_const(mWxRubyConstants,"ART_ERROR", rb_str_new2("wxART_ERROR"));
+    rb_define_const(mWxRubyConstants,"ART_QUESTION", rb_str_new2("wxART_QUESTION"));
+    rb_define_const(mWxRubyConstants,"ART_WARNING", rb_str_new2("wxART_WARNING"));
+    rb_define_const(mWxRubyConstants,"ART_INFORMATION", rb_str_new2("wxART_INFORMATION"));
+    rb_define_const(mWxRubyConstants,"ART_MISSING_IMAGE", rb_str_new2("wxART_MISSING_IMAGE"));
+    rb_define_const(mWxRubyConstants,"LAYOUT_UNCONSTRAIINED", INT2NUM(wxUnconstrained));
+    rb_define_const(mWxRubyConstants,"LAYOUT_AS_IS", INT2NUM(wxAsIs));
+    rb_define_const(mWxRubyConstants,"LAYOUT_PERCENT_OF", INT2NUM(wxPercentOf));
+    rb_define_const(mWxRubyConstants,"LAYOUT_ABOVE", INT2NUM(wxAbove));
+    rb_define_const(mWxRubyConstants,"LAYOUT_BELOW", INT2NUM(wxBelow));
+    rb_define_const(mWxRubyConstants,"LAYOUT_LEFT_OF", INT2NUM(wxLeftOf));
+    rb_define_const(mWxRubyConstants,"LAYOUT_RIGHT_OF", INT2NUM(wxRightOf));
+    rb_define_const(mWxRubyConstants,"LAYOUT_SAME_AS", INT2NUM(wxSameAs));
+    rb_define_const(mWxRubyConstants,"LAYOUT_ABSOLUTE", INT2NUM(wxAbsolute));
+    rb_define_const(mWxRubyConstants,"LAYOUT_LEFT", INT2NUM(wxLeft));
+    rb_define_const(mWxRubyConstants,"LAYOUT_TOP", INT2NUM(wxTop));
+    rb_define_const(mWxRubyConstants,"LAYOUT_RIGHT", INT2NUM(wxRight));
+    rb_define_const(mWxRubyConstants,"LAYOUT_BOTTOM", INT2NUM(wxBottom));
+    rb_define_const(mWxRubyConstants,"LAYOUT_WIDTH", INT2NUM(wxWidth));
+    rb_define_const(mWxRubyConstants,"LAYOUT_HEIGHT", INT2NUM(wxHeight));
+    rb_define_const(mWxRubyConstants,"LAYOUT_CENTRE", INT2NUM(wxCentre));
+    rb_define_const(mWxRubyConstants,"LAYOUT_CENTER", INT2NUM(wxCenter));
+    rb_define_const(mWxRubyConstants,"LAYOUT_CENTRE_X", INT2NUM(wxCentreX));
+    rb_define_const(mWxRubyConstants,"LAYOUT_CENTRE_Y", INT2NUM(wxCentreY));
+    rb_define_const(mWxRubyConstants,"NOT_FOUND", INT2NUM(-1));
 }
 

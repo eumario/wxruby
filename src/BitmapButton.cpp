@@ -557,6 +557,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -771,27 +772,6 @@ SwigDirector_wxBitmapButton::SwigDirector_wxBitmapButton(VALUE self, wxWindow *p
 
 
 
-static VALUE
-_wrap_new_wxBitmapButton__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxBitmapButton *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxBitmapButton *)new SwigDirector_wxBitmapButton(arg1,false);
-        
-    } else {
-        result = (wxBitmapButton *)new wxBitmapButton();
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxBitmapButton_allocate(VALUE self) {
@@ -810,7 +790,7 @@ _wrap_wxBitmapButton_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxBitmapButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxBitmapButton(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -859,99 +839,6 @@ _wrap_new_wxBitmapButton__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     DATA_PTR(self) = result;
     return self;
-}
-
-
-static VALUE _wrap_new_wxBitmapButton(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[9];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 9); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_new_wxBitmapButton__SWIG_0(nargs, args, self);
-        }
-    }
-    if ((argc >= 4) && (argc <= 9)) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        if (argc <= 4) {
-                            return _wrap_new_wxBitmapButton__SWIG_1(nargs, args, self);
-                        }
-                        {
-                            void *ptr;
-                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            if (argc <= 5) {
-                                return _wrap_new_wxBitmapButton__SWIG_1(nargs, args, self);
-                            }
-                            {
-                                void *ptr;
-                                _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
-                            }
-                            if (_v) {
-                                if (argc <= 6) {
-                                    return _wrap_new_wxBitmapButton__SWIG_1(nargs, args, self);
-                                }
-                                {
-                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
-                                }
-                                if (_v) {
-                                    if (argc <= 7) {
-                                        return _wrap_new_wxBitmapButton__SWIG_1(nargs, args, self);
-                                    }
-                                    {
-                                        void *ptr;
-                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
-                                    }
-                                    if (_v) {
-                                        if (argc <= 8) {
-                                            return _wrap_new_wxBitmapButton__SWIG_1(nargs, args, self);
-                                        }
-                                        {
-                                            _v = (TYPE(argv[8]) == T_STRING);
-                                        }
-                                        if (_v) {
-                                            return _wrap_new_wxBitmapButton__SWIG_1(nargs, args, self);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxBitmapButton'");
-    return Qnil;
 }
 
 
@@ -1445,6 +1332,6 @@ mWxBitmapButton = mWx;
     rb_define_method(cWxBitmapButton.klass, "get_bitmap_label", VALUEFUNC(_wrap_wxBitmapButton_GetBitmapLabel), -1);
     rb_define_method(cWxBitmapButton.klass, "get_bitmap_selected", VALUEFUNC(_wrap_wxBitmapButton_GetBitmapSelected), -1);
     cWxBitmapButton.mark = 0;
-    cWxBitmapButton.destroy = (void (*)(void *)) GcFreefunc;
+    cWxBitmapButton.destroy = (void (*)(void *)) free_wxBitmapButton;
 }
 

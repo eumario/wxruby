@@ -4,3 +4,7 @@
 
 typedef int wxWindowID;
 typedef int wxCoord;
+typedef wxString wxArtID;
+typedef wxString wxArtClient;
+typedef int wxEdge;
+typedef int wxRelationship;

@@ -23,6 +23,9 @@
 %ignore wxWindow::PopEventHandler;
 # %ignore wxWindow::SetCaret;
 
+%rename(SetDimensions) wxWindow::SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
+ 
+
 %include "include/wxWindow.h"
 
 

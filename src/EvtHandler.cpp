@@ -555,6 +555,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -562,15 +563,18 @@ void GcFreefunc(void *);
 
 
 #include <wx/calctrl.h>
+#include <wx/fdrepdlg.h>
+#include <wx/notebook.h>
+#include <wx/spinbutt.h>
 
 
 extern swig_class cWxObject;
 swig_class cWxEvtHandler;
 static void free_wxEvtHandler(wxEvtHandler *);
 
-    static VALUE callbacks = Qnil;
 
 
+static VALUE callbacks = Qnil;
 extern swig_class cWxEvent;
 extern swig_class cWxCalendarEvent;
 extern swig_class cWxCloseEvent;
@@ -580,6 +584,11 @@ extern swig_class cWxPaintEvent;
 extern swig_class cWxUpdateUIEvent;
 extern swig_class cWxSizeEvent;
 extern swig_class cWxKeyEvent; 
+extern swig_class cWxFindDialogEvent;
+extern swig_class cWxMouseEvent;
+extern swig_class cWxFocusEvent;
+extern swig_class cWxSpinEvent;
+extern swig_class cWxNotebookEvent;
 
 static const wxEventType *calendarEvents[] = 
 {
@@ -620,6 +629,7 @@ static const wxEventType *commandEvents[] =
     &wxEVT_COMMAND_TOOL_RCLICKED,
     &wxEVT_COMMAND_TOOL_ENTER,
     &wxEVT_COMMAND_SPINCTRL_UPDATED,
+    &wxEVT_COMMAND_COMBOBOX_SELECTED,
     (const wxEventType *)0
 };
 
@@ -656,6 +666,57 @@ static const wxEventType *keyEvents [] =
     (const wxEventType *)0
 };
 
+static const wxEventType *findEvents [] = 
+{
+    &wxEVT_COMMAND_FIND,
+    &wxEVT_COMMAND_FIND_NEXT,
+    &wxEVT_COMMAND_FIND_REPLACE,
+    &wxEVT_COMMAND_FIND_REPLACE_ALL,
+    &wxEVT_COMMAND_FIND_CLOSE,
+    (const wxEventType *)0
+};
+
+static const wxEventType *focusEvents [] =
+{
+    &wxEVT_SET_FOCUS,
+    &wxEVT_KILL_FOCUS,
+    (const wxEventType *)0
+};    
+
+static const wxEventType *mouseEvents[] = 
+{
+    &wxEVT_LEFT_DOWN,
+    &wxEVT_LEFT_UP,
+    &wxEVT_LEFT_DCLICK,
+    &wxEVT_MIDDLE_DOWN,
+    &wxEVT_MIDDLE_UP,
+    &wxEVT_MIDDLE_DCLICK,
+    &wxEVT_RIGHT_DOWN,
+    &wxEVT_RIGHT_UP,
+    &wxEVT_RIGHT_DCLICK,
+    &wxEVT_MOTION,
+    &wxEVT_ENTER_WINDOW,
+    &wxEVT_LEAVE_WINDOW,
+    &wxEVT_MOUSEWHEEL,
+    (const wxEventType *)0
+};
+
+static const wxEventType *spinEvents[] = 
+{
+    &wxEVT_SCROLL_THUMBTRACK,
+    &wxEVT_SCROLL_LINEUP,
+    &wxEVT_SCROLL_LINEDOWN,
+    (const wxEventType *)0
+};
+
+static const wxEventType *notebookEvents[] = 
+{
+     &wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,
+     &wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING,
+     (const wxEventType *)0
+};
+
+
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
 class wxRbCallback : public wxObject 
@@ -670,27 +731,37 @@ public:
         VALUE cEvent = Qnil;
         
         int type = event.GetEventType();
-        if(IsEventInMap(type, calendarEvents))
+        if(event.IsKindOf(CLASSINFO(wxCalendarEvent)))
             cEvent = cWxCalendarEvent.klass;
-        else if(IsEventInMap(type, closeEvents))
-            cEvent = cWxCloseEvent.klass;
-        else if(IsEventInMap(type, commandEvents))
-            cEvent = cWxCommandEvent.klass;
-        else if(IsEventInMap(type, idleEvents))
-            cEvent = cWxIdleEvent.klass;
-        else if(IsEventInMap(type, paintEvents))
-            cEvent = cWxPaintEvent.klass;
-        else if(IsEventInMap(type, updateUIEvents))
+        else if (event.IsKindOf(CLASSINFO(wxNotebookEvent)))
+            cEvent = cWxNotebookEvent.klass;
+       else if(event.IsKindOf(CLASSINFO(wxUpdateUIEvent)))
             cEvent = cWxUpdateUIEvent.klass;
-        else if(IsEventInMap(type, sizeEvents))
+        else if(event.IsKindOf(CLASSINFO(wxSizeEvent)))
             cEvent = cWxSizeEvent.klass;
-        else if(IsEventInMap(type, keyEvents))
+        else if(event.IsKindOf(CLASSINFO(wxKeyEvent)))
             cEvent = cWxKeyEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxFindDialogEvent)))
+            cEvent = cWxFindDialogEvent.klass;            
+        else if(event.IsKindOf(CLASSINFO(wxFocusEvent)))
+            cEvent = cWxFocusEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxMouseEvent)))
+            cEvent = cWxMouseEvent.klass;            
+        else if(event.IsKindOf(CLASSINFO(wxSpinEvent)))
+            cEvent = cWxSpinEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxCloseEvent)))
+            cEvent = cWxCloseEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxIdleEvent)))
+            cEvent = cWxIdleEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxPaintEvent)))
+            cEvent = cWxPaintEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
+            cEvent = cWxCommandEvent.klass;
+ 
         else
         {
-            printf("Unknown event type %d\n",type);
             cEvent = cWxEvent.klass;
-	}
+        }
             
         static VALUE vevent;
         vevent = Data_Wrap_Struct(cEvent, 0, 0, 0);
@@ -713,7 +784,7 @@ public:
 };
 
 
-static void internal_connect(VALUE self, int firstId, int lastId, 
+void internal_connect(VALUE self, int firstId, int lastId, 
                 wxEventType eventType)
 {
     
@@ -730,133 +801,6 @@ static void internal_connect(VALUE self, int firstId, int lastId,
     wxObjectEventFunction function = 
         (wxObjectEventFunction )&wxRbCallback::EventThunker;
     (cppSelf)->Connect(firstId, lastId, eventType, function, userData);
-}
-
-static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self, 
-        wxEventType eventType) 
-{
-    if (argc != 1)
-        rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-        
-    int id = NUM2INT(argv[0]);
-    //printf("evt_with_id(%d) %s\n", id, rb_block_given_p() ? "with block" : "");
-
-    internal_connect(self, id, id, eventType);
-    return Qnil;
-}
-
-static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self, 
-        wxEventType eventType) 
-{
-    if (argc != 0)
-        rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-        
-    //printf("evt_no_parameters() %s\n", rb_block_given_p() ? "with block" : "");
-    internal_connect(self, -1, -1, eventType);
-    return Qnil;
-}
-
-static VALUE connect_fnc(int argc, VALUE *argv, VALUE self) 
-{
-    if (argc != 3)
-        rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)", argc);
-
-    int id = NUM2INT(argv[0]);
-    int lastId = NUM2INT(argv[1]);
-    int type = NUM2INT(argv[2]);
-    
-    internal_connect(self, id, lastId, type);
-    return Qnil;
-}
-
-static VALUE evt_menu(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_MENU_SELECTED);
-}
-
-static VALUE evt_choice(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_CHOICE_SELECTED);
-}
-
-static VALUE evt_calendar(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_CALENDAR_DOUBLECLICKED);
-}
-
-static VALUE evt_calendar_sel_changed(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_CALENDAR_SEL_CHANGED);
-}
-
-static VALUE evt_calendar_day(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_CALENDAR_DAY_CHANGED);
-}
-
-static VALUE evt_calendar_month(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_CALENDAR_MONTH_CHANGED);
-}
-
-static VALUE evt_calendar_year(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_CALENDAR_YEAR_CHANGED);
-}
-
-static VALUE evt_calendar_weekday_clicked(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_CALENDAR_WEEKDAY_CLICKED);
-}
-
-static VALUE evt_update_ui(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_with_id(argc, argv, self, wxEVT_UPDATE_UI);
-}
-
-static VALUE evt_paint(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_PAINT);
-}
-
-static VALUE evt_close(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_CLOSE_WINDOW);
-}
-
-static VALUE evt_idle(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_IDLE);
-}
-
-static VALUE evt_show(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_SHOW);
-}
-
-static VALUE evt_window_create(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_CREATE);
-}
-
-static VALUE evt_size(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_SIZE);
-}
-
-static VALUE evt_key_down(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_KEY_DOWN);
-}
-
-static VALUE evt_key_up(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_KEY_UP);
-}
-
-static VALUE evt_char(int argc, VALUE *argv, VALUE self) 
-{
-    return internal_evt_no_parameters(argc, argv, self, wxEVT_CHAR);
 }
 
 
@@ -1446,26 +1390,9 @@ mWxEvtHandler = mWx;
     cWxEvtHandler.mark = 0;
     cWxEvtHandler.destroy = (void (*)(void *)) free_wxEvtHandler;
     
-    rb_define_method(cWxEvtHandler.klass, "connect", VALUEFUNC(connect_fnc), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_menu", VALUEFUNC(evt_menu), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_choice", VALUEFUNC(evt_choice), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar", VALUEFUNC(evt_calendar), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_sel_changed", VALUEFUNC(evt_calendar_sel_changed), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_day", VALUEFUNC(evt_calendar_day), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_month", VALUEFUNC(evt_calendar_month), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_year", VALUEFUNC(evt_calendar_year), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_weekday_clicked", VALUEFUNC(evt_calendar_weekday_clicked), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_idle", VALUEFUNC(evt_idle), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_size", VALUEFUNC(evt_size), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_show", VALUEFUNC(evt_show), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_update_ui", VALUEFUNC(evt_update_ui), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_window_create", VALUEFUNC(evt_window_create), -1);
+    extern void Init_WxRubyEvents();
     
-    rb_define_method(cWxEvtHandler.klass, "evt_paint", VALUEFUNC(evt_paint), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_close", VALUEFUNC(evt_close), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_key_down", VALUEFUNC(evt_key_down), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_key_up", VALUEFUNC(evt_key_up), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_char", VALUEFUNC(evt_char), -1);
+    Init_WxRubyEvents();
     
 }
 

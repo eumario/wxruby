@@ -552,6 +552,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -830,6 +831,68 @@ static VALUE _wrap_new_wxPoint(int nargs, VALUE *args, VALUE self) {
 }
 
 
+static VALUE
+_wrap_wxPoint_x_set(int argc, VALUE *argv, VALUE self) {
+    wxPoint *arg1 = (wxPoint *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxPoint, 1);
+    arg2 = NUM2INT(argv[0]);
+    if (arg1) (arg1)->x = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxPoint_x_get(int argc, VALUE *argv, VALUE self) {
+    wxPoint *arg1 = (wxPoint *) 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxPoint, 1);
+    result = (int) ((arg1)->x);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxPoint_y_set(int argc, VALUE *argv, VALUE self) {
+    wxPoint *arg1 = (wxPoint *) 0 ;
+    int arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxPoint, 1);
+    arg2 = NUM2INT(argv[0]);
+    if (arg1) (arg1)->y = arg2;
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxPoint_y_get(int argc, VALUE *argv, VALUE self) {
+    wxPoint *arg1 = (wxPoint *) 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxPoint, 1);
+    result = (int) ((arg1)->y);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
 static void
 free_wxPoint(wxPoint *arg1) {
     //delete arg1;
@@ -870,6 +933,10 @@ mWxPoint = mWx;
     SWIG_TypeClientData(SWIGTYPE_p_wxPoint, (void *) &cWxPoint);
     rb_define_alloc_func(cWxPoint.klass, _wrap_wxPoint_allocate);
     rb_define_method(cWxPoint.klass, "initialize", VALUEFUNC(_wrap_new_wxPoint), -1);
+    rb_define_method(cWxPoint.klass, "x=", VALUEFUNC(_wrap_wxPoint_x_set), -1);
+    rb_define_method(cWxPoint.klass, "x", VALUEFUNC(_wrap_wxPoint_x_get), -1);
+    rb_define_method(cWxPoint.klass, "y=", VALUEFUNC(_wrap_wxPoint_y_set), -1);
+    rb_define_method(cWxPoint.klass, "y", VALUEFUNC(_wrap_wxPoint_y_get), -1);
     cWxPoint.mark = 0;
     cWxPoint.destroy = (void (*)(void *)) free_wxPoint;
 }

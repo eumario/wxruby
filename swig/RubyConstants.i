@@ -64,7 +64,7 @@ enum wxGeometryCentre
 #define wxCENTER_FRAME          0x0000
 // centre on screen rather than parent
 #define wxCENTRE_ON_SCREEN      0x0002
-#define wxCENTER_ON_SCREEN      wxCENTRE_ON_SCREEN
+// wxCENTER_ON_SCREEN      wxCENTRE_ON_SCREEN
 
 enum wxOrientation
 {
@@ -76,7 +76,7 @@ enum wxOrientation
 
 enum wxDirection
 {
-    wxLEFT                    = 0x0010,
+    
     wxRIGHT                   = 0x0020,
     wxUP                      = 0x0040,
     wxDOWN                    = 0x0080,
@@ -1253,10 +1253,42 @@ enum wxStockCursor
  
     wxCURSOR_MAX
 };
+
+#define wxLC_VRULES          0x0001
+#define wxLC_HRULES          0x0002
+
+#define wxLC_ICON            0x0004
+#define wxLC_SMALL_ICON      0x0008
+#define wxLC_LIST            0x0010
+#define wxLC_REPORT          0x0020
+
+#define wxLC_ALIGN_TOP       0x0040
+#define wxLC_ALIGN_LEFT      0x0080
+#define wxLC_AUTOARRANGE     0x0100
+#define wxLC_VIRTUAL         0x0200
+#define wxLC_EDIT_LABELS     0x0400
+#define wxLC_NO_HEADER       0x0800
+#define wxLC_NO_SORT_HEADER  0x1000
+#define wxLC_SINGLE_SEL      0x2000
+#define wxLC_SORT_ASCENDING  0x4000
+#define wxLC_SORT_DESCENDING 0x8000
+
+#define wxLC_MASK_TYPE       (wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT)
+#define wxLC_MASK_ALIGN      (wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT)
+#define wxLC_MASK_SORT       (wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING)
+
+// for compatibility only
+#define wxLC_USER_TEXT       wxLC_VIRTUAL
+
+
  
 #ifndef __WXGTK__
     #define wxCURSOR_DEFAULT wxCURSOR_ARROW
 #endif
+
+
+
+
 
 %constant const wxSize DEFAULT_SIZE = wxDefaultSize;
 %constant const wxPoint DEFAULT_POSITION = wxDefaultPosition;
@@ -1297,36 +1329,68 @@ enum wxStockCursor
 %constant int TRANSPARENT =    wxTRANSPARENT;
 
 %constant const char *FILE_SELECTOR_DEFAULT_WILDCARD_STR = "*.*";
-#if 0
-%constant const char * wxART_ADD_BOOKMARK         
-%constant const char * wxART_DEL_BOOKMARK         
-%constant const char * wxART_HELP_SIDE_PANEL      
-%constant const char * wxART_HELP_SETTINGS        
-%constant const char * wxART_HELP_BOOK            
-%constant const char * wxART_HELP_FOLDER          
-%constant const char * wxART_HELP_PAGE            
-%constant const char * wxART_GO_BACK              
-%constant const char * wxART_GO_FORWARD           
-%constant const char * wxART_GO_UP                
-%constant const char * wxART_GO_DOWN              
-%constant const char * wxART_GO_TO_PARENT         
-%constant const char * wxART_GO_HOME              
-%constant const char * wxART_FILE_OPEN            
-%constant const char * wxART_PRINT                
-%constant const char * wxART_HELP                 
-%constant const char * wxART_TIP                  
-%constant const char * wxART_REPORT_VIEW          
-%constant const char * wxART_LIST_VIEW            
-%constant const char * wxART_NEW_DIR              
-%constant const char * wxART_FOLDER               
-%constant const char * wxART_GO_DIR_UP            
-%constant const char * wxART_EXECUTABLE_FILE      
-%constant const char * wxART_NORMAL_FILE          
-%constant const char * wxART_TICK_MARK            
-%constant const char * wxART_CROSS_MARK           
-%constant const char * wxART_ERROR                
-%constant const char * wxART_QUESTION             
-%constant const char * wxART_WARNING              
-%constant const char * wxART_INFORMATION          
-%constant const char * wxART_MISSING_IMAGE        
-#endif
+
+
+
+%constant const char * ART_TOOLBAR               = wxART_TOOLBAR_C;
+%constant const char * ART_MENU                  = wxART_MENU_C;
+%constant const char * ART_FRAME_ICON            = wxART_FRAME_ICON_C;
+%constant const char * ART_CMN_DIALOG            = wxART_CMN_DIALOG_C;
+%constant const char * ART_HELP_BROWSER          = wxART_HELP_BROWSER_C;
+%constant const char * ART_MESSAGE_BOX           = wxART_MESSAGE_BOX_C;
+%constant const char * ART_OTHER                 = wxART_OTHER_C;
+
+%constant const char * ART_ADD_BOOKMARK          = wxART_ADD_BOOKMARK;
+%constant const char * ART_DEL_BOOKMARK          = wxART_DEL_BOOKMARK;
+%constant const char * ART_HELP_SIDE_PANEL       = wxART_HELP_SIDE_PANEL;
+%constant const char * ART_HELP_SETTINGS         = wxART_HELP_SETTINGS;
+%constant const char * ART_HELP_BOOK             = wxART_HELP_BOOK;
+%constant const char * ART_HELP_FOLDER           = wxART_HELP_FOLDER;
+%constant const char * ART_HELP_PAGE             = wxART_HELP_PAGE;
+%constant const char * ART_GO_BACK               = wxART_GO_BACK;
+%constant const char * ART_GO_FORWARD            = wxART_GO_FORWARD;
+%constant const char * ART_GO_UP                 = wxART_GO_UP;
+%constant const char * ART_GO_DOWN               = wxART_GO_DOWN;
+%constant const char * ART_GO_TO_PARENT          = wxART_GO_TO_PARENT;
+%constant const char * ART_GO_HOME               = wxART_GO_HOME;
+%constant const char * ART_FILE_OPEN             = wxART_FILE_OPEN;
+%constant const char * ART_PRINT                 = wxART_PRINT;
+%constant const char * ART_HELP                  = wxART_HELP;
+%constant const char * ART_TIP                   = wxART_TIP;
+%constant const char * ART_REPORT_VIEW           = wxART_REPORT_VIEW;
+%constant const char * ART_LIST_VIEW             = wxART_LIST_VIEW;
+%constant const char * ART_NEW_DIR               = wxART_NEW_DIR;
+%constant const char * ART_FOLDER                = wxART_FOLDER;
+%constant const char * ART_GO_DIR_UP             = wxART_GO_DIR_UP;
+%constant const char * ART_EXECUTABLE_FILE       = wxART_EXECUTABLE_FILE;
+%constant const char * ART_NORMAL_FILE           = wxART_NORMAL_FILE;
+%constant const char * ART_TICK_MARK             = wxART_TICK_MARK;
+%constant const char * ART_CROSS_MARK            = wxART_CROSS_MARK;
+%constant const char * ART_ERROR                 = wxART_ERROR;
+%constant const char * ART_QUESTION              = wxART_QUESTION;
+%constant const char * ART_WARNING               = wxART_WARNING;
+%constant const char * ART_INFORMATION           = wxART_INFORMATION;
+%constant const char * ART_MISSING_IMAGE         = wxART_MISSING_IMAGE;
+
+%constant const int LAYOUT_UNCONSTRAIINED = wxUnconstrained;
+%constant const int LAYOUT_AS_IS = wxAsIs;
+%constant const int LAYOUT_PERCENT_OF = wxPercentOf;
+%constant const int LAYOUT_ABOVE = wxAbove;
+%constant const int LAYOUT_BELOW = wxBelow;
+%constant const int LAYOUT_LEFT_OF = wxLeftOf;
+%constant const int LAYOUT_RIGHT_OF = wxRightOf;
+%constant const int LAYOUT_SAME_AS = wxSameAs;
+%constant const int LAYOUT_ABSOLUTE = wxAbsolute;
+
+%constant const int LAYOUT_LEFT =wxLeft; 
+%constant const int LAYOUT_TOP =wxTop; 
+%constant const int LAYOUT_RIGHT =wxRight; 
+%constant const int LAYOUT_BOTTOM =wxBottom; 
+%constant const int LAYOUT_WIDTH =wxWidth; 
+%constant const int LAYOUT_HEIGHT =wxHeight;
+%constant const int LAYOUT_CENTRE =wxCentre; 
+%constant const int LAYOUT_CENTER =wxCenter; 
+%constant const int LAYOUT_CENTRE_X =wxCentreX; 
+%constant const int LAYOUT_CENTRE_Y =wxCentreY;
+
+%constant const int NOT_FOUND = -1;

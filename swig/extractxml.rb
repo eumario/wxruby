@@ -154,7 +154,7 @@ $fixes =
     'wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")'=>
     'wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")',
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")'=>
-    'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")'
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox")',
     },
     'wxConfigBase' =>
     {
@@ -200,6 +200,32 @@ $fixes =
     'const wxString& GetReplaceString() const'=>
     'wxString GetReplaceString() const',
     },
+    'wxFlexGridSizer'=>
+    {
+    'void AddGrowableCol(size_t  idx , int  proportion = 0)'=>
+    'void AddGrowableCol(size_t  idx)',
+    'void AddGrowableRow(size_t  idx , int  proportion = 0)'=>
+    'void AddGrowableRow(size_t  idx)',
+     },
+	'wxGrid'=>
+	{
+    'wxSize DoGetBestSize() const'=>"",
+    'void InitRowHeights()'=>"",
+    'void InitColWidths()'=>"",
+    'int GetColWidth(int  col ) const'=>"",
+    'int GetColLeft(int  col ) const'=>"",
+    'int GetColRight(int  col ) const'=>"",
+    'int GetRowHeight(int  row ) const'=>"",
+    'int GetRowTop(int  row ) const'=>"",
+    'int GetRowBottom(int  row ) const'=>"",
+    'int SetOrCalcColumnSizes(bool  calcOnly , bool  setAsMin = true)'=>"",
+    'int SetOrCalcRowSizes(bool  calcOnly , bool  setAsMin = true)'=>"",
+    'void AutoSizeColOrRow(int  n , bool  setAsMin , bool  column )'=>"",
+    'int GetColMinimalWidth(int  col ) const'=>"",
+    'int GetRowMinimalHeight(int  col ) const'=>"",
+    'bool CanHaveAttributes()'=>"",
+    'wxGridCellAttr* GetOrCreateCellAttr(int  row , int  col ) const'=>"",
+	},
     'wxIcon' =>
     {
     'wxIcon()' =>
@@ -241,6 +267,8 @@ $fixes =
     'wxListBox(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n = 0 , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")',
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")'=>
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox")',
+	'void InsertItems(int  nItems , const wxString  *items , int  pos )'=>
+	'void InsertItems(int  n, const wxString  choices []= NULL, int  pos = 0)',
     },
     #
     # NSK - the following are protected, but since we don't have a 
@@ -283,6 +311,11 @@ $fixes =
     'virtual void SetToolBar(wxWindow*  toolbar )'=>
     'virtual void SetToolBar(wxToolBar*  toolbar )',
     },
+    'wxMemoryDC'=>
+    {
+    'SelectObject(const wxBitmap&  bitmap )'=>
+    'void SelectObject(const wxBitmap&  bitmap )',
+    },
     'wxMenu' =>
     {
     'bool Prepend(wxMenuItem * item )' =>
@@ -303,6 +336,11 @@ $fixes =
     {
     'wxPanel()' =>
     '//wxPanel()',
+    },
+    'wxStaticBitmap'=>
+    {
+    'wxBitmap& GetBitmap() const'=>
+    'wxBitmap GetBitmap() const',
     },
     'wxSingleChoiceDialog'=>
     {
@@ -404,11 +442,40 @@ $missing =
     'wxComboBox'=>
     [
     'void Append(const wxString& item)',
+	'void SetSelection(int n)',
     ],
+	'wxListBox'=>
+	[
+	'void SetSelection(int n, const bool select = TRUE)',
+	'void SetStringSelection(const wxString& string, const bool select = TRUE)',
+	'void Append(const wxString& item)',
+	'void Delete(int n)',
+	'int FindString(wxString & string)',
+	'int GetCount()',
+	'int GetSelection()',
+	'wxString GetString(int n)',
+	'wxString GetStringSelection()',
+	'void SetString(int n, wxString& string)',
+	'void Select(int n)',
+	],
+	'wxTextCtrl'=>
+	[
+	'void operator<<(const char *);'
+	],
     'wxToolBar'=>
     [
     'void SetRows(int rows)',
-    ]
+    ],
+    'wxLayoutConstraints'=>
+    [
+    'wxIndividualLayoutConstraint bottom,height,left,right,top,width'
+    ],
+	'wxPoint'=>
+	[
+	'int x',
+	'int y'
+	]
+
 }
 
 def get_missing_methods(class_name)
@@ -425,6 +492,142 @@ def get_missing_methods(class_name)
     end
     return missing
 end
+
+$events = {}
+
+class WxEvent
+    NO_PARAM = 1
+    WITH_ID = 2
+    WITH_RANGE = 3
+
+    attr_reader :name
+    attr_reader :type
+    attr_reader :evt_id
+
+    def initialize(name, e) 
+        
+        if /(id1, id2, event, func)/ =~ name
+            @type = WITH_RANGE
+        elsif /(id, func)/ =~ name
+            @type = WITH_ID
+        else
+            @type = NO_PARAM
+        end
+
+        @name = name.gsub(/\(.*\)/,"")
+        @evt_id = e
+    end
+
+    def WxEvent.fix_errors_in_xml()
+        $event_fixes.each do |pair|
+            $events[pair[0]] = pair[1]
+        end
+    end
+
+    def to_s
+        return "[\"#{@name}\", #{@type}, \"#{@evt_id}\"],"
+    end 
+
+end
+
+$events_exclude = [
+	'EVT_COMMAND',
+	'EVT_DIALUP',
+	'EVT_SASH',
+	'EVT_TASKBAR',
+	'EVT_TAB',
+	'EVT_TOGGLEBUTTON',
+	'EVT_WIZARD',
+]
+
+
+
+$event_fixes = {
+"EVT_CALENDAR(id, func)"=>WxEvent.new("EVT_CALENDAR(id, func)", "wxEVT_CALENDAR_DOUBLECLICKED"),
+"EVT_CALENDAR_DAY(id, func)"=>WxEvent.new("EVT_CALENDAR_DAY(id, func)", "wxEVT_CALENDAR_DAY_CHANGED"),
+"EVT_CALENDAR_MONTH(id, func)"=>WxEvent.new("EVT_CALENDAR_MONTH(id, func)", "wxEVT_CALENDAR_MONTH_CHANGED"),
+"EVT_CALENDAR_SEL_CHANGED(id, func)"=>WxEvent.new("EVT_CALENDAR_SEL_CHANGED(id, func)", "wxEVT_CALENDAR_SEL_CHANGED"),
+"EVT_CALENDAR_WEEKDAY_CLICKED(id, func)"=>WxEvent.new("EVT_CALENDAR_WEEKDAY_CLICKED(id, func)", "wxEVT_CALENDAR_WEEKDAY_CLICKED"),
+"EVT_CALENDAR_YEAR(id, func)"=>WxEvent.new("EVT_CALENDAR_YEAR(id, func)", "wxEVT_CALENDAR_YEAR_CHANGED"),
+"EVT_CLOSE(func)"=>WxEvent.new("EVT_CLOSE(func)", "wxEVT_CLOSE_WINDOW"),
+"EVT_COMMAND(id, event, func)"=>WxEvent.new("EVT_COMMAND(id, event, func)", "wxEVT_COMMAND"),
+"EVT_COMMAND_RANGE(id1, id2, event, func)"=>WxEvent.new("EVT_COMMAND_RANGE(id1, id2, event, func)", "wxEVT_COMMAND"),
+"EVT_CONTEXT_MENU(func)"=>WxEvent.new("EVT_CONTEXT_MENU(func)", "wxEVT_CONTEXT_MENU"),
+"EVT_DIALUP_CONNECTED(func)"=>WxEvent.new("EVT_DIALUP_CONNECTED(func)", "wxEVT_DIALUP_CONNECTED"),
+"EVT_DIALUP_DISCONNECTED(func)"=>WxEvent.new("EVT_DIALUP_DISCONNECTED(func)", "wxEVT_DIALUP_DISCONNECTED"),
+"EVT_END_SESSION(func)"=>WxEvent.new("EVT_END_SESSION(func)", "wxEVT_END_SESSION"),
+"EVT_FIND(id, func)"=>WxEvent.new("EVT_FIND(id, func)", "wxEVT_COMMAND_FIND"),
+"EVT_FIND_CLOSE(id, func)"=>WxEvent.new("EVT_FIND_CLOSE(id, func)", "wxEVT_COMMAND_FIND_CLOSE"),
+"EVT_FIND_NEXT(id, func)"=>WxEvent.new("EVT_FIND_NEXT(id, func)", "wxEVT_COMMAND_FIND_NEXT"),
+"EVT_FIND_REPLACE(id, func)"=>WxEvent.new("EVT_FIND_REPLACE(id, func)", "wxEVT_COMMAND_FIND_REPLACE"),
+"EVT_FIND_REPLACE_ALL(id, func)"=>WxEvent.new("EVT_FIND_REPLACE_ALL(id, func)", "wxEVT_COMMAND_FIND_REPLACE_ALL"),
+"EVT_LIST_BEGIN_DRAG(id, func)"=>WxEvent.new("EVT_LIST_BEGIN_DRAG(id, func)", "wxEVT_COMMAND_LIST_BEGIN_DRAG"),
+"EVT_LIST_BEGIN_LABEL_EDIT(id, func)"=>WxEvent.new("EVT_LIST_BEGIN_LABEL_EDIT(id, func)", "wxEVT_COMMAND_LIST_BEGIN_LABEL_EDIT"),
+"EVT_LIST_BEGIN_RDRAG(id, func)"=>WxEvent.new("EVT_LIST_BEGIN_RDRAG(id, func)", "wxEVT_COMMAND_LIST_BEGIN_RDRAG"),
+"EVT_LIST_CACHE_HINT(id, func)"=>WxEvent.new("EVT_LIST_CACHE_HINT(id, func)", "wxEVT_COMMAND_LIST_CACHE_HINT"),
+"EVT_LIST_COL_BEGIN_DRAG(id, func)"=>WxEvent.new("EVT_LIST_COL_BEGIN_DRAG(id, func)", "wxEVT_COMMAND_LIST_COL_BEGIN_DRAG"),
+"EVT_LIST_COL_CLICK(id, func)"=>WxEvent.new("EVT_LIST_COL_CLICK(id, func)", "wxEVT_COMMAND_LIST_COL_CLICK"),
+"EVT_LIST_COL_DRAGGING(id, func)"=>WxEvent.new("EVT_LIST_COL_DRAGGING(id, func)", "wxEVT_COMMAND_LIST_COL_DRAGGING"),
+"EVT_LIST_COL_END_DRAG(id, func)"=>WxEvent.new("EVT_LIST_COL_END_DRAG(id, func)", "wxEVT_COMMAND_LIST_COL_END_DRAG"),
+"EVT_LIST_COL_RIGHT_CLICK(id, func)"=>WxEvent.new("EVT_LIST_COL_RIGHT_CLICK(id, func)", "wxEVT_COMMAND_LIST_COL_RIGHT_CLICK"),
+"EVT_LIST_DELETE_ALL_ITEMS(id, func)"=>WxEvent.new("EVT_LIST_DELETE_ALL_ITEMS(id, func)", "wxEVT_COMMAND_LIST_DELETE_ALL_ITEMS"),
+"EVT_LIST_DELETE_ITEM(id, func)"=>WxEvent.new("EVT_LIST_DELETE_ITEM(id, func)", "wxEVT_COMMAND_LIST_DELETE_ITEM"),
+"EVT_LIST_END_LABEL_EDIT(id, func)"=>WxEvent.new("EVT_LIST_END_LABEL_EDIT(id, func)", "wxEVT_COMMAND_LIST_END_LABEL_EDIT"),
+"EVT_LIST_GET_INFO(id, func)"=>WxEvent.new("EVT_LIST_GET_INFO(id, func)","wxEVT_COMMAND_LIST_GET_INFO"),
+"EVT_LIST_SET_INFO(id, func)"=>WxEvent.new("EVT_LIST_SET_INFO(id, func)","wxEVT_COMMAND_LIST_SET_INFO"),
+"EVT_LIST_INSERT_ITEM(id, func)"=>WxEvent.new("EVT_LIST_INSERT_ITEM(id, func)", "wxEVT_COMMAND_LIST_INSERT_ITEM"),
+"EVT_LIST_ITEM_ACTIVATED(id, func)"=>WxEvent.new("EVT_LIST_ITEM_ACTIVATED(id, func)", "wxEVT_COMMAND_LIST_ITEM_ACTIVATED"),
+"EVT_LIST_ITEM_DESELECTED(id, func)"=>WxEvent.new("EVT_LIST_ITEM_DESELECTED(id, func)", "wxEVT_COMMAND_LIST_ITEM_DESELECTED"),
+"EVT_LIST_ITEM_FOCUSED(id, func)"=>WxEvent.new("EVT_LIST_ITEM_FOCUSED(id, func)", "wxEVT_COMMAND_LIST_ITEM_FOCUSED"),
+"EVT_LIST_ITEM_MIDDLE_CLICK(id, func)"=>WxEvent.new("EVT_LIST_ITEM_MIDDLE_CLICK(id, func)", "wxEVT_COMMAND_LIST_ITEM_MIDDLE_CLICK"),
+"EVT_LIST_ITEM_RIGHT_CLICK(id, func)"=>WxEvent.new("EVT_LIST_ITEM_RIGHT_CLICK(id, func)", "wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK"),
+"EVT_LIST_ITEM_SELECTED(id, func)"=>WxEvent.new("EVT_LIST_ITEM_SELECTED(id, func)", "wxEVT_COMMAND_LIST_ITEM_SELECTED"),
+"EVT_LIST_KEY_DOWN(id, func)"=>WxEvent.new("EVT_LIST_KEY_DOWN(id, func)", "wxEVT_COMMAND_LIST_KEY_DOWN"),
+"EVT_MENU(id, func)"=>WxEvent.new("EVT_MENU(id, func)", "wxEVT_COMMAND_MENU_SELECTED"),
+"EVT_MENU_CLOSE(func)"=>WxEvent.new("EVT_MENU_CLOSE(func)", "wxEVT_MENU_CLOSE"),
+"EVT_MENU_HIGHLIGHT(id, func)"=>WxEvent.new("EVT_MENU_HIGHLIGHT(id, func)", "wxEVT_MENU_HIGHLIGHT"),
+"EVT_MENU_HIGHLIGHT_ALL(func)"=>WxEvent.new("EVT_MENU_HIGHLIGHT_ALL(func)", "wxEVT_MENU_HIGHLIGHT"),
+"EVT_MENU_OPEN(func)"=>WxEvent.new("EVT_MENU_OPEN(func)", "wxEVT_MENU_OPEN"),
+"EVT_MENU_RANGE(id1, id2, func)"=>WxEvent.new("EVT_MENU_RANGE(id1, id2, func)", "wxEVT_COMMAND_MENU_SELECTED"),
+"EVT_MOUSE_EVENTS(func)"=>WxEvent.new("EVT_MOUSE_EVENTS(func)", "0"),
+"EVT_NOTEBOOK_PAGE_CHANGED(id, func)"=>WxEvent.new("EVT_NOTEBOOK_PAGE_CHANGED(id, func)","wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED"),
+"EVT_NOTEBOOK_PAGE_CHANGING(id, func)"=>WxEvent.new("EVT_NOTEBOOK_PAGE_CHANGING(id, func)","wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING"),
+"EVT_QUERY_END_SESSION(func)"=>WxEvent.new("EVT_QUERY_END_SESSION(func)", "wxEVT_QUERY_END_SESSION"),
+"EVT_SCROLLWIN(func)"=>WxEvent.new("EVT_SCROLLWIN(func)", "0"),
+"EVT_SOCKET(id, func)"=>WxEvent.new("EVT_SOCKET(id, func)", "wxEVT_SOCKET"),
+"EVT_SPINCTRL(id, func)"=>WxEvent.new("EVT_SPINCTRL(id, func)", "wxEVT_COMMAND_SPINCTRL_UPDATED"),
+"EVT_SPIN(id, func)"=>WxEvent.new("EVT_SPIN(id, func)","wxEVT_SCROLL_THUMBTRACK"),
+"EVT_SPIN_UP(id, func)"=>WxEvent.new("EVT_SPIN_UP(id, func)","wxEVT_SCROLL_LINEDOWN"),
+"EVT_SPIN_DOWN(id, func)"=>WxEvent.new("EVT_SPIN_DOWN(id, func)","wxEVT_SCROLL_LINEUP"),
+
+"EVT_TEXT_MAXLEN(id, func)"=>WxEvent.new("EVT_TEXT_MAXLEN(id, func)", "wxEVT_COMMAND_TEXT_MAXLEN"),
+"EVT_TEXT_URL(id, func)"=>WxEvent.new("EVT_TEXT_URL(id, func)", "wxEVT_COMMAND_TEXT_URL"),
+"EVT_TOGGLEBUTTON(id, func)"=>WxEvent.new("EVT_TOGGLEBUTTON(id, func)", "wxEVT_COMMAND_TOGGLEBUTTON_CLICKED"),
+"EVT_TREE_BEGIN_DRAG(id, func)"=>WxEvent.new("EVT_TREE_BEGIN_DRAG(id, func)", "wxEVT_COMMAND_TREE_BEGIN_DRAG"),
+"EVT_TREE_BEGIN_LABEL_EDIT(id, func)"=>WxEvent.new("EVT_TREE_BEGIN_LABEL_EDIT(id, func)", "wxEVT_COMMAND_TREE_BEGIN_LABEL_EDIT"),
+"EVT_TREE_BEGIN_RDRAG(id, func)"=>WxEvent.new("EVT_TREE_BEGIN_RDRAG(id, func)", "wxEVT_COMMAND_TREE_BEGIN_RDRAG"),
+"EVT_TREE_DELETE_ITEM(id, func)"=>WxEvent.new("EVT_TREE_DELETE_ITEM(id, func)", "wxEVT_COMMAND_TREE_DELETE_ITEM"),
+"EVT_TREE_END_DRAG(id, func)"=>WxEvent.new("EVT_TREE_END_DRAG(id, func)", "wxEVT_COMMAND_TREE_END_DRAG"),
+"EVT_TREE_END_LABEL_EDIT(id, func)"=>WxEvent.new("EVT_TREE_END_LABEL_EDIT(id, func)", "wxEVT_COMMAND_TREE_END_LABEL_EDIT"),
+"EVT_TREE_GET_INFO(id, func)"=>WxEvent.new("EVT_TREE_GET_INFO(id, func)", "wxEVT_COMMAND_TREE_GET_INFO"),
+"EVT_TREE_ITEM_ACTIVATED(id, func)"=>WxEvent.new("EVT_TREE_ITEM_ACTIVATED(id, func)", "wxEVT_COMMAND_TREE_ITEM_ACTIVATED"),
+"EVT_TREE_ITEM_COLLAPSED(id, func)"=>WxEvent.new("EVT_TREE_ITEM_COLLAPSED(id, func)", "wxEVT_COMMAND_TREE_ITEM_COLLAPSED"),
+"EVT_TREE_ITEM_COLLAPSING(id, func)"=>WxEvent.new("EVT_TREE_ITEM_COLLAPSING(id, func)", "wxEVT_COMMAND_TREE_ITEM_COLLAPSING"),
+"EVT_TREE_ITEM_EXPANDED(id, func)"=>WxEvent.new("EVT_TREE_ITEM_EXPANDED(id, func)", "wxEVT_COMMAND_TREE_ITEM_EXPANDED"),
+"EVT_TREE_ITEM_EXPANDING(id, func)"=>WxEvent.new("EVT_TREE_ITEM_EXPANDING(id, func)", "wxEVT_COMMAND_TREE_ITEM_EXPANDING"),
+"EVT_TREE_ITEM_MIDDLE_CLICK(id, func)"=>WxEvent.new("EVT_TREE_ITEM_MIDDLE_CLICK(id, func)", "wxEVT_COMMAND_TREE_ITEM_MIDDLE_CLICK"),
+"EVT_TREE_ITEM_RIGHT_CLICK(id, func)"=>WxEvent.new("EVT_TREE_ITEM_RIGHT_CLICK(id, func)", "wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK"),
+"EVT_TREE_KEY_DOWN(id, func)"=>WxEvent.new("EVT_TREE_KEY_DOWN(id, func)", "wxEVT_COMMAND_TREE_KEY_DOWN"),
+"EVT_TREE_SEL_CHANGED(id, func)"=>WxEvent.new("EVT_TREE_SEL_CHANGED(id, func)", "wxEVT_COMMAND_TREE_SEL_CHANGED"),
+"EVT_TREE_SEL_CHANGING(id, func)"=>WxEvent.new("EVT_TREE_SEL_CHANGING(id, func)", "wxEVT_COMMAND_TREE_SEL_CHANGING"),
+"EVT_TREE_SET_INFO(id, func)"=>WxEvent.new("EVT_TREE_SET_INFO(id, func)", "wxEVT_COMMAND_TREE_SET_INFO"),
+"EVT_WIZARD_CANCEL(id, func)"=>WxEvent.new("EVT_WIZARD_CANCEL(id, func)", "wxEVT_WIZARD_CANCEL"),
+"EVT_WIZARD_FINISHED(id, func)"=>WxEvent.new("EVT_WIZARD_FINISHED(id, func)", "wxEVT_WIZARD_FINISHED"),
+"EVT_WIZARD_HELP(id, func)"=>WxEvent.new("EVT_WIZARD_HELP(id, func)", "wxEVT_WIZARD_HELP"),
+"EVT_WIZARD_PAGE_CHANGED(id, func)"=>WxEvent.new("EVT_WIZARD_PAGE_CHANGED(id, func)", "wxEVT_WIZARD_CHANGED"),
+"EVT_WIZARD_PAGE_CHANGING(id, func)"=>WxEvent.new("EVT_WIZARD_PAGE_CHANGING(id, func)", "wxEVT_WIZARD_CHANGING"),
+}
+
 
 class WxParameter
     def initialize(node)
@@ -500,6 +703,8 @@ class WxClass
                 load_parent_classes(class_info)
             elsif(isTagStart(class_info, 'members'))
                 load_class_members(class_info)
+            elsif(isTagStart(class_info,'events'))
+                load_events(class_info)
             else
                 #puts(class_info.entity)
             end
@@ -545,7 +750,23 @@ class WxClass
         end
         @members << m
     end
-    
+
+    def load_events(class_info)
+         class_info.children.each do | member |
+            if(isTagStart(member, 'event'))
+                evt_id = ""
+                event_name = member.entity.attrs['name']
+                member.children.each do|child|
+                    if (/wxEVT[A-Z_]*/ =~ child.entity.text)
+                        evt_id = $&
+                    end
+                end
+                $events[event_name] = WxEvent.new(event_name,evt_id)
+            end
+        end
+    end
+
+  
     def parent
         return @parents[0]
     end
@@ -638,6 +859,22 @@ File.open(File.join(output_dir, parent_file), "w") do | out |
     out.puts("$parents = {")
     out.puts(parents.join("\n"))
     out.puts("}")
+end
+
+File.open(File.join(output_dir,"events.rb"),"w") do |out|
+    WxEvent.fix_errors_in_xml
+    out.puts("$events = [")
+    $events.each_with_index do |name, val|
+		exclude = false
+        $events_exclude.each do |prefix|
+        	if name[1].name.index(prefix) != nil
+				exclude = true
+			end
+		end
+        out.puts name[1].to_s if !exclude
+    end
+    out.puts("]")
+
 end
 
 if($fixes.size > 0)

@@ -559,10 +559,14 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
 #include <wx/datetime.h>
+
+
+#include <wx/bitmap.h>
 
 
 #include <wx/image.h>
@@ -827,20 +831,22 @@ _wrap_new_wxBitmap__SWIG_3(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_new_wxBitmap__SWIG_4(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
-    wxBitmapType arg2 ;
+    wxBitmapType arg2 = (wxBitmapType) wxBITMAP_TYPE_XPM ;
     wxBitmap *result;
     
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
         arg1 = new wxString(STR2CSTR(argv[0]));
     }
-    {
-        wxBitmapType * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxBitmapType, 1);
-        if (ptr) arg2 = *ptr;
+    if (argc > 1) {
+        {
+            wxBitmapType * ptr;
+            SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxBitmapType, 1);
+            if (ptr) arg2 = *ptr;
+        }
     }
-    result = (wxBitmap *)new wxBitmap((wxString const &)*arg1,arg2);
+    result = (wxBitmap *)new wxBitmap(*arg1,arg2);
     DATA_PTR(self) = result;
     return self;
 }
@@ -931,6 +937,24 @@ static VALUE _wrap_new_wxBitmap(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
+    if ((argc >= 1) && (argc <= 2)) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
+        if (_v) {
+            if (argc <= 1) {
+                return _wrap_new_wxBitmap__SWIG_4(nargs, args, self);
+            }
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxBitmapType, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_wxBitmap__SWIG_4(nargs, args, self);
+            }
+        }
+    }
     if ((argc >= 2) && (argc <= 3)) {
         int _v;
         {
@@ -950,21 +974,6 @@ static VALUE _wrap_new_wxBitmap(int nargs, VALUE *args, VALUE self) {
                 if (_v) {
                     return _wrap_new_wxBitmap__SWIG_2(nargs, args, self);
                 }
-            }
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            _v = (TYPE(argv[0]) == T_STRING);
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxBitmapType, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_new_wxBitmap__SWIG_4(nargs, args, self);
             }
         }
     }
