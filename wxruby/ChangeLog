@@ -1,3 +1,8 @@
+2004-04-17
+    * Minor updates to README files
+    * Tagged tree as 0.3.0
+    
+
 2004-03-29
     * Update samples to use correct method names:
       dialogs/dialog.rb: CanVeto -> can_veto
