@@ -8,15 +8,21 @@ ID_Logs = ID_HIGHEST + 1
 ID_Browser = ID_HIGHEST + 2
 ID_PlugProvider = ID_HIGHEST + 3
 
+$clients = 
+{
+    ART_OTHER => "ART_OTHER",
+    ART_TOOLBAR => "ART_TOOLBAR",
+    ART_MENU => "ART_MENU",
+    ART_FRAME_ICON => "ART_FRAME_ICON",
+    ART_CMN_DIALOG => "ART_CMN_DIALOG",
+    ART_HELP_BROWSER => "ART_HELP_BROWSER",
+    ART_MESSAGE_BOX => "ART_MESSAGE_BOX",
+}
 
 def FillClients(choice)
-    choice.append("ART_OTHER",ART_OTHER)
-    choice.append("ART_TOOLBAR",ART_TOOLBAR)
-    choice.append("ART_MENU",ART_MENU)
-    choice.append("ART_FRAME_ICON",ART_FRAME_ICON)
-    choice.append("ART_CMN_DIALOG",ART_CMN_DIALOG)
-    choice.append("ART_HELP_BROWSER",ART_HELP_BROWSER)
-    choice.append("ART_MESSAGE_BOX",ART_MESSAGE_BOX)
+    $clients.each_key do | key |
+        choice.append($clients[key],key)
+    end
 end
 
 def FillBitmaps(images,list,index,client,size)
@@ -271,8 +277,9 @@ class ArtBrowserDialog < Dialog
   end
 
   def onChooseClient(event)
-    data = event.get_client_data
-    SetArtClient(data)
+    item = event.get_selection
+    client_id = $clients.keys[item]
+    SetArtClient(client_id)
   end
 
 end
