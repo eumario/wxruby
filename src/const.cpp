@@ -22,6 +22,7 @@
 #include "wx/socket.h"
 #include "wx/url.h"
 #include "wx/splitter.h"
+#include "wx/dnd.h"
 
 
 #include "bitmap.h"
@@ -1096,5 +1097,16 @@ void SetConstants() {
     rb_define_const(mWx,"TREE_HITTEST_ONITEMUPPERPART"           ,INT2NUM(wxTREE_HITTEST_ONITEMUPPERPART));
     rb_define_const(mWx,"TREE_HITTEST_ONITEMLOWERPART"           ,INT2NUM(wxTREE_HITTEST_ONITEMLOWERPART));
     rb_define_const(mWx,"TREE_HITTEST_ONITEM"           ,INT2NUM(wxTREE_HITTEST_ONITEM));
+    
+    rb_define_const(mWx,"DRAG_ERROR", INT2NUM(wxDragError));
+    rb_define_const(mWx,"DRAG_NONE", INT2NUM(wxDragNone));
+    rb_define_const(mWx,"DRAG_COPY", INT2NUM(wxDragCopy));
+    rb_define_const(mWx,"DRAG_MOVE", INT2NUM(wxDragMove));
+    rb_define_const(mWx,"DRAG_CANCEL", INT2NUM(wxDragCancel));
+    
+    rb_define_const(mWx,"DRAG_COPY_ONLY", INT2NUM(wxDrag_CopyOnly));
+    rb_define_const(mWx,"DRAG_ALLOW_MOVE", INT2NUM(wxDrag_AllowMove));
+    rb_define_const(mWx,"DRAG_DEFAULT_MOVE", INT2NUM(wxDrag_DefaultMove));
+    
 
 }

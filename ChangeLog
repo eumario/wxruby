@@ -1,3 +1,16 @@
+2003-11-30 17:00  kbs
+    * Added missing drag-and-drop constants
+    * Fixed ListCtrl::get_item_text (it was returning the row number 
+        instead of the text)
+    * Fixed the TextDropTarget virtual call back return value
+    * Added samples/etc/dragdrop.rb sample to demonstrate the 
+        drag and drop classes
+    * App now tried to call on_init first, but still falls back 
+        to the now-deprecated OnInit if necessary
+        [Note: All the samples should be changed to define
+        on_init instead of OnInit]
+
+
 2003-11-30 15:00  kbs
     * Fixed compile warnings in 25 cpp files
     

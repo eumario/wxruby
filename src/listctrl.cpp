@@ -364,14 +364,9 @@ VALUE
 WxListCtrl::GetItemText(int argc, VALUE *argv, VALUE self)
 {
     long item = NUM2INT(argv[0]);
-    int geometry = wxLIST_NEXT_ALL;
-    if(argc>1) geometry = NUM2INT(argv[1]);
-    int state = wxLIST_STATE_DONTCARE;
-    if(argc>2) state = NUM2INT(argv[2]);
     wxRbListCtrl *ptr;
     Data_Get_Struct(self, wxRbListCtrl, ptr);
-    return INT2NUM(ptr->GetNextItem(item,geometry,state));
-
+    return rb_str_new2(ptr->GetItemText(item));
 }
 
 VALUE
