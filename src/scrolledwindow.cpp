@@ -39,10 +39,15 @@ void WxScrolledWindow::DefineClass()
 	rb_define_method(rubyClass, "set_target_window", VALUEFUNC(WxScrolledWindow::SetTargetWindow), 1);
 }
 
+static void mark(void* ptr)
+{
+    rb_gc_mark(((wxRbScrolledWindow*)ptr)->vdata);
+}
+
 VALUE
 WxScrolledWindow::alloc(VALUE self)
 {
-    return Data_Wrap_Struct(self, 0, 0, 0);
+    return Data_Wrap_Struct(self, &mark, 0, 0);
 }
 
 VALUE
@@ -78,9 +83,9 @@ WxScrolledWindow::init(int argc, VALUE *argv, VALUE self)
     ptr = new wxRbScrolledWindow(parent,id,pos,size,style,name);
     DATA_PTR(self) = ptr;
 
-    VALUE vdata = rb_hash_new();
-    rb_hash_aset(vdata,rb_str_new2("self"),self);
-    ptr->SetClientData((void*)vdata);
+    ptr->vdata = rb_hash_new();
+    rb_hash_aset(ptr->vdata, rb_str_new2("self"), self);
+    ptr->SetClientData((void*)ptr->vdata);
 
     return self;
 }

@@ -110,6 +110,17 @@ other compilers (such as Borland), or other platforms.
 --------------------------------------------------------------------
 KNOWN PROBLEMS
 
+* NOTE: The following classes have known problems that may cause 
+  crashes if you use set_client_data and/or get_client_data: 
+    Choice, ComboBox, CommandEvent, SocketEvent, EvtHandler,
+    ListBox, Socket
+
+* NOTE: The following classes have known problems that may cause 
+  crashes if you use these methods:
+  - Event (get_event_object)
+  - ListCtrl (on_get_item_attr, on_get_item_image, on_get_item_text)
+  - TreeCtrl (on_compare_items)
+
 * Not all classes and methods have been implemented yet.
 
 * Certain features do not manage memory correctly, and may 

@@ -20,6 +20,8 @@ public:
         const wxSize& size = wxDefaultSize, long style = wxHSCROLL | wxVSCROLL, const wxString& name = "scrolledWindow")
         :   wxScrolledWindow(parent,id,pos,size,style,name) { }
     virtual void OnDraw(wxDC& dc);
+
+    VALUE vdata;
 };
 
 class WxScrolledWindow {
@@ -41,6 +43,7 @@ public:
 
     static void DefineClass();
 	static VALUE rubyClass;
+
 };
 
 #endif
