@@ -131,7 +131,9 @@ VALUE WxApp::init(VALUE self)
 
 	extern int  wxEntryInitGui();
 	wxEntryInitGui();
-	if(rb_respond_to(self,rb_intern("OnInit")))
+	if(rb_respond_to(self,rb_intern("on_init")))
+	  rb_funcall(self,rb_intern("on_init"),0);
+	else if(rb_respond_to(self,rb_intern("OnInit")))
 	  rb_funcall(self,rb_intern("OnInit"),0);
 
 	return self;
