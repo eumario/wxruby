@@ -1,6 +1,9 @@
 2003-12-29
     * Added events sample (in etc)
     * Ran convert-repo on darcs source code repository
+    * Now support almost all methods of Wx::Font, along with 
+        the related constants
+    * Added font.rb sample to etc, written by Nobuaki Arima
     
 
 2003-12-12 20:15  kbs

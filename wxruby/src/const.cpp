@@ -835,7 +835,7 @@ void SetConstants() {
     rb_define_const(mWx,"DEFAULT_DATE_TIME", WxDateTime::init0(wxDefaultDateTime));
     rb_define_const(mWx,"NULL_BITMAP", WxBitmap::init0(wxNullBitmap));
     rb_define_const(mWx,"NULL_COLOUR", WxColour::init0(wxNullColour));
-    rb_define_const(mWx,"NULL_FONT", WxFont::init0(wxNullFont));
+    rb_define_const(mWx,"NULL_FONT", WxFont::init0(&wxNullFont));
     rb_define_const(mWx,"NULL_PEN", WxPen::init0(&wxNullPen));
     rb_define_const(mWx,"NULL_BRUSH", WxBrush::init0(wxNullBrush));
 
@@ -1026,10 +1026,10 @@ void SetConstants() {
     rb_define_const(mWx,"IMAGE_LIST_SMALL"           ,INT2NUM(wxIMAGE_LIST_SMALL));
     rb_define_const(mWx,"IMAGE_LIST_STATE"           ,INT2NUM(wxIMAGE_LIST_STATE));
 
-    rb_define_const(mWx,"NORMAL_FONT"           ,WxFont::init0(*wxNORMAL_FONT));
-    rb_define_const(mWx,"SMALL_FONT"           ,WxFont::init0(*wxSMALL_FONT));
-    rb_define_const(mWx,"ITALIC_FONT"           ,WxFont::init0(*wxITALIC_FONT));
-    rb_define_const(mWx,"SWISS_FONT"           ,WxFont::init0(*wxSWISS_FONT));
+    rb_define_const(mWx,"NORMAL_FONT"           ,WxFont::init0(wxNORMAL_FONT));
+    rb_define_const(mWx,"SMALL_FONT"           ,WxFont::init0(wxSMALL_FONT));
+    rb_define_const(mWx,"ITALIC_FONT"           ,WxFont::init0(wxITALIC_FONT));
+    rb_define_const(mWx,"SWISS_FONT"           ,WxFont::init0(wxSWISS_FONT));
 
     rb_define_const(mWx,"FONTFAMILY_DEFAULT"      ,INT2NUM(wxFONTFAMILY_DEFAULT));
     rb_define_const(mWx,"FONTFAMILY_DECORATIVE" ,INT2NUM(wxFONTFAMILY_DECORATIVE));
@@ -1048,6 +1048,47 @@ void SetConstants() {
     rb_define_const(mWx,"FONTWEIGHT_LIGHT"           ,INT2NUM(wxFONTWEIGHT_LIGHT));
     rb_define_const(mWx,"FONTWEIGHT_BOLD"           ,INT2NUM(wxFONTWEIGHT_BOLD));
     rb_define_const(mWx,"FONTWEIGHT_MAX"           ,INT2NUM(wxFONTWEIGHT_MAX));
+
+    rb_define_const(mWx,"FONTENCODING_SYSTEM", INT2NUM(wxFONTENCODING_SYSTEM));
+    rb_define_const(mWx,"FONTENCODING_DEFAULT", INT2NUM(wxFONTENCODING_DEFAULT));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_1", INT2NUM(wxFONTENCODING_ISO8859_1));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_2", INT2NUM(wxFONTENCODING_ISO8859_2));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_3", INT2NUM(wxFONTENCODING_ISO8859_3));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_4", INT2NUM(wxFONTENCODING_ISO8859_4));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_5", INT2NUM(wxFONTENCODING_ISO8859_5));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_6", INT2NUM(wxFONTENCODING_ISO8859_6));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_7", INT2NUM(wxFONTENCODING_ISO8859_7));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_8", INT2NUM(wxFONTENCODING_ISO8859_8));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_9", INT2NUM(wxFONTENCODING_ISO8859_9));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_10", INT2NUM(wxFONTENCODING_ISO8859_10));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_11", INT2NUM(wxFONTENCODING_ISO8859_11));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_12", INT2NUM(wxFONTENCODING_ISO8859_12));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_13", INT2NUM(wxFONTENCODING_ISO8859_13));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_14", INT2NUM(wxFONTENCODING_ISO8859_14));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_15", INT2NUM(wxFONTENCODING_ISO8859_15));
+    rb_define_const(mWx,"FONTENCODING_ISO8859_MAX", INT2NUM(wxFONTENCODING_ISO8859_MAX));
+    rb_define_const(mWx,"FONTENCODING_KOI8", INT2NUM(wxFONTENCODING_KOI8));
+    rb_define_const(mWx,"FONTENCODING_ALTERNATIVE", INT2NUM(wxFONTENCODING_ALTERNATIVE));
+    rb_define_const(mWx,"FONTENCODING_BULGARIAN", INT2NUM(wxFONTENCODING_BULGARIAN));
+    rb_define_const(mWx,"FONTENCODING_CP437", INT2NUM(wxFONTENCODING_CP437));
+    rb_define_const(mWx,"FONTENCODING_CP850", INT2NUM(wxFONTENCODING_CP850));
+    rb_define_const(mWx,"FONTENCODING_CP852", INT2NUM(wxFONTENCODING_CP852));
+    rb_define_const(mWx,"FONTENCODING_CP855", INT2NUM(wxFONTENCODING_CP855));
+    rb_define_const(mWx,"FONTENCODING_CP866", INT2NUM(wxFONTENCODING_CP866));
+    rb_define_const(mWx,"FONTENCODING_CP874", INT2NUM(wxFONTENCODING_CP874));
+    rb_define_const(mWx,"FONTENCODING_CP1250", INT2NUM(wxFONTENCODING_CP1250));
+    rb_define_const(mWx,"FONTENCODING_CP1251", INT2NUM(wxFONTENCODING_CP1251));
+    rb_define_const(mWx,"FONTENCODING_CP1252", INT2NUM(wxFONTENCODING_CP1252));
+    rb_define_const(mWx,"FONTENCODING_CP1253", INT2NUM(wxFONTENCODING_CP1253));
+    rb_define_const(mWx,"FONTENCODING_CP1254", INT2NUM(wxFONTENCODING_CP1254));
+    rb_define_const(mWx,"FONTENCODING_CP1255", INT2NUM(wxFONTENCODING_CP1255));
+    rb_define_const(mWx,"FONTENCODING_CP1256", INT2NUM(wxFONTENCODING_CP1256));
+    rb_define_const(mWx,"FONTENCODING_CP1257", INT2NUM(wxFONTENCODING_CP1257));
+    rb_define_const(mWx,"FONTENCODING_CP12_MAX", INT2NUM(wxFONTENCODING_CP12_MAX));
+    rb_define_const(mWx,"FONTENCODING_UTF7", INT2NUM(wxFONTENCODING_UTF7));
+    rb_define_const(mWx,"FONTENCODING_UTF8", INT2NUM(wxFONTENCODING_UTF8));
+    rb_define_const(mWx,"FONTENCODING_UNICODE", INT2NUM(wxFONTENCODING_UNICODE));
+    rb_define_const(mWx,"FONTENCODING_MAX", INT2NUM(wxFONTENCODING_MAX));
 
     rb_define_const(mWx,"URL_NOERR"           ,INT2NUM(wxURL_NOERR));
     rb_define_const(mWx,"URL_SNTXERR"           ,INT2NUM(wxURL_SNTXERR));
