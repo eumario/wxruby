@@ -6,6 +6,9 @@
 
 #############################
 # platform-dependent settings
+require 'rbconfig'
+
+include Config
 
 $cpp = "cl.exe"
 $ld = "link"
@@ -61,8 +64,8 @@ $extra_libs = [
     "gdi32.lib", "winspool.lib", "comdlg32.lib",
     "shell32.lib", "ole32.lib", "oleaut32.lib", "uuid.lib",
     "odbc32.lib ", "odbccp32.lib", "comctl32.lib", 
-    "rpcrt4.lib", "winmm.lib","msvcrt-ruby18.lib"].join(' ')
-$extra_objs = "wx.res"
+    "rpcrt4.lib", "winmm.lib","#{Config::TOPDIR}/lib/msvcrt-ruby18.lib"].join(' ')
+$extra_objs = "swig/wx.res"
 
 
 
