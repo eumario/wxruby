@@ -61,7 +61,7 @@ elsif have_library("kernel32")
     $INCTEMP="#$WXDIR/lib/msw#{$DEBUGPOSTFIX}"
     $WXLIB="#$WXLIBDIR/wxmsw#{$DEBUGPOSTFIX}.lib"
     $CFLAGS += " -I#$WXINC -I#$INCTEMP #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
-    $CFLAGS += " -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /D__WINDOWS__ -D__WXMSW__"
+    $CFLAGS += " -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /D__WINDOWS__ -D__WXMSW__ /EHsc /GR -I.."
     $libs += " gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib"
     $libs += " uuid.lib odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib winmm.lib"
     if $DEBUG
@@ -74,7 +74,7 @@ elsif have_library("kernel32")
 	$libs += " #$WXLIBDIR/png.lib #$WXLIBDIR/zlib.lib #$WXLIBDIR/jpeg.lib"
 	$libs += " #$WXLIBDIR/tiff.lib #$WXLIB"
     end
-    $objs.push("wx.res")
+    #$objs.push("wx.res")
 
 end
 

@@ -562,6 +562,23 @@ void GcFreefunc(void *);
 #include <wx/fdrepdlg.h>
 #include <wx/artprov.h>
 
+//
+// All of these exist on only one platform, so in those
+// cases I'm defining them so the compiler doesn't freak out
+//
+#ifndef __WXGTK__
+#define    wxCURSOR_DEFAULT 0
+#endif
+#ifndef __WXMAC__
+#define        wxCURSOR_COPY_ARROW 0
+#endif
+#ifndef __X__
+    // Not yet implemented for Windows
+#define    wxCURSOR_CROSS_REVERSE 0
+#define    wxCURSOR_DOUBLE_ARROW 0
+#define    wxCURSOR_BASED_ARROW_UP 0
+#define    wxCURSOR_BASED_ARROW_DOWN 0
+#endif // X11
 
 
 
@@ -749,7 +766,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "RubyConstants.h"
+#include "src/RubyConstants.h"
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
@@ -915,7 +932,7 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"ED_BUTTONS_BOTTOM", INT2NUM(0x0000));
     rb_define_const(mWxRubyConstants,"ED_BUTTONS_RIGHT", INT2NUM(0x0002));
     rb_define_const(mWxRubyConstants,"ED_STATIC_LINE", INT2NUM(0x0001));
-    rb_define_const(mWxRubyConstants,"EXT_DIALOG_STYLE", INT2NUM((0x20000000|0x0004)));
+    rb_define_const(mWxRubyConstants,"EXT_DIALOG_STYLE", INT2NUM((0x20000000|0x0004|0x0001)));
     rb_define_const(mWxRubyConstants,"MB_DOCKABLE", INT2NUM(0x0001));
     rb_define_const(mWxRubyConstants,"MENU_TEAROFF", INT2NUM(0x0001));
     rb_define_const(mWxRubyConstants,"COLOURED", INT2NUM(0x0800));
@@ -1461,7 +1478,6 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"CURSOR_WAIT", INT2NUM(wxCURSOR_WAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_WATCH", INT2NUM(wxCURSOR_WATCH));
     rb_define_const(mWxRubyConstants,"CURSOR_BLANK", INT2NUM(wxCURSOR_BLANK));
-    rb_define_const(mWxRubyConstants,"CURSOR_COPY_ARROW", INT2NUM(wxCURSOR_COPY_ARROW));
     rb_define_const(mWxRubyConstants,"CURSOR_ARROWWAIT", INT2NUM(wxCURSOR_ARROWWAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_MAX", INT2NUM(wxCURSOR_MAX));
     rb_define_const(mWxRubyConstants,"LC_VRULES", INT2NUM(0x0001));
