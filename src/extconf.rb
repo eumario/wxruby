@@ -40,7 +40,7 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
 
     $CFLAGS += " `wx-config --cxxflags` -I.. "
     $CPPFLAGS += ' -x objective-c++ '
-    $LDFLAGS += " `wx-config --libs` -framework Carbon "
+    $LDFLAGS += " `wx-config --libs` -lobjc "
     if ($use_xrc)
       $LDFLAGS += " -lwx_mac_xrc-2.4 "
     end

@@ -401,9 +401,10 @@ class MyPanel < Panel
         bmpBtn.set_bitmap_selected(bmp2)
         bmpBtn.set_bitmap_focus(bmp3)
 
+if !(RUBY_PLATFORM =~ /darwin/) 
         ToggleButton.new(panel, ID_BUTTON_LABEL,
                                  "&Toggle label", Point.new(250, 20))
-
+end
         @m_label = StaticText.new(panel, -1, "Label with some long text",
                                    Point.new(250, 60), DEFAULT_SIZE,
                                    ALIGN_RIGHT)
@@ -540,7 +541,9 @@ class MyPanel < Panel
         evt_spin_up(ID_SPINCTRL) {|event| onSpinCtrlUp(event) }
         evt_spin_down(ID_SPINCTRL) {|event| onSpinCtrlDown(event) }
         evt_text(ID_SPINCTRL) {|event| onSpinCtrlText(event) }
+if !(RUBY_PLATFORM =~ /darwin/)
         evt_togglebutton(ID_BUTTON_LABEL) {|event| onupdateLabel(event) }
+end
         evt_checkbox(ID_CHANGE_COLOUR) {|event| onChangeColour(event) }
         evt_button(ID_BUTTON_TEST1) {|event| onTestButton(event) }
         evt_button(ID_BUTTON_TEST2) {|event| onTestButton(event) }

@@ -80,7 +80,12 @@ public:
 	
 		
 #else     
+#if __WXMAC__
+	wxEntry(argc,(char **)argv);
+
+#else
         wxEntry((const int)argc,(char **)argv);
+#endif
 #endif        
 		
 #ifdef wxDEBUG

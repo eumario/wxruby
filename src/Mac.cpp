@@ -86,16 +86,13 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
-#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
-#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7+ */
-#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
+#    else /* These definitions should work for Ruby 1.7 */
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -550,8 +547,9 @@ extern OSErr    CPSGetCurrentProcess (ProcessSerialNumber* iPSN);
 extern OSErr    CPSEnableForegroundOperation (ProcessSerialNumber* iPSN, UInt32 iArg2, UInt32 iArg3, UInt32 iArg4, UInt32 iArg5);
 extern OSErr    CPSSetFrontProcess (ProcessSerialNumber* iPSN);
 }
-
+#if wxMINOR_VERSION == 4
 extern "C" short gSharedLibraryResource;
+#endif
 
 void macstart()
 {
@@ -566,6 +564,7 @@ void macstart()
         CPSSetFrontProcess (&aTaskPSN);
         aTaskIsInFront = YES;
 
+#if wxMINOR_VERSION==4
         // Open the shared library resource file if it is not yet open
         NSSymbol    theSymbol;
         NSModule    theModule;
@@ -576,7 +575,7 @@ void macstart()
 		//   load the framework resources            
 		gSharedLibraryResource = CFBundleOpenBundleResourceMap(gSharedLibraryBundle);
         }
-
+#endif
 }
 
 #endif

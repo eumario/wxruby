@@ -122,14 +122,17 @@ class MyCanvas < ScrolledWindow
         evt_paint() {|event| onPaint(event) }
     end
 
+    def clear
+
+    end
+
     def onPaint(event)
-        dc = PaintDC.new(self)
-	p get_app
-        dc.set_font(get_app().m_canvasFont)
-        dc.set_text_foreground(get_app().m_canvasTextColour)
-        #dc.set_text_background(TRANSPARENT)
-        dc.draw_text("Windows common dialogs test application", 10, 10)
-        dc.free
+        paint do |dc|
+            dc.set_font(get_app().m_canvasFont)
+            dc.set_text_foreground(get_app().m_canvasTextColour)
+            #dc.set_text_background(TRANSPARENT)
+            dc.draw_text("Windows common dialogs test application", 10, 10)
+        end
     end
 end
 
@@ -203,7 +206,7 @@ class MyFrame < Frame
             retData = dialog.get_colour_data()
             col = retData.get_colour()
             $myCanvas.set_background_colour(col)
-            $myCanvas.clear()
+            #$myCanvas.clear()
             $myCanvas.refresh()
         end
     end
