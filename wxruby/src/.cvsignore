@@ -20,6 +20,11 @@ frame.h
 frame.cpp
 grid.h
 grid.cpp
+mdichildframe.h
+mdiclientwindow.cpp
+mdiclientwindow.h
+mdiparentframe.cpp
+mdiparentframe.h
 menuitem.h
 menuitem.cpp
 textctrl.h
