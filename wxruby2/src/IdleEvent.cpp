@@ -8,10 +8,8 @@
  * interface file instead. 
  * ----------------------------------------------------------------------------- */
 
+#define SWIG_NOINCLUDE
 #define SWIG_DIRECTORS
-
-#define SWIG_GLOBAL 1
-
 
 #ifdef __cplusplus
 template<class T> class SwigValueWrapper {
@@ -433,201 +431,41 @@ SWIG_UnpackData(char *c, void *ptr, int sz) {
 }
 #endif
 
-/* rubydef.swg */
+/* rubydec.swg -*- c -*- */
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-static VALUE _mSWIG = Qnil;
-static VALUE _cSWIG_Pointer = Qnil;
-
-/* Initialize Ruby runtime support */
-SWIGRUNTIME(void)
-SWIG_Ruby_InitRuntime(void)
-{
-    if (_mSWIG == Qnil) {
-        _mSWIG = rb_define_module("SWIG");
-    }
-}
-
-/* Define Ruby class for C type */
-SWIGRUNTIME(void)
-SWIG_Ruby_define_class(swig_type_info *type)
-{
-    VALUE klass;
-    char *klass_name = (char *) malloc(4 + strlen(type->name) + 1);
-    sprintf(klass_name, "TYPE%s", type->name);
-    if (NIL_P(_cSWIG_Pointer)) {
-	_cSWIG_Pointer = rb_define_class_under(_mSWIG, "Pointer", rb_cObject);
-	rb_undef_method(CLASS_OF(_cSWIG_Pointer), "new");
-    }
-    klass = rb_define_class_under(_mSWIG, klass_name, _cSWIG_Pointer);
-    free((void *) klass_name);
-}
-
-/* Create a new pointer object */
-SWIGRUNTIME(VALUE)
-SWIG_Ruby_NewPointerObj(void *ptr, swig_type_info *type, int own)
-{
-    char *klass_name;
-    swig_class *sklass;
-    VALUE klass;
-    VALUE obj;
-    
-    if (!ptr)
-	return Qnil;
-    
-    if (type->clientdata) {
-      sklass = (swig_class *) type->clientdata;
-      obj = Data_Wrap_Struct(sklass->klass, VOIDFUNC(sklass->mark), (own ? VOIDFUNC(sklass->destroy) : 0), ptr);
-    } else {
-      klass_name = (char *) malloc(4 + strlen(type->name) + 1);
-      sprintf(klass_name, "TYPE%s", type->name);
-      klass = rb_const_get(_mSWIG, rb_intern(klass_name));
-      free((void *) klass_name);
-      obj = Data_Wrap_Struct(klass, 0, 0, ptr);
-    }
-    rb_iv_set(obj, "__swigtype__", rb_str_new2(type->name));
-    return obj;
-}
-
-/* Create a new class instance (always owned) */
-SWIGRUNTIME(VALUE)
-SWIG_Ruby_NewClassInstance(VALUE klass, swig_type_info *type)
-{
-    VALUE obj;
-    swig_class *sklass = (swig_class *) type->clientdata;
-    obj = Data_Wrap_Struct(klass, VOIDFUNC(sklass->mark), VOIDFUNC(sklass->destroy), 0);
-    rb_iv_set(obj, "__swigtype__", rb_str_new2(type->name));
-    return obj;
-}
-
-/* Get type mangle from class name */
-SWIGRUNTIME(char *)
-SWIG_Ruby_MangleStr(VALUE obj)
-{
-  VALUE stype = rb_iv_get(obj, "__swigtype__");
-  return StringValuePtr(stype);
-}
-
-/* Convert a pointer value */
-SWIGRUNTIME(int)
-SWIG_Ruby_ConvertPtr(VALUE obj, void **ptr, swig_type_info *ty, int flags)
-{
-  char *c;
-  swig_type_info *tc;
-
-  /* Grab the pointer */
-  if (NIL_P(obj)) {
-    *ptr = 0;
-    return 0;
-  } else {
-    Data_Get_Struct(obj, void, *ptr);
-  }
-  
-  /* Do type-checking if type info was provided */
-  if (ty) {
-    if (ty->clientdata) {
-        if (rb_obj_is_kind_of(obj, ((swig_class *) (ty->clientdata))->klass)) {
-          if (*ptr == 0)
-            rb_raise(rb_eRuntimeError, "This %s already released", ty->str);
-          return 0;
-        }
-    }
-    if ((c = SWIG_MangleStr(obj)) == NULL) {
-      if (flags & SWIG_POINTER_EXCEPTION)
-        rb_raise(rb_eTypeError, "Expected %s", ty->str);
-      else
-        return -1;
-    }
-    tc = SWIG_TypeCheck(c, ty);
-    if (!tc) {
-      if (flags & SWIG_POINTER_EXCEPTION)
-        rb_raise(rb_eTypeError, "Expected %s", ty->str);
-      else
-        return -1;
-    }
-    *ptr = SWIG_TypeCast(tc, *ptr);
-  }
-  return 0;
-}
-
-/* Convert a pointer value, signal an exception on a type mismatch */
-SWIGRUNTIME(void *)
-SWIG_Ruby_MustGetPtr(VALUE obj, swig_type_info *ty, int argnum, int flags)
-{
-  void *result;
-  SWIG_ConvertPtr(obj, &result, ty, flags | SWIG_POINTER_EXCEPTION);
-  return result;
-}
-
-/* Check convert */
-SWIGRUNTIME(int)
-SWIG_Ruby_CheckConvert(VALUE obj, swig_type_info *ty)
-{
-  char *c = SWIG_MangleStr(obj);
-  if (!c)
-    return 0;
-  return SWIG_TypeCheck(c,ty) != 0;
-}
-
-SWIGRUNTIME(VALUE)
-SWIG_Ruby_NewPackedObj(void *ptr, int sz, swig_type_info *type) {
-  char result[1024];
-  char *r = result;
-  if ((2*sz + 1 + strlen(type->name)) > 1000) return 0;
-  *(r++) = '_';
-  r = SWIG_PackData(r, ptr, sz);
-  strcpy(r, type->name);
-  return rb_str_new2(result);
-}
-
-/* Convert a packed value value */
-SWIGRUNTIME(void)
-SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_type_info *ty, int flags) {
-  swig_type_info *tc;
-  char  *c;
-
-  if (TYPE(obj) != T_STRING) goto type_error;
-  c = StringValuePtr(obj);
-  /* Pointer values must start with leading underscore */
-  if (*c != '_') goto type_error;
-  c++;
-  c = SWIG_UnpackData(c, ptr, sz);
-  if (ty) {
-    tc = SWIG_TypeCheck(c, ty);
-    if (!tc) goto type_error;
-  }
-  return;
-
-type_error:
-
-  if (flags) {
-    if (ty) {
-      rb_raise(rb_eTypeError, "Type error. Expected %s", ty->name);
-    } else {
-      rb_raise(rb_eTypeError, "Expected a pointer");
-    }
-  }
-}
+SWIGIMPORT(void)   SWIG_Ruby_InitRuntime(void);
+SWIGIMPORT(void)   SWIG_Ruby_define_class(swig_type_info *);
+SWIGIMPORT(VALUE)  SWIG_Ruby_NewPointerObj(void *, swig_type_info *, int);
+SWIGIMPORT(VALUE)  SWIG_Ruby_NewClassInstance(VALUE, swig_type_info *);
+SWIGIMPORT(char *) SWIG_Ruby_MangleStr(VALUE);
+SWIGIMPORT(int)    SWIG_Ruby_ConvertPtr(VALUE, void**, swig_type_info *, int);
+SWIGIMPORT(void *) SWIG_Ruby_MustGetPtr(VALUE, swig_type_info *, int, int);
+SWIGIMPORT(int)    SWIG_Ruby_CheckConvert(VALUE, swig_type_info *);
+SWIGIMPORT(VALUE)  SWIG_Ruby_NewPackedObj(void *ptr, int sz, swig_type_info *type);
+SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_type_info *ty, int flags);
 
 #ifdef __cplusplus
 }
 #endif
 
 
-
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_wxWindow swig_types[0] 
+#define  SWIGTYPE_p_wxIdleEvent swig_types[0] 
 static swig_type_info *swig_types[2];
 
 /* -------- TYPES TABLE (END) -------- */
 
-#define SWIG_init    Init_wx
-#define SWIG_name    "Wx"
+#define SWIG_init    Init_wxIdleEvent
+#define SWIG_name    "WxIdleEvent"
 
-VALUE mWx;
+static VALUE alive = Qnil;
+
+static VALUE mWxIdleEvent;
+   extern VALUE mWx;
 
 #  undef GetClassName
 #  undef GetClassInfo
@@ -652,28 +490,9 @@ bool GcIsDeleted(void *);
 #include <wx/datetime.h>
 
 
-#include <wx/hashmap.h>
-
-WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
-WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
-
-static GcHashMap GcHash;
-static DeletedHashMap DeletedHash;
-
-void GcMarkDeleted(void *ptr)
-{
-	DeletedHash[ptr] = true;
-}
-
-bool GcIsDeleted(void *ptr)
-{
-	if (DeletedHash.find(ptr) == DeletedHash.end())
-		return false;
-	else return true;
-}
-
-
-
+extern swig_class cWxEvent;
+swig_class cWxIdleEvent;
+static void free_wxIdleEvent(wxIdleEvent *);
 /***********************************************************************
  * director.swg
  *
@@ -780,10 +599,21 @@ namespace Swig {
     public:
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
+
+    printf("IdleEvent.cpp" " new Director %p\n", this);
+    if(alive == Qnil)
+    {
+        rb_global_variable(&alive);
+        alive = rb_hash_new();
+    }
+    rb_hash_aset(alive, INT2NUM((int)this), self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
+
+    printf("IdleEvent.cpp" " ~Director %p\n", this);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -838,7 +668,7 @@ namespace Swig {
       }
   };
 
-  bool Swig::Director::swig_up = false;
+//  bool Swig::Director::swig_up = false;
 
 #ifdef __PTHREAD__
   MUTEX_INIT(Swig::Director::swig_mutex_up);
@@ -857,56 +687,81 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "wx.h"
+#include "IdleEvent.h"
+
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
+static VALUE
+_wrap_wxIdleEvent_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_wxIdleEvent_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxIdleEvent);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
 
 static VALUE
-_wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
-    wxString *arg1 = 0 ;
-    wxString const &arg2_defvalue = "Message" ;
-    wxString *arg2 = (wxString *) &arg2_defvalue ;
-    int arg3 = (int) wxOK ;
-    wxWindow *arg4 = (wxWindow *) NULL ;
-    int arg5 = (int) -1 ;
-    int arg6 = (int) -1 ;
-    int result;
+_wrap_new_wxIdleEvent(int argc, VALUE *argv, VALUE self) {
+    wxIdleEvent *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (wxIdleEvent *)new wxIdleEvent();
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_wxIdleEvent_RequestMore(int argc, VALUE *argv, VALUE self) {
+    wxIdleEvent *arg1 = (wxIdleEvent *) 0 ;
+    bool arg2 = (bool) true ;
+    
+    if ((argc < 0) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIdleEvent, 1);
+    if (argc > 0) {
+        arg2 = RTEST(argv[0]);
+    }
+    (arg1)->RequestMore(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxIdleEvent_MoreRequested(int argc, VALUE *argv, VALUE self) {
+    wxIdleEvent *arg1 = (wxIdleEvent *) 0 ;
+    bool result;
     VALUE vresult = Qnil;
     
-    if ((argc < 1) || (argc > 6))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    {
-        arg1 = new wxString(STR2CSTR(argv[0]));
-    }
-    if (argc > 1) {
-        {
-            arg2 = new wxString(STR2CSTR(argv[1]));
-        }
-    }
-    if (argc > 2) {
-        arg3 = NUM2INT(argv[2]);
-    }
-    if (argc > 3) {
-        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxWindow, 1);
-    }
-    if (argc > 4) {
-        arg5 = NUM2INT(argv[4]);
-    }
-    if (argc > 5) {
-        arg6 = NUM2INT(argv[5]);
-    }
-    result = (int)wxMessageBox((wxString const &)*arg1,(wxString const &)*arg2,arg3,arg4,arg5,arg6);
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIdleEvent, 1);
+    result = (bool)((wxIdleEvent const *)arg1)->MoreRequested();
     
-    vresult = INT2NUM(result);
+    vresult = result ? Qtrue : Qfalse;
     return vresult;
 }
 
 
+static void
+free_wxIdleEvent(wxIdleEvent *arg1) {
+    delete arg1;
+}
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0},{"_p_wxWindow"},{0}};
+static swig_type_info _swigt__p_wxIdleEvent[] = {{"_p_wxIdleEvent", 0, "wxIdleEvent *", 0},{"_p_wxIdleEvent"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
-_swigt__p_wxWindow, 
+_swigt__p_wxIdleEvent, 
 0
 };
 
@@ -917,11 +772,14 @@ _swigt__p_wxWindow,
 #ifdef __cplusplus
 extern "C"
 #endif
-SWIGEXPORT(void) Init_wx(void) {
+SWIGEXPORT(void) Init_wxIdleEvent(void) {
+static bool initialized;
+if(initialized) return;
+initialized = true;
     int i;
     
     SWIG_InitRuntime();
-    mWx = rb_define_module("Wx");
+mWxIdleEvent = mWx;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
@@ -929,98 +787,16 @@ SWIGEXPORT(void) Init_wx(void) {
     }
     
     
-    
-    
-    extern void InitializeOtherModules();
-    InitializeOtherModules();
-    
-    rb_define_const(mWx,"VERSION_STRING", rb_str_new2("wxRuby-SWIG 0.0.3"));
-    rb_define_module_function(mWx, "message_box", VALUEFUNC(_wrap_wxMessageBox), -1);
-    
-    rb_define_const(mWx,"XXX", INT2NUM(777));
-    printf("Defined XXX = %d\n", NUM2INT(rb_iv_get(mWx, "XXX")));
-    
-}
-
-
-extern "C" void InitializeOtherModules()
-{
-    extern void Init_wxApp();
-    Init_wxApp();
-    extern void Init_wxBitmap();
-    Init_wxBitmap();
-    extern void Init_wxBitmapButton();
-    Init_wxBitmapButton();
-    extern void Init_wxBoxSizer();
-    Init_wxBoxSizer();
-    extern void Init_wxBrush();
-    Init_wxBrush();
-    extern void Init_wxButton();
-    Init_wxButton();
-    extern void Init_wxCalendarCtrl();
-    Init_wxCalendarCtrl();
-    extern void Init_wxCalendarDateAttr();
-    Init_wxCalendarDateAttr();
-    extern void Init_wxCalendarEvent();
-    Init_wxCalendarEvent();
-    extern void Init_wxCaret();
-    Init_wxCaret();
-    extern void Init_wxCheckBox();
-    Init_wxCheckBox();
-    extern void Init_wxChoice();
-    Init_wxChoice();
-    extern void Init_wxCloseEvent();
-    Init_wxCloseEvent();
-    extern void Init_wxCommandEvent();
-    Init_wxCommandEvent();
-    extern void Init_wxControl();
-    Init_wxControl();
-    extern void Init_wxControlWithItems();
-    Init_wxControlWithItems();
-    extern void Init_wxDC();
-    Init_wxDC();
-    extern void Init_wxDialog();
-    Init_wxDialog();
     extern void Init_wxEvent();
     Init_wxEvent();
-    extern void Init_wxEvtHandler();
-    Init_wxEvtHandler();
-    extern void Init_wxFrame();
-    Init_wxFrame();
-    extern void Init_wxGDIObject();
-    Init_wxGDIObject();
-    extern void Init_wxIcon();
-    Init_wxIcon();
-    extern void Init_wxIdleEvent();
-    Init_wxIdleEvent();
-    extern void Init_wxMenu();
-    Init_wxMenu();
-    extern void Init_wxMenuBar();
-    Init_wxMenuBar();
-    extern void Init_wxObject();
-    Init_wxObject();
-    extern void Init_wxPaintDC();
-    Init_wxPaintDC();
-    extern void Init_wxPaintEvent();
-    Init_wxPaintEvent();
-    extern void Init_wxPanel();
-    Init_wxPanel();
-    extern void Init_wxPoint();
-    Init_wxPoint();
-    extern void Init_wxSize();
-    Init_wxSize();
-    extern void Init_wxSizer();
-    Init_wxSizer();
-    extern void Init_wxStaticText();
-    Init_wxStaticText();
-    extern void Init_wxUpdateUIEvent();
-    Init_wxUpdateUIEvent();
-    extern void Init_wxWindow();
-    Init_wxWindow();
-    extern void Init_wxWindowDC();
-    Init_wxWindowDC();
-    extern void Init_wxRubyConstants();
-    Init_wxRubyConstants();
-    extern void Init_wxFunctions();
-    Init_wxFunctions();
+    //extern swig_class cWxEvent;
+    cWxIdleEvent.klass = rb_define_class_under(mWxIdleEvent, "IdleEvent", cWxEvent.klass);
+    SWIG_TypeClientData(SWIGTYPE_p_wxIdleEvent, (void *) &cWxIdleEvent);
+    rb_define_alloc_func(cWxIdleEvent.klass, _wrap_wxIdleEvent_allocate);
+    rb_define_method(cWxIdleEvent.klass, "initialize", VALUEFUNC(_wrap_new_wxIdleEvent), -1);
+    rb_define_method(cWxIdleEvent.klass, "request_more", VALUEFUNC(_wrap_wxIdleEvent_RequestMore), -1);
+    rb_define_method(cWxIdleEvent.klass, "more_requested", VALUEFUNC(_wrap_wxIdleEvent_MoreRequested), -1);
+    cWxIdleEvent.mark = 0;
+    cWxIdleEvent.destroy = (void (*)(void *)) free_wxIdleEvent;
 }
+
