@@ -1,3 +1,15 @@
+2003-11-17 19:25  kbs
+	* Made droptarget an ABSTRACT class for MSWin compatibility
+
+	* Updated wxpp.rb to support that
+
+
+2003-11-16 kbs
+	* Added drag and drop classes submitted by Gergely Kontra
+
+	* Added ABSTRACT feature to wxpp.rb
+
+
 2003-11-10 21:00  kbs
 	* Fixed extconf.rb that I broke a couple weeks ago
 
