@@ -557,6 +557,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -823,13 +824,16 @@ mWxRubyStockObjects = mWx;
     rb_define_const(mWxRubyStockObjects,"GREEN", SWIG_NewPointerObj((void *) wxGREEN, SWIGTYPE_p_wxColour,0));
     rb_define_const(mWxRubyStockObjects,"CYAN", SWIG_NewPointerObj((void *) wxCYAN, SWIGTYPE_p_wxColour,0));
     rb_define_const(mWxRubyStockObjects,"LIGHT_GREY", SWIG_NewPointerObj((void *) wxLIGHT_GREY, SWIGTYPE_p_wxColour,0));
-    rb_define_const(mWxRubyStockObjects,"NullBitmap", SWIG_NewPointerObj((void *) &wxNullBitmap, SWIGTYPE_p_wxBitmap, 0));
-    rb_define_const(mWxRubyStockObjects,"NullIcon", SWIG_NewPointerObj((void *) &wxNullIcon, SWIGTYPE_p_wxIcon, 0));
-    rb_define_const(mWxRubyStockObjects,"NullCursor", SWIG_NewPointerObj((void *) &wxNullCursor, SWIGTYPE_p_wxCursor, 0));
-    rb_define_const(mWxRubyStockObjects,"NullPen", SWIG_NewPointerObj((void *) &wxNullPen, SWIGTYPE_p_wxPen, 0));
-    rb_define_const(mWxRubyStockObjects,"NullBrush", SWIG_NewPointerObj((void *) &wxNullBrush, SWIGTYPE_p_wxBrush, 0));
-    rb_define_const(mWxRubyStockObjects,"NullPalette", SWIG_NewPointerObj((void *) &wxNullPalette, SWIGTYPE_p_wxPalette, 0));
-    rb_define_const(mWxRubyStockObjects,"NullFont", SWIG_NewPointerObj((void *) &wxNullFont, SWIGTYPE_p_wxFont, 0));
-    rb_define_const(mWxRubyStockObjects,"NullColour", SWIG_NewPointerObj((void *) &wxNullColour, SWIGTYPE_p_wxColour, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_BITMAP", SWIG_NewPointerObj((void *) &wxNullBitmap, SWIGTYPE_p_wxBitmap, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_ICON", SWIG_NewPointerObj((void *) &wxNullIcon, SWIGTYPE_p_wxIcon, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_CURSOR", SWIG_NewPointerObj((void *) &wxNullCursor, SWIGTYPE_p_wxCursor, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_PEN", SWIG_NewPointerObj((void *) &wxNullPen, SWIGTYPE_p_wxPen, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_BRUSH", SWIG_NewPointerObj((void *) &wxNullBrush, SWIGTYPE_p_wxBrush, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_PALETTE", SWIG_NewPointerObj((void *) &wxNullPalette, SWIGTYPE_p_wxPalette, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_FONT", SWIG_NewPointerObj((void *) &wxNullFont, SWIGTYPE_p_wxFont, 0));
+    rb_define_const(mWxRubyStockObjects,"NULL_COLOUR", SWIG_NewPointerObj((void *) &wxNullColour, SWIGTYPE_p_wxColour, 0));
+    rb_define_const(mWxRubyStockObjects,"STANDARD_CURSOR", SWIG_NewPointerObj((void *) wxSTANDARD_CURSOR, SWIGTYPE_p_wxCursor,0));
+    rb_define_const(mWxRubyStockObjects,"HOURGLASS_CURSOR", SWIG_NewPointerObj((void *) wxHOURGLASS_CURSOR, SWIGTYPE_p_wxCursor,0));
+    rb_define_const(mWxRubyStockObjects,"CROSS_CURSOR", SWIG_NewPointerObj((void *) wxCROSS_CURSOR, SWIGTYPE_p_wxCursor,0));
 }
 

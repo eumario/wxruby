@@ -11,7 +11,7 @@ public:
    wxStaticBitmap() ;
    wxStaticBitmap(wxWindow*  parent , wxWindowID  id , const wxBitmap&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBitmap") ;
   bool Create(wxWindow*  parent , wxWindowID  id , const wxBitmap&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBitmap") ;
-  wxBitmap& GetBitmap() const;
+  wxBitmap GetBitmap() const;
   virtual void SetBitmap(const wxBitmap&   label ) ;
 };
 

@@ -6,6 +6,8 @@
 %{
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
+#include <wx/notebook.h>
+#include <wx/spinbutt.h>
 %}
 
 %module(directors="1") wxEvtHandler
@@ -15,11 +17,11 @@
 
 %include "include/wxEvtHandler.h"
 
-%{
-    static VALUE callbacks = Qnil;
-%}
 
 %{
+
+
+static VALUE callbacks = Qnil;
 extern swig_class cWxEvent;
 extern swig_class cWxCalendarEvent;
 extern swig_class cWxCloseEvent;
@@ -33,6 +35,7 @@ extern swig_class cWxFindDialogEvent;
 extern swig_class cWxMouseEvent;
 extern swig_class cWxFocusEvent;
 extern swig_class cWxSpinEvent;
+extern swig_class cWxNotebookEvent;
 
 static const wxEventType *calendarEvents[] = 
 {
@@ -153,6 +156,14 @@ static const wxEventType *spinEvents[] =
     (const wxEventType *)0
 };
 
+static const wxEventType *notebookEvents[] = 
+{
+     &wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,
+     &wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING,
+     (const wxEventType *)0
+};
+
+
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
 class wxRbCallback : public wxObject 
@@ -167,30 +178,33 @@ public:
         VALUE cEvent = Qnil;
         
         int type = event.GetEventType();
-        if(IsEventInMap(type, calendarEvents))
+        if(event.IsKindOf(CLASSINFO(wxCalendarEvent)))
             cEvent = cWxCalendarEvent.klass;
-        else if(IsEventInMap(type, closeEvents))
-            cEvent = cWxCloseEvent.klass;
-        else if(IsEventInMap(type, commandEvents))
-            cEvent = cWxCommandEvent.klass;
-        else if(IsEventInMap(type, idleEvents))
-            cEvent = cWxIdleEvent.klass;
-        else if(IsEventInMap(type, paintEvents))
-            cEvent = cWxPaintEvent.klass;
-        else if(IsEventInMap(type, updateUIEvents))
+        else if (event.IsKindOf(CLASSINFO(wxNotebookEvent)))
+            cEvent = cWxNotebookEvent.klass;
+       else if(event.IsKindOf(CLASSINFO(wxUpdateUIEvent)))
             cEvent = cWxUpdateUIEvent.klass;
-        else if(IsEventInMap(type, sizeEvents))
+        else if(event.IsKindOf(CLASSINFO(wxSizeEvent)))
             cEvent = cWxSizeEvent.klass;
-        else if(IsEventInMap(type, keyEvents))
+        else if(event.IsKindOf(CLASSINFO(wxKeyEvent)))
             cEvent = cWxKeyEvent.klass;
-        else if(IsEventInMap(type, findEvents))
+        else if(event.IsKindOf(CLASSINFO(wxFindDialogEvent)))
             cEvent = cWxFindDialogEvent.klass;            
-        else if(IsEventInMap(type, focusEvents))
+        else if(event.IsKindOf(CLASSINFO(wxFocusEvent)))
             cEvent = cWxFocusEvent.klass;
-        else if(IsEventInMap(type, mouseEvents))
+        else if(event.IsKindOf(CLASSINFO(wxMouseEvent)))
             cEvent = cWxMouseEvent.klass;            
-        else if(IsEventInMap(type, spinEvents))
+        else if(event.IsKindOf(CLASSINFO(wxSpinEvent)))
             cEvent = cWxSpinEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxCloseEvent)))
+            cEvent = cWxCloseEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxIdleEvent)))
+            cEvent = cWxIdleEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxPaintEvent)))
+            cEvent = cWxPaintEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
+            cEvent = cWxCommandEvent.klass;
+ 
         else
         {
             cEvent = cWxEvent.klass;
@@ -217,6 +231,40 @@ public:
 };
 
 
+void internal_connect(VALUE self, int firstId, int lastId, 
+                wxEventType eventType)
+{
+    
+    wxEvtHandler *cppSelf = (wxEvtHandler *) 0 ;
+    SWIG_ConvertPtr(self, (void **) &cppSelf, SWIGTYPE_p_wxEvtHandler, 1);
+
+    VALUE func = rb_funcall(rb_cProc, rb_intern("new"), 0);
+    rb_global_variable(&callbacks);
+    if(callbacks == Qnil)
+        callbacks = rb_ary_new();
+    rb_ary_push(callbacks, func);
+
+    wxObject* userData = new wxRbCallback(func);
+    wxObjectEventFunction function = 
+        (wxObjectEventFunction )&wxRbCallback::EventThunker;
+    (cppSelf)->Connect(firstId, lastId, eventType, function, userData);
+}
+
+%}
+
+%init %{
+extern void Init_WxRubyEvents();
+
+Init_WxRubyEvents();
+%}
+
+
+#if 0
+%{
+    static VALUE callbacks = Qnil;
+%}
+
+%{
 static void internal_connect(VALUE self, int firstId, int lastId, 
                 wxEventType eventType)
 {
@@ -518,6 +566,63 @@ static VALUE evt_spin_down(int argc, VALUE *argv, VALUE self)
     return internal_evt_with_id(argc, argv, self, wxEVT_SCROLL_LINEDOWN);
 }
 
+static VALUE evt_notebook_page_changing(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING);
+}
+
+static VALUE evt_notebook_page_changed(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED);
+}
+
+static VALUE evt_listbox(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_LISTBOX_SELECTED);
+}
+
+static VALUE evt_listbox_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_LISTBOX_DOUBLECLICKED);
+}
+
+static VALUE evt_checkbox(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_CHECKBOX_CLICKED);
+}
+
+static VALUE evt_text(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TEXT_UPDATED);
+}
+
+static VALUE evt_text_enter(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TEXT_ENTER);
+}
+
+static VALUE evt_text_maxlen(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TEXT_MAXLEN);
+}
+
+#ifdef __WXMSW__
+static VALUE evt_text_url(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TEXT_URL);
+}
+#endif
+
+static VALUE evt_radiobox(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_RADIOBOX_SELECTED);
+}
+
+static VALUE evt_radiobutton(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_RADIOBUTTON_SELECTED);
+}
+
 
 
 %}
@@ -576,7 +681,27 @@ static VALUE evt_spin_down(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_spin", VALUEFUNC(evt_spin), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_spin_up", VALUEFUNC(evt_spin_up), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_spin_down", VALUEFUNC(evt_spin_down), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changing", VALUEFUNC(evt_notebook_page_changing), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changed", VALUEFUNC(evt_notebook_page_changed), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_listbox", VALUEFUNC(evt_listbox), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_listbox_dclick", VALUEFUNC(evt_listbox_dclick), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_checkbox", VALUEFUNC(evt_checkbox), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_text", VALUEFUNC(evt_text), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_text_enter", VALUEFUNC(evt_text_enter), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_text_maxlen", VALUEFUNC(evt_text_maxlen), -1);        
+#ifdef __WXMSW__
+    rb_define_method(cWxEvtHandler.klass, "evt_text_url", VALUEFUNC(evt_text_url), -1);        
+#endif
+    rb_define_method(cWxEvtHandler.klass, "evt_radiobox", VALUEFUNC(evt_radiobox), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_radiobutton", VALUEFUNC(evt_radiobutton), -1);        
+
+
+
+
+
+
+
 %}
 
-
+#endif
 

@@ -557,6 +557,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -1342,7 +1343,7 @@ mWxCaret = mWx;
     rb_define_alloc_func(cWxCaret.klass, _wrap_wxCaret_allocate);
     rb_define_method(cWxCaret.klass, "initialize", VALUEFUNC(_wrap_new_wxCaret), -1);
     rb_define_method(cWxCaret.klass, "create", VALUEFUNC(_wrap_wxCaret_Create), -1);
-    rb_define_singleton_method(cWxCaret.klass, "GetBlinkTime", VALUEFUNC(_wrap_wxCaret_GetBlinkTime), -1);
+    rb_define_singleton_method(cWxCaret.klass, "get_blink_time", VALUEFUNC(_wrap_wxCaret_GetBlinkTime), -1);
     rb_define_method(cWxCaret.klass, "get_position", VALUEFUNC(_wrap_wxCaret_GetPosition), -1);
     rb_define_method(cWxCaret.klass, "get_size", VALUEFUNC(_wrap_wxCaret_GetSize), -1);
     rb_define_method(cWxCaret.klass, "get_window", VALUEFUNC(_wrap_wxCaret_GetWindow), -1);
@@ -1351,7 +1352,7 @@ mWxCaret = mWx;
     rb_define_method(cWxCaret.klass, "is_visible", VALUEFUNC(_wrap_wxCaret_IsVisible), -1);
     rb_define_method(cWxCaret.klass, "move_xy", VALUEFUNC(_wrap_wxCaret_MoveXy), -1);
     rb_define_method(cWxCaret.klass, "move", VALUEFUNC(_wrap_wxCaret_Move), -1);
-    rb_define_singleton_method(cWxCaret.klass, "SetBlinkTime", VALUEFUNC(_wrap_wxCaret_SetBlinkTime), -1);
+    rb_define_singleton_method(cWxCaret.klass, "set_blink_time", VALUEFUNC(_wrap_wxCaret_SetBlinkTime), -1);
     rb_define_method(cWxCaret.klass, "set_size", VALUEFUNC(_wrap_wxCaret_SetSize), -1);
     rb_define_method(cWxCaret.klass, "show", VALUEFUNC(_wrap_wxCaret_Show), -1);
     cWxCaret.mark = 0;

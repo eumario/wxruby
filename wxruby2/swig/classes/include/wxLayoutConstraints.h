@@ -9,6 +9,8 @@ class wxLayoutConstraints : public wxObject
 {
 public:
    wxLayoutConstraints() ;
+  // the following were missing from the xml
+  wxIndividualLayoutConstraint bottom,height,left,right,top,width;
 };
 
 

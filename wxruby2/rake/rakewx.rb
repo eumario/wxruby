@@ -46,7 +46,7 @@ end
 def all_obj_bases
     return get_classes + 
         ["wx", "RubyConstants", "RubyStockObjects", 
-            "RubyEventTypes", "Functions","Mac"]
+            "RubyEventTypes", "Functions","Mac","Events"]
 end
 
 def special_swig_file(base_name)
@@ -156,6 +156,18 @@ def create_normal_swig_task(base_name)
     end
 end
 
+def create_swig_event_task(base_name)
+    cpp_file = cpp_file(base_name)
+    swig_file = special_swig_file(base_name)
+    
+    file(cpp_file => swig_file) do |t|
+        do_swig(swig_file, cpp_file, $swig_options)
+        post_process(cpp_file, "fixmodule.rb")
+        post_process(cpp_file, "fixevents.rb")
+    end
+    return cpp_file
+end
+
 def create_swig_main_task(base_name)
     cpp_file = cpp_file(base_name)
     swig_file = special_swig_file(base_name)
@@ -176,6 +188,7 @@ def create_swig_tasks
     create_swig_helper_task("RubyEventTypes")
     create_swig_helper_task("Functions")
     create_swig_helper_task("Mac")
+    create_swig_event_task("Events")
     create_swig_main_task("wx")
     file(cpp_file("wx") => normal_cpp_files)
 end

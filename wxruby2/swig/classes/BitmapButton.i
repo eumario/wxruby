@@ -5,8 +5,7 @@
 
 %module(directors="1") wxBitmapButton
 
-#%feature("freefunc") wxBitmapButton "GcFreefunc";
-GC_NEVER(wxBitmapButton)
+%ignore wxBitmapButton::wxBitmapButton();
 
 %include "include/wxBitmapButton.h"
 

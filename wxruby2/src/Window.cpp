@@ -570,6 +570,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -1112,7 +1113,7 @@ void SwigDirector_wxWindow::SetSize(int x, int y, int width, int height, int siz
     obj2 = INT2NUM(width);
     obj3 = INT2NUM(height);
     obj4 = INT2NUM(sizeFlags);
-    result = rb_funcall(swig_get_self(), rb_intern("set_size"), 5,obj0,obj1,obj2,obj3,obj4);
+    result = rb_funcall(swig_get_self(), rb_intern("set_dimensions"), 5,obj0,obj1,obj2,obj3,obj4);
 }
 
 
@@ -4627,7 +4628,7 @@ _wrap_wxWindow_SetScrollPos(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxWindow_SetSize__SWIG_0(int argc, VALUE *argv, VALUE self) {
+_wrap_wxWindow_SetDimensions(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
     int arg2 ;
     int arg3 ;
@@ -4655,7 +4656,7 @@ _wrap_wxWindow_SetSize__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxWindow_SetSize__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxWindow_SetSize__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
     wxRect *arg2 = 0 ;
     Swig::Director *director = 0;
@@ -4673,7 +4674,7 @@ _wrap_wxWindow_SetSize__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxWindow_SetSize__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_wxWindow_SetSize__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
     int arg2 ;
     int arg3 ;
@@ -4693,7 +4694,7 @@ _wrap_wxWindow_SetSize__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxWindow_SetSize__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_wxWindow_SetSize__SWIG_2(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
     wxSize *arg2 = 0 ;
     Swig::Director *director = 0;
@@ -4712,12 +4713,12 @@ _wrap_wxWindow_SetSize__SWIG_3(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_wxWindow_SetSize(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[7];
+    VALUE argv[4];
     int ii;
     
     argc = nargs + 1;
     argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 6); ii++) {
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
         argv[ii] = args[ii-1];
     }
     if (argc == 2) {
@@ -4732,7 +4733,7 @@ static VALUE _wrap_wxWindow_SetSize(int nargs, VALUE *args, VALUE self) {
                 _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxRect, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_wxWindow_SetSize__SWIG_1(nargs, args, self);
+                return _wrap_wxWindow_SetSize__SWIG_0(nargs, args, self);
             }
         }
     }
@@ -4748,7 +4749,7 @@ static VALUE _wrap_wxWindow_SetSize(int nargs, VALUE *args, VALUE self) {
                 _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_wxWindow_SetSize__SWIG_3(nargs, args, self);
+                return _wrap_wxWindow_SetSize__SWIG_2(nargs, args, self);
             }
         }
     }
@@ -4767,45 +4768,7 @@ static VALUE _wrap_wxWindow_SetSize(int nargs, VALUE *args, VALUE self) {
                     _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_wxWindow_SetSize__SWIG_2(nargs, args, self);
-                }
-            }
-        }
-    }
-    if ((argc >= 5) && (argc <= 6)) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        {
-                            _v = ((TYPE(argv[4]) == T_FIXNUM) || (TYPE(argv[4]) == T_BIGNUM)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            if (argc <= 5) {
-                                return _wrap_wxWindow_SetSize__SWIG_0(nargs, args, self);
-                            }
-                            {
-                                _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
-                            }
-                            if (_v) {
-                                return _wrap_wxWindow_SetSize__SWIG_0(nargs, args, self);
-                            }
-                        }
-                    }
+                    return _wrap_wxWindow_SetSize__SWIG_1(nargs, args, self);
                 }
             }
         }
@@ -5431,11 +5394,11 @@ mWxWindow = mWx;
     rb_define_method(cWxWindow.klass, "destroy_children", VALUEFUNC(_wrap_wxWindow_DestroyChildren), -1);
     rb_define_method(cWxWindow.klass, "disable", VALUEFUNC(_wrap_wxWindow_Disable), -1);
     rb_define_method(cWxWindow.klass, "enable", VALUEFUNC(_wrap_wxWindow_Enable), -1);
-    rb_define_singleton_method(cWxWindow.klass, "FindFocus", VALUEFUNC(_wrap_wxWindow_FindFocus), -1);
+    rb_define_singleton_method(cWxWindow.klass, "find_focus", VALUEFUNC(_wrap_wxWindow_FindFocus), -1);
     rb_define_method(cWxWindow.klass, "find_window", VALUEFUNC(_wrap_wxWindow_FindWindow), -1);
-    rb_define_singleton_method(cWxWindow.klass, "FindWindowById", VALUEFUNC(_wrap_wxWindow_FindWindowById), -1);
-    rb_define_singleton_method(cWxWindow.klass, "FindWindowByName", VALUEFUNC(_wrap_wxWindow_FindWindowByName), -1);
-    rb_define_singleton_method(cWxWindow.klass, "FindWindowByLabel", VALUEFUNC(_wrap_wxWindow_FindWindowByLabel), -1);
+    rb_define_singleton_method(cWxWindow.klass, "find_window_by_id", VALUEFUNC(_wrap_wxWindow_FindWindowById), -1);
+    rb_define_singleton_method(cWxWindow.klass, "find_window_by_name", VALUEFUNC(_wrap_wxWindow_FindWindowByName), -1);
+    rb_define_singleton_method(cWxWindow.klass, "find_window_by_label", VALUEFUNC(_wrap_wxWindow_FindWindowByLabel), -1);
     rb_define_method(cWxWindow.klass, "fit", VALUEFUNC(_wrap_wxWindow_Fit), -1);
     rb_define_method(cWxWindow.klass, "fit_inside", VALUEFUNC(_wrap_wxWindow_FitInside), -1);
     rb_define_method(cWxWindow.klass, "freeze", VALUEFUNC(_wrap_wxWindow_Freeze), -1);
@@ -5443,7 +5406,7 @@ mWxWindow = mWx;
     rb_define_method(cWxWindow.klass, "get_background_colour", VALUEFUNC(_wrap_wxWindow_GetBackgroundColour), -1);
     rb_define_method(cWxWindow.klass, "get_best_size", VALUEFUNC(_wrap_wxWindow_GetBestSize), -1);
     rb_define_method(cWxWindow.klass, "get_caret", VALUEFUNC(_wrap_wxWindow_GetCaret), -1);
-    rb_define_singleton_method(cWxWindow.klass, "GetCapture", VALUEFUNC(_wrap_wxWindow_GetCapture), -1);
+    rb_define_singleton_method(cWxWindow.klass, "get_capture", VALUEFUNC(_wrap_wxWindow_GetCapture), -1);
     rb_define_method(cWxWindow.klass, "get_char_height", VALUEFUNC(_wrap_wxWindow_GetCharHeight), -1);
     rb_define_method(cWxWindow.klass, "get_char_width", VALUEFUNC(_wrap_wxWindow_GetCharWidth), -1);
     rb_define_method(cWxWindow.klass, "get_client_size", VALUEFUNC(_wrap_wxWindow_GetClientSize), -1);
@@ -5516,6 +5479,7 @@ mWxWindow = mWx;
     rb_define_method(cWxWindow.klass, "set_name", VALUEFUNC(_wrap_wxWindow_SetName), -1);
     rb_define_method(cWxWindow.klass, "set_scrollbar", VALUEFUNC(_wrap_wxWindow_SetScrollbar), -1);
     rb_define_method(cWxWindow.klass, "set_scroll_pos", VALUEFUNC(_wrap_wxWindow_SetScrollPos), -1);
+    rb_define_method(cWxWindow.klass, "set_dimensions", VALUEFUNC(_wrap_wxWindow_SetDimensions), -1);
     rb_define_method(cWxWindow.klass, "set_size", VALUEFUNC(_wrap_wxWindow_SetSize), -1);
     rb_define_method(cWxWindow.klass, "set_size_hints", VALUEFUNC(_wrap_wxWindow_SetSizeHints), -1);
     rb_define_method(cWxWindow.klass, "set_sizer", VALUEFUNC(_wrap_wxWindow_SetSizer), -1);

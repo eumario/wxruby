@@ -514,7 +514,10 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-static swig_type_info *swig_types[1];
+#define  SWIGTYPE_p_wxWindow swig_types[0] 
+#define  SWIGTYPE_p_wxArrayInt swig_types[1] 
+#define  SWIGTYPE_p_wxPoint swig_types[2] 
+static swig_type_info *swig_types[4];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -549,17 +552,30 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
 #include <wx/datetime.h>
 
 
-#include <wx/image.h>
 
-void log_message(VALUE self, VALUE text)
+#include <wx/image.h>
+#include <wx/app.h>
+#include <wx/choicdlg.h>
+
+
+class wxRubyApp
 {
-    wxLogMessage("%s", STR2CSTR(text));
+public:
+	static VALUE app_ptr;
+};
+
+void log_message(int argc, VALUE *argv, VALUE self)
+{
+    VALUE str = rb_f_sprintf(argc, argv);
+    wxLogWarning(StringValuePtr(str));
+
 }
 
 void log_status(int argc, VALUE *argv, VALUE self)
@@ -576,6 +592,38 @@ void log_status(int argc, VALUE *argv, VALUE self)
     }
 
 }
+
+
+static void
+log_warning(int argc, VALUE *argv, VALUE self)
+{
+    VALUE str = rb_f_sprintf(argc, argv);
+    wxLogWarning(StringValuePtr(str));
+}
+
+
+static void
+log_error(int argc, VALUE *argv, VALUE self)
+{
+    VALUE str = rb_f_sprintf(argc, argv);
+    wxLogError(StringValuePtr(str));
+}
+
+
+static VALUE get_app(VALUE self)
+{
+    VALUE ret = wxRubyApp::app_ptr;
+    
+    return ret;
+}
+
+static VALUE
+wx_yield(VALUE self)
+{
+    return (wxYield() ? Qtrue : Qfalse);
+}
+
+
 
 
 
@@ -774,11 +822,438 @@ _wrap_wxInitAllImageHandlers(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_wxBell(int argc, VALUE *argv, VALUE self) {
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    wxBell();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxYield(int argc, VALUE *argv, VALUE self) {
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (bool)wxYield();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetCwd(int argc, VALUE *argv, VALUE self) {
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = wxGetCwd();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetEmailAddress(int argc, VALUE *argv, VALUE self) {
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = wxGetEmailAddress();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetHostName(int argc, VALUE *argv, VALUE self) {
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = wxGetHostName();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetFullHostName(int argc, VALUE *argv, VALUE self) {
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = wxGetFullHostName();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetUserId(int argc, VALUE *argv, VALUE self) {
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = wxGetUserId();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetUserName(int argc, VALUE *argv, VALUE self) {
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = wxGetUserName();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetHomeDir(int argc, VALUE *argv, VALUE self) {
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = wxGetHomeDir();
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSetWorkingDirectory(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]));
+    }
+    wxSetWorkingDirectory((wxString const &)*arg1);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxGetMultipleChoices(int argc, VALUE *argv, VALUE self) {
+    wxArrayInt *arg1 = 0 ;
+    wxString *arg2 = 0 ;
+    wxString *arg3 = 0 ;
+    int arg4 ;
+    wxString *arg5 ;
+    wxWindow *arg6 = (wxWindow *) NULL ;
+    int arg7 = (int) -1 ;
+    int arg8 = (int) -1 ;
+    bool arg9 = (bool) TRUE ;
+    int arg10 = (int) 150 ;
+    int arg11 = (int) 200 ;
+    size_t result;
+    wxArrayInt sel1 ;
+    wxString *arr4 ;
+    VALUE vresult = Qnil;
+    
+    {
+        arg4 = 0;
+        arg5 = NULL;
+    }
+    {
+        arg1 = &sel1;
+    }
+    if ((argc < 2) || (argc > 9))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]));
+    }
+    {
+        arg3 = new wxString(STR2CSTR(argv[1]));
+    }
+    if (argc > 2) {
+        {
+            if ((argv[2] == Qnil) || (TYPE(argv[2]) != T_ARRAY))
+            {
+                arg4 = 0;
+                arg5 = NULL;
+            }
+            else
+            {
+                arr4 = new wxString[RARRAY(argv[2])->len];
+                for (int i = 0; i < RARRAY(argv[2])->len; i++)
+                {
+                    arr4[i] = STR2CSTR(rb_ary_entry(argv[2],i));
+                }
+                arg4 = RARRAY(argv[2])->len;
+                arg5 = arr4;
+            }
+        }
+    }
+    if (argc > 3) {
+        SWIG_ConvertPtr(argv[3], (void **) &arg6, SWIGTYPE_p_wxWindow, 1);
+    }
+    if (argc > 4) {
+        arg7 = NUM2INT(argv[4]);
+    }
+    if (argc > 5) {
+        arg8 = NUM2INT(argv[5]);
+    }
+    if (argc > 6) {
+        arg9 = RTEST(argv[6]);
+    }
+    if (argc > 7) {
+        arg10 = NUM2INT(argv[7]);
+    }
+    if (argc > 8) {
+        arg11 = NUM2INT(argv[8]);
+    }
+    result = wxGetMultipleChoices(*arg1,(wxString const &)*arg2,(wxString const &)*arg3,arg4,(wxString const (*))arg5,arg6,arg7,arg8,arg9,arg10,arg11);
+    
+    vresult = INT2NUM(result);
+    {
+        vresult = rb_ary_new();
+        for (int i = 0; i < arg1->GetCount(); i++)
+        rb_ary_push(vresult,INT2NUM((*arg1)[i]));
+    }
+    {
+        if (arg5 != NULL) delete [] arg5;
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetNumberFromUser(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxString *arg2 = 0 ;
+    wxString *arg3 = 0 ;
+    long arg4 ;
+    long arg5 = (long) 0 ;
+    long arg6 = (long) 100 ;
+    wxWindow *arg7 = (wxWindow *) NULL ;
+    wxPoint const &arg8_defvalue = wxDefaultPosition ;
+    wxPoint *arg8 = (wxPoint *) &arg8_defvalue ;
+    long result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 4) || (argc > 8))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]));
+    }
+    {
+        arg2 = new wxString(STR2CSTR(argv[1]));
+    }
+    {
+        arg3 = new wxString(STR2CSTR(argv[2]));
+    }
+    arg4 = NUM2LONG(argv[3]);
+    if (argc > 4) {
+        arg5 = NUM2LONG(argv[4]);
+    }
+    if (argc > 5) {
+        arg6 = NUM2LONG(argv[5]);
+    }
+    if (argc > 6) {
+        SWIG_ConvertPtr(argv[6], (void **) &arg7, SWIGTYPE_p_wxWindow, 1);
+    }
+    if (argc > 7) {
+        SWIG_ConvertPtr(argv[7], (void **) &arg8, SWIGTYPE_p_wxPoint, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    result = (long)wxGetNumberFromUser((wxString const &)*arg1,(wxString const &)*arg2,(wxString const &)*arg3,arg4,arg5,arg6,arg7,(wxPoint const &)*arg8);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetTextFromUser(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxString const &arg2_defvalue = "Input text" ;
+    wxString *arg2 = (wxString *) &arg2_defvalue ;
+    wxString const &arg3_defvalue = "" ;
+    wxString *arg3 = (wxString *) &arg3_defvalue ;
+    wxWindow *arg4 = (wxWindow *) NULL ;
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]));
+    }
+    if (argc > 1) {
+        {
+            arg2 = new wxString(STR2CSTR(argv[1]));
+        }
+    }
+    if (argc > 2) {
+        {
+            arg3 = new wxString(STR2CSTR(argv[2]));
+        }
+    }
+    if (argc > 3) {
+        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxWindow, 1);
+    }
+    result = wxGetTextFromUser((wxString const &)*arg1,(wxString const &)*arg2,(wxString const &)*arg3,arg4);
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxGetPasswordFromUser(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxString const &arg2_defvalue = "Input text" ;
+    wxString *arg2 = (wxString *) &arg2_defvalue ;
+    wxString const &arg3_defvalue = "" ;
+    wxString *arg3 = (wxString *) &arg3_defvalue ;
+    wxWindow *arg4 = (wxWindow *) NULL ;
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]));
+    }
+    if (argc > 1) {
+        {
+            arg2 = new wxString(STR2CSTR(argv[1]));
+        }
+    }
+    if (argc > 2) {
+        {
+            arg3 = new wxString(STR2CSTR(argv[2]));
+        }
+    }
+    if (argc > 3) {
+        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxWindow, 1);
+    }
+    result = wxGetPasswordFromUser((wxString const &)*arg1,(wxString const &)*arg2,(wxString const &)*arg3,arg4);
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxFileSelector(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxString const &arg2_defvalue = "" ;
+    wxString *arg2 = (wxString *) &arg2_defvalue ;
+    wxString const &arg3_defvalue = "" ;
+    wxString *arg3 = (wxString *) &arg3_defvalue ;
+    wxString const &arg4_defvalue = "" ;
+    wxString *arg4 = (wxString *) &arg4_defvalue ;
+    wxString const &arg5_defvalue = "*.*" ;
+    wxString *arg5 = (wxString *) &arg5_defvalue ;
+    int arg6 = (int) 0 ;
+    wxWindow *arg7 = (wxWindow *) 0 ;
+    int arg8 = (int) -1 ;
+    int arg9 = (int) -1 ;
+    wxString result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 9))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]));
+    }
+    if (argc > 1) {
+        {
+            arg2 = new wxString(STR2CSTR(argv[1]));
+        }
+    }
+    if (argc > 2) {
+        {
+            arg3 = new wxString(STR2CSTR(argv[2]));
+        }
+    }
+    if (argc > 3) {
+        {
+            arg4 = new wxString(STR2CSTR(argv[3]));
+        }
+    }
+    if (argc > 4) {
+        {
+            arg5 = new wxString(STR2CSTR(argv[4]));
+        }
+    }
+    if (argc > 5) {
+        arg6 = NUM2INT(argv[5]);
+    }
+    if (argc > 6) {
+        SWIG_ConvertPtr(argv[6], (void **) &arg7, SWIGTYPE_p_wxWindow, 1);
+    }
+    if (argc > 7) {
+        arg8 = NUM2INT(argv[7]);
+    }
+    if (argc > 8) {
+        arg9 = NUM2INT(argv[8]);
+    }
+    result = wxFileSelector((wxString const &)*arg1,(wxString const &)*arg2,(wxString const &)*arg3,(wxString const &)*arg4,(wxString const &)*arg5,arg6,arg7,arg8,arg9);
+    
+    {
+        vresult = rb_str_new2((&result)->c_str());
+    }
+    return vresult;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxArrayInt[] = {{"_p_wxArrayInt", 0, "wxArrayInt *", 0, 0, 0, 0},{"_p_wxArrayInt", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
+_swigt__p_wxWindow, 
+_swigt__p_wxArrayInt, 
+_swigt__p_wxPoint, 
 0
 };
 
@@ -804,10 +1279,29 @@ mWxFunctions = mWx;
     }
     
     rb_define_module_function(mWxFunctions, "init_all_image_handlers", VALUEFUNC(_wrap_wxInitAllImageHandlers), -1);
+    rb_define_module_function(mWxFunctions, "bell", VALUEFUNC(_wrap_wxBell), -1);
+    rb_define_module_function(mWxFunctions, "yield", VALUEFUNC(_wrap_wxYield), -1);
+    rb_define_module_function(mWxFunctions, "get_cwd", VALUEFUNC(_wrap_wxGetCwd), -1);
+    rb_define_module_function(mWxFunctions, "get_email_address", VALUEFUNC(_wrap_wxGetEmailAddress), -1);
+    rb_define_module_function(mWxFunctions, "get_host_name", VALUEFUNC(_wrap_wxGetHostName), -1);
+    rb_define_module_function(mWxFunctions, "get_full_host_name", VALUEFUNC(_wrap_wxGetFullHostName), -1);
+    rb_define_module_function(mWxFunctions, "get_user_id", VALUEFUNC(_wrap_wxGetUserId), -1);
+    rb_define_module_function(mWxFunctions, "get_user_name", VALUEFUNC(_wrap_wxGetUserName), -1);
+    rb_define_module_function(mWxFunctions, "get_home_dir", VALUEFUNC(_wrap_wxGetHomeDir), -1);
+    rb_define_module_function(mWxFunctions, "set_working_directory", VALUEFUNC(_wrap_wxSetWorkingDirectory), -1);
+    rb_define_module_function(mWxFunctions, "get_multiple_choices", VALUEFUNC(_wrap_wxGetMultipleChoices), -1);
+    rb_define_module_function(mWxFunctions, "get_number_from_user", VALUEFUNC(_wrap_wxGetNumberFromUser), -1);
+    rb_define_module_function(mWxFunctions, "get_text_from_user", VALUEFUNC(_wrap_wxGetTextFromUser), -1);
+    rb_define_module_function(mWxFunctions, "get_password_from_user", VALUEFUNC(_wrap_wxGetPasswordFromUser), -1);
+    rb_define_module_function(mWxFunctions, "file_selector", VALUEFUNC(_wrap_wxFileSelector), -1);
     
     extern VALUE mWx;
-    rb_define_method(mWx, "log_message", VALUEFUNC(log_message), 1);
+    rb_define_method(mWx, "log_message", VALUEFUNC(log_message), -1);
+    rb_define_method(mWx, "log_warning", VALUEFUNC(log_warning), -1);
     rb_define_method(mWx, "log_status", VALUEFUNC(log_status), -1);
+    rb_define_method(mWx, "log_error", VALUEFUNC(log_error), -1);
+    rb_define_method(mWx, "get_app", VALUEFUNC(get_app), 0);
+    
     
     
 }

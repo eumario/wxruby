@@ -6,5 +6,5 @@
 %module(directors="1") wxComboBox
 
 %ignore wxComboBox::wxComboBox();
-
+%rename (SetSelectionRange) SetSelection(long from, long to);
 %include "include/wxComboBox.h"

@@ -556,6 +556,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -847,6 +848,9 @@ _wrap_new_wxChoice(int argc, VALUE *argv, VALUE self) {
         
     }
     DATA_PTR(self) = result;
+    {
+        if (arg7 != NULL) delete [] arg7;
+    }
     return self;
 }
 
@@ -919,6 +923,9 @@ _wrap_wxChoice_Create(int argc, VALUE *argv, VALUE self) {
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10);
     
     vresult = result ? Qtrue : Qfalse;
+    {
+        if (arg7 != NULL) delete [] arg7;
+    }
     return vresult;
 }
 

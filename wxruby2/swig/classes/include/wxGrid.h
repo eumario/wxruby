@@ -217,22 +217,22 @@ public:
   wxPen& GetDividerPen() const;
   virtual void OnActivate(bool  active ) ;
   void Fit() ;
-  wxSize DoGetBestSize() const;
-  void InitRowHeights() ;
-  void InitColWidths() ;
-  int GetColWidth(int  col ) const;
-  int GetColLeft(int  col ) const;
-  int GetColRight(int  col ) const;
-  int GetRowHeight(int  row ) const;
-  int GetRowTop(int  row ) const;
-  int GetRowBottom(int  row ) const;
-  int SetOrCalcColumnSizes(bool  calcOnly , bool  setAsMin = true) ;
-  int SetOrCalcRowSizes(bool  calcOnly , bool  setAsMin = true) ;
-  void AutoSizeColOrRow(int  n , bool  setAsMin , bool  column ) ;
-  int GetColMinimalWidth(int  col ) const;
-  int GetRowMinimalHeight(int  col ) const;
-  bool CanHaveAttributes() ;
-  wxGridCellAttr* GetOrCreateCellAttr(int  row , int  col ) const;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
+  ;
 };
 
 

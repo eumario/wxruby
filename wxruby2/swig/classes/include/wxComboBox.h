@@ -26,6 +26,7 @@ public:
   void SetValue(const wxString&  text ) ;
   // the following were missing from the xml
   void Append(const wxString& item);
+  void SetSelection(int n);
 };
 
 

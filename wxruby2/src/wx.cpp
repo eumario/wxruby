@@ -714,6 +714,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
 
@@ -737,6 +738,16 @@ void GcMapPtrToValue(void *ptr, VALUE val)
 		GcRubyHash = rb_hash_new();
 	}
 	rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
+}
+
+VALUE GcGetValueFromPtr(void *ptr)
+{
+	if (GcRubyHash == Qnil)
+	{
+		rb_global_variable(&GcRubyHash);
+		GcRubyHash = rb_hash_new();
+	}
+	return rb_hash_aref(GcRubyHash, INT2NUM((int)ptr));
 }
 
 void GcMarkDeleted(void *ptr)
@@ -1026,6 +1037,8 @@ extern "C" void InitializeOtherModules()
 {
     extern void Init_wxApp();
     Init_wxApp();
+    extern void Init_wxArtProvider();
+    Init_wxArtProvider();
     extern void Init_wxBitmap();
     Init_wxBitmap();
     extern void Init_wxBitmapButton();
@@ -1034,6 +1047,10 @@ extern "C" void InitializeOtherModules()
     Init_wxBoxSizer();
     extern void Init_wxBrush();
     Init_wxBrush();
+    extern void Init_wxBusyCursor();
+    Init_wxBusyCursor();
+    extern void Init_wxBusyInfo();
+    Init_wxBusyInfo();
     extern void Init_wxButton();
     Init_wxButton();
     extern void Init_wxCalendarCtrl();
@@ -1050,18 +1067,22 @@ extern "C" void InitializeOtherModules()
     Init_wxCheckListBox();
     extern void Init_wxChoice();
     Init_wxChoice();
+    extern void Init_wxClassInfo();
+    Init_wxClassInfo();
     extern void Init_wxClientDC();
     Init_wxClientDC();
     extern void Init_wxCloseEvent();
     Init_wxCloseEvent();
     extern void Init_wxColour();
     Init_wxColour();
+    extern void Init_wxColourData();
+    Init_wxColourData();
+    extern void Init_wxColourDialog();
+    Init_wxColourDialog();
     extern void Init_wxComboBox();
     Init_wxComboBox();
     extern void Init_wxCommandEvent();
     Init_wxCommandEvent();
-    extern void Init_wxConfigBase();
-    Init_wxConfigBase();
     extern void Init_wxControl();
     Init_wxControl();
     extern void Init_wxControlWithItems();
@@ -1080,6 +1101,16 @@ extern "C" void InitializeOtherModules()
     Init_wxEvtHandler();
     extern void Init_wxFileDialog();
     Init_wxFileDialog();
+    extern void Init_wxFindDialogEvent();
+    Init_wxFindDialogEvent();
+    extern void Init_wxFindReplaceData();
+    Init_wxFindReplaceData();
+    extern void Init_wxFindReplaceDialog();
+    Init_wxFindReplaceDialog();
+    extern void Init_wxFlexGridSizer();
+    Init_wxFlexGridSizer();
+    extern void Init_wxFocusEvent();
+    Init_wxFocusEvent();
     extern void Init_wxFont();
     Init_wxFont();
     extern void Init_wxFontData();
@@ -1092,6 +1123,10 @@ extern "C" void InitializeOtherModules()
     Init_wxGDIObject();
     extern void Init_wxGauge();
     Init_wxGauge();
+    extern void Init_wxGrid();
+    Init_wxGrid();
+    extern void Init_wxGridSizer();
+    Init_wxGridSizer();
     extern void Init_wxIcon();
     Init_wxIcon();
     extern void Init_wxIdleEvent();
@@ -1100,22 +1135,44 @@ extern "C" void InitializeOtherModules()
     Init_wxImage();
     extern void Init_wxImageList();
     Init_wxImageList();
+    extern void Init_wxIndividualLayoutConstraint();
+    Init_wxIndividualLayoutConstraint();
     extern void Init_wxKeyEvent();
     Init_wxKeyEvent();
+    extern void Init_wxLayoutConstraints();
+    Init_wxLayoutConstraints();
     extern void Init_wxListBox();
     Init_wxListBox();
     extern void Init_wxListCtrl();
     Init_wxListCtrl();
+    extern void Init_wxLog();
+    Init_wxLog();
+    extern void Init_wxLogTextCtrl();
+    Init_wxLogTextCtrl();
+    extern void Init_wxMDIChildFrame();
+    Init_wxMDIChildFrame();
+    extern void Init_wxMDIParentFrame();
+    Init_wxMDIParentFrame();
     extern void Init_wxMask();
     Init_wxMask();
+    extern void Init_wxMemoryDC();
+    Init_wxMemoryDC();
     extern void Init_wxMenu();
     Init_wxMenu();
     extern void Init_wxMenuBar();
     Init_wxMenuBar();
     extern void Init_wxMessageDialog();
     Init_wxMessageDialog();
+    extern void Init_wxMouseEvent();
+    Init_wxMouseEvent();
     extern void Init_wxNotebook();
     Init_wxNotebook();
+    extern void Init_wxNotebookEvent();
+    Init_wxNotebookEvent();
+    extern void Init_wxNotebookSizer();
+    Init_wxNotebookSizer();
+    extern void Init_wxNotifyEvent();
+    Init_wxNotifyEvent();
     extern void Init_wxObject();
     Init_wxObject();
     extern void Init_wxPaintDC();
@@ -1124,28 +1181,60 @@ extern "C" void InitializeOtherModules()
     Init_wxPaintEvent();
     extern void Init_wxPanel();
     Init_wxPanel();
+    extern void Init_wxPen();
+    Init_wxPen();
     extern void Init_wxPoint();
     Init_wxPoint();
     extern void Init_wxRadioBox();
     Init_wxRadioBox();
+    extern void Init_wxRadioButton();
+    Init_wxRadioButton();
     extern void Init_wxScrolledWindow();
     Init_wxScrolledWindow();
+    extern void Init_wxSingleChoiceDialog();
+    Init_wxSingleChoiceDialog();
     extern void Init_wxSize();
     Init_wxSize();
     extern void Init_wxSizeEvent();
     Init_wxSizeEvent();
     extern void Init_wxSizer();
     Init_wxSizer();
+    extern void Init_wxSlider();
+    Init_wxSlider();
+    extern void Init_wxSpinButton();
+    Init_wxSpinButton();
+    extern void Init_wxSpinCtrl();
+    Init_wxSpinCtrl();
+    extern void Init_wxSpinEvent();
+    Init_wxSpinEvent();
+    extern void Init_wxStaticBitmap();
+    Init_wxStaticBitmap();
+    extern void Init_wxStaticBox();
+    Init_wxStaticBox();
+    extern void Init_wxStaticBoxSizer();
+    Init_wxStaticBoxSizer();
     extern void Init_wxStaticText();
     Init_wxStaticText();
+    extern void Init_wxStatusBar();
+    Init_wxStatusBar();
     extern void Init_wxTextCtrl();
     Init_wxTextCtrl();
+    extern void Init_wxTextEntryDialog();
+    Init_wxTextEntryDialog();
+    extern void Init_wxTipProvider();
+    Init_wxTipProvider();
+    extern void Init_wxTipWindow();
+    Init_wxTipWindow();
+    extern void Init_wxToolBar();
+    Init_wxToolBar();
     extern void Init_wxUpdateUIEvent();
     Init_wxUpdateUIEvent();
     extern void Init_wxWindow();
     Init_wxWindow();
     extern void Init_wxWindowDC();
     Init_wxWindowDC();
+    extern void Init_wxWindowDisabler();
+    Init_wxWindowDisabler();
     extern void Init_wxRubyConstants();
     Init_wxRubyConstants();
     extern void Init_wxFunctions();

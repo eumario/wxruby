@@ -9,7 +9,7 @@ class wxMemoryDC : public wxDC
 {
 public:
    wxMemoryDC() ;
-   SelectObject(const wxBitmap&  bitmap ) ;
+  void SelectObject(const wxBitmap&  bitmap );
 };
 
 

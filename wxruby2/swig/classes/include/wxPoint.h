@@ -10,6 +10,9 @@ class wxPoint
 public:
    wxPoint() ;
    wxPoint(int  x , int  y ) ;
+  // the following were missing from the xml
+  int x;
+  int y;
 };
 
 
