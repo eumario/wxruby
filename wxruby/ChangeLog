@@ -1,3 +1,8 @@
+2003-12-07 19:45  kbs
+    * Add images sample
+    * Update all samples to define App#on_init instead of OnInit
+    
+
 2003-12-07 19:30  kbs
     * Integrated File drag-and-drop, and two more dnd samples 
       from Gergely Kontra
