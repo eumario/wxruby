@@ -44,7 +44,8 @@ end
 
 def all_obj_bases
     return get_classes + 
-        ["wx", "RubyConstants", "RubyStockObjects", "Functions"]
+        ["wx", "RubyConstants", "RubyStockObjects", 
+            "RubyEventTypes", "Functions"]
 end
 
 def special_swig_file(base_name)
@@ -170,6 +171,7 @@ def create_swig_tasks
     end
     create_swig_helper_task("RubyConstants")
     create_swig_helper_task("RubyStockObjects")
+    create_swig_helper_task("RubyEventTypes")
     create_swig_helper_task("Functions")
     create_swig_main_task("wx")
     file(cpp_file("wx") => normal_cpp_files)

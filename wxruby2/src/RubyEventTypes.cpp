@@ -454,20 +454,14 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_wxEvent swig_types[0] 
-#define  SWIGTYPE_p_wxEvtHandler swig_types[1] 
-#define  SWIGTYPE_p_wxClientData swig_types[2] 
-#define  SWIGTYPE_p_wxEventTable swig_types[3] 
-static swig_type_info *swig_types[5];
+static swig_type_info *swig_types[1];
 
 /* -------- TYPES TABLE (END) -------- */
 
-#define SWIG_init    Init_wxEvtHandler
-#define SWIG_name    "WxEvtHandler"
+#define SWIG_init    Init_wxRubyEventTypes
+#define SWIG_name    "WxRubyEventTypes"
 
-static VALUE alive = Qnil;
-
-static VALUE mWxEvtHandler;
+static VALUE mWxRubyEventTypes;
    extern VALUE mWx;
 
 #  undef GetClassName
@@ -548,152 +542,6 @@ public:
                                                                                 
     VALUE       m_func;
 };
-
-
-#include <wx/calctrl.h>
-
-
-extern swig_class cWxObject;
-swig_class cWxEvtHandler;
-static void free_wxEvtHandler(wxEvtHandler *);
-
-    static VALUE callbacks = Qnil;
-
-
-static void internal_connect(VALUE self, int firstId, int lastId, 
-                wxEventType eventType, wxObjectEventFunction function)
-{
-    
-    wxEvtHandler *cppSelf = (wxEvtHandler *) 0 ;
-    SWIG_ConvertPtr(self, (void **) &cppSelf, SWIGTYPE_p_wxEvtHandler, 1);
-
-    VALUE func = rb_funcall(rb_cProc, rb_intern("new"), 0);
-    rb_global_variable(&callbacks);
-    if(callbacks == Qnil)
-        callbacks = rb_ary_new();
-    rb_ary_push(callbacks, func);
-
-    wxObject* userData = new wxRbCallback(func);
-    (cppSelf)->Connect(firstId, lastId, eventType, function, userData);
-}
-
-static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self, 
-        wxObjectEventFunction function, wxEventType eventType) 
-{
-    if (argc != 1)
-        rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-        
-    int id = NUM2INT(argv[0]);
-    //printf("evt_with_id(%d) %s\n", id, rb_block_given_p() ? "with block" : "");
-
-    internal_connect(self, id, id, eventType, function);
-    return Qnil;
-}
-
-static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self, 
-        wxObjectEventFunction function, wxEventType eventType) 
-{
-    if (argc != 0)
-        rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-        
-    //printf("evt_no_parameters() %s\n", rb_block_given_p() ? "with block" : "");
-    internal_connect(self, -1, -1, eventType, function);
-    return Qnil;
-}
-
-static VALUE connect(int argc, VALUE *argv, VALUE self) 
-{
-    if (argc != 3)
-        rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)", argc);
-
-    int id = NUM2INT(argv[0]);
-    int lastId = NUM2INT(argv[1]);
-    int type = NUM2INT(argv[2]);
-    
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::GenericEventThunker;
-
-    internal_connect(self, id, lastId, type, function);
-    return Qnil;
-}
-
-static VALUE evt_menu(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CommandEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_COMMAND_MENU_SELECTED);
-}
-
-static VALUE evt_choice(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CommandEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_COMMAND_CHOICE_SELECTED);
-}
-
-static VALUE evt_calendar(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CalendarEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_CALENDAR_DOUBLECLICKED);
-}
-
-static VALUE evt_calendar_sel_changed(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CalendarEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_CALENDAR_SEL_CHANGED);
-}
-
-static VALUE evt_calendar_day(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CalendarEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_CALENDAR_DAY_CHANGED);
-}
-
-static VALUE evt_calendar_month(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CalendarEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_CALENDAR_MONTH_CHANGED);
-}
-
-static VALUE evt_calendar_year(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CalendarEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_CALENDAR_YEAR_CHANGED);
-}
-
-static VALUE evt_calendar_weekday_clicked(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CalendarEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_CALENDAR_WEEKDAY_CLICKED);
-}
-
-static VALUE evt_update_ui(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::UpdateUIEventThunker;
-    return internal_evt_with_id(argc, argv, self, function, wxEVT_UPDATE_UI);
-}
-
-static VALUE evt_paint(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::PaintEventThunker;
-    return internal_evt_no_parameters(argc, argv, self, function, wxEVT_PAINT);
-}
-
-static VALUE evt_close(int argc, VALUE *argv, VALUE self) 
-{
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::CloseEventThunker;
-    return internal_evt_no_parameters(argc, argv, self, function, wxEVT_CLOSE_WINDOW);
-}
-
 
 /***********************************************************************
  * director.swg
@@ -801,21 +649,10 @@ namespace Swig {
     public:
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
-
-    printf("EvtHandler.cpp" " new Director %p\n", this);
-    if(alive == Qnil)
-    {
-        rb_global_variable(&alive);
-        alive = rb_hash_new();
-    }
-    rb_hash_aset(alive, INT2NUM((int)this), self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
-
-    printf("EvtHandler.cpp" " ~Director %p\n", this);
-    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -889,351 +726,13 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "EvtHandler.h"
-
-SwigDirector_wxEvtHandler::SwigDirector_wxEvtHandler(VALUE self, bool disown): wxEvtHandler(), Swig::Director(self, disown) {
-    
-}
-
-
-
-void SwigDirector_wxEvtHandler::AddPendingEvent(wxEvent &event) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        wxEvtHandler::AddPendingEvent(event);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj(&event, SWIGTYPE_p_wxEvent, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("add_pending_event"), 1,obj0);
-}
-
-
-bool SwigDirector_wxEvtHandler::ProcessEvent(wxEvent &event) {
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return wxEvtHandler::ProcessEvent(event);
-    }
-    obj0 = SWIG_NewPointerObj(&event, SWIGTYPE_p_wxEvent, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("process_event"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return c_result;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_wxEvtHandler_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_wxEvtHandler_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxEvtHandler);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_wxEvtHandler(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxEvtHandler *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxEvtHandler *)new SwigDirector_wxEvtHandler(arg1,0);
-        
-    } else {
-        result = (wxEvtHandler *)new wxEvtHandler();
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static void
-free_wxEvtHandler(wxEvtHandler *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxEvtHandler*)arg1;
-    printf("EvtHandler.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    delete arg1;
-}
-static VALUE
-_wrap_wxEvtHandler_AddPendingEvent(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxEvent *arg2 = 0 ;
-    Swig::Director *director = 0;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxEvent, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    (arg1)->AddPendingEvent(*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_GetClientData(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    void *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    result = (void *)(arg1)->GetClientData();
-    
-    {
-        vresult = (VALUE)(result);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_GetClientObject(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxClientData *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    result = (wxClientData *)((wxEvtHandler const *)arg1)->GetClientObject();
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxClientData,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_GetEvtHandlerEnabled(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    result = (bool)(arg1)->GetEvtHandlerEnabled();
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_GetNextHandler(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxEvtHandler *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    result = (wxEvtHandler *)(arg1)->GetNextHandler();
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxEvtHandler,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_GetPreviousHandler(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxEvtHandler *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    result = (wxEvtHandler *)(arg1)->GetPreviousHandler();
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxEvtHandler,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_ProcessEvent(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxEvent *arg2 = 0 ;
-    bool result;
-    Swig::Director *director = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxEvent, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    result = (bool)(arg1)->ProcessEvent(*arg2);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_SearchEventTable(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxEventTable *arg2 = 0 ;
-    wxEvent *arg3 = 0 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxEventTable, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxEvent, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (bool)(arg1)->SearchEventTable(*arg2,*arg3);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_SetClientData(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    void *arg2 = (void *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    {
-        arg2 = (void*)(argv[0]);
-    }
-    (arg1)->SetClientData(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_SetClientObject(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxClientData *arg2 = (wxClientData *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxClientData, 1);
-    (arg1)->SetClientObject(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_SetEvtHandlerEnabled(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    bool arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    arg2 = RTEST(argv[0]);
-    (arg1)->SetEvtHandlerEnabled(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_SetNextHandler(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxEvtHandler *arg2 = (wxEvtHandler *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxEvtHandler, 1);
-    (arg1)->SetNextHandler(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxEvtHandler_SetPreviousHandler(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    wxEvtHandler *arg2 = (wxEvtHandler *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxEvtHandler, 1);
-    (arg1)->SetPreviousHandler(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_disown_wxEvtHandler(int argc, VALUE *argv, VALUE self) {
-    wxEvtHandler *arg1 = (wxEvtHandler *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
+#include "RubyEventTypes.h"
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_wxEvent[] = {{"_p_wxEvent", 0, "wxEvent *", 0},{"_p_wxEvent"},{0}};
-static swig_type_info _swigt__p_wxEvtHandler[] = {{"_p_wxEvtHandler", 0, "wxEvtHandler *", 0},{"_p_wxEvtHandler"},{0}};
-static swig_type_info _swigt__p_wxClientData[] = {{"_p_wxClientData", 0, "wxClientData *", 0},{"_p_wxClientData"},{0}};
-static swig_type_info _swigt__p_wxEventTable[] = {{"_p_wxEventTable", 0, "wxEventTable *", 0},{"_p_wxEventTable"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
-_swigt__p_wxEvent, 
-_swigt__p_wxEvtHandler, 
-_swigt__p_wxClientData, 
-_swigt__p_wxEventTable, 
 0
 };
 
@@ -1244,59 +743,140 @@ _swigt__p_wxEventTable,
 #ifdef __cplusplus
 extern "C"
 #endif
-SWIGEXPORT(void) Init_wxEvtHandler(void) {
+SWIGEXPORT(void) Init_wxRubyEventTypes(void) {
 static bool initialized;
 if(initialized) return;
 initialized = true;
     int i;
     
     SWIG_InitRuntime();
-mWxEvtHandler = mWx;
+mWxRubyEventTypes = mWx;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxEvtHandler, "disown_wxEvtHandler", VALUEFUNC(_wrap_disown_wxEvtHandler), -1);
-    
-    extern void Init_wxObject();
-    Init_wxObject();
-    //extern swig_class cWxObject;
-    cWxEvtHandler.klass = rb_define_class_under(mWxEvtHandler, "EvtHandler", cWxObject.klass);
-    SWIG_TypeClientData(SWIGTYPE_p_wxEvtHandler, (void *) &cWxEvtHandler);
-    rb_define_alloc_func(cWxEvtHandler.klass, _wrap_wxEvtHandler_allocate);
-    rb_define_method(cWxEvtHandler.klass, "initialize", VALUEFUNC(_wrap_new_wxEvtHandler), -1);
-    rb_define_method(cWxEvtHandler.klass, "add_pending_event", VALUEFUNC(_wrap_wxEvtHandler_AddPendingEvent), -1);
-    rb_define_method(cWxEvtHandler.klass, "get_client_data", VALUEFUNC(_wrap_wxEvtHandler_GetClientData), -1);
-    rb_define_method(cWxEvtHandler.klass, "get_client_object", VALUEFUNC(_wrap_wxEvtHandler_GetClientObject), -1);
-    rb_define_method(cWxEvtHandler.klass, "get_evt_handler_enabled", VALUEFUNC(_wrap_wxEvtHandler_GetEvtHandlerEnabled), -1);
-    rb_define_method(cWxEvtHandler.klass, "get_next_handler", VALUEFUNC(_wrap_wxEvtHandler_GetNextHandler), -1);
-    rb_define_method(cWxEvtHandler.klass, "get_previous_handler", VALUEFUNC(_wrap_wxEvtHandler_GetPreviousHandler), -1);
-    rb_define_method(cWxEvtHandler.klass, "process_event", VALUEFUNC(_wrap_wxEvtHandler_ProcessEvent), -1);
-    rb_define_method(cWxEvtHandler.klass, "search_event_table", VALUEFUNC(_wrap_wxEvtHandler_SearchEventTable), -1);
-    rb_define_method(cWxEvtHandler.klass, "set_client_data", VALUEFUNC(_wrap_wxEvtHandler_SetClientData), -1);
-    rb_define_method(cWxEvtHandler.klass, "set_client_object", VALUEFUNC(_wrap_wxEvtHandler_SetClientObject), -1);
-    rb_define_method(cWxEvtHandler.klass, "set_evt_handler_enabled", VALUEFUNC(_wrap_wxEvtHandler_SetEvtHandlerEnabled), -1);
-    rb_define_method(cWxEvtHandler.klass, "set_next_handler", VALUEFUNC(_wrap_wxEvtHandler_SetNextHandler), -1);
-    rb_define_method(cWxEvtHandler.klass, "set_previous_handler", VALUEFUNC(_wrap_wxEvtHandler_SetPreviousHandler), -1);
-    cWxEvtHandler.mark = 0;
-    cWxEvtHandler.destroy = (void (*)(void *)) free_wxEvtHandler;
-    
-    rb_define_method(cWxEvtHandler.klass, "connect", VALUEFUNC(connect), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_menu", VALUEFUNC(evt_menu), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_choice", VALUEFUNC(evt_choice), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar", VALUEFUNC(evt_calendar), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_sel_changed", VALUEFUNC(evt_calendar_sel_changed), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_day", VALUEFUNC(evt_calendar_day), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_month", VALUEFUNC(evt_calendar_month), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_year", VALUEFUNC(evt_calendar_year), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_calendar_weekday_clicked", VALUEFUNC(evt_calendar_weekday_clicked), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_update_ui", VALUEFUNC(evt_update_ui), -1);
-    
-    rb_define_method(cWxEvtHandler.klass, "evt_paint", VALUEFUNC(evt_paint), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_close", VALUEFUNC(evt_close), -1);
-    
-    
+    rb_define_const(mWxRubyEventTypes,"EVT_NULL", INT2NUM(wxEVT_NULL));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_BUTTON_CLICKED", INT2NUM(wxEVT_COMMAND_BUTTON_CLICKED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_CHECKBOX_CLICKED", INT2NUM(wxEVT_COMMAND_CHECKBOX_CLICKED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_CHOICE_SELECTED", INT2NUM(wxEVT_COMMAND_CHOICE_SELECTED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_LISTBOX_SELECTED", INT2NUM(wxEVT_COMMAND_LISTBOX_SELECTED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_LISTBOX_DOUBLECLICKED", INT2NUM(wxEVT_COMMAND_LISTBOX_DOUBLECLICKED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_CHECKLISTBOX_TOGGLED", INT2NUM(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_TEXT_UPDATED", INT2NUM(wxEVT_COMMAND_TEXT_UPDATED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_TEXT_ENTER", INT2NUM(wxEVT_COMMAND_TEXT_ENTER));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_TEXT_URL", INT2NUM(wxEVT_COMMAND_TEXT_URL));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_TEXT_MAXLEN", INT2NUM(wxEVT_COMMAND_TEXT_MAXLEN));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_MENU_SELECTED", INT2NUM(wxEVT_COMMAND_MENU_SELECTED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_SLIDER_UPDATED", INT2NUM(wxEVT_COMMAND_SLIDER_UPDATED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_RADIOBOX_SELECTED", INT2NUM(wxEVT_COMMAND_RADIOBOX_SELECTED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_RADIOBUTTON_SELECTED", INT2NUM(wxEVT_COMMAND_RADIOBUTTON_SELECTED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_SCROLLBAR_UPDATED", INT2NUM(wxEVT_COMMAND_SCROLLBAR_UPDATED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_VLBOX_SELECTED", INT2NUM(wxEVT_COMMAND_VLBOX_SELECTED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_COMBOBOX_SELECTED", INT2NUM(wxEVT_COMMAND_COMBOBOX_SELECTED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_TOOL_RCLICKED", INT2NUM(wxEVT_COMMAND_TOOL_RCLICKED));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_TOOL_ENTER", INT2NUM(wxEVT_COMMAND_TOOL_ENTER));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_SPINCTRL_UPDATED", INT2NUM(wxEVT_COMMAND_SPINCTRL_UPDATED));
+    rb_define_const(mWxRubyEventTypes,"EVT_SOCKET", INT2NUM(wxEVT_SOCKET));
+    rb_define_const(mWxRubyEventTypes,"EVT_TIMER", INT2NUM(wxEVT_TIMER));
+    rb_define_const(mWxRubyEventTypes,"EVT_LEFT_DOWN", INT2NUM(wxEVT_LEFT_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_LEFT_UP", INT2NUM(wxEVT_LEFT_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_MIDDLE_DOWN", INT2NUM(wxEVT_MIDDLE_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_MIDDLE_UP", INT2NUM(wxEVT_MIDDLE_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_RIGHT_DOWN", INT2NUM(wxEVT_RIGHT_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_RIGHT_UP", INT2NUM(wxEVT_RIGHT_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_MOTION", INT2NUM(wxEVT_MOTION));
+    rb_define_const(mWxRubyEventTypes,"EVT_ENTER_WINDOW", INT2NUM(wxEVT_ENTER_WINDOW));
+    rb_define_const(mWxRubyEventTypes,"EVT_LEAVE_WINDOW", INT2NUM(wxEVT_LEAVE_WINDOW));
+    rb_define_const(mWxRubyEventTypes,"EVT_LEFT_DCLICK", INT2NUM(wxEVT_LEFT_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_MIDDLE_DCLICK", INT2NUM(wxEVT_MIDDLE_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_RIGHT_DCLICK", INT2NUM(wxEVT_RIGHT_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_SET_FOCUS", INT2NUM(wxEVT_SET_FOCUS));
+    rb_define_const(mWxRubyEventTypes,"EVT_KILL_FOCUS", INT2NUM(wxEVT_KILL_FOCUS));
+    rb_define_const(mWxRubyEventTypes,"EVT_CHILD_FOCUS", INT2NUM(wxEVT_CHILD_FOCUS));
+    rb_define_const(mWxRubyEventTypes,"EVT_MOUSEWHEEL", INT2NUM(wxEVT_MOUSEWHEEL));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_LEFT_DOWN", INT2NUM(wxEVT_NC_LEFT_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_LEFT_UP", INT2NUM(wxEVT_NC_LEFT_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_MIDDLE_DOWN", INT2NUM(wxEVT_NC_MIDDLE_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_MIDDLE_UP", INT2NUM(wxEVT_NC_MIDDLE_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_RIGHT_DOWN", INT2NUM(wxEVT_NC_RIGHT_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_RIGHT_UP", INT2NUM(wxEVT_NC_RIGHT_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_MOTION", INT2NUM(wxEVT_NC_MOTION));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_ENTER_WINDOW", INT2NUM(wxEVT_NC_ENTER_WINDOW));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_LEAVE_WINDOW", INT2NUM(wxEVT_NC_LEAVE_WINDOW));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_LEFT_DCLICK", INT2NUM(wxEVT_NC_LEFT_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_MIDDLE_DCLICK", INT2NUM(wxEVT_NC_MIDDLE_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_RIGHT_DCLICK", INT2NUM(wxEVT_NC_RIGHT_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_CHAR", INT2NUM(wxEVT_CHAR));
+    rb_define_const(mWxRubyEventTypes,"EVT_CHAR_HOOK", INT2NUM(wxEVT_CHAR_HOOK));
+    rb_define_const(mWxRubyEventTypes,"EVT_NAVIGATION_KEY", INT2NUM(wxEVT_NAVIGATION_KEY));
+    rb_define_const(mWxRubyEventTypes,"EVT_KEY_DOWN", INT2NUM(wxEVT_KEY_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_KEY_UP", INT2NUM(wxEVT_KEY_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_SET_CURSOR", INT2NUM(wxEVT_SET_CURSOR));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_TOP", INT2NUM(wxEVT_SCROLL_TOP));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_BOTTOM", INT2NUM(wxEVT_SCROLL_BOTTOM));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_LINEUP", INT2NUM(wxEVT_SCROLL_LINEUP));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_LINEDOWN", INT2NUM(wxEVT_SCROLL_LINEDOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_PAGEUP", INT2NUM(wxEVT_SCROLL_PAGEUP));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_PAGEDOWN", INT2NUM(wxEVT_SCROLL_PAGEDOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_THUMBTRACK", INT2NUM(wxEVT_SCROLL_THUMBTRACK));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_THUMBRELEASE", INT2NUM(wxEVT_SCROLL_THUMBRELEASE));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLL_ENDSCROLL", INT2NUM(wxEVT_SCROLL_ENDSCROLL));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_TOP", INT2NUM(wxEVT_SCROLLWIN_TOP));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_BOTTOM", INT2NUM(wxEVT_SCROLLWIN_BOTTOM));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_LINEUP", INT2NUM(wxEVT_SCROLLWIN_LINEUP));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_LINEDOWN", INT2NUM(wxEVT_SCROLLWIN_LINEDOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_PAGEUP", INT2NUM(wxEVT_SCROLLWIN_PAGEUP));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_PAGEDOWN", INT2NUM(wxEVT_SCROLLWIN_PAGEDOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_THUMBTRACK", INT2NUM(wxEVT_SCROLLWIN_THUMBTRACK));
+    rb_define_const(mWxRubyEventTypes,"EVT_SCROLLWIN_THUMBRELEASE", INT2NUM(wxEVT_SCROLLWIN_THUMBRELEASE));
+    rb_define_const(mWxRubyEventTypes,"EVT_SIZE", INT2NUM(wxEVT_SIZE));
+    rb_define_const(mWxRubyEventTypes,"EVT_MOVE", INT2NUM(wxEVT_MOVE));
+    rb_define_const(mWxRubyEventTypes,"EVT_CLOSE_WINDOW", INT2NUM(wxEVT_CLOSE_WINDOW));
+    rb_define_const(mWxRubyEventTypes,"EVT_END_SESSION", INT2NUM(wxEVT_END_SESSION));
+    rb_define_const(mWxRubyEventTypes,"EVT_QUERY_END_SESSION", INT2NUM(wxEVT_QUERY_END_SESSION));
+    rb_define_const(mWxRubyEventTypes,"EVT_ACTIVATE_APP", INT2NUM(wxEVT_ACTIVATE_APP));
+    rb_define_const(mWxRubyEventTypes,"EVT_POWER", INT2NUM(wxEVT_POWER));
+    rb_define_const(mWxRubyEventTypes,"EVT_ACTIVATE", INT2NUM(wxEVT_ACTIVATE));
+    rb_define_const(mWxRubyEventTypes,"EVT_CREATE", INT2NUM(wxEVT_CREATE));
+    rb_define_const(mWxRubyEventTypes,"EVT_DESTROY", INT2NUM(wxEVT_DESTROY));
+    rb_define_const(mWxRubyEventTypes,"EVT_SHOW", INT2NUM(wxEVT_SHOW));
+    rb_define_const(mWxRubyEventTypes,"EVT_ICONIZE", INT2NUM(wxEVT_ICONIZE));
+    rb_define_const(mWxRubyEventTypes,"EVT_MAXIMIZE", INT2NUM(wxEVT_MAXIMIZE));
+    rb_define_const(mWxRubyEventTypes,"EVT_MOUSE_CAPTURE_CHANGED", INT2NUM(wxEVT_MOUSE_CAPTURE_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_PAINT", INT2NUM(wxEVT_PAINT));
+    rb_define_const(mWxRubyEventTypes,"EVT_ERASE_BACKGROUND", INT2NUM(wxEVT_ERASE_BACKGROUND));
+    rb_define_const(mWxRubyEventTypes,"EVT_NC_PAINT", INT2NUM(wxEVT_NC_PAINT));
+    rb_define_const(mWxRubyEventTypes,"EVT_PAINT_ICON", INT2NUM(wxEVT_PAINT_ICON));
+    rb_define_const(mWxRubyEventTypes,"EVT_MENU_OPEN", INT2NUM(wxEVT_MENU_OPEN));
+    rb_define_const(mWxRubyEventTypes,"EVT_MENU_CLOSE", INT2NUM(wxEVT_MENU_CLOSE));
+    rb_define_const(mWxRubyEventTypes,"EVT_MENU_HIGHLIGHT", INT2NUM(wxEVT_MENU_HIGHLIGHT));
+    rb_define_const(mWxRubyEventTypes,"EVT_CONTEXT_MENU", INT2NUM(wxEVT_CONTEXT_MENU));
+    rb_define_const(mWxRubyEventTypes,"EVT_SYS_COLOUR_CHANGED", INT2NUM(wxEVT_SYS_COLOUR_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_DISPLAY_CHANGED", INT2NUM(wxEVT_DISPLAY_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_SETTING_CHANGED", INT2NUM(wxEVT_SETTING_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_QUERY_NEW_PALETTE", INT2NUM(wxEVT_QUERY_NEW_PALETTE));
+    rb_define_const(mWxRubyEventTypes,"EVT_PALETTE_CHANGED", INT2NUM(wxEVT_PALETTE_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_JOY_BUTTON_DOWN", INT2NUM(wxEVT_JOY_BUTTON_DOWN));
+    rb_define_const(mWxRubyEventTypes,"EVT_JOY_BUTTON_UP", INT2NUM(wxEVT_JOY_BUTTON_UP));
+    rb_define_const(mWxRubyEventTypes,"EVT_JOY_MOVE", INT2NUM(wxEVT_JOY_MOVE));
+    rb_define_const(mWxRubyEventTypes,"EVT_JOY_ZMOVE", INT2NUM(wxEVT_JOY_ZMOVE));
+    rb_define_const(mWxRubyEventTypes,"EVT_DROP_FILES", INT2NUM(wxEVT_DROP_FILES));
+    rb_define_const(mWxRubyEventTypes,"EVT_DRAW_ITEM", INT2NUM(wxEVT_DRAW_ITEM));
+    rb_define_const(mWxRubyEventTypes,"EVT_MEASURE_ITEM", INT2NUM(wxEVT_MEASURE_ITEM));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMPARE_ITEM", INT2NUM(wxEVT_COMPARE_ITEM));
+    rb_define_const(mWxRubyEventTypes,"EVT_INIT_DIALOG", INT2NUM(wxEVT_INIT_DIALOG));
+    rb_define_const(mWxRubyEventTypes,"EVT_IDLE", INT2NUM(wxEVT_IDLE));
+    rb_define_const(mWxRubyEventTypes,"EVT_UPDATE_UI", INT2NUM(wxEVT_UPDATE_UI));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_LEFT_CLICK", INT2NUM(wxEVT_COMMAND_LEFT_CLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_LEFT_DCLICK", INT2NUM(wxEVT_COMMAND_LEFT_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_RIGHT_CLICK", INT2NUM(wxEVT_COMMAND_RIGHT_CLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_RIGHT_DCLICK", INT2NUM(wxEVT_COMMAND_RIGHT_DCLICK));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_SET_FOCUS", INT2NUM(wxEVT_COMMAND_SET_FOCUS));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_KILL_FOCUS", INT2NUM(wxEVT_COMMAND_KILL_FOCUS));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_ENTER", INT2NUM(wxEVT_COMMAND_ENTER));
+    rb_define_const(mWxRubyEventTypes,"EVT_HELP", INT2NUM(wxEVT_HELP));
+    rb_define_const(mWxRubyEventTypes,"EVT_DETAILED_HELP", INT2NUM(wxEVT_DETAILED_HELP));
 }
 

@@ -19,8 +19,8 @@
 %}
 
 %{
-static void connect(VALUE self, wxObjectEventFunction function,
-                wxEventType eventType, int firstId, int lastId)
+static void internal_connect(VALUE self, int firstId, int lastId, 
+                wxEventType eventType, wxObjectEventFunction function)
 {
     
     wxEvtHandler *cppSelf = (wxEvtHandler *) 0 ;
@@ -45,7 +45,7 @@ static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self,
     int id = NUM2INT(argv[0]);
     //printf("evt_with_id(%d) %s\n", id, rb_block_given_p() ? "with block" : "");
 
-    connect(self, function, eventType, id, id);
+    internal_connect(self, id, id, eventType, function);
     return Qnil;
 }
 
@@ -56,7 +56,23 @@ static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self,
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
         
     //printf("evt_no_parameters() %s\n", rb_block_given_p() ? "with block" : "");
-    connect(self, function, eventType, -1, -1);
+    internal_connect(self, -1, -1, eventType, function);
+    return Qnil;
+}
+
+static VALUE connect(int argc, VALUE *argv, VALUE self) 
+{
+    if (argc != 3)
+        rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)", argc);
+
+    int id = NUM2INT(argv[0]);
+    int lastId = NUM2INT(argv[1]);
+    int type = NUM2INT(argv[2]);
+    
+    wxObjectEventFunction function = 
+        (wxObjectEventFunction )&wxRbCallback::GenericEventThunker;
+
+    internal_connect(self, id, lastId, type, function);
     return Qnil;
 }
 
@@ -140,6 +156,7 @@ static VALUE evt_close(int argc, VALUE *argv, VALUE self)
 %}
 
 %init %{
+    rb_define_method(cWxEvtHandler.klass, "connect", VALUEFUNC(connect), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_menu", VALUEFUNC(evt_menu), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_choice", VALUEFUNC(evt_choice), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar", VALUEFUNC(evt_calendar), -1);
