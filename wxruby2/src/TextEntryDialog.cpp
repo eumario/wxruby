@@ -755,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/TextEntryDialog.h"
+#include "TextEntryDialog.h"
 
 SwigDirector_wxTextEntryDialog::SwigDirector_wxTextEntryDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &caption, wxString const &defaultValue, long style, wxPoint const &pos, bool disown): wxTextEntryDialog(parent, message, caption, defaultValue, style, pos), Swig::Director(self, disown) {
     

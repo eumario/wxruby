@@ -772,7 +772,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ListCtrl.h"
+#include "ListCtrl.h"
 
 SwigDirector_wxListCtrl::SwigDirector_wxListCtrl(VALUE self, bool disown): wxListCtrl(), Swig::Director(self, disown) {
     

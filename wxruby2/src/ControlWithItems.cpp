@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ControlWithItems.h"
+#include "ControlWithItems.h"
 
 static VALUE
 _wrap_wxControlWithItems_Append(int argc, VALUE *argv, VALUE self) {
@@ -924,22 +924,6 @@ _wrap_wxControlWithItems_GetStringSelection(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxControlWithItems_Number(int argc, VALUE *argv, VALUE self) {
-    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
-    result = (int)((wxControlWithItems const *)arg1)->Number();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
 _wrap_wxControlWithItems_SetClientData(int argc, VALUE *argv, VALUE self) {
     wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
     int arg2 ;
@@ -1047,7 +1031,6 @@ mWxControlWithItems = mWx;
     rb_define_method(cWxControlWithItems.klass, "get_selection", VALUEFUNC(_wrap_wxControlWithItems_GetSelection), -1);
     rb_define_method(cWxControlWithItems.klass, "get_string", VALUEFUNC(_wrap_wxControlWithItems_GetString), -1);
     rb_define_method(cWxControlWithItems.klass, "get_string_selection", VALUEFUNC(_wrap_wxControlWithItems_GetStringSelection), -1);
-    rb_define_method(cWxControlWithItems.klass, "number", VALUEFUNC(_wrap_wxControlWithItems_Number), -1);
     rb_define_method(cWxControlWithItems.klass, "set_client_data", VALUEFUNC(_wrap_wxControlWithItems_SetClientData), -1);
     rb_define_method(cWxControlWithItems.klass, "set_client_object", VALUEFUNC(_wrap_wxControlWithItems_SetClientObject), -1);
     rb_define_method(cWxControlWithItems.klass, "set_string", VALUEFUNC(_wrap_wxControlWithItems_SetString), -1);

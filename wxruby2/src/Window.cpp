@@ -789,7 +789,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Window.h"
+#include "Window.h"
 
 SwigDirector_wxWindow::SwigDirector_wxWindow(VALUE self, bool disown): wxWindow(), Swig::Director(self, disown) {
     
@@ -1976,19 +1976,6 @@ _wrap_wxWindow_CentreOnScreen(int argc, VALUE *argv, VALUE self) {
         arg2 = NUM2INT(argv[0]);
     }
     (arg1)->CentreOnScreen(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxWindow_Clear(int argc, VALUE *argv, VALUE self) {
-    wxWindow *arg1 = (wxWindow *) 0 ;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    (arg1)->Clear();
     
     return Qnil;
 }
@@ -5421,7 +5408,6 @@ mWxWindow = mWx;
     rb_define_method(cWxWindow.klass, "centre", VALUEFUNC(_wrap_wxWindow_Centre), -1);
     rb_define_method(cWxWindow.klass, "centre_on_parent", VALUEFUNC(_wrap_wxWindow_CentreOnParent), -1);
     rb_define_method(cWxWindow.klass, "centre_on_screen", VALUEFUNC(_wrap_wxWindow_CentreOnScreen), -1);
-    rb_define_method(cWxWindow.klass, "clear", VALUEFUNC(_wrap_wxWindow_Clear), -1);
     rb_define_method(cWxWindow.klass, "client_to_screen", VALUEFUNC(_wrap_wxWindow_ClientToScreen), -1);
     rb_define_method(cWxWindow.klass, "close", VALUEFUNC(_wrap_wxWindow_Close), -1);
     rb_define_method(cWxWindow.klass, "convert_dialog_to_pixels", VALUEFUNC(_wrap_wxWindow_ConvertDialogToPixels), -1);

@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/MemoryDC.h"
+#include "MemoryDC.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Font.h"
+#include "Font.h"
 
 static VALUE
 _wrap_new_wxFont__SWIG_0(int argc, VALUE *argv, VALUE self) {

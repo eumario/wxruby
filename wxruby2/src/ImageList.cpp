@@ -762,7 +762,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ImageList.h"
+#include "ImageList.h"
 
 static VALUE
 _wrap_new_wxImageList__SWIG_0(int argc, VALUE *argv, VALUE self) {

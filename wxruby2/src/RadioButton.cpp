@@ -761,7 +761,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/RadioButton.h"
+#include "RadioButton.h"
 
 SwigDirector_wxRadioButton::SwigDirector_wxRadioButton(VALUE self, bool disown): wxRadioButton(), Swig::Director(self, disown) {
     

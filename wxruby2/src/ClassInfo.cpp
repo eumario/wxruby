@@ -515,9 +515,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxClassInfo swig_types[0] 
-#define  SWIGTYPE_p_wxObjectConstructorFn swig_types[1] 
-#define  SWIGTYPE_p_wxObject swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxObject swig_types[1] 
+static swig_type_info *swig_types[3];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -754,50 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ClassInfo.h"
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_wxClassInfo_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_wxClassInfo_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxClassInfo);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_wxClassInfo(int argc, VALUE *argv, VALUE self) {
-    char *arg1 ;
-    char *arg2 ;
-    char *arg3 ;
-    int arg4 ;
-    wxObjectConstructorFn arg5 ;
-    wxClassInfo *result;
-    
-    if ((argc < 5) || (argc > 5))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
-    arg1 = StringValuePtr(argv[0]);
-    arg2 = StringValuePtr(argv[1]);
-    arg3 = StringValuePtr(argv[2]);
-    arg4 = NUM2INT(argv[3]);
-    {
-        wxObjectConstructorFn * ptr;
-        SWIG_ConvertPtr(argv[4], (void **) &ptr, SWIGTYPE_p_wxObjectConstructorFn, 1);
-        if (ptr) arg5 = *ptr;
-    }
-    result = (wxClassInfo *)new wxClassInfo(arg1,arg2,arg3,arg4,arg5);
-    DATA_PTR(self) = result;
-    return self;
-}
-
+#include "ClassInfo.h"
 
 static VALUE
 _wrap_wxClassInfo_CreateObject(int argc, VALUE *argv, VALUE self) {
@@ -931,12 +887,10 @@ free_wxClassInfo(wxClassInfo *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxClassInfo[] = {{"_p_wxClassInfo", 0, "wxClassInfo *", 0, 0, 0, 0},{"_p_wxClassInfo", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxObjectConstructorFn[] = {{"_p_wxObjectConstructorFn", 0, "wxObjectConstructorFn *", 0, 0, 0, 0},{"_p_wxObjectConstructorFn", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxObject[] = {{"_p_wxObject", 0, "wxObject *", 0, 0, 0, 0},{"_p_wxObject", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxClassInfo, 
-_swigt__p_wxObjectConstructorFn, 
 _swigt__p_wxObject, 
 0
 };
@@ -965,8 +919,7 @@ mWxClassInfo = mWx;
     
     cWxClassInfo.klass = rb_define_class_under(mWxClassInfo, "ClassInfo", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_wxClassInfo, (void *) &cWxClassInfo);
-    rb_define_alloc_func(cWxClassInfo.klass, _wrap_wxClassInfo_allocate);
-    rb_define_method(cWxClassInfo.klass, "initialize", VALUEFUNC(_wrap_new_wxClassInfo), -1);
+    rb_undef_alloc_func(cWxClassInfo.klass);
     rb_define_method(cWxClassInfo.klass, "create_object", VALUEFUNC(_wrap_wxClassInfo_CreateObject), -1);
     rb_define_singleton_method(cWxClassInfo.klass, "find_class", VALUEFUNC(_wrap_wxClassInfo_FindClass), -1);
     rb_define_method(cWxClassInfo.klass, "get_base_class_name1", VALUEFUNC(_wrap_wxClassInfo_GetBaseClassName1), -1);

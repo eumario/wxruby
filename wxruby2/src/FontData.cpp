@@ -755,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/FontData.h"
+#include "FontData.h"
 
 SwigDirector_wxFontData::SwigDirector_wxFontData(VALUE self, bool disown): wxFontData(), Swig::Director(self, disown) {
     

@@ -759,7 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/SpinCtrl.h"
+#include "SpinCtrl.h"
 
 
 #ifndef __WXGTK__

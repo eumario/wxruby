@@ -564,7 +564,11 @@ void GcFreefunc(void *);
 
 
 #ifdef __WXMAC__
+#if wxMINOR_VERSION == 4
 int wxEntry( int argc, char *argv[],bool val=true );
+#else
+int wxEntry( int &argc, char *argv[]);
+#endif
 #else
 int wxEntry( int argc, char *argv[]);
 #endif
@@ -635,7 +639,9 @@ public:
         printf("OnExit...\n");
         rb_gc_start();
         printf("survived gc\n");
+#if !wxCHECK_VERSION(2,5,0)
         wxTheApp = 0;
+#endif
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
         if ( oldlog )
@@ -847,7 +853,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/App.h"
+#include "App.h"
 
 SwigDirector_App::SwigDirector_App(VALUE self, bool disown): wxRubyApp(), Swig::Director(self, disown) {
     
@@ -1365,82 +1371,6 @@ _wrap_App_Pending(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_App_SendIdleEvents__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxRubyApp *arg1 = (wxRubyApp *) 0 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRubyApp, 1);
-    result = (bool)(arg1)->SendIdleEvents();
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_App_SendIdleEvents__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxRubyApp *arg1 = (wxRubyApp *) 0 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRubyApp, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    result = (bool)(arg1)->SendIdleEvents(arg2);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE _wrap_App_SendIdleEvents(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxRubyApp, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_App_SendIdleEvents__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxRubyApp, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_App_SendIdleEvents__SWIG_1(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'App_SendIdleEvents'");
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_App_SetAppName(int argc, VALUE *argv, VALUE self) {
     wxRubyApp *arg1 = (wxRubyApp *) 0 ;
     wxString *arg2 = 0 ;
@@ -1655,7 +1585,6 @@ mWxApp = mWx;
     rb_define_method(cApp.klass, "on_init", VALUEFUNC(_wrap_App_OnInit), -1);
     rb_define_method(cApp.klass, "on_init_cmd_line", VALUEFUNC(_wrap_App_OnInitCmdLine), -1);
     rb_define_method(cApp.klass, "pending", VALUEFUNC(_wrap_App_Pending), -1);
-    rb_define_method(cApp.klass, "send_idle_events", VALUEFUNC(_wrap_App_SendIdleEvents), -1);
     rb_define_method(cApp.klass, "set_app_name", VALUEFUNC(_wrap_App_SetAppName), -1);
     rb_define_method(cApp.klass, "set_class_name", VALUEFUNC(_wrap_App_SetClassName), -1);
     rb_define_method(cApp.klass, "set_exit_on_frame_delete", VALUEFUNC(_wrap_App_SetExitOnFrameDelete), -1);

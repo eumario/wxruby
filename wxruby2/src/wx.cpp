@@ -721,6 +721,11 @@ void GcFreefunc(void *);
 #include <wx/datetime.h>
 
 
+
+#ifdef __WXMAC__
+#define Init_wx Init_WxFramework
+#endif
+
 #include <wx/hashmap.h>
 
 WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
@@ -951,7 +956,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/wx.h"
+#include "wx.h"
 
 static VALUE
 _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {

@@ -766,7 +766,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Bitmap.h"
+#include "Bitmap.h"
 
 static VALUE
 _wrap_new_wxBitmap__SWIG_0(int argc, VALUE *argv, VALUE self) {

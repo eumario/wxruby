@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/BoxSizer.h"
+#include "BoxSizer.h"
 
 SwigDirector_wxBoxSizer::SwigDirector_wxBoxSizer(VALUE self, int orient, bool disown): wxBoxSizer(orient), Swig::Director(self, disown) {
     

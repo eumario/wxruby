@@ -765,7 +765,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Notebook.h"
+#include "Notebook.h"
 
 SwigDirector_wxNotebook::SwigDirector_wxNotebook(VALUE self, bool disown): wxNotebook(), Swig::Director(self, disown) {
     

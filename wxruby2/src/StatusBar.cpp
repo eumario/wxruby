@@ -760,7 +760,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/StatusBar.h"
+#include "StatusBar.h"
 
 SwigDirector_wxStatusBar::SwigDirector_wxStatusBar(VALUE self, bool disown): wxStatusBar(), Swig::Director(self, disown) {
     

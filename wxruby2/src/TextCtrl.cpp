@@ -762,7 +762,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/TextCtrl.h"
+#include "TextCtrl.h"
 
 SwigDirector_wxTextCtrl::SwigDirector_wxTextCtrl(VALUE self, bool disown): wxTextCtrl(), Swig::Director(self, disown) {
     

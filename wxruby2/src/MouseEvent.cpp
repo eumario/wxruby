@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/MouseEvent.h"
+#include "MouseEvent.h"
 
 static VALUE
 _wrap_wxMouseEvent_AltDown(int argc, VALUE *argv, VALUE self) {

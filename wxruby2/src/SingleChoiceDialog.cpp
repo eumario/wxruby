@@ -756,7 +756,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/SingleChoiceDialog.h"
+#include "SingleChoiceDialog.h"
 
 SwigDirector_wxSingleChoiceDialog::SwigDirector_wxSingleChoiceDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &caption, int n, wxString const choices[], char **clientData, long style, wxPoint const &pos, bool disown): wxSingleChoiceDialog(parent, message, caption, n, choices, clientData, style, pos), Swig::Director(self, disown) {
     

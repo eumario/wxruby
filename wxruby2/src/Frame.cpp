@@ -764,7 +764,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Frame.h"
+#include "Frame.h"
 
 SwigDirector_wxFrame::SwigDirector_wxFrame(VALUE self, bool disown): wxFrame(), Swig::Director(self, disown) {
     
@@ -994,21 +994,6 @@ _wrap_wxFrame_Centre(int argc, VALUE *argv, VALUE self) {
         arg2 = NUM2INT(argv[0]);
     }
     (arg1)->Centre(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFrame_Command(int argc, VALUE *argv, VALUE self) {
-    wxFrame *arg1 = (wxFrame *) 0 ;
-    int arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFrame, 1);
-    arg2 = NUM2INT(argv[0]);
-    (arg1)->Command(arg2);
     
     return Qnil;
 }
@@ -1672,7 +1657,6 @@ mWxFrame = mWx;
     rb_define_alloc_func(cWxFrame.klass, _wrap_wxFrame_allocate);
     rb_define_method(cWxFrame.klass, "initialize", VALUEFUNC(_wrap_new_wxFrame), -1);
     rb_define_method(cWxFrame.klass, "centre", VALUEFUNC(_wrap_wxFrame_Centre), -1);
-    rb_define_method(cWxFrame.klass, "command", VALUEFUNC(_wrap_wxFrame_Command), -1);
     rb_define_method(cWxFrame.klass, "create", VALUEFUNC(_wrap_wxFrame_Create), -1);
     rb_define_method(cWxFrame.klass, "create_status_bar", VALUEFUNC(_wrap_wxFrame_CreateStatusBar), -1);
     rb_define_method(cWxFrame.klass, "create_tool_bar", VALUEFUNC(_wrap_wxFrame_CreateToolBar), -1);

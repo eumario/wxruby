@@ -759,7 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Mask.h"
+#include "Mask.h"
 
 SwigDirector_wxMask::SwigDirector_wxMask(VALUE self, bool disown): wxMask(), Swig::Director(self, disown) {
     
