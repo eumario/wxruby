@@ -18,6 +18,17 @@
 #include "version.h"
 #include "dynamiccast.h"
 
+#ifdef WIN32
+#  undef GetClassName
+#  undef GetClassInfo
+#  undef Yield
+#  undef GetMessage
+#  undef FindWindow
+#  undef GetCharWidth
+#  undef DrawText
+#  undef StartDoc
+#endif
+
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
 #    define VALUEFUNC(f) ((VALUE (*)()) f)

@@ -1,3 +1,7 @@
+2004-01-02
+    * Merged another WIN32 patch from Curt
+    
+
 2004-01-01
     * Merged Curt's changes for MSW compilation
     * Attempt to fix extraneous wxDateTime asserts which happen 
