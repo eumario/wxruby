@@ -759,21 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/FontDialog.h"
-
-static VALUE
-_wrap_new_wxFontDialog__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxWindow *arg1 = (wxWindow *) 0 ;
-    wxFontDialog *result;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    result = (wxFontDialog *)new wxFontDialog(arg1);
-    DATA_PTR(self) = result;
-    return self;
-}
-
+#include "FontDialog.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
@@ -793,59 +779,23 @@ _wrap_wxFontDialog_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxFontDialog__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxFontDialog(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
     wxFontData *arg2 = 0 ;
     wxFontDialog *result;
     
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        arg2 = new wxFontData();
+    }
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxFontData, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if (argc > 1) {
+        SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxFontData, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
     result = (wxFontDialog *)new wxFontDialog(arg1,(wxFontData const &)*arg2);
     DATA_PTR(self) = result;
     return self;
-}
-
-
-static VALUE _wrap_new_wxFontDialog(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_new_wxFontDialog__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxFontData, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_new_wxFontDialog__SWIG_1(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxFontDialog'");
-    return Qnil;
 }
 
 
@@ -875,11 +825,16 @@ _wrap_wxFontDialog_Create__SWIG_1(int argc, VALUE *argv, VALUE self) {
     bool result;
     VALUE vresult = Qnil;
     
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        arg3 = new wxFontData();
+    }
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFontDialog, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxFontData, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if (argc > 1) {
+        SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxFontData, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
     result = (bool)(arg1)->Create(arg2,(wxFontData const &)*arg3);
     
     vresult = result ? Qtrue : Qfalse;
@@ -913,7 +868,7 @@ static VALUE _wrap_wxFontDialog_Create(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
-    if (argc == 3) {
+    if ((argc >= 2) && (argc <= 3)) {
         int _v;
         {
             void *ptr;
@@ -925,6 +880,9 @@ static VALUE _wrap_wxFontDialog_Create(int nargs, VALUE *args, VALUE self) {
                 _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxFontDialog_Create__SWIG_1(nargs, args, self);
+                }
                 {
                     void *ptr;
                     _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxFontData, 0) != -1)) ? 1 : 0;

@@ -44,3 +44,11 @@ def delete_files_in(dir)
 	end
     end
 end
+
+def delete_files_in_with_ext(dir,ext)
+    Dir[File.join(dir, "*#{ext}")].each do |f| 
+	if !(f =~ /CVS/)
+        	force_delete(f) 
+	end
+    end
+end

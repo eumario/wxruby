@@ -753,7 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/UpdateUIEvent.h"
+#include "UpdateUIEvent.h"
 
 SwigDirector_wxUpdateUIEvent::SwigDirector_wxUpdateUIEvent(VALUE self, wxWindowID commandId, bool disown): wxUpdateUIEvent(commandId), Swig::Director(self, disown) {
     

@@ -514,21 +514,20 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_wxListCtrlCompare swig_types[0] 
-#define  SWIGTYPE_p_wxRect swig_types[1] 
-#define  SWIGTYPE_p_wxColour swig_types[2] 
-#define  SWIGTYPE_p_wxImageList swig_types[3] 
-#define  SWIGTYPE_p_wxListCtrl swig_types[4] 
-#define  SWIGTYPE_p_wxValidator swig_types[5] 
-#define  SWIGTYPE_p_wxWindow swig_types[6] 
+#define  SWIGTYPE_p_wxListCtrl swig_types[0] 
+#define  SWIGTYPE_p_wxSize swig_types[1] 
+#define  SWIGTYPE_p_wxWindow swig_types[2] 
+#define  SWIGTYPE_p_wxFont swig_types[3] 
+#define  SWIGTYPE_p_wxValidator swig_types[4] 
+#define  SWIGTYPE_p_wxListItem swig_types[5] 
+#define  SWIGTYPE_p_wxColour swig_types[6] 
 #define  SWIGTYPE_p_wxPoint swig_types[7] 
-#define  SWIGTYPE_p_wxListItemAttr swig_types[8] 
-#define  SWIGTYPE_p_wxTextCtrl swig_types[9] 
-#define  SWIGTYPE_p_wxFont swig_types[10] 
-#define  SWIGTYPE_p_wxListItem swig_types[11] 
-#define  SWIGTYPE_p_wxSize swig_types[12] 
-#define  SWIGTYPE_p_int swig_types[13] 
-static swig_type_info *swig_types[15];
+#define  SWIGTYPE_p_wxImageList swig_types[8] 
+#define  SWIGTYPE_p_wxRect swig_types[9] 
+#define  SWIGTYPE_p_int swig_types[10] 
+#define  SWIGTYPE_p_wxListCtrlCompare swig_types[11] 
+#define  SWIGTYPE_p_wxListItemAttr swig_types[12] 
+static swig_type_info *swig_types[14];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -773,7 +772,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ListCtrl.h"
+#include "ListCtrl.h"
 
 SwigDirector_wxListCtrl::SwigDirector_wxListCtrl(VALUE self, bool disown): wxListCtrl(), Swig::Director(self, disown) {
     
@@ -1273,22 +1272,6 @@ _wrap_wxListCtrl_GetCountPerPage(int argc, VALUE *argv, VALUE self) {
     result = (int)((wxListCtrl const *)arg1)->GetCountPerPage();
     
     vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxListCtrl_GetEditControl(int argc, VALUE *argv, VALUE self) {
-    wxListCtrl *arg1 = (wxListCtrl *) 0 ;
-    wxTextCtrl *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListCtrl, 1);
-    result = (wxTextCtrl *)((wxListCtrl const *)arg1)->GetEditControl();
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
     return vresult;
 }
 
@@ -2481,36 +2464,34 @@ free_wxListItemAttr(wxListItemAttr *arg1) {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_wxListCtrlCompare[] = {{"_p_wxListCtrlCompare", 0, "wxListCtrlCompare *", 0, 0, 0, 0},{"_p_wxListCtrlCompare", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxRect[] = {{"_p_wxRect", 0, "wxRect *", 0, 0, 0, 0},{"_p_wxRect", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxColour[] = {{"_p_wxColour", 0, "wxColour *", 0, 0, 0, 0},{"_p_wxColour", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxImageList[] = {{"_p_wxImageList", 0, "wxImageList *", 0, 0, 0, 0},{"_p_wxImageList", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxListCtrl[] = {{"_p_wxListCtrl", 0, "wxListCtrl *", 0, 0, 0, 0},{"_p_wxListCtrl", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxValidator[] = {{"_p_wxValidator", 0, "wxValidator *", 0, 0, 0, 0},{"_p_wxValidator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxListItemAttr[] = {{"_p_wxListItemAttr", 0, "wxListItemAttr *", 0, 0, 0, 0},{"_p_wxListItemAttr", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxTextCtrl[] = {{"_p_wxTextCtrl", 0, "wxTextCtrl *", 0, 0, 0, 0},{"_p_wxTextCtrl", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxFont[] = {{"_p_wxFont", 0, "wxFont *", 0, 0, 0, 0},{"_p_wxFont", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxListItem[] = {{"_p_wxListItem", 0, "wxListItem *", 0, 0, 0, 0},{"_p_wxListItem", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0, 0},{"_p_wxSize", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxFont[] = {{"_p_wxFont", 0, "wxFont *", 0, 0, 0, 0},{"_p_wxFont", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxValidator[] = {{"_p_wxValidator", 0, "wxValidator *", 0, 0, 0, 0},{"_p_wxValidator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxListItem[] = {{"_p_wxListItem", 0, "wxListItem *", 0, 0, 0, 0},{"_p_wxListItem", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxColour[] = {{"_p_wxColour", 0, "wxColour *", 0, 0, 0, 0},{"_p_wxColour", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxImageList[] = {{"_p_wxImageList", 0, "wxImageList *", 0, 0, 0, 0},{"_p_wxImageList", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxRect[] = {{"_p_wxRect", 0, "wxRect *", 0, 0, 0, 0},{"_p_wxRect", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_int[] = {{"_p_int", 0, "int *", 0, 0, 0, 0},{"_p_int", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxListCtrlCompare[] = {{"_p_wxListCtrlCompare", 0, "wxListCtrlCompare *", 0, 0, 0, 0},{"_p_wxListCtrlCompare", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxListItemAttr[] = {{"_p_wxListItemAttr", 0, "wxListItemAttr *", 0, 0, 0, 0},{"_p_wxListItemAttr", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
-_swigt__p_wxListCtrlCompare, 
-_swigt__p_wxRect, 
-_swigt__p_wxColour, 
-_swigt__p_wxImageList, 
 _swigt__p_wxListCtrl, 
-_swigt__p_wxValidator, 
-_swigt__p_wxWindow, 
-_swigt__p_wxPoint, 
-_swigt__p_wxListItemAttr, 
-_swigt__p_wxTextCtrl, 
-_swigt__p_wxFont, 
-_swigt__p_wxListItem, 
 _swigt__p_wxSize, 
+_swigt__p_wxWindow, 
+_swigt__p_wxFont, 
+_swigt__p_wxValidator, 
+_swigt__p_wxListItem, 
+_swigt__p_wxColour, 
+_swigt__p_wxPoint, 
+_swigt__p_wxImageList, 
+_swigt__p_wxRect, 
 _swigt__p_int, 
+_swigt__p_wxListCtrlCompare, 
+_swigt__p_wxListItemAttr, 
 0
 };
 
@@ -2558,7 +2539,6 @@ mWxListCtrl = mWx;
     rb_define_method(cWxListCtrl.klass, "get_column_count", VALUEFUNC(_wrap_wxListCtrl_GetColumnCount), -1);
     rb_define_method(cWxListCtrl.klass, "get_column_width", VALUEFUNC(_wrap_wxListCtrl_GetColumnWidth), -1);
     rb_define_method(cWxListCtrl.klass, "get_count_per_page", VALUEFUNC(_wrap_wxListCtrl_GetCountPerPage), -1);
-    rb_define_method(cWxListCtrl.klass, "get_edit_control", VALUEFUNC(_wrap_wxListCtrl_GetEditControl), -1);
     rb_define_method(cWxListCtrl.klass, "get_image_list", VALUEFUNC(_wrap_wxListCtrl_GetImageList), -1);
     rb_define_method(cWxListCtrl.klass, "get_item", VALUEFUNC(_wrap_wxListCtrl_GetItem), -1);
     rb_define_method(cWxListCtrl.klass, "get_item_count", VALUEFUNC(_wrap_wxListCtrl_GetItemCount), -1);

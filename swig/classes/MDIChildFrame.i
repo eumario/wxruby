@@ -11,10 +11,11 @@
 
 %ignore wxMDIChildFrame::wxMDIChildFrame();
 
-#ifdef __WXMAC__
+//
+// Doesn't work on wxMac. We need a better workaround.
+//
 %ignore wxMdiChildFrame::GetWindowMenu;
 %ignore wxMdiChildFrame::SetWindowMenu;
-#endif
 
 %include "include/wxMDIChildFrame.h"
 

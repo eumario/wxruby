@@ -759,7 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/SpinCtrl.h"
+#include "SpinCtrl.h"
 
 static VALUE
 _wrap_new_wxSpinCtrl__SWIG_0(int argc, VALUE *argv, VALUE self) {

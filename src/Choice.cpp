@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Choice.h"
+#include "Choice.h"
 
 SwigDirector_wxChoice::SwigDirector_wxChoice(VALUE self, bool disown): wxChoice(), Swig::Director(self, disown) {
     

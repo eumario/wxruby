@@ -512,6 +512,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #endif
 
 
+#if defined(__WXMSW__)
+
+
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxSize swig_types[0] 
@@ -760,7 +763,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ToggleButton.h"
+#include "ToggleButton.h"
 
 SwigDirector_wxToggleButton::SwigDirector_wxToggleButton(VALUE self, bool disown): wxToggleButton(), Swig::Director(self, disown) {
     
@@ -1011,3 +1014,13 @@ mWxToggleButton = mWx;
     cWxToggleButton.destroy = (void (*)(void *)) free_wxToggleButton;
 }
 
+            #else
+            #ifdef __cplusplus
+            extern "C"
+            #endif
+            SWIGEXPORT(void) Init_wxToggleButton(void) {
+static bool initialized;
+if(initialized) return;
+initialized = true;
+            }
+            #endif    

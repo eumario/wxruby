@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/StaticBitmap.h"
+#include "StaticBitmap.h"
 
 SwigDirector_wxStaticBitmap::SwigDirector_wxStaticBitmap(VALUE self, bool disown): wxStaticBitmap(), Swig::Director(self, disown) {
     

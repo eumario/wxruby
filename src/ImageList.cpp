@@ -762,7 +762,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ImageList.h"
+#include "ImageList.h"
 
 static VALUE
 _wrap_new_wxImageList__SWIG_0(int argc, VALUE *argv, VALUE self) {
@@ -1122,32 +1122,7 @@ _wrap_wxImageList_RemoveAll(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxImageList_Replace__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxImageList *arg1 = (wxImageList *) 0 ;
-    int arg2 ;
-    wxBitmap *arg3 = 0 ;
-    wxBitmap const &arg4_defvalue = wxNullBitmap ;
-    wxBitmap *arg4 = (wxBitmap *) &arg4_defvalue ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 2) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImageList, 1);
-    arg2 = NUM2INT(argv[0]);
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxBitmap, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
-    if (argc > 2) {
-        SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxBitmap, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
-    }
-    result = (bool)(arg1)->Replace(arg2,(wxBitmap const &)*arg3,(wxBitmap const &)*arg4);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxImageList_Replace__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxImageList_Replace(int argc, VALUE *argv, VALUE self) {
     wxImageList *arg1 = (wxImageList *) 0 ;
     int arg2 ;
     wxIcon *arg3 = 0 ;
@@ -1163,73 +1138,6 @@ _wrap_wxImageList_Replace__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
-}
-
-
-static VALUE _wrap_wxImageList_Replace(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[5];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if ((argc >= 3) && (argc <= 4)) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxImageList, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
-                }
-                if (_v) {
-                    if (argc <= 3) {
-                        return _wrap_wxImageList_Replace__SWIG_0(nargs, args, self);
-                    }
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_wxImageList_Replace__SWIG_0(nargs, args, self);
-                    }
-                }
-            }
-        }
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxImageList, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxIcon, 0) != -1)) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_wxImageList_Replace__SWIG_1(nargs, args, self);
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxImageList_Replace'");
-    return Qnil;
 }
 
 

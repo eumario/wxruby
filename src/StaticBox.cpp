@@ -756,7 +756,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/StaticBox.h"
+#include "StaticBox.h"
 
 SwigDirector_wxStaticBox::SwigDirector_wxStaticBox(VALUE self, bool disown): wxStaticBox(), Swig::Director(self, disown) {
     

@@ -9,20 +9,18 @@
 #include <wx/fontdlg.h>
 %}
 
-//
-// Hey cool - conditional compilation!
-//
-#ifdef __WXMAC__
+
 %feature("nodirector") wxFontDialog;
+
 %ignore wxFontDialog::wxFontDialog(wxWindow *);
-#endif
+%typemap(default) wxFontData & {
+	$1 = new wxFontData();
+}
 
 #
 # Workaround for SWIG 1.3.22
 #
-%feature("nodirector") wxFontDialog;
 %ignore wxFontDialog::Create();
 %ignore wxFontDialog::wxFontDialog();
-%nodirector wxFontDialog::wxFontDialog();
 
 %include "include/wxFontDialog.h"

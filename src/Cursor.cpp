@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Cursor.h"
+#include "Cursor.h"
 
 static VALUE
 _wrap_new_wxCursor__SWIG_0(int argc, VALUE *argv, VALUE self) {

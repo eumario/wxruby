@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/FindReplaceData.h"
+#include "FindReplaceData.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

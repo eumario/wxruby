@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/CheckListBox.h"
+#include "CheckListBox.h"
 
 SwigDirector_wxCheckListBox::SwigDirector_wxCheckListBox(VALUE self, bool disown): wxCheckListBox(), Swig::Director(self, disown) {
     

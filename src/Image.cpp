@@ -767,7 +767,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Image.h"
+#include "Image.h"
 
 static VALUE
 _wrap_new_wxImage__SWIG_0(int argc, VALUE *argv, VALUE self) {

@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ColourData.h"
+#include "ColourData.h"
 
 SwigDirector_wxColourData::SwigDirector_wxColourData(VALUE self, bool disown): wxColourData(), Swig::Director(self, disown) {
     

@@ -760,7 +760,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ListBox.h"
+#include "ListBox.h"
 
 SwigDirector_wxListBox::SwigDirector_wxListBox(VALUE self, bool disown): wxListBox(), Swig::Director(self, disown) {
     

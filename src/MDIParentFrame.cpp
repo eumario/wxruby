@@ -519,11 +519,10 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxMDIClientWindow swig_types[2] 
 #define  SWIGTYPE_p_wxWindow swig_types[3] 
 #define  SWIGTYPE_p_wxMDIParentFrame swig_types[4] 
-#define  SWIGTYPE_p_wxMenu swig_types[5] 
-#define  SWIGTYPE_p_int swig_types[6] 
-#define  SWIGTYPE_p_wxToolBar swig_types[7] 
-#define  SWIGTYPE_p_wxPoint swig_types[8] 
-static swig_type_info *swig_types[10];
+#define  SWIGTYPE_p_int swig_types[5] 
+#define  SWIGTYPE_p_wxToolBar swig_types[6] 
+#define  SWIGTYPE_p_wxPoint swig_types[7] 
+static swig_type_info *swig_types[9];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -764,7 +763,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/MDIParentFrame.h"
+#include "MDIParentFrame.h"
 
 SwigDirector_wxMDIParentFrame::SwigDirector_wxMDIParentFrame(VALUE self, bool disown): wxMDIParentFrame(), Swig::Director(self, disown) {
     
@@ -1081,22 +1080,6 @@ _wrap_wxMDIParentFrame_GetToolBar(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxMDIParentFrame_GetWindowMenu(int argc, VALUE *argv, VALUE self) {
-    wxMDIParentFrame *arg1 = (wxMDIParentFrame *) 0 ;
-    wxMenu *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMDIParentFrame, 1);
-    result = (wxMenu *)((wxMDIParentFrame const *)arg1)->GetWindowMenu();
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxMenu,0);
-    return vresult;
-}
-
-
-static VALUE
 _wrap_wxMDIParentFrame_OnCreateClient(int argc, VALUE *argv, VALUE self) {
     wxMDIParentFrame *arg1 = (wxMDIParentFrame *) 0 ;
     wxMDIClientWindow *result;
@@ -1128,21 +1111,6 @@ _wrap_wxMDIParentFrame_SetToolBar(int argc, VALUE *argv, VALUE self) {
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->SetToolBar(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxMDIParentFrame_SetWindowMenu(int argc, VALUE *argv, VALUE self) {
-    wxMDIParentFrame *arg1 = (wxMDIParentFrame *) 0 ;
-    wxMenu *arg2 = (wxMenu *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMDIParentFrame, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxMenu, 1);
-    (arg1)->SetWindowMenu(arg2);
     
     return Qnil;
 }
@@ -1185,7 +1153,6 @@ static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0
 static swig_type_info _swigt__p_wxMDIClientWindow[] = {{"_p_wxMDIClientWindow", 0, "wxMDIClientWindow *", 0, 0, 0, 0},{"_p_wxMDIClientWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxMDIParentFrame[] = {{"_p_wxMDIParentFrame", 0, "wxMDIParentFrame *", 0, 0, 0, 0},{"_p_wxMDIParentFrame", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxMenu[] = {{"_p_wxMenu", 0, "wxMenu *", 0, 0, 0, 0},{"_p_wxMenu", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_int[] = {{"_p_int", 0, "int *", 0, 0, 0, 0},{"_p_int", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxToolBar[] = {{"_p_wxToolBar", 0, "wxToolBar *", 0, 0, 0, 0},{"_p_wxToolBar", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -1196,7 +1163,6 @@ _swigt__p_wxSize,
 _swigt__p_wxMDIClientWindow, 
 _swigt__p_wxWindow, 
 _swigt__p_wxMDIParentFrame, 
-_swigt__p_wxMenu, 
 _swigt__p_int, 
 _swigt__p_wxToolBar, 
 _swigt__p_wxPoint, 
@@ -1242,10 +1208,8 @@ mWxMDIParentFrame = mWx;
     rb_define_method(cWxMDIParentFrame.klass, "get_active_child", VALUEFUNC(_wrap_wxMDIParentFrame_GetActiveChild), -1);
     rb_define_method(cWxMDIParentFrame.klass, "get_client_window", VALUEFUNC(_wrap_wxMDIParentFrame_GetClientWindow), -1);
     rb_define_method(cWxMDIParentFrame.klass, "get_tool_bar", VALUEFUNC(_wrap_wxMDIParentFrame_GetToolBar), -1);
-    rb_define_method(cWxMDIParentFrame.klass, "get_window_menu", VALUEFUNC(_wrap_wxMDIParentFrame_GetWindowMenu), -1);
     rb_define_method(cWxMDIParentFrame.klass, "on_create_client", VALUEFUNC(_wrap_wxMDIParentFrame_OnCreateClient), -1);
     rb_define_method(cWxMDIParentFrame.klass, "set_tool_bar", VALUEFUNC(_wrap_wxMDIParentFrame_SetToolBar), -1);
-    rb_define_method(cWxMDIParentFrame.klass, "set_window_menu", VALUEFUNC(_wrap_wxMDIParentFrame_SetWindowMenu), -1);
     rb_define_method(cWxMDIParentFrame.klass, "tile", VALUEFUNC(_wrap_wxMDIParentFrame_Tile), -1);
     cWxMDIParentFrame.mark = 0;
     cWxMDIParentFrame.destroy = (void (*)(void *)) free_wxMDIParentFrame;

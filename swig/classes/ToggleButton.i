@@ -5,7 +5,9 @@
 
 %module(directors="1") wxToggleButton
 
-#ifndef __WXMAC__
+%runtime %{
+//@@if defined(__WXMSW__)
+%}
 
 %{
 #include <wx/tglbtn.h>
@@ -15,4 +17,4 @@
 
 %include "include/wxToggleButton.h"
 
-#endif
+

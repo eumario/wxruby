@@ -759,7 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/SpinButton.h"
+#include "SpinButton.h"
 
 SwigDirector_wxSpinButton::SwigDirector_wxSpinButton(VALUE self, bool disown): wxSpinButton(), Swig::Director(self, disown) {
     

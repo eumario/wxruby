@@ -14,12 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxFont : public wxFont, public Swig::Director {
-
-public:
-    SwigDirector_wxFont(VALUE self, bool disown = false);
-    SwigDirector_wxFont(VALUE self, int pointSize, int family, int style, int weight, bool const underline = false, wxString const &faceName = "", wxFontEncoding encoding = wxFONTENCODING_DEFAULT, bool disown = false);
-};
-
-
 #endif

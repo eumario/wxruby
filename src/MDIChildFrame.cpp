@@ -759,7 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/MDIChildFrame.h"
+#include "MDIChildFrame.h"
 
 SwigDirector_wxMDIChildFrame::SwigDirector_wxMDIChildFrame(VALUE self, bool disown): wxMDIChildFrame(), Swig::Director(self, disown) {
     

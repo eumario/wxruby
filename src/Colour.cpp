@@ -753,7 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Colour.h"
+#include "Colour.h"
 
 static VALUE
 _wrap_new_wxColour__SWIG_0(int argc, VALUE *argv, VALUE self) {

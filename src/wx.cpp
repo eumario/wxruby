@@ -951,7 +951,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/wx.h"
+#include "wx.h"
 
 static VALUE
 _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {

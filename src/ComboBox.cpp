@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ComboBox.h"
+#include "ComboBox.h"
 
 SwigDirector_wxComboBox::SwigDirector_wxComboBox(VALUE self, bool disown): wxComboBox(), Swig::Director(self, disown) {
     

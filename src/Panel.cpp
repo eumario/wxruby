@@ -758,7 +758,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Panel.h"
+#include "Panel.h"
 
 SwigDirector_wxPanel::SwigDirector_wxPanel(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, long style, wxString const &name, bool disown): wxPanel(parent, id, pos, size, style, name), Swig::Director(self, disown) {
     

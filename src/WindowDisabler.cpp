@@ -761,7 +761,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/WindowDisabler.h"
+#include "WindowDisabler.h"
 
 SwigDirector_wxWindowDisabler::SwigDirector_wxWindowDisabler(VALUE self, wxWindow *winToSkip, bool disown): wxWindowDisabler(winToSkip), Swig::Director(self, disown) {
     

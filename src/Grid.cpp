@@ -773,7 +773,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Grid.h"
+#include "Grid.h"
 
 SwigDirector_wxGrid::SwigDirector_wxGrid(VALUE self, bool disown): wxGrid(), Swig::Director(self, disown) {
     
