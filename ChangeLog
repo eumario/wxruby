@@ -1,3 +1,9 @@
+2003-11-10 21:00  kbs
+	* Fixed extconf.rb that I broke a couple weeks ago
+
+	* Added method: Wx::init_all_image_handlers
+
+
 2003-08-22 19:00  kbs
 	* Added some notes to the build/install section of README
 	
