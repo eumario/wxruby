@@ -40,8 +40,3 @@ bool GcIsDeleted(void *ptr)
 #define VERSION_STRING "wxRuby-SWIG 0.0.3"
 
 int wxMessageBox(const wxString& message, const wxString& caption = "Message", int style = wxOK, wxWindow *parent = NULL, int x = -1, int y = -1);
-
-%init %{
-    rb_define_const(mWx,"XXX", INT2NUM(777));
-printf("Defined XXX = %d\n", NUM2INT(rb_iv_get(mWx, "XXX")));
-%}
