@@ -19,7 +19,6 @@ class SwigDirector_wxNotebook : public wxNotebook, public Swig::Director {
 public:
     SwigDirector_wxNotebook(VALUE self, bool disown = false);
     SwigDirector_wxNotebook(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxString const &name = "notebook", bool disown = false);
-    virtual void OnSelChange(wxNotebookEvent &event);
 };
 
 

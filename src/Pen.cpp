@@ -87,16 +87,13 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
-#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
-#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7+ */
-#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
+#    else /* These definitions should work for Ruby 1.7 */
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -515,9 +512,6 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #endif
 
 
-#if defined(__WXMSWIN__) || defined(__WXMAC__)
-
-
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_p_wxDash swig_types[0] 
@@ -763,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Pen.h"
+#include "src/Pen.h"
 
 SwigDirector_wxPen::SwigDirector_wxPen(VALUE self, bool disown): wxPen(), Swig::Director(self, disown) {
     
@@ -1128,22 +1122,6 @@ _wrap_wxPen_GetJoin(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxPen_GetStipple(int argc, VALUE *argv, VALUE self) {
-    wxPen *arg1 = (wxPen *) 0 ;
-    wxBitmap *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxPen, 1);
-    result = (wxBitmap *)((wxPen const *)arg1)->GetStipple();
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxBitmap,0);
-    return vresult;
-}
-
-
-static VALUE
 _wrap_wxPen_GetStyle(int argc, VALUE *argv, VALUE self) {
     wxPen *arg1 = (wxPen *) 0 ;
     int result;
@@ -1459,7 +1437,6 @@ mWxPen = mWx;
     rb_define_method(cWxPen.klass, "get_colour", VALUEFUNC(_wrap_wxPen_GetColour), -1);
     rb_define_method(cWxPen.klass, "get_dashes", VALUEFUNC(_wrap_wxPen_GetDashes), -1);
     rb_define_method(cWxPen.klass, "get_join", VALUEFUNC(_wrap_wxPen_GetJoin), -1);
-    rb_define_method(cWxPen.klass, "get_stipple", VALUEFUNC(_wrap_wxPen_GetStipple), -1);
     rb_define_method(cWxPen.klass, "get_style", VALUEFUNC(_wrap_wxPen_GetStyle), -1);
     rb_define_method(cWxPen.klass, "get_width", VALUEFUNC(_wrap_wxPen_GetWidth), -1);
     rb_define_method(cWxPen.klass, "ok", VALUEFUNC(_wrap_wxPen_Ok), -1);
@@ -1473,13 +1450,3 @@ mWxPen = mWx;
     cWxPen.destroy = (void (*)(void *)) free_wxPen;
 }
 
-            #else
-            #ifdef __cplusplus
-            extern "C"
-            #endif
-            SWIGEXPORT(void) Init_wxPen(void) {
-static bool initialized;
-if(initialized) return;
-initialized = true;
-            }
-            #endif    

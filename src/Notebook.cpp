@@ -87,16 +87,13 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
-#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
-#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7+ */
-#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
+#    else /* These definitions should work for Ruby 1.7 */
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -515,7 +512,7 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #endif
 
 
-#if defined(__WXMSWIN__) || defined(__WXMAC__)
+#if defined(__WXMSW__) || defined(__WXMAC__)
 
 
 /* -------- TYPES TABLE (BEGIN) -------- */
@@ -523,11 +520,10 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxPanel swig_types[0] 
 #define  SWIGTYPE_p_wxSize swig_types[1] 
 #define  SWIGTYPE_p_wxWindow swig_types[2] 
-#define  SWIGTYPE_p_wxNotebookEvent swig_types[3] 
-#define  SWIGTYPE_p_wxNotebook swig_types[4] 
-#define  SWIGTYPE_p_wxPoint swig_types[5] 
-#define  SWIGTYPE_p_wxImageList swig_types[6] 
-static swig_type_info *swig_types[8];
+#define  SWIGTYPE_p_wxNotebook swig_types[3] 
+#define  SWIGTYPE_p_wxPoint swig_types[4] 
+#define  SWIGTYPE_p_wxImageList swig_types[5] 
+static swig_type_info *swig_types[7];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -769,7 +765,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Notebook.h"
+#include "src/Notebook.h"
 
 SwigDirector_wxNotebook::SwigDirector_wxNotebook(VALUE self, bool disown): wxNotebook(), Swig::Director(self, disown) {
     
@@ -781,19 +777,6 @@ SwigDirector_wxNotebook::SwigDirector_wxNotebook(VALUE self, wxWindow *parent, w
     
 }
 
-
-
-void SwigDirector_wxNotebook::OnSelChange(wxNotebookEvent &event) {
-    VALUE obj0 = Qnil ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        wxNotebook::OnSelChange(event);
-        return;
-    }
-    obj0 = SWIG_NewPointerObj(&event, SWIGTYPE_p_wxNotebookEvent, 0);
-    result = rb_funcall(swig_get_self(), rb_intern("on_sel_change"), 1,obj0);
-}
 
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -1154,24 +1137,6 @@ _wrap_wxNotebook_InsertPage(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxNotebook_OnSelChange(int argc, VALUE *argv, VALUE self) {
-    wxNotebook *arg1 = (wxNotebook *) 0 ;
-    wxNotebookEvent *arg2 = 0 ;
-    Swig::Director *director = 0;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxNotebookEvent, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
-    (arg1)->OnSelChange(*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_wxNotebook_RemovePage(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
     int arg2 ;
@@ -1316,7 +1281,6 @@ Swig::Director *director = (Swig::Director*)(arg1);
 static swig_type_info _swigt__p_wxPanel[] = {{"_p_wxPanel", 0, "wxPanel *", 0, 0, 0, 0},{"_p_wxPanel", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0, 0},{"_p_wxSize", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxNotebookEvent[] = {{"_p_wxNotebookEvent", 0, "wxNotebookEvent *", 0, 0, 0, 0},{"_p_wxNotebookEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxNotebook[] = {{"_p_wxNotebook", 0, "wxNotebook *", 0, 0, 0, 0},{"_p_wxNotebook", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxImageList[] = {{"_p_wxImageList", 0, "wxImageList *", 0, 0, 0, 0},{"_p_wxImageList", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -1325,7 +1289,6 @@ static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxPanel, 
 _swigt__p_wxSize, 
 _swigt__p_wxWindow, 
-_swigt__p_wxNotebookEvent, 
 _swigt__p_wxNotebook, 
 _swigt__p_wxPoint, 
 _swigt__p_wxImageList, 
@@ -1376,7 +1339,6 @@ mWxNotebook = mWx;
     rb_define_method(cWxNotebook.klass, "get_row_count", VALUEFUNC(_wrap_wxNotebook_GetRowCount), -1);
     rb_define_method(cWxNotebook.klass, "get_selection", VALUEFUNC(_wrap_wxNotebook_GetSelection), -1);
     rb_define_method(cWxNotebook.klass, "insert_page", VALUEFUNC(_wrap_wxNotebook_InsertPage), -1);
-    rb_define_method(cWxNotebook.klass, "on_sel_change", VALUEFUNC(_wrap_wxNotebook_OnSelChange), -1);
     rb_define_method(cWxNotebook.klass, "remove_page", VALUEFUNC(_wrap_wxNotebook_RemovePage), -1);
     rb_define_method(cWxNotebook.klass, "set_image_list", VALUEFUNC(_wrap_wxNotebook_SetImageList), -1);
     rb_define_method(cWxNotebook.klass, "set_padding", VALUEFUNC(_wrap_wxNotebook_SetPadding), -1);
