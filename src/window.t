@@ -32,8 +32,8 @@
 	wxSize ConvertDialogToPixels(const wxSize& sz); -> ConvertDialogSizeToPixels
 	wxPoint ConvertPixelsToDialog(const wxPoint& pt); -> ConvertPixelsPointToDialog
 	wxSize ConvertPixelsToDialog(const wxSize& sz); -> ConvertPixelsSizeToDialog
-	virtual bool Destroy();
-	virtual void DestroyChildren();
+#	virtual bool Destroy();
+#	virtual void DestroyChildren();
 	void Disable();
 # (8)	virtual void DragAcceptFiles(bool accept);
 	virtual bool Enable(bool enable = TRUE);
@@ -216,6 +216,7 @@ public:
 	// actually belongs in WxObject
     static VALUE GetClassInfo(VALUE self);
     static VALUE Paint(VALUE self);
+    static VALUE Destroy(VALUE self);
 	// msw only
 #ifdef __WXMSW__
     static void DragAcceptFiles(VALUE self,VALUE vaccept);
@@ -250,6 +251,8 @@ void WxWindow::DefineClass()
 
 	rb_define_method(rubyClass,"free",VALUEFUNC(WxWindow::free),0);
 	rb_define_method(rubyClass,"paint",VALUEFUNC(WxWindow::Paint),0);
+	rb_define_method(rubyClass,"destroy",VALUEFUNC(WxWindow::Destroy),0);
+
 	// belongs in WxObject
     rb_define_method(rubyClass,"GetClassInfo",VALUEFUNC(WxWindow::GetClassInfo),0);
 
@@ -299,6 +302,18 @@ WxWindow::GetClassInfo(VALUE self)
     Data_Get_Struct(self, wxWindow, ptr);
     return WxClassInfo::init0(ptr->GetClassInfo());
 }
+
+VALUE
+WxWindow::Destroy(VALUE self)
+{
+    wxWindow *ptr;
+    Data_Get_Struct(self, wxWindow, ptr);
+    ptr->Destroy();
+    DATA_PTR(self) = NULL;
+    return Qnil;
+}
+
+
 
 #ifdef __WXMSW__
 void

@@ -110,15 +110,15 @@ window.o: window.cpp wx.h  window.h evthandler.h colour.h \
   font.h size.h rect.h sizer.h caret.h point.h layout.h region.h \
   validator.h cursor.h tooltip.h classinfo.h
 xmlresource.o: xmlresource.h xmlresource.cpp
-dynamiccast.o: button.o filedroptarget.o menuitem.o  \
-caret.o font.o scrollbar.o  \
-checkbox.o frame.o \
-choice.o grid.o textattr.o colourdialog.o textctrl.o  \
-control.o textdataobject.o  \
-dataformat.o htmleasyprinting.o textdroptarget.o  \
-dataobject.o htmlprocessor.o togglebutton.o  \
-dataobjectsimple.o htmlwindow.o window.o  \
-dropsource.o mdichildframe.o xmlresource.o  \
-droptarget.o mdiclientwindow.o  \
-filedataobject.o mdiparentframe.o  
+dynamiccast.o: button.cpp filedroptarget.cpp menuitem.cpp  \
+caret.cpp font.cpp scrollbar.cpp  \
+checkbox.cpp frame.cpp \
+choice.cpp grid.cpp textattr.cpp colourdialog.cpp textctrl.cpp  \
+control.cpp textdataobject.cpp  \
+dataformat.cpp htmleasyprinting.cpp textdroptarget.cpp  \
+dataobject.cpp htmlprocessor.cpp togglebutton.cpp  \
+dataobjectsimple.cpp htmlwindow.cpp window.cpp  \
+dropsource.cpp mdichildframe.cpp xmlresource.cpp  \
+droptarget.cpp mdiclientwindow.cpp  \
+filedataobject.cpp mdiparentframe.cpp  
 wx.o: wx.cpp wx.h

@@ -88,6 +88,9 @@ VALUE WxRbTypeTable::ConvertCppObject(wxObject *obj)
 {
 	wxString className;
 	
+	if (obj == NULL)
+		return Qnil;
+
 	//
 	// First lets find this guys name
 	//
