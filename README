@@ -1,13 +1,13 @@
-README for wxRuby version 0.3.0 (EARLY BETA)
+README for wxRuby version 0.4.0 (EARLY BETA)
    Released under the wxWidgets 2 license (see LICENSE)
-   This file last updated 2003-04-17
+   This file last updated 2003-06-04
 
 
 --------------------------------------------------------------------
 INTRODUCTION
 
 wxRuby is an extension library for the Ruby language that
-gives access to the wxWidgets (formerly known as wxWindows)
+gives access to the wxWindows 2.4.x (also known as wxWidgets)
 cross-platform, native-widget, GUI toolkit. 
 
 The wxRuby project website is:
@@ -21,7 +21,7 @@ The wxWidgets project website is:
 REQUIREMENTS
 
 * Ruby 1.8.x (or 1.6.5+ on some platforms)
-* wxWidgets or wxWindows 2.4.x (compiled without unicode)
+* wxWindows 2.4.x (perhaps known as wxWidgets 2.4.x), without unicode
 
 Primary development is under Debian GNU/Linux ("Sarge").
 
@@ -159,5 +159,6 @@ this project, including (in no particular order):
  Nobuaki Arima, Roy Varghese, John Platte, Alan Chen,
  Robert P. Carlin, Gerard A.W. Vreeswijk, 
  and everyone who has posted to the mailing list or sent feedback.
-
+ (NOTE: This list is now out of date. I will try to update it 
+ in the next version to recognize several recent contributors)
 --------------------------------------------------------------------
