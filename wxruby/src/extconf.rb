@@ -13,7 +13,9 @@ $objs = [
 "notebook.o","tooltip.o","mask.o","socket.o","url.o","stream.o","toolbar.o",
 "image.o","palette.o","treectrl.o","classinfo.o","splitterwindow.o",
 "methods.o", "staticbitmap.o", "control.o","togglebutton.o","grid.o",
-"menuitem.o", "textattr.o",
+"menuitem.o", "textattr.o", "dataformat.o", 
+"dropsource.o", "droptarget.o", "textdroptarget.o", "filedroptarget.o",
+"dataobject.o", "dataobjectsimple.o", "filedataobject.o", "textdataobject.o",
 ]
 
 
