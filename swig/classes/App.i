@@ -57,13 +57,23 @@ public:
 
         printf("Calling wxEntry, this=%p\n", this);
 #ifdef __WXMSW__
+
+#if wxMINOR_VERSION == 4
 		    extern int  wxEntry(WXHINSTANCE hInstance,
             WXHINSTANCE WXUNUSED(hPrevInstance),
             char *lpCmdLine,
             int nCmdShow,
             bool enterLoop);
-        printf("Module handle = %d\n",GetModuleHandle(NULL));
-		    wxEntry(GetModuleHandle(NULL),0,"",true,true);
+	    wxEntry(GetModuleHandle(NULL),0,"",true,true);
+#else
+		    extern int wxEntry(HINSTANCE hInstance,
+                        HINSTANCE WXUNUSED(hPrevInstance),
+                        wxCmdLineArgType WXUNUSED(pCmdLine),
+                        int nCmdShow);
+	    wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
+#endif
+        
+	
 		
 #else     
         wxEntry((const int)argc,(char **)argv);
