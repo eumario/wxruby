@@ -455,10 +455,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxColour swig_types[0] 
-#define  SWIGTYPE_p_wxString swig_types[1] 
-#define  SWIGTYPE_p_wxBitmap swig_types[2] 
-#define  SWIGTYPE_p_wxBrush swig_types[3] 
-static swig_type_info *swig_types[5];
+#define  SWIGTYPE_p_wxBitmap swig_types[1] 
+#define  SWIGTYPE_p_wxBrush swig_types[2] 
+static swig_type_info *swig_types[4];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -485,6 +484,9 @@ static VALUE mWxBrush;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -670,7 +672,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Brush.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -744,15 +746,54 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Brush.h"
+#include "Brush.h"
+
+SwigDirector_wxBrush::SwigDirector_wxBrush(VALUE self, bool disown): wxBrush(), Swig::Director(self, disown) {
+    
+}
+
+
+
+SwigDirector_wxBrush::SwigDirector_wxBrush(VALUE self, wxColour const &colour, int style, bool disown): wxBrush(colour, style), Swig::Director(self, disown) {
+    
+}
+
+
+
+SwigDirector_wxBrush::SwigDirector_wxBrush(VALUE self, wxString const &colourName, int style, bool disown): wxBrush(colourName, style), Swig::Director(self, disown) {
+    
+}
+
+
+
+SwigDirector_wxBrush::SwigDirector_wxBrush(VALUE self, wxBitmap const &stippleBitmap, bool disown): wxBrush(stippleBitmap), Swig::Director(self, disown) {
+    
+}
+
+
+
+SwigDirector_wxBrush::SwigDirector_wxBrush(VALUE self, wxBrush const &brush, bool disown): wxBrush(brush), Swig::Director(self, disown) {
+    
+}
+
+
 
 static VALUE
 _wrap_new_wxBrush__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
     wxBrush *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (wxBrush *)new wxBrush();
+    arg1 = self;
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxBrush *)new SwigDirector_wxBrush(arg1,0);
+        
+    } else {
+        result = (wxBrush *)new wxBrush();
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -760,15 +801,24 @@ _wrap_new_wxBrush__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxBrush__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxColour *arg1 = 0 ;
-    int arg2 ;
+    VALUE arg1 ;
+    wxColour *arg2 = 0 ;
+    int arg3 ;
     wxBrush *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxColour, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    arg2 = NUM2INT(argv[1]);
-    result = (wxBrush *)new wxBrush((wxColour const &)*arg1,arg2);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxColour, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg3 = NUM2INT(argv[1]);
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxBrush *)new SwigDirector_wxBrush(arg1,(wxColour const &)*arg2,arg3,0);
+        
+    } else {
+        result = (wxBrush *)new wxBrush((wxColour const &)*arg2,arg3);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -776,17 +826,26 @@ _wrap_new_wxBrush__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxBrush__SWIG_2(int argc, VALUE *argv, VALUE self) {
-    wxString *arg1 = 0 ;
-    int arg2 ;
+    VALUE arg1 ;
+    wxString *arg2 = 0 ;
+    int arg3 ;
     wxBrush *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    arg1 = self;
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]));
     }
-    arg2 = NUM2INT(argv[1]);
-    result = (wxBrush *)new wxBrush((wxString const &)*arg1,arg2);
+    arg3 = NUM2INT(argv[1]);
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxBrush *)new SwigDirector_wxBrush(arg1,(wxString const &)*arg2,arg3,0);
+        
+    } else {
+        result = (wxBrush *)new wxBrush((wxString const &)*arg2,arg3);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -794,13 +853,22 @@ _wrap_new_wxBrush__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxBrush__SWIG_3(int argc, VALUE *argv, VALUE self) {
-    wxBitmap *arg1 = 0 ;
+    VALUE arg1 ;
+    wxBitmap *arg2 = 0 ;
     wxBrush *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBitmap, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (wxBrush *)new wxBrush((wxBitmap const &)*arg1);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxBitmap, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxBrush *)new SwigDirector_wxBrush(arg1,(wxBitmap const &)*arg2,0);
+        
+    } else {
+        result = (wxBrush *)new wxBrush((wxBitmap const &)*arg2);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -825,13 +893,22 @@ _wrap_wxBrush_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxBrush__SWIG_4(int argc, VALUE *argv, VALUE self) {
-    wxBrush *arg1 = 0 ;
+    VALUE arg1 ;
+    wxBrush *arg2 = 0 ;
     wxBrush *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBrush, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (wxBrush *)new wxBrush((wxBrush const &)*arg1);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxBrush, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxBrush *)new SwigDirector_wxBrush(arg1,(wxBrush const &)*arg2,0);
+        
+    } else {
+        result = (wxBrush *)new wxBrush((wxBrush const &)*arg2);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -839,63 +916,78 @@ _wrap_new_wxBrush__SWIG_4(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_wxBrush(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[2];
+    VALUE argv[3];
     int ii;
     
     argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+    for (ii = 0; (ii < argc) && (ii < 3); ii++) {
         argv[ii] = args[ii];
     }
-    if (argc == 0) {
-        return _wrap_new_wxBrush__SWIG_0(nargs, args, self);
-    }
     if (argc == 1) {
         int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
-        }
+        _v = 1;
         if (_v) {
-            return _wrap_new_wxBrush__SWIG_3(nargs, args, self);
-        }
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxBrush, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_new_wxBrush__SWIG_4(nargs, args, self);
+            return _wrap_new_wxBrush__SWIG_0(nargs, args, self);
         }
     }
     if (argc == 2) {
         int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxColour, 0) != -1)) ? 1 : 0;
-        }
+        _v = 1;
         if (_v) {
             {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_wxBrush__SWIG_1(nargs, args, self);
+                return _wrap_new_wxBrush__SWIG_3(nargs, args, self);
             }
         }
     }
     if (argc == 2) {
         int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxString, 0) != -1)) ? 1 : 0;
-        }
+        _v = 1;
         if (_v) {
             {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxBrush, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_wxBrush__SWIG_2(nargs, args, self);
+                return _wrap_new_wxBrush__SWIG_4(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        _v = 1;
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxColour, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_new_wxBrush__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        _v = 1;
+        if (_v) {
+            {
+                _v = TYPE(argv[1]) == T_STRING;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_new_wxBrush__SWIG_2(nargs, args, self);
+                }
             }
         }
     }
@@ -907,6 +999,14 @@ static VALUE _wrap_new_wxBrush(int nargs, VALUE *args, VALUE self) {
 
 static void
 free_wxBrush(wxBrush *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxBrush*)arg1;
+    printf("Brush.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
 static VALUE
@@ -1061,8 +1161,7 @@ static VALUE _wrap_wxBrush_SetColour(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxString, 0) != -1)) ? 1 : 0;
+                _v = TYPE(argv[1]) == T_STRING;
             }
             if (_v) {
                 return _wrap_wxBrush_SetColour__SWIG_1(nargs, args, self);
@@ -1130,17 +1229,32 @@ _wrap_wxBrush_SetStyle(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_disown_wxBrush(int argc, VALUE *argv, VALUE self) {
+    wxBrush *arg1 = (wxBrush *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBrush, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxColour[] = {{"_p_wxColour", 0, "wxColour *", 0},{"_p_wxColour"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxBitmap[] = {{"_p_wxBitmap", 0, "wxBitmap *", 0},{"_p_wxBitmap"},{0}};
 static swig_type_info _swigt__p_wxBrush[] = {{"_p_wxBrush", 0, "wxBrush *", 0},{"_p_wxBrush"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxColour, 
-_swigt__p_wxString, 
 _swigt__p_wxBitmap, 
 _swigt__p_wxBrush, 
 0
@@ -1167,6 +1281,7 @@ mWxBrush = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxBrush, "disown_wxBrush", VALUEFUNC(_wrap_disown_wxBrush), -1);
     
     extern void Init_wxGDIObject();
     Init_wxGDIObject();

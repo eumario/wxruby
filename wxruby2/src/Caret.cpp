@@ -488,6 +488,9 @@ static VALUE mWxCaret;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -674,7 +677,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Caret.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -748,7 +751,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Caret.h"
+#include "Caret.h"
 
 static VALUE
 _wrap_new_wxCaret__SWIG_0(int argc, VALUE *argv, VALUE self) {

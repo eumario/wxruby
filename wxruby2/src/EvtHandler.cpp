@@ -486,6 +486,9 @@ static VALUE mWxEvtHandler;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -796,7 +799,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("EvtHandler.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -870,7 +873,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/EvtHandler.h"
+#include "EvtHandler.h"
 
 SwigDirector_wxEvtHandler::SwigDirector_wxEvtHandler(VALUE self, bool disown): wxEvtHandler(), Swig::Director(self, disown) {
     
@@ -948,8 +951,7 @@ static void
 free_wxEvtHandler(wxEvtHandler *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxEvtHandler*)arg1;
     printf("EvtHandler.cpp" " Checking %p\n", director);
-    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));
-    if(self == Qnil)
+    if (GcIsDeleted(director))
     {
         printf("%p is already dead!\n", director);
         return;
@@ -1196,6 +1198,7 @@ _wrap_disown_wxEvtHandler(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
     {
         Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
         if (director) director->swig_disown();
     }
     

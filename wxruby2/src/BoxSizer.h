@@ -14,4 +14,11 @@
 class Swig::Director;
 
 
+class SwigDirector_wxBoxSizer : public wxBoxSizer, public Swig::Director {
+
+public:
+    SwigDirector_wxBoxSizer(VALUE self, int orient, bool disown = 0);
+};
+
+
 #endif

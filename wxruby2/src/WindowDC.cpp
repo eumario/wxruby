@@ -484,6 +484,9 @@ static VALUE mWxWindowDC;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -668,7 +671,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("WindowDC.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -742,7 +745,13 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/WindowDC.h"
+#include "WindowDC.h"
+
+SwigDirector_wxWindowDC::SwigDirector_wxWindowDC(VALUE self, wxWindow *window, bool disown): wxWindowDC(window), Swig::Director(self, disown) {
+    
+}
+
+
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
@@ -763,13 +772,22 @@ _wrap_wxWindowDC_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxWindowDC(int argc, VALUE *argv, VALUE self) {
-    wxWindow *arg1 = (wxWindow *) 0 ;
+    VALUE arg1 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowDC *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    result = (wxWindowDC *)new wxWindowDC(arg1);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxWindowDC *)new SwigDirector_wxWindowDC(arg1,arg2,0);
+        
+    } else {
+        result = (wxWindowDC *)new wxWindowDC(arg2);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -777,8 +795,33 @@ _wrap_new_wxWindowDC(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxWindowDC(wxWindowDC *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxWindowDC*)arg1;
+    printf("WindowDC.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
+static VALUE
+_wrap_disown_wxWindowDC(int argc, VALUE *argv, VALUE self) {
+    wxWindowDC *arg1 = (wxWindowDC *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindowDC, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -812,6 +855,7 @@ mWxWindowDC = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxWindowDC, "disown_wxWindowDC", VALUEFUNC(_wrap_disown_wxWindowDC), -1);
     
     extern void Init_wxDC();
     Init_wxDC();

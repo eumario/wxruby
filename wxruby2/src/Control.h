@@ -14,4 +14,11 @@
 class Swig::Director;
 
 
+class SwigDirector_wxControl : public wxControl, public Swig::Director {
+
+public:
+    SwigDirector_wxControl(VALUE self, bool disown = true);
+};
+
+
 #endif

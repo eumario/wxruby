@@ -455,9 +455,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxControlWithItems swig_types[0] 
-#define  SWIGTYPE_p_wxString swig_types[1] 
-#define  SWIGTYPE_p_wxClientData swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxClientData swig_types[1] 
+static swig_type_info *swig_types[3];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -484,6 +483,9 @@ static VALUE mWxControlWithItems;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -669,7 +671,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("ControlWithItems.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -743,7 +745,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ControlWithItems.h"
+#include "ControlWithItems.h"
 
 static VALUE
 _wrap_wxControlWithItems_Append(int argc, VALUE *argv, VALUE self) {
@@ -991,12 +993,10 @@ free_wxControlWithItems(wxControlWithItems *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxControlWithItems[] = {{"_p_wxControlWithItems", 0, "wxControlWithItems *", 0},{"_p_wxControlWithItems"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxClientData[] = {{"_p_wxClientData", 0, "wxClientData *", 0},{"_p_wxClientData"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxControlWithItems, 
-_swigt__p_wxString, 
 _swigt__p_wxClientData, 
 0
 };

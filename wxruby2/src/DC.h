@@ -14,4 +14,11 @@
 class Swig::Director;
 
 
+class SwigDirector_wxDC : public wxDC, public Swig::Director {
+
+public:
+    SwigDirector_wxDC(VALUE self, bool disown = 0);
+};
+
+
 #endif

@@ -486,6 +486,9 @@ static VALUE mWxCalendarDateAttr;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -672,7 +675,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("CalendarDateAttr.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -746,7 +749,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/CalendarDateAttr.h"
+#include "CalendarDateAttr.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

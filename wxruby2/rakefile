@@ -67,9 +67,9 @@ begin
     
     task :clean do
         force_delete($target_lib)
-        force_rmdir($dest_dir)
+        #force_rmdir($dest_dir)
         delete_files_in($obj_dir)
-        force_rmdir($obj_dir)
+        #force_rmdir($obj_dir)
     end
 rescue Exception => e
     puts(e.message)

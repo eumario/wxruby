@@ -620,8 +620,7 @@ type_error:
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxWindow swig_types[0] 
-#define  SWIGTYPE_p_wxString swig_types[1] 
-static swig_type_info *swig_types[3];
+static swig_type_info *swig_types[2];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -645,6 +644,9 @@ VALUE mWx;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -707,7 +709,28 @@ public:
 };
 
 
+#include <wx/hashmap.h>
+
 IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
+WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
+WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
+
+static GcHashMap GcHash;
+static DeletedHashMap DeletedHash;
+
+void GcMarkDeleted(void *ptr)
+{
+	DeletedHash[ptr] = true;
+}
+
+bool GcIsDeleted(void *ptr)
+{
+	if (DeletedHash.find(ptr) == DeletedHash.end())
+		return false;
+	else return true;
+}
+
+
 
 /***********************************************************************
  * director.swg
@@ -892,7 +915,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/wx.h"
+#include "wx.h"
 
 static VALUE
 _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
@@ -939,11 +962,9 @@ _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0},{"_p_wxWindow"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxWindow, 
-_swigt__p_wxString, 
 0
 };
 
@@ -964,6 +985,8 @@ SWIGEXPORT(void) Init_wx(void) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
         SWIG_define_class(swig_types[i]);
     }
+    
+    
     
     
     extern void InitializeOtherModules();

@@ -14,4 +14,12 @@
 class Swig::Director;
 
 
+class SwigDirector_wxObject : public wxObject, public Swig::Director {
+
+public:
+    SwigDirector_wxObject(VALUE self, bool disown = 0);
+    SwigDirector_wxObject(VALUE self, wxObject const &other, bool disown = 0);
+};
+
+
 #endif

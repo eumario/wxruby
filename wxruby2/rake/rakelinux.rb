@@ -9,9 +9,7 @@
 
 use_wx_config
 
-$extra_ld_flags = '-shared'
-
-$extra_cpp_flags = '-g'
+$extra_ldflags = '-shared'
 
 $debug = false
 if($debug)

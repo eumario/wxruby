@@ -455,9 +455,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_WXTYPE swig_types[0] 
-#define  SWIGTYPE_p_wxString swig_types[1] 
-#define  SWIGTYPE_p_wxCommandEvent swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxCommandEvent swig_types[1] 
+static swig_type_info *swig_types[3];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -484,6 +483,9 @@ static VALUE mWxCommandEvent;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -669,7 +671,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("CommandEvent.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -743,7 +745,13 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/CommandEvent.h"
+#include "CommandEvent.h"
+
+SwigDirector_wxCommandEvent::SwigDirector_wxCommandEvent(VALUE self, WXTYPE commandEventType, int id, bool disown): wxCommandEvent(commandEventType, id), Swig::Director(self, disown) {
+    
+}
+
+
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
@@ -764,23 +772,32 @@ _wrap_wxCommandEvent_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxCommandEvent(int argc, VALUE *argv, VALUE self) {
-    WXTYPE arg1 = (WXTYPE) 0 ;
-    int arg2 = (int) 0 ;
+    VALUE arg1 ;
+    WXTYPE arg2 = (WXTYPE) 0 ;
+    int arg3 = (int) 0 ;
     wxCommandEvent *result;
     
     if ((argc < 0) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
     if (argc > 0) {
         {
             WXTYPE * ptr;
             SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_WXTYPE, 1);
-            if (ptr) arg1 = *ptr;
+            if (ptr) arg2 = *ptr;
         }
     }
     if (argc > 1) {
-        arg2 = NUM2INT(argv[1]);
+        arg3 = NUM2INT(argv[1]);
     }
-    result = (wxCommandEvent *)new wxCommandEvent(arg1,arg2);
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxCommandEvent *)new SwigDirector_wxCommandEvent(arg1,arg2,arg3,0);
+        
+    } else {
+        result = (wxCommandEvent *)new wxCommandEvent(arg2,arg3);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -968,18 +985,41 @@ _wrap_wxCommandEvent_SetString(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxCommandEvent(wxCommandEvent *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxCommandEvent*)arg1;
+    printf("CommandEvent.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
+static VALUE
+_wrap_disown_wxCommandEvent(int argc, VALUE *argv, VALUE self) {
+    wxCommandEvent *arg1 = (wxCommandEvent *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxCommandEvent, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_WXTYPE[] = {{"_p_WXTYPE", 0, "WXTYPE *", 0},{"_p_WXTYPE"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxCommandEvent[] = {{"_p_wxCommandEvent", 0, "wxCommandEvent *", 0},{"_p_wxCommandEvent"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_WXTYPE, 
-_swigt__p_wxString, 
 _swigt__p_wxCommandEvent, 
 0
 };
@@ -1005,6 +1045,7 @@ mWxCommandEvent = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxCommandEvent, "disown_wxCommandEvent", VALUEFUNC(_wrap_disown_wxCommandEvent), -1);
     
     extern void Init_wxEvent();
     Init_wxEvent();

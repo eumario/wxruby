@@ -458,9 +458,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxWindow swig_types[1] 
 #define  SWIGTYPE_p_wxCmdLineParser swig_types[2] 
 #define  SWIGTYPE_p_wxEvent swig_types[3] 
-#define  SWIGTYPE_p_wxString swig_types[4] 
-#define  SWIGTYPE_p_wxLog swig_types[5] 
-static swig_type_info *swig_types[7];
+#define  SWIGTYPE_p_wxLog swig_types[4] 
+static swig_type_info *swig_types[6];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -487,6 +486,9 @@ static VALUE mWxApp;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -799,7 +801,7 @@ public:
             int nCmdShow,
             bool enterLoop);
         printf("Module handle = %d\n",GetModuleHandle(NULL));
-		wxEntry(GetModuleHandle(NULL),0,"",true,false);
+		wxEntry(GetModuleHandle(NULL),0,"",true,true);
 		
 #else     
         wxEntry(argc,argv);
@@ -963,7 +965,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("App.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -1037,7 +1039,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/App.h"
+#include "App.h"
 
 SwigDirector_App::SwigDirector_App(VALUE self, bool disown): wxRubyApp(), Swig::Director(self, disown) {
     
@@ -1208,8 +1210,7 @@ static void
 free_wxRubyApp(wxRubyApp *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_App*)arg1;
     printf("App.cpp" " Checking %p\n", director);
-    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));
-    if(self == Qnil)
+    if (GcIsDeleted(director))
     {
         printf("%p is already dead!\n", director);
         return;
@@ -1769,6 +1770,7 @@ _wrap_disown_App(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxRubyApp, 1);
     {
         Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
         if (director) director->swig_disown();
     }
     
@@ -1783,7 +1785,6 @@ static swig_type_info _swigt__p_wxRubyApp[] = {{"_p_wxRubyApp", 0, "wxRubyApp *"
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0},{"_p_wxWindow"},{0}};
 static swig_type_info _swigt__p_wxCmdLineParser[] = {{"_p_wxCmdLineParser", 0, "wxCmdLineParser *", 0},{"_p_wxCmdLineParser"},{0}};
 static swig_type_info _swigt__p_wxEvent[] = {{"_p_wxEvent", 0, "wxEvent *", 0},{"_p_wxEvent"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxLog[] = {{"_p_wxLog", 0, "wxLog *", 0},{"_p_wxLog"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
@@ -1791,7 +1792,6 @@ _swigt__p_wxRubyApp,
 _swigt__p_wxWindow, 
 _swigt__p_wxCmdLineParser, 
 _swigt__p_wxEvent, 
-_swigt__p_wxString, 
 _swigt__p_wxLog, 
 0
 };

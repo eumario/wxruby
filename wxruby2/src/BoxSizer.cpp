@@ -484,6 +484,9 @@ static VALUE mWxBoxSizer;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -668,7 +671,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("BoxSizer.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -742,7 +745,13 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/BoxSizer.h"
+#include "BoxSizer.h"
+
+SwigDirector_wxBoxSizer::SwigDirector_wxBoxSizer(VALUE self, int orient, bool disown): wxBoxSizer(orient), Swig::Director(self, disown) {
+    
+}
+
+
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
@@ -763,13 +772,22 @@ _wrap_wxBoxSizer_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxBoxSizer(int argc, VALUE *argv, VALUE self) {
-    int arg1 ;
+    VALUE arg1 ;
+    int arg2 ;
     wxBoxSizer *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    arg1 = NUM2INT(argv[0]);
-    result = (wxBoxSizer *)new wxBoxSizer(arg1);
+    arg1 = self;
+    arg2 = NUM2INT(argv[0]);
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxBoxSizer *)new SwigDirector_wxBoxSizer(arg1,arg2,0);
+        
+    } else {
+        result = (wxBoxSizer *)new wxBoxSizer(arg2);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -826,8 +844,33 @@ _wrap_wxBoxSizer_GetOrientation(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxBoxSizer(wxBoxSizer *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxBoxSizer*)arg1;
+    printf("BoxSizer.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
+static VALUE
+_wrap_disown_wxBoxSizer(int argc, VALUE *argv, VALUE self) {
+    wxBoxSizer *arg1 = (wxBoxSizer *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBoxSizer, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -861,6 +904,7 @@ mWxBoxSizer = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxBoxSizer, "disown_wxBoxSizer", VALUEFUNC(_wrap_disown_wxBoxSizer), -1);
     
     extern void Init_wxSizer();
     Init_wxSizer();

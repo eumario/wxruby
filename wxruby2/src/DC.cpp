@@ -463,14 +463,13 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxBrush swig_types[6] 
 #define  SWIGTYPE_p_wxPoint swig_types[7] 
 #define  SWIGTYPE_p_wxDC swig_types[8] 
-#define  SWIGTYPE_p_wxString swig_types[9] 
-#define  SWIGTYPE_p_wxPen swig_types[10] 
-#define  SWIGTYPE_p_wxPalette swig_types[11] 
-#define  SWIGTYPE_p_wxFont swig_types[12] 
-#define  SWIGTYPE_p_wxRegion swig_types[13] 
-#define  SWIGTYPE_p_wxList swig_types[14] 
-#define  SWIGTYPE_p_wxSize swig_types[15] 
-static swig_type_info *swig_types[17];
+#define  SWIGTYPE_p_wxPen swig_types[9] 
+#define  SWIGTYPE_p_wxPalette swig_types[10] 
+#define  SWIGTYPE_p_wxFont swig_types[11] 
+#define  SWIGTYPE_p_wxRegion swig_types[12] 
+#define  SWIGTYPE_p_wxList swig_types[13] 
+#define  SWIGTYPE_p_wxSize swig_types[14] 
+static swig_type_info *swig_types[16];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -497,6 +496,9 @@ static VALUE mWxDC;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -682,7 +684,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("DC.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -756,10 +758,24 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/DC.h"
+#include "DC.h"
+
+SwigDirector_wxDC::SwigDirector_wxDC(VALUE self, bool disown): wxDC(), Swig::Director(self, disown) {
+    
+}
+
+
 
 static void
 free_wxDC(wxDC *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxDC*)arg1;
+    printf("DC.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
 static VALUE
@@ -3628,6 +3644,23 @@ _wrap_wxDC_StartDoc(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_disown_wxDC(int argc, VALUE *argv, VALUE self) {
+    wxDC *arg1 = (wxDC *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxDC, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -3640,7 +3673,6 @@ static swig_type_info _swigt__p_wxBitmap[] = {{"_p_wxBitmap", 0, "wxBitmap *", 0
 static swig_type_info _swigt__p_wxBrush[] = {{"_p_wxBrush", 0, "wxBrush *", 0},{"_p_wxBrush"},{0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0},{"_p_wxPoint"},{0}};
 static swig_type_info _swigt__p_wxDC[] = {{"_p_wxDC", 0, "wxDC *", 0},{"_p_wxDC"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxPen[] = {{"_p_wxPen", 0, "wxPen *", 0},{"_p_wxPen"},{0}};
 static swig_type_info _swigt__p_wxPalette[] = {{"_p_wxPalette", 0, "wxPalette *", 0},{"_p_wxPalette"},{0}};
 static swig_type_info _swigt__p_wxFont[] = {{"_p_wxFont", 0, "wxFont *", 0},{"_p_wxFont"},{0}};
@@ -3658,7 +3690,6 @@ _swigt__p_wxBitmap,
 _swigt__p_wxBrush, 
 _swigt__p_wxPoint, 
 _swigt__p_wxDC, 
-_swigt__p_wxString, 
 _swigt__p_wxPen, 
 _swigt__p_wxPalette, 
 _swigt__p_wxFont, 
@@ -3689,6 +3720,7 @@ mWxDC = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxDC, "disown_wxDC", VALUEFUNC(_wrap_disown_wxDC), -1);
     
     extern void Init_wxObject();
     Init_wxObject();
