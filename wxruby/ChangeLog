@@ -1,3 +1,7 @@
+2003-08-22 05:30  kbs
+	* Updated README and created several platform-specific README.xxx files
+	
+
 2003-08-12 07:00  kbs
 	* Oops! Really checked extconf.rb as described below. Obviously I need
 	to improve my process!
