@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -800,7 +803,7 @@ _wrap_new_wxCheckListBox(int argc, VALUE *argv, VALUE self) {
     long arg8 = (long) 0 ;
     wxValidator const &arg9_defvalue = wxDefaultValidator ;
     wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
-    wxString const &arg10_defvalue = "listBox" ;
+    wxString const &arg10_defvalue = wxT("listBox") ;
     wxString *arg10 = (wxString *) &arg10_defvalue ;
     wxCheckListBox *result;
     wxString *arr6 ;
@@ -828,7 +831,7 @@ _wrap_new_wxCheckListBox(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = STR2CSTR(rb_ary_entry(argv[4],i));
+                    arr6[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[4],i));
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;

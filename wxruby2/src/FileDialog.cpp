@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -785,13 +788,13 @@ static VALUE
 _wrap_new_wxFileDialog(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
-    wxString const &arg3_defvalue = "Choose" ;
+    wxString const &arg3_defvalue = wxT("Choose") ;
     wxString *arg3 = (wxString *) &arg3_defvalue ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
-    wxString const &arg5_defvalue = "" ;
+    wxString const &arg5_defvalue = wxT("") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
-    wxString const &arg6_defvalue = "*.*" ;
+    wxString const &arg6_defvalue = wxT("*.*") ;
     wxString *arg6 = (wxString *) &arg6_defvalue ;
     long arg7 = (long) 0 ;
     wxPoint const &arg8_defvalue = wxDefaultPosition ;
@@ -866,7 +869,7 @@ _wrap_wxFileDialog_GetDirectory(int argc, VALUE *argv, VALUE self) {
     result = ((wxFileDialog const *)arg1)->GetDirectory();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -884,7 +887,7 @@ _wrap_wxFileDialog_GetFilename(int argc, VALUE *argv, VALUE self) {
     result = ((wxFileDialog const *)arg1)->GetFilename();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -894,23 +897,31 @@ static VALUE
 _wrap_wxFileDialog_GetFilenames(int argc, VALUE *argv, VALUE self) {
     wxFileDialog *arg1 = (wxFileDialog *) 0 ;
     wxArrayString *arg2 = 0 ;
-    wxArrayString sel2 ;
-    VALUE vresult = Qnil;
+    wxArrayString tmp2 ;
     
-    {
-        arg2 = &sel2;
-    }
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
+    {
+        if ((argv[0] = Qnil) || (TYPE(argv[0]) != T_ARRAY))
+        {
+            arg2 = &tmp2;
+        }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[0])->len; i++)
+            {
+                wxString item = (wxChar *)STR2CSTR(rb_ary_entry(argv[0],i));
+                tmp2.Add(item);
+            }
+            
+            arg2 = &tmp2;
+        }
+        
+    }
     ((wxFileDialog const *)arg1)->GetFilenames(*arg2);
     
-    {
-        vresult = rb_ary_new();
-        for (int i = 0; i < arg2->GetCount(); i++)
-        rb_ary_push(vresult,rb_str_new2((*arg2)[i].c_str()));
-    }
-    return vresult;
+    return Qnil;
 }
 
 
@@ -942,7 +953,7 @@ _wrap_wxFileDialog_GetMessage(int argc, VALUE *argv, VALUE self) {
     result = ((wxFileDialog const *)arg1)->GetMessage();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -960,7 +971,7 @@ _wrap_wxFileDialog_GetPath(int argc, VALUE *argv, VALUE self) {
     result = ((wxFileDialog const *)arg1)->GetPath();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -970,23 +981,31 @@ static VALUE
 _wrap_wxFileDialog_GetPaths(int argc, VALUE *argv, VALUE self) {
     wxFileDialog *arg1 = (wxFileDialog *) 0 ;
     wxArrayString *arg2 = 0 ;
-    wxArrayString sel2 ;
-    VALUE vresult = Qnil;
+    wxArrayString tmp2 ;
     
-    {
-        arg2 = &sel2;
-    }
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
+    {
+        if ((argv[0] = Qnil) || (TYPE(argv[0]) != T_ARRAY))
+        {
+            arg2 = &tmp2;
+        }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[0])->len; i++)
+            {
+                wxString item = (wxChar *)STR2CSTR(rb_ary_entry(argv[0],i));
+                tmp2.Add(item);
+            }
+            
+            arg2 = &tmp2;
+        }
+        
+    }
     ((wxFileDialog const *)arg1)->GetPaths(*arg2);
     
-    {
-        vresult = rb_ary_new();
-        for (int i = 0; i < arg2->GetCount(); i++)
-        rb_ary_push(vresult,rb_str_new2((*arg2)[i].c_str()));
-    }
-    return vresult;
+    return Qnil;
 }
 
 
@@ -1018,7 +1037,7 @@ _wrap_wxFileDialog_GetWildcard(int argc, VALUE *argv, VALUE self) {
     result = ((wxFileDialog const *)arg1)->GetWildcard();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

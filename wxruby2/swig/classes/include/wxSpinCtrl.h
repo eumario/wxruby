@@ -27,7 +27,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxSpinCtrl(wxWindow*  parent , wxWindowID  id = -1, const wxString&  value = wxEmptyString, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxSP_ARROW_KEYS, int  min = 0, int  max = 100, int  initial = 0, const wxString&  name = _T("wxSpinCtrl")) ;
+  wxSpinCtrl(wxWindow*  parent , wxWindowID  id = -1, const wxString&  value = wxEmptyString, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxSP_ARROW_KEYS, int  min = 0, int  max = 100, int  initial = 0, const wxString&  name = wxT("wxSpinCtrl"));
 	/**
 	 * \brief Creation function called by the spin control constructor.
 
@@ -44,7 +44,7 @@ See   for details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id = -1, const wxString&  value = wxEmptyString, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxSP_ARROW_KEYS, int  min = 0, int  max = 100, int  initial = 0, const wxString&  name = _T("wxSpinCtrl")) ;
+  bool Create(wxWindow*  parent , wxWindowID  id = -1, const wxString&  value = wxEmptyString, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxSP_ARROW_KEYS, int  min = 0, int  max = 100, int  initial = 0, const wxString&  name = wxT("wxSpinCtrl"));
 	/**
 	 * \brief  
 	 * \param const wxString&   

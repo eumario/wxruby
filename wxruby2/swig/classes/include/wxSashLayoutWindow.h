@@ -23,7 +23,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxSashLayoutWindow(wxSashLayoutWindow*  parent , wxSashLayoutWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCLIP_CHILDREN, const wxString&  name = "layoutWindow") ;
+   wxSashLayoutWindow(wxSashLayoutWindow*  parent , wxSashLayoutWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCLIP_CHILDREN, const wxString&  name = wxT("layoutWindow")) ;
 	/**
 	 * \brief Destructor. 
 	*/

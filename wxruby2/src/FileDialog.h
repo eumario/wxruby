@@ -17,7 +17,7 @@ class Swig::Director;
 class SwigDirector_wxFileDialog : public wxFileDialog, public Swig::Director {
 
 public:
-    SwigDirector_wxFileDialog(VALUE self, wxWindow *parent, wxString const &message = "Choose", wxString const &defaultDir = "", wxString const &defaultFile = "", wxString const &wildcard = "*.*", long style = 0, wxPoint const &pos = wxDefaultPosition, bool disown = false);
+    SwigDirector_wxFileDialog(VALUE self, wxWindow *parent, wxString const &message = wxT("Choose"), wxString const &defaultDir = wxT(""), wxString const &defaultFile = wxT(""), wxString const &wildcard = wxT("*.*"), long style = 0, wxPoint const &pos = wxDefaultPosition, bool disown = false);
 };
 
 

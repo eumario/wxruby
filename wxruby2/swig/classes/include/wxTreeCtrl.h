@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxTreeCtrl(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTR_HAS_BUTTONS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listCtrl") ;
+   wxTreeCtrl(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTR_HAS_BUTTONS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("listCtrl")) ;
 	/**
 	 * \brief Destructor, destroying the list control. 
 	*/
@@ -120,7 +120,7 @@ See also  .
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTR_HAS_BUTTONS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listCtrl") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTR_HAS_BUTTONS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("listCtrl")) ;
 	/**
 	 * \brief Deletes the specified item. A   event will be
 generated.

@@ -146,7 +146,7 @@ Sets the commands to start up the network and to hang up again.
 	 * \param const wxString&   
 	*/
 
-   SetConnectCommand(const wxString&  commandDial = wxT("/usr/bin/pon"), const wxString&  commandHangup = wxT("/usr/bin/poff")) ;
+   SetConnectCommand(const wxString&  commandDial = wxT(wxT("/usr/bin/pon")), const wxString&  commandHangup = wxT(wxT("/usr/bin/poff"))) ;
 };
 
 

@@ -84,7 +84,7 @@ were filled.
 	 * \param wxSize   
 	*/
 
-  wxBitmap GetBitmap(const wxString&  param = wxT("bitmap"), wxSize  size = wxDefaultSize) ;
+  wxBitmap GetBitmap(const wxString&  param = wxT(wxT("bitmap")), wxSize  size = wxDefaultSize) ;
 	/**
 	 * \brief Gets a bool flag (1, t, yes, on, true are true, everything else is false). 
 	 * \param const wxString&   
@@ -115,7 +115,7 @@ were filled.
 	 * \param const wxString&   
 	*/
 
-  wxFont GetFont(const wxString&  param = wxT("font")) ;
+  wxFont GetFont(const wxString&  param = wxT(wxT("font"))) ;
 	/**
 	 * \brief Returns the XRCID. 
 	*/
@@ -127,7 +127,7 @@ were filled.
 	 * \param wxSize   
 	*/
 
-  wxIcon GetIcon(const wxString&  param = wxT("icon"), wxSize  size = wxDefaultSize) ;
+  wxIcon GetIcon(const wxString&  param = wxT(wxT("icon")), wxSize  size = wxDefaultSize) ;
 	/**
 	 * \brief Gets the integer value from the parameter. 
 	 * \param const wxString&   
@@ -163,13 +163,13 @@ were filled.
 	 * \param const wxString&   
 	*/
 
-  wxPoint GetPosition(const wxString&  param = wxT("pos")) ;
+  wxPoint GetPosition(const wxString&  param = wxT(wxT("pos"))) ;
 	/**
 	 * \brief Gets the size (may be in dialog units). 
 	 * \param const wxString&   
 	*/
 
-  wxSize GetSize(const wxString&  param = wxT("size")) ;
+  wxSize GetSize(const wxString&  param = wxT(wxT("size"))) ;
 	/**
 	 * \brief Gets style flags from text in form &quot;flag | flag2| flag3 |...&quot;
 Only understands flags added with AddStyle. 
@@ -177,7 +177,7 @@ Only understands flags added with AddStyle.
 	 * \param int   
 	*/
 
-  int GetStyle(const wxString&  param = wxT("style"), int  defaults = 0) ;
+  int GetStyle(const wxString&  param = wxT(wxT("style")), int  defaults = 0) ;
 	/**
 	 * \brief Gets text from param and does some conversions: 
 	 * \param const wxString&   

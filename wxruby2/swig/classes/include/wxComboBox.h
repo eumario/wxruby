@@ -27,7 +27,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-  wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox");
+  wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("comboBox"));
 	/**
 	 * \brief Destructor, destroying the combobox. 
 	*/
@@ -49,7 +49,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox");
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("comboBox"));
 	/**
 	 * \brief Copies the selected text to the clipboard. 
 	*/

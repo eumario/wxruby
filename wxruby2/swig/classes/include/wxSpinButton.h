@@ -23,7 +23,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxSpinButton(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSP_HORIZONTAL, const wxString&  name = "spinButton") ;
+   wxSpinButton(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSP_HORIZONTAL, const wxString&  name = wxT("spinButton")) ;
 	/**
 	 * \brief Destructor, destroys the spin button control. 
 	*/
@@ -40,7 +40,7 @@ See   for details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSP_HORIZONTAL, const wxString&  name = "spinButton") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSP_HORIZONTAL, const wxString&  name = wxT("spinButton")) ;
 	/**
 	 * \brief Returns the maximum permissible value. 
 	*/

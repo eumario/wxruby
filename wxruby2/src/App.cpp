@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -610,7 +613,7 @@ public:
 		    wxEntry(GetModuleHandle(NULL),0,"",true,true);
 		
 #else     
-        wxEntry(argc,argv);
+        wxEntry((const int)argc,(char **)argv);
 #endif        
 		
 
@@ -1097,7 +1100,7 @@ _wrap_App_GetAppName(int argc, VALUE *argv, VALUE self) {
     result = ((wxRubyApp const *)arg1)->GetAppName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1115,7 +1118,7 @@ _wrap_App_GetClassName(int argc, VALUE *argv, VALUE self) {
     result = ((wxRubyApp const *)arg1)->GetClassName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1184,7 +1187,7 @@ _wrap_App_GetVendorName(int argc, VALUE *argv, VALUE self) {
     result = ((wxRubyApp const *)arg1)->GetVendorName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -816,7 +819,7 @@ _wrap_wxLog_GetTraceMasks(int argc, VALUE *argv, VALUE self) {
         
         for (int i = 0; i < result->GetCount(); i++)
         {
-            rb_ary_push(vresult,rb_str_new2((*result)[i]));
+            rb_ary_push(vresult,rb_str_new2((const char *)(*result)[i].c_str()));
         }
     }
     return vresult;
@@ -996,13 +999,13 @@ _wrap_wxLog_GetLogLevel(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_wxLog_SetTimestamp(int argc, VALUE *argv, VALUE self) {
     wxLog *arg1 = (wxLog *) 0 ;
-    char *arg2 ;
+    wxChar *arg2 = (wxChar *) 0 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxLog, 1);
-    arg2 = StringValuePtr(argv[0]);
-    (arg1)->SetTimestamp((char const *)arg2);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxChar, 1);
+    (arg1)->SetTimestamp((wxChar const *)arg2);
     
     return Qnil;
 }

@@ -107,7 +107,7 @@ volume (or current volume if   is empty).
 	 * \param const wxString&   
 	*/
 
-  void AssignCwd(const wxString&  volume = "") ;
+  void AssignCwd(const wxString&  volume = wxT("")) ;
 	/**
 	 * \brief Sets this file name object to the given directory name. The name and extension
 will be empty. 
@@ -197,7 +197,7 @@ current volume.
 	 * \param const wxString&   
 	*/
 
-  wxString GetCwd(const wxString&  volume = "") ;
+  wxString GetCwd(const wxString&  volume = wxT("")) ;
 	/**
 	 * \brief Returns the number of directories in the file name. 
 	*/
@@ -393,7 +393,7 @@ file if the current directory were  .
 	 * \param wxPathFormat   
 	*/
 
-  bool MakeRelativeTo(const wxString&  pathBase = "", wxPathFormat  format = wxPATH_NATIVE) ;
+  bool MakeRelativeTo(const wxString&  pathBase = wxT(""), wxPathFormat  format = wxPATH_NATIVE) ;
 	/**
 	 * \brief  
 	 * \param int   

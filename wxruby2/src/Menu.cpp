@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -791,7 +794,7 @@ _wrap_wxMenu_allocate(VALUE self) {
 static VALUE
 _wrap_new_wxMenu(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
-    wxString const &arg2_defvalue = "" ;
+    wxString const &arg2_defvalue = wxT("") ;
     wxString *arg2 = (wxString *) &arg2_defvalue ;
     long arg3 = (long) 0 ;
     wxMenu *result;
@@ -838,7 +841,7 @@ _wrap_wxMenu_Append(int argc, VALUE *argv, VALUE self) {
     wxMenu *arg1 = (wxMenu *) 0 ;
     int arg2 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     wxItemKind arg5 = (wxItemKind) wxITEM_NORMAL ;
     
@@ -870,7 +873,7 @@ _wrap_wxMenu_AppendCheckItem(int argc, VALUE *argv, VALUE self) {
     wxMenu *arg1 = (wxMenu *) 0 ;
     int arg2 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     
     if ((argc < 2) || (argc > 3))
@@ -896,7 +899,7 @@ _wrap_wxMenu_AppendRadioItem(int argc, VALUE *argv, VALUE self) {
     wxMenu *arg1 = (wxMenu *) 0 ;
     int arg2 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     
     if ((argc < 2) || (argc > 3))
@@ -1260,7 +1263,7 @@ _wrap_wxMenu_GetHelpString(int argc, VALUE *argv, VALUE self) {
     result = ((wxMenu const *)arg1)->GetHelpString(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1280,7 +1283,7 @@ _wrap_wxMenu_GetLabel(int argc, VALUE *argv, VALUE self) {
     result = ((wxMenu const *)arg1)->GetLabel(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1314,7 +1317,7 @@ _wrap_wxMenu_GetTitle(int argc, VALUE *argv, VALUE self) {
     result = ((wxMenu const *)arg1)->GetTitle();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1346,7 +1349,7 @@ _wrap_wxMenu_Insert__SWIG_1(int argc, VALUE *argv, VALUE self) {
     size_t arg2 ;
     int arg3 ;
     wxString *arg4 = 0 ;
-    wxString const &arg5_defvalue = "" ;
+    wxString const &arg5_defvalue = wxT("") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     wxItemKind arg6 = (wxItemKind) wxITEM_NORMAL ;
     
@@ -1459,7 +1462,7 @@ _wrap_wxMenu_InsertCheckItem(int argc, VALUE *argv, VALUE self) {
     size_t arg2 ;
     int arg3 ;
     wxString *arg4 = 0 ;
-    wxString const &arg5_defvalue = "" ;
+    wxString const &arg5_defvalue = wxT("") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     
     if ((argc < 3) || (argc > 4))
@@ -1487,7 +1490,7 @@ _wrap_wxMenu_InsertRadioItem(int argc, VALUE *argv, VALUE self) {
     size_t arg2 ;
     int arg3 ;
     wxString *arg4 = 0 ;
-    wxString const &arg5_defvalue = "" ;
+    wxString const &arg5_defvalue = wxT("") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     
     if ((argc < 3) || (argc > 4))
@@ -1580,7 +1583,7 @@ _wrap_wxMenu_Prepend__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxMenu *arg1 = (wxMenu *) 0 ;
     int arg2 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     wxItemKind arg5 = (wxItemKind) wxITEM_NORMAL ;
     
@@ -1681,7 +1684,7 @@ _wrap_wxMenu_PrependCheckItem(int argc, VALUE *argv, VALUE self) {
     wxMenu *arg1 = (wxMenu *) 0 ;
     int arg2 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     
     if ((argc < 2) || (argc > 3))
@@ -1707,7 +1710,7 @@ _wrap_wxMenu_PrependRadioItem(int argc, VALUE *argv, VALUE self) {
     wxMenu *arg1 = (wxMenu *) 0 ;
     int arg2 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     
     if ((argc < 2) || (argc > 3))

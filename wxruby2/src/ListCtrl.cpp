@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -815,7 +818,7 @@ _wrap_new_wxListCtrl(int argc, VALUE *argv, VALUE self) {
     long arg6 = (long) wxLC_ICON ;
     wxValidator const &arg7_defvalue = wxDefaultValidator ;
     wxValidator *arg7 = (wxValidator *) &arg7_defvalue ;
-    wxString const &arg8_defvalue = "listCtrl" ;
+    wxString const &arg8_defvalue = wxT("listCtrl") ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     wxListCtrl *result;
     
@@ -929,7 +932,7 @@ _wrap_wxListCtrl_Create(int argc, VALUE *argv, VALUE self) {
     long arg6 = (long) wxLC_ICON ;
     wxValidator const &arg7_defvalue = wxDefaultValidator ;
     wxValidator *arg7 = (wxValidator *) &arg7_defvalue ;
-    wxString const &arg8_defvalue = "listCtrl" ;
+    wxString const &arg8_defvalue = wxT("listCtrl") ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     bool result;
     VALUE vresult = Qnil;
@@ -1442,7 +1445,7 @@ _wrap_wxListCtrl_GetItemText(int argc, VALUE *argv, VALUE self) {
     result = ((wxListCtrl const *)arg1)->GetItemText(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

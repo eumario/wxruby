@@ -17,7 +17,7 @@ class Swig::Director;
 class SwigDirector_wxTextEntryDialog : public wxTextEntryDialog, public Swig::Director {
 
 public:
-    SwigDirector_wxTextEntryDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &caption = "Please", wxString const &defaultValue = "", long style = wxOK, wxPoint const &pos = wxDefaultPosition, bool disown = false);
+    SwigDirector_wxTextEntryDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &caption = wxT("Please"), wxString const &defaultValue = wxT(""), long style = wxOK, wxPoint const &pos = wxDefaultPosition, bool disown = false);
 };
 
 

@@ -14,12 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxBitmapButton : public wxBitmapButton, public Swig::Director {
-
-public:
-    SwigDirector_wxBitmapButton(VALUE self, bool disown = false);
-    SwigDirector_wxBitmapButton(VALUE self, wxWindow *parent, wxWindowID id, wxBitmap const &bitmap, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxBU_AUTODRAW, wxValidator const &validator = wxDefaultValidator, wxString const &name = "button", bool disown = false);
-};
-
-
 #endif

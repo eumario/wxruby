@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -760,18 +763,6 @@ namespace Swig {
 
 #include "BitmapButton.h"
 
-SwigDirector_wxBitmapButton::SwigDirector_wxBitmapButton(VALUE self, bool disown): wxBitmapButton(), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxBitmapButton::SwigDirector_wxBitmapButton(VALUE self, wxWindow *parent, wxWindowID id, wxBitmap const &bitmap, wxPoint const &pos, wxSize const &size, long style, wxValidator const &validator, wxString const &name, bool disown): wxBitmapButton(parent, id, bitmap, pos, size, style, validator, name), Swig::Director(self, disown) {
-    
-}
-
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxBitmapButton_allocate(VALUE self) {
@@ -791,52 +782,43 @@ _wrap_wxBitmapButton_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxBitmapButton(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindowID arg3 ;
-    wxBitmap *arg4 = 0 ;
-    wxPoint const &arg5_defvalue = wxDefaultPosition ;
-    wxPoint *arg5 = (wxPoint *) &arg5_defvalue ;
-    wxSize const &arg6_defvalue = wxDefaultSize ;
-    wxSize *arg6 = (wxSize *) &arg6_defvalue ;
-    long arg7 = (long) wxBU_AUTODRAW ;
-    wxValidator const &arg8_defvalue = wxDefaultValidator ;
-    wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
-    wxString const &arg9_defvalue = "button" ;
-    wxString *arg9 = (wxString *) &arg9_defvalue ;
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxWindowID arg2 ;
+    wxBitmap *arg3 = 0 ;
+    wxPoint const &arg4_defvalue = wxDefaultPosition ;
+    wxPoint *arg4 = (wxPoint *) &arg4_defvalue ;
+    wxSize const &arg5_defvalue = wxDefaultSize ;
+    wxSize *arg5 = (wxSize *) &arg5_defvalue ;
+    long arg6 = (long) wxBU_AUTODRAW ;
+    wxValidator const &arg7_defvalue = wxDefaultValidator ;
+    wxValidator *arg7 = (wxValidator *) &arg7_defvalue ;
+    wxString const &arg8_defvalue = wxT("button") ;
+    wxString *arg8 = (wxString *) &arg8_defvalue ;
     wxBitmapButton *result;
     
     if ((argc < 3) || (argc > 8))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    arg3 = NUM2INT(argv[1]);
-    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxBitmap, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    arg2 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[2], (void **) &arg3, SWIGTYPE_p_wxBitmap, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
     if (argc > 3) {
-        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 4) {
-        SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[4], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 5) {
-        arg7 = NUM2LONG(argv[5]);
+        arg6 = NUM2LONG(argv[5]);
     }
     if (argc > 6) {
-        SWIG_ConvertPtr(argv[6], (void **) &arg8, SWIGTYPE_p_wxValidator, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[6], (void **) &arg7, SWIGTYPE_p_wxValidator, 1); if (arg7 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 7) {
         {
-            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg8 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxBitmapButton *)new SwigDirector_wxBitmapButton(arg1,arg2,arg3,(wxBitmap const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9,false);
-        
-    } else {
-        result = (wxBitmapButton *)new wxBitmapButton(arg2,arg3,(wxBitmap const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
-        
-    }
+    result = (wxBitmapButton *)new wxBitmapButton(arg1,arg2,(wxBitmap const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxValidator const &)*arg7,(wxString const &)*arg8);
     DATA_PTR(self) = result;
     return self;
 }
@@ -844,16 +826,7 @@ _wrap_new_wxBitmapButton(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxBitmapButton(wxBitmapButton *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxBitmapButton*)arg1;
-    printf("BitmapButton.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    fflush(stdout);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxBitmapButton_Create(int argc, VALUE *argv, VALUE self) {
@@ -867,7 +840,7 @@ _wrap_wxBitmapButton_Create(int argc, VALUE *argv, VALUE self) {
     long arg7 = (long) 0 ;
     wxValidator const &arg8_defvalue = wxDefaultValidator ;
     wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
-    wxString const &arg9_defvalue = "button" ;
+    wxString const &arg9_defvalue = wxT("button") ;
     wxString *arg9 = (wxString *) &arg9_defvalue ;
     bool result;
     VALUE vresult = Qnil;
@@ -1256,22 +1229,6 @@ static VALUE _wrap_wxBitmapButton_GetBitmapSelected(int nargs, VALUE *args, VALU
 }
 
 
-static VALUE
-_wrap_disown_wxBitmapButton(int argc, VALUE *argv, VALUE self) {
-    wxBitmapButton *arg1 = (wxBitmapButton *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBitmapButton, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1313,7 +1270,6 @@ mWxBitmapButton = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxBitmapButton, "disown_wxBitmapButton", VALUEFUNC(_wrap_disown_wxBitmapButton), -1);
     
     extern void Init_wxButton();
     Init_wxButton();

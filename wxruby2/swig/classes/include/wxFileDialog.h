@@ -42,7 +42,7 @@ by using this flag.
 	 * \param const wxPoint&   
 	*/
 
-   wxFileDialog(wxWindow*  parent , const wxString&  message = "Choose", const wxString&  defaultDir = "", const wxString&  defaultFile = "", const wxString&  wildcard = "*.*", long  style = 0, const wxPoint&  pos = wxDefaultPosition) ;
+   wxFileDialog(wxWindow*  parent , const wxString&  message = wxT("Choose"), const wxString&  defaultDir = wxT(""), const wxString&  defaultFile = wxT(""), const wxString&  wildcard = wxT("*.*"), long  style = 0, const wxPoint&  pos = wxDefaultPosition) ;
 	/**
 	 * \brief Destructor. 
 	*/

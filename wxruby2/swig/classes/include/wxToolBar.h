@@ -49,7 +49,7 @@ public:
 	 * \param wxItemKind  
 	*/
 
-  wxToolBarTool* AddTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxString&  shortHelpString = "", wxItemKind kind = wxITEM_NORMAL) ;
+  wxToolBarTool* AddTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxString&  shortHelpString = wxT(""), wxItemKind kind = wxITEM_NORMAL) ;
 	/**
 	 * \brief  
 	 * \param int  
@@ -62,7 +62,7 @@ public:
 	 * \param wxObject*   
 	*/
 
-  wxToolBarTool* AddTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap& bitmap2 = wxNullBitmap, wxItemKind kind = wxITEM_NORMAL, const wxString&  shortHelpString = "", const wxString&  longHelpString = "", wxObject*  clientData = NULL) ;
+  wxToolBarTool* AddTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap& bitmap2 = wxNullBitmap, wxItemKind kind = wxITEM_NORMAL, const wxString&  shortHelpString = wxT(""), const wxString&  longHelpString = wxT(""), wxObject*  clientData = NULL) ;
 	/**
 	 * \brief Adds a tool to the toolbar. The first (short and most commonly used) version
 has fewer parameters than the full version at the price of not being able to
@@ -84,7 +84,7 @@ as in  .
 	 * \param wxObject*   
 	*/
 
-  wxToolBarTool* AddCheckTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = "", const wxString&  longHelpString = "", wxObject*  clientData = NULL) ;
+  wxToolBarTool* AddCheckTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = wxT(""), const wxString&  longHelpString = wxT(""), wxObject*  clientData = NULL) ;
 	/**
 	 * \brief Adds a new radio tool to the toolbar. Consecutive radio tools form a radio
 group such that exactly one button in the group is pressed at any moment, in
@@ -103,7 +103,7 @@ others are not.
 	 * \param wxObject*   
 	*/
 
-  wxToolBarTool* AddRadioTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = "", const wxString&  longHelpString = "", wxObject*  clientData = NULL) ;
+  wxToolBarTool* AddRadioTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = wxT(""), const wxString&  longHelpString = wxT(""), wxObject*  clientData = NULL) ;
 	/**
 	 * \brief Removes the specified tool from the toolbar and deletes it. If you don't want
 to delete the tool, but just to remove it from the toolbar (to possibly add it
@@ -245,7 +245,7 @@ You must call   for the change to take place.
 	 * \param const wxString&   
 	*/
 
-  wxToolBarTool * InsertTool(size_t  pos , int  toolId , const wxBitmap&  bitmap1 , const wxBitmap& bitmap2 = wxNullBitmap, bool isToggle = false, wxObject*  clientData = NULL, const wxString&  shortHelpString = "", const wxString&  longHelpString = "") ;
+  wxToolBarTool * InsertTool(size_t  pos , int  toolId , const wxBitmap&  bitmap1 , const wxBitmap& bitmap2 = wxNullBitmap, bool isToggle = false, wxObject*  clientData = NULL, const wxString&  shortHelpString = wxT(""), const wxString&  longHelpString = wxT("")) ;
 	/**
 	 * \brief Inserts the tool with the specified attributes into the toolbar at the given
 position.

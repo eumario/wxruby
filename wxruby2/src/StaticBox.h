@@ -18,7 +18,7 @@ class SwigDirector_wxStaticBox : public wxStaticBox, public Swig::Director {
 
 public:
     SwigDirector_wxStaticBox(VALUE self, bool disown = false);
-    SwigDirector_wxStaticBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxString const &name = "staticBox", bool disown = false);
+    SwigDirector_wxStaticBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxString const &name = wxT("staticBox"), bool disown = false);
 };
 
 

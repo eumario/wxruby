@@ -18,7 +18,7 @@ class SwigDirector_wxMDIChildFrame : public wxMDIChildFrame, public Swig::Direct
 
 public:
     SwigDirector_wxMDIChildFrame(VALUE self, bool disown = false);
-    SwigDirector_wxMDIChildFrame(VALUE self, wxMDIParentFrame *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, wxString const &name = "frame", bool disown = false);
+    SwigDirector_wxMDIChildFrame(VALUE self, wxMDIParentFrame *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, wxString const &name = wxT("frame"), bool disown = false);
 };
 
 

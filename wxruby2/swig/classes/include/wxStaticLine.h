@@ -23,7 +23,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxStaticLine(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxLI_HORIZONTAL, const wxString&  name = "staticLine") ;
+   wxStaticLine(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxLI_HORIZONTAL, const wxString&  name = wxT("staticLine")) ;
 	/**
 	 * \brief Creates the static line for two-step construction. See  
 for further details. 
@@ -35,7 +35,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticLine") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("staticLine")) ;
 	/**
 	 * \brief Returns true if the line is vertical, false if horizontal. 
 	*/

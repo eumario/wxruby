@@ -43,7 +43,7 @@ dialog may be resumed with   function.
 	 * \param const wxString&   
 	*/
 
-  bool Update(int  value , const wxString&  newmsg = "") ;
+  bool Update(int  value , const wxString&  newmsg = wxT("")) ;
 };
 
 

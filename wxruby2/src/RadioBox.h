@@ -18,7 +18,7 @@ class SwigDirector_wxRadioBox : public wxRadioBox, public Swig::Director {
 
 public:
     SwigDirector_wxRadioBox(VALUE self, bool disown = false);
-    SwigDirector_wxRadioBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &point = wxDefaultPosition, wxSize const &size = wxDefaultSize, int n = 0, wxString const choices[] = NULL, int majorDimension = 0, long style = wxRA_SPECIFY_COLS, wxValidator const &validator = wxDefaultValidator, wxString const &name = "radioBox", bool disown = false);
+    SwigDirector_wxRadioBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &point = wxDefaultPosition, wxSize const &size = wxDefaultSize, int n = 0, wxString const choices[] = NULL, int majorDimension = 0, long style = wxRA_SPECIFY_COLS, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("radioBox"), bool disown = false);
 };
 
 

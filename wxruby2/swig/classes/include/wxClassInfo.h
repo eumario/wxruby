@@ -30,7 +30,7 @@ dynamically creatable (typically, it is an abstract class).
 	 * \param char*   
 	*/
 
-  static wxClassInfo * FindClass(char*  name ) ;
+  static wxClassInfo * FindClass(wxChar *  name );
 	/**
 	 * \brief Returns the name of the first base class (NULL if none). 
 	*/

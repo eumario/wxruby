@@ -23,7 +23,7 @@ and the mode specifying how the string should be tokenized.
 	 * \param wxStringTokenizerMode   
 	*/
 
-   wxStringTokenizer(const wxString&  str , const wxString&  delims = "", wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
+   wxStringTokenizer(const wxString&  str , const wxString&  delims = wxT(""), wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
 	/**
 	 * \brief Returns the number of tokens in the input string. 
 	*/
@@ -61,7 +61,7 @@ and the mode specifying how the string should be tokenized.
 	 * \param wxStringTokenizerMode   
 	*/
 
-  void SetString(const wxString&  to_tokenize , const wxString&  delims = "", wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
+  void SetString(const wxString&  to_tokenize , const wxString&  delims = wxT(""), wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
 };
 
 

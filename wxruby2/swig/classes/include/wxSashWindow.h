@@ -23,7 +23,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxSashWindow(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCLIP_CHILDREN, const wxString&  name = "sashWindow") ;
+   wxSashWindow(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCLIP_CHILDREN, const wxString&  name = wxT("sashWindow")) ;
 	/**
 	 * \brief Destructor. 
 	*/

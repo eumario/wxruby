@@ -25,7 +25,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxBitmapButton(wxWindow*  parent , wxWindowID  id , const wxBitmap&  bitmap , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxBU_AUTODRAW, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "button") ;
+   wxBitmapButton(wxWindow*  parent , wxWindowID  id , const wxBitmap&  bitmap , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxBU_AUTODRAW, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("button")) ;
 	/**
 	 * \brief Destructor, destroying the button. 
 	*/
@@ -43,7 +43,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxBitmap&  bitmap , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "button");
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxBitmap&  bitmap , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("button"));
 	/**
 	 * \brief Returns the bitmap for the disabled state. 
 	*/

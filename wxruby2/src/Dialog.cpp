@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -854,7 +857,7 @@ _wrap_new_wxDialog(int argc, VALUE *argv, VALUE self) {
     wxSize const &arg6_defvalue = wxDefaultSize ;
     wxSize *arg6 = (wxSize *) &arg6_defvalue ;
     long arg7 = (long) wxDEFAULT_DIALOG_STYLE ;
-    wxString const &arg8_defvalue = "dialogBox" ;
+    wxString const &arg8_defvalue = wxT("dialogBox") ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     wxDialog *result;
     
@@ -934,7 +937,7 @@ _wrap_wxDialog_Create(int argc, VALUE *argv, VALUE self) {
     wxSize const &arg6_defvalue = wxDefaultSize ;
     wxSize *arg6 = (wxSize *) &arg6_defvalue ;
     long arg7 = (long) wxDEFAULT_DIALOG_STYLE ;
-    wxString const &arg8_defvalue = "dialogBox" ;
+    wxString const &arg8_defvalue = wxT("dialogBox") ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     bool result;
     VALUE vresult = Qnil;
@@ -1011,7 +1014,7 @@ _wrap_wxDialog_GetTitle(int argc, VALUE *argv, VALUE self) {
     result = ((wxDialog const *)arg1)->GetTitle();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

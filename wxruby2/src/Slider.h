@@ -18,7 +18,7 @@ class SwigDirector_wxSlider : public wxSlider, public Swig::Director {
 
 public:
     SwigDirector_wxSlider(VALUE self, bool disown = false);
-    SwigDirector_wxSlider(VALUE self, wxWindow *parent, wxWindowID id, int value, int minValue, int maxValue, wxPoint const &point = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxSL_HORIZONTAL, wxValidator const &validator = wxDefaultValidator, wxString const &name = "slider", bool disown = false);
+    SwigDirector_wxSlider(VALUE self, wxWindow *parent, wxWindowID id, int value, int minValue, int maxValue, wxPoint const &point = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxSL_HORIZONTAL, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("slider"), bool disown = false);
 };
 
 

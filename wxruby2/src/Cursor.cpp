@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -770,32 +773,6 @@ _wrap_new_wxCursor__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxCursor__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxString *arg1 = 0 ;
-    long arg2 ;
-    int arg3 = (int) 0 ;
-    int arg4 = (int) 0 ;
-    wxCursor *result;
-    
-    if ((argc < 2) || (argc > 4))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
-    }
-    arg2 = NUM2LONG(argv[1]);
-    if (argc > 2) {
-        arg3 = NUM2INT(argv[2]);
-    }
-    if (argc > 3) {
-        arg4 = NUM2INT(argv[3]);
-    }
-    result = (wxCursor *)new wxCursor((wxString const &)*arg1,arg2,arg3,arg4);
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE
-_wrap_new_wxCursor__SWIG_2(int argc, VALUE *argv, VALUE self) {
     int arg1 ;
     wxCursor *result;
     
@@ -809,7 +786,7 @@ _wrap_new_wxCursor__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxCursor__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxCursor__SWIG_2(int argc, VALUE *argv, VALUE self) {
     wxImage *arg1 = 0 ;
     wxCursor *result;
     
@@ -840,7 +817,7 @@ _wrap_wxCursor_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxCursor__SWIG_4(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxCursor__SWIG_3(int argc, VALUE *argv, VALUE self) {
     wxCursor *arg1 = 0 ;
     wxCursor *result;
     
@@ -855,11 +832,11 @@ _wrap_new_wxCursor__SWIG_4(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_wxCursor(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[4];
+    VALUE argv[1];
     int ii;
     
     argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+    for (ii = 0; (ii < argc) && (ii < 1); ii++) {
         argv[ii] = args[ii];
     }
     if (argc == 0) {
@@ -872,7 +849,7 @@ static VALUE _wrap_new_wxCursor(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxImage, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_wxCursor__SWIG_3(nargs, args, self);
+            return _wrap_new_wxCursor__SWIG_2(nargs, args, self);
         }
     }
     if (argc == 1) {
@@ -882,7 +859,7 @@ static VALUE _wrap_new_wxCursor(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxCursor, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_wxCursor__SWIG_4(nargs, args, self);
+            return _wrap_new_wxCursor__SWIG_3(nargs, args, self);
         }
     }
     if (argc == 1) {
@@ -891,37 +868,7 @@ static VALUE _wrap_new_wxCursor(int nargs, VALUE *args, VALUE self) {
             _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_wxCursor__SWIG_2(nargs, args, self);
-        }
-    }
-    if ((argc >= 2) && (argc <= 4)) {
-        int _v;
-        {
-            _v = (TYPE(argv[0]) == T_STRING);
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                if (argc <= 2) {
-                    return _wrap_new_wxCursor__SWIG_1(nargs, args, self);
-                }
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    if (argc <= 3) {
-                        return _wrap_new_wxCursor__SWIG_1(nargs, args, self);
-                    }
-                    {
-                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_new_wxCursor__SWIG_1(nargs, args, self);
-                    }
-                }
-            }
+            return _wrap_new_wxCursor__SWIG_1(nargs, args, self);
         }
     }
     

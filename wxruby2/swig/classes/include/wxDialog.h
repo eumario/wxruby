@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxDialog(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE, const wxString&  name = "dialogBox") ;
+   wxDialog(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE, const wxString&  name = wxT("dialogBox")) ;
 	/**
 	 * \brief Destructor. Deletes any child windows before deleting the physical window. 
 	*/
@@ -48,7 +48,7 @@ for details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE, const wxString&  name = "dialogBox") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE, const wxString&  name = wxT("dialogBox")) ;
 	/**
 	 * \brief Ends a modal dialog, passing a value to be returned from the  
 invocation. 

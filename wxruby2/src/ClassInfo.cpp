@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -515,8 +518,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxClassInfo swig_types[0] 
-#define  SWIGTYPE_p_wxObject swig_types[1] 
-static swig_type_info *swig_types[3];
+#define  SWIGTYPE_p_wxChar swig_types[1] 
+#define  SWIGTYPE_p_wxObject swig_types[2] 
+static swig_type_info *swig_types[4];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -773,13 +777,13 @@ _wrap_wxClassInfo_CreateObject(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_wxClassInfo_FindClass(int argc, VALUE *argv, VALUE self) {
-    char *arg1 ;
+    wxChar *arg1 = (wxChar *) 0 ;
     wxClassInfo *result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    arg1 = StringValuePtr(argv[0]);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxChar, 1);
     result = (wxClassInfo *)wxClassInfo::FindClass(arg1);
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxClassInfo,0);
@@ -887,10 +891,12 @@ free_wxClassInfo(wxClassInfo *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxClassInfo[] = {{"_p_wxClassInfo", 0, "wxClassInfo *", 0, 0, 0, 0},{"_p_wxClassInfo", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxChar[] = {{"_p_wxChar", 0, "wxChar *", 0, 0, 0, 0},{"_p_wxChar", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxObject[] = {{"_p_wxObject", 0, "wxObject *", 0, 0, 0, 0},{"_p_wxObject", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxClassInfo, 
+_swigt__p_wxChar, 
 _swigt__p_wxObject, 
 0
 };

@@ -24,7 +24,7 @@ public:
 	 * \param wxFontEncoding   
 	*/
 
-   wxFont(int  pointSize , int  family , int  style , int  weight , const bool underline = false, const wxString&  faceName = "", wxFontEncoding  encoding = wxFONTENCODING_DEFAULT) ;
+   wxFont(int  pointSize , int  family , int  style , int  weight , const bool underline = false, const wxString&  faceName = wxT(""), wxFontEncoding  encoding = wxFONTENCODING_DEFAULT) ;
 	/**
 	 * \brief Destructor. 
 	*/

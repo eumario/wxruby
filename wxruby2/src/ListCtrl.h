@@ -18,7 +18,7 @@ class SwigDirector_wxListCtrl : public wxListCtrl, public Swig::Director {
 
 public:
     SwigDirector_wxListCtrl(VALUE self, bool disown = false);
-    SwigDirector_wxListCtrl(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxLC_ICON, wxValidator const &validator = wxDefaultValidator, wxString const &name = "listCtrl", bool disown = false);
+    SwigDirector_wxListCtrl(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxLC_ICON, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("listCtrl"), bool disown = false);
 };
 
 

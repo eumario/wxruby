@@ -13,7 +13,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxHtmlPrintout(const wxString&  title = "Printout") ;
+   wxHtmlPrintout(const wxString&  title = wxT("Printout")) ;
 	/**
 	 * \brief Sets fonts. See   for
 detailed description. 

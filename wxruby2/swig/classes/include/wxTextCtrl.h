@@ -25,7 +25,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxTextCtrl(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxTextCtrlNameStr) ;
+   wxTextCtrl(wxWindow*  parent , wxWindowID  id , const wxString&  value = wxT(""), const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxTextCtrlNameStr) ;
 	/**
 	 * \brief Destructor, destroying the text control. 
 	*/
@@ -93,7 +93,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxTextCtrlNameStr) ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value = wxT(""), const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxTextCtrlNameStr) ;
 	/**
 	 * \brief Copies the selected text to the clipboard and removes the selection. 
 	*/

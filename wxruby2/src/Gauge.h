@@ -18,7 +18,7 @@ class SwigDirector_wxGauge : public wxGauge, public Swig::Director {
 
 public:
     SwigDirector_wxGauge(VALUE self, bool disown = false);
-    SwigDirector_wxGauge(VALUE self, wxWindow *parent, wxWindowID id, int range, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxGA_HORIZONTAL, wxValidator const &validator = wxDefaultValidator, wxString const &name = "gauge", bool disown = false);
+    SwigDirector_wxGauge(VALUE self, wxWindow *parent, wxWindowID id, int range, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxGA_HORIZONTAL, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("gauge"), bool disown = false);
 };
 
 

@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -1236,7 +1239,7 @@ void SwigDirector_wxWindow::GetTextExtent(wxString const &string, int *x, int *y
         wxWindow::GetTextExtent(string,x,y,descent,externalLeading,font);
         return;
     }
-    obj0 = rb_str_new2((&string)->c_str());
+    obj0 = rb_str_new2((const char *)(&string)->c_str());
     obj1 = SWIG_NewPointerObj(x, SWIGTYPE_p_int, 0);
     obj2 = SWIG_NewPointerObj(y, SWIGTYPE_p_int, 0);
     obj3 = SWIG_NewPointerObj(descent, SWIGTYPE_p_int, 0);
@@ -1546,7 +1549,7 @@ void SwigDirector_wxWindow::SetTitle(wxString const &title) {
         wxWindow::SetTitle(title);
         return;
     }
-    obj0 = rb_str_new2((&title)->c_str());
+    obj0 = rb_str_new2((const char *)(&title)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_title"), 1,obj0);
 }
 
@@ -1559,7 +1562,7 @@ void SwigDirector_wxWindow::SetName(wxString const &name) {
         wxWindow::SetName(name);
         return;
     }
-    obj0 = rb_str_new2((&name)->c_str());
+    obj0 = rb_str_new2((const char *)(&name)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_name"), 1,obj0);
 }
 
@@ -1572,7 +1575,7 @@ void SwigDirector_wxWindow::SetHelpText(wxString const &helpText) {
         wxWindow::SetHelpText(helpText);
         return;
     }
-    obj0 = rb_str_new2((&helpText)->c_str());
+    obj0 = rb_str_new2((const char *)(&helpText)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_help_text"), 1,obj0);
 }
 
@@ -3022,7 +3025,7 @@ _wrap_wxWindow_GetHelpText(int argc, VALUE *argv, VALUE self) {
     result = ((wxWindow const *)arg1)->GetHelpText();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -3059,7 +3062,7 @@ _wrap_wxWindow_GetLabel(int argc, VALUE *argv, VALUE self) {
     result = ((wxWindow const *)arg1)->GetLabel();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -3080,7 +3083,7 @@ _wrap_wxWindow_GetName(int argc, VALUE *argv, VALUE self) {
     result = ((wxWindow const *)arg1)->GetName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -3411,7 +3414,7 @@ _wrap_wxWindow_GetTitle(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetTitle();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

@@ -18,7 +18,7 @@ class SwigDirector_wxCheckListBox : public wxCheckListBox, public Swig::Director
 
 public:
     SwigDirector_wxCheckListBox(VALUE self, bool disown = false);
-    SwigDirector_wxCheckListBox(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, int n = 0, wxString const choices[] = NULL, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = "listBox", bool disown = false);
+    SwigDirector_wxCheckListBox(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, int n = 0, wxString const choices[] = NULL, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("listBox"), bool disown = false);
 };
 
 

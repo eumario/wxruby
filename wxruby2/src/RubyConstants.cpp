@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -932,7 +935,7 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"ED_BUTTONS_BOTTOM", INT2NUM(0x0000));
     rb_define_const(mWxRubyConstants,"ED_BUTTONS_RIGHT", INT2NUM(0x0002));
     rb_define_const(mWxRubyConstants,"ED_STATIC_LINE", INT2NUM(0x0001));
-    rb_define_const(mWxRubyConstants,"EXT_DIALOG_STYLE", INT2NUM((0x20000000|0x0004)));
+    rb_define_const(mWxRubyConstants,"EXT_DIALOG_STYLE", INT2NUM((0x20000000|0x0004|0x0001)));
     rb_define_const(mWxRubyConstants,"MB_DOCKABLE", INT2NUM(0x0001));
     rb_define_const(mWxRubyConstants,"MENU_TEAROFF", INT2NUM(0x0001));
     rb_define_const(mWxRubyConstants,"COLOURED", INT2NUM(0x0800));
@@ -1478,7 +1481,6 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"CURSOR_WAIT", INT2NUM(wxCURSOR_WAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_WATCH", INT2NUM(wxCURSOR_WATCH));
     rb_define_const(mWxRubyConstants,"CURSOR_BLANK", INT2NUM(wxCURSOR_BLANK));
-    rb_define_const(mWxRubyConstants,"CURSOR_COPY_ARROW", INT2NUM(wxCURSOR_COPY_ARROW));
     rb_define_const(mWxRubyConstants,"CURSOR_ARROWWAIT", INT2NUM(wxCURSOR_ARROWWAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_MAX", INT2NUM(wxCURSOR_MAX));
     rb_define_const(mWxRubyConstants,"LC_VRULES", INT2NUM(0x0001));

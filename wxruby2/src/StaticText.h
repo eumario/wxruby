@@ -18,7 +18,7 @@ class SwigDirector_wxStaticText : public wxStaticText, public Swig::Director {
 
 public:
     SwigDirector_wxStaticText(VALUE self, bool disown = false);
-    SwigDirector_wxStaticText(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxString const &name = "staticText", bool disown = false);
+    SwigDirector_wxStaticText(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxString const &name = wxT("staticText"), bool disown = false);
     virtual void SetLabel(wxString const &label);
 };
 

@@ -18,7 +18,7 @@ public:
 	 * \param wxMenu*  
 	*/
 
-   wxMenuItem(wxMenu* parentMenu = NULL, int id = ID_SEPARATOR, const wxString&  text = "", const wxString&  helpString = "", wxItemKind  kind = wxITEM_NORMAL, wxMenu* subMenu = NULL) ;
+   wxMenuItem(wxMenu* parentMenu = NULL, int id = ID_SEPARATOR, const wxString&  text = wxT(""), const wxString&  helpString = wxT(""), wxItemKind  kind = wxITEM_NORMAL, wxMenu* subMenu = NULL) ;
 	/**
 	 * \brief Destructor. 
 	*/

@@ -66,7 +66,7 @@ public:
 		    wxEntry(GetModuleHandle(NULL),0,"",true,true);
 		
 #else     
-        wxEntry(argc,argv);
+        wxEntry((const int)argc,(char **)argv);
 #endif        
 		
 

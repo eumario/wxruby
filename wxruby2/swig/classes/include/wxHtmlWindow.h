@@ -23,7 +23,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxHtmlWindow(wxWindow  *parent , wxWindowID  id = -1, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxHW_SCROLLBAR_AUTO, const wxString&  name = "htmlWindow") ;
+   wxHtmlWindow(wxWindow  *parent , wxWindowID  id = -1, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxHW_SCROLLBAR_AUTO, const wxString&  name = wxT("htmlWindow")) ;
 	/**
 	 * \brief Adds   to the static list of available
 filters. These filters are present by default: 

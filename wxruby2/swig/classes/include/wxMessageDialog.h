@@ -17,7 +17,7 @@ public:
 	 * \param const wxPoint&   
 	*/
 
-   wxMessageDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = "Message", long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
+   wxMessageDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = wxT("Message"), long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
 	/**
 	 * \brief Destructor. 
 	*/

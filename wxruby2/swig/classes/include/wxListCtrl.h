@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxListCtrl(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxLC_ICON, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listCtrl") ;
+   wxListCtrl(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxLC_ICON, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("listCtrl")) ;
 	/**
 	 * \brief Destructor, destroying the list control. 
 	*/
@@ -64,7 +64,7 @@ wxIMAGE_LIST_NORMAL, wxIMAGE_LIST_SMALL, wxIMAGE_LIST_STATE (the last is unimple
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxLC_ICON, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listCtrl") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxLC_ICON, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("listCtrl")) ;
 	/**
 	 * \brief Deletes all the items in the list control.
 

@@ -39,7 +39,7 @@ icon file, to specify the cursor hotspot relative to the top left of the image.
 	 * \param int   
 	*/
 
-   wxCursor(const wxString&  cursorName , long  type , int  hotSpotX = 0, int  hotSpotY = 0) ;
+  //wxCursor(const wxString&  cursorName , long  type , int  hotSpotX = 0, int  hotSpotY = 0);
 	/**
 	 * \brief Constructs a cursor using a cursor identifier. 
 	 * \param int  

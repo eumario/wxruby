@@ -11,6 +11,7 @@
 # out at a later date
 #
 %ignore wxTextCtrl::wxTextCtrl();
+%ignore wxTextCtrl::operator<<;
 
 %ignore wxTextCtrl::GetStyle;
 %include "include/wxTextCtrl.h"

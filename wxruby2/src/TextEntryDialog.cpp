@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -785,9 +788,9 @@ _wrap_new_wxTextEntryDialog(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "Please" ;
+    wxString const &arg4_defvalue = wxT("Please") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
-    wxString const &arg5_defvalue = "" ;
+    wxString const &arg5_defvalue = wxT("") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     long arg6 = (long) wxOK ;
     wxPoint const &arg7_defvalue = wxDefaultPosition ;
@@ -855,7 +858,7 @@ _wrap_wxTextEntryDialog_GetValue(int argc, VALUE *argv, VALUE self) {
     result = ((wxTextEntryDialog const *)arg1)->GetValue();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

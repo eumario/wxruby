@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxStaticText(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticText") ;
+   wxStaticText(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("staticText")) ;
 	/**
 	 * \brief Creation function, for two-step construction. For details see  . 
 	 * \param wxWindow*   
@@ -36,7 +36,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticText") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("staticText")) ;
 	/**
 	 * \brief Returns the contents of the control. 
 	*/

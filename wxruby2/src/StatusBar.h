@@ -18,7 +18,7 @@ class SwigDirector_wxStatusBar : public wxStatusBar, public Swig::Director {
 
 public:
     SwigDirector_wxStatusBar(VALUE self, bool disown = false);
-    SwigDirector_wxStatusBar(VALUE self, wxWindow *parent, wxWindowID id, long style = wxST_SIZEGRIP, wxString const &name = "statusBar", bool disown = false);
+    SwigDirector_wxStatusBar(VALUE self, wxWindow *parent, wxWindowID id, long style = wxST_SIZEGRIP, wxString const &name = wxT("statusBar"), bool disown = false);
     virtual void SetFieldsCount(int number = 1, int *widths = NULL);
     virtual void SetStatusWidths(int n, int *widths);
     virtual bool GetFieldRect(int i, wxRect &rect) const;

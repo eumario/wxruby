@@ -18,7 +18,7 @@ class SwigDirector_wxSpinButton : public wxSpinButton, public Swig::Director {
 
 public:
     SwigDirector_wxSpinButton(VALUE self, bool disown = false);
-    SwigDirector_wxSpinButton(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxSP_HORIZONTAL, wxString const &name = "spinButton", bool disown = false);
+    SwigDirector_wxSpinButton(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxSP_HORIZONTAL, wxString const &name = wxT("spinButton"), bool disown = false);
 };
 
 

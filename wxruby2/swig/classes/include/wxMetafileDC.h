@@ -14,7 +14,7 @@ in memory.
 	 * \param const wxString&   
 	*/
 
-   wxMetafileDC(const wxString&  filename = "") ;
+   wxMetafileDC(const wxString&  filename = wxT("")) ;
 	/**
 	 * \brief Destructor. 
 	*/

@@ -20,7 +20,7 @@ The print preview object will be destroyed by the frame when it closes.
 	 * \param const wxString&   
 	*/
 
-   wxPreviewFrame(wxPrintPreview*  preview , wxWindow*  parent , const wxString&  title , const wxPoint&  pos = wxDefaultPosition, const wxSize& size  size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = "frame") ;
+   wxPreviewFrame(wxPrintPreview*  preview , wxWindow*  parent , const wxString&  title , const wxPoint&  pos = wxDefaultPosition, const wxSize& size  size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = wxT("frame")) ;
 	/**
 	 * \brief Destructor. 
 	*/

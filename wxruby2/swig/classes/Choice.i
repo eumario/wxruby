@@ -10,13 +10,11 @@
 
 %typemap(in) (int  n , const wxString  choices[]) {
     $1 = NUM2INT(rb_funcall($input, rb_intern("size"), 0));
-printf("Size: %d\n", $1);
     $2 = new wxString[$1];
     for(int i=0; i < $1; ++i)
     {
         VALUE thisItem = rb_ary_entry($input, i);
-        $2[i] = STR2CSTR(thisItem);
-printf("Item %d: %s\n", i, $2[i].c_str());
+        $2[i] = (wxChar *)STR2CSTR(thisItem);
     }
 }
 

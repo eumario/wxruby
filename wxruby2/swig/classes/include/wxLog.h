@@ -149,7 +149,7 @@ Passing a NULL value (not empty string) to this function disables message timest
 	 * \param const char *   
 	*/
 
-  void SetTimestamp(const char *   format ) ;
+  void SetTimestamp(const wxChar *   format );
 	/**
 	 * \brief Returns the current timestamp format string. 
 	*/

@@ -17,7 +17,7 @@ class Swig::Director;
 class SwigDirector_wxPanel : public wxPanel, public Swig::Director {
 
 public:
-    SwigDirector_wxPanel(VALUE self, wxWindow *parent, wxWindowID id = -1, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxTAB_TRAVERSAL, wxString const &name = "panel", bool disown = false);
+    SwigDirector_wxPanel(VALUE self, wxWindow *parent, wxWindowID id = -1, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxTAB_TRAVERSAL, wxString const &name = wxT("panel"), bool disown = false);
     virtual void OnSysColourChanged(wxSysColourChangedEvent &event);
 };
 

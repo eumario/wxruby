@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -789,7 +792,7 @@ _wrap_new_wxMessageDialog(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = "Message" ;
+    wxString const &arg4_defvalue = wxT("Message") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     long arg5 = (long) wxOK ;
     wxPoint const &arg6_defvalue = wxDefaultPosition ;

@@ -15,7 +15,7 @@ using the   member.
 	 * \param const wxString&   
 	*/
 
-   wxMetafile(const wxString&  filename = "") ;
+   wxMetafile(const wxString&  filename = wxT("")) ;
 	/**
 	 * \brief Destructor. 
 	*/

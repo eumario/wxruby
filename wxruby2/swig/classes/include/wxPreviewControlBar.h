@@ -21,7 +21,7 @@ The buttons parameter may be a combination of the following, using the bitwise `
 	 * \param const wxString&   
 	*/
 
-   wxPreviewControlbar(wxPrintPreview*  preview , long  buttons , wxWindow*  parent , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "panel") ;
+   wxPreviewControlbar(wxPrintPreview*  preview , long  buttons , wxWindow*  parent , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("panel")) ;
 	/**
 	 * \brief Destructor. 
 	*/

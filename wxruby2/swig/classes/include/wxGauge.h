@@ -25,7 +25,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxGauge(wxWindow*  parent , wxWindowID  id , int  range , const wxPoint&  pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxGA_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "gauge") ;
+   wxGauge(wxWindow*  parent , wxWindowID  id , int  range , const wxPoint&  pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxGA_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("gauge")) ;
 	/**
 	 * \brief Destructor, destroying the gauge. 
 	*/
@@ -44,7 +44,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , int  range , const wxPoint&  pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxGA_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "gauge") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , int  range , const wxPoint&  pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxGA_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("gauge")) ;
 	/**
 	 * \brief Returns the width of the 3D bezel face. 
 	*/

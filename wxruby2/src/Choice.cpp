@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -800,7 +803,7 @@ _wrap_new_wxChoice(int argc, VALUE *argv, VALUE self) {
     long arg8 = (long) 0 ;
     wxValidator const &arg9_defvalue = wxDefaultValidator ;
     wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
-    wxString const &arg10_defvalue = "choice" ;
+    wxString const &arg10_defvalue = wxT("choice") ;
     wxString *arg10 = (wxString *) &arg10_defvalue ;
     wxChoice *result;
     
@@ -818,13 +821,11 @@ _wrap_new_wxChoice(int argc, VALUE *argv, VALUE self) {
     if (argc > 4) {
         {
             arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-            printf("Size: %d\n", arg6);
             arg7 = new wxString[arg6];
             for(int i=0; i < arg6; ++i)
             {
                 VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = STR2CSTR(thisItem);
-                printf("Item %d: %s\n", i, arg7[i].c_str());
+                arg7[i] = (wxChar *)STR2CSTR(thisItem);
             }
         }
     }
@@ -880,7 +881,7 @@ _wrap_wxChoice_Create(int argc, VALUE *argv, VALUE self) {
     long arg8 = (long) 0 ;
     wxValidator const &arg9_defvalue = wxDefaultValidator ;
     wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
-    wxString const &arg10_defvalue = "choice" ;
+    wxString const &arg10_defvalue = wxT("choice") ;
     wxString *arg10 = (wxString *) &arg10_defvalue ;
     bool result;
     VALUE vresult = Qnil;
@@ -899,13 +900,11 @@ _wrap_wxChoice_Create(int argc, VALUE *argv, VALUE self) {
     if (argc > 4) {
         {
             arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-            printf("Size: %d\n", arg6);
             arg7 = new wxString[arg6];
             for(int i=0; i < arg6; ++i)
             {
                 VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = STR2CSTR(thisItem);
-                printf("Item %d: %s\n", i, arg7[i].c_str());
+                arg7[i] = (wxChar *)STR2CSTR(thisItem);
             }
         }
     }
