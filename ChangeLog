@@ -1,4 +1,28 @@
-2004-03-13
+2004-03-14 02:00
+    * Cleaned up Validator sample (etc/test21), and fixed Wx::Validator so
+      it behaves sanely. Also renamed the "clone" callback to "copy" to 
+      avoid conflicting with Ruby's Object#clone method.
+      
+
+2004-03-13 22:30
+    * Removed bad printf from ListCtrl.cpp that was printing a warning
+    * Now print a warning if the user app defined OnInit instead of on_init
+    * Update extconf.rb as proposed by Kontra Gergely to automatically 
+      create the tclean target based on actual .t files.
+    * Update callback names in Validator to use new naming convention:
+      clone, transfer_from_window, transfer_to_window, validate
+    * Update more callback names:
+      ArtProvider.create_bitmap
+      ScrolledWindow.on_draw
+    * Fix Validator.get_window to return proper subtype (patch 
+      submitted by Nick)
+    * Add StaticText to dynamic cast table (patch from Nick)
+    * Fixed MAJOR problems with Validators. Updated samples/etc/test21.rb
+      so at least now it actually works. Validators are still weird, and 
+      need to be fixed if possible, or at least well-documented.
+    
+
+2004-03-13 19:00
     * Checked in gentoo ebuild script (from Gour)
     * Fix method names in LsitCtrl callbacks. Now: 
       on_get_item_text, on_get_item_attr, on_get_item_image

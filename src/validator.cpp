@@ -18,22 +18,16 @@
 wxRbValidator::wxRbValidator(const wxRbValidator& original)
 {
     printf("wxRbValidator copy constructor called\n");
-    SetWindow(original.GetWindow());
 }
 
 wxObject *
 wxRbValidator::Clone() const
 {
-  wxRbValidator *ptr = NULL;
-  if(rb_respond_to(self, rb_intern("clone"))) {
-    VALUE klass = rb_funcall(self,rb_intern("clone"),0);
+    wxRbValidator *ptr = NULL;
+    VALUE klass = rb_funcall(self,rb_intern("copy"),0);
     Data_Get_Struct(klass, wxRbValidator, ptr);
-  }
-  else
-  {
-      printf("wxRuby WARNING: Validator must define clone()\n");
-  }
-  return (wxObject*)ptr;
+    ptr->SetWindow(GetWindow());
+    return (wxObject*)ptr;
 }
 
 bool
@@ -55,6 +49,7 @@ wxRbValidator::TransferToWindow()
   }
   return value;
 }
+
 
 bool
 wxRbValidator::Validate(wxWindow* parent)
@@ -102,6 +97,8 @@ WxValidator::init(VALUE self)
     Data_Get_Struct(self, wxRbValidator, ptr);
     ptr = new wxRbValidator(self);
     DATA_PTR(self) = ptr;
+
+  	MapRubyObjectToCppObject(self, ptr);
 
     return self;
 }
