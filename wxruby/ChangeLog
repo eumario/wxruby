@@ -1,3 +1,15 @@
+2004-08-26
+    * Tagged tree as 0.5.0
+    * Updated LICENSE file to add copyright info
+    * Updated README files to 0.5.0
+    * Added XRC (Xml Resource File) support.
+    * Patched problem with MSVC.NET that caused build problems
+    * Added totally awesome HTML widget from Tobi Gruetzmacher.
+    * Fix crash in ListCtrl#on_get_item_xxx 
+    * Fix crash in TreeCtrl#on_compare_items 
+    * Remove all get/set_client_data and 
+      get_event_object methods (they were broken anyway)
+    
 2004-06-04
     * Updated wxWindows/wxWidgets wording in README files
     * Updated README files to 0.4.0

@@ -172,8 +172,6 @@ Section "Sample wxRuby Programs" Section_Samples
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\html\printing.rbw.lnk" "$INSTDIR\samples\html\printing\printing.rbw"
     SetOutPath "$INSTDIR\samples\html\test\" ; for working directory
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\html\test.rbw.lnk" "$INSTDIR\samples\html\test\test.rbw"
-    SetOutPath "$INSTDIR\samples\html\virtual\" ; for working directory
-    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\html\virtual.rbw.lnk" "$INSTDIR\samples\html\virtual\virtual.rbw"
 
   SetOutPath "$INSTDIR\samples\images\"
   CreateShortCut "$SMPROGRAMS\wxRuby\Samples\images.rbw.lnk" "$INSTDIR\samples\images\images.rbw"
