@@ -1,0 +1,476 @@
+2003-08-12 07:00  kbs
+	* Oops! Really checked extconf.rb as described below. Obviously I need
+	to improve my process!
+	
+
+2003-08-11 09:00  kbs
+	* Oops. Really checked in the app.cpp #include change. Yesterday the 
+	checkin failed due to a temporary Savannah problem, but I didn't 
+	notice the error output.
+	
+	* Modified extconf.rb MinGW section to avoid using backticks
+	
+
+2003-08-10 09:30  kbs
+	* Added BSD to extconf.rb
+	
+	* Now include sys/time.h in app.cpp
+	
+	* Modified install.rb to refer to wxruby.so instead of wx.so
+	
+
+2003-07-22 19:40  kbs
+	* Minor change to extconf.rb for MinGW support
+	
+	* Renamed 'depends' to 'depend' so it will automatically 
+	depend on .obj files under MSW
+	
+	* Added some missing dependencies in depend
+	
+	* Removed fontdialog.o from OS X build, since it causes compile 
+	errors. We need to fix them and add it back in later.
+	
+	* Minor updates to the README file.
+
+
+2003-07-17 20:15  kbs
+	* Update extconf.rb to avoid inserting CR's in the makefile 
+	under MSW.
+	
+
+2003-07-11 08:30  kbs
+	* Checked in 'nothing.rb' (oops)
+	
+	* Fixed extconf.rb to handle .t dependencies correctly, which 
+	was broken yesterday.
+	
+	* Updated MinGW settings in extconf.rb to be more like Linux
+	
+
+2003-07-10 19:00  kbs
+	* Remove evt_menu debugging, since the problem has been fixed.
+	
+	* Fixed event handlers to work with MSW and OS X, by cleaning 
+	up how the block/proc is handled.
+	
+	* Added missing return Qnil to WxIdleEvent::RequestMore.
+	
+	* Changed exconf.rb for MSW to set WXVERSION to '24' instead of 
+	'240' or '241'
+	
+	* Added sample 'nothing.rb' in the minimal directory, which is 
+	REALLY a minimal app.
+	
+
+2003-07-09 20:00  kbs
+	* Added support for TextCtrl.position_to_xy
+	It returns a Point instead of x and y values, but that is likely 
+	to change in the future, after I figure out how to return a pair 
+	of values from C code into Ruby.
+
+	* Removed MenuItem.GetName, an obsolete method that was causing 
+	compile errors under MinGW.
+	
+	* Added MinGW settings to extconf.rb
+
+	* Removed 'depends' stuff from extconf.rb that was causing 
+	problems under MSW.
+
+
+2003-07-08 20:30  kbs
+	* OS X compatibility fixes:
+	1. Tweak install.rb
+	2. Add #if to FontDialog
+	3. Add debugging to evt_menu to try to 
+	figure out why it's not working on OS X
+
+
+2003-07-08 07:00  kbs
+	* Fix wxpp to generate better code for methods 
+	like wxWindow::GetHandle that return void*
+	(Under MSW it gave a compile error)
+
+	* Add the ability to improve background thread 
+	performance, by adding the IdleEvent class.
+	
+
+2003-07-06 21:00  kbs
+	* Convert TextCtrl to a template, to add many 
+	missing methods, and added TextAttr as a class.
+	
+
+2003-07-06 10:30  kbs
+	* wxpp.rb no longer creates a 'release' method.
+	It was not used, had not been tested, and was 
+	probably incorrect and dangerous.
+	
+	* Fix missing return value in app.cpp, and remove
+	obsolete Choice.Number method, discovered by Curt's 
+	MSW build attempts.
+
+
+2003-07-06 10:00  kbs
+	* Added MenuItem class (using a template)
+	
+	* Updates to Menu class to work with MenuItem
+	
+	* Changed all remaining module methods to be 
+	module functions, instead of module members, to 
+	allow them to be called as Wx::blah_blah, without 
+	having to include Wx.
+	
+	* Now support mousewheel events
+	
+	* Added some missing methods in menu and sizer
+	
+	* Changed copyrights from Park Heesob to Kevin 
+	Smith, at Park's request
+	
+
+2003-07-05 01:00  kbs
+	* One more OS X patch (in region.cpp)
+
+	* Add missing constants: BU_XXX for button alignment
+	and sizing
+	
+	* Changed all the evt_xxx methods to be simple 
+	members of EventHandler, so they can be called 
+	without forcing you to include Wx.
+	
+	* Added README and LICENSE at the top level, 
+	renamed src/README to src/README.Source
+
+
+2003-07-03 22:00  kbs
+	* Merge in patches from Rich to (hopefully) get it 
+	to compile cleanly under Mac OS X
+
+
+2003-07-02 23:00  kbs
+	* Another tweak to wxpp.rb to try to make Ruby 1.8 
+	happy.
+
+	* Added initial implementation of wxGrid class
+
+
+2003-06-30 23:00  kbs
+	* Updated extconf.rb to work with OS X
+	
+	* Split ToggleButton class into its own file, and
+	now it is only included on MSW and GTK platforms
+	
+	* Updated wxpp.rb to (hopefully) avoid warnings
+	when run under Ruby 1.8.
+	
+
+2003-06-30 19:30  kbs
+	* Fixed wxpp to (hopefully) work with Ruby 1.8.
+	
+
+2003-06-29 23:55  kbs
+	* Change StaticBox to inherit from Control, 
+	instead of Window.
+	
+	* Minor cleanup of Sizer code
+	
+	* Fix memory problem with event callbacks 
+	that would cause frequent crashes.
+
+
+2003-06-29 12:30  kbs
+	* Completely changed the event handling system
+	(all the evt_xxx methods). Now, you never need 
+	to pass a window as the first parameter. You 
+	must pass an ID value (two ids for evt_xxx 
+	methods that take a range). And you must pass 
+	a code block, which may choose to accept an 
+	event parameter.
+	
+	* Updated all the samples to the new event handling 
+	scheme.
+
+
+2003-06-28 23:30  kbs
+	* Added very minimal support for raw mouse
+	events. You will get a mouse event object, 
+	but for now it only supports get_x, get_y, and 
+	is_left_down.
+	
+
+2003-06-28 15:10  kbs
+	* Updated all the rest of the samples to work 
+	with new naming.
+	
+
+2003-06-27 22:30  kbs
+	* Updated more samples to work with new naming:
+	calendar, caret, checklst, config, controls, 
+	dialogs, layout
+	
+	* Changed IndividualConstraintLayout::LEFT (and 
+	the other related constants) back out to 
+	Wx::LAYOUT_LEFT etc. because they apply to other 
+	classes, and they're used in some of our samples,
+	like calendar.
+	
+	* Fixed incorrect constructor signature for 
+	ToggleButton, and added code to wxpp to catch 
+	that problem at compile time if it happens 
+	elsewhere. Some of the default values were 
+	missing.
+	
+
+2003-06-25 22:00 kbs
+	* Fixed error handling when an attempt was made to 
+	initialize a class with a combination of parameters 
+	that didn't have a matching constructor.
+	
+	* Fixed constructor signature for Choice class.
+	
+	* Updated artprov sample for new naming
+	
+	* Tried to resolve wxLEFT and wxLeft conflict, by
+	moving wxLeft into the only class that uses it, 
+	IndividualLayoutConstraint (which is a deprecated 
+	class), and changine wxLEFT to DIRECTION_LEFT. We 
+	should encourage the use of WEST as a simpler and 
+	less confusing way of saying DIRECTION_LEFT.
+
+
+2003-06-25 21:00 kbs
+	* Rename all classes from WxXxx to just Xxxx, and 
+	rename all constants to be ALL_CAPS with no leading 
+	Wx or WX. As a result, all the samples are broken!
+	I will be fixing them as quickly as I can.
+
+	* Fixed extconf.rb to not try to create the depends
+	file. It just didn't work. Now depends is checked in, 
+	and will have to be manually updated when it changes.
+	
+
+2003-06-24 23:30 kbs
+	* Make the code generated by the template mechanism
+	significantly cleaner and simpler
+	
+	* Now rely on the constructor parameter defaults in 
+	the template rather than invoking the underlying 
+	constructor differently depending on how many 
+	parameters were passed
+	
+	* Convert one more class to template: ColourDialog
+	
+	* Start to put in support for WxXxx classes being 
+	subclasses of the corresponding wxXxx class (we will 
+	need this for garbage collection, and it will be 
+	helpful for other purposes)
+	
+	* Some refactoring of wxpp.rb
+	
+	* Fixed one sample that was broken (etc/test.rb)
+
+
+2003-06-23 23:50 kbs
+	* Enhance and simplify the templates to build more 
+	of the "normal" class code automatically
+
+	* Improve checking for initialize methods that don't 
+	invoke super
+	
+	* Converted more classes to templates: caret, 
+	checkbox, choice
+	
+	* Revised the template structure to prepare for 
+	supporting multiple	(overloaded) constructors 
+	(but none are actually being used yet)
+	
+
+2003-06-22 21:00  kbs
+	* Removed window.h/cpp and frame.h/cpp from CVS, 
+	since they are automatically built from templates
+	
+	* If any subclass of a wxruby class defines an 
+	initialize method, it MUST invoke super (because 
+	that's where the actual c++ object is created. 
+	Now, each member method checks and if the c++ 
+	object was not created, it raises a fatal exception.
+	
+	* Add support for overloaded methods, and used it to 
+	implement many missing methods in WxWindow.
+	
+	* Converted the three button classes to template, 
+	and added a template for WxControl
+
+
+2003-06-21 22:00  kbs
+	* Updated all the samples to match the new method
+	naming convention in the library (ruby_style_names)
+	
+	* Fixed a couple segfaults and other errors in the 
+	library itself
+
+
+2003-06-20 21:00  kbs
+    * Convert all object methods from MixedCaseNames to 
+	ruby_style_names
+	
+	* Convert global methods from WxMixedNames to
+	ruby_names
+	
+	* Converted all EVT_XXX_XXX to evt_xxx_xxx
+	
+	* NOTE: AS A RESULT, ALL THE SAMPLES ARE BROKEN!
+	I will be converting them over to the new names
+
+
+2003-06-03 22:00  kbs
+	* Implement class-static methods in wxpp.rb
+	
+	* Implement void* returns in wxpp.rb (WxWindow.GetHandle)
+	
+	* Fixed extconf.rb so a build from scratch works, 
+	correctly parsing the .t files as needed. Under Linux, 
+	that is. Not sure about under Windows.
+	
+
+2003-06-01 22:00  kbs
+	* Update extconf.rb so it builds a Makefile that is aware
+	of .t template files, building the .h and .cpp files as 
+	needed.
+	
+	* Now store a map of cpp objects -> ruby objects, so 
+	methods like WxWindow::GetParent will return the actual 
+	same ruby object that was passed in to the constructor.
+	This removed the need for the odd WxFrame() method.
+
+	* Switch WxWindow over to being created mostly through 
+	templates in window.t.
+	
+
+2003-05-31 19:30  kbs
+	* Move all the ruby class values (rb_cXxx) inside each 
+	class as a static member named rubyClass.
+	
+	* Move all the DefineClass methods from .h files to 
+	.cpp files
+	
+	* Make all classes auto-initializing, so wx.cpp
+	doesn't have to include every class .h file.
+	
+
+2003-05-26 23:00  kbs
+
+	* Convert Frame to use templates to build both the .h and 
+	.cpp files.
+
+	* Major refactoring of wxpp.rb.
+
+	* Templates now autobuild constructors and can handle 
+	array-of-int parameters.
+
+	* Continued reorganization of the codebase, mostly trying 
+	to make wx.cpp smaller by distributing the work out to 
+	the individual classes.
+
+	* Fixed some samples that still required 'wx' instead of 
+	'wxruby'. There are probably others with this problem, 
+	which I will continue to fix as I notice them.
+
+
+2003-05-25 21:00  kbs
+
+	* Convert WxFrame to use templates for many of its methods.
+	For now, the .t file is checked in but the .h file it 
+	generates is also checked in. Eventually, the Makefile 
+	will be updated to automatically convert the .t to .h 
+	before invoking the main compiler.
+
+	* Convert WxFrame to use AutoDefine so it no longer needs to 
+	be included and initialized by wx.cpp.
+
+
+2003-05-25 16:00  kbs
+
+	* Changed target name from wx.so to wxruby.so
+
+	* Put class initialization code in each class, instead of 
+	having it all in wx.cpp.
+
+	* Split part of app.h into app_cb.h to make it easier to 
+	turn into a template later.
+
+
+2003-05-25 11:05  kbs
+
+	* Initial checkin of Park Heesob's non-SWIG version.
+
+	At this point, the src/ and samples/ directories are Park's 
+	newer code. All the other directories are the older SWIG
+	prototype.
+
+	The new version has been tested with Windows and two Linux 
+	distributions. I omitted a few Windows-specific files that 
+	Park had included in his source tarball.
+
+2002-12-02 06:17  curthibbs
+
+	* Initial checkin of wxRuby. This is still very much a
+	work-in-progress. The directory structure and where files
+	live will need to be changed, but this will suffice for now.
+	
+	So far, all work been done under Windows XP. No other 
+	platforms have been tested. We need to develop a suite 
+	of unit tests to cover the functionality of wxWindows 
+	that we want to expose in wxRuby as well as to help us
+	in porting/testing wxRuby on other platforms.
+	
+	I have checked in both makefiles and VC++ 6.0
+	project files. To build and run wxRuby outside of VC++,
+	do the following (from the base wxruby project directory):
+		
+		nmake -f makefile.win
+		
+	To run the test program, change the current directory
+	to wxRuby's "swig" subdirectory and run:
+		
+		ruby test.rb
+		
+	I have a VC++ project defined that is setup for debugging
+	the C/C++ source code. Currently, this depends on my
+	directory layout of ruby, wxwindows, and wxruby (this will
+	need to change).
+	
+	DIRECTORY STRUCTURE FOR VC++ PROJECT
+	
+	As checked in, this currently relies on the layout of my 
+	development directories:
+		
+		+
+		| 
+		+ wxruby
+		|   |
+		|   + swig
+		| 
+		+ ruby-173
+		| 
+		+ rubysrc
+		| 
+		+ wxMSW-2.3.2
+
+	wxRuby
+		This is the base wxRuby project directory. It contains
+		makefiles and VC++ project files.
+		
+	swig
+		Contains all of the wxRuby files.
+		
+	ruby-173
+		Contains my installation of Ruby 1.7.3. (used by the
+		VC++ project to run and debug the test program)
+		
+	rubysrc
+		Contains the unpacked source code for Ruby 1.7.3 (I think
+		the only thing used from here is "ruby.h").
+		
+	wxMSW-2.3.2
+		wxWindows 2.3.2 for MS Windows. Header files are used from
+		here when building wxRuby.

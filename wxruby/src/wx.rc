@@ -1,0 +1,17 @@
+/**********************************************************************
+
+  wx.rc -
+
+  $Author$
+  $Date$
+  created at: 2003-04-14 11:02
+
+  Copyright (C) 2003  Park Heesob
+
+**********************************************************************/
+
+#include <wx/version.h>
+
+//wxplicon ICON "wxpl.ico"
+
+#include <wx/msw/wx.rc>
