@@ -79,16 +79,20 @@ ID_SIZER_CHECKBIG    = 206
 Image_List, Image_Choice, Image_Combo, Image_Text, Image_Radio, Image_Gauge, Image_Max = 0,1,2,3,4,5,6
 
 def Myset_client_data(name,control)
-    count = control.get_count()
-    for n in 0 ... count
-        s = sprintf("%s client data for '%s'",
-                 name, control.get_string(n))
-        control.set_client_data(n, s)
+    # NOTE: get_client_data and set_client_data have been removed from wxRuby 0.4
+    # because they could cause crashes
+    return
+    
+#    count = control.get_count()
+#    for n in 0 ... count
+#        s = sprintf("%s client data for '%s'",
+#                 name, control.get_string(n))
+#        control.set_client_data(n, s)
         # NOTE: As of wxRuby 0.2, the following will demonstrate the 
         # set_client_data and get_client_data are unreliable. Specifically, 
         # garbage collection will release the stored data! 2004-03-29 kbs
         #GC.start
-    end
+#    end
 end
 
 
@@ -633,23 +637,25 @@ class MyPanel < Panel
         @m_text.append_text( listbox.get_string_selection() )
         @m_text.append_text( "'\n" )
 
-        obj = event.get_client_data()
-        @m_text.append_text( "ListBox event client data string is: '" )
-        if obj
-            @m_text.append_text( obj )
-        else
-            @m_text.append_text( "none" )
-        end
+# NOTE: get_client_data and set_client_data have been removed from wxRuby 0.4
+# because they could cause crashes
+#        obj = event.get_client_data()
+#        @m_text.append_text( "ListBox event client data string is: '" )
+#        if obj
+#            @m_text.append_text( obj )
+#        else
+#            @m_text.append_text( "none" )
+#        end
 
-        @m_text.append_text( "'\n" )
-        @m_text.append_text( "ListBox control client data string is: '" )
-        obj = listbox.get_client_data(listbox.get_selection())
-        if obj
-            @m_text.append_text( obj )
-        else
-            @m_text.append_text( "none" )
-        end
-        @m_text.append_text( "'\n" )
+#        @m_text.append_text( "'\n" )
+#        @m_text.append_text( "ListBox control client data string is: '" )
+#        obj = listbox.get_client_data(listbox.get_selection())
+#        if obj
+#            @m_text.append_text( obj )
+#        else
+#            @m_text.append_text( "none" )
+#        end
+#        @m_text.append_text( "'\n" )
     end
 
     def onListBoxDoubleClick(event)
@@ -721,25 +727,27 @@ class MyPanel < Panel
         @m_text.append_text( choice.get_string_selection() )
         @m_text.append_text( "'\n" )
 
-        obj = event.get_client_data()
-        @m_text.append_text( "Choice event client data string is: '" )
+# NOTE: get_client_data and set_client_data have been removed from wxRuby 0.4
+# because they could cause crashes
+#        obj = event.get_client_data()
+#        @m_text.append_text( "Choice event client data string is: '" )
 
-        if obj
-           @m_text.append_text( obj )
-        else
-           @m_text.append_text( "none" )
-        end
+#        if obj
+#           @m_text.append_text( obj )
+#        else
+#           @m_text.append_text( "none" )
+#        end
 
-        @m_text.append_text( "'\n" )
-        @m_text.append_text( "Choice control client data string is: '" )
+#        @m_text.append_text( "'\n" )
+#        @m_text.append_text( "Choice control client data string is: '" )
 
-        obj = choice.get_client_data(choice.get_selection())
-        if obj
-           @m_text.append_text( obj )
-        else
-           @m_text.append_text( "none" )
-        end
-        @m_text.append_text( "'\n" )
+#        obj = choice.get_client_data(choice.get_selection())
+#        if obj
+#           @m_text.append_text( obj )
+#        else
+#           @m_text.append_text( "none" )
+#        end
+#        @m_text.append_text( "'\n" )
     end
 
     def onChoiceButtons(event)
