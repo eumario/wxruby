@@ -4,6 +4,8 @@ include Wx
 
 ID_CHOICE = 1000
 
+$data = {}
+
 class ChoiceDlg < Dialog
   def initialize
     super(nil, -1, "ChoiceDialog", DEFAULT_POSITION, Size.new(185, 185))
@@ -11,7 +13,12 @@ class ChoiceDlg < Dialog
     list = [ "ABS", "Airbag", "Air conditioning" ]
 
     @m_pChoice = Choice.new(self, ID_CHOICE, DEFAULT_POSITION, DEFAULT_SIZE, list)
-    @m_pChoice.append("Automatic gear", 100)
+# NOTE: get_client_data and set_client_data have been removed from wxRuby 0.4
+# because they could cause crashes
+# this code accomplishes the same functionality without using those methods
+    gear_value = 100
+    $data[list.size] = gear_value
+    @m_pChoice.append("Automatic gear", gear_value)
 
 	@m_pLabel = StaticText.new(self, -1, "default")
     dlgSizer = BoxSizer.new(HORIZONTAL)
@@ -32,7 +39,7 @@ class ChoiceDlg < Dialog
 	# the current implementation 2003-06-24 kbs
   	#GC.start
   	chose = event.get_selection
-	data = event.get_client_data
+	data = $data[chose]
 	if(data == nil)
 		data = 0
 	end
@@ -40,7 +47,7 @@ class ChoiceDlg < Dialog
 	@m_pLabel.set_label(data.to_s)
 
 	@m_pChoice.set_selection(chose)
-	@m_pChoice.set_client_data(chose, data)
+	$data[chose] = data
   end
 
   def onClose
