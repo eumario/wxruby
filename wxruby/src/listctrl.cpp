@@ -121,10 +121,7 @@ WxListCtrl::init(int argc, VALUE *argv, VALUE self)
     wxRbListCtrl *ptr;
     Data_Get_Struct(self, wxRbListCtrl, ptr);
     ptr = new wxRbListCtrl(parent,id,pos,size,style);
-
-    VALUE vdata = rb_hash_new();
-    rb_hash_aset(vdata,rb_str_new2("self"),self);
-    ptr->SetClientData((void*)vdata);
+    ptr->m_self = self;
 
     DATA_PTR(self) = ptr;
 
@@ -710,8 +707,7 @@ static ZAutoDefine x;
 wxListItemAttr *
 wxRbListCtrl::OnGetItemAttr(long item) const
 {
-    void *data = GetClientData();
-    VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
+    VALUE self = m_self;
     if(!rb_respond_to(self, rb_intern("on_get_item_attr")))
         return wxListCtrl::OnGetItemAttr(item);
 
@@ -725,16 +721,14 @@ wxRbListCtrl::OnGetItemAttr(long item) const
 int
 wxRbListCtrl::OnGetItemImage(long item) const
 {
-    void *data = GetClientData();
-    VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
+    VALUE self = m_self;
     return NUM2INT(rb_funcall(self,rb_intern("on_get_item_image"),1,INT2NUM(item)));
 }
 
 wxString
 wxRbListCtrl::OnGetItemText(long item, long column) const
 {
-    void *data = GetClientData();
-    VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
+    VALUE self = m_self;
     VALUE value = rb_funcall(self,rb_intern("on_get_item_text"),2,INT2NUM(item),INT2NUM(column));
     wxString str = StringValuePtr(value);
     return str;
