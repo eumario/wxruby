@@ -15,7 +15,7 @@
 # -------------------------------------------------------------------
 # Might want to tweak the following constants.
 
-WxRubyDIR      = 'E:/Dev/RubyDev/wxruby'
+WxRubyDIR      = 'E:/Dev/RubyDev/wxruby/cvs-repo/wxruby'
 # The following constant is not used in this program (yet).
 WxWinDoc       = 'C:/Zip/wxWindows/wxWindows-2.4.1-HTML/wxWindows-2.4.1/docs/html'
 DumpDIR        = 'raw_docs'
