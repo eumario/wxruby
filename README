@@ -102,6 +102,10 @@ other compilers (such as Borland), or other platforms.
 --------------------------------------------------------------------
 KNOWN PROBLEMS
 
+* There may be some compiler warnings on your platform for possibly 
+uninitialized variables. These should be harmless, but we will work 
+to eliminate them in future releases.
+
 * Not all classes and methods have been implemented yet.
 
 * Certain features do not manage memory correctly, and may 
