@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/TipProvider.h"
+#include "TipProvider.h"
 
 SwigDirector_wxTipProvider::SwigDirector_wxTipProvider(VALUE self, size_t currentTip, bool disown): wxTipProvider(currentTip), Swig::Director(self, disown) {
     

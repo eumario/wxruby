@@ -761,7 +761,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ScrolledWindow.h"
+#include "ScrolledWindow.h"
 
 SwigDirector_wxScrolledWindow::SwigDirector_wxScrolledWindow(VALUE self, bool disown): wxScrolledWindow(), Swig::Director(self, disown) {
     

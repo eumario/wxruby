@@ -760,7 +760,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/BusyCursor.h"
+#include "BusyCursor.h"
 
 SwigDirector_wxBusyCursor::SwigDirector_wxBusyCursor(VALUE self, wxCursor *cursor, bool disown): wxBusyCursor(cursor), Swig::Director(self, disown) {
     

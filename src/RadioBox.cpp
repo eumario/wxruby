@@ -761,7 +761,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/RadioBox.h"
+#include "RadioBox.h"
 
 SwigDirector_wxRadioBox::SwigDirector_wxRadioBox(VALUE self, bool disown): wxRadioBox(), Swig::Director(self, disown) {
     
@@ -1140,22 +1140,6 @@ _wrap_wxRadioBox_GetStringSelection(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxRadioBox_Number(int argc, VALUE *argv, VALUE self) {
-    wxRadioBox *arg1 = (wxRadioBox *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRadioBox, 1);
-    result = (int)((wxRadioBox const *)arg1)->Number();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
 _wrap_wxRadioBox_SetSelection(int argc, VALUE *argv, VALUE self) {
     wxRadioBox *arg1 = (wxRadioBox *) 0 ;
     int arg2 ;
@@ -1360,7 +1344,6 @@ mWxRadioBox = mWx;
     rb_define_method(cWxRadioBox.klass, "get_count", VALUEFUNC(_wrap_wxRadioBox_GetCount), -1);
     rb_define_method(cWxRadioBox.klass, "get_selection", VALUEFUNC(_wrap_wxRadioBox_GetSelection), -1);
     rb_define_method(cWxRadioBox.klass, "get_string_selection", VALUEFUNC(_wrap_wxRadioBox_GetStringSelection), -1);
-    rb_define_method(cWxRadioBox.klass, "number", VALUEFUNC(_wrap_wxRadioBox_Number), -1);
     rb_define_method(cWxRadioBox.klass, "set_selection", VALUEFUNC(_wrap_wxRadioBox_SetSelection), -1);
     rb_define_method(cWxRadioBox.klass, "set_string_selection", VALUEFUNC(_wrap_wxRadioBox_SetStringSelection), -1);
     rb_define_method(cWxRadioBox.klass, "show", VALUEFUNC(_wrap_wxRadioBox_Show), -1);

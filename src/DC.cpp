@@ -771,7 +771,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/DC.h"
+#include "DC.h"
 
 SwigDirector_wxDC::SwigDirector_wxDC(VALUE self, bool disown): wxDC(), Swig::Director(self, disown) {
     
@@ -2002,26 +2002,7 @@ _wrap_wxDC_FloodFill(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxDC_GetBackground__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxDC *arg1 = (wxDC *) 0 ;
-    wxBrush *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
-    {
-        wxBrush &_result_ref = (arg1)->GetBackground();
-        result = (wxBrush *) &_result_ref;
-    }
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxBrush,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxDC_GetBackground__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxDC_GetBackground(int argc, VALUE *argv, VALUE self) {
     wxDC *arg1 = (wxDC *) 0 ;
     wxBrush *result;
     VALUE vresult = Qnil;
@@ -2036,42 +2017,6 @@ _wrap_wxDC_GetBackground__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxBrush,0);
     return vresult;
-}
-
-
-static VALUE _wrap_wxDC_GetBackground(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 1); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetBackground__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetBackground__SWIG_1(nargs, args, self);
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxDC_GetBackground'");
-    return Qnil;
 }
 
 
@@ -2092,26 +2037,7 @@ _wrap_wxDC_GetBackgroundMode(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxDC_GetBrush__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxDC *arg1 = (wxDC *) 0 ;
-    wxBrush *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
-    {
-        wxBrush &_result_ref = (arg1)->GetBrush();
-        result = (wxBrush *) &_result_ref;
-    }
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxBrush,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxDC_GetBrush__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxDC_GetBrush(int argc, VALUE *argv, VALUE self) {
     wxDC *arg1 = (wxDC *) 0 ;
     wxBrush *result;
     VALUE vresult = Qnil;
@@ -2126,42 +2052,6 @@ _wrap_wxDC_GetBrush__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxBrush,0);
     return vresult;
-}
-
-
-static VALUE _wrap_wxDC_GetBrush(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 1); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetBrush__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetBrush__SWIG_1(nargs, args, self);
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxDC_GetBrush'");
-    return Qnil;
 }
 
 
@@ -2219,26 +2109,7 @@ _wrap_wxDC_GetClippingBox(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxDC_GetFont__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxDC *arg1 = (wxDC *) 0 ;
-    wxFont *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
-    {
-        wxFont &_result_ref = (arg1)->GetFont();
-        result = (wxFont *) &_result_ref;
-    }
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxFont,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxDC_GetFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxDC_GetFont(int argc, VALUE *argv, VALUE self) {
     wxDC *arg1 = (wxDC *) 0 ;
     wxFont *result;
     VALUE vresult = Qnil;
@@ -2253,42 +2124,6 @@ _wrap_wxDC_GetFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxFont,0);
     return vresult;
-}
-
-
-static VALUE _wrap_wxDC_GetFont(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 1); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetFont__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetFont__SWIG_1(nargs, args, self);
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxDC_GetFont'");
-    return Qnil;
 }
 
 
@@ -2341,26 +2176,7 @@ _wrap_wxDC_GetOptimization(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxDC_GetPen__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxDC *arg1 = (wxDC *) 0 ;
-    wxPen *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
-    {
-        wxPen &_result_ref = (arg1)->GetPen();
-        result = (wxPen *) &_result_ref;
-    }
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxPen,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxDC_GetPen__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxDC_GetPen(int argc, VALUE *argv, VALUE self) {
     wxDC *arg1 = (wxDC *) 0 ;
     wxPen *result;
     VALUE vresult = Qnil;
@@ -2375,42 +2191,6 @@ _wrap_wxDC_GetPen__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxPen,0);
     return vresult;
-}
-
-
-static VALUE _wrap_wxDC_GetPen(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 1); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetPen__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetPen__SWIG_1(nargs, args, self);
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxDC_GetPen'");
-    return Qnil;
 }
 
 
@@ -2454,26 +2234,7 @@ _wrap_wxDC_GetSize(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxDC_GetTextBackground__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxDC *arg1 = (wxDC *) 0 ;
-    wxColour *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
-    {
-        wxColour &_result_ref = (arg1)->GetTextBackground();
-        result = (wxColour *) &_result_ref;
-    }
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxColour,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxDC_GetTextBackground__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxDC_GetTextBackground(int argc, VALUE *argv, VALUE self) {
     wxDC *arg1 = (wxDC *) 0 ;
     wxColour *result;
     VALUE vresult = Qnil;
@@ -2488,42 +2249,6 @@ _wrap_wxDC_GetTextBackground__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxColour,0);
     return vresult;
-}
-
-
-static VALUE _wrap_wxDC_GetTextBackground(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 1); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetTextBackground__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetTextBackground__SWIG_1(nargs, args, self);
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxDC_GetTextBackground'");
-    return Qnil;
 }
 
 
@@ -2561,26 +2286,7 @@ _wrap_wxDC_GetTextExtent(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxDC_GetTextForeground__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxDC *arg1 = (wxDC *) 0 ;
-    wxColour *result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
-    {
-        wxColour &_result_ref = (arg1)->GetTextForeground();
-        result = (wxColour *) &_result_ref;
-    }
-    
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxColour,0);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxDC_GetTextForeground__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxDC_GetTextForeground(int argc, VALUE *argv, VALUE self) {
     wxDC *arg1 = (wxDC *) 0 ;
     wxColour *result;
     VALUE vresult = Qnil;
@@ -2595,42 +2301,6 @@ _wrap_wxDC_GetTextForeground__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxColour,0);
     return vresult;
-}
-
-
-static VALUE _wrap_wxDC_GetTextForeground(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 1); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetTextForeground__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxDC, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxDC_GetTextForeground__SWIG_1(nargs, args, self);
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxDC_GetTextForeground'");
-    return Qnil;
 }
 
 

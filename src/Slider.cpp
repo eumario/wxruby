@@ -761,7 +761,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Slider.h"
+#include "Slider.h"
 
 SwigDirector_wxSlider::SwigDirector_wxSlider(VALUE self, bool disown): wxSlider(), Swig::Director(self, disown) {
     

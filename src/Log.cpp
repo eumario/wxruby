@@ -755,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Log.h"
+#include "Log.h"
 
 SwigDirector_wxLog::SwigDirector_wxLog(VALUE self, bool disown) : Swig::Director(self, disown) {
     

@@ -759,7 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/FontDialog.h"
+#include "FontDialog.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

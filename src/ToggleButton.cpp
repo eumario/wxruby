@@ -763,7 +763,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ToggleButton.h"
+#include "ToggleButton.h"
 
 SwigDirector_wxToggleButton::SwigDirector_wxToggleButton(VALUE self, bool disown): wxToggleButton(), Swig::Director(self, disown) {
     

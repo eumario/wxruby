@@ -758,7 +758,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/FindReplaceDialog.h"
+#include "FindReplaceDialog.h"
 
 SwigDirector_wxFindReplaceDialog::SwigDirector_wxFindReplaceDialog(VALUE self, bool disown): wxFindReplaceDialog(), Swig::Director(self, disown) {
     

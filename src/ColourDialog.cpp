@@ -758,7 +758,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ColourDialog.h"
+#include "ColourDialog.h"
 
 SwigDirector_wxColourDialog::SwigDirector_wxColourDialog(VALUE self, wxWindow *parent, wxColourData *data, bool disown): wxColourDialog(parent, data), Swig::Director(self, disown) {
     

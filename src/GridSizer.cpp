@@ -753,7 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/GridSizer.h"
+#include "GridSizer.h"
 
 static VALUE
 _wrap_new_wxGridSizer__SWIG_0(int argc, VALUE *argv, VALUE self) {

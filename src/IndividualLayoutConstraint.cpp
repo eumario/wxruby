@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/IndividualLayoutConstraint.h"
+#include "IndividualLayoutConstraint.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
