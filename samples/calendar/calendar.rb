@@ -20,8 +20,13 @@ class MyPanel < Panel
 
         set_auto_layout(TRUE)
 
-        date = sprintf("Selected date: %s",
-                    DateTime::today().format_iso_date())
+        begin
+            date = sprintf("Selected date: %s",
+                        DateTime::today().format_iso_date())
+        rescue Exception=>e
+            date = "Selected date: None"
+        end
+
         @m_date = StaticText.new(self, -1, date)
         @m_calendar = CalendarCtrl.new(self, Calendar_CalCtrl,
                                         DEFAULT_DATE_TIME,
