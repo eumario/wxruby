@@ -209,7 +209,7 @@ end
 
 # init our app: create windows
 class CheckListBoxApp < App
-    def OnInit()
+    def on_init()
         pFrame = CheckListBoxFrame.new(
                                      nil,
                                      "Windows Checklistbox Sample",

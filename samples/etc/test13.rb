@@ -53,7 +53,7 @@ class RadiobuttonDlg < Dialog
 end
 
 class RbApp < App
-  def OnInit
+  def on_init
     dlg = RadiobuttonDlg.new
     set_top_window(dlg)
     dlg.show(TRUE)

@@ -7,7 +7,7 @@ class MyFrame < Wx::Frame
 end
 
 class NothingApp < Wx::App
-  def OnInit
+  def on_init
     frame = MyFrame.new("Minimal wxRuby App")
 	frame.show
   end

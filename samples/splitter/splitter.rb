@@ -244,7 +244,7 @@ end
 
 
 class MyApp < App
-    def OnInit
+    def on_init
         # create and show the main frame
         frame = MyFrame.new
 
