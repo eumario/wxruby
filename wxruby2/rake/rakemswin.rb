@@ -35,6 +35,7 @@ $wx_cppflags = [
     "-I#$INCTEMP", 
     ].join(' ')
 $extra_cppflags = [
+	"/GR",
     "-DSTRICT", 
     "-DWIN32", "-D__WIN32__", 
     "-D_WINDOWS", "/D__WINDOWS__", 
