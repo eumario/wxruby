@@ -518,8 +518,7 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxDash swig_types[1] 
 #define  SWIGTYPE_p_wxPen swig_types[2] 
 #define  SWIGTYPE_p_wxColour swig_types[3] 
-#define  SWIGTYPE_p_wxBitmap swig_types[4] 
-static swig_type_info *swig_types[6];
+static swig_type_info *swig_types[5];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -809,22 +808,6 @@ _wrap_new_wxPen__SWIG_2(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_new_wxPen__SWIG_3(int argc, VALUE *argv, VALUE self) {
-    wxBitmap *arg1 = 0 ;
-    int arg2 ;
-    wxPen *result;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBitmap, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    arg2 = NUM2INT(argv[1]);
-    result = (wxPen *)new wxPen((wxBitmap const &)*arg1,arg2);
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxPen_allocate(VALUE self) {
@@ -843,7 +826,7 @@ _wrap_wxPen_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxPen__SWIG_4(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxPen__SWIG_3(int argc, VALUE *argv, VALUE self) {
     wxPen *arg1 = 0 ;
     wxPen *result;
     
@@ -875,22 +858,7 @@ static VALUE _wrap_new_wxPen(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxPen, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_wxPen__SWIG_4(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_new_wxPen__SWIG_3(nargs, args, self);
-            }
+            return _wrap_new_wxPen__SWIG_3(nargs, args, self);
         }
     }
     if (argc == 3) {
@@ -1266,14 +1234,12 @@ static swig_type_info _swigt__p_p_wxDash[] = {{"_p_p_wxDash", 0, "wxDash **", 0,
 static swig_type_info _swigt__p_wxDash[] = {{"_p_wxDash", 0, "wxDash *", 0, 0, 0, 0},{"_p_wxDash", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPen[] = {{"_p_wxPen", 0, "wxPen *", 0, 0, 0, 0},{"_p_wxPen", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxColour[] = {{"_p_wxColour", 0, "wxColour *", 0, 0, 0, 0},{"_p_wxColour", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxBitmap[] = {{"_p_wxBitmap", 0, "wxBitmap *", 0, 0, 0, 0},{"_p_wxBitmap", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_p_wxDash, 
 _swigt__p_wxDash, 
 _swigt__p_wxPen, 
 _swigt__p_wxColour, 
-_swigt__p_wxBitmap, 
 0
 };
 
