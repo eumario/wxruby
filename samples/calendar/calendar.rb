@@ -24,7 +24,7 @@ class MyPanel < Panel
             date = sprintf("Selected date: %s",
                         DateTime::today().format_iso_date())
         rescue Exception=>e
-            date = "Selected date: None"
+            date = "Selected date: (please select one)"
         end
 
         @m_date = StaticText.new(self, -1, date)
