@@ -256,14 +256,14 @@ WxOwnerDrawn::ResetOwnerDrawn(VALUE self)
 
 VALUE WxOwnerDrawn::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxOwnerDrawn
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxOwnerDrawn()
     {
        WxOwnerDrawn::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxOwnerDrawn x;
 
 #endif

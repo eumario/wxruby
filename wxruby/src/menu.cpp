@@ -168,12 +168,12 @@ VALUE WxMenu::Enable(VALUE self,VALUE vid,VALUE venable)
 
 VALUE WxMenu::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxMenu
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxMenu()
     {
        WxMenu::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxMenu x;

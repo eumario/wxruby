@@ -567,12 +567,12 @@ WxImage::init0(wxImage image)
 
 VALUE WxImage::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxImage
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxImage()
     {
        WxImage::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxImage x;

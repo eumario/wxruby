@@ -61,6 +61,8 @@ def getRubyToCppConversionMethod(parameter)
     elsif(className == 'int' || className == 'unsigned' || className == 'size_t' || 
                 className == 'NativeFormat')
         method = "NUM2INT"
+    elsif(className == 'double')
+        method = "NUM2DBL"
     elsif(className == 'bool')
         method = "IsTrue"
     elsif(isStringClass(className))

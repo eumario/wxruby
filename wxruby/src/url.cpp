@@ -118,12 +118,12 @@ WxURL::ConvertToValidURI(VALUE self,VALUE vuri)
 
 VALUE WxURL::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxURL
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxURL()
     {
        WxURL::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxURL x;

@@ -197,12 +197,12 @@ WxComboBox::Delete(VALUE self,VALUE vn)
 
 VALUE WxComboBox::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineComboBox
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineComboBox()
     {
        WxComboBox::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineComboBox x;

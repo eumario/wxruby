@@ -85,12 +85,12 @@ WxMenuBar::IsChecked(VALUE self,VALUE vid)
 
 VALUE WxMenuBar::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxMenuBar
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxMenuBar()
     {
        WxMenuBar::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxMenuBar x;

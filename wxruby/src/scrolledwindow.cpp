@@ -230,15 +230,15 @@ WxScrolledWindow::SetTargetWindow(VALUE self,VALUE vwindow)
 
 VALUE WxScrolledWindow::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxScrolledWindow
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxScrolledWindow()
     {
        WxScrolledWindow::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxScrolledWindow x;
 
 //------------------------------------------------
 void

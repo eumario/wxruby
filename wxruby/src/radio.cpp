@@ -130,15 +130,15 @@ WxRadioBox::SetStringSelection(VALUE self,VALUE vstring)
 
 VALUE WxRadioBox::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxRadio
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxRadio()
     {
        WxRadioBox::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxRadio x;
 
 //-------------------------------------------------------------------------------------
 void WxRadioButton::DefineClass()

@@ -152,15 +152,15 @@ WxSpinCtrl::GetMax(VALUE self)
 
 VALUE WxSpinCtrl::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxSpinCtrl
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxSpinCtrl()
     {
        WxSpinCtrl::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxSpinCtrl x;
 
 //---------------------------------------------------------------------------------------
 void WxSpinButton::DefineClass()

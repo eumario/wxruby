@@ -175,12 +175,12 @@ WxStatusBar::init0(wxStatusBar *statusbar)
 
 VALUE WxStatusBar::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxStatusBar
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxStatusBar()
     {
        WxStatusBar::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxStatusBar x;

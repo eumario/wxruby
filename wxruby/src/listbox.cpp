@@ -277,12 +277,12 @@ WxListBox::Clear(VALUE self)
 
 VALUE WxListBox::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineListBox
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineListBox()
     {
        WxListBox::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineListBox x;

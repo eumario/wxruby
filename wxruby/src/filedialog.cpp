@@ -240,12 +240,12 @@ WxFileDialog::SetFilterIndex(VALUE self,VALUE vfilterIndex)
 
 VALUE WxFileDialog::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxFileDialog
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxFileDialog()
     {
        WxFileDialog::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxFileDialog x;

@@ -307,12 +307,12 @@ WxNotebook::init0(wxNotebook *window)
 
 VALUE WxNotebook::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxNotebook
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxNotebook()
     {
        WxNotebook::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxNotebook x;

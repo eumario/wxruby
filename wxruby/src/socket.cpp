@@ -372,15 +372,15 @@ WxSocketBase::GetPeer(VALUE self)
 
 VALUE WxSocketBase::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxSocket
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxSocket()
     {
        WxSocketBase::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxSocket x;
 
 //----------------------------------------------------------------------------------------
 void WxSocketServer::DefineClass()

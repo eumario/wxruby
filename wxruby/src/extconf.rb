@@ -17,6 +17,7 @@ $objs = [
 "dropsource.o","droptarget.o","textdroptarget.o","filedroptarget.o",
 "filedataobject.o","textdataobject.o","dataobject.o","dataobjectsimple.o",
 "dynamiccast.o", "mdiparentframe.o", "mdiclientwindow.o", "mdichildframe.o",
+"htmlprocessor.o", "htmlwindow.o", "htmleasyprinting.o"
 ]
 
 $use_xrc = false

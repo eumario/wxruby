@@ -93,12 +93,12 @@ WxDirDialog::GetPath(VALUE self)
 
 VALUE WxDirDialog::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxDirDialog
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxDirDialog()
     {
        WxDirDialog::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxDirDialog x;

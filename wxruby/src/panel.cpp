@@ -114,12 +114,12 @@ WxPanel::SetDefaultItem(VALUE self,VALUE vbtn)
 
 VALUE WxPanel::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxPanel
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxPanel()
     {
        WxPanel::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxPanel x;

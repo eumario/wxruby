@@ -248,15 +248,15 @@ WxSizer::Layout(VALUE self)
 
 VALUE WxSizer::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxSizer
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxSizer()
     {
        WxSizer::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxSizer x;
 
 //--------------------------------------------------------------------------------
 void WxGridSizer::DefineClass()

@@ -67,15 +67,15 @@ WxStreamBase::free(VALUE self)
 
 VALUE WxStreamBase::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxStreamBase
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxStreamBase()
     {
        WxStreamBase::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxStreamBase x;
 
 //-----------------------------------------------------------------------
 void WxInputStream::DefineClass()

@@ -106,12 +106,12 @@ WxFontData::init0(const wxFontData &fontData)
 
 VALUE WxFontData::rubyClass;
 
-class ZAutoDefine
+class ZAutoDefineWxFontData
 {
 public:
-   ZAutoDefine()
+   ZAutoDefineWxFontData()
     {
        WxFontData::DefineClass();
     }
 };
-static ZAutoDefine x;
+static ZAutoDefineWxFontData x;
