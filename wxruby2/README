@@ -24,7 +24,7 @@ WHATS NEW:
   event that comes back is a C++ wxEvent object, so you 
   cannot call any methods in any event subclass. [Kevin]
 - Overhauled event callback code to be more dynamic, and
-  easier to add more event types. [Kevin]
+  to make it easier to add more event types. [Kevin]
 
   
 
