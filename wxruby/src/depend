@@ -34,7 +34,7 @@ event.o: event.cpp wx.h event.h date.h size.h point.h \
   calendar.h notebook.h window.h listctrl.h socket.h treectrl.h
 evthandler.o: evthandler.cpp wx.h  calendar.h evthandler.h \
   treectrl.h event.h
-filedataobject.o: filedataobject.cpp filedataobject.h
+filedataobject.o: filedataobject.cpp filedataobject.h dataobjectsimple.o
 filedialog.o: filedialog.cpp wx.h filedialog.h dialog.h
 filedroptarget.o: filedroptarget.cpp droptarget.h
 font.o: font.cpp wx.h font.h
