@@ -1,6 +1,7 @@
 require 'mkmf'
 
 $objs = [
+"htmlprocessor.o", "htmlwindow.o", "htmleasyprinting.o",
 "wx.o","app.o","bitmap.o","button.o","calendar.o","checkbox.o",
 "choice.o","colour.o","colourdata.o","colourdialog.o","combobox.o","const.o",
 "date.o","dialog.o","dirdialog.o","event.o","evthandler.o","filedialog.o",
@@ -17,10 +18,9 @@ $objs = [
 "dropsource.o","droptarget.o","textdroptarget.o","filedroptarget.o",
 "filedataobject.o","textdataobject.o","dataobject.o","dataobjectsimple.o",
 "dynamiccast.o", "mdiparentframe.o", "mdiclientwindow.o", "mdichildframe.o",
-"htmlprocessor.o", "htmlwindow.o", "htmleasyprinting.o"
 ]
 
-$use_xrc = false
+$use_xrc = true
 dir_config("xrc");
 
 #
@@ -59,7 +59,7 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
  	$objs.push("macstart.o")
 elsif have_library("kernel32")
     # native Windows - requires a static build of wxWindows
-    $DEBUG = true
+    $DEBUG = false
     $WXDIR=ENV['WXWIN']
     $WXVERSION = '24'
     if $DEBUG
@@ -69,10 +69,11 @@ elsif have_library("kernel32")
     end
     $WXSRC="#$WXDIR/src/msw"
     $WXINC="#$WXDIR/include"
+    $WXINC2="#$WXDIR/contrib/include"
     $WXLIBDIR="#$WXDIR/lib"
     $INCTEMP="#$WXDIR/lib/msw#{$DEBUGPOSTFIX}"
     $WXLIB="#$WXLIBDIR/wxmsw#{$DEBUGPOSTFIX}.lib"
-    $CFLAGS += " -I#$WXINC -I#$INCTEMP #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
+    $CFLAGS += " -I#$WXINC -I#$WXINC2 -I#$INCTEMP #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
     $CFLAGS += " -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /D__WINDOWS__ -D__WXMSW__"
     $libs += " gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib"
     $libs += " uuid.lib odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib winmm.lib"
@@ -81,10 +82,16 @@ elsif have_library("kernel32")
 	$CFLAGS += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1"
 	$libs += " #$WXLIBDIR/pngd.lib #$WXLIBDIR/zlibd.lib #$WXLIBDIR/jpegd.lib"
 	$libs += " #$WXLIBDIR/tiffd.lib #$WXLIB"
+	if ($use_xrc == true)
+	    $libs += " #$WXLIBDIR/wxxrcd.lib"
+	end
     else
 	$CFLAGS += " -DNDEBUG"
 	$libs += " #$WXLIBDIR/png.lib #$WXLIBDIR/zlib.lib #$WXLIBDIR/jpeg.lib"
 	$libs += " #$WXLIBDIR/tiff.lib #$WXLIB"
+	if ($use_xrc == true)
+	    $libs += " #$WXLIBDIR/wxxrc.lib"
+	end
     end
     $objs.push("wx.res")
 

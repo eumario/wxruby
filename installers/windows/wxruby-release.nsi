@@ -2,18 +2,18 @@
 
 ; Define your application name
 !define APPNAME "wxRuby"
-!define APPNAMEANDVERSION "wxRuby 0.4.0"
+!define APPNAMEANDVERSION "wxRuby 0.5.0"
 
-!define WXRUBY_VERSION 040
+!define WXRUBY_VERSION 050
 
-!define DATE "June 10, 2004"
+!define DATE "August 25, 2004"
 
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
 InstallDir "$PROGRAMFILES\wxRuby"
 InstallDirRegKey HKLM "Software\${APPNAME}" ""
-OutFile "wxruby-0.4.0-mswin.exe"
+OutFile "wxruby-0.5.0-mswin.exe"
 
 
 Var "RubyDir"   ; will contain the directory where Ruby is installed
@@ -60,27 +60,19 @@ Section "wxRuby Library" Section_Library
 
   ; Where is Ruby installed?
 
-  ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org" InstallPath
-
+  ReadRegStr $RubyDir HKLM "software\Ruby\RubyInstaller\" DefaultPath
   IfErrors 0 CopyToRubyDir
 
-    ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby181-12" ""
-
-    IfErrors 0 CopyToRubyDir
-
-    ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby181-11" ""
-
-    IfErrors 0 CopyToRubyDir
-
-    ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby180-10" ""
-
-    IfErrors 0 CopyToRubyDir
-
-      MessageBox MB_OK "Could not find Ruby installation. You must manually copy 'wxruby.so' to $\n$\n(ruby-dir)\lib\ruby\site_ruby\1.8\i386-msvcrt\."
-
-      Goto SkipCopy
-
-
+  ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org" InstallPath
+  IfErrors 0 CopyToRubyDir
+  ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby181-12" ""
+  IfErrors 0 CopyToRubyDir
+  ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby181-11" ""
+  IfErrors 0 CopyToRubyDir
+  ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby180-10" ""
+  IfErrors 0 CopyToRubyDir
+  MessageBox MB_OK "Could not find Ruby installation. You must manually copy 'wxruby.so' to $\n$\n(ruby-dir)\lib\ruby\site_ruby\1.8\i386-msvcrt\."
+  Goto SkipCopy
 
   CopyToRubyDir:
 
@@ -170,20 +162,32 @@ Section "Sample wxRuby Programs" Section_Samples
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test20.rbw -- Text Dialog.lnk" "$INSTDIR\samples\etc\test20.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test21.rbw -- Simple Text Editor.lnk" "$INSTDIR\samples\etc\test21.rbw"
 
+  SetOutPath "$INSTDIR\samples\grid\"
+  CreateShortCut "$SMPROGRAMS\wxRuby\Samples\grid.rbw.lnk" "$INSTDIR\samples\grid\grid.rbw"
+
+  CreateDirectory "$SMPROGRAMS\wxRuby\Samples\Html"
+    SetOutPath "$INSTDIR\samples\html\about\" ; for working directory
+    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\html\about.rbw.lnk" "$INSTDIR\samples\html\about\about.rbw"
+    SetOutPath "$INSTDIR\samples\html\printing\" ; for working directory
+    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\html\printing.rbw.lnk" "$INSTDIR\samples\html\printing\printing.rbw"
+    SetOutPath "$INSTDIR\samples\html\test\" ; for working directory
+    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\html\test.rbw.lnk" "$INSTDIR\samples\html\test\test.rbw"
+    SetOutPath "$INSTDIR\samples\html\virtual\" ; for working directory
+    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\html\virtual.rbw.lnk" "$INSTDIR\samples\html\virtual\virtual.rbw"
+
   SetOutPath "$INSTDIR\samples\images\"
   CreateShortCut "$SMPROGRAMS\wxRuby\Samples\images.rbw.lnk" "$INSTDIR\samples\images\images.rbw"
   SetOutPath "$INSTDIR\samples\layout\"
   CreateShortCut "$SMPROGRAMS\wxRuby\Samples\layout.rbw.lnk" "$INSTDIR\samples\layout\layout.rbw"
   SetOutPath "$INSTDIR\samples\listctrl\"
   CreateShortCut "$SMPROGRAMS\wxRuby\Samples\listtest.rbw.lnk" "$INSTDIR\samples\listctrl\listtest.rbw"
+  SetOutPath "$INSTDIR\samples\mdi\"
+  CreateShortCut "$SMPROGRAMS\wxRuby\Samples\mdi.rbw.lnk" "$INSTDIR\samples\mdi\mdi.rbw"
 
   CreateDirectory "$SMPROGRAMS\wxRuby\Samples\Minimal"
     SetOutPath "$INSTDIR\samples\minimal\"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Minimal\minimal.rbw.lnk" "$INSTDIR\samples\minimal\minimal.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Minimal\nothing.rbw.lnk" "$INSTDIR\samples\minimal\nothing.rbw"
-
-  SetOutPath "$INSTDIR\samples\mdi\"
-  CreateShortCut "$SMPROGRAMS\wxRuby\Samples\mdi.rbw.lnk" "$INSTDIR\samples\mdi\mdi.rbw"
 
   CreateDirectory "$SMPROGRAMS\wxRuby\Samples\Sockets"
     SetOutPath "$INSTDIR\samples\sockets\"
@@ -196,6 +200,8 @@ Section "Sample wxRuby Programs" Section_Samples
   CreateShortCut "$SMPROGRAMS\wxRuby\Samples\toolbar.rbw.lnk" "$INSTDIR\samples\toolbar\toolbar.rbw"
   SetOutPath "$INSTDIR\samples\treectrl\"
   CreateShortCut "$SMPROGRAMS\wxRuby\Samples\treetest.rbw.lnk" "$INSTDIR\samples\treectrl\treetest.rbw"
+  SetOutPath "$INSTDIR\samples\xrc\"
+  CreateShortCut "$SMPROGRAMS\wxRuby\Samples\xrc.rbw.lnk" "$INSTDIR\samples\xrc\xrc_sample.rbw"
 
 SectionEnd
 

@@ -49,7 +49,7 @@ htmlcell.o: htmlcell.cpp htmlcell.h
 htmleasyprinting.o: htmleasyprinting.cpp htmleasyprinting.cpp
 htmlwindow.o: htmlwindow.cpp htmlwindow.h
 htmlcontainercell.o: htmlcontainercell.h htmlcontainercell.cpp
-htmlprocessor.t: htmlprocessor.h htmlprocessor.cpp
+htmlprocessor.o: htmlprocessor.h htmlprocessor.cpp
 image.o: image.cpp wx.h  image.h statusbar.h menubar.h \
   toolbar.h bitmap.h palette.h
 layout.o: layout.cpp wx.h  layout.h
