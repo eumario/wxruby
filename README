@@ -1,27 +1,27 @@
-README for wxRuby version 0.2.1 (ALPHA)
-   Released under the wxWindows 2 license (see LICENSE)
-   This file last updated 2003-03-11
+README for wxRuby version 0.3.0 (EARLY BETA)
+   Released under the wxWidgets 2 license (see LICENSE)
+   This file last updated 2003-04-17
 
 
 --------------------------------------------------------------------
 INTRODUCTION
 
 wxRuby is an extension library for the Ruby language that
-gives access to the wxWindows cross-platform, native-widget, 
-GUI toolkit. 
+gives access to the wxWidgets (formerly known as wxWindows)
+cross-platform, native-widget, GUI toolkit. 
 
 The wxRuby project website is:
   http://rubyforge.org/projects/wxruby/
 
-The wxWindows project website is:
-  http://wxwindows.org/
+The wxWidgets project website is:
+  http://wxwidgets.org/
 
 
 --------------------------------------------------------------------
 REQUIREMENTS
 
 * Ruby 1.8.x (or 1.6.5+ on some platforms)
-* wxWindows 2.4.x (compiled without unicode)
+* wxWidgets or wxWindows 2.4.x (compiled without unicode)
 
 Primary development is under Debian GNU/Linux ("Sarge").
 
@@ -127,7 +127,7 @@ features that are not implemented or do not work correctly.
 * We have almost no documentation yet.
 
 * wxRuby is not yet compatible with unicode versions of 
-wxWindows. This will definitely be fixed as soon as is 
+wxWidgets. This will definitely be fixed as soon as is 
 practical.
 
 
