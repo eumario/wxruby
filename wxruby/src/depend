@@ -45,6 +45,11 @@ frame.o: frame.cpp wx.h  frame.h window.h statusbar.h \
 gauge.o: gauge.cpp wx.h gauge.h window.h
 grid.o : grid.cpp grid.h font.h pen.h rect.h colour.h size.h
 icon.o: icon.cpp wx.h  icon.h bitmap.h
+htmlcell.o: htmlcell.cpp htmlcell.h              
+htmleasyprinting.o: htmleasyprinting.cpp htmleasyprinting.cpp
+htmlwindow.o: htmlwindow.cpp htmlwindow.h
+htmlcontainercell.o: htmlcontainercell.h htmlcontainercell.cpp
+htmlprocessor.t: htmlprocessor.h htmlprocessor.cpp
 image.o: image.cpp wx.h  image.h statusbar.h menubar.h \
   toolbar.h bitmap.h palette.h
 layout.o: layout.cpp wx.h  layout.h
@@ -101,4 +106,5 @@ validator.o: validator.cpp wx.h  window.h validator.h
 window.o: window.cpp wx.h  window.h evthandler.h colour.h \
   font.h size.h rect.h sizer.h caret.h point.h layout.h region.h \
   validator.h cursor.h tooltip.h classinfo.h
+xmlresource.o: xmlresource.h xmlresource.cpp
 wx.o: wx.cpp wx.h
