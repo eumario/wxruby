@@ -488,6 +488,9 @@ static VALUE mWxChoice;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -672,7 +675,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Choice.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -746,7 +749,19 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Choice.h"
+#include "Choice.h"
+
+SwigDirector_wxChoice::SwigDirector_wxChoice(VALUE self, bool disown): wxChoice(), Swig::Director(self, disown) {
+    
+}
+
+
+
+SwigDirector_wxChoice::SwigDirector_wxChoice(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, int n, wxString const choices[], long style, wxValidator const &validator, wxString const &name, bool disown): wxChoice(parent, id, pos, size, n, choices, style, validator, name), Swig::Director(self, disown) {
+    
+}
+
+
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
@@ -767,48 +782,57 @@ _wrap_wxChoice_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxChoice(int argc, VALUE *argv, VALUE self) {
-    wxWindow *arg1 = (wxWindow *) 0 ;
-    wxWindowID arg2 ;
-    wxPoint *arg3 = 0 ;
-    wxSize *arg4 = 0 ;
-    int arg5 ;
-    wxString *arg6 ;
-    long arg7 = (long) 0 ;
-    wxValidator const &arg8_defvalue = wxDefaultValidator ;
-    wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
-    wxString const &arg9_defvalue = "choice" ;
-    wxString *arg9 = (wxString *) &arg9_defvalue ;
+    VALUE arg1 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxWindowID arg3 ;
+    wxPoint *arg4 = 0 ;
+    wxSize *arg5 = 0 ;
+    int arg6 ;
+    wxString *arg7 ;
+    long arg8 = (long) 0 ;
+    wxValidator const &arg9_defvalue = wxDefaultValidator ;
+    wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
+    wxString const &arg10_defvalue = "choice" ;
+    wxString *arg10 = (wxString *) &arg10_defvalue ;
     wxChoice *result;
     
     if ((argc < 5) || (argc > 8))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    arg2 = NUM2INT(argv[1]);
-    SWIG_ConvertPtr(argv[2], (void **) &arg3, SWIGTYPE_p_wxPoint, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxSize, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
-        arg5 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-        printf("Size: %d\n", arg5);
-        arg6 = new wxString[arg5];
-        for(int i=0; i < arg5; ++i)
+        arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
+        printf("Size: %d\n", arg6);
+        arg7 = new wxString[arg6];
+        for(int i=0; i < arg6; ++i)
         {
             VALUE thisItem = rb_ary_entry(argv[4], i);
-            arg6[i] = STR2CSTR(thisItem);
-            printf("Item %d: %s\n", i, arg6[i].c_str());
+            arg7[i] = STR2CSTR(thisItem);
+            printf("Item %d: %s\n", i, arg7[i].c_str());
         }
     }
     if (argc > 5) {
-        arg7 = NUM2LONG(argv[5]);
+        arg8 = NUM2LONG(argv[5]);
     }
     if (argc > 6) {
-        SWIG_ConvertPtr(argv[6], (void **) &arg8, SWIGTYPE_p_wxValidator, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[6], (void **) &arg9, SWIGTYPE_p_wxValidator, 1); if (arg9 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 7) {
         {
-            arg9 = new wxString(STR2CSTR(argv[7]));
+            arg10 = new wxString(STR2CSTR(argv[7]));
         }
     }
-    result = (wxChoice *)new wxChoice(arg1,arg2,(wxPoint const &)*arg3,(wxSize const &)*arg4,arg5,(wxString const (*))arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxChoice *)new SwigDirector_wxChoice(arg1,arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10,0);
+        
+    } else {
+        result = (wxChoice *)new wxChoice(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -816,6 +840,14 @@ _wrap_new_wxChoice(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxChoice(wxChoice *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxChoice*)arg1;
+    printf("Choice.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
 static VALUE
@@ -934,6 +966,23 @@ _wrap_wxChoice_SetSelection(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_disown_wxChoice(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -975,6 +1024,7 @@ mWxChoice = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxChoice, "disown_wxChoice", VALUEFUNC(_wrap_disown_wxChoice), -1);
     
     extern void Init_wxControlWithItems();
     Init_wxControlWithItems();

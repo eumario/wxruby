@@ -458,10 +458,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxSize swig_types[1] 
 #define  SWIGTYPE_p_wxWindow swig_types[2] 
 #define  SWIGTYPE_p_wxButton swig_types[3] 
-#define  SWIGTYPE_p_wxString swig_types[4] 
-#define  SWIGTYPE_p_wxSysColourChangedEvent swig_types[5] 
-#define  SWIGTYPE_p_wxPoint swig_types[6] 
-static swig_type_info *swig_types[8];
+#define  SWIGTYPE_p_wxSysColourChangedEvent swig_types[4] 
+#define  SWIGTYPE_p_wxPoint swig_types[5] 
+static swig_type_info *swig_types[7];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -488,6 +487,9 @@ static VALUE mWxPanel;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -673,7 +675,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Panel.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -747,7 +749,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Panel.h"
+#include "Panel.h"
 
 SwigDirector_wxPanel::SwigDirector_wxPanel(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, long style, wxString const &name, bool disown): wxPanel(parent, id, pos, size, style, name), Swig::Director(self, disown) {
     
@@ -837,8 +839,7 @@ static void
 free_wxPanel(wxPanel *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxPanel*)arg1;
     printf("Panel.cpp" " Checking %p\n", director);
-    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));
-    if(self == Qnil)
+    if (GcIsDeleted(director))
     {
         printf("%p is already dead!\n", director);
         return;
@@ -958,6 +959,7 @@ _wrap_disown_wxPanel(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxPanel, 1);
     {
         Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
         if (director) director->swig_disown();
     }
     
@@ -975,7 +977,6 @@ static swig_type_info _swigt__p_wxPanel[] = {{"_p_wxPanel", 0, "wxPanel *", 0},{
 static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0},{"_p_wxSize"},{0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0},{"_p_wxPanel", _p_wxPanelTo_p_wxWindow},{"_p_wxWindow"},{0}};
 static swig_type_info _swigt__p_wxButton[] = {{"_p_wxButton", 0, "wxButton *", 0},{"_p_wxButton"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxSysColourChangedEvent[] = {{"_p_wxSysColourChangedEvent", 0, "wxSysColourChangedEvent *", 0},{"_p_wxSysColourChangedEvent"},{0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0},{"_p_wxPoint"},{0}};
 
@@ -984,7 +985,6 @@ _swigt__p_wxPanel,
 _swigt__p_wxSize, 
 _swigt__p_wxWindow, 
 _swigt__p_wxButton, 
-_swigt__p_wxString, 
 _swigt__p_wxSysColourChangedEvent, 
 _swigt__p_wxPoint, 
 0

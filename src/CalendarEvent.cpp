@@ -483,6 +483,9 @@ static VALUE mWxCalendarEvent;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -669,7 +672,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("CalendarEvent.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -743,7 +746,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/CalendarEvent.h"
+#include "CalendarEvent.h"
 
 static VALUE
 _wrap_wxCalendarEvent_GetDate(int argc, VALUE *argv, VALUE self) {

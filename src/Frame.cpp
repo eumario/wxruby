@@ -494,6 +494,9 @@ static VALUE mWxFrame;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -678,7 +681,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Frame.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -752,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Frame.h"
+#include "Frame.h"
 
 SwigDirector_wxFrame::SwigDirector_wxFrame(VALUE self, bool disown): wxFrame(), Swig::Director(self, disown) {
     
@@ -960,8 +963,7 @@ static void
 free_wxFrame(wxFrame *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxFrame*)arg1;
     printf("Frame.cpp" " Checking %p\n", director);
-    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));
-    if(self == Qnil)
+    if (GcIsDeleted(director))
     {
         printf("%p is already dead!\n", director);
         return;
@@ -1569,7 +1571,7 @@ _wrap_disown_wxFrame(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxFrame, 1);
     {
-        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+Swig::Director *director = (Swig::Director*)(arg1);
         if (director) director->swig_disown();
     }
     

@@ -485,6 +485,9 @@ static VALUE mWxObject;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -668,7 +671,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Object.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -742,15 +745,36 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Object.h"
+#include "Object.h"
+
+SwigDirector_wxObject::SwigDirector_wxObject(VALUE self, bool disown): wxObject(), Swig::Director(self, disown) {
+    
+}
+
+
+
+SwigDirector_wxObject::SwigDirector_wxObject(VALUE self, wxObject const &other, bool disown): wxObject(other), Swig::Director(self, disown) {
+    
+}
+
+
 
 static VALUE
 _wrap_new_wxObject__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
     wxObject *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (wxObject *)new wxObject();
+    arg1 = self;
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxObject *)new SwigDirector_wxObject(arg1,0);
+        
+    } else {
+        result = (wxObject *)new wxObject();
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -775,13 +799,22 @@ _wrap_wxObject_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxObject__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxObject *arg1 = 0 ;
+    VALUE arg1 ;
+    wxObject *arg2 = 0 ;
     wxObject *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxObject, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
-    result = (wxObject *)new wxObject((wxObject const &)*arg1);
+    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxObject, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxObject *)new SwigDirector_wxObject(arg1,(wxObject const &)*arg2,0);
+        
+    } else {
+        result = (wxObject *)new wxObject((wxObject const &)*arg2);
+        
+    }
     DATA_PTR(self) = result;
     return self;
 }
@@ -789,24 +822,31 @@ _wrap_new_wxObject__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_wxObject(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[1];
+    VALUE argv[2];
     int ii;
     
     argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 1); ii++) {
+    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
         argv[ii] = args[ii];
-    }
-    if (argc == 0) {
-        return _wrap_new_wxObject__SWIG_0(nargs, args, self);
     }
     if (argc == 1) {
         int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxObject, 0) != -1)) ? 1 : 0;
-        }
+        _v = 1;
         if (_v) {
-            return _wrap_new_wxObject__SWIG_1(nargs, args, self);
+            return _wrap_new_wxObject__SWIG_0(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        _v = 1;
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxObject, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_wxObject__SWIG_1(nargs, args, self);
+            }
         }
     }
     
@@ -817,6 +857,14 @@ static VALUE _wrap_new_wxObject(int nargs, VALUE *args, VALUE self) {
 
 static void
 free_wxObject(wxObject *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxObject*)arg1;
+    printf("Object.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
 static VALUE
@@ -912,6 +960,23 @@ _wrap_wxObject_UnRef(int argc, VALUE *argv, VALUE self) {
 }
 
 
+static VALUE
+_wrap_disown_wxObject(int argc, VALUE *argv, VALUE self) {
+    wxObject *arg1 = (wxObject *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxObject, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
+}
+
+
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -947,6 +1012,7 @@ mWxObject = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxObject, "disown_wxObject", VALUEFUNC(_wrap_disown_wxObject), -1);
     
     cWxObject.klass = rb_define_class_under(mWxObject, "Object", rb_cObject);
     SWIG_TypeClientData(SWIGTYPE_p_wxObject, (void *) &cWxObject);

@@ -458,11 +458,10 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxImage swig_types[1] 
 #define  SWIGTYPE_p_wxBitmapType swig_types[2] 
 #define  SWIGTYPE_p_wxPalette swig_types[3] 
-#define  SWIGTYPE_p_wxString swig_types[4] 
-#define  SWIGTYPE_p_wxBitmap swig_types[5] 
-#define  SWIGTYPE_p_wxMask swig_types[6] 
-#define  SWIGTYPE_p_wxRect swig_types[7] 
-static swig_type_info *swig_types[9];
+#define  SWIGTYPE_p_wxBitmap swig_types[4] 
+#define  SWIGTYPE_p_wxMask swig_types[5] 
+#define  SWIGTYPE_p_wxRect swig_types[6] 
+static swig_type_info *swig_types[8];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -489,6 +488,9 @@ static VALUE mWxBitmap;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -677,7 +679,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Bitmap.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -751,7 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Bitmap.h"
+#include "Bitmap.h"
 
 SwigDirector_wxBitmap::SwigDirector_wxBitmap(VALUE self, bool disown): wxBitmap(), Swig::Director(self, disown) {
     
@@ -860,8 +862,7 @@ static void
 free_wxBitmap(wxBitmap *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxBitmap*)arg1;
     printf("Bitmap.cpp" " Checking %p\n", director);
-    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));
-    if(self == Qnil)
+    if (GcIsDeleted(director))
     {
         printf("%p is already dead!\n", director);
         return;
@@ -1177,6 +1178,7 @@ _wrap_disown_wxBitmap(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBitmap, 1);
     {
         Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
         if (director) director->swig_disown();
     }
     
@@ -1191,7 +1193,6 @@ static swig_type_info _swigt__p_wxIcon[] = {{"_p_wxIcon", 0, "wxIcon *", 0},{"_p
 static swig_type_info _swigt__p_wxImage[] = {{"_p_wxImage", 0, "wxImage *", 0},{"_p_wxImage"},{0}};
 static swig_type_info _swigt__p_wxBitmapType[] = {{"_p_wxBitmapType", 0, "wxBitmapType *", 0},{"_p_wxBitmapType"},{0}};
 static swig_type_info _swigt__p_wxPalette[] = {{"_p_wxPalette", 0, "wxPalette *", 0},{"_p_wxPalette"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxBitmap[] = {{"_p_wxBitmap", 0, "wxBitmap *", 0},{"_p_wxBitmap"},{0}};
 static swig_type_info _swigt__p_wxMask[] = {{"_p_wxMask", 0, "wxMask *", 0},{"_p_wxMask"},{0}};
 static swig_type_info _swigt__p_wxRect[] = {{"_p_wxRect", 0, "wxRect *", 0},{"_p_wxRect"},{0}};
@@ -1201,7 +1202,6 @@ _swigt__p_wxIcon,
 _swigt__p_wxImage, 
 _swigt__p_wxBitmapType, 
 _swigt__p_wxPalette, 
-_swigt__p_wxString, 
 _swigt__p_wxBitmap, 
 _swigt__p_wxMask, 
 _swigt__p_wxRect, 

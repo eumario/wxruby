@@ -14,4 +14,11 @@
 class Swig::Director;
 
 
+class SwigDirector_wxCommandEvent : public wxCommandEvent, public Swig::Director {
+
+public:
+    SwigDirector_wxCommandEvent(VALUE self, WXTYPE commandEventType = 0, int id = 0, bool disown = 0);
+};
+
+
 #endif

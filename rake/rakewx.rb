@@ -186,7 +186,7 @@ def create_compile_task(base_name)
     end
     file(obj_file => cpp_file) do |t|
         force_mkdir($obj_dir)
-		sh "#{$cpp} -c #{$cppflags} #{$extra_cppflags} #{out_arg}#{obj_file} #{cpp_file} "
+		sh "#{$cpp} -c #{$cppflags} #{out_arg}#{obj_file} #{cpp_file} "
     end
 end
 

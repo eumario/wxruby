@@ -14,4 +14,12 @@
 class Swig::Director;
 
 
+class SwigDirector_wxChoice : public wxChoice, public Swig::Director {
+
+public:
+    SwigDirector_wxChoice(VALUE self, bool disown = 0);
+    SwigDirector_wxChoice(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, int n, wxString const choices[], long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = "choice", bool disown = 0);
+};
+
+
 #endif

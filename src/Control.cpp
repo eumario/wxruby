@@ -455,9 +455,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxControl swig_types[0] 
-#define  SWIGTYPE_p_wxString swig_types[1] 
-#define  SWIGTYPE_p_wxCommandEvent swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxCommandEvent swig_types[1] 
+static swig_type_info *swig_types[3];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -484,6 +483,9 @@ static VALUE mWxControl;
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 
 
 #include <wx/datetime.h>
@@ -669,7 +671,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Control.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -743,7 +745,13 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Control.h"
+#include "Control.h"
+
+SwigDirector_wxControl::SwigDirector_wxControl(VALUE self, bool disown) : Swig::Director(self, disown) {
+    
+}
+
+
 
 static VALUE
 _wrap_wxControl_Command(int argc, VALUE *argv, VALUE self) {
@@ -797,6 +805,14 @@ _wrap_wxControl_SetLabel(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxControl(wxControl *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxControl*)arg1;
+    printf("Control.cpp" " Checking %p\n", director);
+    if (GcIsDeleted(director))
+    {
+        printf("%p is already dead!\n", director);
+        return;
+    }
+    printf("deleting %p\n", director);
     delete arg1;
 }
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -818,13 +834,39 @@ _wrap_wxControl_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxControl(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
     wxControl *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    result = (wxControl *)new wxControl();
+    arg1 = self;
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxControl *)new SwigDirector_wxControl(arg1);
+        
+    } else {
+        result = (wxControl *)new wxControl();
+        
+    }
     DATA_PTR(self) = result;
     return self;
+}
+
+
+static VALUE
+_wrap_disown_wxControl(int argc, VALUE *argv, VALUE self) {
+    wxControl *arg1 = (wxControl *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxControl, 1);
+    {
+        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
+        if (director) director->swig_disown();
+    }
+    
+    return Qnil;
 }
 
 
@@ -832,12 +874,10 @@ _wrap_new_wxControl(int argc, VALUE *argv, VALUE self) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxControl[] = {{"_p_wxControl", 0, "wxControl *", 0},{"_p_wxControl"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxCommandEvent[] = {{"_p_wxCommandEvent", 0, "wxCommandEvent *", 0},{"_p_wxCommandEvent"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxControl, 
-_swigt__p_wxString, 
 _swigt__p_wxCommandEvent, 
 0
 };
@@ -863,6 +903,7 @@ mWxControl = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxControl, "disown_wxControl", VALUEFUNC(_wrap_disown_wxControl), -1);
     
     extern void Init_wxWindow();
     Init_wxWindow();

@@ -14,4 +14,11 @@
 class Swig::Director;
 
 
+class SwigDirector_wxUpdateUIEvent : public wxUpdateUIEvent, public Swig::Director {
+
+public:
+    SwigDirector_wxUpdateUIEvent(VALUE self, wxWindowID commandId = 0, bool disown = 0);
+};
+
+
 #endif

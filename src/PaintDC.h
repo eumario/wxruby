@@ -14,4 +14,11 @@
 class Swig::Director;
 
 
+class SwigDirector_wxPaintDC : public wxPaintDC, public Swig::Director {
+
+public:
+    SwigDirector_wxPaintDC(VALUE self, wxWindow *window, bool disown = 0);
+};
+
+
 #endif

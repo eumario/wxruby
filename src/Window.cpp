@@ -501,6 +501,9 @@ static VALUE mWxWindow;
 
 #include <wx/wx.h>
 
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+
 
 #include <wx/datetime.h>
 
@@ -703,7 +706,7 @@ namespace Swig {
       virtual ~Director() {
 
     printf("Window.cpp" " ~Director %p\n", this);
-    rb_hash_aset(alive, INT2NUM((int)this), Qnil);
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -777,7 +780,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Window.h"
+#include "Window.h"
 
 SwigDirector_wxWindow::SwigDirector_wxWindow(VALUE self, bool disown): wxWindow(), Swig::Director(self, disown) {
     
@@ -1804,8 +1807,7 @@ static VALUE _wrap_new_wxWindow(int nargs, VALUE *args, VALUE self) {
                                     return _wrap_new_wxWindow__SWIG_1(nargs, args, self);
                                 }
                                 {
-                                    void *ptr;
-                                    _v = (NIL_P(argv[6]) || (TYPE(argv[6]) == T_DATA && SWIG_ConvertPtr(argv[6], &ptr, SWIGTYPE_p_wxString, 0) != -1)) ? 1 : 0;
+                                    _v = TYPE(argv[6]) == T_STRING;
                                 }
                                 if (_v) {
                                     return _wrap_new_wxWindow__SWIG_1(nargs, args, self);
@@ -1827,8 +1829,7 @@ static void
 free_wxWindow(wxWindow *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxWindow*)arg1;
     printf("Window.cpp" " Checking %p\n", director);
-    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));
-    if(self == Qnil)
+    if (GcIsDeleted(director))
     {
         printf("%p is already dead!\n", director);
         return;
@@ -2441,11 +2442,10 @@ static VALUE _wrap_wxWindow_FindWindow(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxString, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_wxWindow_FindWindow__SWIG_1(nargs, args, self);
+                return _wrap_wxWindow_FindWindow__SWIG_0(nargs, args, self);
             }
         }
     }
@@ -2457,10 +2457,10 @@ static VALUE _wrap_wxWindow_FindWindow(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+                _v = TYPE(argv[1]) == T_STRING;
             }
             if (_v) {
-                return _wrap_wxWindow_FindWindow__SWIG_0(nargs, args, self);
+                return _wrap_wxWindow_FindWindow__SWIG_1(nargs, args, self);
             }
         }
     }
@@ -4973,10 +4973,10 @@ static VALUE _wrap_wxWindow_SetToolTip(int nargs, VALUE *args, VALUE self) {
         if (_v) {
             {
                 void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxString, 0) != -1)) ? 1 : 0;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxToolTip, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_wxWindow_SetToolTip__SWIG_0(nargs, args, self);
+                return _wrap_wxWindow_SetToolTip__SWIG_1(nargs, args, self);
             }
         }
     }
@@ -4988,11 +4988,10 @@ static VALUE _wrap_wxWindow_SetToolTip(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxToolTip, 0) != -1)) ? 1 : 0;
+                _v = TYPE(argv[1]) == T_STRING;
             }
             if (_v) {
-                return _wrap_wxWindow_SetToolTip__SWIG_1(nargs, args, self);
+                return _wrap_wxWindow_SetToolTip__SWIG_0(nargs, args, self);
             }
         }
     }
@@ -5301,6 +5300,7 @@ _wrap_disown_wxWindow(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     {
         Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
+if(!director) printf("OOPS! Not a director!\n");
         if (director) director->swig_disown();
     }
     

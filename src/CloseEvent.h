@@ -14,4 +14,11 @@
 class Swig::Director;
 
 
+class SwigDirector_wxCloseEvent : public wxCloseEvent, public Swig::Director {
+
+public:
+    SwigDirector_wxCloseEvent(VALUE self, WXTYPE commandEventType = 0, int id = 0, bool disown = 0);
+};
+
+
 #endif
