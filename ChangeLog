@@ -1,11 +1,19 @@
-2003-08-22 06:00  kbs
+2003-08-22 19:00  kbs
+	* Added some notes to the build/install section of README
+	
+	* Updated LICENSE to make it clear that wxRuby is not wxWindows
+	
+	* Added COPYING.LIB as required by LICENSE
+	
+
+2003-08-22 18:00  kbs
 	* Modified wxpp.rb to eliminate dozens of compiler warnings about 
 	possibly uninitialized variables, and unused variables. Some 
 	warnings may remain. I would have eliminted them earlier, but my 
 	compiler only started complaining a couple weeks ago.
 	
 
-2003-08-22 05:30  kbs
+2003-08-22 17:30  kbs
 	* Updated README and created several platform-specific README.xxx files
 	
 
