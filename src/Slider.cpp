@@ -833,7 +833,7 @@ _wrap_new_wxSlider(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg11 = new wxString(STR2CSTR(argv[9]));
+            arg11 = new wxString((wxChar *)STR2CSTR(argv[9]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -930,7 +930,7 @@ _wrap_wxSlider_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg11 = new wxString(STR2CSTR(argv[9]));
+            arg11 = new wxString((wxChar *)STR2CSTR(argv[9]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,arg4,arg5,arg6,(wxPoint const &)*arg7,(wxSize const &)*arg8,arg9,(wxValidator const &)*arg10,(wxString const &)*arg11);

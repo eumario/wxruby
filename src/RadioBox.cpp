@@ -823,7 +823,7 @@ _wrap_new_wxRadioBox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -861,7 +861,7 @@ _wrap_new_wxRadioBox(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg12 = new wxString(STR2CSTR(argv[9]));
+            arg12 = new wxString((wxChar *)STR2CSTR(argv[9]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -925,7 +925,7 @@ _wrap_wxRadioBox_Create(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -963,7 +963,7 @@ _wrap_wxRadioBox_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg12 = new wxString(STR2CSTR(argv[9]));
+            arg12 = new wxString((wxChar *)STR2CSTR(argv[9]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const (*))arg8,arg9,arg10,(wxValidator const &)*arg11,(wxString const &)*arg12);
@@ -1080,7 +1080,7 @@ _wrap_wxRadioBox_FindString(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRadioBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (int)((wxRadioBox const *)arg1)->FindString((wxString const &)*arg2);
     
@@ -1163,7 +1163,7 @@ _wrap_wxRadioBox_SetStringSelection(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRadioBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetStringSelection((wxString const &)*arg2);
     

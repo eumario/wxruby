@@ -781,7 +781,7 @@ _wrap_wxLog_AddTraceMask(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     wxLog::AddTraceMask((wxString const &)*arg1);
     
@@ -1064,7 +1064,7 @@ _wrap_wxLog_RemoveTraceMask(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     wxLog::RemoveTraceMask((wxString const &)*arg1);
     

@@ -846,7 +846,7 @@ _wrap_new_wxSpinCtrl__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 2) {
         {
-            arg3 = new wxString(STR2CSTR(argv[2]));
+            arg3 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
@@ -869,7 +869,7 @@ _wrap_new_wxSpinCtrl__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg10 = new wxString(STR2CSTR(argv[9]));
+            arg10 = new wxString((wxChar *)STR2CSTR(argv[9]));
         }
     }
     result = (wxSpinCtrl *)new wxSpinCtrl(arg1,arg2,(wxString const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,arg7,arg8,arg9,(wxString const &)*arg10);
@@ -1009,7 +1009,7 @@ _wrap_wxSpinCtrl_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 2) {
         {
-            arg4 = new wxString(STR2CSTR(argv[2]));
+            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
@@ -1032,7 +1032,7 @@ _wrap_wxSpinCtrl_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg11 = new wxString(STR2CSTR(argv[9]));
+            arg11 = new wxString((wxChar *)STR2CSTR(argv[9]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,arg8,arg9,arg10,(wxString const &)*arg11);
@@ -1051,7 +1051,7 @@ _wrap_wxSpinCtrl_SetValue__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetValue((wxString const &)*arg2);
     

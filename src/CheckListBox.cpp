@@ -843,7 +843,7 @@ _wrap_new_wxCheckListBox(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg10 = new wxString(STR2CSTR(argv[7]));
+            arg10 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {

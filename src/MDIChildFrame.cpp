@@ -811,7 +811,7 @@ _wrap_new_wxMDIChildFrame(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxMDIParentFrame, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -824,7 +824,7 @@ _wrap_new_wxMDIChildFrame(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString(STR2CSTR(argv[6]));
+            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -888,7 +888,7 @@ _wrap_wxMDIChildFrame_Create(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxMDIParentFrame, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -901,7 +901,7 @@ _wrap_wxMDIChildFrame_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString(STR2CSTR(argv[6]));
+            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const &)*arg8);

@@ -965,7 +965,7 @@ _wrap_wxSetWorkingDirectory(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     wxSetWorkingDirectory((wxString const &)*arg1);
     
@@ -1001,10 +1001,10 @@ _wrap_wxGetMultipleChoices(int argc, VALUE *argv, VALUE self) {
     if ((argc < 2) || (argc > 9))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     if (argc > 2) {
         {
@@ -1075,13 +1075,13 @@ _wrap_wxGetNumberFromUser(int argc, VALUE *argv, VALUE self) {
     if ((argc < 4) || (argc > 8))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     {
-        arg2 = new wxString(STR2CSTR(argv[1]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     {
-        arg3 = new wxString(STR2CSTR(argv[2]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     arg4 = NUM2LONG(argv[3]);
     if (argc > 4) {
@@ -1117,16 +1117,16 @@ _wrap_wxGetTextFromUser(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     if (argc > 1) {
         {
-            arg2 = new wxString(STR2CSTR(argv[1]));
+            arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
         }
     }
     if (argc > 2) {
         {
-            arg3 = new wxString(STR2CSTR(argv[2]));
+            arg3 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
@@ -1155,16 +1155,16 @@ _wrap_wxGetPasswordFromUser(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     if (argc > 1) {
         {
-            arg2 = new wxString(STR2CSTR(argv[1]));
+            arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
         }
     }
     if (argc > 2) {
         {
-            arg3 = new wxString(STR2CSTR(argv[2]));
+            arg3 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
@@ -1200,26 +1200,26 @@ _wrap_wxFileSelector(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 9))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     if (argc > 1) {
         {
-            arg2 = new wxString(STR2CSTR(argv[1]));
+            arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
         }
     }
     if (argc > 2) {
         {
-            arg3 = new wxString(STR2CSTR(argv[2]));
+            arg3 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
         {
-            arg4 = new wxString(STR2CSTR(argv[3]));
+            arg4 = new wxString((wxChar *)STR2CSTR(argv[3]));
         }
     }
     if (argc > 4) {
         {
-            arg5 = new wxString(STR2CSTR(argv[4]));
+            arg5 = new wxString((wxChar *)STR2CSTR(argv[4]));
         }
     }
     if (argc > 5) {

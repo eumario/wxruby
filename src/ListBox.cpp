@@ -852,7 +852,7 @@ _wrap_new_wxListBox(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg10 = new wxString(STR2CSTR(argv[7]));
+            arg10 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -940,7 +940,7 @@ _wrap_wxListBox_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg10 = new wxString(STR2CSTR(argv[7]));
+            arg10 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10);
@@ -1062,7 +1062,7 @@ _wrap_wxListBox_Set__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     if (argc > 2) {
         SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_p_void, 1);
@@ -1202,7 +1202,7 @@ _wrap_wxListBox_SetFirstItem__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetFirstItem((wxString const &)*arg2);
     
@@ -1285,7 +1285,7 @@ _wrap_wxListBox_SetStringSelection(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     if (argc > 1) {
         arg3 = RTEST(argv[1]);
@@ -1305,7 +1305,7 @@ _wrap_wxListBox_Append(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->Append((wxString const &)*arg2);
     
@@ -1339,7 +1339,7 @@ _wrap_wxListBox_FindString(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (int)(arg1)->FindString(*arg2);
     
@@ -1429,7 +1429,7 @@ _wrap_wxListBox_SetString(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetString(arg2,*arg3);
     

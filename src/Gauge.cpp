@@ -828,7 +828,7 @@ _wrap_new_wxGauge(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString(STR2CSTR(argv[7]));
+            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -895,7 +895,7 @@ _wrap_wxGauge_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString(STR2CSTR(argv[7]));
+            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
