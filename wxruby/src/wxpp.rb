@@ -16,6 +16,9 @@ def isStringClass(className)
 end
 
 def isWxClass(className)
+	if(className == 'wxWindowID')
+		return false
+	end
 	return (className.index('wx') == 0 && !className.index('*'))
 end
 
@@ -216,7 +219,11 @@ class Parameters
     def scanVariables
         optionalCount = getOptionalCount
         requiredCount = size - optionalCount
-        scan = "\tint got=rb_scan_args(argc, argv, " 
+		scan = "\t"
+		if(size > 0)
+	        scan += "int got="
+		end
+		scan += "rb_scan_args(argc, argv, " 
         scan += '"' + requiredCount.to_s + optionalCount.to_s + '"'
         parameters.each_index do | index |
             className = parameters[index].cppClass
@@ -724,7 +731,6 @@ class ClassHandler
         result += parameters.declareRubyVariables
         result += parameters.scanVariables
         result += parameters.convertVariables
-        result += convertSelf
 		if(isSubclass)
         	result += parameters.delegateCallTo("new #{wxName}", wxName)
 		else
