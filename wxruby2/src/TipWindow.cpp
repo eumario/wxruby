@@ -797,7 +797,7 @@ _wrap_new_wxTipWindow(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[1]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     if (argc > 2) {
         arg3 = NUM2INT(argv[2]);

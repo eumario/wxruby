@@ -820,7 +820,7 @@ _wrap_new_wxSpinButton(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString(STR2CSTR(argv[5]));
+            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -880,7 +880,7 @@ _wrap_wxSpinButton_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString(STR2CSTR(argv[5]));
+            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const &)*arg7);

@@ -876,7 +876,7 @@ _wrap_wxFindReplaceData_SetFindString(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFindReplaceData, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetFindString((wxString const &)*arg2);
     
@@ -893,7 +893,7 @@ _wrap_wxFindReplaceData_SetReplaceString(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFindReplaceData, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetReplaceString((wxString const &)*arg2);
     

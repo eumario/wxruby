@@ -844,7 +844,7 @@ _wrap_new_wxBrush__SWIG_2(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     arg1 = self;
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     arg3 = NUM2INT(argv[1]);
     if ( CLASS_OF(self) != Qnil ) {
@@ -1120,7 +1120,7 @@ _wrap_wxBrush_SetColour__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxBrush, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetColour((wxString const &)*arg2);
     

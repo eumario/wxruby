@@ -831,7 +831,7 @@ _wrap_new_wxStaticBitmap(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString(STR2CSTR(argv[6]));
+            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -877,7 +877,7 @@ _wrap_wxStaticBitmap_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString(STR2CSTR(argv[6]));
+            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxBitmap const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const &)*arg8);

@@ -857,7 +857,7 @@ _wrap_new_wxGrid__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString(STR2CSTR(argv[5]));
+            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -3495,7 +3495,7 @@ _wrap_wxGrid_SetCellValue__SWIG_0(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2INT(argv[0]);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     (arg1)->SetCellValue(arg2,arg3,(wxString const &)*arg4);
     
@@ -3514,7 +3514,7 @@ _wrap_wxGrid_SetCellValue__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxGridCellCoords, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetCellValue((wxGridCellCoords const &)*arg2,(wxString const &)*arg3);
     
@@ -3533,7 +3533,7 @@ _wrap_wxGrid_SetCellValue__SWIG_2(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     arg3 = NUM2INT(argv[1]);
     arg4 = NUM2INT(argv[2]);
@@ -3711,7 +3711,7 @@ _wrap_wxGrid_SetColFormatCustom(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetColFormatCustom(arg2,(wxString const &)*arg3);
     
@@ -3762,7 +3762,7 @@ _wrap_wxGrid_SetColLabelValue(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetColLabelValue(arg2,(wxString const &)*arg3);
     
@@ -4108,7 +4108,7 @@ _wrap_wxGrid_SetRowLabelValue(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetRowLabelValue(arg2,(wxString const &)*arg3);
     
@@ -4420,7 +4420,7 @@ _wrap_wxGrid_RegisterDataType(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxGridCellRenderer, 1);
     SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxGridCellEditor, 1);
@@ -4551,7 +4551,7 @@ _wrap_wxGrid_GetDefaultEditorForType(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (wxGridCellEditor *)((wxGrid const *)arg1)->GetDefaultEditorForType((wxString const &)*arg2);
     
@@ -4571,7 +4571,7 @@ _wrap_wxGrid_GetDefaultRendererForType(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (wxGridCellRenderer *)((wxGrid const *)arg1)->GetDefaultRendererForType((wxString const &)*arg2);
     
@@ -4644,7 +4644,7 @@ _wrap_new_wxGrid__SWIG_2(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString(STR2CSTR(argv[6]));
+            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -5102,7 +5102,7 @@ _wrap_wxGrid_SetLabelValue(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGrid, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     arg4 = NUM2INT(argv[2]);
     (arg1)->SetLabelValue(arg2,(wxString const &)*arg3,arg4);

@@ -768,7 +768,7 @@ _wrap_wxControlWithItems_Append(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     {
         arg3 = (void*)(argv[1]);
@@ -806,7 +806,7 @@ _wrap_wxControlWithItems_FindString(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (int)(arg1)->FindString((wxString const &)*arg2);
     
@@ -970,7 +970,7 @@ _wrap_wxControlWithItems_SetString(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetString(arg2,(wxString const &)*arg3);
     

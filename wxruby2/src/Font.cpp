@@ -808,7 +808,7 @@ _wrap_new_wxFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg6 = new wxString(STR2CSTR(argv[5]));
+            arg6 = new wxString((wxChar *)STR2CSTR(argv[5]));
         }
     }
     if (argc > 6) {
@@ -1087,7 +1087,7 @@ _wrap_wxFont_SetFaceName(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFont, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetFaceName((wxString const &)*arg2);
     

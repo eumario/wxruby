@@ -838,7 +838,7 @@ _wrap_wxMenuBar_Append(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenuBar, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxMenu, 1);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     result = (bool)(arg1)->Append(arg2,(wxString const &)*arg3);
     
@@ -909,7 +909,7 @@ _wrap_wxMenuBar_FindMenu(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenuBar, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (int)((wxMenuBar const *)arg1)->FindMenu((wxString const &)*arg2);
     
@@ -930,10 +930,10 @@ _wrap_wxMenuBar_FindMenuItem(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenuBar, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     result = (int)((wxMenuBar const *)arg1)->FindMenuItem((wxString const &)*arg2,(wxString const &)*arg3);
     
@@ -1073,7 +1073,7 @@ _wrap_wxMenuBar_Insert(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxMenu, 1);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     result = (bool)(arg1)->Insert(arg2,arg3,(wxString const &)*arg4);
     
@@ -1164,7 +1164,7 @@ _wrap_wxMenuBar_Replace(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxMenu, 1);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     result = (wxMenu *)(arg1)->Replace(arg2,arg3,(wxString const &)*arg4);
     
@@ -1184,7 +1184,7 @@ _wrap_wxMenuBar_SetHelpString(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenuBar, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetHelpString(arg2,(wxString const &)*arg3);
     
@@ -1203,7 +1203,7 @@ _wrap_wxMenuBar_SetLabel(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenuBar, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetLabel(arg2,(wxString const &)*arg3);
     
@@ -1222,7 +1222,7 @@ _wrap_wxMenuBar_SetLabelTop(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenuBar, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     (arg1)->SetLabelTop(arg2,(wxString const &)*arg3);
     

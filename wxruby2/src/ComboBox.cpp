@@ -816,7 +816,7 @@ _wrap_new_wxComboBox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -847,7 +847,7 @@ _wrap_new_wxComboBox(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 8) {
         {
-            arg11 = new wxString(STR2CSTR(argv[8]));
+            arg11 = new wxString((wxChar *)STR2CSTR(argv[8]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -908,7 +908,7 @@ _wrap_wxComboBox_Create(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -939,7 +939,7 @@ _wrap_wxComboBox_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 8) {
         {
-            arg11 = new wxString(STR2CSTR(argv[8]));
+            arg11 = new wxString((wxChar *)STR2CSTR(argv[8]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const (*))arg8,arg9,(wxValidator const &)*arg10,(wxString const &)*arg11);
@@ -1054,7 +1054,7 @@ _wrap_wxComboBox_Replace(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2LONG(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     (arg1)->Replace(arg2,arg3,(wxString const &)*arg4);
     
@@ -1133,7 +1133,7 @@ _wrap_wxComboBox_SetValue(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxComboBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetValue((wxString const &)*arg2);
     
@@ -1150,7 +1150,7 @@ _wrap_wxComboBox_Append(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxComboBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->Append((wxString const &)*arg2);
     
@@ -1182,7 +1182,7 @@ _wrap_wxComboBox_SetStringSelection(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxComboBox, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetStringSelection(*arg2);
     

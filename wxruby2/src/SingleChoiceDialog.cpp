@@ -805,10 +805,10 @@ _wrap_new_wxSingleChoiceDialog(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     if (argc > 3) {
         {

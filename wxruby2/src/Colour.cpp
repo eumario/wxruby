@@ -793,7 +793,7 @@ _wrap_new_wxColour__SWIG_2(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (wxColour *)new wxColour((wxString const &)*arg1);
     DATA_PTR(self) = result;

@@ -779,7 +779,7 @@ _wrap_new_wxCursor__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if ((argc < 2) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
-        arg1 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     arg2 = NUM2LONG(argv[1]);
     if (argc > 2) {

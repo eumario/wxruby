@@ -799,16 +799,16 @@ _wrap_new_wxTextEntryDialog(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     if (argc > 2) {
         {
-            arg4 = new wxString(STR2CSTR(argv[2]));
+            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
         {
-            arg5 = new wxString(STR2CSTR(argv[3]));
+            arg5 = new wxString((wxChar *)STR2CSTR(argv[3]));
         }
     }
     if (argc > 4) {
@@ -870,7 +870,7 @@ _wrap_wxTextEntryDialog_SetValue(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextEntryDialog, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->SetValue((wxString const &)*arg2);
     

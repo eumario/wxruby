@@ -1113,7 +1113,7 @@ _wrap_new_wxTextCtrl(int argc, VALUE *argv, VALUE self) {
     arg3 = NUM2INT(argv[1]);
     if (argc > 2) {
         {
-            arg4 = new wxString(STR2CSTR(argv[2]));
+            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
@@ -1130,7 +1130,7 @@ _wrap_new_wxTextCtrl(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString(STR2CSTR(argv[7]));
+            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -1168,7 +1168,7 @@ _wrap_wxTextCtrl_AppendText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->AppendText((wxString const &)*arg2);
     
@@ -1329,7 +1329,7 @@ _wrap_wxTextCtrl_Create(int argc, VALUE *argv, VALUE self) {
     arg3 = NUM2INT(argv[1]);
     if (argc > 2) {
         {
-            arg4 = new wxString(STR2CSTR(argv[2]));
+            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
         }
     }
     if (argc > 3) {
@@ -1346,7 +1346,7 @@ _wrap_wxTextCtrl_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString(STR2CSTR(argv[7]));
+            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
@@ -1673,7 +1673,7 @@ _wrap_wxTextCtrl_LoadFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (bool)(arg1)->LoadFile((wxString const &)*arg2);
     
@@ -1788,7 +1788,7 @@ _wrap_wxTextCtrl_Replace(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2LONG(argv[1]);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
@@ -1809,7 +1809,7 @@ _wrap_wxTextCtrl_SaveFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     result = (bool)(arg1)->SaveFile((wxString const &)*arg2);
     
@@ -1958,7 +1958,7 @@ _wrap_wxTextCtrl_SetValue(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
@@ -2008,7 +2008,7 @@ _wrap_wxTextCtrl_WriteText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
     (arg1)->WriteText((wxString const &)*arg2);
     

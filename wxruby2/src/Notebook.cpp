@@ -826,7 +826,7 @@ _wrap_new_wxNotebook(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString(STR2CSTR(argv[5]));
+            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -870,7 +870,7 @@ _wrap_wxNotebook_AddPage(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxPanel, 1);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     if (argc > 2) {
         arg4 = RTEST(argv[2]);
@@ -940,7 +940,7 @@ _wrap_wxNotebook_Create(int argc, VALUE *argv, VALUE self) {
     arg6 = NUM2LONG(argv[4]);
     if (argc > 5) {
         {
-            arg7 = new wxString(STR2CSTR(argv[5]));
+            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const &)*arg7);
@@ -1121,7 +1121,7 @@ _wrap_wxNotebook_InsertPage(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2INT(argv[0]);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxPanel, 1);
     {
-        arg4 = new wxString(STR2CSTR(argv[2]));
+        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
     }
     if (argc > 3) {
         arg5 = RTEST(argv[3]);
@@ -1232,7 +1232,7 @@ _wrap_wxNotebook_SetPageText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]));
+        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
     }
     result = (bool)(arg1)->SetPageText(arg2,(wxString const &)*arg3);
     
