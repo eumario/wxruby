@@ -23,7 +23,7 @@ wxBitmap wxRbArtProvider::CreateBitmap(const wxArtID& id,
 {
     wxBitmap *ptr;
     VALUE v = WxBitmap::init0(wxNullBitmap);
-    v = rb_funcall(self,rb_intern("CreateBitmap"),3,rb_str_new2(id),rb_str_new2(client),WxSize::init0(size));
+    v = rb_funcall(self,rb_intern("create_bitmap"),3,rb_str_new2(id),rb_str_new2(client),WxSize::init0(size));
     Data_Get_Struct(v, wxBitmap, ptr);
     return *ptr;
 }

@@ -820,7 +820,6 @@ WxListItemAttr::HasTextColour(VALUE self)
 {
     wxListItemAttr *ptr;
     Data_Get_Struct(self, wxListItemAttr, ptr);
-printf("ptr = %p\n");
     return (ptr->HasTextColour() ? Qtrue : Qfalse);
 }
 
