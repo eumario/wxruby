@@ -3,8 +3,11 @@
 ; Define your application name
 !define APPNAME "wxRuby"
 !define APPNAMEANDVERSION "wxRuby 0.2"
+
 !define WXRUBY_VERSION 020
+
 !define DATE "Janurary 5, 2004"
+
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
@@ -12,7 +15,9 @@ InstallDir "$PROGRAMFILES\wxRuby"
 InstallDirRegKey HKLM "Software\${APPNAME}" ""
 OutFile "wxruby-mswin-0.2_debug.exe"
 
+
 Var "RubyDir"   ; will contain the directory where Ruby is installed
+
 
 ; Modern interface settings
 !include "MUI.nsh"
@@ -35,41 +40,74 @@ Var "RubyDir"   ; will contain the directory where Ruby is installed
 
 Section "wxRuby Library" Section_Library
   ; Record our basic installation into in the registry
+
   WriteRegStr HKLM "software\wxRuby" InstallPath "$INSTDIR"
+
   WriteRegStr HKLM "software\wxRuby" InstallVersion "${WXRUBY_VERSION}"
+
   WriteRegStr HKLM "software\wxRuby" InstallDate "${DATE}"
+
+
 
 ; Set Section properties
 	SetOverwrite on
+
 
 	; Set Section Files and Shortcuts
 	SetOutPath "$INSTDIR\lib\"
 	File "wxruby-dbg\lib\vc60.pdb"
 	File "wxruby-dbg\lib\wxruby.so"
+
 	File "wxruby-dbg\lib\msvcrtd.dll"
 
+
+
   IfFileExists "" skipCRTcopy
+
 		SetOutPath "$SYSDIR"
     File "wxruby-dbg\lib\msvcrtd.dll"
+
   skipCRTcopy:
 
+
 	; Where is Ruby installed?
+
   ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org" InstallPath
+
   IfErrors 0 CopyToRubyDir
-		ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby180-10" ""
+
+		ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby181-12" ""
+
 		IfErrors 0 CopyToRubyDir
+
+		ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby181-11" ""
+
+		IfErrors 0 CopyToRubyDir
+
+		ReadRegStr $RubyDir HKLM "software\www.ruby-lang.org\Ruby180-10" ""
+
+		IfErrors 0 CopyToRubyDir
+
 			MessageBox MB_OK "Could not find Ruby installation. You must manually copy 'wxruby.so' to $\n$\n(ruby-dir)\lib\ruby\site_ruby\1.8\i386-msvcrt\."
+
 			Goto SkipCopy
+
 			
+
   CopyToRubyDir:
+
 		SetOutPath "$RubyDir\lib\ruby\site_ruby\1.8\i386-msvcrt\"
 		File "wxruby-dbg\lib\wxruby.so"
+
   SkipCopy:
 
+
   ; Create Shortcuts
+
 	CreateDirectory "$SMPROGRAMS\wxRuby"
 	CreateShortCut "$SMPROGRAMS\wxRuby\Uninstall.lnk" "$INSTDIR\uninstall.exe"
 	
+
 SectionEnd
 
 Section "Help Files" Section_Help
@@ -101,6 +139,7 @@ Section "Sample wxRuby Programs" Section_Samples
 	CreateShortCut "$SMPROGRAMS\wxRuby\Samples\caret.lnk" "$INSTDIR\samples\caret\caret.rbw"
 	SetOutPath "$INSTDIR\samples\checklst\"
 	CreateShortCut "$SMPROGRAMS\wxRuby\Samples\checklst.lnk" "$INSTDIR\samples\checklst\checklst.rbw"
+
 	SetOutPath "$INSTDIR\samples\config\"
 	CreateShortCut "$SMPROGRAMS\wxRuby\Samples\conftest.rbw.lnk" "$INSTDIR\samples\config\conftest.rbw"
 	SetOutPath "$INSTDIR\samples\controls\"
@@ -144,6 +183,7 @@ Section "Source Code" Section_Source
 	; Set Section Files and Shortcuts
 	SetOutPath "$INSTDIR\"
 	File /r "wxruby-dbg\src"
+
 	File "wxruby-dbg\README.mswin"
 
 SectionEnd
