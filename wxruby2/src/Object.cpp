@@ -702,27 +702,6 @@ SwigDirector_wxObject::SwigDirector_wxObject(VALUE self, wxObject const &other, 
 
 
 
-static VALUE
-_wrap_new_wxObject__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxObject *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxObject *)new SwigDirector_wxObject(arg1,0);
-        
-    } else {
-        result = (wxObject *)new wxObject();
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxObject_allocate(VALUE self) {
@@ -741,60 +720,23 @@ _wrap_wxObject_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxObject__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxObject(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
-    wxObject *arg2 = 0 ;
     wxObject *result;
     
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxObject, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     if ( CLASS_OF(self) != Qnil ) {
         /* subclassed */
-        result = (wxObject *)new SwigDirector_wxObject(arg1,(wxObject const &)*arg2,0);
+        result = (wxObject *)new SwigDirector_wxObject(arg1,0);
         
     } else {
-        result = (wxObject *)new wxObject((wxObject const &)*arg2);
+        result = (wxObject *)new wxObject();
         
     }
     DATA_PTR(self) = result;
     return self;
-}
-
-
-static VALUE _wrap_new_wxObject(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 1) {
-        int _v;
-        _v = 1;
-        if (_v) {
-            return _wrap_new_wxObject__SWIG_0(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        _v = 1;
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxObject, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_new_wxObject__SWIG_1(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxObject'");
-    return Qnil;
 }
 
 

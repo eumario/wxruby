@@ -1,9 +1,9 @@
 README for wxruby-swig
-Version 0.0.16
+Version 0.0.18-pre
 
 This is a very early release of a swig-based version 
 of wxRuby. It can run the "minimal" sample. It only 
-supports 36 classes, compared to 139 in wxRuby 0.3, 
+supports about 40 classes, compared to 139 in wxRuby 0.3, 
 and over 300 in all of wxWidgets.
 
 It is released under a permissive MIT-style license.
@@ -12,19 +12,9 @@ There are no binaries. You must build it from source.
 
 
 WHATS NEW:
-- Switched version control from darcs to CVS. Now hosted 
-  at rubyforge.org, as a second cvs module within the 
-  wxruby project. [Nick]
-- Internally use wx hash instead of ruby hash, so objects
-  can be freed by ruby [Nick]
-- MS Windows compilation fixes [Nick]
-- Avoid dynamic_cast, hopefully to avoid need for RTTI [Kevin]
-- Major README updates [Kevin]
-- Added support for EvtHandler#connnect, but note that the
-  event that comes back is a C++ wxEvent object, so you 
-  cannot call any methods in any event subclass. [Kevin]
-- Overhauled event callback code to be more dynamic, and
-  to make it easier to add more event types. [Kevin]
+- Added support for evt_idle, evt_show, evt_window_create
+- Removed some unused code and debug output
+- Added a couple very basic unit tests
 
   
 
