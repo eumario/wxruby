@@ -1,7 +1,10 @@
 2004-01-26
     * Added installers/ subdirectory with windows installer 
       scripts from Curt
-      
+    * Changed ListCtrl#get_item to take an id and optional column, 
+      and return a ListItem, like wxPython does
+    * Added sample controls/get_item_sample.rb from Nobuaki Arima
+
 
 2004-01-07
     * Added Curt's README.mswin

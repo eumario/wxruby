@@ -48,7 +48,7 @@ void WxListCtrl::DefineClass()
 #endif
 	rb_define_method(rubyClass, "get_image_list", VALUEFUNC(WxListCtrl::GetImageList), 1);
 	rb_define_method(rubyClass, "get_item_count", VALUEFUNC(WxListCtrl::GetItemCount), 0);
-	rb_define_method(rubyClass, "get_item", VALUEFUNC(WxListCtrl::GetItem), 1);
+	rb_define_method(rubyClass, "get_item", VALUEFUNC(WxListCtrl::GetItem), -1);
 	rb_define_method(rubyClass, "get_item_data", VALUEFUNC(WxListCtrl::GetItemData), 1);
 	rb_define_method(rubyClass, "get_item_position", VALUEFUNC(WxListCtrl::GetItemPosition), 1);
 	rb_define_method(rubyClass, "get_item_rect", VALUEFUNC(WxListCtrl::GetItemRect), -1);
@@ -289,13 +289,25 @@ WxListCtrl::GetImageList(VALUE self,VALUE vwhich)
 
 
 VALUE
-WxListCtrl::GetItem(VALUE self,VALUE vinfo)
+WxListCtrl::GetItem(int argc, VALUE *argv, VALUE self)
 {
+    VALUE listItem = rb_funcall(WxListItem::rubyClass, rb_intern("new"), 0);
+    VALUE id = Qnil;
+    VALUE col = Qnil;
+    rb_scan_args(argc, argv, "11", &id, &col);
+    WxListItem::SetId(listItem, id);
+    if(argc > 1)
+        WxListItem::SetColumn(listItem, col);
+
     wxListItem *info;
-    Data_Get_Struct(vinfo, wxListItem, info);
+    Data_Get_Struct(listItem, wxListItem, info);
+    
     wxRbListCtrl *ptr;
     Data_Get_Struct(self, wxRbListCtrl, ptr);
-    return (ptr->GetItem(*info) ? Qtrue : Qfalse);
+    if(!ptr->GetItem(*info))
+        return Qnil;
+    
+    return listItem;
 }
 
 VALUE
