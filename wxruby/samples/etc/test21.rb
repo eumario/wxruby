@@ -13,97 +13,82 @@ MENU_INFO_ABOUT = 107
 
 
 class RangeValidator < Validator
+  attr_reader :min
+  attr_reader :max
+  attr_reader :current
 
-  def initialize(value,min=nil,max=nil)
+  def initialize(initialValue, min, max)
     super()
-    if(min==nil && max==nil)
-      Copy(value)
-    else
-      @m_min = min
-      @m_max = max
-      @m_value = value
-    end
+    @min = min
+    @max = max
+    @current = initialValue
+    #puts("Validator will allow #{min} to #{max}, default #{current}")
   end
 
-  def m_min
-    @m_min
-  end
-  def m_max
-    @m_max
-  end
-  def m_value
-    @m_value
+  def copy
+    #puts("Validator.copy was called")
+    return RangeValidator.new(current, min, max)
   end
 
-  def Clone
-    return RangeValidator.new(self)
-  end
-
-  def Copy(val)
-    @m_min   = val.m_min
-    @m_max   = val.m_max
-    @m_value = val.m_value
-    return true
-  end
-
-  def Validate(parent)
+  def validate(parent)
     win = get_window()
-    return false if !win
+    if !win
+        puts("get_window returned nil")
+        return false 
+    end
     control = win
     result = false
 
-    currentValue = control.get_value
+    currentValue = control.get_value.to_i
+    #puts("Value being checked: #{currentValue}")
 
-    if !currentValue.ToLong(value)
-      message = sprintf(message,"%s is not a valid number", currentValue.c_str())
+    if currentValue < 1
+      message = "#{currentValue} is not a valid number"
     else
-      if value < m_min || value > m_max
-          message = sprintf(message,"%ld is not between %ld and %ld", value, m_min, m_max)
+      if currentValue < min || currentValue > max
+          message = "#{currentValue} is not between #{min} and #{max}"
       else
           result = true
       end
     end
 
     if !result
-      MessageBox(message)
+      message_box(message)
       control.set_focus
     end
 
     return result
   end
 
-  def TransferToWindow
-
+  def transfer_to_window
+    #puts("transfer_to_window called")
     win = get_window()
-    return false if !win
-    return false if !@m_value
-    return false if !win.is_kind_of(CLASSINFO(TextCtrl))
 
     control = win
-    control.set_value(@m_value)
+    control.set_value(current.to_s)
+    #puts("Value set to #{current}")
 
     return true
   end
 
-  def TransferFromWindow
+  def transfer_from_window
+    #puts("transfer_from_window called")
     win = get_window()
-    return false if !win
-    return false if !@m_value
-
-    return false if !win.is_kind_of(CLASSINFO(TextCtrl))
 
     control = win
-    m_value = control.get_value
+    @current = control.get_value.to_i
+    #puts("Got value #{current}")
 
     return true
   end
 end
 
 class GotoLineDialog < Dialog
+  attr_accessor :value
+  
   def initialize(parent)
     super(parent, -1, "Goto Line...", DEFAULT_POSITION,
                Size.new(250, 120), DEFAULT_DIALOG_STYLE)
-    @m_lineNumber = "1"
     set_auto_layout(TRUE)
 
     layout = LayoutConstraints.new
@@ -142,18 +127,19 @@ class GotoLineDialog < Dialog
     layout.width.same_as(cancelButton, LAYOUT_WIDTH)
     layout.height.as_is
     okButton.set_constraints(layout)
+    okButton.set_default
 
     evt_init_dialog {onInitDialog}
   end
 
   def onInitDialog
-    label = @m_lineNumber
-    label = sprintf(label,"Enter a line between 1 and %ld", @m_maxLineNumber)
+    label = "Enter a line between 1 and #{@m_maxLineNumber}"
     @m_pLabel.set_label(label)
     layout()
-    rangeValidator = RangeValidator.new(@m_lineNumber, 1, @m_maxLineNumber)
+    rangeValidator = RangeValidator.new(1, 1, @m_maxLineNumber)
     @m_pLineNumberCtrl.set_validator(rangeValidator)
-    transfer_data_to_window()
+    result = transfer_data_to_window()
+    #puts("transfer_data_to_window returned #{result}")
     @m_pLineNumberCtrl.set_focus
   end
 
@@ -162,8 +148,7 @@ class GotoLineDialog < Dialog
   end
 
   def GetLineNumber
-    # Return 0 when toLong fails.
-    return @m_lineNumber.to_i
+    return @m_pLineNumberCtrl.get_validator.current
   end
 end
 
@@ -188,6 +173,7 @@ class AboutDialog < Dialog
     layout.width.percent_of(self, LAYOUT_WIDTH, 80)
     layout.height.as_is
 
+
     @m_pOkButton = Button.new(self, ID_OK, "Ok", Point.new(-1, -1))
     @m_pOkButton.set_constraints(layout)
 
@@ -204,8 +190,9 @@ end
 class TextFrame < Frame
   def initialize(title, xpos, ypos, width, height)
     super(nil,-1, title, Point.new(xpos, ypos), Size.new(width, height))
-    @m_pTextCtrl = TextCtrl.new(self, -1, "Type some text...",
-	DEFAULT_POSITION, DEFAULT_SIZE, TE_MULTILINE)
+    @m_pTextCtrl = TextCtrl.new(self, -1, 
+        "This is\na test of\ndialog input.\nFeel free to add more text...",
+	    DEFAULT_POSITION, DEFAULT_SIZE, TE_MULTILINE)
 
     @m_pMenuBar = MenuBar.new
 
@@ -249,6 +236,11 @@ class TextFrame < Frame
     evt_menu(MENU_OPTION_FONT) {|event| onMenuOptionFont(event) }
     evt_menu(MENU_OPTION_DIRECTORY) {|event| onMenuOptionDirectory(event) }
     evt_close {|event| onClose(event) }
+  end
+  
+  def show(visible)
+    super(visible)
+    @m_pTextCtrl.set_focus
   end
 
   def onMenuFileOpen(event)
@@ -300,9 +292,9 @@ class TextFrame < Frame
     dlg = GotoLineDialog.new(self)
     dlg.SetMaxLineNumber(@m_pTextCtrl.get_number_of_lines)
     if dlg.show_modal == ID_OK
-	# Convert the linenumber to a position and set self as the new insertion point.
-	p dlg.GetLineNumber
-	@m_pTextCtrl.set_insertion_point(@m_pTextCtrl.xy_to_position(0, dlg.GetLineNumber - 1))
+        # Convert the linenumber to a position and set self as the new insertion point.
+        #p dlg.GetLineNumber
+        @m_pTextCtrl.set_insertion_point(@m_pTextCtrl.xy_to_position(0, dlg.GetLineNumber - 1))
     end
     dlg.destroy
   end
