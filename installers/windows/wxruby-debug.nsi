@@ -225,7 +225,11 @@ Section "Source Code" Section_Source
   SetOutPath "$INSTDIR\"
   File /r "wxruby-dbg\src"
 
-  File "wxruby-dbg\README.mswin"
+  File "wxruby-rel\ChangeLog"
+  File "wxruby-rel\COPYING.LIB"
+  File "wxruby-rel\LICENSE"
+  File "wxruby-rel\README"
+  File "wxruby-rel\README.mswin"
 
 SectionEnd
 
