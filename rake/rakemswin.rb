@@ -45,13 +45,13 @@ $extra_cppflags = [
 if $DEBUG
     $ruby_cppflags.gsub!(/-MD/," /MDd");
     $ruby_cppflags.gsub!(/-O[A-Za-z0-9-]*/, "/Od")
-    $extra_cppflags += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 /Yd "
+    $extra_cppflags += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
 else
     $extra_cppflags += " -DNDEBUG "
 end
 
 if $DEBUG 
-	$wx_ldflags = " /DEBUG /PDB:lib\\wx.pdb /PDBTYPE:CON "
+	$wx_ldflags = " /DEBUG /PDB:#$WXLIBDIR/../Debug/vc60.pdb "
 else
 	$wx_ldflags = ""
 end
