@@ -87,16 +87,13 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
-#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
-#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7+ */
-#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
+#    else /* These definitions should work for Ruby 1.7 */
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -628,7 +625,12 @@ public:
 	
 		
 #else     
+#if __WXMAC__
+	wxEntry(argc,(char **)argv);
+
+#else
         wxEntry((const int)argc,(char **)argv);
+#endif
 #endif        
 		
 #ifdef wxDEBUG
@@ -890,7 +892,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/App.h"
+#include "App.h"
 
 SwigDirector_App::SwigDirector_App(VALUE self, bool disown): wxRubyApp(), Swig::Director(self, disown) {
     

@@ -87,16 +87,13 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
-#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
-#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7+ */
-#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
+#    else /* These definitions should work for Ruby 1.7 */
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -764,7 +761,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/FileDialog.h"
+#include "FileDialog.h"
 
 SwigDirector_wxFileDialog::SwigDirector_wxFileDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &defaultDir, wxString const &defaultFile, wxString const &wildcard, long style, wxPoint const &pos, bool disown): wxFileDialog(parent, message, defaultDir, defaultFile, wildcard, style, pos), Swig::Director(self, disown) {
     

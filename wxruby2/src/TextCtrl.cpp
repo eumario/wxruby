@@ -87,16 +87,13 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
-#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
-#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7+ */
-#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
+#    else /* These definitions should work for Ruby 1.7 */
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -770,7 +767,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/TextCtrl.h"
+#include "TextCtrl.h"
 
 SwigDirector_wxTextCtrl::SwigDirector_wxTextCtrl(VALUE self, bool disown): wxTextCtrl(), Swig::Director(self, disown) {
     
@@ -2051,6 +2048,206 @@ _wrap_wxTextCtrl_XYToPosition(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_wxTextCtrl___lshift____SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
+    char *arg2 ;
+    wxTextCtrl *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
+    arg2 = StringValuePtr(argv[0]);
+    {
+        wxTextCtrl &_result_ref = (arg1)->operator <<((char const *)arg2);
+        result = (wxTextCtrl *) &_result_ref;
+    }
+    
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxTextCtrl___lshift____SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
+    int arg2 ;
+    wxTextCtrl *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
+    arg2 = NUM2INT(argv[0]);
+    {
+        wxTextCtrl &_result_ref = (arg1)->operator <<(arg2);
+        result = (wxTextCtrl *) &_result_ref;
+    }
+    
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxTextCtrl___lshift____SWIG_2(int argc, VALUE *argv, VALUE self) {
+    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
+    double arg2 ;
+    wxTextCtrl *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
+    arg2 = (double) NUM2DBL(argv[0]);
+    {
+        wxTextCtrl &_result_ref = (arg1)->operator <<(arg2);
+        result = (wxTextCtrl *) &_result_ref;
+    }
+    
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxTextCtrl___lshift____SWIG_3(int argc, VALUE *argv, VALUE self) {
+    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
+    bool arg2 ;
+    wxTextCtrl *result;
+    Swig::Director *resultdirector = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
+    arg2 = RTEST(argv[0]);
+    {
+        wxTextCtrl &_result_ref = (arg1)->operator <<(arg2);
+        result = (wxTextCtrl *) &_result_ref;
+    }
+    
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
+    if (resultdirector) {
+        vresult = resultdirector->swig_get_self();
+    } else {
+        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
+    }
+    return vresult;
+}
+
+
+static VALUE _wrap_wxTextCtrl___lshift__(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (argv[1] == Qtrue || argv[1] == Qfalse) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxTextCtrl___lshift____SWIG_3(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxTextCtrl___lshift____SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxTextCtrl___lshift____SWIG_2(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxTextCtrl___lshift____SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxTextCtrl___lshift__'");
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_wxTextCtrl(int argc, VALUE *argv, VALUE self) {
     wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
     
@@ -2170,6 +2367,7 @@ mWxTextCtrl = mWx;
     rb_define_method(cWxTextCtrl.klass, "undo", VALUEFUNC(_wrap_wxTextCtrl_Undo), -1);
     rb_define_method(cWxTextCtrl.klass, "write_text", VALUEFUNC(_wrap_wxTextCtrl_WriteText), -1);
     rb_define_method(cWxTextCtrl.klass, "xy_to_position", VALUEFUNC(_wrap_wxTextCtrl_XYToPosition), -1);
+    rb_define_method(cWxTextCtrl.klass, "<<", VALUEFUNC(_wrap_wxTextCtrl___lshift__), -1);
     cWxTextCtrl.mark = 0;
     cWxTextCtrl.destroy = (void (*)(void *)) free_wxTextCtrl;
 }
