@@ -124,7 +124,15 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxFont,"wxFont");
 	WXRB_ADD_TYPE_CONV(WxFontData,"wxFontData");
 	WXRB_ADD_TYPE_CONV(WxFrame,"wxFrame");
+#ifdef __WXMSW__
+#ifdef __WIN95__
+	WXRB_ADD_TYPE_CONV(WxGauge,"wxGauge95");
+#else
+	WXRB_ADD_TYPE_CONV(WxGauge,"wxGaugeMSW");
+#endif
+#else
 	WXRB_ADD_TYPE_CONV(WxGauge,"wxGauge");
+#endif
 	WXRB_ADD_TYPE_CONV(WxIcon,"wxIcon");
 	WXRB_ADD_TYPE_CONV(WxImage,"wxImage");
 	WXRB_ADD_TYPE_CONV(WxIndividualLayoutConstraint,"wxIndividualLayoutConstraint");
@@ -142,6 +150,7 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxStatusBar,"wxStatusBar");
 	WXRB_ADD_TYPE_CONV(WxSpinButton,"wxSpinButton");
 	WXRB_ADD_TYPE_CONV(WxSpinCtrl,"wxSpinCtrl");	
+	WXRB_ADD_TYPE_CONV(WxStaticLine,"wxStaticLine");
 	WXRB_ADD_TYPE_CONV(WxTextCtrl,"wxTextCtrl");
 	WXRB_ADD_TYPE_CONV(WxToolBar,"wxToolBar");
 	WXRB_ADD_TYPE_CONV(WxToolTip,"wxToolTip");

@@ -581,6 +581,8 @@ WxWindowDisabler::Disable(int argc, VALUE *argv, VALUE self)
         wxWindowDisabler ptr(winToSkip);
         rb_yield(Qnil);
     }
+
+    return Qnil;
 }
 
 VALUE
@@ -683,6 +685,7 @@ WxBusyInfo::Busy(int argc, VALUE *argv, VALUE self)
         wxBusyInfo ptr(msg,winToSkip);
         rb_yield(Qnil);
     }
+    return Qnil;
 }
 
 

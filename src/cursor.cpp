@@ -119,13 +119,15 @@ void WxBusyCursor::DefineClass()
 }
 
 
-void WxBusyCursor::Busy(int argc, VALUE *argv, VALUE self)
+VALUE WxBusyCursor::Busy(int argc, VALUE *argv, VALUE self)
 {
 	if (rb_block_given_p())
 	{
-		wxBusyCursor cursor;
+		wxBeginBusyCursor();
 		rb_yield(Qnil);
+		wxEndBusyCursor();
 	}
+	return Qnil;
 }
 
 
