@@ -1,3 +1,7 @@
+2004-05-29
+    * Add support for ComboBox#get_value
+    
+
 2004-04-23
     * In splitter sample, rename OnDraw to on_draw so it will work
     * Fix big bug in ScrolledWindow that caused splitter sample to 

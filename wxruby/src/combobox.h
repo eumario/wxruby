@@ -26,6 +26,7 @@ public:
     static VALUE GetCount(VALUE self);
     static VALUE GetSelection(VALUE self);
     static VALUE GetString(VALUE self,VALUE vn);
+    static VALUE GetValue(VALUE self);
     static void Clear(VALUE self);
     static void Delete(VALUE self,VALUE vn);
 
