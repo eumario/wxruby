@@ -1,3 +1,15 @@
+2003-12-12 20:15  kbs
+    * Modified drop targets (text and file) to only allow
+        nil or false to reject the drop, or true to accept.
+        Any other value raises an exception, because it 
+        would be dangerous to accidentally report that you 
+        had accepted a file that was being moved with a 
+        drag operation if you intended to reject it.
+    * Updated dndtext sample to return true instead of 1 
+        in the drop handler. Updated the text output of 
+        both the dndtext and dndfile samples.
+        
+
 2003-12-07 19:45  kbs
     * Add images sample
     * Update all samples to define App#on_init instead of OnInit

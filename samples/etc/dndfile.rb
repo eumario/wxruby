@@ -1,4 +1,5 @@
 # Example by Gergely Kontra
+# minor modifications by Kevin Smith
 require 'wxruby'
 
 class MyFileDropTarget < Wx::FileDropTarget
@@ -7,6 +8,7 @@ class MyFileDropTarget < Wx::FileDropTarget
     @list=list
   end
   def on_drop_files x,y,files
+    puts "Accepting drop of #{files.size} files at position (#{x},#{y})"
     for f in files
       @list.insert_item @list.get_item_count, f
     end

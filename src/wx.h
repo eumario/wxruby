@@ -63,6 +63,31 @@ inline bool IsTrue(VALUE value)
 	return true;
 }
 
+/*
+    This method should be used instead of IsTrue for those 
+    few cases where interpreting nil/false as false and 
+    *anything else* as true might be dangerous.
+
+    This will accept nil or false to mean false, but only 
+    true as true. Any other value will raise an exception.
+
+    Based on code by Gregory Kontra
+*/
+inline bool IsReallyTrueForDangerousOperations(VALUE value)
+{
+	switch(value) 
+    {
+        case Qtrue:
+            return TRUE;
+        case Qnil:
+        case Qfalse:
+            return FALSE;
+        default:
+            rb_raise(rb_eTypeError, "Must return true or false/nil"); 
+            return FALSE;
+	}
+}
+
 inline VALUE CppBoolToRubyBool(bool value)
 {
 	if(value)

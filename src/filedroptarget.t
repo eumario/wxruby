@@ -42,7 +42,7 @@ bool wxFileDropTargetHelper::OnDropFiles(wxCoord x, wxCoord y, const wxArrayStri
 		rb_ary_push(arr,rb_str_new2(filenames[i].c_str()));
 	ID method = rb_intern("on_drop_files");
 	VALUE ret = rb_funcall(me,method,3,INT2NUM(x),INT2NUM(y),arr);
-    return IsTrue(ret);
+    return IsReallyTrueForDangerousOperations(ret);
 }
 
 //$$ END_CPP_FILE

@@ -40,7 +40,7 @@ bool wxTextDropTargetHelper::OnDropText(wxCoord x, wxCoord y, const wxString& da
 	ID method = rb_intern("on_drop_text");
 	
 	VALUE ret = rb_funcall(me,method,3,INT2NUM(x),INT2NUM(y),rb_str_new2(data.c_str()));
-    return IsTrue(ret);
+    return IsReallyTrueForDangerousOperations(ret);
 }
 
 //$$ END_CPP_FILE
