@@ -51,7 +51,7 @@ WxFileDialog::alloc(VALUE self)
 VALUE
 WxFileDialog::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
+    wxWindow* parent = 0;
     wxString message = "Choose a file";
     wxString defaultDir = "";
     wxString defaultFile = "";

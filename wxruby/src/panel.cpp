@@ -39,7 +39,7 @@ WxPanel::alloc(VALUE self)
 VALUE
 WxPanel::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
+    wxWindow* parent = 0;
     wxWindowID id = -1;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;

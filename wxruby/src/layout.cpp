@@ -61,8 +61,8 @@ WxIndividualLayoutConstraint::init0(wxIndividualLayoutConstraint &individualLayo
 void
 WxIndividualLayoutConstraint::SameAs(int argc, VALUE *argv, VALUE self)
 {
-    wxWindowBase *otherW;
-    wxEdge edge;
+    wxWindowBase *otherW = 0;
+    wxEdge edge = wxLeft;
     int marg = wxLAYOUT_DEFAULT_MARGIN;
 
     if(TYPE(argv[0])==T_DATA) {
@@ -85,7 +85,7 @@ WxIndividualLayoutConstraint::SameAs(int argc, VALUE *argv, VALUE self)
 void
 WxIndividualLayoutConstraint::LeftOf(int argc, VALUE *argv, VALUE self)
 {
-    wxWindowBase *sibling;
+    wxWindowBase *sibling = 0;
     int marg = wxLAYOUT_DEFAULT_MARGIN;
 
     if(TYPE(argv[0])==T_DATA) {
@@ -105,7 +105,7 @@ WxIndividualLayoutConstraint::LeftOf(int argc, VALUE *argv, VALUE self)
 void
 WxIndividualLayoutConstraint::RightOf(int argc, VALUE *argv, VALUE self)
 {
-    wxWindowBase *sibling;
+    wxWindowBase *sibling = 0;
     int marg = wxLAYOUT_DEFAULT_MARGIN;
 
     if(TYPE(argv[0])==T_DATA) {
@@ -125,7 +125,7 @@ WxIndividualLayoutConstraint::RightOf(int argc, VALUE *argv, VALUE self)
 void
 WxIndividualLayoutConstraint::Above(int argc, VALUE *argv, VALUE self)
 {
-    wxWindowBase *sibling;
+    wxWindowBase *sibling = 0;
     int marg = wxLAYOUT_DEFAULT_MARGIN;
 
     if(TYPE(argv[0])==T_DATA) {
@@ -145,7 +145,7 @@ WxIndividualLayoutConstraint::Above(int argc, VALUE *argv, VALUE self)
 void
 WxIndividualLayoutConstraint::Below(int argc, VALUE *argv, VALUE self)
 {
-    wxWindowBase *sibling;
+    wxWindowBase *sibling = 0;
     int marg = wxLAYOUT_DEFAULT_MARGIN;
 
     if(TYPE(argv[0])==T_DATA) {
@@ -165,9 +165,9 @@ WxIndividualLayoutConstraint::Below(int argc, VALUE *argv, VALUE self)
 void
 WxIndividualLayoutConstraint::PercentOf(VALUE self,VALUE votherW,VALUE vwh,VALUE vper)
 {
-    wxWindowBase *otherW;
-    wxEdge wh;
-    int per;
+    wxWindowBase *otherW = 0;
+    wxEdge wh = wxLeft;
+    int per = 50;   // arbitrary value to safely avoid compiler warning
 
     if(TYPE(votherW)==T_DATA) {
         wxWindow *ptr;

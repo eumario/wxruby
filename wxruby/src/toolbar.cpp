@@ -78,7 +78,7 @@ VALUE
 WxToolBar::init(int argc, VALUE *argv, VALUE self)
 {
     wxWindow* parent = NULL;
-    wxWindowID id;
+    wxWindowID id = -1;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
     long style = wxTB_HORIZONTAL | wxNO_BORDER;

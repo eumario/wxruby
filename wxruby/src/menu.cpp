@@ -70,7 +70,7 @@ VALUE WxMenu::Append(int argc, VALUE *argv, VALUE self)
     wxItemKind kind = wxITEM_NORMAL;
     if(argc>3) kind = (wxItemKind)NUM2INT(argv[3]);
 
-    wxMenu *ptr;
+    wxMenu *ptr = 0;
     Data_Get_Struct(self, wxMenu, ptr);
     ptr->Append(id,item,helpString,kind);
 	return Qnil;
@@ -79,7 +79,7 @@ VALUE WxMenu::Append(int argc, VALUE *argv, VALUE self)
 VALUE WxMenu::AppendItem(int argc, VALUE *argv, VALUE self)
 {
 	VALUE rubyItem = Qnil;
-	int got=rb_scan_args(argc, argv, "10", &rubyItem);
+//	int got=rb_scan_args(argc, argv, "10", &rubyItem);
     wxMenuItem* item = 0;
     Data_Get_Struct(rubyItem, wxMenuItem, item);
 

@@ -43,9 +43,9 @@ WxGauge::alloc(VALUE self)
 VALUE
 WxGauge::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
-    wxWindowID id;
-    int range;
+    wxWindow* parent = 0;
+    wxWindowID id = -1;
+    int range = 0;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
     long style = wxGA_HORIZONTAL;

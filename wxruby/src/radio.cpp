@@ -39,8 +39,8 @@ WxRadioBox::alloc(VALUE self)
 VALUE
 WxRadioBox::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
-    wxWindowID id;
+    wxWindow* parent = 0;
+    wxWindowID id = -1;
     wxString label;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
@@ -164,8 +164,8 @@ WxRadioButton::alloc(VALUE self)
 VALUE
 WxRadioButton::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
-    wxWindowID id;
+    wxWindow* parent = 0;
+    wxWindowID id = -1;
     wxString label;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;

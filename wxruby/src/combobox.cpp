@@ -47,7 +47,7 @@ VALUE
 WxComboBox::init(int argc, VALUE *argv, VALUE self)
 {
     wxWindow* parent = NULL;
-    wxWindowID id;
+    wxWindowID id = -1;
     wxString value = "";
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;

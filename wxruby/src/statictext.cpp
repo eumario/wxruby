@@ -44,8 +44,8 @@ VALUE WxStaticText::wrapNew(int argc, VALUE *argv, VALUE self)
 VALUE
 WxStaticText::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow *parent;
-    wxWindowID id;
+    wxWindow *parent = 0;
+    wxWindowID id = -1;
     wxString label;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
@@ -139,8 +139,8 @@ WxStaticBox::alloc(VALUE self)
 VALUE
 WxStaticBox::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow *parent;
-    wxWindowID id;
+    wxWindow *parent = 0;
+    wxWindowID id = -1;
     wxString label;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
@@ -215,8 +215,8 @@ WxStaticLine::alloc(VALUE self)
 VALUE
 WxStaticLine::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow *parent;
-    wxWindowID id;
+    wxWindow *parent = 0;
+    wxWindowID id = -1;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
     long style = wxLI_HORIZONTAL;

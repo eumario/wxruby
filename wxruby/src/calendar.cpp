@@ -142,8 +142,8 @@ WxCalendarCtrl::alloc(VALUE self)
 VALUE
 WxCalendarCtrl::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
-    wxWindowID id;
+    wxWindow* parent = 0;
+    wxWindowID id = -1;
     wxDateTime date = wxDefaultDateTime;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;

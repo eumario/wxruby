@@ -42,8 +42,6 @@ wxRbCallback::wxRbCallback(const wxRbCallback &other) {
 
 void wxRbCallback::EventThunker(wxEvent &event) {
     wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
-    wxClassInfo *ci = event.GetClassInfo();
-    const wxChar *classname = ci->GetClassName();
     static VALUE vevent;
     int eventType = event.GetEventType();
     if(eventType==wxEVT_CHAR || eventType==wxEVT_CHAR_HOOK || eventType==wxEVT_KEY_DOWN || eventType==wxEVT_KEY_UP) {

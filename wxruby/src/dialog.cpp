@@ -46,7 +46,7 @@ VALUE
 WxDialog::init(int argc, VALUE *argv, VALUE self)
 {
     wxWindow* parent = NULL;
-    wxWindowID id;
+    wxWindowID id = -1;
     wxString title;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
@@ -421,7 +421,7 @@ WxSingleChoiceDialog::init(int argc, VALUE *argv, VALUE self)
     wxString message = StringValuePtr(argv[1]);
     wxString caption = StringValuePtr(argv[2]);
     int n = 0;
-    wxString *choices;
+    wxString *choices = 0;
     if(argc>3) {
         n = RARRAY(argv[3])->len;
         choices = new wxString[n];
