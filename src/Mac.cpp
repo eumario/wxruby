@@ -551,6 +551,8 @@ extern OSErr    CPSSetFrontProcess (ProcessSerialNumber* iPSN);
 extern "C" short gSharedLibraryResource;
 #endif
 
+extern "C" void _objcInit(void);
+
 void macstart()
 {
 
@@ -575,6 +577,8 @@ void macstart()
 		//   load the framework resources            
 		gSharedLibraryResource = CFBundleOpenBundleResourceMap(gSharedLibraryBundle);
         }
+#else
+
 #endif
 }
 

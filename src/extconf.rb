@@ -1,5 +1,7 @@
 require 'mkmf'
 
+$DEBUG=false
+
 use_xrc = false
 dir_config("xrc");
 
@@ -27,16 +29,11 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
 
     CONFIG['CC'] = "g++"
     if (!$DEBUG)
-      CONFIG['CFLAGS'].gsub!("-g","")
+      $CFLAGS.gsub!("-g","")
     else
-      CONFIG['CFLAGS'].gsub!("-Os","-O0")
+      $CFLAGS = $CFLAGS.gsub(/-O[0-9]/,"-O0") + " -DwxDEBUG "
     end
     CONFIG['LDSHARED'].gsub!("cc","g++")
-    if (!$DEBUG)
-      CONFIG['CFLAGS'].gsub!("-g","")
-    else
-      CONFIG['CFLAGS'].gsub!("-Os","-O0")
-    end
 
     $CFLAGS += " `wx-config --cxxflags` -I.. "
     $CPPFLAGS += ' -x objective-c++ '

@@ -1325,6 +1325,6 @@ mWxMenuBar = mWx;
     rb_define_method(cWxMenuBar.klass, "set_label", VALUEFUNC(_wrap_wxMenuBar_SetLabel), -1);
     rb_define_method(cWxMenuBar.klass, "set_label_top", VALUEFUNC(_wrap_wxMenuBar_SetLabelTop), -1);
     cWxMenuBar.mark = 0;
-    cWxMenuBar.destroy = (void (*)(void *)) free_wxMenuBar;
+    cWxMenuBar.destroy = (void (*)(void *)) GcFreefunc;
 }
 
