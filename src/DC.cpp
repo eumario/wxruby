@@ -700,7 +700,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "DC.h"
+#include "src/DC.h"
 
 static void
 free_wxDC(wxDC *arg1) {

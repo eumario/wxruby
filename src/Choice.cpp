@@ -691,7 +691,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Choice.h"
+#include "src/Choice.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

@@ -690,7 +690,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Button.h"
+#include "src/Button.h"
 
 static VALUE
 _wrap_new_wxButton__SWIG_0(int argc, VALUE *argv, VALUE self) {

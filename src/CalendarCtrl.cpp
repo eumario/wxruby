@@ -697,7 +697,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CalendarCtrl.h"
+#include "src/CalendarCtrl.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

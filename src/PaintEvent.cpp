@@ -686,7 +686,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "PaintEvent.h"
+#include "src/PaintEvent.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

@@ -691,7 +691,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Sizer.h"
+#include "src/Sizer.h"
 
 static void
 free_wxSizer(wxSizer *arg1) {

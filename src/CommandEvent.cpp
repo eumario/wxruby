@@ -687,7 +687,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CommandEvent.h"
+#include "src/CommandEvent.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
