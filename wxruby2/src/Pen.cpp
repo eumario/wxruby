@@ -757,54 +757,15 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Pen.h"
-
-SwigDirector_wxPen::SwigDirector_wxPen(VALUE self, bool disown): wxPen(), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxPen::SwigDirector_wxPen(VALUE self, wxColour const &colour, int width, int style, bool disown): wxPen(colour, width, style), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxPen::SwigDirector_wxPen(VALUE self, wxString const &colourName, int width, int style, bool disown): wxPen(colourName, width, style), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxPen::SwigDirector_wxPen(VALUE self, wxBitmap const &stipple, int width, bool disown): wxPen(stipple, width), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxPen::SwigDirector_wxPen(VALUE self, wxPen const &pen, bool disown): wxPen(pen), Swig::Director(self, disown) {
-    
-}
-
-
+#include "Pen.h"
 
 static VALUE
 _wrap_new_wxPen__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
     wxPen *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxPen *)new SwigDirector_wxPen(arg1,false);
-        
-    } else {
-        result = (wxPen *)new wxPen();
-        
-    }
+    result = (wxPen *)new wxPen();
     DATA_PTR(self) = result;
     return self;
 }
@@ -812,26 +773,17 @@ _wrap_new_wxPen__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxPen__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxColour *arg2 = 0 ;
+    wxColour *arg1 = 0 ;
+    int arg2 ;
     int arg3 ;
-    int arg4 ;
     wxPen *result;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxColour, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    arg3 = NUM2INT(argv[1]);
-    arg4 = NUM2INT(argv[2]);
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxPen *)new SwigDirector_wxPen(arg1,(wxColour const &)*arg2,arg3,arg4,false);
-        
-    } else {
-        result = (wxPen *)new wxPen((wxColour const &)*arg2,arg3,arg4);
-        
-    }
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxColour, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg2 = NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    result = (wxPen *)new wxPen((wxColour const &)*arg1,arg2,arg3);
     DATA_PTR(self) = result;
     return self;
 }
@@ -839,28 +791,19 @@ _wrap_new_wxPen__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxPen__SWIG_2(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxString *arg2 = 0 ;
+    wxString *arg1 = 0 ;
+    int arg2 ;
     int arg3 ;
-    int arg4 ;
     wxPen *result;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = self;
     {
-        arg2 = new wxString(STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]));
     }
-    arg3 = NUM2INT(argv[1]);
-    arg4 = NUM2INT(argv[2]);
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxPen *)new SwigDirector_wxPen(arg1,(wxString const &)*arg2,arg3,arg4,false);
-        
-    } else {
-        result = (wxPen *)new wxPen((wxString const &)*arg2,arg3,arg4);
-        
-    }
+    arg2 = NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    result = (wxPen *)new wxPen((wxString const &)*arg1,arg2,arg3);
     DATA_PTR(self) = result;
     return self;
 }
@@ -868,24 +811,15 @@ _wrap_new_wxPen__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxPen__SWIG_3(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxBitmap *arg2 = 0 ;
-    int arg3 ;
+    wxBitmap *arg1 = 0 ;
+    int arg2 ;
     wxPen *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxBitmap, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    arg3 = NUM2INT(argv[1]);
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxPen *)new SwigDirector_wxPen(arg1,(wxBitmap const &)*arg2,arg3,false);
-        
-    } else {
-        result = (wxPen *)new wxPen((wxBitmap const &)*arg2,arg3);
-        
-    }
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxBitmap, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    arg2 = NUM2INT(argv[1]);
+    result = (wxPen *)new wxPen((wxBitmap const &)*arg1,arg2);
     DATA_PTR(self) = result;
     return self;
 }
@@ -910,22 +844,13 @@ _wrap_wxPen_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxPen__SWIG_4(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxPen *arg2 = 0 ;
+    wxPen *arg1 = 0 ;
     wxPen *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxPen, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxPen *)new SwigDirector_wxPen(arg1,(wxPen const &)*arg2,false);
-        
-    } else {
-        result = (wxPen *)new wxPen((wxPen const &)*arg2);
-        
-    }
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxPen, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxPen *)new wxPen((wxPen const &)*arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -933,102 +858,76 @@ _wrap_new_wxPen__SWIG_4(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_wxPen(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[4];
+    VALUE argv[3];
     int ii;
     
     argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+    for (ii = 0; (ii < argc) && (ii < 3); ii++) {
         argv[ii] = args[ii];
+    }
+    if (argc == 0) {
+        return _wrap_new_wxPen__SWIG_0(nargs, args, self);
     }
     if (argc == 1) {
         int _v;
         {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxPen, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_wxPen__SWIG_0(nargs, args, self);
+            return _wrap_new_wxPen__SWIG_4(nargs, args, self);
         }
     }
     if (argc == 2) {
         int _v;
         {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxPen, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_wxPen__SWIG_4(nargs, args, self);
+                return _wrap_new_wxPen__SWIG_3(nargs, args, self);
             }
         }
     }
     if (argc == 3) {
         int _v;
         {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxColour, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxBitmap, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
                     _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_wxPen__SWIG_3(nargs, args, self);
+                    return _wrap_new_wxPen__SWIG_1(nargs, args, self);
                 }
             }
         }
     }
-    if (argc == 4) {
+    if (argc == 3) {
         int _v;
         {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+            _v = (TYPE(argv[0]) == T_STRING);
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxColour, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
                     _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    {
-                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_new_wxPen__SWIG_1(nargs, args, self);
-                    }
-                }
-            }
-        }
-    }
-    if (argc == 4) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING);
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_new_wxPen__SWIG_2(nargs, args, self);
-                    }
+                    return _wrap_new_wxPen__SWIG_2(nargs, args, self);
                 }
             }
         }
@@ -1041,16 +940,7 @@ static VALUE _wrap_new_wxPen(int nargs, VALUE *args, VALUE self) {
 
 static void
 free_wxPen(wxPen *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxPen*)arg1;
-    printf("Pen.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    fflush(stdout);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxPen_GetCap(int argc, VALUE *argv, VALUE self) {
@@ -1369,22 +1259,6 @@ _wrap_wxPen_SetWidth(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxPen(int argc, VALUE *argv, VALUE self) {
-    wxPen *arg1 = (wxPen *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxPen, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1424,7 +1298,6 @@ mWxPen = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxPen, "disown_wxPen", VALUEFUNC(_wrap_disown_wxPen), -1);
     
     extern void Init_wxGDIObject();
     Init_wxGDIObject();
