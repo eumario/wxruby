@@ -1,3 +1,7 @@
+2003-12-07 19:30  kbs
+    * Integrated File drag-and-drop, and two more dnd samples from Gergely Kontra
+
+
 2003-11-30 17:00  kbs
     * Added missing drag-and-drop constants
     * Fixed ListCtrl::get_item_text (it was returning the row number 
