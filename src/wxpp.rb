@@ -17,7 +17,7 @@ end
 
 def isWxClass(className)
 	if(className == 'wxWindowID' || className == 'wxCoord' || 
-        className == 'wxDragResult')
+        className == 'wxDragResult' || className == 'wxFontEncoding')
 		return false
 	end
 	return (className.index('wx') == 0 && !className.index('*'))
@@ -67,8 +67,10 @@ def getRubyToCppConversionMethod(parameter)
         method = "STR2CSTR"
     elsif(className == 'wxWindowID')
         method = "NUM2INT"
-    elsif(className == 'wxItemKind' || className == 'wxDragResult' || 
-                className == 'wxDataObject::Direction')
+    elsif(className == 'wxItemKind' || 
+                className == 'wxDragResult' || 
+                className == 'wxDataObject::Direction' || 
+                className == 'wxFontEncoding')
         method = "(#{className})NUM2INT"
     elsif(isPointer(className))
         method = "GetCpp<#{convertPointerToBaseClass(className)}>"
@@ -85,7 +87,10 @@ def getCppToRubyConversionMethod(className)
         method = "INT2NUM"
 	elsif(className == 'wxWindowID')
 		method = "INT2NUM"
-	elsif(className == 'wxItemKind' || className == 'wxDragResult' || className == 'wxDataObject::Direction')
+	elsif(className == 'wxItemKind' || 
+                className == 'wxDragResult' || 
+                className == 'wxDataObject::Direction' ||
+                className == 'wxFontEncoding')
 		method = "INT2NUM"
 	elsif(className == 'bool')
 		method = "CppBoolToRubyBool"
@@ -167,6 +172,8 @@ class Parameter
             # NOTE: this may go away when we optimize required parameters
             # to not have separate declaration and value setting!
             cppDeclaration += '=wxDragNone'
+        elsif(type == 'wxFontEncoding')
+            cppDeclaration += '=wxFONTENCODING_DEFAULT'
 		elsif(!isWxClass(type))
 			cppDeclaration += "=0"
 		end
