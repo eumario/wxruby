@@ -139,7 +139,7 @@
 
 %typemap(in,numinputs=1) (int n, const wxString choices []) (wxString *arr)
 {
-  if (($input = Qnil) || (TYPE($input) != T_ARRAY))
+  if (($input == Qnil) || (TYPE($input) != T_ARRAY))
   {
     $1 = 0;
     $2 = NULL;
@@ -162,7 +162,7 @@
     $2 = NULL;
 }
 
-%typemap(freearg) (intn , const wxString choices[])
+%typemap(freearg) (int n , const wxString choices[])
 {
     if ($2 != NULL) delete [] $2;
 }
@@ -170,6 +170,37 @@
 %typemap(typecheck) (int n , const wxString choices[])
 {
    $1 = (TYPE($input) == T_ARRAY);
+}
+
+##############################################################
+
+%typemap(in) wxArrayString & (wxArrayString tmp){
+ 
+  if (($input = Qnil) || (TYPE($input) != T_ARRAY))
+  {
+    $1 = &tmp;
+  }
+  else
+  {
+    
+    for (int i = 0; i < RARRAY($input)->len; i++)
+    {
+        tmp.Add(STR2CSTR(rb_ary_entry($input,i)));
+    }
+    
+    $1 = &tmp;
+  }
+
+}
+
+%typemap(out) wxArrayString & {
+
+  $result = rb_ary_new();
+
+  for (int i = 0; i < $1->GetCount(); i++)
+  {
+    rb_ary_push($result,rb_str_new2((*$1)[i]));
+  }
 }
 
 ##############################################################

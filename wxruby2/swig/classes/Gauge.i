@@ -3,8 +3,12 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
-%module(directors="1") wxCheckBox
+%module(directors="1") wxGauge
+%{
+#include <wx/gauge.h>
+%}
 
-%ignore wxCheckBox::wxCheckBox();
+%ignore wxGauge::wxGauge();
 
-%include "include/wxCheckBox.h"
+%include "include/wxGauge.h"
+

@@ -74,6 +74,29 @@ def fix_quoted_wx(line)
     return line
 end
 
+#
+# NSK - SWIG handles some constants the same way as methods.
+# Use the case of the value to figure out which naming scheme to use
+# (Uppercase ones are constant, Mixed case are methods)
+#
+def is_constant_or_method(line)
+    re = Regexp.new('".*"')
+    match = re.match(line)
+    if(match)
+	#puts("Stripping #{line}")
+        quoted_wx_name = match[0]
+        wx_name = quoted_wx_name[1..-2]
+	swx_name = strip_wx(wx_name)
+        if (swx_name == swx_name.upcase)
+	    return fix_quoted_wx(line)
+	else
+            return fix_define_method(line)
+	end
+        
+    end
+    return line
+end
+
 File.open(ARGV[0], "w") do | out |
     File.foreach(camelCaseFile) do | line |
         if(line.index("rb_define_method") || line.index("rb_intern"))
@@ -86,7 +109,7 @@ File.open(ARGV[0], "w") do | out |
             line = fix_quoted_wx(line)
         end
         if(line.index("rb_define_singleton_method"))
-            line = fix_quoted_wx(line)
+            line = is_constant_or_method(line)
         end
         if(line.index("rb_define_module_function"))
             line = fix_define_method(line)

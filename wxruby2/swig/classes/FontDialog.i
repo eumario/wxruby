@@ -20,6 +20,7 @@
 #
 # Workaround for SWIG 1.3.22
 #
+%feature("nodirector") wxFontDialog;
 %ignore wxFontDialog::Create();
 %ignore wxFontDialog::wxFontDialog();
 %nodirector wxFontDialog::wxFontDialog();

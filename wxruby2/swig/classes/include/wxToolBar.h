@@ -15,7 +15,7 @@ public:
   void AddSeparator() ;
   wxToolBarTool* AddTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxString&  shortHelpString = "", wxItemKind kind = wxITEM_NORMAL) ;
   wxToolBarTool* AddTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap& bitmap2 = wxNullBitmap, wxItemKind kind = wxITEM_NORMAL, const wxString&  shortHelpString = "", const wxString&  longHelpString = "", wxObject*  clientData = NULL) ;
-  wxToolBarTool* AddTool(wxToolBarTool*  tool ) ;
+  //wxToolBarTool* AddTool(wxToolBarTool*  tool );
   wxToolBarTool* AddCheckTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = "", const wxString&  longHelpString = "", wxObject*  clientData = NULL) ;
   wxToolBarTool* AddRadioTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = "", const wxString&  longHelpString = "", wxObject*  clientData = NULL) ;
   bool DeleteTool(int  toolId ) ;
@@ -30,14 +30,14 @@ public:
   bool GetToolEnabled(int  toolId ) const;
   wxString GetToolLongHelp(int  toolId ) const;
   int GetToolPacking() const;
-  int GetToolPos(int  toolId ) const;
+  //int GetToolPos(int  toolId ) const;
   int GetToolSeparation() const;
   wxString GetToolShortHelp(int  toolId ) const;
   bool GetToolState(int  toolId ) const;
   wxToolBarTool * InsertControl(size_t  pos , wxControl * control ) ;
   wxToolBarTool * InsertSeparator(size_t  pos ) ;
   wxToolBarTool * InsertTool(size_t  pos , int  toolId , const wxBitmap&  bitmap1 , const wxBitmap& bitmap2 = wxNullBitmap, bool isToggle = false, wxObject*  clientData = NULL, const wxString&  shortHelpString = "", const wxString&  longHelpString = "") ;
-  wxToolBarTool * InsertTool(size_t  pos , wxToolBarTool*  tool ) ;
+  //wxToolBarTool * InsertTool(size_t  pos , wxToolBarTool*  tool );
   virtual bool OnLeftClick(int  toolId , bool  toggleDown ) ;
   virtual void OnMouseEnter(int  toolId ) ;
   virtual void OnRightClick(int  toolId , float  x , float  y ) ;
@@ -52,6 +52,8 @@ public:
   void SetToolShortHelp(int  toolId , const wxString&  helpString ) ;
   void SetToolSeparation(int  separation ) ;
   void ToggleTool(int  toolId , const bool  toggle ) ;
+  // the following were missing from the xml
+  void SetRows(int rows);
 };
 
 

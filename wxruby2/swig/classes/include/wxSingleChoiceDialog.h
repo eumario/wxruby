@@ -8,12 +8,12 @@
 class wxSingleChoiceDialog : public wxDialog
 {
 public:
-   wxSingleChoiceDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption , int  n , const wxString*  choices , void** clientData = NULL, long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
+  wxSingleChoiceDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption , int  n , const wxString  choices[] , char** clientData = NULL, long  style = wxOK, const wxPoint&  pos = wxDefaultPosition);
   virtual  ~wxSingleChoiceDialog() ;
   int GetSelection() const;
   char* GetSelectionClientData() const;
   wxString GetStringSelection() const;
-  void SetSelection(int  selection ) const;
+  void SetSelection(int  selection ) ;
   int ShowModal() ;
 };
 

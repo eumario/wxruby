@@ -9,8 +9,8 @@ class wxFindReplaceData : public wxObject
 {
 public:
    wxFindReplaceData(wxUint32  flags = 0) ;
-  const wxString& GetFindString() ;
-  const wxString& GetReplaceString() ;
+  wxString GetFindString();
+  wxString GetReplaceString();
   int GetFlags() const;
   void SetFlags(wxUint32  flags ) ;
   void SetFindString(const wxString&  str ) ;

@@ -11,8 +11,8 @@ public:
    wxColourData() ;
   virtual  ~wxColourData() ;
   bool GetChooseFull() const;
-  wxColour& GetColour() const;
-  wxColour& GetCustomColour(int  i ) const;
+  wxColour GetColour() const;
+  wxColour GetCustomColour(int  i );
   void SetChooseFull(const bool  flag ) ;
   void SetColour(const wxColour&  colour ) ;
   void SetCustomColour(int  i , const wxColour&  colour ) ;

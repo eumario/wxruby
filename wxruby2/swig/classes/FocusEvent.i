@@ -3,8 +3,7 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
-%module(directors="1") wxCheckBox
+%module(directors="1") wxFocusEvent
 
-%ignore wxCheckBox::wxCheckBox();
+%include "include/wxFocusEvent.h"
 
-%include "include/wxCheckBox.h"

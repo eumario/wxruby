@@ -3,8 +3,7 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
-%module(directors="1") wxCheckBox
+%module(directors="1") wxColourData
 
-%ignore wxCheckBox::wxCheckBox();
 
-%include "include/wxCheckBox.h"
+%include "include/wxColourData.h"

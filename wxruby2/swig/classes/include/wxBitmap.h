@@ -14,7 +14,7 @@ public:
   //wxBitmap(const char  bits[] , int  width , int  height , int depth = 1);
    wxBitmap(int  width , int  height , int depth = -1) ;
    wxBitmap(const char**  bits ) ;
-  wxBitmap(const wxString&  name , wxBitmapType  type );
+  wxBitmap(wxString&  name , wxBitmapType  type=wxBITMAP_TYPE_XPM );
    wxBitmap(const wxImage&  img , int depth = -1) ;
   virtual  ~wxBitmap() ;
   static void AddHandler(wxBitmapHandler*  handler ) ;

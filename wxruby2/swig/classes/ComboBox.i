@@ -5,4 +5,6 @@
 
 %module(directors="1") wxComboBox
 
+%ignore wxComboBox::wxComboBox();
+
 %include "include/wxComboBox.h"

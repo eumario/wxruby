@@ -24,6 +24,8 @@ public:
   void SetInsertionPointEnd() ;
   void SetSelection(long  from , long  to ) ;
   void SetValue(const wxString&  text ) ;
+  // the following were missing from the xml
+  void Append(const wxString& item);
 };
 
 

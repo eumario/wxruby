@@ -3,8 +3,11 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
-%module(directors="1") wxCheckBox
+%module(directors="1") wxSpinEvent
 
-%ignore wxCheckBox::wxCheckBox();
+%{
+#include <wx/spinbutt.h>
+%}
 
-%include "include/wxCheckBox.h"
+%include "include/wxSpinEvent.h"
+

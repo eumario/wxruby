@@ -26,6 +26,16 @@ void GcMapPtrToValue(void *ptr, VALUE val)
 	rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
 }
 
+VALUE GcGetValueFromPtr(void *ptr)
+{
+	if (GcRubyHash == Qnil)
+	{
+		rb_global_variable(&GcRubyHash);
+		GcRubyHash = rb_hash_new();
+	}
+	return rb_hash_aref(GcRubyHash, INT2NUM((int)ptr));
+}
+
 void GcMarkDeleted(void *ptr)
 {
 	DeletedHash[ptr] = true;

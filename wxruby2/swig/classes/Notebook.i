@@ -12,6 +12,8 @@
 
 GC_NEVER(wxNotebook)
 
+#define wxNotebookPage wxPanel
+
 %ignore wxNotebook::wxNotebook();
 
 %include "include/wxNotebook.h"

@@ -19,10 +19,10 @@ public:
   virtual void GetClientSize(int*  width , int*  height ) const;
   wxMDIChildFrame* GetActiveChild() const;
   wxMDIClientWindow* GetClientWindow() const;
-  virtual wxWindow* GetToolBar() const;
+  virtual wxToolBar* GetToolBar() const;
   wxMenu* GetWindowMenu() const;
   virtual wxMDIClientWindow* OnCreateClient() ;
-  virtual void SetToolBar(wxWindow*  toolbar ) ;
+  virtual void SetToolBar(wxToolBar*  toolbar );
   void SetWindowMenu(wxMenu*  menu ) ;
   void Tile() ;
 };

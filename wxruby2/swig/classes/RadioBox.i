@@ -9,7 +9,7 @@
 #include <wx/radiobox.h>
 %}
 
-
+%ignore wxRadioBox::wxRadioBox();
 %ignore wxRadioBox::GetLabel;
 %ignore wxRadioBox::SetLabel;
 GC_NEVER(wxRadioBox);

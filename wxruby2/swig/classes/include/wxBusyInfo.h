@@ -8,7 +8,7 @@
 class wxBusyInfo
 {
 public:
-   wxBusyInfo(const wxString&  msg , wxParent  *parent = NULL) ;
+  wxBusyInfo(const wxString&  msg , wxWindow *parent = NULL);
   virtual  ~wxBusyInfo() ;
 };
 

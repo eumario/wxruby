@@ -26,6 +26,7 @@ int wxEntry( int argc, char *argv[]);
 %rename(App) wxRubyApp;
 
 %{
+
 extern swig_class cWxEvtHandler;
 
 
@@ -35,7 +36,11 @@ extern "C" void Init_wxRubyEventTypes();
 
 class wxRubyApp : public wxApp
 {
+    
 public:
+    static VALUE app_ptr;
+
+
     virtual ~wxRubyApp()
     {
         printf("~wxRubyApp\n");
@@ -45,15 +50,16 @@ public:
     {
         static int argc = 1;
         static char *argv[] = {"wxruby", NULL};
+
         printf("Calling wxEntry, this=%p\n", this);
 #ifdef __WXMSW__
-		extern int  wxEntry(WXHINSTANCE hInstance,
+		    extern int  wxEntry(WXHINSTANCE hInstance,
             WXHINSTANCE WXUNUSED(hPrevInstance),
             char *lpCmdLine,
             int nCmdShow,
             bool enterLoop);
         printf("Module handle = %d\n",GetModuleHandle(NULL));
-		wxEntry(GetModuleHandle(NULL),0,"",true,true);
+		    wxEntry(GetModuleHandle(NULL),0,"",true,true);
 		
 #else     
         wxEntry(argc,argv);
@@ -68,13 +74,15 @@ public:
     
     virtual bool OnInitGui()
     {
-        Init_wxRubyEventTypes();
         
         printf("OnInitGui before\n");
         bool result = wxApp::OnInitGui();
         printf("OnInitGui after\n");
         if(result)
+        {
+            Init_wxRubyEventTypes();
             Init_wxRubyStockObjects();
+        }
         return result;
     }
 
@@ -95,6 +103,11 @@ public:
         return 0;
     }
 };
+
+VALUE wxRubyApp::app_ptr = Qnil;
+
+
+
 %}
 
 class wxRubyApp : public wxApp
@@ -141,4 +154,6 @@ public:
 };
 
 %extend wxRubyApp {
+
 }
+
