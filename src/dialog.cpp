@@ -34,6 +34,14 @@ WxDialog::alloc(VALUE self)
     return Data_Wrap_Struct(self, 0, 0, 0);
 }
 
+VALUE WxDialog::init0(wxDialog* cppObject)
+{
+    if(cppObject==NULL) return Qnil;
+    VALUE self = Data_Wrap_Struct(rubyClass, 0, 0, 0);
+    DATA_PTR(self) = cppObject;
+    return self;
+}
+
 VALUE
 WxDialog::init(int argc, VALUE *argv, VALUE self)
 {

@@ -12,10 +12,11 @@
 
 #include "wx.h"
 #include "wx/colordlg.h"
+#include "wx/image.h"
 #include "evthandler.h"
 #include "dialog.h"
 #include "colour.h"
-
+#include "dynamiccast.h"
 VALUE rb_cRbApp;
 
 VALUE WxGetApp(VALUE self)
@@ -101,6 +102,13 @@ static VALUE
 WxGetHomeDir(VALUE self)
 {
     return rb_str_new2(wxGetHomeDir());
+}
+
+static VALUE
+WxInitAllImageHandlers(VALUE self)
+{
+    wxInitAllImageHandlers();
+    return Qnil;
 }
 
 static void
@@ -387,12 +395,6 @@ WxGetColourFromUser(int argc, VALUE *argv, VALUE self)
     return WxColour::init0(wxGetColourFromUser(parent,colInit));
 }
 
-static void
-WxInitAllImageHandlers(VALUE self)
-{
-    wxInitAllImageHandlers();
-}
-
 void DefineModuleMethods()
 {
     rb_define_module_function(GetWxModule(), "message_box", VALUEFUNC(WxMessageBox), -1);
@@ -423,6 +425,7 @@ void DefineModuleMethods()
     rb_define_module_function(GetWxModule(), "load_file_selector", VALUEFUNC(WxLoadFileSelector), -1);
     rb_define_module_function(GetWxModule(), "save_file_selector", VALUEFUNC(WxSaveFileSelector), -1);
     rb_define_module_function(GetWxModule(), "get_colour_from_user", VALUEFUNC(WxGetColourFromUser), -1);
-    rb_define_module_function(GetWxModule(), "init_all_image_handlers", VALUEFUNC(WxInitAllImageHandlers), 0);
+    rb_define_module_function(GetWxModule(), "init_all_image_handlers", VALUEFUNC(WxInitAllImageHandlers), -1);
 
+    WxRbTypeTable::Init();
 }

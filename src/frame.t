@@ -11,7 +11,7 @@
 **********************************************************************/
 
 //$$ CLASS Frame : Window
-
+//$$ NEEDS_WRAPPING_CONSTRUCTOR
 //$$ METHODS_BEGIN
   wxFrame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString& name = "frame")
   

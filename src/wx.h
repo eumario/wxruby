@@ -16,6 +16,7 @@
 #include "wx/wx.h"
 #include "ruby.h"
 #include "version.h"
+#include "dynamiccast.h"
 
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */

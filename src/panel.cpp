@@ -77,6 +77,14 @@ WxPanel::init(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
+VALUE WxPanel::init0(wxPanel* cppObject)
+{
+    if(cppObject==NULL) return Qnil;
+    VALUE self = Data_Wrap_Struct(rubyClass, 0, 0, 0);
+    DATA_PTR(self) = cppObject;
+    return self;
+}
+
 
 VALUE
 WxPanel::GetDefaultItem(VALUE self)

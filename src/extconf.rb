@@ -16,7 +16,19 @@ $objs = [
 "menuitem.o", "textattr.o", "dataformat.o", 
 "dropsource.o", "droptarget.o", "textdroptarget.o", "filedroptarget.o",
 "dataobject.o", "dataobjectsimple.o", "filedataobject.o", "textdataobject.o",
+"dynamiccast.o"
 ]
+
+$use_xrc = true
+dir_config("xrc");
+
+#
+# I'd like to use have_library, but I couldn't get it to work.
+#
+if ($use_xrc == true)
+    $LDFLAGS+=" -lwx_mac_xrc-2.4"
+    $objs += ["xmlresource.o"]
+end
 
 
 if /linux/ =~ RUBY_PLATFORM  or /i386-freebsd/ =~ RUBY_PLATFORM
@@ -25,17 +37,20 @@ if /linux/ =~ RUBY_PLATFORM  or /i386-freebsd/ =~ RUBY_PLATFORM
     $CFLAGS += " `wx-config --cxxflags`"
     $LDFLAGS += " `wx-config --libs` -Wl,--version-script,./version-script "
 elsif /mingw32/ =~ RUBY_PLATFORM
+
 	CONFIG["CC"] = eval("`sh wx-config --cxx`")
 	CONFIG["LDSHARED"].gsub!("gcc",eval("`sh wx-config --cxx`").strip)
 	$CFLAGS += eval(" `sh wx-config --cxxflags`").strip
 	$LDFLAGS += eval(" `sh wx-config --libs`").strip
 	$LIBS += " -lwxmsw241"
 elsif /powerpc-darwin/ =~ RUBY_PLATFORM
+
     CONFIG['CC'] = "g++"
     CONFIG['LDSHARED'].gsub!("cc","g++")
     $CFLAGS += " `wx-config --cxxflags`"
     $LDFLAGS += " `wx-config --libs` -Wl "
 	$objs.delete("fontdialog.o")
+
 elsif have_header("windows.h") and have_library("kernel32")
     $WXDIR=ENV['WXWIN']
     $WXVERSION = '24'

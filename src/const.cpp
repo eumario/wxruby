@@ -835,6 +835,9 @@ void SetConstants() {
     rb_define_const(mWx,"NULL_BITMAP", WxBitmap::init0(wxNullBitmap));
     rb_define_const(mWx,"NULL_COLOUR", WxColour::init0(wxNullColour));
     rb_define_const(mWx,"NULL_FONT", WxFont::init0(wxNullFont));
+    rb_define_const(mWx,"NULL_PEN", WxPen::init0(&wxNullPen));
+    rb_define_const(mWx,"NULL_BRUSH", WxBrush::init0(wxNullBrush));
+
 
     rb_define_const(mWx,"STANDARD_CURSOR", WxCursor::init0(wxSTANDARD_CURSOR));
     rb_define_const(mWx,"HOURGLASS_CURSOR", WxCursor::init0(wxHOURGLASS_CURSOR));
