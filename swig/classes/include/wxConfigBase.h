@@ -34,7 +34,8 @@ public:
   bool IsRecordingDefaults() const;
   bool Read(const wxString&  key , wxString*  str ) const;
   bool Read(const wxString&  key , wxString*  str , const wxString&  defaultVal ) const;
-  wxString Read(const wxString&  key , const wxString&  defaultVal ) const;
+  wxString Read(const wxString&  key , const
+wxString&  defaultVal ) const;
   bool Read(const wxString&   key , long*  l ) const;
   bool Read(const wxString&   key , long*  l , long  defaultVal ) const;
   long  Read(const wxString&  key , long  defaultVal ) const;
@@ -49,7 +50,8 @@ public:
   void SetPath(const wxString&  strPath ) ;
   void SetRecordDefaults(bool  bDoIt = true) ;
   void SetUmask(int  mode ) ;
-  bool Write(const wxString&   key , const wxString&   value ) ;
+  bool Write(const wxString&   key , const wxString&  
+value ) ;
   bool Write(const wxString&   key , long  value ) ;
   bool Write(const wxString&   key , double  value ) ;
   bool Write(const wxString&   key , bool  value ) ;

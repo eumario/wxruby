@@ -14,15 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxToolBar : public wxToolBar, public Swig::Director {
-
-public:
-    SwigDirector_wxToolBar(VALUE self, bool disown = false);
-    SwigDirector_wxToolBar(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxTB_HORIZONTAL, wxString const &name = wxPanelNameStr, bool disown = false);
-    virtual void OnRightClick(int toolId, float x, float y);
-    virtual void OnMouseEnter(int toolId);
-    virtual bool OnLeftClick(int toolId, bool toggleDown);
-};
-
-
 #endif

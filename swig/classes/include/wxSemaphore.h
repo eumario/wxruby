@@ -13,7 +13,8 @@ public:
   wxSemaError  Post() ;
   wxSemaError  TryWait() ;
   wxSemaError  Wait() ;
-  wxSemaError  WaitTimeout(unsigned long timeout_millis ) ;
+  wxSemaError  WaitTimeout(unsigned
+long timeout_millis ) ;
 };
 
 

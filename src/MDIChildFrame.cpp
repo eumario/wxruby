@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -912,19 +915,6 @@ _wrap_wxMDIChildFrame_Create(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxMDIChildFrame_Maximize(int argc, VALUE *argv, VALUE self) {
-    wxMDIChildFrame *arg1 = (wxMDIChildFrame *) 0 ;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMDIChildFrame, 1);
-    (arg1)->Maximize();
-    
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_wxMDIChildFrame_Restore(int argc, VALUE *argv, VALUE self) {
     wxMDIChildFrame *arg1 = (wxMDIChildFrame *) 0 ;
     
@@ -1001,7 +991,6 @@ mWxMDIChildFrame = mWx;
     rb_define_method(cWxMDIChildFrame.klass, "initialize", VALUEFUNC(_wrap_new_wxMDIChildFrame), -1);
     rb_define_method(cWxMDIChildFrame.klass, "activate", VALUEFUNC(_wrap_wxMDIChildFrame_Activate), -1);
     rb_define_method(cWxMDIChildFrame.klass, "create", VALUEFUNC(_wrap_wxMDIChildFrame_Create), -1);
-    rb_define_method(cWxMDIChildFrame.klass, "maximize", VALUEFUNC(_wrap_wxMDIChildFrame_Maximize), -1);
     rb_define_method(cWxMDIChildFrame.klass, "restore", VALUEFUNC(_wrap_wxMDIChildFrame_Restore), -1);
     cWxMDIChildFrame.mark = 0;
     cWxMDIChildFrame.destroy = (void (*)(void *)) free_wxMDIChildFrame;
