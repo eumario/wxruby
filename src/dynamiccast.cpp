@@ -19,6 +19,9 @@
 #include "button.h"
 #include "calendar.h"
 #include "caret.h"
+#include "checkbox.h"
+#include "choice.h"
+#include "checkbox.h"
 #include "classinfo.h"
 #include "combobox.h"
 #include "colour.h"
@@ -33,6 +36,7 @@
 #include "font.h"
 #include "fontdata.h"
 #include "frame.h"
+#include "gauge.h"
 #include "icon.h"
 #include "image.h"
 #include "layout.h"
@@ -53,8 +57,10 @@
 #include "region.h"
 #include "size.h"
 #include "sizer.h"
+#include "slider.h"
 #include "socket.h"
 #include "spin.h"
+#include "staticbitmap.h"
 #include "statictext.h"
 #include "statusbar.h"
 #include "stream.h"
@@ -100,9 +106,13 @@ VALUE WxRbTypeTable::ConvertCppObject(wxObject *obj)
 void WxRbTypeTable::Init()
 {
 	WXRB_ADD_TYPE_CONV(WxBitmap,"wxBitmap");
+	WXRB_ADD_TYPE_CONV(WxBitmapButton,"wxBitmapButton");
 	WXRB_ADD_TYPE_CONV(WxBrush,"wxBrush");
 	WXRB_ADD_TYPE_CONV(WxButton,"wxButton");
 	WXRB_ADD_TYPE_CONV(WxCalendarCtrl,"wxCalendarCtrl");
+	WXRB_ADD_TYPE_CONV(WxCheckBox,"wxCheckBox");
+	WXRB_ADD_TYPE_CONV(WxCheckListBox,"wxCheckListBox");
+	WXRB_ADD_TYPE_CONV(WxChoice,"wxChoice");
 	WXRB_ADD_TYPE_CONV(WxComboBox, "wxComboBox");
 	WXRB_ADD_TYPE_CONV(WxColour,"wxColour");
 	WXRB_ADD_TYPE_CONV(WxColourData,"wxColourData");
@@ -114,6 +124,7 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxFont,"wxFont");
 	WXRB_ADD_TYPE_CONV(WxFontData,"wxFontData");
 	WXRB_ADD_TYPE_CONV(WxFrame,"wxFrame");
+	WXRB_ADD_TYPE_CONV(WxGauge,"wxGauge");
 	WXRB_ADD_TYPE_CONV(WxIcon,"wxIcon");
 	WXRB_ADD_TYPE_CONV(WxImage,"wxImage");
 	WXRB_ADD_TYPE_CONV(WxIndividualLayoutConstraint,"wxIndividualLayoutConstraint");
@@ -127,6 +138,7 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxPen,"wxPen");
 	WXRB_ADD_TYPE_CONV(WxRegion,"wxRegion");
 	WXRB_ADD_TYPE_CONV(WxSizer,"wxSizer");
+	WXRB_ADD_TYPE_CONV(WxSlider,"wxSlider");
 	WXRB_ADD_TYPE_CONV(WxStatusBar,"wxStatusBar");
 	WXRB_ADD_TYPE_CONV(WxSpinButton,"wxSpinButton");
 	WXRB_ADD_TYPE_CONV(WxSpinCtrl,"wxSpinCtrl");	
@@ -141,5 +153,6 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxCalendarCtrl,"wxCalendarCtrl");
 	WXRB_ADD_TYPE_CONV(WxRadioBox,"wxRadioBox");
 	WXRB_ADD_TYPE_CONV(WxRadioButton,"wxRadioButton");
-    WXRB_ADD_TYPE_CONV(WxStaticText,"wxStaticText");
+        WXRB_ADD_TYPE_CONV(WxStaticText,"wxStaticText");
+	WXRB_ADD_TYPE_CONV(WxStaticBitmap,"wxStaticBitmap");
 }

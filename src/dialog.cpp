@@ -561,10 +561,26 @@ void WxWindowDisabler::DefineClass()
 	if(rubyClass)
 		return;
 	rubyClass = rb_define_class_under(GetWxModule(),"WindowDisabler", rb_cObject);
-	rb_define_alloc_func(rubyClass,WxWindowDisabler::alloc);
+	//rb_define_alloc_func(rubyClass,WxWindowDisabler::alloc);
 	rb_define_singleton_method(rubyClass, "new", VALUEFUNC(new_1), -1);
-	rb_define_method(rubyClass, "initialize", VALUEFUNC(WxWindowDisabler::init), -1);
-	rb_define_method(rubyClass, "free", VALUEFUNC(WxWindowDisabler::free), 0);
+	//rb_define_method(rubyClass, "initialize", VALUEFUNC(WxWindowDisabler::init), -1);
+	//rb_define_method(rubyClass, "free", VALUEFUNC(WxWindowDisabler::free), 0);
+	rb_define_singleton_method(rubyClass,"disable",VALUEFUNC(WxWindowDisabler::Disable),-1);
+}
+
+VALUE 
+WxWindowDisabler::Disable(int argc, VALUE *argv, VALUE self)
+{
+    wxWindow *winToSkip = (wxWindow *)NULL;
+    if(argc>0) {
+        Data_Get_Struct(argv[0], wxWindow, winToSkip);
+    }
+
+    if (rb_block_given_p())
+    {
+        wxWindowDisabler ptr(winToSkip);
+        rb_yield(Qnil);
+    }
 }
 
 VALUE
@@ -617,9 +633,14 @@ void WxBusyInfo::DefineClass()
 		return;
 	rubyClass = rb_define_class_under(GetWxModule(),"BusyInfo", rb_cObject);
 	rb_define_alloc_func(rubyClass,WxBusyInfo::alloc);
-	rb_define_singleton_method(rubyClass, "new", VALUEFUNC(new_1), -1);
+	//
+	// NSK - I'm getting rid of new and free and replacing them
+	// with the more rubyesque 'busy'
+	//
+	rb_define_singleton_method(rubyClass, "busy", VALUEFUNC(Busy), -1);
+	//rb_define_singleton_method(rubyClass, "new", VALUEFUNC(new_1), -1);
 	rb_define_method(rubyClass, "initialize", VALUEFUNC(WxBusyInfo::init), -1);
-	rb_define_method(rubyClass, "free", VALUEFUNC(WxBusyInfo::free), 0);
+	//rb_define_method(rubyClass, "free", VALUEFUNC(WxBusyInfo::free), 0);
 }
 
 VALUE
@@ -644,6 +665,27 @@ WxBusyInfo::init(int argc, VALUE *argv, VALUE self)
 
     return self;
 }
+
+VALUE 
+WxBusyInfo::Busy(int argc, VALUE *argv, VALUE self)
+{
+    if (argv==0)
+        return Qnil;
+
+    wxString msg = StringValuePtr(argv[0]);
+    wxWindow *winToSkip = (wxWindow *)NULL;
+    if(argc>1) {
+        Data_Get_Struct(argv[1], wxWindow, winToSkip);
+    }
+
+    if (rb_block_given_p())
+    {
+        wxBusyInfo ptr(msg,winToSkip);
+        rb_yield(Qnil);
+    }
+}
+
+
 
 void
 WxBusyInfo::free(VALUE self)

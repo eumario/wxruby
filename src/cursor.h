@@ -30,7 +30,7 @@ public:
     static VALUE alloc(VALUE self);
     static VALUE init(int argc, VALUE *argv, VALUE self);
     static void free(VALUE self);
-
+    static void Busy(int argc, VALUE *argv, VALUE self);
     static void DefineClass();
 	static VALUE rubyClass;
 };

@@ -230,21 +230,21 @@ class MyFrame < Frame
         # calling yield() (as ~BusyCursor does) shouldn't result in messages
         # being flushed -- test it
 
-        bc = BusyCursor.new
-        log_message("This is some message - everything is ok so far.")
-        log_message("Another message...\n... self one is on multiple lines")
-        log_warning("And then something went wrong!")
-
-        # and if ~BusyCursor doesn't do it, then call it manually
-        Wx::yield()
-
-        log_error("Intermediary error handler decided to abort.")
-        log_error("The top level caller detected an unrecoverable error.")
-
-        Log::flush_active()
-
-        log_message("And this is the same dialog but with only one message.")
-        bc.free
+        bc = BusyCursor.busy do 
+            log_message("This is some message - everything is ok so far.")
+            log_message("Another message...\n... self one is on multiple lines")
+            log_warning("And then something went wrong!")
+    
+            # and if ~BusyCursor doesn't do it, then call it manually
+            Wx::yield()
+    
+            log_error("Intermediary error handler decided to abort.")
+            log_error("The top level caller detected an unrecoverable error.")
+    
+            Log::flush_active()
+    
+            log_message("And this is the same dialog but with only one message.")
+        end
     end
 
     def onMessageBox(event)
@@ -547,15 +547,15 @@ class MyFrame < Frame
     end
 
     def onShowBusyInfo(event)
-        disableAll = WindowDisabler.new
-        info = BusyInfo.new("Working, please wait...", self)
-
-        for i in 0 ... 18
-            get_app().yield()
+        WindowDisabler.disable do 
+            BusyInfo.busy("Working, please wait...", self) do 
+    
+                for i in 0 ... 18
+                    get_app().yield()
+                end
+                sleep(2)
+            end
         end
-        sleep(2)
-        info.free
-        disableAll.free
     end
 
     def onShowReplaceDialog(event)

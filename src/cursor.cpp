@@ -108,10 +108,26 @@ void WxBusyCursor::DefineClass()
 		return;
 	rubyClass = rb_define_class_under(GetWxModule(),"BusyCursor", rb_cObject);
 	rb_define_alloc_func(rubyClass,WxBusyCursor::alloc);
-	rb_define_singleton_method(rubyClass, "new", VALUEFUNC(new_1), -1);
+	//
+	// NSK - I'm getting rid of new and free, and replacing them with
+	// the more 'rubyesque' busy method
+	//
+	//rb_define_singleton_method(rubyClass, "new", VALUEFUNC(new_1), -1);
+	rb_define_singleton_method(rubyClass, "busy",VALUEFUNC(Busy),-1);
 	rb_define_method(rubyClass, "initialize", VALUEFUNC(WxBusyCursor::init), -1);
-	rb_define_method(rubyClass, "free", VALUEFUNC(WxBusyCursor::free), 0);
+	//rb_define_method(rubyClass, "free", VALUEFUNC(WxBusyCursor::free), 0);
 }
+
+
+void WxBusyCursor::Busy(int argc, VALUE *argv, VALUE self)
+{
+	if (rb_block_given_p())
+	{
+		wxBusyCursor cursor;
+		rb_yield(Qnil);
+	}
+}
+
 
 VALUE
 WxBusyCursor::alloc(VALUE self)

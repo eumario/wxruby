@@ -96,7 +96,7 @@ public:
     static VALUE alloc(VALUE self);
     static VALUE init(int argc, VALUE *argv, VALUE self);
     static void free(VALUE self);
-
+    static VALUE Disable(int argc, VALUE *argv, VALUE self);
     static void DefineClass();
 	static VALUE rubyClass;
 };
@@ -106,7 +106,7 @@ public:
     static VALUE alloc(VALUE self);
     static VALUE init(int argc, VALUE *argv, VALUE self);
     static void free(VALUE self);
-
+    static VALUE Busy(int argc, VALUE *argv, VALUE self);
     static void DefineClass();
 	static VALUE rubyClass;
 };
