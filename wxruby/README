@@ -33,8 +33,10 @@ We have some unresolved issues with MS Windows.
 --------------------------------------------------------------------
 INSTALL FROM SOURCE
 
+	From the src/ directory:
+	
 	> ruby extconf.rb
-	> make or nmake
+	> make     [[[or nmake, depending on your platform]]]
 	> ruby install.rb
 
 
