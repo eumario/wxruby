@@ -16,6 +16,9 @@
 #include "colour.h"
 #include "window.h"
 #include "date.h"
+#ifdef __WXMAC__
+#include "sys/time.h"
+#endif
 
 extern "C" {
 struct timeval rb_time_timeval(VALUE);
@@ -261,7 +264,7 @@ VALUE WxCalendarCtrl::SetDate(VALUE self, VALUE date)
     else if (CLASS_OF(date) == rb_cTime)
     {
     	struct timeval tm = rb_time_timeval(date);
-    	wxDateTime dt(tm.tv_sec);
+    	wxDateTime dt((time_t)tm.tv_sec);
     	ptr->SetDate(dt);
     }
     else rb_raise(rb_eTypeError, "Must pass Time or DateTime");
