@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Sizer.h"
+#include "src/Sizer.h"
 
 SwigDirector_wxSizer::SwigDirector_wxSizer(VALUE self, bool disown): wxSizer(), Swig::Director(self, disown) {
     

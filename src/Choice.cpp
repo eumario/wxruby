@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Choice.h"
+#include "src/Choice.h"
 
 SwigDirector_wxChoice::SwigDirector_wxChoice(VALUE self, bool disown): wxChoice(), Swig::Director(self, disown) {
     
@@ -994,6 +994,23 @@ _wrap_wxChoice_SetSelection(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_wxChoice_SetStringSelection(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    wxString *arg2 = 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]));
+    }
+    (arg1)->SetStringSelection(*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_wxChoice(int argc, VALUE *argv, VALUE self) {
     wxChoice *arg1 = (wxChoice *) 0 ;
     
@@ -1062,6 +1079,7 @@ mWxChoice = mWx;
     rb_define_method(cWxChoice.klass, "get_columns", VALUEFUNC(_wrap_wxChoice_GetColumns), -1);
     rb_define_method(cWxChoice.klass, "set_columns", VALUEFUNC(_wrap_wxChoice_SetColumns), -1);
     rb_define_method(cWxChoice.klass, "set_selection", VALUEFUNC(_wrap_wxChoice_SetSelection), -1);
+    rb_define_method(cWxChoice.klass, "set_string_selection", VALUEFUNC(_wrap_wxChoice_SetStringSelection), -1);
     cWxChoice.mark = 0;
     cWxChoice.destroy = (void (*)(void *)) free_wxChoice;
 }

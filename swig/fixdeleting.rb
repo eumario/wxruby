@@ -82,6 +82,15 @@ File.open(ARGV[0], "w") do | out |
         if(line.index("Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);"))
             line = 'Swig::Director *director = (Swig::Director*)(arg1);'
         end
+		if (line.index('resultdirector = dynamic_cast<Swig::Director *>(result);'))
+			lines = []
+			lines << 'try {'
+			lines << 'resultdirector = dynamic_cast<Swig::Director *>(result);'    
+			lines << '} catch (...) {'
+			lines << '    resultdirector = NULL;'
+			lines << '}'
+			line = lines.join("\n")
+		end
         
         out.puts(line)
     end

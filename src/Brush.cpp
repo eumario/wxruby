@@ -755,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Brush.h"
+#include "src/Brush.h"
 
 SwigDirector_wxBrush::SwigDirector_wxBrush(VALUE self, bool disown): wxBrush(), Swig::Director(self, disown) {
     

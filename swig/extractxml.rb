@@ -359,6 +359,13 @@ $fixes =
     'wxTipWindow(wxWindow*  parent , const wxString&  text , wxCoord  maxLength = 100, wxTipWindow**  windowPtr )'=>
     'wxTipWindow(wxWindow*  parent , const wxString&  text , wxCoord  maxLength = 100, wxTipWindow**  windowPtr = NULL )',
     },
+    'wxToggleButton'=>
+    {
+	'wxToggleButton(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val , const wxString&  name = "checkBox")'=>
+'wxToggleButton(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val = wxDefaultValidator, const wxString&  name = "checkBox")',
+	'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val , const wxString&  name = "checkBox")'=>
+	'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  val = wxDefaultValidator, const wxString&  name = "checkBox")'
+    },
     'wxToolBar'=>
     {
     'int GetToolPos(int  toolId ) const'=>
@@ -438,11 +445,13 @@ $missing =
     'wxChoice' =>
     [
     'void SetSelection(int  n )',
+	'void SetStringSelection(wxString &)',
     ],
     'wxComboBox'=>
     [
     'void Append(const wxString& item)',
 	'void SetSelection(int n)',
+	'void SetStringSelection(wxString &)',
     ],
 	'wxListBox'=>
 	[
@@ -460,7 +469,10 @@ $missing =
 	],
 	'wxTextCtrl'=>
 	[
-	'void operator<<(const char *);'
+	'wxTextCtrl & operator<<(const char *)',
+	'wxTextCtrl & operator<<(int)',
+	'wxTextCtrl & operator<<(double)',
+	'wxTextCtrl & operator<<(bool)',
 	],
     'wxToolBar'=>
     [
@@ -519,8 +531,8 @@ class WxEvent
     end
 
     def WxEvent.fix_errors_in_xml()
-        $event_fixes.each do |pair|
-            $events[pair[0]] = pair[1]
+        $event_fixes.each do |name, value|
+            $events[name] = value
         end
     end
 
@@ -530,15 +542,7 @@ class WxEvent
 
 end
 
-$events_exclude = [
-	'EVT_COMMAND',
-	'EVT_DIALUP',
-	'EVT_SASH',
-	'EVT_TASKBAR',
-	'EVT_TAB',
-	'EVT_TOGGLEBUTTON',
-	'EVT_WIZARD',
-]
+
 
 
 
@@ -550,8 +554,8 @@ $event_fixes = {
 "EVT_CALENDAR_WEEKDAY_CLICKED(id, func)"=>WxEvent.new("EVT_CALENDAR_WEEKDAY_CLICKED(id, func)", "wxEVT_CALENDAR_WEEKDAY_CLICKED"),
 "EVT_CALENDAR_YEAR(id, func)"=>WxEvent.new("EVT_CALENDAR_YEAR(id, func)", "wxEVT_CALENDAR_YEAR_CHANGED"),
 "EVT_CLOSE(func)"=>WxEvent.new("EVT_CLOSE(func)", "wxEVT_CLOSE_WINDOW"),
-"EVT_COMMAND(id, event, func)"=>WxEvent.new("EVT_COMMAND(id, event, func)", "wxEVT_COMMAND"),
-"EVT_COMMAND_RANGE(id1, id2, event, func)"=>WxEvent.new("EVT_COMMAND_RANGE(id1, id2, event, func)", "wxEVT_COMMAND"),
+"EVT_COMMAND(id, event, func)"=>WxEvent.new("EVT_COMMAND(id, event, func)", "wxEVT_NULL"),
+"EVT_COMMAND_RANGE(id1, id2, event, func)"=>WxEvent.new("EVT_COMMAND_RANGE(id1, id2, event, func)", "wxEVT_NULL"),
 "EVT_CONTEXT_MENU(func)"=>WxEvent.new("EVT_CONTEXT_MENU(func)", "wxEVT_CONTEXT_MENU"),
 "EVT_DIALUP_CONNECTED(func)"=>WxEvent.new("EVT_DIALUP_CONNECTED(func)", "wxEVT_DIALUP_CONNECTED"),
 "EVT_DIALUP_DISCONNECTED(func)"=>WxEvent.new("EVT_DIALUP_DISCONNECTED(func)", "wxEVT_DIALUP_DISCONNECTED"),
@@ -593,6 +597,7 @@ $event_fixes = {
 "EVT_NOTEBOOK_PAGE_CHANGED(id, func)"=>WxEvent.new("EVT_NOTEBOOK_PAGE_CHANGED(id, func)","wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED"),
 "EVT_NOTEBOOK_PAGE_CHANGING(id, func)"=>WxEvent.new("EVT_NOTEBOOK_PAGE_CHANGING(id, func)","wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING"),
 "EVT_QUERY_END_SESSION(func)"=>WxEvent.new("EVT_QUERY_END_SESSION(func)", "wxEVT_QUERY_END_SESSION"),
+"EVT_SASH_DRAGGED_RANGE(id1, id2, func)"=>WxEvent.new("EVT_SASH_DRAGGED_RANGE(id1, id2, func)","wxEVT_SASH_DRAGGED"),
 "EVT_SCROLLWIN(func)"=>WxEvent.new("EVT_SCROLLWIN(func)", "0"),
 "EVT_SOCKET(id, func)"=>WxEvent.new("EVT_SOCKET(id, func)", "wxEVT_SOCKET"),
 "EVT_SPINCTRL(id, func)"=>WxEvent.new("EVT_SPINCTRL(id, func)", "wxEVT_COMMAND_SPINCTRL_UPDATED"),
@@ -624,8 +629,8 @@ $event_fixes = {
 "EVT_WIZARD_CANCEL(id, func)"=>WxEvent.new("EVT_WIZARD_CANCEL(id, func)", "wxEVT_WIZARD_CANCEL"),
 "EVT_WIZARD_FINISHED(id, func)"=>WxEvent.new("EVT_WIZARD_FINISHED(id, func)", "wxEVT_WIZARD_FINISHED"),
 "EVT_WIZARD_HELP(id, func)"=>WxEvent.new("EVT_WIZARD_HELP(id, func)", "wxEVT_WIZARD_HELP"),
-"EVT_WIZARD_PAGE_CHANGED(id, func)"=>WxEvent.new("EVT_WIZARD_PAGE_CHANGED(id, func)", "wxEVT_WIZARD_CHANGED"),
-"EVT_WIZARD_PAGE_CHANGING(id, func)"=>WxEvent.new("EVT_WIZARD_PAGE_CHANGING(id, func)", "wxEVT_WIZARD_CHANGING"),
+"EVT_WIZARD_PAGE_CHANGED(id, func)"=>WxEvent.new("EVT_WIZARD_PAGE_CHANGED(id, func)", "wxEVT_WIZARD_PAGE_CHANGED"),
+"EVT_WIZARD_PAGE_CHANGING(id, func)"=>WxEvent.new("EVT_WIZARD_PAGE_CHANGING(id, func)", "wxEVT_WIZARD_PAGE_CHANGING"),
 }
 
 
@@ -865,13 +870,7 @@ File.open(File.join(output_dir,"events.rb"),"w") do |out|
     WxEvent.fix_errors_in_xml
     out.puts("$events = [")
     $events.each_with_index do |name, val|
-		exclude = false
-        $events_exclude.each do |prefix|
-        	if name[1].name.index(prefix) != nil
-				exclude = true
-			end
-		end
-        out.puts name[1].to_s if !exclude
+		out.puts name[1].to_s 
     end
     out.puts("]")
 

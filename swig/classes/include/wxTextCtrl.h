@@ -59,7 +59,10 @@ public:
   void WriteText(const wxString&   text ) ;
   long XYToPosition(long  x , long  y ) ;
   // the following were missing from the xml
-  void operator<<(const char *);;
+  wxTextCtrl & operator<<(const char *);
+  wxTextCtrl & operator<<(int);
+  wxTextCtrl & operator<<(double);
+  wxTextCtrl & operator<<(bool);
 };
 
 

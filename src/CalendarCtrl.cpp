@@ -763,7 +763,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CalendarCtrl.h"
+#include "src/CalendarCtrl.h"
 
 SwigDirector_wxCalendarCtrl::SwigDirector_wxCalendarCtrl(VALUE self, bool disown): wxCalendarCtrl(), Swig::Director(self, disown) {
     

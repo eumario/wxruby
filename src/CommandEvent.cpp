@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CommandEvent.h"
+#include "src/CommandEvent.h"
 
 SwigDirector_wxCommandEvent::SwigDirector_wxCommandEvent(VALUE self, WXTYPE commandEventType, int id, bool disown): wxCommandEvent(commandEventType, id), Swig::Director(self, disown) {
     

@@ -753,7 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "PaintEvent.h"
+#include "src/PaintEvent.h"
 
 SwigDirector_wxPaintEvent::SwigDirector_wxPaintEvent(VALUE self, int id, bool disown): wxPaintEvent(id), Swig::Director(self, disown) {
     

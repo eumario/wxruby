@@ -752,7 +752,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Point.h"
+#include "src/Point.h"
 
 static VALUE
 _wrap_new_wxPoint__SWIG_0(int argc, VALUE *argv, VALUE self) {

@@ -758,7 +758,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CalendarDateAttr.h"
+#include "src/CalendarDateAttr.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

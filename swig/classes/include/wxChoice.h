@@ -17,6 +17,7 @@ public:
   void SetColumns(int n = 1) ;
   // the following were missing from the xml
   void SetSelection(int  n );
+  void SetStringSelection(wxString &);
 };
 
 

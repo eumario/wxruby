@@ -951,7 +951,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "wx.h"
+#include "src/wx.h"
 
 static VALUE
 _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
@@ -1165,6 +1165,8 @@ extern "C" void InitializeOtherModules()
     Init_wxMessageDialog();
     extern void Init_wxMouseEvent();
     Init_wxMouseEvent();
+    extern void Init_wxMoveEvent();
+    Init_wxMoveEvent();
     extern void Init_wxNotebook();
     Init_wxNotebook();
     extern void Init_wxNotebookEvent();
@@ -1225,6 +1227,8 @@ extern "C" void InitializeOtherModules()
     Init_wxTipProvider();
     extern void Init_wxTipWindow();
     Init_wxTipWindow();
+    extern void Init_wxToggleButton();
+    Init_wxToggleButton();
     extern void Init_wxToolBar();
     Init_wxToolBar();
     extern void Init_wxUpdateUIEvent();

@@ -789,7 +789,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Window.h"
+#include "src/Window.h"
 
 SwigDirector_wxWindow::SwigDirector_wxWindow(VALUE self, bool disown): wxWindow(), Swig::Director(self, disown) {
     
@@ -2378,7 +2378,11 @@ _wrap_wxWindow_FindFocus(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     result = (wxWindow *)wxWindow::FindFocus();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -2402,7 +2406,11 @@ _wrap_wxWindow_FindWindow__SWIG_0(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     result = (wxWindow *)(arg1)->FindWindow(arg2);
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -2428,7 +2436,11 @@ _wrap_wxWindow_FindWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     result = (wxWindow *)(arg1)->FindWindow((wxString const &)*arg2);
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -2500,7 +2512,11 @@ _wrap_wxWindow_FindWindowById(int argc, VALUE *argv, VALUE self) {
     }
     result = (wxWindow *)wxWindow::FindWindowById(arg1,arg2);
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -2528,7 +2544,11 @@ _wrap_wxWindow_FindWindowByName(int argc, VALUE *argv, VALUE self) {
     }
     result = (wxWindow *)wxWindow::FindWindowByName((wxString const &)*arg1,arg2);
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -2556,7 +2576,11 @@ _wrap_wxWindow_FindWindowByLabel(int argc, VALUE *argv, VALUE self) {
     }
     result = (wxWindow *)wxWindow::FindWindowByLabel((wxString const &)*arg1,arg2);
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -2706,7 +2730,11 @@ _wrap_wxWindow_GetCapture(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     result = (wxWindow *)wxWindow::GetCapture();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -2960,7 +2988,11 @@ _wrap_wxWindow_GetGrandParent(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     result = (wxWindow *)((wxWindow const *)arg1)->GetGrandParent();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -3082,7 +3114,11 @@ _wrap_wxWindow_GetParent(int argc, VALUE *argv, VALUE self) {
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = (wxWindow *)((wxWindow const *)arg1)->GetParent();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {

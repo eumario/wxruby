@@ -741,7 +741,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "RubyEventTypes.h"
+#include "src/RubyEventTypes.h"
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */

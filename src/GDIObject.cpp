@@ -753,7 +753,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "GDIObject.h"
+#include "src/GDIObject.h"
 
 SwigDirector_wxGDIObject::SwigDirector_wxGDIObject(VALUE self, bool disown): wxGDIObject(), Swig::Director(self, disown) {
     

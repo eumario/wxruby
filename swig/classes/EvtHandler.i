@@ -36,7 +36,7 @@ extern swig_class cWxMouseEvent;
 extern swig_class cWxFocusEvent;
 extern swig_class cWxSpinEvent;
 extern swig_class cWxNotebookEvent;
-
+extern swig_class cWxMoveEvent;
 static const wxEventType *calendarEvents[] = 
 {
     &wxEVT_CALENDAR_SEL_CHANGED,
@@ -202,6 +202,8 @@ public:
             cEvent = cWxIdleEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxPaintEvent)))
             cEvent = cWxPaintEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxMoveEvent)))
+			cEvent = cWxMoveEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
             cEvent = cWxCommandEvent.klass;
  

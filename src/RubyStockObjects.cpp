@@ -746,7 +746,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "RubyStockObjects.h"
+#include "src/RubyStockObjects.h"
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */

@@ -589,7 +589,7 @@ extern swig_class cWxMouseEvent;
 extern swig_class cWxFocusEvent;
 extern swig_class cWxSpinEvent;
 extern swig_class cWxNotebookEvent;
-
+extern swig_class cWxMoveEvent;
 static const wxEventType *calendarEvents[] = 
 {
     &wxEVT_CALENDAR_SEL_CHANGED,
@@ -755,6 +755,8 @@ public:
             cEvent = cWxIdleEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxPaintEvent)))
             cEvent = cWxPaintEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxMoveEvent)))
+			cEvent = cWxMoveEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
             cEvent = cWxCommandEvent.klass;
  
@@ -995,7 +997,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "EvtHandler.h"
+#include "src/EvtHandler.h"
 
 SwigDirector_wxEvtHandler::SwigDirector_wxEvtHandler(VALUE self, bool disown): wxEvtHandler(), Swig::Director(self, disown) {
     
@@ -1162,7 +1164,11 @@ _wrap_wxEvtHandler_GetNextHandler(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
     result = (wxEvtHandler *)(arg1)->GetNextHandler();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {
@@ -1184,7 +1190,11 @@ _wrap_wxEvtHandler_GetPreviousHandler(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxEvtHandler, 1);
     result = (wxEvtHandler *)(arg1)->GetPreviousHandler();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {

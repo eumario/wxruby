@@ -760,7 +760,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Caret.h"
+#include "src/Caret.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

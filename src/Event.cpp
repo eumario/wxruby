@@ -755,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Event.h"
+#include "src/Event.h"
 
 SwigDirector_wxEvent::SwigDirector_wxEvent(VALUE self, int id, wxEventType eventType, bool disown): wxEvent(id, eventType), Swig::Director(self, disown) {
     
@@ -791,7 +791,11 @@ _wrap_wxEvent_Clone(int argc, VALUE *argv, VALUE self) {
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = (wxEvent *)((wxEvent const *)arg1)->Clone();
     
-    resultdirector = dynamic_cast<Swig::Director *>(result);
+try {
+resultdirector = dynamic_cast<Swig::Director *>(result);
+} catch (...) {
+    resultdirector = NULL;
+}
     if (resultdirector) {
         vresult = resultdirector->swig_get_self();
     } else {

@@ -755,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CalendarEvent.h"
+#include "src/CalendarEvent.h"
 
 static VALUE
 _wrap_wxCalendarEvent_GetDate(int argc, VALUE *argv, VALUE self) {

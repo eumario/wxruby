@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Button.h"
+#include "src/Button.h"
 
 SwigDirector_wxButton::SwigDirector_wxButton(VALUE self, bool disown): wxButton(), Swig::Director(self, disown) {
     
