@@ -110,10 +110,6 @@ other compilers (such as Borland), or other platforms.
 --------------------------------------------------------------------
 KNOWN PROBLEMS
 
-* There may still be a few compiler warnings on your platform. These 
-should be harmless, but we will work to eliminate them in future 
-releases.
-
 * Not all classes and methods have been implemented yet.
 
 * Certain features do not manage memory correctly, and may 
@@ -149,7 +145,8 @@ Original author: Park Heesob
 Thanks also to other folks who have contributed in many ways to 
 this project, including (in no particular order):
  Curt Hibbs, Rich Kilmer, Gergely Kontra, Nick, Gour,
- Nobuaki Arima, Roy Varghese, John Platte, 
+ Nobuaki Arima, Roy Varghese, John Platte, Alan Chen,
+ Robert P. Carlin, Gerard A.W. Vreeswijk, 
  and everyone who has posted to the mailing list or sent feedback.
 
 --------------------------------------------------------------------
