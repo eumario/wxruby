@@ -144,25 +144,25 @@ class MyTreeCtrl < TreeCtrl
         images = ImageList.new(size, size, TRUE)
 
         # should correspond to TreeCtrlIcon_xxx enum
-        wait = BusyCursor.new
-        icons = [
-            Icon.new("icon1.xpm"),
-            Icon.new("icon2.xpm"),
-            Icon.new("icon3.xpm"),
-            Icon.new("icon4.xpm"),
-            Icon.new("icon5.xpm")]
-
-        sizeOrig = icons[0].get_width()
-        for i in 0 ... icons.length
-            if size == sizeOrig
-                images.add(icons[i])
-            else
-                images.add(icons[i])
+        BusyCursor.busy do |x|
+            icons = [
+                Icon.new("icon1.xpm"),
+                Icon.new("icon2.xpm"),
+                Icon.new("icon3.xpm"),
+                Icon.new("icon4.xpm"),
+                Icon.new("icon5.xpm")]
+    
+            sizeOrig = icons[0].get_width()
+            for i in 0 ... icons.length
+                if size == sizeOrig
+                    images.add(icons[i])
+                else
+                    images.add(icons[i])
+                end
             end
+    
+            assign_image_list(images)
         end
-
-        assign_image_list(images)
-        wait.free
     end
 
     def CreateButtonsImageList(size = 11)
@@ -175,24 +175,24 @@ class MyTreeCtrl < TreeCtrl
         images = ImageList.new(size, size, TRUE)
 
         # should correspond to TreeCtrlIcon_xxx enum
-        wait = BusyCursor.new
-        icons = [
-            Icon.new("icon3.xpm"),   # closed
-            Icon.new("icon3.xpm"),   # closed, selected
-            Icon.new("icon5.xpm"),   # open
-            Icon.new("icon5.xpm")]   # open, selected
-
-        for i in 0 ... icons.length
-            sizeOrig = icons[i].get_width()
-            if size == sizeOrig
-                images.add(icons[i])
-            else
-                images.add(Bitmap.new(icons[i].ConvertToImage().Rescale(size, size)))
+        BusyCursor.busy do |x|
+            icons = [
+                Icon.new("icon3.xpm"),   # closed
+                Icon.new("icon3.xpm"),   # closed, selected
+                Icon.new("icon5.xpm"),   # open
+                Icon.new("icon5.xpm")]   # open, selected
+    
+            for i in 0 ... icons.length
+                sizeOrig = icons[i].get_width()
+                if size == sizeOrig
+                    images.add(icons[i])
+                else
+                    images.add(Bitmap.new(icons[i].ConvertToImage().Rescale(size, size)))
+                end
             end
+    
+            AssignButtonsImageList(images)
         end
-
-        AssignButtonsImageList(images)
-        wait.free
     end
 
     def on_compare_items(item1,item2)
