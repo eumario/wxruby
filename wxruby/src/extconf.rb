@@ -46,9 +46,10 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
 
     CONFIG['CC'] = "g++"
     CONFIG['LDSHARED'].gsub!("cc","g++")
-    $CFLAGS += " `wx-config --cxxflags`"
-    $LDFLAGS += " `wx-config --libs` -Wl "
-	$objs.delete("fontdialog.o")
+    $CFLAGS += " `wx-config --cxxflags` "
+    $CPPFLAGS += ' -x objective-c++ '
+    $LDFLAGS += " `wx-config --libs` -framework Carbon "
+ 	$objs.push("macstart.o")
 elsif have_library("kernel32")
     # native Windows - requires a static build of wxWindows
     $DEBUG = true

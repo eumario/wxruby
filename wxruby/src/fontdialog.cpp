@@ -65,7 +65,7 @@ WxFontDialog::init(int argc, VALUE *argv, VALUE self)
     if(argc==1)
 // YUCK! The Generic FontDialog doesn't have a constructor that 
 // only takes one parameter
-#if !(defined(__WXGTK__) || defined(__WXMSW__))
+#if !(defined(__WXGTK__) || defined(__WXMSW__) || defined(__WXMAC__))
       ptr = new wxFontDialog(parent);
 #else
 	  rb_raise(rb_intern("RuntimeError"), 

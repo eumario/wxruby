@@ -34,6 +34,9 @@ int  wxEntryStart(int argc, char**argv);
 void wxEntryCleanup();
 void SetConstants();
 void DefineModuleMethods();
+#ifdef __WXMAC__
+void macstart();
+#endif
 
 
 VALUE mWx;
@@ -146,4 +149,10 @@ void Init_wxruby()
     wxEntryStart(argc,&argv);
 
     SetConstants();
+
+#ifdef __WXMAC__
+
+	macstart();
+
+#endif
 }
