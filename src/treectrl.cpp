@@ -29,8 +29,7 @@ IMPLEMENT_DYNAMIC_CLASS(wxRbTreeCtrl, wxTreeCtrl)
 
 int wxRbTreeCtrl::OnCompareItems(const wxTreeItemId& i1, const wxTreeItemId& i2)
 {
-    void *data = GetClientData();
-    VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
+    VALUE self = m_self;
     VALUE value = rb_funcall(self,rb_intern("on_compare_items"),2,INT2NUM(i1.m_pItem),INT2NUM(i2.m_pItem));
     return NUM2INT(value);
 }
@@ -225,10 +224,7 @@ WxTreeCtrl::init(int argc, VALUE *argv, VALUE self)
     wxRbTreeCtrl *ptr;
     Data_Get_Struct(self, wxRbTreeCtrl, ptr);
     ptr = new wxRbTreeCtrl(parent,id,pos,size,style);
-
-    VALUE vdata = rb_hash_new();
-    rb_hash_aset(vdata,rb_str_new2("self"),self);
-    ptr->SetClientData((void*)vdata);
+    ptr->m_self = self;
 
     DATA_PTR(self) = ptr;
 

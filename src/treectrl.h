@@ -31,6 +31,9 @@ public:
         :   wxTreeCtrl(parent,id,pos,size,style,validator,name) { }
 
     virtual int OnCompareItems(const wxTreeItemId& i1, const wxTreeItemId& i2);
+        
+    VALUE m_self;
+        
     DECLARE_DYNAMIC_CLASS(wxRbTreeCtrl)
 };
 

@@ -10,7 +10,9 @@
       there is a reasonable, if not better, alternate way to 
       accomplish the same thing.
     * Added grid sample that was ported by shanko (Thanks!)
-    
+    * Fixed crash in TreeCtrl#on_compare_items
+      (it could be reproduced in the treectrl sample by inserting 
+       GC.start at the beginning of the DoSortChildren method)
 
 2004-05-29
     * Add support for ComboBox#get_value
