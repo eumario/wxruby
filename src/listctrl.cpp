@@ -301,6 +301,7 @@ WxListCtrl::GetItem(int argc, VALUE *argv, VALUE self)
 
     wxListItem *info;
     Data_Get_Struct(listItem, wxListItem, info);
+    info->m_mask = 0xFFFF;  // we want all info to be valid
     
     wxRbListCtrl *ptr;
     Data_Get_Struct(self, wxRbListCtrl, ptr);
@@ -711,7 +712,7 @@ wxRbListCtrl::OnGetItemAttr(long item) const
 {
     void *data = GetClientData();
     VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
-    VALUE vattr = rb_funcall(self,rb_intern("OnGetItemAttr"),1,INT2NUM(item));
+    VALUE vattr = rb_funcall(self,rb_intern("on_get_item_attr"),1,INT2NUM(item));
     if(vattr==Qnil) return (wxListItemAttr *)NULL;
     wxListItemAttr *ptr;
     Data_Get_Struct(vattr, wxListItemAttr, ptr);
@@ -723,7 +724,7 @@ wxRbListCtrl::OnGetItemImage(long item) const
 {
     void *data = GetClientData();
     VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
-    return NUM2INT(rb_funcall(self,rb_intern("OnGetItemImage"),1,INT2NUM(item)));
+    return NUM2INT(rb_funcall(self,rb_intern("on_get_item_image"),1,INT2NUM(item)));
 }
 
 wxString
@@ -731,7 +732,7 @@ wxRbListCtrl::OnGetItemText(long item, long column) const
 {
     void *data = GetClientData();
     VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
-    VALUE value = rb_funcall(self,rb_intern("OnGetItemText"),2,INT2NUM(item),INT2NUM(column));
+    VALUE value = rb_funcall(self,rb_intern("on_get_item_text"),2,INT2NUM(item),INT2NUM(column));
     wxString str = StringValuePtr(value);
     return str;
 }

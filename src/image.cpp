@@ -132,7 +132,7 @@ WxImage::ConvertToBitmap(VALUE self)
 {
     wxImage *ptr;
     Data_Get_Struct(self, wxImage, ptr);
-    return WxBitmap::init0(ptr->ConvertToBitmap());
+    return WxBitmap::init0(wxBitmap(*ptr));
 }
 
 VALUE

@@ -1,3 +1,17 @@
+2004-03-13
+    * Checked in gentoo ebuild script (from Gour)
+    * Fix method names in LsitCtrl callbacks. Now: 
+      on_get_item_text, on_get_item_attr, on_get_item_image
+    * Integrated patch from Alan Chen which updates
+      WxImage::ConvertToBitmap to avoid using a deprecated 
+      wxWindows call.
+    * Integrated patch from Alan Chen which fixes a problem 
+      in ListCtrl.get_item that (apparently) was preventing 
+      the returned list item from containing any data.
+    * Integrated patch from Kontra Gergely which fixed a couple 
+      dependencies in extconf.rb.
+      
+
 2004-03-11
     * Updated extconf.rb for important Mac fix
     * Tagged tree as 0.2.1
