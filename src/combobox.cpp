@@ -33,6 +33,7 @@ void WxComboBox::DefineClass()
     rb_define_method(rubyClass, "get_selection", VALUEFUNC(WxComboBox::GetSelection), 0);
     rb_define_method(rubyClass, "get_string", VALUEFUNC(WxComboBox::GetString), 1);
     rb_define_method(rubyClass, "get_string_selection", VALUEFUNC(WxComboBox::GetStringSelection), 0);
+    rb_define_method(rubyClass, "get_value", VALUEFUNC(WxComboBox::GetValue), 0);
     rb_define_method(rubyClass, "delete", VALUEFUNC(WxComboBox::Delete), 1);
     rb_define_method(rubyClass, "clear", VALUEFUNC(WxComboBox::Clear), 0);
 }
@@ -199,6 +200,14 @@ WxComboBox::GetStringSelection(VALUE self)
     wxComboBox *ptr;
     Data_Get_Struct(self, wxComboBox, ptr);
     return rb_str_new2(ptr->GetStringSelection());
+}
+
+VALUE
+WxComboBox::GetValue(VALUE self)
+{
+    wxComboBox *ptr;
+    Data_Get_Struct(self, wxComboBox, ptr);
+    return rb_str_new2(ptr->GetValue());
 }
 
 void
