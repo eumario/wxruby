@@ -27,7 +27,7 @@ version.
 The resulting installer is designed to be installed with
 one-click windows installer for Ruby. The wxRuby installer
 looks for the Ruby installer's entries in the windows
-registry to detemine here to copy the wxruby.so file.
+registry to detemine where to copy the wxruby.so file.
 
 The "wxruby-dbg" and "wxuby-rel" subdirectories are not
 in cvs, but are created as part of the process of building
