@@ -14,7 +14,7 @@ end
 if /linux/ =~ RUBY_PLATFORM  or /i386-freebsd/ =~ RUBY_PLATFORM
     CONFIG['CC'] = `wx-config --cxx`
     CONFIG['LDSHARED'].gsub!("gcc",`wx-config --cxx`.strip)
-    $CFLAGS += " `wx-config --cxxflags`"
+    $CFLAGS += " -I.. `wx-config --cxxflags`"
     $LDFLAGS += " `wx-config --libs` -Wl,--version-script,./version-script "
 elsif /mingw32/ =~ RUBY_PLATFORM
 
