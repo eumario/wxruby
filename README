@@ -1,6 +1,6 @@
-README for wxRuby version 0.1 (ALPHA)
+README for wxRuby version 0.2 (ALPHA)
    Released under the wxWindows 2 license (see LICENSE)
-   This file last updated 2003-08-24
+   This file last updated 2003-03-10
 
 
 --------------------------------------------------------------------
@@ -25,9 +25,9 @@ REQUIREMENTS
 
 Primary development is under Debian GNU/Linux ("Sarge").
 
-It has been tested successfully under Cygwin and Mac OS X.
+It seems to work quite well under MS Windows native, and can also 
+be compiled with Cygwin. A Mac OS X version is also available.
 
-We have some unresolved issues with MS Windows.
 
 
 --------------------------------------------------------------------
@@ -110,9 +110,9 @@ other compilers (such as Borland), or other platforms.
 --------------------------------------------------------------------
 KNOWN PROBLEMS
 
-* There may be some compiler warnings on your platform for possibly 
-uninitialized variables. These should be harmless, but we will work 
-to eliminate them in future releases.
+* There may still be a few compiler warnings on your platform. These 
+should be harmless, but we will work to eliminate them in future 
+releases.
 
 * Not all classes and methods have been implemented yet.
 
@@ -134,7 +134,6 @@ features that are not implemented or do not work correctly.
 wxWindows. This will definitely be fixed as soon as is 
 practical.
 
-* The OS X version does not support FontDialog.
 
 
 --------------------------------------------------------------------
@@ -148,11 +147,9 @@ Current maintainer: Kevin Smith
 Original author: Park Heesob
 
 Thanks also to other folks who have contributed in many ways to 
-this project, including:
- Curt Hibbs
- Rich Kilmer
- Gour
- Roy Varghese
- John Platte
+this project, including (in no particular order):
+ Curt Hibbs, Rich Kilmer, Gergely Kontra, Nick, Gour,
+ Nobuaki Arima, Roy Varghese, John Platte, 
+ and everyone who has posted to the mailing list or sent feedback.
 
 --------------------------------------------------------------------

@@ -1,6 +1,6 @@
-README.osx for wxRuby version 0.1 (ALPHA)
+README.osx for wxRuby version 0.2 (ALPHA)
    Released under the wxWindows 2 license (see LICENSE)
-   This file last updated 2003-08-24
+   This file last updated 2004-02-07
 
 --------------------------------------------------------------------
 INTRODUCTION
@@ -14,14 +14,14 @@ The wxRuby project website is:
 
 For general wxRuby information, see the main README file
 
-
 --------------------------------------------------------------------
 MAC OS X INFORMATION
 
-1. The OS X version does not support FontDialog.
+Applications under OS X require resource bundles. Most side effects
+of this have been minimized as much as possible, but Without the wxMac 
+resource files, the wxMenuBar does not work properly. Ok, not at all.
 
-2. Applications under OS X require resource bundles. There are no 
-tools right now to create these bundles specifically for wxRuby 
+There are no tools right now to create these bundles specifically for wxRuby 
 apps, but there is a tool that seems to do the job nicely:
 
 RubyRunner has been replaced by the more capable ScrUITools.  "ScrUI" stands
@@ -36,5 +36,3 @@ terminal window if you need standard input.
 Download ScrUITools at <http://www.xmission.com/~illume/scruitools.tgz>.
 Comments/Questions are welcome.
 
-3. There is currently a compile warning related to icons, which 
-has not yet been researched or resolved.
