@@ -11,6 +11,23 @@
 #include <wx/fdrepdlg.h>
 #include <wx/artprov.h>
 
+//
+// All of these exist on only one platform, so in those
+// cases I'm defining them so the compiler doesn't freak out
+//
+#ifndef __WXGTK__
+#define    wxCURSOR_DEFAULT 0
+#endif
+#ifndef __WXMAC__
+#define        wxCURSOR_COPY_ARROW 0
+#endif
+#ifndef __X__
+    // Not yet implemented for Windows
+#define    wxCURSOR_CROSS_REVERSE 0
+#define    wxCURSOR_DOUBLE_ARROW 0
+#define    wxCURSOR_BASED_ARROW_UP 0
+#define    wxCURSOR_BASED_ARROW_DOWN 0
+#endif // X11
 
 
 
