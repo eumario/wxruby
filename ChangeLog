@@ -1,3 +1,16 @@
+2004-05-31
+    * Change artprov sample to not use get_client_data
+    * Change controls sample to not use get_client_data
+    * Change controls sample to not use get_event_object
+    * Change dialogs sample to not use get_event_object
+    * Change etc/test8 sample to not use get_client_data
+    * Remove implementation of get_client_data and get_event_object
+      from all classes in wxRuby, since the existing implementation 
+      was flawed and could cause crashes. In most (all?) cases, 
+      there is a reasonable, if not better, alternate way to 
+      accomplish the same thing.
+    
+
 2004-05-29
     * Add support for ComboBox#get_value
     
