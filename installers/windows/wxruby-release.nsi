@@ -2,18 +2,18 @@
 
 ; Define your application name
 !define APPNAME "wxRuby"
-!define APPNAMEANDVERSION "wxRuby 0.5.0"
+!define APPNAMEANDVERSION "wxRuby 0.6.0"
 
-!define WXRUBY_VERSION 050
+!define WXRUBY_VERSION 060
 
-!define DATE "August 25, 2004"
+!define DATE "November 19, 2004"
 
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
 InstallDir "$PROGRAMFILES\wxRuby"
 InstallDirRegKey HKLM "Software\${APPNAME}" ""
-OutFile "wxruby-0.5.0-mswin.exe"
+OutFile "wxruby-0.6.0-mswin.exe"
 
 
 Var "RubyDir"   ; will contain the directory where Ruby is installed
@@ -150,7 +150,7 @@ Section "Sample wxRuby Programs" Section_Samples
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test8.rbw -- Choice Dialog.lnk" "$INSTDIR\samples\etc\test8.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test9.rbw -- Combo Box Dialog.rbw.lnk" "$INSTDIR\samples\etc\test9.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test10.rbw -- Gauge Dialog.lnk" "$INSTDIR\samples\etc\test10.rbw"
-    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test11.rbw -- List Box Dialoglnk" "$INSTDIR\samples\etc\test11.rbw"
+    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test11.rbw -- List Box Dialog.lnk" "$INSTDIR\samples\etc\test11.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test12.rbw -- Radio Box Dialog.lnk" "$INSTDIR\samples\etc\test12.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test13.rbw -- Radio Button Dialog.lnk" "$INSTDIR\samples\etc\test13.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test14.rbw -- Slider Dialog.lnk" "$INSTDIR\samples\etc\test14.rbw"
