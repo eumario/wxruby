@@ -490,63 +490,6 @@ bool GcIsDeleted(void *);
 #include <wx/datetime.h>
 
 
-class wxRbCallback : public wxObject 
-{
-    DECLARE_ABSTRACT_CLASS(wxRbCallback);
-public:
-    wxRbCallback(VALUE func) { m_func = func; }
-    wxRbCallback(const wxRbCallback &other) { m_func = other.m_func; }
- 
-    void GenericEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxEvent;
-        EventThunker(event, cWxEvent.klass);
-    }
-    
-    void CalendarEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxCalendarEvent;
-        EventThunker(event, cWxCalendarEvent.klass);
-    }
-    
-    void CloseEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxCloseEvent;
-        EventThunker(event, cWxCloseEvent.klass);
-    }
-    
-    void CommandEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxCommandEvent;
-        EventThunker(event, cWxCommandEvent.klass);
-    }
-    
-    void PaintEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxPaintEvent;
-        EventThunker(event, cWxPaintEvent.klass);
-    }
-    
-    void UpdateUIEventThunker(wxEvent &event)
-    {
-        extern swig_class cWxUpdateUIEvent;
-        EventThunker(event, cWxUpdateUIEvent.klass);
-    }
-    
-    void EventThunker(wxEvent &event, VALUE cEvent)
-    {
-        static VALUE vevent;
-        vevent = Data_Wrap_Struct(cEvent, 0, 0, 0);
-        DATA_PTR(vevent) = &event;
-        
-        wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
-        rb_funcall(cb->m_func, rb_intern("call"),1,vevent);
-    }
-                                                                                
-    VALUE       m_func;
-};
-
-
 extern swig_class cWxEvent;
 swig_class cWxPaintEvent;
 static void free_wxPaintEvent(wxPaintEvent *);
@@ -814,8 +757,7 @@ _wrap_disown_wxPaintEvent(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxPaintEvent, 1);
     {
-        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
-if(!director) printf("OOPS! Not a director!\n");
+Swig::Director *director = (Swig::Director*)(arg1);
         if (director) director->swig_disown();
     }
     

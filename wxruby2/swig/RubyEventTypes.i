@@ -6,6 +6,9 @@
 
 %include "common.i"
 
+%{
+#include <wx/calctrl.h>
+%}
 
     %constant const int wxEVT_NULL;// 0)
     %constant const int wxEVT_COMMAND_BUTTON_CLICKED;// 1)
@@ -129,3 +132,10 @@
     %constant const int wxEVT_COMMAND_ENTER;// 506)
     %constant const int wxEVT_HELP;// 1050)
     %constant const int wxEVT_DETAILED_HELP;// 1051)
+
+    %constant const int wxEVT_CALENDAR_SEL_CHANGED;//, 950)
+    %constant const int wxEVT_CALENDAR_DAY_CHANGED;//, 951)
+    %constant const int wxEVT_CALENDAR_MONTH_CHANGED;//, 952)
+    %constant const int wxEVT_CALENDAR_YEAR_CHANGED;//, 953)
+    %constant const int wxEVT_CALENDAR_DOUBLECLICKED;//, 954)
+    %constant const int wxEVT_CALENDAR_WEEKDAY_CLICKED;//, 955)
