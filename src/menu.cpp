@@ -79,7 +79,7 @@ VALUE WxMenu::Append(int argc, VALUE *argv, VALUE self)
 VALUE WxMenu::AppendItem(int argc, VALUE *argv, VALUE self)
 {
 	VALUE rubyItem = Qnil;
-//	int got=rb_scan_args(argc, argv, "10", &rubyItem);
+	rb_scan_args(argc, argv, "10", &rubyItem);
     wxMenuItem* item = 0;
     Data_Get_Struct(rubyItem, wxMenuItem, item);
 
