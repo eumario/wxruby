@@ -15,7 +15,8 @@ class MyCanvas < ScrolledWindow
         super(parent, -1)
     end
 
-    def OnDraw(dc)
+    def on_draw(dc)
+        #GC.start
         dc.set_pen(BLACK_PEN)
         dc.draw_line(0, 0, 100, 100)
 
