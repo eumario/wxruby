@@ -10,5 +10,6 @@
 %ignore Append(int  id , const wxString&   item , wxMenu * subMenu , const wxString&  helpString = "") ;
 %ignore Append(wxMenuItem*  menuItem ) ;
 
+GC_NEVER(wxMenu);
 
 %include "include/wxMenu.h"

@@ -7,4 +7,6 @@
 
 %ignore    wxMenuBar(int  n , wxMenu*  menus[] , const wxString  titles[] ) ;
 
+GC_NEVER(wxMenuBar);
+
 %include "include/wxMenuBar.h"
