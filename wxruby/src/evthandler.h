@@ -247,7 +247,27 @@ public:
     static void WxRbEVT_TREE_SEL_CHANGED(int argc, VALUE* argv, VALUE self);
     static void WxRbEVT_TREE_SEL_CHANGING(int argc, VALUE* argv, VALUE self);
     static void WxRbEVT_TREE_SET_INFO(int argc, VALUE* argv, VALUE self);
+    
+    static void WxRbEVT_GRID_CELL_LEFT_CLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_CELL_LEFT_DCLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_CELL_RIGHT_CLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_CELL_RIGHT_DCLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_LABEL_LEFT_CLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_LABEL_LEFT_DCLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_LABEL_RIGHT_CLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_LABEL_RIGHT_DCLICK( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_CELL_CHANGE( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_SELECT_CELL( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_EDITOR_HIDDEN( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_EDITOR_SHOWN( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_ROW_SIZE( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_COL_SIZE( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_RANGE_SELECT( int argc, VALUE* argv, VALUE self );
+	static void WxRbEVT_GRID_EDITOR_CREATED( int argc, VALUE* argv, VALUE self );
 
+
+    
+   
     static void DefineClass();
 	static VALUE rubyClass;
 };

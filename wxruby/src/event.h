@@ -75,6 +75,69 @@ public:
 };
 
 
+class WxGridEvent {
+public:
+	static VALUE alloc( VALUE self );
+	static VALUE AltDown( VALUE self );
+	static VALUE ControlDown( VALUE self );
+	static VALUE GetCol( VALUE self );
+	static VALUE GetPosition( VALUE self );
+	static VALUE GetRow( VALUE self );
+	static VALUE MetaDown( VALUE self );
+	static VALUE Selecting( VALUE self );
+	static VALUE ShiftDown( VALUE self );
+	
+	static void DefineClass();
+	static VALUE rubyClass;
+};
+
+class WxGridSizeEvent {
+public:
+	static VALUE alloc( VALUE self );
+	static VALUE AltDown( VALUE self );
+	static VALUE ControlDown( VALUE self );
+	static VALUE GetRowOrCol( VALUE self );
+	static VALUE MetaDown( VALUE self );
+	static VALUE ShiftDown( VALUE self );
+	static VALUE GetPosition( VALUE self );
+	static void DefineClass();
+	static VALUE rubyClass;
+};
+
+
+class WxGridRangeSelectEvent {
+public:
+	static VALUE alloc( VALUE self );
+	static VALUE AltDown( VALUE self );
+	static VALUE ControlDown( VALUE self );
+	static VALUE MetaDown( VALUE self );
+	static VALUE Selecting( VALUE self );
+	static VALUE ShiftDown( VALUE self );
+	static VALUE GetBottomRightCoords( VALUE self );
+	static VALUE GetTopLeftCoords( VALUE self );
+	static VALUE GetLeftCol( VALUE self );
+	static VALUE GetRightCol( VALUE self );
+	static VALUE GetTopRow( VALUE self );
+	static VALUE GetBottomRow( VALUE self );
+
+	static void DefineClass();
+	static VALUE rubyClass;
+};
+
+
+class WxGridEditorCreatedEvent {
+public:
+	static VALUE alloc( VALUE self );
+	static VALUE GetRow( VALUE self );
+	static VALUE GetCol( VALUE self );
+	static VALUE GetControl( VALUE self );
+
+	static void DefineClass();
+	static VALUE rubyClass;
+};
+
+
+
 class WxCommandEvent {
 public:
     static VALUE alloc(VALUE self);

@@ -24,6 +24,7 @@
 #include "wx/url.h"
 #include "wx/splitter.h"
 #include "wx/dnd.h"
+#include "wx/generic/grid.h"
 
 
 #include "bitmap.h"
@@ -780,6 +781,19 @@ void SetConstants() {
     rb_define_const(mWx,"EVT_COMMAND_ENTER", INT2NUM(wxEVT_COMMAND_ENTER));
     rb_define_const(mWx,"EVT_NAVIGATION_KEY", INT2NUM(wxEVT_NAVIGATION_KEY));
     rb_define_const(mWx,"EVT_TIMER", INT2NUM(wxEVT_TIMER));
+    
+    rb_define_const(mWx, "EVT_GRID_CELL_LEFT_CLICK", INT2NUM(wxEVT_GRID_CELL_LEFT_CLICK));
+    rb_define_const(mWx, "EVT_GRID_CELL_RIGHT_CLICK", INT2NUM(wxEVT_GRID_CELL_LEFT_DCLICK));
+    rb_define_const(mWx, "EVT_GRID_CELL_LEFT_DCLICK", INT2NUM(wxEVT_GRID_CELL_LEFT_CLICK));
+    rb_define_const(mWx, "EVT_GRID_CELL_RIGHT_DCLICK", INT2NUM(wxEVT_GRID_CELL_RIGHT_DCLICK));
+    rb_define_const(mWx, "EVT_GRID_LABEL_LEFT_CLICK", INT2NUM(wxEVT_GRID_LABEL_LEFT_CLICK));
+    rb_define_const(mWx, "EVT_GRID_LABEL_RIGHT_CLICK", INT2NUM(wxEVT_GRID_LABEL_LEFT_DCLICK));
+    rb_define_const(mWx, "EVT_GRID_LABEL_LEFT_DCLICK", INT2NUM(wxEVT_GRID_LABEL_RIGHT_CLICK));
+    rb_define_const(mWx, "EVT_GRID_LABEL_RIGHT_DCLICK", INT2NUM(wxEVT_GRID_LABEL_RIGHT_DCLICK));
+    rb_define_const(mWx, "EVT_GRID_CELL_CHANGE", INT2NUM(wxEVT_GRID_CELL_CHANGE));
+    rb_define_const(mWx, "EVT_GRID_SELECT_CELL", INT2NUM(wxEVT_GRID_SELECT_CELL));
+    rb_define_const(mWx, "EVT_GRID_EDITOR_HIDDEN", INT2NUM(wxEVT_GRID_EDITOR_HIDDEN));
+    rb_define_const(mWx, "EVT_GRID_EDITOR_SHOWN", INT2NUM(wxEVT_GRID_EDITOR_SHOWN));
 
     rb_define_const(mWx,"SOCKET_INPUT", INT2NUM(wxSOCKET_INPUT));
     rb_define_const(mWx,"SOCKET_OUTPUT", INT2NUM(wxSOCKET_OUTPUT));

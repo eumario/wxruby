@@ -18,7 +18,91 @@ class MyFrame < Wx::Frame
     panel = Wx::Panel.new(self)
     
     make_grid(panel) 
+
+    evt_grid_cell_left_click() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} is clicked")
+    	evt.skip
+    end 
+
+    evt_grid_cell_right_click() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} is right clicked")
+    	evt.skip
+    end 
+
+    evt_grid_cell_left_dclick() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} is double clicked")
+    	evt.skip
+    end 
+
+    evt_grid_cell_right_dclick() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} is right double clicked")
+    	evt.skip
+    end 
+
+    evt_grid_label_left_click() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} label is clicked")
+    	evt.skip
+    end 
+
+    evt_grid_label_right_click() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} label is right clicked")
+    	evt.skip
+    end 
+
+    evt_grid_label_left_dclick() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} labelis double clicked")
+    	evt.skip
+    end 
+
+    evt_grid_label_right_dclick() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} label is right double clicked")
+    	evt.skip
+    end 
+
+    evt_grid_select_cell() do |evt|
+    	set_status_text("#{evt.get_row} x #{evt.get_col} cell is selected")
+    	evt.skip
+    end
     
+    evt_grid_row_size do |evt|
+    	set_status_text("Row #{evt.get_row_or_col} size changed")
+    	evt.skip
+    end
+
+    evt_grid_col_size do |evt|
+    	set_status_text("Column #{evt.get_row_or_col} size changed")
+    	evt.skip
+    end
+
+    evt_grid_editor_shown do |evt|
+    	set_status_text("Begin editing")
+    	evt.skip
+    end
+
+    evt_grid_editor_hidden do |evt|
+    	set_status_text("End editing")
+    	evt.skip
+    end
+
+
+
+    evt_grid_range_select do |evt|
+    	top = evt.get_top_left_coords
+    	bottom = evt.get_bottom_right_coords
+    	set_status_text("[ #{top[0].to_s} x #{top[1].to_s} ] to [ #{bottom[0].to_s} x #{bottom[1].to_s} ] is selected")
+    end 
+
+    evt_grid_editor_created do |evt|
+    	set_status_text("Control #{evt.get_control} created")
+    	evt.skip
+    end
+
+
+
+
+    evt_grid_cell_change() do |evt|
+    	set_status_text("Cell #{evt.get_row} x #{evt.get_col} has changed")
+    end
   end
 
   def make_grid(panel)
