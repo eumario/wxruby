@@ -46,6 +46,12 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
 
     CONFIG['CC'] = "g++"
     CONFIG['LDSHARED'].gsub!("cc","g++")
+    if (!$DEBUG)
+      CONFIG['CFLAGS'].gsub!("-g","")
+    else
+      CONFIG['CFLAGS'].gsub!("-Os","-O0")
+    end
+
     $CFLAGS += " `wx-config --cxxflags` "
     $CPPFLAGS += ' -x objective-c++ '
     $LDFLAGS += " `wx-config --libs` -framework Carbon "

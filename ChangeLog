@@ -1,3 +1,13 @@
+2004-03-11
+    * Updated extconf.rb for important Mac fix
+    * Tagged tree as 0.2.1
+    
+
+2004-03-10
+    * Updated README files in preparation for 0.2 release
+    * Tagged tree as 0.2
+    
+
 2004-01-29
     * Integrated Nick's Mac OS X changes
     * Fix Menu#append_item which was completely broken
