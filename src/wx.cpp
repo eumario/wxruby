@@ -936,10 +936,6 @@ SWIGEXPORT(void) Init_wx(void) {
     
     rb_define_const(mWx,"VERSION_STRING", rb_str_new2("wxRuby-SWIG 0.0.3"));
     rb_define_module_function(mWx, "message_box", VALUEFUNC(_wrap_wxMessageBox), -1);
-    
-    rb_define_const(mWx,"XXX", INT2NUM(777));
-    printf("Defined XXX = %d\n", NUM2INT(rb_iv_get(mWx, "XXX")));
-    
 }
 
 

@@ -738,6 +738,16 @@ static VALUE evt_idle(int argc, VALUE *argv, VALUE self)
     return internal_evt_no_parameters(argc, argv, self, wxEVT_IDLE);
 }
 
+static VALUE evt_show(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SHOW);
+}
+
+static VALUE evt_window_create(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_CREATE);
+}
+
 
 /***********************************************************************
  * director.swg
@@ -1337,7 +1347,9 @@ mWxEvtHandler = mWx;
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_year", VALUEFUNC(evt_calendar_year), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_weekday_clicked", VALUEFUNC(evt_calendar_weekday_clicked), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_idle", VALUEFUNC(evt_idle), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_show", VALUEFUNC(evt_show), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_update_ui", VALUEFUNC(evt_update_ui), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_window_create", VALUEFUNC(evt_window_create), -1);
     
     rb_define_method(cWxEvtHandler.klass, "evt_paint", VALUEFUNC(evt_paint), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_close", VALUEFUNC(evt_close), -1);

@@ -5,6 +5,7 @@
 
 %module(directors="1") wxObject
 
+%ignore wxObject(wxObject const &other);
 %ignore wxObject::Dump;
 
 %include "include/wxObject.h"
