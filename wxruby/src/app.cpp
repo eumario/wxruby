@@ -137,7 +137,10 @@ VALUE WxApp::init(VALUE self)
 	if(rb_respond_to(self,rb_intern("on_init")))
 	  rb_funcall(self,rb_intern("on_init"),0);
 	else if(rb_respond_to(self,rb_intern("OnInit")))
+    {
+      printf("wxRuby WARNING: OnInit should now be named on_init\n");
 	  rb_funcall(self,rb_intern("OnInit"),0);
+    }
 
 	return self;
 }

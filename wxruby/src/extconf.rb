@@ -111,17 +111,19 @@ wx.res : wx.rc
     }
 end
 
-File.open("Makefile","ab+") {|f|
-	f.puts
-	f.puts("tclean:; @$(RM) button.h caret.h checkbox.h choice.h " + 
-			"colourdialog.h control.h dataformat.h " + 
-			"dataobjectsimple.h dropsource.h droptarget.h " + 
-			"filedataobject.h filedroptarget.h font.h frame.h " + 
-			"grid.h menuitem.h textattr.h textctrl.h " + 
-			"textdataobject.h textdroptarget.h " + 
-			"togglebutton.h window.h xmlresource.h")
-	f.puts
+
+#### Automatically build tclean target based on existing .t files
+template_files = Dir['*.t'].sort
+h_files_built_from_templates = template_files.map do |fn| 
+    fn.sub('.t','.h')
+end
+File.open("Makefile","ab+"){|f|
+  f.puts
+  f.puts("tclean:; @$(RM) "+(h_files_built_from_templates.join(' ')))
+  f.puts
 }
+
+
 
 
 =begin

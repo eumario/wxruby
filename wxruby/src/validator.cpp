@@ -15,13 +15,23 @@
 #include "window.h"
 #include "validator.h"
 
+wxRbValidator::wxRbValidator(const wxRbValidator& original)
+{
+    printf("wxRbValidator copy constructor called\n");
+    SetWindow(original.GetWindow());
+}
+
 wxObject *
-wxRbValidator::Clone()
+wxRbValidator::Clone() const
 {
   wxRbValidator *ptr = NULL;
-  if(rb_respond_to(self, rb_intern("Clone"))) {
-    VALUE klass = rb_funcall(self,rb_intern("Clone"),0);
+  if(rb_respond_to(self, rb_intern("clone"))) {
+    VALUE klass = rb_funcall(self,rb_intern("clone"),0);
     Data_Get_Struct(klass, wxRbValidator, ptr);
+  }
+  else
+  {
+      printf("wxRuby WARNING: Validator must define clone()\n");
   }
   return (wxObject*)ptr;
 }
@@ -30,8 +40,8 @@ bool
 wxRbValidator::TransferFromWindow()
 {
   bool value = FALSE;
-  if(rb_respond_to(self, rb_intern("TransferFromWindow"))) {
-    value = (rb_funcall(self,rb_intern("TransferFromWindow"),0) == Qtrue);
+  if(rb_respond_to(self, rb_intern("transfer_from_window"))) {
+    value = (rb_funcall(self,rb_intern("transfer_from_window"),0) == Qtrue);
   }
   return value;
 }
@@ -40,8 +50,8 @@ bool
 wxRbValidator::TransferToWindow()
 {
   bool value = FALSE;
-  if(rb_respond_to(self, rb_intern("TransferToWindow"))) {
-    value = (rb_funcall(self,rb_intern("TransferToWindow"),0) == Qtrue);
+  if(rb_respond_to(self, rb_intern("transfer_to_window"))) {
+    value = (rb_funcall(self,rb_intern("transfer_to_window"),0) == Qtrue);
   }
   return value;
 }
@@ -51,8 +61,8 @@ wxRbValidator::Validate(wxWindow* parent)
 {
   bool value = FALSE;
   VALUE ptr = WxWindow::init0(parent);
-  if(rb_respond_to(self, rb_intern("Validate"))) {
-    value = (rb_funcall(self,rb_intern("Validate"),1,ptr) == Qtrue);
+  if(rb_respond_to(self, rb_intern("validate"))) {
+    value = (rb_funcall(self,rb_intern("validate"),1,ptr) == Qtrue);
   }
   return value;
 }
@@ -101,7 +111,8 @@ WxValidator::GetWindow(VALUE self)
 {
     wxRbValidator *ptr;
     Data_Get_Struct(self, wxRbValidator, ptr);
-    return WxWindow::init0(ptr->GetWindow());
+    wxWindow* window = ptr->GetWindow();
+    return WxRbTypeTable::ConvertCppObject(window);
 }
 
 void

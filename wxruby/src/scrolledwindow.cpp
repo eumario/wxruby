@@ -242,5 +242,5 @@ wxRbScrolledWindow::OnDraw(wxDC& dc)
     void *data = GetClientData();
     VALUE vdc = WxDC::init0(&dc);
     VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
-    rb_funcall(self,rb_intern("OnDraw"),1,vdc);
+    rb_funcall(self,rb_intern("on_draw"),1,vdc);
 }

@@ -18,7 +18,8 @@ class wxRbValidator : public wxValidator
 {
 public:
   wxRbValidator(VALUE klass) { self = klass;}
-  virtual wxObject* Clone();
+  wxRbValidator(const wxRbValidator& original);
+  virtual wxObject* Clone() const;
   virtual bool TransferFromWindow();
   virtual bool TransferToWindow();
   virtual bool Validate(wxWindow* parent);
