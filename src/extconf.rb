@@ -19,7 +19,7 @@ $objs = [
 "dynamiccast.o"
 ]
 
-$use_xrc = true
+$use_xrc = false
 dir_config("xrc");
 
 #
