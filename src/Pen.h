@@ -14,15 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxPen : public wxPen, public Swig::Director {
-
-public:
-    SwigDirector_wxPen(VALUE self, bool disown = false);
-    SwigDirector_wxPen(VALUE self, wxColour const &colour, int width, int style, bool disown = false);
-    SwigDirector_wxPen(VALUE self, wxString const &colourName, int width, int style, bool disown = false);
-    SwigDirector_wxPen(VALUE self, wxBitmap const &stipple, int width, bool disown = false);
-    SwigDirector_wxPen(VALUE self, wxPen const &pen, bool disown = false);
-};
-
-
 #endif
