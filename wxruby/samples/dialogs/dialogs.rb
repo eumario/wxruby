@@ -55,13 +55,14 @@ class MyModalDialog < Dialog
     end
 
     def onButton(event)
-
-        if event.get_event_object() == @m_btnDelete
+        id = event.get_id
+        
+        if id == @m_btnDelete.get_id
             @m_btnFocused.free
             @m_btnFocused = nil
 
             @m_btnDelete.disable()
-        elsif event.get_event_object() == @m_btnFocused
+        elsif id == @m_btnFocused.get_id
             get_text_from_user("Dummy prompt",
                               "Modal dialog called from dialog",
                               "", self)
