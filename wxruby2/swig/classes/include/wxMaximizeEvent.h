@@ -8,6 +8,11 @@
 class wxMaximizeEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param int   
+	*/
+
    wxMaximizeEvent(int  id = 0) ;
 };
 

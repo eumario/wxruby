@@ -7,7 +7,11 @@
 
 %{
 #ifdef __WXMAC__
+#if wxMINOR_VERSION == 4
 int wxEntry( int argc, char *argv[],bool val=true );
+#else
+int wxEntry( int &argc, char *argv[]);
+#endif
 #else
 int wxEntry( int argc, char *argv[]);
 #endif
@@ -91,7 +95,9 @@ public:
         printf("OnExit...\n");
         rb_gc_start();
         printf("survived gc\n");
+#if !wxCHECK_VERSION(2,5,0)
         wxTheApp = 0;
+#endif
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
         if ( oldlog )
@@ -139,8 +145,10 @@ public:
   ;
   bool ProcessMessage(WXMSG * msg ) ;
   bool Pending() ;
+#if 0
   bool SendIdleEvents() ;
   bool SendIdleEvents(wxWindow*  win ) ;
+#endif
   void SetAppName(const wxString&  name ) ;
   void SetAuto3D(const bool  auto3D ) ;
   void SetClassName(const wxString&  name ) ;

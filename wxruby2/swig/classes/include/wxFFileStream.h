@@ -8,6 +8,12 @@
 class wxFFileStream : public wxFFileOutputStream
 {
 public:
+	/**
+	 * \brief Initializes a new file stream in read-write mode using the specified 
+  name. 
+	 * \param const wxString&  
+	*/
+
    wxFFileStream(const wxString&  iofileName ) ;
 };
 

@@ -8,7 +8,7 @@
 %ignore wxControlWithItems::Append(const wxString&   item);
 %ignore wxControlWithItems::Append(const wxString&   item , wxClientData * clientData );
 %ignore wxControlWithItems::Append(const wxArrayString&  strings );
-
+%ignore wxControlWithItems::Number;
 %ignore wxControlWithItems::Clear;
 %ignore wxControlWithItems::Insert;
 %ignore wxControlWithItems::IsEmpty;

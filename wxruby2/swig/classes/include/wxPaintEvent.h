@@ -8,6 +8,11 @@
 class wxPaintEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param int   
+	*/
+
    wxPaintEvent(int  id = 0) ;
   // the following were missing from the xml
   virtual ~wxPaintEvent();

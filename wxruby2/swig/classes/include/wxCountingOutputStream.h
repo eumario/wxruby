@@ -8,8 +8,20 @@
 class wxCountingOutputStream : public wxOutputStream
 {
 public:
+	/**
+	 * \brief Creates a wxCountingOutputStream object. 
+	*/
+
    wxCountingOutputStream() ;
+	/**
+	 * \brief Destructor. 
+	*/
+
   virtual  ~wxCountingOutputStream() ;
+	/**
+	 * \brief Returns the current size of the stream. 
+	*/
+
   size_t GetSize() const;
 };
 

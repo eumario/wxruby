@@ -8,7 +8,17 @@
 class wxMouseCaptureChangedEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param wxWindowID   
+	 * \param wxWindow*  
+	*/
+
    wxMouseCaptureChangedEvent(wxWindowID  windowId = 0, wxWindow* gainedCapture = NULL) ;
+	/**
+	 * \brief Returns the window that gained the capture, or NULL if it was a non-wxWindows window. 
+	*/
+
   wxWindow* GetCapturedWindow() const;
 };
 

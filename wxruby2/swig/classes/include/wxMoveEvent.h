@@ -8,7 +8,17 @@
 class wxMoveEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param const wxPoint&   
+	 * \param int   
+	*/
+
    wxMoveEvent(const wxPoint&  pt , int  id = 0) ;
+	/**
+	 * \brief Returns the position of the window generating the move change event. 
+	*/
+
   wxPoint GetPosition() const;
 };
 

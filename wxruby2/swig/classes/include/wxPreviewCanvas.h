@@ -8,8 +8,27 @@
 class wxPreviewCanvas : public wxScrolledWindow
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param wxPrintPreview*   
+	 * \param wxWindow*   
+	 * \param const wxPoint&   
+	 * \param const wxSize&   
+	 * \param long  
+	 * \param const wxString&   
+	*/
+
    wxPreviewCanvas(wxPrintPreview*  preview , wxWindow*  parent , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "canvas") ;
+	/**
+	 * \brief Destructor. 
+	*/
+
   virtual  ~wxPreviewCanvas() ;
+	/**
+	 * \brief Calls   to refresh the canvas. 
+	 * \param wxPaintEvent&   
+	*/
+
   virtual void OnPaint(wxPaintEvent&  event ) ;
 };
 

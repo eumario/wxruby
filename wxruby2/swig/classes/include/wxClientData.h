@@ -8,7 +8,15 @@
 class wxClientData
 {
 public:
+	/**
+	 * \brief Constructor. 
+	*/
+
    wxClientData() ;
+	/**
+	 * \brief Virtual destructor. 
+	*/
+
   virtual  ~wxClientData() ;
 };
 

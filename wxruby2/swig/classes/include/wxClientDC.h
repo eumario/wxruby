@@ -8,6 +8,11 @@
 class wxClientDC : public wxWindowDC
 {
 public:
+	/**
+	 * \brief Constructor. Pass a pointer to the window on which you wish to paint. 
+	 * \param wxWindow*  
+	*/
+
    wxClientDC(wxWindow*  window ) ;
 };
 

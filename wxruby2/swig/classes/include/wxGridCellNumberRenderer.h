@@ -8,6 +8,10 @@
 class wxGridCellNumberRenderer : public wxGridellStringRenderer
 {
 public:
+	/**
+	 * \brief Default constructor 
+	*/
+
    wxGridCellNumberRenderer() ;
 };
 

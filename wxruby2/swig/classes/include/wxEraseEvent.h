@@ -8,7 +8,17 @@
 class wxEraseEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param int   
+	 * \param wxDC*   
+	*/
+
    wxEraseEvent(int  id = 0, wxDC*  dc = NULL) ;
+	/**
+	 * \brief Returns the device context to draw into. 
+	*/
+
   wxDC* GetDC() const;
 };
 

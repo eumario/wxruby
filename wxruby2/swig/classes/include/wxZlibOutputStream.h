@@ -8,6 +8,15 @@
 class wxZlibOutputStream : public wxFilterOutputStream
 {
 public:
+	/**
+	 * \brief Creates a new write-only compressed stream.   means level of 
+compression. It is number between 0 and 9 (including these values) where
+0 means no compression and 9 best but slowest compression. -1 is default
+value (currently equivalent to 6). 
+	 * \param wxOutputStream&  
+	 * \param int  
+	*/
+
    wxZlibOutputStream(wxOutputStream&  stream , int level = -1) ;
 };
 

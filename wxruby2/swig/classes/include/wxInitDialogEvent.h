@@ -8,6 +8,11 @@
 class wxInitDialogEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param int   
+	*/
+
    wxInitDialogEvent(int  id = 0) ;
 };
 

@@ -25,6 +25,8 @@
   delete $2;
 }
 
+%ignore wxFrame::Command;
+
 GC_NEVER(wxFrame);
 
 %include "include/wxFrame.h"

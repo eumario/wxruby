@@ -8,7 +8,17 @@
 class wxPoint
 {
 public:
+	/**
+	 * \brief  
+	*/
+
    wxPoint() ;
+	/**
+	 * \brief Create a point. 
+	 * \param int  
+	 * \param int  
+	*/
+
    wxPoint(int  x , int  y ) ;
   // the following were missing from the xml
   int x;

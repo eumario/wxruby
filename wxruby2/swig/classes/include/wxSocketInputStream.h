@@ -8,6 +8,12 @@
 class wxSocketInputStream : public wxInputStream
 {
 public:
+	/**
+	 * \brief Creates a new read-only socket stream using the specified initialized
+socket connection. 
+	 * \param wxSocketBase&  
+	*/
+
    wxSocketInputStream(wxSocketBase&  s ) ;
 };
 

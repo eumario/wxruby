@@ -1,4 +1,9 @@
 xml_file = ARGV[0]
+
+if (ARGV.length > 1)
+  $wx_version = ARGV[1]
+end
+
 input_dir = File.dirname(xml_file)
 output_dir = File.join(input_dir, "classes/include")
 
@@ -122,6 +127,11 @@ $fixes =
     'bool Create(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxString&  name = "choice")' =>
     'bool Create(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "choice")',
     },
+    'wxClassInfo'=> 
+    {
+    'wxClassInfo(char*  className , char*  baseClass1 , char*  baseClass2 , int  size , wxObjectConstructorFn  fn )'=>
+    '//wxClassInfo(char*  className , char*  baseClass1 , char*  baseClass2 , int  size , wxObjectConstructorFn  fn )',
+    },
     'wxCloseEvent' =>
     {
     'void SetLoggingOff(bool  loggingOff ) const' =>
@@ -167,6 +177,15 @@ $fixes =
     {
     'wxCursor(const char  bits[] , int  width , int   height , int  hotSpotX = -1, int  hotSpotY = -1, const char  maskBits[] = NULL)'=>
     '//wxCursor(const char  bits[] , int  width , int   height , int  hotSpotX = -1, int  hotSpotY = -1, const char  maskBits[] = NULL)',
+    },
+    'wxDataObject'=>
+    {
+    'virtual void GetAllFormats(wxDataFormat * formats , Direction dir = Get) const'=>
+    'virtual void GetAllFormats(wxDataFormat * formats , wxDataObject::Direction dir = Get) const= 0',
+    'virtual size_t GetFormatCount(Direction dir = Get) const'=>
+    'virtual size_t GetFormatCount(wxDataObject::Direction dir = Get) const=0',
+    'virtual wxDataFormat GetPreferredFormat(Direction dir = Get) const'=>
+    'virtual wxDataFormat GetPreferredFormat(wxDataObject::Direction dir = Get) const=0',
     },
     'wxDialog' =>
     {
@@ -383,8 +402,44 @@ $fixes =
     },
 }
 
+$fixes_2_5 = {
+
+	'wxApp'=>
+	{
+	'bool SendIdleEvents()'=>
+	'//bool SendIdleEvents()',
+	'bool SendIdleEvents(wxWindow*  win )'=>
+	'bool SendIdleEvents(wxWindow*  win, wxIdleEvent &evt )',
+	},
+	'wxDC'=> 
+	{
+	'wxBrush& GetBrush()'=>
+	'//wxBrush& GetBrush()',
+	'wxBrush& GetBackground()'=>
+	'//wxBrush& GetBackground()',
+	'wxColour& GetTextBackground()'=>
+	'//wxColour& GetTextBackground()',
+	'wxFont& GetFont()'=>
+	'//wxFont& GetFont()',
+	'wxPen& GetPen()'=>
+	'//wxPen& GetPen()',
+	'wxColour& GetTextForeground()'=>
+	'//wxColour& GetTextForeground()',
+	},
+	'wxImage'=>
+	{
+	'wxImage(const wxBitmap&  bitmap )'=>
+	'//wxImage(const wxBitmap&  bitmap )',
+	'wxBitmap ConvertToBitmap() const'=>
+	'//wxBitmap ConvertToBitmap() const',
+	'bool Destroy()'=>
+	'void Destroy()',
+	},
+}
+
 def fix_error_in_xml(class_name, method_proto)
     class_fixes = $fixes[class_name]
+	class_fixes_25 = $fixes_2_5[class_name]
     if(class_fixes)
         #puts("Checking fixes for #{class_name}")
         #puts(method_proto)
@@ -399,6 +454,20 @@ def fix_error_in_xml(class_name, method_proto)
             end
             return fixed_proto
         end
+    end
+    if (class_fixes_25 != nil) and ($wx_version.index("2.5") != -1)
+        key = method_proto.strip
+        fixed_proto = class_fixes_25[key]
+        if(fixed_proto)
+            #puts
+            #puts("Applying fix: #{fixed_proto}")
+            class_fixes_25.delete(key)
+            if(class_fixes_25.size == 0)
+                $fixes.delete(class_name)
+            end
+            return fixed_proto
+        end
+
     end
     return method_proto
 end
@@ -427,6 +496,10 @@ $missing =
     'wxBitmap& GetBitmapLabel()',
     'wxBitmap& GetBitmapSelected()',
     ],
+    'wxClassInfo'=>
+    [
+    'private: wxClassInfo(); public:'
+    ],
     'wxChoice' =>
     [
     'void SetSelection(int  n )',
@@ -437,6 +510,10 @@ $missing =
     'void Append(const wxString& item)',
 	'void SetSelection(int n)',
 	'void SetStringSelection(wxString &)',
+    ],
+    'wxDataObject'=>
+    [
+    'enum Direction { Get=0x01, Set=0x02};'
     ],
 	'wxListBox'=>
 	[
@@ -620,14 +697,25 @@ $event_fixes = {
 
 
 class WxParameter
+    attr_reader :parameter_type, :description
+
+	def type
+		return @parameter_type
+	end
+
     def initialize(node)
+		@description = ""
         @parameter_type = node.attributes['type']
         @name = node.attributes['name']
         @value = node.attributes['value']
+		node.each_element('description') do |elm|
+			@description = elm.texts.join(" ").strip
+		end
+
         if(@value)
             @value.gsub!(/``/, '"')
-	    if (/^[\"]/ =~ @value) and not ( /^[\"].*[\"]/ =~ @value)
-                @value = "#{@value}\""
+		    if (/^[\"]/ =~ @value) and not ( /^[\"].*[\"]/ =~ @value)
+       	         @value = "#{@value}\""
             end
         end
     end
@@ -643,7 +731,7 @@ class WxParameter
 end
 
 class WxMethod
-    attr_reader :name
+    attr_reader :name 
     
     def initialize(node, function_name)
         # sometimes the member name is right and the
@@ -651,16 +739,35 @@ class WxMethod
         @name = function_name
         @return_type = node.attributes['type']
         @suffix = node.attributes['suffix']
+		@description = "";
+
         @parameters = []
         node.each_element('parameters/parameter') do | parameter |
           @parameters << WxParameter.new(parameter)
         end
+		node.each_element('description') do |elm|
+			@description = elm.texts.join(" ").strip
+		end
+
+
     end
     
     def clear_type
         @return_type = ''
     end
     
+    def description
+        desc = "\t/**\n"
+		desc += "\t * \\brief #{@description.to_s} \n"
+		
+		@parameters.each do |p|
+			desc += "\t * \\param #{p.type.to_s} #{p.description.to_s} \n"
+		end
+		desc += "\t*/\n"
+
+		return desc
+	end
+
     def to_s
         params = @parameters.collect do | p |
             p.to_s
@@ -695,6 +802,9 @@ puts("Class: #{@name}: #{node.xpath}")
             if(class_info.xpath =~ /events$/)
                 load_events(class_info)
             end
+			if (class_info.xpath =~ /description/)
+				@description = class_info.to_s
+			end
         end
     end
 
@@ -769,6 +879,7 @@ puts("Class: #{@name}: #{node.xpath}")
                 fixed += ' = 0'
                 #puts("Found pure: #{member.name}")
             end
+			lines << member.description
             lines << "  #{fixed};"
         end
         missing_from_xml = get_missing_methods(@name)

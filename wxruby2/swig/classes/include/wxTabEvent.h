@@ -8,6 +8,12 @@
 class wxTabEvent : public wxCommandEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param WXTYPE  
+	 * \param int  
+	*/
+
    wxTabEvent(WXTYPE commandType = 0, int id = 0) ;
 };
 

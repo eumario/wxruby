@@ -8,6 +8,10 @@
 class wxTimerEvent
 {
 public:
+	/**
+	 * \brief Returns the interval of the timer which generated this event. 
+	*/
+
   int GetInterval() const;
 };
 

@@ -8,7 +8,18 @@
 class wxDataObjectComposite : public wxDataObject
 {
 public:
+	/**
+	 * \brief The default constructor. 
+	*/
+
    wxDataObjectComposite() ;
+	/**
+	 * \brief Adds the   to the list of supported objects and it becomes the
+preferred object if   is true. 
+	 * \param wxDataObjectSimple   
+	 * \param bool   
+	*/
+
   void Add(wxDataObjectSimple  *dataObject , bool  preferred = false) ;
 };
 

@@ -8,9 +8,28 @@
 class wxSocketEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param int  
+	*/
+
    wxSocketEvent(int id = 0) ;
+	/**
+	 * \brief Gets the client data of the socket which generated this event, as
+set with  . 
+	*/
+
   void * GetClientData() ;
+	/**
+	 * \brief Returns the socket object to which this event refers to. This makes
+it possible to use the same event handler for different sockets. 
+	*/
+
   wxSocketBase * GetSocket() const;
+	/**
+	 * \brief Returns the socket event type. 
+	*/
+
   wxSocketNotify GetSocketEvent() const;
 };
 

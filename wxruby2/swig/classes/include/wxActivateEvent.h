@@ -8,7 +8,18 @@
 class wxActivateEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param WXTYPE   
+	 * \param bool  
+	 * \param int   
+	*/
+
    wxActivateEvent(WXTYPE  eventType = 0, bool active = true, int  id = 0) ;
+	/**
+	 * \brief Returns true if the application or window is being activated, false otherwise. 
+	*/
+
   bool GetActive() const;
 };
 

@@ -8,6 +8,18 @@
 class wxHtmlTagsModule : public wxModule
 {
 public:
+	/**
+	 * \brief You must override this method. In most common case its body consists
+only of lines of the following type:
+
+ 
+
+I recommend using the   macros.
+
+\wxheading{Paremeters} 
+	 * \param wxHtmlWinParser   
+	*/
+
   virtual void FillHandlersTable(wxHtmlWinParser  *parser ) ;
 };
 

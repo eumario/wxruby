@@ -8,6 +8,12 @@
 class wxFocusEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param WXTYPE   
+	 * \param int   
+	*/
+
    wxFocusEvent(WXTYPE  eventType = 0, int  id = 0) ;
 };
 

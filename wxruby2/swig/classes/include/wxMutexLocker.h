@@ -8,8 +8,23 @@
 class wxMutexLocker
 {
 public:
+	/**
+	 * \brief Constructs a wxMutexLocker object associated with mutex and locks it.
+Call   to check if the mutex was
+successfully locked. 
+	 * \param wxMutex&  
+	*/
+
    wxMutexLocker(wxMutex&  mutex ) ;
+	/**
+	 * \brief Destructor releases the mutex if it was successfully acquired in the ctor. 
+	*/
+
   virtual  ~wxMutexLocker() ;
+	/**
+	 * \brief Returns true if mutex was acquired in the constructor, false otherwise. 
+	*/
+
   bool IsOk() const;
 };
 

@@ -8,6 +8,12 @@
 class wxHtmlColourCell : public wxHtmlCell
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param wxColour   
+	 * \param int   
+	*/
+
    wxHtmlColourCell(wxColour  clr , int  flags = wxHTML_CLR_FOREGROUND) ;
 };
 

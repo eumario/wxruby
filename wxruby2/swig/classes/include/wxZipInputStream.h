@@ -8,6 +8,12 @@
 class wxZipInputStream : public wxInputStream
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param const wxString&   
+	 * \param const wxString&   
+	*/
+
    wxZipInputStream(const wxString&  archive , const wxString&  file ) ;
 };
 

@@ -8,10 +8,44 @@
 class wxFindReplaceDialog : public wxDialog
 {
 public:
+	/**
+	 * \brief  
+	*/
+
    wxFindReplaceDialog() ;
+	/**
+	 * \brief After using default constructor   
+must be called.
+
+The   and   parameters must be non- . 
+	 * \param wxWindow *   
+	 * \param wxFindReplaceData*   
+	 * \param const wxString&   
+	 * \param int   
+	*/
+
    wxFindReplaceDialog(wxWindow *  parent , wxFindReplaceData*  data , const wxString&  title , int  style = 0) ;
+	/**
+	 * \brief Destructor. 
+	*/
+
   virtual  ~wxFindReplaceDialog() ;
+	/**
+	 * \brief Creates the dialog; use   to show it on screen.
+
+The   and   parameters must be non- . 
+	 * \param wxWindow *   
+	 * \param wxFindReplaceData*   
+	 * \param const wxString&   
+	 * \param int   
+	*/
+
   bool Create(wxWindow *  parent , wxFindReplaceData*  data , const wxString&  title , int  style = 0) ;
+	/**
+	 * \brief Get the   object used by this
+dialog. 
+	*/
+
   const wxFindReplaceData* GetData() const;
 };
 

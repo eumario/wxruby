@@ -8,7 +8,18 @@
 class wxIconizeEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	 * \param int   
+	 * \param bool   
+	*/
+
    wxIconizeEvent(int  id = 0, bool  iconized = true) ;
+	/**
+	 * \brief Returns   if the frame has been iconized,   if it has been
+restored. 
+	*/
+
   bool Iconized() const;
 };
 

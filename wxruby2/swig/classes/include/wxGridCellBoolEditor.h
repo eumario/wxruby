@@ -8,6 +8,10 @@
 class wxGridCellBoolEditor : public wxGridCellEditor
 {
 public:
+	/**
+	 * \brief Default constructor. 
+	*/
+
    wxGridCellBoolEditor() ;
 };
 

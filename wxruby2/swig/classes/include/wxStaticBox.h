@@ -8,9 +8,40 @@
 class wxStaticBox : public wxControl
 {
 public:
+	/**
+	 * \brief Default constructor. 
+	*/
+
    wxStaticBox() ;
+	/**
+	 * \brief Constructor, creating and showing a static box. 
+	 * \param wxWindow*   
+	 * \param wxWindowID   
+	 * \param const wxString&   
+	 * \param const wxPoint&  
+	 * \param const wxSize&   
+	 * \param long  
+	 * \param const wxString&   
+	*/
+
    wxStaticBox(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBox") ;
+	/**
+	 * \brief Destructor, destroying the group box. 
+	*/
+
   virtual  ~wxStaticBox() ;
+	/**
+	 * \brief Creates the static box for two-step construction. See  
+for further details. 
+	 * \param wxWindow*   
+	 * \param wxWindowID   
+	 * \param const wxString&   
+	 * \param const wxPoint&  
+	 * \param const wxSize&   
+	 * \param long  
+	 * \param const wxString&   
+	*/
+
   bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBox") ;
 };
 

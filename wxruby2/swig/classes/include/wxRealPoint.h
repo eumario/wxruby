@@ -8,7 +8,23 @@
 class wxRealPoint
 {
 public:
+	/**
+	 * \brief  
+	*/
+
    wxRealPoint() ;
+	/**
+	 * \brief Create a point.
+
+\member{double}{ x}
+
+\member{double}{ y}
+
+Members of the   object. 
+	 * \param double  
+	 * \param double  
+	*/
+
    wxRealPoint(double  x , double  y ) ;
 };
 

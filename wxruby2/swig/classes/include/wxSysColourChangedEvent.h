@@ -8,6 +8,10 @@
 class wxSysColourChangedEvent : public wxEvent
 {
 public:
+	/**
+	 * \brief Constructor. 
+	*/
+
    wxSysColourChanged() ;
 };
 

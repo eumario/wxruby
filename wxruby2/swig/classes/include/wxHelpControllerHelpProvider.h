@@ -8,8 +8,23 @@
 class wxHelpControllerHelpProvider : public wxSimpleHelpProvider
 {
 public:
+	/**
+	 * \brief Note that the instance doesn't own the help controller. The help controller
+should be deleted separately. 
+	 * \param wxHelpControllerBase*   
+	*/
+
    wxHelpControllerHelpProvider(wxHelpControllerBase*  hc = NULL) ;
+	/**
+	 * \brief Sets the help controller associated with this help provider. 
+	 * \param wxHelpControllerBase*   
+	*/
+
   void SetHelpController(wxHelpControllerBase*  hc ) ;
+	/**
+	 * \brief Returns the help controller associated with this help provider. 
+	*/
+
   wxHelpControllerBase* GetHelpController() const;
 };
 

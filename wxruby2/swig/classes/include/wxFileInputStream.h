@@ -8,10 +8,33 @@
 class wxFileInputStream : public wxInputStream
 {
 public:
+	/**
+	 * \brief Opens the specified file using its   name in read-only mode. 
+	 * \param const wxString&  
+	*/
+
    wxFileInputStream(const wxString&  ifileName ) ;
+	/**
+	 * \brief Initializes a file stream in read-only mode using the file I/O object  . 
+	 * \param wxFile&  
+	*/
+
    wxFileInputStream(wxFile&  file ) ;
+	/**
+	 * \brief Initializes a file stream in read-only mode using the specified file descriptor. 
+	 * \param int  
+	*/
+
    wxFileInputStream(int  fd ) ;
+	/**
+	 * \brief Destructor. 
+	*/
+
   virtual  ~wxFileInputStream() ;
+	/**
+	 * \brief Returns true if the stream is initialized and ready. 
+	*/
+
   bool Ok() const;
 };
 

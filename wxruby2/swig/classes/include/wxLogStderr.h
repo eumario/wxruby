@@ -8,6 +8,12 @@
 class wxLogStderr : public wxLog
 {
 public:
+	/**
+	 * \brief Constructs a log target which sends all the log messages to the given
+ . If it is  , the messages are sent to  . 
+	 * \param FILE   
+	*/
+
    wxLogStderr(FILE  *fp = NULL) ;
 };
 

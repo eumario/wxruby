@@ -12,6 +12,8 @@
 %ignore wxRadioBox::wxRadioBox();
 %ignore wxRadioBox::GetLabel;
 %ignore wxRadioBox::SetLabel;
+%ignore wxRadioBox::Number;
+
 GC_NEVER(wxRadioBox);
 %include "include/wxRadioBox.h"
 
