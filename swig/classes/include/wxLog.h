@@ -11,13 +11,13 @@ public:
   static void AddTraceMask(const wxString&  mask ) ;
   static void ClearTraceMasks() ;
   static const wxArrayString & GetTraceMasks() ;
-  virtual static void OnLog(wxLogLevel   level , const char *   message ) ;
+  static void OnLog(wxLogLevel   level , const char *   message );
   static wxLog * GetActiveTarget() ;
   static wxLog * SetActiveTarget(wxLog *   logtarget ) ;
   static void Suspend() ;
   static void Resume() ;
-  virtual void DoLog(wxLogLevel  level , const wxChar  *msg , time_t  timestamp ) ;
-  virtual void DoLogString(const wxChar  *msg , time_t  timestamp ) ;
+  //virtual void DoLog(wxLogLevel  level , const wxChar  *msg , time_t  timestamp );
+  //virtual void DoLogString(const wxChar  *msg , time_t  timestamp );
   static void DontCreateOnDemand() ;
   virtual void Flush() ;
   static void FlushActive() ;

@@ -24,6 +24,7 @@
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
 void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 %}
 

@@ -80,7 +80,7 @@ $fixes =
     'wxBitmap(void*  data , int  type , int  width , int  height , int depth = -1)' =>
     '',
     'wxBitmap(const wxString&  name , long  type )' =>
-    'wxBitmap(const wxString&  name , wxBitmapType  type )',
+    'wxBitmap(wxString&  name , wxBitmapType  type=wxBITMAP_TYPE_XPM )',
     'wxBitmap(const char  bits[] , int  width , int  height , int depth = 1)' =>
     '//wxBitmap(const char  bits[] , int  width , int  height , int depth = 1)',
     'virtual bool Create(void*  data , int  type , int  width , int  height , int depth = -1)' =>
@@ -103,10 +103,15 @@ $fixes =
     'wxBitmap& GetBitmapSelected() const' =>
     'const wxBitmap& GetBitmapSelected() const',
     },
+    'wxBusyInfo'=>
+    {
+    'wxBusyInfo(const wxString&  msg , wxParent  *parent = NULL)'=>
+    'wxBusyInfo(const wxString&  msg , wxWindow *parent = NULL)',
+    },
     'wxButton' =>
     {
     'wxButton(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator , const wxString&  name = "button")' =>
-    'wxButton(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "button")',
+    'wxButton(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "button")',
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator , const wxString&  name = "button")' =>
     'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "button")',
     },
@@ -136,6 +141,13 @@ $fixes =
     {
     'void SetLoggingOff(bool  loggingOff ) const' =>
     'void SetLoggingOff(bool  loggingOff )',
+    },
+    'wxColourData'=>
+    {
+    'wxColour& GetColour() const'=>
+    'wxColour GetColour() const',
+    'wxColour& GetCustomColour(int  i ) const'=>
+    'wxColour GetCustomColour(int  i )',
     },
     'wxComboBox'=>
     {
@@ -175,6 +187,18 @@ $fixes =
     {
     'virtual void OnCharHook(wxKeyEvent&  event )' =>
     '//virtual void OnCharHook(wxKeyEvent&  event )',
+    },
+    'wxFindReplaceData'=>
+    {
+    'const wxString& GetFindString()'=>
+    'wxString GetFindString()',
+    'const wxString& GetReplaceString()'=>
+    'wxString GetReplaceString()',
+    },
+    'wxFindDialogEvent'=>
+    {
+    'const wxString& GetReplaceString() const'=>
+    'wxString GetReplaceString() const',
     },
     'wxIcon' =>
     {
@@ -231,12 +255,33 @@ $fixes =
     'virtual wxString OnGetItemText(long  item , long  column )'=>
     '//virtual wxString OnGetItemText(long  item , long  column )',
     },
+    'wxLog'=>
+    {
+    'virtual static void OnLog(wxLogLevel   level , const char *   message )'=> 
+    'static void OnLog(wxLogLevel   level , const char *   message )',
+    'virtual void DoLog(wxLogLevel  level , const wxChar  *msg , time_t  timestamp )'=>
+    '//virtual void DoLog(wxLogLevel  level , const wxChar  *msg , time_t  timestamp )',
+    'virtual void DoLogString(const wxChar  *msg , time_t  timestamp )'=>
+    '//virtual void DoLogString(const wxChar  *msg , time_t  timestamp )',
+    },
     'wxMask'=>
     {
     'wxMask(const \helpref{wxBitmap wxbitmap )'=>
     'wxMask(const wxBitmap & wxbitmap )',
     'wxMask(const \helpref{wxBitmap wxbitmap , const \helpref{wxColour wxcolour )'=>
     'wxMask(const wxBitmap & wxbitmap , const wxColour &wxcolour )',
+    },
+    'wxMDIChildFrame'=>
+    {
+    'bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = "frame")'=>
+    'bool Create(wxMDIParentFrame*  parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = "frame")',
+    },
+    'wxMDIParentFrame'=>
+    {
+    'virtual wxWindow* GetToolBar() const'=>
+    'virtual wxToolBar* GetToolBar() const',
+    'virtual void SetToolBar(wxWindow*  toolbar )'=>
+    'virtual void SetToolBar(wxToolBar*  toolbar )',
     },
     'wxMenu' =>
     {
@@ -258,6 +303,32 @@ $fixes =
     {
     'wxPanel()' =>
     '//wxPanel()',
+    },
+    'wxSingleChoiceDialog'=>
+    {
+    'wxSingleChoiceDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption , int  n , const wxString*  choices , void** clientData = NULL, long  style = wxOK, const wxPoint&  pos = wxDefaultPosition)'=> 
+     'wxSingleChoiceDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption , int  n , const wxString  choices[] , char** clientData = NULL, long  style = wxOK, const wxPoint&  pos = wxDefaultPosition)',
+     'void SetSelection(int  selection ) const'=>
+     'void SetSelection(int  selection ) ',
+    },
+    'wxTipProvider'=>
+    {
+    'wxString GetTip()'=>
+    'virtual wxString GetTip()=0',
+    },
+    'wxTipWindow'=>
+    {
+    'wxTipWindow(wxWindow*  parent , const wxString&  text , wxCoord  maxLength = 100, wxTipWindow**  windowPtr )'=>
+    'wxTipWindow(wxWindow*  parent , const wxString&  text , wxCoord  maxLength = 100, wxTipWindow**  windowPtr = NULL )',
+    },
+    'wxToolBar'=>
+    {
+    'int GetToolPos(int  toolId ) const'=>
+    '//int GetToolPos(int  toolId ) const',
+    'wxToolBarTool * InsertTool(size_t  pos , wxToolBarTool*  tool )'=>
+    '//wxToolBarTool * InsertTool(size_t  pos , wxToolBarTool*  tool )',
+    'wxToolBarTool* AddTool(wxToolBarTool*  tool )'=>
+    '//wxToolBarTool* AddTool(wxToolBarTool*  tool )',
     },
     'wxWindow' =>
     {
@@ -330,6 +401,14 @@ $missing =
     [
     'void SetSelection(int  n )',
     ],
+    'wxComboBox'=>
+    [
+    'void Append(const wxString& item)',
+    ],
+    'wxToolBar'=>
+    [
+    'void SetRows(int rows)',
+    ]
 }
 
 def get_missing_methods(class_name)

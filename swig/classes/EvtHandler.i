@@ -5,6 +5,7 @@
 
 %{
 #include <wx/calctrl.h>
+#include <wx/fdrepdlg.h>
 %}
 
 %module(directors="1") wxEvtHandler
@@ -28,6 +29,10 @@ extern swig_class cWxPaintEvent;
 extern swig_class cWxUpdateUIEvent;
 extern swig_class cWxSizeEvent;
 extern swig_class cWxKeyEvent; 
+extern swig_class cWxFindDialogEvent;
+extern swig_class cWxMouseEvent;
+extern swig_class cWxFocusEvent;
+extern swig_class cWxSpinEvent;
 
 static const wxEventType *calendarEvents[] = 
 {
@@ -68,6 +73,7 @@ static const wxEventType *commandEvents[] =
     &wxEVT_COMMAND_TOOL_RCLICKED,
     &wxEVT_COMMAND_TOOL_ENTER,
     &wxEVT_COMMAND_SPINCTRL_UPDATED,
+    &wxEVT_COMMAND_COMBOBOX_SELECTED,
     (const wxEventType *)0
 };
 
@@ -104,6 +110,49 @@ static const wxEventType *keyEvents [] =
     (const wxEventType *)0
 };
 
+static const wxEventType *findEvents [] = 
+{
+    &wxEVT_COMMAND_FIND,
+    &wxEVT_COMMAND_FIND_NEXT,
+    &wxEVT_COMMAND_FIND_REPLACE,
+    &wxEVT_COMMAND_FIND_REPLACE_ALL,
+    &wxEVT_COMMAND_FIND_CLOSE,
+    (const wxEventType *)0
+};
+
+static const wxEventType *focusEvents [] =
+{
+    &wxEVT_SET_FOCUS,
+    &wxEVT_KILL_FOCUS,
+    (const wxEventType *)0
+};    
+
+static const wxEventType *mouseEvents[] = 
+{
+    &wxEVT_LEFT_DOWN,
+    &wxEVT_LEFT_UP,
+    &wxEVT_LEFT_DCLICK,
+    &wxEVT_MIDDLE_DOWN,
+    &wxEVT_MIDDLE_UP,
+    &wxEVT_MIDDLE_DCLICK,
+    &wxEVT_RIGHT_DOWN,
+    &wxEVT_RIGHT_UP,
+    &wxEVT_RIGHT_DCLICK,
+    &wxEVT_MOTION,
+    &wxEVT_ENTER_WINDOW,
+    &wxEVT_LEAVE_WINDOW,
+    &wxEVT_MOUSEWHEEL,
+    (const wxEventType *)0
+};
+
+static const wxEventType *spinEvents[] = 
+{
+    &wxEVT_SCROLL_THUMBTRACK,
+    &wxEVT_SCROLL_LINEUP,
+    &wxEVT_SCROLL_LINEDOWN,
+    (const wxEventType *)0
+};
+
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
 class wxRbCallback : public wxObject 
@@ -134,11 +183,18 @@ public:
             cEvent = cWxSizeEvent.klass;
         else if(IsEventInMap(type, keyEvents))
             cEvent = cWxKeyEvent.klass;
+        else if(IsEventInMap(type, findEvents))
+            cEvent = cWxFindDialogEvent.klass;            
+        else if(IsEventInMap(type, focusEvents))
+            cEvent = cWxFocusEvent.klass;
+        else if(IsEventInMap(type, mouseEvents))
+            cEvent = cWxMouseEvent.klass;            
+        else if(IsEventInMap(type, spinEvents))
+            cEvent = cWxSpinEvent.klass;
         else
         {
-            printf("Unknown event type %d\n",type);
             cEvent = cWxEvent.klass;
-	}
+        }
             
         static VALUE vevent;
         vevent = Data_Wrap_Struct(cEvent, 0, 0, 0);
@@ -193,6 +249,20 @@ static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self,
     return Qnil;
 }
 
+static VALUE internal_evt_with_id_range(int argc, VALUE *argv, VALUE self, 
+        wxEventType eventType)
+{
+    if (argc != 2)
+        rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+        
+    int idStart = NUM2INT(argv[0]);
+    int idEnd = NUM2INT(argv[1]);
+    //printf("evt_with_id(%d) %s\n", id, rb_block_given_p() ? "with block" : "");
+
+    internal_connect(self, idStart, idEnd, eventType);
+    return Qnil;
+}
+
 static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self, 
         wxEventType eventType) 
 {
@@ -221,6 +291,17 @@ static VALUE evt_menu(int argc, VALUE *argv, VALUE self)
 {
     return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_MENU_SELECTED);
 }
+
+static VALUE evt_menu_range(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id_range(argc, argv, self, wxEVT_COMMAND_MENU_SELECTED);
+}
+
+static VALUE evt_combobox(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_COMBOBOX_SELECTED);
+}
+
 
 static VALUE evt_choice(int argc, VALUE *argv, VALUE self) 
 {
@@ -267,6 +348,16 @@ static VALUE evt_paint(int argc, VALUE *argv, VALUE self)
     return internal_evt_no_parameters(argc, argv, self, wxEVT_PAINT);
 }
 
+static VALUE evt_set_focus(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SET_FOCUS);
+}
+
+static VALUE evt_kill_focus(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_KILL_FOCUS);
+}
+
 static VALUE evt_close(int argc, VALUE *argv, VALUE self) 
 {
     return internal_evt_no_parameters(argc, argv, self, wxEVT_CLOSE_WINDOW);
@@ -307,12 +398,142 @@ static VALUE evt_char(int argc, VALUE *argv, VALUE self)
     return internal_evt_no_parameters(argc, argv, self, wxEVT_CHAR);
 }
 
+static VALUE evt_find(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_FIND);
+}
+
+static VALUE evt_find_next(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_FIND_NEXT);
+}
+
+static VALUE evt_find_replace(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_FIND_REPLACE);
+}
+
+static VALUE evt_find_replace_all(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_FIND_REPLACE_ALL);
+}
+
+static VALUE evt_find_close(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_FIND_CLOSE);
+}
+
+static VALUE evt_button(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_BUTTON_CLICKED);
+}
+
+static VALUE evt_tool_rclicked(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TOOL_RCLICKED);
+}
+
+static VALUE evt_tool_enter(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TOOL_ENTER);
+}
+
+static VALUE evt_left_down(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_LEFT_DOWN);
+}
+
+static VALUE evt_left_up(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_LEFT_UP);
+}
+
+static VALUE evt_left_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_LEFT_DCLICK);
+}
+
+static VALUE evt_right_down(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_RIGHT_DOWN);
+}
+
+static VALUE evt_right_up(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_RIGHT_UP);
+}
+
+static VALUE evt_right_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_RIGHT_DCLICK);
+}
+
+static VALUE evt_middle_down(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MIDDLE_DOWN);
+}
+
+static VALUE evt_middle_up(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MIDDLE_UP);
+}
+
+static VALUE evt_middle_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MIDDLE_DCLICK);
+}
+
+static VALUE evt_motion(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MOTION);
+}
+
+static VALUE evt_enter_window(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_ENTER_WINDOW);
+}
+
+static VALUE evt_leave_window(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_LEAVE_WINDOW);
+}
+
+static VALUE evt_mousewheel(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MOUSEWHEEL);
+}
+
+static VALUE evt_spin(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_SCROLL_THUMBTRACK);
+}
+
+static VALUE evt_spin_up(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_SCROLL_LINEUP);
+}
+
+static VALUE evt_spin_down(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_SCROLL_LINEDOWN);
+}
+
+
+
 %}
+
+
+
 
 %init %{
     rb_define_method(cWxEvtHandler.klass, "connect", VALUEFUNC(connect_fnc), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_menu", VALUEFUNC(evt_menu), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_tool", VALUEFUNC(evt_menu), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_menu_range", VALUEFUNC(evt_menu_range), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_tool_range", VALUEFUNC(evt_menu_range), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_choice", VALUEFUNC(evt_choice), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_combobox", VALUEFUNC(evt_combobox), -1);
+
     rb_define_method(cWxEvtHandler.klass, "evt_calendar", VALUEFUNC(evt_calendar), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_sel_changed", VALUEFUNC(evt_calendar_sel_changed), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_day", VALUEFUNC(evt_calendar_day), -1);
@@ -330,4 +551,32 @@ static VALUE evt_char(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_key_down", VALUEFUNC(evt_key_down), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_key_up", VALUEFUNC(evt_key_up), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_char", VALUEFUNC(evt_char), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_find", VALUEFUNC(evt_find), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_find_next", VALUEFUNC(evt_find_next), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_find_replace", VALUEFUNC(evt_find_replace), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_find_replace_all", VALUEFUNC(evt_find_replace_all), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_find_close", VALUEFUNC(evt_find_close), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_button", VALUEFUNC(evt_button), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_tool_rclicked", VALUEFUNC(evt_tool_rclicked), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_tool_enter", VALUEFUNC(evt_tool_enter), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_left_down", VALUEFUNC(evt_left_down), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_left_up", VALUEFUNC(evt_left_up), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_left_dclick", VALUEFUNC(evt_left_dclick), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_right_down", VALUEFUNC(evt_right_down), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_right_up", VALUEFUNC(evt_right_up), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_right_dclick", VALUEFUNC(evt_right_dclick), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_middle_down", VALUEFUNC(evt_middle_down), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_middle_up", VALUEFUNC(evt_middle_up), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_middle_dclick", VALUEFUNC(evt_middle_dclick), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_enter_window", VALUEFUNC(evt_enter_window), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_leave_window", VALUEFUNC(evt_leave_window), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_mousewheel", VALUEFUNC(evt_mousewheel), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_set_focus", VALUEFUNC(evt_set_focus), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_kill_focus", VALUEFUNC(evt_kill_focus), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_spin", VALUEFUNC(evt_spin), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_spin_up", VALUEFUNC(evt_spin_up), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_spin_down", VALUEFUNC(evt_spin_down), -1);        
 %}
+
+
+

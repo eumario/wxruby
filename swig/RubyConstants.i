@@ -3,11 +3,18 @@
 #   as part of the wxRuby project
 
 %module(directors="1") wxRubyConstants
-%{
-#include <wx/gdicmn.h>
-%}
 
 %include "common.i"
+
+%{
+#include <wx/gdicmn.h>
+#include <wx/fdrepdlg.h>
+#include <wx/artprov.h>
+
+
+
+
+%}
 
 enum
 {
@@ -132,6 +139,34 @@ enum wxBorder
     // a mask to extract border style from the combination of flags
     wxBORDER_MASK   = 0x1f200000
 };
+
+enum
+{
+    wxOPEN              = 0x0001,
+    wxSAVE              = 0x0002,
+    wxOVERWRITE_PROMPT  = 0x0004,
+    wxHIDE_READONLY     = 0x0008,
+    wxFILE_MUST_EXIST   = 0x0010,
+    wxMULTIPLE          = 0x0020,
+    wxCHANGE_DIR        = 0x0040
+};
+
+enum wxFindReplaceDialogStyles
+{
+    // replace dialog (otherwise find dialog)
+    wxFR_REPLACEDIALOG = 1,
+
+    // don't allow changing the search direction
+    wxFR_NOUPDOWN      = 2,
+
+    // don't allow case sensitive searching
+    wxFR_NOMATCHCASE   = 4,
+
+    // don't allow whole word searching
+    wxFR_NOWHOLEWORD   = 8
+};
+
+
 
 // ----------------------------------------------------------------------------
 // Window style flags
@@ -359,12 +394,12 @@ enum wxBorder
 #define wxRA_TOPTOBOTTOM    0x0002
 
 // New, more intuitive names to specify majorDim argument
-#define wxRA_SPECIFY_COLS   wxHORIZONTAL
-#define wxRA_SPECIFY_ROWS   wxVERTICAL
+#define wxRA_SPECIFY_COLS   0x0004
+#define wxRA_SPECIFY_ROWS   0x0008
 
 // Old names for compatibility
-#define wxRA_HORIZONTAL     wxHORIZONTAL
-#define wxRA_VERTICAL       wxVERTICAL
+#define wxRA_HORIZONTAL     0x0004
+#define wxRA_VERTICAL       0x0008
 
 /*
  * wxRadioButton style flag
@@ -375,8 +410,8 @@ enum wxBorder
 /*
  * wxGauge flags
  */
-#define wxGA_HORIZONTAL      wxHORIZONTAL
-#define wxGA_VERTICAL        wxVERTICAL
+#define wxGA_HORIZONTAL      0x0004
+#define wxGA_VERTICAL        0x0008
 #define wxGA_PROGRESSBAR     0x0010
 // Windows only
 #define wxGA_SMOOTH          0x0020
@@ -384,8 +419,8 @@ enum wxBorder
 /*
  * wxSlider flags
  */
-#define wxSL_HORIZONTAL      wxHORIZONTAL // 4
-#define wxSL_VERTICAL        wxVERTICAL   // 8
+#define wxSL_HORIZONTAL      0x0004
+#define wxSL_VERTICAL        0x0008
 // The next one is obsolete - use scroll events instead
 #define wxSL_NOTIFY_DRAG     0x0000
 #define wxSL_TICKS           0x0010
@@ -452,8 +487,8 @@ enum wxBorder
 #define wxTC_OWNERDRAW        0x0200
 
 // wxToolBar style flags
-#define wxTB_HORIZONTAL     wxHORIZONTAL    // == 0x0004
-#define wxTB_VERTICAL       wxVERTICAL      // == 0x0008
+#define wxTB_HORIZONTAL     0x0004
+#define wxTB_VERTICAL       0x0008
 #define wxTB_3DBUTTONS      0x0010
 #define wxTB_FLAT           0x0020          // supported only under Win98+/GTK
 #define wxTB_DOCKABLE       0x0040          // use native docking under GTK
@@ -1261,7 +1296,37 @@ enum wxStockCursor
 %constant int USER_DASH   =    wxUSER_DASH;
 %constant int TRANSPARENT =    wxTRANSPARENT;
 
-%constant wxCursor* STANDARD_CURSOR =wxSTANDARD_CURSOR;
-%constant wxCursor* HOURGLASS_CURSOR = wxHOURGLASS_CURSOR;
-%constant wxCursor* CROSS_CURSOR =  wxCROSS_CURSOR;
-
+%constant const char *FILE_SELECTOR_DEFAULT_WILDCARD_STR = "*.*";
+#if 0
+%constant const char * wxART_ADD_BOOKMARK         
+%constant const char * wxART_DEL_BOOKMARK         
+%constant const char * wxART_HELP_SIDE_PANEL      
+%constant const char * wxART_HELP_SETTINGS        
+%constant const char * wxART_HELP_BOOK            
+%constant const char * wxART_HELP_FOLDER          
+%constant const char * wxART_HELP_PAGE            
+%constant const char * wxART_GO_BACK              
+%constant const char * wxART_GO_FORWARD           
+%constant const char * wxART_GO_UP                
+%constant const char * wxART_GO_DOWN              
+%constant const char * wxART_GO_TO_PARENT         
+%constant const char * wxART_GO_HOME              
+%constant const char * wxART_FILE_OPEN            
+%constant const char * wxART_PRINT                
+%constant const char * wxART_HELP                 
+%constant const char * wxART_TIP                  
+%constant const char * wxART_REPORT_VIEW          
+%constant const char * wxART_LIST_VIEW            
+%constant const char * wxART_NEW_DIR              
+%constant const char * wxART_FOLDER               
+%constant const char * wxART_GO_DIR_UP            
+%constant const char * wxART_EXECUTABLE_FILE      
+%constant const char * wxART_NORMAL_FILE          
+%constant const char * wxART_TICK_MARK            
+%constant const char * wxART_CROSS_MARK           
+%constant const char * wxART_ERROR                
+%constant const char * wxART_QUESTION             
+%constant const char * wxART_WARNING              
+%constant const char * wxART_INFORMATION          
+%constant const char * wxART_MISSING_IMAGE        
+#endif

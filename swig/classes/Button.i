@@ -5,4 +5,6 @@
 
 %module(directors="1") wxButton
 
+%ignore wxButton::wxButton();
+
 %include "include/wxButton.h"

@@ -8,7 +8,7 @@
 class wxTipWindow : public wxWindow
 {
 public:
-   wxTipWindow(wxWindow*  parent , const wxString&  text , wxCoord  maxLength = 100, wxTipWindow**  windowPtr ) ;
+  wxTipWindow(wxWindow*  parent , const wxString&  text , wxCoord  maxLength = 100, wxTipWindow**  windowPtr = NULL );
   void SetTipWindowPtr(wxTipWindow**  windowPtr ) ;
   void SetBoundingRect(const wxRect&  rectBound ) ;
 };

@@ -5,13 +5,10 @@
 
 %module(directors="1") wxBitmap
 %feature("nodirector") wxBitmap;
-#%ignore   wxBitmap() ;
-#%ignore   wxBitmap(const wxBitmap&  bitmap ) ;
-#%ignore   wxBitmap(void*  data , int  type , int  width , int  height , int depth = -1) ;
-#%ignore   wxBitmap(const char  bits[] , int  width , int  height , int depth = 1) ;
-#%ignore   wxBitmap(int  width , int  height , int depth = -1) ;
-#%ignore   wxBitmap(const char**  bits ) ;
-#%ignore   wxBitmap(const wxImage&  img , int depth = -1) ;
+
+%{
+#include <wx/bitmap.h>
+%}
 
 %ignore   AddHandler(wxBitmapHandler*  handler ) ;
 %ignore   CleanUpHandlers() ;

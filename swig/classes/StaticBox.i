@@ -3,8 +3,9 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
-%module(directors="1") wxCheckBox
+%module(directors="1") wxStaticBox
 
-%ignore wxCheckBox::wxCheckBox();
+%ignore wxStaticBox::wxStaticBox();
 
-%include "include/wxCheckBox.h"
+%include "include/wxStaticBox.h"
+

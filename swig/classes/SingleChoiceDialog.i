@@ -3,8 +3,8 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
-%module(directors="1") wxCheckBox
+%module(directors="1") wxSingleChoiceDialog
 
-%ignore wxCheckBox::wxCheckBox();
 
-%include "include/wxCheckBox.h"
+%include "include/wxSingleChoiceDialog.h"
+

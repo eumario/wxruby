@@ -3,8 +3,10 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
-%module(directors="1") wxCheckBox
+%module(directors="1") wxFindReplaceData
 
-%ignore wxCheckBox::wxCheckBox();
+%{
+#include <wx/fdrepdlg.h>
+%}
 
-%include "include/wxCheckBox.h"
+%include "include/wxFindReplaceData.h"

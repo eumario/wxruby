@@ -11,7 +11,7 @@ public:
    wxFindDialogEvent(wxEventType  commandType = wxEVT_NULL, int  id = 0) ;
   int GetFlags() const;
   wxString GetFindString() const;
-  const wxString& GetReplaceString() const;
+  wxString GetReplaceString() const;
   wxFindReplaceDialog* GetDialog() const;
 };
 
