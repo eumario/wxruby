@@ -706,8 +706,25 @@ SwigDirector_wxMenu::SwigDirector_wxMenu(VALUE self, long style, bool disown): w
 
 
 
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_new_wxMenu__SWIG_0(int argc, VALUE *argv, VALUE self) {
+_wrap_wxMenu_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_wxMenu_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxMenu);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_wxMenu(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxString const &arg2_defvalue = "" ;
     wxString *arg2 = (wxString *) &arg2_defvalue ;
@@ -735,96 +752,6 @@ _wrap_new_wxMenu__SWIG_0(int argc, VALUE *argv, VALUE self) {
     }
     DATA_PTR(self) = result;
     return self;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_wxMenu_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_wxMenu_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxMenu);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_wxMenu__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    long arg2 ;
-    wxMenu *result;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    arg1 = self;
-    arg2 = NUM2LONG(argv[0]);
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxMenu *)new SwigDirector_wxMenu(arg1,arg2,0);
-        
-    } else {
-        result = (wxMenu *)new wxMenu(arg2);
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE _wrap_new_wxMenu(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 3); ii++) {
-        argv[ii] = args[ii];
-    }
-    if ((argc >= 1) && (argc <= 3)) {
-        int _v;
-        _v = 1;
-        if (_v) {
-            if (argc <= 1) {
-                return _wrap_new_wxMenu__SWIG_0(nargs, args, self);
-            }
-            {
-                _v = TYPE(argv[1]) == T_STRING;
-            }
-            if (_v) {
-                if (argc <= 2) {
-                    return _wrap_new_wxMenu__SWIG_0(nargs, args, self);
-                }
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_new_wxMenu__SWIG_0(nargs, args, self);
-                }
-            }
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        _v = 1;
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_new_wxMenu__SWIG_1(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxMenu'");
-    return Qnil;
 }
 
 

@@ -100,13 +100,13 @@ class MyFrame < Frame
     
     def add_menu_bar
         # create a menu bar
-        menuFile = Menu.new("")   # Parameter should NOT be needed!
+        menuFile = Menu.new
 
         menuFile.append(Calendar_File_About, "&About...\tCtrl-A", "Show about dialog")
         menuFile.append_separator()
         menuFile.append(Calendar_File_Quit, "E&xit\tAlt-X", "Quit self program")
 
-        menuCal = Menu.new("")   # Parameter should NOT be needed!
+        menuCal = Menu.new
         menuCal.append(Calendar_Cal_Monday,
                         "Monday &first weekday\tCtrl-F",
                         "Toggle between Mon and Sun as the first week day",
@@ -134,7 +134,7 @@ class MyFrame < Frame
                         ITEM_CHECK)
 
         # now append the freshly created menu to the menu bar...
-        menuBar = MenuBar.new(0)       # Parameter should NOT be needed!
+        menuBar = MenuBar.new
         menuBar.append(menuFile, "&File")
         menuBar.append(menuCal, "&Calendar")
 

@@ -5,6 +5,6 @@
 
 %module(directors="1") wxMenuBar
 
-%ignore wxMenuBar(long  style, wxMenu**  menus, const wxString  titles[]);
+%ignore    wxMenuBar(int  n , wxMenu*  menus[] , const wxString  titles[] ) ;
 
 %include "include/wxMenuBar.h"

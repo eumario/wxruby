@@ -455,12 +455,11 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxMenuBar swig_types[0] 
-#define  SWIGTYPE_p_p_wxMenu swig_types[1] 
-#define  SWIGTYPE_p_wxString swig_types[2] 
-#define  SWIGTYPE_p_wxMenu swig_types[3] 
-#define  SWIGTYPE_p_size_t swig_types[4] 
-#define  SWIGTYPE_p_wxMenuItem swig_types[5] 
-static swig_type_info *swig_types[7];
+#define  SWIGTYPE_p_wxMenu swig_types[1] 
+#define  SWIGTYPE_p_p_wxMenu swig_types[2] 
+#define  SWIGTYPE_p_size_t swig_types[3] 
+#define  SWIGTYPE_p_wxMenuItem swig_types[4] 
+static swig_type_info *swig_types[6];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -706,8 +705,25 @@ SwigDirector_wxMenuBar::SwigDirector_wxMenuBar(VALUE self, int n, wxMenu *menus[
 
 
 
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_new_wxMenuBar__SWIG_0(int argc, VALUE *argv, VALUE self) {
+_wrap_wxMenuBar_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_wxMenuBar_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
+        
+        
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxMenuBar);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
+    }
+    
+
+static VALUE
+_wrap_new_wxMenuBar(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     long arg2 = (long) 0 ;
     wxMenuBar *result;
@@ -728,104 +744,6 @@ _wrap_new_wxMenuBar__SWIG_0(int argc, VALUE *argv, VALUE self) {
     }
     DATA_PTR(self) = result;
     return self;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_wxMenuBar_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_wxMenuBar_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxMenuBar);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_wxMenuBar__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    int arg2 ;
-    wxMenu **arg3 ;
-    wxString *arg4 ;
-    wxMenuBar *result;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = self;
-    arg2 = NUM2INT(argv[0]);
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_p_wxMenu, 1);
-    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxString, 1);
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxMenuBar *)new SwigDirector_wxMenuBar(arg1,arg2,arg3,(wxString const (*))arg4,0);
-        
-    } else {
-        result = (wxMenuBar *)new wxMenuBar(arg2,arg3,(wxString const (*))arg4);
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE _wrap_new_wxMenuBar(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[4];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 4); ii++) {
-        argv[ii] = args[ii];
-    }
-    if ((argc >= 1) && (argc <= 2)) {
-        int _v;
-        _v = 1;
-        if (_v) {
-            if (argc <= 1) {
-                return _wrap_new_wxMenuBar__SWIG_0(nargs, args, self);
-            }
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_new_wxMenuBar__SWIG_0(nargs, args, self);
-            }
-        }
-    }
-    if (argc == 4) {
-        int _v;
-        _v = 1;
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_p_wxMenu, 0) != -1)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxString, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_new_wxMenuBar__SWIG_1(nargs, args, self);
-                    }
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxMenuBar'");
-    return Qnil;
 }
 
 
@@ -1266,17 +1184,15 @@ Swig::Director *director = (Swig::Director*)(arg1);
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxMenuBar[] = {{"_p_wxMenuBar", 0, "wxMenuBar *", 0},{"_p_wxMenuBar"},{0}};
-static swig_type_info _swigt__p_p_wxMenu[] = {{"_p_p_wxMenu", 0, "wxMenu **", 0},{"_p_p_wxMenu"},{0}};
-static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0},{"_p_wxString"},{0}};
 static swig_type_info _swigt__p_wxMenu[] = {{"_p_wxMenu", 0, "wxMenu *", 0},{"_p_wxMenu"},{0}};
+static swig_type_info _swigt__p_p_wxMenu[] = {{"_p_p_wxMenu", 0, "wxMenu **", 0},{"_p_p_wxMenu"},{0}};
 static swig_type_info _swigt__p_size_t[] = {{"_p_size_t", 0, "size_t *", 0},{"_p_size_t"},{0}};
 static swig_type_info _swigt__p_wxMenuItem[] = {{"_p_wxMenuItem", 0, "wxMenuItem *", 0},{"_p_wxMenuItem"},{0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxMenuBar, 
-_swigt__p_p_wxMenu, 
-_swigt__p_wxString, 
 _swigt__p_wxMenu, 
+_swigt__p_p_wxMenu, 
 _swigt__p_size_t, 
 _swigt__p_wxMenuItem, 
 0
