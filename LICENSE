@@ -18,3 +18,43 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
 SOFTWARE.
+
+
+============================================================================
+
+Distributing wxRuby Applications
+--------------------------------
+
+The required credits for distributing a wxRuby application all come from
+the use of the underlying wxWidgets library. This information is summarized
+below for you convenience, but is subject to change by the wxWidgets project.
+Therefore, it is highly recommended that you read the official details (that
+also include web links relevant documents) at:
+
+   http://wiki.wxwidgets.org/wiki.pl?Distributing_WxWidgets_Applications
+
+
+Required Credits (Copyright "gotchas")
+--------------------------------------
+
+wxWidgets seems to be licenced under a fairly permissive licence which 
+makes it easy to distribute wxWidgets based applications without needing 
+to apply for permission or publicise the fact that wxWidgets is being used. 
+
+However, towards the bottom of the wxWidgets README file, there are a few 
+"gotchas" which apply to binary redistribution: 
+
+- If you use TIFF support, you need to credit Sam Leffler and Silicon 
+  Graphics, Inc., in your software and documentation. 
+  See the [TIFF copyright].
+   
+- If you use JPEG support, you need to credit the Independent JPEG Group 
+  in your documentation. See the [JPEG Readme]. 
+  
+- If you use wxRegEx from wxWidgets 2.4.2, you may need to credit Henry 
+  Spencer in your documentation, depending on what platforms your software 
+  runs on, and what version of wxWidgets you are using (e.g. wxMSW will 
+  use Spencer's code, but apparently most Unices will not). The license 
+  in CVS HEAD for 2.5.0 is different, and a credit in the documentation 
+  is no longer required. See [the regex COPYRIGHT in HEAD] 
+  and [old regex COPYRIGHT]. 
