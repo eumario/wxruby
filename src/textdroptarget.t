@@ -27,4 +27,21 @@ abstract bool OnDropText(int x, int y, const wxString& data);
 
 //$$ BEGIN_CPP_FILE
 //$$ RB_IMPLEMENT_CLASS
+
+wxTextDropTargetHelper::wxTextDropTargetHelper(){};
+
+void wxTextDropTargetHelper::SetSelf(VALUE self)
+{
+	me = self;
+}
+
+bool wxTextDropTargetHelper::OnDropText(wxCoord x, wxCoord y, const wxString& data)
+{
+	ID method = rb_intern("on_drop_text");
+	
+	VALUE ret = rb_funcall(me,method,3,INT2NUM(x),INT2NUM(y),rb_str_new2(data.c_str()));
+	
+	return (bool)NUM2INT(ret);
+}
+
 //$$ END_CPP_FILE

@@ -36,4 +36,18 @@ wxDropTargetHelper::wxDropTargetHelper(wxDataObject* data) :
 {
 }
 
+void wxDropTargetHelper::SetSelf(VALUE self)
+{
+	me = self;
+}
+
+wxDragResult wxDropTargetHelper::OnData(wxCoord x, wxCoord y, wxDragResult def)
+{
+	ID method = rb_intern("on_data");
+	
+	VALUE ret = rb_funcall(me,method,3,INT2NUM(x),INT2NUM(y),INT2NUM(def));
+	
+	return (wxDragResult)NUM2INT(ret);
+}
+
 //$$ END_CPP_FILE

@@ -15,7 +15,7 @@ $objs = [
 "methods.o", "staticbitmap.o", "control.o","togglebutton.o","grid.o",
 "menuitem.o", "textattr.o", "dataformat.o", 
 "dropsource.o", "droptarget.o", "textdroptarget.o", "filedroptarget.o",
-"dataobject.o", "dataobjectsimple.o", "filedataobject.o", "textdataobject.o",
+"filedataobject.o", "textdataobject.o", "dataobject.o", "dataobjectsimple.o",
 "dynamiccast.o"
 ]
 
@@ -26,7 +26,6 @@ dir_config("xrc");
 # I'd like to use have_library, but I couldn't get it to work.
 #
 if ($use_xrc == true)
-    $LDFLAGS+=" -lwx_mac_xrc-2.4"
     $objs += ["xmlresource.o"]
 end
 
@@ -57,9 +56,21 @@ elsif have_header("windows.h") and have_library("kernel32")
     $WXSRC="#$WXDIR/src/msw"
     $WXINC="#$WXDIR/include"
     $INCTEMP="#$WXDIR/lib/mswdll"
-    $WXLIB="#$WXDIR/lib/wxmsw#$WXVERSION.lib"
-    $CFLAGS += " -I#$WXINC -I#$INCTEMP #$WINFLAGS #$EXTRADLLFLAGS -DSTRICT -DWIN32 -D__WIN32__ -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /DWXUSINGDLL=1 /D__WINDOWS__ -D__WXMSW__  "
-    $libs += " #$WXLIB"
+    $WXXML="#$WXDIR/contrib/include/"
+    if $DEBUG
+    	$DEBUGPOSTFIX='d'
+    else
+    	$DEBUGPOSTFIX=''
+    end
+    $WXLIB="#$WXDIR\\lib\\wxmsw#{$WXVERSION}#{$DEBUGPOSTFIX}.lib"
+    $WXXMLLIB="#$WXDIR\\lib\\wxxrc#{$DEBUGPOSTFIX}.lib msvcrt#{$DEBUGPOSTFIX}.lib"     
+    $CFLAGS += " -I#$WXINC -I#$WXXML -I#$INCTEMP #$WINFLAGS #$EXTRADLLFLAGS -DSTRICT -DWIN32 -D__WIN32__ -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /DWXUSINGDLL=1 /D__WINDOWS__ -D__WXMSW__  "
+    if $DEBUG
+	    $CFLAGS = $CFLAGS.gsub(/-MD/," /MLd");
+	    $DLDFLAGS = $DLDFLAGS + " -debug "
+	end
+	$DLDFLAGS = $DLDFLAGS + " -nodefaultlib "
+    $libs += " #$WXLIB #$WXXMLLIB"
     $objs.push("wx.res")
 
 end

@@ -4,6 +4,7 @@
 
   $Author$
   $Date$
+  created at: 2003-04-14 11:02
 
   Copyright (C) 2003  Kevin Smith,NSK
 
@@ -19,6 +20,7 @@
 #include"calendar.h"
 #include"caret.h"
 #include"classinfo.h"
+#include"combobox.h"
 #include"colour.h"
 #include"colourdata.h"
 #include"config.h"
@@ -52,6 +54,7 @@
 #include"size.h"
 #include"sizer.h"
 #include"socket.h"
+#include"spin.h"
 #include"statusbar.h"
 #include"stream.h"
 #include"textattr.h"
@@ -99,6 +102,7 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxBrush,"wxBrush");
 	WXRB_ADD_TYPE_CONV(WxButton,"wxButton");
 	WXRB_ADD_TYPE_CONV(WxCalendarCtrl,"wxCalendarCtrl");
+	WXRB_ADD_TYPE_CONV(WxComboBox, "wxComboBox");
 	WXRB_ADD_TYPE_CONV(WxColour,"wxColour");
 	WXRB_ADD_TYPE_CONV(WxColourData,"wxColourData");
 	WXRB_ADD_TYPE_CONV(WxCursor,"wxCursor");
@@ -123,6 +127,8 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxRegion,"wxRegion");
 	WXRB_ADD_TYPE_CONV(WxSizer,"wxSizer");
 	WXRB_ADD_TYPE_CONV(WxStatusBar,"wxStatusBar");
+	WXRB_ADD_TYPE_CONV(WxSpinButton,"wxSpinButton");
+	WXRB_ADD_TYPE_CONV(WxSpinCtrl,"wxSpinCtrl");	
 	WXRB_ADD_TYPE_CONV(WxTextCtrl,"wxTextCtrl");
 	WXRB_ADD_TYPE_CONV(WxToolBar,"wxToolBar");
 	WXRB_ADD_TYPE_CONV(WxToolTip,"wxToolTip");

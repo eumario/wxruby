@@ -37,6 +37,8 @@ public:
     static void EnableHolidayDisplay(int argc, VALUE *argv, VALUE self);
     static void EnableYearChange(int argc, VALUE *argv, VALUE self);
     static void EnableMonthChange(int argc, VALUE *argv, VALUE self);
+    static VALUE GetDate(VALUE self);
+    static VALUE SetDate(VALUE self, VALUE date);
 
     static void DefineClass();
 	static VALUE rubyClass;

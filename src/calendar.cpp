@@ -15,6 +15,11 @@
 #include "calendar.h"
 #include "colour.h"
 #include "window.h"
+#include "date.h"
+
+extern "C" {
+struct timeval rb_time_timeval(VALUE);
+}
 
 void WxCalendarDateAttr::DefineClass()
 {
@@ -25,6 +30,7 @@ void WxCalendarDateAttr::DefineClass()
 	rb_define_singleton_method(rubyClass, "new", VALUEFUNC(new_1), -1);
 	rb_define_method(rubyClass, "initialize", VALUEFUNC(WxCalendarDateAttr::init), -1);
 	rb_define_method(rubyClass, "get_background_colour", VALUEFUNC(WxCalendarDateAttr::GetBackgroundColour), 0);
+
 }
 
 VALUE
@@ -123,6 +129,8 @@ void WxCalendarCtrl::DefineClass()
     rb_define_method(rubyClass, "enable_holiday_display", VALUEFUNC(WxCalendarCtrl::EnableHolidayDisplay), -1);
     rb_define_method(rubyClass, "enable_year_change", VALUEFUNC(WxCalendarCtrl::EnableYearChange), -1);
     rb_define_method(rubyClass, "enable_month_change", VALUEFUNC(WxCalendarCtrl::EnableMonthChange), -1);
+    rb_define_method(rubyClass, "get_date", VALUEFUNC(WxCalendarCtrl::GetDate), 0);
+    rb_define_method(rubyClass, "set_date", VALUEFUNC(WxCalendarCtrl::SetDate), 1);
 }
 
 VALUE
@@ -236,6 +244,43 @@ WxCalendarCtrl::EnableYearChange(int argc, VALUE *argv, VALUE self)
     wxCalendarCtrl *ptr;
     Data_Get_Struct(self, wxCalendarCtrl, ptr);
     ptr->EnableYearChange(display);
+}
+
+VALUE WxCalendarCtrl::SetDate(VALUE self, VALUE date)
+{
+    wxCalendarCtrl *ptr;
+    wxDateTime *dptr;
+    
+    Data_Get_Struct(self, wxCalendarCtrl, ptr);
+
+    if (CLASS_OF(date) == WxDateTime::rubyClass)
+    {
+    	Data_Get_Struct(date, wxDateTime, dptr);
+    	ptr->SetDate(*dptr);
+    }
+    else if (CLASS_OF(date) == rb_cTime)
+    {
+    	struct timeval tm = rb_time_timeval(date);
+    	wxDateTime dt(tm.tv_sec);
+    	ptr->SetDate(dt);
+    }
+    else rb_raise(rb_eTypeError, "Must pass Time or DateTime");
+    	
+    
+    return Qnil;
+}
+
+VALUE WxCalendarCtrl::GetDate(VALUE self)
+{
+    wxCalendarCtrl *ptr;
+    wxDateTime dt;
+    
+    Data_Get_Struct(self, wxCalendarCtrl, ptr);
+
+    dt = ptr->GetDate();
+    
+    return WxDateTime::init0(dt);
+    
 }
 
 VALUE WxCalendarCtrl::rubyClass;
