@@ -188,11 +188,8 @@ class MyListCtrl < ListCtrl
         LogEvent(event, "OnSelected")
 
         if ( get_window_style_flag() & LC_REPORT ) != 0
-            info = ListItem.new
-            info.set_id(event.get_index())
-            info.set_column(1)
-            info.set_mask(LIST_MASK_TEXT)
-            if get_item(info)
+            info = get_item(event.get_index(), 1)
+            if (info)
                 log_message("Value of the 2nd field of the selected item: %s",
                              info.get_text())
             else
@@ -289,15 +286,15 @@ class MyListCtrl < ListCtrl
                      event.get_text(), event.get_data())
     end
 
-    def OnGetItemText(item,column)
+    def on_get_item_text(item,column)
         return sprintf("Column %d of item %d", column, item)
     end
 
-    def OnGetItemImage(item)
+    def on_get_item_image(item)
         return 0
     end
 
-    def OnGetItemAttr(item)
+    def on_get_item_attr(item)
         return ((item % 2) != 0 ? nil : @m_attr)
     end
 
