@@ -1,6 +1,6 @@
-README for wxRuby version 0.5.0 (EARLY BETA)
+README for wxRuby version 0.6.0 (BETA)
    Released under the wxWidgets 3 license (see LICENSE)
-   This file last updated 2003-08-26
+   This file last updated 2004-11-12
 
 
 --------------------------------------------------------------------
@@ -23,19 +23,5 @@ MAC OS X INFORMATION
 
 Applications under OS X require resource bundles. Most side effects
 of this have been minimized as much as possible, but Without the wxMac 
-resource files, the wxMenuBar does not work properly. Ok, not at all.
+resource files, the wxMenuBar does not work properly. 
 
-There are no tools right now to create these bundles specifically for wxRuby 
-apps, but there is a tool that seems to do the job nicely:
-
-RubyRunner has been replaced by the more capable ScrUITools.  "ScrUI" stands
-for Script User Interface, and is pronounced "screwy". :) Currently, there
-are two tools: ScrUIRunner and ScrUIActivator.  ScrUIRunner replaces
-RubyRunner, but it allows you to specify the working directory, command line
-arguments, and shell environment variables for the script (...added
-specifically for you, Torsten) ;).  ScrUIActivator activates the UI of a
-script that is already running, so you can run the script normally from a
-terminal window if you need standard input.
-
-Download ScrUITools at <http://www.xmission.com/~illume/scruitools.tgz>.
-Comments/Questions are welcome.
