@@ -2,18 +2,18 @@
 
 ; Define your application name
 !define APPNAME "wxRuby"
-!define APPNAMEANDVERSION "wxRuby 0.5.0"
+!define APPNAMEANDVERSION "wxRuby 0.6.0"
 
-!define WXRUBY_VERSION 050
+!define WXRUBY_VERSION 060
 
-!define DATE "August 25, 2004"
+!define DATE "November 14, 2004"
 
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
 InstallDir "$PROGRAMFILES\wxRuby"
 InstallDirRegKey HKLM "Software\${APPNAME}" ""
-OutFile "wxruby-mswin-0.5.0_debug.exe"
+OutFile "wxruby-0.6.0-mswin.exe"
 
 
 Var "RubyDir"   ; will contain the directory where Ruby is installed
@@ -55,23 +55,10 @@ Section "wxRuby Library" Section_Library
 
   ; Set Section Files and Shortcuts
   SetOutPath "$INSTDIR\lib\"
-  File "wxruby-dbg\lib\vc60.pdb"
   File "wxruby-dbg\lib\wxruby.so"
-
-  File "wxruby-dbg\lib\msvcrtd.dll"
-
-
-
-  IfFileExists "" skipCRTcopy
-
-    SetOutPath "$SYSDIR"
-    File "wxruby-dbg\lib\msvcrtd.dll"
-
-  skipCRTcopy:
 
 
   ; Where is Ruby installed?
-
 
   ReadRegStr $RubyDir HKLM "software\Ruby\RubyInstaller\" DefaultPath
   IfErrors 0 CopyToRubyDir
@@ -99,7 +86,7 @@ Section "wxRuby Library" Section_Library
 
   CreateDirectory "$SMPROGRAMS\wxRuby"
   CreateShortCut "$SMPROGRAMS\wxRuby\Uninstall.lnk" "$INSTDIR\uninstall.exe"
-  
+
 
 SectionEnd
 
@@ -122,7 +109,7 @@ Section "Sample wxRuby Programs" Section_Samples
 
   ; Set Section Files and Shortcuts
   SetOutPath "$INSTDIR\"
-  File /r "wxruby-rel\samples"
+  File /r "wxruby-dbg\samples"
   CreateDirectory "$SMPROGRAMS\wxRuby\Samples"
 
   SetOutPath "$INSTDIR\samples\artprov\"
@@ -163,7 +150,7 @@ Section "Sample wxRuby Programs" Section_Samples
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test8.rbw -- Choice Dialog.lnk" "$INSTDIR\samples\etc\test8.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test9.rbw -- Combo Box Dialog.rbw.lnk" "$INSTDIR\samples\etc\test9.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test10.rbw -- Gauge Dialog.lnk" "$INSTDIR\samples\etc\test10.rbw"
-    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test11.rbw -- List Box Dialoglnk" "$INSTDIR\samples\etc\test11.rbw"
+    CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test11.rbw -- List Box Dialog.lnk" "$INSTDIR\samples\etc\test11.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test12.rbw -- Radio Box Dialog.lnk" "$INSTDIR\samples\etc\test12.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test13.rbw -- Radio Button Dialog.lnk" "$INSTDIR\samples\etc\test13.rbw"
     CreateShortCut "$SMPROGRAMS\wxRuby\Samples\Etc\test14.rbw -- Slider Dialog.lnk" "$INSTDIR\samples\etc\test14.rbw"
@@ -225,11 +212,11 @@ Section "Source Code" Section_Source
   SetOutPath "$INSTDIR\"
   File /r "wxruby-dbg\src"
 
-  File "wxruby-rel\ChangeLog"
-  File "wxruby-rel\COPYING.LIB"
-  File "wxruby-rel\LICENSE"
-  File "wxruby-rel\README"
-  File "wxruby-rel\README.mswin"
+  File "wxruby-dbg\ChangeLog"
+  File "wxruby-dbg\COPYING.LIB"
+  File "wxruby-dbg\LICENSE"
+  File "wxruby-dbg\README"
+  File "wxruby-dbg\README.mswin"
 
 SectionEnd
 
