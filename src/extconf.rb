@@ -99,9 +99,13 @@ end
 
 File.open("Makefile","ab+") {|f|
 	f.puts
-	f.puts("tclean:; @$(RM) button.h choice.h frame.h " + 
-			"togglebutton.h caret.h colourdialog.h grid.h textattr.h " + 
-			"checkbox.h control.h menuitem.h textctrl.h window.h ")
+	f.puts("tclean:; @$(RM) button.h caret.h checkbox.h choice.h " + 
+			"colourdialog.h control.h dataformat.h " + 
+			"dataobjectsimple.h dropsource.h droptarget.h " + 
+			"filedataobject.h filedroptarget.h frame.h " + 
+			"grid.h menuitem.h textattr.h textctrl.h " + 
+			"textdataobject.h textdroptarget.h " + 
+			"togglebutton.h window.h xmlresource.h")
 	f.puts
 }
 
