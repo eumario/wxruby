@@ -1,9 +1,11 @@
+# Example by Gergely Kontra
+# minor modifications by Kevin Smith
 require 'wxruby'
 
 class MyTextDropTarget < Wx::TextDropTarget
   def on_drop_text(x,y,text)
-    puts "Ouch, I got #{text.inspect} at position (#{x},#{y})"
-    return 1
+    puts "Accepting drop of text: #{text.inspect} at position (#{x},#{y})"
+    return true
   end
 end
 
