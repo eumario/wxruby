@@ -2,9 +2,9 @@
 
 ; Define your application name
 !define APPNAME "wxRuby"
-!define APPNAMEANDVERSION "wxRuby 0.2.1"
+!define APPNAMEANDVERSION "wxRuby 0.3.0"
 
-!define WXRUBY_VERSION 020
+!define WXRUBY_VERSION 030
 
 !define DATE "Janurary 5, 2004"
 
@@ -13,7 +13,7 @@
 Name "${APPNAMEANDVERSION}"
 InstallDir "$PROGRAMFILES\wxRuby"
 InstallDirRegKey HKLM "Software\${APPNAME}" ""
-OutFile "wxruby-mswin-0.2.1_release.exe"
+OutFile "wxruby-0.3.0-mswin.exe"
 
 
 Var "RubyDir"   ; will contain the directory where Ruby is installed
