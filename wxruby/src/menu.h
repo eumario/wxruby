@@ -19,6 +19,7 @@ public:
     static VALUE alloc(VALUE self);
     static VALUE init(int argc, VALUE *argv, VALUE self);
     static VALUE Append(int argc, VALUE *argv, VALUE self);
+    static VALUE AppendMenu(int argc, VALUE *argv, VALUE self);
     static VALUE AppendItem(int argc, VALUE *argv, VALUE self);
     static VALUE AppendCheckItem(int argc, VALUE *argv, VALUE self);
     static VALUE AppendRadioItem(int argc, VALUE *argv, VALUE self);

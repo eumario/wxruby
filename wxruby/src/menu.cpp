@@ -23,6 +23,7 @@ void WxMenu::DefineClass()
 	rb_define_singleton_method(rubyClass, "new", VALUEFUNC(new_1), -1);
 	rb_define_method(rubyClass, "initialize", VALUEFUNC(WxMenu::init), -1);
 	rb_define_method(rubyClass, "append", VALUEFUNC(WxMenu::Append), -1);
+	rb_define_method(rubyClass, "append_menu", VALUEFUNC(WxMenu::AppendMenu), -1);
 	rb_define_method(rubyClass, "append_item", VALUEFUNC(WxMenu::AppendItem), -1);
 	rb_define_method(rubyClass, "append_check_item", VALUEFUNC(WxMenu::AppendCheckItem), -1);
 	rb_define_method(rubyClass, "append_radio_item", VALUEFUNC(WxMenu::AppendRadioItem), -1);
@@ -75,6 +76,28 @@ VALUE WxMenu::Append(int argc, VALUE *argv, VALUE self)
     ptr->Append(id,item,helpString,kind);
 	return Qnil;
 }
+
+VALUE WxMenu::AppendMenu(int argc, VALUE *argv, VALUE self)
+{
+    int id;
+    VALUE vid, vitem, vmenu, vhelpstring;
+    
+    rb_scan_args(argc, argv, "31", &vid, &vitem, &vmenu, &vhelpstring);
+
+    id = NUM2INT(vid);
+    wxString item = StringValuePtr(vitem);
+    wxString helpString = "";
+    wxMenu *menu = 0;
+    Data_Get_Struct(vmenu, wxMenu, menu);
+    if(vhelpstring != Qnil)
+      helpString = StringValuePtr(vhelpstring);
+
+    wxMenu *ptr = 0;
+    Data_Get_Struct(self, wxMenu, ptr);
+    ptr->Append(id,item,menu,helpString);
+    return Qnil;
+}
+						  
 
 VALUE WxMenu::AppendItem(int argc, VALUE *argv, VALUE self)
 {
