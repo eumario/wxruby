@@ -55,6 +55,7 @@
 #include "radio.h"
 #include "rect.h"
 #include "region.h"
+#include "scrollbar.h"
 #include "size.h"
 #include "sizer.h"
 #include "slider.h"
@@ -145,6 +146,7 @@ void WxRbTypeTable::Init()
 	WXRB_ADD_TYPE_CONV(WxPanel,"wxPanel");
 	WXRB_ADD_TYPE_CONV(WxPen,"wxPen");
 	WXRB_ADD_TYPE_CONV(WxRegion,"wxRegion");
+	WXRB_ADD_TYPE_CONV(WxScrollBar,"wxScrollBar");
 	WXRB_ADD_TYPE_CONV(WxSizer,"wxSizer");
 	WXRB_ADD_TYPE_CONV(WxSlider,"wxSlider");
 	WXRB_ADD_TYPE_CONV(WxStatusBar,"wxStatusBar");

@@ -82,6 +82,7 @@ scrolledwindow.o: scrolledwindow.cpp wx.h \
 size.o: size.cpp wx.h  size.h
 sizer.o: sizer.cpp wx.h  size.h sizer.h notebook.h \
   window.h
+scrollbar.o: scrollbar.cpp scrollbar.h
 slider.o: slider.cpp wx.h  slider.h window.h
 socket.o: socket.cpp wx.h  stream.h socket.h
 spin.o: spin.cpp wx.h spin.h window.h
