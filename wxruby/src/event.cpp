@@ -394,7 +394,6 @@ void WxCommandEvent::DefineClass()
 	rb_define_method(rubyClass, "get_string", VALUEFUNC(WxCommandEvent::GetString), 0);
 	rb_define_method(rubyClass, "is_checked", VALUEFUNC(WxCommandEvent::IsChecked), 0);
 	rb_define_method(rubyClass, "is_selection", VALUEFUNC(WxCommandEvent::IsSelection), 0);
-	rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxCommandEvent::GetClientData), 0);
 	rb_define_method(rubyClass, "get_extra_long", VALUEFUNC(WxCommandEvent::GetExtraLong), 0);
 	rb_define_method(rubyClass, "get_int", VALUEFUNC(WxCommandEvent::GetInt), 0);
 }
@@ -437,17 +436,6 @@ WxCommandEvent::IsSelection(VALUE self)
     return (ptr->IsSelection() ? Qtrue : Qfalse);
 }
 
-VALUE
-WxCommandEvent::GetClientData(VALUE self)
-{
-    wxCommandEvent *ptr;
-    Data_Get_Struct(self, wxCommandEvent, ptr);
-    void *data = ptr->GetClientData();
-    if(data==NULL)
-        return Qnil;
-    else
-        return rb_hash_aref((VALUE)data, rb_str_new2("data"));
-}
 
 VALUE
 WxCommandEvent::GetExtraLong(VALUE self)
@@ -1092,7 +1080,6 @@ void WxSocketEvent::DefineClass()
 	WxEvent::DefineClass();
 	rubyClass = rb_define_class_under(GetWxModule(),"SocketEvent", WxEvent::rubyClass);
 	rb_define_alloc_func(rubyClass,WxSocketEvent::alloc);
-	rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxSocketEvent::GetClientData), 0);
 	rb_define_method(rubyClass, "get_socket", VALUEFUNC(WxSocketEvent::GetSocket), 0);
 	rb_define_method(rubyClass, "get_socket_event", VALUEFUNC(WxSocketEvent::GetSocketEvent), 0);
 }
@@ -1101,15 +1088,6 @@ VALUE
 WxSocketEvent::alloc(VALUE self)
 {
    return Data_Wrap_Struct(self, 0, 0, 0);
-}
-
-
-VALUE
-WxSocketEvent::GetClientData(VALUE self)
-{
-    wxSocketEvent *ptr;
-    Data_Get_Struct(self, wxSocketEvent, ptr);
-    return (VALUE)(ptr->GetClientData());
 }
 
 

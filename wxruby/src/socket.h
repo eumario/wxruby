@@ -24,7 +24,7 @@ public:
     static VALUE Destroy(VALUE self);
     static VALUE Discard(VALUE self);
     static VALUE Error(VALUE self);
-    static VALUE GetClientData(VALUE self);
+//    static VALUE GetClientData(VALUE self);
     static VALUE GetFlags(VALUE self);
     static void InterruptWait(VALUE self);
     static VALUE IsConnected(VALUE self);
@@ -39,7 +39,7 @@ public:
     static VALUE ReadMsg(VALUE self,VALUE vbuffer,VALUE vnbytes);
     static void RestoreState(VALUE self);
     static void SaveState(VALUE self);
-    static void SetClientData(VALUE self,VALUE vdata);
+//    static void SetClientData(VALUE self,VALUE vdata);
     static void SetEventHandler(int argc, VALUE *argv, VALUE self);
     static void SetFlags(VALUE self,VALUE vflags);
     static void SetNotify(VALUE self,VALUE vflags);

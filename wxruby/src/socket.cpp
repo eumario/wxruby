@@ -25,7 +25,7 @@ void WxSocketBase::DefineClass()
 	rb_define_method(rubyClass, "destroy", VALUEFUNC(WxSocketBase::Destroy), 0);
 	rb_define_method(rubyClass, "discard", VALUEFUNC(WxSocketBase::Discard), 0);
 	rb_define_method(rubyClass, "error", VALUEFUNC(WxSocketBase::Error), 0);
-	rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxSocketBase::GetClientData), 0);
+//	rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxSocketBase::GetClientData), 0);
 	rb_define_method(rubyClass, "get_flags", VALUEFUNC(WxSocketBase::GetFlags), 0);
 	rb_define_method(rubyClass, "interrupt_wait", VALUEFUNC(WxSocketBase::InterruptWait), 0);
 	rb_define_method(rubyClass, "is_connected", VALUEFUNC(WxSocketBase::IsConnected), 0);
@@ -40,7 +40,7 @@ void WxSocketBase::DefineClass()
 	rb_define_method(rubyClass, "read_msg", VALUEFUNC(WxSocketBase::ReadMsg), 2);
 	rb_define_method(rubyClass, "restore_state", VALUEFUNC(WxSocketBase::RestoreState), 0);
 	rb_define_method(rubyClass, "save_state", VALUEFUNC(WxSocketBase::SaveState), 0);
-	rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxSocketBase::SetClientData), 1);
+//	rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxSocketBase::SetClientData), 1);
 	rb_define_method(rubyClass, "set_event_handler", VALUEFUNC(WxSocketBase::SetEventHandler), -1);
 	rb_define_method(rubyClass, "set_flags", VALUEFUNC(WxSocketBase::SetFlags), 1);
 	rb_define_method(rubyClass, "set_notify", VALUEFUNC(WxSocketBase::SetNotify), 1);
@@ -101,6 +101,7 @@ WxSocketBase::Error(VALUE self)
     return (ptr->Error() ? Qtrue : Qfalse);
 }
 
+/*
 VALUE
 WxSocketBase::GetClientData(VALUE self)
 {
@@ -108,6 +109,7 @@ WxSocketBase::GetClientData(VALUE self)
     Data_Get_Struct(self, wxSocketBase, ptr);
     return (VALUE)(ptr->GetClientData());
 }
+*/
 
 VALUE
 WxSocketBase::GetFlags(VALUE self)
@@ -198,6 +200,7 @@ WxSocketBase::SaveState(VALUE self)
     ptr->SaveState();
 }
 
+/*
 void
 WxSocketBase::SetClientData(VALUE self,VALUE vdata)
 {
@@ -206,6 +209,7 @@ WxSocketBase::SetClientData(VALUE self,VALUE vdata)
     Data_Get_Struct(self, wxSocketBase, ptr);
     ptr->SetClientData(data);
 }
+*/
 
 void
 WxSocketBase::SetEventHandler(int argc, VALUE *argv, VALUE self)

@@ -21,8 +21,8 @@ public:
     static void SetSelection(VALUE self,VALUE vn);
     static VALUE GetStringSelection(VALUE self);
     static void SetStringSelection(VALUE self,VALUE vstring);
-    static void SetClientData(VALUE self,VALUE vn,VALUE vdata);
-    static VALUE GetClientData(VALUE self,VALUE vn);
+//    static void SetClientData(VALUE self,VALUE vn,VALUE vdata);
+//    static VALUE GetClientData(VALUE self,VALUE vn);
     static VALUE GetCount(VALUE self);
     static VALUE GetSelection(VALUE self);
     static VALUE GetString(VALUE self,VALUE vn);

@@ -34,9 +34,9 @@ public:
     static VALUE GetSelections(VALUE self);
     static VALUE GetCount(VALUE self);
     static void InsertItems(VALUE self,VALUE vitems,VALUE vpos);
-    static void SetClientData(VALUE self,VALUE vn,VALUE vdata);
+//    static void SetClientData(VALUE self,VALUE vn,VALUE vdata);
     static void SetClientObject(VALUE self,VALUE vn,VALUE vdata);
-    static VALUE GetClientData(VALUE self,VALUE vn);
+//    static VALUE GetClientData(VALUE self,VALUE vn);
     static VALUE GetClientObject(VALUE self,VALUE vn);
     static void SetString(VALUE self,VALUE vn,VALUE vstring);
     static void SetStringSelection(int argc, VALUE *argv, VALUE self);

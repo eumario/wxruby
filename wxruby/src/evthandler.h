@@ -33,12 +33,12 @@ public:
     static VALUE init0(wxEvtHandler *handler);
     static void Connect(VALUE argv0,VALUE argv1,VALUE argv2,VALUE argv3,VALUE argv4);
     static void AddPendingEvent(VALUE self,VALUE vevent);
-    static VALUE GetClientData(VALUE self);
+    //static VALUE GetClientData(VALUE self);
     static VALUE GetEvtHandlerEnabled(VALUE self);
     static VALUE GetNextHandler(VALUE self);
     static VALUE GetPreviousHandler(VALUE self);
     static VALUE ProcessEvent(VALUE self,VALUE vevent);
-    static void SetClientData(VALUE self,VALUE vdata);
+    //static void SetClientData(VALUE self,VALUE vdata);
     static void SetEvtHandlerEnabled(VALUE self,VALUE venabled);
     static void SetNextHandler(VALUE self,VALUE vhandler);
     static void SetPreviousHandler(VALUE self,VALUE vhandler);

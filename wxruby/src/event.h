@@ -82,7 +82,7 @@ public:
     static VALUE GetString(VALUE self);
     static VALUE IsChecked(VALUE self);
     static VALUE IsSelection(VALUE self);
-    static VALUE GetClientData(VALUE self);
+    //static VALUE GetClientData(VALUE self);
     static VALUE GetExtraLong(VALUE self);
     static VALUE GetInt(VALUE self);
 
@@ -206,7 +206,7 @@ public:
 class WxSocketEvent {
 public:
     static VALUE alloc(VALUE self);
-    static VALUE GetClientData(VALUE self);
+    //static VALUE GetClientData(VALUE self);
     static VALUE GetSocket(VALUE self);
     static VALUE GetSocketEvent(VALUE self);
 

@@ -41,8 +41,8 @@ void WxListBox::DefineClass()
 	rb_define_method(rubyClass, "get_selections", VALUEFUNC(WxListBox::GetSelections), 0);
 	rb_define_method(rubyClass, "get_count", VALUEFUNC(WxListBox::GetCount), 0);
 	rb_define_method(rubyClass, "insert_items", VALUEFUNC(WxListBox::InsertItems), 2);
-	rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxListBox::SetClientData), 2);
-	rb_define_method(rubyClass, "get_client_data",VALUEFUNC(WxListBox::GetClientData),1);
+//	rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxListBox::SetClientData), 2);
+//	rb_define_method(rubyClass, "get_client_data",VALUEFUNC(WxListBox::GetClientData),1);
 	rb_define_method(rubyClass, "set_string", VALUEFUNC(WxListBox::SetString), 2);
 	rb_define_method(rubyClass, "set_string_selection", VALUEFUNC(WxListBox::SetStringSelection), -1);
 	rb_define_method(rubyClass, "clear", VALUEFUNC(WxListBox::Clear), 0);
@@ -265,39 +265,6 @@ WxListBox::Delete(VALUE self,VALUE vn)
     wxListBox *ptr;
     Data_Get_Struct(self, wxListBox, ptr);
     ptr->Delete(n);
-}
-
-
-void
-WxListBox::SetClientData(VALUE self,VALUE vn,VALUE vcdata)
-{
-    int n = NUM2INT(vn);
-    wxListBox *ptr;
-    Data_Get_Struct(self, wxListBox, ptr);
-
-    void *data = ptr->GetClientData(n);
-    VALUE vdata;
-    if(data==NULL)
-        vdata = rb_hash_new();
-    else
-        vdata = (VALUE)data;
-    rb_hash_aset(vdata,rb_str_new2("data"),vcdata);
-    data = (void*)vdata;
-
-    ptr->SetClientData(n,data);
-}
-
-VALUE
-WxListBox::GetClientData(VALUE self,VALUE vn)
-{
-    int n = NUM2INT(vn);
-    wxListBox *ptr;
-    Data_Get_Struct(self, wxListBox, ptr);
-    void *data = ptr->GetClientData(n);
-    if(data==NULL)
-        return Qnil;
-    else
-        return rb_hash_aref((VALUE)data, rb_str_new2("data"));
 }
 
 void

@@ -69,8 +69,8 @@ void WxChoice::DefineClass()
 	//$$ RB_DEFINE
 	
     rb_define_method(rubyClass, "append", VALUEFUNC(WxChoice::Append), -1);
-    rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxChoice::SetClientData), 2);
-    rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxChoice::GetClientData), 1);
+    //rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxChoice::SetClientData), 2);
+    //rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxChoice::GetClientData), 1);
 }
 
 //$$ RB_IMPLEMENT
@@ -79,50 +79,20 @@ void
 WxChoice::Append(int argc, VALUE *argv, VALUE self)
 {
     wxString item = wxString(StringValuePtr(argv[0]));
-    void* clientData;
+//    void* clientData;
     wxChoice *ptr;
     Data_Get_Struct(self, wxChoice, ptr);
-    if(argc>1) {
+/*    if(argc>1) {
         VALUE vdata = rb_hash_new();
         rb_hash_aset(vdata,rb_str_new2("data"),argv[1]);
         clientData = (void*)vdata;
         ptr->Append(item,clientData);
     } else {
+*/
         ptr->Append(item);
-    }
+//    }
 }
 
 
-void
-WxChoice::SetClientData(VALUE self,VALUE vn,VALUE vcdata)
-{
-    int n = NUM2INT(vn);
-    wxChoice *ptr;
-    Data_Get_Struct(self, wxChoice, ptr);
-
-    void *data = ptr->GetClientData(n);
-    VALUE vdata;
-    if(data==NULL)
-        vdata = rb_hash_new();
-    else
-        vdata = (VALUE)data;
-    rb_hash_aset(vdata,rb_str_new2("data"),vcdata);
-    data = (void*)vdata;
-
-    ptr->SetClientData(n,data);
-}
-
-VALUE
-WxChoice::GetClientData(VALUE self,VALUE vn)
-{
-    int n = NUM2INT(vn);
-    wxChoice *ptr;
-    Data_Get_Struct(self, wxChoice, ptr);
-    void *data = ptr->GetClientData(n);
-    if(data==NULL)
-        return Qnil;
-    else
-        return rb_hash_aref((VALUE)data, rb_str_new2("data"));
-}
 
 //$$ END_CPP_FILE

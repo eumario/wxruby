@@ -27,8 +27,8 @@ void WxComboBox::DefineClass()
     rb_define_method(rubyClass, "append", VALUEFUNC(WxComboBox::Append), -1);
     rb_define_method(rubyClass, "set_selection", VALUEFUNC(WxComboBox::SetSelection), 1);
     rb_define_method(rubyClass, "set_string_selection", VALUEFUNC(WxComboBox::SetStringSelection), 1);
-    rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxComboBox::SetClientData), 2);
-    rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxComboBox::GetClientData), 1);
+//    rb_define_method(rubyClass, "set_client_data", VALUEFUNC(WxComboBox::SetClientData), 2);
+//    rb_define_method(rubyClass, "get_client_data", VALUEFUNC(WxComboBox::GetClientData), 1);
     rb_define_method(rubyClass, "get_count", VALUEFUNC(WxComboBox::GetCount), 0);
     rb_define_method(rubyClass, "get_selection", VALUEFUNC(WxComboBox::GetSelection), 0);
     rb_define_method(rubyClass, "get_string", VALUEFUNC(WxComboBox::GetString), 1);
@@ -160,38 +160,6 @@ WxComboBox::SetStringSelection(VALUE self,VALUE vstring)
     wxComboBox *ptr;
     Data_Get_Struct(self, wxComboBox, ptr);
     ptr->SetStringSelection(string);
-}
-
-void
-WxComboBox::SetClientData(VALUE self,VALUE vn,VALUE vcdata)
-{
-    int n = NUM2INT(vn);
-    wxComboBox *ptr;
-    Data_Get_Struct(self, wxComboBox, ptr);
-
-    void *data = ptr->GetClientData(n);
-    VALUE vdata;
-    if(data==NULL)
-        vdata = rb_hash_new();
-    else
-        vdata = (VALUE)data;
-    rb_hash_aset(vdata,rb_str_new2("data"),vcdata);
-    data = (void*)vdata;
-
-    ptr->SetClientData(n,data);
-}
-
-VALUE
-WxComboBox::GetClientData(VALUE self,VALUE vn)
-{
-    int n = NUM2INT(vn);
-    wxComboBox *ptr;
-    Data_Get_Struct(self, wxComboBox, ptr);
-    void *data = ptr->GetClientData(n);
-    if(data==NULL)
-        return Qnil;
-    else
-        return rb_hash_aref((VALUE)data, rb_str_new2("data"));
 }
 
 VALUE

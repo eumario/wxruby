@@ -205,12 +205,12 @@ void WxEvtHandler::DefineClass()
 	
 	rb_define_alloc_func(rubyClass,WxEvtHandler::alloc);
 	rb_define_method(rubyClass,"AddPendingEvent",VALUEFUNC(WxEvtHandler::AddPendingEvent),1);
-	rb_define_method(rubyClass,"GetClientData",VALUEFUNC(WxEvtHandler::GetClientData),0);
+//	rb_define_method(rubyClass,"GetClientData",VALUEFUNC(WxEvtHandler::GetClientData),0);
 	rb_define_method(rubyClass,"GetEvtHandlerEnabled",VALUEFUNC(WxEvtHandler::GetEvtHandlerEnabled),0);
 	rb_define_method(rubyClass,"GetNextHandler",VALUEFUNC(WxEvtHandler::GetNextHandler),0);
 	rb_define_method(rubyClass,"GetPreviousHandler",VALUEFUNC(WxEvtHandler::GetPreviousHandler),0);
 	rb_define_method(rubyClass,"ProcessEvent",VALUEFUNC(WxEvtHandler::ProcessEvent),1);
-	rb_define_method(rubyClass,"SetClientData",VALUEFUNC(WxEvtHandler::SetClientData),1);
+//	rb_define_method(rubyClass,"SetClientData",VALUEFUNC(WxEvtHandler::SetClientData),1);
 	rb_define_method(rubyClass,"SetEvtHandlerEnabled",VALUEFUNC(WxEvtHandler::SetEvtHandlerEnabled),1);
 	rb_define_method(rubyClass,"SetNextHandler",VALUEFUNC(WxEvtHandler::SetNextHandler),1);
 	rb_define_method(rubyClass,"SetPreviousHandler",VALUEFUNC(WxEvtHandler::SetPreviousHandler),1);
@@ -467,18 +467,6 @@ WxEvtHandler::AddPendingEvent(VALUE self,VALUE vevent)
 }
 
 VALUE
-WxEvtHandler::GetClientData(VALUE self)
-{
-    wxEvtHandler *ptr;
-    Data_Get_Struct(self, wxEvtHandler, ptr);
-    void *data = ptr->GetClientData();
-    if(data==NULL)
-        return Qnil;
-    else
-        return rb_hash_aref((VALUE)data, rb_str_new2("data"));
-}
-
-VALUE
 WxEvtHandler::GetEvtHandlerEnabled(VALUE self)
 {
     wxEvtHandler *ptr;
@@ -511,24 +499,6 @@ WxEvtHandler::ProcessEvent(VALUE self,VALUE vevent)
     Data_Get_Struct(self, wxEvtHandler, ptr);
     return (ptr->ProcessEvent(*event) ? Qtrue : Qfalse);
 }
-
-void
-WxEvtHandler::SetClientData(VALUE self,VALUE vcdata)
-{
-    wxEvtHandler *ptr;
-    Data_Get_Struct(self, wxEvtHandler, ptr);
-
-    void *data = ptr->GetClientData();
-    VALUE vdata;
-    if(data==NULL)
-        vdata = rb_hash_new();
-    else
-        vdata = (VALUE)data;
-    rb_hash_aset(vdata,rb_str_new2("data"),vcdata);
-
-    ptr->SetClientData((void*)vdata);
-}
-
 
 void
 WxEvtHandler::SetEvtHandlerEnabled(VALUE self,VALUE venabled)
