@@ -16,6 +16,7 @@
 #include "wx/spinbutt.h"
 #include "wx/fdrepdlg.h"
 #include "wx/splitter.h"
+#include "wx/generic/grid.h"
 #include "event.h"
 #include "date.h"
 #include "size.h"
@@ -329,6 +330,343 @@ public:
     }
 };
 static ZAutoDefineWxKeyEvent x2;
+
+
+
+void WxGridEvent::DefineClass(){
+	if( rubyClass ) return;
+	WxEvent::DefineClass();
+	rubyClass = rb_define_class_under( GetWxModule(), "GridEvent", WxEvent::rubyClass );
+	rb_define_alloc_func(rubyClass,WxGridEvent::alloc);
+	rb_define_method(rubyClass, "alt_down", VALUEFUNC(WxGridEvent::AltDown), 0);
+	rb_define_method(rubyClass, "control_down", VALUEFUNC(WxGridEvent::ControlDown), 0);
+	rb_define_method(rubyClass, "get_col", VALUEFUNC(WxGridEvent::GetCol), 0);
+	rb_define_method(rubyClass, "get_position", VALUEFUNC(WxGridEvent::GetPosition), 0);
+	rb_define_method(rubyClass, "get_row", VALUEFUNC(WxGridEvent::GetRow), 0);
+	rb_define_method(rubyClass, "meta_down", VALUEFUNC(WxGridEvent::MetaDown), 0);
+	rb_define_method(rubyClass, "selecting", VALUEFUNC(WxGridEvent::Selecting), 0);
+	rb_define_method(rubyClass, "shift_down", VALUEFUNC(WxGridEvent::ShiftDown), 0);		
+}
+
+VALUE
+WxGridEvent::alloc( VALUE self ){
+	return Data_Wrap_Struct( self, 0 , 0 , 0);	
+}
+
+
+VALUE
+WxGridEvent::AltDown( VALUE self ){
+	wxGridEvent *ptr;
+	Data_Get_Struct( self, wxGridEvent, ptr );
+	return (ptr->AltDown() ? Qtrue : Qfalse );	
+}
+
+VALUE
+WxGridEvent::ControlDown(VALUE self)
+{
+    wxGridEvent *ptr;
+    Data_Get_Struct(self, wxGridEvent, ptr);
+    return (ptr->ControlDown() ? Qtrue : Qfalse);
+}
+
+VALUE
+WxGridEvent::GetCol( VALUE self ){
+	wxGridEvent *ptr;
+	Data_Get_Struct( self , wxGridEvent, ptr );
+	return INT2NUM(ptr->GetCol());
+}
+
+VALUE
+WxGridEvent::GetPosition( VALUE self ){
+	wxGridEvent *ptr;
+	Data_Get_Struct( self , wxGridEvent, ptr );
+	return WxPoint::init0(ptr->GetPosition());
+}
+
+VALUE
+WxGridEvent::GetRow( VALUE self ){
+	wxGridEvent *ptr;
+	Data_Get_Struct( self, wxGridEvent, ptr );
+	return INT2NUM( ptr->GetRow() );
+}
+
+VALUE WxGridEvent::Selecting( VALUE self ){
+	wxGridEvent *ptr;
+	Data_Get_Struct( self, wxGridEvent, ptr );
+	return (ptr->Selecting() ? Qtrue : Qfalse );
+}
+
+VALUE WxGridEvent::ShiftDown( VALUE self ){
+	wxGridEvent *ptr;
+	Data_Get_Struct( self, wxGridEvent, ptr );
+	return (ptr->ShiftDown() ? Qtrue : Qfalse );
+}
+
+
+VALUE
+WxGridEvent::MetaDown(VALUE self)
+{
+    wxGridEvent *ptr;
+    Data_Get_Struct(self, wxGridEvent, ptr);
+    return (ptr->MetaDown() ? Qtrue : Qfalse);
+}
+
+void WxGridSizeEvent::DefineClass(){
+	if( rubyClass ) return;
+	WxEvent::DefineClass();
+	rubyClass = rb_define_class_under( GetWxModule(), "GridSizeEvent", WxEvent::rubyClass );
+	rb_define_alloc_func(rubyClass,WxGridEvent::alloc);
+	rb_define_method(rubyClass, "alt_down", VALUEFUNC(WxGridSizeEvent::AltDown), 0);
+	rb_define_method(rubyClass, "control_down", VALUEFUNC(WxGridSizeEvent::ControlDown), 0);
+	rb_define_method(rubyClass, "get_position", VALUEFUNC(WxGridSizeEvent::GetPosition), 0);
+	rb_define_method(rubyClass, "get_row_or_col", VALUEFUNC(WxGridSizeEvent::GetRowOrCol), 0);
+	rb_define_method(rubyClass, "meta_down", VALUEFUNC(WxGridSizeEvent::MetaDown), 0);
+	rb_define_method(rubyClass, "shift_down", VALUEFUNC(WxGridSizeEvent::ShiftDown), 0);		
+}
+
+VALUE
+WxGridSizeEvent::alloc( VALUE self ){
+	return Data_Wrap_Struct( self, 0 , 0 , 0);	
+}
+
+
+VALUE
+WxGridSizeEvent::AltDown( VALUE self ){
+	wxGridSizeEvent *ptr;
+	Data_Get_Struct( self, wxGridSizeEvent, ptr );
+	return (ptr->AltDown() ? Qtrue : Qfalse );	
+}
+
+VALUE
+WxGridSizeEvent::ControlDown(VALUE self)
+{
+    wxGridSizeEvent *ptr;
+    Data_Get_Struct(self, wxGridSizeEvent, ptr);
+    return (ptr->ControlDown() ? Qtrue : Qfalse);
+}
+
+VALUE
+WxGridSizeEvent::GetRowOrCol(VALUE self)
+{
+    wxGridSizeEvent *ptr;
+    Data_Get_Struct(self, wxGridSizeEvent, ptr);
+    return INT2NUM(ptr->GetRowOrCol());
+}
+
+VALUE
+WxGridSizeEvent::GetPosition( VALUE self ){
+	wxGridSizeEvent *ptr;
+	Data_Get_Struct( self , wxGridSizeEvent, ptr );
+	return WxPoint::init0(ptr->GetPosition());
+}
+
+VALUE WxGridSizeEvent::ShiftDown( VALUE self ){
+	wxGridSizeEvent *ptr;
+	Data_Get_Struct( self, wxGridSizeEvent, ptr );
+	return (ptr->ShiftDown() ? Qtrue : Qfalse );
+}
+
+
+VALUE
+WxGridSizeEvent::MetaDown(VALUE self)
+{
+    wxGridSizeEvent *ptr;
+    Data_Get_Struct(self, wxGridSizeEvent, ptr);
+    return (ptr->MetaDown() ? Qtrue : Qfalse);
+}
+
+
+void WxGridRangeSelectEvent::DefineClass(){
+	if( rubyClass ) return;
+	WxEvent::DefineClass();
+	rubyClass = rb_define_class_under( GetWxModule(), "GridRangeSelectEvent", WxEvent::rubyClass );
+	rb_define_alloc_func(rubyClass,WxGridRangeSelectEvent::alloc);
+	rb_define_method(rubyClass, "alt_down", VALUEFUNC(WxGridRangeSelectEvent::AltDown), 0);
+	rb_define_method(rubyClass, "control_down", VALUEFUNC(WxGridRangeSelectEvent::ControlDown), 0);
+	rb_define_method(rubyClass, "get_bottom_right_coords", VALUEFUNC(WxGridRangeSelectEvent::GetBottomRightCoords), 0);
+	rb_define_method(rubyClass, "get_top_left_coords", VALUEFUNC(WxGridRangeSelectEvent::GetTopLeftCoords), 0);
+	rb_define_method(rubyClass, "get_left_col", VALUEFUNC(WxGridRangeSelectEvent::GetLeftCol), 0);
+	rb_define_method(rubyClass, "get_top_row", VALUEFUNC(WxGridRangeSelectEvent::GetTopRow), 0);
+	rb_define_method(rubyClass, "get_right_col", VALUEFUNC(WxGridRangeSelectEvent::GetRightCol), 0);
+	rb_define_method(rubyClass, "get_bottom_row", VALUEFUNC(WxGridRangeSelectEvent::GetBottomRow), 0);
+	rb_define_method(rubyClass, "meta_down", VALUEFUNC(WxGridRangeSelectEvent::MetaDown), 0);
+	rb_define_method(rubyClass, "selecting", VALUEFUNC(WxGridRangeSelectEvent::Selecting), 0);
+	rb_define_method(rubyClass, "shift_down", VALUEFUNC(WxGridRangeSelectEvent::ShiftDown), 0);		
+}
+
+VALUE
+WxGridRangeSelectEvent::alloc( VALUE self ){
+	return Data_Wrap_Struct( self, 0 , 0 , 0);	
+}
+
+
+VALUE
+WxGridRangeSelectEvent::AltDown( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	Data_Get_Struct( self, wxGridRangeSelectEvent, ptr );
+	return (ptr->AltDown() ? Qtrue : Qfalse );	
+}
+
+VALUE
+WxGridRangeSelectEvent::ControlDown(VALUE self)
+{
+    wxGridRangeSelectEvent *ptr;
+    Data_Get_Struct(self, wxGridRangeSelectEvent, ptr);
+    return (ptr->ControlDown() ? Qtrue : Qfalse);
+}
+
+VALUE
+WxGridRangeSelectEvent::GetLeftCol( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	Data_Get_Struct( self , wxGridRangeSelectEvent, ptr );
+	return INT2NUM(ptr->GetLeftCol());
+}
+
+VALUE
+WxGridRangeSelectEvent::GetRightCol( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	Data_Get_Struct( self , wxGridRangeSelectEvent, ptr );
+	return INT2NUM(ptr->GetRightCol());
+}
+
+VALUE
+WxGridRangeSelectEvent::GetTopRow( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	Data_Get_Struct( self , wxGridRangeSelectEvent, ptr );
+	return INT2NUM(ptr->GetTopRow());
+}
+
+VALUE
+WxGridRangeSelectEvent::GetBottomRow( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	Data_Get_Struct( self , wxGridRangeSelectEvent, ptr );
+	return INT2NUM(ptr->GetBottomRow());
+}
+
+
+VALUE
+WxGridRangeSelectEvent::GetBottomRightCoords( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	VALUE ret;
+
+	Data_Get_Struct( self, wxGridRangeSelectEvent, ptr );
+	wxGridCellCoords coords = ptr->GetBottomRightCoords();
+	
+	ret = rb_ary_new();
+	rb_ary_push(ret, INT2NUM(coords.GetRow()));
+	rb_ary_push(ret, INT2NUM(coords.GetCol()));
+	
+	return ret;
+}
+
+VALUE
+WxGridRangeSelectEvent::GetTopLeftCoords( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	VALUE ret;
+
+	Data_Get_Struct( self, wxGridRangeSelectEvent, ptr );
+	wxGridCellCoords coords = ptr->GetTopLeftCoords();
+	
+	ret = rb_ary_new();
+	rb_ary_push(ret, INT2NUM(coords.GetRow()));
+	rb_ary_push(ret, INT2NUM(coords.GetCol()));
+	
+	return ret;
+}
+
+
+VALUE WxGridRangeSelectEvent::Selecting( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	Data_Get_Struct( self, wxGridRangeSelectEvent, ptr );
+	return (ptr->Selecting() ? Qtrue : Qfalse );
+}
+
+VALUE WxGridRangeSelectEvent::ShiftDown( VALUE self ){
+	wxGridRangeSelectEvent *ptr;
+	Data_Get_Struct( self, wxGridRangeSelectEvent, ptr );
+	return (ptr->ShiftDown() ? Qtrue : Qfalse );
+}
+
+
+VALUE
+WxGridRangeSelectEvent::MetaDown(VALUE self)
+{
+    wxGridRangeSelectEvent *ptr;
+    Data_Get_Struct(self, wxGridRangeSelectEvent, ptr);
+    return (ptr->MetaDown() ? Qtrue : Qfalse);
+}
+
+void WxGridEditorCreatedEvent::DefineClass(){
+	if( rubyClass ) return;
+	WxEvent::DefineClass();
+	rubyClass = rb_define_class_under( GetWxModule(), "GridEditorCreatedEvent", WxEvent::rubyClass );
+	rb_define_alloc_func(rubyClass,WxGridEditorCreatedEvent::alloc);
+	rb_define_method(rubyClass, "get_col", VALUEFUNC(WxGridEditorCreatedEvent::GetCol), 0);
+	rb_define_method(rubyClass, "get_row", VALUEFUNC(WxGridEditorCreatedEvent::GetRow), 0);
+	rb_define_method(rubyClass, "get_control", VALUEFUNC(WxGridEditorCreatedEvent::GetControl), 0);
+
+}
+
+VALUE
+WxGridEditorCreatedEvent::alloc( VALUE self ){
+	return Data_Wrap_Struct( self, 0 , 0 , 0);	
+}
+
+
+VALUE
+WxGridEditorCreatedEvent::GetCol( VALUE self ){
+	wxGridEditorCreatedEvent *ptr;
+	Data_Get_Struct( self , wxGridEditorCreatedEvent, ptr );
+	return INT2NUM(ptr->GetCol());
+}
+
+
+
+VALUE
+WxGridEditorCreatedEvent::GetRow( VALUE self ){
+	wxGridEditorCreatedEvent *ptr;
+	Data_Get_Struct( self, wxGridEditorCreatedEvent, ptr );
+	return INT2NUM( ptr->GetRow() );
+}
+
+VALUE
+WxGridEditorCreatedEvent::GetControl(VALUE self){
+	wxGridEditorCreatedEvent *ptr;
+	VALUE ret;
+
+	Data_Get_Struct( self, wxGridEditorCreatedEvent, ptr );
+	wxObject *obj = ptr->GetControl();
+	ret = WxRbTypeTable::ConvertCppObject(obj);
+
+	return ret;
+}
+
+
+
+VALUE WxGridEvent::rubyClass;
+VALUE WxGridSizeEvent::rubyClass;
+VALUE WxGridRangeSelectEvent::rubyClass;
+VALUE WxGridEditorCreatedEvent::rubyClass;
+
+class ZAutoDefineWxGridEvent
+{
+public:
+   ZAutoDefineWxGridEvent()
+    {
+       WxGridEvent::DefineClass();
+       WxGridSizeEvent::DefineClass();
+	   WxGridRangeSelectEvent::DefineClass();
+       WxGridEditorCreatedEvent::DefineClass();
+    }
+};
+static ZAutoDefineWxGridEvent xZach;
+
+
+
+
+//END Zach
+
+
 
 //--------------------------------------------------------------------------------
 void WxCloseEvent::DefineClass()

@@ -29,6 +29,8 @@
 #include "evthandler.h"
 #include "treectrl.h"
 #include "event.h"
+#include "wx/generic/grid.h"
+
 
 IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
@@ -181,6 +183,36 @@ void wxRbCallback::EventThunker(wxEvent &event) {
 	  vevent = Data_Wrap_Struct(WxMouseEvent::rubyClass, 0, 0, 0);
 	} else if(eventType == wxEVT_IDLE) {
 		vevent = Data_Wrap_Struct(WxIdleEvent::rubyClass, 0, 0, 0);
+	} else if(
+		eventType == wxEVT_GRID_CELL_LEFT_CLICK||
+		eventType == wxEVT_GRID_CELL_RIGHT_CLICK||
+		eventType == wxEVT_GRID_CELL_LEFT_DCLICK||
+		eventType == wxEVT_GRID_CELL_RIGHT_DCLICK||
+		eventType == wxEVT_GRID_LABEL_LEFT_CLICK||
+		eventType == wxEVT_GRID_LABEL_RIGHT_CLICK||
+		eventType == wxEVT_GRID_LABEL_LEFT_DCLICK||
+		eventType == wxEVT_GRID_LABEL_RIGHT_DCLICK||
+		eventType == wxEVT_GRID_CELL_CHANGE||
+		eventType == wxEVT_GRID_SELECT_CELL||
+		eventType == wxEVT_GRID_EDITOR_HIDDEN||
+		eventType == wxEVT_GRID_EDITOR_SHOWN
+	){
+		vevent = Data_Wrap_Struct( WxGridEvent::rubyClass, 0, 0, 0 );
+	} else if (
+		eventType == wxEVT_GRID_COL_SIZE ||
+		eventType == wxEVT_GRID_ROW_SIZE
+	){
+		vevent =  Data_Wrap_Struct( WxGridSizeEvent::rubyClass, 0, 0, 0 );
+	} else if (
+		eventType == wxEVT_GRID_RANGE_SELECT
+	){
+		vevent =  Data_Wrap_Struct( WxGridRangeSelectEvent::rubyClass, 0, 0, 0 );
+	} else if (
+		eventType == wxEVT_GRID_EDITOR_CREATED
+	){
+		
+		vevent =  Data_Wrap_Struct( WxGridEditorCreatedEvent::rubyClass, 0, 0, 0 );
+		
     } else {
 //printf("Unknown event type %d\n", eventType);
 	  vevent = Data_Wrap_Struct(WxEvent::rubyClass, 0, 0, 0);
@@ -422,6 +454,26 @@ void WxEvtHandler::DefineClass()
     rb_define_method(rubyClass, "evt_tree_sel_changed",VALUEFUNC(WxEvtHandler::WxRbEVT_TREE_SEL_CHANGED),-1);
     rb_define_method(rubyClass, "evt_tree_sel_changing",VALUEFUNC(WxEvtHandler::WxRbEVT_TREE_SEL_CHANGING),-1);
     rb_define_method(rubyClass, "evt_tree_set_info",VALUEFUNC(WxEvtHandler::WxRbEVT_TREE_SET_INFO),-1);
+    rb_define_method(rubyClass, "evt_grid_cell_left_click", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_CELL_LEFT_CLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_cell_right_click", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_CELL_RIGHT_CLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_cell_left_dclick", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_CELL_LEFT_DCLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_cell_right_dclick", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_CELL_RIGHT_DCLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_label_left_click", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_LABEL_LEFT_CLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_label_right_click", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_LABEL_RIGHT_CLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_label_left_dclick", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_LABEL_LEFT_DCLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_label_right_dclick", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_LABEL_RIGHT_DCLICK), -1 );
+    rb_define_method(rubyClass, "evt_grid_cell_change", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_CELL_CHANGE), -1 );
+    
+    rb_define_method(rubyClass, "evt_grid_select_cell", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_SELECT_CELL), -1 );
+    rb_define_method(rubyClass, "evt_grid_editor_hidden", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_EDITOR_HIDDEN), -1 );
+    rb_define_method(rubyClass, "evt_grid_editor_shown", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_EDITOR_SHOWN), -1 );
+    rb_define_method(rubyClass, "evt_grid_row_size", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_ROW_SIZE), -1 );
+    rb_define_method(rubyClass, "evt_grid_col_size", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_COL_SIZE), -1 );
+    rb_define_method(rubyClass, "evt_grid_range_select", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_RANGE_SELECT), -1 );
+    rb_define_method(rubyClass, "evt_grid_editor_created", VALUEFUNC(WxEvtHandler::WxRbEVT_GRID_EDITOR_CREATED), -1 );
+
+
+
 }
 
 VALUE
@@ -445,7 +497,7 @@ WxEvtHandler::Connect(VALUE rubyClass,VALUE rubyId,VALUE rubyLastId,VALUE rubyTy
     int lastId = NUM2INT(rubyLastId);
     wxEventType eventType = rubyType;
 	VALUE func = rubyBlock;
-
+	
 	// make sure func won't get garbage collected	
 	rb_ary_push(eventCallbackArray, func);
 	
@@ -1743,6 +1795,103 @@ void WxEvtHandler::WxRbEVT_TREE_ITEM_MIDDLE_CLICK(int argc, VALUE* argv, VALUE s
 	VALUE func = Qnil;
 	rb_scan_args(argc, argv, "1&", &id, &func);
     Connect(self, id,INT2NUM(-1),wxEVT_COMMAND_TREE_ITEM_MIDDLE_CLICK, func);
+}
+
+void WxEvtHandler::WxRbEVT_GRID_CELL_LEFT_CLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_CELL_LEFT_CLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_CELL_RIGHT_CLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_CELL_RIGHT_CLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_CELL_LEFT_DCLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_CELL_LEFT_DCLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_CELL_RIGHT_DCLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_CELL_RIGHT_DCLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_LABEL_LEFT_CLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_LABEL_LEFT_CLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_LABEL_RIGHT_CLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_LABEL_RIGHT_CLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_LABEL_LEFT_DCLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_LABEL_LEFT_DCLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_LABEL_RIGHT_DCLICK(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_LABEL_RIGHT_DCLICK, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_CELL_CHANGE(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_CELL_CHANGE, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_SELECT_CELL(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_SELECT_CELL, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_EDITOR_HIDDEN(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_EDITOR_HIDDEN, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_EDITOR_SHOWN(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_EDITOR_SHOWN, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_ROW_SIZE(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_ROW_SIZE, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_COL_SIZE(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_COL_SIZE, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_RANGE_SELECT(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_RANGE_SELECT, func );
+}
+void WxEvtHandler::WxRbEVT_GRID_EDITOR_CREATED(int argc, VALUE *argv, VALUE self ){
+	VALUE id = NUM2INT(-1);
+	VALUE func = Qnil;
+	rb_scan_args(argc, argv, "0&", &func);
+	Connect( self, id, INT2NUM(-1),wxEVT_GRID_EDITOR_CREATED, func );
 }
 
 VALUE WxEvtHandler::rubyClass;
