@@ -45,7 +45,7 @@ end
 def all_obj_bases
     return get_classes + 
         ["wx", "RubyConstants", "RubyStockObjects", 
-            "RubyEventTypes", "Functions"]
+            "RubyEventTypes", "Functions","Mac"]
 end
 
 def special_swig_file(base_name)
@@ -105,6 +105,7 @@ def add_initializers(cpp_file)
     needs_init_list = get_classes
     needs_init_list << "RubyConstants"
     needs_init_list << "Functions"
+    needs_init_list << "Mac"
     File.open(cpp_file, "a") do | out |
         out.puts
         out.puts('extern "C" void InitializeOtherModules()')
@@ -173,6 +174,7 @@ def create_swig_tasks
     create_swig_helper_task("RubyStockObjects")
     create_swig_helper_task("RubyEventTypes")
     create_swig_helper_task("Functions")
+    create_swig_helper_task("Mac")
     create_swig_main_task("wx")
     file(cpp_file("wx") => normal_cpp_files)
 end

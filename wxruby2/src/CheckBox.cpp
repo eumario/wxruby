@@ -690,7 +690,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "CheckBox.h"
+#include "src/CheckBox.h"
 
 static VALUE
 _wrap_new_wxCheckBox__SWIG_0(int argc, VALUE *argv, VALUE self) {

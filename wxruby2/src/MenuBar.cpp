@@ -690,7 +690,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "MenuBar.h"
+#include "src/MenuBar.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

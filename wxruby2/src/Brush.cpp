@@ -688,7 +688,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Brush.h"
+#include "src/Brush.h"
 
 static VALUE
 _wrap_new_wxBrush__SWIG_0(int argc, VALUE *argv, VALUE self) {

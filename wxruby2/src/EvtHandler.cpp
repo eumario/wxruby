@@ -942,7 +942,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "EvtHandler.h"
+#include "src/EvtHandler.h"
 
 SwigDirector_wxEvtHandler::SwigDirector_wxEvtHandler(VALUE self, bool disown): wxEvtHandler(), Swig::Director(self, disown) {
     

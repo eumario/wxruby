@@ -693,7 +693,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Caret.h"
+#include "src/Caret.h"
 
 static VALUE
 _wrap_new_wxCaret__SWIG_0(int argc, VALUE *argv, VALUE self) {

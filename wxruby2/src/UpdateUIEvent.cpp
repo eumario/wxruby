@@ -686,7 +686,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "UpdateUIEvent.h"
+#include "src/UpdateUIEvent.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

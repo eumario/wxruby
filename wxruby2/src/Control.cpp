@@ -687,7 +687,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Control.h"
+#include "src/Control.h"
 
 static VALUE
 _wrap_wxControl_Command(int argc, VALUE *argv, VALUE self) {
