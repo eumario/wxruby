@@ -1,5 +1,6 @@
-wxRuby version 0.1 (ALPHA)
+README for wxRuby version 0.1 (ALPHA)
    Released under the wxWindows 2 license (see LICENSE)
+   This file last updated 2003-08-24
 
 
 --------------------------------------------------------------------
@@ -10,7 +11,7 @@ gives access to the wxWindows cross-platform, native-widget,
 GUI toolkit. 
 
 The wxRuby project website is:
-  https://savannah.nongnu.org/projects/wxruby/
+  http://rubyforge.org/projects/wxruby/
 
 The wxWindows project website is:
   http://wxwindows.org/
@@ -19,16 +20,14 @@ The wxWindows project website is:
 --------------------------------------------------------------------
 REQUIREMENTS
 
-* Ruby 1.6.5+ (or 1.8.x)
+* Ruby 1.8.x (or 1.6.5+ on some platforms)
 * wxWindows 2.4.x (compiled without unicode)
 
 Primary development is under Debian GNU/Linux ("Sarge").
 
-It has been tested successfully under Cygwin.
+It has been tested successfully under Cygwin and Mac OS X.
 
-We have some issues with MS Windows.
-
-It compiles under Mac OS X, but wxRuby apps don't really work.
+We have some unresolved issues with MS Windows.
 
 
 --------------------------------------------------------------------
@@ -85,6 +84,17 @@ which may or may not want the event itself. For example:
     evt_char {|event| onChar(event)}
     evt_menu(Calendar_File_Quit) {onQuit}
 
+
+--------------------------------------------------------------------
+PLATFORM-SPECIFIC ISSUES
+
+Please see the other README files for problems, suggestions, and 
+other information for specific platforms:
+
+  README.linux
+  README.osx
+  README.mingw
+  README.mswin
 
 --------------------------------------------------------------------
 KNOWN PROBLEMS
