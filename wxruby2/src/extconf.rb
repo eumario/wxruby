@@ -40,7 +40,15 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
 
     $CFLAGS += " `wx-config --cxxflags` -I.. "
     $CPPFLAGS += ' -x objective-c++ '
-    $LDFLAGS += " `wx-config --libs` -lobjc "
+    #
+    # We can't include -framework Cocoa because ruby doesn't perform
+    # any cocoa initialization beforehand. 
+    #   http://www.cocoabuilder.com/archive/message/cocoa/2004/1/22/99284
+    # Thankfully, we don't *need* cocoa, but wx-config thinks we do. So
+    # change it's mind.
+    #
+    libs = `wx-config --libs`.chomp.gsub(/-framework Cocoa/,"").gsub(/-framework WebKit/,"")
+    $LIBS += " #{libs} -lobjc "
     if ($use_xrc)
       $LDFLAGS += " -lwx_mac_xrc-2.4 "
     end
