@@ -712,6 +712,9 @@ wxRbListCtrl::OnGetItemAttr(long item) const
 {
     void *data = GetClientData();
     VALUE self = rb_hash_aref((VALUE)data, rb_str_new2("self"));
+    if(!rb_respond_to(self, rb_intern("on_get_item_attr")))
+        return wxListCtrl::OnGetItemAttr(item);
+
     VALUE vattr = rb_funcall(self,rb_intern("on_get_item_attr"),1,INT2NUM(item));
     if(vattr==Qnil) return (wxListItemAttr *)NULL;
     wxListItemAttr *ptr;

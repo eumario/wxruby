@@ -16,7 +16,7 @@ $objs = [
 "menuitem.o","textattr.o","dataformat.o","togglebutton.o",
 "dropsource.o","droptarget.o","textdroptarget.o","filedroptarget.o",
 "filedataobject.o","textdataobject.o","dataobject.o","dataobjectsimple.o",
-"dynamiccast.o"
+"dynamiccast.o", "mdiparentframe.o", "mdiclientwindow.o", "mdichildframe.o",
 ]
 
 $use_xrc = false

@@ -1,3 +1,13 @@
+2004-03-14
+    * Fixed listctrl sample to use new naming for on_xxx callbacks
+    * ListCtrl no longer requires subclasses to implement on_get_item_attr,
+      to match the documentation. 
+      A ListCtrl using virtual mode must still override on_get_item_text. 
+      A ListCtrl that is virtual AND has an image list must override 
+      on_get_item_image
+    * Added MDI support, and an MDI sample
+    
+
 2004-03-14 02:00
     * Cleaned up Validator sample (etc/test21), and fixed Wx::Validator so
       it behaves sanely. Also renamed the "clone" callback to "copy" to 

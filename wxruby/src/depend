@@ -54,6 +54,8 @@ listctrl.o: listctrl.cpp wx.h  listctrl.h textctrl.h list.h \
   point.h rect.h colour.h font.h window.h
 log.o: log.cpp wx.h  log.h
 mask.o: mask.cpp wx.h  mask.h
+mdiparentframe.o: mdiparentframe.cpp mdiparentframe.h wx.h mdiclientwindow.h \
+  mdichildframe.h
 menubar.o: menubar.cpp wx.h  menubar.h
 menu.o: menu.cpp wx.h  menu.h
 menuitem.o : menuitem.cpp wx.h menuitem.h bitmap.h colour.h font.h menu.h
