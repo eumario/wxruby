@@ -18,4 +18,23 @@ For general wxRuby information, see the main README file
 --------------------------------------------------------------------
 MAC OS X INFORMATION
 
-None at this time.
+1. The OS X version does not support FontDialog.
+
+2. Applications under OS X require resource bundles. There are no 
+tools right now to create these bundles specifically for wxRuby 
+apps, but there is a tool that seems to do the job nicely:
+
+RubyRunner has been replaced by the more capable ScrUITools.  "ScrUI" stands
+for Script User Interface, and is pronounced "screwy". :) Currently, there
+are two tools: ScrUIRunner and ScrUIActivator.  ScrUIRunner replaces
+RubyRunner, but it allows you to specify the working directory, command line
+arguments, and shell environment variables for the script (...added
+specifically for you, Torsten) ;).  ScrUIActivator activates the UI of a
+script that is already running, so you can run the script normally from a
+terminal window if you need standard input.
+
+Download ScrUITools at <http://www.xmission.com/~illume/scruitools.tgz>.
+Comments/Questions are welcome.
+
+3. There is currently a compile warning related to icons, which 
+has not yet been researched or resolved.
