@@ -23,10 +23,14 @@ public:
             long style = wxLC_ICON,
             const wxValidator& validator = wxDefaultValidator, const wxString& name = "listCtrl")
         :   wxListCtrl(parent,id,pos,size,style,validator,name) { }
+
+    VALUE m_self;
+        
 private:
     virtual wxString OnGetItemText(long item, long column) const;
     virtual int OnGetItemImage(long item) const;
     virtual wxListItemAttr *OnGetItemAttr(long item) const;
+
 };
 
 class WxListCtrl {

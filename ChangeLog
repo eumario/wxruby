@@ -13,6 +13,12 @@
     * Fixed crash in TreeCtrl#on_compare_items
       (it could be reproduced in the treectrl sample by inserting 
        GC.start at the beginning of the DoSortChildren method)
+    * Fixed crash in ListCtrl#on_get_item_xxx
+      (it could be reproduced in the listctrl sample by inserting 
+       GC.start at the beginning of each of the overridden
+       on_get_item_xxx methods, and choosing "virtual" mode when 
+       running the sample)
+    
 
 2004-05-29
     * Add support for ComboBox#get_value
