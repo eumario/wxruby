@@ -41,7 +41,7 @@ bool wxTextDropTargetHelper::OnDropText(wxCoord x, wxCoord y, const wxString& da
 	
 	VALUE ret = rb_funcall(me,method,3,INT2NUM(x),INT2NUM(y),rb_str_new2(data.c_str()));
 	
-	return (bool)NUM2INT(ret);
+	return IsTrue(ret);
 }
 
 //$$ END_CPP_FILE
