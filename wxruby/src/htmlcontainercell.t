@@ -11,6 +11,7 @@
 **********************************************************************/
 
 //$$ CLASS HtmlContainerCell : HtmlCell
+//$$ NEEDS_WRAPPING_CONSTRUCTOR
 //$$ NO_CLIENT_DATA
 
 //$$ METHODS_BEGIN

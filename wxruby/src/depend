@@ -45,7 +45,7 @@ frame.o: frame.cpp wx.h  frame.h window.h statusbar.h \
 gauge.o: gauge.cpp wx.h gauge.h window.h
 grid.o : grid.cpp grid.h font.h pen.h rect.h colour.h size.h
 icon.o: icon.cpp wx.h  icon.h bitmap.h
-htmlcell.o: htmlcell.cpp htmlcell.h              
+htmlcell.o: htmlcell.cpp htmlcell.h htmlcontainercell.cpp htmlcontainercell.h
 htmleasyprinting.o: htmleasyprinting.cpp htmleasyprinting.cpp
 htmlwindow.o: htmlwindow.cpp htmlwindow.h frame.h
 htmlcontainercell.o: htmlcontainercell.h htmlcontainercell.cpp
@@ -61,6 +61,8 @@ log.o: log.cpp wx.h  log.h
 mask.o: mask.cpp wx.h  mask.h
 mdiparentframe.o: mdiparentframe.cpp mdiparentframe.h wx.h mdiclientwindow.h \
   mdichildframe.h
+mdichildframe.o: mdichildframe.cpp mdichildframe.h
+mdiclientwindow.o: mdiclientwindow.cpp mdiclientwindow.h
 menubar.o: menubar.cpp wx.h  menubar.h
 menu.o: menu.cpp wx.h  menu.h
 menuitem.o : menuitem.cpp wx.h menuitem.h bitmap.h colour.h font.h menu.h
@@ -108,4 +110,15 @@ window.o: window.cpp wx.h  window.h evthandler.h colour.h \
   font.h size.h rect.h sizer.h caret.h point.h layout.h region.h \
   validator.h cursor.h tooltip.h classinfo.h
 xmlresource.o: xmlresource.h xmlresource.cpp
+dynamiccast.o: button.o filedroptarget.o menuitem.o  \
+caret.o font.o scrollbar.o  \
+checkbox.o frame.o \
+choice.o grid.o textattr.o colourdialog.o textctrl.o  \
+control.o textdataobject.o  \
+dataformat.o htmleasyprinting.o textdroptarget.o  \
+dataobject.o htmlprocessor.o togglebutton.o  \
+dataobjectsimple.o htmlwindow.o window.o  \
+dropsource.o mdichildframe.o xmlresource.o  \
+droptarget.o mdiclientwindow.o  \
+filedataobject.o mdiparentframe.o  
 wx.o: wx.cpp wx.h

@@ -57,7 +57,7 @@ class WxHtmlCell
 public:
         //$$ RB_DECLARE
 
-    static VALUE GetHorizontalConstrains(VALUE self);
+    static VALUE GetHorizontalConstraints(VALUE self);
 };
 //$$ END_H_FILE
 
@@ -69,13 +69,13 @@ void WxHtmlCell::DefineClass()
 {
     //$$ RB_DEFINE
 
-	rb_define_method(rubyClass,"get_horizontal_constrains",VALUEFUNC(WxHtmlCell::GetHorizontalConstrains),0);
+	rb_define_method(rubyClass,"get_horizontal_constrains",VALUEFUNC(WxHtmlCell::GetHorizontalConstraints),0);
 }
 
 //$$ RB_IMPLEMENT
 
 VALUE
-WxHtmlCell::GetHorizentalConstraints(VALUE self)
+WxHtmlCell::GetHorizontalConstraints(VALUE self)
 {
     int left;
     int right;
