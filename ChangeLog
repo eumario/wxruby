@@ -1,3 +1,8 @@
+2004-01-26
+    * Added installers/ subdirectory with windows installer 
+      scripts from Curt
+      
+
 2004-01-07
     * Added Curt's README.mswin
     * Merged yet another WIN32 patch from Curt (extconf.rb)
