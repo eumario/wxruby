@@ -7,10 +7,33 @@
 %include "common.i"
 
 %{
+#include <wx/hashmap.h>
+
 IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
+WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
+WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
+
+static GcHashMap GcHash;
+static DeletedHashMap DeletedHash;
+
+void GcMarkDeleted(void *ptr)
+{
+	DeletedHash[ptr] = true;
+}
+
+bool GcIsDeleted(void *ptr)
+{
+	if (DeletedHash.find(ptr) == DeletedHash.end())
+		return false;
+	else return true;
+}
+
+
 %} 
 
 %init %{
+
+
     extern void InitializeOtherModules();
     InitializeOtherModules();
 %}
