@@ -57,6 +57,9 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
     $CPPFLAGS += ' -x objective-c++ '
     $LDFLAGS += " `wx-config --libs` -framework Carbon "
  	$objs.push("macstart.o")
+    if ($use_xrc)
+        $LDFLAGS += " -lwx_mac_xrc-2.4 "
+    end
 elsif have_library("kernel32")
     # native Windows - requires a static build of wxWindows
     $DEBUG = false

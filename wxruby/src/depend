@@ -47,7 +47,7 @@ grid.o : grid.cpp grid.h font.h pen.h rect.h colour.h size.h
 icon.o: icon.cpp wx.h  icon.h bitmap.h
 htmlcell.o: htmlcell.cpp htmlcell.h              
 htmleasyprinting.o: htmleasyprinting.cpp htmleasyprinting.cpp
-htmlwindow.o: htmlwindow.cpp htmlwindow.h
+htmlwindow.o: htmlwindow.cpp htmlwindow.h frame.h
 htmlcontainercell.o: htmlcontainercell.h htmlcontainercell.cpp
 htmlprocessor.o: htmlprocessor.h htmlprocessor.cpp
 image.o: image.cpp wx.h  image.h statusbar.h menubar.h \
