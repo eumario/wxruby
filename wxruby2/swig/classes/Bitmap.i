@@ -4,14 +4,14 @@
 %include "../common.i"
 
 %module(directors="1") wxBitmap
-
-%ignore   wxBitmap() ;
-%ignore   wxBitmap(const wxBitmap&  bitmap ) ;
-%ignore   wxBitmap(void*  data , int  type , int  width , int  height , int depth = -1) ;
-%ignore   wxBitmap(const char  bits[] , int  width , int  height , int depth = 1) ;
-%ignore   wxBitmap(int  width , int  height , int depth = -1) ;
-%ignore   wxBitmap(const char**  bits ) ;
-%ignore   wxBitmap(const wxImage&  img , int depth = -1) ;
+%feature("nodirector") wxBitmap;
+#%ignore   wxBitmap() ;
+#%ignore   wxBitmap(const wxBitmap&  bitmap ) ;
+#%ignore   wxBitmap(void*  data , int  type , int  width , int  height , int depth = -1) ;
+#%ignore   wxBitmap(const char  bits[] , int  width , int  height , int depth = 1) ;
+#%ignore   wxBitmap(int  width , int  height , int depth = -1) ;
+#%ignore   wxBitmap(const char**  bits ) ;
+#%ignore   wxBitmap(const wxImage&  img , int depth = -1) ;
 
 %ignore   AddHandler(wxBitmapHandler*  handler ) ;
 %ignore   CleanUpHandlers() ;

@@ -3,3 +3,4 @@
 #   as part of the wxRuby project
 
 typedef int wxWindowID;
+typedef int wxCoord;

@@ -9,12 +9,12 @@ class wxNotebook : public wxControl
 {
 public:
    wxNotebook() ;
-   wxNotebook(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString&  name = "notebook") ;
+  wxNotebook(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString&  name = "notebook");
   virtual  ~wxNotebook() ;
   bool AddPage(wxNotebookPage*  page , const wxString&  text , bool select = false, int imageId = -1) ;
   void AdvanceSelection(bool forward = true) ;
   void AssignImageList(wxImageList*  imageList ) ;
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size , long style = 0, const wxString&  name = "notebook") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize&  size , long style , const wxString&  name = "notebook");
   bool DeleteAllPages() ;
   bool DeletePage(int  page ) ;
   wxImageList* GetImageList() const;

@@ -8,7 +8,7 @@
 class wxDirDialog : public wxDialog
 {
 public:
-   wxDirDialog(wxWindow*  parent , const wxString&  message = "Choose, const wxString&  defaultPath = "", long  style = 0, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, const wxString&  name = "wxDirCtrl") ;
+   wxDirDialog(wxWindow*  parent , const wxString&  message = "Choose", const wxString&  defaultPath = "", long  style = 0, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, const wxString&  name = "wxDirCtrl") ;
   virtual  ~wxDirDialog() ;
   wxString GetPath() const;
   wxString GetMessage() const;

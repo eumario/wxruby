@@ -21,7 +21,7 @@
 %ignore wxWindow::GetChildren;
 %ignore wxWindow::GetValidator;
 %ignore wxWindow::PopEventHandler;
-%ignore wxWindow::SetCaret;
+# %ignore wxWindow::SetCaret;
 
 %include "include/wxWindow.h"
 

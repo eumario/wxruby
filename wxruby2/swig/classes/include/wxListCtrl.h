@@ -48,9 +48,9 @@ public:
   long InsertItem(long  index , const wxString&  label ) ;
   long InsertItem(long  index , int  imageIndex ) ;
   long InsertItem(long  index , const wxString&  label , int  imageIndex ) ;
-  virtual wxListItemAttr * OnGetItemAttr(long  item ) ;
-  virtual int OnGetItemImage(long  item ) ;
-  virtual wxString OnGetItemText(long  item , long  column ) ;
+  //virtual wxListItemAttr * OnGetItemAttr(long  item );
+  //virtual int OnGetItemImage(long  item );
+  //virtual wxString OnGetItemText(long  item , long  column );
   bool ScrollList(int  dx , int  dy ) ;
   void SetBackgroundColour(const wxColour&  col ) ;
   bool SetColumn(int  col , wxListItem&  item ) ;

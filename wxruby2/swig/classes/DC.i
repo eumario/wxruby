@@ -12,3 +12,12 @@
 %ignore wxDC::StartPage;
 
 %include "include/wxDC.h"
+
+%extend wxDC {
+
+    VALUE free() 
+    {
+        delete self;
+        return Qnil;
+    }
+}

@@ -9,9 +9,9 @@ class wxComboBox : public wxControlWithItems
 {
 public:
    wxComboBox() ;
-   wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox") ;
+  wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox");
   virtual  ~wxComboBox() ;
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value = "", const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "comboBox");
   void Copy() ;
   void Cut() ;
   long GetInsertionPoint() const;

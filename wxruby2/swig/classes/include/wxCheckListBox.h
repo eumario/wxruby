@@ -9,7 +9,7 @@ class wxCheckListBox : public wxListBox
 {
 public:
    wxCheckListBox() ;
-   wxCheckListBox(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, int  n , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox") ;
+  wxCheckListBox(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize& size, int  n =0 , const wxString  choices[] = NULL, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "listBox");
   virtual  ~wxCheckListBox() ;
   void Check(int  item , bool check = true) ;
   bool IsChecked(int  item ) const;

@@ -9,8 +9,8 @@ class wxMask : public wxObject
 {
 public:
    wxMask() ;
-   wxMask(const \helpref{wxBitmap wxbitmap ) ;
-   wxMask(const \helpref{wxBitmap wxbitmap , const \helpref{wxColour wxcolour ) ;
+  wxMask(const wxBitmap & wxbitmap );
+  wxMask(const wxBitmap & wxbitmap , const wxColour &wxcolour );
    wxMask(const wxBitmap&  bitmap , int  index ) ;
   virtual  ~wxMask() ;
   bool Create(const wxBitmap&  bitmap ) ;

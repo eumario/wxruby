@@ -31,12 +31,6 @@ File.open(ARGV[0], "w") do | out |
         if(line.index("Director(VALUE self,"))
             lines = [line]
 	    lines << '    printf("' + this_module + '" " new Director %p\n", this);'
-	    #lines << '    if(alive == Qnil)'
-	    #lines << '    {'
-	    #lines << '        rb_global_variable(&alive);'
-	    #lines << '        alive = rb_hash_new();'
-	    #lines << '    }'
-	    #lines << '    rb_hash_aset(alive, INT2NUM((int)this), self);'
 	    lines << '    fflush(stdout);'
 	    lines << '    GcMapPtrToValue(this,self);'
             line = lines.join("\n")    
@@ -56,8 +50,6 @@ File.open(ARGV[0], "w") do | out |
             lines = []
             lines << "    Swig::Director* director = (Swig::Director*)(SwigDirector_#{$class_name}*)arg1;"
             lines << '    printf("' + this_module + '" " Checking %p\n", director);'
-            #lines << "    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));"
-	    #lines << "    if(self == Qnil)"
 	    lines << "    if (GcIsDeleted(director))"
             lines << "    {"
             lines << "        printf(\"%p is already dead!\\n\", director);"

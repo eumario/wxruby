@@ -11,7 +11,7 @@ public:
    wxImage() ;
    wxImage(const wxImage&  image ) ;
    wxImage(const wxBitmap&  bitmap ) ;
-   wxImage(int  width , int  height , bool clear = true) ;
+  wxImage(int  width , int  height);
    wxImage(int  width , int  height , unsigned char*  data , bool static_data = false) ;
    wxImage(const wxString&  name , long type = wxBITMAP_TYPE_ANY, int index = -1) ;
    wxImage(const wxString&  name , const wxString&  mimetype , int index = -1) ;
@@ -25,8 +25,8 @@ public:
   wxBitmap ConvertToBitmap() const;
   wxImage ConvertToMono(unsigned char  r , unsigned char  g , unsigned char  b ) const;
   wxImage Copy() const;
-  bool Create(int  width , int  height , bool clear = true) ;
-  bool Destroy() ;
+  void Create(int  width , int  height );
+  void Destroy();
   bool FindFirstUnusedColour(unsigned char *  r , unsigned char *  g , unsigned char *  b , unsigned char startR = 1, unsigned char startG = 0, unsigned char startB = 0) ;
   static wxImageHandler* FindHandler(const wxString&  name ) ;
   static wxImageHandler* FindHandler(const wxString&  extension , long  imageType ) ;

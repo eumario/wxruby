@@ -9,13 +9,13 @@ class wxStringTokenizer : public wxObject
 {
 public:
    wxStringTokenizer() ;
-   wxStringTokenizer(const wxString&  str , const wxString&  delims = ", wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
+   wxStringTokenizer(const wxString&  str , const wxString&  delims = "", wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
   int CountTokens() const;
   bool HasMoreTokens() const;
   wxString GetNextToken() ;
   size_t GetPosition() const;
   wxString GetString() const;
-  void SetString(const wxString&  to_tokenize , const wxString&  delims = ", wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
+  void SetString(const wxString&  to_tokenize , const wxString&  delims = "", wxStringTokenizerMode  mode = wxTOKEN_DEFAULT) ;
 };
 
 

@@ -5,4 +5,8 @@
 
 %module(directors="1") wxPanel
 
+
+GC_NEVER(wxPanel);
+
 %include "include/wxPanel.h"
+

@@ -15,7 +15,7 @@ public:
   ;
   ;
   ;
-   wxIcon(const wxString&  name , long  type , int desiredWidth = -1, int desiredHeight = -1) ;
+  wxIcon(const wxString&  name , long  type = wxBITMAP_TYPE_ANY, int desiredWidth = -1, int desiredHeight = -1);
   ;
   void CopyFromBitmap(const wxBitmap&  bmp ) ;
   virtual  ~wxIcon() ;
