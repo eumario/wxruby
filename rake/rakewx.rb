@@ -23,8 +23,13 @@ def wx_config(opt)
 end
 
 def use_wx_config
+    $wx_version = wx_config("--version")
     $wx_cppflags = wx_config("--cppflags")
-    $wx_ldflags = wx_config("--ldflags")
+    if ($wx_version.index("2.5") != -1)
+        $wx_ldflags = ""
+    else
+        $wx_ldflags = wx_config("--ldflags")
+    end
     $wx_libs = wx_config("--libs")
     $cpp = wx_config("--cxx")
     $ld = wx_config("--ld")
@@ -97,7 +102,12 @@ def create_extract_task
     extractor = File.join($swig_dir, "extractxml.rb")
     get_classes.each do | c |
         file(original_h_file(c) => [xml_file, extractor]) do
-            sh "ruby #{extractor} #{xml_file}"
+            if ($wx_version == nil)
+                wx_version = "2.4"
+            else
+                wx_version = $wx_version
+            end
+            sh "ruby #{extractor} #{xml_file} #{wx_version}"
         end
     end
 end
