@@ -47,15 +47,19 @@ public:
 
     virtual ~wxRubyApp()
     {
+#ifdef wxDEBUG    
         printf("~wxRubyApp\n");
+#endif	
     }
 
     int main_loop()
     {
         static int argc = 1;
         static char *argv[] = {"wxruby", NULL};
-
+#ifdef wxDEBUG
         printf("Calling wxEntry, this=%p\n", this);
+#endif
+
 #ifdef __WXMSW__
 
 #if wxMINOR_VERSION == 4
@@ -79,19 +83,25 @@ public:
         wxEntry((const int)argc,(char **)argv);
 #endif        
 		
-
+#ifdef wxDEBUG
         printf("returned from wxEntry...\n");
+#endif	
         rb_gc_start();
+#ifdef wxDEBUG	
         printf("survived gc\n");
+#endif	
         return 0;
     }
     
     virtual bool OnInitGui()
     {
-        
+#ifdef wxDEBUG        
         printf("OnInitGui before\n");
+#endif	
         bool result = wxApp::OnInitGui();
+#ifdef wxDEBUG	
         printf("OnInitGui after\n");
+#endif	
         if(result)
         {
             Init_wxRubyEventTypes();
@@ -102,9 +112,14 @@ public:
 
     virtual int OnExit()
     {
+#ifdef wxDEBUG    
         printf("OnExit...\n");
+#endif	
         rb_gc_start();
+#ifdef wxDEBUG	
         printf("survived gc\n");
+#endif
+
 #if !wxCHECK_VERSION(2,5,0)
         wxTheApp = 0;
 #endif
@@ -112,9 +127,13 @@ public:
         SetTopWindow(0);
         if ( oldlog )
         {
-            printf("Deleting oldlog...\n");
+#ifdef wxDEBUG
+	    printf("Deleting oldlog...\n");
+#endif	    
             delete oldlog;
+#ifdef wxDEBUG	    
             printf("worked\n");
+#endif	    
         }
         return 0;
     }

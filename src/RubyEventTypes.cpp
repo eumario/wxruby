@@ -548,6 +548,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -744,7 +745,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "RubyEventTypes.h"
+#include "src/RubyEventTypes.h"
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */

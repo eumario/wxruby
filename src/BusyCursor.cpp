@@ -552,6 +552,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -679,16 +680,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("BusyCursor.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("BusyCursor.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -763,7 +768,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "BusyCursor.h"
+#include "src/BusyCursor.h"
 
 SwigDirector_wxBusyCursor::SwigDirector_wxBusyCursor(VALUE self, wxCursor *cursor, bool disown): wxBusyCursor(cursor), Swig::Director(self, disown) {
     
@@ -816,14 +821,20 @@ _wrap_new_wxBusyCursor(int argc, VALUE *argv, VALUE self) {
 static void
 free_wxBusyCursor(wxBusyCursor *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxBusyCursor*)arg1;
+#ifdef wxDEBUG
     printf("BusyCursor.cpp" " Checking %p\n", director);
+#endif
     if (GcIsDeleted(director))
     {
+#ifdef wxDEBUG
         printf("%p is already dead!\n", director);
+#endif
         return;
     }
+#ifdef wxDEBUG
     printf("deleting %p\n", director);
     fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE

@@ -565,6 +565,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -690,16 +691,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("DC.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("DC.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -774,7 +779,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "DC.h"
+#include "src/DC.h"
 
 SwigDirector_wxDC::SwigDirector_wxDC(VALUE self, bool disown): wxDC(), Swig::Director(self, disown) {
     
@@ -785,14 +790,20 @@ SwigDirector_wxDC::SwigDirector_wxDC(VALUE self, bool disown): wxDC(), Swig::Dir
 static void
 free_wxDC(wxDC *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxDC*)arg1;
+#ifdef wxDEBUG
     printf("DC.cpp" " Checking %p\n", director);
+#endif
     if (GcIsDeleted(director))
     {
+#ifdef wxDEBUG
         printf("%p is already dead!\n", director);
+#endif
         return;
     }
+#ifdef wxDEBUG
     printf("deleting %p\n", director);
     fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE
@@ -2264,27 +2275,37 @@ _wrap_wxDC_GetTextExtent(int argc, VALUE *argv, VALUE self) {
     wxCoord *arg5 = (wxCoord *) NULL ;
     wxCoord *arg6 = (wxCoord *) NULL ;
     wxFont *arg7 = (wxFont *) NULL ;
+    wxCoord a3 ;
+    wxCoord b3 ;
+    wxCoord c3 ;
+    wxCoord d3 ;
+    VALUE vresult = Qnil;
     
-    if ((argc < 3) || (argc > 6))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    {
+        arg3=&a3;
+        arg4=&b3;
+        arg5=&c3;
+        arg6=&d3;
+    }
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
     {
         arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
     }
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxCoord, 1);
-    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxCoord, 1);
-    if (argc > 3) {
-        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxCoord, 1);
-    }
-    if (argc > 4) {
-        SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxCoord, 1);
-    }
-    if (argc > 5) {
-        SWIG_ConvertPtr(argv[5], (void **) &arg7, SWIGTYPE_p_wxFont, 1);
+    if (argc > 1) {
+        SWIG_ConvertPtr(argv[1], (void **) &arg7, SWIGTYPE_p_wxFont, 1);
     }
     (arg1)->GetTextExtent((wxString const &)*arg2,arg3,arg4,arg5,arg6,arg7);
     
-    return Qnil;
+    {
+        vresult = rb_ary_new();
+        rb_ary_push(vresult, INT2NUM(*arg3));
+        rb_ary_push(vresult, INT2NUM(*arg4));
+        rb_ary_push(vresult, INT2NUM(*arg5));
+        rb_ary_push(vresult, INT2NUM(*arg6));
+    }
+    return vresult;
 }
 
 

@@ -43,8 +43,7 @@
 	   {
 	      wxPaintDC dc(ptr);
 	      
-	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxDC, 0);
-	      printf("dcVal = %d\n",dcVal);
+	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxDC, 0);	      
 	      rb_yield(dcVal);
 	
 	      DATA_PTR(dcVal) = NULL;

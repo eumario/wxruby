@@ -551,6 +551,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -672,16 +673,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("FlexGridSizer.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("FlexGridSizer.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -756,7 +761,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "FlexGridSizer.h"
+#include "src/FlexGridSizer.h"
 
 static VALUE
 _wrap_new_wxFlexGridSizer__SWIG_0(int argc, VALUE *argv, VALUE self) {

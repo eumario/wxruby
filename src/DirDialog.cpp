@@ -554,6 +554,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -675,16 +676,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("DirDialog.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("DirDialog.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -759,7 +764,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "DirDialog.h"
+#include "src/DirDialog.h"
 
 SwigDirector_wxDirDialog::SwigDirector_wxDirDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &defaultPath, long style, wxPoint const &pos, wxSize const &size, wxString const &name, bool disown): wxDirDialog(parent, message, defaultPath, style, pos, size, name), Swig::Director(self, disown) {
     
@@ -845,14 +850,20 @@ _wrap_new_wxDirDialog(int argc, VALUE *argv, VALUE self) {
 static void
 free_wxDirDialog(wxDirDialog *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxDirDialog*)arg1;
+#ifdef wxDEBUG
     printf("DirDialog.cpp" " Checking %p\n", director);
+#endif
     if (GcIsDeleted(director))
     {
+#ifdef wxDEBUG
         printf("%p is already dead!\n", director);
+#endif
         return;
     }
+#ifdef wxDEBUG
     printf("deleting %p\n", director);
     fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE

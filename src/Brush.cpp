@@ -553,6 +553,7 @@ static void SWIG_AsVal(VALUE obj, int *val)
 #  undef connect
 
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 
 void GcMarkDeleted(void *);
 bool GcIsDeleted(void *);
@@ -674,16 +675,20 @@ namespace Swig {
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
+#ifdef wxDEBUG
     printf("Brush.cpp" " new Director %p\n", this);
     fflush(stdout);
+#endif
     GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
 
+#ifdef wxDEBUG
     printf("Brush.cpp" " ~Director %p\n", this);
     fflush(stdout);
+#endif
     GcMarkDeleted(this);
       }
 
@@ -758,7 +763,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "Brush.h"
+#include "src/Brush.h"
 
 SwigDirector_wxBrush::SwigDirector_wxBrush(VALUE self, bool disown): wxBrush(), Swig::Director(self, disown) {
     
@@ -1022,14 +1027,20 @@ static VALUE _wrap_new_wxBrush(int nargs, VALUE *args, VALUE self) {
 static void
 free_wxBrush(wxBrush *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxBrush*)arg1;
+#ifdef wxDEBUG
     printf("Brush.cpp" " Checking %p\n", director);
+#endif
     if (GcIsDeleted(director))
     {
+#ifdef wxDEBUG
         printf("%p is already dead!\n", director);
+#endif
         return;
     }
+#ifdef wxDEBUG
     printf("deleting %p\n", director);
     fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE
