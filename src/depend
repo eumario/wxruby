@@ -1,0 +1,91 @@
+app.o: app.cpp wx.h  app_cb.h app.h
+artprovider.o: artprovider.cpp wx.h bitmap.h icon.h size.h \
+  artprovider.h
+bitmap.o: bitmap.cpp wx.h  bitmap.h mask.h image.h
+brush.o: brush.cpp wx.h  brush.h bitmap.h colour.h
+button.o: button.cpp wx.h  button.h control.h size.h \
+  bitmap.h window.h
+calendar.o: calendar.cpp wx.h calendar.h colour.h window.h
+caret.o: caret.cpp wx.h caret.h point.h size.h window.h
+checkbox.o: checkbox.cpp wx.h checkbox.h control.h listbox.h
+choice.o: choice.cpp wx.h choice.h control.h
+classinfo.o: classinfo.cpp wx.h  classinfo.h
+colour.o: colour.cpp wx.h  colour.h
+colourdata.o: colourdata.cpp wx.h  colour.h colourdata.h
+colourdialog.o: colourdialog.cpp wx.h  colourdialog.h dialog.h window.h \
+  colourdata.h
+combobox.o: combobox.cpp wx.h  combobox.h window.h
+config.o: config.cpp wx.h  config.h
+const.o: const.cpp wx.h  bitmap.h point.h size.h date.h \
+  colour.h cursor.h pen.h font.h brush.h
+control.o: control.cpp wx.h control.h window.h
+cursor.o: cursor.cpp wx.h  cursor.h bitmap.h
+date.o: date.cpp wx.h date.h
+dc.o: dc.cpp wx.h dc.h font.h colour.h pen.h \
+  brush.h
+dialog.o: dialog.cpp wx.h  dialog.h window.h
+dirdialog.o: dirdialog.cpp wx.h  dirdialog.h dialog.h
+event.o: event.cpp wx.h event.h date.h size.h point.h \
+  calendar.h notebook.h window.h listctrl.h socket.h treectrl.h
+evthandler.o: evthandler.cpp wx.h  calendar.h evthandler.h \
+  treectrl.h event.h
+filedialog.o: filedialog.cpp wx.h filedialog.h dialog.h
+font.o: font.cpp wx.h font.h
+fontdata.o: fontdata.cpp wx.h font.h colour.h fontdata.h
+fontdialog.o: fontdialog.cpp wx.h fontdata.h fontdialog.h dialog.h
+frame.o: frame.cpp wx.h  frame.h window.h statusbar.h \
+  menubar.h toolbar.h point.h
+gauge.o: gauge.cpp wx.h gauge.h window.h
+grid.o : grid.cpp grid.h font.h pen.h rect.h colour.h size.h
+icon.o: icon.cpp wx.h  icon.h bitmap.h
+image.o: image.cpp wx.h  image.h statusbar.h menubar.h \
+  toolbar.h bitmap.h palette.h
+layout.o: layout.cpp wx.h  layout.h
+listbox.o: listbox.cpp wx.h  listbox.h ownerdrawn.h window.h
+list.o: list.cpp wx.h  list.h bitmap.h icon.h
+listctrl.o: listctrl.cpp wx.h  listctrl.h textctrl.h list.h \
+  point.h rect.h colour.h font.h window.h
+log.o: log.cpp wx.h  log.h
+mask.o: mask.cpp wx.h  mask.h
+menubar.o: menubar.cpp wx.h  menubar.h
+menu.o: menu.cpp wx.h  menu.h
+menuitem.o : menuitem.cpp wx.h menuitem.h bitmap.h colour.h font.h menu.h
+messagedialog.o: messagedialog.cpp wx.h \
+ messagedialog.h dialog.h
+methods.o: methods.cpp wx.h evthandler.h dialog.h colour.h
+notebook.o: notebook.cpp wx.h  notebook.h window.h list.h \
+  button.h
+ownerdrawn.o: ownerdrawn.cpp
+palette.o: palette.cpp wx.h  palette.h bitmap.h colour.h
+panel.o: panel.cpp wx.h  panel.h button.h window.h
+pen.o: pen.cpp wx.h  pen.h bitmap.h colour.h
+point.o: point.cpp wx.h  point.h
+radio.o: radio.cpp wx.h radio.h window.h
+rect.o: rect.cpp wx.h  rect.h
+region.o: region.cpp wx.h  region.h
+scrolledwindow.o: scrolledwindow.cpp wx.h \
+ dc.h scrolledwindow.h panel.h
+size.o: size.cpp wx.h  size.h
+sizer.o: sizer.cpp wx.h  size.h sizer.h notebook.h \
+  window.h
+slider.o: slider.cpp wx.h  slider.h window.h
+socket.o: socket.cpp wx.h  stream.h socket.h
+spin.o: spin.cpp wx.h spin.h window.h
+splitterwindow.o: splitterwindow.cpp wx.h \
+   splitterwindow.h window.h
+staticbitmap.o: staticbitmap.cpp wx.h  staticbitmap.h window.h
+statictext.o: statictext.cpp wx.h  statictext.h window.h
+statusbar.o: statusbar.cpp wx.h  statusbar.h rect.h window.h
+stream.o: stream.cpp wx.h  stream.h
+textctrl.o: textctrl.cpp wx.h  textctrl.h window.h textattr.h
+timer.o: timer.cpp wx.h  timer.h
+toolbar.o: toolbar.cpp wx.h  toolbar.h size.h window.h
+tooltip.o: tooltip.cpp wx.h  tooltip.h window.h
+treectrl.o: treectrl.cpp wx.h  treectrl.h textctrl.h point.h \
+  rect.h colour.h font.h list.h window.h
+url.o: url.cpp wx.h  socket.h stream.h url.h
+validator.o: validator.cpp wx.h  window.h validator.h
+window.o: window.cpp wx.h  window.h evthandler.h colour.h \
+  font.h size.h rect.h sizer.h caret.h point.h layout.h region.h \
+  validator.h cursor.h tooltip.h classinfo.h
+wx.o: wx.cpp wx.h

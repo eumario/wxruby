@@ -1,0 +1,133 @@
+wxRuby version 0.1 (ALPHA)
+   Released under the wxWindows 2 license (see LICENSE)
+
+
+--------------------------------------------------------------------
+INTRODUCTION
+
+wxRuby is an extension library for the Ruby language that
+gives access to the wxWindows cross-platform, native-widget, 
+GUI toolkit. 
+
+The wxRuby project website is:
+  https://savannah.nongnu.org/projects/wxruby/
+
+The wxWindows project website is:
+  http://wxwindows.org/
+
+
+--------------------------------------------------------------------
+REQUIREMENTS
+
+* Ruby 1.6.5+ (or 1.8.x)
+* wxWindows 2.4.x (compiled without unicode)
+
+Primary development is under Debian GNU/Linux ("Sarge").
+
+It has been tested successfully under Cygwin.
+
+We have some issues with MS Windows.
+
+It compiles under Mac OS X, but wxRuby apps don't really work.
+
+
+--------------------------------------------------------------------
+INSTALL FROM SOURCE
+
+	> ruby extconf.rb
+	> make or nmake
+	> ruby install.rb
+
+
+--------------------------------------------------------------------
+CONTENTS
+
+The src/ directory contains all the C++ source code and headers. It 
+also contains .t files, which are templates that are processed by 
+wxpp.rb to generate .h and .cpp files. It is similar to SWIG, but 
+simpler, and specific to wxRuby.
+
+The samples/ directory contains many sample programs that show how 
+to use wxRuby. The samples are not well-organized yet, and they 
+do not use a consistent coding style. But they should help you 
+get started.
+
+
+--------------------------------------------------------------------
+DOCUMENTATION
+
+Generally, the main wxWindows documentation will apply, with the 
+following changes:
+
+1. Classes are inside the Wx module, and class names do not 
+begin with Wx. So instead of WxWindow, you would refer to 
+Wx::Window.
+
+2. Method names are all lower case, with underlines. So instead 
+of calling SetWindowStyle, you would call set_window_style. 
+Instead of EVT_BUTTON it is evt_button.
+
+3. Constants are all upper case, with underlines, regardless of 
+whether the original wxWindows constant was all caps or mixed 
+case.
+
+4. Constants are inside the Wx module, and do not begin with 
+Wx. So instead of WXK_UP it is Wx::K_UP, instead of wxSUNKEN_BORDER 
+it is Wx::SUNKEN_BORDER, instead of wxNullColour it is 
+Wx::NULL_COLOUR, 
+
+
+To handle an event, you use one of the evt_xxx methods, but 
+instead of passing a function, you provide a block. Generally, 
+it is best to simply delegate the handling to some other method, 
+which may or may not want the event itself. For example:
+
+    evt_char {|event| onChar(event)}
+    evt_menu(Calendar_File_Quit) {onQuit}
+
+
+--------------------------------------------------------------------
+KNOWN PROBLEMS
+
+* Not all classes and methods have been implemented yet.
+
+* Certain features do not manage memory correctly, and may 
+crash during garbage collection. One example is ClientData 
+in listboxes and choices. These will be fixed soon. 
+
+* Many objects that get created will never be freed, so it 
+is likely that any app that runs for a long time will use 
+up a ton of memory.
+
+* The samples generally work, but they are not written in 
+a recommended style. Also, a few of them have a couple 
+features that are not implemented or do not work correctly.
+
+* We have almost no documentation yet.
+
+* wxRuby is not yet compatible with unicode versions of 
+wxWindows. This will definitely be fixed as soon as is 
+practical.
+
+* The OS X version does not support FontDialog.
+
+
+--------------------------------------------------------------------
+CREDITS
+
+Current maintainer: Kevin Smith
+  e-mail: <wxruby@qualitycode.com> (but please send questions to the 
+  wxruby mailing list, because you will get a faster answer, and 
+  everyone can benefit!)
+  
+Original author: Park Heesob
+
+Thanks also to other folks who have contributed in many ways to 
+this project, including:
+ Curt Hibbs
+ Rich Kilmer
+ Gour
+ Roy Varghese
+ John Platte
+
+--------------------------------------------------------------------
