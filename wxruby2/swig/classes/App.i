@@ -269,7 +269,7 @@ public:
             int nCmdShow,
             bool enterLoop);
         printf("Module handle = %d\n",GetModuleHandle(NULL));
-		wxEntry(GetModuleHandle(NULL),0,"",true,false);
+		wxEntry(GetModuleHandle(NULL),0,"",true,true);
 		
 #else     
         wxEntry(argc,argv);
