@@ -35,7 +35,7 @@ class ListBoxDlg < Dialog
 end
 
 class RbApp < App
-  def OnInit
+  def on_init
     dlg = ListBoxDlg.new
     set_top_window(dlg)
     dlg.show(TRUE)

@@ -33,7 +33,7 @@ end
 
 
 class RbApp < App
-  def OnInit
+  def on_init
     dlg = ButtonDlg.new
     dlg.show_modal
   end

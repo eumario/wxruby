@@ -281,7 +281,7 @@ class MyFrame < Frame
 end
 
 class RbApp < App
-    def OnInit()    
+    def on_init()    
   	    frame = MyFrame.new("Caret Windows sample", Point.new(50, 50), Size.new(450, 340))
 	    frame.show(TRUE)
     end

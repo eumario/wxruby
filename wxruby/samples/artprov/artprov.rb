@@ -278,7 +278,7 @@ class ArtBrowserDialog < Dialog
 end
 
 class MyApp < App
-  def OnInit()
+  def on_init()
     # create the main application window
     frame = MyFrame.new("ArtProvider sample",
                                  Point.new(50, 50), Size.new(450, 340))

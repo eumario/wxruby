@@ -29,7 +29,7 @@ end
 
 
 class RbApp < App
-  def OnInit
+  def on_init
     dlg = StaticBoxDlg.new
     dlg.show_modal
   end

@@ -219,7 +219,7 @@ end
 
 class MyApp < App
     
-    def OnInit()
+    def on_init()
 
         # Create the main frame window
         frame = MyFrame.new(nil, "Windows Layout Demo", -1, -1, 400, 300)

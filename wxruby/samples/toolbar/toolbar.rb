@@ -404,7 +404,7 @@ class MyFrame < Frame
 end
 
 class MyApp < App
-    def OnInit
+    def on_init
         # Create the main frame window
         frame = MyFrame.new(nil, -1,
                                  "ToolBar Sample",

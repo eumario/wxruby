@@ -371,7 +371,7 @@ end
 
 
 class RbApp < App
-  def OnInit
+  def on_init
     frame = TextFrame.new("Simple Text Editor", 100, 100, 400, 300)
     frame.show(TRUE)
     set_top_window(frame)

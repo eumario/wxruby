@@ -258,7 +258,7 @@ class MyFrame < Frame
 end
 
 class MyApp < App
-    def OnInit
+    def on_init
         # Create the main application window
         frame = MyFrame.new
 

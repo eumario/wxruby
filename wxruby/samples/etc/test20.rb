@@ -31,7 +31,7 @@ end
 
 
 class RbApp < App
-  def OnInit
+  def on_init
     dlg = TextDlg.new
     dlg.show_modal
   end

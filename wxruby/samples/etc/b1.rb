@@ -64,7 +64,7 @@ class BasicFrame < Frame
 end
 
 class RbApp < App
-  def OnInit
+  def on_init
     frame = BasicFrame.new("wxWindows Basic Steps - Step 1:" \
         " A simple application",
          50, 50, 200, 200)

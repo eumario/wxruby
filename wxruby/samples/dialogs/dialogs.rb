@@ -650,7 +650,7 @@ end
 class MyApp < App
     attr_accessor :m_canvasTextColour,:m_canvasFont
     
-    def OnInit()
+    def on_init()
 
       @m_canvasTextColour = Colour.new("BLACK")
       @m_canvasFont = NORMAL_FONT

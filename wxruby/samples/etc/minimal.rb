@@ -6,7 +6,7 @@ Minimal_Quit = 1
 Minimal_About = ID_ABOUT
 
 class RbApp < App
-  def OnInit
+  def on_init
     frame = MyFrame.new("Hello wxRuby")
     frame.show(TRUE)
   end

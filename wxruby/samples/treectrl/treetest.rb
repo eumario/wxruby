@@ -1198,7 +1198,7 @@ class MyApp < App
         super
     end
     
-    def OnInit
+    def on_init
         # Create the main frame window
         frame = MyFrame.new("TreeCtrl Test", 50, 50, 450, 600)
 

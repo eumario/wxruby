@@ -1133,7 +1133,7 @@ class MyFrame < Frame
 end
 
 class MyApp < App
-    def OnInit()
+    def on_init()
         # parse the cmd line
         x = 50
         y = 50

@@ -37,7 +37,7 @@ class CheckListBoxDlg < Dialog
 end
 
 class RbApp < App
-  def OnInit
+  def on_init
     dlg = CheckListBoxDlg.new
     set_top_window(dlg)
     dlg.show(TRUE)

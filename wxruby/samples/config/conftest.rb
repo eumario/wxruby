@@ -35,7 +35,7 @@ class MyFrame < Frame
         # restore the control's values from the config
 
         # NB: in this program, the config object is already created at this moment
-        # because we had called Get() from MyApp::OnInit(). However, if you later
+        # because we had called Get() from MyApp::on_init(). However, if you later
         # change the code and don't create it before this line, it won't break
         # anything - unlike if you manually create Config object with Create()
         # or in any other way (then you must be sure to create it before using it!).
@@ -125,7 +125,7 @@ class MyFrame < Frame
 end
 
 class MyApp < App
-    def OnInit()
+    def on_init()
 
         # we're using Config's "create-on-demand" feature: it will create the
         # config object when it's used for the first time. It has a number of

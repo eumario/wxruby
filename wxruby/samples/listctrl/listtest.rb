@@ -778,7 +778,7 @@ end
 
 
 class MyApp < App
-    def OnInit
+    def on_init
         # Create the main frame window
         frame = MyFrame.new("ListCtrl Test", 50, 50, 450, 340)
 
