@@ -85,6 +85,13 @@ def normal_cpp_files
     return get_classes.map do | c | cpp_file(c) end
 end
 
+def all_cpp_files
+    return all_obj_bases.map do | c | cpp_file(c) end
+
+end
+
+
+
 def to_obj_files(bases)
     return bases.map do | b | obj_file(b) end
 end
