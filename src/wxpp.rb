@@ -16,13 +16,15 @@ def isStringClass(className)
 end
 
 def isWxClass(className)
-	if(className == 'wxWindowID')
+	if(className == 'wxWindowID' || className == 'wxCoord' || 
+        className == 'wxDragResult')
 		return false
 	end
 	return (className.index('wx') == 0 && !className.index('*'))
 end
 
 def isReference(className)
+    #puts(className)
     if(isStringClass(className))
         return false
     end
@@ -50,9 +52,10 @@ end
 
 def getRubyToCppConversionMethod(parameter)
     className = convertReferenceToPointer(parameter.cppClass)
-    if(className == 'long')
+    if(className == 'long' || className == 'wxCoord')
         method = "NUM2LONG"
-    elsif(className == 'int' || className == 'unsigned')
+    elsif(className == 'int' || className == 'unsigned' || className == 'size_t' || 
+                className == 'NativeFormat')
         method = "NUM2INT"
     elsif(className == 'bool')
         method = "IsTrue"
@@ -60,12 +63,13 @@ def getRubyToCppConversionMethod(parameter)
         method = "STR2CSTR"
     elsif(className == 'wxWindowID')
         method = "NUM2INT"
-	elsif(className == 'wxItemKind')
-		method = "(wxItemKind)NUM2INT"
+    elsif(className == 'wxItemKind' || className == 'wxDragResult' || 
+                className == 'wxDataObject::Direction')
+        method = "(#{className})NUM2INT"
     elsif(isPointer(className))
         method = "GetCpp<#{convertPointerToBaseClass(className)}>"
     else
-        puts("****** RubyToCpp error: #{className}")
+        puts("****** RubyToCpp error: #{parameter.cppClass} -> #{className}")
         raise
     end
     return method
@@ -73,11 +77,11 @@ end
 
 def getCppToRubyConversionMethod(className)
 	#puts(className)
-    if(className == 'int' || className == 'long')
+    if(className == 'int' || className == 'long' || className == 'wxCoord' || className == 'size_t' || className == 'NativeFormat')
         method = "INT2NUM"
 	elsif(className == 'wxWindowID')
 		method = "INT2NUM"
-	elsif(className == 'wxItemKind')
+	elsif(className == 'wxItemKind' || className == 'wxDragResult' || className == 'wxDataObject::Direction')
 		method = "INT2NUM"
 	elsif(className == 'bool')
 		method = "CppBoolToRubyBool"
@@ -112,9 +116,8 @@ end
 def stripAwayUnusedPortions(line)
     body = line.slice!(/[{].*[}]/)
     line.gsub!(/virtual/, '')
-    line.gsub!(/const/, '')
     line.gsub!(/inline/, '')
-    line.gsub!(/[;:]/, ' ')
+    line.gsub!(/[;]/, ' ')
     line.gsub!(/ [*]/, '* ')
     line.gsub!(/ [&]/, '& ')
     line.gsub!(/  /, ' ')
@@ -125,6 +128,7 @@ end
 #################################################################
 class Parameter
     def initialize(parmString)
+        #puts(parmString)
         @isArray = parmString.index('[')
 		variableAndDefault = parmString.split('=')
 		if(variableAndDefault.size > 1)
@@ -153,6 +157,10 @@ class Parameter
 				value = "(#{type})&" + value
 			end
 			cppDeclaration += "=#{value}"
+        elsif(type == 'wxDragResult')
+            # NOTE: this may go away when we optimize required parameters
+            # to not have separate declaration and value setting!
+            cppDeclaration += '=wxDragNone'
 		elsif(!isWxClass(type))
 			cppDeclaration += "=0"
 		end
@@ -173,12 +181,14 @@ end
 #################################################################
 class Parameters
     def initialize(parmListString)
+        @original = parmListString.clone
         @parameters = getParameters(parmListString)
     end
 
     def getParameters(parmListString)
         result = []
         parmListString.gsub!(/[()]/, '')
+        parmListString.gsub!(/const/, '')
         parms = parmListString.split(',')
 		inOptionals = false
         parms.each do | parmString |
@@ -317,6 +327,7 @@ class Parameters
     end
 
     attr_reader :parameters
+    attr_reader :original
 end
 
 
@@ -327,11 +338,19 @@ class MethodPrototype
 			static = true
 			line = line.gsub(/static/, '')
 		end
+        if(line.include?('abstract'))
+            @isAbstract = true
+            line = line.gsub(/abstract/, '')
+        end
         line = stripAwayUnusedPortions(line)
         parmString = line.slice!(/[(].*[)]/)
+        line.gsub!(/const /, '')
         @returnType, @delegateMethod = line.split(' ')
         @parameters = Parameters.new(parmString)
-		discard, @cppMethod = line.split(/->/)
+		constString, @cppMethod = line.split(/->/)
+        if(constString.index('const'))
+            @isConstMethod = true
+        end
 		if(@cppMethod)
 			@cppMethod.strip!
 		else
@@ -368,6 +387,16 @@ class MethodPrototype
 		result = result[1..-1] if result[0,1]=='_'
 		result.downcase
 	end
+    
+    def declareAbstractHelper
+        constString = ''
+        if(isConstMethod)
+            constString = ' const'
+        end
+        return "\t virtual #{@returnType} " + 
+                "#{@cppMethod}#{parameters.original}" + 
+                constString + ";"
+    end
 
     def delegateCall
         lines = parameters.delegateCallTo("pCpp->#{@delegateMethod}", returnType)
@@ -383,6 +412,8 @@ class MethodPrototype
     attr_reader :cppMethod
 	attr_reader :rubyMethod
     attr_reader :parameters
+    attr_reader :isAbstract
+    attr_reader :isConstMethod
 end
 
 #################################################################
@@ -410,6 +441,10 @@ class ClassHandler
 		@isSubclass = false
 	end
     
+    def abstract
+        @isAbstract = true
+    end
+    
 	def needsWrappingConstructor
 		@needsWrappingConstructor = true
 	end
@@ -429,6 +464,13 @@ class ClassHandler
 	def exposedRubyName
 		return name
 	end
+    
+    def cppBaseClassName
+        if(isAbstract)
+            return cppClassName + 'Helper'
+        end
+        return cppClassName
+    end
     
     def cppClassName
         return "wx" + name
@@ -503,6 +545,16 @@ class ClassHandler
 
     def declareStaticMethods
 		return declareMethods(staticMethods)
+    end
+    
+    def declareAbstractMethods
+        lines = []
+        methods.each do | m | 
+            if(m.isAbstract)
+                lines << m.declareAbstractHelper
+            end
+        end
+        return lines
     end
 	
 	def declareVariables
@@ -734,7 +786,7 @@ class ClassHandler
 		if(isSubclass)
         	result += parameters.delegateCallTo("new #{wxName}", wxName)
 		else
-        	result += parameters.delegateCallTo("new #{cppClassName}", cppClassName + "*")
+        	result += parameters.delegateCallTo("new #{cppBaseClassName}", cppClassName + "*")
 		end
         result += endImplementConstructor
         return result
@@ -767,6 +819,7 @@ class ClassHandler
     attr_reader :parent
     attr_reader :methods
 	attr_reader :isSubclass
+    attr_reader :isAbstract
 	attr_reader :staticMethods
 end
 
@@ -780,15 +833,20 @@ class Parser
         @outputLines = []
         File.foreach(filename) do | line |
             line.chomp!
-            if(line.strip.index('//$$') == 0)
-                result = command(line)
-            elsif(in_methods)
-                currentClass.addMethod(line)
-                result = nil
-            else
-                result = [line]
+            begin
+                if(line.strip.index('//$$') == 0)
+                        result = command(line)
+                elsif(in_methods)
+                    currentClass.addMethod(line)
+                    result = nil
+                else
+                    result = [line]
+                end
+                output(result)
+            rescue
+                puts("on line: #{line}")
+                raise
             end
-            output(result)
         end
     end
     
@@ -808,6 +866,9 @@ class Parser
             when 'CLASS'
                 @currentClass = ClassHandler.new(words)
 				@classes[@currentClass.wxName] = @currentClass
+                return nil
+            when 'ABSTRACT'
+                @currentClass.abstract
                 return nil
 			when 'AS_SUBCLASS'
 				@currentClass.subclass
@@ -843,7 +904,7 @@ class Parser
             when 'RB_IMPLEMENT_CLASS'
                 return handleImplementClass(words)
         end
-        puts("Unknown command #{command}")
+        puts("Unknown command #{command} in line #{body}")
         exit(1)
     end
 
@@ -914,7 +975,14 @@ class Parser
 	def handleDeclareClass(words)
 		thisClass = getSpecifiedClass(words)
 		result = []
-		if(thisClass.isSubclass)
+        if(thisClass.isAbstract)
+            result << "class #{thisClass.cppBaseClassName} : public #{thisClass.cppClassName}"
+            result << "{"
+            result += thisClass.declareAbstractMethods
+            result << "};"
+            result << ""
+            inherit = ""
+        elsif(thisClass.isSubclass)
 			inherit = " : public #{thisClass.cppClassName}"
 		else
 			inherit = ""

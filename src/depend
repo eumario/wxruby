@@ -20,16 +20,23 @@ const.o: const.cpp wx.h  bitmap.h point.h size.h date.h \
   colour.h cursor.h pen.h font.h brush.h
 control.o: control.cpp wx.h control.h window.h
 cursor.o: cursor.cpp wx.h  cursor.h bitmap.h
+dataformat.o: dataformat.cpp dataformat.h
+dataobject.o: dataobject.cpp dataobject.h dataformat.h
+dataobjectsimple.o: dataobjectsimple.cpp dataobjectsimple.h dataobject.h dataformat.h
 date.o: date.cpp wx.h date.h
 dc.o: dc.cpp wx.h dc.h font.h colour.h pen.h \
   brush.h
 dialog.o: dialog.cpp wx.h  dialog.h window.h
 dirdialog.o: dirdialog.cpp wx.h  dirdialog.h dialog.h
+dropsource.o: dropsource.cpp dropsource.h dataobject.h
+droptarget.o: droptarget.cpp droptarget.h dataobject.h
 event.o: event.cpp wx.h event.h date.h size.h point.h \
   calendar.h notebook.h window.h listctrl.h socket.h treectrl.h
 evthandler.o: evthandler.cpp wx.h  calendar.h evthandler.h \
   treectrl.h event.h
+filedataobject.o: filedataobject.cpp filedataobject.h
 filedialog.o: filedialog.cpp wx.h filedialog.h dialog.h
+filedroptarget.o: filedroptarget.cpp droptarget.h
 font.o: font.cpp wx.h font.h
 fontdata.o: fontdata.cpp wx.h font.h colour.h fontdata.h
 fontdialog.o: fontdialog.cpp wx.h fontdata.h fontdialog.h dialog.h
@@ -78,6 +85,7 @@ statictext.o: statictext.cpp wx.h  statictext.h window.h
 statusbar.o: statusbar.cpp wx.h  statusbar.h rect.h window.h
 stream.o: stream.cpp wx.h  stream.h
 textctrl.o: textctrl.cpp wx.h  textctrl.h window.h textattr.h
+textdroptarget.o: textdroptarget.cpp textdroptarget.h droptarget.h
 timer.o: timer.cpp wx.h  timer.h
 toolbar.o: toolbar.cpp wx.h  toolbar.h size.h window.h
 tooltip.o: tooltip.cpp wx.h  tooltip.h window.h
