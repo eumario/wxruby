@@ -1,5 +1,6 @@
 2004-01-29
     * Integrated Nick's Mac OS X changes
+    * Fix Menu#append_item which was completely broken
     
 
 2004-01-26
