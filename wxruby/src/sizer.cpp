@@ -583,7 +583,7 @@ WxBoxSizer::GetOrientation(VALUE self)
 {
     wxBoxSizer *ptr;
     Data_Get_Struct(self, wxBoxSizer, ptr);
-    return NUM2INT(ptr->GetOrientation());
+    return INT2NUM(ptr->GetOrientation());
 }
 
 VALUE
