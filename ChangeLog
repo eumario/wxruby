@@ -1,3 +1,11 @@
+2004-03-29
+    * Update samples to use correct method names:
+      dialogs/dialog.rb: CanVeto -> can_veto
+      artprov/artprov.rb: CreateBitmap -> create_bitmap
+    * Add note to controls/controls.rb sample explaining that 
+      the current get/set_client_data can segfault
+
+
 2004-03-24
     * Gentoo ebuild fixed (added DESTDIR & sed trickery)
       [Submitted by Gour]

@@ -366,7 +366,7 @@ class MyFrame < Frame
 end
 
 class MyArtProvider < ArtProvider
-  def CreateBitmap(id,client,size)
+  def create_bitmap(id,client,size)
     if client == ART_MESSAGE_BOX
         if id == ART_INFORMATION
             return Bitmap.new("info.xpm")

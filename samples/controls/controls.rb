@@ -84,6 +84,10 @@ def Myset_client_data(name,control)
         s = sprintf("%s client data for '%s'",
                  name, control.get_string(n))
         control.set_client_data(n, s)
+        # NOTE: As of wxRuby 0.2, the following will demonstrate the 
+        # set_client_data and get_client_data are unreliable. Specifically, 
+        # garbage collection will release the stored data! 2004-03-29 kbs
+        #GC.start
     end
 end
 

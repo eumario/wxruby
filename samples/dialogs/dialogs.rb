@@ -103,7 +103,7 @@ class MyModelessDialog < Dialog
     end
 
     def onClose(event)
-        if event.CanVeto()
+        if event.can_veto()
             message_box("Use the menu item to close self dialog",
                          "Modeless dialog",
                          OK | ICON_INFORMATION, self)
