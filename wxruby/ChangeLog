@@ -1,3 +1,24 @@
+2003-11-20 20:00  kbs
+    * Merged more changes from Nicolas Kral, including:
+        * Fixes for building under MSV6
+        * extconf was changed to build xrc correctly with MSVC
+        * Added a 'DateTime.to_time' method that converts a wxDateTime 
+          to a ruby Time object
+        * Changed CalendarCtrl to take a DateTime or ruby Time object
+          as a parameter to the constructor
+        * Added some types that weren't in the dynamic cast table
+
+
+2003-11-17 21:00  kbs
+	* Merged in changes from Nicolas Kral, including:
+		* NULL_PEN and NULL_BRUSH
+		* Several mouse events
+		* Improved support for dynamic casting of returned cpp
+		  objects back to ruby objects
+		* Some support for XRC
+		* Window 'paint' method that yields a PaintDC
+
+
 2003-11-17 19:25  kbs
 	* Made droptarget an ABSTRACT class for MSWin compatibility
 

@@ -563,6 +563,9 @@ class ClassHandler
                 lines << m.declareAbstractHelper
             end
         end
+        lines << "\tVALUE me;"
+        lines << "\tvoid SetSelf(VALUE);"
+        
         return lines
     end
     
@@ -818,6 +821,9 @@ class ClassHandler
 		end
         lines << "\tDATA_PTR(self) = cppResult;"
 		lines << "\tMapRubyObjectToCppObject(self, cppResult);"
+		if (@isAbstract)
+			lines << "\t((#{cppBaseClassName} *)cppResult)->SetSelf(self);"
+		end
         lines << "\treturn true;"
         lines << "}"
         lines << ""

@@ -25,12 +25,23 @@ void WxDateTime::DefineClass()
 	rb_define_method(rubyClass, "initialize", VALUEFUNC(WxDateTime::init), -1);
 	rb_define_method(rubyClass, "get_day", VALUEFUNC(WxDateTime::GetDay), 0);
 	rb_define_method(rubyClass, "format_iso_date", VALUEFUNC(WxDateTime::FormatISODate), 0);
+	rb_define_method(rubyClass, "to_time", VALUEFUNC(WxDateTime::ToTime), 0);
+	
 }
 
 VALUE
 WxDateTime::alloc(VALUE self)
 {
     return Data_Wrap_Struct(self, 0, 0, 0);
+}
+
+VALUE 
+WxDateTime::ToTime(VALUE self)
+{
+    wxDateTime *ptr;
+    Data_Get_Struct(self, wxDateTime, ptr);
+    return rb_time_new(ptr->GetTicks(),0);
+
 }
 
 VALUE

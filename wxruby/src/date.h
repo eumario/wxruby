@@ -22,7 +22,9 @@ public:
     static VALUE init0(const wxDateTime &dateTime);
     static VALUE GetDay(VALUE self);
     static VALUE Today(VALUE self);
+    
     static VALUE FormatISODate(VALUE self);
+	static VALUE ToTime(VALUE self);
 
     static void DefineClass();
 	static VALUE rubyClass;

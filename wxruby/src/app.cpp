@@ -12,7 +12,9 @@
 
 
 #include "wx.h"
+#ifndef WIN32
 #include <sys/time.h>
+#endif
 
 #if defined(__cplusplus)
 extern "C" {
