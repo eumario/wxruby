@@ -23,6 +23,7 @@ extern swig_class cWxEvent;
 extern swig_class cWxCalendarEvent;
 extern swig_class cWxCloseEvent;
 extern swig_class cWxCommandEvent;
+extern swig_class cWxIdleEvent;
 extern swig_class cWxPaintEvent;
 extern swig_class cWxUpdateUIEvent;
 
@@ -68,6 +69,12 @@ static int commandEvents[] =
     -1
 };
 
+static int idleEvents[] =
+{
+    wxEVT_IDLE,
+    -1
+};
+
 static int paintEvents[] = 
 {
     wxEVT_PAINT,
@@ -101,6 +108,8 @@ public:
             cEvent = cWxCloseEvent.klass;
         else if(IsEventInMap(type, commandEvents))
             cEvent = cWxCommandEvent.klass;
+        else if(IsEventInMap(type, idleEvents))
+            cEvent = cWxIdleEvent.klass;
         else if(IsEventInMap(type, paintEvents))
             cEvent = cWxPaintEvent.klass;
         else if(IsEventInMap(type, updateUIEvents))
@@ -240,6 +249,11 @@ static VALUE evt_close(int argc, VALUE *argv, VALUE self)
     return internal_evt_no_parameters(argc, argv, self, wxEVT_CLOSE_WINDOW);
 }
 
+static VALUE evt_idle(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_IDLE);
+}
+
 %}
 
 %init %{
@@ -252,6 +266,7 @@ static VALUE evt_close(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_month", VALUEFUNC(evt_calendar_month), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_year", VALUEFUNC(evt_calendar_year), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_calendar_weekday_clicked", VALUEFUNC(evt_calendar_weekday_clicked), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_idle", VALUEFUNC(evt_idle), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_update_ui", VALUEFUNC(evt_update_ui), -1);
 
     rb_define_method(cWxEvtHandler.klass, "evt_paint", VALUEFUNC(evt_paint), -1);
