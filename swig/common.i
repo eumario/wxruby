@@ -20,6 +20,9 @@
 #  undef connect
 
 #include <wx/wx.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
 %}
 
 %include "typedefs.i"

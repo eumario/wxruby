@@ -38,6 +38,17 @@
 	$result = rb_str_new2($1.c_str());
 }
 
+%typemap(typecheck) wxString {
+	$1 = TYPE($input) == T_STRING;
+}
+
+%typemap(typecheck) wxString & {
+	$1 = TYPE($input) == T_STRING;
+}
+
+%typemap(typecheck) wxString *{
+	$1 = TYPE($input) == T_STRING;
+}
 ##############################################################
 
 %typemap(in) void* {

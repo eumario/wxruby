@@ -44,7 +44,8 @@ File.open(ARGV[0], "w") do | out |
         if(line.index("~Director()"))
             lines = [line]
             lines << '    printf("' + this_module + '" " ~Director %p\n", this);'
-            lines << '    rb_hash_aset(alive, INT2NUM((int)this), Qnil);'
+	    #lines << '    rb_hash_aset(alive, INT2NUM((int)this), Qnil);'
+	    lines << '    GcMarkDeleted(this);'
             line = lines.join("\n")
         end
         
@@ -52,8 +53,9 @@ File.open(ARGV[0], "w") do | out |
             lines = []
             lines << "    Swig::Director* director = (Swig::Director*)(SwigDirector_#{$class_name}*)arg1;"
             lines << '    printf("' + this_module + '" " Checking %p\n", director);'
-            lines << "    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));"
-            lines << "    if(self == Qnil)"
+            #lines << "    VALUE self = rb_hash_aref(alive, INT2NUM((int)director));"
+	    #lines << "    if(self == Qnil)"
+	    lines << "    if (GcIsDeleted(director))"
             lines << "    {"
             lines << "        printf(\"%p is already dead!\\n\", director);"
             lines << "        return;"
