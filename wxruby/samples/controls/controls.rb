@@ -255,7 +255,7 @@ class MyPanel < Panel
         @m_checkbox = CheckBox.new( panel, ID_LISTBOX_ENABLE, "&Disable", Point.new(20,170) )
         @m_checkbox.set_value(FALSE)
         @m_checkbox.set_tool_tip( "Click here to disable the listbox" )
-        CheckBox.new( panel, ID_CHANGE_COLOUR, "&Toggle colour",
+        @m_toggle_color = CheckBox.new( panel, ID_CHANGE_COLOUR, "&Toggle colour",
                               Point.new(110,170) )
         panel.set_cursor(Cursor.new(CURSOR_HAND))
         @m_notebook.add_page(panel, "ListBox", TRUE, Image_List)
@@ -662,17 +662,23 @@ class MyPanel < Panel
         case event.get_id()
             when ID_LISTBOX_ENABLE
                     @m_text.append_text("Checkbox clicked.\n")
-                    cb = event.get_event_object()
                     if event.get_int() != 0
-                        cb.set_tool_tip( "Click to enable listbox" )
+                        @m_checkbox.set_tool_tip( "Click to enable listbox" )
+                        @m_toggle_color.enable(false)
                     else
-                        cb.set_tool_tip( "Click to disable listbox" )
+                        @m_checkbox.set_tool_tip( "Click to disable listbox" )
+                        @m_toggle_color.enable(true)
                     end
                     @m_listbox.enable( event.get_int() == 0 )
                     @m_lbSelectThis.enable( event.get_int() == 0 )
                     @m_lbSelectNum.enable( event.get_int() == 0 )
                     @m_listboxSorted.enable( event.get_int() == 0 )
-                    Window::find_window_by_id(ID_CHANGE_COLOUR).enable( event.get_int() == 0 )
+                    #w = Window::find_window_by_id(ID_CHANGE_COLOUR)
+                    #if(w)
+                    #    w.enable( event.get_int() == 0 )
+                    #else
+                    #    puts("Window ID_CHANGE_COLOR not found")
+                    #end
             when ID_LISTBOX_SEL_NUM
                     @m_listbox.set_selection( 2 )
                     @m_listboxSorted.set_selection( 2 )
