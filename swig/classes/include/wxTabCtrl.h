@@ -23,7 +23,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxTabCtrl(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size , long style = 0, const wxString&  name = "tabCtrl") ;
+   wxTabCtrl(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size , long style = 0, const wxString&  name = wxT("tabCtrl")) ;
 	/**
 	 * \brief Destroys the wxTabCtrl object. 
 	*/
@@ -40,7 +40,7 @@ of the parameters.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size , long style = 0, const wxString&  name = "tabCtrl") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize&  size , long style = 0, const wxString&  name = wxT("tabCtrl")) ;
 	/**
 	 * \brief Deletes all tab items. 
 	*/

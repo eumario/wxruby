@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -785,16 +788,16 @@ static VALUE
 _wrap_new_wxDirDialog(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
-    wxString const &arg3_defvalue = "Choose" ;
+    wxString const &arg3_defvalue = wxT("Choose") ;
     wxString *arg3 = (wxString *) &arg3_defvalue ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     long arg5 = (long) 0 ;
     wxPoint const &arg6_defvalue = wxDefaultPosition ;
     wxPoint *arg6 = (wxPoint *) &arg6_defvalue ;
     wxSize const &arg7_defvalue = wxDefaultSize ;
     wxSize *arg7 = (wxSize *) &arg7_defvalue ;
-    wxString const &arg8_defvalue = "wxDirCtrl" ;
+    wxString const &arg8_defvalue = wxT("wxDirCtrl") ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     wxDirDialog *result;
     
@@ -864,7 +867,7 @@ _wrap_wxDirDialog_GetPath(int argc, VALUE *argv, VALUE self) {
     result = ((wxDirDialog const *)arg1)->GetPath();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -882,7 +885,7 @@ _wrap_wxDirDialog_GetMessage(int argc, VALUE *argv, VALUE self) {
     result = ((wxDirDialog const *)arg1)->GetMessage();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

@@ -89,13 +89,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -961,7 +964,7 @@ namespace Swig {
 static VALUE
 _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
-    wxString const &arg2_defvalue = "Message" ;
+    wxString const &arg2_defvalue = wxT("Message") ;
     wxString *arg2 = (wxString *) &arg2_defvalue ;
     int arg3 = (int) wxOK ;
     wxWindow *arg4 = (wxWindow *) NULL ;

@@ -18,7 +18,7 @@ class SwigDirector_wxStaticBitmap : public wxStaticBitmap, public Swig::Director
 
 public:
     SwigDirector_wxStaticBitmap(VALUE self, bool disown = false);
-    SwigDirector_wxStaticBitmap(VALUE self, wxWindow *parent, wxWindowID id, wxBitmap const &label, wxPoint const &pos, wxSize const &size = wxDefaultSize, long style = 0, wxString const &name = "staticBitmap", bool disown = false);
+    SwigDirector_wxStaticBitmap(VALUE self, wxWindow *parent, wxWindowID id, wxBitmap const &label, wxPoint const &pos, wxSize const &size = wxDefaultSize, long style = 0, wxString const &name = wxT("staticBitmap"), bool disown = false);
     virtual void SetBitmap(wxBitmap const &label);
 };
 

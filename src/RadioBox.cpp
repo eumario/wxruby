@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -808,7 +811,7 @@ _wrap_new_wxRadioBox(int argc, VALUE *argv, VALUE self) {
     long arg10 = (long) wxRA_SPECIFY_COLS ;
     wxValidator const &arg11_defvalue = wxDefaultValidator ;
     wxValidator *arg11 = (wxValidator *) &arg11_defvalue ;
-    wxString const &arg12_defvalue = "radioBox" ;
+    wxString const &arg12_defvalue = wxT("radioBox") ;
     wxString *arg12 = (wxString *) &arg12_defvalue ;
     wxRadioBox *result;
     wxString *arr7 ;
@@ -843,7 +846,7 @@ _wrap_new_wxRadioBox(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = STR2CSTR(rb_ary_entry(argv[5],i));
+                    arr7[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[5],i));
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -909,7 +912,7 @@ _wrap_wxRadioBox_Create(int argc, VALUE *argv, VALUE self) {
     long arg10 = (long) wxRA_SPECIFY_COLS ;
     wxValidator const &arg11_defvalue = wxDefaultValidator ;
     wxValidator *arg11 = (wxValidator *) &arg11_defvalue ;
-    wxString const &arg12_defvalue = "radioBox" ;
+    wxString const &arg12_defvalue = wxT("radioBox") ;
     wxString *arg12 = (wxString *) &arg12_defvalue ;
     bool result;
     wxString *arr7 ;
@@ -945,7 +948,7 @@ _wrap_wxRadioBox_Create(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = STR2CSTR(rb_ary_entry(argv[5],i));
+                    arr7[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[5],i));
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -1133,7 +1136,7 @@ _wrap_wxRadioBox_GetStringSelection(int argc, VALUE *argv, VALUE self) {
     result = ((wxRadioBox const *)arg1)->GetStringSelection();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1268,7 +1271,7 @@ _wrap_wxRadioBox_GetString(int argc, VALUE *argv, VALUE self) {
     result = ((wxRadioBox const *)arg1)->GetString(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

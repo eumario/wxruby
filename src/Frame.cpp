@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -803,7 +806,7 @@ void SwigDirector_wxFrame::SetStatusText(wxString const &text, int number) {
         wxFrame::SetStatusText(text,number);
         return;
     }
-    obj0 = rb_str_new2((&text)->c_str());
+    obj0 = rb_str_new2((const char *)(&text)->c_str());
     obj1 = INT2NUM(number);
     result = rb_funcall(swig_get_self(), rb_intern("set_status_text"), 2,obj0,obj1);
 }
@@ -821,7 +824,7 @@ wxToolBar *SwigDirector_wxFrame::CreateToolBar(long style, wxWindowID id, wxStri
     }
     obj0 = LONG2NUM(style);
     obj1 = INT2NUM(id);
-    obj2 = rb_str_new2((&name)->c_str());
+    obj2 = rb_str_new2((const char *)(&name)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("create_tool_bar"), 3,obj0,obj1,obj2);
     if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_wxToolBar,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
     return c_result;
@@ -842,7 +845,7 @@ wxStatusBar *SwigDirector_wxFrame::OnCreateStatusBar(int number, long style, wxW
     obj0 = INT2NUM(number);
     obj1 = LONG2NUM(style);
     obj2 = INT2NUM(id);
-    obj3 = rb_str_new2((&name)->c_str());
+    obj3 = rb_str_new2((const char *)(&name)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("on_create_status_bar"), 4,obj0,obj1,obj2,obj3);
     if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_wxStatusBar,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
     return c_result;
@@ -861,7 +864,7 @@ wxToolBar *SwigDirector_wxFrame::OnCreateToolBar(long style, wxWindowID id, wxSt
     }
     obj0 = LONG2NUM(style);
     obj1 = INT2NUM(id);
-    obj2 = rb_str_new2((&name)->c_str());
+    obj2 = rb_str_new2((const char *)(&name)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("on_create_tool_bar"), 3,obj0,obj1,obj2);
     if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_wxToolBar,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
     return c_result;
@@ -876,7 +879,7 @@ void SwigDirector_wxFrame::SetTitle(wxString const &title) {
         wxFrame::SetTitle(title);
         return;
     }
-    obj0 = rb_str_new2((&title)->c_str());
+    obj0 = rb_str_new2((const char *)(&title)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_title"), 1,obj0);
 }
 
@@ -895,7 +898,7 @@ wxStatusBar *SwigDirector_wxFrame::CreateStatusBar(int number, long style, wxWin
     obj0 = INT2NUM(number);
     obj1 = LONG2NUM(style);
     obj2 = INT2NUM(id);
-    obj3 = rb_str_new2((&name)->c_str());
+    obj3 = rb_str_new2((const char *)(&name)->c_str());
     result = rb_funcall(swig_get_self(), rb_intern("create_status_bar"), 4,obj0,obj1,obj2,obj3);
     if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_wxStatusBar,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
     return c_result;
@@ -930,7 +933,7 @@ _wrap_new_wxFrame(int argc, VALUE *argv, VALUE self) {
     wxSize const &arg6_defvalue = wxDefaultSize ;
     wxSize *arg6 = (wxSize *) &arg6_defvalue ;
     long arg7 = (long) wxDEFAULT_FRAME_STYLE ;
-    wxString const &arg8_defvalue = "frame" ;
+    wxString const &arg8_defvalue = wxT("frame") ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     wxFrame *result;
     
@@ -1010,7 +1013,7 @@ _wrap_wxFrame_Create(int argc, VALUE *argv, VALUE self) {
     wxSize const &arg6_defvalue = wxDefaultSize ;
     wxSize *arg6 = (wxSize *) &arg6_defvalue ;
     long arg7 = (long) wxDEFAULT_FRAME_STYLE ;
-    wxString const &arg8_defvalue = "frame" ;
+    wxString const &arg8_defvalue = wxT("frame") ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     bool result;
     VALUE vresult = Qnil;
@@ -1050,7 +1053,7 @@ _wrap_wxFrame_CreateStatusBar(int argc, VALUE *argv, VALUE self) {
     int arg2 = (int) 1 ;
     long arg3 = (long) 0 ;
     wxWindowID arg4 = (wxWindowID) -1 ;
-    wxString const &arg5_defvalue = "statusBar" ;
+    wxString const &arg5_defvalue = wxT("statusBar") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     wxStatusBar *result;
     Swig::Director *director = 0;
@@ -1087,7 +1090,7 @@ _wrap_wxFrame_CreateToolBar(int argc, VALUE *argv, VALUE self) {
     wxFrame *arg1 = (wxFrame *) 0 ;
     long arg2 = (long) wxNO_BORDER ;
     wxWindowID arg3 = (wxWindowID) -1 ;
-    wxString const &arg4_defvalue = "toolBar" ;
+    wxString const &arg4_defvalue = wxT("toolBar") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     wxToolBar *result;
     Swig::Director *director = 0;
@@ -1196,7 +1199,7 @@ _wrap_wxFrame_GetTitle(int argc, VALUE *argv, VALUE self) {
     result = ((wxFrame const *)arg1)->GetTitle();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

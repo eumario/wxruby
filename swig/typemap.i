@@ -5,15 +5,15 @@
 
 ##############################################################
 %typemap(in) wxString& {
-	$1 = new wxString(STR2CSTR($input));
+	$1 = new wxString((wxChar *)STR2CSTR($input));
 }
 
 %typemap(in) const wxString& {
-	$1 = new wxString(STR2CSTR($input));
+	$1 = new wxString((wxChar *)STR2CSTR($input));
 }
 
 %typemap(in) wxString* {
-	$1 = new wxString(STR2CSTR($input));
+	$1 = new wxString((wxChar *)STR2CSTR($input));
 }
 /**
 %typemap(freearg) wxString & {
@@ -28,26 +28,26 @@
 	delete $1;
 }
 */
-%typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2($1.c_str());";
+%typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2((const char *)$1.c_str());";
 
 %typemap(directorin) wxString *, const wxString * "TODO: $1_name->c_str()";
                                                                                                    
 %typemap(out) wxString {
-	$result = rb_str_new2($1.c_str());
+	$result = rb_str_new2((const char *)$1.c_str());
 }
 
 %typemap(out) wxString& {
-	$result = rb_str_new2($1.c_str());
+	$result = rb_str_new2((const char *)$1.c_str());
 }
 
 %typemap(out) const wxString& {
-	$result = rb_str_new2($1.c_str());
+	$result = rb_str_new2((const char *)$1.c_str());
 }
 
 %apply wxString& { wxString* }
                                                                                
 %typemap(varout) wxString {
-	$result = rb_str_new2($1.c_str());
+	$result = rb_str_new2((const char *)$1.c_str());
 }
 
 %typemap(typecheck) wxString {
@@ -149,7 +149,7 @@
     arr = new wxString[RARRAY($input)->len];
     for (int i = 0; i < RARRAY($input)->len; i++)
     {
-        arr[i] = STR2CSTR(rb_ary_entry($input,i));
+        arr[i] = (wxChar *)STR2CSTR(rb_ary_entry($input,i));
     }
     $1 = RARRAY($input)->len;
     $2 = arr;
@@ -185,7 +185,8 @@
     
     for (int i = 0; i < RARRAY($input)->len; i++)
     {
-        tmp.Add(STR2CSTR(rb_ary_entry($input,i)));
+        wxString item = (wxChar *)STR2CSTR(rb_ary_entry($input,i));
+        tmp.Add(item);
     }
     
     $1 = &tmp;
@@ -199,7 +200,7 @@
 
   for (int i = 0; i < $1->GetCount(); i++)
   {
-    rb_ary_push($result,rb_str_new2((*$1)[i]));
+    rb_ary_push($result,rb_str_new2((const char *)(*$1)[i].c_str()));
   }
 }
 

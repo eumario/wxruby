@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxStaticBox(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBox") ;
+   wxStaticBox(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("staticBox")) ;
 	/**
 	 * \brief Destructor, destroying the group box. 
 	*/
@@ -42,7 +42,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBox") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("staticBox")) ;
 };
 
 

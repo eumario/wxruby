@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -807,7 +810,7 @@ _wrap_new_wxSlider(int argc, VALUE *argv, VALUE self) {
     long arg9 = (long) wxSL_HORIZONTAL ;
     wxValidator const &arg10_defvalue = wxDefaultValidator ;
     wxValidator *arg10 = (wxValidator *) &arg10_defvalue ;
-    wxString const &arg11_defvalue = "slider" ;
+    wxString const &arg11_defvalue = wxT("slider") ;
     wxString *arg11 = (wxString *) &arg11_defvalue ;
     wxSlider *result;
     
@@ -903,7 +906,7 @@ _wrap_wxSlider_Create(int argc, VALUE *argv, VALUE self) {
     long arg9 = (long) wxSL_HORIZONTAL ;
     wxValidator const &arg10_defvalue = wxDefaultValidator ;
     wxValidator *arg10 = (wxValidator *) &arg10_defvalue ;
-    wxString const &arg11_defvalue = "slider" ;
+    wxString const &arg11_defvalue = wxT("slider") ;
     wxString *arg11 = (wxString *) &arg11_defvalue ;
     bool result;
     VALUE vresult = Qnil;

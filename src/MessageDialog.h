@@ -17,7 +17,7 @@ class Swig::Director;
 class SwigDirector_wxMessageDialog : public wxMessageDialog, public Swig::Director {
 
 public:
-    SwigDirector_wxMessageDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &caption = "Message", long style = wxOK, wxPoint const &pos = wxDefaultPosition, bool disown = false);
+    SwigDirector_wxMessageDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &caption = wxT("Message"), long style = wxOK, wxPoint const &pos = wxDefaultPosition, bool disown = false);
 };
 
 

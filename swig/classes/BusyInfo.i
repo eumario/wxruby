@@ -18,7 +18,8 @@
   {
     if (rb_block_given_p())
     {
-      wxBusyInfo disabler(msg,parent);
+      wxString message = (wxChar *)msg;
+      wxBusyInfo disabler(message,parent);
       rb_yield(Qnil);
     }
     return ;

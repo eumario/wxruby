@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxScrollBar(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSB_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "scrollBar") ;
+   wxScrollBar(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSB_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("scrollBar")) ;
 	/**
 	 * \brief Destructor, destroying the scrollbar. 
 	*/
@@ -42,7 +42,7 @@ See   for details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSB_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "scrollBar") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSB_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("scrollBar")) ;
 	/**
 	 * \brief Returns the length of the scrollbar. 
 	*/

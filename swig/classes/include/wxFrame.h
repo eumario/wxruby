@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxFrame(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = "frame") ;
+   wxFrame(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = wxT("frame")) ;
 	/**
 	 * \brief Destructor. Destroys all child windows and menu bar if present. 
 	*/
@@ -54,7 +54,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = "frame") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = wxT("frame")) ;
 	/**
 	 * \brief Creates a status bar at the bottom of the frame. 
 	 * \param int  
@@ -63,7 +63,7 @@ for further details.
 	 * \param const wxString&  
 	*/
 
-  virtual wxStatusBar* CreateStatusBar(int number = 1, long style = 0, wxWindowID id = -1, const wxString& name = "statusBar") ;
+  virtual wxStatusBar* CreateStatusBar(int number = 1, long style = 0, wxWindowID id = -1, const wxString& name = wxT("statusBar")) ;
 	/**
 	 * \brief Creates a toolbar at the top or left of the frame. 
 	 * \param long  
@@ -71,7 +71,7 @@ for further details.
 	 * \param const wxString&  
 	*/
 
-  virtual wxToolBar* CreateToolBar(long style = wxNO_BORDER, wxWindowID id = -1, const wxString& name = "toolBar") ;
+  virtual wxToolBar* CreateToolBar(long style = wxNO_BORDER, wxWindowID id = -1, const wxString& name = wxT("toolBar")) ;
 	/**
 	 * \brief Returns the origin of the frame client area (in client coordinates). It may be
 different from (0, 0) if the frame has a toolbar. 

@@ -69,4 +69,4 @@ void GcFreefunc(void *)
 
 #define VERSION_STRING "wxRuby-SWIG 0.0.3"
 
-int wxMessageBox(const wxString& message, const wxString& caption = "Message", int style = wxOK, wxWindow *parent = NULL, int x = -1, int y = -1);
+int wxMessageBox(const wxString& message, const wxString& caption = wxT("Message"), int style = wxOK, wxWindow *parent = NULL, int x = -1, int y = -1);

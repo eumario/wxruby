@@ -18,7 +18,7 @@ class SwigDirector_wxMDIParentFrame : public wxMDIParentFrame, public Swig::Dire
 
 public:
     SwigDirector_wxMDIParentFrame(VALUE self, bool disown = false);
-    SwigDirector_wxMDIParentFrame(VALUE self, wxWindow *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, wxString const &name = "frame", bool disown = false);
+    SwigDirector_wxMDIParentFrame(VALUE self, wxWindow *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, wxString const &name = wxT("frame"), bool disown = false);
     virtual void GetClientSize(int *width, int *height) const;
     virtual wxToolBar *GetToolBar() const;
     virtual wxMDIClientWindow *OnCreateClient();

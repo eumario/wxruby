@@ -24,8 +24,8 @@ class wxRubyArtProvider : public wxArtProvider
     VALUE v_id,v_client,v_size,v_ret;
     wxBitmap result;
 
-    v_id = rb_str_new2(id.c_str());
-    v_client = rb_str_new2(client.c_str());
+    v_id = rb_str_new2((const char *)id.c_str());
+    v_client = rb_str_new2((const char *)client.c_str());
     v_size = SWIG_NewClassInstance(cWxSize.klass,SWIGTYPE_p_wxSize);
     wxSize *size_ptr = new wxSize(size);
     DATA_PTR(v_size) = size_ptr;

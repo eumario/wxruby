@@ -28,7 +28,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxRadioBox(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, int n = 0, const wxString choices[] = NULL, int majorDimension = 0, long style = wxRA_SPECIFY_COLS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "radioBox") ;
+   wxRadioBox(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, int n = 0, const wxString choices[] = NULL, int majorDimension = 0, long style = wxRA_SPECIFY_COLS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("radioBox")) ;
 	/**
 	 * \brief Destructor, destroying the radiobox item. 
 	*/
@@ -50,7 +50,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, int n = 0, const wxString choices[] = NULL, int majorDimension = 0, long style = wxRA_SPECIFY_COLS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "radioBox") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  label , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, int n = 0, const wxString choices[] = NULL, int majorDimension = 0, long style = wxRA_SPECIFY_COLS, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("radioBox")) ;
 	/**
 	 * \brief Enables or disables the entire radiobox. 
 	 * \param bool  

@@ -25,7 +25,7 @@ Note that sometimes you can reduce flicker by passing the wxCLIP_CHILDREN window
 	 * \param const wxString&   
 	*/
 
-  wxNotebook(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString&  name = "notebook");
+  wxNotebook(wxWindow*  parent , wxWindowID  id , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString&  name = wxT("notebook"));
 	/**
 	 * \brief Destroys the wxNotebook object. 
 	*/
@@ -64,7 +64,7 @@ of the parameters.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize&  size , long style , const wxString&  name = "notebook");
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint& pos , const wxSize&  size , long style , const wxString&  name = wxT("notebook"));
 	/**
 	 * \brief Deletes all pages. 
 	*/

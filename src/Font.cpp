@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -792,7 +795,7 @@ _wrap_new_wxFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
     int arg3 ;
     int arg4 ;
     bool arg5 = (bool) (bool)false ;
-    wxString const &arg6_defvalue = "" ;
+    wxString const &arg6_defvalue = wxT("") ;
     wxString *arg6 = (wxString *) &arg6_defvalue ;
     wxFontEncoding arg7 = (wxFontEncoding) wxFONTENCODING_DEFAULT ;
     wxFont *result;
@@ -941,7 +944,7 @@ _wrap_wxFont_GetFaceName(int argc, VALUE *argv, VALUE self) {
     result = ((wxFont const *)arg1)->GetFaceName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -975,7 +978,7 @@ _wrap_wxFont_GetNativeFontInfoDesc(int argc, VALUE *argv, VALUE self) {
     result = ((wxFont const *)arg1)->GetNativeFontInfoDesc();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

@@ -17,7 +17,7 @@ class Swig::Director;
 class SwigDirector_wxMenu : public wxMenu, public Swig::Director {
 
 public:
-    SwigDirector_wxMenu(VALUE self, wxString const &title = "", long style = 0, bool disown = false);
+    SwigDirector_wxMenu(VALUE self, wxString const &title = wxT(""), long style = 0, bool disown = false);
     SwigDirector_wxMenu(VALUE self, long style, bool disown = false);
 };
 

@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -801,7 +804,7 @@ _wrap_new_wxCheckBox(int argc, VALUE *argv, VALUE self) {
     long arg7 = (long) 0 ;
     wxValidator const &arg8_defvalue = wxDefaultValidator ;
     wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
-    wxString const &arg9_defvalue = "checkBox" ;
+    wxString const &arg9_defvalue = wxT("checkBox") ;
     wxString *arg9 = (wxString *) &arg9_defvalue ;
     wxCheckBox *result;
     
@@ -869,7 +872,7 @@ _wrap_wxCheckBox_Create(int argc, VALUE *argv, VALUE self) {
     long arg7 = (long) 0 ;
     wxValidator const &arg8_defvalue = wxDefaultValidator ;
     wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
-    wxString const &arg9_defvalue = "checkBox" ;
+    wxString const &arg9_defvalue = wxT("checkBox") ;
     wxString *arg9 = (wxString *) &arg9_defvalue ;
     bool result;
     VALUE vresult = Qnil;

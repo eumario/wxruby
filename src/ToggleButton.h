@@ -18,7 +18,7 @@ class SwigDirector_wxToggleButton : public wxToggleButton, public Swig::Director
 
 public:
     SwigDirector_wxToggleButton(VALUE self, bool disown = false);
-    SwigDirector_wxToggleButton(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &val = wxDefaultValidator, wxString const &name = "checkBox", bool disown = false);
+    SwigDirector_wxToggleButton(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &val = wxDefaultValidator, wxString const &name = wxT("checkBox"), bool disown = false);
 };
 
 

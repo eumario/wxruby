@@ -18,14 +18,14 @@ class SwigDirector_wxFrame : public wxFrame, public Swig::Director {
 
 public:
     SwigDirector_wxFrame(VALUE self, bool disown = false);
-    SwigDirector_wxFrame(VALUE self, wxWindow *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, wxString const &name = "frame", bool disown = false);
+    SwigDirector_wxFrame(VALUE self, wxWindow *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, wxString const &name = wxT("frame"), bool disown = false);
     virtual void SetStatusWidths(int n, int *widths);
     virtual void SetStatusText(wxString const &text, int number = 0);
-    virtual wxToolBar *CreateToolBar(long style = wxNO_BORDER, wxWindowID id = -1, wxString const &name = "toolBar");
+    virtual wxToolBar *CreateToolBar(long style = wxNO_BORDER, wxWindowID id = -1, wxString const &name = wxT("toolBar"));
     virtual wxStatusBar *OnCreateStatusBar(int number, long style, wxWindowID id, wxString const &name);
     virtual wxToolBar *OnCreateToolBar(long style, wxWindowID id, wxString const &name);
     virtual void SetTitle(wxString const &title);
-    virtual wxStatusBar *CreateStatusBar(int number = 1, long style = 0, wxWindowID id = -1, wxString const &name = "statusBar");
+    virtual wxStatusBar *CreateStatusBar(int number = 1, long style = 0, wxWindowID id = -1, wxString const &name = wxT("statusBar"));
 };
 
 

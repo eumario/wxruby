@@ -14,7 +14,7 @@ public:
 	 * \param long  
 	*/
 
-   wxMenu(const wxString&  title = "", long style = 0) ;
+   wxMenu(const wxString&  title = wxT(""), long style = 0) ;
 	/**
 	 * \brief Constructs a wxMenu object. 
 	 * \param long  
@@ -41,7 +41,7 @@ and recreation of internal data structures.
 	 * \param wxItemKind  
 	*/
 
-  void Append(int  id , const wxString&   item , const wxString&  helpString = "", wxItemKind kind = wxITEM_NORMAL) ;
+  void Append(int  id , const wxString&   item , const wxString&  helpString = wxT(""), wxItemKind kind = wxITEM_NORMAL) ;
 	/**
 	 * \brief Adds a pull-right submenu to the end of the menu. Append the submenu to the parent
 menu   you have added your menu items, or accelerators may not be
@@ -52,7 +52,7 @@ registered properly.
 	 * \param const wxString&   
 	*/
 
-  void Append(int  id , const wxString&   item , wxMenu * subMenu , const wxString&  helpString = "") ;
+  void Append(int  id , const wxString&   item , wxMenu * subMenu , const wxString&  helpString = wxT("")) ;
 	/**
 	 * \brief  
 	 * \param wxMenuItem*  
@@ -66,7 +66,7 @@ registered properly.
 	 * \param const wxString&   
 	*/
 
-  void AppendCheckItem(int  id , const wxString&   item , const wxString&  helpString = "") ;
+  void AppendCheckItem(int  id , const wxString&   item , const wxString&  helpString = wxT("")) ;
 	/**
 	 * \brief Adds a radio item to the end of the menu. All consequent radio items form a
 group and when an item in the group is checked, all the others are
@@ -79,7 +79,7 @@ automatically unchecked.
 	 * \param const wxString&   
 	*/
 
-  void AppendRadioItem(int  id , const wxString&   item , const wxString&  helpString = "") ;
+  void AppendRadioItem(int  id , const wxString&   item , const wxString&  helpString = wxT("")) ;
 	/**
 	 * \brief Adds a separator to the end of the menu. 
 	*/
@@ -202,7 +202,7 @@ as appending it.
 	 * \param wxItemKind  
 	*/
 
-  void Insert(size_t  pos , int  id , const wxString&   item , const wxString&  helpString = "", wxItemKind kind = wxITEM_NORMAL) ;
+  void Insert(size_t  pos , int  id , const wxString&   item , const wxString&  helpString = wxT(""), wxItemKind kind = wxITEM_NORMAL) ;
 	/**
 	 * \brief Inserts a checkable item at the given position. 
 	 * \param size_t   
@@ -211,7 +211,7 @@ as appending it.
 	 * \param const wxString&   
 	*/
 
-  void InsertCheckItem(size_t  pos , int  id , const wxString&   item , const wxString&  helpString = "") ;
+  void InsertCheckItem(size_t  pos , int  id , const wxString&   item , const wxString&  helpString = wxT("")) ;
 	/**
 	 * \brief Inserts a radio item at the given position. 
 	 * \param size_t   
@@ -220,7 +220,7 @@ as appending it.
 	 * \param const wxString&   
 	*/
 
-  void InsertRadioItem(size_t  pos , int  id , const wxString&   item , const wxString&  helpString = "") ;
+  void InsertRadioItem(size_t  pos , int  id , const wxString&   item , const wxString&  helpString = wxT("")) ;
 	/**
 	 * \brief Inserts a separator at the given position. 
 	 * \param size_t   
@@ -254,7 +254,7 @@ existing items.
 	 * \param wxItemKind  
 	*/
 
-  void Prepend(int  id , const wxString&   item , const wxString&  helpString = "", wxItemKind kind = wxITEM_NORMAL) ;
+  void Prepend(int  id , const wxString&   item , const wxString&  helpString = wxT(""), wxItemKind kind = wxITEM_NORMAL) ;
 	/**
 	 * \brief Inserts a checkable item at the position 0. 
 	 * \param int  
@@ -262,7 +262,7 @@ existing items.
 	 * \param const wxString&   
 	*/
 
-  void PrependCheckItem(int  id , const wxString&   item , const wxString&  helpString = "") ;
+  void PrependCheckItem(int  id , const wxString&   item , const wxString&  helpString = wxT("")) ;
 	/**
 	 * \brief Inserts a radio item at the position 0. 
 	 * \param int  
@@ -270,7 +270,7 @@ existing items.
 	 * \param const wxString&   
 	*/
 
-  void PrependRadioItem(int  id , const wxString&   item , const wxString&  helpString = "") ;
+  void PrependRadioItem(int  id , const wxString&   item , const wxString&  helpString = wxT("")) ;
 	/**
 	 * \brief Inserts a separator at the position 0. 
 	 * \param size_t   

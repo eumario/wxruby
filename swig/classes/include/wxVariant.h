@@ -25,21 +25,21 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxVariant(const char*  value , const wxString&  name = "") ;
+   wxVariant(const char*  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a string value. 
 	 * \param const wxString&  
 	 * \param const wxString&   
 	*/
 
-   wxVariant(const wxString&  value , const wxString&  name = "") ;
+   wxVariant(const wxString&  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a character value. 
 	 * \param char  
 	 * \param const wxString&   
 	*/
 
-   wxVariant(char  value , const wxString&  name = "") ;
+   wxVariant(char  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from an integer value. You may need to cast to (long) to
 avoid confusion with other constructors (such as the bool constructor). 
@@ -47,21 +47,21 @@ avoid confusion with other constructors (such as the bool constructor).
 	 * \param const wxString&   
 	*/
 
-   wxVariant(long  value , const wxString&  name = "") ;
+   wxVariant(long  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a boolean value. 
 	 * \param bool  
 	 * \param const wxString&   
 	*/
 
-   wxVariant(bool  value , const wxString&  name = "") ;
+   wxVariant(bool  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a double-precision floating point value. 
 	 * \param double  
 	 * \param const wxString&   
 	*/
 
-   wxVariant(double  value , const wxString&  name = "") ;
+   wxVariant(double  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a list of wxVariant objects. This constructor
 copies  , the application is still responsible for
@@ -70,7 +70,7 @@ deleting   and its contents.
 	 * \param const wxString&   
 	*/
 
-   wxVariant(const wxList&  value , const wxString&  name = "") ;
+   wxVariant(const wxList&  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a list of strings. This constructor
 copies  , the application is still responsible for
@@ -79,28 +79,28 @@ deleting   and its contents.
 	 * \param const wxString&   
 	*/
 
-   wxVariant(const wxStringList&  value , const wxString&  name = "") ;
+   wxVariant(const wxStringList&  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a void pointer. 
 	 * \param void*  
 	 * \param const wxString&   
 	*/
 
-   wxVariant(void*  value , const wxString&  name = "") ;
+   wxVariant(void*  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from a wxObject pointer. 
 	 * \param wxObject*  
 	 * \param const wxString&   
 	*/
 
-   wxVariant(wxObject*  value , const wxString&  name = "") ;
+   wxVariant(wxObject*  value , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Construction from user-defined data. The variant holds on to the   pointer. 
 	 * \param wxVariantData*  
 	 * \param const wxString&   
 	*/
 
-   wxVariant(wxVariantData*  data , const wxString&  name = "") ;
+   wxVariant(wxVariantData*  data , const wxString&  name = wxT("")) ;
 	/**
 	 * \brief Destructor. 
 	*/

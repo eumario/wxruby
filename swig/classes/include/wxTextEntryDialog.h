@@ -18,7 +18,7 @@ public:
 	 * \param const wxPoint&   
 	*/
 
-   wxTextEntryDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = "Please", const wxString&  defaultValue = "", long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
+   wxTextEntryDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption = wxT("Please"), const wxString&  defaultValue = wxT(""), long  style = wxOK, const wxPoint&  pos = wxDefaultPosition) ;
 	/**
 	 * \brief Destructor. 
 	*/

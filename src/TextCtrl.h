@@ -18,7 +18,7 @@ class SwigDirector_wxTextCtrl : public wxTextCtrl, public Swig::Director {
 
 public:
     SwigDirector_wxTextCtrl(VALUE self, bool disown = false);
-    SwigDirector_wxTextCtrl(VALUE self, wxWindow *parent, wxWindowID id, wxString const &value = "", wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxTextCtrlNameStr, bool disown = false);
+    SwigDirector_wxTextCtrl(VALUE self, wxWindow *parent, wxWindowID id, wxString const &value = wxT(""), wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxTextCtrlNameStr, bool disown = false);
     virtual void GetSelection(long *from, long *to) const;
     virtual void Remove(long from, long to);
     virtual void SetInsertionPoint(long pos);

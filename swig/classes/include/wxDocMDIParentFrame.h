@@ -20,7 +20,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxDocMDIParentFrame(wxDocManager*  manager , wxFrame * parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = "frame") ;
+   wxDocMDIParentFrame(wxDocManager*  manager , wxFrame * parent , wxWindowID  id , const wxString&  title , const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE, const wxString&  name = wxT("frame")) ;
 	/**
 	 * \brief Destructor. 
 	*/

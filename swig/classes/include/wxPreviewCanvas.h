@@ -18,7 +18,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxPreviewCanvas(wxPrintPreview*  preview , wxWindow*  parent , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "canvas") ;
+   wxPreviewCanvas(wxPrintPreview*  preview , wxWindow*  parent , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("canvas")) ;
 	/**
 	 * \brief Destructor. 
 	*/

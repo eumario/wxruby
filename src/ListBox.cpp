@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -805,7 +808,7 @@ _wrap_new_wxListBox(int argc, VALUE *argv, VALUE self) {
     long arg8 = (long) 0 ;
     wxValidator const &arg9_defvalue = wxDefaultValidator ;
     wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
-    wxString const &arg10_defvalue = "listBox" ;
+    wxString const &arg10_defvalue = wxT("listBox") ;
     wxString *arg10 = (wxString *) &arg10_defvalue ;
     wxListBox *result;
     wxString *arr6 ;
@@ -837,7 +840,7 @@ _wrap_new_wxListBox(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = STR2CSTR(rb_ary_entry(argv[4],i));
+                    arr6[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[4],i));
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -896,7 +899,7 @@ _wrap_wxListBox_Create(int argc, VALUE *argv, VALUE self) {
     long arg8 = (long) 0 ;
     wxValidator const &arg9_defvalue = wxDefaultValidator ;
     wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
-    wxString const &arg10_defvalue = "listBox" ;
+    wxString const &arg10_defvalue = wxT("listBox") ;
     wxString *arg10 = (wxString *) &arg10_defvalue ;
     bool result;
     wxString *arr6 ;
@@ -925,7 +928,7 @@ _wrap_wxListBox_Create(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = STR2CSTR(rb_ary_entry(argv[4],i));
+                    arr6[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[4],i));
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1013,7 +1016,7 @@ _wrap_wxListBox_InsertItems(int argc, VALUE *argv, VALUE self) {
                 arr2 = new wxString[RARRAY(argv[0])->len];
                 for (int i = 0; i < RARRAY(argv[0])->len; i++)
                 {
-                    arr2[i] = STR2CSTR(rb_ary_entry(argv[0],i));
+                    arr2[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[0],i));
                 }
                 arg2 = RARRAY(argv[0])->len;
                 arg3 = arr2;
@@ -1092,7 +1095,8 @@ _wrap_wxListBox_Set__SWIG_1(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                tmp2.Add(STR2CSTR(rb_ary_entry(argv[0],i)));
+                wxString item = (wxChar *)STR2CSTR(rb_ary_entry(argv[0],i));
+                tmp2.Add(item);
             }
             
             arg2 = &tmp2;
@@ -1394,7 +1398,7 @@ _wrap_wxListBox_GetString(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetString(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1412,7 +1416,7 @@ _wrap_wxListBox_GetStringSelection(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetStringSelection();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

@@ -14,7 +14,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxPrintout(const wxString&  title = "Printout") ;
+   wxPrintout(const wxString&  title = wxT("Printout")) ;
 	/**
 	 * \brief Destructor. 
 	*/

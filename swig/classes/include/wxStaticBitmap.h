@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxStaticBitmap(wxWindow*  parent , wxWindowID  id , const wxBitmap&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBitmap") ;
+   wxStaticBitmap(wxWindow*  parent , wxWindowID  id , const wxBitmap&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("staticBitmap")) ;
 	/**
 	 * \brief Creation function, for two-step construction. For details see  . 
 	 * \param wxWindow*   
@@ -36,7 +36,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxBitmap&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = "staticBitmap") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxBitmap&  label , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxString&  name = wxT("staticBitmap")) ;
 	/**
 	 * \brief Returns a reference to the label bitmap. 
 	*/

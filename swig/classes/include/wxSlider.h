@@ -27,7 +27,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxSlider(wxWindow*  parent , wxWindowID  id , int  value  , int  minValue , int  maxValue , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSL_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "slider") ;
+   wxSlider(wxWindow*  parent , wxWindowID  id , int  value  , int  minValue , int  maxValue , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSL_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("slider")) ;
 	/**
 	 * \brief Destructor, destroying the slider. 
 	*/
@@ -58,7 +58,7 @@ for further details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , int  value  , int  minValue , int  maxValue , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSL_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "slider") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , int  value  , int  minValue , int  maxValue , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxSL_HORIZONTAL, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("slider")) ;
 	/**
 	 * \brief Returns the line size. 
 	*/

@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -801,7 +804,7 @@ _wrap_new_wxComboBox(int argc, VALUE *argv, VALUE self) {
     long arg9 = (long) 0 ;
     wxValidator const &arg10_defvalue = wxDefaultValidator ;
     wxValidator *arg10 = (wxValidator *) &arg10_defvalue ;
-    wxString const &arg11_defvalue = "comboBox" ;
+    wxString const &arg11_defvalue = wxT("comboBox") ;
     wxString *arg11 = (wxString *) &arg11_defvalue ;
     wxComboBox *result;
     wxString *arr7 ;
@@ -832,7 +835,7 @@ _wrap_new_wxComboBox(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = STR2CSTR(rb_ary_entry(argv[5],i));
+                    arr7[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[5],i));
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -892,7 +895,7 @@ _wrap_wxComboBox_Create(int argc, VALUE *argv, VALUE self) {
     long arg9 = (long) 0 ;
     wxValidator const &arg10_defvalue = wxDefaultValidator ;
     wxValidator *arg10 = (wxValidator *) &arg10_defvalue ;
-    wxString const &arg11_defvalue = "comboBox" ;
+    wxString const &arg11_defvalue = wxT("comboBox") ;
     wxString *arg11 = (wxString *) &arg11_defvalue ;
     bool result;
     wxString *arr7 ;
@@ -924,7 +927,7 @@ _wrap_wxComboBox_Create(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = STR2CSTR(rb_ary_entry(argv[5],i));
+                    arr7[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[5],i));
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -1022,7 +1025,7 @@ _wrap_wxComboBox_GetValue(int argc, VALUE *argv, VALUE self) {
     result = ((wxComboBox const *)arg1)->GetValue();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

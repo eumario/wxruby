@@ -25,7 +25,7 @@ the value of   will be ignored.
 	 * \param const wxString&  
 	*/
 
-   wxExpr(wxExprType  type , const wxString& wordOrString = "") ;
+   wxExpr(wxExprType  type , const wxString& wordOrString = wxT("")) ;
 	/**
 	 * \brief Construct an integer expression. 
 	 * \param long  

@@ -14,7 +14,7 @@ public:
 	 * \param wxWindow*   
 	*/
 
-   wxHtmlEasyPrinting(const wxString&  name = "Printing", wxWindow*  parentWindow = NULL) ;
+   wxHtmlEasyPrinting(const wxString&  name = wxT("Printing"), wxWindow*  parentWindow = NULL) ;
 	/**
 	 * \brief Preview HTML file. 
 

@@ -27,7 +27,7 @@ least some font if   is not specified.
 	 * \param const wxString&   
 	*/
 
-  virtual bool EnumerateEncodings(const wxString&  font = "") ;
+  virtual bool EnumerateEncodings(const wxString&  font = wxT("")) ;
 	/**
 	 * \brief Return array of strings containing all encodings found by 
  . This is convenience function. It is 

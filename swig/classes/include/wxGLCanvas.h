@@ -20,7 +20,7 @@ public:
 	 * \param const wxPalette&  
 	*/
 
-   wxGLCanvas(wxWindow*  parent , wxWindowID id = -1, const wxPoint&  pos , const wxSize&  size , long style = 0, const wxString&  name = "GLCanvas", int* attribList = 0, const wxPalette& palette = wxNullPalette) ;
+   wxGLCanvas(wxWindow*  parent , wxWindowID id = -1, const wxPoint&  pos , const wxSize&  size , long style = 0, const wxString&  name = wxT("GLCanvas"), int* attribList = 0, const wxPalette& palette = wxNullPalette) ;
 	/**
 	 * \brief  
 	 * \param wxWindow*   
@@ -34,7 +34,7 @@ public:
 	 * \param const wxPalette&  
 	*/
 
-   wxGLCanvas(wxWindow*  parent , wxGLCanvas*  sharedCanvas = NULL, wxWindowID id = -1, const wxPoint&  pos , const wxSize&  size , long style = 0, const wxString&  name = "GLCanvas", int* attribList = 0, const wxPalette& palette = wxNullPalette) ;
+   wxGLCanvas(wxWindow*  parent , wxGLCanvas*  sharedCanvas = NULL, wxWindowID id = -1, const wxPoint&  pos , const wxSize&  size , long style = 0, const wxString&  name = wxT("GLCanvas"), int* attribList = 0, const wxPalette& palette = wxNullPalette) ;
 	/**
 	 * \brief Constructor. 
 	 * \param wxWindow*   
@@ -48,7 +48,7 @@ public:
 	 * \param const wxPalette&  
 	*/
 
-   wxGLCanvas(wxWindow*  parent , wxGLContext*  sharedContext = NULL, wxWindowID id = -1, const wxPoint&  pos , const wxSize&  size , long style = 0, const wxString&  name = "GLCanvas", int* attribList = 0, const wxPalette& palette = wxNullPalette) ;
+   wxGLCanvas(wxWindow*  parent , wxGLContext*  sharedContext = NULL, wxWindowID id = -1, const wxPoint&  pos , const wxSize&  size , long style = 0, const wxString&  name = wxT("GLCanvas"), int* attribList = 0, const wxPalette& palette = wxNullPalette) ;
 	/**
 	 * \brief Sets this canvas as the current recipient of OpenGL calls.
 Each canvas contain an OpenGL device context that has been created during

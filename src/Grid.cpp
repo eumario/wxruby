@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -1647,7 +1650,7 @@ _wrap_wxGrid_GetCellValue__SWIG_0(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetCellValue(arg2,arg3);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1667,7 +1670,7 @@ _wrap_wxGrid_GetCellValue__SWIG_1(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetCellValue((wxGridCellCoords const &)*arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1772,7 +1775,7 @@ _wrap_wxGrid_GetColLabelValue(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetColLabelValue(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -2176,7 +2179,7 @@ _wrap_wxGrid_GetRowLabelValue(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetRowLabelValue(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -5127,7 +5130,7 @@ _wrap_wxGrid_GetLabelValue(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetLabelValue(arg2,arg3);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

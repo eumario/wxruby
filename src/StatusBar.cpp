@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -829,7 +832,7 @@ void SwigDirector_wxStatusBar::SetStatusText(wxString const &text, int i) {
         wxStatusBar::SetStatusText(text,i);
         return;
     }
-    obj0 = rb_str_new2((&text)->c_str());
+    obj0 = rb_str_new2((const char *)(&text)->c_str());
     obj1 = INT2NUM(i);
     result = rb_funcall(swig_get_self(), rb_intern("set_status_text"), 2,obj0,obj1);
 }
@@ -879,7 +882,7 @@ _wrap_new_wxStatusBar__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
     long arg4 = (long) wxST_SIZEGRIP ;
-    wxString const &arg5_defvalue = "statusBar" ;
+    wxString const &arg5_defvalue = wxT("statusBar") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     wxStatusBar *result;
     
@@ -988,7 +991,7 @@ _wrap_wxStatusBar_Create(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
     long arg4 = (long) wxST_SIZEGRIP ;
-    wxString const &arg5_defvalue = "statusBar" ;
+    wxString const &arg5_defvalue = wxT("statusBar") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     bool result;
     VALUE vresult = Qnil;
@@ -1071,7 +1074,7 @@ _wrap_wxStatusBar_GetStatusText(int argc, VALUE *argv, VALUE self) {
     result = ((wxStatusBar const *)arg1)->GetStatusText(arg2);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

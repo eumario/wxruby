@@ -143,7 +143,7 @@ wxHtmlHelpController ignores this call.
 	 * \param const wxString&   
 	*/
 
-  virtual bool LoadFile(const wxString&  file = "") ;
+  virtual bool LoadFile(const wxString&  file = wxT("")) ;
 	/**
 	 * \brief Overridable member called when this application's viewer is quit by the user.
 

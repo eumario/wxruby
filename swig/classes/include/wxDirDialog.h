@@ -20,7 +20,7 @@ the dialog.
 	 * \param const wxString&   
 	*/
 
-   wxDirDialog(wxWindow*  parent , const wxString&  message = "Choose", const wxString&  defaultPath = "", long  style = 0, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, const wxString&  name = "wxDirCtrl") ;
+   wxDirDialog(wxWindow*  parent , const wxString&  message = wxT("Choose"), const wxString&  defaultPath = wxT(""), long  style = 0, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, const wxString&  name = wxT("wxDirCtrl")) ;
 	/**
 	 * \brief Destructor. 
 	*/

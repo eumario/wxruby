@@ -18,7 +18,7 @@ class SwigDirector_wxDialog : public wxDialog, public Swig::Director {
 
 public:
     SwigDirector_wxDialog(VALUE self, bool disown = false);
-    SwigDirector_wxDialog(VALUE self, wxWindow *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE, wxString const &name = "dialogBox", bool disown = false);
+    SwigDirector_wxDialog(VALUE self, wxWindow *parent, wxWindowID id, wxString const &title, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE, wxString const &name = wxT("dialogBox"), bool disown = false);
     virtual void OnApply(wxCommandEvent &event);
     virtual void OnCancel(wxCommandEvent &event);
     virtual void OnOK(wxCommandEvent &event);

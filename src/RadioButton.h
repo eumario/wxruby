@@ -18,7 +18,7 @@ class SwigDirector_wxRadioButton : public wxRadioButton, public Swig::Director {
 
 public:
     SwigDirector_wxRadioButton(VALUE self, bool disown = false);
-    SwigDirector_wxRadioButton(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = "radioButton", bool disown = false);
+    SwigDirector_wxRadioButton(VALUE self, wxWindow *parent, wxWindowID id, wxString const &label, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("radioButton"), bool disown = false);
 };
 
 

@@ -18,7 +18,7 @@ class SwigDirector_wxScrolledWindow : public wxScrolledWindow, public Swig::Dire
 
 public:
     SwigDirector_wxScrolledWindow(VALUE self, bool disown = false);
-    SwigDirector_wxScrolledWindow(VALUE self, wxWindow *parent, wxWindowID id = -1, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxHSCROLL, wxString const &name = "scrolledWindow", bool disown = false);
+    SwigDirector_wxScrolledWindow(VALUE self, wxWindow *parent, wxWindowID id = -1, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxHSCROLL, wxString const &name = wxT("scrolledWindow"), bool disown = false);
     virtual void OnDraw(wxDC &dc);
 };
 

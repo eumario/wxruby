@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -822,7 +825,7 @@ _wrap_new_wxSingleChoiceDialog(int argc, VALUE *argv, VALUE self) {
                 arr5 = new wxString[RARRAY(argv[3])->len];
                 for (int i = 0; i < RARRAY(argv[3])->len; i++)
                 {
-                    arr5[i] = STR2CSTR(rb_ary_entry(argv[3],i));
+                    arr5[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[3],i));
                 }
                 arg5 = RARRAY(argv[3])->len;
                 arg6 = arr5;
@@ -911,7 +914,7 @@ _wrap_wxSingleChoiceDialog_GetStringSelection(int argc, VALUE *argv, VALUE self)
     result = ((wxSingleChoiceDialog const *)arg1)->GetStringSelection();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

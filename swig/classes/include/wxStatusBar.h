@@ -21,7 +21,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxStatusBar(wxWindow*  parent , wxWindowID  id , long style = wxST_SIZEGRIP, const wxString&  name = "statusBar") ;
+   wxStatusBar(wxWindow*  parent , wxWindowID  id , long style = wxST_SIZEGRIP, const wxString&  name = wxT("statusBar")) ;
 	/**
 	 * \brief Destructor. 
 	*/
@@ -37,7 +37,7 @@ See   for details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , long style = wxST_SIZEGRIP, const wxString&  name = "statusBar") ;
+  bool Create(wxWindow*  parent , wxWindowID  id , long style = wxST_SIZEGRIP, const wxString&  name = wxT("statusBar")) ;
 	/**
 	 * \brief  
 	 * \param int  

@@ -23,7 +23,7 @@ public:
 void log_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(StringValuePtr(str));
+    wxLogWarning((wxChar *)StringValuePtr(str));
 
 }
 
@@ -33,11 +33,11 @@ void log_status(int argc, VALUE *argv, VALUE self)
         wxFrame *ptr;
         Data_Get_Struct(argv[0], wxFrame, ptr);
         VALUE str = rb_f_sprintf(argc-1, &argv[1]);
-        wxLogStatus(ptr,StringValuePtr(str));
+        wxLogStatus(ptr,(wxChar *)StringValuePtr(str));
     }
     else {
         VALUE str = rb_f_sprintf(argc, argv);
-        wxLogStatus(StringValuePtr(str));
+        wxLogStatus((wxChar *)StringValuePtr(str));
     }
 
 }
@@ -47,7 +47,7 @@ static void
 log_warning(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(StringValuePtr(str));
+    wxLogWarning((wxChar *)StringValuePtr(str));
 }
 
 
@@ -55,7 +55,7 @@ static void
 log_error(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogError(StringValuePtr(str));
+    wxLogError((wxChar *)StringValuePtr(str));
 }
 
 
@@ -115,14 +115,14 @@ size_t wxGetMultipleChoices(wxArrayInt& selections,const wxString& message,const
 
 long wxGetNumberFromUser(  const wxString& message,  const wxString& prompt,  const wxString& caption,  long value,  long min = 0,  long max = 100,  wxWindow *parent = NULL,  const wxPoint& pos = wxDefaultPosition);
 
-wxString wxGetTextFromUser(const wxString& message, const wxString& caption = "Input text",
-const wxString& default_value = "", wxWindow *parent = NULL);
+wxString wxGetTextFromUser(const wxString& message, const wxString& caption = wxT("Input text"),
+const wxString& default_value = wxT(""), wxWindow *parent = NULL);
 
-wxString wxGetPasswordFromUser(const wxString& message, const wxString& caption = "Input text",
-const wxString& default_value = "", wxWindow *parent = NULL);
+wxString wxGetPasswordFromUser(const wxString& message, const wxString& caption = wxT("Input text"),
+const wxString& default_value = wxT(""), wxWindow *parent = NULL);
 
 
-wxString wxFileSelector(const wxString& message, const wxString& default_path = "",const wxString& default_filename = "", const wxString& default_extension = "",const wxString& wildcard = "*.*", int flags = 0, wxWindow *parent = 0,int x = -1, int y = -1);
+wxString wxFileSelector(const wxString& message, const wxString& default_path = wxT(""),const wxString& default_filename = wxT(""), const wxString& default_extension = wxT(""),const wxString& wildcard = wxT("*.*"), int flags = 0, wxWindow *parent = 0,int x = -1, int y = -1);
 
 
 

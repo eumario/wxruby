@@ -87,13 +87,16 @@ private:
  
 #ifdef __cplusplus
 #  ifndef RUBY_METHOD_FUNC /* These definitions should work for Ruby 1.4.6 */
+#    define PROTECTFUNC(f) ((VALUE (*)()) f)
 #    define VALUEFUNC(f) ((VALUE (*)()) f)
 #    define VOIDFUNC(f)  ((void (*)()) f)
 #  else
 #    ifndef ANYARGS /* These definitions should work for Ruby 1.6 */
+#      define PROTECTFUNC(f) ((VALUE (*)()) f)
 #      define VALUEFUNC(f) ((VALUE (*)()) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
-#    else /* These definitions should work for Ruby 1.7 */
+#    else /* These definitions should work for Ruby 1.7+ */
+#      define PROTECTFUNC(f) ((VALUE (*)(VALUE)) f)
 #      define VALUEFUNC(f) ((VALUE (*)(ANYARGS)) f)
 #      define VOIDFUNC(f)  ((RUBY_DATA_FUNC) f)
 #    endif
@@ -574,7 +577,7 @@ public:
 void log_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(StringValuePtr(str));
+    wxLogWarning((wxChar *)StringValuePtr(str));
 
 }
 
@@ -584,11 +587,11 @@ void log_status(int argc, VALUE *argv, VALUE self)
         wxFrame *ptr;
         Data_Get_Struct(argv[0], wxFrame, ptr);
         VALUE str = rb_f_sprintf(argc-1, &argv[1]);
-        wxLogStatus(ptr,StringValuePtr(str));
+        wxLogStatus(ptr,(wxChar *)StringValuePtr(str));
     }
     else {
         VALUE str = rb_f_sprintf(argc, argv);
-        wxLogStatus(StringValuePtr(str));
+        wxLogStatus((wxChar *)StringValuePtr(str));
     }
 
 }
@@ -598,7 +601,7 @@ static void
 log_warning(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(StringValuePtr(str));
+    wxLogWarning((wxChar *)StringValuePtr(str));
 }
 
 
@@ -606,7 +609,7 @@ static void
 log_error(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogError(StringValuePtr(str));
+    wxLogError((wxChar *)StringValuePtr(str));
 }
 
 
@@ -856,7 +859,7 @@ _wrap_wxGetCwd(int argc, VALUE *argv, VALUE self) {
     result = wxGetCwd();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -872,7 +875,7 @@ _wrap_wxGetEmailAddress(int argc, VALUE *argv, VALUE self) {
     result = wxGetEmailAddress();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -888,7 +891,7 @@ _wrap_wxGetHostName(int argc, VALUE *argv, VALUE self) {
     result = wxGetHostName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -904,7 +907,7 @@ _wrap_wxGetFullHostName(int argc, VALUE *argv, VALUE self) {
     result = wxGetFullHostName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -920,7 +923,7 @@ _wrap_wxGetUserId(int argc, VALUE *argv, VALUE self) {
     result = wxGetUserId();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -936,7 +939,7 @@ _wrap_wxGetUserName(int argc, VALUE *argv, VALUE self) {
     result = wxGetUserName();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -952,7 +955,7 @@ _wrap_wxGetHomeDir(int argc, VALUE *argv, VALUE self) {
     result = wxGetHomeDir();
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1018,7 +1021,7 @@ _wrap_wxGetMultipleChoices(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = STR2CSTR(rb_ary_entry(argv[2],i));
+                    arr4[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[2],i));
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
@@ -1106,9 +1109,9 @@ _wrap_wxGetNumberFromUser(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_wxGetTextFromUser(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
-    wxString const &arg2_defvalue = "Input text" ;
+    wxString const &arg2_defvalue = wxT("Input text") ;
     wxString *arg2 = (wxString *) &arg2_defvalue ;
-    wxString const &arg3_defvalue = "" ;
+    wxString const &arg3_defvalue = wxT("") ;
     wxString *arg3 = (wxString *) &arg3_defvalue ;
     wxWindow *arg4 = (wxWindow *) NULL ;
     wxString result;
@@ -1135,7 +1138,7 @@ _wrap_wxGetTextFromUser(int argc, VALUE *argv, VALUE self) {
     result = wxGetTextFromUser((wxString const &)*arg1,(wxString const &)*arg2,(wxString const &)*arg3,arg4);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1144,9 +1147,9 @@ _wrap_wxGetTextFromUser(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_wxGetPasswordFromUser(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
-    wxString const &arg2_defvalue = "Input text" ;
+    wxString const &arg2_defvalue = wxT("Input text") ;
     wxString *arg2 = (wxString *) &arg2_defvalue ;
-    wxString const &arg3_defvalue = "" ;
+    wxString const &arg3_defvalue = wxT("") ;
     wxString *arg3 = (wxString *) &arg3_defvalue ;
     wxWindow *arg4 = (wxWindow *) NULL ;
     wxString result;
@@ -1173,7 +1176,7 @@ _wrap_wxGetPasswordFromUser(int argc, VALUE *argv, VALUE self) {
     result = wxGetPasswordFromUser((wxString const &)*arg1,(wxString const &)*arg2,(wxString const &)*arg3,arg4);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }
@@ -1182,13 +1185,13 @@ _wrap_wxGetPasswordFromUser(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_wxFileSelector(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
-    wxString const &arg2_defvalue = "" ;
+    wxString const &arg2_defvalue = wxT("") ;
     wxString *arg2 = (wxString *) &arg2_defvalue ;
-    wxString const &arg3_defvalue = "" ;
+    wxString const &arg3_defvalue = wxT("") ;
     wxString *arg3 = (wxString *) &arg3_defvalue ;
-    wxString const &arg4_defvalue = "" ;
+    wxString const &arg4_defvalue = wxT("") ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
-    wxString const &arg5_defvalue = "*.*" ;
+    wxString const &arg5_defvalue = wxT("*.*") ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     int arg6 = (int) 0 ;
     wxWindow *arg7 = (wxWindow *) 0 ;
@@ -1237,7 +1240,7 @@ _wrap_wxFileSelector(int argc, VALUE *argv, VALUE self) {
     result = wxFileSelector((wxString const &)*arg1,(wxString const &)*arg2,(wxString const &)*arg3,(wxString const &)*arg4,(wxString const &)*arg5,arg6,arg7,arg8,arg9);
     
     {
-        vresult = rb_str_new2((&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->c_str());
     }
     return vresult;
 }

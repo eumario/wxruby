@@ -26,7 +26,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxChoice(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "choice") ;
+   wxChoice(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("choice")) ;
 	/**
 	 * \brief Destructor, destroying the choice item. 
 	*/
@@ -44,7 +44,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = "choice");
+  bool Create(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("choice"));
 	/**
 	 * \brief Deletes the item with the given index from the control. 
 	 * \param int   

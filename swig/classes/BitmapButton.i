@@ -5,6 +5,8 @@
 
 %module(directors="1") wxBitmapButton
 
+%feature(nodirector) wxBitmapButton;
+
 %ignore wxBitmapButton::wxBitmapButton();
 
 %include "include/wxBitmapButton.h"

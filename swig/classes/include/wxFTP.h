@@ -172,7 +172,7 @@ otherwise.
 	 * \param const wxString&  
 	*/
 
-  bool GetDirList(wxArrayString&  files , const wxString& wildcard = "") ;
+  bool GetDirList(wxArrayString&  files , const wxString& wildcard = wxT("")) ;
 	/**
 	 * \brief This function returns the computer-parsable list of the files in the current
 directory (optionally only of the files matching the  , all files
@@ -185,7 +185,7 @@ otherwise.
 	 * \param const wxString&  
 	*/
 
-  bool GetFilesList(wxArrayString&  files , const wxString& wildcard = "") ;
+  bool GetFilesList(wxArrayString&  files , const wxString& wildcard = wxT("")) ;
 	/**
 	 * \brief Initializes an output stream to the specified  . The returned
 stream has all but the seek functionality of wxStreams. When the user finishes
