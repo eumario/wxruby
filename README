@@ -1,0 +1,136 @@
+README for wxruby-swig
+Version 0.0.16
+
+This is a very early release of a swig-based version 
+of wxRuby. It can run the "minimal" sample. It only 
+supports 36 classes, compared to 139 in wxRuby 0.3, 
+and over 300 in all of wxWidgets.
+
+There are no binaries. You must build it from source.
+
+
+WHATS NEW:
+- Incorporated updated xml classes file, which allowed 
+  me to remove a few special cases from extractxml.rb.
+- Simplified how director classes are generated (now 
+  only request directors once in common.i, rather than in 
+  every class .i file)
+- Added missing virtual destructors, which FIXED THE 
+  CRASH on exit from the calendar sample. 
+
+  
+
+REQUIREMENTS:
+
+- wxWindows 2.4 SDK
+- rake (http://rake.rubyforge.org/)
+- Debian GNU/Linux is the only known working platform
+  Other platforms might be supported already, but they 
+  have not been tested yet (see below)
+- OPTIONAL: SWIG 1.3.21 **custom build**
+  Swig'd .cpp and .h files are included in this package, 
+  so you don't actually need SWIG.
+  Note: If you use SWIG, it *MUST* be MY custom build,
+  which creates directors for classes with virtual 
+  destructors but no virtual methods.
+
+
+INSTALLATION:
+
+Tarballs are available at:
+  http://qualitycode.com/repos/wxruby-swig
+
+Alternatively, you can use wget or some other tool to 
+directly pull the directory tree:
+  http://qualitycode.com/repos/wxruby-swig
+
+If you want to help with development, please use 
+darcs (http://www.abridgegame.org/darcs/).
+The command to get the sources is:
+  darcs get http://qualitycode.com/repos/wxruby-swig
+  
+If you intend to perform the SWIG step yourself, you 
+will need SWIG 1.3.21 or later, and NQXML (a pure Ruby 
+XML parser). You will also need to set the following 
+environment variable on your system: WXRUBY_SWIG=YES
+
+Otherwise, the rakefile will trust that the src/ 
+directory already contains all the swigged output.
+  
+
+BUILDING:
+
+There is no ./configure step, nor do you need to 
+run ruby extconf.rb. 
+
+From the top-level directory (typically wxruby-swig/), 
+start the rake build with the command:
+  rake
+  
+If your platform is not Debian GNU/Linux, you will 
+probably need to edit the appropriate platform-dependent 
+rake file (found in the rake subdirectory):
+
+  Mac OSX:              rakemacosx.rb
+  MS Windows VC++:      rakemswin.rb
+  MS Windows BC++:      rakebccwin.rb
+  MS Windows MingGW:    rakemingw.rb
+  MS Windows Cygwin:    rakecygwin.rb
+  NetBSD:               rakenetbsd.rb
+
+When editing a platform-dependent rakefile, you might 
+only need to set one or more of the following variables:
+    $extra_cppflags
+    $extra_ldflags
+    $extra_objs
+    $extra_libs
+
+
+TESTING:
+
+NOTE: For now, you must require 'wx' instead of 'wxruby'
+in any apps. This allows you to have the real wxRuby 
+and this wxRuby-SWIG on your system at the same time.
+
+Very few classes are supported, but each class supports 
+almost all of the available methods. You can try the samples:
+  ruby samples/test.rb
+  ruby samples/minimal/nothing.rb
+  ruby samples/minimal/minimal.rb
+  
+On my system, whenever a wxRuby-SWIG app exits, I get 
+a crash, segfault, illegal instruction, or other problem.
+Please let me know whether you do or do not have this 
+problem, and what platform you are using.
+
+
+NOTES:
+- Uninitialized client data will have the value (false), 
+  not (nil). This is a change from wxRuby 0.3 and earlier.
+- wxDateTime has not been wrapped. Use Ruby's DateTime 
+  whenever a wxDateTime is specified.
+- wxString has not been wrapped. Use a normal Ruby String
+  whenever a wxString is specified.
+- log_message and log_status take a single string parameter, 
+  rather than a format string followed by additional values 
+  to be inserted.
+- None of the "stock objects", like BLUE, NORMAL_FONT, 
+  RED_PEN and NULL_BRUSH, are implemented yet.
+- The following classes are supported:
+    App.i               CheckBox.i          Frame.i       Size.i
+    Bitmap.i            Choice.i            GDIObject.i   Sizer.i
+    BitmapButton.i      CloseEvent.i        Icon.i        StaticText.i
+    BoxSizer.i          CommandEvent.i      Menu.i        UpdateUIEvent.i
+    Brush.i             Control.i           MenuBar.i     Window.i
+    Button.i            ControlWithItems.i  Object.i      WindowDC.i
+    CalendarCtrl.i      DC.i                PaintDC.i     
+    CalendarDateAttr.i  Dialog.i            PaintEvent.i
+    CalendarEvent.i     Event.i             Panel.i
+    Caret.i             EvtHandler.i        Point.i
+
+  
+
+MAINTAINER:
+  Kevin Smith
+  http://qualitycode.com
+  mailto:wxruby@qualitycode.com

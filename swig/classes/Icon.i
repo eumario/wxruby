@@ -1,0 +1,19 @@
+#   Copyright 2004 by Kevin Smith
+#   released under the wxWidgets license
+#   as part of the wxRuby project
+%include "../common.i"
+
+%module(directors="1") wxIcon
+
+%ignore wxIcon::wxIcon();
+%ignore wxIcon::wxIcon(const wxIcon& icon);
+%ignore wxIcon::wxIcon(void* data, int type, int width, int height, int depth = -1);
+%ignore wxIcon::wxIcon(const char bits[], int width, int height, int depth = 1);
+%ignore wxIcon::wxIcon(int width, int height, int depth = -1);
+%ignore wxIcon::wxIcon(char** bits);
+%ignore wxIcon::wxIcon(const char** bits);
+%ignore wxIcon::wxIcon(const wxIconLocation&  loc );
+%ignore wxIcon::SaveFile(const wxString&  name , wxBitmapType  type , wxPalette*  palette = NULL);
+%ignore wxIcon::SetOk;
+
+%include "include/wxIcon.h"

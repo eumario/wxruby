@@ -1,0 +1,146 @@
+- Remove memory debug output
+
+- Change callback hash to be non-ruby, so gc will work properly
+
+- Add mark/free handling to typemap methods
+
+- Add support for overloaded constructors (and fix calendar sample)
+  - and fix cases in minimal.rb
+  
+- NOTE: Any method that returns an object (rather 
+  than an object reference or pointer) is currently 
+  being removed by swig. ARGH!
+
+- Remove debugging output for director constructors/destructors
+
+- Compiling DC causes a ton of warnings, due to SWIG not 
+  initializing all the variables
+  
+- Allow multiple classes in one .i file
+
+- Create rake target "version" that will update the version 
+  in the README, and the runtime version string
+  
+- rake for 1.6.7 (should we bundle rake?)
+  
+- Test and fix rakefile for MSWin
+
+- Add support for statically linking wxWidgets library
+
+- Use more cool features from rbconfig.rb
+
+- Add aliases like label and label= for get_label and set_label
+
+- Problem classes:
+	rubyClass = rb_define_class_under(GetWxModule(),"ArtProvider", rb_cObject);
+
+- Probably not needed?
+    wxString, wxDateTime, wxDateSpan, wxTimeSpan
+    
+
+- Support more classes and evt_xxx methods (duh!)
+	rubyClass = rb_define_class_under(GetWxModule(),"CheckListBox", WxListBox::rubyClass);
+    rubyClass = rb_define_class_under(GetWxModule(),"ClassInfo", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"Colour", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"ColourData", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"ColourDialog", WxDialog::rubyClass);
+    rubyClass = rb_define_class_under(GetWxModule(),"ComboBox", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"ConfigBase", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"Config", WxConfigBase::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Control", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Cursor", WxBitmap::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"BusyCursor", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"DataFormat", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"DataObject", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"DataObjectSimple", WxDataObject::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"DateTime", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"MemoryDC", WxDC::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"ClientDC", WxWindowDC::rubyClass);
+    rubyClass = rb_define_class_under(GetWxModule(),"ProgressDialog", WxDialog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"FindReplaceData", rb_cObject);
+    rubyClass = rb_define_class_under(GetWxModule(),"TextEntryDialog", WxDialog::rubyClass);
+    rubyClass = rb_define_class_under(GetWxModule(),"SingleChoiceDialog", WxDialog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"TipProvider", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"WindowDisabler", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"BusyInfo", rb_cObject);
+    rubyClass = rb_define_class_under(GetWxModule(),"FindReplaceDialog", WxDialog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"DirDialog", WxDialog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"DropSource", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"DropTarget", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"MouseEvent", WxEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"KeyEvent", WxEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"ListEvent", WxNotifyEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SizeEvent", WxEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"MoveEvent", WxEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SpinEvent", WxNotifyEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"NotifyEvent", WxCommandEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"NotebookEvent", WxNotifyEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"FindDialogEvent", WxCommandEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SocketEvent", WxEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SplitterEvent", WxNotifyEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"TreeEvent", WxNotifyEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"IdleEvent", WxEvent::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"FileDataObject", WxDataObjectSimple::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"FileDialog", WxDialog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"FileDropTarget", WxDropTarget::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Font", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"FontData", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"FontDialog", WxDialog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Gauge", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Grid", WxScrolledWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Image", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"IndividualLayoutConstraint", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"LayoutConstraints", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"List", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"ImageList", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"ListBox", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"ListCtrl", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"ListItemAttr", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"ListItem", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"Log", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"LogTextCtrl", WxLog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Mask", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"MDIParentFrame", WxFrame::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"MessageDialog", WxDialog::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Notebook", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"OwnerDrawn", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"Palette", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"Pen", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"RadioBox", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"RadioButton", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Rect", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"Region", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"ScrolledWindow", WxPanel::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"GridSizer", WxSizer::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"FlexGridSizer", WxSizer::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"StaticBoxSizer", WxBoxSizer::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"NotebookSizer", WxSizer::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Slider", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SocketBase", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"SocketServer", WxSocketBase::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SocketClient", WxSocketBase::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Protocol", WxSocketClient::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SpinCtrl", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"SpinButton", WxWindow::rubyClass);
+    rubyClass = rb_define_class_under(GetWxModule(),"SplitterWindow", WxWindow::rubyClass);
+    rubyClass = rb_define_class_under(GetWxModule(),"StaticBitmap", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"StaticBox", WxControl::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"StaticLine", WxControl::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"StatusBar", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"StreamBase", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"InputStream", WxStreamBase::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"OutputStream", WxStreamBase::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"FileOutputStream", WxOutputStream::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"TextAttr", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"TextCtrl", WxControl::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"TextDataObject", WxDataObjectSimple::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"TextDropTarget", WxDropTarget::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"Timer", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"StopWatch", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"ToggleButton", WxButton::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"ToolBar", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"ToolTip", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"TreeItemData", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"TreeCtrl", WxWindow::rubyClass);
+	rubyClass = rb_define_class_under(GetWxModule(),"URL", rb_cObject);
+	rubyClass = rb_define_class_under(GetWxModule(),"Validator", rb_cObject);

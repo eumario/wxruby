@@ -1,0 +1,77 @@
+# rakefile
+#   Copyright 2004 by Kevin Smith
+#   released under the wxWidgets license
+#   as part of the wxRuby project
+
+require "rake/rakeutil"
+require "rake/rakewx"
+
+#############################
+# auto-detected settings that can be
+# overridden by platform-specific rake files
+$dl_ext = Config::CONFIG["DLEXT"]
+$obj_ext = Config::CONFIG["OBJEXT"]
+$ruby_cppflags = Config::CONFIG["CFLAGS"]
+$ruby_includes = " -I " + $:.join(' -I ')
+$ruby_ldflags = Config::CONFIG["LDFLAGS"]
+$ruby_libs  = Config::CONFIG["LIBS"]
+$extra_cppflags = ""
+$extra_ldflags = ""
+$extra_objs = ""
+$extra_libs = ""
+
+#############################
+# platform-specific
+if($macosx) then    require "rake/rakemacosx"
+elsif($mswin) then  require "rake/rakemswin"
+elsif($mingw) then  require "rake/rakemingw"
+elsif($cygwin) then require "rake/rakecygwin"
+elsif($bccwin) then require "rake/rakebccwin"
+elsif($netbsd) then require "rake/rakenetbsd"
+else                require "rake/rakelinux"
+end
+
+
+#############################
+# put it all together
+$cppflags = [$wx_cppflags, $ruby_cppflags, $extra_cppflags, $ruby_includes].join(' ')
+$ldflags = [$wx_ldflags, $ruby_ldflags, $extra_ldflags].join(' ')
+$libs = [$wx_libs, $ruby_libs, $extra_libs].join(' ')
+$extra_objs = $extra_objs
+$dl_lib = "wx.#{$dl_ext}"
+
+
+#############################
+# later, support static linking
+$target_lib = File.join($dest_dir, $dl_lib)
+
+
+#############################
+# public tasks
+begin
+    create_internal_non_swig_tasks
+    if(ENV['WXRUBY_SWIG'])
+        create_internal_swig_tasks
+    end
+    
+    task :default => :link
+    task :link => $target_lib
+    task :compile => all_obj_files
+    task :recompile => [:clean, :compile]
+    task :swig => normal_cpp_files
+    task :reswig => [:clean_src, :swig]
+    
+    task :clean_src do
+        delete_files_in($src_dir)
+    end
+    
+    task :clean do
+        force_delete($target_lib)
+        force_rmdir($dest_dir)
+        delete_files_in($obj_dir)
+        force_rmdir($obj_dir)
+    end
+rescue Exception => e
+    puts(e.message)
+    puts(e.backtrace.join("\n"))
+end

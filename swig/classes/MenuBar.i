@@ -1,0 +1,10 @@
+#   Copyright 2004 by Kevin Smith
+#   released under the wxWidgets license
+#   as part of the wxRuby project
+%include "../common.i"
+
+%module(directors="1") wxMenuBar
+
+%ignore wxMenuBar(long  style, wxMenu**  menus, const wxString  titles[]);
+
+%include "include/wxMenuBar.h"
