@@ -25,29 +25,32 @@
 # %ignore wxWindow::SetCaret;
 
 %rename(SetDimensions) wxWindow::SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
- 
+
+
 
 %include "include/wxWindow.h"
 
-
 %extend wxWindow {
-    VALUE paint()
-    {
-        static VALUE paintDC = Qnil;
-        rb_global_variable(&paintDC);
-
-        if(rb_block_given_p()) 
-        {
-            // avoid quoted constant inside rb_intern because
-            // it will be "fixed" by our post-swig processing
-            char* PAINTDC_CLASS = "PaintDC";
-            VALUE cPaintDC = rb_ivar_get(mWx, rb_intern(PAINTDC_CLASS));
-            
-            VALUE rubySelf = SWIG_NewPointerObj((void *) self, SWIGTYPE_p_wxWindow, 0);
-            paintDC = rb_funcall(cPaintDC, rb_intern("new"), 1, rubySelf);
-            rb_yield(paintDC);
-            paintDC = Qnil;
-        }
-        return Qnil;
+    VALUE this_should_never_be_called(wxDC *tmp) {
+	    return Qnil;
     }
+
+    VALUE paint()
+    {   
+	   wxWindow *ptr = self;
+	
+	   if(rb_block_given_p()) 
+	   {
+	      wxPaintDC dc(ptr);
+	      
+	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxDC, 0);
+	      printf("dcVal = %d\n",dcVal);
+	      rb_yield(dcVal);
+	
+	      DATA_PTR(dcVal) = NULL;
+	   }
+	   return Qnil;	
+   
+  }
+    
 }
