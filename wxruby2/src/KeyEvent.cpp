@@ -760,7 +760,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/KeyEvent.h"
+#include "KeyEvent.h"
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE

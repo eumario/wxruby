@@ -766,7 +766,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ToolBar.h"
+#include "ToolBar.h"
 
 SwigDirector_wxToolBar::SwigDirector_wxToolBar(VALUE self, bool disown): wxToolBar(), Swig::Director(self, disown) {
     

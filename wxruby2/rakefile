@@ -62,7 +62,8 @@ begin
     task :reswig => [:clean_src, :swig]
     
     task :clean_src do
-        delete_files_in($src_dir)
+        delete_files_in_with_ext($src_dir,"cpp")
+	delete_files_in_with_ext($src_dir,"h")
     end
     
     task :clean do

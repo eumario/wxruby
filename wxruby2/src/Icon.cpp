@@ -755,7 +755,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Icon.h"
+#include "Icon.h"
 
 SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, wxString const &name, long type, int desiredWidth, int desiredHeight, bool disown): wxIcon(name, type, desiredWidth, desiredHeight), Swig::Director(self, disown) {
     

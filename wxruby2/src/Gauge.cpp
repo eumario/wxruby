@@ -760,7 +760,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Gauge.h"
+#include "Gauge.h"
 
 SwigDirector_wxGauge::SwigDirector_wxGauge(VALUE self, bool disown): wxGauge(), Swig::Director(self, disown) {
     

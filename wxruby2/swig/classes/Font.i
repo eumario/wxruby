@@ -5,9 +5,7 @@
 
 %module(directors="1") wxFont
 
-#ifdef __WXMAC__
 %feature("nodirector") wxFont;
-#endif
 
 %ignore wxFont::SetNativeFontInfo;
 %include "include/wxFont.h"

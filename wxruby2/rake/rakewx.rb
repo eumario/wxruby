@@ -150,6 +150,7 @@ def create_normal_swig_task(base_name)
     
     file(cpp_file => [swig_file, h_file] + shared_swig_files) do |t|
         do_swig(swig_file, cpp_file, $swig_options)
+        post_process(cpp_file, "fixplatform.rb")
         post_process(cpp_file, "fixmodule.rb")
         fixdeleting = File.join($swig_dir, "fixdeleting.rb")
         sh "ruby #{fixdeleting} #{cpp_file}"
@@ -204,7 +205,7 @@ def create_compile_task(base_name)
     end
     file(obj_file => cpp_file) do |t|
         force_mkdir($obj_dir)
-		sh "#{$cpp} -c #{$cppflags} #{out_arg}#{obj_file} #{cpp_file} "
+        sh "#{$cpp} -c #{$cppflags} #{out_arg}#{obj_file} #{cpp_file} "
     end
 end
 

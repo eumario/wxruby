@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/StaticText.h"
+#include "StaticText.h"
 
 SwigDirector_wxStaticText::SwigDirector_wxStaticText(VALUE self, bool disown): wxStaticText(), Swig::Director(self, disown) {
     

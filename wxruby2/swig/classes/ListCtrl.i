@@ -11,10 +11,10 @@
 %module(directors="1") wxListCtrl
 
 %ignore wxListCtrl::wxListCtrl();
-
-#ifdef __WXMAC__
+//
+// Doesn't work on wxMac
+//
 %ignore wxListCtrl::GetEditControl;
-#endif
 
 %include "include/wxListCtrl.h"
 

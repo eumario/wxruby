@@ -789,7 +789,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Window.h"
+#include "Window.h"
 
 SwigDirector_wxWindow::SwigDirector_wxWindow(VALUE self, bool disown): wxWindow(), Swig::Director(self, disown) {
     

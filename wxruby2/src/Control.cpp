@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Control.h"
+#include "Control.h"
 
 SwigDirector_wxControl::SwigDirector_wxControl(VALUE self, bool disown) : Swig::Director(self, disown) {
     

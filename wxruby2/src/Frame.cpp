@@ -764,7 +764,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Frame.h"
+#include "Frame.h"
 
 SwigDirector_wxFrame::SwigDirector_wxFrame(VALUE self, bool disown): wxFrame(), Swig::Director(self, disown) {
     

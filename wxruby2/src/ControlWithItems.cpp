@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ControlWithItems.h"
+#include "ControlWithItems.h"
 
 static VALUE
 _wrap_wxControlWithItems_Append(int argc, VALUE *argv, VALUE self) {

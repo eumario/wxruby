@@ -757,7 +757,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Pen.h"
+#include "Pen.h"
 
 SwigDirector_wxPen::SwigDirector_wxPen(VALUE self, bool disown): wxPen(), Swig::Director(self, disown) {
     

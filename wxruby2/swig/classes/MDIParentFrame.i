@@ -10,10 +10,11 @@
 %}
 %ignore wxMDIParentFrame::wxMDIParentFrame();
 
-#ifdef __WXMAC__
+//
+// Doesn't work on wxMac
+//
 %ignore wxMDIParentFrame::GetWindowMenu;
 %ignore wxMDIParentFrame::SetWindowMenu;
-#endif
 
 
 %include "include/wxMDIParentFrame.h"

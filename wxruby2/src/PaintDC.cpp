@@ -754,7 +754,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/PaintDC.h"
+#include "PaintDC.h"
 
 SwigDirector_wxPaintDC::SwigDirector_wxPaintDC(VALUE self, wxWindow *window, bool disown): wxPaintDC(window), Swig::Director(self, disown) {
     

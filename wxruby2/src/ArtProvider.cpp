@@ -792,7 +792,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/ArtProvider.h"
+#include "ArtProvider.h"
 
 SwigDirector_ArtProvider::SwigDirector_ArtProvider(VALUE self, bool disown) : Swig::Director(self, disown) {
     

@@ -756,7 +756,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/FileDialog.h"
+#include "FileDialog.h"
 
 SwigDirector_wxFileDialog::SwigDirector_wxFileDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &defaultDir, wxString const &defaultFile, wxString const &wildcard, long style, wxPoint const &pos, bool disown): wxFileDialog(parent, message, defaultDir, defaultFile, wildcard, style, pos), Swig::Director(self, disown) {
     

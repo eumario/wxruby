@@ -756,7 +756,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/DirDialog.h"
+#include "DirDialog.h"
 
 SwigDirector_wxDirDialog::SwigDirector_wxDirDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &defaultPath, long style, wxPoint const &pos, wxSize const &size, wxString const &name, bool disown): wxDirDialog(parent, message, defaultPath, style, pos, size, name), Swig::Director(self, disown) {
     

@@ -771,7 +771,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/DC.h"
+#include "DC.h"
 
 SwigDirector_wxDC::SwigDirector_wxDC(VALUE self, bool disown): wxDC(), Swig::Director(self, disown) {
     

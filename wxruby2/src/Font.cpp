@@ -754,36 +754,15 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Font.h"
-
-SwigDirector_wxFont::SwigDirector_wxFont(VALUE self, bool disown): wxFont(), Swig::Director(self, disown) {
-    
-}
-
-
-
-SwigDirector_wxFont::SwigDirector_wxFont(VALUE self, int pointSize, int family, int style, int weight, bool const underline, wxString const &faceName, wxFontEncoding encoding, bool disown): wxFont(pointSize, family, style, weight, underline, faceName, encoding), Swig::Director(self, disown) {
-    
-}
-
-
+#include "Font.h"
 
 static VALUE
 _wrap_new_wxFont__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
     wxFont *result;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxFont *)new SwigDirector_wxFont(arg1,false);
-        
-    } else {
-        result = (wxFont *)new wxFont();
-        
-    }
+    result = (wxFont *)new wxFont();
     DATA_PTR(self) = result;
     return self;
 }
@@ -808,47 +787,38 @@ _wrap_wxFont_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_wxFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
+    int arg1 ;
     int arg2 ;
     int arg3 ;
     int arg4 ;
-    int arg5 ;
-    bool arg6 = (bool) (bool)false ;
-    wxString const &arg7_defvalue = "" ;
-    wxString *arg7 = (wxString *) &arg7_defvalue ;
-    wxFontEncoding arg8 = (wxFontEncoding) wxFONTENCODING_DEFAULT ;
+    bool arg5 = (bool) (bool)false ;
+    wxString const &arg6_defvalue = "" ;
+    wxString *arg6 = (wxString *) &arg6_defvalue ;
+    wxFontEncoding arg7 = (wxFontEncoding) wxFONTENCODING_DEFAULT ;
     wxFont *result;
     
     if ((argc < 4) || (argc > 7))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
-    arg1 = self;
-    arg2 = NUM2INT(argv[0]);
-    arg3 = NUM2INT(argv[1]);
-    arg4 = NUM2INT(argv[2]);
-    arg5 = NUM2INT(argv[3]);
+    arg1 = NUM2INT(argv[0]);
+    arg2 = NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    arg4 = NUM2INT(argv[3]);
     if (argc > 4) {
-        arg6 = RTEST(argv[4]);
+        arg5 = RTEST(argv[4]);
     }
     if (argc > 5) {
         {
-            arg7 = new wxString(STR2CSTR(argv[5]));
+            arg6 = new wxString(STR2CSTR(argv[5]));
         }
     }
     if (argc > 6) {
         {
             wxFontEncoding * ptr;
             SWIG_ConvertPtr(argv[6], (void **) &ptr, SWIGTYPE_p_wxFontEncoding, 1);
-            if (ptr) arg8 = *ptr;
+            if (ptr) arg7 = *ptr;
         }
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxFont *)new SwigDirector_wxFont(arg1,arg2,arg3,arg4,arg5,arg6,(wxString const &)*arg7,arg8,false);
-        
-    } else {
-        result = (wxFont *)new wxFont(arg2,arg3,arg4,arg5,arg6,(wxString const &)*arg7,arg8);
-        
-    }
+    result = (wxFont *)new wxFont(arg1,arg2,arg3,arg4,arg5,(wxString const &)*arg6,arg7);
     DATA_PTR(self) = result;
     return self;
 }
@@ -856,23 +826,17 @@ _wrap_new_wxFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_wxFont(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[8];
+    VALUE argv[7];
     int ii;
     
     argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 8); ii++) {
+    for (ii = 0; (ii < argc) && (ii < 7); ii++) {
         argv[ii] = args[ii];
     }
-    if (argc == 1) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_new_wxFont__SWIG_0(nargs, args, self);
-        }
+    if (argc == 0) {
+        return _wrap_new_wxFont__SWIG_0(nargs, args, self);
     }
-    if ((argc >= 5) && (argc <= 8)) {
+    if ((argc >= 4) && (argc <= 7)) {
         int _v;
         {
             _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
@@ -890,34 +854,29 @@ static VALUE _wrap_new_wxFont(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
+                        if (argc <= 4) {
+                            return _wrap_new_wxFont__SWIG_1(nargs, args, self);
+                        }
                         {
-                            _v = ((TYPE(argv[4]) == T_FIXNUM) || (TYPE(argv[4]) == T_BIGNUM)) ? 1 : 0;
+                            _v = (argv[4] == Qtrue || argv[4] == Qfalse) ? 1 : 0;
                         }
                         if (_v) {
                             if (argc <= 5) {
                                 return _wrap_new_wxFont__SWIG_1(nargs, args, self);
                             }
                             {
-                                _v = (argv[5] == Qtrue || argv[5] == Qfalse) ? 1 : 0;
+                                _v = (TYPE(argv[5]) == T_STRING);
                             }
                             if (_v) {
                                 if (argc <= 6) {
                                     return _wrap_new_wxFont__SWIG_1(nargs, args, self);
                                 }
                                 {
-                                    _v = (TYPE(argv[6]) == T_STRING);
+                                    void *ptr;
+                                    _v = (NIL_P(argv[6]) || (TYPE(argv[6]) == T_DATA && SWIG_ConvertPtr(argv[6], &ptr, SWIGTYPE_p_wxFontEncoding, 0) != -1)) ? 1 : 0;
                                 }
                                 if (_v) {
-                                    if (argc <= 7) {
-                                        return _wrap_new_wxFont__SWIG_1(nargs, args, self);
-                                    }
-                                    {
-                                        void *ptr;
-                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxFontEncoding, 0) != -1)) ? 1 : 0;
-                                    }
-                                    if (_v) {
-                                        return _wrap_new_wxFont__SWIG_1(nargs, args, self);
-                                    }
+                                    return _wrap_new_wxFont__SWIG_1(nargs, args, self);
                                 }
                             }
                         }
@@ -934,16 +893,7 @@ static VALUE _wrap_new_wxFont(int nargs, VALUE *args, VALUE self) {
 
 static void
 free_wxFont(wxFont *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxFont*)arg1;
-    printf("Font.cpp" " Checking %p\n", director);
-    if (GcIsDeleted(director))
-    {
-        printf("%p is already dead!\n", director);
-        return;
-    }
-    printf("deleting %p\n", director);
-    fflush(stdout);
-    delete arg1;
+    //delete arg1;
 }
 static VALUE
 _wrap_wxFont_IsFixedWidth(int argc, VALUE *argv, VALUE self) {
@@ -1220,22 +1170,6 @@ _wrap_wxFont_SetWeight(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxFont(int argc, VALUE *argv, VALUE self) {
-    wxFont *arg1 = (wxFont *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxFont, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1269,7 +1203,6 @@ mWxFont = mWx;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxFont, "disown_wxFont", VALUEFUNC(_wrap_disown_wxFont), -1);
     
     extern void Init_wxGDIObject();
     Init_wxGDIObject();

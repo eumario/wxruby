@@ -749,7 +749,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/RubyConstants.h"
+#include "RubyConstants.h"
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
@@ -915,7 +915,7 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"ED_BUTTONS_BOTTOM", INT2NUM(0x0000));
     rb_define_const(mWxRubyConstants,"ED_BUTTONS_RIGHT", INT2NUM(0x0002));
     rb_define_const(mWxRubyConstants,"ED_STATIC_LINE", INT2NUM(0x0001));
-    rb_define_const(mWxRubyConstants,"EXT_DIALOG_STYLE", INT2NUM((0x20000000|0x0004|0x0001)));
+    rb_define_const(mWxRubyConstants,"EXT_DIALOG_STYLE", INT2NUM((0x20000000|0x0004)));
     rb_define_const(mWxRubyConstants,"MB_DOCKABLE", INT2NUM(0x0001));
     rb_define_const(mWxRubyConstants,"MENU_TEAROFF", INT2NUM(0x0001));
     rb_define_const(mWxRubyConstants,"COLOURED", INT2NUM(0x0800));
@@ -1461,6 +1461,7 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"CURSOR_WAIT", INT2NUM(wxCURSOR_WAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_WATCH", INT2NUM(wxCURSOR_WATCH));
     rb_define_const(mWxRubyConstants,"CURSOR_BLANK", INT2NUM(wxCURSOR_BLANK));
+    rb_define_const(mWxRubyConstants,"CURSOR_COPY_ARROW", INT2NUM(wxCURSOR_COPY_ARROW));
     rb_define_const(mWxRubyConstants,"CURSOR_ARROWWAIT", INT2NUM(wxCURSOR_ARROWWAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_MAX", INT2NUM(wxCURSOR_MAX));
     rb_define_const(mWxRubyConstants,"LC_VRULES", INT2NUM(0x0001));

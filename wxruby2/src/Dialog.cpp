@@ -760,7 +760,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/Dialog.h"
+#include "Dialog.h"
 
 SwigDirector_wxDialog::SwigDirector_wxDialog(VALUE self, bool disown): wxDialog(), Swig::Director(self, disown) {
     

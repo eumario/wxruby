@@ -10,9 +10,7 @@
 
 %module(directors="1") wxImageList
 
-#ifdef __WXMAC__
 %ignore wxImageList::Replace(int, const wxBitmap&, const wxBitmap&);
-#endif
    
 %rename(AddIcon) wxImageList::Add(const wxIcon&  icon ) ;
 

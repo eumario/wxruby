@@ -759,7 +759,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/MessageDialog.h"
+#include "MessageDialog.h"
 
 SwigDirector_wxMessageDialog::SwigDirector_wxMessageDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &caption, long style, wxPoint const &pos, bool disown): wxMessageDialog(parent, message, caption, style, pos), Swig::Director(self, disown) {
     

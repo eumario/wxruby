@@ -764,7 +764,7 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "src/BusyInfo.h"
+#include "BusyInfo.h"
 
 SwigDirector_wxBusyInfo::SwigDirector_wxBusyInfo(VALUE self, wxString const &msg, wxWindow *parent, bool disown): wxBusyInfo(msg, parent), Swig::Director(self, disown) {
     
