@@ -9,12 +9,13 @@
 
 //$$ CLASS DropTarget
 //$$ NO_CLIENT_DATA 
+//$$ ABSTRACT
 
 //$$ METHODS_BEGIN
 wxDropTarget(wxDataObject *data=NULL);
 
 virtual void GetData();
-virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
+abstract virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
 virtual bool OnDrop(wxCoord x, wxCoord y);
 virtual wxDragResult OnEnter(wxCoord x, wxCoord y, wxDragResult def);
 virtual wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def);
@@ -29,4 +30,10 @@ void SetDataObject(wxDataObject* data);
 
 //$$ BEGIN_CPP_FILE
 //$$ RB_IMPLEMENT_CLASS
+
+wxDropTargetHelper::wxDropTargetHelper(wxDataObject* data) :
+    wxDropTarget(data)
+{
+}
+
 //$$ END_CPP_FILE

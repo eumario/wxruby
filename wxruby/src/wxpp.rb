@@ -393,7 +393,7 @@ class MethodPrototype
         if(isConstMethod)
             constString = ' const'
         end
-        return "\t virtual #{@returnType} " + 
+        return "\tvirtual #{@returnType} " + 
                 "#{@cppMethod}#{parameters.original}" + 
                 constString + ";"
     end
@@ -553,6 +553,14 @@ class ClassHandler
             if(m.isAbstract)
                 lines << m.declareAbstractHelper
             end
+        end
+        return lines
+    end
+    
+    def declareHelperConstructor
+        lines = []
+        @constructors.each do | c |
+            lines << "\t#{cppBaseClassName}#{c.parameters.original};"
         end
         return lines
     end
@@ -978,6 +986,8 @@ class Parser
         if(thisClass.isAbstract)
             result << "class #{thisClass.cppBaseClassName} : public #{thisClass.cppClassName}"
             result << "{"
+            result << "public:"
+            result += thisClass.declareHelperConstructor
             result += thisClass.declareAbstractMethods
             result << "};"
             result << ""
