@@ -36,7 +36,7 @@ evthandler.o: evthandler.cpp wx.h  calendar.h evthandler.h \
   treectrl.h event.h
 filedataobject.o: filedataobject.cpp filedataobject.h dataobjectsimple.o
 filedialog.o: filedialog.cpp wx.h filedialog.h dialog.h
-filedroptarget.o: filedroptarget.cpp droptarget.h
+filedroptarget.o: filedroptarget.cpp filedroptarget.h droptarget.h
 font.o: font.cpp wx.h font.h
 fontdata.o: fontdata.cpp wx.h font.h colour.h fontdata.h
 fontdialog.o: fontdialog.cpp wx.h fontdata.h fontdialog.h dialog.h
@@ -85,8 +85,10 @@ statictext.o: statictext.cpp wx.h  statictext.h window.h
 statusbar.o: statusbar.cpp wx.h  statusbar.h rect.h window.h
 stream.o: stream.cpp wx.h  stream.h
 textctrl.o: textctrl.cpp wx.h  textctrl.h window.h textattr.h
+textdataobject.o: textdataobject.cpp textdataobject.h textdataobject.h
 textdroptarget.o: textdroptarget.cpp textdroptarget.h droptarget.h
 timer.o: timer.cpp wx.h  timer.h
+togglebutton.o: togglebutton.cpp wx.h togglebutton.h button.h
 toolbar.o: toolbar.cpp wx.h  toolbar.h size.h window.h
 tooltip.o: tooltip.cpp wx.h  tooltip.h window.h
 treectrl.o: treectrl.cpp wx.h  treectrl.h textctrl.h point.h \

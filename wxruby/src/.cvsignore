@@ -47,3 +47,6 @@ filedroptarget.h
 textdataobject.h
 textdroptarget.cpp
 textdroptarget.h
+font.cpp
+font.h
+textdataobject.cpp

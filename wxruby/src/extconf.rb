@@ -12,10 +12,10 @@ $objs = [
 "caret.o","statusbar.o","ownerdrawn.o","config.o","region.o","cursor.o",
 "notebook.o","tooltip.o","mask.o","socket.o","url.o","stream.o","toolbar.o",
 "image.o","palette.o","treectrl.o","classinfo.o","splitterwindow.o",
-"methods.o", "staticbitmap.o", "control.o","togglebutton.o","grid.o",
-"menuitem.o", "textattr.o", "dataformat.o", 
-"dropsource.o", "droptarget.o", "textdroptarget.o", "filedroptarget.o",
-"filedataobject.o", "textdataobject.o", "dataobject.o", "dataobjectsimple.o",
+"methods.o","staticbitmap.o","control.o","grid.o",
+"menuitem.o","textattr.o","dataformat.o","togglebutton.o",
+"dropsource.o","droptarget.o","textdroptarget.o","filedroptarget.o",
+"filedataobject.o","textdataobject.o","dataobject.o","dataobjectsimple.o",
 "dynamiccast.o"
 ]
 
@@ -49,28 +49,37 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
     $CFLAGS += " `wx-config --cxxflags`"
     $LDFLAGS += " `wx-config --libs` -Wl "
 	$objs.delete("fontdialog.o")
-
-elsif have_header("windows.h") and have_library("kernel32")
+elsif have_library("kernel32")
+    # native Windows - requires a static build of wxWindows
+    $DEBUG = true
     $WXDIR=ENV['WXWIN']
     $WXVERSION = '24'
+    if $DEBUG
+	$DEBUGPOSTFIX='d'
+    else
+	$DEBUGPOSTFIX=''
+    end
     $WXSRC="#$WXDIR/src/msw"
     $WXINC="#$WXDIR/include"
-    $INCTEMP="#$WXDIR/lib/mswdll"
-    $WXXML="#$WXDIR/contrib/include/"
+    $WXLIBDIR="#$WXDIR/lib"
+    $INCTEMP="#$WXDIR/lib/msw#{$DEBUGPOSTFIX}"
+    $WXLIB="#$WXLIBDIR/wxmsw#{$DEBUGPOSTFIX}.lib"
+    $CFLAGS += " -Fdwxruby.pdb -I#$WXINC -I#$INCTEMP #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
+    $CFLAGS += " -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /D__WINDOWS__ -D__WXMSW__"
+    $libs += " gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib"
+    $libs += " uuid.lib odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib winmm.lib"
     if $DEBUG
-    	$DEBUGPOSTFIX='d'
+	$CFLAGS = $CFLAGS.gsub(/-MD/," /MDd");
+	$CFLAGS += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1"
+	$LDFLAGS = " -link -incremental:no -pdb:wxruby.pdb -debug -dll $(LIBPATH) -def:$(DEFFILE) "
+	$libs += " #$WXLIBDIR/pngd.lib #$WXLIBDIR/zlibd.lib #$WXLIBDIR/jpegd.lib"
+	$libs += " #$WXLIBDIR/tiffd.lib #$WXLIB"
     else
-    	$DEBUGPOSTFIX=''
+	# Release Build has not yet been tested
+	$CFLAGS += " -DNDEBUG"
+	$libs += " #$WXLIBDIR/png.lib #$WXLIBDIR/zlib.lib #$WXLIBDIR/jpeg.lib"
+	$libs += " #$WXLIBDIR/tiff.lib #$WXLIB"
     end
-    $WXLIB="#$WXDIR\\lib\\wxmsw#{$WXVERSION}#{$DEBUGPOSTFIX}.lib"
-    $WXXMLLIB="#$WXDIR\\lib\\wxxrc#{$DEBUGPOSTFIX}.lib msvcrt#{$DEBUGPOSTFIX}.lib"     
-    $CFLAGS += " -I#$WXINC -I#$WXXML -I#$INCTEMP #$WINFLAGS #$EXTRADLLFLAGS -DSTRICT -DWIN32 -D__WIN32__ -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /DWXUSINGDLL=1 /D__WINDOWS__ -D__WXMSW__  "
-    if $DEBUG
-	    $CFLAGS = $CFLAGS.gsub(/-MD/," /MLd");
-	    $DLDFLAGS = $DLDFLAGS + " -debug "
-	end
-	$DLDFLAGS = $DLDFLAGS + " -nodefaultlib "
-    $libs += " #$WXLIB #$WXXMLLIB"
     $objs.push("wx.res")
 
 end
