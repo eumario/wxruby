@@ -543,6 +543,9 @@ public:
     VALUE       m_func;
 };
 
+
+#include <wx/calctrl.h>
+
 /***********************************************************************
  * director.swg
  *
@@ -878,5 +881,11 @@ mWxRubyEventTypes = mWx;
     rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_ENTER", INT2NUM(wxEVT_COMMAND_ENTER));
     rb_define_const(mWxRubyEventTypes,"EVT_HELP", INT2NUM(wxEVT_HELP));
     rb_define_const(mWxRubyEventTypes,"EVT_DETAILED_HELP", INT2NUM(wxEVT_DETAILED_HELP));
+    rb_define_const(mWxRubyEventTypes,"EVT_CALENDAR_SEL_CHANGED", INT2NUM(wxEVT_CALENDAR_SEL_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_CALENDAR_DAY_CHANGED", INT2NUM(wxEVT_CALENDAR_DAY_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_CALENDAR_MONTH_CHANGED", INT2NUM(wxEVT_CALENDAR_MONTH_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_CALENDAR_YEAR_CHANGED", INT2NUM(wxEVT_CALENDAR_YEAR_CHANGED));
+    rb_define_const(mWxRubyEventTypes,"EVT_CALENDAR_DOUBLECLICKED", INT2NUM(wxEVT_CALENDAR_DOUBLECLICKED));
+    rb_define_const(mWxRubyEventTypes,"EVT_CALENDAR_WEEKDAY_CLICKED", INT2NUM(wxEVT_CALENDAR_WEEKDAY_CLICKED));
 }
 

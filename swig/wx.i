@@ -9,7 +9,6 @@
 %{
 #include <wx/hashmap.h>
 
-IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
 WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
 
