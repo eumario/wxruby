@@ -51,7 +51,7 @@ public:
 #endif
     static VALUE GetImageList(VALUE self,VALUE vwhich);
     static VALUE GetItemCount(VALUE self);
-    static VALUE GetItem(VALUE self,VALUE vinfo);
+    static VALUE GetItem(int argc, VALUE *argv, VALUE self);
     static VALUE GetItemData(VALUE self,VALUE vitem);
     static VALUE GetItemPosition(VALUE self,VALUE vitem);
     static VALUE GetItemRect(int argc, VALUE *argv, VALUE self);
