@@ -1,3 +1,8 @@
+2004-03-24
+    * Gentoo ebuild fixed (added DESTDIR & sed trickery)
+      [Submitted by Gour]
+      
+
 2004-03-14
     * Fixed listctrl sample to use new naming for on_xxx callbacks
     * ListCtrl no longer requires subclasses to implement on_get_item_attr,
