@@ -1,13 +1,13 @@
-README.mswin for wxRuby version 0.1 (ALPHA)
+README.mswin for wxRuby version 0.2 (ALPHA)
    Released under the wxWindows 2 license (see LICENSE)
-   This file last updated 2003-08-24
+   This file last updated 2004-01-03
 
 --------------------------------------------------------------------
 INTRODUCTION
 
 wxRuby is an extension library for the Ruby language that
-gives access to the wxWindows cross-platform, native-widget, 
-GUI toolkit. 
+gives access to the wxWindows cross-platform, native-widget,
+GUI toolkit.
 
 The wxRuby project website is:
   http://rubyforge.org/projects/wxruby/
@@ -16,6 +16,86 @@ For general wxRuby information, see the main README file
 
 
 --------------------------------------------------------------------
-MS WINDOWS INFORMATION
+Wxruby for MS Windows
 
-None at this time.
+
+This file describes how to build wxruby extension library with
+the MS Visual C++ 6.0 (service pack 5)
+
+Prerequisites
+==============
+
+In order to build wxruby library you need:
+
+* MS Visual C++ 6.0 service pack 5
+
+* wxWindows from Windows package available on http://www.wxwindows.org
+  I used the file: wxMSW-2.4.1-setup.zip and patch_01).
+
+* Ruby 1.8.0 or higher (
+  I used the 1.8.0 "Ruby Installer For Windows" which is available at:
+  http://rubyinstaller.sourceforge.net/
+
+* wxruby package available from http://rubyforge.org/projects/wxruby/
+
+Procedure
+==========
+
+1) Build wxWindows
+   static library, debug or release build (using makefile)
+
+- Install wxWindows 2.4.1 & patch_01 following the wxWindows
+  instructions.
+
+- Set the environment variable WXWIN to the directory
+  where you installed wxWindows.
+
+- cd %WXWIN%\src\msw
+
+- For a debug build:
+  - nmake -f makefile.vc cleanall
+  - nmake -f makefile.vc
+  - cd %WXWIN%\samples
+  - nmake -f makefile.vc cleanall
+  - nmake -f makefile.vc
+
+- For a release build:
+  - nmake -f makefile.vc cleanall FINAL=1
+  - nmake -f makefile.vc FINAL=1
+  - cd ...\wx\samples
+  - nmake -f makefile.vc cleanall FINAL=1
+  - nmake -f makefile.vc FINAL=1
+
+- run %WXWIN%\samples\controls\controls.exe
+  as a test.
+
+1) Build wxRuby
+
+- I will use the %WXRUBY% to represent the base
+  directory where you have placed wxRuby (it is
+  not necessary to actually create an environment
+  variable for this).
+
+- cd %WXRUBY%\src
+
+- Your type of wxRuby build (release or debug) 
+  must be the same as the wxWindows build.
+  
+- A debug build is done by default. If you want
+  a release build you must edit extconf.rb and
+  change the line "$DEBUG = true" to 
+  "$DEBUG = false".
+
+- ruby extconf.rb (to create Makefile)
+
+- nmake clean
+
+- nmake
+
+- copy resulting wxruby.so (%WXRUBY\src\wxruby.so)
+  to the ruby extension directory:
+     %RUBY%\lib\ruby\site_ruby\1.8\i386-msvcrt
+
+- Run the wxRuby sample apps located at:
+  %WXRUBY%\samples
+
