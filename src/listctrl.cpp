@@ -92,8 +92,8 @@ WxListCtrl::alloc(VALUE self)
 VALUE
 WxListCtrl::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
-    wxWindowID id;
+    wxWindow* parent = 0;
+    wxWindowID id = -1;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
     long style = wxLC_ICON;
@@ -651,7 +651,7 @@ wxCALLBACK wxListCompareFunction(long item1, long item2, long sortData)
 VALUE
 WxListCtrl::SortItems(VALUE self,VALUE klass,VALUE vfunc)
 {
-    wxListCtrlCompare fnSortCallBack;
+    //wxListCtrlCompare fnSortCallBack;
     long data = (long)rb_ary_new3(2,klass,vfunc);
 
     wxRbListCtrl *ptr;

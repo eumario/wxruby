@@ -61,7 +61,10 @@ WxBitmap::init(int argc, VALUE *argv, VALUE self)
         ptr = new wxBitmap(*bmp);
     } else {
         wxString name = StringValuePtr(argv[0]);
-        wxBitmapType type;
+        // Note: We really shouldn't have ANY default here, 
+        // but this was the quickest way to safely get rid 
+        // of the compile warning
+        wxBitmapType type = wxBITMAP_TYPE_XPM;
         if(argc>1 && TYPE(argv[1])==T_FIXNUM)
           type = (wxBitmapType)NUM2INT(argv[1]);
         else if(strstr(StringValuePtr(argv[0]),".xpm"))

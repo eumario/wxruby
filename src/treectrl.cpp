@@ -621,7 +621,7 @@ WxTreeCtrl::GetSelections(VALUE self)
     Data_Get_Struct(self, wxRbTreeCtrl, ptr);
     size_t r = ptr->GetSelections(selection);
     VALUE ary = rb_ary_new();
-    for(int i=0;i<r;i++) {
+    for(size_t i=0;i<r;i++) {
         rb_ary_push(ary,INT2NUM(selection[i].m_pItem));
     }
     return ary;

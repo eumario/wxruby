@@ -1,3 +1,7 @@
+2003-11-30 15:00  kbs
+    * Fixed compile warnings in 25 cpp files
+    
+    
 2003-11-20 22:30  kbs
     * Fixed compile errors:
         * Disable xrc by default

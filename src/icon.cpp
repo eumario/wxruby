@@ -50,7 +50,7 @@ VALUE
 WxIcon::init(int argc, VALUE *argv, VALUE self)
 {
     wxString name;
-    long type;
+    long type = 0;
     int desiredWidth = -1;
     int desiredHeight = -1;
 

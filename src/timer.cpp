@@ -35,7 +35,7 @@ WxTimer::alloc(VALUE self)
 VALUE
 WxTimer::init(int argc, VALUE *argv, VALUE self)
 {
-    wxEvtHandler *owner;
+    wxEvtHandler *owner = 0;
     int id = -1;
 
     if(argc>0 && TYPE(argv[0])==T_DATA) {

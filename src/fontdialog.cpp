@@ -52,8 +52,8 @@ WxFontDialog::alloc(VALUE self)
 VALUE
 WxFontDialog::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow *parent;
-    wxFontData *data;
+    wxWindow *parent = 0;
+    wxFontData *data = 0;
     if(argc>0 && TYPE(argv[0])==T_DATA) {
       Data_Get_Struct(argv[0], wxWindow, parent);
     }

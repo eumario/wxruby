@@ -46,9 +46,6 @@ VALUE
 WxRegion::init(int argc, VALUE *argv, VALUE self)
 {
     wxString name;
-    long type;
-    int desiredWidth = -1;
-    int desiredHeight = -1;
 
     wxRegion *ptr;
     Data_Get_Struct(self, wxRegion, ptr);

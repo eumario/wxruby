@@ -43,8 +43,8 @@ WxSpinCtrl::alloc(VALUE self)
 VALUE
 WxSpinCtrl::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
-    wxWindowID id;
+    wxWindow* parent = 0;
+    wxWindowID id = -1;
     wxString value = "";
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
@@ -189,7 +189,7 @@ VALUE
 WxSpinButton::init(int argc, VALUE *argv, VALUE self)
 {
     wxWindow* parent = NULL;
-    wxWindowID id;
+    wxWindowID id = -1;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
     long style = wxSP_HORIZONTAL;

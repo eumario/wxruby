@@ -58,8 +58,8 @@ WxSizer::init0(wxSizer *sizer)
 VALUE
 WxSizer::Add(int argc, VALUE *argv, VALUE self)
 {
-    int width;
-    int height;
+    int width = 0;
+    int height = 0;
     int option = 0;
     int flag = 0;
     int border = 0;
@@ -175,8 +175,8 @@ WxSizer::Insert(int argc, VALUE *argv, VALUE self)
     int before = NUM2INT(argv[0]);
     wxWindow *window;
     wxSizer *sizer;
-    int width;
-    int height;
+    int width = 0;
+    int height = 0;
     int option = 0;
     int flag = 0;
     int border = 0;

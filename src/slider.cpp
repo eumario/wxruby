@@ -54,11 +54,11 @@ WxSlider::alloc(VALUE self)
 VALUE
 WxSlider::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
-    wxWindowID id;
-    int value;
-    int minValue;
-    int maxValue;
+    wxWindow* parent = 0;
+    wxWindowID id = -1;
+    int value = 0;
+    int minValue = 0;
+    int maxValue = 0;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
     long style = wxSL_HORIZONTAL;

@@ -37,7 +37,7 @@ WxDirDialog::alloc(VALUE self)
 VALUE
 WxDirDialog::init(int argc, VALUE *argv, VALUE self)
 {
-    wxWindow* parent;
+    wxWindow* parent = 0;
     wxString message = "Choose a directory";
     wxString defaultPath = "";
     long style = 0;

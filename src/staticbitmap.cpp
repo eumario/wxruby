@@ -37,7 +37,7 @@ VALUE
 WxStaticBitmap::init(int argc, VALUE *argv, VALUE self)
 {
     wxWindow* parent = NULL;
-    wxWindowID id;
+    wxWindowID id = -1;
     wxBitmap label;
     wxPoint pos = wxDefaultPosition;
     wxSize size = wxDefaultSize;
