@@ -58,7 +58,7 @@ begin
     task :link => $target_lib
     task :compile => all_obj_files
     task :recompile => [:clean, :compile]
-    task :swig => normal_cpp_files
+    task :swig => all_cpp_files
     task :reswig => [:clean_src, :swig]
     
     task :clean_src do
