@@ -24,7 +24,7 @@ public:
     static VALUE init(int argc, VALUE *argv, VALUE self);
     static VALUE ShowModal(VALUE self);
     static VALUE EndModal(VALUE self, VALUE retCode);
-
+    static VALUE init0(wxDialog *);
     static void DefineClass();
 	static VALUE rubyClass;
 };

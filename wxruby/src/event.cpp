@@ -111,6 +111,13 @@ void WxMouseEvent::DefineClass()
 	rb_define_method(rubyClass, "get_x", VALUEFUNC(WxMouseEvent::GetX), 0);
 	rb_define_method(rubyClass, "get_y", VALUEFUNC(WxMouseEvent::GetY), 0);
 	rb_define_method(rubyClass, "left_is_down", VALUEFUNC(WxMouseEvent::LeftIsDown), 0);
+	rb_define_method(rubyClass, "left_down", VALUEFUNC(WxMouseEvent::LeftDown), 0);
+	rb_define_method(rubyClass, "control_down", VALUEFUNC(WxMouseEvent::ControlDown), 0);
+	rb_define_method(rubyClass, "alt_down", VALUEFUNC(WxMouseEvent::AltDown), 0);
+	rb_define_method(rubyClass, "shift_down", VALUEFUNC(WxMouseEvent::ShiftDown), 0);
+	rb_define_method(rubyClass, "meta_down", VALUEFUNC(WxMouseEvent::MetaDown), 0);
+
+
 	rb_define_method(rubyClass, "get_wheel_delta", VALUEFUNC(WxMouseEvent::GetWheelDelta), 0);
 	rb_define_method(rubyClass, "get_wheel_rotation", VALUEFUNC(WxMouseEvent::GetWheelRotation), 0);
 }
@@ -141,6 +148,16 @@ VALUE WxMouseEvent::GetY(VALUE self)
     return INT2NUM(ptr->GetY());
 }
 
+VALUE WxMouseEvent::LeftDown(VALUE self)
+{
+    wxMouseEvent *ptr;
+    Data_Get_Struct(self, wxMouseEvent, ptr);
+	if(ptr->LeftDown())
+		return Qtrue;
+	else
+	    return Qfalse;
+}
+
 VALUE WxMouseEvent::LeftIsDown(VALUE self)
 {
     wxMouseEvent *ptr;
@@ -150,6 +167,49 @@ VALUE WxMouseEvent::LeftIsDown(VALUE self)
 	else
 	    return Qfalse;
 }
+
+VALUE WxMouseEvent::AltDown(VALUE self)
+{
+    wxMouseEvent *ptr;
+    Data_Get_Struct(self, wxMouseEvent, ptr);
+	if(ptr->AltDown())
+		return Qtrue;
+	else
+	    return Qfalse;
+}
+
+VALUE WxMouseEvent::ShiftDown(VALUE self)
+{
+    wxMouseEvent *ptr;
+    Data_Get_Struct(self, wxMouseEvent, ptr);
+	if(ptr->ShiftDown())
+		return Qtrue;
+	else
+	    return Qfalse;
+}
+
+VALUE WxMouseEvent::ControlDown(VALUE self)
+{
+    wxMouseEvent *ptr;
+    Data_Get_Struct(self, wxMouseEvent, ptr);
+	if(ptr->ControlDown())
+		return Qtrue;
+	else
+	    return Qfalse;
+}
+
+VALUE WxMouseEvent::MetaDown(VALUE self)
+{
+    wxMouseEvent *ptr;
+    Data_Get_Struct(self, wxMouseEvent, ptr);
+	if(ptr->MetaDown())
+		return Qtrue;
+	else
+	    return Qfalse;
+}
+
+
+
 
 VALUE WxMouseEvent::GetWheelRotation(VALUE self)
 {

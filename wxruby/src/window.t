@@ -38,11 +38,11 @@
 # (8)	virtual void DragAcceptFiles(bool accept);
 	virtual bool Enable(bool enable = TRUE);
 	static wxWindow* FindFocus();
-	static wxWindow* FindWindowById(long id, wxWindow* parent = NULL);
-	static wxWindow* FindWindowByName(const wxString& name, wxWindow* parent = NULL);
-	static wxWindow* FindWindowByLabel(const wxString& label, wxWindow* parent = NULL);
-	wxWindow* FindWindow(long id); -> FindWindowById
-	wxWindow* FindWindow(const wxString& name); -> FindWindowByName
+	static DYNAMIC FindWindowById(long id, wxWindow* parent = NULL);
+	static DYNAMIC FindWindowByName(const wxString& name, wxWindow* parent = NULL);
+	static DYNAMIC FindWindowByLabel(const wxString& label, wxWindow* parent = NULL);
+	DYNAMIC FindWindow(long id); -> FindWindowById
+	DYNAMIC FindWindow(const wxString& name); -> FindWindowByName
 	virtual void Fit();
 	virtual void FitInside();
 	virtual void Freeze();
@@ -215,7 +215,7 @@ public:
 
 	// actually belongs in WxObject
     static VALUE GetClassInfo(VALUE self);
-
+    static VALUE Paint(VALUE self);
 	// msw only
 #ifdef __WXMSW__
     static void DragAcceptFiles(VALUE self,VALUE vaccept);
@@ -227,6 +227,7 @@ public:
 //$$ END_H_FILE
 
 //$$ BEGIN_CPP_FILE
+#include "wx/dcbuffer.h"
 #include "colour.h"
 #include "font.h"
 #include "size.h"
@@ -241,13 +242,14 @@ public:
 #include "cursor.h"
 #include "tooltip.h"
 #include "classinfo.h"
+#include "dc.h"
 
 void WxWindow::DefineClass()
 {
     //$$ RB_DEFINE
 
 	rb_define_method(rubyClass,"free",VALUEFUNC(WxWindow::free),0);
-
+	rb_define_method(rubyClass,"paint",VALUEFUNC(WxWindow::Paint),0);
 	// belongs in WxObject
     rb_define_method(rubyClass,"GetClassInfo",VALUEFUNC(WxWindow::GetClassInfo),0);
 
@@ -267,6 +269,26 @@ WxWindow::free(VALUE self)
     Data_Get_Struct(self, wxWindow, ptr);
     delete ptr;
 }
+
+VALUE
+WxWindow::Paint(VALUE self)
+{
+    wxWindow *ptr;
+    Data_Get_Struct(self, wxWindow, ptr);
+
+   if(rb_block_given_p()) 
+   {
+      wxBufferedPaintDC dc(ptr);
+
+      VALUE dcVal = WxDC::init0(&dc);
+
+      rb_yield(dcVal);
+
+      DATA_PTR(dcVal) = NULL;
+   }
+   return Qnil;
+}
+
 
 
 // actually belongs in WxObject

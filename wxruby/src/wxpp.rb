@@ -52,6 +52,10 @@ end
 
 def getRubyToCppConversionMethod(parameter)
     className = convertReferenceToPointer(parameter.cppClass)
+    if(className == 'DYNAMIC')
+        return "wxObject *" 
+    end
+    
     if(className == 'long' || className == 'wxCoord')
         method = "NUM2LONG"
     elsif(className == 'int' || className == 'unsigned' || className == 'size_t' || 
@@ -89,6 +93,8 @@ def getCppToRubyConversionMethod(className)
 		method = "rb_str_new2"
 	elsif(className == 'void*')
 		return ["\treturn INT2NUM((long)cppResult);"]
+    elsif(className == "DYNAMIC")
+        method = ["\tWxRbTypeTable::ConvertCppObject"]
     elsif(isWxClass(className))
 		wxName = rubyClassNameFromCppClassName(className)
 		type = convertReferenceToBaseClass(wxName)
@@ -142,7 +148,7 @@ class Parameter
 	
 	def declareCppVariable(cppName)
 		result = []
-		type = convertReferenceToPointer(cppClass)
+  		type = convertReferenceToPointer(cppClass)
 		if(isStringClass(type))
 			type = 'wxString'
 		end
@@ -295,6 +301,9 @@ class Parameters
 
     def delegateCallTo(method, returnType)
         lines = []
+        if(returnType == 'DYNAMIC')
+            returnType = 'wxObject*'
+        end
 		if(returnType == 'void')
 			result = ""
 		elsif(returnType == 'void*')
@@ -743,12 +752,12 @@ class ClassHandler
         lines += parameters.callDelete
         if(returnType == 'void')
             lines << "\treturn Qnil;"
-		elsif(isPointer(returnType) && returnType != 'void*')
-			realReturnType = getWrapperClassName(returnType)
-			realReturnType = convertPointerToBaseClass(realReturnType)
+        elsif(isPointer(returnType) && returnType != 'void*')
+            realReturnType = getWrapperClassName(returnType)
+            realReturnType = convertPointerToBaseClass(realReturnType)
             lines << "\tVALUE rubyResult = GetMappedRubyObjectFromCppObject(cppResult);"
-			lines << "\tif(rubyResult == Qnil)"
-			lines << "\t\trubyResult = #{realReturnType}::init0(cppResult);"
+            lines << "\tif(rubyResult == Qnil)"
+            lines << "\t\trubyResult = #{realReturnType}::init0(cppResult);"
             lines << "\treturn rubyResult;"
         else
             lines += getCppToRubyConversionMethod(returnType)

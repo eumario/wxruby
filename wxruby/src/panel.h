@@ -18,6 +18,7 @@ class WxPanel {
 public:
     static VALUE alloc(VALUE self);
     static VALUE init(int argc, VALUE *argv, VALUE self);
+    static VALUE init0(wxPanel *);
     static VALUE GetDefaultItem(VALUE self);
     static void InitDialog(VALUE self);
     static void SetDefaultItem(VALUE self,VALUE vbtn);

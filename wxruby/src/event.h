@@ -34,6 +34,11 @@ public:
 	static VALUE GetX(VALUE self);
 	static VALUE GetY(VALUE self);
 	static VALUE LeftIsDown(VALUE self);
+	static VALUE LeftDown(VALUE self);
+	static VALUE ShiftDown(VALUE self);
+	static VALUE MetaDown(VALUE self);
+	static VALUE ControlDown(VALUE self);
+	static VALUE AltDown(VALUE self);
 
 	static VALUE GetWheelRotation(VALUE self);
 	static VALUE GetWheelDelta(VALUE self);
