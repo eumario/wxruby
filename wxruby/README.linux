@@ -1,6 +1,6 @@
-README for wxRuby version 0.5.0 (EARLY BETA)
+README for wxRuby version 0.6.0 (BETA)
    Released under the wxWidgets 3 license (see LICENSE)
-   This file last updated 2003-08-26
+   This file last updated 2004-11-12
 
 
 --------------------------------------------------------------------
@@ -21,6 +21,9 @@ For general wxRuby information, see the main README file
 
 --------------------------------------------------------------------
 LINUX INFORMATION
+
+wxGTK does not include the "wx/htmlproc.h" file, so the HTML widget 
+is disabled for now.
 
 None at this time.
 
