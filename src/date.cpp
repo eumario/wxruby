@@ -26,6 +26,7 @@ void WxDateTime::DefineClass()
 	rb_define_method(rubyClass, "get_day", VALUEFUNC(WxDateTime::GetDay), 0);
 	rb_define_method(rubyClass, "format_iso_date", VALUEFUNC(WxDateTime::FormatISODate), 0);
 	rb_define_method(rubyClass, "to_time", VALUEFUNC(WxDateTime::ToTime), 0);
+	rb_define_method(rubyClass, "is_valid", VALUEFUNC(WxDateTime::IsValid), 0);
 	
 }
 
@@ -315,7 +316,9 @@ WxDateTime::init(int argc, VALUE *argv, VALUE self)
 
     wxDateTime *ptr;
     Data_Get_Struct(self, wxDateTime, ptr);
-    if(argc==1 && TYPE(argv[0])==T_FIXNUM) {
+    if(argc==0) {
+      ptr = new wxDateTime();
+    } else if(argc==1 && TYPE(argv[0])==T_FIXNUM) {
       timet = (time_t)NUM2INT(argv[0]);
       ptr = new wxDateTime(timet);
     } else if(argc==1 && TYPE(argv[0])==T_FLOAT) {
@@ -341,7 +344,7 @@ VALUE
 WxDateTime::init0(const wxDateTime &dateTime)
 {
     VALUE self = Data_Wrap_Struct(rubyClass, 0, 0, 0);
-    if(dateTime == wxDefaultDateTime)
+    if(!dateTime.IsValid())
       DATA_PTR(self) = (void*)&wxDefaultDateTime;
     else
       DATA_PTR(self) = new wxDateTime(dateTime.GetTicks());
@@ -355,6 +358,15 @@ WxDateTime::GetDay(VALUE self)
     Data_Get_Struct(self, wxDateTime, ptr);
     return INT2NUM(ptr->GetDay());
 }
+
+VALUE 
+WxDateTime::IsValid(VALUE self)
+{
+    wxDateTime *ptr;
+    Data_Get_Struct(self, wxDateTime, ptr);
+    return CppBoolToRubyBool(ptr->IsValid());
+}
+
 
 VALUE
 WxDateTime::FormatISODate(VALUE self)
