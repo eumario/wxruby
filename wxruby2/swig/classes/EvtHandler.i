@@ -7,7 +7,10 @@
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
 #include <wx/notebook.h>
+#include <wx/grid.h>
 #include <wx/spinbutt.h>
+#include <wx/treectrl.h>
+#include <wx/splitter.h>
 %}
 
 %module(directors="1") wxEvtHandler
@@ -19,8 +22,6 @@
 
 
 %{
-
-
 static VALUE callbacks = Qnil;
 extern swig_class cWxEvent;
 extern swig_class cWxCalendarEvent;
@@ -36,8 +37,14 @@ extern swig_class cWxMouseEvent;
 extern swig_class cWxFocusEvent;
 extern swig_class cWxSpinEvent;
 extern swig_class cWxNotebookEvent;
+extern swig_class cWxGridEvent;
+extern swig_class cWxGridRangeSelectEvent;
+extern swig_class cWxGridSizeEvent;
+extern swig_class cWxTreeEvent;
+extern swig_class cWxSplitterEvent;
 extern swig_class cWxMoveEvent;
-static const wxEventType *calendarEvents[] = 
+
+static const wxEventType *calendarEvents[] =
 {
     &wxEVT_CALENDAR_SEL_CHANGED,
     &wxEVT_CALENDAR_DAY_CHANGED,
@@ -202,6 +209,16 @@ public:
             cEvent = cWxIdleEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxPaintEvent)))
             cEvent = cWxPaintEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxTreeEvent)))
+			cEvent = cWxTreeEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxGridEvent)))
+			cEvent = cWxGridEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxGridRangeSelectEvent)))
+			cEvent = cWxGridRangeSelectEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxGridSizeEvent)))
+			cEvent = cWxGridSizeEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxSplitterEvent)))
+			cEvent = cWxSplitterEvent.klass;
 		else if (event.IsKindOf(CLASSINFO(wxMoveEvent)))
 			cEvent = cWxMoveEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))

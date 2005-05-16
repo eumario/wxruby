@@ -9,6 +9,8 @@
 #include <wx/grid.h>
 %}
 
+%ignore wxGrid::wxGrid();
+%ignore wxGrid::wxGrid(wxWindow*  parent , int  x , int  y , int  w = -1, int  h = -1, long  style = wxWANTS_CHARS, const wxString&  name = wxPanelNameStr);
 %ignore wxGrid::SelectionToDeviceRect;
 
 %include "include/wxGrid.h"

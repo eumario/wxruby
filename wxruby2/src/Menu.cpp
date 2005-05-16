@@ -2005,6 +2005,6 @@ mWxMenu = mWx;
     rb_define_method(cWxMenu.klass, "set_title", VALUEFUNC(_wrap_wxMenu_SetTitle), -1);
     rb_define_method(cWxMenu.klass, "update_ui", VALUEFUNC(_wrap_wxMenu_UpdateUI), -1);
     cWxMenu.mark = 0;
-    cWxMenu.destroy = (void (*)(void *)) free_wxMenu;
+    cWxMenu.destroy = (void (*)(void *)) GcFreefunc;
 }
 

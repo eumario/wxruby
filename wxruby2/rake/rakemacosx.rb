@@ -12,8 +12,8 @@ use_wx_config
 $wx_version = "2.5.3"
 
 $cpp = "g++"
-#$ld = "g++"
-$ld = "/usr/bin/libtool"
+$ld = "g++"
+#$ld = "/usr/bin/libtool"
 $swig_options += " -D__WXMAC__ "
 
 =begin
@@ -32,7 +32,8 @@ $swig_options += " -D__WXMAC__ "
 
 $ruby_cppflags.gsub!(/-g/,"")
 $extra_cppflags = '-x objective-c++'
-$extra_ldflags = " -lgcc -lstdc++ -dynamic -flat_namespace -undefined suppress -read_only_relocs suppress -install_name /Library/Frameworks/wxruby.framework/wxruby -current_version 0.5 -compatibility_version 0.5"
+$extra_ldflags = "-dynamic -bundle -flat_namespace -undefined suppress"
+#$extra_ldflags = " -lgcc -lstdc++ -dynamic -flat_namespace -undefined suppress -read_only_relocs suppress -install_name /Library/Frameworks/wxruby.framework/wxruby -current_version 0.5 -compatibility_version 0.5"
 
 task :framework do
 	build_framework

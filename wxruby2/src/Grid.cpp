@@ -811,29 +811,25 @@ void SwigDirector_wxGrid::OnActivate(bool active) {
 }
 
 
+#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_new_wxGrid__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxGrid *result;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    arg1 = self;
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxGrid *)new SwigDirector_wxGrid(arg1,false);
+_wrap_wxGrid_allocate(VALUE self) {
+#else
+    static VALUE
+    _wrap_wxGrid_allocate(int argc, VALUE *argv, VALUE self) {
+#endif
         
-    } else {
-        result = (wxGrid *)new wxGrid();
         
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxGrid);
+#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
+        rb_obj_call_init(vresult, argc, argv);
+#endif
+        return vresult;
     }
-    DATA_PTR(self) = result;
-    return self;
-}
-
+    
 
 static VALUE
-_wrap_new_wxGrid__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxGrid(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -4604,204 +4600,6 @@ _wrap_wxGrid_SetMargins(int argc, VALUE *argv, VALUE self) {
     arg3 = NUM2INT(argv[1]);
     (arg1)->SetMargins(arg2,arg3);
     
-    return Qnil;
-}
-
-
-#ifdef HAVE_RB_DEFINE_ALLOC_FUNC
-static VALUE
-_wrap_wxGrid_allocate(VALUE self) {
-#else
-    static VALUE
-    _wrap_wxGrid_allocate(int argc, VALUE *argv, VALUE self) {
-#endif
-        
-        
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxGrid);
-#ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-        rb_obj_call_init(vresult, argc, argv);
-#endif
-        return vresult;
-    }
-    
-
-static VALUE
-_wrap_new_wxGrid__SWIG_2(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    int arg3 ;
-    int arg4 ;
-    int arg5 = (int) -1 ;
-    int arg6 = (int) -1 ;
-    long arg7 = (long) wxWANTS_CHARS ;
-    wxString const &arg8_defvalue = wxPanelNameStr ;
-    wxString *arg8 = (wxString *) &arg8_defvalue ;
-    wxGrid *result;
-    
-    if ((argc < 3) || (argc > 7))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    arg3 = NUM2INT(argv[1]);
-    arg4 = NUM2INT(argv[2]);
-    if (argc > 3) {
-        arg5 = NUM2INT(argv[3]);
-    }
-    if (argc > 4) {
-        arg6 = NUM2INT(argv[4]);
-    }
-    if (argc > 5) {
-        arg7 = NUM2LONG(argv[5]);
-    }
-    if (argc > 6) {
-        {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
-        }
-    }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxGrid *)new SwigDirector_wxGrid(arg1,arg2,arg3,arg4,arg5,arg6,arg7,(wxString const &)*arg8,false);
-        
-    } else {
-        result = (wxGrid *)new wxGrid(arg2,arg3,arg4,arg5,arg6,arg7,(wxString const &)*arg8);
-        
-    }
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE _wrap_new_wxGrid(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[8];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 8); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_new_wxGrid__SWIG_0(nargs, args, self);
-        }
-    }
-    if ((argc >= 3) && (argc <= 7)) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    if (argc <= 3) {
-                        return _wrap_new_wxGrid__SWIG_1(nargs, args, self);
-                    }
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        if (argc <= 4) {
-                            return _wrap_new_wxGrid__SWIG_1(nargs, args, self);
-                        }
-                        {
-                            void *ptr;
-                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            if (argc <= 5) {
-                                return _wrap_new_wxGrid__SWIG_1(nargs, args, self);
-                            }
-                            {
-                                _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
-                            }
-                            if (_v) {
-                                if (argc <= 6) {
-                                    return _wrap_new_wxGrid__SWIG_1(nargs, args, self);
-                                }
-                                {
-                                    _v = (TYPE(argv[6]) == T_STRING);
-                                }
-                                if (_v) {
-                                    return _wrap_new_wxGrid__SWIG_1(nargs, args, self);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if ((argc >= 4) && (argc <= 8)) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        if (argc <= 4) {
-                            return _wrap_new_wxGrid__SWIG_2(nargs, args, self);
-                        }
-                        {
-                            _v = ((TYPE(argv[4]) == T_FIXNUM) || (TYPE(argv[4]) == T_BIGNUM)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            if (argc <= 5) {
-                                return _wrap_new_wxGrid__SWIG_2(nargs, args, self);
-                            }
-                            {
-                                _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
-                            }
-                            if (_v) {
-                                if (argc <= 6) {
-                                    return _wrap_new_wxGrid__SWIG_2(nargs, args, self);
-                                }
-                                {
-                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
-                                }
-                                if (_v) {
-                                    if (argc <= 7) {
-                                        return _wrap_new_wxGrid__SWIG_2(nargs, args, self);
-                                    }
-                                    {
-                                        _v = (TYPE(argv[7]) == T_STRING);
-                                    }
-                                    if (_v) {
-                                        return _wrap_new_wxGrid__SWIG_2(nargs, args, self);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxGrid'");
     return Qnil;
 }
 
