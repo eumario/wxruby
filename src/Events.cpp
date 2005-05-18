@@ -865,6 +865,11 @@ static VALUE evt_middle_dclick(int argc, VALUE *argv, VALUE self)
 	return internal_evt_no_parameters(argc,argv,self,wxEVT_MIDDLE_DCLICK);
 }
 
+static VALUE evt_grid_cell_right_dclick(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_CELL_RIGHT_DCLICK);
+}
+
 static VALUE evt_tree_key_down(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_with_id(argc,argv,self,wxEVT_COMMAND_TREE_KEY_DOWN);
@@ -895,6 +900,16 @@ static VALUE evt_dialup_connected(int argc, VALUE *argv, VALUE self)
 static VALUE evt_help_range(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_no_parameters(argc,argv,self,wxEVT_HELP);
+}
+
+static VALUE evt_grid_label_right_dclick(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_LABEL_RIGHT_DCLICK);
+}
+
+static VALUE evt_grid_select_cell(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_SELECT_CELL);
 }
 
 static VALUE evt_spinctrl(int argc, VALUE *argv, VALUE self)
@@ -930,6 +945,11 @@ static VALUE evt_joy_zmove(int argc, VALUE *argv, VALUE self)
 static VALUE evt_char(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_no_parameters(argc,argv,self,wxEVT_CHAR);
+}
+
+static VALUE evt_grid_cell_left_dclick(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_CELL_LEFT_DCLICK);
 }
 
 static VALUE evt_tree_get_info(int argc, VALUE *argv, VALUE self)
@@ -1017,6 +1037,16 @@ static VALUE evt_activate(int argc, VALUE *argv, VALUE self)
 static VALUE evt_idle(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_no_parameters(argc,argv,self,wxEVT_IDLE);
+}
+
+static VALUE evt_grid_cell_right_click(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_CELL_RIGHT_CLICK);
+}
+
+static VALUE evt_grid_label_left_click(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_LABEL_LEFT_CLICK);
 }
 
 static VALUE evt_tree_item_expanded(int argc, VALUE *argv, VALUE self)
@@ -1212,6 +1242,16 @@ static VALUE evt_paint(int argc, VALUE *argv, VALUE self)
 	return internal_evt_no_parameters(argc,argv,self,wxEVT_PAINT);
 }
 
+static VALUE evt_grid_editor_hidden(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_EDITOR_HIDDEN);
+}
+
+static VALUE evt_grid_cell_change(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_CELL_CHANGE);
+}
+
 static VALUE evt_tree_set_info(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_with_id(argc,argv,self,wxEVT_COMMAND_TREE_SET_INFO);
@@ -1354,6 +1394,11 @@ static VALUE evt_spin_up(int argc, VALUE *argv, VALUE self)
 	return internal_evt_with_id(argc,argv,self,wxEVT_SCROLL_LINEDOWN);
 }
 
+static VALUE evt_grid_cell_left_click(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_CELL_LEFT_CLICK);
+}
+
 #ifdef __WXMSW__
 static VALUE evt_taskbar_left_up(int argc, VALUE *argv, VALUE self)
 {
@@ -1369,6 +1414,11 @@ static VALUE evt_sys_colour_changed(int argc, VALUE *argv, VALUE self)
 static VALUE evt_key_down(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_no_parameters(argc,argv,self,wxEVT_KEY_DOWN);
+}
+
+static VALUE evt_grid_editor_shown(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_EDITOR_SHOWN);
 }
 
 #ifdef __WXMSW__
@@ -1408,6 +1458,11 @@ static VALUE evt_calculate_layout(int argc, VALUE *argv, VALUE self)
 static VALUE evt_list_begin_drag(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_with_id(argc,argv,self,wxEVT_COMMAND_LIST_BEGIN_DRAG);
+}
+
+static VALUE evt_grid_label_left_dclick(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_LABEL_LEFT_DCLICK);
 }
 
 static VALUE evt_tree_item_right_click(int argc, VALUE *argv, VALUE self)
@@ -1452,6 +1507,11 @@ static VALUE evt_key_up(int argc, VALUE *argv, VALUE self)
 static VALUE evt_right_dclick(int argc, VALUE *argv, VALUE self)
 {
 	return internal_evt_no_parameters(argc,argv,self,wxEVT_RIGHT_DCLICK);
+}
+
+static VALUE evt_grid_label_right_click(int argc, VALUE *argv, VALUE self)
+{
+	return internal_evt_no_parameters(argc,argv,self,wxEVT_GRID_LABEL_RIGHT_CLICK);
 }
 
 static VALUE evt_menu_range(int argc, VALUE *argv, VALUE self)
@@ -1715,6 +1775,7 @@ void Init_WxRubyEvents()
 	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged", VALUEFUNC(evt_sash_dragged),-1);
 #endif //__WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_middle_dclick", VALUEFUNC(evt_middle_dclick),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_right_dclick", VALUEFUNC(evt_grid_cell_right_dclick),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_tree_key_down", VALUEFUNC(evt_tree_key_down),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_list_insert_item", VALUEFUNC(evt_list_insert_item),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_right_up", VALUEFUNC(evt_right_up),-1);
@@ -1723,6 +1784,8 @@ void Init_WxRubyEvents()
 	rb_define_method(cWxEvtHandler.klass, "evt_dialup_connected", VALUEFUNC(evt_dialup_connected),-1);
 #endif //__WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_help_range", VALUEFUNC(evt_help_range),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_label_right_dclick", VALUEFUNC(evt_grid_label_right_dclick),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_select_cell", VALUEFUNC(evt_grid_select_cell),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_spinctrl", VALUEFUNC(evt_spinctrl),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_pagedown", VALUEFUNC(evt_scrollwin_pagedown),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_list_item_middle_click", VALUEFUNC(evt_list_item_middle_click),-1);
@@ -1730,6 +1793,7 @@ void Init_WxRubyEvents()
 	rb_define_method(cWxEvtHandler.klass, "evt_list_col_right_click", VALUEFUNC(evt_list_col_right_click),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_joy_zmove", VALUEFUNC(evt_joy_zmove),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_char", VALUEFUNC(evt_char),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_left_dclick", VALUEFUNC(evt_grid_cell_left_dclick),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_tree_get_info", VALUEFUNC(evt_tree_get_info),-1);
 #ifdef __WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_taskbar_right_up", VALUEFUNC(evt_taskbar_right_up),-1);
@@ -1749,6 +1813,8 @@ void Init_WxRubyEvents()
 	rb_define_method(cWxEvtHandler.klass, "evt_enter_window", VALUEFUNC(evt_enter_window),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_activate", VALUEFUNC(evt_activate),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_idle", VALUEFUNC(evt_idle),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_right_click", VALUEFUNC(evt_grid_cell_right_click),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_label_left_click", VALUEFUNC(evt_grid_label_left_click),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_tree_item_expanded", VALUEFUNC(evt_tree_item_expanded),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_text", VALUEFUNC(evt_text),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_motion", VALUEFUNC(evt_motion),-1);
@@ -1794,6 +1860,8 @@ void Init_WxRubyEvents()
 	rb_define_method(cWxEvtHandler.klass, "evt_checkbox", VALUEFUNC(evt_checkbox),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_left_up", VALUEFUNC(evt_left_up),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_paint", VALUEFUNC(evt_paint),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_hidden", VALUEFUNC(evt_grid_editor_hidden),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_change", VALUEFUNC(evt_grid_cell_change),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_tree_set_info", VALUEFUNC(evt_tree_set_info),-1);
 #ifdef __WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_togglebutton", VALUEFUNC(evt_togglebutton),-1);
@@ -1824,11 +1892,13 @@ void Init_WxRubyEvents()
 	rb_define_method(cWxEvtHandler.klass, "evt_list_cache_hint", VALUEFUNC(evt_list_cache_hint),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_checklistbox", VALUEFUNC(evt_checklistbox),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_spin_up", VALUEFUNC(evt_spin_up),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_left_click", VALUEFUNC(evt_grid_cell_left_click),-1);
 #ifdef __WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_taskbar_left_up", VALUEFUNC(evt_taskbar_left_up),-1);
 #endif //__WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_sys_colour_changed", VALUEFUNC(evt_sys_colour_changed),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_key_down", VALUEFUNC(evt_key_down),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_shown", VALUEFUNC(evt_grid_editor_shown),-1);
 #ifdef __WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_taskbar_left_down", VALUEFUNC(evt_taskbar_left_down),-1);
 #endif //__WXMSW__
@@ -1840,6 +1910,7 @@ void Init_WxRubyEvents()
 	rb_define_method(cWxEvtHandler.klass, "evt_calendar_year", VALUEFUNC(evt_calendar_year),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_calculate_layout", VALUEFUNC(evt_calculate_layout),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_list_begin_drag", VALUEFUNC(evt_list_begin_drag),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_label_left_dclick", VALUEFUNC(evt_grid_label_left_dclick),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_tree_item_right_click", VALUEFUNC(evt_tree_item_right_click),-1);
 #ifdef __WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_taskbar_right_dclick", VALUEFUNC(evt_taskbar_right_dclick),-1);
@@ -1852,6 +1923,7 @@ void Init_WxRubyEvents()
 #endif //__WXMSW__
 	rb_define_method(cWxEvtHandler.klass, "evt_key_up", VALUEFUNC(evt_key_up),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_right_dclick", VALUEFUNC(evt_right_dclick),-1);
+	rb_define_method(cWxEvtHandler.klass, "evt_grid_label_right_click", VALUEFUNC(evt_grid_label_right_click),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_menu_range", VALUEFUNC(evt_menu_range),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_joy_button_down", VALUEFUNC(evt_joy_button_down),-1);
 	rb_define_method(cWxEvtHandler.klass, "evt_tree_sel_changing", VALUEFUNC(evt_tree_sel_changing),-1);

@@ -31,6 +31,8 @@ $swig_options += " -D__WXMAC__ "
 =end
 
 $ruby_cppflags.gsub!(/-g/,"")
+$wx_libs = $wx_libs.chomp.gsub(/-framework Cocoa/,"").gsub(/-framework WebKit/,"") + " -lobjc "
+
 $extra_cppflags = '-x objective-c++'
 $extra_ldflags = "-dynamic -bundle -flat_namespace -undefined suppress"
 #$extra_ldflags = " -lgcc -lstdc++ -dynamic -flat_namespace -undefined suppress -read_only_relocs suppress -install_name /Library/Frameworks/wxruby.framework/wxruby -current_version 0.5 -compatibility_version 0.5"
