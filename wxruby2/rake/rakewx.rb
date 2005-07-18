@@ -112,21 +112,6 @@ def all_obj_files
     return to_obj_files(all_obj_bases)
 end
 
-def create_extract_task
-    xml_file = File.join($swig_dir, "wxclasses-2.4.2.xml")
-    extractor = File.join($swig_dir, "extractxml.rb")
-    get_classes.each do | c |
-        file(original_h_file(c) => [xml_file, extractor]) do
-            if ($wx_version == nil)
-                wx_version = "2.4"
-            else
-                wx_version = $wx_version
-            end
-            sh "ruby #{extractor} #{xml_file} #{wx_version}"
-        end
-    end
-end
-
 def add_initializers(cpp_file)
     needs_init_list = get_classes
     needs_init_list << "RubyConstants"
@@ -261,7 +246,6 @@ def create_link_task
 end
 
 def create_internal_swig_tasks
-    create_extract_task
     create_swig_tasks
 end
 
