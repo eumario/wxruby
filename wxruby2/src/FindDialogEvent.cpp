@@ -518,9 +518,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxFindReplaceDialog swig_types[0] 
-#define  SWIGTYPE_p_wxEventType swig_types[1] 
-#define  SWIGTYPE_p_wxFindDialogEvent swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxFindDialogEvent swig_types[1] 
+static swig_type_info *swig_types[3];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -794,11 +793,7 @@ _wrap_new_wxFindDialogEvent(int argc, VALUE *argv, VALUE self) {
     if ((argc < 0) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     if (argc > 0) {
-        {
-            wxEventType * ptr;
-            SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_wxEventType, 1);
-            if (ptr) arg1 = *ptr;
-        }
+        arg1 = NUM2INT(argv[0]);
     }
     if (argc > 1) {
         arg2 = NUM2INT(argv[1]);
@@ -885,12 +880,10 @@ free_wxFindDialogEvent(wxFindDialogEvent *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxFindReplaceDialog[] = {{"_p_wxFindReplaceDialog", 0, "wxFindReplaceDialog *", 0, 0, 0, 0},{"_p_wxFindReplaceDialog", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxEventType[] = {{"_p_wxEventType", 0, "wxEventType *", 0, 0, 0, 0},{"_p_wxEventType", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxFindDialogEvent[] = {{"_p_wxFindDialogEvent", 0, "wxFindDialogEvent *", 0, 0, 0, 0},{"_p_wxFindDialogEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxFindReplaceDialog, 
-_swigt__p_wxEventType, 
 _swigt__p_wxFindDialogEvent, 
 0
 };

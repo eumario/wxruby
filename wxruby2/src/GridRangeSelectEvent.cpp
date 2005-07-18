@@ -518,10 +518,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxGridRangeSelectEvent swig_types[0] 
-#define  SWIGTYPE_p_wxEventType swig_types[1] 
-#define  SWIGTYPE_p_wxGridCellCoords swig_types[2] 
-#define  SWIGTYPE_p_wxObject swig_types[3] 
-static swig_type_info *swig_types[5];
+#define  SWIGTYPE_p_wxGridCellCoords swig_types[1] 
+#define  SWIGTYPE_p_wxObject swig_types[2] 
+static swig_type_info *swig_types[4];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -815,11 +814,7 @@ _wrap_new_wxGridRangeSelectEvent__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if ((argc < 5) || (argc > 10))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
     arg1 = NUM2INT(argv[0]);
-    {
-        wxEventType * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxEventType, 1);
-        if (ptr) arg2 = *ptr;
-    }
+    arg2 = NUM2INT(argv[1]);
     SWIG_ConvertPtr(argv[2], (void **) &arg3, SWIGTYPE_p_wxObject, 1);
     SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxGridCellCoords, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
     SWIG_ConvertPtr(argv[4], (void **) &arg5, SWIGTYPE_p_wxGridCellCoords, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -863,8 +858,7 @@ static VALUE _wrap_new_wxGridRangeSelectEvent(int nargs, VALUE *args, VALUE self
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxEventType, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1127,13 +1121,11 @@ free_wxGridRangeSelectEvent(wxGridRangeSelectEvent *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxGridRangeSelectEvent[] = {{"_p_wxGridRangeSelectEvent", 0, "wxGridRangeSelectEvent *", 0, 0, 0, 0},{"_p_wxGridRangeSelectEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxEventType[] = {{"_p_wxEventType", 0, "wxEventType *", 0, 0, 0, 0},{"_p_wxEventType", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxGridCellCoords[] = {{"_p_wxGridCellCoords", 0, "wxGridCellCoords *", 0, 0, 0, 0},{"_p_wxGridCellCoords", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxObject[] = {{"_p_wxObject", 0, "wxObject *", 0, 0, 0, 0},{"_p_wxObject", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxGridRangeSelectEvent, 
-_swigt__p_wxEventType, 
 _swigt__p_wxGridCellCoords, 
 _swigt__p_wxObject, 
 0

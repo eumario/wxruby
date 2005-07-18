@@ -561,6 +561,7 @@ void GcFreefunc(void *);
 
 
 #include <wx/calctrl.h>
+#include <wx/fdrepdlg.h>
 
 /***********************************************************************
  * director.swg
@@ -895,6 +896,11 @@ mWxRubyEventTypes = mWx;
     rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_SET_FOCUS", INT2NUM(wxEVT_COMMAND_SET_FOCUS));
     rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_KILL_FOCUS", INT2NUM(wxEVT_COMMAND_KILL_FOCUS));
     rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_ENTER", INT2NUM(wxEVT_COMMAND_ENTER));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_FIND", INT2NUM(wxEVT_COMMAND_FIND));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_FIND_NEXT", INT2NUM(wxEVT_COMMAND_FIND_NEXT));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_FIND_REPLACE", INT2NUM(wxEVT_COMMAND_FIND_REPLACE));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_FIND_REPLACE_ALL", INT2NUM(wxEVT_COMMAND_FIND_REPLACE_ALL));
+    rb_define_const(mWxRubyEventTypes,"EVT_COMMAND_FIND_CLOSE", INT2NUM(wxEVT_COMMAND_FIND_CLOSE));
     rb_define_const(mWxRubyEventTypes,"EVT_HELP", INT2NUM(wxEVT_HELP));
     rb_define_const(mWxRubyEventTypes,"EVT_DETAILED_HELP", INT2NUM(wxEVT_DETAILED_HELP));
     rb_define_const(mWxRubyEventTypes,"EVT_CALENDAR_SEL_CHANGED", INT2NUM(wxEVT_CALENDAR_SEL_CHANGED));
