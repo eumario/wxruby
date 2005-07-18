@@ -194,6 +194,8 @@
 
 }
 
+%apply wxArrayString & { const wxArrayString &};
+
 %typemap(out) wxArrayString & {
 
   $result = rb_ary_new();
@@ -215,7 +217,7 @@
 }
 
 %typemap(typecheck) wxEdge {
-	$1 = TYPE($input) == T_NUMBER;
+	$1 = TYPE($input) == T_FIXNUM;
 }
 
 %typemap(in) wxRelationship {
@@ -227,7 +229,7 @@
 }
 
 %typemap(typecheck) wxRelationship {
-	$1 = TYPE($input) == T_NUMBER;
+	$1 = TYPE($input) == T_FIXNUM;
 }
 
 
