@@ -15,7 +15,7 @@ WHATS NEW:
 - Added XRC support (you must have WXRUBY_XRC=YES in your 
   environment to enable this option)
 - Integrated several fixes from Sean Long
-
+- No longer extract wx API from an XML file
   
 
 REQUIREMENTS:
