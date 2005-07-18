@@ -41,7 +41,7 @@
 }
 
 %typemap(out) const wxString& {
-	$result = rb_str_new2((const char *)$1.c_str());
+	$result = rb_str_new2((const char *)$1);
 }
 
 %apply wxString& { wxString* }
