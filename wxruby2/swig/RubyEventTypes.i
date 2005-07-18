@@ -8,7 +8,9 @@
 
 %{
 #include <wx/calctrl.h>
+#include <wx/fdrepdlg.h>
 %}
+
 
     %constant const int wxEVT_NULL;// 0)
     %constant const int wxEVT_COMMAND_BUTTON_CLICKED;// 1)
@@ -130,6 +132,12 @@
     %constant const int wxEVT_COMMAND_SET_FOCUS;// 504)
     %constant const int wxEVT_COMMAND_KILL_FOCUS;// 505)
     %constant const int wxEVT_COMMAND_ENTER;// 506)
+    %constant const int wxEVT_COMMAND_FIND;// 510)
+    %constant const int wxEVT_COMMAND_FIND_NEXT;// 511)
+    %constant const int wxEVT_COMMAND_FIND_REPLACE;// 512)
+    %constant const int wxEVT_COMMAND_FIND_REPLACE_ALL;// 513)
+    %constant const int wxEVT_COMMAND_FIND_CLOSE;// 514)            
+        
     %constant const int wxEVT_HELP;// 1050)
     %constant const int wxEVT_DETAILED_HELP;// 1051)
 
