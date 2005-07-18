@@ -21,7 +21,7 @@ $macosx = /powerpc-darwin/ =~ RUBY_PLATFORM
 
 def force_mkdir(dir)
     if(!File.exists?(dir))
-        File.mkdir(dir)
+        Dir.mkdir(dir)
     end
 end
 
