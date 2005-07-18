@@ -629,8 +629,6 @@ wx_yield(VALUE self)
 
 
 
-
-
 /***********************************************************************
  * director.swg
  *
@@ -1300,13 +1298,11 @@ mWxFunctions = mWx;
     rb_define_module_function(mWxFunctions, "file_selector", VALUEFUNC(_wrap_wxFileSelector), -1);
     
     extern VALUE mWx;
-    rb_define_method(mWx, "log_message", VALUEFUNC(log_message), -1);
-    rb_define_method(mWx, "log_warning", VALUEFUNC(log_warning), -1);
-    rb_define_method(mWx, "log_status", VALUEFUNC(log_status), -1);
-    rb_define_method(mWx, "log_error", VALUEFUNC(log_error), -1);
-    rb_define_method(mWx, "get_app", VALUEFUNC(get_app), 0);
-    
-    
+    rb_define_module_function(mWx, "log_message", VALUEFUNC(log_message), -1);
+    rb_define_module_function(mWx, "log_warning", VALUEFUNC(log_warning), -1);
+    rb_define_module_function(mWx, "log_status", VALUEFUNC(log_status), -1);
+    rb_define_module_function(mWx, "log_error", VALUEFUNC(log_error), -1);
+    rb_define_module_function(mWx, "get_app", VALUEFUNC(get_app), 0);
     
 }
 

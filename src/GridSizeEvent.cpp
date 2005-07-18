@@ -518,10 +518,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxGridSizeEvent swig_types[0] 
-#define  SWIGTYPE_p_wxEventType swig_types[1] 
-#define  SWIGTYPE_p_wxObject swig_types[2] 
-#define  SWIGTYPE_p_wxPoint swig_types[3] 
-static swig_type_info *swig_types[5];
+#define  SWIGTYPE_p_wxObject swig_types[1] 
+#define  SWIGTYPE_p_wxPoint swig_types[2] 
+static swig_type_info *swig_types[4];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -815,11 +814,7 @@ _wrap_new_wxGridSizeEvent__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if ((argc < 3) || (argc > 10))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     arg1 = NUM2INT(argv[0]);
-    {
-        wxEventType * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxEventType, 1);
-        if (ptr) arg2 = *ptr;
-    }
+    arg2 = NUM2INT(argv[1]);
     SWIG_ConvertPtr(argv[2], (void **) &arg3, SWIGTYPE_p_wxObject, 1);
     if (argc > 3) {
         arg4 = NUM2INT(argv[3]);
@@ -867,8 +862,7 @@ static VALUE _wrap_new_wxGridSizeEvent(int nargs, VALUE *args, VALUE self) {
         }
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxEventType, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1051,13 +1045,11 @@ free_wxGridSizeEvent(wxGridSizeEvent *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxGridSizeEvent[] = {{"_p_wxGridSizeEvent", 0, "wxGridSizeEvent *", 0, 0, 0, 0},{"_p_wxGridSizeEvent", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxEventType[] = {{"_p_wxEventType", 0, "wxEventType *", 0, 0, 0, 0},{"_p_wxEventType", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxObject[] = {{"_p_wxObject", 0, "wxObject *", 0, 0, 0, 0},{"_p_wxObject", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxGridSizeEvent, 
-_swigt__p_wxEventType, 
 _swigt__p_wxObject, 
 _swigt__p_wxPoint, 
 0
