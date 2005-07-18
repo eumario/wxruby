@@ -16,6 +16,10 @@ WHATS NEW:
   environment to enable this option)
 - Integrated several fixes from Sean Long
 - No longer extract wx API from an XML file
+- Added a contributed installers directory with a 
+  rough rubydoc builder
+- Renamed top-level rake.bat to run-rake.bat to avoid 
+  possible conflicts with the real rake
   
 
 REQUIREMENTS:
