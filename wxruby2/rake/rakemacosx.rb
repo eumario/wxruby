@@ -9,7 +9,7 @@
 
 
 use_wx_config
-$wx_version = "2.5.3"
+$wx_version = "2.6.1"
 
 $cpp = "g++"
 $ld = "g++"
