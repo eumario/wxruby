@@ -2,7 +2,7 @@
 #   released under the wxWidgets license
 #   as part of the wxRuby project
 
-%module(directors="1") wxFunctions
+%module(directors="1") wxXrc
 
 %include "common.i"
 
