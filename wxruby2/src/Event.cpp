@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxEvent
 #define SWIG_name    "WxEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxEvent;
    extern VALUE mWx;
 

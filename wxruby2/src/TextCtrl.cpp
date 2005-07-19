@@ -534,8 +534,6 @@ static swig_type_info *swig_types[11];
 #define SWIG_init    Init_wxTextCtrl
 #define SWIG_name    "WxTextCtrl"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxTextCtrl;
    extern VALUE mWx;
 
@@ -880,7 +878,7 @@ void SwigDirector_wxTextCtrl::Replace(long from, long to, wxString const &value)
     }
     obj0 = LONG2NUM(from);
     obj1 = LONG2NUM(to);
-    obj2 = rb_str_new2((const char *)(&value)->c_str());
+    obj2 = rb_str_new2((const char *)(&value)->mb_str());
     result = rb_funcall(swig_get_self(), rb_intern("replace"), 3,obj0,obj1,obj2);
 }
 
@@ -893,7 +891,7 @@ void SwigDirector_wxTextCtrl::SetValue(wxString const &value) {
         wxTextCtrl::SetValue(value);
         return;
     }
-    obj0 = rb_str_new2((const char *)(&value)->c_str());
+    obj0 = rb_str_new2((const char *)(&value)->mb_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_value"), 1,obj0);
 }
 
@@ -1079,6 +1077,27 @@ bool SwigDirector_wxTextCtrl::CanCopy() {
 }
 
 
+static VALUE
+_wrap_new_wxTextCtrl__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    wxTextCtrl *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    if ( CLASS_OF(self) != Qnil ) {
+        /* subclassed */
+        result = (wxTextCtrl *)new SwigDirector_wxTextCtrl(arg1,false);
+        
+    } else {
+        result = (wxTextCtrl *)new wxTextCtrl();
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxTextCtrl_allocate(VALUE self) {
@@ -1097,7 +1116,7 @@ _wrap_wxTextCtrl_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxTextCtrl(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxTextCtrl__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1121,7 +1140,7 @@ _wrap_new_wxTextCtrl(int argc, VALUE *argv, VALUE self) {
     arg3 = NUM2INT(argv[1]);
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     if (argc > 3) {
@@ -1138,7 +1157,7 @@ _wrap_new_wxTextCtrl(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg9 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -1151,6 +1170,101 @@ _wrap_new_wxTextCtrl(int argc, VALUE *argv, VALUE self) {
     }
     DATA_PTR(self) = result;
     return self;
+}
+
+
+static VALUE _wrap_new_wxTextCtrl(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[9];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 9); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_wxTextCtrl__SWIG_0(nargs, args, self);
+        }
+    }
+    if ((argc >= 3) && (argc <= 9)) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_new_wxTextCtrl__SWIG_1(nargs, args, self);
+                    }
+                    {
+                        _v = (TYPE(argv[3]) == T_STRING);
+                    }
+                    if (_v) {
+                        if (argc <= 4) {
+                            return _wrap_new_wxTextCtrl__SWIG_1(nargs, args, self);
+                        }
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            if (argc <= 5) {
+                                return _wrap_new_wxTextCtrl__SWIG_1(nargs, args, self);
+                            }
+                            {
+                                void *ptr;
+                                _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_new_wxTextCtrl__SWIG_1(nargs, args, self);
+                                }
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_new_wxTextCtrl__SWIG_1(nargs, args, self);
+                                    }
+                                    {
+                                        void *ptr;
+                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        if (argc <= 8) {
+                                            return _wrap_new_wxTextCtrl__SWIG_1(nargs, args, self);
+                                        }
+                                        {
+                                            _v = (TYPE(argv[8]) == T_STRING);
+                                        }
+                                        if (_v) {
+                                            return _wrap_new_wxTextCtrl__SWIG_1(nargs, args, self);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxTextCtrl'");
+    return Qnil;
 }
 
 
@@ -1182,7 +1296,7 @@ _wrap_wxTextCtrl_AppendText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->AppendText((wxString const &)*arg2);
     
@@ -1343,7 +1457,7 @@ _wrap_wxTextCtrl_Create(int argc, VALUE *argv, VALUE self) {
     arg3 = NUM2INT(argv[1]);
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     if (argc > 3) {
@@ -1360,7 +1474,7 @@ _wrap_wxTextCtrl_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg9 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
@@ -1506,7 +1620,7 @@ _wrap_wxTextCtrl_GetLineText(int argc, VALUE *argv, VALUE self) {
     result = ((wxTextCtrl const *)arg1)->GetLineText(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1547,7 +1661,7 @@ _wrap_wxTextCtrl_GetRange(int argc, VALUE *argv, VALUE self) {
     result = ((wxTextCtrl const *)arg1)->GetRange(arg2,arg3);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1588,8 +1702,28 @@ _wrap_wxTextCtrl_GetStringSelection(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetStringSelection();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxTextCtrl_GetStyle(int argc, VALUE *argv, VALUE self) {
+    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
+    long arg2 ;
+    wxTextAttr *arg3 = 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
+    arg2 = NUM2LONG(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxTextAttr, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (bool)(arg1)->GetStyle(arg2,*arg3);
+    
+    vresult = result ? Qtrue : Qfalse;
     return vresult;
 }
 
@@ -1606,7 +1740,7 @@ _wrap_wxTextCtrl_GetValue(int argc, VALUE *argv, VALUE self) {
     result = ((wxTextCtrl const *)arg1)->GetValue();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1687,7 +1821,7 @@ _wrap_wxTextCtrl_LoadFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (bool)(arg1)->LoadFile((wxString const &)*arg2);
     
@@ -1802,7 +1936,7 @@ _wrap_wxTextCtrl_Replace(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2LONG(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
@@ -1823,7 +1957,7 @@ _wrap_wxTextCtrl_SaveFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (bool)(arg1)->SaveFile((wxString const &)*arg2);
     
@@ -1972,7 +2106,7 @@ _wrap_wxTextCtrl_SetValue(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
@@ -2022,7 +2156,7 @@ _wrap_wxTextCtrl_WriteText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->WriteText((wxString const &)*arg2);
     
@@ -2047,206 +2181,6 @@ _wrap_wxTextCtrl_XYToPosition(int argc, VALUE *argv, VALUE self) {
     
     vresult = INT2NUM(result);
     return vresult;
-}
-
-
-static VALUE
-_wrap_wxTextCtrl___lshift____SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
-    char *arg2 ;
-    wxTextCtrl *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
-    arg2 = StringValuePtr(argv[0]);
-    {
-        wxTextCtrl &_result_ref = (arg1)->operator <<((char const *)arg2);
-        result = (wxTextCtrl *) &_result_ref;
-    }
-    
-try {
-resultdirector = dynamic_cast<Swig::Director *>(result);
-} catch (...) {
-    resultdirector = NULL;
-}
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxTextCtrl___lshift____SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
-    int arg2 ;
-    wxTextCtrl *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
-    arg2 = NUM2INT(argv[0]);
-    {
-        wxTextCtrl &_result_ref = (arg1)->operator <<(arg2);
-        result = (wxTextCtrl *) &_result_ref;
-    }
-    
-try {
-resultdirector = dynamic_cast<Swig::Director *>(result);
-} catch (...) {
-    resultdirector = NULL;
-}
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxTextCtrl___lshift____SWIG_2(int argc, VALUE *argv, VALUE self) {
-    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
-    double arg2 ;
-    wxTextCtrl *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
-    arg2 = (double) NUM2DBL(argv[0]);
-    {
-        wxTextCtrl &_result_ref = (arg1)->operator <<(arg2);
-        result = (wxTextCtrl *) &_result_ref;
-    }
-    
-try {
-resultdirector = dynamic_cast<Swig::Director *>(result);
-} catch (...) {
-    resultdirector = NULL;
-}
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxTextCtrl___lshift____SWIG_3(int argc, VALUE *argv, VALUE self) {
-    wxTextCtrl *arg1 = (wxTextCtrl *) 0 ;
-    bool arg2 ;
-    wxTextCtrl *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTextCtrl, 1);
-    arg2 = RTEST(argv[0]);
-    {
-        wxTextCtrl &_result_ref = (arg1)->operator <<(arg2);
-        result = (wxTextCtrl *) &_result_ref;
-    }
-    
-try {
-resultdirector = dynamic_cast<Swig::Director *>(result);
-} catch (...) {
-    resultdirector = NULL;
-}
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxTextCtrl,0);
-    }
-    return vresult;
-}
-
-
-static VALUE _wrap_wxTextCtrl___lshift__(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (argv[1] == Qtrue || argv[1] == Qfalse) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxTextCtrl___lshift____SWIG_3(nargs, args, self);
-            }
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxTextCtrl___lshift____SWIG_1(nargs, args, self);
-            }
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FLOAT) || (TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxTextCtrl___lshift____SWIG_2(nargs, args, self);
-            }
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxTextCtrl, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxTextCtrl___lshift____SWIG_0(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxTextCtrl___lshift__'");
-    return Qnil;
 }
 
 
@@ -2345,6 +2279,7 @@ mWxTextCtrl = mWx;
     rb_define_method(cWxTextCtrl.klass, "get_range", VALUEFUNC(_wrap_wxTextCtrl_GetRange), -1);
     rb_define_method(cWxTextCtrl.klass, "get_selection", VALUEFUNC(_wrap_wxTextCtrl_GetSelection), -1);
     rb_define_method(cWxTextCtrl.klass, "get_string_selection", VALUEFUNC(_wrap_wxTextCtrl_GetStringSelection), -1);
+    rb_define_method(cWxTextCtrl.klass, "get_style", VALUEFUNC(_wrap_wxTextCtrl_GetStyle), -1);
     rb_define_method(cWxTextCtrl.klass, "get_value", VALUEFUNC(_wrap_wxTextCtrl_GetValue), -1);
     rb_define_method(cWxTextCtrl.klass, "is_editable", VALUEFUNC(_wrap_wxTextCtrl_IsEditable), -1);
     rb_define_method(cWxTextCtrl.klass, "is_modified", VALUEFUNC(_wrap_wxTextCtrl_IsModified), -1);
@@ -2370,7 +2305,6 @@ mWxTextCtrl = mWx;
     rb_define_method(cWxTextCtrl.klass, "undo", VALUEFUNC(_wrap_wxTextCtrl_Undo), -1);
     rb_define_method(cWxTextCtrl.klass, "write_text", VALUEFUNC(_wrap_wxTextCtrl_WriteText), -1);
     rb_define_method(cWxTextCtrl.klass, "xy_to_position", VALUEFUNC(_wrap_wxTextCtrl_XYToPosition), -1);
-    rb_define_method(cWxTextCtrl.klass, "<<", VALUEFUNC(_wrap_wxTextCtrl___lshift__), -1);
     cWxTextCtrl.mark = 0;
     cWxTextCtrl.destroy = (void (*)(void *)) free_wxTextCtrl;
 }

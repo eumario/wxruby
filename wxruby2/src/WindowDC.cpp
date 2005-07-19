@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxWindowDC
 #define SWIG_name    "WxWindowDC"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxWindowDC;
    extern VALUE mWx;
 

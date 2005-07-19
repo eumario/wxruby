@@ -524,8 +524,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxGridCellFloatEditor
 #define SWIG_name    "WxGridCellFloatEditor"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxGridCellFloatEditor;
    extern VALUE mWx;
 
@@ -614,7 +612,7 @@ _wrap_wxGridCellFloatEditor_SetParameters(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxGridCellFloatEditor, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetParameters((wxString const &)*arg2);
     

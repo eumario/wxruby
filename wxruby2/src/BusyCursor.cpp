@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxBusyCursor
 #define SWIG_name    "WxBusyCursor"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxBusyCursor;
    extern VALUE mWx;
 

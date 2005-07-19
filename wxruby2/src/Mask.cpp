@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxMask
 #define SWIG_name    "WxMask"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxMask;
    extern VALUE mWx;
 

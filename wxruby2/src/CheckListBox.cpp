@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxCheckListBox
 #define SWIG_name    "WxCheckListBox"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxCheckListBox;
    extern VALUE mWx;
 
@@ -836,7 +834,7 @@ _wrap_new_wxCheckListBox(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[4],i));
+                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -851,7 +849,7 @@ _wrap_new_wxCheckListBox(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg10 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg10 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {

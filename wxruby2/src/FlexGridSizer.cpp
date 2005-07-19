@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxFlexGridSizer
 #define SWIG_name    "WxFlexGridSizer"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxFlexGridSizer;
    extern VALUE mWx;
 

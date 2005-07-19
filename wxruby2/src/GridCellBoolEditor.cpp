@@ -524,8 +524,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxGridCellBoolEditor
 #define SWIG_name    "WxGridCellBoolEditor"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxGridCellBoolEditor;
    extern VALUE mWx;
 

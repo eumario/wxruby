@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxMemoryDC
 #define SWIG_name    "WxMemoryDC"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxMemoryDC;
    extern VALUE mWx;
 

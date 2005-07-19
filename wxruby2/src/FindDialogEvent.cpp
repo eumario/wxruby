@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxFindDialogEvent
 #define SWIG_name    "WxFindDialogEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxFindDialogEvent;
    extern VALUE mWx;
 
@@ -832,7 +830,7 @@ _wrap_wxFindDialogEvent_GetFindString(int argc, VALUE *argv, VALUE self) {
     result = ((wxFindDialogEvent const *)arg1)->GetFindString();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -850,7 +848,7 @@ _wrap_wxFindDialogEvent_GetReplaceString(int argc, VALUE *argv, VALUE self) {
     result = ((wxFindDialogEvent const *)arg1)->GetReplaceString();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }

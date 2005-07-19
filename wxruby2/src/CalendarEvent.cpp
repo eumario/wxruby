@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxCalendarEvent
 #define SWIG_name    "WxCalendarEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxCalendarEvent;
    extern VALUE mWx;
 

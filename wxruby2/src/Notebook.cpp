@@ -533,8 +533,6 @@ static swig_type_info *swig_types[7];
 #define SWIG_init    Init_wxNotebook
 #define SWIG_name    "WxNotebook"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxNotebook;
    extern VALUE mWx;
 
@@ -834,7 +832,7 @@ _wrap_new_wxNotebook(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
+            arg7 = new wxString(STR2CSTR(argv[5]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -884,7 +882,7 @@ _wrap_wxNotebook_AddPage(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxPanel, 1);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         arg4 = RTEST(argv[2]);
@@ -954,7 +952,7 @@ _wrap_wxNotebook_Create(int argc, VALUE *argv, VALUE self) {
     arg6 = NUM2LONG(argv[4]);
     if (argc > 5) {
         {
-            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
+            arg7 = new wxString(STR2CSTR(argv[5]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const &)*arg7);
@@ -1080,7 +1078,7 @@ _wrap_wxNotebook_GetPageText(int argc, VALUE *argv, VALUE self) {
     result = ((wxNotebook const *)arg1)->GetPageText(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1135,7 +1133,7 @@ _wrap_wxNotebook_InsertPage(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2INT(argv[0]);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxPanel, 1);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         arg5 = RTEST(argv[3]);
@@ -1246,7 +1244,7 @@ _wrap_wxNotebook_SetPageText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     result = (bool)(arg1)->SetPageText(arg2,(wxString const &)*arg3);
     

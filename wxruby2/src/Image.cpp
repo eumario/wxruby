@@ -534,8 +534,6 @@ static swig_type_info *swig_types[11];
 #define SWIG_init    Init_wxImage
 #define SWIG_name    "WxImage"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxImage;
    extern VALUE mWx;
 
@@ -850,7 +848,7 @@ _wrap_new_wxImage__SWIG_4(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         arg2 = NUM2LONG(argv[1]);
@@ -874,10 +872,10 @@ _wrap_new_wxImage__SWIG_5(int argc, VALUE *argv, VALUE self) {
     if ((argc < 2) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg2 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         arg3 = NUM2INT(argv[2]);
@@ -938,7 +936,7 @@ _wrap_new_wxImage__SWIG_7(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxInputStream, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg2 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         arg3 = NUM2INT(argv[2]);
@@ -1279,7 +1277,7 @@ _wrap_wxImage_FindHandler__SWIG_0(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (wxImageHandler *)wxImage::FindHandler((wxString const &)*arg1);
     
@@ -1298,7 +1296,7 @@ _wrap_wxImage_FindHandler__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     arg2 = NUM2LONG(argv[1]);
     result = (wxImageHandler *)wxImage::FindHandler((wxString const &)*arg1,arg2);
@@ -1437,7 +1435,7 @@ _wrap_wxImage_GetImageCount__SWIG_0(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         arg2 = NUM2LONG(argv[1]);
@@ -1704,12 +1702,12 @@ _wrap_wxImage_GetOption(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = ((wxImage const *)arg1)->GetOption((wxString const &)*arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1726,7 +1724,7 @@ _wrap_wxImage_GetOptionInt(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (int)((wxImage const *)arg1)->GetOptionInt((wxString const &)*arg2);
     
@@ -1746,7 +1744,7 @@ _wrap_wxImage_HasOption(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (bool)((wxImage const *)arg1)->HasOption((wxString const &)*arg2);
     
@@ -1791,7 +1789,7 @@ _wrap_wxImage_LoadFile__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         arg3 = NUM2LONG(argv[1]);
@@ -1819,10 +1817,10 @@ _wrap_wxImage_LoadFile__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         arg4 = NUM2INT(argv[2]);
@@ -1872,7 +1870,7 @@ _wrap_wxImage_LoadFile__SWIG_3(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxInputStream, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         arg4 = NUM2INT(argv[2]);
@@ -2042,7 +2040,7 @@ _wrap_wxImage_RemoveHandler(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (bool)wxImage::RemoveHandler((wxString const &)*arg1);
     
@@ -2063,7 +2061,7 @@ _wrap_wxImage_SaveFile__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     arg3 = NUM2INT(argv[1]);
     result = (bool)((wxImage const *)arg1)->SaveFile((wxString const &)*arg2,arg3);
@@ -2085,10 +2083,10 @@ _wrap_wxImage_SaveFile__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     result = (bool)((wxImage const *)arg1)->SaveFile((wxString const &)*arg2,(wxString const &)*arg3);
     
@@ -2108,7 +2106,7 @@ _wrap_wxImage_SaveFile__SWIG_2(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (bool)((wxImage const *)arg1)->SaveFile((wxString const &)*arg2);
     
@@ -2150,7 +2148,7 @@ _wrap_wxImage_SaveFile__SWIG_4(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxOutputStream, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     result = (bool)((wxImage const *)arg1)->SaveFile(*arg2,(wxString const &)*arg3);
     
@@ -2509,10 +2507,10 @@ _wrap_wxImage_SetOption__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     (arg1)->SetOption((wxString const &)*arg2,(wxString const &)*arg3);
     
@@ -2530,7 +2528,7 @@ _wrap_wxImage_SetOption__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxImage, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     arg3 = NUM2INT(argv[1]);
     (arg1)->SetOption((wxString const &)*arg2,arg3);

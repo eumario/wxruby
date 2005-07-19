@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxBoxSizer
 #define SWIG_name    "WxBoxSizer"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxBoxSizer;
    extern VALUE mWx;
 

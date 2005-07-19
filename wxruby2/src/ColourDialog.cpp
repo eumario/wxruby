@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxColourDialog
 #define SWIG_name    "WxColourDialog"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxColourDialog;
    extern VALUE mWx;
 

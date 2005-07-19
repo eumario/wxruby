@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxTipProvider
 #define SWIG_name    "WxTipProvider"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxTipProvider;
    extern VALUE mWx;
 
@@ -788,7 +786,7 @@ _wrap_wxTipProvider_GetTip(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetTip();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -806,14 +804,14 @@ _wrap_wxTipProvider_PreprocessTip(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTipProvider, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = (arg1)->PreprocessTip((wxString const &)*arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -880,7 +878,7 @@ _wrap_wxCreateFileTipProvider(int argc, VALUE *argv, VALUE self) {
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     arg2 = NUM2LONG(argv[1]);
     result = (wxTipProvider *)wxCreateFileTipProvider((wxString const &)*arg1,arg2);

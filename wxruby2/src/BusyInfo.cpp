@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxBusyInfo
 #define SWIG_name    "WxBusyInfo"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxBusyInfo;
    extern VALUE mWx;
 

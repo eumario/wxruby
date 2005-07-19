@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxIndividualLayoutConstraint
 #define SWIG_name    "WxIndividualLayoutConstraint"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxIndividualLayoutConstraint;
    extern VALUE mWx;
 

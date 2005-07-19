@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxSpinButton
 #define SWIG_name    "WxSpinButton"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxSpinButton;
    extern VALUE mWx;
 
@@ -828,7 +826,7 @@ _wrap_new_wxSpinButton(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
+            arg7 = new wxString(STR2CSTR(argv[5]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -894,7 +892,7 @@ _wrap_wxSpinButton_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
+            arg7 = new wxString(STR2CSTR(argv[5]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const &)*arg7);

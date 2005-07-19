@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxFocusEvent
 #define SWIG_name    "WxFocusEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxFocusEvent;
    extern VALUE mWx;
 

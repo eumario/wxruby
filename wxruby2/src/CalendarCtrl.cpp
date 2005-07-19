@@ -532,8 +532,6 @@ static swig_type_info *swig_types[9];
 #define SWIG_init    Init_wxCalendarCtrl
 #define SWIG_name    "WxCalendarCtrl"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxCalendarCtrl;
    extern VALUE mWx;
 
@@ -851,7 +849,7 @@ _wrap_new_wxCalendarCtrl(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
+            arg8 = new wxString(STR2CSTR(argv[6]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -917,7 +915,7 @@ _wrap_wxCalendarCtrl_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
+            arg8 = new wxString(STR2CSTR(argv[6]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxDateTime const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const &)*arg8);

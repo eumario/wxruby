@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxStatusBar
 #define SWIG_name    "WxStatusBar"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxStatusBar;
    extern VALUE mWx;
 
@@ -837,7 +835,7 @@ void SwigDirector_wxStatusBar::SetStatusText(wxString const &text, int i) {
         wxStatusBar::SetStatusText(text,i);
         return;
     }
-    obj0 = rb_str_new2((const char *)(&text)->c_str());
+    obj0 = rb_str_new2((const char *)(&text)->mb_str());
     obj1 = INT2NUM(i);
     result = rb_funcall(swig_get_self(), rb_intern("set_status_text"), 2,obj0,obj1);
 }
@@ -901,7 +899,7 @@ _wrap_new_wxStatusBar__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 3) {
         {
-            arg5 = new wxString((wxChar *)STR2CSTR(argv[3]));
+            arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -1017,7 +1015,7 @@ _wrap_wxStatusBar_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 3) {
         {
-            arg5 = new wxString((wxChar *)STR2CSTR(argv[3]));
+            arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,arg4,(wxString const &)*arg5);
@@ -1085,7 +1083,7 @@ _wrap_wxStatusBar_GetStatusText(int argc, VALUE *argv, VALUE self) {
     result = ((wxStatusBar const *)arg1)->GetStatusText(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1118,7 +1116,7 @@ _wrap_wxStatusBar_PushStatusText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxStatusBar, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         arg3 = NUM2INT(argv[1]);
@@ -1179,7 +1177,7 @@ _wrap_wxStatusBar_SetStatusText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxStatusBar, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         arg3 = NUM2INT(argv[1]);

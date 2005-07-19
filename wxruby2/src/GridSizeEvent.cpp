@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxGridSizeEvent
 #define SWIG_name    "WxGridSizeEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxGridSizeEvent;
    extern VALUE mWx;
 

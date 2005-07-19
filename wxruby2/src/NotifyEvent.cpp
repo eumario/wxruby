@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxNotifyEvent
 #define SWIG_name    "WxNotifyEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxNotifyEvent;
    extern VALUE mWx;
 

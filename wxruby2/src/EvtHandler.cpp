@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxEvtHandler
 #define SWIG_name    "WxEvtHandler"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxEvtHandler;
    extern VALUE mWx;
 

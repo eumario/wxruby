@@ -531,8 +531,6 @@ static swig_type_info *swig_types[8];
 #define SWIG_init    Init_wxArtProvider
 #define SWIG_name    "WxArtProvider"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxArtProvider;
    extern VALUE mWx;
 
@@ -822,10 +820,10 @@ _wrap_ArtProvider_CreateBitmap(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRubyArtProvider, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxSize, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
     director = dynamic_cast<Swig::Director *>(arg1);
@@ -854,11 +852,11 @@ _wrap_ArtProvider_GetBitmap(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         {
-            arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
+            arg2 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
         }
     }
     if (argc > 2) {
@@ -888,11 +886,11 @@ _wrap_ArtProvider_GetIcon(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         {
-            arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
+            arg2 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
         }
     }
     if (argc > 2) {

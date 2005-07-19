@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxKeyEvent
 #define SWIG_name    "WxKeyEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxKeyEvent;
    extern VALUE mWx;
 

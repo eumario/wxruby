@@ -1,5 +1,5 @@
 README for wxruby-swig
-Version 0.0.19
+Version 0.0.20-pre
 
 This is a very early release of a swig-based version 
 of wxRuby. It can run the "minimal" sample. It only 
@@ -12,13 +12,16 @@ There are no binaries. You must build it from source.
 
 
 WHATS NEW:
-- Added XRC support (you must have WXRUBY_XRC=YES in your 
-  environment to enable this option)
-- Integrated several fixes from Sean Long
-- No longer extract wx API from an XML file
-- Renamed top-level rake.bat to run-rake.bat to avoid 
-  possible conflicts with the real rake
-  
+- Now target wxWidgets 2.5+
+- wxWindows 2.4 is no longer supported. However, if you 
+  are interested in maintaining (or reviving) 2.4 support, 
+  it would make sense to have it in the same source tree.
+- Should now work with unicode or non-unicode build of wx, 
+  as long as the unicode flag was set the same when wx and 
+  wxRuby were built. HOWEVER, currently all strings passed 
+  into or returned out of wxRuby must be in ASCII or UTF-8,
+  not in any other 8-bit encoding.
+
 
 REQUIREMENTS:
 

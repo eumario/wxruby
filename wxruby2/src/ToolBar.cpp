@@ -524,8 +524,6 @@ static swig_type_info *swig_types[1];
 #define SWIG_init    Init_wxToolBar
 #define SWIG_name    "WxToolBar"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxToolBar;
    extern VALUE mWx;
 
