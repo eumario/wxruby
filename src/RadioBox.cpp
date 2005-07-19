@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxRadioBox
 #define SWIG_name    "WxRadioBox"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxRadioBox;
    extern VALUE mWx;
 
@@ -831,7 +829,7 @@ _wrap_new_wxRadioBox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -851,7 +849,7 @@ _wrap_new_wxRadioBox(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[5],i));
+                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -869,7 +867,7 @@ _wrap_new_wxRadioBox(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg12 = new wxString((wxChar *)STR2CSTR(argv[9]));
+            arg12 = new wxString(STR2CSTR(argv[9]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -939,7 +937,7 @@ _wrap_wxRadioBox_Create(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -959,7 +957,7 @@ _wrap_wxRadioBox_Create(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[5],i));
+                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -977,7 +975,7 @@ _wrap_wxRadioBox_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 9) {
         {
-            arg12 = new wxString((wxChar *)STR2CSTR(argv[9]));
+            arg12 = new wxString(STR2CSTR(argv[9]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const (*))arg8,arg9,arg10,(wxValidator const &)*arg11,(wxString const &)*arg12);
@@ -1094,7 +1092,7 @@ _wrap_wxRadioBox_FindString(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRadioBox, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (int)((wxRadioBox const *)arg1)->FindString((wxString const &)*arg2);
     
@@ -1147,7 +1145,7 @@ _wrap_wxRadioBox_GetStringSelection(int argc, VALUE *argv, VALUE self) {
     result = ((wxRadioBox const *)arg1)->GetStringSelection();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1177,7 +1175,7 @@ _wrap_wxRadioBox_SetStringSelection(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRadioBox, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetStringSelection((wxString const &)*arg2);
     
@@ -1282,7 +1280,7 @@ _wrap_wxRadioBox_GetString(int argc, VALUE *argv, VALUE self) {
     result = ((wxRadioBox const *)arg1)->GetString(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }

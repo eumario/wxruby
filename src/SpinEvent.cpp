@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxSpinEvent
 #define SWIG_name    "WxSpinEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxSpinEvent;
    extern VALUE mWx;
 

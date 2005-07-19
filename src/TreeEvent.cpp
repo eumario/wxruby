@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxTreeEvent
 #define SWIG_name    "WxTreeEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxTreeEvent;
    extern VALUE mWx;
 

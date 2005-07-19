@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxFontData
 #define SWIG_name    "WxFontData"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxFontData;
    extern VALUE mWx;
 

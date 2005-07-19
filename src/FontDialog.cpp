@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxFontDialog
 #define SWIG_name    "WxFontDialog"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxFontDialog;
    extern VALUE mWx;
 

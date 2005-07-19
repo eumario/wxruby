@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxMessageDialog
 #define SWIG_name    "WxMessageDialog"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxMessageDialog;
    extern VALUE mWx;
 
@@ -809,11 +807,11 @@ _wrap_new_wxMessageDialog(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     if (argc > 3) {

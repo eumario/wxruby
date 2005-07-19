@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxStaticBox
 #define SWIG_name    "WxStaticBox"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxStaticBox;
    extern VALUE mWx;
 
@@ -816,7 +814,7 @@ _wrap_new_wxStaticBox(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -829,7 +827,7 @@ _wrap_new_wxStaticBox(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
+            arg8 = new wxString(STR2CSTR(argv[6]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -886,7 +884,7 @@ _wrap_wxStaticBox_Create(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -899,7 +897,7 @@ _wrap_wxStaticBox_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
+            arg8 = new wxString(STR2CSTR(argv[6]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const &)*arg8);

@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxWindowDisabler
 #define SWIG_name    "WxWindowDisabler"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxWindowDisabler;
    extern VALUE mWx;
 

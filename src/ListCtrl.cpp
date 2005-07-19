@@ -537,8 +537,6 @@ static swig_type_info *swig_types[14];
 #define SWIG_init    Init_wxListCtrl
 #define SWIG_name    "WxListCtrl"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxListCtrl;
    extern VALUE mWx;
 
@@ -846,7 +844,7 @@ _wrap_new_wxListCtrl(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
+            arg8 = new wxString(STR2CSTR(argv[6]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -967,7 +965,7 @@ _wrap_wxListCtrl_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
+            arg8 = new wxString(STR2CSTR(argv[6]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxValidator const &)*arg7,(wxString const &)*arg8);
@@ -1076,7 +1074,7 @@ _wrap_wxListCtrl_FindItem__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListCtrl, 1);
     arg2 = NUM2LONG(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         arg4 = RTEST(argv[2]);
@@ -1456,7 +1454,7 @@ _wrap_wxListCtrl_GetItemText(int argc, VALUE *argv, VALUE self) {
     result = ((wxListCtrl const *)arg1)->GetItemText(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1595,7 +1593,7 @@ _wrap_wxListCtrl_InsertColumn__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListCtrl, 1);
     arg2 = NUM2LONG(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         arg4 = NUM2INT(argv[2]);
@@ -1714,7 +1712,7 @@ _wrap_wxListCtrl_InsertItem__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListCtrl, 1);
     arg2 = NUM2LONG(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     result = (long)(arg1)->InsertItem(arg2,(wxString const &)*arg3);
     
@@ -1757,7 +1755,7 @@ _wrap_wxListCtrl_InsertItem__SWIG_3(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListCtrl, 1);
     arg2 = NUM2LONG(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     arg4 = NUM2INT(argv[2]);
     result = (long)(arg1)->InsertItem(arg2,(wxString const &)*arg3,arg4);
@@ -1990,7 +1988,7 @@ _wrap_wxListCtrl_SetItem__SWIG_1(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         arg5 = NUM2INT(argv[3]);
@@ -2177,7 +2175,7 @@ _wrap_wxListCtrl_SetItemText(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListCtrl, 1);
     arg2 = NUM2LONG(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     (arg1)->SetItemText(arg2,(wxString const &)*arg3);
     

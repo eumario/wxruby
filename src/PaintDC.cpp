@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxPaintDC
 #define SWIG_name    "WxPaintDC"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxPaintDC;
    extern VALUE mWx;
 

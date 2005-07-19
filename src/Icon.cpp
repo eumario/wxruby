@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxIcon
 #define SWIG_name    "WxIcon"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxIcon;
    extern VALUE mWx;
 
@@ -801,7 +799,7 @@ _wrap_new_wxIcon(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     arg1 = self;
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         arg3 = NUM2LONG(argv[1]);
@@ -919,7 +917,7 @@ _wrap_wxIcon_LoadFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
         wxBitmapType * ptr;

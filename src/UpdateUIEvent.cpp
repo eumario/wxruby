@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxUpdateUIEvent
 #define SWIG_name    "WxUpdateUIEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxUpdateUIEvent;
    extern VALUE mWx;
 
@@ -933,7 +931,7 @@ _wrap_wxUpdateUIEvent_GetText(int argc, VALUE *argv, VALUE self) {
     result = ((wxUpdateUIEvent const *)arg1)->GetText();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -948,7 +946,7 @@ _wrap_wxUpdateUIEvent_SetText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxUpdateUIEvent, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetText((wxString const &)*arg2);
     

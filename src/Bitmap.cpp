@@ -532,8 +532,6 @@ static swig_type_info *swig_types[9];
 #define SWIG_init    Init_wxBitmap
 #define SWIG_name    "WxBitmap"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxBitmap;
    extern VALUE mWx;
 
@@ -845,7 +843,7 @@ _wrap_new_wxBitmap__SWIG_4(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         {
@@ -1174,7 +1172,7 @@ _wrap_wxBitmap_LoadFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxBitmap, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
         wxBitmapType * ptr;
@@ -1217,7 +1215,7 @@ _wrap_wxBitmap_SaveFile(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxBitmap, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
         wxBitmapType * ptr;

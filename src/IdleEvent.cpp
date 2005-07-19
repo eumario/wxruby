@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxIdleEvent
 #define SWIG_name    "WxIdleEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxIdleEvent;
    extern VALUE mWx;
 

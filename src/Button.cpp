@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxButton
 #define SWIG_name    "WxButton"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxButton;
    extern VALUE mWx;
 
@@ -819,7 +817,7 @@ _wrap_new_wxButton(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
@@ -835,7 +833,7 @@ _wrap_new_wxButton(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg9 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -893,7 +891,7 @@ _wrap_wxButton_Create(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     if (argc > 4) {
@@ -907,7 +905,7 @@ _wrap_wxButton_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg9 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
@@ -929,7 +927,7 @@ _wrap_wxButton_GetLabel(int argc, VALUE *argv, VALUE self) {
     result = ((wxButton const *)arg1)->GetLabel();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -977,7 +975,7 @@ _wrap_wxButton_SetLabel(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxButton, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetLabel((wxString const &)*arg2);
     

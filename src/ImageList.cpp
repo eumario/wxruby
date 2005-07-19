@@ -530,8 +530,6 @@ static swig_type_info *swig_types[7];
 #define SWIG_init    Init_wxImageList
 #define SWIG_name    "WxImageList"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxImageList;
    extern VALUE mWx;
 

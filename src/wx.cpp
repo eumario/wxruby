@@ -974,11 +974,11 @@ _wrap_wxMessageBox(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 6))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         {
-            arg2 = new wxString((wxChar *)STR2CSTR(argv[1]));
+            arg2 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
         }
     }
     if (argc > 2) {

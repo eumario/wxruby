@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxGDIObject
 #define SWIG_name    "WxGDIObject"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxGDIObject;
    extern VALUE mWx;
 

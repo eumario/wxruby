@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxCalendarDateAttr
 #define SWIG_name    "WxCalendarDateAttr"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxCalendarDateAttr;
    extern VALUE mWx;
 

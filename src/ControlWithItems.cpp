@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxControlWithItems
 #define SWIG_name    "WxControlWithItems"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxControlWithItems;
    extern VALUE mWx;
 
@@ -776,7 +774,7 @@ _wrap_wxControlWithItems_Append(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     {
         arg3 = (void*)(argv[1]);
@@ -814,7 +812,7 @@ _wrap_wxControlWithItems_FindString(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (int)(arg1)->FindString((wxString const &)*arg2);
     
@@ -907,7 +905,7 @@ _wrap_wxControlWithItems_GetString(int argc, VALUE *argv, VALUE self) {
     result = ((wxControlWithItems const *)arg1)->GetString(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -925,7 +923,7 @@ _wrap_wxControlWithItems_GetStringSelection(int argc, VALUE *argv, VALUE self) {
     result = ((wxControlWithItems const *)arg1)->GetStringSelection();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -978,7 +976,7 @@ _wrap_wxControlWithItems_SetString(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     (arg1)->SetString(arg2,(wxString const &)*arg3);
     

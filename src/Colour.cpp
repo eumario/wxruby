@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxColour
 #define SWIG_name    "WxColour"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxColour;
    extern VALUE mWx;
 
@@ -801,7 +799,7 @@ _wrap_new_wxColour__SWIG_2(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (wxColour *)new wxColour((wxString const &)*arg1);
     DATA_PTR(self) = result;

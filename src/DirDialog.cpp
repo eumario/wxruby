@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxDirDialog
 #define SWIG_name    "WxDirDialog"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxDirDialog;
    extern VALUE mWx;
 
@@ -812,12 +810,12 @@ _wrap_new_wxDirDialog(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     if (argc > 1) {
         {
-            arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+            arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
         }
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     if (argc > 3) {
@@ -831,7 +829,7 @@ _wrap_new_wxDirDialog(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 6) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[6]));
+            arg8 = new wxString(STR2CSTR(argv[6]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -878,7 +876,7 @@ _wrap_wxDirDialog_GetPath(int argc, VALUE *argv, VALUE self) {
     result = ((wxDirDialog const *)arg1)->GetPath();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -896,7 +894,7 @@ _wrap_wxDirDialog_GetMessage(int argc, VALUE *argv, VALUE self) {
     result = ((wxDirDialog const *)arg1)->GetMessage();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -927,7 +925,7 @@ _wrap_wxDirDialog_SetMessage(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDirDialog, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetMessage((wxString const &)*arg2);
     
@@ -944,7 +942,7 @@ _wrap_wxDirDialog_SetPath(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDirDialog, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetPath((wxString const &)*arg2);
     

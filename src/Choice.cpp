@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxChoice
 #define SWIG_name    "WxChoice"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxChoice;
    extern VALUE mWx;
 
@@ -842,7 +840,7 @@ _wrap_new_wxChoice(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg10 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg10 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -927,7 +925,7 @@ _wrap_wxChoice_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg10 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg10 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10);
@@ -1012,7 +1010,7 @@ _wrap_wxChoice_SetStringSelection(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetStringSelection(*arg2);
     

@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxPoint
 #define SWIG_name    "WxPoint"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxPoint;
    extern VALUE mWx;
 

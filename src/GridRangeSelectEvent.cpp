@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxGridRangeSelectEvent
 #define SWIG_name    "WxGridRangeSelectEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxGridRangeSelectEvent;
    extern VALUE mWx;
 

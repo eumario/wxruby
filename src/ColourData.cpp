@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxColourData
 #define SWIG_name    "WxColourData"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxColourData;
    extern VALUE mWx;
 

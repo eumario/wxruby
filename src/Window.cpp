@@ -544,8 +544,6 @@ static swig_type_info *swig_types[21];
 #define SWIG_init    Init_wxWindow
 #define SWIG_name    "WxWindow"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxWindow;
    extern VALUE mWx;
 
@@ -1245,7 +1243,7 @@ void SwigDirector_wxWindow::GetTextExtent(wxString const &string, int *x, int *y
         wxWindow::GetTextExtent(string,x,y,descent,externalLeading,font);
         return;
     }
-    obj0 = rb_str_new2((const char *)(&string)->c_str());
+    obj0 = rb_str_new2((const char *)(&string)->mb_str());
     obj1 = SWIG_NewPointerObj(x, SWIGTYPE_p_int, 0);
     obj2 = SWIG_NewPointerObj(y, SWIGTYPE_p_int, 0);
     obj3 = SWIG_NewPointerObj(descent, SWIGTYPE_p_int, 0);
@@ -1555,7 +1553,7 @@ void SwigDirector_wxWindow::SetTitle(wxString const &title) {
         wxWindow::SetTitle(title);
         return;
     }
-    obj0 = rb_str_new2((const char *)(&title)->c_str());
+    obj0 = rb_str_new2((const char *)(&title)->mb_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_title"), 1,obj0);
 }
 
@@ -1568,7 +1566,7 @@ void SwigDirector_wxWindow::SetName(wxString const &name) {
         wxWindow::SetName(name);
         return;
     }
-    obj0 = rb_str_new2((const char *)(&name)->c_str());
+    obj0 = rb_str_new2((const char *)(&name)->mb_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_name"), 1,obj0);
 }
 
@@ -1581,7 +1579,7 @@ void SwigDirector_wxWindow::SetHelpText(wxString const &helpText) {
         wxWindow::SetHelpText(helpText);
         return;
     }
-    obj0 = rb_str_new2((const char *)(&helpText)->c_str());
+    obj0 = rb_str_new2((const char *)(&helpText)->mb_str());
     result = rb_funcall(swig_get_self(), rb_intern("set_help_text"), 1,obj0);
 }
 
@@ -1753,7 +1751,7 @@ _wrap_new_wxWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg7 = new wxString((wxChar *)STR2CSTR(argv[5]));
+            arg7 = new wxString(STR2CSTR(argv[5]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
@@ -2434,7 +2432,7 @@ _wrap_wxWindow_FindWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (wxWindow *)(arg1)->FindWindow((wxString const &)*arg2);
     
@@ -2539,7 +2537,7 @@ _wrap_wxWindow_FindWindowByName(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
@@ -2571,7 +2569,7 @@ _wrap_wxWindow_FindWindowByLabel(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
@@ -3037,7 +3035,7 @@ _wrap_wxWindow_GetHelpText(int argc, VALUE *argv, VALUE self) {
     result = ((wxWindow const *)arg1)->GetHelpText();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -3074,7 +3072,7 @@ _wrap_wxWindow_GetLabel(int argc, VALUE *argv, VALUE self) {
     result = ((wxWindow const *)arg1)->GetLabel();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -3095,7 +3093,7 @@ _wrap_wxWindow_GetName(int argc, VALUE *argv, VALUE self) {
     result = ((wxWindow const *)arg1)->GetName();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -3426,7 +3424,7 @@ _wrap_wxWindow_GetTitle(int argc, VALUE *argv, VALUE self) {
     result = (arg1)->GetTitle();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -4568,7 +4566,7 @@ _wrap_wxWindow_SetHelpText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
@@ -4603,7 +4601,7 @@ _wrap_wxWindow_SetName(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
@@ -4905,7 +4903,7 @@ _wrap_wxWindow_SetTitle(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     director = dynamic_cast<Swig::Director *>(arg1);
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
@@ -4960,7 +4958,7 @@ _wrap_wxWindow_SetToolTip__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetToolTip((wxString const &)*arg2);
     

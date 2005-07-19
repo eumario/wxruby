@@ -530,8 +530,6 @@ static swig_type_info *swig_types[7];
 #define SWIG_init    Init_wxCaret
 #define SWIG_name    "WxCaret"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxCaret;
    extern VALUE mWx;
 

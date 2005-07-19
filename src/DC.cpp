@@ -539,8 +539,6 @@ static swig_type_info *swig_types[16];
 #define SWIG_init    Init_wxDC
 #define SWIG_name    "WxDC"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxDC;
    extern VALUE mWx;
 
@@ -1781,7 +1779,7 @@ _wrap_wxDC_DrawRotatedText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     arg3 = NUM2INT(argv[1]);
     arg4 = NUM2INT(argv[2]);
@@ -1940,7 +1938,7 @@ _wrap_wxDC_DrawText(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     arg3 = NUM2INT(argv[1]);
     arg4 = NUM2INT(argv[2]);
@@ -2291,7 +2289,7 @@ _wrap_wxDC_GetTextExtent(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
         SWIG_ConvertPtr(argv[1], (void **) &arg7, SWIGTYPE_p_wxFont, 1);
@@ -2905,7 +2903,7 @@ _wrap_wxDC_StartDoc(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (bool)(arg1)->StartDoc((wxString const &)*arg2);
     

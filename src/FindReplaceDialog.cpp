@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxFindReplaceDialog
 #define SWIG_name    "WxFindReplaceDialog"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxFindReplaceDialog;
    extern VALUE mWx;
 
@@ -812,7 +810,7 @@ _wrap_new_wxFindReplaceDialog(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxFindReplaceData, 1);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         arg5 = NUM2INT(argv[3]);
@@ -865,7 +863,7 @@ _wrap_wxFindReplaceDialog_Create(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxFindReplaceData, 1);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         arg5 = NUM2INT(argv[3]);

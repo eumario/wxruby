@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxClientDC
 #define SWIG_name    "WxClientDC"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxClientDC;
    extern VALUE mWx;
 

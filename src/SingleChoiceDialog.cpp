@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxSingleChoiceDialog
 #define SWIG_name    "WxSingleChoiceDialog"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxSingleChoiceDialog;
    extern VALUE mWx;
 
@@ -813,10 +811,10 @@ _wrap_new_wxSingleChoiceDialog(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         {
@@ -830,7 +828,7 @@ _wrap_new_wxSingleChoiceDialog(int argc, VALUE *argv, VALUE self) {
                 arr5 = new wxString[RARRAY(argv[3])->len];
                 for (int i = 0; i < RARRAY(argv[3])->len; i++)
                 {
-                    arr5[i] = (wxChar *)STR2CSTR(rb_ary_entry(argv[3],i));
+                    arr5[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[3],i)));
                 }
                 arg5 = RARRAY(argv[3])->len;
                 arg6 = arr5;
@@ -925,7 +923,7 @@ _wrap_wxSingleChoiceDialog_GetStringSelection(int argc, VALUE *argv, VALUE self)
     result = ((wxSingleChoiceDialog const *)arg1)->GetStringSelection();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }

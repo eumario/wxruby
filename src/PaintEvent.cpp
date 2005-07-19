@@ -525,8 +525,6 @@ static swig_type_info *swig_types[2];
 #define SWIG_init    Init_wxPaintEvent
 #define SWIG_name    "WxPaintEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxPaintEvent;
    extern VALUE mWx;
 

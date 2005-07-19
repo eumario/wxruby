@@ -15,6 +15,9 @@ int wxEntry( int &argc, char *argv[]);
 #else
 int wxEntry( int argc, char *argv[]);
 #endif
+
+#include <wx/init.h>
+
 %}
 
 %ignore GetAuto3D;
@@ -55,39 +58,35 @@ public:
     int main_loop()
     {
         static int argc = 1;
-        static char *argv[] = {"wxruby", NULL};
+        static wxChar *argv[] = {wxT("wxruby"), NULL};
 #ifdef wxDEBUG
         printf("Calling wxEntry, this=%p\n", this);
 #endif
 
 #ifdef __WXMSW__
-
-#if wxMINOR_VERSION == 4
-		    extern int  wxEntry(WXHINSTANCE hInstance,
-            WXHINSTANCE WXUNUSED(hPrevInstance),
-            char *lpCmdLine,
-            int nCmdShow,
-            bool enterLoop);
-	    wxEntry(GetModuleHandle(NULL),0,"",true,true);
-#else
-		    extern int wxEntry(HINSTANCE hInstance,
-                        HINSTANCE WXUNUSED(hPrevInstance),
-                        wxCmdLineArgType WXUNUSED(pCmdLine),
-                        int nCmdShow);
-	    wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
-#endif
-        
-	
-		
-#else     
-#if __WXMAC__
+	#if wxMINOR_VERSION == 4
+				extern int  wxEntry(WXHINSTANCE hInstance,
+				WXHINSTANCE WXUNUSED(hPrevInstance),
+				char *lpCmdLine,
+				int nCmdShow,
+				bool enterLoop);
+			wxEntry(GetModuleHandle(NULL),0,"",true,true);
+	#else
+				extern int wxEntry(HINSTANCE hInstance,
+							HINSTANCE WXUNUSED(hPrevInstance),
+							wxCmdLineArgType WXUNUSED(pCmdLine),
+							int nCmdShow);
+			wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
+	#endif
+#elif __WXMAC__
 	wxEntry(argc,(char **)argv);
-
+	
 #else
-        wxEntry((const int)argc,(char **)argv);
-#endif
+		wxEntry(argc, argv);
 #endif        
-		
+
+
+
 #ifdef wxDEBUG
         printf("returned from wxEntry...\n");
 #endif	
@@ -142,11 +141,19 @@ public:
         }
         return 0;
     }
+
+bool Initialize(int& argc, wxChar **argv)
+	{
+		printf("Our Initialize was called\n");
+		bool result = wxApp::Initialize(argc, argv);
+		printf("Their Initialize returned %d\n", result);
+		return result;
+	}
+
+
 };
 
 VALUE wxRubyApp::app_ptr = Qnil;
-
-
 
 %}
 
@@ -198,4 +205,3 @@ public:
 %extend wxRubyApp {
 
 }
-

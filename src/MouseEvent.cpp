@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxMouseEvent
 #define SWIG_name    "WxMouseEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxMouseEvent;
    extern VALUE mWx;
 

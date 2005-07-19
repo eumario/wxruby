@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxFont
 #define SWIG_name    "WxFont"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxFont;
    extern VALUE mWx;
 
@@ -816,7 +814,7 @@ _wrap_new_wxFont__SWIG_1(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 5) {
         {
-            arg6 = new wxString((wxChar *)STR2CSTR(argv[5]));
+            arg6 = new wxString(STR2CSTR(argv[5]), wxConvUTF8);
         }
     }
     if (argc > 6) {
@@ -949,7 +947,7 @@ _wrap_wxFont_GetFaceName(int argc, VALUE *argv, VALUE self) {
     result = ((wxFont const *)arg1)->GetFaceName();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -983,7 +981,7 @@ _wrap_wxFont_GetNativeFontInfoDesc(int argc, VALUE *argv, VALUE self) {
     result = ((wxFont const *)arg1)->GetNativeFontInfoDesc();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1095,7 +1093,7 @@ _wrap_wxFont_SetFaceName(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFont, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetFaceName((wxString const &)*arg2);
     

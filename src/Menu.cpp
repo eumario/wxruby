@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxMenu
 #define SWIG_name    "WxMenu"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxMenu;
    extern VALUE mWx;
 
@@ -809,7 +807,7 @@ _wrap_new_wxMenu(int argc, VALUE *argv, VALUE self) {
     arg1 = self;
     if (argc > 0) {
         {
-            arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+            arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
         }
     }
     if (argc > 1) {
@@ -861,11 +859,11 @@ _wrap_wxMenu_Append(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     if (argc > 3) {
@@ -892,11 +890,11 @@ _wrap_wxMenu_AppendCheckItem(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     (arg1)->AppendCheckItem(arg2,(wxString const &)*arg3,(wxString const &)*arg4);
@@ -918,11 +916,11 @@ _wrap_wxMenu_AppendRadioItem(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     (arg1)->AppendRadioItem(arg2,(wxString const &)*arg3,(wxString const &)*arg4);
@@ -1156,7 +1154,7 @@ _wrap_wxMenu_FindItem__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (int)((wxMenu const *)arg1)->FindItem((wxString const &)*arg2);
     
@@ -1274,7 +1272,7 @@ _wrap_wxMenu_GetHelpString(int argc, VALUE *argv, VALUE self) {
     result = ((wxMenu const *)arg1)->GetHelpString(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1294,7 +1292,7 @@ _wrap_wxMenu_GetLabel(int argc, VALUE *argv, VALUE self) {
     result = ((wxMenu const *)arg1)->GetLabel(arg2);
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1328,7 +1326,7 @@ _wrap_wxMenu_GetTitle(int argc, VALUE *argv, VALUE self) {
     result = ((wxMenu const *)arg1)->GetTitle();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1370,11 +1368,11 @@ _wrap_wxMenu_Insert__SWIG_1(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         {
-            arg5 = new wxString((wxChar *)STR2CSTR(argv[3]));
+            arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);
         }
     }
     if (argc > 4) {
@@ -1482,11 +1480,11 @@ _wrap_wxMenu_InsertCheckItem(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         {
-            arg5 = new wxString((wxChar *)STR2CSTR(argv[3]));
+            arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);
         }
     }
     (arg1)->InsertCheckItem(arg2,arg3,(wxString const &)*arg4,(wxString const &)*arg5);
@@ -1510,11 +1508,11 @@ _wrap_wxMenu_InsertRadioItem(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2INT(argv[1]);
     {
-        arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
     if (argc > 3) {
         {
-            arg5 = new wxString((wxChar *)STR2CSTR(argv[3]));
+            arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);
         }
     }
     (arg1)->InsertRadioItem(arg2,arg3,(wxString const &)*arg4,(wxString const &)*arg5);
@@ -1603,11 +1601,11 @@ _wrap_wxMenu_Prepend__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     if (argc > 3) {
@@ -1703,11 +1701,11 @@ _wrap_wxMenu_PrependCheckItem(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     (arg1)->PrependCheckItem(arg2,(wxString const &)*arg3,(wxString const &)*arg4);
@@ -1729,11 +1727,11 @@ _wrap_wxMenu_PrependRadioItem(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
         {
-            arg4 = new wxString((wxChar *)STR2CSTR(argv[2]));
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
         }
     }
     (arg1)->PrependRadioItem(arg2,(wxString const &)*arg3,(wxString const &)*arg4);
@@ -1849,7 +1847,7 @@ _wrap_wxMenu_SetHelpString(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     (arg1)->SetHelpString(arg2,(wxString const &)*arg3);
     
@@ -1868,7 +1866,7 @@ _wrap_wxMenu_SetLabel(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString((wxChar *)STR2CSTR(argv[1]));
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     (arg1)->SetLabel(arg2,(wxString const &)*arg3);
     
@@ -1885,7 +1883,7 @@ _wrap_wxMenu_SetTitle(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetTitle((wxString const &)*arg2);
     

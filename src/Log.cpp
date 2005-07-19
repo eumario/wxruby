@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxLog
 #define SWIG_name    "WxLog"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxLog;
    extern VALUE mWx;
 
@@ -789,7 +787,7 @@ _wrap_wxLog_AddTraceMask(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     wxLog::AddTraceMask((wxString const &)*arg1);
     
@@ -824,7 +822,7 @@ _wrap_wxLog_GetTraceMasks(int argc, VALUE *argv, VALUE self) {
         
         for (int i = 0; i < result->GetCount(); i++)
         {
-            rb_ary_push(vresult,rb_str_new2((const char *)(*result)[i].c_str()));
+            rb_ary_push(vresult,rb_str_new2((const char *)(*result)[i].mb_str()));
         }
     }
     return vresult;
@@ -1072,7 +1070,7 @@ _wrap_wxLog_RemoveTraceMask(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     wxLog::RemoveTraceMask((wxString const &)*arg1);
     

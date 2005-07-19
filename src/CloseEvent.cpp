@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxCloseEvent
 #define SWIG_name    "WxCloseEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxCloseEvent;
    extern VALUE mWx;
 

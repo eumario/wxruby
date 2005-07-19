@@ -530,8 +530,6 @@ static swig_type_info *swig_types[7];
 #define SWIG_init    Init_wxBitmapButton
 #define SWIG_name    "WxBitmapButton"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxBitmapButton;
    extern VALUE mWx;
 
@@ -820,7 +818,7 @@ _wrap_new_wxBitmapButton(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg8 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg8 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     result = (wxBitmapButton *)new wxBitmapButton(arg1,arg2,(wxBitmap const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxValidator const &)*arg7,(wxString const &)*arg8);
@@ -868,7 +866,7 @@ _wrap_wxBitmapButton_Create(int argc, VALUE *argv, VALUE self) {
     }
     if (argc > 7) {
         {
-            arg9 = new wxString((wxChar *)STR2CSTR(argv[7]));
+            arg9 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     result = (bool)(arg1)->Create(arg2,arg3,(wxBitmap const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);

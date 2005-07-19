@@ -529,8 +529,6 @@ static swig_type_info *swig_types[6];
 #define SWIG_init    Init_wxApp
 #define SWIG_name    "WxApp"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxApp;
    extern VALUE mWx;
 
@@ -577,6 +575,9 @@ int wxEntry( int &argc, char *argv[]);
 int wxEntry( int argc, char *argv[]);
 #endif
 
+#include <wx/init.h>
+
+
 
 
 extern swig_class cWxEvtHandler;
@@ -603,39 +604,35 @@ public:
     int main_loop()
     {
         static int argc = 1;
-        static char *argv[] = {"wxruby", NULL};
+        static wxChar *argv[] = {wxT("wxruby"), NULL};
 #ifdef wxDEBUG
         printf("Calling wxEntry, this=%p\n", this);
 #endif
 
 #ifdef __WXMSW__
-
-#if wxMINOR_VERSION == 4
-		    extern int  wxEntry(WXHINSTANCE hInstance,
-            WXHINSTANCE WXUNUSED(hPrevInstance),
-            char *lpCmdLine,
-            int nCmdShow,
-            bool enterLoop);
-	    wxEntry(GetModuleHandle(NULL),0,"",true,true);
-#else
-		    extern int wxEntry(HINSTANCE hInstance,
-                        HINSTANCE WXUNUSED(hPrevInstance),
-                        wxCmdLineArgType WXUNUSED(pCmdLine),
-                        int nCmdShow);
-	    wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
-#endif
-        
-	
-		
-#else     
-#if __WXMAC__
+	#if wxMINOR_VERSION == 4
+				extern int  wxEntry(WXHINSTANCE hInstance,
+				WXHINSTANCE WXUNUSED(hPrevInstance),
+				char *lpCmdLine,
+				int nCmdShow,
+				bool enterLoop);
+			wxEntry(GetModuleHandle(NULL),0,"",true,true);
+	#else
+				extern int wxEntry(HINSTANCE hInstance,
+							HINSTANCE WXUNUSED(hPrevInstance),
+							wxCmdLineArgType WXUNUSED(pCmdLine),
+							int nCmdShow);
+			wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
+	#endif
+#elif __WXMAC__
 	wxEntry(argc,(char **)argv);
-
+	
 #else
-        wxEntry((const int)argc,(char **)argv);
-#endif
+		wxEntry(argc, argv);
 #endif        
-		
+
+
+
 #ifdef wxDEBUG
         printf("returned from wxEntry...\n");
 #endif	
@@ -690,11 +687,19 @@ public:
         }
         return 0;
     }
+
+bool Initialize(int& argc, wxChar **argv)
+	{
+		printf("Our Initialize was called\n");
+		bool result = wxApp::Initialize(argc, argv);
+		printf("Their Initialize returned %d\n", result);
+		return result;
+	}
+
+
 };
 
 VALUE wxRubyApp::app_ptr = Qnil;
-
-
 
 
 
@@ -1145,7 +1150,7 @@ _wrap_App_GetAppName(int argc, VALUE *argv, VALUE self) {
     result = ((wxRubyApp const *)arg1)->GetAppName();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1163,7 +1168,7 @@ _wrap_App_GetClassName(int argc, VALUE *argv, VALUE self) {
     result = ((wxRubyApp const *)arg1)->GetClassName();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1232,7 +1237,7 @@ _wrap_App_GetVendorName(int argc, VALUE *argv, VALUE self) {
     result = ((wxRubyApp const *)arg1)->GetVendorName();
     
     {
-        vresult = rb_str_new2((const char *)(&result)->c_str());
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
     }
     return vresult;
 }
@@ -1427,7 +1432,7 @@ _wrap_App_SetAppName(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRubyApp, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetAppName((wxString const &)*arg2);
     
@@ -1444,7 +1449,7 @@ _wrap_App_SetClassName(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRubyApp, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetClassName((wxString const &)*arg2);
     
@@ -1491,7 +1496,7 @@ _wrap_App_SetVendorName(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxRubyApp, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetVendorName((wxString const &)*arg2);
     

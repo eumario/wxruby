@@ -526,8 +526,6 @@ static swig_type_info *swig_types[3];
 #define SWIG_init    Init_wxNotebookSizer
 #define SWIG_name    "WxNotebookSizer"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxNotebookSizer;
    extern VALUE mWx;
 

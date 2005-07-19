@@ -527,8 +527,6 @@ static swig_type_info *swig_types[4];
 #define SWIG_init    Init_wxSplitterEvent
 #define SWIG_name    "WxSplitterEvent"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxSplitterEvent;
    extern VALUE mWx;
 

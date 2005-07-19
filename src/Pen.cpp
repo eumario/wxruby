@@ -528,8 +528,6 @@ static swig_type_info *swig_types[5];
 #define SWIG_init    Init_wxPen
 #define SWIG_name    "WxPen"
 
-static VALUE alive = Qnil;
-
 static VALUE mWxPen;
    extern VALUE mWx;
 
@@ -806,7 +804,7 @@ _wrap_new_wxPen__SWIG_2(int argc, VALUE *argv, VALUE self) {
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     {
-        arg1 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     arg2 = NUM2INT(argv[1]);
     arg3 = NUM2INT(argv[2]);
@@ -1074,7 +1072,7 @@ _wrap_wxPen_SetColour__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxPen, 1);
     {
-        arg2 = new wxString((wxChar *)STR2CSTR(argv[0]));
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     (arg1)->SetColour((wxString const &)*arg2);
     
