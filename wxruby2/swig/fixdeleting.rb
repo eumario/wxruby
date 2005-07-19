@@ -30,12 +30,13 @@ File.open(ARGV[0], "w") do | out |
             $class_name = matches[1]
             #puts("-----------------#{$class_name}")
         end
-        
-        if(line.index("#define SWIG_name"))
-            lines = [line]
-            lines << "static VALUE alive = Qnil;"
-            line = lines.join("\n")
-        end
+
+# This appears to be unused, so stop inserting it
+#        if(line.index("#define SWIG_name"))
+#            lines = [line]
+#            lines << "static VALUE alive = Qnil;"
+#            line = lines.join("\n")
+#        end
         
         if(line.index("Director(VALUE self,"))
             lines = [line]
