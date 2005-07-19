@@ -7,3 +7,4 @@
 %module(directors="1") wxTextCtrl
 
 %ignore wxTextCtrl::operator<<;
+%include "include/wxTextCtrl.h"
