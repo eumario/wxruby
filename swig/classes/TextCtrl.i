@@ -6,14 +6,4 @@
 
 %module(directors="1") wxTextCtrl
 
-#
-# Doing this to counter a bug in SWIG-1.3.21. To be taken
-# out at a later date
-#
-%ignore wxTextCtrl::wxTextCtrl();
-//%ignore wxTextCtrl::operator<<;
-
-%ignore wxTextCtrl::GetStyle;
-%include "include/wxTextCtrl.h"
-
-
+%ignore wxTextCtrl::operator<<;
