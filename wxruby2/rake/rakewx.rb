@@ -158,8 +158,7 @@ def create_normal_swig_task(base_name)
         post_process(cpp_file, "fixplatform.rb")
         post_process(cpp_file, "fixmodule.rb")
         post_process(cpp_file, "fixswigedcode.rb")
-        fixdeleting = File.join($swig_dir, "fixdeleting.rb")
-        sh "ruby #{fixdeleting} #{cpp_file}"
+		post_process(cpp_file, "fixdeleting.rb")
     end
 end
 
