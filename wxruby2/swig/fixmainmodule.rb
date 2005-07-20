@@ -8,6 +8,19 @@
 #   across multiple SWIG modules
 #   I know it's ugly :-(
 
+def fix(file)
+	broken = file +".old"
+	File.rename(file, broken)
+
+	File.open(ARGV[0], "w") do | out |
+    	File.foreach(broken) do | line |
+    end
+
+end
+
+File.delete(broken)
+end
+
 broken = ARGV[0]+".old"
 File.rename(ARGV[0], broken)
 
