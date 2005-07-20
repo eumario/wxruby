@@ -1273,6 +1273,8 @@ extern "C" void InitializeOtherModules()
     Init_wxRubyConstants();
     extern void Init_wxFunctions();
     Init_wxFunctions();
+    extern void Init_wxXrc();
+    Init_wxXrc();
     extern void Init_wxMac();
     Init_wxMac();
 }
