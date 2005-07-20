@@ -1,9 +1,9 @@
 README for wxruby-swig
 Version 0.0.20-pre
 
-This is a very early release of a swig-based version 
-of wxRuby. It can run the "minimal" sample. It only 
-supports about 40 classes, compared to 139 in wxRuby 0.3, 
+This is a a swig-based version of wxRuby, a library 
+that allows Ruby programs to use the wxWidgets GUI toolkit. 
+It now supports about 120 classes, compared to 139 in wxRuby 0.3, 
 and over 300 in all of wxWidgets.
 
 It is released under a permissive MIT-style license.
@@ -31,14 +31,12 @@ WHATS NEW:
 
 REQUIREMENTS:
 
-- wxWindows 2.4 SDK
+- wxWidgets 2.5 or 2.6 SDK
 - rake (http://rake.rubyforge.org/)
 - OPTIONAL: SWIG 1.3.22 or later
   Swig'd .cpp and .h files are included in this package, 
-  so you don't actually need SWIG.
-  Note: If you use SWIG, it *MUST* be 1.3.22 or later,
-  which includes the patch to create directors for 
-  classes with virtual destructors but no virtual methods.
+  so you don't actually need SWIG. If you use SWIG, it 
+  *MUST* be 1.3.22 or later.
 
 
 INSTALLATION:
@@ -84,15 +82,26 @@ only need to set one or more of the following variables:
 
 TESTING:
 
-NOTE: For now, you must require 'wx' instead of 'wxruby'
-in any apps. This allows you to have the real wxRuby 
-and this wxRuby-SWIG on your system at the same time.
+To use wxruby-swig in your app, use:
+  require 'wx'
 
-Very few classes are supported, but each class supports 
-almost all of the available methods. You can try the samples:
-  ruby samples/test.rb
-  ruby samples/minimal/nothing.rb
-  ruby samples/minimal/minimal.rb
+This has changed from non-SWIG versions of wxruby, 
+to avoid conflicts and to allows you to have both versions 
+of wxruby on your system at the same time.
+
+Several samples are available:
+	samples/calendar/calendar.rb
+	samples/test.rb
+	samples/caret/caret.rb
+	samples/controls/controls.rb
+	samples/controls/get_item_sample.rb
+	samples/dialogs/dialogs.rb
+	samples/etc/choice.rb
+	samples/images/images.rb
+	samples/mdi/mdi.rb
+	samples/minimal/minimal.rb
+	samples/minimal/nothing.rb
+	samples/minimal/text.rb
   
 
 
@@ -107,16 +116,45 @@ NOTES:
   rather than a format string followed by additional values 
   to be inserted.
 - The following classes are supported:
-    App.i               CheckBox.i          Frame.i       Size.i
-    Bitmap.i            Choice.i            GDIObject.i   Sizer.i
-    BitmapButton.i      CloseEvent.i        Icon.i        StaticText.i
-    BoxSizer.i          CommandEvent.i      Menu.i        UpdateUIEvent.i
-    Brush.i             Control.i           MenuBar.i     Window.i
-    Button.i            ControlWithItems.i  Object.i      WindowDC.i
-    CalendarCtrl.i      DC.i                PaintDC.i     
-    CalendarDateAttr.i  Dialog.i            PaintEvent.i
-    CalendarEvent.i     Event.i             Panel.i
-    Caret.i             EvtHandler.i        Point.i
+App.i                FontData.i                    Notebook.i
+ArtProvider.i        FontDialog.i                  NotebookSizer.i
+BitmapButton.i       Font.i                        NotifyEvent.i
+Bitmap.i             Frame.i                       Object.i
+BoxSizer.i           Gauge.i                       PaintDC.i
+Brush.i              GDIObject.i                   PaintEvent.i
+BusyCursor.i         GridCellBoolEditor.i          Panel.i
+BusyInfo.i           GridCellChoiceEditor.i        Pen.i
+Button.i             GridCellEditor.i              Point.i
+CalendarCtrl.i       GridCellFloatEditor.i         RadioBox.i
+CalendarDateAttr.i   GridCellNumberEditor.i        RadioButton.i
+CalendarEvent.i      GridCellTextEditor.i          ScrolledWindow.i
+Caret.i              GridEvent.i                   SingleChoiceDialog.i
+CheckBox.i           Grid.i                        SizeEvent.i
+CheckListBox.i       GridRangeSelectEvent.i        Size.i
+Choice.i             GridSizeEvent.i               Sizer.i
+ClassInfo.i          GridSizer.i                   Slider.i
+ClientDC.i           Icon.i                        SpinButton.i
+CloseEvent.i         IdleEvent.i                   SpinCtrl.i
+ColourData.i         Image.i                       SpinEvent.i
+ColourDialog.i       ImageList.i                   SplitterEvent.i
+Colour.i             include                       StaticBitmap.i
+ComboBox.i           IndividualLayoutConstraint.i  StaticBox.i
+CommandEvent.i       KeyEvent.i                    StaticBoxSizer.i
+Control.i            LayoutConstraints.i           StaticLine.i
+ControlWithItems.i   ListBox.i                     StaticText.i
+Cursor.i             ListCtrl.i                    StatusBar.i
+CVS                  Log.i                         TextCtrl.i
+DC.i                 LogTextCtrl.i                 TextEntryDialog.i
+Dialog.i             Mask.i                        TipProvider.i
+DirDialog.i          MDIChildFrame.i               TipWindow.i
+Event.i              MDIParentFrame.i              ToggleButton.i
+EvtHandler.i         MemoryDC.i                    ToolBar.i
+FileDialog.i         MenuBar.i                     TreeEvent.i
+FindDialogEvent.i    Menu.i                        UpdateUIEvent.i
+FindReplaceData.i    MessageDialog.i               WindowDC.i
+FindReplaceDialog.i  MouseEvent.i                  WindowDisabler.i
+FlexGridSizer.i      MoveEvent.i                   Window.i
+FocusEvent.i         NotebookEvent.i
 
   
 
