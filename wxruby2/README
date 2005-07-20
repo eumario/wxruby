@@ -23,6 +23,7 @@ WHATS NEW:
   not in any other 8-bit encoding.
 - Integrated several .h file patches from Sean Long for 
   compatiblity with wx 2.6
+- XRC support is now automatic, not optional
 
 
 REQUIREMENTS:
