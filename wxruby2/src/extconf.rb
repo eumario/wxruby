@@ -50,11 +50,12 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
       $LDFLAGS += " -lwx_mac_xrc-2.4 "
     end
 
-elsif have_library("kernel32")
+# have_library("kernel32") does not work on XP Pro (don't know about other Windows systems)
+#elsif have_library("kernel32")
+else
     # native Windows - requires a static build of wxWindows
-    $DEBUG = true
     $WXDIR=ENV['WXWIN']
-    $WXVERSION = '24'
+    $WXVERSION = '26'
     if $DEBUG
 	$DEBUGPOSTFIX='d'
     else
@@ -62,24 +63,41 @@ elsif have_library("kernel32")
     end
     $WXSRC="#$WXDIR/src/msw"
     $WXINC="#$WXDIR/include"
-    $WXLIBDIR="#$WXDIR/lib"
-    $INCTEMP="#$WXDIR/lib/msw#{$DEBUGPOSTFIX}"
-    $WXLIB="#$WXLIBDIR/wxmsw#{$DEBUGPOSTFIX}.lib"
-    $CFLAGS += " -I#$WXINC -I#$INCTEMP #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
+
+    $INCTEMP="#$WXDIR/lib/vc_lib/msw#{$DEBUGPOSTFIX}"
+
+    $CFLAGS += " -I#$WXINC -I#$INCTEMP #$WXCONTRIBINC #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
     $CFLAGS += " -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /D__WINDOWS__ -D__WXMSW__ /EHsc /GR -I.."
     $libs += " gdi32.lib winspool.lib comdlg32.lib shell32.lib ole32.lib oleaut32.lib"
     $libs += " uuid.lib odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib winmm.lib"
+    
+    $WXLIBDIR="#$WXDIR/lib/vc_lib"
+    $WXLIB="#$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}.lib"       
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_net.lib"
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_odbc.lib"
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_xml.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_adv.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_core.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_dbgrid.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_html.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_media.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_xrc.lib"
+    $WXLIB += " #$WXLIBDIR/wxexpat#{$DEBUGPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxjpeg#{$DEBUGPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxexpat#{$DEBUGPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxpng#{$DEBUGPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxregex#{$DEBUGPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxtiff#{$DEBUGPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxzlib#{$DEBUGPOSTFIX}.lib"      
     if $DEBUG
 	$CFLAGS = $CFLAGS.gsub(/-MD/," /MDd");
 	$CFLAGS += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1"
-	$libs += " #$WXLIBDIR/pngd.lib #$WXLIBDIR/zlibd.lib #$WXLIBDIR/jpegd.lib"
-	$libs += " #$WXLIBDIR/tiffd.lib #$WXLIB"
     else
 	$CFLAGS += " -DNDEBUG"
-	$libs += " #$WXLIBDIR/png.lib #$WXLIBDIR/zlib.lib #$WXLIBDIR/jpeg.lib"
-	$libs += " #$WXLIBDIR/tiff.lib #$WXLIB"
     end
-    #$objs.push("wx.res")
+    $libs += " #$WXLIB"
+
 
 end
 
