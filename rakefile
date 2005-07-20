@@ -50,9 +50,7 @@ $target_lib = File.join($dest_dir, $dl_lib)
 # public tasks
 begin
     create_internal_non_swig_tasks
-    if(ENV['WXRUBY_SWIG'])
-        create_internal_swig_tasks
-    end
+    create_internal_swig_tasks
     
     task :default => :link
     task :link => $target_lib

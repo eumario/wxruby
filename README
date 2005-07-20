@@ -24,6 +24,9 @@ WHATS NEW:
 - Integrated several .h file patches from Sean Long for 
   compatiblity with wx 2.6
 - XRC support is now automatic, not optional
+- The WXRUBY_SWIG environment variable is no longer used.
+  If any swig class files are newer than the corresponding 
+  generated .cpp/.h files, then swig will be launched.
 
 
 REQUIREMENTS:
@@ -48,11 +51,6 @@ If you intend to perform the SWIG step yourself, you
 will need SWIG 1.3.22 or later. Earlier versions will 
 not work correctly.
 
-To use SWIG, you will also need to set the following 
-environment variable on your system: WXRUBY_SWIG=YES
-
-Otherwise, the rakefile will trust that the src/ 
-directory already contains all the swigged output.
   
 
 
