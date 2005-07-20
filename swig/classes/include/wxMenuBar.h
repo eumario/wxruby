@@ -79,7 +79,7 @@ menu label ( ) indifferently.
 	 * \param const wxString&   
 	*/
 
-  int FindMenu(const wxString&  title ) const;
+  int FindMenu(const wxString&  title ) ;//const; (the const messes up the SWIG code generation)
 	/**
 	 * \brief Finds the menu item id for a menu name/menu item string pair. 
 	 * \param const wxString&   

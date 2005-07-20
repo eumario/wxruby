@@ -58,8 +58,13 @@ for details.
 	 * \param long  
 	 * \param const wxString&   
 	*/
+    bool Create(wxWindow *parent,
+                wxWindowID winid,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                long style = wxScrolledWindowStyle,
+                const wxString& name = wxPanelNameStr);
 
-  bool Create(wxWindow*  parent , wxWindowID  id = -1, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxHSCROLL, const wxString&  name = wxT("scrolledWindow")) ;
 	/**
 	 * \brief Enable or disable physical scrolling in the given direction. Physical
 scrolling is the physical transfer of bits up or down the

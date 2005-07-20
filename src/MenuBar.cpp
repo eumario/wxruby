@@ -923,7 +923,7 @@ _wrap_wxMenuBar_FindMenu(int argc, VALUE *argv, VALUE self) {
     {
         arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
-    result = (int)((wxMenuBar const *)arg1)->FindMenu((wxString const &)*arg2);
+    result = (int)(arg1)->FindMenu((wxString const &)*arg2);
     
     vresult = INT2NUM(result);
     return vresult;

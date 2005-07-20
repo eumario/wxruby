@@ -999,20 +999,18 @@ _wrap_wxStatusBar_Create(int argc, VALUE *argv, VALUE self) {
     wxStatusBar *arg1 = (wxStatusBar *) 0 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
-    long arg4 = (long) wxST_SIZEGRIP ;
-    wxString const &arg5_defvalue = wxT("statusBar") ;
+    long arg4 ;
+    wxString const &arg5_defvalue = wxPanelNameStr ;
     wxString *arg5 = (wxString *) &arg5_defvalue ;
     bool result;
     VALUE vresult = Qnil;
     
-    if ((argc < 2) || (argc > 4))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    if ((argc < 3) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxStatusBar, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
-    if (argc > 2) {
-        arg4 = NUM2LONG(argv[2]);
-    }
+    arg4 = NUM2LONG(argv[2]);
     if (argc > 3) {
         {
             arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);

@@ -775,14 +775,11 @@ static VALUE
 _wrap_wxTipProvider_GetTip(int argc, VALUE *argv, VALUE self) {
     wxTipProvider *arg1 = (wxTipProvider *) 0 ;
     wxString result;
-    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxTipProvider, 1);
-    director = dynamic_cast<Swig::Director *>(arg1);
-    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     result = (arg1)->GetTip();
     
     {

@@ -522,8 +522,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxArrayInt swig_types[2] 
 #define  SWIGTYPE_p_wxListBox swig_types[3] 
 #define  SWIGTYPE_p_wxValidator swig_types[4] 
-#define  SWIGTYPE_p_p_void swig_types[5] 
-#define  SWIGTYPE_p_wxArrayString swig_types[6] 
+#define  SWIGTYPE_p_wxArrayString swig_types[5] 
+#define  SWIGTYPE_p_p_void swig_types[6] 
 #define  SWIGTYPE_p_wxPoint swig_types[7] 
 static swig_type_info *swig_types[9];
 
@@ -999,47 +999,118 @@ _wrap_wxListBox_GetSelections(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxListBox_InsertItems(int argc, VALUE *argv, VALUE self) {
+_wrap_wxListBox_InsertItems__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxListBox *arg1 = (wxListBox *) 0 ;
     int arg2 ;
-    wxString *arg3 = (wxString *) (wxString *)NULL ;
-    int arg4 = (int) 0 ;
-    wxString *arr2 ;
+    wxString *arg3 = (wxString *) 0 ;
+    int arg4 ;
     
-    {
-        arg2 = 0;
-        arg3 = NULL;
-    }
-    if ((argc < 0) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
-    if (argc > 0) {
+    arg2 = NUM2INT(argv[0]);
+    {
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
+    }
+    arg4 = NUM2INT(argv[2]);
+    (arg1)->InsertItems(arg2,(wxString const *)arg3,arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxListBox_InsertItems__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxListBox *arg1 = (wxListBox *) 0 ;
+    wxArrayString *arg2 = 0 ;
+    int arg3 ;
+    wxArrayString tmp2 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
+    {
+        if ((argv[0] = Qnil) || (TYPE(argv[0]) != T_ARRAY))
         {
-            if ((argv[0] == Qnil) || (TYPE(argv[0]) != T_ARRAY))
+            arg2 = &tmp2;
+        }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                arg2 = 0;
-                arg3 = NULL;
+                wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i)));
+                tmp2.Add(item);
             }
-            else
+            
+            arg2 = &tmp2;
+        }
+        
+    }
+    arg3 = NUM2INT(argv[1]);
+    (arg1)->InsertItems((wxArrayString const &)*arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_wxListBox_InsertItems(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[5];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxListBox, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
             {
-                arr2 = new wxString[RARRAY(argv[0])->len];
-                for (int i = 0; i < RARRAY(argv[0])->len; i++)
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxArrayString, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
                 {
-                    arr2[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i)));
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
-                arg2 = RARRAY(argv[0])->len;
-                arg3 = arr2;
+                if (_v) {
+                    return _wrap_wxListBox_InsertItems__SWIG_1(nargs, args, self);
+                }
             }
         }
     }
-    if (argc > 1) {
-        arg4 = NUM2INT(argv[1]);
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxListBox, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = (TYPE(argv[2]) == T_STRING);
+                }
+                if (_v) {
+                    {
+                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxListBox_InsertItems__SWIG_0(nargs, args, self);
+                    }
+                }
+            }
+        }
     }
-    (arg1)->InsertItems(arg2,(wxString const (*))arg3,arg4);
     
-    {
-        if (arg3 != NULL) delete [] arg3;
-    }
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxListBox_InsertItems'");
     return Qnil;
 }
 
@@ -1489,8 +1560,8 @@ static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0
 static swig_type_info _swigt__p_wxArrayInt[] = {{"_p_wxArrayInt", 0, "wxArrayInt *", 0, 0, 0, 0},{"_p_wxArrayInt", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxListBox[] = {{"_p_wxListBox", 0, "wxListBox *", 0, 0, 0, 0},{"_p_wxListBox", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxValidator[] = {{"_p_wxValidator", 0, "wxValidator *", 0, 0, 0, 0},{"_p_wxValidator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_p_void[] = {{"_p_p_void", 0, "void **", 0, 0, 0, 0},{"_p_p_void", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxArrayString[] = {{"_p_wxArrayString", 0, "wxArrayString *", 0, 0, 0, 0},{"_p_wxArrayString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_p_void[] = {{"_p_p_void", 0, "void **", 0, 0, 0, 0},{"_p_p_void", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
@@ -1499,8 +1570,8 @@ _swigt__p_wxWindow,
 _swigt__p_wxArrayInt, 
 _swigt__p_wxListBox, 
 _swigt__p_wxValidator, 
-_swigt__p_p_void, 
 _swigt__p_wxArrayString, 
+_swigt__p_p_void, 
 _swigt__p_wxPoint, 
 0
 };

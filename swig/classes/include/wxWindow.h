@@ -1045,8 +1045,14 @@ If a pair of values is not set (or set to -1), the default values will be used.
 	 * \param int  
 	 * \param int  
 	*/
+    virtual void SetSizeHints( int minW, int minH,
+                               int maxW = wxDefaultCoord, int maxH = wxDefaultCoord,
+                               int incW = wxDefaultCoord, int incH = wxDefaultCoord );
 
-  virtual void SetSizeHints(int minW = -1, int minH = -1, int maxW = -1, int maxH = -1, int incW = -1, int incH = -1) ;
+    void SetSizeHints( const wxSize& minSize,
+                       const wxSize& maxSize=wxDefaultSize,
+                       const wxSize& incSize=wxDefaultSize);
+
 	/**
 	 * \brief Sets the window to have the given layout sizer. The window
 will then own the object, and will take care of its deletion.

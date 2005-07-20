@@ -1797,18 +1797,16 @@ _wrap_wxDC_DrawRoundedRectangle(int argc, VALUE *argv, VALUE self) {
     wxCoord arg3 ;
     wxCoord arg4 ;
     wxCoord arg5 ;
-    double arg6 = (double) 20 ;
+    double arg6 ;
     
-    if ((argc < 4) || (argc > 5))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    if ((argc < 5) || (argc > 5))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxDC, 1);
     arg2 = NUM2INT(argv[0]);
     arg3 = NUM2INT(argv[1]);
     arg4 = NUM2INT(argv[2]);
     arg5 = NUM2INT(argv[3]);
-    if (argc > 4) {
-        arg6 = (double) NUM2DBL(argv[4]);
-    }
+    arg6 = (double) NUM2DBL(argv[4]);
     (arg1)->DrawRoundedRectangle(arg2,arg3,arg4,arg5,arg6);
     
     return Qnil;

@@ -361,7 +361,7 @@ the rectangle.
 	 * \param double  
 	*/
 
-  void DrawRoundedRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double radius = 20)  = 0;
+  void DrawRoundedRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double radius )  = 0;
 	/**
 	 * \brief Draws a spline between all given control points, using the current
 pen.  Doesn't delete the wxList and contents. The spline is drawn

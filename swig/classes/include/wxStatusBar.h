@@ -37,7 +37,10 @@ See   for details.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , long style = wxST_SIZEGRIP, const wxString&  name = wxT("statusBar")) ;
+
+  bool Create(wxWindow *parent, wxWindowID id, long style, const wxString& name = wxPanelNameStr);
+
+ # bool Create(wxWindow*  parent , wxWindowID  id , long style = wxST_SIZEGRIP, const wxString&  name = wxT("statusBar")) ;
 	/**
 	 * \brief  
 	 * \param int  
