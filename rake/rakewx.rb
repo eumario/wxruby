@@ -157,7 +157,6 @@ def create_normal_swig_task(base_name)
         do_swig(swig_file, cpp_file, $swig_options)
         post_process(cpp_file, "fixplatform.rb")
         post_process(cpp_file, "fixmodule.rb")
-        post_process(cpp_file, "fixswigedcode.rb")
 		post_process(cpp_file, "fixdeleting.rb")
     end
 end
