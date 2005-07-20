@@ -924,24 +924,22 @@ static VALUE
 _wrap_wxScrolledWindow_Create(int argc, VALUE *argv, VALUE self) {
     wxScrolledWindow *arg1 = (wxScrolledWindow *) 0 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindowID arg3 = (wxWindowID) -1 ;
+    wxWindowID arg3 ;
     wxPoint const &arg4_defvalue = wxDefaultPosition ;
     wxPoint *arg4 = (wxPoint *) &arg4_defvalue ;
     wxSize const &arg5_defvalue = wxDefaultSize ;
     wxSize *arg5 = (wxSize *) &arg5_defvalue ;
-    long arg6 = (long) wxHSCROLL ;
-    wxString const &arg7_defvalue = wxT("scrolledWindow") ;
+    long arg6 = (long) wxScrolledWindowStyle ;
+    wxString const &arg7_defvalue = wxPanelNameStr ;
     wxString *arg7 = (wxString *) &arg7_defvalue ;
     bool result;
     VALUE vresult = Qnil;
     
-    if ((argc < 1) || (argc > 6))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 2) || (argc > 6))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxScrolledWindow, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    if (argc > 1) {
-        arg3 = NUM2INT(argv[1]);
-    }
+    arg3 = NUM2INT(argv[1]);
     if (argc > 2) {
         SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
     }

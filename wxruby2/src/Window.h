@@ -38,7 +38,7 @@ public:
     virtual bool IsRetained() const;
     virtual wxWindow *GetParent() const;
     virtual void SetVirtualSizeHints(int minW, int minH, int maxW = -1, int maxH = -1);
-    virtual void SetSizeHints(int minW = -1, int minH = -1, int maxW = -1, int maxH = -1, int incW = -1, int incH = -1);
+    virtual void SetSizeHints(int minW, int minH, int maxW = wxDefaultCoord, int maxH = wxDefaultCoord, int incW = wxDefaultCoord, int incH = wxDefaultCoord);
     virtual void SetSize(int width, int height);
     virtual void SetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO);
     virtual void SetClientSize(int width, int height);

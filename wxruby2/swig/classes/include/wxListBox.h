@@ -80,7 +80,8 @@ and  .}
 	 * \param int  
 	*/
 
-  void InsertItems(int  n, const wxString  choices []= NULL, int  pos = 0);
+  void InsertItems(int nItems, const wxString *items, int pos);
+  void InsertItems(const wxArrayString& items, int pos);
 	/**
 	 * \brief Determines whether an item is selected. 
 	 * \param int  

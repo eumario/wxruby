@@ -4816,25 +4816,21 @@ static VALUE _wrap_wxWindow_SetSize(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
-_wrap_wxWindow_SetSizeHints(int argc, VALUE *argv, VALUE self) {
+_wrap_wxWindow_SetSizeHints__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
-    int arg2 = (int) -1 ;
-    int arg3 = (int) -1 ;
-    int arg4 = (int) -1 ;
-    int arg5 = (int) -1 ;
-    int arg6 = (int) -1 ;
-    int arg7 = (int) -1 ;
+    int arg2 ;
+    int arg3 ;
+    int arg4 = (int) wxDefaultCoord ;
+    int arg5 = (int) wxDefaultCoord ;
+    int arg6 = (int) wxDefaultCoord ;
+    int arg7 = (int) wxDefaultCoord ;
     Swig::Director *director = 0;
     
-    if ((argc < 0) || (argc > 6))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 2) || (argc > 6))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    if (argc > 0) {
-        arg2 = NUM2INT(argv[0]);
-    }
-    if (argc > 1) {
-        arg3 = NUM2INT(argv[1]);
-    }
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
     if (argc > 2) {
         arg4 = NUM2INT(argv[2]);
     }
@@ -4851,6 +4847,133 @@ _wrap_wxWindow_SetSizeHints(int argc, VALUE *argv, VALUE self) {
     if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->SetSizeHints(arg2,arg3,arg4,arg5,arg6,arg7);
     
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxWindow_SetSizeHints__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxSize *arg2 = 0 ;
+    wxSize const &arg3_defvalue = wxDefaultSize ;
+    wxSize *arg3 = (wxSize *) &arg3_defvalue ;
+    wxSize const &arg4_defvalue = wxDefaultSize ;
+    wxSize *arg4 = (wxSize *) &arg4_defvalue ;
+    
+    if ((argc < 1) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSize, 1); if (arg2 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if (argc > 1) {
+        SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxSize, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 2) {
+        SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxSize, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    (arg1)->SetSizeHints((wxSize const &)*arg2,(wxSize const &)*arg3,(wxSize const &)*arg4);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_wxWindow_SetSizeHints(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[8];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 7); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if ((argc >= 2) && (argc <= 4)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxWindow_SetSizeHints__SWIG_1(nargs, args, self);
+                }
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_wxWindow_SetSizeHints__SWIG_1(nargs, args, self);
+                    }
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxWindow_SetSizeHints__SWIG_1(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if ((argc >= 3) && (argc <= 7)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_wxWindow_SetSizeHints__SWIG_0(nargs, args, self);
+                    }
+                    {
+                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        if (argc <= 4) {
+                            return _wrap_wxWindow_SetSizeHints__SWIG_0(nargs, args, self);
+                        }
+                        {
+                            _v = ((TYPE(argv[4]) == T_FIXNUM) || (TYPE(argv[4]) == T_BIGNUM)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            if (argc <= 5) {
+                                return _wrap_wxWindow_SetSizeHints__SWIG_0(nargs, args, self);
+                            }
+                            {
+                                _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_wxWindow_SetSizeHints__SWIG_0(nargs, args, self);
+                                }
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    return _wrap_wxWindow_SetSizeHints__SWIG_0(nargs, args, self);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_SetSizeHints'");
     return Qnil;
 }
 

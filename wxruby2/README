@@ -21,6 +21,8 @@ WHATS NEW:
   wxRuby were built. HOWEVER, currently all strings passed 
   into or returned out of wxRuby must be in ASCII or UTF-8,
   not in any other 8-bit encoding.
+- Integrated several .h file patches from Sean Long for 
+  compatiblity with wx 2.6
 
 
 REQUIREMENTS:

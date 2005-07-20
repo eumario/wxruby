@@ -19,7 +19,7 @@ public:
 pure virtual, it should be implemented in the derived classes. 
 	*/
 
-  virtual wxString GetTip()=0;
+  /*virtual*/ wxString GetTip()=0;
 	/**
 	 * \brief Returns a modified tip. This function will be called immediately after read,
 and before being check whether it is a comment, an empty string or a string 
