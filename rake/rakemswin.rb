@@ -12,6 +12,7 @@ include Config
 
 $cpp = "cl.exe"
 $ld = "link"
+$link_output_flag = "/dll /out:"
 
 $DEBUG = true
 

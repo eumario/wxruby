@@ -221,15 +221,10 @@ def create_obj_tasks
 end
 
 def create_link_task
-    if ($mswin)
-      out_arg = "/dll /out:"
-    else
-      out_arg = "-o "
-    end
     file($target_lib => all_obj_files) do |t|
         objs = $extra_objs + " " + all_obj_files.join(' ')
         force_mkdir($dest_dir)
-        sh "#{$ld} #{$ldflags} #{objs} #{$libs} #{out_arg}#{t.name}"
+        sh "#{$ld} #{$ldflags} #{objs} #{$libs} #{$link_output_flag}#{t.name}"
     end
 end
 
