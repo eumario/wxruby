@@ -519,13 +519,12 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 #define  SWIGTYPE_p_wxIcon swig_types[0] 
 #define  SWIGTYPE_p_wxImage swig_types[1] 
-#define  SWIGTYPE_p_wxBitmapType swig_types[2] 
-#define  SWIGTYPE_p_p_char swig_types[3] 
-#define  SWIGTYPE_p_wxPalette swig_types[4] 
-#define  SWIGTYPE_p_wxBitmap swig_types[5] 
-#define  SWIGTYPE_p_wxMask swig_types[6] 
-#define  SWIGTYPE_p_wxRect swig_types[7] 
-static swig_type_info *swig_types[9];
+#define  SWIGTYPE_p_p_char swig_types[2] 
+#define  SWIGTYPE_p_wxPalette swig_types[3] 
+#define  SWIGTYPE_p_wxBitmap swig_types[4] 
+#define  SWIGTYPE_p_wxMask swig_types[5] 
+#define  SWIGTYPE_p_wxRect swig_types[6] 
+static swig_type_info *swig_types[8];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -837,7 +836,7 @@ _wrap_new_wxBitmap__SWIG_3(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_new_wxBitmap__SWIG_4(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
-    wxBitmapType arg2 = (wxBitmapType) wxBITMAP_TYPE_XPM ;
+    int arg2 = (int) wxBITMAP_TYPE_XPM ;
     wxBitmap *result;
     
     if ((argc < 1) || (argc > 2))
@@ -846,13 +845,9 @@ _wrap_new_wxBitmap__SWIG_4(int argc, VALUE *argv, VALUE self) {
         arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
-        {
-            wxBitmapType * ptr;
-            SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxBitmapType, 1);
-            if (ptr) arg2 = *ptr;
-        }
+        arg2 = (int) NUM2INT(argv[1]);
     }
-    result = (wxBitmap *)new wxBitmap(*arg1,arg2);
+    result = (wxBitmap *)new wxBitmap(*arg1,(wxBitmapType )arg2);
     DATA_PTR(self) = result;
     return self;
 }
@@ -953,8 +948,7 @@ static VALUE _wrap_new_wxBitmap(int nargs, VALUE *args, VALUE self) {
                 return _wrap_new_wxBitmap__SWIG_4(nargs, args, self);
             }
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxBitmapType, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 return _wrap_new_wxBitmap__SWIG_4(nargs, args, self);
@@ -1164,7 +1158,7 @@ static VALUE
 _wrap_wxBitmap_LoadFile(int argc, VALUE *argv, VALUE self) {
     wxBitmap *arg1 = (wxBitmap *) 0 ;
     wxString *arg2 = 0 ;
-    wxBitmapType arg3 ;
+    int arg3 ;
     bool result;
     VALUE vresult = Qnil;
     
@@ -1174,12 +1168,8 @@ _wrap_wxBitmap_LoadFile(int argc, VALUE *argv, VALUE self) {
     {
         arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
-    {
-        wxBitmapType * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxBitmapType, 1);
-        if (ptr) arg3 = *ptr;
-    }
-    result = (bool)(arg1)->LoadFile((wxString const &)*arg2,arg3);
+    arg3 = (int) NUM2INT(argv[1]);
+    result = (bool)(arg1)->LoadFile((wxString const &)*arg2,(wxBitmapType )arg3);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -1206,7 +1196,7 @@ static VALUE
 _wrap_wxBitmap_SaveFile(int argc, VALUE *argv, VALUE self) {
     wxBitmap *arg1 = (wxBitmap *) 0 ;
     wxString *arg2 = 0 ;
-    wxBitmapType arg3 ;
+    int arg3 ;
     wxPalette *arg4 = (wxPalette *) NULL ;
     bool result;
     VALUE vresult = Qnil;
@@ -1217,15 +1207,11 @@ _wrap_wxBitmap_SaveFile(int argc, VALUE *argv, VALUE self) {
     {
         arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
-    {
-        wxBitmapType * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxBitmapType, 1);
-        if (ptr) arg3 = *ptr;
-    }
+    arg3 = (int) NUM2INT(argv[1]);
     if (argc > 2) {
         SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxPalette, 1);
     }
-    result = (bool)(arg1)->SaveFile((wxString const &)*arg2,arg3,arg4);
+    result = (bool)(arg1)->SaveFile((wxString const &)*arg2,(wxBitmapType )arg3,arg4);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -1297,7 +1283,6 @@ _wrap_wxBitmap_SetWidth(int argc, VALUE *argv, VALUE self) {
 
 static swig_type_info _swigt__p_wxIcon[] = {{"_p_wxIcon", 0, "wxIcon *", 0, 0, 0, 0},{"_p_wxIcon", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxImage[] = {{"_p_wxImage", 0, "wxImage *", 0, 0, 0, 0},{"_p_wxImage", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxBitmapType[] = {{"_p_wxBitmapType", 0, "wxBitmapType *", 0, 0, 0, 0},{"_p_wxBitmapType", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_p_char[] = {{"_p_p_char", 0, "char **", 0, 0, 0, 0},{"_p_p_char", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPalette[] = {{"_p_wxPalette", 0, "wxPalette *", 0, 0, 0, 0},{"_p_wxPalette", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxBitmap[] = {{"_p_wxBitmap", 0, "wxBitmap *", 0, 0, 0, 0},{"_p_wxBitmap", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -1307,7 +1292,6 @@ static swig_type_info _swigt__p_wxRect[] = {{"_p_wxRect", 0, "wxRect *", 0, 0, 0
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxIcon, 
 _swigt__p_wxImage, 
-_swigt__p_wxBitmapType, 
 _swigt__p_p_char, 
 _swigt__p_wxPalette, 
 _swigt__p_wxBitmap, 

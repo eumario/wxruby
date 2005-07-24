@@ -518,9 +518,8 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxIcon swig_types[0] 
-#define  SWIGTYPE_p_wxBitmapType swig_types[1] 
-#define  SWIGTYPE_p_wxBitmap swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxBitmap swig_types[1] 
+static swig_type_info *swig_types[3];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -763,7 +762,7 @@ namespace Swig {
 
 #include "Icon.h"
 
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, wxString const &name, long type, int desiredWidth, int desiredHeight, bool disown): wxIcon(name, type, desiredWidth, desiredHeight), Swig::Director(self, disown) {
+SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, wxString const &name, wxBitmapType type, int desiredWidth, int desiredHeight, bool disown): wxIcon(name, type, desiredWidth, desiredHeight), Swig::Director(self, disown) {
     
 }
 
@@ -790,7 +789,7 @@ static VALUE
 _wrap_new_wxIcon(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxString *arg2 = 0 ;
-    long arg3 = (long) wxBITMAP_TYPE_ANY ;
+    int arg3 = (int) wxBITMAP_TYPE_ANY ;
     int arg4 = (int) -1 ;
     int arg5 = (int) -1 ;
     wxIcon *result;
@@ -802,7 +801,7 @@ _wrap_new_wxIcon(int argc, VALUE *argv, VALUE self) {
         arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     if (argc > 1) {
-        arg3 = NUM2LONG(argv[1]);
+        arg3 = (int) NUM2INT(argv[1]);
     }
     if (argc > 2) {
         arg4 = NUM2INT(argv[2]);
@@ -812,10 +811,10 @@ _wrap_new_wxIcon(int argc, VALUE *argv, VALUE self) {
     }
     if ( CLASS_OF(self) != Qnil ) {
         /* subclassed */
-        result = (wxIcon *)new SwigDirector_wxIcon(arg1,(wxString const &)*arg2,arg3,arg4,arg5,false);
+        result = (wxIcon *)new SwigDirector_wxIcon(arg1,(wxString const &)*arg2,(wxBitmapType )arg3,arg4,arg5,false);
         
     } else {
-        result = (wxIcon *)new wxIcon((wxString const &)*arg2,arg3,arg4,arg5);
+        result = (wxIcon *)new wxIcon((wxString const &)*arg2,(wxBitmapType )arg3,arg4,arg5);
         
     }
     DATA_PTR(self) = result;
@@ -909,7 +908,7 @@ static VALUE
 _wrap_wxIcon_LoadFile(int argc, VALUE *argv, VALUE self) {
     wxIcon *arg1 = (wxIcon *) 0 ;
     wxString *arg2 = 0 ;
-    wxBitmapType arg3 ;
+    int arg3 ;
     bool result;
     VALUE vresult = Qnil;
     
@@ -919,12 +918,8 @@ _wrap_wxIcon_LoadFile(int argc, VALUE *argv, VALUE self) {
     {
         arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
-    {
-        wxBitmapType * ptr;
-        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxBitmapType, 1);
-        if (ptr) arg3 = *ptr;
-    }
-    result = (bool)(arg1)->LoadFile((wxString const &)*arg2,arg3);
+    arg3 = (int) NUM2INT(argv[1]);
+    result = (bool)(arg1)->LoadFile((wxString const &)*arg2,(wxBitmapType )arg3);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -1015,12 +1010,10 @@ static void *_p_wxIconTo_p_wxBitmap(void *x) {
     return (void *)((wxBitmap *)  ((wxIcon *) x));
 }
 static swig_type_info _swigt__p_wxIcon[] = {{"_p_wxIcon", 0, "wxIcon *", 0, 0, 0, 0},{"_p_wxIcon", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxBitmapType[] = {{"_p_wxBitmapType", 0, "wxBitmapType *", 0, 0, 0, 0},{"_p_wxBitmapType", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxBitmap[] = {{"_p_wxBitmap", 0, "wxBitmap *", 0, 0, 0, 0},{"_p_wxIcon", _p_wxIconTo_p_wxBitmap, 0, 0, 0, 0, 0},{"_p_wxBitmap", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxIcon, 
-_swigt__p_wxBitmapType, 
 _swigt__p_wxBitmap, 
 0
 };

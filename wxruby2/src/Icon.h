@@ -17,7 +17,7 @@ class Swig::Director;
 class SwigDirector_wxIcon : public wxIcon, public Swig::Director {
 
 public:
-    SwigDirector_wxIcon(VALUE self, wxString const &name, long type = wxBITMAP_TYPE_ANY, int desiredWidth = -1, int desiredHeight = -1, bool disown = false);
+    SwigDirector_wxIcon(VALUE self, wxString const &name, wxBitmapType type = wxBITMAP_TYPE_ANY, int desiredWidth = -1, int desiredHeight = -1, bool disown = false);
 };
 
 
