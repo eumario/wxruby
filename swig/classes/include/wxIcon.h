@@ -66,7 +66,7 @@ public:
 	 * \param int  
 	*/
 
-  wxIcon(const wxString&  name , long  type = wxBITMAP_TYPE_ANY, int desiredWidth = -1, int desiredHeight = -1);
+  wxIcon(const wxString&  name , wxBitmapType  type = wxBITMAP_TYPE_ANY, int desiredWidth = -1, int desiredHeight = -1);
 	/**
 	 * \brief Loads an icon from the specified  . 
 	 * \param const wxIconLocation&   

@@ -9,3 +9,4 @@ typedef wxString wxArtClient;
 typedef int wxEventType;
 //typedef int wxEdge;
 //typedef int wxRelationship;
+enum wxBitmapType;
