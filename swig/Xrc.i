@@ -30,6 +30,6 @@ xrcid(VALUE self,VALUE str_id)
 
 
 %init %{
-    extern VALUE mWx;
-    rb_define_module_function(mWx, "xrcid", VALUEFUNC(xrcid), 1);
+    extern VALUE mWxruby2;
+    rb_define_module_function(mWxruby2, "xrcid", VALUEFUNC(xrcid), 1);
 %}

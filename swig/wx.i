@@ -2,7 +2,7 @@
 #   released under the wxWidgets license
 #   as part of the wxRuby project
 
-%module(directors="1") wx
+%module(directors="1") wxruby2
 
 %include "common.i"
 
@@ -64,6 +64,6 @@ void GcFreefunc(void *)
     InitializeOtherModules();
 %}
 
-#define VERSION_STRING "wxRuby-SWIG 0.0.3"
+#define VERSION_STRING "wxRuby2"
 
 int wxMessageBox(const wxString& message, const wxString& caption = wxT("Message"), int style = wxOK, wxWindow *parent = NULL, int x = -1, int y = -1);

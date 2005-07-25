@@ -527,7 +527,7 @@ static swig_type_info *swig_types[3];
 #define SWIG_name    "WxMoveEvent"
 
 static VALUE mWxMoveEvent;
-   extern VALUE mWx;
+   extern VALUE mWxruby2;
 
 static void SWIG_AsVal(VALUE obj, int *val)
 {
@@ -847,7 +847,7 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-mWxMoveEvent = mWx;
+mWxMoveEvent = mWxruby2;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);

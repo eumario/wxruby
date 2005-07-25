@@ -10,6 +10,8 @@
 
 require 'swig/classes/include/parents'
 
+$main_module = 'mWxruby2'
+
 broken = ARGV[0]+".old"
 File.rename(ARGV[0], broken)
 
@@ -21,7 +23,7 @@ File.open(ARGV[0], "w") do | out |
         if(line.index("static VALUE mWx"))
             this_module = line.split[2].gsub(';', '')
             #puts("module: " + this_module)
-            line += "   extern VALUE mWx;"
+            line += "   extern VALUE #{$main_module};"
         end
         if (line.index('swig_class cWx') and not line.index("extern"))
     		re = /cWx.*/
@@ -42,7 +44,7 @@ File.open(ARGV[0], "w") do | out |
             line = "//" + line
         end
         if(line.index("rb_define_module(\"Wx"))
-            line = "#{this_module} = mWx;"
+            line = "#{this_module} = #{$main_module};"
         end
         
         if(line.index("SWIGEXPORT(void) Init_"))

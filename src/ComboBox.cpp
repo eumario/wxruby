@@ -530,7 +530,7 @@ static swig_type_info *swig_types[6];
 #define SWIG_name    "WxComboBox"
 
 static VALUE mWxComboBox;
-   extern VALUE mWx;
+   extern VALUE mWxruby2;
 
 static void SWIG_AsVal(VALUE obj, int *val)
 {
@@ -1250,7 +1250,7 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-mWxComboBox = mWx;
+mWxComboBox = mWxruby2;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);

@@ -8,8 +8,8 @@
  * interface file instead. 
  * ----------------------------------------------------------------------------- */
 
-#ifndef SWIG_Wx_WRAP_H_
-#define SWIG_Wx_WRAP_H_
+#ifndef SWIG_Wxruby2_WRAP_H_
+#define SWIG_Wxruby2_WRAP_H_
 
 class Swig::Director;
 
