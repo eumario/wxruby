@@ -6,5 +6,6 @@
 %module(directors="1") wxListBox
 
 %ignore wxListBox::wxListBox();
+%ignore wxListBox::InsertItems(int nItems, const wxString *items, int pos);
 
 %include "include/wxListBox.h"

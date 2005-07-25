@@ -12,7 +12,7 @@ There are no binaries. You must build it from source.
 
 
 WHATS NEW:
-- Now target wxWidgets 2.6+
+- Now target wxWidgets 2.5+
 - wxWindows 2.4 is no longer supported. However, if you 
   are interested in maintaining (or reviving) 2.4 support, 
   it would make sense to have it in the same source tree.
@@ -27,6 +27,9 @@ WHATS NEW:
 - The WXRUBY_SWIG environment variable is no longer used.
   If any swig class files are newer than the corresponding 
   generated .cpp/.h files, then swig will be launched.
+- Match wxPython by replacing overloaded versions of Menu#append 
+  with Menu#append_item and Menu#append_menu 
+  
 
 
 REQUIREMENTS:

@@ -41,7 +41,7 @@ and recreation of internal data structures.
 	 * \param wxItemKind  
 	*/
 
-  void Append(int  id , const wxString&   item , const wxString&  helpString = wxT(""), wxItemKind kind = wxITEM_NORMAL) ;
+  wxMenuItem* Append(int itemid, const wxString& text, const wxString& help = wxEmptyString, wxItemKind kind = wxITEM_NORMAL);
 	/**
 	 * \brief Adds a pull-right submenu to the end of the menu. Append the submenu to the parent
 menu   you have added your menu items, or accelerators may not be
@@ -52,13 +52,13 @@ registered properly.
 	 * \param const wxString&   
 	*/
 
-  void Append(int  id , const wxString&   item , wxMenu * subMenu , const wxString&  helpString = wxT("")) ;
+  wxMenuItem* Append(int itemid, const wxString& text, wxMenu *submenu, const wxString& help = wxEmptyString);
 	/**
 	 * \brief  
 	 * \param wxMenuItem*  
 	*/
 
-  void Append(wxMenuItem*  menuItem ) ;
+  wxMenuItem* Append(wxMenuItem *item);
 	/**
 	 * \brief Adds a checkable item to the end of the menu. 
 	 * \param int  
@@ -178,7 +178,7 @@ context it returns a 2-element list  }
 list class containing wxMenuItem pointers. 
 	*/
 
-  wxMenuItemList& GetMenuItems() const;
+  const wxMenuItemList& GetMenuItems() const;
 	/**
 	 * \brief Returns the title of the menu. 
 	*/

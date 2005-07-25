@@ -16,11 +16,11 @@ class MyFrame < Frame
       set_icon(Icon.new("mondrian.xpm",BITMAP_TYPE_XPM))
     end
 
-    menuFile = Menu.new("")   # Parameter should NOT be needed!
-    helpMenu = Menu.new("")   # Parameter should NOT be needed!
+    menuFile = Menu.new()
+    helpMenu = Menu.new()
     helpMenu.append(Minimal_About, "&About...\tF1", "Show about dialog")
     menuFile.append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program")
-    menuBar = MenuBar.new(0)  # Parameter should NOT be needed!
+    menuBar = MenuBar.new()
     menuBar.append(menuFile, "&File")
     menuBar.append(helpMenu, "&Help")
     set_menu_bar(menuBar)

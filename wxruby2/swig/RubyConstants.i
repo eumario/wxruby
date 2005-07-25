@@ -168,6 +168,19 @@ enum
     wxCHANGE_DIR        = 0x0040
 };
 
+// flages used by wxFindDialogEvent::GetFlags()
+enum wxFindReplaceFlags
+{
+    // downward search/replace selected (otherwise - upwards)
+    wxFR_DOWN       = 1,
+
+    // whole word search/replace selected
+    wxFR_WHOLEWORD  = 2,
+
+    // case sensitive search/replace selected (otherwise - case insensitive)
+    wxFR_MATCHCASE  = 4
+};
+
 enum wxFindReplaceDialogStyles
 {
     // replace dialog (otherwise find dialog)
@@ -1411,3 +1424,5 @@ enum wxStockCursor
 %constant const int LAYOUT_CENTRE_Y =wxCentreY;
 
 %constant const int NOT_FOUND = -1;
+
+%constant const char * wxEmptyString = "";

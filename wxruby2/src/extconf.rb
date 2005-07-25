@@ -46,9 +46,6 @@ elsif /powerpc-darwin/ =~ RUBY_PLATFORM
     #
     libs = `wx-config --libs`.chomp.gsub(/-framework Cocoa/,"").gsub(/-framework WebKit/,"")
     $LIBS += " #{libs} -lobjc "
-    if ($use_xrc)
-      $LDFLAGS += " -lwx_mac_xrc-2.4 "
-    end
 
 # have_library("kernel32") does not work on XP Pro (don't know about other Windows systems)
 #elsif have_library("kernel32")
@@ -97,7 +94,6 @@ else
 	$CFLAGS += " -DNDEBUG"
     end
     $libs += " #$WXLIB"
-
 
 end
 
