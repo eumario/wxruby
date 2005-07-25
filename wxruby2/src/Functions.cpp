@@ -528,7 +528,7 @@ static swig_type_info *swig_types[4];
 #define SWIG_name    "WxFunctions"
 
 static VALUE mWxFunctions;
-   extern VALUE mWx;
+   extern VALUE mWxruby2;
 
 static void SWIG_AsVal(VALUE obj, int *val)
 {
@@ -1273,7 +1273,7 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-mWxFunctions = mWx;
+mWxFunctions = mWxruby2;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
@@ -1297,12 +1297,12 @@ mWxFunctions = mWx;
     rb_define_module_function(mWxFunctions, "get_password_from_user", VALUEFUNC(_wrap_wxGetPasswordFromUser), -1);
     rb_define_module_function(mWxFunctions, "file_selector", VALUEFUNC(_wrap_wxFileSelector), -1);
     
-    extern VALUE mWx;
-    rb_define_module_function(mWx, "log_message", VALUEFUNC(log_message), -1);
-    rb_define_module_function(mWx, "log_warning", VALUEFUNC(log_warning), -1);
-    rb_define_module_function(mWx, "log_status", VALUEFUNC(log_status), -1);
-    rb_define_module_function(mWx, "log_error", VALUEFUNC(log_error), -1);
-    rb_define_module_function(mWx, "get_app", VALUEFUNC(get_app), 0);
+    extern VALUE mWxruby2;
+    rb_define_module_function(mWxruby2, "log_message", VALUEFUNC(log_message), -1);
+    rb_define_module_function(mWxruby2, "log_warning", VALUEFUNC(log_warning), -1);
+    rb_define_module_function(mWxruby2, "log_status", VALUEFUNC(log_status), -1);
+    rb_define_module_function(mWxruby2, "log_error", VALUEFUNC(log_error), -1);
+    rb_define_module_function(mWxruby2, "get_app", VALUEFUNC(get_app), 0);
     
 }
 

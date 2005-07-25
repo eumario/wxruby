@@ -526,7 +526,7 @@ static swig_type_info *swig_types[2];
 #define SWIG_name    "WxIdleEvent"
 
 static VALUE mWxIdleEvent;
-   extern VALUE mWx;
+   extern VALUE mWxruby2;
 
 static void SWIG_AsVal(VALUE obj, int *val)
 {
@@ -851,7 +851,7 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-mWxIdleEvent = mWx;
+mWxIdleEvent = mWxruby2;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);

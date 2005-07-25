@@ -1,61 +1,42 @@
-README for wxruby-swig
-Version 0.0.20
+README for wxruby2
+Version 0.0.22
 
-This is a a swig-based version of wxRuby, a library 
+This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
-It now supports about 120 classes, compared to 139 in wxRuby 0.3, 
-and over 300 in all of wxWidgets.
-
-It is released under a permissive MIT-style license.
+It is released under a permissive MIT-style license
+(see the LICENSE file for details).
 
 There are no binaries. You must build it from source.
+It now supports about 120 classes, out of the 300+ 
+that are in wxWidgets.
+
+For more details, see the project home page:
+  http://rubyforge.org/projects/wxruby/
 
 
 WHATS NEW:
-- Now target wxWidgets 2.5+
-- wxWindows 2.4 is no longer supported. However, if you 
-  are interested in maintaining (or reviving) 2.4 support, 
-  it would make sense to have it in the same source tree.
-- Should now work with unicode or non-unicode build of wx, 
-  as long as the unicode flag was set the same when wx and 
-  wxRuby were built. HOWEVER, currently all strings passed 
-  into or returned out of wxRuby must be in ASCII or UTF-8,
-  not in any other 8-bit encoding.
-- Integrated several .h file patches from Sean Long for 
-  compatiblity with wx 2.6
-- XRC support is now automatic, not optional
-- The WXRUBY_SWIG environment variable is no longer used.
-  If any swig class files are newer than the corresponding 
-  generated .cpp/.h files, then swig will be launched.
-- Match wxPython by replacing overloaded versions of Menu#append 
-  with Menu#append_item and Menu#append_menu 
-- This will be the last release under the name wxruby-swig.
-  Future releases will be named wxruby2.
+- Binary library is now named wxruby2, and a small Ruby 
+  wrapper named wx.rb is what is actually loaded by apps.
   
 
 
 REQUIREMENTS:
 
-- wxWidgets 2.6 SDK
+- Ruby 1.8 (Ruby 1.6 is not officially supported, but might still work)
+- wxWidgets 2.5+ SDK
 - rake (http://rake.rubyforge.org/)
 - OPTIONAL: SWIG 1.3.22 or later
   Swig'd .cpp and .h files are included in this package, 
   so you don't actually need SWIG. If you use SWIG, it 
-  *MUST* be 1.3.22 or later.
+  *MUST* be 1.3.22 or later. 
 
 
-INSTALLATION:
+OBTAINING THE SOURCE:
 
 No binary builds are available. Source code can be 
 retrieved from CVS at:
   http://rubyforge.org/scm/?group_id=35
   
-If you intend to perform the SWIG step yourself, you 
-will need SWIG 1.3.22 or later. Earlier versions will 
-not work correctly.
-
-  
-
 
 BUILDING:
 
@@ -84,15 +65,25 @@ only need to set one or more of the following variables:
     $extra_objs
     $extra_libs
 
+INSTALLING THE LIBRARY:
+
+As a quick test, you can change to the lib/ subdirectory
+to run a wxRuby app, like:
+  cd lib
+  ruby ../samples/minimal/minimal.rb
+  
+
+Normally, you would install the library somewhere in your 
+path. There will be a "rake install" task, but until then 
+you will need to copy both wx.rb and the binary library 
+(either wxruby2.so or wxruby2.dll depending on your platform)
+to somewhere on your path, such as /usr/local/lib or C:\windows32.
+
 
 TESTING:
 
 To use wxruby-swig in your app, use:
   require 'wx'
-
-This has changed from non-SWIG versions of wxruby, 
-to avoid conflicts and to allows you to have both versions 
-of wxruby on your system at the same time.
 
 Several samples are available:
 	samples/calendar/calendar.rb

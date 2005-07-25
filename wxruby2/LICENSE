@@ -1,5 +1,5 @@
-wxRuby-SWIG
-Copyright (c) 2004 Kevin B. Smith
+wxRuby2
+Copyright (c) 2004-2005 Kevin B. Smith
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
 of this software and associated documentation files (the "Software"), to deal 
@@ -22,10 +22,10 @@ SOFTWARE.
 
 ============================================================================
 
-Distributing wxRuby Applications
---------------------------------
+Distributing wxRuby2 Applications
+---------------------------------
 
-The required credits for distributing a wxRuby application all come from
+The required credits for distributing a wxRuby2 application all come from
 the use of the underlying wxWidgets library. This information is summarized
 below for you convenience, but is subject to change by the wxWidgets project.
 Therefore, it is highly recommended that you read the official details (that
@@ -57,4 +57,4 @@ However, towards the bottom of the wxWidgets README file, there are a few
   use Spencer's code, but apparently most Unices will not). The license 
   in CVS HEAD for 2.5.0 is different, and a credit in the documentation 
   is no longer required. See [the regex COPYRIGHT in HEAD] 
-  and [old regex COPYRIGHT]. 
+  and [old regex COPYRIGHT].

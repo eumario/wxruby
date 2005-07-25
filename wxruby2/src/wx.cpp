@@ -687,10 +687,10 @@ static swig_type_info *swig_types[2];
 
 /* -------- TYPES TABLE (END) -------- */
 
-#define SWIG_init    Init_wx
-#define SWIG_name    "Wx"
+#define SWIG_init    Init_wxruby2
+#define SWIG_name    "Wxruby2"
 
-VALUE mWx;
+VALUE mWxruby2;
 
 static void SWIG_AsVal(VALUE obj, int *val)
 {
@@ -1017,11 +1017,11 @@ _swigt__p_wxWindow,
 #ifdef __cplusplus
 extern "C"
 #endif
-SWIGEXPORT(void) Init_wx(void) {
+SWIGEXPORT(void) Init_wxruby2(void) {
     int i;
     
     SWIG_InitRuntime();
-    mWx = rb_define_module("Wx");
+    mWxruby2 = rb_define_module("Wxruby2");
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
@@ -1034,8 +1034,8 @@ SWIGEXPORT(void) Init_wx(void) {
     extern void InitializeOtherModules();
     InitializeOtherModules();
     
-    rb_define_const(mWx,"VERSION_STRING", rb_str_new2("wxRuby-SWIG 0.0.3"));
-    rb_define_module_function(mWx, "message_box", VALUEFUNC(_wrap_wxMessageBox), -1);
+    rb_define_const(mWxruby2,"VERSION_STRING", rb_str_new2("wxRuby2"));
+    rb_define_module_function(mWxruby2, "message_box", VALUEFUNC(_wrap_wxMessageBox), -1);
 }
 
 

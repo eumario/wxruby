@@ -531,7 +531,7 @@ static swig_type_info *swig_types[7];
 #define SWIG_name    "WxScrolledWindow"
 
 static VALUE mWxScrolledWindow;
-   extern VALUE mWx;
+   extern VALUE mWxruby2;
 
 static void SWIG_AsVal(VALUE obj, int *val)
 {
@@ -1210,7 +1210,7 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-mWxScrolledWindow = mWx;
+mWxScrolledWindow = mWxruby2;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
