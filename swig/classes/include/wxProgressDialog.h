@@ -19,7 +19,7 @@ window only.
 	 * \param int   
 	*/
 
-   wxProgressDialog(const wxString&  title , const wxString&  message , int  maximum = 100, wxWindow *  parent = NULL, int  style = wxPD_AUTO_HIDE) ;
+  wxProgressDialog(const wxString &title , wxString const &message , int  maximum = 100, wxWindow *parent = NULL, int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 	/**
 	 * \brief Destructor. Deletes the dialog and enables all top level windows. 
 	*/
@@ -43,7 +43,11 @@ dialog may be resumed with   function.
 	 * \param const wxString&   
 	*/
 
-  bool Update(int  value , const wxString&  newmsg = wxT("")) ;
+/* FIXME: skip parameter was added in 2.6.0 
+   so we need to find a clean way to support it */
+  virtual bool Update(int value, const wxString& newmsg = wxEmptyString);
+  // the following were missing from the xml
+  virtual bool Show( bool show = true );
 };
 
 

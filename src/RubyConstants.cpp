@@ -886,6 +886,9 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"FILE_MUST_EXIST", INT2NUM(wxFILE_MUST_EXIST));
     rb_define_const(mWxRubyConstants,"MULTIPLE", INT2NUM(wxMULTIPLE));
     rb_define_const(mWxRubyConstants,"CHANGE_DIR", INT2NUM(wxCHANGE_DIR));
+    rb_define_const(mWxRubyConstants,"FR_DOWN", INT2NUM(wxFR_DOWN));
+    rb_define_const(mWxRubyConstants,"FR_WHOLEWORD", INT2NUM(wxFR_WHOLEWORD));
+    rb_define_const(mWxRubyConstants,"FR_MATCHCASE", INT2NUM(wxFR_MATCHCASE));
     rb_define_const(mWxRubyConstants,"FR_REPLACEDIALOG", INT2NUM(wxFR_REPLACEDIALOG));
     rb_define_const(mWxRubyConstants,"FR_NOUPDOWN", INT2NUM(wxFR_NOUPDOWN));
     rb_define_const(mWxRubyConstants,"FR_NOMATCHCASE", INT2NUM(wxFR_NOMATCHCASE));
@@ -1592,5 +1595,6 @@ mWxRubyConstants = mWx;
     rb_define_const(mWxRubyConstants,"LAYOUT_CENTRE_X", INT2NUM(wxCentreX));
     rb_define_const(mWxRubyConstants,"LAYOUT_CENTRE_Y", INT2NUM(wxCentreY));
     rb_define_const(mWxRubyConstants,"NOT_FOUND", INT2NUM(-1));
+    rb_define_const(mWxRubyConstants,"EmptyString", rb_str_new2("\0"));
 }
 

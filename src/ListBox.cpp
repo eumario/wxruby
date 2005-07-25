@@ -999,28 +999,7 @@ _wrap_wxListBox_GetSelections(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxListBox_InsertItems__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxListBox *arg1 = (wxListBox *) 0 ;
-    int arg2 ;
-    wxString *arg3 = (wxString *) 0 ;
-    int arg4 ;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
-    arg2 = NUM2INT(argv[0]);
-    {
-        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
-    }
-    arg4 = NUM2INT(argv[2]);
-    (arg1)->InsertItems(arg2,(wxString const *)arg3,arg4);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxListBox_InsertItems__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxListBox_InsertItems(int argc, VALUE *argv, VALUE self) {
     wxListBox *arg1 = (wxListBox *) 0 ;
     wxArrayString *arg2 = 0 ;
     int arg3 ;
@@ -1038,7 +1017,10 @@ _wrap_wxListBox_InsertItems__SWIG_1(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i)));
+                //this does not work?
+                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
+                //but this does
+                wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
                 tmp2.Add(item);
             }
             
@@ -1049,68 +1031,6 @@ _wrap_wxListBox_InsertItems__SWIG_1(int argc, VALUE *argv, VALUE self) {
     arg3 = NUM2INT(argv[1]);
     (arg1)->InsertItems((wxArrayString const &)*arg2,arg3);
     
-    return Qnil;
-}
-
-
-static VALUE _wrap_wxListBox_InsertItems(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[5];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 3) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxListBox, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxArrayString, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    return _wrap_wxListBox_InsertItems__SWIG_1(nargs, args, self);
-                }
-            }
-        }
-    }
-    if (argc == 4) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxListBox, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = (TYPE(argv[2]) == T_STRING);
-                }
-                if (_v) {
-                    {
-                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_wxListBox_InsertItems__SWIG_0(nargs, args, self);
-                    }
-                }
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxListBox_InsertItems'");
     return Qnil;
 }
 
@@ -1139,19 +1059,42 @@ _wrap_wxListBox_Set__SWIG_0(int argc, VALUE *argv, VALUE self) {
     int arg2 ;
     wxString *arg3 = (wxString *) 0 ;
     void **arg4 = (void **) NULL ;
+    wxString *arr2 ;
     
-    if ((argc < 2) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
-    arg2 = NUM2INT(argv[0]);
     {
-        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
+        arg2 = 0;
+        arg3 = NULL;
     }
-    if (argc > 2) {
-        SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_p_void, 1);
+    if ((argc < 0) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListBox, 1);
+    if (argc > 0) {
+        {
+            if ((argv[0] == Qnil) || (TYPE(argv[0]) != T_ARRAY))
+            {
+                arg2 = 0;
+                arg3 = NULL;
+            }
+            else
+            {
+                arr2 = new wxString[RARRAY(argv[0])->len];
+                for (int i = 0; i < RARRAY(argv[0])->len; i++)
+                {
+                    arr2[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i)));
+                }
+                arg2 = RARRAY(argv[0])->len;
+                arg3 = arr2;
+            }
+        }
+    }
+    if (argc > 1) {
+        SWIG_ConvertPtr(argv[1], (void **) &arg4, SWIGTYPE_p_p_void, 1);
     }
     (arg1)->Set(arg2,(wxString const *)arg3,arg4);
     
+    {
+        if (arg3 != NULL) delete [] arg3;
+    }
     return Qnil;
 }
 
@@ -1175,7 +1118,10 @@ _wrap_wxListBox_Set__SWIG_1(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i)));
+                //this does not work?
+                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
+                //but this does
+                wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
                 tmp2.Add(item);
             }
             
@@ -1194,13 +1140,40 @@ _wrap_wxListBox_Set__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_wxListBox_Set(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[5];
+    VALUE argv[4];
     int ii;
     
     argc = nargs + 1;
     argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
         argv[ii] = args[ii-1];
+    }
+    if ((argc >= 1) && (argc <= 3)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxListBox, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            if (argc <= 1) {
+                return _wrap_wxListBox_Set__SWIG_0(nargs, args, self);
+            }
+            {
+                _v = (TYPE(argv[1]) == T_ARRAY);
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxListBox_Set__SWIG_0(nargs, args, self);
+                }
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_p_void, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxListBox_Set__SWIG_0(nargs, args, self);
+                }
+            }
+        }
     }
     if ((argc >= 2) && (argc <= 3)) {
         int _v;
@@ -1223,35 +1196,6 @@ static VALUE _wrap_wxListBox_Set(int nargs, VALUE *args, VALUE self) {
                 }
                 if (_v) {
                     return _wrap_wxListBox_Set__SWIG_1(nargs, args, self);
-                }
-            }
-        }
-    }
-    if ((argc >= 3) && (argc <= 4)) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxListBox, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = (TYPE(argv[2]) == T_STRING);
-                }
-                if (_v) {
-                    if (argc <= 3) {
-                        return _wrap_wxListBox_Set__SWIG_0(nargs, args, self);
-                    }
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_p_void, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_wxListBox_Set__SWIG_0(nargs, args, self);
-                    }
                 }
             }
         }

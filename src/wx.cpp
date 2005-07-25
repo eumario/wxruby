@@ -1211,6 +1211,8 @@ extern "C" void InitializeOtherModules()
     Init_wxPen();
     extern void Init_wxPoint();
     Init_wxPoint();
+    extern void Init_wxProgressDialog();
+    Init_wxProgressDialog();
     extern void Init_wxRadioBox();
     Init_wxRadioBox();
     extern void Init_wxRadioButton();

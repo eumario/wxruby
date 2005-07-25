@@ -517,18 +517,17 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_wxFileDialog swig_types[0] 
+#define  SWIGTYPE_p_wxProgressDialog swig_types[0] 
 #define  SWIGTYPE_p_wxWindow swig_types[1] 
-#define  SWIGTYPE_p_wxArrayString swig_types[2] 
-#define  SWIGTYPE_p_wxPoint swig_types[3] 
-static swig_type_info *swig_types[5];
+#define  SWIGTYPE_p_wxString swig_types[2] 
+static swig_type_info *swig_types[4];
 
 /* -------- TYPES TABLE (END) -------- */
 
-#define SWIG_init    Init_wxFileDialog
-#define SWIG_name    "WxFileDialog"
+#define SWIG_init    Init_wxProgressDialog
+#define SWIG_name    "WxProgressDialog"
 
-static VALUE mWxFileDialog;
+static VALUE mWxProgressDialog;
    extern VALUE mWx;
 
 static void SWIG_AsVal(VALUE obj, int *val)
@@ -564,9 +563,12 @@ void GcFreefunc(void *);
 #include <wx/datetime.h>
 
 
-extern swig_class cWxDialog;
-swig_class cWxFileDialog;
-static void free_wxFileDialog(wxFileDialog *);
+#include <wx/progdlg.h>
+
+
+extern swig_class cWxFrame;
+swig_class cWxProgressDialog;
+static void free_wxProgressDialog(wxProgressDialog *);
 /***********************************************************************
  * director.swg
  *
@@ -675,7 +677,7 @@ namespace Swig {
       Director(VALUE self, bool disown) : swig_self(self), swig_disown_flag(disown) {
 
 #ifdef wxDEBUG
-    printf("FileDialog.cpp" " new Director %p\n", this);
+    printf("ProgressDialog.cpp" " new Director %p\n", this);
     fflush(stdout);
 #endif
     GcMapPtrToValue(this,self);
@@ -685,7 +687,7 @@ namespace Swig {
       virtual ~Director() {
 
 #ifdef wxDEBUG
-    printf("FileDialog.cpp" " ~Director %p\n", this);
+    printf("ProgressDialog.cpp" " ~Director %p\n", this);
     fflush(stdout);
 #endif
     GcMarkDeleted(this);
@@ -762,24 +764,56 @@ namespace Swig {
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "FileDialog.h"
+#include "ProgressDialog.h"
 
-SwigDirector_wxFileDialog::SwigDirector_wxFileDialog(VALUE self, wxWindow *parent, wxString const &message, wxString const &defaultDir, wxString const &defaultFile, wxString const &wildcard, long style, wxPoint const &pos, bool disown): wxFileDialog(parent, message, defaultDir, defaultFile, wildcard, style, pos), Swig::Director(self, disown) {
+SwigDirector_wxProgressDialog::SwigDirector_wxProgressDialog(VALUE self, wxString const &title, wxString const &message, int maximum, wxWindow *parent, int style, bool disown): wxProgressDialog(title, message, maximum, parent, style), Swig::Director(self, disown) {
     
 }
 
 
 
+bool SwigDirector_wxProgressDialog::Update(int value, wxString const &newmsg) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxProgressDialog::Update(value,newmsg);
+    }
+    obj0 = INT2NUM(value);
+    obj1 = rb_str_new2((const char *)(&newmsg)->mb_str());
+    result = rb_funcall(swig_get_self(), rb_intern("update"), 2,obj0,obj1);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
+bool SwigDirector_wxProgressDialog::Show(bool show) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxProgressDialog::Show(show);
+    }
+    obj0 = show ? Qtrue : Qfalse;
+    result = rb_funcall(swig_get_self(), rb_intern("show"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
-_wrap_wxFileDialog_allocate(VALUE self) {
+_wrap_wxProgressDialog_allocate(VALUE self) {
 #else
     static VALUE
-    _wrap_wxFileDialog_allocate(int argc, VALUE *argv, VALUE self) {
+    _wrap_wxProgressDialog_allocate(int argc, VALUE *argv, VALUE self) {
 #endif
         
         
-        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxFileDialog);
+        VALUE vresult = SWIG_NewClassInstance(self, SWIGTYPE_p_wxProgressDialog);
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
         rb_obj_call_init(vresult, argc, argv);
 #endif
@@ -788,58 +822,39 @@ _wrap_wxFileDialog_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxFileDialog(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxProgressDialog(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxString const &arg3_defvalue = wxT("Choose") ;
-    wxString *arg3 = (wxString *) &arg3_defvalue ;
-    wxString const &arg4_defvalue = wxT("") ;
-    wxString *arg4 = (wxString *) &arg4_defvalue ;
-    wxString const &arg5_defvalue = wxT("") ;
-    wxString *arg5 = (wxString *) &arg5_defvalue ;
-    wxString const &arg6_defvalue = wxT("*.*") ;
-    wxString *arg6 = (wxString *) &arg6_defvalue ;
-    long arg7 = (long) 0 ;
-    wxPoint const &arg8_defvalue = wxDefaultPosition ;
-    wxPoint *arg8 = (wxPoint *) &arg8_defvalue ;
-    wxFileDialog *result;
+    wxString *arg2 = 0 ;
+    wxString *arg3 = 0 ;
+    int arg4 = (int) 100 ;
+    wxWindow *arg5 = (wxWindow *) NULL ;
+    int arg6 = (int) wxPD_APP_MODAL|wxPD_AUTO_HIDE ;
+    wxProgressDialog *result;
     
-    if ((argc < 1) || (argc > 7))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    if ((argc < 2) || (argc > 5))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    if (argc > 1) {
-        {
-            arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
-        }
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    {
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
     if (argc > 2) {
-        {
-            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
-        }
+        arg4 = NUM2INT(argv[2]);
     }
     if (argc > 3) {
-        {
-            arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);
-        }
+        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxWindow, 1);
     }
     if (argc > 4) {
-        {
-            arg6 = new wxString(STR2CSTR(argv[4]), wxConvUTF8);
-        }
-    }
-    if (argc > 5) {
-        arg7 = NUM2LONG(argv[5]);
-    }
-    if (argc > 6) {
-        SWIG_ConvertPtr(argv[6], (void **) &arg8, SWIGTYPE_p_wxPoint, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
+        arg6 = NUM2INT(argv[4]);
     }
     if ( CLASS_OF(self) != Qnil ) {
         /* subclassed */
-        result = (wxFileDialog *)new SwigDirector_wxFileDialog(arg1,arg2,(wxString const &)*arg3,(wxString const &)*arg4,(wxString const &)*arg5,(wxString const &)*arg6,arg7,(wxPoint const &)*arg8,false);
+        result = (wxProgressDialog *)new SwigDirector_wxProgressDialog(arg1,(wxString const &)*arg2,(wxString const &)*arg3,arg4,arg5,arg6,false);
         
     } else {
-        result = (wxFileDialog *)new wxFileDialog(arg2,(wxString const &)*arg3,(wxString const &)*arg4,(wxString const &)*arg5,(wxString const &)*arg6,arg7,(wxPoint const &)*arg8);
+        result = (wxProgressDialog *)new wxProgressDialog((wxString const &)*arg2,(wxString const &)*arg3,arg4,arg5,arg6);
         
     }
     DATA_PTR(self) = result;
@@ -848,10 +863,10 @@ _wrap_new_wxFileDialog(int argc, VALUE *argv, VALUE self) {
 
 
 static void
-free_wxFileDialog(wxFileDialog *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxFileDialog*)arg1;
+free_wxProgressDialog(wxProgressDialog *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxProgressDialog*)arg1;
 #ifdef wxDEBUG
-    printf("FileDialog.cpp" " Checking %p\n", director);
+    printf("ProgressDialog.cpp" " Checking %p\n", director);
 #endif
     if (GcIsDeleted(director))
     {
@@ -867,335 +882,76 @@ free_wxFileDialog(wxFileDialog *arg1) {
     delete arg1;
 }
 static VALUE
-_wrap_wxFileDialog_GetDirectory(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString result;
-    VALUE vresult = Qnil;
+_wrap_wxProgressDialog_Resume(int argc, VALUE *argv, VALUE self) {
+    wxProgressDialog *arg1 = (wxProgressDialog *) 0 ;
     
     if ((argc < 0) || (argc > 0))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = ((wxFileDialog const *)arg1)->GetDirectory();
-    
-    {
-        vresult = rb_str_new2((const char *)(&result)->mb_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_GetFilename(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = ((wxFileDialog const *)arg1)->GetFilename();
-    
-    {
-        vresult = rb_str_new2((const char *)(&result)->mb_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_GetFilenames(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxArrayString *arg2 = 0 ;
-    wxArrayString tmp2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    {
-        if ((argv[0] = Qnil) || (TYPE(argv[0]) != T_ARRAY))
-        {
-            arg2 = &tmp2;
-        }
-        else
-        {
-            for (int i = 0; i < RARRAY(argv[0])->len; i++)
-            {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
-                //but this does
-                wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
-                tmp2.Add(item);
-            }
-            
-            arg2 = &tmp2;
-        }
-        
-    }
-    ((wxFileDialog const *)arg1)->GetFilenames(*arg2);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxProgressDialog, 1);
+    (arg1)->Resume();
     
     return Qnil;
 }
 
 
 static VALUE
-_wrap_wxFileDialog_GetFilterIndex(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = (int)((wxFileDialog const *)arg1)->GetFilterIndex();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_GetMessage(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = ((wxFileDialog const *)arg1)->GetMessage();
-    
-    {
-        vresult = rb_str_new2((const char *)(&result)->mb_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_GetPath(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = ((wxFileDialog const *)arg1)->GetPath();
-    
-    {
-        vresult = rb_str_new2((const char *)(&result)->mb_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_GetPaths(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxArrayString *arg2 = 0 ;
-    wxArrayString tmp2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    {
-        if ((argv[0] = Qnil) || (TYPE(argv[0]) != T_ARRAY))
-        {
-            arg2 = &tmp2;
-        }
-        else
-        {
-            for (int i = 0; i < RARRAY(argv[0])->len; i++)
-            {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
-                //but this does
-                wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
-                tmp2.Add(item);
-            }
-            
-            arg2 = &tmp2;
-        }
-        
-    }
-    ((wxFileDialog const *)arg1)->GetPaths(*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_GetStyle(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    long result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = (long)((wxFileDialog const *)arg1)->GetStyle();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_GetWildcard(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = ((wxFileDialog const *)arg1)->GetWildcard();
-    
-    {
-        vresult = rb_str_new2((const char *)(&result)->mb_str());
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_SetDirectory(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString *arg2 = 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    (arg1)->SetDirectory((wxString const &)*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_SetFilename(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString *arg2 = 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    (arg1)->SetFilename((wxString const &)*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_SetFilterIndex(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
+_wrap_wxProgressDialog_Update(int argc, VALUE *argv, VALUE self) {
+    wxProgressDialog *arg1 = (wxProgressDialog *) 0 ;
     int arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    arg2 = NUM2INT(argv[0]);
-    (arg1)->SetFilterIndex(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_SetMessage(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString *arg2 = 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    (arg1)->SetMessage((wxString const &)*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_SetPath(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString *arg2 = 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    (arg1)->SetPath((wxString const &)*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_SetStyle(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    long arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    arg2 = NUM2LONG(argv[0]);
-    (arg1)->SetStyle(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_SetWildcard(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    wxString *arg2 = 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    (arg1)->SetWildcard((wxString const &)*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxFileDialog_ShowModal(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
-    int result;
+    wxString const &arg3_defvalue = wxEmptyString ;
+    wxString *arg3 = (wxString *) &arg3_defvalue ;
+    bool result;
+    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
-    result = (int)(arg1)->ShowModal();
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxProgressDialog, 1);
+    arg2 = NUM2INT(argv[0]);
+    if (argc > 1) {
+        {
+            arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
+        }
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->Update(arg2,(wxString const &)*arg3);
     
-    vresult = INT2NUM(result);
+    vresult = result ? Qtrue : Qfalse;
     return vresult;
 }
 
 
 static VALUE
-_wrap_disown_wxFileDialog(int argc, VALUE *argv, VALUE self) {
-    wxFileDialog *arg1 = (wxFileDialog *) 0 ;
+_wrap_wxProgressDialog_Show(int argc, VALUE *argv, VALUE self) {
+    wxProgressDialog *arg1 = (wxProgressDialog *) 0 ;
+    bool arg2 = (bool) true ;
+    bool result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxProgressDialog, 1);
+    if (argc > 0) {
+        arg2 = RTEST(argv[0]);
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->Show(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_disown_wxProgressDialog(int argc, VALUE *argv, VALUE self) {
+    wxProgressDialog *arg1 = (wxProgressDialog *) 0 ;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxFileDialog, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxProgressDialog, 1);
     {
 Swig::Director *director = (Swig::Director*)(arg1);
         if (director) director->swig_disown();
@@ -1208,16 +964,14 @@ Swig::Director *director = (Swig::Director*)(arg1);
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_wxFileDialog[] = {{"_p_wxFileDialog", 0, "wxFileDialog *", 0, 0, 0, 0},{"_p_wxFileDialog", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxProgressDialog[] = {{"_p_wxProgressDialog", 0, "wxProgressDialog *", 0, 0, 0, 0},{"_p_wxProgressDialog", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxArrayString[] = {{"_p_wxArrayString", 0, "wxArrayString *", 0, 0, 0, 0},{"_p_wxArrayString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
-static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0, 0, 0, 0},{"_p_wxString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
-_swigt__p_wxFileDialog, 
+_swigt__p_wxProgressDialog, 
 _swigt__p_wxWindow, 
-_swigt__p_wxArrayString, 
-_swigt__p_wxPoint, 
+_swigt__p_wxString, 
 0
 };
 
@@ -1228,47 +982,33 @@ _swigt__p_wxPoint,
 #ifdef __cplusplus
 extern "C"
 #endif
-SWIGEXPORT(void) Init_wxFileDialog(void) {
+SWIGEXPORT(void) Init_wxProgressDialog(void) {
 static bool initialized;
 if(initialized) return;
 initialized = true;
     int i;
     
     SWIG_InitRuntime();
-mWxFileDialog = mWx;
+mWxProgressDialog = mWx;
     
     for (i = 0; swig_types_initial[i]; i++) {
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxFileDialog, "disown_wxFileDialog", VALUEFUNC(_wrap_disown_wxFileDialog), -1);
+    rb_define_module_function(mWxProgressDialog, "disown_wxProgressDialog", VALUEFUNC(_wrap_disown_wxProgressDialog), -1);
     
-    extern void Init_wxDialog();
-    Init_wxDialog();
-    //extern swig_class cWxDialog;
-    cWxFileDialog.klass = rb_define_class_under(mWxFileDialog, "FileDialog", cWxDialog.klass);
-    SWIG_TypeClientData(SWIGTYPE_p_wxFileDialog, (void *) &cWxFileDialog);
-    rb_define_alloc_func(cWxFileDialog.klass, _wrap_wxFileDialog_allocate);
-    rb_define_method(cWxFileDialog.klass, "initialize", VALUEFUNC(_wrap_new_wxFileDialog), -1);
-    rb_define_method(cWxFileDialog.klass, "get_directory", VALUEFUNC(_wrap_wxFileDialog_GetDirectory), -1);
-    rb_define_method(cWxFileDialog.klass, "get_filename", VALUEFUNC(_wrap_wxFileDialog_GetFilename), -1);
-    rb_define_method(cWxFileDialog.klass, "get_filenames", VALUEFUNC(_wrap_wxFileDialog_GetFilenames), -1);
-    rb_define_method(cWxFileDialog.klass, "get_filter_index", VALUEFUNC(_wrap_wxFileDialog_GetFilterIndex), -1);
-    rb_define_method(cWxFileDialog.klass, "get_message", VALUEFUNC(_wrap_wxFileDialog_GetMessage), -1);
-    rb_define_method(cWxFileDialog.klass, "get_path", VALUEFUNC(_wrap_wxFileDialog_GetPath), -1);
-    rb_define_method(cWxFileDialog.klass, "get_paths", VALUEFUNC(_wrap_wxFileDialog_GetPaths), -1);
-    rb_define_method(cWxFileDialog.klass, "get_style", VALUEFUNC(_wrap_wxFileDialog_GetStyle), -1);
-    rb_define_method(cWxFileDialog.klass, "get_wildcard", VALUEFUNC(_wrap_wxFileDialog_GetWildcard), -1);
-    rb_define_method(cWxFileDialog.klass, "set_directory", VALUEFUNC(_wrap_wxFileDialog_SetDirectory), -1);
-    rb_define_method(cWxFileDialog.klass, "set_filename", VALUEFUNC(_wrap_wxFileDialog_SetFilename), -1);
-    rb_define_method(cWxFileDialog.klass, "set_filter_index", VALUEFUNC(_wrap_wxFileDialog_SetFilterIndex), -1);
-    rb_define_method(cWxFileDialog.klass, "set_message", VALUEFUNC(_wrap_wxFileDialog_SetMessage), -1);
-    rb_define_method(cWxFileDialog.klass, "set_path", VALUEFUNC(_wrap_wxFileDialog_SetPath), -1);
-    rb_define_method(cWxFileDialog.klass, "set_style", VALUEFUNC(_wrap_wxFileDialog_SetStyle), -1);
-    rb_define_method(cWxFileDialog.klass, "set_wildcard", VALUEFUNC(_wrap_wxFileDialog_SetWildcard), -1);
-    rb_define_method(cWxFileDialog.klass, "show_modal", VALUEFUNC(_wrap_wxFileDialog_ShowModal), -1);
-    cWxFileDialog.mark = 0;
-    cWxFileDialog.destroy = (void (*)(void *)) free_wxFileDialog;
+    extern void Init_wxFrame();
+    Init_wxFrame();
+    //extern swig_class cWxFrame;
+    cWxProgressDialog.klass = rb_define_class_under(mWxProgressDialog, "ProgressDialog", cWxFrame.klass);
+    SWIG_TypeClientData(SWIGTYPE_p_wxProgressDialog, (void *) &cWxProgressDialog);
+    rb_define_alloc_func(cWxProgressDialog.klass, _wrap_wxProgressDialog_allocate);
+    rb_define_method(cWxProgressDialog.klass, "initialize", VALUEFUNC(_wrap_new_wxProgressDialog), -1);
+    rb_define_method(cWxProgressDialog.klass, "resume", VALUEFUNC(_wrap_wxProgressDialog_Resume), -1);
+    rb_define_method(cWxProgressDialog.klass, "update", VALUEFUNC(_wrap_wxProgressDialog_Update), -1);
+    rb_define_method(cWxProgressDialog.klass, "show", VALUEFUNC(_wrap_wxProgressDialog_Show), -1);
+    cWxProgressDialog.mark = 0;
+    cWxProgressDialog.destroy = (void (*)(void *)) free_wxProgressDialog;
 }
 

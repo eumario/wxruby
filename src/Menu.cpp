@@ -517,12 +517,13 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_wxEvtHandler swig_types[0] 
-#define  SWIGTYPE_p_wxMenu swig_types[1] 
-#define  SWIGTYPE_p_p_wxMenu swig_types[2] 
-#define  SWIGTYPE_p_wxItemKind swig_types[3] 
-#define  SWIGTYPE_p_wxMenuItem swig_types[4] 
-static swig_type_info *swig_types[6];
+#define  SWIGTYPE_p_wxMenuItemList swig_types[0] 
+#define  SWIGTYPE_p_wxEvtHandler swig_types[1] 
+#define  SWIGTYPE_p_wxMenu swig_types[2] 
+#define  SWIGTYPE_p_p_wxMenu swig_types[3] 
+#define  SWIGTYPE_p_wxItemKind swig_types[4] 
+#define  SWIGTYPE_p_wxMenuItem swig_types[5] 
+static swig_type_info *swig_types[7];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -850,9 +851,11 @@ _wrap_wxMenu_Append(int argc, VALUE *argv, VALUE self) {
     wxMenu *arg1 = (wxMenu *) 0 ;
     int arg2 ;
     wxString *arg3 = 0 ;
-    wxString const &arg4_defvalue = wxT("") ;
+    wxString const &arg4_defvalue = wxEmptyString ;
     wxString *arg4 = (wxString *) &arg4_defvalue ;
     wxItemKind arg5 = (wxItemKind) wxITEM_NORMAL ;
+    wxMenuItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -871,9 +874,59 @@ _wrap_wxMenu_Append(int argc, VALUE *argv, VALUE self) {
             arg5 = (wxItemKind)NUM2INT(argv[3]);
         }
     }
-    (arg1)->Append(arg2,(wxString const &)*arg3,(wxString const &)*arg4,arg5);
+    result = (wxMenuItem *)(arg1)->Append(arg2,(wxString const &)*arg3,(wxString const &)*arg4,arg5);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxMenuItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxMenu_AppendMenu(int argc, VALUE *argv, VALUE self) {
+    wxMenu *arg1 = (wxMenu *) 0 ;
+    int arg2 ;
+    wxString *arg3 = 0 ;
+    wxMenu *arg4 = (wxMenu *) 0 ;
+    wxString const &arg5_defvalue = wxEmptyString ;
+    wxString *arg5 = (wxString *) &arg5_defvalue ;
+    wxMenuItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
+    arg2 = NUM2INT(argv[0]);
+    {
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
+    }
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxMenu, 1);
+    if (argc > 3) {
+        {
+            arg5 = new wxString(STR2CSTR(argv[3]), wxConvUTF8);
+        }
+    }
+    result = (wxMenuItem *)(arg1)->Append(arg2,(wxString const &)*arg3,arg4,(wxString const &)*arg5);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxMenuItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxMenu_AppendItem(int argc, VALUE *argv, VALUE self) {
+    wxMenu *arg1 = (wxMenu *) 0 ;
+    wxMenuItem *arg2 = (wxMenuItem *) 0 ;
+    wxMenuItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxMenuItem, 1);
+    result = (wxMenuItem *)(arg1)->Append(arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxMenuItem,0);
+    return vresult;
 }
 
 
@@ -1310,6 +1363,25 @@ _wrap_wxMenu_GetMenuItemCount(int argc, VALUE *argv, VALUE self) {
     result = ((wxMenu const *)arg1)->GetMenuItemCount();
     
     vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxMenu_GetMenuItems(int argc, VALUE *argv, VALUE self) {
+    wxMenu *arg1 = (wxMenu *) 0 ;
+    wxMenuItemList *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxMenu, 1);
+    {
+        wxMenuItemList const &_result_ref = ((wxMenu const *)arg1)->GetMenuItems();
+        result = (wxMenuItemList *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxMenuItemList,0);
     return vresult;
 }
 
@@ -1930,6 +2002,7 @@ Swig::Director *director = (Swig::Director*)(arg1);
 static void *_p_wxMenuTo_p_wxEvtHandler(void *x) {
     return (void *)((wxEvtHandler *)  ((wxMenu *) x));
 }
+static swig_type_info _swigt__p_wxMenuItemList[] = {{"_p_wxMenuItemList", 0, "wxMenuItemList *", 0, 0, 0, 0},{"_p_wxMenuItemList", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxEvtHandler[] = {{"_p_wxEvtHandler", 0, "wxEvtHandler *", 0, 0, 0, 0},{"_p_wxEvtHandler", 0, 0, 0, 0, 0, 0},{"_p_wxMenu", _p_wxMenuTo_p_wxEvtHandler, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxMenu[] = {{"_p_wxMenu", 0, "wxMenu *", 0, 0, 0, 0},{"_p_wxMenu", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_p_wxMenu[] = {{"_p_p_wxMenu", 0, "wxMenu **", 0, 0, 0, 0},{"_p_p_wxMenu", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
@@ -1937,6 +2010,7 @@ static swig_type_info _swigt__p_wxItemKind[] = {{"_p_wxItemKind", 0, "wxItemKind
 static swig_type_info _swigt__p_wxMenuItem[] = {{"_p_wxMenuItem", 0, "wxMenuItem *", 0, 0, 0, 0},{"_p_wxMenuItem", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
+_swigt__p_wxMenuItemList, 
 _swigt__p_wxEvtHandler, 
 _swigt__p_wxMenu, 
 _swigt__p_p_wxMenu, 
@@ -1976,6 +2050,8 @@ mWxMenu = mWx;
     rb_define_alloc_func(cWxMenu.klass, _wrap_wxMenu_allocate);
     rb_define_method(cWxMenu.klass, "initialize", VALUEFUNC(_wrap_new_wxMenu), -1);
     rb_define_method(cWxMenu.klass, "append", VALUEFUNC(_wrap_wxMenu_Append), -1);
+    rb_define_method(cWxMenu.klass, "append_menu", VALUEFUNC(_wrap_wxMenu_AppendMenu), -1);
+    rb_define_method(cWxMenu.klass, "append_item", VALUEFUNC(_wrap_wxMenu_AppendItem), -1);
     rb_define_method(cWxMenu.klass, "append_check_item", VALUEFUNC(_wrap_wxMenu_AppendCheckItem), -1);
     rb_define_method(cWxMenu.klass, "append_radio_item", VALUEFUNC(_wrap_wxMenu_AppendRadioItem), -1);
     rb_define_method(cWxMenu.klass, "append_separator", VALUEFUNC(_wrap_wxMenu_AppendSeparator), -1);
@@ -1989,6 +2065,7 @@ mWxMenu = mWx;
     rb_define_method(cWxMenu.klass, "get_help_string", VALUEFUNC(_wrap_wxMenu_GetHelpString), -1);
     rb_define_method(cWxMenu.klass, "get_label", VALUEFUNC(_wrap_wxMenu_GetLabel), -1);
     rb_define_method(cWxMenu.klass, "get_menu_item_count", VALUEFUNC(_wrap_wxMenu_GetMenuItemCount), -1);
+    rb_define_method(cWxMenu.klass, "get_menu_items", VALUEFUNC(_wrap_wxMenu_GetMenuItems), -1);
     rb_define_method(cWxMenu.klass, "get_title", VALUEFUNC(_wrap_wxMenu_GetTitle), -1);
     rb_define_method(cWxMenu.klass, "insert", VALUEFUNC(_wrap_wxMenu_Insert), -1);
     rb_define_method(cWxMenu.klass, "insert_check_item", VALUEFUNC(_wrap_wxMenu_InsertCheckItem), -1);

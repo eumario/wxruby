@@ -3,12 +3,10 @@
 #   as part of the wxRuby project
 %include "../common.i"
 
+%module(directors="1") wxProgressDialog
 
-%module(directors="1") wxTextCtrl
+%{
+#include <wx/progdlg.h>
+%}
 
-%ignore wxTextCtrl::wxTextCtrl();
-%ignore wxTextCtrl::operator<<;
-
-
-%include "include/wxTextCtrl.h"
-
+%include "include/wxProgressDialog.h"

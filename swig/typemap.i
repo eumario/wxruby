@@ -15,6 +15,7 @@
 %typemap(in) wxString* {
 	$1 = new wxString(STR2CSTR($input), wxConvUTF8));
 }
+
 /**
 %typemap(freearg) wxString & {
 	delete $1;
@@ -172,6 +173,8 @@
    $1 = (TYPE($input) == T_ARRAY);
 }
 
+%apply (int n, const wxString choices []) { (int n, const wxString* choices),(int nItems, const wxString *items) }
+
 ##############################################################
 
 %typemap(in) wxArrayString & (wxArrayString tmp){
@@ -185,7 +188,10 @@
     
     for (int i = 0; i < RARRAY($input)->len; i++)
     {
-        wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry($input,i)));
+		//this does not work?
+        //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry($input,i))); 
+		//but this does
+		wxString item(STR2CSTR(rb_ary_entry($input,i)),wxConvUTF8);
         tmp.Add(item);
     }
     
@@ -193,8 +199,6 @@
   }
 
 }
-
-%apply wxArrayString & { const wxArrayString &};
 
 %typemap(out) wxArrayString & {
 
@@ -205,6 +209,8 @@
     rb_ary_push($result,rb_str_new2((const char *)(*$1)[i].mb_str()));
   }
 }
+
+%apply wxArrayString & { const wxArrayString &}
 
 ##############################################################
 

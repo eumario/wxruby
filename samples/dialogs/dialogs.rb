@@ -548,7 +548,6 @@ class MyFrame < Frame
         else
             log_status("Countdown from %d finished", @max)
         end
-	dialog.free
     end
 
     def onShowBusyInfo(event)

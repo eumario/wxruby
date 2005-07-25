@@ -5,6 +5,9 @@
 
 %module(directors="1") wxFileDialog
 
+# Although this works for wxWidgets 2.6.1 on OS X 10.4, 
+# it fails for wxWidgets 2.5.3 on Ubuntu Linux.
+# typemaps don't belong here anyway, so let's find a better solution.
 #if 0
 %typemap(in,numinputs=0) wxArrayString &(wxArrayString sel)
 {

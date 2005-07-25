@@ -5,11 +5,11 @@
 
 %module(directors="1") wxMenu
 
-%ignore wxMenu(long  style ) ;
-%ignore GetMenuItems;
-%ignore Append(int  id , const wxString&   item , wxMenu * subMenu , const wxString&  helpString = "") ;
-%ignore Append(wxMenuItem*  menuItem ) ;
-
 GC_NEVER(wxMenu);
+
+%ignore wxMenu::wxMenu(long  style );
+
+%rename(AppendMenu) wxMenu::Append(int itemid, const wxString& text, wxMenu *submenu, const wxString& help = wxEmptyString);
+%rename(AppendItem) wxMenu::Append(wxMenuItem *item);
 
 %include "include/wxMenu.h"
