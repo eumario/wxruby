@@ -1,5 +1,5 @@
 README for wxruby-swig
-Version 0.0.20-pre
+Version 0.0.20
 
 This is a a swig-based version of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -29,6 +29,8 @@ WHATS NEW:
   generated .cpp/.h files, then swig will be launched.
 - Match wxPython by replacing overloaded versions of Menu#append 
   with Menu#append_item and Menu#append_menu 
+- This will be the last release under the name wxruby-swig.
+  Future releases will be named wxruby2.
   
 
 
