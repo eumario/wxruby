@@ -520,9 +520,11 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxChoice swig_types[0] 
 #define  SWIGTYPE_p_wxSize swig_types[1] 
 #define  SWIGTYPE_p_wxWindow swig_types[2] 
-#define  SWIGTYPE_p_wxValidator swig_types[3] 
-#define  SWIGTYPE_p_wxPoint swig_types[4] 
-static swig_type_info *swig_types[6];
+#define  SWIGTYPE_p_wxString swig_types[3] 
+#define  SWIGTYPE_p_wxValidator swig_types[4] 
+#define  SWIGTYPE_p_wxArrayString swig_types[5] 
+#define  SWIGTYPE_p_wxPoint swig_types[6] 
+static swig_type_info *swig_types[8];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -777,6 +779,156 @@ SwigDirector_wxChoice::SwigDirector_wxChoice(VALUE self, wxWindow *parent, wxWin
 
 
 
+SwigDirector_wxChoice::SwigDirector_wxChoice(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, wxArrayString const &choices, long style, wxValidator const &validator, wxString const &name, bool disown): wxChoice(parent, id, pos, size, choices, style, validator, name), Swig::Director(self, disown) {
+    
+}
+
+
+
+void SwigDirector_wxChoice::Clear() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxChoice::Clear();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("clear"), 0, NULL);
+}
+
+
+int SwigDirector_wxChoice::GetCount() const {
+    int c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxChoice::GetCount();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("get_count"), 0, NULL);
+    c_result = (int) NUM2INT(result);
+    return c_result;
+}
+
+
+int SwigDirector_wxChoice::GetSelection() const {
+    int c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxChoice::GetSelection();
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("get_selection"), 0, NULL);
+    c_result = (int) NUM2INT(result);
+    return c_result;
+}
+
+
+int SwigDirector_wxChoice::DoInsert(wxString const &item, int pos) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    int c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxChoice::DoInsert(item,pos);
+    }
+    obj0 = rb_str_new2((const char *)(&item)->mb_str());
+    obj1 = INT2NUM(pos);
+    result = rb_funcall(swig_get_self(), rb_intern(""), 2,obj0,obj1);
+    c_result = (int) NUM2INT(result);
+    return c_result;
+}
+
+
+void SwigDirector_wxChoice::Delete(int n) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxChoice::Delete(n);
+        return;
+    }
+    obj0 = INT2NUM(n);
+    result = rb_funcall(swig_get_self(), rb_intern("delete"), 1,obj0);
+}
+
+
+void SwigDirector_wxChoice::SetSelection(int n) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxChoice::SetSelection(n);
+        return;
+    }
+    obj0 = INT2NUM(n);
+    result = rb_funcall(swig_get_self(), rb_intern("set_selection"), 1,obj0);
+}
+
+
+int SwigDirector_wxChoice::DoAppend(wxString const &item) {
+    VALUE obj0 = Qnil ;
+    int c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxChoice::DoAppend(item);
+    }
+    obj0 = rb_str_new2((const char *)(&item)->mb_str());
+    result = rb_funcall(swig_get_self(), rb_intern(""), 1,obj0);
+    c_result = (int) NUM2INT(result);
+    return c_result;
+}
+
+
+int SwigDirector_wxChoice::FindString(wxString const &s) const {
+    VALUE obj0 = Qnil ;
+    int c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxChoice::FindString(s);
+    }
+    obj0 = rb_str_new2((const char *)(&s)->mb_str());
+    result = rb_funcall(swig_get_self(), rb_intern("find_string"), 1,obj0);
+    c_result = (int) NUM2INT(result);
+    return c_result;
+}
+
+
+void SwigDirector_wxChoice::SetString(int n, wxString const &s) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxChoice::SetString(n,s);
+        return;
+    }
+    obj0 = INT2NUM(n);
+    obj1 = rb_str_new2((const char *)(&s)->mb_str());
+    result = rb_funcall(swig_get_self(), rb_intern("set_string"), 2,obj0,obj1);
+}
+
+
+static void
+free_wxChoice(wxChoice *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxChoice*)arg1;
+#ifdef wxDEBUG
+    printf("Choice.cpp" " Checking %p\n", director);
+#endif
+    if (GcIsDeleted(director))
+    {
+#ifdef wxDEBUG
+        printf("%p is already dead!\n", director);
+#endif
+        return;
+    }
+#ifdef wxDEBUG
+    printf("deleting %p\n", director);
+    fflush(stdout);
+#endif
+    delete arg1;
+}
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
 static VALUE
 _wrap_wxChoice_allocate(VALUE self) {
@@ -801,96 +953,81 @@ _wrap_new_wxChoice(int argc, VALUE *argv, VALUE self) {
     wxWindowID arg3 ;
     wxPoint *arg4 = 0 ;
     wxSize *arg5 = 0 ;
-    int arg6 ;
-    wxString *arg7 ;
-    long arg8 = (long) 0 ;
-    wxValidator const &arg9_defvalue = wxDefaultValidator ;
-    wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
-    wxString const &arg10_defvalue = wxT("choice") ;
-    wxString *arg10 = (wxString *) &arg10_defvalue ;
+    wxArrayString *arg6 = 0 ;
+    long arg7 = (long) 0 ;
+    wxValidator const &arg8_defvalue = wxDefaultValidator ;
+    wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
+    wxString const &arg9_defvalue = wxChoiceNameStr ;
+    wxString *arg9 = (wxString *) &arg9_defvalue ;
     wxChoice *result;
+    wxArrayString tmp6 ;
     
-    {
-        arg6 = 0;
-        arg7 = NULL;
-    }
-    if ((argc < 4) || (argc > 8))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    if ((argc < 5) || (argc > 8))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
     arg1 = self;
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
-    if (argc > 4) {
+    {
+        if ((argv[4] = Qnil) || (TYPE(argv[4]) != T_ARRAY))
         {
-            arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-            arg7 = new wxString[arg6];
-            for(int i=0; i < arg6; ++i)
-            {
-                VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = (wxChar *)STR2CSTR(thisItem);
-            }
+            arg6 = &tmp6;
         }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[4])->len; i++)
+            {
+                //this does not work?
+                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
+                //but this does
+                wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
+                tmp6.Add(item);
+            }
+            
+            arg6 = &tmp6;
+        }
+        
     }
     if (argc > 5) {
-        arg8 = NUM2LONG(argv[5]);
+        arg7 = NUM2LONG(argv[5]);
     }
     if (argc > 6) {
-        SWIG_ConvertPtr(argv[6], (void **) &arg9, SWIGTYPE_p_wxValidator, 1); if (arg9 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[6], (void **) &arg8, SWIGTYPE_p_wxValidator, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 7) {
         {
-            arg10 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
+            arg9 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
         }
     }
     if ( CLASS_OF(self) != Qnil ) {
         /* subclassed */
-        result = (wxChoice *)new SwigDirector_wxChoice(arg1,arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10,false);
+        result = (wxChoice *)new SwigDirector_wxChoice(arg1,arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,(wxArrayString const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9,false);
         
     } else {
-        result = (wxChoice *)new wxChoice(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10);
+        result = (wxChoice *)new wxChoice(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,(wxArrayString const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
         
     }
     DATA_PTR(self) = result;
-    {
-        if (arg7 != NULL) delete [] arg7;
-    }
     return self;
 }
 
 
-static void
-free_wxChoice(wxChoice *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxChoice*)arg1;
-#ifdef wxDEBUG
-    printf("Choice.cpp" " Checking %p\n", director);
-#endif
-    if (GcIsDeleted(director))
-    {
-#ifdef wxDEBUG
-        printf("%p is already dead!\n", director);
-#endif
-        return;
-    }
-#ifdef wxDEBUG
-    printf("deleting %p\n", director);
-    fflush(stdout);
-#endif
-    delete arg1;
-}
 static VALUE
-_wrap_wxChoice_Create(int argc, VALUE *argv, VALUE self) {
+_wrap_wxChoice_Create__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxChoice *arg1 = (wxChoice *) 0 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
-    wxPoint *arg4 = 0 ;
-    wxSize *arg5 = 0 ;
-    int arg6 ;
-    wxString *arg7 ;
+    wxPoint const &arg4_defvalue = wxDefaultPosition ;
+    wxPoint *arg4 = (wxPoint *) &arg4_defvalue ;
+    wxSize const &arg5_defvalue = wxDefaultSize ;
+    wxSize *arg5 = (wxSize *) &arg5_defvalue ;
+    int arg6 = (int) 0 ;
+    wxString *arg7 = (wxString *) (wxString *)NULL ;
     long arg8 = (long) 0 ;
     wxValidator const &arg9_defvalue = wxDefaultValidator ;
     wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
-    wxString const &arg10_defvalue = wxT("choice") ;
+    wxString const &arg10_defvalue = wxChoiceNameStr ;
     wxString *arg10 = (wxString *) &arg10_defvalue ;
     bool result;
     VALUE vresult = Qnil;
@@ -899,13 +1036,17 @@ _wrap_wxChoice_Create(int argc, VALUE *argv, VALUE self) {
         arg6 = 0;
         arg7 = NULL;
     }
-    if ((argc < 4) || (argc > 8))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    if ((argc < 2) || (argc > 8))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
-    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if (argc > 2) {
+        SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 3) {
+        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
     if (argc > 4) {
         {
             arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
@@ -939,15 +1080,372 @@ _wrap_wxChoice_Create(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_wxChoice_Create__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxWindowID arg3 ;
+    wxPoint *arg4 = 0 ;
+    wxSize *arg5 = 0 ;
+    wxArrayString *arg6 = 0 ;
+    long arg7 = (long) 0 ;
+    wxValidator const &arg8_defvalue = wxDefaultValidator ;
+    wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
+    wxString const &arg9_defvalue = wxChoiceNameStr ;
+    wxString *arg9 = (wxString *) &arg9_defvalue ;
+    bool result;
+    wxArrayString tmp6 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 5) || (argc > 8))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        if ((argv[4] = Qnil) || (TYPE(argv[4]) != T_ARRAY))
+        {
+            arg6 = &tmp6;
+        }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[4])->len; i++)
+            {
+                //this does not work?
+                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
+                //but this does
+                wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
+                tmp6.Add(item);
+            }
+            
+            arg6 = &tmp6;
+        }
+        
+    }
+    if (argc > 5) {
+        arg7 = NUM2LONG(argv[5]);
+    }
+    if (argc > 6) {
+        SWIG_ConvertPtr(argv[6], (void **) &arg8, SWIGTYPE_p_wxValidator, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 7) {
+        {
+            arg9 = new wxString(STR2CSTR(argv[7]), wxConvUTF8);
+        }
+    }
+    result = (bool)(arg1)->Create(arg2,arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,(wxArrayString const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE _wrap_wxChoice_Create(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[10];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 9); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if ((argc >= 3) && (argc <= 9)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxChoice, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_wxChoice_Create__SWIG_0(nargs, args, self);
+                    }
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        if (argc <= 4) {
+                            return _wrap_wxChoice_Create__SWIG_0(nargs, args, self);
+                        }
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            if (argc <= 5) {
+                                return _wrap_wxChoice_Create__SWIG_0(nargs, args, self);
+                            }
+                            {
+                                _v = (TYPE(argv[5]) == T_ARRAY);
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_wxChoice_Create__SWIG_0(nargs, args, self);
+                                }
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_wxChoice_Create__SWIG_0(nargs, args, self);
+                                    }
+                                    {
+                                        void *ptr;
+                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        if (argc <= 8) {
+                                            return _wrap_wxChoice_Create__SWIG_0(nargs, args, self);
+                                        }
+                                        {
+                                            _v = (TYPE(argv[8]) == T_STRING);
+                                        }
+                                        if (_v) {
+                                            return _wrap_wxChoice_Create__SWIG_0(nargs, args, self);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ((argc >= 6) && (argc <= 9)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxChoice, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            {
+                                void *ptr;
+                                _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxArrayString, 0) != -1)) ? 1 : 0;
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_wxChoice_Create__SWIG_1(nargs, args, self);
+                                }
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_wxChoice_Create__SWIG_1(nargs, args, self);
+                                    }
+                                    {
+                                        void *ptr;
+                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        if (argc <= 8) {
+                                            return _wrap_wxChoice_Create__SWIG_1(nargs, args, self);
+                                        }
+                                        {
+                                            _v = (TYPE(argv[8]) == T_STRING);
+                                        }
+                                        if (_v) {
+                                            return _wrap_wxChoice_Create__SWIG_1(nargs, args, self);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxChoice_Create'");
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_wxChoice_Delete(int argc, VALUE *argv, VALUE self) {
     wxChoice *arg1 = (wxChoice *) 0 ;
     int arg2 ;
+    Swig::Director *director = 0;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
     arg2 = NUM2INT(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
     (arg1)->Delete(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxChoice_Clear(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->Clear();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxChoice_GetCount(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    int result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (int)((wxChoice const *)arg1)->GetCount();
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxChoice_GetSelection(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    int result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (int)((wxChoice const *)arg1)->GetSelection();
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxChoice_SetSelection(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    int arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    arg2 = NUM2INT(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->SetSelection(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxChoice_FindString(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    wxString *arg2 = 0 ;
+    int result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (int)((wxChoice const *)arg1)->FindString((wxString const &)*arg2);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxChoice_GetString(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    int arg2 ;
+    wxString result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    arg2 = NUM2INT(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = ((wxChoice const *)arg1)->GetString(arg2);
+    
+    {
+        vresult = rb_str_new2((const char *)(&result)->mb_str());
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxChoice_SetString(int argc, VALUE *argv, VALUE self) {
+    wxChoice *arg1 = (wxChoice *) 0 ;
+    int arg2 ;
+    wxString *arg3 = 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
+    arg2 = NUM2INT(argv[0]);
+    {
+        arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->SetString(arg2,(wxString const &)*arg3);
     
     return Qnil;
 }
@@ -987,38 +1485,6 @@ _wrap_wxChoice_SetColumns(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxChoice_SetSelection(int argc, VALUE *argv, VALUE self) {
-    wxChoice *arg1 = (wxChoice *) 0 ;
-    int arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
-    arg2 = NUM2INT(argv[0]);
-    (arg1)->SetSelection(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxChoice_SetStringSelection(int argc, VALUE *argv, VALUE self) {
-    wxChoice *arg1 = (wxChoice *) 0 ;
-    wxString *arg2 = 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxChoice, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    (arg1)->SetStringSelection(*arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_disown_wxChoice(int argc, VALUE *argv, VALUE self) {
     wxChoice *arg1 = (wxChoice *) 0 ;
     
@@ -1040,14 +1506,18 @@ Swig::Director *director = (Swig::Director*)(arg1);
 static swig_type_info _swigt__p_wxChoice[] = {{"_p_wxChoice", 0, "wxChoice *", 0, 0, 0, 0},{"_p_wxChoice", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0, 0},{"_p_wxSize", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxString[] = {{"_p_wxString", 0, "wxString *", 0, 0, 0, 0},{"_p_wxString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxValidator[] = {{"_p_wxValidator", 0, "wxValidator *", 0, 0, 0, 0},{"_p_wxValidator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxArrayString[] = {{"_p_wxArrayString", 0, "wxArrayString *", 0, 0, 0, 0},{"_p_wxArrayString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxChoice, 
 _swigt__p_wxSize, 
 _swigt__p_wxWindow, 
+_swigt__p_wxString, 
 _swigt__p_wxValidator, 
+_swigt__p_wxArrayString, 
 _swigt__p_wxPoint, 
 0
 };
@@ -1084,10 +1554,15 @@ mWxChoice = mWxruby2;
     rb_define_method(cWxChoice.klass, "initialize", VALUEFUNC(_wrap_new_wxChoice), -1);
     rb_define_method(cWxChoice.klass, "create", VALUEFUNC(_wrap_wxChoice_Create), -1);
     rb_define_method(cWxChoice.klass, "delete", VALUEFUNC(_wrap_wxChoice_Delete), -1);
+    rb_define_method(cWxChoice.klass, "clear", VALUEFUNC(_wrap_wxChoice_Clear), -1);
+    rb_define_method(cWxChoice.klass, "get_count", VALUEFUNC(_wrap_wxChoice_GetCount), -1);
+    rb_define_method(cWxChoice.klass, "get_selection", VALUEFUNC(_wrap_wxChoice_GetSelection), -1);
+    rb_define_method(cWxChoice.klass, "set_selection", VALUEFUNC(_wrap_wxChoice_SetSelection), -1);
+    rb_define_method(cWxChoice.klass, "find_string", VALUEFUNC(_wrap_wxChoice_FindString), -1);
+    rb_define_method(cWxChoice.klass, "get_string", VALUEFUNC(_wrap_wxChoice_GetString), -1);
+    rb_define_method(cWxChoice.klass, "set_string", VALUEFUNC(_wrap_wxChoice_SetString), -1);
     rb_define_method(cWxChoice.klass, "get_columns", VALUEFUNC(_wrap_wxChoice_GetColumns), -1);
     rb_define_method(cWxChoice.klass, "set_columns", VALUEFUNC(_wrap_wxChoice_SetColumns), -1);
-    rb_define_method(cWxChoice.klass, "set_selection", VALUEFUNC(_wrap_wxChoice_SetSelection), -1);
-    rb_define_method(cWxChoice.klass, "set_string_selection", VALUEFUNC(_wrap_wxChoice_SetStringSelection), -1);
     cWxChoice.mark = 0;
     cWxChoice.destroy = (void (*)(void *)) free_wxChoice;
 }

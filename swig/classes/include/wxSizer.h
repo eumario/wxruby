@@ -8,322 +8,158 @@
 class wxSizer : public wxObject
 {
 public:
-	/**
-	 * \brief The constructor. Note that wxSizer is an abstract base class and may not
-be instantiated. 
-	*/
+    wxSizer();
+    ~wxSizer();
 
-   wxSizer() ;
-	/**
-	 * \brief The destructor. 
-	*/
+    // methods for adding elements to the sizer: there are Add/Insert/Prepend
+    // overloads for each of window/sizer/spacer/wxSizerItem
+    inline wxSizerItem* Add( wxWindow *window,
+                             int proportion = 0,
+                             int flag = 0,
+                             int border = 0,
+                             wxObject* userData = NULL );
+    inline wxSizerItem* Add( wxSizer *sizer,
+                             int proportion = 0,
+                             int flag = 0,
+                             int border = 0,
+                             wxObject* userData = NULL );
+    inline wxSizerItem* Add( int width,
+                             int height,
+                             int proportion = 0,
+                             int flag = 0,
+                             int border = 0,
+                             wxObject* userData = NULL );
+    inline wxSizerItem* Add( wxWindow *window, const wxSizerFlags& flags );
+    inline wxSizerItem* Add( wxSizer *sizer, const wxSizerFlags& flags );
+    inline wxSizerItem* Add( wxSizerItem *item );
 
-  virtual  ~wxSizer() ;
-	/**
-	 * \brief  
-	 * \param wxWindow*   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
+    inline wxSizerItem* AddSpacer(int size);
+    inline wxSizerItem* AddStretchSpacer(int prop = 1);
 
-  void Add(wxWindow*  window , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief  
-	 * \param wxSizer*   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
+    inline wxSizerItem* Insert( size_t index,
+                                wxWindow *window,
+                                int proportion = 0,
+                                int flag = 0,
+                                int border = 0,
+                                wxObject* userData = NULL );
+    inline wxSizerItem* Insert( size_t index,
+                                wxSizer *sizer,
+                                int proportion = 0,
+                                int flag = 0,
+                                int border = 0,
+                                wxObject* userData = NULL );
+    inline wxSizerItem* Insert( size_t index,
+                                int width,
+                                int height,
+                                int proportion = 0,
+                                int flag = 0,
+                                int border = 0,
+                                wxObject* userData = NULL );
+    inline wxSizerItem* Insert( size_t index,
+                                wxWindow *window,
+                                const wxSizerFlags& flags );
+    inline wxSizerItem* Insert( size_t index,
+                                wxSizer *sizer,
+                                const wxSizerFlags& flags );
+    virtual wxSizerItem* Insert( size_t index, wxSizerItem *item );
 
-  void Add(wxSizer*  sizer , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief Appends a child to the sizer.  wxSizer itself is an abstract class, but the parameters are
-equivalent in the derived classes that you will instantiate to use it so they are described
-here: 
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
+    inline wxSizerItem* InsertSpacer(size_t index, int size);
+    inline wxSizerItem* InsertStretchSpacer(size_t index, int prop = 1);
 
-  void Add(int  width , int  height , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief This method is abstract and has to be overwritten by any derived class.
-Here, the sizer will do the actual calculation of its children minimal sizes. 
-	*/
+    inline wxSizerItem* Prepend( wxWindow *window,
+                                 int proportion = 0,
+                                 int flag = 0,
+                                 int border = 0,
+                                 wxObject* userData = NULL );
+    inline wxSizerItem* Prepend( wxSizer *sizer,
+                                 int proportion = 0,
+                                 int flag = 0,
+                                 int border = 0,
+                                 wxObject* userData = NULL );
+    inline wxSizerItem* Prepend( int width,
+                                 int height,
+                                 int proportion = 0,
+                                 int flag = 0,
+                                 int border = 0,
+                                 wxObject* userData = NULL );
+    inline wxSizerItem* Prepend( wxWindow *window, const wxSizerFlags& flags );
+    inline wxSizerItem* Prepend( wxSizer *sizer, const wxSizerFlags& flags );
+    inline wxSizerItem* Prepend( wxSizerItem *item );
 
-  wxSize CalcMin()  = 0;
-	/**
-	 * \brief  
-	 * \param wxWindow*   
-	*/
-
-  bool Detach(wxWindow*  window ) ;
-	/**
-	 * \brief  
-	 * \param wxSizer*   
-	*/
-
-  bool Detach(wxSizer*  sizer ) ;
-	/**
-	 * \brief Detach a child from the sizer without destroying it.   is the window to be
-detached,   is the equivalent sizer and   is the position of
-the child in the sizer, typically 0 for the first item. This method does not
-cause any layout or resizing to take place, call  
-to update the layout &quot;on screen&quot; after detaching a child from the sizer.
-
-Returns true if the child item was found and detached, false otherwise. 
-	 * \param size_t   
-	*/
-
-  bool Detach(size_t  index ) ;
-	/**
-	 * \brief Tell the sizer to resize the   to match the sizer's minimal size. This
-is commonly done in the constructor of the window itself, see sample in the description
-of  . Returns the new size. 
-	 * \param wxWindow*   
-	*/
-
-  wxSize Fit(wxWindow*  window ) ;
-	/**
-	 * \brief Tell the sizer to resize the virtual size of the   to match the sizer's
-minimal size.  This will not alter the on screen size of the window, but may cause
-the addition/removal/alteration of scrollbars required to view the virtual area in
-windows which manage it. 
-	 * \param wxWindow*   
-	*/
-
-  void FitInside(wxWindow*  window ) ;
-	/**
-	 * \brief Returns the current size of the sizer. 
-	*/
-
-  wxSize GetSize() ;
-	/**
-	 * \brief Returns the current position of the sizer. 
-	*/
-
-  wxPoint GetPosition() ;
-	/**
-	 * \brief Returns the minimal size of the sizer. This is either the combined minimal
-size of all the children and their borders or the minimal size set by 
- , depending on which is bigger. 
-	*/
-
-  wxSize GetMinSize() ;
-	/**
-	 * \brief  
-	 * \param size_t   
-	 * \param wxWindow*   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
-
-  void Insert(size_t  index , wxWindow*  window , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief  
-	 * \param size_t   
-	 * \param wxSizer*   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
-
-  void Insert(size_t  index , wxSizer*  sizer , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief Insert a child into the sizer before any existing item at  .
+    inline wxSizerItem* PrependSpacer(int size);
+    inline wxSizerItem* PrependStretchSpacer(int prop = 1);
 
 
+    // Deprecated in 2.6 since historically it does not delete the window,
+    // use Detach instead.
+    virtual bool Remove( wxWindow *window );
+    virtual bool Remove( wxSizer *sizer );
+    virtual bool Remove( int index );
 
-See   for the meaning of the other parameters. 
-	 * \param size_t   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
+    virtual bool Detach( wxWindow *window );
+    virtual bool Detach( wxSizer *sizer );
+    virtual bool Detach( int index );
 
-  void Insert(size_t  index , int  width , int  height , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief Call this to force layout of the children anew, e.g. after having added a child
-to or removed a child (window, other sizer or space) from the sizer while keeping
-the current dimension. 
-	*/
+    virtual void Clear( bool delete_windows = false );
+    virtual void DeleteWindows();
 
-  void Layout() ;
-	/**
-	 * \brief  
-	 * \param wxWindow*   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
+    void SetMinSize( int width, int height );
+    void SetMinSize( wxSize size );
 
-  void Prepend(wxWindow*  window , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief  
-	 * \param wxSizer*   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
+    // Searches recursively
+    bool SetItemMinSize( wxWindow *window, int width, int height );
+    bool SetItemMinSize( wxWindow *window, wxSize size );
 
-  void Prepend(wxSizer*  sizer , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief Same as  , but prepends the items to the beginning of the
-list of items (windows, subsizers or spaces) owned by this sizer. 
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param wxObject*   
-	*/
+    // Searches recursively
+    bool SetItemMinSize( wxSizer *sizer, int width, int height );
+    bool SetItemMinSize( wxSizer *sizer, wxSize size );
 
-  void Prepend(int  width , int  height , int  proportion = 0, int  flag = 0, int  border = 0, wxObject*  userData = NULL) ;
-	/**
-	 * \brief This method is abstract and has to be overwritten by any derived class.
-Here, the sizer will do the actual calculation of its children's positions
-and sizes. 
-	*/
+    bool SetItemMinSize( size_t index, int width, int height );
+    bool SetItemMinSize( size_t index, wxSize size );
+
+    wxSize GetSize() const;
+    wxPoint GetPosition() const;
+
+    // Calculate the minimal size or return m_minSize if bigger.
+    wxSize GetMinSize();
 
   void RecalcSizes()  = 0;
-	/**
-	 * \brief  
-	 * \param wxWindow*   
-	*/
+    wxSize CalcMin() = 0;
 
-  bool Remove(wxWindow*  window ) ;
-	/**
-	 * \brief  
-	 * \param wxSizer*   
-	*/
+    virtual void Layout();
 
-  bool Remove(wxSizer*  sizer ) ;
-	/**
-	 * \brief Removes a child from the sizer and destroys it.    is the wxSizer to be removed,
-  is the position of the child in the sizer, typically 0 for the first item.
-This method does not cause any layout or resizing to take place, call
-  to update the layout &quot;on screen&quot; after removing a
-child from the sizer.
+    wxSize Fit( wxWindow *window );
+    void FitInside( wxWindow *window );
+    void SetSizeHints( wxWindow *window );
+    void SetVirtualSizeHints( wxWindow *window );
 
-  The method taking a wxWindow&#42; parameter is deprecated.  For historical reasons
-it does not destroy the window as would usually be expected from Remove.  You should use
-  in new code instead.  There is currently no wxSizer
-method that will both detach and destroy a wxWindow item.
+    wxSizerItemList& GetChildren();
 
-Returns true if the child item was found and removed, false otherwise. 
-	 * \param size_t   
-	*/
+    void SetDimension( int x, int y, int width, int height );
 
-  bool Remove(size_t  index ) ;
-	/**
-	 * \brief Call this to force the sizer to take the given dimension and thus force the items owned
-by the sizer to resize themselves according to the rules defined by the parameter in the 
-  and   methods. 
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	*/
+    wxSizerItem* GetItem( wxWindow *window, bool recursive = false );
+    wxSizerItem* GetItem( wxSizer *sizer, bool recursive = false );
+    wxSizerItem* GetItem( size_t index );
 
-  void SetDimension(int  x , int  y , int  width , int  height ) ;
-	/**
-	 * \brief  
-	 * \param int   
-	 * \param int   
-	*/
+    // Manage whether individual scene items are considered
+    // in the layout calculations or not.
+    bool Show( wxWindow *window, bool show = true, bool recursive = false );
+    bool Show( wxSizer *sizer, bool show = true, bool recursive = false );
+    bool Show( size_t index, bool show = true );
 
-  void SetMinSize(int  width , int  height ) ;
-	/**
-	 * \brief Call this to give the sizer a minimal size. Normally, the sizer will calculate its
-minimal size based purely on how much space its children need. After calling this
-method   will return either the minimal size
-as requested by its children or the minimal size set here, depending on which is
-bigger. 
-	 * \param wxSize   
-	*/
+    bool Hide( wxSizer *sizer, bool recursive = false );
+    bool Hide( wxWindow *window, bool recursive = false );
+    bool Hide( size_t index );
 
-  void SetMinSize(wxSize  size ) ;
-	/**
-	 * \brief  
-	 * \param wxWindow*   
-	 * \param int  
-	 * \param int  
-	*/
+    bool IsShown( wxWindow *window ) const;
+    bool IsShown( wxSizer *sizer ) const;
+    bool IsShown( size_t index ) const;
 
-  void SetItemMinSize(wxWindow*  window , int  width , int  height ) ;
-	/**
-	 * \brief  
-	 * \param wxSizer*   
-	 * \param int  
-	 * \param int  
-	*/
+    // Recursively call wxWindow::Show () on all sizer items.
+    virtual void ShowItems (bool show);
 
-  void SetItemMinSize(wxSizer*  sizer , int  width , int  height ) ;
-	/**
-	 * \brief Set an item's minimum size by window, sizer, or position. The item will be found recursively
-in the sizer's descendants. This function enables an application to set the size of an item
-after initial creation. 
-	 * \param size_t   
-	 * \param int  
-	 * \param int  
-	*/
-
-  void SetItemMinSize(size_t  index , int  width , int  height ) ;
-	/**
-	 * \brief Tell the sizer to set (and  ) the minimal size of the   to
-match the sizer's minimal size.  This is commonly done in the constructor of the window itself,
-see sample in the description of   if the window is resizable
-(as are many dialogs under Unix and frames on probably all platforms). 
-	 * \param wxWindow*   
-	*/
-
-  void SetSizeHints(wxWindow*  window ) ;
-	/**
-	 * \brief Tell the sizer to set the minimal size of the   virtual area to match the sizer's
-minimal size. For windows with managed scrollbars this will set them appropriately. 
-	 * \param wxWindow*   
-	*/
-
-  void SetVirtualSizeHints(wxWindow*  window ) ;
-	/**
-	 * \brief  
-	 * \param wxWindow*   
-	 * \param bool   
-	*/
-
-  void Show(wxWindow*  window , bool  show = true) ;
-	/**
-	 * \brief  
-	 * \param wxSizer*   
-	 * \param bool   
-	*/
-
-  void Show(wxSizer*  sizer , bool  show = true) ;
-	/**
-	 * \brief Shows or hides the  ,  , or item at  .
-To make a sizer item disappear or reappear, use Show() followed by Layout().
-
-Note that this only works with wxBoxSizer and wxFlexGridSizer, since they
-are the only two sizer classes that can size rows/columns independently. 
-	 * \param size_t   
-	 * \param bool   
-	*/
-
-  void Show(size_t  index , bool  show = true) ;
+    void Show(bool show);
+    bool IsShown() const;
 };
 
 

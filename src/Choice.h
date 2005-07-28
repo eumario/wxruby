@@ -18,7 +18,17 @@ class SwigDirector_wxChoice : public wxChoice, public Swig::Director {
 
 public:
     SwigDirector_wxChoice(VALUE self, bool disown = false);
-    SwigDirector_wxChoice(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, int n, wxString const choices[], long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("choice"), bool disown = false);
+    SwigDirector_wxChoice(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, int n = 0, wxString const choices[] = NULL, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxChoiceNameStr, bool disown = false);
+    SwigDirector_wxChoice(VALUE self, wxWindow *parent, wxWindowID id, wxPoint const &pos, wxSize const &size, wxArrayString const &choices, long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxChoiceNameStr, bool disown = false);
+    virtual void Clear();
+    virtual int GetCount() const;
+    virtual int GetSelection() const;
+    virtual int DoInsert(wxString const &item, int pos);
+    virtual void Delete(int n);
+    virtual void SetSelection(int n);
+    virtual int DoAppend(wxString const &item);
+    virtual int FindString(wxString const &s) const;
+    virtual void SetString(int n, wxString const &s);
 };
 
 

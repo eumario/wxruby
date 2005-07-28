@@ -75,7 +75,9 @@ wx_yield(VALUE self)
 
 %}
 
+void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
 
+void wxEndBusyCursor();
 
 void wxInitAllImageHandlers();
 

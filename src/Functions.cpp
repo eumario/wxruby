@@ -519,8 +519,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 #define  SWIGTYPE_p_wxWindow swig_types[0] 
 #define  SWIGTYPE_p_wxArrayInt swig_types[1] 
-#define  SWIGTYPE_p_wxPoint swig_types[2] 
-static swig_type_info *swig_types[4];
+#define  SWIGTYPE_p_wxCursor swig_types[2] 
+#define  SWIGTYPE_p_wxPoint swig_types[3] 
+static swig_type_info *swig_types[5];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -813,6 +814,31 @@ namespace Swig {
  * --------------------------------------------------- */
 
 #include "Functions.h"
+
+static VALUE
+_wrap_wxBeginBusyCursor(int argc, VALUE *argv, VALUE self) {
+    wxCursor *arg1 = (wxCursor *) wxHOURGLASS_CURSOR ;
+    
+    if ((argc < 0) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if (argc > 0) {
+        SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxCursor, 1);
+    }
+    wxBeginBusyCursor(arg1);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxEndBusyCursor(int argc, VALUE *argv, VALUE self) {
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    wxEndBusyCursor();
+    
+    return Qnil;
+}
+
 
 static VALUE
 _wrap_wxInitAllImageHandlers(int argc, VALUE *argv, VALUE self) {
@@ -1250,11 +1276,13 @@ _wrap_wxFileSelector(int argc, VALUE *argv, VALUE self) {
 
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxArrayInt[] = {{"_p_wxArrayInt", 0, "wxArrayInt *", 0, 0, 0, 0},{"_p_wxArrayInt", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxCursor[] = {{"_p_wxCursor", 0, "wxCursor *", 0, 0, 0, 0},{"_p_wxCursor", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxWindow, 
 _swigt__p_wxArrayInt, 
+_swigt__p_wxCursor, 
 _swigt__p_wxPoint, 
 0
 };
@@ -1280,6 +1308,8 @@ mWxFunctions = mWxruby2;
         SWIG_define_class(swig_types[i]);
     }
     
+    rb_define_module_function(mWxFunctions, "begin_busy_cursor", VALUEFUNC(_wrap_wxBeginBusyCursor), -1);
+    rb_define_module_function(mWxFunctions, "end_busy_cursor", VALUEFUNC(_wrap_wxEndBusyCursor), -1);
     rb_define_module_function(mWxFunctions, "init_all_image_handlers", VALUEFUNC(_wrap_wxInitAllImageHandlers), -1);
     rb_define_module_function(mWxFunctions, "bell", VALUEFUNC(_wrap_wxBell), -1);
     rb_define_module_function(mWxFunctions, "yield", VALUEFUNC(_wrap_wxYield), -1);

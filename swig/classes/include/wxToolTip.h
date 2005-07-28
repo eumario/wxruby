@@ -8,40 +8,24 @@
 class wxToolTip : public wxObject
 {
 public:
-	/**
-	 * \brief Enable or disable tooltips globally. 
-	 * \param bool   
-	*/
+    // ctor & dtor
+    wxToolTip(const wxString &tip);
+    virtual ~wxToolTip();
 
-  static void Enable(bool  flag ) ;
-	/**
-	 * \brief Set the delay after which the tooltip appears. 
-	 * \param long   
-	*/
-
-  static void SetDelay(long  msecs ) ;
-	/**
-	 * \brief Constructor. 
-	 * \param const wxString&   
-	*/
-
-   wxToolTip(const wxString&  tip ) ;
-	/**
-	 * \brief Set the tooltip text. 
-	 * \param const wxString&   
-	*/
-
-  void SetTip(const wxString&  tip ) ;
-	/**
-	 * \brief Get the tooltip text. 
-	*/
-
+    // accessors
+        // tip text
+    void SetTip(const wxString& tip);
   wxString GetTip() const;
-	/**
-	 * \brief Get the associated window. 
-	*/
 
-  wxWindow* GetWindow() const;
+        // the window we're associated with
+    void SetWindow(wxWindow *win);
+    wxWindow *GetWindow() const;
+
+    // controlling tooltip behaviour: globally change tooltip parameters
+        // enable or disable the tooltips globally
+    static void Enable(bool flag);
+        // set the delay after which the tooltip appears
+    static void SetDelay(long milliseconds);
 };
 
 

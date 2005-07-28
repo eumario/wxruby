@@ -521,8 +521,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 #define  SWIGTYPE_p_wxSize swig_types[1] 
 #define  SWIGTYPE_p_wxWindow swig_types[2] 
 #define  SWIGTYPE_p_wxValidator swig_types[3] 
-#define  SWIGTYPE_p_wxPoint swig_types[4] 
-static swig_type_info *swig_types[6];
+#define  SWIGTYPE_p_wxArrayString swig_types[4] 
+#define  SWIGTYPE_p_wxPoint swig_types[5] 
+static swig_type_info *swig_types[7];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -765,16 +766,82 @@ namespace Swig {
 
 #include "ComboBox.h"
 
-SwigDirector_wxComboBox::SwigDirector_wxComboBox(VALUE self, bool disown): wxComboBox(), Swig::Director(self, disown) {
+static VALUE
+_wrap_new_wxComboBox__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxWindowID arg2 ;
+    wxString const &arg3_defvalue = wxEmptyString ;
+    wxString *arg3 = (wxString *) &arg3_defvalue ;
+    wxPoint const &arg4_defvalue = wxDefaultPosition ;
+    wxPoint *arg4 = (wxPoint *) &arg4_defvalue ;
+    wxSize const &arg5_defvalue = wxDefaultSize ;
+    wxSize *arg5 = (wxSize *) &arg5_defvalue ;
+    int arg6 = (int) 0 ;
+    wxString *arg7 = (wxString *) (wxString *)NULL ;
+    long arg8 = (long) 0 ;
+    wxValidator const &arg9_defvalue = wxDefaultValidator ;
+    wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
+    wxString const &arg10_defvalue = wxComboBoxNameStr ;
+    wxString *arg10 = (wxString *) &arg10_defvalue ;
+    wxComboBox *result;
+    wxString *arr6 ;
     
+    {
+        arg6 = 0;
+        arg7 = NULL;
+    }
+    if ((argc < 2) || (argc > 9))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    arg2 = NUM2INT(argv[1]);
+    if (argc > 2) {
+        {
+            arg3 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
+        }
+    }
+    if (argc > 3) {
+        SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 4) {
+        SWIG_ConvertPtr(argv[4], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 5) {
+        {
+            if ((argv[5] == Qnil) || (TYPE(argv[5]) != T_ARRAY))
+            {
+                arg6 = 0;
+                arg7 = NULL;
+            }
+            else
+            {
+                arr6 = new wxString[RARRAY(argv[5])->len];
+                for (int i = 0; i < RARRAY(argv[5])->len; i++)
+                {
+                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                }
+                arg6 = RARRAY(argv[5])->len;
+                arg7 = arr6;
+            }
+        }
+    }
+    if (argc > 6) {
+        arg8 = NUM2LONG(argv[6]);
+    }
+    if (argc > 7) {
+        SWIG_ConvertPtr(argv[7], (void **) &arg9, SWIGTYPE_p_wxValidator, 1); if (arg9 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 8) {
+        {
+            arg10 = new wxString(STR2CSTR(argv[8]), wxConvUTF8);
+        }
+    }
+    result = (wxComboBox *)new wxComboBox(arg1,arg2,(wxString const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,arg6,(wxString const (*))arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10);
+    DATA_PTR(self) = result;
+    {
+        if (arg7 != NULL) delete [] arg7;
+    }
+    return self;
 }
-
-
-
-SwigDirector_wxComboBox::SwigDirector_wxComboBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &value, wxPoint const &pos, wxSize const &size, int n, wxString const choices[], long style, wxValidator const &validator, wxString const &name, bool disown): wxComboBox(parent, id, value, pos, size, n, choices, style, validator, name), Swig::Director(self, disown) {
-    
-}
-
 
 
 #ifdef HAVE_RB_DEFINE_ALLOC_FUNC
@@ -795,116 +862,236 @@ _wrap_wxComboBox_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxComboBox(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindowID arg3 ;
-    wxString *arg4 = 0 ;
-    wxPoint *arg5 = 0 ;
-    wxSize *arg6 = 0 ;
-    int arg7 ;
-    wxString *arg8 ;
-    long arg9 = (long) 0 ;
-    wxValidator const &arg10_defvalue = wxDefaultValidator ;
-    wxValidator *arg10 = (wxValidator *) &arg10_defvalue ;
-    wxString const &arg11_defvalue = wxT("comboBox") ;
-    wxString *arg11 = (wxString *) &arg11_defvalue ;
+_wrap_new_wxComboBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxWindowID arg2 ;
+    wxString *arg3 = 0 ;
+    wxPoint *arg4 = 0 ;
+    wxSize *arg5 = 0 ;
+    wxArrayString *arg6 = 0 ;
+    long arg7 = (long) 0 ;
+    wxValidator const &arg8_defvalue = wxDefaultValidator ;
+    wxValidator *arg8 = (wxValidator *) &arg8_defvalue ;
+    wxString const &arg9_defvalue = wxComboBoxNameStr ;
+    wxString *arg9 = (wxString *) &arg9_defvalue ;
     wxComboBox *result;
-    wxString *arr7 ;
+    wxArrayString tmp6 ;
     
+    if ((argc < 6) || (argc > 9))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 6)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    arg2 = NUM2INT(argv[1]);
     {
-        arg7 = 0;
-        arg8 = NULL;
+        arg3 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
-    if ((argc < 5) || (argc > 9))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
-    arg1 = self;
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[3], (void **) &arg4, SWIGTYPE_p_wxPoint, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[4], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     {
-        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
-    }
-    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
-    if (argc > 5) {
+        if ((argv[5] = Qnil) || (TYPE(argv[5]) != T_ARRAY))
         {
-            if ((argv[5] == Qnil) || (TYPE(argv[5]) != T_ARRAY))
-            {
-                arg7 = 0;
-                arg8 = NULL;
-            }
-            else
-            {
-                arr7 = new wxString[RARRAY(argv[5])->len];
-                for (int i = 0; i < RARRAY(argv[5])->len; i++)
-                {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
-                }
-                arg7 = RARRAY(argv[5])->len;
-                arg8 = arr7;
-            }
+            arg6 = &tmp6;
         }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[5])->len; i++)
+            {
+                //this does not work?
+                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i))); 
+                //but this does
+                wxString item(STR2CSTR(rb_ary_entry(argv[5],i)),wxConvUTF8);
+                tmp6.Add(item);
+            }
+            
+            arg6 = &tmp6;
+        }
+        
     }
     if (argc > 6) {
-        arg9 = NUM2LONG(argv[6]);
+        arg7 = NUM2LONG(argv[6]);
     }
     if (argc > 7) {
-        SWIG_ConvertPtr(argv[7], (void **) &arg10, SWIGTYPE_p_wxValidator, 1); if (arg10 == NULL) rb_raise(rb_eTypeError, "null reference");
+        SWIG_ConvertPtr(argv[7], (void **) &arg8, SWIGTYPE_p_wxValidator, 1); if (arg8 == NULL) rb_raise(rb_eTypeError, "null reference");
     }
     if (argc > 8) {
         {
-            arg11 = new wxString(STR2CSTR(argv[8]), wxConvUTF8);
+            arg9 = new wxString(STR2CSTR(argv[8]), wxConvUTF8);
         }
     }
-    if ( CLASS_OF(self) != Qnil ) {
-        /* subclassed */
-        result = (wxComboBox *)new SwigDirector_wxComboBox(arg1,arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const (*))arg8,arg9,(wxValidator const &)*arg10,(wxString const &)*arg11,false);
-        
-    } else {
-        result = (wxComboBox *)new wxComboBox(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,arg7,(wxString const (*))arg8,arg9,(wxValidator const &)*arg10,(wxString const &)*arg11);
-        
-    }
+    result = (wxComboBox *)new wxComboBox(arg1,arg2,(wxString const &)*arg3,(wxPoint const &)*arg4,(wxSize const &)*arg5,(wxArrayString const &)*arg6,arg7,(wxValidator const &)*arg8,(wxString const &)*arg9);
     DATA_PTR(self) = result;
-    {
-        if (arg8 != NULL) delete [] arg8;
-    }
     return self;
 }
 
 
-static void
-free_wxComboBox(wxComboBox *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxComboBox*)arg1;
-#ifdef wxDEBUG
-    printf("ComboBox.cpp" " Checking %p\n", director);
-#endif
-    if (GcIsDeleted(director))
-    {
-#ifdef wxDEBUG
-        printf("%p is already dead!\n", director);
-#endif
-        return;
+static VALUE _wrap_new_wxComboBox(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[9];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 9); ii++) {
+        argv[ii] = args[ii];
     }
-#ifdef wxDEBUG
-    printf("deleting %p\n", director);
-    fflush(stdout);
-#endif
-    delete arg1;
+    if ((argc >= 2) && (argc <= 9)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                }
+                {
+                    _v = (TYPE(argv[2]) == T_STRING);
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                    }
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        if (argc <= 4) {
+                            return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                        }
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            if (argc <= 5) {
+                                return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                            }
+                            {
+                                _v = (TYPE(argv[5]) == T_ARRAY);
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                                }
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                                    }
+                                    {
+                                        void *ptr;
+                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        if (argc <= 8) {
+                                            return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                                        }
+                                        {
+                                            _v = (TYPE(argv[8]) == T_STRING);
+                                        }
+                                        if (_v) {
+                                            return _wrap_new_wxComboBox__SWIG_0(nargs, args, self);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ((argc >= 6) && (argc <= 9)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = (TYPE(argv[2]) == T_STRING);
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            {
+                                void *ptr;
+                                _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxArrayString, 0) != -1)) ? 1 : 0;
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_new_wxComboBox__SWIG_1(nargs, args, self);
+                                }
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_new_wxComboBox__SWIG_1(nargs, args, self);
+                                    }
+                                    {
+                                        void *ptr;
+                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        if (argc <= 8) {
+                                            return _wrap_new_wxComboBox__SWIG_1(nargs, args, self);
+                                        }
+                                        {
+                                            _v = (TYPE(argv[8]) == T_STRING);
+                                        }
+                                        if (_v) {
+                                            return _wrap_new_wxComboBox__SWIG_1(nargs, args, self);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'new_wxComboBox'");
+    return Qnil;
 }
+
+
 static VALUE
-_wrap_wxComboBox_Create(int argc, VALUE *argv, VALUE self) {
+_wrap_wxComboBox_Create__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxComboBox *arg1 = (wxComboBox *) 0 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
-    wxString *arg4 = 0 ;
-    wxPoint *arg5 = 0 ;
-    wxSize *arg6 = 0 ;
-    int arg7 ;
-    wxString *arg8 ;
+    wxString const &arg4_defvalue = wxEmptyString ;
+    wxString *arg4 = (wxString *) &arg4_defvalue ;
+    wxPoint const &arg5_defvalue = wxDefaultPosition ;
+    wxPoint *arg5 = (wxPoint *) &arg5_defvalue ;
+    wxSize const &arg6_defvalue = wxDefaultSize ;
+    wxSize *arg6 = (wxSize *) &arg6_defvalue ;
+    int arg7 = (int) 0 ;
+    wxString *arg8 = (wxString *) (wxString *)NULL ;
     long arg9 = (long) 0 ;
     wxValidator const &arg10_defvalue = wxDefaultValidator ;
     wxValidator *arg10 = (wxValidator *) &arg10_defvalue ;
-    wxString const &arg11_defvalue = wxT("comboBox") ;
+    wxString const &arg11_defvalue = wxComboBoxNameStr ;
     wxString *arg11 = (wxString *) &arg11_defvalue ;
     bool result;
     wxString *arr7 ;
@@ -914,16 +1101,22 @@ _wrap_wxComboBox_Create(int argc, VALUE *argv, VALUE self) {
         arg7 = 0;
         arg8 = NULL;
     }
-    if ((argc < 5) || (argc > 9))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
+    if ((argc < 2) || (argc > 9))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxComboBox, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
-    {
-        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
+    if (argc > 2) {
+        {
+            arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
+        }
     }
-    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
-    SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+    if (argc > 3) {
+        SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 4) {
+        SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
     if (argc > 5) {
         {
             if ((argv[5] == Qnil) || (TYPE(argv[5]) != T_ARRAY))
@@ -961,6 +1154,237 @@ _wrap_wxComboBox_Create(int argc, VALUE *argv, VALUE self) {
         if (arg8 != NULL) delete [] arg8;
     }
     return vresult;
+}
+
+
+static VALUE
+_wrap_wxComboBox_Create__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxComboBox *arg1 = (wxComboBox *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxWindowID arg3 ;
+    wxString *arg4 = 0 ;
+    wxPoint *arg5 = 0 ;
+    wxSize *arg6 = 0 ;
+    wxArrayString *arg7 = 0 ;
+    long arg8 = (long) 0 ;
+    wxValidator const &arg9_defvalue = wxDefaultValidator ;
+    wxValidator *arg9 = (wxValidator *) &arg9_defvalue ;
+    wxString const &arg10_defvalue = wxComboBoxNameStr ;
+    wxString *arg10 = (wxString *) &arg10_defvalue ;
+    bool result;
+    wxArrayString tmp7 ;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 6) || (argc > 9))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 6)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxComboBox, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    arg3 = NUM2INT(argv[1]);
+    {
+        arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
+    }
+    SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxPoint, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
+    SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxSize, 1); if (arg6 == NULL) rb_raise(rb_eTypeError, "null reference");
+    {
+        if ((argv[5] = Qnil) || (TYPE(argv[5]) != T_ARRAY))
+        {
+            arg7 = &tmp7;
+        }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[5])->len; i++)
+            {
+                //this does not work?
+                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i))); 
+                //but this does
+                wxString item(STR2CSTR(rb_ary_entry(argv[5],i)),wxConvUTF8);
+                tmp7.Add(item);
+            }
+            
+            arg7 = &tmp7;
+        }
+        
+    }
+    if (argc > 6) {
+        arg8 = NUM2LONG(argv[6]);
+    }
+    if (argc > 7) {
+        SWIG_ConvertPtr(argv[7], (void **) &arg9, SWIGTYPE_p_wxValidator, 1); if (arg9 == NULL) rb_raise(rb_eTypeError, "null reference");
+    }
+    if (argc > 8) {
+        {
+            arg10 = new wxString(STR2CSTR(argv[8]), wxConvUTF8);
+        }
+    }
+    result = (bool)(arg1)->Create(arg2,arg3,(wxString const &)*arg4,(wxPoint const &)*arg5,(wxSize const &)*arg6,(wxArrayString const &)*arg7,arg8,(wxValidator const &)*arg9,(wxString const &)*arg10);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE _wrap_wxComboBox_Create(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[11];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 10); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if ((argc >= 3) && (argc <= 10)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxComboBox, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                    }
+                    {
+                        _v = (TYPE(argv[3]) == T_STRING);
+                    }
+                    if (_v) {
+                        if (argc <= 4) {
+                            return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                        }
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            if (argc <= 5) {
+                                return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                            }
+                            {
+                                void *ptr;
+                                _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                                }
+                                {
+                                    _v = (TYPE(argv[6]) == T_ARRAY);
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                                    }
+                                    {
+                                        _v = ((TYPE(argv[7]) == T_FIXNUM) || (TYPE(argv[7]) == T_BIGNUM)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        if (argc <= 8) {
+                                            return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                                        }
+                                        {
+                                            void *ptr;
+                                            _v = (NIL_P(argv[8]) || (TYPE(argv[8]) == T_DATA && SWIG_ConvertPtr(argv[8], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                        }
+                                        if (_v) {
+                                            if (argc <= 9) {
+                                                return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                                            }
+                                            {
+                                                _v = (TYPE(argv[9]) == T_STRING);
+                                            }
+                                            if (_v) {
+                                                return _wrap_wxComboBox_Create__SWIG_0(nargs, args, self);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ((argc >= 7) && (argc <= 10)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxComboBox, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        _v = (TYPE(argv[3]) == T_STRING);
+                    }
+                    if (_v) {
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            {
+                                void *ptr;
+                                _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                            }
+                            if (_v) {
+                                {
+                                    void *ptr;
+                                    _v = (NIL_P(argv[6]) || (TYPE(argv[6]) == T_DATA && SWIG_ConvertPtr(argv[6], &ptr, SWIGTYPE_p_wxArrayString, 0) != -1)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_wxComboBox_Create__SWIG_1(nargs, args, self);
+                                    }
+                                    {
+                                        _v = ((TYPE(argv[7]) == T_FIXNUM) || (TYPE(argv[7]) == T_BIGNUM)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        if (argc <= 8) {
+                                            return _wrap_wxComboBox_Create__SWIG_1(nargs, args, self);
+                                        }
+                                        {
+                                            void *ptr;
+                                            _v = (NIL_P(argv[8]) || (TYPE(argv[8]) == T_DATA && SWIG_ConvertPtr(argv[8], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                        }
+                                        if (_v) {
+                                            if (argc <= 9) {
+                                                return _wrap_wxComboBox_Create__SWIG_1(nargs, args, self);
+                                            }
+                                            {
+                                                _v = (TYPE(argv[9]) == T_STRING);
+                                            }
+                                            if (_v) {
+                                                return _wrap_wxComboBox_Create__SWIG_1(nargs, args, self);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxComboBox_Create'");
+    return Qnil;
 }
 
 
@@ -1202,22 +1626,10 @@ _wrap_wxComboBox_SetStringSelection(int argc, VALUE *argv, VALUE self) {
 }
 
 
-static VALUE
-_wrap_disown_wxComboBox(int argc, VALUE *argv, VALUE self) {
-    wxComboBox *arg1 = (wxComboBox *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxComboBox, 1);
-    {
-Swig::Director *director = (Swig::Director*)(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
+static void
+free_wxComboBox(wxComboBox *arg1) {
+    //delete arg1;
 }
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1225,6 +1637,7 @@ static swig_type_info _swigt__p_wxComboBox[] = {{"_p_wxComboBox", 0, "wxComboBox
 static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0, 0},{"_p_wxSize", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxValidator[] = {{"_p_wxValidator", 0, "wxValidator *", 0, 0, 0, 0},{"_p_wxValidator", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxArrayString[] = {{"_p_wxArrayString", 0, "wxArrayString *", 0, 0, 0, 0},{"_p_wxArrayString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
@@ -1232,6 +1645,7 @@ _swigt__p_wxComboBox,
 _swigt__p_wxSize, 
 _swigt__p_wxWindow, 
 _swigt__p_wxValidator, 
+_swigt__p_wxArrayString, 
 _swigt__p_wxPoint, 
 0
 };
@@ -1257,7 +1671,6 @@ mWxComboBox = mWxruby2;
         SWIG_define_class(swig_types[i]);
     }
     
-    rb_define_module_function(mWxComboBox, "disown_wxComboBox", VALUEFUNC(_wrap_disown_wxComboBox), -1);
     
     extern void Init_wxControlWithItems();
     Init_wxControlWithItems();

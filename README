@@ -1,5 +1,5 @@
 README for wxruby2
-Version 0.0.22
+Version WorkingToward:0.0.23
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -17,7 +17,12 @@ For more details, see the project home page:
 WHATS NEW:
 - Binary library is now named wxruby2, and a small Ruby 
   wrapper named wx.rb is what is actually loaded by apps.
-  
+- Integrated more patches from Sean Long:
+   - XRC samples
+   - Added classes: MenuItem, ToolTip
+   - Added methods in several existing classes
+- Created temporary fake Notebook and ToggleButton classes 
+  in wx.rb, so the controls sample can run on Linux
 
 
 REQUIREMENTS:

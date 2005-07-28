@@ -319,6 +319,10 @@ the application may call it at other times if required.
 	*/
 
   void UpdateUI(wxEvtHandler* source = NULL);
+  void Append(int itemid, const wxString& text, const wxString& help, bool isCheckable);
+  void Insert(size_t pos, int itemid, const wxString& text, const wxString& help, bool isCheckable);
+  void Prepend(int itemid, const wxString& text, const wxString& help, bool isCheckable);
+  static void LockAccels(bool locked);    
 };
 
 

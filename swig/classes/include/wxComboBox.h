@@ -8,48 +8,47 @@
 class wxComboBox : public wxControlWithItems
 {
 public:
-	/**
-	 * \brief Default constructor. 
-	*/
+  wxComboBox();
 
-   wxComboBox() ;
-	/**
-	 * \brief  
-	 * \param wxWindow*  
-	 * \param wxWindowID  
-	 * \param const wxString&   
-	 * \param const wxPoint&  
-	 * \param const wxSize&  
-	 * \param int  
-	 * \param const wxString   
-	 * \param long  
-	 * \param const wxValidator&   
-	 * \param const wxString&   
-	*/
+  wxComboBox(wxWindow *parent, wxWindowID id,
+          const wxString& value = wxEmptyString,
+          const wxPoint& pos = wxDefaultPosition,
+          const wxSize& size = wxDefaultSize,
+          int n = 0, const wxString choices[] = NULL,
+          long style = 0,
+          const wxValidator& validator = wxDefaultValidator,
+          const wxString& name = wxComboBoxNameStr);
 
-  wxComboBox(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("comboBox"));
-	/**
-	 * \brief Destructor, destroying the combobox. 
-	*/
+  wxComboBox(wxWindow *parent, wxWindowID id,
+          const wxString& value,
+          const wxPoint& pos,
+          const wxSize& size,
+          const wxArrayString& choices,
+          long style = 0,
+          const wxValidator& validator = wxDefaultValidator,
+          const wxString& name = wxComboBoxNameStr);
 
-  virtual  ~wxComboBox() ;
-	/**
-	 * \brief Creates the combobox for two-step construction. Derived classes
-should call or replace this function. See  
-for further details. 
-	 * \param wxWindow*  
-	 * \param wxWindowID  
-	 * \param const wxString&   
-	 * \param const wxPoint&  
-	 * \param const wxSize&  
-	 * \param int  
-	 * \param const wxString   
-	 * \param long  
-	 * \param const wxValidator&   
-	 * \param const wxString&   
-	*/
+  bool Create(wxWindow *parent,
+              wxWindowID id,
+              const wxString& value = wxEmptyString,
+              const wxPoint& pos = wxDefaultPosition,
+              const wxSize& size = wxDefaultSize,
+              int n = 0,
+              const wxString choices[] = NULL,
+              long style = 0,
+              const wxValidator& validator = wxDefaultValidator,
+              const wxString& name = wxComboBoxNameStr);
+              
+  bool Create(wxWindow *parent,
+              wxWindowID id,
+              const wxString& value,
+              const wxPoint& pos,
+              const wxSize& size,
+              const wxArrayString& choices,
+              long style = 0,
+              const wxValidator& validator = wxDefaultValidator,
+              const wxString& name = wxComboBoxNameStr);
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxString&  value, const wxPoint& pos , const wxSize& size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("comboBox"));
 	/**
 	 * \brief Copies the selected text to the clipboard. 
 	*/

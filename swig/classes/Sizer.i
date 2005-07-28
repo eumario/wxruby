@@ -5,7 +5,7 @@
 
 %module(directors="1") wxSizer
 
-%ignore wxSizer::Detach;
-%ignore wxSizer::Show;
+%ignore wxSizer::IsShown;
+%ignore wxSizer::Remove;
 
 %include "include/wxSizer.h"
