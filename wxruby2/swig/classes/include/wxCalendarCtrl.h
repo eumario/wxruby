@@ -24,7 +24,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxCalendarCtrl(wxWindow*  parent , wxWindowID  id , const wxDateTime&  date = wxDefaultDateTime, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCAL_SHOW_HOLIDAYS, const wxString&  name = wxCalendarNameStr) ;
+   wxCalendarCtrl(wxWindow*  parent , wxWindowID  id , const wxDateTime&  date = wxDefaultDateTime, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCAL_SHOW_HOLIDAYS | wxWANTS_CHARS, const wxString&  name = wxCalendarNameStr) ;
 	/**
 	 * \brief Creates the control. See   for the meaning of
 the parameters and the control overview for the possible styles. 
@@ -37,7 +37,7 @@ the parameters and the control overview for the possible styles.
 	 * \param const wxString&   
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxDateTime&  date = wxDefaultDateTime, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCAL_SHOW_HOLIDAYS, const wxString&  name = wxCalendarNameStr) ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxDateTime&  date = wxDefaultDateTime, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxCAL_SHOW_HOLIDAYS | wxWANTS_CHARS, const wxString&  name = wxCalendarNameStr) ;
 	/**
 	 * \brief Destroys the control. 
 	*/

@@ -517,12 +517,15 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define  SWIGTYPE_p_wxSizer swig_types[0] 
-#define  SWIGTYPE_p_wxSize swig_types[1] 
-#define  SWIGTYPE_p_wxWindow swig_types[2] 
-#define  SWIGTYPE_p_wxObject swig_types[3] 
-#define  SWIGTYPE_p_wxPoint swig_types[4] 
-static swig_type_info *swig_types[6];
+#define  SWIGTYPE_p_wxSizerItemList swig_types[0] 
+#define  SWIGTYPE_p_wxSizer swig_types[1] 
+#define  SWIGTYPE_p_wxSize swig_types[2] 
+#define  SWIGTYPE_p_wxWindow swig_types[3] 
+#define  SWIGTYPE_p_wxObject swig_types[4] 
+#define  SWIGTYPE_p_wxSizerItem swig_types[5] 
+#define  SWIGTYPE_p_wxSizerFlags swig_types[6] 
+#define  SWIGTYPE_p_wxPoint swig_types[7] 
+static swig_type_info *swig_types[9];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -771,6 +774,161 @@ SwigDirector_wxSizer::SwigDirector_wxSizer(VALUE self, bool disown): wxSizer(), 
 
 
 
+bool SwigDirector_wxSizer::Remove(wxWindow *window) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxSizer::Remove(window);
+    }
+    obj0 = SWIG_NewPointerObj(window, SWIGTYPE_p_wxWindow, 0);
+    result = rb_funcall(swig_get_self(), rb_intern(""), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
+bool SwigDirector_wxSizer::Detach(wxWindow *window) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxSizer::Detach(window);
+    }
+    obj0 = SWIG_NewPointerObj(window, SWIGTYPE_p_wxWindow, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("detach"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
+bool SwigDirector_wxSizer::Remove(wxSizer *sizer) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxSizer::Remove(sizer);
+    }
+    obj0 = SWIG_NewPointerObj(sizer, SWIGTYPE_p_wxSizer, 0);
+    result = rb_funcall(swig_get_self(), rb_intern(""), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
+bool SwigDirector_wxSizer::Remove(int index) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxSizer::Remove(index);
+    }
+    obj0 = INT2NUM(index);
+    result = rb_funcall(swig_get_self(), rb_intern(""), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
+bool SwigDirector_wxSizer::Detach(wxSizer *sizer) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxSizer::Detach(sizer);
+    }
+    obj0 = SWIG_NewPointerObj(sizer, SWIGTYPE_p_wxSizer, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("detach"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
+bool SwigDirector_wxSizer::Detach(int index) {
+    VALUE obj0 = Qnil ;
+    bool c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxSizer::Detach(index);
+    }
+    obj0 = INT2NUM(index);
+    result = rb_funcall(swig_get_self(), rb_intern("detach"), 1,obj0);
+    c_result = (bool) RTEST(result);
+    return c_result;
+}
+
+
+void SwigDirector_wxSizer::DeleteWindows() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxSizer::DeleteWindows();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("delete_windows"), 0, NULL);
+}
+
+
+wxSizerItem *SwigDirector_wxSizer::Insert(size_t index, wxSizerItem *item) {
+    VALUE obj0 = Qnil ;
+    VALUE obj1 = Qnil ;
+    wxSizerItem *c_result ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        return wxSizer::Insert(index,item);
+    }
+    obj0 = LONG2NUM(index);
+    obj1 = SWIG_NewPointerObj(item, SWIGTYPE_p_wxSizerItem, 0);
+    result = rb_funcall(swig_get_self(), rb_intern("insert"), 2,obj0,obj1);
+    if ((SWIG_ConvertPtr(result,(void **) &c_result, SWIGTYPE_p_wxSizerItem,SWIG_POINTER_EXCEPTION | 0 )) == -1) throw Swig::DirectorTypeMismatchException("Pointer conversion failed.");
+    return c_result;
+}
+
+
+void SwigDirector_wxSizer::Layout() {
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxSizer::Layout();
+        return;
+    }
+    result = rb_funcall(swig_get_self(), rb_intern("layout"), 0, NULL);
+}
+
+
+void SwigDirector_wxSizer::Clear(bool delete_windows) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxSizer::Clear(delete_windows);
+        return;
+    }
+    obj0 = delete_windows ? Qtrue : Qfalse;
+    result = rb_funcall(swig_get_self(), rb_intern("clear"), 1,obj0);
+}
+
+
+void SwigDirector_wxSizer::ShowItems(bool show) {
+    VALUE obj0 = Qnil ;
+    VALUE result;
+    
+    if (swig_get_up()) {
+        wxSizer::ShowItems(show);
+        return;
+    }
+    obj0 = show ? Qtrue : Qfalse;
+    result = rb_funcall(swig_get_self(), rb_intern("show_items"), 1,obj0);
+}
+
+
 static void
 free_wxSizer(wxSizer *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxSizer*)arg1;
@@ -798,6 +956,8 @@ _wrap_wxSizer_Add__SWIG_0(int argc, VALUE *argv, VALUE self) {
     int arg4 = (int) 0 ;
     int arg5 = (int) 0 ;
     wxObject *arg6 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 5))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
@@ -815,9 +975,10 @@ _wrap_wxSizer_Add__SWIG_0(int argc, VALUE *argv, VALUE self) {
     if (argc > 4) {
         SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Add(arg2,arg3,arg4,arg5,arg6);
+    result = (wxSizerItem *)(arg1)->Add(arg2,arg3,arg4,arg5,arg6);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -829,6 +990,8 @@ _wrap_wxSizer_Add__SWIG_1(int argc, VALUE *argv, VALUE self) {
     int arg4 = (int) 0 ;
     int arg5 = (int) 0 ;
     wxObject *arg6 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 5))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
@@ -846,9 +1009,10 @@ _wrap_wxSizer_Add__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if (argc > 4) {
         SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Add(arg2,arg3,arg4,arg5,arg6);
+    result = (wxSizerItem *)(arg1)->Add(arg2,arg3,arg4,arg5,arg6);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -861,6 +1025,8 @@ _wrap_wxSizer_Add__SWIG_2(int argc, VALUE *argv, VALUE self) {
     int arg5 = (int) 0 ;
     int arg6 = (int) 0 ;
     wxObject *arg7 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 6))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -879,9 +1045,68 @@ _wrap_wxSizer_Add__SWIG_2(int argc, VALUE *argv, VALUE self) {
     if (argc > 5) {
         SWIG_ConvertPtr(argv[5], (void **) &arg7, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Add(arg2,arg3,arg4,arg5,arg6,arg7);
+    result = (wxSizerItem *)(arg1)->Add(arg2,arg3,arg4,arg5,arg6,arg7);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Add__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxSizerFlags *arg3 = 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxSizerFlags, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxSizerItem *)(arg1)->Add(arg2,(wxSizerFlags const &)*arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Add__SWIG_4(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizer *arg2 = (wxSizer *) 0 ;
+    wxSizerFlags *arg3 = 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxSizerFlags, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxSizerItem *)(arg1)->Add(arg2,(wxSizerFlags const &)*arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Add__SWIG_5(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizerItem *arg2 = (wxSizerItem *) 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizerItem, 1);
+    result = (wxSizerItem *)(arg1)->Add(arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -993,6 +1218,66 @@ static VALUE _wrap_wxSizer_Add(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizerItem, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxSizer_Add__SWIG_5(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSizerFlags, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Add__SWIG_3(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSizerFlags, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Add__SWIG_4(nargs, args, self);
+                }
+            }
+        }
+    }
     if ((argc >= 3) && (argc <= 7)) {
         int _v;
         {
@@ -1053,118 +1338,39 @@ static VALUE _wrap_wxSizer_Add(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
-_wrap_wxSizer_CalcMin(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_AddSpacer(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
-    wxSize result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    result = (arg1)->CalcMin();
-    
-    {
-        wxSize * resultptr;
-        resultptr = new wxSize((wxSize &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxSizer_Fit(int argc, VALUE *argv, VALUE self) {
-    wxSizer *arg1 = (wxSizer *) 0 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxSize result;
+    int arg2 ;
+    wxSizerItem *result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    result = (arg1)->Fit(arg2);
+    arg2 = NUM2INT(argv[0]);
+    result = (wxSizerItem *)(arg1)->AddSpacer(arg2);
     
-    {
-        wxSize * resultptr;
-        resultptr = new wxSize((wxSize &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
-    }
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
     return vresult;
 }
 
 
 static VALUE
-_wrap_wxSizer_FitInside(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_AddStretchSpacer(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    (arg1)->FitInside(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxSizer_GetSize(int argc, VALUE *argv, VALUE self) {
-    wxSizer *arg1 = (wxSizer *) 0 ;
-    wxSize result;
+    int arg2 = (int) 1 ;
+    wxSizerItem *result;
     VALUE vresult = Qnil;
     
-    if ((argc < 0) || (argc > 0))
+    if ((argc < 0) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    result = (arg1)->GetSize();
-    
-    {
-        wxSize * resultptr;
-        resultptr = new wxSize((wxSize &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
+    if (argc > 0) {
+        arg2 = NUM2INT(argv[0]);
     }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxSizer_GetPosition(int argc, VALUE *argv, VALUE self) {
-    wxSizer *arg1 = (wxSizer *) 0 ;
-    wxPoint result;
-    VALUE vresult = Qnil;
+    result = (wxSizerItem *)(arg1)->AddStretchSpacer(arg2);
     
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    result = (arg1)->GetPosition();
-    
-    {
-        wxPoint * resultptr;
-        resultptr = new wxPoint((wxPoint &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxPoint, 1);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxSizer_GetMinSize(int argc, VALUE *argv, VALUE self) {
-    wxSizer *arg1 = (wxSizer *) 0 ;
-    wxSize result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    result = (arg1)->GetMinSize();
-    
-    {
-        wxSize * resultptr;
-        resultptr = new wxSize((wxSize &)result);
-        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
-    }
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
     return vresult;
 }
 
@@ -1178,6 +1384,8 @@ _wrap_wxSizer_Insert__SWIG_0(int argc, VALUE *argv, VALUE self) {
     int arg5 = (int) 0 ;
     int arg6 = (int) 0 ;
     wxObject *arg7 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 6))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -1196,9 +1404,10 @@ _wrap_wxSizer_Insert__SWIG_0(int argc, VALUE *argv, VALUE self) {
     if (argc > 5) {
         SWIG_ConvertPtr(argv[5], (void **) &arg7, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Insert(arg2,arg3,arg4,arg5,arg6,arg7);
+    result = (wxSizerItem *)(arg1)->Insert(arg2,arg3,arg4,arg5,arg6,arg7);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -1211,6 +1420,8 @@ _wrap_wxSizer_Insert__SWIG_1(int argc, VALUE *argv, VALUE self) {
     int arg5 = (int) 0 ;
     int arg6 = (int) 0 ;
     wxObject *arg7 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 6))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -1229,9 +1440,10 @@ _wrap_wxSizer_Insert__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if (argc > 5) {
         SWIG_ConvertPtr(argv[5], (void **) &arg7, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Insert(arg2,arg3,arg4,arg5,arg6,arg7);
+    result = (wxSizerItem *)(arg1)->Insert(arg2,arg3,arg4,arg5,arg6,arg7);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -1245,6 +1457,8 @@ _wrap_wxSizer_Insert__SWIG_2(int argc, VALUE *argv, VALUE self) {
     int arg6 = (int) 0 ;
     int arg7 = (int) 0 ;
     wxObject *arg8 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 3) || (argc > 7))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -1264,9 +1478,77 @@ _wrap_wxSizer_Insert__SWIG_2(int argc, VALUE *argv, VALUE self) {
     if (argc > 6) {
         SWIG_ConvertPtr(argv[6], (void **) &arg8, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Insert(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    result = (wxSizerItem *)(arg1)->Insert(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Insert__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    wxWindow *arg3 = (wxWindow *) 0 ;
+    wxSizerFlags *arg4 = 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxWindow, 1);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxSizerFlags, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxSizerItem *)(arg1)->Insert(arg2,arg3,(wxSizerFlags const &)*arg4);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Insert__SWIG_4(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    wxSizer *arg3 = (wxSizer *) 0 ;
+    wxSizerFlags *arg4 = 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxSizerFlags, 1); if (arg4 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxSizerItem *)(arg1)->Insert(arg2,arg3,(wxSizerFlags const &)*arg4);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Insert__SWIG_5(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    wxSizerItem *arg3 = (wxSizerItem *) 0 ;
+    wxSizerItem *result;
+    Swig::Director *director = 0;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxSizerItem, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (wxSizerItem *)(arg1)->Insert(arg2,arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -1388,6 +1670,81 @@ static VALUE _wrap_wxSizer_Insert(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSizerItem, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Insert__SWIG_5(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxSizerFlags, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxSizer_Insert__SWIG_3(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxSizerFlags, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxSizer_Insert__SWIG_4(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
     if ((argc >= 4) && (argc <= 8)) {
         int _v;
         {
@@ -1453,15 +1810,44 @@ static VALUE _wrap_wxSizer_Insert(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
-_wrap_wxSizer_Layout(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_InsertSpacer(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    int arg3 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    (arg1)->Layout();
+    arg2 = NUM2LONG(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    result = (wxSizerItem *)(arg1)->InsertSpacer(arg2,arg3);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_InsertStretchSpacer(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    int arg3 = (int) 1 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    if (argc > 1) {
+        arg3 = NUM2INT(argv[1]);
+    }
+    result = (wxSizerItem *)(arg1)->InsertStretchSpacer(arg2,arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -1473,6 +1859,8 @@ _wrap_wxSizer_Prepend__SWIG_0(int argc, VALUE *argv, VALUE self) {
     int arg4 = (int) 0 ;
     int arg5 = (int) 0 ;
     wxObject *arg6 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 5))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
@@ -1490,9 +1878,10 @@ _wrap_wxSizer_Prepend__SWIG_0(int argc, VALUE *argv, VALUE self) {
     if (argc > 4) {
         SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Prepend(arg2,arg3,arg4,arg5,arg6);
+    result = (wxSizerItem *)(arg1)->Prepend(arg2,arg3,arg4,arg5,arg6);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -1504,6 +1893,8 @@ _wrap_wxSizer_Prepend__SWIG_1(int argc, VALUE *argv, VALUE self) {
     int arg4 = (int) 0 ;
     int arg5 = (int) 0 ;
     wxObject *arg6 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 5))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
@@ -1521,9 +1912,10 @@ _wrap_wxSizer_Prepend__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if (argc > 4) {
         SWIG_ConvertPtr(argv[4], (void **) &arg6, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Prepend(arg2,arg3,arg4,arg5,arg6);
+    result = (wxSizerItem *)(arg1)->Prepend(arg2,arg3,arg4,arg5,arg6);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -1536,6 +1928,8 @@ _wrap_wxSizer_Prepend__SWIG_2(int argc, VALUE *argv, VALUE self) {
     int arg5 = (int) 0 ;
     int arg6 = (int) 0 ;
     wxObject *arg7 = (wxObject *) NULL ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
     if ((argc < 2) || (argc > 6))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
@@ -1554,9 +1948,68 @@ _wrap_wxSizer_Prepend__SWIG_2(int argc, VALUE *argv, VALUE self) {
     if (argc > 5) {
         SWIG_ConvertPtr(argv[5], (void **) &arg7, SWIGTYPE_p_wxObject, 1);
     }
-    (arg1)->Prepend(arg2,arg3,arg4,arg5,arg6,arg7);
+    result = (wxSizerItem *)(arg1)->Prepend(arg2,arg3,arg4,arg5,arg6,arg7);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Prepend__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxSizerFlags *arg3 = 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxSizerFlags, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxSizerItem *)(arg1)->Prepend(arg2,(wxSizerFlags const &)*arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Prepend__SWIG_4(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizer *arg2 = (wxSizer *) 0 ;
+    wxSizerFlags *arg3 = 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxSizerFlags, 1); if (arg3 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxSizerItem *)(arg1)->Prepend(arg2,(wxSizerFlags const &)*arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Prepend__SWIG_5(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizerItem *arg2 = (wxSizerItem *) 0 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizerItem, 1);
+    result = (wxSizerItem *)(arg1)->Prepend(arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
@@ -1668,6 +2121,66 @@ static VALUE _wrap_wxSizer_Prepend(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizerItem, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxSizer_Prepend__SWIG_5(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSizerFlags, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Prepend__SWIG_3(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSizerFlags, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Prepend__SWIG_4(nargs, args, self);
+                }
+            }
+        }
+    }
     if ((argc >= 3) && (argc <= 7)) {
         int _v;
         {
@@ -1728,30 +2241,58 @@ static VALUE _wrap_wxSizer_Prepend(int nargs, VALUE *args, VALUE self) {
 
 
 static VALUE
-_wrap_wxSizer_RecalcSizes(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_PrependSpacer(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
+    int arg2 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
     
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    (arg1)->RecalcSizes();
+    arg2 = NUM2INT(argv[0]);
+    result = (wxSizerItem *)(arg1)->PrependSpacer(arg2);
     
-    return Qnil;
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
 }
 
 
 static VALUE
-_wrap_wxSizer_Remove__SWIG_0(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_PrependStretchSpacer(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    int arg2 = (int) 1 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    if (argc > 0) {
+        arg2 = NUM2INT(argv[0]);
+    }
+    result = (wxSizerItem *)(arg1)->PrependStretchSpacer(arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Detach__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     bool result;
+    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    result = (bool)(arg1)->Remove(arg2);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->Detach(arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -1759,17 +2300,20 @@ _wrap_wxSizer_Remove__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxSizer_Remove__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_Detach__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
     wxSizer *arg2 = (wxSizer *) 0 ;
     bool result;
+    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
-    result = (bool)(arg1)->Remove(arg2);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->Detach(arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
@@ -1777,24 +2321,27 @@ _wrap_wxSizer_Remove__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxSizer_Remove__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_Detach__SWIG_2(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
-    size_t arg2 ;
+    int arg2 ;
     bool result;
+    Swig::Director *director = 0;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    arg2 = NUM2LONG(argv[0]);
-    result = (bool)(arg1)->Remove(arg2);
+    arg2 = NUM2INT(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    result = (bool)(arg1)->Detach(arg2);
     
     vresult = result ? Qtrue : Qfalse;
     return vresult;
 }
 
 
-static VALUE _wrap_wxSizer_Remove(int nargs, VALUE *args, VALUE self) {
+static VALUE _wrap_wxSizer_Detach(int nargs, VALUE *args, VALUE self) {
     int argc;
     VALUE argv[3];
     int ii;
@@ -1816,7 +2363,7 @@ static VALUE _wrap_wxSizer_Remove(int nargs, VALUE *args, VALUE self) {
                 _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_wxSizer_Remove__SWIG_0(nargs, args, self);
+                return _wrap_wxSizer_Detach__SWIG_0(nargs, args, self);
             }
         }
     }
@@ -1832,7 +2379,7 @@ static VALUE _wrap_wxSizer_Remove(int nargs, VALUE *args, VALUE self) {
                 _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_wxSizer_Remove__SWIG_1(nargs, args, self);
+                return _wrap_wxSizer_Detach__SWIG_1(nargs, args, self);
             }
         }
     }
@@ -1847,32 +2394,47 @@ static VALUE _wrap_wxSizer_Remove(int nargs, VALUE *args, VALUE self) {
                 _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_wxSizer_Remove__SWIG_2(nargs, args, self);
+                return _wrap_wxSizer_Detach__SWIG_2(nargs, args, self);
             }
         }
     }
     
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxSizer_Remove'");
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxSizer_Detach'");
     return Qnil;
 }
 
 
 static VALUE
-_wrap_wxSizer_SetDimension(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_Clear(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
-    int arg2 ;
-    int arg3 ;
-    int arg4 ;
-    int arg5 ;
+    bool arg2 = (bool) false ;
+    Swig::Director *director = 0;
     
-    if ((argc < 4) || (argc > 4))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    if ((argc < 0) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
-    arg2 = NUM2INT(argv[0]);
-    arg3 = NUM2INT(argv[1]);
-    arg4 = NUM2INT(argv[2]);
-    arg5 = NUM2INT(argv[3]);
-    (arg1)->SetDimension(arg2,arg3,arg4,arg5);
+    if (argc > 0) {
+        arg2 = RTEST(argv[0]);
+    }
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->Clear(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_DeleteWindows(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->DeleteWindows();
     
     return Qnil;
 }
@@ -1972,6 +2534,8 @@ _wrap_wxSizer_SetItemMinSize__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg2 = (wxWindow *) 0 ;
     int arg3 ;
     int arg4 ;
+    bool result;
+    VALUE vresult = Qnil;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -1979,18 +2543,45 @@ _wrap_wxSizer_SetItemMinSize__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     arg3 = NUM2INT(argv[1]);
     arg4 = NUM2INT(argv[2]);
-    (arg1)->SetItemMinSize(arg2,arg3,arg4);
+    result = (bool)(arg1)->SetItemMinSize(arg2,arg3,arg4);
     
-    return Qnil;
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
 static VALUE
 _wrap_wxSizer_SetItemMinSize__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxSize arg3 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    {
+        wxSize * ptr;
+        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxSize, 1);
+        if (ptr) arg3 = *ptr;
+    }
+    result = (bool)(arg1)->SetItemMinSize(arg2,arg3);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_SetItemMinSize__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
     wxSizer *arg2 = (wxSizer *) 0 ;
     int arg3 ;
     int arg4 ;
+    bool result;
+    VALUE vresult = Qnil;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -1998,18 +2589,45 @@ _wrap_wxSizer_SetItemMinSize__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
     arg3 = NUM2INT(argv[1]);
     arg4 = NUM2INT(argv[2]);
-    (arg1)->SetItemMinSize(arg2,arg3,arg4);
+    result = (bool)(arg1)->SetItemMinSize(arg2,arg3,arg4);
     
-    return Qnil;
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
 static VALUE
-_wrap_wxSizer_SetItemMinSize__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_wxSizer_SetItemMinSize__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizer *arg2 = (wxSizer *) 0 ;
+    wxSize arg3 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
+    {
+        wxSize * ptr;
+        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxSize, 1);
+        if (ptr) arg3 = *ptr;
+    }
+    result = (bool)(arg1)->SetItemMinSize(arg2,arg3);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_SetItemMinSize__SWIG_4(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
     size_t arg2 ;
     int arg3 ;
     int arg4 ;
+    bool result;
+    VALUE vresult = Qnil;
     
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
@@ -2017,9 +2635,34 @@ _wrap_wxSizer_SetItemMinSize__SWIG_2(int argc, VALUE *argv, VALUE self) {
     arg2 = NUM2LONG(argv[0]);
     arg3 = NUM2INT(argv[1]);
     arg4 = NUM2INT(argv[2]);
-    (arg1)->SetItemMinSize(arg2,arg3,arg4);
+    result = (bool)(arg1)->SetItemMinSize(arg2,arg3,arg4);
     
-    return Qnil;
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_SetItemMinSize__SWIG_5(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    wxSize arg3 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    {
+        wxSize * ptr;
+        SWIG_ConvertPtr(argv[1], (void **) &ptr, SWIGTYPE_p_wxSize, 1);
+        if (ptr) arg3 = *ptr;
+    }
+    result = (bool)(arg1)->SetItemMinSize(arg2,arg3);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
 }
 
 
@@ -2032,6 +2675,71 @@ static VALUE _wrap_wxSizer_SetItemMinSize(int nargs, VALUE *args, VALUE self) {
     argv[0] = self;
     for (ii = 1; (ii < argc) && (ii < 4); ii++) {
         argv[ii] = args[ii-1];
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_SetItemMinSize__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_SetItemMinSize__SWIG_3(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_SetItemMinSize__SWIG_5(nargs, args, self);
+                }
+            }
+        }
     }
     if (argc == 4) {
         int _v;
@@ -2079,7 +2787,7 @@ static VALUE _wrap_wxSizer_SetItemMinSize(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_wxSizer_SetItemMinSize__SWIG_1(nargs, args, self);
+                        return _wrap_wxSizer_SetItemMinSize__SWIG_2(nargs, args, self);
                     }
                 }
             }
@@ -2104,7 +2812,7 @@ static VALUE _wrap_wxSizer_SetItemMinSize(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_wxSizer_SetItemMinSize__SWIG_2(nargs, args, self);
+                        return _wrap_wxSizer_SetItemMinSize__SWIG_4(nargs, args, self);
                     }
                 }
             }
@@ -2112,6 +2820,152 @@ static VALUE _wrap_wxSizer_SetItemMinSize(int nargs, VALUE *args, VALUE self) {
     }
     
     rb_raise(rb_eArgError, "No matching function for overloaded 'wxSizer_SetItemMinSize'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_GetSize(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSize result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    result = ((wxSizer const *)arg1)->GetSize();
+    
+    {
+        wxSize * resultptr;
+        resultptr = new wxSize((wxSize &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_GetPosition(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxPoint result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    result = ((wxSizer const *)arg1)->GetPosition();
+    
+    {
+        wxPoint * resultptr;
+        resultptr = new wxPoint((wxPoint &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxPoint, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_GetMinSize(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSize result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    result = (arg1)->GetMinSize();
+    
+    {
+        wxSize * resultptr;
+        resultptr = new wxSize((wxSize &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_RecalcSizes(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    (arg1)->RecalcSizes();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_CalcMin(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSize result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    result = (arg1)->CalcMin();
+    
+    {
+        wxSize * resultptr;
+        resultptr = new wxSize((wxSize &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Layout(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->Layout();
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_Fit(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    wxSize result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    result = (arg1)->Fit(arg2);
+    
+    {
+        wxSize * resultptr;
+        resultptr = new wxSize((wxSize &)result);
+        vresult = SWIG_NewPointerObj((void *) resultptr, SWIGTYPE_p_wxSize, 1);
+    }
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_FitInside(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    (arg1)->FitInside(arg2);
+    
     return Qnil;
 }
 
@@ -2147,6 +3001,553 @@ _wrap_wxSizer_SetVirtualSizeHints(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_wxSizer_GetChildren(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizerItemList *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    {
+        wxSizerItemList &_result_ref = (arg1)->GetChildren();
+        result = (wxSizerItemList *) &_result_ref;
+    }
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItemList,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_SetDimension(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    int arg2 ;
+    int arg3 ;
+    int arg4 ;
+    int arg5 ;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2INT(argv[0]);
+    arg3 = NUM2INT(argv[1]);
+    arg4 = NUM2INT(argv[2]);
+    arg5 = NUM2INT(argv[3]);
+    (arg1)->SetDimension(arg2,arg3,arg4,arg5);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_GetItem__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    bool arg3 = (bool) false ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    if (argc > 1) {
+        arg3 = RTEST(argv[1]);
+    }
+    result = (wxSizerItem *)(arg1)->GetItem(arg2,arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_GetItem__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizer *arg2 = (wxSizer *) 0 ;
+    bool arg3 = (bool) false ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
+    if (argc > 1) {
+        arg3 = RTEST(argv[1]);
+    }
+    result = (wxSizerItem *)(arg1)->GetItem(arg2,arg3);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_GetItem__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    wxSizerItem *result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    result = (wxSizerItem *)(arg1)->GetItem(arg2);
+    
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxSizerItem,0);
+    return vresult;
+}
+
+
+static VALUE _wrap_wxSizer_GetItem(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if ((argc >= 2) && (argc <= 3)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxSizer_GetItem__SWIG_0(nargs, args, self);
+                }
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_GetItem__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    if ((argc >= 2) && (argc <= 3)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxSizer_GetItem__SWIG_1(nargs, args, self);
+                }
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_GetItem__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxSizer_GetItem__SWIG_2(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxSizer_GetItem'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_Show__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    bool arg3 = (bool) true ;
+    bool arg4 = (bool) false ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    if (argc > 1) {
+        arg3 = RTEST(argv[1]);
+    }
+    if (argc > 2) {
+        arg4 = RTEST(argv[2]);
+    }
+    result = (bool)(arg1)->Show(arg2,arg3,arg4);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Show__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizer *arg2 = (wxSizer *) 0 ;
+    bool arg3 = (bool) true ;
+    bool arg4 = (bool) false ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
+    if (argc > 1) {
+        arg3 = RTEST(argv[1]);
+    }
+    if (argc > 2) {
+        arg4 = RTEST(argv[2]);
+    }
+    result = (bool)(arg1)->Show(arg2,arg3,arg4);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Show__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    bool arg3 = (bool) true ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    if (argc > 1) {
+        arg3 = RTEST(argv[1]);
+    }
+    result = (bool)(arg1)->Show(arg2,arg3);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Hide__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxSizer *arg2 = (wxSizer *) 0 ;
+    bool arg3 = (bool) false ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxSizer, 1);
+    if (argc > 1) {
+        arg3 = RTEST(argv[1]);
+    }
+    result = (bool)(arg1)->Hide(arg2,arg3);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Hide__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    bool arg3 = (bool) false ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    if (argc > 1) {
+        arg3 = RTEST(argv[1]);
+    }
+    result = (bool)(arg1)->Hide(arg2,arg3);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxSizer_Hide__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    size_t arg2 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = NUM2LONG(argv[0]);
+    result = (bool)(arg1)->Hide(arg2);
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE _wrap_wxSizer_Hide(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if ((argc >= 2) && (argc <= 3)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxSizer_Hide__SWIG_0(nargs, args, self);
+                }
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Hide__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    if ((argc >= 2) && (argc <= 3)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxSizer_Hide__SWIG_1(nargs, args, self);
+                }
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Hide__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxSizer_Hide__SWIG_2(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxSizer_Hide'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_ShowItems(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    bool arg2 ;
+    Swig::Director *director = 0;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = RTEST(argv[0]);
+    director = dynamic_cast<Swig::Director *>(arg1);
+    if (director && (director->swig_get_self() == self)) director->swig_set_up();
+    (arg1)->ShowItems(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxSizer_Show__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    wxSizer *arg1 = (wxSizer *) 0 ;
+    bool arg2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSizer, 1);
+    arg2 = RTEST(argv[0]);
+    (arg1)->Show(arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_wxSizer_Show(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[5];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if ((argc >= 2) && (argc <= 4)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxSizer_Show__SWIG_0(nargs, args, self);
+                }
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_wxSizer_Show__SWIG_0(nargs, args, self);
+                    }
+                    {
+                        _v = (argv[3] == Qtrue || argv[3] == Qfalse) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxSizer_Show__SWIG_0(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if ((argc >= 2) && (argc <= 4)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxSizer_Show__SWIG_1(nargs, args, self);
+                }
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    if (argc <= 3) {
+                        return _wrap_wxSizer_Show__SWIG_1(nargs, args, self);
+                    }
+                    {
+                        _v = (argv[3] == Qtrue || argv[3] == Qfalse) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxSizer_Show__SWIG_1(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (argv[1] == Qtrue || argv[1] == Qfalse) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxSizer_Show__SWIG_3(nargs, args, self);
+            }
+        }
+    }
+    if ((argc >= 2) && (argc <= 3)) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxSizer, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                if (argc <= 2) {
+                    return _wrap_wxSizer_Show__SWIG_2(nargs, args, self);
+                }
+                {
+                    _v = (argv[2] == Qtrue || argv[2] == Qfalse) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxSizer_Show__SWIG_2(nargs, args, self);
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxSizer_Show'");
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_disown_wxSizer(int argc, VALUE *argv, VALUE self) {
     wxSizer *arg1 = (wxSizer *) 0 ;
     
@@ -2168,17 +3569,23 @@ Swig::Director *director = (Swig::Director*)(arg1);
 static void *_p_wxSizerTo_p_wxObject(void *x) {
     return (void *)((wxObject *)  ((wxSizer *) x));
 }
+static swig_type_info _swigt__p_wxSizerItemList[] = {{"_p_wxSizerItemList", 0, "wxSizerItemList *", 0, 0, 0, 0},{"_p_wxSizerItemList", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxSizer[] = {{"_p_wxSizer", 0, "wxSizer *", 0, 0, 0, 0},{"_p_wxSizer", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxSize[] = {{"_p_wxSize", 0, "wxSize *", 0, 0, 0, 0},{"_p_wxSize", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxWindow[] = {{"_p_wxWindow", 0, "wxWindow *", 0, 0, 0, 0},{"_p_wxWindow", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxObject[] = {{"_p_wxObject", 0, "wxObject *", 0, 0, 0, 0},{"_p_wxSizer", _p_wxSizerTo_p_wxObject, 0, 0, 0, 0, 0},{"_p_wxObject", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxSizerItem[] = {{"_p_wxSizerItem", 0, "wxSizerItem *", 0, 0, 0, 0},{"_p_wxSizerItem", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxSizerFlags[] = {{"_p_wxSizerFlags", 0, "wxSizerFlags *", 0, 0, 0, 0},{"_p_wxSizerFlags", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxPoint[] = {{"_p_wxPoint", 0, "wxPoint *", 0, 0, 0, 0},{"_p_wxPoint", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
+_swigt__p_wxSizerItemList, 
 _swigt__p_wxSizer, 
 _swigt__p_wxSize, 
 _swigt__p_wxWindow, 
 _swigt__p_wxObject, 
+_swigt__p_wxSizerItem, 
+_swigt__p_wxSizerFlags, 
 _swigt__p_wxPoint, 
 0
 };
@@ -2213,22 +3620,35 @@ mWxSizer = mWxruby2;
     SWIG_TypeClientData(SWIGTYPE_p_wxSizer, (void *) &cWxSizer);
     rb_undef_alloc_func(cWxSizer.klass);
     rb_define_method(cWxSizer.klass, "add", VALUEFUNC(_wrap_wxSizer_Add), -1);
-    rb_define_method(cWxSizer.klass, "calc_min", VALUEFUNC(_wrap_wxSizer_CalcMin), -1);
-    rb_define_method(cWxSizer.klass, "fit", VALUEFUNC(_wrap_wxSizer_Fit), -1);
-    rb_define_method(cWxSizer.klass, "fit_inside", VALUEFUNC(_wrap_wxSizer_FitInside), -1);
+    rb_define_method(cWxSizer.klass, "add_spacer", VALUEFUNC(_wrap_wxSizer_AddSpacer), -1);
+    rb_define_method(cWxSizer.klass, "add_stretch_spacer", VALUEFUNC(_wrap_wxSizer_AddStretchSpacer), -1);
+    rb_define_method(cWxSizer.klass, "insert", VALUEFUNC(_wrap_wxSizer_Insert), -1);
+    rb_define_method(cWxSizer.klass, "insert_spacer", VALUEFUNC(_wrap_wxSizer_InsertSpacer), -1);
+    rb_define_method(cWxSizer.klass, "insert_stretch_spacer", VALUEFUNC(_wrap_wxSizer_InsertStretchSpacer), -1);
+    rb_define_method(cWxSizer.klass, "prepend", VALUEFUNC(_wrap_wxSizer_Prepend), -1);
+    rb_define_method(cWxSizer.klass, "prepend_spacer", VALUEFUNC(_wrap_wxSizer_PrependSpacer), -1);
+    rb_define_method(cWxSizer.klass, "prepend_stretch_spacer", VALUEFUNC(_wrap_wxSizer_PrependStretchSpacer), -1);
+    rb_define_method(cWxSizer.klass, "detach", VALUEFUNC(_wrap_wxSizer_Detach), -1);
+    rb_define_method(cWxSizer.klass, "clear", VALUEFUNC(_wrap_wxSizer_Clear), -1);
+    rb_define_method(cWxSizer.klass, "delete_windows", VALUEFUNC(_wrap_wxSizer_DeleteWindows), -1);
+    rb_define_method(cWxSizer.klass, "set_min_size", VALUEFUNC(_wrap_wxSizer_SetMinSize), -1);
+    rb_define_method(cWxSizer.klass, "set_item_min_size", VALUEFUNC(_wrap_wxSizer_SetItemMinSize), -1);
     rb_define_method(cWxSizer.klass, "get_size", VALUEFUNC(_wrap_wxSizer_GetSize), -1);
     rb_define_method(cWxSizer.klass, "get_position", VALUEFUNC(_wrap_wxSizer_GetPosition), -1);
     rb_define_method(cWxSizer.klass, "get_min_size", VALUEFUNC(_wrap_wxSizer_GetMinSize), -1);
-    rb_define_method(cWxSizer.klass, "insert", VALUEFUNC(_wrap_wxSizer_Insert), -1);
-    rb_define_method(cWxSizer.klass, "layout", VALUEFUNC(_wrap_wxSizer_Layout), -1);
-    rb_define_method(cWxSizer.klass, "prepend", VALUEFUNC(_wrap_wxSizer_Prepend), -1);
     rb_define_method(cWxSizer.klass, "recalc_sizes", VALUEFUNC(_wrap_wxSizer_RecalcSizes), -1);
-    rb_define_method(cWxSizer.klass, "remove", VALUEFUNC(_wrap_wxSizer_Remove), -1);
-    rb_define_method(cWxSizer.klass, "set_dimension", VALUEFUNC(_wrap_wxSizer_SetDimension), -1);
-    rb_define_method(cWxSizer.klass, "set_min_size", VALUEFUNC(_wrap_wxSizer_SetMinSize), -1);
-    rb_define_method(cWxSizer.klass, "set_item_min_size", VALUEFUNC(_wrap_wxSizer_SetItemMinSize), -1);
+    rb_define_method(cWxSizer.klass, "calc_min", VALUEFUNC(_wrap_wxSizer_CalcMin), -1);
+    rb_define_method(cWxSizer.klass, "layout", VALUEFUNC(_wrap_wxSizer_Layout), -1);
+    rb_define_method(cWxSizer.klass, "fit", VALUEFUNC(_wrap_wxSizer_Fit), -1);
+    rb_define_method(cWxSizer.klass, "fit_inside", VALUEFUNC(_wrap_wxSizer_FitInside), -1);
     rb_define_method(cWxSizer.klass, "set_size_hints", VALUEFUNC(_wrap_wxSizer_SetSizeHints), -1);
     rb_define_method(cWxSizer.klass, "set_virtual_size_hints", VALUEFUNC(_wrap_wxSizer_SetVirtualSizeHints), -1);
+    rb_define_method(cWxSizer.klass, "get_children", VALUEFUNC(_wrap_wxSizer_GetChildren), -1);
+    rb_define_method(cWxSizer.klass, "set_dimension", VALUEFUNC(_wrap_wxSizer_SetDimension), -1);
+    rb_define_method(cWxSizer.klass, "get_item", VALUEFUNC(_wrap_wxSizer_GetItem), -1);
+    rb_define_method(cWxSizer.klass, "hide", VALUEFUNC(_wrap_wxSizer_Hide), -1);
+    rb_define_method(cWxSizer.klass, "show_items", VALUEFUNC(_wrap_wxSizer_ShowItems), -1);
+    rb_define_method(cWxSizer.klass, "show", VALUEFUNC(_wrap_wxSizer_Show), -1);
     cWxSizer.mark = 0;
     cWxSizer.destroy = (void (*)(void *)) free_wxSizer;
 }

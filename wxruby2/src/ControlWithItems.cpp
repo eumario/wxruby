@@ -518,8 +518,9 @@ SWIGIMPORT(void)   SWIG_Ruby_ConvertPacked(VALUE obj, void *ptr, int sz, swig_ty
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define  SWIGTYPE_p_wxControlWithItems swig_types[0] 
-#define  SWIGTYPE_p_wxClientData swig_types[1] 
-static swig_type_info *swig_types[3];
+#define  SWIGTYPE_p_wxArrayString swig_types[1] 
+#define  SWIGTYPE_p_wxClientData swig_types[2] 
+static swig_type_info *swig_types[4];
 
 /* -------- TYPES TABLE (END) -------- */
 
@@ -763,7 +764,27 @@ namespace Swig {
 #include "ControlWithItems.h"
 
 static VALUE
-_wrap_wxControlWithItems_Append(int argc, VALUE *argv, VALUE self) {
+_wrap_wxControlWithItems_Append__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    wxString *arg2 = 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    result = (int)(arg1)->Append((wxString const &)*arg2);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxControlWithItems_Append__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
     wxString *arg2 = 0 ;
     void *arg3 = (void *) 0 ;
@@ -783,6 +804,165 @@ _wrap_wxControlWithItems_Append(int argc, VALUE *argv, VALUE self) {
     
     vresult = INT2NUM(result);
     return vresult;
+}
+
+
+static VALUE
+_wrap_wxControlWithItems_Append__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    wxString *arg2 = 0 ;
+    wxClientData *arg3 = (wxClientData *) 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxClientData, 1);
+    result = (int)(arg1)->Append((wxString const &)*arg2,arg3);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxControlWithItems_Append__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    wxArrayString *arg2 = 0 ;
+    wxArrayString tmp2 ;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    {
+        if ((argv[0] = Qnil) || (TYPE(argv[0]) != T_ARRAY))
+        {
+            arg2 = &tmp2;
+        }
+        else
+        {
+            for (int i = 0; i < RARRAY(argv[0])->len; i++)
+            {
+                //this does not work?
+                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
+                //but this does
+                wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
+                tmp2.Add(item);
+            }
+            
+            arg2 = &tmp2;
+        }
+        
+    }
+    (arg1)->Append((wxArrayString const &)*arg2);
+    
+    return Qnil;
+}
+
+
+static VALUE _wrap_wxControlWithItems_Append(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[4];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 3); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxControlWithItems, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxArrayString, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxControlWithItems_Append__SWIG_3(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxControlWithItems, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING);
+            }
+            if (_v) {
+                return _wrap_wxControlWithItems_Append__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxControlWithItems, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING);
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxClientData, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxControlWithItems_Append__SWIG_2(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxControlWithItems, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING);
+            }
+            if (_v) {
+                {
+                    void *ptr;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, 0, 0) != -1)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxControlWithItems_Append__SWIG_1(nargs, args, self);
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxControlWithItems_Append'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxControlWithItems_Clear(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    (arg1)->Clear();
+    
+    return Qnil;
 }
 
 
@@ -930,6 +1110,182 @@ _wrap_wxControlWithItems_GetStringSelection(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_wxControlWithItems_Insert__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    wxString *arg2 = 0 ;
+    int arg3 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    arg3 = NUM2INT(argv[1]);
+    result = (int)(arg1)->Insert((wxString const &)*arg2,arg3);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxControlWithItems_Insert__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    wxString *arg2 = 0 ;
+    int arg3 ;
+    void *arg4 = (void *) 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    arg3 = NUM2INT(argv[1]);
+    {
+        arg4 = (void*)(argv[2]);
+    }
+    result = (int)(arg1)->Insert((wxString const &)*arg2,arg3,arg4);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxControlWithItems_Insert__SWIG_2(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    wxString *arg2 = 0 ;
+    int arg3 ;
+    wxClientData *arg4 = (wxClientData *) 0 ;
+    int result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    arg3 = NUM2INT(argv[1]);
+    SWIG_ConvertPtr(argv[2], (void **) &arg4, SWIGTYPE_p_wxClientData, 1);
+    result = (int)(arg1)->Insert((wxString const &)*arg2,arg3,arg4);
+    
+    vresult = INT2NUM(result);
+    return vresult;
+}
+
+
+static VALUE _wrap_wxControlWithItems_Insert(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[5];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxControlWithItems, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING);
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_wxControlWithItems_Insert__SWIG_0(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxControlWithItems, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING);
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, 0, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxControlWithItems_Insert__SWIG_1(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxControlWithItems, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING);
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxClientData, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        return _wrap_wxControlWithItems_Insert__SWIG_2(nargs, args, self);
+                    }
+                }
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxControlWithItems_Insert'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxControlWithItems_IsEmpty(int argc, VALUE *argv, VALUE self) {
+    wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
+    bool result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxControlWithItems, 1);
+    result = (bool)((wxControlWithItems const *)arg1)->IsEmpty();
+    
+    vresult = result ? Qtrue : Qfalse;
+    return vresult;
+}
+
+
+static VALUE
 _wrap_wxControlWithItems_SetClientData(int argc, VALUE *argv, VALUE self) {
     wxControlWithItems *arg1 = (wxControlWithItems *) 0 ;
     int arg2 ;
@@ -992,10 +1348,12 @@ free_wxControlWithItems(wxControlWithItems *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_wxControlWithItems[] = {{"_p_wxControlWithItems", 0, "wxControlWithItems *", 0, 0, 0, 0},{"_p_wxControlWithItems", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
+static swig_type_info _swigt__p_wxArrayString[] = {{"_p_wxArrayString", 0, "wxArrayString *", 0, 0, 0, 0},{"_p_wxArrayString", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 static swig_type_info _swigt__p_wxClientData[] = {{"_p_wxClientData", 0, "wxClientData *", 0, 0, 0, 0},{"_p_wxClientData", 0, 0, 0, 0, 0, 0},{0, 0, 0, 0, 0, 0, 0}};
 
 static swig_type_info *swig_types_initial[] = {
 _swigt__p_wxControlWithItems, 
+_swigt__p_wxArrayString, 
 _swigt__p_wxClientData, 
 0
 };
@@ -1029,6 +1387,7 @@ mWxControlWithItems = mWxruby2;
     SWIG_TypeClientData(SWIGTYPE_p_wxControlWithItems, (void *) &cWxControlWithItems);
     rb_undef_alloc_func(cWxControlWithItems.klass);
     rb_define_method(cWxControlWithItems.klass, "append", VALUEFUNC(_wrap_wxControlWithItems_Append), -1);
+    rb_define_method(cWxControlWithItems.klass, "clear", VALUEFUNC(_wrap_wxControlWithItems_Clear), -1);
     rb_define_method(cWxControlWithItems.klass, "delete", VALUEFUNC(_wrap_wxControlWithItems_Delete), -1);
     rb_define_method(cWxControlWithItems.klass, "find_string", VALUEFUNC(_wrap_wxControlWithItems_FindString), -1);
     rb_define_method(cWxControlWithItems.klass, "get_client_data", VALUEFUNC(_wrap_wxControlWithItems_GetClientData), -1);
@@ -1037,6 +1396,8 @@ mWxControlWithItems = mWxruby2;
     rb_define_method(cWxControlWithItems.klass, "get_selection", VALUEFUNC(_wrap_wxControlWithItems_GetSelection), -1);
     rb_define_method(cWxControlWithItems.klass, "get_string", VALUEFUNC(_wrap_wxControlWithItems_GetString), -1);
     rb_define_method(cWxControlWithItems.klass, "get_string_selection", VALUEFUNC(_wrap_wxControlWithItems_GetStringSelection), -1);
+    rb_define_method(cWxControlWithItems.klass, "insert", VALUEFUNC(_wrap_wxControlWithItems_Insert), -1);
+    rb_define_method(cWxControlWithItems.klass, "is_empty", VALUEFUNC(_wrap_wxControlWithItems_IsEmpty), -1);
     rb_define_method(cWxControlWithItems.klass, "set_client_data", VALUEFUNC(_wrap_wxControlWithItems_SetClientData), -1);
     rb_define_method(cWxControlWithItems.klass, "set_client_object", VALUEFUNC(_wrap_wxControlWithItems_SetClientObject), -1);
     rb_define_method(cWxControlWithItems.klass, "set_string", VALUEFUNC(_wrap_wxControlWithItems_SetString), -1);

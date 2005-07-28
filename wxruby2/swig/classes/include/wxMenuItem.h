@@ -18,10 +18,23 @@ public:
 	 * \param wxMenu*  
 	*/
 
-   wxMenuItem(wxMenu* parentMenu = NULL, int id = ID_SEPARATOR, const wxString&  text = wxT(""), const wxString&  helpString = wxT(""), wxItemKind  kind = wxITEM_NORMAL, wxMenu* subMenu = NULL) ;
+  wxMenuItem(wxMenu *parentMenu = (wxMenu *)NULL,
+             int id = wxID_SEPARATOR,
+             const wxString& name = wxEmptyString,
+             const wxString& help = wxEmptyString,
+             wxItemKind kind = wxITEM_NORMAL,
+             wxMenu *subMenu = (wxMenu *)NULL);
 	/**
 	 * \brief Destructor. 
 	*/
+
+  // compatibility only, don't use in new code
+  wxMenuItem(wxMenu *parentMenu,
+             int id,
+             const wxString& text,
+             const wxString& help,
+             bool isCheckable,
+             wxMenu *subMenu = (wxMenu *)NULL);
 
   virtual  ~wxMenuItem() ;
 	/**
@@ -29,55 +42,41 @@ public:
 	 * \param bool  
 	*/
 
-  void Check(bool  check ) ;
+  void Check(bool bDoCheck = true);
 	/**
 	 * \brief Deletes the submenu, if any. 
 	*/
 
-  void DeleteSubMenu() ;
-	/**
-	 * \brief Enables or disables the menu item. 
-	 * \param bool  
-	*/
+  // mark item as belonging to the given radio group
+  void SetAsRadioGroupStart();
+  void SetRadioGroupStart(int start);
+  void SetRadioGroupEnd(int end);
 
-  void Enable(bool  enable ) ;
-	/**
-	 * \brief Returns the background colour associated with the menu item (Windows only). 
-	*/
+  void Enable(bool bDoEnable = true);
 
-  wxColour& GetBackgroundColour() const;
-	/**
-	 * \brief Returns the checked or unchecked bitmap (Windows only). 
-	 * \param bool  
-	*/
+  void Toggle();
 
-  wxBitmap& GetBitmap(bool checked = true) const;
-	/**
-	 * \brief Returns the font associated with the menu item (Windows only). 
-	*/
-
-  wxFont& GetFont() const;
-	/**
-	 * \brief Returns the help string associated with the menu item. 
-	*/
-
-  wxString GetHelp() const;
+  wxString GetHelp();
 	/**
 	 * \brief Returns the menu item identifier. 
 	*/
 
-  int GetId() const;
+  int GetRealId();
+  
+  void SetId(int itemid);
+  int GetId();
 	/**
 	 * \brief Returns the item kind, one of  ,  , 
   or  . 
 	*/
 
-  wxItemKind GetKind() const;
+  void SetKind(wxItemKind kind);
+  wxItemKind GetKind();
 	/**
 	 * \brief  
 	*/
 
-  wxString GetLabel() const;
+  wxString GetLabel();
 	/**
 	 * \brief  
 	 * \param const wxString&   
@@ -88,102 +87,87 @@ public:
 	 * \brief Gets the width of the menu item checkmark bitmap (Windows only). 
 	*/
 
-  int GetMarginWidth() const;
-	/**
-	 * \brief Returns the text associated with the menu item.
-
-  this function is deprecated, please use 
-  or   
-instead. 
-	*/
-
-  wxString GetName() const;
 	/**
 	 * \brief  
 	*/
 
-  wxString GetText() const;
+  wxString GetText();
 	/**
 	 * \brief Returns the submenu associated with the menu item, or NULL if there isn't one. 
 	*/
 
-  wxMenu* GetSubMenu() const;
+  bool IsSubMenu();
+  
+  void SetSubMenu(wxMenu *menu);
+  
+  wxMenu* GetSubMenu();
 	/**
 	 * \brief Returns the text colour associated with the menu item (Windows only). 
 	*/
 
-  wxColour& GetTextColour() const;
-	/**
-	 * \brief Returns true if the item is checkable. 
-	*/
+  virtual void SetCheckable(bool checkable);
 
-  bool IsCheckable() const;
+  bool IsCheckable();
 	/**
 	 * \brief Returns true if the item is checked. 
 	*/
 
-  bool IsChecked() const;
+  bool IsChecked();
 	/**
 	 * \brief Returns true if the item is enabled. 
 	*/
 
-  bool IsEnabled() const;
+  bool IsEnabled();
 	/**
 	 * \brief Returns true if the item is a separator. 
 	*/
 
-  bool IsSeparator() const;
+  bool IsSeparator();
 	/**
 	 * \brief Sets the background colour associated with the menu item (Windows only). 
 	 * \param const wxColour&   
 	*/
 
-  void SetBackgroundColour(const wxColour&  colour ) const;
-	/**
-	 * \brief Sets the bitmap for the menu item (Windows and GTK+ only). It is
-equivalent to  (bmp, wxNullBitmap). 
-	 * \param const wxBitmap&   
-	*/
 
-  void SetBitmap(const wxBitmap&  bmp ) const;
-	/**
-	 * \brief Sets the checked/unchecked bitmaps for the menu item (Windows only). The first bitmap
-is also used as the single bitmap for uncheckable menu items. 
-	 * \param const wxBitmap&   
-	 * \param const wxBitmap&   
-	*/
-
-  void SetBitmaps(const wxBitmap&  checked , const wxBitmap&  unchecked = wxNullBitmap) const;
-	/**
-	 * \brief Sets the font associated with the menu item (Windows only). 
-	 * \param const wxFont&   
-	*/
-
-  void SetFont(const wxFont&  font ) const;
-	/**
-	 * \brief Sets the help string. 
-	 * \param const wxString&   
-	*/
-
-  void SetHelp(const wxString&  helpString ) const;
+  void SetHelp(const wxString& str);
 	/**
 	 * \brief Sets the width of the menu item checkmark bitmap (Windows only). 
 	 * \param int  
 	*/
 
-  void SetMarginWidth(int  width ) const;
+
 	/**
 	 * \brief Sets the text associated with the menu item. 
 	 * \param const wxString&   
 	*/
 
-  void SetText(const wxString&  text ) const;
+  void SetText(const wxString& strName);
 	/**
 	 * \brief Sets the text colour associated with the menu item (Windows only). 
 	 * \param const wxColour&   
 	*/
 
-  void SetTextColour(const wxColour&  colour ) const;
+  wxMenu *GetMenu();
+  void SetMenu(wxMenu* menu);
+  
+#if wxUSE_ACCEL
+  // extract the accelerator from the given menu string, return NULL if none
+  // found
+  static wxAcceleratorEntry *GetAccelFromString(const wxString& label);
+
+  // get our accelerator or NULL (caller must delete the pointer)
+  virtual wxAcceleratorEntry *GetAccel();
+
+  // set the accel for this item - this may also be done indirectly with
+  // SetText()
+  virtual void SetAccel(wxAcceleratorEntry *accel);
+#endif // wxUSE_ACCEL  
+
+
+  // Depreciated
+  //void SetName(const wxString& str);
+  //const wxString& GetName();
+
 };
 
 

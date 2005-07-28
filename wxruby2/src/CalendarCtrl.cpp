@@ -811,7 +811,7 @@ _wrap_new_wxCalendarCtrl(int argc, VALUE *argv, VALUE self) {
     wxPoint *arg5 = (wxPoint *) &arg5_defvalue ;
     wxSize const &arg6_defvalue = wxDefaultSize ;
     wxSize *arg6 = (wxSize *) &arg6_defvalue ;
-    long arg7 = (long) wxCAL_SHOW_HOLIDAYS ;
+    long arg7 = (long) wxCAL_SHOW_HOLIDAYS|wxWANTS_CHARS ;
     wxString const &arg8_defvalue = wxCalendarNameStr ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     wxCalendarCtrl *result;
@@ -876,7 +876,7 @@ _wrap_wxCalendarCtrl_Create(int argc, VALUE *argv, VALUE self) {
     wxPoint *arg5 = (wxPoint *) &arg5_defvalue ;
     wxSize const &arg6_defvalue = wxDefaultSize ;
     wxSize *arg6 = (wxSize *) &arg6_defvalue ;
-    long arg7 = (long) wxCAL_SHOW_HOLIDAYS ;
+    long arg7 = (long) wxCAL_SHOW_HOLIDAYS|wxWANTS_CHARS ;
     wxString const &arg8_defvalue = wxCalendarNameStr ;
     wxString *arg8 = (wxString *) &arg8_defvalue ;
     bool result;

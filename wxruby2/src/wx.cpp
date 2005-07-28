@@ -1185,6 +1185,8 @@ extern "C" void InitializeOtherModules()
     Init_wxMenu();
     extern void Init_wxMenuBar();
     Init_wxMenuBar();
+    extern void Init_wxMenuItem();
+    Init_wxMenuItem();
     extern void Init_wxMessageDialog();
     Init_wxMessageDialog();
     extern void Init_wxMouseEvent();
@@ -1261,6 +1263,8 @@ extern "C" void InitializeOtherModules()
     Init_wxToggleButton();
     extern void Init_wxToolBar();
     Init_wxToolBar();
+    extern void Init_wxToolTip();
+    Init_wxToolTip();
     extern void Init_wxTreeEvent();
     Init_wxTreeEvent();
     extern void Init_wxUpdateUIEvent();

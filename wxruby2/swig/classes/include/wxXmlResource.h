@@ -8,219 +8,134 @@
 class wxXmlResource : public wxObject
 {
 public:
-	/**
-	 * \brief Constructor. 
-	 * \param const wxString&   
-	 * \param int   
-	*/
+    // Constructor.
+    // Flags: wxXRC_USE_LOCALE
+    //              translatable strings will be translated via _()
+    //        wxXRC_NO_SUBCLASSING
+    //              subclass property of object nodes will be ignored
+    //              (useful for previews in XRC editors)
+    wxXmlResource(int flags = wxXRC_USE_LOCALE);
 
-   wxXmlResource(const wxString&  filemask , int  flags = wxXRC_USE_LOCALE) ;
-	/**
-	 * \brief Constructor. 
-	 * \param int   
-	*/
+    // Constructor.
+    // Flags: wxXRC_USE_LOCALE
+    //              translatable strings will be translated via _()
+    //        wxXRC_NO_SUBCLASSING
+    //              subclass property of object nodes will be ignored
+    //              (useful for previews in XRC editors)
+    wxXmlResource(const wxString& filemask, int flags = wxXRC_USE_LOCALE);
 
-   wxXmlResource(int  flags = wxXRC_USE_LOCALE) ;
-	/**
-	 * \brief Destructor. 
-	*/
+    // Destructor.
+    ~wxXmlResource();
 
-  virtual  ~wxXmlResource() ;
-	/**
-	 * \brief Initializes only a specific handler (or custom handler). Convention says
-that the handler name is equal to the control's name plus 'XmlHandler', for example
-wxTextCtrlXmlHandler, wxHtmlWindowXmlHandler. The XML resource compiler
-(wxxrc) can create include file that contains initialization code for
-all controls used within the resource. 
-	 * \param wxXmlResourceHandler*   
-	*/
+    // Loads resources from XML files that match given filemask.
+    // This method understands VFS (see filesys.h).
+    bool Load(const wxString& filemask);
 
-  void AddHandler(wxXmlResourceHandler*  handler ) ;
-	/**
-	 * \brief Attaches an unknown control to the given panel/window/dialog.
-Unknown controls are used in conjunction with &lt;object class=&quot;unknown&quot;&gt;. 
-	 * \param const wxString&   
-	 * \param wxWindow*   
-	 * \param wxWindow*   
-	*/
+    // Initialize handlers for all supported controls/windows. This will
+    // make the executable quite big because it forces linking against
+    // most of the wxWidgets library.
+    void InitAllHandlers();
 
-  bool AttachUnknownControl(const wxString&  name , wxWindow*  control , wxWindow*  parent = NULL) ;
-	/**
-	 * \brief Removes all handlers. 
-	*/
+    // Initialize only a specific handler (or custom handler). Convention says
+    // that handler name is equal to the control's name plus 'XmlHandler', for
+    // example wxTextCtrlXmlHandler, wxHtmlWindowXmlHandler. The XML resource
+    // compiler (xmlres) can create include file that contains initialization
+    // code for all controls used within the resource.
+    void AddHandler(wxXmlResourceHandler *handler);
 
-  void ClearHandlers() ;
-	/**
-	 * \brief Compares the XRC version to the argument. Returns -1 if the XRC version
-is less than the argument, +1 if greater, and 0 if they equal. 
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	 * \param int   
-	*/
+    // Add a new handler at the begining of the handler list
+    void InsertHandler(wxXmlResourceHandler *handler);
 
-  int CompareVersion(int  major , int  minor , int  release , int  revision ) const;
-	/**
-	 * \brief Creates a resource from information in the given node. 
-	 * \param wxXmlNode*   
-	 * \param wxObject*   
-	 * \param wxObject*   
-	*/
+    // Removes all handlers
+    void ClearHandlers();
 
-  wxObject* CreateResFromNode(wxXmlNode*  node , wxObject*  parent , wxObject*  instance = NULL) ;
-	/**
-	 * \brief Helper function: finds a resource (calls UpdateResources) and returns a node containing it. 
-	 * \param wxXmlNode*   
-	 * \param const wxString&   
-	 * \param const wxString&   
-	 * \param bool   
-	*/
+    // Registers subclasses factory for use in XRC. This function is not meant
+    // for public use, please see the comment above wxXmlSubclassFactory
+    // definition.
+    static void AddSubclassFactory(wxXmlSubclassFactory *factory);
 
-  wxXmlNode* DoFindResource(wxXmlNode*  parent , const wxString&  name , const wxString&  classname , bool  recursive ) ;
-	/**
-	 * \brief Finds a resource (calls UpdateResources) and returns a node containing it. 
-	 * \param const wxString&   
-	 * \param const wxString&   
-	 * \param bool   
-	*/
+    // Loads menu from resource. Returns NULL on failure.
+    wxMenu *LoadMenu(const wxString& name);
 
-  wxXmlNode* FindResource(const wxString&  name , const wxString&  classname , bool  recursive = false) ;
-	/**
-	 * \brief Gets the global resources object or creates one if none exists. 
-	*/
+    // Loads menubar from resource. Returns NULL on failure.
+    wxMenuBar *LoadMenuBar(wxWindow *parent, const wxString& name);
 
-  wxXmlResource* Get() ;
-	/**
-	 * \brief Returns flags, which may be a bitlist of wxXRC_USE_LOCALE and wxXRC_NO_SUBCLASSING. 
-	*/
+    // Loads menubar from resource. Returns NULL on failure.
+    wxMenuBar *LoadMenuBar(const wxString& name) { return LoadMenuBar(NULL, name); }
 
-  int GetFlags() ;
-	/**
-	 * \brief Returns version information (a.b.c.d = d+ 256&#42;c + 256^2&#42;b + 256\textasciitilde3&#42;a). 
-	*/
+#if wxUSE_TOOLBAR
+    // Loads a toolbar.
+    wxToolBar *LoadToolBar(wxWindow *parent, const wxString& name);
+#endif
 
+    // Loads a dialog. dlg points to parent window (if any).
+    wxDialog *LoadDialog(wxWindow *parent, const wxString& name);
+
+    // Loads a dialog. dlg points to parent window (if any). This form
+    // is used to finish creation of already existing instance (main reason
+    // for this is that you may want to use derived class with new event table)
+    // Example (typical usage):
+    //      MyDialog dlg;
+    //      wxTheXmlResource->LoadDialog(&dlg, mainFrame, "my_dialog");
+    //      dlg->ShowModal();
+    bool LoadDialog(wxDialog *dlg, wxWindow *parent, const wxString& name);
+
+    // Loads a panel. panel points to parent window (if any).
+    wxPanel *LoadPanel(wxWindow *parent, const wxString& name);
+
+    // Loads a panel. panel points to parent window (if any). This form
+    // is used to finish creation of already existing instance.
+    bool LoadPanel(wxPanel *panel, wxWindow *parent, const wxString& name);
+
+    // Loads a frame.
+    wxFrame *LoadFrame(wxWindow* parent, const wxString& name);
+    bool LoadFrame(wxFrame* frame, wxWindow *parent, const wxString& name);
+
+    // Load an object from the resource specifying both the resource name and
+    // the classname.  This lets you load nonstandard container windows.
+    wxObject *LoadObject(wxWindow *parent, const wxString& name,
+                         const wxString& classname);
+
+    // Load an object from the resource specifying both the resource name and
+    // the classname.  This form lets you finish the creation of an existing
+    // instance.
+    bool LoadObject(wxObject *instance, wxWindow *parent, const wxString& name,
+                    const wxString& classname);
+
+    // Loads a bitmap resource from a file.
+    wxBitmap LoadBitmap(const wxString& name);
+
+    // Loads an icon resource from a file.
+    wxIcon LoadIcon(const wxString& name);
+
+    // Attaches an unknown control to the given panel/window/dialog.
+    // Unknown controls are used in conjunction with <object class="unknown">.
+    bool AttachUnknownControl(const wxString& name, wxWindow *control,
+                              wxWindow *parent = NULL);
+
+    // Returns a numeric ID that is equivalent to the string id used in an XML
+    // resource. To be used in event tables.
+    // Macro XRCID is provided for convenience
+    static int GetXRCID(const wxChar *str_id);
+
+    // Returns version information (a.b.c.d = d+ 256*c + 256^2*b + 256^3*a).
   long GetVersion() const;
-	/**
-	 * \brief Returns a numeric ID that is equivalent to the string ID used in an XML
-resource. To be used in event tables.
-The macro   is provided for convenience. 
-	 * \param const wxChar*   
-	*/
 
-  int GetXRCID(const wxChar*  str_id ) ;
-	/**
-	 * \brief Initializes handlers for all supported controls/windows. This will
-make the executable quite big because it forces linking against
-most of the wxWindows library. 
-	*/
+    // Compares resources version to argument. Returns -1 if resources version
+    // is less than the argument, +1 if greater and 0 if they equal.
+    int CompareVersion(int major, int minor, int release, int revision) const;
+//// Singleton accessors.
 
-  void InitAllHandlers() ;
-	/**
-	 * \brief Loads resources from XML files that match given filemask.
-This method understands VFS (see filesys.h). 
-	 * \param const wxString&   
-	*/
+    // Gets the global resources object or creates one if none exists.
+    static wxXmlResource *Get();
 
-  bool Load(const wxString&  filemask ) ;
-	/**
-	 * \brief Loads a bitmap resource from a file. 
-	 * \param const wxString&   
-	*/
+    // Sets the global resources object and returns a pointer to the previous one (may be NULL).
+    static wxXmlResource *Set(wxXmlResource *res);
 
-  wxBitmap LoadBitmap(const wxString&  name ) ;
-	/**
-	 * \brief Loads a dialog.   points to a parent window (if any). 
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	*/
-
-  wxDialog* LoadDialog(wxWindow*  parent , const wxString&  name ) ;
-	/**
-	 * \brief Loads a dialog.   points to parent window (if any).
-
-This form is used to finish creation of an already existing instance (the main reason
-for this is that you may want to use derived class with a new event table).
-
-Example: 
-	 * \param wxDialog*   
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	*/
-
-  bool LoadDialog(wxDialog*  dlg , wxWindow*  parent , const wxString&  name ) ;
-	/**
-	 * \brief Loads a frame. 
-	 * \param wxFrame*   
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	*/
-
-  bool LoadFrame(wxFrame*  frame , wxWindow*  parent , const wxString&  name ) ;
-	/**
-	 * \brief Loads an icon resource from a file. 
-	 * \param const wxString&   
-	*/
-
-  wxIcon LoadIcon(const wxString&  name ) ;
-	/**
-	 * \brief Loads menu from resource. Returns NULL on failure. 
-	 * \param const wxString&   
-	*/
-
-  wxMenu* LoadMenu(const wxString&  name ) ;
-	/**
-	 * \brief Loads a menubar from resource. Returns NULL on failure. 
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	*/
-
-  wxMenuBar* LoadMenuBar(wxWindow*  parent , const wxString&  name ) ;
-	/**
-	 * \brief Loads a menubar from resource. Returns NULL on failure. 
-	 * \param const wxString&   
-	*/
-
-  wxMenuBar* LoadMenuBar(const wxString&  name ) ;
-	/**
-	 * \brief Loads a panel.   points to parent window (if any). 
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	*/
-
-  wxPanel* LoadPanel(wxWindow*  parent , const wxString&  name ) ;
-	/**
-	 * \brief Loads a panel.   points to parent window (if any). This form
-is used to finish creation of an already existing instance. 
-	 * \param wxPanel*   
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	*/
-
-  bool LoadPanel(wxPanel*  panel , wxWindow*  parent , const wxString&  name ) ;
-	/**
-	 * \brief Loads a toolbar. 
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	*/
-
-  wxToolBar* LoadToolBar(wxWindow*  parent , const wxString&  name ) ;
-	/**
-	 * \brief Sets the global resources object and returns a pointer to the previous one (may be NULL). 
-	 * \param wxXmlResource*   
-	*/
-
-  wxXmlResource* Set(wxXmlResource*  res ) ;
-	/**
-	 * \brief Sets flags (bitlist of wxXRC_USE_LOCALE and wxXRC_NO_SUBCLASSING). 
-	*/
-
-  int SetFlags() ;
-	/**
-	 * \brief Scans the resources list for unloaded files and loads them. Also reloads
-files that have been modified since the last load. 
-	*/
-
-  void UpdateResources() ;
+    // Returns flags, which may be a bitlist of wxXRC_USE_LOCALE and wxXRC_NO_SUBCLASSING.
+    int GetFlags() const;
+    // Set flags after construction.
+    void SetFlags(int flags);
 };
 
 

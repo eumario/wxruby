@@ -11,60 +11,62 @@ public:
 	/**
 	 * \brief Default constructor. 
 	*/
+  wxChoice() { }
+  virtual ~wxChoice();
 
-   wxChoice() ;
-	/**
-	 * \brief  
-	 * \param wxWindow *  
-	 * \param wxWindowID  
-	 * \param const wxPoint&   
-	 * \param const wxSize&  
-	 * \param int  
-	 * \param const wxString   
-	 * \param long  
-	 * \param const wxValidator&   
-	 * \param const wxString&   
-	*/
+  wxChoice(wxWindow *parent,
+           wxWindowID id,
+           const wxPoint& pos = wxDefaultPosition,
+           const wxSize& size = wxDefaultSize,
+           int n = 0, const wxString choices[] = NULL,
+           long style = 0,
+           const wxValidator& validator = wxDefaultValidator,
+           const wxString& name = wxChoiceNameStr);
+  
+  wxChoice(wxWindow *parent,
+           wxWindowID id,
+           const wxPoint& pos,
+           const wxSize& size,
+           const wxArrayString& choices,
+           long style = 0,
+           const wxValidator& validator = wxDefaultValidator,
+           const wxString& name = wxChoiceNameStr);
 
-   wxChoice(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("choice")) ;
-	/**
-	 * \brief Destructor, destroying the choice item. 
-	*/
+  bool Create(wxWindow *parent,
+              wxWindowID id,
+              const wxPoint& pos = wxDefaultPosition,
+              const wxSize& size = wxDefaultSize,
+              int n = 0, const wxString choices[] = NULL,
+              long style = 0,
+              const wxValidator& validator = wxDefaultValidator,
+              const wxString& name = wxChoiceNameStr);
+              
+  bool Create(wxWindow *parent,
+              wxWindowID id,
+              const wxPoint& pos,
+              const wxSize& size,
+              const wxArrayString& choices,
+              long style = 0,
+              const wxValidator& validator = wxDefaultValidator,
+              const wxString& name = wxChoiceNameStr);
 
-  virtual  ~wxChoice() ;
-	/**
-	 * \brief Creates the choice for two-step construction. See  . 
-	 * \param wxWindow *  
-	 * \param wxWindowID  
-	 * \param const wxPoint&   
-	 * \param const wxSize&  
-	 * \param int  
-	 * \param const wxString   
-	 * \param long  
-	 * \param const wxString&   
-	*/
+  virtual int DoAppend(const wxString& item);
+  virtual int DoInsert(const wxString& item, int pos);
+  virtual void Delete(int n);
+  virtual void Clear();
 
-  bool Create(wxWindow * parent , wxWindowID  id , const wxPoint&  pos , const wxSize&  size , int  n , const wxString  choices[] , long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("choice"));
-	/**
-	 * \brief Deletes the item with the given index from the control. 
-	 * \param int   
-	*/
+  virtual int GetCount() const;
+  virtual int GetSelection() const;
+  virtual void SetSelection(int n);
 
-  void Delete(int  n ) ;
-	/**
-	 * \brief Gets the number of columns in this choice item. 
-	*/
+  virtual int FindString(const wxString& s) const;
+  virtual wxString GetString(int n) const;
+  virtual void SetString(int n, const wxString& s);
 
   int GetColumns() const;
-	/**
-	 * \brief Sets the number of columns in this choice item. 
-	 * \param int  
-	*/
-
   void SetColumns(int n = 1) ;
-  // the following were missing from the xml
-  void SetSelection(int  n );
-  void SetStringSelection(wxString &);
+
+  //void SetStringSelection(wxString &);
 };
 
 

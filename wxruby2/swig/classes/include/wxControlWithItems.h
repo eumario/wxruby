@@ -142,7 +142,6 @@ the new code. This method is only available if wxWindows was compiled with
 future versions. 
 	*/
 
-  int Number() const;
 	/**
 	 * \brief Associates the given untyped client data pointer with the given item. Note that
 it is an error to call this function if any typed client data pointers had been

@@ -18,6 +18,17 @@ class SwigDirector_wxSizer : public wxSizer, public Swig::Director {
 
 public:
     SwigDirector_wxSizer(VALUE self, bool disown = false);
+    virtual bool Remove(wxWindow *window);
+    virtual bool Detach(wxWindow *window);
+    virtual bool Remove(wxSizer *sizer);
+    virtual bool Remove(int index);
+    virtual bool Detach(wxSizer *sizer);
+    virtual bool Detach(int index);
+    virtual void DeleteWindows();
+    virtual wxSizerItem *Insert(size_t index, wxSizerItem *item);
+    virtual void Layout();
+    virtual void Clear(bool delete_windows = false);
+    virtual void ShowItems(bool show);
 };
 
 

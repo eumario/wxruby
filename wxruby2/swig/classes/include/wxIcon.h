@@ -8,69 +8,28 @@
 class wxIcon : public wxBitmap
 {
 public:
-	/**
-	 * \brief Default constructor. 
-	*/
 
-  ;
-	/**
-	 * \brief Copy constructor. 
-	 * \param const wxIcon&   
-	*/
+    wxIcon() { }
 
-  ;
-	/**
-	 * \brief Creates an icon from the given data, which can be of arbitrary type. 
-	 * \param void*  
-	 * \param int  
-	 * \param int  
-	 * \param int  
-	 * \param int  
-	*/
+        // copy
+    wxIcon(const wxIcon& icon) : wxGDIImage(icon) { Ref(icon); }
 
-  ;
-	/**
-	 * \brief Creates an icon from an array of bits. 
-	 * \param const char  
-	 * \param int  
-	 * \param int  
-	 * \param int  
-	*/
+        // from raw data
+/* This won't compile under Linux with wx 2.5.3
+    wxIcon(const char bits[], int width, int height);
+*/
 
-  ;
-	/**
-	 * \brief Creates a new icon. 
-	 * \param int  
-	 * \param int  
-	 * \param int  
-	*/
+        // from XPM data
+    wxIcon(const char **data) { CreateIconFromXpm(data); }
 
-  ;
-	/**
-	 * \brief  
-	 * \param char**  
-	*/
+    wxIcon(char **data) { CreateIconFromXpm((const char **)data); }
 
-  ;
-	/**
-	 * \brief Creates an icon from XPM data. 
-	 * \param const char**  
-	*/
+        // from resource/file
+    wxIcon(const wxString& name,
+           long type = wxBITMAP_TYPE_ICO_RESOURCE,
+           int desiredWidth = -1, int desiredHeight = -1);
 
-  ;
-	/**
-	 * \brief Loads an icon from a file or resource. 
-	 * \param const wxString&   
-	 * \param long  
-	 * \param int  
-	 * \param int  
-	*/
-
-  wxIcon(const wxString&  name , wxBitmapType  type = wxBITMAP_TYPE_ANY, int desiredWidth = -1, int desiredHeight = -1);
-	/**
-	 * \brief Loads an icon from the specified  . 
-	 * \param const wxIconLocation&   
-	*/
+    wxIcon(const wxIconLocation& loc);
 
   ;
 	/**

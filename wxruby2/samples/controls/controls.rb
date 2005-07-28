@@ -118,7 +118,7 @@ class MyComboBox < ComboBox
                size = DEFAULT_SIZE,
                choices = [],
                style = 0)
-        super(parent, id, value, pos, size, choices, style)
+        super(parent, id, value, pos, size, choices)#, style)
 
         evt_char {|event| onChar(event)}
         evt_key_down {|event| onKeyDown(event)}
@@ -204,7 +204,7 @@ class MyPanel < Panel
 
 	#@m_logTargetOld = Log::set_active_target(LogTextCtrl.new(@m_text))
 
-        @m_notebook = Notebook.new(self, ID_NOTEBOOK)
+        @m_notebook = Wx::Notebook.new(self, ID_NOTEBOOK)
 
         choices = [
             "This",
@@ -541,7 +541,7 @@ end
         evt_spin_up(ID_SPINCTRL) {|event| onSpinCtrlUp(event) }
         evt_spin_down(ID_SPINCTRL) {|event| onSpinCtrlDown(event) }
         evt_text(ID_SPINCTRL) {|event| onSpinCtrlText(event) }
-if !(RUBY_PLATFORM =~ /darwin/)
+if (RUBY_PLATFORM =~ /mswin/)
         evt_togglebutton(ID_BUTTON_LABEL) {|event| onupdateLabel(event) }
 end
         evt_checkbox(ID_CHANGE_COLOUR) {|event| onChangeColour(event) }
@@ -930,7 +930,7 @@ end
     end
 
     def onupdateShowProgress(event)
-        event.enable( @m_spinbutton.get_value() > 0 )
+        #event.enable( @m_spinbutton.get_value() > 0 )
     end
 
     def onShowProgress(event)
@@ -1062,10 +1062,10 @@ class MyFrame < Frame
     end
 
     def onAbout(event)
-        bc = BusyCursor.new
-        dialog = MessageDialog.new(self, "This is a control sample", "About Controls", OK )
-        dialog.show_modal()
-        bc.free
+        bc = BusyCursor.new do 
+	        dialog = MessageDialog.new(self, "This is a control sample", "About Controls", OK )
+    	    dialog.show_modal()
+        end
     end
 
     def onClearLog(event)

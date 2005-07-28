@@ -1,6 +1,6 @@
 require 'mkmf'
 
-$DEBUG=false
+$DEBUG_BUILD=false
 
 use_xrc = false
 dir_config("xrc");
@@ -28,10 +28,10 @@ elsif /mingw32/ =~ RUBY_PLATFORM
 elsif /powerpc-darwin/ =~ RUBY_PLATFORM
 
     CONFIG['CC'] = "g++"
-    if (!$DEBUG)
+    if (!$DEBUG_BUILD)
       $CFLAGS.gsub!("-g","")
     else
-      $CFLAGS = $CFLAGS.gsub(/-O[0-9]/,"-O0") + " -DwxDEBUG "
+      $CFLAGS = $CFLAGS.gsub(/-O[0-9]/,"-O0") + " -DwxDEBUG_BUILD "
     end
     CONFIG['LDSHARED'].gsub!("cc","g++")
 
@@ -53,15 +53,15 @@ else
     # native Windows - requires a static build of wxWindows
     $WXDIR=ENV['WXWIN']
     $WXVERSION = '26'
-    if $DEBUG
-	$DEBUGPOSTFIX='d'
+    if $DEBUG_BUILD
+	    $DEBUG_BUILDPOSTFIX='d'
     else
-	$DEBUGPOSTFIX=''
+	    $DEBUG_BUILDPOSTFIX=''
     end
     $WXSRC="#$WXDIR/src/msw"
     $WXINC="#$WXDIR/include"
 
-    $INCTEMP="#$WXDIR/lib/vc_lib/msw#{$DEBUGPOSTFIX}"
+    $INCTEMP="#$WXDIR/lib/vc_lib/msw#{$DEBUG_BUILDPOSTFIX}"
 
     $CFLAGS += " -I#$WXINC -I#$INCTEMP #$WXCONTRIBINC #$WINFLAGS -DSTRICT -DWIN32 -D__WIN32__"
     $CFLAGS += " -D_WINDOWS -DWINVER=0x0400 /D__WIN95__ /D__WXMSW__ /D__WINDOWS__ -D__WXMSW__ /EHsc /GR -I.."
@@ -69,29 +69,29 @@ else
     $libs += " uuid.lib odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib winmm.lib"
     
     $WXLIBDIR="#$WXDIR/lib/vc_lib"
-    $WXLIB="#$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}.lib"       
-    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}.lib"
-    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_net.lib"
-    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_odbc.lib"
-    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_xml.lib"
-    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_adv.lib"
-    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_core.lib"
-    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_dbgrid.lib"
-    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_html.lib"
-    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_media.lib"
-    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_xrc.lib"
-    $WXLIB += " #$WXLIBDIR/wxexpat#{$DEBUGPOSTFIX}.lib"
-    $WXLIB += " #$WXLIBDIR/wxjpeg#{$DEBUGPOSTFIX}.lib"
-    $WXLIB += " #$WXLIBDIR/wxexpat#{$DEBUGPOSTFIX}.lib"
-    $WXLIB += " #$WXLIBDIR/wxpng#{$DEBUGPOSTFIX}.lib"
-    $WXLIB += " #$WXLIBDIR/wxregex#{$DEBUGPOSTFIX}.lib"
-    $WXLIB += " #$WXLIBDIR/wxtiff#{$DEBUGPOSTFIX}.lib"
-    $WXLIB += " #$WXLIBDIR/wxzlib#{$DEBUGPOSTFIX}.lib"      
-    if $DEBUG
-	$CFLAGS = $CFLAGS.gsub(/-MD/," /MDd");
-	$CFLAGS += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1"
+    $WXLIB =  "#$WXLIBDIR/wxbase26#{$DEBUG_BUILDPOSTFIX}.lib"       
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUG_BUILDPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUG_BUILDPOSTFIX}_net.lib"
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUG_BUILDPOSTFIX}_odbc.lib"
+    $WXLIB += " #$WXLIBDIR/wxbase26#{$DEBUG_BUILDPOSTFIX}_xml.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUG_BUILDPOSTFIX}_adv.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUG_BUILDPOSTFIX}_core.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUG_BUILDPOSTFIX}_dbgrid.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUG_BUILDPOSTFIX}_html.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUG_BUILDPOSTFIX}_media.lib"
+    $WXLIB += " #$WXLIBDIR/wxmsw26#{$DEBUG_BUILDPOSTFIX}_xrc.lib"
+    $WXLIB += " #$WXLIBDIR/wxexpat#{$DEBUG_BUILDPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxjpeg#{$DEBUG_BUILDPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxexpat#{$DEBUG_BUILDPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxpng#{$DEBUG_BUILDPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxregex#{$DEBUG_BUILDPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxtiff#{$DEBUG_BUILDPOSTFIX}.lib"
+    $WXLIB += " #$WXLIBDIR/wxzlib#{$DEBUG_BUILDPOSTFIX}.lib"      
+    if $DEBUG_BUILD
+	    $CFLAGS.gsub!('/MD','/MDd')
+	    $CFLAGS += " -D_DEBUG_BUILD -D__WXDEBUG_BUILD__ -DWXDEBUG_BUILD=1"
     else
-	$CFLAGS += " -DNDEBUG"
+      $CFLAGS += " -DNDEBUG_BUILD"
     end
     $libs += " #$WXLIB"
 

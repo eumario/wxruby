@@ -14,12 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxComboBox : public wxComboBox, public Swig::Director {
-
-public:
-    SwigDirector_wxComboBox(VALUE self, bool disown = false);
-    SwigDirector_wxComboBox(VALUE self, wxWindow *parent, wxWindowID id, wxString const &value, wxPoint const &pos, wxSize const &size, int n, wxString const choices[], long style = 0, wxValidator const &validator = wxDefaultValidator, wxString const &name = wxT("comboBox"), bool disown = false);
-};
-
-
 #endif

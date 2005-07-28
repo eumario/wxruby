@@ -18,7 +18,7 @@ class SwigDirector_wxCalendarCtrl : public wxCalendarCtrl, public Swig::Director
 
 public:
     SwigDirector_wxCalendarCtrl(VALUE self, bool disown = false);
-    SwigDirector_wxCalendarCtrl(VALUE self, wxWindow *parent, wxWindowID id, wxDateTime const &date = wxDefaultDateTime, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxCAL_SHOW_HOLIDAYS, wxString const &name = wxCalendarNameStr, bool disown = false);
+    SwigDirector_wxCalendarCtrl(VALUE self, wxWindow *parent, wxWindowID id, wxDateTime const &date = wxDefaultDateTime, wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, long style = wxCAL_SHOW_HOLIDAYS|wxWANTS_CHARS, wxString const &name = wxCalendarNameStr, bool disown = false);
 };
 
 

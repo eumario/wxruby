@@ -89,6 +89,14 @@
     $result = INT2NUM((int)$1);
 }
 
+# fixes mixup between 
+# wxMenuItem* wxMenu::Append(int itemid, const wxString& text, const wxString& help = wxEmptyString, wxItemKind kind = wxITEM_NORMAL)
+# and
+# void wxMenu::Append(int itemid, const wxString& text, const wxString& help, bool isCheckable);
+%typemap(typecheck) wxItemKind {
+	$1 = (TYPE($input) == T_FIXNUM && TYPE($input) != T_TRUE && TYPE($input) != T_FALSE);
+}
+
 ##############################################################
 
 %typemap(in) wxCalendarDateBorder {
@@ -131,6 +139,11 @@
     
     VALUE cDateTime = rb_iv_get(rb_cObject, "DateTime");
     $result = rb_funcall(cDateTime, rb_intern("new"), 6, y, mon, d, h, min, s);
+}
+
+# Need to have this to over-ride the default which does not work
+%typemap(typecheck) const wxDateTime& {
+	$1 = (TYPE($input) != T_NONE);
 }
 
 %apply int { wxDateTime::WeekDay  }
