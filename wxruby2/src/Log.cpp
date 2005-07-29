@@ -531,10 +531,10 @@ static swig_type_info *swig_types[5];
 static VALUE mWxLog;
    extern VALUE mWxruby2;
 
-static void SWIG_AsVal(VALUE obj, int *val)
-{
-    *val = (int) NUM2INT(obj);
-}
+//static void SWIG_AsVal(VALUE obj, int *val)
+//{
+//    *val = (int) NUM2INT(obj);
+//}
 
 
 #  undef GetClassName

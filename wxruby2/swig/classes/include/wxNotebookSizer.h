@@ -1,8 +1,8 @@
 // wxNotebookSizer.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
 
+// This class is now deprecated, so we no longer support it
+
+#if 0
 #if !defined(_wxNotebookSizer_h_)
 #define _wxNotebookSizer_h_
 class wxNotebookSizer : public wxSizer
@@ -22,4 +22,5 @@ public:
 };
 
 
+#endif
 #endif

@@ -530,10 +530,10 @@ static swig_type_info *swig_types[4];
 static VALUE mWxClassInfo;
    extern VALUE mWxruby2;
 
-static void SWIG_AsVal(VALUE obj, int *val)
-{
-    *val = (int) NUM2INT(obj);
-}
+//static void SWIG_AsVal(VALUE obj, int *val)
+//{
+//    *val = (int) NUM2INT(obj);
+//}
 
 
 #  undef GetClassName
@@ -859,16 +859,6 @@ _wrap_wxClassInfo_GetSize(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_wxClassInfo_InitializeClasses(int argc, VALUE *argv, VALUE self) {
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    wxClassInfo::InitializeClasses();
-    
-    return Qnil;
-}
-
-
-static VALUE
 _wrap_wxClassInfo_IsKindOf(int argc, VALUE *argv, VALUE self) {
     wxClassInfo *arg1 = (wxClassInfo *) 0 ;
     wxClassInfo *arg2 = (wxClassInfo *) 0 ;
@@ -935,7 +925,6 @@ mWxClassInfo = mWxruby2;
     rb_define_method(cWxClassInfo.klass, "get_base_class_name2", VALUEFUNC(_wrap_wxClassInfo_GetBaseClassName2), -1);
     rb_define_method(cWxClassInfo.klass, "get_class_name", VALUEFUNC(_wrap_wxClassInfo_GetClassName), -1);
     rb_define_method(cWxClassInfo.klass, "get_size", VALUEFUNC(_wrap_wxClassInfo_GetSize), -1);
-    rb_define_singleton_method(cWxClassInfo.klass, "initialize_classes", VALUEFUNC(_wrap_wxClassInfo_InitializeClasses), -1);
     rb_define_method(cWxClassInfo.klass, "is_kind_of", VALUEFUNC(_wrap_wxClassInfo_IsKindOf), -1);
     cWxClassInfo.mark = 0;
     cWxClassInfo.destroy = (void (*)(void *)) free_wxClassInfo;

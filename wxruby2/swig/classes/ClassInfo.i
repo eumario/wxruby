@@ -9,5 +9,9 @@
 
 %ignore wxClassInfo::wxClassInfo;
 
-%include "include/wxClassInfo.h"
+# deprecated:
+%ignore wxClassInfo::InitializeClasses;
 
+
+
+%include "include/wxClassInfo.h"

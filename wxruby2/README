@@ -23,6 +23,9 @@ WHATS NEW:
    - Added methods in several existing classes
 - Created temporary fake Notebook and ToggleButton classes 
   in wx.rb, so the controls sample can run on Linux
+- Eliminated several compiler warnings, some by removing 
+  support for deprecated methods
+- Removed deprecated NotebookSizer class
 
 
 REQUIREMENTS:

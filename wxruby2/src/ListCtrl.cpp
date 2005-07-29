@@ -540,10 +540,10 @@ static swig_type_info *swig_types[14];
 static VALUE mWxListCtrl;
    extern VALUE mWxruby2;
 
-static void SWIG_AsVal(VALUE obj, int *val)
-{
-    *val = (int) NUM2INT(obj);
-}
+//static void SWIG_AsVal(VALUE obj, int *val)
+//{
+//    *val = (int) NUM2INT(obj);
+//}
 
 
 #  undef GetClassName
@@ -1398,24 +1398,6 @@ _wrap_wxListCtrl_GetItemRect(int argc, VALUE *argv, VALUE self) {
     result = (bool)((wxListCtrl const *)arg1)->GetItemRect(arg2,*arg3,arg4);
     
     vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxListCtrl_GetItemSpacing(int argc, VALUE *argv, VALUE self) {
-    wxListCtrl *arg1 = (wxListCtrl *) 0 ;
-    bool arg2 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxListCtrl, 1);
-    arg2 = RTEST(argv[0]);
-    result = (int)((wxListCtrl const *)arg1)->GetItemSpacing(arg2);
-    
-    vresult = INT2NUM(result);
     return vresult;
 }
 
@@ -2563,7 +2545,6 @@ mWxListCtrl = mWxruby2;
     rb_define_method(cWxListCtrl.klass, "get_item_data", VALUEFUNC(_wrap_wxListCtrl_GetItemData), -1);
     rb_define_method(cWxListCtrl.klass, "get_item_position", VALUEFUNC(_wrap_wxListCtrl_GetItemPosition), -1);
     rb_define_method(cWxListCtrl.klass, "get_item_rect", VALUEFUNC(_wrap_wxListCtrl_GetItemRect), -1);
-    rb_define_method(cWxListCtrl.klass, "get_item_spacing", VALUEFUNC(_wrap_wxListCtrl_GetItemSpacing), -1);
     rb_define_method(cWxListCtrl.klass, "get_item_state", VALUEFUNC(_wrap_wxListCtrl_GetItemState), -1);
     rb_define_method(cWxListCtrl.klass, "get_item_text", VALUEFUNC(_wrap_wxListCtrl_GetItemText), -1);
     rb_define_method(cWxListCtrl.klass, "get_next_item", VALUEFUNC(_wrap_wxListCtrl_GetNextItem), -1);
