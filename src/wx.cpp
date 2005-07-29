@@ -1197,8 +1197,6 @@ extern "C" void InitializeOtherModules()
     Init_wxNotebook();
     extern void Init_wxNotebookEvent();
     Init_wxNotebookEvent();
-    extern void Init_wxNotebookSizer();
-    Init_wxNotebookSizer();
     extern void Init_wxNotifyEvent();
     Init_wxNotifyEvent();
     extern void Init_wxObject();

@@ -16,6 +16,11 @@
 //
 %ignore wxListCtrl::GetEditControl;
 
+# deprecated:
+%ignore wxListCtrl::GetItemSpacing(bool isSmall) const;
+
+
+
 %include "include/wxListCtrl.h"
 
 //
@@ -35,4 +40,3 @@ public:
 	void SetFont(wxFont &);
 	void SetTextColour(wxColour &);
 };
-

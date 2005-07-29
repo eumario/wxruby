@@ -535,10 +535,10 @@ static swig_type_info *swig_types[9];
 static VALUE mWxSizer;
    extern VALUE mWxruby2;
 
-static void SWIG_AsVal(VALUE obj, int *val)
-{
-    *val = (int) NUM2INT(obj);
-}
+//static void SWIG_AsVal(VALUE obj, int *val)
+//{
+//    *val = (int) NUM2INT(obj);
+//}
 
 
 #  undef GetClassName
@@ -774,21 +774,6 @@ SwigDirector_wxSizer::SwigDirector_wxSizer(VALUE self, bool disown): wxSizer(), 
 
 
 
-bool SwigDirector_wxSizer::Remove(wxWindow *window) {
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return wxSizer::Remove(window);
-    }
-    obj0 = SWIG_NewPointerObj(window, SWIGTYPE_p_wxWindow, 0);
-    result = rb_funcall(swig_get_self(), rb_intern(""), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return c_result;
-}
-
-
 bool SwigDirector_wxSizer::Detach(wxWindow *window) {
     VALUE obj0 = Qnil ;
     bool c_result ;
@@ -799,36 +784,6 @@ bool SwigDirector_wxSizer::Detach(wxWindow *window) {
     }
     obj0 = SWIG_NewPointerObj(window, SWIGTYPE_p_wxWindow, 0);
     result = rb_funcall(swig_get_self(), rb_intern("detach"), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return c_result;
-}
-
-
-bool SwigDirector_wxSizer::Remove(wxSizer *sizer) {
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return wxSizer::Remove(sizer);
-    }
-    obj0 = SWIG_NewPointerObj(sizer, SWIGTYPE_p_wxSizer, 0);
-    result = rb_funcall(swig_get_self(), rb_intern(""), 1,obj0);
-    c_result = (bool) RTEST(result);
-    return c_result;
-}
-
-
-bool SwigDirector_wxSizer::Remove(int index) {
-    VALUE obj0 = Qnil ;
-    bool c_result ;
-    VALUE result;
-    
-    if (swig_get_up()) {
-        return wxSizer::Remove(index);
-    }
-    obj0 = INT2NUM(index);
-    result = rb_funcall(swig_get_self(), rb_intern(""), 1,obj0);
     c_result = (bool) RTEST(result);
     return c_result;
 }

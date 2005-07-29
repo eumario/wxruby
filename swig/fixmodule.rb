@@ -15,6 +15,7 @@ def fixmodule(filename)
 	File.rename(filename, broken)
 	
 	this_module = File.basename(filename)
+	skip_until_close_brace = false
 	
 	File.open(filename, "w") do | out |
 	
@@ -73,6 +74,18 @@ def fixmodule(filename)
 				end
 	  
 			end
+			
+			if(line.index("SWIG_AsVal"))
+				skip_until_close_brace = true
+			end
+			
+			if(skip_until_close_brace)
+				if(line.index("}"))
+					skip_until_close_brace = false
+				end
+				line = "//#{line}"
+			end
+			
 			
 			out.puts(line)
 		end
