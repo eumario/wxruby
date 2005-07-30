@@ -1054,7 +1054,7 @@ _wrap_wxChoice_Create__SWIG_0(int argc, VALUE *argv, VALUE self) {
             for(int i=0; i < arg6; ++i)
             {
                 VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = (wxChar *)STR2CSTR(thisItem);
+                arg7[i] = wxConvUTF8.cMB2WC(STR2CSTR(thisItem));
             }
         }
     }
