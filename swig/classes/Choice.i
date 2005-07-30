@@ -24,8 +24,8 @@
     for(int i=0; i < $1; ++i)
     {
         VALUE thisItem = rb_ary_entry($input, i);
-        $2[i] = (wxChar *)STR2CSTR(thisItem);
-    }
+		$2[i] = wxConvUTF8.cMB2WC(STR2CSTR(thisItem));
+	}
 }
 
 

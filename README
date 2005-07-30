@@ -26,6 +26,8 @@ WHATS NEW:
 - Eliminated several compiler warnings, some by removing 
   support for deprecated methods
 - Removed deprecated NotebookSizer class
+- Fixed wxEntry prototype that was causing errors under gentoo
+- Integrated Choice.i unicode patch from Jani Monoses
 
 
 REQUIREMENTS:
