@@ -6,18 +6,7 @@
 %module(directors="1") wxApp
 
 %{
-#ifdef __WXMAC__
-#if wxMINOR_VERSION == 4
-int wxEntry( int argc, char *argv[],bool val=true );
-#else
-int wxEntry( int &argc, char *argv[]);
-#endif
-#else
-int wxEntry( int argc, char *argv[]);
-#endif
-
 #include <wx/init.h>
-
 %}
 
 %ignore GetAuto3D;
