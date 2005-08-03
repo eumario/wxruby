@@ -41,6 +41,11 @@ $libs = [$wx_libs, $ruby_libs, $extra_libs].join(' ')
 $extra_objs = $extra_objs
 $dl_lib = "wxruby2.#{$dl_ext}"
 
+#used for :install
+$ruby = "#{Config::CONFIG['bindir']}/#{Config::CONFIG['ruby_install_name']}"
+$install_prog = "#$ruby -run -e install -- -vpm 0755"
+$install_site_dir = "#{Config::CONFIG['sitedir']}/#{Config::CONFIG['MAJOR']}.#{Config::CONFIG['MINOR']}"
+$install_lib_dir = "#$install_site_dir/#{Config::CONFIG['sitearch']}"
 
 #############################
 # later, support static linking
@@ -62,7 +67,7 @@ begin
     
     task :clean_src do
         delete_files_in_with_ext($src_dir,"cpp")
-	delete_files_in_with_ext($src_dir,"h")
+		delete_files_in_with_ext($src_dir,"h")
     end
     
     task :clean do
@@ -71,6 +76,7 @@ begin
         delete_files_in($obj_dir)
         #force_rmdir($obj_dir)
     end
+    
 rescue Exception => e
     puts(e.message)
     puts(e.backtrace.join("\n"))

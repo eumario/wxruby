@@ -226,6 +226,20 @@ def create_link_task
     end
 end
 
+def install_lib(filename)
+	if(!File.directory?($install_lib_dir))
+		mkdir($install_lib_dir)
+	end
+	sh "#{$install_prog} lib/#{filename} #{$install_lib_dir}"
+end
+
+def create_install_task
+    task :install => [:default] do |t|
+	  install_lib("wx.rb")
+	  install_lib($dl_lib)
+    end    
+end
+
 def create_internal_swig_tasks
     create_swig_tasks
 end
@@ -233,4 +247,5 @@ end
 def create_internal_non_swig_tasks
     create_obj_tasks
     create_link_task
+	create_install_task
 end

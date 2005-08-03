@@ -1,3 +1,5 @@
+puts("WARNING! wxruby2 extconf.rb is deprecated! Use rake instead.")
+
 require 'mkmf'
 
 $DEBUG_BUILD=false
@@ -133,3 +135,5 @@ File.open("Makefile","ab+"){|f|
 	f.puts("depends:")
 	f.puts("\t$(CXX) $(CXXFLAGS) $(CPPFLAGS) -MM -MG $(SRC) >depend")
 =end
+
+puts("WARNING! wxruby2 extconf.rb is deprecated! Use rake instead.")

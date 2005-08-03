@@ -3,7 +3,13 @@
 #   released under the wxWidgets license
 #   as part of the wxRuby project
 
-require 'wxruby2'
+begin
+	require 'wxruby2'
+rescue LoadError => e
+	puts("Unable to load wxruby. Searched:")
+	puts($LOAD_PATH)
+	exit(1)
+end
 
 # This wrapper serves two functions:
 # 1. It allows apps to require 'wx' but still have the binary 

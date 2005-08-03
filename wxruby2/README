@@ -16,6 +16,7 @@ For more details, see the project home page:
 
 WHATS NEW:
 - No longer support wx 2.5.3. Now require wx 2.6+
+- extconf.rb is now deprecated. Use rake instead.
 - Binary library is now named wxruby2, and a small Ruby 
   wrapper named wx.rb is what is actually loaded by apps.
 - Integrated more patches from Sean Long:
@@ -87,10 +88,9 @@ to run a wxRuby app, like:
   
 
 Normally, you would install the library somewhere in your 
-path. There will be a "rake install" task, but until then 
-you will need to copy both wx.rb and the binary library 
-(either wxruby2.so or wxruby2.dll depending on your platform)
-to somewhere on your path, such as /usr/local/lib or C:\windows32.
+path. There is a "rake install" taskthat copies both wx.rb and 
+the binary library (either wxruby2.so or wxruby2.dll depending 
+on your platform) to the appropriate ruby extensions directory.
 
 
 TESTING:

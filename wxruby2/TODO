@@ -5,8 +5,6 @@ High priority TODO items:
 
 - Implement wxNotebook on Linux
 
-- Create "rake install" task
-
 - Insert placeholder .i files for any wx classes that we specifically 
 do not want to support, such as wxDateTime and the socket classes.
 
@@ -21,9 +19,9 @@ This should be done after the unicode fixes.
 
 - Start building gems
 
-- (Probably) Delete src/extconf.rb (after "rake install" works)
+- (Probably on 2005-08-10) Delete src/extconf.rb (after "rake install" works)
 
-- (Probably) Delete src/version_script
+- (Probably on 2005-08-10) Delete src/version_script
 
 
 
