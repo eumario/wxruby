@@ -18,7 +18,7 @@ $DEBUG = true
 
 # native Windows - requires a static build of wxWindows
 $WXDIR=ENV['WXWIN']
-$WXVERSION = '24'
+$WXVERSION = '26'
 if $DEBUG
     $DEBUGPOSTFIX='d'
 else
@@ -27,9 +27,25 @@ end
 
 $WXSRC="#$WXDIR/src/msw"
 $WXINC="#$WXDIR/include"
-$WXLIBDIR="#$WXDIR/lib"
-$INCTEMP="#$WXDIR/lib/msw#{$DEBUGPOSTFIX}"
-$WXLIB="#$WXLIBDIR/wxmsw#{$DEBUGPOSTFIX}.lib"
+$WXLIBDIR="#$WXDIR/lib/vc_lib"
+$INCTEMP="#$WXDIR/lib/vc_lib/msw#{$DEBUGPOSTFIX}"
+
+$wx_libs =  "#$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}.lib"       
+$wx_libs += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_net.lib"
+$wx_libs += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_odbc.lib"
+$wx_libs += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_xml.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_adv.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_core.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_dbgrid.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_html.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_media.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_xrc.lib"
+$wx_libs += " #$WXLIBDIR/wxexpat#{$DEBUGPOSTFIX}.lib"
+$wx_libs += " #$WXLIBDIR/wxjpeg#{$DEBUGPOSTFIX}.lib"
+$wx_libs += " #$WXLIBDIR/wxpng#{$DEBUGPOSTFIX}.lib"
+$wx_libs += " #$WXLIBDIR/wxregex#{$DEBUGPOSTFIX}.lib"
+$wx_libs += " #$WXLIBDIR/wxtiff#{$DEBUGPOSTFIX}.lib"
+$wx_libs += " #$WXLIBDIR/wxzlib#{$DEBUGPOSTFIX}.lib"   
 
 $wx_cppflags = [
     "-I#$WXINC", "/D__WXMSW__", "-D__WXMSW__",
@@ -38,6 +54,9 @@ $wx_cppflags = [
 $extra_cppflags = [
     "/GR",
     "/GX",
+    "/EHsc",
+    "-I#$Config::TOPDIR",
+    "-I..",    
     "-DSTRICT", 
     "-DWIN32", "-D__WIN32__", 
     "-D_WINDOWS", "/D__WINDOWS__", 
@@ -46,28 +65,17 @@ $extra_cppflags = [
 if $DEBUG
     $ruby_cppflags.gsub!(/-MD/," /MDd");
     $ruby_cppflags.gsub!(/-O[A-Za-z0-9-]*/, "/Od")
-    $extra_cppflags += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
+    $ruby_cppflags += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
 else
-    $extra_cppflags += " -DNDEBUG "
+    $ruby_cppflags += " -DNDEBUG "
 end
 
-if $DEBUG 
-	$wx_ldflags = " /DEBUG /PDB:#$WXLIBDIR/../Debug/vc60.pdb "
-else
-	$wx_ldflags = ""
-end
-
-$wx_libs = [
-    "#$WXLIBDIR/png#{$DEBUGPOSTFIX}.lib",
-    "#$WXLIBDIR/zlib#{$DEBUGPOSTFIX}.lib",
-    "#$WXLIBDIR/jpeg#{$DEBUGPOSTFIX}.lib",
-    "#$WXLIBDIR/tiff#{$DEBUGPOSTFIX}.lib",
-    $WXLIB,].join(' ')
 $extra_libs = [
     "gdi32.lib", "winspool.lib", "comdlg32.lib",
     "shell32.lib", "ole32.lib", "oleaut32.lib", "uuid.lib",
     "odbc32.lib ", "odbccp32.lib", "comctl32.lib", 
-    "rpcrt4.lib", "winmm.lib","#{Config::TOPDIR}/lib/msvcrt-ruby18.lib"].join(' ')
+    "rpcrt4.lib", "winmm.lib","#{Config::TOPDIR}/lib/#{CONFIG['RUBY_SO_NAME']}.lib"].join(' ')
+    
 $extra_objs = "swig/wx.res"
 
 
