@@ -1273,12 +1273,12 @@ extern "C" void InitializeOtherModules()
     Init_wxWindowDC();
     extern void Init_wxWindowDisabler();
     Init_wxWindowDisabler();
+    extern void Init_wxXmlResource();
+    Init_wxXmlResource();
     extern void Init_wxRubyConstants();
     Init_wxRubyConstants();
     extern void Init_wxFunctions();
     Init_wxFunctions();
-    extern void Init_wxXrc();
-    Init_wxXrc();
     extern void Init_wxMac();
     Init_wxMac();
 }
