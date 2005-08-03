@@ -26,7 +26,7 @@ public:
 
         // from resource/file
     wxIcon(const wxString& name,
-           long type = wxBITMAP_TYPE_ICO_RESOURCE,
+           wxBitmapType type = wxBITMAP_TYPE_ICO_RESOURCE,
            int desiredWidth = -1, int desiredHeight = -1);
 
     wxIcon(const wxIconLocation& loc);

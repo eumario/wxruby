@@ -21,7 +21,7 @@ public:
     SwigDirector_wxIcon(VALUE self, wxIcon const &icon, bool disown = false);
     SwigDirector_wxIcon(VALUE self, char const **data, bool disown = false);
     SwigDirector_wxIcon(VALUE self, char **data, bool disown = false);
-    SwigDirector_wxIcon(VALUE self, wxString const &name, long type = wxBITMAP_TYPE_ICO_RESOURCE, int desiredWidth = -1, int desiredHeight = -1, bool disown = false);
+    SwigDirector_wxIcon(VALUE self, wxString const &name, wxBitmapType type = wxBITMAP_TYPE_ICO_RESOURCE, int desiredWidth = -1, int desiredHeight = -1, bool disown = false);
     SwigDirector_wxIcon(VALUE self, wxIconLocation const &loc, bool disown = false);
 };
 
