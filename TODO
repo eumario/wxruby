@@ -25,9 +25,6 @@ This should be done after the unicode fixes.
 
 - (Probably) Delete src/version_script
 
-- (Probably) create separate src/2.5.3/ and src/2.6.1/ directories,
-and conditionally fix differing API calls (like wxSizer::Insert, 
-except that Debian/Ubuntu 2.5.3 behaves like 2.6.1 on that one :-(
 
 
 
