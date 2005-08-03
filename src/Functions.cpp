@@ -579,7 +579,7 @@ public:
 void log_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning((wxChar *)StringValuePtr(str));
+    wxLogWarning(wxConvUTF8.cMB2WC(StringValuePtr(str)));
 
 }
 
@@ -589,11 +589,11 @@ void log_status(int argc, VALUE *argv, VALUE self)
         wxFrame *ptr;
         Data_Get_Struct(argv[0], wxFrame, ptr);
         VALUE str = rb_f_sprintf(argc-1, &argv[1]);
-        wxLogStatus(ptr,(wxChar *)StringValuePtr(str));
+        wxLogStatus(ptr,wxConvUTF8.cMB2WC(StringValuePtr(str)));
     }
     else {
         VALUE str = rb_f_sprintf(argc, argv);
-        wxLogStatus((wxChar *)StringValuePtr(str));
+        wxLogStatus(wxConvUTF8.cMB2WC(StringValuePtr(str)));
     }
 
 }
@@ -603,7 +603,7 @@ static void
 log_warning(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning((wxChar *)StringValuePtr(str));
+    wxLogWarning(wxConvUTF8.cMB2WC(StringValuePtr(str)));
 }
 
 
@@ -611,7 +611,7 @@ static void
 log_error(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogError((wxChar *)StringValuePtr(str));
+    wxLogError(wxConvUTF8.cMB2WC(StringValuePtr(str)));
 }
 
 
