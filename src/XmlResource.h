@@ -8,8 +8,8 @@
  * interface file instead. 
  * ----------------------------------------------------------------------------- */
 
-#ifndef SWIG_WxXrc_WRAP_H_
-#define SWIG_WxXrc_WRAP_H_
+#ifndef SWIG_WxXmlResource_WRAP_H_
+#define SWIG_WxXmlResource_WRAP_H_
 
 class Swig::Director;
 
