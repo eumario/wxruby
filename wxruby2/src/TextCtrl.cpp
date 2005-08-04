@@ -570,6 +570,22 @@ void GcFreefunc(void *);
 #include <wx/datetime.h>
 
 
+  // Allow << to work with a TextCtrl
+  VALUE op_append(VALUE self,VALUE value)
+  {
+      wxTextCtrl *ptr;
+      Data_Get_Struct(self, wxTextCtrl, ptr);
+      if(TYPE(value)==T_STRING)
+        *ptr << wxString(StringValuePtr(value), wxConvUTF8);
+      else if(TYPE(value)==T_FIXNUM)
+        *ptr << NUM2INT(value);
+      else if(TYPE(value)==T_FLOAT)
+        *ptr << (double)(RFLOAT(value)->value);
+      return self;
+  }
+
+
+
 extern swig_class cWxControl;
 swig_class cWxTextCtrl;
 static void free_wxTextCtrl(wxTextCtrl *);
@@ -2132,6 +2148,10 @@ mWxTextCtrl = mWxruby2;
         swig_types[i] = SWIG_TypeRegister(swig_types_initial[i]);
         SWIG_define_class(swig_types[i]);
     }
+    
+    
+    extern VALUE mWxTextCtrl;
+    rb_define_method(mWxTextCtrl, "<<", VALUEFUNC(op_append), 1);
     
     rb_define_module_function(mWxTextCtrl, "disown_wxTextCtrl", VALUEFUNC(_wrap_disown_wxTextCtrl), -1);
     
