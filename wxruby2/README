@@ -31,6 +31,7 @@ WHATS NEW:
 - Fixed wxEntry prototype that was causing errors under gentoo
 - Integrated Choice.i unicode patch from Jani Monoses
 - Updated TODO item to resemble reality
+- Added xrcid module method thanks to Sean Long
 
 
 
