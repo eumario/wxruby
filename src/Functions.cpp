@@ -568,6 +568,7 @@ void GcFreefunc(void *);
 #include <wx/image.h>
 #include <wx/app.h>
 #include <wx/choicdlg.h>
+#include <wx/xrc/xmlres.h>
 
 
 class wxRubyApp
@@ -628,7 +629,13 @@ wx_yield(VALUE self)
     return (wxYield() ? Qtrue : Qfalse);
 }
 
-
+static VALUE 
+xrcid(VALUE self,VALUE str_id)  
+{
+  wxString temp(STR2CSTR(str_id), wxConvUTF8);
+  int ret = wxXmlResource::GetXRCID(temp);
+  return INT2NUM(ret);
+}
 
 /***********************************************************************
  * director.swg
@@ -1333,6 +1340,7 @@ mWxFunctions = mWxruby2;
     rb_define_module_function(mWxruby2, "log_status", VALUEFUNC(log_status), -1);
     rb_define_module_function(mWxruby2, "log_error", VALUEFUNC(log_error), -1);
     rb_define_module_function(mWxruby2, "get_app", VALUEFUNC(get_app), 0);
+    rb_define_module_function(mWxruby2, "xrcid", VALUEFUNC(xrcid), 1);
     
 }
 
