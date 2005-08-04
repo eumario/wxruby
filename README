@@ -32,6 +32,8 @@ WHATS NEW:
 - Integrated Choice.i unicode patch from Jani Monoses
 - Updated TODO item to resemble reality
 - Added xrcid module method thanks to Sean Long
+- Added << operator for TextCtrl thanks to Sean Long
+
 
 
 
