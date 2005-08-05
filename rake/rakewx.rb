@@ -14,7 +14,7 @@ $classes_dir = File.join($swig_dir, 'classes')
 $original_h_dir = File.join($classes_dir, 'include')
 
 $swig_cmd = "swig"
-$swig_options = " -noruntime -noextern "
+$swig_options = " -noextern "
 
 def have_good_swig
 	version = `#{$swig_cmd} -version`.strip.split("\n")[0]
@@ -181,7 +181,7 @@ def create_swig_main_task(base_name)
     swig_file = special_swig_file(base_name)
     
     file(cpp_file => swig_file) do |t|
-        do_swig(swig_file, cpp_file, "-runtime")
+        do_swig(swig_file, cpp_file, "")
         post_process(cpp_file, "fixmainmodule.rb")
         add_initializers(cpp_file)
     end
