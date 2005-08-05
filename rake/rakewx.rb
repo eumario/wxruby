@@ -16,6 +16,11 @@ $original_h_dir = File.join($classes_dir, 'include')
 $swig_cmd = "swig"
 $swig_options = " -noruntime -noextern "
 
+def have_good_swig
+	version = `#{$swig_cmd} -version`.strip.split("\n")[0]
+	return (version >= "SWIG Version 1.3.25" && version < "SWIG Version 2")
+end
+
 def wx_config(opt)
     shell = Config::CONFIG["SHELL"]
     return `#{shell} wx-config #{opt}`.strip + " "
@@ -240,7 +245,18 @@ def create_install_task
 end
 
 def create_internal_swig_tasks
-    create_swig_tasks
+	if(have_good_swig)
+	    create_swig_tasks
+	    task :swig => all_cpp_files
+	    task :reswig => [:clean_src, :swig]
+	else
+	    task :swig do
+			puts("SWIG not available")
+		end
+	    task :reswig do
+			puts("SWIG not available")
+		end
+	end
 end
 
 def create_internal_non_swig_tasks

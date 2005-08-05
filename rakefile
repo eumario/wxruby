@@ -61,8 +61,6 @@ begin
     task :link => $target_lib
     task :compile => all_obj_files
     task :recompile => [:clean, :compile]
-    task :swig => all_cpp_files
-    task :reswig => [:clean_src, :swig]
     
     task :clean_src do
         delete_files_in_with_ext($src_dir,"cpp")
