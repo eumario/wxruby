@@ -1,8 +1,6 @@
 High priority TODO items:
 -------------------------
 
-- Fix copyrights in all the .i files to be consistent
-
 - Implement wxNotebook on Linux
 
 - Insert placeholder .i files for any wx classes that we specifically 
