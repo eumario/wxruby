@@ -1,6 +1,5 @@
-#   Copyright 2004 by Kevin Smith
-#   released under the wxWidgets license
-#   as part of the wxRuby project
+#   Copyright 2004-2005 by Kevin Smith
+#   released under the MIT-style wxruby2 license
 
 %module(directors="1") wxRubyStockObjects
 
@@ -54,4 +53,3 @@
 %constant wxCursor const* wxSTANDARD_CURSOR;
 %constant wxCursor const* wxHOURGLASS_CURSOR;
 %constant wxCursor const*  wxCROSS_CURSOR;
-
