@@ -1,6 +1,6 @@
-#   Copyright 2004 by Kevin Smith
-#   released under the wxWidgets license
-#   as part of the wxRuby project
+#   Copyright 2004-2005 by Kevin Smith
+#   released under the MIT-style wxruby2 license
+
 %include "../common.i"
 
 %{
@@ -15,5 +15,3 @@
 %rename(MoveXy) wxCaret::Move(int,int);
 
 %include "include/wxCaret.h"
-
-
