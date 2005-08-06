@@ -1,7 +1,10 @@
 # parents.rb
-# This file was automatically generated
-# by extractxml.rb, part of the wxRuby project
-# Do not make changes directly to this file!
+#   Copyright 2004-2005 by Kevin Smith
+#   released under the MIT-style wxruby2 license
+
+# this file was originally created based on an XML 
+# file describing the wx api, but now it is manually 
+# maintained. fix it if it is broken.
 
 $parents = {
     'wxAcceleratorTable' => 'wxObject',

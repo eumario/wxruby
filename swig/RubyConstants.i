@@ -6,6 +6,8 @@
 %include "common.i"
 
 %{
+//NO_CLASS - This tells fixmodule not to expect a class
+
 #include <wx/gdicmn.h>
 #include <wx/fdrepdlg.h>
 #include <wx/artprov.h>
@@ -27,8 +29,6 @@
 #define    wxCURSOR_BASED_ARROW_UP 0
 #define    wxCURSOR_BASED_ARROW_DOWN 0
 #endif // X11
-
-
 
 %}
 

@@ -10,5 +10,6 @@
 %}
 
 %ignore wxGridCellEditor::wxGridCellEditor();
+%ignore wxGridCellEditor::~wxGridCellEditor();
 
 %include "include/wxGridCellEditor.h"

@@ -13,70 +13,96 @@ def fixmodule(filename)
 	broken = filename+".old"
 	File.rename(filename, broken)
 	
-	this_module = File.basename(filename)
+	found_swig_class = false
+	found_define_module = false
+	found_init = false
+	found_define_class = false
+	
+	core_name = File.basename(filename, ".cpp")
+puts("core_name: #{core_name}")
+	wx_name = "wx"+core_name
+	this_module = 'mWx' + core_name
+	parent_wxklass = $parents[wx_name]
+	if (parent_wxklass)
+		parent_name = parent_wxklass[2..-1]
+puts("      : #{parent_name}")
+	end
+	
 	skip_until_close_brace = false
 	
 	File.open(filename, "w") do | out |
 	
 		File.foreach(broken) do | line |
-			if(line.index("static VALUE mWx"))
-				this_module = line.split[2].gsub(';', '')
-				#puts("module: " + this_module)
-				line += "   extern VALUE #{$main_module};"
-			end
-			if (line.index('swig_class cWx') and not line.index("extern"))
-				re = /cWx.*/
-				core_name = re.match(line)[0]
-				core_name = "w"+core_name[2..(core_name.length-2)]
-				parent_wxklass = $parents[core_name]
+		
+			# if we find the definition of our class variable,
+			if (line.index('swig_class c') and not line.index("extern"))
+puts("class #{wx_name}")
+				# declare our (primary) base class so we can use it as our parent
 				result = []
 				if (parent_wxklass)
-					parent_wxklass.each do |parent_name|
-						result << "extern swig_class cWx#{parent_name[2..(parent_name.length)]};"
-					end
+					result << "extern swig_class cWx#{parent_name};"
 				end
 				result << line
 				line = result.join("\n")
-						
+				found_swig_class = true
 			end
+			
+			# comment out swig_up because it is defined global in every module
 			if(line.index("bool Swig::Director::swig_up"))
 				line = "//" + line
 			end
+			
+			# instead of defining a new module,
 			if(line.index("rb_define_module(\"Wx"))
-				line = "#{this_module} = #{$main_module};"
+				# declare the real main module variable
+				result = []
+				result << "   extern VALUE #{$main_module};"
+				# set this module equal to the real main module
+				result << "#{this_module} = #{$main_module};"
+				line = result.join("\n")
+				found_define_module = true
 			end
 			
-			if(line.index("SWIGEXPORT(void) Init_"))
+			# at the top of our Init_ function,
+			if(line.index("SWIGEXPORT void Init_"))
+				# make sure we only initialize ourselves once
 				line += "static bool initialized;\n"
 				line += "if(initialized) return;\n"
 				line += "initialized = true;\n"
+				found_init = true
 			end
 	 
-			if(line.index("rb_define_class_under"))
-				re = Regexp.new('\"(.*)\"')
-				match = re.match(line)
-				if match != nil
-				  core_name = match[1]
-				  this_wxklass = 'wx' + core_name
-				  parent_wxklass = $parents[this_wxklass]
+	 		# if we are defining ourselves as a subclass,
+			if(line.index("rb_define_class_under(mWx#{core_name}"))
 				  result = []
 				  if(parent_wxklass)
-					  parent_name = parent_wxklass[2..-1]
+				  	  #initialize our primary parent
 					  result << "    extern void Init_wx#{parent_name}();"
 					  result << "    Init_wx#{parent_name}();"
 					  result << "    //extern swig_class cWx#{parent_name};"
 					  parent_klass = "cWx#{parent_name}.klass"
+					  # define us under our parent instead of under ruby's Object
 					  line = line.gsub(/rb_cObject/, parent_klass)
 				  end
 				result << line
 				line = result.join("\n")
-				end
-	  
+puts(line)
+				found_define_class = true
 			end
 			
-			if(line.index("SWIG_AsVal"))
-				skip_until_close_brace = true
+			# if this module doesn't have a class,
+			if(line.index('//NO_CLASS'))
+				# pretend we found one
+				found_swig_class = true
+				found_define_class = true
 			end
+
+			# this was to avoid compiler warnings, 
+			# but I turned off that warning
+			# it's still here as an example of how to use skip_until_close_brace
+#			if(line.index("SWIG_AsVal"))
+#				skip_until_close_brace = true
+#			end
 			
 			if(skip_until_close_brace)
 				if(line.index("}"))
@@ -88,6 +114,26 @@ def fixmodule(filename)
 			
 			out.puts(line)
 		end
+	end
+	
+	if(!found_swig_class)
+		puts("ERROR! Didn't find swig class")
+		exit(1)
+	end
+	
+	if(!found_define_module)
+		puts("ERROR! Didn't find define module")
+		exit(1)
+	end
+	
+	if(!found_init)
+		puts("ERROR! Didn't find init")
+		exit(1)
+	end
+	
+	if(!found_define_class)
+		puts("ERROR! Didn't find define class")
+		exit(1)
 	end
 	
 	File.delete(broken)

@@ -5,6 +5,11 @@
 
 %include "common.i"
 
+%{
+//NO_CLASS - This tells fixmodule not to expect a class
+
+%}
+
 %constant wxFont* const     wxNORMAL_FONT;
 %constant wxFont* const     wxSMALL_FONT;
 %constant wxFont* const     wxITALIC_FONT;

@@ -5,6 +5,8 @@
 %module wxMac;
 
 %{
+//NO_CLASS - This tells fixmodule not to expect a class
+
 
 #ifdef __WXMAC__
 
