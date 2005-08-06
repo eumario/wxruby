@@ -19,6 +19,10 @@ WHATS NEW:
 - extconf.rb is now deprecated. Use rake instead.
 - Binary library is now named wxruby2, and a small Ruby 
   wrapper named wx.rb is what is actually loaded by apps.
+- MAJOR overhaul of swig build process, and now
+  require SWIG 1.3.24 or newer.
+  Honestly, I'm surprised it worked at all before!
+- Automatically detects whether you have a suitable SWIG or not
 - Integrated more patches from Sean Long:
    - XRC samples
    - Added classes: MenuItem, ToolTip
@@ -43,10 +47,9 @@ REQUIREMENTS:
 - Ruby 1.8 (Ruby 1.6 is not officially supported, but might still work)
 - wxWidgets 2.6+ SDK
 - rake (http://rake.rubyforge.org/)
-- OPTIONAL: SWIG 1.3.22 or later
+- OPTIONAL: SWIG 1.3.24 or later
   Swig'd .cpp and .h files are included in this package, 
-  so you don't actually need SWIG. If you use SWIG, it 
-  *MUST* be 1.3.22 or later. 
+  so you don't actually need SWIG. 
 
 
 OBTAINING THE SOURCE:
