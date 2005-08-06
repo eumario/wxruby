@@ -272,9 +272,9 @@ void internal_connect(VALUE self, int firstId, int lastId,
 %}
 
 %init %{
-extern void Init_WxRubyEvents();
+extern void Init_wxRubyEventTypes();
 
-Init_WxRubyEvents();
+Init_wxRubyEventTypes();
 %}
 
 

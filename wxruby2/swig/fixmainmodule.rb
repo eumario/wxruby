@@ -27,13 +27,18 @@ File.rename(ARGV[0], broken)
 
 this_module = 'unknown'
 File.open(ARGV[0], "w") do | out |
+	found_main_module = false
     File.foreach(broken) do | line |
         if(line.index("static VALUE #{$main_module};"))
             line = "VALUE #{$main_module};"
+			found_main_module = true
         end
         out.puts(line)
     end
-
+	if(!found_main_module)
+		puts("didn't find main module")
+		exit(1)
+	end
 end
 
 File.delete(broken)

@@ -64,7 +64,7 @@ FUNC_DEF
 
 	out.puts <<INIT_FUNC
 extern "C" {
-void Init_WxRubyEvents()
+void Init_wxEvents2()
 {
 INIT_FUNC
 	$events.each do |evt|

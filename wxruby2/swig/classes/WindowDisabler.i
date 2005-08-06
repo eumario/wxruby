@@ -5,6 +5,11 @@
 
 %module(directors="1") wxWindowDisabler
 
+# this class is "not polymorphic" (has no vtable),
+# so we have to disable directors for it
+%feature("nodirector") wxWindowDisabler;
+
+
 %ignore wxWindowDisabler::wxWindowDisabler;
 
 %include "include/wxWindowDisabler.h"

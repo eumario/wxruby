@@ -2,7 +2,11 @@
 #   released under the MIT-style wxruby2 license
 %include "common.i"
 
+%module(directors="1") wxEvents;
+
 %{
+//NO_CLASS - This tells fixmodule not to expect a class
+
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
 #include <wx/notebook.h>
@@ -19,8 +23,6 @@
 #include <wx/process.h>
 #include <wx/tglbtn.h>
 %}
-
-%module(directors="1") wxEventHandlers;
 
 
 

@@ -13,8 +13,6 @@
              bool isCheckable,
              wxMenu *subMenu = (wxMenu *)NULL);
 %ignore wxMenuItem::GetRealId();
-
-# the following don't work under Linux/wx2.5.3
 %ignore wxMenuItem::SetAsRadioGroupStart();
 %ignore wxMenuItem::SetRadioGroupStart(int start);
 %ignore wxMenuItem::SetRadioGroupEnd(int end);

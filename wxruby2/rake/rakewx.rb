@@ -112,9 +112,12 @@ end
 
 def add_initializers(cpp_file)
     needs_init_list = get_classes
-    needs_init_list << "RubyConstants"
+    needs_init_list << "Events"
+    needs_init_list << "Events2"
     needs_init_list << "Functions"
     needs_init_list << "Mac"
+    needs_init_list << "RubyConstants"
+    needs_init_list << "RubyEventTypes"
     File.open(cpp_file, "a") do | out |
         out.puts
         out.puts('extern "C" void InitializeOtherModules()')
@@ -160,7 +163,7 @@ def create_normal_swig_task(base_name)
         do_swig(swig_file, cpp_file, $swig_options)
         post_process(cpp_file, "fixplatform.rb")
         post_process(cpp_file, "fixmodule.rb")
-		post_process(cpp_file, "fixdeleting.rb")
+		#post_process(cpp_file, "fixdeleting.rb")
     end
 end
 

@@ -30,7 +30,7 @@ File.open(ARGV[0], "w") do | out |
             #ifdef __cplusplus
             extern "C"
             #endif
-            SWIGEXPORT(void) Init_wx#{this_module}(void) {
+            SWIGEXPORT void Init_wx#{this_module}(void) {
             }
             #endif    
         FOOTER

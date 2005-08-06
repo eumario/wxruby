@@ -6,6 +6,8 @@
 %include "common.i"
 
 %{
+//NO_CLASS - This tells fixmodule not to expect a class
+
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
 %}

@@ -7,6 +7,8 @@
 
 
 %{
+//NO_CLASS - This tells fixmodule not to expect a class
+
 
 #include <wx/image.h>
 #include <wx/app.h>

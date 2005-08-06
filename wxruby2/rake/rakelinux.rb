@@ -8,6 +8,7 @@
 
 use_wx_config
 
+$extra_cppflags = '-Wno-unused-function'
 $extra_ldflags = '-shared'
 
 # this isn't implemented yet, but as of 2005-07-24 
