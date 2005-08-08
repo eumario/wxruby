@@ -915,6 +915,8 @@ void GcMapPtrToValue(void *ptr, VALUE val);
 VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
+extern VALUE mWxruby2;
+
 
 #include <wx/datetime.h>
 
@@ -3760,7 +3762,6 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-   extern VALUE mWxruby2;
 mWxFunctions = mWxruby2;
     
     SWIG_InitializeModule(0);
@@ -3787,7 +3788,6 @@ mWxFunctions = mWxruby2;
     rb_define_module_function(mWxFunctions, "get_password_from_user", VALUEFUNC(_wrap_wxGetPasswordFromUser), -1);
     rb_define_module_function(mWxFunctions, "file_selector", VALUEFUNC(_wrap_wxFileSelector), -1);
     
-    extern VALUE mWxruby2;
     rb_define_module_function(mWxruby2, "log_message", VALUEFUNC(log_message), -1);
     rb_define_module_function(mWxruby2, "log_warning", VALUEFUNC(log_warning), -1);
     rb_define_module_function(mWxruby2, "log_status", VALUEFUNC(log_status), -1);
