@@ -4,8 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxPen
-
 %feature("nodirector") wxPen;
+
+%{
+//NO_DIRECTOR
+%}
 
 %ignore wxPen::SetStipple;
 %ignore GetStipple;

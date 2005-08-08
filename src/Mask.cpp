@@ -1029,10 +1029,22 @@ namespace Swig {
     public:
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self) : swig_self(self), swig_disown_flag(false) {
+
+#ifdef wxDEBUG
+    printf("Mask.cpp" " new Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
+
+#ifdef wxDEBUG
+    printf("Mask.cpp" " ~Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -1328,6 +1340,21 @@ static VALUE _wrap_new_wxMask(int nargs, VALUE *args, VALUE self) {
 
 static void
 free_wxMask(wxMask *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_wxMask*)arg1;
+#ifdef wxDEBUG
+    printf("Mask.cpp" " Checking %p\n", director);
+#endif
+    if (GcIsDeleted(director))
+    {
+#ifdef wxDEBUG
+        printf("%p is already dead!\n", director);
+#endif
+        return;
+    }
+#ifdef wxDEBUG
+    printf("deleting %p\n", director);
+    fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE

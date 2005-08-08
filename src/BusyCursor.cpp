@@ -918,6 +918,9 @@ extern VALUE mWxruby2;
 
 #include <wx/datetime.h>
 
+
+//NO_DIRECTOR
+
 static void wxBusyCursor_busy(){
     if (rb_block_given_p())
     {
@@ -1031,10 +1034,22 @@ namespace Swig {
     public:
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self) : swig_self(self), swig_disown_flag(false) {
+
+#ifdef wxDEBUG
+    printf("BusyCursor.cpp" " new Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
+
+#ifdef wxDEBUG
+    printf("BusyCursor.cpp" " ~Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */

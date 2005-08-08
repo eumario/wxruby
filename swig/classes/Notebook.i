@@ -3,12 +3,14 @@
 
 %include "../common.i"
 
+%module(directors="1") wxNotebook
+%feature("nodirector") wxNotebook::OnSelChange;
+
 %{
 #include <wx/wx.h>
 #include <wx/notebook.h>
 %}
 
-%module(directors="1") wxNotebook
 
 GC_NEVER(wxNotebook)
 
@@ -16,7 +18,6 @@ GC_NEVER(wxNotebook)
 
 %ignore wxNotebook::wxNotebook();
 %ignore wxNotebook::OnSelChange;
-%feature("nodirector") wxNotebook::OnSelChange;
 
 
 
