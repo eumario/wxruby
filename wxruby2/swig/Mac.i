@@ -4,6 +4,8 @@
 
 %module wxMac;
 
+%include "common.i"
+
 %{
 //NO_CLASS - This tells fixmodule not to expect a class
 

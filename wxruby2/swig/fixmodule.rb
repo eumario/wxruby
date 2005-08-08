@@ -54,12 +54,8 @@ puts("class #{wx_name}")
 			
 			# instead of defining a new module,
 			if(line.index("rb_define_module(\"Wx"))
-				# declare the real main module variable
-				result = []
-				result << "   extern VALUE #{$main_module};"
 				# set this module equal to the real main module
-				result << "#{this_module} = #{$main_module};"
-				line = result.join("\n")
+				line = "#{this_module} = #{$main_module};"
 				found_define_module = true
 			end
 			

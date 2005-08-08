@@ -137,7 +137,6 @@ wxString wxFileSelector(const wxString& message, const wxString& default_path = 
 
 
 %init %{
-    extern VALUE mWxruby2;
     rb_define_module_function(mWxruby2, "log_message", VALUEFUNC(log_message), -1);
     rb_define_module_function(mWxruby2, "log_warning", VALUEFUNC(log_warning), -1);
     rb_define_module_function(mWxruby2, "log_status", VALUEFUNC(log_status), -1);

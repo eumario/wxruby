@@ -913,6 +913,8 @@ void GcMapPtrToValue(void *ptr, VALUE val);
 VALUE GcGetValueFromPtr(void *ptr);
 void GcFreefunc(void *);
 
+extern VALUE mWxruby2;
+
 
 #include <wx/datetime.h>
 
@@ -1361,7 +1363,6 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-   extern VALUE mWxruby2;
 mWxWindowDisabler = mWxruby2;
     
     SWIG_InitializeModule(0);

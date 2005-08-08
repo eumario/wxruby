@@ -866,9 +866,11 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_unsigned_long swig_types[0]
-static swig_type_info *swig_types[1];
-static swig_module_info swig_module = {swig_types, 1, 0, 0, 0, 0};
+#define SWIGTYPE_p_int swig_types[0]
+#define SWIGTYPE_p_unsigned_long swig_types[1]
+#define SWIGTYPE_p_wxString swig_types[2]
+static swig_type_info *swig_types[3];
+static swig_module_info swig_module = {swig_types, 3, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -883,6 +885,35 @@ static void SWIG_AsVal(VALUE obj, int *val)
 {
     *val = (int) NUM2INT(obj);
 }
+
+
+#  undef GetClassName
+#  undef GetClassInfo
+#  undef Yield
+#  undef GetMessage
+#  undef FindWindow
+#  undef GetCharWidth
+#  undef DrawText
+#  undef StartDoc
+#  undef CreateDialog
+#  undef Sleep
+#  undef _
+#  undef Connect
+#  undef connect
+
+#include <wx/wx.h>
+#include <wx/dcbuffer.h>
+
+void GcMarkDeleted(void *);
+bool GcIsDeleted(void *);
+void GcMapPtrToValue(void *ptr, VALUE val);
+VALUE GcGetValueFromPtr(void *ptr);
+void GcFreefunc(void *);
+
+extern VALUE mWxruby2;
+
+
+#include <wx/datetime.h>
 
 
 //NO_CLASS - This tells fixmodule not to expect a class
@@ -942,16 +973,24 @@ void macstart()
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
+static swig_type_info _swigt__p_wxString = {"_p_wxString", "wxString *|wxArtClient *", 0, 0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_int,
   &_swigt__p_unsigned_long,
+  &_swigt__p_wxString,
 };
 
+static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_wxString[] = {  {&_swigt__p_wxString, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_int,
   _swigc__p_unsigned_long,
+  _swigc__p_wxString,
 };
 
 
@@ -1118,7 +1157,6 @@ initialized = true;
     int i;
     
     SWIG_InitRuntime();
-   extern VALUE mWxruby2;
 mWxMac = mWxruby2;
     
     SWIG_InitializeModule(0);
