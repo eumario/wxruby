@@ -17,11 +17,14 @@ $swig_cmd = "swig"
 $swig_options = " -noextern "
 
 def have_good_swig
-	version = `#{$swig_cmd} -version`.strip.split("\n")[0]
-	if(!version)
-		return false
-	end
-	return (version >= "SWIG Version 1.3.25" && version < "SWIG Version 2")
+   begin
+       version = `#{$swig_cmd} -version`.strip.split("\n")[0]
+   rescue SystemCallError
+   end
+   if(!version)
+       return false
+   end
+   return (version >= "SWIG Version 1.3.25" && version < "SWIG Version 2")
 end
 
 def wx_config(opt)
