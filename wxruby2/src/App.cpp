@@ -1154,10 +1154,22 @@ namespace Swig {
     public:
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self) : swig_self(self), swig_disown_flag(false) {
+
+#ifdef wxDEBUG
+    printf("App.cpp" " new Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
+
+#ifdef wxDEBUG
+    printf("App.cpp" " ~Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */
@@ -1385,6 +1397,8 @@ _wrap_App_allocate(VALUE self) {
 
 static VALUE
 _wrap_new_App(int argc, VALUE *argv, VALUE self) {
+
+wxRubyApp::app_ptr = self;
     VALUE arg1 ;
     wxRubyApp *result;
     
@@ -1407,6 +1421,21 @@ _wrap_new_App(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxRubyApp(wxRubyApp *arg1) {
+    Swig::Director* director = (Swig::Director*)(SwigDirector_App*)arg1;
+#ifdef wxDEBUG
+    printf("App.cpp" " Checking %p\n", director);
+#endif
+    if (GcIsDeleted(director))
+    {
+#ifdef wxDEBUG
+        printf("%p is already dead!\n", director);
+#endif
+        return;
+    }
+#ifdef wxDEBUG
+    printf("deleting %p\n", director);
+    fflush(stdout);
+#endif
     delete arg1;
 }
 static VALUE

@@ -4,13 +4,15 @@
 %include "../common.i"
 
 %module(directors="1") wxFontDialog
+%feature("nodirector") wxFontDialog;
+
 %{
+//NO_DIRECTOR
 #include <wx/wx.h>
 #include <wx/fontdlg.h>
 %}
 
 
-%feature("nodirector") wxFontDialog;
 
 %ignore wxFontDialog::wxFontDialog(wxWindow *);
 %typemap(default) wxFontData & {

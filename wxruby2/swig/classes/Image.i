@@ -4,13 +4,15 @@
 %include "../common.i"
 
 %module(directors="1") wxImage
+%feature("nodirector") wxImage;
 
 %{
+//NO_DIRECTOR
+
 #include <wx/wx.h>
 #include <wx/image.h>
 %}
 
-%feature("nodirector") wxImage;
 
 %ignore wxImage(int  width , int  height , bool clear = true) ;
 %ignore wxImage::Create();

@@ -4,10 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxBusyCursor
-
-# this class is "not polymorphic" (has no vtable),
-# so we have to disable directors for it
 %feature("nodirector") wxBusyCursor;
+
+%{
+//NO_DIRECTOR
+%}
 
 
 %include "include/wxBusyCursor.h"

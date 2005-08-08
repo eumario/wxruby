@@ -4,8 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxCursor
-
 %feature("nodirector") wxCursor;
+
+%{
+//NO_DIRECTOR
+%}
 
 /*
  * The following is too close to another constructor

@@ -4,8 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxCalendarDateAttr
+%feature("nodirector") wxCalendarDateAttr;
 
 %{
+//NO_DIRECTOR
+
 #include <wx/calctrl.h>
 %}
 

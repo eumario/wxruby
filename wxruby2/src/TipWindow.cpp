@@ -1029,10 +1029,22 @@ namespace Swig {
     public:
       /* wrap a Ruby object, optionally taking ownership */
       Director(VALUE self) : swig_self(self), swig_disown_flag(false) {
+
+#ifdef wxDEBUG
+    printf("TipWindow.cpp" " new Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMapPtrToValue(this,self);
       }
 
       /* discard our reference at destruction */
       virtual ~Director() {
+
+#ifdef wxDEBUG
+    printf("TipWindow.cpp" " ~Director %p\n", this);
+    fflush(stdout);
+#endif
+    GcMarkDeleted(this);
       }
 
       /* return a pointer to the wrapped Ruby object */

@@ -4,8 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxBitmapButton
-
 %feature(nodirector) wxBitmapButton;
+
+%{
+//NO_DIRECTOR
+%}
 
 %ignore wxBitmapButton::wxBitmapButton();
 
