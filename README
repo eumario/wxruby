@@ -38,6 +38,9 @@ WHATS NEW:
 - Added xrcid module method thanks to Sean Long
 - Added << operator for TextCtrl thanks to Sean Long
 - Updated all copyright headers to be consistent with LICENSE
+- Fixed unicode handling in Functions.i and typemap.i, and 
+  remove the needless typemap from Choice.i
+  
 
 
 

@@ -1177,7 +1177,7 @@ _wrap_new_wxListBox__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1249,7 +1249,7 @@ _wrap_new_wxListBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1315,7 +1315,7 @@ _wrap_new_wxListBox__SWIG_2(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1377,7 +1377,7 @@ _wrap_new_wxListBox__SWIG_3(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1920,7 +1920,7 @@ _wrap_wxListBox_Create__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1986,7 +1986,7 @@ _wrap_wxListBox_Create__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -2046,7 +2046,7 @@ _wrap_wxListBox_Create__SWIG_2(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -2102,7 +2102,7 @@ _wrap_wxListBox_Create__SWIG_3(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -2468,9 +2468,6 @@ _wrap_wxListBox_InsertItems(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
                 tmp2.Add(item);
             }
@@ -2531,7 +2528,7 @@ _wrap_wxListBox_Set__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr2 = new wxString[RARRAY(argv[0])->len];
                 for (int i = 0; i < RARRAY(argv[0])->len; i++)
                 {
-                    arr2[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i)));
+                    arr2[i] = wxString(STR2CSTR(rb_ary_entry(argv[0],i)), wxConvUTF8);
                 }
                 arg2 = RARRAY(argv[0])->len;
                 arg3 = arr2;
@@ -2576,7 +2573,7 @@ _wrap_wxListBox_Set__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr2 = new wxString[RARRAY(argv[0])->len];
                 for (int i = 0; i < RARRAY(argv[0])->len; i++)
                 {
-                    arr2[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i)));
+                    arr2[i] = wxString(STR2CSTR(rb_ary_entry(argv[0],i)), wxConvUTF8);
                 }
                 arg2 = RARRAY(argv[0])->len;
                 arg3 = arr2;
@@ -2611,9 +2608,6 @@ _wrap_wxListBox_Set__SWIG_2(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
                 tmp2.Add(item);
             }
@@ -2647,9 +2641,6 @@ _wrap_wxListBox_Set__SWIG_3(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
                 tmp2.Add(item);
             }

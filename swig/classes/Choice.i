@@ -18,15 +18,4 @@
 %ignore wxChoice::DoInsert(const wxString& item, int pos);
 
 
-%typemap(in) (int  n , const wxString  choices[]) {
-    $1 = NUM2INT(rb_funcall($input, rb_intern("size"), 0));
-    $2 = new wxString[$1];
-    for(int i=0; i < $1; ++i)
-    {
-        VALUE thisItem = rb_ary_entry($input, i);
-		$2[i] = wxConvUTF8.cMB2WC(STR2CSTR(thisItem));
-	}
-}
-
-
 %include "include/wxChoice.h"

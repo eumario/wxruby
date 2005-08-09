@@ -1169,7 +1169,7 @@ _wrap_new_wxSingleChoiceDialog__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr5 = new wxString[RARRAY(argv[3])->len];
                 for (int i = 0; i < RARRAY(argv[3])->len; i++)
                 {
-                    arr5[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[3],i)));
+                    arr5[i] = wxString(STR2CSTR(rb_ary_entry(argv[3],i)), wxConvUTF8);
                 }
                 arg5 = RARRAY(argv[3])->len;
                 arg6 = arr5;
@@ -1241,7 +1241,7 @@ _wrap_new_wxSingleChoiceDialog__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr5 = new wxString[RARRAY(argv[3])->len];
                 for (int i = 0; i < RARRAY(argv[3])->len; i++)
                 {
-                    arr5[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[3],i)));
+                    arr5[i] = wxString(STR2CSTR(rb_ary_entry(argv[3],i)), wxConvUTF8);
                 }
                 arg5 = RARRAY(argv[3])->len;
                 arg6 = arr5;
@@ -1309,7 +1309,7 @@ _wrap_new_wxSingleChoiceDialog__SWIG_2(int argc, VALUE *argv, VALUE self) {
                 arr5 = new wxString[RARRAY(argv[3])->len];
                 for (int i = 0; i < RARRAY(argv[3])->len; i++)
                 {
-                    arr5[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[3],i)));
+                    arr5[i] = wxString(STR2CSTR(rb_ary_entry(argv[3],i)), wxConvUTF8);
                 }
                 arg5 = RARRAY(argv[3])->len;
                 arg6 = arr5;
@@ -1390,7 +1390,7 @@ _wrap_new_wxSingleChoiceDialog__SWIG_3(int argc, VALUE *argv, VALUE self) {
                 arr5 = new wxString[RARRAY(argv[3])->len];
                 for (int i = 0; i < RARRAY(argv[3])->len; i++)
                 {
-                    arr5[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[3],i)));
+                    arr5[i] = wxString(STR2CSTR(rb_ary_entry(argv[3],i)), wxConvUTF8);
                 }
                 arg5 = RARRAY(argv[3])->len;
                 arg6 = arr5;

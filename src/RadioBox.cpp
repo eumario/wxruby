@@ -1183,7 +1183,7 @@ _wrap_new_wxRadioBox__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -1263,7 +1263,7 @@ _wrap_new_wxRadioBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -1337,7 +1337,7 @@ _wrap_new_wxRadioBox__SWIG_2(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -1407,7 +1407,7 @@ _wrap_new_wxRadioBox__SWIG_3(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -1473,7 +1473,7 @@ _wrap_new_wxRadioBox__SWIG_4(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -2152,7 +2152,7 @@ _wrap_wxRadioBox_Create__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -2226,7 +2226,7 @@ _wrap_wxRadioBox_Create__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -2294,7 +2294,7 @@ _wrap_wxRadioBox_Create__SWIG_2(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -2358,7 +2358,7 @@ _wrap_wxRadioBox_Create__SWIG_3(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;
@@ -2418,7 +2418,7 @@ _wrap_wxRadioBox_Create__SWIG_4(int argc, VALUE *argv, VALUE self) {
                 arr7 = new wxString[RARRAY(argv[5])->len];
                 for (int i = 0; i < RARRAY(argv[5])->len; i++)
                 {
-                    arr7[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[5],i)));
+                    arr7[i] = wxString(STR2CSTR(rb_ary_entry(argv[5],i)), wxConvUTF8);
                 }
                 arg7 = RARRAY(argv[5])->len;
                 arg8 = arr7;

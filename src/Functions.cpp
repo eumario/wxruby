@@ -939,7 +939,7 @@ public:
 void log_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(wxConvUTF8.cMB2WC(StringValuePtr(str)));
+    wxLogMessage(wxString(STR2CSTR(str), wxConvUTF8));
 
 }
 
@@ -949,11 +949,11 @@ void log_status(int argc, VALUE *argv, VALUE self)
         wxFrame *ptr;
         Data_Get_Struct(argv[0], wxFrame, ptr);
         VALUE str = rb_f_sprintf(argc-1, &argv[1]);
-        wxLogStatus(ptr,wxConvUTF8.cMB2WC(StringValuePtr(str)));
+        wxLogStatus(ptr,wxString(STR2CSTR(str), wxConvUTF8));
     }
     else {
         VALUE str = rb_f_sprintf(argc, argv);
-        wxLogStatus(wxConvUTF8.cMB2WC(StringValuePtr(str)));
+        wxLogStatus(wxString(STR2CSTR(str), wxConvUTF8));
     }
 
 }
@@ -963,7 +963,7 @@ static void
 log_warning(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(wxConvUTF8.cMB2WC(StringValuePtr(str)));
+    wxLogWarning(wxString(STR2CSTR(str), wxConvUTF8));
 }
 
 
@@ -971,7 +971,7 @@ static void
 log_error(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogError(wxConvUTF8.cMB2WC(StringValuePtr(str)));
+    wxLogError(wxString(STR2CSTR(str), wxConvUTF8));
 }
 
 
@@ -1448,7 +1448,7 @@ _wrap_wxGetMultipleChoices__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[2],i)));
+                    arr4[i] = wxString(STR2CSTR(rb_ary_entry(argv[2],i)), wxConvUTF8);
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
@@ -1532,7 +1532,7 @@ _wrap_wxGetMultipleChoices__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[2],i)));
+                    arr4[i] = wxString(STR2CSTR(rb_ary_entry(argv[2],i)), wxConvUTF8);
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
@@ -1612,7 +1612,7 @@ _wrap_wxGetMultipleChoices__SWIG_2(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[2],i)));
+                    arr4[i] = wxString(STR2CSTR(rb_ary_entry(argv[2],i)), wxConvUTF8);
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
@@ -1688,7 +1688,7 @@ _wrap_wxGetMultipleChoices__SWIG_3(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[2],i)));
+                    arr4[i] = wxString(STR2CSTR(rb_ary_entry(argv[2],i)), wxConvUTF8);
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
@@ -1760,7 +1760,7 @@ _wrap_wxGetMultipleChoices__SWIG_4(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[2],i)));
+                    arr4[i] = wxString(STR2CSTR(rb_ary_entry(argv[2],i)), wxConvUTF8);
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
@@ -1828,7 +1828,7 @@ _wrap_wxGetMultipleChoices__SWIG_5(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[2],i)));
+                    arr4[i] = wxString(STR2CSTR(rb_ary_entry(argv[2],i)), wxConvUTF8);
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
@@ -1892,7 +1892,7 @@ _wrap_wxGetMultipleChoices__SWIG_6(int argc, VALUE *argv, VALUE self) {
                 arr4 = new wxString[RARRAY(argv[2])->len];
                 for (int i = 0; i < RARRAY(argv[2])->len; i++)
                 {
-                    arr4[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[2],i)));
+                    arr4[i] = wxString(STR2CSTR(rb_ary_entry(argv[2],i)), wxConvUTF8);
                 }
                 arg4 = RARRAY(argv[2])->len;
                 arg5 = arr4;
