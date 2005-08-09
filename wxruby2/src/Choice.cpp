@@ -1317,9 +1317,6 @@ _wrap_new_wxChoice__SWIG_0(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }
@@ -1376,9 +1373,6 @@ _wrap_new_wxChoice__SWIG_1(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }
@@ -1431,9 +1425,6 @@ _wrap_new_wxChoice__SWIG_2(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }
@@ -1501,9 +1492,6 @@ _wrap_new_wxChoice__SWIG_3(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }
@@ -1731,6 +1719,7 @@ _wrap_wxChoice_Create__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxValidator *arg9 = 0 ;
     wxString *arg10 = 0 ;
     bool result;
+    wxString *arr6 ;
     VALUE vresult = Qnil;
     
     {
@@ -1746,12 +1735,20 @@ _wrap_wxChoice_Create__SWIG_0(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     if (argc > 4) {
         {
-            arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-            arg7 = new wxString[arg6];
-            for(int i=0; i < arg6; ++i)
+            if ((argv[4] == Qnil) || (TYPE(argv[4]) != T_ARRAY))
             {
-                VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = wxConvUTF8.cMB2WC(STR2CSTR(thisItem));
+                arg6 = 0;
+                arg7 = NULL;
+            }
+            else
+            {
+                arr6 = new wxString[RARRAY(argv[4])->len];
+                for (int i = 0; i < RARRAY(argv[4])->len; i++)
+                {
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
+                }
+                arg6 = RARRAY(argv[4])->len;
+                arg7 = arr6;
             }
         }
     }
@@ -1788,6 +1785,7 @@ _wrap_wxChoice_Create__SWIG_1(int argc, VALUE *argv, VALUE self) {
     long arg8 ;
     wxValidator *arg9 = 0 ;
     bool result;
+    wxString *arr6 ;
     VALUE vresult = Qnil;
     
     {
@@ -1803,12 +1801,20 @@ _wrap_wxChoice_Create__SWIG_1(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     if (argc > 4) {
         {
-            arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-            arg7 = new wxString[arg6];
-            for(int i=0; i < arg6; ++i)
+            if ((argv[4] == Qnil) || (TYPE(argv[4]) != T_ARRAY))
             {
-                VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = wxConvUTF8.cMB2WC(STR2CSTR(thisItem));
+                arg6 = 0;
+                arg7 = NULL;
+            }
+            else
+            {
+                arr6 = new wxString[RARRAY(argv[4])->len];
+                for (int i = 0; i < RARRAY(argv[4])->len; i++)
+                {
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
+                }
+                arg6 = RARRAY(argv[4])->len;
+                arg7 = arr6;
             }
         }
     }
@@ -1839,6 +1845,7 @@ _wrap_wxChoice_Create__SWIG_2(int argc, VALUE *argv, VALUE self) {
     wxString *arg7 ;
     long arg8 ;
     bool result;
+    wxString *arr6 ;
     VALUE vresult = Qnil;
     
     {
@@ -1854,12 +1861,20 @@ _wrap_wxChoice_Create__SWIG_2(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     if (argc > 4) {
         {
-            arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-            arg7 = new wxString[arg6];
-            for(int i=0; i < arg6; ++i)
+            if ((argv[4] == Qnil) || (TYPE(argv[4]) != T_ARRAY))
             {
-                VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = wxConvUTF8.cMB2WC(STR2CSTR(thisItem));
+                arg6 = 0;
+                arg7 = NULL;
+            }
+            else
+            {
+                arr6 = new wxString[RARRAY(argv[4])->len];
+                for (int i = 0; i < RARRAY(argv[4])->len; i++)
+                {
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
+                }
+                arg6 = RARRAY(argv[4])->len;
+                arg7 = arr6;
             }
         }
     }
@@ -1886,6 +1901,7 @@ _wrap_wxChoice_Create__SWIG_3(int argc, VALUE *argv, VALUE self) {
     int arg6 ;
     wxString *arg7 ;
     bool result;
+    wxString *arr6 ;
     VALUE vresult = Qnil;
     
     {
@@ -1901,12 +1917,20 @@ _wrap_wxChoice_Create__SWIG_3(int argc, VALUE *argv, VALUE self) {
     SWIG_ConvertPtr(argv[3], (void **) &arg5, SWIGTYPE_p_wxSize, 1); if (arg5 == NULL) rb_raise(rb_eTypeError, "null reference");
     if (argc > 4) {
         {
-            arg6 = NUM2INT(rb_funcall(argv[4], rb_intern("size"), 0));
-            arg7 = new wxString[arg6];
-            for(int i=0; i < arg6; ++i)
+            if ((argv[4] == Qnil) || (TYPE(argv[4]) != T_ARRAY))
             {
-                VALUE thisItem = rb_ary_entry(argv[4], i);
-                arg7[i] = wxConvUTF8.cMB2WC(STR2CSTR(thisItem));
+                arg6 = 0;
+                arg7 = NULL;
+            }
+            else
+            {
+                arr6 = new wxString[RARRAY(argv[4])->len];
+                for (int i = 0; i < RARRAY(argv[4])->len; i++)
+                {
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
+                }
+                arg6 = RARRAY(argv[4])->len;
+                arg7 = arr6;
             }
         }
     }
@@ -2043,9 +2067,6 @@ _wrap_wxChoice_Create__SWIG_8(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }
@@ -2096,9 +2117,6 @@ _wrap_wxChoice_Create__SWIG_9(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }
@@ -2145,9 +2163,6 @@ _wrap_wxChoice_Create__SWIG_10(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }
@@ -2192,9 +2207,6 @@ _wrap_wxChoice_Create__SWIG_11(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[4])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[4],i)),wxConvUTF8);
                 tmp6.Add(item);
             }

@@ -1,6 +1,9 @@
 High priority TODO items:
 -------------------------
 
+- Get it to compile and run minimal on all three major platforms
+  (Linux, MS Win, Mac OS X)
+  
 - Implement wxNotebook on Linux
 
 - Insert placeholder .i files for any wx classes that we specifically 

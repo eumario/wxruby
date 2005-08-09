@@ -162,7 +162,7 @@
     arr = new wxString[RARRAY($input)->len];
     for (int i = 0; i < RARRAY($input)->len; i++)
     {
-        arr[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry($input,i)));
+        arr[i] = wxString(STR2CSTR(rb_ary_entry($input,i)), wxConvUTF8);
     }
     $1 = RARRAY($input)->len;
     $2 = arr;
@@ -200,9 +200,6 @@
     
     for (int i = 0; i < RARRAY($input)->len; i++)
     {
-		//this does not work?
-        //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry($input,i))); 
-		//but this does
 		wxString item(STR2CSTR(rb_ary_entry($input,i)),wxConvUTF8);
         tmp.Add(item);
     }

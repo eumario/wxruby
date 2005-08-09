@@ -1174,7 +1174,7 @@ _wrap_new_wxCheckListBox__SWIG_0(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1246,7 +1246,7 @@ _wrap_new_wxCheckListBox__SWIG_1(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1312,7 +1312,7 @@ _wrap_new_wxCheckListBox__SWIG_2(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;
@@ -1374,7 +1374,7 @@ _wrap_new_wxCheckListBox__SWIG_3(int argc, VALUE *argv, VALUE self) {
                 arr6 = new wxString[RARRAY(argv[4])->len];
                 for (int i = 0; i < RARRAY(argv[4])->len; i++)
                 {
-                    arr6[i] = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[4],i)));
+                    arr6[i] = wxString(STR2CSTR(rb_ary_entry(argv[4],i)), wxConvUTF8);
                 }
                 arg6 = RARRAY(argv[4])->len;
                 arg7 = arr6;

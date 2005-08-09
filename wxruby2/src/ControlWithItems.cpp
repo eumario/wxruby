@@ -1203,9 +1203,6 @@ _wrap_wxControlWithItems_Append__SWIG_3(int argc, VALUE *argv, VALUE self) {
         {
             for (int i = 0; i < RARRAY(argv[0])->len; i++)
             {
-                //this does not work?
-                //wxString item = wxConvUTF8.cMB2WC(STR2CSTR(rb_ary_entry(argv[0],i))); 
-                //but this does
                 wxString item(STR2CSTR(rb_ary_entry(argv[0],i)),wxConvUTF8);
                 tmp2.Add(item);
             }
