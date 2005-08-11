@@ -1,5 +1,5 @@
 README for wxruby2
-Version WorkingToward:0.0.23
+Version 0.0.23
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
