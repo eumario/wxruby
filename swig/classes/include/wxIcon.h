@@ -5,122 +5,39 @@
 
 #if !defined(_wxIcon_h_)
 #define _wxIcon_h_
+
+
 class wxIcon : public wxBitmap
 {
 public:
 
-    wxIcon() { }
+    wxIcon();
+    wxIcon( const wxIcon& icon);
+    wxIcon( const char **bits, int width=-1, int height=-1 );
 
-        // copy
-    wxIcon(const wxIcon& icon) : wxGDIImage(icon) { Ref(icon); }
+    wxIcon( const wxString& filename,
+#ifdef __WXGTK__
+		wxBitmapType type = wxBITMAP_TYPE_XPM,
+#else
+		long type = wxBITMAP_TYPE_ICO_RESOURCE,
+#endif
+		int desiredWidth=-1, int desiredHeight=-1 );
 
-        // from raw data
-/* This won't compile under Linux with wx 2.5.3
-    wxIcon(const char bits[], int width, int height);
-*/
-
-        // from XPM data
-    wxIcon(const char **data) { CreateIconFromXpm(data); }
-
-    wxIcon(char **data) { CreateIconFromXpm((const char **)data); }
-
-        // from resource/file
-    wxIcon(const wxString& name,
-           wxBitmapType type = wxBITMAP_TYPE_ICO_RESOURCE,
-           int desiredWidth = -1, int desiredHeight = -1);
+	wxIcon( char **bits, int width=-1, int height=-1 );
 
     wxIcon(const wxIconLocation& loc);
 
-  ;
-	/**
-	 * \brief Copies   bitmap to this icon. Under MS Windows the bitmap
-must have mask colour set.
+#if 0 // Not appropriate for swig wrapping
+    wxIcon& operator=(const wxIcon& icon);
+    bool operator==(const wxIcon& icon) const { return m_refData == icon.m_refData; }
+    bool operator!=(const wxIcon& icon) const { return !(*this == icon); }
+#endif
 
+    // create from bitmap (which should have a mask unless it's monochrome):
+    // there shouldn't be any implicit bitmap -> icon conversion (i.e. no
+    // ctors, assignment operators...), but it's ok to have such function
+    void CopyFromBitmap(const wxBitmap& bmp);
 
- 
-
-\perlnote{Constructors supported by wxPerl are:\par
- 
-} 
-	 * \param const wxBitmap&  
-	*/
-
-  void CopyFromBitmap(const wxBitmap&  bmp ) ;
-	/**
-	 * \brief Destroys the wxIcon object and possibly the underlying icon data.
-Because reference counting is used, the icon may not actually be
-destroyed at this point - only when the reference count is zero will the
-data be deleted.
-
-If the application omits to delete the icon explicitly, the icon will be
-destroyed automatically by wxWindows when the application exits.
-
-Do not delete an icon that is selected into a memory device context. 
-	*/
-
-  virtual  ~wxIcon() ;
-	/**
-	 * \brief Gets the colour depth of the icon. A value of 1 indicates a
-monochrome icon. 
-	*/
-
-  int GetDepth() const;
-	/**
-	 * \brief Gets the height of the icon in pixels. 
-	*/
-
-  int GetHeight() const;
-	/**
-	 * \brief Gets the width of the icon in pixels. 
-	*/
-
-  int GetWidth() const;
-	/**
-	 * \brief Loads an icon from a file or resource. 
-	 * \param const wxString&  
-	 * \param long  
-	*/
-
-  bool LoadFile(const wxString&  name , wxBitmapType  type );
-	/**
-	 * \brief Returns true if icon data is present.
-
-\begin{comment} 
-	*/
-
-  bool Ok() const;
-	/**
-	 * \brief Saves an icon in the named file. 
-	 * \param const wxString&   
-	 * \param int  
-	 * \param wxPalette*   
-	*/
-
-  bool SaveFile(const wxString&  name , wxBitmapType  type , wxPalette*  palette = NULL);
-	/**
-	 * \brief Sets the depth member (does not affect the icon data). 
-	 * \param int   
-	*/
-
-  void SetDepth(int  depth ) ;
-	/**
-	 * \brief Sets the height member (does not affect the icon data). 
-	 * \param int   
-	*/
-
-  void SetHeight(int  height ) ;
-	/**
-	 * \brief Sets the validity member (does not affect the icon data). 
-	 * \param int   
-	*/
-
-  void SetOk(int  isOk ) ;
-	/**
-	 * \brief Sets the width member (does not affect the icon data). 
-	 * \param int   
-	*/
-
-  void SetWidth(int  width ) ;
 };
 
 

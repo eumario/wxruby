@@ -48,6 +48,10 @@ WHATS NEW:
 - Patches for mdi sample and Dialog class from Sean Long
 - Window::find_by_xxx now return a ruby object of a type 
   that matches the underlying wx type (based on a patch by Sean Long)
+- No longer %ignore wxChoice() default constructor
+- Now pass wx cpp flags to swig so we can do things 
+  like #ifdef __WXGTK__ in the class/include/wxXxx.h files
+- (Hopefully) fixed Icon to be able to compile on all platforms
 
 
 

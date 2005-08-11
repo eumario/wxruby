@@ -14,17 +14,4 @@
 class Swig::Director;
 
 
-class SwigDirector_wxIcon : public wxIcon, public Swig::Director {
-
-public:
-    SwigDirector_wxIcon(VALUE self);
-    SwigDirector_wxIcon(VALUE self, wxIcon const &icon);
-    SwigDirector_wxIcon(VALUE self, char const **data);
-    SwigDirector_wxIcon(VALUE self, char **data);
-    SwigDirector_wxIcon(VALUE self, wxString const &name, wxBitmapType type = wxBITMAP_TYPE_ICO_RESOURCE, int desiredWidth = -1, int desiredHeight = -1);
-    SwigDirector_wxIcon(VALUE self, wxIconLocation const &loc);
-    virtual ~SwigDirector_wxIcon();
-};
-
-
 #endif
