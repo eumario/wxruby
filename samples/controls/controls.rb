@@ -76,7 +76,7 @@ ID_SIZER_CHECK4      = 204
 ID_SIZER_CHECK14     = 205
 ID_SIZER_CHECKBIG    = 206
 
-Image_List, Image_Choice, Image_Combo, Image_Text, Image_Radio, Image_Gauge, Image_Max = 0,1,2,3,4,5,6
+Image_List, Image_Choice, Image_Combo, Image_Text, Image_Radio, Image_Gauge, Image_Max = (0..6).to_a
 
 def Myset_client_data(name,control)
     # NOTE: get_client_data and set_client_data have been removed from wxRuby 0.4
@@ -218,13 +218,13 @@ class MyPanel < Panel
 
         imagelist = ImageList.new(16, 16)
 
-        imagelist.add_icon( Icon.new( "icons/list.xpm",0 ))
-        imagelist.add_icon( Icon.new( "icons/choice.xpm",0 ))
-        imagelist.add_icon( Icon.new( "icons/combo.xpm",0 ))
-        imagelist.add_icon( Icon.new( "icons/text.xpm",0 ))
-        imagelist.add_icon( Icon.new( "icons/radio.xpm",0 ))
-        imagelist.add_icon( Icon.new( "icons/gauge.xpm",0 ))
-        @m_notebook.set_image_list(imagelist)
+        imagelist.add_icon( Icon.new( "icons/list.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add_icon( Icon.new( "icons/choice.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add_icon( Icon.new( "icons/combo.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add_icon( Icon.new( "icons/text.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add_icon( Icon.new( "icons/radio.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add_icon( Icon.new( "icons/gauge.xpm", Wx::BITMAP_TYPE_XPM))
+        @m_notebook.assign_image_list(imagelist)
 
         panel = Panel.new(@m_notebook)
         @m_listbox = ListBox.new( panel, ID_LISTBOX,
@@ -383,13 +383,11 @@ class MyPanel < Panel
 
         BitmapButton.new(panel, ID_BITMAP_BTN, bitmap, Point.new(100, 20))
 
-        if RUBY_PLATFORM ==  "WXMSW"
-            # test for masked bitmap display
-            bitmap = Bitmap.new("test2.bmp", BITMAP_TYPE_BMP)
-            if bitmap.ok()
-               bitmap.set_mask(Mask.new(bitmap, BLUE))
-               StaticBitmap.new(panel, -1, bitmap, Point.new(300, 120))
-            end
+        # test for masked bitmap display
+        bitmap = Bitmap.new("test2.bmp", BITMAP_TYPE_BMP)
+        if bitmap.ok()
+           bitmap.set_mask(Mask.new(bitmap, BLUE))
+           StaticBitmap.new(panel, -1, bitmap, Point.new(300, 120))
         end
         bmp1 = ArtProvider::get_bitmap(ART_INFORMATION)
         bmp2 = ArtProvider::get_bitmap(ART_WARNING)
@@ -930,14 +928,14 @@ end
     end
 
     def onupdateShowProgress(event)
-        #event.enable( @m_spinbutton.get_value() > 0 )
+        event.enable( @m_spinbutton.get_value() > 0 )
     end
 
     def onShowProgress(event)
         max = @m_spinbutton.get_value()
         if max <= 0
             log_error("You must set positive range!")
-            return Qnil
+            return nil
         end
 
         dialog = ProgressDialog.new("Progress dialog example",
@@ -1005,7 +1003,7 @@ class MyFrame < Frame
         @s_enable2 = TRUE
         @s_windowFocus = nil
 
-	#set_icon(Icon.new("mondrian.xpm"))
+        set_icon(Icon.new("mondrian.xpm", Wx::BITMAP_TYPE_XPM))
 
         file_menu = Menu.new
 
@@ -1062,9 +1060,9 @@ class MyFrame < Frame
     end
 
     def onAbout(event)
-        bc = BusyCursor.new do 
-	        dialog = MessageDialog.new(self, "This is a control sample", "About Controls", OK )
-    	    dialog.show_modal()
+        BusyCursor.busy do
+           dialog = MessageDialog.new(self, "This is a control sample", "About Controls", OK)
+           dialog.show_modal()
         end
     end
 
@@ -1165,5 +1163,9 @@ class MyApp < App
     end
 end
 
+if(!File.exists?('icons') || !File.directory?('icons'))
+	puts("This sample cannot be run from a different directory")
+	exit(1)
+end
 a = MyApp.new
 a.main_loop

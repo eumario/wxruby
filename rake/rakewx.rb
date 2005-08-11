@@ -28,8 +28,7 @@ def have_good_swig
 end
 
 def wx_config(opt)
-    shell = Config::CONFIG["SHELL"]
-    return `#{shell} wx-config #{opt}`.strip + " "
+    return `wx-config #{opt}`.strip + " "
 end
 
 def use_wx_config

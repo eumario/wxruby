@@ -1120,36 +1120,6 @@ namespace Swig {
 
 #include "SpinCtrl.h"
 
-
-#ifndef __WXGTK__
-
-static VALUE
-_wrap_wxSpinCtrl_SetSelection(int argc, VALUE *argv, VALUE self) {
-    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
-    long arg2 ;
-    long arg3 ;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
-    arg2 = NUM2LONG(argv[0]);
-    arg3 = NUM2LONG(argv[1]);
-    (arg1)->SetSelection(arg2,arg3);
-    
-    return Qnil;
-}
-
-#endif
-
-
-extern "C" void PostInit_wxSpinCtrl(void)
-{
-#ifndef __WXGTK__
-    rb_define_method(cWxSpinCtrl.klass, "set_selection", VALUEFUNC(_wrap_wxSpinCtrl_SetSelection), -1);
-#endif
-}
-
-
 extern swig_class cWxControl;
 swig_class cWxSpinCtrl;
 
@@ -2600,6 +2570,23 @@ _wrap_wxSpinCtrl_SetRange(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
+_wrap_wxSpinCtrl_SetSelection(int argc, VALUE *argv, VALUE self) {
+    wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
+    long arg2 ;
+    long arg3 ;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxSpinCtrl, 1);
+    arg2 = NUM2LONG(argv[0]);
+    arg3 = NUM2LONG(argv[1]);
+    (arg1)->SetSelection(arg2,arg3);
+    
+    return Qnil;
+}
+
+
+static VALUE
 _wrap_wxSpinCtrl_GetMin(int argc, VALUE *argv, VALUE self) {
     wxSpinCtrl *arg1 = (wxSpinCtrl *) 0 ;
     int result;
@@ -2857,6 +2844,7 @@ mWxSpinCtrl = mWxruby2;
     rb_define_method(cWxSpinCtrl.klass, "set_value", VALUEFUNC(_wrap_wxSpinCtrl_SetValue), -1);
     rb_define_method(cWxSpinCtrl.klass, "get_value", VALUEFUNC(_wrap_wxSpinCtrl_GetValue), -1);
     rb_define_method(cWxSpinCtrl.klass, "set_range", VALUEFUNC(_wrap_wxSpinCtrl_SetRange), -1);
+    rb_define_method(cWxSpinCtrl.klass, "set_selection", VALUEFUNC(_wrap_wxSpinCtrl_SetSelection), -1);
     rb_define_method(cWxSpinCtrl.klass, "get_min", VALUEFUNC(_wrap_wxSpinCtrl_GetMin), -1);
     rb_define_method(cWxSpinCtrl.klass, "get_max", VALUEFUNC(_wrap_wxSpinCtrl_GetMax), -1);
     cWxSpinCtrl.mark = 0;

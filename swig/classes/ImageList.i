@@ -11,7 +11,7 @@
 %module(directors="1") wxImageList
 
 %ignore wxImageList::Replace(int, const wxBitmap&, const wxBitmap&);
-   
+
 %rename(AddIcon) wxImageList::Add(const wxIcon&  icon ) ;
 
 %include "include/wxImageList.h"

@@ -40,9 +40,11 @@ WHATS NEW:
 - Updated all copyright headers to be consistent with LICENSE
 - Fixed unicode handling in Functions.i and typemap.i, and 
   remove the needless typemap from Choice.i
-- Several .i file patches from Tobias Gruetzmacher
-  (choice, notebook)
-  
+- Several .i file patches from Tobias Gruetzmacher:
+  wxruby-crlf.patch, typemap-fix.patch, togglebutton-fix.patch
+  spinevt-fix.patch, spinctrl-fix.patch, notebook-fix.patch,
+  remove-kluges.patch, choice-fix.patch, rake-shell.patch,
+  fix-controls-sample.patch & icons.tar.gz
 
 
 
