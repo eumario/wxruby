@@ -46,6 +46,8 @@ WHATS NEW:
   remove-kluges.patch, choice-fix.patch, rake-shell.patch,
   fix-controls-sample.patch & icons.tar.gz
 - Patch for mdi sample from Sean Long
+- Window::find_by_xxx now return a ruby object of a type 
+  that matches the underlying wx type (based on a patch by Sean Long)
 
 
 
