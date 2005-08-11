@@ -5,6 +5,4 @@
 
 %module(directors="1") wxDialog
 
-%ignore wxDialog::wxDialog();
-
 %include "include/wxDialog.h"
