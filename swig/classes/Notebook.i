@@ -14,18 +14,9 @@
 
 GC_NEVER(wxNotebook)
 
-#define wxNotebookPage wxPanel
+#define wxNotebookPage wxWindow
 
 %ignore wxNotebook::wxNotebook();
 %ignore wxNotebook::OnSelChange;
-
-
-
-# under GTK, we don't have OnSelChange, 
-# and since it is virtual, that means 
-# we can't even try to compile the class!
-%runtime %{
-//@@if defined(__WXMSW__) || defined(__WXMAC__)
-%}
 
 %include "include/wxNotebook.h"

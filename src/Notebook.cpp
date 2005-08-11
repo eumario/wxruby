@@ -865,22 +865,18 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 
 
 
-#if defined(__WXMSW__) || defined(__WXMAC__)
-
-
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_int swig_types[0]
 #define SWIGTYPE_p_unsigned_long swig_types[1]
 #define SWIGTYPE_p_wxImageList swig_types[2]
 #define SWIGTYPE_p_wxNotebook swig_types[3]
-#define SWIGTYPE_p_wxPanel swig_types[4]
-#define SWIGTYPE_p_wxPoint swig_types[5]
-#define SWIGTYPE_p_wxSize swig_types[6]
-#define SWIGTYPE_p_wxString swig_types[7]
-#define SWIGTYPE_p_wxWindow swig_types[8]
-static swig_type_info *swig_types[9];
-static swig_module_info swig_module = {swig_types, 9, 0, 0, 0, 0};
+#define SWIGTYPE_p_wxPoint swig_types[4]
+#define SWIGTYPE_p_wxSize swig_types[5]
+#define SWIGTYPE_p_wxString swig_types[6]
+#define SWIGTYPE_p_wxWindow swig_types[7]
+static swig_type_info *swig_types[8];
+static swig_module_info swig_module = {swig_types, 8, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1498,7 +1494,7 @@ free_wxNotebook(wxNotebook *arg1) {
 static VALUE
 _wrap_wxNotebook_AddPage__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
-    wxPanel *arg2 = (wxPanel *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
     wxString *arg3 = 0 ;
     bool arg4 ;
     int arg5 ;
@@ -1508,7 +1504,7 @@ _wrap_wxNotebook_AddPage__SWIG_0(int argc, VALUE *argv, VALUE self) {
     if ((argc < 4) || (argc > 4))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxPanel, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     {
         arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
@@ -1524,7 +1520,7 @@ _wrap_wxNotebook_AddPage__SWIG_0(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_wxNotebook_AddPage__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
-    wxPanel *arg2 = (wxPanel *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
     wxString *arg3 = 0 ;
     bool arg4 ;
     bool result;
@@ -1533,7 +1529,7 @@ _wrap_wxNotebook_AddPage__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if ((argc < 3) || (argc > 3))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxPanel, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     {
         arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
@@ -1548,7 +1544,7 @@ _wrap_wxNotebook_AddPage__SWIG_1(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_wxNotebook_AddPage__SWIG_2(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
-    wxPanel *arg2 = (wxPanel *) 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
     wxString *arg3 = 0 ;
     bool result;
     VALUE vresult = Qnil;
@@ -1556,7 +1552,7 @@ _wrap_wxNotebook_AddPage__SWIG_2(int argc, VALUE *argv, VALUE self) {
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxPanel, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
     {
         arg3 = new wxString(STR2CSTR(argv[1]), wxConvUTF8);
     }
@@ -1586,7 +1582,7 @@ static VALUE _wrap_wxNotebook_AddPage(int nargs, VALUE *args, VALUE self) {
         if (_v) {
             {
                 void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxPanel, 0) != -1)) ? 1 : 0;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1607,7 +1603,7 @@ static VALUE _wrap_wxNotebook_AddPage(int nargs, VALUE *args, VALUE self) {
         if (_v) {
             {
                 void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxPanel, 0) != -1)) ? 1 : 0;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1633,7 +1629,7 @@ static VALUE _wrap_wxNotebook_AddPage(int nargs, VALUE *args, VALUE self) {
         if (_v) {
             {
                 void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxPanel, 0) != -1)) ? 1 : 0;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1952,16 +1948,16 @@ static VALUE
 _wrap_wxNotebook_GetPage(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
     int arg2 ;
-    wxPanel *result;
+    wxWindow *result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     arg2 = NUM2INT(argv[0]);
-    result = (wxPanel *)(arg1)->GetPage(arg2);
+    result = (wxWindow *)(arg1)->GetPage(arg2);
     
-    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxPanel,0);
+    vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
     return vresult;
 }
 
@@ -2056,7 +2052,7 @@ static VALUE
 _wrap_wxNotebook_InsertPage__SWIG_0(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
     int arg2 ;
-    wxPanel *arg3 = (wxPanel *) 0 ;
+    wxWindow *arg3 = (wxWindow *) 0 ;
     wxString *arg4 = 0 ;
     bool arg5 ;
     int arg6 ;
@@ -2067,7 +2063,7 @@ _wrap_wxNotebook_InsertPage__SWIG_0(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 5)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     arg2 = NUM2INT(argv[0]);
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxPanel, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxWindow, 1);
     {
         arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
@@ -2084,7 +2080,7 @@ static VALUE
 _wrap_wxNotebook_InsertPage__SWIG_1(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
     int arg2 ;
-    wxPanel *arg3 = (wxPanel *) 0 ;
+    wxWindow *arg3 = (wxWindow *) 0 ;
     wxString *arg4 = 0 ;
     bool arg5 ;
     bool result;
@@ -2094,7 +2090,7 @@ _wrap_wxNotebook_InsertPage__SWIG_1(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     arg2 = NUM2INT(argv[0]);
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxPanel, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxWindow, 1);
     {
         arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
@@ -2110,7 +2106,7 @@ static VALUE
 _wrap_wxNotebook_InsertPage__SWIG_2(int argc, VALUE *argv, VALUE self) {
     wxNotebook *arg1 = (wxNotebook *) 0 ;
     int arg2 ;
-    wxPanel *arg3 = (wxPanel *) 0 ;
+    wxWindow *arg3 = (wxWindow *) 0 ;
     wxString *arg4 = 0 ;
     bool result;
     VALUE vresult = Qnil;
@@ -2119,7 +2115,7 @@ _wrap_wxNotebook_InsertPage__SWIG_2(int argc, VALUE *argv, VALUE self) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxNotebook, 1);
     arg2 = NUM2INT(argv[0]);
-    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxPanel, 1);
+    SWIG_ConvertPtr(argv[1], (void **) &arg3, SWIGTYPE_p_wxWindow, 1);
     {
         arg4 = new wxString(STR2CSTR(argv[2]), wxConvUTF8);
     }
@@ -2153,7 +2149,7 @@ static VALUE _wrap_wxNotebook_InsertPage(int nargs, VALUE *args, VALUE self) {
             if (_v) {
                 {
                     void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxPanel, 0) != -1)) ? 1 : 0;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
                 }
                 if (_v) {
                     {
@@ -2179,7 +2175,7 @@ static VALUE _wrap_wxNotebook_InsertPage(int nargs, VALUE *args, VALUE self) {
             if (_v) {
                 {
                     void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxPanel, 0) != -1)) ? 1 : 0;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
                 }
                 if (_v) {
                     {
@@ -2210,7 +2206,7 @@ static VALUE _wrap_wxNotebook_InsertPage(int nargs, VALUE *args, VALUE self) {
             if (_v) {
                 {
                     void *ptr;
-                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxPanel, 0) != -1)) ? 1 : 0;
+                    _v = (NIL_P(argv[2]) || (TYPE(argv[2]) == T_DATA && SWIG_ConvertPtr(argv[2], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
                 }
                 if (_v) {
                     {
@@ -2385,7 +2381,6 @@ static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0}
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 static swig_type_info _swigt__p_wxImageList = {"_p_wxImageList", "wxImageList *", 0, 0, 0};
 static swig_type_info _swigt__p_wxNotebook = {"_p_wxNotebook", "wxNotebook *", 0, 0, 0};
-static swig_type_info _swigt__p_wxPanel = {"_p_wxPanel", "wxPanel *", 0, 0, 0};
 static swig_type_info _swigt__p_wxPoint = {"_p_wxPoint", "wxPoint *", 0, 0, 0};
 static swig_type_info _swigt__p_wxSize = {"_p_wxSize", "wxSize *", 0, 0, 0};
 static swig_type_info _swigt__p_wxString = {"_p_wxString", "wxString *|wxArtClient *", 0, 0, 0};
@@ -2396,7 +2391,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_unsigned_long,
   &_swigt__p_wxImageList,
   &_swigt__p_wxNotebook,
-  &_swigt__p_wxPanel,
   &_swigt__p_wxPoint,
   &_swigt__p_wxSize,
   &_swigt__p_wxString,
@@ -2407,7 +2401,6 @@ static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxImageList[] = {  {&_swigt__p_wxImageList, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxNotebook[] = {  {&_swigt__p_wxNotebook, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_wxPanel[] = {  {&_swigt__p_wxPanel, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxPoint[] = {  {&_swigt__p_wxPoint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxSize[] = {  {&_swigt__p_wxSize, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxString[] = {  {&_swigt__p_wxString, 0, 0, 0},{0, 0, 0, 0}};
@@ -2418,7 +2411,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_unsigned_long,
   _swigc__p_wxImageList,
   _swigc__p_wxNotebook,
-  _swigc__p_wxPanel,
   _swigc__p_wxPoint,
   _swigc__p_wxSize,
   _swigc__p_wxString,
@@ -2630,13 +2622,3 @@ mWxNotebook = mWxruby2;
     cWxNotebook.destroy = (void (*)(void *)) GcFreefunc;
 }
 
-            #else
-            #ifdef __cplusplus
-            extern "C"
-            #endif
-            SWIGEXPORT void Init_wxNotebook(void) {
-static bool initialized;
-if(initialized) return;
-initialized = true;
-            }
-            #endif    

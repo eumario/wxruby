@@ -20,20 +20,6 @@ Wx = Wxruby2
 
 if(!Wx.constants.index("Notebook"))
 	module Wx
-		class Notebook < Panel
-			def initialize(parent, id)
-				super(parent, id)
-				puts("Notebook class missing, so faking it")
-				
-			end
-			
-			def set_image_list(image_list)
-			end
-			
-			def add_page(panel, title, flag = false, image = nil)
-			end
-		end
-		
 		class ToggleButton < Panel
 			def initialize(parent, id, label, position)
 				super(parent, id)
