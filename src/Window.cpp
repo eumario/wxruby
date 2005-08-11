@@ -873,12 +873,12 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 #define SWIGTYPE_p_wxCaret swig_types[3]
 #define SWIGTYPE_p_wxColour swig_types[4]
 #define SWIGTYPE_p_wxCursor swig_types[5]
-#define SWIGTYPE_p_wxDC swig_types[6]
-#define SWIGTYPE_p_wxDropTarget swig_types[7]
-#define SWIGTYPE_p_wxEvtHandler swig_types[8]
-#define SWIGTYPE_p_wxFont swig_types[9]
-#define SWIGTYPE_p_wxLayoutConstraints swig_types[10]
-#define SWIGTYPE_p_wxMenu swig_types[11]
+#define SWIGTYPE_p_wxDropTarget swig_types[6]
+#define SWIGTYPE_p_wxEvtHandler swig_types[7]
+#define SWIGTYPE_p_wxFont swig_types[8]
+#define SWIGTYPE_p_wxLayoutConstraints swig_types[9]
+#define SWIGTYPE_p_wxMenu swig_types[10]
+#define SWIGTYPE_p_wxPaintDC swig_types[11]
 #define SWIGTYPE_p_wxPoint swig_types[12]
 #define SWIGTYPE_p_wxRect swig_types[13]
 #define SWIGTYPE_p_wxRegion swig_types[14]
@@ -934,7 +934,24 @@ extern VALUE mWxruby2;
 
 #include <wx/datetime.h>
 
-static VALUE wxWindow_this_should_never_be_called(wxWindow *self,wxDC *tmp){
+
+
+static VALUE get_ruby_object(wxObject *obj)
+{
+	VALUE returnVal = Qnil;
+	
+	wxString classNameString(obj->GetClassInfo()->GetClassName());
+	if(classNameString.Len() > 2)
+	{
+		VALUE ruby_class = rb_iv_get(mWxruby2, classNameString.mb_str()+2);
+		returnVal = Data_Wrap_Struct(ruby_class,0,0,obj);
+	}
+	
+	return returnVal;
+}
+
+
+static VALUE wxWindow_this_should_never_be_called(wxWindow *self,wxPaintDC *tmp){
 	    return Qnil;
     }
 static VALUE wxWindow_paint(wxWindow *self){   
@@ -944,13 +961,52 @@ static VALUE wxWindow_paint(wxWindow *self){
 	   {
 	      wxPaintDC dc(ptr);
 	      
-	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxDC, 0);	      
+	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxPaintDC, 0);
 	      rb_yield(dcVal);
 	
 	      DATA_PTR(dcVal) = NULL;
 	   }
 	   return Qnil;	
    
+  }
+static VALUE wxWindow_find_window__SWIG_0(wxWindow *self,long id){
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = self->FindWindow(id); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }
+static VALUE wxWindow_find_window__SWIG_1(wxWindow *self,wxString const &name){
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = self->FindWindow(name); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }
+static VALUE wxWindow_find_window_by_id__SWIG_0(long id,wxWindow *parent=NULL){
+    VALUE returnVal = Qnil;
+    wxObject* obj = wxWindow::FindWindowById(id,parent); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }
+static VALUE wxWindow_find_window_by_name__SWIG_0(wxString const &name,wxWindow *parent=NULL){
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = wxWindow::FindWindowByName(name,parent); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }
+static VALUE wxWindow_find_window_by_label__SWIG_0(wxString const &label,wxWindow *parent=NULL){
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = wxWindow::FindWindowByLabel(label,parent); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
   }
 /***********************************************************************
  * director.swg
@@ -3210,365 +3266,6 @@ _wrap_wxWindow_FindFocus(int argc, VALUE *argv, VALUE self) {
         vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
     }
     return vresult;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindow__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxWindow *arg1 = (wxWindow *) 0 ;
-    long arg2 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    arg2 = NUM2LONG(argv[0]);
-    result = (wxWindow *)(arg1)->FindWindow(arg2);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindow__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxWindow *arg1 = (wxWindow *) 0 ;
-    wxString *arg2 = 0 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    result = (wxWindow *)(arg1)->FindWindow((wxString const &)*arg2);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE _wrap_wxWindow_FindWindow(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[3];
-    int ii;
-    
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii-1];
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxWindow_FindWindow__SWIG_0(nargs, args, self);
-            }
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                _v = (TYPE(argv[1]) == T_STRING);
-            }
-            if (_v) {
-                return _wrap_wxWindow_FindWindow__SWIG_1(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_FindWindow'");
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindowById__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    long arg1 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    arg1 = NUM2LONG(argv[0]);
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    result = (wxWindow *)wxWindow::FindWindowById(arg1,arg2);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindowById__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    long arg1 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    arg1 = NUM2LONG(argv[0]);
-    result = (wxWindow *)wxWindow::FindWindowById(arg1);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE _wrap_wxWindow_FindWindowById(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            return _wrap_wxWindow_FindWindowById__SWIG_1(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxWindow_FindWindowById__SWIG_0(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_FindWindowById'");
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindowByName__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxString *arg1 = 0 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    {
-        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    result = (wxWindow *)wxWindow::FindWindowByName((wxString const &)*arg1,arg2);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindowByName__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxString *arg1 = 0 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    {
-        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    result = (wxWindow *)wxWindow::FindWindowByName((wxString const &)*arg1);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE _wrap_wxWindow_FindWindowByName(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            _v = (TYPE(argv[0]) == T_STRING);
-        }
-        if (_v) {
-            return _wrap_wxWindow_FindWindowByName__SWIG_1(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            _v = (TYPE(argv[0]) == T_STRING);
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxWindow_FindWindowByName__SWIG_0(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_FindWindowByName'");
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindowByLabel__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    wxString *arg1 = 0 ;
-    wxWindow *arg2 = (wxWindow *) 0 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    {
-        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
-    result = (wxWindow *)wxWindow::FindWindowByLabel((wxString const &)*arg1,arg2);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxWindow_FindWindowByLabel__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    wxString *arg1 = 0 ;
-    wxWindow *result;
-    Swig::Director *resultdirector = 0;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    {
-        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    result = (wxWindow *)wxWindow::FindWindowByLabel((wxString const &)*arg1);
-    
-    resultdirector = dynamic_cast<Swig::Director *>(result);
-    if (resultdirector) {
-        vresult = resultdirector->swig_get_self();
-    } else {
-        vresult = SWIG_NewPointerObj((void *) result, SWIGTYPE_p_wxWindow,0);
-    }
-    return vresult;
-}
-
-
-static VALUE _wrap_wxWindow_FindWindowByLabel(int nargs, VALUE *args, VALUE self) {
-    int argc;
-    VALUE argv[2];
-    int ii;
-    
-    argc = nargs;
-    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
-        argv[ii] = args[ii];
-    }
-    if (argc == 1) {
-        int _v;
-        {
-            _v = (TYPE(argv[0]) == T_STRING);
-        }
-        if (_v) {
-            return _wrap_wxWindow_FindWindowByLabel__SWIG_1(nargs, args, self);
-        }
-    }
-    if (argc == 2) {
-        int _v;
-        {
-            _v = (TYPE(argv[0]) == T_STRING);
-        }
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                return _wrap_wxWindow_FindWindowByLabel__SWIG_0(nargs, args, self);
-            }
-        }
-    }
-    
-    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_FindWindowByLabel'");
-    return Qnil;
 }
 
 
@@ -7414,14 +7111,14 @@ _wrap_wxWindow_WarpPointer(int argc, VALUE *argv, VALUE self) {
 static VALUE
 _wrap_wxWindow_this_should_never_be_called(int argc, VALUE *argv, VALUE self) {
     wxWindow *arg1 = (wxWindow *) 0 ;
-    wxDC *arg2 = (wxDC *) 0 ;
+    wxPaintDC *arg2 = (wxPaintDC *) 0 ;
     VALUE result;
     VALUE vresult = Qnil;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
-    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxDC, 1);
+    SWIG_ConvertPtr(argv[0], (void **) &arg2, SWIGTYPE_p_wxPaintDC, 1);
     result = (VALUE)wxWindow_this_should_never_be_called(arg1,arg2);
     
     vresult = result;
@@ -7442,6 +7139,317 @@ _wrap_wxWindow_paint(int argc, VALUE *argv, VALUE self) {
     
     vresult = result;
     return vresult;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    long arg2 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    arg2 = NUM2LONG(argv[0]);
+    result = (VALUE)wxWindow_find_window__SWIG_0(arg1,arg2);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxWindow *arg1 = (wxWindow *) 0 ;
+    wxString *arg2 = 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxWindow, 1);
+    {
+        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    result = (VALUE)wxWindow_find_window__SWIG_1(arg1,(wxString const &)*arg2);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE _wrap_wxWindow_find_window(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[3];
+    int ii;
+    
+    argc = nargs + 1;
+    argv[0] = self;
+    for (ii = 1; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii-1];
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxWindow_find_window__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = (TYPE(argv[1]) == T_STRING);
+            }
+            if (_v) {
+                return _wrap_wxWindow_find_window__SWIG_1(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_find_window'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window_by_id__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    long arg1 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    arg1 = NUM2LONG(argv[0]);
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    result = (VALUE)wxWindow_find_window_by_id__SWIG_0(arg1,arg2);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window_by_id__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    long arg1 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    arg1 = NUM2LONG(argv[0]);
+    result = (VALUE)wxWindow_find_window_by_id__SWIG_0(arg1);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE _wrap_wxWindow_find_window_by_id(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[2];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_wxWindow_find_window_by_id__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxWindow_find_window_by_id__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_find_window_by_id'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window_by_name__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    result = (VALUE)wxWindow_find_window_by_name__SWIG_0((wxString const &)*arg1,arg2);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window_by_name__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    result = (VALUE)wxWindow_find_window_by_name__SWIG_0((wxString const &)*arg1);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE _wrap_wxWindow_find_window_by_name(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[2];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
+        if (_v) {
+            return _wrap_wxWindow_find_window_by_name__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxWindow_find_window_by_name__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_find_window_by_name'");
+    return Qnil;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window_by_label__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxWindow *arg2 = (wxWindow *) 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    SWIG_ConvertPtr(argv[1], (void **) &arg2, SWIGTYPE_p_wxWindow, 1);
+    result = (VALUE)wxWindow_find_window_by_label__SWIG_0((wxString const &)*arg1,arg2);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE
+_wrap_wxWindow_find_window_by_label__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    VALUE result;
+    VALUE vresult = Qnil;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    result = (VALUE)wxWindow_find_window_by_label__SWIG_0((wxString const &)*arg1);
+    
+    vresult = result;
+    return vresult;
+}
+
+
+static VALUE _wrap_wxWindow_find_window_by_label(int nargs, VALUE *args, VALUE self) {
+    int argc;
+    VALUE argv[2];
+    int ii;
+    
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 2); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
+        if (_v) {
+            return _wrap_wxWindow_find_window_by_label__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_wxWindow_find_window_by_label__SWIG_0(nargs, args, self);
+            }
+        }
+    }
+    
+    rb_raise(rb_eArgError, "No matching function for overloaded 'wxWindow_find_window_by_label'");
+    return Qnil;
 }
 
 
@@ -7473,12 +7481,12 @@ static swig_type_info _swigt__p_wxAcceleratorTable = {"_p_wxAcceleratorTable", "
 static swig_type_info _swigt__p_wxCaret = {"_p_wxCaret", "wxCaret *", 0, 0, 0};
 static swig_type_info _swigt__p_wxColour = {"_p_wxColour", "wxColour *", 0, 0, 0};
 static swig_type_info _swigt__p_wxCursor = {"_p_wxCursor", "wxCursor *", 0, 0, 0};
-static swig_type_info _swigt__p_wxDC = {"_p_wxDC", "wxDC *", 0, 0, 0};
 static swig_type_info _swigt__p_wxDropTarget = {"_p_wxDropTarget", "wxDropTarget *", 0, 0, 0};
 static swig_type_info _swigt__p_wxEvtHandler = {"_p_wxEvtHandler", "wxEvtHandler *", 0, 0, 0};
 static swig_type_info _swigt__p_wxFont = {"_p_wxFont", "wxFont *", 0, 0, 0};
 static swig_type_info _swigt__p_wxLayoutConstraints = {"_p_wxLayoutConstraints", "wxLayoutConstraints *", 0, 0, 0};
 static swig_type_info _swigt__p_wxMenu = {"_p_wxMenu", "wxMenu *", 0, 0, 0};
+static swig_type_info _swigt__p_wxPaintDC = {"_p_wxPaintDC", "wxPaintDC *", 0, 0, 0};
 static swig_type_info _swigt__p_wxPoint = {"_p_wxPoint", "wxPoint *", 0, 0, 0};
 static swig_type_info _swigt__p_wxRect = {"_p_wxRect", "wxRect *", 0, 0, 0};
 static swig_type_info _swigt__p_wxRegion = {"_p_wxRegion", "wxRegion *", 0, 0, 0};
@@ -7496,12 +7504,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_wxCaret,
   &_swigt__p_wxColour,
   &_swigt__p_wxCursor,
-  &_swigt__p_wxDC,
   &_swigt__p_wxDropTarget,
   &_swigt__p_wxEvtHandler,
   &_swigt__p_wxFont,
   &_swigt__p_wxLayoutConstraints,
   &_swigt__p_wxMenu,
+  &_swigt__p_wxPaintDC,
   &_swigt__p_wxPoint,
   &_swigt__p_wxRect,
   &_swigt__p_wxRegion,
@@ -7519,12 +7527,12 @@ static swig_cast_info _swigc__p_wxAcceleratorTable[] = {  {&_swigt__p_wxAccelera
 static swig_cast_info _swigc__p_wxCaret[] = {  {&_swigt__p_wxCaret, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxColour[] = {  {&_swigt__p_wxColour, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxCursor[] = {  {&_swigt__p_wxCursor, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_wxDC[] = {  {&_swigt__p_wxDC, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxDropTarget[] = {  {&_swigt__p_wxDropTarget, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxEvtHandler[] = {  {&_swigt__p_wxWindow, _p_wxWindowTo_p_wxEvtHandler, 0, 0},  {&_swigt__p_wxEvtHandler, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxFont[] = {  {&_swigt__p_wxFont, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxLayoutConstraints[] = {  {&_swigt__p_wxLayoutConstraints, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxMenu[] = {  {&_swigt__p_wxMenu, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_wxPaintDC[] = {  {&_swigt__p_wxPaintDC, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxPoint[] = {  {&_swigt__p_wxPoint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxRect[] = {  {&_swigt__p_wxRect, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxRegion[] = {  {&_swigt__p_wxRegion, 0, 0, 0},{0, 0, 0, 0}};
@@ -7542,12 +7550,12 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_wxCaret,
   _swigc__p_wxColour,
   _swigc__p_wxCursor,
-  _swigc__p_wxDC,
   _swigc__p_wxDropTarget,
   _swigc__p_wxEvtHandler,
   _swigc__p_wxFont,
   _swigc__p_wxLayoutConstraints,
   _swigc__p_wxMenu,
+  _swigc__p_wxPaintDC,
   _swigc__p_wxPoint,
   _swigc__p_wxRect,
   _swigc__p_wxRegion,
@@ -7756,10 +7764,6 @@ mWxWindow = mWxruby2;
     rb_define_method(cWxWindow.klass, "disable", VALUEFUNC(_wrap_wxWindow_Disable), -1);
     rb_define_method(cWxWindow.klass, "enable", VALUEFUNC(_wrap_wxWindow_Enable), -1);
     rb_define_singleton_method(cWxWindow.klass, "find_focus", VALUEFUNC(_wrap_wxWindow_FindFocus), -1);
-    rb_define_method(cWxWindow.klass, "find_window", VALUEFUNC(_wrap_wxWindow_FindWindow), -1);
-    rb_define_singleton_method(cWxWindow.klass, "find_window_by_id", VALUEFUNC(_wrap_wxWindow_FindWindowById), -1);
-    rb_define_singleton_method(cWxWindow.klass, "find_window_by_name", VALUEFUNC(_wrap_wxWindow_FindWindowByName), -1);
-    rb_define_singleton_method(cWxWindow.klass, "find_window_by_label", VALUEFUNC(_wrap_wxWindow_FindWindowByLabel), -1);
     rb_define_method(cWxWindow.klass, "fit", VALUEFUNC(_wrap_wxWindow_Fit), -1);
     rb_define_method(cWxWindow.klass, "fit_inside", VALUEFUNC(_wrap_wxWindow_FitInside), -1);
     rb_define_method(cWxWindow.klass, "freeze", VALUEFUNC(_wrap_wxWindow_Freeze), -1);
@@ -7862,6 +7866,10 @@ mWxWindow = mWxruby2;
     rb_define_method(cWxWindow.klass, "warp_pointer", VALUEFUNC(_wrap_wxWindow_WarpPointer), -1);
     rb_define_method(cWxWindow.klass, "this_should_never_be_called", VALUEFUNC(_wrap_wxWindow_this_should_never_be_called), -1);
     rb_define_method(cWxWindow.klass, "paint", VALUEFUNC(_wrap_wxWindow_paint), -1);
+    rb_define_method(cWxWindow.klass, "find_window", VALUEFUNC(_wrap_wxWindow_find_window), -1);
+    rb_define_singleton_method(cWxWindow.klass, "find_window_by_id", VALUEFUNC(_wrap_wxWindow_find_window_by_id), -1);
+    rb_define_singleton_method(cWxWindow.klass, "find_window_by_name", VALUEFUNC(_wrap_wxWindow_find_window_by_name), -1);
+    rb_define_singleton_method(cWxWindow.klass, "find_window_by_label", VALUEFUNC(_wrap_wxWindow_find_window_by_label), -1);
     cWxWindow.mark = 0;
     cWxWindow.destroy = (void (*)(void *)) free_wxWindow;
 }

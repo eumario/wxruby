@@ -26,12 +26,39 @@
 
 %rename(SetDimensions) wxWindow::SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
 
+%{
 
+static VALUE get_ruby_object(wxObject *obj)
+{
+	VALUE returnVal = Qnil;
+	
+	wxString classNameString(obj->GetClassInfo()->GetClassName());
+	if(classNameString.Len() > 2)
+	{
+		VALUE ruby_class = rb_iv_get(mWxruby2, classNameString.mb_str()+2);
+		returnVal = Data_Wrap_Struct(ruby_class,0,0,obj);
+	}
+	
+	return returnVal;
+}
+
+%}
+
+# These are implemented below by hand so casting of types are correct which is 
+# very important when using XRC.
+%ignore wxWindow::FindWindow;
+%ignore wxWindow::FindWindowById;
+%ignore wxWindow::FindWindowByName;
+%ignore wxWindow::FindWindowByLabel;
 
 %include "include/wxWindow.h"
 
 %extend wxWindow {
-    VALUE this_should_never_be_called(wxDC *tmp) {
+
+	// TODO: Find a way to eliminate this weird hack
+	// It causes swig to define SWIGTYPE_p_wxPaintDC
+	// which is needed by our paint() method
+    VALUE this_should_never_be_called(wxPaintDC *tmp) {
 	    return Qnil;
     }
 
@@ -43,7 +70,7 @@
 	   {
 	      wxPaintDC dc(ptr);
 	      
-	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxDC, 0);	      
+	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxPaintDC, 0);
 	      rb_yield(dcVal);
 	
 	      DATA_PTR(dcVal) = NULL;
@@ -52,4 +79,53 @@
    
   }
     
+  VALUE find_window(long  id)
+  {
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = self->FindWindow(id); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }
+  
+  VALUE find_window(const wxString&  name)
+  {
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = self->FindWindow(name); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }  
+  
+  static VALUE find_window_by_id(long  id , wxWindow* parent = NULL)
+  {
+    VALUE returnVal = Qnil;
+    wxObject* obj = wxWindow::FindWindowById(id,parent); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }  
+  
+  static VALUE find_window_by_name(const wxString&  name , wxWindow* parent = NULL)
+  {
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = wxWindow::FindWindowByName(name,parent); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }
+  
+  static VALUE find_window_by_label(const wxString&  label , wxWindow* parent = NULL)
+  {
+    VALUE returnVal = Qnil;
+    
+    wxObject* obj = wxWindow::FindWindowByLabel(label,parent); 
+    returnVal = get_ruby_object(obj);
+  
+    return returnVal;    
+  }  
+  
 }
