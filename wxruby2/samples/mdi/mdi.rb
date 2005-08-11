@@ -16,7 +16,7 @@ ID_EXIT = 99
 
 class MyFrame < Wx::MDIParentFrame
   def initialize(title)
-    super(nil, -1, title)
+    super(nil, -1, title,Wx::DEFAULT_POSITION,Wx::Size.new(500,400))
     
     @child_number = 0
     
