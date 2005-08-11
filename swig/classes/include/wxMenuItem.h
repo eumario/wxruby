@@ -28,6 +28,7 @@ public:
 	 * \brief Destructor. 
 	*/
 
+#if 0 // DEPRECATED
   // compatibility only, don't use in new code
   wxMenuItem(wxMenu *parentMenu,
              int id,
@@ -35,6 +36,7 @@ public:
              const wxString& help,
              bool isCheckable,
              wxMenu *subMenu = (wxMenu *)NULL);
+#endif
 
   virtual  ~wxMenuItem() ;
 	/**

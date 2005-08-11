@@ -6,12 +6,6 @@
 %module(directors="1") wxMenuItem
 
 # the following are apparently MSWin-only
-%ignore wxMenuItem::wxMenuItem(wxMenu *parentMenu,
-             int id,
-             const wxString& text,
-             const wxString& help,
-             bool isCheckable,
-             wxMenu *subMenu = (wxMenu *)NULL);
 %ignore wxMenuItem::GetRealId();
 %ignore wxMenuItem::SetAsRadioGroupStart();
 %ignore wxMenuItem::SetRadioGroupStart(int start);
