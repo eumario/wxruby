@@ -52,7 +52,8 @@ WHATS NEW:
 - Now pass wx cpp flags to swig so we can do things 
   like #ifdef __WXGTK__ in the class/include/wxXxx.h files
 - (Hopefully) fixed Icon to be able to compile on all platforms
-
+- Removed deprecated wxMenuItem constructor for Mac compatibility
+  (based on a patch by Sean Long)
 
 
 

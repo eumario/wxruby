@@ -1121,12 +1121,6 @@ SwigDirector_wxMenuItem::SwigDirector_wxMenuItem(VALUE self, wxMenu *parentMenu,
 
 
 
-SwigDirector_wxMenuItem::SwigDirector_wxMenuItem(VALUE self, wxMenu *parentMenu, int id, wxString const &text, wxString const &help, bool isCheckable, wxMenu *subMenu): wxMenuItem(parentMenu, id, text, help, isCheckable, subMenu), Swig::Director(self) {
-    
-}
-
-
-
 SwigDirector_wxMenuItem::~SwigDirector_wxMenuItem() {
 }
 

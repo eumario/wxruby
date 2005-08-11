@@ -18,7 +18,6 @@ class SwigDirector_wxMenuItem : public wxMenuItem, public Swig::Director {
 
 public:
     SwigDirector_wxMenuItem(VALUE self, wxMenu *parentMenu = (wxMenu *) NULL, int id = wxID_SEPARATOR, wxString const &name = wxEmptyString, wxString const &help = wxEmptyString, wxItemKind kind = wxITEM_NORMAL, wxMenu *subMenu = (wxMenu *) NULL);
-    SwigDirector_wxMenuItem(VALUE self, wxMenu *parentMenu, int id, wxString const &text, wxString const &help, bool isCheckable, wxMenu *subMenu = (wxMenu *) NULL);
     virtual ~SwigDirector_wxMenuItem();
     virtual void SetCheckable(bool checkable);
 };
