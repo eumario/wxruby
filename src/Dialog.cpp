@@ -1194,6 +1194,28 @@ swig_class cWxDialog;
 static VALUE
 _wrap_new_wxDialog__SWIG_0(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
+    wxDialog *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "WxDialog::WxDialog";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (wxDialog *)new SwigDirector_wxDialog(arg1);
+        
+    } else {
+        result = (wxDialog *)new wxDialog();
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxDialog__SWIG_1(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
     wxString *arg4 = 0 ;
@@ -1232,7 +1254,7 @@ _wrap_new_wxDialog__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxDialog__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxDialog__SWIG_2(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1268,7 +1290,7 @@ _wrap_new_wxDialog__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxDialog__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxDialog__SWIG_3(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1302,7 +1324,7 @@ _wrap_new_wxDialog__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxDialog__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxDialog__SWIG_4(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1351,7 +1373,7 @@ _wrap_wxDialog_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxDialog__SWIG_4(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxDialog__SWIG_5(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1390,6 +1412,13 @@ static VALUE _wrap_new_wxDialog(int nargs, VALUE *args, VALUE self) {
     for (ii = 1; (ii < argc) && (ii < 8); ii++) {
         argv[ii] = args[ii-1];
     }
+    if (argc == 1) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            return _wrap_new_wxDialog__SWIG_0(nargs, args, self);
+        }
+    }
     if (argc == 4) {
         int _v;
         _v = (argv[0] != T_NONE);
@@ -1407,7 +1436,7 @@ static VALUE _wrap_new_wxDialog(int nargs, VALUE *args, VALUE self) {
                         _v = (TYPE(argv[3]) == T_STRING);
                     }
                     if (_v) {
-                        return _wrap_new_wxDialog__SWIG_4(nargs, args, self);
+                        return _wrap_new_wxDialog__SWIG_5(nargs, args, self);
                     }
                 }
             }
@@ -1435,7 +1464,7 @@ static VALUE _wrap_new_wxDialog(int nargs, VALUE *args, VALUE self) {
                             _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
                         }
                         if (_v) {
-                            return _wrap_new_wxDialog__SWIG_3(nargs, args, self);
+                            return _wrap_new_wxDialog__SWIG_4(nargs, args, self);
                         }
                     }
                 }
@@ -1469,7 +1498,7 @@ static VALUE _wrap_new_wxDialog(int nargs, VALUE *args, VALUE self) {
                                 _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
                             }
                             if (_v) {
-                                return _wrap_new_wxDialog__SWIG_2(nargs, args, self);
+                                return _wrap_new_wxDialog__SWIG_3(nargs, args, self);
                             }
                         }
                     }
@@ -1508,7 +1537,7 @@ static VALUE _wrap_new_wxDialog(int nargs, VALUE *args, VALUE self) {
                                     _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
                                 }
                                 if (_v) {
-                                    return _wrap_new_wxDialog__SWIG_1(nargs, args, self);
+                                    return _wrap_new_wxDialog__SWIG_2(nargs, args, self);
                                 }
                             }
                         }
@@ -1552,7 +1581,7 @@ static VALUE _wrap_new_wxDialog(int nargs, VALUE *args, VALUE self) {
                                         _v = (TYPE(argv[7]) == T_STRING);
                                     }
                                     if (_v) {
-                                        return _wrap_new_wxDialog__SWIG_0(nargs, args, self);
+                                        return _wrap_new_wxDialog__SWIG_1(nargs, args, self);
                                     }
                                 }
                             }
