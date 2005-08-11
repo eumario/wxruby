@@ -24,10 +24,8 @@ public:
     virtual int GetCount() const;
     virtual int GetSelection() const;
     virtual ~SwigDirector_wxChoice();
-    virtual int DoInsert(wxString const &item, int pos);
     virtual void Delete(int n);
     virtual void SetSelection(int n);
-    virtual int DoAppend(wxString const &item);
     virtual int FindString(wxString const &s) const;
     virtual void SetString(int n, wxString const &s);
 };
