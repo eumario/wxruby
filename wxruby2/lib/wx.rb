@@ -17,14 +17,3 @@ end
 #    expose a friendlier API than the C++ code provides
 
 Wx = Wxruby2
-
-if(!Wx.constants.index("Notebook"))
-	module Wx
-		class ToggleButton < Panel
-			def initialize(parent, id, label, position)
-				super(parent, id)
-				puts("ToggleButton class missing, so faking it")
-			end
-		end
-	end
-end

@@ -865,9 +865,6 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 
 
 
-#if defined(__WXMSW__)
-
-
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_int swig_types[0]
@@ -2341,13 +2338,3 @@ mWxToggleButton = mWxruby2;
     cWxToggleButton.destroy = (void (*)(void *)) free_wxToggleButton;
 }
 
-            #else
-            #ifdef __cplusplus
-            extern "C"
-            #endif
-            SWIGEXPORT void Init_wxToggleButton(void) {
-static bool initialized;
-if(initialized) return;
-initialized = true;
-            }
-            #endif    

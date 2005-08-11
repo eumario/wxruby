@@ -5,10 +5,6 @@
 
 %module(directors="1") wxToggleButton
 
-%runtime %{
-//@@if defined(__WXMSW__)
-%}
-
 %{
 #include <wx/tglbtn.h>
 %}

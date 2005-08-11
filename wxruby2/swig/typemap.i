@@ -12,7 +12,7 @@
 }
 
 %typemap(in) wxString* {
-	$1 = new wxString(STR2CSTR($input), wxConvUTF8));
+	$1 = new wxString(STR2CSTR($input), wxConvUTF8);
 }
 
 /**
