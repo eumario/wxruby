@@ -1236,6 +1236,28 @@ void SwigDirector_wxChoice::SetString(int n, wxString const &s) {
 extern swig_class cWxControlWithItems;
 swig_class cWxChoice;
 
+static VALUE
+_wrap_new_wxChoice__SWIG_0(int argc, VALUE *argv, VALUE self) {
+    VALUE arg1 ;
+    wxChoice *result;
+    
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    arg1 = self;
+    char *classname = "WxChoice::WxChoice";
+    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
+        /* subclassed */
+        result = (wxChoice *)new SwigDirector_wxChoice(arg1);
+        
+    } else {
+        result = (wxChoice *)new wxChoice();
+        
+    }
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
 static void
 free_wxChoice(wxChoice *arg1) {
     Swig::Director* director = (Swig::Director*)(SwigDirector_wxChoice*)arg1;
@@ -1256,7 +1278,7 @@ free_wxChoice(wxChoice *arg1) {
     delete arg1;
 }
 static VALUE
-_wrap_new_wxChoice__SWIG_0(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_1(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1329,7 +1351,7 @@ _wrap_new_wxChoice__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_1(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_2(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1396,7 +1418,7 @@ _wrap_new_wxChoice__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_2(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_3(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1459,7 +1481,7 @@ _wrap_new_wxChoice__SWIG_2(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_3(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_4(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1518,7 +1540,7 @@ _wrap_new_wxChoice__SWIG_3(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_4(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_5(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1550,7 +1572,7 @@ _wrap_new_wxChoice__SWIG_4(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_5(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_6(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1580,7 +1602,7 @@ _wrap_new_wxChoice__SWIG_5(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_6(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_7(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1608,7 +1630,7 @@ _wrap_new_wxChoice__SWIG_6(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_7(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_8(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1634,7 +1656,7 @@ _wrap_new_wxChoice__SWIG_7(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_8(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_9(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1691,7 +1713,7 @@ _wrap_new_wxChoice__SWIG_8(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_9(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_10(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1744,7 +1766,7 @@ _wrap_new_wxChoice__SWIG_9(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxChoice__SWIG_10(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_11(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1812,7 +1834,7 @@ _wrap_wxChoice_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxChoice__SWIG_11(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxChoice__SWIG_12(int argc, VALUE *argv, VALUE self) {
     VALUE arg1 ;
     wxWindow *arg2 = (wxWindow *) 0 ;
     wxWindowID arg3 ;
@@ -1870,6 +1892,13 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
     for (ii = 1; (ii < argc) && (ii < 9); ii++) {
         argv[ii] = args[ii-1];
     }
+    if (argc == 1) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            return _wrap_new_wxChoice__SWIG_0(nargs, args, self);
+        }
+    }
     if (argc == 3) {
         int _v;
         _v = (argv[0] != T_NONE);
@@ -1883,7 +1912,7 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                     _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_wxChoice__SWIG_7(nargs, args, self);
+                    return _wrap_new_wxChoice__SWIG_8(nargs, args, self);
                 }
             }
         }
@@ -1906,59 +1935,13 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                         _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_new_wxChoice__SWIG_6(nargs, args, self);
+                        return _wrap_new_wxChoice__SWIG_7(nargs, args, self);
                     }
                 }
             }
         }
     }
     if ((argc >= 5) && (argc <= 7)) {
-        int _v;
-        _v = (argv[0] != T_NONE);
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        {
-                            void *ptr;
-                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            if (argc <= 5) {
-                                return _wrap_new_wxChoice__SWIG_2(nargs, args, self);
-                            }
-                            {
-                                _v = (TYPE(argv[5]) == T_ARRAY);
-                            }
-                            if (_v) {
-                                if (argc <= 6) {
-                                    return _wrap_new_wxChoice__SWIG_2(nargs, args, self);
-                                }
-                                {
-                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
-                                }
-                                if (_v) {
-                                    return _wrap_new_wxChoice__SWIG_2(nargs, args, self);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if ((argc >= 5) && (argc <= 6)) {
         int _v;
         _v = (argv[0] != T_NONE);
         if (_v) {
@@ -1991,7 +1974,53 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                                 if (argc <= 6) {
                                     return _wrap_new_wxChoice__SWIG_3(nargs, args, self);
                                 }
-                                return _wrap_new_wxChoice__SWIG_3(nargs, args, self);
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    return _wrap_new_wxChoice__SWIG_3(nargs, args, self);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ((argc >= 5) && (argc <= 6)) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            if (argc <= 5) {
+                                return _wrap_new_wxChoice__SWIG_4(nargs, args, self);
+                            }
+                            {
+                                _v = (TYPE(argv[5]) == T_ARRAY);
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_new_wxChoice__SWIG_4(nargs, args, self);
+                                }
+                                return _wrap_new_wxChoice__SWIG_4(nargs, args, self);
                             }
                         }
                     }
@@ -2022,7 +2051,7 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                             _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
                         }
                         if (_v) {
-                            return _wrap_new_wxChoice__SWIG_5(nargs, args, self);
+                            return _wrap_new_wxChoice__SWIG_6(nargs, args, self);
                         }
                     }
                 }
@@ -2030,69 +2059,6 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
         }
     }
     if ((argc >= 5) && (argc <= 9)) {
-        int _v;
-        _v = (argv[0] != T_NONE);
-        if (_v) {
-            {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
-            }
-            if (_v) {
-                {
-                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
-                }
-                if (_v) {
-                    {
-                        void *ptr;
-                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        {
-                            void *ptr;
-                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            if (argc <= 5) {
-                                return _wrap_new_wxChoice__SWIG_0(nargs, args, self);
-                            }
-                            {
-                                _v = (TYPE(argv[5]) == T_ARRAY);
-                            }
-                            if (_v) {
-                                if (argc <= 6) {
-                                    return _wrap_new_wxChoice__SWIG_0(nargs, args, self);
-                                }
-                                {
-                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
-                                }
-                                if (_v) {
-                                    if (argc <= 7) {
-                                        return _wrap_new_wxChoice__SWIG_0(nargs, args, self);
-                                    }
-                                    {
-                                        void *ptr;
-                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
-                                    }
-                                    if (_v) {
-                                        if (argc <= 8) {
-                                            return _wrap_new_wxChoice__SWIG_0(nargs, args, self);
-                                        }
-                                        {
-                                            _v = (TYPE(argv[8]) == T_STRING);
-                                        }
-                                        if (_v) {
-                                            return _wrap_new_wxChoice__SWIG_0(nargs, args, self);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if ((argc >= 5) && (argc <= 8)) {
         int _v;
         _v = (argv[0] != T_NONE);
         if (_v) {
@@ -2137,7 +2103,70 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                                         _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
                                     }
                                     if (_v) {
-                                        return _wrap_new_wxChoice__SWIG_1(nargs, args, self);
+                                        if (argc <= 8) {
+                                            return _wrap_new_wxChoice__SWIG_1(nargs, args, self);
+                                        }
+                                        {
+                                            _v = (TYPE(argv[8]) == T_STRING);
+                                        }
+                                        if (_v) {
+                                            return _wrap_new_wxChoice__SWIG_1(nargs, args, self);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ((argc >= 5) && (argc <= 8)) {
+        int _v;
+        _v = (argv[0] != T_NONE);
+        if (_v) {
+            {
+                void *ptr;
+                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_wxWindow, 0) != -1)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    {
+                        void *ptr;
+                        _v = (NIL_P(argv[3]) || (TYPE(argv[3]) == T_DATA && SWIG_ConvertPtr(argv[3], &ptr, SWIGTYPE_p_wxPoint, 0) != -1)) ? 1 : 0;
+                    }
+                    if (_v) {
+                        {
+                            void *ptr;
+                            _v = (NIL_P(argv[4]) || (TYPE(argv[4]) == T_DATA && SWIG_ConvertPtr(argv[4], &ptr, SWIGTYPE_p_wxSize, 0) != -1)) ? 1 : 0;
+                        }
+                        if (_v) {
+                            if (argc <= 5) {
+                                return _wrap_new_wxChoice__SWIG_2(nargs, args, self);
+                            }
+                            {
+                                _v = (TYPE(argv[5]) == T_ARRAY);
+                            }
+                            if (_v) {
+                                if (argc <= 6) {
+                                    return _wrap_new_wxChoice__SWIG_2(nargs, args, self);
+                                }
+                                {
+                                    _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
+                                }
+                                if (_v) {
+                                    if (argc <= 7) {
+                                        return _wrap_new_wxChoice__SWIG_2(nargs, args, self);
+                                    }
+                                    {
+                                        void *ptr;
+                                        _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
+                                    }
+                                    if (_v) {
+                                        return _wrap_new_wxChoice__SWIG_2(nargs, args, self);
                                     }
                                 }
                             }
@@ -2175,7 +2204,7 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                                 _v = (NIL_P(argv[5]) || (TYPE(argv[5]) == T_DATA && SWIG_ConvertPtr(argv[5], &ptr, SWIGTYPE_p_wxArrayString, 0) != -1)) ? 1 : 0;
                             }
                             if (_v) {
-                                return _wrap_new_wxChoice__SWIG_11(nargs, args, self);
+                                return _wrap_new_wxChoice__SWIG_12(nargs, args, self);
                             }
                         }
                     }
@@ -2210,7 +2239,7 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                                 _v = ((TYPE(argv[5]) == T_FIXNUM) || (TYPE(argv[5]) == T_BIGNUM)) ? 1 : 0;
                             }
                             if (_v) {
-                                return _wrap_new_wxChoice__SWIG_4(nargs, args, self);
+                                return _wrap_new_wxChoice__SWIG_5(nargs, args, self);
                             }
                         }
                     }
@@ -2250,7 +2279,7 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                                     _v = ((TYPE(argv[6]) == T_FIXNUM) || (TYPE(argv[6]) == T_BIGNUM)) ? 1 : 0;
                                 }
                                 if (_v) {
-                                    return _wrap_new_wxChoice__SWIG_10(nargs, args, self);
+                                    return _wrap_new_wxChoice__SWIG_11(nargs, args, self);
                                 }
                             }
                         }
@@ -2296,7 +2325,7 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                                         _v = (NIL_P(argv[7]) || (TYPE(argv[7]) == T_DATA && SWIG_ConvertPtr(argv[7], &ptr, SWIGTYPE_p_wxValidator, 0) != -1)) ? 1 : 0;
                                     }
                                     if (_v) {
-                                        return _wrap_new_wxChoice__SWIG_9(nargs, args, self);
+                                        return _wrap_new_wxChoice__SWIG_10(nargs, args, self);
                                     }
                                 }
                             }
@@ -2347,7 +2376,7 @@ static VALUE _wrap_new_wxChoice(int nargs, VALUE *args, VALUE self) {
                                             _v = (TYPE(argv[8]) == T_STRING);
                                         }
                                         if (_v) {
-                                            return _wrap_new_wxChoice__SWIG_8(nargs, args, self);
+                                            return _wrap_new_wxChoice__SWIG_9(nargs, args, self);
                                         }
                                     }
                                 }

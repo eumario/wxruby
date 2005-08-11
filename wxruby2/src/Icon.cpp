@@ -868,12 +868,14 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_int swig_types[0]
-#define SWIGTYPE_p_unsigned_long swig_types[1]
-#define SWIGTYPE_p_wxBitmap swig_types[2]
-#define SWIGTYPE_p_wxIcon swig_types[3]
-#define SWIGTYPE_p_wxString swig_types[4]
-static swig_type_info *swig_types[5];
-static swig_module_info swig_module = {swig_types, 5, 0, 0, 0, 0};
+#define SWIGTYPE_p_p_char swig_types[1]
+#define SWIGTYPE_p_unsigned_long swig_types[2]
+#define SWIGTYPE_p_wxBitmap swig_types[3]
+#define SWIGTYPE_p_wxIcon swig_types[4]
+#define SWIGTYPE_p_wxIconLocation swig_types[5]
+#define SWIGTYPE_p_wxString swig_types[6]
+static swig_type_info *swig_types[7];
+static swig_module_info swig_module = {swig_types, 7, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1115,75 +1117,16 @@ namespace Swig {
 
 #include "Icon.h"
 
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self): wxIcon(), Swig::Director(self) {
-    
-}
-
-
-
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, wxIcon const &icon): wxIcon(icon), Swig::Director(self) {
-    
-}
-
-
-
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, char const **data): wxIcon(data), Swig::Director(self) {
-    
-}
-
-
-
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, char **data): wxIcon(data), Swig::Director(self) {
-    
-}
-
-
-
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, wxString const &name, wxBitmapType type, int desiredWidth, int desiredHeight): wxIcon(name, type, desiredWidth, desiredHeight), Swig::Director(self) {
-    
-}
-
-
-
-SwigDirector_wxIcon::SwigDirector_wxIcon(VALUE self, wxIconLocation const &loc): wxIcon(loc), Swig::Director(self) {
-    
-}
-
-
-
-SwigDirector_wxIcon::~SwigDirector_wxIcon() {
-}
-
 extern swig_class cWxBitmap;
 swig_class cWxIcon;
 
 static VALUE
 _wrap_new_wxIcon__SWIG_0(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxString *arg2 = 0 ;
-    wxBitmapType arg3 ;
-    int arg4 ;
-    int arg5 ;
     wxIcon *result;
     
-    if ((argc < 4) || (argc > 4))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
-    arg1 = self;
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    arg3 = (wxBitmapType) NUM2INT(argv[1]);
-    arg4 = NUM2INT(argv[2]);
-    arg5 = NUM2INT(argv[3]);
-    char *classname = "WxIcon::WxIcon";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (wxIcon *)new SwigDirector_wxIcon(arg1,(wxString const &)*arg2,arg3,arg4,arg5);
-        
-    } else {
-        result = (wxIcon *)new wxIcon((wxString const &)*arg2,arg3,arg4,arg5);
-        
-    }
+    if ((argc < 0) || (argc > 0))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
+    result = (wxIcon *)new wxIcon();
     DATA_PTR(self) = result;
     return self;
 }
@@ -1191,29 +1134,13 @@ _wrap_new_wxIcon__SWIG_0(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxIcon__SWIG_1(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxString *arg2 = 0 ;
-    wxBitmapType arg3 ;
-    int arg4 ;
+    wxIcon *arg1 = 0 ;
     wxIcon *result;
     
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    arg1 = self;
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    arg3 = (wxBitmapType) NUM2INT(argv[1]);
-    arg4 = NUM2INT(argv[2]);
-    char *classname = "WxIcon::WxIcon";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (wxIcon *)new SwigDirector_wxIcon(arg1,(wxString const &)*arg2,arg3,arg4);
-        
-    } else {
-        result = (wxIcon *)new wxIcon((wxString const &)*arg2,arg3,arg4);
-        
-    }
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxIcon, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxIcon *)new wxIcon((wxIcon const &)*arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -1221,27 +1148,171 @@ _wrap_new_wxIcon__SWIG_1(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxIcon__SWIG_2(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxString *arg2 = 0 ;
-    wxBitmapType arg3 ;
+    char **arg1 = (char **) 0 ;
+    int arg2 ;
+    int arg3 ;
+    wxIcon *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    arg2 = NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    result = (wxIcon *)new wxIcon((char const **)arg1,arg2,arg3);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_3(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    int arg2 ;
     wxIcon *result;
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    arg1 = self;
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    arg2 = NUM2INT(argv[1]);
+    result = (wxIcon *)new wxIcon((char const **)arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_4(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    wxIcon *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    result = (wxIcon *)new wxIcon((char const **)arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_5(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxBitmapType arg2 ;
+    int arg3 ;
+    int arg4 ;
+    wxIcon *result;
+    
+    if ((argc < 4) || (argc > 4))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc);
     {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
-    arg3 = (wxBitmapType) NUM2INT(argv[1]);
-    char *classname = "WxIcon::WxIcon";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (wxIcon *)new SwigDirector_wxIcon(arg1,(wxString const &)*arg2,arg3);
-        
-    } else {
-        result = (wxIcon *)new wxIcon((wxString const &)*arg2,arg3);
-        
+    arg2 = (wxBitmapType) NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    arg4 = NUM2INT(argv[3]);
+    result = (wxIcon *)new wxIcon((wxString const &)*arg1,arg2,arg3,arg4);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_6(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxBitmapType arg2 ;
+    int arg3 ;
+    wxIcon *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
+    arg2 = (wxBitmapType) NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    result = (wxIcon *)new wxIcon((wxString const &)*arg1,arg2,arg3);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_7(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxBitmapType arg2 ;
+    wxIcon *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    arg2 = (wxBitmapType) NUM2INT(argv[1]);
+    result = (wxIcon *)new wxIcon((wxString const &)*arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_8(int argc, VALUE *argv, VALUE self) {
+    wxString *arg1 = 0 ;
+    wxIcon *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    {
+        arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
+    }
+    result = (wxIcon *)new wxIcon((wxString const &)*arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_9(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    int arg2 ;
+    int arg3 ;
+    wxIcon *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    arg2 = NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    result = (wxIcon *)new wxIcon(arg1,arg2,arg3);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_10(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    int arg2 ;
+    wxIcon *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    arg2 = NUM2INT(argv[1]);
+    result = (wxIcon *)new wxIcon(arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_11(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    wxIcon *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    result = (wxIcon *)new wxIcon(arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -1265,26 +1336,14 @@ _wrap_wxIcon_allocate(VALUE self) {
     
 
 static VALUE
-_wrap_new_wxIcon__SWIG_3(int argc, VALUE *argv, VALUE self) {
-    VALUE arg1 ;
-    wxString *arg2 = 0 ;
+_wrap_new_wxIcon__SWIG_12(int argc, VALUE *argv, VALUE self) {
+    wxIconLocation *arg1 = 0 ;
     wxIcon *result;
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    arg1 = self;
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    char *classname = "WxIcon::WxIcon";
-    if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
-        /* subclassed */
-        result = (wxIcon *)new SwigDirector_wxIcon(arg1,(wxString const &)*arg2);
-        
-    } else {
-        result = (wxIcon *)new wxIcon((wxString const &)*arg2);
-        
-    }
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxIconLocation, 1); if (arg1 == NULL) rb_raise(rb_eTypeError, "null reference");
+    result = (wxIcon *)new wxIcon((wxIconLocation const &)*arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -1292,32 +1351,118 @@ _wrap_new_wxIcon__SWIG_3(int argc, VALUE *argv, VALUE self) {
 
 static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
     int argc;
-    VALUE argv[6];
+    VALUE argv[4];
     int ii;
     
-    argc = nargs + 1;
-    argv[0] = self;
-    for (ii = 1; (ii < argc) && (ii < 5); ii++) {
-        argv[ii] = args[ii-1];
+    argc = nargs;
+    for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+        argv[ii] = args[ii];
+    }
+    if (argc == 0) {
+        return _wrap_new_wxIcon__SWIG_0(nargs, args, self);
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxIcon, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_wxIcon__SWIG_1(nargs, args, self);
+        }
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_p_char, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_wxIcon__SWIG_4(nargs, args, self);
+        }
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_p_char, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_wxIcon__SWIG_11(nargs, args, self);
+        }
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_wxIconLocation, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            return _wrap_new_wxIcon__SWIG_12(nargs, args, self);
+        }
+    }
+    if (argc == 1) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
+        if (_v) {
+            return _wrap_new_wxIcon__SWIG_8(nargs, args, self);
+        }
     }
     if (argc == 2) {
         int _v;
-        _v = (argv[0] != T_NONE);
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_p_char, 0) != -1)) ? 1 : 0;
+        }
         if (_v) {
             {
-                _v = (TYPE(argv[1]) == T_STRING);
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_wxIcon__SWIG_10(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 2) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_p_char, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 return _wrap_new_wxIcon__SWIG_3(nargs, args, self);
             }
         }
     }
-    if (argc == 3) {
+    if (argc == 2) {
         int _v;
-        _v = (argv[0] != T_NONE);
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
         if (_v) {
             {
-                _v = (TYPE(argv[1]) == T_STRING);
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                return _wrap_new_wxIcon__SWIG_7(nargs, args, self);
+            }
+        }
+    }
+    if (argc == 3) {
+        int _v;
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_p_char, 0) != -1)) ? 1 : 0;
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1329,34 +1474,53 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
             }
         }
     }
-    if (argc == 4) {
+    if (argc == 3) {
         int _v;
-        _v = (argv[0] != T_NONE);
+        {
+            void *ptr;
+            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_p_char, 0) != -1)) ? 1 : 0;
+        }
         if (_v) {
             {
-                _v = (TYPE(argv[1]) == T_STRING);
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
                     _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    {
-                        _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
-                    }
-                    if (_v) {
-                        return _wrap_new_wxIcon__SWIG_1(nargs, args, self);
-                    }
+                    return _wrap_new_wxIcon__SWIG_9(nargs, args, self);
                 }
             }
         }
     }
-    if (argc == 5) {
+    if (argc == 3) {
         int _v;
-        _v = (argv[0] != T_NONE);
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
         if (_v) {
             {
-                _v = (TYPE(argv[1]) == T_STRING);
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
+            }
+            if (_v) {
+                {
+                    _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
+                }
+                if (_v) {
+                    return _wrap_new_wxIcon__SWIG_6(nargs, args, self);
+                }
+            }
+        }
+    }
+    if (argc == 4) {
+        int _v;
+        {
+            _v = (TYPE(argv[0]) == T_STRING);
+        }
+        if (_v) {
+            {
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1367,12 +1531,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
-                        {
-                            _v = ((TYPE(argv[4]) == T_FIXNUM) || (TYPE(argv[4]) == T_BIGNUM)) ? 1 : 0;
-                        }
-                        if (_v) {
-                            return _wrap_new_wxIcon__SWIG_0(nargs, args, self);
-                        }
+                        return _wrap_new_wxIcon__SWIG_5(nargs, args, self);
                     }
                 }
             }
@@ -1401,170 +1560,8 @@ _wrap_wxIcon_CopyFromBitmap(int argc, VALUE *argv, VALUE self) {
 
 static void
 free_wxIcon(wxIcon *arg1) {
-    Swig::Director* director = (Swig::Director*)(SwigDirector_wxIcon*)arg1;
-#ifdef wxDEBUG
-    printf("Icon.cpp" " Checking %p\n", director);
-#endif
-    if (GcIsDeleted(director))
-    {
-#ifdef wxDEBUG
-        printf("%p is already dead!\n", director);
-#endif
-        return;
-    }
-#ifdef wxDEBUG
-    printf("deleting %p\n", director);
-    fflush(stdout);
-#endif
     delete arg1;
 }
-static VALUE
-_wrap_wxIcon_GetDepth(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    result = (int)((wxIcon const *)arg1)->GetDepth();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxIcon_GetHeight(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    result = (int)((wxIcon const *)arg1)->GetHeight();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxIcon_GetWidth(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    int result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    result = (int)((wxIcon const *)arg1)->GetWidth();
-    
-    vresult = INT2NUM(result);
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxIcon_LoadFile(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    wxString *arg2 = 0 ;
-    wxBitmapType arg3 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    {
-        arg2 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
-    }
-    arg3 = (wxBitmapType) NUM2INT(argv[1]);
-    result = (bool)(arg1)->LoadFile((wxString const &)*arg2,arg3);
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxIcon_Ok(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    bool result;
-    VALUE vresult = Qnil;
-    
-    if ((argc < 0) || (argc > 0))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    result = (bool)((wxIcon const *)arg1)->Ok();
-    
-    vresult = result ? Qtrue : Qfalse;
-    return vresult;
-}
-
-
-static VALUE
-_wrap_wxIcon_SetDepth(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    int arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    arg2 = NUM2INT(argv[0]);
-    (arg1)->SetDepth(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxIcon_SetHeight(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    int arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    arg2 = NUM2INT(argv[0]);
-    (arg1)->SetHeight(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_wxIcon_SetWidth(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    int arg2 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(self, (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    arg2 = NUM2INT(argv[0]);
-    (arg1)->SetWidth(arg2);
-    
-    return Qnil;
-}
-
-
-static VALUE
-_wrap_disown_wxIcon(int argc, VALUE *argv, VALUE self) {
-    wxIcon *arg1 = (wxIcon *) 0 ;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_wxIcon, 1);
-    {
-        Swig::Director *director = dynamic_cast<Swig::Director *>(arg1);
-        if (director) director->swig_disown();
-    }
-    
-    return Qnil;
-}
-
-
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
@@ -1572,30 +1569,38 @@ static void *_p_wxIconTo_p_wxBitmap(void *x) {
     return (void *)((wxBitmap *)  ((wxIcon *) x));
 }
 static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0};
+static swig_type_info _swigt__p_p_char = {"_p_p_char", "char **", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 static swig_type_info _swigt__p_wxBitmap = {"_p_wxBitmap", "wxBitmap *", 0, 0, 0};
 static swig_type_info _swigt__p_wxIcon = {"_p_wxIcon", "wxIcon *", 0, 0, 0};
+static swig_type_info _swigt__p_wxIconLocation = {"_p_wxIconLocation", "wxIconLocation *", 0, 0, 0};
 static swig_type_info _swigt__p_wxString = {"_p_wxString", "wxString *|wxArtClient *", 0, 0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_int,
+  &_swigt__p_p_char,
   &_swigt__p_unsigned_long,
   &_swigt__p_wxBitmap,
   &_swigt__p_wxIcon,
+  &_swigt__p_wxIconLocation,
   &_swigt__p_wxString,
 };
 
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_p_char[] = {  {&_swigt__p_p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxBitmap[] = {  {&_swigt__p_wxIcon, _p_wxIconTo_p_wxBitmap, 0, 0},  {&_swigt__p_wxBitmap, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxIcon[] = {  {&_swigt__p_wxIcon, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_wxIconLocation[] = {  {&_swigt__p_wxIconLocation, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxString[] = {  {&_swigt__p_wxString, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_int,
+  _swigc__p_p_char,
   _swigc__p_unsigned_long,
   _swigc__p_wxBitmap,
   _swigc__p_wxIcon,
+  _swigc__p_wxIconLocation,
   _swigc__p_wxString,
 };
 
@@ -1770,7 +1775,6 @@ mWxIcon = mWxruby2;
         SWIG_define_class(swig_module.types[i]);
     }
     
-    rb_define_module_function(mWxIcon, "disown_wxIcon", VALUEFUNC(_wrap_disown_wxIcon), -1);
     
     extern void Init_wxBitmap();
     Init_wxBitmap();
@@ -1780,14 +1784,6 @@ mWxIcon = mWxruby2;
     rb_define_alloc_func(cWxIcon.klass, _wrap_wxIcon_allocate);
     rb_define_method(cWxIcon.klass, "initialize", VALUEFUNC(_wrap_new_wxIcon), -1);
     rb_define_method(cWxIcon.klass, "copy_from_bitmap", VALUEFUNC(_wrap_wxIcon_CopyFromBitmap), -1);
-    rb_define_method(cWxIcon.klass, "get_depth", VALUEFUNC(_wrap_wxIcon_GetDepth), -1);
-    rb_define_method(cWxIcon.klass, "get_height", VALUEFUNC(_wrap_wxIcon_GetHeight), -1);
-    rb_define_method(cWxIcon.klass, "get_width", VALUEFUNC(_wrap_wxIcon_GetWidth), -1);
-    rb_define_method(cWxIcon.klass, "load_file", VALUEFUNC(_wrap_wxIcon_LoadFile), -1);
-    rb_define_method(cWxIcon.klass, "ok", VALUEFUNC(_wrap_wxIcon_Ok), -1);
-    rb_define_method(cWxIcon.klass, "set_depth", VALUEFUNC(_wrap_wxIcon_SetDepth), -1);
-    rb_define_method(cWxIcon.klass, "set_height", VALUEFUNC(_wrap_wxIcon_SetHeight), -1);
-    rb_define_method(cWxIcon.klass, "set_width", VALUEFUNC(_wrap_wxIcon_SetWidth), -1);
     cWxIcon.mark = 0;
     cWxIcon.destroy = (void (*)(void *)) free_wxIcon;
 }

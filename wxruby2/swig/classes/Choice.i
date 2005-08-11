@@ -5,7 +5,6 @@
 
 %module(directors="1") wxChoice
 
-%ignore wxChoice::wxChoice();
 %ignore wxChoice::DoAppend(const wxString& item);
 %feature("nodirector") wxChoice::DoAppend;
 %ignore wxChoice::DoInsert(const wxString& item, int pos);

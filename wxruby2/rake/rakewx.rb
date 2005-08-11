@@ -137,7 +137,8 @@ def add_initializers(cpp_file)
 end
 
 def do_swig(swig_file, cpp_file, options)
-    sh "#{$swig_cmd} #{options} -w401 -w801 -w515 -c++ -ruby " + 
+    sh "#{$swig_cmd} #{options} #{$wx_cppflags} " + 
+		"-w401 -w801 -w515 -c++ -ruby " + 
         "-o #{cpp_file} #{swig_file}"
     renamer = File.join($swig_dir, "renamer.rb")
     sh "ruby #{renamer} #{cpp_file}"
