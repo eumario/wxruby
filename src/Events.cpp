@@ -1699,7 +1699,7 @@ static VALUE evt_middle_up(int argc, VALUE *argv, VALUE self)
 
 static VALUE evt_spin_down(int argc, VALUE *argv, VALUE self)
 {
-	return internal_evt_with_id(argc,argv,self,wxEVT_SCROLL_LINEUP);
+	return internal_evt_with_id(argc,argv,self,wxEVT_SCROLL_LINEDOWN);
 }
 
 static VALUE evt_left_down(int argc, VALUE *argv, VALUE self)
@@ -1918,7 +1918,7 @@ static VALUE evt_checklistbox(int argc, VALUE *argv, VALUE self)
 
 static VALUE evt_spin_up(int argc, VALUE *argv, VALUE self)
 {
-	return internal_evt_with_id(argc,argv,self,wxEVT_SCROLL_LINEDOWN);
+	return internal_evt_with_id(argc,argv,self,wxEVT_SCROLL_LINEUP);
 }
 
 static VALUE evt_grid_cell_left_click(int argc, VALUE *argv, VALUE self)
