@@ -13,7 +13,13 @@ public:
 
     wxIcon();
     wxIcon( const wxIcon& icon);
+#ifdef __WXGTK__
     wxIcon( const char **bits, int width=-1, int height=-1 );
+    wxIcon( char **bits, int width=-1, int height=-1 );
+#else
+    wxIcon(const char **data);
+    wxIcon(char **data);
+#endif
 
     wxIcon( const wxString& filename,
 #ifdef __WXGTK__
@@ -22,8 +28,6 @@ public:
 		long type = wxBITMAP_TYPE_ICO_RESOURCE,
 #endif
 		int desiredWidth=-1, int desiredHeight=-1 );
-
-	wxIcon( char **bits, int width=-1, int height=-1 );
 
     wxIcon(const wxIconLocation& loc);
 

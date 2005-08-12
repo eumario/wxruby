@@ -1196,6 +1196,54 @@ _wrap_new_wxIcon__SWIG_4(int argc, VALUE *argv, VALUE self) {
 
 static VALUE
 _wrap_new_wxIcon__SWIG_5(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    int arg2 ;
+    int arg3 ;
+    wxIcon *result;
+    
+    if ((argc < 3) || (argc > 3))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    arg2 = NUM2INT(argv[1]);
+    arg3 = NUM2INT(argv[2]);
+    result = (wxIcon *)new wxIcon(arg1,arg2,arg3);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_6(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    int arg2 ;
+    wxIcon *result;
+    
+    if ((argc < 2) || (argc > 2))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    arg2 = NUM2INT(argv[1]);
+    result = (wxIcon *)new wxIcon(arg1,arg2);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_7(int argc, VALUE *argv, VALUE self) {
+    char **arg1 = (char **) 0 ;
+    wxIcon *result;
+    
+    if ((argc < 1) || (argc > 1))
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
+    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
+    result = (wxIcon *)new wxIcon(arg1);
+    DATA_PTR(self) = result;
+    return self;
+}
+
+
+static VALUE
+_wrap_new_wxIcon__SWIG_8(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
     wxBitmapType arg2 ;
     int arg3 ;
@@ -1217,7 +1265,7 @@ _wrap_new_wxIcon__SWIG_5(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxIcon__SWIG_6(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxIcon__SWIG_9(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
     wxBitmapType arg2 ;
     int arg3 ;
@@ -1237,7 +1285,7 @@ _wrap_new_wxIcon__SWIG_6(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxIcon__SWIG_7(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxIcon__SWIG_10(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
     wxBitmapType arg2 ;
     wxIcon *result;
@@ -1255,7 +1303,7 @@ _wrap_new_wxIcon__SWIG_7(int argc, VALUE *argv, VALUE self) {
 
 
 static VALUE
-_wrap_new_wxIcon__SWIG_8(int argc, VALUE *argv, VALUE self) {
+_wrap_new_wxIcon__SWIG_11(int argc, VALUE *argv, VALUE self) {
     wxString *arg1 = 0 ;
     wxIcon *result;
     
@@ -1265,54 +1313,6 @@ _wrap_new_wxIcon__SWIG_8(int argc, VALUE *argv, VALUE self) {
         arg1 = new wxString(STR2CSTR(argv[0]), wxConvUTF8);
     }
     result = (wxIcon *)new wxIcon((wxString const &)*arg1);
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE
-_wrap_new_wxIcon__SWIG_9(int argc, VALUE *argv, VALUE self) {
-    char **arg1 = (char **) 0 ;
-    int arg2 ;
-    int arg3 ;
-    wxIcon *result;
-    
-    if ((argc < 3) || (argc > 3))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
-    arg2 = NUM2INT(argv[1]);
-    arg3 = NUM2INT(argv[2]);
-    result = (wxIcon *)new wxIcon(arg1,arg2,arg3);
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE
-_wrap_new_wxIcon__SWIG_10(int argc, VALUE *argv, VALUE self) {
-    char **arg1 = (char **) 0 ;
-    int arg2 ;
-    wxIcon *result;
-    
-    if ((argc < 2) || (argc > 2))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
-    arg2 = NUM2INT(argv[1]);
-    result = (wxIcon *)new wxIcon(arg1,arg2);
-    DATA_PTR(self) = result;
-    return self;
-}
-
-
-static VALUE
-_wrap_new_wxIcon__SWIG_11(int argc, VALUE *argv, VALUE self) {
-    char **arg1 = (char **) 0 ;
-    wxIcon *result;
-    
-    if ((argc < 1) || (argc > 1))
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    SWIG_ConvertPtr(argv[0], (void **) &arg1, SWIGTYPE_p_p_char, 1);
-    result = (wxIcon *)new wxIcon(arg1);
     DATA_PTR(self) = result;
     return self;
 }
@@ -1388,7 +1388,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
             _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_p_char, 0) != -1)) ? 1 : 0;
         }
         if (_v) {
-            return _wrap_new_wxIcon__SWIG_11(nargs, args, self);
+            return _wrap_new_wxIcon__SWIG_7(nargs, args, self);
         }
     }
     if (argc == 1) {
@@ -1407,7 +1407,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
             _v = (TYPE(argv[0]) == T_STRING);
         }
         if (_v) {
-            return _wrap_new_wxIcon__SWIG_8(nargs, args, self);
+            return _wrap_new_wxIcon__SWIG_11(nargs, args, self);
         }
     }
     if (argc == 2) {
@@ -1421,7 +1421,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
                 _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_wxIcon__SWIG_10(nargs, args, self);
+                return _wrap_new_wxIcon__SWIG_6(nargs, args, self);
             }
         }
     }
@@ -1450,7 +1450,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
                 _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
-                return _wrap_new_wxIcon__SWIG_7(nargs, args, self);
+                return _wrap_new_wxIcon__SWIG_10(nargs, args, self);
             }
         }
     }
@@ -1489,7 +1489,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
                     _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_wxIcon__SWIG_9(nargs, args, self);
+                    return _wrap_new_wxIcon__SWIG_5(nargs, args, self);
                 }
             }
         }
@@ -1508,7 +1508,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
                     _v = ((TYPE(argv[2]) == T_FIXNUM) || (TYPE(argv[2]) == T_BIGNUM)) ? 1 : 0;
                 }
                 if (_v) {
-                    return _wrap_new_wxIcon__SWIG_6(nargs, args, self);
+                    return _wrap_new_wxIcon__SWIG_9(nargs, args, self);
                 }
             }
         }
@@ -1531,7 +1531,7 @@ static VALUE _wrap_new_wxIcon(int nargs, VALUE *args, VALUE self) {
                         _v = ((TYPE(argv[3]) == T_FIXNUM) || (TYPE(argv[3]) == T_BIGNUM)) ? 1 : 0;
                     }
                     if (_v) {
-                        return _wrap_new_wxIcon__SWIG_5(nargs, args, self);
+                        return _wrap_new_wxIcon__SWIG_8(nargs, args, self);
                     }
                 }
             }
