@@ -1,5 +1,5 @@
 README for wxruby2
-Version 0.0.23
+Version 0.0.24-pre
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -15,6 +15,10 @@ For more details, see the project home page:
 
 
 WHATS NEW:
+- Icon patch from Sean Long for MS Win compatibility
+
+
+====0.0.23 tag included all of this:===
 - No longer support wx 2.5.3. Now require wx 2.6+
 - extconf.rb is now deprecated. Use rake instead.
 - Binary library is now named wxruby2, and a small Ruby 
