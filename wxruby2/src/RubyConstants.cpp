@@ -2021,6 +2021,7 @@ mWxRubyConstants = mWxruby2;
     rb_define_const(mWxRubyConstants,"CURSOR_WAIT", INT2NUM(wxCURSOR_WAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_WATCH", INT2NUM(wxCURSOR_WATCH));
     rb_define_const(mWxRubyConstants,"CURSOR_BLANK", INT2NUM(wxCURSOR_BLANK));
+    rb_define_const(mWxRubyConstants,"CURSOR_DEFAULT", INT2NUM(wxCURSOR_DEFAULT));
     rb_define_const(mWxRubyConstants,"CURSOR_ARROWWAIT", INT2NUM(wxCURSOR_ARROWWAIT));
     rb_define_const(mWxRubyConstants,"CURSOR_MAX", INT2NUM(wxCURSOR_MAX));
     rb_define_const(mWxRubyConstants,"LC_VRULES", INT2NUM(0x0001));
