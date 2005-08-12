@@ -47,7 +47,7 @@ $wx_libs += " #$WXLIBDIR/wxtiff#{$DEBUGPOSTFIX}.lib"
 $wx_libs += " #$WXLIBDIR/wxzlib#{$DEBUGPOSTFIX}.lib"   
 
 $wx_cppflags = [
-    "-I#$WXINC", "/D__WXMSW__", "-D__WXMSW__",
+    "-I#$WXINC", "-D__WXMSW__",
     "-I#$INCTEMP", 
     ].join(' ')
 $extra_cppflags = [

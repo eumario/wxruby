@@ -16,7 +16,9 @@ For more details, see the project home page:
 
 WHATS NEW:
 - Icon patch from Sean Long for MS Win compatibility
-
+- rakemswin.rb patch from Sean Long to properly pass __MSWIN__
+  flag into swig
+  
 
 ====0.0.23 tag included all of this:===
 - No longer support wx 2.5.3. Now require wx 2.6+
