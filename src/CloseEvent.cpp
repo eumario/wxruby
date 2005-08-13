@@ -867,8 +867,8 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_WXTYPE swig_types[0]
-#define SWIGTYPE_p_int swig_types[1]
+#define SWIGTYPE_p_int swig_types[0]
+#define SWIGTYPE_p_short swig_types[1]
 #define SWIGTYPE_p_unsigned_long swig_types[2]
 #define SWIGTYPE_p_wxCloseEvent swig_types[3]
 #define SWIGTYPE_p_wxString swig_types[4]
@@ -1137,11 +1137,7 @@ _wrap_new_wxCloseEvent__SWIG_0(int argc, VALUE *argv, VALUE self) {
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
     arg1 = self;
-    {
-        WXTYPE * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_WXTYPE, 1);
-        if (ptr) arg2 = *ptr;
-    }
+    arg2 = NUM2SHRT(argv[0]);
     arg3 = NUM2INT(argv[1]);
     char *classname = "WxCloseEvent::WxCloseEvent";
     if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
@@ -1166,11 +1162,7 @@ _wrap_new_wxCloseEvent__SWIG_1(int argc, VALUE *argv, VALUE self) {
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
     arg1 = self;
-    {
-        WXTYPE * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_WXTYPE, 1);
-        if (ptr) arg2 = *ptr;
-    }
+    arg2 = NUM2SHRT(argv[0]);
     char *classname = "WxCloseEvent::WxCloseEvent";
     if ( strcmp(rb_obj_classname(self), classname) != 0 ) {
         /* subclassed */
@@ -1246,8 +1238,7 @@ static VALUE _wrap_new_wxCloseEvent(int nargs, VALUE *args, VALUE self) {
         _v = (argv[0] != T_NONE);
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_WXTYPE, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 return _wrap_new_wxCloseEvent__SWIG_1(nargs, args, self);
@@ -1259,8 +1250,7 @@ static VALUE _wrap_new_wxCloseEvent(int nargs, VALUE *args, VALUE self) {
         _v = (argv[0] != T_NONE);
         if (_v) {
             {
-                void *ptr;
-                _v = (NIL_P(argv[1]) || (TYPE(argv[1]) == T_DATA && SWIG_ConvertPtr(argv[1], &ptr, SWIGTYPE_p_WXTYPE, 0) != -1)) ? 1 : 0;
+                _v = ((TYPE(argv[1]) == T_FIXNUM) || (TYPE(argv[1]) == T_BIGNUM)) ? 1 : 0;
             }
             if (_v) {
                 {
@@ -1447,29 +1437,29 @@ _wrap_disown_wxCloseEvent(int argc, VALUE *argv, VALUE self) {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_WXTYPE = {"_p_WXTYPE", "WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0};
+static swig_type_info _swigt__p_short = {"_p_short", "short *|WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 static swig_type_info _swigt__p_wxCloseEvent = {"_p_wxCloseEvent", "wxCloseEvent *", 0, 0, 0};
 static swig_type_info _swigt__p_wxString = {"_p_wxString", "wxString *|wxArtClient *", 0, 0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_WXTYPE,
   &_swigt__p_int,
+  &_swigt__p_short,
   &_swigt__p_unsigned_long,
   &_swigt__p_wxCloseEvent,
   &_swigt__p_wxString,
 };
 
-static swig_cast_info _swigc__p_WXTYPE[] = {  {&_swigt__p_WXTYPE, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxCloseEvent[] = {  {&_swigt__p_wxCloseEvent, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxString[] = {  {&_swigt__p_wxString, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_WXTYPE,
   _swigc__p_int,
+  _swigc__p_short,
   _swigc__p_unsigned_long,
   _swigc__p_wxCloseEvent,
   _swigc__p_wxString,

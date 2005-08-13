@@ -9,3 +9,4 @@ typedef int wxEventType;
 //typedef int wxEdge;
 //typedef int wxRelationship;
 enum wxBitmapType;
+typedef short int WXTYPE;

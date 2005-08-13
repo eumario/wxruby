@@ -19,6 +19,10 @@ WHATS NEW:
 - rakemswin.rb patch from Sean Long to properly pass __MSWIN__
   flag into swig
 - samples/dialogs/dialogs.rb improvement from Roy Sutton
+- Added WXTYPE typedef so methods like Event.get_event_type 
+  would return simple numbers instead of weird objects,
+  thanks to Roy Sutton
+
 
   
 
