@@ -320,11 +320,11 @@ class MyFrame < Frame
 
         choices = ["One", "Two", "Three", "Four", "Five"]
 
-        dialog = SingleChoiceDialog.new(self,
-                                    "This is a small sample\n" +
-                                    "A single-choice convenience dialog",
-                                    "Please select a value",
-                                    choices)
+       dialog = SingleChoiceDialog.new(self,
+                                   "This is a small sample\n" +
+                                   "A single-choice convenience dialog",
+                                   "Please select a value",
+                                   choices, nil, OK | CANCEL)
 
         dialog.set_selection(2)
 
