@@ -18,6 +18,8 @@ WHATS NEW:
 - Icon patch from Sean Long for MS Win compatibility
 - rakemswin.rb patch from Sean Long to properly pass __MSWIN__
   flag into swig
+- samples/dialogs/dialogs.rb improvement from Roy Sutton
+
   
 
 ====0.0.23 tag included all of this:===
