@@ -867,9 +867,9 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_WXTYPE swig_types[0]
-#define SWIGTYPE_p_int swig_types[1]
-#define SWIGTYPE_p_long swig_types[2]
+#define SWIGTYPE_p_int swig_types[0]
+#define SWIGTYPE_p_long swig_types[1]
+#define SWIGTYPE_p_short swig_types[2]
 #define SWIGTYPE_p_unsigned_long swig_types[3]
 #define SWIGTYPE_p_wxKeyEvent swig_types[4]
 #define SWIGTYPE_p_wxPoint swig_types[5]
@@ -1148,11 +1148,7 @@ _wrap_new_wxKeyEvent(int argc, VALUE *argv, VALUE self) {
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    {
-        WXTYPE * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_WXTYPE, 1);
-        if (ptr) arg1 = *ptr;
-    }
+    arg1 = NUM2SHRT(argv[0]);
     result = (wxKeyEvent *)new wxKeyEvent(arg1);
     DATA_PTR(self) = result;
     return self;
@@ -1435,9 +1431,9 @@ free_wxKeyEvent(wxKeyEvent *arg1) {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_WXTYPE = {"_p_WXTYPE", "WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0};
 static swig_type_info _swigt__p_long = {"_p_long", "long *", 0, 0, 0};
+static swig_type_info _swigt__p_short = {"_p_short", "short *|WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 static swig_type_info _swigt__p_wxKeyEvent = {"_p_wxKeyEvent", "wxKeyEvent *", 0, 0, 0};
 static swig_type_info _swigt__p_wxPoint = {"_p_wxPoint", "wxPoint *", 0, 0, 0};
@@ -1445,9 +1441,9 @@ static swig_type_info _swigt__p_wxString = {"_p_wxString", "wxString *|wxArtClie
 static swig_type_info _swigt__p_wxUint32 = {"_p_wxUint32", "wxUint32 *", 0, 0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_WXTYPE,
   &_swigt__p_int,
   &_swigt__p_long,
+  &_swigt__p_short,
   &_swigt__p_unsigned_long,
   &_swigt__p_wxKeyEvent,
   &_swigt__p_wxPoint,
@@ -1455,9 +1451,9 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_wxUint32,
 };
 
-static swig_cast_info _swigc__p_WXTYPE[] = {  {&_swigt__p_WXTYPE, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_long[] = {  {&_swigt__p_long, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxKeyEvent[] = {  {&_swigt__p_wxKeyEvent, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxPoint[] = {  {&_swigt__p_wxPoint, 0, 0, 0},{0, 0, 0, 0}};
@@ -1465,9 +1461,9 @@ static swig_cast_info _swigc__p_wxString[] = {  {&_swigt__p_wxString, 0, 0, 0},{
 static swig_cast_info _swigc__p_wxUint32[] = {  {&_swigt__p_wxUint32, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_WXTYPE,
   _swigc__p_int,
   _swigc__p_long,
+  _swigc__p_short,
   _swigc__p_unsigned_long,
   _swigc__p_wxKeyEvent,
   _swigc__p_wxPoint,

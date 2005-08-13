@@ -868,23 +868,24 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_int swig_types[0]
-#define SWIGTYPE_p_unsigned_long swig_types[1]
-#define SWIGTYPE_p_wxBitmap swig_types[2]
-#define SWIGTYPE_p_wxChar swig_types[3]
-#define SWIGTYPE_p_wxDialog swig_types[4]
-#define SWIGTYPE_p_wxFrame swig_types[5]
-#define SWIGTYPE_p_wxIcon swig_types[6]
-#define SWIGTYPE_p_wxMenu swig_types[7]
-#define SWIGTYPE_p_wxMenuBar swig_types[8]
-#define SWIGTYPE_p_wxObject swig_types[9]
-#define SWIGTYPE_p_wxPanel swig_types[10]
-#define SWIGTYPE_p_wxString swig_types[11]
-#define SWIGTYPE_p_wxWindow swig_types[12]
-#define SWIGTYPE_p_wxXmlResource swig_types[13]
-#define SWIGTYPE_p_wxXmlResourceHandler swig_types[14]
-#define SWIGTYPE_p_wxXmlSubclassFactory swig_types[15]
-static swig_type_info *swig_types[16];
-static swig_module_info swig_module = {swig_types, 16, 0, 0, 0, 0};
+#define SWIGTYPE_p_short swig_types[1]
+#define SWIGTYPE_p_unsigned_long swig_types[2]
+#define SWIGTYPE_p_wxBitmap swig_types[3]
+#define SWIGTYPE_p_wxChar swig_types[4]
+#define SWIGTYPE_p_wxDialog swig_types[5]
+#define SWIGTYPE_p_wxFrame swig_types[6]
+#define SWIGTYPE_p_wxIcon swig_types[7]
+#define SWIGTYPE_p_wxMenu swig_types[8]
+#define SWIGTYPE_p_wxMenuBar swig_types[9]
+#define SWIGTYPE_p_wxObject swig_types[10]
+#define SWIGTYPE_p_wxPanel swig_types[11]
+#define SWIGTYPE_p_wxString swig_types[12]
+#define SWIGTYPE_p_wxWindow swig_types[13]
+#define SWIGTYPE_p_wxXmlResource swig_types[14]
+#define SWIGTYPE_p_wxXmlResourceHandler swig_types[15]
+#define SWIGTYPE_p_wxXmlSubclassFactory swig_types[16]
+static swig_type_info *swig_types[17];
+static swig_module_info swig_module = {swig_types, 17, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2078,6 +2079,7 @@ static void *_p_wxXmlResourceTo_p_wxObject(void *x) {
     return (void *)((wxObject *)  ((wxXmlResource *) x));
 }
 static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0};
+static swig_type_info _swigt__p_short = {"_p_short", "short *|WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 static swig_type_info _swigt__p_wxBitmap = {"_p_wxBitmap", "wxBitmap *", 0, 0, 0};
 static swig_type_info _swigt__p_wxChar = {"_p_wxChar", "wxChar *", 0, 0, 0};
@@ -2096,6 +2098,7 @@ static swig_type_info _swigt__p_wxXmlSubclassFactory = {"_p_wxXmlSubclassFactory
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_int,
+  &_swigt__p_short,
   &_swigt__p_unsigned_long,
   &_swigt__p_wxBitmap,
   &_swigt__p_wxChar,
@@ -2114,6 +2117,7 @@ static swig_type_info *swig_type_initial[] = {
 };
 
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxBitmap[] = {  {&_swigt__p_wxBitmap, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxChar[] = {  {&_swigt__p_wxChar, 0, 0, 0},{0, 0, 0, 0}};
@@ -2132,6 +2136,7 @@ static swig_cast_info _swigc__p_wxXmlSubclassFactory[] = {  {&_swigt__p_wxXmlSub
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_int,
+  _swigc__p_short,
   _swigc__p_unsigned_long,
   _swigc__p_wxBitmap,
   _swigc__p_wxChar,

@@ -867,8 +867,8 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_WXTYPE swig_types[0]
-#define SWIGTYPE_p_int swig_types[1]
+#define SWIGTYPE_p_int swig_types[0]
+#define SWIGTYPE_p_short swig_types[1]
 #define SWIGTYPE_p_unsigned_long swig_types[2]
 #define SWIGTYPE_p_wxFocusEvent swig_types[3]
 #define SWIGTYPE_p_wxString swig_types[4]
@@ -1126,11 +1126,7 @@ _wrap_new_wxFocusEvent__SWIG_0(int argc, VALUE *argv, VALUE self) {
     
     if ((argc < 2) || (argc > 2))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc);
-    {
-        WXTYPE * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_WXTYPE, 1);
-        if (ptr) arg1 = *ptr;
-    }
+    arg1 = NUM2SHRT(argv[0]);
     arg2 = NUM2INT(argv[1]);
     result = (wxFocusEvent *)new wxFocusEvent(arg1,arg2);
     DATA_PTR(self) = result;
@@ -1145,11 +1141,7 @@ _wrap_new_wxFocusEvent__SWIG_1(int argc, VALUE *argv, VALUE self) {
     
     if ((argc < 1) || (argc > 1))
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
-    {
-        WXTYPE * ptr;
-        SWIG_ConvertPtr(argv[0], (void **) &ptr, SWIGTYPE_p_WXTYPE, 1);
-        if (ptr) arg1 = *ptr;
-    }
+    arg1 = NUM2SHRT(argv[0]);
     result = (wxFocusEvent *)new wxFocusEvent(arg1);
     DATA_PTR(self) = result;
     return self;
@@ -1200,8 +1192,7 @@ static VALUE _wrap_new_wxFocusEvent(int nargs, VALUE *args, VALUE self) {
     if (argc == 1) {
         int _v;
         {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_WXTYPE, 0) != -1)) ? 1 : 0;
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
         }
         if (_v) {
             return _wrap_new_wxFocusEvent__SWIG_1(nargs, args, self);
@@ -1210,8 +1201,7 @@ static VALUE _wrap_new_wxFocusEvent(int nargs, VALUE *args, VALUE self) {
     if (argc == 2) {
         int _v;
         {
-            void *ptr;
-            _v = (NIL_P(argv[0]) || (TYPE(argv[0]) == T_DATA && SWIG_ConvertPtr(argv[0], &ptr, SWIGTYPE_p_WXTYPE, 0) != -1)) ? 1 : 0;
+            _v = ((TYPE(argv[0]) == T_FIXNUM) || (TYPE(argv[0]) == T_BIGNUM)) ? 1 : 0;
         }
         if (_v) {
             {
@@ -1235,29 +1225,29 @@ free_wxFocusEvent(wxFocusEvent *arg1) {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_WXTYPE = {"_p_WXTYPE", "WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0};
+static swig_type_info _swigt__p_short = {"_p_short", "short *|WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 static swig_type_info _swigt__p_wxFocusEvent = {"_p_wxFocusEvent", "wxFocusEvent *", 0, 0, 0};
 static swig_type_info _swigt__p_wxString = {"_p_wxString", "wxString *|wxArtClient *", 0, 0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_WXTYPE,
   &_swigt__p_int,
+  &_swigt__p_short,
   &_swigt__p_unsigned_long,
   &_swigt__p_wxFocusEvent,
   &_swigt__p_wxString,
 };
 
-static swig_cast_info _swigc__p_WXTYPE[] = {  {&_swigt__p_WXTYPE, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxFocusEvent[] = {  {&_swigt__p_wxFocusEvent, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxString[] = {  {&_swigt__p_wxString, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_WXTYPE,
   _swigc__p_int,
+  _swigc__p_short,
   _swigc__p_unsigned_long,
   _swigc__p_wxFocusEvent,
   _swigc__p_wxString,

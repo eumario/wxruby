@@ -868,12 +868,13 @@ static void SWIG_Ruby_SetModule(swig_module_info *pointer) {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_int swig_types[0]
-#define SWIGTYPE_p_unsigned_long swig_types[1]
-#define SWIGTYPE_p_wxIndividualLayoutConstraint swig_types[2]
-#define SWIGTYPE_p_wxLayoutConstraints swig_types[3]
-#define SWIGTYPE_p_wxString swig_types[4]
-static swig_type_info *swig_types[5];
-static swig_module_info swig_module = {swig_types, 5, 0, 0, 0, 0};
+#define SWIGTYPE_p_short swig_types[1]
+#define SWIGTYPE_p_unsigned_long swig_types[2]
+#define SWIGTYPE_p_wxIndividualLayoutConstraint swig_types[3]
+#define SWIGTYPE_p_wxLayoutConstraints swig_types[4]
+#define SWIGTYPE_p_wxString swig_types[5]
+static swig_type_info *swig_types[6];
+static swig_module_info swig_module = {swig_types, 6, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1389,6 +1390,7 @@ free_wxLayoutConstraints(wxLayoutConstraints *arg1) {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_int = {"_p_int", "int *|wxEventType *", 0, 0, 0};
+static swig_type_info _swigt__p_short = {"_p_short", "short *|WXTYPE *", 0, 0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *|VALUE *", 0, 0, 0};
 static swig_type_info _swigt__p_wxIndividualLayoutConstraint = {"_p_wxIndividualLayoutConstraint", "wxIndividualLayoutConstraint *", 0, 0, 0};
 static swig_type_info _swigt__p_wxLayoutConstraints = {"_p_wxLayoutConstraints", "wxLayoutConstraints *", 0, 0, 0};
@@ -1396,6 +1398,7 @@ static swig_type_info _swigt__p_wxString = {"_p_wxString", "wxString *|wxArtClie
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_int,
+  &_swigt__p_short,
   &_swigt__p_unsigned_long,
   &_swigt__p_wxIndividualLayoutConstraint,
   &_swigt__p_wxLayoutConstraints,
@@ -1403,6 +1406,7 @@ static swig_type_info *swig_type_initial[] = {
 };
 
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_short[] = {  {&_swigt__p_short, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxIndividualLayoutConstraint[] = {  {&_swigt__p_wxIndividualLayoutConstraint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_wxLayoutConstraints[] = {  {&_swigt__p_wxLayoutConstraints, 0, 0, 0},{0, 0, 0, 0}};
@@ -1410,6 +1414,7 @@ static swig_cast_info _swigc__p_wxString[] = {  {&_swigt__p_wxString, 0, 0, 0},{
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_int,
+  _swigc__p_short,
   _swigc__p_unsigned_long,
   _swigc__p_wxIndividualLayoutConstraint,
   _swigc__p_wxLayoutConstraints,
