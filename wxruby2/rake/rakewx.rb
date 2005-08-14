@@ -140,6 +140,7 @@ def add_initializers(cpp_file)
 end
 
 def do_swig(swig_file, cpp_file, options)
+	force_mkdir($src_dir)
     sh "#{$swig_cmd} #{options} #{$wx_cppflags} " + 
 		"-w401 -w801 -w515 -c++ -ruby " + 
         "-o #{cpp_file} #{swig_file}"

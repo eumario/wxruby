@@ -1,5 +1,5 @@
 README for wxruby2
-Version 0.0.24-pre
+Version 0.0.24
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -23,6 +23,7 @@ WHATS NEW:
 - Added WXTYPE typedef so methods like Event.get_event_type 
   would return simple numbers instead of weird objects,
   thanks to Roy Sutton
+- Force creation of src/ file if it doesn't exist (Roy Sutton)
 
 
   
