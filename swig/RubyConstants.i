@@ -1422,6 +1422,18 @@ enum wxStockCursor
 %constant const int LAYOUT_CENTRE_X =wxCentreX; 
 %constant const int LAYOUT_CENTRE_Y =wxCentreY;
 
+// button constants
+#define wxBU_LEFT            0x0040
+#define wxBU_TOP             0x0080
+#define wxBU_RIGHT           0x0100
+#define wxBU_BOTTOM          0x0200
+#define wxBU_ALIGN_MASK      ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM )
+#define wxBU_NOAUTODRAW      0x0000
+#define wxBU_AUTODRAW        0x0004
+#define wxBU_EXACTFIT        0x0001
+
+
+
 %constant const int NOT_FOUND = -1;
 
 %constant const char * wxEmptyString = "";
