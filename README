@@ -6,7 +6,7 @@ that allows Ruby programs to use the wxWidgets GUI toolkit.
 It is released under a permissive MIT-style license
 (see the LICENSE file for details).
 
-There are no binaries. You must build it from source.
+There are no binaries yet. You must build it from source.
 It now supports about 120 classes, out of the 300+ 
 that are in wxWidgets.
 
@@ -15,6 +15,7 @@ For more details, see the project home page:
 
 
 WHATS NEW:
+- Restored SWIG 1.3.24 compatibility (not yet tested extensively)
 - Icon patch from Sean Long for MS Win compatibility
 - rakemswin.rb patch from Sean Long to properly pass __MSWIN__
   flag into swig
@@ -72,11 +73,9 @@ WHATS NEW:
 REQUIREMENTS:
 
 - Ruby 1.8 (Ruby 1.6 is not officially supported, but might still work)
-- wxWidgets 2.6+ SDK
 - rake (http://rake.rubyforge.org/)
-- OPTIONAL: SWIG 1.3.25 or later
-  Swig'd .cpp and .h files are included in this package, 
-  so you don't actually need SWIG. 
+- SWIG 1.3.24 or later
+- wxWidgets 2.6+ SDK
 
 
 OBTAINING THE SOURCE:
@@ -115,16 +114,13 @@ only need to set one or more of the following variables:
 
 INSTALLING THE LIBRARY:
 
-As a quick test, you can change to the lib/ subdirectory
-to run a wxRuby app, like:
-  cd lib
-  ruby ../samples/minimal/minimal.rb
+You can install the library using:
+  rake install
   
-
-Normally, you would install the library somewhere in your 
-path. There is a "rake install" taskthat copies both wx.rb and 
-the binary library (either wxruby2.so or wxruby2.dll depending 
-on your platform) to the appropriate ruby extensions directory.
+Note that on some systems you may need to be "root" to do this.
+To manually install, copy all the files in the lib/ subdirectory 
+to somewhere on your ruby library path, such as a ruby extensions 
+directory.
 
 
 TESTING:
