@@ -60,7 +60,7 @@ puts("class #{wx_name}")
 			end
 			
 			# at the top of our Init_ function,
-			if(line.index("SWIGEXPORT void Init_"))
+			if(line.index("Init_#{wx_name}("))
 				# make sure we only initialize ourselves once
 				line += "static bool initialized;\n"
 				line += "if(initialized) return;\n"
@@ -113,22 +113,22 @@ puts(line)
 	end
 	
 	if(!found_swig_class)
-		puts("ERROR! Didn't find swig class")
+		puts("ERROR! #{__FILE__} Didn't find swig class")
 		exit(1)
 	end
 	
 	if(!found_define_module)
-		puts("ERROR! Didn't find define module")
+		puts("ERROR! #{__FILE__} Didn't find define module")
 		exit(1)
 	end
 	
 	if(!found_init)
-		puts("ERROR! Didn't find init")
+		puts("ERROR! #{__FILE__} Didn't find init")
 		exit(1)
 	end
 	
 	if(!found_define_class)
-		puts("ERROR! Didn't find define class")
+		puts("ERROR! #{__FILE__} Didn't find define class")
 		exit(1)
 	end
 	

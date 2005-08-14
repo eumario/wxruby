@@ -17,14 +17,17 @@ $swig_cmd = "swig"
 $swig_options = " -noextern "
 
 def have_good_swig
-   begin
-       version = `#{$swig_cmd} -version`.strip.split("\n")[0]
-   rescue SystemCallError
-   end
-   if(!version)
-       return false
-   end
-   return (version >= "SWIG Version 1.3.25" && version < "SWIG Version 2")
+	begin
+		version = `#{$swig_cmd} -version`.strip.split("\n")[0]
+	rescue SystemCallError
+		puts('could not execute swig')
+		return false
+	end
+	if(!version || version.empty?)
+		puts('Doing slower check for SWIG 1.3.24')
+		version = `ruby swig/swigver.rb`
+	end
+	return (version >= "SWIG Version 1.3.24" && version < "SWIG Version 2")
 end
 
 def wx_config(opt)
