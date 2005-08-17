@@ -20,6 +20,8 @@ WHATS NEW:
 - Added Button constants (BU_XXX)
 - Added TextAttr class (Alex Fenton)
 - Fixed some bugs in caret sample (Roy Sutton)
+- Added Listbook support and a sample (Sean Long)
+  (Note: On Linux, the sample just shows a blank window)
 
 
 ====0.0.24 tag included all of this:===
