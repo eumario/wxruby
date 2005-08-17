@@ -6,6 +6,7 @@
 %{
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
+#include <wx/listbook.h>
 #include <wx/notebook.h>
 #include <wx/grid.h>
 #include <wx/spinbutt.h>
@@ -37,6 +38,7 @@ extern swig_class cWxMouseEvent;
 extern swig_class cWxFocusEvent;
 extern swig_class cWxSpinEvent;
 extern swig_class cWxNotebookEvent;
+extern swig_class cWxListbookEvent;
 extern swig_class cWxGridEvent;
 extern swig_class cWxGridRangeSelectEvent;
 extern swig_class cWxGridSizeEvent;
@@ -170,6 +172,13 @@ static const wxEventType *notebookEvents[] =
      (const wxEventType *)0
 };
 
+static const wxEventType *listbookEvents[] = 
+{
+     &wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED,
+     &wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING,
+     (const wxEventType *)0
+};
+
 
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
@@ -187,6 +196,8 @@ public:
         int type = event.GetEventType();
         if(event.IsKindOf(CLASSINFO(wxCalendarEvent)))
             cEvent = cWxCalendarEvent.klass;
+        else if (event.IsKindOf(CLASSINFO(wxListbookEvent)))
+            cEvent = cWxListbookEvent.klass;  
         else if (event.IsKindOf(CLASSINFO(wxNotebookEvent)))
             cEvent = cWxNotebookEvent.klass;
        else if(event.IsKindOf(CLASSINFO(wxUpdateUIEvent)))
@@ -595,6 +606,16 @@ static VALUE evt_notebook_page_changed(int argc, VALUE *argv, VALUE self)
     return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED);
 }
 
+static VALUE evt_listbook_page_changing(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING);
+}
+
+static VALUE evt_listbook_page_changed(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED);
+}
+
 static VALUE evt_listbox(int argc, VALUE *argv, VALUE self) 
 {
     return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_LISTBOX_SELECTED);
@@ -702,6 +723,8 @@ static VALUE evt_radiobutton(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_spin_down", VALUEFUNC(evt_spin_down), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changing", VALUEFUNC(evt_notebook_page_changing), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changed", VALUEFUNC(evt_notebook_page_changed), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_listbook_page_changing", VALUEFUNC(evt_listbook_page_changing), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_listbook_page_changed", VALUEFUNC(evt_listbook_page_changed), -1);  
     rb_define_method(cWxEvtHandler.klass, "evt_listbox", VALUEFUNC(evt_listbox), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_listbox_dclick", VALUEFUNC(evt_listbox_dclick), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_checkbox", VALUEFUNC(evt_checkbox), -1);        
