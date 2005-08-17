@@ -18,6 +18,8 @@ WHATS NEW:
 
 - Added src/.cvsignore
 - Added Button constants (BU_XXX)
+- Added TextAttr class (Alex Fenton)
+- Fixed some bugs in caret sample (Roy Sutton)
 
 
 ====0.0.24 tag included all of this:===

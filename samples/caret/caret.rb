@@ -125,11 +125,17 @@ class MyCanvas < ScrolledWindow
     def onSize(event)
         @m_xChars = (event.get_size().x - 2*@m_xMargin) / @m_widthChar
         @m_yChars = (event.get_size().y - 2*@m_yMargin) / @m_heightChar
-        if @m_xChars == 0
+        if @m_xChars <= 0
             @m_xChars = 1
         end
-        if @m_yChars == 0
+        if @m_yChars <= 0
             @m_yChars = 1
+        end
+        if @m_xCaret >= @m_xChars
+            @m_xCaret = @m_xChars-1
+        end
+        if @m_yCaret >= @m_yChars
+            @m_yCaret = @m_yChars-1
         end
 
         @m_text = " " * @m_xChars * @m_yChars
@@ -138,6 +144,7 @@ class MyCanvas < ScrolledWindow
         if frame && frame.get_status_bar()
             msg = sprintf("Panel size is (%d, %d)", @m_xChars, @m_yChars)
             frame.set_status_text(msg, 1)
+            frame.refresh
         end
         event.skip()
     end
