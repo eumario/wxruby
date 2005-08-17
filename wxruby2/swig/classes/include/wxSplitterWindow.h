@@ -41,7 +41,7 @@ details.
 	 * \param const wxString&  
 	*/
 
-  bool Create(wxWindow*  parent , wxWindowID  id , int  x , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxSP_3D, const wxString& name = wxT("splitterWindow")) ;
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint&  point = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxSP_3D, const wxString& name = wxT("splitterWindow")) ;
 	/**
 	 * \brief Returns the current minimum pane size (defaults to zero). 
 	*/
