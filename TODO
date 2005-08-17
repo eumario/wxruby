@@ -1,15 +1,10 @@
 High priority TODO items:
 -------------------------
 
-- (Probably) Remove src/ from CVS and require SWIG to build from source
+- Fix crashes when garbage collection happens
 
-- (Probably on 2005-08-10) Delete src/extconf.rb (after "rake install" works)
+- Add classes that were supported in wxruby 0.6
 
-- (Probably on 2005-08-10) Delete src/version_script
-
-- Get it to compile and run minimal on all three major platforms
-  (Linux, MS Win, Mac OS X)
-  
 - Insert placeholder .i files for any wx classes that we specifically 
 do not want to support, such as wxDateTime and the socket classes.
 
