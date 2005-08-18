@@ -14,7 +14,14 @@ public:
 
    wxLayoutConstraints() ;
   // the following were missing from the xml
-  wxIndividualLayoutConstraint bottom,height,left,right,top,width;
+  wxIndividualLayoutConstraint bottom;
+  wxIndividualLayoutConstraint height;
+  wxIndividualLayoutConstraint left;
+  wxIndividualLayoutConstraint right;
+  wxIndividualLayoutConstraint top;
+  wxIndividualLayoutConstraint width;
+  wxIndividualLayoutConstraint centreX;
+  wxIndividualLayoutConstraint centreY;
 };
 
 

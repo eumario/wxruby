@@ -22,6 +22,7 @@ WHATS NEW:
 - Fixed some bugs in caret sample (Roy Sutton)
 - Added Listbook support and a sample (Sean Long)
   (Note: On Linux, the sample just shows a blank window)
+- Added missing LayoutConstraints#centre_x and centre_y (Roy Sutton)
 
 
 ====0.0.24 tag included all of this:===
