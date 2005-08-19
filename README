@@ -25,6 +25,7 @@ WHATS NEW:
 - Added missing LayoutConstraints#centre_x and centre_y (Roy Sutton)
 - Added SplitterWindow (thanks to Roy Sutton)
 - Added TreeCtrl (compiles and can be new'd, but might segfault)
+- Minor fix to calendar sample (Roy Sutton)
 
 
 ====0.0.24 tag included all of this:===
