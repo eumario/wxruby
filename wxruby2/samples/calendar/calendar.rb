@@ -214,8 +214,8 @@ class MyFrame < Frame
     def toggle_cal_style(on,flag)
         style = @m_calendar.get_window_style_flag
         date = @m_calendar.date
-        @sizer.remove(@m_calendar)
-        @sizer.remove(@m_date)
+        @sizer.detach(@m_calendar)
+        @sizer.detach(@m_date)
         @m_calendar.destroy
         if  on
             style |= flag
