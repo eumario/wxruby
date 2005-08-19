@@ -23,6 +23,8 @@ WHATS NEW:
 - Added Listbook support and a sample (Sean Long)
   (Note: On Linux, the sample just shows a blank window)
 - Added missing LayoutConstraints#centre_x and centre_y (Roy Sutton)
+- Added SplitterWindow (thanks to Roy Sutton)
+- Added TreeCtrl (compiles and can be new'd, but might segfault)
 
 
 ====0.0.24 tag included all of this:===
@@ -157,6 +159,7 @@ Several samples are available:
 
 
 NOTES:
+- Since initialize is reserved in ruby, use SplitterWindow#init instead.
 - Uninitialized client data will have the value (false), 
   not (nil). This is a change from wxRuby 0.3 and earlier.
 - wxDateTime has not been wrapped. Use Ruby's DateTime 

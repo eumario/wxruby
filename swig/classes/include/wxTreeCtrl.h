@@ -168,11 +168,13 @@ This function is currently supported under Windows only.
 	 * \param bool   
 	*/
 
+#if __MSWIN__
   void EndEditLabel(bool  cancelEdit ) ;
 	/**
 	 * \brief Scrolls and/or expands items to ensure that the given item is visible. 
 	 * \param const wxTreeItemId&  
 	*/
+#endif
 
   void EnsureVisible(const wxTreeItemId&  item ) ;
 	/**
