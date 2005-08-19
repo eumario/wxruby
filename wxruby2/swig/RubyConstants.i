@@ -1432,6 +1432,28 @@ enum wxStockCursor
 #define wxBU_AUTODRAW        0x0004
 #define wxBU_EXACTFIT        0x0001
 
+// tree constants
+#define wxTR_NO_BUTTONS              0x0000     // for convenience
+#define wxTR_HAS_BUTTONS             0x0001     // draw collapsed/expanded btns
+#define wxTR_NO_LINES                0x0004     // don't draw lines at all
+#define wxTR_LINES_AT_ROOT           0x0008     // connect top-level nodes
+#define wxTR_TWIST_BUTTONS           0x0010     // still used by wxTreeListCtrl
+#define wxTR_SINGLE                  0x0000     // for convenience
+#define wxTR_MULTIPLE                0x0020     // can select multiple items
+#define wxTR_EXTENDED                0x0040     // TODO: allow extended selection
+#define wxTR_HAS_VARIABLE_ROW_HEIGHT 0x0080     // what it says
+#define wxTR_EDIT_LABELS             0x0200     // can edit item labels
+#define wxTR_ROW_LINES               0x0400     // put border around items
+#define wxTR_HIDE_ROOT               0x0800     // don't display root node
+#define wxTR_FULL_ROW_HIGHLIGHT      0x2000     // highlight full horz space
+#ifdef __WXGTK20__
+#define wxTR_DEFAULT_STYLE           (wxTR_HAS_BUTTONS | wxTR_NO_LINES)
+#else
+#define wxTR_DEFAULT_STYLE           (wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT)
+#endif
+// deprecated: #define wxTR_MAC_BUTTONS             0
+// deprecated: #define wxTR_AQUA_BUTTONS            0
+
 
 
 %constant const int NOT_FOUND = -1;
