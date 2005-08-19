@@ -10,3 +10,5 @@ typedef int wxEventType;
 //typedef int wxRelationship;
 enum wxBitmapType;
 typedef short int WXTYPE;
+enum wxCalendarHitTestResult;
+enum wxCalendarDateBorder;
