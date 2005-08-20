@@ -20,7 +20,6 @@
 %ignore wxWindow::GetTextExtent;
 %ignore wxWindow::GetFont;
 %ignore wxWindow::GetChildren;
-%ignore wxWindow::GetValidator;
 %ignore wxWindow::PopEventHandler;
 # %ignore wxWindow::SetCaret;
 

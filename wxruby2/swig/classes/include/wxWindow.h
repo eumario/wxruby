@@ -584,7 +584,7 @@ only be called within an   handler.
 	 * \brief Returns a pointer to the current validator for the window, or NULL if there is none. 
 	*/
 
-  wxValidator* GetValidator() const;
+  wxValidator* GetValidator();
 	/**
 	 * \brief  
 	 * \param int*   

@@ -30,6 +30,7 @@ WHATS NEW:
   "highlight special dates" menu item now works (Roy Sutton)
 - Fix typo in listbook sample data (Roy Sutton)
 - Fixed TreeCtrl to compile under MS Windows (Roy Sutton)
+- Enabled Window#get_validator
 
 
 ====0.0.24 tag included all of this:===
