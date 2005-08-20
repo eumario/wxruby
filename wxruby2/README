@@ -28,6 +28,7 @@ WHATS NEW:
 - Minor fix to calendar sample (Roy Sutton)
 - Fix how Calendar enums were being defined, so the calendar sample
   "highlight special dates" menu item now works (Roy Sutton)
+- Fix typo in listbook sample data (Roy Sutton)
 
 
 ====0.0.24 tag included all of this:===
