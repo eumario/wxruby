@@ -31,4 +31,9 @@
   rb_define_method(mWxTextCtrl, "<<", VALUEFUNC(op_append), 1);
 %}
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxTextCtrl.h"

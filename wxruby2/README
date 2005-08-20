@@ -31,7 +31,11 @@ WHATS NEW:
 - Fix typo in listbook sample data (Roy Sutton)
 - Fixed TreeCtrl to compile under MS Windows (Roy Sutton)
 - Enabled Window#get_validator
-
+- Adjusted TextCtrl.i and Control.i to %import their parent 
+  classes so all the inherited virtual methods are wrapped by 
+  the Director. This needs to be done for *all* classes.
+  
+  
 
 ====0.0.24 tag included all of this:===
 - Restored SWIG 1.3.24 compatibility (not yet tested extensively)
