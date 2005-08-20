@@ -61,6 +61,8 @@ both selected and unselected items.
 	*/
 
   wxTreeItemId AppendItem(const wxTreeItemId&  parent , const wxString&  text , int image = -1, int selImage = -1, wxTreeItemData* data = NULL) ;
+
+#ifndef __WXMSW__
 	/**
 	 * \brief Sets the buttons image list. The button images assigned with this method will
 be automatically deleted by wxTreeCtrl as appropriate
@@ -77,6 +79,8 @@ See also  .
 	*/
 
   void AssignButtonsImageList(wxImageList*  imageList ) ;
+#endif
+
 	/**
 	 * \brief Sets the normal image list. Image list assigned with this method will
 be automatically deleted by wxTreeCtrl as appropriate
@@ -204,6 +208,8 @@ item is currently invisible.
 	*/
 
   bool GetBoundingRect(const wxTreeItemId&  item , wxRect&  rect , bool  textOnly = false) const;
+
+#ifndef __WXMSW__
 	/**
 	 * \brief Returns the buttons image list (from which application-defined button images are taken).
 
@@ -217,6 +223,7 @@ of descendants, otherwise only one level of children is counted.
 	 * \param const wxTreeItemId&  
 	 * \param bool  
 	*/
+#endif
 
   size_t GetChildrenCount(const wxTreeItemId&  item , bool recursively = true) const;
 	/**
@@ -513,6 +520,8 @@ both selected and unselected items.
 	*/
 
   bool SelectItem(const wxTreeItemId&  item ) ;
+
+#ifndef __WXMSW__
 	/**
 	 * \brief Sets the buttons image list (from which application-defined button images are taken).
 The button images assigned with this method will
@@ -529,6 +538,8 @@ See also  .
 	*/
 
   void SetButtonsImageList(wxImageList*  imageList ) ;
+#endif
+
 	/**
 	 * \brief Sets the indentation for the tree control. 
 	 * \param int   
