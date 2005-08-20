@@ -5,16 +5,6 @@
 
 %module(directors="1") wxWindow
 
-# Not present in wxGTK
-%feature("nodirector") wxWindow::SetScrollPage;
-%ignore wxWindow::SetScrollPage;
-%feature("nodirector") wxWindow::SetScrollRange;
-%ignore wxWindow::SetScrollRange;
-
-# Obsolete
-%feature("nodirector") wxWindow::SetPalette;
-%ignore wxWindow::SetPalette;
-
 %ignore wxWindow::Clear;
 %ignore wxWindow::GetAccessible;
 %ignore wxWindow::GetTextExtent;

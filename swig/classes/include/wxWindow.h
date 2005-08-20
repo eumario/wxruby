@@ -971,6 +971,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param wxPalette*   
 	*/
 
+#if 0 // deprecated
   virtual void SetPalette(const wxPalette*  palette );
 	/**
 	 * \brief  
@@ -980,6 +981,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param int   
 	 * \param bool   
 	*/
+#endif
 
   virtual void SetScrollbar(int  orientation , int  position , int  thumbSize , int  range , bool  refresh = true) ;
 	/**
@@ -989,6 +991,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param bool   
 	*/
 
+#if !__WXGTK__
   virtual void SetScrollPage(int  orientation , int  pageSize , bool  refresh = true) ;
 	/**
 	 * \brief  
@@ -996,6 +999,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param int   
 	 * \param bool   
 	*/
+#endif
 
   virtual void SetScrollPos(int  orientation , int  pos , bool  refresh = true) ;
 	/**
@@ -1005,6 +1009,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param bool   
 	*/
 
+#if !__WXGTK__
   virtual void SetScrollRange(int  orientation , int  range , bool  refresh = true) ;
 	/**
 	 * \brief  
@@ -1014,6 +1019,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param int  
 	 * \param int  
 	*/
+#endif
 
   virtual void SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
 	/**
