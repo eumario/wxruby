@@ -5,7 +5,7 @@ require 'wx'
 #
 class SimpleFrame < Wx::Frame 
 
-	FILE_DIALOG, FILE_ABOUT, FILE_QUIT = [0,1,2]
+	FILE_DIALOG, FILE_ABOUT, FILE_QUIT = [0,Wx::ID_ABOUT,2]
 	
 	def initialize(parent)
 		super(nil,-1,"Sample",Wx::Point.new(50,50),Wx::Size.new(300,300))
@@ -15,7 +15,7 @@ class SimpleFrame < Wx::Frame
 		# Create a new menu
 		bar = Wx::MenuBar.new
 		menu = Wx::Menu.new
-    menu.append(FILE_ABOUT,"About")
+    menu.append(FILE_ABOUT,"About...")
     menu.append_separator
 		menu.append(FILE_QUIT,"Quit")
 		bar.append(menu,"File")
