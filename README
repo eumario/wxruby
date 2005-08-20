@@ -34,7 +34,7 @@ WHATS NEW:
 - Adjusted TextCtrl.i and Control.i to %import their parent 
   classes so all the inherited virtual methods are wrapped by 
   the Director. This needs to be done for *all* classes.
-  
+- Added Validator class [no working sample yet] (Roy Sutton)
   
 
 ====0.0.24 tag included all of this:===
