@@ -7,6 +7,9 @@
 
 %import "include/wxObject.h"
 %import "include/wxGDIObject.h"
-%import "include/wxBitmap.h"
+// the following might eventually be helpful for MSWin?
+// %import "include/wxGDIImage.h"
+// the following works on GTK but not MS Win
+// %import "include/wxBitmap.h"
 
 %include "include/wxIcon.h"
