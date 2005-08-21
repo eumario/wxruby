@@ -1,0 +1,78 @@
+
+====0.0.25 tag included all of this:===
+- Added src/.cvsignore
+- Added Button constants (BU_XXX)
+- Added TextAttr class (Alex Fenton)
+- Fixed some bugs in caret sample (Roy Sutton)
+- Added Listbook support and a sample (Sean Long)
+  (Note: On Linux, the sample just shows a blank window)
+- Added missing LayoutConstraints#centre_x and centre_y (Roy Sutton)
+- Added SplitterWindow (thanks to Roy Sutton)
+- Added TreeCtrl (compiles and can be new'd, but might segfault)
+- Minor fix to calendar sample (Roy Sutton)
+- Fix how Calendar enums were being defined, so the calendar sample
+  "highlight special dates" menu item now works (Roy Sutton)
+- Fix typo in listbook sample data (Roy Sutton)
+- Fixed TreeCtrl to compile under MS Windows (Roy Sutton)
+- Enabled Window#get_validator
+- Adjusted TextCtrl.i and Control.i to %import their parent 
+  classes so all the inherited virtual methods are wrapped by 
+  the Director. This needs to be done for *all* classes.
+- Added Validator class [no working sample yet] (Roy Sutton)
+- Greatly enhanced Grid support (Sean Long)
+  
+
+====0.0.24 tag included all of this:===
+- Restored SWIG 1.3.24 compatibility (not yet tested extensively)
+- Icon patch from Sean Long for MS Win compatibility
+- rakemswin.rb patch from Sean Long to properly pass __MSWIN__
+  flag into swig
+- samples/dialogs/dialogs.rb improvement from Roy Sutton
+- Added WXTYPE typedef so methods like Event.get_event_type 
+  would return simple numbers instead of weird objects,
+  thanks to Roy Sutton
+- Force creation of src/ file if it doesn't exist (Roy Sutton)
+
+
+  
+
+====0.0.23 tag included all of this:===
+- No longer support wx 2.5.3. Now require wx 2.6+
+- extconf.rb is now deprecated. Use rake instead.
+- Binary library is now named wxruby2, and a small Ruby 
+  wrapper named wx.rb is what is actually loaded by apps.
+- MAJOR overhaul of swig build process, and now
+  require SWIG 1.3.25 or newer.
+  Honestly, I'm surprised it worked at all before!
+- Automatically detects whether you have a suitable SWIG or not
+- Integrated more patches from Sean Long:
+   - XRC samples
+   - Added classes: MenuItem, ToolTip
+   - Added methods in several existing classes
+- Created temporary fake Notebook and ToggleButton classes 
+  in wx.rb, so the controls sample can run on Linux
+- Eliminated several compiler warnings, some by removing 
+  support for deprecated methods
+- Removed deprecated NotebookSizer class
+- Fixed wxEntry prototype that was causing errors under gentoo
+- Integrated Choice.i unicode patch from Jani Monoses
+- Updated TODO item to resemble reality
+- Added xrcid module method thanks to Sean Long
+- Added << operator for TextCtrl thanks to Sean Long
+- Updated all copyright headers to be consistent with LICENSE
+- Fixed unicode handling in Functions.i and typemap.i, and 
+  remove the needless typemap from Choice.i
+- Several .i file patches from Tobias Gruetzmacher:
+  wxruby-crlf.patch, typemap-fix.patch, togglebutton-fix.patch
+  spinevt-fix.patch, spinctrl-fix.patch, notebook-fix.patch,
+  remove-kluges.patch, choice-fix.patch, rake-shell.patch,
+  fix-controls-sample.patch & icons.tar.gz
+- Patches for mdi sample and Dialog class from Sean Long
+- Window::find_by_xxx now return a ruby object of a type 
+  that matches the underlying wx type (based on a patch by Sean Long)
+- No longer %ignore wxChoice() default constructor
+- Now pass wx cpp flags to swig so we can do things 
+  like #ifdef __WXGTK__ in the class/include/wxXxx.h files
+- (Hopefully) fixed Icon to be able to compile on all platforms
+- Removed deprecated wxMenuItem constructor for Mac compatibility
+  (based on a patch by Sean Long)
