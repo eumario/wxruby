@@ -5,4 +5,6 @@
 
 %module(directors="1") wxEvent
 
+%import "include/wxObject.h"
+
 %include "include/wxEvent.h"

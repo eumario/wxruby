@@ -5,4 +5,7 @@
 
 %module(directors="1") wxFocusEvent
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxFocusEvent.h"

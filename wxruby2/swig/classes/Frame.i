@@ -29,4 +29,8 @@
 
 GC_NEVER(wxFrame);
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+
 %include "include/wxFrame.h"

@@ -9,4 +9,10 @@
 #include <wx/fdrepdlg.h>
 %}
 %ignore wxFindReplaceDialog::wxFindReplaceDialog();
+
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxDialog.h"
+
 %include "include/wxFindReplaceDialog.h"

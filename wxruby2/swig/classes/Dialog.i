@@ -5,4 +5,8 @@
 
 %module(directors="1") wxDialog
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+
 %include "include/wxDialog.h"

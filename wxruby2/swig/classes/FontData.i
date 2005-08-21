@@ -5,4 +5,6 @@
 
 %module(directors="1") wxFontData
 
+%import "include/wxObject.h"
+
 %include "include/wxFontData.h"
