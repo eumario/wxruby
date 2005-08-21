@@ -5,4 +5,7 @@
 
 %module(directors="1") wxPaintEvent
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxPaintEvent.h"

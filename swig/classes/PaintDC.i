@@ -5,4 +5,8 @@
 
 %module(directors="1") wxPaintDC
 
+%import "include/wxObject.h"
+%import "include/wxDC.h"
+%import "include/wxWindowDC.h"
+
 %include "include/wxPaintDC.h"
