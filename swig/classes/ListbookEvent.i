@@ -9,4 +9,7 @@
 #include <wx/listbook.h>
 %}
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxListbookEvent.h"

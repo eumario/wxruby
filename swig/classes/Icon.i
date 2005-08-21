@@ -5,4 +5,8 @@
 
 %module(directors="1") wxIcon
 
+%import "include/wxObject.h"
+%import "include/wxGDIObject.h"
+%import "include/wxBitmap.h"
+
 %include "include/wxIcon.h"

@@ -6,4 +6,7 @@
 %module(directors="1") wxLayoutConstraints
 
 //%include "include/wxIndividualLayoutConstraint.h"
+
+%import "include/wxObject.h"
+
 %include "include/wxLayoutConstraints.h"

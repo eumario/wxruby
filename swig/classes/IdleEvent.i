@@ -5,4 +5,7 @@
 
 %module(directors="1") wxIdleEvent
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxIdleEvent.h"

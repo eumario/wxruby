@@ -3,8 +3,6 @@
 
 %include "../common.i"
 
-%module(directors="1") wxLogTextCtrl
+%module(directors="1") wxListItemAttr
 
-%import "include/wxLog.h"
-
-%include "include/wxLogTextCtrl.h"
+%include "include/wxListItemAttr.h"
