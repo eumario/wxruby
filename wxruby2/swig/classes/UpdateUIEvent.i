@@ -5,4 +5,8 @@
 
 %module(directors="1") wxUpdateUIEvent
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+%import "include/wxCommandEvent.h"
+
 %include "include/wxUpdateUIEvent.h"

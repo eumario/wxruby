@@ -5,4 +5,7 @@
 
 %module(directors="1") wxWindowDC
 
+%import "include/wxObject.h"
+%import "include/wxDC.h"
+
 %include "include/wxWindowDC.h"

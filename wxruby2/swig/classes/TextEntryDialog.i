@@ -5,5 +5,9 @@
 
 %module(directors="1") wxTextEntryDialog
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxDialog.h"
 
 %include "include/wxTextEntryDialog.h"

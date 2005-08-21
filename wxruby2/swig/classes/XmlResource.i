@@ -16,4 +16,6 @@
 %rename(LoadFrameSubclass) wxXmlResource::LoadFrame(wxFrame *frame, wxWindow *parent, const wxString &name);
 
 
+%import "include/wxObject.h"
+
 %include "include/wxXmlResource.h"
