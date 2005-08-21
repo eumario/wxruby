@@ -12,4 +12,7 @@
 %ignore wxGridCellEditor::wxGridCellEditor();
 %ignore wxGridCellEditor::~wxGridCellEditor();
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+
 %include "include/wxGridCellEditor.h"

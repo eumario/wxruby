@@ -23,4 +23,10 @@
 }
 
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+%import "include/wxCommandEvent.h"
+%import "include/wxNotifyEvent.h"
+%import "include/wxGridEvent.h"
+
 %include "include/wxGridRangeSelectEvent.h"

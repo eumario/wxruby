@@ -5,4 +5,6 @@
 
 %module(directors="1") wxGDIObject
 
+%import "include/wxObject.h"
+
 %include "include/wxGDIObject.h"

@@ -9,5 +9,8 @@
 #include <wx/grid.h>
 %}
 
-%include "include/wxGridCellBoolRenderer.h"
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxGridCellRenderer.h"
 
+%include "include/wxGridCellBoolRenderer.h"

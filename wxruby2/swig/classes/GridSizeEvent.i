@@ -9,4 +9,9 @@
 #include <wx/grid.h>
 %}
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+%import "include/wxCommandEvent.h"
+%import "include/wxNotifyEvent.h"
+
 %include "include/wxGridSizeEvent.h"

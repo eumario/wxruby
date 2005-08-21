@@ -10,4 +10,9 @@
 
 %ignore wxGauge::wxGauge();
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxGauge.h"
