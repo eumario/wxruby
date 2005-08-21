@@ -16,5 +16,9 @@
 %ignore wxMDIParentFrame::GetWindowMenu;
 %ignore wxMDIParentFrame::SetWindowMenu;
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxFrame.h"
 
 %include "include/wxMDIParentFrame.h"

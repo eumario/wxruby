@@ -12,4 +12,7 @@
 %ignore wxMenuItem::SetRadioGroupEnd(int end);
 
 
+%import "include/wxObject.h"
+// TODO: Also OwnerDrawn under MS Windows
+
 %include "include/wxMenuItem.h"

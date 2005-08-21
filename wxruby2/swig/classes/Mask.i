@@ -10,4 +10,6 @@
 
 %module(directors="1") wxMask
 
+%import "include/wxObject.h"
+
 %include "include/wxMask.h"

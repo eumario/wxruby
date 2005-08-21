@@ -14,7 +14,7 @@ public:
 	 * \param int  
 	*/
 
-   wxMouseEvent(WXTYPE mouseEventType = 0, int id = 0) ;
+   wxMouseEvent(wxEventType mouseEventType = 0) ;
 	/**
 	 * \brief Returns true if the Alt key was down at the time of the event. 
 	*/
