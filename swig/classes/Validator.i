@@ -5,4 +5,7 @@
 
 %module(directors="1") wxValidator
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+
 %include "include/wxValidator.h"

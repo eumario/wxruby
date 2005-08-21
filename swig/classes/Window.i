@@ -40,6 +40,9 @@ static VALUE get_ruby_object(wxObject *obj)
 %ignore wxWindow::FindWindowByName;
 %ignore wxWindow::FindWindowByLabel;
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+
 %include "include/wxWindow.h"
 
 %extend wxWindow {

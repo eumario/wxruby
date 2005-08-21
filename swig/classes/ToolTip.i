@@ -11,4 +11,6 @@
 
 %ignore wxToolTip::SetWindow(wxWindow *win);
 
+%import "include/wxObject.h"
+
 %include "include/wxToolTip.h"

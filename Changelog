@@ -1,5 +1,5 @@
 
-- Added full inheritance to classes starting with A through S
+- Added full inheritance to all classes
 - Fixed parent of ProgressDialog to be Dialog
 
 
