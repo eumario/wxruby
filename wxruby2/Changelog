@@ -1,5 +1,6 @@
 
-- Added full inheritance to classes starting with A through O
+- Added full inheritance to classes starting with A through R
+- Fixed parent of ProgressDialog to be Dialog
 
 
 ====0.0.25 tag included all of this:===

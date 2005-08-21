@@ -11,4 +11,9 @@
 
 %ignore wxRadioButton::wxRadioButton();
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxRadioButton.h"
