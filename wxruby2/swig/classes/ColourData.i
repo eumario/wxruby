@@ -5,5 +5,6 @@
 
 %module(directors="1") wxColourData
 
+%import "include/wxObject.h"
 
 %include "include/wxColourData.h"

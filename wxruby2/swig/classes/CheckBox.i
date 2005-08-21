@@ -7,4 +7,9 @@
 
 %ignore wxCheckBox::wxCheckBox();
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxCheckBox.h"

@@ -10,4 +10,9 @@
 %ignore wxChoice::DoInsert(const wxString& item, int pos);
 %feature("nodirector") wxChoice::DoInsert;
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxChoice.h"
