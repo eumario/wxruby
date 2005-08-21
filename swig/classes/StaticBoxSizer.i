@@ -5,4 +5,8 @@
 
 %module(directors="1") wxStaticBoxSizer
 
+%import "include/wxObject.h"
+%import "include/wxSizer.h"
+%import "include/wxBoxSizer.h"
+
 %include "include/wxStaticBoxSizer.h"
