@@ -5,4 +5,8 @@
 
 %module(directors="1") wxListItemAttr
 
+%{
+#include "wx/listbase.h"
+%}
+
 %include "include/wxListItemAttr.h"

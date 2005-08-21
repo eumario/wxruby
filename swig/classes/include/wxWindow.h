@@ -991,7 +991,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param bool   
 	*/
 
-#if !__WXGTK__
+#if __WXMICROWIN___
   virtual void SetScrollPage(int  orientation , int  pageSize , bool  refresh = true) ;
 	/**
 	 * \brief  
@@ -1009,7 +1009,7 @@ can be overridden to do something in addition to this in the derived classes.
 	 * \param bool   
 	*/
 
-#if !__WXGTK__
+#if __WXMICROWIN___
   virtual void SetScrollRange(int  orientation , int  range , bool  refresh = true) ;
 	/**
 	 * \brief  
