@@ -1,11 +1,15 @@
 High priority TODO items:
 -------------------------
 
+- Fix inheritance problems with %imports of full inheritance chains
+
 - Fix crashes when garbage collection happens
 
 - Add detection of "initialize" methods to renamer.rb
 
 - Add classes that were supported in wxruby 0.6
+
+- Try to get rid of compile warnings
 
 - Insert placeholder .i files for any wx classes that we specifically 
 do not want to support, such as wxDateTime and the socket classes.
@@ -51,18 +55,9 @@ Don't pay much attention to it.
 - Create rake target "version" that will update the version 
   in the README, and the runtime version string
   
-- rake for 1.6.7 (should we bundle rake?)
-  
-- Test and fix rakefile for MSWin
-
 - Add support for statically linking wxWidgets library
-
-- Use more cool features from rbconfig.rb
 
 - Add aliases like label and label= for get_label and set_label
 
 - Problem classes:
 	rubyClass = rb_define_class_under(GetWxModule(),"ArtProvider", rb_cObject);
-
-- Probably not needed?
-    wxString, wxDateTime, wxDateSpan, wxTimeSpan
