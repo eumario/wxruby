@@ -1,5 +1,5 @@
 README for wxruby2
-Version 0.0.25
+Version 0.0.26
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -7,135 +7,38 @@ It is released under a permissive MIT-style license
 (see the LICENSE file for details).
 
 There are no binaries yet. You must build it from source.
-It now supports about 120 classes, out of the 300+ 
-that are in wxWidgets.
+It now supports about 130 classes, and is only missing about 20 
+classes that were supported in wxruby 0.6.
 
 For more details, see the project home page:
   http://rubyforge.org/projects/wxruby/
 
 
-WHATS NEW:
-
-- Added src/.cvsignore
-- Added Button constants (BU_XXX)
-- Added TextAttr class (Alex Fenton)
-- Fixed some bugs in caret sample (Roy Sutton)
-- Added Listbook support and a sample (Sean Long)
-  (Note: On Linux, the sample just shows a blank window)
-- Added missing LayoutConstraints#centre_x and centre_y (Roy Sutton)
-- Added SplitterWindow (thanks to Roy Sutton)
-- Added TreeCtrl (compiles and can be new'd, but might segfault)
-- Minor fix to calendar sample (Roy Sutton)
-- Fix how Calendar enums were being defined, so the calendar sample
-  "highlight special dates" menu item now works (Roy Sutton)
-- Fix typo in listbook sample data (Roy Sutton)
-- Fixed TreeCtrl to compile under MS Windows (Roy Sutton)
-- Enabled Window#get_validator
-- Adjusted TextCtrl.i and Control.i to %import their parent 
-  classes so all the inherited virtual methods are wrapped by 
-  the Director. This needs to be done for *all* classes.
-- Added Validator class [no working sample yet] (Roy Sutton)
-- Greatly enhanced Grid support (Sean Long)
-  
-
-====0.0.24 tag included all of this:===
-- Restored SWIG 1.3.24 compatibility (not yet tested extensively)
-- Icon patch from Sean Long for MS Win compatibility
-- rakemswin.rb patch from Sean Long to properly pass __MSWIN__
-  flag into swig
-- samples/dialogs/dialogs.rb improvement from Roy Sutton
-- Added WXTYPE typedef so methods like Event.get_event_type 
-  would return simple numbers instead of weird objects,
-  thanks to Roy Sutton
-- Force creation of src/ file if it doesn't exist (Roy Sutton)
-
-
-  
-
-====0.0.23 tag included all of this:===
-- No longer support wx 2.5.3. Now require wx 2.6+
-- extconf.rb is now deprecated. Use rake instead.
-- Binary library is now named wxruby2, and a small Ruby 
-  wrapper named wx.rb is what is actually loaded by apps.
-- MAJOR overhaul of swig build process, and now
-  require SWIG 1.3.25 or newer.
-  Honestly, I'm surprised it worked at all before!
-- Automatically detects whether you have a suitable SWIG or not
-- Integrated more patches from Sean Long:
-   - XRC samples
-   - Added classes: MenuItem, ToolTip
-   - Added methods in several existing classes
-- Created temporary fake Notebook and ToggleButton classes 
-  in wx.rb, so the controls sample can run on Linux
-- Eliminated several compiler warnings, some by removing 
-  support for deprecated methods
-- Removed deprecated NotebookSizer class
-- Fixed wxEntry prototype that was causing errors under gentoo
-- Integrated Choice.i unicode patch from Jani Monoses
-- Updated TODO item to resemble reality
-- Added xrcid module method thanks to Sean Long
-- Added << operator for TextCtrl thanks to Sean Long
-- Updated all copyright headers to be consistent with LICENSE
-- Fixed unicode handling in Functions.i and typemap.i, and 
-  remove the needless typemap from Choice.i
-- Several .i file patches from Tobias Gruetzmacher:
-  wxruby-crlf.patch, typemap-fix.patch, togglebutton-fix.patch
-  spinevt-fix.patch, spinctrl-fix.patch, notebook-fix.patch,
-  remove-kluges.patch, choice-fix.patch, rake-shell.patch,
-  fix-controls-sample.patch & icons.tar.gz
-- Patches for mdi sample and Dialog class from Sean Long
-- Window::find_by_xxx now return a ruby object of a type 
-  that matches the underlying wx type (based on a patch by Sean Long)
-- No longer %ignore wxChoice() default constructor
-- Now pass wx cpp flags to swig so we can do things 
-  like #ifdef __WXGTK__ in the class/include/wxXxx.h files
-- (Hopefully) fixed Icon to be able to compile on all platforms
-- Removed deprecated wxMenuItem constructor for Mac compatibility
-  (based on a patch by Sean Long)
-
-
-
 REQUIREMENTS:
 
-- Ruby 1.8 (Ruby 1.6 is not officially supported, but might still work)
+- Ruby 1.8
 - rake (http://rake.rubyforge.org/)
 - SWIG 1.3.24 or later
 - wxWidgets 2.6+ SDK
+- Linux, MS Windows, or Mac OS X
 
 
 OBTAINING THE SOURCE:
 
-No binary builds are available. Source code can be 
-retrieved from CVS at:
+No binary builds are available yet. 
+Source code can be retrieved from CVS at:
   http://rubyforge.org/scm/?group_id=35
   
 
 BUILDING:
 
+From the top-level directory (typically wxruby-swig/), 
+just start the rake build with the command:
+  rake
+  
 There is no ./configure step, nor do you need to 
 run ruby extconf.rb. 
 
-From the top-level directory (typically wxruby-swig/), 
-start the rake build with the command:
-  rake
-  
-You may need to edit the appropriate platform-dependent 
-rake file if your system is not yet supported, or if it
-is unusual. These files are found in the rake subdirectory:
-
-  Mac OSX:              rakemacosx.rb
-  MS Windows VC++:      rakemswin.rb
-  MS Windows BC++:      rakebccwin.rb
-  MS Windows MingGW:    rakemingw.rb
-  MS Windows Cygwin:    rakecygwin.rb
-  NetBSD:               rakenetbsd.rb
-
-When editing a platform-dependent rakefile, you might 
-only need to set one or more of the following variables:
-    $extra_cppflags
-    $extra_ldflags
-    $extra_objs
-    $extra_libs
 
 INSTALLING THE LIBRARY:
 
@@ -166,7 +69,29 @@ Several samples are available:
 	samples/minimal/minimal.rb
 	samples/minimal/nothing.rb
 	samples/minimal/text.rb
-  
+
+
+PORTING TO OTHER PLATFORMS
+
+You may need to edit the appropriate platform-dependent 
+rake file if your system is not yet supported, or if it
+is unusual. These files are found in the rake subdirectory:
+
+  Mac OSX:              rakemacosx.rb
+  MS Windows VC++:      rakemswin.rb
+  MS Windows BC++:      rakebccwin.rb
+  MS Windows MingGW:    rakemingw.rb
+  MS Windows Cygwin:    rakecygwin.rb
+  NetBSD:               rakenetbsd.rb
+
+When editing a platform-dependent rakefile, you might 
+merely need to set one or more of the following variables:
+    $extra_cppflags
+    $extra_ldflags
+    $extra_objs
+    $extra_libs
+
+
 
 
 NOTES:
@@ -180,46 +105,55 @@ NOTES:
 - log_message and log_status take a single string parameter, 
   rather than a format string followed by additional values 
   to be inserted.
-- The following classes are supported:
-App.i                FontData.i                    Notebook.i
-ArtProvider.i        FontDialog.i                  NotebookSizer.i
-BitmapButton.i       Font.i                        NotifyEvent.i
-Bitmap.i             Frame.i                       Object.i
-BoxSizer.i           Gauge.i                       PaintDC.i
-Brush.i              GDIObject.i                   PaintEvent.i
-BusyCursor.i         GridCellBoolEditor.i          Panel.i
-BusyInfo.i           GridCellChoiceEditor.i        Pen.i
-Button.i             GridCellEditor.i              Point.i
-CalendarCtrl.i       GridCellFloatEditor.i         RadioBox.i
-CalendarDateAttr.i   GridCellNumberEditor.i        RadioButton.i
-CalendarEvent.i      GridCellTextEditor.i          ScrolledWindow.i
-Caret.i              GridEvent.i                   SingleChoiceDialog.i
-CheckBox.i           Grid.i                        SizeEvent.i
-CheckListBox.i       GridRangeSelectEvent.i        Size.i
-Choice.i             GridSizeEvent.i               Sizer.i
-ClassInfo.i          GridSizer.i                   Slider.i
-ClientDC.i           Icon.i                        SpinButton.i
-CloseEvent.i         IdleEvent.i                   SpinCtrl.i
-ColourData.i         Image.i                       SpinEvent.i
-ColourDialog.i       ImageList.i                   SplitterEvent.i
-Colour.i             include                       StaticBitmap.i
-ComboBox.i           IndividualLayoutConstraint.i  StaticBox.i
-CommandEvent.i       KeyEvent.i                    StaticBoxSizer.i
-Control.i            LayoutConstraints.i           StaticLine.i
-ControlWithItems.i   ListBox.i                     StaticText.i
-Cursor.i             ListCtrl.i                    StatusBar.i
-CVS                  Log.i                         TextCtrl.i
-DC.i                 LogTextCtrl.i                 TextEntryDialog.i
-Dialog.i             Mask.i                        TipProvider.i
-DirDialog.i          MDIChildFrame.i               TipWindow.i
-Event.i              MDIParentFrame.i              ToggleButton.i
-EvtHandler.i         MemoryDC.i                    ToolBar.i
-FileDialog.i         MenuBar.i                     TreeEvent.i
-FindDialogEvent.i    Menu.i                        UpdateUIEvent.i
-FindReplaceData.i    MessageDialog.i               WindowDC.i
-FindReplaceDialog.i  MouseEvent.i                  WindowDisabler.i
-FlexGridSizer.i      MoveEvent.i                   Window.i
-FocusEvent.i         NotebookEvent.i
+  
+  
+SUPPORTED CLASSES:
+
+As of 0.0.25, The following classes are supported:
+App.i                Gauge.i                       Notebook.i
+ArtProvider.i        GDIObject.i                   NotifyEvent.i
+BitmapButton.i       GridCellAttr.i                Object.i
+Bitmap.i             GridCellBoolEditor.i          PaintDC.i
+Bogus.i              GridCellBoolRenderer.i        PaintEvent.i
+BoxSizer.i           GridCellChoiceEditor.i        Panel.i
+Brush.i              GridCellEditor.i              Pen.i
+BusyCursor.i         GridCellFloatEditor.i         Point.i
+BusyInfo.i           GridCellFloatRenderer.i       ProgressDialog.i
+Button.i             GridCellNumberEditor.i        RadioBox.i
+CalendarCtrl.i       GridCellNumberRenderer.i      RadioButton.i
+CalendarDateAttr.i   GridCellRenderer.i            ScrolledWindow.i
+CalendarEvent.i      GridCellStringRenderer.i      SingleChoiceDialog.i
+Caret.i              GridCellTextEditor.i          SizeEvent.i
+CheckBox.i           GridEvent.i                   Size.i
+CheckListBox.i       Grid.i                        Sizer.i
+Choice.i             GridRangeSelectEvent.i        Slider.i
+ClassInfo.i          GridSizeEvent.i               SpinButton.i
+ClientDC.i           GridSizer.i                   SpinCtrl.i
+CloseEvent.i         Icon.i                        SpinEvent.i
+ColourData.i         IdleEvent.i                   SplitterEvent.i
+ColourDialog.i       Image.i                       SplitterWindow.i
+Colour.i             ImageList.i                   StaticBitmap.i
+ComboBox.i           include                       StaticBox.i
+CommandEvent.i       IndividualLayoutConstraint.i  StaticBoxSizer.i
+Control.i            KeyEvent.i                    StaticLine.i
+ControlWithItems.i   LayoutConstraints.i           StaticText.i
+Cursor.i             ListbookEvent.i               StatusBar.i
+CVS                  Listbook.i                    TextAttr.i
+DC.i                 ListBox.i                     TextCtrl.i
+Dialog.i             ListCtrl.i                    TextEntryDialog.i
+DirDialog.i          Log.i                         TipProvider.i
+Event.i              LogTextCtrl.i                 TipWindow.i
+EvtHandler.i         Mask.i                        ToggleButton.i
+FileDialog.i         MDIChildFrame.i               ToolBar.i
+FindDialogEvent.i    MDIParentFrame.i              ToolTip.i
+FindReplaceData.i    MemoryDC.i                    TreeCtrl.i
+FindReplaceDialog.i  MenuBar.i                     TreeEvent.i
+FlexGridSizer.i      Menu.i                        UpdateUIEvent.i
+FocusEvent.i         MenuItem.i                    Validator.i
+FontData.i           MessageDialog.i               WindowDC.i
+FontDialog.i         MouseEvent.i                  WindowDisabler.i
+Font.i               MoveEvent.i                   Window.i
+Frame.i              NotebookEvent.i               XmlResource.i
 
   
 
