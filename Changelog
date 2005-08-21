@@ -1,6 +1,10 @@
-
+====0.0.27 tag included all of this:===
 - Added full inheritance to all classes
 - Fixed parent of ProgressDialog to be Dialog
+
+
+====0.0.26 tag included all of this:===
+- Greatly enhanced Grid support (Sean Long)
 
 
 ====0.0.25 tag included all of this:===
@@ -23,7 +27,6 @@
   classes so all the inherited virtual methods are wrapped by 
   the Director. This needs to be done for *all* classes.
 - Added Validator class [no working sample yet] (Roy Sutton)
-- Greatly enhanced Grid support (Sean Long)
   
 
 ====0.0.24 tag included all of this:===
