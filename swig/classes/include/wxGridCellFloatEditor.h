@@ -8,19 +8,24 @@
 class wxGridCellFloatEditor : public wxGridCellTextEditor
 {
 public:
-	/**
-	 * \brief  
-	 * \param int   
-	 * \param int   
-	*/
 
    wxGridCellFloatEditor(int  width = -1, int  precision = -1) ;
-	/**
-	 * \brief Parameters string format is &quot;width,precision&quot; 
-	 * \param const wxString&   
-	*/
 
-  void SetParameters(const wxString&  params ) ;
+    virtual void Create(wxWindow* parent,
+                        wxWindowID id,
+                        wxEvtHandler* evtHandler);
+
+    virtual bool IsAcceptedKey(wxKeyEvent& event);
+    virtual void BeginEdit(int row, int col, wxGrid* grid);
+    virtual bool EndEdit(int row, int col, wxGrid* grid);
+
+    virtual void Reset();
+    virtual void StartingKey(wxKeyEvent& event);
+
+    virtual wxGridCellEditor *Clone() const;
+
+    // parameters string format is "width,precision"
+    virtual void SetParameters(const wxString& params); 
 };
 
 

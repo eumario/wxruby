@@ -5,7 +5,7 @@
 
 #if !defined(_wxGridCellNumberRenderer_h_)
 #define _wxGridCellNumberRenderer_h_
-class wxGridCellNumberRenderer : public wxGridellStringRenderer
+class wxGridCellNumberRenderer : public wxGridCellStringRenderer
 {
 public:
 	/**

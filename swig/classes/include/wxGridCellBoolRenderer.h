@@ -8,11 +8,23 @@
 class wxGridCellBoolRenderer : public wxGridCellRenderer
 {
 public:
-	/**
-	 * \brief Default constructor 
-	*/
+	wxGridCellBoolRenderer();
 
-   wxGridCellBoolRenderer() ;
+    // draw a check mark or nothing
+    virtual void Draw(wxGrid& grid,
+                      wxGridCellAttr& attr,
+                      wxDC& dc,
+                      const wxRect& rect,
+                      int row, int col,
+                      bool isSelected);
+
+    // return the checkmark size
+    virtual wxSize GetBestSize(wxGrid& grid,
+                               wxGridCellAttr& attr,
+                               wxDC& dc,
+                               int row, int col);
+
+    virtual wxGridCellRenderer *Clone() const;
 };
 
 

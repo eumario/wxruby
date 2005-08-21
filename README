@@ -35,6 +35,7 @@ WHATS NEW:
   classes so all the inherited virtual methods are wrapped by 
   the Director. This needs to be done for *all* classes.
 - Added Validator class [no working sample yet] (Roy Sutton)
+- Greatly enhanced Grid support (Sean Long)
   
 
 ====0.0.24 tag included all of this:===
