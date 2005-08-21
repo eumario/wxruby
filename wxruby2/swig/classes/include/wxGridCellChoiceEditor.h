@@ -8,20 +8,31 @@
 class wxGridCellChoiceEditor : public wxGridCellEditor
 {
 public:
-	/**
-	 * \brief  
-	 * \param size_t   
-	 * \param const wxString   
-	 * \param bool   
-	*/
+    // if !allowOthers, user can't type a string not in choices array
+    wxGridCellChoiceEditor(size_t count = 0,
+                           const wxString choices[] = NULL,
+                           bool allowOthers = false);
+    wxGridCellChoiceEditor(const wxArrayString& choices,
+                           bool allowOthers = false);
 
-   wxGridCellChoiceEditor(size_t  count = 0, const wxString  choices[] = NULL, bool  allowOthers = false) ;
-	/**
-	 * \brief Parameters string format is &quot;item1&#91;,item2&#91;...,itemN]]&quot; 
-	 * \param const wxString&   
-	*/
+    virtual void Create(wxWindow* parent,
+                        wxWindowID id,
+                        wxEvtHandler* evtHandler);
 
-  void SetParameters(const wxString&  params ) ;
+    virtual void PaintBackground(const wxRect& rectCell, wxGridCellAttr *attr);
+
+    virtual void BeginEdit(int row, int col, wxGrid* grid);
+    virtual bool EndEdit(int row, int col, wxGrid* grid);
+
+    virtual void Reset();
+
+    // parameters string format is "item1[,item2[...,itemN]]"
+    virtual void SetParameters(const wxString& params);
+
+    virtual wxGridCellEditor *Clone() const;
+    // DJC MAPTEK
+    // added GetValue so we can get the value which is in the control
+    virtual wxString GetValue() const;
 };
 
 

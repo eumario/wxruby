@@ -191,7 +191,7 @@
 
 %typemap(in) wxArrayString & (wxArrayString tmp){
  
-  if (($input = Qnil) || (TYPE($input) != T_ARRAY))
+  if (($input == Qnil) || (TYPE($input) != T_ARRAY))
   {
     $1 = &tmp;
   }
@@ -217,6 +217,11 @@
   {
     rb_ary_push($result,rb_str_new2((const char *)(*$1)[i].mb_str()));
   }
+}
+
+%typemap(typecheck) wxArrayString &
+{
+   $1 = (TYPE($input) == T_ARRAY);
 }
 
 %apply wxArrayString & { const wxArrayString &}

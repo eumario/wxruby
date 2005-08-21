@@ -8,162 +8,79 @@
 class wxGridCellAttr
 {
 public:
-	/**
-	 * \brief Default constructor. 
-	*/
 
-   wxGridCellAttr() ;
-	/**
-	 * \brief VZ: considering the number of members wxGridCellAttr has now, this ctor
-seems to be pretty useless... may be we should just remove it? 
-	 * \param const wxColour&   
-	 * \param const wxColour&   
-	 * \param const wxFont&   
-	 * \param int   
-	 * \param int   
-	*/
+    enum wxAttrKind
+    {
+        Any,
+        Default,
+        Cell,
+        Row,
+        Col,
+        Merged
+    };
 
-   wxGridCellAttr(const wxColour&  colText , const wxColour&  colBack , const wxFont&  font , int  hAlign , int  vAlign ) ;
-	/**
-	 * \brief Creates a new copy of this object. 
-	*/
+    // ctors
+    //wxGridCellAttr(wxGridCellAttr *attrDefault = NULL);
 
-  wxGridCellAttr* Clone() const;
-	/**
-	 * \brief This class is ref counted: it is created with ref count of 1, so
-calling DecRef() once will delete it. Calling IncRef() allows to lock
-it until the matching DecRef() is called 
-	*/
+    // VZ: considering the number of members wxGridCellAttr has now, this ctor
+    //     seems to be pretty useless... may be we should just remove it?
+    wxGridCellAttr(const wxColour& colText,
+                   const wxColour& colBack,
+                   const wxFont& font,
+                   int hAlign,
+                   int vAlign);
 
-  void IncRef() ;
-	/**
-	 * \brief  
-	*/
+    // creates a new copy of this object
+    wxGridCellAttr *Clone() const;
+    void MergeWith(wxGridCellAttr *mergefrom);
 
-  void DecRef() ;
-	/**
-	 * \brief Sets the text colour. 
-	 * \param const wxColour&   
-	*/
+    // this class is ref counted: it is created with ref count of 1, so
+    // calling DecRef() once will delete it. Calling IncRef() allows to lock
+    // it until the matching DecRef() is called
+    void IncRef();
+    void DecRef();
 
-  void SetTextColour(const wxColour&  colText ) ;
-	/**
-	 * \brief Sets the background colour. 
-	 * \param const wxColour&   
-	*/
+    // setters
+    void SetTextColour(const wxColour& colText);
+    void SetBackgroundColour(const wxColour& colBack);
+    void SetFont(const wxFont& font);
+    void SetAlignment(int hAlign, int vAlign);
+    void SetSize(int num_rows, int num_cols);
+    void SetOverflow(bool allow = true);
+    void SetReadOnly(bool isReadOnly = true);
 
-  void SetBackgroundColour(const wxColour&  colBack ) ;
-	/**
-	 * \brief Sets the font. 
-	 * \param const wxFont&   
-	*/
+    // takes ownership of the pointer
+    void SetRenderer(wxGridCellRenderer *renderer);
+    void SetEditor(wxGridCellEditor* editor);
 
-  void SetFont(const wxFont&  font ) ;
-	/**
-	 * \brief Sets the alignment. 
-	 * \param int   
-	 * \param int   
-	*/
+    void SetKind(wxAttrKind kind);
 
-  void SetAlignment(int  hAlign , int  vAlign ) ;
-	/**
-	 * \brief  
-	 * \param bool   
-	*/
+    // accessors
+    bool HasTextColour() const;
+    bool HasBackgroundColour() const;
+    bool HasFont() const;
+    bool HasAlignment() const;
+    bool HasRenderer() const;
+    bool HasEditor() const;
+    bool HasReadWriteMode() const;
+    bool HasOverflowMode() const;
+    bool HasSize() const;
 
-  void SetReadOnly(bool  isReadOnly = true) ;
-	/**
-	 * \brief takes ownership of the pointer 
-	 * \param wxGridCellRenderer*   
-	*/
+    const wxColour& GetTextColour() const;
+    const wxColour& GetBackgroundColour() const;
+    const wxFont& GetFont() const;
+    void GetAlignment(int *hAlign, int *vAlign) const;
+    void GetSize(int *num_rows, int *num_cols) const;
+    bool GetOverflow() const;
+    wxGridCellRenderer *GetRenderer(wxGrid* grid, int row, int col) const;
+    wxGridCellEditor *GetEditor(wxGrid* grid, int row, int col) const;
 
-  void SetRenderer(wxGridCellRenderer*  renderer ) ;
-	/**
-	 * \brief  
-	 * \param wxGridCellEditor*   
-	*/
+    bool IsReadOnly() const;
 
-  void SetEditor(wxGridCellEditor*  editor ) ;
-	/**
-	 * \brief accessors 
-	*/
+    wxAttrKind GetKind();
 
-  bool HasTextColour() const;
-	/**
-	 * \brief  
-	*/
+    void SetDefAttr(wxGridCellAttr* defAttr);
 
-  bool HasBackgroundColour() const;
-	/**
-	 * \brief  
-	*/
-
-  bool HasFont() const;
-	/**
-	 * \brief  
-	*/
-
-  bool HasAlignment() const;
-	/**
-	 * \brief  
-	*/
-
-  bool HasRenderer() const;
-	/**
-	 * \brief  
-	*/
-
-  bool HasEditor() const;
-	/**
-	 * \brief  
-	*/
-
-  const wxColour& GetTextColour() const;
-	/**
-	 * \brief  
-	*/
-
-  const wxColour& GetBackgroundColour() const;
-	/**
-	 * \brief  
-	*/
-
-  const wxFont& GetFont() const;
-	/**
-	 * \brief \perlnote{This method takes no parameters and
-returns a 2-element list  .} 
-	 * \param int*   
-	 * \param int*   
-	*/
-
-  void GetAlignment(int*  hAlign , int*  vAlign ) const;
-	/**
-	 * \brief  
-	 * \param wxGrid*   
-	 * \param int   
-	 * \param int   
-	*/
-
-  wxGridCellRenderer* GetRenderer(wxGrid*  grid , int  row , int  col ) const;
-	/**
-	 * \brief  
-	 * \param wxGrid*   
-	 * \param int   
-	 * \param int   
-	*/
-
-  wxGridCellEditor* GetEditor(wxGrid*  grid , int  row , int  col ) const;
-	/**
-	 * \brief  
-	*/
-
-  bool IsReadOnly() const;
-	/**
-	 * \brief  
-	 * \param wxGridCellAttr*   
-	*/
-
-  void SetDefAttr(wxGridCellAttr*  defAttr ) ;
 };
 
 
