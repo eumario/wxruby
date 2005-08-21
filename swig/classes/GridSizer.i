@@ -5,4 +5,7 @@
 
 %module(directors="1") wxGridSizer
 
+%import "include/wxObject.h"
+%import "include/wxSizer.h"
+
 %include "include/wxGridSizer.h"
