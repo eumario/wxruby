@@ -6,4 +6,9 @@
 %module(directors="1") wxSingleChoiceDialog
 
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxDialog.h"
+
 %include "include/wxSingleChoiceDialog.h"

@@ -8,5 +8,6 @@
 %ignore wxSizer::IsShown;
 
 
+%import "include/wxObject.h"
 
 %include "include/wxSizer.h"
