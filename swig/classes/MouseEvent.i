@@ -7,4 +7,7 @@
 
 %ignore wxMouseEvent::wxMouseEvent;
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxMouseEvent.h"

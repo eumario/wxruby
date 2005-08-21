@@ -9,4 +9,7 @@
 
 GC_NEVER(wxMenuBar);
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+
 %include "include/wxMenuBar.h"

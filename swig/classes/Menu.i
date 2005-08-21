@@ -12,4 +12,7 @@ GC_NEVER(wxMenu);
 %rename(AppendMenu) wxMenu::Append(int itemid, const wxString& text, wxMenu *submenu, const wxString& help = wxEmptyString);
 %rename(AppendItem) wxMenu::Append(wxMenuItem *item);
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+
 %include "include/wxMenu.h"
