@@ -9,4 +9,7 @@
 %ignore wxCloseEvent::GetSessionEnding;
 %ignore wxCloseEvent::SetForce;
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxCloseEvent.h"

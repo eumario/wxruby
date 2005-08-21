@@ -7,4 +7,7 @@
 
 %ignore wxCommandEvent::Checked;
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxCommandEvent.h"
