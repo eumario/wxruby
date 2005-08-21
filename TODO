@@ -5,6 +5,8 @@ High priority TODO items:
 
 - Fix crashes when garbage collection happens
 
+- Switch from CVS to darcs
+
 - Add detection of "initialize" methods to renamer.rb
 
 - Add classes that were supported in wxruby 0.6
