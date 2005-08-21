@@ -1,4 +1,7 @@
 
+- Added full inheritance to classes starting with A through B
+
+
 ====0.0.25 tag included all of this:===
 - Added src/.cvsignore
 - Added Button constants (BU_XXX)

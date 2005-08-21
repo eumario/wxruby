@@ -8,6 +8,8 @@
 
 %rename(ArtProvider) wxRubyArtProvider;
 
+%import "include/wxObject.h"
+
 %{
 #include <wx/artprov.h>
 
