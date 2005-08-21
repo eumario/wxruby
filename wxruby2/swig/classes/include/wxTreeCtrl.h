@@ -519,7 +519,7 @@ both selected and unselected items.
 	 * \param const wxTreeItemId&  
 	*/
 
-  bool SelectItem(const wxTreeItemId&  item ) ;
+  void SelectItem(const wxTreeItemId&  item ) ;
 
 #ifndef __WXMSW__
 	/**

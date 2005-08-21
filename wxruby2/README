@@ -69,6 +69,10 @@ Several samples are available:
 	samples/minimal/minimal.rb
 	samples/minimal/nothing.rb
 	samples/minimal/text.rb
+	
+The listbook sample doesn't seem to work under Linux.
+The bigdemo sample doesn't work well at all yet, but it will 
+be really cool when it does!
 
 
 PORTING TO OTHER PLATFORMS

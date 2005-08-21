@@ -1,3 +1,7 @@
+- Checked in Robert Carlin's demo that is based on the wxPython demo.
+  It's in samples/bigdemo, and you start it by running Main.rbw.
+  It doesn't work yet, but will be great when it does!
+
 ====0.0.27 tag included all of this:===
 - Added full inheritance to all classes
 - Fixed parent of ProgressDialog to be Dialog
