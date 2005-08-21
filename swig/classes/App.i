@@ -21,6 +21,9 @@
 #//////////////////////////////////
 %rename(App) wxRubyApp;
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+
 %{
 
 extern swig_class cWxEvtHandler;

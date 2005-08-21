@@ -5,4 +5,7 @@
 
 %module(directors="1") wxBrush
 
+%import "include/wxObject.h"
+%import "include/wxGDIObject.h"
+
 %include "include/wxBrush.h"

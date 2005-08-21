@@ -7,4 +7,9 @@
 
 %ignore wxButton::wxButton();
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxButton.h"

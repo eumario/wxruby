@@ -29,4 +29,7 @@
 #include <wx/image.h>
 %}
 
+%import "include/wxObject.h"
+%import "include/wxGDIObject.h"
+
 %include "include/wxBitmap.h"
