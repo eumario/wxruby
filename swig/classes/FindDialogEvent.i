@@ -9,4 +9,8 @@
 #include <wx/fdrepdlg.h>
 %}
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+%import "include/wxCommandEvent.h"
+
 %include "include/wxFindDialogEvent.h"

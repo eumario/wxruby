@@ -9,4 +9,6 @@
 #include <wx/fdrepdlg.h>
 %}
 
+%import "include/wxObject.h"
+
 %include "include/wxFindReplaceData.h"

@@ -19,6 +19,8 @@
 %ignore wxEvtHandler::Connect;
 %ignore wxEvtHandler::Disconnect;
 
+%import "include/wxObject.h"
+
 %include "include/wxEvtHandler.h"
 
 

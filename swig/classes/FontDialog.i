@@ -25,4 +25,9 @@
 %ignore wxFontDialog::Create();
 %ignore wxFontDialog::wxFontDialog();
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxDialog.h"
+
 %include "include/wxFontDialog.h"

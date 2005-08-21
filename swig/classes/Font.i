@@ -11,4 +11,8 @@
 %}
 
 %ignore wxFont::SetNativeFontInfo;
+
+%import "include/wxObject.h"
+%import "include/wxGDIObject.h"
+
 %include "include/wxFont.h"

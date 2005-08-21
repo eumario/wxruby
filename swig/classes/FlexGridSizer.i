@@ -13,4 +13,8 @@
 %ignore wxFlexGridSizer::SetNonFlexibleGrowMode;
  
 
+%import "include/wxObject.h"
+%import "include/wxSizer.h"
+%import "include/wxGridSizer.h"
+
 %include "include/wxFlexGridSizer.h"

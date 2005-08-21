@@ -26,6 +26,7 @@
 	rb_ary_push($result, INT2NUM(*$4));
 }
 
+%import "include/wxObject.h"
 
 %include "include/wxDC.h"
 
