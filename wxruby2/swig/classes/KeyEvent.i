@@ -6,6 +6,9 @@
 
 %module(directors="1") wxKeyEvent
 
+%import "include/wxObject.h"
+%import "include/wxEvent.h"
+
 %include "include/wxKeyEvent.h"
 
 %extend wxKeyEvent {

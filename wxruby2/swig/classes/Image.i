@@ -23,4 +23,6 @@
 %ignore wxImage::GetAlpha() const;
 
 
+%import "include/wxObject.h"
+
 %include "include/wxImage.h"

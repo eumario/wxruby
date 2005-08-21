@@ -14,4 +14,6 @@
 
 %rename(AddIcon) wxImageList::Add(const wxIcon&  icon ) ;
 
+%import "include/wxObject.h"
+
 %include "include/wxImageList.h"

@@ -5,4 +5,6 @@
 
 %module(directors="1") wxIndividualLayoutConstraint
 
+%import "include/wxObject.h"
+
 %include "include/wxIndividualLayoutConstraint.h"

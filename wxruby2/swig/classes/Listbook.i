@@ -18,4 +18,10 @@ GC_NEVER(wxListbook)
 
 %ignore wxListbook::OnSelChange;
 
+// TODO: Are these correct? Docs don't show Listbook
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxListbook.h"

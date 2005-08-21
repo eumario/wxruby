@@ -21,22 +21,14 @@
 
 
 
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
 %include "include/wxListCtrl.h"
 
+// TODO: Make this its own class!
 //
 // There is no record of this class in the XML file
 //
-class wxListItemAttr : public wxObject
-{
-public:
-	wxListItemAttr(wxColour &, wxColour &, wxFont &);
-	wxColour GetBackgroundColour();
-	wxFont GetFont();
-	wxColour GetTextColour();
-	bool HasBackgroundColour();
-	bool HasFont();
-	bool HasTextColour();
-	void SetBackgroundColour(wxColour &c);
-	void SetFont(wxFont &);
-	void SetTextColour(wxColour &);
-};
