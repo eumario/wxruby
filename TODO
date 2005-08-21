@@ -1,11 +1,11 @@
 High priority TODO items:
 -------------------------
 
-- Fix inheritance problems with %imports of full inheritance chains
-
 - Fix crashes when garbage collection happens
 
 - Switch from CVS to darcs
+
+- Get bigdemo working
 
 - Add detection of "initialize" methods to renamer.rb
 

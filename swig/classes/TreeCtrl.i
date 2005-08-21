@@ -16,7 +16,6 @@
 %ignore wxTreeCtrl::GetParent;
 
 // not sure why these aren't working
-%ignore wxTreeCtrl::SelectItem;
 %ignore wxTreeCtrl::SetStateImageList;
 
 %import "include/wxObject.h"
