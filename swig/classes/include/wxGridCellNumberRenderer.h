@@ -1,17 +1,11 @@
-// wxGridCellNumberRenderer.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+//   Copyright 2004-2005 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 #if !defined(_wxGridCellNumberRenderer_h_)
 #define _wxGridCellNumberRenderer_h_
 class wxGridCellNumberRenderer : public wxGridCellStringRenderer
 {
 public:
-	/**
-	 * \brief Default constructor 
-	*/
-
    wxGridCellNumberRenderer() ;
 };
 
