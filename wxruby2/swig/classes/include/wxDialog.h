@@ -55,7 +55,7 @@ invocation.
 	 * \param int   
 	*/
 
-  void EndModal(int  retCode ) ;
+  virtual void EndModal(int  retCode ) ;
 	/**
 	 * \brief  
 	*/
@@ -81,7 +81,7 @@ invocation.
 	 * \brief Returns true if the dialog box is modal, false otherwise. 
 	*/
 
-  bool IsModal() const;
+  virtual bool IsModal() const;
 	/**
 	 * \brief This member is called to allow the window to intercept keyboard events
 before they are processed by child windows. 
@@ -164,13 +164,13 @@ until the dialog is hidden) or modeless (control returns immediately).
 	 * \param const bool  
 	*/
 
-  bool Show(const bool  show ) ;
+  virtual bool Show(bool show = true ) ;
 	/**
 	 * \brief Shows a modal dialog. Program flow does not return until the dialog has been dismissed with
  . 
 	*/
 
-  int ShowModal() ;
+  virtual int ShowModal() ;
 };
 
 
