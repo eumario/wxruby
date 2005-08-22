@@ -1,25 +1,16 @@
-// wxSizeEvent.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+//   Copyright 2004-2005 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 #if !defined(_wxSizeEvent_h_)
 #define _wxSizeEvent_h_
 class wxSizeEvent : public wxEvent
 {
 public:
-	/**
-	 * \brief Constructor. 
-	 * \param const wxSize&   
-	 * \param int   
-	*/
-
    wxSizeEvent(const wxSize&  sz , int  id = 0) ;
-	/**
-	 * \brief Returns the entire size of the window generating the size change event. 
-	*/
-
   wxSize GetSize() const;
+
+  // override pure virtual methods from base classes
+  virtual wxEvent* Clone() const;
 };
 
 

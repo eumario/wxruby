@@ -5,8 +5,9 @@
 - Fix DC.h and WindowDC.i to properly handle pure virtual methods, 
   allowing the caret sample to work again
 - Fixed ControlWithItems, Choice, ComboBox and ListBox to properly 
-  handle virtual methods, allowing the controls sample to work again
+  handle pure virtual methods, allowing the controls sample to work again
 - Properly mark more Dialog methods as being virtual (Roy Sutton)
+- Fixed all the Event classes to properly handle pure virtual methods.
 
 
 

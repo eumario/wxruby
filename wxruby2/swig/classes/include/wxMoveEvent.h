@@ -1,25 +1,16 @@
-// wxMoveEvent.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+//   Copyright 2004-2005 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 #if !defined(_wxMoveEvent_h_)
 #define _wxMoveEvent_h_
 class wxMoveEvent : public wxEvent
 {
 public:
-	/**
-	 * \brief Constructor. 
-	 * \param const wxPoint&   
-	 * \param int   
-	*/
-
    wxMoveEvent(const wxPoint&  pt , int  id = 0) ;
-	/**
-	 * \brief Returns the position of the window generating the move change event. 
-	*/
-
   wxPoint GetPosition() const;
+
+  // override pure virtual methods from base classes
+  virtual wxEvent* Clone() const;
 };
 
 
