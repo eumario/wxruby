@@ -6,6 +6,8 @@
   allowing the caret sample to work again
 - Fixed ControlWithItems, Choice, ComboBox and ListBox to properly 
   handle virtual methods, allowing the controls sample to work again
+- Properly mark more Dialog methods as being virtual (Roy Sutton)
+
 
 
 ====0.0.27 tag included all of this:===
