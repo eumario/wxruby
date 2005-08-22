@@ -1,21 +1,16 @@
-// wxPaintEvent.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+//   Copyright 2004-2005 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 #if !defined(_wxPaintEvent_h_)
 #define _wxPaintEvent_h_
 class wxPaintEvent : public wxEvent
 {
 public:
-	/**
-	 * \brief Constructor. 
-	 * \param int   
-	*/
-
    wxPaintEvent(int  id = 0) ;
-  // the following were missing from the xml
   virtual ~wxPaintEvent();
+
+  // override pure virtual methods from base classes
+  virtual wxEvent* Clone() const;
 };
 
 

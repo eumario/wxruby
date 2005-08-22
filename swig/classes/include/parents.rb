@@ -26,6 +26,7 @@ $parents = {
     'wxCSConv' => 'wxMBConv',
     'wxCalculateLayoutEvent' => 'wxEvent',
     'wxCalendarCtrl' => 'wxControl',
+    'wxCalendarEvent' => 'wxEvent',
     'wxCheckBox' => 'wxControl',
     'wxCheckListBox' => 'wxListBox',
     'wxChoice' => 'wxControlWithItems',
