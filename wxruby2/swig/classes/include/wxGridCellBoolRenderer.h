@@ -1,7 +1,5 @@
-// wxGridCellBoolRenderer.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+//   Copyright 2004-2005 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 #if !defined(_wxGridCellBoolRenderer_h_)
 #define _wxGridCellBoolRenderer_h_
@@ -9,21 +7,17 @@ class wxGridCellBoolRenderer : public wxGridCellRenderer
 {
 public:
 	wxGridCellBoolRenderer();
-
-    // draw a check mark or nothing
+    // define pure virtual methods from base classes
     virtual void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
                       int row, int col,
                       bool isSelected);
-
-    // return the checkmark size
     virtual wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col);
-
     virtual wxGridCellRenderer *Clone() const;
 };
 
