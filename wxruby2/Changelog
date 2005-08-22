@@ -1,3 +1,4 @@
+====0.0.28 tag included all of this:===
 - Checked in Robert Carlin's demo that is based on the wxPython demo.
   It's in samples/bigdemo, and you start it by running Main.rbw.
   It doesn't work yet, but will be great when it does!
@@ -9,6 +10,8 @@
 - Properly mark more Dialog methods as being virtual (Roy Sutton)
 - Fixed all the Event classes to properly handle pure virtual methods
 - Fixed all the GridXxxRenderer classes to handle pure virtual methods
+- Fixed all the Sizer classes to handle pure virtual methods
+- Fixed TipProvider to be an abstract base class
 
 
 
