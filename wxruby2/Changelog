@@ -4,6 +4,8 @@
 - Get new inheritance chain code to compile under MS Win (Roy Sutton)
 - Fix DC.h and WindowDC.i to properly handle pure virtual methods, 
   allowing the caret sample to work again
+- Fixed ControlWithItems, Choice, ComboBox and ListBox to properly 
+  handle virtual methods, allowing the controls sample to work again
 
 
 ====0.0.27 tag included all of this:===
