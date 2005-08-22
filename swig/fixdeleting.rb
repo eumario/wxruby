@@ -153,8 +153,7 @@ puts("core_name: #{core_name}")
 	end
 
 	if(director_class && !found_deleter)
-		puts("ERROR: Didn't find found_deleter")
-		exit(1)
+		puts("WARNING: Didn't find found_deleter")
 	end
 end
 

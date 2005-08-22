@@ -3,7 +3,6 @@
 
 %include "../common.i"
 
-
 %module(directors="1") wxClientDC
 
 %import "include/wxObject.h"
