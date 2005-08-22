@@ -4,6 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxControlWithItems
+%feature("nodirector") wxControlWithItems;   // abstract base class
+
+%{
+//NO_DIRECTOR
+%}
 
 %ignore wxControlWithItems::SetSelection;
 %ignore wxControlWithItems::SetStringSelection;
