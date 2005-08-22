@@ -1,7 +1,5 @@
-// wxSizer.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+//   Copyright 2004-2005 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 #if !defined(_wxSizer_h_)
 #define _wxSizer_h_
@@ -11,8 +9,6 @@ public:
     wxSizer();
     ~wxSizer();
 
-    // methods for adding elements to the sizer: there are Add/Insert/Prepend
-    // overloads for each of window/sizer/spacer/wxSizerItem
     inline wxSizerItem* Add( wxWindow *window,
                              int proportion = 0,
                              int flag = 0,
@@ -123,8 +119,8 @@ public:
     // Calculate the minimal size or return m_minSize if bigger.
     wxSize GetMinSize();
 
-  void RecalcSizes()  = 0;
-    wxSize CalcMin() = 0;
+    virtual void RecalcSizes()  = 0;
+    virtual wxSize CalcMin() = 0;
 
     virtual void Layout();
 

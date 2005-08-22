@@ -1,4 +1,5 @@
-// wxNotebookSizer.h
+//   Copyright 2004-2005 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 // This class is now deprecated, so we no longer support it
 
@@ -8,17 +9,12 @@
 class wxNotebookSizer : public wxSizer
 {
 public:
-	/**
-	 * \brief Constructor. It takes an associated notebook as its only parameter. 
-	 * \param wxNotebook*   
-	*/
-
    wxNotebookSizer(wxNotebook*  notebook ) ;
-	/**
-	 * \brief Returns the notebook associated with the sizer. 
-	*/
-
   wxNotebook* GetNotebook() ;
+
+  // define pure virtual methods from base classes
+  virtual void RecalcSizes();
+  virtual wxSize CalcMin();
 };
 
 
