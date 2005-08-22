@@ -4,6 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxDC
+%feature("nodirector") wxDC; // abstract base class with pure virtual methods
+
+%{
+//NO_DIRECTOR
+%}
 
 %ignore wxDC::CacheEnabled;
 %ignore wxDC::ClearCache;

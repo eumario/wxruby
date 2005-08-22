@@ -47,7 +47,7 @@ released for each drawing operation.
 	 * \param wxCoord  
 	*/
 
-  bool Blit(wxCoord  xdest , wxCoord  ydest , wxCoord  width , wxCoord  height , wxDC*  source , wxCoord  xsrc , wxCoord  ysrc , int logicalFunc = wxCOPY, bool  useMask = false, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1)  = 0;
+  virtual bool Blit(wxCoord  xdest , wxCoord  ydest , wxCoord  width , wxCoord  height , wxDC*  source , wxCoord  xsrc , wxCoord  ysrc , int logicalFunc = wxCOPY, bool  useMask = false, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1)  = 0;
 	/**
 	 * \brief  
 	*/
@@ -68,7 +68,7 @@ released for each drawing operation.
 \begin{comment} 
 	*/
 
-  void Clear()  = 0;
+  virtual void Clear()  = 0;
 	/**
 	 * \brief  
 	*/
@@ -82,7 +82,7 @@ on the given point.
 	 * \param wxCoord  
 	*/
 
-  void CrossHair(wxCoord  x , wxCoord  y )  = 0;
+  virtual void CrossHair(wxCoord  x , wxCoord  y )  = 0;
 	/**
 	 * \brief Destroys the current clipping region so that none of the DC is clipped.
 See also  . 
@@ -133,7 +133,7 @@ The arc is drawn in an anticlockwise direction from the start point to the end p
 	 * \param double  
 	*/
 
-  void DrawArc(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , wxCoord  xc , wxCoord  yc ) = 0;
+  virtual void DrawArc(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , wxCoord  xc , wxCoord  yc ) = 0;
 	/**
 	 * \brief Draw a bitmap on the device context at the specified point. If   is true and the bitmap has
 a transparency mask, the bitmap will be drawn transparently.
@@ -148,7 +148,7 @@ of the bitmap (all bits set to 1), and the current text background colour to dra
 	 * \param bool  
 	*/
 
-  void DrawBitmap(const wxBitmap&  bitmap , wxCoord  x , wxCoord  y , bool  transparent )  = 0;
+  virtual void DrawBitmap(const wxBitmap&  bitmap , wxCoord  x , wxCoord  y , bool  transparent )  = 0;
 	/**
 	 * \brief  
 	 * \param wxCoord  
@@ -187,14 +187,14 @@ of the bitmap (all bits set to 1), and the current text background colour to dra
 	 * \param wxCoord  
 	*/
 
-  void DrawEllipse(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height )  = 0;
+  virtual void DrawEllipse(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height )  = 0;
 	/**
 	 * \brief  
 	 * \param const wxPoint&  
 	 * \param const wxSize&  
 	*/
 
-  void DrawEllipse(const wxPoint&  pt , const wxSize&  size )  = 0;
+  virtual void DrawEllipse(const wxPoint&  pt , const wxSize&  size )  = 0;
 	/**
 	 * \brief Draws an ellipse contained in the rectangle specified either with the given top
 left corner and the given size or directly. The current pen is used for the
@@ -202,7 +202,7 @@ outline and the current brush for filling the shape.
 	 * \param const wxRect&  
 	*/
 
-  void DrawEllipse(const wxRect&  rect )  = 0;
+  virtual void DrawEllipse(const wxRect&  rect )  = 0;
 	/**
 	 * \brief Draws an arc of an ellipse. The current pen is used for drawing the arc and
 the current brush is used for drawing the pie.
@@ -226,7 +226,7 @@ complete ellipse will be drawn.
 	 * \param double  
 	*/
 
-  void DrawEllipticArc(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double  start , double  end )  = 0;
+  virtual void DrawEllipticArc(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double  start , double  end )  = 0;
 	/**
 	 * \brief Draw an icon on the display (does nothing if the device context is PostScript).
 This can be the simplest way of drawing bitmaps on a window. 
@@ -235,7 +235,7 @@ This can be the simplest way of drawing bitmaps on a window.
 	 * \param wxCoord  
 	*/
 
-  void DrawIcon(const wxIcon&  icon , wxCoord  x , wxCoord  y )  = 0;
+  virtual void DrawIcon(const wxIcon&  icon , wxCoord  x , wxCoord  y )  = 0;
 	/**
 	 * \brief Draws a line from the first point to the second. The current pen is used
 for drawing the line. 
@@ -245,7 +245,7 @@ for drawing the line.
 	 * \param wxCoord  
 	*/
 
-  void DrawLine(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 )  = 0;
+  virtual void DrawLine(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 )  = 0;
 	/**
 	 * \brief  
 	 * \param int  
@@ -254,7 +254,7 @@ for drawing the line.
 	 * \param wxCoord  
 	*/
 
-  void DrawLines(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0)  = 0;
+  virtual void DrawLines(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0)  = 0;
 	/**
 	 * \brief Draws lines using an array of   of size  , or list of
 pointers to points, adding the optional offset coordinate. The current
@@ -272,7 +272,7 @@ of wxPoint objects.}
 	 * \param wxCoord  
 	*/
 
-  void DrawLines(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0)  = 0;
+  virtual void DrawLines(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0)  = 0;
 	/**
 	 * \brief  
 	 * \param int  
@@ -282,7 +282,7 @@ of wxPoint objects.}
 	 * \param int   
 	*/
 
-  void DrawPolygon(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE)  = 0;
+  virtual void DrawPolygon(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE)  = 0;
 	/**
 	 * \brief Draws a filled polygon using an array of   of size  ,
 or list of pointers to points, adding the optional offset coordinate.
@@ -308,14 +308,14 @@ of wxPoint objects.}
 	 * \param int   
 	*/
 
-  void DrawPolygon(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE)  = 0;
+  virtual void DrawPolygon(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE)  = 0;
 	/**
 	 * \brief Draws a point using the current pen. 
 	 * \param wxCoord  
 	 * \param wxCoord  
 	*/
 
-  void DrawPoint(wxCoord  x , wxCoord  y )  = 0;
+  virtual void DrawPoint(wxCoord  x , wxCoord  y )  = 0;
 	/**
 	 * \brief Draws a rectangle with the given top left corner, and with the given
 size.  The current pen is used for the outline and the current brush
@@ -326,7 +326,7 @@ for filling the shape.
 	 * \param wxCoord  
 	*/
 
-  void DrawRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height )  = 0;
+  virtual void DrawRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height )  = 0;
 	/**
 	 * \brief Draws the text rotated by   degrees.
 
@@ -340,7 +340,7 @@ which is.
 	 * \param double  
 	*/
 
-  void DrawRotatedText(const wxString&  text , wxCoord  x , wxCoord  y , double  angle )  = 0;
+  virtual void DrawRotatedText(const wxString&  text , wxCoord  x , wxCoord  y , double  angle )  = 0;
 	/**
 	 * \brief Draws a rectangle with the given top left corner, and with the given
 size.  The corners are quarter-circles using the given radius. The
@@ -361,7 +361,7 @@ the rectangle.
 	 * \param double  
 	*/
 
-  void DrawRoundedRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double radius )  = 0;
+  virtual void DrawRoundedRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double radius )  = 0;
 	/**
 	 * \brief Draws a spline between all given control points, using the current
 pen.  Doesn't delete the wxList and contents. The spline is drawn
@@ -408,7 +408,7 @@ with this function in portable programs.
 	 * \param wxCoord  
 	*/
 
-  void DrawText(const wxString&  text , wxCoord  x , wxCoord  y )  = 0;
+  virtual  void DrawText(const wxString&  text , wxCoord  x , wxCoord  y )  = 0;
 	/**
 	 * \brief  
 	 * \param bool  
@@ -479,12 +479,12 @@ function will still return true.
 	 * \brief Gets the character height of the currently set font. 
 	*/
 
-  wxCoord GetCharHeight()  = 0;
+  virtual wxCoord GetCharHeight()  = 0;
 	/**
 	 * \brief Gets the average character width of the currently set font. 
 	*/
 
-  wxCoord GetCharWidth()  = 0;
+  virtual wxCoord GetCharWidth()  = 0;
 	/**
 	 * \brief Gets the rectangle surrounding the current clipping region.
 
@@ -550,7 +550,7 @@ a Wx::Colour value}
 	 * \param wxColour *  
 	*/
 
-  bool GetPixel(wxCoord  x , wxCoord  y , wxColour * colour )  = 0;
+  virtual bool GetPixel(wxCoord  x , wxCoord  y , wxColour * colour )  = 0;
 	/**
 	 * \brief For a PostScript device context, this gets the maximum size of graphics
 drawn so far on the device context.
@@ -576,7 +576,7 @@ implements the following methods:\par
 	 * \param wxCoord *  
 	*/
 
-  void GetSize(wxCoord * width , wxCoord * height )  = 0;
+  virtual void GetSize(wxCoord * width , wxCoord * height )  = 0;
 	/**
 	 * \brief  
 	*/
@@ -618,7 +618,7 @@ See also  ,  .
 	 * \param wxFont *  
 	*/
 
-  void GetTextExtent(const wxString&  string , wxCoord * w , wxCoord * h , wxCoord * descent = NULL, wxCoord * externalLeading = NULL, wxFont * font = NULL)  = 0;
+  virtual void GetTextExtent(const wxString&  string , wxCoord * w , wxCoord * h , wxCoord * descent = NULL, wxCoord * externalLeading = NULL, wxFont * font = NULL)  = 0;
 	/**
 	 * \brief  
 	*/
@@ -725,14 +725,14 @@ operations for placing a graphic on a page.
 	 * \param const wxBrush&   
 	*/
 
-  void SetBackground(const wxBrush&  brush )  = 0;
+  virtual void SetBackground(const wxBrush&  brush )  = 0;
 	/**
 	 * \brief may be one of wxSOLID and wxTRANSPARENT. This setting determines
 whether text will be drawn with a background colour or not. 
 	 * \param int  
 	*/
 
-  void SetBackgroundMode(int  mode )  = 0;
+  virtual void SetBackgroundMode(int  mode )  = 0;
 	/**
 	 * \brief  
 	 * \param wxCoord  
@@ -771,7 +771,7 @@ See   for further details.
 	 * \param const wxPalette&   
 	*/
 
-  void SetPalette(const wxPalette&  palette )  = 0;
+  virtual void SetPalette(const wxPalette&  palette )  = 0;
 	/**
 	 * \brief Sets the current brush for the DC.
 
@@ -786,7 +786,7 @@ when drawing into a monochrome bitmap.
 	 * \param const wxBrush&   
 	*/
 
-  void SetBrush(const wxBrush&  brush )  = 0;
+  virtual void SetBrush(const wxBrush&  brush )  = 0;
 	/**
 	 * \brief Sets the current font for the DC. It must be a valid font, in particular you
 should not pass   to this method.
@@ -795,7 +795,7 @@ See also  .
 	 * \param const wxFont&   
 	*/
 
-  void SetFont(const wxFont&  font )  = 0;
+  virtual void SetFont(const wxFont&  font )  = 0;
 	/**
 	 * \brief Sets the current logical function for the device context.  This determines how
 a source pixel (from a pen or brush colour, or source device context if
@@ -815,7 +815,7 @@ moving outlines, since drawing twice reverts to the original colour.
 	 * \param int  
 	*/
 
-  void SetLogicalFunction(int  function )  = 0;
+  virtual void SetLogicalFunction(int  function )  = 0;
 	/**
 	 * \brief The   of the device context defines the unit of
 measurement used to convert logical units to device units. Note that
@@ -861,7 +861,7 @@ when drawing into a monochrome bitmap.
 	 * \param const wxPen&   
 	*/
 
-  void SetPen(const wxPen&  pen )  = 0;
+  virtual void SetPen(const wxPen&  pen )  = 0;
 	/**
 	 * \brief Sets the current text background colour for the DC. 
 	 * \param const wxColour&   
