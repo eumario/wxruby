@@ -52,7 +52,7 @@ def get_classes
     Dir::foreach($classes_dir) do | filename |
         filespec = File.join($classes_dir, filename)
         #puts("#{filename}: #{File.directory?(filespec)})
-        if(filename[0,1] != '.' && !File.directory?(filespec))
+        if(File.extname(filename) == '.i')
             classes << File.basename(filename, '.i')
         end
     end

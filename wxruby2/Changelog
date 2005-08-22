@@ -1,3 +1,5 @@
+- Updated rakefile to only try to build .i swig files (thanks to Roy Sutton)
+
 ====0.0.28 tag included all of this:===
 - Checked in Robert Carlin's demo that is based on the wxPython demo.
   It's in samples/bigdemo, and you start it by running Main.rbw.
