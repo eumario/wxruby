@@ -2,6 +2,8 @@
 - Change App debugging output to be based on __WXDEBUG__ (Sean Long)
 - Several corrections to the inheritance chains (Sean Long)
 - Added TopLevelWindow (Sean Long)
+- Made more RadioBox methods virtual (thanks to Roy Sutton)
+- Split RadioBox#show_item, to match wxPython
 
 
 ====0.0.28 tag included all of this:===
