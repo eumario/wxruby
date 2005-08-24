@@ -96,12 +96,7 @@ otherwise, the window will still be centered on its parent.
 	*/
 
   void CentreOnScreen(int direction = wxBOTH) ;
-	/**
-	 * \brief Clears the window by filling it with the current background colour. Does not
-cause an erase background event to be generated. 
-	*/
 
-  void Clear() ;
 	/**
 	 * \brief \perlnote{In wxPerl this method returns a 2-element list instead of
 modifying its parameters.} 
@@ -390,7 +385,7 @@ own event handler.
 	 * \brief Returns a reference to the font for this window. 
 	*/
 
-  wxFont& GetFont() const;
+  wxFont GetFont() const;
 	/**
 	 * \brief Returns the foreground colour of the window. 
 	*/
@@ -690,7 +685,7 @@ is not implemented anywhere).
 	 * \param bool   
 	*/
 
-  wxEvtHandler* PopEventHandler(bool  deleteHandler = false) const;
+  wxEvtHandler* PopEventHandler(bool  deleteHandler = false);
 	/**
 	 * \brief  
 	 * \param wxMenu*   

@@ -5,7 +5,7 @@
 
 #if !defined(_wxMenuBar_h_)
 #define _wxMenuBar_h_
-class wxMenuBar : public wxEvtHandler
+class wxMenuBar : public wxWindow
 {
 public:
 	/**

@@ -5,7 +5,7 @@
 
 #if !defined(_wxFrame_h_)
 #define _wxFrame_h_
-class wxFrame : public wxWindow
+class wxFrame : public wxTopLevelWindow
 {
 public:
 	/**

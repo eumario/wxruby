@@ -42,7 +42,7 @@ public:
 
     virtual ~wxRubyApp()
     {
-#ifdef wxDEBUG    
+#ifdef __WXDEBUG__    
         printf("~wxRubyApp\n");
 #endif	
     }
@@ -51,7 +51,7 @@ public:
     {
         static int argc = 1;
         static wxChar *argv[] = {wxT("wxruby"), NULL};
-#ifdef wxDEBUG
+#ifdef __WXDEBUG__
         printf("Calling wxEntry, this=%p\n", this);
 #endif
 
@@ -79,11 +79,11 @@ public:
 
 
 
-#ifdef wxDEBUG
+#ifdef __WXDEBUG__
         printf("returned from wxEntry...\n");
 #endif	
         rb_gc_start();
-#ifdef wxDEBUG	
+#ifdef __WXDEBUG__	
         printf("survived gc\n");
 #endif	
         return 0;
@@ -91,11 +91,11 @@ public:
     
     virtual bool OnInitGui()
     {
-#ifdef wxDEBUG        
+#ifdef __WXDEBUG__        
         printf("OnInitGui before\n");
 #endif	
         bool result = wxApp::OnInitGui();
-#ifdef wxDEBUG	
+#ifdef __WXDEBUG__	
         printf("OnInitGui after\n");
 #endif	
         if(result)
@@ -108,11 +108,11 @@ public:
 
     virtual int OnExit()
     {
-#ifdef wxDEBUG    
+#ifdef __WXDEBUG__    
         printf("OnExit...\n");
 #endif	
         rb_gc_start();
-#ifdef wxDEBUG	
+#ifdef __WXDEBUG__	
         printf("survived gc\n");
 #endif
 
@@ -123,11 +123,11 @@ public:
         SetTopWindow(0);
         if ( oldlog )
         {
-#ifdef wxDEBUG
+#ifdef __WXDEBUG__
 	    printf("Deleting oldlog...\n");
 #endif	    
             delete oldlog;
-#ifdef wxDEBUG	    
+#ifdef __WXDEBUG__	    
             printf("worked\n");
 #endif	    
         }

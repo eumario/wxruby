@@ -1,4 +1,8 @@
 - Updated rakefile to only try to build .i swig files (thanks to Roy Sutton)
+- Change App debugging output to be based on __WXDEBUG__ (Sean Long)
+- Several corrections to the inheritance chains (Sean Long)
+- Added TopLevelWindow (Sean Long)
+
 
 ====0.0.28 tag included all of this:===
 - Checked in Robert Carlin's demo that is based on the wxPython demo.
