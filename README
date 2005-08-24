@@ -109,6 +109,9 @@ NOTES:
 - log_message and log_status take a single string parameter, 
   rather than a format string followed by additional values 
   to be inserted.
+-- ScreenDC extends DC on all platforms, unlike in C++ wx. 
+  This means that you cannot override any virtual methods that were 
+  defined in PaintDC or WindowDC in a ruby subclass of ScreenDC.
   
   
 SUPPORTED CLASSES:
