@@ -4,6 +4,7 @@
 - Added TopLevelWindow (Sean Long)
 - Made more RadioBox methods virtual (thanks to Roy Sutton)
 - Split RadioBox#show_item, to match wxPython
+- Added ScreenDC (Sean Long)
 
 
 ====0.0.28 tag included all of this:===
