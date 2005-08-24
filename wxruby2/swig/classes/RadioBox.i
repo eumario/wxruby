@@ -14,6 +14,8 @@
 %ignore wxRadioBox::SetLabel;
 %ignore wxRadioBox::Number;
 
+%ignore wxRadioBox::Show(int item, const bool show = true);
+
 GC_NEVER(wxRadioBox);
 
 %import "include/wxObject.h"
@@ -22,3 +24,9 @@ GC_NEVER(wxRadioBox);
 %import "include/wxControl.h"
 
 %include "include/wxRadioBox.h"
+%extend wxRadioBox {
+	bool ShowItem(int item, const bool show = true)
+	{
+		return self->Show(item, show);
+	}
+}
