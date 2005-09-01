@@ -218,12 +218,12 @@ class MyPanel < Panel
 
         imagelist = ImageList.new(16, 16)
 
-        imagelist.add_icon( Icon.new( "icons/list.xpm", Wx::BITMAP_TYPE_XPM))
-        imagelist.add_icon( Icon.new( "icons/choice.xpm", Wx::BITMAP_TYPE_XPM))
-        imagelist.add_icon( Icon.new( "icons/combo.xpm", Wx::BITMAP_TYPE_XPM))
-        imagelist.add_icon( Icon.new( "icons/text.xpm", Wx::BITMAP_TYPE_XPM))
-        imagelist.add_icon( Icon.new( "icons/radio.xpm", Wx::BITMAP_TYPE_XPM))
-        imagelist.add_icon( Icon.new( "icons/gauge.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add( Bitmap.new( "icons/list.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add( Bitmap.new( "icons/choice.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add( Bitmap.new( "icons/combo.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add( Bitmap.new( "icons/text.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add( Bitmap.new( "icons/radio.xpm", Wx::BITMAP_TYPE_XPM))
+        imagelist.add( Bitmap.new( "icons/gauge.xpm", Wx::BITMAP_TYPE_XPM))
         @m_notebook.assign_image_list(imagelist)
 
         panel = Panel.new(@m_notebook)
@@ -1003,7 +1003,7 @@ class MyFrame < Frame
         @s_enable2 = TRUE
         @s_windowFocus = nil
 
-        set_icon(Icon.new("mondrian.xpm", Wx::BITMAP_TYPE_XPM))
+        set_icon(Icon.new("mondrian.ico", Wx::BITMAP_TYPE_ICO))
 
         file_menu = Menu.new
 
@@ -1167,5 +1167,7 @@ if(!File.exists?('icons') || !File.directory?('icons'))
 	puts("This sample cannot be run from a different directory")
 	exit(1)
 end
+
+init_all_image_handlers
 a = MyApp.new
 a.main_loop
