@@ -18,7 +18,7 @@ GC_NEVER(wxChoicebook)
 
 %ignore wxChoicebook::OnSelChange;
 
-// TODO: Are these correct? Docs don't show Listbook
+// TODO: Are these correct? Docs don't show Choicebook
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
