@@ -6,6 +6,7 @@
 - Split RadioBox#show_item, to match wxPython
 - Added ScreenDC (Sean Long)
 - Added ChoiceBook and ChoiceBookEvent (Sean Long)
+- Fixed controls.rb sample so images load properly (Roy Sutton)
 
 
 ====0.0.28 tag included all of this:===
