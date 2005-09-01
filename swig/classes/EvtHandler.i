@@ -5,6 +5,7 @@
 
 %{
 #include <wx/calctrl.h>
+#include <wx/choicebk.h>
 #include <wx/fdrepdlg.h>
 #include <wx/listbook.h>
 #include <wx/notebook.h>
@@ -39,6 +40,7 @@ extern swig_class cWxFindDialogEvent;
 extern swig_class cWxMouseEvent;
 extern swig_class cWxFocusEvent;
 extern swig_class cWxSpinEvent;
+extern swig_class cWxChoicebookEvent;
 extern swig_class cWxNotebookEvent;
 extern swig_class cWxListbookEvent;
 extern swig_class cWxGridEvent;
@@ -167,6 +169,13 @@ static const wxEventType *spinEvents[] =
     (const wxEventType *)0
 };
 
+static const wxEventType *choicebookEvents[] = 
+{
+     &wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED,
+     &wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING,
+     (const wxEventType *)0
+};
+
 static const wxEventType *notebookEvents[] = 
 {
      &wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,
@@ -198,6 +207,8 @@ public:
         int type = event.GetEventType();
         if(event.IsKindOf(CLASSINFO(wxCalendarEvent)))
             cEvent = cWxCalendarEvent.klass;
+        else if (event.IsKindOf(CLASSINFO(wxChoicebookEvent)))
+            cEvent = cWxChoicebookEvent.klass;			
         else if (event.IsKindOf(CLASSINFO(wxListbookEvent)))
             cEvent = cWxListbookEvent.klass;  
         else if (event.IsKindOf(CLASSINFO(wxNotebookEvent)))
@@ -723,6 +734,8 @@ static VALUE evt_radiobutton(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_spin", VALUEFUNC(evt_spin), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_spin_up", VALUEFUNC(evt_spin_up), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_spin_down", VALUEFUNC(evt_spin_down), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_choicebook_page_changing", VALUEFUNC(evt_choicebook_page_changing), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_choicebook_page_changed", VALUEFUNC(evt_choicebook_page_changed), -1); 
     rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changing", VALUEFUNC(evt_notebook_page_changing), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changed", VALUEFUNC(evt_notebook_page_changed), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_listbook_page_changing", VALUEFUNC(evt_listbook_page_changing), -1);        

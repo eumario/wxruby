@@ -8,6 +8,7 @@
 //NO_CLASS - This tells fixmodule not to expect a class
 
 #include <wx/calctrl.h>
+#include <wx/choicebk.h>
 #include <wx/fdrepdlg.h>
 #include <wx/notebook.h>
 #include <wx/listbook.h>
@@ -321,6 +322,16 @@ static VALUE evt_spin_down(int argc, VALUE *argv, VALUE self)
     return internal_evt_with_id(argc, argv, self, wxEVT_SCROLL_LINEDOWN);
 }
 
+static VALUE evt_choicebook_page_changing(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING);
+}
+
+static VALUE evt_choicebook_page_changed(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED);
+}
+
 static VALUE evt_notebook_page_changing(int argc, VALUE *argv, VALUE self) 
 {
     return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING);
@@ -446,6 +457,8 @@ static VALUE evt_radiobutton(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_spin", VALUEFUNC(evt_spin), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_spin_up", VALUEFUNC(evt_spin_up), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_spin_down", VALUEFUNC(evt_spin_down), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_choicebook_page_changing", VALUEFUNC(evt_choicebook_page_changing), -1);        
+    rb_define_method(cWxEvtHandler.klass, "evt_choicebook_page_changed", VALUEFUNC(evt_choicebook_page_changed), -1);      
     rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changing", VALUEFUNC(evt_notebook_page_changing), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_notebook_page_changed", VALUEFUNC(evt_notebook_page_changed), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_listbook_page_changing", VALUEFUNC(evt_listbook_page_changing), -1);        
