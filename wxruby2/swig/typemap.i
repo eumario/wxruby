@@ -228,6 +228,43 @@
 
 ##############################################################
 
+%typemap(in) wxArrayInt (wxArrayInt tmp){
+ 
+  if (($input == Qnil) || (TYPE($input) != T_ARRAY))
+  {
+    $1 = &tmp;
+  }
+  else
+  {
+    
+    for (int i = 0; i < RARRAY($input).len; i++)
+    {
+      int item = NUM2INT(rb_ary_entry($input,i));
+      tmp.Add(item);
+    }
+    
+    $1 = &tmp;
+  }
+
+}
+
+%typemap(out) wxArrayInt {
+
+  $result = rb_ary_new();
+
+  for (int i = 0; i < $1.GetCount(); i++)
+  {
+    rb_ary_push($result,INT2NUM( $1.Item(i) ) );
+  }
+}
+
+%typemap(typecheck) wxArrayInt
+{
+   $1 = (TYPE($input) == T_ARRAY);
+}
+
+##############################################################
+
 %typemap(in) wxEdge {
 	$1 = (wxEdge)NUM2INT($input);
 }
