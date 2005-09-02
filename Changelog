@@ -9,6 +9,8 @@
 - Fixed controls.rb sample so images load properly (Roy Sutton)
 - Fix big bug where Mac apps would exit before showing the main window,
   by declaring Show in Frame.i (Sean Long)
+- Added, fixed, and rearranged lots of RubyConstants (Sean Long)
+
 
 
 ====0.0.28 tag included all of this:===
