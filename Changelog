@@ -7,6 +7,8 @@
 - Added ScreenDC (Sean Long)
 - Added ChoiceBook and ChoiceBookEvent (Sean Long)
 - Fixed controls.rb sample so images load properly (Roy Sutton)
+- Fix big bug where Mac apps would exit before showing the main window,
+  by declaring Show in Frame.i (Sean Long)
 
 
 ====0.0.28 tag included all of this:===
