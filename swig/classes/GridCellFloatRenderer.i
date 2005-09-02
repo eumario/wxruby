@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module wxGridCellFloatRenderer
+%module(directors="1") wxGridCellFloatRenderer
 
 %{
 #include <wx/grid.h>
