@@ -11,6 +11,7 @@
   by declaring Show in Frame.i (Sean Long)
 - Added, fixed, and rearranged lots of RubyConstants (Sean Long)
 - Fixed grid renderers and editors to use SWIG directors (Sean Long)
+- Added typemap for ArrayInt (Sean Long)
 
 
 
