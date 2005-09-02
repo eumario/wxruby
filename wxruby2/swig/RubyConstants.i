@@ -21,7 +21,7 @@
 #define    wxCURSOR_DEFAULT 0
 #endif
 #ifndef __WXMAC__
-#define        wxCURSOR_COPY_ARROW 0
+#define    wxCURSOR_COPY_ARROW 0
 #endif
 #ifndef __X__
     // Not yet implemented for Windows
@@ -33,6 +33,15 @@
 
 %}
 
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/defs.h
+//** ---------------------------------------------------------------------------- **
+
+//  ---------------------------------------------------------------------------- 
+//  OS mnemonics -- Identify the running OS (useful for Windows) 
+//  ---------------------------------------------------------------------------- 
+
+//  Not all platforms are currently available or supported 
 enum
 {
     wxUNKNOWN_PLATFORM,
@@ -57,6 +66,9 @@ enum
     wxWIN32S,                 // Windows 32S API
     wxWIN95,                  // Windows 95
     wxWIN386,                 // Watcom 32-bit supervisor modus
+    wxWINDOWS_CE,             // Windows CE (generic)
+    wxWINDOWS_POCKETPC,       // Windows CE PocketPC
+    wxWINDOWS_SMARTPHONE,     // Windows CE Smartphone   
     wxMGL_UNIX,               // MGL with direct hardware access
     wxMGL_X,                  // MGL on X
     wxMGL_WIN32,              // MGL on Win32
@@ -64,7 +76,9 @@ enum
     wxMGL_DOS,                // MGL on MS-DOS
     wxWINDOWS_OS2,            // Native OS/2 PM
     wxUNIX,                   // wxBase under Unix
-    wxX11                     // Plain X11 and Universal widgets
+    wxX11,                    // Plain X11 and Universal widgets
+    wxPALMOS,                 // PalmOS
+    wxDOS                     // wxBase under MS-DOS
 };
 
 // ----------------------------------------------------------------------------
@@ -83,6 +97,7 @@ enum wxGeometryCentre
 #define wxCENTRE_ON_SCREEN      0x0002
 // wxCENTER_ON_SCREEN      wxCENTRE_ON_SCREEN
 
+/*
 enum wxOrientation
 {
     wxHORIZONTAL              = 0x0004,
@@ -90,10 +105,15 @@ enum wxOrientation
 
     wxBOTH                    = (wxVERTICAL | wxHORIZONTAL)
 };
+*/
+
+#define wxHORIZONTAL    0x0004
+#define wxVERTICAL      0x0008
+#define wxBOTH          (wxVERTICAL | wxHORIZONTAL)
 
 enum wxDirection
 {
-    
+    wxLEFT                    = 0x0010,
     wxRIGHT                   = 0x0020,
     wxUP                      = 0x0040,
     wxDOWN                    = 0x0080,
@@ -135,8 +155,15 @@ enum wxStretch
     wxGROW                    = 0x2000,
     wxEXPAND                  = wxGROW,
     wxSHAPED                  = 0x4000,
-    wxADJUST_MINSIZE          = 0x8000,
-    wxTILE                    = 0xc000
+    wxFIXED_MINSIZE           = 0x8000,
+    wxTILE                    = 0xc000,
+
+    // for compatibility only, default now, don't use explicitly any more
+#if WXWIN_COMPATIBILITY_2_4
+    wxADJUST_MINSIZE          = 0x00100000
+#else
+    wxADJUST_MINSIZE          = 0
+#endif
 };
 
 // border flags: the values are chosen for backwards compatibility
@@ -157,46 +184,12 @@ enum wxBorder
     wxBORDER_MASK   = 0x1f200000
 };
 
-enum
-{
-    wxOPEN              = 0x0001,
-    wxSAVE              = 0x0002,
-    wxOVERWRITE_PROMPT  = 0x0004,
-    wxHIDE_READONLY     = 0x0008,
-    wxFILE_MUST_EXIST   = 0x0010,
-    wxMULTIPLE          = 0x0020,
-    wxCHANGE_DIR        = 0x0040
-};
-
-// flages used by wxFindDialogEvent::GetFlags()
-enum wxFindReplaceFlags
-{
-    // downward search/replace selected (otherwise - upwards)
-    wxFR_DOWN       = 1,
-
-    // whole word search/replace selected
-    wxFR_WHOLEWORD  = 2,
-
-    // case sensitive search/replace selected (otherwise - case insensitive)
-    wxFR_MATCHCASE  = 4
-};
-
-enum wxFindReplaceDialogStyles
-{
-    // replace dialog (otherwise find dialog)
-    wxFR_REPLACEDIALOG = 1,
-
-    // don't allow changing the search direction
-    wxFR_NOUPDOWN      = 2,
-
-    // don't allow case sensitive searching
-    wxFR_NOMATCHCASE   = 4,
-
-    // don't allow whole word searching
-    wxFR_NOWHOLEWORD   = 8
-};
-
-
+// This makes it easier to specify a 'normal' border for a control
+#if defined(__SMARTPHONE__) || defined(__POCKETPC__)
+#define wxDEFAULT_CONTROL_BORDER    wxBORDER_SIMPLE
+#else
+#define wxDEFAULT_CONTROL_BORDER    wxBORDER_SUNKEN
+#endif
 
 // ----------------------------------------------------------------------------
 // Window style flags
@@ -233,13 +226,15 @@ enum wxFindReplaceDialogStyles
 #define wxNO_BORDER             wxBORDER_NONE
 */
 
-// Override CTL3D etc. control colour processing to allow own background
-// colour.
-// Override CTL3D or native 3D styles for children
-#define wxNO_3D                 0x00800000
-
-// OBSOLETE - use wxNO_3D instead
-#define wxUSER_COLOURS          wxNO_3D
+# I don't know why SWIG didn't already handle this--it seems 
+# to be confused because the original values were enums
+%constant wxBorder wxDOUBLE_BORDER = wxBORDER_DOUBLE;
+%constant wxBorder wxSUNKEN_BORDER = wxBORDER_SUNKEN;
+%constant wxBorder wxRAISED_BORDER = wxBORDER_RAISED;
+%constant wxBorder wxBORDER = wxBORDER_SIMPLE;
+%constant wxBorder wxSIMPLE_BORDER = wxBORDER_SIMPLE;
+%constant wxBorder wxSTATIC_BORDER = wxBORDER_STATIC;
+%constant wxBorder wxNO_BORDER = wxBORDER_NONE;
 
 // wxALWAYS_SHOW_SB: instead of hiding the scrollbar when it is not needed,
 // disable it - but still show (see also wxLB_ALWAYS_SB style)
@@ -267,8 +262,15 @@ enum wxFindReplaceDialogStyles
 // Windows, it won't normally get the dialog navigation key events)
 #define wxWANTS_CHARS           0x00040000
 
-// Make window retained (mostly Motif, I think) -- obsolete (VZ)?
+// Make window retained (Motif only, see src/generic/scrolwing.cpp)
+// This is non-zero only under wxMotif, to avoid a clash with wxPOPUP_WINDOW
+// on other platforms
+
+#ifdef __WXMOTIF__
 #define wxRETAINED              0x00020000
+#else
+#define wxRETAINED              0x00000000
+#endif
 #define wxBACKINGSTORE          wxRETAINED
 
 // set this flag to create a special popup window: it will be always shown on
@@ -276,9 +278,14 @@ enum wxFindReplaceDialogStyles
 // mouse is clicked outside of it or if it loses focus in any other way
 #define wxPOPUP_WINDOW          0x00020000
 
-// don't invalidate the whole window (resulting in a PAINT event) when the
-// window is resized (currently, makes sense for wxMSW only)
-#define wxNO_FULL_REPAINT_ON_RESIZE 0x00010000
+//  force a full repaint when the window is resized (instead of repainting just 
+//  the invalidated area)
+#define wxFULL_REPAINT_ON_RESIZE 0x00010000
+
+// obsolete: now this is the default behaviour 
+// don't invalidate the whole window (resulting in a PAINT event) when the 
+// window is resized (currently, makes sense for wxMSW only) 
+#define wxNO_FULL_REPAINT_ON_RESIZE 0
 
 /*
  * Extra window style flags (use wxWS_EX prefix to make it clear that they
@@ -303,39 +310,28 @@ enum wxFindReplaceDialogStyles
 // parent is destroyed before the child
 #define wxWS_EX_TRANSIENT               0x00000004
 
+/*  don't paint the window background, we'll assume it will */
+/*  be done by a theming engine. This is not yet used but could */
+/*  possibly be made to work in the future, at least on Windows */
+#define wxWS_EX_THEMED_BACKGROUND       0x00000008
+
+/*  this window should always process idle events */
+#define wxWS_EX_PROCESS_IDLE            0x00000010
+
+/*  this window should always process UI update events */
+#define wxWS_EX_PROCESS_UI_UPDATES      0x00000020
+
 // Use this style to add a context-sensitive help to the window (currently for
 // Win32 only and it doesn't work if wxMINIMIZE_BOX or wxMAXIMIZE_BOX are used)
 #define wxFRAME_EX_CONTEXTHELP  0x00000004
 #define wxDIALOG_EX_CONTEXTHELP 0x00000004
 
-/*
- * wxFrame/wxDialog style flags
- */
-#define wxSTAY_ON_TOP           0x8000
-#define wxICONIZE               0x4000
-#define wxMINIMIZE              wxICONIZE
-#define wxMAXIMIZE              0x2000
-                                        // free flag value: 0x1000
-#define wxSYSTEM_MENU           0x0800
-#define wxMINIMIZE_BOX          0x0400
-#define wxMAXIMIZE_BOX          0x0200
-#define wxTINY_CAPTION_HORIZ    0x0100
-#define wxTINY_CAPTION_VERT     0x0080
-#define wxRESIZE_BORDER         0x0040
+/*  Draw the window in a metal theme on Mac */
+#define wxFRAME_EX_METAL                0x00000040
+#define wxDIALOG_EX_METAL               0x00000040
 
-#define wxDIALOG_NO_PARENT      0x0001  // Don't make owned by apps top window
-#define wxFRAME_NO_TASKBAR      0x0002  // No taskbar button (MSW only)
-#define wxFRAME_TOOL_WINDOW     0x0004  // No taskbar button, no system menu
-#define wxFRAME_FLOAT_ON_PARENT 0x0008  // Always above its parent
-#define wxFRAME_SHAPED          0x0010  // Create a window that is able to be shaped
-
-// deprecated versions defined for compatibility reasons
-#define wxRESIZE_BOX            wxMAXIMIZE_BOX
-#define wxTHICK_FRAME           wxRESIZE_BORDER
-
-// obsolete styles, unused any more
-#define wxDIALOG_MODAL          0x0020  // free flag value 0x0020
-#define wxDIALOG_MODELESS       0x0000
+/*  Create a window which is attachable to another top level window */
+#define wxFRAME_DRAWER          0x0020
 
 /*
  * MDI parent frame style flags
@@ -343,33 +339,6 @@ enum wxFindReplaceDialogStyles
  */
 
 #define wxFRAME_NO_WINDOW_MENU  0x0100
-
-#define wxDEFAULT_FRAME_STYLE \
-  (wxSYSTEM_MENU | wxRESIZE_BORDER | \
-   wxMINIMIZE_BOX | wxMAXIMIZE_BOX | \
-   wxCAPTION | wxCLIP_CHILDREN)
-
-#if defined(__WXMSW__) || defined(__WXPM__) || defined(__WXMGL__)
-#   define wxDEFAULT_DIALOG_STYLE  (wxSYSTEM_MENU | wxCAPTION)
-#else
-//  Under Unix, the dialogs don't have a system menu. Specifying wxSYSTEM_MENU
-//  here will make a close button appear.
-#   define wxDEFAULT_DIALOG_STYLE  wxCAPTION
-#endif
-
-/*
- * wxExtDialog style flags
- */
-#define wxED_CLIENT_MARGIN      0x0004
-#define wxED_BUTTONS_BOTTOM     0x0000  // has no effect
-#define wxED_BUTTONS_RIGHT      0x0002
-#define wxED_STATIC_LINE        0x0001
-
-#if defined(__WXMSW__) || defined(__WXMAC__)
-#   define wxEXT_DIALOG_STYLE  (wxDEFAULT_DIALOG_STYLE|wxED_CLIENT_MARGIN)
-#else
-#   define wxEXT_DIALOG_STYLE  (wxDEFAULT_DIALOG_STYLE|wxED_CLIENT_MARGIN|wxED_STATIC_LINE)
-#endif
 
 /*
  * wxMenuBar style flags
@@ -424,44 +393,21 @@ enum wxFindReplaceDialogStyles
 #define wxRA_TOPTOBOTTOM    0x0002
 
 // New, more intuitive names to specify majorDim argument
-#define wxRA_SPECIFY_COLS   0x0004
-#define wxRA_SPECIFY_ROWS   0x0008
+#define wxRA_SPECIFY_COLS   wxHORIZONTAL
+#define wxRA_SPECIFY_ROWS   wxVERTICAL
 
 // Old names for compatibility
-#define wxRA_HORIZONTAL     0x0004
-#define wxRA_VERTICAL       0x0008
+#define wxRA_HORIZONTAL     wxHORIZONTAL
+#define wxRA_VERTICAL       wxVERTICAL
+#define wxRA_USE_CHECKBOX   0x0010 //alternative native subcontrols (wxPalmOS) 
+
 
 /*
  * wxRadioButton style flag
  */
 #define wxRB_GROUP          0x0004
 #define wxRB_SINGLE         0x0008
-
-/*
- * wxGauge flags
- */
-#define wxGA_HORIZONTAL      0x0004
-#define wxGA_VERTICAL        0x0008
-#define wxGA_PROGRESSBAR     0x0010
-// Windows only
-#define wxGA_SMOOTH          0x0020
-
-/*
- * wxSlider flags
- */
-#define wxSL_HORIZONTAL      0x0004
-#define wxSL_VERTICAL        0x0008
-// The next one is obsolete - use scroll events instead
-#define wxSL_NOTIFY_DRAG     0x0000
-#define wxSL_TICKS           0x0010
-#define wxSL_AUTOTICKS       wxSL_TICKS // we don't support manual ticks
-#define wxSL_LABELS          0x0020
-#define wxSL_LEFT            0x0040
-#define wxSL_TOP             0x0080
-#define wxSL_RIGHT           0x0100
-#define wxSL_BOTTOM          0x0200
-#define wxSL_BOTH            0x0400
-#define wxSL_SELRANGE        0x0800
+#define wxRB_USE_CHECKBOX   0x0010 // alternative native control (wxPalmOS)
 
 /*
  * wxScrollBar flags
@@ -481,20 +427,6 @@ enum wxFindReplaceDialogStyles
 #define wxSP_WRAP             0x2000
 
 /*
- * wxSplitterWindow flags
- */
-#define wxSP_NOBORDER         0x0000
-#define wxSP_NOSASH           0x0010
-#define wxSP_BORDER           0x0020
-#define wxSP_PERMIT_UNSPLIT   0x0040
-#define wxSP_LIVE_UPDATE      0x0080
-#define wxSP_3DSASH           0x0100
-#define wxSP_3DBORDER         0x0200
-#define wxSP_FULLSASH         0x0400
-#define wxSP_3D               (wxSP_3DBORDER | wxSP_3DSASH)
-#define wxSP_SASH_AQUA        0x0800
-
-/*
  * wxNotebook flags
  */
 #define wxNB_FIXEDWIDTH       0x0010
@@ -503,6 +435,29 @@ enum wxFindReplaceDialogStyles
 #define wxNB_RIGHT            0x0040
 #define wxNB_BOTTOM           0x0080
 #define wxNB_MULTILINE        0x0100
+#define wxNB_NOPAGETHEME      0x0200
+#define wxNB_FLAT             0x0400
+#define wxNB_DEFAULT          wxNB_TOP
+
+/*
+ * wxListbook flags
+ */
+#define wxLB_DEFAULT          0x0
+#define wxLB_TOP              0x1
+#define wxLB_BOTTOM           0x2
+#define wxLB_LEFT             0x4
+#define wxLB_RIGHT            0x8
+#define wxLB_ALIGN_MASK       0xf
+
+/*
+ * wxChoicebook flags
+ */
+#define wxCHB_DEFAULT         0x0
+#define wxCHB_TOP             0x1
+#define wxCHB_BOTTOM          0x2
+#define wxCHB_LEFT            0x4
+#define wxCHB_RIGHT           0x8
+#define wxCHB_ALIGN_MASK      0xf
 
 /*
  * wxTabCtrl flags
@@ -515,17 +470,6 @@ enum wxFindReplaceDialogStyles
 #define wxTC_BOTTOM           0x0080
 #define wxTC_MULTILINE        wxNB_MULTILINE
 #define wxTC_OWNERDRAW        0x0200
-
-// wxToolBar style flags
-#define wxTB_HORIZONTAL     0x0004
-#define wxTB_VERTICAL       0x0008
-#define wxTB_3DBUTTONS      0x0010
-#define wxTB_FLAT           0x0020          // supported only under Win98+/GTK
-#define wxTB_DOCKABLE       0x0040          // use native docking under GTK
-#define wxTB_NOICONS        0x0080          // don't show the icons
-#define wxTB_TEXT           0x0100          // show the text
-#define wxTB_NODIVIDER      0x0200          // don't show the divider (Windows)
-#define wxTB_NOALIGN        0x0400          // no automatic alignment (Windows)
 
 /*
  * wxStatusBar95 flags
@@ -556,10 +500,9 @@ enum wxFindReplaceDialogStyles
 #define wxPD_AUTO_HIDE          0x0004
 #define wxPD_ELAPSED_TIME       0x0008
 #define wxPD_ESTIMATED_TIME     0x0010
-// wxGA_SMOOTH = 0x0020 may also be used with wxProgressDialog
-// NO!!! This is wxDIALOG_MODAL and will cause the progress dialog to
-// be modal. No progress will then be made at all.
+#define wxPD_SMOOTH             0x0020
 #define wxPD_REMAINING_TIME     0x0040
+#define wxPD_CAN_SKIP           0x0080
 
 /*
  * wxDirDialog styles
@@ -601,6 +544,17 @@ enum wxFindReplaceDialogStyles
 #define  wxMORE                 0x00010000
 #define  wxSETUP                0x00020000
 
+/*
+ * Background styles. See wxWindow::SetBackgroundStyle
+ */
+
+enum wxBackgroundStyle
+{
+  wxBG_STYLE_SYSTEM,
+  wxBG_STYLE_COLOUR,
+  wxBG_STYLE_CUSTOM
+};
+
 // ----------------------------------------------------------------------------
 // standard IDs
 // ----------------------------------------------------------------------------
@@ -615,7 +569,7 @@ enum
 // id for a separator line in the menu (invalid for normal item)
 enum
 {
-    wxID_SEPARATOR = -1
+    wxID_SEPARATOR = -2
 };
 
 // Standard menu IDs
@@ -642,6 +596,7 @@ enum
     wxID_HELP_PROCEDURES,
     wxID_HELP_CONTEXT,
     wxID_CLOSE_ALL,
+    wxID_PREFERENCES ,
 
     wxID_CUT = 5030,
     wxID_COPY,
@@ -650,6 +605,19 @@ enum
     wxID_FIND,
     wxID_DUPLICATE,
     wxID_SELECTALL,
+    wxID_DELETE,
+    wxID_REPLACE,
+    wxID_REPLACE_ALL,
+    wxID_PROPERTIES,    
+
+    wxID_VIEW_DETAILS,
+    wxID_VIEW_LARGEICONS,
+    wxID_VIEW_SMALLICONS,
+    wxID_VIEW_LIST,
+    wxID_VIEW_SORTDATE,
+    wxID_VIEW_SORTNAME,
+    wxID_VIEW_SORTSIZE,
+    wxID_VIEW_SORTTYPE,
 
     wxID_FILE1 = 5050,
     wxID_FILE2,
@@ -680,6 +648,31 @@ enum
     wxID_ABORT,
     wxID_RETRY,
     wxID_IGNORE,
+    wxID_ADD,
+    wxID_REMOVE,    
+    
+    wxID_UP,
+    wxID_DOWN,
+    wxID_HOME,
+    wxID_REFRESH,
+    wxID_STOP,
+    wxID_INDEX,
+
+    wxID_BOLD,
+    wxID_ITALIC,
+    wxID_JUSTIFY_CENTER,
+    wxID_JUSTIFY_FILL,
+    wxID_JUSTIFY_RIGHT,
+    wxID_JUSTIFY_LEFT,
+    wxID_UNDERLINE,
+    wxID_INDENT,
+    wxID_UNINDENT,
+    wxID_ZOOM_100,
+    wxID_ZOOM_FIT,
+    wxID_ZOOM_IN,
+    wxID_ZOOM_OUT,
+    wxID_UNDELETE,
+    wxID_REVERT_TO_SAVED,    
 
     // System menu IDs (used by wxUniv):
     wxID_SYSTEM_MENU = 5200,
@@ -754,9 +747,71 @@ enum wxHitTest
 // Don't do parent client adjustments (for implementation only)
 #define wxSIZE_NO_ADJUSTMENTS   0x0008
 
+// ----------------------------------------------------------------------------
+// GDI descriptions
+// ----------------------------------------------------------------------------
 
-// VZ: why doesn't it start with "wx"? FIXME
-#define IS_HATCH(s)    ((s)>=wxBDIAGONAL_HATCH && (s)<=wxVERTICAL_HATCH)
+enum
+{
+    // Text font families
+    wxDEFAULT    = 70,
+    wxDECORATIVE,
+    wxROMAN,
+    wxSCRIPT,
+    wxSWISS,
+    wxMODERN,
+    wxTELETYPE,  /* @@@@ */
+
+    // Proportional or Fixed width fonts (not yet used)
+    wxVARIABLE   = 80,
+    wxFIXED,
+
+    wxNORMAL     = 90,
+    wxLIGHT,
+    wxBOLD,
+    // Also wxNORMAL for normal (non-italic text)
+    wxITALIC,
+    wxSLANT,
+
+    // Pen styles
+    wxSOLID      =   100,
+    wxDOT,
+    wxLONG_DASH,
+    wxSHORT_DASH,
+    wxDOT_DASH,
+    wxUSER_DASH,
+
+    wxTRANSPARENT,
+
+    // Brush & Pen Stippling. Note that a stippled pen cannot be dashed!!
+    // Note also that stippling a Pen IS meaningfull, because a Line is
+    wxSTIPPLE_MASK_OPAQUE, //mask is used for blitting monochrome using text fore and back ground colors
+    wxSTIPPLE_MASK,        //mask is used for masking areas in the stipple bitmap (TO DO)
+    // drawn with a Pen, and without any Brush -- and it can be stippled.
+    wxSTIPPLE =          110,
+    wxBDIAGONAL_HATCH,
+    wxCROSSDIAG_HATCH,
+    wxFDIAGONAL_HATCH,
+    wxCROSS_HATCH,
+    wxHORIZONTAL_HATCH,
+    wxVERTICAL_HATCH,
+    wxFIRST_HATCH = wxBDIAGONAL_HATCH,
+    wxLAST_HATCH = wxVERTICAL_HATCH,    
+
+    wxJOIN_BEVEL =     120,
+    wxJOIN_MITER,
+    wxJOIN_ROUND,
+
+    wxCAP_ROUND =      130,
+    wxCAP_PROJECTING,
+    wxCAP_BUTT
+};
+
+#if WXWIN_COMPATIBILITY_2_4
+    #define IS_HATCH(s)    ((s)>=wxFIRST_HATCH && (s)<=wxLAST_HATCH)
+#else
+    /* use wxBrush::IsHatch() instead thought wxMotif still uses it in src/motif/dcclient.cpp */
+#endif
 
 // Logical ops
 typedef enum
@@ -935,8 +990,46 @@ enum wxKeyCode
     WXK_NUMPAD_SEPARATOR,
     WXK_NUMPAD_SUBTRACT,
     WXK_NUMPAD_DECIMAL,
-    WXK_NUMPAD_DIVIDE
+    WXK_NUMPAD_DIVIDE,
+    
+    WXK_WINDOWS_LEFT,
+    WXK_WINDOWS_RIGHT,
+    WXK_WINDOWS_MENU ,
+    WXK_COMMAND,
+
+    // Hardware-specific buttons
+    WXK_SPECIAL1 = 193,
+    WXK_SPECIAL2,
+    WXK_SPECIAL3,
+    WXK_SPECIAL4,
+    WXK_SPECIAL5,
+    WXK_SPECIAL6,
+    WXK_SPECIAL7,
+    WXK_SPECIAL8,
+    WXK_SPECIAL9,
+    WXK_SPECIAL10,
+    WXK_SPECIAL11,
+    WXK_SPECIAL12,
+    WXK_SPECIAL13,
+    WXK_SPECIAL14,
+    WXK_SPECIAL15,
+    WXK_SPECIAL16,
+    WXK_SPECIAL17,
+    WXK_SPECIAL18,
+    WXK_SPECIAL19,
+    WXK_SPECIAL20    
 };
+
+#if wxUSE_HOTKEY
+enum wxHotkeyModifier
+{
+    wxMOD_NONE = 0,
+    wxMOD_ALT = 1,
+    wxMOD_CONTROL = 2,
+    wxMOD_SHIFT = 4,
+    wxMOD_WIN = 8
+};
+#endif
 
 // Mapping modes (same values as used by Windows, don't change)
 enum
@@ -1026,8 +1119,58 @@ typedef enum
     wxPAPER_B5_EXTRA,           // B5 (ISO) Extra 201 x 276 mm
     wxPAPER_A2,                 // A2 420 x 594 mm
     wxPAPER_A3_TRANSVERSE,      // A3 Transverse 297 x 420 mm
-    wxPAPER_A3_EXTRA_TRANSVERSE // A3 Extra Transverse 322 x 445 mm
+    wxPAPER_A3_EXTRA_TRANSVERSE, // A3 Extra Transverse 322 x 445 mm
 
+    wxPAPER_DBL_JAPANESE_POSTCARD,// Japanese Double Postcard 200 x 148 mm 
+    wxPAPER_A6,                 // A6 105 x 148 mm 
+    wxPAPER_JENV_KAKU2,         // Japanese Envelope Kaku #2 
+    wxPAPER_JENV_KAKU3,         // Japanese Envelope Kaku #3 
+    wxPAPER_JENV_CHOU3,         // Japanese Envelope Chou #3 
+    wxPAPER_JENV_CHOU4,         // Japanese Envelope Chou #4 
+    wxPAPER_LETTER_ROTATED,     // Letter Rotated 11 x 8 1/2 in 
+    wxPAPER_A3_ROTATED,         // A3 Rotated 420 x 297 mm 
+    wxPAPER_A4_ROTATED,         // A4 Rotated 297 x 210 mm 
+    wxPAPER_A5_ROTATED,         // A5 Rotated 210 x 148 mm 
+    wxPAPER_B4_JIS_ROTATED,     // B4 (JIS) Rotated 364 x 257 mm 
+    wxPAPER_B5_JIS_ROTATED,     // B5 (JIS) Rotated 257 x 182 mm 
+    wxPAPER_JAPANESE_POSTCARD_ROTATED,// Japanese Postcard Rotated 148 x 100 mm 
+    wxPAPER_DBL_JAPANESE_POSTCARD_ROTATED,// Double Japanese Postcard Rotated 148 x 200 mm 
+    wxPAPER_A6_ROTATED,         // A6 Rotated 148 x 105 mm 
+    wxPAPER_JENV_KAKU2_ROTATED, // Japanese Envelope Kaku #2 Rotated 
+    wxPAPER_JENV_KAKU3_ROTATED, // Japanese Envelope Kaku #3 Rotated 
+    wxPAPER_JENV_CHOU3_ROTATED, // Japanese Envelope Chou #3 Rotated 
+    wxPAPER_JENV_CHOU4_ROTATED, // Japanese Envelope Chou #4 Rotated 
+    wxPAPER_B6_JIS,             // B6 (JIS) 128 x 182 mm 
+    wxPAPER_B6_JIS_ROTATED,     // B6 (JIS) Rotated 182 x 128 mm 
+    wxPAPER_12X11,              // 12 x 11 in 
+    wxPAPER_JENV_YOU4,          // Japanese Envelope You #4 
+    wxPAPER_JENV_YOU4_ROTATED,  // Japanese Envelope You #4 Rotated 
+    wxPAPER_P16K,               // PRC 16K 146 x 215 mm 
+    wxPAPER_P32K,               // PRC 32K 97 x 151 mm 
+    wxPAPER_P32KBIG,            // PRC 32K(Big) 97 x 151 mm 
+    wxPAPER_PENV_1,             // PRC Envelope #1 102 x 165 mm 
+    wxPAPER_PENV_2,             // PRC Envelope #2 102 x 176 mm 
+    wxPAPER_PENV_3,             // PRC Envelope #3 125 x 176 mm 
+    wxPAPER_PENV_4,             // PRC Envelope #4 110 x 208 mm 
+    wxPAPER_PENV_5,             // PRC Envelope #5 110 x 220 mm 
+    wxPAPER_PENV_6,             // PRC Envelope #6 120 x 230 mm 
+    wxPAPER_PENV_7,             // PRC Envelope #7 160 x 230 mm 
+    wxPAPER_PENV_8,             // PRC Envelope #8 120 x 309 mm 
+    wxPAPER_PENV_9,             // PRC Envelope #9 229 x 324 mm 
+    wxPAPER_PENV_10,            // PRC Envelope #10 324 x 458 mm 
+    wxPAPER_P16K_ROTATED,       // PRC 16K Rotated 
+    wxPAPER_P32K_ROTATED,       // PRC 32K Rotated 
+    wxPAPER_P32KBIG_ROTATED,    // PRC 32K(Big) Rotated 
+    wxPAPER_PENV_1_ROTATED,     // PRC Envelope #1 Rotated 165 x 102 mm 
+    wxPAPER_PENV_2_ROTATED,     // PRC Envelope #2 Rotated 176 x 102 mm 
+    wxPAPER_PENV_3_ROTATED,     // PRC Envelope #3 Rotated 176 x 125 mm 
+    wxPAPER_PENV_4_ROTATED,     // PRC Envelope #4 Rotated 208 x 110 mm 
+    wxPAPER_PENV_5_ROTATED,     // PRC Envelope #5 Rotated 220 x 110 mm 
+    wxPAPER_PENV_6_ROTATED,     // PRC Envelope #6 Rotated 230 x 120 mm 
+    wxPAPER_PENV_7_ROTATED,     // PRC Envelope #7 Rotated 230 x 160 mm 
+    wxPAPER_PENV_8_ROTATED,     // PRC Envelope #8 Rotated 309 x 120 mm 
+    wxPAPER_PENV_9_ROTATED,     // PRC Envelope #9 Rotated 324 x 229 mm 
+    wxPAPER_PENV_10_ROTATED     // PRC Envelope #10 Rotated 458 x 324 m 
 } wxPaperSize;
 
 /* Printing orientation */
@@ -1064,57 +1207,20 @@ enum wxPrintMode
     wxPRINT_MODE_NONE =    0,
     wxPRINT_MODE_PREVIEW = 1,   // Preview in external application
     wxPRINT_MODE_FILE =    2,   // Print to file
-    wxPRINT_MODE_PRINTER = 3    // Send to printer
+    wxPRINT_MODE_PRINTER = 3,   // Send to printer
+    wxPRINT_MODE_STREAM =  4    //  Send postscript data into a stream
 };
 
-// ----------------------------------------------------------------------------
-// wxTextCtrl style flags
-// ----------------------------------------------------------------------------
+//  ---------------------------------------------------------------------------- 
+//  UpdateWindowUI flags
+//  ---------------------------------------------------------------------------- 
 
-// the flag bits 0x0001, and 0x0004 are free but should be used only for the
-// things which don't make sense for a text control used by wxTextEntryDialog
-// because they would otherwise conflict with wxOK, wxCANCEL, wxCENTRE
-
-#define wxTE_NO_VSCROLL     0x0002
-#define wxTE_AUTO_SCROLL    0x0008
-
-#define wxTE_READONLY       0x0010
-#define wxTE_MULTILINE      0x0020
-#define wxTE_PROCESS_TAB    0x0040
-
-// alignment flags
-#define wxTE_LEFT           0x0000                    // 0x0000
-#define wxTE_CENTER         wxALIGN_CENTER_HORIZONTAL // 0x0100
-#define wxTE_RIGHT          wxALIGN_RIGHT             // 0x0200
-#define wxTE_CENTRE         wxTE_CENTER
-
-// this style means to use RICHEDIT control and does something only under wxMSW
-// and Win32 and is silently ignored under all other platforms
-#define wxTE_RICH           0x0080
-
-#define wxTE_PROCESS_ENTER  0x0400
-#define wxTE_PASSWORD       0x0800
-
-// automatically detect the URLs and generate the events when mouse is
-// moved/clicked over an URL
-//
-// this is for Win32 richedit controls only so far
-#define wxTE_AUTO_URL       0x1000
-
-// by default, the Windows text control doesn't show the selection when it
-// doesn't have focus - use this style to force it to always show it
-#define wxTE_NOHIDESEL      0x2000
-
-// use wxHSCROLL to not wrap text at all, wxTE_LINEWRAP to wrap it at any
-// position and wxTE_WORDWRAP to wrap at words boundary
-#define wxTE_DONTWRAP       wxHSCROLL
-#define wxTE_LINEWRAP       0x4000
-#define wxTE_WORDWRAP       0x0000  // it's just == !wxHSCROLL
-
-// force using RichEdit version 2.0 or 3.0 instead of 1.0 (default) for
-// wxTE_RICH controls - can be used together with or instead of wxTE_RICH
-#define wxTE_RICH2          0x8000
-
+enum wxUpdateUI
+{
+    wxUPDATE_UI_NONE          = 0x0000,
+    wxUPDATE_UI_RECURSE       = 0x0001,
+    wxUPDATE_UI_FROMIDLE      = 0x0002 /*  Invoked from On(Internal)Idle */
+};
 
 // ----------------------------------------------------------------------------
 // miscellaneous
@@ -1133,6 +1239,24 @@ enum wxPrintMode
 #   define wxALL_FILES_PATTERN   wxT("*")
 #   define wxALL_FILES           gettext_noop("All files (*)|*")
 #endif
+
+#if defined(__CYGWIN__) && defined(__WXMSW__)
+#   if wxUSE_STL || defined(wxUSE_STD_STRING)
+         /*
+            NASTY HACK because the gethostname in sys/unistd.h which the gnu
+            stl includes and wx builds with by default clash with each other
+            (windows version 2nd param is int, sys/unistd.h version is unsigned
+            int).  
+          */
+#        define gethostname gethostnameHACK
+#        include <unistd.h>
+#        undef gethostname
+#   endif
+#endif
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/gdicmn.h
+//** ---------------------------------------------------------------------------- **
 
 enum wxBitmapType
 {
@@ -1171,70 +1295,6 @@ enum wxBitmapType
     wxBITMAP_TYPE_ANY = 50
 };
 
-
-%constant wxDD_NEW_DIR_BUTTON = 0x0080 
-/*
- * Just include the font encodings
- */
-// ----------------------------------------------------------------------------
-// GDI descriptions
-// ----------------------------------------------------------------------------
-
-enum
-{
-    // Text font families
-    wxDEFAULT    = 70,
-    wxDECORATIVE,
-    wxROMAN,
-    wxSCRIPT,
-    wxSWISS,
-    wxMODERN,
-    wxTELETYPE,  /* @@@@ */
-
-    // Proportional or Fixed width fonts (not yet used)
-    wxVARIABLE   = 80,
-    wxFIXED,
-
-    wxNORMAL     = 90,
-    wxLIGHT,
-    wxBOLD,
-    // Also wxNORMAL for normal (non-italic text)
-    wxITALIC,
-    wxSLANT,
-
-    // Pen styles
-    wxSOLID      =   100,
-    wxDOT,
-    wxLONG_DASH,
-    wxSHORT_DASH,
-    wxDOT_DASH,
-    wxUSER_DASH,
-
-    wxTRANSPARENT,
-
-    // Brush & Pen Stippling. Note that a stippled pen cannot be dashed!!
-    // Note also that stippling a Pen IS meaningfull, because a Line is
-    wxSTIPPLE_MASK_OPAQUE, //mask is used for blitting monochrome using text fore and back ground colors
-    wxSTIPPLE_MASK,        //mask is used for masking areas in the stipple bitmap (TO DO)
-    // drawn with a Pen, and without any Brush -- and it can be stippled.
-    wxSTIPPLE =          110,
-    wxBDIAGONAL_HATCH,
-    wxCROSSDIAG_HATCH,
-    wxFDIAGONAL_HATCH,
-    wxCROSS_HATCH,
-    wxHORIZONTAL_HATCH,
-    wxVERTICAL_HATCH,
-
-    wxJOIN_BEVEL =     120,
-    wxJOIN_MITER,
-    wxJOIN_ROUND,
-
-    wxCAP_ROUND =      130,
-    wxCAP_PROJECTING,
-    wxCAP_BUTT
-};
-
- 
 // Standard cursors
 enum wxStockCursor
 {
@@ -1284,6 +1344,14 @@ enum wxStockCursor
     wxCURSOR_MAX
 };
 
+#ifndef __WXGTK__
+    #define wxCURSOR_DEFAULT wxCURSOR_ARROW
+#endif
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/listbase.h - For ListCtrl
+//** ---------------------------------------------------------------------------- **
+
 #define wxLC_VRULES          0x0001
 #define wxLC_HRULES          0x0002
 
@@ -1310,28 +1378,458 @@ enum wxStockCursor
 // for compatibility only
 #define wxLC_USER_TEXT       wxLC_VIRTUAL
 
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/button.h
+//** ---------------------------------------------------------------------------- **
 
- 
-#ifndef __WXGTK__
-    #define wxCURSOR_DEFAULT wxCURSOR_ARROW
+#if wxUSE_TOGGLEBTN || wxUSE_BUTTON
+
+// These flags affect label alignment
+#define wxBU_LEFT            0x0040
+#define wxBU_TOP             0x0080
+#define wxBU_RIGHT           0x0100
+#define wxBU_BOTTOM          0x0200
+#define wxBU_ALIGN_MASK      ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM )
+
 #endif
 
+#if wxUSE_BUTTON
 
+// ----------------------------------------------------------------------------
+// wxButton specific flags
+// ----------------------------------------------------------------------------
 
+// These two flags are obsolete
+#define wxBU_NOAUTODRAW      0x0000
+#define wxBU_AUTODRAW        0x0004
 
+// by default, the buttons will be created with some (system dependent)
+// minimal size to make them look nicer, giving this style will make them as
+// small as possible
+#define wxBU_EXACTFIT        0x0001
+
+#endif
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/treebase.h
+//** ---------------------------------------------------------------------------- ** 
+
+// tree constants
+#define wxTR_NO_BUTTONS              0x0000     // for convenience
+#define wxTR_HAS_BUTTONS             0x0001     // draw collapsed/expanded btns
+#define wxTR_NO_LINES                0x0004     // don't draw lines at all
+#define wxTR_LINES_AT_ROOT           0x0008     // connect top-level nodes
+#define wxTR_TWIST_BUTTONS           0x0010     // still used by wxTreeListCtrl
+#define wxTR_SINGLE                  0x0000     // for convenience
+#define wxTR_MULTIPLE                0x0020     // can select multiple items
+#define wxTR_EXTENDED                0x0040     // TODO: allow extended selection
+#define wxTR_HAS_VARIABLE_ROW_HEIGHT 0x0080     // what it says
+#define wxTR_EDIT_LABELS             0x0200     // can edit item labels
+#define wxTR_ROW_LINES               0x0400     // put border around items
+#define wxTR_HIDE_ROOT               0x0800     // don't display root node
+#define wxTR_FULL_ROW_HIGHLIGHT      0x2000     // highlight full horz space
+#ifdef __WXGTK20__
+#define wxTR_DEFAULT_STYLE           (wxTR_HAS_BUTTONS | wxTR_NO_LINES)
+#else
+#define wxTR_DEFAULT_STYLE           (wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT)
+#endif
+
+// deprecated, don't use
+#define wxTR_MAC_BUTTONS             0
+#define wxTR_AQUA_BUTTONS            0
+
+%constant const int TREE_HITTEST_ABOVE            = 0x0001;
+%constant const int TREE_HITTEST_BELOW            = 0x0002;
+%constant const int TREE_HITTEST_NOWHERE          = 0x0004;
+    // on the button associated with an item.
+%constant const int TREE_HITTEST_ONITEMBUTTON     = 0x0008;
+    // on the bitmap associated with an item.
+%constant const int TREE_HITTEST_ONITEMICON       = 0x0010;
+    // on the indent associated with an item.
+%constant const int TREE_HITTEST_ONITEMINDENT     = 0x0020;
+    // on the label (string) associated with an item.
+%constant const int TREE_HITTEST_ONITEMLABEL      = 0x0040;
+    // on the right of the label associated with an item.
+%constant const int TREE_HITTEST_ONITEMRIGHT      = 0x0080;
+    // on the label (string) associated with an item.
+%constant const int TREE_HITTEST_ONITEMSTATEICON  = 0x0100;
+    // on the left of the wxTreeCtrl.
+%constant const int TREE_HITTEST_TOLEFT           = 0x0200;
+    // on the right of the wxTreeCtrl.
+%constant const int TREE_HITTEST_TORIGHT          = 0x0400;
+    // on the upper part (first half) of the item.
+%constant const int TREE_HITTEST_ONITEMUPPERPART  = 0x0800;
+    // on the lower part (second half) of the item.
+%constant const int TREE_HITTEST_ONITEMLOWERPART  = 0x1000;
+
+    // anywhere on the item
+%constant const int TREE_HITTEST_ONITEM  = 0x0010 | 0x0040;//TREE_HITTEST_ONITEMICON | TREE_HITTEST_ONITEMLABEL;
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/calctrl.h
+//** ---------------------------------------------------------------------------- ** 
+
+// calendar constants
+enum
+{
+    // show Sunday as the first day of the week (default)
+    wxCAL_SUNDAY_FIRST               = 0x0000,
+                                                                                
+    // show Monder as the first day of the week
+    wxCAL_MONDAY_FIRST               = 0x0001,
+                                                                                
+    // highlight holidays
+    wxCAL_SHOW_HOLIDAYS              = 0x0002,
+                                                                                
+    // disable the year change control, show only the month change one
+    wxCAL_NO_YEAR_CHANGE             = 0x0004,
+                                                                                
+    // don't allow changing neither month nor year (implies
+    // wxCAL_NO_YEAR_CHANGE)
+    wxCAL_NO_MONTH_CHANGE            = 0x000c,
+                                                                                
+    // use MS-style month-selection instead of combo-spin combination
+    wxCAL_SEQUENTIAL_MONTH_SELECTION = 0x0010,
+                                                                                
+    // show the neighbouring weeks in the previous and next month
+    wxCAL_SHOW_SURROUNDING_WEEKS     = 0x0020
+};
+
+enum wxCalendarHitTestResult
+{
+    wxCAL_HITTEST_NOWHERE,      // outside of anything
+    wxCAL_HITTEST_HEADER,       // on the header (weekdays)
+    wxCAL_HITTEST_DAY,          // on a day in the calendar
+    wxCAL_HITTEST_INCMONTH,
+    wxCAL_HITTEST_DECMONTH,
+    wxCAL_HITTEST_SURROUNDING_WEEK
+};
+
+// border types for a date
+enum wxCalendarDateBorder
+{
+    wxCAL_BORDER_NONE,          // no border (default)
+    wxCAL_BORDER_SQUARE,        // a rectangular border
+    wxCAL_BORDER_ROUND          // a round border
+};
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/toplevel.h
+//** ---------------------------------------------------------------------------- ** 
+
+/*
+ * wxFrame/wxDialog style flags
+ */
+#define wxSTAY_ON_TOP           0x8000
+#define wxICONIZE               0x4000
+#define wxMINIMIZE              wxICONIZE
+#define wxMAXIMIZE              0x2000
+#define wxCLOSE_BOX             0x1000
+                                        // free flag value: 0x1000
+#define wxSYSTEM_MENU           0x0800
+#define wxMINIMIZE_BOX          0x0400
+#define wxMAXIMIZE_BOX          0x0200
+#define wxTINY_CAPTION_HORIZ    0x0100
+#define wxTINY_CAPTION_VERT     0x0080
+#define wxRESIZE_BORDER         0x0040
+
+// deprecated versions defined for compatibility reasons
+#define wxRESIZE_BOX            wxMAXIMIZE_BOX
+#define wxTHICK_FRAME           wxRESIZE_BORDER
+
+// obsolete styles, unused any more
+#define wxDIALOG_MODAL          0
+#define wxDIALOG_MODELESS       0
+#define wxNO_3D                 0
+#define wxUSER_COLOURS          0
+
+// default style
+//
+// under Windows CE (at least when compiling with eVC 4) we should create
+// top level windows without any styles at all for them to appear
+// "correctly", i.e. as full screen windows with a "hide" button (same as
+// "close" but round instead of squared and just hides the applications
+// instead of closing it) in the title bar
+#if defined(__WXWINCE__)
+    #if defined(__SMARTPHONE__)
+        #define wxDEFAULT_FRAME_STYLE (wxMAXIMIZE)
+    #elif defined(__WINCE_STANDARDSDK__)
+        #define wxDEFAULT_FRAME_STYLE (wxMAXIMIZE|wxCLOSE_BOX)
+    #else
+        #define wxDEFAULT_FRAME_STYLE (wxNO_BORDER)
+    #endif
+#else // !__WXWINCE__
+    #define wxDEFAULT_FRAME_STYLE \
+            (wxSYSTEM_MENU | \
+             wxRESIZE_BORDER | \
+             wxMINIMIZE_BOX | \
+             wxMAXIMIZE_BOX | \
+             wxCLOSE_BOX | \
+             wxCAPTION | \
+             wxCLIP_CHILDREN)
+#endif
+
+// Dialogs are created in a special way
+#define wxTOPLEVEL_EX_DIALOG        0x00000008
+
+// Styles for ShowFullScreen
+// (note that wxTopLevelWindow only handles wxFULLSCREEN_NOBORDER and
+//  wxFULLSCREEN_NOCAPTION; the rest is handled by wxTopLevelWindow)
+enum
+{
+    wxFULLSCREEN_NOMENUBAR   = 0x0001,
+    wxFULLSCREEN_NOTOOLBAR   = 0x0002,
+    wxFULLSCREEN_NOSTATUSBAR = 0x0004,
+    wxFULLSCREEN_NOBORDER    = 0x0008,
+    wxFULLSCREEN_NOCAPTION   = 0x0010,
+
+    wxFULLSCREEN_ALL         = wxFULLSCREEN_NOMENUBAR | wxFULLSCREEN_NOTOOLBAR |
+                               wxFULLSCREEN_NOSTATUSBAR | wxFULLSCREEN_NOBORDER |
+                               wxFULLSCREEN_NOCAPTION
+};
+
+// Styles for RequestUserAttention
+enum
+{
+    wxUSER_ATTENTION_INFO = 1,
+    wxUSER_ATTENTION_ERROR = 2
+};
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/frame.h
+//** ---------------------------------------------------------------------------- ** 
+
+// wxFrame-specific (i.e. not for wxDialog) styles
+#define wxFRAME_NO_TASKBAR      0x0002  // No taskbar button (MSW only)
+#define wxFRAME_TOOL_WINDOW     0x0004  // No taskbar button, no system menu
+#define wxFRAME_FLOAT_ON_PARENT 0x0008  // Always above its parent
+#define wxFRAME_SHAPED          0x0010  // Create a window that is able to be shaped
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/dialog.h
+//** ---------------------------------------------------------------------------- ** 
+
+#define wxDIALOG_NO_PARENT      0x0001  // Don't make owned by apps top window
+
+#ifdef __WXWINCE__
+#define wxDEFAULT_DIALOG_STYLE  (wxCAPTION | wxMAXIMIZE | wxCLOSE_BOX | wxNO_BORDER)
+#else
+#define wxDEFAULT_DIALOG_STYLE  (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX)
+#endif
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/gauge.h
+//** ---------------------------------------------------------------------------- ** 
+
+#define wxGA_HORIZONTAL      wxHORIZONTAL
+#define wxGA_VERTICAL        wxVERTICAL
+
+// Win32 only, is default (and only) on some other platforms
+#define wxGA_SMOOTH          0x0020
+
+// obsolete style
+#define wxGA_PROGRESSBAR     0
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/slider.h
+//** ---------------------------------------------------------------------------- ** 
+
+/*
+ * wxSlider flags
+ */
+#define wxSL_HORIZONTAL      wxHORIZONTAL
+#define wxSL_VERTICAL        wxVERTICAL
+
+#define wxSL_TICKS           0x0010
+#define wxSL_AUTOTICKS       wxSL_TICKS // we don't support manual ticks
+#define wxSL_LABELS          0x0020
+#define wxSL_LEFT            0x0040
+#define wxSL_TOP             0x0080
+#define wxSL_RIGHT           0x0100
+#define wxSL_BOTTOM          0x0200
+#define wxSL_BOTH            0x0400
+#define wxSL_SELRANGE        0x0800
+#define wxSL_INVERSE         0x1000
+
+// obsolete
+#define wxSL_NOTIFY_DRAG     0x0000
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/splitter.h
+//** ---------------------------------------------------------------------------- ** 
+
+/*
+ * wxSplitterWindow flags
+ */
+#define wxSP_NOBORDER         0x0000
+#define wxSP_NOSASH           0x0010
+#define wxSP_PERMIT_UNSPLIT   0x0040
+#define wxSP_LIVE_UPDATE      0x0080
+#define wxSP_3DSASH           0x0100
+#define wxSP_3DBORDER         0x0200
+#define wxSP_NO_XP_THEME      0x0400
+#define wxSP_BORDER           wxSP_3DBORDER
+#define wxSP_3D               (wxSP_3DBORDER | wxSP_3DSASH)
+
+// obsolete styles, don't do anything
+#define wxSP_SASH_AQUA        0
+#define wxSP_FULLSASH         0
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/toolbar.h
+//** ---------------------------------------------------------------------------- ** 
+
+// wxToolBar style flags
+enum
+{
+    // lay out the toolbar horizontally
+    wxTB_HORIZONTAL  = wxHORIZONTAL,    // == 0x0004
+
+    // lay out the toolbar vertically
+    wxTB_VERTICAL    = wxVERTICAL,      // == 0x0008
+
+    // show 3D buttons (wxToolBarSimple only)
+    wxTB_3DBUTTONS   = 0x0010,
+
+    // "flat" buttons (Win32/GTK only)
+    wxTB_FLAT        = 0x0020,
+
+    // dockable toolbar (GTK only)
+    wxTB_DOCKABLE    = 0x0040,
+
+    // don't show the icons (they're shown by default)
+    wxTB_NOICONS     = 0x0080,
+
+    // show the text (not shown by default)
+    wxTB_TEXT        = 0x0100,
+
+    // don't show the divider between toolbar and the window (Win32 only)
+    wxTB_NODIVIDER   = 0x0200,
+
+    // no automatic alignment (Win32 only, useless)
+    wxTB_NOALIGN     = 0x0400,
+
+    // show the text and the icons alongside, not vertically stacked (Win32/GTK)
+    wxTB_HORZ_LAYOUT = 0x0800,
+    wxTB_HORZ_TEXT   = wxTB_HORZ_LAYOUT | wxTB_TEXT
+};
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/textctrl.h
+//** ---------------------------------------------------------------------------- ** 
+// wxTextCtrl style flags
+
+// the flag bits 0x0001, and 0x0004 are free but should be used only for the
+// things which don't make sense for a text control used by wxTextEntryDialog
+// because they would otherwise conflict with wxOK, wxCANCEL, wxCENTRE
+
+#define wxTE_NO_VSCROLL     0x0002
+#define wxTE_AUTO_SCROLL    0x0008
+
+#define wxTE_READONLY       0x0010
+#define wxTE_MULTILINE      0x0020
+#define wxTE_PROCESS_TAB    0x0040
+
+// alignment flags
+#define wxTE_LEFT           0x0000                    // 0x0000
+#define wxTE_CENTER         wxALIGN_CENTER_HORIZONTAL // 0x0100
+#define wxTE_RIGHT          wxALIGN_RIGHT             // 0x0200
+#define wxTE_CENTRE         wxTE_CENTER
+
+// this style means to use RICHEDIT control and does something only under wxMSW
+// and Win32 and is silently ignored under all other platforms
+#define wxTE_RICH           0x0080
+
+#define wxTE_PROCESS_ENTER  0x0400
+#define wxTE_PASSWORD       0x0800
+
+// automatically detect the URLs and generate the events when mouse is
+// moved/clicked over an URL
+//
+// this is for Win32 richedit controls only so far
+#define wxTE_AUTO_URL       0x1000
+
+// by default, the Windows text control doesn't show the selection when it
+// doesn't have focus - use this style to force it to always show it
+#define wxTE_NOHIDESEL      0x2000
+
+// use wxHSCROLL to not wrap text at all, wxTE_CHARWRAP to wrap it at any
+// position and wxTE_WORDWRAP to wrap at words boundary
+//
+// if no wrapping style is given at all, the control wraps at word boundary
+#define wxTE_DONTWRAP       wxHSCROLL
+#define wxTE_CHARWRAP       0x4000  // wrap at any position
+#define wxTE_WORDWRAP       0x0001  // wrap only at words boundaries
+#define wxTE_BESTWRAP       0x0000  // this is the default
+
+// obsolete synonym
+#define wxTE_LINEWRAP       wxTE_CHARWRAP
+
+// force using RichEdit version 2.0 or 3.0 instead of 1.0 (default) for
+// wxTE_RICH controls - can be used together with or instead of wxTE_RICH
+#define wxTE_RICH2          0x8000
+
+// reuse wxTE_RICH2's value for CAPEDIT control on Windows CE
+#if defined(__SMARTPHONE__) || defined(__POCKETPC__)
+#define wxTE_CAPITALIZE     wxTE_RICH2
+#else
+#define wxTE_CAPITALIZE     0
+#endif
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/filedlg.h
+//** ---------------------------------------------------------------------------- ** 
+
+enum
+{
+    wxOPEN              = 0x0001,
+    wxSAVE              = 0x0002,
+    wxOVERWRITE_PROMPT  = 0x0004,
+#if WXWIN_COMPATIBILITY_2_4
+    wxHIDE_READONLY     = 0x0008,
+#endif
+    wxFILE_MUST_EXIST   = 0x0010,
+    wxMULTIPLE          = 0x0020,
+    wxCHANGE_DIR        = 0x0040
+};
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/fdrepdlg.h
+//** ---------------------------------------------------------------------------- ** 
+
+// flages used by wxFindDialogEvent::GetFlags()
+enum wxFindReplaceFlags
+{
+    // downward search/replace selected (otherwise - upwards)
+    wxFR_DOWN       = 1,
+
+    // whole word search/replace selected
+    wxFR_WHOLEWORD  = 2,
+
+    // case sensitive search/replace selected (otherwise - case insensitive)
+    wxFR_MATCHCASE  = 4
+};
+
+enum wxFindReplaceDialogStyles
+{
+    // replace dialog (otherwise find dialog)
+    wxFR_REPLACEDIALOG = 1,
+
+    // don't allow changing the search direction
+    wxFR_NOUPDOWN      = 2,
+
+    // don't allow case sensitive searching
+    wxFR_NOMATCHCASE   = 4,
+
+    // don't allow whole word searching
+    wxFR_NOWHOLEWORD   = 8
+};
+
+//** ---------------------------------------------------------------------------- **
+//   Start SWIG fixes for constants
+//** ---------------------------------------------------------------------------- ** 
 
 %constant const wxSize DEFAULT_SIZE = wxDefaultSize;
 %constant const wxPoint DEFAULT_POSITION = wxDefaultPosition;
-
-# I don't know why SWIG didn't already handle this--it seems 
-# to be confused because the original values were enums
-%constant wxBorder wxDOUBLE_BORDER = wxBORDER_DOUBLE;
-%constant wxBorder wxSUNKEN_BORDER = wxBORDER_SUNKEN;
-%constant wxBorder wxRAISED_BORDER = wxBORDER_RAISED;
-%constant wxBorder wxBORDER = wxBORDER_SIMPLE;
-%constant wxBorder wxSIMPLE_BORDER = wxBORDER_SIMPLE;
-%constant wxBorder wxSTATIC_BORDER = wxBORDER_STATIC;
-%constant wxBorder wxNO_BORDER = wxBORDER_NONE;
 
 
     // Text font families
@@ -1350,6 +1848,7 @@ enum wxStockCursor
 %constant int FONTSTYLE_ITALIC =   wxITALIC;
 %constant int FONTSTYLE_SLANT =     wxSLANT;
     // Pen styles
+/*
 %constant int SOLID       =    wxSOLID;
 %constant int DOT         =    wxDOT;
 %constant int LONG_DASH   =    wxLONG_DASH;
@@ -1357,10 +1856,9 @@ enum wxStockCursor
 %constant int DOT_DASH    =    wxDOT_DASH;
 %constant int USER_DASH   =    wxUSER_DASH;
 %constant int TRANSPARENT =    wxTRANSPARENT;
+*/
 
 %constant const char *FILE_SELECTOR_DEFAULT_WILDCARD_STR = "*.*";
-
-
 
 %constant const char * ART_TOOLBAR               = wxART_TOOLBAR_C;
 %constant const char * ART_MENU                  = wxART_MENU_C;
@@ -1422,86 +1920,6 @@ enum wxStockCursor
 %constant const int LAYOUT_CENTER =wxCenter; 
 %constant const int LAYOUT_CENTRE_X =wxCentreX; 
 %constant const int LAYOUT_CENTRE_Y =wxCentreY;
-
-// button constants
-#define wxBU_LEFT            0x0040
-#define wxBU_TOP             0x0080
-#define wxBU_RIGHT           0x0100
-#define wxBU_BOTTOM          0x0200
-#define wxBU_ALIGN_MASK      ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM )
-#define wxBU_NOAUTODRAW      0x0000
-#define wxBU_AUTODRAW        0x0004
-#define wxBU_EXACTFIT        0x0001
-
-// tree constants
-#define wxTR_NO_BUTTONS              0x0000     // for convenience
-#define wxTR_HAS_BUTTONS             0x0001     // draw collapsed/expanded btns
-#define wxTR_NO_LINES                0x0004     // don't draw lines at all
-#define wxTR_LINES_AT_ROOT           0x0008     // connect top-level nodes
-#define wxTR_TWIST_BUTTONS           0x0010     // still used by wxTreeListCtrl
-#define wxTR_SINGLE                  0x0000     // for convenience
-#define wxTR_MULTIPLE                0x0020     // can select multiple items
-#define wxTR_EXTENDED                0x0040     // TODO: allow extended selection
-#define wxTR_HAS_VARIABLE_ROW_HEIGHT 0x0080     // what it says
-#define wxTR_EDIT_LABELS             0x0200     // can edit item labels
-#define wxTR_ROW_LINES               0x0400     // put border around items
-#define wxTR_HIDE_ROOT               0x0800     // don't display root node
-#define wxTR_FULL_ROW_HIGHLIGHT      0x2000     // highlight full horz space
-#ifdef __WXGTK20__
-#define wxTR_DEFAULT_STYLE           (wxTR_HAS_BUTTONS | wxTR_NO_LINES)
-#else
-#define wxTR_DEFAULT_STYLE           (wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT)
-#endif
-// deprecated: #define wxTR_MAC_BUTTONS             0
-// deprecated: #define wxTR_AQUA_BUTTONS            0
-
-
-// calendar constants
-enum
-{
-    // show Sunday as the first day of the week (default)
-    wxCAL_SUNDAY_FIRST               = 0x0000,
-                                                                                
-    // show Monder as the first day of the week
-    wxCAL_MONDAY_FIRST               = 0x0001,
-                                                                                
-    // highlight holidays
-    wxCAL_SHOW_HOLIDAYS              = 0x0002,
-                                                                                
-    // disable the year change control, show only the month change one
-    wxCAL_NO_YEAR_CHANGE             = 0x0004,
-                                                                                
-    // don't allow changing neither month nor year (implies
-    // wxCAL_NO_YEAR_CHANGE)
-    wxCAL_NO_MONTH_CHANGE            = 0x000c,
-                                                                                
-    // use MS-style month-selection instead of combo-spin combination
-    wxCAL_SEQUENTIAL_MONTH_SELECTION = 0x0010,
-                                                                                
-    // show the neighbouring weeks in the previous and next month
-    wxCAL_SHOW_SURROUNDING_WEEKS     = 0x0020
-};
-
-enum wxCalendarHitTestResult
-{
-    wxCAL_HITTEST_NOWHERE,      // outside of anything
-    wxCAL_HITTEST_HEADER,       // on the header (weekdays)
-    wxCAL_HITTEST_DAY,          // on a day in the calendar
-    wxCAL_HITTEST_INCMONTH,
-    wxCAL_HITTEST_DECMONTH,
-    wxCAL_HITTEST_SURROUNDING_WEEK
-};
-
-// border types for a date
-enum wxCalendarDateBorder
-{
-    wxCAL_BORDER_NONE,          // no border (default)
-    wxCAL_BORDER_SQUARE,        // a rectangular border
-    wxCAL_BORDER_ROUND          // a round border
-};
-
-
-
 
 %constant const int NOT_FOUND = -1;
 
