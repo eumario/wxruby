@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module wxGridCellBoolEditor
+%module(directors="1") wxGridCellBoolEditor
 
 %{
 #include <wx/grid.h>

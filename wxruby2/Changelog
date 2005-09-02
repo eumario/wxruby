@@ -10,6 +10,7 @@
 - Fix big bug where Mac apps would exit before showing the main window,
   by declaring Show in Frame.i (Sean Long)
 - Added, fixed, and rearranged lots of RubyConstants (Sean Long)
+- Fixed grid renderers and editors to use SWIG directors (Sean Long)
 
 
 
