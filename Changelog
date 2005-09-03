@@ -18,6 +18,7 @@
 - Fix to bigdemo that allows wxDialog to come up (Roy Sutton)
 - Fix to bigdemo that allows double-clicking in the tree (Roy Sutton)
 - Added/corrected several methods in Event and subclasses (Roy Sutton)
+- Fix renamer so centreX becomes centre_x (Roy Sutton)
 
 
 
