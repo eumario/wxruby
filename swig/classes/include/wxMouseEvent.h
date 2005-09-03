@@ -7,6 +7,7 @@ class wxMouseEvent : public wxEvent
 {
 public:
    wxMouseEvent(wxEventType mouseEventType = 0) ;
+  wxMouseEvent(const wxMouseEvent& event) ;
   bool AltDown() ;
   bool Button(int  button ) ;
   bool ButtonDClick(int but = wxMOUSE_BTN_ANY) ;

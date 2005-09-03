@@ -7,6 +7,7 @@ class wxNotifyEvent : public wxCommandEvent
 {
 public:
    wxNotifyEvent(wxEventType eventType = wxEVT_NULL, int id = 0) ;
+   wxNotifyEvent(const wxNotifyEvent& event) ;
   void Allow() ;
   bool IsAllowed() const;
   void Veto() ;

@@ -19,6 +19,13 @@ public:
   void SetId(int  id ) ;
   void SetTimestamp(long  timeStamp ) ;
   void Skip(bool skip = true) ;
+
+  bool IsCommandEvent() const ;
+  bool ShouldPropagate() const ;
+  int StopPropagation() ;
+  void ResumePropagation(int propagationLevel) ;
+
+
 };
 
 
