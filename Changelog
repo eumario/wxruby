@@ -14,6 +14,7 @@
 - Added typemap for ArrayInt (Sean Long)
 - Fixed bigdemo About box (Roy Sutton)
 - Added wxTreeCtrl::HitTest which allows tree clicks in bigdemo (Roy Sutton)
+- Fixed declaration of StaticLine constructor and #create (Roy Sutton)
 
 
 
