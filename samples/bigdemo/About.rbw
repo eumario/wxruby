@@ -10,7 +10,7 @@ class MyAboutBox < Wx::Dialog
         title = Wx::StaticText.new(self, -1, "WxRuby Demo!", Wx::Point.new(20, 20))
         title.set_font(headerFont)
         
-        rVersion = Wx::StaticText.new(self, -1, "Running on Ruby version " + VERSION + " on " + Wx::RUBY_PLATFORM, Wx::Point.new(20,100))
+        rVersion = Wx::StaticText.new(self, -1, "Running on Ruby version " + VERSION + " on " + RUBY_PLATFORM, Wx::Point.new(20,100))
         rVersion.set_font(bodyFont)
         rVersion.set_foreground_colour(Wx::RED)
         
