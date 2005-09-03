@@ -34,7 +34,7 @@ class TestDialog < Wx::Dialog
         
         sizer.add(box, 0, Wx::GROW | Wx::ALIGN_CENTER_VERTICAL | Wx::ALL, 5)
         
-        line = Wx::StaticLine.new(self, -1, Wx::Size.new(20,-1), Wx::LI_HORIZONTAL)
+        line = Wx::StaticLine.new(self, -1, Wx::DEFAULT_POSITION, Wx::Size.new(20,-1), Wx::LI_HORIZONTAL)
         sizer.add(line, 0, Wx::ALIGN_BOTTOM | Wx::GROW , 5)
         
         box = Wx::BoxSizer.new(Wx::HORIZONTAL)
