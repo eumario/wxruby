@@ -285,7 +285,7 @@ class WxRubyDemo < Wx::Frame
         evt_tree_item_expanded(TREE_ID) {|event| on_item_expanded(event)}
         evt_tree_item_collapsed(TREE_ID) {|event| on_item_collapsed(event)}
         evt_tree_sel_changed(TREE_ID) {|event| on_tree_sel_changed(event)}
-        evt_tree_item_activated(TREE_ID) {|event| on_tree_left_down(event)}
+        evt_tree_item_activated(TREE_ID) {|event| on_tree_sel_changed(event)}
         @tree.evt_left_down   {|event| on_tree_left_down(event)}
         
         
