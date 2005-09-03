@@ -7,16 +7,18 @@ class wxCommandEvent : public wxEvent
 {
 public:
    wxCommandEvent(WXTYPE commandEventType = 0, int id = 0) ;
+  wxCommandEvent(const wxCommandEvent& event) ;
+   
   virtual ~wxCommandEvent();
 
   bool Checked() const;
   void* GetClientData() ;
-  long GetExtraLong() ;
-  int GetInt() ;
-  int GetSelection() ;
-  wxString GetString() ;
+  long GetExtraLong() const;
+  int GetInt() const;
+  int GetSelection() const;
+  wxString GetString() const;
   bool IsChecked() const;
-  bool IsSelection() ;
+  bool IsSelection() const;
   void SetClientData(void*  clientData ) ;
   void SetExtraLong(int  extraLong ) ;
   void SetInt(int  intCommand ) ;

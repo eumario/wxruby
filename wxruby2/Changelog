@@ -15,7 +15,9 @@
 - Fixed bigdemo About box (Roy Sutton)
 - Added wxTreeCtrl::HitTest which allows tree clicks in bigdemo (Roy Sutton)
 - Fixed declaration of StaticLine constructor and #create (Roy Sutton)
-- Fix that allows bigdemo wxDialog to come up (Roy Sutton)
+- Fix to bigdemo that allows wxDialog to come up (Roy Sutton)
+- Fix to bigdemo that allows double-clicking in the tree (Roy Sutton)
+- Added/corrected several methods in Event and subclasses (Roy Sutton)
 
 
 
