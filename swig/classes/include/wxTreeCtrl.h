@@ -413,6 +413,7 @@ returned as a tuple.}
 	 * \param int&   
 	*/
 
+  wxTreeItemId HitTest(const wxPoint& point) ;
   wxTreeItemId HitTest(const wxPoint&  point , int&  flags ) ;
 	/**
 	 * \brief  
