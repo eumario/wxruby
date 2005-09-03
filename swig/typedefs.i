@@ -12,3 +12,4 @@ enum wxBitmapType;
 typedef short int WXTYPE;
 enum wxCalendarHitTestResult;
 enum wxCalendarDateBorder;
+typedef signed char wxDash;

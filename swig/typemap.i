@@ -189,6 +189,49 @@
 
 ##############################################################
 
+%typemap(in,numinputs=1) (int n, wxPoint points[]) (wxPoint *arr)
+{
+  if (($input == Qnil) || (TYPE($input) != T_ARRAY))
+  {
+    $1 = 0;
+    $2 = NULL;
+  }
+  else
+  {
+    wxPoint *ptmp;
+    arr = new wxPoint[RARRAY($input)->len];
+    for (int i = 0; i < RARRAY($input)->len; i++)
+    {
+	SWIG_ConvertPtr(rb_ary_entry($input,i), (void **) &ptmp, SWIGTYPE_p_wxPoint, 1);
+	if (ptmp == NULL)
+		rb_raise(rb_eTypeError, "null reference");
+        arr[i] = *ptmp;
+    }
+    $1 = RARRAY($input)->len;
+    $2 = arr;
+  }
+}
+
+%typemap(default,numinputs=1) (int n, wxPoint points[]) 
+{
+    $1 = 0;
+    $2 = NULL;
+}
+
+%typemap(freearg) (int n , wxPoint points [])
+{
+    if ($2 != NULL) delete [] $2;
+}
+
+%typemap(typecheck) (int n , wxPoint points[])
+{
+   $1 = (TYPE($input) == T_ARRAY);
+}
+
+%apply (int n, wxPoint points []) { (int n, wxPoint* points),(int nItems, wxPoint *points) }
+
+##############################################################
+
 %typemap(in) wxArrayString & (wxArrayString tmp){
  
   if (($input == Qnil) || (TYPE($input) != T_ARRAY))
