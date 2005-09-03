@@ -14,9 +14,6 @@ def un_camelcase(func)
     if(func[0,2] == 'wx')
         func = func[2..-1]
     end
-    if(func[0,1] == func[0,1].downcase)
-        return func
-    end
     result = ""
     scratch = ""
     func.each_byte do |byte|
