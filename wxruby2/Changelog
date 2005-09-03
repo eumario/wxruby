@@ -19,6 +19,8 @@
 - Fix to bigdemo that allows double-clicking in the tree (Roy Sutton)
 - Added/corrected several methods in Event and subclasses (Roy Sutton)
 - Fix renamer so centreX becomes centre_x (Roy Sutton)
+- Added several typemaps so more of bigdemo can work (Roy Sutton)
+
 
 
 

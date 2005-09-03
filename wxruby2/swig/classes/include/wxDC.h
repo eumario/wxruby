@@ -619,6 +619,13 @@ See also  ,  .
 	*/
 
   virtual void GetTextExtent(const wxString&  string , wxCoord * w , wxCoord * h , wxCoord * descent = NULL, wxCoord * externalLeading = NULL, wxFont * font = NULL)  = 0;
+
+    virtual void GetMultiLineTextExtent(const wxString& text,
+                                        wxCoord *width,
+                                        wxCoord *height,
+                                        wxCoord *heightLine = NULL,
+                                        wxFont *font = NULL);
+
 	/**
 	 * \brief  
 	*/
