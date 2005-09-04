@@ -1,12 +1,14 @@
 require 'wx'
+require 'date'
 
 class TestPanel < Wx::Panel
     def initialize(parent, id, log)
         super(parent, id)
         @log = log
         
-        cal = Wx::CalendarCtrl.new(self, -1, Wx::DEFAULT_DATE_TIME, Wx::Point.new(25,50), Wx::DEFAULT_SIZE, 
-                                    Wx::CAL_SHOW_HOLIDAYS | Wx::CAL_SUNDAY_FIRST | Wx::CAL_SEQUENTIAL_MONTH_SELECTION)
+        date = DateTime.now
+        cal = Wx::CalendarCtrl.new(self, -1, date, Wx::Point.new(25,50), Wx::DEFAULT_SIZE, 
+                                     Wx::CAL_SHOW_HOLIDAYS | Wx::CAL_SUNDAY_FIRST | Wx::CAL_SEQUENTIAL_MONTH_SELECTION)
                                     
         evt_calendar(cal.get_id()) {|event| on_cal_selected(event)}
         
@@ -26,7 +28,7 @@ class TestPanel < Wx::Panel
     #end
     
     def on_cal_selected(event)
-        @log.write_text("on_cal_selected: " + event.get_date().format_iso_date())
+		@log.write_text("on_cal_selected: " + event.get_date().strftime("%F"))
     end
     
     # missing get_current_month() method
@@ -51,4 +53,3 @@ module Demo
         return "The calendar control allows the user to pick a date interactively. For this, it displays a window containing several parts: the control to pick the month and the year at the top (either or both of them may be disabled) and a month area below them which shows all the days in the month. The user can move the current selection using the keyboard and select the date (generating EVT_CALENDAR event) by pressing <Return> or double clicking it."
     end
 end
-    

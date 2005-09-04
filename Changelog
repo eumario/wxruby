@@ -25,6 +25,8 @@
   (supposedly helps with part of bigdemo) (thanks to Roy Sutton)
 - Two tweaks to bigdemo that allow CheckListBox sample to work on Linux
 - Add grid events (Sean Long)
+- Updates to bigdemo to allow Button, CheckBox, Calendar and Sizer demos 
+  to work (Roy Sutton)
 
 
 

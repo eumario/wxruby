@@ -13,7 +13,7 @@ class TestPanel < Wx::Panel
         
         b = Wx::Button.new(self, 20, "HELLO AGAIN!", Wx::Point.new(20,60), Wx::Size.new(120,45))
         evt_button(20) {|event| on_click(event)}
-        b.set_tool_tip_string("This is a Hello button...")
+        b.set_tool_tip("This is a Hello button...")
         
         bmp = Wx::Bitmap.new("./icons/test2.bmp", Wx::BITMAP_TYPE_BMP)
         #mask = Wx::MaskColour.new(bmp, Wx::BLUE)
