@@ -39,10 +39,18 @@ High priority TODO items:
 	TipProvider.h
 	WindowDisabler.h
 
+- Make sure all cases of (int,array) that are typemapped to a single
+  parameter have an equivalent wxArrayString (or whatever), to work 
+  around a swig bug that results in uninitialized parameters.
+  
+- Eliminate massive duplication between swig/Events.i and 
+  swig/classes/EvtHandler.i (probably by deleting what's in Event.i).
+  Probably also should rename Events.i to avoid confusion with 
+  swig/classes/Event.i.
 
 - Fix all "can't return" warnings for non-pointer objects
 
-- Switch from CVS to darcs
+- Switch from CVS to darcs?
 
 - Get bigdemo working
 
