@@ -399,7 +399,165 @@ static VALUE evt_radiobutton(int argc, VALUE *argv, VALUE self)
     return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_RADIOBUTTON_SELECTED);
 }
 
+static VALUE evt_grid_cell_left_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_CELL_LEFT_CLICK);
+}
 
+static VALUE evt_grid_cell_right_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_CELL_RIGHT_CLICK);
+}
+
+static VALUE evt_grid_cell_left_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_CELL_LEFT_DCLICK);
+}
+
+static VALUE evt_grid_cell_right_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_CELL_RIGHT_DCLICK);
+}
+
+static VALUE evt_grid_label_left_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_LABEL_LEFT_CLICK);
+}
+
+static VALUE evt_grid_label_right_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_LABEL_RIGHT_CLICK);
+}
+
+static VALUE evt_grid_label_left_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_LABEL_LEFT_DCLICK);
+}
+
+static VALUE evt_grid_label_right_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_LABEL_RIGHT_DCLICK);
+}
+
+static VALUE evt_grid_cell_change(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_CELL_CHANGE);
+}
+
+static VALUE evt_grid_select_cell(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_SELECT_CELL);
+}
+
+static VALUE evt_grid_editor_hidden(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_EDITOR_HIDDEN);
+}
+
+static VALUE evt_grid_editor_shown(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_EDITOR_SHOWN);
+}
+
+static VALUE evt_grid_cmd_cell_left_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_CELL_LEFT_CLICK);
+}
+
+static VALUE evt_grid_cmd_cell_right_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_CELL_RIGHT_CLICK);
+}
+
+static VALUE evt_grid_cmd_cell_left_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_CELL_LEFT_DCLICK);
+}
+
+static VALUE evt_grid_cmd_cell_right_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_CELL_RIGHT_DCLICK);
+}
+
+static VALUE evt_grid_cmd_label_left_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_LABEL_LEFT_CLICK);
+}
+
+static VALUE evt_grid_cmd_label_right_click(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_LABEL_RIGHT_CLICK);
+}
+
+static VALUE evt_grid_cmd_label_left_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_LABEL_LEFT_DCLICK);
+}
+
+static VALUE evt_grid_cmd_label_right_dclick(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_LABEL_RIGHT_DCLICK);
+}
+
+static VALUE evt_grid_cmd_cell_change(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_CELL_CHANGE);
+}
+
+static VALUE evt_grid_cmd_select_cell(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_SELECT_CELL);
+}
+
+static VALUE evt_grid_cmd_editor_hidden(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_EDITOR_HIDDEN);
+}
+
+static VALUE evt_grid_cmd_editor_shown(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_EDITOR_SHOWN);
+}
+
+static VALUE evt_grid_col_size(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_COL_SIZE);
+}
+
+static VALUE evt_grid_row_size(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_ROW_SIZE);
+}
+
+static VALUE evt_grid_cmd_col_size(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_COL_SIZE);
+}
+
+static VALUE evt_grid_cmd_row_size(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_ROW_SIZE);
+}
+
+static VALUE evt_grid_range_select(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_RANGE_SELECT);
+}
+
+static VALUE evt_grid_cmd_range_select(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_RANGE_SELECT);
+}
+
+static VALUE evt_grid_editor_created(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_GRID_EDITOR_CREATED);
+}
+
+static VALUE evt_grid_cmd_editor_created(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_GRID_EDITOR_CREATED);
+}
 
 %}
 
@@ -475,12 +633,38 @@ static VALUE evt_radiobutton(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_radiobox", VALUEFUNC(evt_radiobox), -1);        
     rb_define_method(cWxEvtHandler.klass, "evt_radiobutton", VALUEFUNC(evt_radiobutton), -1);        
 
-
-
-
-
-
-
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_left_click", VALUEFUNC(evt_grid_cell_left_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_right_click", VALUEFUNC(evt_grid_cell_right_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_left_dclick", VALUEFUNC(evt_grid_cell_left_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_right_dclick", VALUEFUNC(evt_grid_cell_right_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_label_left_click", VALUEFUNC(evt_grid_label_left_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_label_right_click", VALUEFUNC(evt_grid_label_right_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_label_left_dclick", VALUEFUNC(evt_grid_label_left_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_label_right_dclick", VALUEFUNC(evt_grid_label_right_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cell_change", VALUEFUNC(evt_grid_cell_change), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_select_cell", VALUEFUNC(evt_grid_select_cell), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_hidden", VALUEFUNC(evt_grid_editor_hidden), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_shown", VALUEFUNC(evt_grid_editor_shown), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_cell_left_click", VALUEFUNC(evt_grid_cmd_cell_left_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_cell_right_click", VALUEFUNC(evt_grid_cmd_cell_right_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_cell_left_dclick", VALUEFUNC(evt_grid_cmd_cell_left_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_cell_right_dclick", VALUEFUNC(evt_grid_cmd_cell_right_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_label_left_click", VALUEFUNC(evt_grid_cmd_label_left_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_label_right_click", VALUEFUNC(evt_grid_cmd_label_right_click), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_label_left_dclick", VALUEFUNC(evt_grid_cmd_label_left_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_label_right_dclick", VALUEFUNC(evt_grid_cmd_label_right_dclick), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_cell_change", VALUEFUNC(evt_grid_cmd_cell_change), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_select_cell", VALUEFUNC(evt_grid_cmd_select_cell), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_editor_hidden", VALUEFUNC(evt_grid_cmd_editor_hidden), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_editor_shown", VALUEFUNC(evt_grid_cmd_editor_shown), -1);  
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_col_size", VALUEFUNC(evt_grid_col_size), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_row_size", VALUEFUNC(evt_grid_row_size), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_col_size", VALUEFUNC(evt_grid_cmd_col_size), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_row_size", VALUEFUNC(evt_grid_cmd_row_size), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_range_select", VALUEFUNC(evt_grid_range_select), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_range_select", VALUEFUNC(evt_grid_cmd_range_select), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_created", VALUEFUNC(evt_grid_editor_created), -1);
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_editor_created", VALUEFUNC(evt_grid_cmd_editor_created), -1);    
 %}
 
 
