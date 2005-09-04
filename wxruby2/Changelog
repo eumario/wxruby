@@ -20,6 +20,7 @@
 - Added/corrected several methods in Event and subclasses (Roy Sutton)
 - Fix renamer so centreX becomes centre_x (Roy Sutton)
 - Added several typemaps so more of bigdemo can work (Roy Sutton)
+- Made Caret#show and #hide virtual to avoid crashing the caret sample
 
 
 
