@@ -1,4 +1,5 @@
-require 'wx
+require 'wx'
+
 class TestCheckBox < Wx::Panel
     def initialize(parent, log)
         @log = log
@@ -6,7 +7,7 @@ class TestCheckBox < Wx::Panel
         
         Wx::StaticText.new(self, -1, "This example uses the wxCheckBox control", Wx::Point.new(10,10))
         
-        cID = 50000
+        cID = Wx::ID_HIGHEST + 1
         cb1 = Wx::CheckBox.new(self, cID, " Apples", Wx::Point.new(65, 40), Wx::Size.new(150,20), Wx::NO_BORDER)
         cb2 = Wx::CheckBox.new(self, cID + 1, " Oranges", Wx::Point.new(65,60), Wx::Size.new(150,20), Wx::NO_BORDER)
         cb3 = Wx::CheckBox.new(self, cID + 2, " Pears", Wx::Point.new(65,80), Wx::Size.new(150,20), Wx::NO_BORDER)

@@ -494,7 +494,8 @@ class TestSelectionPanel < Wx::Panel
         @text = Wx::TextCtrl.new(self, -1, "", Wx::Point.new(10, 175), Wx::Size.new(350,75), Wx::TE_MULTILINE | Wx::TE_READONLY)
         
         $theTests.each {|item| @list.append(item[0])}
-    end
+		@list.select(0)
+	end
     
     def on_select(event)
         pos = @list.get_selection()
@@ -525,4 +526,3 @@ module Demo
         ""
     end
 end
-
