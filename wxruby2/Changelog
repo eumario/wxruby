@@ -21,6 +21,8 @@
 - Fix renamer so centreX becomes centre_x (Roy Sutton)
 - Added several typemaps so more of bigdemo can work (Roy Sutton)
 - Made Caret#show and #hide virtual to avoid crashing the caret sample
+- Fixed wxCheckListBox.h which works around a swig overloading problem
+  (supposedly helps with part of bigdemo) (thanks to Roy Sutton)
 
 
 
