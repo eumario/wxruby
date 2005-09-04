@@ -2,6 +2,43 @@ High priority TODO items:
 -------------------------
 
 - Fix crashes when garbage collection happens
+  * First, make sure all these classes have directors:
+	BitmapButton.h
+	Bitmap.h
+	BusyCursor.h
+	CalendarDateAttr.h
+	ChoicebookEvent.h
+	ClassInfo.h
+	ControlWithItems.h
+	Cursor.h
+	DC.h
+	Event.h
+	Events.h
+	FontDialog.h
+	Font.h
+	Functions.h
+	GridCellAttr.h
+	GridCellEditor.h
+	GridCellFloatRenderer.h
+	GridCellNumberEditor.h
+	GridCellNumberRenderer.h
+	GridCellRenderer.h
+	Icon.h
+	Image.h
+	ListbookEvent.h
+	ListItemAttr.h
+	MemoryDC.h
+	Pen.h
+	Point.h
+	RubyConstants.h
+	RubyEventTypes.h
+	RubyStockObjects.h
+	Size.h
+	Sizer.h
+	TextAttr.h
+	TipProvider.h
+	WindowDisabler.h
+
 
 - Fix all "can't return" warnings for non-pointer objects
 
