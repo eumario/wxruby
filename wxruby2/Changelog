@@ -23,6 +23,7 @@
 - Made Caret#show and #hide virtual to avoid crashing the caret sample
 - Fixed wxCheckListBox.h which works around a swig overloading problem
   (supposedly helps with part of bigdemo) (thanks to Roy Sutton)
+- Two tweaks to bigdemo that allow CheckListBox sample to work on Linux
 
 
 
