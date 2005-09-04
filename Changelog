@@ -27,6 +27,7 @@
 - Add grid events (Sean Long)
 - Updates to bigdemo to allow Button, CheckBox, Calendar and Sizer demos 
   to work (Roy Sutton)
+- (Hopefully) fixed link error caused by Bogus class
 
 
 
