@@ -28,6 +28,7 @@
 - Updates to bigdemo to allow Button, CheckBox, Calendar and Sizer demos 
   to work (Roy Sutton)
 - (Hopefully) fixed link error caused by Bogus class
+- Removed extra CR's from all bigdemo source files
 
 
 
