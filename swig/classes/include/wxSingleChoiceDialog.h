@@ -5,6 +5,10 @@
 
 #if !defined(_wxSingleChoiceDialog_h_)
 #define _wxSingleChoiceDialog_h_
+
+#define wxCHOICEDLG_STYLE \
+    (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)
+
 class wxSingleChoiceDialog : public wxDialog
 {
 public:
@@ -20,7 +24,7 @@ public:
 	 * \param const wxPoint&   
 	*/
 
-  wxSingleChoiceDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption , int  n , const wxString  choices[] , char** clientData = NULL, long  style = wxOK, const wxPoint&  pos = wxDefaultPosition);
+  wxSingleChoiceDialog(wxWindow*  parent , const wxString&  message , const wxString&  caption , const wxArrayString& choices , char** clientData = NULL, long  style = wxCHOICEDLG_STYLE, const wxPoint&  pos = wxDefaultPosition);
 	/**
 	 * \brief Destructor. 
 	*/
