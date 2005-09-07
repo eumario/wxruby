@@ -53,9 +53,6 @@ public:
   int HitTest(const wxPoint& pt) const { return DoHitTestItem(pt.x, pt.y); }
   int HitTest(wxCoord x, wxCoord y) const { return DoHitTestItem(x, y); }
 
-  // accessors
-  size_t GetItemHeight() const { return m_nItemHeight; }
-
 
 };
 
