@@ -32,6 +32,7 @@
 - Disabled CheckListBox#get_item_height since it's not available on Mac
   (thanks to Sean Long)
 - Changed SingleChoiceDialog constructor to take a string array (Roy Sutton)
+- Removed unused and empty wxMultipleChoiceDialog.h class header (Roy Sutton)
 
 
 
