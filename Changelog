@@ -29,6 +29,9 @@
   to work (Roy Sutton)
 - (Hopefully) fixed link error caused by Bogus class
 - Removed extra CR's from all bigdemo source files
+- Removed CheckListBox#get_item_height since it's not available on Mac
+  (Sean Long)
+ 
 
 
 
