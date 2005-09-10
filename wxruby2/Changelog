@@ -3,6 +3,7 @@
   FontDialog, Font, GridCellEditor, GridCellRenderer, Image, Pen, Sizer, 
   TipProvider
 - Added back BU_XXX constants that were lost in a recent RubyConstants change
+- Fixed samples/minimal/text.rb to require 'wx' (Sean Long)
 
 
 ====0.0.29 tag included all of this:===
