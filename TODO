@@ -3,40 +3,21 @@ High priority TODO items:
 
 - Fix crashes when garbage collection happens
   * First, make sure all these classes have directors:
-	BitmapButton.h
-	Bitmap.h
-	BusyCursor.h
-	CalendarDateAttr.h
-	ChoicebookEvent.h
+	BusyCursor.h - should be polymorphic but compiler complains
+	CalendarDateAttr.h - not polymorphic
+	ChoicebookEvent.h - should be polymorphic but swig doesn't create director
 	ClassInfo.h
-	ControlWithItems.h
-	Cursor.h
-	DC.h
-	Event.h
-	Events.h
-	FontDialog.h
-	Font.h
-	Functions.h
 	GridCellAttr.h
-	GridCellEditor.h
-	GridCellFloatRenderer.h
-	GridCellNumberEditor.h
+	GridCellFloatRenderer.h - should be polymorphic but swig doesn't create director
+	GridCellNumberEditor.h - should be polymorphic but swig doesn't create director
 	GridCellNumberRenderer.h
-	GridCellRenderer.h
 	Icon.h
-	Image.h
 	ListbookEvent.h
 	ListItemAttr.h
 	MemoryDC.h
-	Pen.h
 	Point.h
-	RubyConstants.h
-	RubyEventTypes.h
-	RubyStockObjects.h
 	Size.h
-	Sizer.h
 	TextAttr.h
-	TipProvider.h
 	WindowDisabler.h
 
 - Make sure all cases of (int,array) that are typemapped to a single

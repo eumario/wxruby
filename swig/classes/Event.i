@@ -4,11 +4,6 @@
 %include "../common.i"
 
 %module(directors="1") wxEvent
-%feature("nodirector") wxEvent; // abstract base class with pure virtual methods
-
-%{
-//NO_DIRECTOR
-%}
 
 
 %import "include/wxObject.h"

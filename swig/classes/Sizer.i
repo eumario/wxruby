@@ -4,14 +4,10 @@
 %include "../common.i"
 
 %module(directors="1") wxSizer
-%feature("nodirector") wxSizer; // abstract base class
-
-%{
-//NO_DIRECTOR
-%}
 
 %ignore wxSizer::IsShown;
 
+%feature("nodirector") wxSizer::CalcMin;
 
 %import "include/wxObject.h"
 

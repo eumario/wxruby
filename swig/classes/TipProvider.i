@@ -4,7 +4,8 @@
 %include "../common.i"
 
 %module(directors="1") wxTipProvider
-%feature("nodirector") wxTipProvider; // abstract base class
+
+%feature("nodirector") wxTipProvider::GetTip;
 
 %{
 #include <wx/tipdlg.h>

@@ -4,11 +4,8 @@
 %include "../common.i"
 
 %module(directors="1") wxBitmap
-%feature("nodirector") wxBitmap;
 
 %{
-//NO_DIRECTOR
-
 #include <wx/bitmap.h>
 %}
 

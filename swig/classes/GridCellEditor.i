@@ -4,10 +4,8 @@
 %include "../common.i"
 
 %module(directors="1") wxGridCellEditor
-%feature("nodirector") wxGridCellEditor; // abstract base class
 
 %{
-//NO_DIRECTOR
 #include <wx/grid.h>
 %}
 
