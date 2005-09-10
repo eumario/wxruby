@@ -1,4 +1,4 @@
-require 'wxruby'
+require 'wx'
 include Wx
 
 class MyFrame < Frame
