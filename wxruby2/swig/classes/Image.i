@@ -4,10 +4,8 @@
 %include "../common.i"
 
 %module(directors="1") wxImage
-%feature("nodirector") wxImage;
 
 %{
-//NO_DIRECTOR
 #include <wx/image.h>
 %}
 

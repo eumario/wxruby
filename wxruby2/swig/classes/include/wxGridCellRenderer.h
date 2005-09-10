@@ -15,7 +15,7 @@ public:
     virtual wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
-                               int row, int col);
+                               int row, int col) = 0;
     virtual wxGridCellRenderer *Clone() const = 0;
 };
 

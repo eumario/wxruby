@@ -4,10 +4,10 @@
 %include "../common.i"
 
 %module(directors="1") wxGridCellRenderer
-%feature("nodirector") wxGridCellRenderer;  // abstract base class
+
+%feature("nodirector") wxGridCellRenderer::GetBestSize;
 
 %{
-//NO_DIRECTOR
 #include <wx/grid.h>
 %}
 

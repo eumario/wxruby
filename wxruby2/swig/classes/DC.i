@@ -4,16 +4,15 @@
 %include "../common.i"
 
 %module(directors="1") wxDC
-%feature("nodirector") wxDC; // abstract base class with pure virtual methods
 
-%{
-//NO_DIRECTOR
-%}
+// avoid directors for pure virtuals
+// for some reason, ignoring just this one avoids errors for the rest!?
+%feature("nodirector") wxDC::GetCharHeight;
 
+// Not sure why these are ignored
 %ignore wxDC::CacheEnabled;
 %ignore wxDC::ClearCache;
 %ignore wxDC::EnableCache;
-
 %ignore wxDC::StartPage;
 
 %typemap(in,numinputs=0) (wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading, wxFont *font) (wxCoord a, wxCoord b, wxCoord c, wxCoord d, wxFont f) {

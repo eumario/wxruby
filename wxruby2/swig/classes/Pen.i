@@ -4,11 +4,6 @@
 %include "../common.i"
 
 %module(directors="1") wxPen
-%feature("nodirector") wxPen;
-
-%{
-//NO_DIRECTOR
-%}
 
 %typemap(in,numinputs=1) (int n, wxDash *dashes) (wxDash *arr)
 {
@@ -49,17 +44,7 @@
 
 %ignore wxPen::SetStipple;
 %ignore GetStipple;
-%ignore wxPen::wxPen(const wxBitmap&, int);
 
-# For reasons I dont understand, the
-# constructor ignore above is not solving 
-# the compile error. So ignore the whole 
-# class for now
-/*
-%runtime %{
-//@@if defined(__WXMSW__) || defined(__WXMAC__)
-%}
-*/
 
 %import "include/wxObject.h"
 %import "include/wxGDIObject.h"

@@ -19,6 +19,7 @@ public:
 	*/
 
   virtual  ~wxBusyCursor() ;
+
 };
 
 

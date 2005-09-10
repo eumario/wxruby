@@ -4,11 +4,6 @@
 %include "../common.i"
 
 %module(directors="1") wxFont
-%feature("nodirector") wxFont;
-
-%{
-//NO_DIRECTOR
-%}
 
 %ignore wxFont::SetNativeFontInfo;
 
