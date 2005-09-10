@@ -33,6 +33,7 @@
 
 %}
 
+
 //** ---------------------------------------------------------------------------- **
 //   Start constants from wx/defs.h
 //** ---------------------------------------------------------------------------- **
@@ -1382,7 +1383,6 @@ enum wxStockCursor
 //   Start constants from wx/button.h
 //** ---------------------------------------------------------------------------- **
 
-#if wxUSE_TOGGLEBTN || wxUSE_BUTTON
 
 // These flags affect label alignment
 #define wxBU_LEFT            0x0040
@@ -1391,9 +1391,6 @@ enum wxStockCursor
 #define wxBU_BOTTOM          0x0200
 #define wxBU_ALIGN_MASK      ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM )
 
-#endif
-
-#if wxUSE_BUTTON
 
 // ----------------------------------------------------------------------------
 // wxButton specific flags
@@ -1408,7 +1405,6 @@ enum wxStockCursor
 // small as possible
 #define wxBU_EXACTFIT        0x0001
 
-#endif
 //** ---------------------------------------------------------------------------- **
 //   Start constants from wx/treebase.h
 //** ---------------------------------------------------------------------------- ** 
