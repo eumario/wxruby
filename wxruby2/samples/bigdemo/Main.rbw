@@ -546,5 +546,6 @@ class SimpleApp < Wx::App
   end
 end
 
+Wx::init_all_image_handlers
 test = SimpleApp.new
 test.main_loop

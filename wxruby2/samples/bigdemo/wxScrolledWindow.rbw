@@ -57,7 +57,7 @@ class MyCanvas < Wx::ScrolledWindow
         dc.set_pen(Wx::GREY_PEN)
         dc.draw_polygon(lst, 75)
         dc.set_pen(Wx::GREEN_PEN)
-        #dc.draw_spline(lst.append([[100,100]]))
+        dc.draw_spline(lst << Wx::Point.new(100,100))
         
         dc.draw_bitmap(@bmp, 200, 20, true)
         dc.set_text_foreground(Wx::Colour.new(0, 0xFF, 0x80))
