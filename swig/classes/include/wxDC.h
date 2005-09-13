@@ -40,6 +40,7 @@ public:
   virtual void DrawRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height )  = 0;
   virtual void DrawRotatedText(const wxString&  text , wxCoord  x , wxCoord  y , double  angle )  = 0;
   virtual void DrawRoundedRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double radius )  = 0;
+  void DrawSpline(int n, wxPoint points[] ) ;
   void DrawSpline(wxList * points ) ;
   void DrawSpline(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , wxCoord  x3 , wxCoord  y3 ) ;
   virtual  void DrawText(const wxString&  text , wxCoord  x , wxCoord  y )  = 0;
