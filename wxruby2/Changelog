@@ -9,6 +9,7 @@
 - Fixes to get_text_extent in DC, WindowDC, Window (Roy Sutton)
 - Fix to bigdemo Notebook sample (Roy Sutton)
 - Fixes to evt_menu_range (Roy Sutton)
+- Fix to bigdemo wxScrolledWindow to avoid crashing on Linux
 
 
 ====0.0.29 tag included all of this:===
