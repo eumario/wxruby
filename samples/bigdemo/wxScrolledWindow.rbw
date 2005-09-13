@@ -110,7 +110,7 @@ class MyCanvas < Wx::ScrolledWindow
     end
     
     def draw_saved_lines(dc)
-        dc.set_pen(Wx::Pen.new("MEDIUM FOREST GREEM", 4, Wx::SOLID))
+        dc.set_pen(Wx::Pen.new("MEDIUM FOREST GREEN", 4, Wx::SOLID))
         @lines.each do |line|
             line.each do |coords|
                 coords.flatten!()
@@ -184,4 +184,3 @@ module Demo
         return "The wxScrolledWindow class manages scrolling for its client area, transforming the coordinates according to the scrollbar positions, and setting the scroll positions, thumb sizes and ranges according to the area in view."
     end
 end
-
