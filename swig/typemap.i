@@ -308,6 +308,22 @@
 
 ##############################################################
 
+%typemap(in,numinputs=0) (wxArrayInt& selections) (wxArrayInt tmp) {
+  $1 = &tmp;
+}
+
+%typemap(out) (wxArrayInt& selections) {
+
+  $result = rb_ary_new();
+
+  for (int i = 0; i < $1.GetCount(); i++)
+  {
+    rb_ary_push($result,INT2NUM( $1.Item(i) ) );
+  }
+}
+
+##############################################################
+
 %typemap(in) wxEdge {
 	$1 = (wxEdge)NUM2INT($input);
 }
@@ -334,3 +350,49 @@
 
 
 ##############################################################
+
+%typemap(in,numinputs=0) (wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading) (wxCoord a, wxCoord b, wxCoord c, wxCoord d) {
+	$1=&a;
+	$2=&b;
+	$3=&c;
+	$4=&d;
+}
+
+%typemap(argout) (wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading) {
+	$result = rb_ary_new();
+	rb_ary_push($result, INT2NUM(*$1));
+	rb_ary_push($result, INT2NUM(*$2));
+	rb_ary_push($result, INT2NUM(*$3));
+	rb_ary_push($result, INT2NUM(*$4));
+}
+
+%typemap(in,numinputs=0) (wxCoord * width , wxCoord * height , wxCoord * heightLine) (wxCoord a, wxCoord b, wxCoord c) {
+	$1=&a;
+	$2=&b;
+	$3=&c;
+}
+
+%typemap(argout) (wxCoord * width , wxCoord * height , wxCoord * heightLine) {
+	$result = rb_ary_new();
+	rb_ary_push($result, INT2NUM(*$1));
+	rb_ary_push($result, INT2NUM(*$2));
+	rb_ary_push($result, INT2NUM(*$3));
+}
+
+%typemap(in,numinputs=0) (int * x , int * y , int * descent, int * externalLeading) (int a, int b, int c, int d) {
+	$1=&a;
+	$2=&b;
+	$3=&c;
+	$4=&d;
+}
+
+%typemap(argout) (int * x , int * y , int * descent, int * externalLeading) {
+	$result = rb_ary_new();
+	rb_ary_push($result, INT2NUM(*$1));
+	rb_ary_push($result, INT2NUM(*$2));
+	rb_ary_push($result, INT2NUM(*$3));
+	rb_ary_push($result, INT2NUM(*$4));
+}
+
+##############################################################
+
