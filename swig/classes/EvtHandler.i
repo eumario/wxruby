@@ -204,12 +204,20 @@ static const wxEventType *gridEvents[] =
      &wxEVT_GRID_SELECT_CELL,
      &wxEVT_GRID_EDITOR_HIDDEN,
      &wxEVT_GRID_EDITOR_SHOWN,
-     &wxEVT_GRID_COL_SIZE,
-     &wxEVT_GRID_ROW_SIZE,
-     &wxEVT_GRID_COL_SIZE,
-     &wxEVT_GRID_ROW_SIZE,
-     &wxEVT_GRID_RANGE_SELECT,
      &wxEVT_GRID_EDITOR_CREATED,
+     (const wxEventType *)0
+};
+
+static const wxEventType *gridRangeEvents[] =
+{
+		&wxEVT_GRID_RANGE_SELECT,
+		(const wxEventType *)0
+};
+
+static const wxEventType *gridSizeEvents[] =
+{
+     &wxEVT_GRID_COL_SIZE,
+     &wxEVT_GRID_ROW_SIZE,
      (const wxEventType *)0
 };
 
