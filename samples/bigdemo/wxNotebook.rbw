@@ -26,8 +26,6 @@ class TestNB < Wx::Notebook
         load "GridSimple.rbw"
         #load "wxListCtrl.rbw"
         
-        Wx::NotebookSizer.new(self)
-        
         # Show how to put an image on one of the notebook tabs,
         # first make the image list:
         il = Wx::ImageList.new(16,16)
