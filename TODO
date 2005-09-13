@@ -58,6 +58,11 @@ This should be done after the unicode fixes.
 
 - Should we automatically call init_all_image_handlers?
 
+- Clean up fixevents.rb code
+
+- Eliminate the list in parents.rb and just build the list automatically 
+  from the wx header files
+
 
 
 
