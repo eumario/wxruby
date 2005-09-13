@@ -9,7 +9,7 @@
 #include <wx/grid.h>
 %}
 
-#This is to get arround SWIG trying to call a protected distructor
+#This is to get arround SWIG trying to call a protected destructor
 %nodefault wxGridCellAttr;
 
 %include "include/wxGridCellAttr.h"

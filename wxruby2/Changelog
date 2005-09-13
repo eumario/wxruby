@@ -11,6 +11,8 @@
 - Fixes to evt_menu_range (Roy Sutton)
 - Fix to bigdemo wxScrolledWindow to avoid crashing on Linux
 - Omit FontDialog.new(window) from Mac to avoid compile error
+- Many fixes to grid-related classes (Sean Long)
+
 
 
 ====0.0.29 tag included all of this:===
