@@ -56,6 +56,8 @@ This should be done after the unicode fixes.
 
 - Start building gems
 
+- Should we automatically call init_all_image_handlers?
+
 
 
 
