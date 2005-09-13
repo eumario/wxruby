@@ -45,7 +45,7 @@ File.open(ARGV[0], "a") do | out |
 		when 2
 			func = "internal_evt_with_id"
 		when 3
-			func = "internal_evt_with_range"
+			func = "internal_evt_with_id_range"
 		end
 
 		out.puts "#ifdef __WXMSW__" if windows
