@@ -6,6 +6,7 @@
 - Fixed samples/minimal/text.rb to require 'wx' (Sean Long)
 - Added another DC#draw_spline (Roy Sutton)
 - Fixes to bigdemo MDI sample to work on MS Windows (Roy Sutton)
+- Fixes to get_text_extent in DC, WindowDC, Window (Roy Sutton)
 
 
 ====0.0.29 tag included all of this:===
