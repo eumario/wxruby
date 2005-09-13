@@ -10,6 +10,7 @@
 - Fix to bigdemo Notebook sample (Roy Sutton)
 - Fixes to evt_menu_range (Roy Sutton)
 - Fix to bigdemo wxScrolledWindow to avoid crashing on Linux
+- Omit FontDialog.new(window) from Mac to avoid compile error
 
 
 ====0.0.29 tag included all of this:===
