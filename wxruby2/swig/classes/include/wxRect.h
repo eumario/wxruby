@@ -179,6 +179,10 @@ bottom, otherwise it is moved to the left or top respectively.
 	*/
 
   void SetY(int  y ) ;
+
+  // Missing from XML
+  int x, y;
+  int width, height;
 };
 
 
