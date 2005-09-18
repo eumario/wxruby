@@ -9,6 +9,22 @@
 #include <wx/mdi.h>
 %}
 
+%typemap(in,numinputs=0) (wxRect& rect)
+{
+  $1 = new wxRect;
+}
+
+%typemap(argout) (wxRect& rect)
+{
+  if(result)
+    $result = SWIG_NewPointerObj($1, SWIGTYPE_p_wxRect, 0);
+  else {
+    free($1);
+    $result = Qnil;
+  }
+}
+  
+
 %typemap(in,numinputs=1) (int n, int *widths) (int *arr){
   if (($input == Qnil) || (TYPE($input) != T_ARRAY))
   {
