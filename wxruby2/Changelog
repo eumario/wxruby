@@ -15,6 +15,9 @@
 - Added TextValidator and related constants; tweak Validator (Sean Long)
 - Added Rect class (Roy Sutton)
 - Added Timer and TimerEvent classes (Roy Sutton)
+- Added TreeCtrl icons (Roy Sutton)
+- Avoid MS Windows compile warning by removing definition of CURSOR_DEFAULT
+  (Roy Sutton)
 
 
 

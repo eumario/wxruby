@@ -12,14 +12,12 @@
 #include <wx/fdrepdlg.h>
 #include <wx/artprov.h>
 #include <wx/calctrl.h>
+#include <wx/treebase.h>
 
 //
 // All of these exist on only one platform, so in those
 // cases I'm defining them so the compiler doesn't freak out
 //
-#ifndef __WXGTK__
-#define    wxCURSOR_DEFAULT 0
-#endif
 #ifndef __WXMAC__
 #define    wxCURSOR_COPY_ARROW 0
 #endif
@@ -1409,6 +1407,16 @@ enum wxStockCursor
 //   Start constants from wx/treebase.h
 //** ---------------------------------------------------------------------------- ** 
 
+// enum for different images associated with a treectrl item
+enum wxTreeItemIcon
+{
+    wxTreeItemIcon_Normal,              // not selected, not expanded
+    wxTreeItemIcon_Selected,            //     selected, not expanded
+    wxTreeItemIcon_Expanded,            // not selected,     expanded
+    wxTreeItemIcon_SelectedExpanded,    //     selected,     expanded
+    wxTreeItemIcon_Max
+};
+
 // tree constants
 #define wxTR_NO_BUTTONS              0x0000     // for convenience
 #define wxTR_HAS_BUTTONS             0x0001     // draw collapsed/expanded btns
@@ -1934,3 +1942,9 @@ enum wxFindReplaceDialogStyles
 %constant const int NOT_FOUND = -1;
 
 %constant const char * wxEmptyString = "";
+
+%constant const int TREE_ITEM_ICON_NORMAL = wxTreeItemIcon_Normal;
+%constant const int TREE_ITEM_ICON_SELECTED = wxTreeItemIcon_Selected;
+%constant const int TREE_ITEM_ICON_EXPANDED = wxTreeItemIcon_Expanded;
+%constant const int TREE_ITEM_ICON_SELECTED_EXPANDED = wxTreeItemIcon_SelectedExpanded;
+%constant const int TREE_ITEM_ICON_MAX = wxTreeItemIcon_Max;
