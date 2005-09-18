@@ -8,65 +8,34 @@
 class wxValidator : public wxEvtHandler
 {
 public:
-	/**
-	 * \brief Constructor. 
-	*/
+    wxValidator();
+    virtual ~wxValidator();
 
-   wxValidator() ;
-	/**
-	 * \brief Destructor. 
-	*/
+    // Make a clone of this validator (or return NULL) - currently necessary
+    // if you're passing a reference to a validator.
+    // Another possibility is to always pass a pointer to a new validator
+    // (so the calling code can use a copy constructor of the relevant class).
+    virtual wxObject *Clone() const;
+    bool Copy(const wxValidator& val);
 
-  virtual  ~wxValidator() ;
-	/**
-	 * \brief All validator classes must implement the   function, which returns
-an identical copy of itself. This is because validators are passed to control
-constructors as references which must be copied. Unlike objects such as pens
-and brushes, it does not make sense to have a reference counting scheme
-to do this cloning, because all validators should have separate
-data.
+    // Called when the value in the window must be validated.
+    // This function can pop up an error message.
+    virtual bool Validate(wxWindow *parent);
 
-This base function returns NULL. 
-	*/
+    // Called to transfer data to the window
+    virtual bool TransferToWindow();
 
-  virtual wxObject* Clone() const;
-	/**
-	 * \brief Returns the window associated with the validator. 
-	*/
+    // Called to transfer data from the window
+    virtual bool TransferFromWindow();
 
-  wxWindow* GetWindow() const;
-	/**
-	 * \brief This functions switches on or turns off the error sound produced by the
-validators if an invalid key is pressed. 
-	 * \param bool  
-	*/
+    // accessors
+    wxWindow *GetWindow() const;
+    void SetWindow(wxWindowBase *win);
 
-  void SetBellOnError(bool doIt = true) ;
-	/**
-	 * \brief Associates a window with the validator. 
-	 * \param wxWindow*  
-	*/
-
-  void SetWindow(wxWindow*  window ) ;
-	/**
-	 * \brief This overridable function is called when the value in the window must be
-transferred to the validator. Return false if there is a problem. 
-	*/
-
-  virtual bool TransferFromWindow() ;
-	/**
-	 * \brief This overridable function is called when the value associated with the validator must be
-transferred to the window. Return false if there is a problem. 
-	*/
-
-  virtual bool TransferToWindow() ;
-	/**
-	 * \brief This overridable function is called when the value in the associated window must be validated.
-Return false if the value in the window is not valid; you may pop up an error dialog. 
-	 * \param wxWindow*  
-	*/
-
-  virtual bool Validate(wxWindow*  parent ) ;
+    // validators beep by default if invalid key is pressed, these functions
+    // allow to change it
+    static bool IsSilent();
+    static void SetBellOnError(bool doIt = true);
 };
 
 
