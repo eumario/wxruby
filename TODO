@@ -24,6 +24,9 @@ High priority TODO items:
   parameter have an equivalent wxArrayString (or whatever), to work 
   around a swig bug that results in uninitialized parameters.
   
+- Get all the methods that return objects (instead of object pointers)
+  to work
+  
 - Eliminate massive duplication between swig/Events.i and 
   swig/classes/EvtHandler.i (probably by deleting what's in Event.i).
   Probably also should rename Events.i to avoid confusion with 
@@ -43,9 +46,10 @@ High priority TODO items:
 - Try to get rid of compile warnings
 
 - Insert placeholder .i files for any wx classes that we specifically 
-do not want to support, such as wxDateTime and the socket classes.
+  do not want to support, such as wxDateTime and the socket classes.
 
-- Remove all typemaps from individual class .i files
+- Move all typemaps into a swig/typemaps/ directory, and include the 
+  appropriate ones on a class-by-class basis.
 
 - Allow passing local-encoding strings into unicode versions of wx
 (perhaps with a global runtime setting to say that all ruby strings
