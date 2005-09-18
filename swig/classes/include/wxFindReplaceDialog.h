@@ -47,6 +47,12 @@ dialog.
 	*/
 
   const wxFindReplaceData* GetData() const;
+
+#if defined(__WXMSW__)
+    virtual bool Show(bool show = true);
+    virtual void SetTitle( const wxString& title);
+    virtual wxString GetTitle() const;
+#endif
 };
 
 

@@ -24,6 +24,8 @@
 - Enabled several platform-specific methods to MenuItem (Roy Sutton)
 - Enabled Window#RegisterHotKey on MS Windows (Roy Sutton)
 - Added several missing methods in SplitterWindow (Roy Sutton)
+- Properly handle MS Windows-specific virtual methods in FindReplaceDialog
+  (Roy Sutton)
 
 
 
