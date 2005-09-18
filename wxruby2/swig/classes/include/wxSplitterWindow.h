@@ -47,6 +47,10 @@ details.
 	*/
 
   int GetMinimumPaneSize() const;
+
+    // Gets the sash gravity
+    double GetSashGravity() const;
+
 	/**
 	 * \brief Returns the current sash position. 
 	*/
@@ -55,6 +59,9 @@ details.
 	/**
 	 * \brief  
 	*/
+
+    // Gets the sash size
+    int GetSashSize() const;
 
   int GetSplitMode() const;
 	/**
@@ -119,6 +126,10 @@ may wish to do it yourself.
 	*/
 
   bool ReplaceWindow(wxWindow *  winOld , wxWindow *  winNew ) ;
+
+    // Set the sash gravity
+    void SetSashGravity(double gravity);
+
 	/**
 	 * \brief Sets the sash position. 
 	 * \param int   
@@ -130,6 +141,9 @@ may wish to do it yourself.
 	 * \brief Sets the minimum pane size. 
 	 * \param int   
 	*/
+
+    // Sets the sash size
+  void SetSashSize(int width) ;
 
   void SetMinimumPaneSize(int  paneSize ) ;
 	/**
@@ -160,6 +174,12 @@ may wish to do it yourself.
 	*/
 
   bool Unsplit(wxWindow*  toRemove = NULL) ;
+
+    // Make sure the child window sizes are updated. This is useful
+    // for reducing flicker by updating the sizes before a
+    // window is shown, if you know the overall size is correct.
+    void UpdateSize();
+
 };
 
 
