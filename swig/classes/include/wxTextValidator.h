@@ -8,86 +8,43 @@
 class wxTextValidator : public wxValidator
 {
 public:
-	/**
-	 * \brief Copy constructor. 
-	 * \param const wxTextValidator&  
-	*/
+    wxTextValidator(long style = wxFILTER_NONE, wxString *val = 0);
+    wxTextValidator(const wxTextValidator& val);
 
-   wxTextValidator(const wxTextValidator&  validator ) ;
-	/**
-	 * \brief Constructor, taking a style and optional pointer to a wxString variable. 
-	 * \param long  
-	 * \param wxString*   
-	*/
+    ~wxTextValidator();
 
-   wxTextValidator(long style = wxFILTER_NONE, wxString*  valPtr = NULL) ;
-	/**
-	 * \brief Destructor. 
-	*/
+    // Make a clone of this validator (or return NULL) - currently necessary
+    // if you're passing a reference to a validator.
+    // Another possibility is to always pass a pointer to a new validator
+    // (so the calling code can use a copy constructor of the relevant class).
+    virtual wxObject *Clone() const;
+    bool Copy(const wxTextValidator& val);
 
-  virtual  ~wxTextValidator() ;
-	/**
-	 * \brief Clones the text validator using the copy constructor. 
-	*/
+    // Called when the value in the window must be validated.
+    // This function can pop up an error message.
+    virtual bool Validate(wxWindow *parent);
 
-  virtual wxValidator* Clone() const;
-	/**
-	 * \brief Returns a reference to the exclude list (the list of invalid values). 
-	*/
+    // Called to transfer data to the window
+    virtual bool TransferToWindow();
 
-  wxStringList& GetExcludeList() const;
-	/**
-	 * \brief Returns a reference to the include list (the list of valid values). 
-	*/
+    // Called to transfer data to the window
+    virtual bool TransferFromWindow();
 
-  wxStringList& GetIncludeList() const;
-	/**
-	 * \brief Returns the validator style. 
-	*/
+    // ACCESSORS
+    inline long GetStyle() const;
+    inline void SetStyle(long style);
 
-  long GetStyle() const;
-	/**
-	 * \brief Receives character input from the window and filters it according to the
-current validator style. 
-	 * \param wxKeyEvent&  
-	*/
+    void SetIncludes(const wxArrayString& includes);
+    inline wxArrayString& GetIncludes();
 
-  virtual void OnChar(wxKeyEvent&  event ) ;
-	/**
-	 * \brief Sets the exclude list (invalid values for the user input). 
-	 * \param const wxStringList&  
-	*/
+    void SetExcludes(const wxArrayString& excludes);
+    inline wxArrayString& GetExcludes();
 
-  void SetExcludeList(const wxStringList&  stringList ) ;
-	/**
-	 * \brief Sets the include list (valid values for the user input). 
-	 * \param const wxStringList&  
-	*/
+    bool IsInCharIncludes(const wxString& val);
+    bool IsNotInCharExcludes(const wxString& val);
 
-  void SetIncludeList(const wxStringList&  stringList ) ;
-	/**
-	 * \brief Sets the validator style. 
-	 * \param long  
-	*/
-
-  void SetStyle(long  style ) ;
-	/**
-	 * \brief Transfers the string value to the window. 
-	*/
-
-  virtual bool TransferFromWindow() ;
-	/**
-	 * \brief Transfers the window value to the string. 
-	*/
-
-  virtual bool TransferToWindow() ;
-	/**
-	 * \brief Validates the window contents against the include or exclude lists, depending
-on the validator style. 
-	 * \param wxWindow*  
-	*/
-
-  virtual bool Validate(wxWindow*  parent ) ;
+    // Filter keystrokes
+    void OnChar(wxKeyEvent& event);
 };
 
 
