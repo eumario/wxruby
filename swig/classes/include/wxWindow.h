@@ -734,6 +734,10 @@ This is the same as   but has a nicer syntax.
 	 * \brief  
 	*/
 
+#ifdef __WXMSW__
+  bool RegisterHotKey(int hotkeyId, int modifiers, int virtualKeyCode);
+#endif
+
   virtual void ReleaseMouse() ;
 	/**
 	 * \brief Removes a child window.  This is called automatically by window deletion
