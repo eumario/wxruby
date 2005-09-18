@@ -125,18 +125,34 @@ public:
 	*/
 
   bool IsSeparator();
+
+#if defined(__WXMSW__)
 	/**
 	 * \brief Sets the background colour associated with the menu item (Windows only). 
 	 * \param const wxColour&   
 	*/
+  void SetBackgroundColour(const wxColour& colour);
+#endif
 
+#if defined(__WXMSW__) || defined (__WXGTK__)
+  void SetBitmap(const wxBitmap& bmp);
+#endif
+
+#if defined(__WXMSW__)
+  void SetBitmaps(const wxBitmap& checked, const wxBitmap& unchecked = wxNullBitmap);
+
+  void SetFont(const wxFont& font);
+#endif
 
   void SetHelp(const wxString& str);
+
+#if defined(__WXMSW__)
 	/**
 	 * \brief Sets the width of the menu item checkmark bitmap (Windows only). 
 	 * \param int  
 	*/
-
+  void SetMarginWidth(int width);
+#endif
 
 	/**
 	 * \brief Sets the text associated with the menu item. 
@@ -144,10 +160,14 @@ public:
 	*/
 
   void SetText(const wxString& strName);
+
+#if defined(__WXMSW__)
 	/**
 	 * \brief Sets the text colour associated with the menu item (Windows only). 
 	 * \param const wxColour&   
 	*/
+  void SetTextColour(const wxColour& colour);
+#endif
 
   wxMenu *GetMenu();
   void SetMenu(wxMenu* menu);
