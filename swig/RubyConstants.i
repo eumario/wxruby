@@ -13,6 +13,7 @@
 #include <wx/artprov.h>
 #include <wx/calctrl.h>
 #include <wx/treebase.h>
+#include <wx/imaglist.h>
 
 //
 // All of these exist on only one platform, so in those
@@ -1800,7 +1801,7 @@ enum
 //   Start constants from wx/fdrepdlg.h
 //** ---------------------------------------------------------------------------- ** 
 
-// flages used by wxFindDialogEvent::GetFlags()
+// flags used by wxFindDialogEvent::GetFlags()
 enum wxFindReplaceFlags
 {
     // downward search/replace selected (otherwise - upwards)
@@ -1841,6 +1842,23 @@ enum wxFindReplaceDialogStyles
 #define wxFILTER_EXCLUDE_LIST   0x0020
 #define wxFILTER_INCLUDE_CHAR_LIST 0x0040
 #define wxFILTER_EXCLUDE_CHAR_LIST 0x0080
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/imaglist.h
+//** ---------------------------------------------------------------------------- ** 
+
+// Flags for Draw
+#define wxIMAGELIST_DRAW_NORMAL         0x0001
+#define wxIMAGELIST_DRAW_TRANSPARENT    0x0002
+#define wxIMAGELIST_DRAW_SELECTED       0x0004
+#define wxIMAGELIST_DRAW_FOCUSED        0x0008
+
+// Flag values for Set/GetImageList
+enum {
+    wxIMAGE_LIST_NORMAL, // Normal icons
+    wxIMAGE_LIST_SMALL,  // Small icons
+    wxIMAGE_LIST_STATE   // State icons: unimplemented (see WIN32 documentation)
+};
 
 //** ---------------------------------------------------------------------------- **
 //   Start SWIG fixes for constants

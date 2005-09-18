@@ -18,6 +18,7 @@
 - Added TreeCtrl icons (Roy Sutton)
 - Avoid MS Windows compile warning by removing definition of CURSOR_DEFAULT
   (Roy Sutton)
+- Added ImageList constants (Roy Sutton)
 
 
 
