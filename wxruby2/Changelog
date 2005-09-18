@@ -21,6 +21,7 @@
 - Added ImageList constants (Roy Sutton)
 - Added typemap for StatusBar so get_field_rect will work (Roy Sutton)
 - Enabled Window#get_font, which helps bigdemo work better (Roy Sutton)
+- Enabled several platform-specific methods to MenuItem (Roy Sutton)
 
 
 
