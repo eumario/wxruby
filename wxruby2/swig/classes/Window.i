@@ -7,7 +7,6 @@
 
 %ignore wxWindow::Clear;
 %ignore wxWindow::GetAccessible;
-%ignore wxWindow::GetFont;
 %ignore wxWindow::GetChildren;
 %ignore wxWindow::PopEventHandler;
 # %ignore wxWindow::SetCaret;
