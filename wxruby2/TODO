@@ -27,6 +27,9 @@ High priority TODO items:
 - Get all the methods that return objects (instead of object pointers)
   to work
   
+- Make sure we return an existing Ruby object whenever a wrapped wx object
+  is returned
+  
 - Eliminate massive duplication between swig/Events.i and 
   swig/classes/EvtHandler.i (probably by deleting what's in Event.i).
   Probably also should rename Events.i to avoid confusion with 
