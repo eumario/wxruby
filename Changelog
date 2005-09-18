@@ -12,8 +12,9 @@
 - Fix to bigdemo wxScrolledWindow to avoid crashing on Linux
 - Omit FontDialog.new(window) from Mac to avoid compile error
 - Many fixes to grid-related classes (Sean Long)
-- Add TextValidator and related constants; tweak Validator (Sean Long)
-- Add Rect class (Roy Sutton)
+- Added TextValidator and related constants; tweak Validator (Sean Long)
+- Added Rect class (Roy Sutton)
+- Added Timer and TimerEvent classes (Roy Sutton)
 
 
 
