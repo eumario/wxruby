@@ -1,3 +1,4 @@
+====0.0.29 tag included all of this:===
 - Enabled directors in these classes so they wouldn't crash during garbage 
   collection:  BitmapButton, Bitmap, ControlWithItems, Cursor, DC, Event, 
   FontDialog, Font, GridCellEditor, GridCellRenderer, Image, Pen, Sizer, 
