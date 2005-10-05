@@ -1,7 +1,5 @@
-// wxGridTableBase.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004-2005 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxGridTableBase_h_)
 #define _wxGridTableBase_h_
@@ -52,8 +50,8 @@ public:
 
     virtual wxString GetRowLabelValue( int row );
     virtual wxString GetColLabelValue( int col );
-    virtual void SetRowLabelValue( int WXUNUSED(row), const wxString& );
-    virtual void SetColLabelValue( int WXUNUSED(col), const wxString& );
+    virtual void SetRowLabelValue( int row, const wxString& );
+    virtual void SetColLabelValue( int col, const wxString& );
 
     // Attribute handling
     //

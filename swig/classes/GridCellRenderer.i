@@ -11,7 +11,4 @@
 #include <wx/grid.h>
 %}
 
-%import "include/wxObject.h"
-%import "include/wxEvtHandler.h"
-
 %include "include/wxGridCellRenderer.h"

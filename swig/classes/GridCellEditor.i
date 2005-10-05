@@ -15,8 +15,5 @@
 #This is to get arround SWIG trying to call a protected destructor
 %nodefault wxGridCellEditor;
 
-%import "include/wxObject.h"
-%import "include/wxEvtHandler.h"
-
 
 %include "include/wxGridCellEditor.h"

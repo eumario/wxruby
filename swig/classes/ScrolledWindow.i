@@ -8,7 +8,7 @@
 %}
 
 %module(directors="1") wxScrolledWindow
-%ignore wxScrolledWindow::wxScrolledWindow();
+#%ignore wxScrolledWindow::wxScrolledWindow();
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"

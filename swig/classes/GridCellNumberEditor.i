@@ -12,8 +12,6 @@
 %ignore wxGridCellNumberEditor::GetString() const;
 %ignore wxGridCellNumberEditor::HasRange() const;
 
-%import "include/wxObject.h"
-%import "include/wxEvtHandler.h"
 %import "include/wxGridCellEditor.h"
 
 %include "include/wxGridCellNumberEditor.h"

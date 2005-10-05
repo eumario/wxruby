@@ -1,6 +1,6 @@
 - Re-add typemap in FileDialog, so get_filenames and get_paths will work 
   (thanks to Roy Sutton)
-  
+- Many grid-related improvements, including adding GridCellCoords (Sean Long)  
   
 
 ====0.0.30 tag included all of this:===
