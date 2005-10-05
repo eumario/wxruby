@@ -3,12 +3,11 @@
 
 %include "../common.i"
 
-%module(directors="1") wxGridCellTextEditor
+%module(directors="1") wxGridCellCoords
 
 %{
 #include <wx/grid.h>
 %}
 
-%import "include/wxGridCellEditor.h"
+%include "include/wxGridCellCoords.h"
 
-%include "include/wxGridCellTextEditor.h"

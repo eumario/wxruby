@@ -46,6 +46,7 @@ extern swig_class cWxListbookEvent;
 extern swig_class cWxGridEvent;
 extern swig_class cWxGridRangeSelectEvent;
 extern swig_class cWxGridSizeEvent;
+extern swig_class cWxGridEditorCreatedEvent;
 extern swig_class cWxTreeEvent;
 extern swig_class cWxSplitterEvent;
 extern swig_class cWxMoveEvent;
@@ -204,7 +205,6 @@ static const wxEventType *gridEvents[] =
      &wxEVT_GRID_SELECT_CELL,
      &wxEVT_GRID_EDITOR_HIDDEN,
      &wxEVT_GRID_EDITOR_SHOWN,
-     &wxEVT_GRID_EDITOR_CREATED,
      (const wxEventType *)0
 };
 
@@ -218,6 +218,12 @@ static const wxEventType *gridSizeEvents[] =
 {
      &wxEVT_GRID_COL_SIZE,
      &wxEVT_GRID_ROW_SIZE,
+     (const wxEventType *)0
+};
+
+static const wxEventType *gridEditorEvent[] =
+{
+     &wxEVT_GRID_EDITOR_CREATED,
      (const wxEventType *)0
 };
 
@@ -271,6 +277,8 @@ public:
 			cEvent = cWxGridRangeSelectEvent.klass;
 		else if (event.IsKindOf(CLASSINFO(wxGridSizeEvent)))
 			cEvent = cWxGridSizeEvent.klass;
+		else if (event.IsKindOf(CLASSINFO(wxGridEditorCreatedEvent)))
+			cEvent = cWxGridEditorCreatedEvent.klass;			
 		else if (event.IsKindOf(CLASSINFO(wxSplitterEvent)))
 			cEvent = cWxSplitterEvent.klass;
 		else if (event.IsKindOf(CLASSINFO(wxMoveEvent)))
