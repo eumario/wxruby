@@ -5,10 +5,6 @@
 
 %module(directors="1") wxFileDialog
 
-# Although this works for wxWidgets 2.6.1 on OS X 10.4, 
-# it fails for wxWidgets 2.5.3 on Ubuntu Linux.
-# typemaps don't belong here anyway, so let's find a better solution.
-#if 0
 %typemap(in,numinputs=0) wxArrayString &(wxArrayString sel)
 {
 	$1 = &sel;
@@ -17,9 +13,8 @@
 %typemap(argout) wxArrayString &{
   $result = rb_ary_new();
   for (int i = 0; i < $1->GetCount(); i++)
-    rb_ary_push($result,rb_str_new2((*$1)[i].c_str()));
+    rb_ary_push($result,rb_str_new2((*$1)[i].mb_str()));
 }
-#endif
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
