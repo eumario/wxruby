@@ -50,23 +50,27 @@
 	$result = rb_str_new2((const char *)$1.mb_str());
 }
 
-%typemap(typecheck) wxString {
+%typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxString {
 	$1 = (TYPE($input) == T_STRING);
 }
 
-%typemap(typecheck) wxString & {
-	$1 = (TYPE($input) == T_STRING);
-}
-
-
-%typemap(typecheck) wxString const & {
+%typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxString & {
 	$1 = (TYPE($input) == T_STRING);
 }
 
 
-%typemap(typecheck) wxString *{
+%typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxString const & {
 	$1 = (TYPE($input) == T_STRING);
 }
+
+%typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxString *{
+	$1 = (TYPE($input) == T_STRING);
+}
+
+%typemap(out) void * {
+  $result = INT2NUM((int)$1);
+}
+
 
 ##############################################################
 
@@ -92,7 +96,7 @@
 # wxMenuItem* wxMenu::Append(int itemid, const wxString& text, const wxString& help = wxEmptyString, wxItemKind kind = wxITEM_NORMAL)
 # and
 # void wxMenu::Append(int itemid, const wxString& text, const wxString& help, bool isCheckable);
-%typemap(typecheck) wxItemKind {
+%typemap(typecheck, precedence=SWIG_TYPECHECK_INTEGER) wxItemKind {
 	$1 = (TYPE($input) == T_FIXNUM && TYPE($input) != T_TRUE && TYPE($input) != T_FALSE);
 }
 
@@ -262,7 +266,7 @@
   }
 }
 
-%typemap(typecheck) wxArrayString &
+%typemap(typecheck, precedence=SWIG_TYPECHECK_STRING_ARRAY) wxArrayString &
 {
    $1 = (TYPE($input) == T_ARRAY);
 }
