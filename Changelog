@@ -2,7 +2,7 @@
   (thanks to Roy Sutton)
 - Many grid-related improvements, including adding GridCellCoords (Sean Long) 
 - Improvements to the typemaps, reducing warnings (Roy Sutton)
-
+- Applied a test patch (to the TODO file) submitted via darcs (Sean Long)
   
 
 ====0.0.30 tag included all of this:===
