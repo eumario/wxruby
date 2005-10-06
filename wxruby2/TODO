@@ -37,7 +37,7 @@ High priority TODO items:
 
 - Fix all "can't return" warnings for non-pointer objects
 
-- Switch from CVS to darcs?
+- Switch from CVS to darcs? (in progress)
 
 - Get bigdemo working
 
