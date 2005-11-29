@@ -33,21 +33,21 @@
 %typemap(directorin) wxString *, const wxString * "TODO: $1_name->mb_str()";
                                                                                                    
 %typemap(out) wxString {
-	$result = rb_str_new2((const char *)$1.mb_str());
+	$result = rb_str_new2((const char *)$1.mb_str(wxConvUTF8));
 }
 
 %typemap(out) wxString& {
-	$result = rb_str_new2((const char *)$1.mb_str());
+	$result = rb_str_new2((const char *)$1.mb_str(wxConvUTF8));
 }
 
 %typemap(out) const wxString& {
-	$result = rb_str_new2((const char *)$1.mb_str());
+	$result = rb_str_new2((const char *)$1.mb_str(wxConvUTF8));
 }
 
 %apply wxString& { wxString* }
                                                                                
 %typemap(varout) wxString {
-	$result = rb_str_new2((const char *)$1.mb_str());
+	$result = rb_str_new2((const char *)$1.mb_str(wxConvUTF8));
 }
 
 %typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxString {

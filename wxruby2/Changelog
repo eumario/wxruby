@@ -1,3 +1,5 @@
+- Improved unicode support, and added cool unicode sample: 
+  samples/text/unicode.rb (Alex Fenton)
 - Added cool text sample: samples/text/textctrl.rb (Alex Fenton)
 - Added support for SystemSettings (Alex Fenton)
 - Tweaked ComboBox constructor to fix cases where it got confused about 
