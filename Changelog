@@ -1,3 +1,5 @@
+- Tweaked ComboBox constructor to fix cases where it got confused about 
+  which parameter was which (Kevin Smith)
 - Re-add typemap in FileDialog, so get_filenames and get_paths will work 
   (thanks to Roy Sutton)
 - Many grid-related improvements, including adding GridCellCoords (Sean Long) 
