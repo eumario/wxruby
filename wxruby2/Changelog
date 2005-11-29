@@ -1,3 +1,4 @@
+- Added support for SystemSettings (Alex Fenton)
 - Tweaked ComboBox constructor to fix cases where it got confused about 
   which parameter was which (Kevin Smith)
 - Re-add typemap in FileDialog, so get_filenames and get_paths will work 
