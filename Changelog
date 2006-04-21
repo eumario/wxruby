@@ -1,3 +1,4 @@
+====0.0.30 tag included all of this:===
 *** NOTE: At this point, wxruby2 compiles and links on Ubuntu GNU/Linux, and 
     can at least launch most samples. However, it crashes a lot.
 - BIG changes to target wxWidgets 2.6.3:
