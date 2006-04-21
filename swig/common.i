@@ -4,6 +4,11 @@
 %feature("director");
 
 %{
+// # SWIG 1.3.29 added this new feature which we can't use (yet)
+#define SWIG_DIRECTOR_NOUEH TRUE
+
+
+
 #  undef GetClassName
 #  undef GetClassInfo
 #  undef Yield

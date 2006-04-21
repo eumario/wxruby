@@ -4,6 +4,7 @@
 
 ##############################################################
 %typemap(in) wxString& {
+	// $argnum: $1_type $1_name ($1_mangle) [$1_ltype]
 	$1 = new wxString(STR2CSTR($input), wxConvUTF8);
 }
 
@@ -15,7 +16,12 @@
 	$1 = new wxString(STR2CSTR($input), wxConvUTF8);
 }
 
-/**
+%typemap(directorout) wxString, wxString& "$result = wxString(STR2CSTR($input), wxConvUTF8);";
+
+
+/*
+Currently incompatible with the ruby post-processing of swigged .cpp files
+Needs to be fixed in fixdeleting.rb before this can be uncommented out
 %typemap(freearg) wxString & {
 	delete $1;
 }
@@ -24,10 +30,12 @@
 	delete $1;
 }
 
+ Removed temporarily 2006-04-16 kbs
 %typemap(freearg) wxString* {
 	delete $1;
 }
 */
+
 %typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2((const char *)$1.mb_str());";
 
 %typemap(directorin) wxString *, const wxString * "TODO: $1_name->mb_str()";
@@ -84,6 +92,7 @@
 
 ##############################################################
 
+##############################################################
 %typemap(in) wxItemKind {
 	$1 = (wxItemKind)NUM2INT($input);
 }

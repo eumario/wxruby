@@ -5,13 +5,20 @@
 
 %module(directors="1") wxArtProvider
 
+# The following are not yet compatible with SWIG 1.3.29
+%ignore GetBitmap;
+%ignore GetIcon;
 
 %rename(ArtProvider) wxRubyArtProvider;
 
 %import "include/wxObject.h"
 
+%header %{
+	#include <wx/artprov.h>
+%}
+
+
 %{
-#include <wx/artprov.h>
 
 extern swig_class cWxSize;
 extern swig_class cWxObject;

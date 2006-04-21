@@ -1,3 +1,30 @@
+*** NOTE: At this point, wxruby2 compiles and links on Ubuntu GNU/Linux, and 
+    can at least launch most samples. However, it crashes a lot.
+- BIG changes to target wxWidgets 2.6.3:
+  - controls.rb sample: Temporarily removed ArtProvider stuff that is crashing
+  - Button: Made GetLabel and SetLabel methods virtual
+  - Control: Added empty constructor, and made GetLabel and SetLabel virtual
+  - RadioBox: Removed deprecated GetLabel(n) and SetLabel(n) methods, and
+      made GetLabel and SetLabel virtual
+  - StaticText: Made GetLabel virtual
+  - TextCtrl: Refreshed entire definition, making several more methods virtual
+  - TreeCtrl: Implemented internal hack to work around the fact that this 
+      class has different superclasses on different platforms
+  - ART_XXX constants are now of type ArtID (instead of being strings), but
+      the ArtProvider stuff doesn't really work yet (at least it compiles!)
+  - No longer typedef ArtID and ArtClient as wxStrings
+- BIG changes to target SWIG 1.3.29:
+  - Removed swig option: -noextern
+  - ArtProvider: Removed non-static create_bitmap method (not sure why exactly)
+  - Partly disabled SWIG Director Exceptions because they caused link errors
+      (but they are only partly disabled, and actually sort of work)
+  - SWIG post-processor fixmodule now deletes the GCItem destructor, and
+      the UnknownExceptionHandler::handler method (both were causing errors 
+	  during compiling)
+  - Added a directorout typemap for wxString
+
+
+====This should have been tagged but wasn't:===
 - Improved unicode support, and added cool unicode sample: 
   samples/text/unicode.rb (Alex Fenton)
 - Added cool text sample: samples/text/textctrl.rb (Alex Fenton)

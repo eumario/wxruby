@@ -17,6 +17,7 @@ def fixmodule(filename)
 	found_define_module = false
 	found_init = false
 	found_define_class = false
+	found_gcitem_destructor = false
 	
 	core_name = File.basename(filename, ".cpp")
 puts("core_name: #{core_name}")
@@ -28,7 +29,9 @@ puts("core_name: #{core_name}")
 puts("      : #{parent_name}")
 	end
 	
-	skip_until_close_brace = false
+	skip_until_blank_line = false
+	skip_entire_method = false
+	brace_level = 0
 	
 	File.open(filename, "w") do | out |
 	
@@ -82,7 +85,6 @@ puts("class #{wx_name}")
 				  end
 				result << line
 				line = result.join("\n")
-puts(line)
 				found_define_class = true
 			end
 			
@@ -92,21 +94,39 @@ puts(line)
 				found_swig_class = true
 				found_define_class = true
 			end
-
-			# this was to avoid compiler warnings, 
-			# but I turned off that warning
-			# it's still here as an example of how to use skip_until_close_brace
-#			if(line.index("SWIG_AsVal"))
-#				skip_until_close_brace = true
-#			end
 			
-			if(skip_until_close_brace)
-				if(line.index("}"))
-					skip_until_close_brace = false
-				end
-				line = "//#{line}"
+			# remove the bogus GCItem destructor
+			if(line.strip == 'GCItem::~GCItem()')
+				found_gcitem_destructor = true
+				skip_until_blank_line = true
 			end
 			
+			# remove the UnknownExceptionHandler::handler method
+			if(line.index('void UnknownExceptionHandler::handler()'))
+				skip_entire_method = true
+			end
+
+			
+			if(skip_entire_method)
+				line = "//#{line}"
+				if(line.index('{'))
+					brace_level += 1
+				end
+				if(line.index('}'))
+					brace_level -= 1
+				end
+				if(brace_level == 0)
+					skip_entire_method = false
+				end
+			end
+			
+			if(skip_until_blank_line)
+				if(line.strip.size == 0)
+					skip_until_blank_line = false
+				else
+					line = '// ' + line
+				end
+			end
 			
 			out.puts(line)
 		end
@@ -130,6 +150,10 @@ puts(line)
 	if(!found_define_class)
 		puts("ERROR! #{__FILE__} Didn't find define class")
 		exit(1)
+	end
+	
+	if(!found_gcitem_destructor)
+		puts("NOTE: #{__FILE__} Didn't find gcitem destructor")
 	end
 	
 	File.delete(broken)

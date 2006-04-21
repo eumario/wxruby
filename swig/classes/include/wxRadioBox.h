@@ -1,7 +1,5 @@
-// wxRadioBox.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2006 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxRadioBox_h_)
 #define _wxRadioBox_h_
@@ -17,16 +15,16 @@ public:
   virtual bool Enable(int  n , bool enable = true) ;
   int FindString(const wxString&  string ) const;
   virtual int GetCount() const;
-  wxString GetLabel() const;
-  wxString GetLabel(int  n ) const;
+  virtual wxString GetLabel() const;
   virtual int GetSelection() const;
   wxString GetStringSelection() const;
 
   // deprecated
   //int Number() const;
+  //wxString GetLabel(int  n ) const;
+  //void SetLabel(int  n , const wxString&  label ) ;
   
-  void SetLabel(const wxString&  label ) ;
-  void SetLabel(int  n , const wxString&  label ) ;
+  virtual void SetLabel(const wxString&  label ) ;
   virtual void SetSelection(int  n ) ;
   virtual bool SetStringSelection(const wxString&  string ) ;
   virtual bool Show(bool show = true);

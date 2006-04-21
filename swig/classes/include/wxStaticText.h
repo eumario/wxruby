@@ -1,7 +1,5 @@
-// wxStaticText.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2006 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxStaticText_h_)
 #define _wxStaticText_h_
@@ -41,7 +39,7 @@ public:
 	 * \brief Returns the contents of the control. 
 	*/
 
-  wxString GetLabel() const;
+  virtual wxString GetLabel() const;
 	/**
 	 * \brief Sets the static text label and updates the controls size to exactly fit the
 label unless the control has wxST_NO_AUTORESIZE flag. 
