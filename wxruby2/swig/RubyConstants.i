@@ -1,4 +1,4 @@
-#   Copyright 2004-2005 by Kevin Smith
+#   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
 %module(directors="1") wxRubyConstants
@@ -1999,45 +1999,45 @@ enum {
 
 %constant const char *FILE_SELECTOR_DEFAULT_WILDCARD_STR = "*.*";
 
-%constant const char * ART_TOOLBAR               = wxART_TOOLBAR_C;
-%constant const char * ART_MENU                  = wxART_MENU_C;
-%constant const char * ART_FRAME_ICON            = wxART_FRAME_ICON_C;
-%constant const char * ART_CMN_DIALOG            = wxART_CMN_DIALOG_C;
-%constant const char * ART_HELP_BROWSER          = wxART_HELP_BROWSER_C;
-%constant const char * ART_MESSAGE_BOX           = wxART_MESSAGE_BOX_C;
-%constant const char * ART_OTHER                 = wxART_OTHER_C;
+%constant wxArtID ART_TOOLBAR               = wxART_TOOLBAR;
+%constant wxArtID ART_MENU                  = wxART_MENU;
+%constant wxArtID ART_FRAME_ICON            = wxART_FRAME_ICON;
+%constant wxArtID ART_CMN_DIALOG            = wxART_CMN_DIALOG;
+%constant wxArtID ART_HELP_BROWSER          = wxART_HELP_BROWSER;
+%constant wxArtID ART_MESSAGE_BOX           = wxART_MESSAGE_BOX;
+%constant wxArtID ART_OTHER                 = wxART_OTHER;
 
-%constant const char * ART_ADD_BOOKMARK          = wxART_ADD_BOOKMARK;
-%constant const char * ART_DEL_BOOKMARK          = wxART_DEL_BOOKMARK;
-%constant const char * ART_HELP_SIDE_PANEL       = wxART_HELP_SIDE_PANEL;
-%constant const char * ART_HELP_SETTINGS         = wxART_HELP_SETTINGS;
-%constant const char * ART_HELP_BOOK             = wxART_HELP_BOOK;
-%constant const char * ART_HELP_FOLDER           = wxART_HELP_FOLDER;
-%constant const char * ART_HELP_PAGE             = wxART_HELP_PAGE;
-%constant const char * ART_GO_BACK               = wxART_GO_BACK;
-%constant const char * ART_GO_FORWARD            = wxART_GO_FORWARD;
-%constant const char * ART_GO_UP                 = wxART_GO_UP;
-%constant const char * ART_GO_DOWN               = wxART_GO_DOWN;
-%constant const char * ART_GO_TO_PARENT          = wxART_GO_TO_PARENT;
-%constant const char * ART_GO_HOME               = wxART_GO_HOME;
-%constant const char * ART_FILE_OPEN             = wxART_FILE_OPEN;
-%constant const char * ART_PRINT                 = wxART_PRINT;
-%constant const char * ART_HELP                  = wxART_HELP;
-%constant const char * ART_TIP                   = wxART_TIP;
-%constant const char * ART_REPORT_VIEW           = wxART_REPORT_VIEW;
-%constant const char * ART_LIST_VIEW             = wxART_LIST_VIEW;
-%constant const char * ART_NEW_DIR               = wxART_NEW_DIR;
-%constant const char * ART_FOLDER                = wxART_FOLDER;
-%constant const char * ART_GO_DIR_UP             = wxART_GO_DIR_UP;
-%constant const char * ART_EXECUTABLE_FILE       = wxART_EXECUTABLE_FILE;
-%constant const char * ART_NORMAL_FILE           = wxART_NORMAL_FILE;
-%constant const char * ART_TICK_MARK             = wxART_TICK_MARK;
-%constant const char * ART_CROSS_MARK            = wxART_CROSS_MARK;
-%constant const char * ART_ERROR                 = wxART_ERROR;
-%constant const char * ART_QUESTION              = wxART_QUESTION;
-%constant const char * ART_WARNING               = wxART_WARNING;
-%constant const char * ART_INFORMATION           = wxART_INFORMATION;
-%constant const char * ART_MISSING_IMAGE         = wxART_MISSING_IMAGE;
+%constant wxString ART_ADD_BOOKMARK          = wxART_ADD_BOOKMARK;
+%constant wxArtID ART_DEL_BOOKMARK          = wxART_DEL_BOOKMARK;
+%constant wxArtID ART_HELP_SIDE_PANEL       = wxART_HELP_SIDE_PANEL;
+%constant wxArtID ART_HELP_SETTINGS         = wxART_HELP_SETTINGS;
+%constant wxArtID ART_HELP_BOOK             = wxART_HELP_BOOK;
+%constant wxArtID ART_HELP_FOLDER           = wxART_HELP_FOLDER;
+%constant wxArtID ART_HELP_PAGE             = wxART_HELP_PAGE;
+%constant wxArtID ART_GO_BACK               = wxART_GO_BACK;
+%constant wxArtID ART_GO_FORWARD            = wxART_GO_FORWARD;
+%constant wxArtID ART_GO_UP                 = wxART_GO_UP;
+%constant wxArtID ART_GO_DOWN               = wxART_GO_DOWN;
+%constant wxArtID ART_GO_TO_PARENT          = wxART_GO_TO_PARENT;
+%constant wxArtID ART_GO_HOME               = wxART_GO_HOME;
+%constant wxArtID ART_FILE_OPEN             = wxART_FILE_OPEN;
+%constant wxArtID ART_PRINT                 = wxART_PRINT;
+%constant wxArtID ART_HELP                  = wxART_HELP;
+%constant wxArtID ART_TIP                   = wxART_TIP;
+%constant wxArtID ART_REPORT_VIEW           = wxART_REPORT_VIEW;
+%constant wxArtID ART_LIST_VIEW             = wxART_LIST_VIEW;
+%constant wxArtID ART_NEW_DIR               = wxART_NEW_DIR;
+%constant wxArtID ART_FOLDER                = wxART_FOLDER;
+%constant wxArtID ART_GO_DIR_UP             = wxART_GO_DIR_UP;
+%constant wxArtID ART_EXECUTABLE_FILE       = wxART_EXECUTABLE_FILE;
+%constant wxArtID ART_NORMAL_FILE           = wxART_NORMAL_FILE;
+%constant wxArtID ART_TICK_MARK             = wxART_TICK_MARK;
+%constant wxArtID ART_CROSS_MARK            = wxART_CROSS_MARK;
+%constant wxArtID ART_ERROR                 = wxART_ERROR;
+%constant wxArtID ART_QUESTION              = wxART_QUESTION;
+%constant wxArtID ART_WARNING               = wxART_WARNING;
+%constant wxArtID ART_INFORMATION           = wxART_INFORMATION;
+%constant wxArtID ART_MISSING_IMAGE         = wxART_MISSING_IMAGE;
 
 %constant const int LAYOUT_UNCONSTRAIINED = wxUnconstrained;
 %constant const int LAYOUT_AS_IS = wxAsIs;

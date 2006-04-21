@@ -1,7 +1,5 @@
-// wxButton.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2006 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxButton_h_)
 #define _wxButton_h_
@@ -48,7 +46,7 @@ public:
 	 * \brief Returns the string label for the button. 
 	*/
 
-  wxString GetLabel() const;
+  virtual wxString GetLabel() const;
 	/**
 	 * \brief Returns the default size for the buttons. It is advised to make all the dialog
 buttons of the same size and this function allows to retrieve the (platform and
@@ -67,7 +65,7 @@ box.
 	 * \param const wxString&   
 	*/
 
-  void SetLabel(const wxString&  label ) ;
+  virtual void SetLabel(const wxString&  label ) ;
 };
 
 

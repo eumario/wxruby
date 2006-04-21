@@ -368,8 +368,9 @@ class MyPanel < Panel
 
         panel = Panel.new(@m_notebook)
 
-        icon = ArtProvider::get_icon(ART_INFORMATION)
-        StaticBitmap.new( panel, -1, icon, Point.new(10, 10) )
+puts("FIXME: Not yet compatible with swig 1.3.29 (2006-04-17 kbs)")
+#        icon = ArtProvider::get_icon(ART_INFORMATION)
+#        StaticBitmap.new( panel, -1, icon, Point.new(10, 10) )
 
         bitmap = Bitmap.new( 100, 100 )
         dc = MemoryDC.new
@@ -389,15 +390,15 @@ class MyPanel < Panel
            bitmap.set_mask(Mask.new(bitmap, BLUE))
            StaticBitmap.new(panel, -1, bitmap, Point.new(300, 120))
         end
-        bmp1 = ArtProvider::get_bitmap(ART_INFORMATION)
-        bmp2 = ArtProvider::get_bitmap(ART_WARNING)
-        bmp3 = ArtProvider::get_bitmap(ART_QUESTION)
-        bmpBtn = BitmapButton.new(panel, -1,
-                                    bmp1,
-                                    Point.new(30, 70))
+#        bmp1 = ArtProvider::get_bitmap(ART_INFORMATION)
+#        bmp2 = ArtProvider::get_bitmap(ART_WARNING)
+#        bmp3 = ArtProvider::get_bitmap(ART_QUESTION)
+#        bmpBtn = BitmapButton.new(panel, -1,
+#                                    bmp1,
+#                                    Point.new(30, 70))
 
-        bmpBtn.set_bitmap_selected(bmp2)
-        bmpBtn.set_bitmap_focus(bmp3)
+#        bmpBtn.set_bitmap_selected(bmp2)
+#        bmpBtn.set_bitmap_focus(bmp3)
 
 if !(RUBY_PLATFORM =~ /darwin/) 
         ToggleButton.new(panel, ID_BUTTON_LABEL,

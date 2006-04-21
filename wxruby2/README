@@ -1,10 +1,18 @@
 README for wxruby2
-Version 0.0.29
+Version 0.0.31
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
 It is released under a permissive MIT-style license
 (see the LICENSE file for details).
+
+*** NOTE ***
+This version is VERY UNSTABLE. It is the first build that 
+targets wxWidgets 2.6.3 and SWIG 1.3.29. Please AVOID this 
+build unless you are highly motivated to help improve wxruby2.
+Hopefully within a couple more releases it will be stable 
+again (at least as good as it was in 0.0.30, if not better).
+************
 
 There are no binaries yet. You must build it from source.
 It now supports about 130 classes, and is only missing about 20 
@@ -18,8 +26,8 @@ REQUIREMENTS:
 
 - Ruby 1.8
 - rake (http://rake.rubyforge.org/)
-- SWIG 1.3.24 or later
-- wxWidgets 2.6+ SDK
+- SWIG 1.3.29 or later
+- wxWidgets 2.6.3 SDK
 - Linux, MS Windows, or Mac OS X
 
 

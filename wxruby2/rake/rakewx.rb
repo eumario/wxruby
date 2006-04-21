@@ -1,5 +1,5 @@
 # rakewx.rb
-#   Copyright 2004-2005 by Kevin Smith
+#   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
 # This file is required by the main wxRuby rakefile.
@@ -14,7 +14,7 @@ $classes_dir = File.join($swig_dir, 'classes')
 $original_h_dir = File.join($classes_dir, 'include')
 
 $swig_cmd = "swig"
-$swig_options = " -noextern "
+$swig_options = " "
 
 def have_good_swig
 	begin
