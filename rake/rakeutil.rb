@@ -16,7 +16,7 @@ $cygwin = /cygwin/ =~ RUBY_PLATFORM
 $human = /human/ =~ RUBY_PLATFORM
 $netbsd = /netbsd/ =~ RUBY_PLATFORM
 $os2 = /os2/ =~ RUBY_PLATFORM
-$macosx = /powerpc-darwin/ =~ RUBY_PLATFORM
+$macosx = /darwin/ =~ RUBY_PLATFORM
 
 def force_mkdir(dir)
     if(!File.exists?(dir))
