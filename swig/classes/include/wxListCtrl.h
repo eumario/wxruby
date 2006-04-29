@@ -48,8 +48,6 @@ public:
   long InsertItem(long  index , const wxString&  label ) ;
   long InsertItem(long  index , int  imageIndex ) ;
   long InsertItem(long  index , const wxString&  label , int  imageIndex ) ;
-  //virtual int OnGetItemImage(long  item );
-  //virtual wxString OnGetItemText(long  item , long  column );
   bool ScrollList(int  dx , int  dy ) ;
   void SetBackgroundColour(const wxColour&  col ) ;
   bool SetColumn(int  col , wxListItem&  item ) ;
@@ -68,6 +66,9 @@ public:
   void SetTextColour(const wxColour&  col ) ;
   void SetWindowStyleFlag(long  style ) ;
   bool SortItems(wxListCtrlCompare  fnSortCallBack , long  data ) ;
+ protected:
+  virtual int OnGetItemImage(long  item ) const;
+  virtual wxString OnGetItemText(long  item , long  column ) const;
 
 };
 
