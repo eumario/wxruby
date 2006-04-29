@@ -19,6 +19,7 @@
 
 %typemap(directorout) wxString, wxString& "$result = wxString(STR2CSTR($input), wxConvUTF8);";
 
+%include "typemaps.i"
 
 /*
 Currently incompatible with the ruby post-processing of swigged .cpp files

@@ -19,10 +19,10 @@
 #  undef StartDoc
 #  undef CreateDialog
 #  undef Sleep
-#  undef _
 #  undef Connect
 #  undef connect
 
+#  define WXINTL_NO_GETTEXT_MACRO 1
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
 
