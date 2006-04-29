@@ -5,6 +5,8 @@
 
 %module(directors="1") wxMDIParentFrame;
 
+%apply SWIGTYPE *DISOWN { wxMenuBar * }
+
 %{
 #include <wx/mdi.h>
 %}

@@ -7,6 +7,8 @@
 
 %ignore wxFrame::wxFrame();
 
+%apply SWIGTYPE *DISOWN { wxMenuBar * }
+
 %typemap(in,numinputs=1) (int n, int * widths) (int size, int i, int *arr){
 
   size = RARRAY($input)->len;
