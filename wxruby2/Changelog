@@ -1,4 +1,8 @@
-
+- Catch wxWidgets Asserts and raise them as Ruby fatal exceptions, to avoid 
+  a cascade of worthless "addr2line" console output on Linux
+- Fix bigdemo to allow right-side splitter to be resized. (It was being 
+  created with the splitter bar so high that it was under the tabs of the 
+	notebook, and therefore couldn't be resized)
 - Fix wxTextCtrl.h compile errors by removing overflow() (Roy Sutton)
 - Fix swig object tracking, hopefully fixing many crashes (Roy Sutton)
 - Patch to avoid almost immediate crashing in all samples on Linux after 
