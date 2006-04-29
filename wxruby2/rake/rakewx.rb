@@ -15,6 +15,7 @@ $original_h_dir = File.join($classes_dir, 'include')
 
 $swig_cmd = "swig"
 $swig_options = " "
+$swig_minimum_version = '1.3.29'
 
 def have_good_swig
 	begin
@@ -24,10 +25,11 @@ def have_good_swig
 		return false
 	end
 	if(!version || version.empty?)
-		puts('Doing slower check for SWIG 1.3.24')
+		puts("Doing slower check for SWIG #{$swig_minimum_version}")
 		version = `ruby swig/swigver.rb`
 	end
-	return (version >= "SWIG Version 1.3.24" && version < "SWIG Version 2")
+        ENV['SWIGVER'] = version
+	return (version >= "SWIG Version #{$swig_minimum_version}" && version < "SWIG Version 2")
 end
 
 def wx_config(opt)
