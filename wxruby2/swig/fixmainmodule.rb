@@ -33,6 +33,34 @@ File.open(ARGV[0], "w") do | out |
             line = "VALUE #{$main_module};"
 			found_main_module = true
         end
+
+        # Fix 1.3.29's ruby tracking
+        if(ENV['SWIGVER'] == 'SWIG Version 1.3.29')
+          if(line.index("static VALUE swig_ruby_trackings"))
+            line = "VALUE swig_ruby_trackings = 0;"
+          end
+
+          if(line.index("static ID swig_ruby_hash_delete"))
+            line = "ID swig_ruby_hash_delete = 0;"
+          end
+
+          if(line.index("swig_ruby_trackings = rb_hash_new();"))
+            line = "  if(swig_ruby_trackings == 0) {\n" +
+                   line;
+          end
+			
+          if(line.index("swig_ruby_hash_delete = rb_intern(\"delete\");"))
+            line = line + "\n" +
+    				  "rb_global_variable(&swig_ruby_trackings);\n" +
+                  "  }";
+          end
+					
+				if(line.index("char* type_name = RSTRING(value)->ptr;"))
+					line = "        const char* type_name = (value == Qnil) ? \"\" : RSTRING(value)->ptr;\n";
+				end
+				
+      end
+
         out.puts(line)
     end
 	if(!found_main_module)

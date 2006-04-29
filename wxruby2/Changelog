@@ -1,3 +1,11 @@
+
+- Fix swig object tracking, hopefully fixing many crashes (Roy Sutton)
+- Patch to avoid almost immediate crashing in all samples on Linux after 
+  above patch was applied. Running minimal.rb, and opening and closing the 
+	Help/About box was the easiest way to see the problem. For some reason, 
+	an internal value was Qnil but the SWIG code was not checking for that.
+- Small fix to typemaps for wxString return values (Roy Sutton)
+- Require swig 1.3.29 or later (thanks to Roy Sutton)
 - Fix detection of Intel Macs (Sean Long)
 
 ====0.0.30 tag included all of this:===
