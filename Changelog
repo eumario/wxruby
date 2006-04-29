@@ -1,4 +1,5 @@
 
+- Fix wxTextCtrl.h compile errors by removing overflow() (Roy Sutton)
 - Fix swig object tracking, hopefully fixing many crashes (Roy Sutton)
 - Patch to avoid almost immediate crashing in all samples on Linux after 
   above patch was applied. Running minimal.rb, and opening and closing the 

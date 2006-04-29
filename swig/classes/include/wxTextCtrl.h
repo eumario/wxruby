@@ -166,7 +166,7 @@ public:
     
 	//virtual void SetEditable(bool editable) = 0;
 
-    int overflow(int i);
+   // int overflow(int i);
     wxTextCtrl& operator<<(const wxString& s);
     wxTextCtrl& operator<<(int i);
     wxTextCtrl& operator<<(long i);
