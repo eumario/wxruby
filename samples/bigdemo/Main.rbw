@@ -316,7 +316,7 @@ class WxRubyDemo < Wx::Frame
         splitter.split_vertically(@tree, splitter2, 190)
         
         splitter.set_minimum_pane_size(20)        
-        splitter2.set_minimum_pane_size(20)
+        splitter2.set_minimum_pane_size(100)
         
         @nb.set_selection(0)
         @tree.select_item(root)
