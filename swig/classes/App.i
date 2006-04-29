@@ -173,6 +173,7 @@ public:
   virtual bool OnCmdLineHelp(wxCmdLineParser&  parser ) ;
   virtual bool OnCmdLineParsed(wxCmdLineParser&  parser ) ;
   virtual void OnFatalException() ;
+	virtual void OnAssert(const wxChar *file, int line, const wxChar *cond, const wxChar *msg) ;
   virtual bool OnInit() ;
   virtual void OnInitCmdLine(wxCmdLineParser&  parser ) ;
   ;
@@ -192,8 +193,14 @@ public:
   bool Yield(bool onlyIfNeeded = false) ;
 
     int main_loop();
+		
 };
 
 %extend wxRubyApp {
+	void OnAssert(const wxChar *file, int line, const wxChar *cond, const wxChar *msg)
+	{
+		rb_fatal("Assert failed: %s:%d %s %s\n", file, line, cond, msg);
+	}
+	
 
 }
