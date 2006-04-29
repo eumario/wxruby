@@ -13,6 +13,7 @@
 #include <wx/spinbutt.h>
 #include <wx/treectrl.h>
 #include <wx/splitter.h>
+#include <wx/listctrl.h>
 %}
 
 %module(directors="1") wxEvtHandler
@@ -50,6 +51,7 @@ extern swig_class cWxGridEditorCreatedEvent;
 extern swig_class cWxTreeEvent;
 extern swig_class cWxSplitterEvent;
 extern swig_class cWxMoveEvent;
+extern swig_class cWxListEvent;
 
 static const wxEventType *calendarEvents[] =
 {
@@ -283,6 +285,8 @@ public:
 			cEvent = cWxSplitterEvent.klass;
 		else if (event.IsKindOf(CLASSINFO(wxMoveEvent)))
 			cEvent = cWxMoveEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxListEvent)))
+            cEvent = cWxListEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
             cEvent = cWxCommandEvent.klass;
  
@@ -873,6 +877,8 @@ static VALUE evt_grid_cmd_editor_created(int argc, VALUE *argv, VALUE self)
 {
     return internal_evt_with_id(argc, argv, self, wxEVT_GRID_EDITOR_CREATED);
 }
+
+// TODO:  Add for ListEvent types?  Is this needed?
 
 %}
 

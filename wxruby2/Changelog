@@ -1,3 +1,5 @@
+- Add ListEvent and ListItem; improve ListCtrl and ListItemAttr (Roy Sutton)
+- Fix icon handling in bigdemo ListCtrl_virtual code (Roy Sutton)
 - Catch wxWidgets Asserts and raise them as Ruby fatal exceptions, to avoid 
   a cascade of worthless "addr2line" console output on Linux
 - Fix bigdemo to allow right-side splitter to be resized. (It was being 

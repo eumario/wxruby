@@ -1,6 +1,7 @@
 class wxListItemAttr : public wxObject
 {
 public:
+	wxListItemAttr();
 	wxListItemAttr(wxColour &, wxColour &, wxFont &);
 	wxColour GetBackgroundColour();
 	wxFont GetFont();
