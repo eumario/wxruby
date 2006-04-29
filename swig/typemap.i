@@ -1,6 +1,7 @@
 #   Copyright 2004-2005 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
+%trackobjects;
 
 ##############################################################
 %typemap(in) wxString& {
@@ -45,11 +46,11 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 }
 
 %typemap(out) wxString& {
-	$result = rb_str_new2((const char *)$1.mb_str(wxConvUTF8));
+	$result = rb_str_new2((const char *)(*$1).mb_str(wxConvUTF8));
 }
 
 %typemap(out) const wxString& {
-	$result = rb_str_new2((const char *)$1.mb_str(wxConvUTF8));
+	$result = rb_str_new2((const char *)(*$1).mb_str(wxConvUTF8));
 }
 
 %apply wxString& { wxString* }
@@ -75,11 +76,6 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 	$1 = (TYPE($input) == T_STRING);
 }
 
-%typemap(out) void * {
-  $result = INT2NUM((int)$1);
-}
-
-
 ##############################################################
 
 %typemap(in) void* {
@@ -88,6 +84,10 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 
 %typemap(out) void* {
     $result = (VALUE)($1);
+}
+
+%typemap(typecheck, precedence=SWIG_TYPECHECK_POINTER) void * {
+	$1 = TRUE;
 }
 
 ##############################################################
