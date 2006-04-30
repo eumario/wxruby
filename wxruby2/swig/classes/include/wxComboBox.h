@@ -10,6 +10,7 @@ class wxComboBox : public wxControlWithItems
 public:
   wxComboBox();
 
+
 /* This constructor really doesn't work due to problems with SWIG typemaps
 
   wxComboBox(wxWindow *parent, wxWindowID id,
@@ -32,6 +33,8 @@ public:
           long style = 0,
           const wxValidator& validator = wxDefaultValidator,
           const wxString& name = wxComboBoxNameStr);
+					
+	virtual ~wxComboBox();
 
   bool Create(wxWindow *parent,
               wxWindowID id,

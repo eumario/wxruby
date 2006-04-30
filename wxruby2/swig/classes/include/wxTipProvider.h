@@ -7,6 +7,7 @@ class wxTipProvider
 {
 public:
    wxTipProvider(size_t  currentTip ) ;
+	virtual ~wxTipProvider();
   virtual wxString GetTip() = 0;
   virtual wxString PreprocessTip(const wxString& tip ) ;
   size_t GetCurrentTip() const;

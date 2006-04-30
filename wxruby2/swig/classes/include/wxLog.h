@@ -8,6 +8,9 @@
 class wxLog
 {
 public:
+	
+	virtual ~wxLog();
+
 	/**
 	 * \brief Add the   to the list of allowed masks for
  . 
