@@ -1,4 +1,4 @@
-====0.0.31 tag included all of this:===
+====0.0.32 tag included all of this:===
 - Fix BoxSizer and StaticBoxSizer (Daniel F. Savarese and Roy Sutton)
     Added "virtual" where needed, and added some missing methods
 - Get bigdemo ToolBar sample working (Roy Sutton)
@@ -31,7 +31,7 @@
 - Require swig 1.3.29 or later (thanks to Roy Sutton)
 - Fix detection of Intel Macs (Sean Long)
 
-====0.0.30 tag included all of this:===
+====0.0.31 tag included all of this:===
 *** NOTE: At this point, wxruby2 compiles and links on Ubuntu GNU/Linux, and 
     can at least launch most samples. However, it crashes a lot.
 - BIG changes to target wxWidgets 2.6.3:
