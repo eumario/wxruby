@@ -14,7 +14,7 @@ $classes_dir = File.join($swig_dir, 'classes')
 $original_h_dir = File.join($classes_dir, 'include')
 
 $swig_cmd = "swig"
-$swig_options = " "
+$swig_options = " -fvirtual "
 $swig_minimum_version = '1.3.29'
 
 def have_good_swig
