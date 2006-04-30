@@ -1,3 +1,5 @@
+- Fix BoxSizer and StaticBoxSizer (Daniel F. Savarese and Roy Sutton)
+    Added "virtual" where needed, and added some missing methods
 - Get bigdemo ToolBar sample working (Roy Sutton)
 - Get text/textctrl.rb sample working (Roy Sutton)
 - Remove unneeded typemaps (Alex Fenton)

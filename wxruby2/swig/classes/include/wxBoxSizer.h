@@ -10,6 +10,7 @@ public:
   virtual ~wxBoxSizer();
 
   int GetOrientation() ;
+  void SetOrientation(int orient);
 
   // define pure virtual methods from base classes
   virtual void RecalcSizes();
