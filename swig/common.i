@@ -2,6 +2,7 @@
 #   released under the MIT-style wxruby2 license
 
 %feature("director");
+%feature("compactdefaultargs");
 
 %{
 // # SWIG 1.3.29 added this new feature which we can't use (yet)
