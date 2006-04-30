@@ -1,3 +1,4 @@
+- Fix SWIG warnings by adding missing virtual destructor declarations
 - Now include SWIG's ruby typemaps.i file (Alex Fenton)
 - Reverted the wxWidget Assert catching that was just put in
   (It was causing hanging intead of terminating the app)
