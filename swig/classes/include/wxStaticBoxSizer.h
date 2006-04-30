@@ -6,8 +6,14 @@
 class wxStaticBoxSizer : public wxBoxSizer
 {
 public:
-   wxStaticBoxSizer(wxStaticBox*  box , int  orient ) ;
-  wxStaticBox* GetStaticBox() ;
+  wxStaticBoxSizer(wxStaticBox* box, int orient);
+  wxStaticBoxSizer(int orient, wxWindow *win, const wxString& label = wxEmptyString);
+
+  virtual void RecalcSizes();
+  virtual wxSize CalcMin();
+  wxStaticBox* GetStaticBox() const;
+  virtual void ShowItems(bool show);
+
 };
 
 
