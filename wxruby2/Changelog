@@ -1,3 +1,10 @@
+- Get text/textctrl.rb sample working (Roy Sutton)
+- Remove unneeded typemaps (Alex Fenton)
+- Ignore redundant variations of methods like get_size and get_position,
+    some constructors and cases of create, draw_lines, draw_polygon,
+	  ListBox#set
+- Ignore (temporarily?) methods that now give errors:
+    get_text_extent, get_multi_line_text_extent
 - Fix SWIG warnings by adding missing virtual destructor declarations
 - Now include SWIG's ruby typemaps.i file (Alex Fenton)
 - Reverted the wxWidget Assert catching that was just put in
