@@ -1,3 +1,4 @@
+====0.0.31 tag included all of this:===
 - Fix BoxSizer and StaticBoxSizer (Daniel F. Savarese and Roy Sutton)
     Added "virtual" where needed, and added some missing methods
 - Get bigdemo ToolBar sample working (Roy Sutton)
