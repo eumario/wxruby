@@ -68,7 +68,6 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 	$1 = (TYPE($input) == T_STRING);
 }
 
-
 %typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxString const & {
 	$1 = (TYPE($input) == T_STRING);
 }
@@ -365,48 +364,10 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 
 ##############################################################
 
-%typemap(in,numinputs=0) (wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading) (wxCoord a, wxCoord b, wxCoord c, wxCoord d) {
-	$1=&a;
-	$2=&b;
-	$3=&c;
-	$4=&d;
-}
-
-%typemap(argout) (wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading) {
-	$result = rb_ary_new();
-	rb_ary_push($result, INT2NUM(*$1));
-	rb_ary_push($result, INT2NUM(*$2));
-	rb_ary_push($result, INT2NUM(*$3));
-	rb_ary_push($result, INT2NUM(*$4));
-}
-
-%typemap(in,numinputs=0) (wxCoord * width , wxCoord * height , wxCoord * heightLine) (wxCoord a, wxCoord b, wxCoord c) {
-	$1=&a;
-	$2=&b;
-	$3=&c;
-}
-
-%typemap(argout) (wxCoord * width , wxCoord * height , wxCoord * heightLine) {
-	$result = rb_ary_new();
-	rb_ary_push($result, INT2NUM(*$1));
-	rb_ary_push($result, INT2NUM(*$2));
-	rb_ary_push($result, INT2NUM(*$3));
-}
-
-%typemap(in,numinputs=0) (int * x , int * y , int * descent, int * externalLeading) (int a, int b, int c, int d) {
-	$1=&a;
-	$2=&b;
-	$3=&c;
-	$4=&d;
-}
-
-%typemap(argout) (int * x , int * y , int * descent, int * externalLeading) {
-	$result = rb_ary_new();
-	rb_ary_push($result, INT2NUM(*$1));
-	rb_ary_push($result, INT2NUM(*$2));
-	rb_ary_push($result, INT2NUM(*$3));
-	rb_ary_push($result, INT2NUM(*$4));
-}
+// DC/Window#get_text_extent etc
+%apply int *OUTPUT { int*  x , int*  y , int*  descent, int*  externalLeading};
+%apply wxCoord *OUTPUT { wxCoord * width , wxCoord * height , wxCoord * heightLine };
+%apply wxCoord *OUTPUT { wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading };
 
 ##############################################################
 
