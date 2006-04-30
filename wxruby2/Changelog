@@ -1,3 +1,4 @@
+- Get bigdemo ToolBar sample working (Roy Sutton)
 - Get text/textctrl.rb sample working (Roy Sutton)
 - Remove unneeded typemaps (Alex Fenton)
 - Ignore redundant variations of methods like get_size and get_position,

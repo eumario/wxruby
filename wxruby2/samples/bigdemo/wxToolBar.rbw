@@ -43,7 +43,7 @@ class TestToolBar < Wx::Frame
         cbID = 5000
         choices = ["", "This", "is a", "wxComboBox"] 
         
-        tb.add_control(Wx::ComboBox.new(tb, cbID, "", Wx::DEFAULT_POSITION, Wx::Size.new(150,-1), choices.length(), choices, 
+        tb.add_control(Wx::ComboBox.new(tb, cbID, "", Wx::DEFAULT_POSITION, Wx::Size.new(150,-1), choices, 
                         Wx::CB_DROPDOWN))
         evt_combobox(cbID) {|event| on_combo(event)}
         tb.add_control(Wx::TextCtrl.new(tb, -1, "ToolBar controls!!", Wx::DEFAULT_POSITION, Wx::Size.new(150,-1)))
