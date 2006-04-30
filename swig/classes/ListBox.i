@@ -8,6 +8,10 @@
 %ignore wxListBox::wxListBox();
 %ignore wxListBox::InsertItems(int nItems, const wxString *items, int pos);
 
+// redundant with good type maps
+%ignore Set(int  n , const wxString*  choices , void **clientData = NULL) ;
+
+
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
