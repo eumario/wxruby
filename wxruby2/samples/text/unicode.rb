@@ -83,8 +83,8 @@ class IConvFrame < Wx::Frame
 
     test_button = Wx::Button.new(self, -1, '万')
     ctrl_sizer.add(test_button, 0, Wx::ADJUST_MINSIZE|Wx::ALL, 2)
-    
-    choice = Wx::Choice.new(self, -1)
+    choice = Wx::Choice.new(self, -1, Wx::DEFAULT_POSITION, 
+                            Wx::DEFAULT_SIZE, [])
     File.readlines($utf8_file).each do | line |
       next if line.chomp.empty?
       choice.append(line.chomp)
