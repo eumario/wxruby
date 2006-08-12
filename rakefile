@@ -4,6 +4,8 @@
 
 require "rake/rakeutil"
 require "rake/rakewx"
+require "rake/rakedocs"
+
 begin
   require "rake/rakepackage"
 rescue LoadError # requires rubygems, but not required just to compile
@@ -59,10 +61,10 @@ $target_lib = File.join($dest_dir, $dl_lib)
 #############################
 # public tasks
 begin
-    create_internal_non_swig_tasks
-    create_internal_swig_tasks
-    create_release_tasks
-    
+  create_internal_non_swig_tasks
+  create_internal_swig_tasks
+  create_release_tasks
+  create_documentation_tasks
     task :default => :link
     task :link => $target_lib
     task :compile => all_obj_files
