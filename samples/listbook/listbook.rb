@@ -1,5 +1,7 @@
 require 'wx'
 
+
+
 #
 # Basic Frame Class. This creates the dialog window
 #
@@ -148,10 +150,10 @@ class XrcApp < Wx::App
 		$xml = Wx::XmlResource.get();
 		$xml.init_all_handlers();
 
-		#
-		# Load a resource file
-		#
-		$xml.load("listbook.xrc")	
+		# Load a resource file from the script's directory
+        xrc_file = File.join( File.dirname( __FILE__ ), 'listbook.xrc' )
+
+		$xml.load(xrc_file)	
 
 		#
 		# Show the main frame.
