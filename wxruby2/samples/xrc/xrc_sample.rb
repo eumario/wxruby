@@ -5,19 +5,18 @@ require 'wx'
 #
 class SimpleFrame < Wx::Frame 
 
-	FILE_DIALOG,
-	FILE_QUIT = [1,2]
+	FILE_DIALOG = 1001
 	
 	def initialize()
 		super(nil,-1,"Sample",Wx::Point.new(50,50),Wx::Size.new(300,300))
-		
-		#
+        txt = "Choose 'Open Dialog' from the menu to see a dialog made with XRC"
+        Wx::StaticText.new( self, -1, txt, Wx::Point.new(10, 10) )
+
 		# Create a new menu
-		#
 		bar = Wx::MenuBar.new()
 		menu = Wx::Menu.new()
 		menu.append(FILE_DIALOG,"Open Dialog")
-		menu.append(FILE_QUIT,"Quit")
+		menu.append(Wx::ID_EXIT,"Quit")
 		bar.append(menu,"File")
 		
 		set_menu_bar(bar)
@@ -29,9 +28,9 @@ class SimpleFrame < Wx::Frame
 			SimpleDialog.new(self).show_modal()
 		end
 		
-		evt_menu(FILE_QUIT) do
-      puts Wx::get_app.get_app_name
-			Wx::get_app.exit_main_loop()
+		evt_menu(Wx::ID_EXIT) do
+          puts Wx::get_app.get_app_name
+          Wx::get_app.exit_main_loop()
 		end
 		
 		evt_close() do
@@ -62,7 +61,7 @@ class SimpleDialog < Wx::Dialog
 		#
     
 		@ok = Wx::Window.find_window_by_id(Wx::xrcid('wxID_OK'),self)
-                @cancel = Wx::Window.find_window_by_id(Wx::xrcid('wxID_CANCEL'),self)
+        @cancel = Wx::Window.find_window_by_id(Wx::xrcid('wxID_CANCEL'),self)
 		@message = Wx::Window.find_window_by_id(Wx::xrcid('SAMPLE_MESSAGE'),self)
 		
 		#
@@ -105,7 +104,8 @@ class XrcApp < Wx::App
 		#
 		# Load a resource file
 		#
-		$xml.load("samples.xrc")	
+        xrc_file = File.join( File.dirname(__FILE__), 'samples.xrc' )
+		$xml.load(xrc_file)
 
 		#
 		# Show the main frame.
