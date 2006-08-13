@@ -16,8 +16,7 @@ $windows_only = [
 	'EVT_DIALUP',
 	'EVT_SASH',
 	'EVT_TASKBAR',
-	'EVT_TOGGLEBUTTON',
-	'EVT_WIZARD',
+	'EVT_TOGGLEBUTTON'
 ]
 
 File.open(ARGV[0], "a") do | out |
