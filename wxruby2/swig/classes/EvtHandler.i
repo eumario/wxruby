@@ -14,6 +14,7 @@
 #include <wx/treectrl.h>
 #include <wx/splitter.h>
 #include <wx/listctrl.h>
+#include <wx/sashwin.h>
 #include <wx/wizard.h>
 %}
 
@@ -54,6 +55,8 @@ extern swig_class cWxSplitterEvent;
 extern swig_class cWxMoveEvent;
 extern swig_class cWxListEvent;
 extern swig_class cWxWizardEvent;
+extern swig_class cWxSashEvent;
+
 
 static const wxEventType *calendarEvents[] =
 {
@@ -241,6 +244,12 @@ static const wxEventType *wizardEvents[] =
     (const wxEventType *)0
 };
 
+static const wxEventType *sashEvents[] =
+{
+    &wxEVT_SASH_DRAGGED,
+    (const wxEventType *)0
+};
+
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
 class wxRbCallback : public wxObject 
@@ -303,6 +312,8 @@ public:
             cEvent = cWxWizardEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
             cEvent = cWxCommandEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
+            cEvent = cWxSashEvent.klass;
  
         else
         {
@@ -916,6 +927,18 @@ static VALUE evt_wizard_finished(int argc, VALUE *argv, VALUE self)
 {
     return internal_evt_with_id(argc, argv, self, wxEVT_WIZARD_FINISHED);
 }
+
+static VALUE evt_sash_dragged(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_SASH_DRAGGED);
+}
+
+static VALUE evt_sash_dragged_range(int argc_1, int argc_2, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc_1, argc_2, argv, self, wxEVT_SASH_DRAGGED_RANGE);
+}
+
+
 // TODO:  Add for ListEvent types?  Is this needed?
 
 %}
@@ -1029,6 +1052,8 @@ static VALUE evt_wizard_finished(int argc, VALUE *argv, VALUE self)
 	rb_define_method(cWxEvtHandler.klass, "evt_wizard_cancel", VALUEFUNC(evt_wizard_cancel), -1);
 	rb_define_method(cWxEvtHandler.klass, "evt_wizard_help", VALUEFUNC(evt_wizard_help), -1);
 	rb_define_method(cWxEvtHandler.klass, "evt_wizard_finished", VALUEFUNC(evt_wizard_finished), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged", VALUEFUNC(evt_sash_dragged), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged_range", VALUEFUNC(evt_sash_dragged_range), -1);
 
 %}
 

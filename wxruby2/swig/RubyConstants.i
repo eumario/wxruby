@@ -14,6 +14,7 @@
 #include <wx/calctrl.h>
 #include <wx/treebase.h>
 #include <wx/imaglist.h>
+#include <wx/laywin.h>
 
 //
 // All of these exist on only one platform, so in those
@@ -2049,12 +2050,23 @@ enum {
 %constant const int LAYOUT_SAME_AS = wxSameAs;
 %constant const int LAYOUT_ABSOLUTE = wxAbsolute;
 
-%constant const int LAYOUT_LEFT =wxLeft; 
-%constant const int LAYOUT_TOP =wxTop; 
-%constant const int LAYOUT_RIGHT =wxRight; 
-%constant const int LAYOUT_BOTTOM =wxBottom; 
+enum wxLayoutAlignment
+{
+	wxLAYOUT_LEFT,
+	wxLAYOUT_TOP,
+	wxLAYOUT_RIGHT,
+	wxLAYOUT_BOTTOM
+};
+
 %constant const int LAYOUT_WIDTH =wxWidth; 
 %constant const int LAYOUT_HEIGHT =wxHeight;
+
+enum wxLayoutOrientation
+{
+    wxLAYOUT_HORIZONTAL,
+    wxLAYOUT_VERTICAL 
+};
+
 %constant const int LAYOUT_CENTRE =wxCentre; 
 %constant const int LAYOUT_CENTER =wxCenter; 
 %constant const int LAYOUT_CENTRE_X =wxCentreX; 
