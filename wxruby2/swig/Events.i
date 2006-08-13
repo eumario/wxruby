@@ -569,6 +569,46 @@ static VALUE evt_sash_dragged_range(int argc_1, int argc_2, VALUE *argv, VALUE s
     return internal_evt_with_id(argc_1, argc_2, argv, self, wxEVT_SASH_DRAGGED_RANGE);
 }
 
+static VALUE evt_scrollwin_top(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_TOP);
+}
+
+static VALUE evt_scrollwin_bottom(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_BOTTOM);
+}
+
+static VALUE evt_scrollwin_lineup(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_LINEUP);
+}
+
+static VALUE evt_scrollwin_linedown(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_LINEDOWN);
+}
+
+static VALUE evt_scrollwin_pageup(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_PAGEUP);
+}
+
+static VALUE evt_scrollwin_pagedown(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_PAGEDOWN);
+}
+
+static VALUE evt_scrollwin_thumbtrack(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_THUMBTRACK);
+}
+
+static VALUE evt_scrollwin_thumbrelease(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_THUMBRELEASE);
+}
+
 %}
 
 
@@ -675,6 +715,15 @@ static VALUE evt_sash_dragged_range(int argc_1, int argc_2, VALUE *argv, VALUE s
     rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_range_select", VALUEFUNC(evt_grid_cmd_range_select), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_created", VALUEFUNC(evt_grid_editor_created), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_editor_created", VALUEFUNC(evt_grid_cmd_editor_created), -1);
+
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin", VALUEFUNC(evt_scrollwin), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_top", VALUEFUNC(evt_scrollwin_top), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_bottom", VALUEFUNC(evt_scrollwin_bottom), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_lineup", VALUEFUNC(evt_scrollwin_lineup), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_linedown", VALUEFUNC(evt_scrollwin_linedown), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_pageup", VALUEFUNC(evt_scrollwin_pageup), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_pagedown", VALUEFUNC(evt_scrollwin_pagedown), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_scrollwin_thumbtrack", VALUEFUNC(evt_scrollwin_thumbtrack), -1);
 	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged", VALUEFUNC(evt_sash_dragged), -1);
 	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged_range", VALUEFUNC(evt_sash_dragged_range), -1);
 %}
