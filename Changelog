@@ -1,3 +1,4 @@
+- Added GenericDirCtrl class (Alex Fenton)
 - Added Wizard support (Wizard, WizardEvent, WizardPage, WizardPageSimple)
     and a sample (Alex Fenton)
 - Added NumberEntryDialog class (Sean Long)
