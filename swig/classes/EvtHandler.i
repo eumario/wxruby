@@ -14,6 +14,7 @@
 #include <wx/treectrl.h>
 #include <wx/splitter.h>
 #include <wx/listctrl.h>
+#include <wx/wizard.h>
 %}
 
 %module(directors="1") wxEvtHandler
@@ -52,6 +53,7 @@ extern swig_class cWxTreeEvent;
 extern swig_class cWxSplitterEvent;
 extern swig_class cWxMoveEvent;
 extern swig_class cWxListEvent;
+extern swig_class cWxWizardEvent;
 
 static const wxEventType *calendarEvents[] =
 {
@@ -229,6 +231,16 @@ static const wxEventType *gridEditorEvent[] =
      (const wxEventType *)0
 };
 
+static const wxEventType *wizardEvents[] =
+{
+    &wxEVT_WIZARD_PAGE_CHANGED,
+    &wxEVT_WIZARD_PAGE_CHANGING,
+    &wxEVT_WIZARD_CANCEL,
+    &wxEVT_WIZARD_HELP,
+    &wxEVT_WIZARD_FINISHED,
+    (const wxEventType *)0
+};
+
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
 class wxRbCallback : public wxObject 
@@ -287,6 +299,8 @@ public:
 			cEvent = cWxMoveEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxListEvent)))
             cEvent = cWxListEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxWizardEvent)))
+            cEvent = cWxWizardEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
             cEvent = cWxCommandEvent.klass;
  
@@ -878,6 +892,30 @@ static VALUE evt_grid_cmd_editor_created(int argc, VALUE *argv, VALUE self)
     return internal_evt_with_id(argc, argv, self, wxEVT_GRID_EDITOR_CREATED);
 }
 
+static VALUE evt_wizard_page_changed(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_WIZARD_PAGE_CHANGED);
+}
+
+static VALUE evt_wizard_page_changing(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_WIZARD_PAGE_CHANGING);
+}
+
+static VALUE evt_wizard_cancel(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_WIZARD_CANCEL);
+}
+
+static VALUE evt_wizard_help(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_WIZARD_HELP);
+}
+
+static VALUE evt_wizard_finished(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_WIZARD_FINISHED);
+}
 // TODO:  Add for ListEvent types?  Is this needed?
 
 %}
@@ -986,6 +1024,12 @@ static VALUE evt_grid_cmd_editor_created(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_range_select", VALUEFUNC(evt_grid_cmd_range_select), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_created", VALUEFUNC(evt_grid_editor_created), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_editor_created", VALUEFUNC(evt_grid_cmd_editor_created), -1); 
+    rb_define_method(cWxEvtHandler.klass, "evt_wizard_page_changed", VALUEFUNC(evt_wizard_page_changed), -1);    
+	rb_define_method(cWxEvtHandler.klass, "evt_wizard_page_changing", VALUEFUNC(evt_wizard_page_changing), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_wizard_cancel", VALUEFUNC(evt_wizard_cancel), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_wizard_help", VALUEFUNC(evt_wizard_help), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_wizard_finished", VALUEFUNC(evt_wizard_finished), -1);
+
 %}
 
 #endif
