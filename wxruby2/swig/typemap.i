@@ -361,11 +361,18 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 	$1 = TYPE($input) == T_FIXNUM;
 }
 
+%typemap(in) wxKeyCode {
+	$1 = (wxKeyCode)NUM2INT($input);
+}
+
+%typemap(typecheck) wxKeyCode {
+	$1 = TYPE($input) == T_FIXNUM;
+}
 
 ##############################################################
 
 // DC/Window#get_text_extent etc
-%apply int *OUTPUT { int*  x , int*  y , int*  descent, int*  externalLeading};
+%apply int *OUTPUT { int * x , int * y , int * descent, int * externalLeading };
 %apply wxCoord *OUTPUT { wxCoord * width , wxCoord * height , wxCoord * heightLine };
 %apply wxCoord *OUTPUT { wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading };
 
