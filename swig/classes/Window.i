@@ -10,7 +10,6 @@
 %ignore wxWindow::GetChildren;
 %ignore wxWindow::PopEventHandler;
 # %ignore wxWindow::SetCaret;
-%ignore wxWindow::GetTextExtent;
 
 // only support the variants that return an object
 %ignore wxWindow::GetSize(int*  width , int*  height ) const;
