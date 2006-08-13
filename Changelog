@@ -1,3 +1,4 @@
+- Added MiniFrame class, and etc/miniframe.rb sample (Alex Fenton)
 - Added support for Window#get_text_extent (Sean Long)
 - Added support for Wx::GetKeyState and KeyCode (Sean Long)
 - Enabled SWIG option -fvirtual to reduce code size (Daniel F. Savarese)
