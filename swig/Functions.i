@@ -14,7 +14,7 @@
 #include <wx/app.h>
 #include <wx/choicdlg.h>
 #include <wx/xrc/xmlres.h>
-
+#include <wx/utils.h>
 
 class wxRubyApp
 {
@@ -106,6 +106,8 @@ wxString wxGetUserId();
 wxString wxGetUserName();
 
 wxString wxGetHomeDir();
+
+bool wxGetKeyState(wxKeyCode key);
 
 void wxSetWorkingDirectory(const wxString &);
 

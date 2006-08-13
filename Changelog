@@ -1,3 +1,4 @@
+- Added support for Wx::GetKeyState and KeyCode (Sean Long)
 - Enabled SWIG option -fvirtual to reduce code size (Daniel F. Savarese)
 - Enabled SWIG feature compactdefaultargs to reduce code size 
     (Daniel F. Savarese)
