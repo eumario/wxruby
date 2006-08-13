@@ -558,7 +558,7 @@ implements the following methods:\par
 	 * \param bool  
 	*/
 
-  virtual void GetTextExtent(const wxString&  string , int*  x , int*  y , int*  descent = NULL, int*  externalLeading = NULL, const wxFont*  font = NULL) const;
+  virtual void GetTextExtent(const wxString&  string , int * x , int * y , int * descent = NULL, int * externalLeading = NULL, wxFont * font = NULL) const;
 	/**
 	 * \brief Gets the window's title. Applicable only to frames and dialogs. 
 	*/
