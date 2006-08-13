@@ -559,6 +559,16 @@ static VALUE evt_grid_cmd_editor_created(int argc, VALUE *argv, VALUE self)
     return internal_evt_with_id(argc, argv, self, wxEVT_GRID_EDITOR_CREATED);
 }
 
+static VALUE evt_sash_dragged(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_SASH_DRAGGED);
+}
+
+static VALUE evt_sash_dragged_range(int argc_1, int argc_2, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc_1, argc_2, argv, self, wxEVT_SASH_DRAGGED_RANGE);
+}
+
 %}
 
 
@@ -664,7 +674,9 @@ static VALUE evt_grid_cmd_editor_created(int argc, VALUE *argv, VALUE self)
     rb_define_method(cWxEvtHandler.klass, "evt_grid_range_select", VALUEFUNC(evt_grid_range_select), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_range_select", VALUEFUNC(evt_grid_cmd_range_select), -1);
     rb_define_method(cWxEvtHandler.klass, "evt_grid_editor_created", VALUEFUNC(evt_grid_editor_created), -1);
-    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_editor_created", VALUEFUNC(evt_grid_cmd_editor_created), -1);    
+    rb_define_method(cWxEvtHandler.klass, "evt_grid_cmd_editor_created", VALUEFUNC(evt_grid_cmd_editor_created), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged", VALUEFUNC(evt_sash_dragged), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged_range", VALUEFUNC(evt_sash_dragged_range), -1);
 %}
 
 

@@ -55,7 +55,7 @@ public:
 	 * \param int  
 	*/
 
-  int GetMinimumSizeY(int  min ) const;
+  int GetMinimumSizeY() const;
 	/**
 	 * \brief Returns true if the sash has a border, false otherwise. 
 	 * \param wxSashEdgePosition   

@@ -14,7 +14,6 @@ $exclude = [
 
 $windows_only = [
 	'EVT_DIALUP',
-	'EVT_SASH',
 	'EVT_TASKBAR',
 	'EVT_TOGGLEBUTTON'
 ]
