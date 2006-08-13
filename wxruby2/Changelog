@@ -1,3 +1,4 @@
+- Exposed member variables in KeyEvent (Sean Long)
 - Added Sash classes and sample, but they don't yet work perfectly, at 
     least under Linux (Alex Fenton)
 - Added GenericDirCtrl class (Alex Fenton)

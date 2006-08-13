@@ -1,4 +1,4 @@
-//   Copyright 2004-2005 by Kevin Smith
+//   Copyright 2004-2006 by Kevin Smith
 //   released under the MIT-style wxruby2 license
 
 #if !defined(_wxKeyEvent_h_)
@@ -22,6 +22,27 @@ public:
 
   // override pure virtual methods from base classes
   virtual wxEvent* Clone() const;
+
+  wxCoord       m_x, m_y;
+
+  long          m_keyCode;
+
+  bool          m_controlDown;
+  bool          m_shiftDown;
+  bool          m_altDown;
+  bool          m_metaDown;
+  bool          m_scanCode;
+
+#if wxUSE_UNICODE
+  // This contains the full Unicode character
+  // in a character events in Unicode mode
+  wxChar        m_uniChar;
+#endif
+
+  // these fields contain the platform-specific information about
+  // key that was pressed
+  wxUint32      m_rawCode;
+  wxUint32      m_rawFlags;
 };
 
 
