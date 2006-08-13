@@ -16,7 +16,7 @@ public:
 	 * \param int  
 	*/
 
-   wxScrollWinEvent(WXTYPE  commandType = 0, int  id = 0, int pos = 0, int orientation = 0) ;
+  wxScrollWinEvent(WXTYPE commandType = 0, int pos = 0, int orientation = 0) ;
 	/**
 	 * \brief Returns wxHORIZONTAL or wxVERTICAL, depending on the orientation of the scrollbar. 
 	*/
