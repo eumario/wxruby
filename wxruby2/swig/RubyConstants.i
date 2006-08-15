@@ -82,6 +82,8 @@ enum
     wxDOS                     // wxBase under MS-DOS
 };
 
+enum {  wxDefaultCoord = -1 };
+
 // ----------------------------------------------------------------------------
 // Geometric flags
 // ----------------------------------------------------------------------------
@@ -556,26 +558,25 @@ enum wxBackgroundStyle
   wxBG_STYLE_CUSTOM
 };
 
-// ----------------------------------------------------------------------------
-// standard IDs
-// ----------------------------------------------------------------------------
+/*  ---------------------------------------------------------------------------- */
+/*  standard IDs */
+/*  ---------------------------------------------------------------------------- */
 
-// any id: means that we don't care about the id, whether when installing an
-// event handler or when creating a new window
+/*  Standard menu IDs */
 enum
 {
-    wxID_ANY = -1
-};
+    /* no id matches this one when compared to it */
+    wxID_NONE = -3,
 
-// id for a separator line in the menu (invalid for normal item)
-enum
-{
-    wxID_SEPARATOR = -2
-};
+    /*  id for a separator line in the menu (invalid for normal item) */
+    wxID_SEPARATOR = -2,
 
-// Standard menu IDs
-enum
-{
+    /* any id: means that we don't care about the id, whether when installing
+     * an event handler or when creating a new window */
+    wxID_ANY = -1,
+
+
+	/* all predefined ids are between wxID_LOWEST and wxID_HIGHEST */
     wxID_LOWEST = 4999,
 
     wxID_OPEN,
