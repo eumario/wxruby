@@ -1,3 +1,5 @@
+- Added several missing methods in Window; changed others to better 
+  match wx (Sean Long)
 - Added Wx::default_coord, and minor cleanup of standard ids (Sean Long)
 - Added globals: display_depth, display_size, get_display_size and 
   display_size_mm, get_display_size_mm (Sean Long)
