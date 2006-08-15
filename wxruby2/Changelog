@@ -1,3 +1,5 @@
+- Added globals: display_depth, display_size, get_display_size and 
+  display_size_mm, get_display_size_mm (Sean Long)
 - Added ScrollWinEvent class and sample (Alex Fenton and Joe Seeley)
 - Exposed member variables in KeyEvent (Sean Long)
 - Added Sash classes and sample, but they don't yet work perfectly, at 
