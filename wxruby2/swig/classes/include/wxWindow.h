@@ -198,7 +198,7 @@ when the parent is.
 	 * \param long  
 	*/
 
-  wxWindow* FindWindow(long  id ) ;
+  wxWindow* FindWindow(long  id ) const;
 	/**
 	 * \brief Find a child of this window, by name.
 
@@ -209,7 +209,7 @@ implements the following methods:\par
 	 * \param const wxString&  
 	*/
 
-  wxWindow* FindWindow(const wxString&  name ) ;
+  wxWindow* FindWindow(const wxString&  name ) const;
 	/**
 	 * \brief Find the first window with the given  .
 
@@ -303,6 +303,8 @@ same as the size the window would have had after calling
 	*/
 
   virtual wxSize GetBestSize() const;
+
+	void GetBestSize(int *w, int *h) const;
 	/**
 	 * \brief Returns the   associated with the window. 
 	*/
@@ -692,7 +694,7 @@ is not implemented anywhere).
 	 * \param const wxPoint&   
 	*/
 
-  bool PopupMenu(wxMenu*  menu , const wxPoint&  pos ) ;
+  bool PopupMenu(wxMenu*  menu , const wxPoint&  pos = wxDefaultPosition) ;
 	/**
 	 * \brief  
 	 * \param wxMenu*   
@@ -729,13 +731,15 @@ This is the same as   but has a nicer syntax.
 	 * \param const wxRect&   
 	*/
 
-  virtual void RefreshRect(const wxRect&  rect ) ;
+  virtual void RefreshRect(const wxRect&  rect, bool eraseBackground = true) ;
 	/**
 	 * \brief  
 	*/
 
-#ifdef __WXMSW__
+//#ifdef __WXMSW__
+#ifdef wxUSE_HOTKEY 
   bool RegisterHotKey(int hotkeyId, int modifiers, int virtualKeyCode);
+	virtual bool UnregisterHotKey(int hotkeyId);
 #endif
 
   virtual void ReleaseMouse() ;
@@ -1144,7 +1148,9 @@ will be used.
 	 * \param int  
 	*/
 
-  virtual void SetVirtualSizeHints(int  minW , int  minH , int maxW = -1, int maxH = -1) ;
+  virtual void SetVirtualSizeHints(int  minW , int  minH , int maxW = wxDefaultCoord, int maxH = wxDefaultCoord) ;
+
+	void SetVirtualSizeHints( const wxSize& minSize, const wxSize& maxSize=wxDefaultSize);
 	/**
 	 * \brief Identical to  . 
 	 * \param long  
@@ -1213,6 +1219,43 @@ Interface Guidelines forbid moving the mouse cursor programmatically.
 	*/
 
   void WarpPointer(int  x , int  y ) ;
+
+  void SetWindowVariant( wxWindowVariant variant ) ;
+  wxWindowVariant GetWindowVariant() const;
+	void InvalidateBestSize();
+	void CacheBestSize(const wxSize& size) const;
+	wxSize GetBestFittingSize() const;
+	void SetBestFittingSize(const wxSize& size=wxDefaultSize);
+  virtual wxSize GetMaxSize() const;
+  virtual wxSize GetMinSize() const;
+  void SetMinSize(const wxSize& minSize);
+  void SetMaxSize(const wxSize& maxSize);
+	long GetWindowStyle() const;
+	virtual bool Navigate(int flags = wxNavigationKeyEvent::IsForward);
+	void MoveBeforeInTabOrder(wxWindow *win);
+  void MoveAfterInTabOrder(wxWindow *win);
+	virtual void ClearBackground();
+  bool IsExposed( int x, int y ) const;
+  bool IsExposed( int x, int y, int w, int h ) const;
+  bool IsExposed( const wxPoint& pt ) const;
+  bool IsExposed( const wxRect& rect ) const;
+	virtual wxVisualAttributes GetDefaultAttributes() const;
+	static wxVisualAttributes GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+	void SetOwnBackgroundColour(const wxColour& colour);
+	void SetOwnForegroundColour(const wxColour& colour);
+	virtual bool SetBackgroundStyle(wxBackgroundStyle style);
+	virtual wxBackgroundStyle GetBackgroundStyle() const;
+	virtual bool HasTransparentBackground();
+	void SetOwnFont(const wxFont& font);
+	const wxCursor& GetCursor() const;
+	virtual void UpdateWindowUI(long flags = wxUPDATE_UI_NONE);
+	bool HasScrollbar(int orient) const;
+  bool LineUp();
+  bool LineDown();
+  bool PageUp();
+  bool PageDown();
+	virtual void SetLabel(const wxString& label);
+	wxAcceleratorTable *GetAcceleratorTable();
 };
 
 
