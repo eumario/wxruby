@@ -1,3 +1,4 @@
+- Minor Rakefile updates, mostly Mac and MSWin (Sean Long)
 - Added several missing methods in Window; changed others to better 
   match wx (Sean Long)
 - Added Wx::default_coord, and minor cleanup of standard ids (Sean Long)

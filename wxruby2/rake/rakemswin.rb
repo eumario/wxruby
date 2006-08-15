@@ -1,5 +1,5 @@
 # rakemswin.rb
-#   Copyright 2004-2005 by Kevin Smith
+#   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
 
@@ -13,12 +13,10 @@ $cpp = "cl.exe"
 $ld = "link"
 $link_output_flag = "/dll /out:"
 
-$DEBUG = true
-
 # native Windows - requires a static build of wxWindows
 $WXDIR=ENV['WXWIN']
 $WXVERSION = '26'
-if $DEBUG
+if $debug_build
     $DEBUGPOSTFIX='d'
 else
     $DEBUGPOSTFIX=''
@@ -61,7 +59,7 @@ $extra_cppflags = [
     "-D_WINDOWS", "/D__WINDOWS__", 
     "-DWINVER=0x0400", "/D__WIN95__", 
     ].join(' ')
-if $DEBUG
+if $debug_build
     $ruby_cppflags.gsub!(/-MD/," /MDd");
     $ruby_cppflags.gsub!(/-O[A-Za-z0-9-]*/, "/Od")
     $ruby_cppflags += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
