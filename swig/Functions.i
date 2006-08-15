@@ -136,7 +136,15 @@ const wxString& default_value = wxT(""), wxWindow *parent = NULL);
 
 wxString wxFileSelector(const wxString& message, const wxString& default_path = wxT(""),const wxString& default_filename = wxT(""), const wxString& default_extension = wxT(""),const wxString& wildcard = wxT("*.*"), int flags = 0, wxWindow *parent = 0,int x = -1, int y = -1);
 
+int wxDisplayDepth();
 
+void wxDisplaySize(int *width, int *height);
+
+wxSize wxGetDisplaySize();
+
+void wxDisplaySizeMM(int *width, int *height);
+
+wxSize wxGetDisplaySizeMM();
 
 %init %{
     rb_define_module_function(mWxruby2, "log_message", VALUEFUNC(log_message), -1);
