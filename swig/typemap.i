@@ -77,6 +77,26 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 }
 
 ##############################################################
+%typemap(in) const wxChar const * {
+	$1 = new wxString(STR2CSTR($input), wxConvUTF8).c_str();
+}
+
+%typemap(out) wxChar const * {
+	$result = rb_str_new2((const char *)wxString(*$1).mb_str(wxConvUTF8));
+}
+
+%typemap(directorin) wxChar const * "$input = rb_str_new2((const char *)wxString($1).mb_str());";
+
+%typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxChar const *{
+	$1 = (TYPE($input) == T_STRING);
+}
+
+%typemap(varout) wxChar const * {
+	$result = rb_str_new2((const char *)wxString($1).mb_str(wxConvUTF8));
+}
+
+
+##############################################################
 
 %typemap(in) void* {
 	$1 = (void*)($input);
