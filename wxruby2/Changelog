@@ -1,3 +1,4 @@
+- Improved miniframe sample (Alex Fenton)
 - Added support for overriding App#on_assert (Kevin Smith)
 - Minor Rakefile updates, mostly Mac and MSWin (Sean Long)
 - Added several missing methods in Window; changed others to better 
