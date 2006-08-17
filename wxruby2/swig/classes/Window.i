@@ -22,8 +22,12 @@
 
 static VALUE get_ruby_object(wxObject *obj)
 {
-	VALUE returnVal = Qnil;
+	if ( ! obj )
+	{
+	  return Qnil;
+	}
 	
+	VALUE returnVal = Qnil;
 	wxString classNameString(obj->GetClassInfo()->GetClassName());
 	if(classNameString.Len() > 2)
 	{
