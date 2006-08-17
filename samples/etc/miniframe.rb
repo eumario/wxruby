@@ -1,6 +1,8 @@
 require 'wx'
 
 class MyFrame < Wx::Frame
+  attr_reader :mini
+
   def initialize(title, pos, size, style = Wx::DEFAULT_FRAME_STYLE)
     super(nil, -1, title, pos, size, style)
 
@@ -17,22 +19,41 @@ class MyFrame < Wx::Frame
     create_status_bar(2)
     set_status_text("Welcome to wxRuby!")
 
-    evt_menu(Wx::ID_EXIT) { onQuit }
-    evt_menu(Wx::ID_ABOUT) { onAbout }
-    m = Wx::MiniFrame.new(nil, -1, 'Mini Frame')
-    m.show()
+    evt_menu(Wx::ID_EXIT) { on_quit }
+    evt_menu(Wx::ID_ABOUT) { on_about }
 
+    make_miniframe()
   end
 
-  def onQuit
-    close(Wx::TRUE)
+  def make_miniframe
+    @mini = Wx::MiniFrame.new(self, -1, 'Mini Frame', 
+                              Wx::Point.new(300, 75), Wx::Size.new(300, 150),
+                              Wx::DEFAULT_FRAME_STYLE|Wx::STAY_ON_TOP)
+    sizer = Wx::BoxSizer.new(Wx::VERTICAL)
+    text = Wx::StaticText.new(mini, -1, 'This is a MiniFrame.')
+    sizer.add(text, 0, Wx::ALL, 2)
+    text = Wx::StaticText.new(mini, -1, 'It has a small title bar so it')
+    sizer.add(text, 0, Wx::ALL, 2)
+    text = Wx::StaticText.new(mini, -1, 'doesn\'t take up too much space.')
+    sizer.add(text, 0, Wx::ALL, 2)
+    text = Wx::StaticText.new(mini, -1, 'This MiniFrame has been set to')
+    sizer.add(text, 0, Wx::ALL, 2)
+    text = Wx::StaticText.new(mini, -1, 'stay above the main app window.')
+    sizer.add(text, 0, Wx::ALL, 2)
+    mini.set_sizer(sizer)
+    mini.show()
+    mini.raise()
   end
 
-  def onAbout
+  def on_quit
+    mini.close()
+    close()
+  end
+
+  def on_about
     msg =  sprintf("This is the About dialog of the miniframe sample.\n" \
                     "Welcome to %s", Wx::VERSION_STRING)
     Wx::message_box(msg, "About MiniFrame", Wx::OK|Wx::ICON_INFORMATION, self)
-    
   end
 end
 
@@ -41,9 +62,7 @@ class RbApp < Wx::App
     frame = MyFrame.new("Mini Frame wxRuby App",
                         Wx::Point.new(50, 50), 
                         Wx::Size.new(450, 340))
-
-    frame.show(TRUE)
-
+    frame.show()
   end
 end
 
