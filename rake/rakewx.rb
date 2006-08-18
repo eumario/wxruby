@@ -17,7 +17,7 @@ $swig_cmd = "swig"
 $swig_options = " -fvirtual "
 $swig_minimum_version = '1.3.29'
 
-$debug_build = true
+$debug_build = ENV['DEBUG'] ? true : false
 
 def have_good_swig
 	begin
@@ -35,11 +35,9 @@ def have_good_swig
 end
 
 def wx_config(opt)
-    debug_mode = '--debug=no'
     if $debug_build
       debug_mode = '--debug=yes'
     end
-    
     return `wx-config #{debug_mode} #{opt}`.strip + " "
 end
 
