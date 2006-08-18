@@ -1,3 +1,4 @@
+====0.0.33 tag included all of this:===
 - Tweak rakewx for better debug_mode handling (Alex Fenton
 - Fixed internal get_ruby_object method to handle NULLs (Alex Fenton)
 - Improved miniframe sample (Alex Fenton)
