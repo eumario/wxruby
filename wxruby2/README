@@ -1,5 +1,6 @@
 README for wxruby2
-Version 0.0.31
+Version 0.0.33
+2006-08-20
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -7,28 +8,98 @@ It is released under a permissive MIT-style license
 (see the LICENSE file for details).
 
 *** NOTE ***
-This version is VERY UNSTABLE. It is the first build that 
-targets wxWidgets 2.6.3 and SWIG 1.3.29. Please AVOID this 
-build unless you are highly motivated to help improve wxruby2.
-Hopefully within a couple more releases it will be stable 
-again (at least as good as it was in 0.0.30, if not better).
+This version is VERY UNSTABLE. At least on some platforms, it 
+crashes very often. Hopefully within a couple more releases 
+it will be stable again (at least as good as it was in 0.0.30, 
+if not better).
 ************
 
 There are no binaries yet. You must build it from source.
-It now supports about 130 classes, and is only missing about 20 
-classes that were supported in wxruby 0.6.
 
 For more details, see the project home page:
-  http://rubyforge.org/projects/wxruby/
+  http://wxruby.org/
 
 
-REQUIREMENTS:
+------------------------USING WXRUBY---------------------------
+INSTALLING:
+
+Starting with the 1.9-alpha release, wxRuby is available as binary 
+gems for MS Windows, Mac OS X, and Linux with GTK+ 2. We strongly 
+recommend installing the gem rather than building from source.
+
+
+
+REQUIREMENTS TO CREATE AND RUN WXRUBY APPS:
 
 - Ruby 1.8
-- rake (http://rake.rubyforge.org/)
-- SWIG 1.3.29 or later
+- MS Windows, Mac OS X, or Linux with GTK+ 2, 
+
+
+
+SAMPLES:
+
+There is a samples/ directory containing many small sample wxRuby apps 
+that demonstrate how to use various classes. A few samples do not work 
+across all platforms at this time.
+	
+The bigdemo sample is fairly comprehensive, but not all of the 
+sections work on all platforms. 
+
+
+WRITING YOUR OWN WXRUBY APP:
+
+To use wxruby-swig in your app, use:
+  require 'wx'
+  
+samples/minimal.rb can be used as a template for creating your 
+own wxruby application.
+
+
+DOCUMENTATION:
+
+- wxRuby-specific API documentation can be found here:
+
+    http://wxruby.org/doc/
+	
+  (Note: This documentation is auto-generated from the C++ wxWidgets 
+   API docs. There are some broken links, and some sections which do 
+   not apply to ruby. The documentation is continually being improved.)
+
+
+- Tables summarizing which wx classes are and are not supported can 
+  be found here:
+  
+    http://wxruby.org/wiki/wiki.pl?ClassesSupportedByCategory
+	
+- Most wxWidgets and wxPython tutorials and references can also be used, if 
+  you remember that wxRuby uses ruby_style_naming for methods and variables 
+  instead of MixedCase as used by wxWidgets.
+  
+
+
+API DIFFERENCES FROM WXWIDGETS:
+- Since initialize is reserved in ruby, use SplitterWindow#init instead.
+- Uninitialized client data will have the value (false), 
+  not (nil). This is a change from wxRuby 0.3 and earlier.
+- Many wx classes have not been wrapped because native ruby classes work 
+  as well or better. These include wxDateTime, wxString, networking 
+  classes, database classes.
+- log_message and log_status take a single string parameter, 
+  rather than a format string followed by additional values 
+  to be inserted.
+- ScreenDC extends DC on all platforms, unlike in C++ wx. 
+  This means that you cannot override any virtual methods that were 
+  defined in PaintDC or WindowDC in a ruby subclass of ScreenDC.
+  [Need to verify if this is still true]
+  
+  
+
+
+----------------------COMPILING WXRUBY--------------------------
+REQUIREMENTS TO COMPILE/BUILD WXRUBY ITSELF
+- rake
+- SWIG 1.3.29 or later (NOTE: Earlier versions WILL NOT WORK!)
 - wxWidgets 2.6.3 SDK
-- Linux, MS Windows, or Mac OS X
 
 
 OBTAINING THE SOURCE:
@@ -59,30 +130,6 @@ to somewhere on your ruby library path, such as a ruby extensions
 directory.
 
 
-TESTING:
-
-To use wxruby-swig in your app, use:
-  require 'wx'
-
-Several samples are available:
-	samples/calendar/calendar.rb
-	samples/test.rb
-	samples/caret/caret.rb
-	samples/controls/controls.rb
-	samples/controls/get_item_sample.rb
-	samples/dialogs/dialogs.rb
-	samples/etc/choice.rb
-	samples/images/images.rb
-	samples/mdi/mdi.rb
-	samples/minimal/minimal.rb
-	samples/minimal/nothing.rb
-	samples/minimal/text.rb
-	
-The listbook sample doesn't seem to work under Linux.
-The bigdemo sample doesn't work well at all yet, but it will 
-be really cool when it does!
-
-
 PORTING TO OTHER PLATFORMS
 
 You may need to edit the appropriate platform-dependent 
@@ -95,6 +142,7 @@ is unusual. These files are found in the rake subdirectory:
   MS Windows MingGW:    rakemingw.rb
   MS Windows Cygwin:    rakecygwin.rb
   NetBSD:               rakenetbsd.rb
+  Linux (GTK2):         rakelinux.rb
 
 When editing a platform-dependent rakefile, you might 
 merely need to set one or more of the following variables:
@@ -104,73 +152,7 @@ merely need to set one or more of the following variables:
     $extra_libs
 
 
-
-
-NOTES:
-- Since initialize is reserved in ruby, use SplitterWindow#init instead.
-- Uninitialized client data will have the value (false), 
-  not (nil). This is a change from wxRuby 0.3 and earlier.
-- wxDateTime has not been wrapped. Use Ruby's DateTime 
-  whenever a wxDateTime is specified.
-- wxString has not been wrapped. Use a normal Ruby String
-  whenever a wxString is specified.
-- log_message and log_status take a single string parameter, 
-  rather than a format string followed by additional values 
-  to be inserted.
--- ScreenDC extends DC on all platforms, unlike in C++ wx. 
-  This means that you cannot override any virtual methods that were 
-  defined in PaintDC or WindowDC in a ruby subclass of ScreenDC.
-  
-  
-SUPPORTED CLASSES:
-
-As of 0.0.25, The following classes are supported:
-App.i                Gauge.i                       Notebook.i
-ArtProvider.i        GDIObject.i                   NotifyEvent.i
-BitmapButton.i       GridCellAttr.i                Object.i
-Bitmap.i             GridCellBoolEditor.i          PaintDC.i
-Bogus.i              GridCellBoolRenderer.i        PaintEvent.i
-BoxSizer.i           GridCellChoiceEditor.i        Panel.i
-Brush.i              GridCellEditor.i              Pen.i
-BusyCursor.i         GridCellFloatEditor.i         Point.i
-BusyInfo.i           GridCellFloatRenderer.i       ProgressDialog.i
-Button.i             GridCellNumberEditor.i        RadioBox.i
-CalendarCtrl.i       GridCellNumberRenderer.i      RadioButton.i
-CalendarDateAttr.i   GridCellRenderer.i            ScrolledWindow.i
-CalendarEvent.i      GridCellStringRenderer.i      SingleChoiceDialog.i
-Caret.i              GridCellTextEditor.i          SizeEvent.i
-CheckBox.i           GridEvent.i                   Size.i
-CheckListBox.i       Grid.i                        Sizer.i
-Choice.i             GridRangeSelectEvent.i        Slider.i
-ClassInfo.i          GridSizeEvent.i               SpinButton.i
-ClientDC.i           GridSizer.i                   SpinCtrl.i
-CloseEvent.i         Icon.i                        SpinEvent.i
-ColourData.i         IdleEvent.i                   SplitterEvent.i
-ColourDialog.i       Image.i                       SplitterWindow.i
-Colour.i             ImageList.i                   StaticBitmap.i
-ComboBox.i           include                       StaticBox.i
-CommandEvent.i       IndividualLayoutConstraint.i  StaticBoxSizer.i
-Control.i            KeyEvent.i                    StaticLine.i
-ControlWithItems.i   LayoutConstraints.i           StaticText.i
-Cursor.i             ListbookEvent.i               StatusBar.i
-CVS                  Listbook.i                    TextAttr.i
-DC.i                 ListBox.i                     TextCtrl.i
-Dialog.i             ListCtrl.i                    TextEntryDialog.i
-DirDialog.i          Log.i                         TipProvider.i
-Event.i              LogTextCtrl.i                 TipWindow.i
-EvtHandler.i         Mask.i                        ToggleButton.i
-FileDialog.i         MDIChildFrame.i               ToolBar.i
-FindDialogEvent.i    MDIParentFrame.i              ToolTip.i
-FindReplaceData.i    MemoryDC.i                    TreeCtrl.i
-FindReplaceDialog.i  MenuBar.i                     TreeEvent.i
-FlexGridSizer.i      Menu.i                        UpdateUIEvent.i
-FocusEvent.i         MenuItem.i                    Validator.i
-FontData.i           MessageDialog.i               WindowDC.i
-FontDialog.i         MouseEvent.i                  WindowDisabler.i
-Font.i               MoveEvent.i                   Window.i
-Frame.i              NotebookEvent.i               XmlResource.i
-
-  
+-----------------------------------------------------------
 
 LEAD MAINTAINER:
   Kevin Smith
