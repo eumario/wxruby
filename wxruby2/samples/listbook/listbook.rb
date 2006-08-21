@@ -1,4 +1,6 @@
 require 'wx'
+# This sample demonstrates the use of the listbook class.
+# NB: This sample doesn't currently work on Linux (21/08/2006)
 
 
 
@@ -7,7 +9,7 @@ require 'wx'
 #
 class SimpleFrame < Wx::Frame 
 
-	FILE_DIALOG, FILE_ABOUT, FILE_QUIT = [0,Wx::ID_ABOUT,2]
+	FILE_DIALOG, FILE_ABOUT, FILE_QUIT = [0,Wx::ID_ABOUT,Wx::ID_EXIT]
 	
 	def initialize(parent)
 		super(nil,-1,"Sample",Wx::Point.new(50,50),Wx::Size.new(300,300))
