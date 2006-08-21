@@ -4,8 +4,8 @@ include Wx
 require 'date'
 
 
-Calendar_File_About = 100
-Calendar_File_Quit = 101
+Calendar_File_About = ID_ABOUT
+Calendar_File_Quit = ID_EXIT
 Calendar_Cal_Monday = 200
 Calendar_Cal_Holidays = 201
 Calendar_Cal_Special = 202
@@ -32,33 +32,33 @@ class MyCalendar < CalendarCtrl
         @weekday_names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
         id = get_id
-        evt_calendar(id) {|event| onCalendar(event)}
-        evt_calendar_month(id) {onCalMonthChange}
-        evt_calendar_year(id) {onCalYearChange}
-        evt_calendar_sel_changed(id) {|event| onCalendarChange(event)}
-        evt_calendar_weekday_clicked(id) {|event| onCalendarWeekDayClick(event)}
+    evt_calendar(id) {|event| on_calendar(event)}
+    evt_calendar_month(id) {on_cal_month_change}
+    evt_calendar_year(id) {on_cal_year_change}
+    evt_calendar_sel_changed(id) {|event| on_calendar_change(event)}
+    evt_calendar_weekday_clicked(id) {|event| on_calendar_weekday_click(event)}
     end
 
-    def onCalendar(event)
+  def on_calendar(event)
         @date = event.get_date
         log_message("Double-clicked #{format_date(@date)}")
         @parent.set_date(@date)
     end
 
-    def onCalendarChange(event)
+  def on_calendar_change(event)
         @date = event.get_date
         log_status("Selected date: #{format_date(@date)}")
     end
 
-    def onCalMonthChange
+  def on_cal_month_change
         log_status("Calendar month changed")
     end
 
-    def onCalYearChange
+  def on_cal_year_change
         log_status("Calendar year changed")
     end
 
-    def onCalendarWeekDayClick(event)
+  def on_calendar_weekday_click(event)
         wday = event.get_week_day
         log_status("Clicked on #{@weekday_names[wday]}")
     end
@@ -76,75 +76,75 @@ class MyFrame < Frame
         @calendar_flags = CAL_MONDAY_FIRST | CAL_SHOW_HOLIDAYS
 
         date = DateTime.now
-        @m_date = StaticText.new(self, -1, "")
-        @m_calendar = MyCalendar.new(self, date, @calendar_flags)
+    @date = StaticText.new(self, -1, "")
+    @calendar = MyCalendar.new(self, date, @calendar_flags)
 
         @sizer = BoxSizer.new(VERTICAL)
         configure_window
 
-    	evt_menu(Calendar_File_Quit) {onQuit}
-    	evt_menu(Calendar_File_About) {onAbout}
+  	evt_menu(Calendar_File_Quit) {on_quit}
+  	evt_menu(Calendar_File_About) {on_about}
 
-    	evt_menu(Calendar_Cal_Monday) {|event| onCalMonday(event)}
-    	evt_menu(Calendar_Cal_Holidays) {|event| onCalHolidays(event)}
-    	evt_menu(Calendar_Cal_Special) {|event| onCalSpecial(event)}
+  	evt_menu(Calendar_Cal_Monday) {|event| on_cal_monday(event)}
+  	evt_menu(Calendar_Cal_Holidays) {|event| on_cal_holidays(event)}
+  	evt_menu(Calendar_Cal_Special) {|event| on_cal_special(event)}
 
-    	evt_menu(Calendar_Cal_Month) {|event| onCalAllowMonth(event)}
-    	evt_menu(Calendar_Cal_Year) {|event| onCalAllowYear(event)}
+  	evt_menu(Calendar_Cal_Month) {|event| on_cal_allow_month(event)}
+  	evt_menu(Calendar_Cal_Year) {|event| on_cal_allow_year(event)}
 
-    	evt_menu(Calendar_Cal_SeqMonth) {|event| onCalSeqMonth(event)}
-    	evt_menu(Calendar_Cal_SurroundWeeks) {|event| onCalShowSurroundingWeeks(event)}
+  	evt_menu(Calendar_Cal_SeqMonth) {|event| on_cal_seq_month(event)}
+  	evt_menu(Calendar_Cal_SurroundWeeks) {|event| on_cal_show_surrounding_weeks(event)}
 
-    	evt_update_ui(Calendar_Cal_Year) {|event| onAllowYearUpdate(event)}
+  	evt_update_ui(Calendar_Cal_Year) {|event| on_allow_year_update(event)}
     end
     
     def add_menu_bar
         # create a menu bar
-        menuFile = Menu.new
+    menu_file = Menu.new
 
-        menuFile.append(Calendar_File_About, "&About...\tCtrl-A", "Show about dialog")
-        menuFile.append_separator()
-        menuFile.append(Calendar_File_Quit, "E&xit\tAlt-X", "Quit self program")
+    menu_file.append(Calendar_File_About, "&About...\tCtrl-A", "Show about dialog")
+    menu_file.append_separator()
+    menu_file.append(Calendar_File_Quit, "E&xit\tAlt-X", "Quit self program")
 
-        menuCal = Menu.new
-        menuCal.append(Calendar_Cal_Monday,
+    menu_cal = Menu.new
+    menu_cal.append(Calendar_Cal_Monday,
                         "Monday &first weekday\tCtrl-F",
                         "Toggle between Mon and Sun as the first week day",
                         ITEM_CHECK)
-        menuCal.append(Calendar_Cal_Holidays, "Show &holidays\tCtrl-H",
+    menu_cal.append(Calendar_Cal_Holidays, "Show &holidays\tCtrl-H",
                         "Toggle highlighting the holidays",
                         ITEM_CHECK)
-        menuCal.append(Calendar_Cal_Special, "Highlight &special dates\tCtrl-S",
+    menu_cal.append(Calendar_Cal_Special, "Highlight &special dates\tCtrl-S",
                         "Test custom highlighting",
                         ITEM_CHECK)
-        menuCal.append(Calendar_Cal_SurroundWeeks,
+    menu_cal.append(Calendar_Cal_SurroundWeeks,
                         "Show s&urrounding weeks\tCtrl-W",
                         "Show the neighbouring weeks in the prev/next month",
                         ITEM_CHECK)
-        menuCal.append_separator()
-        menuCal.append(Calendar_Cal_SeqMonth,
+    menu_cal.append_separator()
+    menu_cal.append(Calendar_Cal_SeqMonth,
                         "To&ggle month selector style\tCtrl-G",
                         "Use another style for the calendar controls",
                         ITEM_CHECK)
-        menuCal.append(Calendar_Cal_Month, "&Month can be changed\tCtrl-M",
+    menu_cal.append(Calendar_Cal_Month, "&Month can be changed\tCtrl-M",
                         "Allow changing the month in the calendar",
                         ITEM_CHECK)
-        menuCal.append(Calendar_Cal_Year, "&Year can be changed\tCtrl-Y",
+    menu_cal.append(Calendar_Cal_Year, "&Year can be changed\tCtrl-Y",
                         "Allow changing the year in the calendar",
                         ITEM_CHECK)
 
         # now append the freshly created menu to the menu bar...
-        menuBar = MenuBar.new
-        menuBar.append(menuFile, "&File")
-        menuBar.append(menuCal, "&Calendar")
+    menu_bar = MenuBar.new
+    menu_bar.append(menu_file, "&File")
+    menu_bar.append(menu_cal, "&Calendar")
 
-        menuBar.check(Calendar_Cal_Monday, TRUE)
-        menuBar.check(Calendar_Cal_Holidays, TRUE)
-        menuBar.check(Calendar_Cal_Month, TRUE)
-        menuBar.check(Calendar_Cal_Year, TRUE)
+    menu_bar.check(Calendar_Cal_Monday, TRUE)
+    menu_bar.check(Calendar_Cal_Holidays, TRUE)
+    menu_bar.check(Calendar_Cal_Month, TRUE)
+    menu_bar.check(Calendar_Cal_Year, TRUE)
 
         # ... and attach self menu bar to the frame
-        set_menu_bar(menuBar)
+    set_menu_bar(menu_bar)
     end
 
     def add_status_bar
@@ -154,99 +154,98 @@ class MyFrame < Frame
     end
     
     def configure_window
-        @sizer.add(@m_calendar, 0)
-        @sizer.add(@m_date, 1)
+    @sizer.add(@calendar, 0)
+    @sizer.add(@date, 1)
         @sizer.set_size_hints(self)
         layout
         set_sizer(@sizer)
     end
     
-    def onQuit
-        # TRUE is to force the frame to close
-        close(TRUE)
+  def on_quit
+    # true is to force the frame to close
+    close(true)
     end
 
-    def onAbout
+  def on_about
         message_box("wxRuby CalendarCtrl sample\nby Kevin Smith\n" +
                  "based on the wxWidgets version by Vadim Zeitlin",
                  "About Calendar", OK | ICON_INFORMATION, self)
     end
 
-    def onCalMonday(event)
+  def on_cal_monday(event)
         enable = get_menu_bar().is_checked(event.get_id())
         toggle_cal_style(enable, CAL_MONDAY_FIRST)
     end
 
-    def onCalHolidays(event)
+  def on_cal_holidays(event)
         enable = get_menu_bar().is_checked(event.get_id())
-        @m_calendar.enable_holiday_display(enable)
+    @calendar.enable_holiday_display(enable)
     end
 
-	def onCalSpecial(event)
+	def on_cal_special(event)
         highlight_special(get_menu_bar().is_checked(event.get_id()))
     end
 
-	def onCalAllowMonth(event)
+	def on_cal_allow_month(event)
         allow = get_menu_bar().is_checked(event.get_id())
-        @m_calendar.enable_month_change(allow)
+    @calendar.enable_month_change(allow)
     end
 
-	def onCalAllowYear(event)
+	def on_cal_allow_year(event)
         allow = get_menu_bar().is_checked(event.get_id())
-        @m_calendar.enable_year_change(allow)
+    @calendar.enable_year_change(allow)
     end
 
-	def onCalSeqMonth(event)
+	def on_cal_seq_month(event)
         allow = get_menu_bar().is_checked(event.get_id())
         toggle_cal_style(allow, CAL_SEQUENTIAL_MONTH_SELECTION)
     end
 
-	def onCalShowSurroundingWeeks(event)
+	def on_cal_show_surrounding_weeks(event)
         allow = get_menu_bar().is_checked(event.get_id())
         toggle_cal_style(allow, CAL_SHOW_SURROUNDING_WEEKS)
     end
 
-	def onAllowYearUpdate(event)
-		
+	def on_allow_year_update(event)
         event.enable( get_menu_bar().is_checked(Calendar_Cal_Month))
     end
 
     def toggle_cal_style(on,flag)
-        style = @m_calendar.get_window_style_flag
-        date = @m_calendar.date
-        @sizer.detach(@m_calendar)
-        @sizer.detach(@m_date)
-        @m_calendar.destroy
+    style = @calendar.get_window_style_flag
+    date = @calendar.date
+    @sizer.detach(@calendar)
+    @sizer.detach(@date)
+    @calendar.destroy
         if  on
             style |= flag
         else
             style &= ~flag
         end
-        @m_calendar = MyCalendar.new(self, date, style)
-        @sizer.add(@m_calendar, 0)
-        @sizer.add(@m_date, 1)
+    @calendar = MyCalendar.new(self, date, style)
+    @sizer.add(@calendar, 0)
+    @sizer.add(@date, 1)
         layout
     end
 
     def highlight_special(on)
         if on
-            attrRedCircle = CalendarDateAttr.new(CAL_BORDER_ROUND, RED)
-            attrGreenSquare = CalendarDateAttr.new(CAL_BORDER_SQUARE, GREEN)
-#            attrHeaderLike = CalendarDateAttr.new(BLUE, LIGHT_GREY)
+      attr_red_circle = CalendarDateAttr.new(CAL_BORDER_ROUND, RED)
+      attr_green_square = CalendarDateAttr.new(CAL_BORDER_SQUARE, GREEN)
+#     attr_header_like = CalendarDateAttr.new(BLUE, LIGHT_GREY)
 
-            @m_calendar.set_attr(17, attrRedCircle)
-            @m_calendar.set_attr(29, attrGreenSquare)
-#            @m_calendar.set_attr(13, attrHeaderLike)
+      @calendar.set_attr(17, attr_red_circle)
+      @calendar.set_attr(29, attr_green_square)
+#     @calendar.set_attr(13, attr_header_like)
         else
-            @m_calendar.reset_attr(17)
-            @m_calendar.reset_attr(29)
-            @m_calendar.reset_attr(13)
+      @calendar.reset_attr(17)
+      @calendar.reset_attr(29)
+      @calendar.reset_attr(13)
         end
-        @m_calendar.refresh()
+    @calendar.refresh()
     end
 
     def set_date(d)
-        @m_date.set_label(format_date(d))
+    @date.set_label(format_date(d))
     end
     
 end
@@ -255,7 +254,7 @@ end
 class RbApp < App
     def on_init()
   	    frame = MyFrame.new("Calendar Windows sample")
-	    frame.show(TRUE)
+    frame.show(true)
     end
 end
 
