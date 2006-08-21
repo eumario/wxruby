@@ -326,10 +326,10 @@ public:
             cEvent = cWxScrollWinEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxWizardEvent)))
             cEvent = cWxWizardEvent.klass;
-        else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
-            cEvent = cWxCommandEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
             cEvent = cWxSashEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
+            cEvent = cWxCommandEvent.klass;
  
         else
         {
