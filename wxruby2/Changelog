@@ -1,3 +1,7 @@
+- Fixed sash event handling to avoid crashes (Alex Fenton)
+  (caused by an incorrect patch merge by Kevin)
+
+
 ====0.0.33 tag included all of this:===
 - Tweak rakewx for better debug_mode handling (Alex Fenton
 - Fixed internal get_ruby_object method to handle NULLs (Alex Fenton)
