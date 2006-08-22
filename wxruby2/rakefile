@@ -64,7 +64,6 @@ begin
   create_internal_non_swig_tasks
   create_internal_swig_tasks
   create_release_tasks
-  create_documentation_tasks
     task :default => :link
     task :link => $target_lib
     task :compile => all_obj_files
