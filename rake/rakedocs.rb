@@ -14,6 +14,8 @@
 # based on a static Textile file, doc/textile/index.txtl), and copies
 # the wxruby .css into the directory.
 
+CVS_BASE_DIR = File.expand_path('.')
+
 $LOAD_PATH.push( File.join(CVS_BASE_DIR, 'doc', 'lib') )
 
 require 'wxlatex_parser'
