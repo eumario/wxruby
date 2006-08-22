@@ -60,17 +60,17 @@ public:
         // checked/unchecked) which are taken from the state image list.
     virtual wxImageList *GetImageList() const;
     virtual wxImageList *GetStateImageList() const;
-    virtual wxImageList *GetButtonsImageList() const;
+    
 
     virtual void SetImageList(wxImageList *imageList);
     virtual void SetStateImageList(wxImageList *imageList);
-    virtual void SetButtonsImageList(wxImageList *imageList);
+    
     virtual void AssignImageList(wxImageList *imageList);
     virtual void AssignStateImageList(wxImageList *imageList);
-    virtual void AssignButtonsImageList(wxImageList *imageList);
 
-    virtual void SetDropEffectAboveItem( bool above = false );
-    virtual bool GetDropEffectAboveItem() const;
+
+    
+    
 
     // Functions to work with tree ctrl items.
 
@@ -139,7 +139,7 @@ public:
         // is the item visible (it might be outside the view or not expanded)?
     bool IsVisible(const wxTreeItemId& item) const;
         // does the item has any children?
-    bool HasChildren(const wxTreeItemId& item) const;
+    
     bool ItemHasChildren(const wxTreeItemId& item) const;
         // is the item expanded (only makes sense if HasChildren())?
     bool IsExpanded(const wxTreeItemId& item) const;
@@ -212,8 +212,6 @@ public:
         // get the previous visible item: item must be visible itself!
     wxTreeItemId GetPrevVisible(const wxTreeItemId& item) const;
 
-        // Only for internal use right now, but should probably be public
-    wxTreeItemId GetNext(const wxTreeItemId& item) const;
 
     // operations
     // ----------
@@ -260,8 +258,7 @@ public:
 
         // expand this item
     void Expand(const wxTreeItemId& item);
-        // expand this item and all subitems recursively
-    void ExpandAll(const wxTreeItemId& item);
+
         // collapse the item without removing its children
     void Collapse(const wxTreeItemId& item);
         // collapse the item and remove all children
@@ -285,7 +282,7 @@ public:
     void EnsureVisible(const wxTreeItemId& item);
         // scroll to this item (but don't expand its parent)
     void ScrollTo(const wxTreeItemId& item);
-    void AdjustMyScrollbars();
+
 
         // The first function is more portable (because easier to implement
         // on other platforms), but the second one returns some extra info.
@@ -301,7 +298,7 @@ public:
         // with a one line edit control. The item will be selected if it hadn't
         // been before.
     void EditLabel( const wxTreeItemId& item );
-    void Edit( const wxTreeItemId& item );
+
         // returns a pointer to the text edit control if the item is being
         // edited, NULL otherwise (it's assumed that no more than one item may
         // be edited simultaneously)
@@ -347,19 +344,38 @@ public:
 
     // callbacks
     void OnPaint( wxPaintEvent &event );
-    void OnSetFocus( wxFocusEvent &event );
-    void OnKillFocus( wxFocusEvent &event );
-    void OnChar( wxKeyEvent &event );
-    void OnMouse( wxMouseEvent &event );
-    void OnGetToolTip( wxTreeEvent &event );
+
     void OnInternalIdle( );
 
-    virtual wxSize DoGetBestSize() const;
+
 
     virtual wxVisualAttributes GetDefaultAttributes() const;
 
     static wxVisualAttributes
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+
+#if !defined(__WXMSW__)
+	//Windows does not support these
+	
+	virtual void SetButtonsImageList(wxImageList *imageList);
+    virtual void AssignButtonsImageList(wxImageList *imageList);	
+	virtual wxImageList *GetButtonsImageList() const;
+	virtual bool GetDropEffectAboveItem() const;
+	virtual void SetDropEffectAboveItem( bool above = false );
+        // Only for internal use right now, but should probably be public
+    wxTreeItemId GetNext(const wxTreeItemId& item) const;
+	bool HasChildren(const wxTreeItemId& item) const;
+        // expand this item and all subitems recursively
+    void ExpandAll(const wxTreeItemId& item);	
+    void AdjustMyScrollbars();
+    void Edit( const wxTreeItemId& item );
+    void OnSetFocus( wxFocusEvent &event );
+    void OnKillFocus( wxFocusEvent &event );
+    void OnChar( wxKeyEvent &event );
+    void OnMouse( wxMouseEvent &event );
+    void OnGetToolTip( wxTreeEvent &event );
+    virtual wxSize DoGetBestSize() const;
+#endif
 };
 
 #endif
