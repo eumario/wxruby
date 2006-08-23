@@ -52,8 +52,6 @@ $extra_cppflags = [
     "/GR",
     "/GX",
     "/EHsc",
-    "-I#$Config::TOPDIR",
-    "-I..",    
     "-DSTRICT", 
     "-DWIN32", "-D__WIN32__", 
     "-D_WINDOWS", "/D__WINDOWS__", 
