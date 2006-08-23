@@ -9,10 +9,6 @@
 #include <wx/treectrl.h>
 %}
 
-%ignore wxTreeEvent::GetLabel() const;
-%ignore wxTreeEvent::GetPoint() const;
-%ignore wxTreeEvent::IsEditCancelled() const;
-
 %import "include/wxObject.h"
 %import "include/wxEvent.h"
 %import "include/wxCommandEvent.h"

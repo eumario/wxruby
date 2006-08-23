@@ -12,8 +12,8 @@ public:
   const wxKeyEvent& GetKeyEvent() const;
   const wxString& GetLabel() const;
   wxTreeItemId GetOldItem() const;
-  wxPoint GetPoint()() const;
-  bool IsEditCancelled()() const;
+  wxPoint GetPoint() const;
+  bool IsEditCancelled() const;
 };
 
 
