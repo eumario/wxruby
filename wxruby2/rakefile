@@ -4,7 +4,7 @@
 
 require "rake/rakeutil"
 require "rake/rakewx"
-require "rake/rakedocs"
+#require "rake/rakedocs" # disabled temporarily due to missing latex parser
 
 begin
   require "rake/rakepackage"
