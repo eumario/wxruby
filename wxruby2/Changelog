@@ -1,3 +1,12 @@
+
+- Added comment to listbook sample that it doesn't work on Linux (Alex Fenton)
+- Updated listbook sample menu id (Sean Long)
+- Updated caret sample to modern coding conventions (Alex Fenton)
+- Updated calendar sample to modern coding conventions (Alex Fenton)
+- Bigdemo: Commented out unsupported ArtProvider methods and related 
+  set_image calls (Alex Fenton)
+- Added and updated doc tasks in rakefile and rake/rakedocs.rb (Alex Fenton)
+- Fixed TreeCtrl class to #ifdef features not on MSW (Sean Long)
 - Big fixes to TreeCtrl and added TreeItemId class (Sean Long)
 - Fixed sash event handling to avoid crashes (Alex Fenton)
   (caused by an incorrect patch merge by Kevin)
