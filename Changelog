@@ -1,4 +1,4 @@
-
+- Fixed caret sample to not crash on certain keystrokes (Roy Sutton)
 - Added comment to listbook sample that it doesn't work on Linux (Alex Fenton)
 - Updated listbook sample menu id (Sean Long)
 - Updated caret sample to modern coding conventions (Alex Fenton)
