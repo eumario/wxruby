@@ -8,7 +8,7 @@ class TestPanel < Wx::Panel
     end
     
     def on_kill_focus(event)
-        @log.write("on_kill_focus")
+        @log.write_text("on_kill_focus")
         event.skip()
     end
     
@@ -126,4 +126,3 @@ module Demo
         ""
     end
 end
-
