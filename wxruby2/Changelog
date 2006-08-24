@@ -1,3 +1,4 @@
+- Removed strict dependency on redcloth to do main rake compile (Alex Fenton)
 - Removed unneeded/problematic include dirs from mswin rakefile (Roy Sutton)
 - Fixed TreeEvent to enable more methods (Alex Fenton)
 - Fixed caret sample to not crash on certain keystrokes (Roy Sutton)
