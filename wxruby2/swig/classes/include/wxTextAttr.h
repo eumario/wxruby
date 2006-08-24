@@ -1,140 +1,62 @@
-// wxTextAttr.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2006 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxTextAttr_h_)
 #define _wxTextAttr_h_
 class wxTextAttr
 {
 public:
-	/**
-	 * \brief  
-	*/
+    wxTextAttr();
+    wxTextAttr(const wxColour& colText,
+               const wxColour& colBack = wxNullColour,
+               const wxFont& font = wxNullFont,
+               wxTextAttrAlignment alignment = wxTEXT_ALIGNMENT_DEFAULT);
 
-   wxTextAttr() ;
-	/**
-	 * \brief The constructors initialize one or more of the text foreground colour, background
-colour, font, and alignment. The values not initialized in the constructor can be set
-later, otherwise   will use
-the default values for them. 
-	 * \param const wxColour&   
-	 * \param const wxColour&   
-	 * \param const wxFont&   
-	 * \param wxTextAttrAlignment   
-	*/
+    // operations
+    void Init();
 
-   wxTextAttr(const wxColour&  colText , const wxColour&  colBack = wxNullColour, const wxFont&  font = wxNullFont, wxTextAttrAlignment  alignment = wxTEXT_ALIGNMENT_DEFAULT) ;
-	/**
-	 * \brief Returns the paragraph alignment. 
-	*/
+    // operators
+    void operator= (const wxTextAttr& attr);
 
-  wxTextAttrAlignment GetAlignment() const;
-	/**
-	 * \brief Return the background colour specified by this attribute. 
-	*/
+    // setters
+    void SetTextColour(const wxColour& colText);
+    void SetBackgroundColour(const wxColour& colBack);
+    void SetFont(const wxFont& font, long flags = wxTEXT_ATTR_FONT);
+    void SetAlignment(wxTextAttrAlignment alignment);
+    void SetTabs(const wxArrayInt& tabs);
+    void SetLeftIndent(int indent, int subIndent = 0);
+    void SetRightIndent(int indent);
+    void SetFlags(long flags);
 
-  const wxColour& GetBackgroundColour() const;
-	/**
-	 * \brief Return the text font specified by this attribute. 
-	*/
+    // accessors
+    bool HasTextColour() const;
+    bool HasBackgroundColour() const;
+    bool HasFont() const;
+    bool HasAlignment() const;
+    bool HasTabs() const;
+    bool HasLeftIndent() const;
+    bool HasRightIndent() const;
+    bool HasFlag(long flag) const;
 
-  const wxFont& GetFont() const;
-	/**
-	 * \brief Returns the left indent in tenths of a millimetre. 
-	*/
+    const wxColour& GetTextColour() const;
+    const wxColour& GetBackgroundColour() const;
+    const wxFont& GetFont() const;
+    wxTextAttrAlignment GetAlignment() const;
+    const wxArrayInt& GetTabs() const;
+    long GetLeftIndent() const;
+    long GetLeftSubIndent() const;
+    long GetRightIndent() const;
+    long GetFlags() const;
 
-  int GetLeftIndent() const;
-	/**
-	 * \brief Returns the right indent in tenths of a millimetre. 
-	*/
+    // returns false if we have any attributes set, true otherwise
+    bool IsDefault() const;
 
-  int GetRightIndent() const;
-	/**
-	 * \brief Returns the array of integers representing the tab stops. Each
-array element specifies the tab stop in tenths of a millimetre. 
-	*/
-
-  const wxArrayInt& GetTabs() const;
-	/**
-	 * \brief Return the text colour specified by this attribute. 
-	*/
-
-  const wxColour& GetTextColour() const;
-	/**
-	 * \brief Returns   if this style specifies the background colour to use. 
-	*/
-
-  bool HasBackgroundColour() const;
-	/**
-	 * \brief Returns   if this style specifies the font to use. 
-	*/
-
-  bool HasFont() const;
-	/**
-	 * \brief Returns   if this style specifies the foreground colour to use. 
-	*/
-
-  bool HasTextColour() const;
-	/**
-	 * \brief Returns a bitlist indicating which attributes will be set. 
-	*/
-
-  long GetFlags() ;
-	/**
-	 * \brief Returns   if this style specifies any non-default attributes. 
-	*/
-
-  bool IsDefault() const;
-	/**
-	 * \brief Sets the paragraph alignment. 
-	 * \param wxTextAttrAlignment  
-	*/
-
-  void SetAlignment(wxTextAttrAlignment  alignment ) ;
-	/**
-	 * \brief Sets the background colour. 
-	 * \param const wxColour&   
-	*/
-
-  void SetBackgroundColour(const wxColour&  colour ) ;
-	/**
-	 * \brief Pass a bitlist indicating which attributes will be set. 
-	 * \param long  
-	*/
-
-  void SetFlags(long  flags ) ;
-	/**
-	 * \brief Sets the text font. 
-	 * \param const wxFont&  
-	*/
-
-  void SetFont(const wxFont&  font ) ;
-	/**
-	 * \brief Sets the left indent in tenths of a millimetre. 
-	 * \param int   
-	*/
-
-  void SetLeftIndent(int  indent ) ;
-	/**
-	 * \brief Sets the right indent in tenths of a millimetre. 
-	 * \param int   
-	*/
-
-  void SetRightIndent(int  indent ) ;
-	/**
-	 * \brief Sets the array of integers representing the tab stops. Each
-array element specifies the tab stop in tenths of a millimetre. 
-	 * \param const wxArrayInt&  
-	*/
-
-  void SetTabs(const wxArrayInt&  tabs ) ;
-	/**
-	 * \brief Sets the text colour. 
-	 * \param const wxColour&   
-	*/
-
-  void SetTextColour(const wxColour&  colour ) ;
+    // return the attribute having the valid font and colours: it uses the
+    // attributes set in attr and falls back first to attrDefault and then to
+    // the text control font/colours for those attributes which are not set
+    static wxTextAttr Combine(const wxTextAttr& attr,
+                              const wxTextAttr& attrDef,
+                              const wxTextCtrlBase *text);
 };
 
 
