@@ -1,3 +1,4 @@
+- Renamed bigdemo from Main.rbw to bigdemo.rb (Kevin Smith)
 - Removed strict dependency on redcloth to do main rake compile (Alex Fenton)
 - Removed unneeded/problematic include dirs from mswin rakefile (Roy Sutton)
 - Fixed TreeEvent to enable more methods (Alex Fenton)
