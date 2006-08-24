@@ -31,7 +31,7 @@ end
 
 module Demo
     def Demo.run(frame, nb, log)
-        f = open("Main.rbw", "r")
+        f = open(__FILE__, "r")
         msg = f.read()
         dlg = ScrolledMessageDialog.new(frame, msg, "message test")
         dlg.show_modal()
@@ -41,4 +41,3 @@ module Demo
         return "Ported from wxPython.  Many thanks again to Robin Dunn!"
     end
 end
-    

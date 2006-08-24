@@ -302,7 +302,7 @@ class WxRubyDemo < Wx::Frame
         @txt.set_max_length(0)
         
         @nb.add_page(@txt, "Demo Code")
-        get_demo_file("Main.rbw")
+        get_demo_file(__FILE__)
         
         @log = Wx::TextCtrl.new(splitter2, -1, "", Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TE_MULTILINE | Wx::TE_READONLY |
                                                                                                 Wx::HSCROLL)
@@ -378,7 +378,7 @@ class WxRubyDemo < Wx::Frame
         end
         
         if itemText == "wxRuby Overview"
-            get_demo_file("Main.rbw")
+            get_demo_file(__FILE__)
             set_overview("wxRuby Overview", OVR_TEXT)
             @nb.refresh()
             @window = nil       
