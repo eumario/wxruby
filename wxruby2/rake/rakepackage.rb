@@ -3,7 +3,7 @@ require 'rake/packagetask'
 
 # This file adds support for five new Rake targets
 # Two important ones:
-# :gem     - build a binary wxruby gemm for current platform
+# :gem     - build a binary wxruby gem for current platform
 # :package - build a platfrom-neutral source tarball
 
 # Three less important ones:
@@ -16,15 +16,15 @@ $base_gemspec = Gem::Specification.new do | spec |
   spec.version = '1.9.0'
 
   spec.require_path = 'lib'
-  spec.summary  = 'Ruby interface to the WxWidgets GUI library'
-  spec.author   = 'WxRuby development team'
-  spec.homepage = 'http://wxruby.rubyforge.org/'
-  spec.email    = 'wxruby-users@rubyforge.org'
+  spec.summary  = 'Ruby interface to the wxWidgets GUI library'
+  spec.author   = 'wxRuby development team'
+  spec.homepage = 'http://wxruby.org/'
+  spec.email    = 'support@wxruby.org'
 
   spec.rubyforge_project = 'wxruby'
   spec.description = <<-DESC
-  WxRuby allows the creation of graphical user interface (GUI)
-  applications via the WxWidgets library. WxRuby provides native-style
+  wxRuby allows the creation of graphical user interface (GUI)
+  applications via the wxWidgets library. wxRuby provides native-style
   GUI windows, dialogs and controls on platforms including Windows, OS X
   and Linux.
   DESC

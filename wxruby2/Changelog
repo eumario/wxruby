@@ -1,3 +1,4 @@
+- Minor gemspec changes (domain, email, spelling) (Kevin Smith)
 - Added more wxTextCtrl- and wxTextAttr-related constants (Sean Long)
 - Overhauled wxTextCtrl.h to match actual wx API (Sean Long)
 - Fixed 'undefined method' error in bigdemo/wxTextCtrl (Kevin Smith)
