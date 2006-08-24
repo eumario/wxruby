@@ -1885,6 +1885,54 @@ enum
 #define wxTE_CAPITALIZE     0
 #endif
 
+// ----------------------------------------------------------------------------
+// wxTextCtrl::HitTest return values
+// ----------------------------------------------------------------------------
+
+// the point asked is ...
+enum wxTextCtrlHitTestResult
+{
+    wxTE_HT_UNKNOWN = -2,   // this means HitTest() is simply not implemented
+    wxTE_HT_BEFORE,         // either to the left or upper
+    wxTE_HT_ON_TEXT,        // directly on
+    wxTE_HT_BELOW,          // below [the last line]
+    wxTE_HT_BEYOND          // after [the end of line]
+};
+// ... the character returned
+
+// ----------------------------------------------------------------------------
+// Types for wxTextAttr
+// ----------------------------------------------------------------------------
+
+// Alignment
+
+enum wxTextAttrAlignment
+{
+    wxTEXT_ALIGNMENT_DEFAULT,
+    wxTEXT_ALIGNMENT_LEFT,
+    wxTEXT_ALIGNMENT_CENTRE,
+    wxTEXT_ALIGNMENT_CENTER = wxTEXT_ALIGNMENT_CENTRE,
+    wxTEXT_ALIGNMENT_RIGHT,
+    wxTEXT_ALIGNMENT_JUSTIFIED
+};
+
+// Flags to indicate which attributes are being applied
+
+#define wxTEXT_ATTR_TEXT_COLOUR             0x0001
+#define wxTEXT_ATTR_BACKGROUND_COLOUR       0x0002
+#define wxTEXT_ATTR_FONT_FACE               0x0004
+#define wxTEXT_ATTR_FONT_SIZE               0x0008
+#define wxTEXT_ATTR_FONT_WEIGHT             0x0010
+#define wxTEXT_ATTR_FONT_ITALIC             0x0020
+#define wxTEXT_ATTR_FONT_UNDERLINE          0x0040
+#define wxTEXT_ATTR_FONT \
+  ( wxTEXT_ATTR_FONT_FACE | wxTEXT_ATTR_FONT_SIZE | wxTEXT_ATTR_FONT_WEIGHT | \
+    wxTEXT_ATTR_FONT_ITALIC | wxTEXT_ATTR_FONT_UNDERLINE )
+#define wxTEXT_ATTR_ALIGNMENT               0x0080
+#define wxTEXT_ATTR_LEFT_INDENT             0x0100
+#define wxTEXT_ATTR_RIGHT_INDENT            0x0200
+#define wxTEXT_ATTR_TABS                    0x0400
+
 //** ---------------------------------------------------------------------------- **
 //   Start constants from wx/filedlg.h
 //** ---------------------------------------------------------------------------- ** 
