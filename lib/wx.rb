@@ -17,3 +17,13 @@ end
 #    expose a friendlier API than the C++ code provides
 
 Wx = Wxruby2
+
+
+class Wx::App
+	def on_assert(file, line, condition, message)
+		puts("ASSERT: #{file} #{line}")
+		puts(condition)
+		puts(message)
+		raise
+	end
+end
