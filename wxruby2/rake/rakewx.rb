@@ -20,7 +20,11 @@ $swig_minimum_version = '1.3.29'
 $debug_build = ENV['DEBUG'] ? true : false
 
 def have_good_swig
+	begin
 		version = `#{$swig_cmd} -version`.strip.split("\n")[0]
+	rescue
+		return false
+	end
     if not version
 		return false
 	end
@@ -142,6 +146,12 @@ def add_initializers(cpp_file)
 end
 
 def do_swig(swig_file, cpp_file, options)
+	if(!$found_good_swig)
+		if(!have_good_swig)
+	        raise "Couldn't find required SWIG (minimum #{$swig_minimum_version})."
+		end
+	end
+	$found_good_swig = true
 	force_mkdir($src_dir)
     sh "#{$swig_cmd} #{options} #{$wx_cppflags} " + 
 		"-w401 -w801 -w515 -c++ -ruby " + 
@@ -260,16 +270,9 @@ def create_install_task
 end
 
 def create_internal_swig_tasks
-    if have_good_swig
-	    create_swig_tasks
-	    task :swig => all_cpp_files
-	    task :reswig => [:clean_src, :swig]
-	else
-	    task :swig do
-            puts "Couldn't find required SWIG (minimum #{$swig_minimum_version})."
-		end
-        task :reswig => :swig
-	end
+	create_swig_tasks
+	task :swig => all_cpp_files
+	task :reswig => [:clean_src, :swig]
 end
 
 def create_internal_non_swig_tasks
