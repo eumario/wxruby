@@ -17,7 +17,18 @@ $swig_cmd = "swig"
 $swig_options = " -fvirtual "
 $swig_minimum_version = '1.3.29'
 
-$debug_build = ENV['DEBUG'] ? true : false
+$debug_build = ENV['WXRUBY_DEBUG'] ? true : false
+$verbose_debug = ENV['WXRUBY_VERBOSE'] ? true : false
+
+if $debug_build
+	puts('Enabling DEBUG build')
+end
+
+if($verbose_debug)
+	puts('Enabling VERBOSE debugging output')
+	$verbose_flag = ' -DwxDEBUG=1 '
+end
+
 
 def have_good_swig
 	begin
@@ -237,7 +248,7 @@ def create_compile_task(base_name)
     end
     file(obj_file => cpp_file) do |t|
         force_mkdir($obj_dir)
-        sh "#{$cpp} -c #{$cppflags} #{out_arg}#{obj_file} #{cpp_file} "
+        sh "#{$cpp} -c #{$verbose_flag} #{$cppflags} #{out_arg}#{obj_file} #{cpp_file} "
     end
 end
 

@@ -9,8 +9,6 @@
 use_wx_config
 
 $extra_cppflags = '-Wno-unused-function '
-# for extensive debugging, uncomment this line:
-#$extra_cppflags += ' -DwxDEBUG=1 '
 
 # create a .so binary
 $extra_ldflags = '-shared'
