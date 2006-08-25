@@ -55,7 +55,6 @@ public:
   void SetImageList(wxImageList*  imageList , int  which ) ;
   bool SetItem(wxListItem&  info ) ;
   long SetItem(long  index , int  col , const  wxString& label , int  imageId = -1) ;
-  long SetItem(long  index , int  col , const wxString&  label , int  imageId = -1) ;
   void SetItemCount(long  count ) ;
   bool SetItemData(long  item , long  data ) ;
   bool SetItemImage(long  item , int  image , int  selImage ) ;
