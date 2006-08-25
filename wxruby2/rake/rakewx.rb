@@ -20,18 +20,13 @@ $swig_minimum_version = '1.3.29'
 $debug_build = ENV['DEBUG'] ? true : false
 
 def have_good_swig
-	begin
 		version = `#{$swig_cmd} -version`.strip.split("\n")[0]
-	rescue SystemCallError
-		puts('could not execute swig')
+    if not version
 		return false
 	end
-	if(!version || version.empty?)
-		puts("Doing slower check for SWIG #{$swig_minimum_version}")
-		version = `ruby swig/swigver.rb`
-	end
         ENV['SWIGVER'] = version
-	return (version >= "SWIG Version #{$swig_minimum_version}" && version < "SWIG Version 2")
+    return version >= "SWIG Version #{$swig_minimum_version}" &&
+           version < "SWIG Version 2"
 end
 
 def wx_config(opt)
@@ -265,17 +260,15 @@ def create_install_task
 end
 
 def create_internal_swig_tasks
-	if(have_good_swig)
+    if have_good_swig
 	    create_swig_tasks
 	    task :swig => all_cpp_files
 	    task :reswig => [:clean_src, :swig]
 	else
 	    task :swig do
-			puts("SWIG not available")
+            puts "Couldn't find required SWIG (minimum #{$swig_minimum_version})."
 		end
-	    task :reswig do
-			puts("SWIG not available")
-		end
+        task :reswig => :swig
 	end
 end
 
