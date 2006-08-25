@@ -396,6 +396,39 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 %apply wxCoord *OUTPUT { wxCoord * width , wxCoord * height , wxCoord * heightLine };
 %apply wxCoord *OUTPUT { wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading };
 
+%typemap(directorargout) ( int * x , int * y , int * descent, int * externalLeading ) {
+  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 2))
+  {
+    *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
+    *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
+    if(($3 != NULL) && RARRAY(result)->len >= 3)
+      *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
+    if(($4 != NULL) && RARRAY(result)->len >= 4)
+      *$4 = ($*4_ltype)NUM2INT(rb_ary_entry(result,3));
+  }
+}
+
+%typemap(directorargout) ( wxCoord * width , wxCoord * height , wxCoord * heightLine ) {
+  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 2))
+  {
+    *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
+    *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
+    if(($3 != NULL) && RARRAY(result)->len >= 3)
+      *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
+  }
+}
+%typemap(directorargout) ( wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading ) {
+  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 2))
+  {
+    *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
+    *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
+    if(($3 != NULL) && RARRAY(result)->len >= 3)
+      *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
+    if(($4 != NULL) && RARRAY(result)->len >= 4)
+      *$4 = ($*4_ltype)NUM2INT(rb_ary_entry(result,3));
+  }
+}
+
 ##############################################################
 
 %typemap(in) wxSystemColour {
