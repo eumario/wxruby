@@ -63,7 +63,6 @@ task :html_class_docs => all_class_docs
 # classes which are not yet ported to WxRuby. The Textile source file
 # for this task (doc/textile/index.txtl) is hand-written, not generated
 # from Textile sources.
-desc 'Build the categorised index page for the class documentation'
 file 'doc/html/index.html' => [ 'doc/textile/index.txtl' ] do | t | 
   if not File.exists?( DOC_OUTPUT_DIR )
     Dir.mkdir( DOC_OUTPUT_DIR )
@@ -74,7 +73,7 @@ file 'doc/html/index.html' => [ 'doc/textile/index.txtl' ] do | t |
   gen.output(t.name)
 end
 
-desc 'Copy the wxruby.css file into the HTML output directory'
+# Copy the wxruby.css file into the HTML output directory
 file 'doc/html/wxruby.css' => 'doc/wxruby.css' do
   cp 'doc/wxruby.css', 'doc/html/wxruby.css'
 end
