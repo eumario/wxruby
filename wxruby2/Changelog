@@ -1,3 +1,4 @@
+- Added task descriptions to rakefiles, so rake --tasks works (Alex Fenton)
 - Clean up rakefile SWIG detection to give clearer error messages (Kevin Smith)
 - Fix name of Image#find_handler_mime (Roy Sutton)
 - Removed duplicate declarations in wxTextCtrl.h & wxListCtrl.h (Roy Sutton)
