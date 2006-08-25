@@ -1,3 +1,5 @@
+- Added support for DC#get_text_extent (Kevin Smith)
+- Fix GetTextExtent handling by adding directorout typemap (Roy Sutton)
 - Fix rakewx.rb SWIG version detection (Robin Stocker)
 - Minor gemspec changes (domain, email, spelling) (Kevin Smith)
 - Added more wxTextCtrl- and wxTextAttr-related constants (Sean Long)
