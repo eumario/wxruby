@@ -7,7 +7,7 @@ class TestPanel < Wx::Panel
         
         sampleList = %w(one two three four five six seven eight nine ten eleven twelve thirteen fourteen)
         
-        Wx::StaticText.new(self, -1, "This example uses the wxCheckListBox control.", Wx::DEFAULT_POSITION, Wx::Size.new(45,15))
+        Wx::StaticText.new(self, -1, "This example uses the wxCheckListBox control.", Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE)
         
         lb = Wx::CheckListBox.new(self, 60, Wx::Point.new(80,50), Wx::Size.new(80,120), sampleList)
         evt_listbox(60) {|event| on_evt_listbox(event)}
