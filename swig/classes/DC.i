@@ -15,7 +15,6 @@
 %ignore wxDC::EnableCache;
 %ignore wxDC::StartPage;
 
-%ignore GetTextExtent;
 %ignore GetMultiLineTextExtent;
 
 // redundant with good typemaps
