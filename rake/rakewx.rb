@@ -18,11 +18,17 @@ $swig_options = " -fvirtual "
 $swig_minimum_version = '1.3.29'
 
 $debug_build = ENV['WXRUBY_DEBUG'] ? true : false
+$release_build = ENV['WXRUBY_RELEASE'] ? true : false
 $verbose_debug = ENV['WXRUBY_VERBOSE'] ? true : false
+
+if $release_build
+	puts('Enabling RELEASE build')
+end
 
 if $debug_build
 	puts('Enabling DEBUG build')
 end
+
 
 if($verbose_debug)
 	puts('Enabling VERBOSE debugging output')
@@ -44,11 +50,17 @@ def have_good_swig
            version < "SWIG Version 2"
 end
 
+
 def wx_config(opt)
-    if $debug_build
-      debug_mode = '--debug=yes'
-    end
-    return `wx-config #{debug_mode} #{opt}`.strip + " "
+  if $debug_build
+    debug_mode = '--debug=yes'
+  elsif $release_build
+    debug_mode = '--debug=no'
+  else
+    debug_mode = '' # go with default
+  end
+
+  `wx-config #{debug_mode} #{opt}`.strip + " "
 end
 
 def use_wx_config
