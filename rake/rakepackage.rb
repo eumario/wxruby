@@ -51,7 +51,8 @@ end
 # creates 'gem', 'gem_osx', 'gem_linux' and 'gem_mswin' tasks
 def create_gem_tasks
   # basic binary gem task for current platform
-  task :gem do 
+  desc "Build a binary RubyGem for the current platform"
+  task :gem => [ :default ]do 
     this_gemspec = $base_gemspec.dup()    
     this_gemspec.instance_eval do 
       self.platform = Gem::Platform::CURRENT
