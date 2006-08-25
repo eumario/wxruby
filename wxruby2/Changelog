@@ -1,3 +1,4 @@
+- Fix name of Image#find_handler_mime (Roy Sutton)
 - Removed duplicate declarations in wxTextCtrl.h & wxListCtrl.h (Roy Sutton)
 - Added support for DC#get_text_extent (Kevin Smith)
 - Fix GetTextExtent handling by adding directorout typemap (Roy Sutton)
