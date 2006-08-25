@@ -187,7 +187,7 @@ order) by 1 until an unused colour is found or the colour space exhausted.
 	 * \param const wxString&   
 	*/
 
-  static wxImageHandler* FindHandler(const wxString&  mimetype ) ;
+  static wxImageHandler* FindHandlerMime(const wxString&  mimetype ) ;
 	/**
 	 * \brief Iterates all registered wxImageHandler objects, and returns a string containing file extension masks
 suitable for passing to file open/save dialog boxes. 
