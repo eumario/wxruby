@@ -71,7 +71,7 @@ public:
 
   // override pure virtuals in a base class
   virtual int Append(const wxString&   item );
-  //virtual int Append(const wxString&   item , void * clientData );
+  virtual int Append(const wxString&   item , void * clientData );
   virtual int Append(const wxString&   item , wxClientData * clientData );
   virtual void Append(const wxArrayString&  strings );
   virtual void Clear();
@@ -84,10 +84,10 @@ public:
   virtual wxString GetString(int  n ) const;
   virtual wxString GetStringSelection() const;
   virtual void Insert(const wxString&   item , int  pos );
-  //virtual int Insert(const wxString&   item , int  pos , void * clientData );
+  virtual int Insert(const wxString&   item , int  pos , void * clientData );
   virtual void Insert(const wxString&   item , int  pos , wxClientData * clientData );
   virtual bool IsEmpty() const;
-  //virtual void SetClientData(int  n , void * data ) ;
+  virtual void SetClientData(int  n , void * data ) ;
   virtual void SetClientObject(int  n , wxClientData * data ) ;
   virtual void SetSelection(int  n );
   virtual void SetString(int  n , const wxString&   string );

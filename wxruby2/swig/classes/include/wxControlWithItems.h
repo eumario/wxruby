@@ -10,8 +10,7 @@ class wxControlWithItems : public wxControl
 public:
 
   virtual int Append(const wxString&   item )  = 0;
-// this causes problems for swig directors
-//  virtual int Append(const wxString&   item , void * clientData )  = 0;
+  virtual int Append(const wxString&   item , void * clientData )  = 0;
   virtual int Append(const wxString&   item , wxClientData * clientData )  = 0;
   virtual void Append(const wxArrayString&  strings )  = 0;
   virtual void Clear()  = 0;
@@ -24,8 +23,7 @@ public:
   virtual wxString GetString(int  n ) const = 0;
   virtual wxString GetStringSelection() const = 0;
   virtual int Insert(const wxString&   item , int  pos ) = 0;
-// this causes problems for swig directors
-//  virtual int Insert(const wxString&   item , int  pos , void * clientData ) = 0;
+  virtual int Insert(const wxString&   item , int  pos , void * clientData ) = 0;
   virtual int Insert(const wxString&   item , int  pos , wxClientData * clientData ) = 0;
   virtual bool IsEmpty() const = 0;
   void SetClientData(int  n , void * data ) = 0;
