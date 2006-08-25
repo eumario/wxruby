@@ -123,13 +123,10 @@ public:
     //virtual void MarkDirty() = 0;
     //virtual void DiscardEdits() = 0;
 
-    virtual void SetMaxLength(unsigned long ) { }
-
     //virtual void WriteText(const wxString& text) = 0;
     //virtual void AppendText(const wxString& text) = 0;
 
     virtual bool EmulateKeyPress(const wxKeyEvent& event);
-    virtual bool SetStyle(long start, long end, const wxTextAttr& style);
     virtual bool GetStyle(long position, wxTextAttr& style);
     virtual bool SetDefaultStyle(const wxTextAttr& style);
     virtual const wxTextAttr& GetDefaultStyle() const;
@@ -137,11 +134,6 @@ public:
     //virtual long XYToPosition(long x, long y) const = 0;
     //virtual bool PositionToXY(long pos, long *x, long *y) const = 0;
     //virtual void ShowPosition(long pos) = 0;
-
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const;
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
-                                            wxTextCoord *col,
-                                            wxTextCoord *row) const;
 
     //virtual void Copy() = 0;
     //virtual void Cut() = 0;

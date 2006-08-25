@@ -1,3 +1,4 @@
+- Removed duplicate declarations in wxTextCtrl.h & wxListCtrl.h (Roy Sutton)
 - Added support for DC#get_text_extent (Kevin Smith)
 - Fix GetTextExtent handling by adding directorout typemap (Roy Sutton)
 - Fix rakewx.rb SWIG version detection (Robin Stocker)
