@@ -1,3 +1,4 @@
+- Fix rakewx.rb SWIG version detection (Robin Stocker)
 - Minor gemspec changes (domain, email, spelling) (Kevin Smith)
 - Added more wxTextCtrl- and wxTextAttr-related constants (Sean Long)
 - Overhauled wxTextCtrl.h to match actual wx API (Sean Long)
