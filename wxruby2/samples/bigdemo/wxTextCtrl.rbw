@@ -26,10 +26,10 @@ class TestPanel < Wx::Panel
         t1.set_insertion_point(0)
         @tc1 = t1
         evt_text(t1.get_id()) {|event| on_evt_text(event)}
-        #evt_char {|event| on_evt_char(event)}
-        evt_set_focus {|event| on_set_focus(event)}
-        evt_kill_focus {|event| on_kill_focus(event)}
-        #evt_window_destroy {|event| on_window_destroy(event)}
+        t1.evt_char {|event| on_evt_char(event)}
+        t1.evt_set_focus {|event| on_set_focus(event)}
+        t1.evt_kill_focus {|event| on_kill_focus(event)}
+        #t1.evt_window_destroy {|event| on_window_destroy(event)}
         
         l2 = Wx::StaticText.new(self, -1, "Password")
         t2 = Wx::TextCtrl.new(self, -1, "", Wx::DEFAULT_POSITION, Wx::Size.new(125,-1), Wx::TE_PASSWORD)
@@ -96,7 +96,7 @@ class TestPanel < Wx::Panel
     end
     
     def on_evt_char(event)
-        @log.write_text("evt_char: ")# + event.get_key_code())
+        @log.write_text("evt_char: " + event.get_key_code().to_s)
         event.skip()
     end
     
