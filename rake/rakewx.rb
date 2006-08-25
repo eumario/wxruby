@@ -263,6 +263,7 @@ def install_lib(filename)
 end
 
 def create_install_task
+    desc "Install the WxRuby library to Ruby's lib directories"
     task :install => [:default] do |t|
 	  install_lib("wx.rb")
 	  install_lib($dl_lib)
@@ -271,7 +272,9 @@ end
 
 def create_internal_swig_tasks
 	create_swig_tasks
+    desc "Generate C++ source and header files using SWIG"
 	task :swig => all_cpp_files
+    desc "Force generate C++ source and header files using SWIG"
 	task :reswig => [:clean_src, :swig]
 end
 
