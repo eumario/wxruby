@@ -1,3 +1,4 @@
+- Added default App#on_assert to wx.rb (Kevin Smith)
 - Fixes to ControlWithItem, ComboBox;samples in bigdemo.rb (Roy Sutton)
 - Add WXRUBY_VERBOSE build environment variable (Kevin Smith)
 - Rename DEBUG build environment variable to WXRUBY_DEBUG (Kevin Smith)
