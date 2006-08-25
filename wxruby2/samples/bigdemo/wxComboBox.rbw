@@ -9,15 +9,15 @@ class TestComboBox < Wx::Panel
         
         Wx::StaticText.new(self, -1, "This example uses the wxComboBox control.", Wx::Point.new(8,10))
         
-        Wx::StaticText.new(self, -1, "Select one:", Wx::Point.new(15,50), Wx::Size.new(75,18))
-        cb = Wx::ComboBox.new(self, 500, "default value", Wx::Point.new(90,50), Wx::Size.new(95,-1), 
+        Wx::StaticText.new(self, -1, "Select one:", Wx::Point.new(15,50))
+        cb = Wx::ComboBox.new(self, 500, "default value", Wx::Point.new(90,50), Wx::DEFAULT_SIZE,
                                 sampleList, Wx::CB_DROPDOWN)
         
         evt_combobox(cb.get_id()) {|event| on_combobox(event)}
         evt_text(cb.get_id()) {|event| on_evt_text(event)}
         evt_text_enter(cb.get_id()) {|event| on_evt_text_enter(event)}
-        #evt_set_focus(cb.get_id()) {|event| on_set_focus(event)}
-        #evt_kill_focus(cb.get_id()) {|event| on_kill_focus(event)}
+        cb.evt_set_focus {|event| on_set_focus(event)}
+        cb.evt_kill_focus {|event| on_kill_focus(event)}
         
         cb.append("foo",  "This is some client data for this item")
         
@@ -33,16 +33,16 @@ class TestComboBox < Wx::Panel
     end
     
     def on_evt_text_enter(event)
-        @log.write_text("evt_text_enter: does this work?")
+        @log.write_text("evt_text_enter: " + event.get_string())
     end
     
     def on_set_focus(evt)
-        log.write("OnSetFocus")
+        @log.write_text("OnSetFocus")
         evt.skip()
     end
     
     def on_kill_focus(evt)
-        log.write("OnKillFocus")
+        @log.write_text("OnKillFocus")
         evt.skip()
     end
 end

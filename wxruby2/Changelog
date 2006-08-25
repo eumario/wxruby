@@ -1,3 +1,4 @@
+- Fixes to ControlWithItem, ComboBox;samples in bigdemo.rb (Roy Sutton)
 - Add WXRUBY_VERBOSE build environment variable (Kevin Smith)
 - Rename DEBUG build environment variable to WXRUBY_DEBUG (Kevin Smith)
 - Added task descriptions to rakefiles, so rake --tasks works (Alex Fenton)
