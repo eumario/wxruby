@@ -1,6 +1,13 @@
 require 'wx'
 
 class TestToolBar < Wx::Frame
+    # returns a Bitmap icon object
+    def xpm_bitmap(base_name)
+
+      xpm_file = File.join( File.dirname(__FILE__), 'icons', base_name )
+      Wx::Bitmap.new(xpm_file, Wx::BITMAP_TYPE_XPM)
+    end
+
     def initialize(parent, log)
         super(parent, -1, "Test ToolBar", Wx::DEFAULT_POSITION, Wx::Size.new(500,300))
         @log = log
@@ -12,27 +19,28 @@ class TestToolBar < Wx::Frame
         tb = create_tool_bar(Wx::TB_HORIZONTAL | Wx::NO_BORDER | Wx::TB_FLAT | Wx::TB_TEXT)
         
         create_status_bar()
-        tb.add_tool(10, "New", Wx::Bitmap.new("./icons/new.xpm"),"Long help for New")
+        tb.add_tool(10, "New", xpm_bitmap('new.xpm'), "Long help for New")
         evt_tool(10) {|event| on_tool_click(event)}
         evt_tool_rclicked(10) {|event| on_tool_rclick(event)}
         
-        tb.add_tool(20, "Open", Wx::Bitmap.new("./icons/open.xpm"), "Long help for Open")
+        tb.add_tool(20, "Open", xpm_bitmap('open.xpm'), "Long help for Open")
         evt_tool(20) {|event| on_tool_click(event)}
         evt_tool_rclicked(20) {|event| on_tool_rclick(event)}
         
         tb.add_separator()
         
-        tb.add_tool(30, "Copy", Wx::Bitmap.new("./icons/copy.xpm"), "Long help for Copy")
+        tb.add_tool(30, "Copy", xpm_bitmap('copy.xpm'), "Long help for Copy")
         evt_tool(30) {|event| on_tool_click(event)}
         evt_tool_rclicked(30) {|event| on_tool_rclick(event)}
         
-        tb.add_tool(40, "Paste", Wx::Bitmap.new("./icons/paste.xpm"), "Long help for Paste")
+        tb.add_tool(40, "Paste", xpm_bitmap('paste.xpm'), "Long help for Paste")
         evt_tool(40) {|event| on_tool_click(event)}
         evt_tool_rclicked(40) {|event| on_tool_rclick(event)}
         
         tb.add_separator()
         
-        tb.add_check_tool(50, "", Wx::Bitmap.new("./icons/tog1.xpm"), Wx::NULL_BITMAP, "Toggle this")
+        tb.add_check_tool(50, "", xpm_bitmap('tog1.xpm'),
+                          Wx::NULL_BITMAP, "Toggle this")
         evt_tool(50) {|event| on_tool_click(event)}
         
         evt_tool_enter(-1) {|event| on_tool_enter(event)}
