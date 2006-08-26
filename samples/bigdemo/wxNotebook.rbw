@@ -17,13 +17,17 @@ class NBPanel < Wx::Panel
 end
 
 class TestNB < Wx::Notebook
+    def demo_file(base_name)
+      File.join( File.dirname(__FILE__), base_name )
+    end
+
     def initialize(parent, id, log)
         super(parent, id, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::NB_BOTTOM)
         @log = log
-        
-        load "ColorPanel.rbw"
-        load "wxScrolledWindow.rbw"
-        load "GridSimple.rbw"
+        File
+        load demo_file("ColorPanel.rbw")
+        load demo_file("wxScrolledWindow.rbw")
+        load demo_file("GridSimple.rbw")
         #load "wxListCtrl.rbw"
         
         # Show how to put an image on one of the notebook tabs,
