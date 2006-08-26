@@ -17,15 +17,18 @@ $swig_cmd = "swig"
 $swig_options = " -fvirtual "
 $swig_minimum_version = '1.3.29'
 
+# force building against either a release build or debug build of
+# wxWidgets. Only one should be used; if neither is specified, the
+# default wx configuration will be used. Use of these options depends on
+# there being an appropriately compiled version of wxWidgets available.
 $debug_build = ENV['WXRUBY_DEBUG'] ? true : false
 $release_build = ENV['WXRUBY_RELEASE'] ? true : false
+
 $verbose_debug = ENV['WXRUBY_VERBOSE'] ? true : false
 
 if $release_build
 	puts('Enabling RELEASE build')
-end
-
-if $debug_build
+elsif $debug_build
 	puts('Enabling DEBUG build')
 end
 
@@ -52,10 +55,10 @@ end
 
 
 def wx_config(opt)
-  if $debug_build
-    debug_mode = '--debug=yes'
-  elsif $release_build
+  if $release_build
     debug_mode = '--debug=no'
+  elsif $debug_build
+    debug_mode = '--debug=yes'
   else
     debug_mode = '' # go with default
   end
