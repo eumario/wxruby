@@ -51,6 +51,7 @@ class MinimalFrame < Wx::Frame
     about_dlg = Wx::MessageDialog.new( self, msg, 'About Minimal',
                                        Wx::OK|Wx::ICON_INFORMATION )
     about_dlg.show_modal()
+	about_dlg.destroy()
   end
 
   # utility function to find an icon relative to this ruby script
@@ -70,6 +71,11 @@ class MinimalApp < Wx::App
     # required
     frame.show()
   end
+  
+  def on_assert(file, line, condition, message)
+  	puts("ASSERT: #{file} #{line}: #{condition}; #{message}")
+	raise
+  end
 end
 
 # ensure handlers for xpm images are loaded
@@ -79,4 +85,3 @@ Wx::init_all_image_handlers()
 app = MinimalApp.new
 # ... and run the application
 app.main_loop()
-
