@@ -208,7 +208,8 @@ class WxRubyDemo < Wx::Frame
         @demoID = 6000
         @otherWin = nil
         
-        icon = Wx::Icon.new("./icons/mondrian.xpm")
+        icon_file = File.join(File.dirname(__FILE__), 'icons', 'mondrian.xpm')
+        icon = Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_XPM)
         set_icon(icon)
         
         evt_idle {|event| on_idle(event)}
@@ -383,13 +384,16 @@ class WxRubyDemo < Wx::Frame
             @nb.refresh()
             @window = nil       
         else
-            if File.exist?(itemText + ".rbw")
+          demo_file = File.join( File.dirname(__FILE__), itemText + '.rbw')
+            if File.exist?(demo_file)
                 Wx::log_message("Running Demo: " + itemText + ".rbw")
-                get_demo_file(itemText + ".rbw")
-                # I use load() here because it allows the user to modify the underlying file for each sample, so that each time
-                # They run it any changes made will be reflected without having to restart the demo.
+                get_demo_file(demo_file)
+                # I use load() here because it allows the user to modify
+                # the underlying file for each sample, so that each time 
+                # They run it any changes made will be reflected without
+                # having to restart the demo. 
                 begin
-                    load itemText + ".rbw"
+                    load demo_file
                     set_overview(itemText + " Overview", Demo::overview)
                     @tree.refresh()
                     @nb.refresh()
@@ -513,8 +517,9 @@ class WxRubyDemo < Wx::Frame
     end
     
     def show_tip()
-        tp = Wx::create_file_tip_provider("tips.txt", rand(6))
-        Wx::show_tip(self, tp)
+      tips_file = File.join(File.dirname(__FILE__), 'tips.txt')
+      tp = Wx::create_file_tip_provider( tips_file, rand(6) )
+      Wx::show_tip(self, tp)
     end
     
     def on_demo_menu(childItem)
@@ -537,15 +542,16 @@ class WxRubyDemo < Wx::Frame
     end
 end
 
-class SimpleApp < Wx::App
+class DemoApp < Wx::App
   def on_init
-    frame = WxRubyDemo.new("Minimal wxRuby App",Wx::DEFAULT_POSITION, Wx::Size.new(700, 400))
+    frame = WxRubyDemo.new("WxRuby BIG combined demo",
+                           Wx::DEFAULT_POSITION, 
+                           Wx::Size.new(700, 400))
 
-    frame.show(TRUE)
-
+    frame.show(true)
   end
 end
 
 Wx::init_all_image_handlers
-test = SimpleApp.new
-test.main_loop
+demo = DemoApp.new
+demo.main_loop
