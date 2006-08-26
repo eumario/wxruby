@@ -1,3 +1,4 @@
+- Added WXRUBY_RELEASE build option (Alex Fenton/Kevin Smith)
 - Enabled focus event handlers in bigdemo/wxTextCtrl.rb (Roy Sutton)
 - Added default App#on_assert to wx.rb (Kevin Smith)
 - Fixes to ControlWithItem, ComboBox;samples in bigdemo.rb (Roy Sutton)
