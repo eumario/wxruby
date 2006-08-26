@@ -30,7 +30,9 @@ class ButtonPanel < Wx::Panel
     
     def on_button(event)
         modName = $buttonDefs[event.get_id()][0]
-        load modName + ".rbw"
+        mod_file = File.join(File.dirname(__FILE__), modName + ".rbw")
+        load mod_file
+        
         frame = GridDemo::TestFrame.new(nil, @log)
         frame.show()
     end
