@@ -8,5 +8,6 @@
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
+%import "include/wxTopLevelWindow.h"
 
 %include "include/wxDialog.h"
