@@ -1,3 +1,4 @@
+- Fixed crashes due to set_sizer ownership (Kevin Smith)
 - Remove dangerous and misleading DC#free method (Kevin Smith)
 - Fixed crash-on-exit in minimal.rb by changing Dialog superclass (Kevin Smith)
 - Added WXRUBY_RELEASE build option (Alex Fenton/Kevin Smith)
