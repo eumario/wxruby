@@ -1075,10 +1075,7 @@ parameter if the  \/ is non-NULL and   otherwise.
 	 * \param bool   
 	*/
 
-	// A call to set_sizer passes ownership to C++
-	%apply SWIGTYPE *DISOWN {wxSizer*  sizer};
   void SetSizer(wxSizer*  sizer , bool  deleteOld = true) ;
-	%clear wxSizer*  sizer;
 
 	/**
 	 * \brief The same as  , except it also sets the size hints
