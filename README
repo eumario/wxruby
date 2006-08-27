@@ -1,6 +1,6 @@
 README for wxruby2
 Version 0.0.33
-2006-08-20
+2006-08-26
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -8,10 +8,10 @@ It is released under a permissive MIT-style license
 (see the LICENSE file for details).
 
 *** NOTE ***
-This version is VERY UNSTABLE. At least on some platforms, it 
+This version is NOT VERY RELIABLE. At least on some platforms, it 
 crashes very often. Hopefully within a couple more releases 
 it will be stable again (at least as good as it was in 0.0.30, 
-if not better).
+if not better). The API, however, is already pretty stable.
 ************
 
 ------------------------FAQ---------------------------
@@ -24,10 +24,10 @@ if not better).
    other toolkit has:
    
      - Cross-platform (MSWindows, Mac OS X, Linux)
-	 - Native widgets when possible
-	 - Provides a wide selection of widgets
-	 - Mature foundation (wxWidgets has been around for over 10 years)
-	 - Simple license that is compatible with proprietary and Free Software 
+     - Native widgets when possible
+     - Provides a wide selection of widgets
+     - Simple license that is compatible with proprietary and Free Software 
+     - Mature foundation (wxWidgets has been around for over 10 years)
 
    The really big feature is native widgets. The only other cross-platform 
    toolkits that use native widgets are either limited (Tk) or expensive if 
@@ -102,7 +102,11 @@ if not better).
 - I am getting an error trying to compile wxruby2
 
   Please double-check the requirements. You may be using the wrong 
-  version of SWIG or some other tool.
+  version of SWIG, wxWidgets, or some other tool. 
+  
+  If you need help, please ask your question on the wxruby mailing list 
+  (see the link at http://wxruby.org). Next best would be posting a 
+  support request to the 
   
 - I am getting an error trying to run any wxruby2 application, such as 
   the samples that are included in the gem.
@@ -124,6 +128,10 @@ if not better).
   are limited in the amount of time they can dedicate to the project. We are 
   always looking for more volunteers to help code, test, document, manage 
   the bug list, handle publicity, or do other necessary chores.
+  
+  Wrapping wx is a big project that requires a wide variety of skills. As of 
+  August 2006, the wxRuby project has about 30,000 lines of code, including 
+  ruby, C++, and SWIG scripts. If we weren't using SWIG it would be far bigger.
   
 
 
