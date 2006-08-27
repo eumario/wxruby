@@ -1,3 +1,4 @@
+- Deleted redundant code in Events.i (Alex Fenton)
 - Allow bigdemo to be run from other dirs, fix icons and title (Alex Fenton)
 - Fixed crashes due to set_sizer ownership (Kevin Smith)
 - Remove dangerous and misleading DC#free method (Kevin Smith)
