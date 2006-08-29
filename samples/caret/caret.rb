@@ -164,8 +164,6 @@ class MyCanvas < ScrolledWindow
       dc.draw_text( line, @x_margin, @y_margin + y * @height_char )
     end
 
-    dc.free
-
     if caret
       caret.show
     end
