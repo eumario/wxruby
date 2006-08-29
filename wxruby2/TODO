@@ -1,6 +1,9 @@
 High priority TODO items:
 -------------------------
 
+Visible Bugs
+------------
+
 - Fix crashes when garbage collection happens
   * First, make sure all these classes have directors:
 	BusyCursor.h - should be polymorphic but compiler complains
@@ -20,6 +23,21 @@ High priority TODO items:
 	TextAttr.h
 	WindowDisabler.h
 
+- Other crashes: MDI
+
+- Other crashes (OS X): ColourDialog
+
+- SashWindows sashes not displaying until pulled (Linux)
+
+- Splitters in bigdemo sometimes disappear when loading source (OS X)
+
+- Truncation/missing widgets in bigdemo (OS X)
+
+- Caret sample not working with unicode builds (OS X)
+
+Underlying SWIG & Build system problems
+---------------------------------------
+
 - Make sure all cases of (int,array) that are typemapped to a single
   parameter have an equivalent wxArrayString (or whatever), to work 
   around a swig bug that results in uninitialized parameters.
@@ -30,16 +48,11 @@ High priority TODO items:
 - Make sure we return an existing Ruby object whenever a wrapped wx object
   is returned
   
-- Eliminate massive duplication between swig/Events.i and 
-  swig/classes/EvtHandler.i (probably by deleting what's in Event.i).
-  Probably also should rename Events.i to avoid confusion with 
-  swig/classes/Event.i.
+- Rename Events.i to avoid confusion with swig/classes/Event.i.
 
 - Fix all "can't return" warnings for non-pointer objects
 
 - Switch from CVS to darcs? (in progress)
-
-- Get bigdemo working
 
 - Add detection of "initialize" methods to renamer.rb, and
   rename them to "init"
@@ -61,23 +74,20 @@ should use local-encoding, UTF-8, or some other encoding)
 - Make sure samples/caret/caret.rb About box works (with copyright character)
 This should be done after the unicode fixes.
 
-- Start building gems
-
 - Should we automatically call init_all_image_handlers?
 
 - Clean up fixevents.rb code
 
 - Eliminate the list in parents.rb and just build the list automatically 
   from the wx header files
-
-
+  
+- Create rake target "version" that will update the version 
+  in the README, and the runtime version string
 
 
 ==================================================
 NOTE: The rest of this file is WAY out of date. 
 Don't pay much attention to it.
-
-
 
 - Remove memory debug output
 
@@ -96,11 +106,6 @@ Don't pay much attention to it.
 
 - Compiling DC causes a ton of warnings, due to SWIG not 
   initializing all the variables
-  
-- Create rake target "version" that will update the version 
-  in the README, and the runtime version string
-  
-- Add support for statically linking wxWidgets library
 
 - Add aliases like label and label= for get_label and set_label
 
