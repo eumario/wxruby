@@ -1,3 +1,5 @@
+- Updated TODO, removed completed items, added known errors (Alex Fenton)
+- Fixed crasher in caret.rb sample due to deleted method (Alex Fenton)
 - Deleted redundant code in Events.i (Alex Fenton)
 - Allow bigdemo to be run from other dirs, fix icons and title (Alex Fenton)
 - Fixed crashes due to set_sizer ownership (Kevin Smith)
