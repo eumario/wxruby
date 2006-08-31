@@ -57,7 +57,7 @@ extern swig_class cWxMoveEvent;
 extern swig_class cWxListEvent;
 extern swig_class cWxWizardEvent;
 extern swig_class cWxSashEvent;
-
+extern swig_class cWxActivateEvent;
 
 static const wxEventType *calendarEvents[] =
 {
@@ -264,6 +264,13 @@ static const wxEventType *scrollWinEvents[] =
   (const wxEventType *)0
 };
 
+static const wxEventType *activateEvents[] =
+{
+  &wxEVT_ACTIVATE,
+  &wxEVT_ACTIVATE_APP,
+  (const wxEventType *)0
+};
+
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
 class wxRbCallback : public wxObject 
@@ -326,6 +333,8 @@ public:
             cEvent = cWxScrollWinEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxWizardEvent)))
             cEvent = cWxWizardEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxActivateEvent)))
+            cEvent = cWxActivateEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
             cEvent = cWxSashEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
@@ -994,6 +1003,16 @@ static VALUE evt_scrollwin_thumbrelease(int argc, VALUE *argv, VALUE self)
 {
     return internal_evt_no_parameters(argc, argv, self, wxEVT_SCROLLWIN_THUMBRELEASE);
 }
+
+static VALUE evt_activate(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_ACTIVATE);
+}
+
+static VALUE evt_activate_app(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_ACTIVATE_APP);
+}
 // TODO:  Add for ListEvent types?  Is this needed?
 
 %}
@@ -1118,6 +1137,8 @@ static VALUE evt_scrollwin_thumbrelease(int argc, VALUE *argv, VALUE self)
 	rb_define_method(cWxEvtHandler.klass, "evt_wizard_finished", VALUEFUNC(evt_wizard_finished), -1);
 	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged", VALUEFUNC(evt_sash_dragged), -1);
 	rb_define_method(cWxEvtHandler.klass, "evt_sash_dragged_range", VALUEFUNC(evt_sash_dragged_range), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_activate", VALUEFUNC(evt_activate), -1);
+	rb_define_method(cWxEvtHandler.klass, "evt_activate_app", VALUEFUNC(evt_activate_app), -1);
 
 %}
 
