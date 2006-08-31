@@ -18,6 +18,8 @@ end
 
 Wx = Wxruby2
 
+Wx::WXRUBY_VERSION    = '0.0.34'
+Wx::WXWIDGETS_VERSION = '2.6.3'
 
 class Wx::App
 	def on_assert(file, line, condition, message)

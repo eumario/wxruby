@@ -45,7 +45,7 @@ class MinimalFrame < Wx::Frame
   # show an 'About' dialog
   def on_about
     msg =  sprintf("This is the About dialog of the minimal sample.\n" \
-                   "Welcome to %s", Wx::VERSION_STRING)
+                   "Welcome to wxRuby, version %s", Wx::WXRUBY_VERSION)
 
     # create a simple message dialog with OK button
     about_dlg = Wx::MessageDialog.new( self, msg, 'About Minimal',
