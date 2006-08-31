@@ -164,7 +164,7 @@ class WxWLatexParser < LatexParser
   def func_end
     @ret_value, @func_name, @params = nil, nil, nil
 
-    # if no param function
+    # if zero-param function
     if buffer.empty?
       buffer << ")" 
       return
@@ -178,7 +178,14 @@ class WxWLatexParser < LatexParser
 
     buffer.gsub!(/\n/, '')
     new_buffer, *rest  = buffer.split(',')
-    indent_point = ( new_buffer =~ /\(/ ) - 1
+    indent_point = new_buffer.index('(') - 2
+
+    # reduce indent, adjusting by link href if the return value has a
+    # Link on it.
+    if new_buffer =~ /^ "(?:\w+)"(\:[^ ]+)/
+      indent_point -= $1.length
+    end
+
     while rest && param = rest.shift
       new_buffer << ', '
       # if adding a param would make it longer than a "line"
