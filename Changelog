@@ -1,3 +1,8 @@
+- Small fix to parameter list indenting in wx_latexparser.rb (Alex Fenton)
+- Fixed images.rb so it can be run from outside dir, added notes (Alex Fenton)
+- Fixed crasher in controls.rb due to deleted DC#free method (Alex Fenton)
+- Added licensing info to all samples (Alex Fenton/Kevin Smith)
+- Added SAMPLES-LICENSE.TXT (Kevin Smith/Alex Fenton)
 - Added ActivationEvent class, with a sample (Alex Fenton)
 
 ====0.0.34 tag  on 2006-08-30 included all of this:===
