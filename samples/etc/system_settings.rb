@@ -1,3 +1,6 @@
+# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
+
 require 'wx'
 
 # This example lists the various system settings that WxRuby knows

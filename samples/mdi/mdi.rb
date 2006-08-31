@@ -1,10 +1,10 @@
-#! /usr/bin/env ruby
+# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
+
+require 'wx'
 
 # MDI sample for wxRuby
 # slapped together quickly by Kevin Smith
-
-
-require 'wx'
 
 ID_NEXT = 1
 ID_PREVIOUS = 2
