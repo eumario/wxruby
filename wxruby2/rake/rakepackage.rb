@@ -12,8 +12,8 @@ require 'rake/packagetask'
 # :gem_linux - build a binary gem for Linux (-i686)
 
 $base_gemspec = Gem::Specification.new do | spec |
-  spec.name = 'wxruby'
-  spec.version = '1.9.0'
+  spec.name = 'wxruby2-preview'
+  spec.version = '0.0.34'
 
   spec.require_path = 'lib'
   spec.summary  = 'Ruby interface to the wxWidgets GUI library'
