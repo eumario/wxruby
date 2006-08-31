@@ -1,3 +1,5 @@
+- Added ActivationEvent class, with a sample (Alex Fenton)
+
 ====0.0.34 tag  on 2006-08-30 included all of this:===
 - Changed gemspec to "wxruby2-preview" version 0.0.34 (Alex Fenton)
 - Added Wx::WXRUBY_VERSION and Wx::WXWIDGETS_VERSION (Alex Fenton)
