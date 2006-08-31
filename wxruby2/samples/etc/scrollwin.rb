@@ -1,6 +1,10 @@
-# Example demonstrating the use of Wx::ScrolledWindow and the ScrollWinEvents
+# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
 
 require 'wx'
+
+# Example demonstrating the use of Wx::ScrolledWindow and the
+# ScrollWinEvents
 
 class ScrollFrame < Wx::Frame
   def initialize(title)

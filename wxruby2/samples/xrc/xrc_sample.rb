@@ -1,8 +1,9 @@
+# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
+
 require 'wx'
 
-#
 # Basic Frame Class. This creates the dialog window
-#
 class SimpleFrame < Wx::Frame 
 
 	FILE_DIALOG = 1001

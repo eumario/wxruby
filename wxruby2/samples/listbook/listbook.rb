@@ -1,4 +1,8 @@
+# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
+
 require 'wx'
+
 # This sample demonstrates the use of the listbook class.
 # NB: This sample doesn't currently work on Linux (21/08/2006)
 
