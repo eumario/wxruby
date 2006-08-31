@@ -382,7 +382,6 @@ puts("FIXME: Not yet compatible with swig 1.3.29 (2006-04-17 kbs)")
         dc.draw_ellipse(5, 5, 90, 90)
         dc.draw_text("Bitmap", 30, 40)
         dc.select_object( NULL_BITMAP )
-        dc.free
 
         BitmapButton.new(panel, ID_BITMAP_BTN, bitmap, Point.new(100, 20))
 
