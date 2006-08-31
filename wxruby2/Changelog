@@ -1,3 +1,4 @@
+- Added Wx::WXRUBY_VERSION and Wx::WXWIDGETS_VERSION (Alex Fenton)
 - Added TreeCtrl sample (Alex Fenton)
 - Updated TODO, removed completed items, added known errors (Alex Fenton)
 - Fixed crasher in caret.rb sample due to deleted method (Alex Fenton)
