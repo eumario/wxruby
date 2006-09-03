@@ -74,7 +74,7 @@ class ClassFileHTMLGenerator < HTMLGenerator
 <link rel="stylesheet" type="text/css" href="wxruby.css" />
 </head>
 <body>
-<a href="index.html" id="homelink">Home</a>
+<a href="index.html" id="homelink">wxRuby Documentation Home</a>
 ]
 
 end
