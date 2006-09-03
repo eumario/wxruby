@@ -84,7 +84,8 @@ for further details.
 	 * \brief Returns the window being used as the toolbar for this frame. 
 	*/
 
-  virtual wxToolBar* GetToolBar() const;
+  // TODO: Was virtual.  Causes a crash if left virtual.
+  wxToolBar* GetToolBar() const;
 	/**
 	 * \brief Returns the current Window menu (added by wxWindows to the menubar). This function
 is available under Windows only. 
@@ -97,7 +98,8 @@ you must create your parent frame in two stages, or your function will never be 
 due to the way C++ treats virtual functions called from constructors. For example: 
 	*/
 
-  virtual wxMDIClientWindow* OnCreateClient() ;
+  // TODO: Was virtual.  Causes a crash if left virtual.
+  wxMDIClientWindow* OnCreateClient() ;
 	/**
 	 * \brief Sets the window to be used as a toolbar for this
 MDI parent window. It saves the application having to manage the positioning
