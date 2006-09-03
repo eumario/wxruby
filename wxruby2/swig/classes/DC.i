@@ -17,9 +17,9 @@
 
 %ignore GetMultiLineTextExtent;
 
-// redundant with good typemaps
-%ignore DrawLines(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0);
-%ignore DrawPolygon(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE) ;
+// wxList version is now 'type-safe' so we won't be using that version instead
+%ignore DrawLines(const wxList * points, wxCoord xoffset = 0, wxCoord yoffset = 0);
+%ignore DrawPolygon(const wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE) ;
 
 
 %import "include/wxObject.h"
