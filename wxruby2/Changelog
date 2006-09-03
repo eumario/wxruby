@@ -1,3 +1,4 @@
+====0.0.35 tag on 2006-09-03 included this:===
 - Small fix to parameter list indenting in wx_latexparser.rb (Alex Fenton)
 - Fixed images.rb so it can be run from outside dir, added notes (Alex Fenton)
 - Fixed crasher in controls.rb due to deleted DC#free method (Alex Fenton)
