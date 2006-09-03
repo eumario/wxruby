@@ -18,7 +18,7 @@ end
 
 Wx = Wxruby2
 
-Wx::WXRUBY_VERSION    = '0.0.34'
+Wx::WXRUBY_VERSION    = '0.0.35'
 Wx::WXWIDGETS_VERSION = '2.6.3'
 
 class Wx::App
