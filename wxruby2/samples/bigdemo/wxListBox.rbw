@@ -34,7 +34,7 @@ class FindPrefixListBox < Wx::ListBox
                 set_selection(item)
             end
         elsif key == Wx::K_BACK # backspace removes one character and backs up
-            @typedText = @typedText[0,-1]
+            @typedText = @typedText[0..-2]
             if not @typedText
                 set_selection(0)
             else
@@ -82,8 +82,8 @@ class TestListBox < Wx::Panel
         
         sampleList += ["test a", "test aa", "test aab", "test ab", "test abc", "test abcc", "test abcd"]
         sampleList.sort!()
-        Wx::StaticText.new(self, -1, "Find prefix:", Wx::Point.new(15,250))
-        fp = FindPrefixListBox.new(self, -1, Wx::Point.new(80,250), Wx::Size.new(80,120), sampleList, Wx::LB_SINGLE)
+        Wx::StaticText.new(self, -1, "Find typed prefix:", Wx::Point.new(15,250))
+        fp = FindPrefixListBox.new(self, -1, Wx::Point.new(110,250), Wx::Size.new(80,120), sampleList, Wx::LB_SINGLE)
         fp.set_selection(0)
     end
     

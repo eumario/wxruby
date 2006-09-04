@@ -1,3 +1,4 @@
+- Improvements to bigdemo ListBox sample: prefix searching (Roy Sutton)
 - Minor text corrections to bigdemo Static Text sample (Roy Sutton)
 - Added commented-out AcceptsFiles to be implemented later (Roy Sutton)
 
