@@ -6,9 +6,9 @@ class TestPanel < Wx::Panel
         
         Wx::StaticText.new(self, -1, "This is an example of static text", Wx::Point.new(20, 10))
         
-        Wx::StaticText.new(self, -1, "using the Wx:::StaticText Control.", Wx::Point.new(20, 30))
+        Wx::StaticText.new(self, -1, "using the Wx::StaticText Control.", Wx::Point.new(20, 30))
 
-        Wx::StaticText.new(self, -1, "Is this yellow?", Wx::Point.new(20, 70), Wx::Size.new(90, -1)).set_background_colour(Wx::BLUE)
+        Wx::StaticText.new(self, -1, "Is this blue?", Wx::Point.new(20, 70), Wx::Size.new(90, -1)).set_background_colour(Wx::BLUE)
 
         Wx::StaticText.new(self, -1, "align center", Wx::Point.new(120, 70), Wx::Size.new(90, -1), Wx::ALIGN_CENTER).set_background_colour(Wx::BLUE)
 
