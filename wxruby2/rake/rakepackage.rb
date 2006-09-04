@@ -13,6 +13,7 @@ require 'rake/packagetask'
 
 $base_gemspec = Gem::Specification.new do | spec |
   spec.name = 'wxruby2-preview'
+  # TODO - this shouldn't be hardcoded - load from rake-created file instead
   spec.version = '0.0.35'
 
   spec.require_path = 'lib'
@@ -60,11 +61,6 @@ def create_gem_tasks
     end
     Gem::manage_gems()
     Gem::Builder.new(this_gemspec).build
-    # tidy up the gem file name if on OS X, remove Xcode version
-    if this_gemspec.full_name =~ /darwin[\d.]+$/
-      mv this_gemspec.full_name + '.gem',
-         this_gemspec.full_name.sub(/darwin[\d.]+$/, 'darwin') + '.gem'
-    end
   end
 
   # named platform binary gem tasks to allow cross-building
@@ -84,7 +80,8 @@ def create_gem_tasks
 end
 
 def create_package_tasks
-  Rake::PackageTask.new('wxruby', '1.9.0') do | p_task |
+  # TODO - version shouldn't be hardcoded - load from rake-created file instead
+  Rake::PackageTask.new('wxruby2-preview', '0.0.35') do | p_task |
     p_task.need_tar_gz = true
     pkg_files = p_task.package_files
     pkg_files.include('README', 'LICENSE', 'ChangeLog', 'rakefile')
