@@ -14,12 +14,16 @@ class TestPanel < Wx::Panel
         b = Wx::Button.new(self, 20, "HELLO AGAIN!", Wx::Point.new(20,60), Wx::Size.new(120,45))
         evt_button(20) {|event| on_click(event)}
         b.set_tool_tip("This is a Hello button...")
-        
-        bmp = Wx::Bitmap.new("./icons/test2.bmp", Wx::BITMAP_TYPE_BMP)
+
+        bmp_file = File.join( File.dirname(__FILE__), 'icons', 'test2.bmp')
+        bmp = Wx::Bitmap.new(bmp_file, Wx::BITMAP_TYPE_BMP)
+        bmp_size = Wx::Size.new(bmp.get_width + 10, bmp.get_height + 10)
+
         #mask = Wx::MaskColour.new(bmp, Wx::BLUE)
-        
         #bmp.set_mask(mask)
-        Wx::BitmapButton.new(self, 30, bmp, Wx::Point.new(160, 20), Wx::Size.new(bmp.get_width()+10, bmp.get_height+10))
+        
+        Wx::BitmapButton.new(self, 30, bmp, 
+                             Wx::Point.new(160, 20), bmp_size)
         evt_button(30) {|event| on_click(event)}
         
     end
