@@ -38,6 +38,12 @@ functions so should not be required by the application programmer.
 	 * \param wxWindow*   
 	*/
 
+  // FIXME? AcceptFocus causes problems because it is public here and protected
+  //         in some derived classes.  Do not uncomment unless you also
+  //         make sure to fix it in derived classes else things like
+  //         StaticText will take the focus when tabbing
+  // virtual bool AcceptsFocus() const;
+
   virtual void AddChild(wxWindow*  child ) ;
 	/**
 	 * \brief Directs all mouse input to this window. Call   to
