@@ -1,3 +1,8 @@
+- Whitespace fix in wxChoice.rbw in bigdemo (Roy Sutton)
+- DC#draw_lines fixes (Roy Sutton)
+- Small presentation tweaks to docs (Alex Fenton)
+- Fixed tarball name, OS X, version TODOs in rakepackage.rb (Alex Fenton)
+- Include file fix to prevent mdi sample crashing (Roy Sutton)
 - Improvements to bigdemo ListBox sample: prefix searching (Roy Sutton)
 - Minor text corrections to bigdemo Static Text sample (Roy Sutton)
 - Added commented-out AcceptsFiles to be implemented later (Roy Sutton)
