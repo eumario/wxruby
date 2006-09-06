@@ -9,7 +9,7 @@ class TestChoice < Wx::Panel
         
         Wx::StaticText.new(self, -1, "This example uses the wxChoice control.", Wx::Point.new(15,10))
         
-        Wx::StaticText.new(self, -1, "Select one:", Wx::Point.new(15,50), Wx::Size.new(75,20))
+        Wx::StaticText.new(self, -1, "Select one:", Wx::Point.new(15,50), Wx::Size.new(65,20))
         @ch = Wx::Choice.new(self, 40, Wx::Point.new(80,50), Wx::DEFAULT_SIZE, sampleList)
         evt_choice(40) {|event| on_evt_choice(event)}
     end
