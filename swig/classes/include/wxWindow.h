@@ -1246,13 +1246,19 @@ Interface Guidelines forbid moving the mouse cursor programmatically.
   bool IsExposed( int x, int y, int w, int h ) const;
   bool IsExposed( const wxPoint& pt ) const;
   bool IsExposed( const wxRect& rect ) const;
-	virtual wxVisualAttributes GetDefaultAttributes() const;
+  // FIXME? GetDefaultAttributes causes problems (at least on MSWindows)
+  //         with the layout and background of some controls (Such as
+  //         TextCtrl).
+  //	virtual wxVisualAttributes GetDefaultAttributes() const;
 	static wxVisualAttributes GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 	void SetOwnBackgroundColour(const wxColour& colour);
 	void SetOwnForegroundColour(const wxColour& colour);
 	virtual bool SetBackgroundStyle(wxBackgroundStyle style);
 	virtual wxBackgroundStyle GetBackgroundStyle() const;
-	virtual bool HasTransparentBackground();
+  // FIXME? HasTransparentBackground causes problems (at least on MSWindows)
+  //         with the background of some controls (Such as StaticText).
+  //         It is overridden in a lot of child classes
+  //    virtual bool HasTransparentBackground();
 	void SetOwnFont(const wxFont& font);
 	const wxCursor& GetCursor() const;
 	virtual void UpdateWindowUI(long flags = wxUPDATE_UI_NONE);
