@@ -8,14 +8,18 @@ class wxFlexGridSizer : public wxGridSizer
 public:
    wxFlexGridSizer(int  rows , int  cols , int  vgap , int  hgap ) ;
    wxFlexGridSizer(int  cols , int  vgap = 0, int  hgap = 0) ;
-  void AddGrowableCol(size_t  idx);
-  void AddGrowableRow(size_t  idx);
+  void AddGrowableCol(size_t  idx, int proportion = 0);
+  void AddGrowableRow(size_t  idx, int proportion = 0);
   int GetFlexibleDirection() const;
   int GetNonFlexibleGrowMode() const;
   void RemoveGrowableCol(size_t  idx ) ;
   void RemoveGrowableRow(size_t  idx ) ;
   void SetFlexibleDirection(int  direction ) ;
   void SetNonFlexibleGrowMode(int  mode ) ;
+
+  virtual void RecalcSizes();
+  virtual wxSize CalcMin();
+
 };
 
 
