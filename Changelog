@@ -1,3 +1,6 @@
+
+
+====Migrated repository to SVN===
 - Minor corrections to FlexGridSizer methods (Roy Sutton)
 - wxWindow.h fixes for Windows background colour (Roy SUtton)
 - Whitespace fix in wxChoice.rbw in bigdemo (Roy Sutton)
