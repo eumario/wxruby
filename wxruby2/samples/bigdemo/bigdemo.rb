@@ -155,14 +155,14 @@ $tree_list = [
         #~ ]],
 
     # Images
-    #['Using Images', [
+    ['Using Images', [
     #    'Throbber',
-    #    'wxArtProvider',
+        'wxArtProvider',
     #    'wxDragImage',
     #    'wxImage',
     #    'wxImageFromStream',
     #    'wxMask',
-    #    ]],
+        ]],
 
     # Other stuff
     #['Miscellaneous', [
@@ -313,7 +313,7 @@ class WxRubyDemo < Wx::Frame
         @log.set_max_length(0)
         Wx::Log::set_active_target(Wx::LogTextCtrl.new(@log))
         
-        splitter2.split_horizontally(@nb, @log, 0)
+        splitter2.split_horizontally(@nb, @log, 350)
         splitter.split_vertically(@tree, splitter2, 190)
         
         splitter.set_minimum_pane_size(20)        
@@ -546,7 +546,7 @@ class DemoApp < Wx::App
   def on_init
     frame = WxRubyDemo.new("WxRuby BIG combined demo",
                            Wx::DEFAULT_POSITION, 
-                           Wx::Size.new(700, 400))
+                           Wx::Size.new(750, 550))
 
     frame.show(true)
   end
