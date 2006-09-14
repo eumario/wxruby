@@ -106,7 +106,6 @@ class MyCanvas < Wx::ScrolledWindow
         draw_saved_lines(dc)
         
         dc.end_drawing()
-        dc.free()
     end
     
     def draw_saved_lines(dc)
