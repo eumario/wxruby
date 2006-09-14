@@ -1,5 +1,9 @@
-
-
+- Rake fixes to enable unicode builds on Windows (Roy Sutton)
+- Fixes to ArtProvider constants (Roy Sutton)
+- wxMouseEvent fixes (Roy Sutton)	
+- Fix to bigdemo ScrolledWindow sample (Roy Sutton)
+- Correct more types in latex doc translator (Alex Fenton)
+	
 ====Migrated repository to SVN===
 - Minor corrections to FlexGridSizer methods (Roy Sutton)
 - wxWindow.h fixes for Windows background colour (Roy SUtton)
