@@ -16,27 +16,38 @@ $link_output_flag = "/dll /out:"
 # native Windows - requires a static build of wxWindows
 $WXDIR=ENV['WXWIN']
 $WXVERSION = '26'
+
 if $debug_build
     $DEBUGPOSTFIX='d'
 else
     $DEBUGPOSTFIX=''
 end
 
+if $unicode_build
+    $UNICODEPOSTFIX='u'
+else
+    $UNICODEPOSTFIX=''
+end
+
+$POSTFIX = $UNICODEPOSTFIX + $DEBUGPOSTFIX
+
+
+
 $WXSRC="#$WXDIR/src/msw"
 $WXINC="#$WXDIR/include"
 $WXLIBDIR="#$WXDIR/lib/vc_lib"
-$INCTEMP="#$WXDIR/lib/vc_lib/msw#{$DEBUGPOSTFIX}"
+$INCTEMP="#$WXDIR/lib/vc_lib/msw#{$POSTFIX}"
 
-$wx_libs =  "#$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}.lib"       
-$wx_libs += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_net.lib"
-$wx_libs += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_odbc.lib"
-$wx_libs += " #$WXLIBDIR/wxbase26#{$DEBUGPOSTFIX}_xml.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_adv.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_core.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_dbgrid.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_html.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_media.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$DEBUGPOSTFIX}_xrc.lib"
+$wx_libs =  "#$WXLIBDIR/wxbase26#{$POSTFIX}.lib"       
+$wx_libs += " #$WXLIBDIR/wxbase26#{$POSTFIX}_net.lib"
+$wx_libs += " #$WXLIBDIR/wxbase26#{$POSTFIX}_odbc.lib"
+$wx_libs += " #$WXLIBDIR/wxbase26#{$POSTFIX}_xml.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_adv.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_core.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_dbgrid.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_html.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_media.lib"
+$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_xrc.lib"
 $wx_libs += " #$WXLIBDIR/wxexpat#{$DEBUGPOSTFIX}.lib"
 $wx_libs += " #$WXLIBDIR/wxjpeg#{$DEBUGPOSTFIX}.lib"
 $wx_libs += " #$WXLIBDIR/wxpng#{$DEBUGPOSTFIX}.lib"
@@ -63,6 +74,10 @@ if $debug_build
     $ruby_cppflags += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
 else
     $ruby_cppflags += " -DNDEBUG "
+end
+
+if $unicode_build
+    $wx_cppflags += " -D_UNICODE -DUNICODE"
 end
 
 $extra_libs = [
