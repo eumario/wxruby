@@ -8,24 +8,26 @@ class wxMouseEvent : public wxEvent
 public:
    wxMouseEvent(wxEventType mouseEventType = 0) ;
   wxMouseEvent(const wxMouseEvent& event) ;
-  bool AltDown() ;
-  bool Button(int  button ) ;
-  bool ButtonDClick(int but = wxMOUSE_BTN_ANY) ;
-  bool ButtonDown(int but = -1) ;
-  bool ButtonUp(int but = -1) ;
-  bool ControlDown() ;
-  bool Dragging() ;
-  bool Entering() ;
+  bool AltDown() const;
+  bool Button(int  button ) const;
+  bool ButtonDClick(int but = wxMOUSE_BTN_ANY) const;
+  bool ButtonDown(int but = -1) const;
+  bool ButtonIsDown(int but) const;
+  bool ButtonUp(int but = -1) const;
+  bool ControlDown() const;
+  bool Dragging() const;
+  bool Entering() const;
   int GetButton() const;
   wxPoint GetPosition() const;
-  void GetPosition(wxCoord*  x , wxCoord*  y ) const;
+  // wxCoord is typedef'd to int and interferes with one below
+  //void GetPosition(wxCoord*  x , wxCoord*  y ) const;
   void GetPosition(long*  x , long*  y ) const;
   wxPoint GetLogicalPosition(const wxDC&  dc ) const;
   int GetLinesPerAction() const;
   int GetWheelRotation() const;
   int GetWheelDelta() const;
   long GetX() const;
-  long GetY() ;
+  long GetY() const;
   bool IsButton() const;
   bool IsPageScroll() const;
   bool Leaving() const;
@@ -48,6 +50,5 @@ public:
   // override pure virtual methods from base classes
   virtual wxEvent* Clone() const;
 };
-
 
 #endif
