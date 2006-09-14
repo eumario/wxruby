@@ -12,3 +12,5 @@ enum wxCalendarHitTestResult;
 enum wxCalendarDateBorder;
 typedef signed char wxDash;
 typedef long wxTextPos;
+typedef wxString wxArtClient;
+typedef wxString wxArtID;
