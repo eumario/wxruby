@@ -2049,15 +2049,15 @@ enum {
 
 %constant const char *FILE_SELECTOR_DEFAULT_WILDCARD_STR = "*.*";
 
-%constant wxArtID ART_TOOLBAR               = wxART_TOOLBAR;
-%constant wxArtID ART_MENU                  = wxART_MENU;
-%constant wxArtID ART_FRAME_ICON            = wxART_FRAME_ICON;
-%constant wxArtID ART_CMN_DIALOG            = wxART_CMN_DIALOG;
-%constant wxArtID ART_HELP_BROWSER          = wxART_HELP_BROWSER;
-%constant wxArtID ART_MESSAGE_BOX           = wxART_MESSAGE_BOX;
-%constant wxArtID ART_OTHER                 = wxART_OTHER;
+%constant wxArtClient ART_TOOLBAR               = wxART_TOOLBAR;
+%constant wxArtClient ART_MENU                  = wxART_MENU;
+%constant wxArtClient ART_FRAME_ICON            = wxART_FRAME_ICON;
+%constant wxArtClient ART_CMN_DIALOG            = wxART_CMN_DIALOG;
+%constant wxArtClient ART_HELP_BROWSER          = wxART_HELP_BROWSER;
+%constant wxArtClient ART_MESSAGE_BOX           = wxART_MESSAGE_BOX;
+%constant wxArtClient ART_OTHER                 = wxART_OTHER;
 
-%constant wxString ART_ADD_BOOKMARK          = wxART_ADD_BOOKMARK;
+%constant wxArtID ART_ADD_BOOKMARK          = wxART_ADD_BOOKMARK;
 %constant wxArtID ART_DEL_BOOKMARK          = wxART_DEL_BOOKMARK;
 %constant wxArtID ART_HELP_SIDE_PANEL       = wxART_HELP_SIDE_PANEL;
 %constant wxArtID ART_HELP_SETTINGS         = wxART_HELP_SETTINGS;
@@ -2088,8 +2088,18 @@ enum {
 %constant wxArtID ART_WARNING               = wxART_WARNING;
 %constant wxArtID ART_INFORMATION           = wxART_INFORMATION;
 %constant wxArtID ART_MISSING_IMAGE         = wxART_MISSING_IMAGE;
+%constant wxArtID ART_COPY                  = wxART_COPY;
+%constant wxArtID ART_CUT                   = wxART_CUT;
+%constant wxArtID ART_PASTE                 = wxART_PASTE;
+%constant wxArtID ART_DELETE                = wxART_DELETE;
+%constant wxArtID ART_NEW                   = wxART_NEW;
+%constant wxArtID ART_UNDO                  = wxART_UNDO;
+%constant wxArtID ART_REDO                  = wxART_REDO;
+%constant wxArtID ART_QUIT                  = wxART_QUIT;
+%constant wxArtID ART_FIND                  = wxART_FIND;
+%constant wxArtID ART_FIND_AND_REPLACE      = wxART_FIND_AND_REPLACE;
 
-%constant const int LAYOUT_UNCONSTRAIINED = wxUnconstrained;
+%constant const int LAYOUT_UNCONSTRAINED = wxUnconstrained;
 %constant const int LAYOUT_AS_IS = wxAsIs;
 %constant const int LAYOUT_PERCENT_OF = wxPercentOf;
 %constant const int LAYOUT_ABOVE = wxAbove;
