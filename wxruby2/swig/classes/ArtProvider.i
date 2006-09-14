@@ -5,10 +5,6 @@
 
 %module(directors="1") wxArtProvider
 
-# The following are not yet compatible with SWIG 1.3.29
-%ignore GetBitmap;
-%ignore GetIcon;
-
 %rename(ArtProvider) wxRubyArtProvider;
 
 %import "include/wxObject.h"
@@ -46,6 +42,20 @@ class wxRubyArtProvider : public wxArtProvider
     else
       return wxNullBitmap;
     return result;
+  }
+
+  static wxBitmap GetBitmap(const wxArtID& id,
+                            const wxArtClient& client,
+                            const wxSize& size)
+  {
+    return wxArtProvider::GetBitmap(id, client, size);
+  }
+
+  static wxIcon wxRubyArtProvider::GetIcon(const wxArtID& id,
+                                           const wxArtClient& client,
+                                           const wxSize& size)
+  {
+    return wxArtProvider::GetIcon(id, client, size);
   }
 };
 
