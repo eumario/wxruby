@@ -24,6 +24,10 @@ $swig_minimum_version = '1.3.29'
 $debug_build = ENV['WXRUBY_DEBUG'] ? true : false
 $release_build = ENV['WXRUBY_RELEASE'] ? true : false
 
+# Force non-unicode build with WXRUBY_NO_UNICODE.  Unicode will be
+# the default build now
+$unicode_build = ENV['WXRUBY_NO_UNICODE'] ? false : true
+
 $verbose_debug = ENV['WXRUBY_VERBOSE'] ? true : false
 
 if $release_build
@@ -32,6 +36,9 @@ elsif $debug_build
 	puts('Enabling DEBUG build')
 end
 
+if not $unicode_build
+        puts('Disabling UNICODE build')
+end
 
 if($verbose_debug)
 	puts('Enabling VERBOSE debugging output')
