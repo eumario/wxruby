@@ -52,6 +52,7 @@ $tree_list = [
     # core controls
     ['Core Windows/Controls', [
         'PopupMenu',
+        'wxBitmapButton',
         'wxButton',
         'wxCheckBox',
         'wxCheckListBox',
