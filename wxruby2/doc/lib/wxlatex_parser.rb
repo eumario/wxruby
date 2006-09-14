@@ -20,7 +20,9 @@ class WxWLatexParser < LatexParser
   end
 
   CPP_TO_RUBY_TYPES = { 'long' => 'Integer', 
+                        'unsigned long' => 'Integer', 
                         'int'  => 'Integer',
+                        'unsigned char' => 'Integer',
                         'wxWindowID' => 'Integer',
                         'void' => '', 
                         'bool' => 'Boolean' }
@@ -64,6 +66,7 @@ class WxWLatexParser < LatexParser
   # (Button#get_label). Finds new methods. TODO - static functions.
   def fix_method(cpp_method)
     cpp_method.sub!(/^wx([A-Z]\w+)::wx\1/) { "#{$1}.new" }
+    cpp_method.sub!(/^wx([A-Z]\w+)::operator ?\$([^$]+)\$/) { "#{$1}##{$2}" }
     cpp_method.sub!(WX_METHOD_NAME) { "#{$1}##{$2.un_camelcase}" }
   end
 
@@ -150,6 +153,8 @@ class WxWLatexParser < LatexParser
     elsif not @func_name
       if content == wx_class
         @func_name = "#{rb_class}.new"
+      elsif content =~ /operator ?$([^$]+)$/
+        @func_name = $1
       else
         @func_name = content.un_camelcase
       end
