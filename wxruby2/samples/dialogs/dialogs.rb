@@ -524,15 +524,12 @@ class MyFrame < Frame
                                 "An informative message",
                                 @max,    # range
                                 self,   # parent
-                                PD_CAN_ABORT |
-                                              PD_APP_MODAL |
-                                              PD_ELAPSED_TIME |
-                                              PD_ESTIMATED_TIME |
-                                              PD_REMAINING_TIME)
+                                PD_CAN_ABORT|PD_APP_MODAL|
+                                PD_ELAPSED_TIME|PD_ESTIMATED_TIME|
+                                PD_REMAINING_TIME)
 
-    cont = TRUE
+    cont = true
     for i in 0 .. @max
-
       sleep(1)
       if i == @max
         cont = dialog.update(i, "That's all, folks!")
@@ -546,6 +543,7 @@ class MyFrame < Frame
         if message_box("Do you really want to cancel?",
                        "Progress dialog question",  # caption
                        YES_NO | ICON_QUESTION) == YES
+          dialog.end_modal(ID_CANCEL)
           break
         end
         dialog.resume()
