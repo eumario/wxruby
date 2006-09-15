@@ -57,6 +57,7 @@ $tree_list = [
         'wxCheckBox',
         'wxCheckListBox',
         'wxChoice',
+        'wxChoicebook',
         'wxComboBox',
         'wxGauge',
         #'wxGenericDirCtrl',
@@ -159,6 +160,7 @@ $tree_list = [
     ['Using Images', [
     #    'Throbber',
         'wxArtProvider',
+        'wxCursor',
     #    'wxDragImage',
     #    'wxImage',
     #    'wxImageFromStream',

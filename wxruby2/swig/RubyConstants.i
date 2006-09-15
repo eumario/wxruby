@@ -15,20 +15,21 @@
 #include <wx/treebase.h>
 #include <wx/imaglist.h>
 #include <wx/laywin.h>
+#include <wx/imagbmp.h>
 
 //
 // All of these exist on only one platform, so in those
 // cases I'm defining them so the compiler doesn't freak out
 //
 #ifndef __WXMAC__
-#define    wxCURSOR_COPY_ARROW 0
+#define    wxCURSOR_COPY_ARROW wxCURSOR_ARROW
 #endif
 #ifndef __X__
     // Not yet implemented for Windows
-#define    wxCURSOR_CROSS_REVERSE 0
-#define    wxCURSOR_DOUBLE_ARROW 0
-#define    wxCURSOR_BASED_ARROW_UP 0
-#define    wxCURSOR_BASED_ARROW_DOWN 0
+#define    wxCURSOR_CROSS_REVERSE wxCURSOR_ARROW
+#define    wxCURSOR_DOUBLE_ARROW wxCURSOR_ARROW
+#define    wxCURSOR_BASED_ARROW_UP wxCURSOR_ARROW
+#define    wxCURSOR_BASED_ARROW_DOWN wxCURSOR_ARROW
 #endif // X11
 
 %}
@@ -1430,19 +1431,13 @@ enum wxStockCursor
     wxCURSOR_WAIT,
     wxCURSOR_WATCH,
     wxCURSOR_BLANK,
-#ifdef __WXGTK__
     wxCURSOR_DEFAULT, // standard X11 cursor
-#endif
-#ifdef __WXMAC__
-        wxCURSOR_COPY_ARROW , // MacOS Theme Plus arrow
-#endif
-#ifdef __X__
+    wxCURSOR_COPY_ARROW , // MacOS Theme Plus arrow
     // Not yet implemented for Windows
     wxCURSOR_CROSS_REVERSE,
     wxCURSOR_DOUBLE_ARROW,
     wxCURSOR_BASED_ARROW_UP,
     wxCURSOR_BASED_ARROW_DOWN,
-#endif // X11
  
     wxCURSOR_ARROWWAIT,
  
@@ -1995,6 +1990,29 @@ enum wxFindReplaceDialogStyles
 #define wxFILTER_EXCLUDE_LIST   0x0020
 #define wxFILTER_INCLUDE_CHAR_LIST 0x0040
 #define wxFILTER_EXCLUDE_CHAR_LIST 0x0080
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/imagbmp.h
+//** ---------------------------------------------------------------------------- ** 
+
+%constant const char * IMAGE_OPTION_BMP_FORMAT = "wxBMP_FORMAT";
+
+%constant const char * IMAGE_OPTION_CUR_HOTSPOT_X = "HotSpotX";
+%constant const char * IMAGE_OPTION_CUR_HOTSPOT_Y = "HotSpotY";
+
+enum {
+    wxBMP_24BPP        = 24, // default, do not need to set
+    //wxBMP_16BPP      = 16, // wxQuantize can only do 236 colors?
+    wxBMP_8BPP         =  8, // 8bpp, quantized colors
+    wxBMP_8BPP_GREY    =  9, // 8bpp, rgb averaged to greys
+    wxBMP_8BPP_GRAY    =  wxBMP_8BPP_GREY,
+    wxBMP_8BPP_RED     = 10, // 8bpp, red used as greyscale
+    wxBMP_8BPP_PALETTE = 11, // 8bpp, use the wxImage's palette
+    wxBMP_4BPP         =  4, // 4bpp, quantized colors
+    wxBMP_1BPP         =  1, // 1bpp, quantized "colors"
+    wxBMP_1BPP_BW      =  2  // 1bpp, black & white from red
+};
+
 
 //** ---------------------------------------------------------------------------- **
 //   Start constants from wx/imaglist.h
