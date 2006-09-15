@@ -1,5 +1,6 @@
+- wxBitmapButton sample for bigdemo (Roy Sutton)
 - Rake fixes to enable unicode builds on Windows (Roy Sutton)
-- Fixes to ArtProvider constants (Roy Sutton)
+- Fixes to ArtProvider constants, wrapping + a nice sample (Roy Sutton)
 - wxMouseEvent fixes (Roy Sutton)	
 - Fix to bigdemo ScrolledWindow sample (Roy Sutton)
 - Correct more types in latex doc translator (Alex Fenton)
