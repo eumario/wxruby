@@ -21,7 +21,7 @@ $tree_list = [
         'wxDialog',
         'wxFrame',
         'wxMDIWindows',
-        #'wxMiniFrame',
+        'wxMiniFrame',
         #'wxWizard',
         ]],
 
