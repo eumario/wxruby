@@ -60,7 +60,7 @@ $tree_list = [
         'wxChoicebook',
         'wxComboBox',
         'wxGauge',
-        #'wxGenericDirCtrl',
+        'wxGenericDirCtrl',
         'wxGrid',
         #'wxGrid_MegaExample',
         'wxListBox',
