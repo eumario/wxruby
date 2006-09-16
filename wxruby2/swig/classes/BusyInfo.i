@@ -1,4 +1,4 @@
-#   Copyright 2004-2005 by Kevin Smith
+#   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
 %include "../common.i"
@@ -14,11 +14,10 @@
 %include "include/wxBusyInfo.h"
 
 %extend wxBusyInfo {
-  static void busy(const char *msg, wxWindow *parent = NULL)
+  static void busy(const wxString& message, wxWindow *parent = NULL)
   {
     if (rb_block_given_p())
     {
-      wxString message = (wxChar *)msg;
       wxBusyInfo disabler(message,parent);
       rb_yield(Qnil);
     }
