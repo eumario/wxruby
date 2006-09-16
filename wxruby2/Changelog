@@ -1,3 +1,7 @@
+- Fixed BusyInfo.busy (Sean Long)
+- Added GenericDirCtrl, MiniFrame to bigdemo (Roy Sutton)
+- Fix progress dialog in dialogs.rb (Alex Fenton)
+- Cursor fixes, Cursor and Choicebook samples (Roy Sutton)
 - wxBitmapButton sample for bigdemo (Roy Sutton)
 - Rake fixes to enable unicode builds on Windows (Roy Sutton)
 - Fixes to ArtProvider constants, wrapping + a nice sample (Roy Sutton)
