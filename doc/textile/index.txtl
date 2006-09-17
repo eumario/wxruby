@@ -1,4 +1,4 @@
-h1. WxRuby: Class Reference
+h1. wxRuby Documentation: Class Reference 
 
 This is the class reference for WxRuby. The classes listed below are
 those currently available in WxRuby2. This documentation is currently
@@ -11,16 +11,50 @@ accept
 * There are links to C++ tutorials and topic overviews that are not
 currently available in this documentation
 
-As the WxRuby API is developed, this documentation will be updated with
+As the wxRuby API is developed, this documentation will be updated with
 Ruby-specific information.
 
-h2. Managed windows
+h2(#top). Outline
 
-There are several types of window that are directly controlled by the window manager (such as MS Windows, or the Motif Window Manager). Frames and dialogs are similar in wxWidgets, but only dialogs may be modal.
+* "Window":#window
+* "Frames":#frames
+* "Miscellaneous windows":#misc_windows
+* "Common dialogs":#common_dialogs
+* "Controls":#controls
+* "Menus":#menus
+* "Events":#events
+* "Window layout":#window_layout
+* "Device context":#device_contexts
+* "Graphics device interface":#graphics_device_interface
+* "Validators":#validators
+* "Data Structures":#data_structures
+* "Document/view framework":#docview_framework
+* "Printing framework":#printing
+* "Drag and drop and clipboard classes":#dnd_clipboard
+* "HTML classes":#html
+* "XML Resources":#xrc
+* "Online help":#online_help
+* "Miscellaneous":#misc
+
+h2(#window). Window
+
+Anything painted on the screen in wxRuby is a Window. This includes
+frames and dialogs that contain GUI controls, controls for user
+interaction, and elements that manage the layout of controls, such as
+tabbed notebooks. Many important methods are inherited from Window.
+
+|Window|Anything painted on the screen|
+
+h2(#frames). Frames
+
+There are several types of window that are directly controlled by the
+window manager (such as MS Windows, or the Motif Window Manager). Frames
+and dialogs are similar in wxRuby. Only frames may be associated with a
+menu; only dialogs may appear modally (on top of all other windows).
 
 |TopLevelWindow|Any top level window, dialog or frame|
-|Dialog|Dialog box|
-|Frame|Normal frame|
+|Dialog|Dialog box base class|
+|Frame|Normal OS frame|
 |MDIChildFrame|MDI child frame|
 |MDIParentFrame|MDI parent frame|
 |MiniFrame|A frame with a small title bar|
@@ -29,7 +63,9 @@ There are several types of window that are directly controlled by the window man
 |TipWindow|Shows text in a small window|
 |Wizard|A wizard dialog|
 
-h2. Miscellaneous windows
+"top":#top
+
+h2(#misc_windows). Miscellaneous windows
 
 The following are a variety of classes that are derived from wxWindow.
 
@@ -37,20 +73,25 @@ The following are a variety of classes that are derived from wxWindow.
 |ScrolledWindow|Window with automatically managed scrollbars|
 |Grid|A grid (table) window|
 |SplitterWindow|Window which can be split vertically or horizontally|
-|StatusBar|Implements the status bar on a frame|
-|ToolBar|Toolbar class|
-|Notebook|Notebook class|
-|Listbook|Similar to notebook but using list control|
-|Choicebook|Similar to notebook but using choice control|
+|StatusBar|A status bar on a frame|
+|ToolBar|Toolbar with buttons|
+|Notebook|Tabbed Notebook for layout out controls|
+|Listbook|Similar to notebook but using a list control|
+|Choicebook|Similar to notebook but using a choice (dropdown) control|
 |SashWindow|Window with four optional sashes that can be dragged|
 |SashLayoutWindow|Window that can be involved in an IDE-like layout arrangement|
 |VScrolledWindow|As wxScrolledWindow but supports lines of variable height|
 |WizardPage|A base class for the page in wizard dialog.|
 |WizardPageSimple|A page in wizard dialog.|
 
-h2. Common dialogs
+"top":#top
 
-Common dialogs are ready-made dialog classes which are frequently used in an application.
+h2(#common_dialogs). Common dialogs
+
+Common dialogs are ready-made dialog classes which are frequently used
+in applications. They are OS-native versions for standard GUI activities
+such as opening a file, requesting a text string or password, or
+displaying a message.
 
 |Dialog|Base class for common dialogs|
 |ColourDialog|Colour chooser dialog|
@@ -68,10 +109,11 @@ Common dialogs are ready-made dialog classes which are frequently used in an app
 |MessageDialog|Simple message box dialog|
 |Wizard|A wizard dialog.|
 
-h2. Controls 
+"top":#top
 
-Typically, these are small windows which provide interaction with the
-user.
+h2(#controls). Controls 
+
+These are small windows which provide interaction with the user.
 
 |Control|The base class for controls|
 |Button|Push button control, displaying text|
@@ -102,63 +144,24 @@ user.
 |Slider|A slider that can be dragged by the user|
 |VListBox|A listbox supporting variable height rows|
 
-h2. Menus
+"top":#top
+
+h2(#menus). Menus
+
+Menus typically appear at the top of a frame. They contain drop-down
+lists of actions, which may be accessed by mouse or keyboard shortcut.
 
 |Menu|Displays a series of menu items for selection|
 |MenuBar|Contains a series of menus for use with a frame|
 |MenuItem|Represents a single menu item|
 
-h2. Window layout
+"top":#top
 
-|Sizer|Abstract base class|
-|GridSizer|A sizer for laying out windows in a grid with all fields having the same size|
-|FlexGridSizer|A sizer for laying out windows in a flexible grid|
-|GridBagSizer|Another grid sizer that lets you specify the cell an item is in, and items can span rows and/or columns.|
-|BoxSizer|A sizer for laying out windows in a row or column|
-|StaticBoxSizer|Same as wxBoxSizer, but with a surrounding static box|
+h2(#events). Events
 
-h2. Device contexts
-
-Device contexts are surfaces that may be drawn on, and provide an abstraction that allows parameterisation of your drawing code by passing different device contexts.
-
-|BufferedDC|A helper device context for double buffered drawing.|
-|BufferedPaintDC|A helper device context for double buffered drawing inside OnPaint.|
-|ClientDC|A device context to access the client area outside OnPaint events|
-|PaintDC|A device context to access the client area inside OnPaint events|
-|WindowDC|A device context to access the non-client area|
-|ScreenDC|A device context to access the entire screen|
-|DC|The device context base class|
-|MemoryDC|A device context for drawing into bitmaps|
-|MetafileDC|A device context for drawing into metafiles|
-|MirrorDC|A proxy device context allowing for simple mirroring.|
-|PostScriptDC|A device context for drawing into PostScript files|
-|PrinterDC|A device context for drawing to printers|
-
-h2. Graphics device interface
-
-These classes are related to drawing on device contexts and windows.
-
-|Colour|Represents the red, blue and green elements of a colour|
-|DCClipper|Wraps the operations of setting and destroying the clipping region|
-|Bitmap|Represents a bitmap|
-|Brush|Used for filling areas on a device context|
-|BrushList|The list of previously-created brushes|
-|Cursor|A small, transparent bitmap representing the cursor|
-|Font|Represents fonts|
-|FontList|The list of previously-created fonts|
-|Icon|A small, transparent bitmap for assigning to frames and drawing on device contexts|
-|Image|A platform-independent image class|
-|ImageList|A list of images, used with some controls|
-|Mask|Represents a mask to be used with a bitmap for transparent drawing|
-|Pen|Used for drawing lines on a device context|
-|PenList|The list of previously-created pens|
-|Palette|Represents a table of indices into RGB values|
-|Region|Represents a simple or complex region on a window or device context|
-|RendererNative|Abstracts high-level drawing primitives|
-
-h2. Events
-
-An event object contains information about a specific event. Event handlers (usually member functions) have a single, event argument.
+An event object contains information about a specific event. Event
+handlers blocks may optionally receive a single block parameter, which
+will be an Event object of the appropriate class.
 
 |ActivateEvent|A window or application activation event|
 |CalendarEvent|Used with wxCalendarCtrl|
@@ -203,7 +206,70 @@ An event object contains information about a specific event. Event handlers (usu
 |WindowDestroyEvent|A window destruction event|
 |WizardEvent|A wizard event|
 
-h2. Validators
+"top":#top
+
+h2(#window_layout). Window layout
+
+Sizers enable the layout and size of controls and windows to adapt to
+the user's resizing of frames and containers.
+
+|Sizer|Abstract base class|
+|GridSizer|A sizer for laying out windows in a grid with all fields having the same size|
+|FlexGridSizer|A sizer for laying out windows in a flexible grid|
+|GridBagSizer|Another grid sizer that lets you specify the cell an item is in, and items can span rows and/or columns.|
+|BoxSizer|A sizer for laying out windows in a row or column|
+|StaticBoxSizer|Same as wxBoxSizer, but with a surrounding static box|
+
+"top":#top
+
+h2(#device_contexts). Device contexts
+
+Device contexts are surfaces that may be drawn on. They allow the
+application to draw lines, shapes, images and text directly. This can be
+on-screen within an application GUI, or onto paper.  They provide
+abstraction that allows parameterisation of your drawing code by passing
+different device contexts.
+
+|BufferedDC|A helper device context for double buffered drawing.|
+|BufferedPaintDC|A helper device context for double buffered drawing inside OnPaint.|
+|ClientDC|A device context to access the client area outside OnPaint events|
+|PaintDC|A device context to access the client area inside OnPaint events|
+|WindowDC|A device context to access the non-client area|
+|ScreenDC|A device context to access the entire screen|
+|DC|The device context base class|
+|MemoryDC|A device context for drawing into bitmaps|
+|MetafileDC|A device context for drawing into metafiles|
+|MirrorDC|A proxy device context allowing for simple mirroring.|
+|PostScriptDC|A device context for drawing into PostScript files|
+|PrinterDC|A device context for drawing to printers|
+
+"top":#top
+
+h2(#graphics_device_interface). Graphics device interface
+
+These classes are related to drawing on device contexts and windows.
+
+|Colour|Represents the red, blue and green elements of a colour|
+|DCClipper|Wraps the operations of setting and destroying the clipping region|
+|Bitmap|Represents a bitmap|
+|Brush|Used for filling areas on a device context|
+|BrushList|The list of previously-created brushes|
+|Cursor|A small, transparent bitmap representing the cursor|
+|Font|Represents fonts|
+|FontList|The list of previously-created fonts|
+|Icon|A small, transparent bitmap for assigning to frames and drawing on device contexts|
+|Image|A platform-independent image class|
+|ImageList|A list of images, used with some controls|
+|Mask|Represents a mask to be used with a bitmap for transparent drawing|
+|Pen|Used for drawing lines on a device context|
+|PenList|The list of previously-created pens|
+|Palette|Represents a table of indices into RGB values|
+|Region|Represents a simple or complex region on a window or device context|
+|RendererNative|Abstracts high-level drawing primitives|
+
+"top":#top
+
+h2(#validators). Validators
 
 These are the window validators, used for filtering and validating user input.
 
@@ -211,20 +277,20 @@ These are the window validators, used for filtering and validating user input.
 |TextValidator|Text control validator class|
 |GenericValidator|Generic control validator class|
 
-h2. Data structures
+"top":#top
 
-The majority of these do not need to ported to wxruby, as the ruby
-equivalent built-in class or standard library should be used. Only
-classes that are important to the wxRuby API are listed here.
+h2(#data_structures). Data structures
 
-|Object|The root class for most wxWidgets classes|
-|Point|Representation of a point|
+|Object|The root class for most wxRuby classes|
+|Point|Representation of a point (x, y position) |
 |Rect|A class representing a rectangle|
 |Region|A class representing a region|
 |RealPoint|Representation of a point using floating point numbers|
-|Size|Representation of a size|
+|Size|Representation of a size (height and width)|
 
-h2. Document/view framework
+"top":#top
+
+h2(#docview_framework). Document/view framework
 
 The wxWidgets API supports a document/view framework which provides
 housekeeping for a document-centric application - but this is not yet
@@ -237,9 +303,13 @@ ported to Ruby.
 |DocChildFrame|A child frame for showing a document view|
 |DocParentFrame|A parent frame to contain views|
 
-h2. Printing framework
+"top":#top
 
-A printing and previewing framework is implemented to make it relatively straightforward to provide document printing facilities.
+h2(#printing). Printing framework
+
+A printing and previewing framework is implemented to make it relatively
+straightforward to provide document printing facilities. This part of
+wxWidgets is not yet available in wxRuby but would be nice to have.
 
 |PreviewFrame|Frame for displaying a print preview|
 |PreviewCanvas|Canvas for displaying a print preview|
@@ -254,7 +324,13 @@ A printing and previewing framework is implemented to make it relatively straigh
 |PrintDialogData|Represents information about the print dialog|
 |PageSetupDialogData|Represents information about the page setup dialog|
 
-h2. Drag and drop and clipboard classes
+"top":#top
+
+h2(#dnd_clipboard). Drag and drop and clipboard classes
+
+These classes provide support for passing data to and from other desktop
+applications. This functionality is not yet available in wxRuby2, but
+would be nice to have. 
 
 |DataObject|Data object class|
 |DataFormat|Represents a data format|
@@ -268,13 +344,13 @@ h2. Drag and drop and clipboard classes
 |TextDropTarget|Text drop target class|
 |DropSource|Drop source class|
 
-h2. File related classes
+"top":#top
 
-|StandardPaths|Paths for standard directories|
+h2(#html). HTML classes
 
-h2. HTML classes
-
-These are a set of classes to display text in HTML format. These class include a help system based on the HTML widget.
+These are a set of classes to display text in HTML format. These class
+include a help system based on the HTML widget. This is not yet
+available in wxRuby, but would be nice to have.
 
 |HtmlHelpController|HTML help controller class|
 |HtmlWindow|HTML window class|
@@ -285,22 +361,26 @@ These are a set of classes to display text in HTML format. These class include a
 |HtmlWinParser|HTML parser class for wxHtmlWindow|
 |HtmlWinTagHandler|HTML tag handler, pluginable into wxHtmlWinParser|
 
-h2. Virtual file system classes
-
-These are a set of classes that implement an extensible virtual file system, used internally by the HTML classes.
+There are also a a set of classes that implement an extensible virtual file
+system, used internally by the HTML classes.
 
 |FSFile|Represents a file in the virtual file system|
 |FileSystem|Main interface for the virtual file system|
 |FileSystemHandler|Class used to announce file system type|
 
-h2. XML-based resource system classes
+"top":#top
 
-Resources allow your application to create controls and other user interface elements from specifications stored in an XML format.
+h2(#xrc). XML-based resources
+
+Resources allow your application to create controls and other user
+interface elements from specifications stored in an XML format.
 
 |XmlResource|The main class for working with resources.|
 |XmlResourceHandler|The base class for XML resource handlers.|
 
-h2. Online help
+"top":#top
+
+h2(#online_help). Online help
 
 |HelpController|Family of classes for controlling help windows|
 |HtmlHelpController|HTML help controller class|
@@ -311,13 +391,13 @@ h2. Online help
 |HelpControllerHelpProvider|Class for context-sensitive help provision via a help controller|
 |ToolTip|Class implementing tooltips|
 
-h2. Miscellaneous
+"top":#top
+
+h2(#misc). Miscellaneous
 
 |App|Application class|
 |Caret|A caret (cursor) object|
-|CmdLineParser|Command line parser class|
 |Config|Classes for configuration reading/writing (using either INI files or registry)|
-|DllLoader|Class to work with shared libraries.|
 |GLCanvas|Canvas that you can render OpenGL calls to.|
 |GLContext|Class to ease sharing of OpenGL data resources.|
 |LayoutAlgorithm|An alternative window layout facility|
