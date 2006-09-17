@@ -108,6 +108,7 @@ class IndexPageGenerator < HTMLGenerator
       line
     end
     @src = lines.reject { | l | l.empty? }.join("")
+    tpl_vars['TITLE'] ||= 'WxRuby Documentation: Class Reference'
     super(index_file, tpl_vars)
   end
 end
