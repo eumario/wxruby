@@ -960,7 +960,7 @@ static VALUE evt_sash_dragged(int argc, VALUE *argv, VALUE self)
 
 static VALUE evt_sash_dragged_range(int argc_1, int argc_2, VALUE *argv, VALUE self) 
 {
-    return internal_evt_with_id(argc_1, argc_2, argv, self, wxEVT_SASH_DRAGGED_RANGE);
+    return internal_evt_with_id_range(argc_1, argc_2, argv, self, wxEVT_SASH_DRAGGED_RANGE);
 }
 
 
