@@ -52,9 +52,32 @@ a:visited {
     color: #999999;
 }
 
+a[href="#top"] { 
+    font-size: smaller;
+    font-weight: bold;
+    color: #55CC00;
+}
+
+a[href="#top"]:before { 
+    content: "<";
+}
+
+a[href="#top"]:after { 
+    content: ">";
+}
+
 #homelink { 
     font-size: smaller;
     font-weight: bold;
+    color: #55CC00;
+}
+
+a#homelink:before { 
+    content: "<";
+}
+
+a#homelink:after { 
+    content: ">";
 }
 
 #datestamp { 
@@ -67,7 +90,4 @@ a:visited {
 
 }
 
-#homelink { 
-    border: 1px solid #662211;
-    padding: 2px;
-}
+
