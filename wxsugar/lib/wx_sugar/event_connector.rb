@@ -12,7 +12,7 @@
 # pass the argument +:click+
 #
 # The parameter +source+ is the widget whose events should be listened
-# for. This might be a particular button. If no +source+ is specified,
+# for. This might be a particular button. If +source+ is set to *nil*,
 # and lots of widgets might generate this kind of event (for example, if
 # you have multiple buttons), it assumes that *ANY* button's clicking
 # should be handled.
