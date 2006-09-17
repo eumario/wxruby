@@ -225,8 +225,9 @@ end
 def create_swig_event_task(base_name)
     cpp_file = cpp_file(base_name)
     swig_file = special_swig_file(base_name)
-    
-    file(cpp_file => swig_file) do |t|
+    events_src = File.join %w|swig classes include events.rb|
+
+    file( cpp_file => [ swig_file, events_src ] ) do | t |
         do_swig(swig_file, cpp_file, $swig_options)
         post_process(cpp_file, "fixmodule.rb")
         post_process(cpp_file, "fixevents.rb")
