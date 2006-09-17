@@ -71,7 +71,7 @@ $tree_list = [
         #'wxPopupWindow',
         'wxRadioBox',
         'wxRadioButton',
-        #'wxSashWindow',
+        'wxSashWindow',
         'wxScrolledWindow',
         'wxSlider',
         'wxSpinButton',
