@@ -42,9 +42,9 @@
 #  ...
 #  panel = Wx::Panel.new(parent, -1) # create the container
 #  panel.arrange_horizontally(:padding => 4) # specify layout strategy
-#  panel.add( Wx::Checkbox.new(panel, -1, 'item A') ) # add item,
-#  panel.add( Wx::Checkbox.new(panel, -1, 'item B') ) # another,
-#  panel.add( Wx::Checkbox.new(panel, -1, 'item C') ) # and another
+#  panel.add( Wx::CheckBox.new(panel, -1, 'item A') ) # add item,
+#  panel.add( Wx::CheckBox.new(panel, -1, 'item B') ) # another,
+#  panel.add( Wx::CheckBox.new(panel, -1, 'item C') ) # and another
 
 require 'wx_sugar/class_definitions'
 
