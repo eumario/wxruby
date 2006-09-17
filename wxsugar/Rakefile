@@ -29,7 +29,9 @@ task :gem do
     # REQUIREMENTS
     s.required_ruby_version = '>= 1.8.1'  
 
-    s.files = FileList[ 'lib/wx_sugar/*.rb' ].to_a
+    s.files = FileList[ 'lib/**/*', 
+                        'samples/**/*',
+                        'LICENCE' ].to_a
 
     # LIBRARIES
     s.require_path = 'lib'
@@ -44,6 +46,7 @@ Rake::PackageTask.new('wx_sugar', WXSUGAR_VERSION) do | p_task |
   p_task.need_tar_gz = true
   pkg_files = p_task.package_files
   pkg_files.include('Rakefile')
-  pkg_files.include('lib/**/*.rb')
+  pkg_files.include('LICENCE')
+  pkg_files.include('lib/**/*')
   pkg_files.include('samples/**/*')
 end
