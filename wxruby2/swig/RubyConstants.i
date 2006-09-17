@@ -16,6 +16,7 @@
 #include <wx/imaglist.h>
 #include <wx/laywin.h>
 #include <wx/imagbmp.h>
+#include <wx/sashwin.h>
 
 //
 // All of these exist on only one platform, so in those
@@ -2029,6 +2030,16 @@ enum {
     wxIMAGE_LIST_NORMAL, // Normal icons
     wxIMAGE_LIST_SMALL,  // Small icons
     wxIMAGE_LIST_STATE   // State icons: unimplemented (see WIN32 documentation)
+};
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/sashwin.h
+//** ---------------------------------------------------------------------------- **
+
+enum wxSashDragStatus
+{
+    wxSASH_STATUS_OK,
+    wxSASH_STATUS_OUT_OF_RANGE
 };
 
 //** ---------------------------------------------------------------------------- **
