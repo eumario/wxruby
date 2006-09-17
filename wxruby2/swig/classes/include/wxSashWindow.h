@@ -34,6 +34,15 @@ public:
 	 * \param wxSashEdgePosition   
 	*/
 
+    // Gets the default sash border size
+    int GetDefaultBorderSize() const { return m_borderSize; }
+
+    // Get border size
+    int GetEdgeMargin(wxSashEdgePosition edge) const { return m_sashes[edge].m_margin; }
+
+    // Gets the addition border size between child and sash window
+    int GetExtraBorderSize() const { return m_extraBorderSize; }
+
   bool GetSashVisible(wxSashEdgePosition  edge ) const;
 	/**
 	 * \brief Gets the maximum window size in the x direction. 
@@ -66,6 +75,12 @@ public:
 	 * \brief Sets the maximum window size in the x direction. 
 	 * \param int  
 	*/
+
+    // Sets the default sash border size
+    void SetDefaultBorderSize(int width) { m_borderSize = width; }
+
+    // Sets the addition border size between child and sash window
+    void SetExtraBorderSize(int width) { m_extraBorderSize = width; }
 
   void SetMaximumSizeX(int  min ) ;
 	/**
