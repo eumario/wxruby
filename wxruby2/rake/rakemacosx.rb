@@ -14,7 +14,10 @@ $ld = "g++"
 $swig_options += " -D__WXMAC__ "
 
 $ruby_cppflags.gsub!(/-g/,"")
-$wx_libs = $wx_libs.chomp.gsub(/-framework Cocoa/,"").gsub(/-framework WebKit/,"") + " -lobjc "
+
+$wx_libs.chomp!
+$wx_libs.gsub!(/-framework (Cocoa|WebKit)/, '')
+$wx_libs << ' -lobjc -framework Foundation'
 
 $extra_cppflags = '-x objective-c++'
 $extra_ldflags = "-dynamic -bundle -flat_namespace -undefined suppress"
