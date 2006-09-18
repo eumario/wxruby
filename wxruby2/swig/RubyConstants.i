@@ -2181,3 +2181,26 @@ enum wxLayoutOrientation
 %constant const int TREE_ITEM_ICON_EXPANDED = wxTreeItemIcon_Expanded;
 %constant const int TREE_ITEM_ICON_SELECTED_EXPANDED = wxTreeItemIcon_SelectedExpanded;
 %constant const int TREE_ITEM_ICON_MAX = wxTreeItemIcon_Max;
+
+// Platform constants
+
+#ifdef __WXMOTIF__
+#define wxPlatform "__WXMOTIF__"
+#define wxPlatName "wxMotif"
+#endif
+#ifdef __WXX11__
+#define wxPlatform "__WXX11__"
+#define wxPlatName "wxX11"
+#endif
+#ifdef __WXGTK__
+#define wxPlatform "__WXGTK__"
+#define wxPlatName "wxGTK"
+#endif
+#ifdef __WXMSW__
+#define wxPlatform "__WXMSW__"
+#define wxPlatName "wxMSW"
+#endif
+#ifdef __WXMAC__
+#define wxPlatform "__WXMAC__"
+#define wxPlatName "wxMac"
+#endif
