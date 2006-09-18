@@ -168,19 +168,20 @@ $tree_list = [
         ]],
 
     # Other stuff
-    #['Miscellaneous', [
+    ['Miscellaneous', [
     #    'ColourDB',
     #    'DialogUnits',
     #    'DrawXXXList',
     #    'FontEnumerator',
     #    'PrintFramework',
+         'ShapedWindow',
     #    'Throbber',
     #    'Unicode',
     #    'wxFileHistory',
     #    'wxJoystick',
     #    'wxOGL',
     #    'wxWave',
-    #    ]],
+        ]],
 
     # need libs not coming with the demo
     #['Objects using an external library', [
