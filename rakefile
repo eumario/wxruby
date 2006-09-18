@@ -1,5 +1,5 @@
 # rakefile
-#   Copyright 2004-2005 by Kevin Smith
+#   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
 require "rake/rakeutil"
@@ -93,6 +93,7 @@ begin
     desc "Delete compiled libraries and object files"
     task :clean do
         force_delete($target_lib)
+        force_delete(VERSION_FILE)
         #force_rmdir($dest_dir)
         delete_files_in($obj_dir)
         #force_rmdir($obj_dir)

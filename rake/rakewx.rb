@@ -2,10 +2,24 @@
 #   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
-# This file is required by the main wxRuby rakefile.
-# Basically, the messy parts are here, to keep the 
-# main rakefile easier to understand
+# determine and/or set the version
+VERSION_FILE = File.join %w|lib wx version.rb|
+if ENV['WXRUBY_VERSION']
+  WXRUBY_VERSION = ENV['WXRUBY_VERSION']
+  File.open(VERSION_FILE, 'w') do | version_file |
+    version_file.puts "module Wx"
+    version_file.puts "  WXRUBY_VERSION    = '#{WXRUBY_VERSION}'"
+    version_file.puts "  WXWIDGETS_VERSION = '2.6.3'"
+    version_file.puts "end"
+  end
+elsif File.exists?(VERSION_FILE)
+  require VERSION_FILE
+  WXRUBY_VERSION = Wx::WXRUBY_VERSION
+else
+  WXRUBY_VERSION = ''
+end
 
+# sources and destinations of various intermediate build targets
 $swig_dir = 'swig'
 $src_dir = 'src'
 $obj_dir = 'obj'

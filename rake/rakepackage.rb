@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake/packagetask'
 
-# This file adds support for five new Rake targets
+# This file adds support for five Rake targets
 # Two important ones:
 # :gem     - build a binary wxruby gem for current platform
 # :package - build a platfrom-neutral source tarball
@@ -11,10 +11,17 @@ require 'rake/packagetask'
 # :gem_osx   - build a binary gem for OS X (-ppc)
 # :gem_linux - build a binary gem for Linux (-i686)
 
+task :version do
+  if WXRUBY_VERSION.empty?
+    raise "Cannot build a package without a version being specified\n" +
+          "Create a version by running rake with WXRUBY_VERSION=x.x.x"
+  end
+end
+
 $base_gemspec = Gem::Specification.new do | spec |
   spec.name = 'wxruby2-preview'
   # TODO - this shouldn't be hardcoded - load from rake-created file instead
-  spec.version = '0.0.35'
+  spec.version = WXRUBY_VERSION
 
   spec.require_path = 'lib'
   spec.summary  = 'Ruby interface to the wxWidgets GUI library'
@@ -33,7 +40,7 @@ $base_gemspec = Gem::Specification.new do | spec |
   spec.autorequire  = 'wx'
   spec.require_path = 'lib'
   # Platform specific binaries are added in later
-  spec.files        = [ 'lib/wx.rb' ] +
+  spec.files        = [ 'lib/wx.rb', 'lib/wx/version.rb' ] +
                       FileList[ 'samples/**/*' ].to_a
 
   spec.has_rdoc = false
@@ -53,7 +60,7 @@ end
 def create_gem_tasks
   # basic binary gem task for current platform
   desc "Build a binary RubyGem for the current platform"
-  task :gem => [ :default ]do 
+  task :gem => [ :default, :version ] do
     this_gemspec = $base_gemspec.dup()    
     this_gemspec.instance_eval do 
       self.platform = Gem::Platform::CURRENT
@@ -67,7 +74,7 @@ def create_gem_tasks
   GEM_PLATFORMS.each do | platform, details |
     gem_platform, ext = details
     gem_task = "gem_#{platform}".intern
-    task gem_task do
+    task gem_task => [ :version ] do 
       this_gemspec = $base_gemspec.dup()      
       this_gemspec.instance_eval do 
         self.platform = gem_platform
@@ -80,15 +87,15 @@ def create_gem_tasks
 end
 
 def create_package_tasks
-  # TODO - version shouldn't be hardcoded - load from rake-created file instead
-  Rake::PackageTask.new('wxruby2-preview', '0.0.35') do | p_task |
+  Rake::PackageTask.new('wxruby2-preview', WXRUBY_VERSION) do | p_task |
     p_task.need_tar_gz = true
     pkg_files = p_task.package_files
     pkg_files.include('README', 'LICENSE', 'ChangeLog', 'rakefile')
-    pkg_files.include('lib/**/*.rb')
+    pkg_files.include('lib/wx.rb', 'lib/wx/version.rb')
     pkg_files.include('swig/**/*')
     pkg_files.include('tests/**/*')
     pkg_files.include('rake/**/*')
     pkg_files.include('samples/**/*')
   end
 end
+task :package => :version
