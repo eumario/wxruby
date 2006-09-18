@@ -404,6 +404,7 @@ class WxWLatexParser < LatexParser
       content.sub!(/^# /, ' #')
       content.sub!(/\\\\/, "\n")
       content.gsub!(/wx([A-Z_]+)/) { $1 }
+      content.gsub!(/$(\-\d?|\*|\+\**)$/) { $1 }
       content.gsub!(/<wx\/([\w\.]+?)>/) { "&lt;wx/#{$1}&gt;" }
     end
     super(content)
