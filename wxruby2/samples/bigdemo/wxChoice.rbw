@@ -30,3 +30,9 @@ module Demo
         return "A choice item is used to select one of a list of strings. Unlike a listbox, only the selection is visible until the user pulls down the menu of choices."
     end
 end
+
+if __FILE__ == $0
+  run_solo_lib = File.join( File.dirname(__FILE__), 'run.rb')
+  load run_solo_lib
+  run File.basename($0)
+end

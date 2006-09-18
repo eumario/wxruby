@@ -53,3 +53,9 @@ module Demo
         return "The calendar control allows the user to pick a date interactively. For this, it displays a window containing several parts: the control to pick the month and the year at the top (either or both of them may be disabled) and a month area below them which shows all the days in the month. The user can move the current selection using the keyboard and select the date (generating EVT_CALENDAR event) by pressing <Return> or double clicking it."
     end
 end
+
+if __FILE__ == $0
+  run_solo_lib = File.join( File.dirname(__FILE__), 'run.rb')
+  load run_solo_lib
+  run File.basename($0)
+end
