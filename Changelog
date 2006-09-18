@@ -1,3 +1,7 @@
+- Added platform constants (Roy Sutton)
+- Added Region class, ShapedWindow sample for bigdemo (Roy Sutton)
+- Improvements to class documentation home page (Alex Fenton)
+- ID-range event handler fixes, sashwindow constants and demo (Roy Sutton)
 - Fixed BusyInfo.busy (Sean Long)
 - Added GenericDirCtrl, MiniFrame to bigdemo (Roy Sutton)
 - Fix progress dialog in dialogs.rb (Alex Fenton)
