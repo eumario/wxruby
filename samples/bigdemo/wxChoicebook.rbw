@@ -61,3 +61,9 @@ module Demo
         return "This class is a control similar to a notebook control, but uses a Wx::Choice to manage the selection of the pages."
     end
 end
+
+if __FILE__ == $0
+  run_solo_lib = File.join( File.dirname(__FILE__), 'run.rb')
+  load run_solo_lib
+  run File.basename($0)
+end

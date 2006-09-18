@@ -33,3 +33,9 @@ module Demo
         return "A checkbox is a labelled box which is either on (checkmark is visible) or off (no checkmark)."
     end
 end
+
+if __FILE__ == $0
+  run_solo_lib = File.join( File.dirname(__FILE__), 'run.rb')
+  load run_solo_lib
+  run File.basename($0)
+end

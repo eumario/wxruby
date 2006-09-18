@@ -51,3 +51,9 @@ module Demo
         return "A gauge is a horizontal or vertical bar which shows a quantity (often time). "
     end
 end
+
+if __FILE__ == $0
+  run_solo_lib = File.join( File.dirname(__FILE__), 'run.rb')
+  load run_solo_lib
+  run File.basename($0)
+end
