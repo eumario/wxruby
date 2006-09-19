@@ -18,7 +18,7 @@
 #include <wx/imagbmp.h>
 #include <wx/sashwin.h>
 
-//
+
 // All of these exist on only one platform, so in those
 // cases I'm defining them so the compiler doesn't freak out
 //
@@ -2182,25 +2182,21 @@ enum wxLayoutOrientation
 %constant const int TREE_ITEM_ICON_SELECTED_EXPANDED = wxTreeItemIcon_SelectedExpanded;
 %constant const int TREE_ITEM_ICON_MAX = wxTreeItemIcon_Max;
 
+
 // Platform constants
 
 #ifdef __WXMOTIF__
-#define wxPlatform "__WXMOTIF__"
-#define wxPlatName "wxMotif"
+#define wxPLATFORM "WXMOTIF"
 #endif
 #ifdef __WXX11__
-#define wxPlatform "__WXX11__"
-#define wxPlatName "wxX11"
+#define wxPLATFORM "WXX11"
 #endif
 #ifdef __WXGTK__
-#define wxPlatform "__WXGTK__"
-#define wxPlatName "wxGTK"
+#define wxPLATFORM "WXGTK"
 #endif
 #ifdef __WXMSW__
-#define wxPlatform "__WXMSW__"
-#define wxPlatName "wxMSW"
+#define wxPLATFORM "WXMSW"
 #endif
 #ifdef __WXMAC__
-#define wxPlatform "__WXMAC__"
-#define wxPlatName "wxMac"
+#define wxPLATFORM "WXMAC"
 #endif
