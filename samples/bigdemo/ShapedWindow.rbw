@@ -23,13 +23,7 @@ class MyFrame < Frame
     @bmp = Bitmap.new( Image.new(shape) )
     set_client_size(@bmp.get_width, @bmp.get_height)
 
-    if Platform != '__WXMAC__'
-      # wxMac clips the tooltip to the window shape, YUCK!!!
-      set_tool_tip("Right-click to close the window\n" +
-                   "Double-click the image to set/unset the window shape")
-    end
-
-    if Platform == '__WXGTK__'
+    if Wx::PLATFORM == 'WXGTK'
       # wxGTK requires that the window be created before you can
       # set its shape, so delay the call to SetWindowShape until
       # this event.
