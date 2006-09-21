@@ -1,0 +1,49 @@
+h1. Window Styles and WxRuby Constants Overview
+
+h2. Window Styles
+
+Many visual and interactive properties of controls and windows are
+influenced by the use of "style flags". These are Ruby constants within
+the Wx module, and look like this
+
+ Wx::SUNKEN_BORDER
+ Wx::MINIMIZE_BOX
+ Wx::TE_READONLY
+
+Some style flags are relevant for most windows, such as
+@Wx::SUNKEN_BORDER@. A full list of these constants can be found in the
+documentation for the "Window":window.html class.
+
+Other style flags are relevant for most varieties of frames and dialogs -
+anything that is likely to be displayed with a title bar and a frame
+drawn by the desktop/window manager. An example of these constants is
+@MINIMIZE_BOX@, which displays a button to minimize the frame. A full
+list of these constants is in the "Frame":frame.html documentation.
+
+There are also style flags that are relevant only to a specific class of
+window. An example is @Wx::TE_READONLY@, which is only meangingful for
+TextCtrl widgets. These names for these constants has a prefix
+indicating which class it is relevant to. @TE@ prefix for
+"TextCtrl":textctrl.html, @SP@ for "SpinCtrl":spinctrl.html, @TR@ for
+"TreeCtrl":treectrl.html and so on. 
+
+h2. Using style flags in constructors
+
+All these types of constants are usually used when creating a new window:
+
+ text = Wx::TextCtrl.new(parent, -1, 'Some text', Wx::DEFAULT_POSITION,
+ 	  			         Wx::DEFAULT_SIZE, Wx::TE_READONLY)
+
+To combine style flags, simply join them with the pipe symbol '|',
+ruby's logical OR operator.
+
+ text = WxTextCtrl.new(.....
+                       Wx::TE_READONLY|Wx::SUNKEN_BORDER|Wx::TE_MULTILINE)
+
+If you hate typing 'Wx::' all the time, include the Wx module in your class:
+
+ class MyTextCtrl
+   include Wx
+   ...
+   style = TE_READONLY|SUNKEN_BORDER|TE_MULTILINE
+
