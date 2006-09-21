@@ -31,6 +31,7 @@ li, p {
 td { 
     font-size: 11pt;
     vertical-align: top;
+    padding: 3px;
 }
 
 a { 
@@ -81,7 +82,11 @@ a#homelink:after {
 }
 
 #datestamp { 
+    padding: 3px;
     font-size: smaller;
+    color: #333333;
+    border: 1px solid #EEEAE3;
+    background-color: #FFFAF3;
 }
 
 /* TODO - special formatting to make the 'methods' 
