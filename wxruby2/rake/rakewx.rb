@@ -26,6 +26,8 @@ $obj_dir = 'obj'
 $dest_dir = 'lib'
 $classes_dir = File.join($swig_dir, 'classes')
 $original_h_dir = File.join($classes_dir, 'include')
+$optional_dir = File.join($classes_dir, 'optional')
+$optional_h_dir = File.join($optional_dir, 'include')
 
 $swig_cmd = "swig"
 $swig_options = " -fvirtual "
@@ -113,12 +115,20 @@ def get_classes
     return classes.sort
 end
 
+def get_optional_classes
+    classes = []
+    if ENV['WXSCINTILLA']
+      classes << "Scintilla"
+    end
+    return classes.sort
+end
+
 def all_obj_bases
     extra_classes = 
         ["wx", "RubyConstants", "RubyStockObjects", 
             "RubyEventTypes", "Functions", "Mac", 
 			"Events", ]
-    return get_classes + extra_classes
+    return get_classes + get_optional_classes + extra_classes
 end
 
 def special_swig_file(base_name)
@@ -127,6 +137,10 @@ end
 
 def normal_swig_file(base_name)
     return File.join($classes_dir, "#{base_name}.i")
+end
+
+def optional_swig_file(base_name)
+    return File.join($optional_dir, "#{base_name}.i")
 end
 
 def shared_swig_files
@@ -138,6 +152,14 @@ end
 
 def original_h_file(base_name)
     return File.join($original_h_dir, "wx#{base_name}.h")
+end
+
+def optional_h_file(base_name)
+    if base_name == 'Scintilla'
+        return File.join(ENV['WXSCINTILLA'], "include/wx/wx#{base_name.downcase}.h")
+    else
+        return File.join($optional_h_dir, "wx#{base_name}.h")
+    end
 end
 
 def cpp_file(base_name)
@@ -173,6 +195,7 @@ end
 
 def add_initializers(cpp_file)
     needs_init_list = get_classes
+    needs_init_list += get_optional_classes
     needs_init_list << "Events"
     needs_init_list << "Events2"
     needs_init_list << "Functions"
@@ -236,6 +259,19 @@ def create_normal_swig_task(base_name)
     end
 end
 
+def create_optional_swig_task(base_name)
+    cpp_file = cpp_file(base_name)
+    swig_file = optional_swig_file(base_name)
+    h_file = optional_h_file(base_name)
+    
+    file(cpp_file => [swig_file, h_file] + shared_swig_files) do |t|
+        do_swig(swig_file, cpp_file, $swig_options)
+        post_process(cpp_file, "fixplatform.rb")
+        post_process(cpp_file, "fixmodule.rb")
+	post_process(cpp_file, "fixdeleting.rb")
+    end
+end
+
 def create_swig_event_task(base_name)
     cpp_file = cpp_file(base_name)
     swig_file = special_swig_file(base_name)
@@ -263,6 +299,9 @@ end
 def create_swig_tasks
     get_classes.each do | c |
         create_normal_swig_task(c)
+    end
+    get_optional_classes.each do | c |
+        create_optional_swig_task(c)
     end
     create_swig_helper_task("RubyConstants")
     create_swig_helper_task("RubyStockObjects")

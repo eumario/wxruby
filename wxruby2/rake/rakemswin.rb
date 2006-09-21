@@ -93,3 +93,9 @@ $extra_objs = "swig/wx.res"
 rule('.res' => '.rc') do | t |
     sh("rc -I#$WXINC #{t.prerequisites}")
 end
+
+WXSCINTILLA = ENV['WXSCINTILLA']
+if WXSCINTILLA
+  $wx_libs += " #{WXSCINTILLA}/lib/wxscintilla#{$POSTFIX}.lib"
+  $wx_cppflags += " -I#{WXSCINTILLA}/include -DWXSCINTILLA"
+end

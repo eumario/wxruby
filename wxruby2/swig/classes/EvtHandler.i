@@ -16,6 +16,9 @@
 #include <wx/listctrl.h>
 #include <wx/sashwin.h>
 #include <wx/wizard.h>
+#ifdef WXSCINTILLA
+#    include <wx/wxscintilla.h>
+#endif
 %}
 
 %module(directors="1") wxEvtHandler
@@ -58,6 +61,9 @@ extern swig_class cWxListEvent;
 extern swig_class cWxWizardEvent;
 extern swig_class cWxSashEvent;
 extern swig_class cWxActivateEvent;
+#ifdef WXSCINTILLA
+extern swig_class cWxScintillaEvent;
+#endif
 
 static const wxEventType *calendarEvents[] =
 {
@@ -271,6 +277,38 @@ static const wxEventType *activateEvents[] =
   (const wxEventType *)0
 };
 
+#ifdef WXSCINTILLA
+static const wxEventType *scintillaEvents[] =
+{
+     &wxEVT_SCI_CHANGE,
+     &wxEVT_SCI_STYLENEEDED,
+     &wxEVT_SCI_CHARADDED,
+     &wxEVT_SCI_SAVEPOINTREACHED,
+     &wxEVT_SCI_SAVEPOINTLEFT,
+     &wxEVT_SCI_ROMODIFYATTEMPT,
+     &wxEVT_SCI_KEY,
+     &wxEVT_SCI_DOUBLECLICK,
+     &wxEVT_SCI_UPDATEUI,
+     &wxEVT_SCI_MODIFIED,
+     &wxEVT_SCI_MACRORECORD,
+     &wxEVT_SCI_MARGINCLICK,
+     &wxEVT_SCI_NEEDSHOWN,
+     &wxEVT_SCI_PAINTED,
+     &wxEVT_SCI_USERLISTSELECTION,
+     &wxEVT_SCI_URIDROPPED,
+     &wxEVT_SCI_DWELLSTART,
+     &wxEVT_SCI_DWELLEND,
+     &wxEVT_SCI_START_DRAG,
+     &wxEVT_SCI_DRAG_OVER,
+     &wxEVT_SCI_DO_DROP,
+     &wxEVT_SCI_ZOOM,
+     &wxEVT_SCI_HOTSPOT_CLICK,
+     &wxEVT_SCI_HOTSPOT_DCLICK,
+     &wxEVT_SCI_CALLTIP_CLICK,
+     (const wxEventType *)0
+};
+#endif
+
 //IMPLEMENT_ABSTRACT_CLASS(wxRbCallback, wxObject);
 
 class wxRbCallback : public wxObject 
@@ -337,6 +375,10 @@ public:
             cEvent = cWxActivateEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
             cEvent = cWxSashEvent.klass;
+#ifdef WXSCINTILLA
+        else if (event.IsKindOf(CLASSINFO(wxScintillaEvent)))
+            cEvent = cWxScintillaEvent.klass;
+#endif
         else if(event.IsKindOf(CLASSINFO(wxCommandEvent)))
             cEvent = cWxCommandEvent.klass;
  
