@@ -2,7 +2,12 @@ h1(#wxdialog). Wx::Dialog
 
 A dialog box is a window with a title bar and sometimes a system menu, which
 can be moved around the screen. It can contain controls and other windows and
-is usually used to allow the user to make some choice or to answer a question.
+is usually used to allow the user to make some choice or to answer a
+question. 
+
+Many common interactions such as choosing a file or entering a
+password are encapsulated in subclasses of Wx::Dialog, and will be
+displayed using native dialogs.
 
 h2. Derived from
 
@@ -16,50 +21,30 @@ h2. Derived from
 
 h2. Remarks
 
-There are two kinds of dialog -- _modal_\ and _modeless_. A modal dialog
+There are two kinds of dialog -- _modal_ and _modeless_. A modal dialog
 blocks program flow and user input on other windows until it is dismissed,
 whereas a modeless dialog behaves more like a frame in that program flow
 continues, and input in other windows is still possible. To show a modal dialog
 you should use the "show_modal":#Dialog_showmodal method while to show
-a dialog modelessly you simply use "Show":dialogshow.html, just as with
-frames.
+a dialog modelessly you simply use "show":dialogshow.html, just as with
+frames. 
 
-Note that the modal dialog is one of the very few examples of
-Window-derived objects which may be created on the stack and not on the heap.
-In other words, although this code snippet:
+These methods return a value representing the user's choice from the
+dialog, such as 'OK' or 'Cancel'. To test these, do:
 
+ dlg = MyAskDialog.new(...)
+ case dlg.show_modal
+ when Wx::ID_OK # user clicked ok
+   ...
+ when Wx::ID_CANCLE # user clicked cancel or closed the dialog
+   ...
+ end
 
-     void AskUser()
-     {
-         MyAskDialog *dlg = new MyAskDialog(...);
-         if ( dlg->ShowModal() == ID_OK )
-             ...
-         //else: dialog was cancelled or some another button pressed
- 
-         dlg->Destroy();
-     }
- 
-
-works, you can also achieve the same result by using a simpler code fragment
-below:
-
-
-     void AskUser()
-     {
-         MyAskDialog dlg(...);
-         if ( dlg.ShowModal() == ID_OK )
-             ...
- 
-         // no need to call Destroy() here
-     }
- 
-
-An application can define a "CloseEvent":closeevent.html handler for
-the dialog to respond to system close events.
+As well as handling the ending of dialogs this way, an application can
+also define a "CloseEvent":closeevent.html handler for the dialog to
+respond to system close events, by calling @evt_close@.
 
 h2. Window styles
-
-
 
 |@CAPTION@|Puts a caption on the dialog box.|
 |@DEFAULT_DIALOG_STYLE@|Equivalent to a combination of CAPTION, CLOSE_BOX and SYSTEM_MENU (the last one is not used under Unix)|
@@ -71,7 +56,7 @@ h2. Window styles
 |@THICK_FRAME@|Display a thick frame around the window.|
 |@STAY_ON_TOP@|The dialog stays on top of all other windows.|
 |@NO_3D@|Under Windows, specifies that the child controlsshould not have 3D borders unless specified in the control.|
-|@DIALOG_NO_PARENT@|By default, a dialog createdwith a @NULL@ parent window will be given the "application's top level window":appgettopwindow.html as parent. Use thisstyle to prevent this from happening and create an orphan dialog. This is not recommended for modal dialogs.|
+|@DIALOG_NO_PARENT@|By default, a dialog created with a @nil@ parent window will be given the "application's top level window":appgettopwindow.html as parent. Use thisstyle to prevent this from happening and create an orphan dialog. This is not recommended for modal dialogs.|
 |@DIALOG_EX_CONTEXTHELP@|Under Windows, puts a query button on thecaption. When pressed, Windows will go into a context-sensitive help mode and Widgets will senda EVT_HELP event if the user clicked on an application window. _Note_\ that this is an extendedstyle and must be set by calling "set_extra_style":#Dialog_setextrastyle before Create is called (two-step construction).|
 |@DIALOG_EX_METAL@|On Mac OS X, frames with this style will be shown with a metallic look. This is an _extra_ style.|
 
