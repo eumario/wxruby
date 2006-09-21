@@ -21,6 +21,26 @@
 
 %include "typemaps.i"
 
+%typemap(directorargout) ( int * OUTPUT ) {
+  if($1 != NULL)
+  {
+    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+    {
+      *$1 = (int)NUM2INT(rb_ary_entry(result,0));
+      rb_ary_shift(result);
+    }
+    else
+    {
+      *$1 = 0;
+    }
+  }
+  else
+  {
+    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+      rb_ary_shift(result);  // Guess we should shift it anyhow!
+  }
+}
+
 /*
 Currently incompatible with the ruby post-processing of swigged .cpp files
 Needs to be fixed in fixdeleting.rb before this can be uncommented out
@@ -457,12 +477,3 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 
 %apply int *OUTPUT { int * x , int * y , int * w, int * h };
 
-%typemap(directorargout) ( int * x , int * y , int * w, int * h ) {
-  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len == 4))
-  {
-    *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
-    *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
-    *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
-    *$4 = ($*4_ltype)NUM2INT(rb_ary_entry(result,3));
-  }
-}
