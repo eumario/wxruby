@@ -505,7 +505,7 @@ alpha channel data to an image which doesn't have any. If the pointer is not
 	 * \param unsigned char *  
 	*/
 
-  void SetAlpha(unsigned char * alpha = NULL) ;
+  void SetAlpha(unsigned char * alpha = NULL, bool static_data = false ) ;
 	/**
 	 * \brief Sets the alpha value for the given pixel. This function should only be called
 if the image has alpha channel data, use   to

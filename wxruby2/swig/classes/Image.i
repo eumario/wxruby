@@ -9,17 +9,11 @@
 #include <wx/image.h>
 %}
 
+%apply char * { unsigned char * }
+%apply char { unsigned char }
 
-%ignore wxImage(int  width , int  height , bool clear = true) ;
 %ignore wxImage::Create();
-%ignore wxImage::HasAlpha;
 %ignore wxImage::AddHandler(const wxString&  filename );
-%ignore wxImage::SetAlpha(unsigned char *);
-%ignore wxImage::SetAlpha(int, int, unsigned char);
-%ignore wxImage::GetImageExtWildcard();
-%ignore wxImage::GetAlpha(int  x , int  y ) const;
-%ignore wxImage::GetAlpha() const;
-
 
 %import "include/wxObject.h"
 
