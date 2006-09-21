@@ -1,0 +1,40 @@
+h1(#wxsplitterrenderparams). Wx::SplitterRenderParams
+
+This is just a simple @struct@ used as a return value of 
+"RendererNative#get_splitter_params":renderernative.html#RendererNative_getsplitterparams.
+
+It doesn't have any methods and all of its fields are constant and so can be
+only examined but not modified.
+
+<div id="methods">
+
+h2. Methods
+
+* "Event#width_sash":#SplitterRenderParams_widthsash
+* "SplitterRenderParams#border":#SplitterRenderParams_border
+* "SplitterRenderParams#is_hot_sensitive":#SplitterRenderParams_ishotsensitive
+
+</div>
+
+
+h3(#wxeventwidthsash). Event#width_sash
+
+const CoordwidthSash
+
+The width of the splitter sash.
+
+
+h3(#SplitterRenderParams_border). SplitterRenderParams#border
+
+const Coordborder
+
+The width of the border drawn by the splitter inside it, may be $0$.
+
+
+h3(#SplitterRenderParams_ishotsensitive). SplitterRenderParams#is_hot_sensitive
+
+const boolisHotSensitive
+
+ if the sash changes appearance when the mouse passes over it, 
+otherwise.
+

@@ -1,0 +1,277 @@
+h1(#wxffile). Wx::FFile
+
+FFile implements buffered file I/O. This is a very small class designed to
+minimize the overhead of using it - in fact, there is hardly any overhead at
+all, but using it brings you automatic error checking and hides differences
+between platforms and compilers. It wraps inside it a @FILE *@ handle used
+by standard C IO library (also known as @stdio@).
+
+h2. Derived from
+
+None.
+
+<div id="methods">
+
+h2. Methods
+
+* "FFile.new":#FFile_new
+* "FFile#attach":#FFile_attach
+* "FFile#close":#FFile_close
+* "FFile#detach":#FFile_detach
+* "FFile#fp":#FFile_fp
+* "FFile#eof":#FFile_eof
+* "FFile#error":#FFile_error
+* "FFile#flush":#FFile_flush
+* "FFile#get_kind":#FFile_getkind
+* "FFile#is_opened":#FFile_isopened
+* "FFile#length":#FFile_length
+* "FFile#open":#FFile_open
+* "FFile#read":#FFile_read
+* "FFile#read_all":#FFile_readall
+* "FFile#seek":#FFile_seek
+* "FFile#seek_end":#FFile_seekend
+* "FFile#tell":#FFile_tell
+* "FFile#write":#FFile_write
+* "FFile#write":#FFile_write
+
+</div>
+
+
+
+h3(#FFile_new). FFile.new
+
+  *FFile.new*(%(arg-type)char% filename,  %(arg-type)char% mode = "r")
+
+Opens a file with the given mode. As there is no way to return whether the
+operation was successful or not from the constructor you should test the
+return value of "is_opened":#FFile_isopened to check that it didn't
+fail.
+
+  *FFile.new*(%(arg-type)FILE% fp)
+
+Opens a file with the given file pointer, which has already been opened.
+
+h4. Parameters
+
+* _filename_ The filename.
+* _mode_ The mode in which to open the file using standard C strings.
+Note that you should use @"b"@ flag if you use binary files under Windows
+or the results might be unexpected due to automatic newline conversion done
+for the text files.
+* _fp_ An existing file descriptor, such as stderr.
+
+
+  *destructor*()
+
+Destructor will close the file.
+
+NB: it is not virtual so you should _not_ derive from FFile!
+
+
+h3(#FFile_attach). FFile#attach
+
+  *attach*(%(arg-type)FILE% fp)
+
+Attaches an existing file pointer to the FFile object.
+
+The descriptor should be already opened and it will be closed by FFile
+object.
+
+
+h3(#FFile_close). FFile#close
+
+ Boolean *close*()
+
+Closes the file and returns  on success.
+
+
+h3(#FFile_detach). FFile#detach
+
+  *detach*()
+
+Get back a file pointer from FFile object -- the caller is responsible for closing the file if this
+descriptor is opened. "is_opened()":#FFile_isopened() will return  after call to Detach().
+
+
+h3(#FFile_fp). FFile#fp
+
+ FILE *fp*()
+
+Returns the file pointer associated with the file.
+
+
+h3(#FFile_eof). FFile#eof
+
+ Boolean *eof*()
+
+Returns  if the an attempt has been made to read _past_
+the end of the file. 
+
+Note that the behaviour of the file descriptor based class
+"File":file.html is different as "File#eof":file.html#File_eof
+will return  here as soon as the last byte of the file has been
+read.
+
+Also note that this method may only be called for opened files and may crash if
+the file is not opened.
+
+h4. See also
+
+"is_opened":#FFile_isopened
+
+
+h3(#FFile_error). FFile#error
+
+Returns  if an error has occurred on this file, similar to the standard
+@ferror()@ function.
+
+Please note that this method may only be called for opened files and may crash
+if the file is not opened.
+
+h4. See also
+
+"is_opened":#FFile_isopened
+
+
+h3(#FFile_flush). FFile#flush
+
+ Boolean *flush*()
+
+Flushes the file and returns  on success.
+
+
+h3(#FFile_getfilekind). FFile#get_kind
+
+ "FileKind":filekind.html *get_kind*()
+
+Returns the type of the file. Possible return values are:
+
+
+ enum FileKind
+ {
+   FILE_KIND_UNKNOWN,
+   FILE_KIND_DISK,     // a file supporting seeking to arbitrary offsets
+   FILE_KIND_TERMINAL, // a tty
+   FILE_KIND_PIPE      // a pipe
+ };
+ 
+ 
+
+
+h3(#FFile_isopened). FFile#is_opened
+
+ Boolean *is_opened*()
+
+Returns  if the file is opened. Most of the methods of this class may only
+be used for an opened file.
+
+
+h3(#FFile_length). FFile#length
+
+ "FileOffset":fileoffset.html *length*()
+
+Returns the length of the file.
+
+
+h3(#FFile_open). FFile#open
+
+ Boolean *open*(%(arg-type)char% filename,  %(arg-type)char% mode = "r")
+
+Opens the file, returning  if successful.
+
+h4. Parameters
+
+* _filename_ The filename.
+* _mode_ The mode in which to open the file.
+
+
+h3(#FFile_read). FFile#read
+
+ size_t *read*(%(arg-type)% buffer,  %(arg-type)size_t% count)
+
+Reads the specified number of bytes into a buffer, returning the actual number read.
+
+h4. Parameters
+
+* _buffer_ A buffer to receive the data.
+* _count_ The number of bytes to read.
+
+h4. Return value
+
+The number of bytes read.
+
+
+h3(#FFile_readall). FFile#read_all
+
+ Boolean *read_all*(%(arg-type)String% str,  %(arg-type)MBConv% conv = ConvUTF8)
+
+Reads the entire contents of the file into a string.
+
+h4. Parameters
+
+* _str_ String to read data into.
+* _conv_ Conversion object to use in Unicode build; by default supposes
+that file contents is encoded in UTF-8.
+
+h4. Return value
+
+ if file was read successfully,  otherwise.
+
+
+h3(#FFile_seek). FFile#seek
+
+ Boolean *seek*(%(arg-type)FileOffset% ofs,  %(arg-type)SeekMode% mode = FromStart)
+
+Seeks to the specified position and returns  on success.
+
+h4. Parameters
+
+* _ofs_ Offset to seek to.
+* _mode_ One of *FromStart*, *FromEnd*, *FromCurrent*.
+
+
+h3(#FFile_seekend). FFile#seek_end
+
+ Boolean *seek_end*(%(arg-type)FileOffset% ofs = 0)
+
+Moves the file pointer to the specified number of bytes before the end of the file
+and returns  on success.
+
+h4. Parameters
+
+* _ofs_ Number of bytes before the end of the file.
+
+
+h3(#FFile_tell). FFile#tell
+
+ "FileOffset":fileoffset.html *tell*()
+
+Returns the current position.
+
+
+h3(#FFile_write). FFile#write
+
+ size_t *write*(%(arg-type)% buffer,  %(arg-type)size_t% count)
+
+Writes the specified number of bytes from a buffer.
+
+h4. Parameters
+
+* _buffer_ A buffer containing the data.
+* _count_ The number of bytes to write.
+
+h4. Return value
+
+Number of bytes written.
+
+
+h3(#FFile_writes). FFile#write
+
+ Boolean *write*(%(arg-type)String% s,  %(arg-type)MBConv% conv = ConvUTF8)
+
+Writes the contents of the string to the file, returns  on success.
+
+The second argument is only meaningful in Unicode build of Widgets when
+_conv_ is used to convert _s_ to multibyte representation.
+
+

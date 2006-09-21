@@ -1,0 +1,97 @@
+h1(#wxipv4address). Wx::IPV4address
+
+h2. Derived from
+
+"IPaddress":ipaddress.html
+
+<div id="methods">
+
+h2. Methods
+
+* "IPV4address#hostname":#IPV4address_hostname
+* "IPV4address#ip_address":#IPV4address_ipaddress
+* "IPV4address#service":#IPV4address_service
+* "IPV4address#any_address":#IPV4address_anyaddress
+* "IPV4address#local_host":#IPV4address_localhost
+
+</div>
+
+
+
+h3(#IPV4address_hostname). IPV4address#hostname
+
+ Boolean *hostname*(%(arg-type)String% hostname)
+
+Set the address to _hostname_, which can be a host name
+or an IP-style address in dot notation (a.b.c.d)
+
+h4. Return value
+
+Returns true on success, false if something goes wrong
+(invalid hostname or invalid IP address).
+
+ String *hostname*()
+
+Returns the hostname which matches the IP address.
+
+
+h3(#IPV4address_ipaddress). IPV4address#ip_address
+
+ String *ip_address*()
+
+Returns a String containing the IP address in dot quad (127.0.0.1) format.
+
+
+h3(#IPV4address_service). IPV4address#service
+
+ Boolean *service*(%(arg-type)String% service)
+
+Set the port to that corresponding to the specified _service_.
+
+h4. Return value
+
+Returns true on success, false if something goes wrong
+(invalid service).
+
+ Boolean *service*(%(arg-type)unsigned short% service)
+
+Set the port to that corresponding to the specified _service_.
+
+h4. Return value
+
+Returns true on success, false if something goes wrong
+(invalid service).
+
+ unsigned short *service*()
+
+Returns the current service.
+
+
+h3(#IPV4address_anyaddress). IPV4address#any_address
+
+ Boolean *any_address*()
+
+Set address to any of the addresses of the current machine. Whenever
+possible, use this function instead of "IPV4address#local_host":ipv4address.html#IPV4address_localhost,
+as this correctly handles multi-homed hosts and avoids other small
+problems. Internally, this is the same as setting the IP address
+to *INADDR_ANY*.
+
+h4. Return value
+
+Returns true on success, false if something went wrong.
+
+
+h3(#IPV4address_localhost). IPV4address#local_host
+
+ Boolean *local_host*()
+
+Set address to localhost (127.0.0.1). Whenever possible, use the 
+"IPV4address#any_address":ipv4address.html#IPV4address_anyaddress,
+function instead of this one, as this will correctly handle multi-homed
+hosts and avoid other small problems.
+
+h4. Return value
+
+Returns true on success, false if something went wrong.
+

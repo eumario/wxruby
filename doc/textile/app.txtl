@@ -1,0 +1,658 @@
+h1(#wxapp). Wx::App
+
+The *App* class represents the application itself. It is used
+to:
+
+
+* set and get application-wide properties;
+* implement the windowing system message or event loop;
+* initiate application processing via "App#on_init":app.html#App_oninit;
+* allow default processing of events not handled by other
+objects in the application.
+
+
+You should use the macro IMPLEMENT_APP(appClass) in your application implementation
+file to tell Widgets how to create an instance of your application class.
+
+Use DECLARE_APP(appClass) in a header file if you want the GetApp function (which returns
+a reference to your application object) to be visible to other files.
+
+h2. Derived from
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"App overview":appoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "App.new":#App_new
+* "App#argc":#App_argc
+* "App#argv":#App_argv
+* "App#create_log_target":#App_createlogtarget
+* "App#dispatch":#App_dispatch
+* "App#exit_main_loop":#App_exitmainloop
+* "App#filter_event":#App_filterevent
+* "App#get_app_name":#App_getappname
+* "App#get_class_name":#App_getclassname
+* "App#get_exit_on_frame_delete":#App_getexitonframedelete
+* "App#get_instance":#App_getinstance
+* "App#get_top_window":#App_gettopwindow
+* "App#get_use_best_visual":#App_getusebestvisual
+* "App#get_vendor_name":#App_getvendorname
+* "App#is_active":#App_isactive
+* "App#is_main_loop_running":#App_ismainlooprunning
+* "App#main_loop":#App_mainloop
+* "App#on_assert":#App_onassert
+* "App#on_cmd_line_error":#App_oncmdlineerror
+* "App#on_cmd_line_help":#App_oncmdlinehelp
+* "App#on_cmd_line_parsed":#App_oncmdlineparsed
+* "App#on_exception_in_main_loop":#App_onexceptioninmainloop
+* "App#on_exit":#App_onexit
+* "App#on_fatal_exception":#App_onfatalexception
+* "App#on_init":#App_oninit
+* "App#on_init_cmd_line":#App_oninitcmdline
+* "App#on_run":#App_onrun
+* "App#on_unhandled_exception":#App_onunhandledexception
+* "App#process_message":#App_processmessage
+* "App#pending":#App_pending
+* "App#send_idle_events":#App_sendidleevents
+* "App#set_app_name":#App_setappname
+* "App#set_class_name":#App_setclassname
+* "App#set_exit_on_frame_delete":#App_setexitonframedelete
+* "App#set_instance":#App_setinstance
+* "App#set_top_window":#App_settopwindow
+* "App#set_vendor_name":#App_setvendorname
+* "App#set_use_best_visual":#App_setusebestvisual
+* "App#handle_event":#App_handleevent
+* "App#yield":#App_yield
+
+</div>
+
+
+
+h3(#App_new). App.new
+
+  *destructor*()
+
+Destructor. Will be called implicitly on program exit if the App
+object is created on the stack.
+
+
+h3(#App_argc). App#argc
+
+intargc
+
+Number of command line arguments (after environment-specific processing).
+
+
+h3(#App_argv). App#argv
+
+Char **argv
+
+Command line arguments (after environment-specific processing).
+
+
+h3(#App_createlogtarget). App#create_log_target
+
+ "Log":log.html *create_log_target*()
+
+Creates a Log class for the application to use for logging errors. The default
+implementation returns a new LogGui class.
+
+h4. See also
+
+"Log":log.html
+
+
+h3(#App_dispatch). App#dispatch
+
+  *dispatch*()
+
+Dispatches the next event in the windowing system event queue.
+
+This can be used for programming event loops, e.g.
+
+
+   while (app.Pending())
+     Dispatch();
+ 
+
+h4. See also
+
+"App#pending":app.html#App_pending
+
+
+h3(#App_exitmainloop). App#exit_main_loop
+
+  *exit_main_loop*()
+
+Call this to explicitly exit the main message (event) loop.
+You should normally exit the main loop (and the application) by deleting
+the top window.
+
+
+h3(#App_filterevent). App#filter_event
+
+ Integer *filter_event*(%(arg-type)Event% event)
+
+This function is called before processing any event and allows the application
+to preempt the processing of some events. If this method returns $-1$ the event
+is processed normally, otherwise either @true@ or @false@ should be
+returned and the event processing stops immediately considering that the event
+had been already processed (for the former return value) or that it is not
+going to be processed at all (for the latter one).
+
+
+h3(#App_getappname). App#get_app_name
+
+ String *get_app_name*()
+
+Returns the application name.
+
+h4. Remarks
+
+Widgets sets this to a reasonable default before
+calling "App#on_init":app.html#App_oninit, but the application can reset it at will.
+
+
+h3(#App_getclassname). App#get_class_name
+
+ String *get_class_name*()
+
+Gets the class name of the application. The class name may be used in a platform specific
+manner to refer to the application.
+
+h4. See also
+
+"App#set_class_name":app.html#App_setclassname
+
+
+h3(#App_getexitonframedelete). App#get_exit_on_frame_delete
+
+ Boolean *get_exit_on_frame_delete*()
+
+Returns true if the application will exit when the top-level window is deleted, false
+otherwise.
+
+h4. See also
+
+"App#set_exit_on_frame_delete":app.html#App_setexitonframedelete,
+
+"App shutdown overview":appshutdownoverview.html
+
+
+h3(#App_getinstance). App#get_instance
+
+ "AppConsole":appconsole.html *get_instance*()
+
+Returns the one and only global application object.
+Usually @TheApp@ is usead instead.
+
+h4. See also
+
+"App#set_instance":app.html#App_setinstance
+
+
+h3(#App_gettopwindow). App#get_top_window
+
+ "Window":window.html *get_top_window*()
+
+Returns a pointer to the top window.
+
+h4. Remarks
+
+If the top window hasn't been set using "App#set_top_window":app.html#App_settopwindow, this
+function will find the first top-level window (frame or dialog) and return that.
+
+h4. See also
+
+"set_top_window":#App_settopwindow
+
+
+h3(#App_getusebestvisual). App#get_use_best_visual
+
+ Boolean *get_use_best_visual*()
+
+Returns true if the application will use the best visual on systems that support
+different visuals, false otherwise.
+
+h4. See also
+
+"set_use_best_visual":#App_setusebestvisual
+
+
+h3(#App_getvendorname). App#get_vendor_name
+
+ String *get_vendor_name*()
+
+Returns the application's vendor name.
+
+
+h3(#App_isactive). App#is_active
+
+ Boolean *is_active*()
+
+Returns  if the application is active, i.e. if one of its windows is
+currently in the foreground. If this function returns  and you need to
+attract users attention to the application, you may use 
+"TopLevelWindow#request_user_attention":toplevelwindow.html#TopLevelWindow_requestuserattention 
+to do it.
+
+
+h3(#App_ismainlooprunning). App#is_main_loop_running
+
+ Boolean *is_main_loop_running*()
+
+Returns  if the main event loop is currently running, i.e. if the
+application is inside "on_run":#App_onrun.
+
+This can be useful to test whether the events can be dispatched. For example,
+if this function returns , non-blocking sockets cannot be used because
+the events from them would never be processed.
+
+
+h3(#App_mainloop). App#main_loop
+
+ Integer *main_loop*()
+
+Called by Widgets on creation of the application. Override this if you wish
+to provide your own (environment-dependent) main loop.
+
+h4. Return value
+
+Returns 0 under X, and the wParam of the WM_QUIT message under Windows.
+
+
+
+h3(#App_onassert). App#on_assert
+
+  *on_assert*(%(arg-type)Char% file,  %(arg-type)Integer% line,  %(arg-type)Char% cond, 
+            %(arg-type)Char% msg)
+
+This function is called when an assert failure occurs, i.e. the condition
+specified in "ASSERT":assert.html macro evaluated to @false@.
+It is only called in debug mode (when @__WXDEBUG__@ is defined) as
+asserts are not left in the release code at all.
+
+The base class version show the default assert failure dialog box proposing to
+the user to stop the program, continue or ignore all subsequent asserts.
+
+h4. Parameters
+
+* _file_ the name of the source file where the assert occurred
+* _line_ the line number in this file where the assert occurred
+* _cond_ the condition of the failed assert in string form
+* _msg_ the message specified as argument to 
+"ASSERT_MSG":assertmsg.html or "FAIL_MSG":failmsg.html, will
+be @NULL@ if just "ASSERT":assert.html or "FAIL":fail.html 
+was used
+
+
+h3(#App_oncmdlineerror). App#on_cmd_line_error
+
+ Boolean *on_cmd_line_error*(%(arg-type)CmdLineParser% parser)
+
+Called when command line parsing fails (i.e. an incorrect command line option
+was specified by the user). The default behaviour is to show the program usage
+text and abort the program.
+
+Return @true@ to continue normal execution or @false@ to return 
+@false@ from "on_init":#App_oninit thus terminating the program.
+
+h4. See also
+
+"on_init_cmd_line":#App_oninitcmdline
+
+
+h3(#App_oncmdlinehelp). App#on_cmd_line_help
+
+ Boolean *on_cmd_line_help*(%(arg-type)CmdLineParser% parser)
+
+Called when the help option (@--help@) was specified on the command line.
+The default behaviour is to show the program usage text and abort the program.
+
+Return @true@ to continue normal execution or @false@ to return 
+@false@ from "on_init":#App_oninit thus terminating the program.
+
+h4. See also
+
+"on_init_cmd_line":#App_oninitcmdline
+
+
+h3(#App_oncmdlineparsed). App#on_cmd_line_parsed
+
+ Boolean *on_cmd_line_parsed*(%(arg-type)CmdLineParser% parser)
+
+Called after the command line had been successfully parsed. You may override
+this method to test for the values of the various parameters which could be
+set from the command line.
+
+Don't forget to call the base class version unless you want to suppress
+processing of the standard command line options.
+
+Return @true@ to continue normal execution or @false@ to return 
+@false@ from "on_init":#App_oninit thus terminating the program.
+
+h4. See also
+
+"on_init_cmd_line":#App_oninitcmdline
+
+
+h3(#App_onexceptioninmainloop). App#on_exception_in_main_loop
+
+ Boolean *on_exception_in_main_loop*()
+
+This function is called if an unhandled exception occurs inside the main
+application event loop. It can return  to ignore the exception and to
+continue running the loop or  to exit the loop and terminate the
+program. In the latter case it can also use C++ @throw@ keyword to
+rethrow the current exception.
+
+The default behaviour of this function is the latter in all ports except under
+Windows where a dialog is shown to the user which allows him to choose between
+the different options. You may override this function in your class to do
+something more appropriate.
+
+Finally note that if the exception is rethrown from here, it can be caught in 
+"on_unhandled_exception":#App_onunhandledexception.
+
+
+h3(#App_onexit). App#on_exit
+
+ Integer *on_exit*()
+
+Override this member function for any processing which needs to be
+done as the application is about to exit. OnExit is called after
+destroying all application windows and controls, but before
+Widgets cleanup. Note that it is not called at all if 
+"on_init":#App_oninit failed.
+
+The return value of this function is currently ignored, return the same value
+as returned by the base class method if you override it.
+
+
+h3(#App_onfatalexception). App#on_fatal_exception
+
+  *on_fatal_exception*()
+
+This function may be called if something fatal happens: an unhandled
+exception under Win32 or a a fatal signal under Unix, for example. However,
+this will not happen by default: you have to explicitly call 
+"HandleFatalExceptions":handlefatalexceptions.html to enable this.
+
+Generally speaking, this function should only show a message to the user and
+return. You may attempt to save unsaved data but this is not guaranteed to
+work and, in fact, probably won't.
+
+h4. See also
+
+"HandleFatalExceptions":handlefatalexceptions.html
+
+
+
+h3(#App_oninit). App#on_init
+
+ Boolean *on_init*()
+
+This must be provided by the application, and will usually create the
+application's main window, optionally calling 
+"App#set_top_window":app.html#App_settopwindow. You may use 
+"on_exit":#App_onexit to clean up anything initialized here, provided
+that the function returns .
+
+Notice that if you want to to use the command line processing provided by
+Widgets you have to call the base class version in the derived class
+OnInit().
+
+Return  to continue processing,  to exit the application
+immediately.
+
+
+h3(#App_oninitcmdline). App#on_init_cmd_line
+
+  *on_init_cmd_line*(%(arg-type)CmdLineParser% parser)
+
+Called from "on_init":#App_oninit and may be used to initialize the
+parser with the command line options for this application. The base class
+versions adds support for a few standard options only.
+
+h3(#App_onrun). App#on_run
+
+ Integer *on_run*()
+
+This virtual function is where the execution of a program written in Widgets
+starts. The default implementation just enters the main loop and starts
+handling the events until it terminates, either because 
+"exit_main_loop":#App_exitmainloop has been explicitly called or because
+the last frame has been deleted and 
+"get_exit_on_frame_delete":#App_getexitonframedelete flag is  (this
+is the default).
+
+The return value of this function becomes the exit code of the program, so it
+should return $0$ in case of successful termination.
+
+
+h3(#App_onunhandledexception). App#on_unhandled_exception
+
+  *on_unhandled_exception*()
+
+This function is called when an unhandled C++ exception occurs inside 
+"on_run()":#App_onrun() (the exceptions which occur during the program
+startup and shutdown might not be caught at all).
+Note that the exception type is lost by now, so if you want to really handle
+the exception you should override "on_run()":#App_onrun() and put a
+try/catch clause around the call to the base class version there.
+
+
+h3(#App_processmessage). App#process_message
+
+ Boolean *process_message*(%(arg-type)MSG% msg)
+
+Windows-only function for processing a message. This function
+is called from the main message loop, checking for windows that
+may wish to process it. The function returns true if the message
+was processed, false otherwise. If you use Widgets with another class
+library with its own message loop, you should make sure that this
+function is called to allow Widgets to receive messages. For example,
+to allow co-existence with the Microsoft Foundation Classes, override
+the PreTranslateMessage function:
+
+
+ // Provide Widgets message loop compatibility
+ BOOL CTheApp::PreTranslateMessage(MSG *msg)
+ {
+   if (TheApp && TheApp->ProcessMessage((WXMSW *)msg))
+     return true;
+   else
+     return CWinApp::PreTranslateMessage(msg);
+ }
+ 
+
+
+h3(#App_pending). App#pending
+
+ Boolean *pending*()
+
+Returns true if unprocessed events are in the window system event queue.
+
+h4. See also
+
+"App#dispatch":app.html#App_dispatch
+
+
+h3(#App_sendidleevents). App#send_idle_events
+
+ Boolean *send_idle_events*(%(arg-type)Window% win,  %(arg-type)IdleEvent% event)
+
+Sends idle events to a window and its children.
+
+Please note that this function is internal to Widgets and shouldn't be used
+by user code.
+
+h4. Remarks
+
+These functions poll the top-level windows, and their children, for idle event processing.
+If true is returned, more OnIdle processing is requested by one or more window.
+
+h4. See also
+
+"IdleEvent":idleevent.html
+
+
+h3(#App_setappname). App#set_app_name
+
+  *set_app_name*(%(arg-type)String% name)
+
+Sets the name of the application. The name may be used in dialogs
+(for example by the document/view framework). A default name is set by
+Widgets.
+
+h4. See also
+
+"App#get_app_name":app.html#App_getappname
+
+
+h3(#App_setclassname). App#set_class_name
+
+  *set_class_name*(%(arg-type)String% name)
+
+Sets the class name of the application. This may be used in a platform specific
+manner to refer to the application.
+
+h4. See also
+
+"App#get_class_name":app.html#App_getclassname
+
+
+h3(#App_setexitonframedelete). App#set_exit_on_frame_delete
+
+  *set_exit_on_frame_delete*(%(arg-type)Boolean% flag)
+
+Allows the programmer to specify whether the application will exit when the
+top-level frame is deleted.
+
+h4. Parameters
+
+* _flag_ If true (the default), the application will exit when the top-level frame is
+deleted. If false, the application will continue to run.
+
+h4. See also
+
+"App#get_exit_on_frame_delete":app.html#App_getexitonframedelete,
+
+"App shutdown overview":appshutdownoverview.html
+
+
+h3(#App_setinstance). App#set_instance
+
+  *set_instance*(%(arg-type)AppConsole% app)
+
+Allows external code to modify global @TheApp@, but you should really
+know what you're doing if you call it.
+
+h4. Parameters
+
+* _app_ Replacement for the global application object.
+
+h4. See also
+
+"App#get_instance":app.html#App_getinstance
+
+
+h3(#App_settopwindow). App#set_top_window
+
+  *set_top_window*(%(arg-type)Window% window)
+
+Sets the `top' window. You can call this from within "App#on_init":app.html#App_oninit to
+let Widgets know which is the main window. You don't have to set the top window;
+it is only a convenience so that (for example) certain dialogs without parents can use a
+specific window as the top window. If no top window is specified by the application,
+Widgets just uses the first frame or dialog in its top-level window list, when it
+needs to use the top window.
+
+h4. Parameters
+
+* _window_ The new top window.
+
+h4. See also
+
+"App#get_top_window":app.html#App_gettopwindow, "App#on_init":app.html#App_oninit
+
+
+
+h3(#App_setvendorname). App#set_vendor_name
+
+  *set_vendor_name*(%(arg-type)String% name)
+
+Sets the name of application's vendor. The name will be used
+in registry access. A default name is set by
+Widgets.
+
+h4. See also
+
+"App#get_vendor_name":app.html#App_getvendorname
+
+
+h3(#App_setusebestvisual). App#set_use_best_visual
+
+  *set_use_best_visual*(%(arg-type)Boolean% flag)
+
+Allows the programmer to specify whether the application will use the best visual
+on systems that support several visual on the same display. This is typically the
+case under Solaris and IRIX, where the default visual is only 8-bit whereas certain
+applications are supposed to run in TrueColour mode.
+
+Note that this function has to be called in the constructor of the @App@ 
+instance and won't have any effect when called later on.
+
+This function currently only has effect under GTK.
+
+h4. Parameters
+
+* _flag_ If true, the app will use the best visual.
+
+
+h3(#App_handleevent). App#handle_event
+
+  *handle_event*(%(arg-type)EvtHandler% handler,  %(arg-type)EventFunction% func, 
+               %(arg-type)Event% event)
+
+This function simply invokes the given method func of the specified
+event handler handler with the event as parameter. It exists solely
+to allow to catch the C++ exceptions which could be thrown by all event
+handlers in the application in one place: if you want to do this, override this
+function in your App-derived class and add try/catch clause(s) to it.
+
+
+h3(#App_yield). App#yield
+
+ Boolean *yield*(%(arg-type)Boolean% onlyIfNeeded = false)
+
+Yields control to pending messages in the windowing system. This can be useful, for example, when a
+time-consuming process writes to a text window. Without an occasional
+yield, the text window will not be updated properly, and on systems with
+cooperative multitasking, such as Windows 3.1 other processes will not respond.
+
+Caution should be exercised, however, since yielding may allow the
+user to perform actions which are not compatible with the current task.
+Disabling menu items or whole menus during processing can avoid unwanted
+reentrance of code: see "::SafeYield":safeyield.html for a better
+function.
+
+Note that Yield() will not flush the message logs. This is intentional as
+calling Yield() is usually done to quickly update the screen and popping up a
+message box dialog may be undesirable. If you do wish to flush the log
+messages immediately (otherwise it will be done during the next idle loop
+iteration), call "Log#flush_active":log.html#Log_flushactive.
+
+Calling Yield() recursively is normally an error and an assert failure is
+raised in debug build if such situation is detected. However if the 
+_onlyIfNeeded_ parameter is @true@, the method will just silently
+return @false@ instead.
+

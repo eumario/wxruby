@@ -1,0 +1,28 @@
+h1(#wxdebugreportcompress). Wx::DebugReportCompress
+
+DebugReportCompress is a "DebugReport":debugreport.html which
+compresses all the files in this debug report into a single .ZIP file in its
+@Process()@ function.
+
+h2. Derived from
+
+"DebugReport":debugreport.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DebugReportCompress.new":#DebugReportCompress_new
+* "DebugReportCompress#get_compressed_file_name":#DebugReportCompress_getcompressedfilename
+
+</div>
+
+
+h3(#DebugReportCompress_wxdebugreportcompress). DebugReportCompress.new
+
+h3(#DebugReportCompress_getcompressedfilename). DebugReportCompress#get_compressed_file_name
+
+ String *get_compressed_file_name*()
+
+Returns the full path of the compressed file (empty if creation failed).
+

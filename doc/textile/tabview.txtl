@@ -1,0 +1,405 @@
+h1(#wxtabview). Wx::TabView
+
+Responsible for drawing tabs onto a window, and dealing with input.
+
+Please note that the preferred class for programming tabbed windows is "Notebook":notebook.html.
+This class is retained for backward compatibility.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"TabView overview":tabviewoverview.html, "PanelTabView":paneltabview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TabView.new":#TabView_new
+* "TabView#add_tab":#TabView_addtab
+* "TabView#calculate_tab_width":#TabView_calculatetabwidth
+* "TabView#clear_tabs":#TabView_cleartabs
+* "TabView#draw":#TabView_draw
+* "TabView#find_tab_control_for_id":#TabView_findtabcontrolforid
+* "TabView#find_tab_control_for_position":#TabView_findtabcontrolforposition
+* "TabView#get_background_brush":#TabView_getbackgroundbrush
+* "TabView#get_background_colour":#TabView_getbackgroundcolour
+* "TabView#get_background_pen":#TabView_getbackgroundpen
+* "TabView#get_highlight_colour":#TabView_gethighlightcolour
+* "TabView#get_highlight_pen":#TabView_gethighlightpen
+* "TabView#get_horizontal_tab_offset":#TabView_gethorizontaltaboffset
+* "TabView#get_number_of_layers":#TabView_getnumberoflayers
+* "TabView#get_selected_tab_font":#TabView_getselectedtabfont
+* "TabView#get_shadow_colour":#TabView_getshadowcolour
+* "TabView#get_tab_height":#TabView_gettabheight
+* "TabView#get_tab_font":#TabView_gettabfont
+* "TabView#get_tab_selection_height":#TabView_gettabselectionheight
+* "TabView#get_tab_style":#TabView_gettabstyle
+* "TabView#get_tab_width":#TabView_gettabwidth
+* "TabView#get_text_colour":#TabView_gettextcolour
+* "TabView#get_top_margin":#TabView_gettopmargin
+* "TabView#get_shadow_pen":#TabView_getshadowpen
+* "TabView#get_view_rect":#TabView_getviewrect
+* "TabView#get_vertical_tab_text_spacing":#TabView_getverticaltabtextspacing
+* "TabView#get_window":#TabView_getwindow
+* "TabView#on_create_tab_control":#TabView_oncreatetabcontrol
+* "TabView#layout_tabs":#TabView_layouttabs
+* "TabView#on_event":#TabView_onevent
+* "TabView#on_tab_activate":#TabView_ontabactivate
+* "TabView#on_tab_pre_activate":#TabView_ontabpreactivate
+* "TabView#set_background_colour":#TabView_setbackgroundcolour
+* "TabView#set_highlight_colour":#TabView_sethighlightcolour
+* "TabView#set_horizontal_tab_offset":#TabView_sethorizontaltaboffset
+* "TabView#set_selected_tab_font":#TabView_setselectedtabfont
+* "TabView#set_shadow_colour":#TabView_setshadowcolour
+* "TabView#set_tab_font":#TabView_settabfont
+* "TabView#set_tab_style":#TabView_settabstyle
+* "TabView#set_tab_size":#TabView_settabsize
+* "TabView#set_tab_selection_height":#TabView_settabselectionheight
+* "TabView#set_tab_selection":#TabView_settabselection
+* "TabView#set_text_colour":#TabView_settextcolour
+* "TabView#set_top_margin":#TabView_settopmargin
+* "TabView#set_vertical_tab_text_spacing":#TabView_setverticaltabtextspacing
+* "TabView#set_view_rect":#TabView_setviewrect
+* "TabView#set_window":#TabView_setwindow
+
+</div>
+
+
+h3. TabView.new
+
+  *TabView.new*(%(arg-type)Integer% style = TAB_STYLE_DRAW_BOX TAB_STYLE_COLOUR_INTERIOR)
+
+Constructor.
+
+_style_ may be a bit list of the following:
+
+
+|TAB_STYLE_DRAW_BOX|Draw a box around the view area. Most commonly used for dialogs.|
+|TAB_STYLE_COLOUR_INTERIOR|Draw tab backgrounds in the specified colour. Omitting this stylewill ensure that the tab background matches the dialog background.|
+
+
+h3(#TabView_addtab). TabView#add_tab
+
+ "TabControl":tabcontrol.html *add_tab*(%(arg-type)Integer% id,  %(arg-type)String% label, 
+                      %(arg-type)TabControl% existingTab=NULL)
+
+Adds a tab to the view.
+
+_id_ is the application-chosen identifier for the tab, which will be used in subsequent tab operations.
+
+_label_ is the label to give the tab.
+
+_existingTab_ maybe NULL to specify a new tab, or non-NULL to indicate that an existing tab should be used.
+
+A new layer (row) is started when the current layer has been filled up with tabs.
+
+h3(#TabView_calculatetabwidth). TabView#calculate_tab_width
+
+ Integer *calculate_tab_width*(%(arg-type)Integer% noTabs,  %(arg-type)Boolean% adjustView = false)
+
+The application can specify the tab width using this function, in terms
+of the number of tabs per layer (row) which will fit the view area, which
+should have been set previously with SetViewRect.
+
+_noTabs_ is the number of tabs which should take up the full width
+of the view area.
+
+_adjustView_ can be set to true in order to readjust the view width
+to exactly fit the given number of tabs. 
+
+The new tab width is returned.
+
+h3. TabView#clear_tabs
+
+  *clear_tabs*(%(arg-type)Boolean% deleteTabs=true)
+
+Clears the tabs, deleting them if _deleteTabs_ is true.
+
+h3. TabView#draw
+
+  *draw*(%(arg-type)DC% dc)
+
+Draws the tabs and (optionally) a box around the view area.
+
+h3. TabView#find_tab_control_for_id
+
+ "TabControl":tabcontrol.html *find_tab_control_for_id*(%(arg-type)Integer% id)
+
+Finds the TabControl corresponding to _id_.
+
+h3. TabView#find_tab_control_for_position
+
+ "TabControl":tabcontrol.html *find_tab_control_for_position*(%(arg-type)Integer% layer, 
+                                            %(arg-type)Integer% position)
+
+Finds the TabControl at layer _layer_, position in layer _position_, both starting from
+zero. Note that tabs change layer as they are selected or deselected.
+
+h3. TabView#get_background_brush
+
+ "Brush":brush.html *get_background_brush*()
+
+Returns the brush used to draw in the background colour. It is set when
+SetBackgroundColour is called. 
+
+h3. TabView#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+Returns the colour used for each tab background. By default, this is
+light grey. To ensure a match with the dialog or panel background, omit
+the TAB_STYLE_COLOUR_INTERIOR flag from the TabView constructor. 
+
+h3. TabView#get_background_pen
+
+ "Pen":pen.html *get_background_pen*()
+
+Returns the pen used to draw in the background colour. It is set when
+SetBackgroundColour is called. 
+
+h3. TabView#get_highlight_colour
+
+ "Colour":colour.html *get_highlight_colour*()
+
+Returns the colour used for bright highlights on the left side of `3D' surfaces. By default, this is white.
+
+h3. TabView#get_highlight_pen
+
+ "Pen":pen.html *get_highlight_pen*()
+
+Returns the pen used to draw 3D effect highlights. This is set when
+SetHighlightColour is called. 
+
+h3. TabView#get_horizontal_tab_offset
+
+ Integer *get_horizontal_tab_offset*()
+
+Returns the horizontal spacing by which each tab layer is offset from the one below.
+
+h3. TabView#get_number_of_layers
+
+ Integer *get_number_of_layers*()
+
+Returns the number of layers (rows of tabs).
+
+h3. TabView#get_selected_tab_font
+
+ "Font":font.html *get_selected_tab_font*()
+
+Returns the font to be used for the selected tab label.
+
+h3. TabView#get_shadow_colour
+
+ "Colour":colour.html *get_shadow_colour*()
+
+Returns the colour used for shadows on the right-hand side of `3D' surfaces. By default, this is dark grey.
+
+h3. TabView#get_tab_height
+
+ Integer *get_tab_height*()
+
+Returns the tab default height.
+
+h3. TabView#get_tab_font
+
+ "Font":font.html *get_tab_font*()
+
+Returns the tab label font.
+
+h3. TabView#get_tab_selection_height
+
+ Integer *get_tab_selection_height*()
+
+Returns the height to be used for the currently selected tab; normally a few pixels
+higher than the other tabs.
+
+h3. TabView#get_tab_style
+
+ Integer *get_tab_style*()
+
+Returns the tab style. See constructor documentation for details of valid styles.
+
+h3. TabView#get_tab_width
+
+ Integer *get_tab_width*()
+
+Returns the tab default width.
+
+h3. TabView#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+Returns the colour used to draw label text. By default, this is
+black.
+
+h3. TabView#get_top_margin
+
+ Integer *get_top_margin*()
+
+Returns the height between the top of the view area and the bottom of the first
+row of tabs.
+
+h3. TabView#get_shadow_pen
+
+ "Pen":pen.html *get_shadow_pen*()
+
+Returns the pen used to draw 3D effect shadows. This is set when
+SetShadowColour is called. 
+
+h3. TabView#get_view_rect
+
+ "Rectangle":rectangle.html *get_view_rect*()
+
+Returns the rectangle specifying the view area (above which tabs are
+placed).
+
+h3. TabView#get_vertical_tab_text_spacing
+
+ Integer *get_vertical_tab_text_spacing*()
+
+Returns the vertical spacing between the top of an unselected tab, and the tab label.
+
+h3. TabView#get_window
+
+ wWindow *get_window*()
+
+Returns the window for the view.
+
+h3. TabView#on_create_tab_control
+
+ "TabControl":tabcontrol.html *on_create_tab_control*()
+
+Creates a new tab control. By default, this returns a TabControl object, but the application may wish
+to define a derived class, in which case the tab view should be subclassed and this function overridden.
+
+h3. TabView#layout_tabs
+
+  *layout_tabs*()
+
+Recalculates the positions of the tabs, and adjusts the layer of the selected tab if necessary.
+
+You may want to call this function if the view width has changed (for example, from an OnSize handler).
+
+h3. TabView#on_event
+
+ Boolean *on_event*(%(arg-type)MouseEvent% event)
+
+Processes mouse events sent from the panel or dialog. Returns true if the event was processed,
+false otherwise.
+
+h3. TabView#on_tab_activate
+
+  *on_tab_activate*(%(arg-type)Integer% activateId,  %(arg-type)Integer% deactivateId)
+
+Called when a tab is activated, with the new active tab id, and the former active tab id.
+
+h3. TabView#on_tab_pre_activate
+
+ Boolean *on_tab_pre_activate*(%(arg-type)Integer% activateId,  %(arg-type)Integer% deactivateId)
+
+Called just before a tab is activated, with the new active tab id, and the former active tab id.
+
+If the function returns false, the tab is not activated.
+
+h3. TabView#set_background_colour
+
+  *set_background_colour*(%(arg-type)Colour% col)
+
+Sets the colour to be used for each tab background. By default, this is
+light grey. To ensure a match with the dialog or panel background, omit
+the TAB_STYLE_COLOUR_INTERIOR flag from the TabView constructor. 
+
+h3. TabView#set_highlight_colour
+
+  *set_highlight_colour*(%(arg-type)Colour% col)
+
+Sets the colour to be used for bright highlights on the left side of `3D' surfaces. By default, this is white.
+
+h3. TabView#set_horizontal_tab_offset
+
+  *set_horizontal_tab_offset*(%(arg-type)Integer% offset)
+
+Sets the horizontal spacing by which each tab layer is offset from the one below.
+
+h3. TabView#set_selected_tab_font
+
+  *set_selected_tab_font*(%(arg-type)Font% font)
+
+Sets the font to be used for the selected tab label.
+
+h3. TabView#set_shadow_colour
+
+  *set_shadow_colour*(%(arg-type)Colour% col)
+
+Sets the colour to be used for shadows on the right-hand side of `3D' surfaces. By default, this is dark grey.
+
+h3. TabView#set_tab_font
+
+  *set_tab_font*(%(arg-type)Font% font)
+
+Sets the tab label font.
+
+h3. TabView#set_tab_style
+
+  *set_tab_style*(%(arg-type)Integer% tabStyle)
+
+Sets the tab style. See constructor documentation for details of valid styles.
+
+h3. TabView#set_tab_size
+
+  *set_tab_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+Sets the tab default width and height.
+
+h3. TabView#set_tab_selection_height
+
+  *set_tab_selection_height*(%(arg-type)Integer% height)
+
+Sets the height to be used for the currently selected tab; normally a few pixels
+higher than the other tabs.
+
+h3. TabView#set_tab_selection
+
+  *set_tab_selection*(%(arg-type)Integer% sel,  %(arg-type)Boolean% activateTool=true)
+
+Sets the selected tab, calling the application's OnTabActivate function.
+
+If _activateTool_ is false, OnTabActivate will not be called.
+
+h3. TabView#set_text_colour
+
+  *set_text_colour*(%(arg-type)Colour% col)
+
+Sets the colour to be used to draw label text. By default, this is
+black.
+
+h3. TabView#set_top_margin
+
+  *set_top_margin*(%(arg-type)Integer% margin)
+
+Sets the height between the top of the view area and the bottom of the first
+row of tabs.
+
+h3. TabView#set_vertical_tab_text_spacing
+
+  *set_vertical_tab_text_spacing*(%(arg-type)Integer% spacing)
+
+Sets the vertical spacing between the top of an unselected tab, and the tab label.
+
+h3(#TabView_setviewrect). TabView#set_view_rect
+
+  *set_view_rect*(%(arg-type)Rectangle% rect)
+
+Sets the rectangle specifying the view area (above which tabs are
+placed). This must be set by the application. 
+
+h3. TabView#set_window
+
+  *set_window*(%(arg-type)Window% window)
+
+Set the window that the tab view will use for drawing onto.
+
+

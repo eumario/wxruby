@@ -1,0 +1,130 @@
+h1(#wxsystemoptions). Wx::SystemOptions
+
+SystemOptions stores option/value pairs that Widgets itself or
+applications can use to alter behaviour at run-time. It can be
+used to optimize behaviour that doesn't deserve a distinct API,
+but is still important to be able to configure.
+
+These options are currently recognised by Widgets.
+
+h2. Windows
+
+
+
+|*Option*|*Value*|
+|no-maskblt|1 to never use WIN32's MaskBlt function, 0 to allow it to be used where possible. Default: 0.In some circumstances the MaskBlt function can be slower than using the fallback code, especially if usingDC cacheing. By default, MaskBlt will be used where it is implemented by the operating system and driver.|
+|msw.remap|If 1 (the default), ToolBar bitmap colours will be remappedto the current theme's values. Set this to 0 to disable this functionality, for example if you're usingmore than 16 colours in your tool bitmaps.|
+|msw.window.no-clip-children|If 1, windows will not automatically get the WS_CLIPCHILDRENstyle. This restores the way windows are refreshed back to the method used in versions of Widgetsearlier than 2.5.4, and for some complex window hierarchies it can reduce apparent refresh delays. You maystill specify CLIP_CHILDREN for individual windows.|
+|msw.notebook.themed-background|If set to 0, globally disables themed backgrounds on notebookpages. Note that this won't disable the theme on the actual notebook background (noticeable only if there are nopages).|
+|msw.staticbox.optimized-paint|If set to 0, switches off optimized StaticBox painting.Setting this to 0 causes more flicker, but allows applications to paint graphics on the parent of a static box(the optimized refresh causes any such drawing to disappear).|
+
+
+h2. Mac
+
+
+
+|*Option*|*Value*|
+|mac.window-plain-transition|If 1, uses a plainer transition when showinga window. You can also use the symbol MAC_WINDOW_PLAIN_TRANSITION.|
+|window-default-variant|The default variant used by windows (cast to integer from the WindowVariant enum).Also known as WINDOW_DEFAULT_VARIANT.|
+
+
+h2. MGL
+
+
+
+|*Option*|*Value*|
+|mgl.aa-threshold|Set this integer option to pointsize below which fonts are not antialiased. Default: 10.|
+|mgl.screen-refresh|Screen refresh rate in Hz.A reasonable default is used if not specified.|
+
+
+h2. Motif
+
+
+
+|*Option*|*Value*|
+|motif.largebuttons|If 1, uses a bigger default size for Buttons.|
+
+
+The compile-time option to include or exclude this functionality
+is USE_SYSTEM_OPTIONS.
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SystemOptions.new":#SystemOptions_new
+* "SystemOptions#get_option":#SystemOptions_getoption
+* "SystemOptions#get_option_int":#SystemOptions_getoptionint
+* "SystemOptions#has_option":#SystemOptions_hasoption
+* "SystemOptions#is_false":#SystemOptions_isfalse
+* "SystemOptions#set_option":#SystemOptions_setoption
+
+</div>
+
+
+
+h3(#SystemOptions_new). SystemOptions.new
+
+h3(#SystemOptions_getoption). SystemOptions#get_option
+
+ String *get_option*(%(arg-type)String% name)
+
+Gets an option. The function is case-insensitive to _name_.
+
+Returns empty string if the option hasn't been set.
+
+h4. See also
+
+"SystemOptions#set_option":systemoptions.html#SystemOptions_setoption, "SystemOptions#get_option_int":systemoptions.html#SystemOptions_getoptionint, "SystemOptions#has_option":systemoptions.html#SystemOptions_hasoption
+
+
+h3(#SystemOptions_getoptionint). SystemOptions#get_option_int
+
+ Integer *get_option_int*(%(arg-type)String% name)
+
+Gets an option as an integer. The function is case-insensitive to _name_.
+
+If the option hasn't been set, this function returns $0$.
+
+h4. See also
+
+"SystemOptions#set_option":systemoptions.html#SystemOptions_setoption, "SystemOptions#get_option":systemoptions.html#SystemOptions_getoption, "SystemOptions#has_option":systemoptions.html#SystemOptions_hasoption
+
+
+h3(#SystemOptions_hasoption). SystemOptions#has_option
+
+ Boolean *has_option*(%(arg-type)String% name)
+
+Returns  if the given option is present. The function is case-insensitive to _name_.
+
+h4. See also
+
+"SystemOptions#set_option":systemoptions.html#SystemOptions_setoption, "SystemOptions#get_option":systemoptions.html#SystemOptions_getoption, "SystemOptions#get_option_int":systemoptions.html#SystemOptions_getoptionint
+
+
+h3(#SystemOptions_isfalse). SystemOptions#is_false
+
+ Boolean *is_false*(%(arg-type)String% name)
+
+Returns  if the option with the given name had been set to $0$
+value. This is mostly useful for boolean options for which you can't use
+@GetOptionInt(name) == 0@ as this would also be true if the option
+hadn't been set at all.
+
+
+h3(#SystemOptions_setoption). SystemOptions#set_option
+
+  *set_option*(%(arg-type)String% name,  %(arg-type)String% value)
+
+  *set_option*(%(arg-type)String% name,  %(arg-type)Integer% value)
+
+Sets an option. The function is case-insensitive to _name_.
+
+h4. See also
+
+"SystemOptions#get_option":systemoptions.html#SystemOptions_getoption, "SystemOptions#get_option_int":systemoptions.html#SystemOptions_getoptionint, "SystemOptions#has_option":systemoptions.html#SystemOptions_hasoption
+

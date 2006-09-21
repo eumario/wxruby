@@ -1,0 +1,117 @@
+h1(#wxsingleinstancechecker). Wx::SingleInstanceChecker
+
+SingleInstanceChecker class allows to check that only a single instance of a
+program is running. To do it, you should create an object of this class. As
+long as this object is alive, calls to 
+"is_another_running()":#SingleInstanceChecker_isanotherrunning() from
+other processes will return @true@.
+
+As the object should have the life span as big as possible, it makes sense to
+create it either as a global or in "App#on_init":app.html#App_oninit. For
+example:
+
+
+ bool MyApp::OnInit()
+ {
+     const String name = String::Format("MyApp-    m_checker = new SingleInstanceChecker(name);
+     if ( m_checker->IsAnotherRunning() )
+     {
+         LogError(_("Another program instance is already running, aborting."));
+ 
+         return false;
+     }
+ 
+     ... more initializations ...
+ 
+     return true;
+ }
+ 
+ int MyApp::OnExit()
+ {
+     delete m_checker;
+ 
+     return 0;
+ }
+ 
+
+Note using "GetUserId()":getuserid.html to construct the name: this
+allows different user to run the application concurrently which is usually the
+intended goal. If you don't use the user name in the SingleInstanceChecker
+name, only one user would be able to run the application at a time.
+
+This class is implemented for Win32 and Unix platforms (supporting @fcntl()@
+system call, but almost all of modern Unix systems do) only.
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "SingleInstanceChecker.new":#SingleInstanceChecker_new
+* "SingleInstanceChecker.new":#SingleInstanceChecker_new
+* "SingleInstanceChecker#create":#SingleInstanceChecker_create
+* "SingleInstanceChecker#is_another_running":#SingleInstanceChecker_isanotherrunning
+
+</div>
+
+
+h3(#SingleInstanceChecker_new). SingleInstanceChecker.new
+
+h3(#SingleInstanceChecker_wxsingleinstancechecker). SingleInstanceChecker.new
+
+  *SingleInstanceChecker.new*(%(arg-type)String% name,  %(arg-type)String% path = '')
+
+Like "Create()":singleinstancecheckercreate.html but without
+error checking.
+
+h3(#SingleInstanceChecker_create). SingleInstanceChecker#create
+
+ Boolean *create*(%(arg-type)String% name,  %(arg-type)String% path = '')
+
+Initialize the object if it had been created using the default constructor.
+Note that you can't call Create() more than once, so calling it if the 
+"non default ctor":singleinstancecheckerwxsingleinstancechecker.html 
+had been used is an error.
+
+h4. Parameters
+
+* _name_ must be given and be as unique as possible. It is used as the
+mutex name under Win32 and the lock file name under Unix. 
+"get_app_name()":#SingleInstanceChecker_getappname() and "GetUserId()":getuserid.html 
+are commonly used to construct this parameter.
+* _path_ is optional and is ignored under Win32 and used as the directory to
+create the lock file in under Unix (default is 
+"GetHomeDir()":gethomedir.html)
+
+h4. Return value
+
+Returns @false@ if initialization failed, it doesn't mean that another
+instance is running - use 
+"is_another_running()":#SingleInstanceChecker_isanotherrunning() to check
+for it.
+
+h4. Note
+
+One of possible reasons while Create may fail on Unix is that the lock file
+used for checking already exists but was not created by the user.
+Therefore applications shouldn't treat failure of this function as fatal
+condition, because doing so would open them to the possibility of a Denial of
+Service attack. Instead, they should alert the user about the problem and
+offer to continue execution without checking if another instance is running.
+
+h3(#SingleInstanceChecker_isanotherrunning). SingleInstanceChecker#is_another_running
+
+ Boolean *is_another_running*()
+
+Returns @true@ if another copy of this program is already running, 
+false otherwise.
+
+  *destructor*()
+
+Destructor frees the associated resources.
+
+Note that it is not virtual, this class is not meant to be used polymorphically
+

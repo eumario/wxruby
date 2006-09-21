@@ -1,0 +1,45 @@
+h1(#wxbusycursor). Wx::BusyCursor
+
+This class makes it easy to tell your user that the program is temporarily busy.
+Just create a BusyCursor object on the stack, and within the current scope,
+the hourglass will be shown.
+
+For example:
+
+
+   BusyCursor wait;
+ 
+   for (int i = 0; i < 100000; i++)
+     DoACalculation();
+ 
+
+It works by calling "BeginBusyCursor":beginbusycursor.html in the constructor,
+and "EndBusyCursor":endbusycursor.html in the destructor.
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"BeginBusyCursor":beginbusycursor.html, "EndBusyCursor":endbusycursor.html, "WindowDisabler":windowdisabler.html
+
+<div id="methods">
+
+h2. Methods
+
+* "BusyCursor.new":#BusyCursor_new
+
+</div>
+
+
+h3(#BusyCursor_new). BusyCursor.new
+
+  *BusyCursor.new*(%(arg-type)Cursor% cursor = HOURGLASS_CURSOR)
+
+Constructs a busy cursor object, calling "BeginBusyCursor":beginbusycursor.html.
+
+  *destructor*()
+
+Destroys the busy cursor object, calling "EndBusyCursor":endbusycursor.html.
+

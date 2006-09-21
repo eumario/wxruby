@@ -1,0 +1,49 @@
+h1(#wxwindowdestroyevent). Wx::WindowDestroyEvent
+
+
+
+This event is sent from the Window destructor Window::~Window() when a
+window is destroyed.
+
+When a class derived from Window is destroyed its destructor will have
+already run by the time this event is sent. Therefore this event will not
+usually be received at all.
+
+To receive this event "EvtHandler#connect":evthandler.html#EvtHandler_connect
+must be used (using an event table macro will not work). Since it is
+received after the destructor has run, an object should not handle its
+own WindowDestroyEvent, but it can be used to get notification of the
+destruction of another window.
+
+h2. Derived from
+
+"CommandEvent":event.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+
+It is not possible to receive this event using an event table macro.
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "WindowCreateEvent":windowcreateevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "WindowDestroyEvent.new":#WindowDestroyEvent_new
+
+</div>
+
+
+h3(#WindowDestroyEvent_new). WindowDestroyEvent.new
+
+  *WindowDestroyEvent.new*(%(arg-type)Window% win = nil)
+
+Constructor.
+

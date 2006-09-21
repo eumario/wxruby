@@ -1,0 +1,25 @@
+h1(#wxgridcellnumberrenderer). Wx::GridCellNumberRenderer
+
+This class may be used to format integer data in a cell.
+
+h2. Derived from
+
+"GridellStringRenderer":gridcellstringrenderer.html
+
+"GridCellRenderer":gridcellrenderer.html
+
+h2. See also
+
+"GridCellRenderer":gridcellrenderer.html, "GridCellStringRenderer":gridcellstringrenderer.html, "GridCellFloatRenderer":gridcellfloatrenderer.html, "GridCellBoolRenderer":gridcellboolrenderer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellNumberRenderer.new":#GridCellNumberRenderer_new
+
+</div>
+
+
+h3(#GridCellNumberRenderer_constr). GridCellNumberRenderer.new
+

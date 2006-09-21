@@ -1,0 +1,35 @@
+h1(#wxwindowdisabler). Wx::WindowDisabler
+
+This class disables all windows of the application (may be with the exception
+of one of them) in its constructor and enables them back in its destructor.
+This comes in handy when you want to indicate to the user that the application
+is currently busy and cannot respond to user input.
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"BusyCursor":busycursor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "WindowDisabler.new":#WindowDisabler_new
+
+</div>
+
+
+h3(#WindowDisabler_new). WindowDisabler.new
+
+  *WindowDisabler.new*(%(arg-type)Window% winToSkip = nil)
+
+Disables all top level windows of the applications with the exception of 
+_winToSkip_ if it is not @NULL@.
+
+  *destructor*()
+
+Reenables back the windows disabled by the constructor.
+

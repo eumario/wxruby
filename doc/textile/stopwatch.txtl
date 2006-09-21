@@ -1,0 +1,66 @@
+h1(#wxstopwatch). Wx::StopWatch
+
+The StopWatch class allow you to measure time intervals. For example, you may
+use it to measure the time elapsed by some function:
+
+
+     StopWatch sw;
+     CallLongRunningFunction();
+     LogMessage("The long running function took                  sw.Time());
+     sw.Pause();
+     ... stopwatch is stopped now ...
+     sw.Resume();
+     CallLongRunningFunction();
+     LogMessage("And calling it twice took $ldms in all", sw.Time());
+ 
+
+h2. See also
+
+"::StartTimer":starttimer.html, "::GetElapsedTime":getelapsedtime.html, "Timer":timer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "StopWatch.new":#StopWatch_new
+* "StopWatch#pause":#StopWatch_pause
+* "StopWatch#resume":#StopWatch_resume
+* "StopWatch#start":#StopWatch_start
+* "StopWatch#time":#StopWatch_time
+
+</div>
+
+
+h3(#StopWatch_new). StopWatch.new
+
+h3(#StopWatch_pause). StopWatch#pause
+
+  *pause*()
+
+Pauses the stop watch. Call "StopWatch#resume":stopwatch.html#StopWatch_resume to resume 
+time measuring again.
+
+If this method is called several times, @Resume()@ must be called the same
+number of times to really resume the stop watch. You may, however, call 
+"Start":stopwatchstart.html to resume it unconditionally.
+
+h3(#StopWatch_resume). StopWatch#resume
+
+  *resume*()
+
+Resumes the stop watch which had been paused with 
+"StopWatch#pause":stopwatch.html#StopWatch_pause.
+
+h3(#StopWatch_start). StopWatch#start
+
+  *start*(%(arg-type)Integer% milliseconds = 0)
+
+(Re)starts the stop watch with a given initial value.
+
+h3(#StopWatch_time). StopWatch#time
+
+ Integer *time*()
+
+Returns the time in milliseconds since the start (or restart) or the last call of 
+"StopWatch#pause":stopwatch.html#StopWatch_pause.
+

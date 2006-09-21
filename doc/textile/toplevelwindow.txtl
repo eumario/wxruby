@@ -1,0 +1,288 @@
+h1(#wxtoplevelwindow). Wx::TopLevelWindow
+
+TopLevelWindow is a common base class for "Dialog":dialog.html and 
+"Frame":frame.html. It is an abstract base class meaning that you never
+work with objects of this class directly, but all of its methods are also
+applicable for the two classes above.
+
+h2. Derived from
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TopLevelWindow#get_icon":#TopLevelWindow_geticon
+* "TopLevelWindow#get_icons":#TopLevelWindow_geticons
+* "TopLevelWindow#get_title":#TopLevelWindow_gettitle
+* "TopLevelWindow#is_active":#TopLevelWindow_isactive
+* "TopLevelWindow#iconize":#TopLevelWindow_iconize
+* "TopLevelWindow#is_full_screen":#TopLevelWindow_isfullscreen
+* "TopLevelWindow#is_iconized":#TopLevelWindow_isiconized
+* "TopLevelWindow#is_maximized":#TopLevelWindow_ismaximized
+* "TopLevelWindow#maximize":#TopLevelWindow_maximize
+* "TopLevelWindow#request_user_attention":#TopLevelWindow_requestuserattention
+* "TopLevelWindow#set_icon":#TopLevelWindow_seticon
+* "TopLevelWindow#set_icons":#TopLevelWindow_seticons
+* "TopLevelWindow#set_left_menu":#TopLevelWindow_setleftmenu
+* "TopLevelWindow#set_right_menu":#TopLevelWindow_setrightmenu
+* "TopLevelWindow#set_shape":#TopLevelWindow_setshape
+* "TopLevelWindow#set_title":#TopLevelWindow_settitle
+* "TopLevelWindow#show_full_screen":#TopLevelWindow_showfullscreen
+
+</div>
+
+
+
+h3(#TopLevelWindow_geticon). TopLevelWindow#get_icon
+
+ "Icon":icon.html *get_icon*()
+
+Returns the standard icon of the window. The icon will be invalid if it hadn't
+been previously set by "set_icon":#TopLevelWindow_seticon.
+
+h4. See also
+
+"get_icons":#TopLevelWindow_geticons
+
+
+h3(#TopLevelWindow_geticons). TopLevelWindow#get_icons
+
+ "IconBundle":iconbundle.html *get_icons*()
+
+Returns all icons associated with the window, there will be none of them if
+neither "set_icon":#TopLevelWindow_seticon nor 
+"set_icons":#TopLevelWindow_seticons had been called before.
+
+Use "get_icon":#TopLevelWindow_geticon to get the main icon of the
+window.
+
+h4. See also
+
+"IconBundle":iconbundle.html
+
+
+h3(#TopLevelWindow_gettitle). TopLevelWindow#get_title
+
+ String *get_title*()
+
+Gets a string containing the window title.
+
+See "TopLevelWindow#set_title":toplevelwindow.html#TopLevelWindow_settitle.
+
+
+h3(#TopLevelWindow_isactive). TopLevelWindow#is_active
+
+ Boolean *is_active*()
+
+Returns  if this window is currently active, i.e. if the user is currently
+working with it.
+
+
+h3(#TopLevelWindow_iconize). TopLevelWindow#iconize
+
+  *iconize*(%(arg-type)Boolean% iconize)
+
+Iconizes or restores the window.
+
+h4. Parameters
+
+* _iconize_ If , iconizes the window; if , shows and restores it.
+
+h4. See also
+
+"TopLevelWindow#is_iconized":toplevelwindow.html#TopLevelWindow_isiconized, "TopLevelWindow#maximize":toplevelwindow.html#TopLevelWindow_maximize.
+
+
+h3(#TopLevelWindow_isfullscreen). TopLevelWindow#is_full_screen
+
+ Boolean *is_full_screen*()
+
+Returns  if the window is in fullscreen mode.
+
+h4. See also
+
+"TopLevelWindow#show_full_screen":toplevelwindow.html#TopLevelWindow_showfullscreen
+
+
+h3(#TopLevelWindow_isiconized). TopLevelWindow#is_iconized
+
+ Boolean *is_iconized*()
+
+Returns  if the window is iconized.
+
+
+h3(#TopLevelWindow_ismaximized). TopLevelWindow#is_maximized
+
+ Boolean *is_maximized*()
+
+Returns  if the window is maximized.
+
+
+h3(#TopLevelWindow_maximize). TopLevelWindow#maximize
+
+  *maximize*(%(arg-type)Boolean% maximize)
+
+Maximizes or restores the window.
+
+h4. Parameters
+
+* _maximize_ If , maximizes the window, otherwise it restores it.
+
+h4. See also
+
+"TopLevelWindow#iconize":toplevelwindow.html#TopLevelWindow_iconize
+
+
+h3(#TopLevelWindow_requestuserattention). TopLevelWindow#request_user_attention
+
+  *request_user_attention*(%(arg-type)Integer% flags = USER_ATTENTION_INFO)
+
+Use a system-dependent way to attract users attention to the window when it is
+in background.
+
+flags may have the value of either @USER_ATTENTION_INFO@
+(default) or @USER_ATTENTION_ERROR@ which results in a more drastic
+action. When in doubt, use the default value.
+
+Note that this function should normally be only used when the application is
+not already in foreground.
+
+This function is currently implemented for Win32 where it flashes the
+window icon in the taskbar, and for GTK with task bars supporting it.
+
+
+h3(#TopLevelWindow_seticon). TopLevelWindow#set_icon
+
+  *set_icon*(%(arg-type)Icon% icon)
+
+Sets the icon for this window.
+
+h4. Parameters
+
+* _icon_ The icon to associate with this window.
+
+h4. Remarks
+
+The window takes a `copy' of _icon_, but since it uses reference
+counting, the copy is very quick. It is safe to delete _icon_ after
+calling this function.
+
+See also "Icon":icon.html.
+
+
+h3(#TopLevelWindow_seticons). TopLevelWindow#set_icons
+
+  *set_icons*(%(arg-type)IconBundle% icons)
+
+Sets several icons of different sizes for this window: this allows to use
+different icons for different situations (e.g. task switching bar, taskbar,
+window title bar) instead of scaling, with possibly bad looking results, the
+only icon set by "set_icon":#TopLevelWindow_seticon.
+
+h4. Parameters
+
+* _icons_ The icons to associate with this window.
+
+h4. See also
+
+"IconBundle":iconbundle.html.
+
+
+h3(#TopLevelWindow_setleftmenu). TopLevelWindow#set_left_menu
+
+  *set_left_menu*(%(arg-type)Integer% id = ID_ANY,  %(arg-type)String% label = '', 
+                %(arg-type)Menu% subMenu = nil)
+
+Sets action or menu activated by pressing left hardware button on the smart phones.
+Unavailable on full keyboard machines.
+
+h4. Parameters
+
+* _id_ Identifier for this button.
+* _label_ Text to be displayed on the screen area dedicated to this hardware button.
+* _subMenu_ The menu to be opened after pressing this hardware button.
+
+h4. See also
+
+"TopLevelWindow#set_right_menu":toplevelwindow.html#TopLevelWindow_setrightmenu.
+
+
+h3(#TopLevelWindow_setrightmenu). TopLevelWindow#set_right_menu
+
+  *set_right_menu*(%(arg-type)Integer% id = ID_ANY,  %(arg-type)String% label = '', 
+                 %(arg-type)Menu% subMenu = nil)
+
+Sets action or menu activated by pressing right hardware button on the smart phones.
+Unavailable on full keyboard machines.
+
+h4. Parameters
+
+* _id_ Identifier for this button.
+* _label_ Text to be displayed on the screen area dedicated to this hardware button.
+* _subMenu_ The menu to be opened after pressing this hardware button.
+
+h4. See also
+
+"TopLevelWindow#set_left_menu":toplevelwindow.html#TopLevelWindow_setleftmenu.
+
+
+h3(#TopLevelWindow_setshape). TopLevelWindow#set_shape
+
+ Boolean *set_shape*(%(arg-type)Region% region)
+
+If the platform supports it, sets the shape of the window to that
+depicted by _region_.  The system will not display or
+respond to any mouse event for the pixels that lie outside of the
+region.  To reset the window to the normal rectangular shape simply
+call _SetShape_ again with an empty region.  Returns TRUE if the
+operation is successful.
+
+
+h3(#TopLevelWindow_settitle). TopLevelWindow#set_title
+
+  *set_title*(%(arg-type)String% title)
+
+Sets the window title.
+
+h4. Parameters
+
+* _title_ The window title.
+
+h4. See also
+
+"TopLevelWindow#get_title":toplevelwindow.html#TopLevelWindow_gettitle
+
+
+h3(#TopLevelWindow_showfullscreen). TopLevelWindow#show_full_screen
+
+ Boolean *show_full_screen*(%(arg-type)Boolean% show,  %(arg-type)Integer% style = FULLSCREEN_ALL)
+
+Depending on the value of _show_ parameter the window is either shown full
+screen or restored to its normal state. _style_ is a bit list containing
+some or all of the following values, which indicate what elements of the window
+to hide in full-screen mode:
+
+
+* FULLSCREEN_NOMENUBAR
+* FULLSCREEN_NOTOOLBAR
+* FULLSCREEN_NOSTATUSBAR
+* FULLSCREEN_NOBORDER
+* FULLSCREEN_NOCAPTION
+* FULLSCREEN_ALL (all of the above)
+
+
+This function has not been tested with MDI frames.
+
+Note that showing a window full screen also actually
+"Show()s":windowshow.html if it hadn't been shown yet.
+
+h4. See also
+
+"TopLevelWindow#is_full_screen":toplevelwindow.html#TopLevelWindow_isfullscreen
+

@@ -1,0 +1,162 @@
+h1(#wxhtmleasyprinting). Wx::HtmlEasyPrinting
+
+This class provides very simple interface to printing 
+architecture. It allows you to print HTML documents using
+only a few commands. 
+
+h2. Note
+
+Do not create this class on the stack only. You should create an instance on app 
+startup and use this instance for all printing operations. The reason is that
+this class stores various settings in it.
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlEasyPrinting.new":#HtmlEasyPrinting_new
+* "HtmlEasyPrinting#preview_file":#HtmlEasyPrinting_previewfile
+* "HtmlEasyPrinting#preview_text":#HtmlEasyPrinting_previewtext
+* "HtmlEasyPrinting#print_file":#HtmlEasyPrinting_printfile
+* "HtmlEasyPrinting#print_text":#HtmlEasyPrinting_printtext
+* "HtmlEasyPrinting#page_setup":#HtmlEasyPrinting_pagesetup
+* "HtmlEasyPrinting#set_fonts":#HtmlEasyPrinting_setfonts
+* "HtmlEasyPrinting#set_header":#HtmlEasyPrinting_setheader
+* "HtmlEasyPrinting#set_footer":#HtmlEasyPrinting_setfooter
+* "HtmlEasyPrinting#get_print_data":#HtmlEasyPrinting_getprintdata
+* "HtmlEasyPrinting#get_page_setup_data":#HtmlEasyPrinting_getpagesetupdata
+
+</div>
+
+
+h3(#HtmlEasyPrinting_wxhtmleasyprinting). HtmlEasyPrinting.new
+
+  *HtmlEasyPrinting.new*(%(arg-type)String% name = "Printing", 
+                       %(arg-type)Window% parentWindow = nil)
+
+Constructor.
+
+h4. Parameters
+
+* _name_ Name of the printing object. Used by preview frames and setup dialogs.
+* _parentWindow_ pointer to the window that will own the preview frame and setup dialogs. May be NULL.
+
+h3(#HtmlEasyPrinting_previewfile). HtmlEasyPrinting#preview_file
+
+ Boolean *preview_file*(%(arg-type)String% htmlfile)
+
+Preview HTML file. 
+
+Returns false in case of error -- call
+"Printer#get_last_error":printer.html#Printer_getlasterror to get detailed
+information about the kind of the error.
+
+
+h3(#HtmlEasyPrinting_previewtext). HtmlEasyPrinting#preview_text
+
+ Boolean *preview_text*(%(arg-type)String% htmltext,  %(arg-type)String% basepath = '')
+
+Preview HTML text (not file!). 
+
+Returns false in case of error -- call
+"Printer#get_last_error":printer.html#Printer_getlasterror to get detailed
+information about the kind of the error.
+
+h4. Parameters
+
+* _htmltext_ HTML text.
+* _basepath_ base directory (html string would be stored there if it was in
+file). It is used to determine path for loading images, for example.
+
+h3(#HtmlEasyPrinting_printfile). HtmlEasyPrinting#print_file
+
+ Boolean *print_file*(%(arg-type)String% htmlfile)
+
+Print HTML file.
+
+Returns false in case of error -- call
+"Printer#get_last_error":printer.html#Printer_getlasterror to get detailed
+information about the kind of the error.
+
+h3(#HtmlEasyPrinting_printtext). HtmlEasyPrinting#print_text
+
+ Boolean *print_text*(%(arg-type)String% htmltext,  %(arg-type)String% basepath = '')
+
+Print HTML text (not file!). 
+
+Returns false in case of error -- call
+"Printer#get_last_error":printer.html#Printer_getlasterror to get detailed
+information about the kind of the error.
+
+h4. Parameters
+
+* _htmltext_ HTML text.
+* _basepath_ base directory (html string would be stored there if it was in
+file). It is used to determine path for loading images, for example.
+
+h3(#HtmlEasyPrinting_pagesetup). HtmlEasyPrinting#page_setup
+
+  *page_setup*()
+
+Display page setup dialog and allows the user to modify settings. 
+
+h3(#HtmlEasyPrinting_setfonts). HtmlEasyPrinting#set_fonts
+
+  *set_fonts*(%(arg-type)String% normal_face,  %(arg-type)String% fixed_face, 
+            %(arg-type)Integer% sizes = nil)
+
+Sets fonts. See "HtmlWindow#set_fonts":htmlwindow.html#HtmlWindow_setfonts for
+detailed description.
+
+h3(#HtmlEasyPrinting_setheader). HtmlEasyPrinting#set_header
+
+  *set_header*(%(arg-type)String% header,  %(arg-type)Integer% pg = PAGE_ALL)
+
+Set page header.
+
+h4. Parameters
+
+* _header_ HTML text to be used as header. You can use macros in it:
+
+
+* @PAGENUM@ is replaced by page number
+* @PAGESCNT@ is replaced by total number of pages
+
+
+* _pg_ one of PAGE_ODD, PAGE_EVEN and PAGE_ALL constants.
+
+h3(#HtmlEasyPrinting_setfooter). HtmlEasyPrinting#set_footer
+
+  *set_footer*(%(arg-type)String% footer,  %(arg-type)Integer% pg = PAGE_ALL)
+
+Set page footer.
+
+h4. Parameters
+
+* _footer_ HTML text to be used as footer. You can use macros in it:
+
+
+* @PAGENUM@ is replaced by page number
+* @PAGESCNT@ is replaced by total number of pages
+
+
+* _pg_ one of PAGE_ODD, PAGE_EVEN and PAGE_ALL constants.
+
+h3(#HtmlEasyPrinting_getprintdata). HtmlEasyPrinting#get_print_data
+
+ "PrintData":printdata.html *get_print_data*()
+
+Returns pointer to "PrintData":printdata.html instance used by this class. You can
+set its parameters (via SetXXXX methods).
+
+h3(#HtmlEasyPrinting_getpagesetupdata). HtmlEasyPrinting#get_page_setup_data
+
+ "PageSetupDialogData":pagesetupdialogdata.html *get_page_setup_data*()
+
+Returns a pointer to "PageSetupDialogData":pagesetupdialogdata.html instance used by 
+this class. You can set its parameters (via SetXXXX methods).
+

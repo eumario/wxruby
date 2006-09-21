@@ -1,0 +1,70 @@
+h1(#wxnode). Wx::Node
+
+NodeBase is the node structure used in linked lists (see 
+"List":list.html) and derived classes. You should never use NodeBase
+class directly, however, because it works with untyped (@void *@) data and
+this is unsafe. Use NodeBase-derived classes which are automatically defined
+by WX_DECLARE_LIST and WX_DEFINE_LIST macros instead as described in
+"List":list.html documentation (see example there). Also note that
+although there is a class called Node, it is defined for backwards
+compatibility only and usage of this class is strongly deprecated.
+
+In the documentation below, the type @T@ should be thought of as a
+``template'' parameter: this is the type of data stored in the linked list or,
+in other words, the first argument of WX_DECLARE_LIST macro. Also, Node is
+written as Node<T> even though it isn't really a template class -- but it
+helps to think of it as if it were.
+
+h2. Derived from
+
+None.
+
+h2. See also
+
+"List":list.html, "HashTable":hashtable.html
+
+<div id="methods">
+
+h2. Methods
+
+* "wxNode<T>::GetData":#Node_GetData
+* "wxNode<T>::GetNext":#Node_GetNext
+* "wxNode<T>::GetPrevious":#Node_GetPrevious
+* "wxNode<T>::SetData":#Node_SetData
+* "wxNode<T>::IndexOf":#Node_IndexOf
+
+</div>
+
+
+h3(#Node_getdata). Node<T>::GetData
+
+ T *get_data*()
+
+Retrieves the client data pointer associated with the node.
+
+h3(#Node_getnext). Node<T>::GetNext
+
+ "Node<T>":node<t>.html *get_next*()
+
+Retrieves the next node or NULL if this node is the last one.
+
+h3(#Node_getprevious). Node<T>::GetPrevious
+
+ "Node<T>":node<t>.html *get_previous*()
+
+Retrieves the previous node or NULL if this node is the first one in the list.
+
+h3(#Node_setdata). Node<T>::SetData
+
+  *set_data*(%(arg-type)T% data)
+
+Sets the data associated with the node (usually the pointer will have been
+set when the node was created).
+
+h3(#Node_indexof). Node<T>::IndexOf
+
+ Integer *index_of*()
+
+Returns the zero-based index of this node within the list. The return value
+will be @NOT_FOUND@ if the node has not been added to a list yet.
+

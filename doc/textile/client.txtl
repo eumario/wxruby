@@ -1,0 +1,91 @@
+h1(#wxclient). Wx::Client
+
+A Client object represents the client part of a client-server
+DDE-like (Dynamic Data Exchange) conversation. The actual
+DDE-based implementation using DDEClient is available on Windows
+only, but a platform-independent, socket-based version of this
+API is available using TCPClient, which has the same API.
+
+To create a client which can communicate with a suitable server,
+you need to derive a class from Connection and another from
+Client. The custom Connection class will intercept
+communications in a `conversation' with a server, and the custom
+Client is required so that a user-overridden
+"Client#on_make_connection":client.html#Client_onmakeconnection 
+member can return a Connection of the required class, when a
+connection is made. Look at the IPC sample and the 
+"Interprocess communications overview":ipcoverview.html for
+an example of how to do this.
+
+h2. Derived from
+
+ClientBase
+
+"Object":object.html
+
+h2. See also
+
+"Server":server.html, 
+"Connection":connection.html, "Interprocess communications overview":ipcoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Client.new":#Client_new
+* "Client#make_connection":#Client_makeconnection
+* "Client#on_make_connection":#Client_onmakeconnection
+* "Client#valid_host":#Client_validhost
+
+</div>
+
+
+h3(#Client_new). Client.new
+
+h3(#Client_makeconnection). Client#make_connection
+
+ "ConnectionBase":connectionbase.html *make_connection*(%(arg-type)String% host, 
+                                  %(arg-type)String% service, 
+                                  %(arg-type)String% topic)
+
+Tries to make a connection with a server by host (machine name
+under UNIX - use 'localhost' for same machine; ignored when using
+native DDE in Windows), service name and topic string. If the
+server allows a connection, a Connection object will be
+returned. The type of Connection returned can be altered by
+overriding the 
+"Client#on_make_connection":client.html#Client_onmakeconnection 
+member to return your own derived connection object.
+
+Under Unix, the service name may be either an integer port
+identifier in which case an Internet domain socket will be used
+for the communications, or a valid file name (which shouldn't
+exist and will be deleted afterwards) in which case a Unix domain
+socket is created.
+
+*SECURITY NOTE:* Using Internet domain sockets if extremely
+insecure for IPC as there is absolutely no access control for
+them, use Unix domain sockets whenever possible!
+
+h3(#Client_onmakeconnection). Client#on_make_connection
+
+ "ConnectionBase":connectionbase.html *on_make_connection*()
+
+Called by "Client#make_connection":client.html#Client_makeconnection, by
+default this simply returns a new Connection object. Override
+this method to return a Connection descendant customised for the
+application.
+
+The advantage of deriving your own connection class is that it
+will enable you to intercept messages initiated by the server,
+such as "Connection#on_advise":connection.html#Connection_onadvise. You
+may also want to store application-specific data in instances of
+the new class.
+
+h3(#Client_validhost). Client#valid_host
+
+ Boolean *valid_host*(%(arg-type)String% host)
+
+Returns true if this is a valid host name, false otherwise. This always
+returns true under MS Windows.
+

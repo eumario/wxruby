@@ -1,0 +1,56 @@
+h1(#wxgridcellnumbereditor). Wx::GridCellNumberEditor
+
+The editor for numeric integer data.
+
+h2. Derived from
+
+"GridCellTextEditor":gridcelltexteditor.html
+
+"GridCellEditor":gridcelleditor.html
+
+h2. See also
+
+"GridCellEditor":gridcelleditor.html, "GridCellFloatEditor":gridcellfloateditor.html, "GridCellBoolEditor":gridcellbooleditor.html, "GridCellTextEditor":gridcelltexteditor.html, "GridCellChoiceEditor":gridcellchoiceeditor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellNumberEditor.new":#GridCellNumberEditor_new
+* "GridCellNumberEditor#get_string":#GridCellNumberEditor_getstring
+* "GridCellNumberEditor#has_range":#GridCellNumberEditor_hasrange
+* "GridCellNumberEditor#set_parameters":#GridCellNumberEditor_setparameters
+
+</div>
+
+
+h3(#GridCellNumberEditor_constr). GridCellNumberEditor.new
+
+  *GridCellNumberEditor.new*(%(arg-type)Integer% min = -1,  %(arg-type)Integer% max = -1)
+
+Allows to specify the range for acceptable data;
+if min == max == -1, no range checking is done
+
+
+h3(#GridCellNumberEditor_getstring). GridCellNumberEditor#get_string
+
+ String *get_string*()
+
+String representation of the value.
+
+
+h3(#GridCellNumberEditor_hasrange). GridCellNumberEditor#has_range
+
+ Boolean *has_range*()
+
+If the return value is true, the editor uses a SpinCtrl to get user input,
+otherwise it uses a TextCtrl.
+
+
+h3(#GridCellNumberEditor_setparameters). GridCellNumberEditor#set_parameters
+
+  *set_parameters*(%(arg-type)String% params)
+
+Parameters string format is "min,max".
+
+

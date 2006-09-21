@@ -1,0 +1,40 @@
+h1(#wxstringclientdata). Wx::StringClientData
+
+Predefined client data class for holding a string.
+
+h2. Derived from
+
+"ClientData":clientdata.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "StringClientData.new":#StringClientData_new
+* "StringClientData#get_data":#StringClientData_getdata
+* "StringClientData#set_data":#StringClientData_setdata
+
+</div>
+
+
+
+h3(#StringClientData_wxstringclientdata). StringClientData.new
+
+  *StringClientData.new*(%(arg-type)String% data)
+
+Create client data with string.
+
+h3(#StringClientData_getdata). StringClientData#get_data
+
+ String *get_data*()
+
+Get string client data.
+
+h3(#StringClientData_setdata). StringClientData#set_data
+
+  *set_data*(%(arg-type)String% data)
+
+Set string client data.
+

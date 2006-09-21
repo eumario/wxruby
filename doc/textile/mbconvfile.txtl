@@ -1,0 +1,58 @@
+h1(#wxmbconvfile). Wx::MBConvFile
+
+This class used to define the class instance 
+*ConvFileName*, but nowadays *ConvFileName* is
+either of type ConvLibc (on most platforms) or ConvUTF8
+(on MacOS X). *ConvFileName* converts filenames between 
+filesystem multibyte encoding and Unicode. *ConvFileName* 
+can also be set to a something else at run-time which is used 
+e.g. by GTK to use a class which checks the environment 
+variable *G_FILESYSTEM_ENCODING* indicating that filenames 
+should not be interpreted as UTF8 and also for converting 
+invalid UTF8 characters (e.g. if there is a filename in iso8859_1)
+to strings with octal values. 
+
+Since some platforms (such as Win32) use Unicode in the filenames,
+and others (such as Unix) use multibyte encodings, this class should only
+be used directly if MBFILES is defined to 1. A convenience macro,
+FNCONV, is defined to ConvFileName->cWX2MB in this case. You could
+use it like this:
+
+
+ Char *name = T("rawfile.doc");
+ FILE *fil = fopen(FNCONV(name), "r");
+ 
+
+(although it would be better to use Fopen(name, T("r")) in this case.)
+
+h2. Derived from
+
+"MBConv":mbconv.html
+
+h2. See also
+
+"MBConv classes overview":mbconvclasses.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MBConvFile#mb2_wc":#MBConvFile_mb2wc
+* "MBConvFile#wc2_mb":#MBConvFile_wc2mb
+
+</div>
+
+
+
+h3(#MBConvFile_mb2wc). MBConvFile#mb2_wc
+
+ size_t *mb2_wc*(%(arg-type)wchar_t% buf,  %(arg-type)char% psz,  %(arg-type)size_t% n)
+
+Converts from multibyte filename encoding to Unicode. Returns the size of the destination buffer.
+
+h3(#MBConvFile_wc2mb). MBConvFile#wc2_mb
+
+ size_t *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)size_t% n)
+
+Converts from Unicode to multibyte filename encoding. Returns the size of the destination buffer.
+

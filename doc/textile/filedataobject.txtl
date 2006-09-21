@@ -1,0 +1,57 @@
+h1(#wxfiledataobject). Wx::FileDataObject
+
+FileDataObject is a specialization of "DataObject":dataobject.html 
+for file names. The program works with it just as if it were a list of absolute file
+names, but internally it uses the same format as
+Explorer and other compatible programs under Windows or GNOME/KDE filemanager
+under Unix which makes it possible to receive files from them using this
+class.
+
+*Warning:* Under all non-Windows platforms this class is currently
+"input-only", i.e. you can receive the files from another application, but
+copying (or dragging) file(s) from a Widgets application is not currently
+supported. PS: GTK2 should work as well.
+
+h2. Virtual functions to override
+
+None.
+
+h2. Derived from
+
+"DataObjectSimple":dataobjectsimple.html
+
+"DataObject":dataobject.html
+
+h2. See also
+
+"DataObject":dataobject.html, 
+"DataObjectSimple":dataobjectsimple.html, 
+"TextDataObject":textdataobject.html, 
+"BitmapDataObject":bitmapdataobject.html, 
+"DataObject":dataobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "wxFileDataObject":#FileDataObject_wxFileDataObject
+* "FileDataObject#add_file":#FileDataObject_addfile
+* "FileDataObject#get_filenames":#FileDataObject_getfilenames
+
+</div>
+
+
+h3(#FileDataObject_wxfiledataobject). FileDataObject
+
+h3(#FileDataObject_addfile). FileDataObject#add_file
+
+  *add_file*(%(arg-type)String% file)
+
+*MSW only:* adds a file to the file list represented by this data object.
+
+h3(#FileDataObject_getfilenames). FileDataObject#get_filenames
+
+ "ArrayString& ":arraystring& .html *get_filenames*()
+
+Returns the "array":arraystring.html of file names.
+

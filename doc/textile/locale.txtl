@@ -1,0 +1,415 @@
+h1(#wxlocale). Wx::Locale
+
+Locale class encapsulates all language-dependent settings and is a
+generalization of the C locale concept.
+
+In Widgets this class manages message catalogs which contain the translations
+of the strings used to the current language.
+
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"Internationalization overview":internationalization.html,
+
+"Internat sample":sampleinternat.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Supported languages":#Locale_languages
+* "Locale.new":#Locale_new
+* "Locale#add_catalog":#Locale_addcatalog
+* "Locale#add_catalog_lookup_path_prefix":#Locale_addcataloglookuppathprefix
+* "Locale#add_language":#Locale_addlanguage
+* "Locale#find_language_info":#Locale_findlanguageinfo
+* "Locale#get_canonical_name":#Locale_getcanonicalname
+* "Locale#get_language":#Locale_getlanguage
+* "Locale#get_language_info":#Locale_getlanguageinfo
+* "Locale#get_language_name":#Locale_getlanguagename
+* "Locale#get_locale":#Locale_getlocale
+* "Locale#get_name":#Locale_getname
+* "Locale#get_string":#Locale_getstring
+* "Locale#get_header_value":#Locale_getheadervalue
+* "Locale#get_sys_name":#Locale_getsysname
+* "Locale#get_system_encoding":#Locale_getsystemencoding
+* "Locale#get_system_encoding_name":#Locale_getsystemencodingname
+* "Locale#get_system_language":#Locale_getsystemlanguage
+* "Locale#init":#Locale_init
+* "Locale#is_loaded":#Locale_isloaded
+* "Locale#is_ok":#Locale_isok
+
+</div>
+
+
+
+
+h3(#wxlanguage). Supported languages
+
+See "list of recognized language constants":languagecodes.html.
+These constants may be used to specify the language
+in "Init":localeinit.html and are returned by 
+"get_system_language":#Locale_getsystemlanguage:
+
+
+h3(#Locale_defnew). Locale.new
+
+  *Locale.new*(%(arg-type)Integer% language, 
+             %(arg-type)Integer% flags = LOCALE_LOAD_DEFAULT | LOCALE_CONV_ENCODING)
+
+See "Init()":localeinit.html for parameters description.
+
+  *Locale.new*(%(arg-type)char% szName,  %(arg-type)char% szShort = nil, 
+             %(arg-type)char% szLocale = nil, 
+             %(arg-type)Boolean% bLoadDefault = true, 
+             %(arg-type)Boolean% bConvertEncoding = false)
+
+See "Init()":localeinit.html for parameters description.
+
+The call of this function has several global side effects which you should
+understand: first of all, the application locale is changed - note that this
+will affect many of standard C library functions such as printf() or strftime().
+Second, this Locale object becomes the new current global locale for the
+application and so all subsequent calls to GetTranslation() will try to
+translate the messages using the message catalogs for this locale.
+
+
+
+  *destructor*()
+
+The destructor, like the constructor, also has global side effects: the previously
+set locale is restored and so the changes described in 
+"Init":localeinit.html documentation are rolled back.
+
+
+h3(#Locale_addcatalog). Locale#add_catalog
+
+ Boolean *add_catalog*(%(arg-type)char% szDomain)
+
+ Boolean *add_catalog*(%(arg-type)char% szDomain,  %(arg-type)Language% msgIdLanguage, 
+                     %(arg-type)char% msgIdCharset)
+
+Add a catalog for use with the current locale: it is searched for in standard
+places (current directory first, then the system one), but you may also prepend
+additional directories to the search path with 
+"add_catalog_lookup_path_prefix()":#Locale_addcataloglookuppathprefix().
+
+All loaded catalogs will be used for message lookup by
+"get_string()":#Locale_getstring() for the current locale.
+
+Returns true if catalog was successfully loaded, false otherwise (which might
+mean that the catalog is not found or that it isn't in the correct format).
+
+The second form of this method takes two additional arguments,
+msgIdLanguage and msgIdCharset.
+
+msgIdLanguage specifies the language of "msgid" strings in source code
+(i.e. arguments to "get_string":#Locale_getstring,
+"GetTranslation":gettranslation.html and the 
+"_()":underscore.html macro). It is used if AddCatalog cannot find any
+catalog for current language: if the language is same as source code language,
+then strings from source code are used instead. 
+
+msgIdCharset lets you specify the charset used for msgids in sources
+in case they use 8-bit characters (e.g. German or French strings).  This
+argument has no effect in Unicode build, because literals in sources are
+Unicode strings; you have to use compiler-specific method of setting the right
+charset when compiling with Unicode.
+
+By default (i.e. when you use the first form), msgid strings are assumed
+to be in English and written only using 7-bit ASCII characters.
+
+If you have to deal with non-English strings or 8-bit characters in the source
+code, see the instructions in 
+"Writing non-English applications":nonenglishoverview.html.
+
+
+h3(#Locale_addcataloglookuppathprefix). Locale#add_catalog_lookup_path_prefix
+
+  *add_catalog_lookup_path_prefix*(%(arg-type)String% prefix)
+
+Add a prefix to the catalog lookup path: the message catalog files will be
+looked up under prefix/<lang>/LC_MESSAGES, prefix/<lang> and prefix
+(in this order).
+
+This only applies to subsequent invocations of AddCatalog().
+
+h3(#Locale_addlanguage). Locale#add_language
+
+  *add_language*(%(arg-type)LanguageInfo% info)
+
+Adds custom, user-defined language to the database of known languages. This
+database is used in conjunction with the first form of 
+"Init":localeinit.html. 
+
+LanguageInfo is defined as follows:
+
+
+ struct WXDLLEXPORT LanguageInfo
+ {
+     int Language;                   // Language id
+     String CanonicalName;         // Canonical name, e.g. fr_FR
+ #ifdef __WIN32__
+     Uint32 WinLang, WinSublang;   // Win32 language identifiers
+                                     // (LANG_xxxx, SUBLANG_xxxx)
+ #endif
+     String Description;           // human-readable name of the language
+ };
+ 
+
+
+_Language_ should be greater than LANGUAGE_USER_DEFINED.
+
+
+
+
+h3(#Locale_findlanguageinfo). Locale#find_language_info
+
+ "LanguageInfo":languageinfo.html *find_language_info*(%(arg-type)String% locale)
+
+This function may be used to find the language description structure for the
+given locale, specified either as a two letter ISO language code (for example,
+"pt"), a language code followed by the country code ("pt_BR") or a full, human
+readable, language description ("Portuguese-Brazil").
+
+Returns the information for the given language or @NULL@ if this language
+is unknown. Note that even if the returned pointer is valid, the caller should
+_not_ delete it.
+
+h4. See also
+
+"get_language_info":#Locale_getlanguageinfo
+
+
+h3(#Locale_getcanonicalname). Locale#get_canonical_name
+
+ String *get_canonical_name*()
+
+Returns the canonical form of current locale name. Canonical form is the
+one that is used on UNIX systems: it is a two- or five-letter string in xx or
+xx_YY format, where xx is ISO 639 code of language and YY is ISO 3166 code of
+the country. Examples are "en", "en_GB", "en_US" or "fr_FR".
+
+This form is internally used when looking up message catalogs.
+
+Compare "get_sys_name":#Locale_getsysname.
+
+
+
+
+h3(#Locale_getlanguage). Locale#get_language
+
+ Integer *get_language*()
+
+Returns "Language":language.html constant of current language.
+Note that you can call this function only if you used the form of
+"Init":localeinit.html that takes Language argument.
+
+
+h3(#Locale_getlanguageinfo). Locale#get_language_info
+
+ "LanguageInfo":languageinfo.html *get_language_info*(%(arg-type)Integer% lang)
+
+Returns a pointer to LanguageInfo structure containing information about the
+given language or @NULL@ if this language is unknown. Note that even if the
+returned pointer is valid, the caller should _not_ delete it.
+
+See "add_language":#Locale_addlanguage for the LanguageInfo
+description.
+
+As with "Init":localeinit.html, @LANGUAGE_DEFAULT@ has the
+special meaning if passed as an argument to this function and in this case the
+result of "get_system_language()":#Locale_getsystemlanguage() is used.
+
+
+h3(#Locale_getlanguagename). Locale#get_language_name
+
+ String *get_language_name*(%(arg-type)Integer% lang)
+
+Returns English name of the given language or empty string if this
+language is unknown.
+
+See "get_language_info":#Locale_getlanguageinfo for a remark about
+special meaning of @LANGUAGE_DEFAULT@.
+
+
+h3(#Locale_getlocale). Locale#get_locale
+
+ char *get_locale*()
+
+Returns the locale name as passed to the constructor or 
+"Init()":localeinit.html. This is full, human-readable name,
+e.g. "English" or "French".
+
+
+
+h3(#Locale_getname). Locale#get_name
+
+ String *get_name*()
+
+Returns the current short name for the locale (as given to the constructor or
+the Init() function).
+
+
+h3(#Locale_getstring). Locale#get_string
+
+ char *get_string*(%(arg-type)char% szOrigString,  %(arg-type)char% szDomain = nil)
+
+ char *get_string*(%(arg-type)char% szOrigString,  %(arg-type)char% szOrigString2, 
+                 %(arg-type)size_t% n, 
+                 %(arg-type)char% szDomain = nil)
+
+Retrieves the translation for a string in all loaded domains unless the szDomain
+parameter is specified (and then only this catalog/domain is searched).
+
+Returns original string if translation is not available
+(in this case an error message is generated the first time
+a string is not found; use "LogNull":logoverview.html to suppress it).
+
+The second form is used when retrieving translation of string that has
+different singular and plural form in English or different plural forms in some
+other language. It takes two extra arguments: szOrigString
+parameter must contain the singular form of the string to be converted.
+It is also used as the key for the search in the catalog.
+The szOrigString2 parameter is the plural form (in English).
+The parameter n is used to determine the plural form.  If no
+message catalog is found szOrigString is returned if `n == 1',
+otherwise szOrigString2.
+See GNU gettext manualhttp://www.gnu.org/manual/gettext/html_chapter/gettext_10.html\#SEC150 for additional information on plural forms handling.
+
+This method is called by the "GetTranslation":gettranslation.html
+function and "_()":underscore.html macro.
+
+h4. Remarks
+
+Domains are searched in the last to first order, i.e. catalogs
+added later override those added before.
+
+
+h3(#Locale_getheadervalue). Locale#get_header_value
+
+ String *get_header_value*(%(arg-type)char% szHeader,  %(arg-type)char% szDomain = nil)
+
+Returns the header value for header szHeader. The search for szHeader is case sensitive. If an szDomain
+is passed, this domain is searched. Else all domains will be searched until a header has been found.
+The return value is the value of the header if found. Else this will be empty.
+
+h3(#Locale_getsysname). Locale#get_sys_name
+
+ String *get_sys_name*()
+
+Returns current platform-specific locale name as passed to setlocale().
+
+Compare "get_canonical_name":#Locale_getcanonicalname.
+
+
+
+h3(#Locale_getsystemencoding). Locale#get_system_encoding
+
+ "FontEncoding":fontencoding.html *get_system_encoding*()
+
+Tries to detect the user's default font encoding.
+Returns "FontEncoding":font.html value or 
+*FONTENCODING_SYSTEM* if it couldn't be determined.
+
+
+h3(#Locale_getsystemencodingname). Locale#get_system_encoding_name
+
+ String *get_system_encoding_name*()
+
+Tries to detect the name of the user's default font encoding. This string isn't
+particularly useful for the application as its form is platform-dependent and
+so you should probably use 
+"get_system_encoding":#Locale_getsystemencoding instead.
+
+Returns a user-readable string value or an empty string if it couldn't be
+determined.
+
+
+h3(#Locale_getsystemlanguage). Locale#get_system_language
+
+ Integer *get_system_language*()
+
+Tries to detect the user's default language setting.
+Returns "Language":language.html value or 
+ *LANGUAGE_UNKNOWN* if the language-guessing algorithm failed.
+
+
+
+h3(#Locale_init). Locale#init
+
+
+ Boolean *init*(%(arg-type)Integer% language = LANGUAGE_DEFAULT, 
+              %(arg-type)Integer% flags = LOCALE_LOAD_DEFAULT | LOCALE_CONV_ENCODING)
+
+ Boolean *init*(%(arg-type)char% szName,  %(arg-type)char% szShort = nil, 
+              %(arg-type)char% szLocale = nil, 
+              %(arg-type)Boolean% bLoadDefault = true, 
+              %(arg-type)Boolean% bConvertEncoding = false)
+
+The second form is deprecated, use the first one unless you know what you are
+doing. 
+
+
+h4. Parameters
+
+* _language_ "Language":language.html identifier of the locale. 
+LANGUAGE_DEFAULT has special meaning -- Locale will use system's default 
+language (see "get_system_language":#Locale_getsystemlanguage).
+* _flags_ Combination of the following:
+
+
+
+|@LOCALE_LOAD_DEFAULT@|Load the message catalogfor the given locale containing the translations of standard Widgets messagesautomatically.|
+|@LOCALE_CONV_ENCODING@|Automatically convert messagecatalogs to platform's default encoding. Note that it will do only basic conversion between well-known pair like iso8859-1 and windows-1252 oriso8859-2 and windows-1250. See "Writing non-English applications":nonenglishoverview.html for detaileddescription of this behaviour. Note that this flag is meaningless in Unicode build.|
+
+
+* _szName_ The name of the locale. Only used in diagnostic messages.
+* _szShort_ The standard 2 letter locale abbreviation; it is used as the
+directory prefix when looking for the message catalog files.
+* _szLocale_ The parameter for the call to setlocale(). Note that it is
+platform-specific.
+* _bLoadDefault_ May be set to false to prevent loading of the message catalog
+for the given locale containing the translations of standard Widgets messages.
+This parameter would be rarely used in normal circumstances.
+* _bConvertEncoding_ May be set to true to do automatic conversion of message
+catalogs to platform's native encoding. Note that it will do only basic 
+conversion between well-known pair like iso8859-1 and windows-1252 or
+iso8859-2 and windows-1250. 
+See "Writing non-English applications":nonenglishoverview.html for detailed
+description of this behaviour.
+
+
+The call of this function has several global side effects which you should
+understand: first of all, the application locale is changed - note that this
+will affect many of standard C library functions such as printf() or strftime().
+Second, this Locale object becomes the new current global locale for the
+application and so all subsequent calls to
+"GetTranslation()":gettranslation.html will try to
+translate the messages using the message catalogs for this locale.
+
+Returns true on success or false if the given locale couldn't be set.
+
+
+h3(#Locale_isloaded). Locale#is_loaded
+
+ Boolean *is_loaded*(%(arg-type)char% domain)
+
+Check if the given catalog is loaded, and returns true if it is.
+
+According to GNU gettext tradition, each catalog
+normally corresponds to 'domain' which is more or less the application name.
+
+See also: "add_catalog":#Locale_addcatalog
+
+
+h3(#Locale_isok). Locale#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if the locale could be set successfully.
+

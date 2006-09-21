@@ -1,0 +1,258 @@
+h1(#wxstatusbar). Wx::StatusBar
+
+A status bar is a narrow window that can be placed along the bottom of a frame to give
+small amounts of status information. It can contain one or more fields, one or more of which can
+be variable length according to the size of the window.
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Derived from
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@ST_SIZEGRIP@|On Windows 95, displays a gripper at right-hand side ofthe status bar.|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Remarks
+
+It is possible to create controls and other windows on the status bar. Position these windows
+from an *OnSize* event handler.
+
+h2. See also
+
+"Frame":frame.html, "Status bar sample":samplestatbar.html
+
+<div id="methods">
+
+h2. Methods
+
+* "StatusBar.new":#StatusBar_new
+* "StatusBar#create":#StatusBar_create
+* "StatusBar#get_field_rect":#StatusBar_getfieldrect
+* "StatusBar#get_fields_count":#StatusBar_getfieldscount
+* "StatusBar#get_status_text":#StatusBar_getstatustext
+* "StatusBar#pop_status_text":#StatusBar_popstatustext
+* "StatusBar#push_status_text":#StatusBar_pushstatustext
+* "StatusBar#set_fields_count":#StatusBar_setfieldscount
+* "StatusBar#set_min_height":#StatusBar_setminheight
+* "StatusBar#set_status_text":#StatusBar_setstatustext
+* "StatusBar#set_status_widths":#StatusBar_setstatuswidths
+* "StatusBar#set_status_styles":#StatusBar_setstatusstyles
+
+</div>
+
+
+h3(#StatusBar_new). StatusBar.new
+
+  *StatusBar.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+                %(arg-type)Integer% style = ST_SIZEGRIP, 
+                %(arg-type)String% name = "statusBar")
+
+Constructor, creating the window.
+
+h4. Parameters
+
+* _parent_ The window parent, usually a frame.
+* _id_ The window identifier. It may take a value of -1 to indicate a default value.
+* _style_ The window style. See "StatusBar":statusbar.html.
+* _name_ The name of the window. This parameter is used to associate a name with the item,
+allowing the application user to set Motif resource values for
+individual windows.
+
+h4. See also
+
+"StatusBar#create":statusbar.html#StatusBar_create
+
+  *destructor*()
+
+Destructor.
+
+h3(#StatusBar_create). StatusBar#create
+
+ Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+                %(arg-type)Integer% style = ST_SIZEGRIP, 
+                %(arg-type)String% name = "statusBar")
+
+Creates the window, for two-step construction.
+
+See "StatusBar.new":statusbar.html#StatusBar_new for details.
+
+h3(#StatusBar_getfieldrect). StatusBar#get_field_rect
+
+ Boolean *get_field_rect*(%(arg-type)Integer% i,  %(arg-type)Rect% rect)
+
+Returns the size and position of a field's internal bounding rectangle.
+
+h4. Parameters
+
+* _i_ The field in question.
+* _rect_ The rectangle values are placed in this variable.
+
+h4. Return value
+
+true if the field index is valid, false otherwise.
+
+h4. See also
+
+"Rect":rect.html
+
+
+
+h3(#StatusBar_getfieldscount). StatusBar#get_fields_count
+
+ Integer *get_fields_count*()
+
+Returns the number of fields in the status bar.
+
+h3(#StatusBar_getstatustext). StatusBar#get_status_text
+
+ String *get_status_text*(%(arg-type)Integer% i = 0)
+
+Returns the string associated with a status bar field.
+
+h4. Parameters
+
+* _i_ The number of the status field to retrieve, starting from zero.
+
+h4. Return value
+
+The status field string if the field is valid, otherwise the empty string.
+
+h4. See also
+
+"StatusBar#set_status_text":statusbar.html#StatusBar_setstatustext
+
+h3(#StatusBar_popstatustext). StatusBar#pop_status_text
+
+  *pop_status_text*(%(arg-type)Integer% field = 0)
+
+Sets the field text to the top of the stack, and pops the stack of saved
+strings.
+
+h4. See also
+
+"StatusBar#push_status_text":statusbar.html#StatusBar_pushstatustext
+
+h3(#StatusBar_pushstatustext). StatusBar#push_status_text
+
+  *push_status_text*(%(arg-type)String% string,  %(arg-type)Integer% field = 0)
+
+Saves the current field text in a per field stack, and sets the field text
+to the string passed as argument.
+
+h3(#StatusBar_setfieldscount). StatusBar#set_fields_count
+
+  *set_fields_count*(%(arg-type)Integer% number = 1,  %(arg-type)Integer% widths = nil)
+
+Sets the number of fields, and optionally the field widths.
+
+
+
+
+
+h4. Parameters
+
+* _number_ The number of fields.
+* _widths_ An array of _n_ integers interpreted in the same way as
+in "set_status_widths":#StatusBar_setstatuswidths
+
+h3(#StatusBar_setminheight). StatusBar#set_min_height
+
+  *set_min_height*(%(arg-type)Integer% height)
+
+Sets the minimal possible height for the status bar. The real height may be
+bigger than the height specified here depending on the size of the font used by
+the status bar.
+
+h3(#StatusBar_setstatustext). StatusBar#set_status_text
+
+  *set_status_text*(%(arg-type)String% text,  %(arg-type)Integer% i = 0)
+
+Sets the text for one field.
+
+h4. Parameters
+
+* _text_ The text to be set. Use an empty string (``") to clear the field.
+* _i_ The field to set, starting from zero.
+
+h4. See also
+
+"StatusBar#get_status_text":statusbar.html#StatusBar_getstatustext, "Frame#set_status_text":frame.html#Frame_setstatustext
+
+h3(#StatusBar_setstatuswidths). StatusBar#set_status_widths
+
+  *set_status_widths*(%(arg-type)Integer% n,  %(arg-type)Integer% widths)
+
+Sets the widths of the fields in the status line. There are two types of
+fields: fixed widths one and variable width fields. For the fixed width fields
+you should specify their (constant) width in pixels. For the variable width
+fields, specify a negative number which indicates how the field should expand:
+the space left for all variable width fields is divided between them according
+to the absolute value of this number. A variable width field with width of $-2$
+gets twice as much of it as a field with width $-1$ and so on.
+
+For example, to create one fixed width field of width $100$ in the right part of
+the status bar and two more fields which get $66$\% and $33$\% of the remaining
+space correspondingly, you should use an array containing $-2$, $-1$ and $100$.
+
+h4. Parameters
+
+* _n_ The number of fields in the status bar. Must be equal to the
+number passed to "set_fields_count":#StatusBar_setfieldscount the last
+time it was called.
+* _widths_ Contains an array of _n_ integers, each of which is
+either an absolute status field width in pixels if positive or indicates a
+variable width field if negative.
+
+h4. Remarks
+
+The widths of the variable fields are calculated from the total width of all fields,
+minus the sum of widths of the non-variable fields, divided by the number of
+variable fields.
+
+h4. See also
+
+"StatusBar#set_fields_count":statusbar.html#StatusBar_setfieldscount, "Frame#set_status_widths":frame.html#Frame_setstatuswidths
+
+
+
+
+
+h3(#StatusBar_setstatusstyles). StatusBar#set_status_styles
+
+  *set_status_styles*(%(arg-type)Integer% n,  %(arg-type)Integer% styles)
+
+Sets the styles of the fields in the status line which can make fields appear flat
+or raised instead of the standard sunken 3D border.
+
+h4. Parameters
+
+* _n_ The number of fields in the status bar. Must be equal to the
+number passed to "set_fields_count":#StatusBar_setfieldscount the last
+time it was called.
+* _styles_ Contains an array of _n_ integers with the styles for each field. There 
+are three possible styles:
+
+
+
+|@SB_NORMAL@|(default) The field appears sunken with a standard 3D border.|
+|@SB_FLAT@|No border is painted around the field so that it appears flat.|
+|@SB_RAISED@|A raised 3D border is painted around the field.|
+
+
+
+

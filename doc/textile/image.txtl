@@ -1,0 +1,1260 @@
+h1(#wximage). Wx::Image
+
+This class encapsulates a platform-independent image. An image can be created
+from data, or using "Bitmap#convert_to_image":bitmap.html#Bitmap_converttoimage. An image
+can be loaded from a file in a variety of formats, and is extensible to new formats
+via image format handlers. Functions are available to set and get image bits, so
+it can be used for basic image manipulation.
+
+A Image cannot (currently) be drawn directly to a "DC":dc.html. Instead, 
+a platform-specific "Bitmap":bitmap.html object must be created from it using
+the "Bitmap::Bitmap(Image,int depth)":bitmapctor.html constructor. 
+This bitmap can then
+be drawn in a device context, using "DC#draw_bitmap":dc.html#DC_drawbitmap.
+
+One colour value of the image may be used as a mask colour which will lead to the automatic
+creation of a "Mask":mask.html object associated to the bitmap object.
+
+h2. Alpha channel support
+
+Starting from Widgets 2.5.0 Image supports alpha channel data, that is in
+addition to a byte for the red, green and blue colour components for each pixel
+it also stores a byte representing the pixel opacity. An alpha value of $0$
+corresponds to a transparent pixel (null opacity) while a value of $255$
+means that the pixel is 100\% opaque.
+
+Unlike RGB data, not all images have an alpha channel and before using 
+"get_alpha":#Image_getalpha you should check if this image contains
+an alpha channel with "has_alpha":#Image_hasalpha. Note that currently only
+images loaded from PNG files with transparency information will have an alpha
+channel but alpha support will be added to the other formats as well (as well
+as support for saving images with alpha channel which also isn't implemented).
+
+h2. Available image handlers
+
+The following image handlers are available. *BMPHandler* is always
+installed by default. To use other image formats, install the appropriate
+handler with "Image#add_handler":image.html#Image_addhandler or 
+"InitAllImageHandlers":initallimagehandlers.html.
+
+
+|BMPHandler|For loading and saving, always installed.|
+|PNGHandler|For loading (including alpha support) and saving.|
+|JPEGHandler|For loading and saving.|
+|GIFHandler|Only for loading, due to legal issues.|
+|PCXHandler|For loading and saving (see below).|
+|PNMHandler|For loading and saving (see below).|
+|TIFFHandler|For loading and saving.|
+|IFFHandler|For loading only.|
+|XPMHandler|For loading and saving.|
+|ICOHandler|For loading and saving.|
+|CURHandler|For loading and saving.|
+|ANIHandler|For loading only.|
+
+
+When saving in PCX format, *PCXHandler* will count the number of
+different colours in the image; if there are 256 or less colours, it will
+save as 8 bit, else it will save as 24 bit.
+
+Loading PNMs only works for ASCII or raw RGB images. When saving in
+PNM format, *PNMHandler* will always save as raw RGB.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Bitmap":bitmap.html, 
+"InitAllImageHandlers":initallimagehandlers.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Image.new":#Image_new
+* "Image#add_handler":#Image_addhandler
+* "Image#clean_up_handlers":#Image_cleanuphandlers
+* "Image#compute_histogram":#Image_computehistogram
+* "Image#convert_alpha_to_mask":#Image_convertalphatomask
+* "Image#convert_to_bitmap":#Image_converttobitmap
+* "Image#convert_to_mono":#Image_converttomono
+* "Image#copy":#Image_copy
+* "Image#create":#Image_create
+* "Image#destroy":#Image_destroy
+* "Image#find_first_unused_colour":#Image_findfirstunusedcolour
+* "Image#find_handler":#Image_findhandler
+* "Image#get_image_ext_wildcard":#Image_getimageextwildcard
+* "Image#get_alpha":#Image_getalpha
+* "Image#get_blue":#Image_getblue
+* "Image#get_data":#Image_getdata
+* "Image#get_green":#Image_getgreen
+* "Image#get_image_count":#Image_getimagecount
+* "Image#get_handlers":#Image_gethandlers
+* "Image#get_height":#Image_getheight
+* "Image#get_mask_blue":#Image_getmaskblue
+* "Image#get_mask_green":#Image_getmaskgreen
+* "Image#get_mask_red":#Image_getmaskred
+* "Image#get_or_find_mask_colour":#Image_getorfindmaskcolour
+* "Image#get_palette":#Image_getpalette
+* "Image#get_red":#Image_getred
+* "Image#get_sub_image":#Image_getsubimage
+* "Image#get_width":#Image_getwidth
+* "HSVValue::HSVValue":#Image_HSVValue
+* "Image#hs_vto_rgb":#Image_hsvtorgb
+* "Image#has_alpha":#Image_hasalpha
+* "Image#has_mask":#Image_hasmask
+* "Image#get_option":#Image_getoption
+* "Image#get_option_int":#Image_getoptionint
+* "Image#has_option":#Image_hasoption
+* "Image#init_alpha":#Image_initalpha
+* "Image#init_standard_handlers":#Image_initstandardhandlers
+* "Image#insert_handler":#Image_inserthandler
+* "Image#is_transparent":#Image_istransparent
+* "Image#load_file":#Image_loadfile
+* "Image#ok":#Image_ok
+* "RGBValue::RGBValue":#Image_RGBValue
+* "Image#rg_bto_hsv":#Image_rgbtohsv
+* "Image#remove_handler":#Image_removehandler
+* "Image#mirror":#Image_mirror
+* "Image#replace":#Image_replace
+* "Image#rescale":#Image_rescale
+* "Image#resize":#Image_resize
+* "Image#rotate":#Image_rotate
+* "Image#rotate_hue":#Image_rotatehue
+* "Image#rotate_90":#Image_rotate90
+* "Image#save_file":#Image_savefile
+* "Image#scale":#Image_scale
+* "Image#size":#Image_size
+* "Image#set_alpha":#Image_setalpha
+* "Image#set_data":#Image_setdata
+* "Image#set_mask":#Image_setmask
+* "Image#set_mask_colour":#Image_setmaskcolour
+* "Image#set_mask_from_image":#Image_setmaskfromimage
+* "Image#set_option":#Image_setoption
+* "Image#set_palette":#Image_setpalette
+* "Image#set_rgb":#Image_setrgb
+* "Image#set_rgb":#Image_setrgb
+
+</div>
+
+
+
+h3(#Image_new). Image.new
+
+  *Image.new*(%(arg-type)Image% image)
+
+Copy constructor.
+
+  *Image.new*(%(arg-type)Bitmap% bitmap)
+
+(Deprecated form, use "Bitmap#convert_to_image":bitmap.html#Bitmap_converttoimage
+instead.) Constructs an image from a platform-dependent bitmap. This preserves
+mask information so that bitmaps and images can be converted back
+and forth without loss in that respect.
+
+  *Image.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+            %(arg-type)Boolean% clear=true)
+
+Creates an image with the given width and height.  If _clear_ is true, the new image will be initialized to black.
+Otherwise, the image data will be uninitialized.
+
+  *Image.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height,  %(arg-type)Integer% data, 
+            %(arg-type)Boolean% static_data = )
+
+Creates an image from given data with the given width and height. If 
+_static_data_ is true, then Image will not delete the actual
+image data in its destructor, otherwise it will free it by calling
+_free()_.
+
+  *Image.new*(%(arg-type)String% name,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
+            %(arg-type)Integer% index = -1)
+
+  *Image.new*(%(arg-type)String% name,  %(arg-type)String% mimetype,  %(arg-type)Integer% index = -1)
+
+Loads an image from a file.
+
+  *Image.new*(%(arg-type)InputStream% stream,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
+            %(arg-type)Integer% index = -1)
+
+  *Image.new*(%(arg-type)InputStream% stream,  %(arg-type)String% mimetype, 
+            %(arg-type)Integer% index = -1)
+
+Loads an image from an input stream.
+
+  *Image.new*(%(arg-type)char% xpmData)
+
+Creates an image from XPM data.
+
+h4. Parameters
+
+* _width_ Specifies the width of the image.
+* _height_ Specifies the height of the image.
+* _name_ Name of the file from which to load the image.
+* _stream_ Opened input stream from which to load the image. Currently, the stream must support seeking.
+* _type_ May be one of the following:
+
+
+|BITMAP_TYPE_BMP|Load a Windows bitmap file.|
+|BITMAP_TYPE_GIF|Load a GIF bitmap file.|
+|BITMAP_TYPE_JPEG|Load a JPEG bitmap file.|
+|BITMAP_TYPE_PNG|Load a PNG bitmap file.|
+|BITMAP_TYPE_PCX|Load a PCX bitmap file.|
+|BITMAP_TYPE_PNM|Load a PNM bitmap file.|
+|BITMAP_TYPE_TIF|Load a TIFF bitmap file.|
+|BITMAP_TYPE_XPM|Load a XPM bitmap file.|
+|BITMAP_TYPE_ICO|Load a Windows icon file (ICO).|
+|BITMAP_TYPE_CUR|Load a Windows cursor file (CUR).|
+|BITMAP_TYPE_ANI|Load a Windows animated cursor file (ANI).|
+|BITMAP_TYPE_ANY|Will try to autodetect the format.|
+
+* _mimetype_ MIME type string (for example 'image/jpeg')
+* _index_ Index of the image to load in the case that the image file contains multiple images.
+This is only used by GIF, ICO and TIFF handlers. The default value (-1) means 
+"choose the default image" and is interpreted as the first image (index=0) by 
+the GIF and TIFF handler and as the largest and most colourful one by the ICO handler.
+* _xpmData_ A pointer to XPM image data.
+
+h4. Remarks
+
+Depending on how Widgets has been configured, not all formats may be available.
+
+Note: any handler other than BMP must be previously
+initialized with "Image#add_handler":image.html#Image_addhandler or 
+"InitAllImageHandlers":initallimagehandlers.html.
+
+Note: you can use "get_option_int":#Image_getoptionint to get the 
+hotspot for loaded cursor file:
+
+     int hotspot_x = image.GetOptionInt(IMAGE_OPTION_CUR_HOTSPOT_X);
+     int hotspot_y = image.GetOptionInt(IMAGE_OPTION_CUR_HOTSPOT_Y);
+ 
+ 
+
+h4. See also
+
+"Image#load_file":image.html#Image_loadfile
+
+
+
+
+
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#Image_addhandler). Image#add_handler
+
+  *add_handler*(%(arg-type)ImageHandler% handler)
+
+Adds a handler to the end of the static list of format handlers.
+
+* _handler_ A new image format handler object. There is usually only one instance
+of a given handler class in an application session.
+
+h4. See also
+
+"ImageHandler":imagehandler.html
+
+ Boolean *can_read*(%(arg-type)String% filename)
+
+returns true if the current image handlers can read this file
+
+
+
+h3(#Image_cleanuphandlers). Image#clean_up_handlers
+
+  *clean_up_handlers*()
+
+Deletes all image handlers.
+
+This function is called by Widgets on exit.
+
+
+h3(#Image_computehistogram). Image#compute_histogram
+
+ Integer *compute_histogram*(%(arg-type)ImageHistogram% histogram)
+
+Computes the histogram of the image. _histogram_ is a reference to 
+ImageHistogram object. ImageHistogram is a specialization of 
+"HashMap":hashmap.html "template" and is defined as follows:
+
+
+ class WXDLLEXPORT ImageHistogramEntry
+ {
+ public:
+     ImageHistogramEntry() : index(0), value(0) {}
+     unsigned long index;
+     unsigned long value;
+ };
+ 
+ WX_DECLARE_EXPORTED_HASH_MAP(unsigned long, ImageHistogramEntry,
+                              IntegerHash, IntegerEqual,
+                              ImageHistogram);
+ 
+
+h4. Return value
+
+Returns number of colours in the histogram.
+
+
+h3(#Image_convertalphatomask). Image#convert_alpha_to_mask
+
+ Boolean *convert_alpha_to_mask*(%(arg-type)Integer% threshold = $128$)
+
+If the image has alpha channel, this method converts it to mask. All pixels
+with alpha value less than threshold are replaced with mask colour
+and the alpha channel is removed. Mask colour is chosen automatically using
+"find_first_unused_colour":#Image_findfirstunusedcolour.
+
+If the image image doesn't have alpha channel,
+ConvertAlphaToMask does nothing.
+
+h4. Return value
+
+ if FindFirstUnusedColour returns ,  otherwise. 
+
+
+h3(#Image_converttobitmap). Image#convert_to_bitmap
+
+ "Bitmap":bitmap.html *convert_to_bitmap*()
+
+Deprecated, use equivalent "Bitmap constructor":bitmapctor.html
+(which takes Image and depth as its arguments) instead.
+
+
+h3(#wxbitmapconverttomono). Image#convert_to_mono
+
+ "Image":image.html *convert_to_mono*(%(arg-type)Integer% r,  %(arg-type)Integer% g, 
+                         %(arg-type)Integer% b)
+
+Returns monochromatic version of the image. The returned image has white
+colour where the original has _(r,g,b)_ colour and black colour 
+everywhere else.
+
+
+h3(#Image_copy). Image#copy
+
+ "Image":image.html *copy*()
+
+Returns an identical copy of the image.
+
+
+h3(#Image_create). Image#create
+
+ Boolean *create*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                %(arg-type)Boolean% clear=true)
+
+Creates a fresh image.  If _clear_ is true, the new image will be initialized to black.
+Otherwise, the image data will be uninitialized.
+
+h4. Parameters
+
+* _width_ The width of the image in pixels.
+* _height_ The height of the image in pixels.
+
+h4. Return value
+
+true if the call succeeded, false otherwise.
+
+
+h3(#Image_destroy). Image#destroy
+
+  *destroy*()
+
+Destroys the image data.
+
+
+h3(#Image_findfirstunusedcolour). Image#find_first_unused_colour
+
+ Boolean *find_first_unused_colour*(%(arg-type)Integer% r,  %(arg-type)Integer% g, 
+                                  %(arg-type)Integer% b, 
+                                  %(arg-type)Integer% startR = 1, 
+                                  %(arg-type)Integer% startG = 0, 
+                                  %(arg-type)Integer% startB = 0)
+
+h4. Parameters
+
+* _r,g,b_ Pointers to variables to save the colour.
+* _startR,startG,startB_ Initial values of the colour. Returned colour
+will have RGB values equal to or greater than these.
+
+Finds the first colour that is never used in the image. The search begins at
+given initial colour and continues by increasing R, G and B components (in this
+order) by 1 until an unused colour is found or the colour space exhausted.
+
+h4. Return value
+
+Returns false if there is no unused colour left, true on success.
+
+h4. Notes
+
+Note that this method involves computing the histogram, which is
+computationally intensive operation.
+
+
+h3(#Image_findhandler). Image#find_handler
+
+ "ImageHandler":imagehandler.html *find_handler*(%(arg-type)String% name)
+
+Finds the handler with the given name.
+
+ "ImageHandler":imagehandler.html *find_handler*(%(arg-type)String% extension, 
+                             %(arg-type)Integer% imageType)
+
+Finds the handler associated with the given extension and type.
+
+ "ImageHandler":imagehandler.html *find_handler*(%(arg-type)Integer% imageType)
+
+Finds the handler associated with the given image type.
+
+ "ImageHandler":imagehandler.html *find_handler_mime*(%(arg-type)String% mimetype)
+
+Finds the handler associated with the given MIME type.
+
+* _name_ The handler name.
+* _extension_ The file extension, such as ``bmp".
+* _imageType_ The image type, such as BITMAP_TYPE_BMP.
+* _mimetype_ MIME type.
+
+h4. Return value
+
+A pointer to the handler if found, NULL otherwise.
+
+h4. See also
+
+"ImageHandler":imagehandler.html
+
+
+h3(#Image_getimageextwildcard). Image#get_image_ext_wildcard
+
+ String *get_image_ext_wildcard*()
+
+Iterates all registered ImageHandler objects, and returns a string containing file extension masks
+suitable for passing to file open/save dialog boxes.
+
+h4. Return value
+
+The format of the returned string is "(*.ext1;*.ext2)|*.ext1;*.ext2".
+
+It is usually a good idea to prepend a description before passing the result to the dialog.
+
+Example:
+
+
+     FileDialog FileDlg( this, "Choose Image", ::GetWorkingDirectory(), "", _("Image Files ") + Image::GetImageExtWildcard(), OPEN );
+ 
+
+h4. See also
+
+"ImageHandler":imagehandler.html
+
+
+h3(#Image_getalpha). Image#get_alpha
+
+ Integer *get_alpha*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Returns the alpha value for the given pixel. This function may only be called
+for the images with alpha channel, use "has_alpha":#Image_hasalpha to
+check for this.
+
+The returned value is the _opacity_ of the image, i.e. the value of $0$
+corresponds to the transparent pixels while the value of $255$ -- to the opaque
+ones.
+
+ Integer *get_alpha*()
+
+Returns pointer to the array storing the alpha values for this image. This
+pointer is @NULL@ for the images without the alpha channel. If the image
+does have it, this pointer may be used to directly manipulate the alpha values
+which are stored as the "RGB":imagegetdata.html ones.
+
+
+h3(#Image_getblue). Image#get_blue
+
+ Integer *get_blue*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Returns the blue intensity at the given coordinate.
+
+
+h3(#Image_getdata). Image#get_data
+
+ Integer *get_data*()
+
+Returns the image data as an array. This is most often used when doing
+direct image manipulation. The return value points to an array of
+characters in RGBRGBRGB$$ format in the top-to-bottom, left-to-right
+order, that is the first RGB triplet corresponds to the pixel first pixel of
+the first row, the second one --- to the second pixel of the first row and so
+on until the end of the first row, with second row following after it and so
+on.
+
+You should not delete the returned pointer nor pass it to
+"Image#set_data":image.html#Image_setdata.
+
+
+h3(#Image_getgreen). Image#get_green
+
+ Integer *get_green*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Returns the green intensity at the given coordinate.
+
+
+h3(#Image_getimagecount). Image#get_image_count
+
+ Integer *get_image_count*(%(arg-type)String% filename,  %(arg-type)Integer% type = BITMAP_TYPE_ANY)
+
+ Integer *get_image_count*(%(arg-type)InputStream% stream, 
+                         %(arg-type)Integer% type = BITMAP_TYPE_ANY)
+
+If the image file contains more than one image and the image handler is capable 
+of retrieving these individually, this function will return the number of
+available images.
+
+* _name_ Name of the file to query.
+* _stream_ Opened input stream with image data. Currently, the stream must support seeking.
+* _type_ May be one of the following:
+
+
+|BITMAP_TYPE_BMP|Load a Windows bitmap file.|
+|BITMAP_TYPE_GIF|Load a GIF bitmap file.|
+|BITMAP_TYPE_JPEG|Load a JPEG bitmap file.|
+|BITMAP_TYPE_PNG|Load a PNG bitmap file.|
+|BITMAP_TYPE_PCX|Load a PCX bitmap file.|
+|BITMAP_TYPE_PNM|Load a PNM bitmap file.|
+|BITMAP_TYPE_TIF|Load a TIFF bitmap file.|
+|BITMAP_TYPE_XPM|Load a XPM bitmap file.|
+|BITMAP_TYPE_ICO|Load a Windows icon file (ICO).|
+|BITMAP_TYPE_CUR|Load a Windows cursor file (CUR).|
+|BITMAP_TYPE_ANI|Load a Windows animated cursor file (ANI).|
+|BITMAP_TYPE_ANY|Will try to autodetect the format.|
+
+
+h4. Return value
+
+Number of available images. For most image handlers, this is 1 (exceptions
+are TIFF and ICO formats).
+
+
+h3(#Image_gethandlers). Image#get_handlers
+
+ "List":list.html *get_handlers*()
+
+Returns the static list of image format handlers.
+
+h4. See also
+
+"ImageHandler":imagehandler.html
+
+
+h3(#Image_getheight). Image#get_height
+
+ Integer *get_height*()
+
+Gets the height of the image in pixels.
+
+
+h3(#Image_getmaskblue). Image#get_mask_blue
+
+ Integer *get_mask_blue*()
+
+Gets the blue value of the mask colour.
+
+
+h3(#Image_getmaskgreen). Image#get_mask_green
+
+ Integer *get_mask_green*()
+
+Gets the green value of the mask colour.
+
+
+h3(#Image_getmaskred). Image#get_mask_red
+
+ Integer *get_mask_red*()
+
+Gets the red value of the mask colour.
+
+
+h3(#Image_getgetorsetmaskcolour). Image#get_or_find_mask_colour
+
+ Boolean *get_or_find_mask_colour*(%(arg-type)Integer% r,  %(arg-type)Integer% g, 
+                                 %(arg-type)Integer% b)
+
+Get the current mask colour or find a suitable unused colour that could be 
+used as a mask colour. Returns @true@ if the image currently has a mask.
+
+
+h3(#Image_getpalette). Image#get_palette
+
+ "Palette":palette.html *get_palette*()
+
+Returns the palette associated with the image. Currently the palette is only
+used when converting to Bitmap under Windows.
+
+Eventually Image handlers will set the palette if one exists in the image file.
+
+
+h3(#Image_getred). Image#get_red
+
+ Integer *get_red*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Returns the red intensity at the given coordinate.
+
+
+h3(#Image_getsubimage). Image#get_sub_image
+
+ "Image":image.html *get_sub_image*(%(arg-type)Rect% rect)
+
+Returns a sub image of the current one as long as the rect belongs entirely to 
+the image.
+
+
+h3(#Image_getwidth). Image#get_width
+
+ Integer *get_width*()
+
+Gets the width of the image in pixels.
+
+h4. See also
+
+"Image#get_height":image.html#Image_getheight
+
+
+h3(#hsvvaluehsvvalue). HSVValue::HSVValue
+
+  *hsv_value*(%(arg-type)double% h = 0.0,  %(arg-type)double% s = 0.0,  %(arg-type)double% v = 0.0)
+
+Constructor for HSVValue, an object that contains values for hue, saturation and value which
+represent the value of a color. It is used by "Image#hs_vto_rgb":image.html#Image_hsvtorgb
+and "Image#rg_bto_hsv":image.html#Image_rgbtohsv, which
+converts between HSV color space and RGB color space.
+
+
+
+
+
+h3(#Image_hsvtorgb). Image#hs_vto_rgb
+
+ "Image::RGBValue":image::rgbvalue.html *hs_vto_rgb*(%(arg-type)HSVValue% hsv)
+
+Converts a color in HSV color space to RGB color space.
+
+
+h3(#Image_hasalpha). Image#has_alpha
+
+ Boolean *has_alpha*()
+
+Returns true if this image has alpha channel, false otherwise.
+
+h4. See also
+
+"get_alpha":#Image_getalpha, "set_alpha":#Image_setalpha
+
+
+h3(#Image_hasmask). Image#has_mask
+
+ Boolean *has_mask*()
+
+Returns true if there is a mask active, false otherwise.
+
+
+h3(#Image_getoption). Image#get_option
+
+ String *get_option*(%(arg-type)String% name)
+
+Gets a user-defined option. The function is case-insensitive to _name_.
+
+For example, when saving as a JPEG file, the option *quality* is
+used, which is a number between 0 and 100 (0 is terrible, 100 is very good).
+
+h4. See also
+
+"Image#set_option":image.html#Image_setoption, "Image#get_option_int":image.html#Image_getoptionint, "Image#has_option":image.html#Image_hasoption
+
+
+h3(#Image_getoptionint). Image#get_option_int
+
+ Integer *get_option_int*(%(arg-type)String% name)
+
+Gets a user-defined option as an integer. The function is case-insensitive to _name_.
+
+If the given option is not present, the function returns $0$. Use 
+"Image#has_option":image.html#Image_hasoption is $0$ is a possibly valid value
+for the option.
+
+Options for PNGHandler
+
+|IMAGE_OPTION_PNG_FORMAT|Format for saving a PNG file.|
+|IMAGE_OPTION_PNG_BITDEPTH|Bit depth for every channel (R/G/B/A).|
+
+
+Supported values for IMAGE_OPTION_PNG_FORMAT:
+
+|PNG_TYPE_COLOUR|Stores RGB image.|
+|PNG_TYPE_GREY|Stores grey image, converts from RGB.|
+|PNG_TYPE_GREY_RED|Stores grey image, uses red value as grey.|
+
+
+
+h4. See also
+
+"Image#set_option":image.html#Image_setoption, "Image#get_option":image.html#Image_getoption
+
+
+h3(#Image_hasoption). Image#has_option
+
+ Boolean *has_option*(%(arg-type)String% name)
+
+Returns true if the given option is present. The function is case-insensitive to _name_.
+
+h4. See also
+
+"Image#set_option":image.html#Image_setoption, "Image#get_option":image.html#Image_getoption, "Image#get_option_int":image.html#Image_getoptionint
+
+
+h3(#Image_initalpha). Image#init_alpha
+
+  *init_alpha*()
+
+Initializes the image alpha channel data. It is an error to call it
+if the image already has alpha data. If it doesn't, alpha data will be
+by default initialized to all pixels being fully opaque. But if the image has a
+a mask colour, all mask pixels will be completely transparent.
+
+
+h3(#Image_initstandardhandlers). Image#init_standard_handlers
+
+  *init_standard_handlers*()
+
+Internal use only. Adds standard image format handlers. It only install BMP
+for the time being, which is used by Bitmap.
+
+This function is called by Widgets on startup, and shouldn't be called by
+the user.
+
+h4. See also
+
+"ImageHandler":imagehandler.html, 
+"InitAllImageHandlers":initallimagehandlers.html
+
+
+h3(#Image_inserthandler). Image#insert_handler
+
+  *insert_handler*(%(arg-type)ImageHandler% handler)
+
+Adds a handler at the start of the static list of format handlers.
+
+* _handler_ A new image format handler object. There is usually only one instance
+of a given handler class in an application session.
+
+h4. See also
+
+"ImageHandler":imagehandler.html
+
+
+h3(#Image_istransparent). Image#is_transparent
+
+ Boolean *is_transparent*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                        %(arg-type)Integer% threshold = $128$)
+
+Returns  if the given pixel is transparent, i.e. either has the mask
+colour if this image has a mask or if this image has alpha channel and alpha
+value of this pixel is strictly less than threshold.
+
+
+h3(#Image_loadfile). Image#load_file
+
+ Boolean *load_file*(%(arg-type)String% name,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
+                   %(arg-type)Integer% index = -1)
+
+ Boolean *load_file*(%(arg-type)String% name,  %(arg-type)String% mimetype, 
+                   %(arg-type)Integer% index = -1)
+
+Loads an image from a file. If no handler type is provided, the library will
+try to autodetect the format.
+
+ Boolean *load_file*(%(arg-type)InputStream% stream,  %(arg-type)Integer% type, 
+                   %(arg-type)Integer% index = -1)
+
+ Boolean *load_file*(%(arg-type)InputStream% stream,  %(arg-type)String% mimetype, 
+                   %(arg-type)Integer% index = -1)
+
+Loads an image from an input stream.
+
+h4. Parameters
+
+* _name_ Name of the file from which to load the image.
+* _stream_ Opened input stream from which to load the image. Currently, the stream must support seeking.
+* _type_ One of the following values:
+
+
+|*BITMAP_TYPE_BMP*|Load a Windows image file.|
+|*BITMAP_TYPE_GIF*|Load a GIF image file.|
+|*BITMAP_TYPE_JPEG*|Load a JPEG image file.|
+|*BITMAP_TYPE_PCX*|Load a PCX image file.|
+|*BITMAP_TYPE_PNG*|Load a PNG image file.|
+|*BITMAP_TYPE_PNM*|Load a PNM image file.|
+|*BITMAP_TYPE_TIF*|Load a TIFF image file.|
+|*BITMAP_TYPE_XPM*|Load a XPM image file.|
+|*BITMAP_TYPE_ICO*|Load a Windows icon file (ICO).|
+|*BITMAP_TYPE_CUR*|Load a Windows cursor file (CUR).|
+|BITMAP_TYPE_ANI|Load a Windows animated cursor file (ANI).|
+|*BITMAP_TYPE_ANY*|Will try to autodetect the format.|
+
+* _mimetype_ MIME type string (for example 'image/jpeg')
+* _index_ Index of the image to load in the case that the image file contains multiple images.
+This is only used by GIF, ICO and TIFF handlers. The default value (-1) means 
+"choose the default image" and is interpreted as the first image (index=0) by 
+the GIF and TIFF handler and as the largest and most colourful one by the ICO handler.
+
+h4. Remarks
+
+Depending on how Widgets has been configured, not all formats may be available.
+
+Note: you can use "get_option_int":#Image_getoptionint to get the 
+hotspot for loaded cursor file:
+
+     int hotspot_x = image.GetOptionInt(IMAGE_OPTION_CUR_HOTSPOT_X);
+     int hotspot_y = image.GetOptionInt(IMAGE_OPTION_CUR_HOTSPOT_Y);
+ 
+ 
+
+h4. Return value
+
+true if the operation succeeded, false otherwise. If the optional index parameter is out of range,
+false is returned and a call to LogError() takes place.
+
+h4. See also
+
+"Image#save_file":image.html#Image_savefile
+
+
+
+
+
+
+
+h3(#Image_ok). Image#ok
+
+ Boolean *ok*()
+
+Returns true if image data is present.
+
+
+h3(#rgbvaluergbvalue). RGBValue::RGBValue
+
+  *rgb_value*(%(arg-type)Integer% r = 0,  %(arg-type)Integer% g = 0,  %(arg-type)Integer% b = 0)
+
+Constructor for RGBValue, an object that contains values for red, green and blud which
+represent the value of a color. It is used by "Image#hs_vto_rgb":image.html#Image_hsvtorgb
+and "Image#rg_bto_hsv":image.html#Image_rgbtohsv, which
+converts between HSV color space and RGB color space.
+
+
+
+
+h3(#Image_rgbtohsv). Image#rg_bto_hsv
+
+ "Image::HSVValue":image::hsvvalue.html *rg_bto_hsv*(%(arg-type)RGBValue% rgb)
+
+Converts a color in RGB color space to HSV color space.
+
+
+h3(#Image_removehandler). Image#remove_handler
+
+ Boolean *remove_handler*(%(arg-type)String% name)
+
+Finds the handler with the given name, and removes it. The handler
+is not deleted.
+
+* _name_ The handler name.
+
+h4. Return value
+
+true if the handler was found and removed, false otherwise.
+
+h4. See also
+
+"ImageHandler":imagehandler.html
+
+
+h3(#Image_mirror). Image#mirror
+
+ "Image":image.html *mirror*(%(arg-type)Boolean% horizontally = true)
+
+Returns a mirrored copy of the image. The parameter _horizontally_
+indicates the orientation.
+
+
+h3(#Image_replace). Image#replace
+
+  *replace*(%(arg-type)Integer% r1,  %(arg-type)Integer% g1,  %(arg-type)Integer% b1, 
+         %(arg-type)Integer% r2, 
+          %(arg-type)Integer% g2, 
+          %(arg-type)Integer% b2)
+
+Replaces the colour specified by _r1,g1,b1_ by the colour _r2,g2,b2_.
+
+
+h3(#Image_rescale). Image#rescale
+
+ "Image":image.html *rescale*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+Changes the size of the image in-place by scaling it: after a call to this function, 
+the image will have the given width and height.
+
+Returns the (modified) image itself.
+
+h4. See also
+
+"Scale":imagescale.html
+
+
+h3(#Image_resize). Image#resize
+
+ "Image":image.html *resize*(%(arg-type)Size% size,  %(arg-type)Point% pos, 
+                %(arg-type)Integer% red = -1, 
+                %(arg-type)Integer% green = -1, 
+                %(arg-type)Integer% blue = -1)
+
+Changes the size of the image in-place without scaling it by adding either a border 
+with the given colour or cropping as necessary. The image is pasted into a new 
+image with the given _size_ and background colour at the position _pos_ 
+relative to the upper left of the new image. If _red = green = blue = -1_ 
+then use either the  current mask colour if set or find, use, and set a 
+suitable mask colour for any newly exposed areas.
+
+Returns the (modified) image itself.
+
+h4. See also
+
+"Size":imagesize.html
+
+
+h3(#Image_rotate). Image#rotate
+
+ "Image":image.html *rotate*(%(arg-type)double% angle,  %(arg-type)Point% rotationCentre, 
+                %(arg-type)Boolean% interpolating = true, 
+                %(arg-type)Point% offsetAfterRotation = nil)
+
+Rotates the image about the given point, by _angle_ radians. Passing true
+to _interpolating_ results in better image quality, but is slower. If the
+image has a mask, then the mask colour is used for the uncovered pixels in the
+rotated image background. Else, black (rgb 0, 0, 0) will be used.
+
+Returns the rotated image, leaving this image intact.
+
+
+h3(#Image_rotatehue). Image#rotate_hue
+
+  *rotate_hue*(%(arg-type)double% angle)
+
+Rotates the hue of each pixel in the image by _angle_, which is a double in
+the range of -1.0 to +1.0, where -1.0 corresponds to -360 degrees and +1.0 corresponds
+to +360 degrees.
+
+
+h3(#Image_rotate90). Image#rotate_90
+
+ "Image":image.html *rotate_90*(%(arg-type)Boolean% clockwise = true)
+
+Returns a copy of the image rotated 90 degrees in the direction
+indicated by _clockwise_.
+
+
+h3(#Image_savefile). Image#save_file
+
+ Boolean *save_file*(%(arg-type)String% name,  %(arg-type)Integer% type)
+
+ Boolean *save_file*(%(arg-type)String% name,  %(arg-type)String% mimetype)
+
+Saves an image in the named file.
+
+ Boolean *save_file*(%(arg-type)String% name)
+
+Saves an image in the named file. File type is determined from the extension of the
+file name. Note that this function may fail if the extension is not recognized! You
+can use one of the forms above to save images to files with non-standard extensions.
+
+ Boolean *save_file*(%(arg-type)OutputStream% stream,  %(arg-type)Integer% type)
+
+ Boolean *save_file*(%(arg-type)OutputStream% stream,  %(arg-type)String% mimetype)
+
+Saves an image in the given stream.
+
+h4. Parameters
+
+* _name_ Name of the file to save the image to.
+* _stream_ Opened output stream to save the image to.
+* _type_ Currently these types can be used:
+
+
+|*BITMAP_TYPE_BMP*|Save a BMP image file.|
+|*BITMAP_TYPE_JPEG*|Save a JPEG image file.|
+|*BITMAP_TYPE_PNG*|Save a PNG image file.|
+|*BITMAP_TYPE_PCX*|Save a PCX image file (tries to save as 8-bit if possible, falls back to 24-bit otherwise).|
+|*BITMAP_TYPE_PNM*|Save a PNM image file (as raw RGB always).|
+|*BITMAP_TYPE_TIFF*|Save a TIFF image file.|
+|*BITMAP_TYPE_XPM*|Save a XPM image file.|
+|*BITMAP_TYPE_ICO*|Save a Windows icon file (ICO) (the size may be up to 255 wide by 127 high. A single image is saved in 8 colors at the size supplied).|
+|*BITMAP_TYPE_CUR*|Save a Windows cursor file (CUR).|
+
+* _mimetype_ MIME type.
+
+h4. Return value
+
+true if the operation succeeded, false otherwise.
+
+h4. Remarks
+
+Depending on how Widgets has been configured, not all formats may be available.
+
+Note: you can use "get_option_int":#Image_getoptionint to set the 
+hotspot before saving an image into a cursor file (default hotspot is in 
+the centre of the image):
+
+     image.SetOption(IMAGE_OPTION_CUR_HOTSPOT_X, hotspotX);
+     image.SetOption(IMAGE_OPTION_CUR_HOTSPOT_Y, hotspotY);
+ 
+ 
+
+h4. See also
+
+"Image#load_file":image.html#Image_loadfile
+
+
+
+
+
+
+h3(#Image_scale). Image#scale
+
+ "Image":image.html *scale*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+Returns a scaled version of the image. This is also useful for
+scaling bitmaps in general as the only other way to scale bitmaps
+is to blit a MemoryDC into another MemoryDC.
+
+It may be mentioned that the GTK port uses this function internally
+to scale bitmaps when using mapping modes in DC. 
+
+Example:
+
+
+     // get the bitmap from somewhere
+     Bitmap bmp = ...;
+ 
+     // rescale it to have size of 32*32
+     if ( bmp.GetWidth() != 32 || bmp.GetHeight() != 32 )
+     {
+         Image image = bmp.ConvertToImage();
+         bmp = Bitmap(image.Scale(32, 32));
+ 
+         // another possibility:
+         image.Rescale(32, 32);
+         bmp = image;
+     }
+ 
+ 
+
+h4. See also
+
+"Rescale":imagerescale.html
+
+
+h3(#Image_size). Image#size
+
+ "Image":image.html *size*(%(arg-type)Size% size,  %(arg-type)Point% pos, 
+              %(arg-type)Integer% red = -1, 
+              %(arg-type)Integer% green = -1, 
+              %(arg-type)Integer% blue = -1)
+
+Returns a resized version of this image without scaling it by adding either a border 
+with the given colour or cropping as necessary. The image is pasted into a new 
+image with the given _size_ and background colour at the position _pos_ 
+relative to the upper left of the new image. If _red = green = blue = -1_ 
+then use either the current mask colour if set or find, use, and set a 
+suitable mask colour for any newly exposed areas.
+
+h4. See also
+
+"Resize":imageresize.html
+
+
+h3(#Image_setalpha). Image#set_alpha
+
+  *set_alpha*(%(arg-type)Integer% alpha = @NULL@, %(arg-type)Boolean% static_data = )
+
+This function is similar to "set_data":#Image_setdata and has similar
+restrictions. The pointer passed to it may however be @NULL@ in which case
+the function will allocate the alpha array internally -- this is useful to add
+alpha channel data to an image which doesn't have any. If the pointer is not 
+@NULL@, it must have one byte for each image pixel and be allocated with 
+@malloc()@. Image takes ownership of the pointer and will free it unless
+static_data parameter is set.to  -- in this case the caller should
+do it.
+
+  *set_alpha*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% alpha)
+
+Sets the alpha value for the given pixel. This function should only be called
+if the image has alpha channel data, use "has_alpha":#Image_hasalpha to
+check for this.
+
+
+h3(#Image_setdata). Image#set_data
+
+  *set_data*(%(arg-type)Integer% data)
+
+Sets the image data without performing checks. The data given must have
+the size (width*height*3) or results will be unexpected. Don't use this
+method if you aren't sure you know what you are doing.
+
+The data must have been allocated with @malloc()@, *NOT* with
+@operator new@.
+
+After this call the pointer to the data is owned by the Image object,
+that will be responsible for deleting it.
+Do not pass to this function a pointer obtained through
+"Image#get_data":image.html#Image_getdata.
+
+
+h3(#Image_setmask). Image#set_mask
+
+  *set_mask*(%(arg-type)Boolean% hasMask = true)
+
+Specifies whether there is a mask or not. The area of the mask is determined by the current mask colour.
+
+
+h3(#Image_setmaskcolour). Image#set_mask_colour
+
+  *set_mask_colour*(%(arg-type)Integer% red,  %(arg-type)Integer% green,  %(arg-type)Integer% blue)
+
+Sets the mask colour for this image (and tells the image to use the mask).
+
+
+h3(#Image_setmaskfromimage). Image#set_mask_from_image
+
+ Boolean *set_mask_from_image*(%(arg-type)Image% mask,  %(arg-type)Integer% mr, 
+                             %(arg-type)Integer% mg, 
+                             %(arg-type)Integer% mb)
+
+h4. Parameters
+
+* _mask_ The mask image to extract mask shape from. Must have same dimensions as the image.
+* _mr,mg,mb_ RGB value of pixels in _mask_ that will be used to create the mask.
+
+Sets image's mask so that the pixels that have RGB value of _mr,mg,mb_
+in _mask_ will be masked in the image. This is done by first finding an
+unused colour in the image, setting this colour as the mask colour and then
+using this colour to draw all pixels in the image who corresponding pixel 
+in _mask_ has given RGB value.
+
+h4. Return value
+
+Returns false if _mask_ does not have same dimensions as the image or if
+there is no unused colour left. Returns true if the mask was successfully 
+applied.
+
+h4. Notes
+
+Note that this method involves computing the histogram, which is
+computationally intensive operation.
+
+
+h3(#Image_setoption). Image#set_option
+
+  *set_option*(%(arg-type)String% name,  %(arg-type)String% value)
+
+  *set_option*(%(arg-type)String% name,  %(arg-type)Integer% value)
+
+Sets a user-defined option. The function is case-insensitive to _name_.
+
+For example, when saving as a JPEG file, the option *quality* is
+used, which is a number between 0 and 100 (0 is terrible, 100 is very good).
+
+h4. See also
+
+"Image#get_option":image.html#Image_getoption, "Image#get_option_int":image.html#Image_getoptionint, "Image#has_option":image.html#Image_hasoption
+
+
+h3(#Image_setpalette). Image#set_palette
+
+  *set_palette*(%(arg-type)Palette% palette)
+
+Associates a palette with the image. The palette may be used when converting
+Image to Bitmap (MSW only at present) or in file save operations (none as yet).
+
+
+h3(#Image_setrgb). Image#set_rgb
+
+  *set_rgb*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% red, 
+          %(arg-type)Integer% green, 
+          %(arg-type)Integer% blue)
+
+Sets the pixel at the given coordinate. This routine performs bounds-checks
+for the coordinate so it can be considered a safe way to manipulate the
+data, but in some cases this might be too slow so that the data will have to
+be set directly. In that case you will have to get access to the image data 
+using the "get_data":#Image_getdata method.
+
+
+h3(#Image_setrgbrect). Image#set_rgb
+
+  *set_rgb*(%(arg-type)Rect% rect,  %(arg-type)Integer% red,  %(arg-type)Integer% green, 
+          %(arg-type)Integer% blue)
+
+Sets the colour of the pixels within the given rectangle. This routine performs
+bounds-checks for the coordinate so it can be considered a safe way to manipulate the
+data.
+
+
+h3(#Image_assign). Image#=
+
+ "Image& ":image& .html *operator $=$*(%(arg-type)Image% image)
+
+Assignment operator. This operator does not copy any data, but instead
+passes a pointer to the data in _image_ and increments a reference
+counter. It is a fast operation.
+
+h4. Parameters
+
+* _image_ Image to assign.
+
+h4. Return value
+
+Returns 'this' object.
+
+
+h3(#Image_equal). Image#==
+
+ Boolean *operator $==$*(%(arg-type)Image% image)
+
+Equality operator. This operator tests whether the internal data pointers are
+equal (a fast test).
+
+h4. Parameters
+
+* _image_ Image to compare with 'this'
+
+h4. Return value
+
+Returns true if the images were effectively equal, false otherwise.
+
+
+h3(#Image_notequal). Image#!=
+
+ Boolean *operator $!=$*(%(arg-type)Image% image)
+
+Inequality operator. This operator tests whether the internal data pointers are
+unequal (a fast test).
+
+h4. Parameters
+
+* _image_ Image to compare with 'this'
+
+h4. Return value
+
+Returns true if the images were unequal, false otherwise.
+

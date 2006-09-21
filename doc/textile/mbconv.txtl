@@ -1,0 +1,135 @@
+h1(#wxmbconv). Wx::MBConv
+
+This class is the base class of a hierarchy of classes capable of converting
+text strings between multibyte (SBCS or DBCS) encodings and Unicode. It is itself
+a wrapper around the standard libc mbstowcs() and wcstombs() routines, and has
+one predefined instance, *ConvLibc*.
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"CSConv":csconv.html, 
+"EncodingConverter":encodingconverter.html, 
+"MBConv classes overview":mbconvclasses.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MBConv.new":#MBConv_new
+* "MBConv#mb2_wc":#MBConv_mb2wc
+* "MBConv#wc2_mb":#MBConv_wc2mb
+* "MBConv#c_mb2_wc":#MBConv_cmb2wc
+* "MBConv#c_wc2_mb":#MBConv_cwc2mb
+* "MBConv#c_mb2_wx":#MBConv_cmb2wx
+* "MBConv#c_wx2_mb":#MBConv_cwx2mb
+* "MBConv#c_wc2_wx":#MBConv_cwc2wx
+* "MBConv#c_wx2_wc":#MBConv_cwx2wc
+
+</div>
+
+
+
+h3(#MBConv_wxmbconv). MBConv.new
+
+h3(#MBConv_mb2wc). MBConv#mb2_wc
+
+ size_t *mb2_wc*(%(arg-type)wchar_t% outputBuf,  %(arg-type)char% psz, 
+               %(arg-type)size_t% outputSize)
+
+Converts from a string _psz_ in multibyte encoding to Unicode putting the
+output into the buffer _outputBuf_ of the maximum size _outputSize_ (in wide
+characters, not bytes). If _outputBuf_ is @NULL@, only the length of the
+string which would result from the conversion is calculated and returned.
+Note that this is the length and not size, i.e. the returned value does 
+*not* include the trailing NUL. But when the function is called with a
+non-@NULL@ _outputBuf_, the _outputSize_ parameter should be the size of the buffer
+and so it *should* take into account the trailing NUL.
+
+h4. Parameters
+
+* _outputBuf_ the output buffer, may be @NULL@ if the caller is only
+interested in the length of the resulting string
+* _psz_ the @NUL@-terminated input string, cannot be @NULL@
+* _outputSize_ the size of the output buffer (in wide characters, *including* the
+NUL) , ignored if _outputBuf_ is @NULL@
+
+h4. Return value
+
+The length of the converted string (in wide characters, *excluding* the NUL)
+
+h3(#MBConv_wc2mb). MBConv#wc2_mb
+
+ size_t *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)size_t% n)
+
+Converts from Unicode to multibyte encoding. The semantics of this function
+(including the return value meaning) is the same as for 
+"MB2WC":mbconvmb2wc.html.
+
+Notice that when the function is called with a non-@NULL@ buffer, the 
+_n_ parameter should be the size of the buffer and so it *should* take
+into account the trailing NUL, which might take two or four bytes for some
+encodings (UTF-16 and UTF-32).
+
+h3(#MBConv_cmb2wc). MBConv#c_mb2_wc
+
+ "WCharBuffer":wcharbuffer.html *c_mb2_wc*(%(arg-type)char% psz)
+
+Converts from multibyte encoding to Unicode by calling MB2WC,
+allocating a temporary WCharBuffer to hold the result.
+
+h3(#MBConv_cwc2mb). MBConv#c_wc2_mb
+
+ "CharBuffer":charbuffer.html *c_wc2_mb*(%(arg-type)wchar_t% psz)
+
+Converts from Unicode to multibyte encoding by calling WC2MB,
+allocating a temporary CharBuffer to hold the result.
+
+h3(#MBConv_cmb2wx). MBConv#c_mb2_wx
+
+ char *c_mb2_wx*(%(arg-type)char% psz)
+
+ "WCharBuffer":wcharbuffer.html *c_mb2_wx*(%(arg-type)char% psz)
+
+Converts from multibyte encoding to the current Char type
+(which depends on whether USE_UNICODE is set to 1). If Char is char,
+it returns the parameter unaltered. If Char is wchar_t, it returns the
+result in a WCharBuffer. The macro MB2WXbuf is defined as the correct
+return type (without const).
+
+h3(#MBConv_cwx2mb). MBConv#c_wx2_mb
+
+ char *c_wx2_mb*(%(arg-type)Char% psz)
+
+ "CharBuffer":charbuffer.html *c_wx2_mb*(%(arg-type)Char% psz)
+
+Converts from the current Char type to multibyte encoding. If Char is char,
+it returns the parameter unaltered. If Char is wchar_t, it returns the
+result in a CharBuffer. The macro WX2MBbuf is defined as the correct
+return type (without const).
+
+h3(#MBConv_cwc2wx). MBConv#c_wc2_wx
+
+ wchar_t *c_wc2_wx*(%(arg-type)wchar_t% psz)
+
+ "CharBuffer":charbuffer.html *c_wc2_wx*(%(arg-type)wchar_t% psz)
+
+Converts from Unicode to the current Char type. If Char is wchar_t,
+it returns the parameter unaltered. If Char is char, it returns the
+result in a CharBuffer. The macro WC2WXbuf is defined as the correct
+return type (without const).
+
+h3(#MBConv_cwx2wc). MBConv#c_wx2_wc
+
+ wchar_t *c_wx2_wc*(%(arg-type)Char% psz)
+
+ "WCharBuffer":wcharbuffer.html *c_wx2_wc*(%(arg-type)Char% psz)
+
+Converts from the current Char type to Unicode. If Char is wchar_t,
+it returns the parameter unaltered. If Char is char, it returns the
+result in a WCharBuffer. The macro WX2WCbuf is defined as the correct
+return type (without const).
+
