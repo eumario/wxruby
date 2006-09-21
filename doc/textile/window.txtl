@@ -2765,10 +2765,11 @@ Mac OS X 10.3+ currently. Under this system, each of the standard control can
 exist in several sizes which correspond to the elements of WindowVariant
 enum:
 
- enum WindowVariant
- {
-     WINDOW_VARIANT_NORMAL,        // Normal size
-     WINDOW_VARIANT_SMALL,         // Smaller size (about 25     WINDOW_VARIANT_MINI,          // Mini size (about 33     WINDOW_VARIANT_LARGE,         // Large size (about 25 };
+
+ WINDOW_VARIANT_NORMAL        # Normal size
+ WINDOW_VARIANT_SMALL         # Smaller size (about 25% smaller)
+ WINDOW_VARIANT_MINI          # Mini size (about 33% smaller)
+ WINDOW_VARIANT_LARGE         # Large size (about 25% larger)
  
 
 By default the controls use the normal size, of course, but this function can
