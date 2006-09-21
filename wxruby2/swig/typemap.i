@@ -454,3 +454,15 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 %typemap(out) wxSystemMetric {
     $result = INT2NUM((int)$1);
 }
+
+%apply int *OUTPUT { int * x , int * y , int * w, int * h };
+
+%typemap(directorargout) ( int * x , int * y , int * w, int * h ) {
+  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len == 4))
+  {
+    *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
+    *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
+    *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
+    *$4 = ($*4_ltype)NUM2INT(rb_ary_entry(result,3));
+  }
+}
