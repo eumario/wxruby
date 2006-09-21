@@ -1,0 +1,202 @@
+h1(#wxgenericdirctrl). Wx::GenericDirCtrl
+
+This control can  be used to place a directory listing (with optional files) on an arbitrary window.
+
+The control contains a "TreeCtrl":treectrl.html window representing the directory
+hierarchy, and optionally, a "Choice":choice.html window containing a list of filters.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|DIRCTRL_DIR_ONLY|Only show directories, and not files.|
+|DIRCTRL_3D_INTERNAL|Use 3D borders for internal controls.|
+|DIRCTRL_SELECT_FIRST|When setting the default path, select the first file in the directory.|
+|DIRCTRL_SHOW_FILTERS|Show the drop-down filter list.|
+|DIRCTRL_EDIT_LABELS|Allow the folder and file labels to be editable.|
+
+
+See also "Generic window styles":windowstyles.html.
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "GenericDirCtrl.new":#GenericDirCtrl_new
+* "GenericDirCtrl#create":#GenericDirCtrl_create
+* "GenericDirCtrl#init":#GenericDirCtrl_init
+* "GenericDirCtrl#collapse_tree":#GenericDirCtrl_collapsetree
+* "GenericDirCtrl#expand_path":#GenericDirCtrl_expandpath
+* "GenericDirCtrl#get_default_path":#GenericDirCtrl_getdefaultpath
+* "GenericDirCtrl#get_path":#GenericDirCtrl_getpath
+* "GenericDirCtrl#get_file_path":#GenericDirCtrl_getfilepath
+* "GenericDirCtrl#get_filter":#GenericDirCtrl_getfilter
+* "GenericDirCtrl#get_filter_index":#GenericDirCtrl_getfilterindex
+* "GenericDirCtrl#get_filter_list_ctrl":#GenericDirCtrl_getfilterlistctrl
+* "GenericDirCtrl#get_root_id":#GenericDirCtrl_getrootid
+* "GenericDirCtrl#get_tree_ctrl":#GenericDirCtrl_gettreectrl
+* "GenericDirCtrl#re_create_tree":#GenericDirCtrl_recreatetree
+* "GenericDirCtrl#set_default_path":#GenericDirCtrl_setdefaultpath
+* "GenericDirCtrl#set_filter":#GenericDirCtrl_setfilter
+* "GenericDirCtrl#set_filter_index":#GenericDirCtrl_setfilterindex
+* "GenericDirCtrl#set_path":#GenericDirCtrl_setpath
+
+</div>
+
+
+h3(#GenericDirCtrl_wxgenericdirctrl). GenericDirCtrl.new
+
+  *GenericDirCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+                     %(arg-type)String% dir = DirDialogDefaultFolderStr, 
+                     %(arg-type)Point% pos = DEFAULT_POSITION, 
+                     %(arg-type)Size% size = DEFAULT_SIZE, 
+                     %(arg-type)Integer% style = DIRCTRL_3D_INTERNAL|SUNKEN_BORDER, 
+                     %(arg-type)String% filter = '', 
+                     %(arg-type)Integer% defaultFilter = 0, 
+                     %(arg-type)String% name = TreeCtrlNameStr)
+
+Main constructor.
+
+h4. Parameters
+
+* _parent_ Parent window.
+* _id_ Window identifier.
+* _dir_ Initial folder.
+* _pos_ Position.
+* _size_ Size.
+* _style_ Window style. Please see "GenericDirCtrl":genericdirctrl.html for a list of possible styles.
+* _filter_ A filter string, using the same syntax as that for "FileDialog":filedialog.html. This may be empty if filters
+are not being used.
+
+Example: ``All files (*.*)|*.*|JPEG files (*.jpg)|*.jpg"
+* _defaultFilter_ The zero-indexed default filter setting.
+* _name_ The window name.
+
+  *destructor*()
+
+Destructor.
+
+h3(#GenericDirCtrl_create). GenericDirCtrl#create
+
+ Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+                %(arg-type)String% dir = DirDialogDefaultFolderStr, 
+                %(arg-type)Point% pos = DEFAULT_POSITION, 
+                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DIRCTRL_3D_INTERNAL|SUNKEN_BORDER, 
+                %(arg-type)String% filter = '', 
+                %(arg-type)Integer% defaultFilter = 0, 
+                %(arg-type)String% name = TreeCtrlNameStr)
+
+Create function for two-step construction. See "GenericDirCtrl.new":genericdirctrl.html#GenericDirCtrl_new for details.
+
+h3(#GenericDirCtrl_init). GenericDirCtrl#init
+
+  *init*()
+
+Initializes variables.
+
+h3(#GenericDirCtrl_collapsetree). GenericDirCtrl#collapse_tree
+
+  *collapse_tree*()
+
+Collapses the entire tree.
+
+h3(#GenericDirCtrl_expandpath). GenericDirCtrl#expand_path
+
+ Boolean *expand_path*(%(arg-type)String% path)
+
+Tries to expand as much of the given path as possible, so that the filename or directory is visible in the tree control.
+
+h3(#GenericDirCtrl_getdefaultpath). GenericDirCtrl#get_default_path
+
+ String *get_default_path*()
+
+Gets the default path.
+
+h3(#GenericDirCtrl_getpath). GenericDirCtrl#get_path
+
+ String *get_path*()
+
+Gets the currently-selected directory or filename.
+
+h3(#GenericDirCtrl_getfilepath). GenericDirCtrl#get_file_path
+
+ String *get_file_path*()
+
+Gets selected filename path only (else empty string).
+
+This function doesn't count a directory as a selection.
+
+h3(#GenericDirCtrl_getfilter). GenericDirCtrl#get_filter
+
+ String *get_filter*()
+
+Returns the filter string.
+
+h3(#GenericDirCtrl_getfilterindex). GenericDirCtrl#get_filter_index
+
+ Integer *get_filter_index*()
+
+Returns the current filter index (zero-based).
+
+h3(#GenericDirCtrl_getfilterlistctrl). GenericDirCtrl#get_filter_list_ctrl
+
+ "DirFilterListCtrl":dirfilterlistctrl.html *get_filter_list_ctrl*()
+
+Returns a pointer to the filter list control (if present).
+
+h3(#GenericDirCtrl_getrootid). GenericDirCtrl#get_root_id
+
+ "TreeItemId":treeitemid.html *get_root_id*()
+
+Returns the root id for the tree control.
+
+h3(#GenericDirCtrl_gettreectrl). GenericDirCtrl#get_tree_ctrl
+
+ "TreeCtrl":treectrl.html *get_tree_ctrl*()
+
+Returns a pointer to the tree control.
+
+h3(#GenericDirCtrl_recreatetree). GenericDirCtrl#re_create_tree
+
+  *re_create_tree*()
+
+Collapse and expand the tree, thus re-creating it from scratch.
+May be used to update the displayed directory content.
+
+h3(#GenericDirCtrl_setdefaultpath). GenericDirCtrl#set_default_path
+
+  *set_default_path*(%(arg-type)String% path)
+
+Sets the default path.
+
+h3(#GenericDirCtrl_setfilter). GenericDirCtrl#set_filter
+
+  *set_filter*(%(arg-type)String% filter)
+
+Sets the filter string.
+
+h3(#GenericDirCtrl_setfilterindex). GenericDirCtrl#set_filter_index
+
+  *set_filter_index*(%(arg-type)Integer% n)
+
+Sets the current filter index (zero-based).
+
+h3(#GenericDirCtrl_setpath). GenericDirCtrl#set_path
+
+  *set_path*(%(arg-type)String% path)
+
+Sets the current path.
+

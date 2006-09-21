@@ -1,0 +1,54 @@
+h1(#wxprocessevent). Wx::ProcessEvent
+
+A process event is sent when a process is terminated.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a ProcessEvent, use these event handler macros to direct input to a member
+function that takes a ProcessEvent argument.
+
+
+
+|*evt_end_process(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_END_PROCESS event._id_ is the identifier of the process object (the id passed to the Process constructor)or a window to receive the event.|
+
+h2. See also
+
+"Process":process.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ProcessEvent.new":#ProcessEvent_new
+* "ProcessEvent#get_pid":#ProcessEvent_getpid
+* "ProcessEvent#get_exit_code":#ProcessEvent_getexitcode
+
+</div>
+
+
+h3(#ProcessEvent_new). ProcessEvent.new
+
+  *ProcessEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)Integer% pid = 0, 
+                   %(arg-type)Integer% exitcode = 0)
+
+Constructor. Takes a ProcessObject or window id, a process id and an
+exit status.
+
+h3(#ProcessEvent_getpid). ProcessEvent#get_pid
+
+ Integer *get_pid*()
+
+Returns the process id.
+
+h3(#ProcessEvent_getexitcode). ProcessEvent#get_exit_code
+
+ Integer *get_exit_code*()
+
+Returns the exist status.
+

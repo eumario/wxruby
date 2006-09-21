@@ -1,0 +1,44 @@
+h1(#wxpaintdc). Wx::PaintDC
+
+A PaintDC must be constructed if an application wishes to paint on the
+client area of a window from within an *OnPaint* event.
+This should normally be constructed as a temporary stack object; don't store
+a PaintDC object. If you have an OnPaint handler, you _must_ create a PaintDC
+object within it even if you don't actually use it.
+
+Using PaintDC within OnPaint is important because it automatically
+sets the clipping area to the damaged area of the window. Attempts to draw
+outside this area do not appear.
+
+To draw on a window from outside *OnPaint*, construct a "ClientDC":clientdc.html object.
+
+To draw on the whole window including decorations, construct a "WindowDC":windowdc.html object
+(Windows only).
+
+h2. Derived from
+
+"WindowDC":windowdc.html
+
+"DC":dc.html
+
+h2. See also
+
+"DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html, "WindowDC":windowdc.html, "ScreenDC":screendc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PaintDC.new":#PaintDC_new
+
+</div>
+
+
+h3(#PaintDC_new). PaintDC.new
+
+  *PaintDC.new*(%(arg-type)Window% window)
+
+Constructor. Pass a pointer to the window on which you wish to paint.
+
+
+

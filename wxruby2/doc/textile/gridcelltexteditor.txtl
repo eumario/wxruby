@@ -1,0 +1,32 @@
+h1(#wxgridcelltexteditor). Wx::GridCellTextEditor
+
+The editor for string/text data.
+
+h2. Derived from
+
+"GridCellEditor":gridcelleditor.html
+
+h2. See also
+
+"GridCellEditor":gridcelleditor.html, "GridCellFloatEditor":gridcellfloateditor.html, "GridCellBoolEditor":gridcellbooleditor.html, "GridCellNumberEditor":gridcellnumbereditor.html, "GridCellChoiceEditor":gridcellchoiceeditor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellTextEditor.new":#GridCellTextEditor_new
+* "GridCellTextEditor#set_parameters":#GridCellTextEditor_setparameters
+
+</div>
+
+
+
+h3(#GridCellTextEditor_constr). GridCellTextEditor.new
+
+h3(#GridCellTextEditor_setparameters). GridCellTextEditor#set_parameters
+
+  *set_parameters*(%(arg-type)String% params)
+
+The parameters string format is "n" where n is a number representing the maximum width.
+
+

@@ -1,0 +1,143 @@
+h1(#wxindividuallayoutconstraint). Wx::IndividualLayoutConstraint
+
+Objects of this class are stored in the LayoutConstraint class
+as one of eight possible constraints that a window can be involved in.
+
+Constraints are initially set to have the relationship Unconstrained,
+which means that their values should be calculated by looking at known constraints.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Overview and examples":constraintsoverview.html, "LayoutConstraints":layoutconstraints.html, "Window#set_constraints":window.html#Window_setconstraints.
+
+<div id="methods">
+
+h2. Methods
+
+* "IndividualLayoutConstraint.new":#IndividualLayoutConstraint_new
+* "IndividualLayoutConstraint#above":#IndividualLayoutConstraint_above
+* "IndividualLayoutConstraint#absolute":#IndividualLayoutConstraint_absolute
+* "IndividualLayoutConstraint#as_is":#IndividualLayoutConstraint_asis
+* "IndividualLayoutConstraint#below":#IndividualLayoutConstraint_below
+* "IndividualLayoutConstraint#unconstrained":#IndividualLayoutConstraint_unconstrained
+* "IndividualLayoutConstraint#left_of":#IndividualLayoutConstraint_leftof
+* "IndividualLayoutConstraint#percent_of":#IndividualLayoutConstraint_percentof
+* "IndividualLayoutConstraint#right_of":#IndividualLayoutConstraint_rightof
+* "IndividualLayoutConstraint#same_as":#IndividualLayoutConstraint_sameas
+* "IndividualLayoutConstraint#set":#IndividualLayoutConstraint_set
+
+</div>
+
+
+Edges and relationships
+
+The _Edge_Edge enumerated type specifies the type of edge or dimension of a window.
+
+
+|Left|The left edge.|
+|Top|The top edge.|
+|Right|The right edge.|
+|Bottom|The bottom edge.|
+|CentreX|The x-coordinate of the centre of the window.|
+|CentreY|The y-coordinate of the centre of the window.|
+
+
+The _Relationship_Relationship enumerated type specifies the relationship that
+this edge or dimension has with another specified edge or dimension. Normally, the user
+doesn't use these directly because functions such as _Below_ and _RightOf_ are a convenience
+for using the more general _Set_ function.
+
+
+|Unconstrained|The edge or dimension is unconstrained (the default for edges.|
+|AsIs|The edge or dimension is to be taken from the current window position or size (thedefault for dimensions.|
+|Above|The edge should be above another edge.|
+|Below|The edge should be below another edge.|
+|LeftOf|The edge should be to the left of another edge.|
+|RightOf|The edge should be to the right of another edge.|
+|SameAs|The edge or dimension should be the same as another edge or dimension.|
+|PercentOf|The edge or dimension should be a percentage of another edge or dimension.|
+|Absolute|The edge or dimension should be a given absolute value.|
+
+
+h3(#IndividualLayoutConstraint_new). IndividualLayoutConstraint.new
+
+h3(#IndividualLayoutConstraint_above). IndividualLayoutConstraint#above
+
+  *above*(%(arg-type)Window% otherWin,  %(arg-type)Integer% margin = 0)
+
+Constrains this edge to be above the given window, with an
+optional margin. Implicitly, this is relative to the top edge of the other window.
+
+h3(#IndividualLayoutConstraint_absolute). IndividualLayoutConstraint#absolute
+
+  *absolute*(%(arg-type)Integer% value)
+
+Constrains this edge or dimension to be the given absolute value.
+
+h3(#IndividualLayoutConstraint_asis). IndividualLayoutConstraint#as_is
+
+  *as_is*()
+
+Sets this edge or constraint to be whatever the window's value is
+at the moment. If either of the width and height constraints
+are _as is_, the window will not be resized, but moved instead.
+This is important when considering panel items which are intended
+to have a default size, such as a button, which may take its size
+from the size of the button label.
+
+h3(#IndividualLayoutConstraint_below). IndividualLayoutConstraint#below
+
+  *below*(%(arg-type)Window% otherWin,  %(arg-type)Integer% margin = 0)
+
+Constrains this edge to be below the given window, with an
+optional margin. Implicitly, this is relative to the bottom edge of the other window.
+
+h3(#IndividualLayoutConstraint_unconstrained). IndividualLayoutConstraint#unconstrained
+
+  *unconstrained*()
+
+Sets this edge or dimension to be unconstrained, that is, dependent on
+other edges and dimensions from which this value can be deduced.
+
+h3(#IndividualLayoutConstraint_leftof). IndividualLayoutConstraint#left_of
+
+  *left_of*(%(arg-type)Window% otherWin,  %(arg-type)Integer% margin = 0)
+
+Constrains this edge to be to the left of the given window, with an
+optional margin. Implicitly, this is relative to the left edge of the other window.
+
+h3(#IndividualLayoutConstraint_percentof). IndividualLayoutConstraint#percent_of
+
+  *percent_of*(%(arg-type)Window% otherWin,  %(arg-type)Edge% edge,  %(arg-type)Integer% per)
+
+Constrains this edge or dimension to be to a percentage of the given window, with an
+optional margin.
+
+h3(#IndividualLayoutConstraint_rightof). IndividualLayoutConstraint#right_of
+
+  *right_of*(%(arg-type)Window% otherWin,  %(arg-type)Integer% margin = 0)
+
+Constrains this edge to be to the right of the given window, with an
+optional margin. Implicitly, this is relative to the right edge of the other window.
+
+h3(#IndividualLayoutConstraint_sameas). IndividualLayoutConstraint#same_as
+
+  *same_as*(%(arg-type)Window% otherWin,  %(arg-type)Edge% edge,  %(arg-type)Integer% margin = 0)
+
+Constrains this edge or dimension to be to the same as the edge of the given window, with an
+optional margin.
+
+h3(#IndividualLayoutConstraint_set). IndividualLayoutConstraint#set
+
+  *set*(%(arg-type)Relationship% rel,  %(arg-type)Window% otherWin,  %(arg-type)Edge% otherEdge, 
+      %(arg-type)Integer% value = 0, 
+      %(arg-type)Integer% margin = 0)
+
+Sets the properties of the constraint. Normally called by one of the convenience
+functions such as Above, RightOf, SameAs.
+
+

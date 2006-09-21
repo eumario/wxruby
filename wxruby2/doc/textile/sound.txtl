@@ -1,0 +1,38 @@
+h1(#wxsound). Wx::Sound
+
+This class represents a short sound (loaded from Windows WAV file), that
+can be stored in memory and played. Currently this class is implemented
+on Windows and Unix (and uses either 
+Open Sound Systemhttp://www.opensound.com/oss.html or 
+Simple DirectMedia Layerhttp://www.libsdl.org/).
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Sound.new":#Sound_new
+* "Sound#create":#Sound_create
+* "Sound#is_ok":#Sound_isok
+* "Sound#is_playing":#Sound_isplaying
+* "Sound#play":#Sound_play
+* "Sound#stop":#Sound_stop
+
+</div>
+
+
+
+h3(#Sound_new). Sound.new
+
+  *Sound.new*(%(arg-type)String% fileName,  %(arg-type)Boolean% isResource = false)
+
+Constructs a wave object from a file or, under Windows, from a Windows
+resource. Call "Sound#is_ok":sound.html#Sound_isok to determine whether this
+succeeded.
+
+h4. Parameters
+
+* _fileName_ The filename or Windows resource.

@@ -1,0 +1,38 @@
+h1(#wxchoicebook). Wx::Choicebook
+
+Choicebook is a class similar to "Notebook":notebook.html but which
+uses a "Choice":choice.html to show the labels instead of the
+tabs.
+
+There is no documentation for this class yet but its usage is
+identical to Notebook (except for the features clearly related to tabs
+only), so please refer to that class documentation for now. You can also
+use the "notebook sample":samplenotebook.html to see Choicebook in action.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+
+|@CHB_DEFAULT@|Choose the default location for thelabels depending on the current platform (left everywhere except Mac whereit is top).|
+|@CHB_TOP@|Place labels above the page area.|
+|@CHB_LEFT@|Place labels on the left side.|
+|@CHB_RIGHT@|Place labels on the right side.|
+|@CHB_BOTTOM@|Place labels below the page area.|
+
+
+
+h2. See also
+
+"BookCtrl":bookctrloverview.html, "Notebook":notebook.html, "notebook sample":samplenotebook.html
+

@@ -1,0 +1,192 @@
+h1(#wxevent). Wx::Event
+
+An event is a structure holding information about an event passed to a
+callback or member function. *Event* used to be a multipurpose
+event object, and is an abstract base class for other event classes (see below).
+
+For more information about events, see the "Event handling overview":eventhandlingoverview.html.
+
+
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"CommandEvent":commandevent.html, "MouseEvent":mouseevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Event.new":#Event_new
+* "Event#m__propagation_level":#Event_mpropagationlevel
+* "Event#clone":#Event_clone
+* "Event#get_event_object":#Event_geteventobject
+* "Event#get_event_type":#Event_geteventtype
+* "Event#get_id":#Event_getid
+* "Event#get_skipped":#Event_getskipped
+* "Event#get_timestamp":#Event_gettimestamp
+* "Event#is_command_event":#Event_iscommandevent
+* "Event#resume_propagation":#Event_resumepropagation
+* "Event#set_event_object":#Event_seteventobject
+* "Event#set_event_type":#Event_seteventtype
+* "Event#set_id":#Event_setid
+* "Event#set_timestamp":#Event_settimestamp
+* "Event#should_propagate":#Event_shouldpropagate
+* "Event#skip":#Event_skip
+* "Event#stop_propagation":#Event_stoppropagation
+
+</div>
+
+
+h3(#Event_new). Event.new
+
+  *Event.new*(%(arg-type)Integer% id = 0,  %(arg-type)EventType% eventType = @EVT_NULL@)
+
+Constructor. Should not need to be used directly by an application.
+
+h3(#Event_mpropagationlevel). Event#m__propagation_level
+
+intm_propagationLevel
+
+Indicates how many levels the event can propagate. This member is protected and
+should typically only be set in the constructors of the derived classes. It
+may be temporarily changed by "stop_propagation":#Event_stoppropagation 
+and "resume_propagation":#Event_resumepropagation and tested with 
+"should_propagate":#Event_shouldpropagate.
+
+The initial value is set to either @EVENT_PROPAGATE_NONE@ (by
+default) meaning that the event shouldn't be propagated at all or to 
+@EVENT_PROPAGATE_MAX@ (for command events) meaning that it should be
+propagated as much as necessary.
+
+Any positive number means that the event should be propagated but no more than
+the given number of times. E.g. the propagation level may be set to $1$ to
+propagate the event to its parent only, but not to its grandparent.
+
+h3(#Event_clone). Event#clone
+
+ "Event":event.html *clone*()
+
+Returns a copy of the event.
+
+Any event that is posted to the Widgets event system for later action (via
+"EvtHandler#add_pending_event":evthandler.html#EvtHandler_addpendingevent or
+"PostEvent":postevent.html) must implement this method. All Widgets
+events fully implement this method, but any derived events implemented by the
+user should also implement this method just in case they (or some event
+derived from them) are ever posted.
+
+All Widgets events implement a copy constructor, so the easiest way of
+implementing the Clone function is to implement a copy constructor for
+a new event (call it MyEvent) and then define the Clone function like this:
+
+
+     Event *Clone(void) const { return new MyEvent(*this); }
+ 
+
+h3(#Event_geteventobject). Event#get_event_object
+
+ "Object":object.html *get_event_object*()
+
+Returns the object (usually a window) associated with the
+event, if any.
+
+h3(#Event_geteventtype). Event#get_event_type
+
+ TYPE *get_event_type*()
+
+Returns the identifier of the given event type,
+such as EVENT_TYPE_BUTTON_COMMAND.
+
+h3(#Event_getid). Event#get_id
+
+ Integer *get_id*()
+
+Returns the identifier associated with this event, such as a button command id.
+
+h3(#Event_getskipped). Event#get_skipped
+
+ Boolean *get_skipped*()
+
+Returns true if the event handler should be skipped, false otherwise.
+
+h3(#Event_gettimestamp). Event#get_timestamp
+
+ Integer *get_timestamp*()
+
+Gets the timestamp for the event.
+
+h3(#Event_iscommandevent). Event#is_command_event
+
+ Boolean *is_command_event*()
+
+Returns true if the event is or is derived from
+"CommandEvent":commandevent.html else it returns false.
+Note: Exists only for optimization purposes.
+
+
+h3(#Event_resumepropagation). Event#resume_propagation
+
+  *resume_propagation*(%(arg-type)Integer% propagationLevel)
+
+Sets the propagation level to the given value (for example returned from an
+earlier call to "stop_propagation":#Event_stoppropagation).
+
+
+h3(#Event_seteventobject). Event#set_event_object
+
+  *set_event_object*(%(arg-type)Object% object)
+
+Sets the originating object.
+
+h3(#Event_seteventtype). Event#set_event_type
+
+  *set_event_type*(%(arg-type)TYPE% typ)
+
+Sets the event type.
+
+h3(#Event_setid). Event#set_id
+
+  *set_id*(%(arg-type)Integer% id)
+
+Sets the identifier associated with this event, such as a button command id.
+
+h3(#Event_settimestamp). Event#set_timestamp
+
+  *set_timestamp*(%(arg-type)Integer% timeStamp)
+
+Sets the timestamp for the event.
+
+h3(#Event_shouldpropagate). Event#should_propagate
+
+ Boolean *should_propagate*()
+
+Test if this event should be propagated or not, i.e. if the propagation level
+is currently greater than $0$.
+
+h3(#Event_skip). Event#skip
+
+  *skip*(%(arg-type)Boolean% skip = true)
+
+Called by an event handler, it controls whether additional event
+handlers bound to this event will be called after the current event
+handler returns.  Skip(false) (the default behavior) will prevent
+additional event handlers from being called and control will be
+returned to the sender of the event immediately after the current
+handler has finished.  Skip(true) will cause the event processing
+system to continue searching for a handler function for this event.
+
+
+h3(#Event_stoppropagation). Event#stop_propagation
+
+ Integer *stop_propagation*()
+
+Stop the event from propagating to its parent window.
+
+Returns the old propagation level value which may be later passed to 
+"resume_propagation":#Event_resumepropagation to allow propagating the
+event again.
+

@@ -1,0 +1,485 @@
+h1(#wxsizer). Wx::Sizer
+
+Sizer is the abstract base class used for laying out subwindows in a window. You
+cannot use Sizer directly; instead, you will have to use one of the sizer
+classes derived from it. Currently there are "BoxSizer":boxsizer.html, 
+"StaticBoxSizer":staticboxsizer.html,
+"GridSizer":gridsizer.html 
+"FlexGridSizer":flexgridsizer.html and "GridBagSizer":gridbagsizer.html.
+
+The layout algorithm used by sizers in Widgets is closely related to layout
+in other GUI toolkits, such as Java's AWT, the GTK toolkit or the Qt toolkit. It is
+based upon the idea of the individual subwindows reporting their minimal required
+size and their ability to get stretched if the size of the parent window has changed.
+This will most often mean that the programmer does not set the original size of
+a dialog in the beginning, rather the dialog will be assigned a sizer and this sizer
+will be queried about the recommended size. The sizer in turn will query its
+children, which can be normal windows, empty space or other sizers, so that
+a hierarchy of sizers can be constructed. Note that Sizer does not derive from Window
+and thus does not interfere with tab ordering and requires very little resources compared
+to a real window on screen.
+
+What makes sizers so well fitted for use in Widgets is the fact that every control
+reports its own minimal size and the algorithm can handle differences in font sizes
+or different window (dialog item) sizes on different platforms without problems. If e.g.
+the standard font as well as the overall design of Motif widgets requires more space than
+on Windows, the initial dialog size will automatically be bigger on Motif than on Windows.
+
+Sizers may also be used to control the layout of custom drawn items on the window.  The
+Add, Insert, and Prepend functions return a pointer to the newly added SizerItem. Just
+add empty space of the desired size and attributes, and then use the SizerItem::GetRect
+method to determine where the drawing operations should take place.
+
+
+
+
+h2. Derived from
+
+"Object":object.html
+
+"ClientDataContainer":clientdatacontainer.html
+
+h2. See also
+
+"Sizer overview":sizeroverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Sizer.new":#Sizer_new
+* "Sizer#add":#Sizer_add
+* "Sizer#add_spacer":#Sizer_addspacer
+* "Sizer#add_stretch_spacer":#Sizer_addstretchspacer
+* "Sizer#calc_min":#Sizer_calcmin
+* "Sizer#detach":#Sizer_detach
+* "Sizer#fit":#Sizer_fit
+* "Sizer#fit_inside":#Sizer_fitinside
+* "Sizer#get_item":#Sizer_getitem
+* "Sizer#get_size":#Sizer_getsize
+* "Sizer#get_position":#Sizer_getposition
+* "Sizer#get_min_size":#Sizer_getminsize
+* "Sizer#insert":#Sizer_insert
+* "Sizer#insert_spacer":#Sizer_insertspacer
+* "Sizer#insert_stretch_spacer":#Sizer_insertstretchspacer
+* "Sizer#layout":#Sizer_layout
+* "Sizer#prepend":#Sizer_prepend
+* "Sizer#prepend_spacer":#Sizer_prependspacer
+* "Sizer#prepend_stretch_spacer":#Sizer_prependstretchspacer
+* "Sizer#recalc_sizes":#Sizer_recalcsizes
+* "Sizer#remove":#Sizer_remove
+* "Sizer#set_dimension":#Sizer_setdimension
+* "Sizer#set_min_size":#Sizer_setminsize
+* "Sizer#set_item_min_size":#Sizer_setitemminsize
+* "Sizer#set_size_hints":#Sizer_setsizehints
+* "Sizer#set_virtual_size_hints":#Sizer_setvirtualsizehints
+* "Sizer#show":#Sizer_show
+
+</div>
+
+
+
+h3(#Sizer_wxsizer). Sizer.new
+
+  *destructor*()
+
+The destructor.
+
+
+h3(#Sizer_add). Sizer#add
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)Window% window,  %(arg-type)SizerFlags% flags)
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)Window% window,  %(arg-type)Integer% proportion = 0, 
+                %(arg-type)Integer% flag = 0, 
+                 %(arg-type)Integer% border = 0, 
+                 %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)Sizer% sizer,  %(arg-type)SizerFlags% flags)
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)Sizer% sizer,  %(arg-type)Integer% proportion = 0, 
+                 %(arg-type)Integer% flag = 0, 
+                 %(arg-type)Integer% border = 0, 
+                 %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                 %(arg-type)Integer% proportion = 0, 
+                 %(arg-type)Integer% flag = 0, 
+                 %(arg-type)Integer% border = 0, 
+                 %(arg-type)Object% userData = nil)
+
+Appends a child to the sizer.  Sizer itself is an abstract class, but the parameters are
+equivalent in the derived classes that you will instantiate to use it so they are described
+here:
+
+* _window_ The window to be added to the sizer. Its initial size (either set explicitly by the
+user or calculated internally when using DefaultSize) is interpreted as the minimal and in many
+cases also the initial size. This is particularly useful in connection with "set_size_hints":#Sizer_setsizehints.
+* _sizer_ The (child-)sizer to be added to the sizer. This allows placing a child sizer in a
+sizer and thus to create hierarchies of sizers (typically a vertical box as the top sizer and several
+horizontal boxes on the level beneath).
+* _width and height_ The dimension of a spacer to be added to the sizer. Adding spacers to sizers
+gives more flexibility in the design of dialogs; imagine for example a horizontal box with two buttons at the
+bottom of a dialog: you might want to insert a space between the two buttons and make that space stretchable
+using the _proportion_ flag and the result will be that the left button will be aligned with the left
+side of the dialog and the right button with the right side - the space in between will shrink and grow with
+the dialog.
+* _proportion_ Although the meaning of this parameter is undefined in Sizer, it is used in BoxSizer
+to indicate if a child of a sizer can change its size in the main orientation of the BoxSizer - where
+0 stands for not changeable and a value of more than zero is interpreted relative to the value of other
+children of the same BoxSizer. For example, you might have a horizontal BoxSizer with three children, two
+of which are supposed to change their size with the sizer. Then the two stretchable windows would get a
+value of 1 each to make them grow and shrink equally with the sizer's horizontal dimension.
+* _flag_ This parameter can be used to set a number of flags
+which can be combined using the binary OR operator |. Two main
+behaviours are defined using these flags. One is the border around a
+window: the _border_ parameter determines the border width whereas
+the flags given here determine which side(s) of the item that the
+border will be added.  The other flags determine how the sizer item
+behaves when the space allotted to the sizer changes, and is somewhat
+dependent on the specific kind of sizer used.
+
+
+|@TOP@|
+@BOTTOM@\\@LEFT@\\@RIGHT@\\@ALL@These flags are used to specify which side(s) of  the sizer item the _border_ width will apply to. |
+
+|@EXPAND@|The item will be expanded to fillthe space assigned to the item.|
+|@SHAPED@|The item will be expanded as muchas possible while also maintaining its aspect ratio|
+|@FIXED_MINSIZE@|Normally Sizers will use "get_adjusted_best_size":#Sizer_getadjustedbestsize todetermine what the minimal size of window items should be, and willuse that size to calculate the layout. This allows layouts toadjust when an item changes and its _best size_ becomesdifferent. If you would rather have a window item stay the size itstarted with then use FIXED_MINSIZE.|
+|@ALIGN_CENTER@|\\@ALIGN_LEFT@\\@ALIGN_RIGHT@\\@ALIGN_TOP@\\@ALIGN_BOTTOM@\\@ALIGN_CENTER_VERTICAL@\\@ALIGN_CENTER_HORIZONTAL@The ALIGN flags allow you tospecify the alignment of the item within the space allotted to it bythe sizer, adjusted for the border if any.|
+
+
+* _border_ Determines the border width, if the _flag_
+  parameter is set to include any border flag.
+* _userData_ Allows an extra object to be attached to the sizer
+item, for use in derived classes when sizing information is more
+complex than the _proportion_ and _flag_ will allow for.
+* _flags_ A "SizerFlags":sizerflags.html object that 
+enables you to specify most of the above parameters more conveniently.
+
+h3(#Sizer_addspacer). Sizer#add_spacer
+
+ "SizerItem":sizeritem.html *add_spacer*(%(arg-type)Integer% size)
+
+Adds non-stretchable space to the sizer. More readable way of calling
+"Add":sizeradd.html(size, size, 0).
+
+
+h3(#Sizer_addstretchspacer). Sizer#add_stretch_spacer
+
+ "SizerItem":sizeritem.html *add_stretch_spacer*(%(arg-type)Integer% prop = 1)
+
+Adds stretchable space to the sizer. More readable way of calling
+"Add":sizeradd.html(0, 0, prop).
+
+
+h3(#Sizer_calcmin). Sizer#calc_min
+
+ "Size":size.html *calc_min*()
+
+This method is abstract and has to be overwritten by any derived class.
+Here, the sizer will do the actual calculation of its children minimal sizes.
+
+
+h3(#Sizer_detach). Sizer#detach
+
+ Boolean *detach*(%(arg-type)Window% window)
+
+ Boolean *detach*(%(arg-type)Sizer% sizer)
+
+ Boolean *detach*(%(arg-type)size_t% index)
+
+Detach a child from the sizer without destroying it. _window_ is the window to be
+detached, _sizer_ is the equivalent sizer and _index_ is the position of
+the child in the sizer, typically 0 for the first item. This method does not
+cause any layout or resizing to take place, call "Sizer#layout":sizer.html#Sizer_layout
+to update the layout "on screen" after detaching a child from the sizer.
+
+Returns true if the child item was found and detached, false otherwise.
+
+h4. See also
+
+"Sizer#remove":sizer.html#Sizer_remove
+
+
+h3(#Sizer_fit). Sizer#fit
+
+ "Size":size.html *fit*(%(arg-type)Window% window)
+
+Tell the sizer to resize the _window_ to match the sizer's minimal size. This
+is commonly done in the constructor of the window itself, see sample in the description
+of "BoxSizer":boxsizer.html. Returns the new size.
+
+For a top level window this is the total window size, not client size.
+
+
+h3(#Sizer_fitinside). Sizer#fit_inside
+
+  *fit_inside*(%(arg-type)Window% window)
+
+Tell the sizer to resize the virtual size of the _window_ to match the sizer's
+minimal size.  This will not alter the on screen size of the window, but may cause
+the addition/removal/alteration of scrollbars required to view the virtual area in
+windows which manage it.
+
+h4. See also
+
+"ScrolledWindow#set_scrollbars":scrolledwindow.html#ScrolledWindow_setscrollbars, "Sizer#set_virtual_size_hints":sizer.html#Sizer_setvirtualsizehints
+
+
+h3(#Sizer_getitem). Sizer#get_item
+
+ "SizerItem":sizeritem.html *get_item*(%(arg-type)Window% window, 
+                      %(arg-type)Boolean% recursive = false)
+
+ "SizerItem":sizeritem.html *get_item*(%(arg-type)Sizer% sizer, 
+                      %(arg-type)Boolean% recursive = false)
+
+ "SizerItem":sizeritem.html *get_item*(%(arg-type)size_t% index)
+
+Finds item of the sizer which holds given _window_, _sizer_ or is located
+in sizer at position _index_.
+Use parameter _recursive_ to search in subsizers too.
+
+Returns pointer to item or NULL.
+
+
+h3(#Sizer_getsize). Sizer#get_size
+
+ "Size":size.html *get_size*()
+
+Returns the current size of the sizer.
+
+
+h3(#Sizer_getposition). Sizer#get_position
+
+ "Point":point.html *get_position*()
+
+Returns the current position of the sizer.
+
+
+h3(#Sizer_getminsize). Sizer#get_min_size
+
+ "Size":size.html *get_min_size*()
+
+Returns the minimal size of the sizer. This is either the combined minimal
+size of all the children and their borders or the minimal size set by 
+"set_min_size":#Sizer_setminsize, depending on which is bigger.
+
+
+h3(#Sizer_insert). Sizer#insert
+
+ "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index,  %(arg-type)Window% window, 
+                    %(arg-type)SizerFlags% flags)
+
+ "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index,  %(arg-type)Window% window, 
+                    %(arg-type)Integer% proportion = 0, 
+                   %(arg-type)Integer% flag = 0, 
+                    %(arg-type)Integer% border = 0, 
+                    %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index,  %(arg-type)Sizer% sizer, 
+                    %(arg-type)SizerFlags% flags)
+
+ "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index,  %(arg-type)Sizer% sizer, 
+                    %(arg-type)Integer% proportion = 0, 
+                    %(arg-type)Integer% flag = 0, 
+                    %(arg-type)Integer% border = 0, 
+                    %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index,  %(arg-type)Integer% width, 
+                    %(arg-type)Integer% height, 
+                    %(arg-type)Integer% proportion = 0, 
+                    %(arg-type)Integer% flag = 0, 
+                    %(arg-type)Integer% border = 0, 
+                    %(arg-type)Object% userData = nil)
+
+Insert a child into the sizer before any existing item at _index_.
+
+* _index_ The position this child should assume in the sizer.
+
+See "Sizer#add":sizer.html#Sizer_add for the meaning of the other parameters.
+
+
+h3(#Sizer_insertspacer). Sizer#insert_spacer
+
+ "SizerItem":sizeritem.html *insert_spacer*(%(arg-type)size_t% index,  %(arg-type)Integer% size)
+
+Inserts non-stretchable space to the sizer. More readable way of calling
+"Insert":sizerinsert.html(size, size, 0).
+
+
+h3(#Sizer_insertstretchspacer). Sizer#insert_stretch_spacer
+
+ "SizerItem":sizeritem.html *insert_stretch_spacer*(%(arg-type)size_t% index, 
+                                   %(arg-type)Integer% prop = 1)
+
+Inserts stretchable space to the sizer. More readable way of calling
+"Insert":sizerinsert.html(0, 0, prop).
+
+
+h3(#Sizer_layout). Sizer#layout
+
+  *layout*()
+
+Call this to force layout of the children anew, e.g. after having added a child
+to or removed a child (window, other sizer or space) from the sizer while keeping
+the current dimension.
+
+
+h3(#Sizer_prepend). Sizer#prepend
+
+ "SizerItem":sizeritem.html *prepend*(%(arg-type)Window% window,  %(arg-type)SizerFlags% flags)
+
+ "SizerItem":sizeritem.html *prepend*(%(arg-type)Window% window,  %(arg-type)Integer% proportion = 0, 
+                     %(arg-type)Integer% flag = 0, 
+                     %(arg-type)Integer% border = 0, 
+                     %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *prepend*(%(arg-type)Sizer% sizer,  %(arg-type)SizerFlags% flags)
+
+ "SizerItem":sizeritem.html *prepend*(%(arg-type)Sizer% sizer,  %(arg-type)Integer% proportion = 0, 
+                     %(arg-type)Integer% flag = 0, 
+                     %(arg-type)Integer% border = 0, 
+                     %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *prepend*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                     %(arg-type)Integer% proportion = 0, 
+                     %(arg-type)Integer% flag = 0, 
+                     %(arg-type)Integer% border= 0, 
+                     %(arg-type)Object% userData = nil)
+
+Same as "Sizer#add":sizer.html#Sizer_add, but prepends the items to the beginning of the
+list of items (windows, subsizers or spaces) owned by this sizer.
+
+
+h3(#Sizer_prependspacer). Sizer#prepend_spacer
+
+ "SizerItem":sizeritem.html *prepend_spacer*(%(arg-type)Integer% size)
+
+Prepends non-stretchable space to the sizer. More readable way of calling
+"Prepend":sizerprepend.html(size, size, 0).
+
+
+h3(#Sizer_prependstretchspacer). Sizer#prepend_stretch_spacer
+
+ "SizerItem":sizeritem.html *prepend_stretch_spacer*(%(arg-type)Integer% prop = 1)
+
+Prepends stretchable space to the sizer. More readable way of calling
+"Prepend":sizerprepend.html(0, 0, prop).
+
+
+h3(#Sizer_recalcsizes). Sizer#recalc_sizes
+
+  *recalc_sizes*()
+
+This method is abstract and has to be overwritten by any derived class.
+Here, the sizer will do the actual calculation of its children's positions
+and sizes.
+
+
+h3(#Sizer_remove). Sizer#remove
+
+ Boolean *remove*(%(arg-type)Window% window)
+
+ Boolean *remove*(%(arg-type)Sizer% sizer)
+
+ Boolean *remove*(%(arg-type)size_t% index)
+
+Removes a child from the sizer and destroys it.  _sizer_ is the Sizer to be removed,
+_index_ is the position of the child in the sizer, typically 0 for the first item.
+This method does not cause any layout or resizing to take place, call
+"Sizer#layout":sizer.html#Sizer_layout to update the layout "on screen" after removing a
+child from the sizer.
+
+*NB:* The method taking a Window* parameter is deprecated.  For historical reasons
+it does not destroy the window as would usually be expected from Remove.  You should use
+"Sizer#detach":sizer.html#Sizer_detach in new code instead.  There is currently no Sizer
+method that will both detach and destroy a Window item.
+
+Returns true if the child item was found and removed, false otherwise.
+
+
+h3(#Sizer_setdimension). Sizer#set_dimension
+
+  *set_dimension*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                %(arg-type)Integer% height)
+
+Call this to force the sizer to take the given dimension and thus force the items owned
+by the sizer to resize themselves according to the rules defined by the parameter in the 
+"Add":sizeradd.html and "Prepend":sizerprepend.html methods.
+
+
+h3(#Sizer_setminsize). Sizer#set_min_size
+
+  *set_min_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+  *set_min_size*(%(arg-type)Size% size)
+
+Call this to give the sizer a minimal size. Normally, the sizer will calculate its
+minimal size based purely on how much space its children need. After calling this
+method "get_min_size":#Sizer_getminsize will return either the minimal size
+as requested by its children or the minimal size set here, depending on which is
+bigger.
+
+
+h3(#Sizer_setitemminsize). Sizer#set_item_min_size
+
+  *set_item_min_size*(%(arg-type)Window% window,  %(arg-type)Integer% width, 
+                    %(arg-type)Integer% height)
+
+  *set_item_min_size*(%(arg-type)Sizer% sizer,  %(arg-type)Integer% width, 
+                    %(arg-type)Integer% height)
+
+  *set_item_min_size*(%(arg-type)size_t% index,  %(arg-type)Integer% width, 
+                    %(arg-type)Integer% height)
+
+Set an item's minimum size by window, sizer, or position. The item will be found recursively
+in the sizer's descendants. This function enables an application to set the size of an item
+after initial creation.
+
+
+h3(#Sizer_setsizehints). Sizer#set_size_hints
+
+  *set_size_hints*(%(arg-type)Window% window)
+
+Tell the sizer to set (and "Fit":sizerfit.html) the minimal size of the _window_ to
+match the sizer's minimal size.  This is commonly done in the constructor of the window itself,
+see sample in the description of "BoxSizer":boxsizer.html if the window is resizable
+(as are many dialogs under Unix and frames on probably all platforms).
+
+
+h3(#Sizer_setvirtualsizehints). Sizer#set_virtual_size_hints
+
+  *set_virtual_size_hints*(%(arg-type)Window% window)
+
+Tell the sizer to set the minimal size of the _window_ virtual area to match the sizer's
+minimal size. For windows with managed scrollbars this will set them appropriately.
+
+h4. See also
+
+"ScrolledWindow#set_scrollbars":scrolledwindow.html#ScrolledWindow_setscrollbars
+
+
+h3(#Sizer_show). Sizer#show
+
+ Boolean *show*(%(arg-type)Window% window,  %(arg-type)Boolean% show = true, 
+              %(arg-type)Boolean% recursive = false)
+
+ Boolean *show*(%(arg-type)Sizer% sizer,  %(arg-type)Boolean% show = true, 
+              %(arg-type)Boolean% recursive = false)
+
+ Boolean *show*(%(arg-type)size_t% index,  %(arg-type)Boolean% show = true)
+
+Shows or hides the _window_, _sizer_, or item at _index_.
+To make a sizer item disappear or reappear, use Show() followed by Layout().
+Use parameter _recursive_ to show or hide elements found in subsizers.
+
+Returns true if the child item was found, false otherwise.
+
+Note that this only works with BoxSizer and FlexGridSizer, since they
+are the only two sizer classes that can size rows/columns independently.
+
+
+
+

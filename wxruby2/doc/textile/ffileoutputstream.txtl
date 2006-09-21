@@ -1,0 +1,53 @@
+h1(#wxffileoutputstream). Wx::FFileOutputStream
+
+This class represents data written to a file. There are actually
+two such groups of classes: this one is based on "FFile":ffile.html 
+whereas "FileInputStream":ffileinputstream.html is based in
+the "File":file.html class.
+
+Note that "SeekO()":outputstreamseeko.html 
+can seek beyond the end of the stream (file) and will thus not return 
+_InvalidOffset_ for that.
+
+h2. Derived from
+
+"OutputStream":outputstream.html
+
+h2. See also
+
+"BufferedOutputStream":bufferedoutputstream.html, "FFileInputStream":ffileinputstream.html, "FileInputStream":fileinputstream.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FFileOutputStream.new":#FFileOutputStream_new
+* "FFileOutputStream#ok":#FFileOutputStream_ok
+
+</div>
+
+
+h3(#FFileOutputStream_new). FFileOutputStream.new
+
+  *FFileOutputStream.new*(%(arg-type)String% filename,  %(arg-type)Char% mode="w+b")
+
+Opens the file with the given _filename_ name in the specified mode.
+
+  *FFileOutputStream.new*(%(arg-type)FFile% file)
+
+Initializes a file stream in write-only mode using the file I/O object _file_.
+
+  *FFileOutputStream.new*(%(arg-type)FILE% fp)
+
+Initializes a file stream in write-only mode using the file descriptor _fp_.
+
+  *destructor*()
+
+Destructor.
+
+h3(#FFileOutputStream_ok). FFileOutputStream#ok
+
+ Boolean *ok*()
+
+Returns true if the stream is initialized and ready.
+

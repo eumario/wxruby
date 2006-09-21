@@ -1,0 +1,21 @@
+h1(#wxloggui). Wx::LogGui
+
+This is the default log target for the GUI Widgets applications. It is passed
+to "Log#set_active_target":log.html#Log_setactivetarget at the program
+startup and is deleted by Widgets during the program shut down.
+
+h2. Derived from
+
+"Log":log.html
+
+<div id="methods">
+
+h2. Methods
+
+* "LogGui.new":#LogGui_new
+
+</div>
+
+
+h3(#LogGui_new). LogGui.new
+

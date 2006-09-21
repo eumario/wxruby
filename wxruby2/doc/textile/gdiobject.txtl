@@ -1,0 +1,28 @@
+h1(#wxgdiobject). Wx::GDIObject
+
+This class allows platforms to implement functionality to optimise GDI objects, such
+as Pen, Brush and Font. On Windows, the underling GDI objects are a scarce resource
+and are cleaned up when a usage count goes to zero. On some platforms this
+class may not have any special functionality.
+
+Since the functionality of this class is platform-specific, it is not documented here in detail.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Pen":pen.html, "Brush":brush.html, "Font":font.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GDIObject.new":#GDIObject_new
+
+</div>
+
+
+h3(#GDIObject_constr). GDIObject.new
+

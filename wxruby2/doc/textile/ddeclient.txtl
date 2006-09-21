@@ -1,0 +1,76 @@
+h1(#wxddeclient). Wx::DDEClient
+
+A DDEClient object represents the client part of a client-server DDE
+(Dynamic Data Exchange) conversation.
+
+To create a client which can communicate with a suitable server,
+you need to derive a class from DDEConnection and another from DDEClient.
+The custom DDEConnection class will intercept communications in
+a `conversation' with a server, and the custom DDEServer is required
+so that a user-overridden "DDEClient#on_make_connection":ddeclient.html#DDEClient_onmakeconnection member can return
+a DDEConnection of the required class, when a connection is made.
+
+This DDE-based implementation is
+available on Windows only, but a platform-independent, socket-based version
+of this API is available using "TCPClient":tcpclient.html.
+
+h2. Derived from
+
+ClientBase
+
+"Object":object.html
+
+h2. See also
+
+"DDEServer":ddeserver.html, "DDEConnection":ddeconnection.html, 
+"Interprocess communications overview":ipcoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DDEClient.new":#DDEClient_new
+* "DDEClient#make_connection":#DDEClient_makeconnection
+* "DDEClient#on_make_connection":#DDEClient_onmakeconnection
+* "DDEClient#valid_host":#DDEClient_validhost
+
+</div>
+
+
+h3(#DDEClient_new). DDEClient.new
+
+h3(#DDEClient_makeconnection). DDEClient#make_connection
+
+ "ConnectionBase":connectionbase.html *make_connection*(%(arg-type)String% host, 
+                                  %(arg-type)String% service, 
+                                  %(arg-type)String% topic)
+
+Tries to make a connection with a server specified by the host
+(machine name under UNIX, ignored under Windows), service name (must
+contain an integer port number under UNIX), and topic string. If the
+server allows a connection, a DDEConnection object will be returned.
+The type of DDEConnection returned can be altered by overriding
+the "DDEClient#on_make_connection":ddeclient.html#DDEClient_onmakeconnection member to return your own
+derived connection object.
+
+h3(#DDEClient_onmakeconnection). DDEClient#on_make_connection
+
+ "ConnectionBase":connectionbase.html *on_make_connection*()
+
+The type of "DDEConnection":ddeconnection.html returned from a "DDEClient#make_connection":ddeclient.html#DDEClient_makeconnection call can
+be altered by deriving the *OnMakeConnection* member to return your
+own derived connection object. By default, a DDEConnection
+object is returned.
+
+The advantage of deriving your own connection class is that it will
+enable you to intercept messages initiated by the server, such
+as "DDEConnection#on_advise":ddeconnection.html#DDEConnection_onadvise. You may also want to
+store application-specific data in instances of the new class.
+
+h3(#DDEClient_validhost). DDEClient#valid_host
+
+ Boolean *valid_host*(%(arg-type)String% host)
+
+Returns  if this is a valid host name,  otherwise. This always
+returns  under MS Windows.
+

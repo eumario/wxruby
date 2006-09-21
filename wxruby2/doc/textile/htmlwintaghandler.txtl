@@ -1,0 +1,28 @@
+h1(#wxhtmlwintaghandler). Wx::HtmlWinTagHandler
+
+This is basically HtmlTagHandler except that
+it is extended with protected member m_WParser pointing to
+the HtmlWinParser object (value of this member is identical
+to HtmlParser's m_Parser).
+
+h2. Derived from
+
+"HtmlTagHandler":htmltaghandler.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlWinTagHandler#m__w_parser":#HtmlWinTagHandler_mwparser
+
+</div>
+
+
+h3(#HtmlWinTagHandler_wxhtmlwintaghandlermwparser). HtmlWinTagHandler#m__w_parser
+
+*HtmlWinParser* m_WParser*
+
+Value of this attribute is identical to value of m_Parser. The only different
+is that m_WParser points to HtmlWinParser object while m_Parser
+points to HtmlParser object. (The same object, but overcast.)
+

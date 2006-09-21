@@ -1,0 +1,313 @@
+h1(#wxdatespan). Wx::DateSpan
+
+This class is a "logical time span" and is useful for implementing program
+logic for such things as "add one month to the date" which, in general,
+doesn't mean to add $60*60*24*31$ seconds to it, but to take the same date
+the next month (to understand that this is indeed different consider adding
+one month to Feb, 15 -- we want to get Mar, 15, of course).
+
+When adding a month to the date, all lesser components (days, hours, ...)
+won't be changed unless the resulting date would be invalid: for example,
+Jan 31 + 1 month will be Feb 28, not (non existing) Feb 31.
+
+Because of this feature, adding and subtracting back again the same
+DateSpan will *not*, in general give back the original date: Feb 28 - 1
+month will be Jan 28, not Jan 31!
+
+DateSpan objects can be either positive or negative. They may be
+multiplied by scalars which multiply all deltas by the scalar: i.e.
+$2*(1  month and  1  day)$ is $2$ months and $2$ days. They can
+be added together and with "DateTime":datetime.html or 
+"TimeSpan":timespan.html, but the type of result is different for each
+case.
+
+Beware about weeks: if you specify both weeks and days, the total number of
+days added will be $7*weeks + days$! See also GetTotalDays()
+function.
+
+Equality operators are defined for DateSpans. Two datespans are equal if
+and only if they both give the same target date when added to *every* source date. Thus DateSpan::Months(1) is not equal to DateSpan::Days(30),
+because they don't give the same date when added to 1 Feb. But
+DateSpan::Days(14) is equal to DateSpan::Weeks(2)
+
+Finally, notice that for adding hours, minutes and so on you don't need this
+class at all: "TimeSpan":timespan.html will do the job because there
+are no subtleties associated with those (we don't support leap seconds).
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"Date classes overview":datetimeoverview.html, "DateTime":datetime.html
+
+
+<div id="methods">
+
+h2. Methods
+
+* "DateSpan.new":#DateSpan_new
+* "DateSpan#add":#DateSpan_add
+* "DateSpan#day":#DateSpan_day
+* "DateSpan#days":#DateSpan_days
+* "DateSpan#get_days":#DateSpan_getdays
+* "DateSpan#get_months":#DateSpan_getmonths
+* "DateSpan#get_total_days":#DateSpan_gettotaldays
+* "DateSpan#get_weeks":#DateSpan_getweeks
+* "DateSpan#get_years":#DateSpan_getyears
+* "DateSpan#month":#DateSpan_month
+* "DateSpan#months":#DateSpan_months
+* "DateSpan#multiply":#DateSpan_multiply
+* "DateSpan#negate":#DateSpan_negate
+* "DateSpan#neg":#DateSpan_neg
+* "DateSpan#set_days":#DateSpan_setdays
+* "DateSpan#set_years":#DateSpan_setyears
+* "DateSpan#set_months":#DateSpan_setmonths
+* "DateSpan#set_weeks":#DateSpan_setweeks
+* "DateSpan#subtract":#DateSpan_subtract
+* "DateSpan#week":#DateSpan_week
+* "DateSpan#weeks":#DateSpan_weeks
+* "DateSpan#year":#DateSpan_year
+* "DateSpan#years":#DateSpan_years
+
+</div>
+
+
+h3(#DateSpan_wxdatespan). DateSpan.new
+
+  *DateSpan.new*(%(arg-type)Integer% years = $0$,  %(arg-type)Integer% months = $0$, 
+               %(arg-type)Integer% weeks = $0$, 
+               %(arg-type)Integer% days = $0$)
+
+Constructs the date span object for the given number of years, months, weeks
+and days. Note that the weeks and days add together if both are given.
+
+h3(#DateSpan_add). DateSpan#add
+
+ "DateSpan":datespan.html *add*(%(arg-type)DateSpan% other)
+
+ "DateSpan":datespan.html *add*(%(arg-type)DateSpan% other)
+
+ "DateSpan":datespan.html *operator$+=$*(%(arg-type)DateSpan% other)
+
+Returns the sum of two date spans. The first version returns a new object, the
+second and third ones modify this object in place.
+
+h3(#DateSpan_day). DateSpan#day
+
+ "DateSpan":datespan.html *day*()
+
+Returns a date span object corresponding to one day.
+
+h4. See also
+
+"Days":datespandays.html
+
+h3(#DateSpan_days). DateSpan#days
+
+ "DateSpan":datespan.html *days*(%(arg-type)Integer% days)
+
+Returns a date span object corresponding to the given number of days.
+
+h4. See also
+
+"Day":datespanday.html
+
+h3(#DateSpan_getdays). DateSpan#get_days
+
+ Integer *get_days*()
+
+Returns the number of days (only, that it not counting the weeks component!)
+in this date span.
+
+h4. See also
+
+"get_total_days":#DateSpan_gettotaldays
+
+h3(#DateSpan_getmonths). DateSpan#get_months
+
+ Integer *get_months*()
+
+Returns the number of the months (not counting the years) in this date span.
+
+h3(#DateSpan_gettotaldays). DateSpan#get_total_days
+
+ Integer *get_total_days*()
+
+Returns the combined number of days in this date span, counting both weeks and
+days. It still doesn't take neither months nor years into the account.
+
+h4. See also
+
+"get_weeks":#DateSpan_getweeks, "get_days":#DateSpan_getdays
+
+h3(#DateSpan_getweeks). DateSpan#get_weeks
+
+ Integer *get_weeks*()
+
+Returns the number of weeks in this date span.
+
+h4. See also
+
+"get_total_days":#DateSpan_gettotaldays
+
+h3(#DateSpan_getyears). DateSpan#get_years
+
+ Integer *get_years*()
+
+Returns the number of years in this date span.
+
+h3(#DateSpan_month). DateSpan#month
+
+ "DateSpan":datespan.html *month*()
+
+Returns a date span object corresponding to one month.
+
+h4. See also
+
+"Months":datespanmonths.html
+
+h3(#DateSpan_months). DateSpan#months
+
+ "DateSpan":datespan.html *months*(%(arg-type)Integer% mon)
+
+Returns a date span object corresponding to the given number of months.
+
+h4. See also
+
+"Month":datespanmonth.html
+
+h3(#DateSpan_multiply). DateSpan#multiply
+
+ "DateSpan":datespan.html *multiply*(%(arg-type)Integer% factor)
+
+ "DateSpan":datespan.html *multiply*(%(arg-type)Integer% factor)
+
+ "DateSpan":datespan.html *operator$*=$*(%(arg-type)Integer% factor)
+
+Returns the product of the date span by the specified _factor_. The
+product is computed by multiplying each of the components by the factor.
+
+The first version returns a new object, the second and third ones modify this
+object in place.
+
+h3(#DateSpan_negate). DateSpan#negate
+
+ "DateSpan":datespan.html *negate*()
+
+Returns the date span with the opposite sign.
+
+h4. See also
+
+"Neg":datespanneg.html
+
+h3(#DateSpan_neg). DateSpan#neg
+
+ "DateSpan":datespan.html *neg*()
+
+ "DateSpan":datespan.html *operator$-$*()
+
+Changes the sign of this date span.
+
+h4. See also
+
+"Negate":datespannegate.html
+
+h3(#DateSpan_setdays). DateSpan#set_days
+
+ "DateSpan":datespan.html *set_days*(%(arg-type)Integer% n)
+
+Sets the number of days (without modifying any other components) in this date
+span.
+
+h3(#DateSpan_setyears). DateSpan#set_years
+
+ "DateSpan":datespan.html *set_years*(%(arg-type)Integer% n)
+
+Sets the number of years (without modifying any other components) in this date
+span.
+
+h3(#DateSpan_setmonths). DateSpan#set_months
+
+ "DateSpan":datespan.html *set_months*(%(arg-type)Integer% n)
+
+Sets the number of months (without modifying any other components) in this
+date span.
+
+h3(#DateSpan_setweeks). DateSpan#set_weeks
+
+ "DateSpan":datespan.html *set_weeks*(%(arg-type)Integer% n)
+
+Sets the number of weeks (without modifying any other components) in this date
+span.
+
+h3(#DateSpan_subtract). DateSpan#subtract
+
+ "DateSpan":datespan.html *subtract*(%(arg-type)DateSpan% other)
+
+ "DateSpan":datespan.html *subtract*(%(arg-type)DateSpan% other)
+
+ "DateSpan":datespan.html *operator$+=$*(%(arg-type)DateSpan% other)
+
+Returns the difference of two date spans. The first version returns a new
+object, the second and third ones modify this object in place.
+
+h3(#DateSpan_week). DateSpan#week
+
+ "DateSpan":datespan.html *week*()
+
+Returns a date span object corresponding to one week.
+
+h4. See also
+
+"Weeks":datespanweeks.html
+
+h3(#DateSpan_weeks). DateSpan#weeks
+
+ "DateSpan":datespan.html *weeks*(%(arg-type)Integer% weeks)
+
+Returns a date span object corresponding to the given number of weeks.
+
+h4. See also
+
+"Week":datespanweek.html
+
+h3(#DateSpan_year). DateSpan#year
+
+ "DateSpan":datespan.html *year*()
+
+Returns a date span object corresponding to one year.
+
+h4. See also
+
+"Years":datespanyears.html
+
+h3(#DateSpan_years). DateSpan#years
+
+ "DateSpan":datespan.html *years*(%(arg-type)Integer% years)
+
+Returns a date span object corresponding to the given number of years.
+
+h4. See also
+
+"Year":datespanyear.html
+
+h3(#DateSpan_operatorequal). DateSpan#==
+
+ Boolean *operator$==$*(%(arg-type)DateSpan% other)
+
+Returns @true@ if this date span is equal to the other one. Two date spans
+are considered equal if and only if they have the same number of years and
+months and the same total number of days (counting both days and weeks).
+
+h3(#DateSpan_operatornotequal). DateSpan#!=
+
+ Boolean *operator$!=$*(%(arg-type)DateSpan% other)
+
+Returns @true@ if this date span is different from the other one.
+
+h4. See also
+
+"operator==":datespanoperatorequal.html
+

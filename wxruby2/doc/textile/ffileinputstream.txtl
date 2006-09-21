@@ -1,0 +1,53 @@
+h1(#wxffileinputstream). Wx::FFileInputStream
+
+This class represents data read in from a file. There are actually
+two such groups of classes: this one is based on "FFile":ffile.html 
+whereas "FileInputStream":fileinputstream.html is based in
+the "File":file.html class.
+
+Note that "SeekI()":inputstreamseeki.html 
+can seek beyond the end of the stream (file) and will thus not return 
+_InvalidOffset_ for that.
+
+h2. Derived from
+
+"InputStream":inputstream.html
+
+h2. See also
+
+"BufferedInputStream":bufferedinputstream.html, "FFileOutputStream":ffileoutputstream.html, "FileOutputStream":fileoutputstream.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FFileInputStream.new":#FFileInputStream_new
+* "FFileInputStream#ok":#FFileInputStream_ok
+
+</div>
+
+
+h3(#FFileInputStream_new). FFileInputStream.new
+
+  *FFileInputStream.new*(%(arg-type)String% filename,  %(arg-type)Char% mode = "rb")
+
+Opens the specified file using its _filename_ name using the specified mode.
+
+  *FFileInputStream.new*(%(arg-type)FFile% file)
+
+Initializes a file stream in read-only mode using the file I/O object _file_.
+
+  *FFileInputStream.new*(%(arg-type)FILE% fp)
+
+Initializes a file stream in read-only mode using the specified file pointer _fp_.
+
+  *destructor*()
+
+Destructor.
+
+h3(#FFileInputStream_ok). FFileInputStream#ok
+
+ Boolean *ok*()
+
+Returns true if the stream is initialized and ready.
+

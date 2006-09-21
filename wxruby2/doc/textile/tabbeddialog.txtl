@@ -1,0 +1,58 @@
+h1(#wxtabbeddialog). Wx::TabbedDialog
+
+A dialog suitable for handling tabs.
+
+Please note that the preferred class for programming tabbed windows is "Notebook":notebook.html.
+This class is retained for backward compatibility.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"Tab classes overview":taboverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TabbedDialog.new":#TabbedDialog_new
+* "TabbedDialog#set_tab_view":#TabbedDialog_settabview
+* "TabbedDialog#get_tab_view":#TabbedDialog_gettabview
+
+</div>
+
+
+h3. TabbedDialog.new
+
+  *TabbedDialog.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                   %(arg-type)Point% pos, 
+                   %(arg-type)Size% size, 
+                   %(arg-type)Integer% style=DEFAULT_DIALOG_STYLE, 
+                   %(arg-type)String% name="dialogBox")
+
+Constructor.
+
+  *destructor*()
+
+Destructor. This destructor deletes the tab view associated with the dialog box.
+If you do not wish this to happen, set the tab view to NULL before destruction (for example,
+in the OnCloseWindow event handler).
+
+h3. TabbedDialog#set_tab_view
+
+  *set_tab_view*(%(arg-type)TabView% view)
+
+Sets the tab view associated with the dialog box.
+
+h3. TabbedDialog#get_tab_view
+
+ "TabView":tabview.html *get_tab_view*()
+
+Returns the tab view associated with the dialog box.
+
