@@ -446,7 +446,7 @@ identification purposes.
 	 * \param int*   
 	*/
 
-  virtual void GetPosition(int*  x , int*  y ) const;
+  void GetPosition(int*  x , int*  y ) const;
 	/**
 	 * \brief This gets the position of the window in pixels, relative to the parent window
 for the child windows or relative to the display origin for the top level
