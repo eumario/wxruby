@@ -41,6 +41,26 @@
   }
 }
 
+%typemap(directorargout) ( long * OUTPUT ) {
+  if($1 != NULL)
+  {
+    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+    {
+      *$1 = (long)NUM2LONG(rb_ary_entry(result,0));
+      rb_ary_shift(result);
+    }
+    else
+    {
+      *$1 = 0;
+    }
+  }
+  else
+  {
+    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+      rb_ary_shift(result);  // Guess we should shift it anyhow!
+  }
+}
+
 /*
 Currently incompatible with the ruby post-processing of swigged .cpp files
 Needs to be fixed in fixdeleting.rb before this can be uncommented out
@@ -476,4 +496,3 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 }
 
 %apply int *OUTPUT { int * x , int * y , int * w, int * h };
-
