@@ -3,11 +3,13 @@
 
 %include "../common.i"
 
-
 %module(directors="1") wxTextCtrl
+
+%apply long * OUTPUT { long * }
 
 %ignore wxTextCtrl::wxTextCtrl();
 %ignore wxTextCtrl::operator<<;
+
 
 %{
   // Allow << to work with a TextCtrl

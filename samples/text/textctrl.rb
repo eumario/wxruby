@@ -23,11 +23,10 @@ class InformativeTextCtrl < Wx::TextCtrl
     report << 'Insertion Point: ' << get_insertion_point.to_s() << "\n"
     report << 'First Line Text: ' << get_line_text(0) << "\n"
     report << 'Final Position: ' << get_last_position().to_s() << "\n"
+    report << 'Selection: ' << get_selection().inspect() << "\n"
     report << 'String Selection: ' << get_string_selection().inspect << "\n"
-    # not available
-    report << 'Selection: ' << "Not Implemented\n"
-    # available, but method signature is wrong (3 for 1) - needs SWIG hints
-    report << 'Position to XY: ' << "Not Implemented\n"
+    report << 'Position to X, Y: ' << 
+               position_to_xy( get_insertion_point ).inspect
     return report
   end
 end

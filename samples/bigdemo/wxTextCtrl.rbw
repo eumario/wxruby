@@ -109,8 +109,12 @@ class TestPanel < Wx::Panel
     end
     
     def on_test_get_selection(event)
-        text = @tc.get_string_selection()
-        @log.write_text("get_string_selection(): " + text)
+        start, stop = @tc.get_selection
+        text = @tc.get_string_selection   # On WXMSW, is you select text using
+                                          #  the results of get_selection you
+                                          #  must replace \r\n\ with \n before
+                                          #  taking your selection
+        @log.write_text("get_string_selection [#{start}..#{stop}]: " + text)
     end
 
 end
@@ -123,7 +127,9 @@ module Demo
     end
     
     def Demo.overview
-        ""
+        "A TextCtrl allows text to be displayed and (possibly) edited. It may be single" +
+        "line or multi-line, support styles or not, be read-only or not, and even supports" +
+        "text masking for such things as passwords."
     end
 end
 
