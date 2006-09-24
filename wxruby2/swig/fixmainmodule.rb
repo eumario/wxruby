@@ -35,7 +35,8 @@ File.open(ARGV[0], "w") do | out |
         end
 
         # Fix 1.3.29's ruby tracking
-        if(ENV['SWIGVER'] == 'SWIG Version 1.3.29')
+        # TODO: Should be fixed in (or different with) 1.3.30 but isn't yet
+#        if(ENV['SWIGVER'] == 'SWIG Version 1.3.29')
           if(line.index("static VALUE swig_ruby_trackings"))
             line = "VALUE swig_ruby_trackings = 0;"
           end
@@ -51,15 +52,15 @@ File.open(ARGV[0], "w") do | out |
 			
           if(line.index("swig_ruby_hash_delete = rb_intern(\"delete\");"))
             line = line + "\n" +
-    				  "rb_global_variable(&swig_ruby_trackings);\n" +
-                  "  }";
+                   "rb_global_variable(&swig_ruby_trackings);\n" +
+                   "  }";
           end
-					
-				if(line.index("char* type_name = RSTRING(value)->ptr;"))
-					line = "        const char* type_name = (value == Qnil) ? \"\" : RSTRING(value)->ptr;\n";
-				end
-				
-      end
+
+          if(line.index("char* type_name = RSTRING(value)->ptr;"))
+            line = "        const char* type_name = (value == Qnil) ? \"\" : RSTRING(value)->ptr;\n";
+          end
+# TODO 1.3.30
+#      end
 
         out.puts(line)
     end
