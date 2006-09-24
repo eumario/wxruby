@@ -56,7 +56,8 @@ puts("class #{wx_name}")
 			end
 			
 			# Fix 1.3.29's ruby tracking
-			if(ENV['SWIGVER'] == 'SWIG Version 1.3.29')
+                        # TODO: This should be fixed in 1.3.30 but isn't fixed yet
+#			if(ENV['SWIGVER'] == 'SWIG Version 1.3.29')
 
 			  if(line.index("static VALUE swig_ruby_trackings"))
 					line = "extern VALUE swig_ruby_trackings;"
@@ -80,7 +81,8 @@ puts("class #{wx_name}")
 					line = "        const char* type_name = (value == Qnil) ? \"\" : RSTRING(value)->ptr;\n";
 				end
 				
-			end
+#TODO 1.3.30
+#			end
 
 			# instead of defining a new module,
 			if(line.index("rb_define_module(\"Wx"))
