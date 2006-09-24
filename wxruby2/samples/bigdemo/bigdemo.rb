@@ -199,8 +199,8 @@ $tree_list = [
 
 class DemoCodeViewer < Wx::TextCtrl
     def intialize(parent, id)
-        super(parent, id, "", Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TE_MULTILINE | Wx::TE_READONLY | Wx::HSCROLL | 
-                                                                        Wx::TE_RICH | Wx::TE_NOHIDESEL)
+        super(parent, id, "", Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, 
+              Wx::TE_MULTILINE|Wx::TE_READONLY|Wx::HSCROLL|                                   Wx::TE_RICH|Wx::TE_NOHIDESEL)
     end
 end
 
@@ -298,22 +298,30 @@ class WxRubyDemo < Wx::Frame
         # Create a Notebook
         @nb = Wx::Notebook.new(splitter2, -1, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::CLIP_CHILDREN)
         
-        @ovr = Wx::TextCtrl.new(@nb, -1, OVR_TEXT, Wx::DEFAULT_POSITION, Wx::Size.new(400,400), Wx::TE_MULTILINE | Wx::TE_READONLY |
-                                                                                        Wx::HSCROLL | Wx::TE_RICH | Wx::TE_NOHIDESEL)
+        @ovr = Wx::TextCtrl.new(@nb, -1, OVR_TEXT, Wx::DEFAULT_POSITION, 
+                                Wx::Size.new(400,400), 
+                                Wx::TE_MULTILINE|Wx::TE_READONLY|
+                                Wx::TE_RICH|Wx::TE_NOHIDESEL)
         @nb.add_page(@ovr, "Overview")
         
-        @txt = Wx::TextCtrl.new(@nb, -1, OVR_TEXT, Wx::DEFAULT_POSITION, Wx::Size.new(400,400), Wx::TE_MULTILINE | Wx::TE_READONLY |
-                                                                                        Wx::HSCROLL | Wx::TE_RICH | Wx::TE_NOHIDESEL)
+        @txt = Wx::TextCtrl.new(@nb, -1, OVR_TEXT, Wx::DEFAULT_POSITION, 
+                                Wx::Size.new(400,400), 
+                                Wx::TE_MULTILINE|Wx::TE_READONLY|
+                                Wx::HSCROLL|Wx::TE_RICH|Wx::TE_NOHIDESEL)
         @txt.set_max_length(0)
         
         @nb.add_page(@txt, "Demo Code")
         get_demo_file(__FILE__)
         
-        @log = Wx::TextCtrl.new(splitter2, -1, "", Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TE_MULTILINE | Wx::TE_READONLY |
-                                                                                                Wx::HSCROLL)
-        # For some reason when the number of characters entered is greater than about 10,700, the text control freezes.  I know 
-        # someone mentioned this on the list a while ago...calling set_max_length(0) with zero as the argument tells the text
-        # control to default limit that the underlying native text control can handle.
+        @log = Wx::TextCtrl.new(splitter2, -1, "", Wx::DEFAULT_POSITION, 
+                                Wx::DEFAULT_SIZE, 
+                                Wx::TE_MULTILINE|Wx::TE_READONLY|Wx::HSCROLL)
+        # For some reason when the number of characters entered is
+        # greater than about 10,700, the text control freezes.  I know  
+        # someone mentioned this on the list a while ago...calling
+        # set_max_length(0) with zero as the argument tells the text 
+        # control to default limit that the underlying native text
+        # control can handle. 
         @log.set_max_length(0)
         Wx::Log::set_active_target(Wx::LogTextCtrl.new(@log))
         
