@@ -51,7 +51,7 @@ class wxRubyArtProvider : public wxArtProvider
     return wxArtProvider::GetBitmap(id, client, size);
   }
 
-  static wxIcon wxRubyArtProvider::GetIcon(const wxArtID& id,
+  static wxIcon GetIcon(const wxArtID& id,
                                            const wxArtClient& client,
                                            const wxSize& size)
   {
