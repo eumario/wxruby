@@ -93,3 +93,18 @@ task :textile_docs do
     wxlp.parse()
   end
 end
+
+doc_zip_package = "doc/wxruby-docs-#{WXRUBY_VERSION}.zip"
+
+file doc_zip_package => [ :html_docs ] do | t |
+  sh "zip #{doc_zip_package} doc/html/*.*"
+end
+desc "Zip up the HTML documentation"
+task :doc_zip => [ doc_zip_package ]
+
+doc_tar_gz_package = "doc/wxruby-docs-#{WXRUBY_VERSION}.tar.gz"
+file doc_tar_gz_package  => [ :html_docs ] do | t |
+  sh "tar -zcvf #{doc_tar_gz_package} doc/html/*.*"
+end
+desc "Tarball the HTML documentation"
+task :doc_tar_gz => [ doc_tar_gz_package ]
