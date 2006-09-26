@@ -1,19 +1,16 @@
 require 'wx'
 include Wx
 
-BUTTON_CLOSE = 1003
-
-class MyFrame < MiniFrame
+class MyMiniFrame < MiniFrame
   def initialize(parent, log)
     @log = log
-    super(parent, -1, "Wx::MiniFrame demonstration", DEFAULT_POSITION, Size.new(350,200), DEFAULT_FRAME_STYLE)
+    super(parent, -1, "Wx::MiniFrame demonstration", 
+          DEFAULT_POSITION, Size.new(350,200), DEFAULT_FRAME_STYLE)
     panel = Panel.new(self, -1)
         
-    button = Button.new(panel, BUTTON_CLOSE, "Close me", Point.new(15,15))
-        
-    evt_button(BUTTON_CLOSE) {on_close_me}
-    evt_close {on_close_window}
-        
+    button = Button.new(panel, -1, "Close me", Point.new(15,15))
+    evt_button( button.get_id ) { on_close_me }
+    evt_close { on_close_window }
   end
     
   def on_close_me
@@ -37,7 +34,7 @@ class TestPanel < Wx::Panel
   end
 
   def on_button
-    win = MyFrame.new(self, @log)
+    win = MyMiniFrame.new(self, @log)
     win.set_size(Wx::Size.new(200, 200))
     win.center_on_parent(Wx::BOTH)
     win.show(true)
