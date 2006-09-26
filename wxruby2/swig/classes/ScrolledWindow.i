@@ -10,6 +10,8 @@
 %module(directors="1") wxScrolledWindow
 #%ignore wxScrolledWindow::wxScrolledWindow();
 
+%apply int * OUTPUT { int * }
+
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
