@@ -5,8 +5,6 @@
 
 %module(directors="1") wxWindowDC
 
-%ignore GetTextExtent;
-
 // only support the variants that return an object
 %ignore GetSize(int*  width , int*  height ) const;
 
