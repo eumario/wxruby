@@ -15,7 +15,7 @@ end
  # Rubygems library is required to build a gem, but not just to compile
 # the lib.
 begin
-  require "rake/rakepackage"
+  require "rake/rakepackage"  
 rescue LoadError # package tasks will not be available
 end
 
@@ -69,9 +69,12 @@ $target_lib = File.join($dest_dir, $dl_lib)
 #############################
 # public tasks
 begin
-  create_internal_non_swig_tasks
-  create_internal_swig_tasks
-  create_release_tasks
+    create_internal_non_swig_tasks
+    create_internal_swig_tasks
+    if Object.respond_to?(:create_release_tasks, true)
+        create_release_tasks
+    end
+
     desc "Create the binary Ruby library file"
     task :default => :link
 
