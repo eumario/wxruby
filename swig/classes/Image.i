@@ -9,8 +9,14 @@
 #include <wx/image.h>
 %}
 
-%apply char * { unsigned char * }
-%apply char { unsigned char }
+%typemap(in) unsigned char * data {
+	if(TYPE($input) == T_STRING)
+		$1 = reinterpret_cast< unsigned char * >(STR2CSTR($input));
+	else
+		SWIG_exception_fail(SWIG_ERROR, "in method 'set_data', expected argument of type 'string'");
+}
+
+%apply unsigned char * OUTPUT { unsigned char * r, unsigned char * g, unsigned char * b }
 
 %ignore wxImage::Create();
 %ignore wxImage::AddHandler(const wxString&  filename );
