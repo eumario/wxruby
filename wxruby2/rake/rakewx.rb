@@ -92,11 +92,6 @@ end
 def use_wx_config
     $wx_version = wx_config("--version")
     $wx_cppflags = wx_config("--cppflags")
-    if ($wx_version >= "2.5")
-        $wx_ldflags = ""
-    else
-        $wx_ldflags = wx_config("--ldflags")
-    end
     $wx_libs = wx_config("--libs")
     $cpp = wx_config("--cxx")
     $ld = wx_config("--ld")
