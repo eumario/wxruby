@@ -85,8 +85,7 @@ class TestPanel < Wx::Panel
             return
         end
 
-        eobj = event.get_event_object()
-      p eobj
+        eobj = event.get_event_object
         if eobj == @topwin
             @log.write_text('topwin received drag event')
             @topwin.set_default_size(Wx::Size.new(1000, event.get_drag_rect.height))
@@ -100,7 +99,7 @@ class TestPanel < Wx::Panel
             @log.write_text('leftwin2 received drag event')
             @leftwin2.set_default_size(Wx::Size.new(event.get_drag_rect.width, 1000))
 
-        elsif eobj == @bottomwindow
+        elsif eobj == @bottomwin
             @log.write_text('bottomwin received drag event')
             @bottomwin.set_default_size(Wx::Size.new(1000, event.get_drag_rect.height))
         end
