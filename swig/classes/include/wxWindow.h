@@ -56,7 +56,7 @@ window. In particular, this means that you must release the mouse as many times
 as you capture it. 
 	*/
 
-  virtual void CaptureMouse() ;
+  void CaptureMouse() ;
 	/**
 	 * \brief A synonym for  . 
 	 * \param int  
@@ -110,7 +110,7 @@ modifying its parameters.}
 	 * \param int*   
 	*/
 
-  virtual void ClientToScreen(int*  x , int*  y ) const;
+  void ClientToScreen(int*  x_INOUT , int*  y_INOUT ) const;
 	/**
 	 * \brief Converts to screen coordinates from coordinates relative to this window.
 
@@ -127,7 +127,7 @@ implements the following methods:\par
 	 * \param const wxPoint&  
 	*/
 
-  virtual wxPoint ClientToScreen(const wxPoint&  pt ) const;
+  wxPoint ClientToScreen(const wxPoint&  pt ) const;
 	/**
 	 * \brief This function simply generates a   whose
 handler usually tries to close the window. It doesn't close the window itself,
@@ -174,7 +174,7 @@ windows.
 	 * \brief Destroys all children of a window.  Called automatically by the destructor. 
 	*/
 
-  virtual void DestroyChildren() ;
+  void DestroyChildren() ;
 	/**
 	 * \brief Disables the window, same as  . 
 	*/
@@ -298,7 +298,7 @@ be drawn at, not the minimal size it can possibly tolerate.
 	 * \brief Returns the background colour of the window. 
 	*/
 
-  virtual wxColour GetBackgroundColour() const;
+  wxColour GetBackgroundColour() const;
 	/**
 	 * \brief This functions returns the best acceptable minimal size for the window. For
 example, for a static control, it will be the minimal size such that the
@@ -308,7 +308,7 @@ same as the size the window would have had after calling
  . 
 	*/
 
-  virtual wxSize GetBestSize() const;
+  wxSize GetBestSize() const;
 
 	void GetBestSize(int *w, int *h) const;
 	/**
@@ -343,7 +343,7 @@ a 2-element list  .}
 	 * \param int*   
 	*/
 
-  virtual void GetClientSize(int*  width , int*  height ) const;
+  void GetClientSize(int*  width , int*  height ) const;
 	/**
 	 * \brief This gets the size of the window `client area' in pixels.
 The client area is the area which may be drawn on by the programmer,
@@ -361,7 +361,7 @@ implements the following methods:\par
 } 
 	*/
 
-  virtual wxSize GetClientSize() const;
+  wxSize GetClientSize() const;
 	/**
 	 * \brief Returns a pointer to the window's layout constraints, or NULL if there are none. 
 	*/
@@ -398,7 +398,7 @@ own event handler.
 	 * \brief Returns the foreground colour of the window. 
 	*/
 
-  virtual wxColour GetForegroundColour() ;
+  wxColour GetForegroundColour() ;
 	/**
 	 * \brief Returns the grandparent of a window, or NULL if there isn't one. 
 	*/
@@ -418,7 +418,7 @@ handle, such as   for Windows,   for Motif or   for GTK.
 	 * \brief  
 	*/
 
-  virtual wxString GetHelpText() const;
+  wxString GetHelpText() const;
 	/**
 	 * \brief Returns the identifier of the window. 
 	*/
@@ -439,7 +439,7 @@ identification purposes.
 	 * \brief Returns the parent of the window, or NULL if there is no parent. 
 	*/
 
-  virtual wxWindow* GetParent() const;
+  wxWindow* GetParent() const;
 	/**
 	 * \brief  
 	 * \param int*   
@@ -474,7 +474,7 @@ method:\par
 	 * \brief Returns the size and position of the window as a   object. 
 	*/
 
-  virtual wxRect GetRect() const;
+  wxRect GetRect() const;
 	/**
 	 * \brief Returns the built-in scrollbar thumb size. 
 	 * \param int   
@@ -499,7 +499,7 @@ method:\par
 	 * \param int*   
 	*/
 
-  virtual void GetSize(int*  width , int*  height ) const;
+  void GetSize(int*  width , int*  height ) const;
 	/**
 	 * \brief This gets the size of the entire window in pixels,
 including title bar, border, scrollbars, etc.
@@ -521,7 +521,7 @@ method:\par
 }} 
 	*/
 
-  virtual wxSize GetSize() const;
+  wxSize GetSize() const;
 	/**
 	 * \brief Return the sizer associated with the window by a previous call to
   or  . 
@@ -582,7 +582,7 @@ implements the following methods:\par
 only be called within an   handler. 
 	*/
 
-  virtual wxRegion GetUpdateRegion() const;
+  wxRegion GetUpdateRegion() const;
 	/**
 	 * \brief Returns a pointer to the current validator for the window, or NULL if there is none. 
 	*/
@@ -777,7 +777,7 @@ and then re-inserted into another. Available on Windows and GTK.
 	 * \param int*   
 	*/
 
-  virtual void ScreenToClient(int*  x , int*  y ) const;
+  void ScreenToClient(int*  x_INOUT , int*  y_INOUT ) const;
 	/**
 	 * \brief Converts from screen to client window coordinates.
 
@@ -796,7 +796,7 @@ implements the following methods:\par
 	 * \param const wxPoint&   
 	*/
 
-  virtual wxPoint ScreenToClient(const wxPoint&  pt ) const;
+  wxPoint ScreenToClient(const wxPoint&  pt ) const;
 	/**
 	 * \brief Scrolls the window by the given number of lines down (if   is
 positive) or up. 

@@ -20,6 +20,7 @@
 // Any sizers passed in to wx become owned by C++
 %apply SWIGTYPE *DISOWN {wxSizer*  sizer};
 
+%apply int * INOUT { int * x_INOUT, int * y_INOUT }
 
 %{
 
