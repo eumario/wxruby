@@ -50,7 +50,7 @@ end
 #############################
 # put it all together
 $cppflags = [$wx_cppflags, $ruby_cppflags, $extra_cppflags, $ruby_includes].join(' ')
-$ldflags = [$wx_ldflags, $ruby_ldflags, $extra_ldflags].join(' ')
+$ldflags = [$ruby_ldflags, $extra_ldflags].join(' ')
 $libs = [$wx_libs, $ruby_libs, $extra_libs].join(' ')
 $extra_objs = $extra_objs
 $dl_lib = "wxruby2.#{$dl_ext}"
