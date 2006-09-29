@@ -2182,6 +2182,13 @@ enum wxLayoutOrientation
 %constant const int TREE_ITEM_ICON_SELECTED_EXPANDED = wxTreeItemIcon_SelectedExpanded;
 %constant const int TREE_ITEM_ICON_MAX = wxTreeItemIcon_Max;
 
+// SplashScreen constants
+
+#define wxSPLASH_CENTRE_ON_PARENT   0x01
+#define wxSPLASH_CENTRE_ON_SCREEN   0x02
+#define wxSPLASH_NO_CENTRE          0x00
+#define wxSPLASH_TIMEOUT            0x04
+#define wxSPLASH_NO_TIMEOUT         0x00
 
 // Platform constants
 
