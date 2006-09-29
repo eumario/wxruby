@@ -80,7 +80,10 @@ puts("class #{wx_name}")
 				if(line.index("char* type_name = RSTRING(value)->ptr;"))
 					line = "        const char* type_name = (value == Qnil) ? \"\" : RSTRING(value)->ptr;\n";
 				end
-				
+				# Patch submitted for SWIG 1.3.30
+				if(line.index("if (strcmp(type->name, type_name) == 0) {"))
+					line = "        if (rb_obj_is_kind_of(obj, (((swig_class *) (type->clientdata))->klass))) {"
+				end
 #TODO 1.3.30
 #			end
 
