@@ -167,7 +167,6 @@ class MyCanvas < Wx::ScrolledWindow
             dc.draw_line(coords[0], coords[1], coords[2], coords[3])
             set_XY(event)
             dc.end_drawing()
-            dc.free()
         end
     end
     
