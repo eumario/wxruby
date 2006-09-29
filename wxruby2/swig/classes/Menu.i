@@ -7,6 +7,9 @@
 
 GC_NEVER(wxMenu);
 
+// Any MenuItems passed in to wx become owned by C++
+%apply SWIGTYPE *DISOWN {wxMenuItem*  item};
+
 %ignore wxMenu::wxMenu(long  style );
 
 %rename(AppendMenu) wxMenu::Append(int itemid, const wxString& text, wxMenu *submenu, const wxString& help = wxEmptyString);
