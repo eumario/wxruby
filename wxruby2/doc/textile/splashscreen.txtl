@@ -4,18 +4,14 @@ SplashScreen shows a window with a thin border, displaying a bitmap describing y
 application. Show it in application initialisation, and then either explicitly destroy
 it or let it time-out.
 
-Example usage:
+Example usage - displays the image *a_splash.png* for 3 seconds as a
+splash screen. 
 
-
-   Bitmap bitmap;
-   if (bitmap.LoadFile("splash16.png", BITMAP_TYPE_PNG))
-   {
-       SplashScreen* splash = new SplashScreen(bitmap,
-           SPLASH_CENTRE_ON_SCREEN|SPLASH_TIMEOUT,
-           6000, NULL, -1, DefaultPosition, DefaultSize,
-           SIMPLE_BORDER|STAY_ON_TOP);
-   }
-   Yield();
+ splash_bitmap = Wx::Bitmap.new('a_splash.png', Wx::BITMAP_TYPE_PNG)
+ splash = Wx::SplashScreen.new(splash_bitmap,
+                               Wx::SPLASH_CENTRE_ON_SCREEN|Wx::SPLASH_TIMEOUT,
+							   3000, nil, -1)
+                               
  
 
 h2. Derived from
@@ -56,13 +52,11 @@ and size, and a window style.
 
 _splashStyle_ is a bitlist of some of the following:
 
-
 * SPLASH_CENTRE_ON_PARENT
 * SPLASH_CENTRE_ON_SCREEN
 * SPLASH_NO_CENTRE
 * SPLASH_TIMEOUT
 * SPLASH_NO_TIMEOUT
-
 
 _milliseconds_ is the timeout in milliseconds.
 
