@@ -205,8 +205,6 @@ class MyCanvas < ScrolledWindow
         dc.set_background_mode(SOLID) # overwrite old value
         dc.draw_text(ch.chr, @x_margin + @x_caret * @width_char,
                      @y_margin + @y_caret * @height_char )
-        dc.free
-
         next_char
         if caret
           caret.show
