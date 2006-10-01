@@ -26,7 +26,7 @@ h2. Window styles
 |@TE_READONLY@|The text will not be user-editable.|
 |@TE_RICH@|Use rich text control under Win32, thisallows to have more than 64KB of text in the control even under Win9x. Thisstyle is ignored under other platforms.|
 |@TE_RICH2@|Use rich text control version 2.0 or 3.0under Win32, this style is ignored under other platforms|
-|@TE_AUTO_URL@|Highlight the URLs and generate theTextUrlEvents when mouse events occur over them. This style is only supportedfor TE_RICH Win32 and multi-line GTK2 text controls.|
+|@TE_AUTO_URL@|Highlight the URLs and generate theTextUrlEvents when mouse events occur over them. This style is only supported for @TE_RICH@ Win32 and multi-line GTK2 text controls.|
 |@TE_NOHIDESEL@|By default, the Windows text controldoesn't show the selection when it doesn't have focus - use this style to forceit to always show it. It doesn't do anything under other platforms.|
 |@HSCROLL@|A horizontal scrollbar will be created andused, so that text won't be wrapped. No effect under GTK1.|
 |@TE_LEFT@|The text in the control will be left-justified (default).|
@@ -44,16 +44,16 @@ See also "window styles overview":windowstyles.html and "TextCtrl.new":textctrl.
 h2. TextCtrl text format
 
 The multiline text controls always store the text as a sequence of lines
-separated by @$@@$n@ characters, i.e. in the Unix text format even
+separated by @\n@ characters, i.e. in the Unix text format even
 on non-Unix platforms. This allows the user code to ignore the differences
 between the platforms but at a price: the indices in the control such as those
 returned by "get_insertion_point":#TextCtrl_getinsertionpoint or
 "get_selection":#TextCtrl_getselection can *not* be used as
 indices into the string returned by "get_value":#TextCtrl_getvalue as
 they're going to be slightly off for platforms using
-@$@@$r$@@$n@ as separator (as Windows does), for example.
+@\r\n@ as separator (as Windows does), for example.
 
-Instead, if you need to obtain a substring between the $2$ indices obtained
+Instead, if you need to obtain a substring between the two indices obtained
 from the control with the help of the functions mentioned above, you should
 use "get_range":#TextCtrl_getrange. And the indices themselves can
 only be passed to other methods, for example
@@ -68,7 +68,7 @@ h2. TextCtrl styles
 
 Multi-line text controls support the styles, i.e. provide a possibility to set
 colours and font for individual characters in it (note that under Windows 
-TE_RICH style is required for style support). To use the styles you can
+@TE_RICH@ style is required for style support). To use the styles you can
 either call "set_default_style":#TextCtrl_setdefaultstyle before
 inserting the text or call "set_style":#TextCtrl_setstyle later to
 change the style of the text already in the control (the first solution is
@@ -85,88 +85,23 @@ to "set_default_style":#TextCtrl_setdefaultstyle doesn't change the
 text foreground colour (which stays red) while the last one doesn't change the
 background colour (which stays grey):
 
-
-     text->SetDefaultStyle(TextAttr(*RED));
-     text->AppendText("Red text\n");
-     text->SetDefaultStyle(TextAttr(NullColour, *LIGHT_GREY));
-     text->AppendText("Red on grey text\n");
-     text->SetDefaultStyle(TextAttr(*BLUE);
-     text->AppendText("Blue on grey text\n");
- 
-
-h2. TextCtrl and C++ streams
-
-This class multiply-inherits from *streambuf* where compilers allow,
-allowing code such as the following:
-
-
-   TextCtrl *control = new TextCtrl(...);
- 
-   ostream stream(control)
- 
-   stream << 123.456 << " some text\n";
-   stream.flush();
- 
-
-If your compiler does not support derivation from *streambuf* and gives a
-compile error, define the symbol *NO_TEXT_WINDOW_STREAM* in the
-TextCtrl header file.
-
-Note that independently of this setting you can always use TextCtrl itself
-in a stream-like manner:
-
-
-   TextCtrl *control = new TextCtrl(...);
- 
-   *control << 123.456 << " some text\n";
- 
-
-always works. However the possibility to create an ostream associated with
-TextCtrl may be useful if you need to redirect the output of a function
-taking an ostream as parameter to a text control.
-
-Another commonly requested need is to redirect *std::cout* to the text
-control. This could be done in the following way:
-
-
-   #include <iostream>
- 
-   TextCtrl *control = new TextCtrl(...);
- 
-   std::streambuf *sbOld = std::cout.rdbuf();
-   std::cout.rdbuf(*control);
- 
-   // use cout as usual, the output appears in the text control
-   ...
- 
-   std::cout.rdbuf(sbOld);
- 
-
-But Widgets provides a convenient class to make it even simpler so instead
-you may just do
-
-
-   #include <iostream>
- 
-   TextCtrl *control = new TextCtrl(...);
- 
-   StreamToTextRedirector redirect(control);
- 
-   // all output to cout goes into the text control until the exit from current
-   // scope
- 
-
-See "StreamToTextRedirector":streamtotextredirector.html for more
-details.
+     text.set_default_style( Wx::TextAttr.new(Wx::RED) )
+     text.append_text("Red text\n")
+     text.set_default_style( Wx::TextAttr.new(nil, Wx::LIGHT_GREY) )
+     text.append_text("Red on grey text\n")
+     text.set_default_style( Wx::TextAttr.new(Wx::BLUE) )
+     text.append_text("Blue on grey text\n")
 
 h2. Event handling
 
-The following commands are processed by default event handlers in TextCtrl: ID_CUT, ID_COPY,
-ID_PASTE, ID_UNDO, ID_REDO. The associated UI update events are also processed
-automatically, when the control has the focus.
+The following commands are processed by default event handlers in
+TextCtrl: ID_CUT, ID_COPY, ID_PASTE, ID_UNDO, ID_REDO. The associated UI
+update events are also processed automatically, when the control has the
+focus.
 
-To process input from a text control, use these event handler macros to direct input to member
-functions that take a "CommandEvent":commandevent.html argument.
+To process input from a text control, use these event handler macros to
+direct input to member functions that take a
+"CommandEvent":commandevent.html argument.
 
 
 |*evt_text(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Respond to a EVT_COMMAND_TEXT_UPDATED event,generated when the text changes. Notice that this event will always be sentwhen the text controls contents changes - whether this is due to user input orcomes from the program itself (for example, if SetValue() is called)|
@@ -269,12 +204,6 @@ visible.
 h4. See also
 
 "TextCtrl#create":textctrl.html#TextCtrl_create, "Validator":validator.html
-
-
-  *destructor*()
-
-Destructor, destroying the text control.
-
 
 h3(#TextCtrl_appendtext). TextCtrl#append_text
 
@@ -399,14 +328,13 @@ otherwise.
 
 h3(#TextCtrl_getdefaultstyle). TextCtrl#get_default_style
 
- "TextAttr& ":textattr& .html *get_default_style*()
+ "TextAttr":textattr.html *get_default_style*()
 
 Returns the style currently used for the new text.
 
 h4. See also
 
 "set_default_style":#TextCtrl_setdefaultstyle
-
 
 h3(#TextCtrl_getinsertionpoint). TextCtrl#get_insertion_point
 
@@ -418,17 +346,14 @@ the insertion point is at the end of the text control, it is equal to
 both "get_value()":#TextCtrl_getvalue().Length() and
 "get_last_position()":#TextCtrl_getlastposition().
 
-The following code snippet safely returns the character at the insertion
-point or the zero character if the point is at the end of the control.
+The following code snippet returns the character at the insertion
+point or an empty string if the point is at the end of the control.
 
-
-   char GetCurrentChar(TextCtrl *tc) {
-     if (tc->GetInsertionPoint() == tc->GetLastPosition())
-       return '\0';
-     return tc->GetValue[tc->GetInsertionPoint()];
-   }
- 
-
+ if textctrl.get_last_position == textctrl.get_insertion_point
+ 	return ''
+ else
+	return textctrl.get_value[ textctrl.get_insertion_point, 1]
+ end
 
 h3(#TextCtrl_getlastposition). TextCtrl#get_last_position
 
@@ -440,35 +365,33 @@ which is equal to the number of characters in the control.
 
 h3(#TextCtrl_getlinelength). TextCtrl#get_line_length
 
- Integer *get_line_length*(%(arg-type)Integer% lineNo)
+ Integer *get_line_length*(%(arg-type)Integer% line_num)
 
 Gets the length of the specified line, not including any trailing newline
 character(s).
 
 h4. Parameters
 
-* _lineNo_ Line number (starting from zero).
+* _line_num_ Line number (starting from zero).
 
 h4. Return value
 
-The length of the line, or -1 if _lineNo_ was invalid.
-
+The length of the line, or -1 if _line_num_ was invalid.
 
 h3(#TextCtrl_getlinetext). TextCtrl#get_line_text
 
- String *get_line_text*(%(arg-type)Integer% lineNo)
+ String *get_line_text*(%(arg-type)Integer% line_num)
 
 Returns the contents of a given line in the text control, not including
 any trailing newline character(s).
 
 h4. Parameters
 
-* _lineNo_ The line number, starting from zero.
+* _line_num_ The line number, starting from zero.
 
 h4. Return value
 
 The contents of the line.
-
 
 h3(#TextCtrl_getnumberoflines). TextCtrl#get_number_of_lines
 
@@ -512,19 +435,15 @@ no selection.
 
 Please note that the indices returned may be used with the other Textctrl
 methods but don't necessarily represent the correct indices into the string
-returned by "get_value()":#TextCtrl_getvalue() for multiline controls
+returned by "get_value()":#TextCtrl_getvalue for multiline controls
 under Windows (at least,) you should use
-"get_string_selection()":#TextCtrl_getstringselection() to get the selected
+"get_string_selection()":#TextCtrl_getstringselection to get the selected
 text.
 
 h4. Parameters
 
 * _from_ The returned first position.
 * _to_ The returned last position.
-
-
-
-
 
 
 h3(#TextCtrl_getstringselection). TextCtrl#get_string_selection
@@ -565,8 +484,8 @@ sequence in the native control.
 h3(#TextCtrl_hittest). TextCtrl#hit_test
 
  "TextCtrlHitTestResult":textctrlhittestresult.html *hit_test*(%(arg-type)Point% pt, 
-                                  %(arg-type)TextCoord% col, 
-                                  %(arg-type)TextCoord% row)
+                                %(arg-type)TextCoord% col, 
+                                %(arg-type)TextCoord% row)
 
 This function finds the character at the specified position expressed in
 pixels. If the return code is not @TE_HT_UNKNOWN@ the row and column
@@ -579,8 +498,6 @@ MSW and GTK2 ports.
 h4. See also
 
 "position_to_xy":#TextCtrl_positiontoxy, "XYToPosition":textctrlxytoposition.html
-
-.
 
 h3(#TextCtrl_iseditable). TextCtrl#is_editable
 
@@ -817,19 +734,16 @@ h3(#TextCtrl_setinsertionpointend). TextCtrl#set_insertion_point_end
 
   *set_insertion_point_end*()
 
-Sets the insertion point at the end of the text control. This is equivalent
-to "set_insertion_point":#TextCtrl_setinsertionpoint("get_last_position":#TextCtrl_getlastposition()).
-
+Sets the insertion point at the end of the text control.
 
 h3(#TextCtrl_setmaxlength). TextCtrl#set_max_length
 
-  *set_max_length*(%(arg-type)Integer% len)
+  *set_max_length*(%(arg-type)Integer% length)
 
 This function sets the maximum number of characters the user can enter into the
-control. In other words, it allows to limit the text value length to _len_
-not counting the terminating @NUL@ character.
+control. In other words, it limits the text value length to _length_.
 
-If _len_ is $0$, the previously set max length limit, if any, is discarded
+If _length_ is 0, the previously set max length limit, if any, is discarded
 and the user may enter as much text as the underlying native text control
 widget supports (typically at least 32Kb).
 
@@ -851,7 +765,7 @@ h3(#TextCtrl_setselection). TextCtrl#set_selection
   *set_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
 
 Selects the text starting at the first position up to (but not including) the
-character at the last position. If both parameters are equal to $-1$ all text
+character at the last position. If both parameters are equal to -1 all text
 in the control is selected.
 
 h4. Parameters
@@ -866,7 +780,7 @@ h3(#TextCtrl_setstyle). TextCtrl#set_style
                    %(arg-type)TextAttr% style)
 
 Changes the style of the given range. If any attribute within _style_ is
-not set, the corresponding attribute from "get_default_style()":#TextCtrl_getdefaultstyle() is used.
+not set, the corresponding attribute from "get_default_style()":#TextCtrl_getdefaultstyle is used.
 
 h4. Parameters
 
@@ -883,14 +797,13 @@ h4. See also
 
 "TextCtrl#get_style":textctrl.html#TextCtrl_getstyle, "TextAttr":textattr.html
 
-
 h3(#TextCtrl_setvalue). TextCtrl#set_value
 
   *set_value*(%(arg-type)String% value)
 
 Sets the text value and marks the control as not-modified (which means that
 "is_modified":#TextCtrl_ismodified would return @false@ immediately
-after the call to SetValue).
+after the call to set_value).
 
 Note that this function will generate a @EVT_COMMAND_TEXT_UPDATED@
 event.
@@ -898,7 +811,6 @@ event.
 h4. Parameters
 
 * _value_ The new value to set. It may contain newline characters if the text control is multi-line.
-
 
 h3(#TextCtrl_showposition). TextCtrl#show_position
 
@@ -915,8 +827,8 @@ h3(#TextCtrl_undo). TextCtrl#undo
 
   *undo*()
 
-If there is an undo facility and the last operation can be undone, undoes the last operation. Does nothing
-if there is no undo facility.
+If there is an undo facility and the last operation can be undone,
+undoes the last operation. Does nothing if there is no undo facility.
 
 
 h3(#TextCtrl_writetext). TextCtrl#write_text
@@ -954,25 +866,17 @@ h4. Return value
 The position value, or -1 if @x@ or @y@ was invalid.
 
 
-h3(#TextCtrl_insert). TextCtrl::operator 
+h3(#TextCtrl_insert). TextCtrl#<<
 
- "TextCtrl":textctrl.html *operator *(%(arg-type)String% s)
+ "TextCtrl":textctrl.html << %(arg-type)String% str
 
- "TextCtrl":textctrl.html *operator *(%(arg-type)Integer% i)
+ "TextCtrl":textctrl.html << %(arg-type)Integer% int
 
- "TextCtrl":textctrl.html *operator *(%(arg-type)Integer% i)
+ "TextCtrl":textctrl.html << %(arg-type)Float% float
 
- "TextCtrl":textctrl.html *operator *(%(arg-type)float% f)
-
- "TextCtrl":textctrl.html *operator *(%(arg-type)double% d)
-
- "TextCtrl":textctrl.html *operator *(%(arg-type)char% c)
-
-Operator definitions for appending to a text control, for example:
-
-
-   TextCtrl *wnd = new TextCtrl(my_frame);
+Operator for appending to a text control, for example:
  
-   (*wnd) << "Welcome to text control number " << 1 << ".\n";
+ textctrl = Wx::TextCtrl.new(parent, -1, '')
+ textctrl << "Welcome to text control number " << 1 << ".\n"
  
 
