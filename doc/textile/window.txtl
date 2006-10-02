@@ -272,14 +272,6 @@ correctly sized.
 * _style_ Window style. For generic window styles, please see "Window":window.html.
 * _name_ Window name.
 
-
-  *destructor*()
-
-Destructor. Deletes all subwindows, then deletes itself. Instead of using
-the *delete* operator explicitly, you should normally
-use "Window#destroy":window.html#Window_destroy so that Widgets
-can delete a window only when it is safe to do so, in idle time.
-
 h4. See also
 
 "Window deletion overview":windowdeletionoverview.html, "Window#destroy":window.html#Window_destroy, "CloseEvent":closeevent.html
@@ -420,22 +412,15 @@ cause an erase background event to be generated.
 
 h3(#Window_clienttoscreen). Window#client_to_screen
 
-  *client_to_screen*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ x, y = *client_to_screen*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
+ "Point":point.html = *client_to_screen*(%(arg-type)Point% pt)
 
-
- "Point":point.html *client_to_screen*(%(arg-type)Point% pt)
-
-Converts to screen coordinates from coordinates relative to this window.
-
-* _x_ A pointer to a integer value for the x coordinate. Pass the client coordinate in, and
-a screen coordinate will be passed out.
-* _y_ A pointer to a integer value for the y coordinate. Pass the client coordinate in, and
-a screen coordinate will be passed out.
-* _pt_ The client position for the second form of the function.
-
-
-
+Converts to screen coordinates from coordinates relative to this
+window. The method may be passed _either_ two integers, representing the
+_x_ and _y_ coordinates, _or_ a single "Point":point.html object. If a
+Point is passed in, one will be returned; if two integers are passed in,
+two co-ordinates will be returned.
 
 h3(#Window_close). Window#close
 
@@ -494,21 +479,9 @@ h4. Remarks
 
 Dialog units are used for maintaining a dialog's proportions even if the font changes.
 
-You can also use these functions programmatically. A convenience macro is defined:
-
-
-
- #define DLG_UNIT(parent, pt) parent->ConvertDialogToPixels(pt)
- 
-
-
 h4. See also
 
 "Window#convert_pixels_to_dialog":window.html#Window_convertpixelstodialog
-
-
-
-
 
 h3(#Window_convertpixelstodialog). Window#convert_pixels_to_dialog
 
@@ -531,9 +504,6 @@ Dialog units are used for maintaining a dialog's proportions even if the font ch
 h4. See also
 
 "Window#convert_dialog_to_pixels":window.html#Window_convertdialogtopixels
-
-
-
 
 h3(#Window_destroy). Window#destroy
 
@@ -1850,20 +1820,15 @@ h4. Parameters
 
 h3(#Window_screentoclient). Window#screen_to_client
 
-  *screen_to_client*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ x, y  *screen_to_client*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
  "Point":point.html *screen_to_client*(%(arg-type)Point% pt)
 
-Converts from screen to client window coordinates.
-
-h4. Parameters
-
-* _x_ Stores the screen x coordinate and receives the client x coordinate.
-* _y_ Stores the screen x coordinate and receives the client x coordinate.
-* _pt_ The screen position for the second form of the function.
-
-
-
+Converts from screen to client window coordinates. The method may be
+passed _either_ two integers, representing the _x_ and _y_ coordinates,
+_or_ a single "Point":point.html object. If a Point is passed in, one
+will be returned; if two integers are passed in, two co-ordinates will
+be returned.
 
 h3(#Window_scrolllines). Window#scroll_lines
 
