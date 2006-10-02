@@ -23,17 +23,16 @@ Visible Bugs
 	TextAttr.h
 	WindowDisabler.h
 
-- Other crashes: MDI
-
-- Other crashes (OS X): ColourDialog
-
 - SashWindows sashes not displaying until pulled (Linux)
+
+- ProgressDialog not working (Windows)
 
 - Splitters in bigdemo sometimes disappear when loading source (OS X)
 
 - Truncation/missing widgets in bigdemo (OS X)
 
-- Caret sample not working with unicode builds (OS X)
+- Caret sample not working with unicode builds, need to fix
+  KeyEvent#get_unicode _key (OS X)
 
 Underlying SWIG & Build system problems
 ---------------------------------------
@@ -52,12 +51,10 @@ Underlying SWIG & Build system problems
 
 - Fix all "can't return" warnings for non-pointer objects
 
-- Switch from CVS to darcs? (in progress)
-
 - Add detection of "initialize" methods to renamer.rb, and
   rename them to "init"
 
-- Add classes that were supported in wxruby 0.6
+- Add classes that were supported in wxruby 0.6.0
 
 - Try to get rid of compile warnings
 
@@ -71,19 +68,12 @@ Underlying SWIG & Build system problems
 (perhaps with a global runtime setting to say that all ruby strings
 should use local-encoding, UTF-8, or some other encoding)
 
-- Make sure samples/caret/caret.rb About box works (with copyright character)
-This should be done after the unicode fixes.
-
 - Should we automatically call init_all_image_handlers?
 
 - Clean up fixevents.rb code
 
 - Eliminate the list in parents.rb and just build the list automatically 
   from the wx header files
-  
-- Create rake target "version" that will update the version 
-  in the README, and the runtime version string
-
 
 ==================================================
 NOTE: The rest of this file is WAY out of date. 
@@ -92,9 +82,6 @@ Don't pay much attention to it.
 - Remove memory debug output
 
 - Add mark/free handling to typemap methods
-
-- Add support for overloaded constructors (and fix calendar sample)
-  - and fix cases in minimal.rb
   
 - NOTE: Any method that returns an object (rather 
   than an object reference or pointer) is currently 
@@ -104,10 +91,8 @@ Don't pay much attention to it.
 
 - Remove debugging output for director constructors/destructors
 
-- Compiling DC causes a ton of warnings, due to SWIG not 
-  initializing all the variables
-
-- Add aliases like label and label= for get_label and set_label
+- Add aliases like label and label= for get_label and set_label. Patch 
+  submitted, decide later whether to apply.
 
 - Problem classes:
 	rubyClass = rb_define_class_under(GetWxModule(),"ArtProvider", rb_cObject);
