@@ -82,7 +82,7 @@ puts("class #{wx_name}")
 				end
 				# Patch submitted for SWIG 1.3.30
 				if(line.index("if (strcmp(type->name, type_name) == 0) {"))
-					line = "        if (rb_obj_is_kind_of(obj, (((swig_class *) (type->clientdata))->klass))) {"
+                  line = "		if ( value != Qnil && rb_obj_is_kind_of(obj, sklass->klass) ) {"
 				end
 #TODO 1.3.30
 #			end
