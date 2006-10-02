@@ -1,3 +1,6 @@
+====0.0.36 tag on 2006-10-02 included all of this:===
+- Fix OS X crashes in bigdemo Menu and PopupMenu, for set_bitmap (Alex Fenton)
+- Update README and TODO (Alex Fenton)
 - Fix fixmodule obj tracking code for random crasher on OS X (Alex Fenton)
 - Use Scintilla for code viewer in bigdemo, if available (Roy Sutton)
 - Added SplashScreen class (Roy Sutton)
@@ -57,7 +60,7 @@
 - Fixed crasher in controls.rb due to deleted DC#free method (Alex Fenton)
 - Added licensing info to all samples (Alex Fenton/Kevin Smith)
 - Added SAMPLES-LICENSE.TXT (Kevin Smith/Alex Fenton)
-- Added ActivationEvent class, with a sample (Alex Fenton)
+- Added ActivateEvent class, with a sample (Alex Fenton)
 
 ====0.0.34 tag  on 2006-08-30 included all of this:===
 - Changed gemspec to "wxruby2-preview" version 0.0.34 (Alex Fenton)
