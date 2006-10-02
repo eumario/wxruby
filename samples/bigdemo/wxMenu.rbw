@@ -57,8 +57,15 @@ class MyFrame < Wx::Frame
 
         menu5 = Wx::Menu.new()
         # Show how to put an icon in the menu
-        item = Wx::MenuItem.new(menu5, 500, "&Smile!\tCtrl+S", "This one has an icon")
-        item.set_bitmap(Wx::Bitmap.new("./icons/wxwin16x16.xpm"))
+        item = Wx::MenuItem.new(menu5, 500, "&Smile!\tCtrl+S", 
+                                "This one has an icon")
+
+        # set_bitmap is only available on Windows and GTK
+        if item.respond_to?(:set_bitmap)
+          bmp_file = File.join( File.dirname(__FILE__), 
+                                'icons', 'wxwin16x16.xpm')
+          item.set_bitmap( Wx::Bitmap.new(bmp_file) )
+        end
         menu5.append_item(item)
 
         menu5.append(501, "Interesting thing\tCtrl+A", "Note the shortcut!")
