@@ -1,6 +1,6 @@
 README for wxruby2
-Version 0.0.34
-2006-08-26
+Version 0.0.36
+2006-10-02
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -9,7 +9,7 @@ It is released under a permissive MIT-style license
 
 *** NOTE ***
 This version is NOT VERY RELIABLE. At least on some platforms, it 
-crashes very often. Hopefully within a couple more releases 
+crashes quite often. Hopefully within a couple more releases 
 it will be stable again (at least as good as it was in 0.0.30, 
 if not better). The API, however, is already pretty stable.
 ************
@@ -95,9 +95,12 @@ if not better). The API, however, is already pretty stable.
    that wxPython also had to adopt due to language constraints. This 
    interface is a bit clumsy in spots, thanks to its long history.
    
-   Over time, we plan to create a Ruby-specific layer on top of the basic 
-   wx API, similar to what FXRuby has done for FOX. This enhanced API 
-   will be simpler to use, and will be oriented toward the Ruby Way.
+   Over time, we plan to create a Ruby-specific layer on top of the
+   basic wx API, similar to what FXRuby has done for FOX. This enhanced
+   API will be simpler to use, and will be oriented toward the 'Ruby
+   Way'. We have created the WxSugar sub-project as a testing ground for
+   syntax extensions and improvements; this is a pure-ruby project, and
+   can be used on top of wxruby2 (or wxruby 0.6.0).
    
 - I am getting an error trying to compile wxruby2
 
@@ -115,12 +118,14 @@ if not better). The API, however, is already pretty stable.
   have RUBYOPT=-rubygems. This can be done in .bashrc or /etc/environment, 
   depending on your distribution and preferences. [More details to follow].
   
-- Why aren't the wx network, file, date, and other non-GUI classes supported?
+- Why aren't the wx network, file, date, database and other non-GUI
+  classes supported?
 
-  Because Ruby has its own versions of each of them. We assume you are 
-  writing your application in Ruby, so it makes sense to keep as much code 
-  as possible in Ruby. We have only wrapped the wx classes that are necessary 
-  to write GUI code.
+  Because Ruby has its own versions of each of them, providing
+  cross-platform abstractions of these functions with familiar syntax
+  and methods. We assume you are writing your application in Ruby, so it
+  makes sense to keep as much code as possible in Ruby. We have only
+  wrapped the wx classes that are necessary to write GUI code.
   
 - Why has it taken so long for wxruby2 to be released?
 
@@ -142,9 +147,10 @@ For more details, see the project home page:
 ------------------------USING WXRUBY---------------------------
 INSTALLING:
 
-Starting with the 1.9-alpha release, wxRuby is available as binary 
-gems for MS Windows, Mac OS X, and Linux with GTK+ 2. We strongly 
-recommend installing the gem rather than building from source.
+Starting with the 0.0.35-preview release, wxRuby is available as binary
+gems for MS Windows, Mac OS X, and Linux with GTK+ 2. Unless you wish to
+work on wxRuby itself, we strongly recommend installing the gem rather
+than building from source.
 
 
 
@@ -180,10 +186,15 @@ DOCUMENTATION:
 
     http://wxruby.org/doc/
 	
-  (Note: This documentation is auto-generated from the C++ wxWidgets 
-   API docs. There are some broken links, and some sections which do 
-   not apply to ruby. The documentation is continually being improved.)
+   (Note: This documentation is auto-generated from the C++ wxWidgets API
+   docs. There are some broken links, some sample code in C++, and some
+   sections which do not apply to ruby. The documentation is continually
+   being improved.)
 
+- The latest version of the documentation can be downloaded from the
+  wxRuby 'Files' section on Rubyforge.
+
+  http://www.rubyforge.org/frs/?group_id=35
 
 - Tables summarizing which wx classes are and are not supported can 
   be found here:
