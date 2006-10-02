@@ -60,7 +60,11 @@ class TestPanel < Wx::Panel
         menu = Wx::Menu.new()
         # Show how to put an icon in the menu
         item = Wx::MenuItem.new(menu, @popupID1, "One")
-        item.set_bitmap(Wx::Bitmap.new("./icons/smiley.xpm"))
+        # set_bitmap is only available on GTK and Windows
+        if item.respond_to?(:set_bitmap)
+          bmp_file = File.join( File.dirname(__FILE__), 'icons', 'smiley.xpm')
+          item.set_bitmap( Wx::Bitmap.new(bmp_file) )
+        end
         menu.append_item(item)
         # add some other items
         menu.append(@popupID2, "Two")
