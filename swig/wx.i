@@ -9,6 +9,8 @@
 
 
 #include <wx/hashmap.h>
+#include <wx/gdicmn.h>
+#include <wx/image.h>
 
 WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
 WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
@@ -61,6 +63,9 @@ void GcFreefunc(void *)
 
     extern void InitializeOtherModules();
     InitializeOtherModules();
+    wxInitializeStockLists();
+    wxInitializeStockObjects();
+    wxInitAllImageHandlers();
 %}
 
 #define VERSION_STRING "wxRuby2"
