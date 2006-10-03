@@ -18,17 +18,13 @@ public:
 	 * \param const wxString&   
 	*/
 
-  wxColour* FindColour(const wxString&  colourName ) ;
-	/**
-	 * \brief Finds a colour name given the colour. Returns NULL if not found. 
-	 * \param const wxColour&  
-	*/
+   void AddColour(const wxString& colourName, const wxColour& colour) ;
 
-  wxString FindName(const wxColour&  colour ) const;
-	/**
-	 * \brief Initializes the database with a number of stock colours.  Called by wxWindows
-on start-up. 
-	*/
+    wxColour Find(const wxString& name) const;
+    wxString FindName(const wxColour& colour) const;
+
+    // add a new colour to the database
+    void AddColour(const wxString& name, const wxColour& colour);
 
   void Initialize() ;
 };
