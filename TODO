@@ -68,8 +68,6 @@ Underlying SWIG & Build system problems
 (perhaps with a global runtime setting to say that all ruby strings
 should use local-encoding, UTF-8, or some other encoding)
 
-- Should we automatically call init_all_image_handlers?
-
 - Clean up fixevents.rb code
 
 - Eliminate the list in parents.rb and just build the list automatically 
