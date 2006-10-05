@@ -1,3 +1,7 @@
+- init_all_image_handlers, init_stock_objects and init_stock_lists now
+  called automatically (Roy Sutton)
+- Fix prototypes in wxColourDatabase.h (Roy Sutton)
+
 ====0.0.36 tag on 2006-10-02 included all of this:===
 - Fix OS X crashes in bigdemo Menu and PopupMenu, for set_bitmap (Alex Fenton)
 - Update README and TODO (Alex Fenton)
