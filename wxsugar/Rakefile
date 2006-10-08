@@ -1,13 +1,24 @@
 require 'rake/packagetask'
+require 'rbconfig'
 
+# find the file where the version is stored
+VERSION_FILE = File.join %w|lib wx_sugar version.rb|
+
+# set the version from the environment variable
 if ENV['VERSION']
   WXSUGAR_VERSION = ENV['VERSION']
+  File.open(VERSION_FILE, 'w') do | version_file |
+    version_file.puts "module WxSugar"
+    version_file.puts "  VERSION = '#{WSUGAR_VERSION}'"
+    version_file.puts "end"
+  end
+# or load the version from the file
+elsif File.exists?(VERSION_FILE)
+  require VERSION_FILE
+  WXSUGAR_VERSION = WxSugar::VERSION
 else
-  raise "Cannot build a package or gem without a version number\n" +
-        "Please specify like VERSION=1.2.2"
+  WXSUGAR_VERSION = ''
 end
-
-          
 
 desc "Make a WxSugar gem"
 task :gem do
@@ -41,7 +52,6 @@ task :gem do
   Gem::Builder.new(wxsugar_gemspec).build
 end
 
-# TODO - version shouldn't be hardcoded - load from rake-created file instead
 Rake::PackageTask.new('wx_sugar', WXSUGAR_VERSION) do | p_task |
   p_task.need_tar_gz = true
   pkg_files = p_task.package_files
@@ -50,3 +60,15 @@ Rake::PackageTask.new('wx_sugar', WXSUGAR_VERSION) do | p_task |
   pkg_files.include('lib/**/*')
   pkg_files.include('samples/**/*')
 end
+
+
+desc 'Install the library'
+task :install do
+  cp_r 'lib/wx_sugar/', Config::CONFIG['sitelibdir']
+end
+
+desc 'Remove installed files'
+task :uninstall do
+  rm_r File.join(Config::CONFIG['sitelibdir'], 'wx_sugar')
+end
+
