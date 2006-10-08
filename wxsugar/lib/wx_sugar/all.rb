@@ -50,7 +50,14 @@
 # [menu.rb] 
 #  Create and update menus without a mess of system ids
 
+
 %w[ accessors delayed_constructors event_connector itemdata 
     keyword_constructors layout menu wx_classes ].each do | ext_feature |
   require 'wx_sugar/' + ext_feature    
 end 
+
+begin
+  require 'wx_sugar/version'
+rescue LoadError
+  WxSugar::VERSION = ''
+end
