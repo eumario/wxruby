@@ -96,9 +96,10 @@ module Arranger
       yield(self)
       @current_sizer = superior_sizer
       proportion = layout[:proportion] || 0
+      this_padding = padding || 0
       superior_sizer.add( a_sizer, proportion, 
                           Wx::EXPAND|Wx::ALL|Wx::ADJUST_MINSIZE,
-                         padding)
+                         this_padding)
 
       if layout[:padding]
         @padding = old_padding
