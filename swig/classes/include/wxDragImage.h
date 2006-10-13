@@ -20,7 +20,7 @@ public:
 	 * \param const wxPoint&   
 	*/
 
-   wxDragImage(const wxBitmap&  image , const wxCursor&  cursor = wxNullCursor, const wxPoint&  cursorHotspot = wxPoint(0,) ;
+   wxDragImage(const wxBitmap&  image , const wxCursor& cursor = wxNullCursor);
 	/**
 	 * \brief Constructs a drag image from an icon and optional cursor.
 
@@ -30,7 +30,7 @@ public:
 	 * \param const wxPoint&   
 	*/
 
-   wxDragImage(const wxIcon&  image , const wxCursor&  cursor = wxNullCursor, const wxPoint&  cursorHotspot = wxPoint(0,) ;
+   wxDragImage(const wxIcon&  image , const wxCursor&  cursor = wxNullCursor);
 	/**
 	 * \brief Constructs a drag image from a text string and optional cursor.
 
@@ -40,7 +40,7 @@ public:
 	 * \param const wxPoint&   
 	*/
 
-   wxDragImage(const wxString&  text , const wxCursor&  cursor = wxNullCursor, const wxPoint&  cursorHotspot = wxPoint(0,) ;
+   wxDragImage(const wxString&  text , const wxCursor&  cursor = wxNullCursor);
 	/**
 	 * \brief Constructs a drag image from the text in the given tree control item, and optional cursor.
 
@@ -67,7 +67,9 @@ supplies   and  .
 	 * \param const wxPoint&   
 	*/
 
-   wxDragImage(const wxCursor&  cursor = wxNullCursor, const wxPoint&  cursorHotspot = wxPoint(0,) ;
+#if !defined(__WXMSW__) || defined(__WXUNIVERSAL__)
+   wxDragImage(const wxCursor&  cursor = wxNullCursor);
+#endif
 	/**
 	 * \brief Start dragging the image, in a window or full screen. 
 	 * \param const wxPoint&   
@@ -104,7 +106,9 @@ you must also override  .
 	 * \param const wxPoint&  
 	*/
 
+#if !defined(__WXMSW__) || defined(__WXUNIVERSAL__)
   virtual bool DoDrawImage(wxDC&  dc , const wxPoint&  pos ) ;
+#endif
 	/**
 	 * \brief Call this when the drag has finished.
 
@@ -121,7 +125,9 @@ This function is available in wxGenericDragImage only, and may be overridden (to
 	 * \param const wxPoint&  
 	*/
 
+#if !defined(__WXMSW__) || defined(__WXUNIVERSAL__)
   virtual wxRect GetImageRect(const wxPoint&  pos ) const;
+#endif
 	/**
 	 * \brief Hides the image. You may wish to call this before updating the window
 contents (perhaps highlighting an item). Then call   
@@ -166,7 +172,9 @@ This function is available in wxGenericDragImage only.
 	 * \param const wxRect&  
 	*/
 
+#if !defined(__WXMSW__) || defined(__WXUNIVERSAL__)
   bool UpdateBackingFromWindow(wxDC&  windowDC , wxMemoryDC&  destDC , const wxRect&  sourceRect , const wxRect&  destRect ) const;
+#endif
 };
 
 
