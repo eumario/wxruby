@@ -291,8 +291,5 @@ class CaretApp < App
   end
 end
 
-# ensure handlers for xpm images are loaded
-Wx::init_all_image_handlers
-
 a = CaretApp.new
 a.main_loop

@@ -91,12 +91,6 @@ class XrcApp < Wx::App
 
 	def on_init
 		#
-		# Xrc dialogs can load images, so it's good to have
-		# this line before loading a resource file
-		#
-		Wx::init_all_image_handlers()
-	
-		#
 		# Create a resource handler
 		#
 		$xml = Wx::XmlResource.get();

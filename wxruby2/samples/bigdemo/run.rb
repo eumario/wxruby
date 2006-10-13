@@ -57,9 +57,6 @@ class MinimalApp < Wx::App
   end
 end
 
-# ensure handlers for xpm images are loaded
-Wx::init_all_image_handlers()
-
 def run(sample)
   app = MinimalApp.new(sample)
   app.main_loop()

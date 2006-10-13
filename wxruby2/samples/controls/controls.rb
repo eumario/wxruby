@@ -1170,6 +1170,5 @@ if(!File.exists?('icons') || !File.directory?('icons'))
 	exit(1)
 end
 
-init_all_image_handlers
 a = MyApp.new
 a.main_loop
