@@ -81,9 +81,6 @@ class MinimalApp < Wx::App
   end
 end
 
-# ensure handlers for xpm images are loaded
-Wx::init_all_image_handlers()
-
 # Create an instance ...
 app = MinimalApp.new
 # ... and run the application

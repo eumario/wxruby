@@ -731,6 +731,5 @@ class DemoApp < Wx::App
   end
 end
 
-Wx::init_all_image_handlers
 demo = DemoApp.new
 demo.main_loop

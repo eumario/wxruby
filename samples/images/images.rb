@@ -36,6 +36,5 @@ class ImagesApp < Wx::App
   end
 end
 
-Wx::init_all_image_handlers
 a = ImagesApp.new
 a.main_loop()
