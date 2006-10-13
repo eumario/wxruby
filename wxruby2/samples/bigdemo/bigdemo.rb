@@ -170,7 +170,7 @@ $tree_list = [
     #    'Throbber',
         'wxArtProvider',
         'wxCursor',
-    #    'wxDragImage',
+        'wxDragImage',
     #    'wxImage',
     #    'wxImageFromStream',
     #    'wxMask',
