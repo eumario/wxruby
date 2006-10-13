@@ -1,3 +1,8 @@
+- Removed SWIG virtual feature from rakewx.rb for SWIG 1.3.30 compatibility
+  (Roy Sutton)
+- Remove obsolete calls to init_all_image_handlers (Roy Sutton)
+- DragImage class and sample added (Alex Fenton)
+- StdDialogButtonSizer class added (Alex Fenton)
 - init_all_image_handlers, init_stock_objects and init_stock_lists now
   called automatically (Roy Sutton)
 - Fix prototypes in wxColourDatabase.h (Roy Sutton)
