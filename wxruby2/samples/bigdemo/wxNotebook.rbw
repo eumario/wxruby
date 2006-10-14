@@ -1,4 +1,15 @@
-require 'wx'
+#!/usr/bin/env ruby
+
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 # added this class so that the panel in each NB tab can respond to size events and properly size each nb page - otherwise 
 # NB pages that contain the colored windows won't properly size themseleves

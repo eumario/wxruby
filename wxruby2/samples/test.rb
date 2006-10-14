@@ -1,7 +1,17 @@
+#!/usr/bin/env ruby
 #   Copyright 2004-2005 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
-require 'wx'
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 #Wx::entry
 
