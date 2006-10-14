@@ -1,7 +1,17 @@
+#!/usr/bin/env ruby
 # wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
 
-require 'wx'
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 # This example lists the various system settings that WxRuby knows
 # about. To use it, run it and use the 'View' menu to list the different

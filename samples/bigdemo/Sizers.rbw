@@ -1,4 +1,15 @@
-require 'wx'
+#!/usr/bin/env ruby
+
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 def make_simple_box1(win)
     box = Wx::BoxSizer.new(Wx::HORIZONTAL)

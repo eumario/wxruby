@@ -1,6 +1,15 @@
-#There are some problems here - the evt_command_find_xxx mthose
+#!/usr/bin/env ruby
 
-require 'wx'
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 class TestPanel < Wx::Panel
     def initialize(parent, log)

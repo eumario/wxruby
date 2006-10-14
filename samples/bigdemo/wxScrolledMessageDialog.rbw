@@ -1,4 +1,15 @@
-require 'wx'
+#!/usr/bin/env ruby
+
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 class ScrolledMessageDialog < Wx::Dialog
     def initialize(parent, msg, caption, pos = Wx::DEFAULT_POSITION, size = Wx::Size.new(500,300))

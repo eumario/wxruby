@@ -1,4 +1,15 @@
-require 'wx'
+#!/usr/bin/env ruby
+
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 $wildcard = "Ruby Source (*.rb)|*.rb|RubyW Source (*.rbw)|*.rbw|SPAM files (*.spam)|*.spam|Egg file (*.egg)|*.egg|All Files (*.*)|*.*"
 

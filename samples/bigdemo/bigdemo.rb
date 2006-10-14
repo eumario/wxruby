@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # Demo created by Robert Carlin, 
 #  based on the wxPython demo by Robin Dunn
 #  Modified a bit by Kevin Smith and Roy Sutton
@@ -8,10 +9,18 @@
 #    Refactor editor pane
 #    More samples
 #    Finish 'rubification' of source
-#    Find out why expanding/collapsing a node deletes a character in scintilla
 #    Fix non-scintilla code viewer
 
-require 'wx'
+begin
+  require 'wx'
+rescue LoadError => no_wx_err
+  begin
+    require 'rubygems'
+    require 'wx'
+  rescue LoadError
+    raise no_wx_err
+  end
+end
 
 MENU_EXIT = 100
 TREE_ID = 101
