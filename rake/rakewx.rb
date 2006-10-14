@@ -30,6 +30,7 @@ $optional_dir = File.join($classes_dir, 'optional')
 $optional_h_dir = File.join($optional_dir, 'include')
 
 $swig_cmd = "swig"
+$swig_options = ''
 $swig_minimum_version = '1.3.29'
 
 # force building against either a release build or debug build of
