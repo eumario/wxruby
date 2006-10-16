@@ -26,7 +26,7 @@ void GcMapPtrToValue(void *ptr, VALUE val)
         rb_global_variable(&GcRubyHash);
         GcRubyHash = rb_hash_new();
     }
-    rb_hash_aset(GcRubyHash, INT2NUM((int)ptr), val);
+    rb_hash_aset(GcRubyHash, INT2NUM((long)ptr), val);
 }
 
 VALUE GcGetValueFromPtr(void *ptr)
@@ -36,7 +36,7 @@ VALUE GcGetValueFromPtr(void *ptr)
         rb_global_variable(&GcRubyHash);
         GcRubyHash = rb_hash_new();
     }
-    return rb_hash_aref(GcRubyHash, INT2NUM((int)ptr));
+    return rb_hash_aref(GcRubyHash, INT2NUM((long)ptr));
 }
 
 void GcMarkDeleted(void *ptr)
