@@ -219,6 +219,7 @@ the user's resizing of frames and containers.
 |GridBagSizer|Another grid sizer that lets you specify the cell an item is in, and items can span rows and/or columns.|
 |BoxSizer|A sizer for laying out windows in a row or column|
 |StaticBoxSizer|Same as wxBoxSizer, but with a surrounding static box|
+|StdDialogButtonSizer|Sizer for arranging buttons on a dialog, in platform-standard order|
 
 "top":#top
 
@@ -258,6 +259,7 @@ These classes are related to drawing on device contexts and windows.
 |Font|Represents fonts|
 |FontList|The list of previously-created fonts|
 |Icon|A small, transparent bitmap for assigning to frames and drawing on device contexts|
+|IconBundle|A group of similar icons of different sizes|
 |Image|A platform-independent image class|
 |ImageList|A list of images, used with some controls|
 |Mask|Represents a mask to be used with a bitmap for transparent drawing|
@@ -398,11 +400,14 @@ h2(#misc). Miscellaneous
 |App|Application class|
 |Caret|A caret (cursor) object|
 |Config|Classes for configuration reading/writing (using either INI files or registry)|
+|DragImage|An image that can be dragged across windows|
 |GLCanvas|Canvas that you can render OpenGL calls to.|
 |GLContext|Class to ease sharing of OpenGL data resources.|
 |LayoutAlgorithm|An alternative window layout facility|
 |Process|Process class|
 |Timer|Timer class|
+|TaskBarIcon|Icon that appears in the task bar, system tray or dock, and
+can have a popup menu|
 |StopWatch|Stop watch class|
 |MimeTypesManager|MIME-types manager class|
 |SystemSettings|System settings class for obtaining various global parameters|
