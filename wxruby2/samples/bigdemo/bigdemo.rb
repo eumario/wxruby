@@ -234,6 +234,8 @@ class WxRubyDemo < Wx::Frame
         icon_file = File.join(File.dirname(__FILE__), 'icons', 'mondrian.xpm')
         icon = Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_XPM)
         set_icon(icon)
+
+        @tbicon = DemoTaskBarIcon.new(self)
         
         evt_idle {|event| on_idle(event)}
         evt_close {|event| on_close(event)}
@@ -377,6 +379,7 @@ class WxRubyDemo < Wx::Frame
     end
     
     def on_close(event)
+        @tbicon.remove_icon
         destroy()
         exit()
     end
@@ -728,6 +731,85 @@ class WxRubyDemo < Wx::Frame
     def modified_filename
       File.join(File.dirname(@filename), "modified", File.basename(@filename))
     end
+end
+
+class DemoTaskBarIcon < Wx::TaskBarIcon
+  # TODO: Need a new_id function like wxPython has
+  TBMENU_RESTORE = 6000
+  TBMENU_CLOSE = 6001
+  TBMENU_CHANGE = 6002
+  TBMENU_REMOVE = 6003
+
+  def initialize(frame)
+    super()
+
+    @frame = frame
+
+    # starting image
+    icon = make_icon('ruby.png')
+    set_icon(icon, 'wxRuby Demo')
+    @image_index = 1
+
+    # TODO - events; evt_taskbar_left_dclick not avail?
+    # evt_taskbar_left_dclick  {|evt| on_taskbar_activate(evt) }
+    
+    evt_menu(TBMENU_RESTORE) {|evt| on_taskbar_activate(evt) }
+    evt_menu(TBMENU_CLOSE)   { @frame.close }
+    evt_menu(TBMENU_CHANGE)  {|evt| on_taskbar_change(evt) }
+    evt_menu(TBMENU_REMOVE)  { remove_icon }
+  end
+
+  def create_popup_menu
+    # Called by the base class when it needs to popup the menu
+    #  (the default evt_right_down event).  Create and return
+    #  the menu to display.
+    menu = Wx::Menu.new
+    menu.append(TBMENU_RESTORE, "Restore wxRuby Demo")
+    menu.append(TBMENU_CLOSE,   "Close wxRuby Demo")
+    menu.append_separator
+    menu.append(TBMENU_CHANGE,  "Change the TB Icon")
+    menu.append(TBMENU_REMOVE,  "Remove the TB Icon")
+    return menu
+  end
+
+  def make_icon(imgname)
+    # Different platforms have different requirements for the
+    #  taskbar icon size
+    filename = File.join( File.dirname(__FILE__), 'icons', imgname )
+    img = Wx::Image.new(filename)
+    if Wx::PLATFORM == "WXMSW"
+      img = img.scale(16, 16)
+    elsif Wx::PLATFORM == "WXGTK"
+      img = img.scale(22, 22)
+    end
+    # WXMAC can be any size up to 128x128, so don't scale
+    icon = Wx::Icon.new
+    icon.copy_from_bitmap(Wx::Bitmap.new(img))
+    return icon
+  end
+
+  def on_taskbar_activate(evt)
+    if @frame.is_iconized
+      @frame.iconize(false)
+    end
+    if not @frame.is_shown
+      @frame.show(true)
+    end
+    @frame.raise
+  end
+
+  def on_taskbar_change(evt)
+    names = [ "ruby.png", "wxwin16x16.xpm", "smiles.xpm", "mondrian.xpm" ]
+    name = names[@image_index]
+    @image_index += 1
+    if @image_index >= names.length
+      @image_index = 0
+    end
+
+    icon = make_icon(name)
+    set_icon(icon, 'This is a new icon: ' + name)
+  end
+
 end
 
 class DemoApp < Wx::App
