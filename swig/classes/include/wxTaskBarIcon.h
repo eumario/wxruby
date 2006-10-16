@@ -47,6 +47,10 @@ a class derived from wxTaskBarIcon.
 	*/
 
   bool SetIcon(const wxIcon&  icon , const wxString&  tooltip ) ;
+
+ protected:
+  // Override to return a menu on right-click
+  virtual wxMenu* CreatePopupMenu();
 };
 
 
