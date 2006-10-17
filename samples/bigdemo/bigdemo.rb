@@ -396,8 +396,10 @@ class WxRubyDemo < Wx::Frame
     
     def on_tree_sel_changed(event)
         item = event.get_item()
-        itemText = @tree.get_item_text(item)
-        run_demo(itemText)
+        if item.is_ok
+          itemText = @tree.get_item_text(item)
+          run_demo(itemText)
+        end
     end
     
     def on_tree_left_down(event)
@@ -750,8 +752,8 @@ class DemoTaskBarIcon < Wx::TaskBarIcon
     set_icon(icon, 'wxRuby Demo')
     @image_index = 1
 
-    # TODO - events; evt_taskbar_left_dclick not avail?
-    # evt_taskbar_left_dclick  {|evt| on_taskbar_activate(evt) }
+    # events
+    evt_taskbar_left_dclick  {|evt| on_taskbar_activate(evt) }
     
     evt_menu(TBMENU_RESTORE) {|evt| on_taskbar_activate(evt) }
     evt_menu(TBMENU_CLOSE)   { @frame.close }
