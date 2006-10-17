@@ -25,7 +25,7 @@ h2. Methods
 * "PreviewFrame.new":#PreviewFrame_new
 * "PreviewFrame#create_control_bar":#PreviewFrame_createcontrolbar
 * "PreviewFrame#create_canvas":#PreviewFrame_createcanvas
-* "PreviewFrame#initialize":#PreviewFrame_initialize
+* "PreviewFrame#init":#PreviewFrame_init
 * "PreviewFrame#on_close_window":#PreviewFrame_onclosewindow
 
 </div>
@@ -61,16 +61,21 @@ h3(#PreviewFrame_createcanvas). PreviewFrame#create_canvas
 Creates a PreviewCanvas. Override this function to allow
 a user-defined preview canvas object to be created.
 
-h3(#PreviewFrame_initialize). PreviewFrame#initialize
+h3(#PreviewFrame_init). PreviewFrame#init
 
-  *initialize*()
+  *init*()
 
 Creates the preview canvas and control bar, and calls
-Window::MakeModal(true) to disable other top-level windows
+Window::make_modal(true) to disable other top-level windows
 in the application.
 
 This function should be called by the application prior to
 showing the frame.
+
+h4. Remarks
+
+This method is called *initialize*() in the C++ implementation of wxWidgets in wxRuby
+this had to be changed to *init*() because of the conflict with Ruby's built in *initialize*().
 
 h3(#PreviewFrame_onclosewindow). PreviewFrame#on_close_window
 
