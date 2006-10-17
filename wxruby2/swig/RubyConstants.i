@@ -17,6 +17,7 @@
 #include <wx/laywin.h>
 #include <wx/imagbmp.h>
 #include <wx/sashwin.h>
+#include <wx/prntbase.h>
 
 
 // All of these exist on only one platform, so in those
@@ -1316,6 +1317,13 @@ enum wxPrintMode
     wxPRINT_MODE_FILE =    2,   // Print to file
     wxPRINT_MODE_PRINTER = 3,   // Send to printer
     wxPRINT_MODE_STREAM =  4    //  Send postscript data into a stream
+};
+
+enum wxPrinterError
+{
+    wxPRINTER_NO_ERROR = 0,
+    wxPRINTER_CANCELLED,
+    wxPRINTER_ERROR
 };
 
 //  ---------------------------------------------------------------------------- 

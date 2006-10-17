@@ -4,8 +4,6 @@
 typedef int wxWindowID;
 typedef int wxCoord;
 typedef int wxEventType;
-//typedef int wxEdge;
-//typedef int wxRelationship;
 enum wxBitmapType;
 typedef short int WXTYPE;
 enum wxCalendarHitTestResult;
@@ -16,3 +14,9 @@ typedef wxString wxArtClient;
 typedef wxString wxArtID;
 enum wxBackgroundStyle;
 enum wxTreeItemIcon;
+enum wxDuplexMode;
+enum wxPrintMode;
+enum wxPrinterError;
+enum wxTextCtrlHitTestResult;
+enum wxTextAttrAlignment;
+enum wxSashDragStatus;
