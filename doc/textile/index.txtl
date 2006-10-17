@@ -131,7 +131,7 @@ These are small windows which provide interaction with the user.
 |StaticBox|A static, or group box for visually grouping related controls|
 |ListBox|A list of strings for single or multiple selection|
 |ListCtrl|A control for displaying lists of strings and/or icons, plus a multicolumn report view|
-|ListView|A simpler interface (fa¹Âde for wxListCtrl in report mode|
+|ListView|A simpler interface (faÂ¹Ã‚de for wxListCtrl in report mode|
 |TextCtrl|Single or multiline text editing control|
 |TreeCtrl|Tree (hierarchy) control|
 |ScrollBar|Scrollbar control|
@@ -310,8 +310,7 @@ ported to Ruby.
 h2(#printing). Printing framework
 
 A printing and previewing framework is implemented to make it relatively
-straightforward to provide document printing facilities. This part of
-wxWidgets is not yet available in wxRuby but would be nice to have.
+straightforward to provide document printing facilities.
 
 |PreviewFrame|Frame for displaying a print preview|
 |PreviewCanvas|Canvas for displaying a print preview|
