@@ -18,6 +18,11 @@ public:
     virtual wxDC* PrintDialog(wxWindow *parent);
 
     virtual wxPrintDialogData& GetPrintDialogData() const;
+
+    bool GetAbort() const { return sm_abortIt; }
+
+    static wxPrinterError GetLastError() { return sm_lastError; }
+
 };
 
 
