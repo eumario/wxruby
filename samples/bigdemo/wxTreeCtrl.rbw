@@ -63,34 +63,36 @@ class TestTreeCtrlPanel < Wx::Panel
         
         @tree = MyTreeCtrl.new(self, tID, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TR_HAS_BUTTONS | Wx::TR_EDIT_LABELS, @log)
         
-      # NB - ArtProvider methods are currently unsupported - so
-      # temporarily commented out (AFF - 22 Aug 2006)
-#        isz = Wx::Size.new(16,16)
-#        il = Wx::ImageList.new(16,16)
-#        fldridx = il.add(Wx::ArtProvider::get_icon(Wx::ART_FOLDER, Wx::ART_OTHER, isz))
-#        fldropenidx = il.add(Wx::ArtProvider::get_icon(Wx::ART_FILE_OPEN, Wx::ART_OTHER, isz))
-#ŽÛ        fileidx = il.add(Wx::ArtProvider::get_icon(Wx::ART_REPORT_VIEW, Wx::ART_OTHER, isz))
-#        smileidx = il.add(Wx::Bitmap.new("./icons/wxwin16x16.xpm"))
+        isz = Wx::Size.new(16,16)
+        il = Wx::ImageList.new(16,16)
+        bm = Wx::Bitmap.new
+        bm.copy_from_icon(Wx::ArtProvider::get_icon(Wx::ART_FOLDER, Wx::ART_OTHER, isz))
+        fldridx = il.add(bm)
+        bm.copy_from_icon(Wx::ArtProvider::get_icon(Wx::ART_FILE_OPEN, Wx::ART_OTHER, isz))
+        fldropenidx = il.add(bm)
+        bm.copy_from_icon(Wx::ArtProvider::get_icon(Wx::ART_FILE_OPEN, Wx::ART_OTHER, isz))
+        fileidx = il.add(bm)
+        smileidx = il.add(Wx::Bitmap.new("./icons/wxwin16x16.xpm"))
         
-#        @tree.set_image_list(il)
-#        @il = il
+        @tree.set_image_list(il)
+        @il = il
         
         @root = @tree.add_root("The Root Item")
-#        @tree.set_item_image(@root, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
-#        @tree.set_item_image(@root, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
+        @tree.set_item_image(@root, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
+        @tree.set_item_image(@root, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
         
         0.upto(15) do |x|
             child = @tree.append_item(@root, "Item " + x.to_s())
-#            @tree.set_item_image(child, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
-#            @tree.set_item_image(child, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
+            @tree.set_item_image(child, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
+            @tree.set_item_image(child, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
             0.upto(4) do |y|
                 last = @tree.append_item(child, "item " + x.to_s() + "-" + (?a + y).chr)
-#                @tree.set_item_image(last, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
-#                @tree.set_item_image(last, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
+                @tree.set_item_image(last, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
+                @tree.set_item_image(last, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
                 0.upto(4) do |z|
                     item = @tree.append_item(last, "item " + x.to_s() + "-" + (?a + y).chr + "-" + z.to_s())
-#                    @tree.set_item_image(item, fileidx, Wx::TREE_ITEM_ICON_NORMAL)
-#                    @tree.set_item_image(item, smileidx, Wx::TREE_ITEM_ICON_SELECTED)
+                    @tree.set_item_image(item, fileidx, Wx::TREE_ITEM_ICON_NORMAL)
+                    @tree.set_item_image(item, smileidx, Wx::TREE_ITEM_ICON_SELECTED)
                 end
             end
         end
@@ -156,10 +158,12 @@ class TestTreeCtrlPanel < Wx::Panel
     
     def on_sel_changed(event)
         @item = event.get_item()
-        @log.write_text("on_sel_changed: " + @tree.get_item_text(@item))
-        # if Wx::PLATFORM == "WXMSW"
-            #@log.write_text("BoundingRect: " + @tree.get_bounding_rect(@item))
-        #end
+        if @item.is_ok
+            @log.write_text("on_sel_changed: " + @tree.get_item_text(@item))
+            # if Wx::PLATFORM == "WXMSW"
+                #@log.write_text("BoundingRect: " + @tree.get_bounding_rect(@item))
+            #end
+        end
         event.skip()
     end
     
