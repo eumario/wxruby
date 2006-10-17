@@ -1,15 +1,19 @@
+#!/usr/bin/env ruby
+# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
+
 require 'wx'
 
-WXPRINT_QUIT           = 100
-WXPRINT_PRINT          = 101
-WXPRINT_PAGE_SETUP     = 103
-WXPRINT_PREVIEW        = 104
+WXPRINT_QUIT           = Wx::ID_EXIT
+WXPRINT_PRINT          = Wx::ID_PRINT
+WXPRINT_PAGE_SETUP     = Wx::ID_PRINT_SETUP
+WXPRINT_PREVIEW        = Wx::ID_PREVIEW
 
 WXPRINT_PRINT_PS       = 105
 WXPRINT_PAGE_SETUP_PS  = 107
 WXPRINT_PREVIEW_PS     = 108
 
-WXPRINT_ABOUT          = 109
+WXPRINT_ABOUT          = Wx::ID_ABOUT
 
 WXPRINT_ANGLEUP        = 110
 WXPRINT_ANGLEDOWN      = 111
@@ -54,10 +58,8 @@ class MyFrame < Wx::Frame
 
     dc.draw_text( "Test message: this is in 10 point text", 10, 180)
 
-#if wxUSE_UNICODE
     test = "Hebrew    שלום -- Japanese (日本語)"
     dc.draw_text( test, 10, 200 )
-#endif
 
     points = []
     points << Wx::Point.new(0,0)
@@ -126,9 +128,9 @@ class MyFrame < Wx::Frame
   end
   
   def on_print(event)
-    printDialogData = Wx::PrintDialogData.new(Wx::get_app.print_data)
+    print_dialog_data = Wx::PrintDialogData.new(Wx::get_app.print_data)
 
-    printer = Wx::Printer.new(printDialogData)
+    printer = Wx::Printer.new(print_dialog_data)
     printout = MyPrintout.new("My printout")
     if (!printer.print(self, printout, true))
         if (Wx::Printer.get_last_error == Wx::PRINTER_ERROR)
@@ -143,8 +145,8 @@ class MyFrame < Wx::Frame
   
   def on_print_preview(event)
     # Pass two printout objects: for preview, and possible printing.
-    printDialogData = Wx::PrintDialogData.new(Wx::get_app.print_data)
-    preview = Wx::PrintPreview.new(MyPrintout.new, MyPrintout.new, printDialogData)
+    print_dialog_data = Wx::PrintDialogData.new(Wx::get_app.print_data)
+    preview = Wx::PrintPreview.new(MyPrintout.new, MyPrintout.new, print_dialog_data)
     if (!preview.ok)
         #delete preview;
         Wx::message_box("There was a problem previewing.\nPerhaps your current printer is not set correctly?", "Previewing", Wx::OK)
@@ -159,14 +161,11 @@ class MyFrame < Wx::Frame
   
   def on_page_setup(event)
     Wx::get_app.page_setup_data = Wx::PageSetupDialogData.new(Wx::get_app.print_data)
-    pageSetupDialog = Wx::PageSetupDialog.new(self, Wx::get_app.page_setup_data)
-#    pageSetupDialog = Wx::PageSetupDialog.new(self)
-    pageSetupDialog.show_modal
+    page_setup_dialog = Wx::PageSetupDialog.new(self, Wx::get_app.page_setup_data)
+    page_setup_dialog.show_modal
 
-
-    Wx::get_app.print_data = pageSetupDialog.get_page_setup_data.get_print_data
+    Wx::get_app.print_data = page_setup_dialog.get_page_setup_data.get_print_data
     Wx::get_app.page_setup_data = Wx::PageSetupDialogData.new(Wx::get_app.print_data)
-#    Wx::get_app.page_setup_data = pageSetupDialog.get_page_setup_data    
   end
 
   def on_exit(event)
@@ -223,8 +222,8 @@ class MyPrintout < Wx::Printout
     end
   end
   
-  def on_begin_document(startPage,endPage)
-    go_ahead = super(startPage, endPage)
+  def on_begin_document(start_page,end_page)
+    go_ahead = super(start_page, end_page)
     if (!go_ahead)
         return false
     end
@@ -236,11 +235,11 @@ class MyPrintout < Wx::Printout
   end
   
   def get_page_info
-    minPage = 1
-    maxPage = 2
-    selPageFrom = 1
-    selPageTo = 2
-    [minPage,maxPage,selPageFrom,selPageTo]
+    min_page = 1
+    max_page = 2
+    sel_page_from = 1
+    sel_page_to = 2
+    [min_page,max_page,sel_page_from,sel_page_to]
   end
 
   def draw_page_one(dc)
@@ -249,39 +248,39 @@ class MyPrintout < Wx::Printout
 
     # We know the graphic is 200x200. If we didn't know this,
     # we'd need to calculate it.
-    maxX = 200
-    maxY = 200
+    max_x = 200
+    max_y = 200
 
     # Let's have at least 50 device units margin
-    marginX = 50
-    marginY = 50
+    margin_x = 50
+    margin_y = 50
 
     # Add the margin to the graphic size
-    maxX += (2*marginX)
-    maxY += (2*marginY)
+    max_x += (2*margin_x)
+    max_y += (2*margin_y)
 
     # Get the size of the DC in pixels
     w, h = dc.get_size
 
     # Calculate a suitable scaling factor
-    scaleX=(w/maxX)
-    scaleY=(h/maxY)
+    scale_x=(w/max_x)
+    scale_y=(h/max_y)
 
     # Use x or y scaling factor, whichever fits on the DC
     #actualScale = Wx::min(scaleX,scaleY)
-    if scaleX < scaleY
-      actualScale = scaleX
+    if scale_x < scale_y
+      actual_scale = scale_x
     else
-      actualScale = scaleY
+      actual_scale = scale_y
     end
 
     # Calculate the position on the DC for centring the graphic
-    posX = ((w - (200*actualScale))/2.0)
-    posY = ((h - (200*actualScale))/2.0)
+    pos_x = ((w - (200*actual_scale))/2.0)
+    pos_y = ((h - (200*actual_scale))/2.0)
 
     # Set the scale and origin
-    dc.set_user_scale(actualScale, actualScale)
-    dc.set_device_origin( posX.to_i, posY.to_i )
+    dc.set_user_scale(actual_scale, actual_scale)
+    dc.set_device_origin( pos_x.to_i, pos_y.to_i )
 
     Wx::get_app.frame.draw(dc)
   end
@@ -292,26 +291,26 @@ class MyPrintout < Wx::Printout
     # 5cm on the page.
 
     # Get the logical pixels per inch of screen and printer
-    ppiScreenX, ppiScreenY = get_ppi_screen
-    ppiPrinterX, ppiPrinterY = get_ppi_printer
+    ppi_screen_x, ppi_screen_y = get_ppi_screen
+    ppi_printer_x, ppi_printer_y = get_ppi_printer
 
     # This scales the DC so that the printout roughly represents the
     # the screen scaling. The text point size _should_ be the right size
     # but in fact is too small for some reason. This is a detail that will
     # need to be addressed at some point but can be fudged for the
     # moment.
-    scale = (ppiPrinterX/ppiScreenX)
+    scale = (ppi_printer_x/ppi_screen_x)
 
     # Now we have to check in case our real page size is reduced
     # (e.g. because we're drawing to a print preview memory DC)
-    pageWidth, pageHeight = get_page_size_pixels
+    page_width, page_height = get_page_size_pixels
     w, h = dc.get_size
     
 
     # If printer pageWidth == current DC width, then this doesn't
     # change. But w might be the preview bitmap width, so scale down.
-    overallScale = scale * (w/pageWidth)
-    dc.set_user_scale(overallScale, overallScale)
+    overall_scale = scale * (w/page_width)
+    dc.set_user_scale(overall_scale, overall_scale)
 
     # Calculate conversion factor for converting millimetres into
     # logical units.
@@ -322,11 +321,11 @@ class MyPrintout < Wx::Printout
     # unscale to pass logical units to DrawLine.
 
     # Draw 50 mm by 50 mm L shape
-    logUnitsFactor = (ppiPrinterX/(scale*25.4))
-    logUnits = (50*logUnitsFactor)
+    log_units_factor = (ppi_printer_x/(scale*25.4))
+    log_units = (50*log_units_factor)
     dc.set_pen(Wx::BLACK_PEN)
-    dc.draw_line(50, 250, (50.0 + logUnits).to_i, 250)
-    dc.draw_line(50, 250, 50, (250.0 + logUnits).to_i)
+    dc.draw_line(50, 250, (50.0 + log_units).to_i, 250)
+    dc.draw_line(50, 250, 50, (250.0 + log_units).to_i)
 
     dc.set_background_mode(Wx::TRANSPARENT)
     dc.set_brush(Wx::TRANSPARENT_BRUSH)
@@ -352,48 +351,46 @@ class MyPrintout < Wx::Printout
 
     dc.draw_text("Some test text", 200, 300 )
 
-    # TESTING
+    left_margin = 20
+    right_margin = 20
+    top_margin = 20
+    bottom_margin = 20
 
-    leftMargin = 20
-    rightMargin = 20
-    topMargin = 20
-    bottomMargin = 20
+    page_width_mm, page_height_mm = get_page_size_mm
 
-    pageWidthMM, pageHeightMM = get_page_size_mm
-
-    leftMarginLogical = (logUnitsFactor*leftMargin)
-    topMarginLogical = (logUnitsFactor*topMargin)
-    bottomMarginLogical = (logUnitsFactor*(pageHeightMM - bottomMargin))
-    rightMarginLogical = (logUnitsFactor*(pageWidthMM - rightMargin))
+    left_margin_logical = (log_units_factor*left_margin).to_i
+    top_margin_logical = (log_units_factor*top_margin).to_i
+    bottom_margin_logical = (log_units_factor*(page_height_mm - bottom_margin)).to_i
+    right_margin_logical = (log_units_factor*(page_width_mm - right_margin)).to_i
 
     dc.set_pen(Wx::RED_PEN)
-    dc.draw_line( leftMarginLogical.to_i, topMarginLogical.to_i,
-        rightMarginLogical.to_i, topMarginLogical.to_i)
-    dc.draw_line( leftMarginLogical.to_i, bottomMarginLogical.to_i,
-        rightMarginLogical.to_i,  bottomMarginLogical.to_i)
+    dc.draw_line( left_margin_logical, top_margin_logical,
+                  right_margin_logical, top_margin_logical)
+    dc.draw_line( left_margin_logical, bottom_margin_logical,
+                  right_margin_logical,  bottom_margin_logical)
 
-    write_page_header(self, dc, "A header", logUnitsFactor)
+    write_page_header(self, dc, "A header", log_units_factor)
   end
   
   # Writes a header on a page. Margin units are in millimetres.
-  def write_page_header(printout, dc, text, mmToLogical)
-    pageWidthMM, pageHeightMM = printout.get_page_size_mm
+  def write_page_header(printout, dc, text, mm_to_logical)
+    page_width_mm, page_height_mm = printout.get_page_size_mm
 
-    leftMargin = 10
-    topMargin = 10
-    rightMargin = 10
+    left_margin = 10
+    top_margin = 10
+    right_margin = 10
 
-    leftMarginLogical = (mmToLogical*leftMargin)
-    topMarginLogical = (mmToLogical*topMargin)
-    rightMarginLogical = (mmToLogical*(pageWidthMM - rightMargin))
+    left_margin_logical = (mm_to_logical*left_margin).to_i
+    top_margin_logical = (mm_to_logical*top_margin).to_i
+    right_margin_logical = (mm_to_logical*(page_width_mm - right_margin)).to_i
 
-    xExtent, yExtent= dc.get_text_extent(text)
-    xPos = (((((pageWidthMM - leftMargin - rightMargin)/2.0)+leftMargin)*mmToLogical) - (xExtent/2.0))
-    dc.draw_text(text, xPos.to_i, topMarginLogical.to_i)
+    x_extent, y_extent= dc.get_text_extent(text)
+    x_pos = (((((page_width_mm - left_margin - right_margin)/2.0)+left_margin)*mm_to_logical) - (x_extent/2.0))
+    dc.draw_text(text, x_pos.to_i, top_margin_logical)
 
     dc.set_pen(Wx::BLACK_PEN)
-    dc.draw_line( leftMarginLogical.to_i, (topMarginLogical+yExtent).to_i,
-        rightMarginLogical.to_i, (topMarginLogical+yExtent).to_i )
+    dc.draw_line( left_margin_logical, (top_margin_logical+y_extent).to_i,
+                  right_margin_logical, (top_margin_logical+yExtent).to_i )
 
     return true
   end  
@@ -406,7 +403,7 @@ class MyApp < Wx::App
     @test_font = Wx::Font.new(10, Wx::SWISS, Wx::NORMAL, Wx::NORMAL)
 
     # Create the main frame window
-    @frame = MyFrame.new(nil, "wxWidgets Printing Demo", Wx::Point.new(0, 0), Wx::Size.new(400, 400))
+    @frame = MyFrame.new(nil, "wxRuby Printing Demo", Wx::Point.new(0, 0), Wx::Size.new(400, 400))
 
     # Give it a status line
     @frame.create_status_bar(2)
@@ -435,13 +432,13 @@ class MyApp < Wx::App
 =end
 
     file_menu.append_separator()
-    file_menu.append(WXPRINT_ANGLEUP, "Angle up\tAlt-U",                "Raise rotated text angle")
-    file_menu.append(WXPRINT_ANGLEDOWN, "Angle down\tAlt-D",            "Lower rotated text angle")
+    file_menu.append(WXPRINT_ANGLEUP, "Angle up\tAlt-U","Raise rotated text angle")
+    file_menu.append(WXPRINT_ANGLEDOWN, "Angle down\tAlt-D","Lower rotated text angle")
     file_menu.append_separator()
-    file_menu.append(WXPRINT_QUIT, "E&xit",                "Exit program")
+    file_menu.append(WXPRINT_QUIT, "E&xit","Exit program")
 
     help_menu = Wx::Menu.new
-    help_menu.append(WXPRINT_ABOUT, "&About",              "About this demo")
+    help_menu.append(WXPRINT_ABOUT, "&About","About this demo")
 
     menu_bar = Wx::MenuBar.new
 
@@ -462,7 +459,6 @@ class MyApp < Wx::App
     @frame.show()
 
     @frame.set_status_text("Printing demo")
-
 
     set_top_window(@frame)
     
