@@ -405,8 +405,7 @@ h2(#misc). Miscellaneous
 |LayoutAlgorithm|An alternative window layout facility|
 |Process|Process class|
 |Timer|Timer class|
-|TaskBarIcon|Icon that appears in the task bar, system tray or dock, and
-can have a popup menu|
+|TaskBarIcon|Icon that appears in the task bar, system tray or dock, and can have a popup menu|
 |StopWatch|Stop watch class|
 |MimeTypesManager|MIME-types manager class|
 |SystemSettings|System settings class for obtaining various global parameters|
