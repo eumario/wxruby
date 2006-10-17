@@ -3,8 +3,8 @@
 
 %include "../common.i"
 
-%module(directors="1") wxColourData
+%module(directors="1") wxPrintDialogData
 
 %import "include/wxObject.h"
 
-%include "include/wxColourData.h"
+%include "include/wxPrintDialogData.h"

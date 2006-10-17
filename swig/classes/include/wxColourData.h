@@ -1,75 +1,31 @@
-// wxColourData.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+//   Copyright 2004-2006 by Kevin Smith
+//   released under the MIT-style wxruby2 license
 
 #if !defined(_wxColourData_h_)
 #define _wxColourData_h_
 class wxColourData : public wxObject
 {
 public:
-	/**
-	 * \brief Constructor. Initializes the custom colours to white, the   setting
-to black, and the   setting to true. 
-	*/
+	    wxColourData();
+	    wxColourData(const wxColourData& data);
+	    ~wxColourData();
 
-   wxColourData() ;
-	/**
-	 * \brief Destructor. 
-	*/
+	    void SetChooseFull(bool flag);
+	    bool GetChooseFull() const;
+	    void SetColour(const wxColour& colour);
+	    const wxColour& GetColour() const;
+	    wxColour& GetColour();
 
-  virtual  ~wxColourData() ;
-	/**
-	 * \brief Under Windows, determines whether the Windows colour dialog will display the full dialog
-with custom colour selection controls. Has no meaning under other platforms.
+	    // Array of 16 custom colours
+	    void SetCustomColour(int i, const wxColour& colour);
+	    wxColour GetCustomColour(int i);
 
-The default value is true. 
-	*/
+	    void operator=(const wxColourData& data);
 
-  bool GetChooseFull() const;
-	/**
-	 * \brief Gets the current colour associated with the colour dialog.
-
-The default colour is black. 
-	*/
-
-  wxColour GetColour() const;
-	/**
-	 * \brief Gets the  th custom colour associated with the colour dialog.   should
-be an integer between 0 and 15.
-
-The default custom colours are all white. 
-	 * \param int  
-	*/
-
-  wxColour GetCustomColour(int  i );
-	/**
-	 * \brief Under Windows, tells the Windows colour dialog to display the full dialog
-with custom colour selection controls. Under other platforms, has no effect.
-
-The default value is true. 
-	 * \param const bool   
-	*/
-
-  void SetChooseFull(const bool  flag ) ;
-	/**
-	 * \brief Sets the default colour for the colour dialog.
-
-The default colour is black. 
-	 * \param const wxColour&  
-	*/
-
-  void SetColour(const wxColour&  colour ) ;
-	/**
-	 * \brief Sets the  th custom colour for the colour dialog.   should
-be an integer between 0 and 15.
-
-The default custom colours are all white. 
-	 * \param int  
-	 * \param const wxColour&  
-	*/
-
-  void SetCustomColour(int  i , const wxColour&  colour ) ;
+	public:
+	    wxColour        m_dataColour;
+	    wxColour        m_custColours[16];
+	    bool            m_chooseFull;
 };
 
 
