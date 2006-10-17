@@ -9,9 +9,9 @@ file or downloaded via HTTP protocol) in a window. The width
 of the window is constant - given in the constructor - and virtual height
 is changed dynamically depending on page size.
 Once the window is created you can set its content by calling 
-"set_page(text)":#HtmlWindow_setpage(text),
-"load_page(filename)":#HtmlWindow_loadpage(filename) or
-"load_file":#HtmlWindow_loadfile.
+"set_page(html_code)":#HtmlWindow_setpage,
+"load_page(location)":#HtmlWindow_loadpage or
+"load_file(file_name)":#HtmlWindow_loadfile.
 
 h2. Note
 
@@ -251,7 +251,7 @@ h4. Return value
 
 |*HTML_OPEN*|Open the URL.|
 |*HTML_BLOCK*|Deny access to the URL, "HtmlParser#open_url":htmlparser.html#HtmlParser_openurl will return NULL.|
-|*HTML_REDIRECT*|Don't open _url_, redirect to anotherURL. OnOpeningURL must fill _*redirect_ with the new URL. OnOpeningURL willbe called again on returned URL.|
+|*HTML_REDIRECT*|Don't open _url_, redirect to anotherURL. OnOpeningURL must fill _redirect_ with the new URL. OnOpeningURL willbe called again on returned URL.|
 
 
 h3(#HtmlWindow_onsettitle). HtmlWindow#on_set_title
@@ -324,15 +324,14 @@ h4. See also
 
 h3(#HtmlWindow_setborders). HtmlWindow#set_borders
 
-  *set_borders*(%(arg-type)Integer% b)
+  *set_borders*(%(arg-type)Integer% border_width)
 
-This function sets the space between border of window and HTML contents. See image:
-
-border.bmp
+This function sets the space between border of window and HTML
+contents. 
 
 h4. Parameters
 
-* _b_ indentation from borders in pixels
+* _border_width_ indentation from borders in pixels
 
 h3(#HtmlWindow_setfonts). HtmlWindow#set_fonts
 
@@ -349,8 +348,7 @@ platform-specific face name. Examples are "helvetica" under Unix or
 "Times New Roman" under Windows.
 * _fixed_face_ The same thing for fixed face ( <TT>..</TT> )
 * _sizes_ This is an array of 7 items of _int_ type.
-The values represent size of font with HTML size from -2 to +4
-( <FONT SIZE=-2> to <FONT SIZE=+4> ). Default sizes are used if _sizes_
+The values represent size of font with HTML size from -2 to +4 (equivalent to the SIZE attribute value of the HTML FONT tag). Default sizes are used if _sizes_
 is NULL.
 
 h4. Defaults
@@ -363,19 +361,15 @@ h3(#HtmlWindow_setpage). HtmlWindow#set_page
 
  Boolean *set_page*(%(arg-type)String% source)
 
-Sets HTML page and display it. This won't *load* the page!!
-It will display the _source_. See example:
-
-
- htmlwin -> SetPage("<html><body>Hello, world!</body></html>");
- 
+Sets HTML page and display it. This doesn't *load* the page!
+It parses and displays the HTML in the string _source_.
 
 If you want to load a document from some location use 
 "load_page":#HtmlWindow_loadpage instead.
 
 h4. Parameters
 
-* _source_ The HTML document source to be displayed.
+* _source_ The HTML source to be displayed as a document
 
 h4. Return value
 
@@ -386,8 +380,8 @@ h3(#HtmlWindow_setrelatedframe). HtmlWindow#set_related_frame
   *set_related_frame*(%(arg-type)Frame% frame,  %(arg-type)String% format)
 
 Sets the frame in which page title will be displayed. _format_ is format of
-frame title, e.g. "HtmlHelp : \%s". It must contain exactly one \%s. This
-\%s is substituted with HTML page title.
+frame title, e.g. "HtmlHelp : @%s@". It must contain exactly one @%s@. This
+@%s@ is substituted with HTML page title.
 
 h3(#HtmlWindow_setrelatedstatusbar). HtmlWindow#set_related_status_bar
 
