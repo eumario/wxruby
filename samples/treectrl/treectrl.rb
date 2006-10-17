@@ -58,7 +58,7 @@ TreeTest_IncSpacing,
 TreeTest_DecSpacing,
 TreeTest_ToggleIcon,
 TreeTest_Select,
-TreeTest_Unselect = (0..39).to_a
+TreeTest_Unselect = (Wx::ID_HIGHEST..Wx::ID_HIGHEST+39).to_a
 TreeTest_Ctrl = 1000
 
 TreeCtrlIcon_File,
@@ -271,9 +271,10 @@ class MyTreeCtrl < Wx::TreeCtrl
 
     id,cookie = get_next_child(root_id,cookie)
     id,cookie = get_next_child(root_id,cookie)
-    set_item_text_colour(id, Wx::RED)
-    # Not supported on OS X
-    set_item_background_colour(id, Wx::LIGHT_GREY)
+    if Wx::PLATFORM == "WXMSW"
+      set_item_text_colour(id, Wx::RED)      
+      set_item_background_colour(id, Wx::LIGHT_GREY)
+    end
   end
 
   def get_items_recursively(parent_id, cookie)
@@ -986,7 +987,7 @@ class MyFrame < Wx::Frame
   end
 
   def on_about(event)
-    message_box("Tree test sample\n" +
+    Wx::message_box("Tree test sample\n" +
                                       "(c) Julian Smart 1997, Vadim Zeitlin 1998",
                 "About tree test",
                 Wx::OK|Wx::ICON_INFORMATION, self)
