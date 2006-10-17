@@ -10,9 +10,7 @@
 %}
 
 %ignore wxRadioBox::wxRadioBox();
-%ignore wxRadioBox::GetLabel;
-%ignore wxRadioBox::SetLabel;
-%ignore wxRadioBox::Number;
+%ignore wxRadioBox::Number;   # Obsolete
 
 %ignore wxRadioBox::Show(int item, const bool show = true);
 
