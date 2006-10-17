@@ -304,6 +304,8 @@ class MyPanel < Panel
                                   choices,PROCESS_ENTER)
                                   # CB_READONLY | PROCESS_ENTER)
 
+        @m_combo.set_tool_tip("This is a natural\ncombobox - can you believe me?")
+
         Button.new( panel, ID_COMBO_SEL_NUM, "Select #&2", Point.new(180,30), Size.new(140,30) )
         Button.new( panel, ID_COMBO_SEL_STR, "&Select 'This'", Point.new(340,30), Size.new(140,30) )
         Button.new( panel, ID_COMBO_CLEAR, "&clear", Point.new(180,80), Size.new(140,30) )
@@ -323,7 +325,6 @@ class MyPanel < Panel
         @m_radio = RadioBox.new( panel, ID_RADIOBOX, "T&his", Point.new(10,10), Size.new(-1,-1), choices, 1, RA_SPECIFY_COLS )
         @m_radio.set_foreground_colour(RED)
 
-        @m_combo.set_tool_tip("This is a natural\ncombobox - can you believe me?")
         @m_radio.set_tool_tip("Ever seen a radiobox?")
 
         Button.new( panel, ID_RADIOBOX_SEL_NUM, "Select #&2", Point.new(180,30), Size.new(140,30) )
@@ -380,9 +381,8 @@ class MyPanel < Panel
 
         panel = Panel.new(@m_notebook)
 
-puts("FIXME: Not yet compatible with swig 1.3.29 (2006-04-17 kbs)")
-#        icon = ArtProvider::get_icon(ART_INFORMATION)
-#        StaticBitmap.new( panel, -1, icon, Point.new(10, 10) )
+        icon = ArtProvider::get_icon(ART_INFORMATION)
+        StaticBitmap.new( panel, -1, icon, Point.new(10, 10) )
 
         bitmap = Bitmap.new( 100, 100 )
         dc = MemoryDC.new
@@ -1129,17 +1129,16 @@ class MyFrame < Frame
 
             @s_windowFocus = focus
 
-            if RUBY_PLATFORM=="WXMSW"
+#            if Wx::PLATFORM == "WXMSW"
+#            get_handle not 'handled' properly yet
+            if false
                 msg = sprintf(
                     "Focus: %s, HWND = %08x",
-                    @s_windowFocus.GetClassInfo().get_class_name(),
-                    @s_windowFocus.GetHWND()
+                    @s_windowFocus.get_class_info.get_class_name,
+                    @s_windowFocus.get_handle
                       )
             else
-                msg = sprintf(
-                    "Focus: %s",
-                    @s_windowFocus.get_class_info().get_class_name()
-                      )
+              msg = "Focus: #{@s_windowFocus.get_class_info.get_class_name}"
             end
             set_status_text(msg)
         end
