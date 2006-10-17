@@ -24,7 +24,7 @@ class MyFrame < Frame
   def initialize(title,pos,size,style=DEFAULT_FRAME_STYLE)
     super(nil,-1,title,pos,size,style)
 
-    if RUBY_PLATFORM == "WXMSW"
+    if Wx::PLATFORM == "WXMSW"
       set_icon(Icon.new("mondrian.ico",BITMAP_TYPE_ICO))
     else
       set_icon(Icon.new("mondrian.xpm",BITMAP_TYPE_XPM))

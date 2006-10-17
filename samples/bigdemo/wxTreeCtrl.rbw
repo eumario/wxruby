@@ -157,7 +157,7 @@ class TestTreeCtrlPanel < Wx::Panel
     def on_sel_changed(event)
         @item = event.get_item()
         @log.write_text("on_sel_changed: " + @tree.get_item_text(@item))
-        # if Wx::RUBY_PLATFORM == "WXMSW"
+        # if Wx::PLATFORM == "WXMSW"
             #@log.write_text("BoundingRect: " + @tree.get_bounding_rect(@item))
         #end
         event.skip()

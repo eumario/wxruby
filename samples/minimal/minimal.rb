@@ -22,7 +22,7 @@ class MinimalFrame < Wx::Frame
     super(nil, -1, title, pos, size, style)
 
     # Set the frame's icon - use .ico on windows, else .xpm
-    if RUBY_PLATFORM == "WXMSW"
+    if Wx::PLATFORM == "WXMSW"
       set_icon( Wx::Icon.new(local_icon_file("mondrian.ico"), 
                              Wx::BITMAP_TYPE_ICO) )
     else
