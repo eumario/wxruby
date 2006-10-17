@@ -15,3 +15,4 @@ typedef long wxTextPos;
 typedef wxString wxArtClient;
 typedef wxString wxArtID;
 enum wxBackgroundStyle;
+enum wxTreeItemIcon;
