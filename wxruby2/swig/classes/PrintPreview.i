@@ -3,8 +3,12 @@
 
 %include "../common.i"
 
-%module(directors="1") wxColourData
+%module(directors="1") wxPrintPreview
+
+%{
+#include <wx/print.h>
+%}
 
 %import "include/wxObject.h"
 
-%include "include/wxColourData.h"
+%include "include/wxPrintPreview.h"

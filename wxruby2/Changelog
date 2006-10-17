@@ -1,5 +1,8 @@
-- Added automatic test for rubygem if wx cannot be loaded 'normally'
-- Added shebang line to samples
+- Added printing support and sample (Sean Long)
+- Fix Bug 6144 - compile warning on 64 bit processors (Roy Sutton)
+- Added automatic test for rubygem if wx cannot be loaded 'normally' (Roy
+   Sutton)
+- Added shebang line to samples (Roy Sutton)
 - Removed SWIG virtual feature from rakewx.rb for SWIG 1.3.30 compatibility
   (Roy Sutton)
 - Remove obsolete calls to init_all_image_handlers (Roy Sutton)

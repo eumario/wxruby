@@ -3,8 +3,14 @@
 
 %include "../common.i"
 
-%module(directors="1") wxColourData
+%module(directors="1") wxPrintout
+
+%{
+#include <wx/print.h>
+%}
+
+%apply int * OUTPUT {int *}
 
 %import "include/wxObject.h"
 
-%include "include/wxColourData.h"
+%include "include/wxPrintout.h"
