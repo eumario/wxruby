@@ -1,3 +1,5 @@
+- Fixes for printing framework - constants, missing meths (Roy Sutton/Sean Long)
+- Some little doc fixes (Alex Fenton)
 - Added printing support and sample (Sean Long)
 - Fix Bug 6144 - compile warning on 64 bit processors (Roy Sutton)
 - Added automatic test for rubygem if wx cannot be loaded 'normally' (Roy
