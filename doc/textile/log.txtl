@@ -1,7 +1,11 @@
 h1(#wxlog). Wx::Log
 
-Log class defines the interface for the _log targets_ used by Widgets
-logging functions as explained in the "Log overview":logoverview.html.
+Log class defines the interface for the _log targets_ used by wxRuby. In
+wxRuby, only the class LogTextCtrl is generally of interest, providing
+in-application debugging and logging information. The file-based log
+targets provided by WxWidgets are generally better implemented in pure
+Ruby, using the appropriate classes from the standard library.
+
 The only situations when you need to directly use this class is when you want
 to derive your own log target because the existing ones don't satisfy your
 needs. Another case is if you wish to customize the behaviour of the standard
@@ -9,11 +13,8 @@ logging classes (all of which respect the Log settings): for example, set
 which trace messages are logged and which are not or change (or even remove
 completely) the timestamp on the messages.
 
-Otherwise, it is completely hidden behind the _LogXXX()_ functions and
+Otherwise, it is completely hidden behind the _log_xxxx()_ functions and
 you may not even know about its existence.
-
-See "log overview":logoverview.html for the descriptions of Widgets
-logging facilities.
 
 h2. Derived from
 
