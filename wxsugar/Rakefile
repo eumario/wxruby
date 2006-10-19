@@ -9,7 +9,7 @@ if ENV['VERSION']
   WXSUGAR_VERSION = ENV['VERSION']
   File.open(VERSION_FILE, 'w') do | version_file |
     version_file.puts "module WxSugar"
-    version_file.puts "  VERSION = '#{WSUGAR_VERSION}'"
+    version_file.puts "  VERSION = '#{WXSUGAR_VERSION}'"
     version_file.puts "end"
   end
 # or load the version from the file
