@@ -15,7 +15,7 @@ $utf8_file = File.join( File.dirname(__FILE__), 'utf8.txt')
 class UnicodeDemoTextCtrl < Wx::TextCtrl
   NEWLINE_CORRECTION_FACTOR = 0
   
-  DEFAULT_TEXT = "This sample requires that you have a unicode build of WxWidgets. If you do, you should be able to see a range of characters from different languages displayed, and be able to type multilingual strings in the text area. Note that some characters may only be displayed if you are using a suitable font.
+  DEFAULT_TEXT = "If you have a unicode version of wxruby, you should be able to see a range of characters from different languages displayed, and be able to type multilingual strings in the text area. Note that some scripts may only be displayed if you are using a suitable font; otherwise characters will appear as blank boxes.
 
 " << File.read( $utf8_file )
 
@@ -23,9 +23,6 @@ class UnicodeDemoTextCtrl < Wx::TextCtrl
     super(parent, -1, text, 
           Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TE_MULTILINE)
   end
-
-  # more ruby-ish
-  alias :<< :append_text
 
   # run through a few useful methods of textctrl and report the results
   # as a string
@@ -66,36 +63,38 @@ class IConvFrame < Wx::Frame
 
   def initialize(title, pos, size)
     super(nil, -1, title, pos, size)
+    panel = Wx::Panel.new(self)
     sizer = Wx::BoxSizer.new(Wx::VERTICAL)
 
     # The text input and display
-    @textctrl = UnicodeDemoTextCtrl.new(self)
+    @textctrl = UnicodeDemoTextCtrl.new(panel)
     sizer.add(@textctrl, 3, Wx::GROW|Wx::ALL, 2)
 
     # The button to show what's selected
-    button = Wx::Button.new(self, -1, 'Describe text selection')
+    button = Wx::Button.new(panel, -1, 'Describe text selection')
     sizer.add(button, 0, Wx::ADJUST_MINSIZE|Wx::ALL, 2 )
     evt_button(button.get_id) { | e | on_click(e) }
 
-    @log = LogTextCtrl.new(self)
+    @log = LogTextCtrl.new(panel)
     sizer.add(@log, 1, Wx::GROW|Wx::ALL, 2)
-    sizer.add( Wx::StaticText.new(self, -1, 'Some controls with unicode'),
+    sizer.add( Wx::StaticText.new(panel, -1, 'Some controls with unicode'),
                0, Wx::ADJUST_MINSIZE|Wx::ALL, 2 )
     ctrl_sizer = Wx::BoxSizer.new(Wx::HORIZONTAL)
 
-    test_button = Wx::Button.new(self, -1, '万')
+    test_button = Wx::Button.new(panel, -1, '万')
     ctrl_sizer.add(test_button, 0, Wx::ADJUST_MINSIZE|Wx::ALL, 2)
-    choice = Wx::Choice.new(self, -1, Wx::DEFAULT_POSITION, 
+    choice = Wx::Choice.new(panel, -1, Wx::DEFAULT_POSITION, 
                             Wx::DEFAULT_SIZE, [])
     File.readlines($utf8_file).each do | line |
       next if line.chomp.empty?
       choice.append(line.chomp)
     end
+    choice.set_selection(0)
     ctrl_sizer.add(choice, 0, Wx::ADJUST_MINSIZE|Wx::ALL, 2)
 
     sizer.add(ctrl_sizer, 0, Wx::ADJUST_MINSIZE|Wx::ALL, 2)
     construct_menus()
-    self.set_sizer( sizer )
+    panel.set_sizer( sizer )
   end
 
   # Prompt the user to specify a file whose contents should be loaded
