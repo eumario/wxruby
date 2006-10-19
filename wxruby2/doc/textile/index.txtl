@@ -403,6 +403,8 @@ h2(#misc). Miscellaneous
 |GLCanvas|Canvas that you can render OpenGL calls to.|
 |GLContext|Class to ease sharing of OpenGL data resources.|
 |LayoutAlgorithm|An alternative window layout facility|
+|Log|Base class for logging|
+|LogTextCtrl|A TextCtrl that displays application log messages|
 |Process|Process class|
 |Timer|Timer class|
 |TaskBarIcon|Icon that appears in the task bar, system tray or dock, and can have a popup menu|
