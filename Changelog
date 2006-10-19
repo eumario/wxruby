@@ -1,3 +1,5 @@
+- Remove a SWIG warning in Pen and remove unneeded broken typemap (Roy Sutton)
+- Remove a spurious warning on MSWIN, in fixplatform.rb (Roy Sutton)
 - Fixes for printing framework - constants, missing meths (Roy Sutton/Sean Long)
 - Some little doc fixes (Alex Fenton)
 - Added printing support and sample (Sean Long)
