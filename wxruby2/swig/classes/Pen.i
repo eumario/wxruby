@@ -40,8 +40,6 @@
    $1 = (TYPE($input) == T_ARRAY);
 }
 
-%apply (int n, wxDash dash []) { (int n, wxDash *dashes),(int nItems, wxDash *dash) }
-
 %ignore wxPen::SetStipple;
 %ignore GetStipple;
 
