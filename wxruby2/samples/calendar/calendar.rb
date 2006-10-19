@@ -82,15 +82,14 @@ end
 class MyFrame < Frame
     def initialize(title)
         super(nil, -1, title)
-
+        @panel = Wx::Panel.new(self)
         add_menu_bar
         add_status_bar
 
         @calendar_flags = CAL_MONDAY_FIRST | CAL_SHOW_HOLIDAYS
 
-        date = DateTime.now
-    @date = StaticText.new(self, -1, "")
-    @calendar = MyCalendar.new(self, date, @calendar_flags)
+        now = DateTime.now
+        @calendar = MyCalendar.new(@panel, now, @calendar_flags)
 
         @sizer = BoxSizer.new(VERTICAL)
         configure_window
@@ -167,11 +166,11 @@ class MyFrame < Frame
     end
     
     def configure_window
-    @sizer.add(@calendar, 0)
-    @sizer.add(@date, 1)
-        @sizer.set_size_hints(self)
+        @sizer.add(@calendar, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
+        @sizer.set_size_hints(@panel)
         layout
-        set_sizer(@sizer)
+        @panel.set_sizer(@sizer)
+        set_best_fitting_size
     end
     
   def on_quit
@@ -227,17 +226,15 @@ class MyFrame < Frame
     style = @calendar.get_window_style_flag
     date = @calendar.date
     @sizer.detach(@calendar)
-    @sizer.detach(@date)
     @calendar.destroy
         if  on
             style |= flag
         else
             style &= ~flag
         end
-    @calendar = MyCalendar.new(self, date, style)
-    @sizer.add(@calendar, 0)
-    @sizer.add(@date, 1)
-        layout
+      @calendar = MyCalendar.new(self, date, style)
+      @sizer.add(@calendar, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
+      layout
     end
 
     def highlight_special(on)
