@@ -1,5 +1,5 @@
-# fixmodule.rb
-#   Copyright 2004-2005 by Kevin Smith
+# fixplatform.rb
+#   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
 #   This script post-processes the SWIG output
@@ -15,6 +15,9 @@ File.rename(ARGV[0], broken)
 this_module = File.basename(ARGV[0],".cpp")
 
 File.open(ARGV[0], "w") do | out |
+    if RUBY_PLATFORM =~ /mswin/
+        out.puts("#pragma warning(disable:4786)")
+    end
     add_footer = false
     File.foreach(broken) do | line |
         if (line.index("//@@"))
