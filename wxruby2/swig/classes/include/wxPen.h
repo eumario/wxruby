@@ -21,7 +21,10 @@ public:
   wxColour& GetColour() const;
   int GetDashes(wxDash**  dashes ) const;
   int GetJoin() const;
-  wxBitmap*  GetStipple() const;
+// not available on GTK
+#if defined(__WXMSW__) || defined(__WXMAC__)
+  wxBitmap* GetStipple() const;
+#endif
   int GetStyle() const;
   int GetWidth() const;
   bool Ok() const;
@@ -31,7 +34,10 @@ public:
   void SetColour(int  red , int  green , int  blue ) ;
   void SetDashes(int  n , wxDash*  dashes ) ;
   void SetJoin(int join_style ) ;
-  void SetStipple(wxBitmap*  stipple ) ;
+// not available on GTK
+#if defined(__WXMSW__) || defined(__WXMAC__)
+  void SetStipple(const wxBitmap&  stipple ) ;
+#endif
   void SetStyle(int  style ) ;
   void SetWidth(int  width ) ;
 };
