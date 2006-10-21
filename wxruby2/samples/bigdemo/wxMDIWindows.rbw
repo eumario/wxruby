@@ -26,7 +26,8 @@ class TestPanel < Wx::Panel
     end
     
     def show_mdi_demo(event)
-        load "MDIDemo.rbw"
+        mdi_demo_file = File.join( File.dirname(__FILE__), "MDIDemo.rbw")
+        load mdi_demo_file
         frame = Demo::MyParentFrame.new()
         frame.show()
     end

@@ -38,7 +38,9 @@ class MyParentFrame < Wx::MDIParentFrame
             @bg_bmp = 
             evt_erase_background {|event| on_erase_background(event)}
         end
-        load "wxScrolledWindow.rbw"
+        scrollwin_demo_file = File.join(File.dirname(__FILE__), 
+                                        "wxScrolledWindow.rbw")
+        load scrollwin_demo_file
     end
     
     def on_exit(event)
