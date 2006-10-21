@@ -40,10 +40,6 @@
    $1 = (TYPE($input) == T_ARRAY);
 }
 
-%ignore wxPen::SetStipple;
-%ignore GetStipple;
-
-
 %import "include/wxObject.h"
 %import "include/wxGDIObject.h"
 
