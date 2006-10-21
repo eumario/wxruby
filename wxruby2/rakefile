@@ -101,6 +101,13 @@ begin
         delete_files_in($obj_dir)
         #force_rmdir($obj_dir)
     end
+
+	desc "Experimental generation of Makefile so can use multiprocessors to compile faster!"
+	task :make => [:swig,:rake_make,:link]		
+	task :rake_make do
+		create_makefile
+		run_makefile(2)		
+	end
   
 rescue Exception => e
     puts(e.message)
