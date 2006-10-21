@@ -1,3 +1,6 @@
+- Add support for faster building on 2-processor systems, via Makefile (Sean Long)
+- Fix some bugs causing crashes on OS X in bigdemo MDI sample (Alex Fenton)
+- Enabled Pen#Get/SetStipple on Mac and MsWin (Alex Fenton/Roy Sutton)
 - Remove a SWIG warning in Pen and remove unneeded broken typemap (Roy Sutton)
 - Remove a spurious warning on MSWIN, in fixplatform.rb (Roy Sutton)
 - Fixes for printing framework - constants, missing meths (Roy Sutton/Sean Long)
