@@ -4,22 +4,9 @@ Window is the base class for all windows and represents any visible object on
 screen. All controls, top level windows and so on are windows. Sizers and
 device contexts are not, however, as they don't appear on screen themselves.
 
-Please note that all children of the window will be deleted automatically by
-the destructor before the window itself is deleted which means that you don't
-have to worry about deleting them manually. Please see the "window
-deletion overview":windowdeletionoverview.html for more information.
-
-Also note that in this, and many others, Widgets classes some
-@GetXXX()@ methods may be overloaded (as, for example,
-"get_size":#Window_getsize or
-"get_client_size":#Window_getclientsize). In this case, the overloads
-are non-virtual because having multiple virtual functions with the same name
-results in a virtual function name hiding at the derived class level (in
-English, this means that the derived class has to override all overloaded
-variants if it overrides any of them). To allow overriding them in the derived
-class, Widgets uses a unique protected virtual @DoGetXXX()@ method
-and all @GetXXX()@ ones are forwarded to it, so overriding the former
-changes the behaviour of the latter.
+Please note that all children of the window will be deleted
+automatically before the window itself is deleted which means that you
+don't have to worry about deleting them manually.
 
 h2. Derived from
 
@@ -432,8 +419,8 @@ however.
 
 h4. Parameters
 
-* _force_ @false@ if the window's close handler should be able to veto the destruction
-of this window, @true@ if it cannot.
+* _force_ @false@ if the window's close handler should be able to veto
+  the destruction of this window, @true@ if it cannot.
 
 h4. Remarks
 
@@ -1188,10 +1175,6 @@ h4. Parameters
 * _width_ Receives the window width.
 * _height_ Receives the window height.
 
-
-
-
-
 h4. See also
 
 "get_client_size":#Window_getclientsize, "get_virtual_size":#Window_getvirtualsize
@@ -1207,29 +1190,26 @@ Return the sizer associated with the window by a previous call to
 
 h3(#Window_gettextextent). Window#get_text_extent
 
-  *get_text_extent*(%(arg-type)String% string,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
-                  %(arg-type)Integer% descent = nil, 
-                  %(arg-type)Integer% externalLeading = nil, 
-                  %(arg-type)Font% font = nil, 
-                  %(arg-type)Boolean% use16 = @false@)
+ Integer x, Integer y, Integer descent, Integer external_leading =  
+   *get_text_extent*(%(arg-type)String% string, %(arg-type)Font% font = nil, %(arg-type)Boolean% use16 = @false@)
 
 Gets the dimensions of the string as it would be drawn on the
-window with the currently selected font.
+window with the currently selected font. The dimensions are returned as
+a four-element array. 
+
+The first two elements are the width and height, in pixels, of the
+string. The third and fourth values are the descent and external
+leading - which are not normally needed.
+
+The @font@ parameter may optionally be passed to specify the font and
+size for which the dimensions of the string will be calculated. If this
+parameter is not passed, the current window font is used.
 
 h4. Parameters
 
 * _string_ String whose extent is to be measured.
-* _x_ Return value for width.
-* _y_ Return value for height.
-* _descent_ Return value for descent (optional).
-* _externalLeading_ Return value for external leading (optional).
 * _font_ Font to use instead of the current window font (optional).
 * _use16_ If @true@, _string_ contains 16-bit characters. The default is @false@.
-
-
-
-
-
 
 h3(#Window_gettitle). Window#get_title
 
@@ -1585,13 +1565,22 @@ in order to send update events to the window in idle time.
 
 h3(#Window_pagedown). Window#page_down
 
-This is just a wrapper for "scroll_pages()":#Window_scrollpages()$(1)$.
+This is just a convenience wrapper for
+"scroll_pages(1)":#Window_scrollpages . It scrolls the window down one page
 
 
 h3(#Window_pageup). Window#page_up
 
-This is just a wrapper for "scroll_pages()":#Window_scrollpages()$(-1)$.
+This is just a convenience wrapper for
+"scroll_pages(-1)":#Window_scrollpages . It scrolls the window up one page.
 
+
+h3(#Window_paint). Window#paint
+
+ paint { | window_dc | ... }
+
+This method runs the block, yielding a "WindowDC":windowdc.html into it
+to enable direct drawing onto a widget.
 
 h3(#Window_popeventhandler). Window#pop_event_handler
 
