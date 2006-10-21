@@ -160,6 +160,7 @@ h2. Methods
 * "Window#on_internal_idle":#Window_oninternalidle
 * "Window#page_down":#Window_pagedown
 * "Window#page_up":#Window_pageup
+* "Window#paint":#Window_paint
 * "Window#pop_event_handler":#Window_popeventhandler
 * "Window#popup_menu":#Window_popupmenu
 * "Window#push_event_handler":#Window_pusheventhandler
@@ -1579,8 +1580,10 @@ h3(#Window_paint). Window#paint
 
  paint { | window_dc | ... }
 
-This method runs the block, yielding a "WindowDC":windowdc.html into it
-to enable direct drawing onto a widget.
+This method runs the block, yielding a "PaintDC":paintdc.html into it
+to enable direct drawing onto a widget. This method should *only* be
+used within an @on_paint@ handler. To draw at other times, create a
+"ClientDC":clientdc.html object.
 
 h3(#Window_popeventhandler). Window#pop_event_handler
 
