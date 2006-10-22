@@ -15,8 +15,6 @@
 %ignore wxDC::EnableCache;
 %ignore wxDC::StartPage;
 
-%ignore GetMultiLineTextExtent;
-
 // wxList version is now 'type-safe' so we won't be using that version instead
 %ignore DrawLines(const wxList * points, wxCoord xoffset = 0, wxCoord yoffset = 0);
 %ignore DrawPolygon(const wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE) ;
