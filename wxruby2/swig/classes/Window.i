@@ -57,31 +57,6 @@ static VALUE get_ruby_object(wxObject *obj)
 %include "include/wxWindow.h"
 
 %extend wxWindow {
-
-	// TODO: Find a way to eliminate this weird hack
-	// It causes swig to define SWIGTYPE_p_wxPaintDC
-	// which is needed by our paint() method
-    VALUE this_should_never_be_called(wxPaintDC *tmp) {
-	    return Qnil;
-    }
-
-    VALUE paint()
-    {   
-	   wxWindow *ptr = self;
-	
-	   if(rb_block_given_p()) 
-	   {
-	      wxPaintDC dc(ptr);
-	      
-	      VALUE dcVal = SWIG_NewPointerObj((void *) &dc, SWIGTYPE_p_wxPaintDC, 0);
-	      rb_yield(dcVal);
-	
-	      DATA_PTR(dcVal) = NULL;
-	   }
-	   return Qnil;	
-   
-  }
-    
   VALUE find_window(long  id)
   {
     VALUE returnVal = Qnil;
