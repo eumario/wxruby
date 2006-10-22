@@ -108,3 +108,18 @@ file doc_tar_gz_package  => [ :html_docs ] do | t |
 end
 desc "Tarball the HTML documentation"
 task :doc_tar_gz => [ doc_tar_gz_package ]
+
+# set the rubyforge username for publishing to the website
+RUBYFORGE_USER = ENV['RUBYFORGE_USER']
+
+desc 'Publish rendered docs and sources to the wxRuby website, using scp'
+task :publish_docs => [ :html_docs ] do | t | 
+  if not RUBYFORGE_USER
+    raise 'Must specify RUBYFORGE_USER to publish documents'
+  end
+  # the location we are publishing to
+  dest = "#{RUBYFORGE_USER}@rubyforge.org:/var/www/gforge-projects/wxruby/doc/"
+  sh "scp doc/html/*.html #{dest}"
+  sh "scp doc/html/*.css #{dest}"
+  sh "scp doc/textile/*.txtl #{dest}"
+end
