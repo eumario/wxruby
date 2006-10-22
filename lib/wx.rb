@@ -1,23 +1,23 @@
-# rakewx.rb
-#   Copyright 2004-2006 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+# Copyright 2004-2006 by Kevin Smith
+# released under the MIT-style wxruby2 license
 
-# This wrapper serves two functions:
-# 1. It allows apps to require 'wx' but still have the binary 
-#    library properly named wxruby2.so or wxruby2.dll
-# 2. Later, we can add wrapper classes and methods here that can 
-#    expose a friendlier API than the C++ code provides
+# This wrapper serves three functions:
+# 1. It loads the binary library 'wxruby2.so' or 'wxruby.dll', while
+#    still allowing applications to just require 'wx'.
+# 2. It sets up the version information
+# 3. It loads in ruby extensions to the core Wx classes.
 
 begin
-	require 'wxruby2'
+  require 'wxruby2'
 rescue LoadError => e
-	puts("Unable to load wxruby. Searched:")
-	puts($LOAD_PATH)
-	exit(1)
+  warn "LoadError: unable to load wxruby2 binary. Searched:"
+  warn $LOAD_PATH.inspect
+  exit 1
 end
 
 Wx = Wxruby2
 
+# Load the version information (should be bundled with all released versions)
 begin
   require 'wx/version'
 rescue LoadError
@@ -25,11 +25,8 @@ rescue LoadError
   Wx::WXRUBY_VERSION = '0.0.0'
 end
 
-class Wx::App
-	def on_assert(file, line, condition, message)
-		puts("ASSERT: #{file} #{line}")
-		puts(condition)
-		puts(message)
-		raise
-	end
+# Load in all the class extension methods written in ruby
+class_files = File.join( File.dirname(__FILE__), 'wx', 'classes', '*.rb')
+Dir.glob(class_files) do | class_file | 
+  require 'wx/classes/' + class_file[/\w+\.rb$/]
 end
