@@ -1,3 +1,7 @@
+- Window.paint implemented in Ruby (Alex Fenton)
+- Created a directory for ruby extension classes (Alex Fenton)
+- Un-ignored get_multi_line_text_extent (Roy Sutton)
+- Added html doc publishing tasks to rake (Alex Fenton)
 - Add support for faster building on 2-processor systems, via Makefile (Sean Long)
 - Fix some bugs causing crashes on OS X in bigdemo MDI sample (Alex Fenton)
 - Enabled Pen#Get/SetStipple on Mac and MsWin (Alex Fenton/Roy Sutton)
