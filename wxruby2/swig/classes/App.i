@@ -137,16 +137,6 @@ public:
 	{
 		printf("ASSERT fired\n");
 	}
-
-bool Initialize(int& argc, wxChar **argv)
-	{
-		printf("Our Initialize was called\n");
-		bool result = wxApp::Initialize(argc, argv);
-		printf("Their Initialize returned %d\n", result);
-		return result;
-	}
-
-
 };
 
 VALUE wxRubyApp::app_ptr = Qnil;
@@ -158,7 +148,6 @@ class wxRubyApp : public wxApp
 public:
    wxRubyApp() ;
   virtual  ~wxApp() ;
-  virtual wxLog* CreateLogTarget() ;
   void Dispatch() ;
   int FilterEvent(wxEvent&  event ) ;
   wxString GetAppName() const;
