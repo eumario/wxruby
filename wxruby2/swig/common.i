@@ -4,7 +4,7 @@
 %feature("director");
 %feature("compactdefaultargs");
 
-%{
+%runtime %{
 // # SWIG 1.3.29 added this new feature which we can't use (yet)
 #define SWIG_DIRECTOR_NOUEH TRUE
 
@@ -27,11 +27,11 @@
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
 
-void GcMarkDeleted(void *);
-bool GcIsDeleted(void *);
-void GcMapPtrToValue(void *ptr, VALUE val);
-VALUE GcGetValueFromPtr(void *ptr);
-void GcFreefunc(void *);
+extern void GcMarkDeleted(void *);
+extern bool GcIsDeleted(void *);
+extern void GcMapPtrToValue(void *ptr, VALUE val);
+extern VALUE GcGetValueFromPtr(void *ptr);
+extern void GcFreefunc(void *);
 
 extern VALUE mWxruby2;
 %}
