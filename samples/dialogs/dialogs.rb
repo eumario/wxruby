@@ -130,21 +130,15 @@ end
 class MyCanvas < ScrolledWindow
   def initialize(parent)
     super(parent,-1,DEFAULT_POSITION,DEFAULT_SIZE, NO_FULL_REPAINT_ON_RESIZE)
-    text = Wx::StaticText.new(self, -1, 
-                              'WxRuby common dialog test application',
-                              Wx::Point.new(10, 10) )
-    # PaintDC currently causing ObjectPreviouslyDeleted (10 Aug 2006)
-    # evt_paint() {|event| onPaint(event) }
+    evt_paint { |event| on_paint(event) }
   end
 
   def clear
 
   end
 
-  def onPaint(event)
-    # PaintDC currently causing ObjectPreviouslyDeleted (10 Aug 2006)
+  def on_paint(event)
     paint do | dc |
-      p dc
       dc.set_text_foreground( get_app.canvas_text_colour )
       dc.set_font( get_app.canvas_font )
       dc.draw_text("Windows common dialogs test application", 10, 10)
@@ -229,15 +223,15 @@ class MyFrame < Frame
 
   def onChooseFont(event)
     data = FontData.new
-    data.set_initial_font($app.canvas_font)
-    data.set_colour($app.canvas_text_colour)
+    data.set_initial_font(Wx::get_app.canvas_font)
+    data.set_colour(Wx::get_app.canvas_text_colour)
 
     dialog = FontDialog.new(self, data)
 
     if dialog.show_modal() == ID_OK
       retData = dialog.get_font_data()
-      # $app.canvas_font = retData.get_chosen_font()
-      # $app.canvas_text_colour = retData.get_colour()
+      Wx::get_app.canvas_font = retData.get_chosen_font()
+      Wx::get_app.canvas_text_colour = retData.get_colour()
       font   = retData.get_chosen_font
       msg = "Font = %s, %i pt" % [ font.get_face_name,
                                    font.get_point_size ]
@@ -573,7 +567,7 @@ class MyFrame < Frame
       info = BusyInfo.busy("Working, please wait...", self) do
         
         for i in 0 ... 18
-          $app.yield()
+          Wx::get_app.yield()
         end
         sleep(2)
       end
@@ -725,6 +719,6 @@ class MyApp < App
   end
 end
 
-$app = MyApp.new()
-$app.main_loop()
+app = MyApp.new()
+app.main_loop()
 
