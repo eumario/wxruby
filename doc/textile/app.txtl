@@ -34,7 +34,6 @@ h2. Methods
 * "App.new":#App_new
 * "App#argc":#App_argc
 * "App#argv":#App_argv
-* "App#create_log_target":#App_createlogtarget
 * "App#dispatch":#App_dispatch
 * "App#exit_main_loop":#App_exitmainloop
 * "App#filter_event":#App_filterevent
@@ -96,18 +95,6 @@ h3(#App_argv). App#argv
 Char **argv
 
 Command line arguments (after environment-specific processing).
-
-
-h3(#App_createlogtarget). App#create_log_target
-
- "Log":log.html *create_log_target*()
-
-Creates a Log class for the application to use for logging errors. The default
-implementation returns a new LogGui class.
-
-h4. See also
-
-"Log":log.html
 
 
 h3(#App_dispatch). App#dispatch
