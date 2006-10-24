@@ -174,8 +174,6 @@ def all_cpp_files
 
 end
 
-
-
 def to_obj_files(bases)
     return bases.map do | b | obj_file(b) end
 end
@@ -186,6 +184,10 @@ end
 
 def all_obj_files
     return to_obj_files(all_obj_bases)
+end
+
+def all_ruby_lib_files
+  FileList[ 'lib/**/*.rb' ]
 end
 
 def add_initializers(cpp_file)
@@ -339,19 +341,27 @@ def create_link_task
     end
 end
 
-def install_lib(filename)
-	if(!File.directory?($install_lib_dir))
-		mkdir($install_lib_dir)
-	end
-	sh "#{$install_prog} lib/#{filename} #{$install_lib_dir}"
-end
 
 def create_install_task
     desc "Install the WxRuby library to Ruby's lib directories"
-    task :install => [:default] do |t|
-	  install_lib("wx.rb")
-	  install_lib($dl_lib)
-    end    
+    task :install => [ :default, *all_ruby_lib_files ] do | t |
+        dest_dir = Config::CONFIG['sitelibdir']
+        force_mkdir File.join(dest_dir, 'wx')
+        force_mkdir File.join(dest_dir, 'wx', 'classes')
+        cp $target_lib, Config::CONFIG['sitearchdir']
+        all_ruby_lib_files.each do | lib_file |
+            dest = lib_file.sub(/^lib/, dest_dir)
+            cp lib_file, dest
+            chmod 0755, dest
+        end
+    end
+
+    desc "Removes installed library files from site_ruby"
+    task :uninstall do | t |
+        rm_rf File.join(Config::CONFIG['sitearchdir'], $dl_lib)
+        rm_rf File.join(Config::CONFIG['sitelibdir'], 'wx.rb')
+        rm_rf File.join(Config::CONFIG['sitelibdir'], 'wx')
+    end
 end
 
 def create_internal_swig_tasks
