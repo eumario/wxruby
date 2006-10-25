@@ -137,6 +137,14 @@ public:
 	{
 		printf("ASSERT fired\n");
 	}
+
+bool Initialize(int& argc, wxChar **argv)
+	{
+		bool result = wxApp::Initialize(argc, argv);
+		return result;
+	}
+
+
 };
 
 VALUE wxRubyApp::app_ptr = Qnil;
