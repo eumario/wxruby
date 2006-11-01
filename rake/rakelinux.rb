@@ -13,6 +13,8 @@ $extra_cppflags = '-Wno-unused-function '
 # create a .so binary
 $extra_ldflags = '-shared'
 
+# This class is not available on WXGTK
+$excluded_classes << 'PrinterDC'
 
 # This appears to work as of 2006-08-23, Ubuntu 6.06, wx 2.6.3
 # You must have a non-shared, unicode wx configuration available

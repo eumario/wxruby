@@ -34,6 +34,8 @@ $extra_ldflags = ""
 $extra_objs = ""
 $extra_libs = ""
 $link_output_flag = "-o "
+# some classes are not implemented by WxWidgets on all platforms
+$excluded_classes = []
 
 #############################
 # platform-specific

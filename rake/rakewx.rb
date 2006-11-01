@@ -98,15 +98,9 @@ def use_wx_config
 end
 
 def get_classes
-    classes = []
-    Dir::foreach($classes_dir) do | filename |
-        filespec = File.join($classes_dir, filename)
-        #puts("#{filename}: #{File.directory?(filespec)})
-        if(File.extname(filename) == '.i')
-            classes << File.basename(filename, '.i')
-        end
-    end
-    #puts classes
+    classes = FileList[ "#{$classes_dir}/*.i" ]
+    classes.map! { | ifile| File.basename(ifile, '.i') }
+    classes -= $excluded_classes
     return classes.sort
 end
 
