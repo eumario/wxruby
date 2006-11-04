@@ -1,29 +1,35 @@
 h1(#wxmenu). Wx::Menu
 
-A menu is a popup (or pull down) list of items, one of which may be
-selected before the menu goes away (clicking elsewhere dismisses the
-menu). Menus may be used to construct either menu bars or popup menus.
+A menu is a pull-down or pop-up list of items. The Wx::Menu class may be
+used to construct either menu bars (associated with a "Frame":frame.html
+via its "Menubar":menubar.html ) or popup menus. Items are represented
+as text, and some platforms, they may also have icons. One item is
+selected by clicking on it, or by using a shortcut, to start an
+application action. Clicking elsewhere dismisses the menu.
 
-A menu item has an integer ID associated with it which can be used to
-identify the selection, or to change the menu item in some way. A menu item
-with a special identifier $-1$ is a separator item and doesn't have an
-associated command but just makes a separator line appear in the menu.
+A menu item has an integer ID associated with it is used to identify it
+when it is clicked, and to access and change the menu item after it has
+been created. A menu item with a special identifier @-1@ is a separator.
+Separators don't have an associated command but just make a separator line
+appear in the menu.
 
-*NB:* Please note that _ID_ABOUT_ and _ID_EXIT_ are
-predefined by Widgets and have a special meaning since entries
+*NB:* Please note that @ID_ABOUT@ and @ID_EXIT@ are
+predefined by Widgets and have a special meaning. Entries
 using these IDs will be taken out of the normal menus under MacOS X
 and will be inserted into the system menu (following the appropriate
-MacOS X interface guideline). On PalmOS _ID_EXIT_ is disabled according
+MacOS X interface guideline). On PalmOS @ID_EXIT@ is disabled according
 to Palm OS Companion guidelines.
 
-Menu items may be either normal items, check items or radio items. Normal items
-don't have any special properties while the check items have a boolean flag
-associated to them and they show a checkmark in the menu when the flag is set.
-Widgets automatically toggles the flag value when the item is clicked and its
-value may be retrieved using either "is_checked":#Menu_ischecked method
-of Menu or MenuBar itself or by using 
-"Event#is_checked":event.html#Event_ischecked when you get the menu
-notification for the item in question.
+h2. Types of menu item
+
+Menu items may be either normal items, check items or radio
+items. Normal items don't have any special properties. Check items have
+a boolean flag associated to them and they show a checkmark in the menu
+when the flag is set.  Widgets automatically toggles the flag value when
+the item is clicked and its value may be retrieved using either
+"is_checked":#Menu_ischecked method of Menu or MenuBar itself or by
+using "Event#is_checked":event.html#Event_ischecked when you get the
+menu notification for the item in question.
 
 The radio items are similar to the check items except that all the other items
 in the same radio group are unchecked when a radio item is checked. The radio
@@ -34,12 +40,12 @@ of the item positions inserting or removing the items in the menu containing
 the radio items risks to not work correctly. Finally note that radio items
 are not supported under Motif.
 
-h2. Allocation strategy
+h2. Deletion of menus
 
-All menus except the popup ones must be created on the heap. All menus
-attached to a menubar or to another menu will be deleted by their parent when
-it is deleted. As the frame menubar is deleted by the frame itself, it means
-that normally all menus used are deleted automatically.
+All menus attached to a menubar or to another menu will be deleted by
+their parent when it is deleted. As the frame menubar is deleted by the
+frame itself, it means that normally all menus used are deleted
+automatically.
 
 h2. Derived from
 
@@ -49,21 +55,20 @@ h2. Derived from
 
 h2. Event handling
 
-If the menu is part of a menubar, then "MenuBar":menubar.html event processing is used.
+If the menu is part of a menubar, then "MenuBar":menubar.html event
+processing is used, using @evt_menu@.
 
-With a popup menu, there is a variety of ways to handle a menu selection event
-(EVT_COMMAND_MENU_SELECTED).
+To handle a popup menu, handle a menu selection event
+(EVT_COMMAND_MENU_SELECTED). Provide @evt_menu@ handlers in the window
+which pops up the menu, or in an ancestor ofthis window.
 
+h2. Example
 
-# Derive a new class from Menu and define event table entries using the EVT_MENU macro.
-# Set a new event handler for Menu, using an object whose class has EVT_MENU entries.
-# Provide EVT_MENU handlers in the window which pops up the menu, or in an ancestor of
-this window.
-# Define a callback of type Function, which you pass to the Menu constructor.
-The callback takes a reference to the menu, and a reference to a
-"CommandEvent":commandevent.html. This method is deprecated and should
-not be used in the new code, it is provided for backwards compatibility only.
-
+ file_menu = Wx::Menu.new
+ # add a menu item with arbitrary ID 2001
+ file_menu.append(2001, '&Open file')
+ # handle this menu item event
+ evt_menu(2001) { | evt | on_open_file(evt) }
 
 h2. See also
 
@@ -77,6 +82,8 @@ h2. Methods
 
 * "Menu.new":#Menu_new
 * "Menu#append":#Menu_append
+* "Menu#append_item":#Menu_appenditem
+* "Menu#append_menu":#Menu_appendmenu
 * "Menu#append_check_item":#Menu_appendcheckitem
 * "Menu#append_radio_item":#Menu_appendradioitem
 * "Menu#append_separator":#Menu_appendseparator
@@ -122,25 +129,6 @@ h4. Parameters
 * _title_ A title for the popup menu: the empty string denotes no title.
 * _style_ If set to @MENU_TEAROFF@, the menu will be detachable (GTK only).
 
-  *Menu.new*(%(arg-type)Integer% style)
-
-Constructs a Menu object.
-
-h4. Parameters
-
-* _style_ If set to @MENU_TEAROFF@, the menu will be detachable (GTK only).
-
-  *destructor*()
-
-Destructor, destroying the menu.
-
-Note: under Motif, a popup menu must have a valid parent (the window
-it was last popped up on) when being destroyed. Therefore, make sure
-you delete or re-use the popup menu _before_ destroying the
-parent window. Re-use in this context means popping up the menu on
-a different window from last time, which causes an implicit destruction
-and recreation of internal data structures.
-
 h3(#Menu_append). Menu#append
 
  "MenuItem":menuitem.html *append*(%(arg-type)Integer% id,  %(arg-type)String% item, 
@@ -149,33 +137,36 @@ h3(#Menu_append). Menu#append
 
 Adds a string item to the end of the menu.
 
- "MenuItem":menuitem.html *append*(%(arg-type)Integer% id,  %(arg-type)String% item, 
+h3(#Menu_appenditem). Menu#append_item
+
+ "MenuItem":menuitem.html *append_item*(%(arg-type)MenuItem% menuItem)
+
+Adds a "MenuItem":menuitem.html object. This is the most generic variant
+of Append() method because it may be used for both items (including
+separators) and submenus and because you can also specify various extra
+properties of a menu item this way, such as bitmaps and fonts.
+
+h3(#Menu_appendmenu). Menu#append_menu
+
+ "MenuItem":menuitem.html *append_menu*(%(arg-type)Integer% id,  %(arg-type)String% item, 
                    %(arg-type)Menu% subMenu, 
                    %(arg-type)String% helpString = "")
 
-Adds a pull-right submenu to the end of the menu. Append the submenu to the parent
-menu _after_ you have added your menu items, or accelerators may not be
-registered properly.
-
- "MenuItem":menuitem.html *append*(%(arg-type)MenuItem% menuItem)
-
-Adds a menu item object. This is the most generic variant of Append() method
-because it may be used for both items (including separators) and submenus and
-because you can also specify various extra properties of a menu item this way,
-such as bitmaps and fonts.
+Adds a pull-right submenu to the end of the menu. Append the submenu to
+the parent menu _after_ you have added your menu items, or accelerators
+may not be registered properly.
 
 h4. Parameters
 
 * _id_ The menu command identifier.
 * _item_ The string to appear on the menu item.
 * _menu_ Pull-right submenu.
-* _kind_ May be @ITEM_SEPARATOR@, @ITEM_NORMAL@, 
-@ITEM_CHECK@ or @ITEM_RADIO@
-* _helpString_ An optional help string associated with the item.
-By default, the handler for the EVT_MENU_HIGHLIGHT event displays
-this string in the status line.
-* _menuItem_ A menuitem object. It will be owned by the Menu object after this function
-is called, so do not delete it yourself.
+* _kind_ May be @ITEM_SEPARATOR@, @ITEM_NORMAL@, @ITEM_CHECK@ or @ITEM_RADIO@
+* _helpString_ An optional help string associated with the item. By
+default, the handler for the EVT_MENU_HIGHLIGHT event displays this
+string in the status line. 
+* _menuItem_ A menuitem object. It will be owned by the Menu object
+after this function is called, so do not delete it yourself.
 
 h4. Remarks
 
@@ -185,17 +176,17 @@ creation of a menu or menubar.
 The _item_ string for the normal menu items (not submenus or separators)
 may include the accelerator which can be used to activate the menu item
 from keyboard. The accelerator string follows the item label and is separated
-from it by a @TAB@ character (@'$@@$t'@). Its general syntax is
-any combination of @"CTRL"@, @"ALT"@ and @"SHIFT"@ strings (case
+from it by a @TAB@ character "\t". Its general syntax is
+any combination of @CTRL@, @ALT@ and @SHIFT@ strings (case
 doesn't matter) separated by either @'-'@ or @'+'@ characters and
 followed by the accelerator itself. The accelerator may be any alphanumeric
 character, any function key (from @F1@ to @F12@) or one of the special
 characters listed in the table below (again, case doesn't matter):
 
 
-|@DEL@| or @DELETE@Delete key|
-|@INS@| or @INSERT@Insert key|
-|@ENTER@| or @RETURN@Enter key|
+|@DEL@ or @DELETE@|Delete key|
+|@INS@ or @INSERT@|Insert key|
+|@ENTER@ or @RETURN@|Enter key|
 |@PGUP@|PageUp key|
 |@PGDN@|PageDown key|
 |@LEFT@|Left cursor arrow key|
@@ -206,19 +197,17 @@ characters listed in the table below (again, case doesn't matter):
 |@END@|End key|
 |@SPACE@|Space|
 |@TAB@|Tab key|
-|@ESC@| or @ESCAPE@Escape key (Windows only)|
+|@ESC@ or @ESCAPE@| Escape key (Windows only)|
 
 
 h4. See also
 
 "Menu#append_separator":menu.html#Menu_appendseparator, "Menu#append_check_item":menu.html#Menu_appendcheckitem, "Menu#append_radio_item":menu.html#Menu_appendradioitem, "Menu#insert":menu.html#Menu_insert, "Menu#set_label":menu.html#Menu_setlabel, "Menu#get_help_string":menu.html#Menu_gethelpstring, "Menu#set_help_string":menu.html#Menu_sethelpstring, "MenuItem":menuitem.html
 
-
-
 h3(#Menu_appendcheckitem). Menu#append_check_item
 
  "MenuItem":menuitem.html *append_check_item*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                              %(arg-type)String% helpString = "")
+                            %(arg-type)String% helpString = "")
 
 Adds a checkable item to the end of the menu.
 
@@ -229,7 +218,7 @@ h4. See also
 h3(#Menu_appendradioitem). Menu#append_radio_item
 
  "MenuItem":menuitem.html *append_radio_item*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                              %(arg-type)String% helpString = "")
+                            %(arg-type)String% helpString = "")
 
 Adds a radio item to the end of the menu. All consequent radio items form a
 group and when an item in the group is checked, all the others are
@@ -337,8 +326,6 @@ Finds the menu item id for a menu item string.
 Finds the menu item object associated with the given menu item identifier and,
 optionally, the (sub)menu it belongs to.
 
-
-
 h4. Parameters
 
 * _itemString_ Menu item string to find.
@@ -350,7 +337,7 @@ h4. Return value
 
 First form: menu item identifier, or @NOT_FOUND@ if none is found.
 
-Second form: returns the menu item object, or NULL if it is not found.
+Second form: returns the "MenuItem":menuitem.html object, or NULL if it is not found.
 
 h4. Remarks
 
@@ -363,7 +350,7 @@ h3(#Menu_finditembyposition). Menu#find_item_by_position
 
  "MenuItem":menuitem.html *find_item_by_position*(%(arg-type)size_t% position)
 
-Returns the MenuItem given a position in the menu.
+Returns the "MenuItem":menuitem.html at the given position in the menu.
 
 h3(#Menu_gethelpstring). Menu#get_help_string
 
@@ -410,7 +397,7 @@ Returns the number of items in the menu.
 
 h3(#Menu_getmenuitems). Menu#get_menu_items
 
- "MenuItemList":menuitemlist.html *get_menu_items*()
+ Array *get_menu_items*()
 
 Returns the list of items in the menu. MenuItemList is a pseudo-template
 list class containing MenuItem pointers.
@@ -625,7 +612,7 @@ h4. Parameters
 * _title_ The title to set.
 
 h4. Remarks
-
+									
 This is relevant only to popup menus, use 
 "MenuBar#set_label_top":menubar.html#MenuBar_setlabeltop for the menus in the
 menubar.
