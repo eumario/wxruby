@@ -24,6 +24,14 @@ h3 {
     padding-bottom: 2px;
 }
 
+h4 {
+	font-size: 11pt;
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 1px;
+	padding-bottom: 1px;
+}
+
 li, p { 
     font-size: 11pt;
 }
@@ -47,6 +55,12 @@ a:hover {
 a:visited { 
     color: #662211;
     text-decoration: none;
+}
+
+pre {
+	padding: 5px;
+    border: 1px solid #EEEAE3;
+    background-color: #FFFAF3;
 }
 
 .arg-type { 
@@ -94,5 +108,3 @@ a#homelink:after {
 #methods { 
 
 }
-
-
