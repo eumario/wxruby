@@ -1,19 +1,9 @@
 h1(#wxwindowdestroyevent). Wx::WindowDestroyEvent
 
-
-
-This event is sent from the Window destructor Window::~Window() when a
-window is destroyed.
-
-When a class derived from Window is destroyed its destructor will have
-already run by the time this event is sent. Therefore this event will not
-usually be received at all.
-
-To receive this event "EvtHandler#connect":evthandler.html#EvtHandler_connect
-must be used (using an event table macro will not work). Since it is
-received after the destructor has run, an object should not handle its
-own WindowDestroyEvent, but it can be used to get notification of the
-destruction of another window.
+This event is sent when a window is destroyed. It is a subclass of
+"CommandEvent":commandevent.html and so it is propagated up the window
+hierarchy. This means that frames, panels and other container windows
+can listen for the destruction of controls that they contain.
 
 h2. Derived from
 
@@ -23,10 +13,19 @@ h2. Derived from
 
 "Object":object.html
 
-h2. Event table macros
+h2. Event hooks
 
 
-It is not possible to receive this event using an event table macro.
+To process a window destruction event, use the @evt_destroy@ event hook
+to handle the event using a block. The block can optionally receive a
+WindowDestroyEvent argument. @id@ should be the id of the window whose
+destruction should be handled. It is possible to observe the destruction
+of any window using the special identifier @Wx::ID_ANY@. Note that a
+WindowDestroyEvent is only generated when a window's @destroy@ method is
+explicitly called; the automatic deletion of child windows when a frame
+is destroyed does *not* trigger these events.
+
+|*evt_destroy(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_DESTROY event.|
 
 h2. See also
 
@@ -40,10 +39,9 @@ h2. Methods
 
 </div>
 
-
 h3(#WindowDestroyEvent_new). WindowDestroyEvent.new
 
   *WindowDestroyEvent.new*(%(arg-type)Window% win = nil)
 
-Constructor.
+Constructor. Unlikely to be required in user code.
 

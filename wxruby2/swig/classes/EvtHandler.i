@@ -61,6 +61,8 @@ extern swig_class cWxListEvent;
 extern swig_class cWxWizardEvent;
 extern swig_class cWxSashEvent;
 extern swig_class cWxActivateEvent;
+extern swig_class cWxWindowCreateEvent;
+extern swig_class cWxWindowDestroyEvent;
 #ifdef WXSCINTILLA
 extern swig_class cWxScintillaEvent;
 #endif
@@ -277,6 +279,18 @@ static const wxEventType *activateEvents[] =
   (const wxEventType *)0
 };
 
+static const wxEventType *createEvents[] =
+{
+  &wxEVT_CREATE,
+  (const wxEventType *)0
+};
+
+static const wxEventType *destroyEvents[] =
+{
+  &wxEVT_DESTROY,
+  (const wxEventType *)0
+};
+
 #ifdef WXSCINTILLA
 static const wxEventType *scintillaEvents[] =
 {
@@ -373,6 +387,10 @@ public:
             cEvent = cWxWizardEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxActivateEvent)))
             cEvent = cWxActivateEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxWindowCreateEvent)))
+            cEvent = cWxWindowCreateEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxWindowDestroyEvent)))
+            cEvent = cWxWindowDestroyEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
             cEvent = cWxSashEvent.klass;
 #ifdef WXSCINTILLA
@@ -411,7 +429,6 @@ public:
 void internal_connect(VALUE self, int firstId, int lastId, 
                 wxEventType eventType)
 {
-    
     wxEvtHandler *cppSelf = (wxEvtHandler *) 0 ;
     SWIG_ConvertPtr(self, (void **) &cppSelf, SWIGTYPE_p_wxEvtHandler, 1);
 
@@ -445,7 +462,7 @@ Init_wxRubyEventTypes();
 static void internal_connect(VALUE self, int firstId, int lastId, 
                 wxEventType eventType)
 {
-    
+
     wxEvtHandler *cppSelf = (wxEvtHandler *) 0 ;
     SWIG_ConvertPtr(self, (void **) &cppSelf, SWIGTYPE_p_wxEvtHandler, 1);
 
@@ -1054,6 +1071,16 @@ static VALUE evt_activate(int argc, VALUE *argv, VALUE self)
 static VALUE evt_activate_app(int argc, VALUE *argv, VALUE self) 
 {
     return internal_evt_no_parameters(argc, argv, self, wxEVT_ACTIVATE_APP);
+}
+
+static VALUE evt_create(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_CREATE);
+}
+
+static VALUE evt_destroy(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_DESTROY);
 }
 // TODO:  Add for ListEvent types?  Is this needed?
 
