@@ -69,6 +69,8 @@ puts("core_name: #{core_name}")
 			lines << '    printf("' + this_module + '" " ~Director %p\n", this);'
 			lines << '    fflush(stdout);'
 			lines << '#endif'
+            lines << '    VALUE rb_obj = GcGetValueFromPtr(this);'
+            lines << '    rb_ivar_set(rb_obj, rb_intern("@__swig_dead__"), Qtrue);'
 			lines << '    GcMarkDeleted(this);'
 			line = lines.join("\n")
 			found_director_destructor = true

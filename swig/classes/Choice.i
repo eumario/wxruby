@@ -1,4 +1,4 @@
-#   Copyright 2004-2005 by Kevin Smith
+#   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
 %include "../common.i"
@@ -27,8 +27,25 @@
               long style = 0,
               const wxValidator& validator = wxDefaultValidator,
               const wxString& name = wxChoiceNameStr);
-  
 
+
+// start client_data fixes
+%include "../shared/control_with_items.i"
+%markfunc wxChoice "mark_wxControlWithItems";
+
+%ignore wxChoice::GetClientData(int n) const;
+%ignore wxChoice::GetClientObject(int n) const;
+%extend wxChoice {
+  VALUE get_client_data(int n)
+  {
+	VALUE returnVal = (VALUE) self->GetClientData(n);
+	if ( returnVal == NULL )
+	  return Qnil;
+	return returnVal;
+  }
+}
+
+// end client_data fix
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
