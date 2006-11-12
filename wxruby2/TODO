@@ -23,8 +23,6 @@ Visible Bugs
 	TextAttr.h
 	WindowDisabler.h
 
-- SashWindows sashes not displaying until pulled (Linux)
-
 - Splitters in bigdemo sometimes disappear when loading source (OS X)
 
 - Truncation/missing widgets in bigdemo (OS X)
