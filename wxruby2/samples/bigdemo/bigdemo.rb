@@ -272,7 +272,7 @@ class WxRubyDemo < Wx::Frame
         @mainmenu.append(menu, "&Demo")
         
         # Make a Help menu
-        helpID = @demoID += 1
+        helpID = Wx::ID_ABOUT
         findID = @demoID += 1
         findnextID = @demoID += 1
         clearID = @demoID += 1
@@ -489,7 +489,7 @@ class WxRubyDemo < Wx::Frame
     end
     
     def on_help_about(event)
-        load "About.rbw"
+        load File.join(File.dirname(__FILE__), "About.rbw")
         about = About::MyAboutBox.new(self)
         about.show_modal()
         about.destroy()
