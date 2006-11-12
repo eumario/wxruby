@@ -349,25 +349,17 @@ would be nice to have.
 
 h2(#html). HTML classes
 
-These are a set of classes to display text in HTML format. These class
-include a help system based on the HTML widget. This is not yet
-available in wxRuby, but would be nice to have.
+These are a set of classes to allow display and printing of hypertext in
+HTML format, including images and clickable links.
 
 |HtmlHelpController|HTML help controller class|
-|HtmlWindow|HTML window class|
-|HtmlEasyPrinting|Simple class for printing HTML|
+|HtmlWindow|HTML window class, for displaying HTML|
+|HtmlEasyPrinting|Simple but useful class for printing HTML|
 |HtmlPrintout|Generic HTML wxPrintout class|
 |HtmlParser|Generic HTML parser class|
 |HtmlTagHandler|HTML tag handler, pluginable into wxHtmlParser|
 |HtmlWinParser|HTML parser class for wxHtmlWindow|
 |HtmlWinTagHandler|HTML tag handler, pluginable into wxHtmlWinParser|
-
-There are also a a set of classes that implement an extensible virtual file
-system, used internally by the HTML classes.
-
-|FSFile|Represents a file in the virtual file system|
-|FileSystem|Main interface for the virtual file system|
-|FileSystemHandler|Class used to announce file system type|
 
 "top":#top
 
