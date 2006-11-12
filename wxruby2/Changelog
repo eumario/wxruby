@@ -1,3 +1,8 @@
+- Fix crash in etc/sash.rb sample (Alex Fenton)
+- Added HtmlWindow, HtmlCell, HtmlEasyPrinting &c (Alex Fenton)
+- Added WindowCreateEvent and WindowDestroyEvent (Alex Fenton)
+- Fix for Choice#get_client_data and set_client_data, inc mem mgmt (Alex Fenton)
+
 === 0.0.37 tag on 2006-10-24 included all of this: ===
 - Fixed rake install task for non-gem build, added rake uninstall (Alex Fenton)
 - Some unneeded debugging and deprecated method removed from App (Alex Fenton)
