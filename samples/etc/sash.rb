@@ -89,7 +89,6 @@ class MySashFrame < Wx::Frame
     # The second argument is the residual window that takes up remaining
     # space
     Wx::LayoutAlgorithm.new.layout_frame(self, @m_panel)
-    paint()
   end
 
   def on_v_sash_dragged(sash, e)
