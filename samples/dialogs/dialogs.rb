@@ -40,42 +40,42 @@ DIALOGS_BUSYINFO = 23
 DIALOGS_FIND = 24
 DIALOGS_REPLACE = 25
 
-$myCanvas = nil
+$my_canvas = nil
 
 class MyModalDialog < Dialog
   def initialize(parent)
     super(parent, -1, "Modal dialog")
 
-    sizerTop = BoxSizer.new(HORIZONTAL)
+    sizer_top = BoxSizer.new(HORIZONTAL)
 
-    @m_btnFocused = Button.new(self, -1, "Default button")
-    @m_btnDelete = Button.new(self, -1, "&Delete button")
-    btnOk = Button.new(self, ID_CANCEL, "&Close")
-    sizerTop.add(@m_btnFocused, 0, ALIGN_CENTER | ALL, 5)
-    sizerTop.add(@m_btnDelete, 0, ALIGN_CENTER | ALL, 5)
-    sizerTop.add(btnOk, 0, ALIGN_CENTER | ALL, 5)
+    @btn_focused = Button.new(self, -1, "Default button")
+    @btn_delete = Button.new(self, -1, "&Delete button")
+    btn_ok = Button.new(self, ID_CANCEL, "&Close")
+    sizer_top.add(@btn_focused, 0, ALIGN_CENTER | ALL, 5)
+    sizer_top.add(@btn_delete, 0, ALIGN_CENTER | ALL, 5)
+    sizer_top.add(btn_ok, 0, ALIGN_CENTER | ALL, 5)
 
-    set_auto_layout(TRUE)
-    set_sizer(sizerTop)
+    set_auto_layout(true)
+    set_sizer(sizer_top)
 
-    sizerTop.set_size_hints(self)
-    sizerTop.fit(self)
+    sizer_top.set_size_hints(self)
+    sizer_top.fit(self)
 
-    @m_btnFocused.set_focus()
-    @m_btnFocused.set_default()
+    @btn_focused.set_focus()
+    @btn_focused.set_default()
 
-    evt_button(-1) {|event| onButton(event) }
+    evt_button(-1) {|event| on_button(event) }
   end
 
-  def onButton(event)
+  def on_button(event)
     id = event.get_id
     
-    if id == @m_btnDelete.get_id
-      @m_btnFocused.destroy
-      @m_btnFocused = nil
+    if id == @btn_delete.get_id
+      @btn_focused.destroy
+      @btn_focused = nil
 
-      @m_btnDelete.disable()
-    elsif @m_btnFocused && id == @m_btnFocused.get_id
+      @btn_delete.disable()
+    elsif @btn_focused && id == @btn_focused.get_id
       get_text_from_user("Dummy prompt", "Modal dialog called from dialog",
                          "", self)
     else
@@ -89,33 +89,33 @@ class MyModelessDialog < Dialog
   def initialize(parent)
     super(parent, -1, "Modeless dialog")
 
-    sizerTop = BoxSizer.new(VERTICAL)
+    sizer_top = BoxSizer.new(VERTICAL)
 
     btn = Button.new(self, DIALOGS_MODELESS_BTN, "Press me")
     check = CheckBox.new(self, -1, "Should be disabled")
     check.disable()
 
-    sizerTop.add(btn, 1, EXPAND | ALL, 5)
-    sizerTop.add(check, 1, EXPAND | ALL, 5)
+    sizer_top.add(btn, 1, EXPAND | ALL, 5)
+    sizer_top.add(check, 1, EXPAND | ALL, 5)
 
-    set_auto_layout(TRUE)
-    set_sizer(sizerTop)
+    set_auto_layout(true)
+    set_sizer(sizer_top)
 
-    sizerTop.set_size_hints(self)
-    sizerTop.fit(self)
+    sizer_top.set_size_hints(self)
+    sizer_top.fit(self)
 
-    evt_button(DIALOGS_MODELESS_BTN) {|event| onButton(event) }
+    evt_button(DIALOGS_MODELESS_BTN) {|event| on_button(event) }
 
-    evt_close() {|event| onClose(event) }
+    evt_close() {|event| on_close(event) }
 
   end
 
-  def onButton(event)
+  def on_button(event)
     message_box("Button pressed in modeless dialog", "Info",
                 OK | ICON_INFORMATION, self)
   end
 
-  def onClose(event)
+  def on_close(event)
     if event.can_veto()
       message_box("Use the menu item to close self dialog",
                   "Modeless dialog",
@@ -138,11 +138,10 @@ class MyCanvas < ScrolledWindow
   end
 
   def on_paint(event)
-    paint do | dc |
-      dc.set_text_foreground( get_app.canvas_text_colour )
-      dc.set_font( get_app.canvas_font )
-      dc.draw_text("Windows common dialogs test application", 10, 10)
-    end
+    dc = PaintDC.new(self)
+    dc.set_text_foreground( get_app.canvas_text_colour )
+    dc.set_font( get_app.canvas_font )
+    dc.draw_text("Windows common dialogs test application", 10, 10)
   end
 end
 
@@ -153,57 +152,57 @@ class MyFrame < Frame
                  size)
     super(parent, -1, title, pos, size)
 
-    @m_dialog = nil
+    @dialog = nil
 
-    @m_dlgFind = nil
-    @m_dlgReplace = nil
+    @dlg_find = nil
+    @dlg_replace = nil
 
-    @m_findData = FindReplaceData.new
+    @find_data = FindReplaceData.new
 
-    @s_extDef = ""
-    @s_index = -1
+    @ext_def = ""
+    @index = -1
 
     @max = 10
 
     create_status_bar()
 
-    evt_menu(DIALOGS_CHOOSE_COLOUR) {|event| onChooseColour(event) }
-    evt_menu(DIALOGS_CHOOSE_FONT) {|event| onChooseFont(event) }
-    evt_menu(DIALOGS_LOG_DIALOG) {|event| onLogDialog(event) }
-    evt_menu(DIALOGS_MESSAGE_BOX) {|event| onMessageBox(event) }
-    evt_menu(DIALOGS_TEXT_ENTRY) {|event| onTextEntry(event) }
-    evt_menu(DIALOGS_PASSWORD_ENTRY) {|event| onPasswordEntry(event) }
-    evt_menu(DIALOGS_NUM_ENTRY) {|event| onNumericEntry(event) }
-    evt_menu(DIALOGS_SINGLE_CHOICE) {|event| onSingleChoice(event) }
-    evt_menu(DIALOGS_MULTI_CHOICE) {|event| onMultiChoice(event) }
-    evt_menu(DIALOGS_FILE_OPEN) {|event| onFileOpen(event) }
-    evt_menu(DIALOGS_FILE_OPEN2) {|event| onFileOpen2(event) }
-    evt_menu(DIALOGS_FILES_OPEN) {|event| onFilesOpen(event) }
-    evt_menu(DIALOGS_FILE_SAVE) {|event| onFileSave(event) }
-    evt_menu(DIALOGS_DIR_CHOOSE) {|event| onDirChoose(event) }
-    evt_menu(DIALOGS_MODAL) {|event| onModalDlg(event) }
-    evt_menu(DIALOGS_MODELESS) {|event| onModelessDlg(event) }
-    evt_menu(DIALOGS_TIP) {|event| onShowTip(event) }
-    evt_menu(DIALOGS_PROGRESS) {|event| onShowProgress(event) }
-    evt_menu(DIALOGS_BUSYINFO) {|event| onShowBusyInfo(event) }
-    evt_menu(DIALOGS_FIND) {|event| onShowFindDialog(event) }
-    evt_menu(DIALOGS_REPLACE) {|event| onShowReplaceDialog(event) }
-    evt_find(-1) {|event| onFindDialog(event) }
-    evt_find_next(-1) {|event| onFindDialog(event) }
-    evt_find_replace(-1) {|event| onFindDialog(event) }
-    evt_find_replace_all(-1) {|event| onFindDialog(event) }
-    evt_find_close(-1) {|event| onFindDialog(event) }
-    evt_menu(ID_EXIT) {|event| onExit(event) }
+    evt_menu(DIALOGS_CHOOSE_COLOUR) {|event| on_choose_colour(event) }
+    evt_menu(DIALOGS_CHOOSE_FONT) {|event| on_choose_font(event) }
+    evt_menu(DIALOGS_LOG_DIALOG) {|event| on_log_dialog(event) }
+    evt_menu(DIALOGS_MESSAGE_BOX) {|event| on_message_box(event) }
+    evt_menu(DIALOGS_TEXT_ENTRY) {|event| on_text_entry(event) }
+    evt_menu(DIALOGS_PASSWORD_ENTRY) {|event| on_password_entry(event) }
+    evt_menu(DIALOGS_NUM_ENTRY) {|event| on_numeric_entry(event) }
+    evt_menu(DIALOGS_SINGLE_CHOICE) {|event| on_single_choice(event) }
+    evt_menu(DIALOGS_MULTI_CHOICE) {|event| on_multi_choice(event) }
+    evt_menu(DIALOGS_FILE_OPEN) {|event| on_file_open(event) }
+    evt_menu(DIALOGS_FILE_OPEN2) {|event| on_file_open2(event) }
+    evt_menu(DIALOGS_FILES_OPEN) {|event| on_files_open(event) }
+    evt_menu(DIALOGS_FILE_SAVE) {|event| on_file_save(event) }
+    evt_menu(DIALOGS_DIR_CHOOSE) {|event| on_dir_choose(event) }
+    evt_menu(DIALOGS_MODAL) {|event| on_modal_dlg(event) }
+    evt_menu(DIALOGS_MODELESS) {|event| on_modeless_dlg(event) }
+    evt_menu(DIALOGS_TIP) {|event| on_show_tip(event) }
+    evt_menu(DIALOGS_PROGRESS) {|event| on_show_progress(event) }
+    evt_menu(DIALOGS_BUSYINFO) {|event| on_show_busy_info(event) }
+    evt_menu(DIALOGS_FIND) {|event| on_show_find_dialog(event) }
+    evt_menu(DIALOGS_REPLACE) {|event| on_show_replace_dialog(event) }
+    evt_find(-1) {|event| on_find_dialog(event) }
+    evt_find_next(-1) {|event| on_find_dialog(event) }
+    evt_find_replace(-1) {|event| on_find_dialog(event) }
+    evt_find_replace_all(-1) {|event| on_find_dialog(event) }
+    evt_find_close(-1) {|event| on_find_dialog(event) }
+    evt_menu(ID_EXIT) {|event| on_exit(event) }
 
   end
 
-  def onChooseColour(event)
+  def on_choose_colour(event)
 
-    col = $myCanvas.get_background_colour()
+    col = $my_canvas.get_background_colour()
 
     data = ColourData.new
     data.set_colour(col)
-    data.set_choose_full(TRUE)
+    data.set_choose_full(true)
     for i in 0 ... 16
       colour = Colour.new(i*16, i*16, i*16)
       data.set_custom_colour(i, colour)
@@ -214,14 +213,14 @@ class MyFrame < Frame
     if dialog.show_modal() == ID_OK
       retData = dialog.get_colour_data()
       col = retData.get_colour()
-      $myCanvas.set_background_colour(col)
-      #$myCanvas.clear()
-      $myCanvas.refresh()
+      $my_canvas.set_background_colour(col)
+      #$my_canvas.clear()
+      $my_canvas.refresh()
     end
   end
 
 
-  def onChooseFont(event)
+  def on_choose_font(event)
     data = FontData.new
     data.set_initial_font(Wx::get_app.canvas_font)
     data.set_colour(Wx::get_app.canvas_text_colour)
@@ -229,21 +228,21 @@ class MyFrame < Frame
     dialog = FontDialog.new(self, data)
 
     if dialog.show_modal() == ID_OK
-      retData = dialog.get_font_data()
-      Wx::get_app.canvas_font = retData.get_chosen_font()
-      Wx::get_app.canvas_text_colour = retData.get_colour()
-      font   = retData.get_chosen_font
+      ret_data = dialog.get_font_data()
+      Wx::get_app.canvas_font = ret_data.get_chosen_font()
+      Wx::get_app.canvas_text_colour = ret_data.get_colour()
+      font   = ret_data.get_chosen_font
       msg = "Font = %s, %i pt" % [ font.get_face_name,
                                    font.get_point_size ]
       dialog2 = MessageDialog.new(self, msg, "Got font")
       dialog2.show_modal()
-      # $myCanvas.refresh()
+      # $my_canvas.refresh()
     end
     #else: cancelled by the user, don't change the font
   end
 
 
-  def onLogDialog(event)
+  def on_log_dialog(event)
 
     # calling yield() (as ~BusyCursor does) shouldn't result in messages
     # being flushed -- test it
@@ -263,10 +262,10 @@ class MyFrame < Frame
       Log::flush_active()
       
       log_message("And this is the same dialog but with only one message.")
-	end
+	  end
   end
 
-  def onMessageBox(event)
+  def on_message_box(event)
 
     dialog = MessageDialog.new(nil, "This is a message box\nA long, long string to test out the message box properly",
                                "Message box text", NO_DEFAULT|YES_NO|CANCEL|ICON_INFORMATION)
@@ -284,7 +283,7 @@ class MyFrame < Frame
   end
 
 
-  def onNumericEntry(event)
+  def on_numeric_entry(event)
 
     res = get_number_from_user( "This is some text, actually a lot of text.\n" +
                                                                                 "Even two rows of text.",
@@ -302,7 +301,7 @@ class MyFrame < Frame
     message_box(msg, "Numeric test result", OK | icon, self)
   end
 
-  def onPasswordEntry(event)
+  def on_password_entry(event)
 
     pwd = get_password_from_user("Enter password:",
                                  "Password entry dialog",
@@ -314,7 +313,7 @@ class MyFrame < Frame
   end
 
 
-  def onTextEntry(event)
+  def on_text_entry(event)
 
     dialog = TextEntryDialog.new(self,
                                  "This is a small sample\n" +
@@ -329,7 +328,7 @@ class MyFrame < Frame
     end
   end
 
-  def onSingleChoice(event)
+  def on_single_choice(event)
 
     choices = ["One", "Two", "Three", "Four", "Five"]
 
@@ -348,7 +347,7 @@ class MyFrame < Frame
   end
 
 
-  def onMultiChoice(event)
+  def on_multi_choice(event)
 
     choices = [
       "One", "Two", "Three", "Four", "Five",
@@ -372,7 +371,7 @@ class MyFrame < Frame
   end
 
 
-  def onFileOpen(event)
+  def on_file_open(event)
 
     dialog = FileDialog.new(
                              self,
@@ -400,12 +399,12 @@ class MyFrame < Frame
   # this shows how to take advantage of specifying a default extension in the
   # call to FileSelector: it is remembered after each new call and the next
   # one will use it by default
-  def onFileOpen2(event)
+  def on_file_open2(event)
 
     path = file_selector(
                           "Select the file to load",
                           "", "",
-                          @s_extDef,
+                          @ext_def,
                           "Waveform (*.wav)|*.wav|Plain text (*.txt)|*.txt|All files (*.*)|*.*",
                           CHANGE_DIR,
                           self
@@ -416,14 +415,14 @@ class MyFrame < Frame
     end
 
     # it is just a sample, would use SplitPath in real program
-    @s_extDef = path[/[^\.]*$/]
+    @ext_def = path[/[^\.]*$/]
 
     log_message("You selected the file '%s', remembered extension '%s'",
-                path, @s_extDef)
+                path, @ext_def)
   end
 
 
-  def onFilesOpen(event)
+  def on_files_open(event)
 
     dialog = FileDialog.new(self, "Testing open multiple file dialog",
                             "", "", FILE_SELECTOR_DEFAULT_WILDCARD_STR,
@@ -448,7 +447,7 @@ class MyFrame < Frame
   end
 
 
-  def onFileSave(event)
+  def on_file_save(event)
 
     dialog = FileDialog.new(self,
                             "Testing save file dialog",
@@ -466,12 +465,12 @@ class MyFrame < Frame
     end
   end
 
-  def onDirChoose(event)
+  def on_dir_choose(event)
 
     # pass some initial dir to DirDialog
-    dirHome = get_home_dir()
+    dir_home = get_home_dir()
 
-    dialog = DirDialog.new(self, "Testing directory picker", dirHome)
+    dialog = DirDialog.new(self, "Testing directory picker", dir_home)
 
     if dialog.show_modal() == ID_OK
       log_message("Selected path: %s", dialog.get_path())
@@ -479,50 +478,50 @@ class MyFrame < Frame
   end
 
 
-  def onModalDlg(event)
+  def on_modal_dlg(event)
     dlg = MyModalDialog.new(self)
     dlg.show_modal()
   end
 
-  def onModelessDlg(event)
+  def on_modeless_dlg(event)
     show = get_menu_bar().is_checked(event.get_id())
     if show
-      if !@m_dialog
-        @m_dialog = MyModelessDialog.new(self)
+      if !@dialog
+        @dialog = MyModelessDialog.new(self)
       end
-      @m_dialog.show(TRUE)
+      @dialog.show(true)
     else # hide
-      @m_dialog.hide()
+      @dialog.hide()
     end
   end
 
 
-  def onShowTip(event)
+  def on_show_tip(event)
 
-    if @s_index == -1
-      @s_index = rand(5)
+    if @index == -1
+      @index = rand(5)
     end
     
     tip_src = File.join( File.dirname(__FILE__), 'tips.txt')
-    tipProvider = create_file_tip_provider(tip_src, @s_index)
+    tip_provider = create_file_tip_provider(tip_src, @index)
 
-    showAtStartup = show_tip(self, tipProvider)
+    show_at_startup = show_tip(self, tip_provider)
 
-    if showAtStartup
+    if show_at_startup
       message_box("Will show tips on startup", "Tips dialog",
                   OK | ICON_INFORMATION, self)
     end
 
-    @s_index = tipProvider.get_current_tip()
+    @index = tip_provider.get_current_tip()
 
   end
 
-  def onExit(event)
-    close(TRUE)
+  def on_exit(event)
+    close(true)
   end
 
 
-  def onShowProgress(event)
+  def on_show_progress(event)
 
     dialog = ProgressDialog.new("Progress dialog example",
                                 "An informative message",
@@ -562,7 +561,7 @@ class MyFrame < Frame
     end
   end
 
-  def onShowBusyInfo(event)
+  def on_show_busy_info(event)
     WindowDisabler.disable(self) do
       info = BusyInfo.busy("Working, please wait...", self) do
         
@@ -574,41 +573,41 @@ class MyFrame < Frame
 	end
   end
 
-  def onShowReplaceDialog(event)
+  def on_show_replace_dialog(event)
 
-    if @m_dlgReplace
-      #@m_dlgReplace.destroy
-      @m_dlgReplace = nil
+    if @dlg_replace
+      #@dlg_replace.destroy
+      @dlg_replace = nil
     else
-      @m_dlgReplace = FindReplaceDialog.new(
+      @dlg_replace = FindReplaceDialog.new(
                                              self,
-                                             @m_findData,
+                                             @find_data,
                                              "Find and replace dialog",
                                              FR_REPLACEDIALOG
                                            )
 
-      @m_dlgReplace.show(TRUE)
+      @dlg_replace.show(true)
     end
   end
 
-  def onShowFindDialog(event)
+  def on_show_find_dialog(event)
 
-    if @m_dlgFind
-      @m_dlgFind.destroy
-      @m_dlgFind = nil
+    if @dlg_find
+      @dlg_find.destroy
+      @dlg_find = nil
     else
-      @m_dlgFind = FindReplaceDialog.new(
+      @dlg_find = FindReplaceDialog.new(
                                           self,
-                                          @m_findData,
+                                          @find_data,
                                           "Find dialog",  # just for testing
                                           FR_NOWHOLEWORD
                                         )
 
-      @m_dlgFind.show(TRUE)
+      @dlg_find.show(true)
     end
   end
 
-  def DecodeFindDialogEventFlags(flags)
+  def decode_find_dialog_event_flags(flags)
     str = ""
     str << ((flags & FR_DOWN) != 0 ? "down" : "up") << ", "  \
     << ((flags & FR_WHOLEWORD) != 0 ? "whole words only, " : "") \
@@ -618,7 +617,7 @@ class MyFrame < Frame
     return str
   end
 
-  def onFindDialog(event)
+  def on_find_dialog(event)
 
     type = event.get_event_type()
 
@@ -626,33 +625,33 @@ class MyFrame < Frame
       log_message("Find %s'%s' (flags: %s)",
                   type == EVT_COMMAND_FIND_NEXT ? "next " : "",
                   event.get_find_string(),
-                  DecodeFindDialogEventFlags(event.get_flags()))
+                  decode_find_dialog_event_flags(event.get_flags()))
     elsif type == EVT_COMMAND_FIND_REPLACE || type == EVT_COMMAND_FIND_REPLACE_ALL
       log_message("Replace %s'%s' with '%s' (flags: %s)",
                   type == EVT_COMMAND_FIND_REPLACE_ALL ? "all " : "",
                   event.get_find_string(),
                   event.get_replace_string(),
-                  DecodeFindDialogEventFlags(event.get_flags()))
+                  decode_find_dialog_event_flags(event.get_flags()))
     elsif type == EVT_COMMAND_FIND_CLOSE
       dlg = event.get_dialog()
-      if dlg == @m_dlgFind
+      if dlg == @dlg_find
         txt = "Find"
-        idMenu = DIALOGS_FIND
-        @m_dlgFind = nil
-      elsif dlg == @m_dlgReplace
+        id_menu = DIALOGS_FIND
+        @dlg_find = nil
+      elsif dlg == @dlg_replace
         txt = "Replace"
-        idMenu = DIALOGS_REPLACE
-        @m_dlgReplace = nil
+        id_menu = DIALOGS_REPLACE
+        @dlg_replace = nil
       else
         txt = "Unknown"
-        idMenu = -1
+        id_menu = -1
         log_error("unexpected event")
       end
 
       log_message("%s dialog is being closed.", txt)
 
-      if idMenu != -1
-        get_menu_bar().check(idMenu, FALSE)
+      if id_menu != -1
+        get_menu_bar().check(id_menu, false)
       end
 
       dlg.destroy()
@@ -709,8 +708,8 @@ class MyApp < App
     menu_bar.append(file_menu, "&File")
     frame.set_menu_bar(menu_bar)
 
-    $myCanvas = MyCanvas.new(frame)
-    $myCanvas.set_background_colour(WHITE)
+    $my_canvas = MyCanvas.new(frame)
+    $my_canvas.set_background_colour(WHITE)
 
     frame.centre(BOTH)
 
