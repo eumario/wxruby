@@ -32,8 +32,8 @@ class MyFrame < Wx::Frame
     s = Wx::StaticText.new(self, -1, 'The Wizard has completed')
 
 
-    evt_menu(Wx::ID_EXIT) { onQuit }
-    evt_menu(Wx::ID_ABOUT) { onAbout }
+    evt_menu(Wx::ID_EXIT) { on_quit }
+    evt_menu(Wx::ID_ABOUT) { on_about }
     w = Wx::Wizard.new(self, -1, 'The WxRuby Wizard')
     p1 = Wx::WizardPageSimple.new(w)
     s = Wx::StaticText.new(p1, -1, 'This is the first page')
@@ -54,14 +54,14 @@ class MyFrame < Wx::Frame
     w.run_wizard(p1)
   end
 
-  def onQuit
+  def on_quit
     close(Wx::TRUE)
   end
 
-  def onAbout
+  def on_about
     msg =  sprintf("This is the About dialog of the wizard sample.\n" \
                     "Welcome to %s", Wx::VERSION_STRING)
-    message_box(msg, "About Wizard", Wx::OK|Wx::ICON_INFORMATION, self)
+    Wx::message_box(msg, "About Wizard", Wx::OK|Wx::ICON_INFORMATION, self)
   end
 end
 
