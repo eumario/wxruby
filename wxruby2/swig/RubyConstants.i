@@ -18,7 +18,7 @@
 #include <wx/imagbmp.h>
 #include <wx/sashwin.h>
 #include <wx/prntbase.h>
-
+//#include <wx/dcbuffer.h>
 
 // All of these exist on only one platform, so in those
 // cases I'm defining them so the compiler doesn't freak out
@@ -2197,6 +2197,16 @@ enum wxLayoutOrientation
 #define wxSPLASH_NO_CENTRE          0x00
 #define wxSPLASH_TIMEOUT            0x04
 #define wxSPLASH_NO_TIMEOUT         0x00
+
+// Double buffering helper
+
+// Assumes the buffer bitmap covers the entire scrolled window,
+// and prepares the window DC accordingly
+//#define wxBUFFER_VIRTUAL_AREA       0x01
+
+// Assumes the buffer bitmap only covers the client area;
+// does not prepare the window DC
+//#define wxBUFFER_CLIENT_AREA        0x02
 
 // Platform constants
 

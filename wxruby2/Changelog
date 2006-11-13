@@ -1,3 +1,4 @@
+- Fixed a few crashes in samples (Sean Long)
 - Fix crash in etc/sash.rb sample (Alex Fenton)
 - Added HtmlWindow, HtmlCell, HtmlEasyPrinting &c (Alex Fenton)
 - Added WindowCreateEvent and WindowDestroyEvent (Alex Fenton)
