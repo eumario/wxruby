@@ -1,6 +1,7 @@
+#!/usr/bin/env ruby
 # Written by Nobuaki Arima
 
-require 'wxruby'
+require 'wx'
 
 ID = 1
 
@@ -34,22 +35,28 @@ class ListctrlFrame < Wx::Frame
 
     # test of get_item method
     0.upto(2) do |i|
-      item = list.get_item(i)
-      print "ID:",item.get_id,"\n"
-      print "column:    ",item.get_column,"\n"
-      print "text:      ",item.get_text,"\n"
-      print "text color:",show_color(item.get_text_colour),"\n"
-      print "BG color:  ",show_color(item.get_background_colour),"\n"
-      print "font:      ",show_font(item.get_font),"\n\n"
+      item = Wx::ListItem.new()
+      item.set_id(i)
+      if list.get_item(item)      
+        print "ID:",item.get_id,"\n"
+        print "column:    ",item.get_column,"\n"
+        print "text:      ",item.get_text,"\n"
+        print "text color:",show_color(item.get_text_colour),"\n"
+        print "BG color:  ",show_color(item.get_background_colour),"\n"
+        print "font:      ",show_font(item.get_font),"\n\n"
+      end
     end
     0.upto(2) do |i|
-      item = list.get_item(i,1)
-      print "ID:",item.get_id,"\n"
-      print "column:    ",item.get_column,"\n"
-      print "text:      ",item.get_text,"\n"
-      print "text color:",show_color(item.get_text_colour),"\n"
-      print "BG color:  ",show_color(item.get_background_colour),"\n"
-      print "font:      ",show_font(item.get_font),"\n\n"
+      item = Wx::ListItem.new()
+      item.set_id(i)      
+      if list.get_item(item)
+        print "ID:",item.get_id,"\n"
+        print "column:    ",item.get_column,"\n"
+        print "text:      ",item.get_text,"\n"
+        print "text color:",show_color(item.get_text_colour),"\n"
+        print "BG color:  ",show_color(item.get_background_colour),"\n"
+        print "font:      ",show_font(item.get_font),"\n\n"
+      end
     end
   end
   
@@ -73,7 +80,7 @@ class RbApp < Wx::App
   def on_init
     frame = ListctrlFrame.new("Listctrl test",Wx::Point.new(50, 50), Wx::Size.new(450, 340))
 
-    frame.show(TRUE)
+    frame.show(true)
 
   end
 end
