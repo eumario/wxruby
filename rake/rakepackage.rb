@@ -40,7 +40,7 @@ $base_gemspec = Gem::Specification.new do | spec |
   spec.autorequire  = 'wx'
   spec.require_path = 'lib'
   # Platform specific binaries are added in later
-  spec.files        = [ 'lib/wx.rb', 'lib/wx/version.rb' ] +
+  spec.files        = FileList[ 'lib/**/*' ].to_a +
                       FileList[ 'samples/**/*' ].to_a
 
   spec.has_rdoc = false
@@ -92,6 +92,7 @@ def create_package_tasks
     pkg_files = p_task.package_files
     pkg_files.include('README', 'LICENSE', 'ChangeLog', 'rakefile')
     pkg_files.include('lib/wx.rb', 'lib/wx/version.rb')
+    pkg_files.include('lib/wx/classes/*')
     pkg_files.include('swig/**/*')
     pkg_files.include('tests/**/*')
     pkg_files.include('rake/**/*')
