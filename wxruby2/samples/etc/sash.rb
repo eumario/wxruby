@@ -30,8 +30,8 @@ class MySashFrame < Wx::Frame
     create_status_bar(2)
     set_status_text("wxRuby Sash sample")
 
-    evt_menu(Wx::ID_EXIT) { onQuit }
-    evt_menu(Wx::ID_ABOUT) { onAbout }
+    evt_menu(Wx::ID_EXIT) { on_quit }
+    evt_menu(Wx::ID_ABOUT) { on_about }
 
     # Start creating the sashes - these are created from outermost
     # inwards. 
@@ -116,7 +116,7 @@ class MySashFrame < Wx::Frame
   def on_about
     msg =  sprintf("This is the About dialog of the sash sample.\n" \
                     "Welcome to %s", Wx::VERSION_STRING)
-    message_box(msg, "About Sash", Wx::OK|Wx::ICON_INFORMATION, self)
+    Wx::message_box(msg, "About Sash", Wx::OK|Wx::ICON_INFORMATION, self)
   end
 end
 
