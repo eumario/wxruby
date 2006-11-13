@@ -326,7 +326,6 @@ class WxRubyDemo < Wx::Frame
         @nb.add_page(@ovr, "Overview")
         
         if Wx.const_defined?(:Scintilla)
-puts "here"          
           panel, @txt = setup_editor(@nb)
           @nb.add_page(panel, "Demo Code")
         else
