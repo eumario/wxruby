@@ -1,3 +1,5 @@
+- Ensure that all lib files are included in gem and tarball (Sean Long/Alex Fenton)
+- Fixed an error in bigdemo's About dialog (Alex Fenton)
 - Fixed a few crashes in samples (Sean Long)
 - Fix crash in etc/sash.rb sample (Alex Fenton)
 - Added HtmlWindow, HtmlCell, HtmlEasyPrinting &c (Alex Fenton)
