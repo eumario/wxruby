@@ -138,10 +138,11 @@ class MyCanvas < ScrolledWindow
   end
 
   def on_paint(event)
-    dc = PaintDC.new(self)
-    dc.set_text_foreground( get_app.canvas_text_colour )
-    dc.set_font( get_app.canvas_font )
-    dc.draw_text("Windows common dialogs test application", 10, 10)
+    paint do |dc|
+      dc.set_text_foreground( get_app.canvas_text_colour )
+      dc.set_font( get_app.canvas_font )
+      dc.draw_text("Windows common dialogs test application", 10, 10)
+    end
   end
 end
 
