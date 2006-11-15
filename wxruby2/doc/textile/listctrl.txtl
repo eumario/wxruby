@@ -168,7 +168,7 @@ h3(#ListCtrl_new). ListCtrl.new
   *ListCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
                %(arg-type)Point% pos = DEFAULT_POSITION, 
                %(arg-type)Size% size = DEFAULT_SIZE, 
-               %(arg-type)Integer% style = LC_ICON, 
+               %(arg-type)Integer% style = @LC_ICON@, 
                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = ListCtrlNameStr)
 
@@ -188,12 +188,6 @@ appropriately.
 h4. See also
 
 "ListCtrl#create":listctrl.html#ListCtrl_create, "Validator":validator.html
-
-
-  *destructor*()
-
-Destructor, destroying the list control.
-
 
 h3(#ListCtrl_arrange). ListCtrl#arrange
 
@@ -311,10 +305,6 @@ Find an item nearest this position in the specified direction, starting from
 _start_ or the beginning if _start_ is -1.
 
 
-
-
-
-
 h3(#ListCtrl_getcolumn). ListCtrl#get_column
 
  Boolean *get_column*(%(arg-type)Integer% col,  %(arg-type)ListItem% item)
@@ -371,22 +361,20 @@ Returns the specified image list. _which_ may be one of:
 |@IMAGE_LIST_SMALL@|The small icon image list.|
 |@IMAGE_LIST_STATE@|The user-defined state image list (unimplemented).|
 
-
-
 h3(#ListCtrl_getitem). ListCtrl#get_item
 
- Boolean *get_item*(%(arg-type)ListItem% info)
+ "ListItem":listitem.html *get_item*(%(arg-type)Integer% row,
+                                      %(arg-type)Integer% col = -1)
 
-Gets information about the item. See "ListCtrl#set_item":listctrl.html#ListCtrl_setitem for more
-information.
+Gets information, such as the text label, font and colour, about a
+ListCtrl item at zero-based row number @row@. The @col@ parameter is
+optional, and is only meaningful if the ListCtrl was created with the
+style @LC_REPORT@. In that case the ListItem will contain information
+such as the text content specific to that column in that row.
 
-You must call _info.SetId()_ to the ID of item you're interested in
-before calling this method.
-
-
-
-
-
+The information about the list entry is returned as a
+"ListItem":listitem.html - see that class and
+"ListCtrl#set_item":listctrl.html#ListCtrl_setitem for more information.
 
 h3(#ListCtrl_getitembackgroundcolour). ListCtrl#get_item_background_colour
 
@@ -793,17 +781,19 @@ h4. See also
 
 h3(#ListCtrl_setitem). ListCtrl#set_item
 
+ Integer *set_item*(%(arg-type)Integer% index,  %(arg-type)Integer% col, 
+                     %(arg-type)String% label, 
+                    %(arg-type)Integer% imageId = -1)
+
  Boolean *set_item*(%(arg-type)ListItem% info)
 
- Integer *set_item*(%(arg-type)Integer% index,  %(arg-type)Integer% col, 
-                  %(arg-type)% String& label, 
-                  %(arg-type)Integer% imageId = -1)
+Sets information about the item. The first form of the method sets the
+label in the specified row and column to the specified string.
 
-Sets information about the item.
-
-ListItem is a class with the following members:
-
-
+The second form is more flexible, as it allows setting a number of
+attributes at once. ListItem is a class with the following attributes -
+see the "ListItem":listitem.html class for how to create this class and
+set its attributes in wxRuby.
 
 |long m_mask|Indicates which fields are valid. See the list of valid mask flags below.|
 |long m_itemId|The zero-based item position.|
@@ -819,8 +809,6 @@ ListItem is a class with the following members:
 
 The *m_mask* member contains a bitlist specifying which of the other fields are valid. The flags are:
 
-
-
 |LIST_MASK_STATE|The *m_state* field is valid.|
 |LIST_MASK_TEXT|The *m_text* field is valid.|
 |LIST_MASK_IMAGE|The *m_image* field is valid.|
@@ -830,8 +818,6 @@ The *m_mask* member contains a bitlist specifying which of the other fields are 
 
 
 The *m_stateMask* and *m_state* members take flags from the following:
-
-
 
 |LIST_STATE_DONTCARE|Don't care what the state is. Win32 only. |
 |LIST_STATE_DROPHILITED|The item is highlighted to receive a drop event. Win32 only. |
@@ -845,13 +831,6 @@ information: for this you need to call one of SetTextColour(),
 SetBackgroundColour() or SetFont() functions on it passing it the colour/font
 to use. If the colour/font is not specified, the default list control
 colour/font is used.
-
- Integer *set_item*(%(arg-type)Integer% index,  %(arg-type)Integer% col,  %(arg-type)String% label, 
-                  %(arg-type)Integer% imageId = -1)
-
-Sets a string field at a particular column.
-
-
 
 h3(#ListCtrl_setitembackgroundcolour). ListCtrl#set_item_background_colour
 

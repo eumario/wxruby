@@ -19,6 +19,25 @@
 # deprecated:
 %ignore wxListCtrl::GetItemSpacing(bool isSmall) const;
 
+%ignore wxListCtrl::GetItem(wxListItem& info) const;
+
+%extend wxListCtrl {
+  VALUE get_item(int row, int col = -1)
+  {
+	VALUE returnVal = Qnil;
+	wxListItem *list_item = new wxListItem();
+	list_item->SetId(row);
+	if ( col != -1 )
+	  list_item->SetColumn(col);
+	
+	bool success = self->GetItem(*list_item);
+	if ( success ) 
+	  returnVal = SWIG_NewPointerObj(list_item, SWIGTYPE_p_wxListItem, 1);
+
+	return returnVal;
+  }
+}
+
 
 
 %import "include/wxObject.h"
@@ -27,8 +46,3 @@
 %import "include/wxControl.h"
 
 %include "include/wxListCtrl.h"
-
-// TODO: Make this its own class!
-//
-// There is no record of this class in the XML file
-//
