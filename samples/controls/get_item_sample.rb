@@ -3,13 +3,13 @@
 
 require 'wx'
 
-ID = 1
-
 class ListctrlFrame < Wx::Frame
   def initialize(title,pos,size)
     super(nil,-1,title,pos,size,Wx::DEFAULT_FRAME_STYLE)
 
-    list = Wx::ListCtrl.new(self, ID, Wx::DEFAULT_POSITION,Wx::DEFAULT_SIZE,Wx::LC_REPORT)
+    list = Wx::ListCtrl.new(self, -1, Wx::DEFAULT_POSITION,
+                             Wx::DEFAULT_SIZE,
+                             Wx::LC_REPORT)
     list.insert_column(0,"column0",Wx::LIST_FORMAT_LEFT, -1)
     list.insert_column(1,"column1",Wx::LIST_FORMAT_LEFT, -1)
     list.insert_item(0, 'line0:column0')
@@ -32,12 +32,10 @@ class ListctrlFrame < Wx::Frame
     item.set_font(Wx::ITALIC_FONT)
     item.set_background_colour(Wx::LIGHT_GREY)
     list.set_item( item )
-
+    
     # test of get_item method
     0.upto(2) do |i|
-      item = Wx::ListItem.new()
-      item.set_id(i)
-      if list.get_item(item)      
+      if item = list.get_item(i)      
         print "ID:",item.get_id,"\n"
         print "column:    ",item.get_column,"\n"
         print "text:      ",item.get_text,"\n"
@@ -46,10 +44,9 @@ class ListctrlFrame < Wx::Frame
         print "font:      ",show_font(item.get_font),"\n\n"
       end
     end
+    # test other column
     0.upto(2) do |i|
-      item = Wx::ListItem.new()
-      item.set_id(i)      
-      if list.get_item(item)
+      if item = list.get_item(i, 1)
         print "ID:",item.get_id,"\n"
         print "column:    ",item.get_column,"\n"
         print "text:      ",item.get_text,"\n"
@@ -61,14 +58,15 @@ class ListctrlFrame < Wx::Frame
   end
   
   def show_color(color)
-    red = color.red
-    green = color.green
-    blue = color.blue
-    return "(#{red}, #{green}, #{blue})"
+    if color.ok
+      return '(%i, %i, %i)' % [color.red, color.green, color.blue]
+    else
+      return '(N/A)'
+    end
   end
   
   def show_font(font)
-    if(font.get_style == Wx::ITALIC)
+    if font.get_style == Wx::ITALIC
         return "Italic"
     end
     return "Normal"
