@@ -1,10 +1,9 @@
 h1(#wxtreectrl). Wx::TreeCtrl
 
-A tree control presents information as a hierarchy, with items that may be expanded
-to show further items. Items in a tree control are referenced by TreeItemId handles,
-which may be tested for validity by calling TreeItemId::IsOk.
-
-To intercept events from a tree control, use the event table macros described in "TreeEvent":treeevent.html.
+A tree control presents information as a hierarchy, with items that may
+be expanded to show further items. Desktop OSes commonly make use of
+this type of control to present a navigable representation of folders
+and files on a hard drive.
 
 h2. Derived from
 
@@ -18,31 +17,36 @@ h2. Derived from
 
 h2. Window styles
 
+The behaviour and appearance of a TreeCtrl can be modified in several
+ways by applying styles when constructing the widget.
 
-
-|@TR_EDIT_LABELS@|Use this styleif you wish the user to be able to edit labels in the tree control.|
-|@TR_NO_BUTTONS@|For convenienceto document that no buttons are to be drawn.|
-|@TR_HAS_BUTTONS@|Use this styleto show + and - buttons to the left of parent items.|
-|@TR_NO_LINES@|Use this styleto hide vertical level connectors.|
-|@TR_FULL_ROW_HIGHLIGHT@|Use this style to have the backgroundcolour and the selection highlight extend over the entire horizontalrow of the tree control window. (This flag is ignored under Windows unless you specify TR_NO_LINES as well.) |
-|@TR_LINES_AT_ROOT@|Use this styleto show lines between root nodes.Only applicable if TR_HIDE_ROOT is set and TR_NO_LINES is not set.|
-|@TR_HIDE_ROOT@|Use this styleto suppress the display of the root node,effectively causing the first-level nodesto appear as a series of root nodes.|
-|@TR_ROW_LINES@|Use this styleto draw a contrasting border between displayed rows.|
-|@TR_HAS_VARIABLE_ROW_HEIGHT@|Use this styleto cause row heights to be just big enough to fit the content.If not set, all rows use the largest row height.The default is that this flag is unset.Generic only.|
-|@TR_SINGLE@|For convenienceto document that only one item may be selected at a time.Selecting another item causes the current selection, if any,to be deselected.  This is the default.|
-|@TR_MULTIPLE@|Use this styleto allow a range of items to be selected.If a second range is selected, the current range, if any, is deselected.|
-|@TR_EXTENDED@|Use this styleto allow disjoint items to be selected.  (Only partially implemented; may not work in all cases.)|
-|@TR_DEFAULT_STYLE@|The set of flags that areclosest to the defaults for the native control for a particular toolkit.|
-
+|@TR_EDIT_LABELS@|Use this style if you wish the user to be able to edit labels in the tree control.|
+|@TR_NO_BUTTONS@|For convenience to document that no buttons are to be drawn.|
+|@TR_HAS_BUTTONS@|Use this style to show + and - buttons to the left of parent items.|
+|@TR_NO_LINES@|Use this style to hide vertical level connectors.|
+|@TR_FULL_ROW_HIGHLIGHT@|Use this style to have the background colour and the selection highlight extend over the entire horizontal row of the tree control window. (This flag is ignored under Windows unless you specify TR_NO_LINES as well.) |
+|@TR_LINES_AT_ROOT@|Use this style to show lines between root nodes. Only applicable if TR_HIDE_ROOT is set and TR_NO_LINES is not set.|
+|@TR_HIDE_ROOT@|Use this style to suppress the display of the root node,effectively causing the first-level nodes to appear as a series of root nodes.|
+|@TR_ROW_LINES@|Use this style to draw a contrasting border between displayed rows.|
+|@TR_HAS_VARIABLE_ROW_HEIGHT@|Use this style to cause row heights to be just big enough to fit the content. If not set, all rows use the largest row height.The default is that this flag is unset.Generic only.|
+|@TR_SINGLE@|For convenience to document that only one item may be selected at a time. Selecting another item causes the current selection, if any,to be deselected.  This is the default.|
+|@TR_MULTIPLE@|Use this style to allow a range of items to be selected.If a second range is selected, the current range, if any, is deselected.|
+|@TR_EXTENDED@|Use this style to allow disjoint items to be selected.  (Only partially implemented; may not work in all cases.)|
+|@TR_DEFAULT_STYLE@|The set of flags that are closest to the defaults for the native control for a particular toolkit.|
 
 See also "window styles overview":windowstyles.html.
 
-h2. Event handling
+h2. Event hooks
 
-To process input from a tree control, use these event handler macros to direct input to member
-functions that take a "TreeEvent":treeevent.html argument.
+TreeCtrls can generate a large number of events, reflecting the variety
+of ways in which users can interact with such controls. Handled events
+include selecting items, expanding branches, dragging items, and editing
+item labels as well as standard mouse and keyboard interactions. To
+intercept events from a tree control, use the event table macros
+described below and in "TreeEvent":treeevent.html.
 
-
+To process input from a tree control, use these event methods to direct
+input to blocks that take a "TreeEvent":treeevent.html argument.
 
 |*evt_tree_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the left mouse button.|
 |*evt_tree_begin_rdrag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the right mouse button.|
@@ -66,10 +70,30 @@ functions that take a "TreeEvent":treeevent.html argument.
 |*evt_tree_item_menu(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The context menu for the selected item has been requested, either by a right click or by using the menu key.|
 |*evt_tree_state_image_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The state image has been clicked. Windows only.|
 
-
 h2. See also
 
-"TreeItemData":treeitemdata.html, "TreeCtrl overview":treectrloverview.html, "ListBox":listbox.html, "ListCtrl":listctrl.html, "ImageList":imagelist.html, "TreeEvent":treeevent.html
+"TreeItemData":treeitemdata.html, "ListBox":listbox.html, "ListCtrl":listctrl.html, "ImageList":imagelist.html, "TreeEvent":treeevent.html
+
+h2. Working with TreeCtrl items
+
+In wxRuby, individual items (including branches) in a tree control are
+referenced by TreeItemIds. These ids are returned by methods such as
+"append_item":#TreeCtrl_appenditem which add items to a tree, and by
+TreeEvents which can be queried to find which item is being acted
+upon. The ids can then be passed in as arguments to methods which modify
+items within the tree, such as "set_item_text":#TreeCtrl_setitemtext.
+As well as the text label, tree items can have several other properties,
+such as being bold, italic, and icons for expanded and collapsed
+states. TreeItemIds which may be tested for validity by calling
+TreeItemId#is_ok.
+
+TreeCtrls can be linked to non-GUI application objects by using the
+item_data methods. Methods which add items to the tree all accept an
+optional @item_data@ argument, which may be any normal Ruby
+object. Alternatively, a Ruby object can be explicitly associated with a
+TreeCtrl item by calling "set_item_data":#TreeCtrl_setitemdata . The
+same Ruby object can later be retrieved from a TreeCtrlItemId by calling
+"get_item_data":#TreeCtrl_getitemdata .
 
 h2. Win32 notes
 
@@ -78,9 +102,8 @@ implemented in the system library @comctl32.dll@. Some versions of this
 library are known to have bugs with handling the tree control colours: the
 usual symptom is that the expanded items leave black (or otherwise incorrectly
 coloured) background behind them, especially for the controls using non
-default background colour. The recommended solution is to upgrade the @comctl32.dll@
-to a newer version: see 
-http://www.microsoft.com/downloads/release.asp?ReleaseID=11916http://www.microsoft.com/downloads/release.asp?ReleaseID=11916.
+default background colour. The recommended solution is to upgrade the
+@comctl32.dll@ to a newer version: see "http://www.microsoft.com/downloads/release.asp?ReleaseID=11916":http://www.microsoft.com/downloads/release.asp?ReleaseID=11916.
 
 <div id="methods">
 
@@ -165,8 +188,6 @@ h2. Methods
 
 </div>
 
-
-
 h3(#TreeCtrl_constr). TreeCtrl.new
 
   *TreeCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
@@ -180,7 +201,7 @@ Constructor, creating and showing a tree control.
 
 h4. Parameters
 
-* _parent_ Parent window. Must not be @NULL@.
+* _parent_ Parent window. Must be a valid Wx::Window, and not nil.
 * _id_ Window identifier. A value of -1 indicates a default value.
 * _pos_ Window position.
 * _size_ Window size. If the default size (-1, -1) is specified then the window is sized
@@ -194,16 +215,11 @@ h4. See also
 "TreeCtrl#create":treectrl.html#TreeCtrl_create, "Validator":validator.html
 
 
-  *destructor*()
-
-Destructor, destroying the list control.
-
-
 h3(#TreeCtrl_addroot). TreeCtrl#add_root
 
  "TreeItemId":treeitemid.html *add_root*(%(arg-type)String% text,  %(arg-type)Integer% image = -1, 
                        %(arg-type)Integer% selImage = -1, 
-                       %(arg-type)TreeItemData% data = @NULL@)
+                       %(arg-type)Object% item_data = @nil@)
 
 Adds the root node to the tree, returning the new item.
 
@@ -219,7 +235,7 @@ h3(#TreeCtrl_appenditem). TreeCtrl#append_item
  "TreeItemId":treeitemid.html *append_item*(%(arg-type)TreeItemId% parent,  %(arg-type)String% text, 
                           %(arg-type)Integer% image = -1, 
                           %(arg-type)Integer% selImage = -1, 
-                          %(arg-type)TreeItemData% data = @NULL@)
+                          %(arg-type)Object% item_data = @nil@)
 
 Appends an item to the end of the branch identified by _parent_, return a new item id.
 
@@ -240,7 +256,7 @@ be automatically deleted by TreeCtrl as appropriate
 
 Setting or assigning the button image list enables the display of image buttons.
 Once enabled, the only way to disable the display of button images is to set
-the button image list to @NULL@.
+the button image list to @nil@.
 
 This function is only available in the generic version.
 
@@ -480,14 +496,9 @@ Returns the background colour of the item.
 
 h3(#TreeCtrl_getitemdata). TreeCtrl#get_item_data
 
- "TreeItemData":treeitemdata.html *get_item_data*(%(arg-type)TreeItemId% item)
+ Object *get_item_data*(%(arg-type)TreeItemId% item)
 
 Returns the tree item data associated with the item.
-
-h4. See also
-
-"TreeItemData":treeitemdata.html
-
 
 
 h3(#TreeCtrl_getitemfont). TreeCtrl#get_item_font
@@ -659,12 +670,6 @@ Fills the array of tree items passed in with the currently selected items. This
 function can be called only if the control has the TR_MULTIPLE style.
 
 Returns the number of selected items.
-
-
-
-
-
-
 h3(#TreeCtrl_getstateimagelist). TreeCtrl#get_state_image_list
 
  "ImageList":imagelist.html *get_state_image_list*()
@@ -705,13 +710,13 @@ h3(#TreeCtrl_insertitem). TreeCtrl#insert_item
                           %(arg-type)TreeItemId% previous,  %(arg-type)String% text, 
                           %(arg-type)Integer% image = -1, 
                           %(arg-type)Integer% selImage = -1, 
-                          %(arg-type)TreeItemData% data = @NULL@)
+                          %(arg-type)Object% item_data = @nil@)
 
  "TreeItemId":treeitemid.html *insert_item*(%(arg-type)TreeItemId% parent, 
                           %(arg-type)size_t% before,  %(arg-type)String% text, 
                           %(arg-type)Integer% image = -1, 
                           %(arg-type)Integer% selImage = -1, 
-                          %(arg-type)TreeItemData% data = @NULL@)
+                          %(arg-type)Object% item_data = @nil@)
 
 Inserts an item after a given one (_previous_) or before one identified by its position (_before_).
 _before_ must be less than the number of children.
@@ -781,7 +786,7 @@ h3(#TreeCtrl_prependitem). TreeCtrl#prepend_item
  "TreeItemId":treeitemid.html *prepend_item*(%(arg-type)TreeItemId% parent,  %(arg-type)String% text, 
                            %(arg-type)Integer% image = -1, 
                            %(arg-type)Integer% selImage = -1, 
-                           %(arg-type)TreeItemData% data = @NULL@)
+                           %(arg-type)Object% item_data = @nil@)
 
 Appends an item as the first child of _parent_, return a new item id.
 
@@ -817,7 +822,7 @@ The button images assigned with this method will
 
 Setting or assigning the button image list enables the display of image buttons.
 Once enabled, the only way to disable the display of button images is to set
-the button image list to @NULL@.
+the button image list to @nil@.
 
 This function is only available in the generic version.
 
@@ -861,7 +866,7 @@ See also: "is_bold":#TreeCtrl_isbold
 
 h3(#TreeCtrl_setitemdata). TreeCtrl#set_item_data
 
-  *set_item_data*(%(arg-type)TreeItemId% item,  %(arg-type)TreeItemData% data)
+  *set_item_data*(%(arg-type)TreeItemId% item,  %(arg-type)Object% data)
 
 Sets the item client data.
 
@@ -959,7 +964,7 @@ case-sensitive alphabetical order).
 
 h4. See also
 
-"TreeItemData":treeitemdata.html, "on_compare_items":#TreeCtrl_oncompareitems
+"on_compare_items":#TreeCtrl_oncompareitems
 
 
 h3(#TreeCtrl_toggle). TreeCtrl#toggle
