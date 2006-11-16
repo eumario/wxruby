@@ -9,9 +9,87 @@
 #include <wx/treectrl.h>
 %}
 
-// not sure why these aren't working
-#%ignore wxTreeCtrl::SetStateImageList;
+ // ITEM DATA fixes - This is done so the API user never sees a
+// TreeItemData object - where in Wx C++ such an object
+// would be passed or returned by a method, any Ruby object may be used.
+%{
+class wxRbTreeItemData : public wxTreeItemData {
+public:
+    wxRbTreeItemData(VALUE obj = Qnil) {
+        m_obj = obj;
+    }
 
+    VALUE GetRubyObject() {
+	    return m_obj;
+    }
+
+    void SetRubyObject(VALUE obj) {
+	    m_obj = obj;
+    }
+
+    VALUE m_obj;
+};
+%}
+
+
+// typemaps for setting and getting ruby objects as itemdata.
+%typemap(in) wxTreeItemData* "$1 = new wxRbTreeItemData($input);"
+
+%typemap(directorin) wxTreeItemData* {
+  wxRbTreeItemData* ruby_item_data = (wxRbTreeItemData *)$1;
+  $input = ruby_item_data->GetRubyObject();
+}
+
+%typemap(out) wxTreeItemData* {
+  if ( $1 == NULL )
+	{
+	  $result = Qnil;
+	}
+  else
+  	{
+	  wxRbTreeItemData* ruby_item_data = (wxRbTreeItemData *)$1;
+	  $result = ruby_item_data->GetRubyObject();
+	}
+}
+
+// GC handling for item data objects
+%{
+  static void RecursivelyGCMarkFrom(wxTreeCtrl *tree_ctrl, wxTreeItemId base_id )
+  {
+	
+	// check if there's item data, and mark it
+	wxRbTreeItemData* ruby_item_data = (wxRbTreeItemData *)tree_ctrl->GetItemData(base_id);
+	if ( ruby_item_data != NULL )
+	  {
+		VALUE ruby_obj = ruby_item_data->GetRubyObject();
+		rb_gc_mark(ruby_obj);
+	  }
+
+	// recurse through children
+	if ( tree_ctrl->ItemHasChildren(base_id) )
+	  {
+		wxTreeItemIdValue cookie;
+		wxTreeItemId child = tree_ctrl->GetFirstChild(base_id, cookie);
+		while ( child.IsOk() )
+		  {
+			RecursivelyGCMarkFrom(tree_ctrl, child);
+			child = tree_ctrl->GetNextSibling(child);
+		  }
+	  }
+  }
+
+  static void mark_wxTreeCtrl(void *ptr)
+  {
+	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
+	if ( rb_ivar_get(rb_obj, rb_intern("@__swig_dead__") ) == Qtrue )
+	  return;
+
+	wxTreeCtrl* tree_ctrl = (wxTreeCtrl*) ptr;
+	wxTreeItemId root_id = tree_ctrl->GetRootItem();
+	RecursivelyGCMarkFrom(tree_ctrl, root_id);
+  }
+%}
+%markfunc wxTreeCtrl "mark_wxTreeCtrl";
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
@@ -24,6 +102,7 @@
 #endif
 
 %include "include/wxTreeCtrl.h"
+
 
 %extend wxTreeCtrl {
 	
@@ -54,3 +133,4 @@
 		return array;		
 	}
 }
+
