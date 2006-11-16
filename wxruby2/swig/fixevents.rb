@@ -13,8 +13,7 @@ $exclude = [
 ]
 
 $windows_only = [
-	'EVT_DIALUP',
-	'EVT_TOGGLEBUTTON'
+	'EVT_DIALUP'
 ]
 
 File.open(ARGV[0], "a") do | out |
