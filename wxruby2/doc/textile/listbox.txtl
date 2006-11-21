@@ -5,13 +5,14 @@ strings are displayed in a scrolling box, with the selected string(s)
 marked in reverse video. A listbox can be single selection (if an item
 is selected, the previous selection is removed) or multiple selection
 (clicking an item toggles the item on or off independently of other
-selections).
+selections). This is controlled by changing the style passed to the
+constructor. 
 
 List box elements are numbered from zero. Their number is limited in
-some platforms (e.g. ca. 2000 on GTK).
+some platforms - for example, around 2000 on GTK.
 
-A listbox callback gets an event EVT_COMMAND_LISTBOX_SELECT for single clicks, and
-EVT_COMMAND_LISTBOX_DOUBLE_CLICKED for double clicks.
+A listbox callback gets an event EVT_COMMAND_LISTBOX_SELECT for single
+clicks, and EVT_COMMAND_LISTBOX_DOUBLE_CLICKED for double clicks.
 
 h2. Derived from
 
@@ -45,8 +46,6 @@ See also "window styles overview":windowstyles.html.
 
 h2. Event handling
 
-
-
 |*evt_listbox(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_LISTBOX_SELECTED event,when an item on the list is selected.|
 |*evt_listbox_dclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_LISTBOX_DOUBLECLICKED event,when the listbox is double-clicked.|
 
@@ -76,15 +75,9 @@ h3(#ListBox_new). ListBox.new
 
   *ListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
               %(arg-type)Point% pos = DEFAULT_POSITION, 
-              %(arg-type)Size% size = DEFAULT_SIZE,  %(arg-type)Integer% n, 
-              %(arg-type)String% choices[] = nil,  %(arg-type)Integer% style = 0, 
-              %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
-              %(arg-type)String% name = "listBox")
-
-  *ListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
-              %(arg-type)Size% size, 
-              %(arg-type)ArrayString% choices, 
-              %(arg-type)Integer% style = 0, 
+              %(arg-type)Size% size = DEFAULT_SIZE, 
+              %(arg-type)Array% choices = nil,  
+			  %(arg-type)Integer% style = 0, 
               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
               %(arg-type)String% name = "listBox")
 
@@ -97,7 +90,6 @@ h4. Parameters
 * _pos_ Window position.
 * _size_ Window size. If the default size (-1, -1) is specified then the window is sized
 appropriately.
-* _n_ Number of strings with which to initialise the control.
 * _choices_ An array of strings with which to initialise the control.
 * _style_ Window style. See "ListBox":listbox.html.
 * _validator_ Window validator.
@@ -107,27 +99,12 @@ h4. See also
 
 "ListBox#create":listbox.html#ListBox_create, "Validator":validator.html
 
-
-
-
-
-  *destructor*()
-
-Destructor, destroying the list box.
-
 h3(#ListBox_create). ListBox#create
 
  Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
                 %(arg-type)Point% pos = DEFAULT_POSITION, 
                 %(arg-type)Size% size = DEFAULT_SIZE,  %(arg-type)Integer% n, 
                 %(arg-type)String% choices[] = nil,  %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
-                %(arg-type)String% name = "listBox")
-
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
-                %(arg-type)Size% size, 
-                %(arg-type)ArrayString% choices, 
-                %(arg-type)Integer% style = 0, 
                 %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "listBox")
 
@@ -208,22 +185,14 @@ true if the given item is selected, false otherwise.
 
 h3(#ListBox_set). ListBox#set
 
-  *set*(%(arg-type)Integer% n,  %(arg-type)String% choices,  %(arg-type)% *clientData = @NULL@)
-
-  *set*(%(arg-type)ArrayString% choices,  %(arg-type)% *clientData = @NULL@)
+  *set*(%(arg-type)Array% choices,  %(arg-type)% *clientData = @NULL@)
 
 Clears the list box and adds the given strings to it.
 
 h4. Parameters
 
-* _n_ The number of strings to set.
 * _choices_ An array of strings to set.
-* _clientData_ Options array of client data pointers
-
-h4. Remarks
-
-You may free the array from the calling program after this function has been
-called.
+* _clientData_ Optional array of client data pointers - not currently supported
 
 h3(#ListBox_setfirstitem). ListBox#set_first_item
 
