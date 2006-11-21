@@ -1,3 +1,7 @@
+- Corrected some typemapped method signatures (Alex Fenton)
+- Un-disabled evt_toolbar on Linux and OS X (Alex Fenton)
+- Fixed get_item_data and mem mgmt for TreeCtrl (Alex Fenton)
+- Added get_client_data support for all ControlWithItems + test case (Alex Fenton)
 - Ensure that all lib files are included in gem and tarball (Sean Long/Alex Fenton)
 - Fixed an error in bigdemo's About dialog (Alex Fenton)
 - Fixed a few crashes in samples (Sean Long)
@@ -29,6 +33,7 @@
 - Removed SWIG virtual feature from rakewx.rb for SWIG 1.3.30 compatibility
   (Roy Sutton)
 - Remove obsolete calls to init_all_image_handlers (Roy Sutton)
+- TaskBarIcon class and sample added (Roy Sutton)	
 - DragImage class and sample added (Alex Fenton)
 - StdDialogButtonSizer class added (Alex Fenton)
 - init_all_image_handlers, init_stock_objects and init_stock_lists now
