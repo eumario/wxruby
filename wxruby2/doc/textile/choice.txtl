@@ -1,8 +1,10 @@
 h1(#wxchoice). Wx::Choice
 
-A choice item is used to select one of a list of strings. Unlike a
-listbox, only the selection is visible until the user pulls down the
-menu of choices.
+A choice item (also often called a 'dropdown') is used to select one of
+a list of strings. Unlike a listbox, only the selection is visible until
+the user pulls down the menu of choices. By using the client_data
+functions inherited from "ControlWithItems":controlwithitems.html , ruby
+objects can be associated with items within the dropdown.
 
 h2. Derived from
 
@@ -53,15 +55,7 @@ h3(#Choice_new). Choice.new
 
   *Choice.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
              %(arg-type)Size% size, 
-             %(arg-type)Integer% n, 
-             %(arg-type)String% choices[], 
-             %(arg-type)Integer% style = 0, 
-             %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
-             %(arg-type)String% name = "choice")
-
-  *Choice.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
-             %(arg-type)Size% size, 
-             %(arg-type)ArrayString% choices, 
+             %(arg-type)Array% choices[], 
              %(arg-type)Integer% style = 0, 
              %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
              %(arg-type)String% name = "choice")
@@ -75,7 +69,6 @@ h4. Parameters
 * _pos_ Window position.
 * _size_ Window size. If the default size (-1, -1) is specified then the choice is sized
 appropriately.
-* _n_ Number of strings with which to initialise the choice control.
 * _choices_ An array of strings with which to initialise the choice control.
 * _style_ Window style. See "Choice":choice.html.
 * _validator_ Window validator.
@@ -85,29 +78,11 @@ h4. See also
 
 "Choice#create":choice.html#Choice_create, "Validator":validator.html
 
-
-
-
-
-
-  *destructor*()
-
-Destructor, destroying the choice item.
-
-
 h3(#Choice_create). Choice#create
 
  Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
                 %(arg-type)Size% size, 
-                %(arg-type)Integer% n, 
-                %(arg-type)String% choices[], 
-                %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
-                %(arg-type)String% name = "choice")
-
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
-                %(arg-type)Size% size, 
-                %(arg-type)ArrayString% choices, 
+                %(arg-type)Array% choices[], 
                 %(arg-type)Integer% style = 0, 
                 %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "choice")
@@ -134,7 +109,7 @@ Gets the number of columns in this choice item.
 
 h4. Remarks
 
-This is implemented for Motif only and always returns $1$ for the other
+This is implemented for Motif only and always returns @1@ for the other
 platforms.
 
 
@@ -148,11 +123,6 @@ the user closes the dropdown list, this function returns the current selection.
 That is, while the dropdown list is shown, it returns the currently selected
 item in it. When it is not shown, its result is the same as for the other
 function.
-
-2.6.2 (before this version 
-"get_selection":#Choice_getselection itself behaved like
-this).
-
 
 h3(#Choice_setcolumns). Choice#set_columns
 
