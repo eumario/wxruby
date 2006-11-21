@@ -28,24 +28,15 @@
               const wxValidator& validator = wxDefaultValidator,
               const wxString& name = wxChoiceNameStr);
 
-
 // start client_data fixes
 %include "../shared/control_with_items.i"
 %markfunc wxChoice "mark_wxControlWithItems";
 
-%ignore wxChoice::GetClientData(int n) const;
-%ignore wxChoice::GetClientObject(int n) const;
 %extend wxChoice {
-  VALUE get_client_data(int n)
-  {
-	VALUE returnVal = (VALUE) self->GetClientData(n);
-	if ( returnVal == NULL )
-	  return Qnil;
-	return returnVal;
-  }
+  VALUE get_client_data(int n) { wxControlWithItems_get_client_data(self, n); }
 }
+// end client_data fixes
 
-// end client_data fix
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
