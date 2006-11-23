@@ -88,7 +88,7 @@ class TestListBox < Wx::Panel
         Wx::StaticText.new(self, -1, "Select many:", Wx::Point.new(200,50), Wx::Size.new(65,18))
         @lb2 = Wx::ListBox.new(self, 70, Wx::Point.new(280,50), Wx::Size.new(80,120), sampleList, Wx::LB_EXTENDED)
         evt_listbox(@lb2.get_id()) {|event| on_evt_multi_listbox(event)}
-        # evt_right_up(@lb2.get_id()) {|event| on_evt_right_button(event)}
+        @lb2.evt_right_up {|event| on_evt_right_button(event)}
         @lb2.set_selection(0)
         
         sampleList += ["test a", "test aa", "test aab", "test ab", "test abc", "test abcc", "test abcd"]
