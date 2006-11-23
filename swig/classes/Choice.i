@@ -33,7 +33,7 @@
 %markfunc wxChoice "mark_wxControlWithItems";
 
 %extend wxChoice {
-  VALUE get_client_data(int n) { wxControlWithItems_get_client_data(self, n); }
+  VALUE get_client_data(int n) { return wxControlWithItems_get_client_data(self, n); }
 }
 // end client_data fixes
 
