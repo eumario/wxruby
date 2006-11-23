@@ -395,6 +395,16 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
   }
 }
 
+%typemap(argout) (wxArrayInt& selections) {
+
+   $result = rb_ary_new();
+
+   for (int i = 0; i < ($1)->GetCount(); i++)
+   {
+     rb_ary_push($result,INT2NUM( ($1)->Item(i) ) );
+   }
+}
+
 ##############################################################
 
 %typemap(in) wxEdge {
