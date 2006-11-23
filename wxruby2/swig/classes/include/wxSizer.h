@@ -89,8 +89,8 @@ public:
     // Deprecated in 2.6 since historically it does not delete the window,
     // use Detach instead.
     //virtual bool Remove( wxWindow *window );
-    //virtual bool Remove( wxSizer *sizer );
-    //virtual bool Remove( int index );
+    virtual bool Remove( wxSizer *sizer );
+    virtual bool Remove( int index );
 
     virtual bool Detach( wxWindow *window );
     virtual bool Detach( wxSizer *sizer );

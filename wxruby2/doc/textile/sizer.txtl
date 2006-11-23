@@ -81,10 +81,10 @@ h2. Methods
 
 h3(#Sizer_wxsizer). Sizer.new
 
-  *destructor*()
-
-The destructor.
-
+This method is abstract in this class - Wx::Sizer is never instantiated
+directly. See the specific subclass you are using (eg
+"BoxSizer":boxsizer.html ) for the parameters require by the
+constructor.
 
 h3(#Sizer_add). Sizer#add
 
@@ -377,28 +377,22 @@ This method is abstract and has to be overwritten by any derived class.
 Here, the sizer will do the actual calculation of its children's positions
 and sizes.
 
-
 h3(#Sizer_remove). Sizer#remove
-
- Boolean *remove*(%(arg-type)Window% window)
 
  Boolean *remove*(%(arg-type)Sizer% sizer)
 
  Boolean *remove*(%(arg-type)size_t% index)
 
-Removes a child from the sizer and destroys it.  _sizer_ is the Sizer to be removed,
-_index_ is the position of the child in the sizer, typically 0 for the first item.
-This method does not cause any layout or resizing to take place, call
-"Sizer#layout":sizer.html#Sizer_layout to update the layout "on screen" after removing a
-child from the sizer.
+Removes a child from the sizer and destroys it.  _sizer_ is the Sizer to
+be removed, _index_ is the position of the child in the sizer, typically
+0 for the first item.  This method does not cause any layout or resizing
+to take place, call "Sizer#layout":sizer.html#Sizer_layout to update the
+layout "on screen" after removing a child from the sizer.
 
-*NB:* The method taking a Window* parameter is deprecated.  For historical reasons
-it does not destroy the window as would usually be expected from Remove.  You should use
-"Sizer#detach":sizer.html#Sizer_detach in new code instead.  There is currently no Sizer
-method that will both detach and destroy a Window item.
+If you have a variable holding a Window you want to remove from a sizer,
+use "Sizer#detach":sizer.html#Sizer_detach instead.
 
 Returns true if the child item was found and removed, false otherwise.
-
 
 h3(#Sizer_setdimension). Sizer#set_dimension
 
