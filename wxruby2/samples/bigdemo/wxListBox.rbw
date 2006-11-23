@@ -20,12 +20,12 @@ class FindPrefixListBox < Wx::ListBox
     end
     
     def find_prefix(prefix)
-        @log.write_text("Looking for prefix: " + prefix.to_s())
+        @log.write_text("Looking for prefix: " + prefix.to_s)
         if prefix
-            prefix.downcase!()
-            length = prefix.length()
-            0.upto(get_count()) do |x|
-                text = get_string(x).to_s().downcase()
+            prefix.downcase!
+            length = prefix.length
+            0.upto(get_count) do |x|
+                text = get_string(x).to_s.downcase
                 if text[0,length] == prefix
                     @log.write_text("Prefix " + prefix + " is found.")
                     return x
@@ -37,9 +37,9 @@ class FindPrefixListBox < Wx::ListBox
     end
     
     def on_key(event)
-        key = event.get_key_code()
+        key = event.get_key_code
         if key >= 32 and key <= 127
-            @typedText += key.chr()
+            @typedText += key.chr
             item = find_prefix(@typedText)
             if item != -1
                 set_selection(item)
@@ -57,7 +57,7 @@ class FindPrefixListBox < Wx::ListBox
             
         else
             @typedText = ""
-            event.skip()
+            event.skip
         end
     end
     
@@ -78,44 +78,43 @@ class TestListBox < Wx::Panel
         
         Wx::StaticText.new(self, -1, "Select one:", Wx::Point.new(15,50), Wx::Size.new(65,18))
         @lb1 = Wx::ListBox.new(self, 60, Wx::Point.new(80,50), Wx::Size.new(80,120), sampleList, Wx::LB_SINGLE)
-        evt_listbox(@lb1.get_id()) {|event| on_evt_listbox(event)}
-        evt_listbox_dclick(@lb1.get_id()) {|event| on_evt_listbox_dclick(event)}
+        evt_listbox(@lb1.get_id) {|event| on_evt_listbox(event)}
+        evt_listbox_dclick(@lb1.get_id) {|event| on_evt_listbox_dclick(event)}
         @lb1.set_selection(3)
-        @lb1.append("with data")#, "This one has data")
-        # set_client_data() not supported in wxRuby 0.4
-        # @lb1.set_client_data(2, "This one has data")
+        @lb1.append("with data", "This one has data")
+        @lb1.set_client_data(2, "This one has data")
         
         Wx::StaticText.new(self, -1, "Select many:", Wx::Point.new(200,50), Wx::Size.new(65,18))
         @lb2 = Wx::ListBox.new(self, 70, Wx::Point.new(280,50), Wx::Size.new(80,120), sampleList, Wx::LB_EXTENDED)
-        evt_listbox(@lb2.get_id()) {|event| on_evt_multi_listbox(event)}
+        evt_listbox(@lb2.get_id) {|event| on_evt_multi_listbox(event)}
         @lb2.evt_right_up {|event| on_evt_right_button(event)}
         @lb2.set_selection(0)
         
         sampleList += ["test a", "test aa", "test aab", "test ab", "test abc", "test abcc", "test abcd"]
-        sampleList.sort!()
+        sampleList.sort!
         Wx::StaticText.new(self, -1, "Find typed prefix:", Wx::Point.new(15,250))
         fp = FindPrefixListBox.new(self, -1, Wx::Point.new(110,250), Wx::Size.new(80,120), sampleList, Wx::LB_SINGLE)
         fp.set_selection(0)
     end
     
     def on_evt_listbox(event)
-        @log.write_text("evt_listbox: " + event.get_string() + " " + event.get_selection().to_s())
+        @log.write_text("evt_listbox: #{event.get_string}, #{event.is_selection}, #{event.get_selection}, #{event.get_client_data}")
     end
     
     def on_evt_listbox_dclick(event)
-        @log.write_text("evt_listbox_dclick: " + @lb1.get_selection().to_s())
-        @lb1.delete(@lb1.get_selection())
+        @log.write_text("evt_listbox_dclick: " + @lb1.get_selection.to_s)
+        @lb1.delete(@lb1.get_selection)
     end
     
     def on_evt_multi_listbox(event)
-        @log.write_text("evt_multi_listbox: (" + @lb2.get_selections().to_s() + ")")
+        @log.write_text("evt_multi_listbox: (" + @lb2.get_selections.to_s + ")")
     end
     
     def on_evt_right_button(event)
-        @log.write_text("evt_right_button: " + event.get_position().to_s())
-        if event.get_event_object().get_id() == 70
-            selections = @lb2.get_selections()
-            selections.reverse!()
+        @log.write_text("evt_right_button: " + event.get_position.to_s)
+        if event.get_event_object.get_id == 70
+            selections = @lb2.get_selections
+            selections.reverse!
             selections.each do |index|
                 @lb2.delete(index)
             end

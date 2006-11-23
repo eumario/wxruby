@@ -24,9 +24,9 @@ class TestComboBox < Wx::Panel
         cb = Wx::ComboBox.new(self, 500, "default value", Wx::Point.new(90,50), Wx::DEFAULT_SIZE,
                                 sampleList, Wx::CB_DROPDOWN)
         
-        evt_combobox(cb.get_id()) {|event| on_combobox(event)}
-        evt_text(cb.get_id()) {|event| on_evt_text(event)}
-        evt_text_enter(cb.get_id()) {|event| on_evt_text_enter(event)}
+        evt_combobox(cb.get_id) {|event| on_combobox(event)}
+        evt_text(cb.get_id) {|event| on_evt_text(event)}
+        evt_text_enter(cb.get_id) {|event| on_evt_text_enter(event)}
         cb.evt_set_focus {|event| on_set_focus(event)}
         cb.evt_kill_focus {|event| on_kill_focus(event)}
         
@@ -36,25 +36,27 @@ class TestComboBox < Wx::Panel
     end
     
     def on_combobox(event)
-        @log.write_text("evt_combobox: " + event.get_string())
+        cb = event.get_event_object
+        data = cb.get_client_data(event.get_selection)
+        @log.write_text("evt_combobox: #{event.get_string}\nClient Data: #{data}")
     end
     
     def on_evt_text(event)
-        @log.write_text("evt_text: " + event.get_string())
+        @log.write_text("evt_text: " + event.get_string)
     end
     
     def on_evt_text_enter(event)
-        @log.write_text("evt_text_enter: " + event.get_string())
+        @log.write_text("evt_text_enter: " + event.get_string)
     end
     
     def on_set_focus(evt)
         @log.write_text("OnSetFocus")
-        evt.skip()
+        evt.skip
     end
     
     def on_kill_focus(evt)
         @log.write_text("OnKillFocus")
-        evt.skip()
+        evt.skip
     end
 end
 
