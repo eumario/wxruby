@@ -107,7 +107,8 @@ class TestListBox < Wx::Panel
     end
     
     def on_evt_multi_listbox(event)
-        @log.write_text("evt_multi_listbox: (" + @lb2.get_selections.to_s + ")")
+        @log.write_text("evt_multi_listbox: (" + 
+                         @lb2.get_selections.join(',') + ")")
     end
     
     def on_evt_right_button(event)
