@@ -16,12 +16,9 @@ h2. Derived from
 
 h2. Constants
 
-The possible values for the family parameter of "Font
+The possible constant values for the family parameter of "Font
 constructor":fontctor.html are (the old names are for compatibility only):
 
-
- enum FontFamily
- {
      FONTFAMILY_DEFAULT = DEFAULT,
      FONTFAMILY_DECORATIVE = DECORATIVE,
      FONTFAMILY_ROMAN = ROMAN,
@@ -30,53 +27,39 @@ constructor":fontctor.html are (the old names are for compatibility only):
      FONTFAMILY_MODERN = MODERN,
      FONTFAMILY_TELETYPE = TELETYPE,
      FONTFAMILY_MAX
- };
  
 
 The possible values for the weight parameter are (the old names
 are for compatibility only):
 
-
- enum FontWeight
- {
      FONTWEIGHT_NORMAL = NORMAL,
      FONTWEIGHT_LIGHT = LIGHT,
      FONTWEIGHT_BOLD = BOLD,
      FONTWEIGHT_MAX
- };
- 
 
 The font flags which can be used during the font creation are:
 
-
- enum
- {
-     // no special flags: font with default weight/slant/anti-aliasing
+     # no special flags: font with default weight/slant/anti-aliasing
      FONTFLAG_DEFAULT          = 0,
  
-     // slant flags (default: no slant)
+     # slant flags (default: no slant)
      FONTFLAG_ITALIC           = 1 << 0,
      FONTFLAG_SLANT            = 1 << 1,
  
-     // weight flags (default: medium)
+     # weight flags (default: medium)
      FONTFLAG_LIGHT            = 1 << 2,
      FONTFLAG_BOLD             = 1 << 3,
  
-     // anti-aliasing flag: force on or off (default: the current system default)
+     # anti-aliasing flag: force on or off (default: the current system default)
      FONTFLAG_ANTIALIASED      = 1 << 4,
      FONTFLAG_NOT_ANTIALIASED  = 1 << 5,
  
-     // underlined/strikethrough flags (default: no lines)
+     # underlined/strikethrough flags (default: no lines)
      FONTFLAG_UNDERLINED       = 1 << 6,
      FONTFLAG_STRIKETHROUGH    = 1 << 7,
- };
- 
 
 The known font encodings are:
 
-
- enum FontEncoding
- {
      FONTENCODING_SYSTEM = -1,     // system default
      FONTENCODING_DEFAULT,         // current default encoding
  
@@ -131,22 +114,15 @@ The known font encodings are:
                                      // EncodingConverter class
  
      FONTENCODING_MAX
- };
- 
 
-h2. Predefined objects
+h2. Predefined constants objects
 
-Objects:
+* @Wx::NORMAL_FONT@ *NullFont*
+* @Wx::SMALL_FONT@
+* @Wx::ITALIC_FONT@
+* @Wx::SWISS_FONT@
 
-*NullFont*
 
-Pointers:
-
-*NORMAL_FONT
-
-SMALL_FONT\\
-ITALIC_FONT\\
-SWISS_FONT*
 
 h2. See also
 
@@ -156,9 +132,17 @@ h2. See also
 
 h2. Methods
 
-* "Font.new":#Font_new
-* "Font#is_fixed_width":#Font_isfixedwidth
+h3. Class Methods
+
 * "Font#get_default_encoding":#Font_getdefaultencoding
+* "Font#get_default_encoding_name":#Font_getdefaultencodingname
+* "Font.new":#Font_new
+
+h3. Instance Methods
+
+
+* "Font#is_fixed_width":#Font_isfixedwidth
+
 * "Font#get_face_name":#Font_getfacename
 * "Font#get_family":#Font_getfamily
 * "Font#get_native_font_info_desc":#Font_getnativefontinfodesc
@@ -179,7 +163,31 @@ h2. Methods
 
 </div>
 
+h2. Class Methods
 
+
+h3(#Font_getdefaultencoding). Font.get_default_encoding
+
+ Integer *get_default_encoding*()
+
+Returns an integer constant identifying the current application's
+default encoding. This is set by the OS, and may be changed by using
+"set_default_encoding":#Font_setdefaultencoding 
+
+h4. See also
+
+"get_default_encoding_name":#Font_getdefaultencodingname
+
+h3(#Font_getdefaultencodingname). Font.get_default_encoding_name
+
+ String *get_default_encoding_name*()
+
+Returns the name of the current application's default encoding. This is
+returned as a string suitable for use with Ruby's 'iconv' library.
+
+h4. See also
+
+"Font encoding overview":fontencodingoverview.html,
 
 h3(#Font_new). Font.new
 
@@ -250,21 +258,32 @@ Under Windows, only scalable TrueType fonts are used.
 See also "DC#set_font":dc.html#DC_setfont, "DC#draw_text":dc.html#DC_drawtext
 and "DC#get_text_extent":dc.html#DC_gettextextent.
 
+h3(#Font_setdefaultencoding). Font#set_default_encoding
 
-  *destructor*()
+  *set_default_encoding*(%(arg-type)FontEncoding% encoding)
 
-Destructor.
+Sets the default font encoding, passing a valid @Wx::FONTENCODING_XX@ constant.
 
-h4. Remarks
+h4. See also
 
-The destructor may not delete the underlying font object of the native windowing
-system, since Font uses a reference counting system for efficiency.
+"Font encoding overview":fontencodingoverview.html,
+"get_default_encoding":#Font_getdefaultencoding
 
-Although all remaining fonts are deleted when the application exits,
-the application should try to clean up all fonts itself. This is because
-Widgets cannot know if a pointer to the font object is stored in an
-application data structure, and there is a risk of double deletion.
 
+h3(#Font_setdefaultencoding). Font#set_default_encoding_name
+
+  *set_default_encoding*(%(arg-type)FontEncoding% encoding)
+
+Sets the default font encoding, passing an encoding name.
+
+h4. See also
+
+"Font encoding overview":fontencodingoverview.html,
+"get_default_encoding":#Font_getdefaultencoding
+
+
+
+h2. Instance Methods
 
 h3(#Font_isfixedwidth). Font#is_fixed_width
 
@@ -272,19 +291,6 @@ h3(#Font_isfixedwidth). Font#is_fixed_width
 
 Returns @true@ if the font is a fixed width (or monospaced) font,
 @false@ if it is a proportional one or font is invalid.
-
-
-h3(#Font_getdefaultencoding). Font#get_default_encoding
-
- "FontEncoding":fontencoding.html *get_default_encoding*()
-
-Returns the current application's default encoding.
-
-h4. See also
-
-"Font encoding overview":fontencodingoverview.html,
-"set_default_encoding":#Font_setdefaultencoding
-
 
 h3(#Font_getfacename). Font#get_face_name
 
@@ -406,18 +412,6 @@ h3(#Font_ok). Font#ok
  Boolean *ok*()
 
 Returns @true@ if this object is a valid font, @false@ otherwise.
-
-
-h3(#Font_setdefaultencoding). Font#set_default_encoding
-
-  *set_default_encoding*(%(arg-type)FontEncoding% encoding)
-
-Sets the default font encoding.
-
-h4. See also
-
-"Font encoding overview":fontencodingoverview.html,
-"get_default_encoding":#Font_getdefaultencoding
 
 
 h3(#Font_setfacename). Font#set_face_name
