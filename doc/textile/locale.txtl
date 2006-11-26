@@ -1,15 +1,16 @@
 h1(#wxlocale). Wx::Locale
 
-Locale class encapsulates all language-dependent settings and is a
-generalization of the C locale concept.
+The Locale class encapsulates all language-dependent settings and is a
+generalization of the C locale concept. This class's methods may be used
+to discover information about the user's default language, such as its
+canonical name, description and character encoding. It may also be used
+to set an alternative locale, via @Wx::Locale.set_locale@. This will
+affect things like the default date format.
 
-In Widgets this class manages message catalogs which contain the translations
-of the strings used to the current language.
-
-
-h2. Derived from
-
-No base class
+In WxWidgets this class also manages message catalogs which contain
+translations of the strings used for the current language. However, the
+methods for getting translations of strings (@get_string@, @add_catalog@
+etc) are not currently supported in wxRuby.
 
 h2. See also
 
@@ -21,24 +22,29 @@ h2. See also
 
 h2. Methods
 
-* "Supported languages":#Locale_languages
-* "Locale.new":#Locale_new
-* "Locale#add_catalog":#Locale_addcatalog
-* "Locale#add_catalog_lookup_path_prefix":#Locale_addcataloglookuppathprefix
-* "Locale#add_language":#Locale_addlanguage
+h3. Class Methods
+
 * "Locale#find_language_info":#Locale_findlanguageinfo
-* "Locale#get_canonical_name":#Locale_getcanonicalname
-* "Locale#get_language":#Locale_getlanguage
 * "Locale#get_language_info":#Locale_getlanguageinfo
 * "Locale#get_language_name":#Locale_getlanguagename
+* "Locale.get_system_encoding":#Locale_getsystemencoding
+* "Locale.get_system_encoding_name":#Locale_getsystemencodingname
+* "Locale.get_system_language":#Locale_getsystemlanguage
+* "Locale.new":#Locale_new
+
+h3. Instance Methods
+
+* "Supported languages":#Locale_languages
+* "Locale#add_catalog":#Locale_addcatalog
+* "Locale#add_catalog_lookup_path_prefix":Locale_addcataloglookuppathprefix
+* "Locale#add_language":#Locale_addlanguage
+* "Locale#get_canonical_name":#Locale_getcanonicalname
+* "Locale#get_language":#Locale_getlanguage
 * "Locale#get_locale":#Locale_getlocale
 * "Locale#get_name":#Locale_getname
 * "Locale#get_string":#Locale_getstring
 * "Locale#get_header_value":#Locale_getheadervalue
 * "Locale#get_sys_name":#Locale_getsysname
-* "Locale#get_system_encoding":#Locale_getsystemencoding
-* "Locale#get_system_encoding_name":#Locale_getsystemencodingname
-* "Locale#get_system_language":#Locale_getsystemlanguage
 * "Locale#init":#Locale_init
 * "Locale#is_loaded":#Locale_isloaded
 * "Locale#is_ok":#Locale_isok
@@ -46,45 +52,89 @@ h2. Methods
 </div>
 
 
+h2. Class Methods
 
+h3(#Locale_findlanguageinfo). Locale.find_language_info
 
-h3(#wxlanguage). Supported languages
+ "LanguageInfo":languageinfo.html *find_language_info*(%(arg-type)String% locale)
 
-See "list of recognized language constants":languagecodes.html.
-These constants may be used to specify the language
-in "Init":localeinit.html and are returned by 
-"get_system_language":#Locale_getsystemlanguage:
+This function may be used to find the language description structure for the
+given locale, specified either as a two letter ISO language code (for example,
+"pt"), a language code followed by the country code ("pt_BR") or a full, human
+readable, language description ("Portuguese-Brazil").
 
+Returns the information for the given language or @nil@ if this language
+is unknown.
+
+h4. See also
+
+"get_language_info":#Locale_getlanguageinfo
+
+h3(#Locale_getlanguageinfo). Locale.get_language_info
+
+ "LanguageInfo":languageinfo.html *get_language_info*(%(arg-type)Integer% lang)
+
+Returns a pointer to LanguageInfo structure containing information about the
+given language or @NULL@ if this language is unknown. Note that even if the
+returned pointer is valid, the caller should _not_ delete it.
+
+See "add_language":#Locale_addlanguage for the LanguageInfo
+description.
+
+As with "Init":localeinit.html, @LANGUAGE_DEFAULT@ has the
+special meaning if passed as an argument to this function and in this case the
+result of "get_system_language()":#Locale_getsystemlanguage() is used.
+
+h3(#Locale_getsystemencodingname). Locale.get_system_encoding_name
+
+ String *get_system_encoding_name*()
+
+Returns the name of the user's default font encoding, for example
+'ISO-8859-1'. Nil is returned if the system encoding couldn't be
+detected. 
+
+h3(#Locale_getsystemlanguage). Locale.get_system_language
+
+ Integer *get_system_language*()
+
+Tries to detect the user's default language setting.  Returns
+"Language":language.html, for example @Wx::LANGUAGE_ENGLISH_UK@ value or
+1 (@Wx::LANGUAGE_UNKNOWN@) if the language-guessing algorithm failed.
+
+h3(#Locale_getsystemlanguage). Locale.get_system_language_name
+
+ String *get_system_language_name*()
+
+Returns the name of the user's default langage. Returns an uppercase
+String name, for example "ENGLISH_UK".
 
 h3(#Locale_defnew). Locale.new
 
   *Locale.new*(%(arg-type)Integer% language, 
-             %(arg-type)Integer% flags = LOCALE_LOAD_DEFAULT | LOCALE_CONV_ENCODING)
+                %(arg-type)Integer% flags = LOCALE_LOAD_DEFAULT|LOCALE_CONV_ENCODING)
 
-See "Init()":localeinit.html for parameters description.
+Creates a new Wx::Locale object, *and* sets it to be the global locale
+used by this location. As an important side-effect, calling this method
+sets the application locale to the language; see
+"Locale.set_locale":#setlocale.
 
-  *Locale.new*(%(arg-type)char% szName,  %(arg-type)char% szShort = nil, 
-             %(arg-type)char% szLocale = nil, 
-             %(arg-type)Boolean% bLoadDefault = true, 
-             %(arg-type)Boolean% bConvertEncoding = false)
+h3(#Locale_setlocale). Locale.set_locale
 
-See "Init()":localeinit.html for parameters description.
+  *Locale.new*(%(arg-type)Integer% language)
 
-The call of this function has several global side effects which you should
-understand: first of all, the application locale is changed - note that this
-will affect many of standard C library functions such as printf() or strftime().
-Second, this Locale object becomes the new current global locale for the
-application and so all subsequent calls to GetTranslation() will try to
-translate the messages using the message catalogs for this locale.
+  *Locale.new*(%(arg-type)String% language)
 
 
+Sets @language@ to be the default language for this
+application. @language@ may be a @Wx::LANGUAGE_XXX@ constant (for example,
+@Wx::LANGUAGE_DUTCH@) or a canonical name (for example, 'pt_BR', for
+Brazilian Portuguese).
 
-  *destructor*()
+The call of this function has several global effects which you
+should understand: first of all, the application locale is changed -
+note that this will affect standard ruby methods such as Time#strftime.
 
-The destructor, like the constructor, also has global side effects: the previously
-set locale is restored and so the changes described in 
-"Init":localeinit.html documentation are rolled back.
-
+h2. Instance Methods
 
 h3(#Locale_addcatalog). Locale#add_catalog
 
@@ -146,44 +196,13 @@ Adds custom, user-defined language to the database of known languages. This
 database is used in conjunction with the first form of 
 "Init":localeinit.html. 
 
-LanguageInfo is defined as follows:
+LanguageInfo is a Ruby struct class with the following accessors:
 
+* language (Integer language identifier id)
+* canonical_name (Canonical name, eg fr_FR)
+* description (Human readable string name of the language)
 
- struct WXDLLEXPORT LanguageInfo
- {
-     int Language;                   // Language id
-     String CanonicalName;         // Canonical name, e.g. fr_FR
- #ifdef __WIN32__
-     Uint32 WinLang, WinSublang;   // Win32 language identifiers
-                                     // (LANG_xxxx, SUBLANG_xxxx)
- #endif
-     String Description;           // human-readable name of the language
- };
- 
-
-
-_Language_ should be greater than LANGUAGE_USER_DEFINED.
-
-
-
-
-h3(#Locale_findlanguageinfo). Locale#find_language_info
-
- "LanguageInfo":languageinfo.html *find_language_info*(%(arg-type)String% locale)
-
-This function may be used to find the language description structure for the
-given locale, specified either as a two letter ISO language code (for example,
-"pt"), a language code followed by the country code ("pt_BR") or a full, human
-readable, language description ("Portuguese-Brazil").
-
-Returns the information for the given language or @NULL@ if this language
-is unknown. Note that even if the returned pointer is valid, the caller should
-_not_ delete it.
-
-h4. See also
-
-"get_language_info":#Locale_getlanguageinfo
-
+The value of _Language_ should be greater than @Wx::LANGUAGE_USER_DEFINED@.
 
 h3(#Locale_getcanonicalname). Locale#get_canonical_name
 
@@ -198,9 +217,6 @@ This form is internally used when looking up message catalogs.
 
 Compare "get_sys_name":#Locale_getsysname.
 
-
-
-
 h3(#Locale_getlanguage). Locale#get_language
 
  Integer *get_language*()
@@ -208,22 +224,6 @@ h3(#Locale_getlanguage). Locale#get_language
 Returns "Language":language.html constant of current language.
 Note that you can call this function only if you used the form of
 "Init":localeinit.html that takes Language argument.
-
-
-h3(#Locale_getlanguageinfo). Locale#get_language_info
-
- "LanguageInfo":languageinfo.html *get_language_info*(%(arg-type)Integer% lang)
-
-Returns a pointer to LanguageInfo structure containing information about the
-given language or @NULL@ if this language is unknown. Note that even if the
-returned pointer is valid, the caller should _not_ delete it.
-
-See "add_language":#Locale_addlanguage for the LanguageInfo
-description.
-
-As with "Init":localeinit.html, @LANGUAGE_DEFAULT@ has the
-special meaning if passed as an argument to this function and in this case the
-result of "get_system_language()":#Locale_getsystemlanguage() is used.
 
 
 h3(#Locale_getlanguagename). Locale#get_language_name
@@ -239,20 +239,17 @@ special meaning of @LANGUAGE_DEFAULT@.
 
 h3(#Locale_getlocale). Locale#get_locale
 
- char *get_locale*()
+ String *get_locale*()
 
-Returns the locale name as passed to the constructor or 
-"Init()":localeinit.html. This is full, human-readable name,
-e.g. "English" or "French".
-
+Returns the locale name as passed to the constructor. This is full,
+human-readable name, e.g. "English" or "French".
 
 
 h3(#Locale_getname). Locale#get_name
 
  String *get_name*()
 
-Returns the current short name for the locale (as given to the constructor or
-the Init() function).
+Returns the current short name for the locale.
 
 
 h3(#Locale_getstring). Locale#get_string
@@ -263,12 +260,13 @@ h3(#Locale_getstring). Locale#get_string
                  %(arg-type)size_t% n, 
                  %(arg-type)char% szDomain = nil)
 
-Retrieves the translation for a string in all loaded domains unless the szDomain
-parameter is specified (and then only this catalog/domain is searched).
+Retrieves the translation for a string in all loaded domains unless the
+szDomain parameter is specified (and then only this catalog/domain is
+searched).
 
-Returns original string if translation is not available
-(in this case an error message is generated the first time
-a string is not found; use "LogNull":logoverview.html to suppress it).
+Returns original string if translation is not available (in this case an
+error message is generated the first time a string is not found; use
+"LogNull":logoverview.html to suppress it).
 
 The second form is used when retrieving translation of string that has
 different singular and plural form in English or different plural forms in some
@@ -307,7 +305,6 @@ Returns current platform-specific locale name as passed to setlocale().
 Compare "get_canonical_name":#Locale_getcanonicalname.
 
 
-
 h3(#Locale_getsystemencoding). Locale#get_system_encoding
 
  "FontEncoding":fontencoding.html *get_system_encoding*()
@@ -315,28 +312,6 @@ h3(#Locale_getsystemencoding). Locale#get_system_encoding
 Tries to detect the user's default font encoding.
 Returns "FontEncoding":font.html value or 
 *FONTENCODING_SYSTEM* if it couldn't be determined.
-
-
-h3(#Locale_getsystemencodingname). Locale#get_system_encoding_name
-
- String *get_system_encoding_name*()
-
-Tries to detect the name of the user's default font encoding. This string isn't
-particularly useful for the application as its form is platform-dependent and
-so you should probably use 
-"get_system_encoding":#Locale_getsystemencoding instead.
-
-Returns a user-readable string value or an empty string if it couldn't be
-determined.
-
-
-h3(#Locale_getsystemlanguage). Locale#get_system_language
-
- Integer *get_system_language*()
-
-Tries to detect the user's default language setting.
-Returns "Language":language.html value or 
- *LANGUAGE_UNKNOWN* if the language-guessing algorithm failed.
 
 
 

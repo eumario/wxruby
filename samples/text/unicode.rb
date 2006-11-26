@@ -66,6 +66,14 @@ class IConvFrame < Wx::Frame
     panel = Wx::Panel.new(self)
     sizer = Wx::BoxSizer.new(Wx::VERTICAL)
 
+    sys_lang = Wx::Locale.get_system_language_name
+    text = Wx::StaticText.new(panel, -1, "System language: #{sys_lang}")
+    sizer.add(text, 0, Wx::ALL, 5)
+
+    sys_enc = Wx::Locale.get_system_encoding_name
+    text = Wx::StaticText.new(panel, -1, "System default encoding: #{sys_enc}")
+    sizer.add(text, 0, Wx::ALL, 5)
+
     # The text input and display
     @textctrl = UnicodeDemoTextCtrl.new(panel)
     sizer.add(@textctrl, 3, Wx::GROW|Wx::ALL, 2)

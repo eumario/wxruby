@@ -4,8 +4,10 @@
 %include "../common.i"
 
 %module(directors="1") wxFont
-
 %ignore wxFont::SetNativeFontInfo;
+
+// import the font encoding constants directly from the WxWidgets source
+%include <wx/fontenc.h>
 
 %import "include/wxObject.h"
 %import "include/wxGDIObject.h"
