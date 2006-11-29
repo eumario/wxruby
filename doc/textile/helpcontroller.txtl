@@ -1,71 +1,52 @@
 h1(#wxhelpcontroller). Wx::HelpController
 
-This is a family of classes by which
-applications may invoke a help viewer to provide on-line help.
+This is a family of classes by which applications invoke a viewer to
+provide on-line help. A help controller allows an application to display
+help, at the index page or on a particular topic, and shut the help
+program down on termination.  This avoids proliferation of many
+instances of the help viewer whenever the user requests a different
+topics via the application's menus or buttons.
 
-A help controller allows an application to display help, at the contents
-or at a particular topic, and shut the help program down on termination.
-This avoids proliferation of many instances of the help viewer whenever the
-user requests a different topic via the application's menus or buttons.
+Typically, an application will create a help controller instance when it
+starts, and immediately call *load_file* to load the help content from a
+file. The help viewer will only get run, however, just before the first
+call to display something.
 
-Typically, an application will create a help controller instance
-when it starts, and immediately call *Initialize* to associate a filename with it. The help viewer will only get run, however,
-just before the first call to display something.
+Using this class will invoke the most appropriate help viewer on each
+different platform, using the native help controller where
+possible. This means:
 
-Most help controller classes actually derive from HelpControllerBase and have
-names of the form XXXHelpController or HelpControllerXXX. An
-appropriate class is aliased to the name HelpController for each platform, as follows:
+* On desktop Windows, Microsoft HTML Help is used
+* On all other platforms, "HtmlHelpController":htmlhelpcontroller.html is used
 
+These two classes are very similar in functionality and
+appearance. Unless you have a strong preference for using the native
+help viewer on Windows, it's recommended that you use
+"HtmlHelpController":htmlhelpcontroller.html directly, rather than using
+this class. This has the additional advantage that you only need to
+provide help files in one format (.htb) to cover all desktop platforms,
+instead of needing to provide a format (.chm) specially for windows. See
+"HtmlHelpController":htmlhelpcontroller.html for more details on the
+file formats used.
 
-* On desktop Windows, CHMHelpController is used (MS HTML Help).
-* On Windows CE, WinceHelpController is used.
-* On all other platforms, HtmlHelpController is used if HTML is
-compiled into Widgets; otherwise ExtHelpController is used (for invoking an external
-browser).
-
-
-The remaining help controller classes need to be named
-explicitly by an application that wishes to make use of them.
-
-There are currently the following help controller classes defined:
-
-
-* WinHelpController, for controlling Windows Help.
-* CHMHelpController, for controlling MS HTML Help. To use this, you need to set USE_MS_HTML_HELP
-to 1 in setup.h and have htmlhelp.h header from Microsoft's HTML Help kit (you don't need
-VC++ specific htmlhelp.lib because Widgets loads necessary DLL at runtime and so it
-works with all compilers).
-* BestHelpController, for controlling MS HTML Help or, if Microsoft's runtime is
-not available, "HtmlHelpController":htmlhelpcontroller.html. You need to provide
-*both* CHM and HTB versions of the help file. For 32bit Windows only.
-* ExtHelpController, for controlling external browsers under Unix.
-The default browser is Netscape Navigator. The 'help' sample shows its use.
-* WinceHelpController, for controlling a simple @.htm@ help controller for Windows CE applications.
-* "HtmlHelpController":htmlhelpcontroller.html, a sophisticated help controller using "HTML":html.html, in
-a similar style to the Microsoft HTML Help viewer and using some of the same files.
-Although it has an API compatible with other help controllers, it has more advanced features, so it is
-recommended that you use the specific API for this class instead. Note that if you
-use .zip or .htb formats for your books, you
-must add this line to your application initialization: @FileSystem::AddHandler(new ZipFSHandler);@
-or nothing will be shown in your help window.
+WxWidgets also provides classes for viewing help on Win CE, but WxRuby
+is not currently ported to this platform. 
 
 
 h2. Derived from
 
-HelpControllerBase
-
-"Object":object.html
+ "Wx::Object":object.html
 
 h2. See also
 
-"HtmlHelpController":htmlhelpcontroller.html, "HTML":html.html
+"HtmlHelpController":htmlhelpcontroller.html
 
 <div id="methods">
 
 h2. Methods
 
 * "HelpController.new":#HelpController_new
-* "HelpController#initialize":#HelpController_initialize
+* "HelpController#init":#HelpController_init
 * "HelpController#display_block":#HelpController_displayblock
 * "HelpController#display_contents":#HelpController_displaycontents
 * "HelpController#display_context_popup":#HelpController_displaycontextpopup
@@ -88,20 +69,19 @@ h3(#HelpController_new). HelpController.new
 
 Destroys the help instance, closing down the viewer if it is running.
 
-h3(#HelpController_initialize). HelpController#initialize
+h3(#HelpController_init). HelpController#init
 
-  *initialize*(%(arg-type)String% file)
+  *init*(%(arg-type)String% file)
 
-  *initialize*(%(arg-type)String% file,  %(arg-type)Integer% server)
-
-Initializes the help instance with a help filename, and optionally a server socket
-number if using Help (now obsolete). Does not invoke the help viewer.
-This must be called directly after the help instance object is created and before
-any attempts to communicate with the viewer.
+Initializes the help instance with a help filename. Does not invoke the
+help viewer.  This must be called directly after the help instance
+object is created and before any attempts to communicate with the
+viewer.
 
 You may omit the file extension and a suitable one will be chosen. For
-HtmlHelpController, the extensions zip, htb and hhp will be appended while searching for
-a suitable file. For WinHelp, the hlp extension is appended.
+HtmlHelpController, the extensions zip, htb and hhp will be appended
+while searching for a suitable file. For WinHelp, the hlp extension is
+appended.
 
 h3(#HelpController_displayblock). HelpController#display_block
 

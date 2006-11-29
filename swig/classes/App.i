@@ -7,6 +7,8 @@
 
 %{
 #include <wx/init.h>
+#include <wx/filesys.h>
+#include <wx/fs_zip.h>
 %}
 
 %ignore GetAuto3D;
@@ -101,6 +103,7 @@ public:
         {
             Init_wxRubyEventTypes();
             Init_wxRubyStockObjects();
+			wxFileSystem::AddHandler(new wxZipFSHandler);
         }
         return result;
     }
