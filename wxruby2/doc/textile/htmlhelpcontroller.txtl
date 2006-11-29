@@ -1,45 +1,205 @@
 h1(#wxhtmlhelpcontroller). Wx::HtmlHelpController
 
-*WARNING!* Although this class has an API compatible with other Widgets
-help controllers as documented by "HelpController":helpcontroller.html, it
-is recommended that you use the enhanced capabilities of HtmlHelpController's API.
+This help controller provides an easy way of displaying HTML help in
+your application. It provides a sophisticated system for showing help
+that includes a hierarchical contents listing, index, keyword search and
+bookmarking. 
 
-This help controller provides an easy way of displaying HTML help in your
-application (see _test_ sample). The help system is based on *books* 
-(see "add_book":#HtmlHelpController_addbook). A book is a logical
-section of documentation (for example "User's Guide" or "Programmer's Guide" or
-"C++ Reference" or "Widgets Reference"). The help controller can handle as
-many books as you want.
+It is similar to the Microsoft Windows HTML Help Viewer, but unlike that
+viewer it is available and uses the same help file format on all
+platforms. The native Windows help viewer is available in WxRuby by
+using the "Wx::HelpController":helpcontroller.html class, which will
+create an OS-native viewer on Windows and an HtmlHelpController on
+Linux/GTk and OS X. However, unless you have a strong preference for
+using the native control on Windows, you are recommended to use this
+class, as it means you can provide your help file(s) in a single format
+only.
 
-HTML uses Microsoft's HTML Help Workshop project files (.hhp, .hhk, .hhc) as its
-native format. The file format is described "here":helpformat.html.
-Have a look at docs/html/ directory where sample project files are stored.
+The help system is based on *books* (see). A book is a logical section
+of documentation (for example "User's Guide" or "Programmer's Guide" or
+"Ruby Reference" or "Class Reference"). The help controller can handle
+as many books as you want.
 
-You can use Tex2RTF to produce these files when generating HTML, if you set *htmlWorkshopFiles* to *true* in
-your tex2rtf.ini file.
+h2(#html_help_file_format). Html Help File Format
 
-h2. Note
+@Wx::HtmlHelpController@ library uses a reduced version of Microsoft's
+HTML Workshop format. This consists of standard HTML 4.0 files, plus a
+set of three files (.hhp, .hhc, .hhk) that are a project header file, a
+help contents file and a help index file, respectively. These are all
+simple text files that are easily authored or generated using any of a
+wide variety of tools.
 
-It is strongly recommended to use preprocessed *.hhp.cached* version of
-projects. It can be either created on-the-fly (see 
-"set_temp_dir":#HtmlHelpController_settempdir) or you can use 
-*hhp2cached* utility from _utils/hhp2cached_ to create it and
-distribute the cached version together with helpfiles. See _samples/html/help_ 
-sample for demonstration of its use.
+A HtmlHelpController can use an .hhp header file directly as an argument
+to "add_book":#HtmlHelpController_addbook to open documentation. 
 
-h2. See also
+You can make a regular zip archive of these files, plus the HTML and any
+image files, for wxHTML (or helpview) to read; and the .zip file can
+optionally be renamed to .htb.
 
-"Information about BestHelpController":helpcontroller.html
+h3(#hhp_header_file). Header file (.hhp)
 
-h2. Derived from
+Header file must contain these lines (and may contain additional lines which are ignored) :
 
-HelpControllerBase
+ Contents file=[filename.hhc]
+ Index file=[filename.hhk]
+ Title=[title of your book]
+ Default topic=[default page to be displayed.htm]
+
+All filenames (including the Default topic) are relative to the location
+of .hhp file.
+
+_Localization note_ In addition, .hhp file may contain the line
+
+ Charset=<rfc_charset>
+
+which specifies what charset (e.g. "iso8859_1") was used in contents and
+index files. Please note that this line is incompatible with MS HTML
+Help Workshop and it would either silently remove it or complain with
+some error.
+
+h3(#hhc_contents_file). Contents file (.hhc)
+
+The contents file lists the hierarchical structure of the help
+documentation. The contents file has HTML syntax and it can be parsed by
+regular HTML parser. It contains exactly one list
+(&lt;ul&gt;....&lt;/ul&gt; statement), with &lt;li&gt; elements
+containing an &lt;object&gt; of type @text/sitemap@ for each node of the
+contents:
+
+<pre>
+ <ul>
+  <li>
+	<object type="text/sitemap">
+      <param name="Name" value="@topic name@">
+      <param name="ID" value=@numeric_id@>
+      <param name="Local" value="@filename.htm@">
+    </object>
+  <li>
+    <object type="text/sitemap">
+      <param name="Name" value="@topic name@">
+      <param name="ID" value=@numeric_id@>
+      <param name="Local" value="@filename.htm@">
+    </object>
+  ...    
+ </ul>
+</pre>
+
+You can modify the value attributes of param tags. @topic name@ is name
+of chapter/topic as is displayed in the contents listing, @filename.htm@
+is the HTML page name (relative to .hhp file) and @numeric_id@ is
+optional - it is used only when you use the HtmlHelpController#display()
+method to show a specific part of the help documentation.
+
+Items in the list may be nested to produce a hierarchical tree-like
+organisation of content topics. To do this, one &lt;li&gt; statement may
+contain one or more &lt;ul&gt; sub-statements in the .hhc file:
+
+<pre>
+ <ul>
+   <li> 
+     <object type="text/sitemap">
+       <param name="Name" value="Top node">
+       <param name="Local" value="top.htm">
+     </object>
+     <ul>
+       <li>
+	     <object type="text/sitemap">
+           <param name="Name" value="subnode in topnode">
+           <param name="Local" value="subnode1.htm">
+         </object>
+      ...
+    </ul>
+  <li> 
+    <object type="text/sitemap">
+      <param name="Name" value="Another Top">
+      <param name="Local" value="top2.htm">
+    </object>
+  ...    
+ </ul>
+</pre>
+
+h3(#hhk_index_file). Index file (.hhk)
+
+The index file is a listing of keywords, associated with locations that
+describe those keywords. Index files have same format as contents file
+except that ID params are ignored and sublists are not allowed.
+
+h3(#html_content_files). Html Content Files
+
+HtmlHelpController uses "HtmlWindow":htmlwindow.html to display the HTML
+content pages of the help documentation. Therefore, it understand the
+large subset of HTML 4.0 that is understood by that widget.
+
+One "feature" to note is that it does *not* support anchors specified
+using the modern @id@ attribute used on any HTML element. Only
+old-fashioned named anchors (using the @name@ attribute on an @a@ tag)
+are recognised.
+
+h3(#htb_bundle_files). Bundling help files (.htb)
+
+Distributing help using the file format described above means
+distributing a reasonably number of files (at least the header file,
+contents page and the actual documentation), and maintaining the
+directory organisation. It can be more convenient to bundle all the
+content and index files together into a single file.
+
+A help file bundle can be created by zipping up the .hhp, .hhc, .hhk
+plus the HTML content files and any images into a single standard .zip
+archive. WxRuby can then load help from this single archive file instead of
+from an .hhp file. If you prefer, the .zip file can be renamed .htb
+('HTml help Book') to indicate that it contains help documentation.
+
+The .chm (Compiled Help) format that is generated by Microsoft's Help
+Workshop is a similar concept.  However, this file format is *not*
+compatible with WxRuby's Wx::HtmlHelpController. These .chm files can be
+read by the native Microsoft Help Viewer, which is accessible in WxRuby
+by using the "HelpController":helpcontroller.html class, on Windows
+only.
+
+h3(#creating_html_help_files). Generating HTML Help files
+
+There are several tools that can be used to automate the creation of
+.hhp, .hhc, .hhk and .html files for use with the help viewer.
+
+You can use Tex2RTF, a utility included with the wxWidgets distribution
+to produce these files when generating HTML from Latex. To do so, set
+*htmlWorkshopFiles* to *true* in your tex2rtf.ini file.
+
+The files can also be generated from Docbook XML documentation, by using
+the *htmlhelp.xsl* stylesheet.
+
+If you prefer to use a GUI, Microsoft offers a free HTML Help Workshop
+for authoring Help documentation.
+
+Although we do not know of any tool to automatically create the contents
+and index files from Ruby's RDoc system, it should be relatively
+straightforward to adapt RDoc's output for use with HtmlHelpController.
+
+h3(#note_on_caching). Note on caching
+
+The WxWidgets documentation recommends the use of preprocessed
+*.hhp.cached* version of projects. These can be either created
+on-the-fly (see "set_temp_dir":#HtmlHelpController_settempdir) or you
+can use *hhp2cached* utility from _utils/hhp2cached_ directory in the
+WxWidgets distribution to create it and distribute the cached version
+together with helpfiles.
+
+h2(#see_also). See also
+
+"Wx::HelpController":helpcontroller.html
+
+h2(#superclasses). Inherits from
+
+ "Wx::Object":object.html
 
 <div id="methods">
 
-h2. Methods
+h2. Class Methods
 
 * "HtmlHelpController.new":#HtmlHelpController_new
+
+h2. Instance Methods
+
 * "HtmlHelpController#add_book":#HtmlHelpController_addbook
 * "HtmlHelpController#create_help_frame":#HtmlHelpController_createhelpframe
 * "HtmlHelpController#display":#HtmlHelpController_display
@@ -54,8 +214,9 @@ h2. Methods
 
 </div>
 
+h2(#class_methods). Class Methods
 
-h3(#HtmlHelpController_wxhtmlhelpcontroller). HtmlHelpController.new
+h3(#HtmlHelpController_new). HtmlHelpController.new
 
   *HtmlHelpController.new*(%(arg-type)Integer% style = HF_DEFAULT_STYLE)
 
@@ -78,38 +239,28 @@ _style_ is combination of these flags:
 |@HF_ICONS_BOOK@|All nodes in contents panehave a book icon. This is how Microsoft's HTML help viewer behaves.|
 |@HF_ICONS_FOLDER@|Book nodes in contents pane havea book icon, book's sections have a folder icon. This is the default.|
 |@HF_ICONS_BOOK_CHAPTER@|Both book nodes andnodes of top-level sections of a book (i.e. chapters) have a book icon,all other sections (sections, subsections, ...) have a folder icon.|
-|@HF_DEFAULT_STYLE@|@HF_TOOLBAR | HF_CONTENTS| HF_INDEX | HF_SEARCH | HF_BOOKMARKS | HF_PRINT@|
+|@HF_DEFAULT_STYLE@|@HF_TOOLBAR@&#124;@HF_CONTENTS@&#124;@HF_INDEX@&#124;@HF_SEARCH@&#124;@HF_BOOKMARKS@&#124;@HF_PRINT@|
 
+
+h2(#instance_methods). Instance Methods
 
 h3(#HtmlHelpController_addbook). HtmlHelpController#add_book
 
- Boolean *add_book*(%(arg-type)FileName% book_file,  %(arg-type)Boolean% show_wait_msg)
+ Boolean *add_book*(%(arg-type)String% book_file,  %(arg-type)Boolean% show_wait_msg)
 
- Boolean *add_book*(%(arg-type)String% book_url,  %(arg-type)Boolean% show_wait_msg)
+Adds book into the list of loaded books. This must be called at least
+once before displaying any help. 
 
-Adds book (".hhp file":helpformat.html - HTML Help Workshop project file) into the list of loaded books.
-This must be called at least once before displaying  any help.
-
-_book_file_ or _book_url_  may be either .hhp file or ZIP archive
-that contains arbitrary number of .hhp files in 
-top-level directory. This ZIP archive must have .zip or .htb extension
-(the latter stands for "HTML book"). In other words,
-@AddBook(FileName("help.zip"))@
-is possible and, in fact, recommended way.
+_book_file_ may be either .hhp file or ZIP archive that contains
+arbitrary number of .hhp files in top-level directory. This ZIP archive
+must have the .zip or .htb extension (the latter stands for "HTML
+book"). See above for more information about the format of the help
+files. 
 
 h4. Parameters
 
-* _show_wait_msg_ If true then a decoration-less window with progress message is displayed.
-* _book_file_ Help book filename. It is recommended to use this prototype
-instead of the one taking URL, because it is less error-prone.
-* _book_url_ Help book URL (note that syntax of filename and URL is 
-different on most platforms)
-
-h4. Note
-
-Don't forget to install FileSystem ZIP handler with
-@FileSystem::AddHandler(new ZipFSHandler);@ before calling this method
-on a .zip or .htb file!
+* _book_file_ Help book filename; this should be a fully-qualified path to the helpfile; @File.expand_path@ may be useful here.
+* _show_wait_msg_ If true then a decoration-less window with progress message is displayed while the help file is loaded.
 
 h3(#HtmlHelpController_createhelpframe). HtmlHelpController#create_help_frame
 
@@ -149,8 +300,6 @@ Looking for the page runs in these steps:
 
 This alternative form is used to search help contents by numeric IDs.
 
-
-
 h3(#HtmlHelpController_displaycontents). HtmlHelpController#display_contents
 
   *display_contents*()
@@ -185,21 +334,23 @@ h3(#HtmlHelpController_settempdir). HtmlHelpController#set_temp_dir
 
   *set_temp_dir*(%(arg-type)String% path)
 
-Sets the path for storing temporary files - cached binary versions of index and contents files. These binary
-forms are much faster to read. Default value is empty string (empty string means
-that no cached data are stored). Note that these files are _not_ 
-deleted when program exits.
+Sets the path for storing temporary files - cached binary versions of
+index and contents files. These binary forms are much faster to
+read. Default value is empty string (empty string means that no cached
+data are stored). Note that these files are _not_ deleted when program
+exits.
 
-Once created these cached files will be used in all subsequent executions 
-of your application. If cached files become older than corresponding .hhp
-file (e.g. if you regenerate documentation) it will be refreshed.
+Once created these cached files will be used in all subsequent
+executions of your application. If cached files become older than
+corresponding .hhp file (e.g. if you regenerate documentation) it will
+be refreshed.
 
 h3(#HtmlHelpController_settitleformat). HtmlHelpController#set_title_format
 
   *set_title_format*(%(arg-type)String% format)
 
-Sets format of title of the frame. Must contain exactly one "\%s"
-(for title of displayed HTML page).
+Sets format of title of the frame. Must contain exactly one "\%s" (for
+title of displayed HTML page).
 
 h3(#HtmlHelpController_useconfig). HtmlHelpController#use_config
 
