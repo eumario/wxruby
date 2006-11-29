@@ -43,6 +43,7 @@ class TestInternationalisation < Test::Unit::TestCase
   end
   
   def test_add_language_info
+    flunk 'Wx::Locale.add_language is not yet implemented'
     # FIXME - typemaps for wxString are not picked up when SWIG converts
     # the struct definition; so maybe do an %extend for this method that
     # accepts string canonical name and description and Win32
