@@ -318,20 +318,14 @@ WxSugar.define_keyword_ctors('TreeCtrl') do
 #  wx_ctor_params :validator, :name => 'treeCtrl'
 end
 
-# wxScrollBar 	Scrollbar control
-# wxSpinButton 	A spin or 'up-down' control
-WxSugar.define_keyword_ctors('SpinCtrl') do
-  wx_ctor_params :pos, :size, :style => Wx::SP_HORIZONTAL
-#  wx_ctor_params :validator, :name => 'treeCtrl'
-end
-
 # wxSpinCtrl 	A spin control - i.e. spin button and text control
 WxSugar.define_keyword_ctors('SpinCtrl') do
+  wx_ctor_params :value => ''
   wx_ctor_params :pos, :size, :style => Wx::SP_ARROW_KEYS
   wx_ctor_params :min => 0
   wx_ctor_params :max => 100
   wx_ctor_params :initial => 0
-#  wx_ctor_params :validator, :name => 'treeCtrl'
+  wx_ctor_params :name => 'spinCtrl'
 end
 
 # One or more lines of non-editable text
