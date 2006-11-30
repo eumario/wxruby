@@ -52,6 +52,34 @@ class TestItemData < Test::Unit::TestCase
     f.close(true)
   end
 
+  def test_listctrl_itemdata
+    f = CtrlContainerFrame.new(Wx::ListCtrl)
+    lc = f.control
+    assert_equal(nil, lc.get_item_data(-7))
+    assert_equal(nil, lc.get_item_data(0))
+    assert_equal(nil, lc.get_item_data(118))
+
+    lc.insert_item(0, 'string')
+    assert_equal(nil, lc.get_item_data(0))
+
+    lc.set_item_data(0, 'a string')
+    assert_equal('a string', lc.get_item_data(0))
+    GC.start
+    assert_equal('a string', lc.get_item_data(0))
+
+    lc.insert_item(1, 'hash')
+    assert_equal(nil, lc.get_item_data(1))
+
+    lc.set_item_data(1, { :a => 457 })
+    assert_equal({ :a => 457 }, lc.get_item_data(1))
+    GC.start
+    assert_equal({ :a => 457 }, lc.get_item_data(1))
+
+    assert_raises(IndexError) { lc.set_item_data(17, 3.412) }
+    f.close(true)
+  end
+
+
   def test_choice_itemdata
     f = CtrlContainerFrame.new(Wx::Choice, Wx::DEFAULT_POSITION,
                                 Wx::DEFAULT_SIZE, %w[hash string float])
