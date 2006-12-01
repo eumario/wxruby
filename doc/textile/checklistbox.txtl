@@ -52,15 +52,8 @@ h3(#CheckListBox_new). CheckListBox.new
 
   *CheckListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
                    %(arg-type)Point% pos = DEFAULT_POSITION, 
-                   %(arg-type)Size% size = DEFAULT_SIZE,  %(arg-type)Integer% n, 
-                   %(arg-type)String% choices[] = nil, 
-                   %(arg-type)Integer% style = 0, 
-                   %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
-                   %(arg-type)String% name = "listBox")
-
-  *CheckListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
-                   %(arg-type)Size% size, 
-                   %(arg-type)ArrayString% choices, 
+                   %(arg-type)Size% size = DEFAULT_SIZE,
+                   %(arg-type)Array% choices = [], 
                    %(arg-type)Integer% style = 0, 
                    %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                    %(arg-type)String% name = "listBox")
@@ -74,7 +67,6 @@ h4. Parameters
 * _pos_ Window position.
 * _size_ Window size. If the default size (-1, -1) is specified then the window is sized
 appropriately.
-* _n_ Number of strings with which to initialise the control.
 * _choices_ An array of strings with which to initialise the control.
 * _style_ Window style. See "CheckListBox":checklistbox.html.
 * _validator_ Window validator.
