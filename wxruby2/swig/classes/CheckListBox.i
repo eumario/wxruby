@@ -6,7 +6,9 @@
 %module(directors="1") wxCheckListBox
 %ignore wxCheckListBox::wxCheckListBox();
 
-// redundant with good typemaps
+// item data fixes not required here because fixed by superclass ListBox 
+
+// not needed as fixed by typemap for alternate ArrayString constructor
 %ignore Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
