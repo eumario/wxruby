@@ -1,26 +1,18 @@
 h1(#wxcontrolwithitems). Wx::ControlWithItems
 
-This class is an abstract base class for some Widgets controls which contain
-several items, such as "ListBox":listbox.html and 
-"CheckListBox":checklistbox.html derived from it, 
-"Choice":choice.html and "ComboBox":combobox.html.
+This class is an abstract base class for several Widgets controls which
+contain several items, such as "ListBox":listbox.html and
+"CheckListBox":checklistbox.html derived from it, "Choice":choice.html
+and "ComboBox":combobox.html.
 
 It defines the methods for accessing the controls items and although each of
 the derived classes implements them differently, they still all conform to the
 same interface.
 
 The items in a ControlWithItems have (non empty) string labels and,
-optionally, client data associated with them. Client data may be of two
-different kinds: either simple untyped (@void *@) pointers which are simply
-stored by the control but not used in any way by it, or typed pointers
-(@ClientData *@) which are owned by the control meaning that the typed
-client data (and only it) will be deleted when an item is 
-"deleted":controlwithitemsdelete.html or the entire control is 
-"cleared":controlwithitemsclear.html (which also happens when it is
-destroyed). Finally note that in the same control all items must have client
-data of the same type (typed or untyped), if any. This type is determined by
-the first call to "Append":controlwithitemsappend.html (the version with
-client data pointer) or "set_client_data":#ControlWithItems_setclientdata.
+optionally, item data associated with them. Any ruby object may be set
+as item data for an item with a control, allowing linking of core ruby
+program objects with GUI code.
 
 h2. Derived from
 
@@ -40,9 +32,8 @@ h2. Methods
 * "ControlWithItems#clear":#ControlWithItems_clear
 * "ControlWithItems#delete":#ControlWithItems_delete
 * "ControlWithItems#find_string":#ControlWithItems_findstring
-* "ControlWithItems#get_client_data":#ControlWithItems_getclientdata
-* "ControlWithItems#get_client_object":#ControlWithItems_getclientobject
 * "ControlWithItems#get_count":#ControlWithItems_getcount
+* "ControlWithItems#get_item_data":#ControlWithItems_getitemdata
 * "ControlWithItems#get_selection":#ControlWithItems_getselection
 * "ControlWithItems#get_string":#ControlWithItems_getstring
 * "ControlWithItems#get_string_selection":#ControlWithItems_getstringselection
@@ -50,8 +41,7 @@ h2. Methods
 * "ControlWithItems#is_empty":#ControlWithItems_isempty
 * "ControlWithItems#number":#ControlWithItems_number
 * "ControlWithItems#select":#ControlWithItems_select
-* "ControlWithItems#set_client_data":#ControlWithItems_setclientdata
-* "ControlWithItems#set_client_object":#ControlWithItems_setclientobject
+* "ControlWithItems#set_item_data":#ControlWithItems_setitemdata
 * "ControlWithItems#set_selection":#ControlWithItems_setselection
 * "ControlWithItems#set_string":#ControlWithItems_setstring
 * "ControlWithItems#set_string_selection":#ControlWithItems_setstringselection
@@ -133,42 +123,6 @@ The zero-based position of the item, or @NOT_FOUND@ if the string was
 not found.
 
 
-h3(#ControlWithItems_getclientdata). ControlWithItems#get_client_data
-
-  *get_client_data*(%(arg-type)Integer% n)
-
-Returns a pointer to the client data associated with the given item (if any).
-It is an error to call this function for a control which doesn't have untyped
-client data at all although it is ok to call it even if the given item doesn't
-have any client data associated with it (but other items do).
-
-h4. Parameters
-
-* _n_ The zero-based position of the item.
-
-h4. Return value
-
-A pointer to the client data, or @NULL@ if not present.
-
-
-h3(#ControlWithItems_getclientobject). ControlWithItems#get_client_object
-
- "ClientData":clientdata.html *get_client_object*(%(arg-type)Integer% n)
-
-Returns a pointer to the client data associated with the given item (if any).
-It is an error to call this function for a control which doesn't have typed
-client data at all although it is ok to call it even if the given item doesn't
-have any client data associated with it (but other items do).
-
-h4. Parameters
-
-* _n_ The zero-based position of the item.
-
-h4. Return value
-
-A pointer to the client data, or @NULL@ if not present.
-
-
 h3(#ControlWithItems_getcount). ControlWithItems#get_count
 
  Integer *get_count*()
@@ -178,6 +132,27 @@ Returns the number of items in the control.
 h4. See also
 
 "is_empty":#ControlWithItems_isempty
+
+h3(#ControlWithItems_getitemdata). ControlWithItems#get_item_data
+
+  Object *get_item_data*(%(arg-type)Integer% n)
+
+Returns the ruby object previously set as data for the given item in the
+control. If no object has been set as data, then @nil@ is returned.
+
+Note that in WxWidgets C++, this method is called GetClientData;
+therefore *get_client_data* is an alias in WxRuby for this method. THe
+name *get_item_data* is preferred for clarity and consistency with the
+other classes such as "TreeCtrl":treectrl.html and
+"ListCtrl":listctrl.html which offer a similar feature.
+
+h4. Parameters
+
+* _n_ The zero-based position of the item.
+
+h4. See also
+
+"set_item_data":#ControlWithItems_setitemdata
 
 
 h3(#ControlWithItems_getselection). ControlWithItems#get_selection
@@ -253,9 +228,8 @@ h4. Parameters
 
 h4. Return value
 
-The return value is the index of the newly inserted item. If the insertion failed
-for some reason, -1 is returned.
-
+The return value is the index of the newly inserted item. If the
+insertion failed for some reason, -1 is returned.
 
 h3(#ControlWithItems_isempty). ControlWithItems#is_empty
 
@@ -267,18 +241,6 @@ h4. See also
 
 "get_count":#ControlWithItems_getcount
 
-
-h3(#ControlWithItems_number). ControlWithItems#number
-
- Integer *number*()
-
-*Obsolescence note:* This method is obsolete and was replaced with
-"get_count":#ControlWithItems_getcount, please use the new method in
-the new code. This method is only available if Widgets was compiled with 
-@WXWIN_COMPATIBILITY_2_2@ defined and will disappear completely in
-future versions.
-
-
 h3(#ControlWithItems_select). ControlWithItems#select
 
   *select*(%(arg-type)Integer% n)
@@ -288,44 +250,36 @@ exists only because it is slightly more natural for controls which support
 multiple selection.
 
 
-h3(#ControlWithItems_setclientdata). ControlWithItems#set_client_data
+h3(#ControlWithItems_setitemdata). ControlWithItems#set_item_data
 
-  *set_client_data*(%(arg-type)Integer% n,  %(arg-type)% data)
+  *set_item_data*(%(arg-type)Integer% n,  %(arg-type)Object% data)
 
-Associates the given untyped client data pointer with the given item. Note that
-it is an error to call this function if any typed client data pointers had been
-associated with the control items before.
+Associates the ruby object with the given item in the control. This
+useful feature enables the linking of program data (for example, objects
+representing a database record) with the GUI, so that on subsequent
+interaction with the control, GUI code can use
+"get_item_data":#ControlWithItems_getitemdata to determine which program
+data object is being interacted with. Any ruby object may be set as item
+data, though it may be unwise to use volatile objects such as sockets or
+files as item data.
 
-h4. Parameters
-
-* _n_ The zero-based item index.
-* _data_ The client data to associate with the item.
-
-
-h3(#ControlWithItems_setclientobject). ControlWithItems#set_client_object
-
-  *set_client_object*(%(arg-type)Integer% n,  %(arg-type)ClientData% data)
-
-Associates the given typed client data pointer with the given item: the 
-_data_ object will be deleted when the item is deleted (either explicitly
-by using "Deletes":controlwithitemsdelete.html or implicitly when the
-control itself is destroyed).
-
-Note that it is an error to call this function if any untyped client data
-pointers had been associated with the control items before.
+Note that in WxWidgets C++, this method is called SetClientData;
+therefore *set_client_data* is an alias in WxRuby for this method. THe
+name *set_item_data* is preferred for clarity and consistency with the
+other classes such as "TreeCtrl":treectrl.html and
+"ListCtrl":listctrl.html which offer a similar feature.
 
 h4. Parameters
 
 * _n_ The zero-based item index.
 * _data_ The client data to associate with the item.
-
 
 h3(#ControlWithItems_setselection). ControlWithItems#set_selection
 
   *set_selection*(%(arg-type)Integer% n)
 
 Sets the selection to the given item n or removes the selection entirely
-if n $==$ @NOT_FOUND@.
+if n == -1.
 
 Note that this does not cause any command events to be emitted nor does it
 deselect any other items in the controls which support multiple selections.
@@ -364,8 +318,8 @@ h4. Parameters
 
 h4. Return value
 
- if the specified string has been selected,  if it wasn't found in
-the control.
+@true@ if the specified string has been selected, @false@ if it wasn't
+found in the control.
 
 h4. See also
 

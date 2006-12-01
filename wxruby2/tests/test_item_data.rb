@@ -20,10 +20,10 @@ end
 class TestItemData < Test::Unit::TestCase
   def assert_retrievable_data(ctrl, n, test_value)
     compare = Marshal.load( Marshal.dump(test_value) )
-    ctrl.set_client_data(n, test_value)
-    assert_equal(compare, ctrl.get_client_data(n) )
+    ctrl.set_item_data(n, test_value)
+    assert_equal(compare, ctrl.get_item_data(n) )
     GC.start
-    assert_equal(compare, ctrl.get_client_data(n) )
+    assert_equal(compare, ctrl.get_item_data(n) )
   end
 
   def do_control_with_items_assertions(f)
@@ -34,21 +34,26 @@ class TestItemData < Test::Unit::TestCase
 
   def test_treectrl_itemdata
     f = CtrlContainerFrame.new(Wx::TreeCtrl)
-    root = f.control.add_root('foo')
+    tree = f.control
+    root = tree.add_root('foo')
+    assert_nil(tree.get_item_data( tree.get_root_item))
 
-    id = f.control.append_item(root, 'a hash', -1, -1, { :a => 7 })
-    assert_equal({:a => 7 }, 
-                  f.control.get_item_data(id) )
+    id = tree.append_item(root, 'a hash', -1, -1, { :a => 7 })
+    assert_equal({:a => 7 }, tree.get_item_data(id) )
 
-    id = f.control.prepend_item(root, 'a float', -1, -1, 7.8)
-    assert_equal(7.8, 
+    id = tree.prepend_item(root, 'a float', -1, -1, 7.8)
+    assert_equal(7.8, tree.get_item_data(id) )
+    GC.start
+    assert_equal(7.8, tree.get_item_data(id) )
+
+    id = tree.prepend_item(root, 'an array', -1, -1)
+    assert_nil( tree.get_item_data(id) )
+    tree.set_item_data(id, %w|foo bar baz|)
+    assert_equal(%w|foo bar baz|,
                  f.control.get_item_data(id) )
-
-    id = f.control.prepend_item(root, 'an array', -1, -1, %w|foo bar baz|)
     GC.start
     assert_equal(%w|foo bar baz|,
                  f.control.get_item_data(id) )
-
     f.close(true)
   end
 
