@@ -105,6 +105,13 @@ class TestItemData < Test::Unit::TestCase
      do_control_with_items_assertions(f)
      f.close(true)
    end
+
+   def test_checklistbox_itemdata
+     f = CtrlContainerFrame.new(Wx::CheckListBox, Wx::DEFAULT_POSITION,
+                                Wx::DEFAULT_SIZE, %w[hash string float])
+     do_control_with_items_assertions(f)
+     f.close(true)
+   end
 end
 
 app = TestApp.new
