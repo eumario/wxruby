@@ -13,12 +13,21 @@ Wx::NULL_BITMAP = nil
 $VERBOSE = v
 
 module WxSugar
+  @defined_classes = {}
+
   # accepts a string unadorned name of a WxWidgets class, and block, which 
   # defines the constructor parameters and style flags for that class.
   # If the named class exists in the available WxRuby, the block is run and 
   # the class may use keyword constructors. If the class is not available, the
   # block is ignored.
   def self.define_keyword_ctors(klass_name, &block)
+    # check this class hasn't already been defined
+    if @defined_classes[klass_name]
+      raise ArgumentError, "Keyword ctor for #{klass_name} already defined"
+    else
+      @defined_classes[klass_name] = true
+    end
+
     begin     
       klass =  Wx::const_get(klass_name)
     rescue NameError
@@ -34,8 +43,14 @@ module WxSugar
   end
 end
 
+# Window : base class for all widgets and frames
+WxSugar.define_keyword_ctors('Window') do
+   wx_ctor_params :pos, :size, :style
+   wx_ctor_params :name => 'window'
+end
+
+
 ### FRAMES
-# Normal frame
 
 # wxTopLevelWindow 	ABSTRACT: Any top level window, dialog or frame
 
@@ -146,7 +161,7 @@ end
 
 # wxSashLayoutWindow: Window that can be involved in an IDE-like layout
 # arrangement
-WxSugar.define_keyword_ctors('SashWindow') do
+WxSugar.define_keyword_ctors('SashLayoutWindow') do
   wx_ctor_params :pos, :size
   wx_ctor_params :style =>  Wx::CLIP_CHILDREN|Wx::SW_3D
   wx_ctor_params :name => 'layoutWindow'
@@ -223,7 +238,15 @@ end
 
 # wxFontDialog 	Font chooser dialog
 # wxPageSetupDialog 	Standard page setup dialog
+WxSugar.define_keyword_ctors('PageSetupDialog') do
+  wx_ctor_params :data
+end
+
 # wxPrintDialog 	Standard print dialog
+WxSugar.define_keyword_ctors('PrintDialog') do
+  wx_ctor_params :data
+end
+
 
 # Simple message box dialog
 WxSugar.define_keyword_ctors('MessageDialog') do
@@ -297,6 +320,17 @@ WxSugar.define_keyword_ctors('Gauge') do
 end
 
 # wxGenericDirCtrl 	A control for displaying a directory tree
+WxSugar.define_keyword_ctors('GenericDirCtrl') do
+  # TODO :dir => Wx::DIR_DIALOG_DEFAULT_FOLDER_STR
+  wx_ctor_params :dir => '' 
+  wx_ctor_params :pos, :size, 
+                 :style => Wx::DIRCTRL_3D_INTERNAL|Wx::SUNKEN_BORDER
+  wx_ctor_params :filter => ''
+  wx_ctor_params :default_filter => 0
+  wx_ctor_params :name => 'genericDirCtrl'
+end
+
+
 # wxHtmlListBox 	A listbox showing HTML content
 # wxListBox 	A list of strings for single or multiple selection
 WxSugar.define_keyword_ctors('ListBox') do
@@ -354,13 +388,11 @@ WxSugar.define_keyword_ctors('RadioBox') do
   wx_ctor_params :pos, :size, :choices => []
   wx_ctor_params :major_dimension => 0
   wx_ctor_params :style => Wx::RA_SPECIFY_COLS
-
-#  wx_ctor_params :validator, :name => 'radioBox'
+  #  wx_ctor_params :validator, :name => 'radioBox'
 end
 
-
 # wxRadioButton 	A round button to be used with others in a mutually exclusive way
-WxSugar.define_keyword_ctors('RadioBox') do
+WxSugar.define_keyword_ctors('RadioButton') do
   wx_ctor_params :label => ''
   wx_ctor_params :pos, :size, :style => 0
   #  wx_ctor_params :validator, :name => 'radioButton'
@@ -368,9 +400,17 @@ end
 
 # wxSlider 	A slider that can be dragged by the user
 WxSugar.define_keyword_ctors('Slider') do
+  wx_ctor_params :value => 0
   wx_ctor_params :min_value, :max_value
   wx_ctor_params :pos, :size, :style => Wx::SL_HORIZONTAL
   #  wx_ctor_params :validator, :name => 'radioButton'
+end
+
+
+# wxSpinButton - Has two small up and down (or left and right) arrow buttons
+WxSugar.define_keyword_ctors('SpinButton') do
+   wx_ctor_params :pos, :size, :style => Wx::SP_HORIZONTAL
+   wx_ctor_params :name => 'spinButton'
 end
 
 # wxVListBox 	A listbox supporting variable height rows
@@ -379,5 +419,11 @@ end
 WxSugar.define_keyword_ctors('TextCtrl') do
   wx_ctor_params :value => ''
   wx_ctor_params :pos, :size, :style
+  # wx_ctor_params validator, :name => 'textCtrl'
 end
 
+# wxHtmlWindow - Control for displaying HTML
+WxSugar.define_keyword_ctors('HtmlWindow') do
+  wx_ctor_params :pos, :size, :style => Wx::HW_DEFAULT_STYLE
+  wx_ctor_params :name => 'htmlWindow'
+end
