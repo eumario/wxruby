@@ -244,7 +244,7 @@ module KeywordConstructor
           pre_wx_kwctor_init(*real_args)
         rescue
           Kernel.raise ArgumentError, "Error initializing #{self.inspect} \n" +
-                                      "Sent paramters: #{real_args.inspect}\n" +
+                                      "Sent parameters: #{real_args.inspect}\n" +
                                       "correct parameters are:\n" + 
                                       self.class.describe_constructor()
         end
