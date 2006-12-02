@@ -17,6 +17,13 @@ enum wxHtmlOpeningStatus
     wxHTML_REDIRECT
 };
 
+// wxHtmlWindow flags:
+#define wxHW_SCROLLBAR_NEVER    0x0002
+#define wxHW_SCROLLBAR_AUTO     0x0004
+#define wxHW_NO_SELECTION       0x0008
+#define wxHW_DEFAULT_STYLE      wxHW_SCROLLBAR_AUTO
+
+
 // implement in ruby
 %ignore wxHtmlWindow::LoadFile;
 
