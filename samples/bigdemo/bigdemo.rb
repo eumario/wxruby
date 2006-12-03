@@ -118,14 +118,11 @@ $tree_list = [
         #'FileBrowseButton',
         #'GenericButtons',
         #'MaskedEditControls',
-        #'PyShell',
-        #'PyCrust',
         #'SplitTree',
         #'TablePrint',
         #'Throbber',
         #'wxCalendar',
         'wxCalendarCtrl',
-        #'wxPyColourChooser',
         #'wxDynamicSashWindow',
         #'wxEditableListBox',
         #'wxEditor',
@@ -355,8 +352,9 @@ class WxRubyDemo < Wx::Frame
         @log.set_max_length(0)
         Wx::Log::set_active_target(Wx::LogTextCtrl.new(@log))
         
-        splitter2.split_horizontally(@nb, @log, 350)
         splitter.split_vertically(@tree, splitter2, 190)
+        splitter2.split_horizontally(@nb, @log, 200)
+
         
         splitter.set_minimum_pane_size(20)        
         splitter2.set_minimum_pane_size(100)
