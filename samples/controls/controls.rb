@@ -90,23 +90,6 @@ ID_SIZER_CHECKBIG    = 206
 
 Image_List, Image_Choice, Image_Combo, Image_Text, Image_Radio, Image_Gauge, Image_Max = (0..6).to_a
 
-def Myset_client_data(name,control)
-    # NOTE: get_client_data and set_client_data have been removed from wxRuby 0.4
-    # because they could cause crashes
-    return
-    
-#    count = control.get_count()
-#    for n in 0 ... count
-#        s = sprintf("%s client data for '%s'",
-#                 name, control.get_string(n))
-#        control.set_client_data(n, s)
-        # NOTE: As of wxRuby 0.2, the following will demonstrate the 
-        # set_client_data and get_client_data are unreliable. Specifically, 
-        # garbage collection will release the stored data! 2004-03-29 kbs
-        #GC.start
-#    end
-end
-
 
 # a button which intercepts double clicks (for testing...)
 class MyButton < Button
@@ -247,8 +230,6 @@ class MyPanel < Panel
                                          Point.new(10,90), Size.new(120,70),
                                          choices, LB_SORT )
 
-        Myset_client_data("listbox", @m_listbox)
-        Myset_client_data("listbox", @m_listboxSorted)
 
         @m_listbox.set_cursor(CROSS_CURSOR)
 
@@ -280,9 +261,6 @@ class MyPanel < Panel
         @m_choice = Choice.new( panel, ID_CHOICE, Point.new(10,10), Size.new(120,-1), choices )
         @m_choiceSorted = Choice.new( panel, ID_CHOICE_SORTED, Point.new(10,70), Size.new(120,-1),
                                        choices, CB_SORT )
-
-        Myset_client_data("choice", @m_choice)
-        Myset_client_data("choice", @m_choiceSorted)
 
         @m_choice.set_selection(2)
         @m_choice.set_background_colour(Colour.new("red"))
@@ -409,42 +387,14 @@ class MyPanel < Panel
 
 #        bmpBtn.set_bitmap_selected(bmp2)
 #        bmpBtn.set_bitmap_focus(bmp3)
-
-if !(RUBY_PLATFORM =~ /darwin/) 
-        ToggleButton.new(panel, ID_BUTTON_LABEL,
-                                 "&Toggle label", Point.new(250, 20))
-end
+      ToggleButton.new(panel, ID_BUTTON_LABEL,
+                       "&Toggle label", Point.new(250, 20))
         @m_label = StaticText.new(panel, -1, "Label with some long text",
                                    Point.new(250, 60), DEFAULT_SIZE,
                                    ALIGN_RIGHT)
         @m_label.set_foreground_colour(BLUE )
 
         @m_notebook.add_page(panel, "BitmapXXX")
-
-        # layout constraints
-
-        panel = Panel.new(@m_notebook)
-        panel.set_auto_layout( TRUE )
-
-        c = LayoutConstraints.new
-        c.top.same_as( panel, LAYOUT_TOP, 10 )
-        c.height.as_is( )
-        c.left.same_as( panel, LAYOUT_LEFT, 10 )
-        c.width.percent_of( panel, LAYOUT_WIDTH, 40 )
-
-        pMyButton = Button.new(panel, ID_BUTTON_TEST1, "Test Button &1" )
-        pMyButton.set_constraints( c )
-
-        c = LayoutConstraints.new
-        c.top.same_as( panel, LAYOUT_TOP, 10 )
-        c.bottom.same_as( panel, LAYOUT_BOTTOM, 10 )
-        c.right.same_as( panel, LAYOUT_RIGHT, 10 )
-        c.width.percent_of( panel, LAYOUT_WIDTH, 40 )
-
-        pMyButton2 = Button.new(panel, ID_BUTTON_TEST2, "Test Button &2" )
-        pMyButton2.set_constraints( c )
-
-        @m_notebook.add_page(panel, "layoutConstraint")
 
         # sizer
 

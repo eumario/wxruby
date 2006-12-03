@@ -11,6 +11,9 @@
 %ignore wxWindow::PopEventHandler;
 # %ignore wxWindow::SetCaret;
 
+// LayoutConstraints are deprecated and not supported in WxRuby
+%ignore wxWindow::SetConstraints;
+
 // only support the variants that return an object
 %ignore wxWindow::GetSize(int*  width , int*  height ) const;
 %ignore wxWindow::GetPosition(int*  x , int*  y ) const;
