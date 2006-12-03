@@ -52,7 +52,8 @@ WxSugar.define_class_group('MISC_WINDOW_CLASSES',
   'SashLayoutWindow',
   'VScrolledWindow',
   'WizardPage',
-  'WizardPageSimple'
+  'WizardPageSimple',
+  'HtmlWindow'
 )
 
 WxSugar.define_class_group('CONTROL_CLASSES',
