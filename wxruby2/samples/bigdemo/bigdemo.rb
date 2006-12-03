@@ -146,7 +146,6 @@ $tree_list = [
     #    'Layoutf',
     #    'RowColSizer',
         'Sizers',
-        'wxLayoutConstraints',
     #    'wxScrolledPanel',
     #    'wxXmlResource',
     #    'wxXmlResourceHandler',

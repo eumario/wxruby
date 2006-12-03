@@ -12,31 +12,29 @@ rescue LoadError => no_wx_err
 end
 
 class ScrolledMessageDialog < Wx::Dialog
-    def initialize(parent, msg, caption, pos = Wx::DEFAULT_POSITION, size = Wx::Size.new(500,300))
+    def initialize(parent, msg, caption, 
+                   pos = Wx::DEFAULT_POSITION, 
+                   size = Wx::Size.new(500,300) )
         super(parent, -1, caption, pos, size)
         x,y = pos.x, pos.y
         if x == -1 and y == -1
             center_on_screen(Wx::BOTH)
         end
-        text = Wx::TextCtrl.new(self, -1, msg, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TE_MULTILINE | Wx::TE_READONLY)
-        ok = Wx::Button.new(self, Wx::ID_OK, "OK")
-        lc = Wx::LayoutConstraints.new()
-        lc.top.same_as(self, Wx::LAYOUT_TOP, 5)
-        lc.bottom.same_as(ok, Wx::LAYOUT_TOP, 5)
-        lc.right.same_as(self, Wx::LAYOUT_RIGHT, 5)
-        lc.left.same_as(self, Wx::LAYOUT_LEFT, 5)
-        
-        text.set_constraints(lc)
-        
-        lc = Wx::LayoutConstraints.new()
-        lc.bottom.same_as(self, Wx::LAYOUT_BOTTOM, 5)
-        lc.centre_x.percent_of(self, Wx::LAYOUT_WIDTH, 50)
-        lc.width.absolute(80)
-        lc.height.absolute(25)
-        
-        ok.set_constraints(lc)
-        set_auto_layout(true)
-        layout()
+        sizer = Wx::BoxSizer.new(Wx::VERTICAL)
+        text = Wx::TextCtrl.new(self, -1, msg, 
+                                 Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, 
+                                 Wx::TE_MULTILINE|Wx::TE_READONLY)
+
+        sizer.add(text, 1, Wx::EXPAND|Wx::ALL, 5)
+
+        button_sizer = Wx::StdDialogButtonSizer.new
+        button_sizer.add_button( Wx::Button.new(self, Wx::ID_OK, "OK") )
+        button_sizer.realize
+
+        sizer.add(button_sizer, 0, Wx::EXPAND|Wx::ALL, 5)
+
+        set_sizer(sizer)
+        layout
     end
 end
 
@@ -49,7 +47,8 @@ module Demo
     end
 
     def Demo.overview
-        return "Ported from wxPython.  Many thanks again to Robin Dunn!"
+        return "A simple ruby example of a custom dialog displaying a " +
+               "long message in a scrolled TextCtrl"
     end
 end
 
