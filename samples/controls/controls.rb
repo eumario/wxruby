@@ -385,13 +385,12 @@ class MyPanel < Panel
         StaticBitmap.new( panel, -1, icon, Point.new(10, 10) )
 
         bitmap = Bitmap.new( 100, 100 )
-        dc = MemoryDC.new
-        dc.select_object( bitmap )
-        dc.set_pen(GREEN_PEN)
-        dc.clear()
-        dc.draw_ellipse(5, 5, 90, 90)
-        dc.draw_text("Bitmap", 30, 40)
-        dc.select_object( NULL_BITMAP )
+        bitmap.draw do | dc |
+          dc.clear()
+          dc.set_pen(GREEN_PEN)
+          dc.draw_ellipse(5, 5, 90, 90)
+          dc.draw_text("Bitmap", 30, 40)
+        end
 
         BitmapButton.new(panel, ID_BITMAP_BTN, bitmap, Point.new(100, 20))
 

@@ -213,7 +213,8 @@ data be deleted.
 If the application omits to delete the bitmap explicitly, the bitmap will be
 destroyed automatically by Widgets when the application exits.
 
-Do not delete a bitmap that is selected into a memory device context.
+Do not delete a bitmap that is selected into a memory device context,
+for example during a call to "draw":#Bitmap_draw .
 
 h3(#Bitmap_addhandler). Bitmap#add_handler
 
@@ -285,6 +286,20 @@ type of data.
 h4. See also
 
 "Bitmap.new":bitmap.html#Bitmap_new
+
+h3(#Bitmap_draw). Bitmap#draw
+
+ *draw*() { | device_context | ... }
+
+Allows drawing directly onto a Bitmap. Accepts a block which will be
+passed a "MemoryDC":memorydc.html device context, which can be used to
+draw lines, shapes and text upon a bitmap. See "DC":dc.html for the full
+range of drawing methods that are available.
+
+Using this call ensures that the device context is properly set up for
+use before drawing starts, and disposed of when drawing is
+finished. It's recommended you use this draw method rather than
+instantiating MemoryDC directly.
 
 h3(#Bitmap_findhandler). Bitmap#find_handler
 
