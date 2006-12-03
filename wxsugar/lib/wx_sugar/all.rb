@@ -16,10 +16,13 @@
 # 
 # == Using WxSugar
 # 
-# The extensions can currently be used with either WxRuby (0.6.0) or
-# WxRuby2 (the SWIG version). To use all of the extensions, simple write
+# The extensions can currently be used with WxRuby2 or the old WxRuby
+# (0.6.0). WxRuby2 is strongly recommended, and support for the old
+# series may be dropped in the future.
+# 
+# The simplest way to use WxSugar is to load all the behaviours. You
+# should load the wx library first:
 #
-#   # EITHER ... New development
 #  require 'wx'
 #   # OR ... old non-SWIG beta veresion
 #  require 'wxruby'
@@ -27,31 +30,43 @@
 #  require 'wx_sugar/all'
 #  ... 
 # 
-# If you only want to load specific behaviours, just +require+ the
-# desired extensions only
+# If you only want to load specific WxSugar behaviours, just +require+
+# the desired extensions only
 #  
 #  require 'wx_sugar/keyword_constructors'
 #  require 'wx_sugar/acccessors'
 #
 # == Overview of extensions
+# 
+# The following are the WxSugar behaviours that are available. In
+# general you require one of these extensions, it modifies the behaviour
+# of all relevant Wx classes, and affects all new instances.
 #
-# [accessors.rb] 
+# [accessors] 
 #  Provide ruby-style getters, setters and question-mark methods
-# [delayed_constructors.rb] 
-#  For use with +layout+, limited independent interest
-# [event_connector.rb] 
+# [delayed_constructors] 
+#  Required by +layout+, of limited independent interest
+# [event_connector] 
 #  Neater syntax for connecting event listeners
-# [itemdata.rb] 
-#  Associate ruby objects with items in controls *NEEDS UPDATE*
-# [keyword_constructors.rb] 
+# [keyword_constructors] 
 #  Use keyword-style hash arguments to construct widgets
-# [layout.rb] 
-#  Easy interface to using WxWidgets Sizers
-# [menu.rb] 
+# [layout] 
+#  Easy interface to using WxWidgets Sizers to arrange controls
+# [menu] 
 #  Create and update menus without a mess of system ids
+# [wx_classes]
+#  Useful ruby methods added to individual Wx classes.
+#
+# === Deprecated extensions
+#
+# This module is deprecated and will soon be removed.
+#
+# [itemdata.rb] 
+#  Linking ruby objects with wx controls; use the
+#  get/set_item_data methods in core wxruby2 instead.
 
 
-%w[ accessors delayed_constructors event_connector itemdata 
+%w[ accessors delayed_constructors event_connector 
     keyword_constructors layout menu wx_classes ].each do | ext_feature |
   require 'wx_sugar/' + ext_feature    
 end 
