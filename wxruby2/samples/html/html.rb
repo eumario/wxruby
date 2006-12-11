@@ -22,11 +22,18 @@ class MyHtmlWindow < Wx::HtmlWindow
     case uri
     when URI::HTTP
       Wx::BusyCursor.busy do
-        res = Net::HTTP.start(uri.host, uri.port) do | http |
-          http.get(uri.path)
+        begin
+          res = Net::HTTP.start(uri.host, uri.port) do | http |
+            http.get(uri.path)
+          end
+          @loaded_uri = uri
+          set_page(res.body)
+        rescue => err
+          msg = "Could not load page:\n#{err}"
+          Wx::MessageDialog.new(nil, msg, 'Error loading page', 
+                                 Wx::OK|Wx::ICON_ERROR).show_modal
+          return ''
         end
-        @loaded_uri = uri
-        set_page(res.body)
       end
       return @loaded_uri
     when URI::Generic
@@ -61,7 +68,11 @@ class MyHtmlWindow < Wx::HtmlWindow
   end
 
   def on_link_clicked(link)
-    link_uri = URI.parse(link.get_href)
+    href = link.get_href
+    if href =~ /^#/
+        super(link)
+    end
+    link_uri = URI.parse(href)
     @loaded_uri = load_page_from_uri(link_uri)
   end
 
