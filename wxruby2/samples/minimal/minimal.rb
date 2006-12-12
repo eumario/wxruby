@@ -6,9 +6,9 @@ begin
   require 'wx'
 rescue LoadError => no_wx_err
   begin
-    require 'rubygems'
-    require 'wx'
-  rescue LoadError
+    require 'rubygems' 
+    load 'wx'
+  rescue
     raise no_wx_err
   end
 end
