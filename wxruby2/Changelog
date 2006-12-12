@@ -1,3 +1,8 @@
+- Tweak binary library loading so errors are raised with accurate info (Alex Fenton)
+- Added HelpController and HtmlHelpController, plus bigdemo sample (Alex Fenton)
+- Added TreeCtrl#traverse method (Alex Fenton)
+- Removed broken and deprecated LayoutConstraints (Alex Fenton)
+- Added Wx::Bitmap.draw, analogous to Wx::Window.paint (Alex Fenton)
 - More i18n support: add Locale class, get/set encodings & languages (Alex Fenton)
 - Nicer to_s output, esp for Colour, Point, Rect, Size (Alex Fenton)
 - Restored client data stuff in samples(Roy Sutton)
