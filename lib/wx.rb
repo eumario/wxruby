@@ -7,14 +7,11 @@
 # 2. It sets up the version information
 # 3. It loads in ruby extensions to the core Wx classes.
 
-begin
-  require 'wxruby2'
-rescue LoadError => e
-  warn "LoadError: unable to load wxruby2 binary. Searched:"
-  warn $LOAD_PATH.inspect
-  exit 1
-end
 
+# load the binary library
+require 'wxruby2'
+
+# alias the module
 Wx = Wxruby2
 
 # Load the version information (should be bundled with all released versions)
