@@ -263,12 +263,14 @@ class WxWLatexParser < LatexParser
   end
 
   def do_rtfsp()
-    scan /\n/
+    scan(/\n/)
     append " "
   end
 
   def do_itemsep()
-    scan /\=\w+/ if peek(1) == '='
+    if peek(1) == '='
+      scan(/\=\w+/)
+    end
   end
 
   # item in a enumerated list
