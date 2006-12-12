@@ -196,6 +196,7 @@ h2(#superclasses). Inherits from
 
 h2. Class Methods
 
+* "HtmlHelpController.instance":#HtmlHelpController_instance
 * "HtmlHelpController.new":#HtmlHelpController_new
 
 h2. Instance Methods
@@ -216,11 +217,34 @@ h2. Instance Methods
 
 h2(#class_methods). Class Methods
 
+h3(#HtmlHelpController_instance). HtmlHelpController.instance
+
+  *HtmlHelpController.instance*(%(arg-type)Integer% style = HF_DEFAULT_STYLE)
+
+Returns a new HtmlHelpController if one hasn't already been created, or
+returns the previously created one if there is such.
+
+Users typically expect only a single help window to be running for
+any particular application, with the help shown and hidden as
+required. To avoid showing multiple help windows within a single
+application, use this method in preference to
+"new":#HtmlHelpController_new . 
+
+h4. Parameters
+
+_style_ defines optional styles for the help window; the options are
+described below in the "new":#HtmlHelpController_new method. Note that
+the style argument will only be processed in the first call to this
+method - subsequent calls will return a controller with the original
+style.
+
 h3(#HtmlHelpController_new). HtmlHelpController.new
 
   *HtmlHelpController.new*(%(arg-type)Integer% style = HF_DEFAULT_STYLE)
 
-Constructor.
+Constructor. To avoid a proliferation of help frames, you may prefer
+to use the "instance":#HtmlHelpController_instance class method instead
+to display help.
 
 h4. Parameters
 
