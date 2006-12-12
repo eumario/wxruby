@@ -2047,27 +2047,49 @@ h4. See also
 
 "::SetCursor":setcursor.html, "Cursor":cursor.html
 
+h3(#Window_setdimensions). Window#set_dimensions
 
-h3(#Window_setconstraints). Window#set_constraints
+  *set_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  
+              %(arg-type)Integer% width, %(arg-type)Integer% height, 
+              %(arg-type)Integer% sizeFlags = SIZE_AUTO)
 
-  *set_constraints*(%(arg-type)LayoutConstraints% constraints)
-
-Sets the window to have the given layout constraints. The window
-will then own the object, and will take care of its deletion.
-If an existing layout constraints object is already owned by the
-window, it will be deleted.
+Specifies the size and position of the window, in pixel units.
 
 h4. Parameters
 
-* _constraints_ The constraints to set. Pass NULL to disassociate and delete the window's
-constraints.
+* _x_ Required x position in pixels, or -1 to indicate that the existing
+value should be used.
+* _y_ Required y position in pixels, or -1 to indicate that the existing
+value should be used.
+* _width_ Required width in pixels, or -1 to indicate that the existing
+value should be used.
+* _height_ Required height position in pixels, or -1 to indicate that the existing
+value should be used.
+* _sizeFlags_ Indicates the interpretation of other parameters. It is a bit list of the following:
 
-h4. Remarks
+*SIZE_AUTO_WIDTH*: a -1 width value is taken to indicate
+a wxRuby-supplied default width.
 
-You must call "Window#set_auto_layout":window.html#Window_setautolayout to tell a window to use
-the constraints automatically in OnSize; otherwise, you must override OnSize and call Layout()
-explicitly. When setting both a LayoutConstraints and a "Sizer":sizer.html, only the
-sizer will have effect.
+*SIZE_AUTO_HEIGHT*: a -1 height value is taken to indicate
+a wxRuby-supplied default width.
+
+*SIZE_AUTO*: -1 size values are taken to indicate
+a wxRuby-supplied default size.
+
+*SIZE_USE_EXISTING*: existing dimensions should be used
+if -1 values are supplied.
+
+*SIZE_ALLOW_MINUS_ONE*: allow dimensions of -1 and less to be interpreted
+as real dimensions, not default values.
+
+*SIZE_FORCE*: normally, if the position and the size of the window are
+already the same as the parameters of this function, nothing is done. but with
+this flag a window resize may be forced even in this case (supported in wx
+2.6.2 and later and only implemented for MSW and ignored elsewhere currently)
+
+h4. See also
+
+"set_size":#Window_setsize
 
 h3(#Window_setinitialbestsize). Window#set_initial_best_size
 
@@ -2127,7 +2149,6 @@ h4. See also
 
 "set_foreground_colour":#Window_setforegroundcolour, "inherit_attributes":#Window_inheritattributes
 
-
 h3(#Window_setdroptarget). Window#set_drop_target
 
   *set_drop_target*(%(arg-type)DropTarget% target)
@@ -2139,9 +2160,6 @@ If the window already has a drop target, it is deleted.
 h4. See also
 
 "Window#get_drop_target":window.html#Window_getdroptarget,
-"Drag and drop overview":dndoverview.html
-
-
 
 h3(#Window_seteventhandler). Window#set_event_handler
 
@@ -2223,7 +2241,7 @@ explanations.
 h4. Parameters
 
 * _font_ Font to associate with this window, pass
-@NullFont@ to reset to the default font.
+@Wx::NULL_FONT@ reset to the default font.
 
 h4. See also
 
@@ -2245,7 +2263,7 @@ explanation of the difference between this method and
 h4. Parameters
 
 * _colour_ The colour to be used as the foreground colour, pass
-  @NullColour@ to reset to the default colour.
+  @Wx::NULL_COLOUR@ to reset to the default colour.
 
 h4. Remarks
 
@@ -2356,22 +2374,19 @@ The window is sized so that you can only see 16 lines at a time.
 
 You would use:
 
-
-   SetScrollbar(VERTICAL, 0, 16, 50);
- 
-
+   set_scroll_bar(VERTICAL, 0, 16, 50);
 
 Note that with the window at this size, the thumb position can never go
 above 50 minus 16, or 34.
 
-You can determine how many lines are currently visible by dividing the current view
-size by the character height in pixels.
+You can determine how many lines are currently visible by dividing the
+current view size by the character height in pixels.
 
-When defining your own scrollbar behaviour, you will always need to recalculate
-the scrollbar settings when the window size changes. You could therefore put your
-scrollbar calculations and SetScrollbar
-call into a function named AdjustScrollbars, which can be called initially and also
-from your "SizeEvent":sizeevent.html handler function.
+When defining your own scrollbar behaviour, you will always need to
+recalculate the scrollbar settings when the window size changes. You
+could therefore put your scrollbar calculations and SetScrollbar call
+into a function named AdjustScrollbars, which can be called initially
+and also from your "SizeEvent":sizeevent.html handler function.
 
 h4. See also
 
@@ -2469,63 +2484,22 @@ h4. See also
 
 h3(#Window_setsize). Window#set_size
 
-  *set_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
-           %(arg-type)Integer% height, 
-           %(arg-type)Integer% sizeFlags = SIZE_AUTO)
+  *set_size*(%(arg-type)Size% size)
 
   *set_size*(%(arg-type)Rect% rect)
 
-Sets the size and position of the window in pixels.
-
-  *set_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
-
-  *set_size*(%(arg-type)Size% size)
-
-Sets the size of the window in pixels.
+Sets the size of the window using either a "Size":size.html or "Rect":rect.html
+object. The former just specifies the size of the window, in pixels; a
+rect specifies a new size and position.
 
 h4. Parameters
 
-* _x_ Required x position in pixels, or -1 to indicate that the existing
-value should be used.
-* _y_ Required y position in pixels, or -1 to indicate that the existing
-value should be used.
-* _width_ Required width in pixels, or -1 to indicate that the existing
-value should be used.
-* _height_ Required height position in pixels, or -1 to indicate that the existing
-value should be used.
 * _size_ "Size":size.html object for setting the size.
 * _rect_ "Rect":rect.html object for setting the position and size.
-* _sizeFlags_ Indicates the interpretation of other parameters. It is a bit list of the following:
-
-*SIZE_AUTO_WIDTH*: a $-1$ width value is taken to indicate
-a Widgets-supplied default width.
-
-*SIZE_AUTO_HEIGHT*: a $-1$ height value is taken to indicate
-a Widgets-supplied default width.\\
-*SIZE_AUTO*: -1 size values are taken to indicate
-a Widgets-supplied default size.\\
-*SIZE_USE_EXISTING*: existing dimensions should be used
-if -1 values are supplied.\\
-*SIZE_ALLOW_MINUS_ONE*: allow dimensions of $-1$ and less to be interpreted
-as real dimensions, not default values.
-*SIZE_FORCE*: normally, if the position and the size of the window are
-already the same as the parameters of this function, nothing is done. but with
-this flag a window resize may be forced even in this case (supported in wx
-2.6.2 and later and only implemented for MSW and ignored elsewhere currently)
-
-
-h4. Remarks
-
-The second form is a convenience for calling the first form with default
-x and y parameters, and must be used with non-default width and height values.
-
-The first form sets the position and optionally size, of the window.
-Parameters may be -1 to indicate either that a default should be supplied
-by Widgets, or that the current value of the dimension should be used.
 
 h4. See also
 
-"Window#move":window.html#Window_move
+"Window:set_dimensions":#Window_setdimensions , "Window#move":window.html#Window_move
 
 
 
