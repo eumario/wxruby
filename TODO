@@ -1,5 +1,16 @@
-High priority TODO items:
--------------------------
+==================================================
+
+NOTE: This file is somewhat out of date. Some of these issues may well have
+been solved by developments in wxRuby or SWIG. 
+
+For an up-to-date list of wxRuby bugs and missing features, please
+consult the rubyforge tracker at:
+
+https://rubyforge.org/tracker/?group_id=35
+
+Please report any new bugs via the tracker.
+
+==================================================
 
 Visible Bugs
 ------------
@@ -69,19 +80,11 @@ should use local-encoding, UTF-8, or some other encoding)
 - Eliminate the list in parents.rb and just build the list automatically 
   from the wx header files
 
-==================================================
-NOTE: The rest of this file is WAY out of date. 
-Don't pay much attention to it.
-
 - Add mark/free handling to typemap methods
   
 - NOTE: Any method that returns an object (rather 
   than an object reference or pointer) is currently 
   being removed by swig. ARGH!
-
-- Add support for evt_xxx(:method) as an alternative
-
-- Remove debugging output for director constructors/destructors
 
 - Add aliases like label and label= for get_label and set_label. Patch 
   submitted, decide later whether to apply.
