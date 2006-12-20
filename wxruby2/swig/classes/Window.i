@@ -7,7 +7,6 @@
 
 %ignore wxWindow::Clear;
 %ignore wxWindow::GetAccessible;
-%ignore wxWindow::GetChildren;
 %ignore wxWindow::PopEventHandler;
 # %ignore wxWindow::SetCaret;
 
@@ -25,8 +24,28 @@
 
 %apply int * INOUT { int * x_INOUT, int * y_INOUT }
 
-%{
+// Typemap for GetChildren
+%typemap(out) wxList& {
+  $result = rb_ary_new();
 
+  wxNode *node = $1->GetFirst();
+  while (node)
+  {
+    wxObject *obj = node->GetData();
+    rb_ary_push($result, get_ruby_object(obj));
+    node = node->GetNext();
+  }
+}
+
+// general-purpose function used to return ruby wrappers around windows 
+// whose type is not known in advance - as in find_window, get_children etc
+
+// TODO - doesn't work correctly with object tracking - it should return 
+// the same Ruby object if the object has been seen before
+// use something like:
+//	  returnVal = SWIG_NewPointerObj(obj, SWIGTYPE_p_wxWindow, 0);
+// but this causes problems for when a new Ruby object is needed - eg with XRC
+%{
 static VALUE get_ruby_object(wxObject *obj)
 {
 	if ( ! obj )
@@ -38,8 +57,8 @@ static VALUE get_ruby_object(wxObject *obj)
 	wxString classNameString(obj->GetClassInfo()->GetClassName());
 	if(classNameString.Len() > 2)
 	{
-		VALUE ruby_class = rb_iv_get(mWxruby2, classNameString.mb_str()+2);
-		returnVal = Data_Wrap_Struct(ruby_class,0,0,obj);
+	    VALUE ruby_class = rb_iv_get(mWxruby2, classNameString.mb_str()+2);
+	    returnVal = Data_Wrap_Struct(ruby_class,0,0,obj);
 	}
 	
 	return returnVal;
