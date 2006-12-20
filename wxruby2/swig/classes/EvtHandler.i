@@ -37,6 +37,7 @@ extern swig_class cWxEvent;
 extern swig_class cWxCalendarEvent;
 extern swig_class cWxCloseEvent;
 extern swig_class cWxCommandEvent;
+extern swig_class cWxTextUrlEvent;
 extern swig_class cWxIdleEvent;
 extern swig_class cWxPaintEvent;
 extern swig_class cWxUpdateUIEvent;
@@ -94,7 +95,6 @@ static const wxEventType *commandEvents[] =
     &wxEVT_COMMAND_CHECKLISTBOX_TOGGLED,
     &wxEVT_COMMAND_TEXT_UPDATED,
     &wxEVT_COMMAND_TEXT_ENTER,
-    &wxEVT_COMMAND_TEXT_URL,
     &wxEVT_COMMAND_TEXT_MAXLEN,
     &wxEVT_COMMAND_MENU_SELECTED,
     &wxEVT_COMMAND_SLIDER_UPDATED,
@@ -107,6 +107,12 @@ static const wxEventType *commandEvents[] =
     &wxEVT_COMMAND_TOOL_ENTER,
     &wxEVT_COMMAND_SPINCTRL_UPDATED,
     &wxEVT_COMMAND_COMBOBOX_SELECTED,
+    (const wxEventType *)0
+};
+
+static const wxEventType *textUrlEvents[] =
+{
+    &wxEVT_COMMAND_TEXT_URL,
     (const wxEventType *)0
 };
 
@@ -393,6 +399,8 @@ public:
             cEvent = cWxWindowDestroyEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
             cEvent = cWxSashEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxTextUrlEvent)))
+            cEvent = cWxTextUrlEvent.klass;
 #ifdef WXSCINTILLA
         else if (event.IsKindOf(CLASSINFO(wxScintillaEvent)))
             cEvent = cWxScintillaEvent.klass;
@@ -810,7 +818,7 @@ static VALUE evt_text_maxlen(int argc, VALUE *argv, VALUE self)
     return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TEXT_MAXLEN);
 }
 
-#ifdef __WXMSW__
+#ifndef __WXMAC__
 static VALUE evt_text_url(int argc, VALUE *argv, VALUE self) 
 {
     return internal_evt_with_id(argc, argv, self, wxEVT_COMMAND_TEXT_URL);
