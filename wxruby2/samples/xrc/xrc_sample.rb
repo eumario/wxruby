@@ -51,47 +51,30 @@ class SimpleFrame < Wx::Frame
 	
 end
 
-#
-# Dialog subclass. Uses XRC for the dialog definition
-#
+# Dialog subclass. The components within the dialog are loaded from XRC.
 class SimpleDialog < Wx::Dialog
-
 	def initialize(parent)
 		super()
 		
-		#
 		# Load the dialog from XRC. We define $xml in on_init.
 		# We could use XmlResource.get() over and over again, but
 		# honestly, thats just too much work.
-		#
 		$xml.load_dialog_subclass(self,parent,'SAMPLE_DIALOG')
-		
-		#
-		# Get the buttons. Note we use 'xrcid' much like the XRCID macro
-		# in C++. Make sure the id's actually exist, or your program will crash!
-		#
-    
-		@ok = Wx::Window.find_window_by_id(Wx::xrcid('wxID_OK'),self)
-        @cancel = Wx::Window.find_window_by_id(Wx::xrcid('wxID_CANCEL'),self)
-		@message = Wx::Window.find_window_by_id(Wx::xrcid('SAMPLE_MESSAGE'),self)
-		
-		#
+
+		# Get the buttons. The xrcid method turns a string identifier
+        # used in an xml file into a numeric identifier as used in
+        # wxruby. 
+        @ok      = find_window_by_id( Wx::xrcid('wxID_OK') )
+        @cancel  = find_window_by_id( Wx::xrcid('wxID_CANCEL') )
+        @message = find_window_by_id( Wx::xrcid('SAMPLE_MESSAGE') )
+
 		# Bind the buttons to event handlers
-		#
-		evt_button(Wx::xrcid('wxID_OK')) do
-			end_modal(Wx::ID_OK)
+        evt_button( @ok.get_id ) { end_modal(Wx::ID_OK) }
+        evt_button( @cancel.get_id ) { end_modal(Wx::ID_CANCEL) }
+		evt_button( @message.get_id ) do
+          Wx::message_box("And now a message from our sponsors.")
 		end
-		
-		evt_button(Wx::xrcid('wxID_CANCEL')) do
-			end_modal(Wx::ID_CANCEL)
-		end
-		
-		evt_button(Wx::xrcid('SAMPLE_MESSAGE')) do
-			Wx::message_box("And now a message from our sponsors.")
-		end
-		
 	end
-	
 end
 
 #
@@ -100,27 +83,20 @@ end
 class XrcApp < Wx::App
 
 	def on_init
-		#
 		# Create a resource handler
-		#
 		$xml = Wx::XmlResource.get();
 		$xml.init_all_handlers();
 
-		#
+
 		# Load a resource file
-		#
         xrc_file = File.join( File.dirname(__FILE__), 'samples.xrc' )
 		$xml.load(xrc_file)
 
-		#
 		# Show the main frame.
-		#
-		$main = SimpleFrame.new()
-		$main.show(true)
+		main = SimpleFrame.new()
+		main.show(true)
 	end
 
 end
-		
-		
 
-XrcApp.new().main_loop()
+XrcApp.new.main_loop()
