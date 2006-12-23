@@ -8,7 +8,6 @@
 %ignore wxWindow::Clear;
 %ignore wxWindow::GetAccessible;
 %ignore wxWindow::PopEventHandler;
-# %ignore wxWindow::SetCaret;
 
 // LayoutConstraints are deprecated and not supported in WxRuby
 %ignore wxWindow::SetConstraints;
@@ -24,7 +23,7 @@
 
 %apply int * INOUT { int * x_INOUT, int * y_INOUT }
 
-// Typemap for GetChildren
+// Typemap for GetChildren - casts wxObjects to correct ruby wrappers
 %typemap(out) wxList& {
   $result = rb_ary_new();
 
@@ -37,38 +36,57 @@
   }
 }
 
-// general-purpose function used to return ruby wrappers around windows 
-// whose type is not known in advance - as in find_window, get_children etc
-
-// TODO - doesn't work correctly with object tracking - it should return 
-// the same Ruby object if the object has been seen before
-// use something like:
-//	  returnVal = SWIG_NewPointerObj(obj, SWIGTYPE_p_wxWindow, 0);
-// but this causes problems for when a new Ruby object is needed - eg with XRC
+// Returns a ruby wrapper around a wxObject whose wx class is not known
+// in advance - needed for find_window, get_children etc This is a bit
+// complicated because it must check if the ruby object already exists,
+// and if not, wrap it in the correct class, and ensure that future
+// calls return the same object.
 %{
-static VALUE get_ruby_object(wxObject *obj)
+static VALUE get_ruby_object(wxObject *wx_obj)
 {
-	if ( ! obj )
+  if ( ! wx_obj ) return Qnil;
+
+  // Get the wx class and the ruby class we are converting into  
+  wxString class_name( wx_obj->GetClassInfo()->GetClassName() );
+  VALUE r_class;
+  if ( class_name.Len() > 2 )
 	{
-	  return Qnil;
+	  r_class = rb_iv_get(mWxruby2, class_name.mb_str() + 2);
 	}
-	
-	VALUE returnVal = Qnil;
-	wxString classNameString(obj->GetClassInfo()->GetClassName());
-	if(classNameString.Len() > 2)
+  else return Qnil;
+
+  // First, Try fetching a tracked (previously seen) object
+  VALUE r_obj = SWIG_RubyInstanceFor(wx_obj);
+  if ( r_obj != Qnil ) // Found a tracked object
 	{
-	    VALUE ruby_class = rb_iv_get(mWxruby2, classNameString.mb_str()+2);
-	    returnVal = Data_Wrap_Struct(ruby_class,0,0,obj);
+	  // Check the types match (see SWIG_NewPointerObj)
+	  VALUE r_swigtype = rb_iv_get(r_obj, "__swigtype__");
+	  if ( r_swigtype != Qnil && rb_obj_is_kind_of(r_obj, r_class) )
+		return r_obj;
 	}
-	
-	return returnVal;
+  
+  // Otherwise - no previously tracked object found - so wrap a new one.
+  // Get a string with the internal SWIG name tag of the class (eg _p_wxButton)
+  char *swigtype = (char *) malloc(3 + class_name.Len() + 1);
+  sprintf(swigtype, "_p_%s", (const char *)(class_name.mb_str()));
+  
+  // Wrap the object, tag its swigtype (core Wx type), and track it
+  // Imitates latter part of SWIG_NewPointerObj
+  r_obj = Data_Wrap_Struct(r_class, 0, 0, wx_obj);
+  rb_iv_set(r_obj, "__swigtype__", rb_str_new2(swigtype));
+  SWIG_RubyAddTracking(wx_obj, r_obj);
+  
+  free((void *) swigtype);
+  return r_obj;
 }
 
 %}
 
-# These are implemented below by hand so casting of types are correct which is 
-# very important when using XRC.
+// This is the instance method - implemented instead in Ruby - see window.rb
 %ignore wxWindow::FindWindow;
+
+// These are class methods implemented below by hand so casting of types
+// is correct, which is very important when using XRC.
 %ignore wxWindow::FindWindowById;
 %ignore wxWindow::FindWindowByName;
 %ignore wxWindow::FindWindowByLabel;
@@ -79,29 +97,10 @@ static VALUE get_ruby_object(wxObject *obj)
 %include "include/wxWindow.h"
 
 %extend wxWindow {
-  VALUE find_window(long  id)
-  {
-    VALUE returnVal = Qnil;
-    
-    wxObject* obj = self->FindWindow(id); 
-    returnVal = get_ruby_object(obj);
-  
-    return returnVal;    
-  }
-  
-  VALUE find_window(const wxString&  name)
-  {
-    VALUE returnVal = Qnil;
-    
-    wxObject* obj = self->FindWindow(name); 
-    returnVal = get_ruby_object(obj);
-  
-    return returnVal;    
-  }  
-  
   static VALUE find_window_by_id(long  id , wxWindow* parent = NULL)
   {
     VALUE returnVal = Qnil;
+
     wxObject* obj = wxWindow::FindWindowById(id,parent); 
     returnVal = get_ruby_object(obj);
   
@@ -127,5 +126,4 @@ static VALUE get_ruby_object(wxObject *obj)
   
     return returnVal;    
   }  
-  
 }
