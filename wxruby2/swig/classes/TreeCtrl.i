@@ -67,6 +67,7 @@ protected:
 	  }
   }
 
+  // Called on every tree item to do GC marking of itemdata
   static void DoGCMarkItemData(void *ptr, const wxTreeItemId& item_id)
   {
 	wxTreeCtrl* tree_ctrl = (wxTreeCtrl*) ptr;
@@ -90,15 +91,6 @@ protected:
 	wxTreeItemId root_id = tree_ctrl->GetRootItem();
 	RecurseOverTreeIds(tree_ctrl, root_id, &DoGCMarkItemData);
   }
-
-  // function for internal implementation of TreeCtrl#traverse 
-  static void DoTreeCtrlYielding(void *ptr, const wxTreeItemId& item_id)
-  {
-	// create a copy to wrap and give to ruby
-	wxTreeItemId *copy_id = new wxTreeItemId(item_id.m_pItem);
-	VALUE rb_item_id = SWIG_NewPointerObj(copy_id, SWIGTYPE_p_wxTreeItemId, SWIG_POINTER_OWN);
-	rb_yield(rb_item_id);
-  }
 %}
 %markfunc wxTreeCtrl "mark_wxTreeCtrl";
 
@@ -116,24 +108,6 @@ protected:
 
 
 %extend wxTreeCtrl {
-
-  VALUE traverse(const wxTreeItemId& item_id = wxTreeItemId() )
-  {
-	wxTreeItemId base_id;
-
-	if ( item_id.IsOk() ) 
-	  {
-		base_id = item_id;
-	  }
-	else
-	  {
-		base_id = self->GetRootItem();
-	  }
-
-	RecurseOverTreeIds(self, base_id, &DoTreeCtrlYielding);
-	return Qnil;
-  }
-
 	//Change signature so it returns an array of the TreeItemId and the Cookie.
 	//This behavior matches that used by wxPython and wxPerl.
 	VALUE get_first_child(const wxTreeItemId& item)
