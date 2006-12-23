@@ -22,6 +22,8 @@
 %ignore  Create(void*  data , int  type , int  width , int  height , int depth = -1) ;
 %ignore wxBitmap::SetPalette;
 
+%apply SWIGTYPE *DISOWN { wxMask* mask };
+
 %{
 #include <wx/image.h>
 %}
