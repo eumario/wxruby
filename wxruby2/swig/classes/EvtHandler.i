@@ -64,6 +64,7 @@ extern swig_class cWxSashEvent;
 extern swig_class cWxActivateEvent;
 extern swig_class cWxWindowCreateEvent;
 extern swig_class cWxWindowDestroyEvent;
+extern swig_class cWxMenuEvent;
 #ifdef WXSCINTILLA
 extern swig_class cWxScintillaEvent;
 #endif
@@ -297,6 +298,14 @@ static const wxEventType *destroyEvents[] =
   (const wxEventType *)0
 };
 
+static const wxEventType *menuEvents[] =
+{
+  &wxEVT_MENU_OPEN,
+  &wxEVT_MENU_CLOSE,
+  &wxEVT_MENU_HIGHLIGHT,
+  (const wxEventType *)0
+};
+
 #ifdef WXSCINTILLA
 static const wxEventType *scintillaEvents[] =
 {
@@ -397,6 +406,8 @@ public:
             cEvent = cWxWindowCreateEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxWindowDestroyEvent)))
             cEvent = cWxWindowDestroyEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxMenuEvent)))
+            cEvent = cWxMenuEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
             cEvent = cWxSashEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxTextUrlEvent)))
@@ -1090,6 +1101,28 @@ static VALUE evt_destroy(int argc, VALUE *argv, VALUE self)
 {
     return internal_evt_no_parameters(argc, argv, self, wxEVT_DESTROY);
 }
+
+static VALUE evt_menu_open(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MENU_OPEN);
+}
+
+static VALUE evt_menu_close(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MENU_CLOSE);
+}
+
+static VALUE evt_menu_highlight(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_with_id(argc, argv, self, wxEVT_MENU_HIGHLIGHT);
+}
+
+static VALUE evt_menu_highlight_all(int argc, VALUE *argv, VALUE self) 
+{
+    return internal_evt_no_parameters(argc, argv, self, wxEVT_MENU_HIGHLIGHT_ALL);
+}
+
+
 // TODO:  Add for ListEvent types?  Is this needed?
 
 %}
