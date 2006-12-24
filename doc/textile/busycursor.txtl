@@ -1,45 +1,38 @@
 h1(#wxbusycursor). Wx::BusyCursor
 
-This class makes it easy to tell your user that the program is temporarily busy.
-Just create a BusyCursor object on the stack, and within the current scope,
-the hourglass will be shown.
+This class makes it easy to tell your user that the program is
+temporarily busy.  Just call the class method "busy":BusyCursor_busy,
+passing it a block; while the block is executed, the system's hourglass
+cursor will be displayed.
 
 For example:
 
-
-   BusyCursor wait;
+ Wx::BusyCursor.busy do 
+   # do some lengthy operation
+   # ...
+ end
  
-   for (int i = 0; i < 100000; i++)
-     DoACalculation();
- 
-
-It works by calling "BeginBusyCursor":beginbusycursor.html in the constructor,
-and "EndBusyCursor":endbusycursor.html in the destructor.
-
 h2. Derived from
 
 None
 
 h2. See also
 
-"BeginBusyCursor":beginbusycursor.html, "EndBusyCursor":endbusycursor.html, "WindowDisabler":windowdisabler.html
+"BusyInfo":busyinfo.html, "WindowDisabler":windowdisabler.html
 
 <div id="methods">
 
-h2. Methods
+h2. Class methods
 
-* "BusyCursor.new":#BusyCursor_new
+* "BusyCursor.busy":#BusyCursor_busy
 
 </div>
 
 
-h3(#BusyCursor_new). BusyCursor.new
+h3(#BusyCursor_busy). BusyCursor.busy
 
-  *BusyCursor.new*(%(arg-type)Cursor% cursor = HOURGLASS_CURSOR)
+  *BusyCursor.busy*() { ... }
 
-Constructs a busy cursor object, calling "BeginBusyCursor":beginbusycursor.html.
-
-  *destructor*()
-
-Destroys the busy cursor object, calling "EndBusyCursor":endbusycursor.html.
-
+Changes the cursor into the system's 'busy' indicator (typically an
+hourglass), calls the passed block, then returns the cursor to normal
+once the block is completed.
