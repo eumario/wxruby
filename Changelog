@@ -1,3 +1,15 @@
+- Added MenuEvent class (Alex Fenton)
+- Documented how to use WindowDisabler, BusyCursor & BusyInfo (Alex Fenton)
+- Fixed TreeItemId == method (Alex Fenton)
+- Moved TreeCtrl#traverse to wxSugar (Alex Fenton)
+- Simplify some bits of XRC sample (Alex Fenton)
+- Added some missing classes to parents.rb (Alex Fenton)
+- Made find_window_xx etc return correct objects from SWIG tracking (Alex FEnton)
+- Added TextUrlEvent class (Alex Fenton)
+- Fixed Window#get_children method (Alex Fenton)
+
+=== 0.0.37 tag on 2006-12-24 included all of this: ===
+- Updated TODO (Alex Fenton)
 - Tweak binary library loading so errors are raised with accurate info (Alex Fenton)
 - Added HelpController and HtmlHelpController, plus bigdemo sample (Alex Fenton)
 - Added TreeCtrl#traverse method (Alex Fenton)
