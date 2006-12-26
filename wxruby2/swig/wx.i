@@ -12,6 +12,9 @@
 #include <wx/gdicmn.h>
 #include <wx/image.h>
 
+#include <wx/filesys.h>
+#include <wx/fs_zip.h>
+
 WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
 WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
 
@@ -56,16 +59,27 @@ void GcFreefunc(void *)
 
 }
 
+///////////////////////////////////////////////////
+extern "C" void Init_wxRubyStockObjects();
+extern "C" void Init_wxRubyEventTypes();
+
 %} 
 
 %init %{
-
 
     extern void InitializeOtherModules();
     InitializeOtherModules();
     wxInitializeStockLists();
     wxInitializeStockObjects();
     wxInitAllImageHandlers();
+
+	// Load the event type constants
+	Init_wxRubyEventTypes();
+	// Load the stock colours (eg Wx::RED), pens and brushes
+	Init_wxRubyStockObjects();
+
+	// This is needed so HtmlHelp can load docs from a zip file
+	wxFileSystem::AddHandler(new wxZipFSHandler);
 %}
 
 #define VERSION_STRING "wxRuby2"
