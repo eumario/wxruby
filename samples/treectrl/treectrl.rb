@@ -73,7 +73,7 @@ class MyTreeCtrl < Wx::TreeCtrl
 
     @reverse_sort = false
 
-    create_image_list()
+    create_image_list
 
     # add some items to the tree
     add_test_items_to_tree(5, 2)
@@ -134,54 +134,28 @@ class MyTreeCtrl < Wx::TreeCtrl
     return get_item_parent(item) == get_root_item() && !get_prev_sibling(item)
   end
 
-  # TEMPORARILY DISABLED
-  def set_item_image(*args)
-  end
-
-  # TEMPORARILY DISABLED
-  def create_image_list(size = 16)
-    return false
-    if size == -1
-      set_image_list(nil)
-      return nil
-    end
-    if size == 0
-      size = @imageSize
-    else
-      @imageSize = size
-    end
+  def create_image_list
+    @imageSize = 16
 
     # Make an image list containing small icons
-    images = Wx::ImageList.new(size, size, true)
-
+    images = Wx::ImageList.new(16, 16, true)
     # should correspond to TreeCtrlIcon_xxx enum
-    Wx::BusyCursor.busy do |x|
-      icons = [
-        Wx::Icon.new("icon1.xpm"),
-        Wx::Icon.new("icon2.xpm"),
-        Wx::Icon.new("icon3.xpm"),
-        Wx::Icon.new("icon4.xpm"),
-        Wx::Icon.new("icon5.xpm")]
-      
-      orig_size = icons[0].get_width()
-      for i in 0 ... icons.length
-        if size == orig_size
-          images.add(icons[i])
-        else
-          images.add(icons[i])
-        end
+    Wx::BusyCursor.busy do
+      icons = (1 .. 5).map do | i |
+        icon_file = File.join(File.dirname(__FILE__), "icon#{i}.xpm")
+        # Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_XPM, 16, 16)
+        Wx::Bitmap.new(icon_file, Wx::BITMAP_TYPE_XPM)
       end
-      
-      assign_image_list(images)
+      icons.each { | ic | images.add(ic) }
+      set_image_list(images)
     end
   end
 
-  def create_buttons_image_list(size = 11)
-    if size == -1
-      set_buttons_image_list(nil)
-      return nil
-    end
+  def unset_image_list
+    set_image_list(nil)
+  end
 
+  def create_buttons_image_list()
     # Make an image list containing small icons
     images = Wx::ImageList.new(size, size, true)
 
@@ -193,12 +167,12 @@ class MyTreeCtrl < Wx::TreeCtrl
         Wx::Icon.new("icon5.xpm"),   # open
         Wx::Icon.new("icon5.xpm")]   # open, selected
       
-      for i in 0 ... icons.length
-        orig_size = icons[i].get_width()
+      icons.each do | ic |
+        orig_size = ic.get_width()
         if size == orig_size
-          images.add(icons[i])
+          images.add(ic)
         else
-          resized = icons[i].convert_to_image().rescale(size, size)
+          resized = ic.convert_to_image().rescale(size, size)
           images.add( Wx::Bitmap.new(resized) )
         end
       end
@@ -254,17 +228,22 @@ class MyTreeCtrl < Wx::TreeCtrl
   end
 
   def add_test_items_to_tree(num_children,depth)
-    image = Wx::get_app.show_images() ? TreeCtrlIcon_Folder : -1
+    image = Wx::get_app.show_images ? TreeCtrlIcon_Folder : -1
     root_id = add_root("Root",image, image)
     if image != -1
       set_item_image(root_id, TreeCtrlIcon_FolderOpened, 
-                     Wx::TREE_ITEM_ICON_EXPANDED)
+                      Wx::TREE_ITEM_ICON_EXPANDED)
     end
 
     add_items_recursively(root_id, num_children, depth, 0)
 
     # set some colours/fonts for testing
-    set_item_font(root_id, Wx::ITALIC_FONT)
+    # note that font sizes can also be varied, but only on platforms
+    # that use the generic TreeCtrl - OS X and GTK, and only if
+    # Wx::TR_HAS_VARIABLE_ROW_HEIGHT style was used in the constructor
+    font = get_font
+    font.set_style(Wx::FONTSTYLE_ITALIC)
+    set_item_font(root_id, font)
 
     id,cookie = get_first_child(root_id)
     set_item_text_colour(id, Wx::BLUE)
@@ -1121,11 +1100,11 @@ class MyFrame < Wx::Frame
   end
 
   def on_toggle_images(event)
-    if Wx::get_app.show_images()
-      @treectrl.create_image_list(-1)
+    if Wx::get_app.show_images
+      @treectrl.unset_image_list
       Wx::get_app.show_images = false
     else
-      @treectrl.create_image_list(0)
+      @treectrl.create_image_list
       Wx::get_app.show_images = true
     end
   end
