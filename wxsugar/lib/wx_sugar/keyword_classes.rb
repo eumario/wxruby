@@ -5,13 +5,6 @@
 # and is no use on its own - except if you are looking for a bug or want
 # to add a  missing class.
 
-# This is a dummy, this variable is not loaded until Wx init
-# hush warnings if it has already been loaded when we get here
-v = $VERBOSE
-$VERBOSE = nil
-Wx::NULL_BITMAP = nil
-$VERBOSE = v
-
 module WxSugar
   @defined_classes = {}
 
@@ -287,7 +280,7 @@ end
 WxSugar.define_keyword_ctors('CheckBox') do
   wx_ctor_params :label => ''
   wx_ctor_params :pos, :size, :style
-  # wx_ctor_params :validator, :name => 'checkBox'
+  # wx_ctor_params :validator => Wx::DEFAULT_VALIDATOR, :name => 'checkBox'
 end
 
 # A listbox with a checkbox to the left of each item
