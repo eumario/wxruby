@@ -7,8 +7,6 @@
 
 %{
 #include <wx/init.h>
-#include <wx/filesys.h>
-#include <wx/fs_zip.h>
 %}
 
 %ignore GetAuto3D;
@@ -28,11 +26,6 @@
 %{
 
 extern swig_class cWxEvtHandler;
-
-
-///////////////////////////////////////////////////
-extern "C" void Init_wxRubyStockObjects();
-extern "C" void Init_wxRubyEventTypes();
 
 class wxRubyApp : public wxApp
 {
@@ -99,12 +92,6 @@ public:
 #ifdef __WXDEBUG__	
         printf("OnInitGui after\n");
 #endif	
-        if(result)
-        {
-            Init_wxRubyEventTypes();
-            Init_wxRubyStockObjects();
-			wxFileSystem::AddHandler(new wxZipFSHandler);
-        }
         return result;
     }
 
