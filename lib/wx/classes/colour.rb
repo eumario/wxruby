@@ -1,5 +1,4 @@
 class Wx::Colour
-
   # Redefine the initialize method so it raises an exception if an
   # invalid colour value is given. This might be an unknown colour
   # string (eg 'dark blue') or out-of-bounds integer values (<0 or >255)
@@ -15,6 +14,15 @@ class Wx::Colour
     if not ok
       Kernel.raise ArgumentError, "Invalid colour values #{args.inspect}"
     end
+  end
+
+  # Colours are equal to one another if they have the same red, green
+  # and blue intensity.
+  def ==(other)
+    if not other.is_a?(self.class)
+      raise ArgumentError, "No comparison of #{self} to #{other}"
+    end
+    [ red, green, blue ] == [ other.red, other.green, other.blue ]
   end
 
   # More informative output for inspect etc

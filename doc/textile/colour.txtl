@@ -1,13 +1,15 @@
 h1(#wxcolour). Wx::Colour
 
-A colour is an object representing a combination of Red, Green, and Blue (RGB) intensity values,
-and is used to determine drawing colours. See the
-entry for "ColourDatabase":colourdatabase.html for how a pointer to a predefined,
-named colour may be returned instead of creating a new colour.
+A colour is an object representing a combination of Red, Green, and Blue
+(RGB) intensity values, and is used to determine drawing colours. See
+the entry for "ColourDatabase":colourdatabase.html for how a pointer to
+a predefined, named colour may be returned instead of creating a new
+colour.
 
 Valid RGB values are in the range 0 to 255.
 
-You can retrieve the current system colour settings with "SystemSettings":systemsettings.html.
+You can retrieve the current system colour settings for different UI
+elements with "SystemSettings":systemsettings.html.
 
 h2. Derived from
 
@@ -15,20 +17,16 @@ h2. Derived from
 
 h2. Predefined objects
 
-Objects:
+These predefined colours are defined as constants in wxRuby.
 
-*NullColour*
-
-Pointers:
-
-*BLACK
-
-WHITE\\
-RED\\
-BLUE\\
-GREEN\\
-CYAN\\
-LIGHT_GREY*
+ Wx::NULL_COLOUR
+ Wx::BLACK
+ Wx::WHITE
+ Wx::RED
+ Wx::BLUE
+ Wx::GREEN
+ Wx::CYAN
+ Wx::LIGHT_GREY
 
 h2. See also
 
@@ -48,22 +46,17 @@ h2. Methods
 
 </div>
 
-
-
 h3(#Colour_constr). Colour.new
 
-  *Colour.new*(%(arg-type)Integer% red,  %(arg-type)Integer% green,  %(arg-type)Integer% blue)
+  *Colour.new*(%(arg-type)Integer% red, %(arg-type)Integer% green,  %(arg-type)Integer% blue)
 
-Constructs a colour from red, green and blue values.
+Constructs a colour from red, green and blue values. Each value should
+be between 0 and 255.
 
   *Colour.new*(%(arg-type)String% colourNname)
 
-Constructs a colour object using a colour name
-listed in *TheColourDatabase*.
-
-  *Colour.new*(%(arg-type)Colour% colour)
-
-Copy constructor.
+Constructs a colour object using a colour name listed in the global
+colour database *Wx::TheColourDatabase*.
 
 h4. Parameters
 
@@ -71,15 +64,10 @@ h4. Parameters
 * _green_ The green value.
 * _blue_ The blue value.
 * _colourName_ The colour name.
-* _colour_ The colour to copy.
 
 h4. See also
 
 "ColourDatabase":colourdatabase.html
-
-
-
-
 
 h3(#Colour_blue). Colour#blue
 
@@ -118,39 +106,19 @@ h3(#Colour_red). Colour#red
 
 Returns the red intensity.
 
-
 h3(#Colour_set). Colour#set
 
   *set*(%(arg-type)Integer% red,  %(arg-type)Integer% green,  %(arg-type)Integer% blue)
 
 Sets the RGB intensity values.
 
-
-h3(#Colour_assign). Colour#=
-
- "Colour":colour.html *operator $=$*(%(arg-type)Colour% colour)
-
-Assignment operator, taking another colour object.
-
- "Colour":colour.html *operator $=$*(%(arg-type)String% colourName)
-
-Assignment operator, using a colour name to be found in the colour database.
-
 h4. See also
 
 "ColourDatabase":colourdatabase.html
 
-
 h3(#Colour_equality). Colour#==
 
- Boolean *operator $==$*(%(arg-type)Colour% colour)
+ Boolean *operator ==*(%(arg-type)Colour% colour)
 
 Tests the equality of two colours by comparing individual red, green blue colours.
-
-
-h3(#Colour_inequality). Colour#!=
-
- Boolean *operator $!=$*(%(arg-type)Colour% colour)
-
-Tests the inequality of two colours by comparing individual red, green blue colours.
 
