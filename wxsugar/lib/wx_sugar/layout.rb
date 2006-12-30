@@ -67,7 +67,9 @@ module Arranger
     elsif sizer = self.get_sizer
       return sizer
     else
-      return @current_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
+      @current_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
+      self.set_sizer(@current_sizer)
+      @current_sizer
     end
   end
   
@@ -106,6 +108,9 @@ module Arranger
       end
     # set as main sizer            
     else
+      if @current_sizer
+        warn "Sizer already specified, redefining layout for #{self}"
+      end        
       @padding = layout[:padding] if layout[:padding]
       @current_sizer = a_sizer
       yield(self) if block_given?
@@ -123,7 +128,7 @@ module Arranger
     child  = build_child(child)
     layout = hints_to_constants(layout_hints)
     proportion = layout_hints[:proportion] || 0
-    siz = self.current_sizer()
+    siz = self.current_sizer
     padding = layout_hints[:padding] || @padding
     siz.add(child, proportion, layout, padding || 0)
     siz.layout()
@@ -205,11 +210,17 @@ module Arranger
     end
   end
 
-
   # Convert a hash of layout hints to WxWidgets Sizer constants
+  
   def hints_to_constants(layout_hints)
-    layout = Wx::ALL
-    
+    if layout_hints[:pad]
+      layout = layout_hints[:pad].split(',').inject(0) do | l, edge |
+        l | Wx::const_get(edge.upcase)
+      end
+    else
+      layout = Wx::ALL
+    end
+
     if layout_hints[:minsize]
       layout = layout | Wx::ADJUST_MINSIZE|Wx::EXPAND
     end
@@ -218,9 +229,9 @@ module Arranger
     end
 
     
-    if layout_hints[:align]
+    if align = layout_hints[:align]
       begin
-        align_const = Wx::const_get('ALIGN_' << layout_hints[:align].to_s.upcase)
+        align_const = Wx::const_get('ALIGN_' << align.to_s.upcase)
         layout = layout | align_const
       rescue NameError
         Kernel.raise ArgumentError,
