@@ -5,6 +5,14 @@
 
 %module(directors="1") wxWindow
 
+enum wxWindowVariant
+{
+  wxWINDOW_VARIANT_NORMAL, // Normal size
+  wxWINDOW_VARIANT_SMALL,  // Smaller size (about 25 % smaller than normal )
+  wxWINDOW_VARIANT_MINI,   // Mini size (about 33 % smaller than normal )
+  wxWINDOW_VARIANT_LARGE,  // Large size (about 25 % larger than normal )
+};
+
 %ignore wxWindow::Clear;
 %ignore wxWindow::GetAccessible;
 %ignore wxWindow::PopEventHandler;
