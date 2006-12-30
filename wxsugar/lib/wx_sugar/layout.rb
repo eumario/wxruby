@@ -95,7 +95,7 @@ module Arranger
       end
 
       superior_sizer, @current_sizer = @current_sizer, a_sizer
-      yield(self)
+      yield(a_sizer)
       @current_sizer = superior_sizer
       proportion = layout[:proportion] || 0
       this_padding = padding || 0
@@ -113,7 +113,7 @@ module Arranger
       end        
       @padding = layout[:padding] if layout[:padding]
       @current_sizer = a_sizer
-      yield(self) if block_given?
+      yield(a_sizer) if block_given?
       self.set_sizer(a_sizer)
     end
   end
