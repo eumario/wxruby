@@ -1,11 +1,12 @@
 h1(#wxacceleratortable). Wx::AcceleratorTable
 
-An accelerator table allows the application to specify a table of keyboard shortcuts for
-menus or other commands. On Windows, menu or button commands are supported; on GTK,
-only menu commands are supported.
+An accelerator table allows the application to specify a table of
+keyboard shortcuts for menus or other commands. On Windows, menu or
+button commands are supported; on GTK (and OS X?), only menu commands
+are supported.
 
-The object *NullAcceleratorTable* is defined to be a table with no data, and is the
-initial accelerator table for a window.
+The object *NullAcceleratorTable* is defined to be a table with no data,
+and is the initial accelerator table for a window.
 
 h2. Derived from
 
@@ -13,21 +14,27 @@ h2. Derived from
 
 h2. Example
 
+This example shows how to create an accelerator table with three
+shortcut key entries. Note the use of the ruby method String[0] to
+retrieve the integer keycode corresponding to an alphanumeric key,
+and the use of the Wx::K_XXX constant to get the keycode for a
+non-alphanumeric key.
 
-   AcceleratorEntry entries[4];
-   entries[0].Set(ACCEL_CTRL,  (int) 'N',     ID_NEW_WINDOW);
-   entries[1].Set(ACCEL_CTRL,  (int) 'X',     ID_EXIT);
-   entries[2].Set(ACCEL_SHIFT, (int) 'A',     ID_ABOUT);
-   entries[3].Set(ACCEL_NORMAL,  WXK_DELETE,    ID_CUT);
-   AcceleratorTable accel(4, entries);
-   frame->SetAcceleratorTable(accel);
+  entries = [ Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, 'N'[0], 
+                                       ID_NEW_WINDOW),
+              Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, 'X'[0], 
+                                       Wx::ID_EXIT),
+              Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, Wx::K_DELETE, 
+                                       Wx::ID_CUT) ]
+  table	= Wx::AcceleratorTable.new(entries)
+  frame.set_accelerator_table(table)
  
-
 h2. Remarks
 
-An accelerator takes precedence over normal processing and can be a convenient way to program some event handling.
-For example, you can use an accelerator table to enable a dialog with a multi-line text control to
-accept CTRL-Enter as meaning `OK' (but not in GTK+ at present).
+An accelerator takes precedence over normal processing and can be a
+convenient way to program some event handling. 
+For example, you can use an accelerator table to enable a dialog with a
+multi-line text control to accept CTRL-Enter as meaning `OK' (but not in GTK+ at present).
 
 h2. See also
 
@@ -45,31 +52,13 @@ h2. Methods
 
 h3(#AcceleratorTable_new). AcceleratorTable.new
 
-  *AcceleratorTable.new*(%(arg-type)AcceleratorTable% bitmap)
-
-Copy constructor.
-
-  *AcceleratorTable.new*(%(arg-type)Integer% n,  %(arg-type)AcceleratorEntry% entries[])
+  *AcceleratorTable.new*(%(arg-type)Array% entries)
 
 Creates from an array of "AcceleratorEntry":acceleratorentry.html objects.
 
-  *AcceleratorTable.new*(%(arg-type)String% resource)
-
-Loads the accelerator table from a Windows resource (Windows only).
-
 h4. Parameters
 
-* _n_ Number of accelerator entries.
 * _entries_ The array of entries.
-* _resource_ Name of a Windows accelerator.
-
-
-
-
-
-  *destructor*()
-
-Destroys the AcceleratorTable object.
 
 h3(#AcceleratorTable_ok). AcceleratorTable#ok
 
@@ -77,25 +66,9 @@ h3(#AcceleratorTable_ok). AcceleratorTable#ok
 
 Returns true if the accelerator table is valid.
 
-h3(#AcceleratorTable_assign). AcceleratorTable#=
-
- "AcceleratorTable& ":acceleratortable& .html *operator $=$*(%(arg-type)AcceleratorTable% accel)
-
-Assignment operator. This operator does not copy any data, but instead
-passes a pointer to the data in _accel_ and increments a reference
-counter. It is a fast operation.
-
-h4. Parameters
-
-* _accel_ Accelerator table to assign.
-
-h4. Return value
-
-Returns reference to this object.
-
 h3(#AcceleratorTable_equal). AcceleratorTable#==
 
- Boolean *operator $==$*(%(arg-type)AcceleratorTable% accel)
+ Boolean *==*(%(arg-type)AcceleratorTable% accel)
 
 Equality operator. This operator tests whether the internal data pointers are
 equal (a fast test).
@@ -107,20 +80,3 @@ h4. Parameters
 h4. Return value
 
 Returns true if the accelerator tables were effectively equal, false otherwise.
-
-h3(#AcceleratorTable_notequal). AcceleratorTable#!=
-
- Boolean *operator $!=$*(%(arg-type)AcceleratorTable% accel)
-
-Inequality operator. This operator tests whether the internal data pointers are
-unequal (a fast test).
-
-h4. Parameters
-
-* _accel_ Accelerator table to compare with
-
-h4. Return value
-
-Returns true if the accelerator tables were unequal, false otherwise.
-
-
