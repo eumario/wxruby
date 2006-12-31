@@ -66,6 +66,7 @@ extern swig_class cWxActivateEvent;
 extern swig_class cWxWindowCreateEvent;
 extern swig_class cWxWindowDestroyEvent;
 extern swig_class cWxMenuEvent;
+extern swig_class cWxContextMenuEvent;
 #ifdef WXSCINTILLA
 extern swig_class cWxScintillaEvent;
 #endif
@@ -322,6 +323,12 @@ static const wxEventType *menuEvents[] =
   (const wxEventType *)0
 };
 
+static const wxEventType *contextMenuEvents[] =
+{
+  &wxEVT_CONTEXT_MENU,
+  (const wxEventType *)0
+};
+
 #ifdef WXSCINTILLA
 static const wxEventType *scintillaEvents[] =
 {
@@ -426,6 +433,8 @@ public:
             cEvent = cWxWindowDestroyEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxMenuEvent)))
             cEvent = cWxMenuEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxContextMenuEvent)))
+            cEvent = cWxContextMenuEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxSashEvent)))
             cEvent = cWxSashEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxTextUrlEvent)))
