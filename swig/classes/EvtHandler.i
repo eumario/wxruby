@@ -56,6 +56,7 @@ extern swig_class cWxGridSizeEvent;
 extern swig_class cWxGridEditorCreatedEvent;
 extern swig_class cWxTreeEvent;
 extern swig_class cWxSplitterEvent;
+extern swig_class cWxScrollEvent;
 extern swig_class cWxScrollWinEvent;
 extern swig_class cWxMoveEvent;
 extern swig_class cWxListEvent;
@@ -266,6 +267,21 @@ static const wxEventType *sashEvents[] =
     (const wxEventType *)0
 };
 
+static const wxEventType *scrollEvents[] =
+{
+  &wxEVT_SCROLL_TOP,
+  &wxEVT_SCROLL_BOTTOM,
+  &wxEVT_SCROLL_LINEUP,
+  &wxEVT_SCROLL_LINEDOWN,
+  &wxEVT_SCROLL_PAGEUP,
+  &wxEVT_SCROLL_PAGEDOWN,
+  &wxEVT_SCROLL_THUMBTRACK,
+  &wxEVT_SCROLL_THUMBRELEASE,
+  &wxEVT_SCROLL_CHANGED,
+  (const wxEventType *)0
+};
+
+
 static const wxEventType *scrollWinEvents[] =
 {
   &wxEVT_SCROLLWIN_TOP,
@@ -396,6 +412,8 @@ public:
 			cEvent = cWxMoveEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxListEvent)))
             cEvent = cWxListEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxScrollEvent)))
+            cEvent = cWxScrollEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxScrollWinEvent)))
             cEvent = cWxScrollWinEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxWizardEvent)))
@@ -1040,7 +1058,6 @@ static VALUE evt_sash_dragged_range(int argc_1, int argc_2, VALUE *argv, VALUE s
 {
     return internal_evt_with_id_range(argc_1, argc_2, argv, self, wxEVT_SASH_DRAGGED_RANGE);
 }
-
 
 static VALUE evt_scrollwin_top(int argc, VALUE *argv, VALUE self) 
 {

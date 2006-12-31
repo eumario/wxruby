@@ -1,3 +1,13 @@
+# This describes the event types known to wxRuby. It is used by
+# swig/fixevents.rb to automatically generate a set of evt_xxx methods
+# for binding events
+#
+# In each array:
+# * the first item is the name of the method that will be created
+# * the second item is the number of parameters the method expects
+# * the third item is the mapping to an wx event type constant 
+#   (see RubyEventTypes.i)
+
 $events = [
 ["EVT_TREE_END_DRAG", 2, "wxEVT_COMMAND_TREE_END_DRAG"],
 ["EVT_COMMAND_LEFT_CLICK", 2, "wxEVT_COMMAND_LEFT_CLICK"],
@@ -209,6 +219,15 @@ $events = [
 ["EVT_TIMER", 2, "wxEVT_TIMER"],
 ["EVT_CREATE", 2, "wxEVT_CREATE"],
 ["EVT_DESTROY", 2, "wxEVT_DESTROY"],
+["EVT_SCROLL", 1, "0"],
+["EVT_SCROLL_TOP", 1, "wxEVT_SCROLL_TOP"],
+["EVT_SCROLL_BOTTOM", 1, "wxEVT_SCROLL_BOTTOM"],
+["EVT_SCROLL_LINEUP", 1, "wxEVT_SCROLL_LINEUP"],
+["EVT_SCROLL_LINEDOWN", 1,"wxEVT_SCROLL_LINEDOWN"],
+["EVT_SCROLL_PAGEUP", 1, "wxEVT_SCROLL_PAGEUP"],
+["EVT_SCROLL_PAGEDOWN", 1, "wxEVT_SCROLL_PAGEDOWN"],
+["EVT_SCROLL_THUMBTRACK", 1, "wxEVT_SCROLL_THUMBTRACK"],
+["EVT_SCROLL_THUMBRELEASE", 1, "wxEVT_SCROLL_THUMBRELEASE"]
 ]
 
 if(ENV['WXSCINTILLA'])
