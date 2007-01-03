@@ -199,6 +199,7 @@ will be an Event object of the appropriate class.
 |SpinEvent|An event from wxSpinButton|
 |SplitterEvent|An event from wxSplitterWindow|
 |SysColourChangedEvent|A system colour change event|
+|TextUrlEvent|Mouse interaction with a URL in a TextCtrl|
 |TimerEvent|A timer expiration event|
 |TreeEvent|A tree control event|
 |UpdateUIEvent|A user interface update event|

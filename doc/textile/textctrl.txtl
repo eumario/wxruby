@@ -99,15 +99,21 @@ TextCtrl: ID_CUT, ID_COPY, ID_PASTE, ID_UNDO, ID_REDO. The associated UI
 update events are also processed automatically, when the control has the
 focus.
 
-To process input from a text control, use these event handler macros to
-direct input to member functions that take a
-"CommandEvent":commandevent.html argument.
+To process input from a text control, use these event handler methods to
+direct the events to a block that takes a "CommandEvent":commandevent.html
+argument.
 
 
 |*evt_text(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Respond to a EVT_COMMAND_TEXT_UPDATED event,generated when the text changes. Notice that this event will always be sentwhen the text controls contents changes - whether this is due to user input orcomes from the program itself (for example, if SetValue() is called)|
 |*evt_text_enter(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Respond to a EVT_COMMAND_TEXT_ENTER event,generated when enter is pressed in a text control (which must haveTE_PROCESS_ENTER style for this event to be generated).|
-|*evt_text_url(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A mouse event occurred over an URLin the text control (MSW and GTK2 only)|
-|*evt_text_maxlen(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|User tried to enter more textinto the control than the limit set by"set_max_length":#TextCtrl_setmaxlength.|
+|*evt_text_maxlen(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|User tried to enter more textinto the control than the limit set by "set_max_length":#TextCtrl_setmaxlength.|
+
+The following event handler works similarly for textctrls created with the
+@TE_AUTO_URL@ style, but the block will instead receive a
+"TextUrlEvent":TextUrlEvent.html with additional information about the
+URL.
+
+|*evt_text_url(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A mouse event occurred over an URL in the text control (MSW and GTK2 only)|
 
 <div id="methods">
 
