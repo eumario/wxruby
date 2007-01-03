@@ -50,23 +50,13 @@ public:
 #endif
 
 #ifdef __WXMSW__
-	#if wxMINOR_VERSION == 4
-				extern int  wxEntry(WXHINSTANCE hInstance,
-				WXHINSTANCE WXUNUSED(hPrevInstance),
-				char *lpCmdLine,
-				int nCmdShow,
-				bool enterLoop);
-			wxEntry(GetModuleHandle(NULL),0,"",true,true);
-	#else
-				extern int wxEntry(HINSTANCE hInstance,
-							HINSTANCE WXUNUSED(hPrevInstance),
-							wxCmdLineArgType WXUNUSED(pCmdLine),
-							int nCmdShow);
-			wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
-	#endif
+		extern int wxEntry(HINSTANCE hInstance,
+						   HINSTANCE WXUNUSED(hPrevInstance),
+						   wxCmdLineArgType WXUNUSED(pCmdLine),
+						   int nCmdShow);
+		wxEntry(GetModuleHandle(NULL),(HINSTANCE)0,(wxCmdLineArgType)"",(int)true);
 #elif __WXMAC__
-	wxEntry(argc,(char **)argv);
-	
+		wxEntry(argc,(char **)argv);
 #else
 		wxEntry(argc, argv);
 #endif        
@@ -105,9 +95,6 @@ public:
         printf("survived gc\n");
 #endif
 
-#if !wxCHECK_VERSION(2,5,0)
-        wxTheApp = 0;
-#endif
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
         if ( oldlog )
@@ -185,7 +172,3 @@ public:
     int main_loop();
 		
 };
-
-%extend wxRubyApp {
-
-}
