@@ -2143,7 +2143,7 @@ enum wxSashDragStatus
 
 %constant const wxSize DEFAULT_SIZE = wxDefaultSize;
 %constant const wxPoint DEFAULT_POSITION = wxDefaultPosition;
-
+%constant const wxValidator DEFAULT_VALIDATOR = wxDefaultValidator;
 
     // Text font families
 %constant int FONTFAMILY_DEFAULT =    wxDEFAULT;
