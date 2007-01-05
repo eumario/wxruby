@@ -9,6 +9,9 @@
 #include <wx/treectrl.h>
 %}
 
+// wxTreeItemId fixes - these typemaps convert them to ruby Integers
+%include "../shared/treeitemid_typemaps.i"
+
 %import "include/wxObject.h"
 %import "include/wxEvent.h"
 %import "include/wxCommandEvent.h"
