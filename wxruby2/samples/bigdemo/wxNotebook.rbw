@@ -44,7 +44,9 @@ class TestNB < Wx::Notebook
         # Show how to put an image on one of the notebook tabs,
         # first make the image list:
         il = Wx::ImageList.new(16,16)
-        il.add_icon(Wx::Icon.new("./icons/wxwin16x16.xpm"))
+        ic_file = File.join(File.dirname(__FILE__),'icons','wxwin16x16.xpm')
+        il.add_icon( Wx::Icon.new(ic_file) )
+
         assign_image_list(il)
         
         win = make_color_panel(Wx::BLUE)
