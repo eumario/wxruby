@@ -26,6 +26,8 @@
 %{
 
 extern swig_class cWxEvtHandler;
+extern "C" void Init_wxRubyStockObjects();
+
 
 class wxRubyApp : public wxApp
 {
@@ -82,11 +84,17 @@ public:
 #ifdef __WXDEBUG__	
         printf("OnInitGui after\n");
 #endif	
+		// Stock objects must not be instantiated before a wxApp has started
+		if ( result ) 
+		  Init_wxRubyStockObjects();
+
         return result;
     }
 
     virtual int OnExit()
     {
+
+
 #ifdef __WXDEBUG__    
         printf("OnExit...\n");
 #endif	

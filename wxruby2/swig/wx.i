@@ -60,7 +60,6 @@ void GcFreefunc(void *)
 }
 
 ///////////////////////////////////////////////////
-extern "C" void Init_wxRubyStockObjects();
 extern "C" void Init_wxRubyEventTypes();
 
 %} 
@@ -69,14 +68,10 @@ extern "C" void Init_wxRubyEventTypes();
 
     extern void InitializeOtherModules();
     InitializeOtherModules();
-    wxInitializeStockLists();
-    wxInitializeStockObjects();
     wxInitAllImageHandlers();
 
 	// Load the event type constants
 	Init_wxRubyEventTypes();
-	// Load the stock colours (eg Wx::RED), pens and brushes
-	Init_wxRubyStockObjects();
 
 	// This is needed so HtmlHelp can load docs from a zip file
 	wxFileSystem::AddHandler(new wxZipFSHandler);
