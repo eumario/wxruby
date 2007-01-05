@@ -1,3 +1,4 @@
+
 #   Copyright 2004-2006 by Kevin Smith
 #   released under the MIT-style wxruby2 license
 
@@ -9,7 +10,10 @@
 #include <wx/treectrl.h>
 %}
 
- // ITEM DATA fixes - This is done so the API user never sees a
+// wxTreeItemId fixes - these typemaps convert them to ruby Integers
+%include "../shared/treeitemid_typemaps.i"
+
+// ITEM DATA fixes - This is done so the API user never sees a
 // TreeItemData object - where in Wx C++ such an object
 // would be passed or returned by a method, any Ruby object may be used.
 %{
@@ -114,10 +118,9 @@ protected:
 	{
 		void* cookie = 0;
 		wxTreeItemId ret_item = self->GetFirstChild(item, cookie);
-		
 		VALUE array = rb_ary_new();			
-		VALUE ret_item_ruby = SWIG_NewPointerObj((new wxTreeItemId(static_cast< const wxTreeItemId& >(ret_item))), SWIGTYPE_p_wxTreeItemId, SWIG_POINTER_OWN |  0 );									
-		rb_ary_push(array,ret_item_ruby);	
+
+		rb_ary_push(array,LONG2NUM((long)ret_item.m_pItem)); 
 		rb_ary_push(array,LONG2NUM((long)cookie));
 			
 		return array;		
@@ -128,8 +131,8 @@ protected:
 		wxTreeItemId ret_item = self->GetNextChild(item, cookie);
 		
 		VALUE array = rb_ary_new();			
-		VALUE ret_item_ruby = SWIG_NewPointerObj((new wxTreeItemId(static_cast< const wxTreeItemId& >(ret_item))), SWIGTYPE_p_wxTreeItemId, SWIG_POINTER_OWN |  0 );									
-		rb_ary_push(array,ret_item_ruby);	
+
+		rb_ary_push(array,LONG2NUM((long)ret_item.m_pItem));	
 		rb_ary_push(array,LONG2NUM((long)cookie));
 			
 		return array;		
