@@ -138,7 +138,7 @@ class MyTreeCtrl < Wx::TreeCtrl
     @imageSize = 16
 
     # Make an image list containing small icons
-    images = Wx::ImageList.new(16, 16, true)
+    images = Wx::ImageList.new(32, 32, true)
     # should correspond to TreeCtrlIcon_xxx enum
     Wx::BusyCursor.busy do
       icons = (1 .. 5).map do | i |
@@ -157,7 +157,7 @@ class MyTreeCtrl < Wx::TreeCtrl
 
   def create_buttons_image_list()
     # Make an image list containing small icons
-    images = Wx::ImageList.new(size, size, true)
+    images = Wx::ImageList.new(16, 16, true)
 
     # should correspond to TreeCtrlIcon_xxx enum
     Wx::BusyCursor.busy do |x|
@@ -262,7 +262,7 @@ class MyTreeCtrl < Wx::TreeCtrl
     else
       id, cookie = get_next_child(parent_id, cookie)
     end
-    if not id.is_ok
+    if not id.nonzero?
       return nil
     end
 
@@ -578,12 +578,12 @@ class MyTreeCtrl < Wx::TreeCtrl
     dest_item = event.get_item()
     @dragged_item = 0
 
-    if dest_item.is_ok && ! item_has_children(dest_item)
+    if dest_item.nonzero? && ! item_has_children(dest_item)
       # copy to the parent then
       dest_item = get_item_parent(dest_item)
     end
 
-    unless dest_item.is_ok()
+    unless dest_item.nonzero?()
       Wx::log_message("OnEndDrag: can't drop here.")
       return nil
     end
@@ -662,7 +662,7 @@ class MyTreeCtrl < Wx::TreeCtrl
 
   def show_popup_menu(id, pos)
     title = ""
-    if id.is_ok
+    if id.nonzero?
       title << "Menu for " << get_item_text(id)
     else
       title = "Menu for no particular item"
@@ -973,7 +973,7 @@ class MyFrame < Wx::Frame
   end
 
   def check_item(item)
-    unless item.is_ok
+    unless item.nonzero?
       message_box("Please select some item first!",
                   "Tree sample error",
                   Wx::OK|Wx::ICON_EXCLAMATION, self)
@@ -1028,7 +1028,7 @@ class MyFrame < Wx::Frame
   def on_dump_selected(event)
     if ( @treectrl.get_window_style & Wx::TR_MULTIPLE ) == 0
       item_id = @treectrl.get_selection
-      if item_id.is_ok
+      if item_id.nonzero?
         Wx::log_message("<TreeItem '%s'>", 
                         @treectrl.get_item_text(item_id))
       else
