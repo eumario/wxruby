@@ -2145,6 +2145,17 @@ enum wxSashDragStatus
 %constant const wxPoint DEFAULT_POSITION = wxDefaultPosition;
 %constant const wxValidator DEFAULT_VALIDATOR = wxDefaultValidator;
 
+
+// 'Null' objects
+%constant wxBitmap const  NULL_BITMAP = wxNullBitmap;
+%constant wxIcon const    NULL_ICON = wxNullIcon;
+%constant wxCursor const  NULL_CURSOR = wxNullCursor;
+%constant wxPen const     NULL_PEN = wxNullPen;
+%constant wxBrush const   NULL_BRUSH = wxNullBrush;
+%constant wxPalette const NULL_PALETTE = wxNullPalette;
+%constant wxFont const    NULL_FONT = wxNullFont;
+%constant wxColour const  NULL_COLOUR = wxNullColour;
+
     // Text font families
 %constant int FONTFAMILY_DEFAULT =    wxDEFAULT;
 %constant int FONTFAMILY_DECORATIVE =     wxDECORATIVE;

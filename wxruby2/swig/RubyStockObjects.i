@@ -1,7 +1,13 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2006 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
+// These are standard Wx graphic/drawing objects. Unlike RubyConstants, 
+// objects in this file aren't loaded into ruby until AFTER app.on_init
+
+// Trying to create these kind of objects before a wxApp has started causes
+// errors on GTK. 
 %module(directors="1") wxRubyStockObjects
+
 
 %include "common.i"
 
@@ -44,16 +50,6 @@
 %constant wxColour* const   wxGREEN;
 %constant wxColour* const   wxCYAN;
 %constant wxColour* const   wxLIGHT_GREY;
-                                                                                
-#// 'Null' objects
-%constant wxBitmap const  NULL_BITMAP = wxNullBitmap;
-%constant wxIcon const    NULL_ICON = wxNullIcon;
-%constant wxCursor const  NULL_CURSOR = wxNullCursor;
-%constant wxPen const     NULL_PEN = wxNullPen;
-%constant wxBrush const   NULL_BRUSH = wxNullBrush;
-%constant wxPalette const NULL_PALETTE = wxNullPalette;
-%constant wxFont const    NULL_FONT = wxNullFont;
-%constant wxColour const  NULL_COLOUR = wxNullColour;
 
 %constant wxCursor const* wxSTANDARD_CURSOR;
 %constant wxCursor const* wxHOURGLASS_CURSOR;
