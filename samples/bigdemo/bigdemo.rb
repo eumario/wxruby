@@ -393,7 +393,7 @@ class WxRubyDemo < Wx::Frame
     
     def on_tree_sel_changed(event)
         item = event.get_item()
-        if item.is_ok
+        if item.nonzero?
           itemText = @tree.get_item_text(item)
           run_demo(itemText)
         end
