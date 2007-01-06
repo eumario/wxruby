@@ -37,6 +37,11 @@ public:
     bool operator!=(const wxIcon& icon) const { return !(*this == icon); }
 #endif
 
+// on GTK this method is inherited from Bitmap, not defined here
+#ifndef __WXGTK__
+	bool Ok() const;
+#endif
+
     // create from bitmap (which should have a mask unless it's monochrome):
     // there shouldn't be any implicit bitmap -> icon conversion (i.e. no
     // ctors, assignment operators...), but it's ok to have such function

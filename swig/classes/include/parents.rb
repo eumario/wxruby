@@ -145,7 +145,6 @@ $parents = {
     'wxHtmlWinTagHandler' => 'wxHtmlTagHandler',
     'wxHtmlWindow' => 'wxScrolledWindow',
     'wxIPV4address' => 'wxSockAddress',
-    'wxIcon' => 'wxBitmap',
     'wxIconizeEvent' => 'wxEvent',
     'wxIdleEvent' => 'wxEvent',
     'wxImage' => 'wxObject',
@@ -316,3 +315,9 @@ $parents = {
     'wxZlibInputStream' => 'wxFilterInputStream',
     'wxZlibOutputStream' => 'wxFilterOutputStream',
 }
+
+if RUBY_PLATFORM =~ /linux/
+  $parents['wxIcon'] = 'wxBitmap'
+else
+  $parents['wxIcon'] = 'wxGDIObject'
+end

@@ -11,9 +11,17 @@
 
 %import "include/wxObject.h"
 %import "include/wxGDIObject.h"
-// the following might eventually be helpful for MSWin?
+
+// inheritance pattern is slightly different across platforms
+// GTK: Icon < Bitmap < GDIOBject 
+// OS X: Icon < GDIObject
+// Windows: Icon < GDIImage < GDIObject (no public class GDIImage)
+#if defined(__WXGTK__)
+%import "include/wxBitmap.h"
+#endif
+
+// #if defined(__WXMSW__)
 // %import "include/wxGDIImage.h"
-// the following works on GTK but not MS Win
-// %import "include/wxBitmap.h"
+// #endif
 
 %include "include/wxIcon.h"
