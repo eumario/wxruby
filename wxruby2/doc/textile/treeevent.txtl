@@ -14,10 +14,8 @@ h2. Derived from
 
 h2. Event table macros
 
-To process input from a tree control, use these event handler macros to direct input to member
-functions that take a TreeEvent argument.
-
-
+To process input from a tree control, use these methods to set up event
+handler blocks that take a TreeEvent argument.
 
 |*evt_tree_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has started dragging an item with the left mouse button. The event handler must call *TreeEvent::Allow()* for the drag operation to continue.|
 |*evt_tree_begin_rdrag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has started dragging an item with the right mouse button. The event handler must call *TreeEvent::Allow()* for the drag operation to continue.|
@@ -78,7 +76,8 @@ h3(#TreeEvent_getitem). TreeEvent#get_item
 
  "TreeItemId":treeitemid.html *get_item*()
 
-Returns the item (valid for all events).
+Returns the item (valid for all events). See "TreeCtrl":treectrl.html
+for information about TreeItemIds.
 
 h3(#TreeEvent_getkeyevent). TreeEvent#get_key_event
 
