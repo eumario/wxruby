@@ -7,19 +7,20 @@ user may wish to derive a new class from this class for providing a bitmap
 on-demand in order to minimize memory consumption when offering data in several
 formats, such as a bitmap and GIF.
 
-
-
-h2. Virtual functions to override
-
-This class may be used as is, but 
-"get_bitmap":#BitmapDataObject_getbitmap may be overridden to increase
-efficiency.
-
 h2. Derived from
 
 "DataObjectSimple":dataobjectsimple.html
 
 "DataObject":dataobject.html
+
+h2. Methods
+
+<div id="methods">
+
+* "BitmapDataObject#get_bitmap":#BitmapDataObject_getbitmap
+* "BitmapDataObject#set_bitmap":#BitmapDataObject_setbitmap
+
+</div>
 
 h2. See also
 
