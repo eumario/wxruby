@@ -1,9 +1,9 @@
 h1(#wxboxsizer). Wx::BoxSizer
 
-The basic idea behind a box sizer is that windows will most often be laid out in rather
-simple basic geometry, typically in a row or a column or several hierarchies of either.
-
-For more information, please see "Programming with BoxSizer":boxsizerprogramming.html.
+Theidea behind a box sizer is that windows will most often be laid out
+in rather simple basic geometry, a row or a column, or hierarchies of
+both. BoxSizers arrange their contents as either a column or a row, and
+may be nested to create sophisticated resizeable layouts.
 
 h2. Derived from
 
@@ -15,33 +15,26 @@ h2. See also
 
 "Sizer":sizer.html, "Sizer overview":sizeroverview.html
 
+h2. Methods
+
+<div id="methods">
+
+* "BoxSizer.new":#BoxSizer_wxboxsizer
+* "BoxSizer#get_orientation":#BoxSizer_getorientation
+
+</div>
+
 h3(#BoxSizer_wxboxsizer). BoxSizer.new
 
   *BoxSizer.new*(%(arg-type)Integer% orient)
 
-Constructor for a BoxSizer. _orient_ may be either of VERTICAL
-or HORIZONTAL for creating either a column sizer or a row sizer.
-
-h3(#BoxSizer_recalcsizes). BoxSizer#recalc_sizes
-
-  *recalc_sizes*()
-
-Implements the calculation of a box sizer's dimensions and then sets
-the size of its children (calling "Window#set_size":window.html#Window_setsize 
-if the child is a window). It is used internally only and must not be called
-by the user. Documented for information.
-
-h3(#BoxSizer_calcmin). BoxSizer#calc_min
-
- "Size":size.html *calc_min*()
-
-Implements the calculation of a box sizer's minimal. It is used internally
-only and must not be called by the user. Documented for information.
+Constructor for a BoxSizer. _orient_ may be either of @Wx::VERTICAL@
+or @Wx::HORIZONTAL@ for creating either a column sizer or a row sizer.
 
 h3(#BoxSizer_getorientation). BoxSizer#get_orientation
 
  Integer *get_orientation*()
 
-Returns the orientation of the box sizer, either VERTICAL
-or HORIZONTAL.
+Returns the orientation of the box sizer, either Wx::VERTICAL
+or Wx::HORIZONTAL.
 
