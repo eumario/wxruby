@@ -76,16 +76,34 @@ h2. See also
 
 h2. Working with TreeCtrl items
 
+A TreeCtrl contains one, or more usually, many items. As well as the
+text label and parent, tree items can have several other properties,
+such as being bold or italic, and icons for expanded and collapsed states.
+
 In wxRuby, individual items (including branches) in a tree control are
-referenced by TreeItemIds. These ids are returned by methods such as
+referenced by *TreeItemIds*. These ids are returned by methods such as
 "append_item":#TreeCtrl_appenditem which add items to a tree, and by
 TreeEvents which can be queried to find which item is being acted
-upon. The ids can then be passed in as arguments to methods which modify
-items within the tree, such as "set_item_text":#TreeCtrl_setitemtext.
-As well as the text label, tree items can have several other properties,
-such as being bold, italic, and icons for expanded and collapsed
-states. TreeItemIds which may be tested for validity by calling
-TreeItemId#is_ok.
+upon. The ids are passed in as arguments to methods which modify items
+within the tree, such as "set_item_text":#TreeCtrl_setitemtext.
+
+TreeItemIds are Integers, but the number itself is an opaque identifier;
+you should not carry out arithmetic on it, or assume anything about the
+id of one item relative to another. The only useful operation that can
+be carried out on a TreeItemId is to test whether it refers to a valid
+item. If the id is equal to zero, then the id does not refer to a valid
+item. This is most useful when testing whether any item has been clicked
+as part of a "TreeEvent":treeevent.html handler; for example:
+
+ def on_tree_clicked(event)
+   if event.get_item.nonzero?
+     # .. an item was clicked, make it bold
+     set_item_bold(event.get_item)
+   else
+     # otherwise the click didn't happen over an item
+   ...
+
+h3. Associating Ruby objects with TreeCtrl items
 
 TreeCtrls can be linked to non-GUI application objects by using the
 item_data methods. Methods which add items to the tree all accept an
