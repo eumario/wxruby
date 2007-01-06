@@ -106,7 +106,7 @@ module KeywordConstructor
       :size      => Wx::DEFAULT_SIZE,
       :pos       => Wx::DEFAULT_POSITION,
       :style     => 0,
-      :validator => nil, # Should be Wx::DefaultValidator
+      :validator => Wx::DEFAULT_VALIDATOR,
       :choices   => [] # for Choice, ComboBox etc
     }
 

@@ -78,6 +78,18 @@ WxSugar.define_keyword_ctors('MiniFrame') do
 end
 
 # wxSplashScreen 	Splash screen class
+# FIXME - this probably won't work at present because the 'parent' arg
+# comes in a funny place in this class's ctor
+# 
+# WxSugar.define_keyword_ctors('SplashScreen') do
+#   wx_ctor_params :bitmap => Wx::NULL_BITMAP
+#   wx_ctor_params :splashstyle, :milliseconds, :id => 1
+#   wx_ctor_params :parent => nil
+#   wx_ctor_params :title => ''
+#   wx_ctor_params :pos, :size
+#   wx_ctor_params :style => Wx::SIMPLE_BORDER|Wx::FRAME_NO_TASKBAR|Wx::STAY_ON_TOP
+# end
+
 # wxPropertySheetDialog 	Property sheet dialog
 # wxTipWindow 	Shows text in a small window
 
@@ -255,18 +267,19 @@ end
 WxSugar.define_keyword_ctors('Button') do
   wx_ctor_params :label => ''
   wx_ctor_params :pos, :size, :style
-#  wx_ctor_params :validator, :name => 'button'
+  wx_ctor_params :validator, :name => 'button'
 end
 
 # Push button control, displaying a bitmap
 WxSugar.define_keyword_ctors('BitmapButton') do
   wx_ctor_params :bitmap, :pos, :size, :style => Wx::BU_AUTODRAW
+  wx_ctor_params :validator, :name => 'button'
 end
 
 # A button which stays pressed when clicked by user.
 WxSugar.define_keyword_ctors('ToggleButton') do
   wx_ctor_params :label, :pos, :size, :style
-  # wx_ctor_params :validator, :name => 'checkBox'
+  wx_ctor_params :validator, :name => 'checkBox'
 end
 
 # Control showing an entire calendar month
@@ -280,27 +293,27 @@ end
 WxSugar.define_keyword_ctors('CheckBox') do
   wx_ctor_params :label => ''
   wx_ctor_params :pos, :size, :style
-  # wx_ctor_params :validator => Wx::DEFAULT_VALIDATOR, :name => 'checkBox'
+  wx_ctor_params :validator, :name => 'checkBox'
 end
 
 # A listbox with a checkbox to the left of each item
 WxSugar.define_keyword_ctors('CheckListBox') do 	
   wx_ctor_params :pos, :size, :choices, :style
-  # wx_ctor_params :validator, :name => 'listBox'
+  wx_ctor_params :validator, :name => 'listBox'
 end
 
 # wxChoice 	Choice control (a combobox without the editable area)
 WxSugar.define_keyword_ctors('Choice') do
   wx_ctor_params :pos, :size, :choices, :style
-#  wx_ctor_params :validator, :name => 'choice'
+  wx_ctor_params :validator, :name => 'choice'
 end
 
 # wxComboBox 	A choice with an editable area
 WxSugar.define_keyword_ctors('ComboBox') do
   wx_ctor_params :value => ''
   wx_ctor_params :pos, :size, :choices => []
-  wx_ctor_params :style
-#  wx_ctor_params :validator, :name => 'comboBox'
+  wx_ctor_params :style 
+  wx_ctor_params :validator, :name => 'comboBox'
 end
 
 # wxDatePickerCtrl 	Small date picker control
@@ -309,7 +322,7 @@ end
 # remaining
 WxSugar.define_keyword_ctors('Gauge') do
   wx_ctor_params :range, :pos, :size, :style => Wx::GA_HORIZONTAL
-  # wx_ctor_params :validator, :name
+  wx_ctor_params :validator, :name
 end
 
 # wxGenericDirCtrl 	A control for displaying a directory tree
@@ -329,12 +342,13 @@ end
 WxSugar.define_keyword_ctors('ListBox') do
   wx_ctor_params :pos, :size, :choices => []
   wx_ctor_params :style
+  wx_ctor_params :validator, :name => 'listBox'
 end
 
 # wxListCtrl 	A control for displaying lists of strings and/or icons, plus a multicolumn report view
 WxSugar.define_keyword_ctors('ListCtrl') do
   wx_ctor_params :pos, :size, :style => Wx::LC_ICON
-#  wx_ctor_params :validator, :name => 'listCtrlNameStr'
+  wx_ctor_params :validator, :name => 'listCtrl'
 end
 
 # wxListView 	A simpler interface (facade for wxListCtrl in report mode
@@ -342,7 +356,7 @@ end
 # wxTreeCtrl 	Tree (hierarchy) control
 WxSugar.define_keyword_ctors('TreeCtrl') do
   wx_ctor_params :pos, :size, :style => Wx::TR_HAS_BUTTONS
-#  wx_ctor_params :validator, :name => 'treeCtrl'
+  wx_ctor_params :validator, :name => 'treeCtrl'
 end
 
 # wxSpinCtrl 	A spin control - i.e. spin button and text control
@@ -381,14 +395,14 @@ WxSugar.define_keyword_ctors('RadioBox') do
   wx_ctor_params :pos, :size, :choices => []
   wx_ctor_params :major_dimension => 0
   wx_ctor_params :style => Wx::RA_SPECIFY_COLS
-  #  wx_ctor_params :validator, :name => 'radioBox'
+  wx_ctor_params :validator, :name => 'radioBox'
 end
 
-# wxRadioButton 	A round button to be used with others in a mutually exclusive way
+# wxRadioButton: A round button used with others in a mutually exclusive way
 WxSugar.define_keyword_ctors('RadioButton') do
   wx_ctor_params :label => ''
   wx_ctor_params :pos, :size, :style => 0
-  #  wx_ctor_params :validator, :name => 'radioButton'
+  wx_ctor_params :validator, :name => 'radioButton'
 end
 
 # wxSlider 	A slider that can be dragged by the user
@@ -396,9 +410,8 @@ WxSugar.define_keyword_ctors('Slider') do
   wx_ctor_params :value => 0
   wx_ctor_params :min_value, :max_value
   wx_ctor_params :pos, :size, :style => Wx::SL_HORIZONTAL
-  #  wx_ctor_params :validator, :name => 'radioButton'
+  wx_ctor_params :validator, :name => 'slider'
 end
-
 
 # wxSpinButton - Has two small up and down (or left and right) arrow buttons
 WxSugar.define_keyword_ctors('SpinButton') do
@@ -412,7 +425,7 @@ end
 WxSugar.define_keyword_ctors('TextCtrl') do
   wx_ctor_params :value => ''
   wx_ctor_params :pos, :size, :style
-  # wx_ctor_params validator, :name => 'textCtrl'
+  wx_ctor_params :validator, :name => 'textCtrl'
 end
 
 # wxHtmlWindow - Control for displaying HTML
