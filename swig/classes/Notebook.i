@@ -16,6 +16,11 @@ GC_NEVER(wxNotebook)
 
 #define wxNotebookPage wxWindow
 
+// Protect panels etc added as Notebook pages from being GC'd by Ruby;
+// avoids double-free segfaults on exit on GTK
+%apply SWIGTYPE *DISOWN { wxNotebookPage* page };
+
+
 %ignore wxNotebook::wxNotebook();
 %ignore wxNotebook::OnSelChange;
 
