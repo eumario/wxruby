@@ -43,14 +43,6 @@
 %constant wxBrush* const   wxCYAN_BRUSH;
 %constant wxBrush* const   wxRED_BRUSH;
 
-%constant wxColour* const   wxBLACK;
-%constant wxColour* const   wxWHITE;
-%constant wxColour* const   wxRED;
-%constant wxColour* const   wxBLUE;
-%constant wxColour* const   wxGREEN;
-%constant wxColour* const   wxCYAN;
-%constant wxColour* const   wxLIGHT_GREY;
-
 %constant wxCursor const* wxSTANDARD_CURSOR;
 %constant wxCursor const* wxHOURGLASS_CURSOR;
-%constant wxCursor const*  wxCROSS_CURSOR;
+%constant wxCursor const* wxCROSS_CURSOR;

@@ -1,4 +1,18 @@
 class Wx::Colour
+  # Standard colours, corresponding to WxWidgets stock colours.
+  Wx::WHITE = new('White')
+  Wx::BLACK = new('Black')
+
+  Wx::RED   = new('Red')
+  Wx::GREEN = new('Green')
+  Wx::BLUE  = new('Blue')
+
+  Wx::YELLOW  = new('Yellow')
+  Wx::CYAN    = new('Cyan')
+  Wx::MAGENTA = new('Magenta')
+
+  Wx::LIGHT_GREY = new('Light Grey')
+
   # Redefine the initialize method so it raises an exception if an
   # invalid colour value is given. This might be an unknown colour
   # string (eg 'dark blue') or out-of-bounds integer values (<0 or >255)
