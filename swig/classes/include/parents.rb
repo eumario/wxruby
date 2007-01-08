@@ -210,6 +210,7 @@ $parents = {
     'wxPaintEvent' => 'wxEvent',
     'wxPalette' => 'wxGDIObject',
     'wxPanel' => 'wxWindow',
+    'wxPasswordEntryDialog' => 'wxTextEntryDialog',
     'wxPathList' => 'wxList',
     'wxPen' => 'wxGDIObject',
     'wxPlotCurve' => 'wxObject',
