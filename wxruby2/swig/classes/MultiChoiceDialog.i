@@ -18,7 +18,7 @@
   }
   else
   {
-    for (int i = 0; i < RARRAY_LEN($input); i++)
+    for (int i = 0; i < RARRAY($input)->len; i++)
     {
       int item = NUM2INT(rb_ary_entry($input,i));
       tmp.Add(item);
