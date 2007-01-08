@@ -10,7 +10,7 @@ class Wx::TreeCtrl
     block.call(start_item)
     if has_children(start_item)
       child, cookie = get_first_child(start_item)
-      while child.is_ok
+      while child.nonzero?
         traverse(child, &block)
         child = get_next_sibling(child)
       end
