@@ -7,12 +7,14 @@ shortcomings.
 
 * A few methods have innaccurate descriptions of the parameters they
 accept
-* The example code is all in C++
+* Some of the example code is still in C++
 * There are links to C++ tutorials and topic overviews that are not
-currently available in this documentation
+available - many are not relevant to wxRuby.
 
 As the wxRuby API is developed, this documentation will be updated with
-Ruby-specific information.
+Ruby-specific information. For now, you can read the "window styles
+overview":windowstyles.html for general info on window styles and wxRuby
+constants.
 
 h2(#top). Outline
 
@@ -161,7 +163,9 @@ h2(#events). Events
 
 An event object contains information about a specific event. Event
 handlers blocks may optionally receive a single block parameter, which
-will be an Event object of the appropriate class.
+will be an Event object of the appropriate class. For more information
+about events and setting up event handlers, see the 
+"event handling overview":eventhandlingoverview.html
 
 |ActivateEvent|A window or application activation event|
 |CalendarEvent|Used with wxCalendarCtrl|
@@ -405,7 +409,7 @@ h2(#misc). Miscellaneous
 |MimeTypesManager|MIME-types manager class|
 |SystemSettings|System settings class for obtaining various global parameters|
 |SystemOptions|System options class for run-time configuration|
-|AcceleratorTable|Accelerator table|
+|AcceleratorTable|Accelerator table for setting up shortcut keys|
 |AutomationObject|OLE automation class|
 |FontMapper|Font mapping, finding suitable font for given encoding|
 |EncodingConverter|Encoding conversions|
