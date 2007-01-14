@@ -48,6 +48,8 @@ public:
   long InsertItem(long  index , const wxString&  label ) ;
   long InsertItem(long  index , int  imageIndex ) ;
   long InsertItem(long  index , const wxString&  label , int  imageIndex ) ;
+  void RefreshItem(long item);
+  void RefreshItems(long itemFrom, long itemTo);
   bool ScrollList(int  dx , int  dy ) ;
   void SetBackgroundColour(const wxColour&  col ) ;
   bool SetColumn(int  col , wxListItem&  item ) ;
