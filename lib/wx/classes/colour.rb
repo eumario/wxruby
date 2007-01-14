@@ -1,18 +1,4 @@
 class Wx::Colour
-  # Standard colours, corresponding to WxWidgets stock colours.
-  Wx::WHITE = new('White')
-  Wx::BLACK = new('Black')
-
-  Wx::RED   = new('Red')
-  Wx::GREEN = new('Green')
-  Wx::BLUE  = new('Blue')
-
-  Wx::YELLOW  = new('Yellow')
-  Wx::CYAN    = new('Cyan')
-  Wx::MAGENTA = new('Magenta')
-
-  Wx::LIGHT_GREY = new('Light Grey')
-
   # Redefine the initialize method so it raises an exception if an
   # invalid colour value is given. This might be an unknown colour
   # string (eg 'dark blue') or out-of-bounds integer values (<0 or >255)
@@ -29,6 +15,20 @@ class Wx::Colour
       Kernel.raise ArgumentError, "Invalid colour values #{args.inspect}"
     end
   end
+
+  # Standard colours, corresponding to WxWidgets stock colours.
+  Wx::WHITE = new(255, 255, 255)
+  Wx::BLACK = new(0, 0, 0)
+
+  Wx::RED   = new(255, 0, 0)
+  Wx::GREEN = new(0, 255, 0)
+  Wx::BLUE  = new(0, 0, 255)
+
+  Wx::YELLOW  = new(255, 255, 0)
+  Wx::MAGENTA = new(255, 0, 255)
+  Wx::CYAN    = new(0, 255, 255)
+
+  Wx::LIGHT_GREY = new(192, 192, 192)
 
   # Colours are equal to one another if they have the same red, green
   # and blue intensity.
