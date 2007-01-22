@@ -473,6 +473,7 @@ class WxRubyDemo < Wx::Frame
     end
     
     def set_overview(name, text)
+        text ||= ''
         @curOverview = text
         @ovr.set_value(text)
         @ovr.set_style(0,text.length,Wx::TextAttr.new(Wx::BLUE, Wx::Colour.new("White"), Wx::Font.new(12, Wx::FONTFAMILY_SWISS, Wx::FONTSTYLE_NORMAL, Wx::FONTWEIGHT_BOLD)))
