@@ -25,7 +25,7 @@ public:
 void log_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogMessage(wxString(STR2CSTR(str), wxConvUTF8));
+    wxLogMessage(wxString(StringValuePtr(str), wxConvUTF8));
 
 }
 
@@ -35,11 +35,11 @@ void log_status(int argc, VALUE *argv, VALUE self)
         wxFrame *ptr;
         Data_Get_Struct(argv[0], wxFrame, ptr);
         VALUE str = rb_f_sprintf(argc-1, &argv[1]);
-        wxLogStatus(ptr,wxString(STR2CSTR(str), wxConvUTF8));
+        wxLogStatus(ptr,wxString(StringValuePtr(str), wxConvUTF8));
     }
     else {
         VALUE str = rb_f_sprintf(argc, argv);
-        wxLogStatus(wxString(STR2CSTR(str), wxConvUTF8));
+        wxLogStatus(wxString(StringValuePtr(str), wxConvUTF8));
     }
 
 }
@@ -49,7 +49,7 @@ static void
 log_warning(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(wxString(STR2CSTR(str), wxConvUTF8));
+    wxLogWarning(wxString(StringValuePtr(str), wxConvUTF8));
 }
 
 
@@ -57,7 +57,7 @@ static void
 log_error(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
-    wxLogError(wxString(STR2CSTR(str), wxConvUTF8));
+    wxLogError(wxString(StringValuePtr(str), wxConvUTF8));
 }
 
 
@@ -77,7 +77,7 @@ wx_yield(VALUE self)
 static VALUE 
 xrcid(VALUE self,VALUE str_id)  
 {
-  wxString temp(STR2CSTR(str_id), wxConvUTF8);
+  wxString temp(StringValuePtr(str_id), wxConvUTF8);
   int ret = wxXmlResource::GetXRCID(temp);
   return INT2NUM(ret);
 }
