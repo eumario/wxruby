@@ -11,7 +11,7 @@
 
 %typemap(in) unsigned char * data {
 	if(TYPE($input) == T_STRING)
-		$1 = reinterpret_cast< unsigned char * >(STR2CSTR($input));
+		$1 = reinterpret_cast< unsigned char * >(StringValuePtr($input));
 	else
 		SWIG_exception_fail(SWIG_ERROR, "in method 'set_data', expected argument of type 'string'");
 }

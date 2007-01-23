@@ -6,18 +6,18 @@
 ##############################################################
 %typemap(in) wxString& {
 	// $argnum: $1_type $1_name ($1_mangle) [$1_ltype]
-	$1 = new wxString(STR2CSTR($input), wxConvUTF8);
+	$1 = new wxString(StringValuePtr($input), wxConvUTF8);
 }
 
 %typemap(in) const wxString& {
-	$1 = new wxString(STR2CSTR($input), wxConvUTF8);
+	$1 = new wxString(StringValuePtr($input), wxConvUTF8);
 }
 
 %typemap(in) wxString* {
-	$1 = new wxString(STR2CSTR($input), wxConvUTF8);
+	$1 = new wxString(StringValuePtr($input), wxConvUTF8);
 }
 
-%typemap(directorout) wxString, wxString& "$result = wxString(STR2CSTR($input), wxConvUTF8);";
+%typemap(directorout) wxString, wxString& "$result = wxString(StringValuePtr($input), wxConvUTF8);";
 
 %include "typemaps.i"
 
@@ -118,7 +118,7 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
 
 ##############################################################
 %typemap(in) const wxChar const * {
-	$1 = new wxString(STR2CSTR($input), wxConvUTF8).c_str();
+	$1 = new wxString(StringValuePtr($input), wxConvUTF8).c_str();
 }
 
 %typemap(out) wxChar const * {
@@ -235,7 +235,8 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
     arr = new wxString[RARRAY($input)->len];
     for (int i = 0; i < RARRAY($input)->len; i++)
     {
-        arr[i] = wxString(STR2CSTR(rb_ary_entry($input,i)), wxConvUTF8);
+	  VALUE str = rb_ary_entry($input,i);
+	  arr[i] = wxString(StringValuePtr(str), wxConvUTF8);
     }
     $1 = RARRAY($input)->len;
     $2 = arr;
@@ -316,8 +317,9 @@ Needs to be fixed in fixdeleting.rb before this can be uncommented out
     
     for (int i = 0; i < RARRAY($input)->len; i++)
     {
-		wxString item(STR2CSTR(rb_ary_entry($input,i)),wxConvUTF8);
-        tmp.Add(item);
+	  VALUE str = rb_ary_entry($input, i);
+	  wxString item(StringValuePtr(str), wxConvUTF8);
+	  tmp.Add(item);
     }
     
     $1 = &tmp;
