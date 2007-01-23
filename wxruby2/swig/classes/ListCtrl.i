@@ -72,6 +72,9 @@
 	  return;
 
 	wxListCtrl* wx_lc = (wxListCtrl*) ptr;
+	if ( wx_lc->GetWindowStyle() & wxLC_VIRTUAL )
+	  return;
+
 	int count = wx_lc->GetItemCount();
 	if ( count == 0 ) return;
 
