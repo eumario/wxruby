@@ -105,6 +105,7 @@ $parents = {
     'wxGenericDirCtrl' => 'wxControl',
     'wxGenericValidator' => 'wxValidator',
     'wxGrid' => 'wxScrolledWindow',
+    'wxGridBagSizer' => 'wxFlexGridSizer',
     'wxGridCellBoolEditor' => 'wxGridCellEditor',
     'wxGridCellBoolRenderer' => 'wxGridCellRenderer',
     'wxGridCellChoiceEditor' => 'wxGridCellEditor',
