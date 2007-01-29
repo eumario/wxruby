@@ -21,7 +21,7 @@
 // this is useless method, just here to inform SWIG about the existence
 // of the wxAcceleratorEntry class, so that it creates the typed pointer
 // definition _p_wxAcceleratorEntry
-%extend wxAcceleratorTable { VALUE bogus__(wxAcceleratorEntry) { } }
+%extend wxAcceleratorTable { VALUE bogus__(wxAcceleratorEntry) { return (VALUE)0; } }
 
 
 // For constructor, accepts an array of Wx::AcceleratorEntry objects
