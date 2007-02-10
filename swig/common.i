@@ -27,6 +27,11 @@
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
 
+
+#if ! wxCHECK_VERSION(2,6,3)
+#error "wxRuby requires WxWidgets version 2.6.3"
+#endif
+
 extern void GcMarkDeleted(void *);
 extern bool GcIsDeleted(void *);
 extern void GcMapPtrToValue(void *ptr, VALUE val);
