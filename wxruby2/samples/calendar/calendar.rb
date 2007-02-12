@@ -33,14 +33,14 @@ def format_date(d)
 end
 
 class MyCalendar < CalendarCtrl
-    def initialize(parent, initial_date, calendar_flags)
+    def initialize(parent, display_frame, initial_date, calendar_flags)
         super(parent, -1, 
                     initial_date,
                     DEFAULT_POSITION,
                     DEFAULT_SIZE,
                     calendar_flags | RAISED_BORDER)
 
-        @parent = parent
+        @display = display_frame
         @date = initial_date
         @weekday_names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -54,8 +54,7 @@ class MyCalendar < CalendarCtrl
 
   def on_calendar(event)
         @date = event.get_date
-        log_message("Double-clicked #{format_date(@date)}")
-        @parent.set_date(@date)
+        @display.set_date(@date)
     end
 
   def on_calendar_change(event)
@@ -89,7 +88,7 @@ class MyFrame < Frame
         @calendar_flags = CAL_MONDAY_FIRST | CAL_SHOW_HOLIDAYS
 
         now = DateTime.now
-        @calendar = MyCalendar.new(@panel, now, @calendar_flags)
+        @calendar = MyCalendar.new(@panel, self, now, @calendar_flags)
 
         @sizer = BoxSizer.new(VERTICAL)
         configure_window
@@ -232,7 +231,7 @@ class MyFrame < Frame
         else
             style &= ~flag
         end
-      @calendar = MyCalendar.new(self, date, style)
+      @calendar = MyCalendar.new(@panel, self, date, style)
       @sizer.add(@calendar, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
       layout
     end
@@ -241,21 +240,26 @@ class MyFrame < Frame
         if on
       attr_red_circle = CalendarDateAttr.new(CAL_BORDER_ROUND, RED)
       attr_green_square = CalendarDateAttr.new(CAL_BORDER_SQUARE, GREEN)
-#     attr_header_like = CalendarDateAttr.new(BLUE, LIGHT_GREY)
+      # This wraps correctly, but causes problems because the colour is freed
+      # when the attribute is reset.
+      #
+      # attr_header_like = CalendarDateAttr.new(BLUE, LIGHT_GREY)
 
       @calendar.set_attr(17, attr_red_circle)
       @calendar.set_attr(29, attr_green_square)
-#     @calendar.set_attr(13, attr_header_like)
+      # @calendar.set_attr(13, attr_header_like)
         else
       @calendar.reset_attr(17)
       @calendar.reset_attr(29)
-      @calendar.reset_attr(13)
+      # @calendar.reset_attr(13)
         end
     @calendar.refresh()
     end
 
     def set_date(d)
-    @date.set_label(format_date(d))
+      str = "%s-%s-%s" % [ d.year, d.mon, d.day ]
+      Wx::MessageDialog.new( self, "The selected date is #{str}", 
+                             "Date chosen" ).show_modal
     end
     
 end
