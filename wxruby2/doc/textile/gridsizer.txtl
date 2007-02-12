@@ -15,6 +15,22 @@ h2. See also
 
 "Sizer":sizer.html, "Sizer overview":sizeroverview.html
 
+h2. Methods
+
+<div id="methods">
+
+* "GridSizer.new":#GridSizer_wxgridsizer
+* "GridSizer#get_cols":#GridSizer_getcols
+* "GridSizer#get_hgap":#GridSizer_gethgap
+* "GridSizer#get_rows":#GridSizer_getrows
+* "GridSizer#get_vgap":#GridSizer_getvgap
+* "GridSizer#set_cols":#GridSizer_setcols
+* "GridSizer#set_hgap":#GridSizer_sethgap
+* "GridSizer#set_rows":#GridSizer_setrows
+* "GridSizer#set_vgap":#GridSizer_setvgap
+
+</div>
+
 h3(#GridSizer_wxgridsizer). GridSizer.new
 
   *GridSizer.new*(%(arg-type)Integer% rows,  %(arg-type)Integer% cols,  %(arg-type)Integer% vgap, 
