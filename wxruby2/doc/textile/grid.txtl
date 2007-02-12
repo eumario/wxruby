@@ -12,13 +12,6 @@ examples of simple and more complex applications, explains the
 relationship between the various grid classes and has a summary of the
 keyboard shortcuts and mouse functions provided by Grid.
 
-Grid has been greatly expanded and redesigned for Widgets 2.2
-onwards. If you have been using the old Grid class you will probably
-want to have a look at the "Grid classes overview":gridoverview.html to see
-how things have changed. The new grid classes are reasonably backward-compatible
-but there are some exceptions. There are also easier ways of doing many things compared to
-the previous implementation.
-
 h2. Derived from
 
 "ScrolledWindow":scrolledwindow.html
@@ -70,47 +63,188 @@ h2. See also
 
 "Grid overview":gridoverview.html
 
-h2. Function groups
+h2. Methods
 
+<div id="methods">
 
+* "Grid.new":#Grid_new
+* "Grid#append_cols":#Grid_appendcols
+* "Grid#append_rows":#Grid_appendrows
+* "Grid#auto_size":#Grid_autosize
+* "Grid#auto_size_col_or_row":#Grid_autosizecolorrow
+* "Grid#auto_size_column":#Grid_autosizecolumn
+* "Grid#auto_size_columns":#Grid_autosizecolumns
+* "Grid#auto_size_row":#Grid_autosizerow
+* "Grid#auto_size_rows":#Grid_autosizerows
+* "Grid#begin_batch":#Grid_beginbatch
+* "Grid#block_to_device_rect":#Grid_blocktodevicerect
+* "Grid#can_drag_col_size":#Grid_candragcolsize
+* "Grid#can_drag_row_size":#Grid_candragrowsize
+* "Grid#can_drag_grid_size":#Grid_candraggridsize
+* "Grid#can_enable_cell_control":#Grid_canenablecellcontrol
+* "Grid#can_have_attributes":#Grid_canhaveattributes
+* "Grid#cell_to_rect":#Grid_celltorect
+* "Grid#clear_grid":#Grid_cleargrid
+* "Grid#clear_selection":#Grid_clearselection
+* "Grid#create_grid":#Grid_creategrid
+* "Grid#delete_cols":#Grid_deletecols
+* "Grid#delete_rows":#Grid_deleterows
+* "Grid#disable_cell_edit_control":#Grid_disablecelleditcontrol
+* "Grid#disable_drag_col_size":#Grid_disabledragcolsize
+* "Grid#disable_drag_grid_size":#Grid_disabledraggridsize
+* "Grid#disable_drag_row_size":#Grid_disabledragrowsize
+* "Grid#enable_cell_edit_control":#Grid_enablecelleditcontrol
+* "Grid#enable_drag_col_size":#Grid_enabledragcolsize
+* "Grid#enable_drag_grid_size":#Grid_enabledraggridsize
+* "Grid#enable_drag_row_size":#Grid_enabledragrowsize
+* "Grid#enable_editing":#Grid_enableediting
+* "Grid#enable_grid_lines":#Grid_enablegridlines
+* "Grid#end_batch":#Grid_endbatch
+* "Grid#fit":#Grid_fit
+* "Grid#force_refresh":#Grid_forcerefresh
+* "Grid#get_batch_count":#Grid_getbatchcount
+* "Grid#get_cell_alignment":#Grid_getcellalignment
+* "Grid#get_cell_background_colour":#Grid_getcellbackgroundcolour
+* "Grid#get_cell_editor":#Grid_getcelleditor
+* "Grid#get_cell_font":#Grid_getcellfont
+* "Grid#get_cell_renderer":#Grid_getcellrenderer
+* "Grid#get_cell_text_colour":#Grid_getcelltextcolour
+* "Grid#get_cell_value":#Grid_getcellvalue
+* "Grid#get_col_left":#Grid_getcolleft
+* "Grid#get_col_label_alignment":#Grid_getcollabelalignment
+* "Grid#get_col_label_size":#Grid_getcollabelsize
+* "Grid#get_col_label_value":#Grid_getcollabelvalue
+* "Grid#get_col_minimal_acceptable_width":#Grid_getcolminimalacceptablewidth
+* "Grid#get_col_minimal_width":#Grid_getcolminimalwidth
+* "Grid#get_col_right":#Grid_getcolright
+* "Grid#get_col_size":#Grid_getcolsize
+* "Grid#get_default_cell_alignment":#Grid_getdefaultcellalignment
+* "Grid#get_default_cell_background_colour":#Grid_getdefaultcellbackgroundcolour
+* "Grid#get_default_cell_font":#Grid_getdefaultcellfont
+* "Grid#get_default_cell_text_colour":#Grid_getdefaultcelltextcolour
+* "Grid#get_default_col_label_size":#Grid_getdefaultcollabelsize
+* "Grid#get_default_col_size":#Grid_getdefaultcolsize
+* "Grid#get_default_editor":#Grid_getdefaulteditor
+* "Grid#get_default_editor_for_cell":#Grid_getdefaulteditorforcell
+* "Grid#get_default_editor_for_type":#Grid_getdefaulteditorfortype
+* "Grid#get_default_renderer":#Grid_getdefaultrenderer
+* "Grid#get_default_renderer_for_cell":#Grid_getdefaultrendererforcell
+* "Grid#get_default_renderer_for_type":#Grid_getdefaultrendererfortype
+* "Grid#get_default_row_label_size":#Grid_getdefaultrowlabelsize
+* "Grid#get_default_row_size":#Grid_getdefaultrowsize
+* "Grid#get_grid_cursor_col":#Grid_getgridcursorcol
+* "Grid#get_grid_cursor_row":#Grid_getgridcursorrow
+* "Grid#get_grid_line_colour":#Grid_getgridlinecolour
+* "Grid#grid_lines_enabled":#Grid_gridlinesenabled
+* "Grid#get_label_background_colour":#Grid_getlabelbackgroundcolour
+* "Grid#get_label_font":#Grid_getlabelfont
+* "Grid#get_label_text_colour":#Grid_getlabeltextcolour
+* "Grid#get_number_cols":#Grid_getnumbercols
+* "Grid#get_number_rows":#Grid_getnumberrows
+* "Grid#get_or_create_cell_attr":#Grid_getorcreatecellattr
+* "Grid#get_row_minimal_acceptable_height":#Grid_getrowminimalacceptableheight
+* "Grid#get_row_minimal_height":#Grid_getrowminimalheight
+* "Grid#get_row_label_alignment":#Grid_getrowlabelalignment
+* "Grid#get_row_label_size":#Grid_getrowlabelsize
+* "Grid#get_row_label_value":#Grid_getrowlabelvalue
+* "Grid#get_row_size":#Grid_getrowsize
+* "Grid#get_scroll_line_x":#Grid_getscrolllinex
+* "Grid#get_scroll_line_y":#Grid_getscrollliney
+* "Grid#get_selection_mode":#Grid_getselectionmode
+* "Grid#get_selected_cells":#Grid_getselectedcells
+* "Grid#get_selected_cols":#Grid_getselectedcols
+* "Grid#get_selected_rows":#Grid_getselectedrows
+* "Grid#get_selection_background":#Grid_getselectionbackground
+* "Grid#get_selection_block_top_left":#Grid_getselectionblocktopleft
+* "Grid#get_selection_block_bottom_right":#Grid_getselectionblockbottomright
+* "Grid#get_selection_foreground":#Grid_getselectionforeground
+* "Grid#get_table":#Grid_gettable
+* "Grid#get_view_width":#Grid_getviewwidth
+* "Grid#hide_cell_edit_control":#Grid_hidecelleditcontrol
+* "Grid#init_col_widths":#Grid_initcolwidths
+* "Grid#init_row_heights":#Grid_initrowheights
+* "Grid#insert_cols":#Grid_insertcols
+* "Grid#insert_rows":#Grid_insertrows
+* "Grid#is_cell_edit_control_enabled":#Grid_iscelleditcontrolenabled
+* "Grid#is_current_cell_read_only":#Grid_iscurrentcellreadonly
+* "Grid#is_editable":#Grid_iseditable
+* "Grid#is_in_selection":#Grid_isinselection
+* "Grid#is_read_only":#Grid_isreadonly
+* "Grid#is_selection":#Grid_isselection
+* "Grid#is_visible":#Grid_isvisible
+* "Grid#make_cell_visible":#Grid_makecellvisible
+* "Grid#move_cursor_down":#Grid_movecursordown
+* "Grid#move_cursor_left":#Grid_movecursorleft
+* "Grid#move_cursor_right":#Grid_movecursorright
+* "Grid#move_cursor_up":#Grid_movecursorup
+* "Grid#move_cursor_down_block":#Grid_movecursordownblock
+* "Grid#move_cursor_left_block":#Grid_movecursorleftblock
+* "Grid#move_cursor_right_block":#Grid_movecursorrightblock
+* "Grid#move_cursor_up_block":#Grid_movecursorupblock
+* "Grid#move_page_down":#Grid_movepagedown
+* "Grid#move_page_up":#Grid_movepageup
+* "Grid#register_data_type":#Grid_registerdatatype
+* "Grid#save_edit_control_value":#Grid_saveeditcontrolvalue
+* "Grid#select_all":#Grid_selectall
+* "Grid#select_block":#Grid_selectblock
+* "Grid#select_col":#Grid_selectcol
+* "Grid#selection_to_device_rect":#Grid_selectiontodevicerect
+* "Grid#select_row":#Grid_selectrow
+* "Grid#set_cell_alignment":#Grid_setcellalignment
+* "Grid#set_cell_background_colour":#Grid_setcellbackgroundcolour
+* "Grid#set_cell_editor":#Grid_setcelleditor
+* "Grid#set_cell_font":#Grid_setcellfont
+* "Grid#set_cell_renderer":#Grid_setcellrenderer
+* "Grid#set_cell_text_colour":#Grid_setcelltextcolour
+* "Grid#set_cell_value":#Grid_setcellvalue
+* "Grid#set_col_attr":#Grid_setcolattr
+* "Grid#set_col_format_bool":#Grid_setcolformatbool
+* "Grid#set_col_format_number":#Grid_setcolformatnumber
+* "Grid#set_col_format_float":#Grid_setcolformatfloat
+* "Grid#set_col_format_custom":#Grid_setcolformatcustom
+* "Grid#set_col_label_alignment":#Grid_setcollabelalignment
+* "Grid#set_col_label_size":#Grid_setcollabelsize
+* "Grid#set_col_label_value":#Grid_setcollabelvalue
+* "Grid#set_col_minimal_width":#Grid_setcolminimalwidth
+* "Grid#set_col_minimal_acceptable_width":#Grid_setcolminimalacceptablewidth
+* "Grid#set_col_size":#Grid_setcolsize
+* "Grid#set_default_cell_alignment":#Grid_setdefaultcellalignment
+* "Grid#set_default_cell_background_colour":#Grid_setdefaultcellbackgroundcolour
+* "Grid#set_default_cell_font":#Grid_setdefaultcellfont
+* "Grid#set_default_cell_text_colour":#Grid_setdefaultcelltextcolour
+* "Grid#set_default_editor":#Grid_setdefaulteditor
+* "Grid#set_default_renderer":#Grid_setdefaultrenderer
+* "Grid#set_default_col_size":#Grid_setdefaultcolsize
+* "Grid#set_default_row_size":#Grid_setdefaultrowsize
+* "Grid#set_grid_cursor":#Grid_setgridcursor
+* "Grid#set_grid_line_colour":#Grid_setgridlinecolour
+* "Grid#set_label_background_colour":#Grid_setlabelbackgroundcolour
+* "Grid#set_label_font":#Grid_setlabelfont
+* "Grid#set_label_text_colour":#Grid_setlabeltextcolour
+* "Grid#set_margins":#Grid_setmargins
+* "Grid#set_or_calc_column_sizes":#Grid_setorcalccolumnsizes
+* "Grid#set_or_calc_row_sizes":#Grid_setorcalcrowsizes
+* "Grid#set_read_only":#Grid_setreadonly
+* "Grid#set_row_attr":#Grid_setrowattr
+* "Grid#set_row_label_alignment":#Grid_setrowlabelalignment
+* "Grid#set_row_label_size":#Grid_setrowlabelsize
+* "Grid#set_row_label_value":#Grid_setrowlabelvalue
+* "Grid#set_row_minimal_height":#Grid_setrowminimalheight
+* "Grid#set_row_minimal_acceptable_height":#Grid_setrowminimalacceptableheight
+* "Grid#set_row_size":#Grid_setrowsize
+* "Grid#set_scroll_line_x":#Grid_setscrolllinex
+* "Grid#set_scroll_line_y":#Grid_setscrollliney
+* "Grid#set_selection_background":#Grid_setselectionbackground
+* "Grid#set_selection_foreground":#Grid_setselectionforeground
+* "Grid#set_selection_mode":#Grid_setselectionmode
+* "Grid#set_table":#Grid_settable
+* "Grid#show_cell_edit_control":#Grid_showcelleditcontrol
+* "Grid#xto_col":#Grid_xtocol
+* "Grid#xto_edge_of_col":#Grid_xtoedgeofcol
+* "Grid#yto_edge_of_row":#Grid_ytoedgeofrow
+* "Grid#yto_row":#Grid_ytorow
 
-h3(#Grid_constructors). Constructors and initialization
-
-"Grid":gridctor.html
-
-"DESTRUCTOR":griddtor.html
-
-"create_grid":#Grid_creategrid
-
-"set_table":#Grid_settable
-
-
-
-h3(#Grid_displayformat). Display format
-
-
-
-h3(#Grid_selectionfunctions). Selection functions
-
-"Grid#clear_selection":grid.html#Grid_clearselection
-
-"Grid#is_selection":grid.html#Grid_isselection
-
-"Grid#select_all":grid.html#Grid_selectall
-
-"Grid#select_block":grid.html#Grid_selectblock
-
-"Grid#select_col":grid.html#Grid_selectcol
-
-"Grid#select_row":grid.html#Grid_selectrow
-
-2
-
-h4. Members
-
-
-
-
+</div>
 
 h3(#Grid_new). Grid.new
 
