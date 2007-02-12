@@ -14,7 +14,9 @@ initialization is needed.
 *Unix:* MIME type information is stored in the files mailcap and mime.types
 (system-wide) and .mailcap and .mime.types in the current user's home directory:
 all of these files can be searched for and loaded (disabled by default). However,
-additional functions 
+
+h2. Additional Functions 
+
 "MimeTypesManager#read_mailcap":mimetypesmanager.html#MimeTypesManager_readmailcap and 
 "MimeTypesManager#read_mime_types":mimetypesmanager.html#MimeTypesManager_readmimetypes are
 provided to load additional files.
@@ -63,8 +65,6 @@ program.
 
 "MimeTypesManager":mimetypesmanagerctor.html
 
-"DESTRUCTOR":mimetypesmanagerdtor.html
-
 h3(#mimequerydatabase). Query database
 
 These functions are the heart of this class: they allow to find a "file type":filetype.html object
@@ -73,7 +73,6 @@ If the function is successful, it returns a pointer to the FileType object
 which *must* be deleted by the caller, otherwise NULL will be returned.
 
 "get_file_type_from_mime_type":#MimeTypesManager_getfiletypefrommimetype
-
 "get_file_type_from_extension":#MimeTypesManager_getfiletypefromextension
 
 h3(#MimeTypesManager_init). Initialization functions
@@ -83,22 +82,8 @@ default ones which are loaded automatically) containing MIME
 information in either mailcap(5) or mime.types(5) format.
 
 "read_mailcap":#MimeTypesManager_readmailcap
-
 "read_mime_types":#MimeTypesManager_readmimetypes
-
 "add_fallbacks":#MimeTypesManager_addfallbacks
-
-2
-
-h4. Members
-
-
-
-h3(#MimeTypesManager_new). MimeTypesManager.new
-
-  *destructor*()
-
-Destructor is not virtual, so this class should not be derived from.
 
 h3(#MimeTypesManager_addfallbacks). MimeTypesManager#add_fallbacks
 
