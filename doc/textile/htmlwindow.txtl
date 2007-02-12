@@ -32,6 +32,44 @@ h2. Window styles
 |@HW_SCROLLBAR_AUTO@|Display scrollbars only ifpage's size exceeds window's size.|
 |@HW_NO_SELECTION@|Don't allow the user to selecttext.|
 
+h2. Methods
+
+<div id="methods">
+
+* "HtmlWindow.new":#HtmlWindow_wxhtmlwindow
+* "HtmlWindow#add_filter":#HtmlWindow_addfilter
+* "HtmlWindow#append_to_page":#HtmlWindow_appendtopage
+* "HtmlWindow#get_internal_representation":#HtmlWindow_getinternalrepresentation
+* "HtmlWindow#get_opened_anchor":#HtmlWindow_getopenedanchor
+* "HtmlWindow#get_opened_page":#HtmlWindow_getopenedpage
+* "HtmlWindow#get_opened_page_title":#HtmlWindow_getopenedpagetitle
+* "HtmlWindow#get_related_frame":#HtmlWindow_getrelatedframe
+* "HtmlWindow#history_back":#HtmlWindow_historyback
+* "HtmlWindow#history_can_back":#HtmlWindow_historycanback
+* "HtmlWindow#history_can_forward":#HtmlWindow_historycanforward
+* "HtmlWindow#history_clear":#HtmlWindow_historyclear
+* "HtmlWindow#history_forward":#HtmlWindow_historyforward
+* "HtmlWindow#load_file":#HtmlWindow_loadfile
+* "HtmlWindow#load_page":#HtmlWindow_loadpage
+* "HtmlWindow#on_cell_clicked":#HtmlWindow_oncellclicked
+* "HtmlWindow#on_cell_mouse_hover":#HtmlWindow_oncellmousehover
+* "HtmlWindow#on_link_clicked":#HtmlWindow_onlinkclicked
+* "HtmlWindow#on_opening_url":#HtmlWindow_onopeningurl
+* "HtmlWindow#on_set_title":#HtmlWindow_onsettitle
+* "HtmlWindow#read_customization":#HtmlWindow_readcustomization
+* "HtmlWindow#select_all":#HtmlWindow_selectall
+* "HtmlWindow#selection_to_text":#HtmlWindow_selectiontotext
+* "HtmlWindow#select_line":#HtmlWindow_selectline
+* "HtmlWindow#select_word":#HtmlWindow_selectword
+* "HtmlWindow#set_borders":#HtmlWindow_setborders
+* "HtmlWindow#set_fonts":#HtmlWindow_setfonts
+* "HtmlWindow#set_page":#HtmlWindow_setpage
+* "HtmlWindow#set_related_frame":#HtmlWindow_setrelatedframe
+* "HtmlWindow#set_related_status_bar":#HtmlWindow_setrelatedstatusbar
+* "HtmlWindow#to_text":#HtmlWindow_totext
+* "HtmlWindow#write_customization":#HtmlWindow_writecustomization
+
+</div>
 
 h3(#HtmlWindow_wxhtmlwindow). HtmlWindow.new
 
