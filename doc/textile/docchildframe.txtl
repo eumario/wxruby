@@ -19,21 +19,22 @@ h2. Derived from
 
 "Object":object.html
 
+h2. Methods
+
+<div id="methods">
+* "DocChildFrame.new":#DocChildFrame_new
+* "DocChildFrame#get_document":#DocChildFrame_getdocument
+* "DocChildFrame#get_view":#DocChildFrame_getview
+* "DocChildFrame#on_activate":#DocChildFrame_onactivate
+* "DocChildFrame#on_close_window":#DocChildFrame_onclosewindow
+* "DocChildFrame#set_document":#DocChildFrame_setdocument
+* "DocChildFrame#set_view":#DocChildFrame_setview
+
+</div>
+
 h2. See also
 
 "Document/view overview":docviewoverview.html, "Frame":frame.html
-
-h3(#DocChildFrame_mchilddocument). DocChildFrame#m__child_document
-
-Document*m_childDocument
-
-The document associated with the frame.
-
-h3(#DocChildFrame_mchildview). DocChildFrame#m__child_view
-
-View*m_childView
-
-The view associated with the frame.
 
 h3(#DocChildFrame_new). DocChildFrame.new
 
@@ -46,10 +47,6 @@ h3(#DocChildFrame_new). DocChildFrame.new
                     %(arg-type)String% name = "frame")
 
 Constructor.
-
-  *destructor*()
-
-Destructor.
 
 h3(#DocChildFrame_getdocument). DocChildFrame#get_document
 
