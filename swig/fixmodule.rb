@@ -77,8 +77,8 @@ puts("class #{wx_name}")
 							 "  }";
 			  end
 
-				if(line.index("char* type_name = RSTRING(value)->ptr;"))
-					line = "        const char* type_name = (value == Qnil) ? \"\" : RSTRING(value)->ptr;\n";
+				if line =~ /char\* type_name = (RSTRING\(value\)->ptr|RSTRING_PTR\(value\));/
+					line = ""
 				end
 				# Patch submitted for SWIG 1.3.30
 				if(line.index("if (strcmp(type->name, type_name) == 0) {"))
