@@ -191,7 +191,7 @@ class MyPanel < Panel
     def initialize(frame,x,y,w,h)
         super( frame, -1, Point.new(x, y), Size.new(w, h) )
 
-        @s_colOld = Colour.new
+        @s_colOld = NULL_COLOUR
 
         @m_text = TextCtrl.new(self, -1, "This is the log window.\n",
                                 Point.new(0, 250), Size.new(100, 50), TE_MULTILINE)
