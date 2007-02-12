@@ -27,6 +27,20 @@ h2. See also
 
 "Sizer":sizer.html, "Sizer overview":sizeroverview.html, "Dialog#create_button_sizer":dialog.html#Dialog_createbuttonsizer
 
+
+h2. Methods
+
+<div id="methods">
+
+* "StdDialogButtonSizer.new":#StdDialogButtonSizer_new
+* "StdDialogButtonSizer#add_button":#StdDialogButtonSizer_addbutton
+* "StdDialogButtonSizer#realize":#StdDialogButtonSizer_realize
+* "StdDialogButtonSizer#set_affirmative_button":#StdDialogButtonSizer_setaffirmativebutton
+* "StdDialogButtonSizer#set_cancel_button":#StdDialogButtonSizer_setcancelbutton
+* "StdDialogButtonSizer#set_negative_button":#StdDialogButtonSizer_setnegativebutton
+
+</div>
+
 h3(#StdDialogButtonSizer_new). StdDialogButtonSizer.new
 
 h3(#StdDialogButtonSizer_addbutton). StdDialogButtonSizer#add_button
