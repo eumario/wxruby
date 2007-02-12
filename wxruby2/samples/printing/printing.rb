@@ -101,9 +101,11 @@ class MyFrame < Wx::Frame
 
     # Load icon
     if Wx::PLATFORM == "WXMSW"
-      my_icon = Wx::Icon.new("mondrian.ico",Wx::BITMAP_TYPE_ICO)
+      icon_file = File.join(File.dirname(__FILE__), 'mondrian.ico')
+      my_icon = Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_ICO)
     else
-      my_icon = Wx::Icon.new("mondrian.xpm",Wx::BITMAP_TYPE_XPM)
+      icon_file = File.join(File.dirname(__FILE__), 'mondrian.xpm')
+      my_icon = Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_XPM)
     end
 
     dc.draw_icon( my_icon, 100, 100)
@@ -411,9 +413,11 @@ class MyApp < Wx::App
 
     # Load icon and bitmap
     if Wx::PLATFORM == "WXMSW"
-      @frame.set_icon( Wx::Icon.new("mondrian.ico",Wx::BITMAP_TYPE_ICO) )
+      icon_file = File.join(File.dirname(__FILE__), 'mondrian.ico')
+      @frame.set_icon( Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_ICO) )
     else
-      @frame.set_icon( Wx::Icon.new("mondrian.xpm",Wx::BITMAP_TYPE_XPM) )
+      icon_file = File.join(File.dirname(__FILE__), 'mondrian.xpm')
+      @frame.set_icon( Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_XPM) )
     end    
 
     # Make a menubar
