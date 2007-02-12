@@ -9,6 +9,22 @@ This is where SizerFlags comes in.  Instead of a bunch of flags and other stuff,
 Note that by specification, all methods of SizerFlags return the SizerFlags object itself to ease the calling of multiple methods at a time.
 
 
+h2. Methods
+
+<div id="methods">
+
+* "SizerFlags.new":#SizerFlags_new
+* "SizerFlags#align":#SizerFlags_align
+* "SizerFlags#border":#SizerFlags_border
+* "SizerFlags#center":#SizerFlags_center
+* "SizerFlags#centre":#SizerFlags_centre
+* "SizerFlags#expand":#SizerFlags_expand
+* "SizerFlags#left":#SizerFlags_left
+* "SizerFlags#proportion":#SizerFlags_proportion
+* "SizerFlags#right":#SizerFlags_right
+
+</div>
+
 h3(#SizerFlags_new). SizerFlags.new
 
   *SizerFlags.new*(%(arg-type)Integer% proportion = 0)
