@@ -1,7 +1,5 @@
-// wxGridCellAttr.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxGridCellAttr_h_)
 #define _wxGridCellAttr_h_
@@ -19,11 +17,7 @@ public:
         Merged
     };
 
-    // ctors
-    //wxGridCellAttr(wxGridCellAttr *attrDefault = NULL);
-
-    // VZ: considering the number of members wxGridCellAttr has now, this ctor
-    //     seems to be pretty useless... may be we should just remove it?
+    wxGridCellAttr();
     wxGridCellAttr(const wxColour& colText,
                    const wxColour& colBack,
                    const wxFont& font,
