@@ -1,5 +1,5 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 %include "../common.i"
 
@@ -9,8 +9,11 @@
 #include <wx/grid.h>
 %}
 
-#This is to get arround SWIG trying to call a protected destructor
-%nodefault wxGridCellAttr;
+%apply SWIGTYPE *DISOWN { wxGridCellEditor* editor };
+%apply SWIGTYPE *DISOWN { wxGridCellRenderer* renderer };
+
+// This is to get arround SWIG trying to call a protected destructor
+%nodefaultdtor wxGridCellAttr;
 
 %include "include/wxGridCellAttr.h"
 
