@@ -301,14 +301,13 @@ class MyPrintout < Wx::Printout
     # but in fact is too small for some reason. This is a detail that will
     # need to be addressed at some point but can be fudged for the
     # moment.
-    scale = (ppi_printer_x/ppi_screen_x)
+    scale = ( ppi_printer_x.to_f / ppi_screen_x.to_f )
 
     # Now we have to check in case our real page size is reduced
     # (e.g. because we're drawing to a print preview memory DC)
     page_width, page_height = get_page_size_pixels
     w, h = dc.get_size
     
-
     # If printer pageWidth == current DC width, then this doesn't
     # change. But w might be the preview bitmap width, so scale down.
     overall_scale = scale * (w/page_width)
@@ -391,8 +390,8 @@ class MyPrintout < Wx::Printout
     dc.draw_text(text, x_pos.to_i, top_margin_logical)
 
     dc.set_pen(Wx::BLACK_PEN)
-    dc.draw_line( left_margin_logical, (top_margin_logical+y_extent).to_i,
-                  right_margin_logical, (top_margin_logical+yExtent).to_i )
+    dc.draw_line( left_margin_logical, (top_margin_logical + y_extent).to_i,
+                  right_margin_logical, (top_margin_logical + y_extent).to_i )
 
     return true
   end  
