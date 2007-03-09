@@ -38,9 +38,6 @@ Visible Bugs
 
 - Truncation/missing widgets in bigdemo (OS X)
 
-- Caret sample not working with unicode builds, need to fix
-  KeyEvent#get_unicode _key (OS X)
-
 Underlying SWIG & Build system problems
 ---------------------------------------
 
@@ -51,9 +48,6 @@ Underlying SWIG & Build system problems
 - Get all the methods that return objects (instead of object pointers)
   to work
   
-- Make sure we return an existing Ruby object whenever a wrapped wx object
-  is returned
-  
 - Rename Events.i to avoid confusion with swig/classes/Event.i.
 
 - Fix all "can't return" warnings for non-pointer objects
@@ -61,7 +55,8 @@ Underlying SWIG & Build system problems
 - Add detection of "initialize" methods to renamer.rb, and
   rename them to "init"
 
-- Add classes that were supported in wxruby 0.6.0
+- Add classes that were supported in wxruby 0.6.0 - now only DataObject
+  and DataFormat classes remain to be added
 
 - Try to get rid of compile warnings
 
