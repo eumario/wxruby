@@ -1,3 +1,4 @@
+=== 0.0.39 tag on 2007-03-12 included all of this: ===
 - Added grid sample (Alex Fenton)
 - Fix GC-related segfaults related to GridCellAttr and GridCellEditor (Alex Fenton)
 - Fix numerous crashes caused by regression from SWIG upgrade (Alex Fenton)
