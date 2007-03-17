@@ -33,7 +33,31 @@ File.open(ARGV[0], "a") do | out |
 			end
 		end
 		next if exclude	
+        if(evt[0]=="EVT_MOUSE_EVENTS")
+		out.puts "#ifdef __WXMSW__" if windows
+		
+		out.puts <<FUNC_DEF
+static VALUE evt_mouse_events(int argc, VALUE *argv, VALUE self)
+{
+    evt_left_down(argc,argv,self);
+    evt_left_up(argc,argv,self);
+    evt_middle_down(argc,argv,self);
+    evt_middle_up(argc,argv,self);
+    evt_right_down(argc,argv,self);
+    evt_right_up(argc,argv,self);
+    evt_motion(argc,argv,self);
+    evt_left_dclick(argc,argv,self);
+    evt_middle_dclick(argc,argv,self);
+    evt_right_dclick(argc,argv,self);
+    evt_leave_window(argc,argv,self);
+    evt_enter_window(argc,argv,self);
+    return evt_mousewheel(argc,argv,self);
+}
+FUNC_DEF
 
+		out.puts "#endif //__WXMSW__" if windows
+        next
+        end
 		func = ""
 		case evt[1]
 		when 1
