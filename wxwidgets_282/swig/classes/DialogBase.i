@@ -3,12 +3,11 @@
 
 %include "../common.i"
 
-%module(directors="1") wxDialog
+%module(directors="1") wxDialogBase
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
 %import "include/wxTopLevelWindow.h"
-%import "include/wxDialogBase.h"
 
-%include "include/wxDialog.h"
+%include "include/wxDialogBase.h"

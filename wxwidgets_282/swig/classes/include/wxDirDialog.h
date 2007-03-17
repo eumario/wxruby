@@ -36,15 +36,6 @@ the dialog.
 	*/
 
   wxString GetMessage() const;
-	/**
-	 * \brief Returns the dialog style. 
-	*/
-
-  long GetStyle() const;
-	/**
-	 * \brief Sets the message that will be displayed on the dialog. 
-	 * \param const wxString&   
-	*/
 
   void SetMessage(const wxString&  message ) ;
 	/**
@@ -53,12 +44,6 @@ the dialog.
 	*/
 
   void SetPath(const wxString&  path ) ;
-	/**
-	 * \brief Sets the dialog style. This is currently unused. 
-	 * \param long   
-	*/
-
-  void SetStyle(long  style ) ;
 	/**
 	 * \brief Shows the dialog, returning wxID_OK if the user pressed OK, and wxOK_CANCEL
 otherwise. 

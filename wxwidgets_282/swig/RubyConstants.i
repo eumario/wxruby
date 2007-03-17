@@ -47,6 +47,7 @@
 //  ---------------------------------------------------------------------------- 
 
 //  Not all platforms are currently available or supported 
+/*
 enum
 {
     wxUNKNOWN_PLATFORM,
@@ -85,6 +86,7 @@ enum
     wxPALMOS,                 // PalmOS
     wxDOS                     // wxBase under MS-DOS
 };
+*/
 
 enum {  wxDefaultCoord = -1 };
 

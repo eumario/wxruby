@@ -365,8 +365,8 @@ public:
         // Only for internal use right now, but should probably be public
     wxTreeItemId GetNext(const wxTreeItemId& item) const;
 	bool HasChildren(const wxTreeItemId& item) const;
-        // expand this item and all subitems recursively
-    void ExpandAll(const wxTreeItemId& item);	
+    void ExpandAll();
+    void ExpandAllChildren(const wxTreeItemId& item);	
     void AdjustMyScrollbars();
     void Edit( const wxTreeItemId& item );
     void OnSetFocus( wxFocusEvent &event );
@@ -374,7 +374,7 @@ public:
     void OnChar( wxKeyEvent &event );
     void OnMouse( wxMouseEvent &event );
     void OnGetToolTip( wxTreeEvent &event );
-    virtual wxSize DoGetBestSize() const;
+    // virtual wxSize DoGetBestSize() const;
 #endif
 };
 

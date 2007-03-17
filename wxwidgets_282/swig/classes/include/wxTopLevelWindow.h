@@ -14,6 +14,20 @@ public:
 
     // top level wnd state
     // --------------------
+    /**
+    * \brief Returns a pointer to the button which is the default for this window, or NULL.
+    The default button is the one activated by pressing the Enter key. 
+    */
+
+    wxWindow* GetDefaultItem() const;
+    /**
+    * \brief Changes the default item for the panel. 
+    * \param wxWindow   
+    */
+
+    void SetDefaultItem(wxWindow *btn ) ;
+    virtual wxString GetTitle() const;
+    virtual void SetTitle(const wxString&  title ) ;
 
     // maximize = true => maximize, otherwise - restore
     virtual void Maximize(bool maximize = true) = 0;

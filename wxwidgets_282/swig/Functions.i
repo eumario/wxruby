@@ -125,7 +125,7 @@ void wxSetWorkingDirectory(const wxString &);
 
 size_t wxGetMultipleChoices(wxArrayInt& selections,const wxString& message,const wxString& caption,int n, const wxString choices[],wxWindow *parent = NULL,int x = -1, int y = -1,bool centre = TRUE,int width=150, int height=200);
 
-long wxGetNumberFromUser(  const wxString& message,  const wxString& prompt,  const wxString& caption,  long value,  long min = 0,  long max = 100,  wxWindow *parent = NULL,  const wxPoint& pos = wxDefaultPosition);
+//long wxGetNumberFromUser(  const wxString& message,  const wxString& prompt,  const wxString& caption,  long value,  long min = 0,  long max = 100,  wxWindow *parent = NULL,  const wxPoint& pos = wxDefaultPosition);
 
 wxString wxGetTextFromUser(const wxString& message, const wxString& caption = wxT("Input text"),
 const wxString& default_value = wxT(""), wxWindow *parent = NULL);

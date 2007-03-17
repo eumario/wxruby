@@ -86,7 +86,7 @@ public:
 #endif	
 		// Stock objects must not be instantiated before a wxApp has started
 		if ( result ) 
-		  Init_wxRubyStockObjects();
+		  //		  Init_wxRubyStockObjects();
 
         return result;
     }
@@ -142,7 +142,7 @@ public:
    wxRubyApp() ;
   virtual  ~wxApp() ;
   void Dispatch() ;
-  int FilterEvent(wxEvent&  event ) ;
+  virtual int FilterEvent(wxEvent&  event ) ;
   wxString GetAppName() const;
   bool GetAuto3D() const;
   wxString GetClassName() const;

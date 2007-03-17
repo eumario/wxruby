@@ -18,7 +18,7 @@ public:
   virtual int FindString(const wxString&  string )  = 0;
   virtual void * GetClientData(int  n ) const = 0;
   virtual wxClientData * GetClientObject(int  n ) const = 0;
-  virtual int GetCount() const = 0;
+  virtual unsigned int GetCount() const = 0;
   virtual int GetSelection() const = 0;
   virtual wxString GetString(int  n ) const = 0;
   virtual wxString GetStringSelection() const = 0;

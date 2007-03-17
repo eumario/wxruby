@@ -5,6 +5,7 @@
 
 #if !defined(_wxWindow_h_)
 #define _wxWindow_h_
+
 class wxWindow : public wxEvtHandler
 {
 public:
@@ -19,12 +20,13 @@ public:
 
   virtual void AddChild(wxWindow*  child ) ;
   void CaptureMouse() ;
+
   void Center(int  direction ) ;
-  void CenterOnParent(int  direction ) ;
-  void CenterOnScreen(int  direction ) ;
   void Centre(int direction = wxBOTH) ;
+
+  void CenterOnParent(int  direction ) ;
   void CentreOnParent(int direction = wxBOTH) ;
-  void CentreOnScreen(int direction = wxBOTH) ;
+
   void ClientToScreen(int*  x_INOUT , int*  y_INOUT ) const;
   wxPoint ClientToScreen(const wxPoint&  pt ) const;
   bool Close(bool force = false) ;
@@ -47,7 +49,7 @@ public:
   virtual void FitInside() ;
   virtual void Freeze() ;
   //wxAccessible* GetAccessible();
-  wxSize GetAdjustedBestSize() const;
+  wxSize GetEffectiveMinSize() const;
   wxColour GetBackgroundColour() const;
   wxSize GetBestSize() const;
   wxCaret * GetCaret() const;
@@ -81,7 +83,6 @@ public:
   wxSize GetSize() const;
   wxSizer * GetSizer() const;
   virtual void GetTextExtent(const wxString&  string , int * x , int * y , int * descent = NULL, int * externalLeading = NULL, wxFont * font = NULL) const;
-  virtual wxString GetTitle() ;
   wxToolTip* GetToolTip() const;
   wxRegion GetUpdateRegion() const;
   wxValidator* GetValidator();
@@ -170,7 +171,6 @@ public:
                        const wxSize& incSize=wxDefaultSize);
   void SetSizer(wxSizer*  sizer , bool  deleteOld = true) ;
   void SetSizerAndFit(wxSizer*  sizer , bool  deleteOld = true) ;
-  virtual void SetTitle(const wxString&  title ) ;
   virtual void SetThemeEnabled(bool  enable ) ;
   virtual void SetValidator(const wxValidator&  validator ) ;
   void SetToolTip(const wxString&  tip ) ;

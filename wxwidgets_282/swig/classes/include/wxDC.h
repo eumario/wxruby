@@ -61,7 +61,7 @@ public:
   const wxFont& GetFont() const;
   int GetLogicalFunction() ;
   int GetMapMode() ;
-  bool GetOptimization() ;
+//  bool GetOptimization() ;
   //wxPen& GetPen();
   const wxPen& GetPen() const;
   virtual bool GetPixel(wxCoord  x , wxCoord  y , wxColour * colour )  = 0;
@@ -100,7 +100,7 @@ public:
   virtual void SetFont(const wxFont&  font )  = 0;
   virtual void SetLogicalFunction(int  function )  = 0;
   void SetMapMode(int  int ) ;
-  void SetOptimization(bool  optimize ) ;
+//  void SetOptimization(bool  optimize ) ;
   virtual void SetPen(const wxPen&  pen )  = 0;
   void SetTextBackground(const wxColour&  colour ) ;
   void SetTextForeground(const wxColour&  colour ) ;

@@ -43,7 +43,7 @@ The default value is true.
 The default value is black. 
 	*/
 
-  wxColour& GetColour() ;
+  const wxColour& GetColour() ;
 	/**
 	 * \brief Gets the font chosen by the user. If the user pressed OK (wxFontDialog::Show returned true), this returns
 a new font which is now `owned' by the application, and should be deleted

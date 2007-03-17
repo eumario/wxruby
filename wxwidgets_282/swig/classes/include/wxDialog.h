@@ -5,7 +5,7 @@
 
 #if !defined(_wxDialog_h_)
 #define _wxDialog_h_
-class wxDialog : public wxTopLevelWindow
+class wxDialog : public wxDialogBase
 {
 public:
 	/**
@@ -94,25 +94,25 @@ before they are processed by child windows.
 	 * \param wxCommandEvent&   
 	*/
 
-  virtual void OnApply(wxCommandEvent&  event ) ;
+  //virtual void OnApply(wxCommandEvent&  event ) ;
 	/**
 	 * \brief  
 	 * \param wxCommandEvent&   
 	*/
 
-  virtual void OnCancel(wxCommandEvent&  event ) ;
+  //virtual void OnCancel(wxCommandEvent&  event ) ;
 	/**
 	 * \brief  
 	 * \param wxCommandEvent&   
 	*/
 
-  virtual void OnOK(wxCommandEvent&  event ) ;
+  //virtual void OnOK(wxCommandEvent&  event ) ;
 	/**
 	 * \brief The default handler for wxEVT_SYS_COLOUR_CHANGED. 
 	 * \param wxSysColourChangedEvent&   
 	*/
 
-  virtual void OnSysColourChanged(wxSysColourChangedEvent&  event ) ;
+  //virtual void OnSysColourChanged(wxSysColourChangedEvent&  event ) ;
 	/**
 	 * \brief Sets the icon for this dialog.
 
@@ -137,16 +137,6 @@ See also  .
 	*/
 
   void SetIcons(const wxIconBundle&  icons ) ;
-	/**
-	 * \brief This function is deprecated and doesn't work for all ports, just use 
-  to show a modal dialog instead.
-
-Allows the programmer to specify whether the dialog box is modal (wxDialog::Show blocks control
-until the dialog is hidden) or modeless (control returns immediately). 
-	 * \param const bool  
-	*/
-
-  void SetModal(const bool  flag ) ;
 	/**
 	 * \brief  
 	 * \param int   

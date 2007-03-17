@@ -46,3 +46,4 @@
 %constant wxCursor const* wxSTANDARD_CURSOR;
 %constant wxCursor const* wxHOURGLASS_CURSOR;
 %constant wxCursor const* wxCROSS_CURSOR;
+

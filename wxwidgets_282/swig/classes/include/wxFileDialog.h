@@ -10,23 +10,6 @@ class wxFileDialog : public wxDialog
 public:
 	/**
 	 * \brief Constructor. Use   to show the dialog.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   Previous versions of wxWindows used   by default
 under MS Windows which allowed the program to simply remember the last
 directory where user selected the files to open/save. This (desired)
@@ -97,11 +80,6 @@ use   for the others.
 
   void GetPaths(wxArrayString&  paths ) const;
 	/**
-	 * \brief Returns the dialog style. 
-	*/
-
-  long GetStyle() const;
-	/**
 	 * \brief Returns the file dialog wildcard. 
 	*/
 
@@ -136,12 +114,6 @@ use   for the others.
 	*/
 
   void SetPath(const wxString&  path ) ;
-	/**
-	 * \brief Sets the dialog style. See   for details. 
-	 * \param long   
-	*/
-
-  void SetStyle(long  style ) ;
 	/**
 	 * \brief Sets the wildcard, which can contain multiple file types, for example:
 
