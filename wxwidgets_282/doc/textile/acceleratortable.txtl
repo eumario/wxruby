@@ -1,0 +1,82 @@
+h1(#wxacceleratortable). Wx::AcceleratorTable
+
+An accelerator table allows the application to specify a table of
+keyboard shortcuts for menus or other commands. On Windows, menu or
+button commands are supported; on GTK (and OS X?), only menu commands
+are supported.
+
+The object *NullAcceleratorTable* is defined to be a table with no data,
+and is the initial accelerator table for a window.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Example
+
+This example shows how to create an accelerator table with three
+shortcut key entries. Note the use of the ruby method String[0] to
+retrieve the integer keycode corresponding to an alphanumeric key,
+and the use of the Wx::K_XXX constant to get the keycode for a
+non-alphanumeric key.
+
+  entries = [ Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, 'N'[0], 
+                                       ID_NEW_WINDOW),
+              Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, 'X'[0], 
+                                       Wx::ID_EXIT),
+              Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, Wx::K_DELETE, 
+                                       Wx::ID_CUT) ]
+  table	= Wx::AcceleratorTable.new(entries)
+  frame.set_accelerator_table(table)
+ 
+h2. Remarks
+
+An accelerator takes precedence over normal processing and can be a
+convenient way to program some event handling. 
+For example, you can use an accelerator table to enable a dialog with a
+multi-line text control to accept CTRL-Enter as meaning `OK' (but not in GTK+ at present).
+
+h2. See also
+
+"AcceleratorEntry":acceleratorentry.html, "Window#set_accelerator_table":window.html#Window_setacceleratortable
+
+<div id="methods">
+
+h2. Methods
+
+* "AcceleratorTable.new":#AcceleratorTable_new
+* "AcceleratorTable#ok":#AcceleratorTable_ok
+
+</div>
+
+
+h3(#AcceleratorTable_new). AcceleratorTable.new
+
+  *AcceleratorTable.new*(%(arg-type)Array% entries)
+
+Creates from an array of "AcceleratorEntry":acceleratorentry.html objects.
+
+h4. Parameters
+
+* _entries_ The array of entries.
+
+h3(#AcceleratorTable_ok). AcceleratorTable#ok
+
+ Boolean *ok*()
+
+Returns true if the accelerator table is valid.
+
+h3(#AcceleratorTable_equal). AcceleratorTable#==
+
+ Boolean *==*(%(arg-type)AcceleratorTable% accel)
+
+Equality operator. This operator tests whether the internal data pointers are
+equal (a fast test).
+
+h4. Parameters
+
+* _accel_ Accelerator table to compare with
+
+h4. Return value
+
+Returns true if the accelerator tables were effectively equal, false otherwise.

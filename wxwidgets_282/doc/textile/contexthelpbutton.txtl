@@ -1,0 +1,51 @@
+h1(#wxcontexthelpbutton). Wx::ContextHelpButton
+
+Instances of this class may be used to add a question mark button that when pressed, puts the
+application into context-help mode. It does this by creating a "ContextHelp":contexthelp.html object which itself
+generates a EVT_HELP event when the user clicks on a window.
+
+On Windows, you may add a question-mark icon to a dialog by use of the DIALOG_EX_CONTEXTHELP extra style, but
+on other platforms you will have to add a button explicitly, usually next to OK, Cancel or similar buttons.
+
+h2. Derived from
+
+"BitmapButton":bitmapbutton.html
+
+"Button":button.html
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"BitmapButton":bitmapbutton.html, "ContextHelp":contexthelp.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ContextHelpButton.new":#ContextHelpButton_new
+
+</div>
+
+
+h3(#ContextHelpButton_constr). ContextHelpButton.new
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Button identifier. Defaults to ID_CONTEXT_HELP.
+* _pos_ Button position.
+* _size_ Button size. If the default size (-1, -1) is specified then the button is sized
+appropriately for the question mark bitmap.
+* _style_ Window style.
+
+h4. Remarks
+
+Normally you need pass only the parent window to the constructor, and use the defaults for the remaining parameters.
+

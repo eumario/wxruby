@@ -1,0 +1,24 @@
+h1(#wxgridcellbooleditor). Wx::GridCellBoolEditor
+
+The editor for boolean data.
+
+h2. Derived from
+
+"GridCellEditor":gridcelleditor.html
+
+h2. See also
+
+"GridCellEditor":gridcelleditor.html, "GridCellFloatEditor":gridcellfloateditor.html, "GridCellNumberEditor":gridcellnumbereditor.html, "GridCellTextEditor":gridcelltexteditor.html, "GridCellChoiceEditor":gridcellchoiceeditor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellBoolEditor.new":#GridCellBoolEditor_new
+
+</div>
+
+
+
+h3(#GridCellBoolEditor_constr). GridCellBoolEditor.new
+

@@ -1,0 +1,43 @@
+h1(#wxdialupevent). Wx::DialUpEvent
+
+This is the event class for the dialup events sent by 
+"DialUpManager":dialupmanager.html.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DialUpEvent.new":#DialUpEvent_new
+* "DialUpEvent#is_connected_event":#DialUpEvent_isconnectedevent
+* "DialUpEvent#is_own_event":#DialUpEvent_isownevent
+
+</div>
+
+
+h3(#DialUpEvent_wxdialupevent). DialUpEvent.new
+
+  *DialUpEvent.new*(%(arg-type)Boolean% isConnected,  %(arg-type)Boolean% isOwnEvent)
+
+Constructor is only used by "DialUpManager":dialupmanager.html.
+
+h3(#DialUpEvent_isconnectedevent). DialUpEvent#is_connected_event
+
+ Boolean *is_connected_event*()
+
+Is this a @CONNECTED@ or @DISCONNECTED@ event? In other words, does it
+notify about transition from offline to online state or vice versa?
+
+h3(#DialUpEvent_isownevent). DialUpEvent#is_own_event
+
+ Boolean *is_own_event*()
+
+Does this event come from DialUpManager::Dial() or from some extrenal
+process (i.e. does it result from our own attempt to establish the
+connection)?
+

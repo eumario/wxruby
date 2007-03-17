@@ -1,0 +1,17 @@
+h1(#wxbufferedinputstream). Wx::BufferedInputStream
+
+This stream acts as a cache. It caches the bytes read from the specified
+input stream (See "FilterInputStream":filterinputstream.html).
+It uses StreamBuffer and sets the default in-buffer size to 1024 bytes.
+This class may not be used without some other stream to read the data
+from (such as a file stream or a memory stream).
+
+h2. Derived from
+
+"FilterInputStream":filterinputstream.html
+
+h2. See also
+
+"StreamBuffer":streambuffer.html, "InputStream":inputstream.html,
+"BufferedOutputStream":bufferedoutputstream.html
+

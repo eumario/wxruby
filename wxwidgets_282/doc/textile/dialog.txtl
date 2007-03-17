@@ -1,0 +1,259 @@
+h1(#wxdialog). Wx::Dialog
+
+A dialog box is a window with a title bar and sometimes a system menu, which
+can be moved around the screen. It can contain controls and other windows and
+is usually used to allow the user to make some choice or to answer a
+question. 
+
+Many common interactions such as choosing a file or entering a
+password are encapsulated in subclasses of Wx::Dialog, and will be
+displayed using native dialogs.
+
+h2. Derived from
+
+"TopLevelWindow":toplevelwindow.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+There are two kinds of dialog -- _modal_ and _modeless_. A modal dialog
+blocks program flow and user input on other windows until it is dismissed,
+whereas a modeless dialog behaves more like a frame in that program flow
+continues, and input in other windows is still possible. To show a modal dialog
+you should use the "show_modal":#Dialog_showmodal method while to show
+a dialog modelessly you simply use "show":dialogshow.html, just as with
+frames. 
+
+These methods return a value representing the user's choice from the
+dialog, such as 'OK' or 'Cancel'. To test these, do:
+
+ dlg = MyAskDialog.new(...)
+ case dlg.show_modal
+ when Wx::ID_OK # user clicked ok
+   ...
+ when Wx::ID_CANCLE # user clicked cancel or closed the dialog
+   ...
+ end
+
+As well as handling the ending of dialogs this way, an application can
+also define a "CloseEvent":closeevent.html handler for the dialog to
+respond to system close events, by calling @evt_close@.
+
+h2. Window styles
+
+|@CAPTION@|Puts a caption on the dialog box.|
+|@DEFAULT_DIALOG_STYLE@|Equivalent to a combination of CAPTION, CLOSE_BOX and SYSTEM_MENU (the last one is not used under Unix)|
+|@RESIZE_BORDER@|Display a resizeable frame around the window.|
+|@SYSTEM_MENU@|Display a system menu.|
+|@CLOSE_BOX@|Displays a close box on the frame.|
+|@MAXIMIZE_BOX@|Displays a maximize box on the dialog.|
+|@MINIMIZE_BOX@|Displays a minimize box on the dialog.|
+|@THICK_FRAME@|Display a thick frame around the window.|
+|@STAY_ON_TOP@|The dialog stays on top of all other windows.|
+|@NO_3D@|Under Windows, specifies that the child controlsshould not have 3D borders unless specified in the control.|
+|@DIALOG_NO_PARENT@|By default, a dialog created with a @nil@ parent window will be given the "application's top level window":appgettopwindow.html as parent. Use thisstyle to prevent this from happening and create an orphan dialog. This is not recommended for modal dialogs.|
+|@DIALOG_EX_CONTEXTHELP@|Under Windows, puts a query button on thecaption. When pressed, Windows will go into a context-sensitive help mode and Widgets will senda EVT_HELP event if the user clicked on an application window. _Note_\ that this is an extendedstyle and must be set by calling "set_extra_style":#Dialog_setextrastyle before Create is called (two-step construction).|
+|@DIALOG_EX_METAL@|On Mac OS X, frames with this style will be shown with a metallic look. This is an _extra_ style.|
+
+
+Under Unix or Linux, MWM (the Motif Window Manager) or other window managers
+recognizing the MHM hints should be running for any of these styles to have an
+effect.
+
+See also "Generic window styles":windowstyles.html.
+
+h2. See also
+
+"Dialog overview":dialogoverview.html, "Frame":frame.html, "Validator overview":validatoroverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Dialog.new":#Dialog_new
+* "Dialog#centre":#Dialog_centre
+* "Dialog#create":#Dialog_create
+* "Dialog#create_button_sizer":#Dialog_createbuttonsizer
+* "Dialog#create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer
+* "Dialog#do_ok":#Dialog_dook
+* "Dialog#end_modal":#Dialog_endmodal
+* "Dialog#get_affirmative_id":#Dialog_getaffirmativeid
+* "Dialog#get_return_code":#Dialog_getreturncode
+* "Dialog#get_title":#Dialog_gettitle
+* "Dialog#get_tool_bar":#Dialog_gettoolbar
+* "Dialog#iconize":#Dialog_iconize
+* "Dialog#is_iconized":#Dialog_isiconized
+* "Dialog#is_modal":#Dialog_ismodal
+* "Dialog#on_apply":#Dialog_onapply
+* "Dialog#on_cancel":#Dialog_oncancel
+* "Dialog#on_ok":#Dialog_onok
+* "Dialog#on_sys_colour_changed":#Dialog_onsyscolourchanged
+* "Dialog#set_affirmative_id":#Dialog_setaffirmativeid
+* "Dialog#set_icon":#Dialog_seticon
+* "Dialog#set_icons":#Dialog_seticons
+* "Dialog#set_modal":#Dialog_setmodal
+* "Dialog#set_return_code":#Dialog_setreturncode
+* "Dialog#set_title":#Dialog_settitle
+* "Dialog#show":#Dialog_show
+* "Dialog#show_modal":#Dialog_showmodal
+
+</div>
+
+
+h3(#Dialog_new). Dialog.new
+
+  *Dialog.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+             %(arg-type)Point% pos = DEFAULT_POSITION, 
+             %(arg-type)Size% size = DEFAULT_SIZE, 
+             %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
+             %(arg-type)String% name = "dialogBox")
+
+Constructor.
+
+h4. Parameters
+
+* _parent_ Can be NULL, a frame or another dialog box.
+* _id_ An identifier for the dialog. A value of -1 is taken to mean a default.
+* _title_ The title of the dialog.
+* _pos_ The dialog position. A value of (-1, -1) indicates a default position, chosen by
+either the windowing system or Widgets, depending on platform.
+* _size_ The dialog size. A value of (-1, -1) indicates a default size, chosen by
+either the windowing system or Widgets, depending on platform.
+* _style_ The window style. See "Dialog":dialog.html.
+* _name_ Used to associate a name with the window,
+allowing the application user to set Motif resource values for
+individual dialog boxes.
+
+h4. See also
+
+"Dialog#create":dialog.html#Dialog_create
+
+  *destructor*()
+
+Destructor. Deletes any child windows before deleting the physical window.
+
+h3(#Dialog_centre). Dialog#centre
+
+  *centre*(%(arg-type)Integer% direction = BOTH)
+
+Centres the dialog box on the display.
+
+h4. Parameters
+
+* _direction_ May be @HORIZONTAL@, @VERTICAL@ or @BOTH@.
+
+h3(#Dialog_create). Dialog#create
+
+ Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)Point% pos = DEFAULT_POSITION, 
+                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
+                %(arg-type)String% name = "dialogBox")
+
+Used for two-step dialog box construction. See "Dialog.new":dialog.html#Dialog_new for details.
+
+h3(#Dialog_createbuttonsizer). Dialog#create_button_sizer
+
+ "Sizer":sizer.html *create_button_sizer*(%(arg-type)Integer% flags)
+
+Creates a sizer with standard buttons. _flags_ is a bit list
+of the following flags: OK, CANCEL, YES, NO, HELP, NO_DEFAULT.
+
+The sizer lays out the buttons in a manner appropriate to the platform.
+
+This function simply calls "create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer.
+
+h3(#Dialog_createstddialogbuttonsizer). Dialog#create_std_dialog_button_sizer
+
+ "StdDialogButtonSizer":stddialogbuttonsizer.html *create_std_dialog_button_sizer*(%(arg-type)Integer% flags)
+
+Creates a "StdDialogButtonSizer":stddialogbuttonsizer.html with standard buttons. _flags_ is a bit list
+of the following flags: OK, CANCEL, YES, NO, HELP, NO_DEFAULT.
+
+The sizer lays out the buttons in a manner appropriate to the platform.
+
+h3(#Dialog_dook). Dialog#do_ok
+
+ Boolean *do_ok*()
+
+This function is called when the titlebar OK button is pressed (PocketPC only).
+A command event for the identifier returned by GetAffirmativeId is sent by
+default. You can override this function. If the function returns false, Widgets
+will call Close() for the dialog.
+
+h3(#Dialog_endmodal). Dialog#end_modal
+
+  *end_modal*(%(arg-type)Integer% retCode)
+
+Ends a modal dialog, passing a value to be returned from the "Dialog#show_modal":dialog.html#Dialog_showmodal invocation.
+
+h4. Parameters
+
+* _retCode_ The value that should be returned by *ShowModal*.
+
+h4. See also
+
+"Dialog#show_modal":dialog.html#Dialog_showmodal, "Dialog#get_return_code":dialog.html#Dialog_getreturncode, "Dialog#set_return_code":dialog.html#Dialog_setreturncode
+
+h3(#Dialog_getaffirmativeid). Dialog#get_affirmative_id
+
+ Integer *get_affirmative_id*()
+
+Gets the identifier to be used when the user presses an OK button in a PocketPC titlebar.
+
+h4. See also
+
+"Dialog#set_affirmative_id":dialog.html#Dialog_setaffirmativeid
+
+h3(#Dialog_getreturncode). Dialog#get_return_code
+
+ Integer *get_return_code*()
+
+Gets the return code for this window.
+
+h4. Remarks
+
+A return code is normally associated with a modal dialog, where "Dialog#show_modal":dialog.html#Dialog_showmodal returns
+a code to the application.
+
+h4. See also
+
+"Dialog#set_return_code":dialog.html#Dialog_setreturncode, "Dialog#show_modal":dialog.html#Dialog_showmodal, "Dialog#end_modal":dialog.html#Dialog_endmodal
+
+h3(#Dialog_gettitle). Dialog#get_title
+
+ String *get_title*()
+
+Returns the title of the dialog box.
+
+h3(#Dialog_gettoolbar). Dialog#get_tool_bar
+
+ "ToolBar":toolbar.html *get_tool_bar*()
+
+On PocketPC, a dialog is automatically provided with an empty toolbar. GetToolBar
+allows you to access the toolbar and add tools to it. Removing tools and adding
+arbitrary controls are not currently supported.
+
+This function is not available on any other platform.
+
+h3(#Dialog_iconized). Dialog#iconize
+
+  *iconize*(%(arg-type)Boolean% iconize)
+
+Iconizes or restores the dialog. Windows only.
+
+h4. Parameters
+
+* _iconize_ If true, iconizes the dialog box; if false, shows and restores it.
+
+h4. Remarks
+
+Note that in Windows, iconization has no effect since dialog boxes cannot be
+iconized. However, applications may need to explicitly restore dialog
+boxes under Motif which have user-iconizable frames, and under Windows
+calling @Iconize(false)@ will bring the window to the front, as does

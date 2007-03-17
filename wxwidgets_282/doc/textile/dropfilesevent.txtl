@@ -1,0 +1,91 @@
+h1(#wxdropfilesevent). Wx::DropFilesEvent
+
+This class is used for drop files events, that is, when files have been dropped
+onto the window. This functionality is currently only available under Windows.
+The window must have previously been enabled for dropping by calling 
+"Window#drag_accept_files":window.html#Window_dragacceptfiles.
+
+Important note: this is a separate implementation to the more general
+drag and drop implementation documented "here":dndoverview.html. It uses the
+older, Windows message-based approach of dropping files.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a drop files event, use these event handler macros to direct input to a member
+function that takes a DropFilesEvent argument.
+
+
+
+|*evt_drop_files()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_DROP_FILES event.|
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DropFilesEvent.new":#DropFilesEvent_new
+* "DropFilesEvent#m__files":#DropFilesEvent_mfiles
+* "DropFilesEvent#m__no_files":#DropFilesEvent_mnofiles
+* "DropFilesEvent#m__pos":#DropFilesEvent_mpos
+* "DropFilesEvent#get_files":#DropFilesEvent_getfiles
+* "DropFilesEvent#get_number_of_files":#DropFilesEvent_getnumberoffiles
+* "DropFilesEvent#get_position":#DropFilesEvent_getposition
+
+</div>
+
+
+h3(#DropFilesEvent_new). DropFilesEvent.new
+
+  *DropFilesEvent.new*(%(arg-type)TYPE% id = 0,  %(arg-type)Integer% noFiles = 0, 
+                     %(arg-type)String% files = nil)
+
+Constructor.
+
+h3(#DropFilesEvent_mfiles). DropFilesEvent#m__files
+
+String*m_files
+
+An array of filenames.
+
+h3(#DropFilesEvent_mnofiles). DropFilesEvent#m__no_files
+
+intm_noFiles
+
+The number of files dropped.
+
+h3(#DropFilesEvent_mpos). DropFilesEvent#m__pos
+
+Pointm_pos
+
+The point at which the drop took place.
+
+h3(#DropFilesEvent_getfiles). DropFilesEvent#get_files
+
+ String *get_files*()
+
+Returns an array of filenames.
+
+h3(#DropFilesEvent_getnumberoffiles). DropFilesEvent#get_number_of_files
+
+ Integer *get_number_of_files*()
+
+Returns the number of files dropped.
+
+h3(#DropFilesEvent_getposition). DropFilesEvent#get_position
+
+ "Point":point.html *get_position*()
+
+Returns the position at which the files were dropped.
+
+Returns an array of filenames.
+
+

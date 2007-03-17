@@ -1,0 +1,418 @@
+h1. wxRuby Documentation: Class Reference 
+
+This is the class reference for WxRuby. The classes listed below are
+those currently available in WxRuby2. This documentation is currently
+auto-generated from the WxWidgets C++ documentation, so it has some
+shortcomings. 
+
+* A few methods have innaccurate descriptions of the parameters they
+accept
+* Some of the example code is still in C++
+* There are links to C++ tutorials and topic overviews that are not
+available - many are not relevant to wxRuby.
+
+As the wxRuby API is developed, this documentation will be updated with
+Ruby-specific information. For now, you can read the "window styles
+overview":windowstyles.html for general info on window styles and wxRuby
+constants.
+
+h2(#top). Outline
+
+* "Window":#window
+* "Frames":#frames
+* "Miscellaneous windows":#misc_windows
+* "Common dialogs":#common_dialogs
+* "Controls":#controls
+* "Menus":#menus
+* "Events":#events
+* "Window layout":#window_layout
+* "Device context":#device_contexts
+* "Graphics device interface":#graphics_device_interface
+* "Validators":#validators
+* "Data Structures":#data_structures
+* "Document/view framework":#docview_framework
+* "Printing framework":#printing
+* "Drag and drop and clipboard classes":#dnd_clipboard
+* "HTML classes":#html
+* "XML Resources":#xrc
+* "Online help":#online_help
+* "Miscellaneous":#misc
+
+h2(#window). Window
+
+Anything painted on the screen in wxRuby is a Window. This includes
+frames and dialogs that contain GUI controls, controls for user
+interaction, and elements that manage the layout of controls, such as
+tabbed notebooks. Many important methods are inherited from Window.
+
+|Window|Anything painted on the screen|
+
+h2(#frames). Frames
+
+There are several types of window that are directly controlled by the
+window manager (such as MS Windows, or the Motif Window Manager). Frames
+and dialogs are similar in wxRuby. Only frames may be associated with a
+menu; only dialogs may appear modally (on top of all other windows).
+
+|TopLevelWindow|Any top level window, dialog or frame|
+|Dialog|Dialog box base class|
+|Frame|Normal OS frame|
+|MDIChildFrame|MDI child frame|
+|MDIParentFrame|MDI parent frame|
+|MiniFrame|A frame with a small title bar|
+|SplashScreen|Splash screen class|
+|PropertySheetDialog|Property sheet dialog|
+|TipWindow|Shows text in a small window|
+|Wizard|A wizard dialog|
+
+"top":#top
+
+h2(#misc_windows). Miscellaneous windows
+
+The following are a variety of classes that are derived from wxWindow.
+
+|Panel|A window whose colour changes according to current user settings|
+|ScrolledWindow|Window with automatically managed scrollbars|
+|Grid|A grid (table) window|
+|SplitterWindow|Window which can be split vertically or horizontally|
+|StatusBar|A status bar on a frame|
+|ToolBar|Toolbar with buttons|
+|Notebook|Tabbed Notebook for layout out controls|
+|Listbook|Similar to notebook but using a list control|
+|Choicebook|Similar to notebook but using a choice (dropdown) control|
+|SashWindow|Window with four optional sashes that can be dragged|
+|SashLayoutWindow|Window that can be involved in an IDE-like layout arrangement|
+|VScrolledWindow|As wxScrolledWindow but supports lines of variable height|
+|WizardPage|A base class for the page in wizard dialog.|
+|WizardPageSimple|A page in wizard dialog.|
+
+"top":#top
+
+h2(#common_dialogs). Common dialogs
+
+Common dialogs are ready-made dialog classes which are frequently used
+in applications. They are OS-native versions for standard GUI activities
+such as opening a file, requesting a text string or password, or
+displaying a message.
+
+|Dialog|Base class for common dialogs|
+|ColourDialog|Colour chooser dialog|
+|DirDialog|Directory selector dialog|
+|FileDialog|File selector dialog|
+|FindReplaceDialog|Text search/replace dialog|
+|MultiChoiceDialog|Dialog to get one or more selections from a list|
+|SingleChoiceDialog|Dialog to get a single selection from a list and return the string|
+|TextEntryDialog|Dialog to get a single line of text from the user|
+|PasswordEntryDialog|Dialog to get a password from the user|
+|FontDialog|Font chooser dialog|
+|PageSetupDialog|Standard page setup dialog|
+|PrintDialog|Standard print dialog|
+|ProgressDialog|Progress indication dialog|
+|MessageDialog|Simple message box dialog|
+|Wizard|A wizard dialog.|
+
+"top":#top
+
+h2(#controls). Controls 
+
+These are small windows which provide interaction with the user.
+
+|Control|The base class for controls|
+|Button|Push button control, displaying text|
+|BitmapButton|Push button control, displaying a bitmap|
+|ToggleButton|A button which stays pressed when clicked by user.|
+|CalendarCtrl|Control showing an entire calendar month|
+|CheckBox|Checkbox control|
+|CheckListBox|A listbox with a checkbox to the left of each item|
+|Choice|Choice control (a combobox without the editable area)|
+|ComboBox|A choice with an editable area|
+|DatePickerCtrl|Small date picker control|
+|Gauge|A control to represent a varying quantity, such as time remaining|
+|GenericDirCtrl|A control for displaying a directory tree|
+|HtmlListBox|A listbox showing HTML content|
+|StaticBox|A static, or group box for visually grouping related controls|
+|ListBox|A list of strings for single or multiple selection|
+|ListCtrl|A control for displaying lists of strings and/or icons, plus a multicolumn report view|
+|ListView|A simpler interface (fa¹Âde for wxListCtrl in report mode|
+|TextCtrl|Single or multiline text editing control|
+|TreeCtrl|Tree (hierarchy) control|
+|ScrollBar|Scrollbar control|
+|SpinButton|A spin or 'up-down' control|
+|SpinCtrl|A spin control - i.e. spin button and text control|
+|StaticText|One or more lines of non-editable text|
+|StaticBitmap|A control to display a bitmap|
+|RadioBox|A group of radio buttons|
+|RadioButton|A round button to be used with others in a mutually exclusive way|
+|Slider|A slider that can be dragged by the user|
+|VListBox|A listbox supporting variable height rows|
+
+"top":#top
+
+h2(#menus). Menus
+
+Menus typically appear at the top of a frame. They contain drop-down
+lists of actions, which may be accessed by mouse or keyboard shortcut.
+
+|Menu|Displays a series of menu items for selection|
+|MenuBar|Contains a series of menus for use with a frame|
+|MenuItem|Represents a single menu item|
+
+"top":#top
+
+h2(#events). Events
+
+An event object contains information about a specific event. Event
+handlers blocks may optionally receive a single block parameter, which
+will be an Event object of the appropriate class. For more information
+about events and setting up event handlers, see the 
+"event handling overview":eventhandlingoverview.html
+
+|ActivateEvent|A window or application activation event|
+|CalendarEvent|Used with wxCalendarCtrl|
+|CalculateLayoutEvent|Used to calculate window layout|
+|CloseEvent|A close window or end session event|
+|CommandEvent|An event from a variety of standard controls|
+|ContextMenuEvent|An event generated when the user issues a context menu command|
+|DateEvent|Used with wxDatePickerCtrl|
+|DialUpEvent|Event send by wxDialUpManager|
+|DropFilesEvent|A drop files event|
+|EraseEvent|An erase background event|
+|Event|The event base class|
+|FindDialogEvent|Event sent by wxFindReplaceDialog|
+|FocusEvent|A window focus event|
+|KeyEvent|A keypress event|
+|IconizeEvent|An iconize/restore event|
+|IdleEvent|An idle event|
+|InitDialogEvent|A dialog initialisation event|
+|JoystickEvent|A joystick event|
+|ListEvent|A list control event|
+|MaximizeEvent|A maximize event|
+|MenuEvent|A menu event|
+|MouseCaptureChangedEvent|A mouse capture changed event|
+|MouseEvent|A mouse event|
+|MoveEvent|A move event|
+|NotebookEvent|A notebook control event|
+|NotifyEvent|A notification event, which can be vetoed|
+|PaintEvent|A paint event|
+|ProcessEvent|A process ending event|
+|QueryLayoutInfoEvent|Used to query layout information|
+|ScrollEvent|A scroll event from sliders, stand-alone scrollbars and spin buttons|
+|ScrollWinEvent|A scroll event from scrolled windows|
+|SizeEvent|A size event|
+|SocketEvent|A socket event|
+|SpinEvent|An event from wxSpinButton|
+|SplitterEvent|An event from wxSplitterWindow|
+|SysColourChangedEvent|A system colour change event|
+|TextUrlEvent|Mouse interaction with a URL in a TextCtrl|
+|TimerEvent|A timer expiration event|
+|TreeEvent|A tree control event|
+|UpdateUIEvent|A user interface update event|
+|WindowCreateEvent|A window creation event|
+|WindowDestroyEvent|A window destruction event|
+|WizardEvent|A wizard event|
+
+"top":#top
+
+h2(#window_layout). Window layout
+
+Sizers enable the layout and size of controls and windows to adapt to
+the user's resizing of frames and containers.
+
+|Sizer|Abstract base class|
+|GridSizer|A sizer for laying out windows in a grid with all fields having the same size|
+|FlexGridSizer|A sizer for laying out windows in a flexible grid|
+|GridBagSizer|Another grid sizer that lets you specify the cell an item is in, and items can span rows and/or columns.|
+|BoxSizer|A sizer for laying out windows in a row or column|
+|StaticBoxSizer|Same as wxBoxSizer, but with a surrounding static box|
+|StdDialogButtonSizer|Sizer for arranging buttons on a dialog, in platform-standard order|
+
+"top":#top
+
+h2(#device_contexts). Device contexts
+
+Device contexts are surfaces that may be drawn on. They allow the
+application to draw lines, shapes, images and text directly. This can be
+on-screen within an application GUI, or onto paper.  They provide
+abstraction that allows parameterisation of your drawing code by passing
+different device contexts.
+
+|BufferedDC|A helper device context for double buffered drawing.|
+|BufferedPaintDC|A helper device context for double buffered drawing inside OnPaint.|
+|ClientDC|A device context to access the client area outside OnPaint events|
+|PaintDC|A device context to access the client area inside OnPaint events|
+|WindowDC|A device context to access the non-client area|
+|ScreenDC|A device context to access the entire screen|
+|DC|The device context base class|
+|MemoryDC|A device context for drawing into bitmaps|
+|MetafileDC|A device context for drawing into metafiles|
+|MirrorDC|A proxy device context allowing for simple mirroring.|
+|PostScriptDC|A device context for drawing into PostScript files|
+|PrinterDC|A device context for drawing to printers|
+
+"top":#top
+
+h2(#graphics_device_interface). Graphics device interface
+
+These classes are related to drawing on device contexts and windows.
+
+|Colour|Represents the red, blue and green elements of a colour|
+|DCClipper|Wraps the operations of setting and destroying the clipping region|
+|Bitmap|Represents a bitmap|
+|Brush|Used for filling areas on a device context|
+|BrushList|The list of previously-created brushes|
+|Cursor|A small, transparent bitmap representing the cursor|
+|Font|Represents fonts|
+|FontList|The list of previously-created fonts|
+|Icon|A small, transparent bitmap for assigning to frames and drawing on device contexts|
+|IconBundle|A group of similar icons of different sizes|
+|Image|A platform-independent image class|
+|ImageList|A list of images, used with some controls|
+|Mask|Represents a mask to be used with a bitmap for transparent drawing|
+|Pen|Used for drawing lines on a device context|
+|PenList|The list of previously-created pens|
+|Palette|Represents a table of indices into RGB values|
+|Region|Represents a simple or complex region on a window or device context|
+|RendererNative|Abstracts high-level drawing primitives|
+
+"top":#top
+
+h2(#validators). Validators
+
+These are the window validators, used for filtering and validating user input.
+
+|Validator|Base validator class|
+|TextValidator|Text control validator class|
+|GenericValidator|Generic control validator class|
+
+"top":#top
+
+h2(#data_structures). Data structures
+
+|Object|The root class for most wxRuby classes|
+|Point|Representation of a point (x, y position) |
+|Rect|A class representing a rectangle|
+|Region|A class representing a region|
+|RealPoint|Representation of a point using floating point numbers|
+|Size|Representation of a size (height and width)|
+
+"top":#top
+
+h2(#docview_framework). Document/view framework
+
+The wxWidgets API supports a document/view framework which provides
+housekeeping for a document-centric application - but this is not yet
+ported to Ruby.
+
+|Document|Represents a document|
+|View|Represents a view|
+|DocTemplate|Manages the relationship between a document class and a view class|
+|DocManager|Manages the documents and views in an application|
+|DocChildFrame|A child frame for showing a document view|
+|DocParentFrame|A parent frame to contain views|
+
+"top":#top
+
+h2(#printing). Printing framework
+
+A printing and previewing framework is implemented to make it relatively
+straightforward to provide document printing facilities.
+
+|PreviewFrame|Frame for displaying a print preview|
+|PreviewCanvas|Canvas for displaying a print preview|
+|PreviewControlBar|Standard control bar for a print preview|
+|PrintDialog|Standard print dialog|
+|PageSetupDialog|Standard page setup dialog|
+|Printer|Class representing the printer|
+|PrinterDC|Printer device context|
+|Printout|Class representing a particular printout|
+|PrintPreview|Class representing a print preview|
+|PrintData|Represents information about the document being printed|
+|PrintDialogData|Represents information about the print dialog|
+|PageSetupDialogData|Represents information about the page setup dialog|
+
+"top":#top
+
+h2(#dnd_clipboard). Drag and drop and clipboard classes
+
+These classes provide support for passing data to and from other desktop
+applications. This functionality is not yet available in wxRuby2, but
+would be nice to have. 
+
+|DataObject|Data object class|
+|DataFormat|Represents a data format|
+|TextDataObject|Text data object class|
+|FileDataObject|File data object class|
+|BitmapDataObject|Bitmap data object class|
+|CustomDataObject|Custom data object class|
+|Clipboard|Clipboard class|
+|DropTarget|Drop target class|
+|FileDropTarget|File drop target class|
+|TextDropTarget|Text drop target class|
+|DropSource|Drop source class|
+
+"top":#top
+
+h2(#html). HTML classes
+
+These are a set of classes to allow display and printing of hypertext in
+HTML format, including images and clickable links.
+
+|HtmlHelpController|HTML help controller class|
+|HtmlWindow|HTML window class, for displaying HTML|
+|HtmlEasyPrinting|Simple but useful class for printing HTML|
+|HtmlPrintout|Generic HTML wxPrintout class|
+|HtmlParser|Generic HTML parser class|
+|HtmlTagHandler|HTML tag handler, pluginable into wxHtmlParser|
+|HtmlWinParser|HTML parser class for wxHtmlWindow|
+|HtmlWinTagHandler|HTML tag handler, pluginable into wxHtmlWinParser|
+
+"top":#top
+
+h2(#xrc). XML-based resources
+
+Resources allow your application to create controls and other user
+interface elements from specifications stored in an XML format.
+
+|XmlResource|The main class for working with resources.|
+|XmlResourceHandler|The base class for XML resource handlers.|
+
+"top":#top
+
+h2(#online_help). Online help
+
+|HelpController|Family of classes for controlling help windows|
+|HtmlHelpController|HTML help controller class|
+|ContextHelp|Class to put application into context-sensitive help mode|
+|ContextHelpButton|Button class for putting application into context-sensitive help mode|
+|HelpProvider|Abstract class for context-sensitive help provision|
+|SimpleHelpProvider|Class for simple context-sensitive help provision|
+|HelpControllerHelpProvider|Class for context-sensitive help provision via a help controller|
+|ToolTip|Class implementing tooltips|
+
+"top":#top
+
+h2(#misc). Miscellaneous
+
+|App|Application class|
+|Caret|A caret (cursor) object|
+|Config|Classes for configuration reading/writing (using either INI files or registry)|
+|DragImage|An image that can be dragged across windows|
+|GLCanvas|Canvas that you can render OpenGL calls to.|
+|GLContext|Class to ease sharing of OpenGL data resources.|
+|LayoutAlgorithm|An alternative window layout facility|
+|Log|Base class for logging|
+|LogTextCtrl|A TextCtrl that displays application log messages|
+|Process|Process class|
+|Timer|Timer class|
+|TaskBarIcon|Icon that appears in the task bar, system tray or dock, and can have a popup menu|
+|StopWatch|Stop watch class|
+|MimeTypesManager|MIME-types manager class|
+|SystemSettings|System settings class for obtaining various global parameters|
+|SystemOptions|System options class for run-time configuration|
+|AcceleratorTable|Accelerator table for setting up shortcut keys|
+|AutomationObject|OLE automation class|
+|FontMapper|Font mapping, finding suitable font for given encoding|
+|EncodingConverter|Encoding conversions|
+|CalendarDateAttr|Used with wxCalendarCtrl|
+|Quantize|Class to perform quantization, or colour reduction|
+|SingleInstanceChecker|Check that only single program instance is running|

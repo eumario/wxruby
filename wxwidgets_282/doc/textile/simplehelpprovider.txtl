@@ -1,0 +1,16 @@
+h1(#wxsimplehelpprovider). Wx::SimpleHelpProvider
+
+SimpleHelpProvider is an implementation of "HelpProvider":helpprovider.html which supports
+only plain text help strings, and shows the string associated with the
+control (if any) in a tooltip.
+
+h2. Derived from
+
+"HelpProvider":helpprovider.html
+
+h2. See also
+
+"HelpProvider":helpprovider.html, "HelpControllerHelpProvider":helpcontrollerhelpprovider.html, 
+"ContextHelp":contexthelp.html, "Window#set_help_text":window.html#Window_sethelptext, 
+"Window#get_help_text":window.html#Window_gethelptext
+

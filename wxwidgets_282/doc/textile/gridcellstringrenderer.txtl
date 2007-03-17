@@ -1,0 +1,24 @@
+h1(#wxgridcellstringrenderer). Wx::GridCellStringRenderer
+
+This class may be used to format string data in a cell; it is the default
+for string cells.
+
+h2. Derived from
+
+"GridCellRenderer":gridcellrenderer.html
+
+h2. See also
+
+"GridCellRenderer":gridcellrenderer.html, "GridCellNumberRenderer":gridcellnumberrenderer.html, "GridCellFloatRenderer":gridcellfloatrenderer.html, "GridCellBoolRenderer":gridcellboolrenderer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellStringRenderer.new":#GridCellStringRenderer_new
+
+</div>
+
+
+h3(#GridCellStringRenderer_constr). GridCellStringRenderer.new
+

@@ -1,0 +1,200 @@
+h1(#wximagelist). Wx::ImageList
+
+A ImageList contains a list of images, which are stored in
+an unspecified form. Images can have masks for transparent
+drawing, and can be made from a variety of sources including bitmaps
+and icons.
+
+ImageList is used principally in conjunction with "TreeCtrl":treectrl.html and
+ "ListCtrl":listctrl.html classes.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"TreeCtrl":treectrl.html, "ListCtrl":listctrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ImageList.new":#ImageList_new
+* "ImageList#add":#ImageList_add
+* "ImageList#create":#ImageList_create
+* "ImageList#draw":#ImageList_draw
+* "ImageList#get_bitmap":#ImageList_getbitmap
+* "ImageList#get_icon":#ImageList_geticon
+* "ImageList#get_image_count":#ImageList_getimagecount
+* "ImageList#get_size":#ImageList_getsize
+* "ImageList#remove":#ImageList_remove
+* "ImageList#remove_all":#ImageList_removeall
+* "ImageList#replace":#ImageList_replace
+
+</div>
+
+
+h3(#ImageList_constr). ImageList.new
+
+  *ImageList.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                %(arg-type)Boolean% mask = true, 
+                %(arg-type)Integer% initialCount = 1)
+
+Constructor specifying the image size, whether image masks should be created, and the initial size of the list.
+
+h4. Parameters
+
+* _width_ Width of the images in the list.
+* _height_ Height of the images in the list.
+* _mask_ true if masks should be created for all images.
+* _initialCount_ The initial size of the list.
+
+h4. See also
+
+"ImageList#create":imagelist.html#ImageList_create
+
+h3(#ImageList_add). ImageList#add
+
+ Integer *add*(%(arg-type)Bitmap% bitmap,  %(arg-type)Bitmap% mask = NullBitmap)
+
+Adds a new image using a bitmap and optional mask bitmap.
+
+ Integer *add*(%(arg-type)Bitmap% bitmap,  %(arg-type)Colour% maskColour)
+
+Adds a new image using a bitmap and mask colour.
+
+ Integer *add*(%(arg-type)Icon% icon)
+
+Adds a new image using an icon.
+
+h4. Parameters
+
+* _bitmap_ Bitmap representing the opaque areas of the image.
+* _mask_ Monochrome mask bitmap, representing the transparent areas of the image.
+* _maskColour_ Colour indicating which parts of the image are transparent.
+* _icon_ Icon to use as the image.
+
+h4. Return value
+
+The new zero-based image index.
+
+h4. Remarks
+
+The original bitmap or icon is not affected by the *Add* operation, and can be deleted afterwards.
+
+
+h3(#ImageList_create). ImageList#create
+
+ Boolean *create*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                %(arg-type)Boolean% mask = true, 
+                %(arg-type)Integer% initialCount = 1)
+
+Initializes the list. See "ImageList.new":imagelist.html#ImageList_new for details.
+
+h3(#ImageList_draw). ImageList#draw
+
+ Boolean *draw*(%(arg-type)Integer% index,  %(arg-type)DC% dc,  %(arg-type)Integer% x, 
+              %(arg-type)Integer% y, 
+              %(arg-type)Integer% flags = IMAGELIST_DRAW_NORMAL, 
+              %(arg-type)Boolean% solidBackground = false)
+
+Draws a specified image onto a device context.
+
+h4. Parameters
+
+* _index_ Image index, starting from zero.
+* _dc_ Device context to draw on.
+* _x_ X position on the device context.
+* _y_ Y position on the device context.
+* _flags_ How to draw the image. A bitlist of a selection of the following:
+
+
+|*IMAGELIST_DRAW_NORMAL*|Draw the image normally.|
+|*IMAGELIST_DRAW_TRANSPARENT*|Draw the image with transparency.|
+|*IMAGELIST_DRAW_SELECTED*|Draw the image in selected state.|
+|*IMAGELIST_DRAW_FOCUSED*|Draw the image in a focused state.|
+
+
+* _solidBackground_ For optimisation - drawing can be faster if the function is told
+that the background is solid.
+
+h3(#ImageList_getbitmap). ImageList#get_bitmap
+
+ "Bitmap":bitmap.html *get_bitmap*(%(arg-type)Integer% index)
+
+Returns the bitmap corresponding to the given index.
+
+h3(#ImageList_geticon). ImageList#get_icon
+
+ "Icon":icon.html *get_icon*(%(arg-type)Integer% index)
+
+Returns the icon corresponding to the given index.
+
+h3(#ImageList_getimagecount). ImageList#get_image_count
+
+ Integer *get_image_count*()
+
+Returns the number of images in the list.
+
+h3(#ImageList_getsize). ImageList#get_size
+
+ Boolean *get_size*(%(arg-type)Integer% index,  %(arg-type)Integer% width, 
+                  %(arg-type)Integer% height)
+
+Retrieves the size of the images in the list. Currently, the _index_ 
+parameter is ignored as all images in the list have the same size.
+
+h4. Parameters
+
+* _index_ currently unused, should be 0
+* _width_ receives the width of the images in the list
+* _height_ receives the height of the images in the list
+
+h4. Return value
+
+true if the function succeeded, false if it failed (for example, if the image
+list was not yet initialized).
+
+h3(#ImageList_remove). ImageList#remove
+
+ Boolean *remove*(%(arg-type)Integer% index)
+
+Removes the image at the given position.
+
+h3(#ImageList_removeall). ImageList#remove_all
+
+ Boolean *remove_all*()
+
+Removes all the images in the list.
+
+h3(#ImageList_replace). ImageList#replace
+
+ Boolean *replace*(%(arg-type)Integer% index,  %(arg-type)Bitmap% bitmap, 
+                 %(arg-type)Bitmap% mask = NullBitmap)
+
+Replaces the existing image with the new image.
+
+Windows only.
+
+ Boolean *replace*(%(arg-type)Integer% index,  %(arg-type)Icon% icon)
+
+Replaces the existing image with the new image.
+
+h4. Parameters
+
+* _bitmap_ Bitmap representing the opaque areas of the image.
+* _mask_ Monochrome mask bitmap, representing the transparent areas of the image.
+* _icon_ Icon to use as the image.
+
+h4. Return value
+
+true if the replacement was successful, false otherwise.
+
+h4. Remarks
+
+The original bitmap or icon is not affected by the *Replace* operation, and can be deleted afterwards.
+
+
+
+

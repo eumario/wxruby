@@ -1,0 +1,128 @@
+h1(#wxhtmllistbox). Wx::HtmlListBox
+
+HtmlListBox is an implementation of "VListBox":vlistbox.html which
+shows HTML content in the listbox rows. This is still an abstract base class
+and you will need to derive your own class from it (see htlbox sample for the
+example) but you will only need to override a single 
+"on_get_item()":#HtmlListBox_ongetitem() function.
+
+h2. Derived from
+
+"VListBox":vlistbox.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlListBox.new":#HtmlListBox_new
+* "HtmlListBox#create":#HtmlListBox_create
+* "HtmlListBox#get_file_system":#HtmlListBox_getfilesystem
+* "HtmlListBox#get_selected_text_bg_colour":#HtmlListBox_getselectedtextbgcolour
+* "HtmlListBox#get_selected_text_colour":#HtmlListBox_getselectedtextcolour
+* "HtmlListBox#on_get_item":#HtmlListBox_ongetitem
+* "HtmlListBox#on_get_item_markup":#HtmlListBox_ongetitemmarkup
+
+</div>
+
+
+
+h3(#HtmlListBox_wxhtmllistbox). HtmlListBox.new
+
+  *HtmlListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
+                  %(arg-type)Point% pos = DEFAULT_POSITION, 
+                  %(arg-type)Size% size = DEFAULT_SIZE, 
+                  %(arg-type)Integer% style = 0, 
+                  %(arg-type)String% name = VListBoxNameStr)
+
+Normal constructor which calls "Create()":htmllistboxcreate.html
+internally.
+
+  *destructor*()
+
+Destructor cleans up whatever resources we use.
+
+
+h3(#HtmlListBox_create). HtmlListBox#create
+
+ Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)Point% pos = DEFAULT_POSITION, 
+                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)String% name = VListBoxNameStr)
+
+Creates the control and optionally sets the initial number of items in it
+(it may also be set or changed later with 
+"set_item_count()":#HtmlListBox_setitemcount()).
+
+There are no special styles defined for HtmlListBox, in particular the
+ListBox styles can not be used here.
+
+Returns @true@ on success or @false@ if the control couldn't be created
+
+
+h3(#HtmlListBox_getfilesystem). HtmlListBox#get_file_system
+
+ "FileSystem":filesystem.html *get_file_system*()
+
+ "FileSystem":filesystem.html *get_file_system*()
+
+Returns the "FileSystem":filesystem.html used by the HTML parser of
+this object. The file system object is used to resolve the paths in HTML
+fragments displayed in the control and you should use 
+"FileSystem#change_path_to":filesystem.html#FileSystem_changepathto if you use
+relative paths for the images or other resources embedded in your HTML.
+
+
+h3(#HtmlListBox_getselectedtextbgcolour). HtmlListBox#get_selected_text_bg_colour
+
+ "Colour":colour.html *get_selected_text_bg_colour*(%(arg-type)Colour% colBg)
+
+This virtual function may be overridden to change the appearance of the
+background of the selected cells in the same way as 
+"get_selected_text_colour":#HtmlListBox_getselectedtextcolour.
+
+It should be rarely, if ever, used because 
+"set_selection_background":#HtmlListBox_setselectionbackground allows to
+change the selection background for all cells at once and doing anything more
+fancy is probably going to look strangely.
+
+h4. See also
+
+"get_selected_text_colour":#HtmlListBox_getselectedtextcolour
+
+
+h3(#HtmlListBox_getselectedtextcolour). HtmlListBox#get_selected_text_colour
+
+ "Colour":colour.html *get_selected_text_colour*(%(arg-type)Colour% colFg)
+
+This virtual function may be overridden to customize the appearance of the
+selected cells. It is used to determine how the colour _colFg_ is going to
+look inside selection. By default all original colours are completely ignored
+and the standard, system-dependent, selection colour is used but the program
+may wish to override this to achieve some custom appearance.
+
+h4. See also
+
+"get_selected_text_bg_colour":#HtmlListBox_getselectedtextbgcolour,
+
+"set_selection_background":#HtmlListBox_setselectionbackground,
+
+"SystemSettings#get_colour":systemsettings.html#SystemSettings_getcolour
+
+
+h3(#HtmlListBox_ongetitem). HtmlListBox#on_get_item
+
+ String *on_get_item*(%(arg-type)size_t% n)
+
+This method must be implemented in the derived class and should return
+the body (i.e. without @<html>@ nor @<body>@ tags) of the HTML fragment
+for the given item.
+
+
+h3(#HtmlListBox_ongetitemmarkup). HtmlListBox#on_get_item_markup
+
+ String *on_get_item_markup*(%(arg-type)size_t% n)
+
+This function may be overridden to decorate HTML returned by
+"on_get_item()":#HtmlListBox_ongetitem().
+

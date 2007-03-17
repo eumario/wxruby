@@ -1,0 +1,49 @@
+h1(#wxpreviewcanvas). Wx::PreviewCanvas
+
+A preview canvas is the default canvas used by the print preview
+system to display the preview.
+
+h2. Derived from
+
+"ScrolledWindow":scrolledwindow.html
+
+"Window":window.html
+
+"wxevthandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"PreviewFrame":previewframe.html, "PreviewControlBar":previewcontrolbar.html, "PrintPreview":printpreview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PreviewCanvas.new":#PreviewCanvas_new
+* "PreviewCanvas#on_paint":#PreviewCanvas_onpaint
+
+</div>
+
+
+h3(#PreviewCanvas_new). PreviewCanvas.new
+
+  *PreviewCanvas.new*(%(arg-type)PrintPreview% preview,  %(arg-type)Window% parent, 
+                    %(arg-type)Point% pos = DEFAULT_POSITION, 
+                    %(arg-type)Size% size = DEFAULT_SIZE, 
+                    %(arg-type)Integer% style = 0, 
+                    %(arg-type)String% name = "canvas")
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+
+h3(#PreviewCanvas_onpaint). PreviewCanvas#on_paint
+
+  *on_paint*(%(arg-type)PaintEvent% event)
+
+Calls "PrintPreview#paint_page":printpreview.html#PrintPreview_paintpage to refresh the canvas.
+

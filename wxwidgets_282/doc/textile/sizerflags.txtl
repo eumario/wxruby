@@ -1,0 +1,112 @@
+h1(#wxsizerflags). Wx::SizerFlags
+
+PRELIMINARY.
+
+Normally, when you add something to a sizer via "Sizer#add":sizer.html#Sizer_add, you have to specify a lot of flags and parameters.  This can be unwieldy.
+
+This is where SizerFlags comes in.  Instead of a bunch of flags and other stuff, you can use SizerFlags, which is a convenient class for doing so.
+
+Note that by specification, all methods of SizerFlags return the SizerFlags object itself to ease the calling of multiple methods at a time.
+
+
+h2. Methods
+
+<div id="methods">
+
+* "SizerFlags.new":#SizerFlags_new
+* "SizerFlags#align":#SizerFlags_align
+* "SizerFlags#border":#SizerFlags_border
+* "SizerFlags#center":#SizerFlags_center
+* "SizerFlags#centre":#SizerFlags_centre
+* "SizerFlags#expand":#SizerFlags_expand
+* "SizerFlags#left":#SizerFlags_left
+* "SizerFlags#proportion":#SizerFlags_proportion
+* "SizerFlags#right":#SizerFlags_right
+
+</div>
+
+h3(#SizerFlags_new). SizerFlags.new
+
+  *SizerFlags.new*(%(arg-type)Integer% proportion = 0)
+
+Creates the Sizer with the proportion specified by @proportion@.
+
+
+h3(#SizerFlags_align). SizerFlags#align
+
+ "SizerFlags& ":sizerflags& .html *align*(%(arg-type)Integer% align = 0)
+
+Sets the alignment of this SizerFlags to @align@.
+
+Note that if this method is not called, the SizerFlags has no specified alignment.
+
+h4. See also
+
+"Left":sizerflagsleft.html,
+
+"Right":sizerflagsright.html,
+
+"Centre":sizerflagscentre.html
+
+
+h3(#SizerFlags_border). SizerFlags#border
+
+ "SizerFlags& ":sizerflags& .html *border*(%(arg-type)Integer% direction, 
+                                         %(arg-type)Integer% borderinpixels)
+
+Sets the SizerFlags to have a border of a number of pixels specified by @borderinpixels@ with the directions specified by @direction@.
+
+ "SizerFlags& ":sizerflags& .html *border*(%(arg-type)Integer% direction = ALL)
+
+Sets the SizerFlags to have a border of a default size with the directions specified by @direction@.
+
+
+h3(#SizerFlags_center). SizerFlags#center
+
+ "SizerFlags& ":sizerflags& .html *center*()
+
+Sets the object of the SizerFlags to center itself in the area it is given.
+
+
+h3(#SizerFlags_centre). SizerFlags#centre
+
+ "SizerFlags& ":sizerflags& .html *centre*()
+
+"SizerFlags#center":sizerflags.html#SizerFlags_center for people with the other dialect of english.
+
+
+h3(#SizerFlags_expand). SizerFlags#expand
+
+ "SizerFlags& ":sizerflags& .html *expand*()
+
+Sets the object of the SizerFlags to expand to fill as much area as it can.
+
+
+h3(#SizerFlags_left). SizerFlags#left
+
+ "SizerFlags& ":sizerflags& .html *left*()
+
+Aligns the object to the left, shortcut for @Align(ALIGN_LEFT)@
+
+h4. See also
+
+"Align":sizerflagsalign.html
+
+
+h3(#SizerFlags_proportion). SizerFlags#proportion
+
+ "SizerFlags& ":sizerflags& .html *proportion*(%(arg-type)Integer% proportion = 0)
+
+Sets the proportion of this SizerFlags to @proportion@
+
+
+h3(#SizerFlags_right). SizerFlags#right
+
+ "SizerFlags& ":sizerflags& .html *right*()
+
+Aligns the object to the right, shortcut for @Align(ALIGN_RIGHT)@
+
+h4. See also
+
+"Align":sizerflagsalign.html
+

@@ -1,0 +1,47 @@
+h1(#wxbrush). Wx::Brush
+
+A brush is a drawing tool for filling in areas. It is used for painting
+the background of rectangles, ellipses, etc. It has a colour and a
+style.
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Predefined objects
+
+Objects:
+
+*NullBrush*
+
+Pointers:
+
+*BLUE_BRUSH
+
+GREEN_BRUSH\\
+WHITE_BRUSH\\
+BLACK_BRUSH\\
+GREY_BRUSH\\
+MEDIUM_GREY_BRUSH\\
+LIGHT_GREY_BRUSH\\
+TRANSPARENT_BRUSH\\
+CYAN_BRUSH\\
+RED_BRUSH*
+
+h2. Remarks
+
+On a monochrome display, Widgets shows
+all brushes as white unless the colour is really black.
+
+Do not initialize objects on the stack before the program commences,
+since other required structures may not have been set up yet. Instead,
+define global pointers to objects and create them in "App#on_init":app.html#App_oninit or
+when required.
+
+An application may wish to create brushes with different
+characteristics dynamically, and there is the consequent danger that a
+large number of duplicate brushes will be created. Therefore an
+application may wish to get a pointer to a brush by using the global
+list of brushes *TheBrushList*, and calling the member function

@@ -1,0 +1,44 @@
+h1(#wxmeminputstream). Wx::MemoryInputStream
+
+h2. Derived from
+
+"InputStream":inputstream.html
+
+h2. See also
+
+"StreamBuffer":streambuffer.html, "MemoryOutputStream":memoutputstream.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MemoryInputStream.new":#MemoryInputStream_new
+* "MemoryInputStream#get_input_stream_buffer":#MemoryInputStream_getinputstreambuffer
+
+</div>
+
+
+h3(#MemoryInputStream_new). MemoryInputStream.new
+
+  *MemoryInputStream.new*(%(arg-type)char% data,  %(arg-type)size_t% len)
+
+Initializes a new read-only memory stream which will use the specified buffer
+_data_ of length _len_. The stream does not take ownership of the 
+buffer, i.e. the buffer will not be deleted in its destructor.
+
+  *MemoryInputStream.new*(%(arg-type)MemoryOutputStream% stream)
+
+Creates a new read-only memory stream, initializing it with the
+data from the given output stream stream.
+
+  *destructor*()
+
+Destructor.
+
+h3(#MemoryInputStream_getistrmbuf). MemoryInputStream#get_input_stream_buffer
+
+ "StreamBuffer":streambuffer.html *get_input_stream_buffer*()
+
+Returns the pointer to the stream object used as an internal buffer
+for that stream.
+

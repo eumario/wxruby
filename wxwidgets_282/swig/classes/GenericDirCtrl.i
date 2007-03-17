@@ -1,0 +1,31 @@
+#   Copyright 2004-2005 by Kevin Smith
+#   released under the MIT-style wxruby2 license
+
+%include "../common.i"
+
+%module(directors="1") wxGenericDirCtrl
+
+%{
+#include <wx/dirctrl.h>
+%}
+
+enum
+{
+    // Only allow directory viewing/selection, no files
+    wxDIRCTRL_DIR_ONLY       = 0x0010,
+    // When setting the default path, select the first file in the directory
+    wxDIRCTRL_SELECT_FIRST   = 0x0020,
+    // Show the filter list
+    wxDIRCTRL_SHOW_FILTERS   = 0x0040,
+    // Use 3D borders on internal controls
+    wxDIRCTRL_3D_INTERNAL    = 0x0080,
+    // Editable labels
+    wxDIRCTRL_EDIT_LABELS    = 0x0100
+};
+
+%import "include/wxObject.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxWindow.h"
+%import "include/wxControl.h"
+
+%include "include/wxGenericDirCtrl.h"

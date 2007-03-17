@@ -1,0 +1,110 @@
+body { 
+    font-family: Lucida Grande, verdana, arial, helvetica, sans-serif;
+    float: right;
+}
+
+hr { 
+    display: none;
+}
+
+h1 { 
+    font-size: 24pt;
+}
+
+h2 { 
+    font-size: 18pt;
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+    border-bottom: 2px dotted #CCAA33;
+}
+
+h3 { 
+    font-size: 12pt;
+    border-bottom: 2px dotted #CCAA33;
+    padding-bottom: 2px;
+}
+
+h4 {
+	font-size: 11pt;
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 1px;
+	padding-bottom: 1px;
+}
+
+li, p { 
+    font-size: 11pt;
+}
+
+td { 
+    font-size: 11pt;
+    vertical-align: top;
+    padding: 3px;
+}
+
+a { 
+    color: #AA3311;
+    text-decoration: none;
+}
+
+a:hover { 
+    color: #FF3311;
+    text-decoration: underline;
+}
+
+a:visited { 
+    color: #662211;
+    text-decoration: none;
+}
+
+pre {
+	padding: 5px;
+    border: 1px solid #EEEAE3;
+    background-color: #FFFAF3;
+}
+
+.arg-type { 
+    color: #999999;
+}
+
+a[href="#top"] { 
+    font-size: smaller;
+    font-weight: bold;
+    color: #55CC00;
+}
+
+a[href="#top"]:before { 
+    content: "<";
+}
+
+a[href="#top"]:after { 
+    content: ">";
+}
+
+#homelink { 
+    font-size: smaller;
+    font-weight: bold;
+    color: #55CC00;
+}
+
+a#homelink:before { 
+    content: "<";
+}
+
+a#homelink:after { 
+    content: ">";
+}
+
+#datestamp { 
+    padding: 3px;
+    font-size: smaller;
+    color: #333333;
+    border: 1px solid #EEEAE3;
+    background-color: #FFFAF3;
+}
+
+/* TODO - special formatting to make the 'methods' 
+   list a floating side panel */
+#methods { 
+
+}

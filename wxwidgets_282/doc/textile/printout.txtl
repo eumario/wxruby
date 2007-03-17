@@ -1,0 +1,216 @@
+h1(#wxprintout). Wx::Printout
+
+This class encapsulates the functionality of printing out an
+application document. A new class must be derived and members
+overridden to respond to calls such as OnPrintPage and HasPage.
+Instances of this class are passed to Printer::Print or a
+PrintPreview object to initiate printing or previewing.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Printing framework overview":printingoverview.html, "PrinterDC":printerdc.html, "PrintDialog":printdialog.html, "Printer":printer.html, "PrintPreview":printpreview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Printout.new":#Printout_new
+* "Printout#get_dc":#Printout_getdc
+* "Printout#get_page_info":#Printout_getpageinfo
+* "Printout#get_page_size_mm":#Printout_getpagesizemm
+* "Printout#get_page_size_pixels":#Printout_getpagesizepixels
+* "Printout#get_ppi_printer":#Printout_getppiprinter
+* "Printout#get_ppi_screen":#Printout_getppiscreen
+* "Printout#get_title":#Printout_gettitle
+* "Printout#has_page":#Printout_haspage
+* "Printout#is_preview":#Printout_ispreview
+* "Printout#on_begin_document":#Printout_onbegindocument
+* "Printout#on_end_document":#Printout_onenddocument
+* "Printout#on_begin_printing":#Printout_onbeginprinting
+* "Printout#on_end_printing":#Printout_onendprinting
+* "Printout#on_prepare_printing":#Printout_onprepareprinting
+* "Printout#on_print_page":#Printout_onprintpage
+
+</div>
+
+
+
+h3(#Printout_new). Printout.new
+
+  *Printout.new*(%(arg-type)String% title = "Printout")
+
+Constructor. Pass an optional title argument - the current filename would be a good idea. This will appear in the printing list
+(at least in MSW)
+
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#Printout_getdc). Printout#get_dc
+
+ "DC":dc.html *get_dc*()
+
+Returns the device context associated with the printout (given to the printout at start of
+printing or previewing). This will be a PrinterDC if printing under Windows,
+a PostScriptDC if printing on other platforms, and a MemoryDC if previewing.
+
+
+h3(#Printout_getpageinfo). Printout#get_page_info
+
+  *get_page_info*(%(arg-type)Integer% minPage,  %(arg-type)Integer% maxPage, 
+                %(arg-type)Integer% pageFrom, 
+                %(arg-type)Integer% pageTo)
+
+Called by the framework to obtain information from the application about minimum and maximum page values that
+the user can select, and the required page range to be printed. By default this
+returns 1, 32000 for the page minimum and maximum values, and 1, 1 for the required page range.
+
+If _minPage_ is zero, the page number controls in the print dialog will be disabled.
+
+
+
+
+
+
+h3(#Printout_getpagesizemm). Printout#get_page_size_mm
+
+  *get_page_size_mm*(%(arg-type)Integer% w,  %(arg-type)Integer% h)
+
+Returns the size of the printer page in millimetres.
+
+
+
+
+
+
+h3(#Printout_getpagesizepixels). Printout#get_page_size_pixels
+
+  *get_page_size_pixels*(%(arg-type)Integer% w,  %(arg-type)Integer% h)
+
+Returns the size of the printer page in pixels. These may not be the
+same as the values returned from "DC#get_size":dc.html#DC_getsize if
+the printout is being used for previewing, since in this case, a
+memory device context is used, using a bitmap size reflecting the current
+preview zoom. The application must take this discrepancy into account if
+previewing is to be supported.
+
+
+
+
+
+
+h3(#Printout_getppiprinter). Printout#get_ppi_printer
+
+  *get_ppi_printer*(%(arg-type)Integer% w,  %(arg-type)Integer% h)
+
+Returns the number of pixels per logical inch of the printer device context.
+Dividing the printer PPI by the screen PPI can give a suitable scaling
+factor for drawing text onto the printer. Remember to multiply
+this by a scaling factor to take the preview DC size into account.
+
+
+
+
+
+
+h3(#Printout_getppiscreen). Printout#get_ppi_screen
+
+  *get_ppi_screen*(%(arg-type)Integer% w,  %(arg-type)Integer% h)
+
+Returns the number of pixels per logical inch of the screen device context.
+Dividing the printer PPI by the screen PPI can give a suitable scaling
+factor for drawing text onto the printer. Remember to multiply
+this by a scaling factor to take the preview DC size into account.
+
+
+h3(#Printout_gettitle). Printout#get_title
+
+ String *get_title*()
+
+Returns the title of the printout
+
+
+
+
+
+
+h3(#Printout_haspage). Printout#has_page
+
+ Boolean *has_page*(%(arg-type)Integer% pageNum)
+
+Should be overridden to return true if the document has this page, or false
+if not. Returning false signifies the end of the document. By default,
+HasPage behaves as if the document has only one page.
+
+
+h3(#Printout_ispreview). Printout#is_preview
+
+ Boolean *is_preview*()
+
+Returns true if the printout is currently being used for previewing.
+
+
+h3(#Printout_onbegindocument). Printout#on_begin_document
+
+ Boolean *on_begin_document*(%(arg-type)Integer% startPage,  %(arg-type)Integer% endPage)
+
+Called by the framework at the start of document printing. Return false from
+this function cancels the print job. OnBeginDocument is called once for every
+copy printed.
+
+The base Printout::OnBeginDocument _must_ be called (and the return value
+checked) from within the overridden function, since it calls DC::StartDoc.
+
+
+
+
+h3(#Printout_onenddocument). Printout#on_end_document
+
+  *on_end_document*()
+
+Called by the framework at the end of document printing. OnEndDocument
+is called once for every copy printed.
+
+The base Printout::OnEndDocument _must_ be called
+from within the overridden function, since it calls DC::EndDoc.
+
+
+h3(#Printout_onbeginprinting). Printout#on_begin_printing
+
+  *on_begin_printing*()
+
+Called by the framework at the start of printing. OnBeginPrinting is called once for every
+print job (regardless of how many copies are being printed).
+
+
+h3(#Printout_onendprinting). Printout#on_end_printing
+
+  *on_end_printing*()
+
+Called by the framework at the end of printing. OnEndPrinting
+is called once for every print job (regardless of how many copies are being printed).
+
+
+h3(#Printout_onprepareprinting). Printout#on_prepare_printing
+
+  *on_prepare_printing*()
+
+Called once by the framework before any other demands are made of the
+Printout object. This gives the object an opportunity to calculate the
+number of pages in the document, for example.
+
+
+h3(#Printout_onprintpage). Printout#on_print_page
+
+ Boolean *on_print_page*(%(arg-type)Integer% pageNum)
+
+Called by the framework when a page should be printed. Returning false cancels
+the print job. The application can use Printout::GetDC to obtain a device
+context to draw on.
+

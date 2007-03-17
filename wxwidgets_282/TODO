@@ -1,0 +1,88 @@
+==================================================
+
+NOTE: This file is somewhat out of date. Some of these issues may well have
+been solved by developments in wxRuby or SWIG. 
+
+For an up-to-date list of wxRuby bugs and missing features, please
+consult the rubyforge tracker at:
+
+https://rubyforge.org/tracker/?group_id=35
+
+Please report any new bugs via the tracker.
+
+==================================================
+
+Visible Bugs
+------------
+
+- Fix crashes when garbage collection happens
+  * First, make sure all these classes have directors:
+	BusyCursor.h - should be polymorphic but compiler complains
+	CalendarDateAttr.h - not polymorphic
+	ChoicebookEvent.h - should be polymorphic but swig doesn't create director
+	ClassInfo.h
+	GridCellAttr.h
+	GridCellFloatRenderer.h - should be polymorphic but swig doesn't create director
+	GridCellNumberEditor.h - should be polymorphic but swig doesn't create director
+	GridCellNumberRenderer.h
+	Icon.h
+	ListbookEvent.h
+	ListItemAttr.h
+	MemoryDC.h
+	Point.h
+	Size.h
+	TextAttr.h
+	WindowDisabler.h
+
+- Splitters in bigdemo sometimes disappear when loading source (OS X)
+
+- Truncation/missing widgets in bigdemo (OS X)
+
+Underlying SWIG & Build system problems
+---------------------------------------
+
+- Make sure all cases of (int,array) that are typemapped to a single
+  parameter have an equivalent wxArrayString (or whatever), to work 
+  around a swig bug that results in uninitialized parameters.
+  
+- Get all the methods that return objects (instead of object pointers)
+  to work
+  
+- Rename Events.i to avoid confusion with swig/classes/Event.i.
+
+- Fix all "can't return" warnings for non-pointer objects
+
+- Add detection of "initialize" methods to renamer.rb, and
+  rename them to "init"
+
+- Add classes that were supported in wxruby 0.6.0 - now only DataObject
+  and DataFormat classes remain to be added
+
+- Try to get rid of compile warnings
+
+- Insert placeholder .i files for any wx classes that we specifically 
+  do not want to support, such as wxDateTime and the socket classes.
+
+- Move all typemaps into a swig/typemaps/ directory, and include the 
+  appropriate ones on a class-by-class basis.
+
+- Allow passing local-encoding strings into unicode versions of wx
+(perhaps with a global runtime setting to say that all ruby strings
+should use local-encoding, UTF-8, or some other encoding)
+
+- Clean up fixevents.rb code
+
+- Eliminate the list in parents.rb and just build the list automatically 
+  from the wx header files
+
+- Add mark/free handling to typemap methods
+  
+- NOTE: Any method that returns an object (rather 
+  than an object reference or pointer) is currently 
+  being removed by swig. ARGH!
+
+- Add aliases like label and label= for get_label and set_label. Patch 
+  submitted, decide later whether to apply.
+
+- Problem classes:
+	rubyClass = rb_define_class_under(GetWxModule(),"ArtProvider", rb_cObject);

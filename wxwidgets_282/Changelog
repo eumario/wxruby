@@ -1,0 +1,484 @@
+=== 0.0.39 tag on 2007-03-12 included all of this: ===
+- Added grid sample (Alex Fenton)
+- Fix GC-related segfaults related to GridCellAttr and GridCellEditor (Alex Fenton)
+- Fix numerous crashes caused by regression from SWIG upgrade (Alex Fenton)
+- Documentation for FontDialog (Alex Fenton)
+- Test for suitable version (==2.6.3) of wxWidgets (Alex Fenton)
+- Fix Window compile error (Roy Sutton)
+- Added GridBagSizer and supporting classes (Alex Fenton)
+- Update deprecated Ruby API calls to STR2CSTR (Alex Fenton)
+- Fix various crashers in samples (Alex Fenton)
+- Fix crasher with item data in virtual ListCtrl (Alex Fenton)
+- Added RefreshItem(s) methods for virtual ListCtrl (Alex Fenton)
+- Added useful links in documentation main page (Hawley Waldman)
+- Added IconBundle class (Alex Fenton)
+- Added PasswordEntryDialog class (Alex Fenton)
+- Fix segfault on exit on GTK (Alex Fenton)
+- Added missing 'methods' list in docs for numerous classes (Alex Fenton)
+- Fix the inheritance chain for wxIcon, fixes the 'ok' method on M (Alex Fenton)
+- Typemap wxTreeItemId to a simple ruby Integer, not a full ruby class (Alex Fenton)
+- Make wx raise an exception if Icon created from non-existent file (Alex Fenton)
+- Fix a GC crasher when using nested sizers (Alex Fenton)
+- Made NULL_XXX objects available from startup though (Alex Fenton) 
+- Moved init StockObjects to App.on_init to avoid GTK error messages (Alex Fenton)
+- Added DEFAULT_VALIDATOR constant (Alex Fenton)
+- Tidied up redundant stuff for old Wx versions in App.i (Alex Fenton)
+- Added convenience wrapper & doc for TextUrlEvent (Alex Fenton)
+- Added AcceleratorEntry and AcceleratorTable classes, plus doc (Alex Fenton)
+- Added ContextMenuEvent plus plumbing (Alex Fenton)
+- Added ScrollBar and ScrollEvent, plus event handling plumbing (Alex Fenton)
+- Added WINDOW_VARIANT enum for small/mini controls on OS X (Alex Fenton)
+- Raise an error if an invalid name is used to instantiate a Colour (Alex Fenton)
+- Restored tree item images and fonts within TreeCtrl sample (Alex Fenton)
+- Stock colours etc initialized at library load time, not app.on_init (Alex Fenton)
+- Added MenuEvent class (Alex Fenton)
+- Documented how to use WindowDisabler, BusyCursor & BusyInfo (Alex Fenton)
+- Fixed TreeItemId == method (Alex Fenton)
+- Fixed crasher with Bitmap#set_mask (Alex Fenton)
+- Moved TreeCtrl#traverse to wxSugar (Alex Fenton)
+- Simplify some bits of XRC sample (Alex Fenton)
+- Added some missing classes to parents.rb (Alex Fenton)
+- Made find_window_xx etc return correct objects from SWIG tracking (Alex FEnton)
+- Added TextUrlEvent class (Alex Fenton)
+- Fixed Window#get_children method (Alex Fenton)
+
+=== 0.0.38 tag on 2006-12-24 included all of this: ===
+- Updated TODO (Alex Fenton)
+- Tweak binary library loading so errors are raised with accurate info (Alex Fenton)
+- Added HelpController and HtmlHelpController, plus bigdemo sample (Alex Fenton)
+- Added TreeCtrl#traverse method (Alex Fenton)
+- Removed broken and deprecated LayoutConstraints (Alex Fenton)
+- Added Wx::Bitmap.draw, analogous to Wx::Window.paint (Alex Fenton)
+- More i18n support: add Locale class, get/set encodings & languages (Alex Fenton)
+- Nicer to_s output, esp for Colour, Point, Rect, Size (Alex Fenton)
+- Restored client data stuff in samples(Roy Sutton)
+- Re-enable ListBox methods that accept new client data (Roy Sutton)
+- Added typemap to fix ListBox.get_selections (Roy Sutton)
+- Added wxUInt32 typedef, fixing FindReplaceData.new(a_flag) (Roy Sutton)
+- Give more info on failed assertions but don't raise exception (Alex Fenton)
+- Corrected some typemapped method signatures in documentation (Alex Fenton)
+- Un-disabled evt_toolbar on Linux and OS X (Alex Fenton)
+- Fixed TreeCtrl#get_item_data and mem mgmt (Alex Fenton)
+- Added get_client_data support for all ControlWithItems + test case (Alex Fenton)
+- Ensure that all lib files are included in gem and tarball (Sean Long/Alex Fenton)
+- Fixed an error in bigdemo's About dialog (Alex Fenton)
+- Fixed a few crashes in samples (Sean Long)
+- Fix crash in etc/sash.rb sample (Alex Fenton)
+- Added HtmlWindow, HtmlCell, HtmlEasyPrinting &c (Alex Fenton)
+- Added WindowCreateEvent and WindowDestroyEvent (Alex Fenton)
+- Fix for Choice#get_client_data and set_client_data, inc mem mgmt (Alex Fenton)
+
+=== 0.0.37 tag on 2006-10-24 included all of this: ===
+- Fixed rake install task for non-gem build, added rake uninstall (Alex Fenton)
+- Some unneeded debugging and deprecated method removed from App (Alex Fenton)
+- Window.paint implemented in Ruby (Alex Fenton)
+- Created a directory for ruby extension classes (Alex Fenton)
+- Un-ignored get_multi_line_text_extent (Roy Sutton)
+- Added html doc publishing tasks to rake (Alex Fenton)
+- Add support for faster building on 2-processor systems, via Makefile (Sean Long)
+- Fix some bugs causing crashes on OS X in bigdemo MDI sample (Alex Fenton)
+- Enabled Pen#Get/SetStipple on Mac and MsWin (Alex Fenton/Roy Sutton)
+- Remove a SWIG warning in Pen and remove unneeded broken typemap (Roy Sutton)
+- Remove a spurious warning on MSWIN, in fixplatform.rb (Roy Sutton)
+- Scintilla support on OS X (Alex Fenton)
+- Fixes for printing framework - constants, missing meths (Roy Sutton/Sean Long)
+- Some little doc fixes (Alex Fenton)
+- Added printing support and sample (Sean Long)
+- Fix Bug 6144 - compile warning on 64 bit processors (Roy Sutton)
+- Added automatic test for rubygem if wx cannot be loaded 'normally' (Roy
+   Sutton)
+- Added shebang line to samples (Roy Sutton)
+- Removed SWIG virtual feature from rakewx.rb for SWIG 1.3.30 compatibility
+  (Roy Sutton)
+- Remove obsolete calls to init_all_image_handlers (Roy Sutton)
+- TaskBarIcon class and sample added (Roy Sutton)	
+- DragImage class and sample added (Alex Fenton)
+- StdDialogButtonSizer class added (Alex Fenton)
+- init_all_image_handlers, init_stock_objects and init_stock_lists now
+  called automatically (Roy Sutton)
+- Fix prototypes in wxColourDatabase.h (Roy Sutton)
+
+====0.0.36 tag on 2006-10-02 included all of this:===
+- Fix OS X crashes in bigdemo Menu and PopupMenu, for set_bitmap (Alex Fenton)
+- Update README and TODO (Alex Fenton)
+- Fix fixmodule obj tracking code for random crasher on OS X (Alex Fenton)
+- Use Scintilla for code viewer in bigdemo, if available (Roy Sutton)
+- Added SplashScreen class (Roy Sutton)
+- MenuItems owned by Menu when added (Roy Sutton) + doc (Alex Fenton)
+- Use IN/OUT parameters in Window.i - #client_to_screen etc (Roy Sutton)
+- Correct several Window methods that shouldn't be virtual (Roy Sutton)
+- Rakefile cleanup given WxWidgets 2.4 no longer supported (Tobias Gruetzmacher)
+- Change to fixmodule for Event#get_event_object (Roy Sutton)
+- Fix buglets in SashWindow and ScrolledWindow bigdemo (Roy Sutton)
+- Tarball and zip packages for documentation (Alex Fenton)
+- Fix build on non-gem systems (Tobias Gruetzmacher/Alex Fenton)
+- Fix several ScrolledWindow methods returning multiple integers (Roy Sutton)
+- Fix for gem-less systems (Tobias Gruetzmacher)
+- Fix name clash between Frame and MiniFrame samples in bigdemo (Roy Sutton)
+- WindowDC#get_text_extent unignored (Roy Sutton)
+- Samples files have svn:executable property set (Alex Fenton/Roy Sutton)
+- Better text wrapping in bigdemo.rb (Roy Sutton)
+- Forward compatibility for SWIG 1.3.30-dev (Roy Sutton)
+- Fix long *OUTPUT typemap, TextCtrl#get_selection + samples (Roy Sutton/Alex F)
+- Fix for ArtProvider.i under gcc 4.1.1 (Kees Jongenburger)
+- Added Scintilla, and sample (Roy Sutton)
+- Check in Textile doc sources, added key topics (Alex Fenton)
+- Fixes for alphachannel on Images (Roy Sutton)
+- Typemap and fix to wxWindow.h to enable Window#centre_on_parent (Roy Sutton)
+- Added version numbering system for builds and wx.rb (Alex Fenton)
+- Fixed ColourDialog crasher on OS X (Alex Fenton)
+- Added platform constants (Roy Sutton)
+- Added Region class, ShapedWindow sample for bigdemo (Roy Sutton)
+- Improvements to class documentation home page (Alex Fenton)
+- ID-range event handler fixes, sashwindow constants and demo (Roy Sutton)
+- Fixed BusyInfo.busy (Sean Long)
+- Added GenericDirCtrl, MiniFrame to bigdemo (Roy Sutton)
+- Fix progress dialog in dialogs.rb (Alex Fenton)
+- Cursor fixes, Cursor and Choicebook samples (Roy Sutton)
+- wxBitmapButton sample for bigdemo (Roy Sutton)
+- Rake fixes to enable unicode builds on Windows (Roy Sutton)
+- Fixes to ArtProvider constants, wrapping + a nice sample (Roy Sutton)
+- wxMouseEvent fixes (Roy Sutton)	
+- Fix to bigdemo ScrolledWindow sample (Roy Sutton)
+- Correct more types in latex doc translator (Alex Fenton)
+	
+====Migrated repository to SVN===
+- Minor corrections to FlexGridSizer methods (Roy Sutton)
+- wxWindow.h fixes for Windows background colour (Roy SUtton)
+- Whitespace fix in wxChoice.rbw in bigdemo (Roy Sutton)
+- DC#draw_lines fixes (Roy Sutton)
+- Small presentation tweaks to docs (Alex Fenton)
+- Fixed tarball name, OS X, version TODOs in rakepackage.rb (Alex Fenton)
+- Include file fix to prevent mdi sample crashing (Roy Sutton)
+- Improvements to bigdemo ListBox sample: prefix searching (Roy Sutton)
+- Minor text corrections to bigdemo Static Text sample (Roy Sutton)
+- Added commented-out AcceptsFiles to be implemented later (Roy Sutton)
+
+====0.0.35 tag on 2006-09-03 included this:===
+- Small fix to parameter list indenting in wx_latexparser.rb (Alex Fenton)
+- Fixed images.rb so it can be run from outside dir, added notes (Alex Fenton)
+- Fixed crasher in controls.rb due to deleted DC#free method (Alex Fenton)
+- Added licensing info to all samples (Alex Fenton/Kevin Smith)
+- Added SAMPLES-LICENSE.TXT (Kevin Smith/Alex Fenton)
+- Added ActivateEvent class, with a sample (Alex Fenton)
+
+====0.0.34 tag  on 2006-08-30 included all of this:===
+- Changed gemspec to "wxruby2-preview" version 0.0.34 (Alex Fenton)
+- Added Wx::WXRUBY_VERSION and Wx::WXWIDGETS_VERSION (Alex Fenton)
+- Added TreeCtrl sample (Alex Fenton)
+- Updated TODO, removed completed items, added known errors (Alex Fenton)
+- Fixed crasher in caret.rb sample due to deleted method (Alex Fenton)
+- Deleted redundant code in Events.i (Alex Fenton)
+- Allow bigdemo to be run from other dirs, fix icons and title (Alex Fenton)
+- Fixed crashes due to set_sizer ownership (Kevin Smith)
+- Remove dangerous and misleading DC#free method (Kevin Smith)
+- Fixed crash-on-exit in minimal.rb by changing Dialog superclass (Kevin Smith)
+- Added WXRUBY_RELEASE build option (Alex Fenton/Kevin Smith)
+- Enabled focus event handlers in bigdemo/wxTextCtrl.rb (Roy Sutton)
+- Added default App#on_assert to wx.rb (Kevin Smith)
+- Fixes to ControlWithItem, ComboBox;samples in bigdemo.rb (Roy Sutton)
+- Add WXRUBY_VERBOSE build environment variable (Kevin Smith)
+- Rename DEBUG build environment variable to WXRUBY_DEBUG (Kevin Smith)
+- Added task descriptions to rakefiles, so rake --tasks works (Alex Fenton)
+- Clean up rakefile SWIG detection to give clearer error messages (Kevin Smith)
+- Fix name of Image#find_handler_mime (Roy Sutton)
+- Removed duplicate declarations in wxTextCtrl.h & wxListCtrl.h (Roy Sutton)
+- Added support for DC#get_text_extent (Kevin Smith)
+- Fix GetTextExtent handling by adding directorout typemap (Roy Sutton)
+- Fix rakewx.rb SWIG version detection (Robin Stocker)
+- Minor gemspec changes (domain, email, spelling) (Kevin Smith)
+- Added more wxTextCtrl- and wxTextAttr-related constants (Sean Long)
+- Overhauled wxTextCtrl.h to match actual wx API (Sean Long)
+- Fixed 'undefined method' error in bigdemo/wxTextCtrl (Kevin Smith)
+- Renamed bigdemo from Main.rbw to bigdemo.rb (Kevin Smith)
+- Removed strict dependency on redcloth to do main rake compile (Alex Fenton)
+- Removed unneeded/problematic include dirs from mswin rakefile (Roy Sutton)
+- Fixed TreeEvent to enable more methods (Alex Fenton)
+- Fixed caret sample to not crash on certain keystrokes (Roy Sutton)
+- Added comment to listbook sample that it doesn't work on Linux (Alex Fenton)
+- Updated listbook sample menu id (Sean Long)
+- Updated caret sample to modern coding conventions (Alex Fenton)
+- Updated calendar sample to modern coding conventions (Alex Fenton)
+- Bigdemo: Commented out unsupported ArtProvider methods and related 
+  set_image calls (Alex Fenton)
+- Added and updated doc tasks in rakefile and rake/rakedocs.rb (Alex Fenton)
+- Fixed TreeCtrl class to #ifdef features not on MSW (Sean Long)
+- Big fixes to TreeCtrl and added TreeItemId class (Sean Long)
+- Fixed sash event handling to avoid crashes (Alex Fenton)
+  (caused by an incorrect patch merge by Kevin)
+
+
+====0.0.33 tag included all of this:===
+- Tweak rakewx for better debug_mode handling (Alex Fenton
+- Fixed internal get_ruby_object method to handle NULLs (Alex Fenton)
+- Improved miniframe sample (Alex Fenton)
+- Added support for overriding App#on_assert (Kevin Smith)
+- Minor Rakefile updates, mostly Mac and MSWin (Sean Long)
+- Added several missing methods in Window; changed others to better 
+  match wx (Sean Long)
+- Added Wx::default_coord, and minor cleanup of standard ids (Sean Long)
+- Added globals: display_depth, display_size, get_display_size and 
+  display_size_mm, get_display_size_mm (Sean Long)
+- Added ScrollWinEvent class and sample (Alex Fenton and Joe Seeley)
+- Exposed member variables in KeyEvent (Sean Long)
+- Added Sash classes and sample, but they don't yet work perfectly, at 
+    least under Linux (Alex Fenton)
+- Added GenericDirCtrl class (Alex Fenton)
+- Added Wizard support (Wizard, WizardEvent, WizardPage, WizardPageSimple)
+    and a sample (Alex Fenton)
+- Added NumberEntryDialog class (Sean Long)
+- Added MiniFrame class, and etc/miniframe.rb sample (Alex Fenton)
+- Added support for Window#get_text_extent (Sean Long)
+- Added support for Wx::GetKeyState and KeyCode (Sean Long)
+- Enabled SWIG option -fvirtual to reduce code size (Daniel F. Savarese)
+- Enabled SWIG feature compactdefaultargs to reduce code size 
+    (Daniel F. Savarese)
+
+====0.0.32 tag included all of this:===
+- Fix BoxSizer and StaticBoxSizer (Daniel F. Savarese and Roy Sutton)
+    Added "virtual" where needed, and added some missing methods
+- Get bigdemo ToolBar sample working (Roy Sutton)
+- Get text/textctrl.rb sample working (Roy Sutton)
+- Remove unneeded typemaps (Alex Fenton)
+- Ignore redundant variations of methods like get_size and get_position,
+    some constructors and cases of create, draw_lines, draw_polygon,
+	  ListBox#set
+- Ignore (temporarily?) methods that now give errors:
+    get_text_extent, get_multi_line_text_extent
+- Fix SWIG warnings by adding missing virtual destructor declarations
+- Now include SWIG's ruby typemaps.i file (Alex Fenton)
+- Reverted the wxWidget Assert catching that was just put in
+  (It was causing hanging intead of terminating the app)
+- Added DISOWN markers for Frame and MDIParentFrame MenuBars (Roy Sutton)
+- Add ListEvent and ListItem; improve ListCtrl and ListItemAttr (Roy Sutton)
+- Fix icon handling in bigdemo ListCtrl_virtual code (Roy Sutton)
+- Catch wxWidgets Asserts and raise them as Ruby fatal exceptions, to avoid 
+  a cascade of worthless "addr2line" console output on Linux
+- Fix bigdemo to allow right-side splitter to be resized. (It was being 
+  created with the splitter bar so high that it was under the tabs of the 
+	notebook, and therefore couldn't be resized)
+- Fix wxTextCtrl.h compile errors by removing overflow() (Roy Sutton)
+- Fix swig object tracking, hopefully fixing many crashes (Roy Sutton)
+- Patch to avoid almost immediate crashing in all samples on Linux after 
+  above patch was applied. Running minimal.rb, and opening and closing the 
+	Help/About box was the easiest way to see the problem. For some reason, 
+	an internal value was Qnil but the SWIG code was not checking for that.
+- Small fix to typemaps for wxString return values (Roy Sutton)
+- Require swig 1.3.29 or later (thanks to Roy Sutton)
+- Fix detection of Intel Macs (Sean Long)
+
+====0.0.31 tag included all of this:===
+*** NOTE: At this point, wxruby2 compiles and links on Ubuntu GNU/Linux, and 
+    can at least launch most samples. However, it crashes a lot.
+- BIG changes to target wxWidgets 2.6.3:
+  - controls.rb sample: Temporarily removed ArtProvider stuff that is crashing
+  - Button: Made GetLabel and SetLabel methods virtual
+  - Control: Added empty constructor, and made GetLabel and SetLabel virtual
+  - RadioBox: Removed deprecated GetLabel(n) and SetLabel(n) methods, and
+      made GetLabel and SetLabel virtual
+  - StaticText: Made GetLabel virtual
+  - TextCtrl: Refreshed entire definition, making several more methods virtual
+  - TreeCtrl: Implemented internal hack to work around the fact that this 
+      class has different superclasses on different platforms
+  - ART_XXX constants are now of type ArtID (instead of being strings), but
+      the ArtProvider stuff doesn't really work yet (at least it compiles!)
+  - No longer typedef ArtID and ArtClient as wxStrings
+- BIG changes to target SWIG 1.3.29:
+  - Removed swig option: -noextern
+  - ArtProvider: Removed non-static create_bitmap method (not sure why exactly)
+  - Partly disabled SWIG Director Exceptions because they caused link errors
+      (but they are only partly disabled, and actually sort of work)
+  - SWIG post-processor fixmodule now deletes the GCItem destructor, and
+      the UnknownExceptionHandler::handler method (both were causing errors 
+	  during compiling)
+  - Added a directorout typemap for wxString
+
+
+====This should have been tagged but wasn't:===
+- Improved unicode support, and added cool unicode sample: 
+  samples/text/unicode.rb (Alex Fenton)
+- Added cool text sample: samples/text/textctrl.rb (Alex Fenton)
+- Added support for SystemSettings (Alex Fenton)
+- Tweaked ComboBox constructor to fix cases where it got confused about 
+  which parameter was which (Kevin Smith)
+- Re-add typemap in FileDialog, so get_filenames and get_paths will work 
+  (thanks to Roy Sutton)
+- Many grid-related improvements, including adding GridCellCoords (Sean Long) 
+- Improvements to the typemaps, reducing warnings (Roy Sutton)
+- Applied a test patch (to the TODO file) submitted via darcs (Sean Long)
+  
+
+====0.0.30 tag included all of this:===
+- Enabled directors in these classes so they wouldn't crash during garbage 
+  collection:  BitmapButton, Bitmap, ControlWithItems, Cursor, DC, Event, 
+  FontDialog, Font, GridCellEditor, GridCellRenderer, Image, Pen, Sizer, 
+  TipProvider
+- Added back BU_XXX constants that were lost in a recent RubyConstants change
+- Fixed samples/minimal/text.rb to require 'wx' (Sean Long)
+- Added another DC#draw_spline (Roy Sutton)
+- Fixes to bigdemo MDI sample to work on MS Windows (Roy Sutton)
+- Fixes to get_text_extent in DC, WindowDC, Window (Roy Sutton)
+- Fix to bigdemo Notebook sample (Roy Sutton)
+- Fixes to evt_menu_range (Roy Sutton)
+- Fix to bigdemo wxScrolledWindow to avoid crashing on Linux
+- Omit FontDialog.new(window) from Mac to avoid compile error
+- Many fixes to grid-related classes (Sean Long)
+- Added TextValidator and related constants; tweak Validator (Sean Long)
+- Added Rect class (Roy Sutton)
+- Added Timer and TimerEvent classes (Roy Sutton)
+- Added TreeCtrl icons (Roy Sutton)
+- Avoid MS Windows compile warning by removing definition of CURSOR_DEFAULT
+  (Roy Sutton)
+- Added ImageList constants (Roy Sutton)
+- Added typemap for StatusBar so get_field_rect will work (Roy Sutton)
+- Enabled Window#get_font, which helps bigdemo work better (Roy Sutton)
+- Enabled several platform-specific methods to MenuItem (Roy Sutton)
+- Enabled Window#RegisterHotKey on MS Windows (Roy Sutton)
+- Added several missing methods in SplitterWindow (Roy Sutton)
+- Properly handle MS Windows-specific virtual methods in FindReplaceDialog
+  (Roy Sutton)
+
+
+
+
+====0.0.29 tag included all of this:===
+- Updated rakefile to only try to build .i swig files (thanks to Roy Sutton)
+- Change App debugging output to be based on __WXDEBUG__ (Sean Long)
+- Several corrections to the inheritance chains (Sean Long)
+- Added TopLevelWindow (Sean Long)
+- Made more RadioBox methods virtual (thanks to Roy Sutton)
+- Split RadioBox#show_item, to match wxPython
+- Added ScreenDC (Sean Long)
+- Added ChoiceBook and ChoiceBookEvent (Sean Long)
+- Fixed controls.rb sample so images load properly (Roy Sutton)
+- Fix big bug where Mac apps would exit before showing the main window,
+  by declaring Show in Frame.i (Sean Long)
+- Added, fixed, and rearranged lots of RubyConstants (Sean Long)
+- Fixed grid renderers and editors to use SWIG directors (Sean Long)
+- Added typemap for ArrayInt (Sean Long)
+- Fixed bigdemo About box (Roy Sutton)
+- Added wxTreeCtrl::HitTest which allows tree clicks in bigdemo (Roy Sutton)
+- Fixed declaration of StaticLine constructor and #create (Roy Sutton)
+- Fix to bigdemo that allows wxDialog to come up (Roy Sutton)
+- Fix to bigdemo that allows double-clicking in the tree (Roy Sutton)
+- Added/corrected several methods in Event and subclasses (Roy Sutton)
+- Fix renamer so centreX becomes centre_x (Roy Sutton)
+- Added several typemaps so more of bigdemo can work (Roy Sutton)
+- Made Caret#show and #hide virtual to avoid crashing the caret sample
+- Fixed wxCheckListBox.h which works around a swig overloading problem
+  (supposedly helps with part of bigdemo) (thanks to Roy Sutton)
+- Two tweaks to bigdemo that allow CheckListBox sample to work on Linux
+- Add grid events (Sean Long)
+- Updates to bigdemo to allow Button, CheckBox, Calendar and Sizer demos 
+  to work (Roy Sutton)
+- (Hopefully) fixed link error caused by Bogus class
+- Removed extra CR's from all bigdemo source files
+- Disabled CheckListBox#get_item_height since it's not available on Mac
+  (thanks to Sean Long)
+- Changed SingleChoiceDialog constructor to take a string array (Roy Sutton)
+- Removed unused and empty wxMultipleChoiceDialog.h class header (Roy Sutton)
+
+
+
+====0.0.28 tag included all of this:===
+- Checked in Robert Carlin's demo that is based on the wxPython demo.
+  It's in samples/bigdemo, and you start it by running Main.rbw.
+  It doesn't work yet, but will be great when it does!
+- Get new inheritance chain code to compile under MS Win (Roy Sutton)
+- Fix DC.h and WindowDC.i to properly handle pure virtual methods, 
+  allowing the caret sample to work again
+- Fixed ControlWithItems, Choice, ComboBox and ListBox to properly 
+  handle pure virtual methods, allowing the controls sample to work again
+- Properly mark more Dialog methods as being virtual (Roy Sutton)
+- Fixed all the Event classes to properly handle pure virtual methods
+- Fixed all the GridXxxRenderer classes to handle pure virtual methods
+- Fixed all the Sizer classes to handle pure virtual methods
+- Fixed TipProvider to be an abstract base class
+
+
+
+====0.0.27 tag included all of this:===
+- Added full inheritance to all classes
+- Fixed parent of ProgressDialog to be Dialog
+
+
+====0.0.26 tag included all of this:===
+- Greatly enhanced Grid support (Sean Long)
+
+
+====0.0.25 tag included all of this:===
+- Added src/.cvsignore
+- Added Button constants (BU_XXX)
+- Added TextAttr class (Alex Fenton)
+- Fixed some bugs in caret sample (Roy Sutton)
+- Added Listbook support and a sample (Sean Long)
+  (Note: On Linux, the sample just shows a blank window)
+- Added missing LayoutConstraints#centre_x and centre_y (Roy Sutton)
+- Added SplitterWindow (thanks to Roy Sutton)
+- Added TreeCtrl (compiles and can be new'd, but might segfault)
+- Minor fix to calendar sample (Roy Sutton)
+- Fix how Calendar enums were being defined, so the calendar sample
+  "highlight special dates" menu item now works (Roy Sutton)
+- Fix typo in listbook sample data (Roy Sutton)
+- Fixed TreeCtrl to compile under MS Windows (Roy Sutton)
+- Enabled Window#get_validator
+- Adjusted TextCtrl.i and Control.i to %import their parent 
+  classes so all the inherited virtual methods are wrapped by 
+  the Director. This needs to be done for *all* classes.
+- Added Validator class [no working sample yet] (Roy Sutton)
+  
+
+====0.0.24 tag included all of this:===
+- Restored SWIG 1.3.24 compatibility (not yet tested extensively)
+- Icon patch from Sean Long for MS Win compatibility
+- rakemswin.rb patch from Sean Long to properly pass __MSWIN__
+  flag into swig
+- samples/dialogs/dialogs.rb improvement from Roy Sutton
+- Added WXTYPE typedef so methods like Event.get_event_type 
+  would return simple numbers instead of weird objects,
+  thanks to Roy Sutton
+- Force creation of src/ file if it doesn't exist (Roy Sutton)
+
+
+  
+
+====0.0.23 tag included all of this:===
+- No longer support wx 2.5.3. Now require wx 2.6+
+- extconf.rb is now deprecated. Use rake instead.
+- Binary library is now named wxruby2, and a small Ruby 
+  wrapper named wx.rb is what is actually loaded by apps.
+- MAJOR overhaul of swig build process, and now
+  require SWIG 1.3.25 or newer.
+  Honestly, I'm surprised it worked at all before!
+- Automatically detects whether you have a suitable SWIG or not
+- Integrated more patches from Sean Long:
+   - XRC samples
+   - Added classes: MenuItem, ToolTip
+   - Added methods in several existing classes
+- Created temporary fake Notebook and ToggleButton classes 
+  in wx.rb, so the controls sample can run on Linux
+- Eliminated several compiler warnings, some by removing 
+  support for deprecated methods
+- Removed deprecated NotebookSizer class
+- Fixed wxEntry prototype that was causing errors under gentoo
+- Integrated Choice.i unicode patch from Jani Monoses
+- Updated TODO item to resemble reality
+- Added xrcid module method thanks to Sean Long
+- Added << operator for TextCtrl thanks to Sean Long
+- Updated all copyright headers to be consistent with LICENSE
+- Fixed unicode handling in Functions.i and typemap.i, and 
+  remove the needless typemap from Choice.i
+- Several .i file patches from Tobias Gruetzmacher:
+  wxruby-crlf.patch, typemap-fix.patch, togglebutton-fix.patch
+  spinevt-fix.patch, spinctrl-fix.patch, notebook-fix.patch,
+  remove-kluges.patch, choice-fix.patch, rake-shell.patch,
+  fix-controls-sample.patch & icons.tar.gz
+- Patches for mdi sample and Dialog class from Sean Long
+- Window::find_by_xxx now return a ruby object of a type 
+  that matches the underlying wx type (based on a patch by Sean Long)
+- No longer %ignore wxChoice() default constructor
+- Now pass wx cpp flags to swig so we can do things 
+  like #ifdef __WXGTK__ in the class/include/wxXxx.h files
+- (Hopefully) fixed Icon to be able to compile on all platforms
+- Removed deprecated wxMenuItem constructor for Mac compatibility
+  (based on a patch by Sean Long)

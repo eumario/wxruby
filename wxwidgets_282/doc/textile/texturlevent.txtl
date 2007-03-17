@@ -1,0 +1,78 @@
+h1(#wxtexturlevent). Wx::TextUrlEvent
+
+This event contains information about an interaction with a highlighted
+URL in a "TextCtrl":textctrl.html that has been initialised with the
+style @TE_AUTO_URL@.
+
+h2. Derived from
+
+"Event":event.html, "CommandEvent":commandevent.html
+
+h2. Event handlers 
+
+To process a TextUrlEvent, use the @evt_text_url@ event handler to
+direct the event to a block that takes a CommandEvent argument. Pass the
+id of the TextCtrl to the event handler.
+
+|*evt_text_url(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a text url interaction|
+
+h2. Different mouse events
+
+When an event handler is defined, *all* mouse interactions with URLs in
+the TextCtrl will fire an event. This means that not only button clicks,
+but mouse motion into, within and out of the URL area will trigger the
+handler. While this adds flexibility, it also means that you will probably
+need to determine what mouse action was taken to decide how to respond
+to the event.
+
+This can be done by calling the
+"TextUrlEvent#getmouseevent":get_mouse_event method and using the
+methods defined for "MouseEvent":mouseevent.html to determine whether
+the event was a mouse click, which button was clicked, and so on:
+
+ mouse_event = event.get_mouse_event
+ if mouse_event.left_down
+   # ...
+ end
+
+
+<div id="methods">
+
+h2. Instance Methods
+
+* "TextUrlEvent#get_mouse_event":#TextUrlEvent_getmouseevent
+* "TextUrlEvent#get_url":#TextUrlEvent_geturl
+* "TextUrlEvent#get_url_start":#TextUrlEvent_geturlstart
+* "TextUrlEvent#get_url_end":#TextUrlEvent_geturlend
+
+</div>
+
+h3(#TextUrlEvent_getmousevent). TextUrlEvent#checked
+
+ "MouseEvent":mousevent.html *get_mouse_event*()
+
+Returns the "MouseEvent":mousevent.html associated with this interaction.
+
+h3(#TextUrlEvent_geturl). TextUrlEvent#get_url
+
+  String *get_url*()
+
+Returns the text of the URL that is being interacted with. 
+
+This is a convenience method for calling:
+
+  get_event_object.get_value[get_url_start .. get_url_end]
+
+h3(#TextUrlEvent_geturlstart). TextUrlEvent#get_url_start
+
+ Integer *get_url_start*()
+
+Returns the first character position of the URL string within the containing
+TextCtrl's contents.
+
+h3(#TextUrlEvent_geturlend). TextUrlEvent#get_url_end
+
+ Integer *get_url_end*()
+
+Returns the last character position of the URL string within the containing
+TextCtrl's contents.

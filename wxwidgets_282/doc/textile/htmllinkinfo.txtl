@@ -1,0 +1,62 @@
+h1(#wxhtmllinkinfo). Wx::HtmlLinkInfo
+
+This class stores all necessary information about hypertext
+links (as represented by @<A>@ tag in HTML documents). In 
+current implementation it stores URL and target frame name. 
+_Note that frames are not currently supported by HTML!_
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlLinkInfo.new":#HtmlLinkInfo_new
+* "HtmlLinkInfo#get_event":#HtmlLinkInfo_getevent
+* "HtmlLinkInfo#get_html_cell":#HtmlLinkInfo_gethtmlcell
+* "HtmlLinkInfo#get_href":#HtmlLinkInfo_gethref
+* "HtmlLinkInfo#get_target":#HtmlLinkInfo_gettarget
+
+</div>
+
+
+h3(#HtmlLinkInfo_wxhtmllinkinfo). HtmlLinkInfo.new
+
+  *HtmlLinkInfo.new*(%(arg-type)String% href,  %(arg-type)String% target = '')
+
+Construct hypertext link from HREF (aka URL) and TARGET (name of target
+frame).
+
+h3(#HtmlLinkInfo_getevent). HtmlLinkInfo#get_event
+
+ "MouseEvent":mouseevent.html *get_event*()
+
+Return pointer to event that generated OnLinkClicked event. Valid
+only within "HtmlWindow#on_link_clicked":htmlwindow.html#HtmlWindow_onlinkclicked,
+NULL otherwise.
+
+h3(#HtmlLinkInfo_gethtmlcell). HtmlLinkInfo#get_html_cell
+
+ "HtmlCell":htmlcell.html *get_html_cell*()
+
+Return pointer to the cell that was clicked. Valid
+only within "HtmlWindow#on_link_clicked":htmlwindow.html#HtmlWindow_onlinkclicked,
+NULL otherwise.
+
+
+h3(#HtmlLinkInfo_gethref). HtmlLinkInfo#get_href
+
+ String *get_href*()
+
+Return _HREF_ value of the @<A>@ tag.
+
+h3(#HtmlLinkInfo_gettarget). HtmlLinkInfo#get_target
+
+ String *get_target*()
+
+Return _TARGET_ value of the @<A>@ tag (this value
+is used to specify in which frame should be the page pointed
+by "Href":htmllinkinfogethref.html opened).
+
