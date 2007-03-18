@@ -56,7 +56,7 @@ public:
   static wxWindow * GetCapture() ;
   virtual int GetCharHeight() const;
   virtual int GetCharWidth() const;
-  wxList& GetChildren() ;
+  wxWindowList& GetChildren() ;
   void GetClientSize(int*  width , int*  height ) const;
   wxSize GetClientSize() const;
   wxLayoutConstraints* GetConstraints() const;

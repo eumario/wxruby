@@ -32,10 +32,10 @@ enum wxWindowVariant
 %apply int * INOUT { int * x_INOUT, int * y_INOUT }
 
 // Typemap for GetChildren - casts wxObjects to correct ruby wrappers
-%typemap(out) wxList& {
+%typemap(out) wxWindowList& {
   $result = rb_ary_new();
 
-  wxNode *node = $1->GetFirst();
+  wxWindowListNode *node = $1->GetFirst();
   while (node)
   {
     wxObject *obj = node->GetData();
