@@ -19,8 +19,9 @@ File.open(filename, "w") do | out |
 puts("core_name: #{core_name}")
 	wx_name = "wx"+core_name
 	
-	if(core_name == "App")
+	if core_name == "App"
 		found_app_constructor = false
+		wx_name = core_name
 	else
 		found_app_constructor = true
 	end
