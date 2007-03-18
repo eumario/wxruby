@@ -65,10 +65,8 @@ h2. Methods
 * "Window#capture_mouse":#Window_capturemouse
 * "Window#center":#Window_center
 * "Window#center_on_parent":#Window_centeronparent
-* "Window#center_on_screen":#Window_centeronscreen
 * "Window#centre":#Window_centre
 * "Window#centre_on_parent":#Window_centreonparent
-* "Window#centre_on_screen":#Window_centreonscreen
 * "Window#clear_background":#Window_clearbackground
 * "Window#client_to_screen":#Window_clienttoscreen
 * "Window#close":#Window_close
@@ -91,7 +89,6 @@ h2. Methods
 * "Window#freeze":#Window_freeze
 * "Window#get_accelerator_table":#Window_getacceleratortable
 * "Window#get_accessible":#Window_getaccessible
-* "Window#get_adjusted_best_size":#Window_getadjustedbestsize
 * "Window#get_background_colour":#Window_getbackgroundcolour
 * "Window#get_background_style":#Window_getbackgroundstyle
 * "Window#get_best_fitting_size":#Window_getbestfittingsize
@@ -108,6 +105,7 @@ h2. Methods
 * "Window#get_cursor":#Window_getcursor
 * "Window#get_default_attributes":#Window_getdefaultattributes
 * "Window#get_drop_target":#Window_getdroptarget
+* "Window#get_effective_best_size":#Window_geteffectivebestsize
 * "Window#get_event_handler":#Window_geteventhandler
 * "Window#get_extra_style":#Window_getextrastyle
 * "Window#get_font":#Window_getfont
@@ -129,7 +127,6 @@ h2. Methods
 * "Window#get_size":#Window_getsize
 * "Window#get_sizer":#Window_getsizer
 * "Window#get_text_extent":#Window_gettextextent
-* "Window#get_title":#Window_gettitle
 * "Window#get_tool_tip":#Window_gettooltip
 * "Window#get_update_region":#Window_getupdateregion
 * "Window#get_validator":#Window_getvalidator
@@ -213,7 +210,6 @@ h2. Methods
 * "Window#set_size_hints":#Window_setsizehints
 * "Window#set_sizer":#Window_setsizer
 * "Window#set_sizer_and_fit":#Window_setsizerandfit
-* "Window#set_title":#Window_settitle
 * "Window#set_theme_enabled":#Window_setthemeenabled
 * "Window#set_tool_tip":#Window_settooltip
 * "Window#set_validator":#Window_setvalidator
@@ -318,14 +314,6 @@ h3(#Window_centeronparent). Window#center_on_parent
 
 A synonym for "centre_on_parent":#Window_centreonparent.
 
-
-h3(#Window_centeronscreen). Window#center_on_screen
-
-  *center_on_screen*(%(arg-type)Integer% direction)
-
-A synonym for "centre_on_screen":#Window_centreonscreen.
-
-
 h3(#Window_centre). Window#centre
 
   *centre*(%(arg-type)Integer% direction = BOTH)
@@ -350,7 +338,6 @@ h4. See also
 
 "Window#center":window.html#Window_center
 
-
 h3(#Window_centreonparent). Window#centre_on_parent
 
   *centre_on_parent*(%(arg-type)Integer% direction = BOTH)
@@ -372,23 +359,6 @@ window is not a top level window, then behaviour is the same as
 h4. See also
 
 "Window#centre_on_screen":window.html#Window_centreonscreen
-
-
-h3(#Window_centreonscreen). Window#centre_on_screen
-
-  *centre_on_screen*(%(arg-type)Integer% direction = BOTH)
-
-Centres the window on screen. This only works for top level windows -
-otherwise, the window will still be centered on its parent.
-
-h4. Parameters
-
-* _direction_ Specifies the direction for the centering. May be @HORIZONTAL@, @VERTICAL@ or @BOTH@.
-
-h4. See also
-
-"Window#centre_on_parent":window.html#Window_centreonparent
-
 
 h3(#Window_clearbackground). Window#clear_background
 
@@ -740,17 +710,6 @@ Returns the accessible object for this window, if any.
 See also "Accessible":accessible.html.
 
 
-h3(#Window_getadjustedbestsize). Window#get_adjusted_best_size
-
- "Size":size.html *get_adjusted_best_size*()
-
-This method is similar to "get_best_size":#Window_getbestsize, except
-in one thing.  GetBestSize should return the minimum untruncated size of the
-window, while this method will return the largest of BestSize and any user
-specified minimum size.  ie. it is the minimum size the window should currently
-be drawn at, not the minimal size it can possibly tolerate.
-
-
 h3(#Window_getbackgroundcolour). Window#get_background_colour
 
  "Colour":colour.html *get_background_colour*()
@@ -954,6 +913,18 @@ h4. See also
 "Window#set_drop_target":window.html#Window_setdroptarget,
 "Drag and drop overview":dndoverview.html
 
+
+h3(#Window_geteffectivebestsize). Window#get_effective_best_size
+
+ "Size":size.html *get_effective_best_size*()
+
+Merges the window's best size into the min size and returns the
+result.  This is the value used by sizers to determine the appropriate
+ammount of sapce to allocate for the widget.
+
+h4. See also
+
+"Window#get_best_size":window.html#Window_getbestsize, "Window#set_initial_size":window.html#Window_setinitialsize
 
 h3(#Window_geteventhandler). Window#get_event_handler
 
@@ -1211,17 +1182,6 @@ h4. Parameters
 * _string_ String whose extent is to be measured.
 * _font_ Font to use instead of the current window font (optional).
 * _use16_ If @true@, _string_ contains 16-bit characters. The default is @false@.
-
-h3(#Window_gettitle). Window#get_title
-
- String *get_title*()
-
-Gets the window's title. Applicable only to frames and dialogs.
-
-h4. See also
-
-"Window#set_title":window.html#Window_settitle
-
 
 h3(#Window_gettooltip). Window#get_tool_tip
 
@@ -2575,22 +2535,6 @@ h3(#Window_setsizerandfit). Window#set_sizer_and_fit
 
 The same as "set_sizer":#Window_setsizer, except it also sets the size hints
 for the window based on the sizer's minimum size.
-
-
-h3(#Window_settitle). Window#set_title
-
-  *set_title*(%(arg-type)String% title)
-
-Sets the window's title. Applicable only to frames and dialogs.
-
-h4. Parameters
-
-* _title_ The window's title.
-
-h4. See also
-
-"Window#get_title":window.html#Window_gettitle
-
 
 h3(#Window_setthemeenabled). Window#set_theme_enabled
 
