@@ -26,6 +26,9 @@ enum wxWindowVariant
 
 %rename(SetDimensions) wxWindow::SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
 
+// Caret set by set_caret becomes owned by C++
+%apply SWIGTYPE *DISOWN {wxCaret*  caret};
+
 // Any sizers passed in to wx become owned by C++
 %apply SWIGTYPE *DISOWN {wxSizer*  sizer};
 
