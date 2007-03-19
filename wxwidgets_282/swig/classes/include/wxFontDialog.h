@@ -21,7 +21,12 @@ public:
 
 
   virtual  ~wxFontDialog() ;
-  const wxFontData& GetFontData() const;
+#if defined(__WXMAC__)
+  wxFontData& GetFontData();
+#else
+	const wxFontData& GetFontData() const;
+#endif
+
   wxFontData& GetFontData() ;
   int ShowModal() ;
 };
