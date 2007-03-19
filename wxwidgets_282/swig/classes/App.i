@@ -43,6 +43,8 @@ public:
 #endif	
     }
 
+  // This is the method run when main_loop is called in Ruby
+  // wxEntry calls the C++ App::OnInit method
     int main_loop()
     {
         static int argc = 1;
@@ -63,8 +65,6 @@ public:
 		wxEntry(argc, argv);
 #endif        
 
-
-
 #ifdef __WXDEBUG__
         printf("returned from wxEntry...\n");
 #endif	
@@ -75,20 +75,20 @@ public:
         return 0;
     }
     
-    virtual bool OnInitGui()
+    // This method initializes the stock objects (Pens, Brushes, Fonts) 
+    // before yielding to ruby by calling the App's on_init method.
+    // Note that as of wxWidget 2.8, the stock fonts in particular cannot
+    // be initialized any earlier than this without crashing
+    bool OnInit()
     {
-#ifdef __WXDEBUG__        
-        printf("OnInitGui before\n");
-#endif	
-        bool result = wxApp::OnInitGui();
-#ifdef __WXDEBUG__	
-        printf("OnInitGui after\n");
-#endif	
-		// Stock objects must not be instantiated before a wxApp has started
-		if ( result ) 
-		  //		  Init_wxRubyStockObjects();
-
-        return result;
+      Init_wxRubyStockObjects();
+	  VALUE result = rb_funcall(wxRubyApp::app_ptr, rb_intern("on_init"), 0, NULL);
+	  if ( result == Qfalse || result == Qnil ) { 
+		return false; 
+	  }
+  	  else { 
+		return true; 
+	  }
     }
 
     virtual int OnExit()
@@ -123,13 +123,6 @@ public:
 		printf("ASSERT fired\n");
 	}
 
-bool Initialize(int& argc, wxChar **argv)
-	{
-		bool result = wxApp::Initialize(argc, argv);
-		return result;
-	}
-
-
 };
 
 VALUE wxRubyApp::app_ptr = Qnil;
@@ -151,7 +144,6 @@ public:
   bool GetUseBestVisual() const;
   wxString GetVendorName() const;
   void ExitMainLoop() ;
-  bool Initialized() ;
   int MainLoop() ;
   virtual void OnAssert(const wxChar *file, int line, const wxChar *cond, const wxChar *msg);
   virtual int OnExit() ;
@@ -159,7 +151,7 @@ public:
   virtual bool OnCmdLineHelp(wxCmdLineParser&  parser ) ;
   virtual bool OnCmdLineParsed(wxCmdLineParser&  parser ) ;
   virtual void OnFatalException() ;
-  virtual bool OnInit() ;
+  bool OnInit() ;
   virtual void OnInitCmdLine(wxCmdLineParser&  parser ) ;
   ;
   bool ProcessMessage(WXMSG * msg ) ;
@@ -176,7 +168,5 @@ public:
   void SetVendorName(const wxString&  name ) ;
   void SetUseBestVisual(bool  flag ) ;
   bool Yield(bool onlyIfNeeded = false) ;
-
-    int main_loop();
-		
+  int main_loop();
 };
