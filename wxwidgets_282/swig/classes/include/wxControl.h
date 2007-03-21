@@ -23,10 +23,11 @@ public:
   void Command(wxCommandEvent&  event ) ;
   int GetAlignment() const;
 
-  wxString GetLabelText() const;
   virtual bool ShouldInheritColours() const;
 
   virtual wxString GetLabel() const;
+  wxString GetLabelText() const;
+  static wxString GetLabelText(wxString& label) const;
   virtual void SetLabel(const wxString&  label ) ;
   virtual bool SetFont(const wxFont& font);
 };

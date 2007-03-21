@@ -23,11 +23,10 @@ h2. Methods
 
 * "Control#command":#Control_command
 * "Control#get_label":#Control_getlabel
+* "Control#get_label_text":#Control_getlabeltext
 * "Control#set_label":#Control_setlabel
 
 </div>
-
-
 
 h3(#Control_command). Control#command
 
@@ -40,8 +39,19 @@ h3(#Control_getlabel). Control#get_label
 
  String *get_label*()
 
-Returns the control's text.
+Returns the control's text. Note that the returned string contains the
+mnemonics (@&@ characters) if any, use
+"Control#get_label_text":control.html#Control_getlabeltext if they are 
+undesired.
 
+h3(#Control_getlabeltext). Control#get_label_text
+
+ String *get_label_text*()
+
+Returns the control's label without the mnemonics characters.
+
+Can also be called as a class method, passing in a single label string;
+this will return the same label string with the mnemonic characters removed.
 
 h3(#Control_setlabel). Control#set_label
 
