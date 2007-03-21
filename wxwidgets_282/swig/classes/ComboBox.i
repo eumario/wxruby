@@ -6,7 +6,11 @@
 %module(directors="1") wxComboBox
 
 %ignore wxComboBox::wxComboBox();
+
+// methods for getting and setting the text selection
 %rename (SetSelectionRange) SetSelection(long from, long to);
+%rename (GetSelectionRange) GetSelection(long *from, long *to);
+%apply long * OUTPUT { long *from, long *to }
 
 
 // redundant with good typemaps

@@ -18,14 +18,14 @@ h2. Derived from
 
 "Object":object.html
 
-h2. Window styles
+h2(#window_styles). Window styles
 
 
 |@CB_SIMPLE@|Creates a combobox with a permanently displayed list. Windows only. |
 |@CB_DROPDOWN@|Creates a combobox with a drop-down list.|
 |@CB_READONLY@|Same as CB_DROPDOWN but only thestrings specified as the combobox choices can be selected, it is impossible toselect (even from a program) a string which is not in the choices list.|
 |@CB_SORT@|Sorts the entries in the list alphabetically.|
-
+|@TE_PROCESS_ENTER@|The control will generatethe event EVT_COMMAND_TEXT_ENTER (otherwise pressing Enter keyis either processed internally by the control or used for navigation betweendialog controls). Windows only.|
 
 See also "window styles overview":windowstyles.html.
 
@@ -56,16 +56,18 @@ h2. Methods
 * "ComboBox#can_undo":#ComboBox_canundo
 * "ComboBox#copy":#ComboBox_copy
 * "ComboBox#cut":#ComboBox_cut
+* "ComboBox#get_value":#ComboBox_getvalue
 * "ComboBox#get_insertion_point":#ComboBox_getinsertionpoint
 * "ComboBox#get_last_position":#ComboBox_getlastposition
-* "ComboBox#get_value":#ComboBox_getvalue
+* "ComboBox#get_current_selection":#ComboBox_getcurrentselection
+* "ComboBox#get_selection":#ComboBox_getselectionrange
 * "ComboBox#paste":#ComboBox_paste
 * "ComboBox#redo":#ComboBox_redo
 * "ComboBox#replace":#ComboBox_replace
 * "ComboBox#remove":#ComboBox_remove
 * "ComboBox#set_insertion_point":#ComboBox_setinsertionpoint
 * "ComboBox#set_insertion_point_end":#ComboBox_setinsertionpointend
-* "ComboBox#set_selection":#ComboBox_setselection
+* "ComboBox#set_selection":#ComboBox_setselectionrange
 * "ComboBox#set_value":#ComboBox_setvalue
 * "ComboBox#undo":#ComboBox_undo
 
@@ -74,36 +76,26 @@ h2. Methods
 
 h3(#ComboBox_new). ComboBox.new
 
-  *ComboBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
-               %(arg-type)Integer% n, 
-               %(arg-type)String% choices[], 
-               %(arg-type)Integer% style = 0, 
-               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
-               %(arg-type)String% name = "comboBox")
-
   *ComboBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
                %(arg-type)Point% pos, 
                %(arg-type)Size% size, 
-               %(arg-type)ArrayString% choices, 
+               %(arg-type)Array% choices, 
                %(arg-type)Integer% style = 0, 
                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "comboBox")
 
-Constructor, creating and showing a combobox.
+Constructor, creating and showing a combobox. 
 
 h4. Parameters
 
-* _parent_ Parent window. Must not be NULL.
+* _parent_ Parent window. Must not be nil.
 * _id_ Window identifier. A value of -1 indicates a default value.
 * _value_ Initial selection string. An empty string indicates no selection.
 * _pos_ Window position.
 * _size_ Window size. If the default size (-1, -1) is specified then the window is sized
 appropriately.
-* _n_ Number of strings with which to initialise the control.
 * _choices_ An array of strings with which to initialise the control.
-* _style_ Window style. See "ComboBox":combobox.html.
+* _style_ Window style. See "ComboBox Window Styles":#window_styles
 * _validator_ Window validator.
 * _name_ Window name.
 
@@ -112,23 +104,7 @@ h4. See also
 "ComboBox#create":combobox.html#ComboBox_create, "Validator":validator.html
 
 
-
-
-
-  *destructor*()
-
-Destructor, destroying the combobox.
-
 h3(#ComboBox_create). ComboBox#create
-
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
-                %(arg-type)Integer% n, 
-                %(arg-type)String% choices[], 
-                %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
-                %(arg-type)String% name = "comboBox")
 
  Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
                 %(arg-type)Point% pos, 
@@ -138,14 +114,15 @@ h3(#ComboBox_create). ComboBox#create
                 %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "comboBox")
 
-Creates the combobox for two-step construction. Derived classes
-should call or replace this function. See "ComboBox.new":combobox.html#ComboBox_new for further details.
+Creates the combobox for two-step construction. Derived classes should call or replace this function. See "ComboBox.new":combobox.html#ComboBox_new for further details.
 
 h3(#ComboBox_cancopy). ComboBox#can_copy
 
  Boolean *can_copy*()
 
-Returns true if the combobox is editable and there is a text selection to copy to the clipboard.
+Returns true if the combobox is editable and there is a text selection
+to copy to the clipboard. 
+
 Only available on Windows.
 
 h3(#ComboBox_cancut). ComboBox#can_cut
@@ -188,17 +165,41 @@ h3(#ComboBox_cut). ComboBox#cut
 
 Copies the selected text to the clipboard and removes the selection.
 
+h3(#ComboBox_getcurrentselection). ComboBox#get_current_selection
+
+ Integer *get_current_selection*()
+
+This function does the same things as 
+"Choice#get_current_selection":choice.html#Choice_getcurrentselection and
+returns the item currently selected in the dropdown list if it's open or the
+same thing as "get_selection":#ComboBox_getselection otherwise.
+
+
 h3(#ComboBox_getinsertionpoint). ComboBox#get_insertion_point
 
  Integer *get_insertion_point*()
 
 Returns the insertion point for the combobox's text field.
 
+Note: Under MSW, this function always returns 0 if the combobox
+doesn't have the focus.
+
 h3(#ComboBox_getlastposition). ComboBox#get_last_position
 
  "TextPos":textpos.html *get_last_position*()
 
 Returns the last position in the combobox text field.
+
+h3(#ComboBox_getselectionrange). ComboBox#get_selection_range
+
+  Integer from, Integer to = *get_selection_range*()
+
+This is the same as
+"TextCtrl#get_selection":textctrl.html#TextCtrl_getselection  
+for the text control which is part of the combobox, returning the
+start and end position of the text selection.
+
+Currently this method is only implemented in MSW and GTK.
 
 h3(#ComboBox_getvalue). ComboBox#get_value
 
@@ -257,7 +258,7 @@ h3(#ComboBox_setinsertionpointend). ComboBox#set_insertion_point_end
 
 Sets the insertion point at the end of the combobox text field.
 
-h3(#ComboBox_setselection). ComboBox#set_selection
+h3(#ComboBox_setselectionrange). ComboBox#set_selection_range
 
   *set_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
 
@@ -267,8 +268,6 @@ h4. Parameters
 
 * _from_ The first position.
 * _to_ The second position.
-
-
 
 h3(#ComboBox_setvalue). ComboBox#set_value
 

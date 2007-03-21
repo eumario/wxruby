@@ -10,19 +10,6 @@ class wxComboBox : public wxControlWithItems
 public:
   wxComboBox();
 
-
-/* This constructor really doesn't work due to problems with SWIG typemaps
-
-  wxComboBox(wxWindow *parent, wxWindowID id,
-          const wxString& value = wxEmptyString,
-          const wxPoint& pos = wxDefaultPosition,
-          const wxSize& size = wxDefaultSize,
-          int n = 0, const wxString choices[] = NULL,
-          long style = 0,
-          const wxValidator& validator = wxDefaultValidator,
-          const wxString& name = wxComboBoxNameStr);
-*/
-
 /* tweak this signature so it can be used for cases where only 
    a few parameters are passed */
   wxComboBox(wxWindow *parent, wxWindowID id,
@@ -58,8 +45,12 @@ public:
               const wxString& name = wxComboBoxNameStr);
   void Copy() ;
   void Cut() ;
+  int GetCurrentSelection() const;
   long GetInsertionPoint() const;
   long GetLastPosition() const;
+#if defined(__WXMSW__) || defined (__WXGTK__)
+  void GetSelection(long *from, long *to) const;
+#endif
   wxString GetValue() const;
   void Paste() ;
   void Replace(long  from , long  to , const wxString&  text ) ;
