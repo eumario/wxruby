@@ -18,7 +18,7 @@ public:
   unsigned char Green() const;
   bool IsOk() const;
   unsigned char Red() const;
-  void Set(const unsigned char  red , const unsigned char  green , const unsigned char  blue ) ;
+  void Set(const unsigned char  red , const unsigned char  green , const unsigned char  blue, const unsigned char alpha = wxALPHA_OPAQUE ) ;
 };
 
 
