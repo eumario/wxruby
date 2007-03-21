@@ -57,5 +57,8 @@ h3(#Control_setlabel). Control#set_label
 
   *set_label*(%(arg-type)String% label)
 
-Sets the item's text.
+Sets the item's text. The @&@ characters in the label are special and
+indicate that the following character is a mnemonic for this control and
+can be used to activate it from the keyboard (typically by using Alt key
+in combination with it). To insert a literal ampersand character, you need to double it, i.e. use @"&&"@
 
