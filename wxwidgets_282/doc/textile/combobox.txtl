@@ -60,14 +60,14 @@ h2. Methods
 * "ComboBox#get_insertion_point":#ComboBox_getinsertionpoint
 * "ComboBox#get_last_position":#ComboBox_getlastposition
 * "ComboBox#get_current_selection":#ComboBox_getcurrentselection
-* "ComboBox#get_selection":#ComboBox_getselectionrange
+* "ComboBox#get_selection_range":#ComboBox_getselectionrange
 * "ComboBox#paste":#ComboBox_paste
 * "ComboBox#redo":#ComboBox_redo
 * "ComboBox#replace":#ComboBox_replace
 * "ComboBox#remove":#ComboBox_remove
 * "ComboBox#set_insertion_point":#ComboBox_setinsertionpoint
 * "ComboBox#set_insertion_point_end":#ComboBox_setinsertionpointend
-* "ComboBox#set_selection":#ComboBox_setselectionrange
+* "ComboBox#set_selection_range":#ComboBox_setselectionrange
 * "ComboBox#set_value":#ComboBox_setvalue
 * "ComboBox#undo":#ComboBox_undo
 
