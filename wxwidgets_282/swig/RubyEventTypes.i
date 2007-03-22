@@ -10,6 +10,7 @@
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
 #include <wx/power.h>
+#include <wx/aui/aui.h>
 %}
 
 
@@ -154,3 +155,19 @@
     %constant const int wxEVT_CALENDAR_YEAR_CHANGED;//, 953)
     %constant const int wxEVT_CALENDAR_DOUBLECLICKED;//, 954)
     %constant const int wxEVT_CALENDAR_WEEKDAY_CLICKED;//, 955)
+
+    %constant const int wxEVT_AUI_PANE_BUTTON;
+    %constant const int wxEVT_AUI_PANE_CLOSE;
+    %constant const int wxEVT_AUI_PANE_MAXIMIZE;
+    %constant const int wxEVT_AUI_PANE_RESTORE;
+    %constant const int wxEVT_AUI_RENDER;
+    %constant const int wxEVT_AUI_FIND_MANAGER;
+
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGING;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_BUTTON;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_BEGIN_DRAG;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_END_DRAG;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_DRAG_MOTION;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND;

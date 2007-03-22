@@ -16,6 +16,7 @@
 #include <wx/listctrl.h>
 #include <wx/sashwin.h>
 #include <wx/wizard.h>
+#include <wx/aui/aui.h>
 #ifdef WXSCINTILLA
 #    include <wx/wxscintilla.h>
 #endif
@@ -67,6 +68,8 @@ extern swig_class cWxWindowCreateEvent;
 extern swig_class cWxWindowDestroyEvent;
 extern swig_class cWxMenuEvent;
 extern swig_class cWxContextMenuEvent;
+extern swig_class cWxAuiManagerEvent;
+extern swig_class cWxAuiNotebookEvent;
 #ifdef WXSCINTILLA
 extern swig_class cWxScintillaEvent;
 #endif
@@ -329,6 +332,30 @@ static const wxEventType *contextMenuEvents[] =
   (const wxEventType *)0
 };
 
+static const wxEventType *auiManagerEvents[] =
+{
+  &wxEVT_AUI_PANE_BUTTON,
+  &wxEVT_AUI_PANE_CLOSE,
+  &wxEVT_AUI_PANE_MAXIMIZE,
+  &wxEVT_AUI_PANE_RESTORE,
+  &wxEVT_AUI_RENDER,
+  &wxEVT_AUI_FIND_MANAGER,
+  (const wxEventType *)0
+};
+
+static const wxEventType *auiNotebookEvents[] =
+{
+  &wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE,
+  &wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED,
+  &wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGING,
+  &wxEVT_COMMAND_AUINOTEBOOK_BUTTON,
+  &wxEVT_COMMAND_AUINOTEBOOK_BEGIN_DRAG,
+  &wxEVT_COMMAND_AUINOTEBOOK_END_DRAG,
+  &wxEVT_COMMAND_AUINOTEBOOK_DRAG_MOTION,
+  &wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND,
+  (const wxEventType *)0
+};
+
 #ifdef WXSCINTILLA
 static const wxEventType *scintillaEvents[] =
 {
@@ -439,6 +466,11 @@ public:
             cEvent = cWxSashEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxTextUrlEvent)))
             cEvent = cWxTextUrlEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxAuiManagerEvent)))
+            cEvent = cWxAuiManagerEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxAuiNotebookEvent)))
+            cEvent = cWxAuiNotebookEvent.klass;
+
 #ifdef WXSCINTILLA
         else if (event.IsKindOf(CLASSINFO(wxScintillaEvent)))
             cEvent = cWxScintillaEvent.klass;

@@ -23,6 +23,7 @@
 %rename(SetDockable) wxAuiPaneInfo::Dockable(bool b = true);
 %rename(SetFloatable) wxAuiPaneInfo::Floatable(bool b = true);
 %rename(SetGripper) wxAuiPaneInfo::Gripper(bool b = true);
+%rename(SetGripperTop) wxAuiPaneInfo::GripperTop(bool b = true);
 %rename(SetLeftDockable) wxAuiPaneInfo::LeftDockable(bool b = true);
 %rename(SetMaximizeButton) wxAuiPaneInfo::MaximizeButton(bool b = true);
 %rename(SetMinimizeButton) wxAuiPaneInfo::MinimizeButton(bool b = true);
@@ -34,6 +35,7 @@
 %rename(SetTopDockable) wxAuiPaneInfo::TopDockable(bool b = true);
 
 // attribute-like settings
+%rename(SetLayer) wxAuiPaneInfo::Layer(int layer);
 %rename(SetPosition) wxAuiPaneInfo::Position(int pos);
 %rename(SetRow) wxAuiPaneInfo::Row(int row);
 

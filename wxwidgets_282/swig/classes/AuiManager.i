@@ -8,6 +8,97 @@
 %{
 #include <wx/aui/aui.h>
 %}
+enum wxAuiManagerDock
+  {
+    wxAUI_DOCK_NONE = 0,
+    wxAUI_DOCK_TOP = 1,
+    wxAUI_DOCK_RIGHT = 2,
+    wxAUI_DOCK_BOTTOM = 3,
+    wxAUI_DOCK_LEFT = 4,
+    wxAUI_DOCK_CENTER = 5,
+    wxAUI_DOCK_CENTRE = wxAUI_DOCK_CENTER
+  };
+
+enum wxAuiManagerOption
+  {
+    wxAUI_MGR_ALLOW_FLOATING           = 1 << 0,
+    wxAUI_MGR_ALLOW_ACTIVE_PANE        = 1 << 1,
+    wxAUI_MGR_TRANSPARENT_DRAG         = 1 << 2,
+    wxAUI_MGR_TRANSPARENT_HINT         = 1 << 3,
+    wxAUI_MGR_VENETIAN_BLINDS_HINT     = 1 << 4,
+    wxAUI_MGR_RECTANGLE_HINT           = 1 << 5,
+    wxAUI_MGR_HINT_FADE                = 1 << 6,
+    wxAUI_MGR_NO_VENETIAN_BLINDS_FADE  = 1 << 7,
+
+    wxAUI_MGR_DEFAULT = wxAUI_MGR_ALLOW_FLOATING |
+                        wxAUI_MGR_TRANSPARENT_HINT |
+                        wxAUI_MGR_HINT_FADE |
+                        wxAUI_MGR_NO_VENETIAN_BLINDS_FADE
+  };
+
+enum wxAuiPaneDockArtSetting
+  {
+    wxAUI_DOCKART_SASH_SIZE = 0,
+    wxAUI_DOCKART_CAPTION_SIZE = 1,
+    wxAUI_DOCKART_GRIPPER_SIZE = 2,
+    wxAUI_DOCKART_PANE_BORDER_SIZE = 3,
+    wxAUI_DOCKART_PANE_BUTTON_SIZE = 4,
+    wxAUI_DOCKART_BACKGROUND_COLOUR = 5,
+    wxAUI_DOCKART_SASH_COLOUR = 6,
+    wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR = 7,
+    wxAUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR = 8,
+    wxAUI_DOCKART_INACTIVE_CAPTION_COLOUR = 9,
+    wxAUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR = 10,
+    wxAUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR = 11,
+    wxAUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR = 12,
+    wxAUI_DOCKART_BORDER_COLOUR = 13,
+    wxAUI_DOCKART_GRIPPER_COLOUR = 14,
+    wxAUI_DOCKART_CAPTION_FONT = 15,
+    wxAUI_DOCKART_GRADIENT_TYPE = 16
+  };
+
+enum wxAuiPaneDockArtGradients
+  {
+    wxAUI_GRADIENT_NONE = 0,
+    wxAUI_GRADIENT_VERTICAL = 1,
+    wxAUI_GRADIENT_HORIZONTAL = 2
+  };
+
+enum wxAuiPaneButtonState
+  {
+    wxAUI_BUTTON_STATE_NORMAL = 0,
+    wxAUI_BUTTON_STATE_HOVER = 1,
+    wxAUI_BUTTON_STATE_PRESSED = 2
+  };
+
+enum wxAuiButtonId
+  {
+    wxAUI_BUTTON_CLOSE = 101,
+    wxAUI_BUTTON_MAXIMIZE_RESTORE = 102,
+    wxAUI_BUTTON_MINIMIZE = 103,
+    wxAUI_BUTTON_PIN = 104,
+    wxAUI_BUTTON_OPTIONS = 105,
+    wxAUI_BUTTON_WINDOWLIST = 106,
+    wxAUI_BUTTON_LEFT = 107,
+    wxAUI_BUTTON_RIGHT = 108,
+    wxAUI_BUTTON_UP = 109,
+    wxAUI_BUTTON_DOWN = 110,
+    wxAUI_BUTTON_CUSTOM1 = 201,
+    wxAUI_BUTTON_CUSTOM2 = 202,
+    wxAUI_BUTTON_CUSTOM3 = 203
+  };
+
+// for GetAllPanes
+%typemap(out) wxAuiPaneInfoArray & {
+  $result = rb_ary_new();
+
+  for (int i = 0; i < $1->GetCount(); i++)
+  {
+	wxAuiPaneInfo pi = $1->Item(i);
+	VALUE r_pi = SWIG_NewPointerObj(&pi, SWIGTYPE_p_wxAuiPaneInfo, 0);
+	rb_ary_push($result, r_pi);
+  }
+}
 
 %import "include/wxEvtHandler.h"
 %import "include/wxObject.h"
