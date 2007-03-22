@@ -2,13 +2,6 @@
 # released under the MIT-style wxruby2 license
 
 class Wx::Window
-  # Creates a device context which can be used for drawing on the
-  # window, and passes it into a block. Note that this method should
-  # only be used within an on_paint handler.
-  def paint
-    yield Wx::PaintDC.new(self)
-  end
-
   # Recursively searches all windows below +self+ and returns the first
   # window which has the id +an_id+. This corresponds to the find_window
   # method method in WxWidgets when called with an integer.

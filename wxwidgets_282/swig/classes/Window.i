@@ -105,6 +105,12 @@ static VALUE get_ruby_object(wxObject *wx_obj)
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 
+// needed for SWIG's knowledge of PaintDC type, for paint() method
+%import "include/wxDC.h"
+%import "include/wxWindowDC.h"
+%import "include/wxPaintDC.h"
+
+
 %include "include/wxWindow.h"
 
 %extend wxWindow {
@@ -137,4 +143,17 @@ static VALUE get_ruby_object(wxObject *wx_obj)
   
     return returnVal;    
   }  
+  VALUE paint()
+  {  
+	wxWindow *ptr = self;
+	if ( rb_block_given_p() )
+	  {
+		wxPaintDC dc(ptr);
+		VALUE dcVal = SWIG_NewPointerObj((void *) &dc,SWIGTYPE_p_wxPaintDC, 0);
+		rb_yield(dcVal);
+		SWIG_RubyRemoveTracking((void *) &dc);
+		DATA_PTR(dcVal) = NULL;
+	  }
+	return Qnil;
+  }
 }
