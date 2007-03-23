@@ -226,35 +226,36 @@ class SettingsPanel < Wx::Panel
 
   def on_set_colour(event)
     dlg = Wx::ColourDialog.new(@frame)
-    dlg.set_title("Cololur Picker")
+    dlg.set_title("Colour Picker")
 
     return unless dlg.show_modal == Wx::ID_OK
     
     var = nil
     case event.get_id()
-    when ID_BackgroundColor
+    when ID_BackgroundColour
       var = Wx::AUI_DOCKART_BACKGROUND_COLOUR
-    when ID_SashColor
+    when ID_SashColour
       var = Wx::AUI_DOCKART_SASH_COLOUR
-    when ID_InactiveCaptionColor
+    when ID_InactiveCaptionColour
       var = Wx::AUI_DOCKART_INACTIVE_CAPTION_COLOUR
-    when ID_InactiveCaptionGradientColor
+    when ID_InactiveCaptionGradientColour
       var = Wx::AUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR
-    when ID_InactiveCaptionTextColor
+    when ID_InactiveCaptionTextColour
       var = Wx::AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR
-    when ID_ActiveCaptionColor
+    when ID_ActiveCaptionColour
       var = Wx::AUI_DOCKART_ACTIVE_CAPTION_COLOUR
-    when ID_ActiveCaptionGradientColor
+    when ID_ActiveCaptionGradientColour
       var = Wx::AUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR
-    when ID_ActiveCaptionTextColor
+    when ID_ActiveCaptionTextColour
       var = Wx::AUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR	 	
-    when ID_BorderColor
+    when ID_BorderColour
       var = Wx::AUI_DOCKART_BORDER_COLOUR
-    when ID_GripperColor
+    when ID_GripperColour
       var = Wx::AUI_DOCKART_GRIPPER_COLOUR
     else
       return
-    end  
+    end
+
     @frame.get_dock_art.set_colour(var, dlg.get_colour_data.get_colour )
     @frame.do_update
     update_colours
@@ -288,7 +289,7 @@ class SettingsPanel < Wx::Panel
     sz = Wx::BoxSizer.new(Wx::HORIZONTAL)
     sz.add(1, 1, 1, Wx::EXPAND)
     sz.add( Wx::StaticText.new(self, Wx::ID_ANY, caption) )
-    sz.add(@cap_grad)
+    sz.add(bmp_butt)
     sz.add(1, 1, 1, Wx::EXPAND)
     sz.set_item_min_size(1, 180, 20)
     return bmp_butt, sz
@@ -532,7 +533,7 @@ class AuiFrame < Wx::Frame
     evt_menu(ID_NoGradient) { | e | on_gradient(e) } 
     evt_menu(ID_VerticalGradient) { | e | on_gradient(e) } 
     evt_menu(ID_HorizontalGradient) { | e | on_gradient(e) } 
-    evt_menu(ID_Settings) { | e | p 'foo'; on_settings(e) } 
+    evt_menu(ID_Settings) { on_settings } 
     evt_menu(ID_GridContent) { | e | on_change_content_pane(e) } 
     evt_menu(ID_TreeContent) { | e | on_change_content_pane(e) } 
     evt_menu(ID_TextContent) { | e | on_change_content_pane(e) } 
@@ -1012,7 +1013,7 @@ class AuiFrame < Wx::Frame
     if event.get_pane.get_name == "test10"
       msg = "Are you sure you want to close/hide this pane?"
       dlg = Wx::MessageDialog.new(self, msg, "Wx::AUI", Wx::YES_NO)
-      if dlg.show_modal !- Wx::YES
+      if dlg.show_modal != Wx::ID_YES
         return event.veto
       end
     end
@@ -1046,7 +1047,7 @@ class AuiFrame < Wx::Frame
     if notebook.get_page(event.get_selection).kind_of?(Wx::HtmlWindow)
       msg = "Are you sure you want to close/hide this notebook page?"
       dlg = Wx::MessageDialog.new(self, msg, "Wx::AUI", Wx::YES_NO)
-      if dlg.show_modal != Wx::YES
+      if dlg.show_modal != Wx::ID_YES
         event.veto
       else
         event.allow
