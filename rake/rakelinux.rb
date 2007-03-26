@@ -22,8 +22,7 @@ $link_wx_statically = true
 if($link_wx_statically)
 	$extra_libs = "-Wl,-Bdynamic -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 " + 
 	"-lgdk_pixbuf-2.0 -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 " + 
-	"-lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lglib-2.0 " +
-	"-ljpeg -lpng -ltiff" 
+	"-lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lglib-2.0 "
 	libs = $wx_libs.split(' ')
 	libs.collect! do | lib |
 		if(lib =~ /lwx_/)
@@ -32,4 +31,9 @@ if($link_wx_statically)
 		lib
 	end
 	$wx_libs = libs.join(' ')
+        WXSCINTILLA = ENV['WXSCINTILLA']
+        if WXSCINTILLA
+                $wx_libs += " #{WXSCINTILLA}/lib/libwxscintilla.a "
+                $wx_cppflags += " -I#{WXSCINTILLA}/include -DWXSCINTILLA"
+        end
 end
