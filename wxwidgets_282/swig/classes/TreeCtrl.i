@@ -98,18 +98,11 @@ protected:
 %}
 %markfunc wxTreeCtrl "mark_wxTreeCtrl";
 
-%import "include/wxObject.h"
-%import "include/wxEvtHandler.h"
-%import "include/wxWindow.h"
-
-#if defined(__WXMSW__)
 %import "include/wxControl.h"
-#else
-%import "include/wxScrolledWindow.h"
-#endif
-
+%import "include/wxWindow.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxObject.h"
 %include "include/wxTreeCtrl.h"
-
 
 %extend wxTreeCtrl {
 	//Change signature so it returns an array of the TreeItemId and the Cookie.
