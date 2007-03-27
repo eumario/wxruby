@@ -14,6 +14,14 @@ there are also versions which accept single @Point@ parameter instead of
 two @Coord@ ones or @Point@ and @Size@ instead of four of
 them.
 
+h2. Support for Transparency / Alpha Channel
+
+On Mac OS X when using Core Graphics (_MAC_USE_CORE_GRAPHICS set to 1)
+colors with alpha are supported, so instances of "Pen":pen.html or
+"Brush":brush.html that are built from "Colour":colour.html use the
+color's alpha values when stroking or filling.
+
+
 h2. Derived from
 
 "Object":object.html
@@ -27,7 +35,6 @@ h2. See also
 h2. Methods
 
 * "DC.new":#DC_new
-* "DC#begin_drawing":#DC_begindrawing
 * "DC#blit":#DC_blit
 * "DC#cache_enabled":#DC_cacheenabled
 * "DC#calc_bounding_box":#DC_calcboundingbox
@@ -60,7 +67,6 @@ h2. Methods
 * "DC#draw_text":#DC_drawtext
 * "DC#enable_cache":#DC_enablecache
 * "DC#end_doc":#DC_enddoc
-* "DC#end_drawing":#DC_enddrawing
 * "DC#end_page":#DC_endpage
 * "DC#flood_fill":#DC_floodfill
 * "DC#get_background":#DC_getbackground
@@ -70,8 +76,10 @@ h2. Methods
 * "DC#get_char_width":#DC_getcharwidth
 * "DC#get_clipping_box":#DC_getclippingbox
 * "DC#get_font":#DC_getfont
+* "DC#get_layout_direction":#DC_getlayoutdirection
 * "DC#get_logical_function":#DC_getlogicalfunction
 * "DC#get_map_mode":#DC_getmapmode
+* "DC#get_multi_line_text_extent":#DC_getmultilinetextextent
 * "DC#get_partial_text_extents":#DC_getpartialtextextents
 * "DC#get_pen":#DC_getpen
 * "DC#get_pixel":#DC_getpixel
@@ -82,6 +90,8 @@ h2. Methods
 * "DC#get_text_extent":#DC_gettextextent
 * "DC#get_text_foreground":#DC_gettextforeground
 * "DC#get_user_scale":#DC_getuserscale
+* "DC#gradient_fill_concentric":#DC_gradientfillconcentric
+* "DC#gradient_fill_linear":#DC_gradientfilllinear
 * "DC#logical_to_device_x":#DC_logicaltodevicex
 * "DC#logical_to_device_xrel":#DC_logicaltodevicexrel
 * "DC#logical_to_device_y":#DC_logicaltodevicey
@@ -90,7 +100,7 @@ h2. Methods
 * "DC#max_y":#DC_maxy
 * "DC#min_x":#DC_minx
 * "DC#min_y":#DC_miny
-* "DC#ok":#DC_ok
+* "DC#is_ok":#DC_isok
 * "DC#reset_bounding_box":#DC_resetboundingbox
 * "DC#set_axis_orientation":#DC_setaxisorientation
 * "DC#set_background":#DC_setbackground
@@ -99,6 +109,7 @@ h2. Methods
 * "DC#set_clipping_region":#DC_setclippingregion
 * "DC#set_device_origin":#DC_setdeviceorigin
 * "DC#set_font":#DC_setfont
+* "DC#set_layout_direction":#DC_setlayoutdirection
 * "DC#set_logical_function":#DC_setlogicalfunction
 * "DC#set_map_mode":#DC_setmapmode
 * "DC#set_palette":#DC_setpalette
@@ -114,18 +125,6 @@ h2. Methods
 
 
 h3(#DC_new). DC.new
-
-  *destructor*()
-
-Destructor.
-
-
-h3(#DC_begindrawing). DC#begin_drawing
-
-  *begin_drawing*()
-
-This is deprecated and does nothing. Don't use.
-
 
 h3(#DC_blit). DC#blit
 
@@ -646,14 +645,6 @@ h3(#DC_enddoc). DC#end_doc
 
 Ends a document (only relevant when outputting to a printer).
 
-
-h3(#DC_enddrawing). DC#end_drawing
-
-  *end_drawing*()
-
-This is deprecated and does nothing. Don't use.
-
-
 h3(#DC_endpage). DC#end_page
 
   *end_page*()
@@ -728,16 +719,24 @@ h3(#DC_getclippingbox). DC#get_clipping_box
 Gets the rectangle surrounding the current clipping region.
 
 
-
-
-
-
 h3(#DC_getfont). DC#get_font
 
  "Font":font.html *get_font*()
 
 Gets the current font (see "DC#set_font":dc.html#DC_setfont).
 
+h3(#DC_getlayoutdirection). DC#get_layout_direction
+
+ "LayoutDirection":layoutdirection.html *get_layout_direction*()
+
+Gets the current layout direction of the device context. On platforms where RTL layout
+is supported, the return value will either be @Layout_LeftToRight@ or 
+@Layout_RightToLeft@. If RTL layout is not supported, the return value will 
+be @Layout_Default@.
+
+h4. See also
+
+"set_layout_direction":#DC_setlayoutdirection
 
 h3(#DC_getlogicalfunction). DC#get_logical_function
 
@@ -834,30 +833,24 @@ Gets the current text background colour (see "DC#set_text_background":dc.html#DC
 
 h3(#DC_gettextextent). DC#get_text_extent
 
-  *get_text_extent*(%(arg-type)String% string,  %(arg-type)Coord% w,  %(arg-type)Coord% h, 
-                 
-  %(arg-type)Coord% descent = nil, 
-                  %(arg-type)Coord% externalLeading = nil, 
-                  %(arg-type)Font% font = nil)
+  Integer w, Integer h, 
+  Integer descent,
+  Integer external_leading = *get_text_extent*(%(arg-type)String% string,  
+  		  				                         %(arg-type)Font% font = nil)
 
 Gets the dimensions of the string using the currently selected font.
-_string_ is the text string to measure, _w_ and _h_ are
-the total width and height respectively, _descent_ is the
-dimension from the baseline of the font to the bottom of the
-descender, and _externalLeading_ is any extra vertical space added
-to the font by the font designer (usually is zero).
-
-The optional parameter _font_ specifies an alternative
-to the currently selected font: but note that this does not
-yet work under Windows, so you need to set a font for
+_string_ is the text string to measure, and the optional parameter
+_font_ specifies an alternative to the currently selected font: but note
+that this does not yet work under Windows, so you need to set a font for
 the device context first.
 
+The method returns an array of values. _w_ and _h_ are the total width
+and height respectively, _descent_ is the dimension from the baseline of
+the font to the bottom of the descender, and _external_leading_ is any
+extra vertical space added to the font by the font designer. This is
+usually zero.
+
 See also "Font":font.html, "DC#set_font":dc.html#DC_setfont.
-
-
-
-
-
 
 h3. DC#get_text_foreground
 
@@ -872,8 +865,27 @@ h3. DC#get_user_scale
 
 Gets the current user scale factor (set by "set_user_scale":#DC_setuserscale).
 
+h3. DC#gradient_fill_concentric
 
+  *gradient_fill_concentric*(%(arg-type)Rect% rect, %(arg-type)Colour% initial_colour, 
+                                %(arg-type)Colour% dest_colour, %(arg-type)Point% centre = nil )
 
+Fill the area specified by rect with a radial gradient, starting from
+_initial_colour_ at the centre of the circle and fading to _dest_colour_ on
+the circle outside.
+
+_centre_ is the relative coordinates of centre of the circle in the
+specified rect. If not specified, the circle is placed at the centre of
+rect.
+
+*Note*: Currently this function is very slow, don't use it for real-time drawing.
+
+h3. DC#gradient_fill_linear
+
+  *gradient_fill_concentric*(%(arg-type)Rect% rect, %(arg-type)Colour% initial_colour, 
+                                %(arg-type)Colour% dest_colour, %(arg-type)Direction% dir = @Wx::EAST@ )
+
+Fill the area specified by rect with a linear gradient, starting from initialColour and eventually fading to destColour. The nDirection specifies the direction of the colour change, default is to use initialColour on the left part of the rectangle and destColour on the right one.
 
 h3. DC#logical_to_device_x
 
@@ -937,9 +949,9 @@ h3. DC#min_y
 Gets the minimum vertical extent used in drawing commands so far.
 
 
-h3. DC#ok
+h3. DC#is_ok
 
- Boolean *ok*()
+ Boolean *is_ok*()
 
 Returns true if the DC is ok to use.
 
@@ -1050,6 +1062,16 @@ should not pass @NullFont@ to this method.
 
 See also "Font":font.html.
 
+
+h3. DC#set_layout_direction
+
+  *set_layout_direction*(%(arg-type)LayoutDirection% dir)
+
+Sets the current layout direction for the device context. _dir_ may be
+either @Wx::LAYOUT_DEFAULT@, @Wx::LAYOUT_LEFT_TO_RIGHT@ or
+@Wx::LAYOUT_RIGHT_TO_LEFT@.
+
+See also "get_layout_direction":#DC_getlayoutdirection
 
 h3. DC#set_logical_function
 

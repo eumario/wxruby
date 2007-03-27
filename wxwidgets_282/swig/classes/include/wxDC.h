@@ -8,7 +8,6 @@ class wxDC : public wxObject
 public:
    wxDC() ;
   virtual  ~wxDC() ;
-  void BeginDrawing() ;
   virtual bool Blit(wxCoord  xdest , wxCoord  ydest , wxCoord  width , wxCoord  height , wxDC*  source , wxCoord  xsrc , wxCoord  ysrc , int logicalFunc = wxCOPY, bool  useMask = false, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1)  = 0;
   static bool CacheEnabled() ;
   void CalcBoundingBox(wxCoord  x , wxCoord  y ) ;
@@ -46,7 +45,6 @@ public:
   virtual  void DrawText(const wxString&  text , wxCoord  x , wxCoord  y )  = 0;
   static void EnableCache(bool  enableCache ) ;
   void EndDoc() ;
-  void EndDrawing() ;
   void EndPage() ;
   bool FloodFill(wxCoord  x , wxCoord  y , const wxColour&  colour , int style = wxFLOOD_SURFACE) ;
   //wxBrush& GetBackground();
@@ -59,6 +57,7 @@ public:
   void GetClippingBox(wxCoord  *x , wxCoord  *y , wxCoord  *width , wxCoord  *height ) ;
   //wxFont& GetFont();
   const wxFont& GetFont() const;
+  wxLayoutDirection GetLayoutDirection() const;
   int GetLogicalFunction() ;
   int GetMapMode() ;
 //  bool GetOptimization() ;
@@ -77,6 +76,9 @@ public:
   //wxColour& GetTextForeground();
   const wxColour& GetTextForeground() const;
   void GetUserScale(double  *x , double  *y ) ;
+  void GradientFillConcentric(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour);
+  void GradientFillConcentric(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour, const wxPoint& circleCenter);
+  void GradientFillLinear(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour, wxDirection nDirection = wxEAST);
   wxCoord LogicalToDeviceX(wxCoord  x ) ;
   wxCoord LogicalToDeviceXRel(wxCoord  x ) ;
   wxCoord LogicalToDeviceY(wxCoord  y ) ;
@@ -85,7 +87,7 @@ public:
   wxCoord MaxY() ;
   wxCoord MinX() ;
   wxCoord MinY() ;
-  bool Ok() ;
+  bool IsOk();
   void ResetBoundingBox() ;
   void SetAxisOrientation(bool  xLeftRight , bool  yBottomUp ) ;
   void SetDeviceOrigin(wxCoord  x , wxCoord  y ) ;
@@ -95,6 +97,7 @@ public:
   void SetClippingRegion(const wxPoint&  pt , const wxSize&  sz ) ;
   void SetClippingRegion(const wxRect&  rect ) ;
   void SetClippingRegion(const wxRegion&  region ) ;
+  void SetLayoutDirection(wxLayoutDirection dir);
   virtual void SetPalette(const wxPalette&  palette )  = 0;
   virtual void SetBrush(const wxBrush&  brush )  = 0;
   virtual void SetFont(const wxFont&  font )  = 0;
