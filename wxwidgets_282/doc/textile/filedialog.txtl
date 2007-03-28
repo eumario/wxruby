@@ -12,6 +12,27 @@ h2. Derived from
 
 "Object":object.html
 
+h2. Window styles
+
+
+|@FD_DEFAULT_STYLE@|Equivalent to FD_OPEN.|
+|@FD_OPEN@|This is an open dialog; usually this means that the default button's label of the dialog is "Open". Cannot be combined with FD_SAVE.|
+|@FD_SAVE@|This is a save dialog; usually this means that the default button's label of the dialog is "Save". Cannot be combined with FD_OPEN.|
+|@FD_OVERWRITE_PROMPT@|For save dialog only: prompt for a confirmation if a file will be overwritten.|
+|@FD_FILE_MUST_EXIST@|For open dialog only: the user may only select files that actually exist.|
+|@FD_MULTIPLE@|For open dialog only: allows selecting multiple files.|
+|@FD_CHANGE_DIR@|Change the current working directory to the directory where the file(s) chosen by the user are.|
+|@FD_PREVIEW@|Show the preview of the selected files (currently only supported by GTK using GTK+ 2.4 or later).|
+
+
+*NB:* Previous versions of Widgets used @FD_CHANGE_DIR@ by default
+under MS Windows which allowed the program to simply remember the last
+directory where user selected the files to open/save. This (desired)
+functionality must be implemented in the program itself now (manually remember
+the last path used and pass it to the dialog the next time it is called) or
+by using this flag.
+
+
 h2. See also
 
 "FileDialog overview":filedialogoverview.html, "FileSelector":fileselector.html
@@ -24,9 +45,7 @@ functionality. The path and filename are distinct elements of a full file pathna
 If path is ``", the current directory will be used. If filename is ``",
 no default filename will be supplied. The wildcard determines what files
 are displayed in the file selector, and file extension supplies a type
-extension for the required filename. Flags may be a combination of OPEN,
-SAVE, OVERWRITE_PROMPT, HIDE_READONLY, FILE_MUST_EXIST,
-MULTIPLE, CHANGE_DIR or 0.
+extension for the required filename.
 
 Both the X and Windows versions implement a wildcard filter. Typing a
 filename containing wildcards (*, ?) in the filename text item, and
@@ -57,14 +76,12 @@ h2. Methods
 * "FileDialog#get_message":#FileDialog_getmessage
 * "FileDialog#get_path":#FileDialog_getpath
 * "FileDialog#get_paths":#FileDialog_getpaths
-* "FileDialog#get_style":#FileDialog_getstyle
 * "FileDialog#get_wildcard":#FileDialog_getwildcard
 * "FileDialog#set_directory":#FileDialog_setdirectory
 * "FileDialog#set_filename":#FileDialog_setfilename
 * "FileDialog#set_filter_index":#FileDialog_setfilterindex
 * "FileDialog#set_message":#FileDialog_setmessage
 * "FileDialog#set_path":#FileDialog_setpath
-* "FileDialog#set_style":#FileDialog_setstyle
 * "FileDialog#set_wildcard":#FileDialog_setwildcard
 * "FileDialog#show_modal":#FileDialog_showmodal
 
@@ -77,8 +94,10 @@ h3(#FileDialog_new). FileDialog.new
                  %(arg-type)String% defaultDir = "", 
                  %(arg-type)String% defaultFile = "", 
                  %(arg-type)String% wildcard = ".*", 
-                 %(arg-type)Integer% style = 0, 
-                 %(arg-type)Point% pos = DEFAULT_POSITION)
+                 %(arg-type)Integer% style = FD_DEFAULT_STYLE, 
+                 %(arg-type)Point% pos = DEFAULT_POSITION, 
+                 %(arg-type)Size% sz = DEFAULT_SIZE, 
+                 %(arg-type)String% name = "filedlg")
 
 Constructor. Use "FileDialog#show_modal":filedialog.html#FileDialog_showmodal to show the dialog.
 
@@ -92,26 +111,11 @@ h4. Parameters
 
 Note that the native Motif dialog has some limitations with respect to
 wildcards; see the Remarks section above.
-* _style_ A dialog style. A bitlist of:
-
-
-
-|*OPEN*|This is an open dialog.|
-|*SAVE*|This is a save dialog.|
-|*OVERWRITE_PROMPT*|For save dialog only: prompt for a confirmation if a file will be overwritten.|
-|*HIDE_READONLY*|Do not display the checkbox to toggle display of read-only files. Deprecated in 2.6; the checkbox is never shown.|
-|*FILE_MUST_EXIST*|The user may only select files that actually exist.|
-|*MULTIPLE*|For open dialog only: allows selecting multiple files.|
-|*CHANGE_DIR*|Change the current working directory to the directory where the file(s) chosen by the user are.|
-
+* _style_ A dialog style. See FD_* styles for more info.
 * _pos_ Dialog position. Not implemented.
+* _size_ Dialog size. Not implemented.
+* _name_ Dialog name. Not implemented.
 
-*NB:* Previous versions of Widgets used @CHANGE_DIR@ by default
-under MS Windows which allowed the program to simply remember the last
-directory where user selected the files to open/save. This (desired)
-functionality must be implemented in the program itself now (manually remember
-the last path used and pass it to the dialog the next time it is called) or
-by using this flag.
 
   *destructor*()
 
@@ -170,12 +174,6 @@ Fills the array _paths_ with the full paths of the files chosen. This
 function should only be used with the dialogs which have @MULTIPLE@ style,
 use "get_path":#FileDialog_getpath for the others.
 
-h3(#FileDialog_getstyle). FileDialog#get_style
-
- Integer *get_style*()
-
-Returns the dialog style.
-
 h3(#FileDialog_getwildcard). FileDialog#get_wildcard
 
  String *get_wildcard*()
@@ -211,12 +209,6 @@ h3(#FileDialog_setpath). FileDialog#set_path
   *set_path*(%(arg-type)String% path)
 
 Sets the path (the combined directory and filename that will be returned when the dialog is dismissed).
-
-h3(#FileDialog_setstyle). FileDialog#set_style
-
-  *set_style*(%(arg-type)Integer% style)
-
-Sets the dialog style. See "FileDialog.new":filedialog.html#FileDialog_new for details.
 
 h3(#FileDialog_setwildcard). FileDialog#set_wildcard
 
