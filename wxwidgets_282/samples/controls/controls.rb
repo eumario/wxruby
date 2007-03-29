@@ -374,7 +374,7 @@ class MyPanel < Panel
 
         # test for masked bitmap display
         bitmap = Bitmap.new("test2.bmp", BITMAP_TYPE_BMP)
-        if bitmap.ok()
+        if bitmap.is_ok()
            bitmap.set_mask(Mask.new(bitmap, BLUE))
            StaticBitmap.new(panel, -1, bitmap, Point.new(300, 120))
         end
@@ -565,7 +565,7 @@ end
 
     def onChangeColour(event)
         # test panel colour changing and propagation to the subcontrols
-        if @s_colOld.ok()
+        if @s_colOld.is_ok()
 
             set_background_colour(@s_colOld)
             @s_colOld = NULL_COLOUR
