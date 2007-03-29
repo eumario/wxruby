@@ -234,12 +234,13 @@ public:
                             int image = -1, int selectedImage = -1,
                             wxTreeItemData *data = NULL);
 
+		// NOTE! - This version of InsertItem is implemented in the .i file, as insert_item_before
         // insert a new item before the one with the given index
-    virtual wxTreeItemId InsertItem(const wxTreeItemId& parent,
-                            size_t index,
-                            const wxString& text,
-                            int image = -1, int selectedImage = -1,
-                            wxTreeItemData *data = NULL);
+    //virtual wxTreeItemId InsertItem(const wxTreeItemId& parent,
+    //                        size_t index,
+    //                        const wxString& text,
+    //                        int image = -1, int selectedImage = -1,
+    //                        wxTreeItemData *data = NULL);
 
         // insert a new item in as the last child of the parent
     virtual wxTreeItemId AppendItem(const wxTreeItemId& parent,

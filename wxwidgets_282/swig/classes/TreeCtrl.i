@@ -130,5 +130,17 @@ protected:
 			
 		return array;		
 	}
+	
+	//Changed this version of insert_item to insert_item_before so SWIG
+	//does not get confused between the 2 method signatures
+	//This behavior matches that used by wxPython.
+	wxTreeItemId insert_item_before(const wxTreeItemId& parent,
+                          size_t index,
+                          const wxString& text,
+                          int image = -1, int selectedImage = -1,
+                          wxTreeItemData *data = NULL)
+	{
+		return self->InsertItem(parent,index,text,image,selectedImage,data);
+	}
 }
 
