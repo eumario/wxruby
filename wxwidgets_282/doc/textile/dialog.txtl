@@ -19,7 +19,23 @@ h2. Derived from
 
 "Object":object.html
 
-h2. Remarks
+h2. Dialog Buttons
+
+The dialog usually contains either a single button allowing to close the
+dialog or two buttons, one accepting the changes and the other one
+discarding them (such button, if present, is automatically activated if
+the user presses the @"Esc"@ key). By default, buttons with the standard
+@ID_OK@ and @ID_CANCEL@ identifiers behave as expected. It is also
+possible to use a button with a different identifier nstead, see
+"set_affirmative_id":#Dialog_setaffirmativeid and
+"set_escape_id":#Dialog_setescapeid.
+
+Also notice that the "create_button_sizer()":#Dialog_createbuttonsizer() 
+should be used to create the buttons appropriate for the current platform and
+positioned correctly (including their order which is
+platform-dependent).
+
+h2. Modal and modeless dialogs
 
 There are two kinds of dialog -- _modal_ and _modeless_. A modal dialog
 blocks program flow and user input on other windows until it is dismissed,
@@ -56,8 +72,8 @@ h2. Window styles
 |@THICK_FRAME@|Display a thick frame around the window.|
 |@STAY_ON_TOP@|The dialog stays on top of all other windows.|
 |@NO_3D@|Under Windows, specifies that the child controlsshould not have 3D borders unless specified in the control.|
-|@DIALOG_NO_PARENT@|By default, a dialog created with a @nil@ parent window will be given the "application's top level window":appgettopwindow.html as parent. Use thisstyle to prevent this from happening and create an orphan dialog. This is not recommended for modal dialogs.|
-|@DIALOG_EX_CONTEXTHELP@|Under Windows, puts a query button on thecaption. When pressed, Windows will go into a context-sensitive help mode and Widgets will senda EVT_HELP event if the user clicked on an application window. _Note_\ that this is an extendedstyle and must be set by calling "set_extra_style":#Dialog_setextrastyle before Create is called (two-step construction).|
+|@DIALOG_NO_PARENT@|By default, a dialog created with a @nil@ parent window will be given the "application's top level window":app.html as parent. Use thisstyle to prevent this from happening and create an orphan dialog. This is not recommended for modal dialogs.|
+|@DIALOG_EX_CONTEXTHELP@|Under Windows, puts a query button on thecaption. When pressed, Windows will go into a context-sensitive help mode and Widgets will senda EVT_HELP event if the user clicked on an application window. _Note_ that this is an extendedstyle and must be set by calling "set_extra_style":#Dialog_setextrastyle before Create is called (two-step construction).|
 |@DIALOG_EX_METAL@|On Mac OS X, frames with this style will be shown with a metallic look. This is an _extra_ style.|
 
 
@@ -79,30 +95,29 @@ h2. Methods
 * "Dialog#centre":#Dialog_centre
 * "Dialog#create":#Dialog_create
 * "Dialog#create_button_sizer":#Dialog_createbuttonsizer
+* "Dialog#create_separated_button_sizer":#Dialog_createseparatedbuttonsizer
 * "Dialog#create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer
 * "Dialog#do_ok":#Dialog_dook
 * "Dialog#end_modal":#Dialog_endmodal
 * "Dialog#get_affirmative_id":#Dialog_getaffirmativeid
+* "Dialog#get_escape_id":#Dialog_getescapeid
 * "Dialog#get_return_code":#Dialog_getreturncode
-* "Dialog#get_title":#Dialog_gettitle
 * "Dialog#get_tool_bar":#Dialog_gettoolbar
 * "Dialog#iconize":#Dialog_iconize
 * "Dialog#is_iconized":#Dialog_isiconized
 * "Dialog#is_modal":#Dialog_ismodal
-* "Dialog#on_apply":#Dialog_onapply
-* "Dialog#on_cancel":#Dialog_oncancel
-* "Dialog#on_ok":#Dialog_onok
 * "Dialog#on_sys_colour_changed":#Dialog_onsyscolourchanged
 * "Dialog#set_affirmative_id":#Dialog_setaffirmativeid
+* "Dialog#set_escape_id":#Dialog_setescapeid
 * "Dialog#set_icon":#Dialog_seticon
 * "Dialog#set_icons":#Dialog_seticons
 * "Dialog#set_modal":#Dialog_setmodal
 * "Dialog#set_return_code":#Dialog_setreturncode
-* "Dialog#set_title":#Dialog_settitle
 * "Dialog#show":#Dialog_show
 * "Dialog#show_modal":#Dialog_showmodal
 
 </div>
+
 
 
 h3(#Dialog_new). Dialog.new
@@ -133,9 +148,11 @@ h4. See also
 
 "Dialog#create":dialog.html#Dialog_create
 
+
   *destructor*()
 
 Destructor. Deletes any child windows before deleting the physical window.
+
 
 h3(#Dialog_centre). Dialog#centre
 
@@ -147,6 +164,7 @@ h4. Parameters
 
 * _direction_ May be @HORIZONTAL@, @VERTICAL@ or @BOTH@.
 
+
 h3(#Dialog_create). Dialog#create
 
  Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
@@ -157,6 +175,7 @@ h3(#Dialog_create). Dialog#create
 
 Used for two-step dialog box construction. See "Dialog.new":dialog.html#Dialog_new for details.
 
+
 h3(#Dialog_createbuttonsizer). Dialog#create_button_sizer
 
  "Sizer":sizer.html *create_button_sizer*(%(arg-type)Integer% flags)
@@ -166,7 +185,24 @@ of the following flags: OK, CANCEL, YES, NO, HELP, NO_DEFAULT.
 
 The sizer lays out the buttons in a manner appropriate to the platform.
 
-This function simply calls "create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer.
+This function uses "create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer 
+internally for most platforms but doesn't create the sizer at all for the
+platforms with hardware buttons (such as smartphones) for which it sets up the
+hardware buttons appropriately and returns , so don't forget to test that
+the return value is valid before using it.
+
+
+h3(#Dialog_createseparatedbuttonsizer). Dialog#create_separated_button_sizer
+
+ "Sizer":sizer.html *create_separated_button_sizer*(%(arg-type)Integer% flags)
+
+Creates a sizer with standard buttons using 
+"create_button_sizer":#Dialog_createbuttonsizer separated from the rest
+of the dialog contents by a horizontal "StaticLine":staticline.html.
+
+Please notice that just like CreateButtonSizer() this function may return  
+if no buttons were created.
+
 
 h3(#Dialog_createstddialogbuttonsizer). Dialog#create_std_dialog_button_sizer
 
@@ -177,6 +213,7 @@ of the following flags: OK, CANCEL, YES, NO, HELP, NO_DEFAULT.
 
 The sizer lays out the buttons in a manner appropriate to the platform.
 
+
 h3(#Dialog_dook). Dialog#do_ok
 
  Boolean *do_ok*()
@@ -185,6 +222,7 @@ This function is called when the titlebar OK button is pressed (PocketPC only).
 A command event for the identifier returned by GetAffirmativeId is sent by
 default. You can override this function. If the function returns false, Widgets
 will call Close() for the dialog.
+
 
 h3(#Dialog_endmodal). Dialog#end_modal
 
@@ -200,15 +238,30 @@ h4. See also
 
 "Dialog#show_modal":dialog.html#Dialog_showmodal, "Dialog#get_return_code":dialog.html#Dialog_getreturncode, "Dialog#set_return_code":dialog.html#Dialog_setreturncode
 
+
 h3(#Dialog_getaffirmativeid). Dialog#get_affirmative_id
 
  Integer *get_affirmative_id*()
 
-Gets the identifier to be used when the user presses an OK button in a PocketPC titlebar.
+Gets the identifier of the button which works like standard OK button in this
+dialog.
 
 h4. See also
 
 "Dialog#set_affirmative_id":dialog.html#Dialog_setaffirmativeid
+
+
+h3(#Dialog_getescapeid). Dialog#get_escape_id
+
+ Integer *get_escape_id*()
+
+Gets the identifier of the button to map presses of @ESC@
+button to.
+
+h4. See also
+
+"Dialog#set_escape_id":dialog.html#Dialog_setescapeid
+
 
 h3(#Dialog_getreturncode). Dialog#get_return_code
 
@@ -225,11 +278,6 @@ h4. See also
 
 "Dialog#set_return_code":dialog.html#Dialog_setreturncode, "Dialog#show_modal":dialog.html#Dialog_showmodal, "Dialog#end_modal":dialog.html#Dialog_endmodal
 
-h3(#Dialog_gettitle). Dialog#get_title
-
- String *get_title*()
-
-Returns the title of the dialog box.
 
 h3(#Dialog_gettoolbar). Dialog#get_tool_bar
 
@@ -240,6 +288,7 @@ allows you to access the toolbar and add tools to it. Removing tools and adding
 arbitrary controls are not currently supported.
 
 This function is not available on any other platform.
+
 
 h3(#Dialog_iconized). Dialog#iconize
 
