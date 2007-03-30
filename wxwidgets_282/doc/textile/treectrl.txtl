@@ -173,6 +173,7 @@ h2. Methods
 * "TreeCtrl#get_state_image_list":#TreeCtrl_getstateimagelist
 * "TreeCtrl#hit_test":#TreeCtrl_hittest
 * "TreeCtrl#insert_item":#TreeCtrl_insertitem
+* "TreeCtrl#insert_item_before":#TreeCtrl_insertitembefore
 * "TreeCtrl#is_bold":#TreeCtrl_isbold
 * "TreeCtrl#is_expanded":#TreeCtrl_isexpanded
 * "TreeCtrl#is_selected":#TreeCtrl_isselected
@@ -730,14 +731,7 @@ h3(#TreeCtrl_insertitem). TreeCtrl#insert_item
                           %(arg-type)Integer% selImage = -1, 
                           %(arg-type)Object% item_data = @nil@)
 
- "TreeItemId":treeitemid.html *insert_item*(%(arg-type)TreeItemId% parent, 
-                          %(arg-type)size_t% before,  %(arg-type)String% text, 
-                          %(arg-type)Integer% image = -1, 
-                          %(arg-type)Integer% selImage = -1, 
-                          %(arg-type)Object% item_data = @nil@)
-
-Inserts an item after a given one (_previous_) or before one identified by its position (_before_).
-_before_ must be less than the number of children.
+Inserts an item after a given one (_previous_).
 
 The _image_ and _selImage_ parameters are an index within
 the normal image list specifying the image to use for unselected and
@@ -746,6 +740,22 @@ If _image_ > -1 and _selImage_ is -1, the same image is used for
 both selected and unselected items.
 
 
+h3(#TreeCtrl_insertitembefore). TreeCtrl#insert_item_before
+
+	"TreeItemId":treeitemid.html *insert_item_before*(%(arg-type)TreeItemId% parent, 
+	                         %(arg-type)size_t% before,  %(arg-type)String% text, 
+	                         %(arg-type)Integer% image = -1, 
+	                         %(arg-type)Integer% selImage = -1, 
+	                         %(arg-type)Object% item_data = @nil@)
+
+Inserts an item before one identified by its position (_before_).
+_before_ must be less than the number of children.
+
+The _image_ and _selImage_ parameters are an index within
+the normal image list specifying the image to use for unselected and
+selected items, respectively.
+If _image_ > -1 and _selImage_ is -1, the same image is used for
+both selected and unselected items.
 
 
 h3(#TreeCtrl_isbold). TreeCtrl#is_bold
