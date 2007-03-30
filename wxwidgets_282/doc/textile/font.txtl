@@ -2,9 +2,7 @@ h1(#wxfont). Wx::Font
 
 A font is an object which determines the appearance of text. Fonts are
 used for drawing text to a device context, and setting the appearance of
-a window's text.
-
-You can retrieve the current system font settings with "SystemSettings":systemsettings.html.
+a window's text. You can retrieve the current system font settings with "SystemSettings":systemsettings.html.
 
 "SystemSettings":systemsettings.html
 
@@ -115,9 +113,13 @@ The known font encodings are:
  
      FONTENCODING_MAX
 
-h2. Predefined constants objects
+h2. Predefined font constants
 
-* @Wx::NORMAL_FONT@ *NullFont*
+Note that with the exception of @WX::NULL_FONT@, these are not defined
+until the App's main loop has begun.
+
+* @Wx::NULL_FONT@
+* @Wx::NORMAL_FONT@
 * @Wx::SMALL_FONT@
 * @Wx::ITALIC_FONT@
 * @Wx::SWISS_FONT@
@@ -146,16 +148,18 @@ h3. Instance Methods
 * "Font#get_face_name":#Font_getfacename
 * "Font#get_family":#Font_getfamily
 * "Font#get_native_font_info_desc":#Font_getnativefontinfodesc
+* "Font#get_native_font_info_user_desc":#Font_getnativefontinfouserdesc
 * "Font#get_point_size":#Font_getpointsize
 * "Font#get_style":#Font_getstyle
 * "Font#get_underlined":#Font_getunderlined
 * "Font#get_weight":#Font_getweight
 * "Font#new":#Font_new
-* "Font#ok":#Font_ok
+* "Font#is_ok":#Font_isok
 * "Font#set_default_encoding":#Font_setdefaultencoding
 * "Font#set_face_name":#Font_setfacename
 * "Font#set_family":#Font_setfamily
 * "Font#set_native_font_info":#Font_setnativefontinfo
+* "Font#set_native_font_info_user_desc":#Font_setnativefontinfouserdesc
 * "Font#set_point_size":#Font_setpointsize
 * "Font#set_style":#Font_setstyle
 * "Font#set_underlined":#Font_setunderlined
@@ -190,6 +194,10 @@ h4. See also
 "Font encoding overview":fontencodingoverview.html,
 
 h3(#Font_new). Font.new
+
+  *Font.new*(%(arg-type)Font% font)
+
+Copy constructor, uses "reference counting":trefcount.html.
 
   *Font.new*(%(arg-type)Integer% pointSize,  %(arg-type)FontFamily% family, 
            %(arg-type)Integer% style, 
@@ -320,12 +328,26 @@ h3(#Font_getnativefontinfodesc). Font#get_native_font_info_desc
 
  String *get_native_font_info_desc*()
 
-Returns the platform-dependent string completely describing this font or an
-empty string if the font wasn't constructed using the native font description.
+Returns the platform-dependent string completely describing this font.
+Returned string is always non-empty.
+Note that the returned string is not meant to be shown or edited by the user: a typical
+use of this function is for serializing in string-form a Font object.
 
 h4. See also
 
-"Font#set_native_font_info":font.html#Font_setnativefontinfo
+"Font#set_native_font_info":font.html#Font_setnativefontinfo,"Font#get_native_font_info_user_desc":font.html#Font_getnativefontinfouserdesc
+
+
+h3(#Font_getnativefontinfouserdesc). Font#get_native_font_info_user_desc
+
+ String *get_native_font_info_user_desc*()
+
+Returns a user-friendly string for this font object. Returned string is always non-empty.
+Some examples of the formats of returned strings (which are platform-dependent) are in "set_native_font_info_user_desc":#Font_setnativefontinfouserdesc.
+
+h4. See also
+
+"Font#get_native_font_info_desc":font.html#Font_getnativefontinfodesc
 
 
 h3(#Font_getpointsize). Font#get_point_size
@@ -407,18 +429,19 @@ Using @New()@ is currently the only way to directly create a font with
 the given size in pixels on platforms other than MSW.
 
 
-h3(#Font_ok). Font#ok
+h3(#Font_isok). Font#is_ok
 
- Boolean *ok*()
+ Boolean *is_ok*()
 
 Returns @true@ if this object is a valid font, @false@ otherwise.
 
 
 h3(#Font_setfacename). Font#set_face_name
 
-  *set_face_name*(%(arg-type)String% faceName)
+ Boolean *set_face_name*(%(arg-type)String% faceName)
 
 Sets the facename for the font.
+Returns  if the given face name exists;  otherwise.
 
 h4. Parameters
 
@@ -464,12 +487,44 @@ h4. See also
 
 h3(#Font_setnativefontinfo). Font#set_native_font_info
 
-  *set_native_font_info*(%(arg-type)String% info)
+ Boolean *set_native_font_info*(%(arg-type)String% info)
 
-Creates the font corresponding to the given native font description string
+Creates the font corresponding to the given native font description string and returns  if
+the creation was successful.
 which must have been previously returned by
 "get_native_font_info_desc":#Font_getnativefontinfodesc. If the string is
-invalid, font is unchanged.
+invalid, font is unchanged. This function is typically used for de-serializing a Font
+object previously saved in a string-form.
+
+h4. See also
+
+"Font#set_native_font_info_user_desc":font.html#Font_setnativefontinfouserdesc
+
+
+h3(#Font_setnativefontinfouserdesc). Font#set_native_font_info_user_desc
+
+ Boolean *set_native_font_info_user_desc*(%(arg-type)String% info)
+
+Creates the font corresponding to the given native font description string and returns  if
+the creation was successful.
+Unlike "set_native_font_info":#Font_setnativefontinfo, this function accepts
+strings which are user-friendly.
+Examples of accepted string formats are:
+
+
+
+|Generic syntax|Example|
+|on |*GTK2*: @$[FACE-NAME]$ $[bold]$ $[oblique|italic]$ $[POINTSIZE]$@Monospace bold 10|
+|on |*MSW*: @$[light|bold]$ $[italic]$ $[FACE-NAME]$ $[POINTSIZE]$ $[ENCODING]$@Tahoma 10 WINDOWS-1252|
+|on |*Mac*: FIXMEFIXME|
+
+
+For more detailed information about the allowed syntaxes you can look at the documentation of the native API used for font-rendering (e.g. pango_font_description_from_stringhttp://developer.gnome.org/doc/API/2.0/pango/pango-Fonts.html\#pango-font-description-from-string).
+
+h4. See also
+
+"Font#set_native_font_info":font.html#Font_setnativefontinfo
+
 
 
 h3(#Font_setpointsize). Font#set_point_size
@@ -537,30 +592,3 @@ h4. Parameters
 h4. See also
 
 "Font#get_weight":font.html#Font_getweight
-
-
-h3(#Font_assignment). Font#=
-
- "Font":font.html *operator $=$*(%(arg-type)Font% font)
-
-Assignment operator, using reference counting. Returns a reference
-to `this'.
-
-
-h3(#Font_equals). Font#==
-
- Boolean *operator $==$*(%(arg-type)Font% font)
-
-Equality operator. Two fonts are equal if they contain pointers
-to the same underlying font data. It does not compare each attribute,
-so two independently-created fonts using the same parameters will
-fail the test.
-
-
-h3(#Font_notequals). Font#!=
-
- Boolean *operator $!=$*(%(arg-type)Font% font)
-
-Inequality operator. Two fonts are not equal if they contain pointers
-to different underlying font data. It does not compare each attribute.
-
