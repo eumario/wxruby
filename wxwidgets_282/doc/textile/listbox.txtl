@@ -126,21 +126,10 @@ This applies to multiple selection listboxes only.
 
 h3(#ListBox_getselections). ListBox#get_selections
 
- Integer *get_selections*(%(arg-type)ArrayInt% selections)
+ Array *get_selections*()
 
-Fill an array of ints with the positions of the currently selected items.
-
-h4. Parameters
-
-* _selections_ A reference to an ArrayInt instance that is used to store the result of the query.
-
-h4. Return value
-
-The number of selections.
-
-h4. Remarks
-
-Use this with a multiple selection listbox.
+Returns an array of integers corresponding to the selected items in the
+listbox. Use this with a multiple selection listbox.
 
 h4. See also
 
