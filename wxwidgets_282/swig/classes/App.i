@@ -118,7 +118,8 @@ public:
         return 0;
     }
 	
-	virtual void OnAssert(const wxChar *file, int line, const wxChar *cond, const wxChar *msg)
+    // actually implemented in ruby in classes/app.rb
+	virtual void OnAssertFailure(const wxChar *file, int line, const wxChar *cond, const wxChar *msg)
 	{
 		printf("ASSERT fired\n");
 	}
@@ -145,7 +146,7 @@ public:
   wxString GetVendorName() const;
   void ExitMainLoop() ;
   int MainLoop() ;
-  virtual void OnAssert(const wxChar *file, int line, const wxChar *cond, const wxChar *msg);
+  virtual void OnAssertFailure(const wxChar *file, int line, const wxChar *cond, const wxChar *msg);
   virtual int OnExit() ;
   virtual bool OnCmdLineError(wxCmdLineParser&  parser ) ;
   virtual bool OnCmdLineHelp(wxCmdLineParser&  parser ) ;
