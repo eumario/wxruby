@@ -18,7 +18,7 @@ class Wx::Window
   #  # Example - find a StaticText with a label matching /foo/
   #  a_frame.find_window(Wx::StaticText) { | tx | tx.label =~ /foo/ }
   def find_window(a_class = Wx::Window, &block)
-    descendants.grep(a_class).detect(&block)
+    get_descendants.grep(a_class).detect(&block)
   end
 
   # Returns the window's current size as a two element array
@@ -31,5 +31,20 @@ class Wx::Window
   def get_position_xy
     pos = get_position
     return pos.x, pos.y
+  end
+
+  # Tests if the GUI object has the given window style +style+. Returns
+  # +style+ if it has been applied, or +nil+ if the window does not have
+  # that style.
+  # 
+  #  combobox.has_style?(Wx::CB_READONLY)
+  #  textctrl.has_style?(Wx::TE_MULTILINE)
+  # 
+  # Note that you should at least know that the constant +style+ is
+  # applicable to self. You may get false positives if testing a widget
+  # for a style belonging to an irrelevant class, e.g. testing a
+  # Wx::TextCtrl for the WX::CB_READONLY style.
+  def has_style?(style)
+    ( get_window_style & style ).nonzero?
   end
 end
