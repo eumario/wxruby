@@ -32,7 +32,7 @@
 	  return;
     if(!wx_cwi->HasClientObjectData()&&!wx_cwi->HasClientUntypedData())
         return; // Control containing only strings
-	printf("4x\n");
+
 	for (int i = 0; i < count; ++i)
 	  {
 		VALUE object = (VALUE) wx_cwi->GetClientData(i);
