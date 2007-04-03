@@ -14,7 +14,8 @@ class Wx::ListCtrl
     insert_item(get_item_count, str)
   end
 
-  # Emulate the ControlWithItems find_string method.
+  # Emulate the ControlWithItems find_string method. Like the cognate
+  # method, it returns -1 if the string was not found.
   def find_string(str, case_sensitive = false)
     if case_sensitive
       find_string_sensitively(str)
@@ -29,6 +30,7 @@ class Wx::ListCtrl
   def find_string_sensitively(str)
     start = -1
     until found = find_item(start, str) and get_item_text(found) == str
+      break if found == -1 # Not found at all
       start = found + 1
     end
     return found
