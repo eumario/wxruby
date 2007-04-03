@@ -37,22 +37,25 @@
 # 
 # The following are the WxSugar behaviours that are available. In
 # general you require one of these extensions, it modifies the behaviour
-# of all relevant Wx classes, and affects all new instances.
+# of all relevant Wx classes, and affects all new instances. The
+# following are listed in order of interest
 #
 # [accessors] 
 #  Provide ruby-style getters, setters and question-mark methods
-# [delayed_constructors] 
-#  Required by +layout+, of limited independent interest
-# [event_connector] 
-#  Neater syntax for connecting event listeners
 # [keyword_constructors] 
 #  Use keyword-style hash arguments to construct widgets
+# [event_connector] 
+#  Neater syntax for connecting event listeners
 # [layout] 
 #  Easy interface to using WxWidgets Sizers to arrange controls
-# [menu] 
-#  Create and update menus without a mess of system ids
 # [wx_classes]
 #  Useful ruby methods added to individual Wx classes.
+# [menu] 
+#  Create and update menus without a mess of system ids
+# [enumerable controls]
+#  Treat list-like GUI controls as Ruby enumerables with an +each+ method
+# [delayed_constructors] 
+#  Required by +layout+, of limited independent interest
 #
 # === Deprecated extensions
 #
