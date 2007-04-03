@@ -51,11 +51,12 @@ module WxSugar::EnumerableControl
   # +value+. +value+ may be a string label, or it may be any ruby object
   # set as client data to a list item. Returns +nil+ if nothing matches.
   def index(value)
-    if value.kind_of?(String) and i = find_string(value)
+    # -1 means 'not found' in WxWidgets
+    if value.kind_of?(String) && ( i = find_string(value, true) ) && i > -1
       return i
     end
     indices = (0 ... get_count).to_a
-    return indices.find { | i | get_item_data(i) == value }
+    return indices.find { | i | get_item_data(i) == value } 
   end
 
   # Appends this string to the control
@@ -72,10 +73,34 @@ module WxSugar::EnumerableControl
   end
 
   # These classes provide proxy accessors for items within the control.
+  # ItemCollection is an abstract base class.
   class ItemCollection 
     attr_reader :cwi
     def initialize(cwi)
       @cwi = cwi
+    end
+
+    # Do a bounds-checked call of some value-fetching method +methdo+
+    # for the item +i+
+    def [](method, i)
+      unless index?(i)
+        raise IndexError, "No such item #{i} in #{self.cwi}"
+      end
+      cwi.send( method, i )
+    end
+
+    # Do a bounds-checked call of some value-setting method +methdo+
+    # for the item +i+ to value +val+
+    def []=(method, i, val)
+      unless index?(i)
+        raise IndexError, "No such item #{i} in #{self.cwi}"
+      end
+      cwi.send( method, i, val )
+    end
+
+    # over-ridden by some subclasses
+    def index?(i)
+      i >= 0 and i < cwi.get_count
     end
   end
 
@@ -85,12 +110,14 @@ module WxSugar::EnumerableControl
       cwi.each { | i | yield cwi.get_item_data(i) }
     end
 
+    # Retrieves the item data for item +i+
     def [](i)
-      cwi.get_item_data(i)
+      super :get_item_data, i
     end
 
+    # Sets the item data for +i+ to be +obj+
     def []=(i, obj)
-      cwi.set_item_data(i, obj)
+      super :set_item_data, i, obj
     end
   end
 
@@ -101,12 +128,35 @@ module WxSugar::EnumerableControl
       cwi.each { | i | yield cwi.get_string(i) }
     end
 
+    # Retrieves the string for item +i+
     def [](i)
-      cwi.get_string(i)
+      super :get_string, i
     end
 
+    # Sets a string within the control
     def []=(i, str)
-      cwi.set_string(i, str)
+      super :set_string, i, str
+    end
+  end
+
+  # Fetching strings from a ListCtrl
+  class ListItemTextCollection < ItemCollection
+    def each 
+      cwi.each { | i | yield cwi.get_item_text(i) }
+    end
+
+    # Retrieves the string for item +i+
+    def [](i)
+      super :get_item_text, i
+    end
+
+    # Sets a string within the control
+    def []=(i, str)
+      super :set_item_text, i, str
+    end
+
+    def index?(i)
+      i >= 0 and i < cwi.get_item_count
     end
   end
 end
