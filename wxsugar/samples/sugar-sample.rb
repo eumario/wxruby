@@ -18,9 +18,12 @@ class SugaryFrame < Wx::Frame
     add( Wx::Panel, :proportion => 1 ) do | panel |
       # a text control
       panel.background_colour = Wx::Colour.new(200, 150, 100) 
-      panel.add( Wx::TextCtrl[ :value => 'initial value', 
+      tx = panel.add( Wx::TextCtrl[ :value => 'initial value', 
                                :style => Wx::TE_MULTILINE,
                                :size  => [200, 300]  ] )
+      # test if a style is applied to a control
+      tx.has_style?(Wx::TE_MULTILINE) # true
+      tx.has_style?(Wx::TE_READONLY) # false
     end
 
     # use a nested grid sizer to arrange bottom area
@@ -32,8 +35,15 @@ class SugaryFrame < Wx::Frame
       end
 
       # a drop down
-      choices = %w[ nasty nice ]
-      add( Wx::Choice[ :choices => choices ], :padding => 4)
+      choices = add( Wx::Choice[ :choices => %w[ nasty nice salty ] ], 
+                     :padding => 4 )
+      choices << 'sweet'
+      # access client data via a collection
+      choices.data[3] = Object.new
+      # iterate over a dropdown's content simply
+      choices.each { | i | nil }
+      # iterate over a dropdown's full content
+      choices.each { | i, str, data | nil }
 
       # another button
       add( Wx::Button[ :label => 'foo' ] ) do | button |
