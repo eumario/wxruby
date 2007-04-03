@@ -9,6 +9,7 @@
 #include <wx/init.h>
 %}
 
+
 %ignore GetAuto3D;
 %ignore OnQueryEndSession;
 %ignore ProcessMessage;
@@ -19,6 +20,11 @@
 
 #//////////////////////////////////
 %rename(App) wxRubyApp;
+
+// Prevent the App being destroyed prematurely when Ruby exits down with
+// an exception. Otherwise GC destroys the C++ object, which can still
+// be needed for final WxWidgets events.
+GC_NEVER(wxRubyApp);
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
