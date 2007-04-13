@@ -39,7 +39,7 @@ public:
 
 // on GTK this method is inherited from Bitmap, not defined here
 #ifndef __WXGTK__
-	bool Ok() const;
+	bool IsOk() const;
 #endif
 
     // create from bitmap (which should have a mask unless it's monochrome):
