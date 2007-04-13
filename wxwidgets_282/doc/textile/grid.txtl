@@ -395,6 +395,15 @@ to the client size of the grid window.
 
 
 
+h3(#Grid_candragcolmove). Grid#can_drag_col_move
+
+ Boolean *can_drag_col_move*()
+
+Returns true if columns can be moved by dragging with the mouse. Columns can be moved
+by dragging on their labels.
+
+
+
 h3(#Grid_candragcolsize). Grid#can_drag_col_size
 
  Boolean *can_drag_col_size*()
@@ -524,6 +533,15 @@ Equivalent to calling EnableCellEditControl(false).
 
 
 
+h3(#Grid_disabledragcolmove). Grid#disable_drag_col_move
+
+  *disable_drag_col_move*()
+
+Disables column moving by dragging with the mouse. Equivalent to passing false to
+"Grid#enable_drag_col_move":grid.html#Grid_enabledragcolmove.
+
+
+
 h3(#Grid_disabledragcolsize). Grid#disable_drag_col_size
 
   *disable_drag_col_size*()
@@ -565,6 +583,14 @@ h3(#Grid_enabledragcolsize). Grid#enable_drag_col_size
   *enable_drag_col_size*(%(arg-type)Boolean% enable = true)
 
 Enables or disables column sizing by dragging with the mouse.
+
+
+
+h3(#Grid_enabledragcolmove). Grid#enable_drag_col_move
+
+  *enable_drag_col_move*(%(arg-type)Boolean% enable = true)
+
+Enables or disables column moving by dragging with the mouse.
 
 
 
@@ -732,6 +758,13 @@ and the "Grid overview":gridoverview.html for more information.
 
 
 
+h3(#Grid_getcolat). Grid#get_col_at
+
+ Integer *get_col_at*(%(arg-type)Integer% colPos)
+
+Returns the column ID of the specified column position.
+
+
 h3(#Grid_getcolleft). Grid#get_col_left
 
  Integer *get_col_left*(%(arg-type)Integer% col)
@@ -785,6 +818,14 @@ h3(#Grid_getcolminimalwidth). Grid#get_col_minimal_width
  Integer *get_col_minimal_width*(%(arg-type)Integer% col)
 
 Get the minimal width of the given column/row.
+
+
+
+h3(#Grid_getcolpos). Grid#get_col_pos
+
+ Integer *get_col_pos*(%(arg-type)Integer% colID)
+
+Returns the position of the specified column.
 
 
 
@@ -942,6 +983,63 @@ h3(#Grid_getgridlinecolour). Grid#get_grid_line_colour
  "Colour":colour.html *get_grid_line_colour*()
 
 Returns the colour used for grid lines.
+
+h4. See also
+
+"get_default_grid_line_pen()":#Grid_getdefaultgridlinepen()
+
+
+h3(#Grid_getdefaultgridlinepen). Grid#get_default_grid_line_pen
+
+ "Pen":pen.html *get_default_grid_line_pen*()
+
+Returns the pen used for grid lines. This virtual function may be overridden in
+derived classes in order to change the appearance of grid lines. Note that
+currently the pen width must be $1$.
+
+h4. See also
+
+"get_col_grid_line_pen()":#Grid_getcolgridlinepen(),
+
+"get_row_grid_line_pen()":#Grid_getrowgridlinepen()
+
+
+
+
+h3(#Grid_getrowgridlinepen). Grid#get_row_grid_line_pen
+
+ "Pen":pen.html *get_row_grid_line_pen*(%(arg-type)Integer% row)
+
+Returns the pen used for horizontal grid lines. This virtual function may be
+overridden in derived classes in order to change the appearance of individual
+grid line for the given row row.
+
+Example: 
+
+\\
+
+    // in a grid displaying music notation, use a solid black pen between
+    // octaves (C0=row 127, C1=row 115 etc.)
+    Pen MidiGrid::GetRowGridLinePen(int row)
+    {
+        if ( row          return Pen(*BLACK, 1, SOLID);
+        else 
+           return GetDefaultGridLinePen();
+    }
+ 
+
+
+
+h3(#Grid_getcolgridlinepen). Grid#get_col_grid_line_pen
+
+ "Pen":pen.html *get_col_grid_line_pen*(%(arg-type)Integer% col)
+
+Returns the pen used for vertical grid lines. This virtual function may be
+overridden in derived classes in order to change the appearance of individual
+grid lines for the given column col.
+
+See "get_row_grid_line_pen()":#Grid_getrowgridlinepen() for an example.
+
 
 
 
@@ -1703,6 +1801,14 @@ with sizes smaller than the value specified here.
 
 
 
+h3(#Grid_setcolpos). Grid#set_col_pos
+
+  *set_col_pos*(%(arg-type)Integer% colID,  %(arg-type)Integer% newPos)
+
+Sets the position of the specified column.
+
+
+
 h3(#Grid_setcolsize). Grid#set_col_size
 
   *set_col_size*(%(arg-type)Integer% col,  %(arg-type)Integer% width)
@@ -2035,9 +2141,14 @@ Displays the in-place cell edit control for the current cell.
 
 h3(#Grid_xtocol). Grid#xto_col
 
- Integer *xto_col*(%(arg-type)Integer% x)
+ Integer *xto_col*(%(arg-type)Integer% x,  %(arg-type)Boolean% clipToMinMax = false)
 
-Returns the grid column that corresponds to the logical x coordinate. Returns 
+h4. Parameters
+* _x_ The x position to evaluate.
+* _clipToMinMax_ If true, rather than returning NOT_FOUND, it returns either the first or last column depending on whether x is too far to the left or right respectively.
+
+h4. Return value
+The grid column that corresponds to the logical x coordinate. Returns
 @NOT_FOUND@ if there is no column at the x position.
 
 
@@ -2064,6 +2175,6 @@ h3(#Grid_ytorow). Grid#yto_row
 
  Integer *yto_row*(%(arg-type)Integer% y)
 
-Returns the grid row that corresponds to the logical y coordinate. Returns 
+Returns the grid row that corresponds to the logical y coordinate. Returns
 @NOT_FOUND@ if there is no row at the y position.
 
