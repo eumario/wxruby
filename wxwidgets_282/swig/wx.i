@@ -54,9 +54,10 @@ bool GcIsDeleted(void *ptr)
     else return true;
 }
 
-void GcFreefunc(void *)
+void GcFreefunc(void *ptr)
 {
-
+  SWIG_RubyUnlinkObjects(ptr);
+  SWIG_RubyRemoveTracking(ptr);
 }
 
 ///////////////////////////////////////////////////
@@ -74,7 +75,7 @@ extern "C" void Init_wxRubyEventTypes();
 	Init_wxRubyEventTypes();
 
 	// This is needed so HtmlHelp can load docs from a zip file
-	wxFileSystem::AddHandler(new wxZipFSHandler);
+	wxFileSystem::AddHandler(new wxArchiveFSHandler);
 %}
 
 #define VERSION_STRING "wxRuby2"
