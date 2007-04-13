@@ -5,9 +5,21 @@
 
 %module(directors="1") wxCalendarCtrl
 
+%include "../shared/datetime.i"
+
 %{
 #include <wx/calctrl.h>
 %}
+
+
+
+%typemap(in) wxCalendarDateBorder {
+	$1 = (wxCalendarDateBorder)NUM2INT($input);
+}
+
+%typemap(out) wxCalendarDateBorder {
+    $result = INT2NUM((int)$1);
+}
 
 %ignore wxCalendarCtrl::wxCalendarCtrl();
 
