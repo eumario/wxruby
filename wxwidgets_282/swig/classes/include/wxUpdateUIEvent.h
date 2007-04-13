@@ -1,4 +1,4 @@
-//   Copyright 2004-2005 by Kevin Smith
+//   Copyright 2004-2007 by Kevin Smith
 //   released under the MIT-style wxruby2 license
 
 #if !defined(_wxUpdateUIEvent_h_)
@@ -15,8 +15,15 @@ public:
   bool GetSetChecked() const;
   bool GetSetEnabled() const;
   bool GetSetText() const;
+  bool GetSetShown() const;
+  bool GetShown() const;
+  static long GetUpdateInterval();
   wxString GetText() const;
-  void SetText(const wxString&  text ) ;
+  static void ResetUpdateTime();
+  static void SetMode(wxUpdateUIMode mode);
+  void SetText(const wxString&  text );
+  static void SetUpdateInterval(long updateInterval);
+  void Show(bool show);
 };
 
 
