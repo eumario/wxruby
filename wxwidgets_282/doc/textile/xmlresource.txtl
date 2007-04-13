@@ -38,11 +38,14 @@ h2. Methods
 * "XmlResource#load":#XmlResource_load
 * "XmlResource#load_bitmap":#XmlResource_loadbitmap
 * "XmlResource#load_dialog":#XmlResource_loaddialog
+* "XmlResource#load_dialog_subclass":#XmlResource_loaddialogsubclass
 * "XmlResource#load_frame":#XmlResource_loadframe
+* "XmlResource#load_frame_subclass":#XmlResource_loadframesubclass
 * "XmlResource#load_icon":#XmlResource_loadicon
 * "XmlResource#load_menu":#XmlResource_loadmenu
 * "XmlResource#load_menu_bar":#XmlResource_loadmenubar
 * "XmlResource#load_panel":#XmlResource_loadpanel
+* "XmlResource#load_panel_subclass":#XmlResource_loadpanelsubclass
 * "XmlResource#load_tool_bar":#XmlResource_loadtoolbar
 * "XmlResource#set":#XmlResource_set
 * "XmlResource#set_flags":#XmlResource_setflags
@@ -177,7 +180,9 @@ h3(#XmlResource_loaddialog). XmlResource#load_dialog
 
 Loads a dialog. _dlg_ points to a parent window (if any).
 
- Boolean *load_dialog*(%(arg-type)Dialog% dlg,  %(arg-type)Window% parent,  %(arg-type)String% name)
+h3(#XmlResource_loaddialogsubclass). XmlResource#load_dialog_subclass
+
+ Boolean *load_dialog_subclass*(%(arg-type)Dialog% dlg,  %(arg-type)Window% parent,  %(arg-type)String% name)
 
 Loads a dialog. _dlg_ points to parent window (if any).
 
@@ -187,17 +192,23 @@ for this is that you may want to use derived class with a new event table).
 Example:
 
 
-   MyDialog dlg;
-   TheXmlResource->LoadDialog(&dlg, mainFrame, "my_dialog");
-   dlg->ShowModal();
+   dlg = MyDialog.new
+   the_xml_resource.load_dialog_subclass(dlg, main_frame, "my_dialog")
+   dlg.show_modal
  
 
 
 h3(#XmlResource_loadframe). XmlResource#load_frame
 
- Boolean *load_frame*(%(arg-type)Frame% frame,  %(arg-type)Window% parent,  %(arg-type)String% name)
+ "Frame":frame.html *load_frame*(%(arg-type)Window% parent,  %(arg-type)String% name)
 
 Loads a frame.
+
+h3(#XmlResource_loadframesubclass). XmlResource#load_frame_subclass
+
+ Boolean *load_frame_subclass*(%(arg-type)Frame% frame,  %(arg-type)Window% parent,  %(arg-type)String% name)
+
+Loads a frame. This form is used to finish creation of an already existing instance.
 
 
 h3(#XmlResource_loadicon). XmlResource#load_icon
@@ -231,7 +242,9 @@ h3(#XmlResource_loadpanel). XmlResource#load_panel
 
 Loads a panel. _panel_ points to parent window (if any).
 
- Boolean *load_panel*(%(arg-type)Panel% panel,  %(arg-type)Window% parent,  %(arg-type)String% name)
+h3(#XmlResource_loadpanelsubclass). XmlResource#load_panel_subclass
+
+ Boolean *load_panel_subclass*(%(arg-type)Panel% panel,  %(arg-type)Window% parent,  %(arg-type)String% name)
 
 Loads a panel. _panel_ points to parent window (if any). This form
 is used to finish creation of an already existing instance.
