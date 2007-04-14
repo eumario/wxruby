@@ -30,7 +30,7 @@ possible to use a button with a different identifier nstead, see
 "set_affirmative_id":#Dialog_setaffirmativeid and
 "set_escape_id":#Dialog_setescapeid.
 
-Also notice that the "create_button_sizer()":#Dialog_createbuttonsizer() 
+Also notice that the "create_button_sizer":#Dialog_createbuttonsizer 
 should be used to create the buttons appropriate for the current platform and
 positioned correctly (including their order which is
 platform-dependent).
@@ -132,7 +132,7 @@ Constructor.
 
 h4. Parameters
 
-* _parent_ Can be NULL, a frame or another dialog box.
+* _parent_ Can be nil, a frame or another dialog box.
 * _id_ An identifier for the dialog. A value of -1 is taken to mean a default.
 * _title_ The title of the dialog.
 * _pos_ The dialog position. A value of (-1, -1) indicates a default position, chosen by
@@ -219,20 +219,20 @@ h3(#Dialog_dook). Dialog#do_ok
  Boolean *do_ok*()
 
 This function is called when the titlebar OK button is pressed (PocketPC only).
-A command event for the identifier returned by GetAffirmativeId is sent by
+A command event for the identifier returned by "get_affirmative_id":dialog.html#Dialog_getaffirmativeid is sent by
 default. You can override this function. If the function returns false, Widgets
-will call Close() for the dialog.
+will call "close":window.html#Window_close for the dialog.
 
 
 h3(#Dialog_endmodal). Dialog#end_modal
 
-  *end_modal*(%(arg-type)Integer% retCode)
+  *end_modal*(%(arg-type)Integer% ret_code)
 
 Ends a modal dialog, passing a value to be returned from the "Dialog#show_modal":dialog.html#Dialog_showmodal invocation.
 
 h4. Parameters
 
-* _retCode_ The value that should be returned by *ShowModal*.
+* _ret_code_ The value that should be returned by *show_modal*.
 
 h4. See also
 
@@ -283,14 +283,14 @@ h3(#Dialog_gettoolbar). Dialog#get_tool_bar
 
  "ToolBar":toolbar.html *get_tool_bar*()
 
-On PocketPC, a dialog is automatically provided with an empty toolbar. GetToolBar
+On PocketPC, a dialog is automatically provided with an empty toolbar. *get_tool_bar*
 allows you to access the toolbar and add tools to it. Removing tools and adding
 arbitrary controls are not currently supported.
 
 This function is not available on any other platform.
 
 
-h3(#Dialog_iconized). Dialog#iconize
+h3(#Dialog_iconize). Dialog#iconize
 
   *iconize*(%(arg-type)Boolean% iconize)
 
@@ -305,4 +305,145 @@ h4. Remarks
 Note that in Windows, iconization has no effect since dialog boxes cannot be
 iconized. However, applications may need to explicitly restore dialog
 boxes under Motif which have user-iconizable frames, and under Windows
-calling @Iconize(false)@ will bring the window to the front, as does
+calling @iconize(false)@ will bring the window to the front, as does
+
+
+h3(#Dialog_isiconized). Dialog#is_iconized
+
+  Boolean *is_iconized*()
+
+Returns true if the dialog box is iconized. Windows only.
+
+h4. Remarks
+
+Always returns false under Windows since dialogs cannot be iconized.
+
+h3(#Dialog_ismodal). Dialog#is_modal
+
+  Boolean *is_modal*()
+
+Returns true if the dialog box is modal, false otherwise.
+
+h3(#Dialog_onsyscolourchanged). Dialog#on_sys_colour_changed
+
+  *on_sys_colour_changed*(%(arg-type)SysColourChangedEvent% event)
+
+The default handler for EVT_SYS_COLOUR_CHANGED.
+
+h4. Parameters
+
+* _event_ The colour change event.
+
+h4. Remarks
+
+Changes the dialog's colour to conform to the current settings (Windows only). Add an event table entry for your dialog class if you wish the behaviour to be different (such as keeping a user-defined background colour). If you do override this function, call "Event::skip":event.html#Event_skip to propagate the notification to child windows and controls.
+
+h4. See also
+
+"SysColourChangedEvent":syscolourchangedevent.html
+
+h3(#Dialog_setaffirmativeid). Dialog#set_affirmative_id
+
+  *set_affirmative_id*(%(arg-type)Integer% id)
+
+Sets the identifier to be used as OK button. When the button with this identifier is pressed, the dialog calls "validate":window.html#Window_validate and "Window::transfer_data_from_window":window.html#Window_transferdatafromwindow and, if they both return true, closes the dialog with ID_OK return code.
+
+Also, when the user presses a hardware OK button on the devices having one or the special OK button in the PocketPC title bar, an event with this id is generated.
+
+By default, the affirmative id is ID_OK.
+
+h4. See also
+
+"Dialog::get_affirmative_id":dialog.html#Dialog_getaffirmativeid, "Dialog::set_escape_id":dialog.html#Dialog_setescapeid
+
+h3(#Dialog_setescapeid). Dialog#set_escape_id
+
+  *set_escape_id*(%(arg-type)Integer% id)
+
+Sets the identifier of the button which should work like the standard CANCEL button in this dialog. When the button with this id is clicked, the dialog is closed. Also, when the user presses ESC key in the dialog or closes the dialog using the close button in the title bar, this is mapped to the click of the button with the specified id.
+
+By default, the escape id is the special value ID_ANY meaning that ID_CANCEL button is used if it's present in the dialog and otherwise the button with "get_affirmative_id":dialog.html#Dialog_getaffirmativeid is used. Another special value for _id_ is ID_NONE meaning that ESC presses should be ignored. If any other value is given, it is interpreted as the id of the button to map the escape key to.
+
+h3(#Dialog_seticon). Dialog#set_icon
+
+  *set_icon*(%(arg-type)Icon% icon)
+
+Sets the icon for this dialog.
+
+h4. Parameters
+
+* _icon_ The icon to associate with this dialog.
+
+h4. See also 
+
+"Icon":icon.html
+
+h3(#Dialog_seticons). Dialog#set_icons
+
+  *set_icons*(%(arg-type)IconBundle% icons)
+
+Sets the icons for this dialog.
+
+h4. Parameters
+
+* _icons_ The icons to associate with this dialog.
+
+h4. See also 
+
+"IconBundle":iconbundle.html
+
+h3(#Dialog_setmodal). Dialog#set_modal
+
+  *set_modal*(%(arg-type)Boolean% flag)
+
+*NB:* This function is deprecated and doesn't work for all ports, just use "show_modal":dialog.html#Dialog_showmodal to show a modal dialog instead.
+
+Allows the programmer to specify whether the dialog box is modal ("Dialog::show":dialog.html#Dialog_show blocks control until the dialog is hidden) or modeless (control returns immediately).
+
+h4. Parameters
+
+* _flag_ If true, the dialog will be modal, otherwise it will be modeless.
+
+h3(#Dialog_setreturncode). Dialog#set_return_code
+
+  *set_return_code*(%(arg-type)Integer% ret_code)
+
+h4. Parameters
+
+* _ret_code_ The integer return code, usually a control identifier.
+
+h4. Remarks
+
+A return code is normally associated with a modal dialog, where "Dialog::show_modal":dialog.html#Dialog_showmodal returns a code to the application. The function "Dialog::end_modal":dialog.html#Dialog_endmodal calls *set_return_code*.
+
+h4. See also
+
+"Dialog::get_return_code":dialog.html#Dialog_getreturncode, "Dialog::show_modal":dialog.html#Dialog_showmodal, "Dialog::end_modal":dialog.html#Dialog_endmodal
+
+h3(#Dialog_show). Dialog#show
+
+  Boolean *show*(%(arg-type)Boolean% show)
+
+Hides or shows the dialog.
+
+h4. Parameters
+
+* _show_ If true, the dialog box is shown and brought to the front; otherwise the box is hidden. If false and the dialog is modal, control is returned to the calling program.
+
+h4. Remarks
+
+The preferred way of dismissing a modal dialog is to use "Dialog::end_modal":dialog.html#Dialog_endmodal.
+
+h3(#Dialog_showmodal). Dialog#show_modal
+
+  Integer *show_modal*()
+
+Shows a modal dialog. Program flow does not return until the dialog has been dismissed with "Dialog::end_modal":dialog.html#Dialog_endmodal.
+
+h4. Return value
+
+The return value is the value set with "Dialog::set_return_code":dialog.html#Dialog_setreturncode.
+
+h4. See also
+
+"Dialog::end_modal":dialog.html#Dialog_endmodal, "Dialog::get_return_code":dialog.html#Dialog_getreturncode, "Dialog::set_return_code":dialog.html#Dialog_setreturncode
