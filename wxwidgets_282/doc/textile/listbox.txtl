@@ -73,7 +73,7 @@ h2. Methods
 
 h3(#ListBox_new). ListBox.new
 
-  *ListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+  *ListBox.new*(%(arg-type)Window% parent, %(arg-type)Integer% id, 
               %(arg-type)Point% pos = DEFAULT_POSITION, 
               %(arg-type)Size% size = DEFAULT_SIZE, 
               %(arg-type)Array% choices = nil,  
@@ -101,10 +101,10 @@ h4. See also
 
 h3(#ListBox_create). ListBox#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+ Boolean *create*(%(arg-type)Window% parent, %(arg-type)Integer% id, 
                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE,  %(arg-type)Integer% n, 
-                %(arg-type)String% choices[] = nil,  %(arg-type)Integer% style = 0, 
+                %(arg-type)Size% size = DEFAULT_SIZE, %(arg-type)Integer% n, 
+                %(arg-type)String% choices[] = nil, %(arg-type)Integer% style = 0, 
                 %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "listBox")
 
@@ -141,9 +141,9 @@ h4. See also
 
 h3(#ListBox_insertitems). ListBox#insert_items
 
-  *insert_items*(%(arg-type)Integer% nItems,  %(arg-type)String% items,  %(arg-type)Integer% pos)
+  *insert_items*(%(arg-type)Integer% nItems, %(arg-type)String% items, %(arg-type)Integer% pos)
 
-  *insert_items*(%(arg-type)ArrayString% nItems,  %(arg-type)Integer% pos)
+  *insert_items*(%(arg-type)ArrayString% nItems, %(arg-type)Integer% pos)
 
 Insert the given number of strings before the specified position.
 
@@ -174,14 +174,14 @@ true if the given item is selected, false otherwise.
 
 h3(#ListBox_set). ListBox#set
 
-  *set*(%(arg-type)Array% choices,  %(arg-type)% *clientData = @NULL@)
+  *set*(%(arg-type)Array% choices, %(arg-type)Array% client_data = @nil@)
 
 Clears the list box and adds the given strings to it.
 
 h4. Parameters
 
 * _choices_ An array of strings to set.
-* _clientData_ Optional array of client data pointers - not currently supported
+* _client_data_ Optional array of client data pointers - not currently supported
 
 h3(#ListBox_setfirstitem). ListBox#set_first_item
 

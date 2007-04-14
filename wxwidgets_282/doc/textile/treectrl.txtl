@@ -51,20 +51,20 @@ input to blocks that take a "TreeEvent":treeevent.html argument.
 |*evt_tree_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the left mouse button.|
 |*evt_tree_begin_rdrag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the right mouse button.|
 |*evt_tree_end_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|End dragging with the left or right mouse button.|
-|*evt_tree_begin_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin editing a label. This can be prevented by calling "Veto()":notifyeventveto.html.|
-|*evt_tree_end_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Finish editing a label. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_begin_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin editing a label. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
+|*evt_tree_end_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Finish editing a label. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
 |*evt_tree_delete_item(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Delete an item.|
 |*evt_tree_get_info(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Request information from the application.|
 |*evt_tree_set_info(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Information is being supplied.|
 |*evt_tree_item_activated(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been activated, i.e. chosen by double clicking it with mouse or from keyboard|
 |*evt_tree_item_collapsed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been collapsed.|
-|*evt_tree_item_collapsing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being collapsed. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_item_collapsing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being collapsed. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
 |*evt_tree_item_expanded(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been expanded.|
-|*evt_tree_item_expanding(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being expanded. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_item_expanding(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being expanded. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
 |*evt_tree_item_right_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has clicked the item with the right mouse button.|
 |*evt_tree_item_middle_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has clicked the item with the middle mouse button.|
 |*evt_tree_sel_changed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Selection has changed.|
-|*evt_tree_sel_changing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Selection is changing. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_sel_changing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Selection is changing. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
 |*evt_tree_key_down(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A key has been pressed.|
 |*evt_tree_item_gettooltip(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The opportunity to set the item tooltipis being given to the application (call TreeEvent::SetToolTip). Windows only.|
 |*evt_tree_item_menu(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The context menu for the selected item has been requested, either by a right click or by using the menu key.|
@@ -518,9 +518,9 @@ For this enumeration function you must pass in a `cookie' parameter
 which is opaque for the application but is necessary for the library
 to make these functions reentrant (i.e. allow more than one
 enumeration on one and the same object simultaneously). The cookie passed to
-GetFirstChild and GetNextChild should be the same variable.
+get_first_child and "get_next_child":treectrl.html#TreeCtrl_getnextchild should be the same variable.
 
-Returns an invalid tree item (i.e. IsOk() returns @false@) if there are no further children.
+Returns an invalid tree item (i.e. is_ok() returns @false@) if there are no further children.
 
 h4. See also
 
@@ -631,7 +631,7 @@ For this enumeration function you must pass in a `cookie' parameter
 which is opaque for the application but is necessary for the library
 to make these functions reentrant (i.e. allow more than one
 enumeration on one and the same object simultaneously). The cookie passed to
-GetFirstChild and GetNextChild should be the same.
+"get_first_child":treectrl.html#TreeCtrl_getfirstchild and get_next_child should be the same.
 
 Returns an invalid tree item if there are no further children.
 

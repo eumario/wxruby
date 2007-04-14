@@ -85,7 +85,7 @@ h3(#ControlWithItems_clear). ControlWithItems#clear
 
 Removes all items from the control.
 
-_Clear()_ also deletes the client data of the existing items if it is owned
+_clear()_ also deletes the client data of the existing items if it is owned
 by the control.
 
 h3(#ControlWithItems_delete). ControlWithItems#delete
@@ -105,7 +105,7 @@ h4. Parameters
 
 h4. See also
 
-"Clear":controlwithitemsclear.html
+"clear":controlwithitems.html#ControlWithItems_clear
 
 h3(#ControlWithItems_findstring). ControlWithItems#find_string
 
@@ -206,14 +206,14 @@ h4. See also
 
 h3(#ControlWithItems_insert). ControlWithItems#insert
 
- Integer *insert*(%(arg-type)String% item,  %(arg-type)Integer% pos)
+ Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos)
 
 Inserts the item into the list before pos.
 Not valid for @LB_SORT@ or @CB_SORT@ styles, use Append instead.
 
- Integer *insert*(%(arg-type)String% item,  %(arg-type)Integer% pos,  %(arg-type)% clientData)
+ Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, %(arg-type)% clientData)
 
- Integer *insert*(%(arg-type)String% item,  %(arg-type)Integer% pos, 
+ Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, 
                 %(arg-type)ClientData% clientData)
 
 Inserts the item into the list before pos, associating the given, typed or
@@ -263,8 +263,8 @@ data object is being interacted with. Any ruby object may be set as item
 data, though it may be unwise to use volatile objects such as sockets or
 files as item data.
 
-Note that in WxWidgets C++, this method is called SetClientData;
-therefore *set_client_data* is an alias in WxRuby for this method. THe
+*Note* that in WxWidgets C++, this method is called SetClientData;
+therefore *set_client_data* is an alias in WxRuby for this method. The
 name *set_item_data* is preferred for clarity and consistency with the
 other classes such as "TreeCtrl":treectrl.html and
 "ListCtrl":listctrl.html which offer a similar feature.

@@ -280,7 +280,7 @@ to hide in full-screen mode:
 This function has not been tested with MDI frames.
 
 Note that showing a window full screen also actually
-"Show()s":windowshow.html if it hadn't been shown yet.
+"show()s":window.html#Window_show if it hadn't been shown yet.
 
 h4. See also
 

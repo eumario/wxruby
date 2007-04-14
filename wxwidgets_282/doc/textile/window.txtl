@@ -1400,12 +1400,12 @@ layout is on, this function gets called automatically when the window is resized
 
 h3(#Window_linedown). Window#line_down
 
-This is just a wrapper for "scroll_lines":#Window_scrolllines$(1)$.
+This is just a wrapper for "scroll_lines":#Window_scrolllines (1).
 
 
 h3(#Window_lineup). Window#line_up
 
-This is just a wrapper for "scroll_lines":#Window_scrolllines$(-1)$.
+This is just a wrapper for "scroll_lines":#Window_scrolllines (-1).
 
 
 h3(#Window_lower). Window#lower
@@ -1416,7 +1416,7 @@ Lowers the window to the bottom of the window hierarchy.
 
 h4. See also
 
-"Raise":windowraise.html
+"raise":window.html#Window_raise
 
 
 h3(#Window_makemodal). Window#make_modal
@@ -1448,8 +1448,8 @@ h4. Parameters
 
 h4. Remarks
 
-Implementations of SetSize can also implicitly implement the
-Window::Move function, which is defined in the base Window class
+Implementations of "set_size":window.html#Window_setsize can also implicitly implement the
+Window::move function, which is defined in the base Window class
 as the call:
 
 
@@ -1472,13 +1472,13 @@ This means that when the user presses @TAB@ key on that other window,
 the focus switches to this window.
 
 Default tab order is the same as creation order, this function and
-"move_before_in_tab_order()":#Window_movebeforeintaborder() allow to change
+"move_before_in_tab_order":#Window_movebeforeintaborder allow to change
 it after creating all the windows.
 
 h4. Parameters
 
 * _win_ A sibling of this window which should precede it in tab order,
-must not be NULL
+must not be nil.
 
 
 h3(#Window_movebeforeintaborder). Window#move_before_in_tab_order
@@ -1634,7 +1634,7 @@ In current version of Widgets this works both for manage and child windows.
 
 h4. See also
 
-"Lower":windowlower.html
+"lower":window.html#Window_lower
 
 
 h3(#Window_refresh). Window#refresh
@@ -1644,7 +1644,7 @@ h3(#Window_refresh). Window#refresh
 Causes this window, and all of its children recursively (except under GTK1
 where this is not implemented), to be repainted. Note that repainting doesn't
 happen immediately but only during the next event loop iteration, if you need
-to update the window immediately you should use "Update":windowupdate.html 
+to update the window immediately you should use "update":window.html#Window_update
 instead.
 
 h4. Parameters
@@ -2667,9 +2667,9 @@ h3(#Window_show). Window#show
 
  Boolean *show*(%(arg-type)Boolean% show = @true@)
 
-Shows or hides the window. You may need to call "Raise":windowraise.html
+Shows or hides the window. You may need to call "raise":window.html#Window_raise
 for a top level window if you want to bring it to top, although this is not
-needed if Show() is called immediately after the frame creation.
+needed if show() is called immediately after the frame creation.
 
 h4. Parameters
 
@@ -2758,7 +2758,7 @@ Calling this method immediately repaints the invalidated area of the window and
 all of its children recursively while this would usually only happen when the
 flow of control returns to the event loop. Notice that this function doesn't
 refresh the window and does nothing if the window hadn't been already
-repainted. Use "Refresh":windowrefresh.html first if you want to
+repainted. Use "refresh":window.html#Window_refresh first if you want to
 immediately redraw the window unconditionally.
 
 
@@ -2818,7 +2818,7 @@ h3(#Window_validate). Window#validate
 Validates the current values of the child controls using their validators.
 
 If the window has @WS_EX_VALIDATE_RECURSIVELY@ extra style flag set,
-the method will also call Validate() of all child windows.
+the method will also call validate() of all child windows.
 
 h4. Return value
 
@@ -2835,7 +2835,7 @@ h3(#Window_warppointer). Window#warp_pointer
 
 Moves the pointer to the given position on the window.
 
-*NB: * This function is not supported under Mac because Apple Human
+*NB:* This function is not supported under Mac because Apple Human
 Interface Guidelines forbid moving the mouse cursor programmatically.
 
 h4. Parameters

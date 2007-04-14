@@ -57,7 +57,7 @@ h2. Methods
 
 h3(#XmlResource_new). XmlResource.new
 
-  *XmlResource.new*(%(arg-type)String% filemask,  %(arg-type)Integer% flags = XRC_USE_LOCALE)
+  *XmlResource.new*(%(arg-type)String% filemask, %(arg-type)Integer% flags = XRC_USE_LOCALE)
 
 Constructor.
 
@@ -96,11 +96,11 @@ all controls used within the resource.
 
 h3(#XmlResource_attachunknowncontrol). XmlResource#attach_unknown_control
 
- Boolean *attach_unknown_control*(%(arg-type)String% name,  %(arg-type)Window% control, 
+ Boolean *attach_unknown_control*(%(arg-type)String% name, %(arg-type)Window% control, 
                                 %(arg-type)Window% parent = nil)
 
 Attaches an unknown control to the given panel/window/dialog.
-Unknown controls are used in conjunction with <object class="unknown">.
+Unknown controls are used in conjunction with @<object class="unknown">@.
 
 
 h3(#XmlResource_clearhandlers). XmlResource#clear_handlers
@@ -112,7 +112,7 @@ Removes all handlers.
 
 h3(#XmlResource_compareversion). XmlResource#compare_version
 
- Integer *compare_version*(%(arg-type)Integer% major,  %(arg-type)Integer% minor, 
+ Integer *compare_version*(%(arg-type)Integer% major, %(arg-type)Integer% minor, 
                          %(arg-type)Integer% release, 
                          %(arg-type)Integer% revision)
 
@@ -176,13 +176,13 @@ Loads a bitmap resource from a file.
 
 h3(#XmlResource_loaddialog). XmlResource#load_dialog
 
- "Dialog":dialog.html *load_dialog*(%(arg-type)Window% parent,  %(arg-type)String% name)
+ "Dialog":dialog.html *load_dialog*(%(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a dialog. _dlg_ points to a parent window (if any).
 
 h3(#XmlResource_loaddialogsubclass). XmlResource#load_dialog_subclass
 
- Boolean *load_dialog_subclass*(%(arg-type)Dialog% dlg,  %(arg-type)Window% parent,  %(arg-type)String% name)
+ Boolean *load_dialog_subclass*(%(arg-type)Dialog% dlg, %(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a dialog. _dlg_ points to parent window (if any).
 
@@ -200,13 +200,13 @@ Example:
 
 h3(#XmlResource_loadframe). XmlResource#load_frame
 
- "Frame":frame.html *load_frame*(%(arg-type)Window% parent,  %(arg-type)String% name)
+ "Frame":frame.html *load_frame*(%(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a frame.
 
 h3(#XmlResource_loadframesubclass). XmlResource#load_frame_subclass
 
- Boolean *load_frame_subclass*(%(arg-type)Frame% frame,  %(arg-type)Window% parent,  %(arg-type)String% name)
+ Boolean *load_frame_subclass*(%(arg-type)Frame% frame, %(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a frame. This form is used to finish creation of an already existing instance.
 
@@ -227,7 +227,7 @@ Loads menu from resource. Returns NULL on failure.
 
 h3(#XmlResource_loadmenubar). XmlResource#load_menu_bar
 
- "MenuBar":menubar.html *load_menu_bar*(%(arg-type)Window% parent,  %(arg-type)String% name)
+ "MenuBar":menubar.html *load_menu_bar*(%(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a menubar from resource. Returns NULL on failure.
 
@@ -238,13 +238,13 @@ Loads a menubar from resource. Returns NULL on failure.
 
 h3(#XmlResource_loadpanel). XmlResource#load_panel
 
- "Panel":panel.html *load_panel*(%(arg-type)Window% parent,  %(arg-type)String% name)
+ "Panel":panel.html *load_panel*(%(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a panel. _panel_ points to parent window (if any).
 
 h3(#XmlResource_loadpanelsubclass). XmlResource#load_panel_subclass
 
- Boolean *load_panel_subclass*(%(arg-type)Panel% panel,  %(arg-type)Window% parent,  %(arg-type)String% name)
+ Boolean *load_panel_subclass*(%(arg-type)Panel% panel, %(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a panel. _panel_ points to parent window (if any). This form
 is used to finish creation of an already existing instance.
@@ -252,7 +252,7 @@ is used to finish creation of an already existing instance.
 
 h3(#XmlResource_loadtoolbar). XmlResource#load_tool_bar
 
- "ToolBar":toolbar.html *load_tool_bar*(%(arg-type)Window% parent,  %(arg-type)String% name)
+ "ToolBar":toolbar.html *load_tool_bar*(%(arg-type)Window% parent, %(arg-type)String% name)
 
 Loads a toolbar.
 
@@ -276,7 +276,7 @@ h3(#XmlResource_unload). XmlResource#unload
  Boolean *unload*(%(arg-type)String% filename)
 
 This function unloads a resource previously loaded by 
-"Load()":xmlresourceload.html.
+"load()":xmlresource.html#XmlResource_load.
 
 Returns  if the resource was successfully unloaded and  if it hasn't
 been found in the list of loaded resources.

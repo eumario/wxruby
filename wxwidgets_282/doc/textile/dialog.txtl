@@ -447,3 +447,4 @@ The return value is the value set with "Dialog::set_return_code":dialog.html#Dia
 h4. See also
 
 "Dialog::end_modal":dialog.html#Dialog_endmodal, "Dialog::get_return_code":dialog.html#Dialog_getreturncode, "Dialog::set_return_code":dialog.html#Dialog_setreturncode
+
