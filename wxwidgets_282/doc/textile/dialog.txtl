@@ -52,7 +52,7 @@ dialog, such as 'OK' or 'Cancel'. To test these, do:
  case dlg.show_modal
  when Wx::ID_OK # user clicked ok
    ...
- when Wx::ID_CANCLE # user clicked cancel or closed the dialog
+ when Wx::ID_CANCEL # user clicked cancel or closed the dialog
    ...
  end
 
