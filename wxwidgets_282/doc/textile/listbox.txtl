@@ -103,8 +103,9 @@ h3(#ListBox_create). ListBox#create
 
  Boolean *create*(%(arg-type)Window% parent, %(arg-type)Integer% id, 
                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, %(arg-type)Integer% n, 
-                %(arg-type)String% choices[] = nil, %(arg-type)Integer% style = 0, 
+                %(arg-type)Size% size = DEFAULT_SIZE,
+                %(arg-type)String% choices[] = nil, 
+				%(arg-type)Integer% style = 0, 
                 %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "listBox")
 
@@ -136,21 +137,15 @@ h4. See also
 "ControlWithItems#get_selection":controlwithitems.html#ControlWithItems_getselection, "ControlWithItems#get_string_selection":controlwithitems.html#ControlWithItems_getstringselection, "ControlWithItems#set_selection":controlwithitems.html#ControlWithItems_setselection
 
 
-
-
-
 h3(#ListBox_insertitems). ListBox#insert_items
 
-  *insert_items*(%(arg-type)Integer% nItems, %(arg-type)String% items, %(arg-type)Integer% pos)
+  *insert_items*(%(arg-type)Array% items, %(arg-type)Integer% pos)
 
-  *insert_items*(%(arg-type)ArrayString% nItems, %(arg-type)Integer% pos)
-
-Insert the given number of strings before the specified position.
+Insert a number of strings before the specified position.
 
 h4. Parameters
 
-* _nItems_ Number of items in the array _items_
-* _items_ Labels of items to be inserted
+* _items_ Array of strings for the labels of items to be inserted
 * _pos_ Position before which to insert the items: for example, if _pos_ is 0 the items
 will be inserted in the beginning of the listbox
 
