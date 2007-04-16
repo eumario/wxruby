@@ -2141,6 +2141,16 @@ enum wxSashDragStatus
 };
 
 //** ---------------------------------------------------------------------------- **
+//   Start constants from wx/timer.h
+//** ---------------------------------------------------------------------------- **
+
+// generate notifications periodically until the timer is stopped (default)
+%constant bool TIMER_CONTINUOUS = false;
+
+// only send the notification once and then stop the timer
+%constant bool TIMER_ONE_SHOT = true;
+
+//** ---------------------------------------------------------------------------- **
 //   Start SWIG fixes for constants
 //** ---------------------------------------------------------------------------- ** 
 
