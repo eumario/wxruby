@@ -55,9 +55,9 @@ h3(#ControlWithItems_append). ControlWithItems#append
 
 Adds the item to the end of the list box.
 
- Integer *append*(%(arg-type)String% item,  %(arg-type)% clientData)
+ Integer *append*(%(arg-type)String% item, %(arg-type)Object% clientData)
 
- Integer *append*(%(arg-type)String% item,  %(arg-type)ClientData% clientData)
+ Integer *append*(%(arg-type)String% item, %(arg-type)ClientData% clientData)
 
 Adds the item to the end of the list box, associating the given, typed or
 untyped, client data pointer with the item.
@@ -211,10 +211,9 @@ h3(#ControlWithItems_insert). ControlWithItems#insert
 Inserts the item into the list before pos.
 Not valid for @LB_SORT@ or @CB_SORT@ styles, use Append instead.
 
- Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, %(arg-type)% clientData)
+ Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, %(arg-type)Object% clientData)
 
- Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, 
-                %(arg-type)ClientData% clientData)
+ Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, %(arg-type)ClientData% clientData)
 
 Inserts the item into the list before pos, associating the given, typed or
 untyped, client data pointer with the item.
@@ -252,7 +251,7 @@ multiple selection.
 
 h3(#ControlWithItems_setitemdata). ControlWithItems#set_item_data
 
-  *set_item_data*(%(arg-type)Integer% n,  %(arg-type)Object% data)
+  *set_item_data*(%(arg-type)Integer% n, %(arg-type)Object% data)
 
 Associates the ruby object with the given item in the control. This
 useful feature enables the linking of program data (for example, objects
@@ -295,7 +294,7 @@ h4. See also
 
 h3(#ControlWithItems_setstring). ControlWithItems#set_string
 
-  *set_string*(%(arg-type)Integer% n,  %(arg-type)String% string)
+  *set_string*(%(arg-type)Integer% n, %(arg-type)String% string)
 
 Sets the label for the given item.
 
