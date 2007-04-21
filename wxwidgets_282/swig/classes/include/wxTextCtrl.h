@@ -169,6 +169,14 @@ public:
     virtual void DoUpdateWindowUI(wxUpdateUIEvent& event);
 
     virtual bool ShouldInheritColours() const;
+
+		//Use this to turn off and on 'Check Spelling as You Type' on OS X 10.4.x and above
+		//renamed in the .i file to check_spelling
+#ifdef __WXMAC__
+	#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+		void MacCheckSpelling(bool check);
+	#endif
+#endif
 };
 
 
