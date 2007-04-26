@@ -322,7 +322,7 @@ end
 # remaining
 WxSugar.define_keyword_ctors('Gauge') do
   wx_ctor_params :range, :pos, :size, :style => Wx::GA_HORIZONTAL
-  wx_ctor_params :validator, :name
+  wx_ctor_params :validator, :name => 'gauge'
 end
 
 # wxGenericDirCtrl 	A control for displaying a directory tree
