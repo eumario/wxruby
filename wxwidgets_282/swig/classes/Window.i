@@ -17,6 +17,9 @@ enum wxWindowVariant
 %ignore wxWindow::GetAccessible;
 %ignore wxWindow::PopEventHandler;
 
+// A custom method is required to do the correct casting - see below
+%ignore wxWindow::GetHandle;
+
 // LayoutConstraints are deprecated and not supported in WxRuby
 %ignore wxWindow::SetConstraints;
 
@@ -143,6 +146,10 @@ static VALUE get_ruby_object(wxObject *wx_obj)
   
     return returnVal;    
   }  
+
+  // pass a PaintDC into a passed ruby block, and ensure that the DC 
+  // is correctly deleted when drawing is completed. This is important 
+  // to avoid entering an endless loop of paint events.
   VALUE paint()
   {  
 	wxWindow *ptr = self;
@@ -155,5 +162,27 @@ static VALUE get_ruby_object(wxObject *wx_obj)
 		DATA_PTR(dcVal) = NULL;
 	  }
 	return Qnil;
+  }
+
+  // Return a window handle as a platform-specific ruby integer
+  VALUE get_handle()
+  {
+	wxWindow *win = self;
+	long handle;
+
+	// borrowed from wxPython
+#ifdef __WXMSW__
+    handle = (long)win->GetHandle();
+#endif
+
+#if defined(__WXGTK__) || defined(__WXX11)
+    handle = (long)GetXWindow(win);
+#endif
+
+#ifdef __WXMAC__
+    handle = (long)win->GetHandle();
+#endif
+
+	return LONG2NUM(handle);
   }
 }
