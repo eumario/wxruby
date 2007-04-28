@@ -47,7 +47,6 @@ class MyCanvas < Wx::ScrolledWindow
     end
     
     def do_drawing(dc, printing=false)
-        dc.begin_drawing()
         dc.set_pen(Wx::Pen.new("RED", 1, Wx::SOLID)) # Pen constructor requires (color, width, style)
         dc.draw_rectangle(5,5,50,50)
         
@@ -115,8 +114,6 @@ class MyCanvas < Wx::ScrolledWindow
         dc.draw_rectangle(490, 90, 20, 20)
         
         draw_saved_lines(dc)
-        
-        dc.end_drawing()
     end
     
     def draw_saved_lines(dc)
@@ -170,14 +167,12 @@ class MyCanvas < Wx::ScrolledWindow
                 dc = Wx::ClientDC.new(self)
                 prepare_dc(dc)
             end
-            dc.begin_drawing()
             dc.set_pen(Wx::Pen.new("MEDIUM FOREST GREEN", 4, Wx::SOLID))
             coords = [@x, @y] + convert_event_coords(event)
             @curLine.push(coords)
             coords.flatten!()
             dc.draw_line(coords[0], coords[1], coords[2], coords[3])
             set_XY(event)
-            dc.end_drawing()
         end
     end
     
