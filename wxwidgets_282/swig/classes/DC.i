@@ -5,6 +5,8 @@
 
 %module(directors="1") wxDC
 
+%ignore wxDC::wxDC();
+
 // raises 'void value is not ignored as it should be' compile error
 %ignore wxDC::StartPage;
 
