@@ -37,22 +37,26 @@ $WXINC=File.join("#$WXDIR","include")
 $WXLIBDIR=File.join("#$WXDIR","lib","vc_lib")
 $INCTEMP=File.join("#$WXDIR","lib","vc_lib","msw#{$POSTFIX}")
 
-$wx_libs =  File.join("#$WXLIBDIR","wxbase28#{$POSTFIX}.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxbase28#{$POSTFIX}_net.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxbase28#{$POSTFIX}_odbc.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxbase28#{$POSTFIX}_xml.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxmsw28#{$POSTFIX}_adv.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxmsw28#{$POSTFIX}_core.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxmsw28#{$POSTFIX}_dbgrid.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxmsw28#{$POSTFIX}_html.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxmsw28#{$POSTFIX}_media.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxmsw28#{$POSTFIX}_xrc.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxexpat#{$DEBUGPOSTFIX}.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxjpeg#{$DEBUGPOSTFIX}.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxpng#{$DEBUGPOSTFIX}.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxregex#{$POSTFIX}.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxtiff#{$DEBUGPOSTFIX}.lib")
-$wx_libs += File.join("#$WXLIBDIR","wxzlib#{$DEBUGPOSTFIX}.lib")
+# wxWidgets libraries that should be linked into wxRuby
+# odbc and db_table not required by wxruby
+windows_libs = %W|wxbase#{$WXVERSION}#{$POSTFIX}
+                  wxbase#{$WXVERSION}#{$POSTFIX}_net 
+                  wxbase#{$WXVERSION}#{$POSTFIX}_xml
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_adv
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_core
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_html
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_media
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_xrc
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_aui
+                  wxexpat#{$DEBUGPOSTFIX}
+                  wxjpeg#{$DEBUGPOSTFIX}
+                  wxpng#{$DEBUGPOSTFIX}
+                  wxtiff#{$DEBUGPOSTFIX}
+                  wxzlib#{$DEBUGPOSTFIX}
+                  wxregex#{$POSTFIX}|
+
+windows_libs.map! { | lib | File.join($WXLIBDIR, "#{lib}.lib") }
+$wx_libs = windows_libs.join(' ')
 
 $wx_cppflags = [
     "-I#$WXINC", "-D__WXMSW__",
