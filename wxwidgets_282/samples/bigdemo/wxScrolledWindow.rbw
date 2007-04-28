@@ -26,7 +26,8 @@ class MyCanvas < Wx::ScrolledWindow
         set_background_colour(Wx::WHITE) 
         
         set_cursor(Wx::Cursor.new(Wx::CURSOR_PENCIL))
-        @bmp = Wx::Bitmap.new("./icons/test2.xpm")
+        bmp_file = File.join(File.dirname(__FILE__), 'icons', 'test2.xpm')
+        @bmp = Wx::Bitmap.new(bmp_file)
         
         
         set_scrollbars(20, 20, @maxWidth / 20, @maxHeight / 20, 0, 0, true)
@@ -39,15 +40,13 @@ class MyCanvas < Wx::ScrolledWindow
     end
     
     def on_paint(event)
-            dc = Wx::PaintDC.new(self)
-            prepare_dc(dc)
-            # since we're not buffering in this case, we have to
-            # paint the whole window, potentially very time consuming.
-            do_drawing(dc)
+      paint { | dc | do_drawing(dc) }
     end
     
     def do_drawing(dc, printing=false)
-        dc.set_pen(Wx::Pen.new("RED", 1, Wx::SOLID)) # Pen constructor requires (color, width, style)
+        # Reset the origin co-ordinates of the DC to reflect current scrolling
+        do_prepare_dc(dc)
+        dc.set_pen(Wx::Pen.new("RED", 1, Wx::SOLID))
         dc.draw_rectangle(5,5,50,50)
         
         dc.set_brush(Wx::LIGHT_GREY_BRUSH)
@@ -161,11 +160,9 @@ class MyCanvas < Wx::ScrolledWindow
                 # If doing buffered drawing, create the buffered DC, giving it
                 # it a real DC to blit to when done.
                 cdc = Wx::ClientDC.new(self)
-                prepare_dc(cdc)
                 dc = Wx::BufferedDC.new(cdc, @buffer)
             else
                 dc = Wx::ClientDC.new(self)
-                prepare_dc(dc)
             end
             dc.set_pen(Wx::Pen.new("MEDIUM FOREST GREEN", 4, Wx::SOLID))
             coords = [@x, @y] + convert_event_coords(event)
