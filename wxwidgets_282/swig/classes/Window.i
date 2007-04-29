@@ -186,21 +186,7 @@ static VALUE get_ruby_object(wxObject *wx_obj)
   VALUE get_handle()
   {
 	wxWindow *win = self;
-	long handle;
-
-	// borrowed from wxPython
-#ifdef __WXMSW__
-    handle = (long)win->GetHandle();
-#endif
-
-#if defined(__WXGTK__) || defined(__WXX11)
-    handle = (long)GetXWindow(win);
-#endif
-
-#ifdef __WXMAC__
-    handle = (long)win->GetHandle();
-#endif
-
+    long handle = (long)win->GetHandle();
 	return LONG2NUM(handle);
   }
 }
