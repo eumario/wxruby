@@ -28,9 +28,9 @@ class Wx::Window
   # handler. This ensures that any call to Window#paint within the
   # handler will supply a Wx::PaintDC (see swig/Window.i).
   def evt_paint(&block)
-    wrapped_block = proc do
+    wrapped_block = proc do | event |
       instance_variable_set("@__painting__", true)
-      block.call
+      block.call(event)
       remove_instance_variable("@__painting__")
     end
     __old_evt_paint(&wrapped_block)
