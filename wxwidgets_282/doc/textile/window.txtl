@@ -1537,10 +1537,24 @@ h3(#Window_paint). Window#paint
 
  paint { | window_dc | ... }
 
-This method runs the block, yielding a "PaintDC":paintdc.html into it
-to enable direct drawing onto a widget. This method should *only* be
-used within an @on_paint@ handler. To draw at other times, create a
-"ClientDC":clientdc.html object.
+Runs a block containing code for drawing lines, shapes and bitmaps onto
+the Window. The block should receive a "DC":dc.html (device context)
+object which can then be used to run drawing commands.
+
+The preferred usage of this method is within an @evt_paint@ handler,
+which is called whenever any part of the Window needs to be redrawn. In
+this case, the block will receive a "PaintDC":paintdc.html object. If
+@paint@ is called outside a paint event handler, it will receive a
+"ClientDC":clientdc.html object. These two classes support identical methods.
+
+This is the correct way in wxRuby to draw directly upon, for example,
+Panels. You should not attempt to instantiate a PaintDC or ClientDC
+directly. This will raise an exception, as doing so can cause serious
+errors on some platforms.
+
+Note also that it is not possible to draw directly upon some core
+controls, such as "Wx::Button":button.html. Whilst this may work on some
+platforms, it is not portable.
 
 h3(#Window_popeventhandler). Window#pop_event_handler
 
