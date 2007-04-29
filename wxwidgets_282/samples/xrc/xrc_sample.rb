@@ -54,6 +54,11 @@ end
 # Dialog subclass. The components within the dialog are loaded from XRC.
 class SimpleDialog < Wx::Dialog
 	def initialize(parent)
+        # To load a layout defined in XRC into a Ruby subclass of Dialog,
+        # first call the empty constructor. All the details of size,
+        # title, position and so on are loaded from the XRC by the call to 
+        # load_frame_subclass. Using a non-empty constructor will cause
+        # errors on GTK.
 		super()
 		
 		# Load the dialog from XRC. We define $xml in on_init.
