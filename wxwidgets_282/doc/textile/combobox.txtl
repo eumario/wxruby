@@ -60,14 +60,14 @@ h2. Methods
 * "ComboBox#get_insertion_point":#ComboBox_getinsertionpoint
 * "ComboBox#get_last_position":#ComboBox_getlastposition
 * "ComboBox#get_current_selection":#ComboBox_getcurrentselection
-* "ComboBox#get_selection_range":#ComboBox_getselectionrange
+* "ComboBox#get_text_selection_range":#ComboBox_gettextselectionrange
 * "ComboBox#paste":#ComboBox_paste
 * "ComboBox#redo":#ComboBox_redo
 * "ComboBox#replace":#ComboBox_replace
 * "ComboBox#remove":#ComboBox_remove
 * "ComboBox#set_insertion_point":#ComboBox_setinsertionpoint
 * "ComboBox#set_insertion_point_end":#ComboBox_setinsertionpointend
-* "ComboBox#set_selection_range":#ComboBox_setselectionrange
+* "ComboBox#set_text_selection_range":#ComboBox_settextselectionrange
 * "ComboBox#set_value":#ComboBox_setvalue
 * "ComboBox#undo":#ComboBox_undo
 
@@ -190,9 +190,9 @@ h3(#ComboBox_getlastposition). ComboBox#get_last_position
 
 Returns the last position in the combobox text field.
 
-h3(#ComboBox_getselectionrange). ComboBox#get_selection_range
+h3(#ComboBox_gettextselectionrange). ComboBox#get_text_selection_range
 
-  Integer from, Integer to = *get_selection_range*()
+  Integer from, Integer to = *get_text_selection_range*()
 
 This is the same as
 "TextCtrl#get_selection":textctrl.html#TextCtrl_getselection  
@@ -258,9 +258,9 @@ h3(#ComboBox_setinsertionpointend). ComboBox#set_insertion_point_end
 
 Sets the insertion point at the end of the combobox text field.
 
-h3(#ComboBox_setselectionrange). ComboBox#set_selection_range
+h3(#ComboBox_settextselectionrange). ComboBox#set_text_selection_range
 
-  *set_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+  *set_text_selection_range*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
 
 Selects the text between the two positions, in the combobox text field.
 
