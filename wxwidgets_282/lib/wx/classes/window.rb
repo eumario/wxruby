@@ -1,4 +1,4 @@
-# Copyright 2004-2006 by Kevin Smith
+# Copyright 2004-2007 by Kevin Smith
 # released under the MIT-style wxruby2 license
 
 class Wx::Window
@@ -20,5 +20,19 @@ class Wx::Window
   # has the label +a_label+.
   def find_window_by_label(a_label)
     Wx:Window.find_window_by_label(a_label, self)
+  end
+
+  alias :__old_evt_paint :evt_paint
+  # This modified version of evt_paint sets a variable indicating that a
+  # paint event is being handled just before running the event
+  # handler. This ensures that any call to Window#paint within the
+  # handler will supply a Wx::PaintDC (see swig/Window.i).
+  def evt_paint(&block)
+    wrapped_block = proc do
+      instance_variable_set("@__painting__", true)
+      block.call
+      remove_instance_variable("@__painting__")
+    end
+    __old_evt_paint(&wrapped_block)
   end
 end

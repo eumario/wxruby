@@ -112,6 +112,7 @@ static VALUE get_ruby_object(wxObject *wx_obj)
 %import "include/wxDC.h"
 %import "include/wxWindowDC.h"
 %import "include/wxPaintDC.h"
+%import "include/wxClientDC.h"
 
 
 %include "include/wxWindow.h"
@@ -147,13 +148,21 @@ static VALUE get_ruby_object(wxObject *wx_obj)
     return returnVal;    
   }  
 
-  // pass a PaintDC into a passed ruby block, and ensure that the DC 
-  // is correctly deleted when drawing is completed. This is important 
-  // to avoid entering an endless loop of paint events.
+  // passes a DC for drawing on Window into a passed ruby block, and
+  // ensure that the DC is correctly deleted when drawing is
+  // completed. This is important to avoid entering an endless loop of
+  // paint events. The DC will be a PaintDC if used within a evt_paint handler
+  // (recommended) or else a ClientDC.
   VALUE paint()
   {  
+	if ( ! rb_block_given_p() )
+	  rb_raise(rb_eArgError, "No block given for Window#paint");
+
 	wxWindow *ptr = self;
-	if ( rb_block_given_p() )
+	VALUE rb_win = SWIG_RubyInstanceFor(ptr);
+	// see if within an evt_paint block - see classes/window.rb
+	// if so, supply a PaintDC to the block
+	if ( rb_ivar_get(rb_win, rb_intern("@__painting__") ) == Qtrue ) 
 	  {
 		wxPaintDC dc(ptr);
 		VALUE dcVal = SWIG_NewPointerObj((void *) &dc,SWIGTYPE_p_wxPaintDC, 0);
@@ -161,6 +170,15 @@ static VALUE get_ruby_object(wxObject *wx_obj)
 		SWIG_RubyRemoveTracking((void *) &dc);
 		DATA_PTR(dcVal) = NULL;
 	  }
+	else // supply a ClientDC
+	  {
+		wxClientDC dc(ptr);
+		VALUE dcVal = SWIG_NewPointerObj((void *) &dc,SWIGTYPE_p_wxClientDC, 0);
+		rb_yield(dcVal);
+		SWIG_RubyRemoveTracking((void *) &dc);
+		DATA_PTR(dcVal) = NULL;
+	  }
+
 	return Qnil;
   }
 
