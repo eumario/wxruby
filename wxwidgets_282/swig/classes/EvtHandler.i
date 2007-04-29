@@ -43,6 +43,7 @@ extern swig_class cWxIdleEvent;
 extern swig_class cWxPaintEvent;
 extern swig_class cWxUpdateUIEvent;
 extern swig_class cWxSizeEvent;
+extern swig_class cWxTimerEvent;
 extern swig_class cWxKeyEvent; 
 extern swig_class cWxFindDialogEvent;
 extern swig_class cWxMouseEvent;
@@ -143,6 +144,12 @@ static const wxEventType *updateUIEvents[] =
 static const wxEventType *sizeEvents[] = 
 {
     &wxEVT_SIZE,
+    (const wxEventType *)0
+};
+
+static const wxEventType *timerEvents[] = 
+{
+    &wxEVT_TIMER,
     (const wxEventType *)0
 };
 
@@ -430,6 +437,8 @@ public:
             cEvent = cWxIdleEvent.klass;
         else if(event.IsKindOf(CLASSINFO(wxPaintEvent)))
             cEvent = cWxPaintEvent.klass;
+        else if(event.IsKindOf(CLASSINFO(wxTimerEvent)))
+            cEvent = cWxTimerEvent.klass;
 		else if (event.IsKindOf(CLASSINFO(wxTreeEvent)))
 			cEvent = cWxTreeEvent.klass;
 		else if (event.IsKindOf(CLASSINFO(wxGridEvent)))
