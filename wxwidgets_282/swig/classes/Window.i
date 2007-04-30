@@ -26,6 +26,7 @@ enum wxWindowVariant
 // only support the variants that return an object
 %ignore wxWindow::GetSize(int*  width , int*  height ) const;
 %ignore wxWindow::GetPosition(int*  x , int*  y ) const;
+%ignore wxWindow::GetScreenPosition(int* x, int* y) const;
 
 %rename(SetDimensions) wxWindow::SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
 
