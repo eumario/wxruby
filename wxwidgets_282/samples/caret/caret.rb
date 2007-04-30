@@ -107,16 +107,17 @@ class MyCanvas < ScrolledWindow
   end
 
   def create_caret
-    dc = ClientDC.new(self)
-    dc.set_font(@font)
-    @height_char = dc.get_char_height
-    @width_char = dc.get_char_width
+    paint do | dc |
+      dc.set_font(@font)
+      @height_char = dc.get_char_height
+      @width_char = dc.get_char_width
 
-    caret = Caret.new(self, Size.new(@width_char, @height_char))
-    set_caret(caret)
+      caret = Caret.new(self, Size.new(@width_char, @height_char))
+      set_caret(caret)
 
-    caret.move(Point.new(@x_margin, @y_margin))
-    caret.show
+      caret.move(Point.new(@x_margin, @y_margin))
+      caret.show
+    end
   end
 
   def move_caret(x,y)
