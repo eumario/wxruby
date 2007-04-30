@@ -1,6 +1,6 @@
 h1(#wxtoplevelwindow). Wx::TopLevelWindow
 
-TopLevelWindow is a common base class for "Dialog":dialog.html and 
+TopLevelWindow is a common base class for "Dialog":dialog.html and
 "Frame":frame.html. It is an abstract base class meaning that you never
 work with objects of this class directly, but all of its methods are also
 applicable for the two classes above.
@@ -17,26 +17,70 @@ h2. Derived from
 
 h2. Methods
 
+* "TopLevelWindow#can_set_transparent":#TopLevelWindow_cansettransparent
+* "TopLevelWindow#enable_close_button":#TopLevelWindow_enableclosebutton
+* "TopLevelWindow#get_default_item":#TopLevelWindow_getdefaultitem
 * "TopLevelWindow#get_icon":#TopLevelWindow_geticon
 * "TopLevelWindow#get_icons":#TopLevelWindow_geticons
 * "TopLevelWindow#get_title":#TopLevelWindow_gettitle
+* "TopLevelWindow#handle_setting_change":#TopLevelWindow_handlesettingchange
 * "TopLevelWindow#is_active":#TopLevelWindow_isactive
+* "TopLevelWindow#is_always_maximized":#TopLevelWindow_isalwaysmaximized
 * "TopLevelWindow#iconize":#TopLevelWindow_iconize
 * "TopLevelWindow#is_full_screen":#TopLevelWindow_isfullscreen
 * "TopLevelWindow#is_iconized":#TopLevelWindow_isiconized
 * "TopLevelWindow#is_maximized":#TopLevelWindow_ismaximized
+* "TopLevelWindow#is_using_native_decorations":#TopLevelWindow_isusingnativedecorations
 * "TopLevelWindow#maximize":#TopLevelWindow_maximize
 * "TopLevelWindow#request_user_attention":#TopLevelWindow_requestuserattention
+* "TopLevelWindow#set_default_item":#TopLevelWindow_setdefaultitem
 * "TopLevelWindow#set_icon":#TopLevelWindow_seticon
 * "TopLevelWindow#set_icons":#TopLevelWindow_seticons
 * "TopLevelWindow#set_left_menu":#TopLevelWindow_setleftmenu
+* "TopLevelWindow#set_max_size":#TopLevelWindow_setmaxsize
+* "TopLevelWindow#set_min_size":#TopLevelWindow_setminsize
+* "TopLevelWindow#set_size_hints":#TopLevelWindow_setsizehints
 * "TopLevelWindow#set_right_menu":#TopLevelWindow_setrightmenu
 * "TopLevelWindow#set_shape":#TopLevelWindow_setshape
 * "TopLevelWindow#set_title":#TopLevelWindow_settitle
+* "TopLevelWindow#set_transparent":#TopLevelWindow_settransparent
+* "TopLevelWindow#should_prevent_app_exit":#TopLevelWindow_shouldpreventappexit
 * "TopLevelWindow#show_full_screen":#TopLevelWindow_showfullscreen
+* "TopLevelWindow#use_native_decorations":#TopLevelWindow_usenativedecorations
+* "TopLevelWindow#use_native_decorations_by_default":#TopLevelWindow_usenativedecorationsbydefault
 
 </div>
 
+
+h3(#TopLevelWindow_cansettransparent). TopLevelWindow#can_set_transparent
+
+ Boolean *can_set_transparent*()
+
+Returns  if the platform supports making the window translucent.
+
+h4. See also
+
+"TopLevelWindow#set_transparent":toplevelwindow.html#TopLevelWindow_settransparent
+
+
+h3(#wxtoplevelenableclosebutton). TopLevelWindow#enable_close_button
+
+ Boolean *enable_close_button*(%(arg-type)Boolean% enable = true)
+
+Enables or disables the Close button (most often in the right
+upper corner of a dialog) and the Close entry of the system
+menu (most often in the left upper corner of the dialog).
+Currently only implemented for MSW and GTK. Returns
+true if operation was successful. This may be wrong on
+X11 (including GTK+) where the window manager may not support
+this operation and there is no way to find out.
+
+h3(#TopLevelWindow_getdefaultitem). TopLevelWindow#get_default_item
+
+ "Window":window.html *get_default_item*()
+
+Returns a pointer to the button which is the default for this window, or .
+The default button is the one activated by pressing the Enter key.
 
 
 h3(#TopLevelWindow_geticon). TopLevelWindow#get_icon
@@ -56,7 +100,7 @@ h3(#TopLevelWindow_geticons). TopLevelWindow#get_icons
  "IconBundle":iconbundle.html *get_icons*()
 
 Returns all icons associated with the window, there will be none of them if
-neither "set_icon":#TopLevelWindow_seticon nor 
+neither "set_icon":#TopLevelWindow_seticon nor
 "set_icons":#TopLevelWindow_seticons had been called before.
 
 Use "get_icon":#TopLevelWindow_geticon to get the main icon of the
@@ -73,7 +117,18 @@ h3(#TopLevelWindow_gettitle). TopLevelWindow#get_title
 
 Gets a string containing the window title.
 
-See "TopLevelWindow#set_title":toplevelwindow.html#TopLevelWindow_settitle.
+h4. See also
+
+"TopLevelWindow#set_title":toplevelwindow.html#TopLevelWindow_settitle
+
+
+h3(#TopLevelWindow_handlesettingchange). TopLevelWindow#handle_setting_change
+
+ Boolean *handle_setting_change*(%(arg-type)WPARAM% wParam,  %(arg-type)LPARAM% lParam)
+
+Unique to the WinCE port. Responds to showing/hiding SIP (soft input panel) area and resize
+window accordingly. Override this if you want to avoid resizing or do additional
+operations.
 
 
 h3(#TopLevelWindow_isactive). TopLevelWindow#is_active
@@ -82,6 +137,14 @@ h3(#TopLevelWindow_isactive). TopLevelWindow#is_active
 
 Returns  if this window is currently active, i.e. if the user is currently
 working with it.
+
+
+h3(#TopLevelWindow_isalwaysmaximized). TopLevelWindow#is_always_maximized
+
+ Boolean *is_always_maximized*()
+
+Returns  if this window is expected to be always maximized, either due to platform policy
+or due to local policy regarding particular class.
 
 
 h3(#TopLevelWindow_iconize). TopLevelWindow#iconize
@@ -124,6 +187,22 @@ h3(#TopLevelWindow_ismaximized). TopLevelWindow#is_maximized
 Returns  if the window is maximized.
 
 
+h3(#TopLevelWindow_isusingnativedecorations). TopLevelWindow#is_using_native_decorations
+
+ Boolean *is_using_native_decorations*()
+
+This method is specific to Universal port
+
+Returns  if this window is using native decorations,  if we draw
+them ourselves.
+
+h4. See also
+
+"use_native_decorations":#TopLevelWindow_usenativedecorations,
+
+"use_native_decorations_by_default":#TopLevelWindow_usenativedecorationsbydefault
+
+
 h3(#TopLevelWindow_maximize). TopLevelWindow#maximize
 
   *maximize*(%(arg-type)Boolean% maximize)
@@ -155,6 +234,17 @@ not already in foreground.
 
 This function is currently implemented for Win32 where it flashes the
 window icon in the taskbar, and for GTK with task bars supporting it.
+
+
+h3(#TopLevelWindow_setdefaultitem). TopLevelWindow#set_default_item
+
+  *set_default_item*(%(arg-type)Window% win)
+
+Changes the default item for the panel, usually win is a button.
+
+h4. See also
+
+"get_default_item":#TopLevelWindow_getdefaultitem
 
 
 h3(#TopLevelWindow_seticon). TopLevelWindow#set_icon
@@ -213,6 +303,43 @@ h4. See also
 "TopLevelWindow#set_right_menu":toplevelwindow.html#TopLevelWindow_setrightmenu.
 
 
+h3(#TopLevelWindow_setmaxsize). TopLevelWindow#set_max_size
+
+  *set_max_size*(%(arg-type)Size% size)
+
+A simpler interface for setting the size hints than
+"set_size_hints":#TopLevelWindow_setsizehints.
+
+h3(#TopLevelWindow_setminsize). TopLevelWindow#set_min_size
+
+  *set_min_size*(%(arg-type)Size% size)
+
+A simpler interface for setting the size hints than
+"set_size_hints":#TopLevelWindow_setsizehints.
+
+h3(#TopLevelWindow_setsizehints). TopLevelWindow#set_size_hints
+
+  *set_size_hints*(%(arg-type)Integer% minW,  %(arg-type)Integer% minH,  %(arg-type)Integer% maxW=-1, 
+                 %(arg-type)Integer% maxH=-1, 
+                 %(arg-type)Integer% incW=-1, 
+                 %(arg-type)Integer% incH=-1)
+
+  *set_size_hints*(%(arg-type)Size% minSize, %(arg-type)Size% maxSize=DefaultSize, 
+                 %(arg-type)Size% incSize=DefaultSize)
+
+Allows specification of minimum and maximum window sizes, and window size increments.
+If a pair of values is not set (or set to -1), the default values will be used.
+
+* _incW_ Specifies the increment for sizing the width (Motif/Xt only).
+* _incH_ Specifies the increment for sizing the height (Motif/Xt only).
+* _incSize_ Increment size (Motif/Xt only).
+
+h4. Remarks
+
+If this function is called, the user will not be able to size the window outside
+the given bounds. The resizing increments are only significant under Motif or Xt.
+
+
 h3(#TopLevelWindow_setrightmenu). TopLevelWindow#set_right_menu
 
   *set_right_menu*(%(arg-type)Integer% id = ID_ANY,  %(arg-type)String% label = '', 
@@ -240,7 +367,7 @@ If the platform supports it, sets the shape of the window to that
 depicted by _region_.  The system will not display or
 respond to any mouse event for the pixels that lie outside of the
 region.  To reset the window to the normal rectangular shape simply
-call _SetShape_ again with an empty region.  Returns TRUE if the
+call _SetShape_ again with an empty region.  Returns true if the
 operation is successful.
 
 
@@ -257,6 +384,34 @@ h4. Parameters
 h4. See also
 
 "TopLevelWindow#get_title":toplevelwindow.html#TopLevelWindow_gettitle
+
+
+h3(#TopLevelWindow_settransparent). TopLevelWindow#set_transparent
+
+ Boolean *set_transparent*(%(arg-type)Integer% alpha)
+
+If the platform supports it will set the window to be translucent
+
+h4. Parameters
+
+* _alpha_ Determines how opaque or transparent the window will
+  be, if the platform supports the opreration.  A value of 0 sets the
+  window to be fully transparent, and a value of 255 sets the window
+  to be fully opaque.
+
+Returns  if the transparency was successfully changed.
+
+
+
+h3(#TopLevelWindow_shouldpreventappexit). TopLevelWindow#should_prevent_app_exit
+
+ Boolean *should_prevent_app_exit*()
+
+This virtual function is not meant to be called directly but can be overridden
+to return  (it returns  by default) to allow the application to
+close even if this, presumably not very important, window is still opened.
+By default, the application stays alive as long as there are any open top level
+windows.
 
 
 h3(#TopLevelWindow_showfullscreen). TopLevelWindow#show_full_screen
@@ -285,4 +440,48 @@ Note that showing a window full screen also actually
 h4. See also
 
 "TopLevelWindow#is_full_screen":toplevelwindow.html#TopLevelWindow_isfullscreen
+
+
+h3(#TopLevelWindow_usenativedecorations). TopLevelWindow#use_native_decorations
+
+  *use_native_decorations*(%(arg-type)Boolean% native = )
+
+This method is specific to Universal port
+
+Use native or custom-drawn decorations for this window only. Notice that to
+have any effect this method must be called before really creating the window,
+i.e. two step creation must be used:
+
+     MyFrame *frame = new MyFrame;           // use default ctor
+     frame->UseNativeDecorations(false);     // change from default "true"
+     frame->Create(parent, title, ...);      // really create the frame
+ 
+
+h4. See also
+
+"use_native_decorations_by_default":#TopLevelWindow_usenativedecorationsbydefault,
+
+"is_using_native_decorations":#TopLevelWindow_isusingnativedecorations
+
+
+h3(#TopLevelWindow_usenativedecorationsbydefault). TopLevelWindow#use_native_decorations_by_default
+
+  *use_native_decorations_by_default*(%(arg-type)Boolean% native = )
+
+This method is specific to Universal port
+
+Top level windows in Universal port can use either system-provided window
+decorations (i.e. title bar and various icons, buttons and menus in it) or draw
+the decorations themselves. By default the system decorations are used if they
+are available, but this method can be called with native set to  to
+change this for all windows created after this point.
+
+Also note that if @WXDECOR@ environment variable is set, then custom
+decorations are used by default and so it may make sense to call this method
+with default argument if the application can't use custom decorations at all
+for some reason.
+
+h4. See also
+
+"use_native_decorations":#TopLevelWindow_usenativedecorations
 
