@@ -13,6 +13,7 @@
 #include <wx/artprov.h>
 #include <wx/calctrl.h>
 #include <wx/treebase.h>
+#include <wx/image.h>
 #include <wx/imaglist.h>
 #include <wx/laywin.h>
 #include <wx/imagbmp.h>
@@ -2120,6 +2121,16 @@ enum {
     wxBMP_1BPP_BW      =  2  // 1bpp, black & white from red
 };
 
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/image.h
+//** ---------------------------------------------------------------------------- ** 
+
+// Constants for wxImage::Scale() for determining the level of quality
+enum
+{
+    wxIMAGE_QUALITY_NORMAL = 0,
+    wxIMAGE_QUALITY_HIGH = 1
+};
 
 //** ---------------------------------------------------------------------------- **
 //   Start constants from wx/imaglist.h
