@@ -149,7 +149,7 @@ class MyFrame < Wx::Frame
     # Pass two printout objects: for preview, and possible printing.
     print_dialog_data = Wx::PrintDialogData.new(Wx::get_app.print_data)
     preview = Wx::PrintPreview.new(MyPrintout.new, MyPrintout.new, print_dialog_data)
-    if (!preview.ok)
+    if not preview.is_ok
         #delete preview;
         Wx::message_box("There was a problem previewing.\nPerhaps your current printer is not set correctly?", "Previewing", Wx::OK)
         return
