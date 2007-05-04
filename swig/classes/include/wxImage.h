@@ -76,10 +76,10 @@ public:
   bool SaveFile(wxOutputStream&  stream , const wxString&  mimetype ) const;
   wxImage Mirror(bool horizontally = true) const;
   void Replace(unsigned char  r1 , unsigned char  g1 , unsigned char  b1 , unsigned char  r2 , unsigned char  g2 , unsigned char  b2 ) ;
-  wxImage & Rescale(int  width , int  height ) ;
+  wxImage & Rescale(int width, int height, int quality = wxIMAGE_QUALITY_NORMAL ) ;
   wxImage Rotate(double  angle , const wxPoint&  rotationCentre , bool interpolating = true, wxPoint* offsetAfterRotation = NULL) ;
   wxImage Rotate90(bool clockwise = true) const;
-  wxImage Scale(int  width , int  height ) const;
+  wxImage Scale(int width, int height, int quality = wxIMAGE_QUALITY_NORMAL ) const;
   void SetAlpha(unsigned char * alpha = NULL, bool static_data = false ) ;
   void SetAlpha(int  x , int  y , unsigned char  alpha ) ;
   void SetData(unsigned char* data ) ;
