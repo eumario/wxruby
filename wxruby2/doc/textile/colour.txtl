@@ -37,10 +37,12 @@ h2. See also
 h2. Methods
 
 * "Colour.new":#Colour_new
+* "Colour#alpha":#Colour_alpha
 * "Colour#blue":#Colour_blue
 * "Colour#get_pixel":#Colour_getpixel
+* "Colour#get_as_string":#Colour_getasstring
 * "Colour#green":#Colour_green
-* "Colour#ok":#Colour_ok
+* "Colour#is_ok":#Colour_isok
 * "Colour#red":#Colour_red
 * "Colour#set":#Colour_set
 
@@ -48,26 +50,27 @@ h2. Methods
 
 h3(#Colour_constr). Colour.new
 
-  *Colour.new*(%(arg-type)Integer% red, %(arg-type)Integer% green,  %(arg-type)Integer% blue)
+  *Colour.new*(%(arg-type)Integer% red, %(arg-type)Integer% green,  %(arg-type)Integer% blue, %(arg-type)Integer% alpha = 255)
 
-Constructs a colour from red, green and blue values. Each value should
-be between 0 and 255.
+Constructs a colour from red, green and blue values and an optional
+alpha value for transparency. Each value should
+be between 0 and 255; the default value for alpha is 255, which is
+completely opaque.
 
-  *Colour.new*(%(arg-type)String% colourNname)
+  *Colour.new*(%(arg-type)String% colour_name)
 
-Constructs a colour object using a colour name listed in the global
-colour database *Wx::TheColourDatabase*.
-
-h4. Parameters
-
-* _red_ The red value.
-* _green_ The green value.
-* _blue_ The blue value.
-* _colourName_ The colour name.
+Constructs a colour object using the colour named @colour_name@, listed
+in the global colour database *Wx::TheColourDatabase*.
 
 h4. See also
 
 "ColourDatabase":colourdatabase.html
+
+h3(#Colour_alpha). Colour#alpha
+
+ Integer *alpha*()
+
+Returns the alpha value, or opacity, for the colour.
 
 h3(#Colour_blue). Colour#blue
 
@@ -75,13 +78,22 @@ h3(#Colour_blue). Colour#blue
 
 Returns the blue intensity.
 
+h3(#Colour_getasstring). Colour#get_as_string
 
+ String *get_as_string*(%(arg-type)Integer% format)
+
+Returns a string representation of this colour, in the format
+@format@. Format should be one of the constants:
+
+* @Wx::C2S_HTML_SYNTAX@ to obtain the colour as "#" followed by 6 hexadecimal digits (e.g. wxColour(255,0,0) -> "#FF0000").
+* @Wx::C2S_CSS_SYNTAX@ to obtain the colour in the "rgb(r,g,b)" syntax (e.g. wxColour(255,0,0) -> "rgb(255,0,0)")
+* @Wx::C2S_NAME@ to obtain the colour name (e.g. wxColour(255,0,0) -> "red"), where possible
 h3(#Colour_getpixel). Colour#get_pixel
 
  Integer *get_pixel*()
 
-Returns a pixel value which is platform-dependent. On Windows, a COLORREF is returned.
-On X, an allocated pixel value is returned.
+Returns a pixel value which is platform-dependent. On Windows, a
+COLORREF is returned. On X, an allocated pixel value is returned.
 
 -1 is returned if the pixel is invalid (on X, unallocated).
 
@@ -93,11 +105,12 @@ h3(#Colour_green). Colour#green
 Returns the green intensity.
 
 
-h3(#Colour_ok). Colour#ok
+h3(#Colour_isok). Colour#is_ok
 
- Boolean *ok*()
+ Boolean *is_ok*()
 
-Returns  if the colour object is valid (the colour has been initialised with RGB values).
+Returns  if the colour object is valid (the colour has been initialised
+with valid RGB values).
 
 
 h3(#Colour_red). Colour#red

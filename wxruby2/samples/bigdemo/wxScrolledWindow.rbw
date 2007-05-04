@@ -26,7 +26,8 @@ class MyCanvas < Wx::ScrolledWindow
         set_background_colour(Wx::WHITE) 
         
         set_cursor(Wx::Cursor.new(Wx::CURSOR_PENCIL))
-        @bmp = Wx::Bitmap.new("./icons/test2.xpm")
+        bmp_file = File.join(File.dirname(__FILE__), 'icons', 'test2.xpm')
+        @bmp = Wx::Bitmap.new(bmp_file)
         
         
         set_scrollbars(20, 20, @maxWidth / 20, @maxHeight / 20, 0, 0, true)
@@ -34,21 +35,18 @@ class MyCanvas < Wx::ScrolledWindow
         evt_left_down {|event| on_left_button_event_down(event)}
         evt_left_up {|event| on_left_button_event_up(event)}
         evt_motion {|event| on_left_button_event_motion(event)}
-        evt_paint {|event| on_paint(event)}
+        evt_paint { on_paint }
         #evt_mousewheel {|event| on_wheel(event)}
     end
     
-    def on_paint(event)
-            dc = Wx::PaintDC.new(self)
-            prepare_dc(dc)
-            # since we're not buffering in this case, we have to
-            # paint the whole window, potentially very time consuming.
-            do_drawing(dc)
+    def on_paint
+      paint { | dc | do_drawing(dc) }
     end
     
     def do_drawing(dc, printing=false)
-        dc.begin_drawing()
-        dc.set_pen(Wx::Pen.new("RED", 1, Wx::SOLID)) # Pen constructor requires (color, width, style)
+        # Reset the origin co-ordinates of the DC to reflect current scrolling
+        do_prepare_dc(dc)
+        dc.set_pen(Wx::Pen.new("RED", 1, Wx::SOLID))
         dc.draw_rectangle(5,5,50,50)
         
         dc.set_brush(Wx::LIGHT_GREY_BRUSH)
@@ -115,8 +113,6 @@ class MyCanvas < Wx::ScrolledWindow
         dc.draw_rectangle(490, 90, 20, 20)
         
         draw_saved_lines(dc)
-        
-        dc.end_drawing()
     end
     
     def draw_saved_lines(dc)
@@ -160,24 +156,23 @@ class MyCanvas < Wx::ScrolledWindow
     
     def on_left_button_event_motion(event)
         if event.left_is_down() and @drawing
-            if $BUFFERED
-                # If doing buffered drawing, create the buffered DC, giving it
-                # it a real DC to blit to when done.
-                cdc = Wx::ClientDC.new(self)
-                prepare_dc(cdc)
-                dc = Wx::BufferedDC.new(cdc, @buffer)
-            else
-                dc = Wx::ClientDC.new(self)
-                prepare_dc(dc)
-            end
-            dc.begin_drawing()
+#             if $BUFFERED
+#                 # If doing buffered drawing, create the buffered DC, giving it
+#                 # it a real DC to blit to when done.
+#                 cdc = Wx::ClientDC.new(self)
+#                 dc = Wx::BufferedDC.new(cdc, @buffer)
+#             else
+#                 dc = Wx::ClientDC.new(self)
+#             end
+
+          paint do | dc |
             dc.set_pen(Wx::Pen.new("MEDIUM FOREST GREEN", 4, Wx::SOLID))
             coords = [@x, @y] + convert_event_coords(event)
             @curLine.push(coords)
             coords.flatten!()
             dc.draw_line(coords[0], coords[1], coords[2], coords[3])
             set_XY(event)
-            dc.end_drawing()
+          end
         end
     end
     

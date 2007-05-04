@@ -215,6 +215,9 @@ public:
     wxString GetRowLabelValue( int row );
     wxString GetColLabelValue( int col );
     wxColour GetGridLineColour();
+    virtual wxPen GetDefaultGridLinePen();
+    virtual wxPen GetRowGridLinePen(int row);
+    virtual wxPen GetColGridLinePen(int col);
     wxColour GetCellHighlightColour();
     int      GetCellHighlightPenWidth();
     int      GetCellHighlightROPenWidth();
@@ -240,9 +243,13 @@ public:
     void     EnableDragColSize( bool enable = true );
     void     DisableDragColSize();
     bool     CanDragColSize();
+    void     EnableDragColMove();
+    void     DisableDragColMove();
+    bool     CanDragColMove();
     void     EnableDragGridSize(bool enable = true);
     void     DisableDragGridSize();
     bool     CanDragGridSize();
+
 
     void     EnableDragCell( bool enable = true );
     void     DisableDragCell();
@@ -294,6 +301,9 @@ public:
     void     SetDefaultColSize( int width, bool resizeExistingCols = false );
 
     void     SetColSize( int col, int width );
+
+	int      GetColAt( int colPos );
+    int      GetColPos( int colID ) const;
 
     // automatically size the column or row to fit to its contents, if
     // setAsMin is true, this optimal width will also be set as minimal width

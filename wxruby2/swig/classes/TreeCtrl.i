@@ -98,18 +98,11 @@ protected:
 %}
 %markfunc wxTreeCtrl "mark_wxTreeCtrl";
 
-%import "include/wxObject.h"
-%import "include/wxEvtHandler.h"
-%import "include/wxWindow.h"
-
-#if defined(__WXMSW__)
 %import "include/wxControl.h"
-#else
-%import "include/wxScrolledWindow.h"
-#endif
-
+%import "include/wxWindow.h"
+%import "include/wxEvtHandler.h"
+%import "include/wxObject.h"
 %include "include/wxTreeCtrl.h"
-
 
 %extend wxTreeCtrl {
 	//Change signature so it returns an array of the TreeItemId and the Cookie.
@@ -136,6 +129,18 @@ protected:
 		rb_ary_push(array,LONG2NUM((long)cookie));
 			
 		return array;		
+	}
+	
+	//Changed this version of insert_item to insert_item_before so SWIG
+	//does not get confused between the 2 method signatures
+	//This behavior matches that used by wxPython.
+	wxTreeItemId insert_item_before(const wxTreeItemId& parent,
+                          size_t index,
+                          const wxString& text,
+                          int image = -1, int selectedImage = -1,
+                          wxTreeItemData *data = NULL)
+	{
+		return self->InsertItem(parent,index,text,image,selectedImage,data);
 	}
 }
 

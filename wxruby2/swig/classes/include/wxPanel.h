@@ -23,7 +23,7 @@ public:
 	 * \param const wxString&   
 	*/
 
-   wxPanel(wxWindow*  parent , wxWindowID  id = -1, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxTAB_TRAVERSAL, const wxString&  name = wxT("panel")) ;
+   wxPanel(wxWindow*  parent , wxWindowID  id = -1, const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxTAB_TRAVERSAL|wxNO_BORDER, const wxString&  name = wxT("panel")) ;
 	/**
 	 * \brief Destructor. Deletes any child windows before deleting the physical window. 
 	*/
@@ -42,12 +42,6 @@ for details.
 
   bool Create(wxWindow*  parent , wxWindowID  id , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = wxTAB_TRAVERSAL, const wxString&  name = wxT("panel")) ;
 	/**
-	 * \brief Returns a pointer to the button which is the default for this window, or NULL.
-The default button is the one activated by pressing the Enter key. 
-	*/
-
-  wxButton* GetDefaultItem() const;
-	/**
 	 * \brief Sends a  , which
 in turn transfers data to the dialog via validators. 
 	*/
@@ -59,12 +53,6 @@ in turn transfers data to the dialog via validators.
 	*/
 
   virtual void OnSysColourChanged(wxSysColourChangedEvent&  event ) ;
-	/**
-	 * \brief Changes the default button for the panel. 
-	 * \param wxButton   
-	*/
-
-  void SetDefaultItem(wxButton  *btn ) ;
 };
 
 

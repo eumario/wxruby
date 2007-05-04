@@ -55,7 +55,7 @@ class MyFrame < Wx::Frame
   end
 
   def on_quit
-    close(Wx::TRUE)
+    close(true)
   end
 
   def on_about
@@ -71,7 +71,7 @@ class RbApp < Wx::App
                         Wx::Point.new(50, 50), 
                         Wx::Size.new(450, 340))
 
-    frame.show(TRUE)
+    frame.show(true)
 
   end
 end

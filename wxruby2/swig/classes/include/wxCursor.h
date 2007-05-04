@@ -1,9 +1,9 @@
-// Copyright 2004-2005 by Kevin Smith
+// Copyright 2004-2007 by Kevin Smith
 // released under the MIT-style wxruby2 license
-
 
 #if !defined(_wxCursor_h_)
 #define _wxCursor_h_
+
 class wxCursor : public wxBitmap
 {
 public:
@@ -14,8 +14,7 @@ public:
    wxCursor(const wxImage&  image ) ;
    wxCursor(const wxCursor&  cursor ) ;
   virtual  ~wxCursor() ;
-  bool Ok() const;
+  bool IsOk() const;
 };
-
 
 #endif

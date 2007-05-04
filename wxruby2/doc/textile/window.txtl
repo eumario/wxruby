@@ -32,7 +32,7 @@ window class or on all platforms.
 |@NO_FULL_REPAINT_ON_RESIZE@|On Windows, this style used to disable repaintingthe window completely when its size is changed. Since this behaviour is now the default, the style is now obsoleteand no longer has an effect.|
 |@VSCROLL@|Use this style to enable a vertical scrollbar.|
 |@HSCROLL@|Use this style to enable a horizontal scrollbar.|
-|@ALWAYS_SHOW_SB@|If a window has scrollbars,disable them instead of hiding them when they are not needed (i.e. when thesize of the window is big enough to not require the scrollbars to navigate it).This style is currently only implemented for MSW and Universal and doesnothing on the other platforms.|
+|@ALWAYS_SHOW_SB@|If a window has scrollbars,disable them instead of hiding them when they are not needed (i.e. when thesize of the window is big enough to not require the scrollbars to navigate it).This style is currently implemented for MSW, GTK and Universal and doesnothing on the other platforms.|
 |@CLIP_CHILDREN@|Use this style to eliminate flicker caused by the background beingrepainted, then children being painted over them. Windows only.|
 |@FULL_REPAINT_ON_RESIZE@|Use this style to forcea complete redraw of the window whenever it is resized instead of redrawingjust the part of the window affected by resizing. Note that this was thebehaviour by default before 2.5.1 release and that if you experience redrawproblems with code which previously used to work you may want to try this.Currently this style applies on GTK+ 2 and Windows only, and full repainting is alwaysdone on other platforms.|
 
@@ -55,6 +55,8 @@ h2. See also
 
 "Event handling overview":eventhandlingoverview.html
 
+"Window sizing overview":windowsizingoverview.html
+
 <div id="methods">
 
 h2. Methods
@@ -65,10 +67,8 @@ h2. Methods
 * "Window#capture_mouse":#Window_capturemouse
 * "Window#center":#Window_center
 * "Window#center_on_parent":#Window_centeronparent
-* "Window#center_on_screen":#Window_centeronscreen
 * "Window#centre":#Window_centre
 * "Window#centre_on_parent":#Window_centreonparent
-* "Window#centre_on_screen":#Window_centreonscreen
 * "Window#clear_background":#Window_clearbackground
 * "Window#client_to_screen":#Window_clienttoscreen
 * "Window#close":#Window_close
@@ -84,20 +84,19 @@ h2. Methods
 * "Window#find_focus":#Window_findfocus
 * "Window#find_window":#Window_findwindow
 * "Window#find_window_by_id":#Window_findwindowbyid
-* "Window#find_window_by_name":#Window_findwindowbyname
 * "Window#find_window_by_label":#Window_findwindowbylabel
+* "Window#find_window_by_name":#Window_findwindowbyname
 * "Window#fit":#Window_fit
 * "Window#fit_inside":#Window_fitinside
 * "Window#freeze":#Window_freeze
 * "Window#get_accelerator_table":#Window_getacceleratortable
 * "Window#get_accessible":#Window_getaccessible
-* "Window#get_adjusted_best_size":#Window_getadjustedbestsize
 * "Window#get_background_colour":#Window_getbackgroundcolour
 * "Window#get_background_style":#Window_getbackgroundstyle
-* "Window#get_best_fitting_size":#Window_getbestfittingsize
+* "Window#get_effective_min_size":#Window_geteffectiveminsize
 * "Window#get_best_size":#Window_getbestsize
-* "Window#get_caret":#Window_getcaret
 * "Window#get_capture":#Window_getcapture
+* "Window#get_caret":#Window_getcaret
 * "Window#get_char_height":#Window_getcharheight
 * "Window#get_char_width":#Window_getcharwidth
 * "Window#get_children":#Window_getchildren
@@ -108,12 +107,14 @@ h2. Methods
 * "Window#get_cursor":#Window_getcursor
 * "Window#get_default_attributes":#Window_getdefaultattributes
 * "Window#get_drop_target":#Window_getdroptarget
+* "Window#get_effective_best_size":#Window_geteffectivebestsize
 * "Window#get_event_handler":#Window_geteventhandler
 * "Window#get_extra_style":#Window_getextrastyle
 * "Window#get_font":#Window_getfont
 * "Window#get_foreground_colour":#Window_getforegroundcolour
 * "Window#get_grand_parent":#Window_getgrandparent
 * "Window#get_handle":#Window_gethandle
+* "Window#get_help_text_at_point":#Window_gethelptextatpoint
 * "Window#get_help_text":#Window_gethelptext
 * "Window#get_id":#Window_getid
 * "Window#get_label":#Window_getlabel
@@ -123,30 +124,37 @@ h2. Methods
 * "Window#get_parent":#Window_getparent
 * "Window#get_position":#Window_getposition
 * "Window#get_rect":#Window_getrect
+* "Window#get_screen_position":#Window_getscreenposition
+* "Window#get_screen_rect":#Window_getscreenrect
 * "Window#get_scroll_pos":#Window_getscrollpos
 * "Window#get_scroll_range":#Window_getscrollrange
 * "Window#get_scroll_thumb":#Window_getscrollthumb
 * "Window#get_size":#Window_getsize
 * "Window#get_sizer":#Window_getsizer
 * "Window#get_text_extent":#Window_gettextextent
-* "Window#get_title":#Window_gettitle
 * "Window#get_tool_tip":#Window_gettooltip
 * "Window#get_update_region":#Window_getupdateregion
 * "Window#get_validator":#Window_getvalidator
 * "Window#get_virtual_size":#Window_getvirtualsize
+* "Window#get_window_border_size":#Window_getwindowbordersize
 * "Window#get_window_style_flag":#Window_getwindowstyleflag
 * "Window#get_window_variant":#Window_getwindowvariant
 * "Window#has_capture":#Window_hascapture
+* "Window#has_flag":#Window_hasflag
+* "Window#has_multiple_pages":#Window_hasmultiplepages
 * "Window#has_scrollbar":#Window_hasscrollbar
 * "Window#has_transparent_background":#Window_hastransparentbackground
 * "Window#hide":#Window_hide
 * "Window#inherit_attributes":#Window_inheritattributes
 * "Window#init_dialog":#Window_initdialog
 * "Window#invalidate_best_size":#Window_invalidatebestsize
+* "Window#is_double_buffered":#Window_isdoublebuffered
 * "Window#is_enabled":#Window_isenabled
 * "Window#is_exposed":#Window_isexposed
+* "Window#is_frozen":#Window_isfrozen
 * "Window#is_retained":#Window_isretained
 * "Window#is_shown":#Window_isshown
+* "Window#is_shown_on_screen":#Window_isshownonscreen
 * "Window#is_top_level":#Window_istoplevel
 * "Window#layout":#Window_layout
 * "Window#line_down":#Window_linedown
@@ -181,19 +189,14 @@ h2. Methods
 * "Window#set_auto_layout":#Window_setautolayout
 * "Window#set_background_colour":#Window_setbackgroundcolour
 * "Window#set_background_style":#Window_setbackgroundstyle
-* "Window#set_best_fitting_size":#Window_setbestfittingsize
+* "Window#set_initial_size":#Window_setinitialsize
 * "Window#set_caret":#Window_setcaret
 * "Window#set_client_size":#Window_setclientsize
+* "Window#set_constraints":#Window_setconstraints
 * "Window#set_containing_sizer":#Window_setcontainingsizer
 * "Window#set_cursor":#Window_setcursor
-* "Window#set_constraints":#Window_setconstraints
-* "Window#set_initial_best_size":#Window_setinitialbestsize
-* "Window#set_max_size":#Window_setmaxsize
-* "Window#set_min_size":#Window_setminsize
-* "Window#set_own_background_colour":#Window_setownbackgroundcolour
-* "Window#set_own_font":#Window_setownfont
-* "Window#set_own_foreground_colour":#Window_setownforegroundcolour
 * "Window#set_drop_target":#Window_setdroptarget
+* "Window#set_initial_best_size":#Window_setinitialbestsize
 * "Window#set_event_handler":#Window_seteventhandler
 * "Window#set_extra_style":#Window_setextrastyle
 * "Window#set_focus":#Window_setfocus
@@ -203,7 +206,12 @@ h2. Methods
 * "Window#set_help_text":#Window_sethelptext
 * "Window#set_id":#Window_setid
 * "Window#set_label":#Window_setlabel
+* "Window#set_max_size":#Window_setmaxsize
+* "Window#set_min_size":#Window_setminsize
 * "Window#set_name":#Window_setname
+* "Window#set_own_background_colour":#Window_setownbackgroundcolour
+* "Window#set_own_font":#Window_setownfont
+* "Window#set_own_foreground_colour":#Window_setownforegroundcolour
 * "Window#set_palette":#Window_setpalette
 * "Window#set_scrollbar":#Window_setscrollbar
 * "Window#set_scroll_page":#Window_setscrollpage
@@ -213,7 +221,6 @@ h2. Methods
 * "Window#set_size_hints":#Window_setsizehints
 * "Window#set_sizer":#Window_setsizer
 * "Window#set_sizer_and_fit":#Window_setsizerandfit
-* "Window#set_title":#Window_settitle
 * "Window#set_theme_enabled":#Window_setthemeenabled
 * "Window#set_tool_tip":#Window_settooltip
 * "Window#set_validator":#Window_setvalidator
@@ -225,6 +232,7 @@ h2. Methods
 * "Window#should_inherit_colours":#Window_shouldinheritcolours
 * "Window#show":#Window_show
 * "Window#thaw":#Window_thaw
+* "Window#toggle_window_style":#Window_togglewindowstyle
 * "Window#transfer_data_from_window":#Window_transferdatafromwindow
 * "Window#transfer_data_to_window":#Window_transferdatatowindow
 * "Window#unregister_hot_key":#Window_unregisterhotkey
@@ -249,11 +257,11 @@ Constructs a window, which can be a child of a frame, dialog or any other non-co
 h4. Parameters
 
 * _parent_ Pointer to a parent window.
-* _id_ Window identifier. If -1, will automatically create an identifier.
-* _pos_ Window position. DefaultPosition is (-1, -1) which indicates that Widgets
+* _id_ Window identifier. If ID_ANY, will automatically create an identifier.
+* _pos_ Window position. DefaultPosition indicates that Widgets
 should generate a default position for the window. If using the Window class directly, supply
 an actual position.
-* _size_ Window size. DefaultSize is (-1, -1) which indicates that Widgets
+* _size_ Window size. DefaultSize indicates that Widgets
 should generate a default size for the window. If no suitable size can  be found, the
 window will be sized to 20x20 pixels so that the window is visible but obviously not
 correctly sized. 
@@ -298,11 +306,18 @@ Note that Widgets maintains the stack of windows having captured the mouse
 and when the mouse is released the capture returns to the window which had had
 captured it previously and it is only really released if there were no previous
 window. In particular, this means that you must release the mouse as many times
-as you capture it.
+as you capture it, unless the window receives
+the "MouseCaptureLostEvent":mousecapturelostevent.html event.
+
+Any application which captures the mouse in the beginning of some operation
+must handle "MouseCaptureLostEvent":mousecapturelostevent.html
+and cancel this operation when it receives the event. The event handler must
+not recapture mouse.
 
 h4. See also
 
 "Window#release_mouse":window.html#Window_releasemouse
+"MouseCaptureLostEvent":mousecapturelostevent.html
 
 
 h3(#Window_center). Window#center
@@ -317,14 +332,6 @@ h3(#Window_centeronparent). Window#center_on_parent
   *center_on_parent*(%(arg-type)Integer% direction)
 
 A synonym for "centre_on_parent":#Window_centreonparent.
-
-
-h3(#Window_centeronscreen). Window#center_on_screen
-
-  *center_on_screen*(%(arg-type)Integer% direction)
-
-A synonym for "centre_on_screen":#Window_centreonscreen.
-
 
 h3(#Window_centre). Window#centre
 
@@ -350,7 +357,6 @@ h4. See also
 
 "Window#center":window.html#Window_center
 
-
 h3(#Window_centreonparent). Window#centre_on_parent
 
   *centre_on_parent*(%(arg-type)Integer% direction = BOTH)
@@ -373,23 +379,6 @@ h4. See also
 
 "Window#centre_on_screen":window.html#Window_centreonscreen
 
-
-h3(#Window_centreonscreen). Window#centre_on_screen
-
-  *centre_on_screen*(%(arg-type)Integer% direction = BOTH)
-
-Centres the window on screen. This only works for top level windows -
-otherwise, the window will still be centered on its parent.
-
-h4. Parameters
-
-* _direction_ Specifies the direction for the centering. May be @HORIZONTAL@, @VERTICAL@ or @BOTH@.
-
-h4. See also
-
-"Window#centre_on_parent":window.html#Window_centreonparent
-
-
 h3(#Window_clearbackground). Window#clear_background
 
   *clear_background*()
@@ -400,12 +389,12 @@ cause an erase background event to be generated.
 
 h3(#Window_clienttoscreen). Window#client_to_screen
 
- x, y = *client_to_screen*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ x, y = *client_to_screen*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
  "Point":point.html = *client_to_screen*(%(arg-type)Point% pt)
 
 Converts to screen coordinates from coordinates relative to this
-window. The method may be passed _either_ two integers, representing the
+window. The method may be passed _either_ two integers, representing the 
 _x_ and _y_ coordinates, _or_ a single "Point":point.html object. If a
 Point is passed in, one will be returned; if two integers are passed in,
 two co-ordinates will be returned.
@@ -521,7 +510,7 @@ h3(#Window_disable). Window#disable
 
  Boolean *disable*()
 
-Disables the window, same as "Enable(":windowenable.html.
+Disables the window, same as "enable()":window.html#Window_enable.
 
 h4. Return value
 
@@ -634,7 +623,7 @@ Find a child of this window, by name.
 
 h3(#Window_findwindowbyid). Window#find_window_by_id
 
- "Window":window.html *find_window_by_id*(%(arg-type)Integer% id,  %(arg-type)Window% parent = nil)
+ "Window":window.html *find_window_by_id*(%(arg-type)Integer% id, %(arg-type)Window% parent = nil)
 
 Find the first window with the given _id_.
 
@@ -649,8 +638,7 @@ h4. See also
 
 h3(#Window_findwindowbyname). Window#find_window_by_name
 
- "Window":window.html *find_window_by_name*(%(arg-type)String% name, 
-                              %(arg-type)Window% parent = nil)
+ "Window":window.html *find_window_by_name*(%(arg-type)String% name, %(arg-type)Window% parent = nil)
 
 Find a window by its name (as given in a window constructor or *Create* function call).
 If _parent_ is NULL, the search will start from all top-level
@@ -667,8 +655,7 @@ h4. See also
 
 h3(#Window_findwindowbylabel). Window#find_window_by_label
 
- "Window":window.html *find_window_by_label*(%(arg-type)String% label, 
-                               %(arg-type)Window% parent = nil)
+ "Window":window.html *find_window_by_label*(%(arg-type)String% label, %(arg-type)Window% parent = nil)
 
 Find a window by its label. Depending on the type of window, the label may be a window title
 or panel item label. If _parent_ is NULL, the search will start from all top-level
@@ -691,7 +678,7 @@ subwindow it is better (faster and the result is more precise as Fit adds some
 margin to account for fuzziness of its calculations) to call
 
 
-     window->SetClientSize(child->GetSize());
+     window.set_client_size(child.get_size)
  
 
 instead of calling Fit.
@@ -701,7 +688,7 @@ h3(#Window_fitinside). Window#fit_inside
 
   *fit_inside*()
 
-Similar to "Fit":windowfit.html, but sizes the interior (virtual) size
+Similar to "fit":window.html#Window_fit, but sizes the interior (virtual) size
 of a window.  Mainly useful with scrolled windows to reset scrollbars after
 sizing changes that do not trigger a size event, and/or scrolled windows without
 an interior sizer.  This function similarly won't do anything if there are no
@@ -713,8 +700,8 @@ h3(#Window_freeze). Window#freeze
   *freeze*()
 
 Freezes the window or, in other words, prevents any updates from taking place
-on screen, the window is not redrawn at all. "Thaw":windowthaw.html must
-be called to reenable window redrawing. Calls to these two functions may be
+on screen, the window is not redrawn at all. "thaw":window.html#Window_thaw must
+be called to re-enable window redrawing. Calls to these two functions may be
 nested.
 
 This method is useful for visual appearance optimization (for example, it
@@ -722,6 +709,10 @@ is a good idea to use it before doing many large text insertions in a row into
 a TextCtrl under GTK) but is not implemented on all platforms nor for all
 controls so it is mostly just a hint to Widgets and not a mandatory
 directive.
+
+h4. See also
+
+"WindowUpdateLocker":windowupdatelocker.html
 
 
 h3(#Window_getacceleratortable). Window#get_accelerator_table
@@ -738,17 +729,6 @@ h3(#Window_getaccessible). Window#get_accessible
 Returns the accessible object for this window, if any.
 
 See also "Accessible":accessible.html.
-
-
-h3(#Window_getadjustedbestsize). Window#get_adjusted_best_size
-
- "Size":size.html *get_adjusted_best_size*()
-
-This method is similar to "get_best_size":#Window_getbestsize, except
-in one thing.  GetBestSize should return the minimum untruncated size of the
-window, while this method will return the largest of BestSize and any user
-specified minimum size.  ie. it is the minimum size the window should currently
-be drawn at, not the minimal size it can possibly tolerate.
 
 
 h3(#Window_getbackgroundcolour). Window#get_background_colour
@@ -777,15 +757,17 @@ h4. See also
 
 "Window#set_background_colour":window.html#Window_setbackgroundcolour, "Window#get_foreground_colour":window.html#Window_getforegroundcolour, "Window#set_background_style":window.html#Window_setbackgroundstyle
 
-h3(#Window_getbestfittingsize). Window#get_best_fitting_size
+h3(#Window_geteffectiveminsize). Window#get_effective_min_size
 
- "Size":size.html *get_best_fitting_size*()
+ "Size":size.html *get_effective_min_size*()
 
-Merges the window's best size into the min size and returns the result.
+Merges the window's best size into the min size and returns the
+result.  This is the value used by sizers to determine the appropriate
+ammount of sapce to allocate for the widget.
 
 h4. See also
 
-"Window#get_best_size":window.html#Window_getbestsize, "Window#set_best_fitting_size":window.html#Window_setbestfittingsize, "Window#set_size_hints":window.html#Window_setsizehints
+"Window#get_best_size":window.html#Window_getbestsize, "Window#set_initial_size":window.html#Window_setinitialsize
 
 
 h3(#Window_getbestsize). Window#get_best_size
@@ -800,13 +782,6 @@ same as the size the window would have had after calling
 "Fit":windowfit.html.
 
 
-h3(#Window_getcaret). Window#get_caret
-
- "Caret":caret.html *get_caret*()
-
-Returns the "caret":caret.html associated with the window.
-
-
 h3(#Window_getcapture). Window#get_capture
 
  "Window":window.html *get_capture*()
@@ -818,7 +793,15 @@ h4. See also
 "Window#has_capture":window.html#Window_hascapture,
 "Window#capture_mouse":window.html#Window_capturemouse,
 "Window#release_mouse":window.html#Window_releasemouse,
+"MouseCaptureLostEvent":mousecapturelostevent.html
 "MouseCaptureChangedEvent":mousecapturechangedevent.html
+
+
+h3(#Window_getcaret). Window#get_caret
+
+ "Caret":caret.html *get_caret*()
+
+Returns the "caret":caret.html associated with the window.
 
 
 h3(#Window_getcharheight). Window#get_char_height
@@ -857,10 +840,10 @@ ignore under other platforms. Under Mac, it will change the size of the
 returned font. See "Window#set_window_variant":window.html#Window_setwindowvariant
 for more about this.
 
-This static method is ``overridden'' in many derived classes and so calling,
-for example, "Button":button.html::GetClassDefaultAttributes() will typically
+This static method is ''overridden'' in many derived classes and so calling,
+for example, "Button#get_class_default_attributes":button.html will typically
 return the values appropriate for a button which will be normally different
-from those returned by, say, "ListCtrl":listctrl.html::GetClassDefaultAttributes().
+from those returned by, say, "ListCtrl#get_class_default_attributes":listctrl.html.
 
 The @VisualAttributes@ structure has at least the fields
 @font@, @colFg@ and @colBg@. All of them may be invalid
@@ -881,7 +864,7 @@ h3(#Window_getclientsize). Window#get_client_size
 
  "Size":size.html *get_client_size*()
 
-This gets the size of the window `client area' in pixels.
+This gets the size of the window 'client area' in pixels.
 The client area is the area which may be drawn on by the programmer,
 excluding title bar, border, scrollbars, etc.
 
@@ -902,7 +885,7 @@ h3(#Window_getconstraints). Window#get_constraints
 
  "LayoutConstraints":layoutconstraints.html *get_constraints*()
 
-Returns a pointer to the window's layout constraints, or NULL if there are none.
+Returns a pointer to the window's layout constraints, or @nil@ if there are none.
 
 
 h3(#Window_getcontainingsizer). Window#get_containing_sizer
@@ -910,7 +893,7 @@ h3(#Window_getcontainingsizer). Window#get_containing_sizer
  "Sizer":sizer.html *get_containing_sizer*()
 
 Return the sizer that this window is a member of, if any, otherwise
-@NULL@.
+@nil@.
 
 
 h3(#Window_getcursor). Window#get_cursor
@@ -929,14 +912,14 @@ h3(#Window_getdefaultattributes). Window#get_default_attributes
  "VisualAttributes":visualattributes.html *get_default_attributes*()
 
 Currently this is the same as calling
-"get_class_default_attributes":#Window_getclassdefaultattributes("get_window_variant":#Window_getwindowvariant()).
+"get_class_default_attributes":#Window_getclassdefaultattributes ("get_window_variant":#Window_getwindowvariant).
 
 One advantage of using this function compared to the static version is that
 the call is automatically dispatched to the correct class (as usual with
 virtual functions) and you don't have to specify the class name explicitly.
 
 The other one is that in the future this function could return different
-results, for example it might return a different font for an ``Ok'' button
+results, for example it might return a different font for an ''Ok'' button
 than for a generic button if the users GUI is configured to show such buttons
 in bold font. Of course, the down side is that it is impossible to call this
 function without actually having an object to apply it to whereas the static
@@ -947,13 +930,25 @@ h3(#Window_getdroptarget). Window#get_drop_target
 
  "DropTarget":droptarget.html *get_drop_target*()
 
-Returns the associated drop target, which may be NULL.
+Returns the associated drop target, which may be @nil@.
 
 h4. See also
 
 "Window#set_drop_target":window.html#Window_setdroptarget,
 "Drag and drop overview":dndoverview.html
 
+
+h3(#Window_geteffectivebestsize). Window#get_effective_best_size
+
+ "Size":size.html *get_effective_best_size*()
+
+Merges the window's best size into the min size and returns the
+result.  This is the value used by sizers to determine the appropriate
+ammount of sapce to allocate for the widget.
+
+h4. See also
+
+"Window#get_best_size":window.html#Window_getbestsize, "Window#set_initial_size":window.html#Window_setinitialsize
 
 h3(#Window_geteventhandler). Window#get_event_handler
 
@@ -1005,7 +1000,7 @@ h3(#Window_getgrandparent). Window#get_grand_parent
 
  "Window":window.html *get_grand_parent*()
 
-Returns the grandparent of a window, or NULL if there isn't one.
+Returns the grandparent of a window, or @nil@ if there isn't one.
 
 
 h3(#Window_gethandle). Window#get_handle
@@ -1020,6 +1015,22 @@ handle, such as *HWND* for Windows, *Widget* for Motif, *GtkWidget* for GTK or *
 
 
 
+h3(#Window_gethelptextatpoint). Window#get_help_text_at_point
+
+ String *get_help_text_at_point*(%(arg-type)Point% point,  %(arg-type)HelpEvent::Origin% origin)
+
+Gets the help text to be used as context-sensitive help for this window. This
+method should be overridden if the help message depends on the position inside
+the window, otherwise "get_help_text":#Window_gethelptext can be used.
+
+h4. Parameters
+
+* _point_ Coordinates of the mouse at the moment of help event emission.
+* _origin_ Help event origin, see also "HelpEvent#get_origin":helpevent.html#HelpEvent_getorigin.
+
+2.7.0
+
+
 h3(#Window_gethelptext). Window#get_help_text
 
  String *get_help_text*()
@@ -1031,7 +1042,7 @@ and not in the window object itself.
 
 h4. See also
 
-"set_help_text":#Window_sethelptext, "HelpProvider":helpprovider.html
+"set_help_text":#Window_sethelptext, "get_help_text_at_point":#Window_gethelptextatpoint, "HelpProvider":helpprovider.html
 
 
 h3(#Window_getid). Window#get_id
@@ -1043,7 +1054,7 @@ Returns the identifier of the window.
 h4. Remarks
 
 Each window has an integer identifier. If the application has not provided one
-(or the default Id -1) an unique identifier with a negative value will be generated.
+(or the default ID_ANY) an unique identifier with a negative value will be generated.
 
 h4. See also
 
@@ -1070,14 +1081,16 @@ h3(#Window_getmaxsize). Window#get_max_size
  "Size":size.html *get_max_size*()
 
 Returns the maximum size of the window, an indication to the sizer layout mechanism
-that this is the maximum possible size.
+that this is the maximum possible size. 
 
 h3(#Window_getminsize). Window#get_min_size
 
  "Size":size.html *get_min_size*()
 
 Returns the minimum size of the window, an indication to the sizer layout mechanism
-that this is the minimum required size.
+that this is the minimum required size. It normally just returns the value set
+by "set_min_size":#Window_setminsize, but it can be overridden to do the
+calculation on demand.
 
 h3(#Window_getname). Window#get_name
 
@@ -1099,12 +1112,12 @@ h3(#Window_getparent). Window#get_parent
 
  "Window":window.html *get_parent*()
 
-Returns the parent of the window, or NULL if there is no parent.
+Returns the parent of the window, or @nil@ if there is no parent.
 
 
 h3(#Window_getposition). Window#get_position
 
-  *get_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+  *get_position*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
  "Point":point.html *get_position*()
 
@@ -1114,12 +1127,17 @@ windows.
 
 h4. Parameters
 
-* _x_ Receives the x position of the window.
-* _y_ Receives the y position of the window.
+* _x_ Receives the x position of the window if non-.
+* _y_ Receives the y position of the window if non-.
 
 
 
 
+
+
+h4. See also
+
+"get_screen_position":#Window_getscreenposition
 
 
 h3(#Window_getrect). Window#get_rect
@@ -1127,6 +1145,41 @@ h3(#Window_getrect). Window#get_rect
  "Rect":rect.html *get_rect*()
 
 Returns the size and position of the window as a "Rect":rect.html object.
+
+h4. See also
+
+"get_screen_rect":#Window_getscreenrect
+
+
+h3(#Window_getscreenposition). Window#get_screen_position
+
+  *get_screen_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+ "Point":point.html *get_screen_position*()
+
+Returns the window position in screen coordinates, whether the window is a
+child window or a top level one.
+
+h4. Parameters
+
+* _x_ Receives the x position of the window on the screen if non-.
+* _y_ Receives the y position of the window on the screen if non-.
+
+h4. See also
+
+"get_position":#Window_getposition
+
+
+h3(#Window_getscreenrect). Window#get_screen_rect
+
+ "Rect":rect.html *get_screen_rect*()
+
+Returns the size and position of the window on the screen as a 
+"Rect":rect.html object.
+
+h4. See also
+
+"get_rect":#Window_getrect
 
 
 h3(#Window_getscrollpos). Window#get_scroll_pos
@@ -1186,7 +1239,7 @@ h3(#Window_getsizer). Window#get_sizer
  "Sizer":sizer.html *get_sizer*()
 
 Return the sizer associated with the window by a previous call to
-"set_sizer()":#Window_setsizer() or @NULL@.
+"set_sizer":#Window_setsizer or @nil@.
 
 
 h3(#Window_gettextextent). Window#get_text_extent
@@ -1212,22 +1265,11 @@ h4. Parameters
 * _font_ Font to use instead of the current window font (optional).
 * _use16_ If @true@, _string_ contains 16-bit characters. The default is @false@.
 
-h3(#Window_gettitle). Window#get_title
-
- String *get_title*()
-
-Gets the window's title. Applicable only to frames and dialogs.
-
-h4. See also
-
-"Window#set_title":window.html#Window_settitle
-
-
 h3(#Window_gettooltip). Window#get_tool_tip
 
  "ToolTip":tooltip.html *get_tool_tip*()
 
-Get the associated tooltip or NULL if none.
+Get the associated tooltip or @nil@ if none.
 
 
 h3(#Window_getupdateregion). Window#get_update_region
@@ -1246,12 +1288,12 @@ h3(#Window_getvalidator). Window#get_validator
 
  "Validator":validator.html *get_validator*()
 
-Returns a pointer to the current validator for the window, or NULL if there is none.
+Returns a pointer to the current validator for the window, or @nil@ if there is none.
 
 
 h3(#Window_getvirtualsize). Window#get_virtual_size
 
-  *get_virtual_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+  *get_virtual_size*(%(arg-type)Integer% width, %(arg-type)Integer% height)
 
  "Size":size.html *get_virtual_size*()
 
@@ -1266,6 +1308,14 @@ h4. Parameters
 * _height_ Receives the window virtual height.
 
 "get_size":#Window_getsize, "get_client_size":#Window_getclientsize
+
+
+h3(#Window_getwindowbordersize). Window#get_window_border_size
+
+ "Size":size.html *get_window_border_size*()
+
+Returns the size of the left/right and top/bottom borders of this window in x
+and y components of the result respectively.
 
 
 h3(#Window_getwindowstyleflag). Window#get_window_style_flag
@@ -1294,7 +1344,27 @@ h4. See also
 
 "Window#capture_mouse":window.html#Window_capturemouse,
 "Window#release_mouse":window.html#Window_releasemouse,
+"MouseCaptureLostEvent":mousecapturelostevent.html
 "MouseCaptureChangedEvent":mousecapturechangedevent.html
+
+
+h3(#Window_hasflag). Window#has_flag
+
+ Boolean *has_flag*(%(arg-type)Integer% flag)
+
+Returns @true@ if the window has the given flag bit set.
+
+
+h3(#Window_hasmultiplepages). Window#has_multiple_pages
+
+ Boolean *has_multiple_pages*()
+
+This method should be overridden to return @true@ if this window has
+multiple pages. All standard class with multiple pages such as 
+"Notebook":notebook.html, "Listbook":listbook.html and 
+"Treebook":treebook.html already override it to return @true@
+and user-defined classes with similar behaviour should do it as well to allow
+the library to handle such windows appropriately.
 
 
 h3(#Window_hasscrollbar). Window#has_scrollbar
@@ -1324,7 +1394,7 @@ h3(#Window_hide). Window#hide
 
  Boolean *hide*()
 
-Equivalent to calling "Show":windowshow.html(@false@).
+Equivalent to calling "show":window.html#Window_show (@false@).
 
 
 h3(#Window_inheritattributes). Window#inherit_attributes
@@ -1335,8 +1405,8 @@ This function is (or should be, in case of custom controls) called during
 window creation to intelligently set up the window visual attributes, that is
 the font and the foreground and background colours.
 
-By ``intelligently'' the following is meant: by default, all windows use their
-own "default":windowgetclassdefaultattributes.html attributes. However
+By ''intelligently'' the following is meant: by default, all windows use their
+own "default":window.html#Window_getclassdefaultattributes attributes. However
 if some of the parents attributes are explicitly (that is, using
 "set_font":#Window_setfont and not
 "set_own_font":#Window_setownfont) changed and if the
@@ -1371,6 +1441,19 @@ h3(#Window_invalidatebestsize). Window#invalidate_best_size
 Resets the cached best size value so it will be recalculated the next time it is needed.
 
 
+h3(#Window_isdoublebuffered). Window#is_double_buffered
+
+ Boolean *is_double_buffered*()
+
+Returns  if the window contents is double-buffered by the system, i.e. if
+any drawing done on the window is really done on a temporary backing surface
+and transferred to the screen all at once later.
+
+h4. See also
+
+"BufferedDC":buffereddc.html
+
+
 h3(#Window_isenabled). Window#is_enabled
 
  Boolean *is_enabled*()
@@ -1384,12 +1467,11 @@ h4. See also
 
 h3(#Window_isexposed). Window#is_exposed
 
- Boolean *is_exposed*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ Boolean *is_exposed*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
  Boolean *is_exposed*(%(arg-type)Point% &pt)
 
- Boolean *is_exposed*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% w, 
-                    %(arg-type)Integer% h)
+ Boolean *is_exposed*(%(arg-type)Integer% x, %(arg-type)Integer% y, %(arg-type)Integer% w, %(arg-type)Integer% h)
 
  Boolean *is_exposed*(%(arg-type)Rect% &rect)
 
@@ -1398,6 +1480,18 @@ last repaint. Call this in an paint event handler to optimize redrawing by
 only redrawing those areas, which have been exposed.
 
 
+
+
+h3(#Window_isfrozen). Window#is_frozen
+
+ Boolean *is_frozen*()
+
+Returns  if the window is currently frozen by a call to 
+"Freeze()":windowfreeze.html.
+
+h4. See also
+
+"Thaw()":windowthaw.html
 
 
 h3(#Window_isretained). Window#is_retained
@@ -1416,6 +1510,22 @@ h3(#Window_isshown). Window#is_shown
  Boolean *is_shown*()
 
 Returns @true@ if the window is shown, @false@ if it has been hidden.
+
+h4. See also
+
+"Window#is_shown_on_screen":window.html#Window_isshownonscreen
+
+
+h3(#Window_isshownonscreen). Window#is_shown_on_screen
+
+ Boolean *is_shown_on_screen*()
+
+Returns @true@ if the window is physically visible on the screen, i.e. it
+is shown and all its parents up to the toplevel window are shown as well.
+
+h4. See also
+
+"Window#is_shown":window.html#Window_isshown
 
 
 h3(#Window_istoplevel). Window#is_top_level
@@ -1440,23 +1550,23 @@ layout is on, this function gets called automatically when the window is resized
 
 h3(#Window_linedown). Window#line_down
 
-This is just a wrapper for "scroll_lines":#Window_scrolllines$(1)$.
+This is just a wrapper for "scroll_lines":#Window_scrolllines (1).
 
 
 h3(#Window_lineup). Window#line_up
 
-This is just a wrapper for "scroll_lines":#Window_scrolllines$(-1)$.
+This is just a wrapper for "scroll_lines":#Window_scrolllines (-1).
 
 
 h3(#Window_lower). Window#lower
 
   *lower*()
 
-Lowers the window to the bottom of the window hierarchy.
+Lowers the window to the bottom of the window hierarchy (z-order).
 
 h4. See also
 
-"Raise":windowraise.html
+"raise":window.html#Window_raise
 
 
 h3(#Window_makemodal). Window#make_modal
@@ -1474,7 +1584,7 @@ the user can only interact with this window. If @false@, the effect is reversed.
 
 h3(#Window_move). Window#move
 
-  *move*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+  *move*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
   *move*(%(arg-type)Point% pt)
 
@@ -1488,12 +1598,12 @@ h4. Parameters
 
 h4. Remarks
 
-Implementations of SetSize can also implicitly implement the
-Window::Move function, which is defined in the base Window class
+Implementations of "set_size":window.html#Window_setsize can also implicitly implement the
+Window::move function, which is defined in the base Window class
 as the call:
 
 
-   SetSize(x, y, -1, -1, SIZE_USE_EXISTING);
+   set_size(x, y, -1, -1, SIZE_USE_EXISTING)
  
 
 h4. See also
@@ -1512,13 +1622,13 @@ This means that when the user presses @TAB@ key on that other window,
 the focus switches to this window.
 
 Default tab order is the same as creation order, this function and
-"move_before_in_tab_order()":#Window_movebeforeintaborder() allow to change
+"move_before_in_tab_order":#Window_movebeforeintaborder allow to change
 it after creating all the windows.
 
 h4. Parameters
 
 * _win_ A sibling of this window which should precede it in tab order,
-must not be NULL
+must not be nil.
 
 
 h3(#Window_movebeforeintaborder). Window#move_before_in_tab_order
@@ -1580,10 +1690,24 @@ h3(#Window_paint). Window#paint
 
  paint { | window_dc | ... }
 
-This method runs the block, yielding a "PaintDC":paintdc.html into it
-to enable direct drawing onto a widget. This method should *only* be
-used within an @on_paint@ handler. To draw at other times, create a
-"ClientDC":clientdc.html object.
+Runs a block containing code for drawing lines, shapes and bitmaps onto
+the Window. The block should receive a "DC":dc.html (device context)
+object which can then be used to run drawing commands.
+
+The preferred usage of this method is within an @evt_paint@ handler,
+which is called whenever any part of the Window needs to be redrawn. In
+this case, the block will receive a "PaintDC":paintdc.html object. If
+@paint@ is called outside a paint event handler, it will receive a
+"ClientDC":clientdc.html object. These two classes support identical methods.
+
+This is the correct way in wxRuby to draw directly upon, for example,
+Panels. You should not attempt to instantiate a PaintDC or ClientDC
+directly. This will raise an exception, as doing so can cause serious
+errors on some platforms.
+
+Note also that it is not possible to draw directly upon some core
+controls, such as "Wx::Button":button.html. Whilst this may work on some
+platforms, it is not portable.
 
 h3(#Window_popeventhandler). Window#pop_event_handler
 
@@ -1602,9 +1726,9 @@ h4. See also
 
 h3(#Window_popupmenu). Window#popup_menu
 
- Boolean *popup_menu*(%(arg-type)Menu% menu,  %(arg-type)Point% pos = DEFAULT_POSITION)
+ Boolean *popup_menu*(%(arg-type)Menu% menu, %(arg-type)Point% pos = DEFAULT_POSITION)
 
- Boolean *popup_menu*(%(arg-type)Menu% menu,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+ Boolean *popup_menu*(%(arg-type)Menu% menu, %(arg-type)Integer% x, %(arg-type)Integer% y)
 
 Pops up the given menu at the specified coordinates, relative to this
 window, and returns control when the user has dismissed the menu. If a
@@ -1668,30 +1792,30 @@ h3(#Window_raise). Window#raise
 
   *raise*()
 
-Raises the window to the top of the window hierarchy.
+Raises the window to the top of the window hierarchy (z-order).
 
-In current version of Widgets this works both for manage and child windows.
+In current version of Widgets this works both for managed and child windows.
 
 h4. See also
 
-"Lower":windowlower.html
+"lower":window.html#Window_lower
 
 
 h3(#Window_refresh). Window#refresh
 
-  *refresh*(%(arg-type)Boolean% eraseBackground = @true@,  %(arg-type)Rect% rect = nil)
+  *refresh*(%(arg-type)Boolean% eraseBackground = @true@, %(arg-type)Rect% rect = nil)
 
 Causes this window, and all of its children recursively (except under GTK1
 where this is not implemented), to be repainted. Note that repainting doesn't
 happen immediately but only during the next event loop iteration, if you need
-to update the window immediately you should use "Update":windowupdate.html 
+to update the window immediately you should use "update":window.html#Window_update
 instead.
 
 h4. Parameters
 
 * _eraseBackground_ If @true@, the background will be
 erased.
-* _rect_ If non-NULL, only the given rectangle will
+* _rect_ If non-nil, only the given rectangle will
 be treated as damaged.
 
 h4. See also
@@ -1701,19 +1825,19 @@ h4. See also
 
 h3(#Window_refreshrect). Window#refresh_rect
 
-  *refresh_rect*(%(arg-type)Rect% rect,  %(arg-type)Boolean% eraseBackground = )
+  *refresh_rect*(%(arg-type)Rect% rect, %(arg-type)Boolean% eraseBackground = @true@)
 
 Redraws the contents of the given rectangle: only the area inside it will be
 repainted.
 
-This is the same as "Refresh":windowrefresh.html but has a nicer syntax
+This is the same as "refresh":window.html#Window_refresh but has a nicer syntax
 as it can be called with a temporary Rect object as argument like this
-@RefreshRect(Rect(x, y, w, h))@.
+@refresh_rect(Rect(x, y, w, h))@.
 
 
 h3(#Window_registerhotkey). Window#register_hot_key
 
- Boolean *register_hot_key*(%(arg-type)Integer% hotkeyId,  %(arg-type)Integer% modifiers, 
+ Boolean *register_hot_key*(%(arg-type)Integer% hotkeyId, %(arg-type)Integer% modifiers, 
                           %(arg-type)Integer% virtualKeyCode)
 
 Registers a system wide hotkey. Every time the user presses the hotkey registered here, this window
@@ -1756,6 +1880,7 @@ h4. See also
 "Window#capture_mouse":window.html#Window_capturemouse,
 "Window#has_capture":window.html#Window_hascapture,
 "Window#release_mouse":window.html#Window_releasemouse,
+"MouseCaptureLostEvent":mousecapturelostevent.html
 "MouseCaptureChangedEvent":mousecapturechangedevent.html
 
 
@@ -1783,7 +1908,7 @@ not delete) it from it.
 
 h4. Parameters
 
-* _handler_ The event handler to remove, must be non @NULL@ and
+* _handler_ The event handler to remove, must be non @nil@ and
 must be present in this windows event handlers chain
 
 h4. Return value
@@ -1803,7 +1928,7 @@ h3(#Window_reparent). Window#reparent
 
 Reparents the window, i.e the window will be removed from its
 current parent window (e.g. a non-standard toolbar in a Frame)
-and then re-inserted into another. Available on Windows and GTK.
+and then re-inserted into another.
 
 h4. Parameters
 
@@ -1812,7 +1937,7 @@ h4. Parameters
 
 h3(#Window_screentoclient). Window#screen_to_client
 
- x, y  *screen_to_client*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ x, y  *screen_to_client*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
  "Point":point.html *screen_to_client*(%(arg-type)Point% pt)
 
@@ -1859,9 +1984,7 @@ on top/bottom and nothing was done.
 
 h4. Remarks
 
-This function is currently only implemented under MSW and TextCtrl under
-GTK (it also works for ScrolledWindow derived classes under all
-platforms).
+This function is currently only implemented under MSW and GTK.
 
 h4. See also
 
@@ -1870,7 +1993,7 @@ h4. See also
 
 h3(#Window_scrollwindow). Window#scroll_window
 
-  *scroll_window*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy,  %(arg-type)Rect% rect = nil)
+  *scroll_window*(%(arg-type)Integer% dx, %(arg-type)Integer% dy, %(arg-type)Rect% rect = nil)
 
 Physically scrolls the pixels in the window and move child windows accordingly.
 
@@ -1878,14 +2001,14 @@ h4. Parameters
 
 * _dx_ Amount to scroll horizontally.
 * _dy_ Amount to scroll vertically.
-* _rect_ Rectangle to invalidate. If this is NULL, the whole window is invalidated. If you
-pass a rectangle corresponding to the area of the window exposed by the scroll, your painting handler
-can optimize painting by checking for the invalidated region. This parameter is ignored under GTK.
+* _rect_ Rectangle to scroll, if it is , the whole window is
+scrolled (this is always the case under GTK which doesn't support this
+parameter)
 
 h4. Remarks
 
-Use this function to optimise your scrolling implementations, to minimise the area that must be
-redrawn. Note that it is rarely required to call this function from a user program.
+Note that you can often use "ScrolledWindow":scrolledwindow.html
+instead of using this function directly.
 
 
 h3(#Window_setacceleratortable). Window#set_accelerator_table
@@ -1910,16 +2033,21 @@ h3(#Window_setautolayout). Window#set_auto_layout
   *set_auto_layout*(%(arg-type)Boolean% autoLayout)
 
 Determines whether the "Window#layout":window.html#Window_layout function will
-be called automatically when the window is resized. It is called implicitly by
-"Window#set_sizer":window.html#Window_setsizer but if you use
+be called automatically when the window is resized. Please note that this only
+happens for the windows usually used to contain children, namely 
+"Panel":panel.html and "TopLevelWindow":toplevelwindow.html 
+(and the classes deriving from them).
+
+This method is called implicitly by 
+"Window#set_sizer":window.html#Window_setsizer but if you use 
 "Window#set_constraints":window.html#Window_setconstraints you should call it
 manually or otherwise the window layout won't be correctly updated when its
 size changes.
 
 h4. Parameters
 
-* _autoLayout_ Set this to @true@ if you wish the Layout function to be called
-from within Window::OnSize functions.
+* _autoLayout_ Set this to  if you wish the Layout function to be
+called automatically when the window is resized.
 
 h4. See also
 
@@ -1977,9 +2105,9 @@ h4. See also
 "Window#set_background_colour":window.html#Window_setbackgroundcolour, "Window#get_foreground_colour":window.html#Window_getforegroundcolour, "Window#get_background_style":window.html#Window_getbackgroundstyle
 
 
-h3(#Window_setbestfittingsize). Window#set_best_fitting_size
+h3(#Window_setinitialsize). Window#set_initial_size
 
-  *set_best_fitting_size*(%(arg-type)Size% size = DEFAULT_SIZE)
+  *set_initial_size*(%(arg-type)Size% size = DEFAULT_SIZE)
 
 A _smart_ SetSize that will fill in default size components with the
 window's _best_ size values.  Also sets the window's minsize to
@@ -1988,9 +2116,13 @@ partial size is passed to this function then the sizers will use that
 size instead of the results of GetBestSize to determine the minimum
 needs of the window for layout.
 
+Most controls will use this to set their initial size, and their min
+size to the passed in value (if any.)
+
+
 h4. See also
 
-"Window#set_size":window.html#Window_setsize, "Window#get_best_size":window.html#Window_getbestsize, "Window#get_best_fitting_size":window.html#Window_getbestfittingsize, "Window#set_size_hints":window.html#Window_setsizehints
+"Window#set_size":window.html#Window_setsize, "Window#get_best_size":window.html#Window_getbestsize, "Window#get_effective_min_size":window.html#Window_geteffectiveminsize
 
 
 h3(#Window_setcaret). Window#set_caret
@@ -2002,7 +2134,7 @@ Sets the "caret":caret.html associated with the window.
 
 h3(#Window_setclientsize). Window#set_client_size
 
-  *set_client_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+  *set_client_size*(%(arg-type)Integer% width, %(arg-type)Integer% height)
 
   *set_client_size*(%(arg-type)Size% size)
 
@@ -2049,9 +2181,9 @@ h4. See also
 
 h3(#Window_setdimensions). Window#set_dimensions
 
-  *set_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  
-              %(arg-type)Integer% width, %(arg-type)Integer% height, 
-              %(arg-type)Integer% sizeFlags = SIZE_AUTO)
+  *set_size*(%(arg-type)Integer% x, %(arg-type)Integer% y,  
+           %(arg-type)Integer% width, %(arg-type)Integer% height, 
+           %(arg-type)Integer% sizeFlags = SIZE_AUTO)
 
 Specifies the size and position of the window, in pixel units.
 
@@ -2091,63 +2223,32 @@ h4. See also
 
 "set_size":#Window_setsize
 
-h3(#Window_setinitialbestsize). Window#set_initial_best_size
+h3(#Window_setcontainingsizer). Window#set_containing_sizer
 
-  *set_initial_best_size*(%(arg-type)Size% size)
+  *set_containing_sizer*(%(arg-type)Sizer% sizer)
 
-Sets the initial window size if none is given (i.e. at least one of the
-components of the size passed to ctor/Create() is DefaultCoord).
+This normally does not need to be called by user code.  It is called
+when a window is added to a sizer, and is used so the window can
+remove itself from the sizer when it is destroyed.
 
-h3(#Window_setmaxsize). Window#set_max_size
 
-  *set_max_size*(%(arg-type)Size% size)
+h3(#Window_setcursor). Window#set_cursor
 
-Sets the maximum size of the window, to indicate to the sizer layout mechanism
-that this is the maximum possible size.
+  *set_cursor*(%(arg-type)Cursor% cursor)
 
-h3(#Window_setminsize). Window#set_min_size
+Sets the window's cursor. Notice that the window cursor also sets it for the
+children of the window implicitly.
 
-  *set_min_size*(%(arg-type)Size% size)
+The _cursor_ may be @NullCursor@ in which case the window cursor will
+be reset back to default.
 
-Sets the minimum size of the window, to indicate to the sizer layout mechanism
-that this is the minimum required size. You may need to call this
-if you change the window size after construction and before adding
-to its parent sizer.
+h4. Parameters
 
-h3(#Window_setownbackgroundcolour). Window#set_own_background_colour
-
-  *set_own_background_colour*(%(arg-type)Colour% colour)
-
-Sets the background colour of the window but prevents it from being inherited
-by the children of this window.
+* _cursor_ Specifies the cursor that the window should normally display.
 
 h4. See also
 
-"set_background_colour":#Window_setbackgroundcolour, "inherit_attributes":#Window_inheritattributes
-
-
-h3(#Window_setownfont). Window#set_own_font
-
-  *set_own_font*(%(arg-type)Font% font)
-
-Sets the font of the window but prevents it from being inherited by the
-children of this window.
-
-h4. See also
-
-"set_font":#Window_setfont, "inherit_attributes":#Window_inheritattributes
-
-
-h3(#Window_setownforegroundcolour). Window#set_own_foreground_colour
-
-  *set_own_foreground_colour*(%(arg-type)Colour% colour)
-
-Sets the foreground colour of the window but prevents it from being inherited
-by the children of this window.
-
-h4. See also
-
-"set_foreground_colour":#Window_setforegroundcolour, "inherit_attributes":#Window_inheritattributes
+"::SetCursor":setcursor.html, "Cursor":cursor.html
 
 h3(#Window_setdroptarget). Window#set_drop_target
 
@@ -2160,6 +2261,13 @@ If the window already has a drop target, it is deleted.
 h4. See also
 
 "Window#get_drop_target":window.html#Window_getdroptarget,
+
+h3(#Window_setinitialbestsize). Window#set_initial_best_size
+
+  *set_initial_best_size*(%(arg-type)Size% size)
+
+Sets the initial window size if none is given (i.e. at least one of the
+components of the size passed to ctor/Create() is DefaultCoord).
 
 h3(#Window_seteventhandler). Window#set_event_handler
 
@@ -2199,9 +2307,9 @@ bits are:
 |@WS_EX_VALIDATE_RECURSIVELY@|TransferDataTo/FromWindow()and Validate() methods will recursively descend into all children of thewindow if it has this style flag set.|
 |@WS_EX_BLOCK_EVENTS@|Normally, the commandevents are propagated upwards to the window parent recursively until a handlerfor them is found. Using this style allows to prevent them from beingpropagated beyond this window. Notice that Dialog has this style on bydefault for the reasons explained in the"event processing overview":eventprocessing.html.|
 |@WS_EX_TRANSIENT@|This can be used to prevent awindow from being used as an implicit parent for the dialogs which werecreated without a parent. It is useful for the windows which can disappear atany moment as creating children of such windows results in fatal problems.|
-|@FRAME_EX_CONTEXTHELP@|Under Windows, puts a query button on thecaption. When pressed, Windows will go into a context-sensitive help mode and Widgets will senda EVT_HELP event if the user clicked on an application window.This style cannot be used together with MAXIMIZE_BOX or MINIMIZE_BOX, soyou should use the style of@DEFAULT_FRAME_STYLE & @@(MINIMIZE_BOX | MAXIMIZE_BOX)@ for theframes having this style (the dialogs don't have minimize nor maximize box bydefault)|
-|@WS_EX_PROCESS_IDLE@|This window should always process idle events, evenif the mode set by "IdleEvent#set_mode":idleevent.html#IdleEvent_setmode is IDLE_PROCESS_SPECIFIED.|
-|@WS_EX_PROCESS_UI_UPDATES@|This window should always process UI update events,even if the mode set by "UpdateUIEvent#set_mode":updateuievent.html#UpdateUIEvent_setmode is UPDATE_UI_PROCESS_SPECIFIED.|
+|@FRAME_EX_CONTEXTHELP@|Under Windows, puts a query button on the caption. When pressed, Windows will go into a context-sensitive help mode and Widgets will send a EVT_HELP event if the user clicked on an application window. This style cannot be used together with @MAXIMIZE_BOX@ or @MINIMIZE_BOX@, soyou should use the style of @DEFAULT_FRAME_STYLE@ & (@MINIMIZE_BOX@ &#124; @MAXIMIZE_BOX@) for the frames having this style (the dialogs don't have minimize nor maximize box bydefault)|
+|@WS_EX_PROCESS_IDLE@|This window should always process idle events, evenif the mode set by "IdleEvent#set_mode":idleevent.html#IdleEvent_setmode is @IDLE_PROCESS_SPECIFIED@.|
+|@WS_EX_PROCESS_UI_UPDATES@|This window should always process UI update events,even if the mode set by "UpdateUIEvent#set_mode":updateuievent.html#UpdateUIEvent_setmode is @UPDATE_UI_PROCESS_SPECIFIED@.|
 
 
 
@@ -2237,6 +2345,12 @@ parent window if you don't want its font to be inherited by its children,
 use "set_own_font":#Window_setownfont instead in this case and
 see "inherit_attributes":#Window_inheritattributes for more
 explanations.
+
+Please notice that the given font is not automatically used for 
+"PaintDC":paintdc.html objects associated with this window, you need to
+call "DC::SetFont()":dcsetfont.html too. However this font is used by
+any standard controls for drawing their text as well as by 
+"Window::GetTextExtent()":windowgettextextent.html.
 
 h4. Parameters
 
@@ -2328,6 +2442,22 @@ h4. See also
 "Window#get_label":window.html#Window_getlabel
 
 
+h3(#Window_setmaxsize). Window#set_max_size
+
+  *set_max_size*(%(arg-type)Size% size)
+
+Sets the maximum size of the window, to indicate to the sizer layout mechanism
+that this is the maximum possible size.
+
+h3(#Window_setminsize). Window#set_min_size
+
+  *set_min_size*(%(arg-type)Size% size)
+
+Sets the minimum size of the window, to indicate to the sizer layout mechanism
+that this is the minimum required size. You may need to call this
+if you change the window size after construction and before adding
+to its parent sizer.
+
 h3(#Window_setname). Window#set_name
 
   *set_name*(%(arg-type)String% name)
@@ -2343,6 +2473,42 @@ h4. See also
 "Window#get_name":window.html#Window_getname
 
 
+h3(#Window_setownbackgroundcolour). Window#set_own_background_colour
+
+  *set_own_background_colour*(%(arg-type)Colour% colour)
+
+Sets the background colour of the window but prevents it from being inherited
+by the children of this window.
+
+h4. See also
+
+"set_background_colour":#Window_setbackgroundcolour, "inherit_attributes":#Window_inheritattributes
+
+
+h3(#Window_setownfont). Window#set_own_font
+
+  *set_own_font*(%(arg-type)Font% font)
+
+Sets the font of the window but prevents it from being inherited by the
+children of this window.
+
+h4. See also
+
+"set_font":#Window_setfont, "inherit_attributes":#Window_inheritattributes
+
+
+h3(#Window_setownforegroundcolour). Window#set_own_foreground_colour
+
+  *set_own_foreground_colour*(%(arg-type)Colour% colour)
+
+Sets the foreground colour of the window but prevents it from being inherited
+by the children of this window.
+
+h4. See also
+
+"set_foreground_colour":#Window_setforegroundcolour, "inherit_attributes":#Window_inheritattributes
+
+
 h3(#Window_setpalette). Window#set_palette
 
   *set_palette*(%(arg-type)Palette% palette)
@@ -2352,7 +2518,7 @@ Obsolete - use "DC#set_palette":dc.html#DC_setpalette instead.
 
 h3(#Window_setscrollbar). Window#set_scrollbar
 
-  *set_scrollbar*(%(arg-type)Integer% orientation,  %(arg-type)Integer% position, 
+  *set_scrollbar*(%(arg-type)Integer% orientation, %(arg-type)Integer% position, 
                 %(arg-type)Integer% thumbSize, 
                 %(arg-type)Integer% range, 
                 %(arg-type)Boolean% refresh = @true@)
@@ -2374,7 +2540,7 @@ The window is sized so that you can only see 16 lines at a time.
 
 You would use:
 
-   set_scroll_bar(VERTICAL, 0, 16, 50);
+   set_scrollbar(VERTICAL, 0, 16, 50)
 
 Note that with the window at this size, the thumb position can never go
 above 50 minus 16, or 34.
@@ -2384,8 +2550,8 @@ current view size by the character height in pixels.
 
 When defining your own scrollbar behaviour, you will always need to
 recalculate the scrollbar settings when the window size changes. You
-could therefore put your scrollbar calculations and SetScrollbar call
-into a function named AdjustScrollbars, which can be called initially
+could therefore put your scrollbar calculations and set_scrollbar call
+into a function named adjust_scrollbars, which can be called initially
 and also from your "SizeEvent":sizeevent.html handler function.
 
 h4. See also
@@ -2397,7 +2563,7 @@ h4. See also
 
 h3(#Window_setscrollpage). Window#set_scroll_page
 
-  *set_scroll_page*(%(arg-type)Integer% orientation,  %(arg-type)Integer% pageSize, 
+  *set_scroll_page*(%(arg-type)Integer% orientation, %(arg-type)Integer% pageSize, 
                   %(arg-type)Boolean% refresh = @true@)
 
 Sets the page size of one of the built-in scrollbars.
@@ -2432,7 +2598,7 @@ h4. See also
 
 h3(#Window_setscrollpos). Window#set_scroll_pos
 
-  *set_scroll_pos*(%(arg-type)Integer% orientation,  %(arg-type)Integer% pos, 
+  *set_scroll_pos*(%(arg-type)Integer% orientation, %(arg-type)Integer% pos, 
                  %(arg-type)Boolean% refresh = @true@)
 
 Sets the position of one of the built-in scrollbars.
@@ -2457,7 +2623,7 @@ h4. See also
 
 h3(#Window_setscrollrange). Window#set_scroll_range
 
-  *set_scroll_range*(%(arg-type)Integer% orientation,  %(arg-type)Integer% range, 
+  *set_scroll_range*(%(arg-type)Integer% orientation, %(arg-type)Integer% range, 
                    %(arg-type)Boolean% refresh = @true@)
 
 Sets the range of one of the built-in scrollbars.
@@ -2506,7 +2672,7 @@ h4. See also
 
 h3(#Window_setsizehints). Window#set_size_hints
 
-  *set_size_hints*(%(arg-type)Integer% minW,  %(arg-type)Integer% minH,  %(arg-type)Integer% maxW=-1, 
+  *set_size_hints*(%(arg-type)Integer% minW, %(arg-type)Integer% minH, %(arg-type)Integer% maxW=-1, 
                  %(arg-type)Integer% maxH=-1, 
                  %(arg-type)Integer% incW=-1, 
                  %(arg-type)Integer% incH=-1)
@@ -2540,7 +2706,7 @@ The resizing increments are only significant under Motif or Xt.
 
 h3(#Window_setsizer). Window#set_sizer
 
-  *set_sizer*(%(arg-type)Sizer% sizer,  %(arg-type)Boolean% deleteOld=true)
+  *set_sizer*(%(arg-type)Sizer% sizer, %(arg-type)Boolean% deleteOld=true)
 
 Sets the window to have the given layout sizer. The window
 will then own the object, and will take care of its deletion.
@@ -2549,7 +2715,7 @@ window, it will be deleted if the deleteOld parameter is true.
 
 Note that this function will also call
 "set_auto_layout":#Window_setautolayout implicitly with @true@
-parameter if the _sizer_\/ is non-NULL and @false@ otherwise.
+parameter if the _sizer_ is non-nil and @false@ otherwise.
 
 h4. Parameters
 
@@ -2571,26 +2737,10 @@ only the sizer will have effect.
 
 h3(#Window_setsizerandfit). Window#set_sizer_and_fit
 
-  *set_sizer_and_fit*(%(arg-type)Sizer% sizer,  %(arg-type)Boolean% deleteOld=true)
+  *set_sizer_and_fit*(%(arg-type)Sizer% sizer, %(arg-type)Boolean% deleteOld=true)
 
 The same as "set_sizer":#Window_setsizer, except it also sets the size hints
 for the window based on the sizer's minimum size.
-
-
-h3(#Window_settitle). Window#set_title
-
-  *set_title*(%(arg-type)String% title)
-
-Sets the window's title. Applicable only to frames and dialogs.
-
-h4. Parameters
-
-* _title_ The window's title.
-
-h4. See also
-
-"Window#get_title":window.html#Window_gettitle
-
 
 h3(#Window_setthemeenabled). Window#set_theme_enabled
 
@@ -2629,7 +2779,7 @@ create a new validator of this type.
 
 h3(#Window_setvirtualsize). Window#set_virtual_size
 
-  *set_virtual_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+  *set_virtual_size*(%(arg-type)Integer% width, %(arg-type)Integer% height)
 
   *set_virtual_size*(%(arg-type)Size% size)
 
@@ -2677,7 +2827,7 @@ h3(#Window_setwindowstyleflag). Window#set_window_style_flag
   *set_window_style_flag*(%(arg-type)Integer% style)
 
 Sets the style of the window. Please note that some styles cannot be changed
-after the window creation and that "Refresh()":windowrefresh.html might
+after the window creation and that "refresh":window.html#Window_refresh might
 be called after changing the others for the change to take place immediately.
 
 See "Window styles":windowstyles.html for more information about flags.
@@ -2723,9 +2873,9 @@ h3(#Window_show). Window#show
 
  Boolean *show*(%(arg-type)Boolean% show = @true@)
 
-Shows or hides the window. You may need to call "Raise":windowraise.html
+Shows or hides the window. You may need to call "raise":window.html#Window_raise
 for a top level window if you want to bring it to top, although this is not
-needed if Show() is called immediately after the frame creation.
+needed if show() is called immediately after the frame creation.
 
 h4. Parameters
 
@@ -2746,8 +2896,8 @@ h3(#Window_thaw). Window#thaw
   *thaw*()
 
 Reenables window updating after a previous call to
-"Freeze":windowfreeze.html. To really thaw the control, it must be called
-exactly the same number of times as "Freeze":windowfreeze.html.
+"freeze":window.html#Window_freeze. To really thaw the control, it must be called
+exactly the same number of times as "freeze":window.html#Window_freeze.
 
 
 h3(#Window_transferdatafromwindow). Window#transfer_data_from_window
@@ -2758,7 +2908,7 @@ Transfers values from child controls to data areas specified by their validators
 @false@ if a transfer failed.
 
 If the window has @WS_EX_VALIDATE_RECURSIVELY@ extra style flag set,
-the method will also call TransferDataFromWindow() of all child windows.
+the method will also call transfer_data_from_window() of all child windows.
 
 h4. See also
 
@@ -2772,7 +2922,7 @@ h3(#Window_transferdatatowindow). Window#transfer_data_to_window
 Transfers values to child controls from data areas specified by their validators.
 
 If the window has @WS_EX_VALIDATE_RECURSIVELY@ extra style flag set,
-the method will also call TransferDataToWindow() of all child windows.
+the method will also call transfer_data_to_window() of all child windows.
 
 h4. Return value
 
@@ -2791,7 +2941,7 @@ Unregisters a system wide hotkey.
 
 h4. Parameters
 
-* _hotkeyId_ Numeric identifier of the hotkey. Must be the same id that was passed to RegisterHotKey.
+* _hotkeyId_ Numeric identifier of the hotkey. Must be the same id that was passed to register_hot_key.
 
 h4. Return value
 
@@ -2805,6 +2955,31 @@ h4. See also
 
 "Window#register_hot_key":window.html#Window_registerhotkey
 
+h4. See also
+
+"WindowUpdateLocker":windowupdatelocker.html
+
+
+h3(#Window_togglewindowstyle). Window#toggle_window_style
+
+ Boolean *toggle_window_style*(%(arg-type)Integer% flag)
+
+Turns the given flag on if it's currently turned off and vice versa.
+This function cannot be used if the value of the flag is $0$ (which is often
+the case for default flags).
+
+Also, please notice that not all styles can be changed after the control
+creation.
+
+h4. Return value
+
+Returns  if the style was turned on by this function,  if it was
+switched off.
+
+h4. See also
+
+"Window#set_window_style_flag":window.html#Window_setwindowstyleflag, "Window#has_flag":window.html#Window_hasflag
+
 
 h3(#Window_update). Window#update
 
@@ -2814,7 +2989,7 @@ Calling this method immediately repaints the invalidated area of the window and
 all of its children recursively while this would usually only happen when the
 flow of control returns to the event loop. Notice that this function doesn't
 refresh the window and does nothing if the window hadn't been already
-repainted. Use "Refresh":windowrefresh.html first if you want to
+repainted. Use "refresh":window.html#Window_refresh first if you want to
 immediately redraw the window unconditionally.
 
 
@@ -2844,16 +3019,16 @@ _flags_ should be a bitlist of one or more of the following values.
  };
  
 
-If you are calling this function from an OnInternalIdle or OnIdle
+If you are calling this function from an on_internal_idle or on_idle
 function, make sure you pass the UPDATE_UI_FROMIDLE flag, since
 this tells the window to only update the UI elements that need
 to be updated in idle time. Some windows update their elements
 only when necessary, for example when a menu is about to be shown.
-The following is an example of how to call UpdateWindowUI from
+The following is an example of how to call update_window_ui from
 an idle function.
 
 
- void MyWindow::OnInternalIdle()
+ void MyWindow::on_internal_idle()
  {
      if (UpdateUIEvent::CanUpdate(this))
          UpdateWindowUI(UPDATE_UI_FROMIDLE);
@@ -2874,7 +3049,7 @@ h3(#Window_validate). Window#validate
 Validates the current values of the child controls using their validators.
 
 If the window has @WS_EX_VALIDATE_RECURSIVELY@ extra style flag set,
-the method will also call Validate() of all child windows.
+the method will also call validate() of all child windows.
 
 h4. Return value
 
@@ -2887,11 +3062,11 @@ h4. See also
 
 h3(#Window_warppointer). Window#warp_pointer
 
-  *warp_pointer*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+  *warp_pointer*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
 Moves the pointer to the given position on the window.
 
-*NB: * This function is not supported under Mac because Apple Human
+*NB:* This function is not supported under Mac because Apple Human
 Interface Guidelines forbid moving the mouse cursor programmatically.
 
 h4. Parameters

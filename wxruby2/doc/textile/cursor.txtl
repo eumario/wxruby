@@ -24,16 +24,14 @@ h2. Derived from
 
 h2. Predefined objects
 
-Objects:
+The following predefined cursors are accessed via Ruby constants. Note
+that the standard, hourglass and cross cursors are not loaded until the
+App enters its main loop.
 
-*NullCursor*
-
-Pointers:
-
-*STANDARD_CURSOR
-
-HOURGLASS_CURSOR\\
-CROSS_CURSOR*
+ *Wx::NULL_CURSOR*
+ *Wx::STANDARD_CURSOR*
+ *Wx::HOURGLASS_CURSOR*
+ *Wx::CROSS_CURSOR*
 
 h2. See also
 
@@ -44,40 +42,17 @@ h2. See also
 h2. Methods
 
 * "Cursor.new":#Cursor_new
-* "Cursor#ok":#Cursor_ok
+* "Cursor#is_ok":#Cursor_isok
 
 </div>
 
 
 h3(#Cursor_new). Cursor.new
 
-  *Cursor.new*(%(arg-type)char% bits[],  %(arg-type)Integer% width,  %(arg-type)Integer% height, 
-             %(arg-type)Integer% hotSpotX=-1, 
-             %(arg-type)Integer% hotSpotY=-1, 
-             %(arg-type)char% maskBits[]=NULL, 
-             %(arg-type)Colour% fg=NULL, 
-             %(arg-type)Colour% bg=NULL)
-
-Constructs a cursor by passing an array of bits (Motif and GTK+ only). _maskBits_ is used only under
-Motif and GTK+. The parameters _fg_ and _bg_ are only present on GTK+, and force the
-cursor to use particular background and foreground colours.
-
-If either _hotSpotX_ or _hotSpotY_ is -1, the hotspot will be the centre of the cursor image (Motif only).
-
-  *Cursor.new*(%(arg-type)String% cursorName,  %(arg-type)Integer% type, 
-             %(arg-type)Integer% hotSpotX=0, 
-             %(arg-type)Integer% hotSpotY=0)
-
-Constructs a cursor by passing a string resource name or filename.
-
-On MacOS when specifying a string resource name, first the color cursors 'crsr' and then the black/white cursors 'CURS' in the resource chain are scanned through.
-
-_hotSpotX_ and _hotSpotY_ are currently only used under Windows when loading from an
-icon file, to specify the cursor hotspot relative to the top left of the image.
-
   *Cursor.new*(%(arg-type)Integer% cursorId)
 
-Constructs a cursor using a cursor identifier.
+Constructs a cursor using a cursor identifier; valid constants for this
+parameter are given below.
 
   *Cursor.new*(%(arg-type)Image% image)
 
@@ -151,96 +126,18 @@ Under Windows, the permitted types are:
 |*CURSOR_WATCH*|A watch cursor.|
 |*CURSOR_ARROWWAIT*|A cursor with both an arrow andan hourglass, (windows.)|
 
-
 Note that not all cursors are available on all platforms.
-* _cursor_ Pointer or reference to a cursor to copy.
+h3(#Cursor_isok). Cursor#is_ok
 
-
-
-
-
-h4. Example
-
-The following is an example of creating a
-cursor from 32x32 bitmap data (@down_bits@) and a mask
-(@down_mask@) where 1 is black and 0 is white for
-the bits, and 1 is opaque and 0 is transparent for
-the mask. It works on Windows and GTK+.
-
-
- static char down_bits[] = { 255, 255, 255, 255, 31,
-   255, 255, 255, 31, 255, 255, 255, 31, 255, 255, 255,
-   31, 255, 255, 255, 31, 255, 255, 255, 31, 255, 255,
-   255, 31, 255, 255, 255, 31, 255, 255, 255, 25, 243,
-   255, 255, 19, 249, 255, 255, 7, 252, 255, 255, 15, 254,
-   255, 255, 31, 255, 255, 255, 191, 255, 255, 255, 255,
-   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-   255 };
- 
- static char down_mask[] = { 240, 1, 0, 0, 240, 1,
-   0, 0, 240, 1, 0, 0, 240, 1, 0, 0, 240, 1, 0, 0, 240, 1,
-   0, 0, 240, 1, 0, 0, 240, 1, 0, 0, 255, 31, 0, 0, 255,
-   31, 0, 0, 254, 15, 0, 0, 252, 7, 0, 0, 248, 3, 0, 0,
-   240, 1, 0, 0, 224, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0,
-   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-   0, 0, 0, 0, 0 };
- 
- #ifdef __WXMSW__
- Bitmap down_bitmap(down_bits, 32, 32);
- Bitmap down_mask_bitmap(down_mask, 32, 32);
- 
- down_bitmap.SetMask(new Mask(down_mask_bitmap));
- Image down_image = down_bitmap.ConvertToImage();
- down_image.SetOption(IMAGE_OPTION_CUR_HOTSPOT_X, 6);
- down_image.SetOption(IMAGE_OPTION_CUR_HOTSPOT_Y, 14);
- Cursor down_cursor = Cursor(down_image);
- #else
- Cursor down_cursor = Cursor(down_bits, 32, 32,
-   6, 14, down_mask, WHITE, BLACK);
- #endif
- 
-
-  *destructor*()
-
-Destroys the cursor. A cursor can be reused for more
-than one window, and does not get destroyed when the window is
-destroyed. Widgets destroys all cursors on application exit, although
-it is best to clean them up explicitly.
-
-h3(#Cursor_ok). Cursor#ok
-
- Boolean *ok*()
+ Boolean *is_ok*()
 
 Returns true if cursor data is present.
-
-h3(#Cursor_assignment). Cursor#=
-
- "Cursor":cursor.html *operator $=$*(%(arg-type)Cursor% cursor)
-
-Assignment operator, using reference counting. Returns a reference
-to `this'.
 
 h3(#Cursor_equals). Cursor#==
 
  Boolean *operator $==$*(%(arg-type)Cursor% cursor)
 
-Equality operator. Two cursors are equal if they contain pointers
-to the same underlying cursor data. It does not compare each attribute,
-so two independently-created cursors using the same parameters will
-fail the test.
-
-h3(#Cursor_notequals). Cursor#!=
-
- Boolean *operator $!=$*(%(arg-type)Cursor% cursor)
-
-Inequality operator. Two cursors are not equal if they contain pointers
-to different underlying cursor data. It does not compare each attribute.
-
-
+Equality operator. Two cursors are equal if they point to to the same
+underlying cursor data. It does not compare each attribute, so two
+independently-created cursors using the same parameters will fail the
+test.

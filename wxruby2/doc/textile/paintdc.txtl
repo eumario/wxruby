@@ -1,19 +1,16 @@
 h1(#wxpaintdc). Wx::PaintDC
 
-A PaintDC must be constructed if an application wishes to paint on the
-client area of a window from within an *OnPaint* event.
-This should normally be constructed as a temporary stack object; don't store
-a PaintDC object. If you have an OnPaint handler, you _must_ create a PaintDC
-object within it even if you don't actually use it.
+This class is used to draw upon Windows within an @evt_paint@
+handler. This is the recommended technique to draw lines, shapes and
+bitmaps on the screen. 
 
-Using PaintDC within OnPaint is important because it automatically
-sets the clipping area to the damaged area of the window. Attempts to draw
-outside this area do not appear.
+This class is not instantiated directly. Rather, define an @evt_paint@
+handler, and within it call the "paint":window.html#Window_paint method
+of the Window you wish to draw upon. This method accepts a block, 
+which receives a PaintDC object upon which drawing methods can be called.
 
-To draw on a window from outside *OnPaint*, construct a "ClientDC":clientdc.html object.
-
-To draw on the whole window including decorations, construct a "WindowDC":windowdc.html object
-(Windows only).
+This class has no methods of its own; all the drawing methods are
+described in the documentation for "DC":dc.html.
 
 h2. Derived from
 
@@ -24,21 +21,4 @@ h2. Derived from
 h2. See also
 
 "DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html, "WindowDC":windowdc.html, "ScreenDC":screendc.html
-
-<div id="methods">
-
-h2. Methods
-
-* "PaintDC.new":#PaintDC_new
-
-</div>
-
-
-h3(#PaintDC_new). PaintDC.new
-
-  *PaintDC.new*(%(arg-type)Window% window)
-
-Constructor. Pass a pointer to the window on which you wish to paint.
-
-
 

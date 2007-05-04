@@ -24,6 +24,7 @@
 #include <wx/laywin.h>
 #include <wx/process.h>
 #include <wx/tglbtn.h>
+#include <wx/aui/aui.h>
 
 #ifdef WXSCINTILLA
 #    include <wx/wxscintilla.h>

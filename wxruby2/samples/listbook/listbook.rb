@@ -26,9 +26,13 @@ class SimpleFrame < Wx::Frame
 	FILE_DIALOG, FILE_ABOUT, FILE_QUIT = [0,Wx::ID_ABOUT,Wx::ID_EXIT]
 	
 	def initialize(parent)
-		super(nil,-1,"Sample",Wx::Point.new(50,50),Wx::Size.new(300,300))
-
-    $xml.load_frame_subclass(self,nil,'ID_FRAME')
+      # To load a layout defined in XRC into a Ruby subclass of Frame,
+      # first call the empty constructor. All the details of size,
+      # title, position and so on are loaded from the XRC by the call to 
+      # load_frame_subclass. Using a non-empty constructor will cause
+      # errors on GTK.
+      super()
+      $xml.load_frame_subclass(self,nil,'ID_FRAME')
     
 		# Create a new menu
 		bar = Wx::MenuBar.new

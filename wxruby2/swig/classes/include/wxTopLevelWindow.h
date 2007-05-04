@@ -14,28 +14,27 @@ public:
 
     // top level wnd state
     // --------------------
-
     // maximize = true => maximize, otherwise - restore
-    virtual void Maximize(bool maximize = true) = 0;
+    virtual void Maximize(bool maximize = true);
 
     // undo Maximize() or Iconize()
-    virtual void Restore() = 0;
+    virtual void Restore();
 
     // iconize = true => iconize, otherwise - restore
-    virtual void Iconize(bool iconize = true) = 0;
+    virtual void Iconize(bool iconize = true);
 
     // return true if the frame is maximized
-    virtual bool IsMaximized() const = 0;
-
+    virtual bool IsMaximized() const;
+	virtual bool IsAlwaysMaximized() const;
     // return true if the frame is iconized
-    virtual bool IsIconized() const = 0;
+    virtual bool IsIconized() const;
 
     // get the frame icon
     const wxIcon& GetIcon() const;
 
     // get the frame icons
     const wxIconBundle& GetIcons() const;
-
+	
     // set the frame icon
     virtual void SetIcon(const wxIcon& icon);
 
@@ -43,30 +42,42 @@ public:
     virtual void SetIcons(const wxIconBundle& icons );
 
     // maximize the window to cover entire screen
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) = 0;
+    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL);
 
     // return true if the frame is in fullscreen mode
-    virtual bool IsFullScreen() const = 0;
+    virtual bool IsFullScreen() const;
 
-    /*
-       for now we already have them in wxWindow, but this is wrong: these
-       methods really only make sense for wxTopLevelWindow!
-
-    virtual void SetTitle(const wxString& title) = 0;
-    virtual wxString GetTitle() const = 0;
-     */
+	// frame title
+    virtual wxString GetTitle() const;
+    virtual void SetTitle(const wxString&  title ) ;
+	
+	// switch on or off close button
+	virtual bool EnableCloseButton(bool enable = true);
 
     // Set the shape of the window to the given region.
-    // Returns true if the platform supports this feature (and the
-    // operation is successful.)
     virtual bool SetShape(const wxRegion& region);
 
     // Attracts the users attention to this window if the application is
     // inactive (should be called when a background event occurs)
     virtual void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO);
 
+	virtual bool ShouldPreventAppExit() const { return true };
+
     // Is this the active frame (highlighted in the taskbar)?
     virtual bool IsActive();
+
+    // centre the window on screen: this is just a shortcut
+    void CentreOnScreen(int dir = wxBOTH) { DoCentre(dir | wxCENTRE_ON_SCREEN); }
+    void CenterOnScreen(int dir = wxBOTH) { CentreOnScreen(dir); }
+
+    // used to reset default if pointing to removed child
+    virtual void RemoveChild(wxWindowBase *child);
+
+	wxWindow* GetDefaultItem() const;
+    void SetDefaultItem(wxWindow *btn ) ;
+
+	virtual bool CanSetTransparent();
+	virtual bool SetTransparent(int alpha);
 
 #if defined(__SMARTPHONE__)
     virtual void SetLeftMenu(int id = wxID_ANY, const wxString& label = wxEmptyString, wxMenu *subMenu = NULL) = 0;
@@ -78,8 +89,8 @@ public:
 
     // override some base class virtuals
     virtual bool Destroy();
-    virtual bool IsTopLevel() const;
-    virtual wxSize GetMaxSize() const;
+    virtual bool IsTopLevel() const { return true; }
+    virtual bool IsVisible() const { return IsShown(); }
 
     // event handlers
     void OnCloseWindow(wxCloseEvent& event);
@@ -95,6 +106,22 @@ public:
     // do the window-specific processing after processing the update event
     virtual void DoUpdateWindowUI(wxUpdateUIEvent& event) ;
 
+    // a different API for SetSizeHints
+	virtual void SetMaxSize(const wxSize& size);
+	virtual void SetMinSize(const wxSize& size);
+
+    // set size hints for "window manager"
+    virtual void DoSetSizeHints( int minW, int minH,
+                                 int maxW = wxDefaultCoord, int maxH = wxDefaultCoord,
+                                 int incW = wxDefaultCoord, int incH = wxDefaultCoord );
+
+	// only for Win CE
+	//	virtual bool HandleSettingChange(WXWPARAM wParam, WXLPARAM lParam);
+
+	// only for wx UNIVERSAL
+	// bool IsUsingNativeDecorations() const;
+	// void UseNativeDecorations(bool native = true);
+	// void UseNativeDecorationsByDefault(bool native = true);
 };
 
 

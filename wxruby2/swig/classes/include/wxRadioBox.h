@@ -14,7 +14,7 @@ public:
   virtual bool Enable(bool enable = true) ;
   virtual bool Enable(int  n , bool enable = true) ;
   int FindString(const wxString&  string ) const;
-  virtual int GetCount() const;
+  virtual unsigned int GetCount() const;
   virtual wxString GetLabel() const;
   virtual int GetSelection() const;
   wxString GetStringSelection() const;

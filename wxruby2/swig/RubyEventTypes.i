@@ -7,10 +7,14 @@
 
 %{
 //NO_CLASS - This tells fixmodule not to expect a class
-
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
+#include <wx/power.h>
+#include <wx/aui/aui.h>
 %}
+
+
+
 
 
     %constant const int wxEVT_NULL;// 0)
@@ -93,7 +97,10 @@
     %constant const int wxEVT_END_SESSION;// 403)
     %constant const int wxEVT_QUERY_END_SESSION;// 404)
     %constant const int wxEVT_ACTIVATE_APP;// 405)
-    %constant const int wxEVT_POWER;// 406)
+#ifdef wxHAS_POWER_EVENTS  // currently Win32 only
+    %constant const int wxEVT_POWER_SUSPENDING;// 406)
+    %constant const int wxEVT_POWER_SUSPENDED;// 407)
+#endif
     %constant const int wxEVT_ACTIVATE;// 409)
     %constant const int wxEVT_CREATE;// 410)
     %constant const int wxEVT_DESTROY;// 411)
@@ -148,3 +155,19 @@
     %constant const int wxEVT_CALENDAR_YEAR_CHANGED;//, 953)
     %constant const int wxEVT_CALENDAR_DOUBLECLICKED;//, 954)
     %constant const int wxEVT_CALENDAR_WEEKDAY_CLICKED;//, 955)
+
+    %constant const int wxEVT_AUI_PANE_BUTTON;
+    %constant const int wxEVT_AUI_PANE_CLOSE;
+    %constant const int wxEVT_AUI_PANE_MAXIMIZE;
+    %constant const int wxEVT_AUI_PANE_RESTORE;
+    %constant const int wxEVT_AUI_RENDER;
+    %constant const int wxEVT_AUI_FIND_MANAGER;
+
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGING;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_BUTTON;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_BEGIN_DRAG;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_END_DRAG;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_DRAG_MOTION;
+    %constant const int wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND;

@@ -47,6 +47,7 @@
 //  ---------------------------------------------------------------------------- 
 
 //  Not all platforms are currently available or supported 
+/*
 enum
 {
     wxUNKNOWN_PLATFORM,
@@ -85,6 +86,7 @@ enum
     wxPALMOS,                 // PalmOS
     wxDOS                     // wxBase under MS-DOS
 };
+*/
 
 enum {  wxDefaultCoord = -1 };
 
@@ -1406,6 +1408,7 @@ enum wxBitmapType
     wxBITMAP_TYPE_ICON_RESOURCE,
     wxBITMAP_TYPE_ANI,
     wxBITMAP_TYPE_IFF,
+    wxBITMAP_TYPE_TGA,
     wxBITMAP_TYPE_MACCURSOR,
     wxBITMAP_TYPE_MACCURSOR_RESOURCE,
     wxBITMAP_TYPE_ANY = 50
@@ -2136,6 +2139,16 @@ enum wxSashDragStatus
     wxSASH_STATUS_OK,
     wxSASH_STATUS_OUT_OF_RANGE
 };
+
+//** ---------------------------------------------------------------------------- **
+//   Start constants from wx/timer.h
+//** ---------------------------------------------------------------------------- **
+
+// generate notifications periodically until the timer is stopped (default)
+%constant bool TIMER_CONTINUOUS = false;
+
+// only send the notification once and then stop the timer
+%constant bool TIMER_ONE_SHOT = true;
 
 //** ---------------------------------------------------------------------------- **
 //   Start SWIG fixes for constants

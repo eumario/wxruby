@@ -9,8 +9,9 @@
 #include <wx/grid.h>
 %}
 
-%apply SWIGTYPE *DISOWN { wxGridCellEditor* editor };
 %apply SWIGTYPE *DISOWN { wxGridCellAttr* attr };
+%apply SWIGTYPE *DISOWN { wxGridCellEditor* editor };
+%apply SWIGTYPE *DISOWN { wxGridCellRenderer* renderer };
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"

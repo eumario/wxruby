@@ -12,7 +12,8 @@ public:
   int GetAlignHor() const;
   int GetAlignVer() const;
   wxColour GetBackgroundColour() ;
-  wxHtmlCell* GetFirstCell() ;
+  //wxHtmlCell* GetFirstCell() ;
+  wxHtmlCell* GetFirstChild() const;
   int GetIndent(int  ind ) const;
   int GetIndentUnits(int  ind ) const;
   void InsertCell(wxHtmlCell  *cell ) ;

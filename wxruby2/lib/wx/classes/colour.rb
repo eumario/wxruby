@@ -11,7 +11,7 @@ class Wx::Colour
       Kernel.raise ArgumentError, "Invalid colour values #{args.inspect}"
     end
 
-    if not ok
+    if not is_ok
       Kernel.raise ArgumentError, "Invalid colour values #{args.inspect}"
     end
   end
@@ -31,16 +31,17 @@ class Wx::Colour
   Wx::LIGHT_GREY = new(192, 192, 192)
 
   # Colours are equal to one another if they have the same red, green
-  # and blue intensity.
+  # and blue intensity, and the same alpha
   def ==(other)
     if not other.is_a?(self.class)
       raise ArgumentError, "No comparison of #{self} to #{other}"
     end
-    [ red, green, blue ] == [ other.red, other.green, other.blue ]
+    [ red, green, blue, alpha ] == 
+      [ other.red, other.green, other.blue, other.alpha ]
   end
 
   # More informative output for inspect etc
   def to_s
-    "#<Wx::Colour: (#{red}, #{green}, #{blue})>"
+    "#<Wx::Colour: (#{red}, #{green}, #{blue} *#{alpha})>"
   end
 end

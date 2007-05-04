@@ -97,18 +97,23 @@ h3(#TreeEvent_getolditem). TreeEvent#get_old_item
 
 Returns the old item index (valid for EVT_TREE_ITEM_CHANGING and CHANGED events)
 
-h3(#TreeEvent_getpoint). TreeEvent::GetPoint()
+
+h3(#TreeEvent_getpoint). TreeEvent#get_point
 
  "Point":point.html *get_point*()
 
-Returns the position of the mouse pointer if the event is a drag event.
+Returns the position of the mouse pointer if the event is a drag or menu-context event.
+In both cases the position is in client coordinates - i.e. relative to the TreeCtrl
+window (so that you can pass it directly to e.g. "Window#popup_menu":window.html#Window_popupmenu).
 
-h3(#TreeEvent_iseditcancelled). TreeEvent::IsEditCancelled()
+
+h3(#TreeEvent_iseditcancelled). TreeEvent#is_edit_cancelled
 
  Boolean *is_edit_cancelled*()
 
 Returns true if the label edit was cancelled. This should be
 called from within an EVT_TREE_END_LABEL_EDIT handler.
+
 
 h3(#TreeEvent_settooltip). TreeEvent#set_tool_tip
 

@@ -1,7 +1,5 @@
-// wxPen.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004 - 2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxPen_h_)
 #define _wxPen_h_
@@ -9,8 +7,8 @@ class wxPen : public wxGDIObject
 {
 public:
    wxPen() ;
-   wxPen(const wxColour&  colour , int  width , int  style ) ;
-   wxPen(const wxString&  colourName , int  width , int  style ) ;
+   wxPen(const wxColour&  colour , int  width = 1 , int  style = wxSOLID ) ;
+   wxPen(const wxString&  colourName , int  width = 1 , int  style = wxSOLID ) ;
 // not available on GTK
 #if defined(__WXMSW__) || defined(__WXMAC__)
    wxPen(const wxBitmap&  stipple , int  width ) ;

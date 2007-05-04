@@ -1,14 +1,12 @@
 h1(#wxclientdc). Wx::ClientDC
 
-A ClientDC must be constructed if an application wishes to paint on the
-client area of a window from outside an *OnPaint* event.
-This should normally be constructed as a temporary stack object; don't store
-a ClientDC object.
+This class is used to draw upon Windows outside of @evt_paint@
+handlers. It is not instantiated directly; rather, call the
+"paint":window.html#Window_paint method of the Window you wish to draw
+upon, and pass a block which will receive a ClientDC object.
 
-To draw on a window from within *OnPaint*, construct a "PaintDC":paintdc.html object.
-
-To draw on the whole window including decorations, construct a "WindowDC":windowdc.html object
-(Windows only).
+This class has no methods of its own; all the drawing methods are
+described in the documentation for "DC":dc.html.
 
 h2. Derived from
 
@@ -19,21 +17,3 @@ h2. Derived from
 h2. See also
 
 "DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html, "WindowDC":windowdc.html, "ScreenDC":screendc.html
-
-<div id="methods">
-
-h2. Methods
-
-* "ClientDC.new":#ClientDC_new
-
-</div>
-
-
-h3(#ClientDC_new). ClientDC.new
-
-  *ClientDC.new*(%(arg-type)Window% window)
-
-Constructor. Pass a pointer to the window on which you wish to paint.
-
-
-

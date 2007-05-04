@@ -47,14 +47,15 @@ h3(#GridCellAttr_wxgridcellattr). GridCellAttr.new
                    %(arg-type)Integer% hAlign, 
                    %(arg-type)Integer% vAlign)
 
-VZ: considering the number of members GridCellAttr has now, this ctor
-seems to be pretty useless... may be we should just remove it?
+Constructor specifying some of the often used attributes.
+
 
 h3(#GridCellAttr_clone). GridCellAttr#clone
 
  "GridCellAttr":gridcellattr.html *clone*()
 
 Creates a new copy of this object.
+
 
 h3(#GridCellAttr_incref). GridCellAttr#inc_ref
 
@@ -63,6 +64,7 @@ h3(#GridCellAttr_incref). GridCellAttr#inc_ref
 This class is ref counted: it is created with ref count of 1, so
 calling DecRef() once will delete it. Calling IncRef() allows to lock
 it until the matching DecRef() is called
+
 
 h3(#GridCellAttr_decref). GridCellAttr#dec_ref
 
@@ -74,11 +76,13 @@ h3(#GridCellAttr_settextcolour). GridCellAttr#set_text_colour
 
 Sets the text colour.
 
+
 h3(#GridCellAttr_setbackgroundcolour). GridCellAttr#set_background_colour
 
   *set_background_colour*(%(arg-type)Colour% colBack)
 
 Sets the background colour.
+
 
 h3(#GridCellAttr_setfont). GridCellAttr#set_font
 
@@ -86,11 +90,15 @@ h3(#GridCellAttr_setfont). GridCellAttr#set_font
 
 Sets the font.
 
+
 h3(#GridCellAttr_setalignment). GridCellAttr#set_alignment
 
   *set_alignment*(%(arg-type)Integer% hAlign,  %(arg-type)Integer% vAlign)
 
-Sets the alignment.
+Sets the alignment. hAlign can be one of @ALIGN_LEFT@, 
+@ALIGN_CENTRE@ or @ALIGN_RIGHT@ and vAlign can be one
+of @ALIGN_TOP@, @ALIGN_CENTRE@ or @ALIGN_BOTTOM@.
+
 
 h3(#GridCellAttr_setreadonly). GridCellAttr#set_read_only
 
@@ -160,6 +168,9 @@ h3(#GridCellAttr_getalignment). GridCellAttr#get_alignment
 
   *get_alignment*(%(arg-type)Integer% hAlign,  %(arg-type)Integer% vAlign)
 
+
+
+See "set_alignment":#GridCellAttr_setalignment for the returned values.
 
 
 h3(#GridCellAttr_getrenderer). GridCellAttr#get_renderer

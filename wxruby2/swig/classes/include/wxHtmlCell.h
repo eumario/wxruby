@@ -13,7 +13,7 @@ public:
 	*/
 
    wxHtmlCell() ;
-  virtual bool AdjustPagebreak(int *  pagebreak ) ;
+  virtual bool AdjustPagebreak(int *  pagebreak,wxArrayInt& known_pagebreaks) const ;
   virtual void Draw(wxDC&  dc , int  x , int  y , int  view_y1 , int  view_y2, wxHtmlRenderingInfo info) ;
   virtual void DrawInvisible(wxDC&  dc , int  x , int  y, wxHtmlRenderingInfo info ) ;
   virtual const wxHtmlCell* Find(int  condition , const void*  param ) ;

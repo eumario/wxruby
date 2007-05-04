@@ -1122,7 +1122,7 @@ class MyFrame < Wx::Frame
 
   def on_insert_item(event)
     image = Wx::get_app.show_images() ? TreeCtrlIcon_File : -1
-    @treectrl.insert_item(@treectrl.get_root_item(), image, "2nd item")
+    @treectrl.insert_item(@treectrl.get_root_item(), -1, "2nd item", image)
   end
 
   def on_add_item(event)

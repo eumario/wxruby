@@ -45,7 +45,7 @@ h2. See also
 h2. Methods
 
 * "AcceleratorTable.new":#AcceleratorTable_new
-* "AcceleratorTable#ok":#AcceleratorTable_ok
+* "AcceleratorTable#isok":#AcceleratorTable_isok
 
 </div>
 
@@ -60,9 +60,9 @@ h4. Parameters
 
 * _entries_ The array of entries.
 
-h3(#AcceleratorTable_ok). AcceleratorTable#ok
+h3(#AcceleratorTable_isok). AcceleratorTable#is_ok
 
- Boolean *ok*()
+ Boolean *is_ok*()
 
 Returns true if the accelerator table is valid.
 

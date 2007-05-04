@@ -19,10 +19,12 @@ public:
   virtual bool DisplaySection(int  sectionNo ) ;
   virtual bool DisplayTextPopup(const wxString&  text , const wxPoint&  pos ) ;
   virtual wxFrame * GetFrameParameters(wxSize *  size = NULL, wxPoint *  pos = NULL, bool * newFrameEachTime = NULL) ;
+  virtual wxWindow* GetParentWindow();
   virtual bool KeywordSearch(const wxString&  keyWord ) ;
   virtual bool LoadFile(const wxString&  file = wxT("")) ;
   virtual void OnQuit() ;
   virtual void SetFrameParameters(const wxString &  title , const wxSize &  size , const wxPoint &  pos = wxDefaultPosition, bool  newFrameEachTime = false) ;
+  virtual void SetParentWindow(wxWindow* win);
   virtual void SetViewer(const wxString&  viewer , long  flags ) ;
   virtual bool Quit() ;
 };
