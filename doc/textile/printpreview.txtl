@@ -26,7 +26,7 @@ h2. Methods
 * "PrintPreview#get_min_page":#PrintPreview_getminpage
 * "PrintPreview#get_printout":#PrintPreview_getprintout
 * "PrintPreview#get_printout_for_printing":#PrintPreview_getprintoutforprinting
-* "PrintPreview#ok":#PrintPreview_ok
+* "PrintPreview#is_ok":#PrintPreview_ok
 * "PrintPreview#paint_page":#PrintPreview_paintpage
 * "PrintPreview#print":#PrintPreview_print
 * "PrintPreview#render_page":#PrintPreview_renderpage
@@ -119,9 +119,9 @@ Gets the printout object to be used for printing from within the preview interfa
 or NULL if none exists.
 
 
-h3(#PrintPreview_ok). PrintPreview#ok
+h3(#PrintPreview_isok). PrintPreview#is_ok
 
- Boolean *ok*()
+ Boolean *is_ok*()
 
 Returns true if the PrintPreview is valid, false otherwise. It could return false if there was a
 problem initializing the printer device context (current printer not set, for example).
