@@ -28,8 +28,8 @@
 #include <wx/dcbuffer.h>
 
 
-#if ! wxCHECK_VERSION(2,6,3)
-#error "wxRuby requires WxWidgets version 2.6.3"
+#if ! wxCHECK_VERSION(2,8,3)
+#error "This version of wxRuby requires WxWidgets 2.8.3 or greater"
 #endif
 
 extern void GcMarkDeleted(void *);
