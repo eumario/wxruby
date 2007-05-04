@@ -9,7 +9,6 @@ if ENV['WXRUBY_VERSION']
   File.open(VERSION_FILE, 'w') do | version_file |
     version_file.puts "module Wx"
     version_file.puts "  WXRUBY_VERSION    = '#{WXRUBY_VERSION}'"
-    version_file.puts "  WXWIDGETS_VERSION = '2.6.3'"
     version_file.puts "end"
   end
 elsif File.exists?(VERSION_FILE)

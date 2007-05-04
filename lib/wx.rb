@@ -18,9 +18,13 @@ Wx = Wxruby2
 begin
   require 'wx/version'
 rescue LoadError
-  Wx::WXWIDGETS_VERSION = '0.0.0'
   Wx::WXRUBY_VERSION = '0.0.0'
 end
+# Convenience string for WxWidgets version info
+Wx::WXWIDGETS_VERSION = '%i.%i.%i' % [ Wx::WXWIDGETS_MAJOR_VERSION,
+                                       Wx::WXWIDGETS_MINOR_VERSION,
+                                       Wx::WXWIDGETS_RELEASE_NUMBER ]
+
 
 # Load in all the class extension methods written in ruby
 class_files = File.join( File.dirname(__FILE__), 'wx', 'classes', '*.rb')
