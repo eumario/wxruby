@@ -58,7 +58,7 @@ class ListctrlFrame < Wx::Frame
   end
   
   def show_color(color)
-    if color.ok
+    if color.is_ok
       return '(%i, %i, %i)' % [color.red, color.green, color.blue]
     else
       return '(N/A)'
