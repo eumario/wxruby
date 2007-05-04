@@ -21,6 +21,7 @@
 #include <wx/listbase.h>
 //#include <wx/dcbuffer.h>
 
+
 // All of these exist on only one platform, so in those
 // cases I'm defining them so the compiler doesn't freak out
 //
@@ -36,6 +37,13 @@
 #endif // X11
 
 %}
+
+// Version numbers from wx/version.h
+%constant const int wxWXWIDGETS_MAJOR_VERSION = wxMAJOR_VERSION;
+%constant const int wxWXWIDGETS_MINOR_VERSION = wxMINOR_VERSION;
+%constant const int wxWXWIDGETS_RELEASE_NUMBER = wxRELEASE_NUMBER;
+%constant const int wxWXWIDGETS_SUBRELEASE_NUMBER = wxSUBRELEASE_NUMBER;
+// WXWIDGETS_VERSION is defined in lib/wx/version.rb
 
 
 //** ---------------------------------------------------------------------------- **
