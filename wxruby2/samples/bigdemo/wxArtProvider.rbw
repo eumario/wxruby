@@ -114,7 +114,7 @@ class MyArtProvider < Wx::ArtProvider
         #    bmp = make_bitmap("tick.png")
         end
 
-        if bmp.ok
+        if bmp.is_ok
             @log.write_text("MyArtProvider: providing #{artid}:#{client} at #{size.x}x#{size.y}")
         end
         bmp
@@ -229,7 +229,7 @@ class TestPanel < Wx::Panel
 
         bmp = Wx::ArtProvider.get_bitmap(@artid, @client, Wx::Size.new(16,16))
 
-        if not bmp.ok
+        if not bmp.is_ok
             bmp = Wx::Bitmap.new(16,16)
             clear_bmp(bmp)
         end
@@ -238,7 +238,7 @@ class TestPanel < Wx::Panel
 
         bmp = Wx::ArtProvider::get_bitmap(@artid, @client, Wx::Size.new(32,32))
 
-        if not bmp.ok
+        if not bmp.is_ok
             bmp = Wx::Bitmap.new(32,32)
             clear_bmp(bmp)
         end
@@ -247,7 +247,7 @@ class TestPanel < Wx::Panel
 
         bmp = Wx::ArtProvider::get_bitmap(@artid, @client, Wx::Size.new(48,48))
 
-        if not bmp.ok
+        if not bmp.is_ok
             bmp = Wx::Bitmap.new(48,48)
             clear_bmp(bmp)
         end
