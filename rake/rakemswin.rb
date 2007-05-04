@@ -15,7 +15,7 @@ $link_output_flag = "/dll /out:"
 
 # native Windows - requires a static build of wxWindows
 $WXDIR=ENV['WXWIN']
-$WXVERSION = '26'
+$WXVERSION = '28'
 
 if $debug_build
     $DEBUGPOSTFIX='d'
@@ -32,28 +32,31 @@ end
 $POSTFIX = $UNICODEPOSTFIX + $DEBUGPOSTFIX
 
 
+$WXSRC=File.join("#$WXDIR","src","msw")
+$WXINC=File.join("#$WXDIR","include")
+$WXLIBDIR=File.join("#$WXDIR","lib","vc_lib")
+$INCTEMP=File.join("#$WXDIR","lib","vc_lib","msw#{$POSTFIX}")
 
-$WXSRC="#$WXDIR/src/msw"
-$WXINC="#$WXDIR/include"
-$WXLIBDIR="#$WXDIR/lib/vc_lib"
-$INCTEMP="#$WXDIR/lib/vc_lib/msw#{$POSTFIX}"
+# wxWidgets libraries that should be linked into wxRuby
+# odbc and db_table not required by wxruby
+windows_libs = %W|wxbase#{$WXVERSION}#{$POSTFIX}
+                  wxbase#{$WXVERSION}#{$POSTFIX}_net 
+                  wxbase#{$WXVERSION}#{$POSTFIX}_xml
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_adv
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_core
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_html
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_media
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_xrc
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_aui
+                  wxexpat#{$DEBUGPOSTFIX}
+                  wxjpeg#{$DEBUGPOSTFIX}
+                  wxpng#{$DEBUGPOSTFIX}
+                  wxtiff#{$DEBUGPOSTFIX}
+                  wxzlib#{$DEBUGPOSTFIX}
+                  wxregex#{$POSTFIX}|
 
-$wx_libs =  "#$WXLIBDIR/wxbase26#{$POSTFIX}.lib"       
-$wx_libs += " #$WXLIBDIR/wxbase26#{$POSTFIX}_net.lib"
-$wx_libs += " #$WXLIBDIR/wxbase26#{$POSTFIX}_odbc.lib"
-$wx_libs += " #$WXLIBDIR/wxbase26#{$POSTFIX}_xml.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_adv.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_core.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_dbgrid.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_html.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_media.lib"
-$wx_libs += " #$WXLIBDIR/wxmsw26#{$POSTFIX}_xrc.lib"
-$wx_libs += " #$WXLIBDIR/wxexpat#{$DEBUGPOSTFIX}.lib"
-$wx_libs += " #$WXLIBDIR/wxjpeg#{$DEBUGPOSTFIX}.lib"
-$wx_libs += " #$WXLIBDIR/wxpng#{$DEBUGPOSTFIX}.lib"
-$wx_libs += " #$WXLIBDIR/wxregex#{$DEBUGPOSTFIX}.lib"
-$wx_libs += " #$WXLIBDIR/wxtiff#{$DEBUGPOSTFIX}.lib"
-$wx_libs += " #$WXLIBDIR/wxzlib#{$DEBUGPOSTFIX}.lib"   
+windows_libs.map! { | lib | File.join($WXLIBDIR, "#{lib}.lib") }
+$wx_libs = windows_libs.join(' ')
 
 $wx_cppflags = [
     "-I#$WXINC", "-D__WXMSW__",
@@ -71,7 +74,8 @@ $extra_cppflags = [
 if $debug_build
     $ruby_cppflags.gsub!(/-MD/," /MDd");
     $ruby_cppflags.gsub!(/-O[A-Za-z0-9-]*/, "/Od")
-    $ruby_cppflags += " -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
+    $ruby_cppflags += " -Zi -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
+    $extra_ldflags += "/DEBUG"
 else
     $ruby_cppflags += " -DNDEBUG "
 end

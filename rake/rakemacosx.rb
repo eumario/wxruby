@@ -17,7 +17,7 @@ $ruby_cppflags.gsub!(/-g/,"")
 
 $wx_libs.chomp!
 $wx_libs.gsub!(/-framework (Cocoa|WebKit)/, '')
-$wx_libs << ' -lobjc -framework Foundation'
+$wx_libs << ' -framework Foundation -framework Appkit'
 
 $extra_cppflags = '-x objective-c++'
 $extra_ldflags = "-dynamic -bundle -flat_namespace -undefined suppress"

@@ -5,11 +5,9 @@
 
 
 // First hide the old Wx definitions of these methods - which segfault
-// TODO - these are not ACTUALLY getting ignored, whether they are 
-// named by method only or with full class qualification. Perh Swig 1.3.29 bug?
-%ignore GetClientData(int n) const;
-%ignore GetClientObject(int n) const;
-%ignore SetClientObject(int  n, wxClientData * data);
+%ignore *::GetClientData(int n) const;
+%ignore *::GetClientObject(int n) const;
+%ignore *::SetClientObject(int  n, wxClientData * data);
 
 %{
   // Returns a ruby object stored as client data
@@ -26,11 +24,15 @@
 	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
 	if ( rb_ivar_get(rb_obj, rb_intern("@__swig_dead__") ) == Qtrue )
 	  return;
-
+	fflush(stdout);
+	
 	wxControlWithItems* wx_cwi = (wxControlWithItems*) ptr;
 	int count = wx_cwi->GetCount();
 	if ( count == 0 )
 	  return;
+    if(!wx_cwi->HasClientObjectData()&&!wx_cwi->HasClientUntypedData())
+        return; // Control containing only strings
+
 	for (int i = 0; i < count; ++i)
 	  {
 		VALUE object = (VALUE) wx_cwi->GetClientData(i);

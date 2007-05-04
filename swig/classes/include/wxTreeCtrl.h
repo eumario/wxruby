@@ -1,4 +1,4 @@
-// Copyright 2006 by Kevin Smith
+// Copyright 2006 - 2007 by Kevin Smith
 // released under the MIT-style wxruby2 license
 
 #if !defined(_wxTreeCtrl_h_)
@@ -148,6 +148,7 @@ public:
         // is item text in bold font?
     bool IsBold(const wxTreeItemId& item) const;
         // does the layout include space for a button?
+	bool IsEmpty() const;
 
     // number of children
     // ------------------
@@ -174,13 +175,6 @@ public:
         // get the parent of this item (may return NULL if root)
     wxTreeItemId GetItemParent(const wxTreeItemId& item) const;
 
-#if WXWIN_COMPATIBILITY_2_2
-        // deprecated:  Use GetItemParent instead.
-    wxTreeItemId GetParent(const wxTreeItemId& item) const;
-
-        // Expose the base class method hidden by the one above. Not deprecatable.
-    wxWindow *GetParent() const;
-#endif  // WXWIN_COMPATIBILITY_2_2
 
         // for this enumeration function you must pass in a "cookie" parameter
         // which is opaque for the application but is necessary for the library
@@ -234,12 +228,13 @@ public:
                             int image = -1, int selectedImage = -1,
                             wxTreeItemData *data = NULL);
 
+		// NOTE! - This version of InsertItem is implemented in the .i file, as insert_item_before
         // insert a new item before the one with the given index
-    virtual wxTreeItemId InsertItem(const wxTreeItemId& parent,
-                            size_t index,
-                            const wxString& text,
-                            int image = -1, int selectedImage = -1,
-                            wxTreeItemData *data = NULL);
+    //virtual wxTreeItemId InsertItem(const wxTreeItemId& parent,
+    //                        size_t index,
+    //                        const wxString& text,
+    //                        int image = -1, int selectedImage = -1,
+    //                        wxTreeItemData *data = NULL);
 
         // insert a new item in as the last child of the parent
     virtual wxTreeItemId AppendItem(const wxTreeItemId& parent,
@@ -256,11 +251,15 @@ public:
         // NB: this won't send wxEVT_COMMAND_TREE_ITEM_DELETED events
     void DeleteAllItems();
 
-        // expand this item
     void Expand(const wxTreeItemId& item);
+	void ExpandAll();
+	void ExpandAllChildren(const wxTreeItemId& item);
 
-        // collapse the item without removing its children
+
     void Collapse(const wxTreeItemId& item);
+	void CollapseAll();
+	void CollapseAllChildren(const wxTreeItemId& item);
+
         // collapse the item and remove all children
     void CollapseAndReset(const wxTreeItemId& item);
         // toggles the current state
@@ -303,6 +302,9 @@ public:
         // edited, NULL otherwise (it's assumed that no more than one item may
         // be edited simultaneously)
     wxTextCtrl* GetEditControl() const;
+
+	bool GetQuickBestSize() const;
+	void SetQuickBestSize(bool quickBestSize);
 
     // sorting
         // this function is called to compare 2 items and should return -1, 0
@@ -365,8 +367,7 @@ public:
         // Only for internal use right now, but should probably be public
     wxTreeItemId GetNext(const wxTreeItemId& item) const;
 	bool HasChildren(const wxTreeItemId& item) const;
-        // expand this item and all subitems recursively
-    void ExpandAll(const wxTreeItemId& item);	
+
     void AdjustMyScrollbars();
     void Edit( const wxTreeItemId& item );
     void OnSetFocus( wxFocusEvent &event );
@@ -374,7 +375,7 @@ public:
     void OnChar( wxKeyEvent &event );
     void OnMouse( wxMouseEvent &event );
     void OnGetToolTip( wxTreeEvent &event );
-    virtual wxSize DoGetBestSize() const;
+    // virtual wxSize DoGetBestSize() const;
 #endif
 };
 

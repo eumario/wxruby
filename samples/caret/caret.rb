@@ -107,16 +107,17 @@ class MyCanvas < ScrolledWindow
   end
 
   def create_caret
-    dc = ClientDC.new(self)
-    dc.set_font(@font)
-    @height_char = dc.get_char_height
-    @width_char = dc.get_char_width
+    paint do | dc |
+      dc.set_font(@font)
+      @height_char = dc.get_char_height
+      @width_char = dc.get_char_width
 
-    caret = Caret.new(self, Size.new(@width_char, @height_char))
-    set_caret(caret)
+      caret = Caret.new(self, Size.new(@width_char, @height_char))
+      set_caret(caret)
 
-    caret.move(Point.new(@x_margin, @y_margin))
-    caret.show
+      caret.move(Point.new(@x_margin, @y_margin))
+      caret.show
+    end
   end
 
   def move_caret(x,y)
@@ -166,15 +167,14 @@ class MyCanvas < ScrolledWindow
       caret.hide
     end
 
-    dc = PaintDC.new(self)
-    prepare_dc(dc)
-    dc.clear
+    paint do | dc |
+      dc.clear
+      dc.set_font(@font)
 
-    dc.set_font(@font)
-
-    for y in 0 ... @y_chars
-      line = @text[@x_chars * y,@x_chars]
-      dc.draw_text( line, @x_margin, @y_margin + y * @height_char )
+      for y in 0 ... @y_chars
+        line = @text[@x_chars * y,@x_chars]
+        dc.draw_text( line, @x_margin, @y_margin + y * @height_char )
+      end
     end
 
     if caret
@@ -204,21 +204,8 @@ class MyCanvas < ScrolledWindow
       ch = event.key_code
       if !event.alt_down and (ch >= K_SPACE) and (ch < K_DELETE)
         self[@x_caret, @y_caret] = ch.chr
-
-        caret = get_caret
-        if caret
-          caret.hide
-        end
-
-        dc = ClientDC.new(self)
-        dc.set_font(@font)
-        dc.set_background_mode(SOLID) # overwrite old value
-        dc.draw_text(ch.chr, @x_margin + @x_caret * @width_char,
-                     @y_margin + @y_caret * @height_char )
+        refresh
         next_char
-        if caret
-          caret.show
-        end
       else
         event.skip
       end

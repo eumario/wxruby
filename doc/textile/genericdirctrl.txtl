@@ -39,6 +39,7 @@ h2. Methods
 * "GenericDirCtrl#init":#GenericDirCtrl_init
 * "GenericDirCtrl#collapse_tree":#GenericDirCtrl_collapsetree
 * "GenericDirCtrl#expand_path":#GenericDirCtrl_expandpath
+* "GenericDirCtrl#collapse_path":#GenericDirCtrl_collapsepath
 * "GenericDirCtrl#get_default_path":#GenericDirCtrl_getdefaultpath
 * "GenericDirCtrl#get_path":#GenericDirCtrl_getpath
 * "GenericDirCtrl#get_file_path":#GenericDirCtrl_getfilepath
@@ -52,6 +53,7 @@ h2. Methods
 * "GenericDirCtrl#set_filter":#GenericDirCtrl_setfilter
 * "GenericDirCtrl#set_filter_index":#GenericDirCtrl_setfilterindex
 * "GenericDirCtrl#set_path":#GenericDirCtrl_setpath
+* "GenericDirCtrl#show_hidden":#GenericDirCtrl_showhidden
 
 </div>
 
@@ -118,6 +120,12 @@ h3(#GenericDirCtrl_expandpath). GenericDirCtrl#expand_path
  Boolean *expand_path*(%(arg-type)String% path)
 
 Tries to expand as much of the given path as possible, so that the filename or directory is visible in the tree control.
+
+h3(#GenericDirCtrl_collapsepath). GenericDirCtrl#collapse_path
+
+ Boolean *collapse_path*(%(arg-type)String% path)
+
+Collapse the given path.
 
 h3(#GenericDirCtrl_getdefaultpath). GenericDirCtrl#get_default_path
 
@@ -199,4 +207,13 @@ h3(#GenericDirCtrl_setpath). GenericDirCtrl#set_path
   *set_path*(%(arg-type)String% path)
 
 Sets the current path.
+
+h3(#GenericDirCtrl_ShowHidden). GenericDirCtrl#show_hidden
+
+  *show_hidden*(%(arg-type)Boolean% show)
+
+h4. Parameters
+
+* _show_ If true, hidden folders and files will be displayed by the
+control. If false, they will not be displayed.
 

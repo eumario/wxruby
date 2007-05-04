@@ -46,8 +46,7 @@ class MyFrame < Frame
       set_window_shape
     end
 
-    dc = ClientDC.new(self)
-    dc.draw_bitmap(@bmp, 0, 0, true)
+    paint { | dc | dc.draw_bitmap(@bmp, 0, 0, true) }
   end
 
   def set_window_shape
@@ -65,8 +64,7 @@ class MyFrame < Frame
   end
 
   def on_paint
-    dc = PaintDC.new(self)
-    dc.draw_bitmap(@bmp, 0, 0, true)
+    paint { | dc | dc.draw_bitmap(@bmp, 0, 0, true) }
   end
     
   def on_exit

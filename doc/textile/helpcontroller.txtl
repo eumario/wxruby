@@ -57,10 +57,12 @@ h2. Instance Methods
 * "HelpController#display_section":#HelpController_displaysection
 * "HelpController#display_text_popup":#HelpController_displaytextpopup
 * "HelpController#get_frame_parameters":#HelpController_getframeparameters
+* "HelpController#get_parent_window":#HelpController_getparentwindow
 * "HelpController#keyword_search":#HelpController_keywordsearch
 * "HelpController#load_file":#HelpController_loadfile
 * "HelpController#on_quit":#HelpController_onquit
 * "HelpController#set_frame_parameters":#HelpController_setframeparameters
+* "HelpController#set_parent_window":#HelpController_setparentwindow
 * "HelpController#set_viewer":#HelpController_setviewer
 * "HelpController#quit":#HelpController_quit
 
@@ -188,6 +190,13 @@ h4. Parameters
 * _flags_ This defaults to HELP_NETSCAPE for ExtHelpController, indicating
 that the viewer is a variant of Netscape Navigator.
 
+h3(#HelpController_getparentwindow). HelpController#get_parent_window
+
+ Boolean *get_parent_window*()
+
+Returns the window to be used as the parent for the help window. This window is used
+by CHMHelpController, WinHelpController and HtmlHelpController.
+
 h3(#HelpController_keywordsearch). HelpController#keyword_search
 
  Boolean *keyword_search*(%(arg-type)String% keyWord, 
@@ -239,6 +248,13 @@ page title) and also the size and position of the frame if the frame is already
 open. _newFrameEachTime_ is ignored.
 
 For all other help controllers this function has no effect.
+
+h3(#HelpController_setparentwindow). HelpController#set_parent_window
+
+  *set_parent_window*(%(arg-type)Window% parentWindow)
+
+Sets the window to be used as the parent for the help window. This is used
+by CHMHelpController, WinHelpController and HtmlHelpController.
 
 h3(#HelpController_setviewer). HelpController#set_viewer
 

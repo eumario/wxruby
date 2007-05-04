@@ -5,7 +5,7 @@
 
 #if !defined(_wxHtmlWindow_h_)
 #define _wxHtmlWindow_h_
-class wxHtmlWindow : public wxScrolledWindow
+class wxHtmlWindow : public wxScrolledWindow,public wxHtmlWindowMouseHelper
 {
 public:
    wxHtmlWindow() ;
@@ -24,8 +24,8 @@ public:
   bool HistoryForward() ;
   virtual bool LoadFile(const wxFileName&  filename ) ;
   virtual bool LoadPage(const wxString&  location ) ;
-  virtual void OnCellClicked(wxHtmlCell  *cell , wxCoord  x , wxCoord  y , const wxMouseEvent&  event ) ;
-  virtual void OnCellMouseHover(wxHtmlCell  *cell , wxCoord  x , wxCoord  y ) ;
+ // virtual bool OnCellClicked(wxHtmlCell  *cell , wxCoord  x , wxCoord  y , const wxMouseEvent&  event ) ;
+ // virtual void OnCellMouseHover(wxHtmlCell  *cell , wxCoord  x , wxCoord  y ) ;
   virtual void OnLinkClicked(const wxHtmlLinkInfo&  link ) ;
   virtual wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType  type , const wxString&  url , wxString * redirect ) const;
   virtual void OnSetTitle(const wxString&  title ) ;

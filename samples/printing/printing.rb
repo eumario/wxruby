@@ -110,7 +110,7 @@ class MyFrame < Wx::Frame
 
     dc.draw_icon( my_icon, 100, 100)
 
-    if @bitmap.ok
+    if @bitmap.is_ok
       dc.draw_bitmap( @bitmap, 10, 10 )
     end
   end

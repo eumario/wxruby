@@ -53,12 +53,14 @@ elsif $debug_build
 end
 
 if not $unicode_build
-        puts('Disabling UNICODE build')
+  puts('Disabling UNICODE build')
 end
 
 if($verbose_debug)
-	puts('Enabling VERBOSE debugging output')
-	$verbose_flag = ' -DwxDEBUG=1 '
+  puts('Enabling VERBOSE debugging output')
+  $verbose_flag = ' -DwxDEBUG=1 '
+else
+  $verbose_flag = ''
 end
 
 
@@ -207,10 +209,10 @@ def add_initializers(cpp_file)
 end
 
 def do_swig(swig_file, cpp_file, options)
-	if(!$found_good_swig)
-		if(!have_good_swig)
-	        raise "Couldn't find required SWIG (minimum #{$swig_minimum_version})."
-		end
+	if not defined? $found_good_swig 
+      unless have_good_swig
+        raise "Couldn't find required SWIG (minimum #{$swig_minimum_version})."
+      end
 	end
 	$found_good_swig = true
 	force_mkdir($src_dir)

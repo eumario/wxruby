@@ -5,6 +5,7 @@
 
 #if !defined(_wxWindow_h_)
 #define _wxWindow_h_
+
 class wxWindow : public wxEvtHandler
 {
 public:
@@ -19,12 +20,13 @@ public:
 
   virtual void AddChild(wxWindow*  child ) ;
   void CaptureMouse() ;
+
   void Center(int  direction ) ;
-  void CenterOnParent(int  direction ) ;
-  void CenterOnScreen(int  direction ) ;
   void Centre(int direction = wxBOTH) ;
+
+  void CenterOnParent(int  direction ) ;
   void CentreOnParent(int direction = wxBOTH) ;
-  void CentreOnScreen(int direction = wxBOTH) ;
+
   void ClientToScreen(int*  x_INOUT , int*  y_INOUT ) const;
   wxPoint ClientToScreen(const wxPoint&  pt ) const;
   bool Close(bool force = false) ;
@@ -47,14 +49,14 @@ public:
   virtual void FitInside() ;
   virtual void Freeze() ;
   //wxAccessible* GetAccessible();
-  wxSize GetAdjustedBestSize() const;
+  wxSize GetEffectiveMinSize() const;
   wxColour GetBackgroundColour() const;
   wxSize GetBestSize() const;
   wxCaret * GetCaret() const;
   static wxWindow * GetCapture() ;
   virtual int GetCharHeight() const;
   virtual int GetCharWidth() const;
-  wxList& GetChildren() ;
+  wxWindowList& GetChildren() ;
   void GetClientSize(int*  width , int*  height ) const;
   wxSize GetClientSize() const;
   wxLayoutConstraints* GetConstraints() const;
@@ -66,6 +68,8 @@ public:
   wxColour GetForegroundColour() ;
   wxWindow* GetGrandParent() const;
   void* GetHandle() const;
+  virtual wxString GetHelpTextAtPoint(const wxPoint point, 
+									  wxHelpEvent::Origin origin) const;
   wxString GetHelpText() const;
   int GetId() const;
   virtual wxString  GetLabel() const;
@@ -77,23 +81,31 @@ public:
   virtual int GetScrollThumb(int  orientation ) ;
   virtual int GetScrollPos(int  orientation ) ;
   virtual int GetScrollRange(int  orientation ) ;
+  virtual void GetScreenPosition(int* x, int* y) const;
+  wxPoint GetScreenPosition() const;
+  virtual wxRect GetScreenRect() const;
   void GetSize(int*  width , int*  height ) const;
   wxSize GetSize() const;
   wxSizer * GetSizer() const;
   virtual void GetTextExtent(const wxString&  string , int * x , int * y , int * descent = NULL, int * externalLeading = NULL, wxFont * font = NULL) const;
-  virtual wxString GetTitle() ;
   wxToolTip* GetToolTip() const;
   wxRegion GetUpdateRegion() const;
   wxValidator* GetValidator();
   void GetVirtualSize(int*  width , int*  height ) const;
   wxSize GetVirtualSize() const;
+  wxSize GetWindowBorderSize() const;
   long GetWindowStyleFlag() const;
   virtual bool HasCapture() const;
+  bool HasFlag(int flag) const;
+  virtual bool HasMultiplePages() const;
   bool Hide() ;
   void InitDialog() ;
+  virtual bool IsDoubleBuffered() const;
   virtual bool IsEnabled() const;
+  virtual bool IsFrozen() const;
   virtual bool IsRetained() const;
   virtual bool IsShown() const;
+  virtual bool IsShownOnScreen() const;
   bool IsTopLevel() const;
   void Layout() ;
   void Lower() ;
@@ -140,7 +152,8 @@ public:
   void SetFont(const wxFont&  font ) ;
   virtual bool SetForegroundColour(const wxColour&  colour );
   virtual void SetHelpText(const wxString&  helpText ) ;
-  void SetId(int  id ) ;
+  void SetId(int  id );
+  void SetInitialSize(const wxSize& size = wxDefaultSize);
   virtual void SetName(const wxString&  name ) ;
 #if 0 // deprecated
   virtual void SetPalette(const wxPalette*  palette );
@@ -170,7 +183,6 @@ public:
                        const wxSize& incSize=wxDefaultSize);
   void SetSizer(wxSizer*  sizer , bool  deleteOld = true) ;
   void SetSizerAndFit(wxSizer*  sizer , bool  deleteOld = true) ;
-  virtual void SetTitle(const wxString&  title ) ;
   virtual void SetThemeEnabled(bool  enable ) ;
   virtual void SetValidator(const wxValidator&  validator ) ;
   void SetToolTip(const wxString&  tip ) ;
@@ -193,8 +205,6 @@ public:
   wxWindowVariant GetWindowVariant() const;
 	void InvalidateBestSize();
 	void CacheBestSize(const wxSize& size) const;
-	wxSize GetBestFittingSize() const;
-	void SetBestFittingSize(const wxSize& size=wxDefaultSize);
   virtual wxSize GetMaxSize() const;
   virtual wxSize GetMinSize() const;
   void SetMinSize(const wxSize& minSize);
@@ -231,6 +241,7 @@ public:
   bool PageDown();
 	virtual void SetLabel(const wxString& label);
 	wxAcceleratorTable *GetAcceleratorTable();
+	bool ToggleWindowStyle(int flag);
 };
 
 

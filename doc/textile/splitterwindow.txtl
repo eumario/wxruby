@@ -58,7 +58,7 @@ h2. Methods
 * "SplitterWindow#get_split_mode":#SplitterWindow_getsplitmode
 * "SplitterWindow#get_window_1":#SplitterWindow_getwindow1
 * "SplitterWindow#get_window_2":#SplitterWindow_getwindow2
-* "SplitterWindow#initialize":#SplitterWindow_initialize
+* "SplitterWindow#init":#SplitterWindow_init
 * "SplitterWindow#is_split":#SplitterWindow_issplit
 * "SplitterWindow#on_double_click_sash":#SplitterWindow_ondoubleclicksash
 * "SplitterWindow#on_unsplit":#SplitterWindow_onunsplit
@@ -99,7 +99,7 @@ h4. Parameters
 h4. Remarks
 
 After using this constructor, you must create either one or two subwindows
-with the splitter window as parent, and then call one of "SplitterWindow#initialize":splitterwindow.html#SplitterWindow_initialize, "SplitterWindow#split_vertically":splitterwindow.html#SplitterWindow_splitvertically and "SplitterWindow#split_horizontally":splitterwindow.html#SplitterWindow_splithorizontally in
+with the splitter window as parent, and then call one of "SplitterWindow#init":splitterwindow.html#SplitterWindow_init, "SplitterWindow#split_vertically":splitterwindow.html#SplitterWindow_splitvertically and "SplitterWindow#split_horizontally":splitterwindow.html#SplitterWindow_splithorizontally in
 order to set the pane(s).
 
 You can create two windows, with one hidden when not being shown; or you can
@@ -107,7 +107,7 @@ create and delete the second pane on demand.
 
 h4. See also
 
-"SplitterWindow#initialize":splitterwindow.html#SplitterWindow_initialize, "SplitterWindow#split_vertically":splitterwindow.html#SplitterWindow_splitvertically, "SplitterWindow#split_horizontally":splitterwindow.html#SplitterWindow_splithorizontally, "SplitterWindow#create":splitterwindow.html#SplitterWindow_create
+"SplitterWindow#init":splitterwindow.html#SplitterWindow_init, "SplitterWindow#split_vertically":splitterwindow.html#SplitterWindow_splitvertically, "SplitterWindow#split_horizontally":splitterwindow.html#SplitterWindow_splithorizontally, "SplitterWindow#create":splitterwindow.html#SplitterWindow_create
 
   *destructor*()
 
@@ -176,9 +176,9 @@ h3(#SplitterWindow_getwindow2). SplitterWindow#get_window_2
 
 Returns the right/bottom pane.
 
-h3(#SplitterWindow_initialize). SplitterWindow#initialize
+h3(#SplitterWindow_init). SplitterWindow#init
 
-  *initialize*(%(arg-type)Window% window)
+  *init*(%(arg-type)Window% window)
 
 Initializes the splitter window to have one pane.  The child window is
 shown if it is currently hidden.

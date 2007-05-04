@@ -19,8 +19,9 @@ File.open(filename, "w") do | out |
 puts("core_name: #{core_name}")
 	wx_name = "wx"+core_name
 	
-	if(core_name == "App")
+	if core_name == "App"
 		found_app_constructor = false
+		wx_name = core_name
 	else
 		found_app_constructor = true
 	end
@@ -30,7 +31,7 @@ puts("core_name: #{core_name}")
 	skip_deleter_fix = false
 	
 	director_class = nil
-
+	director_class_name = "SwigDirector_#{wx_name}"
 	File.foreach(broken) do | line |
     
 		# if we found our director class constructor,
@@ -51,6 +52,11 @@ puts("core_name: #{core_name}")
 		# in the Director constructor, 
         if(line.index("Director(VALUE self"))
 			# make a note of this object
+			found_director_constructor = true
+		end
+		# class specific constructor
+	if(line.index(director_class_name+"::"+director_class_name))
+			# make a note of this object
 			lines = [line]
 			lines << '#ifdef wxDEBUG'
 			lines << '    printf("' + this_module + '" " new Director %p\n", this);'
@@ -60,10 +66,11 @@ puts("core_name: #{core_name}")
 			line = lines.join("\n")    
 			found_director_constructor = true
 		end
-
-		# in the Director destructor,
-        if(line.index("~Director()"))
+	if(line.index("~"+director_class_name))
 			# make a note that this object has been deleted
+			# it's done in class specific destructor
+			# because multiple inheritance causes
+			# this!=(Director *)this in some compilers
 			lines = [line]
 			lines << '#ifdef wxDEBUG'
 			lines << '    printf("' + this_module + '" " ~Director %p\n", this);'
@@ -73,25 +80,27 @@ puts("core_name: #{core_name}")
             lines << '    rb_ivar_set(rb_obj, rb_intern("@__swig_dead__"), Qtrue);'
 			lines << '    GcMarkDeleted(this);'
 			line = lines.join("\n")
+		end
+		# in the Director destructor,
+        if(line.index("~Director()"))
 			found_director_destructor = true
-        end
+	        end
     
 		# where the C++ object was being deleted,    
         if(line.index("delete arg1") && !skip_deleter_fix && director_class)
 			lines = []
-			lines << "    Swig::Director* director = (Swig::Director*)(#{director_class}*)arg1;"
 			lines << '#ifdef wxDEBUG'
-			lines << '    printf("' + this_module + '" " Checking %p\n", director);'
+			lines << '    printf("' + this_module + '" " Checking %p\n", arg1);'
 			lines << '#endif'
-			lines << "    if (GcIsDeleted(director))"
+			lines << "    if (GcIsDeleted(arg1))"
 			lines << "    {"
 			lines << '#ifdef wxDEBUG'
-			lines << "        printf(\"%p is already dead!\\n\", director);"
+			lines << "        printf(\"%p is already dead!\\n\", arg1);"
 			lines << '#endif'
 			lines << "        return;"
 			lines << "    }"
 			lines << '#ifdef wxDEBUG'
-			lines << "    printf(\"deleting %p\\n\", director);"
+			lines << "    printf(\"deleting %p\\n\", arg1);"
 			lines << "    fflush(stdout);"
 			lines << '#endif'
 			lines << "    delete arg1;"

@@ -3,11 +3,13 @@
 
 %include "../common.i"
 
+%module(directors="1") wxCalendarEvent
+
 %{
 #include <wx/calctrl.h>
 %}
 
-%module(directors="1") wxCalendarEvent
+%include "../shared/datetime.i"
 
 %import "include/wxObject.h"
 %import "include/wxEvent.h"

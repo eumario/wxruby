@@ -42,17 +42,9 @@ public:
 
   // override base class virtuals
   virtual void Delete(int n);
-
-  virtual bool SetFont( const wxFont &font );
-
   // items may be checked
   virtual bool IsChecked(size_t uiIndex) const;
   virtual void Check(size_t uiIndex, bool bCheck = true);
-
-  // return the index of the item at this position or wxNOT_FOUND
-  int HitTest(const wxPoint& pt) const { return DoHitTestItem(pt.x, pt.y); }
-  int HitTest(wxCoord x, wxCoord y) const { return DoHitTestItem(x, y); }
-
 
 };
 

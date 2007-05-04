@@ -1,82 +1,86 @@
-// Copyright 2004-2005 by Kevin Smith
+// Copyright 2004-2007 by Kevin Smith
 // released under the MIT-style wxruby2 license
 
 #if !defined(_wxDC_h_)
 #define _wxDC_h_
+
 class wxDC : public wxObject
 {
 public:
    wxDC() ;
   virtual  ~wxDC() ;
-  void BeginDrawing() ;
-  virtual bool Blit(wxCoord  xdest , wxCoord  ydest , wxCoord  width , wxCoord  height , wxDC*  source , wxCoord  xsrc , wxCoord  ysrc , int logicalFunc = wxCOPY, bool  useMask = false, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1)  = 0;
-  static bool CacheEnabled() ;
+  bool Blit(wxCoord  xdest , wxCoord  ydest , wxCoord  width , wxCoord  height , wxDC*  source , wxCoord  xsrc , wxCoord  ysrc , int logicalFunc = wxCOPY, bool  useMask = false, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1);
   void CalcBoundingBox(wxCoord  x , wxCoord  y ) ;
-  virtual void Clear()  = 0;
-  static void ClearCache() ;
-  virtual void CrossHair(wxCoord  x , wxCoord  y )  = 0;
+  void Clear();
+  virtual void ComputeScaleAndOrigin();
+  void CrossHair(wxCoord  x , wxCoord  y );
   void DestroyClippingRegion() ;
   wxCoord DeviceToLogicalX(wxCoord  x ) ;
   wxCoord DeviceToLogicalXRel(wxCoord  x ) ;
   wxCoord DeviceToLogicalY(wxCoord  y ) ;
   wxCoord DeviceToLogicalYRel(wxCoord  y ) ;
-  virtual void DrawArc(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , wxCoord  xc , wxCoord  yc ) = 0;
-  virtual void DrawBitmap(const wxBitmap&  bitmap , wxCoord  x , wxCoord  y , bool  transparent )  = 0;
+  void DrawArc(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , wxCoord  xc , wxCoord  yc );
+  void DrawBitmap(const wxBitmap&  bitmap , wxCoord  x , wxCoord  y , bool  transparent );
   void DrawCheckMark(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height ) ;
   void DrawCheckMark(const wxRect & rect ) ;
   void DrawCircle(wxCoord  x , wxCoord  y , wxCoord  radius ) ;
   void DrawCircle(const wxPoint&  pt , wxCoord  radius ) ;
-  virtual void DrawEllipse(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height )  = 0;
-  virtual void DrawEllipse(const wxPoint&  pt , const wxSize&  size )  = 0;
-  virtual void DrawEllipse(const wxRect&  rect )  = 0;
-  virtual void DrawEllipticArc(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double  start , double  end )  = 0;
-  virtual void DrawIcon(const wxIcon&  icon , wxCoord  x , wxCoord  y )  = 0;
-  virtual void DrawLine(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 )  = 0;
-  virtual void DrawLines(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0)  = 0;
-  virtual void DrawLines(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0)  = 0;
-  virtual void DrawPolygon(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE)  = 0;
-  virtual void DrawPolygon(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE)  = 0;
-  virtual void DrawPoint(wxCoord  x , wxCoord  y )  = 0;
-  virtual void DrawRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height )  = 0;
-  virtual void DrawRotatedText(const wxString&  text , wxCoord  x , wxCoord  y , double  angle )  = 0;
-  virtual void DrawRoundedRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double radius )  = 0;
+  void DrawEllipse(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height );
+  void DrawEllipse(const wxPoint&  pt , const wxSize&  size );
+  void DrawEllipse(const wxRect&  rect );
+  void DrawEllipticArc(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double  start , double  end );
+  void DrawIcon(const wxIcon&  icon , wxCoord  x , wxCoord  y );
+  virtual void DrawLabel(const wxString& text, const wxBitmap& image, const wxRect& rect, int alignment = wxALIGN_LEFT | wxALIGN_TOP, int indexAccel = -1, wxRect *rectBounding = NULL);
+  void DrawLabel(const wxString& text, const wxRect& rect, int alignment = wxALIGN_LEFT | wxALIGN_TOP, int indexAccel = -1);
+  void DrawLine(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 );
+  void DrawLines(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0);
+  void DrawLines(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0);
+  void DrawPolygon(int  n , wxPoint  points[] , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE);
+  void DrawPolygon(wxList * points , wxCoord xoffset = 0, wxCoord yoffset = 0, int  fill_style = wxODDEVEN_RULE);
+  void DrawPolyPolygon(int n, int count[], wxPoint points[], wxCoord xoffset = 0, wxCoord yoffset = 0, int fill_style = wxODDEVEN_RULE);
+  void DrawPoint(wxCoord  x , wxCoord  y );
+  void DrawRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height );
+  void DrawRotatedText(const wxString&  text , wxCoord  x , wxCoord  y , double  angle );
+  void DrawRoundedRectangle(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height , double radius );
   void DrawSpline(int n, wxPoint points[] ) ;
   void DrawSpline(wxList * points ) ;
   void DrawSpline(wxCoord  x1 , wxCoord  y1 , wxCoord  x2 , wxCoord  y2 , wxCoord  x3 , wxCoord  y3 ) ;
-  virtual  void DrawText(const wxString&  text , wxCoord  x , wxCoord  y )  = 0;
-  static void EnableCache(bool  enableCache ) ;
+   void DrawText(const wxString&  text , wxCoord  x , wxCoord  y );
   void EndDoc() ;
-  void EndDrawing() ;
   void EndPage() ;
   bool FloodFill(wxCoord  x , wxCoord  y , const wxColour&  colour , int style = wxFLOOD_SURFACE) ;
-  //wxBrush& GetBackground();
   const wxBrush& GetBackground() const;
   int GetBackgroundMode() const;
-  //wxBrush& GetBrush();
   const wxBrush& GetBrush() const;
-  virtual wxCoord GetCharHeight()  = 0;
-  virtual wxCoord GetCharWidth()  = 0;
+  wxCoord GetCharHeight();
+  wxCoord GetCharWidth();
   void GetClippingBox(wxCoord  *x , wxCoord  *y , wxCoord  *width , wxCoord  *height ) ;
-  //wxFont& GetFont();
   const wxFont& GetFont() const;
+  wxLayoutDirection GetLayoutDirection() const;
   int GetLogicalFunction() ;
   int GetMapMode() ;
-  bool GetOptimization() ;
-  //wxPen& GetPen();
+  void GetMultiLineTextExtent(const wxString& text,
+							  wxCoord *width,
+							  wxCoord *height,
+							  wxCoord *heightLine = NULL,
+							  wxFont *font = NULL) const;
+  wxSize GetMultiLineTextExtent(const wxString& string) const;
+  bool GetPartialTextExtents(const wxString& text, wxArrayInt& widths) const;
   const wxPen& GetPen() const;
-  virtual bool GetPixel(wxCoord  x , wxCoord  y , wxColour * colour )  = 0;
-  virtual void GetSize(wxCoord * width , wxCoord * height )  = 0;
-  //wxColour& GetTextBackground();
+  bool GetPixel(wxCoord  x , wxCoord  y , wxColour * colour );
+  wxSize GetPPI() const;
+  void GetSize(wxCoord * width , wxCoord * height );
+  wxSize GetSize() const;
+  void GetSizeMM(wxCoord *width, wxCoord *height) const;
+  wxSize GetSizeMM() const;
   const wxColour& GetTextBackground() const;
-  virtual void GetTextExtent(const wxString&  string , wxCoord * w , wxCoord * h , wxCoord * descent = NULL, wxCoord * externalLeading = NULL, wxFont * font = NULL)  = 0;
-    virtual void GetMultiLineTextExtent(const wxString& text,
-                                        wxCoord *width,
-                                        wxCoord *height,
-                                        wxCoord *heightLine = NULL,
-                                        wxFont *font = NULL);
-  //wxColour& GetTextForeground();
+  void GetTextExtent(const wxString&  string , wxCoord * w , wxCoord * h , wxCoord * descent = NULL, wxCoord * externalLeading = NULL, wxFont * font = NULL);
+  wxSize GetTextExtent(const wxString& string) const;
   const wxColour& GetTextForeground() const;
   void GetUserScale(double  *x , double  *y ) ;
+  void GradientFillConcentric(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour);
+  void GradientFillConcentric(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour, const wxPoint& circleCenter);
+  void GradientFillLinear(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour, wxDirection nDirection = wxEAST);
   wxCoord LogicalToDeviceX(wxCoord  x ) ;
   wxCoord LogicalToDeviceXRel(wxCoord  x ) ;
   wxCoord LogicalToDeviceY(wxCoord  y ) ;
@@ -85,23 +89,22 @@ public:
   wxCoord MaxY() ;
   wxCoord MinX() ;
   wxCoord MinY() ;
-  bool Ok() ;
+  bool IsOk();
   void ResetBoundingBox() ;
   void SetAxisOrientation(bool  xLeftRight , bool  yBottomUp ) ;
   void SetDeviceOrigin(wxCoord  x , wxCoord  y ) ;
-  virtual void SetBackground(const wxBrush&  brush )  = 0;
-  virtual void SetBackgroundMode(int  mode )  = 0;
+  void SetBackground(const wxBrush&  brush );
+  void SetBackgroundMode(int  mode );
+  void SetBrush(const wxBrush&  brush );
   void SetClippingRegion(wxCoord  x , wxCoord  y , wxCoord  width , wxCoord  height ) ;
   void SetClippingRegion(const wxPoint&  pt , const wxSize&  sz ) ;
   void SetClippingRegion(const wxRect&  rect ) ;
   void SetClippingRegion(const wxRegion&  region ) ;
-  virtual void SetPalette(const wxPalette&  palette )  = 0;
-  virtual void SetBrush(const wxBrush&  brush )  = 0;
-  virtual void SetFont(const wxFont&  font )  = 0;
-  virtual void SetLogicalFunction(int  function )  = 0;
+  void SetFont(const wxFont&  font );
+  void SetLogicalFunction(int  function );
   void SetMapMode(int  int ) ;
-  void SetOptimization(bool  optimize ) ;
-  virtual void SetPen(const wxPen&  pen )  = 0;
+  void SetPalette(const wxPalette&  palette );
+  void SetPen(const wxPen&  pen );
   void SetTextBackground(const wxColour&  colour ) ;
   void SetTextForeground(const wxColour&  colour ) ;
   void SetUserScale(double  xScale , double  yScale ) ;

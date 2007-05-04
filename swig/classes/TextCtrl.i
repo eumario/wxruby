@@ -10,6 +10,7 @@
 %ignore wxTextCtrl::wxTextCtrl();
 %ignore wxTextCtrl::operator<<;
 
+%rename(check_spelling) MacCheckSpelling;
 
 %{
   // Allow << to work with a TextCtrl

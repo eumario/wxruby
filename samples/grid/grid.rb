@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 begin
   require 'wx'
 rescue LoadError => no_wx_err

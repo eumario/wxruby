@@ -257,28 +257,23 @@ Returns 0 under X, and the wParam of the WM_QUIT message under Windows.
 
 
 
-h3(#App_onassert). App#on_assert
+h3(#App_onassert). App#on_assert_failure
 
-  *on_assert*(%(arg-type)Char% file,  %(arg-type)Integer% line,  %(arg-type)Char% cond, 
+  *on_assert_failure*(%(arg-type)Char% file,  %(arg-type)Integer% line,  %(arg-type)Char% cond, 
             %(arg-type)Char% msg)
 
-This function is called when an assert failure occurs, i.e. the condition
-specified in "ASSERT":assert.html macro evaluated to @false@.
-It is only called in debug mode (when @__WXDEBUG__@ is defined) as
-asserts are not left in the release code at all.
-
-The base class version show the default assert failure dialog box proposing to
-the user to stop the program, continue or ignore all subsequent asserts.
+This method is called when an assert failure occurs, i.e. a condition
+specified in the WxWidgets C++ library evaluates to @false@.  It is only
+called if WxWidgets was compiled in debug mode (when @__WXDEBUG__@ is
+defined); note that standard releases of WxRuby are compiled without
+this option.
 
 h4. Parameters
 
 * _file_ the name of the source file where the assert occurred
 * _line_ the line number in this file where the assert occurred
 * _cond_ the condition of the failed assert in string form
-* _msg_ the message specified as argument to 
-"ASSERT_MSG":assertmsg.html or "FAIL_MSG":failmsg.html, will
-be @NULL@ if just "ASSERT":assert.html or "FAIL":fail.html 
-was used
+* _msg_ the failure message, may be @nil@ if just "ASSERT":assert.html or "FAIL":fail.html was used
 
 
 h3(#App_oncmdlineerror). App#on_cmd_line_error

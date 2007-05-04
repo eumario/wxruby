@@ -30,7 +30,8 @@ be destroyed safely.
 	 * \param const wxBitmap&   
 	*/
 
-  void SelectObject(const wxBitmap&  bitmap );
+  void SelectObject(wxBitmap&  bitmap );
+  virtual void SelectObjectAsSource(const wxBitmap& bmp);
 };
 
 

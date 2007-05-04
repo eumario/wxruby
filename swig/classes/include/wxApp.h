@@ -42,7 +42,7 @@ going to be processed at all (for the latter one).
 	 * \param wxEvent&   
 	*/
 
-  int FilterEvent(wxEvent&  event ) ;
+virtual int FilterEvent(wxEvent&  event ) ;
 	/**
 	 * \brief Returns the application name. 
 	*/

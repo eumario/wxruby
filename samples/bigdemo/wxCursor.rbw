@@ -90,7 +90,8 @@ class TestCursor < Wx::Panel
     choice = event.get_string
     @log.write_text("Selecting the cursor #{choice}")
     if choice[0..1] == 'zz'
-      image = Wx::Image.new('icons/pointy.png')
+      img_file = File.join(File.dirname(__FILE__), 'icons', 'pointy.png')
+      image = Wx::Image.new(img_file)
 
       # since this image didn't come from a .cur file, tell it where the
       # hotspot is... 
@@ -107,11 +108,12 @@ class TestCursor < Wx::Panel
 
   def on_draw_dot(evt)
     # Draw a dot so the user can see where the hotspot is
-    dc = Wx::ClientDC.new(@win)
-    dc.set_pen(Wx::RED_PEN)
-    dc.set_brush(Wx::RED_BRUSH)
-    pos = evt.get_position
-    dc.draw_circle(pos.x, pos.y, 4)
+    @win.paint do | dc |
+      dc.set_pen(Wx::RED_PEN)
+      dc.set_brush(Wx::RED_BRUSH)
+      pos = evt.get_position
+      dc.draw_circle(pos.x, pos.y, 4)
+    end
   end
 
   

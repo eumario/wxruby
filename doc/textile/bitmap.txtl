@@ -44,7 +44,7 @@ h2. Methods
 * "Bitmap#init_standard_handlers":#Bitmap_initstandardhandlers
 * "Bitmap#insert_handler":#Bitmap_inserthandler
 * "Bitmap#load_file":#Bitmap_loadfile
-* "Bitmap#ok":#Bitmap_ok
+* "Bitmap#is_ok":#Bitmap_isok
 * "Bitmap#remove_handler":#Bitmap_removehandler
 * "Bitmap#save_file":#Bitmap_savefile
 * "Bitmap#set_depth":#Bitmap_setdepth
@@ -458,9 +458,9 @@ h4. See also
 
 "Bitmap#save_file":bitmap.html#Bitmap_savefile
 
-h3(#Bitmap_ok). Bitmap#ok
+h3(#Bitmap_isok). Bitmap#is_ok
 
- Boolean *ok*()
+ Boolean *is_ok*()
 
 Returns true if bitmap data is present.
 

@@ -23,11 +23,10 @@ h2. Methods
 
 * "Control#command":#Control_command
 * "Control#get_label":#Control_getlabel
+* "Control#get_label_text":#Control_getlabeltext
 * "Control#set_label":#Control_setlabel
 
 </div>
-
-
 
 h3(#Control_command). Control#command
 
@@ -40,12 +39,26 @@ h3(#Control_getlabel). Control#get_label
 
  String *get_label*()
 
-Returns the control's text.
+Returns the control's text. Note that the returned string contains the
+mnemonics (@&@ characters) if any, use
+"Control#get_label_text":control.html#Control_getlabeltext if they are 
+undesired.
 
+h3(#Control_getlabeltext). Control#get_label_text
+
+ String *get_label_text*()
+
+Returns the control's label without the mnemonics characters.
+
+Can also be called as a class method, passing in a single label string;
+this will return the same label string with the mnemonic characters removed.
 
 h3(#Control_setlabel). Control#set_label
 
   *set_label*(%(arg-type)String% label)
 
-Sets the item's text.
+Sets the item's text. The @&@ characters in the label are special and
+indicate that the following character is a mnemonic for this control and
+can be used to activate it from the keyboard (typically by using Alt key
+in combination with it). To insert a literal ampersand character, you need to double it, i.e. use @"&&"@
 

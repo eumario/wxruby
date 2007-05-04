@@ -16,15 +16,17 @@ public:
   wxString GetFaceName() const;
   int GetFamily() const;
   wxString GetNativeFontInfoDesc() const;
+  wxString GetNativeFontInfoUserDesc();
   int GetPointSize() const;
   int GetStyle() const;
   bool GetUnderlined() const;
   int GetWeight() const;
-  bool Ok() const;
+  bool IsOk() const;
   static void SetDefaultEncoding(wxFontEncoding  encoding ) ;
   void SetFaceName(const wxString&  faceName ) ;
   void SetFamily(int  family ) ;
   void SetNativeFontInfo(const wxString&  info ) ;
+  bool SetNativeFontInfoUserDesc(const wxString& info);
   void SetPointSize(int  pointSize ) ;
   void SetStyle(int  style ) ;
   void SetUnderlined(const bool  underlined ) ;

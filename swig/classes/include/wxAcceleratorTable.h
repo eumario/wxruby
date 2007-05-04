@@ -11,7 +11,7 @@ public:
    wxAcceleratorTable(int  n , wxAcceleratorEntry  entries[] ) ;
    wxAcceleratorTable(const wxString&  resource ) ;
    virtual  ~wxAcceleratorTable() ;
-   bool Ok() const;
+   bool IsOk() const;
 };
 
 

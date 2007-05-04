@@ -23,6 +23,9 @@ enum
     wxDIRCTRL_EDIT_LABELS    = 0x0100
 };
 
+// wxTreeItemId conversion to Ruby Integers - GetRootId method needs this
+%include "../shared/treeitemid_typemaps.i"
+
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
