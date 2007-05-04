@@ -30,12 +30,10 @@ class MyFrame < Wx::Frame
   end
 
   def on_paint
-    puts("onPaint begin")
     paint do | dc |
       dc.clear
       dc.draw_bitmap(@bitmap, 0, 0, false)
     end
-    puts("onPaint end")
   end
 end
 
