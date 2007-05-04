@@ -1170,7 +1170,7 @@ class MyFrame < Wx::Frame
     Wx::log_message('NOT IMPLEMENTED')
     return
     col = Wx::get_colour_from_user(self, @treectrl.get_foreground_colour())
-    if col.ok()
+    if col.is_ok
       @treectrl.set_foreground_colour(col)
     end
   end
@@ -1180,7 +1180,7 @@ class MyFrame < Wx::Frame
     Wx::log_message('NOT IMPLEMENTED')
     return
     col = Wx::get_colour_from_user(self, @treectrl.get_background_colour())
-    if col.ok()
+    if col.is_ok
       @treectrl.set_background_colour(col)
     end
   end
