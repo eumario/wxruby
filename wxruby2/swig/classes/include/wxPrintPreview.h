@@ -38,7 +38,7 @@ public:
     virtual int GetMaxPage() const;
     virtual int GetMinPage() const;
 
-    virtual bool Ok() const;
+    virtual bool IsOk() const;
     virtual void SetOk(bool ok);
 };
 
