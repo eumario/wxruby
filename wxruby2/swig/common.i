@@ -4,12 +4,6 @@
 %feature("director");
 %feature("compactdefaultargs");
 
-// Check for a correct version of WxWidgets before proceeding any further
-%include <wx/version.h>
-#if ! wxCHECK_VERSION(2,8,3)
-#error "This version of wxRuby requires WxWidgets 2.8.3 or greater"
-#endif
-
 %runtime %{
 // # SWIG 1.3.29 added this new feature which we can't use (yet)
 #define SWIG_DIRECTOR_NOUEH TRUE
@@ -33,6 +27,10 @@
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
 
+
+#if ! wxCHECK_VERSION(2,8,3)
+#error "This version of wxRuby requires WxWidgets 2.8.3 or greater"
+#endif
 
 extern void GcMarkDeleted(void *);
 extern bool GcIsDeleted(void *);
