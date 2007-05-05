@@ -5,10 +5,12 @@
 
 %module(directors="1") wxStatusBar;
 
-%{
-#include <wx/mdi.h>
-%}
+// StatusBar has numerous methods (eg GetFieldRect, G/SetStatusText,
+// SetFieldsCount) that are marked 'virtual', but can't be
+// usefully re-implemented in Ruby.
+%feature("nodirector");
 
+// For GetFieldsRect
 %typemap(in,numinputs=0) (wxRect& rect)
 {
   $1 = new wxRect;
@@ -24,7 +26,7 @@
   }
 }
   
-
+// For SetStatusWidths
 %typemap(in,numinputs=1) (int n, int *widths) (int *arr){
   if (($input == Qnil) || (TYPE($input) != T_ARRAY))
   {
