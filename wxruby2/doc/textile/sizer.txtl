@@ -381,7 +381,7 @@ h3(#Sizer_remove). Sizer#remove
 
  Boolean *remove*(%(arg-type)Sizer% sizer)
 
- Boolean *remove*(%(arg-type)size_t% index)
+ Boolean *remove*(%(arg-type)Integer% index)
 
 Removes a child from the sizer and destroys it.  _sizer_ is the Sizer to
 be removed, _index_ is the position of the child in the sizer, typically
@@ -389,8 +389,8 @@ be removed, _index_ is the position of the child in the sizer, typically
 to take place, call "Sizer#layout":sizer.html#Sizer_layout to update the
 layout "on screen" after removing a child from the sizer.
 
-If you have a variable holding a Window you want to remove from a sizer,
-use "Sizer#detach":sizer.html#Sizer_detach instead.
+If you have a variable holding a "Window":window.html you want to remove
+from a sizer, use "Sizer#detach":sizer.html#Sizer_detach instead.
 
 Returns true if the child item was found and removed, false otherwise.
 
@@ -425,7 +425,7 @@ h3(#Sizer_setitemminsize). Sizer#set_item_min_size
   *set_item_min_size*(%(arg-type)Sizer% sizer,  %(arg-type)Integer% width, 
                     %(arg-type)Integer% height)
 
-  *set_item_min_size*(%(arg-type)size_t% index,  %(arg-type)Integer% width, 
+  *set_item_min_size*(%(arg-type)Integer% index,  %(arg-type)Integer% width, 
                     %(arg-type)Integer% height)
 
 Set an item's minimum size by window, sizer, or position. The item will be found recursively
@@ -463,7 +463,7 @@ h3(#Sizer_show). Sizer#show
  Boolean *show*(%(arg-type)Sizer% sizer,  %(arg-type)Boolean% show = true, 
               %(arg-type)Boolean% recursive = false)
 
- Boolean *show*(%(arg-type)size_t% index,  %(arg-type)Boolean% show = true)
+ Boolean *show*(%(arg-type)Integer% index,  %(arg-type)Boolean% show = true)
 
 Shows or hides the _window_, _sizer_, or item at _index_.
 To make a sizer item disappear or reappear, use Show() followed by Layout().
