@@ -1,4 +1,4 @@
-//   Copyright 2004-2006 by Kevin Smith
+//   Copyright 2004-2007 by Kevin Smith
 //   released under the MIT-style wxruby2 license
 
 #if !defined(_wxPageSetupDialogData_h_)
@@ -28,6 +28,7 @@ public:
 
     // Is this data OK for showing the page setup dialog?
     bool Ok() const;
+		bool IsOk() const;
 
     // If a corresponding paper type is found in the paper database, will set the m_printData
     // paper size id member as well.
