@@ -5,6 +5,17 @@
 
 %module(directors="1") wxFileDialog
 
+enum
+{
+    wxFD_OPEN              = 0x0001,
+    wxFD_SAVE              = 0x0002,
+    wxFD_OVERWRITE_PROMPT  = 0x0004,
+    wxFD_FILE_MUST_EXIST   = 0x0010,
+    wxFD_MULTIPLE          = 0x0020,
+    wxFD_CHANGE_DIR        = 0x0080,
+    wxFD_PREVIEW           = 0x0100
+};
+
 %typemap(in,numinputs=0) wxArrayString &(wxArrayString sel)
 {
 	$1 = &sel;
