@@ -1,5 +1,5 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 %feature("director");
 %feature("compactdefaultargs");
@@ -32,27 +32,9 @@
 #error "This version of wxRuby requires WxWidgets 2.8.3 or greater"
 #endif
 
-extern void GcMarkDeleted(void *);
-extern bool GcIsDeleted(void *);
-extern void GcMapPtrToValue(void *ptr, VALUE val);
-extern VALUE GcGetValueFromPtr(void *ptr);
-extern void GcFreefunc(void *);
-
 extern VALUE mWxruby2;
 %}
 
 %include "typedefs.i"
 %include "typemap.i"
-
-#
-# Protect certain classes from the GC
-#
-%define GC_NEVER(kls)
-%feature("freefunc") kls "GcFreefunc";
-%enddef
-
-#
-# This may do something someday
-#
-%define GC_ALWAYS(klass)
-%enddef
+%include "memory_management.i"
