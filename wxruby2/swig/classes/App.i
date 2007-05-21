@@ -1,5 +1,5 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
@@ -32,6 +32,8 @@ GC_NEVER(wxRubyApp);
 %{
 
 extern swig_class cWxEvtHandler;
+extern swig_class cWxWindow;
+extern swig_class cWxEvent;
 extern "C" void Init_wxRubyStockObjects();
 
 
@@ -39,22 +41,81 @@ class wxRubyApp : public wxApp
 {
     
 public:
-    static VALUE app_ptr;
 
 
-    virtual ~wxRubyApp()
-    {
+  virtual ~wxRubyApp()
+  {
 #ifdef __WXDEBUG__    
-        printf("~wxRubyApp\n");
+	printf("~wxRubyApp\n");
 #endif	
     }
+
+  // special event handler for destruction of windows which is done
+  // automatically by wxWidgets. Tag the object as having been destroyed
+  // by WxWidgets.
+  void OnWindowDestroy(wxWindowDestroyEvent &event) 
+  {
+	wxObject* wx_obj = event.GetEventObject();
+	// Would be neater - but can't do it this way b/c of destruction sequence
+	// SWIG_RubyUnlinkObjects((void *)wx_obj);
+
+	VALUE rb_obj = SWIG_RubyInstanceFor((void *)wx_obj);
+	rb_iv_set(rb_obj, "@__wx_destroyed__", Qtrue);
+	event.Skip();
+  }
+
+
+  static VALUE mark_iterate(VALUE pair, VALUE arg, VALUE self) 
+  {
+	VALUE key, val;
+
+	key = rb_ary_entry(pair, 0);
+	val = rb_ary_entry(pair, 1);
+	VALUE rb_obj = SWIG_RubyReferenceToObject(val);
+	// Check if it's a descendant of Wx::Window, and if it has not yet been
+	// deleted by WxWidgets.
+	if ( rb_obj_is_kind_of(rb_obj, cWxWindow.klass) && 
+		 rb_iv_get(rb_obj, "@__wx_destroyed__") != Qtrue )
+	  {
+		rb_gc_mark(rb_obj);
+	  }
+	return Qnil;
+  }
+
+  static void mark_wxRubyApp(void *ptr)
+  {
+
+#ifdef __WXDEBUG__
+	printf("=== Starting App GC mark phase\n");
+#endif
+
+	// If the App has ended, the ruby object will have been unlinked from 
+	// the C++ one; this implies that all Windows have already been destroyed
+	// so there is no point trying to mark them, and doing so may cause 
+	// errors.
+	VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
+	if ( DATA_PTR(the_app) == 0 ) 
+	  {
+		return;
+	  }
+
+	rb_iterate(rb_each, swig_ruby_trackings, (VALUE(*)(...))mark_iterate, Qnil);
+#ifdef __WXDEBUG__
+        printf("=== App GC mark phase completed\n");
+#endif
+
+  }
 
   // This is the method run when main_loop is called in Ruby
   // wxEntry calls the C++ App::OnInit method
     int main_loop()
     {
-        static int argc = 1;
-        static wxChar *argv[] = {wxT("wxruby"), NULL};
+	  rb_define_const(mWxruby2, "THE_APP", SWIG_RubyInstanceFor(this));
+	  static int argc = 1;
+	  static wxChar *argv[] = {wxT("wxruby"), NULL};
+	  this->Connect(wxEVT_DESTROY,
+					wxWindowDestroyEventHandler(wxRubyApp::OnWindowDestroy));
+
 #ifdef __WXDEBUG__
         printf("Calling wxEntry, this=%p\n", this);
 #endif
@@ -88,7 +149,8 @@ public:
     bool OnInit()
     {
       Init_wxRubyStockObjects();
-	  VALUE result = rb_funcall(wxRubyApp::app_ptr, rb_intern("on_init"), 0, NULL);
+	  VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
+	  VALUE result  = rb_funcall(the_app, rb_intern("on_init"), 0, NULL);
 	  if ( result == Qfalse || result == Qnil ) { 
 		return false; 
 	  }
@@ -101,27 +163,23 @@ public:
     {
 
 
-#ifdef __WXDEBUG__    
-        printf("OnExit...\n");
-#endif	
-        rb_gc_start();
 #ifdef __WXDEBUG__	
-        printf("survived gc\n");
-#endif
+        printf("OnExit...\n");
+#endif 
+
+		// unhook the App ruby object from the C++ object
+		SWIG_RubyUnlinkObjects((void *)this);
 
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
         if ( oldlog )
-        {
-#ifdef __WXDEBUG__
-	    printf("Deleting oldlog...\n");
-#endif	    
-            delete oldlog;
-#ifdef __WXDEBUG__	    
-            printf("worked\n");
-#endif	    
-        }
+		  {
+			delete oldlog;
+			
+		  }
+
         return 0;
+		
     }
 	
     // actually implemented in ruby in classes/app.rb
@@ -132,9 +190,9 @@ public:
 
 };
 
-VALUE wxRubyApp::app_ptr = Qnil;
-
 %}
+
+%markfunc wxRubyApp "wxRubyApp::mark_wxRubyApp";
 
 class wxRubyApp : public wxApp
 {
