@@ -20,7 +20,7 @@
 class wxRubyApp
 {
 public:
-	static VALUE app_ptr;
+
 };
 
 void log_message(int argc, VALUE *argv, VALUE self)
@@ -64,9 +64,7 @@ log_error(int argc, VALUE *argv, VALUE self)
 
 static VALUE get_app(VALUE self)
 {
-    VALUE ret = wxRubyApp::app_ptr;
-    
-    return ret;
+  rb_const_get(mWxruby2, rb_intern("THE_APP"));
 }
 
 static VALUE

@@ -41,6 +41,7 @@ def fix_define_method(line)
     match = re.match(line)
     if(match)
         quoted_method_name = match[0]
+        return line if quoted_method_name == '"THE_APP"'
         method_name = quoted_method_name[1..-2]
         new_method_name = '"' + un_camelcase(method_name) + '"'
         line[quoted_method_name] = new_method_name
