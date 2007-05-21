@@ -13,7 +13,7 @@
   // Returns a ruby object stored as client data
   static VALUE wxControlWithItems_get_client_data(wxControlWithItems *ptr, int n) {
 	VALUE returnVal = (VALUE) ptr->GetClientData(n);
-	if ( returnVal == NULL )
+	if ( returnVal )
 	  return Qnil;
 	return returnVal;
   }
@@ -22,7 +22,7 @@
   // Checks whether the C++ object is still around first...
   static void mark_wxControlWithItems(void* ptr) {
 	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
-	if ( rb_ivar_get(rb_obj, rb_intern("@__swig_dead__") ) == Qtrue )
+	if ( rb_iv_get(rb_obj, "@__wx_destroyed__" ) == Qtrue )
 	  return;
 	fflush(stdout);
 	
@@ -36,7 +36,7 @@
 	for (int i = 0; i < count; ++i)
 	  {
 		VALUE object = (VALUE) wx_cwi->GetClientData(i);
-		if ( object != NULL && object != Qnil ) 
+		if ( object && object != Qnil ) 
 		  {
 			rb_gc_mark(object);
 		  }
