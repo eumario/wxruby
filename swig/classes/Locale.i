@@ -1,9 +1,10 @@
-#   Copyright 2004-2006 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module wxLocale
+GC_MANAGE(wxLocale);
 
 %{
 #include <wx/intl.h>

@@ -1,10 +1,10 @@
-
-#   Copyright 2004-2006 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxTreeCtrl
+GC_MANAGE_AS_WINDOW(wxTreeCtrl);
 
 %{
 #include <wx/treectrl.h>
@@ -88,7 +88,7 @@ protected:
   static void mark_wxTreeCtrl(void *ptr)
   {
 	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
-	if ( rb_ivar_get(rb_obj, rb_intern("@__swig_dead__") ) == Qtrue )
+	if ( rb_iv_get(rb_obj, "@__wx_destroyed__" ) == Qtrue )
 	  return;
 
 	wxTreeCtrl* tree_ctrl = (wxTreeCtrl*) ptr;

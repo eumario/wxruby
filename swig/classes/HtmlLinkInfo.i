@@ -1,9 +1,10 @@
-# Copyright 2004-2006 by Kevin Smith
-# released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxHtmlLinkInfo
+GC_MANAGE_AS_OBJECT(wxHtmlLinkInfo);
 
 %{
 #include <wx/html/htmlcell.h>

@@ -1,5 +1,5 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
@@ -9,6 +9,7 @@
 %}
 
 %module(directors="1") wxListCtrl
+GC_MANAGE_AS_WINDOW(wxListCtrl);
 
 %ignore wxListCtrl::wxListCtrl();
 //
@@ -66,9 +67,9 @@
 %{
   // Prevents Ruby's GC sweeping up items that are stored as item data
   static void mark_wxListCtrl(void* ptr) {
-  // Checks whether the C++ object is still around first...
+	// Checks whether the C++ object is still around first...
 	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
-	if ( rb_ivar_get(rb_obj, rb_intern("@__swig_dead__") ) == Qtrue )
+	if ( rb_iv_get(rb_obj, "@__wx_destroyed__") == Qtrue )
 	  return;
 
 	wxListCtrl* wx_lc = (wxListCtrl*) ptr;
@@ -81,7 +82,7 @@
 	for (int i = 0; i < count; ++i)
 	  {
 		VALUE object = (VALUE) wx_lc->GetItemData(i);
-		if ( object != NULL && object != Qnil ) 
+		if ( object && object != Qnil ) 
 		  {
 			rb_gc_mark(object);
 		  }

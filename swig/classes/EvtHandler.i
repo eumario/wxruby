@@ -1,5 +1,5 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
@@ -23,6 +23,7 @@
 %}
 
 %module(directors="1") wxEvtHandler
+GC_MANAGE_AS_OBJECT(wxEvtHandler);
 
 %ignore wxEvtHandler::Connect;
 %ignore wxEvtHandler::Disconnect;

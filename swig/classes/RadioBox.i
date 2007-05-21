@@ -1,9 +1,10 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxRadioBox
+GC_MANAGE_AS_WINDOW(wxRadioBox);
 %{
 #include <wx/wx.h>
 #include <wx/radiobox.h>
@@ -14,7 +15,6 @@
 
 %ignore wxRadioBox::Show(int item, const bool show = true);
 
-GC_NEVER(wxRadioBox);
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
