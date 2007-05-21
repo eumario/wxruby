@@ -7,62 +7,21 @@
 
 %{
 
-
-#include <wx/hashmap.h>
 #include <wx/gdicmn.h>
 #include <wx/image.h>
 
 #include <wx/filesys.h>
 #include <wx/fs_zip.h>
 
-WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,GcHashMap);
-WX_DECLARE_VOIDPTR_HASH_MAP(bool,DeletedHashMap);
-
-static GcHashMap GcHash;
-static DeletedHashMap DeletedHash;
-static VALUE GcRubyHash = Qnil;
-
-void GcMapPtrToValue(void *ptr, VALUE val)
-{
-    if (GcRubyHash == Qnil)
-    {
-        rb_global_variable(&GcRubyHash);
-        GcRubyHash = rb_hash_new();
-    }
-    rb_hash_aset(GcRubyHash, INT2NUM((long)ptr), val);
-}
-
-VALUE GcGetValueFromPtr(void *ptr)
-{
-    if (GcRubyHash == Qnil)
-    {
-        rb_global_variable(&GcRubyHash);
-        GcRubyHash = rb_hash_new();
-    }
-    return rb_hash_aref(GcRubyHash, INT2NUM((long)ptr));
-}
-
-void GcMarkDeleted(void *ptr)
-{
-    DeletedHash[ptr] = true;
-}
-
-bool GcIsDeleted(void *ptr)
-{
-    if (DeletedHash.find(ptr) == DeletedHash.end())
-        return false;
-    else return true;
-}
-
-void GcFreefunc(void *ptr)
-{
-  SWIG_RubyUnlinkObjects(ptr);
-  SWIG_RubyRemoveTracking(ptr);
-}
-
-///////////////////////////////////////////////////
 extern "C" void Init_wxRubyEventTypes();
 
+// Code to be run when the ruby object is swept by GC - this only
+// unlinks the C++ object from the ruby VALUE but doesn't delete
+// it because it is still needed and will be managed by WxWidgets.
+void GcNullFreeFunc(void *ptr)
+{
+  SWIG_RubyRemoveTracking(ptr);
+}
 %} 
 
 %init %{

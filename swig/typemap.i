@@ -1,7 +1,5 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
-
-%trackobjects;
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 ##############################################################
 %typemap(in) wxString& {
