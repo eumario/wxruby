@@ -3,19 +3,22 @@ h1(#wxapp). Wx::App
 The *App* class represents the application itself. It is used
 to:
 
-
 * set and get application-wide properties;
 * implement the windowing system message or event loop;
 * initiate application processing via "App#on_init":app.html#App_oninit;
-* allow default processing of events not handled by other
-objects in the application.
+* allow default processing of events not handled by other objects in the application.
 
+To define what the App should do when it starts, define a subclass of
+Wx::App, and describe what it should do (display frames, etc) within an
+@on_init@ method. THen create an instance of this class, and call its
+@main_loop@ method. All creation of "Windows":window.html,
+"Brushes":brush.html, "Pens":pen.html, "Colours":colours.html, and
+"Icons":icon.html must be done after the app has been started, by
+calling main_loop.
 
-You should use the macro IMPLEMENT_APP(appClass) in your application implementation
-file to tell Widgets how to create an instance of your application class.
-
-Use DECLARE_APP(appClass) in a header file if you want the GetApp function (which returns
-a reference to your application object) to be visible to other files.
+Any wxRuby program will have a single instance of Wx::App, which can be
+accessed once the app has started by the constant @Wx::THE_APP@, or by
+the module method @Wx::get_app()@.
 
 h2. Derived from
 
@@ -248,8 +251,10 @@ h3(#App_mainloop). App#main_loop
 
  Integer *main_loop*()
 
-Called by Widgets on creation of the application. Override this if you wish
-to provide your own (environment-dependent) main loop.
+Calling this method starts up the application, calling its @on_init@
+method.
+
+
 
 h4. Return value
 
