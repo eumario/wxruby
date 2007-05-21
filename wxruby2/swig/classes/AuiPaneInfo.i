@@ -1,9 +1,10 @@
-#   Copyright 2004-2007 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxAuiPaneInfo
+GC_MANAGE(wxAuiPaneInfo);
 
 %{
 #include <wx/aui/aui.h>

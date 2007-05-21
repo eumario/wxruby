@@ -94,7 +94,7 @@ public:
 
     virtual bool Detach( wxWindow *window );
     virtual bool Detach( wxSizer *sizer );
-    virtual bool Detach( int index );
+    virtual bool Detach( size_t index );
 
     virtual void Clear( bool delete_windows = false );
     virtual void DeleteWindows();

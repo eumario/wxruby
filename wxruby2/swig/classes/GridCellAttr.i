@@ -1,9 +1,10 @@
 // Copyright 2004-2007 by Kevin Smith
-// released under the MIT-style wxruby2 license
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxGridCellAttr
+GC_MANAGE(wxGridCellAttr);
 
 %{
 #include <wx/grid.h>

@@ -1,10 +1,13 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxMenu
-
+// FIXME - deletion of pop-up menus
+// MEnus associated with a MenuBar and Frame are deleted automatically
+// on the C++ side when the MenuBar is destroyed.
+// However, popup menus may not be being collected
 GC_NEVER(wxMenu);
 
 // Any MenuItems passed in to wx become owned by C++

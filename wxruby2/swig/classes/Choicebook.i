@@ -1,9 +1,10 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxChoicebook
+GC_MANAGE_AS_WINDOW(wxChoicebook);
 %feature("nodirector") wxChoicebook::OnSelChange;
 
 %{
@@ -12,7 +13,6 @@
 %}
 
 
-GC_NEVER(wxChoicebook)
 
 #define wxChoicebookPage wxWindow
 

@@ -1,5 +1,5 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %module(directors="1") wxXmlResource
 

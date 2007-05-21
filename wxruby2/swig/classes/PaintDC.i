@@ -1,9 +1,10 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-like wxRuby license
 
 %include "../common.i"
 
 %module(directors="1") wxPaintDC
+GC_MANAGE_AS_OBJECT(wxPaintDC);
 
 // wxList version is now 'type-safe' so we won't be using that version instead
 %ignore DrawLines(const wxList * points, wxCoord xoffset = 0, wxCoord yoffset = 0);
