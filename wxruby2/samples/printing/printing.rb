@@ -262,7 +262,9 @@ class MyPrintout < Wx::Printout
     max_y += (2*margin_y)
 
     # Get the size of the DC in pixels
-    w, h = dc.get_size
+    size = dc.get_size
+    w = size.get_width
+    h = size.get_height
 
     # Calculate a suitable scaling factor
     scale_x=(w/max_x)
@@ -306,7 +308,9 @@ class MyPrintout < Wx::Printout
     # Now we have to check in case our real page size is reduced
     # (e.g. because we're drawing to a print preview memory DC)
     page_width, page_height = get_page_size_pixels
-    w, h = dc.get_size
+    size = dc.get_size
+    w = size.get_width
+    h = size.get_height
     
     # If printer pageWidth == current DC width, then this doesn't
     # change. But w might be the preview bitmap width, so scale down.
