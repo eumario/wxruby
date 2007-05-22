@@ -221,7 +221,7 @@ class IConvFrame < Wx::Frame
   def on_about()
     msg =  sprintf("This is the About dialog of the Unicode sample.\n" \
                     "Welcome to %s", Wx::VERSION_STRING)
-    message_box(msg, "About Minimal", Wx::OK|Wx::ICON_INFORMATION, self)
+    Wx::message_box(msg, "About Minimal", Wx::OK|Wx::ICON_INFORMATION, self)
   end
 end
 
