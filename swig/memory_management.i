@@ -22,6 +22,7 @@
 // This is implemented in swig/wx.i
 %{
 extern void GcNullFreeFunc(void *);
+extern void GC_mark_wxWindow(void *);
 %}
 
 // Macro definitions.
@@ -33,27 +34,39 @@ extern void GcNullFreeFunc(void *);
 %feature("freefunc") kls "GcNullFreeFunc";
 %enddef
 
-// Strategy for windows that aren't top-level windows.
-// Here, the C++ objects are destroyed automatically by WxWidgets when the
-// frame that contains them is closed and destroyed
+// Strategy for windows that aren't top-level windows.  Here, the C++
+// objects are destroyed automatically by WxWidgets when the frame that
+// contains them is closed and destroyed. 
 %define GC_MANAGE_AS_WINDOW(kls)
 GC_NEVER(kls);
+
+// Any sizer associated with the frame will be preserved by the default
+// function. If subclasse of Wx::Window need to implement their own
+// markfuncs (eg controls with ItemData), they probably need to call
+// this function in their own mark routine if they may have a sizer
+// associated with them.
+%feature("markfunc") kls "GC_mark_wxWindow";
 %enddef
 
 // Strategy for top-level frames - these are destroyed automatically.
 %define GC_MANAGE_AS_FRAME(kls)
 GC_NEVER(kls);
+// Mark any associated sizer
+%feature("markfunc") kls "GC_mark_wxWindow";
 %enddef
 
 // Strategy for dialogs - these are destroyed automatically
 %define GC_MANAGE_AS_DIALOG(kls)
 GC_NEVER(kls);
+// Mark any associated sizer
+%feature("markfunc") kls "GC_mark_wxWindow";
 %enddef
 
 // Events - cleaned up by WxWidgets when handling is complete, shouldn't 
 // be stored so not tracked.
 %define GC_MANAGE_AS_EVENT(kls)
 %feature("freefunc") kls "GcNullFreeFunc";
+%feature("nodirector") kls;
 %enddef
 
 // Other descendants of Wx::Object - eg Colour, Pen, Bitmap - that Wx 
