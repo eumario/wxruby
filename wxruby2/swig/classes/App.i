@@ -72,9 +72,12 @@ public:
 	key = rb_ary_entry(pair, 0);
 	val = rb_ary_entry(pair, 1);
 	VALUE rb_obj = SWIG_RubyReferenceToObject(val);
-	// Check if it's a descendant of Wx::Window, and if it has not yet been
-	// deleted by WxWidgets.
-	if ( rb_obj_is_kind_of(rb_obj, cWxWindow.klass) && 
+
+	// Check if it's a valid object (sometimes SWIG doesn't return what we're
+	// expecting), a descendant of Wx::Window, and if it has not yet been
+	// deleted by WxWidgets; if so, mark it.
+	if ( TYPE(rb_obj) == T_DATA &&
+		 rb_obj_is_kind_of(rb_obj, cWxWindow.klass) && 
 		 rb_iv_get(rb_obj, "@__wx_destroyed__") != Qtrue )
 	  {
 		rb_gc_mark(rb_obj);
@@ -82,6 +85,8 @@ public:
 	return Qnil;
   }
 
+  // Implements GC protection. Always called because Wx::THE_APP is a 
+  // so always checked in GC mark phase. 
   static void mark_wxRubyApp(void *ptr)
   {
 
@@ -99,9 +104,12 @@ public:
 		return;
 	  }
 
+	// To do the marking, iterate over SWIG's hash list of known wrapped
+	// objects (swig_ruby_trackings) and check each one.
 	rb_iterate(rb_each, swig_ruby_trackings, (VALUE(*)(...))mark_iterate, Qnil);
+
 #ifdef __WXDEBUG__
-        printf("=== App GC mark phase completed\n");
+	printf("=== App GC mark phase completed\n");
 #endif
 
   }
