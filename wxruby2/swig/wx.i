@@ -22,6 +22,37 @@ void GcNullFreeFunc(void *ptr)
 {
   SWIG_RubyRemoveTracking(ptr);
 }
+
+static VALUE wx_destroyed_sym = rb_intern("@__wx_destroyed__");
+bool GC_IsWindowDeleted(void *ptr)
+{
+  VALUE rb_win = SWIG_RubyInstanceFor(ptr);
+  return ( rb_ivar_defined(rb_win, wx_destroyed_sym ) == Qtrue );
+}
+
+// Default mark routine for Windows - preserve sizers
+void GC_mark_wxWindow(void *ptr)
+{
+
+  if ( GC_IsWindowDeleted(ptr) ) return;
+
+  wxWindow* wx_win = (wxWindow*)ptr;
+  wxSizer* wx_sizer = wx_win->GetSizer();
+  if ( wx_sizer )
+	{
+	  VALUE rb_sizer = SWIG_RubyInstanceFor(wx_sizer);
+	  rb_gc_mark(rb_sizer);
+	}
+
+  wxCaret* wx_caret = wx_win->GetCaret();
+  if ( wx_caret )
+	{
+	  VALUE rb_caret = SWIG_RubyInstanceFor(wx_caret);
+	  rb_gc_mark(rb_caret);
+	}
+}  
+
+
 %} 
 
 %init %{
