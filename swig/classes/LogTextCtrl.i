@@ -3,8 +3,8 @@
 
 %include "../common.i"
 
-%module(directors="1") wxLogTextCtrl
-GC_MANAGE(wxLogTextCtrl);
+%module wxLogTextCtrl
+GC_NEVER(wxLogTextCtrl);
 
 %import "include/wxLog.h"
 
