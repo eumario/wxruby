@@ -12,6 +12,11 @@ GC_MANAGE_AS_OBJECT(wxFlexGridSizer);
 %ignore wxFlexGridSizer::SetNonFlexibleDirection;
 %ignore wxFlexGridSizer::GetNonFlexibleGrowMode;
 %ignore wxFlexGridSizer::SetNonFlexibleGrowMode;
+
+// shared functions for GC marking 
+%include "../shared/sizers.i"
+%markfunc wxBoxSizer "mark_wxSizer";
+
  
 
 %import "include/wxObject.h"
