@@ -6,12 +6,12 @@
 %module(directors="1") wxSizer
 GC_MANAGE_AS_OBJECT(wxSizer);
 
+%feature("nodirector") wxSizer::CalcMin;
 %ignore wxSizer::IsShown;
 
-%feature("nodirector") wxSizer::CalcMin;
-
-// Any nested sizers passed to Add() in are owned by C++, not GC'd by Ruby
-%apply SWIGTYPE *DISOWN { wxSizer* sizer };
+// shared functions for GC marking 
+%include "../shared/sizers.i"
+%markfunc wxSizer "mark_wxSizer";
 
 %import "include/wxObject.h"
 

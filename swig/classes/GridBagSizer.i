@@ -10,6 +10,11 @@ GC_MANAGE_AS_OBJECT(wxGridBagSizer);
 #include <wx/gbsizer.h>
 %}
 
+// shared functions for GC marking 
+%include "../shared/sizers.i"
+%markfunc wxBoxSizer "mark_wxSizer";
+
+
 // ignore these for now - are they useful?
 // require GBSizerItem to be wrapped
 %ignore wxGridBagSizer::FindItemWithData;
