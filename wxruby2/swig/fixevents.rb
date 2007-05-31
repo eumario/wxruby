@@ -1,10 +1,12 @@
-# fixevents.rb
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+# Copyright 2004-2007 by Kevin Smith
+# released under the MIT-style wxruby2 license
 
-#   This script post-processes the SWIG output
-#   to write all of the event handlers
-#   I know it's ugly :-(
+# This script post-processes SWIG's output of swig/Events.i to add in
+# all the event handler methods (evt_xxx) to classes that inherit from
+# EvtHandler. It reads 'swig/classes/include/events.rb' which contains
+# definitions for every event type, and adds the relevant methods to the
+# EvtHandler class.
+
 require 'swig/classes/include/events'
 
 $exclude = [
