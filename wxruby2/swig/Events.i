@@ -184,7 +184,30 @@
 %constant const int wxEVT_HELP;// 1050)
 %constant const int wxEVT_DETAILED_HELP;// 1051)
 
-%constant const int  wxEVT_GRID_CELL_LEFT_CLICK; //1580)
+%constant const int wxEVT_COMMAND_TREE_BEGIN_DRAG;
+%constant const int wxEVT_COMMAND_TREE_BEGIN_RDRAG;
+%constant const int wxEVT_COMMAND_TREE_END_DRAG;
+%constant const int wxEVT_COMMAND_TREE_BEGIN_LABEL_EDIT;
+%constant const int wxEVT_COMMAND_TREE_END_LABEL_EDIT;
+%constant const int wxEVT_COMMAND_TREE_GET_INFO;
+%constant const int wxEVT_COMMAND_TREE_SET_INFO;
+%constant const int wxEVT_COMMAND_TREE_ITEM_EXPANDED;
+%constant const int wxEVT_COMMAND_TREE_ITEM_EXPANDING;
+%constant const int wxEVT_COMMAND_TREE_ITEM_COLLAPSED;
+%constant const int wxEVT_COMMAND_TREE_ITEM_COLLAPSING;
+%constant const int wxEVT_COMMAND_TREE_SEL_CHANGED;
+%constant const int wxEVT_COMMAND_TREE_SEL_CHANGING;
+%constant const int wxEVT_COMMAND_TREE_KEY_DOWN;
+%constant const int wxEVT_COMMAND_TREE_DELETE_ITEM;
+%constant const int wxEVT_COMMAND_TREE_ITEM_ACTIVATED;
+
+%constant const int wxEVT_COMMAND_TREE_ITEM_MENU;
+%constant const int wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK;
+%constant const int wxEVT_COMMAND_TREE_ITEM_MIDDLE_CLICK;
+%constant const int wxEVT_COMMAND_TREE_STATE_IMAGE_CLICK;
+%constant const int wxEVT_COMMAND_TREE_ITEM_GETTOOLTIP;
+
+%constant const int wxEVT_GRID_CELL_LEFT_CLICK; //1580)
 %constant const int wxEVT_GRID_CELL_RIGHT_CLICK; //1581)
 %constant const int wxEVT_GRID_CELL_LEFT_DCLICK; //1582)
 %constant const int wxEVT_GRID_CELL_RIGHT_DCLICK; //1583)
@@ -257,6 +280,7 @@ void internal_connect(VALUE self, int firstId, int lastId,
 static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self, 
         wxEventType eventType) 
 {
+	puts("Called internal_evt_with_id in Events");        
     if (argc != 1)
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
         
@@ -286,7 +310,7 @@ static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self,
 {
     if (argc != 0)
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-        
+	puts("Called in Events");        
     //printf("evt_no_parameters() %s\n", rb_block_given_p() ? "with block" : "");
     internal_connect(self, -1, -1, eventType);
     return Qnil;
