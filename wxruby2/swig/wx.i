@@ -13,8 +13,6 @@
 #include <wx/filesys.h>
 #include <wx/fs_zip.h>
 
-extern "C" void Init_wxRubyEventTypes();
-
 // Code to be run when the ruby object is swept by GC - this only
 // unlinks the C++ object from the ruby VALUE but doesn't delete
 // it because it is still needed and will be managed by WxWidgets.
@@ -60,9 +58,6 @@ void GC_mark_wxWindow(void *ptr)
     extern void InitializeOtherModules();
     InitializeOtherModules();
     wxInitAllImageHandlers();
-
-	// Load the event type constants
-	Init_wxRubyEventTypes();
 
 	// This is needed so HtmlHelp can load docs from a zip file
 	wxFileSystem::AddHandler(new wxArchiveFSHandler);

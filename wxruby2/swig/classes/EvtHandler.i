@@ -534,13 +534,6 @@ void internal_connect(VALUE self, int firstId, int lastId,
 
 %}
 
-%init %{
-extern void Init_wxRubyEventTypes();
-
-Init_wxRubyEventTypes();
-%}
-
-
 // The EvtHandler instance event methods (evt_xxx) are not defined
 // here. Instead, they are defined by Events.cpp, generated from
 // swig/Event.i and modified by swig/fixevents.rb
