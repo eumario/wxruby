@@ -20,15 +20,16 @@ class MyFrame < Frame
         
         button = Button.new(panel, -1, "Close me", Point.new(15,15))
         evt_button( button.get_id ) { on_close_me }
-        evt_close { on_close_window }
+        evt_close { | e | on_close_window(e) }
     end
     
     def on_close_me
         close(true)
     end
 
-    def on_close_window
-        destroy
+    def on_close_window(event)
+
+      event.skip
     end
 end
 
