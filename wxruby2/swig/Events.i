@@ -1,10 +1,30 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 %include "common.i"
 
-%module(directors="1") wxEvents;
+%module wxEvents;
+
+// This module defines all the EVT_ constants that uniquely identify
+// each type of GUI event that WxWidgets can generate.
+//
+// SWIG's output of this file is post-processed by swig/fixevents.rb in
+// order to define a set of evt_xxx methods that all classes inheriting
+// from EvtHandler should hae, in order to define event handlers in
+// Ruby.
+//
+// To wrap a type of wx event that is missing:
+// 1) Create a .i file to wrap the Event class 
+// 2) Add the appropriate EVT constants to this file
+// 3) Add the mappings from these constants to the appropriate Ruby 
+//    event class in lib/wx/classes/evthandler.rb
+// 4) If this isn't working, check that the event type is correclty defined 
+//    in swig/classes/include/events.rb as this file is used by fixevents.rb
+//    to generate the event handler methods.
+
+
 
 %{
+
 //NO_CLASS - This tells fixmodule not to expect a class
 
 #include <wx/calctrl.h>
@@ -29,6 +49,7 @@
 #ifdef WXSCINTILLA
 #    include <wx/wxscintilla.h>
 #endif
+
 %}
 
 
@@ -107,7 +128,10 @@
 %constant const int wxEVT_SCROLLWIN_THUMBTRACK;// 326)
 %constant const int wxEVT_SCROLLWIN_THUMBRELEASE;// 327)
 %constant const int wxEVT_SIZE;// 400)
+%constant const int wxEVT_SIZING; // Not exposed?
 %constant const int wxEVT_MOVE;// 401)
+%constant const int wxEVT_MOVING; // Not exposed?
+
 %constant const int wxEVT_CLOSE_WINDOW;// 402)
 %constant const int wxEVT_END_SESSION;// 403)
 %constant const int wxEVT_QUERY_END_SESSION;// 404)
@@ -184,6 +208,27 @@
 %constant const int wxEVT_HELP;// 1050)
 %constant const int wxEVT_DETAILED_HELP;// 1051)
 
+%constant const int wxEVT_COMMAND_LIST_BEGIN_DRAG;
+%constant const int wxEVT_COMMAND_LIST_BEGIN_RDRAG;
+%constant const int wxEVT_COMMAND_LIST_BEGIN_LABEL_EDIT;
+%constant const int wxEVT_COMMAND_LIST_END_LABEL_EDIT;
+%constant const int wxEVT_COMMAND_LIST_DELETE_ITEM;
+%constant const int wxEVT_COMMAND_LIST_DELETE_ALL_ITEMS;
+%constant const int wxEVT_COMMAND_LIST_KEY_DOWN;
+%constant const int wxEVT_COMMAND_LIST_INSERT_ITEM;
+%constant const int wxEVT_COMMAND_LIST_COL_CLICK;
+%constant const int wxEVT_COMMAND_LIST_COL_RIGHT_CLICK;
+%constant const int wxEVT_COMMAND_LIST_COL_BEGIN_DRAG;
+%constant const int wxEVT_COMMAND_LIST_COL_DRAGGING;
+%constant const int wxEVT_COMMAND_LIST_COL_END_DRAG;
+%constant const int wxEVT_COMMAND_LIST_ITEM_SELECTED;
+%constant const int wxEVT_COMMAND_LIST_ITEM_DESELECTED;
+%constant const int wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK;
+%constant const int wxEVT_COMMAND_LIST_ITEM_MIDDLE_CLICK;
+%constant const int wxEVT_COMMAND_LIST_ITEM_ACTIVATED;
+%constant const int wxEVT_COMMAND_LIST_ITEM_FOCUSED;
+%constant const int wxEVT_COMMAND_LIST_CACHE_HINT;
+
 %constant const int wxEVT_COMMAND_TREE_BEGIN_DRAG;
 %constant const int wxEVT_COMMAND_TREE_BEGIN_RDRAG;
 %constant const int wxEVT_COMMAND_TREE_END_DRAG;
@@ -245,6 +290,10 @@
 %constant const int wxEVT_WIZARD_FINISHED; //903)
 
 %constant const int wxEVT_SASH_DRAGGED;
+%constant const int wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED; // 850
+%constant const int wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING; // 851
+%constant const int wxEVT_COMMAND_SPLITTER_DOUBLECLICKED; // 852
+%constant const int wxEVT_COMMAND_SPLITTER_UNSPLIT; // 853
 
 %constant const int wxEVT_AUI_PANE_BUTTON;
 %constant const int wxEVT_AUI_PANE_CLOSE;
@@ -283,7 +332,6 @@ static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self,
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
         
     int id = NUM2INT(argv[0]);
-    //printf("evt_with_id(%d) %s\n", id, rb_block_given_p() ? "with block" : "");
 
     internal_connect(self, id, id, eventType);
     return Qnil;
