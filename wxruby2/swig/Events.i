@@ -200,7 +200,6 @@
 %constant const int wxEVT_COMMAND_TREE_KEY_DOWN;
 %constant const int wxEVT_COMMAND_TREE_DELETE_ITEM;
 %constant const int wxEVT_COMMAND_TREE_ITEM_ACTIVATED;
-
 %constant const int wxEVT_COMMAND_TREE_ITEM_MENU;
 %constant const int wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK;
 %constant const int wxEVT_COMMAND_TREE_ITEM_MIDDLE_CLICK;
@@ -280,7 +279,6 @@ void internal_connect(VALUE self, int firstId, int lastId,
 static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self, 
         wxEventType eventType) 
 {
-	puts("Called internal_evt_with_id in Events");        
     if (argc != 1)
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc);
         
@@ -299,7 +297,6 @@ static VALUE internal_evt_with_id_range(int argc, VALUE *argv, VALUE self,
         
     int idStart = NUM2INT(argv[0]);
     int idEnd = NUM2INT(argv[1]);
-    //printf("evt_with_id(%d) %s\n", id, rb_block_given_p() ? "with block" : "");
 
     internal_connect(self, idStart, idEnd, eventType);
     return Qnil;
@@ -310,8 +307,6 @@ static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self,
 {
     if (argc != 0)
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
-	puts("Called in Events");        
-    //printf("evt_no_parameters() %s\n", rb_block_given_p() ? "with block" : "");
     internal_connect(self, -1, -1, eventType);
     return Qnil;
 }
