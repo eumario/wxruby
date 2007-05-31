@@ -23,16 +23,16 @@ class MyMiniFrame < MiniFrame
         
     button = Button.new(panel, -1, "Close me", Point.new(15,15))
     evt_button( button.get_id ) { on_close_me }
-    evt_close { on_close_window }
+    # evt_close { | e | on_close_window(e) }
   end
     
   def on_close_me
     close(true)
   end
     
-  def on_close_window
+  def on_close_window(event)
     @log.write_text("MiniFrame closed.")
-    destroy
+    event.skip
   end
     
 end
