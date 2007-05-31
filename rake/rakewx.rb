@@ -114,10 +114,7 @@ def get_optional_classes
 end
 
 def all_obj_bases
-    extra_classes = 
-        ["wx", "RubyConstants", "RubyStockObjects", 
-            "RubyEventTypes", "Functions", "Mac", 
-			"Events", ]
+    extra_classes = %w|wx RubyConstants RubyStockObjects Functions Mac Events|
     return get_classes + get_optional_classes + extra_classes
 end
 
@@ -193,7 +190,6 @@ def add_initializers(cpp_file)
     needs_init_list << "Functions"
     needs_init_list << "Mac"
     needs_init_list << "RubyConstants"
-    needs_init_list << "RubyEventTypes"
     File.open(cpp_file, "a") do | out |
         out.puts
         out.puts('extern "C" void InitializeOtherModules()')
@@ -297,7 +293,6 @@ def create_swig_tasks
     end
     create_swig_helper_task("RubyConstants")
     create_swig_helper_task("RubyStockObjects")
-    create_swig_helper_task("RubyEventTypes")
     create_swig_helper_task("Functions")
     create_swig_helper_task("Mac")
     create_swig_event_task("Events")
