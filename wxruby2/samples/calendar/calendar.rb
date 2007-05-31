@@ -169,7 +169,6 @@ class MyFrame < Frame
         @sizer.set_size_hints(@panel)
         layout
         @panel.set_sizer(@sizer)
-        set_best_fitting_size
     end
     
   def on_quit
