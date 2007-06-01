@@ -10,6 +10,10 @@ GC_MANAGE_AS_WINDOW(wxGrid);
 #include <wx/grid.h>
 %}
 
+
+// Memory management is needed for these classes in addition to *DISOWN
+// to prevent premature ruby GC. To save a lot of messy C++ The work is
+// done in pure ruby - see lib/wx/classes/grid.rb
 %apply SWIGTYPE *DISOWN { wxGridCellAttr* attr };
 %apply SWIGTYPE *DISOWN { wxGridCellEditor* editor };
 %apply SWIGTYPE *DISOWN { wxGridCellRenderer* renderer };
