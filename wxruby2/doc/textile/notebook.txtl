@@ -82,7 +82,6 @@ h2. Methods
 * "Notebook.new":#Notebook_new
 * "Notebook#add_page":#Notebook_addpage
 * "Notebook#advance_selection":#Notebook_advanceselection
-* "Notebook#assign_image_list":#Notebook_assignimagelist
 * "Notebook#create":#Notebook_create
 * "Notebook#delete_all_pages":#Notebook_deleteallpages
 * "Notebook#delete_page":#Notebook_deletepage
@@ -172,19 +171,6 @@ h3(#Notebook_advanceselection). Notebook#advance_selection
 Cycles through the tabs.
 
 The call to this function generates the page changing events.
-
-
-h3(#Notebook_assignimagelist). Notebook#assign_image_list
-
-  *assign_image_list*(%(arg-type)ImageList% imageList)
-
-Sets the image list for the page control and takes ownership of
-the list.
-
-h4. See also
-
-"ImageList":imagelist.html,
-"set_image_list":#Notebook_setimagelist
 
 
 h3(#Notebook_create). Notebook#create
@@ -367,14 +353,7 @@ h3(#Notebook_setimagelist). Notebook#set_image_list
 
   *set_image_list*(%(arg-type)ImageList% imageList)
 
-Sets the image list for the page control. It does not take
-ownership of the image list, you must delete it yourself.
-
-h4. See also
-
-"ImageList":imagelist.html,
-"assign_image_list":#Notebook_assignimagelist
-
+Sets the "image list":imagelist.html for the page control.
 
 h3(#Notebook_setpadding). Notebook#set_padding
 

@@ -12,7 +12,8 @@ GC_MANAGE_AS_WINDOW(wxNotebook);
 #include <wx/notebook.h>
 %}
 
-
+// Ruby handles memory management - always use SetImageList
+%ignore wxNotebook::AssignImageList;
 
 #define wxNotebookPage wxWindow
 
