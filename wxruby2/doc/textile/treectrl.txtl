@@ -130,9 +130,6 @@ h2. Methods
 * "TreeCtrl.new":#TreeCtrl_new
 * "TreeCtrl#add_root":#TreeCtrl_addroot
 * "TreeCtrl#append_item":#TreeCtrl_appenditem
-* "TreeCtrl#assign_buttons_image_list":#TreeCtrl_assignbuttonsimagelist
-* "TreeCtrl#assign_image_list":#TreeCtrl_assignimagelist
-* "TreeCtrl#assign_state_image_list":#TreeCtrl_assignstateimagelist
 * "TreeCtrl#collapse":#TreeCtrl_collapse
 * "TreeCtrl#collapse_all":#TreeCtrl_collapseall
 * "TreeCtrl#collapse_all_children":#TreeCtrl_collapseallchildren
@@ -269,54 +266,6 @@ the normal image list specifying the image to use for unselected and
 selected items, respectively.
 If _image_ > -1 and _selImage_ is -1, the same image is used for
 both selected and unselected items.
-
-
-h3(#TreeCtrl_assignbuttonsimagelist). TreeCtrl#assign_buttons_image_list
-
-  *assign_buttons_image_list*(%(arg-type)ImageList% imageList)
-
-Sets the buttons image list. The button images assigned with this method will
-be automatically deleted by TreeCtrl as appropriate
-(i.e. it takes ownership of the list).
-
-Setting or assigning the button image list enables the display of image buttons.
-Once enabled, the only way to disable the display of button images is to set
-the button image list to @nil@.
-
-This function is only available in the generic version.
-
-See also "set_buttons_image_list":#TreeCtrl_setbuttonsimagelist.
-
-
-h3(#TreeCtrl_assignimagelist). TreeCtrl#assign_image_list
-
-  *assign_image_list*(%(arg-type)ImageList% imageList)
-
-Sets the normal image list. Image list assigned with this method will
-be automatically deleted by TreeCtrl as appropriate
-(i.e. it takes ownership of the list).
-
-See also "set_image_list":#TreeCtrl_setimagelist.
-
-
-h3(#TreeCtrl_assignstateimagelist). TreeCtrl#assign_state_image_list
-
-  *assign_state_image_list*(%(arg-type)ImageList% imageList)
-
-Sets the state image list. Image list assigned with this method will
-be automatically deleted by TreeCtrl as appropriate
-(i.e. it takes ownership of the list).
-
-See also "set_state_image_list":#TreeCtrl_setstateimagelist.
-
-
-
-h3(#TreeCtrl_collapse). TreeCtrl#collapse
-
-  *collapse*(%(arg-type)TreeItemId% item)
-
-Collapses the given item.
-
 
 h3(#TreeCtrl_collapseall). TreeCtrl#collapse_all
 
@@ -904,17 +853,12 @@ h3(#TreeCtrl_setbuttonsimagelist). TreeCtrl#set_buttons_image_list
   *set_buttons_image_list*(%(arg-type)ImageList% imageList)
 
 Sets the buttons image list (from which application-defined button images are taken).
-The button images assigned with this method will
-*not* be deleted by TreeCtrl's destructor, you must delete it yourself.
 
-Setting or assigning the button image list enables the display of image buttons.
-Once enabled, the only way to disable the display of button images is to set
-the button image list to @nil@.
+Setting the button image list enables the display of image buttons.
+Once enabled, the only way to disable the display of button images is to
+set the button image list to @nil@.
 
 This function is only available in the generic version.
-
-See also "assign_buttons_image_list":#TreeCtrl_assignbuttonsimagelist.
-
 
 h3(#TreeCtrl_setindent). TreeCtrl#set_indent
 
@@ -927,12 +871,7 @@ h3(#TreeCtrl_setimagelist). TreeCtrl#set_image_list
 
   *set_image_list*(%(arg-type)ImageList% imageList)
 
-Sets the normal image list. Image list assigned with this method will
-*not* be deleted by TreeCtrl's destructor, you must delete it yourself.
-
-See also "assign_image_list":#TreeCtrl_assignimagelist.
-
-
+Sets the normal image list.
 
 h3(#TreeCtrl_setitembackgroundcolour). TreeCtrl#set_item_background_colour
 
@@ -1039,10 +978,6 @@ h3(#TreeCtrl_setstateimagelist). TreeCtrl#set_state_image_list
   *set_state_image_list*(%(arg-type)ImageList% imageList)
 
 Sets the state image list (from which application-defined state images are taken).
-Image list assigned with this method will
-*not* be deleted by TreeCtrl's destructor, you must delete it yourself.
-
-See also "assign_state_image_list":#TreeCtrl_assignstateimagelist.
 
 h3(#TreeCtrl_setwindowstyle). TreeCtrl#set_window_style
 
