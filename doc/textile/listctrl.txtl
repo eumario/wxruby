@@ -99,7 +99,6 @@ h2. Methods
 
 * "ListCtrl.new":#ListCtrl_new
 * "ListCtrl#arrange":#ListCtrl_arrange
-* "ListCtrl#assign_image_list":#ListCtrl_assignimagelist
 * "ListCtrl#clear_all":#ListCtrl_clearall
 * "ListCtrl#create":#ListCtrl_create
 * "ListCtrl#delete_all_items":#ListCtrl_deleteallitems
@@ -201,17 +200,6 @@ Arranges the items in icon or small icon view. This only has effect on Win32. _f
 |LIST_ALIGN_LEFT|Align to the left side of the control.|
 |LIST_ALIGN_TOP|Align to the top side of the control.|
 |LIST_ALIGN_SNAP_TO_GRID|Snap to grid.|
-
-
-
-h3(#ListCtrl_assignimagelist). ListCtrl#assign_image_list
-
-  *assign_image_list*(%(arg-type)ImageList% imageList,  %(arg-type)Integer% which)
-
-Sets the image list associated with the control and
-takes ownership of it (i.e. the control will, unlike when using
-SetImageList, delete the list when destroyed). _which_ is one of
-IMAGE_LIST_NORMAL, IMAGE_LIST_SMALL, IMAGE_LIST_STATE (the last is unimplemented).
 
 h4. See also
 
@@ -773,16 +761,6 @@ h3(#ListCtrl_setimagelist). ListCtrl#set_image_list
 
 Sets the image list associated with the control. _which_ is one of
 IMAGE_LIST_NORMAL, IMAGE_LIST_SMALL, IMAGE_LIST_STATE (the last is unimplemented).
-
-This method does not take ownership of the image list, you have to
-delete it yourself.
-
-h4. See also
-
-"ListCtrl#assign_image_list":listctrl.html#ListCtrl_assignimagelist
-
-
-
 h3(#ListCtrl_setitem). ListCtrl#set_item
 
  Integer *set_item*(%(arg-type)Integer% index,  %(arg-type)Integer% col, 
