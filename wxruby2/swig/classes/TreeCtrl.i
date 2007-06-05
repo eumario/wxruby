@@ -13,6 +13,10 @@ GC_MANAGE_AS_WINDOW(wxTreeCtrl);
 // wxTreeItemId fixes - these typemaps convert them to ruby Integers
 %include "../shared/treeitemid_typemaps.i"
 
+%ignore wxTreeCtrl::AssignImageList;
+%ignore wxTreeCtrl::AssignButtonsImageList;
+%ignore wxTreeCtrl::AssignStateImageList;
+
 // ITEM DATA fixes - This is done so the API user never sees a
 // TreeItemData object - where in Wx C++ such an object
 // would be passed or returned by a method, any Ruby object may be used.
@@ -92,6 +96,17 @@ protected:
 	  return;
 
 	wxTreeCtrl* tree_ctrl = (wxTreeCtrl*) ptr;
+
+	wxImageList* img_list;
+	// First check if there's ImageLists and mark if found
+	img_list = tree_ctrl->GetImageList();
+	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+	img_list = tree_ctrl->GetButtonsImageList();
+	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+	img_list = tree_ctrl->GetStateImageList();
+	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+
+	// Now mark the item data
 	wxTreeItemId root_id = tree_ctrl->GetRootItem();
 	RecurseOverTreeIds(tree_ctrl, root_id, &DoGCMarkItemData);
   }
