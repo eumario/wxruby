@@ -77,6 +77,7 @@ public:
   wxImage Mirror(bool horizontally = true) const;
   void Replace(unsigned char  r1 , unsigned char  g1 , unsigned char  b1 , unsigned char  r2 , unsigned char  g2 , unsigned char  b2 ) ;
   wxImage & Rescale(int width, int height, int quality = wxIMAGE_QUALITY_NORMAL ) ;
+  wxImage & Resize(const wxSize& size, const wxPoint pos, int red = -1, int green = -1, int blue = -1);
   wxImage Rotate(double  angle , const wxPoint&  rotationCentre , bool interpolating = true, wxPoint* offsetAfterRotation = NULL) ;
   wxImage Rotate90(bool clockwise = true) const;
   wxImage Scale(int width, int height, int quality = wxIMAGE_QUALITY_NORMAL ) const;
@@ -91,7 +92,7 @@ public:
   void SetPalette(const wxPalette&  palette ) ;
   void SetRGB(int  x , int  y , unsigned char  red , unsigned char  green , unsigned char  blue ) ;
     wxImage ShrinkBy( int xFactor , int yFactor ) const ;
-
+	wxImage Size(const wxSize& size, const wxPoint pos, int red = -1, int green = -1, int blue = -1);
 };
 
 
