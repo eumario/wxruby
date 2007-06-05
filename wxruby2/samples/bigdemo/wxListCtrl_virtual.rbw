@@ -17,7 +17,9 @@ class TestVirtualList < Wx::ListCtrl
         @log = log
         
         @il = Wx::ImageList.new(16,16)
-        @idx1 = @il.add(Wx::Bitmap.new("./icons/wxwin16x16.xpm"))
+        bmp_file = File.join(File.dirname(__FILE__), "icons/wxwin16x16.xpm")
+        
+        @idx1 = @il.add(Wx::Bitmap.new(bmp_file))
         set_image_list(@il, Wx::IMAGE_LIST_SMALL)
         
         insert_column(0,"First")
