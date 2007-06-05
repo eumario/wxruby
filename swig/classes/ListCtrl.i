@@ -6,18 +6,22 @@
 %{
 #include <wx/wx.h>
 #include <wx/listctrl.h>
+#include <wx/imaglist.h>
 %}
 
 %module(directors="1") wxListCtrl
 GC_MANAGE_AS_WINDOW(wxListCtrl);
 
+// default constructor
 %ignore wxListCtrl::wxListCtrl();
-//
+
+// Ruby handles memory management - always use SetImageList
+%ignore wxListCtrl::AssignImageList;
+
 // Doesn't work on wxMac
-//
 %ignore wxListCtrl::GetEditControl;
 
-# deprecated:
+// deprecated:
 %ignore wxListCtrl::GetItemSpacing(bool isSmall) const;
 
 // dealt with below
@@ -73,6 +77,17 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 	  return;
 
 	wxListCtrl* wx_lc = (wxListCtrl*) ptr;
+
+	// First check if there's ImageLists and mark if found
+	wxImageList* img_list;
+	img_list= wx_lc->GetImageList(wxIMAGE_LIST_NORMAL);
+	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+	img_list= wx_lc->GetImageList(wxIMAGE_LIST_SMALL);
+	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+	img_list= wx_lc->GetImageList(wxIMAGE_LIST_STATE);
+	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+
+	// Don't try to mark item data for VIRTUAL listctrls
 	if ( wx_lc->GetWindowStyle() & wxLC_VIRTUAL )
 	  return;
 
