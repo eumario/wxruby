@@ -177,7 +177,7 @@ class MyTreeCtrl < Wx::TreeCtrl
         end
       end
       
-      assign_buttons_image_list(images)
+      set_buttons_image_list(images)
     end
   end
 
