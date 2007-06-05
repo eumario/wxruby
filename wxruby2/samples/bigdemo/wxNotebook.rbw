@@ -47,7 +47,7 @@ class TestNB < Wx::Notebook
         ic_file = File.join(File.dirname(__FILE__),'icons','wxwin16x16.xpm')
         il.add_icon( Wx::Icon.new(ic_file) )
 
-        assign_image_list(il)
+        set_image_list(il)
         
         win = make_color_panel(Wx::BLUE)
         add_page(win, "Blue", true, 0)

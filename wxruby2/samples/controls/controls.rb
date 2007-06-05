@@ -219,7 +219,7 @@ class MyPanel < Panel
         imagelist.add( Bitmap.new( "icons/text.xpm", Wx::BITMAP_TYPE_XPM))
         imagelist.add( Bitmap.new( "icons/radio.xpm", Wx::BITMAP_TYPE_XPM))
         imagelist.add( Bitmap.new( "icons/gauge.xpm", Wx::BITMAP_TYPE_XPM))
-        @m_notebook.assign_image_list(imagelist)
+        @m_notebook.set_image_list(imagelist)
 
         panel = Panel.new(@m_notebook)
         @m_listbox = ListBox.new( panel, ID_LISTBOX,
