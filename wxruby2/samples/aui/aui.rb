@@ -1165,7 +1165,7 @@ class AuiFrame < Wx::Frame
     img_list.add( Wx::ArtProvider::get_bitmap( Wx::ART_NORMAL_FILE, 
                                                Wx::ART_OTHER, 
                                                Wx::Size.new(16, 16) ) )
-    tree.assign_image_list(img_list)
+    tree.set_image_list(img_list)
     root = tree.add_root("Wx::AUI Project", 0)
     items = []
     1.upto(5) { | i | items << tree.append_item(root, "Item #{i}", 0) }
