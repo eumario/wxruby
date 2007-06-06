@@ -46,6 +46,7 @@ class Wx::EvtHandler
     Wx::EVT_COMMAND_TEXT_URL => Wx::TextUrlEvent,
     Wx::EVT_IDLE => Wx::IdleEvent,
     Wx::EVT_PAINT => Wx::PaintEvent,
+    Wx::EVT_ERASE_BACKGROUND => Wx::EraseEvent,
     Wx::EVT_UPDATE_UI => Wx::UpdateUIEvent,
     Wx::EVT_SIZE => Wx::SizeEvent,
     Wx::EVT_SIZING => Wx::SizeEvent,
