@@ -8,19 +8,21 @@ GC_MANAGE_AS_WINDOW(wxToolBar);
 
 %{
 #include <wx/toolbar.h>
-
-// for some reason, the api returns a wxToolBarTool, 
-// even though that's not a documented class.
-// fake it by saying it's just a control
-typedef wxControl wxToolBarTool ;
 %}
 
-#// for some reason, the api returns a wxToolBarTool, 
-#// even though that's not a documented class.
-#// fake it by saying it's just a control
-typedef wxControl wxToolBarTool;
 
-%ignore wxToolBar::AddTool(int toolId, const wxString& label, const wxBitmap& bitmap1, const wxBitmap& bitmap2 = wxNullBitmap, wxItemKind kind = wxITEM_NORMAL, const wxString& shortHelpString = "", const wxString& longHelpString = "", wxObject* clientData = NULL);
+// 
+%typemap(out) wxToolBarToolBase* {
+  int pos_of_tool = arg1->GetToolPos($1->GetId());
+  $result = INT2NUM(pos_of_tool);
+}
+
+
+// Versions of methods that accept a ToolBarTool argument are not
+// supported in wxRuby, because that class is not ported.
+%ignore wxToolBar::AddTool(wxToolBarToolBase *tool);
+%ignore wxToolBar::FindToolForPosition(const float  x , const float  y ) const;
+%ignore wxToolBar::InsertTool(size_t pos, wxToolBarToolBase *tool);
 
 // VERY weird swig bug here...
 // If we have the comment, the %if, %ignore and %endif,
