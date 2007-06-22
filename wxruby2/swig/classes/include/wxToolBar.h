@@ -16,11 +16,14 @@ public:
   wxToolBarToolBase* AddTool(wxToolBarToolBase*  tool );
   wxToolBarToolBase* AddCheckTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = wxT(""), const wxString&  longHelpString = wxT(""), wxObject*  clientData = NULL) ;
   wxToolBarToolBase* AddRadioTool(int  toolId , const wxString&  label , const wxBitmap&  bitmap1 , const wxBitmap&  bitmap2 , const wxString&  shortHelpString = wxT(""), const wxString&  longHelpString = wxT(""), wxObject*  clientData = NULL) ;
+  void ClearTools();
   bool DeleteTool(int  toolId ) ;
   bool DeleteToolByPos(size_t  pos ) ;
   void EnableTool(int  toolId , const bool  enable ) ;
+  wxToolBarToolBase* FindById(int  id) ;
   wxControl* FindControl(int  id) ;
   wxToolBarToolBase* FindToolForPosition(const float  x , const float  y ) const;
+  int GetToolsCount() ;
   wxSize GetToolSize() ;
   wxSize GetToolBitmapSize() ;
   wxSize GetMargins() const;
@@ -54,7 +57,9 @@ public:
   void SetRows(int rows);
   void SetToolBitmapSize(const wxSize&  size ) ;
   void SetToolClientData(int  id , wxObject*  clientData ) ;
+  void SetToolDisabledBitmap(int id, const wxBitmap& bitmap);
   void SetToolLongHelp(int  toolId , const wxString&  helpString ) ;
+  void SetToolNormalBitmap(int id, const wxBitmap& bitmap);
   void SetToolPacking(int  packing ) ;
   void SetToolShortHelp(int  toolId , const wxString&  helpString ) ;
   void SetToolSeparation(int  separation ) ;
