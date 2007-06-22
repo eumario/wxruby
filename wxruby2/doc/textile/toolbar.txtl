@@ -8,10 +8,6 @@ The name ToolBar is defined to be a synonym for one of the following classes:
 * *ToolBarGTK* The GTK toolbar.
 
 
-Note that the base class *ToolBarBase* defines
-automatic scrolling management functionality which is similar
-to "ScrolledWindow":scrolledwindow.html, so please refer to this class also.
-
 h2. Derived from
 
 ToolBarBase
@@ -28,7 +24,7 @@ h2. Remarks
 
 You may also create a toolbar that is managed by the frame, by
 calling "Frame#create_tool_bar":frame.html#Frame_createtoolbar. Under Pocket PC,
-you should _always_ use this function for creating the toolbar
+you should always use this function for creating the toolbar
 to be managed by the frame, so that Widgets can use a combined
 menubar and toolbar. Where you manage your own toolbars, create a ToolBar
 as usual.
@@ -73,6 +69,9 @@ h2. Window styles
 |@TB_NOALIGN@|Specifies no alignment with the parent window (Windows only, not very useful).|
 |@TB_HORZ_LAYOUT@|Shows the text and the icons alongside, not vertically stacked (Windows and GTK2 only). This style must be used with TB_TEXT.|
 |@TB_HORZ_TEXT@|Combination of TB_HORZ_LAYOUT and TB_TEXT.|
+|@TB_NO_TOOLTIPS@|Don't show the short help tooltips for the tools when the mouse hovers over them.|
+|@TB_BOTTOM@|Align the toolbar at the bottom of parent window.|
+|@TB_RIGHT@|Align the toolbar at the right side of parent window.|
 
 
 See also "window styles overview":windowstyles.html. Note that the Win32
@@ -114,12 +113,14 @@ h2. Methods
 * "ToolBar#add_tool":#ToolBar_addtool
 * "ToolBar#add_check_tool":#ToolBar_addchecktool
 * "ToolBar#add_radio_tool":#ToolBar_addradiotool
+* "ToolBar#clear_tools":#ToolBar_cleartools
 * "ToolBar#delete_tool":#ToolBar_deletetool
 * "ToolBar#delete_tool_by_pos":#ToolBar_deletetoolbypos
 * "ToolBar#enable_tool":#ToolBar_enabletool
 * "ToolBar#find_by_id":#ToolBar_findbyid
 * "ToolBar#find_control":#ToolBar_findcontrol
 * "ToolBar#find_tool_for_position":#ToolBar_findtoolforposition
+* "ToolBar#get_tools_count":#ToolBar_gettoolscount
 * "ToolBar#get_tool_size":#ToolBar_gettoolsize
 * "ToolBar#get_tool_bitmap_size":#ToolBar_gettoolbitmapsize
 * "ToolBar#get_margins":#ToolBar_getmargins
@@ -143,9 +144,11 @@ h2. Methods
 * "ToolBar#set_margins":#ToolBar_setmargins
 * "ToolBar#set_tool_bitmap_size":#ToolBar_settoolbitmapsize
 * "ToolBar#set_tool_client_data":#ToolBar_settoolclientdata
+* "ToolBar#set_tool_disabled_bitmap":#ToolBar_settooldisabledbitmap
 * "ToolBar#set_tool_long_help":#ToolBar_settoollonghelp
 * "ToolBar#set_tool_packing":#ToolBar_settoolpacking
 * "ToolBar#set_tool_short_help":#ToolBar_settoolshorthelp
+* "ToolBar#set_tool_normal_bitmap":#ToolBar_settoolnormalbitmap
 * "ToolBar#set_tool_separation":#ToolBar_settoolseparation
 * "ToolBar#toggle_tool":#ToolBar_toggletool
 
@@ -208,27 +211,28 @@ h4. See also
 
 h3(#ToolBar_addtool). ToolBar#add_tool
 
- "ToolBarToolBase":toolbartoolbase.html *add_tool*(%(arg-type)Integer% toolId, 
-                            %(arg-type)String% label, 
-                            %(arg-type)Bitmap% bitmap1, 
-                            %(arg-type)String% shortHelpString = "", 
-                            %(arg-type)ItemKind% kind = ITEM_NORMAL)
+ Integer *add_tool*(%(arg-type)Integer% toolId, 
+                     %(arg-type)String% label,
+                     %(arg-type)Bitmap% bitmap1, 
+                     %(arg-type)String% shortHelpString = "", 
+                     %(arg-type)ItemKind% kind = ITEM_NORMAL)
 
- "ToolBarToolBase":toolbartoolbase.html *add_tool*(%(arg-type)Integer% toolId, 
-                            %(arg-type)String% label, 
-                            %(arg-type)Bitmap% bitmap1, 
-                            %(arg-type)Bitmap% bitmap2 = NullBitmap, 
-                            %(arg-type)ItemKind% kind = ITEM_NORMAL, 
-                            %(arg-type)String% shortHelpString = "", 
-                           %(arg-type)String% longHelpString = "", 
-                            %(arg-type)Object% clientData = nil)
+ Integer *add_tool*(%(arg-type)Integer% toolId, 
+                     %(arg-type)String% label, 
+                     %(arg-type)Bitmap% bitmap1, 
+                     %(arg-type)Bitmap% bitmap2 = NullBitmap, 
+                     %(arg-type)ItemKind% kind = ITEM_NORMAL, 
+                     %(arg-type)String% shortHelpString = "", 
+                     %(arg-type)String% longHelpString = "", 
+                     %(arg-type)Object% clientData = nil)
 
- "ToolBarToolBase":toolbartoolbase.html *add_tool*(%(arg-type)ToolBarToolBase% tool)
 
-Adds a tool to the toolbar. The first (short and most commonly used) version
+Adds a tool to the toolbar, and return the integer position of the newly
+added tool. 
+
+The first (short and most commonly used) version
 has fewer parameters than the full version at the price of not being able to
-specify some of the more rarely used button features. The last version allows
-you to add an existing tool.
+specify some of the more rarely used button features. 
 
 h4. Parameters
 
@@ -248,7 +252,6 @@ normal one.
 parent frame when the mouse pointer is inside the tool
 * _clientData_ An optional pointer to client data which can be
 retrieved later using "ToolBar#get_tool_client_data":toolbar.html#ToolBar_gettoolclientdata.
-* _tool_ The tool to be added.
 
 h4. Remarks
 
@@ -265,8 +268,8 @@ h3(#ToolBar_addchecktool). ToolBar#add_check_tool
                                   %(arg-type)String% label, 
                                   %(arg-type)Bitmap% bitmap1, 
                                   %(arg-type)Bitmap% bitmap2, 
-                                  %(arg-type)String% shortHelpString = "", 
-                                  %(arg-type)String% longHelpString = "", 
+                                  %(arg-type)String% shortHelp = "", 
+                                  %(arg-type)String% longHelp = "", 
                                   %(arg-type)Object% clientData = nil)
 
 Adds a new check (or toggle) tool to the toolbar. The parameters are the same
@@ -275,6 +278,7 @@ as in "ToolBar#add_tool":toolbar.html#ToolBar_addtool.
 h4. See also
 
 "ToolBar#add_tool":toolbar.html#ToolBar_addtool
+
 
 h3(#ToolBar_addradiotool). ToolBar#add_radio_tool
 
@@ -298,6 +302,12 @@ others are not.
 h4. See also
 
 "ToolBar#add_tool":toolbar.html#ToolBar_addtool
+
+h3(#ToolBar_cleartools). ToolBar#clear_tools
+
+ *clear_tools*()
+
+Deletes all the tools in the toolbar.
 
 h3(#ToolBar_deletetool). ToolBar#delete_tool
 
@@ -347,37 +357,23 @@ h4. See also
 
 h3(#ToolBar_findbyid). ToolBar#find_by_id
 
- "ToolBarToolBase":toolbartoolbase.html *find_by_id*(%(arg-type)Integer% id)
+ Integer *find_by_id*(%(arg-type)Integer% id)
 
-Returns a pointer to the tool identified by _id_ or
-NULL if no corresponding tool is found.
+Returns the position of the tool identified by _id_ or nil if no
+corresponding tool is found.
 
 h3(#ToolBar_findcontrol). ToolBar#find_control
 
  "Control":control.html *find_control*(%(arg-type)Integer% id)
 
-Returns a pointer to the control identified by _id_ or
-NULL if no corresponding control is found.
+Returns a pointer to the Wx::Control identified by _id_ or nil if no
+corresponding control is found.
 
-h3(#ToolBar_findtoolforposition). ToolBar#find_tool_for_position
+h3(#ToolBar_gettoolscount). ToolBar#get_tools_count
 
- "ToolBarToolBase":toolbartoolbase.html *find_tool_for_position*(%(arg-type)float% x, 
-                                          %(arg-type)float% y)
+ Integer *get_tools_count*()
 
-Finds a tool for the given mouse position.
-
-h4. Parameters
-
-* _x_ X position.
-* _y_ Y position.
-
-h4. Return value
-
-A pointer to a tool if a tool is found, or NULL otherwise.
-
-h4. Remarks
-
-Used internally, and should not need to be used by the programmer.
+Returns the number of tools in the toolbar.
 
 h3(#ToolBar_gettoolsize). ToolBar#get_tool_size
 
@@ -548,20 +544,18 @@ h4. See also
 
 h3(#ToolBar_inserttool). ToolBar#insert_tool
 
- "ToolBarToolBase":toolbartoolbase.html *insert_tool*(%(arg-type)size_t% pos, 
-                               %(arg-type)Integer% toolId, 
-                               %(arg-type)Bitmap% bitmap1, 
-                               %(arg-type)Bitmap% bitmap2 = NullBitmap, 
-                               %(arg-type)Boolean% isToggle = false, 
-                               %(arg-type)Object% clientData = nil, 
-                               %(arg-type)String% shortHelpString = "", 
-                               %(arg-type)String% longHelpString = "")
-
- "ToolBarToolBase":toolbartoolbase.html *insert_tool*(%(arg-type)size_t% pos, 
-                               %(arg-type)ToolBarToolBase% tool)
+ Integer *insert_tool*(%(arg-type)size_t% pos, 
+                         %(arg-type)Integer% toolId,
+						 %(arg-type)String% label, 
+                         %(arg-type)Bitmap% bitmap1, 
+                         %(arg-type)Bitmap% bitmap2 = NullBitmap, 
+						 %(arg-type)Integer% type = Wx::ITEM_NORMAL,
+                         %(arg-type)String% shortHelp = "", 
+                         %(arg-type)String% longHelp = "",
+                         %(arg-type)Object% clientData = nil)
 
 Inserts the tool with the specified attributes into the toolbar at the given
-position.
+position. Returns the position of the newly inserted tool.
 
 You must call "Realize":toolbarrealize.html for the change to take place.
 
@@ -721,6 +715,16 @@ h3(#ToolBar_settoolclientdata). ToolBar#set_tool_client_data
 
 Sets the client data associated with the tool.
 
+h3(#ToolBar_settooldisabledbitmap). ToolBar#set_tool_disabled_bitmap
+
+  *set_tool_disabled_bitmap*(%(arg-type)Integer% id,  %(arg-type)Bitmap% bitmap)
+
+Sets the bitmap to be used by the tool with the given ID when the tool
+is in a disabled state. This can only be used on Button tools, not
+controls. NOTE: The native toolbar classes on the main platforms all
+synthesize the disabled bitmap from the normal bitmap, so this function
+will have no effect on those platforms.
+
 h3(#ToolBar_settoollonghelp). ToolBar#set_tool_long_help
 
   *set_tool_long_help*(%(arg-type)Integer% toolId,  %(arg-type)String% helpString)
@@ -735,6 +739,14 @@ h4. Parameters
 h4. Remarks
 
 You might use the long help for displaying the tool purpose on the status line.
+
+h3(#ToolBar_settoolnormalbitmap). ToolBar#set_tool_normal_bitmap
+
+  *set_tool_normal_bitmap*(%(arg-type)Integer% id,  %(arg-type)Bitmap% bitmap)
+
+Sets the bitmap to be used by the tool with the given ID. This can only
+be used on Button tools, not controls.
+
 
 h4. See also
 
