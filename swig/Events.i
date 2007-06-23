@@ -1,3 +1,4 @@
+
 // Copyright 2004-2007 by Kevin Smith
 // released under the MIT-style wxruby2 license
 %include "common.i"
@@ -311,19 +312,17 @@
 %constant const int wxEVT_COMMAND_AUINOTEBOOK_DRAG_MOTION;
 %constant const int wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND;
 
-#############################################################################
-#### NOTE: Before adding anything below this line, consider whether it really
-#### belongs in swig/classes/include/events.rb instead!!!
-#############################################################################
-
-
 
 %{
+
+// TODO - there is considerable duplication between the public ruby
+// 'connect' method and internal_connect - in fact all the evt_xxx
+// methods could now be implemented in ruby via 'connect'
+// Internal method that links a ruby Proc (the block passed to evt_xxx)
+// to the WxWidgets C++ event handler method.
 extern swig_class cWxEvtHandler;
-
-void internal_connect(VALUE self, int firstId, int lastId, 
-                wxEventType eventType);
-
+extern void internal_connect(VALUE self, int firstId, int lastId, 
+							 wxEventType eventType);
 
 static VALUE internal_evt_with_id(int argc, VALUE *argv, VALUE self, 
         wxEventType eventType) 
@@ -356,19 +355,6 @@ static VALUE internal_evt_no_parameters(int argc, VALUE *argv, VALUE self,
     if (argc != 0)
         rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc);
     internal_connect(self, -1, -1, eventType);
-    return Qnil;
-}
-
-static VALUE connect_fnc(int argc, VALUE *argv, VALUE self) 
-{
-    if (argc != 3)
-        rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)", argc);
-
-    int id = NUM2INT(argv[0]);
-    int lastId = NUM2INT(argv[1]);
-    int type = NUM2INT(argv[2]);
-    
-    internal_connect(self, id, lastId, type);
     return Qnil;
 }
 
