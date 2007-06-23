@@ -3,25 +3,6 @@
 
 %include "../common.i"
 
-%{
-#include <wx/calctrl.h>
-#include <wx/choicebk.h>
-#include <wx/fdrepdlg.h>
-#include <wx/listbook.h>
-#include <wx/notebook.h>
-#include <wx/grid.h>
-#include <wx/spinbutt.h>
-#include <wx/treectrl.h>
-#include <wx/splitter.h>
-#include <wx/listctrl.h>
-#include <wx/sashwin.h>
-#include <wx/wizard.h>
-#include <wx/aui/aui.h>
-#ifdef WXSCINTILLA
-#    include <wx/wxscintilla.h>
-#endif
-%}
-
 %module(directors="1") wxEvtHandler
 GC_MANAGE_AS_OBJECT(wxEvtHandler);
 
@@ -31,7 +12,6 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 %import "include/wxObject.h"
 
 %include "include/wxEvtHandler.h"
-
 
 %{
 
