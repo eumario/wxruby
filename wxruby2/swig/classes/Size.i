@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module(directors="1") wxSize
+%module wxSize
 GC_MANAGE(wxSize);
 
 %include "include/wxSize.h"

@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module(directors="1") wxRect
+%module wxRect
 GC_MANAGE(wxRect);
 
 %include "include/wxRect.h"
