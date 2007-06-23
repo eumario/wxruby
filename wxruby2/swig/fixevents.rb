@@ -7,38 +7,43 @@
 # definitions for every event type, and adds the relevant methods to the
 # EvtHandler class.
 
+# Load the $events global array of type definitions
 require 'swig/classes/include/events'
 
-$exclude = [
-	'EVT_COMMAND',
-	'EVT_TAB',
-]
+# Little class to make accessing Event Type info a bit easier below
+class WxEventType < Struct.new(:name, :type, :wx_const)
+  # Events in Wx but not exposed in WxRuby (b/c they cause problems)
+  EXCLUDED = [ /^EVT_TAB/, 'EVT_COMMAND' ]
+  # These event types only work on Windows
+  WINDOWS_ONLY = [ /^EVT_DIALUP/ ]
 
-$windows_only = [
-	'EVT_DIALUP'
-]
+  def initialize(*args)
+    super
+    @excluded = true if EXCLUDED.any? { | x | x === name }
+    @win_only = true if WINDOWS_ONLY.any? { | x | x === name }
+  end
 
+  def excluded?
+    @excluded
+  end
+
+  def windows_only? 
+    @win_only
+  end
+end
+
+# Convert the raw arrays into informative event type objects
+$events.map! { | x | WxEventType[ *x ] }
+
+# Append this stuff to the default SWIG Events.i file
 File.open(ARGV[0], "a") do | out |
+  # First we loop over the events creating short C++ functions to hook
+  # up events for each
+  $events.each do | evt |
+    next if evt.excluded?
 
-
-	$events.each do |evt|
-		exclude = false
-		windows = false
-		$windows_only.each do |name|
-			if (evt[0].index(name) != nil)
-				windows = true
-			end
-		end
-		$exclude.each do |name|
-			if (evt[0].index(name) != nil)
-				exclude = true
-			end
-		end
-		next if exclude	
-        if(evt[0]=="EVT_MOUSE_EVENTS")
-		out.puts "#ifdef __WXMSW__" if windows
-		
-		out.puts <<FUNC_DEF
+    if evt.name =="EVT_MOUSE_EVENTS"
+      out.puts <<FUNC_DEF
 static VALUE evt_mouse_events(int argc, VALUE *argv, VALUE self)
 {
     evt_left_down(argc,argv,self);
@@ -56,66 +61,40 @@ static VALUE evt_mouse_events(int argc, VALUE *argv, VALUE self)
     return evt_mousewheel(argc,argv,self);
 }
 FUNC_DEF
+      next
+    end
 
-		out.puts "#endif //__WXMSW__" if windows
-        next
-        end
-		func = ""
-		case evt[1]
-		when 1
-			func = "internal_evt_no_parameters"
-		when 2
-			func = "internal_evt_with_id"
-		when 3
-			func = "internal_evt_with_id_range"
-		end
+    func = case evt.type
+      when 1 : "internal_evt_no_parameters"
+      when 2 : "internal_evt_with_id"
+      when 3 : "internal_evt_with_id_range"
+    end
 
-		out.puts "#ifdef __WXMSW__" if windows
-		
-		out.puts <<FUNC_DEF
-static VALUE #{evt[0].downcase}(int argc, VALUE *argv, VALUE self)
-{
-	return #{func}(argc,argv,self,#{evt[2]});
-}
+    out.puts "#ifdef __WXMSW__" if evt.windows_only?
+    out.puts <<FUNC_DEF
+static VALUE #{evt.name.downcase}(int argc, VALUE *argv, VALUE self)
+  { return #{func}(argc, argv, self, #{evt.wx_const}); }
 
 FUNC_DEF
+    out.puts "#endif //__WXMSW__" if evt.windows_only?
+  end
 
-		out.puts "#endif //__WXMSW__" if windows
-
-	end
-
-	out.puts <<INIT_FUNC
+  # Then we loop over the events and register the ruby method for each
+  out.puts <<INIT_FUNC
 extern "C" {
 void Init_wxEvents2()
 {
 INIT_FUNC
-	$events.each do |evt|
-		windows = false
-		exclude = false
-		$windows_only.each do |name|
-			if (evt[0].index(name) != nil)
-				windows = true
-			end
-		end
-		$exclude.each do |name|
-			if (evt[0].index(name) != nil)
-				exclude = true
-			end
-		end
-		next if exclude	
+  $events.each do | evt |
+    next if evt.excluded?
 
-
-		out.puts "#ifdef __WXMSW__" if windows
-
-		out.puts <<REGISTER_FUNC
-	rb_define_method(cWxEvtHandler.klass, \"#{evt[0].downcase}\", VALUEFUNC(#{evt[0].downcase}),-1);
+    out.puts "#ifdef __WXMSW__" if evt.windows_only?
+    out.puts <<REGISTER_FUNC
+	rb_define_method(cWxEvtHandler.klass, \"#{evt.name.downcase}\", VALUEFUNC(#{evt.name.downcase}),-1);
 REGISTER_FUNC
+    out.puts "#endif //__WXMSW__" if evt.windows_only?
+  end
 
-		out.puts "#endif //__WXMSW__" if windows
-
-	end
-
-	out.puts "}"
-	out.puts "}"
-
+  out.puts "}"
+  out.puts "}"
 end
