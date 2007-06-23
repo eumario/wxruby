@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module(directors="1") wxPoint
+%module wxPoint
 GC_MANAGE(wxPoint);
 
 %include "include/wxPoint.h"
