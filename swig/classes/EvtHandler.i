@@ -10,10 +10,32 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 %ignore wxEvtHandler::Disconnect;
 
 %import "include/wxObject.h"
-
 %include "include/wxEvtHandler.h"
 
-%{
+// The EvtHandler instance event methods (evt_xxx) are not defined
+// here. Instead, they are defined by Events.cpp, generated from
+// swig/Event.i and modified by swig/fixevents.rb
+
+// This provides the public Ruby 'connect' method
+%extend wxEvtHandler {
+  VALUE connect(int firstId, int lastId, wxEventType eventType)
+  {
+    VALUE func = rb_funcall(rb_cProc, rb_intern("new"), 0);
+    rb_global_variable(&callbacks);
+    if(callbacks == Qnil)
+        callbacks = rb_ary_new();
+    rb_ary_push(callbacks, func);
+
+    wxObject* userData = new wxRbCallback(func);
+    wxObjectEventFunction function = 
+        (wxObjectEventFunction )&wxRbCallback::EventThunker;
+    self->Connect(firstId, lastId, eventType, function, userData);
+	return Qtrue;
+  }
+}
+
+
+%runtime{
 
 extern swig_class cWxEvtHandler;
 static VALUE callbacks = Qnil;
@@ -25,7 +47,6 @@ class wxRbCallback : public wxObject
 public:
     wxRbCallback(VALUE func) { m_func = func; }
     wxRbCallback(const wxRbCallback &other) { m_func = other.m_func; }
-
 
     // This method handles all events on the WxWidgets/C++ side. It link
     // inspects the event and based on the event's type wraps it in the
@@ -49,11 +70,12 @@ public:
 
     VALUE m_func;
 };
+}
 
-// Internal method that links a ruby Proc (the block passed to evt_xxx)
-// to the WxWidgets C++ event handler method.
+%{
+// This is used by the evt_xxx methods from swig/Events.i
 void internal_connect(VALUE self, int firstId, int lastId, 
-                wxEventType eventType)
+					  wxEventType eventType)
 {
     wxEvtHandler *cppSelf = (wxEvtHandler *) 0 ;
     SWIG_ConvertPtr(self, (void **) &cppSelf, SWIGTYPE_p_wxEvtHandler, 1);
@@ -67,11 +89,7 @@ void internal_connect(VALUE self, int firstId, int lastId,
     wxObject* userData = new wxRbCallback(func);
     wxObjectEventFunction function = 
         (wxObjectEventFunction )&wxRbCallback::EventThunker;
-    (cppSelf)->Connect(firstId, lastId, eventType, function, userData);
+		(cppSelf)->Connect(firstId, lastId, eventType, function, userData);
 }
 
 %}
-
-// The EvtHandler instance event methods (evt_xxx) are not defined
-// here. Instead, they are defined by Events.cpp, generated from
-// swig/Event.i and modified by swig/fixevents.rb
