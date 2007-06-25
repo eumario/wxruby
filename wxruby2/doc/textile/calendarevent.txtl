@@ -30,16 +30,19 @@ h2. Methods
 
 h3(#CalendarEvent_getweekday). CalendarEvent#get_week_day
 
- "DateTime::WeekDay":datetime::weekday.html *get_week_day*()
+ Integer *get_week_day*()
 
-Returns the week day on which the user clicked in 
-@EVT_CALENDAR_WEEKDAY_CLICKED@ handler. It doesn't make sense to call
-this function in other handlers.
+Returns an integer for the weekday clicked in an
+@EVT_CALENDAR_WEEKDAY_CLICKED@ handler. This is an integer corresponding
+to the day name that the user clicked upon in a
+"CalendarCtrl":calendarctrl.html (Sunday = 0, Monday = 1, Tuesday = 2
+etc, as in Ruby's Time class).
 
+It doesn't make sense to call this method in other handlers.
 
 h3(#CalendarEvent_setweekday). CalendarEvent#set_week_day
 
-  *set_week_day*(%(arg-type)DateTime::WeekDay% day)
+  *set_week_day*(%(arg-type)Integer% day)
 
 Sets the week day carried by the event, normally only used by the library
 internally.
