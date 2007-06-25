@@ -1,23 +1,10 @@
 // Copyright 2004-2007 by Kevin Smith
 // released under the MIT-style wxruby2 license
 
-##############################################################
-%typemap(in) wxString& {
-	// $argnum: $1_type $1_name ($1_mangle) [$1_ltype]
-	$1 = new wxString(StringValuePtr($input), wxConvUTF8);
-}
 
-%typemap(in) const wxString& {
-	$1 = new wxString(StringValuePtr($input), wxConvUTF8);
-}
-
-%typemap(in) wxString* {
-	$1 = new wxString(StringValuePtr($input), wxConvUTF8);
-}
-
-%typemap(directorout) wxString, wxString& "$result = wxString(StringValuePtr($input), wxConvUTF8);";
-
+// include SWIG's built-in typemaps, eg for OUTPUT/INPUT
 %include "typemaps.i"
+
 
 %typemap(directorargout) ( int * OUTPUT ) {
   if($1 != NULL)
@@ -59,22 +46,17 @@
   }
 }
 
-/*
-Currently incompatible with the ruby post-processing of swigged .cpp files
-Needs to be fixed in fixdeleting.rb before this can be uncommented out
-%typemap(freearg) wxString & {
-	delete $1;
-}
+// (ruby) String <-> wxString
+%typemap(in) wxString& "$1 = new wxString(StringValuePtr($input), wxConvUTF8);"
+%typemap(in) wxString* "$1 = new wxString(StringValuePtr($input), wxConvUTF8);"
 
-%typemap(freearg) const wxString& {
-	delete $1;
-}
+%typemap(directorout) wxString, wxString& "$result = wxString(StringValuePtr($input), wxConvUTF8);";
 
- Removed temporarily 2006-04-16 kbs
-%typemap(freearg) wxString* {
-	delete $1;
-}
-*/
+// Only free the wxString argument if it has been assigned as a heap
+// variable by the typemap - SWIG assigns the default as stack varialbes
+// - but can't get these to work in the input typemap for now.
+%typemap(freearg) wxString & "if ( argc > $argnum - 2 ) delete $1;"
+%typemap(freearg) wxString* "if ( argc > $argnum - 2 ) delete $1;"
 
 %typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2((const char *)$1.mb_str());";
 
