@@ -4,7 +4,7 @@
 #include <wx/datetime.h>
 %}
 
-%typemap(in) const wxDateTime& {
+%typemap(in) wxDateTime& {
     int y = NUM2INT(rb_funcall($input, rb_intern("year"), 0));
     int rMonth = NUM2INT(rb_funcall($input, rb_intern("month"), 0));
     int rDay = NUM2INT(rb_funcall($input, rb_intern("mday"), 0));
@@ -20,6 +20,8 @@
 	$1 = new wxDateTime(d, mon, y, h, min, s, 0);
 }
 
+%typemap(freearg) wxDateTime& "if ( argc > $argnum - 2 ) delete $1;"
+
 %typemap(out) wxDateTime& {
     VALUE y = INT2NUM($1->GetYear());
     VALUE mon = INT2NUM($1->GetMonth() + 1);
@@ -29,11 +31,14 @@
     VALUE s = INT2NUM($1->GetSecond());
     
     VALUE cTime = rb_iv_get(rb_cObject, "Time");
-    // $result = rb_funcall(cDateTime, rb_intern("new"), 6, y, mon, d, h, min, s);
+
     $result = rb_funcall(cTime, rb_intern("local"), 6, y, mon, d, h, min, s);
 }
 
 // Need to have this to over-ride the default which does not work
-%typemap(typecheck) const wxDateTime& {
+%typemap(typecheck) wxDateTime& {
 	$1 = (TYPE($input) != T_NONE);
 }
+
+%typemap(in) wxDateTime::WeekDay "$1 = (wxDateTime::WeekDay)NUM2INT($input);"
+%typemap(out) wxDateTime::WeekDay "$result = INT2NUM($1);"
