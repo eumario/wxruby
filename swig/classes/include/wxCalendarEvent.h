@@ -1,4 +1,4 @@
-//   Copyright 2004-2005 by Kevin Smith
+//   Copyright 2004-2007 by Kevin Smith
 //   released under the MIT-style wxruby2 license
 
 
@@ -9,6 +9,7 @@ class wxCalendarEvent : public wxEvent
 public:
   const wxDateTime& GetDate() const;
   wxDateTime::WeekDay GetWeekDay() const;
+  void SetWeekDay(wxDateTime::WeekDay day);
 
   // override pure virtual methods from base classes
   virtual wxEvent* Clone() const;
