@@ -27,6 +27,8 @@ Wx::WXWIDGETS_VERSION = '%i.%i.%i' % [ Wx::WXWIDGETS_MAJOR_VERSION,
 
 
 # Load in all the class extension methods written in ruby
+# evthandler must be required first b/c it sets up methods modified elsewhere
+require 'wx/classes/evthandler.rb'
 class_files = File.join( File.dirname(__FILE__), 'wx', 'classes', '*.rb')
 Dir.glob(class_files) do | class_file | 
   require 'wx/classes/' + class_file[/\w+\.rb$/]
