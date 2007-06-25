@@ -114,7 +114,7 @@ def get_optional_classes
 end
 
 def all_obj_bases
-    extra_classes = %w|wx RubyConstants RubyStockObjects Functions Mac Events|
+    extra_classes = %w|wx RubyConstants RubyStockObjects Functions Mac|
     return get_classes + get_optional_classes + extra_classes
 end
 
@@ -185,8 +185,6 @@ end
 def add_initializers(cpp_file)
     needs_init_list = get_classes
     needs_init_list += get_optional_classes
-    needs_init_list << "Events"
-    needs_init_list << "Events2"
     needs_init_list << "Functions"
     needs_init_list << "Mac"
     needs_init_list << "RubyConstants"
@@ -258,21 +256,6 @@ def create_optional_swig_task(base_name)
     end
 end
 
-def create_swig_event_task(base_name)
-    cpp_file = cpp_file(base_name)
-    swig_file = special_swig_file(base_name)
-    events_src = File.join %w|swig classes include events.rb|
-    fixevents = File.join($swig_dir, "fixevents.rb")
-
-
-    file( cpp_file => [ swig_file, events_src, fixevents ] ) do | t |
-        do_swig(swig_file, cpp_file, $swig_options)
-        post_process(cpp_file, "fixmodule.rb")
-        post_process(cpp_file, "fixevents.rb")
-    end
-    return cpp_file
-end
-
 def create_swig_main_task(base_name)
     cpp_file = cpp_file(base_name)
     swig_file = special_swig_file(base_name)
@@ -295,7 +278,6 @@ def create_swig_tasks
     create_swig_helper_task("RubyStockObjects")
     create_swig_helper_task("Functions")
     create_swig_helper_task("Mac")
-    create_swig_event_task("Events")
     create_swig_main_task("wx")
     file(cpp_file("wx") => normal_cpp_files)
 end
