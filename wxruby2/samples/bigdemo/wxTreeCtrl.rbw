@@ -72,7 +72,8 @@ class TestTreeCtrlPanel < Wx::Panel
         fldropenidx = il.add(bm)
         bm.copy_from_icon(Wx::ArtProvider::get_icon(Wx::ART_FILE_OPEN, Wx::ART_OTHER, isz))
         fileidx = il.add(bm)
-        smileidx = il.add(Wx::Bitmap.new("./icons/wxwin16x16.xpm"))
+        bmp_file = File.join(File.dirname(__FILE__), 'icons', 'wxwin16x16.xpm')
+        smileidx = il.add(Wx::Bitmap.new(bmp_file))
         
         @tree.set_image_list(il)
         @il = il
