@@ -1,25 +1,12 @@
-// wxIconizeEvent.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2006 - 2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 #if !defined(_wxIconizeEvent_h_)
 #define _wxIconizeEvent_h_
 class wxIconizeEvent : public wxEvent
 {
 public:
-	/**
-	 * \brief Constructor. 
-	 * \param int   
-	 * \param bool   
-	*/
-
-   wxIconizeEvent(int  id = 0, bool  iconized = true) ;
-	/**
-	 * \brief Returns   if the frame has been iconized,   if it has been
-restored. 
-	*/
-
+  wxIconizeEvent(int  id = 0, bool iconized = true) ;
   bool Iconized() const;
 };
 
