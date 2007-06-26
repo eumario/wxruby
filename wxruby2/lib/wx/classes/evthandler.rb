@@ -736,6 +736,22 @@ class Wx::EvtHandler
     end
   end
 
+  # convenience evt_handler to listen to all mouse events
+  def evt_mouse_events(&block)
+    evt_left_down(&block)
+    evt_left_up(&block)
+    evt_middle_down(&block)
+    evt_middle_up(&block)
+    evt_right_down(&block)
+    evt_right_up(&block)
+    evt_motion(&block)
+    evt_left_dclick(&block)
+    evt_middle_dclick(&block)
+    evt_right_dclick(&block)
+    evt_leave_window(&block)
+    evt_enter_window(&block)
+    evt_mousewheel(&block)
+  end
 
 # TODO
 #   if defined?(Wx::Scintilla)
