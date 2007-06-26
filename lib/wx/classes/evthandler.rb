@@ -287,7 +287,7 @@ class Wx::EvtHandler
               Wx::Event],
     EventType['evt_iconize', 0,
               Wx::EVT_ICONIZE, 
-              Wx::Event],
+              Wx::IconizeEvent],
     EventType['evt_idle', 0,
               Wx::EVT_IDLE, 
               Wx::IdleEvent],
