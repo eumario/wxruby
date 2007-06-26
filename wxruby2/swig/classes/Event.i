@@ -30,6 +30,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 #include <wx/tglbtn.h>
 #include <wx/aui/aui.h>
 #include <wx/treebook.h>
+#include <wx/hyperlink.h>
 
 #ifdef WXSCINTILLA
 #    include <wx/wxscintilla.h>
@@ -291,6 +292,8 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED;
 %constant const int wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING;
 %constant const int wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED;
+
+%constant const int wxEVT_COMMAND_HYPERLINK; // 3700 
 
 %constant const int wxEVT_WIZARD_PAGE_CHANGED; //900)
 %constant const int wxEVT_WIZARD_PAGE_CHANGING; //901)
