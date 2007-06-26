@@ -40,6 +40,16 @@ class MinimalFrame < Wx::Frame
     evt_menu(Wx::ID_ABOUT) { on_about }
 
     evt_activate { | e | on_activate(e) }
+    evt_iconize  { | e | on_iconize(e) }
+  end
+
+
+  def on_iconize(event)
+    if event.iconized
+      puts "Frame '#{get_title}' was iconized"
+    else
+      puts "Frame '#{get_title}' was restored"
+    end
   end
 
   def on_activate(event)
