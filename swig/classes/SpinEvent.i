@@ -7,7 +7,7 @@
 GC_MANAGE_AS_EVENT(wxSpinEvent);
 
 %{
-#include <wx/spinbutt.h>
+#include <wx/spinctrl.h>
 %}
 
 %import "include/wxObject.h"

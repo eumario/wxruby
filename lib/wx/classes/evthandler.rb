@@ -545,7 +545,7 @@ class Wx::EvtHandler
               Wx::ScrollEvent],
     EventType['evt_spinctrl', 1,
               Wx::EVT_COMMAND_SPINCTRL_UPDATED, 
-              Wx::CommandEvent],
+              Wx::SpinEvent],
     EventType['evt_spin_down', 1,
               Wx::EVT_SCROLL_LINEDOWN, 
               Wx::ScrollEvent],
