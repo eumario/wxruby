@@ -8,7 +8,7 @@ GC_MANAGE_AS_OBJECT(wxStaticBoxSizer);
 
 // shared functions for GC marking 
 %include "../shared/sizers.i"
-%markfunc wxBoxSizer "mark_wxSBSizer";
+%markfunc wxBoxSizer "mark_wxSizer";
 
 // Must ensure that the C++ detach method is called, else the associated
 // StaticBox will be double-freed
