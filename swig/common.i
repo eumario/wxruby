@@ -32,7 +32,9 @@
 #error "This version of wxRuby requires WxWidgets 2.8.3 or greater"
 #endif
 
-extern VALUE mWxruby2;
+extern VALUE mWxruby2; // The global Wxruby2 module
+extern swig_class cWxTopLevelWindow; // used for wxWindow typemap in typemap.i
+
 %}
 
 %include "typedefs.i"

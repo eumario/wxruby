@@ -383,4 +383,19 @@
 
 ##############################################################
 
+// This typemap catches the first argument of all constructors and
+// Create() methods for Wx::Window classes. These should not be called
+// before App::main_loop is started, and, except for TopLevelWindows,
+// the parent argument must not be NULL.
+%typemap(check) wxWindow* parent {
+  if ( ! rb_const_defined(mWxruby2, rb_intern("THE_APP") ) )
+	{ rb_raise(rb_eRuntimeError,
+			   "Cannot create a Window before App.main_loop has been called");}
+  if ( ! $1 && ! rb_obj_is_kind_of(self, cWxTopLevelWindow.klass) )
+	{ rb_raise(rb_eArgError, 
+			   "Window parent argument must not be nil"); }
+}
+
 %apply int *OUTPUT { int * x , int * y , int * w, int * h };
+
+

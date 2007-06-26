@@ -12,6 +12,15 @@ GC_MANAGE(wxBusyInfo);
 
 %ignore wxBusyInfo::wxBusyInfo;
 
+// BusyInfo is an exception to the general rule in typemap.i - it
+// accepts a wxWindow* parent argument which may be null - but it does
+// not inherit from TopLevelWindow - so special typemap for this class.
+%typemap(check) wxWindow* parent {
+  if ( ! rb_const_defined(mWxruby2, rb_intern("THE_APP") ) )
+	{ rb_raise(rb_eRuntimeError,
+			   "Cannot create BusyInfo before App.main_loop has been called");}
+}
+
 %include "include/wxBusyInfo.h"
 
 %extend wxBusyInfo {
