@@ -64,7 +64,7 @@ log_error(int argc, VALUE *argv, VALUE self)
 
 static VALUE get_app(VALUE self)
 {
-  rb_const_get(mWxruby2, rb_intern("THE_APP"));
+  return rb_const_get(mWxruby2, rb_intern("THE_APP"));
 }
 
 static VALUE
