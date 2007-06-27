@@ -31,7 +31,8 @@ bool GC_IsWindowDeleted(void *ptr)
 // Default mark routine for Windows - preserve sizers
 void GC_mark_wxWindow(void *ptr)
 {
-
+  // can occasionally be NULL if called in an evt_create handler
+  if ( ! ptr ) return; 
   if ( GC_IsWindowDeleted(ptr) ) return;
 
   wxWindow* wx_win = (wxWindow*)ptr;
