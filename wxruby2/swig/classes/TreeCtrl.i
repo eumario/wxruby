@@ -101,8 +101,10 @@ protected:
 	// First check if there's ImageLists and mark if found
 	img_list = tree_ctrl->GetImageList();
 	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+#if !defined(__WXMSW__)
 	img_list = tree_ctrl->GetButtonsImageList();
 	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
+#endif
 	img_list = tree_ctrl->GetStateImageList();
 	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
 
