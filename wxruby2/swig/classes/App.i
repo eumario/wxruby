@@ -10,12 +10,16 @@
 %}
 
 
+// Not supported
 %ignore GetAuto3D;
 %ignore OnQueryEndSession;
 %ignore ProcessMessage;
 %ignore SetAuto3D;
 
+// Redefined below
 %ignore MainLoop;
+%ignore FilterEvent;
+
 %rename(wx_initialize) Initialize;
 
 #//////////////////////////////////
@@ -36,6 +40,8 @@ extern swig_class cWxWindow;
 extern swig_class cWxEvent;
 extern "C" void Init_wxRubyStockObjects();
 
+// Pre-fetched id because it's called very frequently in wxRubyApp::FilterEvent
+static VALUE filter_event_sym = rb_intern("filter_event");
 
 class wxRubyApp : public wxApp
 {
@@ -189,7 +195,33 @@ public:
         return 0;
 		
     }
-	
+
+
+  int FilterEvent(wxEvent& event) {
+	VALUE rb_self = SWIG_RubyInstanceFor(this);
+	// Just proceed if no ruby filter_event method is defined in App class
+	// filter_event_sym defined above
+	if ( ! rb_respond_to(rb_self, filter_event_sym) ) 
+	  { return -1; }
+	// else wrap the event and pass into that method
+	VALUE event_type_id =  INT2NUM(event.GetEventType());
+	VALUE event_klass = rb_funcall(cWxEvtHandler.klass, 
+								   rb_intern("event_class_for_type"),
+								   1, event_type_id ); 	  
+
+	VALUE rb_event = Data_Wrap_Struct(event_klass, 0, 0, 0);
+	DATA_PTR(rb_event) = &event;
+
+	VALUE rb_ret_val = rb_funcall(rb_self, filter_event_sym, 1, rb_event);
+	if ( ! FIXNUM_P(rb_ret_val)  )
+	  { rb_raise(rb_eTypeError, "filter_event must return an integer"); }
+	int ret_val = FIX2INT(rb_ret_val);
+	if ( ret_val < -1 || ret_val > 1  )
+	  { rb_raise(rb_eRuntimeError, "filter_event must return -1, 0, or 1"); }
+
+	return ret_val;
+  }
+
     // actually implemented in ruby in classes/app.rb
 	virtual void OnAssertFailure(const wxChar *file, int line, const wxChar *cond, const wxChar *msg)
 	{
@@ -197,7 +229,6 @@ public:
 	}
 
 };
-
 %}
 
 %markfunc wxRubyApp "wxRubyApp::mark_wxRubyApp";
