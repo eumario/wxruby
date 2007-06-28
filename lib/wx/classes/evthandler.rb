@@ -113,7 +113,7 @@ class Wx::EvtHandler
               Wx::CommandEvent],
     EventType['evt_child_focus', 0,
               Wx::EVT_CHILD_FOCUS, 
-              Wx::Event],
+              Wx::ChildFocusEvent],
     EventType['evt_choice', 1,
               Wx::EVT_COMMAND_CHOICE_SELECTED, 
               Wx::CommandEvent],
