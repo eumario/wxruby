@@ -1,39 +1,17 @@
 h1(#wxobject). Wx::Object
 
-This is the root class of all Widgets classes.
-It declares a virtual destructor which ensures that
-destructors get called for all derived class objects where necessary.
-
-Object is the hub of a dynamic object creation
-scheme, enabling a program to create instances of a class only knowing
-its string class name, and to query the class hierarchy.
-
-The class contains optional debugging versions
-of *new* and *delete*, which can help trace memory allocation
-and deallocation problems.
-
-Object can be used to implement reference counted objects, such as
-Pen, Bitmap and others.
-
-h2. See also
-
-"ClassInfo":classinfo.html, "Debugging overview":debuggingoverview.html, "ObjectRefData":objectrefdata.html
+This is the base class for most wxRuby classes. Almost all of the useful
+functions it provides to the C++ library, such as exploration of
+object-oriented class relationships and memory management, are handled
+within the Ruby language or the wxRuby wrapping. Therefore, this class
+has very few methods.
 
 <div id="methods">
 
 h2. Methods
 
 * "Object.new":#Object_new
-* "Object#m__ref_data":#Object_mrefdata
-* "Object#dump":#Object_dump
-* "Object#get_class_info":#Object_getclassinfo
-* "Object#get_ref_data":#Object_getrefdata
-* "Object#is_kind_of":#Object_iskindof
-* "Object#ref":#Object_ref
-* "Object#set_ref_data":#Object_setrefdata
-* "Object#un_ref":#Object_unref
-* "wxObject::operator new":#Object_new
-* "wxObject::operator delete":#Object_delete
+* "Object#wx_class":#Object_wxclass
 
 </div>
 
@@ -42,139 +20,16 @@ h3(#Object_new). Object.new
 
   *Object.new*(%(arg-type)Object% other)
 
-Default and copy constructors.
+Default constructor. Should not need to be called in ruby code.
 
-h3(#Object_mrefdata). Object#m__ref_data
+h3(#Object_wxclass). Object#wx_class
 
-ObjectRefData* m_refData
+  String *wx_class*()
 
-Pointer to an object which is the object's reference-counted data.
+Returns the name of the C++ wxWidgets class which this object is
+wrapping, for example 'wxTextCtrl' or 'wxFrame'. Note that if a wxRuby
+class has been subclassed, this will still return the name of the core
+C++ class which this object is wrapping.
 
-h4. See also
-
-"Object#ref":object.html#Object_ref, "Object#un_ref":object.html#Object_unref, "Object#set_ref_data":object.html#Object_setrefdata, "Object#get_ref_data":object.html#Object_getrefdata, "ObjectRefData":objectrefdata.html
-
-h3(#Object_dump). Object#dump
-
-  *dump*(%(arg-type)ostream% stream)
-
-A virtual function that may be redefined by derived classes to allow dumping of
-memory states.
-
-This function is only defined in debug build and doesn't exist at all if
-@__WXDEBUG__@ is not defined.
-
-h4. Parameters
-
-* _stream_ Stream on which to output dump information.
-
-h4. Remarks
-
-Currently Widgets does not define Dump for derived classes, but
-programmers may wish to use it for their own applications. Be sure to
-call the Dump member of the class's base class to allow all information to be
-dumped.
-
-The implementation of this function in Object just writes the class name of
-the object.
-
-h3(#Object_getclassinfo). Object#get_class_info
-
- "ClassInfo":classinfo.html *get_class_info*()
-
-This virtual function is redefined for every class that requires run-time
-type information, when using DECLARE_CLASS macros.
-
-h3(#Object_getrefdata). Object#get_ref_data
-
- "ObjectRefData":objectrefdata.html *get_ref_data*()
-
-Returns the *m_refData* pointer.
-
-h4. See also
-
-"Object#ref":object.html#Object_ref, "Object#un_ref":object.html#Object_unref, "Object#m__ref_data":object.html#Object_mrefdata, "Object#set_ref_data":object.html#Object_setrefdata, "ObjectRefData":objectrefdata.html
-
-h3(#Object_iskindof). Object#is_kind_of
-
- Boolean *is_kind_of*(%(arg-type)ClassInfo% info)
-
-Determines whether this class is a subclass of (or the same class as)
-the given class.
-
-h4. Parameters
-
-* _info_ A pointer to a class information object, which may be obtained
-by using the CLASSINFO macro.
-
-h4. Return value
-
-true if the class represented by _info_ is the same class as
-this one or is derived from it.
-
-h4. Example
-
-
-   bool tmp = obj->IsKindOf(CLASSINFO(Frame));
- 
-
-h3(#Object_ref). Object#ref
-
-  *ref*(%(arg-type)Object% clone)
-
-Makes this object refer to the data in _clone_.
-
-h4. Parameters
-
-* _clone_ The object to `clone'.
-
-h4. Remarks
-
-First this function calls "Object#un_ref":object.html#Object_unref on itself
-to decrement (and perhaps free) the data it is currently referring to.
-
-It then sets its own m_refData to point to that of _clone_, and increments the reference count
-inside the data.
-
-h4. See also
-
-"Object#un_ref":object.html#Object_unref, "Object#m__ref_data":object.html#Object_mrefdata, "Object#set_ref_data":object.html#Object_setrefdata, "Object#get_ref_data":object.html#Object_getrefdata, "ObjectRefData":objectrefdata.html
-
-h3(#Object_setrefdata). Object#set_ref_data
-
-  *set_ref_data*(%(arg-type)ObjectRefData% data)
-
-Sets the *m_refData* pointer.
-
-h4. See also
-
-"Object#ref":object.html#Object_ref, "Object#un_ref":object.html#Object_unref, "Object#m__ref_data":object.html#Object_mrefdata, "Object#get_ref_data":object.html#Object_getrefdata, "ObjectRefData":objectrefdata.html
-
-h3(#Object_unref). Object#un_ref
-
-  *un_ref*()
-
-Decrements the reference count in the associated data, and if it is zero, deletes the data.
-The *m_refData* member is set to NULL.
-
-h4. See also
-
-"Object#ref":object.html#Object_ref, "Object#m__ref_data":object.html#Object_mrefdata, "Object#set_ref_data":object.html#Object_setrefdata, "Object#get_ref_data":object.html#Object_getrefdata, "ObjectRefData":objectrefdata.html
-
-h3(#Object_new). Object::operator new
-
-  *new*(%(arg-type)size_t% size,  %(arg-type)String% filename = nil, 
-      %(arg-type)Integer% lineNum = 0)
-
-The _new_ operator is defined for debugging versions of the library only, when
-the identifier __WXDEBUG__ is defined. It takes over memory allocation, allowing
-DebugContext operations.
-
-h3(#Object_delete). Object::operator delete
-
-  *delete*(%(arg-type)% buf)
-
-The _delete_ operator is defined for debugging versions of the library only, when
-the identifier __WXDEBUG__ is defined. It takes over memory deallocation, allowing
-DebugContext operations.
-
+This method is normally only required for development and debugging -
+user code should not need to call it.
