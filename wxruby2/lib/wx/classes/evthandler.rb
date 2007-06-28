@@ -539,7 +539,7 @@ class Wx::EvtHandler
               Wx::ScrollEvent],
     EventType['evt_set_cursor', 0,
               Wx::EVT_SET_CURSOR, 
-              Wx::Event],
+              Wx::SetCursorEvent],
     EventType['evt_set_focus', 0,
               Wx::EVT_SET_FOCUS, 
               Wx::FocusEvent],
