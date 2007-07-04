@@ -4,16 +4,14 @@
 %include "../common.i"
 
 %module(directors="1") wxGridBagSizer
-GC_MANAGE_AS_OBJECT(wxGridBagSizer);
+GC_MANAGE_AS_SIZER(wxGridBagSizer);
 
 %{
 #include <wx/gbsizer.h>
 %}
 
-// shared functions for GC marking 
+// shared functions
 %include "../shared/sizers.i"
-%markfunc wxBoxSizer "mark_wxSizer";
-
 
 // ignore these for now - are they useful?
 // require GBSizerItem to be wrapped

@@ -4,11 +4,10 @@
 %include "../common.i"
 
 %module(directors="1") wxStaticBoxSizer
-GC_MANAGE_AS_OBJECT(wxStaticBoxSizer);
+GC_MANAGE_AS_SIZER(wxStaticBoxSizer);
 
-// shared functions for GC marking 
+// shared functions
 %include "../shared/sizers.i"
-%markfunc wxStaticBoxSizer "mark_wxSizer";
 
 // Must ensure that the C++ detach method is called, else the associated
 // StaticBox will be double-freed
