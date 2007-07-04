@@ -38,7 +38,9 @@ h2. Methods
 * "StaticBitmap.new":#StaticBitmap_new
 * "StaticBitmap#create":#StaticBitmap_create
 * "StaticBitmap#get_bitmap":#StaticBitmap_getbitmap
+* "StaticIcon#get_icon":#StaticBitmap_geticon
 * "StaticBitmap#set_bitmap":#StaticBitmap_setbitmap
+* "StaticIcon#set_icon":#StaticBitmap_seticon
 
 </div>
 
@@ -47,7 +49,7 @@ h2. Methods
 h3(#StaticBitmap_constr). StaticBitmap.new
 
   *StaticBitmap.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Bitmap% label, 
-                   %(arg-type)Point% pos, 
+                   %(arg-type)Point% pos = DEFAULT_POSITION, 
                    %(arg-type)Size% size = DEFAULT_SIZE, 
                    %(arg-type)Integer% style = 0, 
                    %(arg-type)String% name = "staticBitmap")
@@ -72,7 +74,7 @@ h4. See also
 h3(#StaticBitmap_create). StaticBitmap#create
 
  Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Bitmap% label, 
-                %(arg-type)Point% pos, 
+                %(arg-type)Point% pos = DEFAULT_POSITION, 
                 %(arg-type)Size% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
                 %(arg-type)String% name = "staticBitmap")
@@ -84,11 +86,26 @@ h3(#StaticBitmap_getbitmap). StaticBitmap#get_bitmap
 
  "Bitmap":bitmap.html *get_bitmap*()
 
-Returns a reference to the label bitmap.
+Returns the bitmap currently used in the control. Notice that this method can
+be called even if "set_icon":#StaticBitmap_seticon had been used.
 
 h4. See also
 
 "StaticBitmap#set_bitmap":staticbitmap.html#StaticBitmap_setbitmap
+
+
+h3(#StaticBitmap_geticon). StaticIcon#get_icon
+
+ "Icon":icon.html *get_icon*()
+
+Returns the icon currently used in the control. Notice that this method can
+only be called if "set_icon":#StaticBitmap_seticon had been used: an icon
+can't be retrieved from the control if a bitmap had been set (using 
+"set_bitmap":#StaticBitmap_setbitmap).
+
+h4. See also
+
+"StaticIcon#set_icon":staticicon.html#StaticIcon_seticon
 
 
 h3(#StaticBitmap_setbitmap). StaticBitmap#set_bitmap
@@ -104,4 +121,19 @@ h4. Parameters
 h4. See also
 
 "StaticBitmap#get_bitmap":staticbitmap.html#StaticBitmap_getbitmap
+
+
+h3(#StaticBitmap_seticon). StaticIcon#set_icon
+
+  *set_icon*(%(arg-type)Icon% label)
+
+Sets the label to the given icon.
+
+h4. Parameters
+
+* _label_ The new icon.
+
+h4. See also
+
+"StaticIcon#get_icon":staticicon.html#StaticIcon_geticon
 
