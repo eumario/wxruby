@@ -3,7 +3,8 @@ h1(#wxspinbutton). Wx::SpinButton
 A SpinButton has two small up and down (or left and right) arrow buttons. It
 is often used next to a text control for increment and decrementing a value.
 Portable programs should try to use "SpinCtrl":spinctrl.html instead
-as SpinButton is not implemented for all platforms.
+as SpinButton is not implemented for all platforms but SpinCtrl is as it
+degenerates to a simple "TextCtrl":textctrl.html on such platforms.
 
 *NB:* the range supported by this control (and SpinCtrl) depends on the
 platform but is at least @-0x8000@ to @0x7fff@. Under GTK and
