@@ -33,6 +33,7 @@ $parents = {
     'wxCalendarEvent' => 'wxEvent',
     'wxCheckBox' => 'wxControl',
     'wxCheckListBox' => 'wxListBox',
+    'wxChildFocusEvent' => 'wxCommandEvent',
     'wxChoice' => 'wxControlWithItems',
     'wxChoicebook' => 'wxControl',
     'wxChoicebookEvent' => 'wxNotifyEvent',	
