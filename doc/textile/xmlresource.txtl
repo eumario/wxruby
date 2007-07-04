@@ -147,7 +147,7 @@ h3(#XmlResource_getxmlid). XmlResource#get_xrcid
 
 Returns a numeric ID that is equivalent to the string ID used in an XML
 resource. To be used in event tables.
-The macro @XRCID(name)@ is provided for convenience.
+The module method @Wx::xrcid(name)@ is provided for convenience.
 
 
 h3(#XmlResource_initallhandlers). XmlResource#init_all_handlers
@@ -161,11 +161,11 @@ most of the Widgets library.
 
 h3(#XmlResource_load). XmlResource#load
 
- Boolean *load*(%(arg-type)String% filemask)
+ Boolean *load*(%(arg-type)String% file)
 
-Loads resources from XML files that match given filemask.
-This method understands VFS (see filesys.h).
-
+Loads resources from the XML file @file@. If this file does not exist,
+or contains invalid XML, an exception will be raised; if successful, the
+loaded file name will be returneed.
 
 h3(#XmlResource_loadbitmap). XmlResource#load_bitmap
 
