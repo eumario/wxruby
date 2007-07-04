@@ -41,6 +41,14 @@ h2. Window styles
 
 See also "window styles overview":windowstyles.html and "TextCtrl.new":textctrl.html#TextCtrl_new.
 
+Note that alignment styles (@TE_LEFT@, 
+@TE_CENTRE@ and @TE_RIGHT@) can be changed
+dynamically after control creation on MSW and GTK. 
+@TE_READONLY@, @TE_PASSWORD@ and wrapping styles
+can be dynamically changed under GTK but not MSW. The other styles can be
+only set during control creation.
+
+
 h2. TextCtrl text format
 
 The multiline text controls always store the text as a sequence of lines
@@ -92,6 +100,27 @@ background colour (which stays grey):
      text.set_default_style( Wx::TextAttr.new(Wx::BLUE) )
      text.append_text("Blue on grey text\n")
 
+h2. Constants
+
+The values below are the possible return codes of the
+"hit_test":#TextCtrl_hittest method:
+
+
+
+ // the point asked is ...
+ enum TextCtrlHitTestResult
+ {
+     TE_HT_UNKNOWN = -2,   // this means HitTest() is simply not implemented
+     TE_HT_BEFORE,         // either to the left or upper
+     TE_HT_ON_TEXT,        // directly on
+     TE_HT_BELOW,          // below [the last line]
+     TE_HT_BEYOND          // after [the end of line]
+ };
+ // ... the character returned
+ 
+
+
+
 h2. Event handling
 
 The following commands are processed by default event handlers in
@@ -104,7 +133,7 @@ direct the events to a block that takes a "CommandEvent":commandevent.html
 argument.
 
 
-|*evt_text(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Respond to a EVT_COMMAND_TEXT_UPDATED event,generated when the text changes. Notice that this event will always be sentwhen the text controls contents changes - whether this is due to user input orcomes from the program itself (for example, if SetValue() is called)|
+|*evt_text(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Respond to a EVT_COMMAND_TEXT_UPDATED event,generated when the text changes. Notice that this event will be sentwhen the text controls contents changes - whether this is due to user input orcomes from the program itself (for example, if SetValue() is called); see ChangeValue() fora function which does not send this event.|
 |*evt_text_enter(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Respond to a EVT_COMMAND_TEXT_ENTER event,generated when enter is pressed in a text control (which must haveTE_PROCESS_ENTER style for this event to be generated).|
 |*evt_text_maxlen(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|User tried to enter more textinto the control than the limit set by "set_max_length":#TextCtrl_setmaxlength.|
 
@@ -145,6 +174,7 @@ h2. Methods
 * "TextCtrl#get_value":#TextCtrl_getvalue
 * "TextCtrl#hit_test":#TextCtrl_hittest
 * "TextCtrl#is_editable":#TextCtrl_iseditable
+* "TextCtrl#is_empty":#TextCtrl_isempty
 * "TextCtrl#is_modified":#TextCtrl_ismodified
 * "TextCtrl#is_multi_line":#TextCtrl_ismultiline
 * "TextCtrl#is_single_line":#TextCtrl_issingleline
@@ -162,9 +192,11 @@ h2. Methods
 * "TextCtrl#set_insertion_point":#TextCtrl_setinsertionpoint
 * "TextCtrl#set_insertion_point_end":#TextCtrl_setinsertionpointend
 * "TextCtrl#set_max_length":#TextCtrl_setmaxlength
+* "TextCtrl#set_modified":#TextCtrl_setmodified
 * "TextCtrl#set_selection":#TextCtrl_setselection
 * "TextCtrl#set_style":#TextCtrl_setstyle
 * "TextCtrl#set_value":#TextCtrl_setvalue
+* "TextCtrl#change_value":#TextCtrl_changevalue
 * "TextCtrl#show_position":#TextCtrl_showposition
 * "TextCtrl#undo":#TextCtrl_undo
 * "TextCtrl#write_text":#TextCtrl_writetext
@@ -408,12 +440,17 @@ Returns the number of lines in the text control buffer.
 h4. Remarks
 
 Note that even empty text controls have one line (where the insertion point
-is), so GetNumberOfLines() never returns 0.
+is), so GetNumberOfLines() never returns $0$.
 
-For gtk_text (multi-line) controls, the number of lines is
-calculated by actually counting newline characters in the buffer. You
-may wish to avoid using functions that work with line numbers if you are
-working with controls that contain large amounts of text.
+For GTK using GTK+ 1.2.x and earlier, the number of lines in a multi-line
+text control is calculated by actually counting newline characters in the
+buffer, i.e. this function returns the number of logical lines and doesn't
+depend on whether any of them are wrapped. For all the other platforms, the
+number of physical lines in the control is returned.
+
+Also note that you may wish to avoid using functions that work with line
+numbers if you are working with controls that contain large amounts of text as
+this function has $O(N)$ complexity for $N$ being the number of lines.
 
 
 h3(#TextCtrl_getrange). TextCtrl#get_range
@@ -505,6 +542,7 @@ h4. See also
 
 "position_to_xy":#TextCtrl_positiontoxy, "XYToPosition":textctrlxytoposition.html
 
+
 h3(#TextCtrl_iseditable). TextCtrl#is_editable
 
  Boolean *is_editable*()
@@ -513,6 +551,17 @@ Returns @true@ if the controls contents may be edited by user (note that it
 always can be changed by the program), i.e. if the control hasn't been put in
 read-only mode by a previous call to
 "set_editable":#TextCtrl_seteditable.
+
+
+h3(#TextCtrl_isempty). TextCtrl#is_empty
+
+ Boolean *is_empty*()
+
+Returns  if the control is currently empty. This is the same as 
+@GetValue().empty()@ but can be much more efficient for the multiline
+controls containing big amounts of text.
+
+2.7.1
 
 
 h3(#TextCtrl_ismodified). TextCtrl#is_modified
@@ -553,13 +602,14 @@ h4. See also
 
 h3(#TextCtrl_loadfile). TextCtrl#load_file
 
- Boolean *load_file*(%(arg-type)String% filename)
+ Boolean *load_file*(%(arg-type)String% filename,  %(arg-type)Integer% fileType = TEXT_TYPE_ANY)
 
 Loads and displays the named file, if it exists.
 
 h4. Parameters
 
 * _filename_ The filename of the file to load.
+* _fileType_ The type of file to load. This is currently ignored in TextCtrl.
 
 h4. Return value
 
@@ -668,13 +718,14 @@ h4. Parameters
 
 h3(#TextCtrl_savefile). TextCtrl#save_file
 
- Boolean *save_file*(%(arg-type)String% filename)
+ Boolean *save_file*(%(arg-type)String% filename,  %(arg-type)Integer% fileType = TEXT_TYPE_ANY)
 
 Saves the contents of the control in a text file.
 
 h4. Parameters
 
 * _filename_ The name of the file in which to save the text.
+* _fileType_ The type of file to save. This is currently ignored in TextCtrl.
 
 h4. Return value
 
@@ -766,6 +817,17 @@ h4. Compatibility
 Only implemented in MSW/GTK starting with Widgets 2.3.2.
 
 
+h3(#TextCtrl_setmodified). TextCtrl#set_modified
+
+  *set_modified*(%(arg-type)Boolean% modified)
+
+Marks the control as being modified by the user or not.
+
+h4. See also
+
+"mark_dirty":#TextCtrl_markdirty, "discard_edits":#TextCtrl_discardedits
+
+
 h3(#TextCtrl_setselection). TextCtrl#set_selection
 
   *set_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
@@ -813,6 +875,29 @@ after the call to set_value).
 
 Note that this function will generate a @EVT_COMMAND_TEXT_UPDATED@
 event.
+
+This function is deprecated and should not be used in new code. Please use the
+"change_value":#TextCtrl_changevalue function instead.
+
+h4. Parameters
+
+* _value_ The new value to set. It may contain newline characters if the text control is multi-line.
+
+
+h3(#TextCtrl_changevalue). TextCtrl#change_value
+
+  *change_value*(%(arg-type)String% value)
+
+Sets the text value and marks the control as not-modified (which means that
+"is_modified":#TextCtrl_ismodified would return @false@ immediately
+after the call to SetValue).
+
+Note that this function will not generate the @EVT_COMMAND_TEXT_UPDATED@ 
+event.
+This is the only difference with "set_value":#TextCtrl_setvalue.
+See "this topic":progevent.html for more information.
+
+2.7.1
 
 h4. Parameters
 
