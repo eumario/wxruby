@@ -4,7 +4,7 @@
 %include "../common.i"
 
 %module(directors="1") wxFlexGridSizer
-GC_MANAGE_AS_OBJECT(wxFlexGridSizer);
+GC_MANAGE_AS_SIZER(wxFlexGridSizer);
 
 %ignore wxFlexGridSizer::GetFlexibleDirection;
 %ignore wxFlexGridSizer::GetNonFlexibleDirection;
@@ -13,11 +13,8 @@ GC_MANAGE_AS_OBJECT(wxFlexGridSizer);
 %ignore wxFlexGridSizer::GetNonFlexibleGrowMode;
 %ignore wxFlexGridSizer::SetNonFlexibleGrowMode;
 
-// shared functions for GC marking 
+// shared functions
 %include "../shared/sizers.i"
-%markfunc wxBoxSizer "mark_wxSizer";
-
- 
 
 %import "include/wxObject.h"
 %import "include/wxSizer.h"

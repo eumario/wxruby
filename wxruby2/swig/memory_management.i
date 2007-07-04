@@ -75,6 +75,16 @@ GC_NEVER(kls);
 %trackobjects;
 %enddef
 
+// Sizers attached to windows are automatically destroyed by wxWidgets,
+// so they should not be deleted.  
+//
+// TODO - orphaned/unattached sizers are not automatically destroyed -
+// so the freefunc should check for this condition and do the delete if
+// required to prevent a memory leak.
+%define GC_MANAGE_AS_SIZER(kls)
+GC_NEVER(kls);
+%enddef
+
 // All other classes - mainly helper classes (eg Sizer, GridCellxxx) and
 // informational classes eg Point, Size, Rect. These are tracked but 
 // sometimes later disowned once passed into a widget, and thenceforth 

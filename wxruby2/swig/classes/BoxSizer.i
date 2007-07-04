@@ -4,13 +4,11 @@
 %include "../common.i"
 
 %module(directors="1") wxBoxSizer
-GC_MANAGE_AS_OBJECT(wxBoxSizer);
+GC_MANAGE_AS_SIZER(wxBoxSizer);
 
 
-// shared functions for GC marking 
+// shared functions
 %include "../shared/sizers.i"
-%markfunc wxBoxSizer "mark_wxSizer";
-
 
 %import "include/wxObject.h"
 %import "include/wxSizer.h"

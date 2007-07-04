@@ -4,14 +4,13 @@
 %include "../common.i"
 
 %module(directors="1") wxSizer
-GC_MANAGE_AS_OBJECT(wxSizer);
+GC_MANAGE_AS_SIZER(wxSizer);
 
 %feature("nodirector") wxSizer::CalcMin;
 %ignore wxSizer::IsShown;
 
-// shared functions for GC marking 
+// shared functions
 %include "../shared/sizers.i"
-%markfunc wxSizer "mark_wxSizer";
 
 %import "include/wxObject.h"
 
