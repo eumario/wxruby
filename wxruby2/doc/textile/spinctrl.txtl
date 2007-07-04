@@ -35,6 +35,12 @@ the corresponding events will not be generated under all platforms. Finally, if
 the user modifies the text in the edit part of the spin control directly, the
 @EVT_TEXT@ is generated, like for the "TextCtrl":textctrl.html.
 
+When the use enters text into the text area, the text is not
+validated until the control loses focus (e.g. by using the TAB
+key). The value is then adjusted to the range and a 
+"SpinEvent":spinevent.html sent then if the value
+is different from the last value sent.
+
 h2. See also
 
 "Event handling overview":eventhandlingoverview.html,
