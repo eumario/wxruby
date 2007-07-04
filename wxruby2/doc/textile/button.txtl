@@ -133,7 +133,7 @@ h4. Remarks
 
 Under Windows, only dialog box buttons respond to this function.  As
 normal under Windows and Motif, pressing return causes the default button to
-be depressed when the return key is pressed. See also "Window#set_focus":window.html#Window_setfocus which sets the keyboard focus for windows and text panel items, and "Panel#set_default_item":panel.html#Panel_setdefaultitem.
+be depressed when the return key is pressed. See also "Window#set_focus":window.html#Window_setfocus which sets the keyboard focus for windows and text panel items, and "TopLevelWindow#set_default_item":toplevelwindow.html#TopLevelWindow_setdefaultitem.
 
 Note that under Motif, calling this function immediately after
 creation of a button and before the creation of other buttons
