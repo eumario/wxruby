@@ -7,10 +7,15 @@ class wxTextCtrl : public wxControl
 {
 public:
     wxTextCtrl();
-    wxTextCtrl(wxWindow *parent, wxWindowID id, wxString const &value = wxT(""), 
-		wxPoint const &pos = wxDefaultPosition, wxSize const &size = wxDefaultSize, 
-		long style = 0, wxValidator const &validator = wxDefaultValidator, 
-		wxString const &name = wxTextCtrlNameStr);
+    wxTextCtrl(wxWindow *parent, 
+			   wxWindowID id, 
+			   wxString const &value = wxT(""), 
+			   wxPoint const &pos = wxDefaultPosition, 
+			   wxSize const &size = wxDefaultSize, 
+			   long style = 0, 
+			   wxValidator const &validator = wxDefaultValidator, 
+			   wxString const &name = wxTextCtrlNameStr);
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString &value = wxEmptyString,
@@ -21,12 +26,17 @@ public:
                 const wxString &name = wxTextCtrlNameStr);
 
     virtual wxString GetValue() const;
-    virtual void SetValue(const wxString& value);
+    virtual void SetValue(const wxString& value); // deprecated since 2.8
+	virtual void ChangeValue(const wxString& value);
+
+
     virtual int GetLineLength(long lineNo) const;
     virtual wxString GetLineText(long lineNo) const;
     virtual int GetNumberOfLines() const;
     virtual bool IsModified() const;
     virtual bool IsEditable() const;
+	bool IsEmpty() const;
+
     virtual void GetSelection(long* from, long* to) const;
     virtual void Clear();
     virtual void Replace(long from, long to, const wxString& value);
@@ -74,6 +84,9 @@ public:
     bool SetForegroundColour(const wxColour& colour);
     bool SetBackgroundColour(const wxColour& colour);
 
+
+    void SetModified(bool modified);
+
 	// Although the following were public in the .h file,
 	// I believe they are not part of the public API
 	//GtkWidget* GetConnectWidget();
@@ -82,7 +95,7 @@ public:
     //void CalculateScrollbar();
     //void OnInternalIdle();
     //void SetUpdateFont(bool ) { }
-    //void SetModified() { m_modified = true; }
+
     //virtual void Freeze();
     //virtual void Thaw();
     //virtual bool ScrollLines(int lines);
@@ -102,9 +115,6 @@ public:
     //virtual int GetLineLength(long lineNo) const = 0;
     //virtual wxString GetLineText(long lineNo) const = 0;
     //virtual int GetNumberOfLines() const = 0;
-
-    //virtual bool IsModified() const = 0;
-    //virtual bool IsEditable() const = 0;
 
     bool IsSingleLine() const;
     bool IsMultiLine() const;
