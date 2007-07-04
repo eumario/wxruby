@@ -28,7 +28,7 @@ as well.
 Although in this simple case it is clear that the correct key code could be
 found in the key down event handler by checking the value returned by
 "shift_down()":#KeyEvent_shiftdown(), in general you should use
-@EVT_CHAR@ for this as for non alphanumeric keys the translation is
+@EVT_CHAR@ for this as for non-alphanumeric keys the translation is
 keyboard-layout dependent and can only be done properly by the system itself.
 
 Another kind of translation is done when the control key is pressed: for
@@ -74,18 +74,12 @@ functions that take a KeyEvent argument.
 
 h2. Methods
 
-* "KeyEvent#m__alt_down":#KeyEvent_maltdown
-* "KeyEvent#m__control_down":#KeyEvent_mcontroldown
-* "KeyEvent#m__key_code":#KeyEvent_mkeycode
-* "KeyEvent#m__meta_down":#KeyEvent_mmetadown
-* "KeyEvent#m__shift_down":#KeyEvent_mshiftdown
-* "KeyEvent#m__x":#KeyEvent_mx
-* "KeyEvent#m__y":#KeyEvent_my
 * "KeyEvent.new":#KeyEvent_new
 * "KeyEvent#alt_down":#KeyEvent_altdown
 * "KeyEvent#cmd_down":#KeyEvent_cmddown
 * "KeyEvent#control_down":#KeyEvent_controldown
 * "KeyEvent#get_key_code":#KeyEvent_getkeycode
+* "KeyEvent#get_modifiers":#KeyEvent_getmodifiers
 * "KeyEvent#get_position":#KeyEvent_getposition
 * "KeyEvent#get_raw_key_code":#KeyEvent_getrawkeycode
 * "KeyEvent#get_raw_key_flags":#KeyEvent_getrawkeyflags
@@ -97,57 +91,6 @@ h2. Methods
 * "KeyEvent#shift_down":#KeyEvent_shiftdown
 
 </div>
-
-
-
-h3(#KeyEvent_maltdown). KeyEvent#m__alt_down
-
-boolm_altDown
-
-true if the Alt key is pressed down.
-
-
-h3(#KeyEvent_mcontroldown). KeyEvent#m__control_down
-
-boolm_controlDown
-
-true if control is pressed down.
-
-
-h3(#KeyEvent_mkeycode). KeyEvent#m__key_code
-
-longm_keyCode
-
-Virtual keycode. See "Keycodes":keycodes.html for a list of identifiers.
-
-
-h3(#KeyEvent_mmetadown). KeyEvent#m__meta_down
-
-boolm_metaDown
-
-true if the Meta key is pressed down.
-
-
-h3(#KeyEvent_mshiftdown). KeyEvent#m__shift_down
-
-boolm_shiftDown
-
-true if shift is pressed down.
-
-
-h3(#KeyEvent_mx). KeyEvent#m__x
-
-intm_x
-
-X position of the event.
-
-
-h3(#KeyEvent_my). KeyEvent#m__y
-
-intm_y
-
-Y position of the event.
-
 
 h3(#KeyEvent_new). KeyEvent.new
 
@@ -162,18 +105,21 @@ h3(#KeyEvent_altdown). KeyEvent#alt_down
 
 Returns true if the Alt key was down at the time of the key event.
 
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
+
 
 h3(#KeyEvent_cmddown). KeyEvent#cmd_down
 
  Boolean *cmd_down*()
 
-"Cmd" is a pseudo key which is the same as Control for PC and Unix platforms
-but the special "Apple" (a.k.a as "Command") key under Macs: it makes often
-sense to use it instead of, say, ControlDown() because Cmd key is used for the
-same thing under Mac as Ctrl elsewhere (but Ctrl still exists, just not used
-for this purpose under Mac). So for non-Mac platforms this is the same as 
-"control_down()":#KeyEvent_controldown() and under Mac this is the same
-as "meta_down()":#KeyEvent_metadown().
+Cmd is a pseudo key which is the same as Control for PC and Unix
+platforms but the special Apple (a.k.a as Command) key under
+Macs: it makes often sense to use it instead of, say, ControlDown() because Cmd
+key is used for the same thing under Mac as Ctrl elsewhere (but Ctrl still
+exists, just not used for this purpose under Mac). So for non-Mac platforms
+this is the same as "control_down()":#KeyEvent_controldown() and under
+Mac this is the same as "meta_down()":#KeyEvent_metadown().
 
 
 h3(#KeyEvent_controldown). KeyEvent#control_down
@@ -181,6 +127,9 @@ h3(#KeyEvent_controldown). KeyEvent#control_down
  Boolean *control_down*()
 
 Returns true if the control key was down at the time of the key event.
+
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
 
 
 h3(#KeyEvent_getkeycode). KeyEvent#get_key_code
@@ -197,6 +146,35 @@ user entered a character that can be represented in current locale's default
 charset. You can obtain the corresponding Unicode character using
 "get_unicode_key":#KeyEvent_getunicodekey.
 
+
+h3(#KeyEvent_getmodifiers). KeyEvent#get_modifiers
+
+ Integer *get_modifiers*()
+
+Return the bitmask of modifier keys which were pressed when this event
+happened. See "key modifier constants":keymodifiers.html for the full list
+of modifiers.
+
+Notice that this function is easier to use correctly than, for example, 
+"control_down":#KeyEvent_controldown because when using the latter you
+also have to remember to test that none of the other modifiers is pressed:
+
+
+     if ( control_down && ! alt_down && ! shift_down && ! meta_down )
+         ... handle Ctrl-XXX ...
+ 
+
+and forgetting to do it can result in serious program bugs (e.g. program not
+working with European keyboard layout where AltGr key which is seen by
+the program as combination of Ctrl and Alt is used). On the
+other hand, you can simply write
+
+
+     if ( get_modifiers == Wx::MOD_CONTROL )
+         ... handle Ctrl-XXX ...
+ 
+
+with this function.
 
 h3(#KeyEvent_getposition). KeyEvent#get_position
 
@@ -271,10 +249,16 @@ h3(#KeyEvent_metadown). KeyEvent#meta_down
 
 Returns true if the Meta key was down at the time of the key event.
 
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
+
 
 h3(#KeyEvent_shiftdown). KeyEvent#shift_down
 
  Boolean *shift_down*()
 
 Returns true if the shift key was down at the time of the key event.
+
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
 

@@ -15,6 +15,7 @@ public:
   long GetX() const;
   long GetY() const;
   bool MetaDown() const;
+  int GetModifiers() const;
   wxPoint GetPosition() const;
   void GetPosition(long * x , long * y ) const;
   bool HasModifiers() const;
@@ -23,14 +24,6 @@ public:
   // override pure virtual methods from base classes
   virtual wxEvent* Clone() const;
 
-  wxCoord       m_x, m_y;
-
-  long          m_keyCode;
-
-  bool          m_controlDown;
-  bool          m_shiftDown;
-  bool          m_altDown;
-  bool          m_metaDown;
   bool          m_scanCode;
 
 #if wxUSE_UNICODE
