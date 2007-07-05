@@ -38,6 +38,7 @@ GC_NEVER(wxRubyApp);
 extern swig_class cWxEvtHandler;
 extern swig_class cWxWindow;
 extern swig_class cWxEvent;
+extern void GC_SetWindowDeleted(void*);
 extern "C" void Init_wxRubyStockObjects();
 
 // Pre-fetched id because it's called very frequently in wxRubyApp::FilterEvent
@@ -62,11 +63,7 @@ public:
   void OnWindowDestroy(wxWindowDestroyEvent &event) 
   {
 	wxObject* wx_obj = event.GetEventObject();
-	// Would be neater - but can't do it this way b/c of destruction sequence
-	// SWIG_RubyUnlinkObjects((void *)wx_obj);
-
-	VALUE rb_obj = SWIG_RubyInstanceFor((void *)wx_obj);
-	rb_iv_set(rb_obj, "@__wx_destroyed__", Qtrue);
+	GC_SetWindowDeleted(wx_obj);
 	event.Skip();
   }
 

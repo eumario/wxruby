@@ -19,10 +19,11 @@
 //    will be deleted too by the standard %freefunc.
 
 
-// This is implemented in swig/wx.i
+// These are implemented in swig/wx.i, so they are shared among all classes
 %{
 extern void GcNullFreeFunc(void *);
 extern void GC_mark_wxWindow(void *);
+extern void GC_mark_wxFrame(void *);
 %}
 
 // Macro definitions.
@@ -48,11 +49,13 @@ GC_NEVER(kls);
 %feature("markfunc") kls "GC_mark_wxWindow";
 %enddef
 
-// Strategy for top-level frames - these are destroyed automatically.
+// Strategy for top-level frames - these are destroyed
+// automatically. Marking is the same as for Windows, plus preservation
+// of the associated MenuBar, if reuqired.
 %define GC_MANAGE_AS_FRAME(kls)
 GC_NEVER(kls);
 // Mark any associated sizer
-%feature("markfunc") kls "GC_mark_wxWindow";
+%feature("markfunc") kls "GC_mark_wxFrame";
 %enddef
 
 // Strategy for dialogs - these are destroyed automatically
