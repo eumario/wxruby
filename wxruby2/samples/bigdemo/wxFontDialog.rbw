@@ -131,6 +131,8 @@ class FontTestPanel < Wx::Panel
                 return "Wx::SWISS"
             when Wx::MODERN
                 return "Wx::MODERN"
+            when Wx::TELETYPE      
+                return "Wx::TELETYPE"
             when Wx::NORMAL
                 return "Wx::NORMAL"
             when Wx::SLANT
@@ -141,6 +143,8 @@ class FontTestPanel < Wx::Panel
                 return "Wx::LIGHT"
             when Wx::BOLD
                 return "Wx::BOLD"
+            else
+                return "Unknown"
         end
     end
     
