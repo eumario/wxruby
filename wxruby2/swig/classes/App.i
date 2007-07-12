@@ -19,6 +19,8 @@
 // Redefined below
 %ignore MainLoop;
 %ignore FilterEvent;
+%feature("nodirector") FilterEvent;
+
 
 %rename(wx_initialize) Initialize;
 
