@@ -241,6 +241,10 @@ class MyFrame < Frame
 
     @canvas = MyCanvas.new(self)
 
+    # This is required to set focus so that key events are directed to
+    # this Window, on Linux/GTK in particular 
+    @canvas.set_focus
+
     # create a status bar just for fun (by default with 1 pane only)
     create_status_bar(2)
     set_status_text("Welcome to Windows!")
