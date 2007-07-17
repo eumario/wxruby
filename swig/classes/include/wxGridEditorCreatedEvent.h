@@ -18,6 +18,8 @@ public:
     void SetCol(int col);
     void SetControl(wxControl* ctrl);
 
+		virtual wxEvent *Clone() const;
+
 };
 
 
