@@ -16,6 +16,9 @@ public:
   bool MetaDown() ;
   bool Selecting() ;
   bool ShiftDown() ;
+	bool CmdDown();
+	
+	virtual wxEvent *Clone() const;
 };
 
 

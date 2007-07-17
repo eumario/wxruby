@@ -14,6 +14,9 @@ public:
   int GetRowOrCol() ;
   bool MetaDown() ;
   bool ShiftDown() ;
+	bool CmdDown();
+	
+	virtual wxEvent *Clone() const;
 };
 
 
