@@ -63,8 +63,7 @@ class MinimalFrame < Wx::Frame
     # create a simple message dialog with OK button
     about_dlg = Wx::MessageDialog.new( self, msg, 'About Minimal',
                                        Wx::OK|Wx::ICON_INFORMATION )
-    about_dlg.show_modal()
-	about_dlg.destroy()
+    about_dlg.show_modal
   end
 
   # utility function to find an icon relative to this ruby script
