@@ -19,8 +19,8 @@
 // Redefined below
 %ignore MainLoop;
 %ignore FilterEvent;
-%feature("nodirector") FilterEvent;
-
+%feature("nodirector") FilterEvent; // director-like custom method below
+%feature("nodirector") GetTopWindow; // avoid exception on exit
 
 %rename(wx_initialize) Initialize;
 
@@ -174,15 +174,9 @@ public:
 
     virtual int OnExit()
     {
-
-
 #ifdef __WXDEBUG__	
         printf("OnExit...\n");
 #endif 
-
-		// unhook the App ruby object from the C++ object
-		SWIG_RubyUnlinkObjects((void *)this);
-
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
         if ( oldlog )
@@ -192,7 +186,6 @@ public:
 		  }
 
         return 0;
-		
     }
 
 
