@@ -137,5 +137,3 @@ void GC_mark_wxFrame(void *ptr)
 %}
 
 #define VERSION_STRING "wxRuby2"
-
-int wxMessageBox(const wxString& message, const wxString& caption = wxT("Message"), int style = wxOK, wxWindow *parent = NULL, int x = -1, int y = -1);

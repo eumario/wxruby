@@ -1,9 +1,14 @@
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+// Copyright 2004-2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
 
 %module(directors="1") wxFunctions
-
 %include "common.i"
+
+// This file defines a set of top-level functions used across the
+// wxLibrary:
+// * shortcut methods for displaying simple dialogs
+// * logging functions
+// * the xrcid macro
 
 
 %{
@@ -121,6 +126,8 @@ void wxSetWorkingDirectory(const wxString &);
     rb_ary_push($result,INT2NUM((*$1)[i]));
 }
 
+
+int wxMessageBox(const wxString& message, const wxString& caption = wxT("Message"), int style = wxOK, wxWindow *parent = NULL, int x = -1, int y = -1);
 
 size_t wxGetMultipleChoices(wxArrayInt& selections,const wxString& message,const wxString& caption,int n, const wxString choices[],wxWindow *parent = NULL,int x = -1, int y = -1,bool centre = TRUE,int width=150, int height=200);
 
