@@ -9,8 +9,6 @@
 // * shortcut methods for displaying simple dialogs
 // * logging functions
 // * the xrcid macro
-
-
 %{
 //NO_CLASS - This tells fixmodule not to expect a class
 
@@ -85,7 +83,7 @@ xrcid(VALUE self,VALUE str_id)
   int ret = wxXmlResource::GetXRCID(temp);
   return INT2NUM(ret);
 }
-%}
+%} // end of Header code
 
 void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
 
@@ -114,6 +112,16 @@ wxString wxGetHomeDir();
 bool wxGetKeyState(wxKeyCode key);
 
 void wxSetWorkingDirectory(const wxString &);
+
+// All the functions which take a parent argument in this file display
+// dialogs, so the parent argument can be nil (which is not permitted in
+// the normal typemap defined in typemap.i). So override the standard
+// typemap and just check that the App has been started.
+%typemap(check) wxWindow* parent {
+  if ( ! rb_const_defined(mWxruby2, rb_intern("THE_APP") ) )
+	{ rb_raise(rb_eRuntimeError,
+			   "Cannot display dialog before App.main_loop has been called");}
+}
 
 %typemap(in,numinputs=0) wxArrayInt &selections (wxArrayInt sel)
 {
