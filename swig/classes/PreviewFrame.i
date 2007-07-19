@@ -10,6 +10,12 @@ GC_MANAGE_AS_FRAME(wxPreviewFrame);
 #include <wx/print.h>
 %}
 
+
+// Once a PrintPreview is associated with a PreviewFrame, it is deleted
+// automatically by wxWidgets - so must avoid calling its destructor
+// from Ruby when it is GC'd.
+%apply SWIGTYPE *DISOWN {wxPrintPreview* preview};
+
 %rename(init) Initialize;
 
 %import "include/wxObject.h"
