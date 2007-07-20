@@ -10,6 +10,8 @@
 %ignore *::SetClientObject(int  n, wxClientData * data);
 
 %{
+  extern swig_class cWxControlWithItems;
+
   // Returns a ruby object stored as client data
   static VALUE wxControlWithItems_get_client_data(wxControlWithItems *ptr, int n) {
 	VALUE returnVal = (VALUE) ptr->GetClientData(n);
@@ -24,8 +26,12 @@
 	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
 	if ( rb_iv_get(rb_obj, "@__wx_destroyed__" ) == Qtrue )
 	  return;
-	fflush(stdout);
-	
+
+	// On Windows, sometimes the wrong object is associated with the
+	// ptr, so we check whether it is the right one to avoid crashes
+	if ( ! rb_obj_is_kind_of(rb_obj, cWxControlWithItems.klass) ) 
+	  return;
+
 	wxControlWithItems* wx_cwi = (wxControlWithItems*) ptr;
 	int count = wx_cwi->GetCount();
 	if ( count == 0 )
