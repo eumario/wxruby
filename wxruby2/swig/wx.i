@@ -36,7 +36,8 @@ bool GC_IsWindowDeleted(void *ptr)
 void GC_SetWindowDeleted(void *ptr)
 {
   VALUE rb_win = SWIG_RubyInstanceFor(ptr);
-  rb_ivar_set(rb_win, wx_destroyed_sym, Qtrue);
+  if ( rb_win != Qnil )
+	rb_ivar_set(rb_win, wx_destroyed_sym, Qtrue);
 }
 
 // Carries out marking of Sizer objects belonging to a Wx::Window. Note
@@ -45,10 +46,10 @@ void GC_SetWindowDeleted(void *ptr)
 // not those picked up as marked by in-scope variables by
 // Ruby. Otherwise, segfaults may result. Because Sizers are SWIG
 // directors, they must be preserved from GC.
-void GC_mark_SizerBelongingToWindow(wxSizer *wx_sizer)
+void GC_mark_SizerBelongingToWindow(wxSizer *wx_sizer, VALUE rb_sizer)
 {
   // First, mark this sizer
-  rb_gc_mark( SWIG_RubyInstanceFor(wx_sizer) );
+  rb_gc_mark( rb_sizer );
   
   // Then loop over hte sizer's content and mark each sub-sizer in turn
   wxSizerItemList& children = wx_sizer->GetChildren();
@@ -59,7 +60,11 @@ void GC_mark_SizerBelongingToWindow(wxSizer *wx_sizer)
 	  wxSizerItem* item = node->GetData();
 	  wxSizer* child_sizer  = item->GetSizer();
 	  if ( child_sizer )
-		{  GC_mark_SizerBelongingToWindow(child_sizer); }
+		{
+		  VALUE rb_child_sizer = SWIG_RubyInstanceFor(child_sizer);
+		  if ( rb_child_sizer != Qnil )
+			{  GC_mark_SizerBelongingToWindow(child_sizer, rb_child_sizer); }
+		}
 	}
 
 }
@@ -95,7 +100,9 @@ void GC_mark_wxWindow(void *ptr)
   wxSizer* wx_sizer = wx_win->GetSizer();
   if ( wx_sizer )
 	{ 
-	  GC_mark_SizerBelongingToWindow(wx_sizer); 
+	  VALUE rb_sizer = SWIG_RubyInstanceFor(wx_sizer);
+	  if ( rb_sizer != Qnil )
+		GC_mark_SizerBelongingToWindow(wx_sizer, rb_sizer); 
 	}
 
   wxCaret* wx_caret = wx_win->GetCaret();
