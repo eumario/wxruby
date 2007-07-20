@@ -64,7 +64,6 @@ $wx_cppflags = [
     ].join(' ')
 $extra_cppflags = [
     "/GR",
-    "/GX",
     "/EHsc",
     "-DSTRICT", 
     "-DWIN32", "-D__WIN32__", 
