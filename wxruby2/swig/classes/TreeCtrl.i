@@ -91,8 +91,7 @@ protected:
   // SWIG's entry point function for GC mark
   static void mark_wxTreeCtrl(void *ptr)
   {
-	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
-	if ( rb_iv_get(rb_obj, "@__wx_destroyed__" ) == Qtrue )
+	if ( GC_IsWindowDeleted(ptr) )
 	  return;
 
 	wxTreeCtrl* tree_ctrl = (wxTreeCtrl*) ptr;
