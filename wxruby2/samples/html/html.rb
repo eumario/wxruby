@@ -100,22 +100,24 @@ class HtmlFrame < Wx::Frame
   end
 
   def setup_panel
+    panel = Wx::Panel.new(self, -1)
+
     sizer = Wx::BoxSizer.new(Wx::VERTICAL)
     top_sizer = Wx::BoxSizer.new(Wx::HORIZONTAL)
     
-    @go_butt  = Wx::StaticText.new(self, -1, 'Location:')
+    @go_butt  = Wx::StaticText.new(panel, -1, 'Location:')
     top_sizer.add(@go_butt, 0, Wx::ALL, 4)
-    @addr_bar = Wx::TextCtrl.new(self, -1, 'HOME', Wx::DEFAULT_POSITION,
+    @addr_bar = Wx::TextCtrl.new(panel, -1, 'HOME', Wx::DEFAULT_POSITION,
                                 Wx::DEFAULT_SIZE, Wx::TE_READONLY)
     top_sizer.add(@addr_bar, 1, Wx::ALL, 4)
     sizer.add(top_sizer, 0, Wx::EXPAND|Wx::TOP|Wx::BOTTOM, 4)
 
-    @html_win = MyHtmlWindow.new(self, -1)
+    @html_win = MyHtmlWindow.new(panel, -1)
     @html_win.set_related_frame(self, 'HTML Window: %s')
     @html_win.set_related_status_bar(2)
     @html_win.set_page(DATA.read)
     sizer.add(@html_win, 1, Wx::ALL|Wx::GROW, 4)
-    self.set_sizer(sizer)
+    panel.set_sizer(sizer)
   end
 
   def setup_menus
