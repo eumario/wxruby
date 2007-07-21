@@ -31,11 +31,12 @@ enum wxWindowVariant
 
 %rename(SetDimensions) wxWindow::SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
 
-// Caret set by set_caret becomes owned by C++
-%apply SWIGTYPE *DISOWN {wxCaret*  caret};
-
-// Any sizers passed in to wx become owned by C++
-%apply SWIGTYPE *DISOWN {wxSizer*  sizer};
+// Any of these following kind of objects become owned by the window
+// when passed into Wx, and so will be deleted automatically; using
+// DISOWN resets their %freefunc to avoid deleting the object twice
+%apply SWIGTYPE *DISOWN {wxCaret* caret};
+%apply SWIGTYPE *DISOWN {wxSizer* sizer};
+%apply SWIGTYPE *DISOWN {wxToolTip* tip};
 
 %apply int * INOUT { int * x_INOUT, int * y_INOUT }
 
