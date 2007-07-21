@@ -4,7 +4,7 @@
 %include "../common.i"
 
 %module(directors="1") wxTaskBarIcon
-GC_MANAGE_AS_OBJECT(wxTaskBarIcon);
+GC_NEVER(wxTaskBarIcon); // Shouldn't be deleted from within Ruby
 
 %{
 #include <wx/taskbar.h>
