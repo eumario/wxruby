@@ -22,6 +22,8 @@ void GcNullFreeFunc(void *ptr)
 // WindowDestroyEvent handled by wxRubyApp
 bool GC_IsWindowDeleted(void *ptr)
 {
+  // If objects have been 'unlinked' then DATA_PTR = 0
+  if ( ! ptr ) return true;
   VALUE rb_win = SWIG_RubyInstanceFor(ptr);
   if ( rb_ivar_defined(rb_win, wx_destroyed_sym ) )
 	return true;
@@ -37,6 +39,8 @@ void GC_SetWindowDeleted(void *ptr)
   if ( rb_win != Qnil )
 	{
 	  rb_ivar_set(rb_win, wx_destroyed_sym, Qtrue);
+	  SWIG_RubyUnlinkObjects(ptr);
+	  SWIG_RubyRemoveTracking(ptr);
 	}
 }
 
@@ -92,8 +96,6 @@ void GC_mark_MenuBarBelongingToFrame(wxMenuBar *menu_bar)
 // belong to this window
 void GC_mark_wxWindow(void *ptr)
 {
-  // can occasionally be NULL if called in an evt_create handler
-  if ( ! ptr ) return; 
   if ( GC_IsWindowDeleted(ptr) ) return;
 
   wxWindow* wx_win = (wxWindow*)ptr;
@@ -129,5 +131,26 @@ void GC_mark_wxFrame(void *ptr)
   wxMenuBar* menu_bar = wx_frame->GetMenuBar();
   if ( menu_bar ) 
 	{ GC_mark_MenuBarBelongingToFrame(menu_bar); }
+}
+
+// Prevents Ruby's GC sweeping up items that are stored as client data
+// Checks whether the C++ object is still around first...
+void mark_wxControlWithItems(void* ptr) {
+  if ( GC_IsWindowDeleted(ptr) )
+	return;
+
+  wxControlWithItems* wx_cwi = (wxControlWithItems*) ptr;
+  int count = wx_cwi->GetCount();
+  if ( count == 0 )
+	return; // Empty control
+  if ( ! wx_cwi->HasClientObjectData() && ! wx_cwi->HasClientUntypedData() )
+	return; // Control containing only strings
+  
+  for (int i = 0; i < count; ++i)
+	{
+	  VALUE object = (VALUE) wx_cwi->GetClientData(i);
+	  if ( object && object != Qnil ) 
+		rb_gc_mark(object);
+	}
 }
 %}
