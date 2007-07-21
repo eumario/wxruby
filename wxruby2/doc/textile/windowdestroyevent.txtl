@@ -15,15 +15,14 @@ h2. Derived from
 
 h2. Event hooks
 
+To process a window destruction event, use the @evt_window_destroy@ event hook
+to handle the event using a block. The block receives a
+WindowDestroyEvent argument.
 
-To process a window destruction event, use the @evt_destroy@ event hook
-to handle the event using a block. The block can optionally receive a
-WindowDestroyEvent argument. @id@ should be the id of the window whose
-destruction should be handled. It is possible to observe the destruction
-of any window using the special identifier @Wx::ID_ANY@. Note that a
-WindowDestroyEvent is only generated when a window's @destroy@ method is
-explicitly called; the automatic deletion of child windows when a frame
-is destroyed does *not* trigger these events.
+Note that if you specify your own evt_window_destroy handler, you *MUST*
+call "event.skip":event.html#Event_skip on the event. This ensures it is
+passed on to wxRuby's internal evt_window_destroy handlers, where it
+used in memory management.
 
 |*evt_destroy(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_DESTROY event.|
 
