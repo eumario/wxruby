@@ -52,20 +52,22 @@ end
 class TextCtrlFrame < Wx::Frame
   def initialize(title, pos, size)
     super(nil, -1, title, pos, size)
+
+    panel = Wx::Panel.new(self, -1)
     sizer = Wx::BoxSizer.new(Wx::VERTICAL)
 
-    @textctrl = InformativeTextCtrl.new(self, '')
+    @textctrl = InformativeTextCtrl.new(panel, '')
     populate_textctrl()
     sizer.add(@textctrl, 2, Wx::GROW|Wx::ALL, 2)
 
-    button = Wx::Button.new(self, -1, 'Get Info')
+    button = Wx::Button.new(panel, -1, 'Get Info')
     sizer.add(button, 0, Wx::ADJUST_MINSIZE|Wx::ALL, 2 )
     evt_button(button.get_id) { | e | on_click(e) }
 
-    @log = LogTextCtrl.new(self)
+    @log = LogTextCtrl.new(panel)
     sizer.add(@log, 1, Wx::GROW|Wx::ALL, 2)
 
-    self.set_sizer( sizer )
+    panel.set_sizer( sizer )
   end
 
   def populate_textctrl()
