@@ -1,3 +1,4 @@
+
 // Copyright 2004-2007 by Kevin Smith
 // released under the MIT-style wxruby2 license
 
@@ -34,6 +35,7 @@
 
 extern VALUE mWxruby2; // The global Wxruby2 module
 extern swig_class cWxTopLevelWindow; // used for wxWindow typemap in typemap.i
+extern bool GC_IsWindowDeleted(void *ptr);
 
 %}
 
