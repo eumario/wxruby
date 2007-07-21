@@ -28,7 +28,7 @@ $original_h_dir = File.join($classes_dir, 'include')
 $optional_dir = File.join($classes_dir, 'optional')
 $optional_h_dir = File.join($optional_dir, 'include')
 
-$swig_cmd = "swig"
+$swig_cmd = ENV['SWIGCMD'] || "swig"
 $swig_options = ''
 $swig_minimum_version = '1.3.29'
 
@@ -224,8 +224,7 @@ end
 def create_swig_helper_task(base_name)
     cpp_file = cpp_file(base_name)
     swig_file = special_swig_file(base_name)
-    
-    file(cpp_file => swig_file) do |t|
+    file(cpp_file => swig_file ) do |t|
         do_swig(swig_file, cpp_file, $swig_options)
         post_process(cpp_file, "fixmodule.rb")
     end
@@ -259,8 +258,8 @@ end
 def create_swig_main_task(base_name)
     cpp_file = cpp_file(base_name)
     swig_file = special_swig_file(base_name)
-    
-    file(cpp_file => swig_file) do |t|
+    mark_free = special_swig_file("mark_free_impl")
+    file(cpp_file => [ swig_file, mark_free ] ) do |t|
         do_swig(swig_file, cpp_file, "")
         post_process(cpp_file, "fixmainmodule.rb")
         add_initializers(cpp_file)
