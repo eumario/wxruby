@@ -8,8 +8,6 @@
 
 
 %{
-static VALUE wx_destroyed_sym = rb_intern("@__wx_destroyed__");
-
 // Code to be run when the ruby object is swept by GC - this only
 // unlinks the C++ object from the ruby VALUE but doesn't delete
 // it because it is still needed and will be managed by WxWidgets.
@@ -23,9 +21,7 @@ void GcNullFreeFunc(void *ptr)
 bool GC_IsWindowDeleted(void *ptr)
 {
   // If objects have been 'unlinked' then DATA_PTR = 0
-  if ( ! ptr ) return true;
-  VALUE rb_win = SWIG_RubyInstanceFor(ptr);
-  if ( rb_ivar_defined(rb_win, wx_destroyed_sym ) )
+  if ( ! ptr ) 
 	return true;
   else
 	return false;
@@ -35,13 +31,8 @@ bool GC_IsWindowDeleted(void *ptr)
 // WindowDestroyEvent handled by wxRubyApp
 void GC_SetWindowDeleted(void *ptr)
 {
-  VALUE rb_win = SWIG_RubyInstanceFor(ptr);
-  if ( rb_win != Qnil )
-	{
-	  rb_ivar_set(rb_win, wx_destroyed_sym, Qtrue);
-	  SWIG_RubyUnlinkObjects(ptr);
-	  SWIG_RubyRemoveTracking(ptr);
-	}
+  SWIG_RubyUnlinkObjects(ptr);
+  SWIG_RubyRemoveTracking(ptr);
 }
 
 // Carries out marking of Sizer objects belonging to a Wx::Window. Note
