@@ -130,6 +130,8 @@ void mark_wxControlWithItems(void* ptr) {
   if ( GC_IsWindowDeleted(ptr) )
 	return;
 
+  GC_mark_wxWindow(ptr);
+
   wxControlWithItems* wx_cwi = (wxControlWithItems*) ptr;
   int count = wx_cwi->GetCount();
   if ( count == 0 )
