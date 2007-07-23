@@ -50,7 +50,8 @@ class MinimalFrame < Wx::Frame
     evt_menu(Wx::ID_ABOUT) { on_about }
   end
 
-  # end the application
+  # End the application; it should finish automatically when the last
+  # window is closed.
   def on_quit
     close()
   end
@@ -75,18 +76,16 @@ end
 # Wx::App is the container class for any wxruby app - only a single
 # instance is required
 class MinimalApp < Wx::App
+  # This method is called when main_loop is entered; it should set up
+  # the application's and display initial GUI windows.
   def on_init
     frame = MinimalFrame.new("Minimal wxRuby App",
                              Wx::Point.new(50, 50), 
                              Wx::Size.new(450, 340))
     set_app_name('Minimal')
-    # required
+    # This is required, and on_init must return a true value else the
+    # app will not start
     frame.show()
-  end
-  
-  def on_assert(file, line, condition, message)
-  	puts("ASSERT: #{file} #{line}: #{condition}; #{message}")
-	raise
   end
 end
 
