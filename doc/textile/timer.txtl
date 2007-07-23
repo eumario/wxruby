@@ -4,21 +4,31 @@ The Timer class allows you to execute code at specified intervals. Its
 precision is platform-dependent, but in general will not be better than 1ms nor
 worse than 1s.
 
-There are three different ways to use this class:
+There are two different ways to use this class:
 
+# You may derive a new class from Timer and define your own
+"notify":timernotify.html instance method in that to perform the
+required action. For example:
 
-# You may derive a new class from Timer and override the 
-"Notify":timernotify.html member to perform the required action.
-# Or you may redirect the notifications to any 
-"EvtHandler":evthandler.html derived object by using the non default
-constructor or "set_owner":#Timer_setowner. Then use the @EVT_TIMER@ 
-macro to connect it to the event handler which will receive 
+ class MyTimer < Wx::Timer
+   def notify
+     puts "Timer ticked" 
+   end 
+ end
+ 
+ timer = MyTimer.new
+ timer.start(100) # every 1/10 second
+
+# Or you may redirect the notifications to any
+"EvtHandler":evthandler.html derived object by using the longer
+constructor or "set_owner":#Timer_setowner. Then use the @evt_timer@
+method to connect it to the event handler which will receive
 "TimerEvent":timerevent.html notifications.
-# Or you may use a derived class and the @EVT_TIMER@ 
-macro to connect it to an event handler defined in the derived class.
-If the default constructor is used, the timer object will be its
-own owner object, since it is derived from EvtHandler.
 
+  # assuming 'self' is some Window or Wx::App
+  timer = Wx::Timer.new(self, 1234) # 1234 is an arbitrary id
+  evt_timer(1234) { puts "Timer ticked" }
+  timer.start(100)
 
 In any case, you must start the timer with "Start":timerstart.html 
 after constructing it before it actually starts sending notifications. It can
