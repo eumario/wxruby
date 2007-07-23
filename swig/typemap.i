@@ -54,7 +54,13 @@
 
 // Only free the wxString argument if it has been assigned as a heap
 // variable by the typemap - SWIG assigns the default as stack varialbes
-// - but can't get these to work in the input typemap for now.
+// - but can't get stack variables to work in the input typemap for now.
+//
+// Note that these freearg typemaps only work for instance methods -
+// they shouldn't be applied to static/class methods because these have
+// one fewer argument. Fortunately there are very few static methods in
+// Wx that accept wxString, and can be dealt with on a case-by-case
+// basis in the appropriate class .i files.
 %typemap(freearg) wxString & "if ( argc > $argnum - 2 ) delete $1;"
 %typemap(freearg) wxString* "if ( argc > $argnum - 2 ) delete $1;"
 
