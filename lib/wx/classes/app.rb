@@ -10,4 +10,16 @@ class Wx::App
   def on_assert_failure(file, line, condition, message)
     warn "Wx WARNING: #{message} (#{file}:#{line})"
   end
+
+  # For use in development only, of no practical use in production code.
+  # This method causes Ruby's garbage collection to run (roughly) at
+  # interval +interval+ (seconds) - the default is 1, i.e. every
+  # second. This should help ferret out bugs in memory management more
+  # quickly.
+  def gc_stress(interval = 1)
+    t = Wx::Timer.new(self, 9999)
+    evt_timer(9999) { Thread.pass }
+    Thread.new { loop { sleep interval; GC.start } }
+    t.start(100)
+  end
 end
