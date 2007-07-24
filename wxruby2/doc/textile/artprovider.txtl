@@ -1,14 +1,14 @@
 h1(#wxartprovider). Wx::ArtProvider
 
-The ArtProvider class is used to customize the look of wxRuby applications.
-When wxRuby needs to display an icon or a bitmap (e.g. in the standard file
-dialog), it does not use a hard-coded resource but asks ArtProvider for it
-instead. This way users can plug in their own ArtProvider class and easily
-replace standard art with their own version. All
-that is needed is to derive a class from ArtProvider, override its
-"create_bitmap":#ArtProvider_createbitmap method and register the
-provider with
-"ArtProvider#push_provider":artprovider.html#ArtProvider_pushprovider:
+The ArtProvider class is used to customize the look of wxRuby
+applications.  When wxRuby needs to display an icon or a bitmap (e.g. in
+the standard file dialog), it does not use a hard-coded resource but
+asks ArtProvider for it instead. This way users can plug in their own
+ArtProvider class and easily replace standard art with their own
+version. All that is needed is to derive a class from ArtProvider,
+override its "create_bitmap":#ArtProvider_createbitmap method and
+register the provider with
+"ArtProvider#push":artprovider.html#ArtProvider_push:
 
   class MyProvider < Wx::ArtProvider
   	def create_bitmap(art_id, art_client, art_size)
@@ -17,9 +17,8 @@ provider with
     end
   end
 
-  Wx::ArtProvider.push_provider(MyProvider.new)
+  Wx::ArtProvider.push(MyProvider.new)
  
-
 There's another way of taking advantage of this class: you can use it in
 your code and use platform native icons as provided by
 "ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap or
@@ -112,9 +111,10 @@ h2. Methods
 
 * "ArtProvider.get_bitmap":#ArtProvider_getbitmap
 * "ArtProvider.get_icon":#ArtProvider_geticon
-* "ArtProvider.pop_provider":#ArtProvider_new
-* "ArtProvider.push_provider":#ArtProvider_pushprovider
-* "ArtProvider.remove_provider":#ArtProvider_removeprovider
+* "ArtProvider.insert":#ArtProvider_insert
+* "ArtProvider.pop":#ArtProvider_pop
+* "ArtProvider.push":#ArtProvider_push
+* "ArtProvider.remove":#ArtProvider_remove
 
 * "ArtProvider#create_bitmap":#ArtProvider_createbitmap
 
@@ -124,13 +124,20 @@ h2. Instance Methods
 
 h3(#ArtProvider_createbitmap). ArtProvider#create_bitmap
 
- "Bitmap":bitmap.html *create_bitmap*(%(arg-type)ArtID% id,  %(arg-type)ArtClient% client, 
-                        %(arg-type)Size% size)
+ "Bitmap":bitmap.html *create_bitmap*(%(arg-type)String% id,  
+                                      %(arg-type)String% client, 
+                                      %(arg-type)Size% size)
 
-Derived art provider classes must override this method to create
-requested art resource. Note that returned bitmaps are cached by
-ArtProvider and it is therefore not necessary to optimize create_bitmap
-for speed (e.g. you may create Bitmap objects from XPMs here).
+If you create your own custom Wx::ArtProvider subclasses, they must
+include an instance method @create_bitmap@. This method should accept
+three arguments, as above, identifying the name, use and size of the
+bitmap requested. The method should return a "Wx::Bitmap":bitmap.html
+appropriate to the request, or @nil@ if the requested bitmap cannot be
+supplied by the provider.
+
+Note that it is not necessary for your custom Ruby ArtProvider classes
+to perform any caching - wxRuby will cache repeated requests for the
+same bitmap.
 
 h4. Parameters
 
@@ -142,7 +149,7 @@ This only serves as a hint.
 h4. Note
 
 This is *not* part of ArtProvider's public API and should not normally
-be called directly, Use
+be called directly in wxRuby code. Use
 "ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap or
 "ArtProvider#get_icon":artprovider.html#ArtProvider_geticon to query
 ArtProvider for a resource.
@@ -151,8 +158,9 @@ h2. Class Methods
 
 h3(#ArtProvider_getbitmap). ArtProvider.get_bitmap
 
- "Bitmap":bitmap.html *get_bitmap*(%(arg-type)ArtID% id,  %(arg-type)ArtClient% client = ART_OTHER, 
-                     %(arg-type)Size% size = DEFAULT_SIZE)
+ "Bitmap":bitmap.html *get_bitmap*(%(arg-type)String% id,  
+                                   %(arg-type)Stringt% client = "ART_OTHER_C", 
+                                   %(arg-type)Size% size = DEFAULT_SIZE)
 
 Query registered providers for bitmap with given ID.
 
@@ -160,7 +168,7 @@ h4. Parameters
 
 * _id_ ArtID unique identifier of the bitmap.
 * _client_ ArtClient identifier of the client (i.e. who is asking for the bitmap).
-* _size_ Size of the returned bitmap or @DefaultSize@ if size doesn't matter.
+* _size_ Size of the returned bitmap or @Wx::DEFAULT_SIZE@ if size doesn't matter.
 
 h4. Return value
 
@@ -168,36 +176,37 @@ The bitmap if one of registered providers recognizes the ID or NullBitmap otherw
 
 h3(#ArtProvider_geticon). ArtProvider.get_icon
 
- "Icon":icon.html *get_icon*(%(arg-type)ArtID% id,  %(arg-type)ArtClient% client = ART_OTHER, 
-                 %(arg-type)Size% size = DEFAULT_SIZE)
+ "Icon":icon.html *get_icon*(%(arg-type)String% id,  
+                             %(arg-type)ArtClient% client = "ART_OTHER_C", 
+                             %(arg-type)Size% size = DEFAULT_SIZE)
 
 Same as "ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap, but
-return a Icon object (or NullIcon on failure).
+return a Icon object (or @Wx::NULL_ICON@ on failure).
 
- "Size":size.html *get_size_hint*(%(arg-type)ArtClient% client, 
-                      %(arg-type)Boolean% platform_default = false)
+h3(#ArtProvider_push). ArtProvider.insert
 
-Returns a suitable size hint for the given _ArtClient_. If 
-_platform_default_ is , return a size based on the current platform, 
-otherwise return the size from the topmost ArtProvider. _DefaultSize_ may be 
-returned if the client doesn't have a specified size, like ART_OTHER for example.
+  *insert*(%(arg-type)ArtProvider% provider)
 
-h3(#ArtProvider_new). ArtProvider.pop_provider
+Registers a new art provider and adds it to the bottom of the providers
+stack (i.e. it will be queried last).
 
- Boolean *pop_provider*()
+h3(#ArtProvider_push). ArtProvider.pop
 
-Remove latest added provider and delete it.
+  *pop*()
 
-h3(#ArtProvider_pushprovider). ArtProvider.push_provider
+Removes the latest added provider.
 
-  *push_provider*(%(arg-type)ArtProvider% provider)
+h3(#ArtProvider_push). ArtProvider.push
 
-Register new art provider (add it to the top of providers stack).
+  *push*(%(arg-type)ArtProvider% provider)
 
-h3(#ArtProvider_removeprovider). ArtProvider.remove_provider
+Registers a new art provider and adds it to the top of providers stack
+(i.e. it will be queried first).
 
- Boolean *remove_provider*(%(arg-type)ArtProvider% provider)
+h3(#ArtProvider_remove). ArtProvider.remove
 
-Remove a provider from the stack. The provider must have been added previously
-and is _not_ deleted.
+ Boolean *remove*(%(arg-type)ArtProvider% provider)
+
+Removes a provider from the stack. The provider must have been added
+previously.
 
