@@ -366,8 +366,8 @@ class MyPanel < Panel
 
     panel = Panel.new(@m_notebook)
 
-    # icon = ArtProvider::get_icon(ART_INFORMATION)
-    StaticBitmap.new( panel, -1, Wx::NULL_ICON, Point.new(10, 10) )
+    icon = ArtProvider::get_icon(ART_INFORMATION)
+    StaticBitmap.new( panel, -1, icon, Point.new(10, 10) )
 
     bitmap = Bitmap.new( 100, 100 )
     bitmap.draw do | dc |
@@ -1098,20 +1098,10 @@ class MyFrame < Frame
     # track the window which has the focus in the status bar
     focus = Window::find_focus()
     if focus && (focus != @s_windowFocus)
-
       @s_windowFocus = focus
-
-      #            if Wx::PLATFORM == "WXMSW"
-      #            get_handle not 'handled' properly yet
-      if false
-        msg = sprintf(
-                       "Focus: %s, HWND = %08x",
-                       @s_windowFocus.get_class_info.get_class_name,
-                       @s_windowFocus.get_handle
-                     )
-      else
-        msg = "Focus: #{@s_windowFocus.get_class_info.get_class_name}"
-      end
+      msg = sprintf( "Focus: %s, HWND = %08x",
+                       @s_windowFocus.wx_class,
+                       @s_windowFocus.get_handle )
       set_status_text(msg)
     end
   end
