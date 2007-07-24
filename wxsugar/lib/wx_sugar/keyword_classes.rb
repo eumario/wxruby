@@ -433,3 +433,11 @@ WxSugar.define_keyword_ctors('HtmlWindow') do
   wx_ctor_params :pos, :size, :style => Wx::HW_DEFAULT_STYLE
   wx_ctor_params :name => 'htmlWindow'
 end
+
+# wxHyperTextCtrl - display a clickable URL
+WxSugar.define_keyword_ctors('HyperlinkCtrl') do
+  wx_ctor_params :label => ''
+  wx_ctor_params :url => ''
+  wx_ctor_params :pos, :size, :style => 0
+  wx_ctor_params :name => 'hyperlink'
+end
