@@ -20,7 +20,14 @@ GC_MANAGE_AS_OBJECT(wxImage);
 %apply unsigned char * OUTPUT { unsigned char * r, unsigned char * g, unsigned char * b }
 
 %ignore wxImage::Create();
-%ignore wxImage::AddHandler(const wxString&  filename );
+
+// Handler methods are not supported in wxRuby; if these methods are
+// added, corrected freearg typemap for input wxString in static method
+// will be required
+%ignore wxImage::AddHandler;
+%ignore wxImage::FindHandler;
+%ignore wxImage::FindHandlerMime;
+%ignore wxImage::RemoveHandler;
 
 %import "include/wxObject.h"
 
