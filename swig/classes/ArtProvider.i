@@ -8,10 +8,8 @@ GC_MANAGE_AS_OBJECT(wxArtProvider);
 
 %rename(ArtProvider) wxRubyArtProvider;
 
-%import "include/wxObject.h"
-
 %header %{
-	#include <wx/artprov.h>
+#include <wx/artprov.h>
 %}
 
 
@@ -65,15 +63,23 @@ class wxRubyArtProvider : public wxArtProvider
 
 %ignore wxArtProvider;
 
+%import "include/wxObject.h"
 %include "include/wxArtProvider.h"
 
 class wxRubyArtProvider : public wxArtProvider
 {
 public:
-    wxBitmap CreateBitmap(const wxArtID& id, const wxArtClient& client, const wxSize& size);
-  static wxBitmap GetBitmap(const wxArtID&  id , const wxArtClient&  client = wxART_OTHER, const wxSize&  size = wxDefaultSize) ;
-  static wxIcon GetIcon(const wxArtID&  id , const wxArtClient&  client = wxART_OTHER, const wxSize&  size = wxDefaultSize) ;
-  static bool PopProvider() ;
-  static void PushProvider(wxArtProvider*  provider ) ;
-  static bool RemoveProvider(wxArtProvider*  provider ) ;
+  wxBitmap CreateBitmap(const wxArtID& id, 
+						const wxArtClient& client, 
+						const wxSize& size);
+  static wxBitmap GetBitmap(const wxArtID& id, 
+							const wxArtClient&  client = wxART_OTHER, 
+							const wxSize&  size = wxDefaultSize);
+  static wxIcon GetIcon(const wxArtID&  id, 
+						const wxArtClient& client = wxART_OTHER, 
+						const wxSize&  size = wxDefaultSize);
+  static void Insert(wxArtProvider*  provider);
+  static bool Pop() ;
+  static void Push(wxArtProvider*  provider);
+  static bool Remove(wxArtProvider*  provider);
 };
