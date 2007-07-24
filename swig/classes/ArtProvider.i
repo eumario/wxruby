@@ -28,40 +28,27 @@ extern swig_class cWxObject;
 class wxRubyArtProvider : public wxArtProvider
 {
   public:
-  VALUE self;
 
   wxBitmap CreateBitmap(const wxArtID& id, const wxArtClient& client, const wxSize& size)
   {
     VALUE v_id,v_client,v_size,v_ret;
     wxBitmap result;
 
-    v_id = rb_str_new2((const char *)id.c_str());
-    v_client = rb_str_new2((const char *)client.c_str());
+	VALUE self = SWIG_RubyInstanceFor(this);
+
+    v_id = rb_str_new2((const char *)id.mb_str(wxConvUTF8));
+    v_client = rb_str_new2((const char *)client.mb_str(wxConvUTF8));
     v_size = SWIG_NewClassInstance(cWxSize.klass,SWIGTYPE_p_wxSize);
     wxSize *size_ptr = new wxSize(size);
     DATA_PTR(v_size) = size_ptr;
-
+	
     v_ret = rb_funcall(self,rb_intern("create_bitmap"),3,v_id,v_client,v_size);
-    
+
     if (v_ret != Qnil) 
       result = *((wxBitmap *)DATA_PTR(v_ret));
     else
       return wxNullBitmap;
     return result;
-  }
-
-  static wxBitmap GetBitmap(const wxArtID& id,
-                            const wxArtClient& client,
-                            const wxSize& size)
-  {
-    return wxArtProvider::GetBitmap(id, client, size);
-  }
-
-  static wxIcon GetIcon(const wxArtID& id,
-                                           const wxArtClient& client,
-                                           const wxSize& size)
-  {
-    return wxArtProvider::GetIcon(id, client, size);
   }
 };
 
