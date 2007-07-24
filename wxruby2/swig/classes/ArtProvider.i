@@ -20,6 +20,8 @@ typedef wxString wxArtClient;
 // deletion differently from the standard technique in typemap.i
 %typemap(freearg) wxString& "if ( argc > $argnum - 1 ) delete $1;";
 
+%apply SWIGTYPE *DISOWN {wxArtProvider* provider};
+
 %{
 
 extern swig_class cWxSize;
