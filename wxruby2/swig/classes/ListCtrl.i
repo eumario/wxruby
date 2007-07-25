@@ -29,6 +29,9 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 %ignore wxListCtrl::GetItemData;
 %ignore wxListCtrl::SetItemData;
 
+// required for hit_test, return flags as second part of array return value
+%apply int *OUTPUT { int& flags }
+
 %extend wxListCtrl {
   VALUE get_item(int row, int col = -1)
   {
@@ -71,9 +74,7 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 %{
   // Prevents Ruby's GC sweeping up items that are stored as item data
   static void mark_wxListCtrl(void* ptr) {
-	// Checks whether the C++ object is still around first...
-	VALUE rb_obj = SWIG_RubyInstanceFor(ptr);
-	if ( rb_iv_get(rb_obj, "@__wx_destroyed__") == Qtrue )
+	if ( GC_IsWindowDeleted(ptr) )
 	  return;
 
 	wxListCtrl* wx_lc = (wxListCtrl*) ptr;
