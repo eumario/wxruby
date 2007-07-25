@@ -62,6 +62,7 @@ class TestInternationalisation < Test::Unit::TestCase
     sys_lang = Wx::Locale.get_system_language
     assert_kind_of(Fixnum, sys_lang)
 
+    assert(Wx::Locale.is_available(sys_lang), 'System language is available')
     assert_kind_of(String, Wx::Locale.get_system_language_name)
 
     assert_kind_of(Integer, Wx::Locale.get_system_encoding)
@@ -73,24 +74,30 @@ class TestInternationalisation < Test::Unit::TestCase
     time = Time.local(2006, 10, 25, 16, 48, 12)
 
     # setting via Locale.set_locale
-    locale = Wx::Locale.set_locale('en_GB')
-    assert_equal('en_GB', locale.get_canonical_name)
-    assert_equal(Wx::LANGUAGE_ENGLISH, locale.get_language)
-    assert_equal('English', locale.get_language_name)
-    assert_match(%r|25/10/(20)?06|, time.strftime('%x'))
+    if Wx::Locale.is_available(Wx::LANGUAGE_ENGLISH)
+      locale = Wx::Locale.set_locale('en_GB')
+      assert_equal('en_GB', locale.get_canonical_name)
+      assert_equal(Wx::LANGUAGE_ENGLISH, locale.get_language)
+      assert_equal('English', locale.get_language_name)
+      assert_match(%r|25/10/(20)?06|, time.strftime('%x'))
+    end
 
-    locale = Wx::Locale.set_locale('en_US')
-    assert_equal('en_US', locale.get_canonical_name)
-    assert_equal(Wx::LANGUAGE_ENGLISH_US, locale.get_language)
-    assert_equal('English (U.S.)', locale.get_language_name)
-    assert_match(%r|10/25/(20)?06|, time.strftime('%x'))
+    if Wx::Locale.is_available(Wx::LANGUAGE_ENGLISH_US)
+      locale = Wx::Locale.set_locale('en_US')
+      assert_equal('en_US', locale.get_canonical_name)
+      assert_equal(Wx::LANGUAGE_ENGLISH_US, locale.get_language)
+      assert_equal('English (U.S.)', locale.get_language_name)
+      assert_match(%r|10/25/(20)?06|, time.strftime('%x'))
+    end
 
     # setting via Locale.new
-    locale = Wx::Locale.new(Wx::LANGUAGE_DANISH)
-    assert_equal('da_DK', locale.get_canonical_name)
-    assert_equal(Wx::LANGUAGE_DANISH, locale.get_language)
-    assert_equal('Danish', locale.get_language_name)
-    assert_equal(%r|25\.10\.(20)?06|, time.strftime('%x'))
+    if Wx::Locale.is_available(Wx::LANGUAGE_DANISH)
+      Wx::Locale.new(Wx::LANGUAGE_DANISH)
+      assert_equal('da_DK', locale.get_canonical_name)
+      assert_equal(Wx::LANGUAGE_DANISH, locale.get_language)
+      assert_equal('Danish', locale.get_language_name)
+      assert_equal(%r|25\.10\.(20)?06|, time.strftime('%x'))
+    end
 
     assert_raises(ArgumentError) { Wx::Locale.set_locale('bad') }
     locale = Wx::Locale.new(Wx::LANGUAGE_DEFAULT)
