@@ -5,6 +5,7 @@ class TestApp < Wx::App
   attr_accessor :test_class
   def on_init
     Test::Unit::UI::Console::TestRunner.run(self.test_class)
+    false # exit after tests
   end
 end
 
@@ -71,25 +72,25 @@ class TestInternationalisation < Test::Unit::TestCase
   def test_set_locales
     time = Time.local(2006, 10, 25, 16, 48, 12)
 
-    # setting via Locale.new
-    locale = Wx::Locale.new(Wx::LANGUAGE_DANISH)
-    assert_equal('da_DK', locale.get_canonical_name)
-    assert_equal(Wx::LANGUAGE_DANISH, locale.get_language)
-    assert_equal('Danish', locale.get_language_name)
-    assert_equal('25.10.2006', time.strftime('%x'))
-
     # setting via Locale.set_locale
     locale = Wx::Locale.set_locale('en_GB')
     assert_equal('en_GB', locale.get_canonical_name)
     assert_equal(Wx::LANGUAGE_ENGLISH, locale.get_language)
     assert_equal('English', locale.get_language_name)
-    assert_equal('25/10/2006', time.strftime('%x'))
+    assert_match(%r|25/10/(20)?06|, time.strftime('%x'))
 
     locale = Wx::Locale.set_locale('en_US')
     assert_equal('en_US', locale.get_canonical_name)
     assert_equal(Wx::LANGUAGE_ENGLISH_US, locale.get_language)
     assert_equal('English (U.S.)', locale.get_language_name)
-    assert_equal('10/25/2006', time.strftime('%x'))
+    assert_match(%r|10/25/(20)?06|, time.strftime('%x'))
+
+    # setting via Locale.new
+    locale = Wx::Locale.new(Wx::LANGUAGE_DANISH)
+    assert_equal('da_DK', locale.get_canonical_name)
+    assert_equal(Wx::LANGUAGE_DANISH, locale.get_language)
+    assert_equal('Danish', locale.get_language_name)
+    assert_equal(%r|25\.10\.(20)?06|, time.strftime('%x'))
 
     assert_raises(ArgumentError) { Wx::Locale.set_locale('bad') }
     locale = Wx::Locale.new(Wx::LANGUAGE_DEFAULT)
