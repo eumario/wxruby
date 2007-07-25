@@ -27,7 +27,8 @@ public:
   static wxString GetSystemEncodingName() const;
   static int GetSystemLanguage() const;
   bool Init(int  language = wxLANGUAGE_DEFAULT, int  flags = wxLOCALE_LOAD_DEFAULT) ;
-  // bool Init(const char  *szName , const char  *szShort = NULL, const char  *szLocale = NULL, bool  bLoadDefault = true, bool  bConvertEncoding = false) ;
+
+  static bool IsAvailable(int lang);
   bool IsLoaded(const char*  domain ) const;
   bool IsOk() const;
 };
