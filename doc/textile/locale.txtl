@@ -30,6 +30,7 @@ h3. Class Methods
 * "Locale.get_system_encoding":#Locale_getsystemencoding
 * "Locale.get_system_encoding_name":#Locale_getsystemencodingname
 * "Locale.get_system_language":#Locale_getsystemlanguage
+* "Locale.is_available":#Locale_isavailable
 * "Locale.new":#Locale_new
 
 h3. Instance Methods
@@ -108,15 +109,32 @@ h3(#Locale_getsystemlanguage). Locale.get_system_language_name
 Returns the name of the user's default langage. Returns an uppercase
 String name, for example "ENGLISH_UK".
 
+h3(#Locale_isavailable). Locale.is_available
+
+ Boolean *is_available*(%(arg-type)Integer% language)
+
+Check whether the operating system and/or C run time environment
+supports this locale. For example in Windows 2000 and Windows XP, as
+well as on popular Linux desktop distributions, support for many locales
+is not installed by default. Calling "set_locale":#Locale_setlocale on
+an uninstalled Locale may cause error messages to be displayed to the
+user.
+
+Returns true if the locale is supported.
+
+The argument @language@ is the Integer wxLanguage identifier. To obtain
+this for a given a two letter ISO language code, use
+"find_language_info":#Locale_findlanguageinfo to obtain its
+Wx::LanguageInfo structure. See "add_language":#Locale_addlanguage for
+the Wx::LanguageInfo description.
+
 h3(#Locale_defnew). Locale.new
 
   *Locale.new*(%(arg-type)Integer% language, 
                 %(arg-type)Integer% flags = LOCALE_LOAD_DEFAULT|LOCALE_CONV_ENCODING)
 
 Creates a new Wx::Locale object, *and* sets it to be the global locale
-used by this location. As an important side-effect, calling this method
-sets the application locale to the language; see
-"Locale.set_locale":#setlocale.
+used by this location. See "Locale.set_locale":#setlocale.
 
 h3(#Locale_setlocale). Locale.set_locale
 
