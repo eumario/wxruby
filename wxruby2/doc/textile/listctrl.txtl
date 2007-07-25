@@ -554,14 +554,12 @@ list or report views (this is a limitation of the native Win32 control).
 
 h3(#ListCtrl_hittest). ListCtrl#hit_test
 
- Integer *hit_test*(%(arg-type)Point% point,  %(arg-type)Integer% flags)
+ [ Integer item, Integer flags ] = *hit_test*(%(arg-type)Point% point)
 
-Determines which item (if any) is at the specified point,
-giving details in _flags_. Returns index of the item or @NOT_FOUND@
-if no item is at the specified point.
-_flags_ will be a combination of the following flags:
-
-
+Determines which item (if any) is at the specified point, giving details
+in _flags_. Returns a two-element array, with the first element being
+the index of the item or @NOT_FOUND@ if no item is at the specified
+point.  _flags_ will be a combination of the following flags:
 
 |LIST_HITTEST_ABOVE|Above the client area.|
 |LIST_HITTEST_BELOW|Below the client area.|
