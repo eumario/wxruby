@@ -7,6 +7,11 @@
 GC_MANAGE_AS_WINDOW(wxTextCtrl);
 
 %apply long * OUTPUT { long * }
+%apply long * OUTPUT { wxTextCoord *col, wxTextCoord *row }
+
+%feature("nodirector") HitTest;
+%feature("nodirector") PositionToXY;
+%feature("nodirector") XYToPositionTo;
 
 %ignore wxTextCtrl::wxTextCtrl();
 %ignore wxTextCtrl::operator<<;
