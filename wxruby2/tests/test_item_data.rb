@@ -6,6 +6,7 @@ class TestApp < Wx::App
   attr_accessor :test_class
   def on_init
     Test::Unit::UI::Console::TestRunner.run(self.test_class)
+    false
   end
 end
 
