@@ -16,7 +16,7 @@
   // Returns a ruby object stored as client data
   static VALUE wxControlWithItems_get_client_data(wxControlWithItems *ptr, int n) {
 	VALUE returnVal = (VALUE) ptr->GetClientData(n);
-	if ( returnVal )
+	if ( ! returnVal )
 	  return Qnil;
 	return returnVal;
   }
