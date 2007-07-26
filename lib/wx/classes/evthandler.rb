@@ -2,6 +2,22 @@
 # EvtHandler. This includes all Wx::Window subclasses and Wx::App.
 
 class Wx::EvtHandler
+  # EventType is an internal class that's used to set up event handlers
+  # and mappings. 
+  # * 'name' is the name of the event handler method in ruby
+  # * 'arity' is the number of id arguments that method should accept
+  # * 'const' is the Wx EventType constant that identifies the event
+  # * 'evt_class' is the WxRuby event class which is passed to the event
+  #    handler block
+  # 
+  # NB: Some event types currently pass a Wx::Event into the event
+  # handler block; when the appropriate classes are added to wxRuby, the
+  # binding can be updated here.
+  EventType = Struct.new(:name, :arity, :const, :evt_class)
+
+  # Fast look-up hash to map event type ids to ruby event classes
+  EVENT_TYPE_MAPPING = {}
+
   # Given a Wx EventType id (eg Wx::EVT_MENU), returns a WxRuby Event
   # class which should be passed to event handler blocks. The actual
   # EVT_XXX constants themselves are in the compiled library, defined in
@@ -15,19 +31,45 @@ class Wx::EvtHandler
     end
   end
 
-  # EventType is an internal class that's used to set up event handlers
-  # and mappings. 
-  # * 'name' is the name of the event handler method in ruby
-  # * 'arity' is the number of id arguments that method should accept
-  # * 'const' is the Wx EventType constant that identifies the event
-  # * 'evt_class' is the WxRuby event class which is passed to the event
-  #    handler block
-  # 
-  # NB: Some event types currently pass a Wx::Event into the event
-  # handler block; when the appropriate classes are added to wxRuby, the
-  # binding can be updated here.
-  EventType = Struct.new(:name, :arity, :const, :evt_class)
-  EVENT_TYPE_MAPPING = {}
+  # Public method to register the mapping of a custom event type
+  # +konstant+ (which should be a to a
+  # custom event class. 
+  def self.register_class( klass, konstant = nil, 
+                           meth = nil, arity = nil)
+    konstant ||= new_event_type
+    unless klass < Wx::Event
+      Kernel.raise TypeError, "Event class should be a subclass of Wx::Event"
+    end
+    ev_type = EventType.new(meth, arity, konstant, klass)
+    register_event_type(ev_type)
+    return konstant
+  end
+
+  # Registers the event type +ev_type+, which should be an instance of
+  # the Struct class +Wx::EvtHandler::EventType+. 
+  def self.register_event_type(ev_type)
+    EVENT_TYPE_MAPPING[ev_type.const] = ev_type.evt_class
+    unless ev_type.arity and ev_type.name
+      return 
+    end
+    case ev_type.arity
+    when 0 # events without an id
+      class_eval %Q| 
+        def #{ev_type.name}(&block)
+          connect(Wx::ID_ANY, Wx::ID_ANY, #{ev_type.const}, &block)
+        end |
+    when 1 # events with an id
+      class_eval %Q|
+        def #{ev_type.name}(id, &block)
+          connect(id, Wx::ID_ANY, #{ev_type.const}, &block)
+        end |
+    when 2 # events with id range
+      class_eval %Q|
+        def #{ev_type.name}(first_id, last_id, &block)
+          connect(first_id, last_id, #{ev_type.const}, &block)
+        end |
+    end
+  end
 
   EVENT_DEFINITIONS = [ 
     EventType['evt_activate', 0,
@@ -727,29 +769,8 @@ class Wx::EvtHandler
   #    are fired to quickly look up the right type to yield
   # 2) EvtHandler instance methods like evt_xxx to conveniently set 
   #    up event handlers
-  EVENT_DEFINITIONS.each do | ev_type |
-    EVENT_TYPE_MAPPING[ev_type.const] = ev_type.evt_class
-    case ev_type.arity
-    when 0 # events without an id
-      class_eval %Q{
-        def #{ev_type.name}(&block)
-          connect(Wx::ID_ANY, Wx::ID_ANY, #{ev_type.const}, &block)
-        end
-      }
-    when 1 # events with an id
-      class_eval %Q{
-        def #{ev_type.name}(id, &block)
-          connect(id, Wx::ID_ANY, #{ev_type.const}, &block)
-        end
-      }
-    when 2 # events with id range
-      class_eval %Q{
-        def #{ev_type.name}(first_id, last_id, &block)
-          connect(first_id, last_id, #{ev_type.const}, &block)
-        end
-      }
-    end
-  end
+  EVENT_DEFINITIONS.each { | ev_type | register_event_type(ev_type) }
+
 
   # convenience evt_handler to listen to all mouse events
   def evt_mouse_events(&block)
