@@ -22,7 +22,8 @@ Event handling overvieweventhandlingoverview
 
 h2. Methods
 
-* "EvtHandler.new":#EvtHandler_new
+* "EvtHandler.new_event_type":#EvtHandler_neweventtype
+* "EvtHandler.register_class":#EvtHandler_registerclass
 * "EvtHandler#add_pending_event":#EvtHandler_addpendingevent
 * "EvtHandler#connect":#EvtHandler_connect
 * "EvtHandler#disconnect":#EvtHandler_disconnect
@@ -41,14 +42,60 @@ h2. Methods
 
 </div>
 
+h2. Class Methods
 
-h3(#EvtHandler_new). EvtHandler.new
+h3(#EvtHandler_neweventtype). EvtHandler.new_event_type
 
-  *destructor*()
+  Integer *new_event_type*()
 
-Destructor. If the handler is part of a chain, the destructor will
-unlink itself and restore the previous and next handlers so that they point to
-each other.
+Returns a new, unique identifier for an event type. 
+
+Different types of events in wxRuby are identified by unique integer
+constant, for example @Wx::EVT_COMMAND_LEFT_CLICK@ (see
+"Event":event.html) Since this is used to wrap events triggered in the
+API (or in user Ruby code) with the appropriate Ruby class, if you
+create your own custom events, you may wish to use this
+method to get an id which is guaranteed to be unique.
+
+h3(#EvtHandler_neweventtype). EvtHandler.register_class
+
+  Integer *new_event_type*(%(arg-type)Class% klass, 
+                           %(arg-type)Integer% konstant = nil,
+                           %(arg-type)String% meth = nil,
+                           %(arg-type)Event% arity = nil)
+
+Registers the mapping of user-defined events identified by the constant
+@konstant@ to the user-defined ruby event class @klass@. If @konstant@
+is not specified, a new, unique identifier will be created by the API
+and returned by the method. 
+
+Optionally, if @meth@ and @arity@ are specified, this method will also
+create a shortcut method for setting up event handlers, comparable to
+the in-built methods such as @evt_menu@, @evt_button@ or @evt_close@. 
+
+If you wish to have such a method created, @meth@ should contain the
+name of the new method (for example "@evt_foo@"), and @arity@ should be 
+the number of arguments the method should accept. Normally, for events
+similar to the "CommandEvents":commandevent.html fired by in-built
+control types like "Button":button.html and "TextCtrl":textctrl.html,
+this argument should be 1, which will be the id of the control whose
+CommandEvents are being listened for.
+
+h4. Example
+
+ class MyCustomControl < Wx::Window
+   ...
+ end
+
+ class MyCustomEvent < Wx::CommandEvent
+
+ end
+ 
+ EVT_MY_CUSTOM = Wx::EvtHandler.new_event_type
+ Wx::EvtHandler.register_class(MyCustomEvent, EVT_MY_CUSTOM,
+                               "evt_my_custom", 1)
+
+h2. Instance Methods
 
 h3(#EvtHandler_addpendingevent). EvtHandler#add_pending_event
 
