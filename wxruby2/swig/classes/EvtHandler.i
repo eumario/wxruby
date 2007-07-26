@@ -16,8 +16,8 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 // here. Instead, they are defined by Events.cpp, generated from
 // swig/Event.i and modified by swig/fixevents.rb
 
-// This provides the public Ruby 'connect' method
 %extend wxEvtHandler {
+  // This provides the public Ruby 'connect' method
   VALUE connect(int firstId, int lastId, wxEventType eventType)
   {
     VALUE func = rb_funcall(rb_cProc, rb_intern("new"), 0);
@@ -31,6 +31,14 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
         (wxObjectEventFunction )&wxRbCallback::EventThunker;
     self->Connect(firstId, lastId, eventType, function, userData);
 	return Qtrue;
+  }
+
+  // This class method provides a guaranteed-unique event id that can be
+  // used for custom event types.
+  static VALUE new_event_type()
+  {
+	int event_type_id = (int)wxNewEventType();
+	return INT2NUM(event_type_id );
   }
 }
 
