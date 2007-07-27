@@ -19,8 +19,7 @@ task :version do
 end
 
 $base_gemspec = Gem::Specification.new do | spec |
-  spec.name = 'wxruby2-preview'
-  # TODO - this shouldn't be hardcoded - load from rake-created file instead
+  spec.name = 'wxruby'
   spec.version = WXRUBY_VERSION
 
   spec.require_path = 'lib'
@@ -87,7 +86,7 @@ def create_gem_tasks
 end
 
 def create_package_tasks
-  Rake::PackageTask.new('wxruby2-preview', WXRUBY_VERSION) do | p_task |
+  Rake::PackageTask.new('wxruby', WXRUBY_VERSION) do | p_task |
     p_task.need_tar_gz = true
     pkg_files = p_task.package_files
     pkg_files.include('README', 'LICENSE', 'ChangeLog', 'rakefile')
