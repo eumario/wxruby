@@ -21,7 +21,7 @@ h2. See also
 h2. Methods
 
 * "Event.new":#Event_new
-* "Event#m__propagation_level":#Event_mpropagationlevel
+* "Event.new_event_type":#Event_neweventtype
 * "Event#clone":#Event_clone
 * "Event#get_event_object":#Event_geteventobject
 * "Event#get_event_type":#Event_geteventtype
@@ -47,6 +47,21 @@ h3(#Event_new). Event.new
   *Event.new*(%(arg-type)Integer% id = 0,  %(arg-type)EventType% eventType = @EVT_NULL@)
 
 Constructor. Should not need to be used directly by an application.
+
+h3(#Event_neweventtype). Event.new_event_type
+
+  Integer event_id *Event.new_event_type*()
+
+
+Returns a new, unique identifier for use by a custom user-defined event
+type.
+
+Different types of events in wxRuby are identified by unique integer
+constant, for example @Wx::EVT_COMMAND_LEFT_CLICK@ (see
+"Event":event.html) Since this is used to wrap events triggered in the
+API (or in user Ruby code) with the appropriate Ruby class, if you
+create your own custom events, you may wish to use this
+method to get an id which is guaranteed to be unique.
 
 h3(#Event_clone). Event#clone
 
