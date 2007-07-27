@@ -32,14 +32,6 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
     self->Connect(firstId, lastId, eventType, function, userData);
 	return Qtrue;
   }
-
-  // This class method provides a guaranteed-unique event id that can be
-  // used for custom event types.
-  static VALUE new_event_type()
-  {
-	int event_type_id = (int)wxNewEventType();
-	return INT2NUM(event_type_id );
-  }
 }
 
 

@@ -32,11 +32,13 @@ class Wx::EvtHandler
   end
 
   # Public method to register the mapping of a custom event type
-  # +konstant+ (which should be a to a
-  # custom event class. 
+  # +konstant+ (which should be a unique integer; one will be created if
+  # not supplied) to a custom event class +klass+. If +meth+ and +arity+
+  # are given, a convenience evt_handler method called +meth+ will be
+  # created, which accepts +arity+ arguments.
   def self.register_class( klass, konstant = nil, 
                            meth = nil, arity = nil)
-    konstant ||= new_event_type
+    konstant ||= Wx::Event.new_event_type
     unless klass < Wx::Event
       Kernel.raise TypeError, "Event class should be a subclass of Wx::Event"
     end

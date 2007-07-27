@@ -22,7 +22,6 @@ Event handling overvieweventhandlingoverview
 
 h2. Methods
 
-* "EvtHandler.new_event_type":#EvtHandler_neweventtype
 * "EvtHandler.register_class":#EvtHandler_registerclass
 * "EvtHandler#add_pending_event":#EvtHandler_addpendingevent
 * "EvtHandler#connect":#EvtHandler_connect
@@ -48,15 +47,6 @@ h3(#EvtHandler_neweventtype). EvtHandler.new_event_type
 
   Integer *new_event_type*()
 
-Returns a new, unique identifier for an event type. 
-
-Different types of events in wxRuby are identified by unique integer
-constant, for example @Wx::EVT_COMMAND_LEFT_CLICK@ (see
-"Event":event.html) Since this is used to wrap events triggered in the
-API (or in user Ruby code) with the appropriate Ruby class, if you
-create your own custom events, you may wish to use this
-method to get an id which is guaranteed to be unique.
-
 h3(#EvtHandler_neweventtype). EvtHandler.register_class
 
   Integer *new_event_type*(%(arg-type)Class% klass, 
@@ -67,7 +57,8 @@ h3(#EvtHandler_neweventtype). EvtHandler.register_class
 Registers the mapping of user-defined events identified by the constant
 @konstant@ to the user-defined ruby event class @klass@. If @konstant@
 is not specified, a new, unique identifier will be created by the API
-and returned by the method. 
+(using "Event.new_event_type":event.html#Event_neweventtype) and
+returned by the method.
 
 Optionally, if @meth@ and @arity@ are specified, this method will also
 create a shortcut method for setting up event handlers, comparable to

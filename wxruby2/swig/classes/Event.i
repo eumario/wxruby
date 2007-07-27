@@ -6,6 +6,15 @@
 %module(directors="1") wxEvent
 GC_MANAGE_AS_EVENT(wxEvent);
 
+%extend wxEvent {
+  // This class method provides a guaranteed-unique event id that can be
+  // used for custom event types.
+  static VALUE new_event_type()
+  {
+	int event_type_id = (int)wxNewEventType();
+	return INT2NUM(event_type_id );
+  }
+}
 
 // These includes are all required so that the wx EVT_XXX constants 
 // are all loaded
@@ -328,5 +337,4 @@ GC_MANAGE_AS_EVENT(wxEvent);
 
 
 %import "include/wxObject.h"
-
 %include "include/wxEvent.h"
