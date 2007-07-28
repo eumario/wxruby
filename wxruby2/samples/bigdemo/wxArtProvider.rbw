@@ -78,50 +78,37 @@ class MyArtProvider < Wx::ArtProvider
        @log = log
     end
 
-    def CreateBitmap(artid, client, size)
-        # You can do anything here you want, such as using the same
-        # image for any size, any client, etc., or using specific
-        # images for specific sizes, whatever...
+    # Custom art providers must supply this method
+    
+    def create_bitmap(artid, client, size)
+      # You can do anything here you want, such as using the same
+      # image for any size, any client, etc., or using specific
+      # images for specific sizes, whatever...
 
-        # See end of file for the image data
-
-        bmp = Wx::Bitmap.new
-        # use this one for all 48x48 images
-        if size.width == 48:
-            bmp = make_bitmap("smile48.png")
-
-        # but be more specific for these
-        elsif size.width == 16 and artid == wx.ART_ADD_BOOKMARK:
-            bmp = make_bitmap("smile16.png")
-        elsif size.width == 32 and artid == wx.ART_ADD_BOOKMARK:
-            bmp = make_bitmap("smile32.png")
-
-        # and just ignore the size for these
-        elsif artid == Wx::ART_GO_BACK:
-            bmp = make_bitmap("left.png")
-        #elsif artid == Wx::ART_GO_FORWARD:
-        #    bmp = make_bitmap("right.png")
-        #elsif artid == Wx::ART_GO_UP:
-        #    bmp = make_bitmap("up.png")
-        elsif artid == Wx::ART_GO_DOWN:
-            bmp = make_bitmap("down.png")
-        elsif artid == Wx::ART_GO_TO_PARENT:
-            bmp = make_bitmap("back.png")
-
-        #elsif artid == Wx::ART_CROSS_MARK:
-        #    bmp = make_bitmap("cross.png")
-        #elsif artid == Wx::ART_TICK_MARK:
-        #    bmp = make_bitmap("tick.png")
+      bmp = nil
+      # use this one for all 48x48 images
+      case size.get_width
+      when 48
+        bmp = make_bitmap("wxwin48x48.png")
+      when 32
+        bmp = make_bitmap("wxwin32x32.png")
+      when 16 
+        # be more specific for these
+        if artid == Wx::ART_ADD_BOOKMARK
+          bmp = make_bitmap("smiles.bmp")
+        else
+          bmp = make_bitmap("wxwin16x16.png")
         end
-
-        if bmp.is_ok
-            @log.write_text("MyArtProvider: providing #{artid}:#{client} at #{size.x}x#{size.y}")
-        end
-        bmp
+      end
+      if bmp
+        @log.write_text("MyArtProvider: providing #{artid}:#{client} at #{size.x}x#{size.y}")
+      end
+      bmp
     end
 
     def make_bitmap(f)
-       Wx::Bitmap.new(Wx::Image.new(f))
+      f_path = File.join(File.dirname(__FILE__), 'icons', f)
+       Wx::Bitmap.new(Wx::Image.new(f_path))
     end
 end
 
@@ -154,11 +141,11 @@ class TestPanel < Wx::Panel
         combo.set_selection(0)
 
         # Custom provider not currently working
-        #cb = Wx::CheckBox.new(self, -1, "Use custom provider")
-        #fgs.add(cb, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
-        #evt_checkbox(cb.get_id) { |event| on_use_custom(event) }
+        cb = Wx::CheckBox.new(self, -1, "Use custom provider")
+        fgs.add(cb, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
+        evt_checkbox(cb.get_id) { |event| on_use_custom(event) }
         # One extra spacer to account for missing checkbox
-        fgs.add(10, 10, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
+        # fgs.add(10, 10, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
 
         fgs.add(10, 10, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
         fgs.add(10, 10, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
@@ -214,11 +201,13 @@ class TestPanel < Wx::Panel
 
     def on_use_custom(evt)
         if evt.is_checked
-            @log.write_text("Images will now be provided by MyArtProvider")
-            Wx::ArtProvider.push_provider( MyArtProvider.new(@log) )
+            @log.write_text("Images will now be provided by
+        MyArtProvider")
+            Wx::ArtProvider.push( MyArtProvider.new(@log) )
+
         else
             @log.write_text("MyArtProvider deactivated\n")
-            Wx::ArtProvider.pop_provider
+            Wx::ArtProvider.pop
         end
         get_art
     end
