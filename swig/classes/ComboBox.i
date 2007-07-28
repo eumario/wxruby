@@ -36,7 +36,7 @@ GC_MANAGE_AS_WINDOW(wxComboBox);
   VALUE get_client_data(int n) 
   {
 	VALUE returnVal = (VALUE) self->GetClientData(n);
-	if ( returnVal == NULL )
+	if ( ! returnVal )
 	  return Qnil;
 	return returnVal;
   }
