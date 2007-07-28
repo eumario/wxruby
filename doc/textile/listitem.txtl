@@ -70,10 +70,12 @@ Returns the zero-based column; meaningful only in report mode.
 
 h3(#ListItem_getdata). ListItem#get_data
 
- Integer *get_data*()
+ Object *get_data*()
 
-Returns client data associated with the control. Please note that
-client data is associated with the item and not with subitems.
+Returns the ruby object set as client data for this item (see
+"set_data":#ListItem_setdata, or @nil@ if no such data is set. Please
+note that client data is associated with the item and not with subitems
+in columns.
 
 h3(#ListItem_getfont). ListItem#get_font
 
@@ -166,12 +168,11 @@ Sets the zero-based column. Meaningful only in report mode.
 
 h3(#ListItem_setdata). ListItem#set_data
 
-  *set_data*(%(arg-type)Integer% data)
+  *set_data*(%(arg-type)Object% data)
 
-  *set_data*(%(arg-type)% data)
-
-Sets client data for the item. Please note that
-client data is associated with the item and not with subitems.
+Sets client data for the item, which can be any arbitrary object. Please
+note that client data is associated with the item and not with subitem
+columns..
 
 h3(#ListItem_setfont). ListItem#set_font
 
