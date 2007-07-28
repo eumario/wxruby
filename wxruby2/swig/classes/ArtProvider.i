@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module(directors="1") wxArtProvider
+%module wxArtProvider
 GC_MANAGE_AS_OBJECT(wxArtProvider);
 
 %rename(ArtProvider) wxRubyArtProvider;
@@ -58,6 +58,7 @@ class wxRubyArtProvider : public wxArtProvider
 %}
 
 %ignore wxArtProvider;
+%ignore wxArtProvider::CreateBitmap; // must be supplied in ruby
 
 %import "include/wxObject.h"
 %include "include/wxArtProvider.h"
