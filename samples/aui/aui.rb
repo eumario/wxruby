@@ -674,7 +674,7 @@ class AuiFrame < Wx::Frame
 
 
     pi = Wx::AuiPaneInfo.new
-    pi.set_name('tb1').set_caption("Toolbar 2").toolbar_pane
+    pi.set_name('tb2').set_caption("Toolbar 2").toolbar_pane
     pi.top.set_row(1)
     pi.set_left_dockable(false).set_right_dockable(false)
     @mgr.add_pane(tb2, pi)
