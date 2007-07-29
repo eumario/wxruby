@@ -85,8 +85,8 @@ class Wx::Grid
   # and columns are deleted and inserted, the position of the columns
   # and rows with stored editors and renderers may move.
   wx_insert_rows = self.instance_method(:insert_rows)
-  define_method(:insert_rows) do | pos, num |
-    wx_insert_rows.bind(self).call(pos, num)
+  define_method(:insert_rows) do | pos, num, update |
+    wx_insert_rows.bind(self).call(pos, num, update)
     num.times { @__row_editors.insert(pos, nil) }
     num.times { @__row_renderers.insert(pos, nil) }
     num.times { @__cell_editors.insert(pos, []) }
@@ -94,8 +94,8 @@ class Wx::Grid
   end
 
   wx_insert_cols = self.instance_method(:insert_cols)
-  define_method(:insert_cols) do | pos, num |
-    wx_insert_cols.bind(self).call(pos, num)
+  define_method(:insert_cols) do | pos, num, update |
+    wx_insert_cols.bind(self).call(pos, num, update)
     num.times { @__col_editors.insert(pos, nil) }
     num.times { @__col_renderers.insert(pos, nil) }
     num.times do
@@ -107,8 +107,8 @@ class Wx::Grid
   end
 
   wx_delete_rows = self.instance_method(:delete_rows)
-  define_method(:delete_rows) do | pos, num |
-    wx_delete_rows.bind(self).call(pos, num)
+  define_method(:delete_rows) do | pos, num, update |
+    wx_delete_rows.bind(self).call(pos, num, update)
     @__row_editors.slice!(pos, num)
     @__row_renderers.slice!(pos, num)
     @__cell_editors.slice!(pos, num)
@@ -116,8 +116,8 @@ class Wx::Grid
   end
  
   wx_delete_cols = self.instance_method(:delete_cols)
-  define_method(:delete_cols) do | pos, num |
-    wx_delete_cols.bind(self).call(pos, num)
+  define_method(:delete_cols) do | pos, num, update |
+    wx_delete_cols.bind(self).call(pos, num, update)
     @__col_editors.slice!(pos, num)
     @__col_renderers.slice!(pos, num)
     num.times do
