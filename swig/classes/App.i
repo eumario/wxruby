@@ -104,7 +104,7 @@ public:
 	VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
 	if ( DATA_PTR(the_app) == 0 ) 
 	  return;
-	if ( rb_iv_get(the_app, "__app_ended__") == Qtrue )
+	if ( rb_ivar_defined(the_app, rb_intern("__app_ended__")) == Qtrue )
 	  return;
 
 	// To do the marking, iterate over SWIG's hash list of known wrapped
