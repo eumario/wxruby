@@ -84,18 +84,18 @@ class Wx::Grid
   # This and the following methods do a bit of book-keeping - as rows
   # and columns are deleted and inserted, the position of the columns
   # and rows with stored editors and renderers may move.
-  wx_insert_rows = self.instance_method(:insert_rows)
-  define_method(:insert_rows) do | pos, num, update |
-    wx_insert_rows.bind(self).call(pos, num, update)
+  alias :__insert_rows :insert_rows
+  def insert_rows(pos = 0, num = 1, update_labels = true)
+    __insert_rows(pos, num, update_labels)
     num.times { @__row_editors.insert(pos, nil) }
     num.times { @__row_renderers.insert(pos, nil) }
     num.times { @__cell_editors.insert(pos, []) }
     num.times { @__cell_renderers.insert(pos, []) }
   end
-
-  wx_insert_cols = self.instance_method(:insert_cols)
-  define_method(:insert_cols) do | pos, num, update |
-    wx_insert_cols.bind(self).call(pos, num, update)
+  
+  alias :__insert_cols :insert_cols
+  def insert_cols(pos = 0, num = 1, update_labels = true)
+    __insert_cols(pos, num, update_labels)
     num.times { @__col_editors.insert(pos, nil) }
     num.times { @__col_renderers.insert(pos, nil) }
     num.times do
@@ -106,18 +106,18 @@ class Wx::Grid
     end
   end
 
-  wx_delete_rows = self.instance_method(:delete_rows)
-  define_method(:delete_rows) do | pos, num, update |
-    wx_delete_rows.bind(self).call(pos, num, update)
+  alias :__delete_rows :delete_rows
+  def delete_rows(pos = 0, num = 1, update_labels = true)
+    __delete_rows(pos, num, update_labels)
     @__row_editors.slice!(pos, num)
     @__row_renderers.slice!(pos, num)
     @__cell_editors.slice!(pos, num)
     @__cell_renderers.slice!(pos, num)
   end
  
-  wx_delete_cols = self.instance_method(:delete_cols)
-  define_method(:delete_cols) do | pos, num, update |
-    wx_delete_cols.bind(self).call(pos, num, update)
+  alias :__delete_cols :delete_cols
+  def delete_cols(pos = 0, num = 1, update_labels = true)
+    __delete_cols(pos, num, update_labels)
     @__col_editors.slice!(pos, num)
     @__col_renderers.slice!(pos, num)
     num.times do
