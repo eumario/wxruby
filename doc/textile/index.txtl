@@ -86,6 +86,7 @@ of user input and interaction.
 |Gauge|A control to represent a varying quantity, such as time remaining|
 |GenericDirCtrl|A control for displaying a directory tree|
 |HtmlListBox|A listbox showing HTML content|
+|HyperlinkCtrl|Displays a clickable URL that will launch a browser|
 |StaticBox|A static, or group box for visually grouping related controls|
 |ListBox|A list of strings for single or multiple selection|
 |ListCtrl|A control for displaying lists of strings and/or icons, plus a multicolumn report view|
@@ -175,6 +176,7 @@ about events and setting up event handlers, see the
 |ActivateEvent|A window or application activation event|
 |CalendarEvent|Used with wxCalendarCtrl|
 |CalculateLayoutEvent|Used to calculate window layout|
+|ChildFocusEvent|Called when focus is set to a child of this Window|
 |CloseEvent|A close window or end session event|
 |CommandEvent|An event from a variety of standard controls|
 |ContextMenuEvent|An event generated when the user issues a context menu command|
