@@ -1,8 +1,11 @@
 h1(#wxrenderernative). Wx::RendererNative
 
-First, a brief introduction to Renderer and why it is needed.
+Firstly, note that this class is not constructed directly. To get a
+Wx::RendererNative, call the class method Wx::RendererNative.get.
 
-Usually Widgets uses the underlying low level GUI system to draw all the
+A brief introduction to Renderer and why it is needed.
+
+Usually wxRuby uses the underlying low level GUI system to draw all the
 controls - this is what we mean when we say that it is a ``native'' framework.
 However not all controls exist under all (or even any) platforms and in this
 case Widgets provides a default, generic, implementation of them written in
@@ -21,8 +24,8 @@ emulate the native look and feel.
 
 So the renderers work by exposing a large set of high-level drawing functions
 which are used by the generic controls. There is always a default global
-renderer but it may be changed or extended by the user, see 
-"Render sample":samplerender.html.
+renderer but it may be changed or extended by the user.
+
 
 All drawing functions take some standard parameters:
 
@@ -41,13 +44,16 @@ the rendering functions should always prepare it.
 combination of the @CONTROL_XXX@ constants below.
 
 
+Note that each drawing function restores the "DC":dc.html attributes if
+it changes them, so it is safe to assume that the same pen, brush and colours
+that were active before the call to this function are still in effect after it.
+
+
 h2. Constants
 
 The following rendering flags are defined:
 
 
- enum
- {
      CONTROL_DISABLED   = 0x00000001,  // control is disabled
      CONTROL_FOCUSED    = 0x00000002,  // currently has keyboard focus
      CONTROL_PRESSED    = 0x00000004,  // (button) is pressed
@@ -57,9 +63,8 @@ The following rendering flags are defined:
      CONTROL_CURRENT    = 0x00000010,  // mouse is currently over the control
      CONTROL_SELECTED   = 0x00000020,  // selected item in e.g. listbox
      CONTROL_CHECKED    = 0x00000040,  // (check/radio button) is checked
-     CONTROL_CHECKABLE  = 0x00000080   // (menu) item can be checked
- };
- 
+     CONTROL_CHECKABLE  = 0x00000080,  // (menu) item can be checked
+     CONTROL_UNDETERMINED = CONTROL_CHECKABLE  // (check) undetermined state
 
 h2. Derived from
 
@@ -69,27 +74,34 @@ No base class
 
 h2. Methods
 
+* "RendererNative#draw_check_box":#RendererNative_drawcheckbox
 * "RendererNative#draw_combo_box_drop_button":#RendererNative_drawcomboboxdropbutton
 * "RendererNative#draw_drop_arrow":#RendererNative_drawdroparrow
 * "RendererNative#draw_header_button":#RendererNative_drawheaderbutton
+* "RendererNative#draw_item_selection_rect":#RendererNative_drawitemselectionrect
+* "RendererNative#draw_push_button":#RendererNative_drawpushbutton
 * "RendererNative#draw_splitter_border":#RendererNative_drawsplitterborder
 * "RendererNative#draw_splitter_sash":#RendererNative_drawsplittersash
 * "RendererNative#draw_tree_item_button":#RendererNative_drawtreeitembutton
 * "RendererNative#get":#RendererNative_get
 * "RendererNative#get_default":#RendererNative_getdefault
 * "RendererNative#get_generic":#RendererNative_getgeneric
+* "RendererNative#get_header_button_height":#RendererNative_getheaderbuttonheight
 * "RendererNative#get_splitter_params":#RendererNative_getsplitterparams
 * "RendererNative#get_version":#RendererNative_getversion
 * "RendererNative#load":#RendererNative_load
 * "RendererNative#set":#RendererNative_set
 
 </div>
+h3(#RendererNative_drawcheckbox). RendererNative#draw_check_box
 
+  *draw_check_box*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+                 %(arg-type)Integer% flags)
 
+Draw a check box (used by DataViewCtrl).
 
-  *destructor*()
-
-Virtual destructor as for any base class.
+flags may have the @CONTROL_CHECKED@, @CONTROL_CURRENT@ or
+@CONTROL_UNDETERMINED@ bit set.
 
 
 h3(#RendererNative_drawcomboboxdropbutton). RendererNative#draw_combo_box_drop_button
@@ -118,10 +130,48 @@ flags may have the @CONTROL_PRESSED@ or @CONTROL_CURRENT@ bit set.
 
 h3(#RendererNative_drawheaderbutton). RendererNative#draw_header_button
 
-  *draw_header_button*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
-                     %(arg-type)Integer% flags = 0)
+ Integer *draw_header_button*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+                            %(arg-type)Integer% flags = 0, 
+                            %(arg-type)HeaderSortIconType% sortArrow = HDR_SORT_ICON_NONE, 
+                            %(arg-type)HeaderButtonParams% params = nil)
 
-Draw the header control button (used by "ListCtrl":listctrl.html).
+Draw the header control button (used, for example, by
+"ListCtrl":listctrl.html).  Depending on platforms the
+flags parameter may support the @CONTROL_SELECTED@
+@CONTROL_DISABLED@ and @CONTROL_CURRENT@ bits.
+The sortArrow parameter can be one of
+@HDR_SORT_ICON_NONE@, @HDR_SORT_ICON_UP@, or
+@HDR_SORT_ICON_DOWN@.  Additional values controlling the
+drawing of a text or bitmap label can be passed in params.  The
+value returned is the optimal width to contain the the unabreviated
+label text or bitmap, the sort arrow if present, and internal margins.
+
+
+
+h3(#RendererNative_drawitemselectionrect). RendererNative#draw_item_selection_rect
+
+  *draw_item_selection_rect*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+                           %(arg-type)Integer% flags = 0)
+
+Draw a selection rectangle underneath the text as used e.g. in a 
+"ListCtrl":listctrl.html. The supported flags are
+@CONTROL_SELECTED@ for items which are selected (e.g. often a blue
+rectangle) and @CONTROL_CURRENT@ for the item that has the focus
+(often a dotted line around the item's text). @CONTROL_FOCUSED@ may
+be used to indicate if the control has the focus (othewise the the selection
+rectangle is e.g. often grey and not blue). This may be ignored by the renderer
+or deduced by the code directly from the win.
+
+
+h3(#RendererNative_drawpushbutton). RendererNative#draw_push_button
+
+  *draw_push_button*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+                   %(arg-type)Integer% flags)
+
+Draw a blank push button that looks very similar to "Button":button.html.
+
+flags may have the @CONTROL_PRESSED@, @CONTROL_CURRENT@ or
+@CONTROL_ISDEFAULT@ bit set.
 
 
 h3(#RendererNative_drawsplitterborder). RendererNative#draw_splitter_border
@@ -180,17 +230,33 @@ is the default renderer implementation, others have platform-specific default
 renderer which can be retrieved by calling "get_default":#RendererNative_getdefault.
 
 
+h3(#RendererNative_getheaderbuttonheight). RendererNative#get_header_button_height
+
+ Integer *get_header_button_height*(%(arg-type)Window% win)
+
+Returns the height of a header button, either a fixed platform height if available, or a 
+generic height based on the window's font.
+
+
 h3(#RendererNative_getsplitterparams). RendererNative#get_splitter_params
 
- "SplitterRenderParams":splitterrenderparams.html *get_splitter_params*(%(arg-type)Window% win)
+ SplitterRenderParams *get_splitter_params*(%(arg-type)Window% win)
 
-Get the splitter parameters, see 
-"SplitterRenderParams":splitterrenderparams.html.
+Gets the parameters for platform-native splitter. 
+
+This return value is  a structure containing the following fields:
+
+* _width_sash_ : the integer width of the sash
+* _border_ : the integer width of the border drawn by the splitter inside it, may be 0
+* _is_hot_sensitive_ : @true@ if the sash changes appearance when the mouse passes over it, @false@ otherwise
+
 
 
 h3(#RendererNative_getversion). RendererNative#get_version
 
  "RendererVersion":rendererversion.html *get_version*()
+
+*NOT CURRENTLY SUPPORTED*
 
 This function is used for version checking: "Load":renderernativeload.html 
 refuses to load any shared libraries implementing an older or incompatible
@@ -207,6 +273,8 @@ h3(#RendererNative_load). RendererNative#load
 
  "RendererNative":renderernative.html *load*(%(arg-type)String% name)
 
+*NOT CURRENTLY SUPPORTED*
+
 Load the renderer from the specified DLL, the returned pointer must be
 deleted by caller if not @NULL@ when it is not used any more.
 
@@ -214,7 +282,6 @@ The name should be just the base name of the renderer and not the full
 name of the DLL file which is constructed differently (using 
 "DynamicLibrary#canonicalize_plugin_name":dynamiclibrary.html#DynamicLibrary_canonicalizepluginname) 
 on different systems.
-
 
 h3(#RendererNative_set). RendererNative#set
 
