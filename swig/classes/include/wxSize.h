@@ -1,54 +1,19 @@
-// wxSize.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2006 - 2007 by Kevin Smith
+// released under the MIT-style wxruby2 license
+
 
 #if !defined(_wxSize_h_)
 #define _wxSize_h_
 class wxSize
 {
 public:
-	/**
-	 * \brief  
-	*/
-
-   wxSize() ;
-	/**
-	 * \brief Creates a size object. 
-	 * \param int  
-	 * \param int  
-	*/
-
-   wxSize(int  width , int  height ) ;
-	/**
-	 * \brief Gets the width member. 
-	*/
-
+   wxSize();
+   wxSize(int  width, int  height);
   int GetWidth() const;
-	/**
-	 * \brief Gets the height member. 
-	*/
-
   int GetHeight() const;
-	/**
-	 * \brief Sets the width and height members. 
-	 * \param int  
-	 * \param int  
-	*/
-
-  void Set(int  width , int  height ) ;
-	/**
-	 * \brief Sets the height. 
-	 * \param int  
-	*/
-
-  void SetHeight(int  height ) ;
-	/**
-	 * \brief Sets the width. 
-	 * \param int  
-	*/
-
-  void SetWidth(int  width ) ;
+  void Set(int  width, int  height);
+  void SetHeight(int height );
+  void SetWidth(int width );
 };
 
 
