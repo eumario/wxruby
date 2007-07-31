@@ -122,23 +122,35 @@ h2. Methods
 
 h3(#Dialog_new). Dialog.new
 
-  *Dialog.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-             %(arg-type)Point% pos = DEFAULT_POSITION, 
-             %(arg-type)Size% size = DEFAULT_SIZE, 
-             %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
-             %(arg-type)String% name = "dialogBox")
+  *Dialog.new*()
 
-Constructor.
+  *Dialog.new*(%(arg-type)Window% parent,  
+               %(arg-type)Integer% id,  
+               %(arg-type)String% title, 
+               %(arg-type)Point% pos = DEFAULT_POSITION, 
+               %(arg-type)Size% size = DEFAULT_SIZE, 
+               %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
+               %(arg-type)String% name = "dialogBox")
+
+Constructors. A Dialog may be attached to a particular parent frame, in
+which case it will be automatically destroyed when that parent is
+closed. However, the _parent_ argument may be @nil@ - indeed it is
+possible to create an application that consists only of Dialogs. If a
+Dialog is created with a @nil@ parent, you must be sure to call
+"destroy":#Dialog_destroy on the dialog once it is no longer being
+used. Otherwise, your application may hang when it exits because there
+is a window still remaining in use, even if it is not visible.
+
+The zero-argument form is only useful when loading dialog subclasses
+using "XRC":xmlresource.html.
 
 h4. Parameters
 
 * _parent_ Can be nil, a frame or another dialog box.
 * _id_ An identifier for the dialog. A value of -1 is taken to mean a default.
 * _title_ The title of the dialog.
-* _pos_ The dialog position. A value of (-1, -1) indicates a default position, chosen by
-either the windowing system or Widgets, depending on platform.
-* _size_ The dialog size. A value of (-1, -1) indicates a default size, chosen by
-either the windowing system or Widgets, depending on platform.
+* _pos_ The dialog position. A value of (-1, -1) indicates a default position, chosen by either the windowing system or wxRuby, depending on platform.
+* _size_ The dialog size. A value of (-1, -1) indicates a default size, chosen by either the windowing system or wxRuby, depending on platform.
 * _style_ The window style. See "Dialog":dialog.html.
 * _name_ Used to associate a name with the window,
 allowing the application user to set Motif resource values for
@@ -213,6 +225,14 @@ of the following flags: OK, CANCEL, YES, NO, HELP, NO_DEFAULT.
 
 The sizer lays out the buttons in a manner appropriate to the platform.
 
+h3(#Dialog_destroy). Dialog#destroy
+
+ Boolean *destroy*()
+
+Tells wxRuby that this Dialog can be disposed of. This is normally only
+required if the Dialog was created with no parent frame (see
+"new":#Dialog_new). Dialogs that are associated with a parent frame will
+be automatically destroyed by wxRuby when the frame is closed.
 
 h3(#Dialog_dook). Dialog#do_ok
 
