@@ -255,6 +255,7 @@ different device contexts.
 |MirrorDC|A proxy device context allowing for simple mirroring.|
 |PostScriptDC|A device context for drawing into PostScript files|
 |PrinterDC|A device context for drawing to printers|
+|RendererNative|Assists drawing native-look GUI elements in custom controls|
 
 "top":#top
 
