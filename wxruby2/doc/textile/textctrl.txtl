@@ -105,28 +105,18 @@ h2. Constants
 The values below are the possible return codes of the
 "hit_test":#TextCtrl_hittest method:
 
-
-
- // the point asked is ...
- enum TextCtrlHitTestResult
- {
-     TE_HT_UNKNOWN = -2,   // this means HitTest() is simply not implemented
-     TE_HT_BEFORE,         // either to the left or upper
-     TE_HT_ON_TEXT,        // directly on
-     TE_HT_BELOW,          // below [the last line]
-     TE_HT_BEYOND          // after [the end of line]
- };
- // ... the character returned
- 
-
-
+     Wx::TE_HT_UNKNOWN = -2  # this means HitTest() is simply not implemented
+     Wx::TE_HT_BEFORE        # either to the left or upper
+     Wx::TE_HT_ON_TEXT       # directly on
+     Wx::TE_HT_BELOW         # below [the last line]
+     Wx::TE_HT_BEYOND        # after [the end of line]
 
 h2. Event handling
 
 The following commands are processed by default event handlers in
-TextCtrl: ID_CUT, ID_COPY, ID_PASTE, ID_UNDO, ID_REDO. The associated UI
-update events are also processed automatically, when the control has the
-focus.
+TextCtrl: @Wx::ID_CUT@, @Wx::ID_COPY@, @Wx::ID_PASTE@, @Wx::ID_UNDO@,
+@Wx::ID_REDO@. The associated UI update events are also processed
+automatically, when the control has the focus.
 
 To process input from a text control, use these event handler methods to
 direct the events to a block that takes a "CommandEvent":commandevent.html
@@ -471,23 +461,27 @@ may also be more efficient, especially if the control contains a lot of data.
 
 h3(#TextCtrl_getselection). TextCtrl#get_selection
 
-  *get_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+  [ Integer *from*, Integer *to* ] = *get_selection*()
 
-Gets the current selection span. If the returned values are equal, there was
-no selection.
+Gets the current selection span and returns the start (@from@) and end
+(@to@) points as a two-element array. These two values are integer
+offsets within the TextCtrl's text. If the returned values are equal,
+there was no selection.
 
-Please note that the indices returned may be used with the other Textctrl
-methods but don't necessarily represent the correct indices into the string
-returned by "get_value()":#TextCtrl_getvalue for multiline controls
-under Windows (at least,) you should use
-"get_string_selection()":#TextCtrl_getstringselection to get the selected
-text.
+Note that on some platforms, if the selection was made by click-dragging
+from right to left, @from@ may be larger than @to@. In other words, you
+should not assume that @from@ is earlier in the sequence of characters
+in the TextCtrl. Using ruby's @sort@ method should correct this. 
 
-h4. Parameters
+Please note that the indices returned may be used with the other
+Textctrl methods but don't necessarily represent the correct indices
+into the string returned by "get_value()":#TextCtrl_getvalue for
+all multiline controls under Windows (at least,) 
 
-* _from_ The returned first position.
-* _to_ The returned last position.
-
+This problem appears to be avoided if the TextCtrl is created with the
+@Wx::TE_RICH2@ style, or you can use
+"get_string_selection":#TextCtrl_getstringselection to get a string
+containing the selected text.
 
 h3(#TextCtrl_getstringselection). TextCtrl#get_string_selection
 
@@ -655,29 +649,19 @@ Pastes text from the clipboard to the text item.
 
 h3(#TextCtrl_positiontoxy). TextCtrl#position_to_xy
 
- Boolean *position_to_xy*(%(arg-type)Integer% pos,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+ [ Integer *x*, Integer *y* ] = *position_to_xy*(pos)
 
-Converts given position to a zero-based column, line number pair.
+Converts given position to a zero-based column, line number pair. If the
+position requested is less than 0 or greater than the length of the
+TextCtrl, the single value @nil@ will be returned.
 
 h4. Parameters
 
 * _pos_ Position.
-* _x_ Receives zero based column number.
-* _y_ Receives zero based line number.
-
-h4. Return value
-
-@true@ on success, @false@ on failure (most likely due to a too large position
-parameter).
 
 h4. See also
 
 "TextCtrl#xy_to_position":textctrl.html#TextCtrl_xytoposition
-
-
-
-
-
 
 h3(#TextCtrl_redo). TextCtrl#redo
 
