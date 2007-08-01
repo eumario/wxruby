@@ -51,14 +51,10 @@ h2. Methods
 * "App#is_main_loop_running":#App_ismainlooprunning
 * "App#main_loop":#App_mainloop
 * "App#on_assert":#App_onassert
-* "App#on_cmd_line_error":#App_oncmdlineerror
-* "App#on_cmd_line_help":#App_oncmdlinehelp
-* "App#on_cmd_line_parsed":#App_oncmdlineparsed
 * "App#on_exception_in_main_loop":#App_onexceptioninmainloop
 * "App#on_exit":#App_onexit
 * "App#on_fatal_exception":#App_onfatalexception
 * "App#on_init":#App_oninit
-* "App#on_init_cmd_line":#App_oninitcmdline
 * "App#on_run":#App_onrun
 * "App#on_unhandled_exception":#App_onunhandledexception
 * "App#process_message":#App_processmessage
@@ -280,57 +276,6 @@ h4. Parameters
 * _cond_ the condition of the failed assert in string form
 * _msg_ the failure message, may be @nil@ if just "ASSERT":assert.html or "FAIL":fail.html was used
 
-
-h3(#App_oncmdlineerror). App#on_cmd_line_error
-
- Boolean *on_cmd_line_error*(%(arg-type)CmdLineParser% parser)
-
-Called when command line parsing fails (i.e. an incorrect command line option
-was specified by the user). The default behaviour is to show the program usage
-text and abort the program.
-
-Return @true@ to continue normal execution or @false@ to return 
-@false@ from "on_init":#App_oninit thus terminating the program.
-
-h4. See also
-
-"on_init_cmd_line":#App_oninitcmdline
-
-
-h3(#App_oncmdlinehelp). App#on_cmd_line_help
-
- Boolean *on_cmd_line_help*(%(arg-type)CmdLineParser% parser)
-
-Called when the help option (@--help@) was specified on the command line.
-The default behaviour is to show the program usage text and abort the program.
-
-Return @true@ to continue normal execution or @false@ to return 
-@false@ from "on_init":#App_oninit thus terminating the program.
-
-h4. See also
-
-"on_init_cmd_line":#App_oninitcmdline
-
-
-h3(#App_oncmdlineparsed). App#on_cmd_line_parsed
-
- Boolean *on_cmd_line_parsed*(%(arg-type)CmdLineParser% parser)
-
-Called after the command line had been successfully parsed. You may override
-this method to test for the values of the various parameters which could be
-set from the command line.
-
-Don't forget to call the base class version unless you want to suppress
-processing of the standard command line options.
-
-Return @true@ to continue normal execution or @false@ to return 
-@false@ from "on_init":#App_oninit thus terminating the program.
-
-h4. See also
-
-"on_init_cmd_line":#App_oninitcmdline
-
-
 h3(#App_onexceptioninmainloop). App#on_exception_in_main_loop
 
  Boolean *on_exception_in_main_loop*()
@@ -399,15 +344,6 @@ OnInit().
 
 Return  to continue processing,  to exit the application
 immediately.
-
-
-h3(#App_oninitcmdline). App#on_init_cmd_line
-
-  *on_init_cmd_line*(%(arg-type)CmdLineParser% parser)
-
-Called from "on_init":#App_oninit and may be used to initialize the
-parser with the command line options for this application. The base class
-versions adds support for a few standard options only.
 
 h3(#App_onrun). App#on_run
 
