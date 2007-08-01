@@ -16,11 +16,23 @@
 %ignore ProcessMessage;
 %ignore SetAuto3D;
 
+// Not useful - command line parsing would be done using ruby's libraries
+%ignore OnCmdLineError;
+%feature("nodirector") OnCmdLineError;
+%ignore OnCmdLineHelp;
+%feature("nodirector") OnCmdLineHelp;
+%ignore OnCmdLineParsed;
+%feature("nodirector") OnCmdLineParsed;
+%ignore OnInitCmdLine;
+%feature("nodirector") OnInitCmdLine;
+
 // Redefined below
 %ignore MainLoop;
 %ignore FilterEvent;
 %feature("nodirector") FilterEvent; // director-like custom method below
 %feature("nodirector") GetTopWindow; // avoid exception on exit
+
+
 
 %rename(wx_initialize) Initialize;
 
