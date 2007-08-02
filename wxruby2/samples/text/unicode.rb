@@ -102,7 +102,7 @@ class IConvFrame < Wx::Frame
 
     sizer.add(ctrl_sizer, 0, Wx::ADJUST_MINSIZE|Wx::ALL, 2)
     construct_menus()
-    panel.set_sizer( sizer )
+    panel.set_sizer_and_fit( sizer )
   end
 
   # Prompt the user to specify a file whose contents should be loaded
