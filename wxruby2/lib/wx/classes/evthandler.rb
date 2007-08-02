@@ -791,6 +791,17 @@ class Wx::EvtHandler
     evt_mousewheel(&block)
   end
 
+  # convenience evt handler to listen to all scrollwin events
+  def evt_scrollwin(&block)
+    evt_scrollwin_top(&block)
+    evt_scrollwin_bottom(&block)
+    evt_scrollwin_lineup(&block)
+    evt_scrollwin_linedown(&block)
+    evt_scrollwin_pageup(&block)
+    evt_scrollwin_pagedown(&block)
+    evt_scrollwin_thumbtrack(&block)
+    evt_scrollwin_thumbrelease(&block)
+  end
 # TODO
 #   if defined?(Wx::Scintilla)
 #     EVENT_TYPE_MAPPING.merge(
