@@ -124,6 +124,18 @@ void GC_mark_wxFrame(void *ptr)
 	{ GC_mark_MenuBarBelongingToFrame(menu_bar); }
 }
 
+void GC_mark_wxEvent(void *ptr)
+{
+  if ( ! ptr ) return;
+  wxEvent* wx_event = (wxEvent*)ptr;
+  if ( wx_event->IsCommandEvent() )
+	{
+	  wxCommandEvent* wx_cm_event = (wxCommandEvent*)ptr;
+	  VALUE rb_client_data = (VALUE)wx_cm_event->GetClientData();
+	  rb_gc_mark(rb_client_data);
+	}
+}
+
 // Prevents Ruby's GC sweeping up items that are stored as client data
 // Checks whether the C++ object is still around first...
 void mark_wxControlWithItems(void* ptr) {
