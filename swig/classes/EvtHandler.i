@@ -12,10 +12,10 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 %import "include/wxObject.h"
 %include "include/wxEvtHandler.h"
 
-// The EvtHandler instance event methods (evt_xxx) are not defined
-// here. Instead, they are defined by Events.cpp, generated from
-// swig/Event.i and modified by swig/fixevents.rb
 
+// The EvtHandler instance event methods (evt_xxx) are not defined
+// here. Rather, they are set up in ruby in
+// lib/wx/classes/evthandler.rb, using the public 'connect' method below
 %extend wxEvtHandler {
   // This provides the public Ruby 'connect' method
   VALUE connect(int firstId, int lastId, wxEventType eventType)
@@ -71,25 +71,3 @@ public:
     VALUE m_func;
 };
 }
-
-%{
-// This is used by the evt_xxx methods from swig/Events.i
-void internal_connect(VALUE self, int firstId, int lastId, 
-					  wxEventType eventType)
-{
-    wxEvtHandler *cppSelf = (wxEvtHandler *) 0 ;
-    SWIG_ConvertPtr(self, (void **) &cppSelf, SWIGTYPE_p_wxEvtHandler, 1);
-
-    VALUE func = rb_funcall(rb_cProc, rb_intern("new"), 0);
-    rb_global_variable(&callbacks);
-    if(callbacks == Qnil)
-        callbacks = rb_ary_new();
-    rb_ary_push(callbacks, func);
-
-    wxObject* userData = new wxRbCallback(func);
-    wxObjectEventFunction function = 
-        (wxObjectEventFunction )&wxRbCallback::EventThunker;
-		(cppSelf)->Connect(firstId, lastId, eventType, function, userData);
-}
-
-%}
