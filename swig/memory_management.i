@@ -24,6 +24,7 @@
 extern void GcNullFreeFunc(void *);
 extern void GC_mark_wxWindow(void *);
 extern void GC_mark_wxFrame(void *);
+extern void GC_mark_wxEvent(void *);
 %}
 
 // Macro definitions.
@@ -69,6 +70,7 @@ GC_NEVER(kls);
 // be stored so not tracked.
 %define GC_MANAGE_AS_EVENT(kls)
 %feature("freefunc") kls "GcNullFreeFunc";
+%feature("markfunc") kls "GC_mark_wxEvent";
 %feature("nodirector") kls;
 %enddef
 
