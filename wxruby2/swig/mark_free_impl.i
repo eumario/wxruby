@@ -124,6 +124,9 @@ void GC_mark_wxFrame(void *ptr)
 	{ GC_mark_MenuBarBelongingToFrame(menu_bar); }
 }
 
+// TODO - need some way to mark the ClientData associated with custom
+// ruby event types - but this doesn't work, as it marks non-ruby
+// ClientData associated with core wx event classes - which crashes
 void GC_mark_wxEvent(void *ptr)
 {
   if ( ! ptr ) return;
@@ -131,8 +134,8 @@ void GC_mark_wxEvent(void *ptr)
   if ( wx_event->IsCommandEvent() )
 	{
 	  wxCommandEvent* wx_cm_event = (wxCommandEvent*)ptr;
-	  VALUE rb_client_data = (VALUE)wx_cm_event->GetClientData();
-	  rb_gc_mark(rb_client_data);
+	  // VALUE rb_client_data = (VALUE)wx_cm_event->GetClientData();
+	  // rb_gc_mark(rb_client_data);
 	}
 }
 
