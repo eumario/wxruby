@@ -29,7 +29,7 @@ class Wx::TreeCtrl
       raise ArgumentError, "Invalid number of block parameters"
     end
 
-    if has_children(start_item)
+    if item_has_children(start_item)
       child, cookie = get_first_child(start_item)
       while child.nonzero?
         traverse(child, &block)
