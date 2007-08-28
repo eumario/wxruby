@@ -33,14 +33,23 @@ public:
   int GetItemCount() const;
   long GetItemData(long  item ) const;
   bool GetItemPosition(long  item , wxPoint&  pos ) const;
-  bool GetItemRect(long  item , wxRect&  rect , int  code = wxLIST_RECT_BOUNDS) const;
+  bool GetItemRect(long item, 
+				   wxRect& rect, 
+				   int code = wxLIST_RECT_BOUNDS) const;
+
+  bool GetSubItemRect(long item, 
+					  long subitem, 
+					  wxRect& rect, 
+					  int code = wxLIST_RECT_BOUNDS) const;
   int GetItemSpacing(bool  isSmall ) const;
   int GetItemState(long  item , long  stateMask ) const;
   wxString GetItemText(long  item ) const;
   long GetNextItem(long  item , int  geometry = wxLIST_NEXT_ALL, int  state = wxLIST_STATE_DONTCARE) const;
   int GetSelectedItemCount() const;
+
   wxColour GetTextColour() const;
   long GetTopItem() const;
+  wxRect GetViewRect() const;
   long HitTest(const wxPoint&  point , int&  flags ) ;
   long InsertColumn(long  col , wxListItem&  info ) ;
   long InsertColumn(long  col , const wxString&  heading , int  format = wxLIST_FORMAT_LEFT, int  width = -1) ;
