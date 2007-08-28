@@ -411,19 +411,13 @@ Returns the position of the item, in icon or small icon view.
 
 h3(#ListCtrl_getitemrect). ListCtrl#get_item_rect
 
- Boolean *get_item_rect*(%(arg-type)Integer% item,  %(arg-type)Rect% rect, 
-                       %(arg-type)Integer% code = LIST_RECT_BOUNDS)
+ Rect *get_item_rect*(%(arg-type)Integer% item,
+                      %(arg-type)Integer% code = LIST_RECT_BOUNDS)
 
 Returns the rectangle representing the item's size and position, in physical
 coordinates.
 
 _code_ is one of LIST_RECT_BOUNDS, LIST_RECT_ICON, LIST_RECT_LABEL.
-
-
-
-
-
-
 
 h3(#ListCtrl_getitemspacing). ListCtrl#get_item_spacing
 
