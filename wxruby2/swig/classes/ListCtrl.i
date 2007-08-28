@@ -29,6 +29,12 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 %ignore wxListCtrl::GetItemData;
 %ignore wxListCtrl::SetItemData;
 
+// Not described in the docs as being Windows-only, but doesn't seem to
+// appear in GTK wx headers, so causes a compile error
+#if !defined(__WXMSW__)
+%ignore wxListCtrl::GetSubItemRect;
+#endif
+
 // required for GetItemRect and GetSubItemRect
 %typemap(in, numinputs=0) (wxRect &rect) {
   $1 = new wxRect();
