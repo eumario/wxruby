@@ -3,14 +3,14 @@
 
 %include "../common.i"
 
+%module(directors="1") wxListCtrl
+GC_MANAGE_AS_WINDOW(wxListCtrl);
+
 %{
 #include <wx/wx.h>
 #include <wx/listctrl.h>
 #include <wx/imaglist.h>
 %}
-
-%module(directors="1") wxListCtrl
-GC_MANAGE_AS_WINDOW(wxListCtrl);
 
 // default constructor
 %ignore wxListCtrl::wxListCtrl();
@@ -29,8 +29,18 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 %ignore wxListCtrl::GetItemData;
 %ignore wxListCtrl::SetItemData;
 
+// required for GetItemRect and GetSubItemRect
+%typemap(in, numinputs=0) (wxRect &rect) {
+  $1 = new wxRect();
+}
+%typemap(argout) ( wxRect &rect ) {
+  $result = SWIG_NewPointerObj($1, SWIGTYPE_p_wxRect, 1);
+}
+
 // required for hit_test, return flags as second part of array return value
 %apply int *OUTPUT { int& flags }
+
+
 
 %extend wxListCtrl {
   VALUE get_item(int row, int col = -1)
