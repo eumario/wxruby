@@ -40,7 +40,10 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 	list_item->SetId(row);
 	if ( col != -1 )
 	  list_item->SetColumn(col);
-	
+	// We don't know what fields the ruby user might wish to access, so
+	// we fetch them all
+	list_item->SetMask(wxLIST_MASK_DATA|wxLIST_MASK_FORMAT|wxLIST_MASK_IMAGE|wxLIST_MASK_STATE|wxLIST_MASK_TEXT|wxLIST_MASK_WIDTH);
+
 	bool success = self->GetItem(*list_item);
 	if ( success ) 
 	  returnVal = SWIG_NewPointerObj(list_item, SWIGTYPE_p_wxListItem, 1);
