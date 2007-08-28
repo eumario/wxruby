@@ -60,33 +60,33 @@ class TestVirtualList < Wx::ListCtrl
         @log.write_text("on_item_deselected: %s" % event.get_index())
     end
     
-     #---------------------------------------------------
-    # These methods are callbacks for implementing the
-    # "virtualness" of the list...  Normally you would
-    # determine the text, attributes and/or image based
-    # on values from some external data source, but for
-    # this demo we'll just calculate them
-    
+    # These three following methods are callbacks for implementing the
+    # "virtualness" of the list; they *must* be defined by any ListCtrl
+    # object with the style LC_VIRTUAL.
+
+    # Normally you would determine the text, attributes and/or image
+    # based on values from some external data source, but for this demo
+    # we'll just calculate them based on order. 
     def on_get_item_text(item, col)
-        return "Item %d, column %d" % [item,col]
+      return "Item %d, column %d" % [item,col]
     end
     
-    def on_get_item_image(item)
-        if item % 3 == 0
-            return @idx1
-        else
-            return -1
-        end
+    def on_get_item_column_image(item, col)
+      if item % 4 == 0
+        return @idx1
+      else
+        return -1
+      end
     end
     
     def on_get_item_attr(item)
-        if item % 3 == 1
-            return @attr1
-        elsif item % 3 == 2
-            return @attr2
-        else 
-            return nil
-        end
+      if item % 3 == 1
+        return @attr1
+      elsif item % 3 == 2
+        return @attr2
+      else 
+        return nil
+      end
     end
 end
 
