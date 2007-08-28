@@ -77,9 +77,10 @@ public:
   void SetWindowStyleFlag(long  style ) ;
   bool SortItems(wxListCtrlCompare  fnSortCallBack , long  data ) ;
  protected:
-  virtual int OnGetItemImage(long  item ) const;
-  virtual wxString OnGetItemText(long  item , long  column ) const;
-
+  virtual wxListItemAttr* OnGetItemAttr(long item) const;
+  virtual int OnGetItemImage(long item) const;
+  virtual int OnGetItemColumnImage(long item, long column) const;
+  virtual wxString OnGetItemText(long  item, long column) const;
 };
 
 
