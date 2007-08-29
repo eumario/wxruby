@@ -8,9 +8,23 @@ It is released under a permissive MIT-style license
 (see the LICENSE file for details).
 
 This version is a beta release, in preparation for a stable release of
-wxruby version 2.0.
+wxruby version 2.0. 
 
 ------------------------FAQ---------------------------
+
+- What platforms and operating systems are supported in wxRuby2?
+
+  Currently the following are fully supported:
+
+  Windows NT/2000/XP/Vista (i686)
+  OS X 10.3+ (i686 and PowerPc)
+  Linux (i686)
+
+  Work is ongoing to support 64-bit processors on Linux. 
+
+  It is unlikely that support for old Windows OS's (3.1, 95, 98, ME)
+  will be added to wxRuby2 in the near future, as these operating
+  systems have very limited support for Unicode.
 
 - Why would I choose wxruby over FXRuby, Ruby/GTK, or one of the other 
    GUI toolkits? Isn't wxruby arriving "too late"?
