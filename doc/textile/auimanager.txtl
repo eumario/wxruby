@@ -121,7 +121,7 @@ h2. Methods
 * "AuiManager.new":#AuiManager_new
 * "AuiManager#add_pane":#AuiManager_addpane
 * "AuiManager#detach_pane":#AuiManager_detachpane
-* "AuiManager#get_all_panes":#AuiManager_getallpanes
+* "AuiManager#each_pane":#AuiManager_eachpane
 * "AuiManager#get_art_provider":#AuiManager_getartprovider
 * "AuiManager#get_dock_size_constraint":#AuiManager_getdocksizeconstraint
 * "AuiManager#get_flags":#AuiManager_getflags
@@ -179,11 +179,17 @@ Tells the AuiManager to stop managing the pane specified by window.
 The window, if in a floated frame, is reparented to the frame managed
 by AuiManager.
 
-h3(#AuiManager_getallpanes). AuiManager#get_all_panes
+h3(#AuiManager_eachpane). AuiManager#each_pane
 
- "AuiPaneInfoArray":auipaneinfoarray.html *get_all_panes*()
+ *get_all_panes*() { ... }
 
-Returns an array of all panes managed by the frame manager.
+Iterates over all the panes contained in the AuiManager, passing each
+one in turn into the passed block as an "AuiPaneInfo":auipaneinfo.html
+object. 
+
+Note that changes can be made to the panes as they are iterated over by
+this method, but such changes will not be displayed until
+"update":#AuiManager_update is called. 
 
 h3(#AuiManager_getartprovider). AuiManager#get_art_provider
 
