@@ -564,7 +564,8 @@ class AuiFrame < Wx::Frame
     evt_update_ui(ID_VerticalGradient) { | e | on_update_ui(e) } 
     evt_update_ui(ID_HorizontalGradient) { | e | on_update_ui(e) } 
     evt_menu_range( ID_FirstPerspective, 
-                    ID_FirstPerspective + @perspectives.length) { | e | }
+                    ID_FirstPerspective + 
+                    @perspectives.length) { | e | on_restore_perspective(e) }
     evt_aui_pane_close { | e | on_pane_close(e) }
     evt_auinotebook_page_close(Wx::ID_ANY) { | e | on_notebook_page_close(e) }
   end
@@ -800,7 +801,7 @@ class AuiFrame < Wx::Frame
   def setup_perspectives
     perspective_all = @mgr.save_perspective
 
-    @mgr.get_all_panes.each do | pane | 
+    @mgr.each_pane do | pane | 
       pane.hide unless pane.is_toolbar
     end 
 
@@ -935,7 +936,7 @@ class AuiFrame < Wx::Frame
     end
 
 
-    @mgr.get_all_panes.each do | pane | 
+    @mgr.each_pane do | pane | 
       maybe_nb = pane.get_window
       next unless maybe_nb.kind_of?(Wx::AuiNotebook)
       if e_id == ID_NotebookArtGloss
@@ -1023,7 +1024,7 @@ class AuiFrame < Wx::Frame
   def on_create_perspective
     msg = "Enter a name for the new perspective:"
     dlg = Wx::TextEntryDialog.new(self, msg, "Wx::AUI Test")
-    dlg.set_value("Perspective %d" % @perspectives.length + 1)
+    dlg.set_value("Perspective %d" % [ @perspectives.length + 1 ] )
     return unless dlg.show_modal != Wx::ID_OK
     if @perspectives.length.zero?
       @perspectives_menu.append_separator
