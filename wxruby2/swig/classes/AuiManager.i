@@ -89,17 +89,23 @@ enum wxAuiButtonId
     wxAUI_BUTTON_CUSTOM3 = 203
   };
 
-// for GetAllPanes
-%typemap(out) wxAuiPaneInfoArray & {
-  $result = rb_ary_new();
 
-  for (int i = 0; i < $1->GetCount(); i++)
-  {
-	wxAuiPaneInfo pi = $1->Item(i);
-	VALUE r_pi = SWIG_NewPointerObj(&pi, SWIGTYPE_p_wxAuiPaneInfo, 0);
-	rb_ary_push($result, r_pi);
-  }
+%ignore wxAuiManager::GetAllPanes;
+
+%extend wxAuiManager {
+  VALUE each_pane() {
+	wxAuiPaneInfoArray panes = self->GetAllPanes();
+	for (int i = 0; i < panes.GetCount(); i++)
+	  {
+		wxAuiPaneInfo &pi_ref = self->GetPane( panes.Item(i).name );
+		wxAuiPaneInfo *pi = (wxAuiPaneInfo*)&pi_ref;
+		VALUE r_pi = SWIG_NewPointerObj(pi, SWIGTYPE_p_wxAuiPaneInfo, 0);
+		rb_yield(r_pi);
+	  }	
+	return Qnil;
+	}
 }
+
 
 %import "include/wxEvtHandler.h"
 %import "include/wxObject.h"
