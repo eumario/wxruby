@@ -98,8 +98,3 @@ def create_resources(base)
 	`#{cmd} #{base}/Versions/A/Resources/wxruby.rsrc`
 end
 
-WXSCINTILLA = ENV['WXSCINTILLA']
-if WXSCINTILLA
-  $wx_libs += " #{WXSCINTILLA}/lib/libwxscintilla#{$POSTFIX}.a"
-  $wx_cppflags += " -I#{WXSCINTILLA}/include -DWXSCINTILLA"
-end
