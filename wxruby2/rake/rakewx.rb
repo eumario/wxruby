@@ -91,11 +91,18 @@ def wx_config(opt)
 end
 
 def use_wx_config
-    $wx_version = wx_config("--version")
-    $wx_cppflags = wx_config("--cppflags")
-    $wx_libs = wx_config("--libs std,stc")
-    $cpp = wx_config("--cxx")
-    $ld = wx_config("--ld")
+  $wx_version = wx_config("--version")
+  $wx_cppflags = wx_config("--cppflags")
+  $wx_libs = wx_config("--libs std,stc")
+  $cpp = wx_config("--cxx")
+  $ld = wx_config("--ld")
+  
+  # Check whether there is a lib file for StyledTextCtrl (Scintilla). If
+  # not, don't try and compile this file.
+  stc_lib = $wx_libs[/\S+_stc\S+/]
+  if not File.exists?(stc_lib)
+    $excluded_classes << 'StyledTextCtrl'
+  end
 end
 
 def get_classes
