@@ -73,6 +73,11 @@ class Wx::EvtHandler
     end
   end
 
+  # Definitions for all event types that are part by core wxRuby. Events
+  # that are mapped to class Wx::Event are TODO as they are not
+  # currently wrapped by the correct class. All StyledTextCtrl
+  # (Scintilla) events with prefix EVT_STC are dealt with in the
+  # separate styledtextctrl.rb file.
   EVENT_DEFINITIONS = [ 
     EventType['evt_activate', 0,
               Wx::EVT_ACTIVATE, 
@@ -802,34 +807,5 @@ class Wx::EvtHandler
     evt_scrollwin_thumbtrack(&block)
     evt_scrollwin_thumbrelease(&block)
   end
-# TODO
-#   if defined?(Wx::Scintilla)
-#     EVENT_TYPE_MAPPING.merge(
-#       Wx::EVT_SCI_CHANGE => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_STYLENEEDED => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_CHARADDED => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_SAVEPOINTREACHED => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_SAVEPOINTLEFT => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_ROMODIFYATTEMPT => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_KEY => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_DOUBLECLICK => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_UPDATEUI => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_MODIFIED => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_MACRORECORD => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_MARGINCLICK => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_NEEDSHOWN => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_PAINTED => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_USERLISTSELECTION => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_URIDROPPED => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_DWELLSTART => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_DWELLEND => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_START_DRAG => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_DRAG_OVER => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_DO_DROP => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_ZOOM => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_HOTSPOT_CLICK => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_HOTSPOT_DCLICK => Wx::ScintillaEvent,
-#       Wx::EVT_SCI_CALLTIP_CLICK => Wx::ScintillaEvent )
-#   end
 end
 
