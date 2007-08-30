@@ -1025,7 +1025,7 @@ class AuiFrame < Wx::Frame
     msg = "Enter a name for the new perspective:"
     dlg = Wx::TextEntryDialog.new(self, msg, "Wx::AUI Test")
     dlg.set_value("Perspective %d" % [ @perspectives.length + 1 ] )
-    return unless dlg.show_modal != Wx::ID_OK
+    return unless dlg.show_modal == Wx::ID_OK
     if @perspectives.length.zero?
       @perspectives_menu.append_separator
     end
