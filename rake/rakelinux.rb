@@ -31,9 +31,4 @@ if($link_wx_statically)
 		lib
 	end
 	$wx_libs = libs.join(' ')
-        WXSCINTILLA = ENV['WXSCINTILLA']
-        if WXSCINTILLA
-                $wx_libs += " #{WXSCINTILLA}/lib/libwxscintilla.a "
-                $wx_cppflags += " -I#{WXSCINTILLA}/include -DWXSCINTILLA"
-        end
 end
