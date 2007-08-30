@@ -93,7 +93,7 @@ end
 def use_wx_config
     $wx_version = wx_config("--version")
     $wx_cppflags = wx_config("--cppflags")
-    $wx_libs = wx_config("--libs")
+    $wx_libs = wx_config("--libs std,stc")
     $cpp = wx_config("--cxx")
     $ld = wx_config("--ld")
 end
