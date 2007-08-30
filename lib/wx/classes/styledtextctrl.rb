@@ -1,7 +1,11 @@
 # Functionality here must be loaded first to add custom events
 require 'wx/classes/evthandler'
 
-class Wx::StyledTextCtrl
+# These event type constants will only be available and meaningful if
+# Wx::StyledTextCtrl has been compiled into the library. If so, they
+# need the below definitions for mapping, otherwise all the rest should
+# be skipped
+if defined?(Wx::StyledTextCtrl)
   EventType = Wx::EvtHandler::EventType
 
   STC_EVENT_TYPES = [ 
