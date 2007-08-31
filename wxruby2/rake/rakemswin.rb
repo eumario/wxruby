@@ -56,6 +56,17 @@ windows_libs = %W|wxbase#{$WXVERSION}#{$POSTFIX}
                   wxregex#{$POSTFIX}|
 
 windows_libs.map! { | lib | File.join($WXLIBDIR, "#{lib}.lib") }
+
+# Test for presence of StyledTextCtrl (scintilla) library; link it in if
+# present, skip that class if not 
+scintilla_lib = File.join( $WXLIBDIR, "wxmsw#{$WXVERSION}#{$POSTFIX}_stc.lib" )
+if File.exists?(scintilla_lib)
+  windows_libs << scintilla_lib 
+else
+  $excluded_classes << "StyledTextCtrl"
+end
+
+# Glue them all together into an argument passed to the linker
 $wx_libs = windows_libs.join(' ')
 
 $wx_cppflags = [
