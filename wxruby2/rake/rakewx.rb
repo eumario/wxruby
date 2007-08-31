@@ -97,8 +97,9 @@ def use_wx_config
   
   # Check whether there is a lib file for StyledTextCtrl (Scintilla). If
   # not, don't try and compile this file.
-  stc_lib = $wx_libs[/\S+_stc\S+/]
+  stc_lib = $wx_libs[/\S+libwx\S+_stc\S+/]
   if not File.exists?(stc_lib)
+    $wx_libs = wx_config("--libs")
     $excluded_classes << 'StyledTextCtrl'
   end
 end
