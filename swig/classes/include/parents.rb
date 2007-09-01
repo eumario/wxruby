@@ -19,6 +19,7 @@ $parents = {
     'wxAutomationObject' => 'wxObject',
     'wxBitmap' => 'wxGDIObject',
     'wxBitmapButton' => 'wxButton',
+    'wxBitmapComboBox' => 'wxControlWithItems',
     'wxBitmapDataObject' => 'wxDataObjectSimple',
     'wxBitmapHandler' => 'wxObject',
     'wxBoxSizer' => 'wxSizer',
