@@ -31,11 +31,8 @@ GC_MANAGE_AS_WINDOW(wxChoice);
 
 // start client_data fixes
 %include "../shared/control_with_items.i"
+CLIENT_DATA_FEATURES(wxChoice);
 %markfunc wxChoice "mark_wxControlWithItems";
-
-%extend wxChoice {
-  VALUE get_client_data(int n) { return wxControlWithItems_get_client_data(self, n); }
-}
 // end client_data fixes
 
 

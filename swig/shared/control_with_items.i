@@ -12,12 +12,19 @@
 %{
   extern swig_class cWxControlWithItems;
   extern void mark_wxControlWithItems(void* ptr);
+%}
 
-  // Returns a ruby object stored as client data
-  static VALUE wxControlWithItems_get_client_data(wxControlWithItems *ptr, int n) {
-	VALUE returnVal = (VALUE) ptr->GetClientData(n);
+%define CLIENT_DATA_FEATURES(kls)
+%extend kls {
+  VALUE get_client_data(int n) {
+	// Avoid an assert failure if no data previously set
+	if ( ! self->HasClientUntypedData() )
+	  return Qnil;
+
+	VALUE returnVal = (VALUE) self->GetClientData(n);
 	if ( ! returnVal )
 	  return Qnil;
 	return returnVal;
-  }
-%}
+	}
+}
+%enddef
