@@ -6,6 +6,7 @@
 
 // First hide the old Wx definitions of these methods - which segfault
 %ignore *::GetClientData(int n) const;
+%ignore *::SetClientData(int n, void *data);
 %ignore *::GetClientObject(int n) const;
 %ignore *::SetClientObject(int  n, wxClientData * data);
 
@@ -25,6 +26,11 @@
 	if ( ! returnVal )
 	  return Qnil;
 	return returnVal;
-	}
+  }
+
+  VALUE set_client_data(int n, VALUE item_data) {
+	self->SetClientData(n, (void *)item_data);
+	return item_data;
+  }
 }
 %enddef
