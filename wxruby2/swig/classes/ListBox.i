@@ -14,11 +14,8 @@ GC_MANAGE_AS_WINDOW(wxListBox);
 
 // start client_data fixes
 %include "../shared/control_with_items.i"
+CLIENT_DATA_FEATURES(wxListBox);
 %markfunc wxListBox "mark_wxControlWithItems";
-
-%extend wxListBox {
-  VALUE get_client_data(int n) { return wxControlWithItems_get_client_data(self, n); }
-}
 // end client_data fixes
 
 
