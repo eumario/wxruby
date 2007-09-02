@@ -13,9 +13,15 @@ GC_MANAGE_AS_WINDOW(wxTreeCtrl);
 // wxTreeItemId fixes - these typemaps convert them to ruby Integers
 %include "../shared/treeitemid_typemaps.i"
 
+// These only differ from SetXXXList in the way memory ownership is transferred
 %ignore wxTreeCtrl::AssignImageList;
 %ignore wxTreeCtrl::AssignButtonsImageList;
 %ignore wxTreeCtrl::AssignStateImageList;
+
+// Only support the version that returns more info in flags
+%ignore wxTreeCtrl::HitTest(const wxPoint& point);
+// Typemap to return the flags in hit_test
+%apply int *OUTPUT { int& flags }
 
 // ITEM DATA fixes - This is done so the API user never sees a
 // TreeItemData object - where in Wx C++ such an object
@@ -121,15 +127,16 @@ protected:
 %include "include/wxTreeCtrl.h"
 
 %extend wxTreeCtrl {
-	//Change signature so it returns an array of the TreeItemId and the Cookie.
-	//This behavior matches that used by wxPython and wxPerl.
+	// Change signature so it returns an array of the TreeItemId and the
+	// cookie, as Ruby Fixnums. This behaviour matches that used by
+	// wxPython.
 	VALUE get_first_child(const wxTreeItemId& item)
 	{
 		void* cookie = 0;
 		wxTreeItemId ret_item = self->GetFirstChild(item, cookie);
 		VALUE array = rb_ary_new();			
 
-		rb_ary_push(array,LONG2NUM((long)ret_item.m_pItem)); 
+		rb_ary_push(array,LONG2NUM((size_t)ret_item.m_pItem)); 
 		rb_ary_push(array,LONG2NUM((long)cookie));
 			
 		return array;		
@@ -141,21 +148,20 @@ protected:
 		
 		VALUE array = rb_ary_new();			
 
-		rb_ary_push(array,LONG2NUM((long)ret_item.m_pItem));	
+		rb_ary_push(array,LONG2NUM((size_t)ret_item.m_pItem));	
 		rb_ary_push(array,LONG2NUM((long)cookie));
 			
 		return array;		
 	}
 	
-	//Changed this version of insert_item to insert_item_before so SWIG
-	//does not get confused between the 2 method signatures
-	//This behavior matches that used by wxPython.
+	// Changed this version of insert_item to insert_item_before so SWIG
+	// does not get confused between the 2 method signatures
+	// This behaviour matches that used by wxPython.
 	wxTreeItemId insert_item_before(const wxTreeItemId& parent,
-                          size_t index,
-                          const wxString& text,
-                          int image = -1, int selectedImage = -1,
-                          wxTreeItemData *data = NULL)
-	{
+									size_t index,
+									const wxString& text,
+									int image = -1, int selectedImage = -1,
+									wxTreeItemData *data = NULL) {
 		return self->InsertItem(parent,index,text,image,selectedImage,data);
 	}
 }
