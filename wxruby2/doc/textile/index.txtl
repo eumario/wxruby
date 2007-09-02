@@ -80,8 +80,9 @@ of user input and interaction.
 |CalendarCtrl|Control showing an entire calendar month|
 |CheckBox|Checkbox control|
 |CheckListBox|A listbox with a checkbox to the left of each item|
-|Choice|Choice control (a combobox without the editable area)|
-|ComboBox|A choice with an editable area|
+|Choice|Drop-down list from which the user can select one option|
+|ComboBox|A drop-down Choice with an editable text area|
+|BitmapComboBox|A ComboBox where each item can have an image|
 |DatePickerCtrl|Small date picker control|
 |Gauge|A control to represent a varying quantity, such as time remaining|
 |GenericDirCtrl|A control for displaying a directory tree|
