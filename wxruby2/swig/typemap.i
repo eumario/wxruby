@@ -136,7 +136,39 @@
 	$1 = TRUE;
 }
 
-##############################################################
+// Typemaps for wxSize and wxPoint as input parameters; for brevity,
+// wxRuby permits these common input parameters to be represented as
+// two-element arrays [x, y] or [width, height].
+%typemap(in) wxSize&, wxPoint& {
+  if ( TYPE($input) == T_DATA ) 
+	{
+	  void * argp$argnum;
+	  SWIG_ConvertPtr($input, &argp$argnum, $1_descriptor, 1 );
+	  $1 = reinterpret_cast< $1_basetype * >(argp$argnum);
+	
+	}
+  else if ( TYPE($input) == T_ARRAY )
+	{
+	  $1_basetype tmp  = $1_basetype( NUM2INT( rb_ary_entry($input, 0) ),
+									  NUM2INT( rb_ary_entry($input, 1) ) );
+	  $1 = &tmp;
+	}
+  else
+	{
+	  rb_raise(rb_eTypeError, "Wrong type for $1_basetype parameter");
+	}
+}
+
+%typemap(typecheck) wxSize&, wxPoint& {
+  void *vptr = 0;
+  $1 = 0;
+  if ( TYPE($input) == T_ARRAY && RARRAY($input)->len == 2 )
+	$1 = 1;
+  if ( TYPE($input) == T_DATA &&
+	   SWIG_CheckState( SWIG_ConvertPtr($input, &vptr, $1_descriptor, 0) ) )
+	$1 = 1;
+}
+
 
 ##############################################################
 %typemap(in) wxItemKind {
