@@ -33,3 +33,10 @@ class_files = File.join( File.dirname(__FILE__), 'wx', 'classes', '*.rb')
 Dir.glob(class_files) do | class_file | 
   require 'wx/classes/' + class_file[/\w+\.rb$/]
 end
+
+# Load in syntax sweetner
+require 'wx/accessors'
+require 'wx/keyword_ctors'
+require 'wx/keyword_defs'
+
+
