@@ -1,11 +1,18 @@
 h1(#wxtextctrl). Wx::TextCtrl
 
-A text control allows text to be displayed and edited. It may be
-single line or multi-line.
+A text control allows text to be displayed and edited. It may be single
+line or multi-line. The multi-line version can be created with the
+window style @TE_RICH@ and @TE_RICH2@, in which case segments of text
+can have visual styles applied to them: bold, italic, underline,
+background and foreground colour, and font.
+
+TextCtrl uses native text editing components on all platforms, and this
+means there are some minor inconsistencies, particularly in the
+treatment of styled text. For more complex rich text editing needs,
+consider using "StyledTextCtrl":styledtextctrl.html, or for rich text
+display, "HtmlWindow":htmlwindow.html
 
 h2. Derived from
-
-streambuf
 
 "Control":control.html
 
@@ -16,8 +23,6 @@ streambuf
 "Object":object.html
 
 h2. Window styles
-
-
 
 |@TE_PROCESS_ENTER@|The control will generatethe event EVT_COMMAND_TEXT_ENTER (otherwise pressing Enter keyis either processed internally by the control or used for navigation betweendialog controls).|
 |@TE_PROCESS_TAB@|The control will receiveEVT_CHAR events for TAB pressed - normally, TAB is used for passing to thenext control in a dialog instead. For the control created with this style,you can still use Ctrl-Enter to pass to the next control from the keyboard.|
