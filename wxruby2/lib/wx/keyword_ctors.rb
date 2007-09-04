@@ -144,7 +144,7 @@ module Wx
           if arg # use the supplied list arg 
             out_args << arg
           elsif kwa.key?(param.name) # use the keyword arg
-            out_args << arg
+            out_args << kwa[param.name]
           else # use the default argument
             out_args << param.default
           end
