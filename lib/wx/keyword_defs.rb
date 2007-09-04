@@ -314,6 +314,14 @@ Wx::define_keyword_ctors('ComboBox') do
   wx_ctor_params :validator, :name => 'comboBox'
 end
 
+# wxBitmapComboBox 	A choice with an editable area
+Wx::define_keyword_ctors('BitmapComboBox') do
+  wx_ctor_params :value => ''
+  wx_ctor_params :pos, :size, :choices => []
+  wx_ctor_params :style 
+  wx_ctor_params :validator, :name => 'comboBox'
+end
+
 # wxDatePickerCtrl 	Small date picker control
 
 # wxGauge 	A control to represent a varying quantity, such as time
