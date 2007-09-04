@@ -15,20 +15,14 @@ end
 
 # The frame or self-contained window for this application
 class MinimalFrame < Wx::Frame
-  def initialize(title, pos, size, style = Wx::DEFAULT_FRAME_STYLE)
+  def initialize(title)
     
     # A main application frame has no parent (nil)
-    # -1 means this frame will be supplied a default id
-    super(nil, -1, title, pos, size, style)
+    super(nil, :title => title, :size => [ 400, 300 ])
 
-    # Set the frame's icon - use .ico on windows, else .xpm
-    if Wx::PLATFORM == "WXMSW"
-      set_icon( Wx::Icon.new(local_icon_file("mondrian.ico"), 
-                             Wx::BITMAP_TYPE_ICO) )
-    else
-      set_icon( Wx::Icon.new(local_icon_file("mondrian.xpm"), 
-                             Wx::BITMAP_TYPE_XPM) )
-    end
+    # PNG is a good choice for cross-platofrm icons
+    icon_file = File.join( File.dirname(__FILE__), 'mondrian.png')
+    self.icon = Wx::Icon.new(icon_file)
 
     menu_file = Wx::Menu.new()
     menu_help = Wx::Menu.new()
@@ -66,11 +60,6 @@ class MinimalFrame < Wx::Frame
                                        Wx::OK|Wx::ICON_INFORMATION )
     about_dlg.show_modal
   end
-
-  # utility function to find an icon relative to this ruby script
-  def local_icon_file(icon_name)
-    File.join( File.dirname(__FILE__), icon_name) 
-  end
 end
 
 # Wx::App is the container class for any wxruby app - only a single
@@ -79,13 +68,12 @@ class MinimalApp < Wx::App
   # This method is called when main_loop is entered; it should set up
   # the application's and display initial GUI windows.
   def on_init
-    frame = MinimalFrame.new("Minimal wxRuby App",
-                             Wx::Point.new(50, 50), 
-                             Wx::Size.new(450, 340))
-    set_app_name('Minimal')
-    # This is required, and on_init must return a true value else the
-    # app will not start
-    frame.show()
+    self.app_name = 'Minimal'
+    frame = MinimalFrame.new("Minimal wxRuby App")
+    # This is required,
+    frame.show
+    # on_init must return a true value else the app will not start
+    true
   end
 end
 
