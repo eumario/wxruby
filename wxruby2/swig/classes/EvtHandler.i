@@ -32,6 +32,42 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
     self->Connect(firstId, lastId, eventType, function, userData);
 	return Qtrue;
   }
+
+  // Implementation of disconnect, accepting either an EVT_XXX constant
+  // or a symbol name of an event handler method
+  VALUE disconnect(int firstId, 
+				   int lastId = wxID_ANY, 
+				   VALUE evtSpecifier = Qnil)
+  {
+	wxEventType event_type;
+
+	if ( TYPE(evtSpecifier) == T_FIXNUM ) // simply an Integer id
+	  event_type = NUM2INT(evtSpecifier);
+	else if ( TYPE(evtSpecifier) == T_NIL ) // Not defined = any type
+	  event_type = wxEVT_NULL;
+	else if ( TYPE(evtSpecifier) == T_SYMBOL ) // Symbol handler method
+	  {
+		VALUE rb_evt_type = rb_funcall(cWxEvtHandler.klass, 
+									   rb_intern("event_type_for_name"),
+									   1, evtSpecifier);
+		if ( rb_evt_type )
+		  event_type = NUM2INT( rb_evt_type );
+		else
+		  rb_raise(rb_eTypeError, "Unknown event handler %s", 
+				   STR2CSTR(rb_inspect(evtSpecifier)));
+	  }
+	else 
+	  rb_raise(rb_eTypeError, "Invalid specifier for event type");
+
+
+	// TODO - enable switching off all handlers by type only - this
+	// version doesn't work if the first arg is wxID_ANY
+	if ( self->Disconnect(firstId, lastId, event_type))
+	  return Qtrue;
+	else
+	  return Qfalse;
+  }
+
 }
 
 

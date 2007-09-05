@@ -16,19 +16,34 @@ class Wx::EvtHandler
   EventType = Struct.new(:name, :arity, :const, :evt_class)
 
   # Fast look-up hash to map event type ids to ruby event classes
-  EVENT_TYPE_MAPPING = {}
+  EVENT_TYPE_CLASS_MAP = {}
+  # Hash to look up EVT constants from symbol names of evt handler
+  # methods; used internally by disconnect (see EvtHandler.i)
+  EVENT_NAME_TYPE_MAP = {}
 
   # Given a Wx EventType id (eg Wx::EVT_MENU), returns a WxRuby Event
   # class which should be passed to event handler blocks. The actual
   # EVT_XXX constants themselves are in the compiled library, defined in
   # swig/classes/Event.i
   def self.event_class_for_type(id)
-    if evt_klass = EVENT_TYPE_MAPPING[id]
+    if evt_klass = EVENT_TYPE_CLASS_MAP[id]
       return evt_klass
     else
       warn "No event class defined for event type #{id}"
       return Wx::Event
     end
+  end
+
+  # Given the symbol name of an evt_xxx handler method, returns the
+  # Integer Wx::EVT_XXX constant associated with that handler.
+  def self.event_type_for_name(name)
+    EVENT_NAME_TYPE_MAP[name]
+  end
+
+  # Given the Integer constant Wx::EVT_XXX, returns the convenience
+  # handler method name associated with that type of event.
+  def self.event_name_for_type(name)
+    EVENT_NAME_TYPE_MAP.index(name)
   end
 
   # Public method to register the mapping of a custom event type
@@ -50,7 +65,9 @@ class Wx::EvtHandler
   # Registers the event type +ev_type+, which should be an instance of
   # the Struct class +Wx::EvtHandler::EventType+. 
   def self.register_event_type(ev_type)
-    EVENT_TYPE_MAPPING[ev_type.const] = ev_type.evt_class
+    EVENT_TYPE_CLASS_MAP[ev_type.const] = ev_type.evt_class
+    EVENT_NAME_TYPE_MAP[ev_type.name.intern] = ev_type.const
+
     unless ev_type.arity and ev_type.name
       return 
     end
