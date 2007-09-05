@@ -169,13 +169,20 @@ module Wx
         end
       end
     end
-    
+
     def self.included(klass)
       klass.extend ClassMethods
       klass.module_eval do
+
         alias :pre_wx_kwctor_init :initialize
 
-        def initialize(parent, *mixed_args)
+        def initialize(parent = :default_ctor, *mixed_args)
+          # allow zero-args ctor for use with XRC
+          if parent == :default_ctor
+            pre_wx_kwctor_init()
+            return
+          end
+
           # Allow classes to ignore :id argument in positional args
           unless self.class < Wx::Dialog
             if not mixed_args[0].kind_of?(Fixnum)
