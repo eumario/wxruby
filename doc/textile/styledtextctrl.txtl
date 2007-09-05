@@ -49,6 +49,34 @@ constant names by changing the prefix from @SC_@ (Scintilla) to @STC_@
 |@SC_LEX_RUBY|@Wx::STC_LEX_RUBY|
 |@SC_PRINT_COLOURONWHITE|@Wx::STC_PRINT_COLOURONWHITE|
 
+h2. Event Handling
+
+A StyledTextCtrl has a number of event handlers, each of which will be
+passed a "StyledTextEvent":styledtextevent. 
+
+|*evt_stc_calltip_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A calltip was clicked|
+|*evt_stc_change(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The text contents was changed|
+|*evt_stc_charadded(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A character was added|
+|*evt_stc_doubleclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Double-click on the control|
+|*evt_stc_do_drop(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Drag and drop ended on the control|
+|*evt_stc_drag_over(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The cursor was moved over the control while dragging|
+|*evt_stc_dwellend(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|THe mouse ceased to dwell over a point|
+|*evt_stc_dwellstart(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The cursor was dwelling over a point for the user-defined dwell period |
+|*evt_stc_hotspot_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A hotspot was clicked|
+|*evt_stc_hotspot_dclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A hotspot was double-clicked|
+|*evt_stc_key(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A command key was pressed|
+|*evt_stc_macrorecord(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A recordable action took place while macro recording|
+|*evt_stc_marginclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A margin was clicked|
+|*evt_stc_modified(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The contents was modified|
+|*evt_stc_savepointleft(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The control was changed from it's last-saved state|
+|*evt_stc_savepointreached(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The last-saved state was reached in an undo/redo chain|
+|*evt_stc_start_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Dragging started in the control|
+|*evt_stc_styleneeded(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A language lexer requested a style|
+|*evt_stc_updateui(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|An update UI event|
+|*evt_stc_uridropped(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A URL was dropped in the control started in the control|
+|*evt_stc_userlistselection(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|An user-defined auto-completion entry was chosen|
+|*evt_stc_zoom(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The control view was zoomed by keyboard or "set_zoom":#STC_setzoom|
+
 h2. Methods
 
 Since StyledTextCtrl supports so many methods, they are broken down here
