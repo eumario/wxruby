@@ -142,6 +142,14 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
         found_define_class = true
       end
       
+      # As a class is initialised, store a global mapping from it to the
+      # correct SWIGTYPE; see wx.i
+      if line =~ /SWIG_TypeClientData\((SWIGTYPE_p_\w+),\s+
+                  \(void\s\*\)\s+&(\w+)\)/x
+        
+        line << "\n  wxRuby_SetSwigTypeForClass(#{$2}.klass, #{$1});"
+      end
+
       # if this module doesn't have a class,
       if(line.index('//NO_CLASS'))
         # pretend we found one
