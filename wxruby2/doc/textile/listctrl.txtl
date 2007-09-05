@@ -386,9 +386,10 @@ Returns the number of items in the list control.
 
 h3(#ListCtrl_getitemdata). ListCtrl#get_item_data
 
- Integer *get_item_data*(%(arg-type)Integer% item)
+ Object *get_item_data*(%(arg-type)Integer% item)
 
-Gets the application-defined data associated with this item.
+Gets the application-defined data object associated with this item; see
+"set_item_data":#ListCtrl_setitemdata.
 
 
 h3(#ListCtrl_getitemfont). ListCtrl#get_item_font
@@ -830,10 +831,11 @@ from $0$ to _count_.
 
 h3(#ListCtrl_setitemdata). ListCtrl#set_item_data
 
- Boolean *set_item_data*(%(arg-type)Integer% item,  %(arg-type)Integer% data)
+ Boolean *set_item_data*(%(arg-type)Integer% item,  %(arg-type)Object% data)
 
-Associates application-defined data with this item.
-
+Associates application-defined data with this item. Any normal ruby
+object may be stored as item data. Note that in a multi-column ListCtrl,
+created with @Wx::LC_REPORT@, item data is still stored per-row.
 
 h3(#ListCtrl_setitemfont). ListCtrl#set_item_font
 
