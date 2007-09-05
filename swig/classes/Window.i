@@ -59,6 +59,7 @@ enum wxWindowVariant
 // and if not, wrap it in the correct class, and ensure that future
 // calls return the same object.
 %{
+
 static VALUE get_ruby_object(wxObject *wx_obj)
 {
   if ( ! wx_obj ) return Qnil;
@@ -81,19 +82,11 @@ static VALUE get_ruby_object(wxObject *wx_obj)
 	  if ( r_swigtype != Qnil && rb_obj_is_kind_of(r_obj, r_class) )
 		return r_obj;
 	}
-  
-  // Otherwise - no previously tracked object found - so wrap a new one.
-  // Get a string with the internal SWIG name tag of the class (eg _p_wxButton)
-  char *swigtype = (char *) malloc(3 + class_name.Len() + 1);
-  sprintf(swigtype, "_p_%s", (const char *)(class_name.mb_str()));
-  
-  // Wrap the object, tag its swigtype (core Wx type), and track it
-  // Imitates latter part of SWIG_NewPointerObj
-  r_obj = Data_Wrap_Struct(r_class, 0, 0, wx_obj);
-  rb_iv_set(r_obj, "__swigtype__", rb_str_new2(swigtype));
-  SWIG_RubyAddTracking(wx_obj, r_obj);
-  
-  free((void *) swigtype);
+
+  // Otherwise, retrieve the swig type info for this class and wrap it
+  // in Ruby
+  swig_type_info* swig_type = wxRuby_GetSwigTypeForClass(r_class);
+  r_obj = SWIG_NewPointerObj(wx_obj, swig_type, 1);
   return r_obj;
 }
 
