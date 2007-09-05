@@ -2,13 +2,20 @@ h1(#wxevthandler). Wx::EvtHandler
 
 A class that can handle events from the windowing system.
 Window (and therefore all window classes) are derived from
-this class.
+this class, and Wx::App is also an EvtHandler.
 
-When events are received, EvtHandler invokes the method listed in the
-event table using itself as the object.  When using multiple inheritance
-it is imperative that the EvtHandler(-derived) class be the first
-class inherited such that the "this" pointer for the overall object
-will be identical to the "this" pointer for the EvtHandler portion.
+The methods listed here are relatively rarely needed in user code,
+unless you wish to write your own event-generating classes, or to
+dynamically remove event handlers in a running program.
+
+This is because, in addition to the methods listed here, all event
+handler classes support a number of convenience methods for seting up
+event handlers. These methods have names of the form evt_xxx, for
+example, evt_button or evt_close. The names of these methods can be
+found in the documentation on the control class which generates the
+events (for example "Button":button.html), or in the documentation for
+the event class (for example "CloseEvent".closeevent.html).
+
 
 h2. Derived from
 
@@ -124,22 +131,18 @@ up idle handling is done calling "::WakeUpIdle":wakeupidle.html.)
 
 h3(#EvtHandler_connect). EvtHandler#connect
 
-  *connect*(%(arg-type)Integer% id,  %(arg-type)Integer% lastId,  %(arg-type)EventType% eventType, 
-          %(arg-type)ObjectEventFunction% function, 
-          %(arg-type)Object% userData = nil, 
-          %(arg-type)EvtHandler% eventSink = nil)
+  *connect*(%(arg-type)Integer% id, 
+            %(arg-type)Integer% lastId,
+            %(arg-type)EventType% eventType) { ... }
 
-  *connect*(%(arg-type)Integer% id,  %(arg-type)EventType% eventType, 
-          %(arg-type)ObjectEventFunction% function, 
-          %(arg-type)Object% userData = nil, 
-          %(arg-type)EvtHandler% eventSink = nil)
+Listens for events of the specified type and runs the associated block
+when they occur. The id parameters are required for some events to
+specify a particular object whose events are to be listened for -
+typically, a control. A small number of event types accept a range, but
+the second parameter is normally Wx::ID_ANY.
 
-  *connect*(%(arg-type)EventType% eventType,  %(arg-type)ObjectEventFunction% function, 
-          %(arg-type)Object% userData = nil, 
-          %(arg-type)EvtHandler% eventSink = nil)
-
-Connects the given function dynamically with the event handler, id and event type. This
-is an alternative to the use of static event tables. See the 'event' or the old 'dynamic' sample for usage.
+Note that it is usually simpler and more convenient to use the evt_xxx
+methods than using connect directly. 
 
 h4. Parameters
 
@@ -148,59 +151,31 @@ associated with the event handler function. For the version not taking this
 argument, it defaults to @ID_ANY@.
 * _lastId_ The second part of the identifier range to be associated with the event handler function.
 * _eventType_ The event type to be associated with this event handler.
-* _function_ The event handler function. Note that this function should
-be explicitly converted to the correct type which can be done using a macro
-called @FooHandler@ for the handler for any @FooEvent@.
-* _userData_ Data to be associated with the event table entry.
-* _eventSink_ Object whose member function should be called. If this is NULL,
-this will be used.
-
-h4. Example
-
-
-   frame->Connect( ID_EXIT,
-     EVT_COMMAND_MENU_SELECTED,
-     CommandEventHandler(MyFrame::OnQuit) );
- 
-
-
 
 h3(#EvtHandler_disconnect). EvtHandler#disconnect
 
- Boolean *disconnect*(%(arg-type)EventType% eventType = EVT_NULL, 
-                    %(arg-type)ObjectEventFunction% function = nil,  %(arg-type)Object% userData = nil, 
-                    %(arg-type)EvtHandler% eventSink = nil)
+ Boolean *disconnect*(%(arg-type)Integer% first_id, 
+                     %(arg-type)Integer% last_id = @ID_ANY@,
+                     %(arg-type)EventType% evt_type = nil)
 
- Boolean *disconnect*(%(arg-type)Integer% id = @ID_ANY@, 
-                    %(arg-type)EventType% eventType = EVT_NULL, 
-                    %(arg-type)ObjectEventFunction% function = nil,  %(arg-type)Object% userData = nil,  %(arg-type)EvtHandler% eventSink = nil)
+Disconnects event handlers which match the criteria passed in as
+arguments. Returns @true@ if any matching event handlers were found and
+disconnected, or @false@ if no changes were made.
 
- Boolean *disconnect*(%(arg-type)Integer% id,  %(arg-type)Integer% lastId = @ID_ANY@, 
-                    %(arg-type)EventType% eventType = EVT_NULL, 
-                    %(arg-type)ObjectEventFunction% function = nil, 
-                    %(arg-type)Object% userData = nil, 
-                    %(arg-type)EvtHandler% eventSink = nil)
+The @first_id@ is the wx identifier of the window whose events are no
+longer to be responded to. The @second_id@ is the optional upper part of
+an id range, for those types of event handlers that accept ranges. 
 
-Disconnects the given function dynamically from the event handler, using the specified
-parameters as search criteria and returning true if a matching function has been
-found and removed. This method can only disconnect functions which have been added
-using the "EvtHandler#connect":evthandler.html#EvtHandler_connect method. There is no way
-to disconnect functions connected using the (static) event tables.
-
-h4. Parameters
-
-* _id_ The identifier (or first of the identifier range) associated with the event handler function.
-* _lastId_ The second part of the identifier range associated with the event handler function.
-* _eventType_ The event type associated with this event handler.
-* _function_ The event handler function.
-* _userData_ Data associated with the event table entry.
-* _eventSink_ Object whose member function should be called.
-
-
+The @evt_type@ is the type of events that should no longer be
+handled. @evt_type@ may be passed as either a Integer constant (for
+example @Wx::EVT_COMMAND_BUTTON_CLICKED@), or may be the symbol name of
+the method used to set up the event handler (for example :evt_button).
+If evt_type is @nil@ - the default - then all event types will be
+disconnected.
 
 h3(#EvtHandler_getclientdata). EvtHandler#get_client_data
 
- void*  *get_client_data*()
+ Object *get_client_data*()
 
 Gets user-supplied client data.
 
