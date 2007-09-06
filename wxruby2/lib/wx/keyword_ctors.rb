@@ -200,6 +200,8 @@ module Wx
                    self.class.describe_constructor()
             Kernel.raise ArgumentError, msg
           end
+          
+          yield self if block_given?
         end
       end
       
