@@ -40,6 +40,9 @@ enum wxWindowVariant
 
 %apply int * INOUT { int * x_INOUT, int * y_INOUT }
 
+
+%include "../shared/get_ruby_window.i"
+
 // Typemap for GetChildren - casts wxObjects to correct ruby wrappers
 %typemap(out) wxWindowList& {
   $result = rb_ary_new();
@@ -48,49 +51,10 @@ enum wxWindowVariant
   while (node)
   {
     wxObject *obj = node->GetData();
-    rb_ary_push($result, get_ruby_object(obj));
+    rb_ary_push($result, get_ruby_window_wrapper(obj));
     node = node->GetNext();
   }
 }
-
-// Returns a ruby wrapper around a wxObject whose wx class is not known
-// in advance - needed for find_window, get_children etc This is a bit
-// complicated because it must check if the ruby object already exists,
-// and if not, wrap it in the correct class, and ensure that future
-// calls return the same object.
-%{
-
-static VALUE get_ruby_object(wxObject *wx_obj)
-{
-  if ( ! wx_obj ) return Qnil;
-
-  // Get the wx class and the ruby class we are converting into  
-  wxString class_name( wx_obj->GetClassInfo()->GetClassName() );
-  VALUE r_class;
-  if ( class_name.Len() > 2 )
-	{
-	  r_class = rb_iv_get(mWxruby2, class_name.mb_str() + 2);
-	}
-  else return Qnil;
-
-  // First, Try fetching a tracked (previously seen) object
-  VALUE r_obj = SWIG_RubyInstanceFor(wx_obj);
-  if ( r_obj != Qnil ) // Found a tracked object
-	{
-	  // Check the types match (see SWIG_NewPointerObj)
-	  VALUE r_swigtype = rb_iv_get(r_obj, "__swigtype__");
-	  if ( r_swigtype != Qnil && rb_obj_is_kind_of(r_obj, r_class) )
-		return r_obj;
-	}
-
-  // Otherwise, retrieve the swig type info for this class and wrap it
-  // in Ruby
-  swig_type_info* swig_type = wxRuby_GetSwigTypeForClass(r_class);
-  r_obj = SWIG_NewPointerObj(wx_obj, swig_type, 1);
-  return r_obj;
-}
-
-%}
 
 // This is the instance method - implemented instead in Ruby - see window.rb
 %ignore wxWindow::FindWindow;
@@ -119,7 +83,7 @@ static VALUE get_ruby_object(wxObject *wx_obj)
     VALUE returnVal = Qnil;
 
     wxObject* obj = wxWindow::FindWindowById(id,parent); 
-    returnVal = get_ruby_object(obj);
+    returnVal = get_ruby_window_wrapper(obj);
   
     return returnVal;    
   }  
@@ -129,7 +93,7 @@ static VALUE get_ruby_object(wxObject *wx_obj)
     VALUE returnVal = Qnil;
     
     wxObject* obj = wxWindow::FindWindowByName(name,parent); 
-    returnVal = get_ruby_object(obj);
+    returnVal = get_ruby_window_wrapper(obj);
   
     return returnVal;    
   }
@@ -139,7 +103,7 @@ static VALUE get_ruby_object(wxObject *wx_obj)
     VALUE returnVal = Qnil;
     
     wxObject* obj = wxWindow::FindWindowByLabel(label,parent); 
-    returnVal = get_ruby_object(obj);
+    returnVal = get_ruby_window_wrapper(obj);
   
     return returnVal;    
   }  
