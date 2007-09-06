@@ -24,7 +24,7 @@ static VALUE get_ruby_window_wrapper(wxObject *wx_obj)
   // Otherwise, retrieve the swig type info for this class and wrap it
   // in Ruby
   swig_type_info* swig_type = wxRuby_GetSwigTypeForClass(r_class);
-  r_obj = SWIG_NewPointerObj(wx_obj, swig_type, 1);
+  VALUE r_obj = SWIG_NewPointerObj(wx_obj, swig_type, 1);
   return r_obj;
 }
 
