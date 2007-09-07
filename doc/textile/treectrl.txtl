@@ -204,6 +204,7 @@ h2. Methods
 * "TreeCtrl#sort_children":#TreeCtrl_sortchildren
 * "TreeCtrl#toggle":#TreeCtrl_toggle
 * "TreeCtrl#toggle_item_selection":#TreeCtrl_toggleitemselection
+* "TreeCtrl#traverse":#TreeCtrl_traverse
 * "TreeCtrl#unselect":#TreeCtrl_unselect
 * "TreeCtrl#unselect_all":#TreeCtrl_unselectall
 * "TreeCtrl#unselect_item":#TreeCtrl_unselectitem
@@ -1022,6 +1023,17 @@ h3(#TreeCtrl_unselect). TreeCtrl#unselect
 
 Removes the selection from the currently selected item (if any).
 
+h3(#TreeCtrl_traverse). TreeCtrl#traverse
+
+  *traverse*(%(arg-type)TreeItemId% start_item = root_id) { &#124; item_id &#124; ... }
+
+Recurses over the TreeCtrl's items, passing each TreeItemId successively
+into the passed block. This TreeItemId can be used as an argument to
+many other methods in this class.
+
+The @start_item@ argument will be the first item_id passed into the
+block, followed by its children and descendants, depth first. If
+@start_item@ is not specified, it defaults to the root item of the tree.
 
 h3(#TreeCtrl_unselectall). TreeCtrl#unselect_all
 
