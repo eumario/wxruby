@@ -117,6 +117,14 @@ protected:
 	wxTreeItemId root_id = tree_ctrl->GetRootItem();
 	RecurseOverTreeIds(tree_ctrl, root_id, &DoGCMarkItemData);
   }
+
+  // function for internal implementation of TreeCtrl#traverse 
+  static void DoTreeCtrlYielding(void *ptr, const wxTreeItemId& item_id)
+  {
+	// create a copy to wrap and give to ruby
+	VALUE rb_item_id = LONG2NUM((size_t)item_id.m_pItem);
+	rb_yield(rb_item_id);
+  }
 %}
 %markfunc wxTreeCtrl "mark_wxTreeCtrl";
 
@@ -163,6 +171,21 @@ protected:
 									int image = -1, int selectedImage = -1,
 									wxTreeItemData *data = NULL) {
 		return self->InsertItem(parent,index,text,image,selectedImage,data);
+	}
+
+	// Loop over the items in the TreeCtrl, starting from the item
+	// identified by start_id, passing the id of each item into the
+	// passed ruby block
+	VALUE traverse(	VALUE start_id = Qnil )
+	{
+	  wxTreeItemId base_id;
+	  if ( start_id == Qnil )
+		base_id = self->GetRootItem();
+	  else
+		base_id = wxTreeItemId( (void *)NUM2LONG(start_id) );
+
+	  RecurseOverTreeIds(self, base_id, &DoTreeCtrlYielding);
+	  return Qnil;
 	}
 }
 
