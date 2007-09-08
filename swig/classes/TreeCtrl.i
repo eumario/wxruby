@@ -18,8 +18,12 @@ GC_MANAGE_AS_WINDOW(wxTreeCtrl);
 %ignore wxTreeCtrl::AssignButtonsImageList;
 %ignore wxTreeCtrl::AssignStateImageList;
 
+// Dealt with below
+%ignore wxTreeCtrl::GetRootItem;
+
 // Only support the version that returns more info in flags
 %ignore wxTreeCtrl::HitTest(const wxPoint& point);
+
 // Typemap to return the flags in hit_test
 %apply int *OUTPUT { int& flags }
 
@@ -135,7 +139,7 @@ protected:
 %include "include/wxTreeCtrl.h"
 
 %extend wxTreeCtrl {
-	// Change signature so it returns an array of the TreeItemId and the
+  	// Change signature so it returns an array of the TreeItemId and the
 	// cookie, as Ruby Fixnums. This behaviour matches that used by
 	// wxPython.
 	VALUE get_first_child(const wxTreeItemId& item)
@@ -144,7 +148,7 @@ protected:
 		wxTreeItemId ret_item = self->GetFirstChild(item, cookie);
 		VALUE array = rb_ary_new();			
 
-		rb_ary_push(array,LONG2NUM((size_t)ret_item.m_pItem)); 
+		rb_ary_push(array, TREEID2RUBY(ret_item) );
 		rb_ary_push(array,LONG2NUM((long)cookie));
 			
 		return array;		
@@ -156,11 +160,21 @@ protected:
 		
 		VALUE array = rb_ary_new();			
 
-		rb_ary_push(array,LONG2NUM((size_t)ret_item.m_pItem));	
+		rb_ary_push(array, TREEID2RUBY(ret_item) );
 		rb_ary_push(array,LONG2NUM((long)cookie));
 			
 		return array;		
 	}
+
+	// If this must fail with TR_HIDE_ROOT, at least fail detectably and
+	// reliably across platforms
+	VALUE get_root_item()
+	  {
+		if ( self->GetWindowStyle() & wxTR_HIDE_ROOT )
+		  return INT2NUM(0);
+		else
+		  return TREEID2RUBY( self->GetRootItem() );
+	  }
 	
 	// Changed this version of insert_item to insert_item_before so SWIG
 	// does not get confused between the 2 method signatures
