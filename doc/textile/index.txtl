@@ -1,20 +1,19 @@
 h1. wxRuby Documentation: Class Reference 
 
 This is the class reference for WxRuby. The classes listed below are
-those currently available in WxRuby2. This documentation is currently
-auto-generated from the WxWidgets C++ documentation, so it has some
-shortcomings. 
+those currently available in WxRuby2. This documentation was seeded by
+converting the WxWidgets C++ documentation, so it has some shortcomings.
 
-* A few methods have innaccurate descriptions of the parameters they
-accept
+* A small number of  methods have innaccurate descriptions of the parameters they accept
 * Some of the example code is still in C++
 * There are links to C++ tutorials and topic overviews that are not
 available - many are not relevant to wxRuby.
 
-As the wxRuby API is developed, this documentation will be updated with
-Ruby-specific information. For now, you can read the "window styles
-overview":windowstyles.html for general info on window styles and wxRuby
-constants.
+The following tutorials contain helpful overviews specific to the wxRuby
+API:
+
+* "wxRuby introduction":wxruby_intro : wxRuby syntax conventions
+* "window styles overview":windowstyles.html : window styles and wxRuby constants.
 
 h2(#top). Outline
 
@@ -93,6 +92,7 @@ of user input and interaction.
 |ListCtrl|A control for displaying lists of strings and/or icons, plus a multicolumn report view|
 |ListView|A simpler interface (fa¹Âde for wxListCtrl in report mode|
 |TextCtrl|Single or multiline text editing control|
+|StyledTextCtrl|Sophisticated text editor based on Scintilla|
 |TreeCtrl|Tree (hierarchy) control|
 |ScrollBar|Scrollbar control|
 |SpinButton|A spin or 'up-down' control|
