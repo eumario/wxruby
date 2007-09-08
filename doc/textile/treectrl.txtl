@@ -657,8 +657,9 @@ h3(#TreeCtrl_getrootitem). TreeCtrl#get_root_item
 
  "TreeItemId":treeitemid.html *get_root_item*()
 
-Returns the root item for the tree control.
-
+Returns the root item for the tree control. Note that if the tree was
+created with a hidden root (using the @TR_HIDE_ROOT@ style), this will
+always return 0, an invalid tree id.
 
 h3(#TreeCtrl_getitemselectedimage). TreeCtrl#get_item_selected_image
 
@@ -1033,7 +1034,9 @@ many other methods in this class.
 
 The @start_item@ argument will be the first item_id passed into the
 block, followed by its children and descendants, depth first. If
-@start_item@ is not specified, it defaults to the root item of the tree.
+@start_item@ is not specified, it will traverse over all the items in
+the tree. It will starting from the root item, or, if the tree has a
+hidden root, the bottom-most items.
 
 h3(#TreeCtrl_unselectall). TreeCtrl#unselect_all
 
