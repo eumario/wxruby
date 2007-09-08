@@ -85,7 +85,56 @@ protected:
 	  }
   }
 
-  // Called on every tree item to do GC marking of itemdata
+  // Safe version of recursion from base across all contained items that
+  // works whether or not the TreeCtrl has the TR_HIDE_ROOT
+  // style. Required to ensure that marking of item data is done
+  // correctly for hidden-root treectrls.
+  static void RecurseFromRoot(wxTreeCtrl *tree_ctrl, 
+							  void(*rec_func)(void *, const wxTreeItemId&) )
+	{
+	  // straightforward
+	  if ( ! ( tree_ctrl->GetWindowStyle() & wxTR_HIDE_ROOT ) )
+		{
+		  RecurseOverTreeIds(tree_ctrl, tree_ctrl->GetRootItem(), *rec_func);
+		  return;
+		}
+	  // Find the top-left most item, then recurse over it and siblings
+	  else
+		{
+		  wxTreeItemId base_id = tree_ctrl->GetFirstVisibleItem();
+		  wxTreeItemId prev_id = tree_ctrl->GetItemParent(base_id);
+		  wxTreeItemId root_id = tree_ctrl->GetRootItem();
+		  while ( prev_id.IsOk() && prev_id != root_id )
+			{
+			  base_id = prev_id;
+			  prev_id = tree_ctrl->GetItemParent(base_id);
+			}
+		  prev_id = tree_ctrl->GetPrevSibling(base_id);
+		  while ( prev_id.IsOk()  )
+			{
+			  base_id = prev_id;
+			  prev_id = tree_ctrl->GetPrevSibling(base_id);
+			}
+		  // now do recursion
+		  RecurseOverTreeIds(tree_ctrl, base_id, *rec_func);
+		  while ( ( base_id = tree_ctrl->GetNextSibling(base_id) ) &&
+				  base_id.IsOk() )
+			RecurseOverTreeIds(tree_ctrl, base_id, *rec_func);
+		  return;
+		}
+	}
+
+
+  // Recursively-called function to implement of TreeCtrl#traverse
+  static void DoTreeCtrlYielding(void *ptr, const wxTreeItemId& item_id)
+  {
+	// create a copy to wrap and give to ruby
+	VALUE rb_item_id = LONG2NUM((size_t)item_id.m_pItem);
+	rb_yield(rb_item_id);
+  }
+
+  // Recursively-called function to do GC marking of itemdata for every
+  // tree item
   static void DoGCMarkItemData(void *ptr, const wxTreeItemId& item_id)
   {
 	wxTreeCtrl* tree_ctrl = (wxTreeCtrl*) ptr;
@@ -119,15 +168,7 @@ protected:
 
 	// Now mark the item data
 	wxTreeItemId root_id = tree_ctrl->GetRootItem();
-	RecurseOverTreeIds(tree_ctrl, root_id, &DoGCMarkItemData);
-  }
-
-  // function for internal implementation of TreeCtrl#traverse 
-  static void DoTreeCtrlYielding(void *ptr, const wxTreeItemId& item_id)
-  {
-	// create a copy to wrap and give to ruby
-	VALUE rb_item_id = LONG2NUM((size_t)item_id.m_pItem);
-	rb_yield(rb_item_id);
+	RecurseFromRoot(tree_ctrl, &DoGCMarkItemData);
   }
 %}
 %markfunc wxTreeCtrl "mark_wxTreeCtrl";
@@ -189,16 +230,20 @@ protected:
 
 	// Loop over the items in the TreeCtrl, starting from the item
 	// identified by start_id, passing the id of each item into the
-	// passed ruby block
+	// passed ruby block. Starts from root and covers all if no arg.
 	VALUE traverse(	VALUE start_id = Qnil )
 	{
 	  wxTreeItemId base_id;
 	  if ( start_id == Qnil )
-		base_id = self->GetRootItem();
+		RecurseFromRoot(self, &DoTreeCtrlYielding);
 	  else
-		base_id = wxTreeItemId( (void *)NUM2LONG(start_id) );
-
-	  RecurseOverTreeIds(self, base_id, &DoTreeCtrlYielding);
+		{
+		  base_id = wxTreeItemId( (void *)NUM2LONG(start_id) );
+		  if ( ! base_id.IsOk() ) 
+			rb_raise(rb_eArgError, "Invalid tree identifier");
+		  else
+			RecurseOverTreeIds(self, base_id, &DoTreeCtrlYielding);
+		}
 	  return Qnil;
 	}
 }
