@@ -2,6 +2,10 @@
 # released under the MIT-style wxruby2 license
 
 class Wx::Window
+  # Create a wx-specific name for get_id, to prevent confusion with
+  # ruby's (deprecated) Object#id
+  alias :wx_id :get_id
+
   # Recursively searches all windows below +self+ and returns the first
   # window which has the id +an_id+. This corresponds to the find_window
   # method method in WxWidgets when called with an integer.
