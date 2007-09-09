@@ -1,3 +1,35 @@
+=== 1.9.1 tag on 2007-09-09 included all of this: ===
+- Fix return value of Wx.get_multiple_selections (AF)
+- Added Window#wx_id alias for get_id (AF)
+- Documentation for new syntax options (AF)
+- Binary build on Linux AMD64 (AF/GD)
+- Fix possible item data crashes for TreeCtrl with TR_HIDE_ROOT (AF)
+- Re-introduce TreeCtrl#traverse (AF)
+- Add event-handling sample (AF)
+- New syntax options from wxSugar: keyword constructors, ruby accessors (AF)
+- Enable numeric operators (*/+-) for Size and Point (AF)
+- Additional 2.8 methods for Wx::Size (AF)
+- Added EvtHandler#disconnect (AF)
+- Make XRC-loaded widgets have correct mark/free functions (AF)
+- Document correct method signatures for ListCtrl#get_item_data (AF)
+- "Rubyify" minimal sample and use PNG icon (AF)
+- Added BitmapComboBox class from 2.8 (AF)
+- Avoid assert fail if ControlWithItems#get_item_data call before data set(AF)
+- Added StyledTextCtrl (Scintilla) class if wxWidgets compiled that way (AF)
+- Fix TreeCtrl#on_compare_items on MSW (AF)
+- Fix bug in AUI sample (AF)
+- Document that Win 95/98/ME are not supported (AF)
+- Add AuiManager#each_pane as fix for #all_panes (AF)
+- Fix return value of ListCtrl#get_item_rect (AF)
+- Allow Choice#append to accept optional item_data arg (AF)
+- Tried to add marking for CommandEvent, but removed pending fixes (AF)
+- Added EvtHandler#evt_scrollwin catch-all handler (AF)
+- Fix MSW layout problem in samples/text/unicode (AF) 
+- Remove some irrelevant methods in App class (AF)
+- Added RendererNative class (AF)
+- Allow optional arguments to Grid#insert/delete row/cols (SL/AF)
+- Avoid warnings from App when GC runs (AF)
+	
 === 1.9.0 tag on 2007-07-28 included all of this: ===
 - Fix memory management for custom ArtProviders, add in sample (AF)
 - Fix wrong return value for ListItem#get_data and update doc (AF)	
@@ -374,7 +406,7 @@
 - Enabled SWIG feature compactdefaultargs to reduce code size 
     (Daniel F. Savarese)
 
-====0.0.32 tag included all of this:===
+ ====0.0.32 tag included all of this:===
 - Fix BoxSizer and StaticBoxSizer (Daniel F. Savarese and Roy Sutton)
     Added "virtual" where needed, and added some missing methods
 - Get bigdemo ToolBar sample working (Roy Sutton)
