@@ -9,6 +9,7 @@
 // * shortcut methods for displaying simple dialogs
 // * logging functions
 // * the xrcid macro
+
 %{
 //NO_CLASS - This tells fixmodule not to expect a class
 
@@ -85,33 +86,6 @@ xrcid(VALUE self,VALUE str_id)
 }
 %} // end of Header code
 
-void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
-
-void wxEndBusyCursor();
-
-void wxInitAllImageHandlers();
-
-void wxBell();
-
-bool wxYield();
-
-wxString wxGetCwd();
-
-wxString wxGetEmailAddress();
-
-wxString wxGetHostName();
-
-wxString wxGetFullHostName();
-
-wxString wxGetUserId();
-
-wxString wxGetUserName();
-
-wxString wxGetHomeDir();
-
-bool wxGetKeyState(wxKeyCode key);
-
-void wxSetWorkingDirectory(const wxString &);
 
 // All the functions which take a parent argument in this file display
 // dialogs, so the parent argument can be nil (which is not permitted in
@@ -123,45 +97,73 @@ void wxSetWorkingDirectory(const wxString &);
 			   "Cannot display dialog before App.main_loop has been called");}
 }
 
-%typemap(in,numinputs=0) wxArrayInt &selections (wxArrayInt sel)
-{
-	$1 = &sel;
-}
-
-%typemap(argout) wxArrayInt &selections {
-  $result = rb_ary_new();
-  for (int i = 0; i < $1->GetCount(); i++)
-    rb_ary_push($result,INT2NUM((*$1)[i]));
-}
 
 
-int wxMessageBox(const wxString& message, const wxString& caption = wxT("Message"), int style = wxOK, wxWindow *parent = NULL, int x = -1, int y = -1);
+void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
+void wxEndBusyCursor();
+void wxBell();
+bool wxYield();
 
-size_t wxGetMultipleChoices(wxArrayInt& selections,const wxString& message,const wxString& caption,int n, const wxString choices[],wxWindow *parent = NULL,int x = -1, int y = -1,bool centre = TRUE,int width=150, int height=200);
+void wxInitAllImageHandlers();
 
-long wxGetNumberFromUser(const wxString& message, const wxString& prompt,  
+wxString wxGetCwd();
+wxString wxGetEmailAddress();
+wxString wxGetHostName();
+wxString wxGetFullHostName();
+wxString wxGetUserId();
+wxString wxGetUserName();
+wxString wxGetHomeDir();
+void wxSetWorkingDirectory(const wxString &);
+
+bool wxGetKeyState(wxKeyCode key);
+
+int wxMessageBox(const wxString& message, 
+				 const wxString& caption = wxT("Message"), 
+				 int style = wxOK, 
+				 wxWindow *parent = NULL, 
+				 int x = -1, 
+				 int y = -1);
+
+// Fix selections to be the return value to ruby
+%include "shared/arrayint_selections.i"
+size_t wxGetMultipleChoices(wxArrayInt& selections,
+							const wxString& message,
+							const wxString& caption,int n, 
+							const wxString choices[],
+							wxWindow *parent = NULL,
+							int x = -1, 
+							int y = -1,
+							bool centre = TRUE,
+							int width=150, 
+							int height=200);
+long wxGetNumberFromUser(const wxString& message, 
+						 const wxString& prompt,  
 						 const wxString& caption, 
 						 long value, long min = 0, long max = 100, 
 						 wxWindow *parent = NULL, 
 						 const wxPoint& pos = wxDefaultPosition);
-
-wxString wxGetTextFromUser(const wxString& message, const wxString& caption = wxT("Input text"),
-const wxString& default_value = wxT(""), wxWindow *parent = NULL);
-
-wxString wxGetPasswordFromUser(const wxString& message, const wxString& caption = wxT("Input text"),
-const wxString& default_value = wxT(""), wxWindow *parent = NULL);
-
-
-wxString wxFileSelector(const wxString& message, const wxString& default_path = wxT(""),const wxString& default_filename = wxT(""), const wxString& default_extension = wxT(""),const wxString& wildcard = wxT("*.*"), int flags = 0, wxWindow *parent = 0,int x = -1, int y = -1);
+wxString wxGetTextFromUser(const wxString& message, 
+						   const wxString& caption = wxT("Input text"),
+						   const wxString& default_value = wxT(""), 
+						   wxWindow *parent = NULL);
+wxString wxGetPasswordFromUser(const wxString& message, 
+							   const wxString& caption = wxT("Input text"),
+							   const wxString& default_value = wxT(""), 
+							   wxWindow *parent = NULL);
+wxString wxFileSelector(const wxString& message, 
+						const wxString& default_path = wxT(""),
+						const wxString& default_filename = wxT(""), 
+						const wxString& default_extension = wxT(""),
+						const wxString& wildcard = wxT("*.*"), 
+						int flags = 0, 
+						wxWindow *parent = 0,
+						int x = -1, 
+						int y = -1);
 
 int wxDisplayDepth();
-
 void wxDisplaySize(int *width, int *height);
-
 wxSize wxGetDisplaySize();
-
 void wxDisplaySizeMM(int *width, int *height);
-
 wxSize wxGetDisplaySizeMM();
 
 %init %{

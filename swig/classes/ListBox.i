@@ -18,28 +18,8 @@ CLIENT_DATA_FEATURES(wxListBox);
 %markfunc wxListBox "mark_wxControlWithItems";
 // end client_data fixes
 
+%include "../shared/arrayint_selections.i"
 
-// typemaps for GetSelections()
-%typemap(in,numinputs=0) (wxArrayInt& selections) (wxArrayInt tmp) {
-  $1 = &tmp;
-}
-
-%typemap(out) (wxArrayInt& selections) {
-  $result = rb_ary_new();
-  for (int i = 0; i < $1.GetCount(); i++)
-  {
-    rb_ary_push($result,INT2NUM( $1.Item(i) ) );
-  }
-}
-
-%typemap(argout) (wxArrayInt& selections) {
-   $result = rb_ary_new();
-   for (int i = 0; i < ($1)->GetCount(); i++)
-   {
-     rb_ary_push($result,INT2NUM( ($1)->Item(i) ) );
-   }
-}
-// end typemaps for GetSelections()
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
