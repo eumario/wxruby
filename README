@@ -1,6 +1,6 @@
 README for wxruby2
-Version 1.9.0
-2006-10-02
+
+Version 1.9.x
 
 This is wxruby2, the second generation of wxRuby, a library 
 that allows Ruby programs to use the wxWidgets GUI toolkit. 
@@ -8,7 +8,7 @@ It is released under a permissive MIT-style license
 (see the LICENSE file for details).
 
 This version is a beta release, in preparation for a stable release of
-wxruby version 2.0. 
+wxruby version 2.0.
 
 ------------------------FAQ---------------------------
 
