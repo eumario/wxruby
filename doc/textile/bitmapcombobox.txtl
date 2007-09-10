@@ -107,12 +107,6 @@ h4. See also
 
 "BitmapComboBox#create":bitmapcombobox.html#BitmapComboBox_create, "Validator":validator.html
 
-
-  *destructor*()
-
-Destructor, destroying the combobox.
-
-
 h3(#BitmapComboBox_create). BitmapComboBox#create
 
  Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
@@ -138,25 +132,24 @@ should call or replace this function. See "BitmapComboBox.new":bitmapcombobox.ht
 
 h3(#BitmapComboBox_append). BitmapComboBox#append
 
- Integer *append*(%(arg-type)String% item,  %(arg-type)Bitmap% bitmap = NullBitmap)
+ Integer *append*(%(arg-type)String% item,  
+                 %(arg-type)Bitmap% bitmap = Wx::NULL_BITMAP)
 
 Adds the item to the end of the combo box.
 
- Integer *append*(%(arg-type)String% item,  %(arg-type)Bitmap% bitmap,  %(arg-type)% clientData)
+ Integer *append*(%(arg-type)String% item,  
+                  %(arg-type)Bitmap% bitmap,  
+                  %(arg-type)Object% item_data)
 
- Integer *append*(%(arg-type)String% item,  %(arg-type)Bitmap% bitmap, 
-                %(arg-type)ClientData% clientData)
-
-Adds the item to the end of the combo box, associating the given, typed or
-untyped, client data pointer with the item.
-
+Adds the item to the end of the combo box, associating the given item
+data with the item. As with other "controls with items":controlwithitems.html,
+any normal ruby object may be set as item data.
 
 h3(#BitmapComboBox_getbitmapsize). BitmapComboBox#get_bitmap_size
 
  "Size":size.html *get_bitmap_size*()
 
 Returns size of bitmaps used in the list.
-
 
 h3(#BitmapComboBox_getitembitmap). BitmapComboBox#get_item_bitmap
 
@@ -167,25 +160,27 @@ Returns the bitmap of the item with the given index.
 
 h3(#BitmapComboBox_insert). BitmapComboBox#insert
 
- Integer *insert*(%(arg-type)String% item,  %(arg-type)Bitmap% bitmap,  %(arg-type)unsigned int% pos)
+ Integer *insert*(%(arg-type)String% item,  
+                  %(arg-type)Bitmap% bitmap,  
+                  %(arg-type)Integer% pos)
 
-Inserts the item into the list before pos.
-Not valid for @CB_SORT@ style, use Append instead.
+Inserts the item into the list before pos. Not valid for @CB_SORT@
+style, use "append":#BitmapComboBox_append instead.
 
- Integer *insert*(%(arg-type)String% item,  %(arg-type)Bitmap% bitmap,  %(arg-type)unsigned int% pos, 
-                %(arg-type)% clientData)
+ Integer *insert*(%(arg-type)String% item,  
+                  %(arg-type)Bitmap% bitmap,  
+                  %(arg-type)Integer% pos,
+                  %(arg-type)Object% item_data)
 
- Integer *insert*(%(arg-type)String% item,  %(arg-type)Bitmap% bitmap,  %(arg-type)unsigned int% pos, 
-                %(arg-type)ClientData% clientData)
 
-Inserts the item into the list before pos, associating the given, typed or
-untyped, client data pointer with the item.
-Not valid for @CB_SORT@ style, use Append instead.
+Inserts the item into the list before pos, associating the given item
+data with the item. Not valid for @CB_SORT@ style, use
+"append":#BitmapComboBox_append instead.
 
 
 h3(#BitmapComboBox_setitembitmap). BitmapComboBox#set_item_bitmap
 
-  *set_item_bitmap*(%(arg-type)unsigned int% n,  %(arg-type)Bitmap% bitmap)
+  *set_item_bitmap*(%(arg-type)Integer% n,  %(arg-type)Bitmap% bitmap)
 
 Sets the bitmap for the given item.
 
