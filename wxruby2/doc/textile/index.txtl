@@ -4,7 +4,7 @@ This is the class reference for WxRuby. The classes listed below are
 those currently available in WxRuby2. This documentation was seeded by
 converting the WxWidgets C++ documentation, so it has some shortcomings.
 
-* A small number of  methods have innaccurate descriptions of the parameters they accept
+* A small number of  methods have inaccurate descriptions of the parameters they accept
 * Some of the example code is still in C++
 * There are links to C++ tutorials and topic overviews that are not
 available - many are not relevant to wxRuby.
@@ -12,7 +12,7 @@ available - many are not relevant to wxRuby.
 The following tutorials contain helpful overviews specific to the wxRuby
 API:
 
-* "wxRuby introduction":wxruby_intro : wxRuby syntax conventions
+* "wxRuby introduction":wxruby_intro.html : wxRuby syntax conventions
 * "window styles overview":windowstyles.html : window styles and wxRuby constants.
 
 h2(#top). Outline
