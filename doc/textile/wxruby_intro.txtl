@@ -58,10 +58,10 @@ instance's method, you must explicitly specify @self@ as the
 receiver. Without this, Ruby will interpret the call as an assignment to
 a local variable rather than a method call:
 
- # won't work, seen as assignment to local variable "size"
+  ==#== won't work, seen as assignment to local variable "size"
  size = new_size
 
- # correct way
+  ==#== correct way
  self.size = new_size
  
 h4. is_ methods
@@ -72,10 +72,12 @@ C++ API which test a condition, such as
 return true or false to have a name ending with the "?"
 character. In wxRuby, therefore, both the following are permitted
 
- # C++ style
+  ==#== C++ style
  a_bitmap.is_ok
+
+Or
  
- # Ruby style
+  ==#== Ruby style
  a_bitmap.ok?
 
 h3. Size and Point argument shorthands
@@ -93,14 +95,17 @@ width/height size. The above could be re-written:
 
  button = Wx::Button.new( parent, -1, 'press me', [50, 50])
 
- # Or, neater, using keyword arguments:
+Or, neater, using keyword arguments:
+
  button = Wx::Button.new( parent, :label => 'press me', 
                                   :pos => [50, 50])
 
-These can be used in any method accepting a point or size argument:
+These can be used in any method accepting a size argument:
  
- # Resize widget
+  ==#== Resize widget
  widget.size = [200, 100]
+
+Or a point argument
  
- # Move widget
+  ==#== Move widget
  widget.move [40, 20]
