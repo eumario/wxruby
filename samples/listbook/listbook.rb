@@ -23,37 +23,37 @@ end
 #
 class SimpleFrame < Wx::Frame 
 
-	FILE_DIALOG, FILE_ABOUT, FILE_QUIT = [0,Wx::ID_ABOUT,Wx::ID_EXIT]
-	
-	def initialize(parent)
-      # To load a layout defined in XRC into a Ruby subclass of Frame,
-      # first call the empty constructor. All the details of size,
-      # title, position and so on are loaded from the XRC by the call to 
-      # load_frame_subclass. Using a non-empty constructor will cause
-      # errors on GTK.
-      super()
-      $xml.load_frame_subclass(self,nil,'ID_FRAME')
+  FILE_DIALOG, FILE_ABOUT, FILE_QUIT = [0,Wx::ID_ABOUT,Wx::ID_EXIT]
+  
+  def initialize(parent)
+    # To load a layout defined in XRC into a Ruby subclass of Frame,
+    # first call the empty constructor. All the details of size,
+    # title, position and so on are loaded from the XRC by the call to 
+    # load_frame_subclass. Using a non-empty constructor will cause
+    # errors on GTK.
+    super()
+    $xml.load_frame_subclass(self,nil,'ID_FRAME')
     
-		# Create a new menu
-		bar = Wx::MenuBar.new
-		menu = Wx::Menu.new
+    # Create a new menu
+    bar = Wx::MenuBar.new
+    menu = Wx::Menu.new
     menu.append(FILE_ABOUT,"About...")
     menu.append_separator
-		menu.append(FILE_QUIT,"Quit")
-		bar.append(menu,"File")
-		
-		set_menu_bar(bar)
-		
-		# Assign the menu events
+    menu.append(FILE_QUIT,"Quit")
+    bar.append(menu,"File")
+    
+    set_menu_bar(bar)
+    
+    # Assign the menu events
     evt_menu(FILE_ABOUT) do
-        Wx::message_box("wxRuby Listbook sample\nby Sean Long", "About Listbook", Wx::OK | Wx::ICON_INFORMATION, self)
+      Wx::message_box("wxRuby Listbook sample\nby Sean Long", "About Listbook", Wx::OK | Wx::ICON_INFORMATION, self)
     end    
-		evt_menu(FILE_QUIT) do
-			Wx::get_app.exit_main_loop()
-		end
-		evt_close() do
-			Wx::get_app.exit_main_loop()
-		end
+    evt_menu(FILE_QUIT) do
+      Wx::get_app.exit_main_loop()
+    end
+    evt_close() do
+      Wx::get_app.exit_main_loop()
+    end
 
     # Variables not in tabs
     @listbook = Wx::Window.find_window_by_id(Wx::xrcid('ID_LISTBOOK'),self)
@@ -147,9 +147,9 @@ class SimpleFrame < Wx::Frame
       order_string << "moved to tab = #{@listbook.get_page_text(tab_number)} \n"
       @text_output.set_value(order_string)
     end    
- 
+    
   end
-	
+  
 end
 
 #
@@ -157,27 +157,27 @@ end
 #
 class XrcApp < Wx::App
 
-	def on_init
-		#
-		# Create a resource handler
-		#
-		$xml = Wx::XmlResource.get();
-		$xml.init_all_handlers();
+  def on_init
+    #
+    # Create a resource handler
+    #
+    $xml = Wx::XmlResource.get();
+    $xml.init_all_handlers();
 
-		# Load a resource file from the script's directory
-        xrc_file = File.join( File.dirname( __FILE__ ), 'listbook.xrc' )
+    # Load a resource file from the script's directory
+    xrc_file = File.join( File.dirname( __FILE__ ), 'listbook.xrc' )
 
-		$xml.load(xrc_file)	
+    $xml.load(xrc_file)	
 
-		#
-		# Show the main frame.
-		#
-		$main = SimpleFrame.new(self)
-		$main.show(true)
+    #
+    # Show the main frame.
+    #
+    $main = SimpleFrame.new(self)
+    $main.show(true)
     
-	end
+  end
 
 end
-		
-		
+
+
 XrcApp.new().main_loop()
