@@ -13,11 +13,6 @@ rescue LoadError => no_wx_err
   end
 end
 
-# This sample demonstrates the use of the listbook class.
-# NB: This sample doesn't currently work on Linux (21/08/2006)
-
-
-
 #
 # Basic Frame Class. This creates the dialog window
 #
@@ -56,26 +51,28 @@ class SimpleFrame < Wx::Frame
     end
 
     # Variables not in tabs
-    @listbook = Wx::Window.find_window_by_id(Wx::xrcid('ID_LISTBOOK'),self)
-    @text_output = Wx::Window.find_window_by_id(Wx::xrcid('ID_ORDER_TEXTCTRL'),self)
+    @listbook    = xrcid_to_window('ID_LISTBOOK')
+    @text_output = xrcid_to_window('ID_ORDER_TEXTCTRL')
     
     # Variables for widgets in Pizza tab
-    @pizza_size = Wx::Window.find_window_by_id(Wx::xrcid('ID_PIZZA_SIZE_CHOICE'),self)
-    @pizza_crust = Wx::Window.find_window_by_id(Wx::xrcid('ID_PIZZA_CRUST_CHOICE'),self)
-    @pizza_sauce = Wx::Window.find_window_by_id(Wx::xrcid('ID_PIZZA_SAUCE_CHOICE'),self)
-    @pizza_cheese = Wx::Window.find_window_by_id(Wx::xrcid('ID_PIZZA_CHEESE_CHOICE'),self)
+    @pizza_size   = xrcid_to_window('ID_PIZZA_SIZE_CHOICE')
+    @pizza_crust  = xrcid_to_window('ID_PIZZA_CRUST_CHOICE')
+    @pizza_sauce  = xrcid_to_window('ID_PIZZA_SAUCE_CHOICE')
+    @pizza_cheese = xrcid_to_window('ID_PIZZA_CHEESE_CHOICE')
     @pizza_toppings = []
     3.times do |i|
-      @pizza_toppings << Wx::Window.find_window_by_id(Wx::xrcid("ID_PIZZA_TOPPING_#{i+1}_CHOICE"),self)
+      @pizza_toppings << xrcid_to_window("ID_PIZZA_TOPPING_#{i+1}_CHOICE")
     end
 
     # fill in toppings
-    toppings = ['pepperoni','sausage','itallian sausage','olives','mushrooms','artichoke','extra cheese','']
+    toppings = ['pepperoni','sausage','italian sausage','olives',
+                'mushrooms','artichoke','extra cheese','']
     toppings.each do |top_name|
       @pizza_toppings.each do |top_obj|
         top_obj.append(top_name)
       end      
     end
+
     index = 0
     @pizza_toppings.each do |obj|
       obj.set_selection(index)
@@ -83,11 +80,10 @@ class SimpleFrame < Wx::Frame
     end
     
     # Events for pizza tab
-    evt_button(Wx::xrcid('ID_PIZZA_BUTTON')) do |event|
+    evt_button( Wx::xrcid('ID_PIZZA_BUTTON') ) do |event|
       #get selections and add to order
       order_string = @text_output.get_value
       if order_string != "" then order_string << "\n" end
-      
       order_string << "One #{@pizza_size.get_string_selection} pizza with:\n"      
       order_string << @pizza_crust.get_string_selection + " crust" + "\n"
       order_string << @pizza_sauce.get_string_selection + " sauce" +"\n"
@@ -99,8 +95,8 @@ class SimpleFrame < Wx::Frame
     
 
     # Variables for widgets in Drink tab
-    @drink_size = Wx::Window.find_window_by_id(Wx::xrcid('ID_DRINK_SIZE_CHOICE'),self)
-    @drink_type = Wx::Window.find_window_by_id(Wx::xrcid('ID_DRINK_TYPE_CHOICE'),self)
+    @drink_size = xrcid_to_window('ID_DRINK_SIZE_CHOICE')
+    @drink_type = xrcid_to_window('ID_DRINK_TYPE_CHOICE')
     
     # Events for drink tab
     evt_button(Wx::xrcid('ID_DRINK_BUTTON')) do |event|
@@ -114,11 +110,12 @@ class SimpleFrame < Wx::Frame
     end    
     
     # Variables for widgets in Ice Cream tab
-    @ice_cream_size = Wx::Window.find_window_by_id(Wx::xrcid('ID_ICE_CREAM_SIZE_CHOICE'),self)
-    @ice_cream_type = Wx::Window.find_window_by_id(Wx::xrcid('ID_ICE_CREAM_TYPE_CHOICE'),self)
+    @ice_cream_size = xrcid_to_window('ID_ICE_CREAM_SIZE_CHOICE')
+    @ice_cream_type = xrcid_to_window('ID_ICE_CREAM_TYPE_CHOICE')
     @ice_cream_toppings = []
     4.times do |i|
-      @ice_cream_toppings << Wx::Window.find_window_by_id(Wx::xrcid("ID_ICE_CREAM_TOPPING_#{i+1}_CHOICE"),self)
+      @ice_cream_toppings << 
+        xrcid_to_window("ID_ICE_CREAM_TOPPING_#{i+1}_CHOICE")
     end    
 
     toppings = ['','m&m\'s','chocolate chips','fudge','nuts','cherry','whip cream'] 
@@ -146,10 +143,15 @@ class SimpleFrame < Wx::Frame
       order_string = @text_output.get_value
       order_string << "moved to tab = #{@listbook.get_page_text(tab_number)} \n"
       @text_output.set_value(order_string)
-    end    
-    
+    end
   end
-  
+
+  # Converts a XRCID id - as used in wxWidget's XML format - into the
+  # correct ruby window
+  def xrcid_to_window(xrc_id) 
+    Wx::Window.find_window_by_id(Wx::xrcid(xrc_id), self)      
+  end
+
 end
 
 #
@@ -158,9 +160,7 @@ end
 class XrcApp < Wx::App
 
   def on_init
-    #
     # Create a resource handler
-    #
     $xml = Wx::XmlResource.get();
     $xml.init_all_handlers();
 
@@ -169,14 +169,12 @@ class XrcApp < Wx::App
 
     $xml.load(xrc_file)	
 
-    #
+
     # Show the main frame.
-    #
     $main = SimpleFrame.new(self)
     $main.show(true)
     
   end
-
 end
 
 
