@@ -59,11 +59,20 @@ enum wxWindowVariant
 // This is the instance method - implemented instead in Ruby - see window.rb
 %ignore wxWindow::FindWindow;
 
-// These are class methods implemented below by hand so casting of types
-// is correct, which is very important when using XRC.
+// These class methods return a wxWindow in C++. If a layout has been
+// loaded from XRC, it is possible - even likely - that the C++ object
+// is new to Ruby. Therefore, we need to make sure that the object is
+// wrapped with the correct Ruby class; by default, SWIG just maps these
+// to the base class Wx::Window which won't have the right methods
+// see '../shared/get_ruby_window.i'
 %ignore wxWindow::FindWindowById;
 %ignore wxWindow::FindWindowByName;
 %ignore wxWindow::FindWindowByLabel;
+
+// Likewise for these instance methods which return Sizers or Windows
+%ignore wxWindow::GetParent;
+%ignore wxWindow::GetContainingSizer;
+%ignore wxWindow::GetSizer;
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
@@ -77,36 +86,61 @@ enum wxWindowVariant
 
 %include "include/wxWindow.h"
 
+
+// Implement various methods %ignore'd above - these are methods which
+// require the return value to be wrapped in an appropriate Ruby class
+// which is not known in advance. 
+// TODO - could these be done with %typemap - without trampling on the ctor?
 %extend wxWindow {
   static VALUE find_window_by_id(long  id , wxWindow* parent = NULL)
   {
     VALUE returnVal = Qnil;
-
     wxObject* obj = wxWindow::FindWindowById(id,parent); 
     returnVal = get_ruby_window_wrapper(obj);
-  
     return returnVal;    
   }  
   
-  static VALUE find_window_by_name(const wxString&  name , wxWindow* parent = NULL)
+  static VALUE find_window_by_name(const wxString&  name, 
+								   wxWindow* parent = NULL)
   {
     VALUE returnVal = Qnil;
-    
-    wxObject* obj = wxWindow::FindWindowByName(name,parent); 
+	wxObject* obj = wxWindow::FindWindowByName(name,parent); 
     returnVal = get_ruby_window_wrapper(obj);
-  
     return returnVal;    
   }
   
-  static VALUE find_window_by_label(const wxString&  label , wxWindow* parent = NULL)
+  static VALUE find_window_by_label(const wxString&  label , 
+									wxWindow* parent = NULL)
   {
     VALUE returnVal = Qnil;
-    
     wxObject* obj = wxWindow::FindWindowByLabel(label,parent); 
     returnVal = get_ruby_window_wrapper(obj);
-  
     return returnVal;    
   }  
+
+  VALUE get_containing_sizer()
+  {
+    VALUE returnVal = Qnil;
+    wxObject* obj = self->GetContainingSizer(); 
+    returnVal = get_ruby_window_wrapper(obj);
+    return returnVal;    
+  }
+
+  VALUE get_parent()
+  {
+    VALUE returnVal = Qnil;
+    wxObject* obj = self->GetParent(); 
+    returnVal = get_ruby_window_wrapper(obj);
+    return returnVal;    
+  }
+
+  VALUE get_sizer()
+  {
+    VALUE returnVal = Qnil;
+    wxObject* obj = self->GetSizer(); 
+    returnVal = get_ruby_window_wrapper(obj);
+    return returnVal;    
+  }
 
   // passes a DC for drawing on Window into a passed ruby block, and
   // ensure that the DC is correctly deleted when drawing is
