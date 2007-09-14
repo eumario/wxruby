@@ -9,6 +9,12 @@
 #include <wx/xrc/xmlres.h>
 %}
 
+enum wxXmlResourceFlags
+{
+    wxXRC_USE_LOCALE     = 1,
+    wxXRC_NO_SUBCLASSING = 2,
+    wxXRC_NO_RELOADING   = 4
+};
 
 // For these three methods, there are in Wx two variants. One loads an
 // XRC from scratch and returns an instance of the core Wx class:
