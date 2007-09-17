@@ -42,6 +42,7 @@ class Wx::EvtHandler
 
   # Given the Integer constant Wx::EVT_XXX, returns the convenience
   # handler method name associated with that type of event.
+
   def self.event_name_for_type(name)
     EVENT_NAME_TYPE_MAP.index(name)
   end
@@ -63,32 +64,77 @@ class Wx::EvtHandler
   end
 
   # Registers the event type +ev_type+, which should be an instance of
-  # the Struct class +Wx::EvtHandler::EventType+. 
+  # the Struct class +Wx::EvtHandler::EventType+. This sets up the
+  # mapping of events of that type (identified by integer id) to the
+  # appropriate ruby event class, and defines a convenience evt_xxx
+  # instance method in the class EvtHandler.
   def self.register_event_type(ev_type)
+    # set up the event type mapping
     EVENT_TYPE_CLASS_MAP[ev_type.const] = ev_type.evt_class
     EVENT_NAME_TYPE_MAP[ev_type.name.intern] = ev_type.const
 
     unless ev_type.arity and ev_type.name
       return 
     end
+
+    # set up the evt_xxx method
     case ev_type.arity
     when 0 # events without an id
       class_eval %Q| 
-        def #{ev_type.name}(&block)
-          connect(Wx::ID_ANY, Wx::ID_ANY, #{ev_type.const}, &block)
+        def #{ev_type.name}(meth = nil, &block)
+          handler = acquire_handler(meth, block)
+          connect(Wx::ID_ANY, Wx::ID_ANY, #{ev_type.const}, &handler)
         end |
     when 1 # events with an id
       class_eval %Q|
-        def #{ev_type.name}(id, &block)
-          connect(id, Wx::ID_ANY, #{ev_type.const}, &block)
+        def #{ev_type.name}(id, meth = nil, &block)
+          handler = acquire_handler(meth, block)
+          id  = acquire_id(id)
+          connect(id, Wx::ID_ANY, #{ev_type.const}, &handler)
         end |
     when 2 # events with id range
       class_eval %Q|
-        def #{ev_type.name}(first_id, last_id, &block)
-          connect(first_id, last_id, #{ev_type.const}, &block)
+        def #{ev_type.name}(first_id, last_id, meth = nil, &block)
+          handler  = acquire_handler(meth, block)
+          first_id = acquire_id(first_id)
+          last_id  = acquire_id(last_id)
+          connect( first_id, last_id, #{ev_type.const}, &handler)
         end |
     end
   end
+
+  # Not for external use; determines whether to use a block or call a
+  # method in self to handle an event, passed to connect.
+  def acquire_handler(meth, block)
+    if block and not meth
+      return block
+    elsif meth and not block
+      h_meth = self.method(meth)
+      if h_meth.arity == 1
+        return lambda { | evt | send(meth, evt) }
+      else
+        return lambda { send(meth) }
+      end
+    else
+      Kernel.raise RuntimeError,
+                  "Specify event handler using a method name OR block"
+                  caller
+    end
+  end
+
+  # Not for external use; acquires an id either from an explicit Fixnum
+  # parameter or by calling the wx_id method of a passed Window.
+  def acquire_id(window_or_id)
+    case window_or_id
+    when Fixnum : window_or_id
+    when Wx::Window : window_or_id.wx_id
+    else Kernel.raise RuntimeError, 
+                     "Must specify Wx::Window event source or its Wx id, " +
+                     "not '#{window_or_id.inspect}'",
+                      caller
+    end
+  end
+  private :acquire_id, :acquire_handler
 
   # Definitions for all event types that are part by core wxRuby. Events
   # that are mapped to class Wx::Event are TODO as they are not
