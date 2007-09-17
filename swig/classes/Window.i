@@ -14,22 +14,42 @@ enum wxWindowVariant
   wxWINDOW_VARIANT_LARGE,  // Large size (about 25 % larger than normal )
 };
 
+// Not supported
 %ignore wxWindow::Clear;
 %ignore wxWindow::GetAccessible;
 %ignore wxWindow::PopEventHandler;
 
-// A custom method is required to do the correct casting - see below
-%ignore wxWindow::GetHandle;
-
 // LayoutConstraints are deprecated and not supported in WxRuby
 %ignore wxWindow::SetConstraints;
 
-// only support the variants that return an object
+// A custom method is required to do the correct casting - see below
+%ignore wxWindow::GetHandle;
+
+// only support the variants that return an Point or Size object
 %ignore wxWindow::GetSize(int*  width , int*  height ) const;
 %ignore wxWindow::GetPosition(int*  x , int*  y ) const;
 %ignore wxWindow::GetScreenPosition(int* x, int* y) const;
 
 %rename(SetDimensions) wxWindow::SetSize(int  x , int  y , int  width , int  height , int sizeFlags = wxSIZE_AUTO) ;
+
+// This is the instance method - implemented instead in Ruby - see window.rb
+%ignore wxWindow::FindWindow;
+
+// These class methods return a wxWindow in C++. If a layout has been
+// loaded from XRC, it is possible - even likely - that the C++ object
+// is new to Ruby. Therefore, we need to make sure that the object is
+// wrapped with the correct Ruby class; by default, SWIG just maps these
+// to the base class Wx::Window which won't have the right methods
+// see '../shared/get_ruby_window.i'
+%ignore wxWindow::FindWindowById;
+%ignore wxWindow::FindWindowByName;
+%ignore wxWindow::FindWindowByLabel;
+
+// Likewise for these instance methods which return Sizers or Windows
+%ignore wxWindow::GetParent;
+%ignore wxWindow::GetGrandParent;
+%ignore wxWindow::GetContainingSizer;
+%ignore wxWindow::GetSizer;
 
 // Any of these following kind of objects become owned by the window
 // when passed into Wx, and so will be deleted automatically; using
@@ -55,24 +75,6 @@ enum wxWindowVariant
     node = node->GetNext();
   }
 }
-
-// This is the instance method - implemented instead in Ruby - see window.rb
-%ignore wxWindow::FindWindow;
-
-// These class methods return a wxWindow in C++. If a layout has been
-// loaded from XRC, it is possible - even likely - that the C++ object
-// is new to Ruby. Therefore, we need to make sure that the object is
-// wrapped with the correct Ruby class; by default, SWIG just maps these
-// to the base class Wx::Window which won't have the right methods
-// see '../shared/get_ruby_window.i'
-%ignore wxWindow::FindWindowById;
-%ignore wxWindow::FindWindowByName;
-%ignore wxWindow::FindWindowByLabel;
-
-// Likewise for these instance methods which return Sizers or Windows
-%ignore wxWindow::GetParent;
-%ignore wxWindow::GetContainingSizer;
-%ignore wxWindow::GetSizer;
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
@@ -122,6 +124,14 @@ enum wxWindowVariant
   {
     VALUE returnVal = Qnil;
     wxObject* obj = self->GetContainingSizer(); 
+    returnVal = get_ruby_window_wrapper(obj);
+    return returnVal;    
+  }
+
+  VALUE get_grand_parent()
+  {
+    VALUE returnVal = Qnil;
+    wxObject* obj = self->GetGrandParent(); 
     returnVal = get_ruby_window_wrapper(obj);
     return returnVal;    
   }
