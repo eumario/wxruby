@@ -1,10 +1,16 @@
 # Copyright 2004-2007 by Kevin Smith
 # released under the MIT-style wxruby2 license
 
+# The base class for all things displayed on screen
 class Wx::Window
-  # Create a wx-specific name for get_id, to prevent confusion with
-  # ruby's (deprecated) Object#id
+
+  # Ruby's Object#id is deprecated and will be removed in 1.9; therefore
+  # for classes inheriting from Wx::Window, the id method returns the
+  # wxRuby Window id
+  alias :id :get_id
+  # In case a more explicit option is preferred.
   alias :wx_id :get_id
+
 
   # Recursively searches all windows below +self+ and returns the first
   # window which has the id +an_id+. This corresponds to the find_window
