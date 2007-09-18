@@ -15,8 +15,6 @@ end
 include Wx
 
 # menu items
-Caret_Quit = ID_EXIT
-Caret_About = ID_ABOUT
 Caret_set_blink_time = 3
 Caret_Move = 4
 
@@ -27,26 +25,22 @@ Caret_Text = 1000
 # MyCanvas is a canvas on which you can type
 class MyCanvas < ScrolledWindow
   def initialize(parent)
-    super(parent, -1,
-          DEFAULT_POSITION, DEFAULT_SIZE,
-          SUNKEN_BORDER )
+    super(parent, :style => SUNKEN_BORDER)
 
-    set_background_colour(WHITE)
+    self.background_colour = WHITE
 
     @font = Font.new(12, FONTFAMILY_TELETYPE,
                      FONTSTYLE_NORMAL, FONTWEIGHT_NORMAL)
 
-    @x_caret = @y_caret =
-      @x_chars = @y_chars = 0
-
+    @x_caret = @y_caret = @x_chars = @y_chars = 0
     @x_margin = @y_margin = 5
     @text = nil
 
     create_caret
 
-    evt_paint {on_paint}
-    evt_size {|event| on_size(event)}
-    evt_char {|event| on_char(event)}
+    evt_paint :on_paint
+    evt_size :on_size
+    evt_char :on_char
   end
 
   def [](x,y)
@@ -108,14 +102,14 @@ class MyCanvas < ScrolledWindow
 
   def create_caret
     paint do | dc |
-      dc.set_font(@font)
-      @height_char = dc.get_char_height
-      @width_char = dc.get_char_width
+      dc.font = @font
+      @height_char = dc.char_height
+      @width_char = dc.char_width
 
-      caret = Caret.new(self, Size.new(@width_char, @height_char))
-      set_caret(caret)
+      my_caret = Caret.new(self, Size.new(@width_char, @height_char))
+      self.caret = my_caret
 
-      caret.move(Point.new(@x_margin, @y_margin))
+      caret.move [ @x_margin, @y_margin ]
       caret.show
     end
   end
@@ -130,13 +124,13 @@ class MyCanvas < ScrolledWindow
   def do_move_caret
     log_status("Caret is at (%d, %d)", @x_caret, @y_caret)
 
-    get_caret.move_xy(@x_margin + @x_caret * @width_char,
-                        @y_margin + @y_caret * @height_char)
+    caret.move_xy( @x_margin + @x_caret * @width_char,
+                   @y_margin + @y_caret * @height_char)
   end
 
   def on_size(event)
-    @x_chars = (event.get_size.x - 2*@x_margin) / @width_char
-    @y_chars = (event.get_size.y - 2*@y_margin) / @height_char
+    @x_chars = (event.size.x - 2 * @x_margin) / @width_char
+    @y_chars = (event.size.y - 2 * @y_margin) / @height_char
     if @x_chars <= 0
       @x_chars = 1
     end
@@ -152,17 +146,15 @@ class MyCanvas < ScrolledWindow
 
     @text = " " * @x_chars * @y_chars
 
-    frame = get_parent
-    if frame && frame.get_status_bar
+    if parent && parent.status_bar
       msg = sprintf("Panel size is (%d, %d)", @x_chars, @y_chars)
-      frame.set_status_text(msg, 1)
-      frame.refresh
+      parent.set_status_text(msg, 1)
+      parent.refresh
     end
     event.skip
   end
 
   def on_paint
-    caret = get_caret
     if caret
       caret.hide
     end
@@ -180,7 +172,6 @@ class MyCanvas < ScrolledWindow
     if caret
       caret.show
     end
-
   end
 
   def on_char(event)
@@ -212,15 +203,14 @@ class MyCanvas < ScrolledWindow
     end
     do_move_caret
   end
-
 end
 
 class MyFrame < Frame
-  def initialize(title,pos,size)
+  def initialize(title, pos, size)
     super(nil, -1, title, pos, size)
     # set the frame icon
     icon_file = File.join(File.dirname(__FILE__), 'mondrian.xpm')
-    set_icon(Icon.new(icon_file, BITMAP_TYPE_XPM))
+    self.icon = Icon.new(icon_file, BITMAP_TYPE_XPM)
 
     # create a menu bar
     menu_file = Menu.new
@@ -228,16 +218,16 @@ class MyFrame < Frame
     menu_file.append(Caret_set_blink_time, "&Blink time...\tCtrl-B")
     menu_file.append(Caret_Move, "&Move caret\tCtrl-C")
     menu_file.append_separator
-    menu_file.append(Caret_About, "&About...\tCtrl-A", "Show about dialog")
+    menu_file.append(Wx::ID_ABOUT, "&About...\tCtrl-A", "Show about dialog")
     menu_file.append_separator
-    menu_file.append(Caret_Quit, "E&xit\tAlt-X", "Quit self program")
+    menu_file.append(Wx::ID_EXIT, "E&xit\tAlt-X", "Quit self program")
 
     # now append the freshly created menu to the menu bar...
     menu_bar = MenuBar.new
     menu_bar.append(menu_file, "&File")
 
     # ... and attach self menu bar to the frame
-    set_menu_bar(menu_bar)
+    self.menu_bar = menu_bar
 
     @canvas = MyCanvas.new(self)
 
@@ -247,12 +237,12 @@ class MyFrame < Frame
 
     # create a status bar just for fun (by default with 1 pane only)
     create_status_bar(2)
-    set_status_text("Welcome to Windows!")
+    self.status_text = "Welcome to Windows!"
 
-    evt_menu(Caret_Quit) {on_quit}
-    evt_menu(Caret_About) {on_about}
-    evt_menu(Caret_set_blink_time) {on_set_blink_time}
-    evt_menu(Caret_Move) {on_caret_move}
+    evt_menu Wx::ID_EXIT, :on_quit
+    evt_menu Wx::ID_ABOUT, :on_about
+    evt_menu Caret_set_blink_time, :on_set_blink_time
+    evt_menu Caret_Move, :on_caret_move
   end
   
   def on_quit
