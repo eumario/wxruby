@@ -37,10 +37,11 @@ class Wx::Window
   # paint event is being handled just before running the event
   # handler. This ensures that any call to Window#paint within the
   # handler will supply a Wx::PaintDC (see swig/Window.i).
-  def evt_paint(&block)
+  def evt_paint(meth = nil, &block)
+    paint_proc = acquire_handler(meth, block)
     wrapped_block = proc do | event |
       instance_variable_set("@__painting__", true)
-      block.call(event)
+      paint_proc.call(event)
       remove_instance_variable("@__painting__")
     end
     __old_evt_paint(&wrapped_block)
