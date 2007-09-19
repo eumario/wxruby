@@ -137,6 +137,15 @@ pass the control itself as the parameter to the event handler:
  my_button = Wx::Button.new(panel, :label => 'Press me')
  evt_button(my_button) { 'my_button was pressed' }
 
+If there are many similar controls within a Frame or Dialog, it can be
+easier to set up a global event handler, then work out what specific
+action should be taken within the event handling code itself, perhaps
+using the "event_object":event.html#Event_geteventobject method in Event
+to identify the control. To set up a catch-all event handler for
+CommandEvent types, use the special @Wx::ID_ANY@ identifier:
+
+ evt_button(Wx::ID_ANY) { 'some button was pressed' }
+
 h3. Other events
 
 Other events in WxRuby include sizing, activating, closing and moving
