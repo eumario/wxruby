@@ -56,7 +56,7 @@ h3(#EvtHandler_neweventtype). EvtHandler.new_event_type
 
 h3(#EvtHandler_neweventtype). EvtHandler.register_class
 
-  Integer *new_event_type*(%(arg-type)Class% klass, 
+  Integer *register_class*(%(arg-type)Class% klass, 
                            %(arg-type)Integer% konstant = nil,
                            %(arg-type)String% meth = nil,
                            %(arg-type)Event% arity = nil)
