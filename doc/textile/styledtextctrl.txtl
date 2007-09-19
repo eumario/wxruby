@@ -667,7 +667,8 @@ h3(#STC_getwrapmode). StyledTextCtrl#get_wrap_mode
 
  Integer *get_wrap_mode*()
 
-Retrieve whether text is word wrapped.
+Retrieve whether text is word wrapped. The return value will be one of
+@Wx::STC_WRAP_NONE@, @Wx::STC_WRAP_WORD@ or @Wx::STC_WRAP_CHAR@
 
 h3(#STC_getwrapstartindent). StyledTextCtrl#get_wrap_start_indent
 
@@ -709,7 +710,11 @@ h3(#STC_setwrapmode). StyledTextCtrl#set_wrap_mode
 
   *set_wrap_mode*(%(arg-type)Integer% mode)
 
-Sets whether text is word wrapped.
+Sets whether text is word wrapped. Valid constants for @mode@ are
+
+* Wx::STC_WRAP_NONE
+* Wx::STC_WRAP_WORD
+* Wx::STC_WRAP_CHAR
 
 h3(#STC_setwrapstartindent). StyledTextCtrl#set_wrap_start_indent
 
@@ -1179,7 +1184,7 @@ h3(#STC_getendstyled). StyledTextCtrl#get_end_styled
 
  Integer *get_end_styled*()
 
-#endif     Retrieve the position of the last correctly styled character.
+Retrieve the position of the last correctly styled character.
 
 h3(#STC_getlinestate). StyledTextCtrl#get_line_state
 
@@ -3676,7 +3681,7 @@ h3(#STC_setuseantialiasing). StyledTextCtrl#set_use_anti_aliasing
 
   *set_use_anti_aliasing*(%(arg-type)Boolean% useAA)
 
-#endif     Specify whether anti-aliased fonts should be used.  Will have no effect     on some platforms, but on some (wxMac for example) can greatly improve     performance.
+Specify whether anti-aliased fonts should be used.  Will have no effect     on some platforms, but on some (wxMac for example) can greatly improve     performance.
 
 h3(#STC_setwhitespacechars). StyledTextCtrl#set_whitespace_chars
 
