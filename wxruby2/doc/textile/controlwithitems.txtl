@@ -1,13 +1,15 @@
 h1(#wxcontrolwithitems). Wx::ControlWithItems
 
-This class is an abstract base class for several Widgets controls which
+This class is a common base class for several wxRuby controls which
 contain several items, such as "ListBox":listbox.html and
 "CheckListBox":checklistbox.html derived from it, "Choice":choice.html
 and "ComboBox":combobox.html.
 
-It defines the methods for accessing the controls items and although each of
-the derived classes implements them differently, they still all conform to the
-same interface.
+It defines the methods for accessing the controls items and although
+each of the derived classes implements them differently, they still all
+conform to the same interface. In particular, all these classes include
+an "each":#ControlWithItems_each method and include Ruby's Enumerable
+module. Hence, methods such as collect, select and find are available.
 
 The items in a ControlWithItems have (non empty) string labels and,
 optionally, item data associated with them. Any ruby object may be set
@@ -31,6 +33,7 @@ h2. Methods
 * "ControlWithItems#append":#ControlWithItems_append
 * "ControlWithItems#clear":#ControlWithItems_clear
 * "ControlWithItems#delete":#ControlWithItems_delete
+* "ControlWithItems#each":#ControlWithItems_each
 * "ControlWithItems#find_string":#ControlWithItems_findstring
 * "ControlWithItems#get_count":#ControlWithItems_getcount
 * "ControlWithItems#get_item_data":#ControlWithItems_getitemdata
@@ -106,6 +109,18 @@ h4. Parameters
 h4. See also
 
 "clear":controlwithitems.html#ControlWithItems_clear
+
+h3(#ControlWithItems_each). ControlWithItems#each
+
+  *each*() { &#124; index &#124; ... }
+
+Can be used to iterate over all the items contained within the
+control. Given a block, it will pass the integer index of each contained
+item into that block. For example
+
+  choice.each do &#124; i &#124;
+    puts "The label of item  #{i} is '#{choice.string(i)}'"
+  end
 
 h3(#ControlWithItems_findstring). ControlWithItems#find_string
 
