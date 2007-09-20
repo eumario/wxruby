@@ -78,14 +78,17 @@ h2. Working with TreeCtrl items
 
 A TreeCtrl contains one, or more usually, many items. As well as the
 text label and parent, tree items can have several other properties,
-such as being bold or italic, and icons for expanded and collapsed states.
+such as being bold or italic, and icons for expanded and collapsed
+states.
 
 In wxRuby, individual items (including branches) in a tree control are
 referenced by *TreeItemIds*. These ids are returned by methods such as
 "append_item":#TreeCtrl_appenditem which add items to a tree, and by
 TreeEvents which can be queried to find which item is being acted
 upon. The ids are passed in as arguments to methods which modify items
-within the tree, such as "set_item_text":#TreeCtrl_setitemtext.
+within the tree, such as "set_item_text":#TreeCtrl_setitemtext. This
+class includes Ruby's Enumerable module, so methods such as find,
+collect and select can be used to iterate over the control's contents.
 
 TreeItemIds are Integers, but the number itself is an opaque identifier;
 you should not carry out arithmetic on it, or assume anything about the
@@ -138,6 +141,7 @@ h2. Methods
 * "TreeCtrl#delete":#TreeCtrl_delete
 * "TreeCtrl#delete_all_items":#TreeCtrl_deleteallitems
 * "TreeCtrl#delete_children":#TreeCtrl_deletechildren
+* "TreeCtrl#each":#TreeCtrl_each
 * "TreeCtrl#edit_label":#TreeCtrl_editlabel
 * "TreeCtrl#end_edit_label":#TreeCtrl_endeditlabel
 * "TreeCtrl#ensure_visible":#TreeCtrl_ensurevisible
@@ -340,6 +344,12 @@ If you have called "TreeCtrl#set_item_has_children":treectrl.html#TreeCtrl_setit
 may need to call it again since _DeleteChildren_ does not automatically
 clear the setting.
 
+h3(#TreeCtrl_each). TreeCtrl#each
+
+  *each*() { &#124; item_id &#124; ... }
+
+Passes the item id of each and every item in the TreeCtrl into the
+passed block, allowing iteration of the control's contents.
 
 h3(#TreeCtrl_editlabel). TreeCtrl#edit_label
 

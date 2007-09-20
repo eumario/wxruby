@@ -3,7 +3,9 @@ h1(#wxlistctrl). Wx::ListCtrl
 A list control presents lists in a number of formats: list view, report view,
 icon view and small icon view. In any case, elements are numbered from zero.
 For all these modes, the items are stored in the control and must be added to
-it using "insert_item":#ListCtrl_insertitem method.
+it using "insert_item":#ListCtrl_insertitem method. This class includes
+Ruby's Enumerable module, so methods such as find, select and collect
+can be used to operate over the control's whole contents.
 
 A special case of report view quite different from the other modes of the list
 control is a virtual control in which the items data (including text, images
@@ -66,7 +68,6 @@ To process input from a list control, use these event handler macros to direct i
 functions that take a "ListEvent":listevent.html argument.
 
 
-
 |*evt_list_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the left mouse button.|
 |*evt_list_begin_rdrag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the right mouse button.|
 |*evt_list_begin_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin editing a label. This can be prevented by calling "Veto()":notifyeventveto.html.|
@@ -104,6 +105,7 @@ h2. Methods
 * "ListCtrl#delete_all_items":#ListCtrl_deleteallitems
 * "ListCtrl#delete_column":#ListCtrl_deletecolumn
 * "ListCtrl#delete_item":#ListCtrl_deleteitem
+* "ListCtrl#each":#ListCtrl_each
 * "ListCtrl#edit_label":#ListCtrl_editlabel
 * "ListCtrl#ensure_visible":#ListCtrl_ensurevisible
 * "ListCtrl#find_item":#ListCtrl_finditem
@@ -252,8 +254,14 @@ Deletes the specified item. This function sends the
 
 See also: "delete_all_items":#ListCtrl_deleteallitems
 
+h3(#ListCtrl_each). ListCtrl#each
 
-h3(#ListCtrl_edit). ListCtrl#edit_label
+  *each*() { &#124; index &#124; ... }
+
+Can be used to iterate over the control's contents; passes the integer
+index of each valid item in the control into the passed block.
+
+h3(#ListCtrl_editlabel). ListCtrl#edit_label
 
   *edit_label*(%(arg-type)Integer% item)
 
