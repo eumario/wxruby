@@ -1,7 +1,16 @@
 h1(#wxcommandevent). Wx::CommandEvent
 
-This event class contains information about command events, which originate from a variety of
-simple controls. More complex controls, such as "TreeCtrl":treectrl.html, have separate command event classes.
+This event class contains information about command events, which
+originate from a variety of simple controls such as
+"buttons":button.html, "checkboxes":checkbox.html, "lists":listbox.html
+and "menus":menu.html. It controls which contain multiple items with
+string labels, it can be used to determine which specific item has been
+used (see "get_index":#CommandEvent_getindex, and whether a selection or
+deselection has taken place (see
+"is_selection":#CommandEvent_isselection).
+
+More complex controls, such as "TreeCtrl":treectrl.html, have separate
+command event classes.
 
 h2. Derived from
 
@@ -9,10 +18,11 @@ h2. Derived from
 
 h2. Event table macros
 
-To process a menu command event, use these event handler macros to direct input to member
-functions that take a CommandEvent argument.
-
-
+To handle command events, use these event handler methods to set up a
+block to receive the event. All of these event handler methods require
+that the control whose events are being listened for be identified - see
+the "event handling overview":eventhandlingoverview.html#events_with_ids
+for more information.
 
 |*evt_command(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a command, supplying the window identifier,command event identifier, and member function.|
 |*evt_command_range(id1, id2)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a command for a rangeof window identifiers, supplying the minimum and maximum window identifiers,command event identifier, and member function.|
@@ -50,17 +60,14 @@ functions that take a CommandEvent argument.
 h2. Methods
 
 * "CommandEvent.new":#CommandEvent_new
-* "CommandEvent#checked":#CommandEvent_checked
 * "CommandEvent#get_client_data":#CommandEvent_getclientdata
-* "CommandEvent#get_client_object":#CommandEvent_getclientobject
-* "CommandEvent#get_extra_long":#CommandEvent_getextralong
+* "CommandEvent#get_index":#CommandEvent_getindex
 * "CommandEvent#get_int":#CommandEvent_getint
 * "CommandEvent#get_selection":#CommandEvent_getselection
 * "CommandEvent#get_string":#CommandEvent_getstring
 * "CommandEvent#is_checked":#CommandEvent_ischecked
 * "CommandEvent#is_selection":#CommandEvent_isselection
 * "CommandEvent#set_client_data":#CommandEvent_setclientdata
-* "CommandEvent#set_client_object":#CommandEvent_setclientobject
 * "CommandEvent#set_extra_long":#CommandEvent_setextralong
 * "CommandEvent#set_int":#CommandEvent_setint
 * "CommandEvent#set_string":#CommandEvent_setstring
@@ -74,58 +81,58 @@ h3(#CommandEvent_new). CommandEvent.new
 
 Constructor.
 
-h3(#CommandEvent_checked). CommandEvent#checked
-
- Boolean *checked*()
-
-Deprecated, use "is_checked":#CommandEvent_ischecked instead.
-
 h3(#CommandEvent_getclientdata). CommandEvent#get_client_data
 
   *get_client_data*()
 
-Returns client data pointer for a listbox or choice selection event
-(not valid for a deselection).
+Returns the client data of the item being selected in a listbox or
+choice selection event.
 
-h3(#CommandEvent_getclientobject). CommandEvent#get_client_object
+This method is only valid when an item is being selected, not when an
+item is being *deselected*. Whilst the correct value may be returned on
+some platforms (eg Windows), the value may be empty on others (eg GTK)
+when a deselection is taking place.
 
- "ClientData":clientdata.html *get_client_object*()
+h3(#CommandEvent_getindex). CommandEvent#get_index
 
-Returns client object pointer for a listbox or choice selection event
-(not valid for a deselection).
+ Integer *get_index*()
 
-h3(#CommandEvent_getextralong). CommandEvent#get_extra_long
+Returns the integer index of the particular item being selected in a
+"listbox":listbox.html, "choice":choice.html or "radiobox":radiobox.html
+selection, or the item being checked in
+"checklistbox":checklistbox.html. 
 
- Integer *get_extra_long*()
-
-Returns extra information dependant on the event objects type.
-If the event comes from a listbox selection, it is a boolean
-determining whether the event was a selection (true) or a
-deselection (false). A listbox deselection only occurs for
-multiple-selection boxes, and in this case the index and string values
-are indeterminate and the listbox must be examined by the application.
+This method is only valid when an item is being selected, not when an
+item is being *deselected*. Whilst the correct value may be returned on
+some platforms (eg Windows), the value may be empty on others (eg GTK)
+when a deselection is taking place.
 
 h3(#CommandEvent_getint). CommandEvent#get_int
 
  Integer *get_int*()
 
-Returns the integer identifier corresponding to a listbox, choice or
-radiobox selection (only if the event was a selection, not a
-deselection), or a boolean value representing the value of a checkbox.
+This is a deprecated alias for "get_index":#CommandEvent_getindex; use
+that method by preference.
 
 h3(#CommandEvent_getselection). CommandEvent#get_selection
 
  Integer *get_selection*()
 
-Returns item index for a listbox or choice selection event (not valid for
-a deselection).
+Returns item index for a listbox or choice selection event (not valid
+for a deselection). This is an alias for
+"get_index":#CommandEvent_getindex
 
 h3(#CommandEvent_getstring). CommandEvent#get_string
 
  String *get_string*()
 
-Returns item string for a listbox or choice selection event (not valid for
-a deselection).
+Returns the string label of the item being selected or checked in a
+listbox, choice or similar control with multiple items.
+
+This method is only valid when an item is being selected, not when an
+item is being *deselected*. Whilst the correct value may be returned on
+some platforms (eg Windows), the value may be empty on others (eg GTK)
+when a deselection is taking place.
 
 h3(#CommandEvent_ischecked). CommandEvent#is_checked
 
@@ -136,6 +143,11 @@ method returns @true@ for a selection event and @false@ for a
 deselection one. For the menu events, this method indicates if the menu item
 just has become checked or unchecked (and thus only makes sense for checkable
 menu items).
+
+Note that this method is not useful for events coming from a
+"CheckListBox":checklistbox.html; you must check the checked state of
+the relevant item in the control directly using the
+"is_checked":checklistbox.html#CheckListBox_ischecked method in that class.
 
 h3(#CommandEvent_isselection). CommandEvent#is_selection
 
@@ -150,30 +162,26 @@ h3(#CommandEvent_setclientdata). CommandEvent#set_client_data
 
 Sets the client data for this event.
 
-h3(#CommandEvent_setclientobject). CommandEvent#set_client_object
-
-  *set_client_object*(%(arg-type)ClientData% clientObject)
-
-Sets the client object for this event. The client object is not owned by the event
-object and the event object will not delete the client object in its destructor.
-The client object must be owned and deleted by another object (e.g. a control)
-that has longer life time than the event object.
-
 h3(#CommandEvent_setextralong). CommandEvent#set_extra_long
 
   *set_extra_long*(%(arg-type)Integer% extraLong)
 
-Sets the *m_extraLong* member.
+Sets the *m_extraLong* attribute; this is used in the case of selection
+events to determine whether it is a selection (when the value should be
+@1@) or a deselection (when it should be @0@).
 
 h3(#CommandEvent_setint). CommandEvent#set_int
 
   *set_int*(%(arg-type)Integer% intCommand)
 
-Sets the *m_commandInt* member.
+In the case of selection and checking events from controls with multiple
+items, sets the index of item being selected; in the case of
+"checkboxes":checkbox.html, should be @1@ if the control is being
+checked, or @0@ if being unchecked.
 
 h3(#CommandEvent_setstring). CommandEvent#set_string
 
   *set_string*(%(arg-type)String% string)
 
-Sets the *m_commandString* member.
+Sets the string of the item being selected.
 
