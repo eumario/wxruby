@@ -116,7 +116,7 @@ class Wx::EvtHandler
         return lambda { send(meth) }
       end
     else
-      Kernel.raise RuntimeError,
+      Kernel.raise ArgumentError,
                   "Specify event handler using a method name OR block"
                   caller
     end
@@ -128,7 +128,7 @@ class Wx::EvtHandler
     case window_or_id
     when Fixnum : window_or_id
     when Wx::Window : window_or_id.wx_id
-    else Kernel.raise RuntimeError, 
+    else Kernel.raise ArgumentError, 
                      "Must specify Wx::Window event source or its Wx id, " +
                      "not '#{window_or_id.inspect}'",
                       caller
