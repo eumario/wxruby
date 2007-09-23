@@ -90,6 +90,7 @@ module EventConnector
   #  end
   #
   def listen(evt, source = self, handler = nil, &block)
+    warn "listen is deprecated, use evt_xxx directly (#{caller[0]})"
 
     # get the WxWidget evt_xxx method that will be called for binding
     event = "evt_#{evt}"
