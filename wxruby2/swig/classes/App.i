@@ -113,11 +113,8 @@ public:
 	// the C++ one; this implies that all Windows have already been destroyed
 	// so there is no point trying to mark them, and doing so may cause 
 	// errors.
-	VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
-	if ( DATA_PTR(the_app) == 0 ) 
-	  return;
-	if ( rb_ivar_defined(the_app, rb_intern("__app_ended__")) == Qtrue )
-	  return;
+    if ( ! wxApp::IsMainLoopRunning() )
+        return;
 
 	// To do the marking, iterate over SWIG's hash list of known wrapped
 	// objects (swig_ruby_trackings) and check each one.
@@ -188,8 +185,6 @@ public:
         printf("OnExit...\n");
 #endif 
 		VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
-		rb_iv_set(the_app, "__app_ended__", Qtrue);
-					
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
         if ( oldlog )
