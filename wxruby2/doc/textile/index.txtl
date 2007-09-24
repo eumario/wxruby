@@ -114,6 +114,7 @@ typically provide ways of organising other widgets (for example, in a
 Notebook), or other interaction devices (such as a StatusBar).
 
 |Panel|A window whose colour changes according to current user settings|
+|CollapsiblePane|A container with a button to collapse or expand contents|
 |ScrolledWindow|Window with automatically managed scrollbars|
 |Grid|A grid (table) window|
 |SplitterWindow|Window which can be split vertically or horizontally|
