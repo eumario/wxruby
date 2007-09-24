@@ -22,6 +22,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 
 #include <wx/calctrl.h>
 #include <wx/choicebk.h>
+#include <wx/collpane.h>
 #include <wx/fdrepdlg.h>
 #include <wx/notebook.h>
 #include <wx/listbook.h>
@@ -70,6 +71,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_COMMAND_TOOL_ENTER;// 17)
 %constant const int wxEVT_COMMAND_SPINCTRL_UPDATED;// 18)
 %constant const int wxEVT_COMMAND_TOGGLEBUTTON_CLICKED; // 19
+%constant const int wxEVT_COMMAND_COLLPANE_CHANGED; // 1102
 
 %constant const int wxEVT_SOCKET;// 50)
 %constant const int wxEVT_TIMER ;// 80)
