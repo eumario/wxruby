@@ -104,20 +104,27 @@ class Wx::EvtHandler
   end
 
   # Not for external use; determines whether to use a block or call a
-  # method in self to handle an event, passed to connect.
+  # method in self to handle an event, passed to connect. Makes evt_xxx
+  # liberal about what it accepts - aside from a block, it can be a
+  # method name (as Symbol or String), a (bound) method object, or a
+  # Proc object
   def acquire_handler(meth, block)
     if block and not meth
       return block
     elsif meth and not block
-      h_meth = self.method(meth)
+      h_meth = case meth
+        when Symbol, String : self.method(meth)
+        when Proc : meth
+        when Method : meth.to_proc
+      end
       if h_meth.arity == 1
-        return lambda { | evt | send(meth, evt) }
+        return lambda { | evt | h_meth.call(evt) }
       else
-        return lambda { send(meth) }
+        return lambda { h_meth.call }
       end
     else
       Kernel.raise ArgumentError,
-                  "Specify event handler using a method name OR block"
+                  "Specify event handler with a method, name, proc OR block"
                   caller
     end
   end
@@ -127,7 +134,7 @@ class Wx::EvtHandler
   def acquire_id(window_or_id)
     case window_or_id
     when Fixnum : window_or_id
-    when Wx::Window : window_or_id.wx_id
+    when Wx::Window, Wx::MenuItem : window_or_id.wx_id
     else Kernel.raise ArgumentError, 
                      "Must specify Wx::Window event source or its Wx id, " +
                      "not '#{window_or_id.inspect}'",
