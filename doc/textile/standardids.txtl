@@ -1,0 +1,127 @@
+h1. Standard Application Ids
+
+wxRuby provides a set of predefined constants of integer ids which
+correspond to common application actions. These are particularly useful
+in "Menus":menu.html and "Dialogs":dialogs.html. If the appropriate id
+is specified, the menu item or button will be displayed with an
+appropriate system icon on GTK.
+
+The names are generally self-explanatory; they cover:
+
+* "Basic application actions":#basic_application
+* "Editing Actions":#editing_actions
+* "Viewing options":#viewing_options
+* "Recent file identifiers":#recent_files
+* "Standard dialog buttons":#dialog_buttons
+* "Navigation ids":#navigation
+* "Formatting actions":#formatting_actions
+
+h2(#basic_application). Basic application actions
+
+    Wx::::ID_OPEN
+    Wx::::ID_CLOSE
+    Wx::::ID_NEW
+    Wx::::ID_SAVE
+    Wx::::ID_SAVEAS
+    Wx::::ID_REVERT
+    Wx::::ID_EXIT
+    Wx::::ID_UNDO
+    Wx::::ID_REDO
+    Wx::::ID_HELP
+    Wx::::ID_PRINT
+    Wx::::ID_PRINT_SETUP
+    Wx::::ID_PREVIEW
+    Wx::::ID_ABOUT
+    Wx::::ID_HELP_CONTENTS
+    Wx::::ID_HELP_COMMANDS
+    Wx::::ID_HELP_PROCEDURES
+    Wx::::ID_HELP_CONTEXT
+    Wx::::ID_CLOSE_ALL
+    Wx::::ID_PREFERENCES 
+
+h2(#editing_actions). Editing actions
+
+    Wx::::ID_CUT = 5030
+    Wx::::ID_COPY
+    Wx::::ID_PASTE
+    Wx::::ID_CLEAR
+    Wx::::ID_FIND
+    Wx::::ID_DUPLICATE
+    Wx::::ID_SELECTALL
+    Wx::::ID_DELETE
+    Wx::::ID_REPLACE
+    Wx::::ID_REPLACE_ALL
+    Wx::::ID_PROPERTIES    
+
+h2(#viewing_options). Viewing options
+
+    Wx::ID_VIEW_DETAILS
+    Wx::ID_VIEW_LARGEICONS
+    Wx::ID_VIEW_SMALLICONS
+    Wx::ID_VIEW_LIST
+    Wx::ID_VIEW_SORTDATE
+    Wx::ID_VIEW_SORTNAME
+    Wx::ID_VIEW_SORTSIZE
+    Wx::ID_VIEW_SORTTYPE
+
+h2(#recent_files). Recent file identifiers
+
+    Wx::ID_FILE1
+    Wx::ID_FILE2
+    Wx::ID_FILE3
+    Wx::ID_FILE4
+    Wx::ID_FILE5
+    Wx::ID_FILE6
+    Wx::ID_FILE7
+    Wx::ID_FILE8
+    Wx::ID_FILE9
+
+h2(#dialog_buttons). Standard dialog buttons
+
+    Wx::ID_OK
+    Wx::ID_CANCEL
+    Wx::ID_APPLY
+    Wx::ID_YES
+    Wx::ID_NO
+    Wx::ID_STATIC
+    Wx::ID_FORWARD
+    Wx::ID_BACKWARD
+    Wx::ID_DEFAULT
+    Wx::ID_MORE
+    Wx::ID_SETUP
+    Wx::ID_RESET
+    Wx::ID_CONTEXT_HELP
+    Wx::ID_YESTOALL
+    Wx::ID_NOTOALL
+    Wx::ID_ABORT
+    Wx::ID_RETRY
+    Wx::ID_IGNORE
+    Wx::ID_ADD
+    Wx::ID_REMOVE    
+
+h2(#navigation). Navigation ids
+    
+    Wx::ID_UP
+    Wx::ID_DOWN
+    Wx::ID_HOME
+    Wx::ID_REFRESH
+    Wx::ID_STOP
+    Wx::ID_INDEX
+
+h2(#formatting_actions). Formatting actions
+
+    Wx::ID_BOLD
+    Wx::ID_ITALIC
+    Wx::ID_JUSTIFY_CENTER
+    Wx::ID_JUSTIFY_FILL
+    Wx::ID_JUSTIFY_RIGHT
+    Wx::ID_JUSTIFY_LEFT
+    Wx::ID_UNDERLINE
+    Wx::ID_INDENT
+    Wx::ID_UNINDENT
+    Wx::ID_ZOOM_100
+    Wx::ID_ZOOM_FIT
+    Wx::ID_ZOOM_IN
+    Wx::ID_ZOOM_OUT
+    Wx::ID_UNDELETE
+    Wx::ID_REVERT_TO_SAVED    
