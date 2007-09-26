@@ -33,42 +33,42 @@ public:
   void Destroy(wxMenuItem * item ) ;
   void Enable(int  id , const bool  enable ) ;
   int FindItem(const wxString&  itemString ) const;
-  wxMenuItem * FindItem(int  id , wxMenu ** menu = NULL) const;
-  wxMenuItem* FindItemByPosition(size_t  position ) const;
+  wxMenuItem* FindItem(int id, wxMenu ** menu = NULL) const;
+  wxMenuItem* FindItemByPosition(size_t position) const;
   wxString GetHelpString(int  id ) const;
   wxString GetLabel(int  id ) const;
   size_t GetMenuItemCount() const;
   const wxMenuItemList& GetMenuItems() const;
   wxString GetTitle() const;
-  bool Insert(size_t pos, wxMenuItem * item ) ;
-  void Insert(size_t  pos, 
-              int  id, 
-              const wxString& item, 
-              const wxString& helpString = wxT(""), 
-              wxItemKind kind = wxITEM_NORMAL) ;
-  void InsertCheckItem(size_t pos , 
-                       int  id, 
-                       const wxString& item, 
-                       const wxString& helpString = wxT(""));
-  void InsertRadioItem(size_t pos, 
-                       int id, 
-                       const wxString& item, 
-                       const wxString&  helpString = wxT(""));
-  void InsertSeparator(size_t pos);
+  wxMenuItem* Insert(size_t pos, wxMenuItem * item );
+  wxMenuItem* Insert(size_t  pos, 
+                     int  id, 
+                     const wxString& item, 
+                     const wxString& helpString = wxT(""), 
+                     wxItemKind kind = wxITEM_NORMAL);
+  wxMenuItem* InsertCheckItem(size_t pos , 
+                              int  id, 
+                              const wxString& item, 
+                              const wxString& helpString = wxT(""));
+  wxMenuItem* InsertRadioItem(size_t pos, 
+                              int id, 
+                              const wxString& item, 
+                              const wxString&  helpString = wxT(""));
+  wxMenuItem* InsertSeparator(size_t pos);
   bool IsChecked(int id) const;
   bool IsEnabled(int id) const;
-  void Prepend(wxMenuItem * item );
-  void Prepend(int id, 
-               const wxString& item, 
-               const wxString& helpString = wxT(""), 
-               wxItemKind kind = wxITEM_NORMAL);
-  void PrependCheckItem(int id, 
-                        const wxString& item, 
-                        const wxString& helpString = wxT(""));
-  void PrependRadioItem(int id, 
-                        const wxString& item, 
-                        const wxString& helpString = wxT(""));
-  void PrependSeparator();
+  wxMenuItem* Prepend(wxMenuItem * item );
+  wxMenuItem* Prepend(int id, 
+                      const wxString& item, 
+                      const wxString& helpString = wxT(""), 
+                      wxItemKind kind = wxITEM_NORMAL);
+  wxMenuItem* PrependCheckItem(int id, 
+                               const wxString& item, 
+                               const wxString& helpString = wxT(""));
+  wxMenuItem* PrependRadioItem(int id, 
+                               const wxString& item, 
+                               const wxString& helpString = wxT(""));
+  wxMenuItem* PrependSeparator();
   wxMenuItem * Remove(int id);
   wxMenuItem * Remove(wxMenuItem * item );
   void SetHelpString(int id, 
