@@ -4,21 +4,38 @@ A menu is a pull-down or pop-up list of items. The Wx::Menu class may be
 used to construct either menu bars (associated with a "Frame":frame.html
 via its "Menubar":menubar.html ) or popup menus. Items are represented
 as text, and some platforms, they may also have icons. One item is
-selected by clicking on it, or by using a shortcut, to start an
+selected by clicking on it, or by using a key shortcut, to start an
 application action. Clicking elsewhere dismisses the menu.
 
 A menu item has an integer ID associated with it is used to identify it
 when it is clicked, and to access and change the menu item after it has
-been created. A menu item with a special identifier @-1@ is a separator.
-Separators don't have an associated command but just make a separator line
-appear in the menu.
+been created (for example, disabling or enabling items in response to
+particular application states). In common with other parts of the wxRuby
+API, it is not always necessary to give explicit ids; it can omitted,
+and wxRuby will supply a reasonable, unique default. These can be used
+to set up "event handling for Menus":#event_handling.
 
-*NB:* Please note that @ID_ABOUT@ and @ID_EXIT@ are
-predefined by Widgets and have a special meaning. Entries
-using these IDs will be taken out of the normal menus under MacOS X
-and will be inserted into the system menu (following the appropriate
-MacOS X interface guideline). On PalmOS @ID_EXIT@ is disabled according
-to Palm OS Companion guidelines.
+h2. Special Menu Ids
+
+There are cases where it is desirable to explicitly set the id to one of
+the special constants built into wxRuby, in order to get better native
+appearance and behaviour across different window systems. 
+
+Most importantly, @Wx::ID_ABOUT@ and @Wx::ID_EXIT@ are predefined and
+have special meaning: "Display an About dialog" and "Exit the
+application". If these ids are used, the menu items will be taken out of
+the normal menus under MacOS X and will be inserted into the 'system'
+(Apple) menu, following the appropriate MacOS X interface guideline. In
+addition, they will be given the standard label ('Quit', on OS X,
+'Exit', on GTK and Windows).
+
+Secondly, predefined ids corresponding to a set of common application
+actions are also available, such as @Wx::ID_SAVE@, @Wx::ID_CUT@ and
+@Wx::ID_PROPERTIES@. If these are used as the ids for the relevant items
+in Frame menus, they will be displayed with the GTK-theme supplied
+system standard icon. 
+
+See also, "the list of standard ids":standardsids.html.
 
 h2. Types of menu item
 
@@ -40,35 +57,42 @@ of the item positions inserting or removing the items in the menu containing
 the radio items risks to not work correctly. Finally note that radio items
 are not supported under Motif.
 
-h2. Deletion of menus
-
-All menus attached to a menubar or to another menu will be deleted by
-their parent when it is deleted. As the frame menubar is deleted by the
-frame itself, it means that normally all menus used are deleted
-automatically.
-
 h2. Derived from
 
 "EvtHandler":evthandler.html
 
 "Object":object.html
 
-h2. Event handling
+h2(#event_handling). Event handling
 
-If the menu is part of a menubar, then "MenuBar":menubar.html event
-processing is used, using @evt_menu@.
+The event of the user selecting an item from a menu can be captured by
+the @evt_menu@ handler. This is used whether the Menu is part of a
+Frame's MenuBar, or whether it is a standalone pop-up menu. This event
+handler receives events of type "CommandEvent":commandevent.html. 
 
-To handle a popup menu, handle a menu selection event
-(EVT_COMMAND_MENU_SELECTED). Provide @evt_menu@ handlers in the window
-which pops up the menu, or in an ancestor ofthis window.
+"As with other CommandEvents":eventhandlingoverview.html#events_with_ids
+, the event "bubbles" upwards through the containing windows, so the
+event handlers can be set up in the containing frame. And, as with other
+CommandEvents, @evt_menu@ must be told which MenuItem's events it should
+listen for. It can be passed either a "MenuItem":menuitem.html object,
+or the integer id of a menu item.
 
-h2. Example
+Note that there are also events fired when a menu in a menubar is opened
+up by the user, of class "MenuEvent":menuevent.html. However, these are
+rarely required in practice.
 
- file_menu = Wx::Menu.new
- # add a menu item with arbitrary ID 2001
- file_menu.append(2001, '&Open file')
- # handle this menu item event
- evt_menu(2001) { | evt | on_open_file(evt) }
+h3. Event Handling Example
+
+ my_menu = Wx::Menu.new
+
+  ==#== Menu items are returned by all adding methods
+ menu_item1 = my_menu.append('Do something', 'Help text')
+ evt_menu menu_item1, :on_do_something
+
+  ==#== Use a menu item with a specialid
+ my_menu.append(Wx::ID_OPEN, '&Open file', 'Open a file')
+  ==#== Handle this menu event, specifying by id
+ evt_menu Wx::ID_OPEN, on_open_file
 
 h2. See also
 
@@ -131,11 +155,14 @@ h4. Parameters
 
 h3(#Menu_append). Menu#append
 
- "MenuItem":menuitem.html *append*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                   %(arg-type)String% helpString = "", 
-                   %(arg-type)ItemKind% kind = ITEM_NORMAL)
+ "MenuItem":menuitem.html *append*(%(arg-type)Integer% id = Wx::ID_ANY,
+                                  %(arg-type)String% item = "", 
+                                  %(arg-type)String% helpString = "", 
+                                  %(arg-type)ItemKind% kind = Wx::ITEM_NORMAL)
 
-Adds a string item to the end of the menu.
+Adds a string item to the end of the menu. Note that the only required
+item is the string label for the menu item; if the id is omitted, wxRuby
+will supply a reasonable default.
 
 h3(#Menu_appenditem). Menu#append_item
 
@@ -148,9 +175,10 @@ properties of a menu item this way, such as bitmaps and fonts.
 
 h3(#Menu_appendmenu). Menu#append_menu
 
- "MenuItem":menuitem.html *append_menu*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                   %(arg-type)Menu% subMenu, 
-                   %(arg-type)String% helpString = "")
+ "MenuItem":menuitem.html *append_menu*(%(arg-type)Integer% id = Wx::ID_ANY, 
+                                        %(arg-type)String% item, 
+                                        %(arg-type)Menu% subMenu, 
+                                        %(arg-type)String% helpString = "")
 
 Adds a pull-right submenu to the end of the menu. Append the submenu to
 the parent menu _after_ you have added your menu items, or accelerators
@@ -206,8 +234,9 @@ h4. See also
 
 h3(#Menu_appendcheckitem). Menu#append_check_item
 
- "MenuItem":menuitem.html *append_check_item*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                            %(arg-type)String% helpString = "")
+ "MenuItem":menuitem.html *append_check_item*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
 
 Adds a checkable item to the end of the menu.
 
@@ -217,15 +246,16 @@ h4. See also
 
 h3(#Menu_appendradioitem). Menu#append_radio_item
 
- "MenuItem":menuitem.html *append_radio_item*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                            %(arg-type)String% helpString = "")
+ "MenuItem":menuitem.html *append_radio_item*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
 
 Adds a radio item to the end of the menu. All consequent radio items form a
 group and when an item in the group is checked, all the others are
 automatically unchecked.
 
-*NB:* Currently only implemented under Windows and GTK, use
-\#if HAS_RADIO_MENU_ITEMS to test for availability of this feature.
+Currently only implemented under Windows and GTK
+
 
 h4. See also
 
@@ -420,12 +450,14 @@ h4. See also
 
 h3(#Menu_insert). Menu#insert
 
- "MenuItem":menuitem.html *insert*(%(arg-type)size_t% pos,  %(arg-type)MenuItem% item)
+ "MenuItem":menuitem.html *insert*(%(arg-type)size_t% pos,  
+                                   %(arg-type)MenuItem% item)
 
- "MenuItem":menuitem.html *insert*(%(arg-type)size_t% pos,  %(arg-type)Integer% id, 
-                   %(arg-type)String% item, 
-                   %(arg-type)String% helpString = "", 
-                   %(arg-type)ItemKind% kind = ITEM_NORMAL)
+ "MenuItem":menuitem.html *insert*(%(arg-type)size_t% pos,  
+                                   %(arg-type)Integer% id = Wx::ID_ANY, 
+                                   %(arg-type)String% item, 
+                                   %(arg-type)String% helpString = "", 
+                                   %(arg-type)ItemKind% kind = ITEM_NORMAL)
 
 Inserts the given _item_ before the position _pos_. Inserting the item
 at position "get_menu_item_count":#Menu_getmenuitemcount is the same
@@ -437,9 +469,10 @@ h4. See also
 
 h3(#Menu_insertcheckitem). Menu#insert_check_item
 
- "MenuItem":menuitem.html *insert_check_item*(%(arg-type)size_t% pos,  %(arg-type)Integer% id, 
-                              %(arg-type)String% item, 
-                              %(arg-type)String% helpString = "")
+ "MenuItem":menuitem.html *insert_check_item*(%(arg-type)size_t% pos,  
+                                              %(arg-type)Integer% id = Wx::ID_ANY, 
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
 
 Inserts a checkable item at the given position.
 
@@ -449,9 +482,10 @@ h4. See also
 
 h3(#Menu_insertradioitem). Menu#insert_radio_item
 
- "MenuItem":menuitem.html *insert_radio_item*(%(arg-type)size_t% pos,  %(arg-type)Integer% id, 
-                              %(arg-type)String% item, 
-                              %(arg-type)String% helpString = "")
+ "MenuItem":menuitem.html *insert_radio_item*(%(arg-type)size_t% pos,  
+                                              %(arg-type)Integer% id = Wx::ID_ANY, 
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
 
 Inserts a radio item at the given position.
 
@@ -509,9 +543,10 @@ h3(#Menu_prepend). Menu#prepend
 
  "MenuItem":menuitem.html *prepend*(%(arg-type)MenuItem% item)
 
- "MenuItem":menuitem.html *prepend*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                    %(arg-type)String% helpString = "", 
-                    %(arg-type)ItemKind% kind = ITEM_NORMAL)
+ "MenuItem":menuitem.html *prepend*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                    %(arg-type)String% item, 
+                                    %(arg-type)String% helpString = "", 
+                                    %(arg-type)ItemKind% kind = ITEM_NORMAL)
 
 Inserts the given _item_ at position $0$, i.e. before all the other
 existing items.
@@ -522,8 +557,9 @@ h4. See also
 
 h3(#Menu_prependcheckitem). Menu#prepend_check_item
 
- "MenuItem":menuitem.html *prepend_check_item*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                               %(arg-type)String% helpString = "")
+ "MenuItem":menuitem.html *prepend_check_item*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                               %(arg-type)String% item,
+                                               %(arg-type)String% helpString = "")
 
 Inserts a checkable item at position $0$.
 
@@ -533,8 +569,9 @@ h4. See also
 
 h3(#Menu_prependradioitem). Menu#prepend_radio_item
 
- "MenuItem":menuitem.html *prepend_radio_item*(%(arg-type)Integer% id,  %(arg-type)String% item, 
-                               %(arg-type)String% helpString = "")
+ "MenuItem":menuitem.html *prepend_radio_item*(%(arg-type)Integer% id = Wx::ID_ANY, 
+                                               %(arg-type)String% item, 
+                                               %(arg-type)String% helpString = "")
 
 Inserts a radio item at position $0$.
 
