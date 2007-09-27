@@ -12,7 +12,11 @@ class wxSound : public wxObject
   wxSound(int size, const wxByte* data);
   virtual ~wxSound();
   bool Create(const wxString& fileName, bool isResource = false);
+//As of wxWidgets 2.8.5 this is not a method for wxMac it is also not 
+//listed in the documentation.
+#if !defined(__WXMAC__)
   bool Create(int size, const wxByte* data);
+#endif
   bool IsOk();
 #if !defined(__WXMSW__)
   static bool IsPlaying();
