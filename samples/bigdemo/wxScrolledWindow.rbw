@@ -139,6 +139,8 @@ class MyCanvas < Wx::ScrolledWindow
         if event.left_is_down() and !@drawing
             set_focus()
             set_XY(event)
+            @event_x_old =  event.get_x # added this to save the current absolute...
+            @event_y_old = event.get_y  # ... mouse position
             @curLine = []
             capture_mouse()
             @drawing = true
@@ -167,11 +169,14 @@ class MyCanvas < Wx::ScrolledWindow
 
           paint do | dc |
             dc.set_pen(Wx::Pen.new("MEDIUM FOREST GREEN", 4, Wx::SOLID))
-            coords = [@x, @y] + convert_event_coords(event)
-            @curLine.push(coords)
+            save_coords = [@x, @y] + convert_event_coords(event)             # translate the absolute coords to save them in the array
+            coords = [@event_x_old, @event_y_old, event.get_x, event.get_y]  # the absolute coords to use for the first draw
+            @curLine.push(save_coords)                                       # use the translated coords here
             coords.flatten!()
-            dc.draw_line(coords[0], coords[1], coords[2], coords[3])
+            dc.draw_line(coords[0], coords[1], coords[2], coords[3])         # and the absolute coords here
             set_XY(event)
+            @event_x_old = event.get_x                                       # saving the new ...
+            @event_y_old = event.get_y                                       # ... absolute coords
           end
         end
     end
