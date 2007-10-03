@@ -232,7 +232,7 @@ class MyFrame < Frame
         end
       @calendar = MyCalendar.new(@panel, self, date, style)
       @sizer.add(@calendar, 0, Wx::ALIGN_CENTRE|Wx::ALL, 5)
-      layout
+      @panel.layout
     end
 
     def highlight_special(on)
