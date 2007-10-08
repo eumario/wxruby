@@ -166,7 +166,7 @@ enum wxWindowVariant
 	VALUE rb_win = SWIG_RubyInstanceFor(ptr);
 	// see if within an evt_paint block - see classes/window.rb
 	// if so, supply a PaintDC to the block
-	if ( rb_ivar_get(rb_win, rb_intern("@__painting__") ) == Qtrue ) 
+	if ( rb_ivar_defined(rb_win, rb_intern("@__painting__") ) == Qtrue ) 
 	  {
 		wxPaintDC dc(ptr);
 		VALUE dcVal = SWIG_NewPointerObj((void *) &dc,SWIGTYPE_p_wxPaintDC, 0);
