@@ -40,7 +40,8 @@ $base_gemspec = Gem::Specification.new do | spec |
   spec.require_path = 'lib'
   # Platform specific binaries are added in later
   spec.files        = FileList[ 'lib/**/*' ].to_a +
-                      FileList[ 'samples/**/*' ].to_a
+                      FileList[ 'samples/**/*' ].to_a +
+                      FileList[ 'README', 'LICENSE' ].to_a
 
   spec.has_rdoc = false
 end
