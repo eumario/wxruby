@@ -34,7 +34,7 @@ class Wx::Timer
     @@__unowned_timers__ ||= []
 
     # remove from list of previous owner
-    if @__owner__
+    if defined?(@__owner__)
       @__owner__.instance_eval { @__owned_timers__.delete(this_timer) }
     end
 
@@ -51,7 +51,7 @@ class Wx::Timer
 
     # Then add to list of new owner, setting destructor hook if required    
     new_owner.instance_eval do
-      if not @__owned_timers__
+      if not defined?(@__owned_timers__)
         @__owned_timers__ = []
         unless self.kind_of?(Wx::App) # Don't set up hook on App
           evt_window_destroy do | evt |
