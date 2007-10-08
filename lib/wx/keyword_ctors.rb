@@ -113,12 +113,6 @@ module Wx
       def param_spec
         @param_spec ||= []
       end
-
-      attr_writer :param_flags
-      def param_flags
-        @param_flags ||= {}
-      end
-
       
       # Adds a list of named parameters *params* to the parameter
       # specification for this Wx class's constructor. Each parameter
@@ -210,8 +204,6 @@ module Wx
       def klass.inherited(sub_klass)
         sub_klass.instance_variable_set(:@param_spec, 
                                         instance_variable_get(:@param_spec) )
-        sub_klass.instance_variable_set(:@param_flags, 
-                                        instance_variable_get(:@param_flags) )
       end
     end
   end
