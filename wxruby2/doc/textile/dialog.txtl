@@ -97,6 +97,7 @@ h2. Methods
 * "Dialog#create_button_sizer":#Dialog_createbuttonsizer
 * "Dialog#create_separated_button_sizer":#Dialog_createseparatedbuttonsizer
 * "Dialog#create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer
+* "Dialog#destroy":#Dialog_destroy
 * "Dialog#do_ok":#Dialog_dook
 * "Dialog#end_modal":#Dialog_endmodal
 * "Dialog#get_affirmative_id":#Dialog_getaffirmativeid
