@@ -78,9 +78,9 @@ class MyHtmlWindow < Wx::HtmlWindow
 
   def on_cell_mouse_hover(cell, x, y)
     if link = cell.get_link
-      get_related_frame.set_status_text(link.get_href)
+      related_frame.status_text = link.get_href, 1
     else
-      get_related_frame.set_status_text('')
+      related_frame.status_text = ''
     end
   end
 end
@@ -95,8 +95,8 @@ class HtmlFrame < Wx::Frame
     super(nil, -1, title, pos, size, style)
     setup_menus
     setup_panel
-    create_status_bar(2)
-    set_status_text("Welcome to wxRuby!")
+    create_status_bar
+    self.status_text = "Welcome to wxRuby!"
   end
 
   def setup_panel
@@ -127,6 +127,7 @@ class HtmlFrame < Wx::Frame
     # in the correct platform-specific place
     menu_help.append(Wx::ID_ABOUT, "&About...\tF1", "Show about dialog")
     menu_file.append(Wx::ID_OPEN, "&Open File...\tCtrl-O", "Open File")
+    menu_file.append(Wx::ID_HIGHEST + 1, "&Open URL...\tCtrl-U", "Open URL")
     menu_file.append(Wx::ID_PRINT, "&Print...\tCtrl-P", "Print")
 
     menu_file.append(Wx::ID_PREVIEW, "&Preview...\tCtrl-Shift-P", 
@@ -137,13 +138,14 @@ class HtmlFrame < Wx::Frame
     menu_bar.append(menu_file, "&File")
     menu_bar.append(menu_help, "&Help")
     # Assign the menus to this frame
-    set_menu_bar(menu_bar)
+    self.menu_bar = menu_bar
     # handle menu events
-    evt_menu(Wx::ID_OPEN) { on_open_file }
-    evt_menu(Wx::ID_PRINT) { on_print }
-    evt_menu(Wx::ID_PREVIEW) { on_preview }
-    evt_menu(Wx::ID_EXIT) { on_quit }
-    evt_menu(Wx::ID_ABOUT) { on_about }
+    evt_menu Wx::ID_OPEN, :on_open_file
+    evt_menu Wx::ID_HIGHEST + 1, :on_open_url
+    evt_menu Wx::ID_PRINT, :on_print
+    evt_menu Wx::ID_PREVIEW, :on_preview
+    evt_menu Wx::ID_EXIT, :on_quit
+    evt_menu Wx::ID_ABOUT, :on_about
   end
 
   # end the application
@@ -153,14 +155,25 @@ class HtmlFrame < Wx::Frame
 
   def on_open_file
     f_dlg = Wx::FileDialog.new(self, "Open an HTML file", "", "", 
-                                "HTML files (*.html;*.htm)|.html;.htm)", 
+                                "HTML files (*.html;*.htm)|*.html;*.htm)", 
                                 Wx::OPEN)
     if not f_dlg.show_modal == Wx::ID_OK
       return
     end
     html_file = f_dlg.get_path
-
+    if html_file.index("\\")
+      html_file = html_file.split("\\").join("/")
+    end
     @html_win.load_file(html_file)
+  end
+
+  def on_open_url
+    url = Wx::get_text_from_user('Enter URL to open', 'Enter URL')
+    if not url.empty?
+      uri = URI.parse(url)
+      uri.path = '/' if uri.path.empty?
+      @html_win.load_page_from_uri(uri)
+    end
   end
 
   # show an 'About' dialog
