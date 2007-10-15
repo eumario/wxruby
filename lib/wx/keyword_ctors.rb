@@ -101,6 +101,7 @@ module Wx
         :size      => Wx::DEFAULT_SIZE,
         :pos       => Wx::DEFAULT_POSITION,
         :style     => 0,
+        :title     => '',
         :validator => Wx::DEFAULT_VALIDATOR,
         :choices   => [] # for Choice, ComboBox etc
       }
@@ -175,13 +176,6 @@ module Wx
           if parent == :default_ctor
             pre_wx_kwctor_init()
             return
-          end
-
-          # Allow classes to ignore :id argument in positional args
-          unless self.class < Wx::Dialog
-            if not mixed_args[0].kind_of?(Fixnum)
-              mixed_args.unshift(-1) 
-            end
           end
 
           real_args = [ parent ] + self.class.args_as_list(*mixed_args)
