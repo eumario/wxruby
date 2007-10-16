@@ -1,5 +1,5 @@
-// Copyright 2004-2006 by Kevin Smith
-// released under the MIT-style wxruby2 license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 // These are standard Wx graphic/drawing objects. Unlike RubyConstants, 
 // objects in this file aren't loaded into ruby until AFTER app.on_init

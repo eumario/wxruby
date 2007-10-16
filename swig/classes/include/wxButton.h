@@ -1,5 +1,5 @@
-// Copyright 2006 by Kevin Smith
-// released under the MIT-style wxruby2 license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 #if !defined(_wxButton_h_)
 #define _wxButton_h_

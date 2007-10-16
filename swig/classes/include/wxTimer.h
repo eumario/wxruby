@@ -1,5 +1,5 @@
-// Copyright 2004-2007 by Kevin Smith
-// released under the MIT-like wxRuby license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 #if !defined(_wxTimer_h_)
 #define _wxTimer_h_

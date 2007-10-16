@@ -1,5 +1,5 @@
-// Copyright 2004-2007 by Kevin Smith
-// released under the MIT-style wxruby2 license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 %module(directors="1") wxFunctions
 %include "common.i"
