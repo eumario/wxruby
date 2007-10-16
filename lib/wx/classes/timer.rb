@@ -34,7 +34,7 @@ class Wx::Timer
     @@__unowned_timers__ ||= []
 
     # remove from list of previous owner
-    if defined?(@__owner__)
+    if defined?(@__owner__) and @__owner__
       @__owner__.instance_eval { @__owned_timers__.delete(this_timer) }
     end
 
