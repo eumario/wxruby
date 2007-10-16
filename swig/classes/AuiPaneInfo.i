@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module(directors="1") wxAuiPaneInfo
+%module wxAuiPaneInfo
 GC_MANAGE(wxAuiPaneInfo);
 
 %{
