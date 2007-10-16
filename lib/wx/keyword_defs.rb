@@ -44,7 +44,7 @@ end
 
 # Window : base class for all widgets and frames
 Wx::define_keyword_ctors('Window') do
-   wx_ctor_params :pos, :size, :style
+   wx_ctor_params :id, :pos, :size, :style
    wx_ctor_params :name => 'window'
 end
 
