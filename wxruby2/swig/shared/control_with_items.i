@@ -1,5 +1,5 @@
-# Copyright 2004-2006 by Kevin Smith
-# Released under the MIT-style wxruby2 license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 // shared code for ControlWithItems - Wx::Choice, Wx::ComboBox etcxf
 

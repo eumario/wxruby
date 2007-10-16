@@ -1,5 +1,5 @@
-//   Copyright 2004-2005 by Kevin Smith
-//   released under the MIT-style wxruby2 license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 
 #if !defined(_wxCloseEvent_h_)

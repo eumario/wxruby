@@ -1,5 +1,5 @@
-// Copyright 2004-2007 by Kevin Smith
-// released under the MIT-like wxRuby license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 // This file, required by common.i defines a set of macros which are used
 // to specify memory management strategies for individual Wx classes.

@@ -1,4 +1,9 @@
-// Typemaps for converting between wxDateTime and Ruby's Date and Time classes
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
+
+// Typemaps for converting between wxDateTime and Ruby's Date and Time
+// classes. These are used in CalendarCtrl etc
+
 
 %{
 #include <wx/datetime.h>

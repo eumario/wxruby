@@ -1,5 +1,8 @@
-// These typemaps are used by TreeCtrl and TreeEvent to convert wx tree 
-// item ids into simple 
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
+
+// These typemaps are used by TreeCtrl and TreeEvent to convert wx tree
+// item ids into simple ruby integers
 
 %{
 #define TREEID2RUBY(id) LONG2NUM((size_t)id.m_pItem)

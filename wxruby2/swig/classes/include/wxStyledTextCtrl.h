@@ -1,20 +1,5 @@
-////////////////////////////////////////////////////////////////////////////
-// Name:        stc.h
-// Purpose:     A wxWidgets implementation of Scintilla.  This class is the
-//              one meant to be used directly by wx applications.  It does not
-//              derive directly from the Scintilla classes, and in fact there
-//              is no mention of Scintilla classes at all in this header.
-//              This class delegates all method calls and events to the
-//              Scintilla objects and so forth.  This allows the use of
-//              Scintilla without polluting the namespace with all the
-//              classes and itentifiers from Scintilla.
-//
-// Author:      Robin Dunn
-//
-// Created:     13-Jan-2000
-// RCS-ID:      $Id: stc.h,v 1.74 2006/08/31 05:35:26 RD Exp $
-// Copyright:   (c) 2000 by Total Control Software
-// Licence:     wxWindows license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef __stc_h__

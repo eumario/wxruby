@@ -1,5 +1,5 @@
-// Copyright 2004-2007, WxRuby development team
-// released under the MIT-style wxruby2 license
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 // mark_free_impl.i - this contains the C++ implementation of various
 // common GC-related functions, such as shared %mark functions and

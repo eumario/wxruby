@@ -1,3 +1,6 @@
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
+
 // Returns a ruby wrapper around a wxObject whose wx class is not known
 // in advance - needed for find_window, get_children etc This is a bit
 // complicated because it must check if the ruby object already exists,
