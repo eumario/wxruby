@@ -242,14 +242,15 @@ class MyTreeCtrl < Wx::TreeCtrl
     font.style = Wx::FONTSTYLE_ITALIC
     set_item_font(root_id, font)
 
-    id, cookie = get_first_child(root_id)
-    set_item_text_colour(id, Wx::BLUE)
+    ids = get_children(root_id)
 
-    id,cookie = get_next_child(root_id,cookie)
-    id,cookie = get_next_child(root_id,cookie)
+    # make the first item blue
+    set_item_text_colour(ids[0], Wx::BLUE)
+
+    # make the third item red on grey
     if Wx::PLATFORM == "WXMSW"
-      set_item_text_colour(id, Wx::RED)      
-      set_item_background_colour(id, Wx::LIGHT_GREY)
+      set_item_text_colour(ids[2], Wx::RED)      
+      set_item_background_colour(ids[2], Wx::LIGHT_GREY)
     end
   end
 
