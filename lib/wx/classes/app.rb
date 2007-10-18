@@ -11,7 +11,6 @@ class Wx::App
     app_klass = Class.new(self)
     app_klass.class_eval do
       define_method(:on_init, &block)
-      end
     end
     the_app = app_klass.new
     the_app.main_loop
