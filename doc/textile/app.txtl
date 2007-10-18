@@ -1,20 +1,54 @@
 h1(#wxapp). Wx::App
 
-The *App* class represents the application itself. It is used
-to:
+The *App* class represents the whole GUI application itself. It is the
+container within which all GUI code runs. It is used to:
 
 * set and get application-wide properties;
-* implement the windowing system message or event loop;
-* initiate application processing via "App#on_init":app.html#App_oninit;
+* implement the windowing event loop to respond to user actions;
+* initiate the application via "App#on_init":app.html#App_oninit;
 * allow default processing of events not handled by other objects in the application.
 
-To define what the App should do when it starts, define a subclass of
-Wx::App, and describe what it should do (display frames, etc) within an
-@on_init@ method. THen create an instance of this class, and call its
-@main_loop@ method. All creation of "Windows":window.html,
-"Brushes":brush.html, "Pens":pen.html, "Colours":colours.html, and
-"Icons":icon.html must be done after the app has been started, by
-calling main_loop.
+h2. Running an app
+
+No GUI code can run before an App starts - all "Windows":window.html,
+"Frames":frame.html, "Brushes":brush.html, "Pens":pen.html,
+"Colours":colours.html, and "Icons":icon.html must be created after the
+app has been started, otherwise wxRuby will raise an
+exception. Therefore, a Wx::App is responsible for setting up the
+initial state of the application's windows. There are two ways to do
+this.
+
+The first, simpler way is just to use the "Wx::App.run":#App_run class
+method. Pass this method a block specifying how to set up the initial
+windows in the app; this code will run, and the App will then wait for
+the user to interact with the application:
+
+ Wx::App.run do 
+   f = Wx::Frame.new(nil, :title => 'basic app')
+   f.show
+ end
+
+The second way is appropriate for more complex applications. In this
+case, define a subclass of Wx::App, and describe what it should do
+on start up (display frames) within an @on_init@ method. Then create an
+instance of this class, and call its @main_loop@ method.
+
+ class MyApp < Wx::App
+   def on_init
+     f = Wx::Frame.new(nil, :title => 'basic app')
+     f.show
+   end
+ end
+ 
+ app = MyApp.new
+ app.main_loop
+
+This method is more suitable for complex apps because it allows you to
+define global custom methods and behaviours in the App class, and to
+override the default handling of events or exceptions using
+"filter_event":#App_filterevent or @rescue@.
+
+h2. Accessing the application instance
 
 Any wxRuby program will have a single instance of Wx::App, which can be
 accessed once the app has started by the constant @Wx::THE_APP@, or by
@@ -35,8 +69,7 @@ h2. See also
 h2. Methods
 
 * "App.new":#App_new
-* "App#argc":#App_argc
-* "App#argv":#App_argv
+* "App.run":#App_run
 * "App#dispatch":#App_dispatch
 * "App#exit_main_loop":#App_exitmainloop
 * "App#filter_event":#App_filterevent
@@ -73,28 +106,18 @@ h2. Methods
 </div>
 
 
-
 h3(#App_new). App.new
 
-  *destructor*()
+Creates a new Application, but does not run it; to start the
+and enter its event loop, call "main_loop":#App_mainloop on the
+instance.
 
-Destructor. Will be called implicitly on program exit if the App
-object is created on the stack.
+h3(#App_new). App.run
 
+ Wx::App.run { ... }
 
-h3(#App_argc). App#argc
-
-intargc
-
-Number of command line arguments (after environment-specific processing).
-
-
-h3(#App_argv). App#argv
-
-Char **argv
-
-Command line arguments (after environment-specific processing).
-
+Creates a new App and starts its main loop, using the code in the passed
+block to set up the initial state of the Windows.
 
 h3(#App_dispatch). App#dispatch
 
