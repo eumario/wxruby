@@ -249,10 +249,18 @@ h3(#Window_new). Window.new
 
   *Window.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
              %(arg-type)Point% pos = DEFAULT_POSITION, 
-             %(arg-type)Size% size = DEFAULT_SIZE,  %(arg-type)Integer% style = 0, 
-             %(arg-type)String% name = PanelNameStr)
+             %(arg-type)Size% size = DEFAULT_SIZE,  
+             %(arg-type)Integer% style = 0, 
+             %(arg-type)String% name = "") { ... }
 
-Constructs a window, which can be a child of a frame, dialog or any other non-control window.
+Constructs a window, which can be a child of a frame, dialog or any
+other non-"control":control.html window. All Windows apart from
+top-level main windows must have another window as parent - this
+argument cannot be @nil@.
+
+Any constructor for a Window can be passed a block; the newly created
+instance will be passed as an argument to this block, allowing further
+setup to be done to it.
 
 h4. Parameters
 
