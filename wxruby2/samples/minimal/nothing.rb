@@ -13,19 +13,9 @@ rescue LoadError => no_wx_err
   end
 end
 
-# This is a really really bare minimum frame and application
-class MyFrame < Wx::Frame
-  def initialize(title)
-    super(nil, -1, title)
-  end
+# This is the minimum code to start a WxRuby app - create a Frame, and
+# show it.
+Wx::App.run do 
+  frame = Wx::Frame.new(nil, :title => "Minimal wxRuby App")
+  frame.show
 end
-
-class NothingApp < Wx::App
-  def on_init
-    frame = MyFrame.new("Minimal wxRuby App")
-    frame.show
-    return true
-  end
-end
-
-NothingApp.new.main_loop
