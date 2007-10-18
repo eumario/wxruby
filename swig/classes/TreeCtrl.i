@@ -180,11 +180,24 @@ protected:
 %include "include/wxTreeCtrl.h"
 
 %extend wxTreeCtrl {
+
+  // The C++ interface uses a "cookie" to enable iteration over the
+  // children. This is clumsy, unrubyish and broken as of wxRuby 1.9.1
+  // so just return the first child TreeItemId. Iteration should then be
+  // possibel using get_next_sibling, as needed
+    VALUE get_first_child(const wxTreeItemId& item)
+    {
+      void* cookie = 0;
+      wxTreeItemId ret_item = self->GetFirstChild(item, cookie);
+      return TREEID2RUBY(ret_item);
+    }
+
   	// Change signature so it returns an array of the TreeItemId and the
 	// cookie, as Ruby Fixnums. This behaviour matches that used by
 	// wxPython.
-	VALUE get_first_child(const wxTreeItemId& item)
+	VALUE get_first_child_and_cookie(const wxTreeItemId& item)
 	{
+        rb_warn("TreeCtrl#get_first_child_and_cookie is deprecated");
 		void* cookie = 0;
 		wxTreeItemId ret_item = self->GetFirstChild(item, cookie);
 		VALUE array = rb_ary_new();			
@@ -197,6 +210,7 @@ protected:
 	
 	VALUE get_next_child(const wxTreeItemId& item, void* cookie)
 	{
+        rb_warn("TreeCtrl#get_next_child is deprecated");
 		wxTreeItemId ret_item = self->GetNextChild(item, cookie);
 		
 		VALUE array = rb_ary_new();			
