@@ -933,35 +933,24 @@ Sets the whole window style, deleting all items.
 
 h3(#ListCtrl_sortitems). ListCtrl#sort_items
 
- Boolean *sort_items*(%(arg-type)ListCtrlCompare% fnSortCallBack,  %(arg-type)Integer% data)
+ *sort_items*() { | a, b | ... }
 
-Call this function to sort the items in the list control. Sorting is done
-using the specified _fnSortCallBack_ function. This function must have the
-following prototype:
+Call this function to sort the items in the list control. Sorting is
+done according to the passed block, which should accept two
+arguments. This block will be called each time a pair of items is being
+compared; it will be passed the item data associated with the two items.
 
+The block should return 0 if the items are equal, a negative numeric
+value if the first item is less than the second one and a positive
+numeric value if the first one is greater than the second one. This is
+similar to the way that Ruby classes implementing the comparison
+operator "@<=>@" must work. In fact, ListCtrl#sort_items can be used simply by
+relying on that ruby method, if the item data in the control is of a
+suitable class (eg Numeric, String):
 
- int CALLBACK ListCompareFunction(long item1, long item2, long sortData)
- 
+ list_ctrl.sort_items { | a, b | a <=> b }
 
-It is called each time when the two items must be compared and should return 0
-if the items are equal, negative value if the first item is less than the
-second one and positive value if the first one is greater than the second one
-(the same convention as used by @qsort(3)@).
-
-h4. Parameters
-
-* _item1_ client data associated with the first item (*NOT* the index).
-* _item2_ client data associated with the second item (*NOT* the index).
-* _data_ the value passed to SortItems() itself.
-
-Notice that the control may only be sorted on client data associated with the
-items, so you *must* use "set_item_data":#ListCtrl_setitemdata if
-you want to be able to sort the items in the control.
-
-Please see the "listctrl sample":samplelistctrl.html for an example of
-using this function.
-
-
-
-
-
+Note that the control may only be sorted on item data associated with
+the items; the block is *not* passed the indexes of the
+items. Therefore, you *must* use "set_item_data":#ListCtrl_setitemdata
+if you want to be able to sort the items in the control.
