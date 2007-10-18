@@ -24,8 +24,13 @@ class MinimalFrame < Wx::Frame
     # The main application frame has no parent (nil)
     super(nil, :title => title, :size => [ 400, 300 ])
 
-    # PNG is a good choice for cross-platofrm icons
-    icon_file = File.join( File.dirname(__FILE__), 'mondrian.png')
+    # Different platforms use different file formats for a frame icon.
+    icon_type = case Wx::PLATFORM
+      when 'WXMSW' : 'ico'
+      when 'WXGTK', 'WXMAC' : 'png'
+    end 
+    icon_file = File.join( File.dirname(__FILE__), "mondrian.#{icon_type}")
+    # Although OS X doesn't have "Frame" icons, so this will have no effect
     self.icon = Wx::Icon.new(icon_file)
 
     menu_bar = Wx::MenuBar.new
