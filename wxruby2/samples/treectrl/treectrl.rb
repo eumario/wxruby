@@ -605,7 +605,7 @@ class MyTreeCtrl < Wx::TreeCtrl
 
     # for testing, prevent self item's label editing
     if is_test_item(event.item)
-      message_box("The demo prevents you editing this item.")
+      Wx::message_box("The demo prevents you editing this item.")
       event.veto()
     end
   end
@@ -620,7 +620,7 @@ class MyTreeCtrl < Wx::TreeCtrl
     # For a demo, don't allow anything except letters in the labels
     if event.label =~ /[^\w.]/
       msg = "Only letters, numbers and full stops are allowed in the label."
-      message_box(msg)
+      Wx::message_box(msg)
       Wx::log_message("Label edit was cancelled by demo")
       event.veto
     end
@@ -631,7 +631,7 @@ class MyTreeCtrl < Wx::TreeCtrl
 
     # for testing, prevent the user from collapsing the first child folder
     if is_test_item(event.item)
-      message_box("You can't collapse self item.")
+      Wx::message_box("You can't collapse self item.")
       event.veto
     end
   end
@@ -962,7 +962,7 @@ class MyFrame < Wx::Frame
 
   def check_item(item)
     unless item.nonzero?
-      message_box("Please select some item first!",
+      Wx::message_box("Please select some item first!",
                   "Tree sample error",
                   Wx::OK|Wx::ICON_EXCLAMATION, self)
       return false
