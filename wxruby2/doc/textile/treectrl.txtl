@@ -150,6 +150,7 @@ h2. Methods
 * "TreeCtrl#expand_all_children":#TreeCtrl_expandallchildren
 * "TreeCtrl#get_bounding_rect":#TreeCtrl_getboundingrect
 * "TreeCtrl#get_buttons_image_list":#TreeCtrl_getbuttonsimagelist
+* "TreeCtrl#get_children":#TreeCtrl_getchildren
 * "TreeCtrl#get_children_count":#TreeCtrl_getchildrencount
 * "TreeCtrl#get_count":#TreeCtrl_getcount
 * "TreeCtrl#get_edit_control":#TreeCtrl_geteditcontrol
@@ -164,7 +165,6 @@ h2. Methods
 * "TreeCtrl#get_item_text":#TreeCtrl_getitemtext
 * "TreeCtrl#get_item_text_colour":#TreeCtrl_getitemtextcolour
 * "TreeCtrl#get_last_child":#TreeCtrl_getlastchild
-* "TreeCtrl#get_next_child":#TreeCtrl_getnextchild
 * "TreeCtrl#get_next_sibling":#TreeCtrl_getnextsibling
 * "TreeCtrl#get_next_visible":#TreeCtrl_getnextvisible
 * "TreeCtrl#get_item_parent":#TreeCtrl_getitemparent
@@ -427,11 +427,6 @@ Notice that the rectangle coordinates are logical, not physical ones. So, for
 example, the x coordinate may be negative if the tree has a horizontal
 scrollbar and its position is not $0$.
 
-
-
-
-
-
 h3(#TreeCtrl_getbuttonsimagelist). TreeCtrl#get_buttons_image_list
 
  "ImageList":imagelist.html *get_buttons_image_list*()
@@ -440,15 +435,20 @@ Returns the buttons image list (from which application-defined button images are
 
 This function is only available in the generic version.
 
+h3(#TreeCtrl_getchildren). TreeCtrl#get_children
+
+ Array *get_children*(%(arg-type)TreeItemId% item)
+
+Returns all of the children of the item as an Array of Tree Item Ids.
 
 h3(#TreeCtrl_getchildrencount). TreeCtrl#get_children_count
 
- unsigned int *get_children_count*(%(arg-type)TreeItemId% item, 
+ Integer *get_children_count*(%(arg-type)TreeItemId% item, 
                                  %(arg-type)Boolean% recursively = @true@)
 
-Returns the number of items in the branch. If _recursively_ is @true@, returns the total number
-of descendants, otherwise only one level of children is counted.
-
+Returns the number of items in the branch. If _recursively_ is @true@,
+returns the total number of descendants, otherwise only one level of
+children is counted.
 
 h3(#TreeCtrl_getcount). TreeCtrl#get_count
 
@@ -469,28 +469,11 @@ if no label is being edited.
 
 h3(#TreeCtrl_getfirstchild). TreeCtrl#get_first_child
 
- "TreeItemId":treeitemid.html *get_first_child*(%(arg-type)TreeItemId% item, 
-                              %(arg-type)TreeItemIdValue% cookie)
+ "TreeItemId":treeitemid.html *get_first_child*(%(arg-type)TreeItemId% item)
 
-Returns the first child; call "TreeCtrl#get_next_child":treectrl.html#TreeCtrl_getnextchild for the next child.
-
-For this enumeration function you must pass in a `cookie' parameter
-which is opaque for the application but is necessary for the library
-to make these functions reentrant (i.e. allow more than one
-enumeration on one and the same object simultaneously). The cookie passed to
-get_first_child and "get_next_child":treectrl.html#TreeCtrl_getnextchild should be the same variable.
-
-Returns an invalid tree item (i.e. is_ok() returns @false@) if there are no further children.
-
-h4. See also
-
-"TreeCtrl#get_next_child":treectrl.html#TreeCtrl_getnextchild,
-"TreeCtrl#get_next_sibling":treectrl.html#TreeCtrl_getnextsibling
-
-
-
-
-
+Returns the id of the first child of an item. Returns @0@ if the item
+has no children. Use  "get_next_child":#TreeCtrl_getnextchild, to
+iterate through the remaining children.
 
 h3(#TreeCtrl_getfirstvisibleitem). TreeCtrl#get_first_visible_item
 
@@ -578,30 +561,6 @@ h4. See also
 "get_first_child":#TreeCtrl_getfirstchild,
 "TreeCtrl#get_next_sibling":treectrl.html#TreeCtrl_getnextsibling,
 "get_last_child":#TreeCtrl_getlastchild
-
-
-h3(#TreeCtrl_getnextchild). TreeCtrl#get_next_child
-
- "TreeItemId":treeitemid.html *get_next_child*(%(arg-type)TreeItemId% item, 
-                             %(arg-type)TreeItemIdValue% cookie)
-
-Returns the next child; call "TreeCtrl#get_first_child":treectrl.html#TreeCtrl_getfirstchild for the first child.
-
-For this enumeration function you must pass in a `cookie' parameter
-which is opaque for the application but is necessary for the library
-to make these functions reentrant (i.e. allow more than one
-enumeration on one and the same object simultaneously). The cookie passed to
-"get_first_child":treectrl.html#TreeCtrl_getfirstchild and get_next_child should be the same.
-
-Returns an invalid tree item if there are no further children.
-
-h4. See also
-
-"TreeCtrl#get_first_child":treectrl.html#TreeCtrl_getfirstchild
-
-
-
-
 
 
 h3(#TreeCtrl_getnextsibling). TreeCtrl#get_next_sibling
