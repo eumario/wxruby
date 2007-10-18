@@ -29,6 +29,9 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 %ignore wxListCtrl::GetItemData;
 %ignore wxListCtrl::SetItemData;
 
+// dealt with specially below
+%ignore wxListCtrl::SortItems;
+
 // Not described in the docs as being Windows-only, but doesn't seem to
 // appear in GTK wx headers, so causes a compile error
 #if !defined(__WXMSW__)
@@ -45,6 +48,19 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 
 // required for hit_test, return flags as second part of array return value
 %apply int *OUTPUT { int& flags }
+
+// Helper code for SortItems - yields the two items being compared into
+// the associated block, and get an integer return value
+%{
+  int wxListCtrl_SortByYielding(long item1, long item2, long data)
+  {
+    VALUE items = rb_ary_new();
+    rb_ary_push(items, (VALUE)item1);
+    rb_ary_push(items, (VALUE)item2);
+    VALUE the_order = rb_yield(items);
+    return NUM2INT(the_order);
+  }
+%}
 
 
 
@@ -87,6 +103,11 @@ GC_MANAGE_AS_WINDOW(wxListCtrl);
 	  return Qtrue;
 	return Qnil;
   }	
+  
+  void sort_items()
+  {
+    self->SortItems(wxListCtrl_SortByYielding, 0);
+  }
 }
 
 %markfunc wxListCtrl "mark_wxListCtrl";
