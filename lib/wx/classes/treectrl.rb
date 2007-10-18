@@ -4,4 +4,15 @@ class Wx::TreeCtrl
   include Enumerable
   # Iterate over all items
   alias :each :traverse
+
+  # Return the children of +parent+ as an array of TreeItemIDs.
+  def get_children(parent)
+    kids = [ get_first_child(parent) ]
+    return [] if kids[0].nil?
+
+    while kid = get_next_sibling(kids.last)
+      kids << kid
+    end
+    kids
+  end
 end
