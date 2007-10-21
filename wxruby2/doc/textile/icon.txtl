@@ -131,10 +131,12 @@ Its meaning is determined by the _flags_ parameter.
 |BITMAP_TYPE_XPM|Load an XPM bitmap file.|
 
 
-The validity of these flags depends on the platform and Widgets configuration.
-If all possible Widgets settings are used, the Windows platform supports ICO file, ICO resource,
-XPM data, and XPM file. Under GTK, the available formats are BMP file, XPM data, XPM file, and PNG file.
-Under Motif, the available formats are XBM data, XBM file, XPM data, XPM file.
+The validity of these flags depends on the platform and Widgets
+configuration.  If all possible Widgets settings are used, the Windows
+platform supports ICO file, ICO resource, XPM data, XPM file and PNG
+file. Under GTK, the available formats are BMP file, XPM data, XPM file,
+and PNG file. For cross-platform reliability, ensure that the second
+argument specifying the type is given. 
 
 h4. Remarks
 
