@@ -38,6 +38,8 @@ h2(#top). Outline
 * "Online help":#online_help
 * "Miscellaneous":#misc
 
+See also the list of "wxRuby module functions":wx_functions.html.
+
 h2(#window). Window
 
 Anything painted on the screen in wxRuby is a Window. This includes
