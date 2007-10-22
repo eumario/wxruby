@@ -71,12 +71,6 @@ static VALUE get_app(VALUE self)
   return rb_const_get(mWxruby2, rb_intern("THE_APP"));
 }
 
-static VALUE
-wx_yield(VALUE self)
-{
-    return (wxYield() ? Qtrue : Qfalse);
-}
-
 static VALUE 
 xrcid(VALUE self,VALUE str_id)  
 {
@@ -109,18 +103,13 @@ xrcid(VALUE self,VALUE str_id)
 void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
 void wxEndBusyCursor();
 void wxBell();
-bool wxYield();
 
-void wxInitAllImageHandlers();
-
-wxString wxGetCwd();
 wxString wxGetEmailAddress();
 wxString wxGetHostName();
 wxString wxGetFullHostName();
 wxString wxGetUserId();
 wxString wxGetUserName();
 wxString wxGetHomeDir();
-void wxSetWorkingDirectory(const wxString &);
 
 bool wxGetKeyState(wxKeyCode key);
 
@@ -168,9 +157,7 @@ wxString wxFileSelector(const wxString& message,
 						int y = -1);
 
 int wxDisplayDepth();
-void wxDisplaySize(int *width, int *height);
 wxSize wxGetDisplaySize();
-void wxDisplaySizeMM(int *width, int *height);
 wxSize wxGetDisplaySizeMM();
 
 %init %{
