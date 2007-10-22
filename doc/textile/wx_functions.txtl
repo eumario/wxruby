@@ -1,0 +1,52 @@
+h1(#wx_functions). WxRuby module functions
+
+Most of the functionality in wxRuby is provided through classes, but
+there are a number of useful functions provided within the Wx:: module.
+
+h2. See also
+
+"App":app.html, 
+"Locale":locale.html
+
+<div id="methods">
+
+h2. Methods
+
+h3. Miscellaneous methods
+
+* "Wx::begin_busy_cursor":#Functions_beginbusycursor
+* "Wx::end_busy_cursor":#Functions_endbusycursor
+* "Wx::bell":#Functions_bell
+* "Wx::get_app":#Functions_getapp
+* "Wx::get_key_state":#Functions_getkeystate
+* "Wx::xrcid":#Functions_xrcid
+
+h3. Dialog shortcut methods
+
+* "Wx::file_selector":#Functions_fileselector
+* "Wx::message_box":#Functions_messagebox
+* "Wx::get_multiple_choices":#Functions_getmultiplechoices
+* "Wx::get_number_from_user":#Functions_getnumberfromuser
+* "Wx::get_text_from_user":#Functions_gettextfromuser
+* "Wx::get_password_from_user":#Functions_getpasswordfromuser
+
+h3. Logging methods                        
+
+* "Wx::log_message":#Functions_logmessage
+* "Wx::log_warning":#Functions_logwarning
+* "Wx::log_error":#Functions_logerror
+* "Wx::log_status":#Functions_logstatus
+
+h3. System information methods
+
+* "Wx::get_email_address":#Functions_getemailaddress
+* "Wx::get_host_name":#Functions_gethostname
+* "Wx::get_full_host_name":#Functions_getfullhostname
+* "Wx::get_user_id":#Functions_getuserid
+* "Wx::get_home_dir":#Functions_gethomedir
+
+h3. Display information methods
+
+* "Wx::display_depth":#Functions_displaydepth
+* "Wx::get_display_size":#Functions_displaysize
+* "Wx::get_display_size_mm":#Functions_displaysize
