@@ -18,9 +18,7 @@ wxruby version 2.0.
 
   Windows NT/2000/XP/Vista (i686)
   OS X 10.3+ (i686 and PowerPc)
-  Linux (i686)
-
-  Work is ongoing to support 64-bit processors on Linux. 
+  Linux (i686 + AMD-64)
 
   It is unlikely that support for old Windows OS's (3.1, 95, 98, ME)
   will be added to wxRuby2 in the near future, as these operating
@@ -78,15 +76,13 @@ wxruby version 2.0.
 	 
 - Is wxruby2 ready for "production" use?
 
-   No - not quite - but it's getting close and you're invited to give it
-   a try. It is currently a beta release, which fixes many or most of
-   the memory leaks and crashes in earlier "preview" version of
-   wxruby2. This release also includes all the classes and features that
-   are proposed for inclusion in wxruby 2.0.
+  Yes, pretty much. This is a beta release, and there may be some bugs
+  in some methods, or memory leaks. This release includes all the
+  classes and features that are proposed for inclusion in wxruby 2.0.
 
-   It is considerably more stable and fully-featured than the old 0.6.0
-   release, which was never really stable enough for heavy-duty
-   production use.
+  It is considerably more stable and fully-featured than the old 0.6.0
+  release, which was never really stable enough for heavy-duty
+  production use.
    
 - Does wxruby2 support the Xxx class?
 
@@ -101,30 +97,16 @@ wxruby version 2.0.
   and is more appropriate for compiled code. wxruby2 is available under a 
   *very* simple MIT-style license, which allows just about any use with 
   very few restrictions.
-  
-- The API doesn't seem very Ruby-like
-
-   The current API is basically a straight port of the wxWidgets C++ 
-   interface. Well, actually it has several of the same adjustments 
-   that wxPython also had to adopt due to language constraints. This 
-   interface is a bit clumsy in spots, thanks to its long history.
-   
-   Over time, we plan to create a Ruby-specific layer on top of the
-   basic wx API, similar to what FXRuby has done for FOX. This enhanced
-   API will be simpler to use, and will be oriented toward the 'Ruby
-   Way'. We have created the WxSugar sub-project as a testing ground for
-   syntax extensions and improvements; this is a pure-ruby project, and
-   can be used on top of wxruby2 (or wxruby 0.6.0).
    
 - I am getting an error trying to compile wxruby2
 
-  Please double-check the requirements. You may be using the wrong 
-  version of SWIG, wxWidgets, or some other tool. 
+  Please double-check the requirements. You may be using the wrong
+  version of SWIG, wxWidgets, or some other tool. Double-check the
+  instructions on the wxRuby wiki (http://wxruby.rubyforge.org/)
   
   If you need help, please ask your question on the wxruby mailing list 
-  (see the link at http://wxruby.org). Next best would be posting a 
-  support request to the 
-  
+  (see the link at http://wxruby.org). 
+
 - I am getting an error trying to run any wxruby2 application, such as 
   the samples that are included in the gem.
   
@@ -164,19 +146,14 @@ For more details, see the project home page:
 ------------------------USING WXRUBY---------------------------
 INSTALLING:
 
-Starting with the 0.0.35-preview release, wxRuby is available as binary
-gems for MS Windows, Mac OS X, and Linux with GTK+ 2. Unless you wish to
-work on wxRuby itself, we strongly recommend installing the gem rather
-than building from source.
-
-
+wxRuby is available as binary gems for MS Windows, Mac OS X, and Linux
+with GTK+ 2. Unless you wish to work on wxRuby itself, we strongly
+recommend installing the gem rather than building from source.
 
 REQUIREMENTS TO CREATE AND RUN WXRUBY APPS:
 
 - Ruby 1.8
-- MS Windows, Mac OS X, or Linux with GTK+ 2, 
-
-
+- MS Windows NT/2000/XP/Vista, Mac OS X 10.3+, or Linux with GTK+ 2, 
 
 SAMPLES:
 
@@ -229,27 +206,18 @@ API DIFFERENCES FROM WXWIDGETS:
   wxPerl), adjusting certain method calls when the C++ style doesn't fit 
   dynamic languages.
 - Since initialize is reserved in ruby, use SplitterWindow#init instead.
-- Uninitialized client data will have the value (false), 
-  not (nil). This is a change from wxRuby 0.3 and earlier.
 - Many wx classes have not been wrapped because native ruby classes work 
   as well or better. These include wxDateTime, wxString, networking 
   classes, database classes.
 - log_message and log_status take a single string parameter, 
   rather than a format string followed by additional values 
-  to be inserted.
+  to be inserted. Use Ruby's sprintf if required.
 - ScreenDC extends DC on all platforms, unlike in C++ wx. 
   This means that you cannot override any virtual methods that were 
   defined in PaintDC or WindowDC in a ruby subclass of ScreenDC.
   [Need to verify if this is still true]
 - BusyCursor can be used in a Ruby block to ensure the original cursor 
   is always restored.
-  
-The core wxRuby project is focussed on providing a mostly
-straightforward port of the C++ library. If you're interested in a more
-"ruby-ish" API for writing GUI code, the related "wxSugar" project is a
-set of higher-level pure-ruby wrappers for exactly this purpose. See the
-wxruby website for more information.
-
 
 ----------------------COMPILING WXRUBY--------------------------
 REQUIREMENTS TO COMPILE/BUILD WXRUBY ITSELF
@@ -257,7 +225,7 @@ REQUIREMENTS TO COMPILE/BUILD WXRUBY ITSELF
 - rake 
 - SWIG, version 1.3.31. SWIG 1.3.29 or later may work; earlier version 
   definitely won't
-- wxWidgets 2.8.3 SDK. See further information on the wxruby website for
+- wxWidgets 2.8.x SDK. See further information on the wxruby website for
   recommended compile-time options for wxWidgets.
 
 
