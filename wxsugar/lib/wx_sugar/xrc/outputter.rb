@@ -85,7 +85,13 @@ class <%= fq_name(klass.sub_class) %> < <%= klass.superclass %>
 
     finder = lambda do | x | 
       int_id = Wx::xrcid(x)
-      Wx::Window.find_window_by_id(int_id, self) || int_id
+      begin
+        Wx::Window.find_window_by_id(int_id, self) || int_id
+      # Temporary hack to work around regression in 1.9.2; remove
+      # begin/rescue clause in later versions
+      rescue RuntimeError
+        int_id
+      end
     end
     <% klass.controls.each do | ctrl | %>
     @<%= ctrl.name.downcase %> = finder.call("<%= ctrl.name %>")<% if ctrl.sub_class %>
