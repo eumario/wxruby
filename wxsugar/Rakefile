@@ -40,12 +40,18 @@ task :gem do
     # REQUIREMENTS
     s.required_ruby_version = '>= 1.8.1'  
 
-    s.files = FileList[ 'lib/**/*', 
+    s.files = FileList[ 'bin/**/*',
+                        'lib/**/*', 
                         'samples/**/*',
                         'LICENCE' ].to_a
 
     # LIBRARIES
     s.require_path = 'lib'
+
+    # Add XRCise tool as an executable
+    s.bindir = 'bin'
+    s.executables << 'xrcise'
+
     s.has_rdoc = true
   end
   Gem.manage_gems
@@ -57,6 +63,7 @@ Rake::PackageTask.new('wx_sugar', WXSUGAR_VERSION) do | p_task |
   pkg_files = p_task.package_files
   pkg_files.include('Rakefile')
   pkg_files.include('LICENCE')
+  pkg_files.include('bin/**/*')
   pkg_files.include('lib/**/*')
   pkg_files.include('samples/**/*')
 end
