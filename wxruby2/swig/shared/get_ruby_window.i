@@ -18,11 +18,12 @@
 %{
 static VALUE get_ruby_window_wrapper(wxObject *wx_obj)
 {
-  // If the object is bad - could be that no window matched the id, or
-  // that an error arose from incorrect XML syntax
+  // If no object was passed to be wrapped; this could be a normal state
+  // (eg if get_sizer was called on a Window with no sizer set), or
+  // could be an error, eg if calling get_window_by_id and no window
+  // matched the id, or an error arose from incorrect XML syntax
   if ( ! wx_obj ) 
-    rb_raise(rb_eRuntimeError,
-             "Nil cannot be wrapped as a Wx::Window; check for XRC errors or incorrect ids");
+    return Qnil;
 
   // Get the wx class and the ruby class we are converting into  
   wxString class_name( wx_obj->GetClassInfo()->GetClassName() );
