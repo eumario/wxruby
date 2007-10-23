@@ -64,13 +64,15 @@ module Arranger
   def current_sizer()
     if @current_sizer
       return @current_sizer 
-    elsif sizer = self.get_sizer
-      return sizer
     else
-      @current_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
-      self.set_sizer(@current_sizer)
-      @current_sizer
+      begin 
+        return self.get_sizer
+      rescue RuntimeError
+      end
     end
+    @current_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
+    self.set_sizer(@current_sizer)
+    @current_sizer
   end
   
   # Set the main or current sizer of this container window to be
