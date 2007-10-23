@@ -15,6 +15,10 @@ win_classes.flatten.each do | klass |
   # Returns a Proc object that when called with a single argument,
   # +parent+, will return a new widget constructed according to +args+ 
   def klass.[](*args)
+    # Deal with id parameter if none specified
+    if self.param_spec[0].name == :id and not args[0].kind_of?(Fixnum)
+      args.unshift(-1)
+    end
     lambda { | parent | new(parent, *args) }
   end
 
