@@ -13,21 +13,19 @@ class Wx::Grid
   # The code below stores Ruby redefines all methods that may
   # potentially set an Editor or Renderer, and stores a reference to
   # it in an instance variable, so they are not disposed of up when GC sweeps.
-  wx_init = self.instance_method(:initialize)
-  define_method(:initialize) do | *args |
-    wx_init.bind(self).call(*args)
-    @__default_editor   = nil
-    @__default_renderer = nil
-
-    @__cell_editors   = []
-    @__cell_renderers = []
-
-    @__col_renderers = []
-    @__col_editors   = []
-    @__row_renderers = []
-    @__row_editors   = []
-  end
   
+  # These all need to be set up as private methods which default to an
+  # array. This can't be done in initialize b/c that may not be called
+  # when a Grid is loaded from XRC
+  %w| __cell_editors   __col_editors   __row_editors
+      __cell_renderers __col_renderers __row_renderers |.each do | meth |
+    define_method(meth) do
+      instance_variable_get("@#{meth}") || 
+        instance_variable_set("@#{meth}", [])
+    end
+    private meth
+  end
+
   # store default editor
   wx_set_default_editor = self.instance_method(:set_default_editor)
   define_method(:set_default_editor) do | editr |
@@ -46,38 +44,39 @@ class Wx::Grid
   wx_set_cell_editor = self.instance_method(:set_cell_editor)
   define_method(:set_cell_editor) do | row, col, editr |
     wx_set_cell_editor.bind(self).call(row, col, editr)
-    @__cell_editors[row] ||= []
-    @__cell_editors[row][col] = editr
+    __cell_editors[row] ||= []
+    __cell_editors[row][col] = editr
    end
 
   # store cell renderer
   wx_set_cell_renderer = self.instance_method(:set_cell_renderer)
   define_method(:set_cell_renderer) do | row, col, rendr |
     wx_set_cell_renderer.bind(self).call(row, col, rendr)
-    @__cell_renderers[row] ||= []
-    @__cell_renderers[row][col] = rendr
+    __cell_renderers[row] ||= []
+    __cell_renderers[row][col] = rendr
   end
 
+  # Store an editor and/or renderer for a whole column
   wx_set_col_attr = self.instance_method(:set_col_attr)
   define_method(:set_col_attr) do | col, attr |
     wx_set_col_attr.bind(self).call(col, attr)
     if attr.has_editor
-      @__col_editors[col] = attr.get_editor(self, 0, col)
+      __col_editors[col] = attr.get_editor(self, 0, col)
     end
     if attr.has_renderer
-      @__col_renderers[col] = attr.get_renderer(self, 0, col)
+      __col_renderers[col] = attr.get_renderer(self, 0, col)
     end
   end  
 
+  # Store an editor and/or renderer for a whole row
   wx_set_row_attr = self.instance_method(:set_row_attr)
   define_method(:set_row_attr) do | row, attr |
     wx_set_row_attr.bind(self).call(row, attr)
     if attr.has_editor
-      @__row_editors[row] = attr.get_editor(self, row, 0)
+      __row_editors[row] = attr.get_editor(self, row, 0)
     end
-
     if attr.has_renderer
-      @__row_renderers[row] = attr.get_renderer(self, row, 0)
+      __row_renderers[row] = attr.get_renderer(self, row, 0)
     end
   end  
 
@@ -87,44 +86,44 @@ class Wx::Grid
   alias :__insert_rows :insert_rows
   def insert_rows(pos = 0, num = 1, update_labels = true)
     __insert_rows(pos, num, update_labels)
-    num.times { @__row_editors.insert(pos, nil) }
-    num.times { @__row_renderers.insert(pos, nil) }
-    num.times { @__cell_editors.insert(pos, []) }
-    num.times { @__cell_renderers.insert(pos, []) }
+    num.times { __row_editors.insert(pos, nil) }
+    num.times { __row_renderers.insert(pos, nil) }
+    num.times { __cell_editors.insert(pos, []) }
+    num.times { __cell_renderers.insert(pos, []) }
   end
   
   alias :__insert_cols :insert_cols
   def insert_cols(pos = 0, num = 1, update_labels = true)
     __insert_cols(pos, num, update_labels)
-    num.times { @__col_editors.insert(pos, nil) }
-    num.times { @__col_renderers.insert(pos, nil) }
+    num.times { __col_editors.insert(pos, nil) }
+    num.times { __col_renderers.insert(pos, nil) }
     num.times do
-      @__cell_editors.map { | col | col.insert(pos, []) if col }
+      __cell_editors.map { | col | col.insert(pos, []) if col }
     end
     num.times do
-      @__cell_renderers.map { | col | col.insert(pos, []) if col }
+      __cell_renderers.map { | col | col.insert(pos, []) if col }
     end
   end
 
   alias :__delete_rows :delete_rows
   def delete_rows(pos = 0, num = 1, update_labels = true)
     __delete_rows(pos, num, update_labels)
-    @__row_editors.slice!(pos, num)
-    @__row_renderers.slice!(pos, num)
-    @__cell_editors.slice!(pos, num)
-    @__cell_renderers.slice!(pos, num)
+    __row_editors.slice!(pos, num)
+    __row_renderers.slice!(pos, num)
+    __cell_editors.slice!(pos, num)
+    __cell_renderers.slice!(pos, num)
   end
  
   alias :__delete_cols :delete_cols
   def delete_cols(pos = 0, num = 1, update_labels = true)
     __delete_cols(pos, num, update_labels)
-    @__col_editors.slice!(pos, num)
-    @__col_renderers.slice!(pos, num)
+    __col_editors.slice!(pos, num)
+    __col_renderers.slice!(pos, num)
     num.times do
-      @__cell_editors.map { | col | col.slice!(pos, num) if col }
+      __cell_editors.map { | col | col.slice!(pos, num) if col }
     end
     num.times do
-      @__cell_renderers.map { | col | col.slice!(pos, num) if col }
+      __cell_renderers.map { | col | col.slice!(pos, num) if col }
     end
   end
 end
