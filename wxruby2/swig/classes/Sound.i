@@ -10,10 +10,9 @@ GC_MANAGE_AS_OBJECT(wxSound);
 #include <wx/sound.h>
 %}
 
-// disambiguate static method from instance method, otherwise SWIG gets
-// confused and only wraps the static method
-%rename(PlaySound) wxSound::Play(const wxString& filename, 
-								 unsigned flags = wxSOUND_ASYNC);
+// SWIG gets confused and only wraps the static method; easier to create
+// to the shortcut method in lib/wx/classes/sound.rb
+%ignore wxSound::Play(const wxString& filename, unsigned flags = wxSOUND_ASYNC);
 
 #define wxSOUND_SYNC  0
 #define wxSOUND_ASYNC 1
