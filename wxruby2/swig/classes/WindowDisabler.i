@@ -3,24 +3,19 @@
 
 %include "../common.i"
 
-%module(directors="1") wxWindowDisabler
+%module wxWindowDisabler
 GC_MANAGE(wxWindowDisabler);
-%feature("nodirector") wxWindowDisabler;
-
-%{
-//NO_DIRECTOR
-%}
 
 %ignore wxWindowDisabler::wxWindowDisabler;
 
 %include "include/wxWindowDisabler.h"
 
 %extend wxWindowDisabler {
-  static void disable(wxWindow *parent = NULL)
+  static void disable(wxWindow *to_skip = NULL)
   {
     if (rb_block_given_p())
     {
-      wxWindowDisabler disabler(parent);
+      wxWindowDisabler disabler(to_skip);
       rb_yield(Qnil);
     }
     return ;
