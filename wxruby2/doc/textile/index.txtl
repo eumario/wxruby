@@ -427,6 +427,7 @@ h2(#misc). Miscellaneous
 |Log|Base class for logging|
 |LogTextCtrl|A TextCtrl that displays application log messages|
 |Process|Process class|
+|Sound|Play simple sounds from Windows WAV files|
 |Timer|Timer class|
 |TaskBarIcon|Icon that appears in the task bar, system tray or dock, and can have a popup menu|
 |StopWatch|Stop watch class|
