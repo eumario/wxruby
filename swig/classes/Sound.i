@@ -10,6 +10,8 @@ GC_MANAGE_AS_OBJECT(wxSound);
 #include <wx/sound.h>
 %}
 
+%ignore wxSound::Create;
+
 // SWIG gets confused and only wraps the static method; easier to create
 // to the shortcut method in lib/wx/classes/sound.rb
 %ignore wxSound::Play(const wxString& filename, unsigned flags = wxSOUND_ASYNC);
