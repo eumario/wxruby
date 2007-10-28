@@ -1,3 +1,32 @@
+h1. Wx::GridCellRenderer
+
+This class and its subclasses are responsible for actually drawing the
+cell in the grid. You may pass instances of this class as arguments to
+"Grid":grid.html or "GridCellAttr":gridcellattr.html to specify a
+renderer to be used by a single cell, a row, a column, or the whole
+grid, using "grid#set_default_renderer":grid.html#Grid_setdefaultrenderer
+
+As well as predefined renderers for displaying numbers, text and so
+forth, completely custom subclasses can be defined to draw arbitrary
+content in grid cells, including text and graphics. To define your own
+renderer, inherit from one of the predefined classes (for example,
+"GridCellStringRenderer":gridcellstringrenderer.html, and define your
+own "draw":#GridCellRenderer_draw method. Among the arguments passed to
+draw is a "DC":dc.html which can be used for drawing. Note that it is
+not possible to inherit directly from this class.
+
+This example draws the text content normally, with a red diagonal line
+running through the cell:
+
+  class MyGridCellRenderer < Wx::GridCellStringRenderer
+    def draw(grid, attr, dc, rect, row, col, is_selected)
+      super(grid, attr, dc, rect, row, col, is_selected)
+      dc.pen = Wx::RED_PEN
+      dc.draw_line(rect.left, rect.top, rect.right, rect.bottom)
+    end
+  end
+
+
 h2. Derived from
 
 GridCellWorker
