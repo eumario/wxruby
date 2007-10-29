@@ -127,11 +127,11 @@ class MyClientFrame < SocketGUI
   # the timer to be running, so we stop that as well.
   def disconnect()
     return if @socket.nil?
+		Thread.kill(@thread) unless @thread.nil?
     @socket.send_packet("QUIT")
     @socket.close()
     @socket = nil
     @timer.stop
-    Thread.kill(@thread) unless @thread.nil?
     get_menu_bar.enable(ID_CONNECT,true)
     get_menu_bar.enable(ID_DISCONNECT,false)
   end
@@ -205,7 +205,10 @@ class MyClientFrame < SocketGUI
     when /\/nick/
       on_name
     when /\/exit/
-      self.close
+			self.close
+		when /\/eval/
+			evl_str = msg[5..-1]
+			append_prog_msg(self.instance_eval(evl_str).inspect)
     when /\/me/
       append_msg("<-- #{@nick} #{msg[4..-1]}")
       msg = "EMOTE " + msg[4..-1]
@@ -229,25 +232,51 @@ class MyClientFrame < SocketGUI
       @mutex.lock
       ret = IO::select(nil,[@socket],[@socket],0.3)
       unless ret.nil?
-        unless ret[2] == []
-          # We have an error
-          error = nil
-          begin
-            @socket.connect(Socket.sockaddr_in(@port,@host))
-          rescue => e
-            error = e
-          end
-          append_error("Error attempting to connect to #{@host}:#{@port}")
-          append_error("Message: #{e} (#{e.class})")
-          @mutex.unlock
-          @socket.close()
-          @socket = nil
-          get_menu_bar.enable(ID_CONNECT,true)
-          get_menu_bar.enable(ID_DISCONNECT,false)
-          @timer.stop()
-          Thread.kill(@thread)
-          return
-        end
+				if Wx::PLATFORM == "WXMSW"
+					unless ret[2] == []
+						# We have an error
+						error = nil
+						begin
+							error = @socket.connect(Socket.sockaddr_in(@port,@host))
+						rescue => e
+							error = e
+						end
+						append_error("Error attempting to connect to #{@host}:#{@port}")
+						append_error("Message: #{e} (#{e.class})")
+						@mutex.unlock
+						@socket.close()
+						@socket = nil
+						get_menu_bar.enable(ID_CONNECT,true)
+						get_menu_bar.enable(ID_DISCONNECT,false)
+						@timer.stop()
+						Thread.kill(@thread)
+						@thread.exit
+						return
+					end
+				else # For WXGTK and WXMAC
+					# Since on WXGTK and WXMAC doesn't return the error part in ret, we need
+					# to check and see if we are connected.
+					error = nil
+					begin
+						error = @socket.connect(Socket.sockaddr_in(@port,@host))
+					rescue => e
+						error = e
+					end
+					if error.class != Fixnum && !error.nil?
+						# We're not connected!
+						append_error("Error attempting to connect to #{@host}:#{@port}")
+						append_error("Message: #{e} (#{e.class})")
+						@mutex.unlock
+						@socket.close()
+						@socket = nil
+						get_menu_bar.enable(ID_CONNECT,true)
+						get_menu_bar.enable(ID_DISCONNECT,false)
+						@timer.stop()
+						Thread.kill(@thread)
+						@thread.exit
+						return
+					end
+				end
         append_prog_msg("Connected to #{@host}:#{@port}")
         get_menu_bar.enable(ID_CONNECT,false)
         get_menu_bar.enable(ID_DISCONNECT,true)
@@ -323,6 +352,7 @@ class MyClientFrame < SocketGUI
           @socket = nil
           @timer.stop
           @mutex.unlock
+					@thread.exit
           break
         end
         msg = @socket.recv_packet()
@@ -356,6 +386,7 @@ end
 
 class MySocketApp < Wx::App
   def on_init
+		Thread.abort_on_exception = true
     frame = MyClientFrame.new(nil,-1,"Socket Demo >> Client")
     frame.show
   end
