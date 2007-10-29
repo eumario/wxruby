@@ -65,7 +65,7 @@ class MyClientFrame < SocketGUI
   def on_init()
     @nick = "Client"
     @port = "1234"
-    @addr = "localhost"
+    @addr = $LOCALHOST_NAME
     @mutex = Mutex.new
     @buffer = ""
     @timer = Wx::Timer.new(self,ID_TIMER_POLL)
@@ -97,7 +97,7 @@ class MyClientFrame < SocketGUI
       Wx::message_box("You are already connected to a server!","Connect to...",Wx::ID_OK|Wx::ICON_ERROR)
       return
     end
-    msgbox = Wx::TextEntryDialog.new(self,"Enter the server you wish to connect to: (Default: localhost:1234)",
+    msgbox = Wx::TextEntryDialog.new(self,"Enter the server you wish to connect to: (Default: #{$LOCALHOST_NAME}:1234)",
                                       "Connect to server",@addr + ":" + @port.to_s)
     ret = msgbox.show_modal
     if ret == Wx::ID_CANCEL

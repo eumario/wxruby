@@ -1,6 +1,12 @@
 # wxRuby2 Sample Code. Copyright (c) 2007-???? Mario J. Steele
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
 
+if /darwin/ =~ RUBY_PLATFORM
+  $LOCALHOST_NAME = "127.0.0.1"
+else
+  $LOCALHOST_NAME = "localhost"
+end
+
 class SocketGUI < Wx::Frame
   @@constants = []
 
@@ -68,7 +74,7 @@ class SocketGUI < Wx::Frame
     @output.append_text(msg)
     @output.thaw
     c, el = @output.position_to_xy(@output.get_last_position)
-    @output.scroll_lines((el-sl)+2)
+    @output.scroll_lines((el-sl)+2) unless sl == nil || el == nil
   end
   
   def append_prog_msg(msg)

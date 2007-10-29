@@ -99,7 +99,7 @@ class MyServerFrame < SocketGUI
     end
     @port = mbox.get_value.to_i
     @socket = Socket.new(AF_INET,SOCK_STREAM,0)
-    @socket.bind(Socket.sockaddr_in(@port,"localhost"))
+    @socket.bind(Socket.sockaddr_in(@port,$LOCALHOST_NAME))
     @socket.listen(5)
     append_prog_msg("[#{Time.now}] - Server started on port #{@port}.")
     update_users()
