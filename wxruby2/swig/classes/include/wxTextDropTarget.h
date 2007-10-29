@@ -1,36 +1,16 @@
-// wxTextDropTarget.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004-2007, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 #if !defined(_wxTextDropTarget_h_)
 #define _wxTextDropTarget_h_
 class wxTextDropTarget : public wxDropTarget
 {
 public:
-	/**
-	 * \brief Constructor. 
-	*/
-
    wxTextDropTarget() ;
-	/**
-	 * \brief See  . This function is implemented
-appropriately for text, and calls  . 
-	 * \param long   
-	 * \param long   
-	 * \param const void   
-	 * \param size_t   
-	*/
-
-  virtual bool OnDrop(long  x , long  y , const void  *data , size_t  size ) ;
-	/**
-	 * \brief Override this function to receive dropped text. 
-	 * \param long   
-	 * \param long   
-	 * \param const char   
-	*/
-
-  virtual bool OnDropText(long  x , long  y , const char  *data ) ;
+  virtual bool OnDrop(long x, long y,
+                      const void *data, size_t size);
+  virtual bool OnDropText(long x, long y, 
+                          const char *data);
 };
 
 
