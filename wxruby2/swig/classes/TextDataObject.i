@@ -10,6 +10,8 @@ GC_MANAGE_AS_OBJECT(wxTextDataObject);
 #include <wx/dataobj.h>
 %}
 
+%include "../shared/data_format_typemap.i"
+
 %ignore GetAllFormats;
 %feature("nodirector") GetAllFormats;
 
@@ -30,8 +32,6 @@ GC_MANAGE_AS_OBJECT(wxTextDataObject);
 
 %ignore SetData;
 %feature("nodirector") SetData;
-
-%include "../shared/data_object.i"
 
 %import "include/wxDataObjectSimple.h"
 %import "include/wxDataObject.h"
