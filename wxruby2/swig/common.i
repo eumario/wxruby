@@ -23,7 +23,14 @@
 #  undef Connect
 #  undef connect
 
-#  define WXINTL_NO_GETTEXT_MACRO 1
+// problematic Wx definition of _ macro conflicts with SWIG 
+#define WXINTL_NO_GETTEXT_MACRO 1
+
+// appears in both ruby headers and wx headers, avoid warning on MSW
+#ifdef __WXMSW__
+#undef HAVE_FSYNC
+#endif
+
 #include <wx/wx.h>
 #include <wx/dcbuffer.h>
 
