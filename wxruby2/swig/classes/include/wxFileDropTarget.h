@@ -7,7 +7,7 @@ class wxFileDropTarget : public wxDropTarget
 {
 public:
   wxFileDropTarget();
-  virtual bool OnDrop(wxCoord x, wxCoord y, 
+  virtual bool OnDrop(long x, long y, 
                       const void *data, size_t size) = 0;
   virtual bool OnDropFiles(wxCoord x, wxCoord y, 
                            const wxArrayString& filenames) = 0;

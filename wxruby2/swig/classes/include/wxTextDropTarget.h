@@ -6,11 +6,11 @@
 class wxTextDropTarget : public wxDropTarget
 {
 public:
-   wxTextDropTarget() ;
+  wxTextDropTarget();
   virtual bool OnDrop(long x, long y,
-                      const void *data, size_t size);
-  virtual bool OnDropText(long x, long y, 
-                          const char *data);
+                      const void *data, size_t size) = 0;
+  virtual bool OnDropText(wxCoord x, wxCoord y, 
+                          const wxString& data) = 0;
 };
 
 
