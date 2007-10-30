@@ -50,23 +50,18 @@ def fix_define_method(line)
     return line
 end
 
-def strip_wx(class_name)
-    if(class_name[0,2].downcase != 'wx')
-        return class_name
-    end
-    return class_name[2..-1]
+def strip_wx(class_name) 
+  return class_name.sub(/^wx_?/i,'')
 end
 
 def fix_quoted_wx(line)
-    re = Regexp.new('".*"')
-    match = re.match(line)
+    match = /"(.*)"/.match(line)
     if(match)
-        #puts("Stripping #{line}")
-        quoted_wx_name = match[0]
-        wx_name = quoted_wx_name[1..-2]
-        new_name = '"' + strip_wx(wx_name) + '"'
-        line[quoted_wx_name] = new_name
-        #puts(line)
+      #puts("Stripping #{line}")
+      quoted_wx_name = match[1]
+      wx_name = quoted_wx_name.sub(/^wx_?/i,'')
+      line[match[0]] = '"' + wx_name + '"'
+      #puts(line)
     end
     return line
 end

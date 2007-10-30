@@ -91,17 +91,37 @@ end
 def use_wx_config
   $wx_version = wx_config("--version")
   $wx_cppflags = wx_config("--cppflags")
-  $wx_libs = wx_config("--libs std,stc")
+
+  $wx_libs = wx_config("--libs std,gl,stc")
+  
   $cpp = wx_config("--cxx")
   $ld = wx_config("--ld")
-  
-  # Check whether there is a lib file for StyledTextCtrl (Scintilla). If
-  # not, don't try and compile this file.
+    
+  # Checks whether these optional libs are built and should be included
   stc_lib = $wx_libs[/\S+libwx\S+_stc\S+/]
-  if not File.exists?(stc_lib)
-    $wx_libs = wx_config("--libs")
+  gl_lib = $wx_libs[/\S+libwx\S+_gl\S+/]
+  
+  inc_stc = true
+  inc_gl = true
+  libs_str = "--libs std"
+  
+  if stc_lib.nil? or not File.exists?(stc_lib)
+    inc_stc = false
     $excluded_classes << 'StyledTextCtrl'
   end
+  
+  if gl_lib.nil? or not File.exists?(gl_lib)
+    inc_gl = false
+    $excluded_classes << 'GLCanvas'
+  end  
+  
+  libs_str << ',gl' if inc_gl
+  libs_str << ',stc' if inc_stc
+  $wx_libs = wx_config(libs_str)
+  
+  $wx_version = wx_config("--version")
+  $wx_cppflags = wx_config("--cppflags")
+  
 end
 
 def get_classes
