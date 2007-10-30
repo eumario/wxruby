@@ -118,10 +118,6 @@ def use_wx_config
   libs_str << ',gl' if inc_gl
   libs_str << ',stc' if inc_stc
   $wx_libs = wx_config(libs_str)
-  
-  $wx_version = wx_config("--version")
-  $wx_cppflags = wx_config("--cppflags")
-  
 end
 
 def get_classes
