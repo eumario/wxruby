@@ -20,3 +20,4 @@ enum wxTextAttrAlignment;
 enum wxSashDragStatus;
 typedef unsigned int wxUint32;  // Should be correct on all platforms
 enum wxFontEncoding;
+enum wxDragResult;
