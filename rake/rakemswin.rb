@@ -11,7 +11,9 @@ include Config
 
 $cpp = "cl.exe"
 $ld = "link"
+$cpp_out_flag = "/Fo"
 $link_output_flag = "/dll /out:"
+
 
 # native Windows - requires a static build of wxWindows
 $WXDIR=ENV['WXWIN']
