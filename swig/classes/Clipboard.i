@@ -10,7 +10,7 @@ GC_NEVER(wxClipboard);
 #include <wx/clipbrd.h>
 %}
 
-%include "../shared/data_object.i"
+%include "../shared/data_format_typemap.i"
 
 %include "include/wxClipboard.h"
 
