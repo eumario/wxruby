@@ -11,7 +11,6 @@ require 'rake/rakeunixish'
 
 $cpp = "g++"
 $ld = "g++"
-$swig_options += " -D__WXMAC__ "
 
 $ruby_cppflags.gsub!(/-g/,"")
 
