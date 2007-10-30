@@ -57,6 +57,7 @@ enum wxWindowVariant
 %apply SWIGTYPE *DISOWN {wxCaret* caret};
 %apply SWIGTYPE *DISOWN {wxSizer* sizer};
 %apply SWIGTYPE *DISOWN {wxToolTip* tip};
+%apply SWIGTYPE *DISOWN {wxDropTarget* target};
 
 %apply int * INOUT { int * x_INOUT, int * y_INOUT }
 
