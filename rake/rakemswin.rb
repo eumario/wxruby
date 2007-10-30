@@ -66,6 +66,15 @@ else
   $excluded_classes << "StyledTextCtrl"
 end
 
+# Test for presence of OpenGL library; link it in if
+# present, skip that class if not 
+gl_lib = File.join( $WXLIBDIR, "wxmsw#{$WXVERSION}#{$POSTFIX}_gl.lib" )
+if File.exists?(gl_lib)
+  windows_libs << gl_lib 
+else
+  $excluded_classes << "GLCanvas"
+end
+
 # Glue them all together into an argument passed to the linker
 $wx_libs = windows_libs.join(' ')
 
