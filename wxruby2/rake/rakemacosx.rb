@@ -7,7 +7,7 @@
 # platform-dependent settings
 
 
-use_wx_config
+require 'rake/rakeunixish'
 
 $cpp = "g++"
 $ld = "g++"

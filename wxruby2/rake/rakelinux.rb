@@ -6,7 +6,7 @@
 #############################
 # platform-dependent settings
 
-use_wx_config
+require 'rake/rakeunixish'
 
 $extra_cppflags = '-Wno-unused-function '
 
