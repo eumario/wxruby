@@ -18,8 +18,21 @@ $wx_libs.chomp!
 $wx_libs.gsub!(/-framework (Cocoa|WebKit)/, '')
 $wx_libs << ' -framework Foundation -framework Appkit'
 
-$extra_cppflags = '-x objective-c++ -arch ppc -arch i386'
-$extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress -arch ppc -arch i386'
+# Defaults to building a universal binary, set WXRUBY_OSX_NO_UNIVERSAL to true
+# to build the default for the current computer
+$osx_universal = true
+
+if ENV['WXRUBY_OSX_NO_UNIVERSAL']
+  $osx_universal = false
+end
+
+$extra_cppflags = '-x objective-c++'
+$extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress'
+
+if $osx_universal
+  $extra_cppflags << ' -arch ppc -arch i386'
+  $extra_ldflags << ' -arch ppc -arch i386'
+end
 
 task :framework do
 	build_framework
