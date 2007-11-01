@@ -18,8 +18,8 @@ $wx_libs.chomp!
 $wx_libs.gsub!(/-framework (Cocoa|WebKit)/, '')
 $wx_libs << ' -framework Foundation -framework Appkit'
 
-$extra_cppflags = '-x objective-c++'
-$extra_ldflags = "-dynamic -bundle -flat_namespace -undefined suppress"
+$extra_cppflags = '-x objective-c++ -arch ppc -arch i386'
+$extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress -arch ppc -arch i386'
 
 task :framework do
 	build_framework
