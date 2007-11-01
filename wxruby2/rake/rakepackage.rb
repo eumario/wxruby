@@ -62,8 +62,14 @@ def create_gem_tasks
   desc "Build a binary RubyGem for the current platform"
   task :gem => [ :default, :version ] do
     this_gemspec = $base_gemspec.dup()    
-    this_gemspec.instance_eval do 
+    this_gemspec.instance_eval do       
       self.platform = Gem::Platform::CURRENT
+      if self.platform.include?('darwin')
+        self.platform = "universal-darwin"
+        if $osx_split_gem_name != nil
+          self.platform = $osx_split_gem_name
+        end
+      end
       self.files += [ TARGET_LIB ]
     end
     Gem::manage_gems()
@@ -100,3 +106,68 @@ def create_package_tasks
   end
 end
 task :package => :version
+
+desc "Creates 3 gems for Mac OS X: universal, powerpc, i686."
+task :osx_all_gems do
+  if !$macosx
+    puts "This task only works on Mac OS X."
+    exit
+  end
+  
+  gem_name = 'wxruby'
+  default_full_gem_name = "#{gem_name}-#{WXRUBY_VERSION}-universal-darwin.gem"
+  
+  gem_task = Rake::Task['gem']
+  gem_task.application.handle_options()
+  
+  if File.exists?(default_full_gem_name)==false
+    puts ""
+    puts "The universal gem (#{default_full_gem_name}) must exist before running this task. Creating..."
+    gem_task.execute
+  end
+  
+  ext = GEM_PLATFORMS['osx'][1]
+  tmp_dir = "tmp_osx_lib"
+  
+  #save the current universal build
+  if File.exists?(tmp_dir)==false
+    sh "mkdir #{tmp_dir}"
+  end
+  sh "mv #{default_full_gem_name} #{tmp_dir}/"
+  sh "mv lib/wxruby2#{ext} #{tmp_dir}/"
+  
+  gem_task = Rake::Task['gem']
+  gem_task.application.handle_options()
+  
+  #create the ppc version of library and build gem
+  puts ""
+  create_osx_platform_gem(default_full_gem_name,tmp_dir,ext,gem_task,"ppc")
+
+  #remove the stripped lib now that gem is made
+  sh "rm lib/wxruby2#{ext}"
+
+  #create the i386 version of library and build gem
+  puts ""
+  create_osx_platform_gem(default_full_gem_name,tmp_dir,ext,gem_task,"i386")
+
+  #move back the universal gem
+  sh "rm lib/wxruby2#{ext}"
+  sh "mv #{tmp_dir}/wxruby2#{ext} lib/"
+  sh "mv #{tmp_dir}/#{default_full_gem_name} ."
+
+  sh "rmdir #{tmp_dir}"
+end
+
+def create_osx_platform_gem(gem_name,tmp_dir,lib_ext,gem_build_task,platform="ppc")
+  if platform == "ppc"
+    cpu = 'powerpc'
+  else
+    cpu = 'i686'
+  end
+  
+  $osx_split_gem_name = "#{cpu}-darwin"
+  puts "Creating GEM for Mac OS X (#{platform})"
+  sh "lipo #{tmp_dir}/wxruby2#{lib_ext} -thin #{platform} -output lib/wxruby2#{lib_ext}"
+  sh "lipo -info lib/wxruby2#{lib_ext}"  
+  gem_build_task.execute
+end
