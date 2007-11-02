@@ -258,9 +258,21 @@ other non-"control":control.html window. All Windows apart from
 top-level main windows must have another window as parent - this
 argument cannot be @nil@.
 
-Any constructor for a Window can be passed a block; the newly created
-instance will be passed as an argument to this block, allowing further
-setup to be done to it.
+Any constructor for a Window can be passed a block to do further set-up
+of the Window. If no argument is specifid for the block, it will be run
+in the context of the newly created instance, with the Window as @self@.
+If an explicit parameter is passeed, the new Window will be passed as that
+argument to this block. ie, either of the following is allowed:
+
+ Wx::Button.new(...) do 
+  self.label = 'Foo'
+ end
+
+or
+
+ Wx::Button.new(...) do | button |
+   button.label = 'Foo'
+ end
 
 h4. Parameters
 
