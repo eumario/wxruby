@@ -171,7 +171,10 @@ module Wx
 
         alias :pre_wx_kwctor_init :initialize
 
-        def initialize(parent = :default_ctor, *mixed_args)
+        # The new definition of initialize; accepts a parent arg
+        # mixed_args, which may zero or more position args, optionally
+        # terminated with hash keyword args, and an optional block
+        def initialize(parent = :default_ctor, *mixed_args, &block)
           # allow zero-args ctor for use with XRC
           if parent == :default_ctor
             pre_wx_kwctor_init()
@@ -188,8 +191,19 @@ module Wx
                    self.class.describe_constructor()
             Kernel.raise ArgumentError, msg
           end
-          
-          yield self if block_given?
+
+          # If a block was given, pass the newly created Window instance
+          # into it; use block
+          if block
+            if block.arity == -1 or block.arity == 0
+              self.instance_eval(&block)
+            elsif block.arity == 1
+              block.call(self)
+            else 
+              Kernel.raise ArgumentError, 
+                           "Block to initialize accepts zero or one arg"
+            end
+          end
         end
       end
       
