@@ -114,6 +114,16 @@ task :osx_all_gems do
     exit
   end
   
+  # Figure out OS Version to run lipo correctly
+  # on 10.4 the ppc part of a universal binary is called ppc
+  # on 10.5 the ppc part is called ppc7400
+  data = %x{system_profiler SPSoftwareDataType}
+  if data.include?('Mac OS X 10.5')
+    lipo_ppc = 'ppc7400'
+  else
+    lipo_ppc = 'ppc'
+  end
+  
   gem_name = 'wxruby'
   default_full_gem_name = "#{gem_name}-#{WXRUBY_VERSION}-universal-darwin.gem"
   
@@ -141,7 +151,7 @@ task :osx_all_gems do
   
   #create the ppc version of library and build gem
   puts ""
-  create_osx_platform_gem(default_full_gem_name,tmp_dir,ext,gem_task,"ppc")
+  create_osx_platform_gem(default_full_gem_name,tmp_dir,ext,gem_task,lipo_ppc)
 
   #remove the stripped lib now that gem is made
   sh "rm lib/wxruby2#{ext}"
@@ -159,7 +169,7 @@ task :osx_all_gems do
 end
 
 def create_osx_platform_gem(gem_name,tmp_dir,lib_ext,gem_build_task,platform="ppc")
-  if platform == "ppc"
+  if platform.include?("ppc")
     cpu = 'powerpc'
   else
     cpu = 'i686'
