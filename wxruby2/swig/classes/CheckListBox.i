@@ -7,9 +7,6 @@
 GC_MANAGE_AS_WINDOW(wxCheckListBox);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCheckListBox);
 
-%include "../shared/no_window_virtuals.i"
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCheckListBox);
-
 %ignore wxCheckListBox::wxCheckListBox();
 
 // item data fixes not required here because fixed by superclass ListBox 
