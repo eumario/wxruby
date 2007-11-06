@@ -5,6 +5,7 @@
 
 %module(directors="1") wxToggleButton
 GC_MANAGE_AS_WINDOW(wxToggleButton);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxToggleButton);
 
 %{
 #include <wx/tglbtn.h>

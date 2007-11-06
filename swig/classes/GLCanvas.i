@@ -5,6 +5,7 @@
 
 %module(directors="1") wxGLCanvas
 GC_MANAGE_AS_WINDOW(wxGLCanvas);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGLCanvas);
 
 %{
 #ifdef __WXMAC__

@@ -5,6 +5,11 @@
 
 %module(directors="1") wxButton
 GC_MANAGE_AS_WINDOW(wxButton);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxButton);
+
+%include "../shared/no_window_virtuals.i"
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxButton);
+
 
 %ignore wxButton::wxButton();
 

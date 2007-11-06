@@ -50,3 +50,6 @@ extern void wxRuby_SetSwigTypeForClass(VALUE cls, swig_type_info* ty);
 %include "typedefs.i"
 %include "typemap.i"
 %include "memory_management.i"
+
+// Used to reduce bloat in classes inheriting from Wx::Window
+%include "shared/no_window_virtuals.i"

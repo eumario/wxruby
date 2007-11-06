@@ -5,6 +5,7 @@
 
 %module(directors="1") wxGrid
 GC_MANAGE_AS_WINDOW(wxGrid);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
 
 %{
 #include <wx/grid.h>

@@ -5,6 +5,7 @@
 
 %module(directors="1") wxFindReplaceDialog
 GC_MANAGE_AS_DIALOG(wxFindReplaceDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxFindReplaceDialog);
 
 %{
 #include <wx/fdrepdlg.h>

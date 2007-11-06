@@ -5,6 +5,7 @@
 
 %module(directors="1") wxRadioButton
 GC_MANAGE_AS_WINDOW(wxRadioButton);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRadioButton);
 %{
 #include <wx/wx.h>
 #include <wx/radiobut.h>

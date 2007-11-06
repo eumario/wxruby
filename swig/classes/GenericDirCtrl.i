@@ -5,6 +5,7 @@
 
 %module(directors="1") wxGenericDirCtrl
 GC_MANAGE_AS_WINDOW(wxGenericDirCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGenericDirCtrl);
 
 %{
 #include <wx/dirctrl.h>

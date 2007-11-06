@@ -5,6 +5,7 @@
 
 %module(directors="1") wxPrintDialog
 GC_MANAGE_AS_DIALOG(wxPrintDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPrintDialog);
 %feature("nodirector") wxPrintDialog;
 
 %{

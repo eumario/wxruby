@@ -5,6 +5,7 @@
 
 %module(directors="1") wxControl
 GC_MANAGE_AS_WINDOW(wxControl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxControl);
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"

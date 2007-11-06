@@ -5,6 +5,7 @@
 
 %module(directors="1") wxStaticBitmap
 GC_MANAGE_AS_WINDOW(wxStaticBitmap);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStaticBitmap);
 
 %ignore wxStaticBitmap::wxStaticBitmap();
 

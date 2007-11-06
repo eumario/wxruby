@@ -5,6 +5,7 @@
 
 %module(directors="1") wxRadioBox
 GC_MANAGE_AS_WINDOW(wxRadioBox);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRadioBox);
 %{
 #include <wx/wx.h>
 #include <wx/radiobox.h>

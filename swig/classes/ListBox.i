@@ -5,6 +5,7 @@
 
 %module(directors="1") wxListBox
 GC_MANAGE_AS_WINDOW(wxListBox);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxListBox);
 
 %ignore wxListBox::wxListBox();
 %ignore wxListBox::InsertItems(int nItems, const wxString *items, int pos);

@@ -5,6 +5,7 @@
 
 %module(directors="1") wxScrollBar
 GC_MANAGE_AS_WINDOW(wxScrollBar);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxScrollBar);
 
 #define wxSB_HORIZONTAL      wxHORIZONTAL
 #define wxSB_VERTICAL        wxVERTICAL

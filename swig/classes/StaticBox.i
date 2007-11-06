@@ -5,6 +5,7 @@
 
 %module(directors="1") wxStaticBox
 GC_MANAGE_AS_WINDOW(wxStaticBox);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStaticBox);
 
 %ignore wxStaticBox::wxStaticBox();
 

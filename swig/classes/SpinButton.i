@@ -5,6 +5,7 @@
 
 %module(directors="1") wxSpinButton
 GC_MANAGE_AS_WINDOW(wxSpinButton);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxSpinButton);
 %{
 #include <wx/spinbutt.h>
 %}

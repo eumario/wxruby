@@ -5,6 +5,7 @@
 
 %module(directors="1") wxChoicebook
 GC_MANAGE_AS_WINDOW(wxChoicebook);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxChoicebook);
 %feature("nodirector") wxChoicebook::OnSelChange;
 
 %{

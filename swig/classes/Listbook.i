@@ -5,6 +5,7 @@
 
 %module(directors="1") wxListbook
 GC_MANAGE_AS_WINDOW(wxListbook);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxListbook);
 %feature("nodirector") wxListbook::OnSelChange;
 
 %{

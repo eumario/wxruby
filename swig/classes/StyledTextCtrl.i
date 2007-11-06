@@ -5,6 +5,7 @@
 
 %module(directors="1") wxStyledTextCtrl
 GC_MANAGE_AS_WINDOW(wxStyledTextCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStyledTextCtrl);
 
 %{
 #include <wx/stc/stc.h>

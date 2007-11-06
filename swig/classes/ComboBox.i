@@ -5,6 +5,7 @@
 
 %module(directors="1") wxComboBox
 GC_MANAGE_AS_WINDOW(wxComboBox);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxComboBox);
 
 %ignore wxComboBox::wxComboBox();
 

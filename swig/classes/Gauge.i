@@ -5,6 +5,7 @@
 
 %module(directors="1") wxGauge
 GC_MANAGE_AS_WINDOW(wxGauge);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGauge);
 %{
 #include <wx/gauge.h>
 %}

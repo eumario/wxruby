@@ -5,6 +5,7 @@
 
 %module(directors="1") wxProgressDialog
 GC_MANAGE_AS_DIALOG(wxProgressDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxProgressDialog);
 
 %{
 #include <wx/progdlg.h>

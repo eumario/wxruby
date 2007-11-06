@@ -5,6 +5,7 @@
 
 %module(directors="1") wxWizardPage
 GC_MANAGE_AS_WINDOW(wxWizardPage);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxWizardPage);
 
 %{
 #include <wx/wizard.h>

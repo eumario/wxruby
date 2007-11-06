@@ -5,6 +5,7 @@
 
 %module(directors="1") wxTextCtrl
 GC_MANAGE_AS_WINDOW(wxTextCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTextCtrl);
 
 %apply long * OUTPUT { long * }
 %apply long * OUTPUT { wxTextCoord *col, wxTextCoord *row }

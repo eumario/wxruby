@@ -5,6 +5,7 @@
 
 %module(directors="1") wxCollapsiblePane
 GC_MANAGE_AS_WINDOW(wxCollapsiblePane);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCollapsiblePane);
 
 %{
 #include <wx/collpane.h>

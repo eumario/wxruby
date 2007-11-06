@@ -10,6 +10,7 @@
 
 %module(directors="1") wxNumberEntryDialog
 GC_MANAGE_AS_DIALOG(wxNumberEntryDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNumberEntryDialog);
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"

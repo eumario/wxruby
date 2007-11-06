@@ -5,6 +5,7 @@
 
 %module(directors="1") wxCalendarCtrl
 GC_MANAGE_AS_WINDOW(wxCalendarCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCalendarCtrl);
 
 %include "../shared/datetime.i"
 

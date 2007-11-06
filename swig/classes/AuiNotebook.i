@@ -5,6 +5,7 @@
 
 %module(directors="1") wxAuiNotebook
 GC_MANAGE_AS_WINDOW(wxAuiNotebook);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxAuiNotebook);
 
 %{
 #include <wx/aui/aui.h>

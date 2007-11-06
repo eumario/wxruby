@@ -5,6 +5,7 @@
 
 %module(directors="1") wxColourDialog
 GC_MANAGE_AS_DIALOG(wxColourDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxColourDialog);
 
 %{
 #include <wx/colordlg.h>
