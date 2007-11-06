@@ -43,8 +43,6 @@ h2. Extra window styles
 
 The following are extra styles, set using "Window#set_extra_style":window.html#Window_setextrastyle.
 
-
-|@WS_EX_VALIDATE_RECURSIVELY@|By default, Validate/TransferDataTo/FromWindow()only work on direct children of the window (compatible behaviour). Set this flag to make them recursivelydescend into all subwindows.|
 |@WS_EX_BLOCK_EVENTS@|CommandEvents and the objects of the derived classes are forwarded to theparent window and so on recursively by default. Using this flag for thegiven window allows to block this propagation at this window, i.e. preventthe events from being propagated further upwards. Dialogs have thisflag on by default.|
 |@WS_EX_TRANSIENT@|Don't use this window as an implicit parent for the other windows: this mustbe used with transient windows as otherwise there is the risk of creating adialog/frame with this window as a parent which would lead to a crash if theparent is destroyed before the child.|
 |@WS_EX_PROCESS_IDLE@|This window should always process idle events, evenif the mode set by "IdleEvent#set_mode":idleevent.html#IdleEvent_setmode is IDLE_PROCESS_SPECIFIED.|
@@ -233,8 +231,6 @@ h2. Methods
 * "Window#show":#Window_show
 * "Window#thaw":#Window_thaw
 * "Window#toggle_window_style":#Window_togglewindowstyle
-* "Window#transfer_data_from_window":#Window_transferdatafromwindow
-* "Window#transfer_data_to_window":#Window_transferdatatowindow
 * "Window#unregister_hot_key":#Window_unregisterhotkey
 * "Window#update":#Window_update
 * "Window#update_window_ui":#Window_updatewindowui
@@ -1450,8 +1446,7 @@ h3(#Window_initdialog). Window#init_dialog
 
   *init_dialog*()
 
-Sends an @EVT_INIT_DIALOG@ event, whose handler usually transfers data
-to the dialog via validators.
+Sends an @EVT_INIT_DIALOG@ event.
 
 
 h3(#Window_invalidatebestsize). Window#invalidate_best_size
@@ -2324,7 +2319,6 @@ Sets the extra style bits for the window. The currently defined extra style
 bits are:
 
 
-|@WS_EX_VALIDATE_RECURSIVELY@|TransferDataTo/FromWindow()and Validate() methods will recursively descend into all children of thewindow if it has this style flag set.|
 |@WS_EX_BLOCK_EVENTS@|Normally, the commandevents are propagated upwards to the window parent recursively until a handlerfor them is found. Using this style allows to prevent them from beingpropagated beyond this window. Notice that Dialog has this style on bydefault for the reasons explained in the"event processing overview":eventprocessing.html.|
 |@WS_EX_TRANSIENT@|This can be used to prevent awindow from being used as an implicit parent for the dialogs which werecreated without a parent. It is useful for the windows which can disappear atany moment as creating children of such windows results in fatal problems.|
 |@FRAME_EX_CONTEXTHELP@|Under Windows, puts a query button on the caption. When pressed, Windows will go into a context-sensitive help mode and Widgets will send a EVT_HELP event if the user clicked on an application window. This style cannot be used together with @MAXIMIZE_BOX@ or @MINIMIZE_BOX@, soyou should use the style of @DEFAULT_FRAME_STYLE@ & (@MINIMIZE_BOX@ &#124; @MAXIMIZE_BOX@) for the frames having this style (the dialogs don't have minimize nor maximize box bydefault)|
@@ -2919,40 +2913,6 @@ Reenables window updating after a previous call to
 "freeze":window.html#Window_freeze. To really thaw the control, it must be called
 exactly the same number of times as "freeze":window.html#Window_freeze.
 
-
-h3(#Window_transferdatafromwindow). Window#transfer_data_from_window
-
- Boolean *transfer_data_from_window*()
-
-Transfers values from child controls to data areas specified by their validators. Returns
-@false@ if a transfer failed.
-
-If the window has @WS_EX_VALIDATE_RECURSIVELY@ extra style flag set,
-the method will also call transfer_data_from_window() of all child windows.
-
-h4. See also
-
-"Window#transfer_data_to_window":window.html#Window_transferdatatowindow, "Validator":validator.html, "Window#validate":window.html#Window_validate
-
-
-h3(#Window_transferdatatowindow). Window#transfer_data_to_window
-
- Boolean *transfer_data_to_window*()
-
-Transfers values to child controls from data areas specified by their validators.
-
-If the window has @WS_EX_VALIDATE_RECURSIVELY@ extra style flag set,
-the method will also call transfer_data_to_window() of all child windows.
-
-h4. Return value
-
-Returns @false@ if a transfer failed.
-
-h4. See also
-
-"Window#transfer_data_from_window":window.html#Window_transferdatafromwindow, "Validator":validator.html, "Window#validate":window.html#Window_validate
-
-
 h3(#Window_unregisterhotkey). Window#unregister_hot_key
 
  Boolean *unregister_hot_key*(%(arg-type)Integer% hotkeyId)
@@ -3077,7 +3037,7 @@ Returns @false@ if any of the validations failed.
 
 h4. See also
 
-"Window#transfer_data_from_window":window.html#Window_transferdatafromwindow, "Window#transfer_data_to_window":window.html#Window_transferdatatowindow, "Validator":validator.html
+ "Validator":validator.html
 
 
 h3(#Window_warppointer). Window#warp_pointer
