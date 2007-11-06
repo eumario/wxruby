@@ -5,6 +5,7 @@
 
 %module(directors="1") wxListCtrl
 GC_MANAGE_AS_WINDOW(wxListCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxListCtrl);
 
 %{
 #include <wx/wx.h>

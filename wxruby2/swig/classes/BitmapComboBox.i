@@ -5,6 +5,7 @@
 
 %module(directors="1") wxBitmapComboBox
 GC_MANAGE_AS_WINDOW(wxBitmapComboBox);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBitmapComboBox);
 
 %{
 #include <wx/bmpcbox.h>

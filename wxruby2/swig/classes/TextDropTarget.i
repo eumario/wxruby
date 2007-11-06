@@ -10,7 +10,7 @@ GC_MANAGE_AS_OBJECT(wxTextDropTarget);
 #include <wx/dnd.h>
 %}
 
-%ignore OnDrop; 
+%ignore OnDrop;
 %ignore OnData;  
 
 // Use C++ implementations, don't call into Ruby

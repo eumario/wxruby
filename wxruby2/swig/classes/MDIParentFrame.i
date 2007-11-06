@@ -5,6 +5,7 @@
 
 %module(directors="1") wxMDIParentFrame;
 GC_MANAGE_AS_FRAME(wxMDIParentFrame);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMDIParentFrame);
 
 %apply SWIGTYPE *DISOWN { wxMenuBar * }
 

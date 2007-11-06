@@ -5,6 +5,7 @@
 
 %module(directors="1") wxFileDialog
 GC_MANAGE_AS_DIALOG(wxFileDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxFileDialog);
 
 enum
 {

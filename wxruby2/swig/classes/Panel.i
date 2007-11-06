@@ -5,6 +5,7 @@
 
 %module(directors="1") wxPanel
 GC_MANAGE_AS_WINDOW(wxPanel);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPanel);
 
 
 

@@ -5,6 +5,7 @@
 
 %module(directors="1") wxChoice
 GC_MANAGE_AS_WINDOW(wxChoice);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxChoice);
 
 %ignore wxChoice::DoAppend(const wxString& item);
 %feature("nodirector") wxChoice::DoAppend;

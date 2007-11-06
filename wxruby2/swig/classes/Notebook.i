@@ -5,6 +5,7 @@
 
 %module(directors="1") wxNotebook
 GC_MANAGE_AS_WINDOW(wxNotebook);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNotebook);
 %feature("nodirector") wxNotebook::OnSelChange;
 
 %{

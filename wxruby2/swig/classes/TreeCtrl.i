@@ -5,6 +5,7 @@
 
 %module(directors="1") wxTreeCtrl
 GC_MANAGE_AS_WINDOW(wxTreeCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTreeCtrl);
 
 %{
 #include <wx/treectrl.h>

@@ -5,6 +5,10 @@
 
 %module(directors="1") wxBitmapButton
 GC_MANAGE_AS_WINDOW(wxBitmapButton);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBitmapButton);
+
+%include "../shared/no_window_virtuals.i"
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBitmapButton);
 
 %ignore wxBitmapButton::wxBitmapButton();
 

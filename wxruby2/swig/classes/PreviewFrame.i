@@ -5,6 +5,7 @@
 
 %module(directors="1") wxPreviewFrame
 GC_MANAGE_AS_FRAME(wxPreviewFrame);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPreviewFrame);
 
 %{
 #include <wx/print.h>

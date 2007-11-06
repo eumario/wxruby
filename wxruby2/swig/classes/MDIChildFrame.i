@@ -5,6 +5,7 @@
 
 %module(directors="1") wxMDIChildFrame;
 GC_MANAGE_AS_FRAME(wxMDIChildFrame);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMDIChildFrame);
 
 %{
 #include <wx/mdi.h>

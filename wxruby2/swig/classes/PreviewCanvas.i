@@ -5,6 +5,7 @@
 
 %module(directors="1") wxPreviewCanvas
 GC_MANAGE_AS_WINDOW(wxPreviewCanvas);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPreviewCanvas);
 
 %{
 #include <wx/print.h>

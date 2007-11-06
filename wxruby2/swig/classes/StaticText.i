@@ -5,6 +5,7 @@
 
 %module(directors="1") wxStaticText
 GC_MANAGE_AS_WINDOW(wxStaticText);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStaticText);
 
 %ignore wxStaticText::wxStaticText();
 

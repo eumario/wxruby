@@ -5,6 +5,7 @@
 
 %module(directors="1") wxPageSetupDialog
 GC_MANAGE_AS_DIALOG(wxPageSetupDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPageSetupDialog);
 %feature("nodirector") wxPageSetupDialog;
 
 %{

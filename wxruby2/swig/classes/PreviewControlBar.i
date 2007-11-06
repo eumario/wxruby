@@ -5,6 +5,7 @@
 
 %module(directors="1") wxPreviewControlBar
 GC_MANAGE_AS_WINDOW(wxPreviewControlBar);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPreviewControlBar);
 
 %{
 #include <wx/print.h>

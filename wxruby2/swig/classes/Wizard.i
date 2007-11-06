@@ -5,6 +5,7 @@
 
 %module(directors="1") wxWizard
 GC_MANAGE_AS_DIALOG(wxWizard);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxWizard);
 
 %{
 #include <wx/wizard.h>

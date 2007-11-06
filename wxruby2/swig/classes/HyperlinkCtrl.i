@@ -5,6 +5,7 @@
 
 %module(directors="1") wxHyperlinkCtrl
 GC_MANAGE_AS_WINDOW(wxHyperlinkCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxHyperlinkCtrl);
 
 %{
 #include <wx/hyperlink.h>

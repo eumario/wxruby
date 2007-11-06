@@ -5,6 +5,7 @@
 
 %module(directors="1") wxSlider
 GC_MANAGE_AS_WINDOW(wxSlider);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxSlider);
 %{
 #include <wx/wx.h>
 #include <wx/slider.h>

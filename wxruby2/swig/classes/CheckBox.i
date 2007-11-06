@@ -5,6 +5,7 @@
 
 %module(directors="1") wxCheckBox
 GC_MANAGE_AS_WINDOW(wxCheckBox);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCheckBox);
 
 %ignore wxCheckBox::wxCheckBox();
 

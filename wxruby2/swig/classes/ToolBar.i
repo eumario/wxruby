@@ -5,6 +5,7 @@
 
 %module(directors="1") wxToolBar;
 GC_MANAGE_AS_WINDOW(wxToolBar);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxToolBar);
 
 %{
 #include <wx/toolbar.h>

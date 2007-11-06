@@ -5,6 +5,7 @@
 
 %module(directors="1") wxControlWithItems
 GC_MANAGE_AS_WINDOW(wxControlWithItems);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxControlWithItems);
 
 %ignore wxControlWithItems::SetSelection;
 %ignore wxControlWithItems::SetStringSelection;

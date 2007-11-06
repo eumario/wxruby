@@ -5,6 +5,7 @@
 
 %module(directors="1") wxStatusBar;
 GC_MANAGE_AS_WINDOW(wxStatusBar);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStatusBar);
 
 // StatusBar has numerous methods (eg GetFieldRect, G/SetStatusText,
 // SetFieldsCount) that are marked 'virtual', but can't be

@@ -5,6 +5,7 @@
 
 %module(directors="1") wxSpinCtrl
 GC_MANAGE_AS_WINDOW(wxSpinCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxSpinCtrl);
 
 %{
 #include <wx/spinctrl.h>

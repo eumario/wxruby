@@ -5,6 +5,7 @@
 
 %module(directors="1") wxSingleChoiceDialog
 GC_MANAGE_AS_DIALOG(wxSingleChoiceDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxSingleChoiceDialog);
 
 
 %import "include/wxObject.h"

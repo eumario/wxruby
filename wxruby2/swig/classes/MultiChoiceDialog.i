@@ -5,6 +5,7 @@
 
 %module(directors="1") wxMultiChoiceDialog
 GC_MANAGE_AS_DIALOG(wxMultiChoiceDialog);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMultiChoiceDialog);
 
 %{
 #include <wx/choicdlg.h>

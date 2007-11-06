@@ -5,6 +5,7 @@
 
 %module(directors="1") wxStaticLine
 GC_MANAGE_AS_WINDOW(wxStaticLine);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStaticLine);
 
 %{
 #include <wx/statline.h>
