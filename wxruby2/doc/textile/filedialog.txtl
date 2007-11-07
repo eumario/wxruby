@@ -25,44 +25,39 @@ h2. Window styles
 |@FD_PREVIEW@|Show the preview of the selected files (currently only supported by GTK using GTK+ 2.4 or later).|
 
 
-*NB:* Previous versions of Widgets used @FD_CHANGE_DIR@ by default
+*NB:* Previous versions of wxRuby used @FD_CHANGE_DIR@ by default
 under MS Windows which allowed the program to simply remember the last
 directory where user selected the files to open/save. This (desired)
 functionality must be implemented in the program itself now (manually remember
 the last path used and pass it to the dialog the next time it is called) or
 by using this flag.
 
-
-h2. See also
-
-"FileDialog overview":filedialogoverview.html, "FileSelector":fileselector.html
-
 h2. Remarks
 
 Pops up a file selector box. In Windows and GTK2.4+, this is the common
-file selector dialog. In X, this is a file selector box with somewhat less
-functionality. The path and filename are distinct elements of a full file pathname.
-If path is ``", the current directory will be used. If filename is ``",
-no default filename will be supplied. The wildcard determines what files
-are displayed in the file selector, and file extension supplies a type
-extension for the required filename.
+file selector dialog. In X, this is a file selector box with somewhat
+less functionality. The path and filename are distinct elements of a
+full file pathname.  If path is ``", the current directory will be
+used. If filename is ``", no default filename will be supplied. The
+wildcard determines what files are displayed in the file selector, and
+file extension supplies a type extension for the required filename.
 
 Both the X and Windows versions implement a wildcard filter. Typing a
-filename containing wildcards (*, ?) in the filename text item, and
+filename containing wildcards (&#42;, ?) in the filename text item, and
 clicking on Ok, will result in only those files matching the pattern being
 displayed. The wildcard may be a specification for multiple
 types of file with a description for each, such as:
 
 
-  "BMP and GIF files (*.bmp;*.gif)|*.bmp;*.gif|PNG files (*.png)|*.png"
+_BMP and GIF files (&#42;.bmp;&#42;.gif)|&#42;.bmp;&#42;.gif|PNG files (&#42;.png)|&#42;.png_
  
 
-It must be noted that wildcard support in the native Motif file
-dialog is quite limited: only one alternative is supported,
-and it is displayed without the descriptive test; ``BMP files (*.bmp)|*.bmp''
-is displayed as ``*.bmp'', and both
-``BMP files (*.bmp)|*.bmp|GIF files (*.gif)|*.gif'' and
-``Image files|*.bmp;*.gif'' are errors.
+It must be noted that wildcard support in the native Motif file dialog
+is quite limited: only one alternative is supported, and it is displayed
+without the descriptive test; _BMP files (&#42;.bmp)|&#42;.bmp_ is
+displayed as _&#42;.bmp_, and both 
+_BMP files(&#42;.bmp)|&#42;.bmp|GIF files (&#42;.gif)|&#42;.gif_ and 
+_Image files|&#42;.bmp;&#42;.gif_ are errors.
 
 <div id="methods">
 
@@ -93,7 +88,7 @@ h3(#FileDialog_new). FileDialog.new
   *FileDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message = "Choose a file", 
                  %(arg-type)String% defaultDir = "", 
                  %(arg-type)String% defaultFile = "", 
-                 %(arg-type)String% wildcard = ".*", 
+                 %(arg-type)String% wildcard = ".<notextile>*</notextile>", 
                  %(arg-type)Integer% style = FD_DEFAULT_STYLE, 
                  %(arg-type)Point% pos = DEFAULT_POSITION, 
                  %(arg-type)Size% sz = DEFAULT_SIZE, 
@@ -107,19 +102,15 @@ h4. Parameters
 * _message_ Message to show on the dialog.
 * _defaultDir_ The default directory, or the empty string.
 * _defaultFile_ The default filename, or the empty string.
-* _wildcard_ A wildcard, such as ``*.*" or ``BMP files (*.bmp)|*.bmp|GIF files (*.gif)|*.gif".
+* _wildcard_ A wildcard, such as _&#42;.&#42;_ or _BMP files (&#42;.bmp)|&#42;.bmp|GIF files (&#42;.gif)|&#42;.gif"_
 
 Note that the native Motif dialog has some limitations with respect to
 wildcards; see the Remarks section above.
-* _style_ A dialog style. See FD_* styles for more info.
+* _style_ A dialog style. See the @FD_*@ styles, above, for more info.
 * _pos_ Dialog position. Not implemented.
 * _size_ Dialog size. Not implemented.
 * _name_ Dialog name. Not implemented.
 
-
-  *destructor*()
-
-Destructor.
 
 h3(#FileDialog_getdirectory). FileDialog#get_directory
 
@@ -135,24 +126,25 @@ Returns the default filename.
 
 h3(#FileDialog_getfilenames). FileDialog#get_filenames
 
-  *get_filenames*(%(arg-type)ArrayString% filenames)
+  Array *get_filenames*()
 
-Fills the array _filenames_ with the names of the files chosen. This
-function should only be used with the dialogs which have @MULTIPLE@ style,
-use "get_filename":#FileDialog_getfilename for the others.
+Returns an array of strings of the names of the files chosen. This
+function should only be used with the dialogs which have @MULTIPLE@
+style, use "get_filename":#FileDialog_getfilename for the others.
 
 Note that under Windows, if the user selects shortcuts, the filenames
-include paths, since the application cannot determine the full path
-of each referenced file by appending the directory containing the shortcuts
+include paths, since the application cannot determine the full path of
+each referenced file by appending the directory containing the shortcuts
 to the filename.
 
 h3(#FileDialog_getfilterindex). FileDialog#get_filter_index
 
  Integer *get_filter_index*()
 
-Returns the index into the list of filters supplied, optionally, in the wildcard parameter.
-Before the dialog is shown, this is the index which will be used when the dialog is first displayed.
-After the dialog is shown, this is the index selected by the user.
+Returns the index into the list of filters supplied, optionally, in the
+wildcard parameter.  Before the dialog is shown, this is the index which
+will be used when the dialog is first displayed.  After the dialog is
+shown, this is the index selected by the user.
 
 h3(#FileDialog_getmessage). FileDialog#get_message
 
@@ -168,11 +160,11 @@ Returns the full path (directory and filename) of the selected file.
 
 h3(#FileDialog_getpaths). FileDialog#get_paths
 
-  *get_paths*(%(arg-type)ArrayString% paths)
+  Array *get_paths*()
 
-Fills the array _paths_ with the full paths of the files chosen. This
-function should only be used with the dialogs which have @MULTIPLE@ style,
-use "get_path":#FileDialog_getpath for the others.
+Returns an array with the full paths of the files chosen. This function
+should only be used with the dialogs which have @MULTIPLE@ style, use
+"get_path":#FileDialog_getpath for the others.
 
 h3(#FileDialog_getwildcard). FileDialog#get_wildcard
 
@@ -208,7 +200,8 @@ h3(#FileDialog_setpath). FileDialog#set_path
 
   *set_path*(%(arg-type)String% path)
 
-Sets the path (the combined directory and filename that will be returned when the dialog is dismissed).
+Sets the path (the combined directory and filename that will be returned
+when the dialog is dismissed).
 
 h3(#FileDialog_setwildcard). FileDialog#set_wildcard
 
@@ -216,7 +209,7 @@ h3(#FileDialog_setwildcard). FileDialog#set_wildcard
 
 Sets the wildcard, which can contain multiple file types, for example:
 
-``BMP files (*.bmp)|*.bmp|GIF files (*.gif)|*.gif"
+_BMP files (&#42;.bmp)|&#42;.bmp|GIF files (&#42;.gif)|&#42;.gif_
 
 Note that the native Motif dialog has some limitations with respect to
 wildcards; see the Remarks section above.
@@ -225,7 +218,7 @@ h3(#FileDialog_showmodal). FileDialog#show_modal
 
  Integer *show_modal*()
 
-Shows the dialog, returning ID_OK if the user pressed OK, and ID_CANCEL
-otherwise.
+Shows the dialog, returning @Wx::ID_OK@ if the user pressed OK, and
+@Wx::ID_CANCEL@ otherwise.
 
 
