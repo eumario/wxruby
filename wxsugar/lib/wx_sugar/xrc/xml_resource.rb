@@ -8,6 +8,9 @@ class XRCResource
   def initialize(xrc_file)
     @xrc_file = xrc_file
     xml_content = File.read(xrc_file)
+    # workaround for an ?bug in recent REXML, which fails to match
+    # certain XPath expressions when xmlns is declared
+    xml_content.sub!(/xmlns="[^"]+"/, '')
     @xml_doc = REXML::Document.new(xml_content)
     @classes = []
     REXML::XPath.each(@xml_doc.root, "/resource/object") do | elem |
