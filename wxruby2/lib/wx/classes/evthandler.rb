@@ -589,7 +589,7 @@ class Wx::EvtHandler
               Wx::Event],
     EventType['evt_query_layout_info', 0,
               Wx::EVT_QUERY_LAYOUT_INFO, 
-              Wx::Event],
+              Wx::QueryLayoutInfoEvent],
     EventType['evt_radiobox', 1,
               Wx::EVT_COMMAND_RADIOBOX_SELECTED, 
               Wx::CommandEvent],
