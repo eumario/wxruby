@@ -14,125 +14,115 @@ rescue LoadError => no_wx_err
 end
 
 class TestPanel < Wx::Panel
-    def initialize(parent, log)
-        super(parent, -1, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::NO_FULL_REPAINT_ON_RESIZE)
-        @log = log
-        
-        winids = []
+  def initialize(parent, log)
+    super(parent, :style => Wx::NO_FULL_REPAINT_ON_RESIZE)
+    @log = log
+    
+    winids = []
 
-        # Create some layout windows
-        # A window like a toolbar
-        @topwin = Wx::SashLayoutWindow.new(
-            self, -1, Wx::DEFAULT_POSITION, Wx::Size.new(200, 30), 
-            Wx::NO_BORDER|Wx::SW_3D
-            )
+    # Create some layout windows
+    # A window like a toolbar
+    @topwin = Wx::SashLayoutWindow.new( self, 
+                                        :size => [200, 30],
+                                        :style => Wx::NO_BORDER|Wx::SW_3D)
+    @topwin.default_size = [1000, 30]
+    @topwin.orientation  = Wx::LAYOUT_HORIZONTAL
+    @topwin.alignment    = Wx::LAYOUT_TOP
+    @topwin.background_colour = Wx::RED
+    @topwin.set_sash_visible(Wx::SASH_BOTTOM, true)
 
-        @topwin.set_default_size(Wx::Size.new(1000, 30))
-        @topwin.set_orientation(Wx::LAYOUT_HORIZONTAL)
-        @topwin.set_alignment(Wx::LAYOUT_TOP)
-        @topwin.set_background_colour(Wx::Colour.new(255, 0, 0))
-        @topwin.set_sash_visible(Wx::SASH_BOTTOM, true)
+    winids << @topwin.id
 
-        winids << @topwin.get_id
+    # A window like a statusbar
+    @bottomwin = Wx::SashLayoutWindow.new( self, 
+                                           :size => [200, 30], 
+                                           :style => Wx::NO_BORDER|Wx::SW_3D )
 
-        # A window like a statusbar
-        @bottomwin = Wx::SashLayoutWindow.new(
-                self, -1, Wx::DEFAULT_POSITION, Wx::Size.new(200, 30), 
-                Wx::NO_BORDER|Wx::SW_3D
-                )
+    @bottomwin.default_size = [1000, 30]
+    @bottomwin.orientation  = Wx::LAYOUT_HORIZONTAL
+    @bottomwin.alignment    = Wx::LAYOUT_BOTTOM
+    @bottomwin.background_colour = Wx::GREEN
+    @bottomwin.set_sash_visible(Wx::SASH_TOP, true)
 
-        @bottomwin.set_default_size(Wx::Size.new(1000, 30))
-        @bottomwin.set_orientation(Wx::LAYOUT_HORIZONTAL)
-        @bottomwin.set_alignment(Wx::LAYOUT_BOTTOM)
-        @bottomwin.set_background_colour(Wx::Colour.new(0, 0, 255))
-        @bottomwin.set_sash_visible(Wx::SASH_TOP, true)
+    winids << @bottomwin.id
 
-        winids << @bottomwin.get_id
+    # A window to the left of the client window
+    @leftwin1 =  Wx::SashLayoutWindow.new( self, 
+                                           :size => [200, 30], 
+                                           :style => Wx::NO_BORDER|Wx::SW_3D )
 
-        # A window to the left of the client window
-        @leftwin1 =  Wx::SashLayoutWindow.new(
-                self, -1, Wx::DEFAULT_POSITION, Wx::Size.new(200, 30), 
-                Wx::NO_BORDER|Wx::SW_3D
-                )
+    @leftwin1.default_size = [120, 1000]
+    @leftwin1.orientation  = Wx::LAYOUT_VERTICAL
+    @leftwin1.alignment    = Wx::LAYOUT_LEFT
+    @leftwin1.background_colour = Wx::BLUE
+    @leftwin1.set_sash_visible(Wx::SASH_RIGHT, true)
+    @leftwin1.extra_border_size = 10
 
-      @leftwin1.set_default_size(Wx::Size.new(120, 1000))
-        @leftwin1.set_orientation(Wx::LAYOUT_VERTICAL)
-        @leftwin1.set_alignment(Wx::LAYOUT_LEFT)
-        @leftwin1.set_background_colour(Wx::Colour.new(0, 255, 0))
-        @leftwin1.set_sash_visible(Wx::SASH_RIGHT, true)
-        @leftwin1.set_extra_border_size(10)
-        text_window = Wx::TextCtrl.new(
-                        @leftwin1, -1, "", Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, 
-                        Wx::TE_MULTILINE|Wx::SUNKEN_BORDER
-                        )
+    text_window = Wx::TextCtrl.new( @leftwin1,  
+                                    :value => 'A sub window',
+                                    :style =>  Wx::TE_MULTILINE|Wx::SUNKEN_BORDER)
+    winids << @leftwin1.id
 
-        text_window.set_value("A sub window")
+    # Another window to the left of the client window
+    @leftwin2 = Wx::SashLayoutWindow.new( self, 
+                                          :size => [200, 30], 
+                                          :style => Wx::NO_BORDER|Wx::SW_3D)
 
-        winids << @leftwin1.get_id
+    @leftwin2.default_size = [120, 1000]
+    @leftwin2.orientation  = Wx::LAYOUT_VERTICAL
+    @leftwin2.alignment    = Wx::LAYOUT_LEFT
+    @leftwin2.background_colour = Wx::Colour.new(0, 255, 255)
+    @leftwin2.set_sash_visible(Wx::SASH_RIGHT, true)
 
-        # Another window to the left of the client window
-        @leftwin2 = Wx::SashLayoutWindow.new(
-                self, -1, Wx::DEFAULT_POSITION, Wx::Size.new(200, 30), 
-                Wx::NO_BORDER|Wx::SW_3D
-                )
+    winids << @leftwin2.id
 
-        @leftwin2.set_default_size(Wx::Size.new(120, 1000))
-        @leftwin2.set_orientation(Wx::LAYOUT_VERTICAL)
-        @leftwin2.set_alignment(Wx::LAYOUT_LEFT)
-        @leftwin2.set_background_colour(Wx::Colour.new(0, 255, 255))
-        @leftwin2.set_sash_visible(Wx::SASH_RIGHT, true)
+    # will occupy the space not used by the Layout Algorithm
+    @remaining_space = Wx::Panel.new(self, :style =>  Wx::SUNKEN_BORDER)
 
-        winids << @leftwin2.get_id
+    evt_sash_dragged_range(winids.min, winids.max, :on_sash_drag) 
+    evt_size :on_size
+  end
 
-        # will occupy the space not used by the Layout Algorithm
-        @remaining_space = Wx::Panel.new(self, -1, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::SUNKEN_BORDER)
 
-        evt_sash_dragged_range(winids.min, winids.max) {|event| on_sash_drag(event) }
-        evt_size {|event| on_size(event) }
+  def on_sash_drag(event)
+    if event.get_drag_status == Wx::SASH_STATUS_OUT_OF_RANGE:
+        @log.write_text('drag == out of range')
+      return
     end
 
+    eobj = event.get_event_object
+    if eobj == @topwin
+      @log.write_text('topwin received drag event')
+      @topwin.default_size = Wx::Size.new(1000, event.drag_rect.height)
 
-    def on_sash_drag(event)
-        if event.get_drag_status == Wx::SASH_STATUS_OUT_OF_RANGE:
-            @log.write_text('drag == out of range')
-            return
-        end
+    elsif eobj == @leftwin1
+      @log.write_text('leftwin1 received drag event')
+      @leftwin1.default_size = Wx::Size.new(event.drag_rect.width, 1000)
 
-        eobj = event.get_event_object
-        if eobj == @topwin
-            @log.write_text('topwin received drag event')
-            @topwin.set_default_size(Wx::Size.new(1000, event.get_drag_rect.height))
+    elsif eobj == @leftwin2
+      @log.write_text('leftwin2 received drag event')
+      @leftwin2.default_size = Wx::Size.new(event.drag_rect.width, 1000)
 
-        elsif eobj == @leftwin1
-            @log.write_text('leftwin1 received drag event')
-            @leftwin1.set_default_size(Wx::Size.new(event.get_drag_rect.width, 1000))
-
-
-        elsif eobj == @leftwin2
-            @log.write_text('leftwin2 received drag event')
-            @leftwin2.set_default_size(Wx::Size.new(event.get_drag_rect.width, 1000))
-
-        elsif eobj == @bottomwin
-            @log.write_text('bottomwin received drag event')
-            @bottomwin.set_default_size(Wx::Size.new(1000, event.get_drag_rect.height))
-        end
-
-        Wx::LayoutAlgorithm.new.layout_window(self, @remaining_space)
-        @remaining_space.refresh
+    elsif eobj == @bottomwin
+      @log.write_text('bottomwin received drag event')
+      @bottomwin.default_size = Wx::Size.new(1000, event.drag_rect.height)
     end
 
-    def on_size(event)
-        Wx::LayoutAlgorithm.new.layout_window(self, @remaining_space)
-    end
+    Wx::LayoutAlgorithm.new.layout_window(self, @remaining_space)
+    @remaining_space.refresh
+  end
+
+  def on_size(event)
+    Wx::LayoutAlgorithm.new.layout_window(self, @remaining_space)
+  end
 
 end
 
 module Demo
-
   def Demo.run(frame, nb, log)
     TestPanel.new(nb, log)
   end
-    
+  
   def Demo.overview
     return <<EOS
 Wx::SashLayoutWindow responds to OnCalculateLayout events generated by 
