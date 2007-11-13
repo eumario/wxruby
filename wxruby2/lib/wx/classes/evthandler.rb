@@ -202,7 +202,7 @@ class Wx::EvtHandler
               Wx::CommandEvent],
     EventType['evt_calculate_layout', 0,
               Wx::EVT_CALCULATE_LAYOUT, 
-              Wx::Event],
+              Wx::CalculateLayoutEvent],
     EventType['evt_calendar', 1,
               Wx::EVT_CALENDAR_DOUBLECLICKED, 
               Wx::CalendarEvent],
