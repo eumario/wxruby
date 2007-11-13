@@ -3,8 +3,8 @@
 
 %include "../common.i"
 
-%module wxQueryLayoutInfoEvent
-GC_MANAGE_AS_EVENT(wxQueryLayoutInfoEvent);
+%module wxCalculateLayoutEvent
+GC_MANAGE_AS_EVENT(wxCalculateLayoutEvent);
 
 %{
 #include <wx/laywin.h>
@@ -12,4 +12,4 @@ GC_MANAGE_AS_EVENT(wxQueryLayoutInfoEvent);
 
 %import "include/wxObject.h"
 %import "include/wxEvent.h"
-%include "include/wxQueryLayoutInfoEvent.h"
+%include "include/wxCalculateLayoutEvent.h"
