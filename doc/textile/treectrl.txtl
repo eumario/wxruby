@@ -520,20 +520,14 @@ Returns the font of the item label.
 h3(#TreeCtrl_getitemimage). TreeCtrl#get_item_image
 
  Integer *get_item_image*(%(arg-type)TreeItemId% item, 
-                        %(arg-type)TreeItemIcon% which = TreeItemIcon_Normal)
+                          %(arg-type)int% which = Wx::TREE_ITEM_ICON_NORMAL)
 
 Gets the specified item image. The value of _which_ may be:
 
-
-TreeItemIcon_Normal to get the normal item image
-TreeItemIcon_Selected to get the selected item image (i.e. the image
-which is shown when the item is currently selected)
-TreeItemIcon_Expanded to get the expanded image (this only
-makes sense for items which have children - then this image is shown when the
-item is expanded and the normal image is shown when it is collapsed)
-TreeItemIcon_SelectedExpanded to get the selected expanded image
-(which is shown when an expanded item is currently selected)
-
+* @TREE_ITEM_ICON_NORMAL@ to get the normal item image
+* @TREE_ITEM_ICON_SELECTED@ to get the selected item image (i.e. the image which is shown when the item is currently selected)
+* @TREE_ITEM_ICON_EXPANDED@ to get the expanded image (this only makes sense for items which have children - then this image is shown when the item is expanded and the normal image is shown when it is collapsed)
+* @TREE_ITEM_ICON_SELECTED_EXPANDED@ to get the selected expanded image (which is shown when an expanded item is currently selected)
 
 
 h3(#TreeCtrl_getitemtext). TreeCtrl#get_item_text
