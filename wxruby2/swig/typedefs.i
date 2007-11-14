@@ -1,6 +1,7 @@
 // Copyright 2004-2007, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
+typedef double wxDouble;
 typedef int wxWindowID;
 typedef int wxCoord;
 typedef int wxEventType;
