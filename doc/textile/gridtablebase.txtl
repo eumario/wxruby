@@ -1,6 +1,56 @@
 h1(#wxgridtablebase). Wx::GridTableBase
 
-Grid table classes.
+GridTableBase is an advanced way of supplying data to the cells in a
+"Grid":grid.html. It is particularly useful for working with very large
+grids, and for closely connecting the Grid display with an underlying
+data source such as a SQL database.
+
+In a standard Grid, the size of the grid is specified using
+"Grid#create_table":grid.html#Grid_createtable, and then the contents of
+each cell specified using
+"Grid#set_value":grid.html#Grid_setvalue. Whilst this is this is
+straightforward for smaller grids, with very large grids it may become
+inefficient and slow to set all the values when only a small proportion
+are actually shown to the user at any one time. If the data source is,
+for example, a SQL database, the GUI event handling code in the grid,
+and the code to fetch and set rows in the database can become mixed up
+in the Grid class.
+
+"GridTableBase":gridtablebase.html is a class which can supply, on
+demand, cell values and visual appearance attributes as particular cells
+are displayed in a Grid. 
+
+To use this class, you must derive your own Ruby class from it, and
+implement at set of methods to return the grid's size, cell values, and
+visual attributes. Then, instead of calling "Grid#create_table" on the
+grid to set its size, call "Grid#set_table" and pass in an instance of
+your GridTableBase subclass.
+
+The number of methods that have to be defined in a subclass of
+GridTableBase will depend on the interactions that are permitted by the
+"Grid":grid.html class it will be associated with. The minimal set of
+methods that must be implemented in a read-only grid is:
+
+* get_attr
+* get_number_cols
+* get_number_rows
+* get_value
+* is_empty_cell
+
+In addition, you may wish to override:
+
+* get_row_label_value
+* get_col_label_value
+
+In order for a user to be able to edit values within the grid, you must
+also override:
+
+* set_value
+
+Additional methods will be needed if the Grid class provides a way to
+insert or delete rows or columns, or if custom
+"renderers":gridcellrenderer.html or "editors":gridcelleditor.html are
+used.
 
 h2. Derived from
 
@@ -40,9 +90,6 @@ h2. Methods
 * "GridTableBase#get_col_label_value":#GridTableBase_getcollabelvalue
 * "GridTableBase#set_row_label_value":#GridTableBase_setrowlabelvalue
 * "GridTableBase#set_col_label_value":#GridTableBase_setcollabelvalue
-* "GridTableBase#set_attr_provider":#GridTableBase_setattrprovider
-* "GridTableBase#get_attr_provider":#GridTableBase_getattrprovider
-* "GridTableBase#can_have_attributes":#GridTableBase_canhaveattributes
 * "GridTableBase#update_attr_rows":#GridTableBase_updateattrrows
 * "GridTableBase#update_attr_cols":#GridTableBase_updateattrcols
 * "GridTableBase#get_attr":#GridTableBase_getattr
@@ -55,32 +102,43 @@ h2. Methods
 
 h3(#GridTableBase_wxgridtablebase). GridTableBase.new
 
-  *destructor*()
+Creates a new GridTable. If you define your own @initialize@ function in
+your subclass of GridTableBase, you must ensure you call @super@ within
+that constructor.
 
 h3(#GridTableBase_getnumberrows). GridTableBase#get_number_rows
 
  Integer *get_number_rows*()
 
-You must override these functions in a derived table class.
+Should return the total number of rows in the grid. You must override these
+functions in a derived table class.
 
 h3(#GridTableBase_getnumbercols). GridTableBase#get_number_cols
 
  Integer *get_number_cols*()
 
+Should return the total number of columns in the grid. You must override
+this functions in a derived table class.
 
 h3(#GridTableBase_isemptycell). GridTableBase#is_empty_cell
 
  Boolean *is_empty_cell*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
+Should return true if a cell is empty. You must override this
+function in a derived table class.
 
 h3(#GridTableBase_getvalue). GridTableBase#get_value
 
  String *get_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
+Should return the content of the specified cell *as a Ruby string*. You
+must override this function in a derived table class.
 
 h3(#GridTableBase_setvalue). GridTableBase#set_value
 
   *set_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)String% value)
+
+Called when the value of a cell is updated by the user.
 
 
 h3(#GridTableBase_gettypename). GridTableBase#get_type_name
@@ -249,18 +307,19 @@ h3(#GridTableBase_updateattrcols). GridTableBase#update_attr_cols
 
 h3(#GridTableBase_getattr). GridTableBase#get_attr
 
- "GridCellAttr":gridcellattr.html *get_attr*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+ "GridCellAttr":gridcellattr.html *get_attr*(%(arg-type)Integer% row,  
+                                             %(arg-type)Integer% col,
+                                             %(arg-type)Integer% attr_kind)
 
-by default forwarded to GridCellAttrProvider if any. May be
-overridden to handle attributes directly in the table.
-
+May be overridden to handle attributes directly in the table.
 
 h3(#GridTableBase_setattr). GridTableBase#set_attr
 
-  *set_attr*(%(arg-type)GridCellAttr% attr,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
+  *set_attr*(%(arg-type)GridCellAttr% attr,  
+             %(arg-type)Integer% row,  
+             %(arg-type)Integer% col)
 
-these functions take ownership of the pointer
-
+Set the attribute for a cell.
 
 h3(#GridTableBase_setrowattr). GridTableBase#set_row_attr
 
