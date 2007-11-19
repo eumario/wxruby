@@ -6,12 +6,7 @@ reference counting, so copying and assignment operations are fast.
 h2. Derived from
 
 "GDIObject":gdiobject.html
-
 "Object":object.html
-
-h2. See also
-
-"RegionIterator":regioniterator.html
 
 <div id="methods">
 
@@ -81,30 +76,32 @@ Clears the current region.
 
 h3(#Region_contains). Region#contains
 
- "RegionContain":regioncontain.html *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ Integer *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ Integer *contains*(%(arg-type)Point% pt)
 
-Returns a value indicating whether the given point is contained within the region.
+Returns a false or true value indicating whether the given point is
+contained within the region.
 
- "RegionContain":regioncontain.html *contains*(%(arg-type)Point% pt)
+ Integer *contains*(%(arg-type)Rect% rect)
+ Integer *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                    %(arg-type)Integer% width,  %(arg-type)Integer% height)
 
-Returns a value indicating whether the given point is contained within the region.
-
- "RegionContain":regioncontain.html *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
-                          %(arg-type)Integer% width, 
-                          %(arg-type)Integer% height)
-
-Returns a value indicating whether the given rectangle is contained within the region.
-
- "RegionContain":regioncontain.html *contains*(%(arg-type)Rect% rect)
-
-Returns a value indicating whether the given rectangle is contained within the region.
+Returns a false or true value indicating whether the given rectangle is
+contained within the region.
 
 h4. Return value
 
-The return value is one of OutRegion, PartRegion and InRegion.
+All these methods test whether a given point or rectangle is contained
+with the region. If the point or rectangle is completely outside the
+rectangle, returns @false@. If the point or rectangle is contained,
+returns an integer (which will be true in Ruby). 
 
-On Windows, only OutRegion and InRegion are returned; a value InRegion then indicates that
-all or some part of the region is contained in this region.
+If testing a Rectangle the return value will distinguish between a
+wholly-contained rectangle (which will return value equal to
+@Wx::IN_REGION@) and a partly overlapping rectangle (which will have a
+return value of @Wx::PART_REGION@). Note that on Windows, this
+distinction is not made; the return value will always be @false@ or
+@Wx::IN_REGION@)
 
 h3(#Region_converttobitmap). Region#convert_to_bitmap
 
@@ -114,11 +111,6 @@ Convert the region to a black and white bitmap with the white pixels
 being inside the region.
 
 h3(#Region_getbox). Region#get_box
-
-  *get_box*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-          %(arg-type)Coord% height)
-
-Returns the outer bounds of the region.
 
  "Rect":rect.html *get_box*()
 
