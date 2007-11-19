@@ -16,9 +16,10 @@ class wxRegion : public wxGDIObject
  wxRegion(const wxBitmap& bmp, const wxColour& transColour = wxNullColour, int tolerance = 0);
  virtual ~wxRegion();
  void Clear();
- wxRegionContain Contains(long& x, long& y) const;
+ wxRegionContain Contains(wxCoord x, wxCoord y) const;
  wxRegionContain Contains(const wxPoint& pt) const;
- wxRegionContain Contains(long& x, long& y, long& width, long& height) const;
+ wxRegionContain Contains(wxCoord x, wxCoord y, 
+                          wxCoord width, wxCoord height) const;
  wxRegionContain Contains(const wxRect& rect) const;
  wxBitmap ConvertToBitmap() const;
  void GetBox(long& x, long& y, long& width, long& height) const;
