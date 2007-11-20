@@ -65,7 +65,7 @@ scintilla_lib = File.join( $WXLIBDIR, "wxmsw#{$WXVERSION}#{$POSTFIX}_stc.lib" )
 if File.exists?(scintilla_lib)
   windows_libs << scintilla_lib 
 else
-  $excluded_classes << "StyledTextCtrl"
+  $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
 end
 
 # Test for presence of OpenGL library; link it in if

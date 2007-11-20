@@ -28,7 +28,7 @@ gl_lib = $wx_libs[/\S+libwx\S+_gl\S+/]
 
 # StyledTextCtrl (Scintilla)
 if stc_lib.nil? or not File.exists?(stc_lib)
-  $excluded_classes << 'StyledTextCtrl'
+  $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
 else
   libs_str << ',stc'
 end
