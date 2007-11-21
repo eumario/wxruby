@@ -106,7 +106,7 @@ if $unicode_build
 end
 
 $extra_libs = [
-    "gdi32.lib", "winspool.lib", "comdlg32.lib",
+    "gdi32.lib", "gdiplus.lib", "winspool.lib", "comdlg32.lib",
     "shell32.lib", "ole32.lib", "oleaut32.lib", "uuid.lib",
     "odbc32.lib ", "odbccp32.lib", "comctl32.lib", 
     "rpcrt4.lib", "winmm.lib","#{Config::TOPDIR}/lib/#{CONFIG['RUBY_SO_NAME']}.lib"].join(' ')
