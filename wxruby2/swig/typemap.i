@@ -159,7 +159,7 @@
 	}
 }
 
-%typemap(typecheck) wxSize&, wxPoint& {
+%typemap(typecheck, precedence=SWIG_TYPECHECK_POINTER) wxSize&, wxPoint& {
   void *vptr = 0;
   $1 = 0;
   if ( TYPE($input) == T_ARRAY && RARRAY($input)->len == 2 )
