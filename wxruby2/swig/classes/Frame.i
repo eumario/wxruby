@@ -28,6 +28,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxFrame);
 }
 
 %ignore wxFrame::Command;
+%feature("nodirector") IsFullScreen;
 
 
 %import "include/wxObject.h"
