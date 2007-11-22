@@ -5,6 +5,9 @@
 
 %module(directors="1") wxTopLevelWindow
 GC_MANAGE_AS_WINDOW(wxTopLevelWindow);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTopLevelWindow);
+
+%feature("nodirector") IsFullScreen;
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
