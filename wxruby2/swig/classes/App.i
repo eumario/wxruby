@@ -107,6 +107,7 @@ public:
 
 #ifdef __WXDEBUG__
 	printf("=== Starting App GC mark phase\n");
+    VALUE before = rb_funcall(rb_cTime, rb_intern("now"), 0);
 #endif
 
 	// If the App has ended, the ruby object will have been unlinked from 
@@ -120,8 +121,11 @@ public:
 	// objects (swig_ruby_trackings) and check each one.
 	rb_iterate(rb_each, swig_ruby_trackings, (VALUE(*)(...))mark_iterate, Qnil);
 
+
 #ifdef __WXDEBUG__
-	printf("=== App GC mark phase completed\n");
+    VALUE after = rb_funcall(rb_cTime, rb_intern("now"), 0);
+	printf("=== App GC mark phase completed; marking took %f s\n",
+           NUM2DBL(rb_funcall(after, rb_intern("-"), 1, before)));
 #endif
 
   }
