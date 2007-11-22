@@ -97,8 +97,7 @@ def create_package_tasks
     p_task.need_tar_gz = true
     pkg_files = p_task.package_files
     pkg_files.include('README', 'LICENSE', 'ChangeLog', 'rakefile')
-    pkg_files.include('lib/wx.rb', 'lib/wx/version.rb')
-    pkg_files.include('lib/wx/classes/*')
+    pkg_files.include('lib/**/*.rb')
     pkg_files.include('swig/**/*')
     pkg_files.include('tests/**/*')
     pkg_files.include('rake/**/*')
