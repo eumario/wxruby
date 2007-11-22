@@ -463,3 +463,10 @@ Wx::define_keyword_ctors('CollapsiblePane') do
   wx_ctor_params :validator, :name => 'collapsiblePane'
 end
 
+Wx::define_keyword_ctors('MediaCtrl') do
+  wx_ctor_params :id, :filename => ''
+  wx_ctor_params :pos, :size, :style => 0
+  wx_ctor_params :backend => ''
+  wx_ctor_params :validator, :name => 'mediaCtrl'
+end
+
