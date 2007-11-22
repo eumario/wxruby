@@ -23,19 +23,25 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNotebook);
 #define wxNB_NOPAGETHEME      0x0400
 #define wxNB_FLAT             0x0800
 
-// Ruby handles memory management - always use SetImageList
-%ignore wxNotebook::AssignImageList;
-
 #define wxNotebookPage wxWindow
+
+// No default ctor
+%ignore wxNotebook::wxNotebook();
 
 // Protect panels etc added as Notebook pages from being GC'd by Ruby;
 // avoids double-free segfaults on exit on GTK
 %apply SWIGTYPE *DISOWN { wxNotebookPage* page };
 
-// No default ctor
-%ignore wxNotebook::wxNotebook();
+// Avoid premature deletion of ImageList providing icons for notebook
+// tabs; wxRuby takes ownership when the ImageList is assigned,
+// wxWidgets will delete the ImageList with the Notebook.
+%apply SWIGTYPE *DISOWN { wxImageList* };
+// This version in Wx doesn't automatically delete
+%ignore wxNotebook::SetImageList;
+// Use the version that deletes the ImageList when the Notebook is destroyed
+%rename(SetImageList) wxNotebook::AssignImageList;
 
-// HAndle with events rather than virtual methods
+// Users should handle page changes with events, not virtual methods
 %ignore wxNotebook::OnSelChange;
 %feature("nodirector") wxNotebook::OnSelChange;
 
