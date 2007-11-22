@@ -41,6 +41,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 #include <wx/aui/aui.h>
 #include <wx/treebook.h>
 #include <wx/hyperlink.h>
+#include <wx/mediactrl.h>
 
 #ifdef WXSCINTILLA
 #    include <wx/wxscintilla.h>
@@ -337,6 +338,9 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_COMMAND_AUINOTEBOOK_DRAG_MOTION;
 %constant const int wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND;
 
+%constant const int wxEVT_MEDIA_FINISHED;
+%constant const int wxEVT_MEDIA_STOP;
+%constant const int wxEVT_MEDIA_LOADED;
 
 %import "include/wxObject.h"
 %include "include/wxEvent.h"
