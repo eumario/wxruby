@@ -1,12 +1,18 @@
 h1(#wximagelist). Wx::ImageList
 
-A ImageList contains a list of images, which are stored in
-an unspecified form. Images can have masks for transparent
-drawing, and can be made from a variety of sources including bitmaps
-and icons.
+A ImageList contains a list of images, which can be used to supply
+images/icons to controls. The images are stored in an unspecified form
+and can have masks for transparent drawing. The images in a list can be
+supplied by a variety of classes including "bitmaps":bitmap.html and
+"icons":icon.html.
 
-ImageList is used principally in conjunction with "TreeCtrl":treectrl.html and
- "ListCtrl":listctrl.html classes.
+ImageList is used in conjunction with "TreeCtrl":treectrl.html,
+"ListCtrl":listctrl.html and "Notebook":notebook.html classes. All of
+these classes have methods to assign an ImageList to the control, and
+then methods to select which image to use for a particular item within
+the control, by using the index of the image in the list. Note that a
+particular ImageList should only be assigned to one control - don't try
+to share an ImageList instance between different Windows.
 
 h2. Derived from
 
