@@ -353,7 +353,12 @@ h3(#Notebook_setimagelist). Notebook#set_image_list
 
   *set_image_list*(%(arg-type)ImageList% imageList)
 
-Sets the "image list":imagelist.html for the page control.
+Sets the "image list":imagelist.html which can be used to supply icons
+for each tab within the notebook. 
+
+Once an image list has been assigned to a Notebook, it "belongs" to the
+Notebook, and should not be set as the image list for another Notebook
+or other control.
 
 h3(#Notebook_setpadding). Notebook#set_padding
 
