@@ -1,0 +1,112 @@
+h1(#wxgraphicsmatrix). Wx::GraphicsMatrix
+
+A GraphicsMatrix is a native representation of an affine matrix. The contents are specific and private to the respective renderer. Instances are ref counted and can therefore be assigned as usual. The only way to get a valid instance is via a CreateMatrix call on the graphics context or the renderer instance.
+
+h2. Derived from
+
+"GraphicsObject":graphicsobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GraphicsMatrix#concat":#GraphicsMatrix_concat
+* "GraphicsMatrix#get":#GraphicsMatrix_get
+* "GraphicsMatrix#get_native_matrix":#GraphicsMatrix_getnativematrix
+* "GraphicsMatrix#invert":#GraphicsMatrix_invert
+* "GraphicsMatrix#is_equal":#GraphicsMatrix_isequal
+* "GraphicsMatrix#is_identity":#GraphicsMatrix_isidentity
+* "GraphicsMatrix#rotate":#GraphicsMatrix_rotate
+* "GraphicsMatrix#scale":#GraphicsMatrix_scale
+* "GraphicsMatrix#translate":#GraphicsMatrix_translate
+* "GraphicsMatrix#set":#GraphicsMatrix_set
+* "GraphicsMatrix#transform_point":#GraphicsMatrix_transformpoint
+* "GraphicsMatrix#transform_distance":#GraphicsMatrix_transformdistance
+
+</div>
+
+
+h3(#GraphicsMatrix_concat). GraphicsMatrix#concat
+
+  *concat*(%(arg-type)GraphicsMatrix% t)
+
+Concatenates the matrix passed with the current matrix.
+
+  *concat*(%(arg-type)GraphicsMatrix% t)
+
+
+h3(#GraphicsMatrix_get). GraphicsMatrix#get
+
+ void  *get*(%(arg-type)Double% a=NULL,                         %(arg-type)Double% b=NULL, 
+                                  %(arg-type)Double% c=NULL, 
+                                  %(arg-type)Double% d=NULL, 
+                                  %(arg-type)Double% tx=NULL, 
+                                  %(arg-type)Double% ty=NULL)
+
+Returns the component values of the matrix via the argument pointers.
+
+h3(#GraphicsMatrix_getnativematrix). GraphicsMatrix#get_native_matrix
+
+  *get_native_matrix*()
+
+Returns the native representation of the matrix. For CoreGraphics this is a CFAffineMatrix pointer. For GDIPlus a Matrix Pointer and for Cairo a cairo_matrix_t pointer.
+
+h3(#GraphicsMatrix_invert). GraphicsMatrix#invert
+
+  *invert*()
+
+Inverts the matrix.
+
+h3(#GraphicsMatrix_isequal). GraphicsMatrix#is_equal
+
+ Boolean *is_equal*(%(arg-type)GraphicsMatrix% t)
+
+Returns true if the elements of the transformation matrix are equal.
+
+h3(#GraphicsMatrix_isidentity). GraphicsMatrix#is_identity
+
+ Boolean *is_identity*()
+
+Return true if this is the identity matrix.
+
+h3(#GraphicsMatrix_rotate). GraphicsMatrix#rotate
+
+  *rotate*(%(arg-type)Double% angle)
+
+Rotates this matrix (radians).
+
+h3(#GraphicsMatrix_scale). GraphicsMatrix#scale
+
+  *scale*(%(arg-type)Double% xScale,  %(arg-type)Double% yScale)
+
+Scales this matrix.
+
+h3(#GraphicsMatrix_translate). GraphicsMatrix#translate
+
+  *translate*(%(arg-type)Double% dx,  %(arg-type)Double% dy)
+
+Translates this matrix.
+
+h3(#GraphicsMatrix_set). GraphicsMatrix#set
+
+  *set*(%(arg-type)Double% a = 1.0,  %(arg-type)Double% b = 0.0,  %(arg-type)Double% c = 0.0, 
+      %(arg-type)Double% d = 1.0, 
+      %(arg-type)Double% tx = 0.0, 
+      %(arg-type)Double% ty = 0.0)
+
+Sets the matrix to the respective values (default values are the identity matrix)
+
+h3(#GraphicsMatrix_transformpoint). GraphicsMatrix#transform_point
+
+  *transform_point*(%(arg-type)Double% x,  %(arg-type)Double% y)
+
+Applies this matrix to a point.
+
+h3(#GraphicsMatrix_transformdistance). GraphicsMatrix#transform_distance
+
+  *transform_distance*(%(arg-type)Double% dx,  %(arg-type)Double% dy)
+
+Applies this matrix to a distance (ie. performs all transforms except translations)
+
+
+
