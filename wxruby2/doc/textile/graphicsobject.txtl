@@ -1,0 +1,20 @@
+h1(#wxgraphicsobject). Wx::GraphicsObject
+
+This class is the superclass of native graphics objects like pens
+etc. It has no useful methods in wxRuby, and does not need to be used in
+code.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"GraphicsBrush":graphicsbrush.html, "GraphicsPen":graphicspen.html, "GraphicsMatrix":graphicsmatrix.html, "GraphicsPath":graphicspath.html
+
+<div id="methods">
+
+h2. Methods
+
+</div>
+
