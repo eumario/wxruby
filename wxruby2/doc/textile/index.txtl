@@ -105,6 +105,7 @@ of user input and interaction.
 |RadioButton|A round button to be used with others in a mutually exclusive way|
 |Slider|A slider that can be dragged by the user|
 |VListBox|A listbox supporting variable height rows|
+|MediaCtrl|A control for playing sound and video|
 
 "top":#top
 
@@ -260,6 +261,15 @@ different device contexts.
 |PostScriptDC|A device context for drawing into PostScript files|
 |PrinterDC|A device context for drawing to printers|
 |RendererNative|Assists drawing native-look GUI elements in custom controls|
+
+wxRuby also provides an alternative set of Graphics classes that can be
+used for high-quality anti-aliased drawing:
+
+|GraphicsContext|An anti-aliased Device Context|
+|GraphicsBrush|Brush for use with GraphicsContext|
+|GraphicsFont|Font for use with GraphicsContext|
+|GraphicsPen|Pen for use with GraphicsContext|
+|GraphicsMatrix|Matrix for specifying transformations in a GraphicsContext|
 
 "top":#top
 
