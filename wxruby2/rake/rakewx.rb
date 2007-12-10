@@ -152,7 +152,7 @@ end
 
 desc "Removes installed library files from site_ruby"
 task :uninstall do | t |
-  rm_rf File.join(Config::CONFIG['sitearchdir'], $dl_lib)
+  rm_rf File.join(Config::CONFIG['sitearchdir'],File.basename(TARGET_LIB))
   rm_rf File.join(Config::CONFIG['sitelibdir'], 'wx.rb')
   rm_rf File.join(Config::CONFIG['sitelibdir'], 'wx')
 end
