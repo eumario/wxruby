@@ -143,7 +143,7 @@ task :install => [ :default, *ALL_RUBY_LIB_FILES ] do | t |
   force_mkdir File.join(dest_dir, 'wx')
   force_mkdir File.join(dest_dir, 'wx', 'classes')
   cp TARGET_LIB, Config::CONFIG['sitearchdir']
-  all_ruby_lib_files.each do | lib_file |
+  ALL_RUBY_LIB_FILES.each do | lib_file |
     dest = lib_file.sub(/^lib/, dest_dir)
     cp lib_file, dest
     chmod 0755, dest
