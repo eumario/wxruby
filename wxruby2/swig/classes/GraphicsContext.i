@@ -10,6 +10,10 @@ GC_MANAGE_AS_OBJECT(wxGraphicsContext);
 #include <wx/graphics.h>
 %}
 
+%ignore wxGraphicsContext(wxGraphicsRenderer* renderer);
+%ignore wxGraphicsContext::CreateFromNative;
+%ignore wxGraphicsContext::CreateFromNativeWindow;
+
 %import  "include/wxObject.h"
 %import  "include/wxGraphicsObject.h"
 
