@@ -10,6 +10,8 @@ GC_MANAGE_AS_OBJECT(wxGraphicsObject);
 #include <wx/graphics.h>
 %}
 
+%ignore wxGraphicsObject::GetRenderer;
+
 %import  "include/wxObject.h"
 %include  "include/wxGraphicsObject.h"
 
