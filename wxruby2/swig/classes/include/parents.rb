@@ -266,6 +266,7 @@ $parents = {
     'wxScrollEvent' => 'wxCommandEvent',
     'wxScrollWinEvent' => 'wxEvent',
     'wxScrolledWindow' => 'wxPanel',
+    'wxSearchCtrl' => 'wxTextCtrl',
     'wxSimpleHelpProvider' => 'wxHelpProvider',
     'wxSingleChoiceDialog' => 'wxDialog',
     'wxSizeEvent' => 'wxEvent',
