@@ -24,7 +24,7 @@ enum wxXmlResourceFlags
 // are disambiguated below.
 %rename(LoadDialogSubclass) wxXmlResource::LoadDialog(wxDialog *dlg, wxWindow *parent, const wxString &name);
 
-%rename(LoadPanelSubclass) wxXmlResource::LoadPanel(wxPanel *pan, wxWindow *parent, wxString &name);
+%rename(LoadPanelSubclass) wxXmlResource::LoadPanel(wxPanel *panel, wxWindow *parent, const wxString &name);
 
 %rename(LoadFrameSubclass) wxXmlResource::LoadFrame(wxFrame *frame, wxWindow *parent, const wxString &name);
 
