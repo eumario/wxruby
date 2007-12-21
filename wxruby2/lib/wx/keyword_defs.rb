@@ -428,6 +428,13 @@ Wx::define_keyword_ctors('SpinButton') do
    wx_ctor_params :name => 'spinButton'
 end
 
+# wxScrollBar - standalone scrollbar with arrows and thumb 
+Wx::define_keyword_ctors('ScrollBar') do 
+   wx_ctor_params :id, :pos, :size, :style => Wx::SB_HORIZONTAL
+   wx_ctor_params :validator, :name => 'scrollBar'
+end
+
+
 # wxVListBox 	A listbox supporting variable height rows
 
 # wxTextCtrl 	Single or multiline text editing control
