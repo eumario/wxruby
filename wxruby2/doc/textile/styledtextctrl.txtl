@@ -1326,7 +1326,13 @@ Set style size, face, bold, italic, and underline attributes from     a wxFont's
 
 h3(#STC_stylesetfontattr). StyledTextCtrl#style_set_font_attr
 
-  *style_set_font_attr*(%(arg-type)Integer% styleNum, %(arg-type)Integer% size, %(arg-type)String% faceName, %(arg-type)Boolean% bold, %(arg-type)Boolean% italic, %(arg-type)Boolean% underline, %(arg-type)FontEncoding% encoding=wxFONTENCODING_DEFAULT)
+  *style_set_font_attr*(%(arg-type)Integer% styleNum,
+                        %(arg-type)Integer% size, 
+                        %(arg-type)String% faceName, 
+                        %(arg-type)Boolean% bold,  
+                        %(arg-type)Boolean% italic,
+                        %(arg-type)Boolean% underline, 
+                        %(arg-type)FontEncoding% encoding=Wx::FONTENCODING_DEFAULT)
 
 Set all font style attributes at once.
 
