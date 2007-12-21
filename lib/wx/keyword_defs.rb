@@ -477,3 +477,9 @@ Wx::define_keyword_ctors('MediaCtrl') do
   wx_ctor_params :validator, :name => 'mediaCtrl'
 end
 
+Wx::define_keyword_ctors('SearchCtrl') do
+  wx_ctor_params :id, :value => ''
+  wx_ctor_params :pos, :size, :style => 0
+  wx_ctor_params :validator, :name = 'searchCtrl'
+end
+
