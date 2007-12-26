@@ -9,32 +9,36 @@ camelCaseFile = ARGV[0]+".old"
 File.rename(ARGV[0], camelCaseFile)
 
 this_module = File.basename(ARGV[0])
+class String
+  ACRONYMS = /([A-Z0-9_]{2,})(?=[A-Z][a-z])/
+  CAPITALS = /([a-z])(?=[A-Z0-9])/
+  NUMBERS  = /(\d+)(?=[A-Za-z_])/
 
-def un_camelcase(func)
-    if(func[0,2] == 'wx')
-        func = func[2..-1]
-    end
-    result = ""
-    scratch = ""
-    func.each_byte do |byte|
-        if (?A..?Z).include? byte
-            scratch << byte.chr
-        else
-            if scratch.size==1
-                result += "_"+scratch
-                scratch = ""
-            elsif scratch.size>1
-                result += "_"+scratch[0..-2]+"_"+scratch[-1,1]
-                scratch = ""
-            end
-                result += byte.chr
-        end
-    end
-    result += "_"+scratch if scratch!=""
-    result = result[1..-1] if result[0,1]=='_'
-    result.downcase
+  def un_camelcase(word_sep = '_')
+    dup.un_camelcase!(word_sep)
+  end
+
+  def un_camelcase!(word_sep = '_')
+    gsub!(ACRONYMS) { $1 + word_sep }
+    gsub!(CAPITALS) { $1 + word_sep }
+    gsub!(NUMBERS)  { $1 + word_sep }
+    downcase!
+    self
+  end
+
+  def camelcase(word_sep = '_')
+    dup.camelcase!(word_sep)
+  end
+
+  def camelcase!(word_sep = '_')
+    gsub!(/(?:\A|#{word_sep})([a-z])/) { $1.upcase }
+  end
+
+  # True if +self+ appears to be a camelcased word
+  def camelcase?()
+    self =~ /^(?:[A-Z][a-z]+){2,}/
+  end
 end
-    
 
 def fix_define_method(line)
     re = Regexp.new('".*"')
@@ -43,7 +47,7 @@ def fix_define_method(line)
         quoted_method_name = match[0]
         return line if quoted_method_name == '"THE_APP"'
         method_name = quoted_method_name[1..-2]
-        new_method_name = '"' + un_camelcase(method_name) + '"'
+        new_method_name = '"%s"' % method_name.un_camelcase
         line[quoted_method_name] = new_method_name
         #puts(line)
     end
