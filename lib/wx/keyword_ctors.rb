@@ -135,8 +135,8 @@ module Wx
         # get keyword arguments from mixed args if supplied, else empty
         kwa = mixed_args.last.kind_of?(Hash) ? mixed_args.pop : {}
         out_args = []
-        param_spec.zip(mixed_args) do | param, arg |
-          if arg # use the supplied list arg 
+        param_spec.each_with_index do | param, i |
+          if arg = mixed_args[i] # use the supplied list arg 
             out_args << arg
           elsif kwa.key?(param.name) # use the keyword arg
             out_args << kwa[param.name]
