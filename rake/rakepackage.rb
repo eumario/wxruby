@@ -5,12 +5,6 @@ require 'rake/packagetask'
 # Two important ones:
 # :gem     - build a binary wxruby gem for current platform
 # :package - build a platfrom-neutral source tarball
-
-# Three less important ones:
-# :gem_mswin - build a binary gem for Win32 (-i686)
-# :gem_osx   - build a binary gem for OS X (-ppc)
-# :gem_linux - build a binary gem for Linux (-i686)
-
 task :version do
   if WXRUBY_VERSION.empty?
     raise "Cannot build a package without a version being specified\n" +
@@ -46,11 +40,6 @@ $base_gemspec = Gem::Specification.new do | spec |
   spec.has_rdoc = false
 end
 
-GEM_PLATFORMS = { 'mswin' => [ Gem::Platform::WIN32,  '.so' ],
-                  'osx'   => [ Gem::Platform::DARWIN, '.bundle' ],
-                  'linux' => [ Gem::Platform::LINUX_586, '.so' ] }
-
-
 def create_release_tasks
   create_gem_tasks
   create_package_tasks
@@ -74,21 +63,6 @@ def create_gem_tasks
     end
     Gem::manage_gems()
     Gem::Builder.new(this_gemspec).build
-  end
-
-  # named platform binary gem tasks to allow cross-building
-  GEM_PLATFORMS.each do | platform, details |
-    gem_platform, ext = details
-    gem_task = "gem_#{platform}".intern
-    task gem_task => [ :version ] do 
-      this_gemspec = $base_gemspec.dup()      
-      this_gemspec.instance_eval do 
-        self.platform = gem_platform
-        self.files += [ File.join($dest_dir, "wxruby2#{ext}") ]
-      end
-      Gem::manage_gems()
-      Gem::Builder.new(this_gemspec).build
-    end
   end
 end
 
