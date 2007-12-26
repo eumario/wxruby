@@ -113,9 +113,9 @@ class Wx::EvtHandler
       return block
     elsif meth and not block
       h_meth = case meth
-        when Symbol, String : self.method(meth)
-        when Proc : meth
-        when Method : meth.to_proc
+        when Symbol, String then self.method(meth)
+        when Proc then meth
+        when Method then meth.to_proc
       end
       if h_meth.arity == 1
         return lambda { | evt | h_meth.call(evt) }
@@ -133,8 +133,8 @@ class Wx::EvtHandler
   # parameter or by calling the wx_id method of a passed Window.
   def acquire_id(window_or_id)
     case window_or_id
-    when Fixnum : window_or_id
-    when Wx::Window, Wx::MenuItem : window_or_id.wx_id
+    when Fixnum then window_or_id
+    when Wx::Window, Wx::MenuItem then window_or_id.wx_id
     else Kernel.raise ArgumentError, 
                      "Must specify Wx::Window event source or its Wx id, " +
                      "not '#{window_or_id.inspect}'",
