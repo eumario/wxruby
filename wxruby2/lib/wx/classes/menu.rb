@@ -23,9 +23,9 @@ class Wx::Menu
         old_meth = instance_method(meth)
         define_method(meth) do | *args |
           case args.first
-            when Fixnum : old_meth.bind(self).call(*args)
-            when String : old_meth.bind(self).call(Wx::ID_ANY, *args)
-            when Wx::MenuItem : old_meth.bind(self).call(args.first)
+            when Fixnum then old_meth.bind(self).call(*args)
+            when String then old_meth.bind(self).call(Wx::ID_ANY, *args)
+            when Wx::MenuItem then old_meth.bind(self).call(args.first)
           end
         end
       end
@@ -46,9 +46,9 @@ class Wx::Menu
         old_meth = instance_method(meth)
         define_method(meth) do | pos, *args |
           case args.first
-            when Fixnum : old_meth.bind(self).call(pos, *args)
-            when String : old_meth.bind(self).call(pos, Wx::ID_ANY, *args)
-            when Wx::MenuItem : old_meth.bind(self).call(pos, args.first)
+            when Fixnum then old_meth.bind(self).call(pos, *args)
+            when String then old_meth.bind(self).call(pos, Wx::ID_ANY, *args)
+            when Wx::MenuItem then old_meth.bind(self).call(pos, args.first)
           end
         end
       end
