@@ -148,7 +148,6 @@ h2. Methods
 * "TreeCtrl#expand":#TreeCtrl_expand
 * "TreeCtrl#expand_all":#TreeCtrl_expandall
 * "TreeCtrl#expand_all_children":#TreeCtrl_expandallchildren
-* "TreeCtrl#get_bounding_rect":#TreeCtrl_getboundingrect
 * "TreeCtrl#get_buttons_image_list":#TreeCtrl_getbuttonsimagelist
 * "TreeCtrl#get_children":#TreeCtrl_getchildren
 * "TreeCtrl#get_children_count":#TreeCtrl_getchildrencount
@@ -162,8 +161,10 @@ h2. Methods
 * "TreeCtrl#get_item_data":#TreeCtrl_getitemdata
 * "TreeCtrl#get_item_font":#TreeCtrl_getitemfont
 * "TreeCtrl#get_item_image":#TreeCtrl_getitemimage
+* "TreeCtrl#get_item_rect":#TreeCtrl_getitemrect
 * "TreeCtrl#get_item_text":#TreeCtrl_getitemtext
 * "TreeCtrl#get_item_text_colour":#TreeCtrl_getitemtextcolour
+* "TreeCtrl#get_label_rect":#TreeCtrl_getlabelrect
 * "TreeCtrl#get_last_child":#TreeCtrl_getlastchild
 * "TreeCtrl#get_next_sibling":#TreeCtrl_getnextsibling
 * "TreeCtrl#get_next_visible":#TreeCtrl_getnextvisible
@@ -409,24 +410,6 @@ h3(#TreeCtrl_expandallchildren). TreeCtrl#expand_all_children
 
 Expands the given item and all its children recursively.
 
-
-h3(#TreeCtrl_getitemrect). TreeCtrl#get_bounding_rect
-
- Boolean *get_bounding_rect*(%(arg-type)TreeItemId% item,  %(arg-type)Rect% rect, 
-                           %(arg-type)Boolean% textOnly = @false@)
-
-Retrieves the rectangle bounding the _item_. If _textOnly_ is @true@,
-only the rectangle around the item's label will be returned, otherwise the
-item's image is also taken into account.
-
-The return value is @true@ if the rectangle was successfully retrieved or @false@
-if it was not (in this case _rect_ is not changed) -- for example, if the
-item is currently invisible.
-
-Notice that the rectangle coordinates are logical, not physical ones. So, for
-example, the x coordinate may be negative if the tree has a horizontal
-scrollbar and its position is not $0$.
-
 h3(#TreeCtrl_getbuttonsimagelist). TreeCtrl#get_buttons_image_list
 
  "ImageList":imagelist.html *get_buttons_image_list*()
@@ -529,6 +512,20 @@ Gets the specified item image. The value of _which_ may be:
 * @TREE_ITEM_ICON_EXPANDED@ to get the expanded image (this only makes sense for items which have children - then this image is shown when the item is expanded and the normal image is shown when it is collapsed)
 * @TREE_ITEM_ICON_SELECTED_EXPANDED@ to get the selected expanded image (which is shown when an expanded item is currently selected)
 
+h3(#TreeCtrl_getitemrect). TreeCtrl#get_item_rect
+
+  "Rect":rect.html *get_item_rect*(%(arg-type)TreeItemId% item)
+
+Retrieves the pixel location and size of a tree item, including any
+image or button. Returns a the "rectangle":rect.html bounding the
+_item_, or @nil@ if the item is not valid, for example, if it is
+currently invisible within a collapsed parent.
+
+Notice that the rectangle coordinates are logical, not physical
+ones. So, for example, the x coordinate may be negative if the tree has
+a horizontal scrollbar and its position is not @0@.
+
+See also "get_label_rect":#TreeCtrl_getlabelrect.
 
 h3(#TreeCtrl_getitemtext). TreeCtrl#get_item_text
 
@@ -543,6 +540,20 @@ h3(#TreeCtrl_getitemtextcolour). TreeCtrl#get_item_text_colour
 
 Returns the colour of the item label.
 
+h3(#TreeCtrl_getitemrect). TreeCtrl#get_label_rect
+
+  "Rect":rect.html *get_label_rect*(%(arg-type)TreeItemId% item)
+
+Retrieves the pixel location and size of a tree item's label. Returns a
+the "rectangle":rect.html bounding the _item_ label, or @nil@ if the item is
+not valid, for example, if it is currently invisible within a collapsed
+parent.
+
+Notice that the rectangle coordinates are logical, not physical
+ones. So, for example, the x coordinate may be negative if the tree has
+a horizontal scrollbar and its position is not @0@.
+
+See also "get_item_rect":#TreeCtrl_getitemrect.
 
 h3(#TreeCtrl_getlastchild). TreeCtrl#get_last_child
 
