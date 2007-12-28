@@ -97,21 +97,6 @@ class MyTreeCtrl < Wx::TreeCtrl
 
     evt_right_dclick :on_rmouse_dclick
     evt_right_up :on_rmouse_up
-    evt_paint :on_paint
-  end
-
-  def on_paint(e)
-    super
-    paint do | dc |
-      dc.clear
-      dc.pen = Wx::RED_PEN
-      each do | item | 
-        if rect = label_rect(item)
-          dc.draw_line(rect.left, rect.top, 
-                        rect.right, rect.bottom)
-        end
-      end
-    end
   end
 
   def show_info(id)
@@ -222,6 +207,7 @@ class MyTreeCtrl < Wx::TreeCtrl
           image = imageSel = -1
         end
         id = append_item(parent_id, str, image, imageSel)
+
         # and now we also set the expanded one (only for the folders)
         if has_children && Wx::get_app.show_images()
           set_item_image( id, TreeCtrlIcon_FolderOpened,
@@ -320,6 +306,7 @@ class MyTreeCtrl < Wx::TreeCtrl
 
   def on_item_expanded(event)
     Wx::log_message("OnItemExpanded")
+    event.skip
   end
 
   def on_item_expanding(event)
@@ -654,9 +641,6 @@ class MyTreeCtrl < Wx::TreeCtrl
     if item_id  = event.item
       show_info(item_id)
     end
-    puts get_item_rect(event.item)
-    puts get_label_rect(event.item)
-
     Wx::log_message("OnItemActivated")
   end
 
