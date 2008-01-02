@@ -181,6 +181,7 @@ class GridFrame < Wx::Frame
     @grid.auto_size_row(3, true)
 
     # Display of cells can be customised
+    @grid.set_cell_editor(6, 0, Wx::GridCellBoolEditor.new)
     @grid.set_cell_renderer(6, 0, Wx::GridCellBoolRenderer.new)
     @grid.set_cell_value(6, 1, 'Cell to the left displayed as boolean')
   end
