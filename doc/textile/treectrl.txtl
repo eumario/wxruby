@@ -783,15 +783,7 @@ items in the tree control. The function should return a negative, zero or
 positive value if the first item is less than, equal to or greater than the
 second one.
 
-Please note that you must use RTTI macros 
-"DECLARE_DYNAMIC_CLASS":declaredynamicclass.html and 
-"IMPLEMENT_DYNAMIC_CLASS":implementdynamicclass.html if you override this
-function because otherwise the base class considers that it is not overridden
-and uses the default comparison, i.e. sorts the items alphabetically, which
-allows it optimize away the calls to the virtual function completely.
-
 See also: "sort_children":#TreeCtrl_sortchildren
-
 
 h3(#TreeCtrl_prependitem). TreeCtrl#prepend_item
 
