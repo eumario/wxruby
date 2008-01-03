@@ -21,18 +21,25 @@ def check_swig
   begin
     version = `#{SWIG_CMD} -version`[/\d+\.\d+\.\d+/]
   rescue
-    raise "Could not run SWIG; check that SWIG's installed in PATH"
+    raise "Could not run SWIG (#{SWIG_CMD})"
   end
 
   # Very old versions put --version on STDERR, not STDOUT
   unless version
-    raise "Could not get info from SWIG; is a very old version  installed?"
+    raise "Could not get version info from SWIG; " + 
+          "is a very old version installed?.\n" + 
+          "The recommended version is #{SWIG_MAXIMUM_VERSION}"
   end
 
   if version < SWIG_MINIMUM_VERSION
     raise "SWIG version '#{version}' installed, " +
-          "#{SWIG_MINIMUM_VERSION} required"
+          "minimum version required is #{SWIG_MINIMUM_VERSION}.\n" + 
+          "The recommended version is #{SWIG_MAXIMUM_VERSION}"
+  elsif version > SWIG_MAXIMUM_VERSION 
+    raise "SWIG version '#{version}' installed, " +
+          "maximum version permitted is #{SWIG_MAXIMUM_VERSION}"
   end
+
   $have_good_swig = true
 end
 

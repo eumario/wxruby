@@ -10,7 +10,7 @@
 
 require "rake/rakeutil"
 
-# DETERMINE OR SET VERSION
+# Determine or set version of wxRuby library
 require 'rake/rakeversion'
 
 # STANDARD BUILD DIRECTORIES
@@ -20,20 +20,22 @@ OBJ_DIR  = 'obj'
 DEST_DIR = 'lib'
 CLASSES_DIR = File.join(SWIG_DIR, 'classes')
 
-SWIG_CMD = ENV['SWIGCMD'] || "swig"
-SWIG_MINIMUM_VERSION = '1.3.29'
-
-# What we're eventually building
+# THE BINARY LIBRARY TO BE COMPILED
 DLL_LIB = "wxruby2.#{Config::CONFIG["DLEXT"]}"
 TARGET_LIB = File.join(DEST_DIR, DLL_LIB)
 
+# FOR ENSURING SUITABLE SWIG VERSION IS AVAILABLE
+SWIG_CMD = ENV['SWIG_CMD'] || "swig"
+SWIG_MINIMUM_VERSION = '1.3.29'
+SWIG_MAXIMUM_VERSION = '1.3.31'
+
 # SOURCE FILE GROUPS
-# All core Wx classes to be built
+# THE UNADORNED NAMES OF ALL THE WX OBJECT CLASSES TO BE BUILT
 ALL_CLASSES =  FileList[ "#{CLASSES_DIR}/*.i" ].sort.map do | i_file | 
   File.basename(i_file, '.i')
 end
 
-#
+# THE MAIN ENTRY POINT MODULE
 MAIN_MODULE = 'wx'
 # Extra swig helper files to be built
 HELPER_CLASSES = %w|RubyConstants RubyStockObjects Functions Mac|
