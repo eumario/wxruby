@@ -17,6 +17,8 @@ Dir.glob('swig/**/*.i') do | i |
 end
 
 $have_good_swig = false
+# Test (once) whether there is a correct version of SWIG available,
+# either on the path or in the environment variable SWIG_CMD
 def check_swig
   begin
     version = `#{SWIG_CMD} -version`[/\d+\.\d+\.\d+/]
@@ -43,30 +45,35 @@ def check_swig
   $have_good_swig = true
 end
 
-# Returns the plain names of all normal Wx classes to be built
+# The plain names of all normal Wx classes to be built
 def all_build_classes
   ALL_CLASSES - $excluded_classes
 end
 
-# Returns the plain names of every .i file to be built
+# The plain module names of every SWIG module (in an .i file) to be built
 def all_build
   all_build_classes + HELPER_CLASSES + [ MAIN_MODULE ]
 end
 
+# Every compiled object file to be linked into the final library
 def all_obj_files
   all_build.map { | f | "#{OBJ_DIR}/#{f}.#{OBJ_EXT}" } 
 end
 
+# Every cpp file to be compiled
 def all_cpp_files
   all_build.map { | f | "#{SRC_DIR}/#{f}.cpp" } 
 end
 
+# Every swig class that must be processed
 def all_swig_files
   all_build_classes.map { | f | "#{CLASSES_DIR}/#{f}.i" } +
     HELPER_CLASSES.map { | f | "#{SWIG_DIR}/#{f}.i" } +
     [ 'swig/wx.i' ]
 end
 
+# Helper: run swig on +source+ (.i file) to generate +target+ (.cpp
+# file) 
 def do_swig(source, target)
   check_swig if not $have_good_swig
   sh "#{SWIG_CMD} #{$wx_cppflags} " + 
@@ -74,12 +81,15 @@ def do_swig(source, target)
     "-o #{target} #{source}"
 end
 
+# Helper: run ruby scripts over SWIG-generated .cpp file +file+, to
+# provide various SWIG fixes and workarounds
 def post_process(file, *processors)
   processors.each do | p |
     sh "ruby swig/#{p}.rb #{file}"
   end
 end
 
+# Target to run the linker to create a final .so/.dll wxruby2 library
 file TARGET_LIB => all_obj_files do | t |
   objs = $extra_objs + " " + all_obj_files.join(' ')
   sh "#{$ld} #{$ldflags} #{objs} #{$libs} #{$link_output_flag}#{t.name}"
