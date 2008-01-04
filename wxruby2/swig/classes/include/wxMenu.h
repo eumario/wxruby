@@ -18,12 +18,12 @@ public:
                      wxMenu *submenu, 
                      const wxString& help = wxEmptyString);
   wxMenuItem* Append(wxMenuItem *item);
-  void AppendCheckItem(int  id, 
-                       const wxString& item , 
-                       const wxString& helpString = wxT(""));
-  void AppendRadioItem(int id, 
-                       const wxString& item, 
-                       const wxString&  helpString = wxT(""));
+  wxMenuItem* AppendCheckItem(int  id, 
+                              const wxString& item , 
+                              const wxString& helpString = wxT(""));
+  wxMenuItem* AppendRadioItem(int id, 
+                              const wxString& item, 
+                              const wxString&  helpString = wxT(""));
   void AppendSeparator();
   void Break();
   void Check(int id, const bool check );
@@ -69,8 +69,9 @@ public:
                                const wxString& item, 
                                const wxString& helpString = wxT(""));
   wxMenuItem* PrependSeparator();
-  wxMenuItem * Remove(int id);
-  wxMenuItem * Remove(wxMenuItem * item );
+  wxMenuItem* Remove(int id);
+  wxMenuItem* Remove(wxMenuItem* item );
+
   void SetHelpString(int id, 
                      const wxString& helpString );
   void SetLabel(int id,
