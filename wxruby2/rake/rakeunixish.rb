@@ -1,7 +1,12 @@
 # Common code for platforms that use wx-config (basically, everything
 # not MSW)
 
-def wx_config(opt)
+# Helper function that runs the wx-config command line program from
+# wxWidgets to determine suitable builds and build options. Passed an
+# option which corresponds to one of the command-line options to
+# wx-config, eg '--list' or '--libs'. See --help for that program.
+def wx_config(option)
+  # 
   if $release_build
     debug_mode = '--debug=no'
   elsif $debug_build
@@ -9,15 +14,61 @@ def wx_config(opt)
   else
     debug_mode = '' # go with default
   end
-  `wx-config #{debug_mode} #{opt}`.strip + " "
+
+  if $static_build
+    static_mode = '--static=yes'
+  elsif $dynamic_build
+    static_mode = '--static=no'
+  else
+    static_mode = ''
+  end
+  
+  
+  cfg = `wx-config #{debug_mode} #{static_mode} #{option} 2>&1`
+
+  # Check status for errors
+  unless $?.exitstatus.zero?
+    if cfg =~ /Warning: No config found to match:([^\n]*)/
+      raise "No suitable wxWidgets found for specified build options;\n" +
+        "(#{$1.strip})"
+    else
+      raise "wx-config error:\n(#{cfg})"
+    end
+  end
+
+  return cfg.strip + " "
 end
 
+# First, if either debug/release or static/dynamic has been left
+# unspecified, find out what default build is available, and set that.
+unless $dynamic_build or $static_build
+  if wx_config('--list') =~ /\ADefault config is ([\w.-]+)/
+    available = $1
+    if available =~ /static/
+      $static_build  = true
+    else
+      $dynamic_build = true
+    end
+  end
+end
 
-$wx_version = wx_config("--version")
+unless $release_build or $debug_build
+  if wx_config('--list') =~ /\ADefault config is ([\w.-]+)/
+    available = $1
+    if available =~ /debug/
+      $debug_build  = true
+    else
+      $release_build = true
+    end
+  end
+end
+
+# Now actually run the program to fill in some variables
+$wx_version  = wx_config("--version")
 $wx_cppflags = wx_config("--cppflags")
-$wx_libs = wx_config("--libs std,stc,gl")
-$cpp = wx_config("--cxx")
-$ld = wx_config("--ld")
+$wx_libs     = wx_config("--libs std,stc,gl")
+$cpp         = wx_config("--cxx")
+$ld          = wx_config("--ld")
   
 # Check for some optional components in wxWidgets: STC (Scintilla) and
 # OpenGL; don't try and compile those classes if not present
