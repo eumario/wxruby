@@ -145,9 +145,13 @@ class Wx::EvtHandler
 
   # Definitions for all event types that are part by core wxRuby. Events
   # that are mapped to class Wx::Event are TODO as they are not
-  # currently wrapped by the correct class. All StyledTextCtrl
-  # (Scintilla) events with prefix EVT_STC are dealt with in the
-  # separate styledtextctrl.rb file.
+  # currently wrapped by the correct class. 
+
+  # All StyledTextCtrl (Scintilla) events with prefix EVT_STC are dealt
+  # with in the separate styledtextctrl.rb file.
+  # 
+  # All MediaCtrl events with prefix EVT_MEDIA are dealt with in the
+  # separate mediactrl.rb file
   EVENT_DEFINITIONS = [ 
     EventType['evt_activate', 0,
               Wx::EVT_ACTIVATE, 
@@ -533,15 +537,6 @@ class Wx::EvtHandler
     EventType['evt_maximize', 0,
               Wx::EVT_MAXIMIZE, 
               Wx::Event],
-    EventType['evt_media_finished', 1,
-              Wx::EVT_MEDIA_FINISHED,
-              Wx::MediaEvent],
-    EventType['evt_media_stop', 1,
-              Wx::EVT_MEDIA_STOP,
-              Wx::MediaEvent],
-    EventType['evt_media_loaded', 1,
-              Wx::EVT_MEDIA_LOADED,
-              Wx::MediaEvent],
     EventType['evt_menu', 1,
               Wx::EVT_COMMAND_MENU_SELECTED, 
               Wx::CommandEvent],
