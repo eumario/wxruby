@@ -1,6 +1,6 @@
-# rakefile
-#   Copyright 2004-2006 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+# wxRuby rakefile
+# Copyright 2004-2008 by wxRuby development team
+# Released under the MIT-style wxruby2 license
 
 # Influential environment variables
 # WXRUBY_RELEASE    : build a release version, stripped of debugging info
@@ -42,36 +42,6 @@ HELPER_CLASSES = %w|RubyConstants RubyStockObjects Functions Mac|
 # Pure-ruby lib files
 ALL_RUBY_LIB_FILES = FileList[ 'lib/**/*.rb' ]
 
-# force building against either a release build or debug build of
-# wxWidgets. Only one should be used; if neither is specified, the
-# default wx configuration will be used. Use of these options depends on
-# there being an appropriately compiled version of wxWidgets available.
-$debug_build = ENV['WXRUBY_DEBUG'] ? true : false
-$release_build = ENV['WXRUBY_RELEASE'] ? true : false
-
-# Force non-unicode build with WXRUBY_NO_UNICODE.  Unicode will be
-# the default build now
-$unicode_build = ENV['WXRUBY_NO_UNICODE'] ? false : true
-
-$verbose_debug = ENV['WXRUBY_VERBOSE'] ? true : false
-
-if $release_build
-	puts('Enabling RELEASE build')
-elsif $debug_build
-	puts('Enabling DEBUG build')
-end
-
-if not $unicode_build
-  puts('Disabling UNICODE build')
-end
-
-if($verbose_debug)
-  puts('Enabling VERBOSE debugging output')
-  $verbose_flag = ' -DwxDEBUG=1 '
-else
-  $verbose_flag = ''
-end
-
 
 # Redcloth library is required to build the documentation, but not
 # required just to compile the lib.
@@ -87,54 +57,7 @@ begin
 rescue LoadError # package tasks will not be available
 end
 
-#############################
-# auto-detected settings that can be
-# overridden by platform-specific rake files
-$ruby_cppflags = Config::CONFIG["CFLAGS"]
-
-# Ruby 1.9.0 changes location of some header files
-if RUBY_VERSION >= "1.9.0"
-  includes = [ Config::CONFIG["rubyhdrdir"],
-    Config::CONFIG["sitehdrdir"],
-    Config::CONFIG["vendorhdrdir"],
-    File.join(Config::CONFIG["rubyhdrdir"], Config::CONFIG['arch'])  ]
-  $ruby_includes = " -I " + includes.join(' -I ')
-else
-  $ruby_includes = " -I " + $:.join(' -I ')
-end
-
-$ruby_ldflags = Config::CONFIG["LDFLAGS"]
-$ruby_libs  = Config::CONFIG["LIBS"]
-$extra_cppflags = ""
-$extra_ldflags = ""
-$extra_objs = ""
-$extra_libs = ""
-$cpp_out_flag =  "-o "
-$link_output_flag = "-o "
-OBJ_EXT = Config::CONFIG["OBJEXT"]
-
-# some classes are not implemented by WxWidgets on all platforms
-$excluded_classes = []
-
-#############################
-# platform-specific
-if($macosx) then    require "rake/rakemacosx"
-elsif($mswin) then  require "rake/rakemswin"
-elsif($mingw) then  require "rake/rakemingw"
-elsif($cygwin) then require "rake/rakecygwin"
-elsif($bccwin) then require "rake/rakebccwin"
-elsif($netbsd) then require "rake/rakenetbsd"
-else                require "rake/rakelinux"
-end
-
-#############################
-# put it all together
-$cppflags = [$wx_cppflags, $ruby_cppflags, $extra_cppflags, $ruby_includes].join(' ')
-$ldflags = [$ruby_ldflags, $extra_ldflags].join(' ')
-$libs = [$wx_libs, $ruby_libs, $extra_libs].join(' ')
-$extra_objs = $extra_objs
-
-
+require 'rake/rakeconfigure'
 require "rake/rakewx"
 
 #############################

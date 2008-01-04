@@ -6,8 +6,6 @@
 # It contains stuff that I think should be included
 # in the standard rake program
 
-require "rbconfig"
-
 $extmk = /extmk\.rb/ =~ $0
 $mswin = /mswin/ =~ RUBY_PLATFORM
 $bccwin = /bccwin/ =~ RUBY_PLATFORM
