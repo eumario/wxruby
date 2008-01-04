@@ -342,9 +342,5 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_COMMAND_SEARCHCTRL_SEARCH_BTN;
 %constant const int wxEVT_COMMAND_SEARCHCTRL_CANCEL_BTN;
 
-%constant const int wxEVT_MEDIA_FINISHED;
-%constant const int wxEVT_MEDIA_STOP;
-%constant const int wxEVT_MEDIA_LOADED;
-
 %import "include/wxObject.h"
 %include "include/wxEvent.h"
