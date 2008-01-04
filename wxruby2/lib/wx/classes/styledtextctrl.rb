@@ -8,7 +8,7 @@ require 'wx/classes/evthandler'
 if defined?(Wx::StyledTextCtrl)
   EventType = Wx::EvtHandler::EventType
 
-  STC_EVENT_TYPES = [ 
+  stc_event_types = [ 
     EventType['evt_stc_calltip_click', 1,
               Wx::EVT_STC_CALLTIP_CLICK, 
               Wx::StyledTextEvent],
@@ -86,7 +86,7 @@ if defined?(Wx::StyledTextCtrl)
               Wx::StyledTextEvent]
     ]
 
-  STC_EVENT_TYPES.each do | ev_type | 
+  stc_event_types.each do | ev_type | 
     Wx::EvtHandler.register_event_type(ev_type)
   end
 end
