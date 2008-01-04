@@ -1,43 +1,43 @@
 # rakemswin.rb
-#   Copyright 2004-2006 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+# Copyright 2004-2008 by wxRuby development team
+# Released under the MIT-style wxruby2 license
 
+# Compiling on Windows with Microsoft compiler
+$cpp  = "cl.exe"
+$ld   = "link"
 
-#############################
-# platform-dependent settings
-require 'rbconfig'
-
-include Config
-
-$cpp = "cl.exe"
-$ld = "link"
-$cpp_out_flag = "/Fo"
+$cpp_out_flag     = "/Fo"
 $link_output_flag = "/dll /out:"
 
+# Only static build is currently allowed on Windows; TODO
+if $dynamic_build 
+  raise "Dynamically-linked build is not allowed on Windows, use static"
+else
+  $static_build = true
+end
 
-# native Windows - requires a static build of wxWindows
-$WXDIR=ENV['WXWIN']
+# Use the "WXWIN" environment variable to specify path to unpacked
+# wxWidgets distribution
+$WXDIR = ENV['WXWIN']
+
+unless $WXDIR
+  raise "Location of wxWidgets library must be specified " +
+        "with WXWIN environment variable"
+end
+
+# Variants within wxWidgets directory layout are identified by these tags
 $WXVERSION = '28'
-
-if $debug_build
-    $DEBUGPOSTFIX='d'
-else
-    $DEBUGPOSTFIX=''
-end
-
-if $unicode_build
-    $UNICODEPOSTFIX='u'
-else
-    $UNICODEPOSTFIX=''
-end
-
+$DEBUGPOSTFIX   = $debug_build ? 'd' : ''
+$UNICODEPOSTFIX = $unicode_build ? 'u' : ''
 $POSTFIX = $UNICODEPOSTFIX + $DEBUGPOSTFIX
 
+# Some secondary directories in the wxWidgets layout
+$WXINCDIR      = File.join("#$WXDIR", "include")
+$WXLIBDIR      = File.join("#$WXDIR", "lib", "vc_lib")
+$WXSETUPINCDIR = File.join("#$WXDIR", "lib", "vc_lib", "msw#{$POSTFIX}")
 
-$WXSRC=File.join("#$WXDIR","src","msw")
-$WXINC=File.join("#$WXDIR","include")
-$WXLIBDIR=File.join("#$WXDIR","lib","vc_lib")
-$INCTEMP=File.join("#$WXDIR","lib","vc_lib","msw#{$POSTFIX}")
+WXWIDGETS_SETUP_H  = File.join($WXSETUPINCDIR, 'wx', 'setup.h')
+
 
 # wxWidgets libraries that should be linked into wxRuby
 # odbc and db_table not required by wxruby
@@ -59,9 +59,11 @@ windows_libs = %W|wxbase#{$WXVERSION}#{$POSTFIX}
 
 windows_libs.map! { | lib | File.join($WXLIBDIR, "#{lib}.lib") }
 
+# Windows-specific routines for checking for supported features
 # Test for presence of StyledTextCtrl (scintilla) library; link it in if
 # present, skip that class if not 
-scintilla_lib = File.join( $WXLIBDIR, "wxmsw#{$WXVERSION}#{$POSTFIX}_stc.lib" )
+scintilla_lib = File.join( $WXLIBDIR, 
+                           "wxmsw#{$WXVERSION}#{$POSTFIX}_stc.lib" )
 if File.exists?(scintilla_lib)
   windows_libs << scintilla_lib 
 else
@@ -80,42 +82,34 @@ end
 # Glue them all together into an argument passed to the linker
 $wx_libs = windows_libs.join(' ')
 
-$wx_cppflags = [
-    "-I#$WXINC", "-D__WXMSW__",
-    "-I#$INCTEMP", 
-    ].join(' ')
-$extra_cppflags = [
-    "/GR",
-    "/EHsc",
-    "-DSTRICT", 
-    "-DWIN32", "-D__WIN32__", 
-    "-D_WINDOWS", "/D__WINDOWS__", 
-    "-DWINVER=0x0400", "/D__WIN95__", 
-    ].join(' ')
+$wx_cppflags = "-I#{$WXINCDIR} -D__WXMSW__ -I#{$WXSETUPINCDIR}"
+$extra_cppflags = %W[ /GR /EHsc -DSTRICT -DWIN32 -D__WIN32__ -DWINVER=0x0400
+                      -D_WINDOWS /D__WINDOWS__  /D__WIN95__].join(' ')
+
 if $debug_build
-    $ruby_cppflags.gsub!(/-MD/," /MDd");
-    $ruby_cppflags.gsub!(/-O[A-Za-z0-9-]*/, "/Od")
-    $ruby_cppflags += " -Zi -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
-    $extra_ldflags += "/DEBUG"
+  $ruby_cppflags.gsub!(/-MD/," /MDd");
+  $ruby_cppflags.gsub!(/-O[A-Za-z0-9-]*/, "/Od")
+  $ruby_cppflags += " -Zi -D_DEBUG -D__WXDEBUG__ -DWXDEBUG=1 "
+  $extra_ldflags += "/DEBUG"
 else
-    $ruby_cppflags += " -DNDEBUG "
+  $ruby_cppflags += " -DNDEBUG "
 end
 
 if $unicode_build
-    $wx_cppflags += " -D_UNICODE -DUNICODE"
+  $wx_cppflags += " -D_UNICODE -DUNICODE"
 end
 
 $extra_libs = [
     "gdi32.lib", "gdiplus.lib", "winspool.lib", "comdlg32.lib",
     "shell32.lib", "ole32.lib", "oleaut32.lib", "uuid.lib",
     "odbc32.lib ", "odbccp32.lib", "comctl32.lib", 
-    "rpcrt4.lib", "winmm.lib","#{Config::TOPDIR}/lib/#{CONFIG['RUBY_SO_NAME']}.lib"].join(' ')
+    "rpcrt4.lib", "winmm.lib", "#{Config::TOPDIR}/lib/#{Config::CONFIG['RUBY_SO_NAME']}.lib"].join(' ')
     
 $extra_objs = "swig/wx.res"
-
-
 
 rule('.res' => '.rc') do | t |
     sh("rc -I#$WXINC #{t.prerequisites}")
 end
+
+
 
