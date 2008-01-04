@@ -69,6 +69,14 @@ else               require "rake/rakelinux"
 end
 
 # FOURTH: summarise the main options chosen back for the user
+if $dynamic_build and $static_build
+  raise "Both STATIC and RELEASE specified; request one or other"
+elsif $dynamic_build
+  puts "Enabling DYNAMIC build"
+elsif $static_build
+  puts "Enabling STATIC build"
+end
+
 if $release_build and $debug_build
   raise "Both RELEASE and DEBUG specified; request one or other"
 elsif $release_build
@@ -77,11 +85,10 @@ elsif $debug_build
   puts "Enabling DEBUG build"
 end
 
-
 if $unicode_build
   puts "Enabling UNICODE build"
 else
-  puts "Enabling ANSI build"
+  puts "Enabling ANSI build; NOT RECOMMENDED"
 end
 
 if $verbose_debug
@@ -90,7 +97,6 @@ if $verbose_debug
 else
   $verbose_flag = ''
 end
-
 
 # FIFTH: Testing the relevant wxWidgets setup.h file to see what
 # features are supported.
