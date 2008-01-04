@@ -99,9 +99,32 @@ else
 end
 
 # FIFTH: Testing the relevant wxWidgets setup.h file to see what
-# features are supported.
+# features are supported. Note that the presence of OpenGL (for
+# GLCanvas) and Scintilla (for StyledTextCtrl) is tested for in the
+# platform-specific rakefiles.
 
-# TODO
+# The wxWidgets setup.h file contains a series of definitions like
+# #define wxUSE_FOO 1. The location of the file should be set
+# by the platform-specific rakefile. Parse it into a ruby hash:
+WX_FEATURES = {}
+
+File.read(WXWIDGETS_SETUP_H).scan(/^#define\s+(\w+)\s+([01])/) do | define |
+  WX_FEATURES[$1] = $2.to_i.zero? ? false : true
+end
+
+# MediaCtrl is not always included or easily built, esp on Linux
+unless WX_FEATURES['wxUSE_MEDIACTRL']
+  $excluded_classes += %w|MediaCtrl MediaEvent|
+end
+
+# GraphicsContext is not enabled by default on some platforms
+unless WX_FEATURES['wxUSE_GRAPHICS_CONTEXT']
+  $excluded_classes += %w|GraphicsBrush GraphicsContext GraphicsFont
+                          GraphicsMatrix GraphicsObject GraphicsPath GraphicsPen|
+end
+
+puts "The following wxWidgets features are not available and will be skipped:"
+puts "  " + $excluded_classes.sort.join("\n  ")  
 
 # SIXTH: Putting it all together
 
