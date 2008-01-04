@@ -69,28 +69,37 @@ $wx_cppflags = wx_config("--cppflags")
 $wx_libs     = wx_config("--libs std,stc,gl")
 $cpp         = wx_config("--cxx")
 $ld          = wx_config("--ld")
-  
+
+# Find out where the wxWidgets setup.h file being used is located; this
+# will be used later in rakeconfigure.rb
+setup_inc_dir = $wx_cppflags[/^-I(\S+)/][2..-1]
+WXWIDGETS_SETUP_H  = File.join(setup_inc_dir, 'wx', 'setup.h')
+
 # Check for some optional components in wxWidgets: STC (Scintilla) and
-# OpenGL; don't try and compile those classes if not present
+# OpenGL; don't try and compile those classes if not present. Tests
+# whether the library file exists. 
 
+# Hold the actual --lib argument to be used for the final flags
 libs_str = "--libs std"
-stc_lib = $wx_libs[/\S+libwx\S+_stc\S+/]
-gl_lib = $wx_libs[/\S+libwx\S+_gl\S+/]
 
-# StyledTextCtrl (Scintilla)
+# Test for StyledTextCtrl (Scintilla)
+stc_lib = $wx_libs[/\S+libwx\S+_stc\S+/]
 if stc_lib.nil? or not File.exists?(stc_lib)
   $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
 else
   libs_str << ',stc'
 end
 
-# OpenGL
+
+# Test for OpenGL
+gl_lib = $wx_libs[/\S+libwx\S+_gl\S+/]
 if gl_lib.nil? or not File.exists?(gl_lib)
   $excluded_classes << 'GLCanvas'
 else
   libs_str << ',gl'
 end  
 
+# Set the final list of libs to be used
 $wx_libs = wx_config(libs_str)
 
 
