@@ -1,56 +1,48 @@
 h1(#wxclipboard). Wx::Clipboard
 
-A class for manipulating the clipboard. Note that this is not compatible with the
-clipboard class from Widgets 1.xx, which has the same name but a different implementation.
+A class for manipulating the clipboard.
 
-To use the clipboard, you call member functions of the global *TheClipboard* object.
+Call "Clipboard#open":clipboard.html#Clipboard_open to get ownership of
+the clipboard. The resulting block will be passed a Wx::Clipboard, and
+you now own the clipboard. Call
+"Clipboard#set_data":clipboard.html#Clipboard_setdata to put data on the
+clipboard, or "Clipboard#get_data":clipboard.html#Clipboard_getdata to
+retrieve data from the clipboard.
 
-See also the "DataObject overview":dataobjectoverview.html for further information.
-
-Call "Clipboard#open":clipboard.html#Clipboard_open to get ownership of the clipboard. If this operation returns true, you
-now own the clipboard. Call "Clipboard#set_data":clipboard.html#Clipboard_setdata to put data
-on the clipboard, or "Clipboard#get_data":clipboard.html#Clipboard_getdata to
-retrieve data from the clipboard. Call "Clipboard#close":clipboard.html#Clipboard_close to close
-the clipboard and relinquish ownership. You should keep the clipboard open only momentarily.
+You should keep the clipboard open only momentarily. It is strongly
+recommended that you use the block form of Clipboard::open as this will
+ensure the clipboard is closed in a timely fashion.
 
 For example:
 
-
-   // Write some text to the clipboard
-   if (TheClipboard->Open())
-   {
-     // This data objects are held by the clipboard, 
-     // so do not delete them in the app.
-     TheClipboard->SetData( new TextDataObject("Some text") );
-     TheClipboard->Close();
-   }
+   # Write some text to the clipboard
+   Wx::Clipboard.open do | clip |
+     clip.data = Wx::TextDataObject.new("Some text")
+   end  
  
-   // Read some text
-   if (TheClipboard->Open())
-   {
-     if (TheClipboard->IsSupported( DF_TEXT ))
-     {
-       TextDataObject data;
-       TheClipboard->GetData( data );
-       MessageBox( data.GetText() );
-     }  
-     TheClipboard->Close();
-   }
+   # Read some text
+   Wx::Clipboard.open do | clip |
+     if clip.supported?( Wx::DF_TEXT )
+       txt = Wx::TextDataObject.new
+       clip.get_data(txt)
+       message_box(txt.text)
+     end
+   end
  
-
 h2. Derived from
 
 "Object":object.html
 
 h2. See also
 
-"Drag and drop overview":dndoverview.html, "DataObject":dataobject.html
+"DataObject":dataobject.html
 
 <div id="methods">
 
 h2. Methods
 
 * "Clipboard.new":#Clipboard_new
+* "Clipboard.open":#Clipboard_open
 * "Clipboard#add_data":#Clipboard_adddata
 * "Clipboard#clear":#Clipboard_clear
 * "Clipboard#close":#Clipboard_close
@@ -67,9 +59,12 @@ h2. Methods
 
 h3(#Clipboard_new). Clipboard.new
 
-  *destructor*()
+h3(#Clipboard_new). Clipboard.open
 
-Destructor.
+ Clipboard.open() { ... }
+
+Opens the clipboard and passes it to the enclosed block. Ensures that
+the clipboard is closed when the block is ended.
 
 h3(#Clipboard_adddata). Clipboard#add_data
 
