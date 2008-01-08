@@ -83,20 +83,38 @@ WXWIDGETS_SETUP_H  = File.join(setup_inc_dir, 'wx', 'setup.h')
 libs_str = "--libs std"
 
 # Test for StyledTextCtrl (Scintilla)
-stc_lib = $wx_libs[/\S+libwx\S+_stc\S+/]
-if stc_lib.nil? or not File.exists?(stc_lib)
-  $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+if $dynamic_build
+	stc_lib = $wx_libs[/\S+wx_gtk\S+_stc\S+/]
+	if stc_lib.nil?
+		$excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+	else
+		libs_str << ',stc'
+	end
 else
-  libs_str << ',stc'
+	stc_lib = $wx_libs[/\S+libwx\S+_stc\S+/]
+	if stc_lib.nil? or not File.exists?(stc_lib)
+	  $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+	else
+  	libs_str << ',stc'
+	end
 end
 
 
 # Test for OpenGL
-gl_lib = $wx_libs[/\S+libwx\S+_gl\S+/]
-if gl_lib.nil? or not File.exists?(gl_lib)
-  $excluded_classes << 'GLCanvas'
+if $dynamic_build
+	gl_lib = $wx_libs[/\S+wx_gtk\S+_gl\S+/]
+	if gl_lib.nil?
+		$excluded_classes << 'GLCanvas'
+	else
+		libs_str << ',gl'
+	end
 else
-  libs_str << ',gl'
+	gl_lib = $wx_libs[/\S+libwx\S+_gl\S+/]
+	if gl_lib.nil? or not File.exists?(gl_lib)
+  	$excluded_classes << 'GLCanvas'
+	else
+  	libs_str << ',gl'
+	end
 end  
 
 # Set the final list of libs to be used
