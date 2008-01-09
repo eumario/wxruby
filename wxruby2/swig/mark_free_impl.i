@@ -104,6 +104,13 @@ void GC_mark_wxWindow(void *ptr)
 	  VALUE rb_caret = SWIG_RubyInstanceFor(wx_caret);
 	  rb_gc_mark(rb_caret);
 	}
+
+  wxDropTarget* wx_droptarget = wx_win->GetDropTarget();
+  if ( wx_droptarget )
+	{
+	  VALUE rb_droptarget = SWIG_RubyInstanceFor(wx_droptarget);
+	  rb_gc_mark(rb_droptarget);
+	}
 }  
 
 
