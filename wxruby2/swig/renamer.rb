@@ -14,14 +14,30 @@ class String
   CAPITALS = /([a-z])(?=[A-Z0-9])/
   NUMBERS  = /(\d+)(?=[A-Za-z_])/
 
+	# retrived from inflector.rb from active_support
+  def underscore()
+    gsub!(/::/, '/').
+    gsub!(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+    gsub!(/([a-z\d])([A-Z])/,'\1_\2').
+    tr("-", "_").
+    downcase!
+  end
+  
   def un_camelcase(word_sep = '_')
     dup.un_camelcase!(word_sep)
   end
 
   def un_camelcase!(word_sep = '_')
+=begin
     gsub!(ACRONYMS) { $1 + word_sep }
     gsub!(CAPITALS) { $1 + word_sep }
     gsub!(NUMBERS)  { $1 + word_sep }
+    downcase!
+=end
+    gsub!(/::/, '/')
+    gsub!(/([A-Z]+)([A-Z][a-z])/,"\\1#{word_sep}\\2")
+    gsub!(/([a-z\d])([A-Z])/,"\\1#{word_sep}\\2")
+    tr("-","#{word_sep}")
     downcase!
     self
   end
@@ -47,7 +63,7 @@ def fix_define_method(line)
         quoted_method_name = match[0]
         return line if quoted_method_name == '"THE_APP"'
         method_name = quoted_method_name[1..-2]
-        new_method_name = '"%s"' % method_name.un_camelcase
+        new_method_name = '"%s"' % strip_wx(method_name.un_camelcase)
         line[quoted_method_name] = new_method_name
         #puts(line)
     end
