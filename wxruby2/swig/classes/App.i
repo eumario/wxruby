@@ -115,8 +115,12 @@ public:
 	// so there is no point trying to mark them, and doing so may cause 
 	// errors.
     if ( ! wxApp::IsMainLoopRunning() )
+      {
+#ifdef __WXDEBUG__
+	printf("=== App is not running, skipping mark phase\n");
+#endif
         return;
-
+      }
 	// To do the marking, iterate over SWIG's hash list of known wrapped
 	// objects (swig_ruby_trackings) and check each one.
 	rb_iterate(rb_each, swig_ruby_trackings, (VALUE(*)(...))mark_iterate, Qnil);
@@ -253,6 +257,7 @@ public:
   wxString GetVendorName() const;
   void ExitMainLoop() ;
   int MainLoop() ;
+  bool IsMainLoopRunning();
   virtual void OnAssertFailure(const wxChar *file, int line, const wxChar *cond, const wxChar *msg);
   virtual int OnExit() ;
   virtual bool OnCmdLineError(wxCmdLineParser&  parser ) ;
