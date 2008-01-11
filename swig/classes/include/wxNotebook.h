@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 
@@ -29,6 +29,7 @@ public:
 			  const wxString&  name = wxT("notebook"));
   bool DeleteAllPages();
   bool DeletePage(int  page);
+  wxWindow* GetCurrentPage() const;
   wxImageList* GetImageList() const;
   wxNotebookPage* GetPage(int page);
   int GetPageCount() const;
