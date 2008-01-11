@@ -899,6 +899,13 @@ class AuiFrame < Wx::Frame
   def on_notebook_flag(event)
     e_id = event.get_id
 
+    # TODO - Notebook styles not currently supported; not SO important
+    if e_id = ID_NotebookArtGloss or
+        e_id = ID_NotebookArtSimple
+      Wx::message_box("AUI Notebook Art styles not currently supported in wxRuby")
+      return
+    end
+        
     if e_id == ID_NotebookNoCloseButton or
         e_id == ID_NotebookCloseButton or
         e_id == ID_NotebookCloseButtonAll or
