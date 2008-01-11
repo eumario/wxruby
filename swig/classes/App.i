@@ -114,13 +114,14 @@ public:
 	// the C++ one; this implies that all Windows have already been destroyed
 	// so there is no point trying to mark them, and doing so may cause 
 	// errors.
-    if ( ! wxApp::IsMainLoopRunning() )
+    if ( rb_gv_get("__wx_app_ended__" ) == Qtrue )
       {
 #ifdef __WXDEBUG__
-	printf("=== App is not running, skipping mark phase\n");
+	printf("=== App has ended, skipping mark phase\n");
 #endif
         return;
       }
+
 	// To do the marking, iterate over SWIG's hash list of known wrapped
 	// objects (swig_ruby_trackings) and check each one.
 	rb_iterate(rb_each, swig_ruby_trackings, (VALUE(*)(...))mark_iterate, Qnil);
@@ -177,14 +178,18 @@ public:
     bool OnInit()
     {
       Init_wxRubyStockObjects();
+      // Get the ruby representation of the App object, and call the
+      // ruby on_init method to set up the initial window state
 	  VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
 	  VALUE result  = rb_funcall(the_app, rb_intern("on_init"), 0, NULL);
-	  if ( result == Qfalse || result == Qnil ) { 
-		return false; 
-	  }
-  	  else { 
+      
+      // If on_init return any (ruby) true value, signal to wxWidgets to
+      // enter the main event loop by returning true, else return false
+      // which will make wxWidgets exit.
+	  if ( result == Qfalse || result == Qnil )
+        return false; 
+      else
 		return true; 
-	  }
     }
 
     virtual int OnExit()
@@ -192,6 +197,9 @@ public:
 #ifdef __WXDEBUG__	
         printf("OnExit...\n");
 #endif 
+        // Note in a global variable that the App has ended, so that we
+        // can skip any GC marking later
+        rb_gv_set("__wx_app_ended__", Qtrue);
 		VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
@@ -257,7 +265,8 @@ public:
   wxString GetVendorName() const;
   void ExitMainLoop() ;
   int MainLoop() ;
-  bool IsMainLoopRunning();
+  static bool IsMainLoopRunning();
+  bool IsActive() const;
   virtual void OnAssertFailure(const wxChar *file, int line, const wxChar *cond, const wxChar *msg);
   virtual int OnExit() ;
   virtual bool OnCmdLineError(wxCmdLineParser&  parser ) ;
