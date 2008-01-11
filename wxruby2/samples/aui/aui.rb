@@ -1110,7 +1110,7 @@ class AuiFrame < Wx::Frame
     pi.set_caption("Client Size Reporter").float
     pi.set_floating_position(get_start_position)
     pi.set_close_button.set_maximize_button
-    @mgr.add_pane( create_size_report, pi)
+    @mgr.add_pane( create_size_report_ctrl, pi)
     @mgr.update
   end
 
