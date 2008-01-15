@@ -16,6 +16,11 @@ Dir.glob('swig/**/*.i') do | i |
   end
 end
 
+# One include file is a SWIG core file (typemaps.i), not a wxRuby file;
+# avoid an error with the rake package (source tar.gz) file
+swigs_typemap_file = File.expand_path('typemaps.i', 'swig')
+SWIG_DEPENDS['swig/typemap.i'].delete(swigs_typemap_file)
+
 $have_good_swig = false
 # Test (once) whether there is a correct version of SWIG available,
 # either on the path or in the environment variable SWIG_CMD
