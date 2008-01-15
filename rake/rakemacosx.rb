@@ -26,8 +26,9 @@ if ENV['WXRUBY_OSX_NO_UNIVERSAL']
   $osx_universal = false
 end
 
-$extra_cppflags = '-x objective-c++'
-$extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress'
+#Minimum system supported is 10.4.x, this is the minimum supported by wxWidgets as of 01/15/2008
+$extra_cppflags = '-x objective-c++ -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
+$extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
 
 if $osx_universal
   $extra_cppflags << ' -arch ppc -arch i386'
