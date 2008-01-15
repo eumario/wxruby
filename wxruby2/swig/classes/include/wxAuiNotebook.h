@@ -62,56 +62,38 @@ public:
 
     virtual void Split(size_t page, int direction);
 
-#if wxABI_VERSION >= 20801
+// New methods from 2.8.1 onwards
+// #if wxABI_VERSION >= 20801
     const wxAuiManager& GetAuiManager() const { return m_mgr; }
-#endif
+// #endif
 
-protected:
+// New methods from 2.8.5 onwards
+// #if wxABI_VERSION >= 20805
+    // Sets the normal font
+    void SetNormalFont(const wxFont& font);
 
-    // these can be overridden
-	// NB - made non-virtual so that base class works
-    void UpdateTabCtrlHeight();
-    int CalculateTabCtrlHeight();
-    wxSize CalculateNewSplitSize();
-    
-protected:
+    // Sets the selected tab font
+    void SetSelectedFont(const wxFont& font);
 
-    void DoSizing();
-    void InitNotebook(long style);
-    wxAuiTabCtrl* GetTabCtrlFromPoint(const wxPoint& pt);
-    wxWindow* GetTabFrameFromTabCtrl(wxWindow* tab_ctrl);
-    wxAuiTabCtrl* GetActiveTabCtrl();
-    bool FindTab(wxWindow* page, wxAuiTabCtrl** ctrl, int* idx);
-    void RemoveEmptyTabFrames();
-    void UpdateHintWindowSize();
-    
-protected:
+    // Sets the measuring font
+    void SetMeasuringFont(const wxFont& font);
 
-    void OnChildFocus(wxChildFocusEvent& evt);
-    void OnRender(wxAuiManagerEvent& evt);
-    void OnSize(wxSizeEvent& evt);
-    void OnTabClicked(wxCommandEvent& evt);
-    void OnTabBeginDrag(wxCommandEvent& evt);
-    void OnTabDragMotion(wxCommandEvent& evt);
-    void OnTabEndDrag(wxCommandEvent& evt);
-    void OnTabButton(wxCommandEvent& evt);
-    
-protected:
+    // Sets the tab font
+    virtual bool SetFont(const wxFont& font);
 
-    wxAuiManager m_mgr;
-    wxAuiTabContainer m_tabs;
-    int m_curpage;
-    int m_tab_id_counter;
-    wxWindow* m_dummy_wnd;
+    // Gets the tab control height
+    int GetTabCtrlHeight() const;
 
-    wxSize m_requested_bmp_size;
-    int m_requested_tabctrl_height;
-    wxFont m_selected_font;
-    wxFont m_normal_font;
-    int m_tab_ctrl_height;
-        
-    int m_last_drag_x;
-    unsigned int m_flags;
+    // Gets the height of the notebook for a given page height
+    int GetHeightForPageHeight(int pageHeight);
+
+    // Advances the selection, generation page selection events
+    void AdvanceSelection(bool forward = true);
+
+    // Shows the window menu
+    bool ShowWindowMenu();
+// #endif
+
 };
 
 #endif
