@@ -198,27 +198,31 @@ end
 class GraphicsFrame < Wx::Frame
   def initialize()
     super(nil,:title=>"Graphics Context example",:size=>[500,400])
-    hbox = Wx::BoxSizer.new(Wx::VERTICAL)
     @win = GraphicsWindow.new(self)
-    hbox.add(@win,1,Wx::EXPAND|Wx::ALL)
-    grid = Wx::GridSizer.new(2,2)
-    cb_rect = Wx::CheckBox.new(self,:label=>"Draw Rectangles")
-    cb_corner = Wx::CheckBox.new(self,:label=>"Draw Corners")
-    create_status_bar()
-    get_status_bar.set_status_text("FPS: 0")
-    grid.add(cb_rect)
-    grid.add(cb_corner)
-    @win.rect = cb_rect
-    @win.corner = cb_corner
-    hbox.add(grid)
-    set_sizer(hbox)
-    @timer = Wx::Timer.new(self,2000)
-    evt_timer(2000, :fps_display)
-    @timer.start(1000)
+
+    create_status_bar(3)
+    status_bar.set_status_text("Frames per sec: 0", 0)
+    @win.rect = Wx::CheckBox.new(status_bar,:label=>"Draw Rectangles")
+    @win.corner = Wx::CheckBox.new(status_bar,:label=>"Draw Corners")
+    
+    Wx::Timer.every(1000) { fps_display }
+    evt_size :on_size
   end
-  
+
+
+  # Place the two control checkboxes within the StatusBar
+  def on_size
+    rect = status_bar.field_rect(1)
+    @win.rect.move [ rect.x + 2, rect.y + 2]
+    @win.rect.size = [ rect.width - 4, rect.height - 4 ]
+
+    rect = status_bar.field_rect(2)
+    @win.corner.move [ rect.x + 2, rect.y + 2]
+    @win.corner.size = [ rect.width - 4, rect.height - 4 ]
+  end
+
   def fps_display()
-    get_status_bar.set_status_text("FPS: #{@win.fps}")
+    get_status_bar.set_status_text("Frames per sec: #{@win.fps}", 0)
     @win.fps = 0
   end
 end
