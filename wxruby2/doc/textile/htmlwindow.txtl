@@ -1,24 +1,17 @@
 h1(#wxhtmlwindow). Wx::HtmlWindow
 
-HtmlWindow is probably the only class you will directly use
-unless you want to do something special (like adding new tag
-handlers or MIME filters).
+HtmlWindow is a widget for displaying simple HTML. IT supports key HTML
+features like links, images, tables and headings, but does not support
+all the features of modern browsers such as CSS and Javascript. It's well
+suited for creating hypertext-based applications, but not for creating a
+complete web browser.
 
-The purpose of this class is to display HTML pages (either local
-file or downloaded via HTTP protocol) in a window. The width
-of the window is constant - given in the constructor - and virtual height
-is changed dynamically depending on page size.
-Once the window is created you can set its content by calling 
+Once the window is created you can set its content by calling
 "set_page(html_code)":#HtmlWindow_setpage,
 "load_page(location)":#HtmlWindow_loadpage or
-"load_file(file_name)":#HtmlWindow_loadfile.
-
-h2. Note
-
-HtmlWindow uses the "Image":image.html class for displaying images.
-Don't forget to initialize all image formats you need before loading any page!
-(See "InitAllImageHandlers":initallimagehandlers.html and
-"Image#add_handler":image.html#Image_addhandler.)
+"load_file(file_name)":#HtmlWindow_loadfile. The width of the window is
+constant - given in the constructor - and virtual height is changed
+dynamically depending on page size.
 
 h2. Derived from
 
@@ -31,6 +24,21 @@ h2. Window styles
 |@HW_SCROLLBAR_NEVER@|Never display scrollbars, noteven when the page is larger than the window.|
 |@HW_SCROLLBAR_AUTO@|Display scrollbars only ifpage's size exceeds window's size.|
 |@HW_NO_SELECTION@|Don't allow the user to selecttext.|
+
+h2. Event handling
+
+To process user interaction with an HtmlWindow, use these event handlers
+to direct input to blocks that take a "HtmlCellEvent":htmlcellevent.html
+argument or a "HtmlLinkEvent":htmllinkevent.html.
+
+
+|*evt_html_cell_clicked(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A "HtmlCell":htmlcell.html was clicked.|
+|*evt_html_cell_hover(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The mouse passed over a "HtmlCell":htmlcell.html.|
+|*evt_html_link_clicked(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A "HtmlCell":htmlcell.html which contains an hyperlink was clicked.|
+
+h2. See also
+
+"HtmlLinkEvent":htmllinkevent.html, "HtmlCellEvent":htmlcellevent.html
 
 h2. Methods
 
@@ -51,9 +59,6 @@ h2. Methods
 * "HtmlWindow#history_forward":#HtmlWindow_historyforward
 * "HtmlWindow#load_file":#HtmlWindow_loadfile
 * "HtmlWindow#load_page":#HtmlWindow_loadpage
-* "HtmlWindow#on_cell_clicked":#HtmlWindow_oncellclicked
-* "HtmlWindow#on_cell_mouse_hover":#HtmlWindow_oncellmousehover
-* "HtmlWindow#on_link_clicked":#HtmlWindow_onlinkclicked
 * "HtmlWindow#on_opening_url":#HtmlWindow_onopeningurl
 * "HtmlWindow#on_set_title":#HtmlWindow_onsettitle
 * "HtmlWindow#read_customization":#HtmlWindow_readcustomization
@@ -221,82 +226,12 @@ h4. See also
 
 "load_file":#HtmlWindow_loadfile
 
-h3(#HtmlWindow_oncellclicked). HtmlWindow#on_cell_clicked
-
-  *on_cell_clicked*(%(arg-type)HtmlCell% cell,  %(arg-type)Coord% x,  %(arg-type)Coord% y, 
-                  %(arg-type)MouseEvent% event)
-
-This method is called when a mouse button is clicked inside HtmlWindow.
-The default behaviour is to call 
-"on_link_clicked":#HtmlWindow_onlinkclicked if the cell contains a
-hypertext link.
-
-h4. Parameters
-
-* _cell_ The cell inside which the mouse was clicked, always a simple
-(i.e. non container) cell
-* _x, y_ The logical coordinates of the click point
-* _event_ The mouse event containing other information about the click
-
-h3(#HtmlWindow_oncellmousehover). HtmlWindow#on_cell_mouse_hover
-
-  *on_cell_mouse_hover*(%(arg-type)HtmlCell% cell,  %(arg-type)Coord% x,  %(arg-type)Coord% y)
-
-This method is called when a mouse moves over an HTML cell.
-
-h4. Parameters
-
-* _cell_ The cell inside which the mouse is currently, always a simple
-(i.e. non container) cell
-* _x, y_ The logical coordinates of the click point
-
-h3(#HtmlWindow_onlinkclicked). HtmlWindow#on_link_clicked
-
-  *on_link_clicked*(%(arg-type)HtmlLinkInfo% link)
-
-Called when user clicks on hypertext link. Default behaviour is to call 
-"load_page":#HtmlWindow_loadpage and do nothing else.
-
-Also see "HtmlLinkInfo":htmllinkinfo.html.
-
-h3(#HtmlWindow_onopeningurl). HtmlWindow#on_opening_url
-
- "HtmlOpeningStatus":htmlopeningstatus.html *on_opening_url*(%(arg-type)HtmlURLType% type, 
-                                   %(arg-type)String% url, 
-                                    %(arg-type)String% redirect)
-
-Called when an URL is being opened (either when the user clicks on a link or
-an image is loaded). The URL will be opened only if OnOpeningURL returns 
-@HTML_OPEN@. This method is called by
-"HtmlParser#open_url":htmlparser.html#HtmlParser_openurl.
-You can override OnOpeningURL to selectively block some
-URLs (e.g. for security reasons) or to redirect them elsewhere. Default
-behaviour is to always return @HTML_OPEN@.
-
-h4. Parameters
-
-* _type_ Indicates type of the resource. Is one of
-
-|*HTML_URL_PAGE*|Opening a HTML page.|
-|*HTML_URL_IMAGE*|Opening an image.|
-|*HTML_URL_OTHER*|Opening a resource that doesn't fall intoany other category.|
-
-* _url_ URL being opened.
-* _redirect_ Pointer to String variable that must be filled with an
-URL if OnOpeningURL returns @HTML_REDIRECT@.
-
-h4. Return value
-
-|*HTML_OPEN*|Open the URL.|
-|*HTML_BLOCK*|Deny access to the URL, "HtmlParser#open_url":htmlparser.html#HtmlParser_openurl will return NULL.|
-|*HTML_REDIRECT*|Don't open _url_, redirect to anotherURL. OnOpeningURL must fill _redirect_ with the new URL. OnOpeningURL willbe called again on returned URL.|
-
-
 h3(#HtmlWindow_onsettitle). HtmlWindow#on_set_title
 
   *on_set_title*(%(arg-type)String% title)
 
-Called on parsing @<TITLE>@ tag.
+Called on parsing @<TITLE>@ tag. This can be overloaded in subclasses to
+customise what happens as that part of an HTML page is read.
 
 
 h3(#HtmlWindow_readcustomization). HtmlWindow#read_customization
