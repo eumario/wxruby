@@ -43,6 +43,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 #include <wx/hyperlink.h>
 #include <wx/srchctrl.h>
 #include <wx/mediactrl.h>
+#include <wx/html/htmlwin.h>
 
 #ifdef WXSCINTILLA
 #    include <wx/wxscintilla.h>
@@ -329,6 +330,10 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_AUI_PANE_RESTORE;
 %constant const int wxEVT_AUI_RENDER;
 %constant const int wxEVT_AUI_FIND_MANAGER;
+
+%constant const int wxEVT_COMMAND_HTML_CELL_CLICKED;
+%constant const int wxEVT_COMMAND_HTML_CELL_HOVER;
+%constant const int wxEVT_COMMAND_HTML_LINK_CLICKED;
 
 %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE;
 %constant const int wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED;
