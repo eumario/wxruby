@@ -123,8 +123,10 @@ unless WX_FEATURES['wxUSE_GRAPHICS_CONTEXT']
                           GraphicsMatrix GraphicsObject GraphicsPath GraphicsPen|
 end
 
-puts "The following wxWidgets features are not available and will be skipped:"
-puts "  " + $excluded_classes.sort.join("\n  ")  
+if not $excluded_classes.empty?
+  puts "The following wxWidgets features are not available and will be skipped:"
+  puts "  " + $excluded_classes.sort.join("\n  ")  
+end
 
 # SIXTH: Putting it all together
 
