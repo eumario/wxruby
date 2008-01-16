@@ -1,3 +1,19 @@
+=== 1.9.4 tag on 2008-01-16 included all of this: ===
+- Don't do unnecessary warnings about skipping unsupported classes (AF)
+- Avoid some rubygems warnings about deprecated autorequire (AF)
+- Update etc/threaded.rb sample to use convenience methods (AF)
+- Document event handling for HtmlWindow (AF)
+- Fix display problem with graphics_drawing sample on OS X (AF)
+- Fix a debug warning in html window sample, update to use event handling (AF)
+- Replace deprecated virtual methods in HtmlWindow with event handling (AF)
+- Added HtmlLinkEvent and HtmlCellEvent (AF)
+- Added convenience Wx::Timer class methods "every" and "after" (AF)
+- Added missing Timer#get_id method (AF)
+- Avoid rake gem failure with current Rubygems (AF)
+- Add some missing methods to AuiNotebook (AF)
+- Ensure that OS X gems built on 10.5 will also work on 10.4 (SL)
+- Fix a dependency error with tarball rake task (AF)
+
 === 1.9.3 tag on 2008-01-15 included all of this: ===
 - Consolidate DC-related samples in single drawing directory (AF)
 - Added a GraphicsContext samples (MS)
