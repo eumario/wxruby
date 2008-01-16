@@ -1,5 +1,9 @@
 # Class allowing periodic or timed events to be fired
 class Wx::Timer
+  # In common with other classes, make the id method refer to the
+  # wxWidgets id, not ruby's deprecated name for object_id
+  alias :id :get_id
+
   # This class can be linked to an owner - an instance of a class
   # derived from EvtHandler which will receive Timer events. However,
   # event if a Wx::Timer is attached to a Wx::Window, it is (unlike most

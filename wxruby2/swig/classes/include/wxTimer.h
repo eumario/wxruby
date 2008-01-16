@@ -9,6 +9,7 @@ public:
   wxTimer();
   wxTimer(wxEvtHandler * owner , int  id = -1);
   virtual  ~wxTimer();
+  int GetId() const;
   int GetInterval() const;
   bool IsOneShot() const;
   bool IsRunning() const;

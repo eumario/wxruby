@@ -67,9 +67,11 @@ h3(#Timer_wxtimer). Timer.new
 Creates a timer and associates it with _owner_. Please see 
 "set_owner":#Timer_setowner for the description of parameters.
 
-  *destructor*()
+h3(#Timer_getinterval). Timer#get_id
 
-Destructor. Stops the timer if it is running.
+ Integer *get_id*()
+
+Returns the id of the timer.
 
 h3(#Timer_getinterval). Timer#get_interval
 
