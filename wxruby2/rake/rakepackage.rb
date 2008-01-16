@@ -30,7 +30,6 @@ $base_gemspec = Gem::Specification.new do | spec |
   and Linux.
   DESC
 
-  spec.autorequire  = 'wx'
   spec.require_path = 'lib'
   # Platform specific binaries are added in later
   spec.files        = FileList[ 'lib/**/*' ].to_a +
