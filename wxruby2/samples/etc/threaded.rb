@@ -65,14 +65,11 @@ class GaugeApp < Wx::App
   # Get a guaranteed-unique id
   THREAD_TIMER_ID = Wx::ID_HIGHEST + 1
   def on_init
-    # Create a global application timer 
-    t = Wx::Timer.new(self, THREAD_TIMER_ID)
-    # When the timer "ticks", switch control to other ruby threads
-    evt_timer(THREAD_TIMER_ID) { Thread.pass }
-    # Start the timer to run every 1/40 second (25ms); higher values
-    # will make the other threads run more often, but will eventually
-    # degrade the responsiveness of the GUI.
-    t.start(25)
+    # Create a global application timer that passes control to other
+    # ruby threads. The timer will run every 1/40 second (25ms). Higher
+    # values will make the other threads run more often, but will
+    # eventually degrade the responsiveness of the GUI.
+    Wx::Timer.every(25) { Thread.pass }
     prog = ProgressFrame.new
     prog.show
   end
