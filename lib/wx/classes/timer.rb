@@ -1,5 +1,26 @@
 # Class allowing periodic or timed events to be fired
 class Wx::Timer
+  # Convenience method to trigger a one-off action after +interval+
+  # milliseconds have passed. The action is specified by the passed
+  # block. The Timer is owned by the global App object, and is returned
+  # by the method.
+  def self.after(interval, &block)
+    timer = new(Wx::THE_APP, Wx::ID_ANY)
+    Wx::THE_APP.evt_timer(timer.get_id, block)
+    timer.start(interval, true)
+    timer
+  end
+
+  # Convenience method to trigger a repeating action every +interval+
+  # milliseconds. The action is specified by the passed block. The Timer
+  # is owned by the global App object, and is returned by the method.
+  def self.every(interval, &block)
+    timer = new(Wx::THE_APP, Wx::ID_ANY)
+    Wx::THE_APP.evt_timer(timer.get_id, block)
+    timer.start(interval)
+    timer
+  end
+
   # In common with other classes, make the id method refer to the
   # wxWidgets id, not ruby's deprecated name for object_id
   alias :id :get_id

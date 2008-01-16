@@ -4,9 +4,29 @@ The Timer class allows you to execute code at specified intervals. Its
 precision is platform-dependent, but in general will not be better than 1ms nor
 worse than 1s.
 
-There are two different ways to use this class:
+There are several different ways to use this class:
 
-# You may derive a new class from Timer and define your own
+The most convenient way is to use the Timer.every class method, which accepts
+a Integer to specify the millisecond interval at which the Timer should
+fire, and a block to specify what should happen at that interval. For
+example, to print a message to STDOUT every 1/2 second:
+
+  Wx::Timer.every(500) do
+    puts "Tick"
+  end                               
+
+Secondly you may use the event handling mechanism to direct events to
+any object which inherits from "EvtHandler":evthandler.html. To do this
+use the longer constructor or "set_owner":#Timer_setowner. Then use the
+@evt_timer@ method to connect it to the event handler which will receive
+"TimerEvent":timerevent.html notifications.
+
+  # assuming 'self' is some Window or Wx::App
+  timer = Wx::Timer.new(self)
+  evt_timer(timer.id) { puts "Timer ticked" }
+  timer.start(100)
+
+Lastly, you may derive a new class from Timer and define your own
 "notify":timernotify.html instance method in that to perform the
 required action. For example:
 
@@ -19,26 +39,13 @@ required action. For example:
  timer = MyTimer.new
  timer.start(100) # every 1/10 second
 
-# Or you may redirect the notifications to any
-"EvtHandler":evthandler.html derived object by using the longer
-constructor or "set_owner":#Timer_setowner. Then use the @evt_timer@
-method to connect it to the event handler which will receive
-"TimerEvent":timerevent.html notifications.
-
-  # assuming 'self' is some Window or Wx::App
-  timer = Wx::Timer.new(self, 1234) # 1234 is an arbitrary id
-  evt_timer(1234) { puts "Timer ticked" }
-  timer.start(100)
-
-In any case, you must start the timer with "Start":timerstart.html 
+Unless you use Timer.every, you must start the timer with "start":#Timer_start
 after constructing it before it actually starts sending notifications. It can
-be stopped later with "Stop":timerstop.html.
-
-*Note:* A timer can only be used from the main thread.
+be stopped later with "stop":#Timer_stop
 
 h2. Derived from
 
-"EvtHandler":evthandler.html
+"EvtHandler":evthandler.html, "Object":object.html
 
 h2. See also
 
@@ -49,6 +56,9 @@ h2. See also
 h2. Methods
 
 * "Timer.new":#Timer_new
+* "Timer.after":#Timer_after
+* "Timer.every":#Timer_every
+* "Timer#get_id":#Timer_getid
 * "Timer#get_interval":#Timer_getinterval
 * "Timer#is_one_shot":#Timer_isoneshot
 * "Timer#is_running":#Timer_isrunning
@@ -67,7 +77,31 @@ h3(#Timer_wxtimer). Timer.new
 Creates a timer and associates it with _owner_. Please see 
 "set_owner":#Timer_setowner for the description of parameters.
 
-h3(#Timer_getinterval). Timer#get_id
+h3(#Timer_after). Timer.after
+
+  *Timer.after*(%(arg-type)Integer% interval) { ... }
+
+Carries out the action specified in the passed block after _interval_
+milliseconds have passed. Note that the action will happen only once; if
+you want a repeating action, use "Timer.every":#Timer_every
+
+If you wish to interrupt the timed event before it may have happened,
+capture the return value which is the newly created timer for this
+action, and call "stop":#Timer_stop on it.
+
+h3(#Timer_every). Timer.every
+
+  *Timer.every*(%(arg-type)Integer% interval) { ... }
+
+Repeats the action specified in the passed block every _interval_
+milliseconds. The timer is owned by the application object and will fire
+as long as the application is running.
+
+The method returns the new timer; if you may wish to stop the timer
+before the application finishes, you should capture this return value so
+you can call "stop":#Timer_stop on it later.
+
+h3(#Timer_getid). Timer#get_id
 
  Integer *get_id*()
 
@@ -83,7 +117,7 @@ h3(#Timer_isoneshot). Timer#is_one_shot
 
  Boolean *is_one_shot*()
 
-Returns @true@ if the timer is one shot, i.e.\ if it will stop after firing the
+Returns @true@ if the timer is one shot, i.e. if it will stop after firing the
 first notification automatically.
 
 h3(#Timer_isrunning). Timer#is_running
