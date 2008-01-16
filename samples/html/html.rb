@@ -18,6 +18,12 @@ require 'uri'
 
 class MyHtmlWindow < Wx::HtmlWindow
   attr_reader :html_src
+  def initialize(*args)
+    super
+    evt_html_link_clicked self, :on_link_clicked
+    evt_html_cell_hover self, :on_hover
+  end
+
   def load_page_from_uri(uri)
     case uri
     when URI::HTTP
@@ -64,21 +70,19 @@ class MyHtmlWindow < Wx::HtmlWindow
   def set_page(html)
     super html
     @html_src = html
-    get_related_frame.addr_bar.set_value(@loaded_uri.to_s)
+    related_frame.addr_bar.value = @loaded_uri.to_s
   end
 
-  def on_link_clicked(link)
-    href = link.get_href
-    if href =~ /^#/
-        super(link)
-    end
+  def on_link_clicked(event)
+    href = event.link_info.href
+    return if href =~ /^#/
     link_uri = URI.parse(href)
     @loaded_uri = load_page_from_uri(link_uri)
   end
 
-  def on_cell_mouse_hover(cell, x, y)
-    if link = cell.get_link
-      related_frame.status_text = link.get_href, 1
+  def on_hover(event)
+    if link = event.cell.link
+      related_frame.set_status_text(link.href)
     else
       related_frame.status_text = ''
     end
@@ -114,7 +118,7 @@ class HtmlFrame < Wx::Frame
 
     @html_win = MyHtmlWindow.new(panel, -1)
     @html_win.set_related_frame(self, 'HTML Window: %s')
-    @html_win.set_related_status_bar(2)
+
     @html_win.set_page(DATA.read)
     sizer.add(@html_win, 1, Wx::ALL|Wx::GROW, 4)
     panel.set_sizer(sizer)
