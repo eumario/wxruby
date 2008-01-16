@@ -53,13 +53,13 @@ def create_gem_tasks
     this_gemspec = $base_gemspec.dup()    
     this_gemspec.instance_eval do       
       self.platform = Gem::Platform::CURRENT
-      if self.platform.include?('darwin')
-        self.platform = "universal-darwin"
-        if $osx_split_gem_name != nil
-          self.platform = $osx_split_gem_name
+      self.files += [ TARGET_LIB ]
+      # If building on OS X, test for splitting OS universal gem into two 
+      if self.platform.os == 'darwin' and self.platform.cpu == 'universal'
+        if $osx_split_gem_name
+          self.platform.cpu = $osx_split_gem_name
         end
       end
-      self.files += [ TARGET_LIB ]
     end
     Gem::manage_gems()
     Gem::Builder.new(this_gemspec).build
