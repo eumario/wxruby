@@ -1,4 +1,4 @@
-h1. wxRuby Documentation: Class Reference 
+h1. wxRuby Documentation: Class Reference
 
 This is the class reference for WxRuby. The classes listed below are
 those currently available in WxRuby2. This documentation was seeded by
@@ -69,7 +69,7 @@ menu; only dialogs may appear modally (on top of all other windows).
 
 "top":#top
 
-h2(#controls). Controls 
+h2(#controls). Controls
 
 These are small windows or widgets which provide allow for various types
 of user input and interaction.
@@ -175,7 +175,7 @@ h2(#events). Events
 An event object contains information about a specific event. Event
 handlers blocks may optionally receive a single block parameter, which
 will be an Event object of the appropriate class. For more information
-about events and setting up event handlers, see the 
+about events and setting up event handlers, see the
 "event handling overview":eventhandlingoverview.html
 
 |ActivateEvent|A window or application activation event|
@@ -368,12 +368,10 @@ straightforward to provide document printing facilities.
 
 h2(#dnd_clipboard). Drag and drop and clipboard classes
 
-These classes provide support for passing data to and from other desktop
-applications. This functionality is not yet available in wxRuby2, but
-would be nice to have. 
+These classes provide support for passing to and from other desktop
+applications, as well as between widgets within a wxRuby application.
 
 |DataObject|Data object class|
-|DataFormat|Represents a data format|
 |TextDataObject|Text data object class|
 |FileDataObject|File data object class|
 |BitmapDataObject|Bitmap data object class|
