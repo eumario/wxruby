@@ -8,7 +8,7 @@ It is particularly suited for editing source code of a variety of
 programming languages. It has built-in support in the form of
 "Lexers":#styling_for_programming_languages for many common languages,
 including Ruby, Python, HTML, C/C++ and SQL. As well as customisable
-"syntax highlighting":#apply_visual_styles_to_text, it also supports
+"syntax highlighting":#styling_text, it also supports
 code-folding, autocompletion and indentation.
 
 However, its use is not restricted to source-code editing. It has a wide
@@ -44,11 +44,6 @@ Scintilla documentation. They then need to be converted to wxRuby
 constant names by changing the prefix from @SC_@ (Scintilla) to @STC_@
 (StyledTextCtrl)
 
-|*Scintilla constant*|*wxRuby constant*|
-|@SC_MARK_CIRCLE@|@Wx::STC_MARK_CIRCLE@|
-|@SC_LEX_RUBY@|@Wx::STC_LEX_RUBY@|
-|@SC_PRINT_COLOURONWHITE@|@Wx::STC_PRINT_COLOURONWHITE@|
-
 h2. Event Handling
 
 A StyledTextCtrl has a number of event handlers, each of which will be
@@ -82,44 +77,44 @@ h2. Methods
 Since StyledTextCtrl supports so many methods, they are broken down here
 into groups.
 
-* "Basic text query and modification":#basic_text_query_and_modification
-* "Text encoding":#text_encoding
-* "Cross-platform end-of-line":#crossplatform_endofline
-* "Querying text coordinates":#querying_text_coordinates
+* "Autocompletion":#autocompletion
 * "Basic movement":#basic_movement
-* "Anchor, selection and cursor":#anchor_selection_and_cursor
-* "Line wrapping":#line_wrapping
-* "Scrolling and scrollbars":#scrolling_and_scrollbars
-* "Cut, copy and paste":#cut_copy_and_paste
-* "Undo and redo":#undo_and_redo
-* "Search and replace":#search_and_replace
-* "Apply visual styles to text":#apply_visual_styles_to_text
-* "Additional text styling":#additional_text_styling
-* "Styling for programming languages":#styling_for_programming_languages
+* "Brace matching and highlighting":#brace_matching_and_highlighting
+* "Popup call tips":#popup_call_tips
 * "Caret features":#caret_features
-* "Tab and indentation guides":#tab_and_indentation_guides
-* "Start-of-line special markers":#startofline_special_markers
-* "Custom margin displays":#custom_margin_displays
-* "Long line markers":#long_line_markers
-* "Code folding":#code_folding
-* "Paired-brace matching":#pairedbrace_matching
-* "Function name autocompletion":#function_name_autocompletion
-* "Pop-up argument lists":#popup_argument_lists
-* "Miscellaneous view options":#miscellaneous_view_options
-* "Multiple views of one document":#multiple_views_of_one_document
-* "Function name autocompletion":#function_name_autocompletion
-* "Pop-up argument lists":#popup_argument_lists
-* "Command keys":#command_keys
-* "Functions emulating keyboard commands":#functions_emulating_keyboard_commands
-* "Macro recording":#macro_recording
-* "Load and save to file":#load_and_save_to_file
-* "Printing":#printing
+* "Cut, copy and paste":#cut_copy_and_paste
 * "Drag and drop":#drag_and_drop
-* "Interaction with WxRuby":#interaction_with_wxruby
-* "Control event handling":#control_event_handling
+* "Event handling":#event_handling
+* "Folding":#folding
+* "Indentation and Tabs":#indentation_and_tabs
+* "Indicators":#indicators
+* "Key bindings":#key_bindings
+* "Keyboard commands functions":#keyboard_commands_functions
+* "Line Endings":#line_endings
+* "Load and save to file":#load_and_save_to_file
+* "Long line markers":#long_line_markers
+* "Macro recording":#macro_recording
+* "Margins":#margins
+* "Markers":#markers
 * "Miscellaneous other settings":#miscellaneous_other_settings
+* "Multiple views of one document":#multiple_views_of_one_document
+* "Printing":#printing
+* "Scrolling and scrollbars":#scrolling_and_scrollbars
+* "Search and replace":#search_and_replace
+* "Selection, anchor and cursor":#anchor_selection_and_cursor
+* "Styling text":#styling_text
+* "Styling for programming languages":#styling_for_programming_languages
+* "Text coordinates":#text_coordinates
+* "Text encoding":#text_encoding
+* "Text retrieval and modification":#text_retrieval_and_modification
+* "Undo and redo":#undo_and_redo
+* "White space, zoom and other view options":#miscellaneous_view_options
+* "Wrapping lines":#line_wrapping
+* "WxRuby interaction":#wxruby_interaction
 
-h2(#basic_text_query_and_modification). Basic text query and modification
+
+
+h2(#text_retrieval_and_modification). Text retrieval and modification
 
 * "StyledTextCtrl.add_text":#STC_addtext
 * "StyledTextCtrl.allocate":#STC_allocate
@@ -304,7 +299,7 @@ Set the code page used to interpret the bytes of the document as characters.
 
 
 
-h2(#crossplatform_endofline). Cross-platform end-of-line
+h2(#line_endings). Line endings
 
 * "StyledTextCtrl.convert_eo_ls":#STC_converteols
 * "StyledTextCtrl.get_eol_mode":#STC_geteolmode
@@ -344,7 +339,7 @@ Make the end of line characters visible or invisible.
 
 
 
-h2(#querying_text_coordinates). Querying text coordinates
+h2(#text_coordinates). Text coordinates
 
 * "StyledTextCtrl.get_column":#STC_getcolumn
 * "StyledTextCtrl.get_cur_line":#STC_getcurline
@@ -639,7 +634,7 @@ Sets the cursor to one of the SC_CURSOR* values.
 
 
 
-h2(#line_wrapping). Line wrapping
+h2(#line_wrapping). Wrapping lines
 
 * "StyledTextCtrl.get_layout_cache":#STC_getlayoutcache
 * "StyledTextCtrl.get_wrap_mode":#STC_getwrapmode
@@ -667,8 +662,7 @@ h3(#STC_getwrapmode). StyledTextCtrl#get_wrap_mode
 
  Integer *get_wrap_mode*()
 
-Retrieve whether text is word wrapped. The return value will be one of
-@Wx::STC_WRAP_NONE@, @Wx::STC_WRAP_WORD@ or @Wx::STC_WRAP_CHAR@
+Retrieve whether text is word wrapped.
 
 h3(#STC_getwrapstartindent). StyledTextCtrl#get_wrap_start_indent
 
@@ -710,11 +704,7 @@ h3(#STC_setwrapmode). StyledTextCtrl#set_wrap_mode
 
   *set_wrap_mode*(%(arg-type)Integer% mode)
 
-Sets whether text is word wrapped. Valid constants for @mode@ are
-
-* Wx::STC_WRAP_NONE
-* Wx::STC_WRAP_WORD
-* Wx::STC_WRAP_CHAR
+Sets whether text is word wrapped.
 
 h3(#STC_setwrapstartindent). StyledTextCtrl#set_wrap_start_indent
 
@@ -1137,7 +1127,7 @@ Make the target range start and end be the same as the selection range start and
 
 
 
-h2(#apply_visual_styles_to_text). Apply visual styles to text
+h2(#styling_text). Styling text
 
 * "StyledTextCtrl.clear_document_style":#STC_cleardocumentstyle
 * "StyledTextCtrl.get_end_styled":#STC_getendstyled
@@ -1184,7 +1174,7 @@ h3(#STC_getendstyled). StyledTextCtrl#get_end_styled
 
  Integer *get_end_styled*()
 
-Retrieve the position of the last correctly styled character.
+#endif     Retrieve the position of the last correctly styled character.
 
 h3(#STC_getlinestate). StyledTextCtrl#get_line_state
 
@@ -1326,13 +1316,7 @@ Set style size, face, bold, italic, and underline attributes from     a wxFont's
 
 h3(#STC_stylesetfontattr). StyledTextCtrl#style_set_font_attr
 
-  *style_set_font_attr*(%(arg-type)Integer% styleNum,
-                        %(arg-type)Integer% size, 
-                        %(arg-type)String% faceName, 
-                        %(arg-type)Boolean% bold,  
-                        %(arg-type)Boolean% italic,
-                        %(arg-type)Boolean% underline, 
-                        %(arg-type)FontEncoding% encoding=Wx::FONTENCODING_DEFAULT)
+  *style_set_font_attr*(%(arg-type)Integer% styleNum, %(arg-type)Integer% size, %(arg-type)String% faceName, %(arg-type)Boolean% bold, %(arg-type)Boolean% italic, %(arg-type)Boolean% underline, %(arg-type)FontEncoding% encoding=wxFONTENCODING_DEFAULT)
 
 Set all font style attributes at once.
 
@@ -1386,7 +1370,7 @@ Set a style to be visible or not.
 
 
 
-h2(#additional_text_styling). Additional text styling
+h2(#indicators). Indicators
 
 * "StyledTextCtrl.indicator_get_foreground":#STC_indicatorgetforeground
 * "StyledTextCtrl.indicator_get_style":#STC_indicatorgetstyle
@@ -1632,7 +1616,7 @@ Switch between sticky and non-sticky: meant to be bound to a key.
 
 
 
-h2(#tab_and_indentation_guides). Tab and indentation guides
+h2(#indentation_and_tabs). Indentation and Tabs
 
 * "StyledTextCtrl.get_back_space_un_indents":#STC_getbackspaceunindents
 * "StyledTextCtrl.get_highlight_guide":#STC_gethighlightguide
@@ -1756,7 +1740,7 @@ Indentation will only use space characters if useTabs is false, otherwise     it
 
 
 
-h2(#startofline_special_markers). Start-of-line special markers
+h2(#markers). Markers
 
 * "StyledTextCtrl.marker_add":#STC_markeradd
 * "StyledTextCtrl.marker_add_set":#STC_markeraddset
@@ -1859,7 +1843,7 @@ Set the foreground colour used for a particular marker number.
 
 
 
-h2(#custom_margin_displays). Custom margin displays
+h2(#margins). Margins
 
 * "StyledTextCtrl.get_margin_left":#STC_getmarginleft
 * "StyledTextCtrl.get_margin_mask":#STC_getmarginmask
@@ -2002,7 +1986,7 @@ The edge may be displayed by a line (EDGE_LINE) or by highlighting text that    
 
 
 
-h2(#code_folding). Code folding
+h2(#folding). Folding
 
 * "StyledTextCtrl.doc_line_from_visible":#STC_doclinefromvisible
 * "StyledTextCtrl.ensure_visible":#STC_ensurevisible
@@ -2125,7 +2109,7 @@ Find the display line of a document line taking hidden lines into account.
 
 
 
-h2(#pairedbrace_matching). Paired-brace matching
+h2(#brace_matching_and_highlighting). Brace matching and highlighting
 
 * "StyledTextCtrl.brace_bad_light":#STC_bracebadlight
 * "StyledTextCtrl.brace_highlight":#STC_bracehighlight
@@ -2151,7 +2135,7 @@ Find the position of a matching brace or INVALID_POSITION if no match.
 
 
 
-h2(#function_name_autocompletion). Function name autocompletion
+h2(#autocompletion). Autocompletion
 
 * "StyledTextCtrl.auto_comp_active":#STC_autocompactive
 * "StyledTextCtrl.auto_comp_cancel":#STC_autocompcancel
@@ -2366,7 +2350,7 @@ Display a list of strings and send notification when user chooses one.
 
 
 
-h2(#popup_argument_lists). Pop-up argument lists
+h2(#popup_call_tips). Pop-up call tips
 
 * "StyledTextCtrl.call_tip_active":#STC_calltipactive
 * "StyledTextCtrl.call_tip_cancel":#STC_calltipcancel
@@ -2434,7 +2418,7 @@ Enable use of STYLE_CALLTIP and set call tip tab size in pixels.
 
 
 
-h2(#miscellaneous_view_options). Miscellaneous view options
+h2(#miscellaneous_view_options). White space, zoom and other view options
 
 * "StyledTextCtrl.get_view_white_space":#STC_getviewwhitespace
 * "StyledTextCtrl.get_zoom":#STC_getzoom
@@ -2542,7 +2526,7 @@ Change the document object used.
 
 
 
-h2(#function_name_autocompletion). Function name autocompletion
+h2(#autocompletion). Autocompletion
 
 * "StyledTextCtrl.auto_comp_active":#STC_autocompactive
 * "StyledTextCtrl.auto_comp_cancel":#STC_autocompcancel
@@ -2757,7 +2741,7 @@ Display a list of strings and send notification when user chooses one.
 
 
 
-h2(#popup_argument_lists). Pop-up argument lists
+h2(#popup_call_tips). Pop-up call tips
 
 * "StyledTextCtrl.call_tip_active":#STC_calltipactive
 * "StyledTextCtrl.call_tip_cancel":#STC_calltipcancel
@@ -2825,7 +2809,7 @@ Enable use of STYLE_CALLTIP and set call tip tab size in pixels.
 
 
 
-h2(#command_keys). Command keys
+h2(#key_bindings). Key Bindings
 
 * "StyledTextCtrl.cmd_key_assign":#STC_cmdkeyassign
 * "StyledTextCtrl.cmd_key_clear":#STC_cmdkeyclear
@@ -2858,7 +2842,7 @@ Perform one of the operations defined by the wxSTC_CMD_* constants.
 
 
 
-h2(#functions_emulating_keyboard_commands). Functions emulating keyboard commands
+h2(#keyboard_commands_functions). Keyboard Commands Functions
 
 * "StyledTextCtrl.back_tab":#STC_backtab
 * "StyledTextCtrl.cancel":#STC_cancel
@@ -3540,7 +3524,7 @@ Allow for simulating a DnD DropText
 
 
 
-h2(#interaction_with_wxruby). Interaction with WxRuby
+h2(#wxruby_interaction). Wxruby interaction
 
 * "StyledTextCtrl.get_mouse_down_captures":#STC_getmousedowncaptures
 * "StyledTextCtrl.get_status":#STC_getstatus
@@ -3587,7 +3571,7 @@ Change internal focus flag.
 
 
 
-h2(#control_event_handling). Control event handling
+h2(#event_handling). Event handling
 
 * "StyledTextCtrl.get_last_keydown_processed":#STC_getlastkeydownprocessed
 * "StyledTextCtrl.get_mod_event_mask":#STC_getmodeventmask
@@ -3687,7 +3671,7 @@ h3(#STC_setuseantialiasing). StyledTextCtrl#set_use_anti_aliasing
 
   *set_use_anti_aliasing*(%(arg-type)Boolean% useAA)
 
-Specify whether anti-aliased fonts should be used.  Will have no effect     on some platforms, but on some (wxMac for example) can greatly improve     performance.
+#endif     Specify whether anti-aliased fonts should be used.  Will have no effect     on some platforms, but on some (wxMac for example) can greatly improve     performance.
 
 h3(#STC_setwhitespacechars). StyledTextCtrl#set_whitespace_chars
 
