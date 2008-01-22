@@ -25,6 +25,7 @@ public:
   wxDirFilterListCtrl* GetFilterListCtrl() const;
   wxTreeItemId GetRootId() ;
   wxTreeCtrl* GetTreeCtrl() const;
+  void ReCreateTree() ;
   void SetDefaultPath(const wxString&  path ) ;
   void SetFilter(const wxString&  filter ) ;
   void SetFilterIndex(int  n ) ;
