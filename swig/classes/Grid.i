@@ -19,10 +19,16 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
 // Here, we simply tell SWIG that once these three classes have been
 // applied, they are owned and will be cleaned up by wxWidgets, and so
 // should not be freed by Ruby.
-
 %apply SWIGTYPE *DISOWN { wxGridCellAttr* attr };
 %apply SWIGTYPE *DISOWN { wxGridCellEditor* editor };
 %apply SWIGTYPE *DISOWN { wxGridCellRenderer* renderer };
+
+// If invalid grid-cell co-ordinates are passed into wxWidgets,
+// segfaults may result, so check to avoid this.
+%typemap(check) int row, int col {
+  if ( $1 < 0 )
+    rb_raise(rb_eIndexError, "Negative grid cell co-ordinate is not valid");
+}
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
