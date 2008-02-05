@@ -37,6 +37,7 @@ public:
   wxMenuItem* FindItemByPosition(size_t position) const;
   wxString GetHelpString(int  id ) const;
   wxString GetLabel(int  id ) const;
+  wxString GetLabelText(int id) const;
   size_t GetMenuItemCount() const;
   const wxMenuItemList& GetMenuItems() const;
   wxString GetTitle() const;
