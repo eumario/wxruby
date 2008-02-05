@@ -120,6 +120,7 @@ h2. Methods
 * "Menu#find_item_by_position":#Menu_finditembyposition
 * "Menu#get_help_string":#Menu_gethelpstring
 * "Menu#get_label":#Menu_getlabel
+* "Menu#get_label_text":#Menu_getlabeltext
 * "Menu#get_menu_item_count":#Menu_getmenuitemcount
 * "Menu#get_menu_items":#Menu_getmenuitems
 * "Menu#get_title":#Menu_gettitle
@@ -405,7 +406,15 @@ h3(#Menu_getlabel). Menu#get_label
 
  String *get_label*(%(arg-type)Integer% id)
 
-Returns a menu item label.
+Returns the menu item label for the item identified by _id_. An empty
+string is returned if the item was not found.
+
+h3(#Menu_getlabeltext). Menu#get_label_text
+
+ String *get_label_text*(%(arg-type)Integer% id)
+
+Returns a menu item label, without any of the original mnemonics and
+accelerators. An empty string is returned if the item was not found.
 
 h4. Parameters
 
