@@ -63,8 +63,10 @@ class Wx::Window
     if self.double_buffered?
       paint { | dc | yield dc }
     else
+      # client_size is the window area available for drawing upon
+      c_size = client_size
       # Create an in-memory buffer if none supplied
-      buffer ||= Wx::Bitmap.new(size.width, size.height)
+      buffer ||= Wx::Bitmap.new(c_size.width, c_size.height)
       buffer.draw do | mem_dc |
         mem_dc.background = Wx::TRANSPARENT_BRUSH
         mem_dc.clear
@@ -72,7 +74,7 @@ class Wx::Window
         yield mem_dc
         paint do | dc | 
           # Copy the buffer to the window
-          dc.blit(0, 0, size.width, size.height, mem_dc, 0, 0)
+          dc.blit(0, 0, c_size.width, c_size.height, mem_dc, 0, 0)
         end
       end
     end
