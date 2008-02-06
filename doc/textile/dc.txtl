@@ -11,7 +11,7 @@ only, so refer to this section for most device context information.
 
 Please note that in addition to the versions of the methods documented here,
 there are also versions which accept single @Point@ parameter instead of
-two @Coord@ ones or @Point@ and @Size@ instead of four of
+two @Integer@ ones or @Point@ and @Size@ instead of four of
 them.
 
 h2. Support for Transparency / Alpha Channel
@@ -128,15 +128,15 @@ h3(#DC_new). DC.new
 
 h3(#DC_blit). DC#blit
 
- Boolean *blit*(%(arg-type)Coord% xdest,  %(arg-type)Coord% ydest,  %(arg-type)Coord% width, 
-              %(arg-type)Coord% height, 
+ Boolean *blit*(%(arg-type)Integer% xdest,  %(arg-type)Integer% ydest,  %(arg-type)Integer% width, 
+              %(arg-type)Integer% height, 
                %(arg-type)DC% source, 
-              %(arg-type)Coord% xsrc, 
-              %(arg-type)Coord% ysrc, 
+              %(arg-type)Integer% xsrc, 
+              %(arg-type)Integer% ysrc, 
               %(arg-type)Integer% logicalFunc = COPY, 
                %(arg-type)Boolean% useMask = false, 
-              %(arg-type)Coord% xsrcMask = -1, 
-              %(arg-type)Coord% ysrcMask = -1)
+              %(arg-type)Integer% xsrcMask = -1, 
+              %(arg-type)Integer% ysrcMask = -1)
 
 Copy from a source DC to this DC, specifying the destination
 coordinates, size of area to copy, source DC, source coordinates,
@@ -215,7 +215,7 @@ h4. See also
 
 h3(#DC_calcboundingbox). DC#calc_bounding_box
 
-  *calc_bounding_box*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *calc_bounding_box*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Adds the specified point to the bounding box which can be retrieved with 
 "MinX":dcminx.html, "MaxX":dcmaxx.html and 
@@ -265,7 +265,7 @@ internally after such changes.
 
 h3(#DC_crosshair). DC#cross_hair
 
-  *cross_hair*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *cross_hair*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Displays a cross hair using the current pen. This is a vertical
 and horizontal line the height and width of the window, centred
@@ -282,7 +282,7 @@ See also "DC#set_clipping_region":dc.html#DC_setclippingregion.
 
 h3(#DC_devicetologicalx). DC#device_to_logical_x
 
- "Coord":coord.html *device_to_logical_x*(%(arg-type)Coord% x)
+ Integer *device_to_logical_x*(%(arg-type)Integer% x)
 
 Convert device X coordinate to logical coordinate, using the current
 mapping mode.
@@ -290,7 +290,7 @@ mapping mode.
 
 h3(#DC_devicetologicalxrel). DC#device_to_logical_xrel
 
- "Coord":coord.html *device_to_logical_xrel*(%(arg-type)Coord% x)
+ Integer *device_to_logical_xrel*(%(arg-type)Integer% x)
 
 Convert device X coordinate to relative logical coordinate, using the current
 mapping mode but ignoring the x axis orientation.
@@ -299,7 +299,7 @@ Use this function for converting a width, for example.
 
 h3(#DC_devicetologicaly). DC#device_to_logical_y
 
- "Coord":coord.html *device_to_logical_y*(%(arg-type)Coord% y)
+ Integer *device_to_logical_y*(%(arg-type)Integer% y)
 
 Converts device Y coordinate to logical coordinate, using the current
 mapping mode.
@@ -307,7 +307,7 @@ mapping mode.
 
 h3(#DC_devicetologicalyrel). DC#device_to_logical_yrel
 
- "Coord":coord.html *device_to_logical_yrel*(%(arg-type)Coord% y)
+ Integer *device_to_logical_yrel*(%(arg-type)Integer% y)
 
 Convert device Y coordinate to relative logical coordinate, using the current
 mapping mode but ignoring the y axis orientation.
@@ -316,10 +316,9 @@ Use this function for converting a height, for example.
 
 h3(#DC_drawarc). DC#draw_arc
 
-  *draw_arc*(%(arg-type)Coord% x1,  %(arg-type)Coord% y1,  %(arg-type)Coord% x2, 
-           %(arg-type)Coord% y2, 
-           %(arg-type)Coord% xc, 
-           %(arg-type)Coord% yc)
+  *draw_arc*(%(arg-type)Integer% x1,  %(arg-type)Integer% y1,  
+              %(arg-type)Integer% x2,  %(arg-type)Integer% y2, 
+              %(arg-type)Integer% xc,  %(arg-type)Integer% yc)
 
 Draws an arc of a circle, centred on (_xc, yc_), with starting point (_x1, y1_)
 and ending at (_x2, y2_).   The current pen is used for the outline
@@ -330,7 +329,7 @@ The arc is drawn in an anticlockwise direction from the start point to the end p
 
 h3(#DC_drawbitmap). DC#draw_bitmap
 
-  *draw_bitmap*(%(arg-type)Bitmap% bitmap,  %(arg-type)Coord% x,  %(arg-type)Coord% y, 
+  *draw_bitmap*(%(arg-type)Bitmap% bitmap,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
               %(arg-type)Boolean% transparent)
 
 Draw a bitmap on the device context at the specified point. If _transparent_ is true and the bitmap has
@@ -344,8 +343,8 @@ of the bitmap (all bits set to 1), and the current text background colour to dra
 
 h3(#DC_drawcheckmark). DC#draw_check_mark
 
-  *draw_check_mark*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-                  %(arg-type)Coord% height)
+  *draw_check_mark*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                  %(arg-type)Integer% height)
 
   *draw_check_mark*(%(arg-type)Rect% rect)
 
@@ -354,9 +353,9 @@ Draws a check mark inside the given rectangle.
 
 h3(#DC_drawcircle). DC#draw_circle
 
-  *draw_circle*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% radius)
+  *draw_circle*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% radius)
 
-  *draw_circle*(%(arg-type)Point% pt,  %(arg-type)Coord% radius)
+  *draw_circle*(%(arg-type)Point% pt,  %(arg-type)Integer% radius)
 
 Draws a circle with the given centre and radius.
 
@@ -367,8 +366,8 @@ h4. See also
 
 h3(#DC_drawellipse). DC#draw_ellipse
 
-  *draw_ellipse*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-               %(arg-type)Coord% height)
+  *draw_ellipse*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+               %(arg-type)Integer% height)
 
   *draw_ellipse*(%(arg-type)Point% pt,  %(arg-type)Size% size)
 
@@ -385,8 +384,8 @@ h4. See also
 
 h3(#DC_drawellipticarc). DC#draw_elliptic_arc
 
-  *draw_elliptic_arc*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-                    %(arg-type)Coord% height, 
+  *draw_elliptic_arc*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                    %(arg-type)Integer% height, 
                     %(arg-type)double% start, 
                     %(arg-type)double% end)
 
@@ -408,7 +407,7 @@ complete ellipse will be drawn.
 
 h3(#DC_drawicon). DC#draw_icon
 
-  *draw_icon*(%(arg-type)Icon% icon,  %(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *draw_icon*(%(arg-type)Icon% icon,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Draw an icon on the display (does nothing if the device context is PostScript).
 This can be the simplest way of drawing bitmaps on a window.
@@ -433,70 +432,52 @@ it is != -1 and return the bounding rectangle if required.
 
 h3(#DC_drawline). DC#draw_line
 
-  *draw_line*(%(arg-type)Coord% x1,  %(arg-type)Coord% y1,  %(arg-type)Coord% x2, 
-            %(arg-type)Coord% y2)
+  *draw_line*(%(arg-type)Integer% x1,  %(arg-type)Integer% y1, 
+               %(arg-type)Integer% x2,  %(arg-type)Integer% y2)
 
 Draws a line from the first point to the second. The current pen is used
-for drawing the line. Note that the point $(x2, y2)$ is not part of the
-line and is not drawn by this function (this is consistent with the behaviour
-of many other toolkits).
-
+for drawing the line. Note that the point (x2, y2) is not part of the
+line and is not drawn by this function (this is consistent with the
+behaviour of many other toolkits).
 
 h3(#DC_drawlines). DC#draw_lines
 
-  *draw_lines*(%(arg-type)Integer% n,  %(arg-type)Point% points[],  %(arg-type)Coord% xoffset = 0, 
-             %(arg-type)Coord% yoffset = 0)
-
-  *draw_lines*(%(arg-type)List% points,  %(arg-type)Coord% xoffset = 0, 
-             %(arg-type)Coord% yoffset = 0)
-
-Draws lines using an array of _points_ of size _n_, or list of
-pointers to points, adding the optional offset coordinate. The current
-pen is used for drawing the lines.  The programmer is responsible for
-deleting the list of points.
+  *draw_lines*(%(arg-type)Array% points,  
+                %(arg-type)Integer% xoffset = 0, 
+                %(arg-type)Integer% yoffset = 0)
 
 
-
-
+Draws lines using _points_, which should be an Array of
+"Point":point.html objects. An optional offset may be supplied which
+will be added to each point. The current pen is used for drawing the
+lines.
 
 
 h3(#DC_drawpolygon). DC#draw_polygon
 
-  *draw_polygon*(%(arg-type)Integer% n,  %(arg-type)Point% points[],  %(arg-type)Coord% xoffset = 0, 
-               %(arg-type)Coord% yoffset = 0, 
-              
-  %(arg-type)Integer% fill_style = ODDEVEN_RULE)
+  *draw_polygon*(%(arg-type)Array% points,  
+                   %(arg-type)Integer% xoffset = 0, 
+                   %(arg-type)Integer% yoffset = 0, 
+                   %(arg-type)Integer% fill_style = ODDEVEN_RULE)
 
-  *draw_polygon*(%(arg-type)List% points,  %(arg-type)Coord% xoffset = 0, 
-               %(arg-type)Coord% yoffset = 0, 
-              
-  %(arg-type)Integer% fill_style = ODDEVEN_RULE)
-
-Draws a filled polygon using an array of _points_ of size _n_,
-or list of pointers to points, adding the optional offset coordinate.
-
-The last argument specifies the fill rule: *ODDEVEN_RULE* (the
-default) or *WINDING_RULE*.
+Draws a filled polygon with _points_, which should be an Array of
+"Point":point.html objects. An optional offset may be supplied which
+will be added to each point. wxRuby automatically closes the first and
+last points.
 
 The current pen is used for drawing the outline, and the current brush
 for filling the shape.  Using a transparent brush suppresses filling.
-The programmer is responsible for deleting the list of points.
-
-Note that Widgets automatically closes the first and last points.
-
-
-
-
+The last argument specifies the fill rule: *ODDEVEN_RULE* (the default)
+or *WINDING_RULE*.
 
 
 h3(#DC_drawpolypolygon). DC#draw_poly_polygon
 
-  *draw_poly_polygon*(%(arg-type)Integer% n,  %(arg-type)Integer% count[], 
-                    %(arg-type)Point% points[], 
-                    %(arg-type)Coord% xoffset = 0, 
-                    %(arg-type)Coord% yoffset = 0, 
-                   
-  %(arg-type)Integer% fill_style = ODDEVEN_RULE)
+  *draw_poly_polygon*(%(arg-type)Integer% count[], 
+                        %(arg-type)Point% points[], 
+                        %(arg-type)Integer% xoffset = 0, 
+                        %(arg-type)Integer% yoffset = 0, 
+                        %(arg-type)Integer% fill_style = ODDEVEN_RULE)
 
 Draws two or more filled polygons using an array of _points_, adding the
 optional offset coordinates.
@@ -520,32 +501,28 @@ The polygons maybe disjoint or overlapping. Each polygon specified in a call to
 "draw_polygon":#DC_drawpolygon member function, the polygons created by
 *DrawPolyPolygon* are not closed automatically.
 
-
-
-
-
-
 h3(#DC_drawpoint). DC#draw_point
 
-  *draw_point*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *draw_point*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Draws a point using the color of the current pen. Note that the other properties of the pen are not used, such as width etc..
 
 
 h3(#DC_drawrectangle). DC#draw_rectangle
 
-  *draw_rectangle*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-                 %(arg-type)Coord% height)
+  *draw_rectangle*(%(arg-type)Integer% x, %(arg-type)Integer% y,  
+                     %(arg-type)Integer% width, %(arg-type)Integer% height)
 
 Draws a rectangle with the given top left corner, and with the given
 size.  The current pen is used for the outline and the current brush
 for filling the shape.
 
-
 h3(#DC_drawrotatedtext). DC#draw_rotated_text
 
-  *draw_rotated_text*(%(arg-type)String% text,  %(arg-type)Coord% x,  %(arg-type)Coord% y, 
-                    %(arg-type)double% angle)
+  *draw_rotated_text*(%(arg-type)String% text,  
+                        %(arg-type)Integer% x,  
+                        %(arg-type)Integer% y, 
+                        %(arg-type)double% angle)
 
 Draws the text rotated by _angle_ degrees.
 
@@ -561,8 +538,8 @@ h4. See also
 
 h3(#DC_drawroundedrectangle). DC#draw_rounded_rectangle
 
-  *draw_rounded_rectangle*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-                         %(arg-type)Coord% height, 
+  *draw_rounded_rectangle*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                         %(arg-type)Integer% height, 
                          %(arg-type)double% radius)
 
 Draws a rectangle with the given top left corner, and with the given
@@ -581,20 +558,15 @@ the rectangle.
 
 h3(#DC_drawspline). DC#draw_spline
 
-  *draw_spline*(%(arg-type)Integer% n,  %(arg-type)Point% points[])
+  *draw_spline*(%(arg-type)Array% points)
 
 Draws a spline between all given control points, using the current
-pen.
+pen. _points_ should be an Array of "Point":point.html objects.
 
-  *draw_spline*(%(arg-type)List% points)
 
-Draws a spline between all given control points, using the current
-pen.  Doesn't delete the List and contents.
-
-  *draw_spline*(%(arg-type)Coord% x1,  %(arg-type)Coord% y1,  %(arg-type)Coord% x2, 
-              %(arg-type)Coord% y2, 
-              %(arg-type)Coord% x3, 
-              %(arg-type)Coord% y3)
+  *draw_spline*(%(arg-type)Integer% x1, %(arg-type)Integer% y1,  
+                  %(arg-type)Integer% x2, %(arg-type)Integer% y2, 
+                  %(arg-type)Integer% x3, %(arg-type)Integer% y3)
 
 Draws a three-point spline using the current pen.
 
@@ -605,7 +577,7 @@ Draws a three-point spline using the current pen.
 
 h3(#DC_drawtext). DC#draw_text
 
-  *draw_text*(%(arg-type)String% text,  %(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *draw_text*(%(arg-type)String% text,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Draws a text string at the specified point, using the current text font,
 and the current text foreground and background colours.
@@ -654,7 +626,7 @@ Ends a document page (only relevant when outputting to a printer).
 
 h3(#DC_floodfill). DC#flood_fill
 
- Boolean *flood_fill*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Colour% colour, 
+ Boolean *flood_fill*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Colour% colour, 
                     %(arg-type)Integer% style=FLOOD_SURFACE)
 
 Flood fills the device context starting from the given point, using
@@ -699,22 +671,22 @@ Gets the current brush (see "DC#set_brush":dc.html#DC_setbrush).
 
 h3(#DC_getcharheight). DC#get_char_height
 
- "Coord":coord.html *get_char_height*()
+ Integer *get_char_height*()
 
 Gets the character height of the currently set font.
 
 
 h3(#DC_getcharwidth). DC#get_char_width
 
- "Coord":coord.html *get_char_width*()
+ Integer *get_char_width*()
 
 Gets the average character width of the currently set font.
 
 
 h3(#DC_getclippingbox). DC#get_clipping_box
 
-  *get_clipping_box*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-                   %(arg-type)Coord% height)
+  *get_clipping_box*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  
+                       %(arg-type)Integer% width, %(arg-type)Integer% height)
 
 Gets the rectangle surrounding the current clipping region.
 
@@ -727,12 +699,12 @@ Gets the current font (see "DC#set_font":dc.html#DC_setfont).
 
 h3(#DC_getlayoutdirection). DC#get_layout_direction
 
- "LayoutDirection":layoutdirection.html *get_layout_direction*()
+ Integer *get_layout_direction*()
 
-Gets the current layout direction of the device context. On platforms where RTL layout
-is supported, the return value will either be @Layout_LeftToRight@ or 
-@Layout_RightToLeft@. If RTL layout is not supported, the return value will 
-be @Layout_Default@.
+Gets the current layout direction of the device context. On platforms
+where RTL layout is supported, the return value will either be
+@Layout_LeftToRight@ or @Layout_RightToLeft@. If RTL layout is not
+supported, the return value will be @Layout_Default@.
 
 h4. See also
 
@@ -776,17 +748,12 @@ Gets the current pen (see "DC#set_pen":dc.html#DC_setpen).
 
 h3(#DC_getpixel). DC#get_pixel
 
- Boolean *get_pixel*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Colour% colour)
+ Boolean *get_pixel*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Colour% colour)
 
 Gets in _colour_ the colour at the specified location.
 Not available for PostScriptDC or MetafileDC.
 
 Note that setting a pixel can be done using "draw_point":#DC_drawpoint.
-
-
-
-
-
 h3(#DC_getppi). DC#get_ppi
 
  "Size":size.html *get_ppi*()
@@ -795,30 +762,22 @@ Returns the resolution of the device in pixels per inch.
 
 h3(#DC_getsize). DC#get_size
 
-  *get_size*(%(arg-type)Coord% width,  %(arg-type)Coord% height)
-
  "Size":size.html *get_size*()
 
-This gets the horizontal and vertical resolution in device units. It can be used to scale graphics to fit the page.
-For example, if _maxX_ and _maxY_ represent the maximum horizontal and vertical `pixel' values used in your
-application, the following code will scale the graphic to fit on the
-printer page:
+This gets the horizontal and vertical resolution in device units. It can
+be used to scale graphics to fit the page.  
+   
+For example, if _max_x_ and _max_y_ represent the maximum horizontal and
+vertical `pixel' values used in your application, the following code
+will scale the graphic to fit on the printer page:
 
 
-   Coord w, h;
-   dc.GetSize(&w, &h);
-   double scaleX=(double)(maxX/w);
-   double scaleY=(double)(maxY/h);
-   dc.SetUserScale(min(scaleX,scaleY),min(scaleX,scaleY));
+   scale_x = max_x / dc.size.width
+   scale_y = max_y / dc.size.height
+   dc.set_user_scale( [scale_x, scale_y].min, [scale_x, scale_y].min)
  
 
-
-
-
-
 h3(#DC_getsizemm). DC#get_size_mm
-
-  *get_size_mm*(%(arg-type)Coord% width,  %(arg-type)Coord% height)
 
  "Size":size.html *get_size_mm*()
 
@@ -828,7 +787,8 @@ h3(#DC_gettextbackground). DC#get_text_background
 
  "Colour":colour.html *get_text_background*()
 
-Gets the current text background colour (see "DC#set_text_background":dc.html#DC_settextbackground).
+Gets the current text background colour (see
+"DC#set_text_background":dc.html#DC_settextbackground).
 
 
 h3(#DC_gettextextent). DC#get_text_extent
@@ -889,7 +849,7 @@ Fill the area specified by rect with a linear gradient, starting from initialCol
 
 h3. DC#logical_to_device_x
 
- "Coord":coord.html *logical_to_device_x*(%(arg-type)Coord% x)
+ "Integer":coord.html *logical_to_device_x*(%(arg-type)Integer% x)
 
 Converts logical X coordinate to device coordinate, using the current
 mapping mode.
@@ -897,7 +857,7 @@ mapping mode.
 
 h3. DC#logical_to_device_xrel
 
- "Coord":coord.html *logical_to_device_xrel*(%(arg-type)Coord% x)
+ "Integer":coord.html *logical_to_device_xrel*(%(arg-type)Integer% x)
 
 Converts logical X coordinate to relative device coordinate, using the current
 mapping mode but ignoring the x axis orientation.
@@ -906,7 +866,7 @@ Use this for converting a width, for example.
 
 h3. DC#logical_to_device_y
 
- "Coord":coord.html *logical_to_device_y*(%(arg-type)Coord% y)
+ "Integer":coord.html *logical_to_device_y*(%(arg-type)Integer% y)
 
 Converts logical Y coordinate to device coordinate, using the current
 mapping mode.
@@ -914,7 +874,7 @@ mapping mode.
 
 h3. DC#logical_to_device_yrel
 
- "Coord":coord.html *logical_to_device_yrel*(%(arg-type)Coord% y)
+ "Integer":coord.html *logical_to_device_yrel*(%(arg-type)Integer% y)
 
 Converts logical Y coordinate to relative device coordinate, using the current
 mapping mode but ignoring the y axis orientation.
@@ -923,28 +883,28 @@ Use this for converting a height, for example.
 
 h3. DC#max_x
 
- "Coord":coord.html *max_x*()
+ "Integer":coord.html *max_x*()
 
 Gets the maximum horizontal extent used in drawing commands so far.
 
 
 h3. DC#max_y
 
- "Coord":coord.html *max_y*()
+ "Integer":coord.html *max_y*()
 
 Gets the maximum vertical extent used in drawing commands so far.
 
 
 h3. DC#min_x
 
- "Coord":coord.html *min_x*()
+ "Integer":coord.html *min_x*()
 
 Gets the minimum horizontal extent used in drawing commands so far.
 
 
 h3. DC#min_y
 
- "Coord":coord.html *min_y*()
+ "Integer":coord.html *min_y*()
 
 Gets the minimum vertical extent used in drawing commands so far.
 
@@ -1018,8 +978,8 @@ when drawing into a monochrome bitmap.
  
 h3. DC#set_clipping_region
 
-  *set_clipping_region*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-                      %(arg-type)Coord% height)
+  *set_clipping_region*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                      %(arg-type)Integer% height)
 
   *set_clipping_region*(%(arg-type)Point% pt,  %(arg-type)Size% sz)
 
@@ -1044,7 +1004,7 @@ h4. See also
 
 h3. DC#set_device_origin
 
-  *set_device_origin*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *set_device_origin*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Sets the device origin (i.e., the origin in pixels after scaling has been
 applied).
