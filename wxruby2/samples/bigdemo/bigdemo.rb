@@ -22,8 +22,6 @@ rescue LoadError => no_wx_err
   end
 end
 
-MENU_EXIT = 100
-TREE_ID = 101
 
 OVR_TEXT = "This is the WxRuby Demo.  It was ported from the wxPython Demo, created by Robin Dunn.  Many thanks to him for all his hard work - this demo is what it is because of him.  Click on any of the items in the tree control to start the demo.  Don't forget to check out the Demo Code tab - you can see the source code for each demo!\nHope you like it!"
 
@@ -249,8 +247,8 @@ class WxRubyDemo < Wx::Frame
         
         @mainmenu = Wx::MenuBar.new
         menu = Wx::Menu.new
-        menu.append(MENU_EXIT, "E&xit\tALT-X", "Get the heck outta here!")
-        evt_menu(MENU_EXIT) {exit}
+        menu.append(Wx::ID_EXIT, "E&xit\tALT-X", "Get the heck outta here!")
+        evt_menu(Wx::ID_EXIT) {exit}
         @mainmenu.append(menu, "&File")
         
         # Make a Demo menu - thanks to Kevin Smith for figuring the submenus out!
@@ -289,7 +287,7 @@ class WxRubyDemo < Wx::Frame
         @finddata = Wx::FindReplaceData.new()
         
         @treeMap = {}
-        @tree = Wx::TreeCtrl.new(splitter, TREE_ID, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TR_DEFAULT_STYLE)#, Wx::TR_HAS_BUTTONS | Wx::TR_HAS_VARIABLE_ROW_HEIGHT)
+        @tree = Wx::TreeCtrl.new(splitter)
         root = @tree.add_root("wxRuby Overview")
         firstChild = nil
         
@@ -304,11 +302,11 @@ class WxRubyDemo < Wx::Frame
         @tree.expand(root)
         @tree.expand(firstChild)
         
-        evt_tree_item_expanded(TREE_ID) {|event| on_item_expanded(event)}
-        evt_tree_item_collapsed(TREE_ID) {|event| on_item_collapsed(event)}
-        evt_tree_sel_changed(TREE_ID) {|event| on_tree_sel_changed(event)}
-        evt_tree_item_activated(TREE_ID) {|event| on_tree_sel_changed(event)}
-        @tree.evt_left_down   {|event| on_tree_left_down(event)}
+        evt_tree_item_expanded   @tree, :on_item_expanded
+        evt_tree_item_collapsed  @tree, :on_item_collapsed
+        evt_tree_sel_changed     @tree, :on_tree_sel_changed
+        evt_tree_item_activated  @tree, :on_tree_sel_changed
+        @tree.evt_left_down method(:on_tree_left_down)
         
         
         
