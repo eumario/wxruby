@@ -34,6 +34,29 @@ GC_NEVER(wxMenu);
     }
 }
 
+// Need to protect sub-menus associated with particular items in the menu
+%{
+  static void mark_wxMenu(void *ptr) 
+  {
+    if ( GC_IsWindowDeleted(ptr) )
+      return;
+
+    wxMenu* menu = (wxMenu*)ptr;
+    wxMenuItemList menu_items = menu->GetMenuItems();
+    wxMenuItemList::iterator iter;
+    for (iter = menu_items.begin(); iter != menu_items.end(); ++iter)
+      {
+        wxMenuItem *item = *iter;
+        wxMenu* sub_menu = item->GetSubMenu();
+        if ( sub_menu)
+          rb_gc_mark( SWIG_RubyInstanceFor(sub_menu) );
+      }
+    return;
+  }
+%}
+
+%markfunc wxMenu "mark_wxMenu";
+
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 
