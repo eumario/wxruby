@@ -248,8 +248,6 @@ on-screen within an application GUI, or onto paper.  They provide
 abstraction that allows parameterisation of your drawing code by passing
 different device contexts.
 
-|BufferedDC|A helper device context for double buffered drawing.|
-|BufferedPaintDC|A helper device context for double buffered drawing inside OnPaint.|
 |ClientDC|A device context to access the client area outside OnPaint events|
 |PaintDC|A device context to access the client area inside OnPaint events|
 |WindowDC|A device context to access the non-client area|

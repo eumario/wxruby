@@ -167,6 +167,7 @@ h2. Methods
 * "Window#page_down":#Window_pagedown
 * "Window#page_up":#Window_pageup
 * "Window#paint":#Window_paint
+* "Window#paint_buffered":#Window_paintbuffered
 * "Window#pop_event_handler":#Window_popeventhandler
 * "Window#popup_menu":#Window_popupmenu
 * "Window#push_event_handler":#Window_pusheventhandler
@@ -1703,11 +1704,12 @@ This is just a convenience wrapper for
 
 h3(#Window_paint). Window#paint
 
- paint { | window_dc | ... }
+ paint { | device_context | ... }
 
-Runs a block containing code for drawing lines, shapes and bitmaps onto
-the Window. The block should receive a "DC":dc.html (device context)
-object which can then be used to run drawing commands.
+Run code to draws lines, shapes and bitmaps onto the Window. The block
+should receive a "DC":dc.html (device context) object which can then be
+used to do the actual drawing. See the "DC":dc.html documentation for
+valid drawing methods.
 
 The preferred usage of this method is within an @evt_paint@ handler,
 which is called whenever any part of the Window needs to be redrawn. In
@@ -1724,7 +1726,30 @@ Note also that it is not possible to draw directly upon some core
 controls, such as "Wx::Button":button.html. Whilst this may work on some
 platforms, it is not portable.
 
+If the drawing block contains many separate drawing commands, using
+"paint_buffered":#Window_paintbuffered may reduce flicker on some
+platforms, in particular Windows.
+
+
+h3(#Window_paintbuffered). Window#paint_buffered
+
+ paint_buffered(buffer = nil) { | device_context | ... }
+
+Enables flicker-free drawing. All drawing commands are carried out on
+an off-screen buffer, then copied en-masse to the on-screen Window when
+the drawing is finished. The method otherwise works identically to
+"paint":#Window_paint. 
+
+The method may be passed an existing "bitmap":bitmap.html as the buffer
+to carry out drawing on, otherwise one will be created as required. It
+may be more efficient to re-use an existing buffer for frequently
+updated drawings.
+
+Note that some platforms such as OS X and GTK support double-buffering
+natively, and in this case no special buffer will be created.
+
 h3(#Window_popeventhandler). Window#pop_event_handler
+
 
  "EvtHandler":evthandler.html *pop_event_handler*(%(arg-type)Boolean% deleteHandler = @false@)
 

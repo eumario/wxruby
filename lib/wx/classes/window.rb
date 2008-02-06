@@ -46,4 +46,35 @@ class Wx::Window
     end
     __old_evt_paint(&wrapped_block)
   end
+
+  # Provides bufferd drawing facility to reduce flicker for complex
+  # drawing commands. Works similar to BufferedDC and BufferedPaintDC in
+  # the wxWidgets API, by doing drawing on an in-memory Bitmap, then
+  # copying the result in bulk to the screen. 
+  #
+  # The method may be passed an existing Wx::Bitmap as the +buffer+,
+  # otherwise one will be created. 
+  #
+  # Works like wxAutoBufferedDC in that additional buffering will only
+  # be done on platforms that do not already natively support buffering
+  # for the standard PaintDC / ClientDC - Windows, in particular.
+  def paint_buffered(buffer = nil)
+    # OS X and GTK do double-buffering natively
+    if self.double_buffered?
+      paint { | dc | yield dc }
+    else
+      # Create an in-memory buffer if none supplied
+      buffer ||= Wx::Bitmap.new(size.width, size.height)
+      buffer.draw do | mem_dc |
+        mem_dc.background = Wx::TRANSPARENT_BRUSH
+        mem_dc.clear
+        # Yield the bitmap for the user code to draw upon
+        yield mem_dc
+        paint do | dc | 
+          # Copy the buffer to the window
+          dc.blit(0, 0, size.width, size.height, mem_dc, 0, 0)
+        end
+      end
+    end
+  end
 end
