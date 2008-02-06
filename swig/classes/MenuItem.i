@@ -7,13 +7,6 @@
 // GC_MANAGE_AS_OBJECT(wxMenuItem);
 GC_NEVER(wxMenuItem);
 
-# the following are apparently MSWin-only
-%ignore wxMenuItem::GetRealId();
-%ignore wxMenuItem::SetAsRadioGroupStart();
-%ignore wxMenuItem::SetRadioGroupStart(int start);
-%ignore wxMenuItem::SetRadioGroupEnd(int end);
-
-
 %import "include/wxObject.h"
 // TODO: Also OwnerDrawn under MS Windows
 
