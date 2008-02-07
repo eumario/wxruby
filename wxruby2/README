@@ -17,7 +17,7 @@ wxruby version 2.0.
   Currently the following are fully supported:
 
   Windows NT/2000/XP/Vista (i686)
-  OS X 10.3+ (i686 and PowerPc)
+  OS X 10.4+ (i686 and PowerPc)
   Linux (i686 + AMD-64)
 
   It is unlikely that support for old Windows OS's (3.1, 95, 98, ME)
@@ -72,7 +72,7 @@ wxruby version 2.0.
 	 - Vastly improved support for OS X
 	 - Looks much better under Linux because it uses GTK+2
 	 - Simpler and more permissive license 
-	 - Wraps wxWidgets 2.8.3 instead of the older 2.4 series
+	 - Wraps wxWidgets 2.8.7 instead of the older 2.4 series
 	 
 - Is wxruby2 ready for "production" use?
 
@@ -135,7 +135,7 @@ wxruby version 2.0.
   the bug list, handle publicity, or do other necessary chores.
   
   Wrapping wx is a big project that requires a wide variety of skills. As of 
-  August 2006, the wxRuby project has about 30,000 lines of code, including 
+  February 2008, the wxRuby project has over 100,000 lines of code, including 
   ruby, C++, and SWIG scripts. If we weren't using SWIG it would be far bigger.
 
 
@@ -153,7 +153,12 @@ recommend installing the gem rather than building from source.
 REQUIREMENTS TO CREATE AND RUN WXRUBY APPS:
 
 - Ruby 1.8
-- MS Windows NT/2000/XP/Vista, Mac OS X 10.3+, or Linux with GTK+ 2, 
+- MS Windows NT/2000/XP/Vista, Mac OS X 10.4+, or Linux with GTK+ 2, 
+
+- On Windows, gdiplus.pll and msvcp71.dll. These are available on most
+  systems, but can be downloaded and installed for free from the
+  internet
+- On Linux, libgstreamer. This can be installed from most package sources
 
 SAMPLES:
 
@@ -212,12 +217,6 @@ API DIFFERENCES FROM WXWIDGETS:
 - log_message and log_status take a single string parameter, 
   rather than a format string followed by additional values 
   to be inserted. Use Ruby's sprintf if required.
-- ScreenDC extends DC on all platforms, unlike in C++ wx. 
-  This means that you cannot override any virtual methods that were 
-  defined in PaintDC or WindowDC in a ruby subclass of ScreenDC.
-  [Need to verify if this is still true]
-- BusyCursor can be used in a Ruby block to ensure the original cursor 
-  is always restored.
 
 ----------------------COMPILING WXRUBY--------------------------
 REQUIREMENTS TO COMPILE/BUILD WXRUBY ITSELF
