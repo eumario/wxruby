@@ -18,13 +18,14 @@ public:
   //         StaticText will take the focus when tabbing
   // virtual bool AcceptsFocus() const;
 
-  virtual void AddChild(wxWindow*  child ) ;
-  void CaptureMouse() ;
+  virtual void AddChild(wxWindow* child);
+  void AssociateHandle(WXWidget handle);
+  void CaptureMouse();
 
-  void Center(int  direction ) ;
-  void Centre(int direction = wxBOTH) ;
+  void Center(int  direction );
+  void Centre(int direction = wxBOTH);
 
-  void CenterOnParent(int  direction ) ;
+  void CenterOnParent(int  direction );
   void CentreOnParent(int direction = wxBOTH) ;
 
   void ClientToScreen(int*  x_INOUT , int*  y_INOUT ) const;
@@ -37,7 +38,7 @@ public:
   virtual bool Destroy() ;
   void DestroyChildren() ;
   void Disable() ;
-  ;
+  void DissociateHandle();
   virtual bool Enable(bool enable = true) ;
   static wxWindow* FindFocus() ;
   wxWindow* FindWindow(long  id ) const;
@@ -151,6 +152,7 @@ public:
   virtual void SetFocusFromKbd() ;
   void SetFont(const wxFont&  font ) ;
   virtual bool SetForegroundColour(const wxColour&  colour );
+
   virtual void SetHelpText(const wxString&  helpText ) ;
   void SetId(int  id );
   void SetInitialSize(const wxSize& size = wxDefaultSize);
