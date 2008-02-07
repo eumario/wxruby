@@ -9,6 +9,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTreeCtrl);
 
 %{
 #include <wx/treectrl.h>
+#include <wx/dirctrl.h>
 %}
 
 // wxTreeItemId fixes - these typemaps convert them to ruby Integers
@@ -167,7 +168,14 @@ protected:
 	img_list = tree_ctrl->GetStateImageList();
 	if ( img_list ) rb_gc_mark(SWIG_RubyInstanceFor(img_list));
 
-	// Now mark the item data
+    // Stop here if it's a TreeCtrl belonging to a GenericDirCtrl, as
+    // the item data aren't ruby objects
+    wxWindow* parent = tree_ctrl->GetParent();
+    if ( parent->IsKindOf( CLASSINFO(wxGenericDirCtrl) ) )
+      return;
+
+	// Otherwise proceed and GC mark the item data objects associated
+	// with the TreeCtrl
 	wxTreeItemId root_id = tree_ctrl->GetRootItem();
 	RecurseFromRoot(tree_ctrl, &DoGCMarkItemData);
   }
