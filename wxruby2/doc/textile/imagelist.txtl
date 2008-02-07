@@ -4,7 +4,9 @@ A ImageList contains a list of images, which can be used to supply
 images/icons to controls. The images are stored in an unspecified form
 and can have masks for transparent drawing. The images in a list can be
 supplied by a variety of classes including "bitmaps":bitmap.html and
-"icons":icon.html.
+"icons":icon.html. In almost all cases, it's easier to use
+"Bitmap":bitmap.html as the formats supported by this class are more
+consistent across platforms.
 
 ImageList is used in conjunction with "TreeCtrl":treectrl.html,
 "ListCtrl":listctrl.html and "Notebook":notebook.html classes. All of
