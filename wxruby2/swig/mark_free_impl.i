@@ -23,6 +23,8 @@ bool GC_IsWindowDeleted(void *ptr)
   // If objects have been 'unlinked' then DATA_PTR = 0
   if ( ! ptr ) 
 	return true;
+  if ( rb_gv_get("__wx_app_ended__" ) == Qtrue )
+	return true;
   else
 	return false;
 }
