@@ -187,9 +187,14 @@ public:
       // enter the main event loop by returning true, else return false
       // which will make wxWidgets exit.
 	  if ( result == Qfalse || result == Qnil )
-        return false; 
+        {
+		  rb_gv_set("__wx_app_ended__", Qtrue); // Don't do any more GC
+		  return false; 
+		}
       else
-		return true; 
+		{
+		  return true; 
+		}
     }
 
     virtual int OnExit()
