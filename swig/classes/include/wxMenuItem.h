@@ -52,12 +52,12 @@ public:
 // Various methods available only on Windows
 #if defined(__WXMSW__)
   wxColour& GetBackgroundColour() const;
-  wxBitmap& GetBitmap(bool checked = true) const;
+  const wxBitmap& GetBitmap(bool checked = true) const;
   wxFont& GetFont() const;
   int GetMarginWidth();
-  wxColour& GetTextColour(const wxColour& colour);
+  wxColour& GetTextColour();
 
-  void SetBackgroundColour(const wxColour& colour) const;
+  void SetBackgroundColour(const wxColour& colour);
   void SetBitmaps(const wxBitmap& checked, 
                   const wxBitmap& unchecked = wxNullBitmap);
   void SetFont(const wxFont& font);
