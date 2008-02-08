@@ -24,7 +24,9 @@ h2. Window styles
 
 
 
-|@DEFAULT_FRAME_STYLE@|Defined as *MINIMIZE_BOX ** MAXIMIZE_BOX ** RESIZE_BORDER ** SYSTEM_MENU ** CAPTION ** CLOSE_BOX ** CLIP_CHILDREN*.|
+|@DEFAULT_FRAME_STYLE@|Defined as
+@MINIMIZE_BOX@&#124;@MAXIMIZE_BOX@&#124;@RESIZE_BORDER@&#124;
+@SYSTEM_MENU@&#124;@CAPTION@&#124;@CLOSE_BOX@&#124;@CLIP_CHILDREN@|
 |@ICONIZE@|Display the frame iconized (minimized). Windows only. |
 |@CAPTION@|Puts a caption on the frame.|
 |@MINIMIZE@|Identical to *ICONIZE*. Windows only.|
@@ -32,31 +34,46 @@ h2. Window styles
 |@MAXIMIZE@|Displays the frame maximized. Windows only.|
 |@MAXIMIZE_BOX@|Displays a maximize box on the frame.|
 |@CLOSE_BOX@|Displays a close box on the frame.|
-|@STAY_ON_TOP@|Stay on top of all other windows,see also FRAME_FLOAT_ON_PARENT.|
+|@STAY_ON_TOP@|Stay on top of all other windows, see also @FRAME_FLOAT_ON_PARENT@.|
 |@SYSTEM_MENU@|Displays a system menu.|
 |@RESIZE_BORDER@|Displays a resizeable border around the window.|
-|@FRAME_TOOL_WINDOW@|Causes a frame with a smalltitlebar to be created; the frame does not appear in the taskbar under Windows or GTK+.|
-|@FRAME_NO_TASKBAR@|Creates an otherwise normalframe but it does not appear in the taskbar under Windows or GTK+ (note that itwill minimize to the desktop window under Windows which may seem strange to theusers and thus it might be better to use this style only withoutMINIMIZE_BOX style). In GTK, the flag is respected only if GTK+ is atleast version 2.2 and the window manager supports _NET_WM_STATE_SKIP_TASKBARhttp://freedesktop.org/Standards/wm-spec/1.3/ar01s05.html hint.Has no effect under other platforms.|
+|@FRAME_TOOL_WINDOW@|Causes a frame with a small titlebar to be created; the frame does not appear in the taskbar under Windows or GTK+.|
+|@FRAME_NO_TASKBAR@|Creates an otherwise normal frame but it does not
+appear in the taskbar under Windows or GTK+ (note that it will minimize
+to the desktop window under Windows which may seem strange to the users
+and thus it might be better to use this style only without @MINIMIZE_BOX@
+style). In GTK, the flag is respected only if GTK+ is at least version
+2.2. Has no effect under other platforms.|
 |@FRAME_FLOAT_ON_PARENT@|The frame will always beon top of its parent (unlike STAY_ON_TOP). A frame created with this stylemust have a non-NULL parent.|
-|@FRAME_EX_CONTEXTHELP@|Under Windows, puts a query button on thecaption. When pressed, Windows will go into a context-sensitive help mode and Widgets will senda EVT_HELP event if the user clicked on an application window. _Note_ that this is an extendedstyle and must be set by calling "set_extra_style":#Frame_setextrastyle before Create is called (two-step construction).You cannot use this style together with MAXIMIZE_BOX or MINIMIZE_BOX, soyou should use @DEFAULT_FRAME_STYLE & ~ (MINIMIZE_BOX | MAXIMIZE_BOX)@ for theframes having this style (the dialogs don't have a minimize or a maximize box bydefault)|
+|@FRAME_EX_CONTEXTHELP@|Under Windows, puts a query button on the
+caption. When pressed, Windows will go into a context-sensitive help
+mode and Widgets will senda EVT_HELP event if the user clicked on an
+application window. _Note_ that this is not currently supported in wxRuby|
 |@FRAME_SHAPED@|Windows with this style are  allowed to have their shape changed with the "set_shape":#Frame_setshape method.|
 |@FRAME_EX_METAL@|On Mac OS X, frames with this style will be shown with a metallic look. This is an _extra_ style.|
 
 
 The default frame style is for normal, resizeable frames. To create a frame
 which can not be resized by user, you may use the following combination of
-styles: @DEFAULT_FRAME_STYLE & ~ (RESIZE_BORDER @@ RESIZE_BOX @@ MAXIMIZE_BOX)@.
+styles: 
+
+@DEFAULT_FRAME_STYLE@ & ~ (@RESIZE_BORDER@|@RESIZE_BOX@|@MAXIMIZE_BOX@).
 
 See also "window styles overview":windowstyles.html.
 
 h2. Default event processing
 
-Frame processes the following events:
+The following event handlers are available for Frame:
 
-
-|"EVT_SIZE":sizeevent.html|If the frame has exactly onechild window, not counting the status and toolbar, this child is resized totake the entire frame client area. If two or more windows are present, theyshould be laid out explicitly either by manually handling EVT_SIZE or using"sizers":sizeroverview.html|
-
-|"EVT_MENU_HIGHLIGHT":menuevent.html|The defaultimplementation displays the "help string":menuitemgethelp.html associatedwith the selected item in the first pane of the status bar, if there is one.|
+|*evt_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|If the frame has exactly one child window, not counting the status and
+toolbar, this child is resized to take the entire frame client area. If
+two or more windows are present, they should be laid out explicitly
+either by manually handling the "SizeEvent":sizeevent.html from this
+handler, or, preferably, using "sizers":sizer.html|
+|*evt_menu_highlight()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The default implementation displays the 
+"help string":menuitem.html#MenuItem_gethelp associated with the selected item
+in the first pane of the status bar, if there is one. The
+"MenuEvent":menuevent.html may be manually handled if preferred| 
 
 
 h2. Remarks
@@ -129,10 +146,6 @@ For Motif, MWM (the Motif Window Manager) should be running for any window style
 h4. See also
 
 "Frame#create":frame.html#Frame_create
-
-  *destructor*()
-
-Destructor. Destroys all child windows and menu bar if present.
 
 h3(#Frame_centre). Frame#centre
 
