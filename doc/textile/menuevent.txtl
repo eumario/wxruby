@@ -1,11 +1,13 @@
 h1(#wxmenuevent). Wx::MenuEvent
 
-This class is used for a variety of menu-related events. Note that
-these do not include menu command events, which are
-handled using "CommandEvent":commandevent.html objects.
+This class is used to represent a variety of menu-related events such as
+highlighting, opening and closing items. Note that the commonest event
+to be handled from menus - that of actually choosing a menu item - is
+not a MenuEvent but a "CommandEvent":commandevent.html, captured by
+using @evt_menu@.
 
-The default handler for EVT_MENU_HIGHLIGHT displays help
-text in the first field of the status bar.
+The default handler for @evt_menu_highlight@ displays help text in the
+first field of the status bar.
 
 h2. Derived from
 
