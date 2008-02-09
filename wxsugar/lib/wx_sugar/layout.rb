@@ -66,10 +66,13 @@ module Arranger
       return @current_sizer 
     else
       begin 
-        return self.get_sizer
-      rescue RuntimeError
+        if @current_sizer = self.get_sizer
+          return @current_sizer
+        end
+      rescue RuntimeError # Some wxRuby versions would error on get_sizer
       end
     end
+    
     @current_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
     self.set_sizer(@current_sizer)
     @current_sizer
