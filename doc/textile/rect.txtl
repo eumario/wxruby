@@ -19,12 +19,16 @@ h2. Methods
 * "Rect#y":#Rect_y
 * "Rect#width":#Rect_width
 * "Rect#height":#Rect_height
+* "Rect#centre_in":#Rect_centrein
+* "Rect#contains":#Rect_contains
 * "Rect#deflate":#Rect_deflate
 * "Rect#get_bottom":#Rect_getbottom
 * "Rect#get_height":#Rect_getheight
 * "Rect#get_left":#Rect_getleft
 * "Rect#get_position":#Rect_getposition
 * "Rect#get_top_left":#Rect_gettopleft
+* "Rect#get_top_right":#Rect_gettopright
+* "Rect#get_bottom_left":#Rect_getbottomleft
 * "Rect#get_bottom_right":#Rect_getbottomright
 * "Rect#get_right":#Rect_getright
 * "Rect#get_size":#Rect_getsize
@@ -33,7 +37,6 @@ h2. Methods
 * "Rect#get_x":#Rect_getx
 * "Rect#get_y":#Rect_gety
 * "Rect#inflate":#Rect_inflate
-* "Rect#inside":#Rect_inside
 * "Rect#intersects":#Rect_intersects
 * "Rect#is_empty":#Rect_isempty
 * "Rect#offset":#Rect_offset
@@ -96,9 +99,39 @@ intheight
 Height member.
 
 
+h3(#Rect_centrein). Rect#centre_in
+
+ "Rect":rect.html *centre_in*(%(arg-type)Rect% r,  %(arg-type)Integer% dir = BOTH)
+
+ "Rect":rect.html *center_in*(%(arg-type)Rect% r,  %(arg-type)Integer% dir = BOTH)
+
+Returns the rectangle having the same size as this one but centered relatively
+to the given rectangle r. By default, rectangle is centred in both
+directions but if dir includes only @VERTICAL@ or only 
+@HORIZONTAL@ flag, then it is only centered in this direction while
+the other component of its position remains unchanged.
+
+
+h3(#Rect_contains). Rect#contains
+
+ Boolean *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+ Boolean *contains*(%(arg-type)Point% pt)
+
+Returns @true@ if the given point is inside the rectangle (or on its
+boundary) and @false@ otherwise.
+
+ Boolean *contains*(%(arg-type)Rect% rect)
+
+Returns  if the given rectangle is completely inside this rectangle
+(or touches its boundary) and  otherwise.
+
+
 h3(#Rect_deflate). Rect#deflate
 
   *deflate*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
+
+  *deflate*(%(arg-type)Size% diff)
 
   *deflate*(%(arg-type)Coord% diff)
 
@@ -147,14 +180,29 @@ h3(#Rect_gettopleft). Rect#get_top_left
 
  "Point":point.html *get_top_left*()
 
-Gets the topleft position of the rectangle. (Same as GetPosition).
+Gets the position of the top left corner of the rectangle, same as 
+"get_position":#Rect_getposition.
+
+
+h3(#Rect_gettopright). Rect#get_top_right
+
+ "Point":point.html *get_top_right*()
+
+Gets the position of the top right corner.
+
+
+h3(#Rect_getbottomleft). Rect#get_bottom_left
+
+ "Point":point.html *get_bottom_left*()
+
+Gets the position of the bottom left corner.
 
 
 h3(#Rect_getbottomright). Rect#get_bottom_right
 
  "Point":point.html *get_bottom_right*()
 
-Gets the bottom right position. Returns the bottom right point inside the rectangle.
+Gets the position of the bottom right corner.
 
 
 h3(#Rect_getright). Rect#get_right
@@ -207,6 +255,8 @@ h3(#Rect_inflate). Rect#inflate
 
   *inflate*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
 
+  *inflate*(%(arg-type)Size% diff)
+
   *inflate*(%(arg-type)Coord% diff)
 
  "Rect":rect.html *inflate*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
@@ -249,21 +299,11 @@ h4. See also
 "Deflate":rectdeflate.html
 
 
-h3(#Rect_inside). Rect#inside
-
- Boolean *inside*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
-
- Boolean *inside*(%(arg-type)Point% pt)
-
-Returns @true@ if the given point is inside the rectangle (or on its
-boundary) and @false@ otherwise.
-
-
 h3(#Rect_intersects). Rect#intersects
 
  Boolean *intersects*(%(arg-type)Rect% rect)
 
-Returns @true@ if this rectangle has a non empty intersection with the
+Returns @true@ if this rectangle has a non-empty intersection with the
 rectangle _rect_ and @false@ otherwise.
 
 
