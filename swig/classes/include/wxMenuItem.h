@@ -35,14 +35,11 @@ public:
   bool IsSeparator() const;
   bool IsSubMenu() const;
 
-  void SetAsRadioGroupStart();
   void SetHelp(const wxString& str);
   void SetId(int itemid);
   void SetItemLabel(const wxString& label);
   void SetKind(wxItemKind kind);
   void SetMenu(wxMenu* menu);
-  void SetRadioGroupStart(int start);
-  void SetRadioGroupEnd(int end);
   void SetSubMenu(wxMenu *menu);
   void SetText(const wxString& strName);
 
@@ -51,6 +48,9 @@ public:
 
 // Various methods available only on Windows
 #if defined(__WXMSW__)
+  void SetAsRadioGroupStart();
+  void SetRadioGroupStart(int start);
+  void SetRadioGroupEnd(int end);
   wxColour& GetBackgroundColour() const;
   const wxBitmap& GetBitmap(bool checked = true) const;
   wxFont& GetFont() const;
