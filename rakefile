@@ -7,6 +7,7 @@
 # WXRUBY_DEBUG      : build a debug version
 # WXRUBY_VERSION    : set the version info (x.x.x) for this tree
 # WXRUBY_NO_UNICODE : try and build an ANSI version
+# WXRUBY_EXCLUDED   : exclude certian classes from being compiled, even if present
 
 require "rake/rakeutil"
 
