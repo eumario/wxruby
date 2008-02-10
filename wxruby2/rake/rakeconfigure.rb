@@ -24,6 +24,10 @@ $static_build  = ENV['WXRUBY_STATIC'] ? true : false
 # case anyone is using it
 $unicode_build = ENV['WXRUBY_NO_UNICODE'] ? false : true
 
+# Exclude certian classes from being built, even if they are present
+# in the configuration of wxWidgets.
+$excluded_classes = ENV['WXRUBY_EXCLUDED'] ? ENV['WXRUBY_EXCLUDED'].split(",") : []
+
 # SECOND: get a series of settings from rbconfig; these may be overridden
 # in the platform-specific rakefiles below
 # Get ruby's info on how it was built
@@ -53,8 +57,9 @@ $cpp_out_flag =  "-o "
 $link_output_flag = "-o "
 OBJ_EXT = Config::CONFIG["OBJEXT"]
 
+# This is now set with the detection of WXRUBY_EXCLUDED
 # some classes are not implemented by WxWidgets on all platforms
-$excluded_classes = []
+# $excluded_classes = []
 
 # THIRD: load the platform-specific rakefiles; these can extend or
 # override many of the previously set options. These variables are set
