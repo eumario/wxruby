@@ -28,6 +28,9 @@ end
 
 #Minimum system supported is 10.4.x, this is the minimum supported by wxWidgets as of 01/15/2008
 $extra_cppflags = '-x objective-c++ -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
+# Ensure debugging symbols and file/line refs etc included for debugging
+$extra_cppflags << ' -g' if $debug_build
+
 $extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
 
 if $osx_universal
