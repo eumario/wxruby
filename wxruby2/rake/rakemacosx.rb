@@ -12,8 +12,6 @@ require 'rake/rakeunixish'
 $cpp = "g++"
 $ld = "g++"
 
-$ruby_cppflags.gsub!(/-g/,"")
-
 $wx_libs.chomp!
 $wx_libs.gsub!(/-framework (Cocoa|WebKit)/, '')
 $wx_libs << ' -framework Foundation -framework Appkit'
@@ -26,10 +24,17 @@ if ENV['WXRUBY_OSX_NO_UNIVERSAL']
   $osx_universal = false
 end
 
-#Minimum system supported is 10.4.x, this is the minimum supported by wxWidgets as of 01/15/2008
+# Minimum system supported is 10.4.x, this is the minimum supported by
+# wxWidgets as of 01/15/2008
 $extra_cppflags = '-x objective-c++ -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
-# Ensure debugging symbols and file/line refs etc included for debugging
-$extra_cppflags << ' -g' if $debug_build
+# If release build, remove debugging info; if debug build, ensure
+# debugging info and remove optimisations
+if $release_build
+  $ruby_cppflags.sub!(/-g/, '')
+elsif $debug_build
+  $extra_cppflags << ' -g'
+  $ruby_cppflags.sub!(/-Os/, '')
+end
 
 $extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
 
