@@ -96,7 +96,7 @@ class <%= fq_name(klass.sub_class) %> < <%= klass.superclass %>
 		<% klass.controls.each do | ctrl | %>
 		@<%= ctrl.name.downcase %> = finder.call("<%= ctrl.name %>")<% if ctrl.sub_class %>
 		@<%= ctrl.name.downcase %>.extend(<%= fq_name(ctrl.sub_class) %>)<% end %><% end %>
-		if self.method_defined? "on_init"
+		if self.class.method_defined? "on_init"
 			self.on_init()
 		end
 	end
