@@ -13,14 +13,16 @@ class Wx::DC
         x
       when Array
         if x.length != 2
-          err = ArgumentError.new("Wrong number of elements in point array")
-          err.set_backtrace(caller)
+          msg = "Wrong number of elements in point array item, should be two"
+          err = ArgumentError.new(msg)
+          err.set_backtrace(caller[2..-1])
           Kernel.raise(err)
         end
         Wx::Point.new(x[0], x[1])
       else
-        err = ArgumentError.new("Wrong type of item #{x} in point array")
-        err.set_backtrace(caller)
+        msg = "Wrong type of item #{x.inspect} in point array"
+        err = ArgumentError.new(msg)
+        err.set_backtrace(caller[2..-1])
         Kernel.raise(err)
       end
     end
