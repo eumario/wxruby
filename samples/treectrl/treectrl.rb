@@ -89,7 +89,7 @@ class MyTreeCtrl < Wx::TreeCtrl
     evt_tree_item_expanding self, :on_item_expanding
     evt_tree_item_collapsed self, :on_item_collapsed
     evt_tree_item_collapsing self, :on_item_collapsing
-    evt_tree_item_right_click self, :on_item_right_click
+    evt_tree_item_menu self, :on_item_menu
     evt_tree_sel_changed self, :on_sel_changed
     evt_tree_sel_changing self, :on_sel_changing
     evt_tree_key_down self, :on_tree_key_down
@@ -644,7 +644,7 @@ class MyTreeCtrl < Wx::TreeCtrl
     Wx::log_message("OnItemActivated")
   end
 
-  def on_item_right_click(event)
+  def on_item_menu(event)
     show_popup_menu(event.item, event.point)
   end
 
