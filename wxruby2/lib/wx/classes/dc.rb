@@ -46,4 +46,10 @@ class Wx::DC
     end
     wx_draw_poly_polygon.bind(self).call(*args)
   end
+
+  wx_draw_spline = self.instance_method(:draw_spline)
+  define_method(:draw_spline) do | *args |
+    args[0] = __convert_point_array(args[0])
+    wx_draw_spline.bind(self).call(*args)
+  end
 end
