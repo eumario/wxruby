@@ -24,7 +24,7 @@
   }
 %}
 
-
+// Set of typemaps for draw_lines, draw_polygon etc
 %typemap(in,numinputs=1) (int n, wxPoint points[]) (wxPoint *arr)
 {
   if ( ($input == Qnil) || (TYPE($input) != T_ARRAY) )
@@ -59,4 +59,46 @@
 
 %apply (int n, wxPoint points []) { (int n, wxPoint* points),(int nItems, wxPoint *points) }
 
+// For draw_poly_polygon only
+%typemap(in,numinputs=1) (int n, int count[], wxPoint points[]) (wxPoint *point_arr)
+{
+  if ( ($input == Qnil) || (TYPE($input) != T_ARRAY) )
+  {
+    $1 = 0;
+    $2 = NULL;
+    $3 = NULL;
+  }
+  else
+  {
+    // total number of polygons
+    $1 = RARRAY($input)->len; 
+    $2 = (int*)malloc($1 * sizeof(int));
+    // number of points in each polygon
+    for ( int i = 0; i < RARRAY($input)->len; i++ )
+        $2[i] = RARRAY( rb_ary_entry($input, i) )->len;
+    // array of all the points
+    VALUE all_points = rb_funcall($input, rb_intern("flatten"), 0);
+    point_arr = new wxPoint[RARRAY(all_points)->len];
+    wxRuby_PointArrayRubyToC(all_points, point_arr);
+    $3 = point_arr;
+  }
+}
+
+%typemap(default,numinputs=1) (int n, int count[], wxPoint points[]) 
+{
+    $1 = 0;
+    $2 = NULL;
+    $3 = NULL;
+}
+
+%typemap(freearg) (int n, int count[], wxPoint points[]) 
+{
+  if ($2 != NULL) delete [] $2;
+  if ($3 != NULL) delete [] $3;
+}
+
+%typemap(typecheck) (int n, int count[], wxPoint points[]) 
+{
+   $1 = (TYPE($input) == T_ARRAY);
+}
 
