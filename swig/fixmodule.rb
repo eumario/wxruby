@@ -76,28 +76,6 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
       if(line.index("bool Swig::Director::swig_up"))
         line = "//" + line
       end
-      
-      # Fix 1.3.29's ruby tracking
-      # TODO: This should be fixed in 1.3.30 but isn't fixed yet
-      #			if(ENV['SWIGVER'] == 'SWIG Version 1.3.29')
-
-      if(line.index("static VALUE swig_ruby_trackings"))
-        line = "extern VALUE swig_ruby_trackings;"
-      end
-      if(line.index("static ID swig_ruby_hash_delete"))
-        line = "extern ID swig_ruby_hash_delete;"
-      end
-
-      if(line.index("swig_ruby_trackings = rb_hash_new();"))
-        line = "  if(swig_ruby_trackings == 0) {\n" +
-          line;
-      end
-      
-      if(line.index("swig_ruby_hash_delete = rb_intern(\"delete\");"))
-        line = line + "\n" + 
-          "rb_global_variable(&swig_ruby_trackings);\n" +
-          "  }";
-      end
 
       if line =~ /char\* type_name = (RSTRING\(value\)->ptr|RSTRING_PTR\(value\));/
         line = ""
