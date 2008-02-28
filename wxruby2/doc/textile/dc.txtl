@@ -447,59 +447,72 @@ h3(#DC_drawlines). DC#draw_lines
                 %(arg-type)Integer% yoffset = 0)
 
 
-Draws lines using _points_, which should be an Array of
-"Point":point.html objects. An optional offset may be supplied which
-will be added to each point. The current pen is used for drawing the
-lines.
+Draws lines between each element in _points_, which should be an Array of
+co-ordinates. These may be passed as "Point":point.html objects, or
+using the shorter notation of two-element arrays representing _x_ and
+_y_. This example draws from (20, 25) to (50, 75) to (0, 100)
 
+ points = [ [20, 25], [50, 75], [0, 100] ]
+ dc.draw_lines(points)
+
+An optional offset may be supplied which will be added to each
+point. The current pen is used for drawing the lines.
 
 h3(#DC_drawpolygon). DC#draw_polygon
 
   *draw_polygon*(%(arg-type)Array% points,  
                    %(arg-type)Integer% xoffset = 0, 
                    %(arg-type)Integer% yoffset = 0, 
-                   %(arg-type)Integer% fill_style = ODDEVEN_RULE)
+                   %(arg-type)Integer% fill_style = Wx::ODDEVEN_RULE)
 
-Draws a filled polygon with _points_, which should be an Array of
-"Point":point.html objects. An optional offset may be supplied which
-will be added to each point. wxRuby automatically closes the first and
-last points.
+Draws a filled polygon using _points_, which should be an Array of
+co-ordinates. These may be passed as "Point":point.html objects, or
+using the shorter notation of two-element arrays representing _x_ and
+_y_. See "draw_lines":#DC_drawlines for an example. wxRuby automatically
+closes the first and last points.
+
+An optional offset may be supplied which will be added to each point.
 
 The current pen is used for drawing the outline, and the current brush
 for filling the shape.  Using a transparent brush suppresses filling.
-The last argument specifies the fill rule: *ODDEVEN_RULE* (the default)
-or *WINDING_RULE*.
-
+The last argument specifies the fill rule: *Wx::ODDEVEN_RULE* (the
+default) or *Wx::WINDING_RULE*.
 
 h3(#DC_drawpolypolygon). DC#draw_poly_polygon
 
-  *draw_poly_polygon*(%(arg-type)Integer% count[], 
-                        %(arg-type)Point% points[], 
+  *draw_poly_polygon*(%(arg-type)Array% points, 
                         %(arg-type)Integer% xoffset = 0, 
                         %(arg-type)Integer% yoffset = 0, 
-                        %(arg-type)Integer% fill_style = ODDEVEN_RULE)
+                        %(arg-type)Integer% fill_style = Wx::ODDEVEN_RULE)
 
-Draws two or more filled polygons using an array of _points_, adding the
-optional offset coordinates.
-
-Notice that for the platforms providing a native implementation
-of this function (Windows and PostScript-based DC currently), this is more
+Draws two or more filled polygons using an set of polygons described in
+_points_, adding the optional offset coordinates. The main reason to use
+this method is for efficiency if drawing many polygons at one
+time. "draw_polygon":#DC_draw_polygon is simpler, but on some platforms,
+including Windows "draw_poly_polygon":#DC_drawpolypolygonis more
 efficient than using "draw_polygon":#DC_drawpolygon in a loop.
 
-_n_ specifies the number of polygons to draw, the array _count_ of size 
-_n_ specifies the number of points in each of the polygons in the 
-_points_ array.
+The argument _points_ should be an array of arrays of co-ordinates. Each
+array should describe the points of a polygon, with each point specified
+using either a "Point":point.html object, or a two-element array
+containing _x_ and _y_ coordinates using integers. 
 
-The last argument specifies the fill rule: *ODDEVEN_RULE* (the default)
-or *WINDING_RULE*.
+The polygons maybe disjoint or overlapping. Each polygon specified in a
+call to "draw_poly_polygon":#DC_drawpolypolygon must be closed. Unlike
+polygons created by "draw_polygon":#DC_drawpolygon, the polygons created
+by this method are not closed automatically.
 
-The current pen is used for drawing the outline, and the current brush for
-filling the shape.  Using a transparent brush suppresses filling.
+The last argument specifies the fill rule: *Wx::ODDEVEN_RULE* (the
+default) or *Wx::WINDING_RULE*. The current pen is used for drawing the
+outline, and the current brush for filling the shape.  Using a
+transparent brush suppresses filling.
 
-The polygons maybe disjoint or overlapping. Each polygon specified in a call to
-*DrawPolyPolygon* must be closed. Unlike polygons created by the
-"draw_polygon":#DC_drawpolygon member function, the polygons created by
-*DrawPolyPolygon* are not closed automatically.
+This example draws two triangles, offsetting to the right by 20 pixels
+and to the top by 10 pixels.
+
+ polygon1 = [ [5, 5], [50, 50], [100, 50], [5, 5] ]
+ polygon2 = [ [100, 200], [250, 250], [100, 75], [100, 200]]
+ dc.draw_poly_polygon( [ polygon1, polygon2 ], 20, -10)
 
 h3(#DC_drawpoint). DC#draw_point
 
@@ -561,7 +574,10 @@ h3(#DC_drawspline). DC#draw_spline
   *draw_spline*(%(arg-type)Array% points)
 
 Draws a spline between all given control points, using the current
-pen. _points_ should be an Array of "Point":point.html objects.
+pen. _points_ should be an Array of co-ordinates. These may be passed as
+"Point":point.html objects, or using the shorter notation of two-element
+arrays representing _x_ and _y_. See "draw_lines":#DC_drawlines for an
+example.
 
 
   *draw_spline*(%(arg-type)Integer% x1, %(arg-type)Integer% y1,  
