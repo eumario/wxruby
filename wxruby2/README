@@ -222,8 +222,7 @@ API DIFFERENCES FROM WXWIDGETS:
 REQUIREMENTS TO COMPILE/BUILD WXRUBY ITSELF
 
 - rake 
-- SWIG, version 1.3.31. SWIG 1.3.29 or later may work; earlier version 
-  definitely won't, nor will later versions such as 1.3.33
+- SWIG, version 1.3.32 or later. Earlier versions will not work correctly.
 - wxWidgets 2.8.x SDK. See further information on the wxruby website for
   recommended compile-time options for wxWidgets.
 
