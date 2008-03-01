@@ -4,7 +4,7 @@
 #if !defined(_wxDialog_h_)
 #define _wxDialog_h_
 
-class wxDialog : public wxDialogBase
+class wxDialog : public wxTopLevelWindow
 {
 public:
    wxDialog() ;
