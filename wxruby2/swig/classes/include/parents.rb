@@ -272,6 +272,7 @@ $parents = {
     'wxSingleChoiceDialog' => 'wxDialog',
     'wxSizeEvent' => 'wxEvent',
     'wxSizer' => 'wxObject',
+    'wxSizerItem' => 'wxObject',
     'wxSlider' => 'wxControl',
     'wxSockAddress' => 'wxObject',
     'wxSocketBase' => 'wxObject',
