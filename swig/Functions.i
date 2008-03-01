@@ -27,14 +27,14 @@ public:
 
 };
 
-void log_message(int argc, VALUE *argv, VALUE self)
+static VALUE log_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
     wxLogMessage(wxString(StringValuePtr(str), wxConvUTF8));
-
+    return Qnil;
 }
 
-void log_status(int argc, VALUE *argv, VALUE self)
+static VALUE log_status(int argc, VALUE *argv, VALUE self)
 {
     if(TYPE(argv[0])==T_DATA) {
         wxFrame *ptr;
@@ -46,23 +46,23 @@ void log_status(int argc, VALUE *argv, VALUE self)
         VALUE str = rb_f_sprintf(argc, argv);
         wxLogStatus(wxString(StringValuePtr(str), wxConvUTF8));
     }
-
+    return Qnil;
 }
 
 
-static void
-log_warning(int argc, VALUE *argv, VALUE self)
+static VALUE log_warning(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
     wxLogWarning(wxString(StringValuePtr(str), wxConvUTF8));
+    return Qnil;
 }
 
 
-static void
-log_error(int argc, VALUE *argv, VALUE self)
+static VALUE log_error(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
     wxLogError(wxString(StringValuePtr(str), wxConvUTF8));
+    return Qnil;
 }
 
 
