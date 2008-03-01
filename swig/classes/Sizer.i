@@ -12,6 +12,20 @@ GC_MANAGE_AS_SIZER(wxSizer);
 // shared functions
 %include "../shared/sizers.i"
 
+// Typemap for GetChildren - convert to array of Sizer items
+%typemap(out) wxSizerItemList& {
+  $result = rb_ary_new();
+
+  wxwxSizerItemListNode *node = $1->GetFirst();
+  while (node)
+  {
+    wxSizerItem *wx_si = node->GetData();
+    VALUE rb_si = SWIG_NewPointerObj(wx_si, SWIGTYPE_p_wxSizerItem, 0);
+    rb_ary_push($result, rb_si);
+    node = node->GetNext();
+  }
+}
+
 %import "include/wxObject.h"
 
 %include "include/wxSizer.h"
