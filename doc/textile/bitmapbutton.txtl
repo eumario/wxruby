@@ -102,11 +102,11 @@ h4. See also
 
 h3(#BitmapButton_create). BitmapButton#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Bitmap% bitmap, 
-                %(arg-type)Point% pos, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% bitmap, 
+                %(arg-type)"Point":point.html% pos, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator, 
+                %(arg-type)"Validator":validator.html% validator, 
                 %(arg-type)String% name = "button")
 
 Button creation function for two-step creation. For more details, see "BitmapButton.new":bitmapbutton.html#BitmapButton_new.
@@ -163,7 +163,7 @@ h4. See also
 
 h3(#BitmapButton_setbitmapdisabled). BitmapButton#set_bitmap_disabled
 
-  *set_bitmap_disabled*(%(arg-type)Bitmap% bitmap)
+  *set_bitmap_disabled*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap for the disabled button appearance.
 
@@ -177,7 +177,7 @@ h4. See also
 
 h3(#BitmapButton_setbitmapfocus). BitmapButton#set_bitmap_focus
 
-  *set_bitmap_focus*(%(arg-type)Bitmap% bitmap)
+  *set_bitmap_focus*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap for the button appearance when it has the keyboard focus.
 
@@ -191,7 +191,7 @@ h4. See also
 
 h3(#BitmapButton_setbitmaphover). BitmapButton#set_bitmap_hover
 
-  *set_bitmap_focus*(%(arg-type)Bitmap% bitmap)
+  *set_bitmap_focus*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap for the button appearance when it has the keyboard focus.
 
@@ -205,7 +205,7 @@ h4. See also
 
 h3(#BitmapButton_setbitmaplabel). BitmapButton#set_bitmap_label
 
-  *set_bitmap_label*(%(arg-type)Bitmap% bitmap)
+  *set_bitmap_label*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap label for the button.
 
@@ -224,7 +224,7 @@ h4. See also
 
 h3(#BitmapButton_setbitmapselected). BitmapButton#set_bitmap_selected
 
-  *set_bitmap_selected*(%(arg-type)Bitmap% bitmap)
+  *set_bitmap_selected*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap for the selected (depressed) button appearance.
 

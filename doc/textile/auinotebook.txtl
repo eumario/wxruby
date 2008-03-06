@@ -64,26 +64,26 @@ h2. Methods
 
 h3(#AuiNotebook_wxauinotebook). AuiNotebook.new
 
-  *AuiNotebook.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-                  %(arg-type)Point% pos = DEFAULT_POSITION, 
-                  %(arg-type)Size% size = DEFAULT_SIZE, 
+  *AuiNotebook.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                  %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                  %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                   %(arg-type)Integer% style = AUI_NB_DEFAULT_STYLE)
 
 Constructor. Creates a AuiNotebok control.
 
 h3(#AuiNotebook_addpage). AuiNotebook#add_page
 
- Boolean *add_page*(%(arg-type)Window% page,  %(arg-type)String% caption, 
+ Boolean *add_page*(%(arg-type)"Window":window.html% page,  %(arg-type)String% caption, 
                   %(arg-type)Boolean% select = false, 
-                  %(arg-type)Bitmap% bitmap = NullBitmap)
+                  %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap)
 
 Adds a page.  If the _select_ parameter is true, calling this will generate a page change event.
 
 h3(#AuiNotebook_create). AuiNotebook#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0)
 
 Creates the notebook window.
@@ -120,7 +120,7 @@ Returns the number of pages in the notebook.
 
 h3(#AuiNotebook_getpageindex). AuiNotebook#get_page_index
 
- Integer *get_page_index*(%(arg-type)Window% page_wnd)
+ Integer *get_page_index*(%(arg-type)"Window":window.html% page_wnd)
 
 Returns the page index for the specified window.  If the window is not found in
 the notebook, NOT_FOUND is returned.
@@ -139,10 +139,10 @@ Returns the currently selected page.
 
 h3(#AuiNotebook_insertpage). AuiNotebook#insert_page
 
- Boolean *insert_page*(%(arg-type)Integer% page_idx,  %(arg-type)Window% page, 
+ Boolean *insert_page*(%(arg-type)Integer% page_idx,  %(arg-type)"Window":window.html% page, 
                      %(arg-type)String% caption, 
                      %(arg-type)Boolean% select = false, 
-                     %(arg-type)Bitmap% bitmap = NullBitmap)
+                     %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap)
 
 InsertPage() is similar to AddPage, but allows the ability to specify the insert location.
 If the _select_ parameter is true, calling this will generate a page change event.
@@ -155,13 +155,13 @@ Removes a page, without deleting the window pointer.
 
 h3(#AuiNotebook_setartprovider). AuiNotebook#set_art_provider
 
-  *set_art_provider*(%(arg-type)AuiTabArt% art)
+  *set_art_provider*(%(arg-type)"AuiTabArt":auitabart.html% art)
 
 Sets the art provider to be used by the notebook.
 
 h3(#AuiNotebook_setpagebitmap). AuiNotebook#set_page_bitmap
 
- Boolean *set_page_bitmap*(%(arg-type)Integer% page,  %(arg-type)Bitmap% bitmap)
+ Boolean *set_page_bitmap*(%(arg-type)Integer% page,  %(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap for the page.  To remove a bitmap from the tab caption, pass
 NullBitmap.
@@ -190,7 +190,7 @@ Specifying -1 as the height will return the control to its default auto-sizing b
 
 h3(#AuiNotebook_setuniformbitmapsize). AuiNotebook#set_uniform_bitmap_size
 
-  *set_uniform_bitmap_size*(%(arg-type)Size% size)
+  *set_uniform_bitmap_size*(%(arg-type)"Size":size.html% size)
 
 SetUniformBitmapSize() ensures that all tabs will have the same height, even
 if some tabs don't have bitmaps.  Passing DefaultSize to this function will

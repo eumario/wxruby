@@ -69,7 +69,7 @@ h2. Methods
 
 h3(#ListEvent_new). ListEvent.new
 
-  *ListEvent.new*(%(arg-type)TYPE% commandType = 0,  %(arg-type)Integer% id = 0)
+  *ListEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% id = 0)
 
 Constructor.
 

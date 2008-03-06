@@ -80,10 +80,10 @@ h2. Methods
 
 h3(#Wizard_new). Wizard.new
 
-  *Wizard.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+  *Wizard.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
              %(arg-type)String% title = '', 
-             %(arg-type)Bitmap% bitmap = NullBitmap, 
-             %(arg-type)Point% pos = DEFAULT_POSITION, 
+             %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap, 
+             %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
              %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE)
 
 Constructor which really creates the wizard -- if you use this constructor, you
@@ -108,10 +108,10 @@ by default.
 
 h3(#Wizard_create). Wizard#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
                 %(arg-type)String% title = '', 
-                %(arg-type)Bitmap% bitmap = NullBitmap, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
+                %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
                 %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE)
 
 Creates the wizard dialog. Must be called if the default constructor had been
@@ -136,7 +136,7 @@ by default.
 
 h3(#Wizard_fittopage). Wizard#fit_to_page
 
-  *fit_to_page*(%(arg-type)WizardPage% firstPage)
+  *fit_to_page*(%(arg-type)"WizardPage":wizardpage.html% firstPage)
 
 This method is obsolete, use
 "get_page_area_sizer":#Wizard_getpageareasizer instead.
@@ -200,7 +200,7 @@ Returns the size available for the pages.
 
 h3(#Wizard_hasnextpage). Wizard#has_next_page
 
- Boolean *has_next_page*(%(arg-type)WizardPage% page)
+ Boolean *has_next_page*(%(arg-type)"WizardPage":wizardpage.html% page)
 
 Return @true@ if this page is not the last one in the wizard. The base
 class version implements this by calling 
@@ -214,7 +214,7 @@ h4. See also
 
 h3(#Wizard_hasprevpage). Wizard#has_prev_page
 
- Boolean *has_prev_page*(%(arg-type)WizardPage% page)
+ Boolean *has_prev_page*(%(arg-type)"WizardPage":wizardpage.html% page)
 
 Returns @true@ if this page is not the last one in the wizard. The base
 class version implements this by calling 
@@ -228,7 +228,7 @@ h4. See also
 
 h3(#Wizard_runwizard). Wizard#run_wizard
 
- Boolean *run_wizard*(%(arg-type)WizardPage% firstPage)
+ Boolean *run_wizard*(%(arg-type)"WizardPage":wizardpage.html% firstPage)
 
 Executes the wizard starting from the given page, returning @true@ if it was
 successfully finished or @false@ if user cancelled it. The _firstPage_ 
@@ -237,7 +237,7 @@ can not be @NULL@.
 
 h3(#Wizard_setpagesize). Wizard#set_page_size
 
-  *set_page_size*(%(arg-type)Size% sizePage)
+  *set_page_size*(%(arg-type)"Size":size.html% sizePage)
 
 This method is obsolete, use
 "get_page_area_sizer":#Wizard_getpageareasizer instead.

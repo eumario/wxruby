@@ -156,10 +156,10 @@ h2. Instance Methods
 
 h3(#Locale_addcatalog). Locale#add_catalog
 
- Boolean *add_catalog*(%(arg-type)char% szDomain)
+ Boolean *add_catalog*(%(arg-type)"char":char.html% szDomain)
 
- Boolean *add_catalog*(%(arg-type)char% szDomain,  %(arg-type)Language% msgIdLanguage, 
-                     %(arg-type)char% msgIdCharset)
+ Boolean *add_catalog*(%(arg-type)"char":char.html% szDomain,  %(arg-type)"Language":language.html% msgIdLanguage, 
+                     %(arg-type)"char":char.html% msgIdCharset)
 
 Add a catalog for use with the current locale: it is searched for in standard
 places (current directory first, then the system one), but you may also prepend
@@ -208,7 +208,7 @@ This only applies to subsequent invocations of AddCatalog().
 
 h3(#Locale_addlanguage). Locale#add_language
 
-  *add_language*(%(arg-type)LanguageInfo% info)
+  *add_language*(%(arg-type)"LanguageInfo":languageinfo.html% info)
 
 Adds custom, user-defined language to the database of known languages. This
 database is used in conjunction with the first form of 
@@ -272,11 +272,11 @@ Returns the current short name for the locale.
 
 h3(#Locale_getstring). Locale#get_string
 
- char *get_string*(%(arg-type)char% szOrigString,  %(arg-type)char% szDomain = nil)
+ char *get_string*(%(arg-type)"char":char.html% szOrigString,  %(arg-type)"char":char.html% szDomain = nil)
 
- char *get_string*(%(arg-type)char% szOrigString,  %(arg-type)char% szOrigString2, 
+ char *get_string*(%(arg-type)"char":char.html% szOrigString,  %(arg-type)"char":char.html% szOrigString2, 
                  %(arg-type)Integer% n, 
-                 %(arg-type)char% szDomain = nil)
+                 %(arg-type)"char":char.html% szDomain = nil)
 
 Retrieves the translation for a string in all loaded domains unless the
 szDomain parameter is specified (and then only this catalog/domain is
@@ -308,7 +308,7 @@ added later override those added before.
 
 h3(#Locale_getheadervalue). Locale#get_header_value
 
- String *get_header_value*(%(arg-type)char% szHeader,  %(arg-type)char% szDomain = nil)
+ String *get_header_value*(%(arg-type)"char":char.html% szHeader,  %(arg-type)"char":char.html% szDomain = nil)
 
 Returns the header value for header szHeader. The search for szHeader is case sensitive. If an szDomain
 is passed, this domain is searched. Else all domains will be searched until a header has been found.
@@ -339,8 +339,8 @@ h3(#Locale_init). Locale#init
  Boolean *init*(%(arg-type)Integer% language = LANGUAGE_DEFAULT, 
               %(arg-type)Integer% flags = LOCALE_LOAD_DEFAULT | LOCALE_CONV_ENCODING)
 
- Boolean *init*(%(arg-type)char% szName,  %(arg-type)char% szShort = nil, 
-              %(arg-type)char% szLocale = nil, 
+ Boolean *init*(%(arg-type)"char":char.html% szName,  %(arg-type)"char":char.html% szShort = nil, 
+              %(arg-type)"char":char.html% szLocale = nil, 
               %(arg-type)Boolean% bLoadDefault = true, 
               %(arg-type)Boolean% bConvertEncoding = false)
 
@@ -390,7 +390,7 @@ Returns true on success or false if the given locale couldn't be set.
 
 h3(#Locale_isloaded). Locale#is_loaded
 
- Boolean *is_loaded*(%(arg-type)char% domain)
+ Boolean *is_loaded*(%(arg-type)"char":char.html% domain)
 
 Check if the given catalog is loaded, and returns true if it is.
 

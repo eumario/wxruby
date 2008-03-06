@@ -32,18 +32,18 @@ h2. Methods
 
 h3(#MultiChoiceDialog_constr). MultiChoiceDialog.new
 
-  *MultiChoiceDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message, 
+  *MultiChoiceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
                         %(arg-type)String% caption, 
                         %(arg-type)Integer% n, 
                         %(arg-type)String% choices, 
                         %(arg-type)Integer% style = CHOICEDLG_STYLE, 
-                        %(arg-type)Point% pos = DEFAULT_POSITION)
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
 
-  *MultiChoiceDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message, 
+  *MultiChoiceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
                         %(arg-type)String% caption, 
-                        %(arg-type)ArrayString% choices, 
+                        %(arg-type)"ArrayString":arraystring.html% choices, 
                         %(arg-type)Integer% style = CHOICEDLG_STYLE, 
-                        %(arg-type)Point% pos = DEFAULT_POSITION)
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
 
 Constructor taking an array of String choices.
 
@@ -83,7 +83,7 @@ Returns array with indexes of selected items.
 
 h3(#MultiChoiceDialog_setselections). MultiChoiceDialog#set_selections
 
-  *set_selections*(%(arg-type)ArrayInt% selections)
+  *set_selections*(%(arg-type)"ArrayInt":arrayint.html% selections)
 
 Sets selected items from the array of selected items' indexes.
 

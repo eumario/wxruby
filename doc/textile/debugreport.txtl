@@ -91,7 +91,7 @@ prevent this from happening.
 
 h3(#DebugReport_addall). DebugReport#add_all
 
-  *add_all*(%(arg-type)Context% context = Context_Exception)
+  *add_all*(%(arg-type)"Context":context.html% context = Context_Exception)
 
 Adds all available information to the report. Currently this includes a
 text (XML) file describing the process context and, under Win32, a minidump
@@ -100,7 +100,7 @@ file.
 
 h3(#DebugReport_addcontext). DebugReport#add_context
 
- Boolean *add_context*(%(arg-type)Context% ctx)
+ Boolean *add_context*(%(arg-type)"Context":context.html% ctx)
 
 Add an XML file containing the current or exception context and the
 stack trace.
@@ -122,7 +122,7 @@ The same as "add_dump(context__current)":#DebugReport_adddump(contextcurrent).
 
 h3(#DebugReport_adddump). DebugReport#add_dump
 
- Boolean *add_dump*(%(arg-type)Context% ctx)
+ Boolean *add_dump*(%(arg-type)"Context":context.html% ctx)
 
 Adds the minidump file to the debug report.
 
@@ -177,7 +177,7 @@ occurred.
 
 h3(#DebugReport_doaddcustomcontext). DebugReport#do_add_custom_context
 
-  *do_add_custom_context*(%(arg-type)XmlNode% nodeRoot)
+  *do_add_custom_context*(%(arg-type)"XmlNode":xmlnode.html% nodeRoot)
 
 This function may be overridden to add arbitrary custom context to the XML
 context file created by "add_context":#DebugReport_addcontext. By
@@ -186,7 +186,7 @@ default, it does nothing.
 
 h3(#DebugReport_doaddexceptioninfo). DebugReport#do_add_exception_info
 
- Boolean *do_add_exception_info*(%(arg-type)XmlNode% nodeContext)
+ Boolean *do_add_exception_info*(%(arg-type)"XmlNode":xmlnode.html% nodeContext)
 
 This function may be overridden to modify the contents of the exception tag in
 the XML context file.
@@ -194,7 +194,7 @@ the XML context file.
 
 h3(#DebugReport_doaddloadedmodules). DebugReport#do_add_loaded_modules
 
- Boolean *do_add_loaded_modules*(%(arg-type)XmlNode% nodeModules)
+ Boolean *do_add_loaded_modules*(%(arg-type)"XmlNode":xmlnode.html% nodeModules)
 
 This function may be overridden to modify the contents of the modules tag in
 the XML context file.
@@ -202,7 +202,7 @@ the XML context file.
 
 h3(#DebugReport_doaddsysteminfo). DebugReport#do_add_system_info
 
- Boolean *do_add_system_info*(%(arg-type)XmlNode% nodeSystemInfo)
+ Boolean *do_add_system_info*(%(arg-type)"XmlNode":xmlnode.html% nodeSystemInfo)
 
 This function may be overridden to modify the contents of the system tag in
 the XML context file.

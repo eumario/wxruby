@@ -60,10 +60,10 @@ h2. Methods
 
 h3(#PropertySheetDialog_new). PropertySheetDialog.new
 
-  *PropertySheetDialog.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+  *PropertySheetDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
                           %(arg-type)String% title, 
-                          %(arg-type)Point% pos = DEFAULT_POSITION, 
-                          %(arg-type)Size% size = DEFAULT_SIZE, 
+                          %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                          %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                           %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
                           %(arg-type)String% name = "dialogBox")
 
@@ -71,16 +71,16 @@ Constructor.
 
 h3(#PropertySheetDialog_addbookctrl). PropertySheetDialog#add_book_ctrl
 
-  *add_book_ctrl*(%(arg-type)Sizer% sizer)
+  *add_book_ctrl*(%(arg-type)"Sizer":sizer.html% sizer)
 
 Override this if you wish to add the book control in a way different from the
 standard way (for example, using different spacing).
 
 h3(#PropertySheetDialog_create). PropertySheetDialog#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
                 %(arg-type)String% name = "dialogBox")
 
@@ -121,13 +121,13 @@ full-screen, and the layout will be done when the dialog receives a size event.
 
 h3(#PropertySheetDialog_setbookctrl). PropertySheetDialog#set_book_ctrl
 
-  *set_book_ctrl*(%(arg-type)BookCtrlBase% bookCtrl)
+  *set_book_ctrl*(%(arg-type)"BookCtrlBase":bookctrlbase.html% bookCtrl)
 
 Sets the book control used for the dialog. You will normally not need to use this.
 
 h3(#PropertySheetDialog_setinnersizer). PropertySheetDialog#set_inner_sizer
 
-  *set_inner_sizer*(%(arg-type)Sizer% sizer)
+  *set_inner_sizer*(%(arg-type)"Sizer":sizer.html% sizer)
 
 Sets the inner sizer that contains the book control and button sizer. You will normally not need to use this.
 

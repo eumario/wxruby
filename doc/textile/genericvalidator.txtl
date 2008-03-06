@@ -37,7 +37,7 @@ h2. Methods
 
 h3(#GenericValidator_new). GenericValidator.new
 
-  *GenericValidator.new*(%(arg-type)GenericValidator% validator)
+  *GenericValidator.new*(%(arg-type)"GenericValidator":genericvalidator.html% validator)
 
 Copy constructor.
 
@@ -55,7 +55,7 @@ TextCtrl.
 Constructor taking an integer pointer. This will be used for Gauge, ScrollBar, RadioBox, SpinButton,
 Choice.
 
-  *GenericValidator.new*(%(arg-type)ArrayInt% valPtr)
+  *GenericValidator.new*(%(arg-type)"ArrayInt":arrayint.html% valPtr)
 
 Constructor taking a ArrayInt pointer. This will be used for ListBox, CheckListBox.
 

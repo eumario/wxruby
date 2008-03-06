@@ -39,7 +39,7 @@ h2. Methods
 
 h3(#NotifyEvent_constr). NotifyEvent.new
 
-  *NotifyEvent.new*(%(arg-type)EventType% eventType = EVT_NULL,  %(arg-type)Integer% id = 0)
+  *NotifyEvent.new*(%(arg-type)"EventType":eventtype.html% eventType = EVT_NULL,  %(arg-type)Integer% id = 0)
 
 Constructor (used internally by Widgets only).
 

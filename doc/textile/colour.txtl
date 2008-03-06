@@ -131,7 +131,7 @@ h4. See also
 
 h3(#Colour_equality). Colour#==
 
- Boolean *operator ==*(%(arg-type)Colour% colour)
+ Boolean *operator ==*(%(arg-type)"Colour":colour.html% colour)
 
 Tests the equality of two colours by comparing individual red, green blue colours.
 

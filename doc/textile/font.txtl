@@ -195,22 +195,22 @@ h4. See also
 
 h3(#Font_new). Font.new
 
-  *Font.new*(%(arg-type)Font% font)
+  *Font.new*(%(arg-type)"Font":font.html% font)
 
 Copy constructor, uses "reference counting":trefcount.html.
 
-  *Font.new*(%(arg-type)Integer% pointSize,  %(arg-type)FontFamily% family, 
+  *Font.new*(%(arg-type)Integer% pointSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
            %(arg-type)Integer% style, 
-           %(arg-type)FontWeight% weight, 
+           %(arg-type)"FontWeight":fontweight.html% weight, 
            %(arg-type)Boolean% underline = false, 
            %(arg-type)String% faceName = "", 
-           %(arg-type)FontEncoding% encoding = FONTENCODING_DEFAULT)
+           %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
 
-  *Font.new*(%(arg-type)Size% pixelSize,  %(arg-type)FontFamily% family,  %(arg-type)Integer% style, 
-           %(arg-type)FontWeight% weight, 
+  *Font.new*(%(arg-type)"Size":size.html% pixelSize,  %(arg-type)"FontFamily":fontfamily.html% family,  %(arg-type)Integer% style, 
+           %(arg-type)"FontWeight":fontweight.html% weight, 
            %(arg-type)Boolean% underline = false, 
            %(arg-type)String% faceName = "", 
-           %(arg-type)FontEncoding% encoding = FONTENCODING_DEFAULT)
+           %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
 
 Creates a font object with the specified attributes.
 
@@ -268,7 +268,7 @@ and "DC#get_text_extent":dc.html#DC_gettextextent.
 
 h3(#Font_setdefaultencoding). Font#set_default_encoding
 
-  *set_default_encoding*(%(arg-type)FontEncoding% encoding)
+  *set_default_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
 
 Sets the default font encoding, passing a valid @Wx::FONTENCODING_XX@ constant.
 
@@ -280,7 +280,7 @@ h4. See also
 
 h3(#Font_setdefaultencoding). Font#set_default_encoding_name
 
-  *set_default_encoding*(%(arg-type)FontEncoding% encoding)
+  *set_default_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
 
 Sets the default font encoding, passing an encoding name.
 
@@ -398,29 +398,29 @@ h4. See also
 
 h3(#Font_new). Font#new
 
- "Font":font.html *new*(%(arg-type)Integer% pointSize,  %(arg-type)FontFamily% family, 
+ "Font":font.html *new*(%(arg-type)Integer% pointSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
             %(arg-type)Integer% style, 
-            %(arg-type)FontWeight% weight, 
+            %(arg-type)"FontWeight":fontweight.html% weight, 
             %(arg-type)Boolean% underline = false, 
             %(arg-type)String% faceName = "", 
-            %(arg-type)FontEncoding% encoding = FONTENCODING_DEFAULT)
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
 
- "Font":font.html *new*(%(arg-type)Integer% pointSize,  %(arg-type)FontFamily% family, 
+ "Font":font.html *new*(%(arg-type)Integer% pointSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
             %(arg-type)Integer% flags = @FONTFLAG_DEFAULT@, 
             %(arg-type)String% faceName = "", 
-            %(arg-type)FontEncoding% encoding = FONTENCODING_DEFAULT)
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
 
- "Font":font.html *new*(%(arg-type)Size% pixelSize,  %(arg-type)FontFamily% family, 
+ "Font":font.html *new*(%(arg-type)"Size":size.html% pixelSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
             %(arg-type)Integer% style, 
-            %(arg-type)FontWeight% weight, 
+            %(arg-type)"FontWeight":fontweight.html% weight, 
             %(arg-type)Boolean% underline = false, 
             %(arg-type)String% faceName = "", 
-            %(arg-type)FontEncoding% encoding = FONTENCODING_DEFAULT)
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
 
- "Font":font.html *new*(%(arg-type)Size% pixelSize,  %(arg-type)FontFamily% family, 
+ "Font":font.html *new*(%(arg-type)"Size":size.html% pixelSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
             %(arg-type)Integer% flags = @FONTFLAG_DEFAULT@, 
             %(arg-type)String% faceName = "", 
-            %(arg-type)FontEncoding% encoding = FONTENCODING_DEFAULT)
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
 
 These functions take the same parameters as "Font
 constructor":fontctor.html and return a new font object allocated on the heap.
@@ -461,7 +461,7 @@ h4. See also
 
 h3(#Font_setfamily). Font#set_family
 
-  *set_family*(%(arg-type)FontFamily% family)
+  *set_family*(%(arg-type)"FontFamily":fontfamily.html% family)
 
 Sets the font family.
 
@@ -574,7 +574,7 @@ h4. See also
 
 h3(#Font_setweight). Font#set_weight
 
-  *set_weight*(%(arg-type)FontWeight% weight)
+  *set_weight*(%(arg-type)"FontWeight":fontweight.html% weight)
 
 Sets the font weight.
 

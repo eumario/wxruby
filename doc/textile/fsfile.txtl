@@ -36,9 +36,9 @@ h2. Methods
 
 h3(#FSFile_wxfsfile). FSFile.new
 
-  *FSFile.new*(%(arg-type)InputStream% stream,  %(arg-type)String% loc,  %(arg-type)String% mimetype, 
+  *FSFile.new*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)String% loc,  %(arg-type)String% mimetype, 
              %(arg-type)String% anchor, 
-             %(arg-type)DateTime% modif)
+             %(arg-type)"DateTime":datetime.html% modif)
 
 Constructor. You probably won't use it. See Notes for details.
 

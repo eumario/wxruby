@@ -44,7 +44,7 @@ h3(#DataObjectComposite_wxdataobjectcomposite). DataObjectComposite.new
 
 h3(#DataObjectComposite_add). DataObjectComposite#add
 
-  *add*(    %(arg-type)DataObjectSimple% dataObject,     %(arg-type)Boolean% preferred = false)
+  *add*(    %(arg-type)"DataObjectSimple":dataobjectsimple.html% dataObject,     %(arg-type)Boolean% preferred = false)
 
 Adds the _dataObject_ to the list of supported objects and it becomes the
 preferred object if _preferred_ is true.

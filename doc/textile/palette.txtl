@@ -35,7 +35,7 @@ h2. Methods
 
 h3(#Palette_new). Palette.new
 
-  *Palette.new*(%(arg-type)Palette% palette)
+  *Palette.new*(%(arg-type)"Palette":palette.html% palette)
 
 Copy constructor. This uses reference counting so is a cheap operation.
 
@@ -145,14 +145,14 @@ Returns true if palette data is present.
 
 h3(#Palette_assignment). Palette#=
 
- "Palette":palette.html *operator $=$*(%(arg-type)Palette% palette)
+ "Palette":palette.html *operator $=$*(%(arg-type)"Palette":palette.html% palette)
 
 Assignment operator, using reference counting. Returns a reference
 to `this'.
 
 h3(#Palette_equals). Palette#==
 
- Boolean *operator $==$*(%(arg-type)Palette% palette)
+ Boolean *operator $==$*(%(arg-type)"Palette":palette.html% palette)
 
 Equality operator. Two palettes are equal if they contain pointers
 to the same underlying palette data. It does not compare each attribute,
@@ -161,7 +161,7 @@ fail the test.
 
 h3(#Palette_notequals). Palette#!=
 
- Boolean *operator $!=$*(%(arg-type)Palette% palette)
+ Boolean *operator $!=$*(%(arg-type)"Palette":palette.html% palette)
 
 Inequality operator. Two palettes are not equal if they contain pointers
 to different underlying palette data. It does not compare each attribute.

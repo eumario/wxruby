@@ -110,9 +110,9 @@ h2. Methods
 
 h3(#Notebook_new). Notebook.new
 
-  *Notebook.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE,  %(arg-type)Integer% style = 0, 
+  *Notebook.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE,  %(arg-type)Integer% style = 0, 
                %(arg-type)String% name = NotebookNameStr)
 
 Constructs a notebook control.
@@ -136,7 +136,7 @@ Destroys the Notebook object.
 
 h3(#Notebook_addpage). Notebook#add_page
 
- Boolean *add_page*(%(arg-type)NotebookPage% page,  %(arg-type)String% text, 
+ Boolean *add_page*(%(arg-type)"NotebookPage":notebookpage.html% page,  %(arg-type)String% text, 
                   %(arg-type)Boolean% select = false, 
                   %(arg-type)Integer% imageId = -1)
 
@@ -175,8 +175,8 @@ The call to this function generates the page changing events.
 
 h3(#Notebook_create). Notebook#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)Point% pos = DEFAULT_POSITION,  %(arg-type)Size% size,  %(arg-type)Integer% style = 0, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION,  %(arg-type)"Size":size.html% size,  %(arg-type)Integer% style = 0, 
                 %(arg-type)String% name = NotebookNameStr)
 
 Creates a notebook control. See "Notebook.new":notebook.html#Notebook_new for a description
@@ -273,7 +273,7 @@ to @SetBackgroundColour@. Otherwise, an uninitialised colour will be returned.
 
 h3(#Notebook_hittest). Notebook#hit_test
 
- Integer *hit_test*(%(arg-type)Point% pt,  %(arg-type)Integer% flags = @NULL@)
+ Integer *hit_test*(%(arg-type)"Point":point.html% pt,  %(arg-type)Integer% flags = @NULL@)
 
 Returns the index of the tab at the specified position or @NOT_FOUND@
 if none. If _flags_ parameter is non @NULL@, the position of the point
@@ -303,7 +303,7 @@ the specified position.
 
 h3(#Notebook_insertpage). Notebook#insert_page
 
- Boolean *insert_page*(%(arg-type)Integer% index,  %(arg-type)NotebookPage% page, 
+ Boolean *insert_page*(%(arg-type)Integer% index,  %(arg-type)"NotebookPage":notebookpage.html% page, 
                      %(arg-type)String% text, 
                      %(arg-type)Boolean% select = false, 
                      %(arg-type)Integer% imageId = -1)
@@ -333,7 +333,7 @@ h4. See also
 
 h3(#Notebook_onselchange). Notebook#on_sel_change
 
-  *on_sel_change*(%(arg-type)NotebookEvent% event)
+  *on_sel_change*(%(arg-type)"NotebookEvent":notebookevent.html% event)
 
 An event handler function, called when the page selection is changed.
 
@@ -351,7 +351,7 @@ Deletes the specified page, without deleting the associated window.
 
 h3(#Notebook_setimagelist). Notebook#set_image_list
 
-  *set_image_list*(%(arg-type)ImageList% imageList)
+  *set_image_list*(%(arg-type)"ImageList":imagelist.html% imageList)
 
 Sets the "image list":imagelist.html which can be used to supply icons
 for each tab within the notebook. 
@@ -362,7 +362,7 @@ or other control.
 
 h3(#Notebook_setpadding). Notebook#set_padding
 
-  *set_padding*(%(arg-type)Size% padding)
+  *set_padding*(%(arg-type)"Size":size.html% padding)
 
 Sets the amount of space around each page's icon and label, in pixels.
 
@@ -371,7 +371,7 @@ Sets the amount of space around each page's icon and label, in pixels.
 
 h3(#Notebook_setpagesize). Notebook#set_page_size
 
-  *set_page_size*(%(arg-type)Size% size)
+  *set_page_size*(%(arg-type)"Size":size.html% size)
 
 Sets the width and height of the pages.
 

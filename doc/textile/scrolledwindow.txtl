@@ -128,9 +128,9 @@ h2. Methods
 
 h3(#ScrolledWindow_new). ScrolledWindow.new
 
-  *ScrolledWindow.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
-                     %(arg-type)Point% pos = DEFAULT_POSITION, 
-                     %(arg-type)Size% size = DEFAULT_SIZE, 
+  *ScrolledWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                      %(arg-type)Integer% style = HSCROLL VSCROLL, 
                      %(arg-type)String% name = "scrolledWindow")
 
@@ -199,9 +199,9 @@ h4. See also
 
 h3(#ScrolledWindow_create). ScrolledWindow#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = HSCROLL VSCROLL, 
                 %(arg-type)String% name = "scrolledWindow")
 

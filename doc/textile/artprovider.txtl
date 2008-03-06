@@ -126,7 +126,7 @@ h3(#ArtProvider_createbitmap). ArtProvider#create_bitmap
 
  "Bitmap":bitmap.html *create_bitmap*(%(arg-type)String% id,  
                                       %(arg-type)String% client, 
-                                      %(arg-type)Size% size)
+                                      %(arg-type)"Size":size.html% size)
 
 If you create your own custom Wx::ArtProvider subclasses, they must
 include an instance method @create_bitmap@. This method should accept
@@ -159,8 +159,8 @@ h2. Class Methods
 h3(#ArtProvider_getbitmap). ArtProvider.get_bitmap
 
  "Bitmap":bitmap.html *get_bitmap*(%(arg-type)String% id,  
-                                   %(arg-type)Stringt% client = "ART_OTHER_C", 
-                                   %(arg-type)Size% size = DEFAULT_SIZE)
+                                   %(arg-type)"Stringt":stringt.html% client = "ART_OTHER_C", 
+                                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
 
 Query registered providers for bitmap with given ID.
 
@@ -177,15 +177,15 @@ The bitmap if one of registered providers recognizes the ID or NullBitmap otherw
 h3(#ArtProvider_geticon). ArtProvider.get_icon
 
  "Icon":icon.html *get_icon*(%(arg-type)String% id,  
-                             %(arg-type)ArtClient% client = "ART_OTHER_C", 
-                             %(arg-type)Size% size = DEFAULT_SIZE)
+                             %(arg-type)"ArtClient":artclient.html% client = "ART_OTHER_C", 
+                             %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
 
 Same as "ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap, but
 return a Icon object (or @Wx::NULL_ICON@ on failure).
 
 h3(#ArtProvider_push). ArtProvider.insert
 
-  *insert*(%(arg-type)ArtProvider% provider)
+  *insert*(%(arg-type)"ArtProvider":artprovider.html% provider)
 
 Registers a new art provider and adds it to the bottom of the providers
 stack (i.e. it will be queried last).
@@ -198,14 +198,14 @@ Removes the latest added provider.
 
 h3(#ArtProvider_push). ArtProvider.push
 
-  *push*(%(arg-type)ArtProvider% provider)
+  *push*(%(arg-type)"ArtProvider":artprovider.html% provider)
 
 Registers a new art provider and adds it to the top of providers stack
 (i.e. it will be queried first).
 
 h3(#ArtProvider_remove). ArtProvider.remove
 
- Boolean *remove*(%(arg-type)ArtProvider% provider)
+ Boolean *remove*(%(arg-type)"ArtProvider":artprovider.html% provider)
 
 Removes a provider from the stack. The provider must have been added
 previously.

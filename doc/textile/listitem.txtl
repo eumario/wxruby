@@ -149,14 +149,14 @@ Meaningful only for column headers in report mode. Returns the column width.
 
 h3(#ListItem_setalign). ListItem#set_align
 
-  *set_align*(%(arg-type)ListColumnFormat% align)
+  *set_align*(%(arg-type)"ListColumnFormat":listcolumnformat.html% align)
 
 Sets the alignment for the item. See also
 "ListItem#get_align":listitem.html#ListItem_getalign
 
 h3(#ListItem_setbackgroundcolour). ListItem#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% colBack)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colBack)
 
 Sets the background colour for the item.
 
@@ -176,7 +176,7 @@ columns..
 
 h3(#ListItem_setfont). ListItem#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets the font for the item.
 
@@ -224,7 +224,7 @@ Sets the text label for the item.
 
 h3(#ListItem_settextcolour). ListItem#set_text_colour
 
-  *set_text_colour*(%(arg-type)Colour% colText)
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colText)
 
 Sets the text colour for the item.
 

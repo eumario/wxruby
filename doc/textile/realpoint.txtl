@@ -23,7 +23,7 @@ h2. Methods
 
 h3(#RealPoint_new). RealPoint.new
 
-  *RealPoint.new*(%(arg-type)double% x,  %(arg-type)double% y)
+  *RealPoint.new*(%(arg-type)Float% x,  %(arg-type)Float% y)
 
 Create a point.
 

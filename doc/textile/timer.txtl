@@ -72,7 +72,7 @@ h2. Methods
 
 h3(#Timer_wxtimer). Timer.new
 
-  *Timer.new*(%(arg-type)EvtHandler% owner,  %(arg-type)Integer% id = -1)
+  *Timer.new*(%(arg-type)"EvtHandler":evthandler.html% owner,  %(arg-type)Integer% id = -1)
 
 Creates a timer and associates it with _owner_. Please see 
 "set_owner":#Timer_setowner for the description of parameters.
@@ -137,7 +137,7 @@ Perform whatever action which is to be taken periodically here.
 
 h3(#Timer_setowner). Timer#set_owner
 
-  *set_owner*(%(arg-type)EvtHandler% owner,  %(arg-type)Integer% id = -1)
+  *set_owner*(%(arg-type)"EvtHandler":evthandler.html% owner,  %(arg-type)Integer% id = -1)
 
 Associates the timer with the given _owner_\/ object. When the timer is
 running, the owner will receive "timer events":timerevent.html with

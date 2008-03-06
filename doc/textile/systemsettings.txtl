@@ -29,7 +29,7 @@ h3(#SystemSettings_new). SystemSettings.new
 
 h3(#SystemSettings_getcolour). SystemSettings#get_colour
 
- "Colour":colour.html *get_colour*(%(arg-type)SystemColour% index)
+ "Colour":colour.html *get_colour*(%(arg-type)"SystemColour":systemcolour.html% index)
 
 Returns a system colour.
 
@@ -74,7 +74,7 @@ _index_ can be one of:
 
 h3(#SystemSettings_getfont). SystemSettings#get_font
 
- "Font":font.html *get_font*(%(arg-type)SystemFont% index)
+ "Font":font.html *get_font*(%(arg-type)"SystemFont":systemfont.html% index)
 
 Returns a system font.
 
@@ -94,7 +94,7 @@ _index_ can be one of:
 
 h3(#SystemSettings_getmetric). SystemSettings#get_metric
 
- Integer *get_metric*(%(arg-type)SystemMetric% index,  %(arg-type)Window% win = nil)
+ Integer *get_metric*(%(arg-type)"SystemMetric":systemmetric.html% index,  %(arg-type)"Window":window.html% win = nil)
 
 Returns the value of a system metric, or -1 if the metric is not supported on the current system.
 The value of _win_ determines if the metric returned is a global value or

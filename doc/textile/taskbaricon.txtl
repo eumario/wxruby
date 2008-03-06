@@ -90,7 +90,7 @@ Returns true if the object initialized successfully.
 
 h3(#TaskBarIcon_popupmenu). TaskBarIcon#popup_menu
 
- Boolean *popup_menu*(%(arg-type)Menu% menu)
+ Boolean *popup_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Pops up a menu at the current mouse position. The events can be handled by
 a class derived from TaskBarIcon.
@@ -110,7 +110,7 @@ Removes the icon previously set with "set_icon":#TaskBarIcon_seticon.
 
 h3(#TaskBarIcon_seticon). TaskBarIcon#set_icon
 
- Boolean *set_icon*(%(arg-type)Icon% icon,  %(arg-type)String% tooltip)
+ Boolean *set_icon*(%(arg-type)"Icon":icon.html% icon,  %(arg-type)String% tooltip)
 
 Sets the icon, and optional tooltip text.
 

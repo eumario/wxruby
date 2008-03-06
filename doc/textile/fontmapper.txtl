@@ -124,7 +124,7 @@ h4. See also
 
 h3(#FontMapper_getallencodingnames). FontMapper#get_all_encoding_names
 
- "Char*":char*.html *get_all_encoding_names*(%(arg-type)FontEncoding% encoding)
+ "Char*":char*.html *get_all_encoding_names*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
 
 Returns the array of all possible names for the given encoding. The array is
 -terminated. IF it isn't empty, the first name in it is the canonical
@@ -134,12 +134,12 @@ encoding name, i.e. the same string as returned by
 
 h3(#FontMapper_getaltforencoding). FontMapper#get_alt_for_encoding
 
- Boolean *get_alt_for_encoding*(%(arg-type)FontEncoding% encoding, 
-                              %(arg-type)NativeEncodingInfo% info,  %(arg-type)String% facename = '', 
+ Boolean *get_alt_for_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding, 
+                              %(arg-type)"NativeEncodingInfo":nativeencodinginfo.html% info,  %(arg-type)String% facename = '', 
                               %(arg-type)Boolean% interactive = true)
 
- Boolean *get_alt_for_encoding*(%(arg-type)FontEncoding% encoding, 
-                              %(arg-type)FontEncoding% alt_encoding,  %(arg-type)String% facename = '', 
+ Boolean *get_alt_for_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding, 
+                              %(arg-type)"FontEncoding":fontencoding.html% alt_encoding,  %(arg-type)String% facename = '', 
                               %(arg-type)Boolean% interactive = true)
 
 Find an alternative for the given encoding (which is supposed to not be
@@ -163,7 +163,7 @@ this method may be used to get all supported encodings.
 
 h3(#FontMapper_getencodingdescription). FontMapper#get_encoding_description
 
- String *get_encoding_description*(%(arg-type)FontEncoding% encoding)
+ String *get_encoding_description*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
 
 Return user-readable string describing the given encoding.
 
@@ -183,7 +183,7 @@ restoring objects previously serialized using
 
 h3(#FontMapper_getencodingname). FontMapper#get_encoding_name
 
- String *get_encoding_name*(%(arg-type)FontEncoding% encoding)
+ String *get_encoding_name*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
 
 Return internal string identifier for the encoding (see also 
 "get_encoding_description()":#FontMapper_getencodingdescription())
@@ -204,7 +204,7 @@ all supported encodings.
 
 h3(#FontMapper_isencodingavailable). FontMapper#is_encoding_available
 
- Boolean *is_encoding_available*(%(arg-type)FontEncoding% encoding, 
+ Boolean *is_encoding_available*(%(arg-type)"FontEncoding":fontencoding.html% encoding, 
                                %(arg-type)String% facename = '')
 
 Check whether given encoding is available in given face or not.
@@ -213,7 +213,7 @@ If no facename is given, find _any_ font in this encoding.
 
 h3(#FontMapper_setdialogparent). FontMapper#set_dialog_parent
 
-  *set_dialog_parent*(%(arg-type)Window% parent)
+  *set_dialog_parent*(%(arg-type)"Window":window.html% parent)
 
 The parent window for modal dialogs.
 
@@ -227,7 +227,7 @@ The title for the dialogs (note that default is quite reasonable).
 
 h3(#FontMapper_set). FontMapper#set
 
- "FontMapper":fontmapper.html *set*(%(arg-type)FontMapper% mapper)
+ "FontMapper":fontmapper.html *set*(%(arg-type)"FontMapper":fontmapper.html% mapper)
 
 Set the current font mapper object and return previous one (may be NULL).
 This method is only useful if you want to plug-in an alternative font mapper
@@ -240,7 +240,7 @@ h4. See also
 
 h3(#FontMapper_setconfig). FontMapper#set_config
 
-  *set_config*(%(arg-type)ConfigBase% config)
+  *set_config*(%(arg-type)"ConfigBase":configbase.html% config)
 
 Set the config object to use (may be NULL to use default).
 

@@ -159,7 +159,7 @@ h3(#Menu_append). Menu#append
  "MenuItem":menuitem.html *append*(%(arg-type)Integer% id = Wx::ID_ANY,
                                   %(arg-type)String% item = "", 
                                   %(arg-type)String% helpString = "", 
-                                  %(arg-type)ItemKind% kind = Wx::ITEM_NORMAL)
+                                  %(arg-type)"ItemKind":itemkind.html% kind = Wx::ITEM_NORMAL)
 
 Adds a string item to the end of the menu. Note that the only required
 item is the string label for the menu item; if the id is omitted, wxRuby
@@ -167,7 +167,7 @@ will supply a reasonable default.
 
 h3(#Menu_appenditem). Menu#append_item
 
- "MenuItem":menuitem.html *append_item*(%(arg-type)MenuItem% menuItem)
+ "MenuItem":menuitem.html *append_item*(%(arg-type)"MenuItem":menuitem.html% menuItem)
 
 Adds a "MenuItem":menuitem.html object. This is the most generic variant
 of Append() method because it may be used for both items (including
@@ -178,7 +178,7 @@ h3(#Menu_appendmenu). Menu#append_menu
 
  "MenuItem":menuitem.html *append_menu*(%(arg-type)Integer% id = Wx::ID_ANY, 
                                         %(arg-type)String% item, 
-                                        %(arg-type)Menu% subMenu, 
+                                        %(arg-type)"Menu":menu.html% subMenu, 
                                         %(arg-type)String% helpString = "")
 
 Adds a pull-right submenu to the end of the menu. Append the submenu to
@@ -297,7 +297,7 @@ h3(#Menu_delete). Menu#delete
 
   *delete*(%(arg-type)Integer% id)
 
-  *delete*(%(arg-type)MenuItem% item)
+  *delete*(%(arg-type)"MenuItem":menuitem.html% item)
 
 Deletes the menu item from the menu. If the item is a submenu, it will
 *not* be deleted. Use "Destroy":menudestroy.html if you want to
@@ -316,7 +316,7 @@ h3(#Menu_destroy). Menu#destroy
 
   *destroy*(%(arg-type)Integer% id)
 
-  *destroy*(%(arg-type)MenuItem% item)
+  *destroy*(%(arg-type)"MenuItem":menuitem.html% item)
 
 Deletes the menu item from the menu. If the item is a submenu, it will
 be deleted. Use "Remove":menuremove.html if you want to keep the submenu
@@ -352,7 +352,7 @@ h3(#Menu_finditem). Menu#find_item
 
 Finds the menu item id for a menu item string.
 
- "MenuItem":menuitem.html *find_item*(%(arg-type)Integer% id,  %(arg-type)Menu% menu = nil)
+ "MenuItem":menuitem.html *find_item*(%(arg-type)Integer% id,  %(arg-type)"Menu":menu.html% menu = nil)
 
 Finds the menu item object associated with the given menu item identifier and,
 optionally, the (sub)menu it belongs to.
@@ -460,13 +460,13 @@ h4. See also
 h3(#Menu_insert). Menu#insert
 
  "MenuItem":menuitem.html *insert*(%(arg-type)Integer% pos,  
-                                   %(arg-type)MenuItem% item)
+                                   %(arg-type)"MenuItem":menuitem.html% item)
 
  "MenuItem":menuitem.html *insert*(%(arg-type)Integer% pos,  
                                    %(arg-type)Integer% id = Wx::ID_ANY, 
                                    %(arg-type)String% item, 
                                    %(arg-type)String% helpString = "", 
-                                   %(arg-type)ItemKind% kind = ITEM_NORMAL)
+                                   %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
 
 Inserts the given _item_ before the position _pos_. Inserting the item
 at position "get_menu_item_count":#Menu_getmenuitemcount is the same
@@ -550,12 +550,12 @@ h4. See also
 
 h3(#Menu_prepend). Menu#prepend
 
- "MenuItem":menuitem.html *prepend*(%(arg-type)MenuItem% item)
+ "MenuItem":menuitem.html *prepend*(%(arg-type)"MenuItem":menuitem.html% item)
 
  "MenuItem":menuitem.html *prepend*(%(arg-type)Integer% id = Wx::ID_ANY,  
                                     %(arg-type)String% item, 
                                     %(arg-type)String% helpString = "", 
-                                    %(arg-type)ItemKind% kind = ITEM_NORMAL)
+                                    %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
 
 Inserts the given _item_ at position $0$, i.e. before all the other
 existing items.
@@ -602,7 +602,7 @@ h3(#Menu_remove). Menu#remove
 
  "MenuItem":menuitem.html *remove*(%(arg-type)Integer% id)
 
- "MenuItem":menuitem.html *remove*(%(arg-type)MenuItem% item)
+ "MenuItem":menuitem.html *remove*(%(arg-type)"MenuItem":menuitem.html% item)
 
 Removes the menu item from the menu but doesn't delete the associated C++
 object. This allows to reuse the same item later by adding it back to the menu
@@ -669,7 +669,7 @@ h4. See also
 
 h3(#Menu_updateui). Menu#update_ui
 
-  *update_ui*(%(arg-type)EvtHandler% source = nil)
+  *update_ui*(%(arg-type)"EvtHandler":evthandler.html% source = nil)
 
 Sends events to _source_ (or owning window if NULL) to update the
 menu UI. This is called just before the menu is popped up with "Window#popup_menu":window.html#Window_popupmenu, but

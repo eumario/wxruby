@@ -68,7 +68,7 @@ the clipboard is closed when the block is ended.
 
 h3(#Clipboard_adddata). Clipboard#add_data
 
- Boolean *add_data*(%(arg-type)DataObject% data)
+ Boolean *add_data*(%(arg-type)"DataObject":dataobject.html% data)
 
 Call this function to add the data object to the clipboard. You may call
 this function repeatedly after having cleared the clipboard using "Clipboard#clear":clipboard.html#Clipboard_clear.
@@ -103,7 +103,7 @@ Returns false if the operation is unsuccessful for any reason.
 
 h3(#Clipboard_getdata). Clipboard#get_data
 
- Boolean *get_data*(%(arg-type)DataObject% data)
+ Boolean *get_data*(%(arg-type)"DataObject":dataobject.html% data)
 
 Call this function to fill _data_ with data on the clipboard, if available in the required
 format. Returns true on success.
@@ -116,7 +116,7 @@ Returns true if the clipboard has been opened.
 
 h3(#Clipboard_issupported). Clipboard#is_supported
 
- Boolean *is_supported*(%(arg-type)DataFormat% format)
+ Boolean *is_supported*(%(arg-type)"DataFormat":dataformat.html% format)
 
 Returns true if there is data which matches the data format of the given data object currently *available* (IsSupported sounds like a misnomer, FIXME: better deprecate this name?) on the clipboard.
 
@@ -134,7 +134,7 @@ Returns true on success. This should be tested (as in the sample shown above).
 
 h3(#Clipboard_setdata). Clipboard#set_data
 
- Boolean *set_data*(%(arg-type)DataObject% data)
+ Boolean *set_data*(%(arg-type)"DataObject":dataobject.html% data)
 
 Call this function to set the data object to the clipboard. This function will
 clear all previous contents in the clipboard, so calling it several times

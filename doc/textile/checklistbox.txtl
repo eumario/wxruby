@@ -46,12 +46,12 @@ h2. Methods
 
 h3(#CheckListBox_new). CheckListBox.new
 
-  *CheckListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                   %(arg-type)Point% pos = DEFAULT_POSITION, 
-                   %(arg-type)Size% size = DEFAULT_SIZE,
-                   %(arg-type)Array% choices = [], 
+  *CheckListBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE,
+                   %(arg-type)"Array":array.html% choices = [], 
                    %(arg-type)Integer% style = 0, 
-                   %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                   %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                    %(arg-type)String% name = "listBox")
 
 Constructor, creating and showing a list box.

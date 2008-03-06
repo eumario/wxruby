@@ -53,7 +53,7 @@ h2. Methods
 
 h3(#CustomDataObject_wxcustomdataobject). CustomDataObject.new
 
-  *CustomDataObject.new*(%(arg-type)DataFormat% format = FormatInvalid)
+  *CustomDataObject.new*(%(arg-type)"DataFormat":dataformat.html% format = FormatInvalid)
 
 The constructor accepts a _format_ argument which specifies the (single)
 format supported by this object. If it isn't set here, 

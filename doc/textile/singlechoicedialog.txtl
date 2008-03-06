@@ -35,20 +35,20 @@ h2. Methods
 
 h3(#SingleChoiceDialog_new). SingleChoiceDialog.new
 
-  *SingleChoiceDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message, 
+  *SingleChoiceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
                          %(arg-type)String% caption, 
                          %(arg-type)Integer% n, 
                          %(arg-type)String% choices, 
                          %(arg-type)% clientData = nil, 
                          %(arg-type)Integer% style = CHOICEDLG_STYLE, 
-                         %(arg-type)Point% pos = DEFAULT_POSITION)
+                         %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
 
-  *SingleChoiceDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message, 
+  *SingleChoiceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
                          %(arg-type)String% caption, 
-                         %(arg-type)ArrayString% choices, 
+                         %(arg-type)"ArrayString":arraystring.html% choices, 
                          %(arg-type)% clientData = nil, 
                          %(arg-type)Integer% style = CHOICEDLG_STYLE, 
-                         %(arg-type)Point% pos = DEFAULT_POSITION)
+                         %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
 
 Constructor, taking an array of String choices and optional client data.
 

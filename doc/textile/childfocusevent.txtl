@@ -41,7 +41,7 @@ h2. Methods
 
 h3(#ChildFocusEvent_new). ChildFocusEvent.new
 
-  *ChildFocusEvent.new*(%(arg-type)Window% win = nil)
+  *ChildFocusEvent.new*(%(arg-type)"Window":window.html% win = nil)
 
 Constructor.
 

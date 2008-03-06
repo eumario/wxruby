@@ -44,11 +44,11 @@ h2. Methods
 
 h3(#DirDialog_new). DirDialog.new
 
-  *DirDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message = "Choose a directory", 
+  *DirDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message = "Choose a directory", 
                 %(arg-type)String% defaultPath = "", 
                 %(arg-type)Integer% style = DD_DEFAULT_STYLE, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)String% name = "DirCtrl")
 
 Constructor. Use "DirDialog#show_modal":dirdialog.html#DirDialog_showmodal to show

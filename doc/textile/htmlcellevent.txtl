@@ -37,9 +37,9 @@ h2. Methods
 
 h3(#HtmlCellEvent_new). HtmlCellEvent.new
 
-  *HtmlCellEvent.new*(%(arg-type)EventType% commandType,  %(arg-type)Integer% id, 
-                    %(arg-type)HtmlCell% cell, 
-                    %(arg-type)Point% point)
+  *HtmlCellEvent.new*(%(arg-type)"EventType":eventtype.html% commandType,  %(arg-type)Integer% id, 
+                    %(arg-type)"HtmlCell":htmlcell.html% cell, 
+                    %(arg-type)"Point":point.html% point)
 
 The constructor is not normally used by the user code.
 

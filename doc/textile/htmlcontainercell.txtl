@@ -36,7 +36,7 @@ h2. Methods
 
 h3(#HtmlContainerCell_wxhtmlcontainercell). HtmlContainerCell.new
 
-  *HtmlContainerCell.new*(%(arg-type)HtmlContainerCell% parent)
+  *HtmlContainerCell.new*(%(arg-type)"HtmlContainerCell":htmlcontainercell.html% parent)
 
 Constructor. _parent_ is pointer to parent container or NULL.
 
@@ -79,13 +79,13 @@ of the *HTML_INDENT_** constants.
 
 h3(#HtmlContainerCell_insertcell). HtmlContainerCell#insert_cell
 
-  *insert_cell*(%(arg-type)HtmlCell% cell)
+  *insert_cell*(%(arg-type)"HtmlCell":htmlcell.html% cell)
 
 Inserts new cell into the container.
 
 h3(#HtmlContainerCell_setalign). HtmlContainerCell#set_align
 
-  *set_align*(%(arg-type)HtmlTag% tag)
+  *set_align*(%(arg-type)"HtmlTag":htmltag.html% tag)
 
 Sets the container's alignment (both horizontal and vertical) according to
 the values stored in _tag_. (Tags @ALIGN@ parameter is extracted.) In fact
@@ -132,13 +132,13 @@ alignv.bmp
 
 h3(#HtmlContainerCell_setbackgroundcolour). HtmlContainerCell#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% clr)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% clr)
 
 Sets the background colour for this container.
 
 h3(#HtmlContainerCell_setborder). HtmlContainerCell#set_border
 
-  *set_border*(%(arg-type)Colour% clr1,  %(arg-type)Colour% clr2)
+  *set_border*(%(arg-type)"Colour":colour.html% clr1,  %(arg-type)"Colour":colour.html% clr2)
 
 Sets the border (frame) colours. A border is a rectangle around the container.
 
@@ -204,7 +204,7 @@ h3(#HtmlContainerCell_setwidthfloat). HtmlContainerCell#set_width_float
 
   *set_width_float*(%(arg-type)Integer% w,  %(arg-type)Integer% units)
 
-  *set_width_float*(%(arg-type)HtmlTag% tag,  %(arg-type)double% pixel_scale = 1.0)
+  *set_width_float*(%(arg-type)"HtmlTag":htmltag.html% tag,  %(arg-type)Float% pixel_scale = 1.0)
 
 Sets floating width adjustment.
 

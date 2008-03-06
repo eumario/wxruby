@@ -43,7 +43,7 @@ Constructs a mask from a bitmap and a colour that indicates the background.
 
 
 
-  *Mask.new*(%(arg-type)Bitmap% bitmap,  %(arg-type)Integer% index)
+  *Mask.new*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% index)
 
 Constructs a mask from a bitmap and a palette index that indicates the background. Not
 yet implemented for GTK.
@@ -60,15 +60,15 @@ Destroys the Mask object and the underlying bitmap data.
 
 h3(#Mask_create). Mask#create
 
- Boolean *create*(%(arg-type)Bitmap% bitmap)
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Constructs a mask from a monochrome bitmap.
 
- Boolean *create*(%(arg-type)Bitmap% bitmap,  %(arg-type)Colour% colour)
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)"Colour":colour.html% colour)
 
 Constructs a mask from a bitmap and a colour that indicates the background.
 
- Boolean *create*(%(arg-type)Bitmap% bitmap,  %(arg-type)Integer% index)
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% index)
 
 Constructs a mask from a bitmap and a palette index that indicates the background. Not
 yet implemented for GTK.

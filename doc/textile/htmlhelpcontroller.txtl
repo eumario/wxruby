@@ -288,7 +288,7 @@ h4. Parameters
 
 h3(#HtmlHelpController_createhelpframe). HtmlHelpController#create_help_frame
 
- "HtmlHelpFrame":htmlhelpframe.html *create_help_frame*(%(arg-type)HtmlHelpData% data)
+ "HtmlHelpFrame":htmlhelpframe.html *create_help_frame*(%(arg-type)"HtmlHelpData":htmlhelpdata.html% data)
 
 This protected virtual method may be overridden so that the controller
 uses slightly different frame. See _samples/html/helpview_ sample for
@@ -339,7 +339,7 @@ Displays help window and focuses index panel.
 h3(#HtmlHelpController_keywordsearch). HtmlHelpController#keyword_search
 
  Boolean *keyword_search*(%(arg-type)String% keyword, 
-                        %(arg-type)HelpSearchMode% mode = HELP_SEARCH_ALL)
+                        %(arg-type)"HelpSearchMode":helpsearchmode.html% mode = HELP_SEARCH_ALL)
 
 Displays help window, focuses search panel and starts searching.  Returns true
 if the keyword was found. Optionally it searches through the index (mode =
@@ -350,7 +350,7 @@ You should list all pages in the contents file.
 
 h3(#HtmlHelpController_readcustomization). HtmlHelpController#read_customization
 
-  *read_customization*(%(arg-type)ConfigBase% cfg,  %(arg-type)String% path = '')
+  *read_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
 
 Reads the controller's setting (position of window, etc.)
 
@@ -378,7 +378,7 @@ title of displayed HTML page).
 
 h3(#HtmlHelpController_useconfig). HtmlHelpController#use_config
 
-  *use_config*(%(arg-type)ConfigBase% config,  %(arg-type)String% rootpath = '')
+  *use_config*(%(arg-type)"ConfigBase":configbase.html% config,  %(arg-type)String% rootpath = '')
 
 Associates _config_ object with the controller.
 
@@ -394,7 +394,7 @@ default Config object if available (for details see
 
 h3(#HtmlHelpController_writecustomization). HtmlHelpController#write_customization
 
-  *write_customization*(%(arg-type)ConfigBase% cfg,  %(arg-type)String% path = '')
+  *write_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
 
 Stores controllers setting (position of window etc.)
 

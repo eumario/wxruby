@@ -65,7 +65,7 @@ h2. Methods
 
 h3(#DataFormat_wxdataformatdef). DataFormat.new
 
-  *DataFormat.new*(%(arg-type)NativeFormat% format = DF_INVALID)
+  *DataFormat.new*(%(arg-type)"NativeFormat":nativeformat.html% format = DF_INVALID)
 
 Constructs a data format object for one of the standard data formats or an
 empty data object (use "set_type":#DataFormat_settype or 
@@ -75,7 +75,7 @@ empty data object (use "set_type":#DataFormat_settype or
 
 h3(#DataFormat_wxdataformat). DataFormat.new
 
-  *DataFormat.new*(%(arg-type)Char% format)
+  *DataFormat.new*(%(arg-type)"Char":char.html% format)
 
 Constructs a data format object for a custom format identified by its name 
 _format_.
@@ -84,13 +84,13 @@ _format_.
 
 h3(#DataFormat_operatoreq). DataFormat#==
 
- Boolean *operator $==$*(%(arg-type)DataFormat% format)
+ Boolean *operator $==$*(%(arg-type)"DataFormat":dataformat.html% format)
 
 Returns true if the formats are equal.
 
 h3(#DataFormat_operatorneq). DataFormat#!=
 
- Boolean *operator $!=$*(%(arg-type)DataFormat% format)
+ Boolean *operator $!=$*(%(arg-type)"DataFormat":dataformat.html% format)
 
 Returns true if the formats are different.
 
@@ -109,13 +109,13 @@ Returns the platform-specific number identifying the format.
 
 h3(#DataFormat_setid). DataFormat#set_id
 
-  *set_id*(%(arg-type)Char% format)
+  *set_id*(%(arg-type)"Char":char.html% format)
 
 Sets the format to be the custom format identified by the given name.
 
 h3(#DataFormat_settype). DataFormat#set_type
 
-  *set_type*(%(arg-type)NativeFormat% format)
+  *set_type*(%(arg-type)"NativeFormat":nativeformat.html% format)
 
 Sets the format to the given value, which should be one of DF_XXX constants.
 

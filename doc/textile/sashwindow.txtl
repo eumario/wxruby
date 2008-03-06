@@ -74,9 +74,9 @@ h2. Methods
 
 h3(#SashWindow_new). SashWindow.new
 
-  *SashWindow.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                 %(arg-type)Size% size = DEFAULT_SIZE, 
+  *SashWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                  %(arg-type)Integer% style = CLIP_CHILDREN SW_3D, 
                  %(arg-type)String% name = "sashWindow")
 
@@ -100,7 +100,7 @@ Destructor.
 
 h3(#SashWindow_getsashvisible). SashWindow#get_sash_visible
 
- Boolean *get_sash_visible*(%(arg-type)SashEdgePosition% edge)
+ Boolean *get_sash_visible*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge)
 
 Returns true if a sash is visible on the given edge, false otherwise.
 
@@ -138,7 +138,7 @@ Gets the minimum window size in the y direction.
 
 h3(#SashWindow_hasborder). SashWindow#has_border
 
- Boolean *has_border*(%(arg-type)SashEdgePosition% edge)
+ Boolean *has_border*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge)
 
 Returns true if the sash has a border, false otherwise.
 
@@ -176,7 +176,7 @@ Sets the minimum window size in the y direction.
 
 h3(#SashWindow_setsashvisible). SashWindow#set_sash_visible
 
-  *set_sash_visible*(%(arg-type)SashEdgePosition% edge,  %(arg-type)Boolean% visible)
+  *set_sash_visible*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge,  %(arg-type)Boolean% visible)
 
 Call this function to make a sash visible or invisible on a particular edge.
 
@@ -191,7 +191,7 @@ h4. See also
 
 h3(#SashWindow_setsashborder). SashWindow#set_sash_border
 
-  *set_sash_border*(%(arg-type)SashEdgePosition% edge,  %(arg-type)Boolean% hasBorder)
+  *set_sash_border*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge,  %(arg-type)Boolean% hasBorder)
 
 Call this function to give the sash a border, or remove the border.
 

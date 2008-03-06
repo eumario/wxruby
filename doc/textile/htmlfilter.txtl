@@ -26,7 +26,7 @@ h3(#HtmlFilter_wxhtmlfilter). HtmlFilter.new
 
 h3(#HtmlFilter_canread). HtmlFilter#can_read
 
- Boolean *can_read*(%(arg-type)FSFile% file)
+ Boolean *can_read*(%(arg-type)"FSFile":fsfile.html% file)
 
 Returns true if this filter is capable of reading file _file_.
 
@@ -41,7 +41,7 @@ Example:
 
 h3(#HtmlFilter_readfile). HtmlFilter#read_file
 
- String *read_file*(%(arg-type)FSFile% file)
+ String *read_file*(%(arg-type)"FSFile":fsfile.html% file)
 
 Reads the file and returns string with HTML document.
 

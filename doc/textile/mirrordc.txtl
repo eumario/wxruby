@@ -23,7 +23,7 @@ h2. Methods
 
 h3(#MirrorDC_wxmirrordc). MirrorDC.new
 
-  *MirrorDC.new*(%(arg-type)DC% dc,  %(arg-type)Boolean% mirror)
+  *MirrorDC.new*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Boolean% mirror)
 
 Creates a (maybe) mirrored DC associated with the real dc. Everything
 drawn on MirrorDC will appear (and maybe mirrored) on dc.

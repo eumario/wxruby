@@ -49,7 +49,7 @@ h2. Methods
 
 h3(#DataObjectSimple_wxdataobjectsimple). DataObjectSimple.new
 
-  *DataObjectSimple.new*(%(arg-type)DataFormat% format = FormatInvalid)
+  *DataObjectSimple.new*(%(arg-type)"DataFormat":dataformat.html% format = FormatInvalid)
 
 Constructor accepts the supported format (none by default) which may also be
 set later with "set_format":#DataObjectSimple_setformat.
@@ -63,7 +63,7 @@ that the format is supported in both directions.
 
 h3(#DataObjectSimple_setformat). DataObjectSimple#set_format
 
-  *set_format*(%(arg-type)DataFormat% format)
+  *set_format*(%(arg-type)"DataFormat":dataformat.html% format)
 
 Sets the supported format.
 

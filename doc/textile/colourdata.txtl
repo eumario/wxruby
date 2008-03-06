@@ -76,7 +76,7 @@ The default value is true.
 
 h3(#ColourData_setcolour). ColourData#set_colour
 
-  *set_colour*(%(arg-type)Colour% colour)
+  *set_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the default colour for the colour dialog.
 
@@ -85,7 +85,7 @@ The default colour is black.
 
 h3(#ColourData_setcustomcolour). ColourData#set_custom_colour
 
-  *set_custom_colour*(%(arg-type)Integer% i,  %(arg-type)Colour% colour)
+  *set_custom_colour*(%(arg-type)Integer% i,  %(arg-type)"Colour":colour.html% colour)
 
 Sets the _i_th custom colour for the colour dialog. _i_ should
 be an integer between 0 and 15.
@@ -95,7 +95,7 @@ The default custom colours are invalid colours.
 
 h3(#ColourData_assign). ColourData#=
 
-  *operator $=$*(%(arg-type)ColourData% data)
+  *operator $=$*(%(arg-type)"ColourData":colourdata.html% data)
 
 Assignment operator for the colour data.
 

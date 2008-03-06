@@ -45,7 +45,7 @@ h2. Methods
 
 h3(#DropFilesEvent_new). DropFilesEvent.new
 
-  *DropFilesEvent.new*(%(arg-type)TYPE% id = 0,  %(arg-type)Integer% noFiles = 0, 
+  *DropFilesEvent.new*(%(arg-type)"TYPE":type.html% id = 0,  %(arg-type)Integer% noFiles = 0, 
                      %(arg-type)String% files = nil)
 
 Constructor.

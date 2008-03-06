@@ -39,9 +39,9 @@ h2. Methods
 
 h3(#WizardPageSimple_wxwizardpagesimple). WizardPageSimple.new
 
-  *WizardPageSimple.new*(%(arg-type)Wizard% parent = nil,  %(arg-type)WizardPage% prev = nil, 
-                       %(arg-type)WizardPage% next = nil, 
-                       %(arg-type)Bitmap% bitmap = NullBitmap)
+  *WizardPageSimple.new*(%(arg-type)"Wizard":wizard.html% parent = nil,  %(arg-type)"WizardPage":wizardpage.html% prev = nil, 
+                       %(arg-type)"WizardPage":wizardpage.html% next = nil, 
+                       %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap)
 
 Constructor takes the previous and next pages. They may be modified later by
 "set_prev()":#WizardPageSimple_setprev() or 
@@ -49,19 +49,19 @@ Constructor takes the previous and next pages. They may be modified later by
 
 h3(#WizardPageSimple_setprev). WizardPageSimple#set_prev
 
-  *set_prev*(%(arg-type)WizardPage% prev)
+  *set_prev*(%(arg-type)"WizardPage":wizardpage.html% prev)
 
 Sets the previous page.
 
 h3(#WizardPageSimple_setnext). WizardPageSimple#set_next
 
-  *set_next*(%(arg-type)WizardPage% next)
+  *set_next*(%(arg-type)"WizardPage":wizardpage.html% next)
 
 Sets the next page.
 
 h3(#WizardPageSimple_chain). WizardPageSimple#chain
 
-  *chain*(%(arg-type)WizardPageSimple% first,  %(arg-type)WizardPageSimple% second)
+  *chain*(%(arg-type)"WizardPageSimple":wizardpagesimple.html% first,  %(arg-type)"WizardPageSimple":wizardpagesimple.html% second)
 
 A convenience function to make the pages follow each other.
 

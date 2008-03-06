@@ -45,7 +45,7 @@ h2. Methods
 
 h3(#WizardEvent_wxwizardevent). WizardEvent.new
 
-  *WizardEvent.new*(%(arg-type)EventType% type = EVT_NULL,  %(arg-type)Integer% id = -1, 
+  *WizardEvent.new*(%(arg-type)"EventType":eventtype.html% type = EVT_NULL,  %(arg-type)Integer% id = -1, 
                   %(arg-type)Boolean% direction = true)
 
 Constructor. It is not normally used by the user code as the objects of this

@@ -52,11 +52,11 @@ h2. Methods
 
 h3(#RadioButton_new). RadioButton.new
 
-  *RadioButton.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                  %(arg-type)Point% pos = DEFAULT_POSITION, 
-                  %(arg-type)Size% size = DEFAULT_SIZE, 
+  *RadioButton.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                  %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                  %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                   %(arg-type)Integer% style = 0, 
-                  %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                  %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                   %(arg-type)String% name = "radioButton")
 
 Constructor, creating and showing a radio button.
@@ -82,11 +82,11 @@ Destructor, destroying the radio button item.
 
 h3(#RadioButton_create). RadioButton#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "radioButton")
 
 Creates the choice for two-step construction. See "RadioButton.new":radiobutton.html#RadioButton_new for

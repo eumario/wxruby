@@ -85,7 +85,7 @@ Destructor.
 
 h3(#XmlResource_addhandler). XmlResource#add_handler
 
-  *add_handler*(%(arg-type)XmlResourceHandler% handler)
+  *add_handler*(%(arg-type)"XmlResourceHandler":xmlresourcehandler.html% handler)
 
 Initializes only a specific handler (or custom handler). Convention says
 that the handler name is equal to the control's name plus 'XmlHandler', for example
@@ -96,8 +96,8 @@ all controls used within the resource.
 
 h3(#XmlResource_attachunknowncontrol). XmlResource#attach_unknown_control
 
- Boolean *attach_unknown_control*(%(arg-type)String% name, %(arg-type)Window% control, 
-                                %(arg-type)Window% parent = nil)
+ Boolean *attach_unknown_control*(%(arg-type)String% name, %(arg-type)"Window":window.html% control, 
+                                %(arg-type)"Window":window.html% parent = nil)
 
 Attaches an unknown control to the given panel/window/dialog.
 Unknown controls are used in conjunction with @<object class="unknown">@.
@@ -143,7 +143,7 @@ Returns version information (a.b.c.d = d+ 256*c + 256*b + 256*a).
 
 h3(#XmlResource_getxmlid). XmlResource#get_xrcid
 
- Integer *get_xrcid*(%(arg-type)Char% str_id)
+ Integer *get_xrcid*(%(arg-type)"Char":char.html% str_id)
 
 Returns a numeric ID that is equivalent to the string ID used in an XML
 resource. To be used in event tables.
@@ -176,13 +176,13 @@ Loads a bitmap resource from a file.
 
 h3(#XmlResource_loaddialog). XmlResource#load_dialog
 
- "Dialog":dialog.html *load_dialog*(%(arg-type)Window% parent, %(arg-type)String% name)
+ "Dialog":dialog.html *load_dialog*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a dialog. _dlg_ points to a parent window (if any).
 
 h3(#XmlResource_loaddialogsubclass). XmlResource#load_dialog_subclass
 
- Boolean *load_dialog_subclass*(%(arg-type)Dialog% dlg, %(arg-type)Window% parent, %(arg-type)String% name)
+ Boolean *load_dialog_subclass*(%(arg-type)"Dialog":dialog.html% dlg, %(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a dialog. _dlg_ points to parent window (if any).
 
@@ -200,13 +200,13 @@ Example:
 
 h3(#XmlResource_loadframe). XmlResource#load_frame
 
- "Frame":frame.html *load_frame*(%(arg-type)Window% parent, %(arg-type)String% name)
+ "Frame":frame.html *load_frame*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a frame.
 
 h3(#XmlResource_loadframesubclass). XmlResource#load_frame_subclass
 
- Boolean *load_frame_subclass*(%(arg-type)Frame% frame, %(arg-type)Window% parent, %(arg-type)String% name)
+ Boolean *load_frame_subclass*(%(arg-type)"Frame":frame.html% frame, %(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a frame. This form is used to finish creation of an already existing instance.
 
@@ -227,7 +227,7 @@ Loads menu from resource. Returns NULL on failure.
 
 h3(#XmlResource_loadmenubar). XmlResource#load_menu_bar
 
- "MenuBar":menubar.html *load_menu_bar*(%(arg-type)Window% parent, %(arg-type)String% name)
+ "MenuBar":menubar.html *load_menu_bar*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a menubar from resource. Returns NULL on failure.
 
@@ -238,13 +238,13 @@ Loads a menubar from resource. Returns NULL on failure.
 
 h3(#XmlResource_loadpanel). XmlResource#load_panel
 
- "Panel":panel.html *load_panel*(%(arg-type)Window% parent, %(arg-type)String% name)
+ "Panel":panel.html *load_panel*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a panel. _panel_ points to parent window (if any).
 
 h3(#XmlResource_loadpanelsubclass). XmlResource#load_panel_subclass
 
- Boolean *load_panel_subclass*(%(arg-type)Panel% panel, %(arg-type)Window% parent, %(arg-type)String% name)
+ Boolean *load_panel_subclass*(%(arg-type)"Panel":panel.html% panel, %(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a panel. _panel_ points to parent window (if any). This form
 is used to finish creation of an already existing instance.
@@ -252,14 +252,14 @@ is used to finish creation of an already existing instance.
 
 h3(#XmlResource_loadtoolbar). XmlResource#load_tool_bar
 
- "ToolBar":toolbar.html *load_tool_bar*(%(arg-type)Window% parent, %(arg-type)String% name)
+ "ToolBar":toolbar.html *load_tool_bar*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a toolbar.
 
 
 h3(#XmlResource_set). XmlResource#set
 
- "XmlResource":xmlresource.html *set*(%(arg-type)XmlResource% res)
+ "XmlResource":xmlresource.html *set*(%(arg-type)"XmlResource":xmlresource.html% res)
 
 Sets the global resources object and returns a pointer to the previous one (may be NULL).
 

@@ -205,11 +205,11 @@ h2. Methods
 
 h3(#TextCtrl_new). TextCtrl.new
 
-  *TextCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+  *TextCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style = 0, 
-               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = TextCtrlNameStr)
 
 Constructor, creating and showing a text control.
@@ -318,11 +318,11 @@ Copies the selected text to the clipboard under Motif and MS Windows.
 
 h3(#TextCtrl_create). TextCtrl#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = TextCtrlNameStr)
 
 Creates the text control for two-step construction. Derived classes
@@ -345,7 +345,7 @@ Resets the internal `modified' flag as if the current edits had been saved.
 
 h3(#TextCtrl_emulatekeypress). TextCtrl#emulate_key_press
 
- Boolean *emulate_key_press*(%(arg-type)KeyEvent% event)
+ Boolean *emulate_key_press*(%(arg-type)"KeyEvent":keyevent.html% event)
 
 This functions inserts into the control the character which would have been
 inserted if the given key event had occurred in the text control. The
@@ -500,7 +500,7 @@ returned string is empty.
 
 h3(#TextCtrl_getstyle). TextCtrl#get_style
 
- Boolean *get_style*(%(arg-type)Integer% position,  %(arg-type)TextAttr% style)
+ Boolean *get_style*(%(arg-type)Integer% position,  %(arg-type)"TextAttr":textattr.html% style)
 
 Returns the style at this position in the text control. Not all platforms
 support this function.
@@ -527,7 +527,7 @@ sequence in the native control.
 
 h3(#TextCtrl_hittest). TextCtrl#hit_test
 
- [ Integer result, Integer col, Integer row ] = *hit_test*(%(arg-type)Point% pt)
+ [ Integer result, Integer col, Integer row ] = *hit_test*(%(arg-type)"Point":point.html% pt)
 
 This function finds the character at the specified position expressed in
 pixels. If the return code is not @TE_HT_UNKNOWN@ the row and column
@@ -629,7 +629,7 @@ h4. See also
 
 h3(#TextCtrl_ondropfiles). TextCtrl#on_drop_files
 
-  *on_drop_files*(%(arg-type)DropFilesEvent% event)
+  *on_drop_files*(%(arg-type)"DropFilesEvent":dropfilesevent.html% event)
 
 This event handler function implements default drag and drop behaviour, which
 is to load the first dropped file into the control.
@@ -723,7 +723,7 @@ h4. Return value
 
 h3(#TextCtrl_setdefaultstyle). TextCtrl#set_default_style
 
- Boolean *set_default_style*(%(arg-type)TextAttr% style)
+ Boolean *set_default_style*(%(arg-type)"TextAttr":textattr.html% style)
 
 Changes the default style to use for the new text which is going to be added
 to the control using "write_text":#TextCtrl_writetext or "append_text":#TextCtrl_appendtext.
@@ -834,7 +834,7 @@ h4. Parameters
 h3(#TextCtrl_setstyle). TextCtrl#set_style
 
  Boolean *set_style*(%(arg-type)Integer% start,  %(arg-type)Integer% end, 
-                   %(arg-type)TextAttr% style)
+                   %(arg-type)"TextAttr":textattr.html% style)
 
 Changes the style of the given range. If any attribute within _style_ is
 not set, the corresponding attribute from "get_default_style()":#TextCtrl_getdefaultstyle is used.

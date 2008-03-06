@@ -125,11 +125,11 @@ h3(#Dialog_new). Dialog.new
 
   *Dialog.new*()
 
-  *Dialog.new*(%(arg-type)Window% parent,  
+  *Dialog.new*(%(arg-type)"Window":window.html% parent,  
                %(arg-type)Integer% id,  
                %(arg-type)String% title, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
                %(arg-type)String% name = "dialogBox")
 
@@ -180,9 +180,9 @@ h4. Parameters
 
 h3(#Dialog_create). Dialog#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
                 %(arg-type)String% name = "dialogBox")
 
@@ -347,7 +347,7 @@ Returns true if the dialog box is modal, false otherwise.
 
 h3(#Dialog_onsyscolourchanged). Dialog#on_sys_colour_changed
 
-  *on_sys_colour_changed*(%(arg-type)SysColourChangedEvent% event)
+  *on_sys_colour_changed*(%(arg-type)"SysColourChangedEvent":syscolourchangedevent.html% event)
 
 The default handler for EVT_SYS_COLOUR_CHANGED.
 
@@ -387,7 +387,7 @@ By default, the escape id is the special value ID_ANY meaning that ID_CANCEL but
 
 h3(#Dialog_seticon). Dialog#set_icon
 
-  *set_icon*(%(arg-type)Icon% icon)
+  *set_icon*(%(arg-type)"Icon":icon.html% icon)
 
 Sets the icon for this dialog.
 
@@ -401,7 +401,7 @@ h4. See also
 
 h3(#Dialog_seticons). Dialog#set_icons
 
-  *set_icons*(%(arg-type)IconBundle% icons)
+  *set_icons*(%(arg-type)"IconBundle":iconbundle.html% icons)
 
 Sets the icons for this dialog.
 

@@ -58,9 +58,9 @@ h2. Methods
 
 h3(#MiniFrame_new). MiniFrame.new
 
-  *MiniFrame.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+  *MiniFrame.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
                 %(arg-type)String% name = "frame")
 
@@ -95,9 +95,9 @@ Destructor. Destroys all child windows and menu bar if present.
 
 h3(#MiniFrame_create). MiniFrame#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
                 %(arg-type)String% name = "frame")
 

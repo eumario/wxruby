@@ -108,7 +108,7 @@ h2. Methods
 
 h3(#AuiPaneInfo_wxauipaneinfo). AuiPaneInfo.new
 
-  *AuiPaneInfo.new*(%(arg-type)AuiPaneInfo% c)
+  *AuiPaneInfo.new*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% c)
 
 Copy constructor.
 
@@ -117,7 +117,7 @@ Copy constructor.
 
 h3(#AuiPaneInfo_bestsize). AuiPaneInfo#best_size
 
- "AuiPaneInfo":auipaneinfo.html *best_size*(%(arg-type)Size% size)
+ "AuiPaneInfo":auipaneinfo.html *best_size*(%(arg-type)"Size":size.html% size)
 
  "AuiPaneInfo":auipaneinfo.html *best_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -222,7 +222,7 @@ Floatable() sets whether the user will be able to undock a pane and turn it into
 
 h3(#AuiPaneInfo_floatingposition). AuiPaneInfo#floating_position
 
- "AuiPaneInfo":auipaneinfo.html *floating_position*(%(arg-type)Point% pos)
+ "AuiPaneInfo":auipaneinfo.html *floating_position*(%(arg-type)"Point":point.html% pos)
 
  "AuiPaneInfo":auipaneinfo.html *floating_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -230,7 +230,7 @@ FloatingPosition() sets the position of the floating pane.
 
 h3(#AuiPaneInfo_floatingsize). AuiPaneInfo#floating_size
 
- "AuiPaneInfo":auipaneinfo.html *floating_size*(%(arg-type)Size% size)
+ "AuiPaneInfo":auipaneinfo.html *floating_size*(%(arg-type)"Size":size.html% size)
 
  "AuiPaneInfo":auipaneinfo.html *floating_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -407,7 +407,7 @@ LeftDockable() indicates whether a pane can be docked on the left of the frame.
 
 h3(#AuiPaneInfo_maxsize). AuiPaneInfo#max_size
 
- "AuiPaneInfo":auipaneinfo.html *max_size*(%(arg-type)Size% size)
+ "AuiPaneInfo":auipaneinfo.html *max_size*(%(arg-type)"Size":size.html% size)
 
  "AuiPaneInfo":auipaneinfo.html *max_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -421,7 +421,7 @@ MaximizeButton() indicates that a maximize button should be drawn for the pane.
 
 h3(#AuiPaneInfo_minsize). AuiPaneInfo#min_size
 
- "AuiPaneInfo":auipaneinfo.html *min_size*(%(arg-type)Size% size)
+ "AuiPaneInfo":auipaneinfo.html *min_size*(%(arg-type)"Size":size.html% size)
 
  "AuiPaneInfo":auipaneinfo.html *min_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -489,7 +489,7 @@ Row() determines the row of the docked pane.
 
 h3(#AuiPaneInfo_safeset). AuiPaneInfo#safe_set
 
-  *safe_set*(%(arg-type)AuiPaneInfo% source)
+  *safe_set*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% source)
 
 Write the safe parts of a newly loaded PaneInfo structure "source" into "this"
 used on loading perspectives etc.
@@ -527,13 +527,13 @@ TopDockable() indicates whether a pane can be docked at the top of the frame.
 
 h3(#AuiPaneInfo_window). AuiPaneInfo#window
 
- "AuiPaneInfo":auipaneinfo.html *window*(%(arg-type)Window% w)
+ "AuiPaneInfo":auipaneinfo.html *window*(%(arg-type)"Window":window.html% w)
 
 Window() assigns the window pointer that the AuiPaneInfo should use. This normally does not need to be specified, as the window pointer is automatically assigned to the AuiPaneInfo structure as soon as it is added to the manager.
 
 h3(#AuiPaneInfo_operatorassign). AuiPaneInfo::operator=
 
- "AuiPaneInfo& operator":auipaneinfo& operator.html *operator=*(%(arg-type)AuiPaneInfo% c)
+ "AuiPaneInfo& operator":auipaneinfo& operator.html *operator=*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% c)
 
 Makes a copy of the AuiPaneInfo object.
 

@@ -38,7 +38,7 @@ h2. Methods
 
 h3(#FindDialogEvent_wxfinddialogevent). FindDialogEvent.new
 
-  *FindDialogEvent.new*(%(arg-type)EventType% commandType = EVT_NULL,  %(arg-type)Integer% id = 0)
+  *FindDialogEvent.new*(%(arg-type)"EventType":eventtype.html% commandType = EVT_NULL,  %(arg-type)Integer% id = 0)
 
 Constuctor used by Widgets only.
 

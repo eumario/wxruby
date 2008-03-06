@@ -75,31 +75,31 @@ h2. Methods
 
 h3(#GLCanvas_constr). GLCanvas.new
 
-  *GLCanvas.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+  *GLCanvas.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style=0, 
                %(arg-type)String% name="GLCanvas", 
                %(arg-type)Integer% attribList = 0, 
-               %(arg-type)Palette% palette = NullPalette)
+               %(arg-type)"Palette":palette.html% palette = NullPalette)
 
-  *GLCanvas.new*(%(arg-type)Window% parent,  %(arg-type)GLContext% sharedContext, 
+  *GLCanvas.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"GLContext":glcontext.html% sharedContext, 
                %(arg-type)Integer% id = -1, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style=0, 
                %(arg-type)String% name="GLCanvas", 
                %(arg-type)Integer% attribList = 0, 
-               %(arg-type)Palette% palette = NullPalette)
+               %(arg-type)"Palette":palette.html% palette = NullPalette)
 
-  *GLCanvas.new*(%(arg-type)Window% parent,  %(arg-type)GLCanvas% sharedCanvas, 
+  *GLCanvas.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"GLCanvas":glcanvas.html% sharedCanvas, 
                %(arg-type)Integer% id = -1, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style=0, 
                %(arg-type)String% name="GLCanvas", 
                %(arg-type)Integer% attribList = 0, 
-               %(arg-type)Palette% palette = NullPalette)
+               %(arg-type)"Palette":palette.html% palette = NullPalette)
 
 Constructor.
 
@@ -151,7 +151,7 @@ Note that this function may only be called after the window has been shown.
 
 h3(#GLCanvas_setcolour). GLCanvas#set_colour
 
-  *set_colour*(%(arg-type)char% colour)
+  *set_colour*(%(arg-type)"char":char.html% colour)
 
 Sets the current colour for this window, using the Widgets colour database to find a named colour.
 

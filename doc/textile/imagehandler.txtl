@@ -67,7 +67,7 @@ Gets the file extension associated with this handler.
 
 h3(#ImageHandler_getimagecount). ImageHandler#get_image_count
 
- Integer *get_image_count*(%(arg-type)InputStream% stream)
+ Integer *get_image_count*(%(arg-type)"InputStream":inputstream.html% stream)
 
 If the image file contains more than one image and the image handler is capable 
 of retrieving these individually, this function will return the number of
@@ -97,7 +97,7 @@ Gets the MIME type associated with this handler.
 
 h3(#ImageHandler_loadfile). ImageHandler#load_file
 
- Boolean *load_file*(%(arg-type)Image% image,  %(arg-type)InputStream% stream, 
+ Boolean *load_file*(%(arg-type)"Image":image.html% image,  %(arg-type)"InputStream":inputstream.html% stream, 
                    %(arg-type)Boolean% verbose=true, 
                    %(arg-type)Integer% index=0)
 
@@ -125,7 +125,7 @@ h4. See also
 
 h3(#ImageHandler_savefile). ImageHandler#save_file
 
- Boolean *save_file*(%(arg-type)Image% image,  %(arg-type)OutputStream% stream)
+ Boolean *save_file*(%(arg-type)"Image":image.html% image,  %(arg-type)"OutputStream":outputstream.html% stream)
 
 Saves a image in the output stream.
 

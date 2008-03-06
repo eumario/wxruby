@@ -32,7 +32,7 @@ h2. Class methods
 
 h3(#WindowDisabler_disable). WindowDisabler.disable
 
-  *WindowDisabler.disable*(%(arg-type)Window% winToSkip = nil) { ... }
+  *WindowDisabler.disable*(%(arg-type)"Window":window.html% winToSkip = nil) { ... }
 
 Disables all top level windows of the applications with the exception of 
 _winToSkip_ if it is not @nil@. The passed block is then executed, and

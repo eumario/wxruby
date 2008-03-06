@@ -50,7 +50,7 @@ h2. Methods
 
 h3(#MenuEvent_new). MenuEvent.new
 
-  *MenuEvent.new*(%(arg-type)TYPE% id = 0,  %(arg-type)Integer% id = 0,  %(arg-type)Menu% menu = nil)
+  *MenuEvent.new*(%(arg-type)"TYPE":type.html% id = 0,  %(arg-type)Integer% id = 0,  %(arg-type)"Menu":menu.html% menu = nil)
 
 Constructor.
 

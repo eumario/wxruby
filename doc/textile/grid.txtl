@@ -248,9 +248,9 @@ h2. Methods
 
 h3(#Grid_new). Grid.new
 
-  *Grid.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-           %(arg-type)Point% pos = DEFAULT_POSITION, 
-           %(arg-type)Size% size = DEFAULT_SIZE, 
+  *Grid.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+           %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+           %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
            %(arg-type)Integer% style = WANTS_CHARS, 
            %(arg-type)String% name = PanelNameStr)
 
@@ -386,8 +386,8 @@ screen flicker. The final EndBatch will cause the grid to be repainted.
 
 h3(#Grid_blocktodevicerect). Grid#block_to_device_rect
 
- "Rect":rect.html *block_to_device_rect*(%(arg-type)GridCellCoords% topLeft, 
-                             %(arg-type)GridCellCoords% bottomRight)
+ "Rect":rect.html *block_to_device_rect*(%(arg-type)"GridCellCoords":gridcellcoords.html% topLeft, 
+                             %(arg-type)"GridCellCoords":gridcellcoords.html% bottomRight)
 
 This function returns the rectangle that encloses the block of cells
 limited by TopLeft and BottomRight cell in device coords and clipped
@@ -455,7 +455,7 @@ h3(#Grid_celltorect). Grid#cell_to_rect
 
  "Rect":rect.html *cell_to_rect*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
- "Rect":rect.html *cell_to_rect*(%(arg-type)GridCellCoords% coords)
+ "Rect":rect.html *cell_to_rect*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
 
 Return the rectangle corresponding to the grid cell's size and position in logical
 coordinates.
@@ -743,7 +743,7 @@ h3(#Grid_getcellvalue). Grid#get_cell_value
 
  String *get_cell_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
- String *get_cell_value*(%(arg-type)GridCellCoords% coords)
+ String *get_cell_value*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
 
 Returns the string contained in the cell at the specified location. For simple applications where a
 grid object automatically uses a default grid table of string values you use this function together
@@ -912,7 +912,7 @@ h3(#Grid_getdefaulteditorforcell). Grid#get_default_editor_for_cell
  "GridCellEditor":gridcelleditor.html *get_default_editor_for_cell*(%(arg-type)Integer% row, 
                                               %(arg-type)Integer% col)
 
- "GridCellEditor":gridcelleditor.html *get_default_editor_for_cell*(%(arg-type)GridCellCoords% c)
+ "GridCellEditor":gridcelleditor.html *get_default_editor_for_cell*(%(arg-type)"GridCellCoords":gridcellcoords.html% c)
 
 
 
@@ -1357,7 +1357,7 @@ h3(#Grid_isinselection). Grid#is_in_selection
 
  Boolean *is_in_selection*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
- Boolean *is_in_selection*(%(arg-type)GridCellCoords% coords)
+ Boolean *is_in_selection*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
 
 Is this cell currently selected.
 
@@ -1385,7 +1385,7 @@ h3(#Grid_isvisible). Grid#is_visible
  Boolean *is_visible*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
                     %(arg-type)Boolean% wholeCellVisible = true)
 
- Boolean *is_visible*(%(arg-type)GridCellCoords% coords, 
+ Boolean *is_visible*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords, 
                     %(arg-type)Boolean% wholeCellVisible = true)
 
 Returns true if a cell is either wholly visible (the default) or at least partially
@@ -1397,7 +1397,7 @@ h3(#Grid_makecellvisible). Grid#make_cell_visible
 
   *make_cell_visible*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-  *make_cell_visible*(%(arg-type)GridCellCoords% coords)
+  *make_cell_visible*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
 
 Brings the specified cell into the visible grid cell area with minimal scrolling. Does
 nothing if the cell is already visible.
@@ -1540,8 +1540,8 @@ This function is called for PgUp keypresses.
 
 h3(#Grid_registerdatatype). Grid#register_data_type
 
-  *register_data_type*(%(arg-type)String% typeName,  %(arg-type)GridCellRenderer% renderer, 
-                     %(arg-type)GridCellEditor% editor)
+  *register_data_type*(%(arg-type)String% typeName,  %(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer, 
+                     %(arg-type)"GridCellEditor":gridcelleditor.html% editor)
 
 Methods for a registry for mapping data types to Renderers/Editors
 
@@ -1573,7 +1573,7 @@ h3(#Grid_selectblock). Grid#select_block
                %(arg-type)Integer% rightCol, 
                %(arg-type)Boolean% addToSelected = false)
 
-  *select_block*(%(arg-type)GridCellCoords% topLeft, %(arg-type)GridCellCoords% bottomRight, 
+  *select_block*(%(arg-type)"GridCellCoords":gridcellcoords.html% topLeft, %(arg-type)"GridCellCoords":gridcellcoords.html% bottomRight, 
                %(arg-type)Boolean% addToSelected = false)
 
 Selects a rectangular block of cells. If addToSelected is false then any existing selection will be
@@ -1626,14 +1626,14 @@ Vertical alignment should be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
 h3(#Grid_setcellbackgroundcolour). Grid#set_cell_background_colour
 
   *set_cell_background_colour*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
-                             %(arg-type)Colour% colour)
+                             %(arg-type)"Colour":colour.html% colour)
 
 
 
 h3(#Grid_setcelleditor). Grid#set_cell_editor
 
   *set_cell_editor*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
-                  %(arg-type)GridCellEditor% editor)
+                  %(arg-type)"GridCellEditor":gridcelleditor.html% editor)
 
 Sets the editor for the grid cell at the specified location.
 The grid will take ownership of the pointer.
@@ -1645,7 +1645,7 @@ the "Grid overview":gridoverview.html for more information about cell editors an
 
 h3(#Grid_setcellfont). Grid#set_cell_font
 
-  *set_cell_font*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)Font% font)
+  *set_cell_font*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)"Font":font.html% font)
 
 Sets the font for text in the grid cell at the specified location.
 
@@ -1654,7 +1654,7 @@ Sets the font for text in the grid cell at the specified location.
 h3(#Grid_setcellrenderer). Grid#set_cell_renderer
 
   *set_cell_renderer*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
-                    %(arg-type)GridCellRenderer% renderer)
+                    %(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer)
 
 Sets the renderer for the grid cell at the specified location.
 The grid will take ownership of the pointer.
@@ -1667,11 +1667,11 @@ the "Grid overview":gridoverview.html for more information about cell editors an
 h3(#Grid_setcelltextcolour). Grid#set_cell_text_colour
 
   *set_cell_text_colour*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
-                       %(arg-type)Colour% colour)
+                       %(arg-type)"Colour":colour.html% colour)
 
-  *set_cell_text_colour*(%(arg-type)Colour% val,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
+  *set_cell_text_colour*(%(arg-type)"Colour":colour.html% val,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-  *set_cell_text_colour*(%(arg-type)Colour% colour)
+  *set_cell_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the text colour for the grid cell at the specified location.
 
@@ -1681,7 +1681,7 @@ h3(#Grid_setcellvalue). Grid#set_cell_value
 
   *set_cell_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)String% s)
 
-  *set_cell_value*(%(arg-type)GridCellCoords% coords,  %(arg-type)String% s)
+  *set_cell_value*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords,  %(arg-type)String% s)
 
   *set_cell_value*(%(arg-type)String% val,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
 
@@ -1702,7 +1702,7 @@ and the "Grid overview":gridoverview.html for more information.
 
 h3(#Grid_setcolattr). Grid#set_col_attr
 
-  *set_col_attr*(%(arg-type)Integer% col,  %(arg-type)GridCellAttr% attr)
+  *set_col_attr*(%(arg-type)Integer% col,  %(arg-type)"GridCellAttr":gridcellattr.html% attr)
 
 Sets the cell attributes for all cells in the specified column.
 
@@ -1842,7 +1842,7 @@ Vertical alignment should be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
 
 h3(#Grid_setdefaultcellbackgroundcolour). Grid#set_default_cell_background_colour
 
-  *set_default_cell_background_colour*(%(arg-type)Colour% colour)
+  *set_default_cell_background_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the default background colour for grid cells.
 
@@ -1850,7 +1850,7 @@ Sets the default background colour for grid cells.
 
 h3(#Grid_setdefaultcellfont). Grid#set_default_cell_font
 
-  *set_default_cell_font*(%(arg-type)Font% font)
+  *set_default_cell_font*(%(arg-type)"Font":font.html% font)
 
 Sets the default font to be used for grid cell text.
 
@@ -1858,7 +1858,7 @@ Sets the default font to be used for grid cell text.
 
 h3(#Grid_setdefaultcelltextcolour). Grid#set_default_cell_text_colour
 
-  *set_default_cell_text_colour*(%(arg-type)Colour% colour)
+  *set_default_cell_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the current default colour for grid cell text.
 
@@ -1866,7 +1866,7 @@ Sets the current default colour for grid cell text.
 
 h3(#Grid_setdefaulteditor). Grid#set_default_editor
 
-  *set_default_editor*(%(arg-type)GridCellEditor% editor)
+  *set_default_editor*(%(arg-type)"GridCellEditor":gridcelleditor.html% editor)
 
 Sets the default editor for grid cells. The grid will take ownership of the pointer.
 
@@ -1877,7 +1877,7 @@ the "Grid overview":gridoverview.html for more information about cell editors an
 
 h3(#Grid_setdefaultrenderer). Grid#set_default_renderer
 
-  *set_default_renderer*(%(arg-type)GridCellRenderer% renderer)
+  *set_default_renderer*(%(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer)
 
 Sets the default renderer for grid cells. The grid will take ownership of the pointer.
 
@@ -1915,7 +1915,7 @@ This function calls "Grid#make_cell_visible":grid.html#Grid_makecellvisible.
 
 h3(#Grid_setgridlinecolour). Grid#set_grid_line_colour
 
-  *set_grid_line_colour*(%(arg-type)Colour% colour)
+  *set_grid_line_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the colour used to draw grid lines.
 
@@ -1923,7 +1923,7 @@ Sets the colour used to draw grid lines.
 
 h3(#Grid_setlabelbackgroundcolour). Grid#set_label_background_colour
 
-  *set_label_background_colour*(%(arg-type)Colour% colour)
+  *set_label_background_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the background colour for row and column labels.
 
@@ -1931,7 +1931,7 @@ Sets the background colour for row and column labels.
 
 h3(#Grid_setlabelfont). Grid#set_label_font
 
-  *set_label_font*(%(arg-type)Font% font)
+  *set_label_font*(%(arg-type)"Font":font.html% font)
 
 Sets the font for row and column labels.
 
@@ -1939,7 +1939,7 @@ Sets the font for row and column labels.
 
 h3(#Grid_setlabeltextcolour). Grid#set_label_text_colour
 
-  *set_label_text_colour*(%(arg-type)Colour% colour)
+  *set_label_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the colour for row and column label text.
 
@@ -1981,7 +1981,7 @@ See also "Grid#is_read_only":grid.html#Grid_isreadonly.
 
 h3(#Grid_setrowattr). Grid#set_row_attr
 
-  *set_row_attr*(%(arg-type)Integer% row,  %(arg-type)GridCellAttr% attr)
+  *set_row_attr*(%(arg-type)Integer% row,  %(arg-type)"GridCellAttr":gridcellattr.html% attr)
 
 Sets the cell attributes for all cells in the specified row.
 See the "GridCellAttr":gridcellattr.html class for more information
@@ -2092,13 +2092,13 @@ h4. See also
 
 h3(#Grid_setselectionbackground). Grid#set_selection_background
 
-  *set_selection_background*(%(arg-type)Colour% c)
+  *set_selection_background*(%(arg-type)"Colour":colour.html% c)
 
 
 
 h3(#Grid_setselectionforeground). Grid#set_selection_foreground
 
-  *set_selection_foreground*(%(arg-type)Colour% c)
+  *set_selection_foreground*(%(arg-type)"Colour":colour.html% c)
 
 
 
@@ -2118,7 +2118,7 @@ h4. Parameters
 
 h3(#Grid_settable). Grid#set_table
 
- Boolean *set_table*(%(arg-type)GridTableBase% table,  %(arg-type)Boolean% takeOwnership = false, 
+ Boolean *set_table*(%(arg-type)"GridTableBase":gridtablebase.html% table,  %(arg-type)Boolean% takeOwnership = false, 
                    %(arg-type)Grid::GridSelectionModes% selmode = Grid::GridSelectCells)
 
 Passes a pointer to a custom grid table to be used by the grid. This should be called

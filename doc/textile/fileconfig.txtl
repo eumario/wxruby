@@ -27,7 +27,7 @@ h2. Methods
 
 h3(#FileConfig_new). FileConfig.new
 
-  *FileConfig.new*(%(arg-type)InputStream% is,  %(arg-type)MBConv% conv = ConvUTF8)
+  *FileConfig.new*(%(arg-type)"InputStream":inputstream.html% is,  %(arg-type)"MBConv":mbconv.html% conv = ConvUTF8)
 
 Read the config data from the specified stream instead of the associated file,
 as usual.
@@ -39,7 +39,7 @@ h4. See also
 
 h3(#FileConfig_save). FileConfig#save
 
- Boolean *save*(%(arg-type)OutputStream% os,  %(arg-type)MBConv% conv = ConvUTF8)
+ Boolean *save*(%(arg-type)"OutputStream":outputstream.html% os,  %(arg-type)"MBConv":mbconv.html% conv = ConvUTF8)
 
 Saves all config data to the given stream, returns  if data was saved
 successfully or  on error.

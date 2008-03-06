@@ -48,7 +48,7 @@ h2. Methods
 
 h3(#EraseEvent_new). EraseEvent.new
 
-  *EraseEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)DC% dc = nil)
+  *EraseEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)"DC":dc.html% dc = nil)
 
 Constructor.
 

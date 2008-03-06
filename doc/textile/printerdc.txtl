@@ -27,7 +27,7 @@ h2. Methods
 
 h3(#PrinterDC_new). PrinterDC.new
 
-  *PrinterDC.new*(%(arg-type)PrintData% printData)
+  *PrinterDC.new*(%(arg-type)"PrintData":printdata.html% printData)
 
 Pass a "PrintData":printdata.html object with information
 necessary for setting up a suitable printer device context. This

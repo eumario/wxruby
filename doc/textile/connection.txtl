@@ -78,7 +78,7 @@ h2. Methods
 
 h3(#Connection_new). Connection.new
 
-  *Connection.new*(%(arg-type)char% buffer,  %(arg-type)Integer% size)
+  *Connection.new*(%(arg-type)"char":char.html% buffer,  %(arg-type)Integer% size)
 
 Constructs a connection object. If no user-defined connection
 object is to be derived from Connection, then the constructor
@@ -98,8 +98,8 @@ mainly for backwards compatibility.
 
 h3(#Connection_advise). Connection#advise
 
- Boolean *advise*(%(arg-type)String% item,  %(arg-type)char% data,  %(arg-type)Integer% size = -1, 
-                %(arg-type)IPCFormat% format = CF_TEXT)
+ Boolean *advise*(%(arg-type)String% item,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+                %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
 
 Called by the server application to advise the client of a change
 in the data associated with the given item. Causes the client
@@ -108,8 +108,8 @@ to be called. Returns true if successful.
 
 h3(#Connection_execute). Connection#execute
 
- Boolean *execute*(%(arg-type)char% data,  %(arg-type)Integer% size = -1, 
-                 %(arg-type)IPCFormat% format = CF_TEXT)
+ Boolean *execute*(%(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+                 %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
 
 Called by the client application to execute a command on the
 server. Can also be used to transfer arbitrary data to the server
@@ -130,9 +130,9 @@ its side of the connection.
 
 h3(#Connection_onadvise). Connection#on_advise
 
- Boolean *on_advise*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)char% data, 
+ Boolean *on_advise*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)"char":char.html% data, 
                    %(arg-type)Integer% size, 
-                   %(arg-type)IPCFormat% format)
+                   %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the client application when the server notifies
 it of a change in the data associated with the given item, using
@@ -151,8 +151,8 @@ the connection object is no longer available.
 
 h3(#Connection_onexecute). Connection#on_execute
 
- Boolean *on_execute*(%(arg-type)String% topic,  %(arg-type)char% data,  %(arg-type)Integer% size, 
-                    %(arg-type)IPCFormat% format)
+ Boolean *on_execute*(%(arg-type)String% topic,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size, 
+                    %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the server application when the client notifies
 it to execute the given data, using "Execute":connectionexecute.html.
@@ -160,9 +160,9 @@ Note that there is no item associated with this message.
 
 h3(#Connection_onpoke). Connection#on_poke
 
- Boolean *on_poke*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)char% data, 
+ Boolean *on_poke*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)"char":char.html% data, 
                  %(arg-type)Integer% size, 
-                 %(arg-type)IPCFormat% format)
+                 %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the server application when the client notifies it to
 accept the given data.
@@ -170,7 +170,7 @@ accept the given data.
 h3(#Connection_onrequest). Connection#on_request
 
  char *on_request*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)Integer% size, 
-                 %(arg-type)IPCFormat% format)
+                 %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the server application when the client calls 
 "Connection#request":connection.html#Connection_request. The
@@ -198,8 +198,8 @@ this doesn't have much meaning in practice.
 
 h3(#Connection_poke). Connection#poke
 
- Boolean *poke*(%(arg-type)String% item,  %(arg-type)char% data,  %(arg-type)Integer% size = -1, 
-              %(arg-type)IPCFormat% format = CF_TEXT)
+ Boolean *poke*(%(arg-type)String% item,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+              %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
 
 Called by the client application to poke data into the server.
 Can be used to transfer arbitrary data to the server. Causes the
@@ -212,7 +212,7 @@ Returns true if successful.
 h3(#Connection_request). Connection#request
 
  char *request*(%(arg-type)String% item,  %(arg-type)Integer% size, 
-              %(arg-type)IPCFormat% format = IPC_TEXT)
+              %(arg-type)"IPCFormat":ipcformat.html% format = IPC_TEXT)
 
 Called by the client application to request data from the server.
 Causes the server connection's "Connection#on_request":connection.html#Connection_onrequest 

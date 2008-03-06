@@ -68,7 +68,7 @@ Add styles common to all Window-derived classes.
 
 h3(#XmlResourceHandler_canhandle). XmlResourceHandler#can_handle
 
- Boolean *can_handle*(%(arg-type)XmlNode% node)
+ Boolean *can_handle*(%(arg-type)"XmlNode":xmlnode.html% node)
 
 Returns true if it understands this node and can create
 a resource from it, false otherwise.
@@ -88,20 +88,20 @@ Creates children.
 
 h3(#XmlResourceHandler_createchildrenprivately). XmlResourceHandler#create_children_privately
 
-  *create_children_privately*(%(arg-type)Object% parent,  %(arg-type)XmlNode% rootnode = nil)
+  *create_children_privately*(%(arg-type)Object% parent,  %(arg-type)"XmlNode":xmlnode.html% rootnode = nil)
 
 Helper function.
 
 h3(#XmlResourceHandler_createresfromnode). XmlResourceHandler#create_res_from_node
 
- "Object":object.html *create_res_from_node*(%(arg-type)XmlNode% node,  %(arg-type)Object% parent, 
+ "Object":object.html *create_res_from_node*(%(arg-type)"XmlNode":xmlnode.html% node,  %(arg-type)Object% parent, 
                                %(arg-type)Object% instance = nil)
 
 Creates a resource from a node.
 
 h3(#XmlResourceHandler_createresource). XmlResourceHandler#create_resource
 
- "Object":object.html *create_resource*(%(arg-type)XmlNode% node,  %(arg-type)Object% parent, 
+ "Object":object.html *create_resource*(%(arg-type)"XmlNode":xmlnode.html% node,  %(arg-type)Object% parent, 
                           %(arg-type)Object% instance)
 
 Creates an object (menu, dialog, control, ...) from an XML node.
@@ -120,7 +120,7 @@ were filled.
 h3(#XmlResourceHandler_getbitmap). XmlResourceHandler#get_bitmap
 
  "Bitmap":bitmap.html *get_bitmap*(%(arg-type)String% param = T("bitmap"), 
-                     %(arg-type)Size% size = DEFAULT_SIZE)
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
 
 Gets a bitmap.
 
@@ -144,7 +144,7 @@ Returns the current file system.
 
 h3(#XmlResourceHandler_getdimension). XmlResourceHandler#get_dimension
 
- "Coord":coord.html *get_dimension*(%(arg-type)String% param,  %(arg-type)Coord% defaultv = 0)
+ "Coord":coord.html *get_dimension*(%(arg-type)String% param,  %(arg-type)"Coord":coord.html% defaultv = 0)
 
 Gets a dimension (may be in dialog units).
 
@@ -163,7 +163,7 @@ Returns the XRCID.
 h3(#XmlResourceHandler_geticon). XmlResourceHandler#get_icon
 
  "Icon":icon.html *get_icon*(%(arg-type)String% param = T("icon"), 
-                 %(arg-type)Size% size = DEFAULT_SIZE)
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
 
 Returns an icon.
 
@@ -181,7 +181,7 @@ Returns the resource name.
 
 h3(#XmlResourceHandler_getnodecontent). XmlResourceHandler#get_node_content
 
- String *get_node_content*(%(arg-type)XmlNode% node)
+ String *get_node_content*(%(arg-type)"XmlNode":xmlnode.html% node)
 
 Gets node content from XML_ENTITY_NODE.
 
@@ -237,20 +237,20 @@ Check to see if a parameter exists.
 
 h3(#XmlResourceHandler_isofclass). XmlResourceHandler#is_of_class
 
- Boolean *is_of_class*(%(arg-type)XmlNode% node,  %(arg-type)String% classname)
+ Boolean *is_of_class*(%(arg-type)"XmlNode":xmlnode.html% node,  %(arg-type)String% classname)
 
 Convenience function. Returns true if the node has a property class equal to classname,
 e.g. <object class="Dialog">.
 
 h3(#XmlResourceHandler_setparentresource). XmlResourceHandler#set_parent_resource
 
-  *set_parent_resource*(%(arg-type)XmlResource% res)
+  *set_parent_resource*(%(arg-type)"XmlResource":xmlresource.html% res)
 
 Sets the parent resource.
 
 h3(#XmlResourceHandler_setupwindow). XmlResourceHandler#setup_window
 
-  *setup_window*(%(arg-type)Window% wnd)
+  *setup_window*(%(arg-type)"Window":window.html% wnd)
 
 Sets common window options.
 

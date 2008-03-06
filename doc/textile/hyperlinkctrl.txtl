@@ -75,10 +75,10 @@ h2. Methods
 
 h3(#HyperlinkCtrl_new). HyperlinkCtrl#hyper_link
 
-  *_hyper_link*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+  *_hyper_link*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
                 %(arg-type)String% url, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style, 
                 %(arg-type)String% name = "hyperlink")
 
@@ -87,10 +87,10 @@ Constructor. See "Create":hyperlinkctrlcreate.html for more info.
 
 h3(#HyperlinkCtrl_create). HyperlinkCtrl#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
                 %(arg-type)String% url, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style, 
                 %(arg-type)String% name = "hyperlink")
 
@@ -119,7 +119,7 @@ Returns the colour used to print the label of the hyperlink when the mouse is ov
 
 h3(#HyperlinkCtrl_sethovercolour). HyperlinkCtrl#set_hover_colour
 
-  *set_hover_colour*(%(arg-type)Colour% colour)
+  *set_hover_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the colour used to print the label of the hyperlink when the mouse is over the control.
 
@@ -134,7 +134,7 @@ Returns the colour used to print the label when the link has never been clicked 
 
 h3(#HyperlinkCtrl_setnormalcolour). HyperlinkCtrl#set_normal_colour
 
-  *set_normal_colour*(%(arg-type)Colour% colour)
+  *set_normal_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the colour used to print the label when the link has never been clicked before
 (i.e. the link has not been _visited_) and the mouse is not over the control.
@@ -150,7 +150,7 @@ and the link has already been clicked before (i.e. the link has been _visited_).
 
 h3(#HyperlinkCtrl_setvisitedcolour). HyperlinkCtrl#set_visited_colour
 
-  *set_visited_colour*(%(arg-type)Colour% colour)
+  *set_visited_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the colour used to print the label when the mouse is not over the control
 and the link has already been clicked before (i.e. the link has been _visited_).

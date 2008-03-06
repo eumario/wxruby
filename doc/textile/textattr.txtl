@@ -114,9 +114,9 @@ h2. Methods
 
 h3(#TextAttr_new). TextAttr.new
 
-  *TextAttr.new*(%(arg-type)Colour% colText,  %(arg-type)Colour% colBack = NullColour, 
-               %(arg-type)Font% font = NullFont, 
-               %(arg-type)TextAttrAlignment% alignment = TEXT_ALIGNMENT_DEFAULT)
+  *TextAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack = NullColour, 
+               %(arg-type)"Font":font.html% font = NullFont, 
+               %(arg-type)"TextAttrAlignment":textattralignment.html% alignment = TEXT_ALIGNMENT_DEFAULT)
 
 The constructors initialize one or more of the text foreground colour, background
 colour, font, and alignment. The values not initialized in the constructor can be set
@@ -219,14 +219,14 @@ Returns @true@ if this style specifies any non-default attributes.
 
 h3(#TextAttr_setalignment). TextAttr#set_alignment
 
-  *set_alignment*(%(arg-type)TextAttrAlignment% alignment)
+  *set_alignment*(%(arg-type)"TextAttrAlignment":textattralignment.html% alignment)
 
 Sets the paragraph alignment.
 
 
 h3(#TextAttr_setbackgroundcolour). TextAttr#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% colour)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the background colour.
 
@@ -240,7 +240,7 @@ Pass a bitlist indicating which attributes will be set.
 
 h3(#TextAttr_setfont). TextAttr#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets the text font.
 
@@ -263,7 +263,7 @@ Sets the right indent in tenths of a millimetre.
 
 h3(#TextAttr_settabs). TextAttr#set_tabs
 
-  *set_tabs*(%(arg-type)ArrayInt% tabs)
+  *set_tabs*(%(arg-type)"ArrayInt":arrayint.html% tabs)
 
 Sets the array of integers representing the tab stops. Each
 array element specifies the tab stop in tenths of a millimetre.
@@ -271,7 +271,7 @@ array element specifies the tab stop in tenths of a millimetre.
 
 h3(#TextAttr_settextcolour). TextAttr#set_text_colour
 
-  *set_text_colour*(%(arg-type)Colour% colour)
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the text colour.
 

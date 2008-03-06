@@ -121,8 +121,8 @@ Not currently used by the framework.
 
 h3(#View_onactivateview). View#on_activate_view
 
-  *on_activate_view*(%(arg-type)Boolean% activate,  %(arg-type)View% activeView, 
-                   %(arg-type)View% deactiveView)
+  *on_activate_view*(%(arg-type)Boolean% activate,  %(arg-type)"View":view.html% activeView, 
+                   %(arg-type)"View":view.html% deactiveView)
 
 Called when a view is activated by means of View::Activate. The default implementation does
 nothing.
@@ -155,7 +155,7 @@ closed.
 
 h3(#View_oncreate). View#on_create
 
- Boolean *on_create*(%(arg-type)Document% doc,  %(arg-type)Integer% flags)
+ Boolean *on_create*(%(arg-type)"Document":document.html% doc,  %(arg-type)Integer% flags)
 
 DocManager or Document creates a View via a DocTemplate.
 Just after the DocTemplate creates the View, it calls
@@ -181,13 +181,13 @@ Override to return an instance of a class other than DocPrintout.
 
 h3(#onviewondraw). View#on_draw
 
-  *on_draw*(%(arg-type)DC% dc)
+  *on_draw*(%(arg-type)"DC":dc.html% dc)
 
 Override this function to render the view on the given device context.
 
 h3(#onviewonupdate). View#on_update
 
-  *on_update*(%(arg-type)View% sender,  %(arg-type)Object% hint)
+  *on_update*(%(arg-type)"View":view.html% sender,  %(arg-type)Object% hint)
 
 Called when the view should be updated. _sender_ is a pointer to the view
 that sent the update request, or NULL if no single view requested the update (for instance,
@@ -196,14 +196,14 @@ application-specific information for making updating more efficient.
 
 h3(#View_setdocument). View#set_document
 
-  *set_document*(%(arg-type)Document% doc)
+  *set_document*(%(arg-type)"Document":document.html% doc)
 
 Associates the given document with the view. Normally called by the
 framework.
 
 h3(#View_setframe). View#set_frame
 
-  *set_frame*(%(arg-type)Window% frame)
+  *set_frame*(%(arg-type)"Window":window.html% frame)
 
 Sets the frame associated with this view. The application should call this
 if possible, to tell the view about the frame.

@@ -58,7 +58,7 @@ h2. Methods
 
 h3(#DropTarget_wxdroptarget). DropTarget.new
 
-  *DropTarget.new*(%(arg-type)DataObject% data = nil)
+  *DropTarget.new*(%(arg-type)"DataObject":dataobject.html% data = nil)
 
 Constructor. _data_ is the data to be associated with the drop target.
 
@@ -77,8 +77,8 @@ calling its "DataObject#set_data":dataobject.html#DataObject_setdata method.
 
 h3(#DropTarget_ondata). DropTarget#on_data
 
- "DragResult":dragresult.html *on_data*(%(arg-type)Coord% x,  %(arg-type)Coord% y, 
-                      %(arg-type)DragResult% def)
+ "DragResult":dragresult.html *on_data*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y, 
+                      %(arg-type)"DragResult":dragresult.html% def)
 
 Called after "on_drop":#DropTarget_ondrop returns true. By default this
 will usually "get_data":#DropTarget_getdata and will return the suggested
@@ -86,7 +86,7 @@ default value _def_.
 
 h3(#DropTarget_ondrop). DropTarget#on_drop
 
- Boolean *on_drop*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+ Boolean *on_drop*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
 
 Called when the user drops a data object on the target. Return false to veto the operation.
 
@@ -101,8 +101,8 @@ Return true to accept the data, false to veto the operation.
 
 h3(#DropTarget_onenter). DropTarget#on_enter
 
- "DragResult":dragresult.html *on_enter*(%(arg-type)Coord% x,  %(arg-type)Coord% y, 
-                       %(arg-type)DragResult% def)
+ "DragResult":dragresult.html *on_enter*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y, 
+                       %(arg-type)"DragResult":dragresult.html% def)
 
 Called when the mouse enters the drop target. By default, this calls "on_drag_over":#DropTarget_ondragover.
 
@@ -119,8 +119,8 @@ from the side of the drop source, typically in form of changing the icon.
 
 h3(#DropTarget_ondragover). DropTarget#on_drag_over
 
- "DragResult":dragresult.html *on_drag_over*(%(arg-type)Coord% x,  %(arg-type)Coord% y, 
-                           %(arg-type)DragResult% def)
+ "DragResult":dragresult.html *on_drag_over*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y, 
+                           %(arg-type)"DragResult":dragresult.html% def)
 
 Called when the mouse is being dragged over the drop target. By default, 
 this calls functions return the suggested return value _def_.
@@ -144,7 +144,7 @@ Called when the mouse leaves the drop target.
 
 h3(#DropTarget_setdataobject). DropTarget#set_data_object
 
-  *set_data_object*(%(arg-type)DataObject% data)
+  *set_data_object*(%(arg-type)"DataObject":dataobject.html% data)
 
 Sets the data "DataObject":dataobject.html associated with the 
 drop target and deletes any previously associated data object.

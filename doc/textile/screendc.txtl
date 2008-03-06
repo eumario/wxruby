@@ -27,9 +27,9 @@ h3(#ScreenDC_new). ScreenDC.new
 
 h3(#ScreenDC_startdrawingontop). ScreenDC#start_drawing_on_top
 
- Boolean *start_drawing_on_top*(%(arg-type)Window% window)
+ Boolean *start_drawing_on_top*(%(arg-type)"Window":window.html% window)
 
- Boolean *start_drawing_on_top*(%(arg-type)Rect% rect = nil)
+ Boolean *start_drawing_on_top*(%(arg-type)"Rect":rect.html% rect = nil)
 
 Use this in conjunction with "end_drawing_on_top":#ScreenDC_enddrawingontop to
 ensure that drawing to the screen occurs on top of existing windows. Without this,

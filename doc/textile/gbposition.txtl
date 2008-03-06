@@ -53,13 +53,13 @@ Set a new row value.
 
 h3(#GBPosition_operatorunknown). GBPosition::operator!
 
- Boolean *operator!*(%(arg-type)GBPosition% p)
+ Boolean *operator!*(%(arg-type)"GBPosition":gbposition.html% p)
 
 Is the GBPosition valid?  (An invalid GBPosition is (-1,-1). )
 
 h3(#GBPosition_operatorequal). GBPosition::operator==
 
- bool operator *operator==*(%(arg-type)GBPosition% p)
+ bool operator *operator==*(%(arg-type)"GBPosition":gbposition.html% p)
 
 Compare equality of two GBPositions.
 

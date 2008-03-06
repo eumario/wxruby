@@ -99,7 +99,7 @@ h3(#FileHistory_addfilestomenu). FileHistory#add_files_to_menu
 
 Appends the files in the history list, to all menus managed by the file history object.
 
-  *add_files_to_menu*(%(arg-type)Menu% menu)
+  *add_files_to_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Appends the files in the history list, to the given menu only.
 
@@ -127,7 +127,7 @@ Returns the number of files currently stored in the file history.
 
 h3(#FileHistory_load). FileHistory#load
 
-  *load*(%(arg-type)ConfigBase% config)
+  *load*(%(arg-type)"ConfigBase":configbase.html% config)
 
 Loads the file history from the given config object. This function should be called explicitly by the application.
 
@@ -144,14 +144,14 @@ Removes the specified file from the history.
 
 h3(#FileHistory_removemenu). FileHistory#remove_menu
 
-  *remove_menu*(%(arg-type)Menu% menu)
+  *remove_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Removes this menu from the list of those managed by this object.
 
 
 h3(#FileHistory_save). FileHistory#save
 
-  *save*(%(arg-type)ConfigBase% config)
+  *save*(%(arg-type)"ConfigBase":configbase.html% config)
 
 Saves the file history into the given config object. This must be called
 explicitly by the application.
@@ -163,7 +163,7 @@ h4. See also
 
 h3(#FileHistory_usemenu). FileHistory#use_menu
 
-  *use_menu*(%(arg-type)Menu% menu)
+  *use_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Adds this menu to the list of those menus that are managed by this file history object.
 Also see "add_files_to_menu()":#FileHistory_addfilestomenu() for

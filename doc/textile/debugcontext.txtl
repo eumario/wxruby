@@ -243,7 +243,7 @@ This is obsolete, replaced by "Log":log.html functionality.
 
 h3(#DebugContext_setstream). DebugContext#set_stream
 
-  *set_stream*(%(arg-type)ostream% stream,  %(arg-type)streambuf% streamBuf = nil)
+  *set_stream*(%(arg-type)"ostream":ostream.html% stream,  %(arg-type)"streambuf":streambuf.html% streamBuf = nil)
 
 Sets the stream and optionally, stream buffer associated with the debug context.
 This operation flushes and deletes the existing stream (and stream buffer if any).

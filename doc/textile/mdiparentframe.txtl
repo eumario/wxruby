@@ -85,9 +85,9 @@ h2. Methods
 
 h3(#MDIParentFrame_new). MDIParentFrame.new
 
-  *MDIParentFrame.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-                     %(arg-type)Point% pos = DEFAULT_POSITION, 
-                     %(arg-type)Size% size = DEFAULT_SIZE, 
+  *MDIParentFrame.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                      %(arg-type)Integer% style = DEFAULT_FRAME_STYLE VSCROLL HSCROLL, 
                      %(arg-type)String% name = "frame")
 
@@ -166,9 +166,9 @@ h4. See also
 
 h3(#MDIParentFrame_create). MDIParentFrame#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DEFAULT_FRAME_STYLE VSCROLL HSCROLL, 
                 %(arg-type)String% name = "frame")
 
@@ -276,7 +276,7 @@ h4. See also
 
 h3(#MDIParentFrame_settoolbar). MDIParentFrame#set_tool_bar
 
-  *set_tool_bar*(%(arg-type)Window% toolbar)
+  *set_tool_bar*(%(arg-type)"Window":window.html% toolbar)
 
 Sets the window to be used as a toolbar for this
 MDI parent window. It saves the application having to manage the positioning
@@ -307,7 +307,7 @@ h4. See also
 
 h3(#MDIParentFrame_setwindowmenu). MDIParentFrame#set_window_menu
 
-  *set_window_menu*(%(arg-type)Menu% menu)
+  *set_window_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Call this to change the current Window menu. Ownership of the menu object passes to
 the frame when you call this function.
@@ -318,7 +318,7 @@ To remove the window completely, use the FRAME_NO_WINDOW_MENU window style.
 
 h3(#MDIParentFrame_tile). MDIParentFrame#tile
 
-  *tile*(%(arg-type)Orientation% orient = HORIZONTAL)
+  *tile*(%(arg-type)"Orientation":orientation.html% orient = HORIZONTAL)
 
 Tiles the MDI child windows either horizontally or vertically depending on
 whether orient is HORIZONTAL or VERTICAL.

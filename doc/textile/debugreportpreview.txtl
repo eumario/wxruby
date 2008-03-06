@@ -35,7 +35,7 @@ dtor is trivial as well but should be virtual for a base class
 
 h3(#DebugReportPreview_show). DebugReportPreview#show
 
- Boolean *show*(%(arg-type)DebugReport% dbgrpt)
+ Boolean *show*(%(arg-type)"DebugReport":debugreport.html% dbgrpt)
 
 Present the report to the user and allow him to modify it by removing some or
 all of the files and, potentially, adding some notes. Return  if the

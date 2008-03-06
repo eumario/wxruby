@@ -43,7 +43,7 @@ h2. Methods
 
 h3(#ScrollWinEvent_new). ScrollWinEvent.new
 
-  *ScrollWinEvent.new*(%(arg-type)TYPE% commandType = 0,  %(arg-type)Integer% pos = 0, 
+  *ScrollWinEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% pos = 0, 
                      %(arg-type)Integer% orientation = 0)
 
 Constructor.

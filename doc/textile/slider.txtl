@@ -72,13 +72,13 @@ h2. Methods
 
 h3(#Slider_new). Slider.new
 
-  *Slider.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% value , 
+  *Slider.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% value , 
              %(arg-type)Integer% minValue, 
              %(arg-type)Integer% maxValue, 
-             %(arg-type)Point% point = DEFAULT_POSITION, 
-             %(arg-type)Size% size = DEFAULT_SIZE, 
+             %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+             %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
              %(arg-type)Integer% style = SL_HORIZONTAL, 
-             %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+             %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
              %(arg-type)String% name = "slider")
 
 Constructor, creating and showing a slider.
@@ -125,13 +125,13 @@ Windows 95 only.
 
 h3(#Slider_create). Slider#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% value , 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% value , 
                 %(arg-type)Integer% minValue, 
                 %(arg-type)Integer% maxValue, 
-                %(arg-type)Point% point = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = SL_HORIZONTAL, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "slider")
 
 Used for two-step slider construction. See "Slider.new":slider.html#Slider_new for further details.

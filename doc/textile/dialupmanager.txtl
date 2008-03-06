@@ -82,7 +82,7 @@ Destructor.
 
 h3(#DialUpManager_getispnames). DialUpManager#get_isp_names
 
- Integer *get_isp_names*(%(arg-type)ArrayString% names)
+ Integer *get_isp_names*(%(arg-type)"ArrayString":arraystring.html% names)
 
 This function is only implemented under Windows.
 

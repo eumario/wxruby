@@ -58,7 +58,7 @@ h2. Methods
 
 h3(#StatusBar_new). StatusBar.new
 
-  *StatusBar.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+  *StatusBar.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
                 %(arg-type)Integer% style = ST_SIZEGRIP, 
                 %(arg-type)String% name = "statusBar")
 
@@ -83,7 +83,7 @@ Destructor.
 
 h3(#StatusBar_create). StatusBar#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
                 %(arg-type)Integer% style = ST_SIZEGRIP, 
                 %(arg-type)String% name = "statusBar")
 
@@ -93,7 +93,7 @@ See "StatusBar.new":statusbar.html#StatusBar_new for details.
 
 h3(#StatusBar_getfieldrect). StatusBar#get_field_rect
 
- Boolean *get_field_rect*(%(arg-type)Integer% i,  %(arg-type)Rect% rect)
+ Boolean *get_field_rect*(%(arg-type)Integer% i,  %(arg-type)"Rect":rect.html% rect)
 
 Returns the size and position of a field's internal bounding rectangle.
 

@@ -73,12 +73,12 @@ h2. Methods
 
 h3(#ListBox_new). ListBox.new
 
-  *ListBox.new*(%(arg-type)Window% parent, %(arg-type)Integer% id, 
-              %(arg-type)Point% pos = DEFAULT_POSITION, 
-              %(arg-type)Size% size = DEFAULT_SIZE, 
-              %(arg-type)Array% choices = nil,  
+  *ListBox.new*(%(arg-type)"Window":window.html% parent, %(arg-type)Integer% id, 
+              %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+              %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+              %(arg-type)"Array":array.html% choices = nil,  
 			  %(arg-type)Integer% style = 0, 
-              %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+              %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
               %(arg-type)String% name = "listBox")
 
 Constructor, creating and showing a list box.
@@ -101,12 +101,12 @@ h4. See also
 
 h3(#ListBox_create). ListBox#create
 
- Boolean *create*(%(arg-type)Window% parent, %(arg-type)Integer% id, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE,
+ Boolean *create*(%(arg-type)"Window":window.html% parent, %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE,
                 %(arg-type)String% choices[] = nil, 
 				%(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "listBox")
 
 Creates the listbox for two-step construction. See "ListBox.new":listbox.html#ListBox_new for further details.
@@ -139,7 +139,7 @@ h4. See also
 
 h3(#ListBox_insertitems). ListBox#insert_items
 
-  *insert_items*(%(arg-type)Array% items, %(arg-type)Integer% pos)
+  *insert_items*(%(arg-type)"Array":array.html% items, %(arg-type)Integer% pos)
 
 Insert a number of strings before the specified position.
 
@@ -169,7 +169,7 @@ true if the given item is selected, false otherwise.
 
 h3(#ListBox_set). ListBox#set
 
-  *set*(%(arg-type)Array% choices, %(arg-type)Array% client_data = @nil@)
+  *set*(%(arg-type)"Array":array.html% choices, %(arg-type)"Array":array.html% client_data = @nil@)
 
 Clears the list box and adds the given strings to it.
 

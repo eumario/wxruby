@@ -76,11 +76,11 @@ h2. Methods
 
 h3(#ScrollBar_new). ScrollBar.new
 
-  *ScrollBar.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+  *ScrollBar.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = SB_HORIZONTAL, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "scrollBar")
 
 Constructor, creating and showing a scrollbar.
@@ -107,11 +107,11 @@ Destructor, destroying the scrollbar.
 
 h3(#ScrollBar_create). ScrollBar#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = SB_HORIZONTAL, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "scrollBar")
 
 Scrollbar creation function called by the scrollbar constructor.

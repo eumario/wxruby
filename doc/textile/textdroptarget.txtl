@@ -34,7 +34,7 @@ appropriately for text, and calls "TextDropTarget#on_drop_text":textdroptarget.h
 
 h3(#TextDropTarget_ondroptext). TextDropTarget#on_drop_text
 
- Boolean *on_drop_text*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)String% data)
+ Boolean *on_drop_text*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)String% data)
 
 Override this function to receive dropped text.
 

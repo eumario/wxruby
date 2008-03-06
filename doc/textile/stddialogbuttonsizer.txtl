@@ -45,7 +45,7 @@ h3(#StdDialogButtonSizer_new). StdDialogButtonSizer.new
 
 h3(#StdDialogButtonSizer_addbutton). StdDialogButtonSizer#add_button
 
-  *add_button*(%(arg-type)Button% button)
+  *add_button*(%(arg-type)"Button":button.html% button)
 
 Adds a button to the StdDialogButtonSizer. The button must have one of the following identifiers:
 
@@ -68,19 +68,19 @@ Rearranges the buttons and applies proper spacing between buttons to make them m
 
 h3(#StdDialogButtonSizer_setaffirmativebutton). StdDialogButtonSizer#set_affirmative_button
 
-  *set_affirmative_button*(%(arg-type)Button% button)
+  *set_affirmative_button*(%(arg-type)"Button":button.html% button)
 
 Sets the affirmative button for the sizer. This allows you to use identifiers other than the standard identifiers outlined above.
 
 h3(#StdDialogButtonSizer_setcancelbutton). StdDialogButtonSizer#set_cancel_button
 
-  *set_cancel_button*(%(arg-type)Button% button)
+  *set_cancel_button*(%(arg-type)"Button":button.html% button)
 
 Sets the cancel button for the sizer. This allows you to use identifiers other than the standard identifiers outlined above.
 
 h3(#StdDialogButtonSizer_setnegativebutton). StdDialogButtonSizer#set_negative_button
 
-  *set_negative_button*(%(arg-type)Button% button)
+  *set_negative_button*(%(arg-type)"Button":button.html% button)
 
 Sets the negative button for the sizer. This allows you to use identifiers other than the standard identifiers outlined above.
 

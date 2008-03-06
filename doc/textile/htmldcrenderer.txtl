@@ -27,7 +27,7 @@ h3(#HtmlDCRenderer_wxhtmldcrenderer). HtmlDCRenderer.new
 
 h3(#HtmlDCRenderer_setdc). HtmlDCRenderer#set_dc
 
-  *set_dc*(%(arg-type)DC% dc,  %(arg-type)double% pixel_scale = 1.0)
+  *set_dc*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Float% pixel_scale = 1.0)
 
 Assign DC instance to the renderer.
 

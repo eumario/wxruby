@@ -28,7 +28,7 @@ h2. Methods
 
 h3(#PanelTabView_constr). PanelTabView.new
 
-  *PanelTabView.new*(%(arg-type)Panel% panel, 
+  *PanelTabView.new*(%(arg-type)"Panel":panel.html% panel, 
                    %(arg-type)Integer% style = TAB_STYLE_DRAW_BOX TAB_STYLE_COLOUR_INTERIOR)
 
 Constructor. _panel_ should be a TabbedPanel or TabbedDialog: the type will be checked by the view at run time.
@@ -48,7 +48,7 @@ view is likely to be destroyed. This will clear the list of windows, without del
 
 h3(#PanelTabView_addtabwindow). PanelTabView#add_tab_window
 
-  *add_tab_panel*(%(arg-type)Integer% id,  %(arg-type)Window% window)
+  *add_tab_panel*(%(arg-type)Integer% id,  %(arg-type)"Window":window.html% window)
 
 Adds a window to the view. The window is associated with the tab identifier, and will be shown or hidden as the tab
 is selected or deselected.

@@ -149,7 +149,7 @@ h2. Methods
 
 h3(#AuiManager_wxauimanager). AuiManager.new
 
-  *AuiManager.new*(%(arg-type)Window% managed_wnd = nil, 
+  *AuiManager.new*(%(arg-type)"Window":window.html% managed_wnd = nil, 
                  %(arg-type)unsigned int% flags = AUI_MGR_DEFAULT)
 
 Constructor. managed_wnd specifies the Frame which should be managed.
@@ -160,20 +160,20 @@ to be modified.
 
 h3(#AuiManager_addpane). AuiManager#add_pane
 
- Boolean *add_pane*(%(arg-type)Window% window,  %(arg-type)AuiPaneInfo% pane_info)
+ Boolean *add_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane_info)
 
- Boolean *add_pane*(%(arg-type)Window% window,  %(arg-type)Integer% direction = LEFT, 
+ Boolean *add_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)Integer% direction = LEFT, 
                   %(arg-type)String% caption = '')
 
- Boolean *add_pane*(%(arg-type)Window% window,  %(arg-type)AuiPaneInfo% pane_info, 
-                  %(arg-type)Point% drop_pos)
+ Boolean *add_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane_info, 
+                  %(arg-type)"Point":point.html% drop_pos)
 
 
 AddPane() tells the frame manager to start managing a child window. There are several versions of this function. The first version allows the full spectrum of pane parameter possibilities. The second version is used for simpler user interfaces which do not require as much configuration.  The last version allows a drop position to be specified, which will determine where the pane will be added.
 
 h3(#AuiManager_detachpane). AuiManager#detach_pane
 
- Boolean *detach_pane*(%(arg-type)Window% window)
+ Boolean *detach_pane*(%(arg-type)"Window":window.html% window)
 
 Tells the AuiManager to stop managing the pane specified by window.
 The window, if in a floated frame, is reparented to the frame managed
@@ -201,7 +201,7 @@ See also: "AuiDockArt":auidockart.html.
 
 h3(#AuiManager_getdocksizeconstraint). AuiManager#get_dock_size_constraint
 
-  *get_dock_size_constraint*(%(arg-type)double% widthpct,  %(arg-type)double% heightpct)
+  *get_dock_size_constraint*(%(arg-type)Float% widthpct,  %(arg-type)Float% heightpct)
 
 Returns the current dock constraint values.  See "set_dock_size_constraint()":#AuiManager_setdocksizeconstraint() for more information.
 
@@ -219,7 +219,7 @@ Returns the frame currently being managed by AuiManager.
 
 h3(#AuiManager_getmanager). AuiManager#get_manager
 
- "AuiManager":auimanager.html *get_manager*(%(arg-type)Window% window)
+ "AuiManager":auimanager.html *get_manager*(%(arg-type)"Window":window.html% window)
 
 Calling this method will return the AuiManager for a given window.  The window parameter should
 specify any child window or sub-child window of the frame or window managed by AuiManager.
@@ -229,7 +229,7 @@ window.
 
 h3(#AuiManager_getpane). AuiManager#get_pane
 
- "AuiPaneInfo":auipaneinfo.html *get_pane*(%(arg-type)Window% window)
+ "AuiPaneInfo":auipaneinfo.html *get_pane*(%(arg-type)"Window":window.html% window)
 
  "AuiPaneInfo":auipaneinfo.html *get_pane*(%(arg-type)String% name)
 
@@ -250,7 +250,7 @@ HideHint() hides any docking hint that may be visible.
 
 h3(#AuiManager_insertpane). AuiManager#insert_pane
 
- Boolean *insert_pane*(%(arg-type)Window% window,  %(arg-type)AuiPaneInfo% insert_location, 
+ Boolean *insert_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% insert_location, 
                      %(arg-type)Integer% insert_level = AUI_INSERT_PANE)
 
 This method is used to insert either a previously unmanaged pane window
@@ -264,7 +264,7 @@ or AUI_INSERT_DOCK.
 
 h3(#AuiManager_loadpaneinfo). AuiManager#load_pane_info
 
-  *load_pane_info*(%(arg-type)String% pane_part,  %(arg-type)AuiPaneInfo% pane)
+  *load_pane_info*(%(arg-type)String% pane_part,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
 
 LoadPaneInfo() is similar to to LoadPerspective, with the exception that it only loads information about a single pane.  It is used in combination with SavePaneInfo().
 
@@ -277,13 +277,13 @@ is automatically invoked, thus realizing the saved perspective on screen.
 
 h3(#AuiManager_processdockresult). AuiManager#process_dock_result
 
- Boolean *process_dock_result*(%(arg-type)AuiPaneInfo% target,  %(arg-type)AuiPaneInfo% new_pos)
+ Boolean *process_dock_result*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% target,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% new_pos)
 
 ProcessDockResult() is a protected member of the AUI layout manager.  It can be overridden by derived classes to provide custom docking calculations.
 
 h3(#AuiManager_savepaneinfo). AuiManager#save_pane_info
 
- String *save_pane_info*(%(arg-type)AuiPaneInfo% pane)
+ String *save_pane_info*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
 
 SavePaneInfo() is similar to SavePerspective, with the exception that it only saves information about a single pane.  It is used in combination with LoadPaneInfo().
 
@@ -298,7 +298,7 @@ interface will return to the state it was when the perspective was saved.
 
 h3(#AuiManager_setartprovider). AuiManager#set_art_provider
 
-  *set_art_provider*(%(arg-type)AuiDockArt% art_provider)
+  *set_art_provider*(%(arg-type)"AuiDockArt":auidockart.html% art_provider)
 
 Instructs AuiManager to use art provider specified by parameter
 art_provider for all drawing calls. This allows plugable
@@ -309,7 +309,7 @@ See also: "AuiDockArt":auidockart.html.
 
 h3(#AuiManager_setdocksizeconstraint). AuiManager#set_dock_size_constraint
 
-  *set_dock_size_constraint*(%(arg-type)double% widthpct,  %(arg-type)double% heightpct)
+  *set_dock_size_constraint*(%(arg-type)Float% widthpct,  %(arg-type)Float% heightpct)
 
 When a user creates a new dock by dragging a window into a docked position, often times the large size of the
 window will create a dock that is unwieldly large.  AuiManager by default limits the size of any
@@ -327,13 +327,13 @@ specifies options which allow the frame management behavior to be modified.
 
 h3(#AuiManager_setmanagedwindow). AuiManager#set_managed_window
 
-  *set_managed_window*(%(arg-type)Window% managed_wnd)
+  *set_managed_window*(%(arg-type)"Window":window.html% managed_wnd)
 
 Called to specify the frame or window which is to be managed by AuiManager.  Frame management is not restricted to just frames.  Child windows or custom controls are also allowed.
 
 h3(#AuiManager_showhint). AuiManager#show_hint
 
-  *show_hint*(%(arg-type)Rect% rect)
+  *show_hint*(%(arg-type)"Rect":rect.html% rect)
 
 This function is used by controls to explicitly show a hint window at the specified rectangle.  It is rarely called, and is mostly used by controls implementing custom pane drag/drop behaviour.  The specified rectangle should be in screen coordinates.
 

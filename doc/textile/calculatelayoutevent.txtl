@@ -61,7 +61,7 @@ Sets the flags associated with this event. Not currently used.
 
 h3(#CalculateLayoutEvent_setrect). CalculateLayoutEvent#set_rect
 
-  *set_rect*(%(arg-type)Rect% rect)
+  *set_rect*(%(arg-type)"Rect":rect.html% rect)
 
 Call this to specify the new remaining parent client area, after the space occupied by the
 window has been subtracted.

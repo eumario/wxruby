@@ -115,9 +115,9 @@ h2. Methods
 
 h3(#Frame_new). Frame.new
 
-  *Frame.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-            %(arg-type)Point% pos = DEFAULT_POSITION, 
-            %(arg-type)Size% size = DEFAULT_SIZE, 
+  *Frame.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+            %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+            %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
             %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
             %(arg-type)String% name = "frame")
 
@@ -159,9 +159,9 @@ h4. Parameters
 
 h3(#Frame_create). Frame#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
                 %(arg-type)String% name = "frame")
 
@@ -378,7 +378,7 @@ this function should not be used in this case.
 
 h3(#Frame_setmenubar). Frame#set_menu_bar
 
-  *set_menu_bar*(%(arg-type)MenuBar% menuBar)
+  *set_menu_bar*(%(arg-type)"MenuBar":menubar.html% menuBar)
 
 Tells the frame to show the given menu bar.
 
@@ -404,7 +404,7 @@ h4. See also
 
 h3(#Frame_setstatusbar). Frame#set_status_bar
 
-  *set_status_bar*(%(arg-type)StatusBar% statusBar)
+  *set_status_bar*(%(arg-type)"StatusBar":statusbar.html% statusBar)
 
 Associates a status bar with the frame.
 
@@ -464,7 +464,7 @@ variable fields.
 
 h3(#Frame_settoolbar). Frame#set_tool_bar
 
-  *set_tool_bar*(%(arg-type)ToolBar% toolBar)
+  *set_tool_bar*(%(arg-type)"ToolBar":toolbar.html% toolBar)
 
 Associates a toolbar with the frame.
 

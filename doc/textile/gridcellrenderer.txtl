@@ -48,8 +48,8 @@ h2. Methods
 
 h3(#GridCellRenderer_draw). GridCellRenderer#draw
 
-  *draw*(%(arg-type)Grid% grid,  %(arg-type)GridCellAttr% attr,  %(arg-type)DC% dc, 
-       %(arg-type)Rect% rect, 
+  *draw*(%(arg-type)"Grid":grid.html% grid,  %(arg-type)"GridCellAttr":gridcellattr.html% attr,  %(arg-type)"DC":dc.html% dc, 
+       %(arg-type)"Rect":rect.html% rect, 
        %(arg-type)Integer% row, 
        %(arg-type)Integer% col, 
        %(arg-type)Boolean% isSelected)
@@ -64,8 +64,8 @@ with the background colour from attr and set the text colour and font.
 
 h3(#GridCellRenderer_getbestsize). GridCellRenderer#get_best_size
 
- "Size":size.html *get_best_size*(%(arg-type)Grid% grid,  %(arg-type)GridCellAttr% attr, 
-                      %(arg-type)DC% dc, 
+ "Size":size.html *get_best_size*(%(arg-type)"Grid":grid.html% grid,  %(arg-type)"GridCellAttr":gridcellattr.html% attr, 
+                      %(arg-type)"DC":dc.html% dc, 
                       %(arg-type)Integer% row, 
                       %(arg-type)Integer% col)
 

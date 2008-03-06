@@ -32,7 +32,7 @@ h2. Methods
 
 h3(#HtmlLinkEvent_new). HtmlLinkEvent.new
 
-  *_hyperlink_event*(%(arg-type)Integer% id,  %(arg-type)HtmlLinkInfo% linkinfo)
+  *_hyperlink_event*(%(arg-type)Integer% id,  %(arg-type)"HtmlLinkInfo":htmllinkinfo.html% linkinfo)
 
 The constructor is not normally used by the user code.
 

@@ -59,7 +59,7 @@ h2. Methods
 
 h3(#Process_new). Process.new
 
-  *Process.new*(%(arg-type)EvtHandler% parent = nil,  %(arg-type)Integer% id = -1)
+  *Process.new*(%(arg-type)"EvtHandler":evthandler.html% parent = nil,  %(arg-type)Integer% id = -1)
 
   *Process.new*(%(arg-type)Integer% flags)
 
@@ -167,7 +167,7 @@ Returns @true@ if the child process standard output stream is opened.
 
 h3(#Process_kill). Process#kill
 
- "KillError":killerror.html *kill*(%(arg-type)Integer% pid,  %(arg-type)Signal% signal = SIGNONE, 
+ "KillError":killerror.html *kill*(%(arg-type)Integer% pid,  %(arg-type)"Signal":signal.html% signal = SIGNONE, 
                   %(arg-type)Integer% flags = KILL_NOCHILDREN)
 
 Send the specified signal to the given process. Possible signal values are:

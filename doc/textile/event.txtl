@@ -44,7 +44,7 @@ h2. Methods
 
 h3(#Event_new). Event.new
 
-  *Event.new*(%(arg-type)Integer% id = 0,  %(arg-type)EventType% eventType = @EVT_NULL@)
+  *Event.new*(%(arg-type)Integer% id = 0,  %(arg-type)"EventType":eventtype.html% eventType = @EVT_NULL@)
 
 Constructor. Should not need to be used directly by an application.
 

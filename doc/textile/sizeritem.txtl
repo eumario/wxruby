@@ -59,9 +59,9 @@ h3(#SizerItem_wxsizeritem). SizerItem.new
 Construct a sizer item for tracking a spacer.
 
 
-  *SizerItem.new*(%(arg-type)Window% window,  %(arg-type)SizerFlags% flags)
+  *SizerItem.new*(%(arg-type)"Window":window.html% window,  %(arg-type)"SizerFlags":sizerflags.html% flags)
 
-  *SizerItem.new*(%(arg-type)Window% window,  %(arg-type)Integer% proportion, 
+  *SizerItem.new*(%(arg-type)"Window":window.html% window,  %(arg-type)Integer% proportion, 
                 %(arg-type)Integer% flag, 
                 %(arg-type)Integer% border, 
                 %(arg-type)Object% userData)
@@ -69,9 +69,9 @@ Construct a sizer item for tracking a spacer.
 Construct a sizer item for tracking a window.
 
 
-  *SizerItem.new*(%(arg-type)Sizer% window,  %(arg-type)SizerFlags% flags)
+  *SizerItem.new*(%(arg-type)"Sizer":sizer.html% window,  %(arg-type)"SizerFlags":sizerflags.html% flags)
 
-  *SizerItem.new*(%(arg-type)Sizer% sizer,  %(arg-type)Integer% proportion, 
+  *SizerItem.new*(%(arg-type)"Sizer":sizer.html% sizer,  %(arg-type)Integer% proportion, 
                 %(arg-type)Integer% flag, 
                 %(arg-type)Integer% border, 
                 %(arg-type)Object% userData)
@@ -220,7 +220,7 @@ Set the border item attribute.
 
 h3(#SizerItem_setdimension). SizerItem#set_dimension
 
-  *set_dimension*(%(arg-type)Point% pos,  %(arg-type)Size% size)
+  *set_dimension*(%(arg-type)"Point":point.html% pos,  %(arg-type)"Size":size.html% size)
 
 Set the position and size of the space allocated to the sizer, and
 adjust the position and size of the item to be within that space
@@ -249,30 +249,30 @@ h3(#SizerItem_setratio). SizerItem#set_ratio
 
   *set_ratio*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
 
-  *set_ratio*(%(arg-type)Size% size)
+  *set_ratio*(%(arg-type)"Size":size.html% size)
 
-  *set_ratio*(%(arg-type)float% ratio)
+  *set_ratio*(%(arg-type)Float% ratio)
 
 Set the ratio item attribute.
 
 
 h3(#SizerItem_setsizer). SizerItem#set_sizer
 
-  *set_sizer*(%(arg-type)Sizer% sizer)
+  *set_sizer*(%(arg-type)"Sizer":sizer.html% sizer)
 
 Set the sizer tracked by this item.
 
 
 h3(#SizerItem_setspacer). SizerItem#set_spacer
 
-  *set_spacer*(%(arg-type)Size% size)
+  *set_spacer*(%(arg-type)"Size":size.html% size)
 
 Set the size of the spacer tracked by this item.
 
 
 h3(#SizerItem_setwindow). SizerItem#set_window
 
-  *set_window*(%(arg-type)Window% window)
+  *set_window*(%(arg-type)"Window":window.html% window)
 
 Set the window to be tracked by thsi item.
 

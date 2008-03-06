@@ -113,7 +113,7 @@ Destructor.
 
 h3(#LayoutAlgorithm_layoutframe). LayoutAlgorithm#layout_frame
 
- Boolean *layout_frame*(%(arg-type)Frame% frame,  %(arg-type)Window% mainWindow = nil)
+ Boolean *layout_frame*(%(arg-type)"Frame":frame.html% frame,  %(arg-type)"Window":window.html% mainWindow = nil)
 
 Lays out the children of a normal frame. _mainWindow_ is set to occupy the remaining space.
 
@@ -121,7 +121,7 @@ This function simply calls "LayoutAlgorithm#layout_window":layoutalgorithm.html#
 
 h3(#LayoutAlgorithm_layoutmdiframe). LayoutAlgorithm#layout_mdi_frame
 
- Boolean *layout_mdi_frame*(%(arg-type)MDIParentFrame% frame,  %(arg-type)Rect% rect = nil)
+ Boolean *layout_mdi_frame*(%(arg-type)"MDIParentFrame":mdiparentframe.html% frame,  %(arg-type)"Rect":rect.html% rect = nil)
 
 Lays out the children of an MDI parent frame. If _rect_ is non-NULL, the
 given rectangle will be used as a starting point instead of the frame's client area.
@@ -130,7 +130,7 @@ The MDI client window is set to occupy the remaining space.
 
 h3(#LayoutAlgorithm_layoutwindow). LayoutAlgorithm#layout_window
 
- Boolean *layout_window*(%(arg-type)Window% parent,  %(arg-type)Window% mainWindow = nil)
+ Boolean *layout_window*(%(arg-type)"Window":window.html% parent,  %(arg-type)"Window":window.html% mainWindow = nil)
 
 Lays out the children of a normal frame or other window.
 

@@ -143,14 +143,14 @@ interface, and MEDIACTRLPLAYERCONTROLS_DEFAULT which lets MediaCtrl
 decide what native controls on the interface. 
 h3(#MediaCtrl_wxmediactrl). MediaCtrl.new
 
- MediaCtrl *new*(%(arg-type)Window% parent, 
+ MediaCtrl *new*(%(arg-type)"Window":window.html% parent, 
                  %(arg-type)Integer% id, 
                  %(arg-type)String% fileName = "", 
-                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                 %(arg-type)Size% size = DEFAULT_SIZE, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                  %(arg-type)Integer% style = 0, 
                  %(arg-type)String% backend = "", 
-                 %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                 %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                  %(arg-type)String% name = PanelNameStr )
 
 Creates this control.  Returns @false@ if it can't load the movie
@@ -224,28 +224,28 @@ Loads the file that @fileName@ refers to.  Returns false if loading fails.
 
 h3(#MediaCtrl_loaduri). MediaCtrl#load
 
- Boolean *load*(%(arg-type)URI% uri)
+ Boolean *load*(%(arg-type)"URI":uri.html% uri)
 
 Loads the location that @uri@ refers to.  Note that this is very implementation-dependant, although HTTP URI/URLs are generally supported, for example. Returns false if loading fails.
 
 
 h3(#MediaCtrl_loaduriwithproxy). MediaCtrl#load
 
- Boolean *load*(%(arg-type)URI% uri,  %(arg-type)URI% proxy)
+ Boolean *load*(%(arg-type)"URI":uri.html% uri,  %(arg-type)"URI":uri.html% proxy)
 
 Loads the location that @uri@ refers to with the proxy @proxy@. Not implemented on most backends so it should be called with caution. Returns false if loading fails.
 
 
 h3(#MediaCtrl_loaduriliteral). MediaCtrl#load_uri
 
- Boolean *load_uri*(%(arg-type)URI% uri)
+ Boolean *load_uri*(%(arg-type)"URI":uri.html% uri)
 
 Same as "Load":mediactrlloaduri.html. Kept for Python compatability.
 
 
 h3(#MediaCtrl_loaduriwithproxyliteral). MediaCtrl#load_uri_with_proxy
 
- Boolean *load_uri_with_proxy*(%(arg-type)URI% uri,  %(arg-type)URI% proxy)
+ Boolean *load_uri_with_proxy*(%(arg-type)"URI":uri.html% uri,  %(arg-type)"URI":uri.html% proxy)
 
 Same as "Load":mediactrlloaduriwithproxy.html. Kept for Python compatability.
 
@@ -266,14 +266,14 @@ Resumes playback of the movie.
 
 h3(#MediaCtrl_setposition). MediaCtrl#seek
 
- Integer *seek*(%(arg-type)FileOffset% where,  %(arg-type)SeekMode% mode)
+ Integer *seek*(%(arg-type)"FileOffset":fileoffset.html% where,  %(arg-type)"SeekMode":seekmode.html% mode)
 
 Seeks to a position within the movie.
 
 
 h3(#MediaCtrl_setplaybackrate). MediaCtrl#set_playback_rate
 
- Boolean *set_playback_rate*(%(arg-type)double% dRate)
+ Boolean *set_playback_rate*(%(arg-type)Float% dRate)
 
 Sets the playback rate, or speed of the media, to that referred by @dRate@.
 @1.0@ represents normal speed, while @2.0@ represents twice the normal
@@ -283,7 +283,7 @@ Returns true if successful.
 
 h3(#MediaCtrl_setvolume). MediaCtrl#set_volume
 
- Boolean *set_volume*(%(arg-type)double% dVolume)
+ Boolean *set_volume*(%(arg-type)Float% dVolume)
 
 Sets the volume of the media from a 0.0 to 1.0 range to that referred
 by @dVolume@.  @1.0@ represents full volume, while @0.5@
@@ -294,7 +294,7 @@ full or none is always exact. Returns true if successful.
 
 h3(#MediaCtrl_showplayercontrols). MediaCtrl#show_player_controls
 
- Boolean *show_player_controls*(%(arg-type)MediaCtrlPlayerControls% flags = MEDIACTRLPLAYERCONTROLS_DEFAULT)
+ Boolean *show_player_controls*(%(arg-type)"MediaCtrlPlayerControls":mediactrlplayercontrols.html% flags = MEDIACTRLPLAYERCONTROLS_DEFAULT)
 
 A special feature to MediaCtrl. Applications using native toolkits such as
 QuickTime usually have a scrollbar, play button, and more provided to

@@ -44,7 +44,7 @@ h2. Methods
 
 h3(#SetCursorEvent_new). SetCursorEvent.new
 
-  *SetCursorEvent.new*(%(arg-type)Coord% x = 0,  %(arg-type)Coord% y = 0)
+  *SetCursorEvent.new*(%(arg-type)"Coord":coord.html% x = 0,  %(arg-type)"Coord":coord.html% y = 0)
 
 Constructor, used by the library itself internally to initialize the event
 object.
@@ -85,7 +85,7 @@ considered a valid cursor.
 
 h3(#SetCursorEvent_setcursor). SetCursorEvent#set_cursor
 
-  *set_cursor*(%(arg-type)Cursor% cursor)
+  *set_cursor*(%(arg-type)"Cursor":cursor.html% cursor)
 
 Sets the cursor associated with this event.
 

@@ -58,11 +58,11 @@ h2. Methods
 
 h3(#MenuItem_new). MenuItem.new
 
-  *MenuItem.new*(%(arg-type)Menu% parentMenu = nil,  %(arg-type)Integer% id = ID_SEPARATOR, 
+  *MenuItem.new*(%(arg-type)"Menu":menu.html% parentMenu = nil,  %(arg-type)Integer% id = ID_SEPARATOR, 
                %(arg-type)String% text = "", 
                 %(arg-type)String% helpString = "", 
-               %(arg-type)ItemKind% kind = ITEM_NORMAL, 
-               %(arg-type)Menu% subMenu = nil)
+               %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL, 
+               %(arg-type)"Menu":menu.html% subMenu = nil)
 
 Constructs a MenuItem object.
 
@@ -264,14 +264,14 @@ Returns true if the item is a submenu.
 
 h3(#MenuItem_setbackgroundcolour). MenuItem#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% colour)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the background colour associated with the menu item (Windows only).
 
 
 h3(#MenuItem_setbitmap). MenuItem#set_bitmap
 
-  *set_bitmap*(%(arg-type)Bitmap% bmp)
+  *set_bitmap*(%(arg-type)"Bitmap":bitmap.html% bmp)
 
 Sets the bitmap for the menu item (Windows and GTK+ only). It is
 equivalent to "set_bitmaps":#MenuItem_setbitmaps(bmp, NullBitmap).
@@ -279,7 +279,7 @@ equivalent to "set_bitmaps":#MenuItem_setbitmaps(bmp, NullBitmap).
 
 h3(#MenuItem_setbitmaps). MenuItem#set_bitmaps
 
-  *set_bitmaps*(%(arg-type)Bitmap% checked,  %(arg-type)Bitmap% unchecked = NullBitmap)
+  *set_bitmaps*(%(arg-type)"Bitmap":bitmap.html% checked,  %(arg-type)"Bitmap":bitmap.html% unchecked = NullBitmap)
 
 Sets the checked/unchecked bitmaps for the menu item (Windows only). The first bitmap
 is also used as the single bitmap for uncheckable menu items.
@@ -287,7 +287,7 @@ is also used as the single bitmap for uncheckable menu items.
 
 h3(#MenuItem_setfont). MenuItem#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets the font associated with the menu item (Windows only).
 
@@ -308,14 +308,14 @@ Sets the width of the menu item checkmark bitmap (Windows only).
 
 h3(#MenuItem_setmenu). MenuItem#set_menu
 
-  *set_menu*(%(arg-type)Menu% menu)
+  *set_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Sets the parent menu which will contain this menu item.
 
 
 h3(#MenuItem_setsubmenu). MenuItem#set_sub_menu
 
-  *set_sub_menu*(%(arg-type)Menu% menu)
+  *set_sub_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Sets the submenu of this menu item.
 
@@ -329,7 +329,7 @@ Sets the text associated with the menu item.
 
 h3(#MenuItem_settextcolour). MenuItem#set_text_colour
 
-  *set_text_colour*(%(arg-type)Colour% colour)
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the text colour associated with the menu item (Windows only).
 

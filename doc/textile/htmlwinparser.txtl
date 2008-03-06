@@ -64,14 +64,14 @@ h2. Methods
 
 h3(#HtmlWinParser_wxhtmlwinparser). HtmlWinParser.new
 
-  *HtmlWinParser.new*(%(arg-type)HtmlWindow% wnd)
+  *HtmlWinParser.new*(%(arg-type)"HtmlWindow":htmlwindow.html% wnd)
 
 Constructor. Don't use the default one, use constructor with
 _wnd_ parameter (_wnd_ is pointer to associated "HtmlWindow":htmlwindow.html)
 
 h3(#HtmlWinParser_addmodule). HtmlWinParser#add_module
 
-  *add_module*(%(arg-type)HtmlTagsModule% module)
+  *add_module*(%(arg-type)"HtmlTagsModule":htmltagsmodule.html% module)
 
 Adds "module":handlers.html to the list of HtmlWinParser tag handler.
 
@@ -231,7 +231,7 @@ Opens new container and returns pointer to it (see "Overview":cells.html).
 
 h3(#HtmlWinParser_setactualcolor). HtmlWinParser#set_actual_color
 
-  *set_actual_color*(%(arg-type)Colour% clr)
+  *set_actual_color*(%(arg-type)"Colour":colour.html% clr)
 
 Sets actual text colour. Note: this DOESN'T change the colour!
 You must create "HtmlColourCell":htmlcolourcell.html yourself.
@@ -246,14 +246,14 @@ Alignment of newly opened container is set to this value.
 
 h3(#HtmlWinParser_setcontainer). HtmlWinParser#set_container
 
- "HtmlContainerCell":htmlcontainercell.html *set_container*(%(arg-type)HtmlContainerCell% c)
+ "HtmlContainerCell":htmlcontainercell.html *set_container*(%(arg-type)"HtmlContainerCell":htmlcontainercell.html% c)
 
 Allows you to directly set opened container. This is not recommended - you should use OpenContainer
 wherever possible.
 
 h3(#HtmlWinParser_setdc). HtmlWinParser#set_dc
 
-  *set_dc*(%(arg-type)DC% dc,  %(arg-type)double% pixel_scale = 1.0)
+  *set_dc*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Float% pixel_scale = 1.0)
 
 Sets the DC. This must be called before "Parse":htmlparserparse.html!
 _pixel_scale_  can be used when rendering to high-resolution 
@@ -309,7 +309,7 @@ detailed description.
 
 h3(#HtmlWinParser_setinputencoding). HtmlWinParser#set_input_encoding
 
-  *set_input_encoding*(%(arg-type)FontEncoding% enc)
+  *set_input_encoding*(%(arg-type)"FontEncoding":fontencoding.html% enc)
 
 Sets input encoding. The parser uses this information to build conversion
 tables from document's encoding to some encoding supported by operating
@@ -317,7 +317,7 @@ system.
 
 h3(#HtmlWinParser_setlink). HtmlWinParser#set_link
 
-  *set_link*(%(arg-type)HtmlLinkInfo% link)
+  *set_link*(%(arg-type)"HtmlLinkInfo":htmllinkinfo.html% link)
 
 Sets actual hypertext link. Empty link is represented
 by "HtmlLinkInfo":htmllinkinfo.html with _Href_ equal
@@ -325,7 +325,7 @@ to EmptyString.
 
 h3(#HtmlWinParser_setlinkcolor). HtmlWinParser#set_link_color
 
-  *set_link_color*(%(arg-type)Colour% clr)
+  *set_link_color*(%(arg-type)"Colour":colour.html% clr)
 
 Sets colour of hypertext link.
 

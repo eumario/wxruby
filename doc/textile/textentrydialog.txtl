@@ -31,11 +31,11 @@ h2. Methods
 
 h3(#TextEntryDialog_new). TextEntryDialog.new
 
-  *TextEntryDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message, 
+  *TextEntryDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
                       %(arg-type)String% caption = "Please enter text", 
                       %(arg-type)String% defaultValue = "", 
                       %(arg-type)Integer% style = OK CANCEL CENTRE, 
-                      %(arg-type)Point% pos = DEFAULT_POSITION)
+                      %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
 
 Constructor. Use "TextEntryDialog#show_modal":textentrydialog.html#TextEntryDialog_showmodal to show the dialog.
 

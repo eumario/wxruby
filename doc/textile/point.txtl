@@ -44,14 +44,14 @@ y member.
 
 h3(#Point_equal). Point#==
 
- Boolean *operator $==$*(%(arg-type)Point% pt)
+ Boolean *operator $==$*(%(arg-type)"Point":point.html% pt)
 
 Equality operator: returns  if two points are the same.
 
 
 h3(#Point_notequal). Point#!=
 
- Boolean *operator $!=$*(%(arg-type)Point% pt)
+ Boolean *operator $!=$*(%(arg-type)"Point":point.html% pt)
 
 Inequality operator: returns  if two points are different.
 

@@ -36,7 +36,7 @@ h2. Methods
 h3(#HtmlEasyPrinting_wxhtmleasyprinting). HtmlEasyPrinting.new
 
   *HtmlEasyPrinting.new*(%(arg-type)String% name = "Printing", 
-                       %(arg-type)Window% parentWindow = nil)
+                       %(arg-type)"Window":window.html% parentWindow = nil)
 
 Constructor.
 

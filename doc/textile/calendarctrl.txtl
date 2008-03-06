@@ -125,10 +125,10 @@ h2. Methods
 
 h3(#CalendarCtrl_wxcalendarctrldef). CalendarCtrl.new
 
-  *CalendarCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                   %(arg-type)DateTime% date = DefaultDateTime, 
-                   %(arg-type)Point% pos = DEFAULT_POSITION, 
-                   %(arg-type)Size% size = DEFAULT_SIZE, 
+  *CalendarCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                   %(arg-type)"DateTime":datetime.html% date = DefaultDateTime, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                    %(arg-type)Integer% style = CAL_SHOW_HOLIDAYS, 
                    %(arg-type)String% name = CalendarNameStr)
 
@@ -137,10 +137,10 @@ Does the same as "Create":calendarctrlcreate.html method.
 
 h3(#CalendarCtrl_create). CalendarCtrl#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)DateTime% date = DefaultDateTime, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"DateTime":datetime.html% date = DefaultDateTime, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = CAL_SHOW_HOLIDAYS, 
                 %(arg-type)String% name = CalendarNameStr)
 
@@ -155,7 +155,7 @@ Destroys the control.
 
 h3(#CalendarCtrl_setdate). CalendarCtrl#set_date
 
-  *set_date*(%(arg-type)DateTime% date)
+  *set_date*(%(arg-type)"DateTime":datetime.html% date)
 
 Sets the current date.
 
@@ -197,7 +197,7 @@ holidays.
 
 h3(#CalendarCtrl_setheadercolours). CalendarCtrl#set_header_colours
 
-  *set_header_colours*(%(arg-type)Colour% colFg,  %(arg-type)Colour% colBg)
+  *set_header_colours*(%(arg-type)"Colour":colour.html% colFg,  %(arg-type)"Colour":colour.html% colBg)
 
 Set the colours used for painting the weekdays at the top of the control.
 
@@ -226,7 +226,7 @@ h4. See also
 
 h3(#CalendarCtrl_sethighlightcolours). CalendarCtrl#set_highlight_colours
 
-  *set_highlight_colours*(%(arg-type)Colour% colFg,  %(arg-type)Colour% colBg)
+  *set_highlight_colours*(%(arg-type)"Colour":colour.html% colFg,  %(arg-type)"Colour":colour.html% colBg)
 
 Set the colours to be used for highlighting the currently selected date.
 
@@ -255,7 +255,7 @@ h4. See also
 
 h3(#CalendarCtrl_setholidaycolours). CalendarCtrl#set_holiday_colours
 
-  *set_holiday_colours*(%(arg-type)Colour% colFg,  %(arg-type)Colour% colBg)
+  *set_holiday_colours*(%(arg-type)"Colour":colour.html% colFg,  %(arg-type)"Colour":colour.html% colBg)
 
 Sets the colours to be used for the holidays highlighting (only used if the
 window style includes @CAL_SHOW_HOLIDAYS@ flag).
@@ -294,7 +294,7 @@ The returned pointer may be @NULL@.
 
 h3(#CalendarCtrl_setattr). CalendarCtrl#set_attr
 
-  *set_attr*(%(arg-type)Integer% day,  %(arg-type)CalendarDateAttr% attr)
+  *set_attr*(%(arg-type)Integer% day,  %(arg-type)"CalendarDateAttr":calendardateattr.html% attr)
 
 Associates the attribute with the specified date (in the range $1$).
 
@@ -318,8 +318,8 @@ $1$).
 
 h3(#CalendarCtrl_hittest). CalendarCtrl#hit_test
 
- "CalendarHitTestResult":calendarhittestresult.html *hit_test*(%(arg-type)Point% pos, 
-                                  %(arg-type)DateTime% date = nil, 
+ "CalendarHitTestResult":calendarhittestresult.html *hit_test*(%(arg-type)"Point":point.html% pos, 
+                                  %(arg-type)"DateTime":datetime.html% date = nil, 
                                   %(arg-type)DateTime::WeekDay% wd = nil)
 
 Returns one of @CAL_HITTEST_XXX@ 

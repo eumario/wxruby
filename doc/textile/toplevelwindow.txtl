@@ -124,7 +124,7 @@ h4. See also
 
 h3(#TopLevelWindow_handlesettingchange). TopLevelWindow#handle_setting_change
 
- Boolean *handle_setting_change*(%(arg-type)WPARAM% wParam,  %(arg-type)LPARAM% lParam)
+ Boolean *handle_setting_change*(%(arg-type)"WPARAM":wparam.html% wParam,  %(arg-type)"LPARAM":lparam.html% lParam)
 
 Unique to the WinCE port. Responds to showing/hiding SIP (soft input panel) area and resize
 window accordingly. Override this if you want to avoid resizing or do additional
@@ -238,7 +238,7 @@ window icon in the taskbar, and for GTK with task bars supporting it.
 
 h3(#TopLevelWindow_setdefaultitem). TopLevelWindow#set_default_item
 
-  *set_default_item*(%(arg-type)Window% win)
+  *set_default_item*(%(arg-type)"Window":window.html% win)
 
 Changes the default item for the panel, usually win is a button.
 
@@ -249,7 +249,7 @@ h4. See also
 
 h3(#TopLevelWindow_seticon). TopLevelWindow#set_icon
 
-  *set_icon*(%(arg-type)Icon% icon)
+  *set_icon*(%(arg-type)"Icon":icon.html% icon)
 
 Sets the icon for this window.
 
@@ -268,7 +268,7 @@ See also "Icon":icon.html.
 
 h3(#TopLevelWindow_seticons). TopLevelWindow#set_icons
 
-  *set_icons*(%(arg-type)IconBundle% icons)
+  *set_icons*(%(arg-type)"IconBundle":iconbundle.html% icons)
 
 Sets several icons of different sizes for this window: this allows to use
 different icons for different situations (e.g. task switching bar, taskbar,
@@ -287,7 +287,7 @@ h4. See also
 h3(#TopLevelWindow_setleftmenu). TopLevelWindow#set_left_menu
 
   *set_left_menu*(%(arg-type)Integer% id = ID_ANY,  %(arg-type)String% label = '', 
-                %(arg-type)Menu% subMenu = nil)
+                %(arg-type)"Menu":menu.html% subMenu = nil)
 
 Sets action or menu activated by pressing left hardware button on the smart phones.
 Unavailable on full keyboard machines.
@@ -305,14 +305,14 @@ h4. See also
 
 h3(#TopLevelWindow_setmaxsize). TopLevelWindow#set_max_size
 
-  *set_max_size*(%(arg-type)Size% size)
+  *set_max_size*(%(arg-type)"Size":size.html% size)
 
 A simpler interface for setting the size hints than
 "set_size_hints":#TopLevelWindow_setsizehints.
 
 h3(#TopLevelWindow_setminsize). TopLevelWindow#set_min_size
 
-  *set_min_size*(%(arg-type)Size% size)
+  *set_min_size*(%(arg-type)"Size":size.html% size)
 
 A simpler interface for setting the size hints than
 "set_size_hints":#TopLevelWindow_setsizehints.
@@ -324,8 +324,8 @@ h3(#TopLevelWindow_setsizehints). TopLevelWindow#set_size_hints
                  %(arg-type)Integer% incW=-1, 
                  %(arg-type)Integer% incH=-1)
 
-  *set_size_hints*(%(arg-type)Size% minSize, %(arg-type)Size% maxSize=DefaultSize, 
-                 %(arg-type)Size% incSize=DefaultSize)
+  *set_size_hints*(%(arg-type)"Size":size.html% minSize, %(arg-type)"Size":size.html% maxSize=DefaultSize, 
+                 %(arg-type)"Size":size.html% incSize=DefaultSize)
 
 Allows specification of minimum and maximum window sizes, and window size increments.
 If a pair of values is not set (or set to -1), the default values will be used.
@@ -343,7 +343,7 @@ the given bounds. The resizing increments are only significant under Motif or Xt
 h3(#TopLevelWindow_setrightmenu). TopLevelWindow#set_right_menu
 
   *set_right_menu*(%(arg-type)Integer% id = ID_ANY,  %(arg-type)String% label = '', 
-                 %(arg-type)Menu% subMenu = nil)
+                 %(arg-type)"Menu":menu.html% subMenu = nil)
 
 Sets action or menu activated by pressing right hardware button on the smart phones.
 Unavailable on full keyboard machines.
@@ -361,7 +361,7 @@ h4. See also
 
 h3(#TopLevelWindow_setshape). TopLevelWindow#set_shape
 
- Boolean *set_shape*(%(arg-type)Region% region)
+ Boolean *set_shape*(%(arg-type)"Region":region.html% region)
 
 If the platform supports it, sets the shape of the window to that
 depicted by _region_.  The system will not display or

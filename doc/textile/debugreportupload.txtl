@@ -35,7 +35,7 @@ path to it.
 
 h3(#DebugReportUpload_onserverreply). DebugReportUpload#on_server_reply
 
- Boolean *on_server_reply*(%(arg-type)ArrayString% WXUNUSED(reply))
+ Boolean *on_server_reply*(%(arg-type)"ArrayString":arraystring.html% WXUNUSED(reply))
 
 This function may be overridden in a derived class to show the output from
 curl: this may be an HTML page or anything else that the server returned.

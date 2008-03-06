@@ -60,23 +60,23 @@ h2. Methods
 
 h3(#RadioBox_new). RadioBox.new
 
-  *RadioBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-               %(arg-type)Point% point = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+  *RadioBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+               %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% n = 0, 
                %(arg-type)String% choices[] = nil, 
                %(arg-type)Integer% majorDimension = 0, 
                %(arg-type)Integer% style = RA_SPECIFY_COLS, 
-               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "radioBox")
 
-  *RadioBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-               %(arg-type)Point% point, 
-               %(arg-type)Size% size, 
-               %(arg-type)ArrayString% choices, 
+  *RadioBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+               %(arg-type)"Point":point.html% point, 
+               %(arg-type)"Size":size.html% size, 
+               %(arg-type)"ArrayString":arraystring.html% choices, 
                %(arg-type)Integer% majorDimension = 0, 
                %(arg-type)Integer% style = RA_SPECIFY_COLS, 
-               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "radioBox")
 
 Constructor, creating and showing a radiobox.
@@ -110,23 +110,23 @@ Destructor, destroying the radiobox item.
 
 h3(#RadioBox_create). RadioBox#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)Point% point = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% n = 0, 
                 %(arg-type)String% choices[] = nil, 
                 %(arg-type)Integer% majorDimension = 0, 
                 %(arg-type)Integer% style = RA_SPECIFY_COLS, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "radioBox")
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)Point% point, 
-                %(arg-type)Size% size, 
-                %(arg-type)ArrayString% choices, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% point, 
+                %(arg-type)"Size":size.html% size, 
+                %(arg-type)"ArrayString":arraystring.html% choices, 
                 %(arg-type)Integer% majorDimension = 0, 
                 %(arg-type)Integer% style = RA_SPECIFY_COLS, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "radioBox")
 
 Creates the radiobox for two-step construction. See "RadioBox.new":radiobox.html#RadioBox_new for further details.

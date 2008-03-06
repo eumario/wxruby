@@ -29,10 +29,10 @@ h2. Methods
 
 h3(#HtmlTag_wxhtmltag). HtmlTag.new
 
-  *HtmlTag.new*(%(arg-type)HtmlTag% parent,  %(arg-type)String% source,  %(arg-type)Integer% pos, 
+  *HtmlTag.new*(%(arg-type)"HtmlTag":htmltag.html% parent,  %(arg-type)String% source,  %(arg-type)Integer% pos, 
               %(arg-type)Integer% end_pos, 
-              %(arg-type)HtmlTagsCache% cache, 
-              %(arg-type)HtmlEntitiesParser% entParser)
+              %(arg-type)"HtmlTagsCache":htmltagscache.html% cache, 
+              %(arg-type)"HtmlEntitiesParser":htmlentitiesparser.html% entParser)
 
 Constructor. You will probably never have to construct a HtmlTag object
 yourself. Feel free to ignore the constructor parameters.
@@ -126,7 +126,7 @@ h4. Example
 
 h3(#HtmlTag_getparamascolour). HtmlTag#get_param_as_colour
 
- Boolean *get_param_as_colour*(%(arg-type)String% par,  %(arg-type)Colour% clr)
+ Boolean *get_param_as_colour*(%(arg-type)String% par,  %(arg-type)"Colour":colour.html% clr)
 
 Interprets tag parameter _par_ as colour specification and saves its value
 into Colour variable pointed by _clr_.
@@ -179,7 +179,7 @@ h4. Parameters
 
 h3(#HtmlTag_scanparam). HtmlTag#scan_param
 
- String *scan_param*(%(arg-type)String% par,  %(arg-type)Char% format,  %(arg-type)% value)
+ String *scan_param*(%(arg-type)String% par,  %(arg-type)"Char":char.html% format,  %(arg-type)% value)
 
 This method scans the given parameter. Usage is exactly the same as sscanf's 
 usage except that you don't pass a string but a parameter name as the first

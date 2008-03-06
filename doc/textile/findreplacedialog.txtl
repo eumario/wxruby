@@ -27,7 +27,7 @@ h2. Methods
 
 h3(#FindReplaceDialog_new). FindReplaceDialog.new
 
-  *FindReplaceDialog.new*(%(arg-type)Window% parent,  %(arg-type)FindReplaceData% data, 
+  *FindReplaceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"FindReplaceData":findreplacedata.html% data, 
                         %(arg-type)String% title, 
                         %(arg-type)Integer% style = 0)
 
@@ -42,7 +42,7 @@ Destructor.
 
 h3(#FindReplaceDialog_create). FindReplaceDialog#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)FindReplaceData% data, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)"FindReplaceData":findreplacedata.html% data, 
                 %(arg-type)String% title, 
                 %(arg-type)Integer% style = 0)
 

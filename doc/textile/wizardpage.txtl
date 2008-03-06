@@ -48,8 +48,8 @@ h2. Methods
 
 h3(#WizardPage_wxwizardpage). WizardPage.new
 
-  *WizardPage.new*(%(arg-type)Wizard% parent,  %(arg-type)Bitmap% bitmap = NullBitmap, 
-                 %(arg-type)Char% resource = nil)
+  *WizardPage.new*(%(arg-type)"Wizard":wizard.html% parent,  %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap, 
+                 %(arg-type)"Char":char.html% resource = nil)
 
 Constructor accepts an optional bitmap which will be used for this page
 instead of the default one for this wizard (note that all bitmaps used should

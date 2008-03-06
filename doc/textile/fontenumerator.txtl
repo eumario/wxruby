@@ -49,7 +49,7 @@ h2. Methods
 
 h3(#FontEnumerator_enumeratefacenames). FontEnumerator#enumerate_facenames
 
- Boolean *enumerate_facenames*(    %(arg-type)FontEncoding% encoding = FONTENCODING_SYSTEM, 
+ Boolean *enumerate_facenames*(    %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_SYSTEM, 
                                 %(arg-type)Boolean% fixedWidthOnly = false)
 
 Call "on_facename":#FontEnumerator_onfacename for each font which

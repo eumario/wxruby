@@ -76,12 +76,12 @@ h2. Methods
 
 h3(#ComboBox_new). ComboBox.new
 
-  *ComboBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
-               %(arg-type)Point% pos, 
-               %(arg-type)Size% size, 
-               %(arg-type)Array% choices, 
+  *ComboBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+               %(arg-type)"Point":point.html% pos, 
+               %(arg-type)"Size":size.html% size, 
+               %(arg-type)"Array":array.html% choices, 
                %(arg-type)Integer% style = 0, 
-               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "comboBox")
 
 Constructor, creating and showing a combobox. 
@@ -106,12 +106,12 @@ h4. See also
 
 h3(#ComboBox_create). ComboBox#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
-                %(arg-type)Point% pos, 
-                %(arg-type)Size% size, 
-                %(arg-type)ArrayString% choices, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+                %(arg-type)"Point":point.html% pos, 
+                %(arg-type)"Size":size.html% size, 
+                %(arg-type)"ArrayString":arraystring.html% choices, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "comboBox")
 
 Creates the combobox for two-step construction. Derived classes should call or replace this function. See "ComboBox.new":combobox.html#ComboBox_new for further details.

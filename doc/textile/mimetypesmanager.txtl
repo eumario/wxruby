@@ -87,7 +87,7 @@ information in either mailcap(5) or mime.types(5) format.
 
 h3(#MimeTypesManager_addfallbacks). MimeTypesManager#add_fallbacks
 
-  *add_fallbacks*(%(arg-type)FileTypeInfo% fallbacks)
+  *add_fallbacks*(%(arg-type)"FileTypeInfo":filetypeinfo.html% fallbacks)
 
 This function may be used to provide hard-wired fallbacks for the MIME types
 and extensions that might not be present in the system MIME database.

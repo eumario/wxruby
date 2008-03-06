@@ -54,7 +54,7 @@ h3(#Cursor_new). Cursor.new
 Constructs a cursor using a cursor identifier; valid constants for this
 parameter are given below.
 
-  *Cursor.new*(%(arg-type)Image% image)
+  *Cursor.new*(%(arg-type)"Image":image.html% image)
 
 Constructs a cursor from a Image. The cursor is monochrome, colors with the RGB elements all greater
 than 127 will be foreground, colors less than this background. The mask (if any) will be used as transparent.
@@ -64,7 +64,7 @@ In GTK, the two most frequent colors will be used for foreground and background.
 at the size of the image.
 On MacOS if the cursor is larger than 16x16 it is resized and currently only shown as black/white (mask respected).
 
-  *Cursor.new*(%(arg-type)Cursor% cursor)
+  *Cursor.new*(%(arg-type)"Cursor":cursor.html% cursor)
 
 Copy constructor. This uses reference counting so is a cheap operation.
 
@@ -135,7 +135,7 @@ Returns true if cursor data is present.
 
 h3(#Cursor_equals). Cursor#==
 
- Boolean *operator $==$*(%(arg-type)Cursor% cursor)
+ Boolean *operator $==$*(%(arg-type)"Cursor":cursor.html% cursor)
 
 Equality operator. Two cursors are equal if they point to to the same
 underlying cursor data. It does not compare each attribute, so two

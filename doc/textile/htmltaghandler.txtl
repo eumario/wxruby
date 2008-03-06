@@ -41,7 +41,7 @@ are delimited by ','. Example : @"I,B,FONT,P" @
 
 h3(#HtmlTagHandler_handletag). HtmlTagHandler#handle_tag
 
- Boolean *handle_tag*(%(arg-type)HtmlTag% tag)
+ Boolean *handle_tag*(%(arg-type)"HtmlTag":htmltag.html% tag)
 
 This is the core method of each handler. It is called each time
 one of supported tags is detected. _tag_ contains all necessary
@@ -69,7 +69,7 @@ You shouldn't call ParseInner if the tag is not paired with an ending one.
 
 h3(#HtmlTagHandler_parseinner). HtmlTagHandler#parse_inner
 
-  *parse_inner*(%(arg-type)HtmlTag% tag)
+  *parse_inner*(%(arg-type)"HtmlTag":htmltag.html% tag)
 
 This method calls parser's "do_parsing":#HtmlTagHandler_doparsing method
 for the string between this tag and the paired ending tag:
@@ -83,7 +83,7 @@ will parse 'Hello, world!'.
 
 h3(#HtmlTagHandler_setparser). HtmlTagHandler#set_parser
 
-  *set_parser*(%(arg-type)HtmlParser% parser)
+  *set_parser*(%(arg-type)"HtmlParser":htmlparser.html% parser)
 
 Assigns _parser_ to this handler. Each *instance* of handler 
 is guaranteed to be called only from the parser.

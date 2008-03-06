@@ -55,7 +55,7 @@ h3(#HtmlParser_wxhtmlparser). HtmlParser.new
 
 h3(#HtmlParser_addtag). HtmlParser#add_tag
 
-  *add_tag*(%(arg-type)HtmlTag% tag)
+  *add_tag*(%(arg-type)"HtmlTag":htmltag.html% tag)
 
 This may (and may not) be overwritten in derived class.
 
@@ -69,7 +69,7 @@ handler's HandleTag method.
 
 h3(#HtmlParser_addtaghandler). HtmlParser#add_tag_handler
 
-  *add_tag_handler*(%(arg-type)HtmlTagHandler% handler)
+  *add_tag_handler*(%(arg-type)"HtmlTagHandler":htmltaghandler.html% handler)
 
 Adds handler to the internal list (& hash table) of handlers. This
 method should not be called directly by user but rather by derived class'
@@ -83,7 +83,7 @@ All handlers are deleted on object deletion.
 
 h3(#HtmlParser_addword). HtmlParser#add_text
 
-  *add_word*(%(arg-type)char% txt)
+  *add_word*(%(arg-type)"char":char.html% txt)
 
 Must be overwritten in derived class.
 
@@ -145,7 +145,7 @@ in derived class)
 
 h3(#HtmlParser_openurl). HtmlParser#open_url
 
- "FSFile":fsfile.html *open_url*(%(arg-type)HtmlURLType% type,  %(arg-type)String% url)
+ "FSFile":fsfile.html *open_url*(%(arg-type)"HtmlURLType":htmlurltype.html% type,  %(arg-type)String% url)
 
 Opens given URL and returns @FSFile@ object that can be used to read data
 from it. This method may return NULL in one of two cases: either the URL doesn't
@@ -197,7 +197,7 @@ You shouldn't use InitParser, DoParsing, GetProduct or DoneParser directly.
 
 h3(#HtmlParser_pushtaghandler). HtmlParser#push_tag_handler
 
-  *push_tag_handler*(%(arg-type)HtmlTagHandler% handler,  %(arg-type)String% tags)
+  *push_tag_handler*(%(arg-type)"HtmlTagHandler":htmltaghandler.html% handler,  %(arg-type)String% tags)
 
 Forces the handler to handle additional tags 
 (not returned by "get_supported_tags":#HtmlParser_getsupportedtags). 
@@ -256,7 +256,7 @@ Restores parser's state before last call to
 
 h3(#HtmlParser_setfs). HtmlParser#set_fs
 
-  *set_fs*(%(arg-type)FileSystem% fs)
+  *set_fs*(%(arg-type)"FileSystem":filesystem.html% fs)
 
 Sets the virtual file system that will be used to request additional
 files. (For example @<IMG>@ tag handler requests FSFile with the

@@ -78,9 +78,9 @@ h2. Methods
 
 h3(#HtmlWindow_wxhtmlwindow). HtmlWindow.new
 
-  *HtmlWindow.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
-                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                 %(arg-type)Size% size = DEFAULT_SIZE, 
+  *HtmlWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                  %(arg-type)Integer% style = HW_DEFAULT_STYLE, 
                  %(arg-type)String% name = "htmlWindow")
 
@@ -92,7 +92,7 @@ h4. Parameters
 
 h3(#HtmlWindow_addfilter). HtmlWindow#add_filter
 
-  *add_filter*(%(arg-type)HtmlFilter% filter)
+  *add_filter*(%(arg-type)"HtmlFilter":htmlfilter.html% filter)
 
 Adds "input filter":filters.html to the static list of available
 filters. These filters are present by default:
@@ -191,7 +191,7 @@ Moves to next page in history.
 
 h3(#HtmlWindow_loadfile). HtmlWindow#load_file
 
- Boolean *load_file*(%(arg-type)FileName% filename)
+ Boolean *load_file*(%(arg-type)"FileName":filename.html% filename)
 
 Loads HTML page from file and displays it.
 
@@ -236,7 +236,7 @@ customise what happens as that part of an HTML page is read.
 
 h3(#HtmlWindow_readcustomization). HtmlWindow#read_customization
 
-  *read_customization*(%(arg-type)ConfigBase% cfg,  %(arg-type)String% path = '')
+  *read_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
 
 This reads custom settings from Config. It uses the path 'path'
 if given, otherwise it saves info into currently selected path.
@@ -269,7 +269,7 @@ is currently selected.
 
 h3(#HtmlWindow_selectline). HtmlWindow#select_line
 
-  *select_line*(%(arg-type)Point% pos)
+  *select_line*(%(arg-type)"Point":point.html% pos)
 
 Selects the line of text that pos points at. Note that pos
 is relative to the top of displayed page, not to window's origin, use
@@ -283,7 +283,7 @@ h4. See also
 
 h3(#HtmlWindow_selectword). HtmlWindow#select_word
 
-  *select_word*(%(arg-type)Point% pos)
+  *select_word*(%(arg-type)"Point":point.html% pos)
 
 Selects the word at position pos. Note that pos
 is relative to the top of displayed page, not to window's origin, use
@@ -350,7 +350,7 @@ false if an error occurred, true otherwise.
 
 h3(#HtmlWindow_setrelatedframe). HtmlWindow#set_related_frame
 
-  *set_related_frame*(%(arg-type)Frame% frame,  %(arg-type)String% format)
+  *set_related_frame*(%(arg-type)"Frame":frame.html% frame,  %(arg-type)String% format)
 
 Sets the frame in which page title will be displayed. _format_ is format of
 frame title, e.g. "HtmlHelp : @%s@". It must contain exactly one @%s@. This
@@ -376,7 +376,7 @@ Returns content of currently displayed page as plain text.
 
 h3(#HtmlWindow_writecustomization). HtmlWindow#write_customization
 
-  *write_customization*(%(arg-type)ConfigBase% cfg,  %(arg-type)String% path = '')
+  *write_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
 
 Saves custom settings into Config. It uses the path 'path'
 if given, otherwise it saves info into currently selected path.

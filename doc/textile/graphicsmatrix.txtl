@@ -28,20 +28,20 @@ h2. Methods
 
 h3(#GraphicsMatrix_concat). GraphicsMatrix#concat
 
-  *concat*(%(arg-type)GraphicsMatrix% t)
+  *concat*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% t)
 
 Concatenates the matrix passed with the current matrix.
 
-  *concat*(%(arg-type)GraphicsMatrix% t)
+  *concat*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% t)
 
 
 h3(#GraphicsMatrix_get). GraphicsMatrix#get
 
- void  *get*(%(arg-type)Double% a=NULL,                         %(arg-type)Double% b=NULL, 
-                                  %(arg-type)Double% c=NULL, 
-                                  %(arg-type)Double% d=NULL, 
-                                  %(arg-type)Double% tx=NULL, 
-                                  %(arg-type)Double% ty=NULL)
+ void  *get*(%(arg-type)"Double":double.html% a=NULL,                         %(arg-type)"Double":double.html% b=NULL, 
+                                  %(arg-type)"Double":double.html% c=NULL, 
+                                  %(arg-type)"Double":double.html% d=NULL, 
+                                  %(arg-type)"Double":double.html% tx=NULL, 
+                                  %(arg-type)"Double":double.html% ty=NULL)
 
 Returns the component values of the matrix via the argument pointers.
 
@@ -59,7 +59,7 @@ Inverts the matrix.
 
 h3(#GraphicsMatrix_isequal). GraphicsMatrix#is_equal
 
- Boolean *is_equal*(%(arg-type)GraphicsMatrix% t)
+ Boolean *is_equal*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% t)
 
 Returns true if the elements of the transformation matrix are equal.
 
@@ -71,40 +71,40 @@ Return true if this is the identity matrix.
 
 h3(#GraphicsMatrix_rotate). GraphicsMatrix#rotate
 
-  *rotate*(%(arg-type)Double% angle)
+  *rotate*(%(arg-type)"Double":double.html% angle)
 
 Rotates this matrix (radians).
 
 h3(#GraphicsMatrix_scale). GraphicsMatrix#scale
 
-  *scale*(%(arg-type)Double% xScale,  %(arg-type)Double% yScale)
+  *scale*(%(arg-type)"Double":double.html% xScale,  %(arg-type)"Double":double.html% yScale)
 
 Scales this matrix.
 
 h3(#GraphicsMatrix_translate). GraphicsMatrix#translate
 
-  *translate*(%(arg-type)Double% dx,  %(arg-type)Double% dy)
+  *translate*(%(arg-type)"Double":double.html% dx,  %(arg-type)"Double":double.html% dy)
 
 Translates this matrix.
 
 h3(#GraphicsMatrix_set). GraphicsMatrix#set
 
-  *set*(%(arg-type)Double% a = 1.0,  %(arg-type)Double% b = 0.0,  %(arg-type)Double% c = 0.0, 
-      %(arg-type)Double% d = 1.0, 
-      %(arg-type)Double% tx = 0.0, 
-      %(arg-type)Double% ty = 0.0)
+  *set*(%(arg-type)"Double":double.html% a = 1.0,  %(arg-type)"Double":double.html% b = 0.0,  %(arg-type)"Double":double.html% c = 0.0, 
+      %(arg-type)"Double":double.html% d = 1.0, 
+      %(arg-type)"Double":double.html% tx = 0.0, 
+      %(arg-type)"Double":double.html% ty = 0.0)
 
 Sets the matrix to the respective values (default values are the identity matrix)
 
 h3(#GraphicsMatrix_transformpoint). GraphicsMatrix#transform_point
 
-  *transform_point*(%(arg-type)Double% x,  %(arg-type)Double% y)
+  *transform_point*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y)
 
 Applies this matrix to a point.
 
 h3(#GraphicsMatrix_transformdistance). GraphicsMatrix#transform_distance
 
-  *transform_distance*(%(arg-type)Double% dx,  %(arg-type)Double% dy)
+  *transform_distance*(%(arg-type)"Double":double.html% dx,  %(arg-type)"Double":double.html% dy)
 
 Applies this matrix to a distance (ie. performs all transforms except translations)
 

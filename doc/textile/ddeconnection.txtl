@@ -77,7 +77,7 @@ h2. Methods
 
 h3(#DDEConnection_new). DDEConnection.new
 
-  *DDEConnection.new*(%(arg-type)char% buffer,  %(arg-type)Integer% size)
+  *DDEConnection.new*(%(arg-type)"char":char.html% buffer,  %(arg-type)Integer% size)
 
 Constructs a connection object. If no user-defined connection object is
 to be derived from DDEConnection, then the constructor should not be
@@ -92,8 +92,8 @@ transactions.
 
 h3(#DDEConnection_advise). DDEConnection#advise
 
- Boolean *advise*(%(arg-type)String% item,  %(arg-type)char% data,  %(arg-type)Integer% size = -1, 
-                %(arg-type)IPCFormat% format = CF_TEXT)
+ Boolean *advise*(%(arg-type)String% item,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+                %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
 
 Called by the server application to advise the client of a change in
 the data associated with the given item. Causes the client
@@ -102,8 +102,8 @@ member to be called. Returns true if successful.
 
 h3(#DDEConnection_execute). DDEConnection#execute
 
- Boolean *execute*(%(arg-type)char% data,  %(arg-type)Integer% size = -1, 
-                 %(arg-type)IPCFormat% format = CF_TEXT)
+ Boolean *execute*(%(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+                 %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
 
 Called by the client application to execute a command on the server. Can
 also be used to transfer arbitrary data to the server (similar
@@ -125,9 +125,9 @@ successful.
 
 h3(#DDEConnection_onadvise). DDEConnection#on_advise
 
- Boolean *on_advise*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)char% data, 
+ Boolean *on_advise*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)"char":char.html% data, 
                    %(arg-type)Integer% size, 
-                   %(arg-type)IPCFormat% format)
+                   %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the client application when the server notifies it of a
 change in the data associated with the given item.
@@ -142,8 +142,8 @@ to delete the connection object.
 
 h3(#DDEConnection_onexecute). DDEConnection#on_execute
 
- Boolean *on_execute*(%(arg-type)String% topic,  %(arg-type)char% data,  %(arg-type)Integer% size, 
-                    %(arg-type)IPCFormat% format)
+ Boolean *on_execute*(%(arg-type)String% topic,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size, 
+                    %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the server application when the client notifies it to
 execute the given data. Note that there is no item associated with
@@ -151,9 +151,9 @@ this message.
 
 h3(#DDEConnection_onpoke). DDEConnection#on_poke
 
- Boolean *on_poke*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)char% data, 
+ Boolean *on_poke*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)"char":char.html% data, 
                  %(arg-type)Integer% size, 
-                 %(arg-type)IPCFormat% format)
+                 %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the server application when the client notifies it to
 accept the given data.
@@ -161,7 +161,7 @@ accept the given data.
 h3(#DDEConnection_onrequest). DDEConnection#on_request
 
  char *on_request*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)Integer% size, 
-                 %(arg-type)IPCFormat% format)
+                 %(arg-type)"IPCFormat":ipcformat.html% format)
 
 Message sent to the server application when the client
 calls "DDEConnection#request":ddeconnection.html#DDEConnection_request. The server
@@ -187,8 +187,8 @@ this doesn't have much meaning in practice.
 
 h3(#DDEConnection_poke). DDEConnection#poke
 
- Boolean *poke*(%(arg-type)String% item,  %(arg-type)char% data,  %(arg-type)Integer% size = -1, 
-              %(arg-type)IPCFormat% format = CF_TEXT)
+ Boolean *poke*(%(arg-type)String% item,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+              %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
 
 Called by the client application to poke data into the server. Can be
 used to transfer arbitrary data to the server. Causes the server
@@ -198,7 +198,7 @@ to be called. Returns true if successful.
 h3(#DDEConnection_request). DDEConnection#request
 
  char *request*(%(arg-type)String% item,  %(arg-type)Integer% size, 
-              %(arg-type)IPCFormat% format = IPC_TEXT)
+              %(arg-type)"IPCFormat":ipcformat.html% format = IPC_TEXT)
 
 Called by the client application to request data from the server. Causes
 the server connection's "DDEConnection#on_request":ddeconnection.html#DDEConnection_onrequest member to be called. Returns a

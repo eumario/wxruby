@@ -36,11 +36,11 @@ h2. Methods
 
 h3(#GridEditorCreatedEvent_constr). GridEditorCreatedEvent.new
 
-  *GridEditorCreatedEvent.new*(%(arg-type)Integer% id,  %(arg-type)EventType% type, 
+  *GridEditorCreatedEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type, 
                              %(arg-type)Object% obj, 
                              %(arg-type)Integer% row, 
                              %(arg-type)Integer% col, 
-                             %(arg-type)Control% ctrl)
+                             %(arg-type)"Control":control.html% ctrl)
 
 h3(#GridEditorCreatedEvent_getcol). GridEditorCreatedEvent#get_col
 
@@ -68,7 +68,7 @@ Sets the column at which the event occurred.
 
 h3(#GridEditorCreatedEvent_setcontrol). GridEditorCreatedEvent#set_control
 
-  *set_control*(%(arg-type)Control% ctrl)
+  *set_control*(%(arg-type)"Control":control.html% ctrl)
 
 Sets the edit control.
 

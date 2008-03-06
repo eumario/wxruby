@@ -25,11 +25,11 @@ h3(#IconBundle_wxiconbundle). IconBundle.new
 
 Initializes the bundle with the icon(s) found in the file.
 
-  *IconBundle.new*(%(arg-type)Icon% icon)
+  *IconBundle.new*(%(arg-type)"Icon":icon.html% icon)
 
 Initializes the bundle with a single icon.
 
-  *IconBundle.new*(%(arg-type)IconBundle% ic)
+  *IconBundle.new*(%(arg-type)"IconBundle":iconbundle.html% ic)
 
 Copy constructor.
 
@@ -45,7 +45,7 @@ Adds all the icons contained in the file to the bundle;
 if the collection already contains icons with the same
 width and height, they are replaced by the new ones.
 
-  *add_icon*(%(arg-type)Icon% icon)
+  *add_icon*(%(arg-type)"Icon":icon.html% icon)
 
 Adds the icon to the collection; if the collection already
 contains an icon with the same width and height, it is
@@ -53,7 +53,7 @@ replaced by the new one.
 
 h3(#IconBundle_geticon). IconBundle#get_icon
 
- "Icon":icon.html *get_icon*(%(arg-type)Size% size)
+ "Icon":icon.html *get_icon*(%(arg-type)"Size":size.html% size)
 
 Returns the icon with the given size; if no such icon exists,
 returns the icon with size SYS_ICON_X/SYS_ICON_Y;
@@ -61,13 +61,13 @@ if no such icon exists,
 returns the first icon in the bundle. If size = Size( -1, -1 ),
 returns the icon with size SYS_ICON_X/SYS_ICON_Y.
 
- "Icon":icon.html *get_icon*(%(arg-type)Coord% size = -1)
+ "Icon":icon.html *get_icon*(%(arg-type)"Coord":coord.html% size = -1)
 
 Same as GetIcon( Size( size, size ) ).
 
 h3(#IconBundle_operatorassign). IconBundle::operator=
 
- "IconBundle":iconbundle.html *operator=*(%(arg-type)IconBundle% ic)
+ "IconBundle":iconbundle.html *operator=*(%(arg-type)"IconBundle":iconbundle.html% ic)
 
 Assignment operator.
 

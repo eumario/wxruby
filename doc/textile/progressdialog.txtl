@@ -28,7 +28,7 @@ h3(#ProgressDialog_new). ProgressDialog.new
 
   *ProgressDialog.new*(%(arg-type)String% title,  %(arg-type)String% message, 
                       %(arg-type)Integer% maximum = 100, 
-                     %(arg-type)Window% parent = nil, 
+                     %(arg-type)"Window":window.html% parent = nil, 
                       %(arg-type)Integer% style = PD_AUTO_HIDE | PD_APP_MODAL)
 
 Constructor. Creates the dialog, displays it and disables user input

@@ -43,10 +43,10 @@ h2. Methods
 
 h3(#GridRangeSelectEvent_constr). GridRangeSelectEvent.new
 
-  *GridRangeSelectEvent.new*(%(arg-type)Integer% id,  %(arg-type)EventType% type, 
+  *GridRangeSelectEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type, 
                            %(arg-type)Object% obj, 
-                           %(arg-type)GridCellCoords% topLeft, 
-                           %(arg-type)GridCellCoords% bottomRight, 
+                           %(arg-type)"GridCellCoords":gridcellcoords.html% topLeft, 
+                           %(arg-type)"GridCellCoords":gridcellcoords.html% bottomRight, 
                            %(arg-type)Boolean% sel = true, 
                            %(arg-type)Boolean% control = false, 
                            %(arg-type)Boolean% shift = false, 
