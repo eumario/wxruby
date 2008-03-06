@@ -99,7 +99,7 @@ h3(#RegKey_new). RegKey.new
 
 The constructor to set the full name of the key.
 
-  *RegKey.new*(%(arg-type)RegKey% keyParent,  %(arg-type)String% strKey)
+  *RegKey.new*(%(arg-type)"RegKey":regkey.html% keyParent,  %(arg-type)String% strKey)
 
 The constructor to set the full name of the key under a previously created parent.
 
@@ -127,14 +127,14 @@ Deletes this key and all of its subkeys and values recursively.
 
 h3(#RegKey_deletekey). RegKey#delete_key
 
-  *delete_key*(%(arg-type)Char% szKey)
+  *delete_key*(%(arg-type)"Char":char.html% szKey)
 
 Deletes the subkey with all of its subkeys/values recursively.
 
 
 h3(#RegKey_deletevalue). RegKey#delete_value
 
-  *delete_value*(%(arg-type)Char% szKey)
+  *delete_value*(%(arg-type)"Char":char.html% szKey)
 
 Deletes the named value.
 
@@ -197,7 +197,7 @@ Gets the next key value for this key.
 
 h3(#RegKey_hasvalue). RegKey#has_value
 
- Boolean *has_value*(%(arg-type)Char% szValue)
+ Boolean *has_value*(%(arg-type)"Char":char.html% szValue)
 
 Returns true if the value exists.
 
@@ -211,7 +211,7 @@ Returns true if any values exist.
 
 h3(#RegKey_hassubkey). RegKey#has_sub_key
 
- Boolean *has_sub_key*(%(arg-type)Char% szKey)
+ Boolean *has_sub_key*(%(arg-type)"Char":char.html% szKey)
 
 Returns true if given subkey exists.
 
@@ -239,7 +239,7 @@ Returns true if the key is opened.
 
 h3(#RegKey_open). RegKey#open
 
- Boolean *open*(%(arg-type)AccessMode% mode = Write)
+ Boolean *open*(%(arg-type)"AccessMode":accessmode.html% mode = Write)
 
 Explicitly opens the key. This method also allows the key to be opened in
 read-only mode by passing @RegKey::Read@ instead of default 
@@ -248,32 +248,32 @@ read-only mode by passing @RegKey::Read@ instead of default
 
 h3(#RegKey_queryvalue). RegKey#query_value
 
- Boolean *query_value*(%(arg-type)Char% szValue,  %(arg-type)String% strValue)
+ Boolean *query_value*(%(arg-type)"Char":char.html% szValue,  %(arg-type)String% strValue)
 
 Retrieves the string value.
 
- Boolean *query_value*(%(arg-type)Char% szValue,  %(arg-type)Integer% plValue)
+ Boolean *query_value*(%(arg-type)"Char":char.html% szValue,  %(arg-type)Integer% plValue)
 
 Retrieves the numeric value.
 
 
 h3(#RegKey_rename). RegKey#rename
 
- Boolean *rename*(%(arg-type)Char% szNewName)
+ Boolean *rename*(%(arg-type)"Char":char.html% szNewName)
 
 Renames the key.
 
 
 h3(#RegKey_renamevalue). RegKey#rename_value
 
- Boolean *rename_value*(%(arg-type)Char% szValueOld,  %(arg-type)Char% szValueNew)
+ Boolean *rename_value*(%(arg-type)"Char":char.html% szValueOld,  %(arg-type)"Char":char.html% szValueNew)
 
 Renames a value.
 
 
 h3(#RegKey_setvalue). RegKey#set_value
 
- Boolean *set_value*(%(arg-type)Char% szValue,  %(arg-type)Integer% lValue)
+ Boolean *set_value*(%(arg-type)"Char":char.html% szValue,  %(arg-type)Integer% lValue)
 
 Sets the numeric value.
 

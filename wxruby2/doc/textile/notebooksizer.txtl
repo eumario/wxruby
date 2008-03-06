@@ -34,7 +34,7 @@ h2. Methods
 
 h3(#NotebookSizer_wxnotebooksizer). NotebookSizer.new
 
-  *NotebookSizer.new*(%(arg-type)Notebook% notebook)
+  *NotebookSizer.new*(%(arg-type)"Notebook":notebook.html% notebook)
 
 Constructor. It takes an associated notebook as its only parameter.
 

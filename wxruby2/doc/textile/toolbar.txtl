@@ -157,9 +157,9 @@ h2. Methods
 
 h3(#ToolBar_constr). ToolBar.new
 
-  *ToolBar.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-              %(arg-type)Point% pos = DEFAULT_POSITION, 
-              %(arg-type)Size% size = DEFAULT_SIZE, 
+  *ToolBar.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+              %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+              %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
               %(arg-type)Integer% style = TB_HORIZONTAL NO_BORDER, 
               %(arg-type)String% name = PanelNameStr)
 
@@ -193,7 +193,7 @@ Toolbar destructor.
 
 h3(#ToolBar_addcontrol). ToolBar#add_control
 
- Boolean *add_control*(%(arg-type)Control% control)
+ Boolean *add_control*(%(arg-type)"Control":control.html% control)
 
 Adds any control to the toolbar, typically e.g. a combobox.
 
@@ -213,15 +213,15 @@ h3(#ToolBar_addtool). ToolBar#add_tool
 
  Integer *add_tool*(%(arg-type)Integer% toolId, 
                      %(arg-type)String% label,
-                     %(arg-type)Bitmap% bitmap1, 
+                     %(arg-type)"Bitmap":bitmap.html% bitmap1, 
                      %(arg-type)String% shortHelpString = "", 
-                     %(arg-type)ItemKind% kind = ITEM_NORMAL)
+                     %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
 
  Integer *add_tool*(%(arg-type)Integer% toolId, 
                      %(arg-type)String% label, 
-                     %(arg-type)Bitmap% bitmap1, 
-                     %(arg-type)Bitmap% bitmap2 = NullBitmap, 
-                     %(arg-type)ItemKind% kind = ITEM_NORMAL, 
+                     %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                     %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
+                     %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL, 
                      %(arg-type)String% shortHelpString = "", 
                      %(arg-type)String% longHelpString = "", 
                      %(arg-type)Object% clientData = nil)
@@ -266,8 +266,8 @@ h3(#ToolBar_addchecktool). ToolBar#add_check_tool
 
  "ToolBarToolBase":toolbartoolbase.html *add_check_tool*(%(arg-type)Integer% toolId, 
                                   %(arg-type)String% label, 
-                                  %(arg-type)Bitmap% bitmap1, 
-                                  %(arg-type)Bitmap% bitmap2, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap2, 
                                   %(arg-type)String% shortHelp = "", 
                                   %(arg-type)String% longHelp = "", 
                                   %(arg-type)Object% clientData = nil)
@@ -284,8 +284,8 @@ h3(#ToolBar_addradiotool). ToolBar#add_radio_tool
 
  "ToolBarToolBase":toolbartoolbase.html *add_radio_tool*(%(arg-type)Integer% toolId, 
                                   %(arg-type)String% label, 
-                                  %(arg-type)Bitmap% bitmap1, 
-                                  %(arg-type)Bitmap% bitmap2, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap2, 
                                   %(arg-type)String% shortHelpString = "", 
                                   %(arg-type)String% longHelpString = "", 
                                   %(arg-type)Object% clientData = nil)
@@ -516,7 +516,7 @@ h4. See also
 h3(#ToolBar_insertcontrol). ToolBar#insert_control
 
  "ToolBarToolBase":toolbartoolbase.html *insert_control*(%(arg-type)Integer% pos, 
-                                  %(arg-type)Control% control)
+                                  %(arg-type)"Control":control.html% control)
 
 Inserts the control into the toolbar at the given position.
 
@@ -547,8 +547,8 @@ h3(#ToolBar_inserttool). ToolBar#insert_tool
  Integer *insert_tool*(%(arg-type)Integer% pos, 
                          %(arg-type)Integer% toolId,
 						 %(arg-type)String% label, 
-                         %(arg-type)Bitmap% bitmap1, 
-                         %(arg-type)Bitmap% bitmap2 = NullBitmap, 
+                         %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                         %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
 						 %(arg-type)Integer% type = Wx::ITEM_NORMAL,
                          %(arg-type)String% shortHelp = "", 
                          %(arg-type)String% longHelp = "",
@@ -615,7 +615,7 @@ detect it. Therefore this function may not always be called when expected.
 
 h3(#ToolBar_onrightclick). ToolBar#on_right_click
 
-  *on_right_click*(%(arg-type)Integer% toolId,  %(arg-type)float% x,  %(arg-type)float% y)
+  *on_right_click*(%(arg-type)Integer% toolId,  %(arg-type)Float% x,  %(arg-type)Float% y)
 
 Called when the user clicks on a tool with the right mouse button. The
 programmer should override this function to detect right tool clicks.
@@ -666,7 +666,7 @@ into a custom bitmap. Windows CE only.
 
 h3(#ToolBar_setmargins). ToolBar#set_margins
 
-  *set_margins*(%(arg-type)Size% size)
+  *set_margins*(%(arg-type)"Size":size.html% size)
 
   *set_margins*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -689,7 +689,7 @@ h4. See also
 
 h3(#ToolBar_settoolbitmapsize). ToolBar#set_tool_bitmap_size
 
-  *set_tool_bitmap_size*(%(arg-type)Size% size)
+  *set_tool_bitmap_size*(%(arg-type)"Size":size.html% size)
 
 Sets the default size of each tool bitmap. The default bitmap size is 16 by 15 pixels.
 
@@ -717,7 +717,7 @@ Sets the client data associated with the tool.
 
 h3(#ToolBar_settooldisabledbitmap). ToolBar#set_tool_disabled_bitmap
 
-  *set_tool_disabled_bitmap*(%(arg-type)Integer% id,  %(arg-type)Bitmap% bitmap)
+  *set_tool_disabled_bitmap*(%(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap to be used by the tool with the given ID when the tool
 is in a disabled state. This can only be used on Button tools, not
@@ -742,7 +742,7 @@ You might use the long help for displaying the tool purpose on the status line.
 
 h3(#ToolBar_settoolnormalbitmap). ToolBar#set_tool_normal_bitmap
 
-  *set_tool_normal_bitmap*(%(arg-type)Integer% id,  %(arg-type)Bitmap% bitmap)
+  *set_tool_normal_bitmap*(%(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap to be used by the tool with the given ID. This can only
 be used on Button tools, not controls.

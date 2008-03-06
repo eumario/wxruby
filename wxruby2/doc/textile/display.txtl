@@ -49,7 +49,7 @@ Destructor.
 
 h3(#Display_changemode). Display#change_mode
 
- bool  *change_mode*(%(arg-type)VideoMode% mode = DefaultVideoMode)
+ bool  *change_mode*(%(arg-type)"VideoMode":videomode.html% mode = DefaultVideoMode)
 
 Changes the video mode of this display to the mode specified
 in the mode parameter.
@@ -91,7 +91,7 @@ Returns the bit depth of the display whose index was passed to the constructor.
 
 h3(#Display_getfrompoint). Display#get_from_point
 
- Integer *get_from_point*(%(arg-type)Point% pt)
+ Integer *get_from_point*(%(arg-type)"Point":point.html% pt)
 
 Returns the index of the display on which the given point lies.  Returns -1 if
 the point is not on any connected display.
@@ -103,7 +103,7 @@ h4. Parameters
 
 h3(#Display_getfromwindow). Display#get_from_window
 
- Integer *get_from_window*(%(arg-type)Window% win)
+ Integer *get_from_window*(%(arg-type)"Window":window.html% win)
 
 Returns the index of the display on which the given window lies.
 
@@ -128,7 +128,7 @@ constructor.
 
 h3(#Display_getmodes). Display#get_modes
 
- "ArrayVideoModes ":arrayvideomodes .html *get_modes*(%(arg-type)VideoMode% mode = DefaultVideoMode)
+ "ArrayVideoModes ":arrayvideomodes .html *get_modes*(%(arg-type)"VideoMode":videomode.html% mode = DefaultVideoMode)
 
 Fills and returns an array with all the video modes that
 are supported by this display, or video modes that are 

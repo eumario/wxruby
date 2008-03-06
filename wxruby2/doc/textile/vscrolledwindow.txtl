@@ -60,9 +60,9 @@ h2. Methods
 
 h3(#VScrolledWindow_new). VScrolledWindow.new
 
-  *VScrolledWindow.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-                      %(arg-type)Point% pos = DEFAULT_POSITION, 
-                      %(arg-type)Size% size = DEFAULT_SIZE, 
+  *VScrolledWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                      %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                      %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                       %(arg-type)Integer% style = 0, 
                       %(arg-type)String% name = PanelNameStr)
 
@@ -84,9 +84,9 @@ this class.
 
 h3(#VScrolledWindow_create). VScrolledWindow#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
                 %(arg-type)String% name = PanelNameStr)
 
@@ -175,9 +175,9 @@ h4. See also
 
 h3(#VScrolledWindow_hittest). VScrolledWindow#hit_test
 
- Integer *hit_test*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+ Integer *hit_test*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
 
- Integer *hit_test*(%(arg-type)Point% pt)
+ Integer *hit_test*(%(arg-type)"Point":point.html% pt)
 
 Return the item at the specified (in physical coordinates) position or
 @NOT_FOUND@ if none, i.e. if it is below the last item.

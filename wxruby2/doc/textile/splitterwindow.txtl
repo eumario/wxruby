@@ -79,9 +79,9 @@ h2. Methods
 
 h3(#SplitterWindow_new). SplitterWindow.new
 
-  *SplitterWindow.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                     %(arg-type)Point% point = DEFAULT_POSITION, 
-                     %(arg-type)Size% size = DEFAULT_SIZE, 
+  *SplitterWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                     %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                      %(arg-type)Integer% style=SP_3D, 
                      %(arg-type)String% name = "splitterWindow")
 
@@ -115,9 +115,9 @@ Destroys the SplitterWindow and its children.
 
 h3(#SplitterWindow_create). SplitterWindow#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                 %(arg-type)Point% point = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                 %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style=SP_3D, 
                 %(arg-type)String% name = "splitterWindow")
 
@@ -178,7 +178,7 @@ Returns the right/bottom pane.
 
 h3(#SplitterWindow_init). SplitterWindow#init
 
-  *init*(%(arg-type)Window% window)
+  *init*(%(arg-type)"Window":window.html% window)
 
 Initializes the splitter window to have one pane.  The child window is
 shown if it is currently hidden.
@@ -224,7 +224,7 @@ h4. See also
 
 h3(#SplitterWindow_onunsplit). SplitterWindow#on_unsplit
 
-  *on_unsplit*(%(arg-type)Window% removed)
+  *on_unsplit*(%(arg-type)"Window":window.html% removed)
 
 Application-overridable function called when the window is unsplit, either
 programmatically or using the SplitterWindow user interface.
@@ -256,7 +256,7 @@ panes of the splitter are greater than minimum pane size.
 
 h3(#SplitterWindow_replacewindow). SplitterWindow#replace_window
 
- Boolean *replace_window*(%(arg-type)Window% winOld,  %(arg-type)Window% winNew)
+ Boolean *replace_window*(%(arg-type)"Window":window.html% winOld,  %(arg-type)"Window":window.html% winNew)
 
 This function replaces one of the windows managed by the SplitterWindow with
 another one. It is in general better to use it instead of calling Unsplit()
@@ -284,7 +284,7 @@ h4. See also
 
 h3(#SplitterWindow_setsashgravity). SplitterWindow#set_sash_gravity
 
-  *set_sash_gravity*(%(arg-type)double% gravity)
+  *set_sash_gravity*(%(arg-type)Float% gravity)
 
 Sets the sash gravity. 
 
@@ -383,7 +383,7 @@ h4. See also
 
 h3(#SplitterWindow_splithorizontally). SplitterWindow#split_horizontally
 
- Boolean *split_horizontally*(%(arg-type)Window% window1,  %(arg-type)Window% window2, 
+ Boolean *split_horizontally*(%(arg-type)"Window":window.html% window1,  %(arg-type)"Window":window.html% window2, 
                             %(arg-type)Integer% sashPosition = 0)
 
 Initializes the top and bottom panes of the splitter window.  The
@@ -414,7 +414,7 @@ h4. See also
 
 h3(#SplitterWindow_splitvertically). SplitterWindow#split_vertically
 
- Boolean *split_vertically*(%(arg-type)Window% window1,  %(arg-type)Window% window2, 
+ Boolean *split_vertically*(%(arg-type)"Window":window.html% window1,  %(arg-type)"Window":window.html% window2, 
                           %(arg-type)Integer% sashPosition = 0)
 
 Initializes the left and right panes of the splitter window.  The
@@ -444,7 +444,7 @@ h4. See also
 
 h3(#SplitterWindow_unsplit). SplitterWindow#unsplit
 
- Boolean *unsplit*(%(arg-type)Window% toRemove = nil)
+ Boolean *unsplit*(%(arg-type)"Window":window.html% toRemove = nil)
 
 Unsplits the window.
 

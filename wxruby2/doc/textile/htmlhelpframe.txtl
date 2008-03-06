@@ -35,12 +35,12 @@ h2. Methods
 
 h3(#HtmlHelpFrame_wxhtmlhelpframe). HtmlHelpFrame.new
 
-  *HtmlHelpFrame.new*(%(arg-type)HtmlHelpData% data = nil)
+  *HtmlHelpFrame.new*(%(arg-type)"HtmlHelpData":htmlhelpdata.html% data = nil)
 
-  *HtmlHelpFrame.new*(%(arg-type)Window% parent,  %(arg-type)Integer% WindowID, 
+  *HtmlHelpFrame.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% WindowID, 
                     %(arg-type)String% title = '', 
                     %(arg-type)Integer% style = HF_DEFAULT_STYLE, 
-                    %(arg-type)HtmlHelpData% data = nil)
+                    %(arg-type)"HtmlHelpData":htmlhelpdata.html% data = nil)
 
 Constructor.
 
@@ -64,7 +64,7 @@ _style_ is combination of these flags:
 
 h3(#HtmlHelpFrame_create). HtmlHelpFrame#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% title = '', 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title = '', 
                 %(arg-type)Integer% style = HF_DEFAULT_STYLE)
 
 Creates the frame. See "the constructor":htmlhelpframewxhtmlhelpframe.html
@@ -135,14 +135,14 @@ Return HtmlHelpData object.
 h3(#HtmlHelpFrame_keywordsearch). HtmlHelpFrame#keyword_search
 
  Boolean *keyword_search*(%(arg-type)String% keyword, 
-                        %(arg-type)HelpSearchMode% mode = HELP_SEARCH_ALL)
+                        %(arg-type)"HelpSearchMode":helpsearchmode.html% mode = HELP_SEARCH_ALL)
 
 Search for given keyword. Optionally it searches through the index (mode =
 HELP_SEARCH_INDEX), default the content (mode = HELP_SEARCH_ALL).
 
 h3(#HtmlHelpFrame_readcustomization). HtmlHelpFrame#read_customization
 
-  *read_customization*(%(arg-type)ConfigBase% cfg,  %(arg-type)String% path = '')
+  *read_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
 
 Reads user's settings for this frame (see "HtmlHelpController#read_customization":htmlhelpcontroller.html#HtmlHelpController_readcustomization)
 
@@ -163,19 +163,19 @@ Sets the frame's title format. _format_ must contain exactly one "\%s"
 
 h3(#HtmlHelpFrame_useconfig). HtmlHelpFrame#use_config
 
-  *use_config*(%(arg-type)ConfigBase% config,  %(arg-type)String% rootpath = '')
+  *use_config*(%(arg-type)"ConfigBase":configbase.html% config,  %(arg-type)String% rootpath = '')
 
 Add books to search choice panel.
 
 h3(#HtmlHelpFrame_writecustomization). HtmlHelpFrame#write_customization
 
-  *write_customization*(%(arg-type)ConfigBase% cfg,  %(arg-type)String% path = '')
+  *write_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
 
 Saves user's settings for this frame (see "HtmlHelpController#write_customization":htmlhelpcontroller.html#HtmlHelpController_writecustomization).
 
 h3(#HtmlHelpFrame_addtoolbarbuttons). HtmlHelpFrame#add_toolbar_buttons
 
-  *add_toolbar_buttons*(%(arg-type)ToolBar% toolBar,  %(arg-type)Integer% style) 
+  *add_toolbar_buttons*(%(arg-type)"ToolBar":toolbar.html% toolBar,  %(arg-type)Integer% style) 
 
 You may override this virtual method to add more buttons into help frame's
 toolbar. _toolBar_ is a pointer to the toolbar and _style_ is the style

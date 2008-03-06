@@ -57,11 +57,11 @@ h2. Methods
 
 h3(#CheckBox_new). CheckBox.new
 
-  *CheckBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+  *CheckBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style = 0, 
-               %(arg-type)Validator% val, 
+               %(arg-type)"Validator":validator.html% val, 
                %(arg-type)String% name = "checkBox")
 
 Constructor, creating and showing a checkbox.
@@ -87,11 +87,11 @@ Destructor, destroying the checkbox.
 
 h3(#CheckBox_create). CheckBox#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% val, 
+                %(arg-type)"Validator":validator.html% val, 
                 %(arg-type)String% name = "checkBox")
 
 Creates the checkbox for two-step construction. See "CheckBox.new":checkbox.html#CheckBox_new for details.
@@ -160,7 +160,7 @@ h4. Parameters
 
 h3(#CheckBox_set3statevalue). CheckBox#set_3_state_value
 
-  *set_3_state_value*(%(arg-type)CheckBoxState% state)
+  *set_3_state_value*(%(arg-type)"CheckBoxState":checkboxstate.html% state)
 
 Sets the checkbox to the given state. This does not cause a
 EVT_COMMAND_CHECKBOX_CLICKED event to get emitted.

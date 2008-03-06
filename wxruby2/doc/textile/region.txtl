@@ -29,24 +29,24 @@ h2. Methods
 
 h3(#Region_new). Region.new
 
-  *Region.new*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-             %(arg-type)Coord% height)
+  *Region.new*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
+             %(arg-type)"Coord":coord.html% height)
 
 Constructs a rectangular region with the given position and size.
 
-  *Region.new*(%(arg-type)Point% topLeft,  %(arg-type)Point% bottomRight)
+  *Region.new*(%(arg-type)"Point":point.html% topLeft,  %(arg-type)"Point":point.html% bottomRight)
 
 Constructs a rectangular region from the top left point and the bottom right point.
 
-  *Region.new*(%(arg-type)Rect% rect)
+  *Region.new*(%(arg-type)"Rect":rect.html% rect)
 
 Constructs a rectangular region a Rect object.
 
-  *Region.new*(%(arg-type)Region% region)
+  *Region.new*(%(arg-type)"Region":region.html% region)
 
 Constructs a region by copying another region.
 
-  *Region.new*(%(arg-type)Integer% n,  %(arg-type)Point% points, 
+  *Region.new*(%(arg-type)Integer% n,  %(arg-type)"Point":point.html% points, 
              %(arg-type)Integer% fillStyle = WINDING_RULE)
 
 Constructs a region corresponding to the polygon made of _n_ points in the
@@ -55,9 +55,9 @@ provided array. _fillStyle_ parameter may have values
 
 *NB:* This constructor is only implemented for Win32 and GTK+ Widgets ports.
 
-  *Region.new*(%(arg-type)Bitmap% bmp)
+  *Region.new*(%(arg-type)"Bitmap":bitmap.html% bmp)
 
-  *Region.new*(%(arg-type)Bitmap% bmp,                   %(arg-type)Colour% transColour, 
+  *Region.new*(%(arg-type)"Bitmap":bitmap.html% bmp,                   %(arg-type)"Colour":colour.html% transColour, 
             		  %(arg-type)Integer% tolerance = 0)
 
 Constructs a region using the non-transparent pixels of a bitmap.  See
@@ -77,12 +77,12 @@ Clears the current region.
 h3(#Region_contains). Region#contains
 
  Integer *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
- Integer *contains*(%(arg-type)Point% pt)
+ Integer *contains*(%(arg-type)"Point":point.html% pt)
 
 Returns a false or true value indicating whether the given point is
 contained within the region.
 
- Integer *contains*(%(arg-type)Rect% rect)
+ Integer *contains*(%(arg-type)"Rect":rect.html% rect)
  Integer *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
                     %(arg-type)Integer% width,  %(arg-type)Integer% height)
 
@@ -118,16 +118,16 @@ Returns the outer bounds of the region.
 
 h3(#Region_intersect). Region#intersect
 
- Boolean *intersect*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-                   %(arg-type)Coord% height)
+ Boolean *intersect*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
+                   %(arg-type)"Coord":coord.html% height)
 
 Finds the intersection of this region and another, rectangular region, specified using position and size.
 
- Boolean *intersect*(%(arg-type)Rect% rect)
+ Boolean *intersect*(%(arg-type)"Rect":rect.html% rect)
 
 Finds the intersection of this region and another, rectangular region.
 
- Boolean *intersect*(%(arg-type)Region% region)
+ Boolean *intersect*(%(arg-type)"Region":region.html% region)
 
 Finds the intersection of this region and another region.
 
@@ -148,11 +148,11 @@ Returns @true@ if the region is empty, @false@ otherwise.
 
 h3(#Region_subtract). Region#subtract
 
- Boolean *subtract*(%(arg-type)Rect% rect)
+ Boolean *subtract*(%(arg-type)"Rect":rect.html% rect)
 
 Subtracts a rectangular region from this region.
 
- Boolean *subtract*(%(arg-type)Region% region)
+ Boolean *subtract*(%(arg-type)"Region":region.html% region)
 
 Subtracts a region from this region.
 
@@ -167,7 +167,7 @@ The result is stored in this region.
 
 h3(#Region_offset). Region#offset
 
- Boolean *offset*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+ Boolean *offset*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
 
 Moves the region by the specified offsets in horizontal and vertical
 directions.
@@ -178,26 +178,26 @@ h4. Return value
 
 h3(#Region_union). Region#union
 
- Boolean *union*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-               %(arg-type)Coord% height)
+ Boolean *union*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
+               %(arg-type)"Coord":coord.html% height)
 
 Finds the union of this region and another, rectangular region, specified using position and size.
 
- Boolean *union*(%(arg-type)Rect% rect)
+ Boolean *union*(%(arg-type)"Rect":rect.html% rect)
 
 Finds the union of this region and another, rectangular region.
 
- Boolean *union*(%(arg-type)Region% region)
+ Boolean *union*(%(arg-type)"Region":region.html% region)
 
 Finds the union of this region and another region.
 
- Boolean *union*(%(arg-type)Bitmap% bmp)
+ Boolean *union*(%(arg-type)"Bitmap":bitmap.html% bmp)
 
 Finds the union of this region and the non-transparent pixels of a
 bitmap. Bitmap's mask is used to determine transparency. If the bitmap doesn't
 have a mask, solid rectangle of bitmap's dimensions is used.
 
- Boolean *union*(%(arg-type)Bitmap% bmp,                   %(arg-type)Colour% transColour, 
+ Boolean *union*(%(arg-type)"Bitmap":bitmap.html% bmp,                   %(arg-type)"Colour":colour.html% transColour, 
               		  %(arg-type)Integer% tolerance = 0)
 
 Finds the union of this region and the non-transparent pixels of a
@@ -216,16 +216,16 @@ The result is stored in this region.
 
 h3(#Region_xor). Region#xor
 
- Boolean *xor*(%(arg-type)Coord% x,  %(arg-type)Coord% y,  %(arg-type)Coord% width, 
-             %(arg-type)Coord% height)
+ Boolean *xor*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
+             %(arg-type)"Coord":coord.html% height)
 
 Finds the Xor of this region and another, rectangular region, specified using position and size.
 
- Boolean *xor*(%(arg-type)Rect% rect)
+ Boolean *xor*(%(arg-type)"Rect":rect.html% rect)
 
 Finds the Xor of this region and another, rectangular region.
 
- Boolean *xor*(%(arg-type)Region% region)
+ Boolean *xor*(%(arg-type)"Region":region.html% region)
 
 Finds the Xor of this region and another region.
 
@@ -240,7 +240,7 @@ for any overlapping areas. The result is stored in this region.
 
 h3(#Region_assign). Region#=
 
-  *operator $=$*(%(arg-type)Region% region)
+  *operator $=$*(%(arg-type)"Region":region.html% region)
 
 Copies _region_ by reference counting.
 

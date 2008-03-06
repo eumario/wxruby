@@ -60,7 +60,7 @@ h2. Methods
 
 h3(#TreeEvent_new). TreeEvent.new
 
-  *TreeEvent.new*(%(arg-type)TYPE% commandType = 0,  %(arg-type)Integer% id = 0)
+  *TreeEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% id = 0)
 
 Constructor.
 

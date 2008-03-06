@@ -43,7 +43,7 @@ h2. Methods
 
 h3(#GridCellAttr_wxgridcellattr). GridCellAttr.new
 
-  *GridCellAttr.new*(%(arg-type)Colour% colText,  %(arg-type)Colour% colBack,  %(arg-type)Font% font, 
+  *GridCellAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack,  %(arg-type)"Font":font.html% font, 
                    %(arg-type)Integer% hAlign, 
                    %(arg-type)Integer% vAlign)
 
@@ -72,21 +72,21 @@ h3(#GridCellAttr_decref). GridCellAttr#dec_ref
 
 h3(#GridCellAttr_settextcolour). GridCellAttr#set_text_colour
 
-  *set_text_colour*(%(arg-type)Colour% colText)
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colText)
 
 Sets the text colour.
 
 
 h3(#GridCellAttr_setbackgroundcolour). GridCellAttr#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% colBack)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colBack)
 
 Sets the background colour.
 
 
 h3(#GridCellAttr_setfont). GridCellAttr#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets the font.
 
@@ -107,14 +107,14 @@ h3(#GridCellAttr_setreadonly). GridCellAttr#set_read_only
 
 h3(#GridCellAttr_setrenderer). GridCellAttr#set_renderer
 
-  *set_renderer*(%(arg-type)GridCellRenderer% renderer)
+  *set_renderer*(%(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer)
 
 takes ownership of the pointer
 
 
 h3(#GridCellAttr_seteditor). GridCellAttr#set_editor
 
-  *set_editor*(%(arg-type)GridCellEditor% editor)
+  *set_editor*(%(arg-type)"GridCellEditor":gridcelleditor.html% editor)
 
 
 h3(#GridCellAttr_hastextcolour). GridCellAttr#has_text_colour
@@ -175,14 +175,14 @@ See "set_alignment":#GridCellAttr_setalignment for the returned values.
 
 h3(#GridCellAttr_getrenderer). GridCellAttr#get_renderer
 
- "GridCellRenderer":gridcellrenderer.html *get_renderer*(%(arg-type)Grid% grid, 
+ "GridCellRenderer":gridcellrenderer.html *get_renderer*(%(arg-type)"Grid":grid.html% grid, 
                                  %(arg-type)Integer% row, 
                                  %(arg-type)Integer% col)
 
 
 h3(#GridCellAttr_geteditor). GridCellAttr#get_editor
 
- "GridCellEditor":gridcelleditor.html *get_editor*(%(arg-type)Grid% grid,  %(arg-type)Integer% row, 
+ "GridCellEditor":gridcelleditor.html *get_editor*(%(arg-type)"Grid":grid.html% grid,  %(arg-type)Integer% row, 
                              %(arg-type)Integer% col)
 
 
@@ -193,5 +193,5 @@ h3(#GridCellAttr_isreadonly). GridCellAttr#is_read_only
 
 h3(#GridCellAttr_setdefattr). GridCellAttr#set_def_attr
 
-  *set_def_attr*(%(arg-type)GridCellAttr% defAttr)
+  *set_def_attr*(%(arg-type)"GridCellAttr":gridcellattr.html% defAttr)
 

@@ -31,13 +31,13 @@ h3(#VariantData_new). VariantData.new
 
 h3(#VariantData_copy). VariantData#copy
 
-  *copy*(%(arg-type)VariantData% data)
+  *copy*(%(arg-type)"VariantData":variantdata.html% data)
 
 Copy the data from `this' object to _data_.
 
 h3(#VariantData_eq). VariantData#eq
 
- Boolean *eq*(%(arg-type)VariantData% data)
+ Boolean *eq*(%(arg-type)"VariantData":variantdata.html% data)
 
 Returns true if this object is equal to _data_.
 
@@ -56,7 +56,7 @@ the data isn't a Object the method returns NULL.
 
 h3(#VariantData_read). VariantData#read
 
- Boolean *read*(%(arg-type)ostream% stream)
+ Boolean *read*(%(arg-type)"ostream":ostream.html% stream)
 
  Boolean *read*(%(arg-type)String% string)
 
@@ -64,7 +64,7 @@ Reads the data from _stream_ or _string_.
 
 h3(#VariantData_write). VariantData#write
 
- Boolean *write*(%(arg-type)ostream% stream)
+ Boolean *write*(%(arg-type)"ostream":ostream.html% stream)
 
  Boolean *write*(%(arg-type)String% string)
 

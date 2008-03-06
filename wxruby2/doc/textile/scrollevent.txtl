@@ -41,7 +41,7 @@ h2. Methods
 
 h3(#ScrollEvent_new). ScrollEvent.new
 
-  *ScrollEvent.new*(%(arg-type)TYPE% commandType = 0,  %(arg-type)Integer% id = 0, 
+  *ScrollEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% id = 0, 
                   %(arg-type)Integer% pos = 0, 
                   %(arg-type)Integer% orientation = 0)
 

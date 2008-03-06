@@ -40,19 +40,19 @@ h2. Methods
 
 h3(#Caret_wxcaret). Caret.new
 
-  *Caret.new*(%(arg-type)Window% window,  %(arg-type)Integer% width,  %(arg-type)Integer% height)
+  *Caret.new*(%(arg-type)"Window":window.html% window,  %(arg-type)Integer% width,  %(arg-type)Integer% height)
 
-  *Caret.new*(%(arg-type)WindowBase% window,  %(arg-type)Size% size)
+  *Caret.new*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)"Size":size.html% size)
 
 Create the caret of given (in pixels) width and height and associates it
 with the given window.
 
 h3(#Caret_create). Caret#create
 
- Boolean *create*(%(arg-type)WindowBase% window,  %(arg-type)Integer% width, 
+ Boolean *create*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)Integer% width, 
                 %(arg-type)Integer% height)
 
- Boolean *create*(%(arg-type)WindowBase% window,  %(arg-type)Size% size)
+ Boolean *create*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)"Size":size.html% size)
 
 Create the caret of given (in pixels) width and height and associates it
 with the given window (same as constructor).
@@ -115,7 +115,7 @@ h3(#Caret_move). Caret#move
 
   *move*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
-  *move*(%(arg-type)Point% pt)
+  *move*(%(arg-type)"Point":point.html% pt)
 
 Move the caret to given position (in logical coordinates).
 
@@ -139,7 +139,7 @@ h3(#Caret_setsize). Caret#set_size
 
   *set_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
 
-  *set_size*(%(arg-type)Size% size)
+  *set_size*(%(arg-type)"Size":size.html% size)
 
 Changes the size of the caret.
 

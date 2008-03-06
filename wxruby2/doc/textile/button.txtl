@@ -54,11 +54,11 @@ h2. Methods
 
 h3(#Button_new). Button.new
 
-  *Button.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label = '', 
-             %(arg-type)Point% pos = DEFAULT_POSITION, 
-             %(arg-type)Size% size = DEFAULT_SIZE, 
+  *Button.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label = '', 
+             %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+             %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
              %(arg-type)Integer% style = 0, 
-             %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+             %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
              %(arg-type)String% name = "button")
 
 Constructor, creating and showing a button.
@@ -90,11 +90,11 @@ Destructor, destroying the button.
 
 h3(#Button_create). Button#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label = '', 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label = '', 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator, 
+                %(arg-type)"Validator":validator.html% validator, 
                 %(arg-type)String% name = "button")
 
 Button creation function for two-step creation. For more details, see

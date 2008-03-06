@@ -39,7 +39,7 @@ h2. Methods
 
 h3(#TextValidator_new). TextValidator.new
 
-  *TextValidator.new*(%(arg-type)TextValidator% validator)
+  *TextValidator.new*(%(arg-type)"TextValidator":textvalidator.html% validator)
 
 Copy constructor.
 
@@ -94,20 +94,20 @@ Returns the validator style.
 
 h3(#TextValidator_onchar). TextValidator#on_char
 
-  *on_char*(%(arg-type)KeyEvent% event)
+  *on_char*(%(arg-type)"KeyEvent":keyevent.html% event)
 
 Receives character input from the window and filters it according to the
 current validator style.
 
 h3(#TextValidator_setexcludes). TextValidator#set_excludes
 
-  *set_excludes*(%(arg-type)ArrayString% stringList)
+  *set_excludes*(%(arg-type)"ArrayString":arraystring.html% stringList)
 
 Sets the exclude list (invalid values for the user input).
 
 h3(#TextValidator_setincludes). TextValidator#set_includes
 
-  *set_includes*(%(arg-type)ArrayString% stringList)
+  *set_includes*(%(arg-type)"ArrayString":arraystring.html% stringList)
 
 Sets the include list (valid values for the user input).
 
@@ -131,7 +131,7 @@ Transfers the string value to the text control.
 
 h3(#TextValidator_validate). TextValidator#validate
 
- Boolean *validate*(%(arg-type)Window% parent)
+ Boolean *validate*(%(arg-type)"Window":window.html% parent)
 
 Validates the window contents against the include or exclude lists, depending
 on the validator style.

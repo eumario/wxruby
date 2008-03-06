@@ -65,10 +65,10 @@ h2. Methods
 
 h3(#SpinCtrl_wxspinctrl). SpinCtrl.new
 
-  *SpinCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+  *SpinCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
                %(arg-type)String% value = '', 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style = SP_ARROW_KEYS, 
                %(arg-type)Integer% min = 0, 
                %(arg-type)Integer% max = 100, 
@@ -96,10 +96,10 @@ h4. See also
 
 h3(#SpinCtrl_create). SpinCtrl#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
                 %(arg-type)String% value = '', 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = SP_ARROW_KEYS, 
                 %(arg-type)Integer% min = 0, 
                 %(arg-type)Integer% max = 100, 

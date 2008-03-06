@@ -54,13 +54,13 @@ Set a new rowspan value.
 
 h3(#GBSpan_operatorunknown). GBSpan::operator!
 
- Boolean *operator!*(%(arg-type)GBSpan% o)
+ Boolean *operator!*(%(arg-type)"GBSpan":gbspan.html% o)
 
 Is the GBSpan valid?  (An invalid GBSpan is (-1,-1). )
 
 h3(#GBSpan_operatorequal). GBSpan::operator==
 
- bool operator *operator==*(%(arg-type)GBSpan% o)
+ bool operator *operator==*(%(arg-type)"GBSpan":gbspan.html% o)
 
 Compare equality of two GBSpans.
 

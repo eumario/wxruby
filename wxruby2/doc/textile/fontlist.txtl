@@ -33,7 +33,7 @@ h3(#FontList_new). FontList.new
 
 h3(#FontList_addfont). FontList#add_font
 
-  *add_font*(%(arg-type)Font% font)
+  *add_font*(%(arg-type)"Font":font.html% font)
 
 Used by Widgets to add a font to the list, called in the font constructor.
 
@@ -44,14 +44,14 @@ h3(#findorcreatefont). FontList#find_or_create_font
                             %(arg-type)Integer% weight, 
                             %(arg-type)Boolean% underline = false, 
                             %(arg-type)String% facename = nil, 
-                            %(arg-type)FontEncoding% encoding = FONTENCODING_DEFAULT)
+                            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
 
 Finds a font of the given specification, or creates one and adds it to the list. See the "Font constructor":fontctor.html for
 details of the arguments.
 
 h3(#FontList_removefont). FontList#remove_font
 
-  *remove_font*(%(arg-type)Font% font)
+  *remove_font*(%(arg-type)"Font":font.html% font)
 
 Used by Widgets to remove a font from the list.
 

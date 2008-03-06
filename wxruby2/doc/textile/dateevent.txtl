@@ -31,7 +31,7 @@ Returns the date.
 
 h3(#DateEvent_setdate). DateEvent#set_date
 
-  *set_date*(%(arg-type)DateTime% date)
+  *set_date*(%(arg-type)"DateTime":datetime.html% date)
 
 Sets the date carried by the event, normally only used by the library
 internally.

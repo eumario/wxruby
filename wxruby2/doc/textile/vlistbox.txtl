@@ -59,9 +59,9 @@ h2. Methods
 
 h3(#VListBox_new). VListBox.new
 
-  *VListBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+  *VListBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% countItems = 0, 
                %(arg-type)Integer% style = 0, 
                %(arg-type)String% name = VListBoxNameStr)
@@ -77,9 +77,9 @@ Deletes all items from the control.
 
 h3(#VListBox_create). VListBox#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
                 %(arg-type)String% name = VListBoxNameStr)
 
@@ -241,7 +241,7 @@ Returns @true@ if this item is selected, @false@ otherwise.
 
 h3(#VListBox_ondrawbackground). VListBox#on_draw_background
 
-  *on_draw_background*(%(arg-type)DC% dc,  %(arg-type)Rect% rect,  %(arg-type)Integer% n)
+  *on_draw_background*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% n)
 
 This method is used to draw the items background and, maybe, a border
 around it.
@@ -254,7 +254,7 @@ current.
 
 h3(#VListBox_ondrawitem). VListBox#on_draw_item
 
-  *on_draw_item*(%(arg-type)DC% dc,  %(arg-type)Rect% rect,  %(arg-type)Integer% n)
+  *on_draw_item*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% n)
 
 The derived class must implement this function to actually draw the item
 with the given index on the provided DC.
@@ -269,7 +269,7 @@ region is set to this rectangle before calling this function)
 
 h3(#VListBox_ondrawseparator). VListBox#on_draw_separator
 
-  *on_draw_separator*(%(arg-type)DC% dc,  %(arg-type)Rect% rect,  %(arg-type)Integer% n)
+  *on_draw_separator*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% n)
 
 This method may be used to draw separators between the lines. The rectangle
 passed to it may be modified, typically to deflate it a bit before passing to
@@ -349,9 +349,9 @@ This is just a synonym for
 
 h3(#VListBox_setmargins). VListBox#set_margins
 
-  *set_margins*(%(arg-type)Point% pt)
+  *set_margins*(%(arg-type)"Point":point.html% pt)
 
-  *set_margins*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *set_margins*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
 
 Set the margins: horizontal margin is the distance between the window
 border and the item contents while vertical margin is half of the
@@ -373,7 +373,7 @@ This method may be used both with single and multiple selection listboxes.
 
 h3(#VListBox_setselectionbackground). VListBox#set_selection_background
 
-  *set_selection_background*(%(arg-type)Colour% col)
+  *set_selection_background*(%(arg-type)"Colour":colour.html% col)
 
 Sets the colour to be used for the selected cells background. The background of
 the standard cells may be changed by simply calling 

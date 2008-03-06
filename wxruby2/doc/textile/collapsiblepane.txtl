@@ -77,12 +77,12 @@ h2. Methods
 
 h3(#wxcollapsiblepane). CollapsiblePane.new
 
-  *CollapsiblePane.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+  *CollapsiblePane.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
                       %(arg-type)String% label, 
-                      %(arg-type)Point% pos = DEFAULT_POSITION, 
-                      %(arg-type)Size% size = DEFAULT_SIZE, 
+                      %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                      %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                       %(arg-type)Integer% style = CP_DEFAULT_STYLE, 
-                      %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                      %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                      %(arg-type)String% name = "collapsiblePane")
 
 Initializes the object and calls "Create":collapsiblepanecreate.html with
@@ -91,11 +91,11 @@ all the parameters.
 
 h3(#CollapsiblePane_create). CollapsiblePane#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = CP_DEFAULT_STYLE, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "collapsiblePane")
 
 h4. Parameters

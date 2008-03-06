@@ -363,7 +363,7 @@ h3(#ConfigBase_new). ConfigBase.new
                  %(arg-type)String% localFilename = '', 
                  %(arg-type)String% globalFilename = '', 
                  %(arg-type)Integer% style = 0, 
-                 %(arg-type)MBConv% conv = ConvUTF8)
+                 %(arg-type)"MBConv":mbconv.html% conv = ConvUTF8)
 
 This is the default and only constructor of the ConfigBase class, and
 derived classes.
@@ -664,12 +664,12 @@ _Read_ functions. Instead, write:
  
 
 
- Boolean *read*(%(arg-type)String% key,  %(arg-type)double% d)
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Float% d)
 
 Reads a double value, returning  if the value was found. If the value was
 not found, _d_ is not changed.
 
- Boolean *read*(%(arg-type)String% key,  %(arg-type)double% d,  %(arg-type)double% defaultVal)
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Float% d,  %(arg-type)Float% defaultVal)
 
 Reads a double value, returning  if the value was found. If the value was
 not found, _defaultVal_ is used instead.
@@ -715,7 +715,7 @@ exists.
 
 h3(#ConfigBase_set). ConfigBase#set
 
- "ConfigBase":configbase.html *set*(%(arg-type)ConfigBase% pConfig)
+ "ConfigBase":configbase.html *set*(%(arg-type)"ConfigBase":configbase.html% pConfig)
 
 Sets the config object as the current one, returns the pointer to the previous
 current object (both the parameter and returned value may be NULL)
@@ -755,7 +755,7 @@ h3(#ConfigBase_write). ConfigBase#write
 
  Boolean *write*(%(arg-type)String% key,  %(arg-type)Integer% value)
 
- Boolean *write*(%(arg-type)String% key,  %(arg-type)double% value)
+ Boolean *write*(%(arg-type)String% key,  %(arg-type)Float% value)
 
  Boolean *write*(%(arg-type)String% key,  %(arg-type)Boolean% value)
 

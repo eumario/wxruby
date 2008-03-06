@@ -64,15 +64,15 @@ h4. See also
 
 h3(#ImageList_add). ImageList#add
 
- Integer *add*(%(arg-type)Bitmap% bitmap,  %(arg-type)Bitmap% mask = NullBitmap)
+ Integer *add*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)"Bitmap":bitmap.html% mask = NullBitmap)
 
 Adds a new image using a bitmap and optional mask bitmap.
 
- Integer *add*(%(arg-type)Bitmap% bitmap,  %(arg-type)Colour% maskColour)
+ Integer *add*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)"Colour":colour.html% maskColour)
 
 Adds a new image using a bitmap and mask colour.
 
- Integer *add*(%(arg-type)Icon% icon)
+ Integer *add*(%(arg-type)"Icon":icon.html% icon)
 
 Adds a new image using an icon.
 
@@ -102,7 +102,7 @@ Initializes the list. See "ImageList.new":imagelist.html#ImageList_new for detai
 
 h3(#ImageList_draw). ImageList#draw
 
- Boolean *draw*(%(arg-type)Integer% index,  %(arg-type)DC% dc,  %(arg-type)Integer% x, 
+ Boolean *draw*(%(arg-type)Integer% index,  %(arg-type)"DC":dc.html% dc,  %(arg-type)Integer% x, 
               %(arg-type)Integer% y, 
               %(arg-type)Integer% flags = IMAGELIST_DRAW_NORMAL, 
               %(arg-type)Boolean% solidBackground = false)
@@ -178,14 +178,14 @@ Removes all the images in the list.
 
 h3(#ImageList_replace). ImageList#replace
 
- Boolean *replace*(%(arg-type)Integer% index,  %(arg-type)Bitmap% bitmap, 
-                 %(arg-type)Bitmap% mask = NullBitmap)
+ Boolean *replace*(%(arg-type)Integer% index,  %(arg-type)"Bitmap":bitmap.html% bitmap, 
+                 %(arg-type)"Bitmap":bitmap.html% mask = NullBitmap)
 
 Replaces the existing image with the new image.
 
 Windows only.
 
- Boolean *replace*(%(arg-type)Integer% index,  %(arg-type)Icon% icon)
+ Boolean *replace*(%(arg-type)Integer% index,  %(arg-type)"Icon":icon.html% icon)
 
 Replaces the existing image with the new image.
 

@@ -53,7 +53,7 @@ h2. Methods
 
 h3(#CloseEvent_new). CloseEvent.new
 
-  *CloseEvent.new*(%(arg-type)TYPE% commandEventType = 0,  %(arg-type)Integer% id = 0)
+  *CloseEvent.new*(%(arg-type)"TYPE":type.html% commandEventType = 0,  %(arg-type)Integer% id = 0)
 
 Constructor.
 

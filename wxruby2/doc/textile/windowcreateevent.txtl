@@ -40,7 +40,7 @@ h2. Methods
 
 h3(#WindowCreateEvent_new). WindowCreateEvent.new
 
-  *WindowCreateEvent.new*(%(arg-type)Window% win = nil)
+  *WindowCreateEvent.new*(%(arg-type)"Window":window.html% win = nil)
 
 Constructor. Unlikely to be used in user code, except if simulating
 event sequences.

@@ -150,14 +150,14 @@ Destructor.
 
 h3(#DocManager_activateview). DocManager#activate_view
 
-  *activate_view*(%(arg-type)View% doc,  %(arg-type)Boolean% activate = true)
+  *activate_view*(%(arg-type)"View":view.html% doc,  %(arg-type)Boolean% activate = true)
 
 Sets the current view.
 
 
 h3(#DocManager_adddocument). DocManager#add_document
 
-  *add_document*(%(arg-type)Document% doc)
+  *add_document*(%(arg-type)"Document":document.html% doc)
 
 Adds the document to the list of documents.
 
@@ -171,7 +171,7 @@ Adds a file to the file history list, if we have a pointer to an appropriate fil
 
 h3(#DocManager_associatetemplate). DocManager#associate_template
 
-  *associate_template*(%(arg-type)DocTemplate% temp)
+  *associate_template*(%(arg-type)"DocTemplate":doctemplate.html% temp)
 
 Adds the template to the document manager's template list.
 
@@ -207,7 +207,7 @@ will delete the oldest currently loaded document before creating a new one.
 
 h3(#DocManager_createview). DocManager#create_view
 
- "View":view.html *create_view*(%(arg-type)Document% doc,  %(arg-type)Integer% flags)
+ "View":view.html *create_view*(%(arg-type)"Document":document.html% doc,  %(arg-type)Integer% flags)
 
 Creates a new view for the given document. If more than one view is allowed for the
 document (by virtue of multiple templates mentioning the same document type), a choice
@@ -216,7 +216,7 @@ of view is presented to the user.
 
 h3(#DocManager_disassociatetemplate). DocManager#disassociate_template
 
-  *disassociate_template*(%(arg-type)DocTemplate% temp)
+  *disassociate_template*(%(arg-type)"DocTemplate":doctemplate.html% temp)
 
 Removes the template from the list of templates.
 
@@ -227,14 +227,14 @@ h3(#DocManager_filehistoryaddfilestomenu). DocManager#file_history_add_files_to_
 
 Appends the files in the history list, to all menus managed by the file history object.
 
-  *file_history_add_files_to_menu*(%(arg-type)Menu% menu)
+  *file_history_add_files_to_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Appends the files in the history list, to the given menu only.
 
 
 h3(#DocManager_filehistoryload). DocManager#file_history_load
 
-  *file_history_load*(%(arg-type)ConfigBase% config)
+  *file_history_load*(%(arg-type)"ConfigBase":configbase.html% config)
 
 Loads the file history from a config object.
 
@@ -245,14 +245,14 @@ h4. See also
 
 h3(#DocManager_filehistoryremovemenu). DocManager#file_history_remove_menu
 
-  *file_history_remove_menu*(%(arg-type)Menu% menu)
+  *file_history_remove_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Removes the given menu from the list of menus managed by the file history object.
 
 
 h3(#DocManager_filehistorysave). DocManager#file_history_save
 
-  *file_history_save*(%(arg-type)ConfigBase% resourceFile)
+  *file_history_save*(%(arg-type)"ConfigBase":configbase.html% resourceFile)
 
 Saves the file history into a config object. This must be called
 explicitly by the application.
@@ -264,7 +264,7 @@ h4. See also
 
 h3(#DocManager_filehistoryusemenu). DocManager#file_history_use_menu
 
-  *file_history_use_menu*(%(arg-type)Menu% menu)
+  *file_history_use_menu*(%(arg-type)"Menu":menu.html% menu)
 
 Use this menu for appending recently-visited document filenames, for convenient
 access. Calling this function with a valid menu pointer enables the history

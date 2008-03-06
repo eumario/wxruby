@@ -69,7 +69,7 @@ Usage:
 
 h3(#HtmlCell_draw). HtmlCell#draw
 
-  *draw*(%(arg-type)DC% dc,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
+  *draw*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
        %(arg-type)Integer% view_y1, 
        %(arg-type)Integer% view_y2)
 
@@ -88,7 +88,7 @@ used to optimize rendering speed
 
 h3(#HtmlCell_drawinvisible). HtmlCell#draw_invisible
 
-  *draw_invisible*(%(arg-type)DC% dc,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+  *draw_invisible*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 This method is called instead of "Draw":htmlcelldraw.html when the
 cell is certainly out of the screen (and thus invisible). This is not
@@ -229,8 +229,8 @@ before calling Layout.
 
 h3(#HtmlCell_onmouseclick). HtmlCell#on_mouse_click
 
-  *on_mouse_click*(%(arg-type)Window% parent,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
-                 %(arg-type)MouseEvent% event)
+  *on_mouse_click*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                 %(arg-type)"MouseEvent":mouseevent.html% event)
 
 This function is simple event handler. Each time the user clicks mouse button over a cell
 within "HtmlWindow":htmlwindow.html this method of that cell is called. Default behavior is
@@ -256,21 +256,21 @@ Sets unique cell identifier. Default value is no identifier, i.e. empty string.
 
 h3(#HtmlCell_setlink). HtmlCell#set_link
 
-  *set_link*(%(arg-type)HtmlLinkInfo% link)
+  *set_link*(%(arg-type)"HtmlLinkInfo":htmllinkinfo.html% link)
 
 Sets the hypertext link associated with this cell. (Default value
 is "HtmlLinkInfo":htmllinkinfo.html("", "") (no link))
 
 h3(#HtmlCell_setnext). HtmlCell#set_next
 
-  *set_next*(%(arg-type)HtmlCell% cell)
+  *set_next*(%(arg-type)"HtmlCell":htmlcell.html% cell)
 
 Sets the next cell in the list. This shouldn't be called by user - it is
 to be used only by "HtmlContainerCell#insert_cell":htmlcontainercell.html#HtmlContainerCell_insertcell.
 
 h3(#HtmlCell_setparent). HtmlCell#set_parent
 
-  *set_parent*(%(arg-type)HtmlContainerCell% p)
+  *set_parent*(%(arg-type)"HtmlContainerCell":htmlcontainercell.html% p)
 
 Sets parent container of this cell. This is called from
 "HtmlContainerCell#insert_cell":htmlcontainercell.html#HtmlContainerCell_insertcell.

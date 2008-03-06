@@ -20,7 +20,7 @@ h2. Methods
 
 h3(#HtmlWidgetCell_wxhtmlwidgetcell). HtmlWidgetCell.new
 
-  *HtmlWidgetCell.new*(%(arg-type)Window% wnd,  %(arg-type)Integer% w = 0)
+  *HtmlWidgetCell.new*(%(arg-type)"Window":window.html% wnd,  %(arg-type)Integer% w = 0)
 
 Constructor.
 

@@ -31,7 +31,7 @@ h2. Methods
 
 h3(#WindowDC_wxwindowdc). WindowDC.new
 
-  *WindowDC.new*(%(arg-type)Window% window)
+  *WindowDC.new*(%(arg-type)"Window":window.html% window)
 
 Constructor. Pass a pointer to the window on which you wish to paint.
 

@@ -37,11 +37,11 @@ h2. Methods
 
 h3(#DocMDIParentFrame_new). DocMDIParentFrame.new
 
-  *DocMDIParentFrame.new*(%(arg-type)DocManager% manager,  %(arg-type)Frame% parent, 
+  *DocMDIParentFrame.new*(%(arg-type)"DocManager":docmanager.html% manager,  %(arg-type)"Frame":frame.html% parent, 
                         %(arg-type)Integer% id, 
                         %(arg-type)String% title, 
-                        %(arg-type)Point% pos = DEFAULT_POSITION, 
-                        %(arg-type)Size% size = DEFAULT_SIZE, 
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                        %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                         %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
                         %(arg-type)String% name = "frame")
 
@@ -53,10 +53,10 @@ Destructor.
 
 h3(#DocMDIParentFrame_create). DocMDIParentFrame.new
 
- Boolean *create*(%(arg-type)DocManager% manager,  %(arg-type)Frame% parent,  %(arg-type)Integer% id, 
+ Boolean *create*(%(arg-type)"DocManager":docmanager.html% manager,  %(arg-type)"Frame":frame.html% parent,  %(arg-type)Integer% id, 
                 %(arg-type)String% title, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
                 %(arg-type)String% name = "frame")
 
@@ -64,7 +64,7 @@ Creates the window.
 
 h3(#DocMDIParentFrame_onclosewindow). DocMDIParentFrame#on_close_window
 
-  *on_close_window*(%(arg-type)CloseEvent% event)
+  *on_close_window*(%(arg-type)"CloseEvent":closeevent.html% event)
 
 Deletes all views and documents. If no user input cancelled the
 operation, the frame will be destroyed and the application will exit.

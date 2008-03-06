@@ -110,14 +110,14 @@ The named type of the view associated with this template.
 
 h3(#DocTemplate_new). DocTemplate.new
 
-  *DocTemplate.new*(%(arg-type)DocManager% manager,  %(arg-type)String% descr, 
+  *DocTemplate.new*(%(arg-type)"DocManager":docmanager.html% manager,  %(arg-type)String% descr, 
                   %(arg-type)String% filter, 
                   %(arg-type)String% dir, 
                   %(arg-type)String% ext, 
                   %(arg-type)String% docTypeName, 
                   %(arg-type)String% viewTypeName, 
-                  %(arg-type)ClassInfo% docClassInfo = nil, 
-                  %(arg-type)ClassInfo% viewClassInfo = nil, 
+                  %(arg-type)"ClassInfo":classinfo.html% docClassInfo = nil, 
+                  %(arg-type)"ClassInfo":classinfo.html% viewClassInfo = nil, 
                   %(arg-type)Integer% flags = DEFAULT_TEMPLATE_FLAGS)
 
 Constructor. Create instances dynamically near the start of your application after creating
@@ -182,7 +182,7 @@ calls Document::OnCreate.
 
 h3(#DocTemplate_createview). DocTemplate#create_view
 
- "View":view.html *create_view*(%(arg-type)Document% doc,  %(arg-type)Integer% flags = 0)
+ "View":view.html *create_view*(%(arg-type)"Document":document.html% doc,  %(arg-type)Integer% flags = 0)
 
 Creates a new instance of the associated view class. If you have not supplied
 a ClassInfo parameter to the template constructor, you will need to override this
@@ -238,7 +238,7 @@ Returns the view type name, as passed to the document template constructor.
 
 h3(#DocTemplate_initdocument). DocTemplate#init_document
 
- Boolean *init_document*(%(arg-type)Document% doc,  %(arg-type)String% path, 
+ Boolean *init_document*(%(arg-type)"Document":document.html% doc,  %(arg-type)String% path, 
                        %(arg-type)Integer% flags = 0)
 
 Initialises the document, calling Document::OnCreate. This is called from
@@ -270,7 +270,7 @@ Sets the default directory.
 
 h3(#DocTemplate_setdocumentmanager). DocTemplate#set_document_manager
 
-  *set_document_manager*(%(arg-type)DocManager% manager)
+  *set_document_manager*(%(arg-type)"DocManager":docmanager.html% manager)
 
 Sets the pointer to the document manager instance for which this template was created.
 Should not be called by the application.

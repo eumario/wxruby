@@ -106,7 +106,7 @@ Constructor.
 
 h3(#UpdateUIEvent_canupdate). UpdateUIEvent#can_update
 
- Boolean *can_update*(%(arg-type)Window% window)
+ Boolean *can_update*(%(arg-type)"Window":window.html% window)
 
 Returns @true@ if it is appropriate to update (send UI update events to)
 this window.
@@ -229,7 +229,7 @@ h4. See also
 
 h3(#UpdateUIEvent_setmode). UpdateUIEvent#set_mode
 
-  *set_mode*(%(arg-type)UpdateUIMode% mode)
+  *set_mode*(%(arg-type)"UpdateUIMode":updateuimode.html% mode)
 
 Specify how Widgets will send update events: to
 all windows, or only to those which specify that they

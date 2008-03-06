@@ -60,7 +60,7 @@ Set the untyped client data.
 
 h3(#ClientDataContainer_setclientobject). ClientDataContainer#set_client_object
 
-  *set_client_object*(%(arg-type)ClientData% data)
+  *set_client_object*(%(arg-type)"ClientData":clientdata.html% data)
 
 Set the client data object. Any previous object will be deleted.
 

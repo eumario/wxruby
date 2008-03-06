@@ -33,9 +33,9 @@ h2. Methods
 
 h3(#PreviewFrame_new). PreviewFrame.new
 
-  *PreviewFrame.new*(%(arg-type)PrintPreview% preview,  %(arg-type)Window% parent, 
+  *PreviewFrame.new*(%(arg-type)"PrintPreview":printpreview.html% preview,  %(arg-type)"Window":window.html% parent, 
                    %(arg-type)String% title, 
-                   %(arg-type)Point% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
                    %(arg-type)Size size% size = DEFAULT_SIZE, 
                    %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
                    %(arg-type)String% name = "frame")
@@ -79,7 +79,7 @@ this had to be changed to *init*() because of the conflict with Ruby's built in 
 
 h3(#PreviewFrame_onclosewindow). PreviewFrame#on_close_window
 
-  *on_close_window*(%(arg-type)CloseEvent% event)
+  *on_close_window*(%(arg-type)"CloseEvent":closeevent.html% event)
 
 Enables the other frames in the application, and deletes the print preview
 object, implicitly deleting any printout objects associated with the print

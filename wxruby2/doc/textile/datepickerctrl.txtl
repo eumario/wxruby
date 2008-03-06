@@ -58,12 +58,12 @@ h2. Methods
 
 h3(#DatePickerCtrl_new). DatePickerCtrl.new
 
-  *DatePickerCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                     %(arg-type)DateTime% dt = DefaultDateTime, 
-                     %(arg-type)Point% pos = DEFAULT_POSITION, 
-                     %(arg-type)Size% size = DEFAULT_SIZE, 
+  *DatePickerCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                     %(arg-type)"DateTime":datetime.html% dt = DefaultDateTime, 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                      %(arg-type)Integer% style = DP_DEFAULT | DP_SHOWCENTURY, 
-                     %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                     %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                     %(arg-type)String% name = "datectrl")
 
 Initializes the object and calls "Create":datepickerctrlcreate.html with
@@ -72,12 +72,12 @@ all the parameters.
 
 h3(#DatePickerCtrl_create). DatePickerCtrl#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)DateTime% dt = DefaultDateTime, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"DateTime":datetime.html% dt = DefaultDateTime, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DP_DEFAULT | DP_SHOWCENTURY, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "datectrl")
 
 h4. Parameters
@@ -102,7 +102,7 @@ h4. Return value
 
 h3(#DatePickerCtrl_getrange). DatePickerCtrl#get_range
 
- Boolean *get_range*(%(arg-type)DateTime% dt1,  %(arg-type)DateTime% dt2)
+ Boolean *get_range*(%(arg-type)"DateTime":datetime.html% dt1,  %(arg-type)"DateTime":datetime.html% dt2)
 
 If the control had been previously limited to a range of dates using 
 "set_range()":#DatePickerCtrl_setrange(), returns the lower and upper
@@ -132,7 +132,7 @@ outside of the current range, an invalid object is returned.
 
 h3(#DatePickerCtrl_setrange). DatePickerCtrl#set_range
 
-  *set_range*(%(arg-type)DateTime% dt1,  %(arg-type)DateTime% dt2)
+  *set_range*(%(arg-type)"DateTime":datetime.html% dt1,  %(arg-type)"DateTime":datetime.html% dt2)
 
 Sets the valid range for the date selection. If dt1 is valid, it becomes
 the earliest date (inclusive) accepted by the control. If dt2 is valid,
@@ -146,7 +146,7 @@ the behaviour is undefined.
 
 h3(#DatePickerCtrl_setvalue). DatePickerCtrl#set_value
 
-  *set_value*(%(arg-type)DateTime% dt)
+  *set_value*(%(arg-type)"DateTime":datetime.html% dt)
 
 Changes the current value of the control. The date should be valid and included
 in the currently selected range, if any.

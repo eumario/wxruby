@@ -96,39 +96,39 @@ Destructor.
 
 h3(#AuiDockArt_drawbackground). AuiDockArt#draw_background
 
-  *draw_background*(%(arg-type)DC% dc,  %(arg-type)Window% window,  %(arg-type)Integer% orientation, 
-                  %(arg-type)Rect% rect)
+  *draw_background*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)Integer% orientation, 
+                  %(arg-type)"Rect":rect.html% rect)
 
 Draws a background.
 
 h3(#AuiDockArt_drawborder). AuiDockArt#draw_border
 
-  *draw_border*(%(arg-type)DC% dc,  %(arg-type)Window% window,  %(arg-type)Rect% rect, 
-              %(arg-type)AuiPaneInfo% pane)
+  *draw_border*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)"Rect":rect.html% rect, 
+              %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
 
 Draws a border.
 
 h3(#AuiDockArt_drawcaption). AuiDockArt#draw_caption
 
-  *draw_caption*(%(arg-type)DC% dc,  %(arg-type)Window% window,  %(arg-type)String% text, 
-               %(arg-type)Rect% rect, 
-               %(arg-type)AuiPaneInfo% pane)
+  *draw_caption*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)String% text, 
+               %(arg-type)"Rect":rect.html% rect, 
+               %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
 
 Draws a caption.
 
 h3(#AuiDockArt_drawgripper). AuiDockArt#draw_gripper
 
-  *draw_gripper*(%(arg-type)DC% dc,  %(arg-type)Window% window,  %(arg-type)Rect% rect, 
-               %(arg-type)AuiPaneInfo% pane)
+  *draw_gripper*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)"Rect":rect.html% rect, 
+               %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
 
 Draws a gripper.
 
 h3(#AuiDockArt_drawpanebutton). AuiDockArt#draw_pane_button
 
-  *draw_pane_button*(%(arg-type)DC% dc,  %(arg-type)Window% window,  %(arg-type)Integer% button, 
+  *draw_pane_button*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)Integer% button, 
                    %(arg-type)Integer% button_state, 
-                   %(arg-type)Rect% rect, 
-                   %(arg-type)AuiPaneInfo% pane)
+                   %(arg-type)"Rect":rect.html% rect, 
+                   %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
 
 Draws a button in the pane's title bar.
 
@@ -138,8 +138,8 @@ _button_state_ can be one of the values of *AuiPaneButtonState*.
 
 h3(#AuiDockArt_drawsash). AuiDockArt#draw_sash
 
-  *draw_sash*(%(arg-type)DC% dc,  %(arg-type)Window% window,  %(arg-type)Integer% orientation, 
-            %(arg-type)Rect% rect)
+  *draw_sash*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)Integer% orientation, 
+            %(arg-type)"Rect":rect.html% rect)
 
 Draws a sash between two windows.
 
@@ -175,13 +175,13 @@ _id_ can be one of the size values of *AuiPaneDockArtSetting*.
 
 h3(#AuiDockArt_setcolor). AuiDockArt#set_color
 
-  *set_color*(%(arg-type)Integer% id,  %(arg-type)Colour% color)
+  *set_color*(%(arg-type)Integer% id,  %(arg-type)"Colour":colour.html% color)
 
 The same as "set_colour":#AuiDockArt_setcolour.
 
 h3(#AuiDockArt_setcolour). AuiDockArt#set_colour
 
-  *set_colour*(%(arg-type)Integer% id,  %(arg-type)Color% colour)
+  *set_colour*(%(arg-type)Integer% id,  %(arg-type)"Color":color.html% colour)
 
 Set a certain setting with the value _colour_.
 
@@ -189,7 +189,7 @@ _id_ can be one of the colour values of *AuiPaneDockArtSetting*.
 
 h3(#AuiDockArt_setfont). AuiDockArt#set_font
 
-  *set_font*(%(arg-type)Integer% id,  %(arg-type)Font% font)
+  *set_font*(%(arg-type)Integer% id,  %(arg-type)"Font":font.html% font)
 
 Set a font setting.
 

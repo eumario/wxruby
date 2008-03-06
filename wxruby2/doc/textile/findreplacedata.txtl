@@ -72,7 +72,7 @@ h2. Methods
 
 h3(#FindReplaceData_new). FindReplaceData.new
 
-  *FindReplaceData.new*(%(arg-type)Uint32% flags = 0)
+  *FindReplaceData.new*(%(arg-type)"Uint32":uint32.html% flags = 0)
 
 Constuctor initializes the flags to default value ($0$).
 
@@ -96,7 +96,7 @@ Get the combination of @FindReplaceFlags@ values.
 
 h3(#FindReplaceData_setflags). FindReplaceData#set_flags
 
-  *set_flags*(%(arg-type)Uint32% flags)
+  *set_flags*(%(arg-type)"Uint32":uint32.html% flags)
 
 Set the flags to use to initialize the controls of the dialog.
 

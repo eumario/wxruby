@@ -53,11 +53,11 @@ h2. Methods
 
 h3(#Choice_new). Choice.new
 
-  *Choice.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
-             %(arg-type)Size% size, 
-             %(arg-type)Array% choices[], 
+  *Choice.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Point":point.html% pos, 
+             %(arg-type)"Size":size.html% size, 
+             %(arg-type)"Array":array.html% choices[], 
              %(arg-type)Integer% style = 0, 
-             %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+             %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
              %(arg-type)String% name = "choice")
 
 Constructor, creating and showing a choice.
@@ -80,11 +80,11 @@ h4. See also
 
 h3(#Choice_create). Choice#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Point% pos, 
-                %(arg-type)Size% size, 
-                %(arg-type)Array% choices[], 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Point":point.html% pos, 
+                %(arg-type)"Size":size.html% size, 
+                %(arg-type)"Array":array.html% choices[], 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "choice")
 
 Creates the choice for two-step construction. See "Choice.new":choice.html#Choice_new.

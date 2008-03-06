@@ -83,7 +83,7 @@ h2. Methods
 
 h3(#PrintData_new). PrintData.new
 
-  *PrintData.new*(%(arg-type)PrintData% data)
+  *PrintData.new*(%(arg-type)"PrintData":printdata.html% data)
 
 Copy constructor.
 
@@ -182,7 +182,7 @@ On all other platforms, it returns true.
 
 h3(#PrintData_setbin). PrintData#set_bin
 
-  *set_bin*(%(arg-type)PrintBin% flag)
+  *set_bin*(%(arg-type)"PrintBin":printbin.html% flag)
 
 Sets the current bin. Possible values are:
 
@@ -228,7 +228,7 @@ Sets colour printing on or off.
 
 h3(#PrintData_setduplex). PrintData#set_duplex
 
-  *set_duplex*(%(arg-type)DuplexMode% mode)
+  *set_duplex*(%(arg-type)"DuplexMode":duplexmode.html% mode)
 
 Returns the duplex mode. One of DUPLEX_SIMPLEX, DUPLEX_HORIZONTAL, DUPLEX_VERTICAL.
 
@@ -249,7 +249,7 @@ Sets the orientation. This can be LANDSCAPE or PORTRAIT.
 
 h3(#PrintData_setpaperid). PrintData#set_paper_id
 
-  *set_paper_id*(%(arg-type)PaperSize% paperId)
+  *set_paper_id*(%(arg-type)"PaperSize":papersize.html% paperId)
 
 PaperSizeSets the paper id. This indicates the type of paper to be used. For a mapping between
 paper id, paper size and string name, see PrintPaperDatabase in @paper.h@ (not yet documented).
@@ -341,7 +341,7 @@ printer should be used.
 
 h3(#PrintData_setquality). PrintData#set_quality
 
-  *set_quality*(%(arg-type)PrintQuality% quality)
+  *set_quality*(%(arg-type)"PrintQuality":printquality.html% quality)
 
 Sets the desired print quality. This can be a positive integer, denoting the number of dots per inch, or
 one of the following identifiers:
@@ -359,11 +359,11 @@ indicating the current resolution setting.
 
 h3(#PrintData_assign). PrintData#=
 
-  *operator $=$*(%(arg-type)PrintData% data)
+  *operator $=$*(%(arg-type)"PrintData":printdata.html% data)
 
 Assigns print data to this object.
 
-  *operator $=$*(%(arg-type)PrintSetupData% data)
+  *operator $=$*(%(arg-type)"PrintSetupData":printsetupdata.html% data)
 
 Assigns print setup data to this object. PrintSetupData is deprecated,
 but retained for backward compatibility.

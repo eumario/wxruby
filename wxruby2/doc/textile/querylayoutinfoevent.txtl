@@ -99,7 +99,7 @@ Returns the size that the event handler specified to the event object as being t
 
 h3(#QueryLayoutInfoEvent_setalignment). QueryLayoutInfoEvent#set_alignment
 
-  *set_alignment*(%(arg-type)LayoutAlignment% alignment)
+  *set_alignment*(%(arg-type)"LayoutAlignment":layoutalignment.html% alignment)
 
 Call this to specify the alignment of the window (which side of the remaining parent client area
 the window sticks to). May be one of LAYOUT_TOP, LAYOUT_LEFT, LAYOUT_RIGHT, LAYOUT_BOTTOM.
@@ -112,7 +112,7 @@ Sets the flags associated with this event. Not currently used.
 
 h3(#QueryLayoutInfoEvent_setorientation). QueryLayoutInfoEvent#set_orientation
 
-  *set_orientation*(%(arg-type)LayoutOrientation% orientation)
+  *set_orientation*(%(arg-type)"LayoutOrientation":layoutorientation.html% orientation)
 
 Call this to specify the orientation of the window. May be one of LAYOUT_HORIZONTAL,
 LAYOUT_VERTICAL.
@@ -126,7 +126,7 @@ is not yet used.
 
 h3(#QueryLayoutInfoEvent_setsize). QueryLayoutInfoEvent#set_size
 
-  *set_size*(%(arg-type)Size% size)
+  *set_size*(%(arg-type)"Size":size.html% size)
 
 Call this to let the calling code know what the size of the window is.
 

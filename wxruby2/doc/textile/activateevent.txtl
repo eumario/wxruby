@@ -48,7 +48,7 @@ h2. Methods
 
 h3(#ActivateEvent_new). ActivateEvent.new
 
-  *ActivateEvent.new*(%(arg-type)TYPE% eventType = 0,  %(arg-type)Boolean% active = true, 
+  *ActivateEvent.new*(%(arg-type)"TYPE":type.html% eventType = 0,  %(arg-type)Boolean% active = true, 
                     %(arg-type)Integer% id = 0)
 
 Constructor.

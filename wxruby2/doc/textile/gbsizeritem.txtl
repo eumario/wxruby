@@ -31,21 +31,21 @@ h2. Methods
 h3(#GBSizerItem_wxgbsizeritem). GBSizerItem.new
 
   *GBSizerItem.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
-                  %(arg-type)GBPosition% pos,  %(arg-type)GBSpan% span, 
+                  %(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span, 
                   %(arg-type)Integer% flag, 
                   %(arg-type)Integer% border, 
                   %(arg-type)Object% userData)
 
 Construct a sizer item for tracking a spacer.
 
-  *GBSizerItem.new*(%(arg-type)Window% window,  %(arg-type)GBPosition% pos,  %(arg-type)GBSpan% span, 
+  *GBSizerItem.new*(%(arg-type)"Window":window.html% window,  %(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span, 
                   %(arg-type)Integer% flag, 
                   %(arg-type)Integer% border, 
                   %(arg-type)Object% userData)
 
 Construct a sizer item for tracking a window.
 
-  *GBSizerItem.new*(%(arg-type)Sizer% sizer,  %(arg-type)GBPosition% pos,  %(arg-type)GBSpan% span, 
+  *GBSizerItem.new*(%(arg-type)"Sizer":sizer.html% sizer,  %(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span, 
                   %(arg-type)Integer% flag, 
                   %(arg-type)Integer% border, 
                   %(arg-type)Object% userData)
@@ -76,17 +76,17 @@ Get the row and column spanning of the item.
 
 h3(#GBSizerItem_intersects). GBSizerItem#intersects
 
- Boolean *intersects*(%(arg-type)GBSizerItem% other)
+ Boolean *intersects*(%(arg-type)"GBSizerItem":gbsizeritem.html% other)
 
 Returns true if this item and the other item instersect
 
- Boolean *intersects*(%(arg-type)GBPosition% pos,  %(arg-type)GBSpan% span)
+ Boolean *intersects*(%(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span)
 
 Returns true if the given pos/span would intersect with this item.
 
 h3(#GBSizerItem_setpos). GBSizerItem#set_pos
 
- Boolean *set_pos*(%(arg-type)GBPosition% pos)
+ Boolean *set_pos*(%(arg-type)"GBPosition":gbposition.html% pos)
 
 If the item is already a member of a sizer then first ensure that
 there is no other item that would intersect with this one at the new
@@ -95,7 +95,7 @@ successful and after the next Layout the item will be moved.
 
 h3(#GBSizerItem_setspan). GBSizerItem#set_span
 
- Boolean *set_span*(%(arg-type)GBSpan% span)
+ Boolean *set_span*(%(arg-type)"GBSpan":gbspan.html% span)
 
 If the item is already a member of a sizer then first ensure that
 there is no other item that would intersect with this one with its new

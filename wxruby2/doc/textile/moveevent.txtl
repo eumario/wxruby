@@ -34,7 +34,7 @@ h2. Methods
 
 h3(#MoveEvent_new). MoveEvent.new
 
-  *MoveEvent.new*(%(arg-type)Point% pt,  %(arg-type)Integer% id = 0)
+  *MoveEvent.new*(%(arg-type)"Point":point.html% pt,  %(arg-type)Integer% id = 0)
 
 Constructor.
 

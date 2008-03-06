@@ -42,8 +42,8 @@ h2. Methods
 
 h3(#PrintPreview_new). PrintPreview.new
 
-  *PrintPreview.new*(%(arg-type)Printout% printout,  %(arg-type)Printout% printoutForPrinting, 
-                  %(arg-type)PrintData% data=NULL)
+  *PrintPreview.new*(%(arg-type)"Printout":printout.html% printout,  %(arg-type)"Printout":printout.html% printoutForPrinting, 
+                  %(arg-type)"PrintData":printdata.html% data=NULL)
 
 Constructor. Pass a printout object, an optional printout object to be
 used for actual printing, and the address of an optional
@@ -129,7 +129,7 @@ problem initializing the printer device context (current printer not set, for ex
 
 h3(#PrintPreview_paintpage). PrintPreview#paint_page
 
- Boolean *paint_page*(%(arg-type)PreviewCanvas% canvas,  %(arg-type)DC% dc)
+ Boolean *paint_page*(%(arg-type)"PreviewCanvas":previewcanvas.html% canvas,  %(arg-type)"DC":dc.html% dc)
 
 This refreshes the preview window with the preview image.
 It must be called from the preview window's OnPaint member.
@@ -161,7 +161,7 @@ Renders a page into a MemoryDC. Used internally by PrintPreview.
 
 h3(#PrintPreview_setcanvas). PrintPreview#set_canvas
 
-  *set_canvas*(%(arg-type)PreviewCanvas% window)
+  *set_canvas*(%(arg-type)"PreviewCanvas":previewcanvas.html% window)
 
 Sets the window to be used for displaying the print preview image.
 
@@ -175,7 +175,7 @@ Sets the current page to be previewed.
 
 h3(#PrintPreview_setframe). PrintPreview#set_frame
 
-  *set_frame*(%(arg-type)Frame% frame)
+  *set_frame*(%(arg-type)"Frame":frame.html% frame)
 
 Sets the frame to be used for displaying the print preview canvas
 and control bar.
@@ -183,7 +183,7 @@ and control bar.
 
 h3(#PrintPreview_setprintout). PrintPreview#set_printout
 
-  *set_printout*(%(arg-type)Printout% printout)
+  *set_printout*(%(arg-type)"Printout":printout.html% printout)
 
 Associates a printout object with the PrintPreview object.
 

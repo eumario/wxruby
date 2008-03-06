@@ -34,10 +34,10 @@ h2. Methods
 
 h3(#PreviewControlBar_new). PreviewControlBar#preview_controlbar
 
-  *PreviewControlBar.new*(%(arg-type)PrintPreview% preview,  %(arg-type)Integer% buttons, 
-                        %(arg-type)Window% parent, 
-                        %(arg-type)Point% pos = DEFAULT_POSITION, 
-                        %(arg-type)Size% size = DEFAULT_SIZE, 
+  *PreviewControlBar.new*(%(arg-type)"PrintPreview":printpreview.html% preview,  %(arg-type)Integer% buttons, 
+                        %(arg-type)"Window":window.html% parent, 
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                        %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                         %(arg-type)Integer% style = 0, 
                         %(arg-type)String% name = "panel")
 

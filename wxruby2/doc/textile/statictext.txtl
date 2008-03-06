@@ -44,9 +44,9 @@ h2. Methods
 
 h3(#StaticText_constr). StaticText.new
 
-  *StaticText.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                 %(arg-type)Size% size = DEFAULT_SIZE, 
+  *StaticText.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                  %(arg-type)Integer% style = 0, 
                  %(arg-type)String% name = "staticText")
 
@@ -69,9 +69,9 @@ h4. See also
 
 h3(#StaticText_create). StaticText#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
                 %(arg-type)String% name = "staticText")
 

@@ -36,7 +36,7 @@ Virtual destructor for any base class.
 
 h3(#HelpProvider_addhelp). HelpProvider#add_help
 
-  *add_help*(%(arg-type)WindowBase% window,  %(arg-type)String% text)
+  *add_help*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)String% text)
 
 Associates the text with the given window or id. Although all help
 providers have these functions to allow making "Window#set_help_text":window.html#Window_sethelptext 
@@ -51,7 +51,7 @@ This must be explicitly done by the application.
 
 h3(#HelpProvider_gethelp). HelpProvider#get_help
 
- String *get_help*(%(arg-type)WindowBase% window)
+ String *get_help*(%(arg-type)"WindowBase":windowbase.html% window)
 
 Gets the help string for this window. Its interpretation is dependent on the help provider
 except that empty string always means that no help is associated with
@@ -65,7 +65,7 @@ the application, for example.
 
 h3(#HelpProvider_removehelp). HelpProvider#remove_help
 
-  *remove_help*(%(arg-type)WindowBase% window)
+  *remove_help*(%(arg-type)"WindowBase":windowbase.html% window)
 
 Removes the association between the window pointer and the help text. This is
 called by the Window destructor. Without this, the table of help strings will fill up
@@ -73,14 +73,14 @@ and when window pointers are reused, the wrong help string will be found.
 
 h3(#HelpProvider_set). HelpProvider#set
 
- "HelpProvider":helpprovider.html *set*(%(arg-type)HelpProvider% helpProvider)
+ "HelpProvider":helpprovider.html *set*(%(arg-type)"HelpProvider":helpprovider.html% helpProvider)
 
 Get/set the current, application-wide help provider. Returns
 the previous one.
 
 h3(#HelpProvider_showhelp). HelpProvider#show_help
 
- Boolean *show_help*(%(arg-type)WindowBase% window)
+ Boolean *show_help*(%(arg-type)"WindowBase":windowbase.html% window)
 
 Shows help for the given window. Uses "get_help":#HelpProvider_gethelp internally if
 applicable.

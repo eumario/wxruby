@@ -49,9 +49,9 @@ h2. Methods
 
 h3(#Panel_new). Panel.new
 
-  *Panel.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = $-1$, 
-            %(arg-type)Point% pos = DEFAULT_POSITION, 
-            %(arg-type)Size% size = DEFAULT_SIZE, 
+  *Panel.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = $-1$, 
+            %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+            %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
             %(arg-type)Integer% style = TAB_TRAVERSAL, 
             %(arg-type)String% name = "panel")
 
@@ -80,9 +80,9 @@ Destructor. Deletes any child windows before deleting the physical window.
 
 h3(#Panel_create). Panel#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = TAB_TRAVERSAL, 
                 %(arg-type)String% name = "panel")
 
@@ -108,7 +108,7 @@ h4. See also
 
 h3(#Panel_onsyscolourchanged). Panel#on_sys_colour_changed
 
-  *on_sys_colour_changed*(%(arg-type)SysColourChangedEvent% event)
+  *on_sys_colour_changed*(%(arg-type)"SysColourChangedEvent":syscolourchangedevent.html% event)
 
 The default handler for EVT_SYS_COLOUR_CHANGED.
 
@@ -131,7 +131,7 @@ h4. See also
 
 h3(#Panel_setdefaultitem). Panel#set_default_item
 
-  *set_default_item*(%(arg-type)Button% btn)
+  *set_default_item*(%(arg-type)"Button":button.html% btn)
 
 Changes the default button for the panel.
 

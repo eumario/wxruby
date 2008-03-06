@@ -46,7 +46,7 @@ Returns true if the metafile is valid.
 
 h3(#Metafile_play). Metafile#play
 
- Boolean *play*(%(arg-type)DC% dc)
+ Boolean *play*(%(arg-type)"DC":dc.html% dc)
 
 Plays the metafile into the given device context, returning
 true if successful.

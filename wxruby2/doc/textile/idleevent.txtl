@@ -55,7 +55,7 @@ h3(#IdleEvent_new). IdleEvent.new
 
 h3(#IdleEvent_cansend). IdleEvent#can_send
 
- Boolean *can_send*(%(arg-type)Window% window)
+ Boolean *can_send*(%(arg-type)"Window":window.html% window)
 
 Returns @true@ if it is appropriate to send idle events to
 this window.
@@ -106,7 +106,7 @@ h4. See also
 
 h3(#IdleEvent_setmode). IdleEvent#set_mode
 
-  *set_mode*(%(arg-type)IdleMode% mode)
+  *set_mode*(%(arg-type)"IdleMode":idlemode.html% mode)
 
 Static function for specifying how Widgets will send idle events: to
 all windows, or only to those which specify that they

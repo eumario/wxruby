@@ -130,7 +130,7 @@ h3(#DC_blit). DC#blit
 
  Boolean *blit*(%(arg-type)Integer% xdest,  %(arg-type)Integer% ydest,  %(arg-type)Integer% width, 
               %(arg-type)Integer% height, 
-               %(arg-type)DC% source, 
+               %(arg-type)"DC":dc.html% source, 
               %(arg-type)Integer% xsrc, 
               %(arg-type)Integer% ysrc, 
               %(arg-type)Integer% logicalFunc = COPY, 
@@ -329,7 +329,7 @@ The arc is drawn in an anticlockwise direction from the start point to the end p
 
 h3(#DC_drawbitmap). DC#draw_bitmap
 
-  *draw_bitmap*(%(arg-type)Bitmap% bitmap,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
+  *draw_bitmap*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
               %(arg-type)Boolean% transparent)
 
 Draw a bitmap on the device context at the specified point. If _transparent_ is true and the bitmap has
@@ -346,7 +346,7 @@ h3(#DC_drawcheckmark). DC#draw_check_mark
   *draw_check_mark*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
                   %(arg-type)Integer% height)
 
-  *draw_check_mark*(%(arg-type)Rect% rect)
+  *draw_check_mark*(%(arg-type)"Rect":rect.html% rect)
 
 Draws a check mark inside the given rectangle.
 
@@ -355,7 +355,7 @@ h3(#DC_drawcircle). DC#draw_circle
 
   *draw_circle*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% radius)
 
-  *draw_circle*(%(arg-type)Point% pt,  %(arg-type)Integer% radius)
+  *draw_circle*(%(arg-type)"Point":point.html% pt,  %(arg-type)Integer% radius)
 
 Draws a circle with the given centre and radius.
 
@@ -369,9 +369,9 @@ h3(#DC_drawellipse). DC#draw_ellipse
   *draw_ellipse*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
                %(arg-type)Integer% height)
 
-  *draw_ellipse*(%(arg-type)Point% pt,  %(arg-type)Size% size)
+  *draw_ellipse*(%(arg-type)"Point":point.html% pt,  %(arg-type)"Size":size.html% size)
 
-  *draw_ellipse*(%(arg-type)Rect% rect)
+  *draw_ellipse*(%(arg-type)"Rect":rect.html% rect)
 
 Draws an ellipse contained in the rectangle specified either with the given top
 left corner and the given size or directly. The current pen is used for the
@@ -386,8 +386,8 @@ h3(#DC_drawellipticarc). DC#draw_elliptic_arc
 
   *draw_elliptic_arc*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
                     %(arg-type)Integer% height, 
-                    %(arg-type)double% start, 
-                    %(arg-type)double% end)
+                    %(arg-type)Float% start, 
+                    %(arg-type)Float% end)
 
 Draws an arc of an ellipse. The current pen is used for drawing the arc and
 the current brush is used for drawing the pie.
@@ -407,7 +407,7 @@ complete ellipse will be drawn.
 
 h3(#DC_drawicon). DC#draw_icon
 
-  *draw_icon*(%(arg-type)Icon% icon,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+  *draw_icon*(%(arg-type)"Icon":icon.html% icon,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Draw an icon on the display (does nothing if the device context is PostScript).
 This can be the simplest way of drawing bitmaps on a window.
@@ -415,13 +415,13 @@ This can be the simplest way of drawing bitmaps on a window.
 
 h3(#DC_drawlabel). DC#draw_label
 
-  *draw_label*(%(arg-type)String% text,                                %(arg-type)Bitmap% image, 
-                                           %(arg-type)Rect% rect, 
+  *draw_label*(%(arg-type)String% text,                                %(arg-type)"Bitmap":bitmap.html% image, 
+                                           %(arg-type)"Rect":rect.html% rect, 
                                            %(arg-type)Integer% alignment = ALIGN_LEFT | ALIGN_TOP, 
                                            %(arg-type)Integer% indexAccel = -1, 
-                                           %(arg-type)Rect% rectBounding = nil)
+                                           %(arg-type)"Rect":rect.html% rectBounding = nil)
 
-  *draw_label*(%(arg-type)String% text,  %(arg-type)Rect% rect, 
+  *draw_label*(%(arg-type)String% text,  %(arg-type)"Rect":rect.html% rect, 
                                    %(arg-type)Integer% alignment = ALIGN_LEFT | ALIGN_TOP, 
                                    %(arg-type)Integer% indexAccel = -1)
 
@@ -442,7 +442,7 @@ behaviour of many other toolkits).
 
 h3(#DC_drawlines). DC#draw_lines
 
-  *draw_lines*(%(arg-type)Array% points,  
+  *draw_lines*(%(arg-type)"Array":array.html% points,  
                 %(arg-type)Integer% xoffset = 0, 
                 %(arg-type)Integer% yoffset = 0)
 
@@ -460,7 +460,7 @@ point. The current pen is used for drawing the lines.
 
 h3(#DC_drawpolygon). DC#draw_polygon
 
-  *draw_polygon*(%(arg-type)Array% points,  
+  *draw_polygon*(%(arg-type)"Array":array.html% points,  
                    %(arg-type)Integer% xoffset = 0, 
                    %(arg-type)Integer% yoffset = 0, 
                    %(arg-type)Integer% fill_style = Wx::ODDEVEN_RULE)
@@ -480,7 +480,7 @@ default) or *Wx::WINDING_RULE*.
 
 h3(#DC_drawpolypolygon). DC#draw_poly_polygon
 
-  *draw_poly_polygon*(%(arg-type)Array% points, 
+  *draw_poly_polygon*(%(arg-type)"Array":array.html% points, 
                         %(arg-type)Integer% xoffset = 0, 
                         %(arg-type)Integer% yoffset = 0, 
                         %(arg-type)Integer% fill_style = Wx::ODDEVEN_RULE)
@@ -535,7 +535,7 @@ h3(#DC_drawrotatedtext). DC#draw_rotated_text
   *draw_rotated_text*(%(arg-type)String% text,  
                         %(arg-type)Integer% x,  
                         %(arg-type)Integer% y, 
-                        %(arg-type)double% angle)
+                        %(arg-type)Float% angle)
 
 Draws the text rotated by _angle_ degrees.
 
@@ -553,7 +553,7 @@ h3(#DC_drawroundedrectangle). DC#draw_rounded_rectangle
 
   *draw_rounded_rectangle*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
                          %(arg-type)Integer% height, 
-                         %(arg-type)double% radius)
+                         %(arg-type)Float% radius)
 
 Draws a rectangle with the given top left corner, and with the given
 size.  The corners are quarter-circles using the given radius. The
@@ -571,7 +571,7 @@ the rectangle.
 
 h3(#DC_drawspline). DC#draw_spline
 
-  *draw_spline*(%(arg-type)Array% points)
+  *draw_spline*(%(arg-type)"Array":array.html% points)
 
 Draws a spline between all given control points, using the current
 pen. _points_ should be an Array of co-ordinates. These may be passed as
@@ -642,7 +642,7 @@ Ends a document page (only relevant when outputting to a printer).
 
 h3(#DC_floodfill). DC#flood_fill
 
- Boolean *flood_fill*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Colour% colour, 
+ Boolean *flood_fill*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)"Colour":colour.html% colour, 
                     %(arg-type)Integer% style=FLOOD_SURFACE)
 
 Flood fills the device context starting from the given point, using
@@ -742,7 +742,7 @@ Gets the _mapping mode_ for the device context (see "DC#set_map_mode":dc.html#DC
 
 h3(#DC_getpartialtextextents). DC#get_partial_text_extents
 
- Boolean *get_partial_text_extents*(%(arg-type)String% text,  %(arg-type)ArrayInt% widths)
+ Boolean *get_partial_text_extents*(%(arg-type)String% text,  %(arg-type)"ArrayInt":arrayint.html% widths)
 
 Fills the _widths_ array with the widths from the beginning of 
 _text_ to the corresponding character of _text_.  The generic
@@ -764,7 +764,7 @@ Gets the current pen (see "DC#set_pen":dc.html#DC_setpen).
 
 h3(#DC_getpixel). DC#get_pixel
 
- Boolean *get_pixel*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Colour% colour)
+ Boolean *get_pixel*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)"Colour":colour.html% colour)
 
 Gets in _colour_ the colour at the specified location.
 Not available for PostScriptDC or MetafileDC.
@@ -812,7 +812,7 @@ h3(#DC_gettextextent). DC#get_text_extent
   Integer w, Integer h, 
   Integer descent,
   Integer external_leading = *get_text_extent*(%(arg-type)String% string,  
-  		  				                         %(arg-type)Font% font = nil)
+  		  				                         %(arg-type)"Font":font.html% font = nil)
 
 Gets the dimensions of the string using the currently selected font.
 _string_ is the text string to measure, and the optional parameter
@@ -837,14 +837,14 @@ Gets the current text foreground colour (see "DC#set_text_foreground":dc.html#DC
 
 h3. DC#get_user_scale
 
-  *get_user_scale*(%(arg-type)double% x,  %(arg-type)double% y)
+  *get_user_scale*(%(arg-type)Float% x,  %(arg-type)Float% y)
 
 Gets the current user scale factor (set by "set_user_scale":#DC_setuserscale).
 
 h3. DC#gradient_fill_concentric
 
-  *gradient_fill_concentric*(%(arg-type)Rect% rect, %(arg-type)Colour% initial_colour, 
-                                %(arg-type)Colour% dest_colour, %(arg-type)Point% centre = nil )
+  *gradient_fill_concentric*(%(arg-type)"Rect":rect.html% rect, %(arg-type)"Colour":colour.html% initial_colour, 
+                                %(arg-type)"Colour":colour.html% dest_colour, %(arg-type)"Point":point.html% centre = nil )
 
 Fill the area specified by rect with a radial gradient, starting from
 _initial_colour_ at the centre of the circle and fading to _dest_colour_ on
@@ -858,8 +858,8 @@ rect.
 
 h3. DC#gradient_fill_linear
 
-  *gradient_fill_concentric*(%(arg-type)Rect% rect, %(arg-type)Colour% initial_colour, 
-                                %(arg-type)Colour% dest_colour, %(arg-type)Direction% dir = @Wx::EAST@ )
+  *gradient_fill_concentric*(%(arg-type)"Rect":rect.html% rect, %(arg-type)"Colour":colour.html% initial_colour, 
+                                %(arg-type)"Colour":colour.html% dest_colour, %(arg-type)"Direction":direction.html% dir = @Wx::EAST@ )
 
 Fill the area specified by rect with a linear gradient, starting from initialColour and eventually fading to destColour. The nDirection specifies the direction of the colour change, default is to use initialColour on the left part of the rectangle and destColour on the right one.
 
@@ -963,7 +963,7 @@ bottom up orientation, false to invert it.
 
 h3. DC#set_background
 
-  *set_background*(%(arg-type)Brush% brush)
+  *set_background*(%(arg-type)"Brush":brush.html% brush)
 
 Sets the current background brush for the DC.
 
@@ -978,7 +978,7 @@ whether text will be drawn with a background colour or not.
 
 h3. DC#set_brush
 
-  *set_brush*(%(arg-type)Brush% brush)
+  *set_brush*(%(arg-type)"Brush":brush.html% brush)
 
 Sets the current brush for the DC.
 
@@ -997,11 +997,11 @@ h3. DC#set_clipping_region
   *set_clipping_region*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
                       %(arg-type)Integer% height)
 
-  *set_clipping_region*(%(arg-type)Point% pt,  %(arg-type)Size% sz)
+  *set_clipping_region*(%(arg-type)"Point":point.html% pt,  %(arg-type)"Size":size.html% sz)
 
-  *set_clipping_region*(%(arg-type)Rect% rect)
+  *set_clipping_region*(%(arg-type)"Rect":rect.html% rect)
 
-  *set_clipping_region*(%(arg-type)Region% region)
+  *set_clipping_region*(%(arg-type)"Region":region.html% region)
 
 Sets the clipping region for this device context to the intersection of the
 given region described by the parameters of this method and the previously set
@@ -1031,7 +1031,7 @@ operations for placing a graphic on a page.
 
 h3. DC#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets the current font for the DC. It must be a valid font, in particular you
 should not pass @NullFont@ to this method.
@@ -1041,7 +1041,7 @@ See also "Font":font.html.
 
 h3. DC#set_layout_direction
 
-  *set_layout_direction*(%(arg-type)LayoutDirection% dir)
+  *set_layout_direction*(%(arg-type)"LayoutDirection":layoutdirection.html% dir)
 
 Sets the current layout direction for the device context. _dir_ may be
 either @Wx::LAYOUT_DEFAULT@, @Wx::LAYOUT_LEFT_TO_RIGHT@ or
@@ -1117,7 +1117,7 @@ The mapping mode can be one of the following:
 
 h3(#DC_setpalette). DC#set_palette
 
-  *set_palette*(%(arg-type)Palette% palette)
+  *set_palette*(%(arg-type)"Palette":palette.html% palette)
 
 If this is a window DC or memory DC, assigns the given palette to the window
 or bitmap associated with the DC. If the argument is NullPalette, the current
@@ -1129,7 +1129,7 @@ See "Palette":palette.html for further details.
 
 h3(#DC_setpen). DC#set_pen
 
-  *set_pen*(%(arg-type)Pen% pen)
+  *set_pen*(%(arg-type)"Pen":pen.html% pen)
 
 Sets the current pen for the DC.
 
@@ -1142,14 +1142,14 @@ when drawing into a monochrome bitmap.
 
 h3(#DC_settextbackground). DC#set_text_background
 
-  *set_text_background*(%(arg-type)Colour% colour)
+  *set_text_background*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the current text background colour for the DC.
 
 
 h3(#DC_settextforeground). DC#set_text_foreground
 
-  *set_text_foreground*(%(arg-type)Colour% colour)
+  *set_text_foreground*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the current text foreground colour for the DC.
 
@@ -1159,7 +1159,7 @@ when drawing into a monochrome bitmap.
 
 h3(#DC_setuserscale). DC#set_user_scale
 
-  *set_user_scale*(%(arg-type)double% xScale,  %(arg-type)double% yScale)
+  *set_user_scale*(%(arg-type)Float% xScale,  %(arg-type)Float% yScale)
 
 Sets the user scaling factor, useful for applications which require
 `zooming'.

@@ -25,7 +25,7 @@ h2. Methods
 
 h3(#HtmlTagsModule_fillhandlerstable). HtmlTagsModule#fill_handlers_table
 
-  *fill_handlers_table*(%(arg-type)HtmlWinParser% parser)
+  *fill_handlers_table*(%(arg-type)"HtmlWinParser":htmlwinparser.html% parser)
 
 You must override this method. In most common case its body consists
 only of lines of the following type:

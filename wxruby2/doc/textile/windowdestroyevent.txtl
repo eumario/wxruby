@@ -40,7 +40,7 @@ h2. Methods
 
 h3(#WindowDestroyEvent_new). WindowDestroyEvent.new
 
-  *WindowDestroyEvent.new*(%(arg-type)Window% win = nil)
+  *WindowDestroyEvent.new*(%(arg-type)"Window":window.html% win = nil)
 
 Constructor. Unlikely to be required in user code.
 

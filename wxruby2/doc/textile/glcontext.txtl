@@ -31,11 +31,11 @@ h2. Methods
 
 h3(#GLContext_constr). GLContext.new
 
-  *GLContext.new*(%(arg-type)Boolean% isRGB,  %(arg-type)GLCanvas% win, 
-                %(arg-type)Palette% palette = NullPalette)
+  *GLContext.new*(%(arg-type)Boolean% isRGB,  %(arg-type)"GLCanvas":glcanvas.html% win, 
+                %(arg-type)"Palette":palette.html% palette = NullPalette)
 
-  *GLContext.new*(%(arg-type)Boolean% isRGB,  %(arg-type)GLCanvas% win, 
-                %(arg-type)Palette% palette = NullPalette,  %(arg-type)GLContext% other)
+  *GLContext.new*(%(arg-type)Boolean% isRGB,  %(arg-type)"GLCanvas":glcanvas.html% win, 
+                %(arg-type)"Palette":palette.html% palette = NullPalette,  %(arg-type)"GLContext":glcontext.html% other)
 
 * _win_ Canvas to associate this shared context with.
 * _other_ Context to share data resources with.
@@ -57,7 +57,7 @@ as the target device context for OpenGL operations.
 
 h3(#GLContext_setcolour). GLContext#set_colour
 
-  *set_colour*(%(arg-type)char% colour)
+  *set_colour*(%(arg-type)"char":char.html% colour)
 
 Sets the current colour for this context, using the Widgets colour database to find a named colour.
 

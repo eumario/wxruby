@@ -36,7 +36,7 @@ h2. Methods
 
 h3(#ColourDialog_new). ColourDialog.new
 
-  *ColourDialog.new*(%(arg-type)Window% parent,  %(arg-type)ColourData% data = nil)
+  *ColourDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"ColourData":colourdata.html% data = nil)
 
 Constructor. Pass a parent window, and optionally a pointer to a block of colour
 data, which will be copied to the colour dialog's colour data. Custom
@@ -55,7 +55,7 @@ Destructor.
 
 h3(#ColourDialog_create). ColourDialog#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)ColourData% data = nil)
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)"ColourData":colourdata.html% data = nil)
 
 Same as "constructor":colourdialogctor.html.
 

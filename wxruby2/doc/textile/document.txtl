@@ -120,7 +120,7 @@ Destructor. Removes itself from the document manager.
 
 h3(#Document_addview). Document#add_view
 
- Boolean *add_view*(%(arg-type)View% view)
+ Boolean *add_view*(%(arg-type)"View":view.html% view)
 
 If the view is not already in the list of views, adds the view and calls OnChangedViewList.
 
@@ -227,9 +227,9 @@ See also "Modify":documentmodify.html.
 
 h3(#Document_loadobject). Document#load_object
 
- istream *load_object*(%(arg-type)istream% stream)
+ istream *load_object*(%(arg-type)"istream":istream.html% stream)
 
- "InputStream":inputstream.html *load_object*(%(arg-type)InputStream% stream)
+ "InputStream":inputstream.html *load_object*(%(arg-type)"InputStream":inputstream.html% stream)
 
 Override this function and call it from your own LoadObject before
 streaming your own data. LoadObject is called by the framework
@@ -319,7 +319,7 @@ function fails.
 
 h3(#Document_removeview). Document#remove_view
 
- Boolean *remove_view*(%(arg-type)View% view)
+ Boolean *remove_view*(%(arg-type)"View":view.html% view)
 
 Removes the view from the document's list of views, and calls OnChangedViewList.
 
@@ -338,9 +338,9 @@ Prompts the user for a file to save to, and then calls OnSaveDocument.
 
 h3(#Document_saveobject). Document#save_object
 
- ostream *save_object*(%(arg-type)ostream% stream)
+ ostream *save_object*(%(arg-type)"ostream":ostream.html% stream)
 
- "OutputStream":outputstream.html *save_object*(%(arg-type)OutputStream% stream)
+ "OutputStream":outputstream.html *save_object*(%(arg-type)"OutputStream":outputstream.html% stream)
 
 Override this function and call it from your own SaveObject before
 streaming your own data. SaveObject is called by the framework
@@ -351,7 +351,7 @@ was configured.
 
 h3(#Document_setcommandprocessor). Document#set_command_processor
 
-  *set_command_processor*(%(arg-type)CommandProcessor% processor)
+  *set_command_processor*(%(arg-type)"CommandProcessor":commandprocessor.html% processor)
 
 Sets the command processor to be used for this document. The document will then be responsible
 for its deletion. Normally you should not call this; override OnCreateCommandProcessor
@@ -367,7 +367,7 @@ Sets the document type name for this document. See the comment for "documentType
 
 h3(#Document_setdocumenttemplate). Document#set_document_template
 
-  *set_document_template*(%(arg-type)DocTemplate% templ)
+  *set_document_template*(%(arg-type)"DocTemplate":doctemplate.html% templ)
 
 Sets the pointer to the template that created the document. Should only be called by the
 framework.
@@ -390,7 +390,7 @@ the filename.
 
 h3(#Document_updateallviews). Document#update_all_views
 
-  *update_all_views*(%(arg-type)View% sender = nil,  %(arg-type)Object% hint = nil)
+  *update_all_views*(%(arg-type)"View":view.html% sender = nil,  %(arg-type)Object% hint = nil)
 
 Updates all views. If _sender_ is non-NULL, does not update this view.
 

@@ -50,7 +50,7 @@ Returns the item associated with this node.
 
 h3(#TreeItemData_setid). TreeItemData#set_id
 
-  *set_id*(%(arg-type)TreeItemId% id)
+  *set_id*(%(arg-type)"TreeItemId":treeitemid.html% id)
 
 Sets the item associated with this node.
 

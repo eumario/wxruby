@@ -46,7 +46,7 @@ h2. Methods
 
 h3(#NotebookEvent_constr). NotebookEvent.new
 
-  *NotebookEvent.new*(%(arg-type)EventType% eventType = EVT_NULL,  %(arg-type)Integer% id = 0, 
+  *NotebookEvent.new*(%(arg-type)"EventType":eventtype.html% eventType = EVT_NULL,  %(arg-type)Integer% id = 0, 
                     %(arg-type)Integer% sel = $-1$, 
                     %(arg-type)Integer% oldSel = $-1$)
 

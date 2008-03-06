@@ -24,7 +24,7 @@ h3(#DebugReportPreviewStd_wxdebugreportpreviewstd). DebugReportPreviewStd.new
 
 h3(#DebugReportPreviewStd_show). DebugReportPreviewStd#show
 
- Boolean *show*(%(arg-type)DebugReport% dbgrpt)
+ Boolean *show*(%(arg-type)"DebugReport":debugreport.html% dbgrpt)
 
 Show the dialog, see 
 "DebugReportPreview::Show()":debugreportpreviewshow.html for more

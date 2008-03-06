@@ -46,15 +46,15 @@ h2. Methods
 
 h3(#DropSource_wxdropsource). DropSource.new
 
-  *DropSource.new*(%(arg-type)Window% win = nil, 
-                %(arg-type)IconOrCursor% iconCopy = NullIconOrCursor, 
-                 %(arg-type)IconOrCursor% iconMove = NullIconOrCursor, 
-                 %(arg-type)IconOrCursor% iconNone = NullIconOrCursor)
+  *DropSource.new*(%(arg-type)"Window":window.html% win = nil, 
+                %(arg-type)"IconOrCursor":iconorcursor.html% iconCopy = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconMove = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconNone = NullIconOrCursor)
 
-  *DropSource.new*(%(arg-type)DataObject% data,  %(arg-type)Window% win = nil, 
-                %(arg-type)IconOrCursor% iconCopy = NullIconOrCursor, 
-                 %(arg-type)IconOrCursor% iconMove = NullIconOrCursor, 
-                 %(arg-type)IconOrCursor% iconNone = NullIconOrCursor)
+  *DropSource.new*(%(arg-type)"DataObject":dataobject.html% data,  %(arg-type)"Window":window.html% win = nil, 
+                %(arg-type)"IconOrCursor":iconorcursor.html% iconCopy = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconMove = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconNone = NullIconOrCursor)
 
 The constructors for DataObject.
 
@@ -79,7 +79,7 @@ _win_ is the window which initiates the drag and drop operation.
 
 h3(#DropSource_setdata). DropSource#set_data
 
-  *set_data*(%(arg-type)DataObject% data)
+  *set_data*(%(arg-type)"DataObject":dataobject.html% data)
 
 Sets the data "DataObject":dataobject.html associated with the 
 drop source. This will not delete any previously associated data.
@@ -112,7 +112,7 @@ Returns the DataObject object that has been assigned previously.
 
 h3(#DropSource_givefeedback). DropSource#give_feedback
 
- Boolean *give_feedback*(%(arg-type)DragResult% effect)
+ Boolean *give_feedback*(%(arg-type)"DragResult":dragresult.html% effect)
 
 Overridable: you may give some custom UI feedback during the drag and drop operation
 in this function. It is called on each mouse move, so your implementation must not be too
@@ -130,7 +130,7 @@ feedback. The return values is ignored under GTK.
 
 h3(#DropSource_setcursor). DropSource#set_cursor
 
-  *set_cursor*(%(arg-type)DragResult% res,  %(arg-type)Cursor% cursor)
+  *set_cursor*(%(arg-type)"DragResult":dragresult.html% res,  %(arg-type)"Cursor":cursor.html% cursor)
 
 Set the icon to use for a certain drag result.
 

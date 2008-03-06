@@ -37,7 +37,7 @@ h3(#MemoryDC_new). MemoryDC.new
 
 h3(#MemoryDC_selectobject). MemoryDC#select_object
 
-  *select_object*(%(arg-type)Bitmap% bitmap)
+  *select_object*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Selects the given bitmap into the device context, to use as the memory
 bitmap. Selecting the bitmap into a memory DC allows you to draw into

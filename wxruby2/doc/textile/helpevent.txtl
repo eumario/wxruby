@@ -49,8 +49,8 @@ h2. Methods
 
 h3(#HelpEvent_new). HelpEvent.new
 
-  *HelpEvent.new*(%(arg-type)TYPE% eventType = 0,  %(arg-type)Integer% id = 0, 
-                %(arg-type)Point% point)
+  *HelpEvent.new*(%(arg-type)"TYPE":type.html% eventType = 0,  %(arg-type)Integer% id = 0, 
+                %(arg-type)"Point":point.html% point)
 
 Constructor.
 
@@ -63,7 +63,7 @@ the application to position the help appropriately.
 
 h3(#HelpEvent_setposition). HelpEvent#set_position
 
-  *set_position*(%(arg-type)Point% pt)
+  *set_position*(%(arg-type)"Point":point.html% pt)
 
 Sets the left-click position of the mouse, in screen coordinates.
 

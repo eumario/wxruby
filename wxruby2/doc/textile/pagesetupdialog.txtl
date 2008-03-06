@@ -41,7 +41,7 @@ h2. Methods
 
 h3(#PageSetupDialog_new). PageSetupDialog.new
 
-  *PageSetupDialog.new*(%(arg-type)Window% parent,  %(arg-type)PageSetupDialogData% data = nil)
+  *PageSetupDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"PageSetupDialogData":pagesetupdialogdata.html% data = nil)
 
 Constructor. Pass a parent window, and optionally a pointer to a block of page setup
 data, which will be copied to the print dialog's internal data.

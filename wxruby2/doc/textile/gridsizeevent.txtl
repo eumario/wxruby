@@ -42,7 +42,7 @@ h2. Methods
 
 h3(#GridSizeEvent_constr). GridSizeEvent.new
 
-  *GridSizeEvent.new*(%(arg-type)Integer% id,  %(arg-type)EventType% type,  %(arg-type)Object% obj, 
+  *GridSizeEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type,  %(arg-type)Object% obj, 
                     %(arg-type)Integer% rowOrCol = -1, 
                     %(arg-type)Integer% x = -1, 
                     %(arg-type)Integer% y = -1, 

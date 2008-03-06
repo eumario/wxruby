@@ -35,7 +35,7 @@ h2. Methods
 
 h3(#GridEvent_constr). GridEvent.new
 
-  *GridEvent.new*(%(arg-type)Integer% id,  %(arg-type)EventType% type,  %(arg-type)Object% obj, 
+  *GridEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type,  %(arg-type)Object% obj, 
                 %(arg-type)Integer% row = -1, 
                 %(arg-type)Integer% col = -1, 
                 %(arg-type)Integer% x = -1, 

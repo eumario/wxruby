@@ -39,9 +39,9 @@ h2. Methods
 
 h3(#StaticLine_new). StaticLine.new
 
-  *StaticLine.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                 %(arg-type)Size% size = DEFAULT_SIZE, 
+  *StaticLine.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                  %(arg-type)Integer% style = LI_HORIZONTAL, 
                  %(arg-type)String% name = "staticLine")
 
@@ -63,9 +63,9 @@ h4. See also
 
 h3(#StaticLine_create). StaticLine#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = ID_ANY, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
                 %(arg-type)String% name = "staticLine")
 

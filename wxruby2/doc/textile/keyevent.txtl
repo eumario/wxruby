@@ -94,7 +94,7 @@ h2. Methods
 
 h3(#KeyEvent_new). KeyEvent.new
 
-  *KeyEvent.new*(%(arg-type)TYPE% keyEventType)
+  *KeyEvent.new*(%(arg-type)"TYPE":type.html% keyEventType)
 
 Constructor. Currently, the only valid event types are EVT_CHAR and EVT_CHAR_HOOK.
 

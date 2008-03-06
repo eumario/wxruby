@@ -82,7 +82,7 @@ h2. Methods
 
 h3(#Pen_new). Pen.new
 
-  *Pen.new*(%(arg-type)Colour% colour,  %(arg-type)Integer% width = $1$, 
+  *Pen.new*(%(arg-type)"Colour":colour.html% colour,  %(arg-type)Integer% width = $1$, 
           %(arg-type)Integer% style = @SOLID@)
 
 Constructs a pen from a colour object, pen width and style.
@@ -91,11 +91,11 @@ Constructs a pen from a colour object, pen width and style.
 
 Constructs a pen from a colour name, pen width and style.
 
-  *Pen.new*(%(arg-type)Bitmap% stipple,  %(arg-type)Integer% width)
+  *Pen.new*(%(arg-type)"Bitmap":bitmap.html% stipple,  %(arg-type)Integer% width)
 
 Constructs a stippled pen from a stipple bitmap and a width.
 
-  *Pen.new*(%(arg-type)Pen% pen)
+  *Pen.new*(%(arg-type)"Pen":pen.html% pen)
 
 Copy constructor. This uses reference counting so is a cheap operation.
 

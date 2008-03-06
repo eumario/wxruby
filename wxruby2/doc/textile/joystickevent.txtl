@@ -46,7 +46,7 @@ h2. Methods
 
 h3(#JoystickEvent_new). JoystickEvent.new
 
-  *JoystickEvent.new*(%(arg-type)TYPE% eventType = 0,  %(arg-type)Integer% state = 0, 
+  *JoystickEvent.new*(%(arg-type)"TYPE":type.html% eventType = 0,  %(arg-type)Integer% state = 0, 
                     %(arg-type)Integer% joystick = JOYSTICK1, 
                     %(arg-type)Integer% change = 0)
 

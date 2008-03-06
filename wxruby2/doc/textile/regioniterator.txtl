@@ -37,7 +37,7 @@ h2. Methods
 
 h3(#RegionIterator_new). RegionIterator.new
 
-  *RegionIterator.new*(%(arg-type)Region% region)
+  *RegionIterator.new*(%(arg-type)"Region":region.html% region)
 
 Creates an iterator object given a region.
 
@@ -95,7 +95,7 @@ h3(#RegionIterator_reset). RegionIterator#reset
 
 Resets the iterator to the beginning of the rectangles.
 
-  *reset*(%(arg-type)Region% region)
+  *reset*(%(arg-type)"Region":region.html% region)
 
 Resets the iterator to the given region.
 

@@ -46,7 +46,7 @@ Creates a size object.
 
 h3(#Size_decto). Size#dec_to
 
-  *dec_to*(%(arg-type)Size% size)
+  *dec_to*(%(arg-type)"Size":size.html% size)
 
 Decrements this object so that both of its dimensions are not greater than the
 corresponding dimensions of the size.
@@ -85,7 +85,7 @@ Gets the height member.
 
 h3(#Size_incto). Size#inc_to
 
-  *inc_to*(%(arg-type)Size% size)
+  *inc_to*(%(arg-type)"Size":size.html% size)
 
 Increments this object so that both of its dimensions are not less than the
 corresponding dimensions of the size.
@@ -105,7 +105,7 @@ Sets the width and height members.
 
 h3(#Size_setdefaults). Size#set_defaults
 
-  *set_defaults*(%(arg-type)Size% sizeDefault)
+  *set_defaults*(%(arg-type)"Size":size.html% sizeDefault)
 
 Combine this size object with another one replacing the default (i.e. equal
 to $-1$) components of this object with those of the other. It is typically
@@ -138,7 +138,7 @@ Sets the width.
 
 h3(#Size_assign). Size#=
 
-  *operator $=$*(%(arg-type)Size% sz)
+  *operator $=$*(%(arg-type)"Size":size.html% sz)
 
 Assignment operator.
 

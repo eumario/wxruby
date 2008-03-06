@@ -61,17 +61,17 @@ h2. Methods
 
 h3(#Variant_new). Variant.new
 
-  *Variant.new*(%(arg-type)Variant% variant)
+  *Variant.new*(%(arg-type)"Variant":variant.html% variant)
 
 Copy constructor.
 
-  *Variant.new*(%(arg-type)char% value,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"char":char.html% value,  %(arg-type)String% name = "")
 
   *Variant.new*(%(arg-type)String% value,  %(arg-type)String% name = "")
 
 Construction from a string value.
 
-  *Variant.new*(%(arg-type)char% value,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"char":char.html% value,  %(arg-type)String% name = "")
 
 Construction from a character value.
 
@@ -84,11 +84,11 @@ avoid confusion with other constructors (such as the bool constructor).
 
 Construction from a boolean value.
 
-  *Variant.new*(%(arg-type)double% value,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)Float% value,  %(arg-type)String% name = "")
 
 Construction from a double-precision floating point value.
 
-  *Variant.new*(%(arg-type)List% value,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"List":list.html% value,  %(arg-type)String% name = "")
 
 Construction from a list of Variant objects. This constructor
 copies _value_, the application is still responsible for
@@ -102,27 +102,27 @@ Construction from a void pointer.
 
 Construction from a Object pointer.
 
-  *Variant.new*(%(arg-type)VariantData% data,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"VariantData":variantdata.html% data,  %(arg-type)String% name = "")
 
 Construction from user-defined data.  The variant holds onto the _data_ pointer.
 
-  *Variant.new*(%(arg-type)DateTime% val,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"DateTime":datetime.html% val,  %(arg-type)String% name = "")
 
 Construction from a "DateTime":datetime.html.  
 
-  *Variant.new*(%(arg-type)ArrayString% val,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"ArrayString":arraystring.html% val,  %(arg-type)String% name = "")
 
 Construction from an array of strings.  This constructor copies _value_ and its contents.
 
-  *Variant.new*(%(arg-type)DATE_STRUCT% val,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"DATE_STRUCT":date_struct.html% val,  %(arg-type)String% name = "")
 
 Construction from a odbc date value.  Represented internally by a "DateTime":datetime.html value.
 
-  *Variant.new*(%(arg-type)TIME_STRUCT% val,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"TIME_STRUCT":time_struct.html% val,  %(arg-type)String% name = "")
 
 Construction from a odbc time value.  Represented internally by a "DateTime":datetime.html value.
 
-  *Variant.new*(%(arg-type)TIMESTAMP_STRUCT% val,  %(arg-type)String% name = "")
+  *Variant.new*(%(arg-type)"TIMESTAMP_STRUCT":timestamp_struct.html% val,  %(arg-type)String% name = "")
 
 Construction from a odbc timestamp value.  Represented internally by a "DateTime":datetime.html value.
 
@@ -133,7 +133,7 @@ Destructor.
 
 h3(#Variant_append). Variant#append
 
-  *append*(%(arg-type)Variant% value)
+  *append*(%(arg-type)"Variant":variant.html% value)
 
 Appends a value to the list.
 
@@ -150,13 +150,13 @@ h3(#Variant_convert). Variant#convert
 
  Boolean *convert*(%(arg-type)Boolean% value)
 
- Boolean *convert*(%(arg-type)double% value)
+ Boolean *convert*(%(arg-type)Float% value)
 
  Boolean *convert*(%(arg-type)String% value)
 
- Boolean *convert*(%(arg-type)char% value)
+ Boolean *convert*(%(arg-type)"char":char.html% value)
 
- Boolean *convert*(%(arg-type)DateTime% value)
+ Boolean *convert*(%(arg-type)"DateTime":datetime.html% value)
 
 Retrieves and converts the value of this variant to the type that _value_ is.
 
@@ -249,7 +249,7 @@ Gets the Object pointer value.
 
 h3(#Variant_insert). Variant#insert
 
-  *insert*(%(arg-type)Variant% value)
+  *insert*(%(arg-type)"Variant":variant.html% value)
 
 Inserts a value at the front of the list.
 
@@ -285,7 +285,7 @@ Makes a string representation of the variant value (for any type).
 
 h3(#Variant_member). Variant#member
 
- Boolean *member*(%(arg-type)Variant% value)
+ Boolean *member*(%(arg-type)"Variant":variant.html% value)
 
 Returns true if _value_ matches an element in the list.
 
@@ -298,93 +298,93 @@ is of type list, but the number of elements in the list is zero.
 
 h3(#Variant_setdata). Variant#set_data
 
-  *set_data*(%(arg-type)VariantData% data)
+  *set_data*(%(arg-type)"VariantData":variantdata.html% data)
 
 Sets the internal variant data, deleting the existing data if there is any.
 
 h3(#Variant_assignment). Variant#=
 
-  *operator $=$*(%(arg-type)Variant% value)
+  *operator $=$*(%(arg-type)"Variant":variant.html% value)
 
-  *operator $=$*(%(arg-type)VariantData% value)
+  *operator $=$*(%(arg-type)"VariantData":variantdata.html% value)
 
   *operator $=$*(%(arg-type)String% value)
 
-  *operator $=$*(%(arg-type)char% value)
+  *operator $=$*(%(arg-type)"char":char.html% value)
 
-  *operator $=$*(%(arg-type)char% value)
+  *operator $=$*(%(arg-type)"char":char.html% value)
 
   *operator $=$*(%(arg-type)Integer% value)
 
   *operator $=$*(%(arg-type)Boolean% value)
 
-  *operator $=$*(%(arg-type)double% value)
+  *operator $=$*(%(arg-type)Float% value)
 
   *operator $=$*(%(arg-type)% value)
 
-  *operator $=$*(%(arg-type)List% value)
+  *operator $=$*(%(arg-type)"List":list.html% value)
 
-  *operator $=$*(%(arg-type)DateTime% value)
+  *operator $=$*(%(arg-type)"DateTime":datetime.html% value)
 
-  *operator $=$*(%(arg-type)ArrayString% value)
+  *operator $=$*(%(arg-type)"ArrayString":arraystring.html% value)
 
-  *operator $=$*(%(arg-type)DATE_STRUCT% value)
+  *operator $=$*(%(arg-type)"DATE_STRUCT":date_struct.html% value)
 
-  *operator $=$*(%(arg-type)TIME_STRUCT% value)
+  *operator $=$*(%(arg-type)"TIME_STRUCT":time_struct.html% value)
 
-  *operator $=$*(%(arg-type)TIMESTAMP_STRUCT% value)
+  *operator $=$*(%(arg-type)"TIMESTAMP_STRUCT":timestamp_struct.html% value)
 
 Assignment operators.
 
 h3(#Variant_eq). Variant#==
 
- Boolean *operator $==$*(%(arg-type)Variant% value)
+ Boolean *operator $==$*(%(arg-type)"Variant":variant.html% value)
 
  Boolean *operator $==$*(%(arg-type)String% value)
 
- Boolean *operator $==$*(%(arg-type)char% value)
+ Boolean *operator $==$*(%(arg-type)"char":char.html% value)
 
- Boolean *operator $==$*(%(arg-type)char% value)
+ Boolean *operator $==$*(%(arg-type)"char":char.html% value)
 
  Boolean *operator $==$*(%(arg-type)Integer% value)
 
  Boolean *operator $==$*(%(arg-type)Boolean% value)
 
- Boolean *operator $==$*(%(arg-type)double% value)
+ Boolean *operator $==$*(%(arg-type)Float% value)
 
  Boolean *operator $==$*(%(arg-type)% value)
 
- Boolean *operator $==$*(%(arg-type)List% value)
+ Boolean *operator $==$*(%(arg-type)"List":list.html% value)
 
- Boolean *operator $==$*(%(arg-type)ArrayString% value)
+ Boolean *operator $==$*(%(arg-type)"ArrayString":arraystring.html% value)
 
- Boolean *operator $==$*(%(arg-type)DateTime% value)
+ Boolean *operator $==$*(%(arg-type)"DateTime":datetime.html% value)
 
 Equality test operators.
 
 h3(#Variant_neq). Variant#!=
 
- Boolean *operator $!=$*(%(arg-type)Variant% value)
+ Boolean *operator $!=$*(%(arg-type)"Variant":variant.html% value)
 
  Boolean *operator $!=$*(%(arg-type)String% value)
 
- Boolean *operator $!=$*(%(arg-type)char% value)
+ Boolean *operator $!=$*(%(arg-type)"char":char.html% value)
 
- Boolean *operator $!=$*(%(arg-type)char% value)
+ Boolean *operator $!=$*(%(arg-type)"char":char.html% value)
 
  Boolean *operator $!=$*(%(arg-type)Integer% value)
 
  Boolean *operator $!=$*(%(arg-type)Boolean% value)
 
- Boolean *operator $!=$*(%(arg-type)double% value)
+ Boolean *operator $!=$*(%(arg-type)Float% value)
 
  Boolean *operator $!=$*(%(arg-type)% value)
 
- Boolean *operator $!=$*(%(arg-type)List% value)
+ Boolean *operator $!=$*(%(arg-type)"List":list.html% value)
 
- Boolean *operator $!=$*(%(arg-type)ArrayString% value)
+ Boolean *operator $!=$*(%(arg-type)"ArrayString":arraystring.html% value)
 
- Boolean *operator $!=$*(%(arg-type)DateTime% value)
+ Boolean *operator $!=$*(%(arg-type)"DateTime":datetime.html% value)
 
 Inequality test operators.
 

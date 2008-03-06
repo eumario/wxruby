@@ -30,7 +30,7 @@ h2. Methods
 
 h3(#SpinEvent_new). SpinEvent.new
 
-  *SpinEvent.new*(%(arg-type)EventType% commandType = EVT_NULL,  %(arg-type)Integer% id = 0)
+  *SpinEvent.new*(%(arg-type)"EventType":eventtype.html% commandType = EVT_NULL,  %(arg-type)Integer% id = 0)
 
 The constructor is not normally used by the user code.
 

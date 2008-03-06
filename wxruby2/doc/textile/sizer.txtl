@@ -197,14 +197,14 @@ constructor.
 
 h3(#Sizer_add). Sizer#add
 
- "SizerItem":sizeritem.html *add*(%(arg-type)Window% window,  
+ "SizerItem":sizeritem.html *add*(%(arg-type)"Window":window.html% window,  
                   %(arg-type)Integer% proportion = 0, 
                   %(arg-type)Integer% flag = 0, 
                   %(arg-type)Integer% border = 0, 
                   %(arg-type)Object% userData = nil)
 
 
- "SizerItem":sizeritem.html *add*(%(arg-type)Sizer% sizer,  
+ "SizerItem":sizeritem.html *add*(%(arg-type)"Sizer":sizer.html% sizer,  
                  %(arg-type)Integer% proportion = 0, 
                  %(arg-type)Integer% flag = 0, 
                  %(arg-type)Integer% border = 0, 
@@ -287,9 +287,9 @@ Here, the sizer will do the actual calculation of its children minimal sizes.
 
 h3(#Sizer_detach). Sizer#detach
 
- Boolean *detach*(%(arg-type)Window% window)
+ Boolean *detach*(%(arg-type)"Window":window.html% window)
 
- Boolean *detach*(%(arg-type)Sizer% sizer)
+ Boolean *detach*(%(arg-type)"Sizer":sizer.html% sizer)
 
  Boolean *detach*(%(arg-type)Integer% index)
 
@@ -308,7 +308,7 @@ h4. See also
 
 h3(#Sizer_fit). Sizer#fit
 
- "Size":size.html *fit*(%(arg-type)Window% window)
+ "Size":size.html *fit*(%(arg-type)"Window":window.html% window)
 
 Tell the sizer to resize the _window_ to match the sizer's minimal size. This
 is commonly done in the constructor of the window itself, see sample in the description
@@ -319,7 +319,7 @@ For a top level window this is the total window size, not client size.
 
 h3(#Sizer_fitinside). Sizer#fit_inside
 
-  *fit_inside*(%(arg-type)Window% window)
+  *fit_inside*(%(arg-type)"Window":window.html% window)
 
 Tell the sizer to resize the virtual size of the _window_ to match the sizer's
 minimal size.  This will not alter the on screen size of the window, but may cause
@@ -339,10 +339,10 @@ corresponding to each Window, Sizer or spacer contained in this sizer.
 
 h3(#Sizer_getitem). Sizer#get_item
 
- "SizerItem":sizeritem.html *get_item*(%(arg-type)Window% window, 
+ "SizerItem":sizeritem.html *get_item*(%(arg-type)"Window":window.html% window, 
                       %(arg-type)Boolean% recursive = false)
 
- "SizerItem":sizeritem.html *get_item*(%(arg-type)Sizer% sizer, 
+ "SizerItem":sizeritem.html *get_item*(%(arg-type)"Sizer":sizer.html% sizer, 
                       %(arg-type)Boolean% recursive = false)
 
  "SizerItem":sizeritem.html *get_item*(%(arg-type)Integer% index)
@@ -377,14 +377,14 @@ size of all the children and their borders or the minimal size set by
 h3(#Sizer_insert). Sizer#insert
 
  "SizerItem":sizeritem.html *insert*(%(arg-type)Integer% index, 
-                    %(arg-type)Window% window, 
+                    %(arg-type)"Window":window.html% window, 
                     %(arg-type)Integer% proportion = 0, 
                     %(arg-type)Integer% flag = 0, 
                     %(arg-type)Integer% border = 0, 
                     %(arg-type)Object% userData = nil)
 
  "SizerItem":sizeritem.html *insert*(%(arg-type)Integer% index,  
-                    %(arg-type)Sizer% sizer, 
+                    %(arg-type)"Sizer":sizer.html% sizer, 
                     %(arg-type)Integer% proportion = 0, 
                     %(arg-type)Integer% flag = 0, 
                     %(arg-type)Integer% border = 0, 
@@ -431,13 +431,13 @@ sizer while keeping the current dimension.
 
 h3(#Sizer_prepend). Sizer#prepend
 
- "SizerItem":sizeritem.html *prepend*(%(arg-type)Window% window,  
+ "SizerItem":sizeritem.html *prepend*(%(arg-type)"Window":window.html% window,  
                      %(arg-type)Integer% proportion = 0, 
                      %(arg-type)Integer% flag = 0, 
                      %(arg-type)Integer% border = 0, 
                      %(arg-type)Object% userData = nil)
 
- "SizerItem":sizeritem.html *prepend*(%(arg-type)Sizer% sizer,
+ "SizerItem":sizeritem.html *prepend*(%(arg-type)"Sizer":sizer.html% sizer,
                      %(arg-type)Integer% proportion = 0, 
                      %(arg-type)Integer% flag = 0, 
                      %(arg-type)Integer% border = 0, 
@@ -481,7 +481,7 @@ and sizes.
 
 h3(#Sizer_remove). Sizer#remove
 
- Boolean *remove*(%(arg-type)Sizer% sizer)
+ Boolean *remove*(%(arg-type)"Sizer":sizer.html% sizer)
 
  Boolean *remove*(%(arg-type)Integer% index)
 
@@ -513,7 +513,7 @@ h3(#Sizer_setminsize). Sizer#set_min_size
 
   *set_min_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
 
-  *set_min_size*(%(arg-type)Size% size)
+  *set_min_size*(%(arg-type)"Size":size.html% size)
 
 Call this to give the sizer a minimal size. Normally, the sizer will
 calculate its minimal size based purely on how much space its children
@@ -523,11 +523,11 @@ minimal size set here, depending on which is bigger.
 
 h3(#Sizer_setitemminsize). Sizer#set_item_min_size
 
-  *set_item_min_size*(%(arg-type)Window% window,  
+  *set_item_min_size*(%(arg-type)"Window":window.html% window,  
                     %(arg-type)Integer% width, 
                     %(arg-type)Integer% height)
 
-  *set_item_min_size*(%(arg-type)Sizer% sizer,  
+  *set_item_min_size*(%(arg-type)"Sizer":sizer.html% sizer,  
                     %(arg-type)Integer% width, 
                     %(arg-type)Integer% height)
 
@@ -542,7 +542,7 @@ an application to set the size of an item after initial creation.
 
 h3(#Sizer_setsizehints). Sizer#set_size_hints
 
-  *set_size_hints*(%(arg-type)Window% window)
+  *set_size_hints*(%(arg-type)"Window":window.html% window)
 
 Tell the sizer to set (and "Fit":sizerfit.html) the minimal size of the
 _window_ to match the sizer's minimal size.  This is commonly done in
@@ -552,7 +552,7 @@ under Unix and frames on probably all platforms).
 
 h3(#Sizer_setvirtualsizehints). Sizer#set_virtual_size_hints
 
-  *set_virtual_size_hints*(%(arg-type)Window% window)
+  *set_virtual_size_hints*(%(arg-type)"Window":window.html% window)
 
 Tell the sizer to set the minimal size of the _window_ virtual area to
 match the sizer's minimal size. For windows with managed scrollbars this
@@ -565,11 +565,11 @@ h4. See also
 
 h3(#Sizer_show). Sizer#show
 
- Boolean *show*(%(arg-type)Window% window,  
+ Boolean *show*(%(arg-type)"Window":window.html% window,  
               %(arg-type)Boolean% show = true, 
               %(arg-type)Boolean% recursive = false)
 
- Boolean *show*(%(arg-type)Sizer% sizer,  
+ Boolean *show*(%(arg-type)"Sizer":sizer.html% sizer,  
               %(arg-type)Boolean% show = true, 
               %(arg-type)Boolean% recursive = false)
 

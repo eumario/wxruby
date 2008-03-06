@@ -25,7 +25,7 @@ h3(#GridCellChoiceEditor_constr). GridCellChoiceEditor.new
   *GridCellChoiceEditor.new*(%(arg-type)Integer% count = 0,  %(arg-type)String% choices[] = nil, 
                            %(arg-type)Boolean% allowOthers = false)
 
-  *GridCellChoiceEditor.new*(%(arg-type)ArrayString% choices, 
+  *GridCellChoiceEditor.new*(%(arg-type)"ArrayString":arraystring.html% choices, 
                            %(arg-type)Boolean% allowOthers = false)
 
 * _count_ Number of strings from which the user can choose.

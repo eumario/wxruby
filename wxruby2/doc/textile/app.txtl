@@ -148,7 +148,7 @@ the top window.
 
 h3(#App_filterevent). App#filter_event
 
- Integer *filter_event*(%(arg-type)Event% event)
+ Integer *filter_event*(%(arg-type)"Event":event.html% event)
 
 This function is called before processing any event and allows the application
 to preempt the processing of some events. If this method returns $-1$ the event
@@ -283,8 +283,8 @@ Returns 0 under X, and the wParam of the WM_QUIT message under Windows.
 
 h3(#App_onassert). App#on_assert_failure
 
-  *on_assert_failure*(%(arg-type)Char% file,  %(arg-type)Integer% line,  %(arg-type)Char% cond, 
-            %(arg-type)Char% msg)
+  *on_assert_failure*(%(arg-type)"Char":char.html% file,  %(arg-type)Integer% line,  %(arg-type)"Char":char.html% cond, 
+            %(arg-type)"Char":char.html% msg)
 
 This method is called when an assert failure occurs, i.e. a condition
 specified in the WxWidgets C++ library evaluates to @false@.  It is only
@@ -398,7 +398,7 @@ try/catch clause around the call to the base class version there.
 
 h3(#App_processmessage). App#process_message
 
- Boolean *process_message*(%(arg-type)MSG% msg)
+ Boolean *process_message*(%(arg-type)"MSG":msg.html% msg)
 
 Windows-only function for processing a message. This function
 is called from the main message loop, checking for windows that
@@ -434,7 +434,7 @@ h4. See also
 
 h3(#App_sendidleevents). App#send_idle_events
 
- Boolean *send_idle_events*(%(arg-type)Window% win,  %(arg-type)IdleEvent% event)
+ Boolean *send_idle_events*(%(arg-type)"Window":window.html% win,  %(arg-type)"IdleEvent":idleevent.html% event)
 
 Sends idle events to a window and its children.
 
@@ -497,7 +497,7 @@ h4. See also
 
 h3(#App_setinstance). App#set_instance
 
-  *set_instance*(%(arg-type)AppConsole% app)
+  *set_instance*(%(arg-type)"AppConsole":appconsole.html% app)
 
 Allows external code to modify global @TheApp@, but you should really
 know what you're doing if you call it.
@@ -513,7 +513,7 @@ h4. See also
 
 h3(#App_settopwindow). App#set_top_window
 
-  *set_top_window*(%(arg-type)Window% window)
+  *set_top_window*(%(arg-type)"Window":window.html% window)
 
 Sets the `top' window. You can call this from within "App#on_init":app.html#App_oninit to
 let Widgets know which is the main window. You don't have to set the top window;
@@ -566,8 +566,8 @@ h4. Parameters
 
 h3(#App_handleevent). App#handle_event
 
-  *handle_event*(%(arg-type)EvtHandler% handler,  %(arg-type)EventFunction% func, 
-               %(arg-type)Event% event)
+  *handle_event*(%(arg-type)"EvtHandler":evthandler.html% handler,  %(arg-type)"EventFunction":eventfunction.html% func, 
+               %(arg-type)"Event":event.html% event)
 
 This function simply invokes the given method func of the specified
 event handler handler with the event as parameter. It exists solely

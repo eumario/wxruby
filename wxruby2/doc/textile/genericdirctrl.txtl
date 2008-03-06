@@ -60,10 +60,10 @@ h2. Methods
 
 h3(#GenericDirCtrl_wxgenericdirctrl). GenericDirCtrl.new
 
-  *GenericDirCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+  *GenericDirCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
                      %(arg-type)String% dir = DirDialogDefaultFolderStr, 
-                     %(arg-type)Point% pos = DEFAULT_POSITION, 
-                     %(arg-type)Size% size = DEFAULT_SIZE, 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                      %(arg-type)Integer% style = DIRCTRL_3D_INTERNAL|SUNKEN_BORDER, 
                      %(arg-type)String% filter = '', 
                      %(arg-type)Integer% defaultFilter = 0, 
@@ -92,10 +92,10 @@ Destructor.
 
 h3(#GenericDirCtrl_create). GenericDirCtrl#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id = -1, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
                 %(arg-type)String% dir = DirDialogDefaultFolderStr, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = DIRCTRL_3D_INTERNAL|SUNKEN_BORDER, 
                 %(arg-type)String% filter = '', 
                 %(arg-type)Integer% defaultFilter = 0, 

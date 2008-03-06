@@ -200,7 +200,7 @@ action.
 
 h3(#MouseEvent_new). MouseEvent.new
 
-  *MouseEvent.new*(%(arg-type)TYPE% mouseEventType = 0)
+  *MouseEvent.new*(%(arg-type)"TYPE":type.html% mouseEventType = 0)
 
 Constructor. Valid event types are:
 
@@ -330,7 +330,7 @@ h3(#MouseEvent_getposition). MouseEvent#get_position
 
  "Point":point.html *get_position*()
 
-  *get_position*(%(arg-type)Coord% x,  %(arg-type)Coord% y)
+  *get_position*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
 
   *get_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -345,7 +345,7 @@ returned position is @DefaultPosition@.
 
 h3(#MouseEvent_getlogicalposition). MouseEvent#get_logical_position
 
- "Point":point.html *get_logical_position*(%(arg-type)DC% dc)
+ "Point":point.html *get_logical_position*(%(arg-type)"DC":dc.html% dc)
 
 Returns the logical mouse position in pixels (i.e. translated according to the
 translation set for the DC, which usually indicates that the window has been scrolled).

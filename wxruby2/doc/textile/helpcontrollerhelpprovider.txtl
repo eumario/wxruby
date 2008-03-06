@@ -34,14 +34,14 @@ h2. Methods
 
 h3(#HelpControllerHelpProvider_wxhelpcontrollerhelpprovider). HelpControllerHelpProvider.new
 
-  *HelpControllerHelpProvider.new*(%(arg-type)HelpControllerBase% hc = nil)
+  *HelpControllerHelpProvider.new*(%(arg-type)"HelpControllerBase":helpcontrollerbase.html% hc = nil)
 
 Note that the instance doesn't own the help controller. The help controller
 should be deleted separately.
 
 h3(#HelpControllerHelpProvider_sethelpcontroller). HelpControllerHelpProvider#set_help_controller
 
-  *set_help_controller*(%(arg-type)HelpControllerBase% hc)
+  *set_help_controller*(%(arg-type)"HelpControllerBase":helpcontrollerbase.html% hc)
 
 Sets the help controller associated with this help provider.
 

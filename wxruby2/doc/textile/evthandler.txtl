@@ -56,10 +56,10 @@ h3(#EvtHandler_neweventtype). EvtHandler.new_event_type
 
 h3(#EvtHandler_neweventtype). EvtHandler.register_class
 
-  Integer *register_class*(%(arg-type)Class% klass, 
+  Integer *register_class*(%(arg-type)"Class":class.html% klass, 
                            %(arg-type)Integer% konstant = nil,
                            %(arg-type)String% meth = nil,
-                           %(arg-type)Event% arity = nil)
+                           %(arg-type)"Event":event.html% arity = nil)
 
 Registers the mapping of user-defined events identified by the constant
 @konstant@ to the user-defined ruby event class @klass@. If @konstant@
@@ -97,7 +97,7 @@ h2. Instance Methods
 
 h3(#EvtHandler_addpendingevent). EvtHandler#add_pending_event
 
-  *add_pending_event*(%(arg-type)Event% event)
+  *add_pending_event*(%(arg-type)"Event":event.html% event)
 
 This function posts an event to be processed later.
 
@@ -133,7 +133,7 @@ h3(#EvtHandler_connect). EvtHandler#connect
 
   *connect*(%(arg-type)Integer% id, 
             %(arg-type)Integer% lastId,
-            %(arg-type)EventType% eventType) { ... }
+            %(arg-type)"EventType":eventtype.html% eventType) { ... }
 
 Listens for events of the specified type and runs the associated block
 when they occur. The id parameters are required for some events to
@@ -156,7 +156,7 @@ h3(#EvtHandler_disconnect). EvtHandler#disconnect
 
  Boolean *disconnect*(%(arg-type)Integer% first_id, 
                      %(arg-type)Integer% last_id = @ID_ANY@,
-                     %(arg-type)EventType% evt_type = nil)
+                     %(arg-type)"EventType":eventtype.html% evt_type = nil)
 
 Disconnects event handlers which match the criteria passed in as
 arguments. Returns @true@ if any matching event handlers were found and
@@ -231,7 +231,7 @@ h4. See also
 
 h3(#EvtHandler_processevent). EvtHandler#process_event
 
- Boolean *process_event*(%(arg-type)Event% event)
+ Boolean *process_event*(%(arg-type)"Event":event.html% event)
 
 Processes an event, searching event tables and calling zero or more suitable event handler function(s).
 
@@ -281,7 +281,7 @@ h4. See also
 
 h3(#EvtHandler_searcheventtable). EvtHandler#search_event_table
 
- Boolean *search_event_table*(%(arg-type)EventTable% table,  %(arg-type)Event% event)
+ Boolean *search_event_table*(%(arg-type)"EventTable":eventtable.html% table,  %(arg-type)"Event":event.html% event)
 
 Searches the event table, executing an event handler function if an appropriate one
 is found.
@@ -339,7 +339,7 @@ h4. See also
 
 h3(#EvtHandler_setclientobject). EvtHandler#set_client_object
 
-  *set_client_object*(%(arg-type)ClientData% data)
+  *set_client_object*(%(arg-type)"ClientData":clientdata.html% data)
 
 Set the client data object. Any previous object will be deleted.
 
@@ -369,7 +369,7 @@ h4. See also
 
 h3(#EvtHandler_setnexthandler). EvtHandler#set_next_handler
 
-  *set_next_handler*(%(arg-type)EvtHandler% handler)
+  *set_next_handler*(%(arg-type)"EvtHandler":evthandler.html% handler)
 
 Sets the pointer to the next handler.
 
@@ -383,7 +383,7 @@ h4. See also
 
 h3(#EvtHandler_setprevioushandler). EvtHandler#set_previous_handler
 
-  *set_previous_handler*(%(arg-type)EvtHandler% handler)
+  *set_previous_handler*(%(arg-type)"EvtHandler":evthandler.html% handler)
 
 Sets the pointer to the previous handler.
 

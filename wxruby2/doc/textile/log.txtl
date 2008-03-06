@@ -150,7 +150,7 @@ h2. Instance Methods
 
 h3(#Log_onlog). Log.on_log
 
-  *on_log*(%(arg-type)LogLevel% level,  %(arg-type)char% message)
+  *on_log*(%(arg-type)"LogLevel":loglevel.html% level,  %(arg-type)"char":char.html% message)
 
 Forwards the message at specified level to the _DoLog()_ function of the
 active log target if there is any, does nothing otherwise.
@@ -163,7 +163,7 @@ Returns the active log target (may be @nil@).
 
 h3(#Log_setactivetarget). Log.set_active_target
 
- "Log":log.html *set_active_target*(%(arg-type)Log% logtarget)
+ "Log":log.html *set_active_target*(%(arg-type)"Log":log.html% logtarget)
 
 Sets the specified log target as the active one. Returns the
 previous active log target (may be @nil@).  To supress logging use a new
@@ -245,7 +245,7 @@ h4. See also
 
 h3(#Log_dolog). Log#do_log
 
-  *do_log*(%(arg-type)LogLevel% level,  %(arg-type)Char% msg,  %(arg-type)time_t% timestamp)
+  *do_log*(%(arg-type)"LogLevel":loglevel.html% level,  %(arg-type)"Char":char.html% msg,  %(arg-type)"time_t":time_t.html% timestamp)
 
 Called to process the message of the specified severity. _msg_ is the text
 of the message as specified in the call of _LogXXX()_ function which
@@ -257,7 +257,7 @@ corresponding to the log level and then calls
 
 h3(#Log_dologstring). Log#do_log_string
 
-  *do_log_string*(%(arg-type)Char% msg,  %(arg-type)time_t% timestamp)
+  *do_log_string*(%(arg-type)"Char":char.html% msg,  %(arg-type)"time_t":time_t.html% timestamp)
 
 Called to log the specified string. The timestamp is already included into the
 string but still passed to this function.
@@ -297,7 +297,7 @@ Returns whether the verbose mode is currently active.
 
 h3(#Log_setloglevel). Log#set_log_level
 
-  *set_log_level*(%(arg-type)LogLevel% logLevel)
+  *set_log_level*(%(arg-type)"LogLevel":loglevel.html% logLevel)
 
 Specifies that log messages with $level > logLevel$ should be ignored
 and not sent to the active log target.
@@ -310,7 +310,7 @@ Returns the current log level limit.
 
 h3(#Log_settimestamp). Log#set_timestamp
 
-  *set_timestamp*(%(arg-type)char% format)
+  *set_timestamp*(%(arg-type)"char":char.html% format)
 
 Sets the timestamp format prepended by the default log targets to all
 messages. The string may contain any normal characters as well as \%
@@ -325,7 +325,7 @@ Returns the current timestamp format string.
 
 h3(#Log_settracemask). Log#set_trace_mask
 
-  *set_trace_mask*(%(arg-type)TraceMask% mask)
+  *set_trace_mask*(%(arg-type)"TraceMask":tracemask.html% mask)
 
 Sets the trace mask, see "Customization":logcustomization.html
 section for details.
@@ -337,7 +337,7 @@ for details.
 
 h3(#Log_isallowedtracemask). Log#is_allowed_trace_mask
 
- Boolean *is_allowed_trace_mask*(%(arg-type)Char% mask)
+ Boolean *is_allowed_trace_mask*(%(arg-type)"Char":char.html% mask)
 
 Returns true if the _mask_ is one of allowed masks for
 "LogTrace":logtrace.html.

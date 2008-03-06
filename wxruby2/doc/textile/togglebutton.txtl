@@ -51,11 +51,11 @@ h2. Methods
 
 h3(#ToggleButton_constr). ToggleButton.new
 
-  *ToggleButton.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                   %(arg-type)Point% pos = DEFAULT_POSITION, 
-                   %(arg-type)Size% size = DEFAULT_SIZE, 
+  *ToggleButton.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                    %(arg-type)Integer% style = 0, 
-                   %(arg-type)Validator% val, 
+                   %(arg-type)"Validator":validator.html% val, 
                    %(arg-type)String% name = "checkBox")
 
 Constructor, creating and showing a toggle button.
@@ -81,11 +81,11 @@ Destructor, destroying the toggle button.
 
 h3(#ToggleButton_create). ToggleButton#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% val, 
+                %(arg-type)"Validator":validator.html% val, 
                 %(arg-type)String% name = "checkBox")
 
 Creates the toggle button for two-step construction. See "ToggleButton.new":togglebutton.html#ToggleButton_new for details.

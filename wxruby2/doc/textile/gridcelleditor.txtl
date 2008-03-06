@@ -44,40 +44,40 @@ h3(#GridCellEditor_iscreated). GridCellEditor#is_created
 
 h3(#GridCellEditor_create). GridCellEditor#create
 
-  *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)EvtHandler% evtHandler)
+  *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"EvtHandler":evthandler.html% evtHandler)
 
 Creates the actual edit control.
 
 h3(#GridCellEditor_setsize). GridCellEditor#set_size
 
-  *set_size*(%(arg-type)Rect% rect)
+  *set_size*(%(arg-type)"Rect":rect.html% rect)
 
 Size and position the edit control.
 
 h3(#GridCellEditor_show). GridCellEditor#show
 
-  *show*(%(arg-type)Boolean% show,  %(arg-type)GridCellAttr% attr = nil)
+  *show*(%(arg-type)Boolean% show,  %(arg-type)"GridCellAttr":gridcellattr.html% attr = nil)
 
 Show or hide the edit control, use the specified attributes to set
 colours/fonts for it.
 
 h3(#GridCellEditor_paintbackground). GridCellEditor#paint_background
 
-  *paint_background*(%(arg-type)Rect% rectCell,  %(arg-type)GridCellAttr% attr)
+  *paint_background*(%(arg-type)"Rect":rect.html% rectCell,  %(arg-type)"GridCellAttr":gridcellattr.html% attr)
 
 Draws the part of the cell not occupied by the control: the base class
 version just fills it with background colour from the attribute.
 
 h3(#GridCellEditor_beginedit). GridCellEditor#begin_edit
 
-  *begin_edit*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)Grid% grid)
+  *begin_edit*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)"Grid":grid.html% grid)
 
 Fetch the value from the table and prepare the edit control
 to begin editing. Set the focus to the edit control.
 
 h3(#GridCellEditor_endedit). GridCellEditor#end_edit
 
- Boolean *end_edit*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)Grid% grid)
+ Boolean *end_edit*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)"Grid":grid.html% grid)
 
 Complete the editing of the current cell. Returns true if the value has
 changed. If necessary, the control may be destroyed.
@@ -90,7 +90,7 @@ Reset the value in the control back to its starting value.
 
 h3(#GridCellEditor_startingkey). GridCellEditor#starting_key
 
-  *starting_key*(%(arg-type)KeyEvent% event)
+  *starting_key*(%(arg-type)"KeyEvent":keyevent.html% event)
 
 If the editor is enabled by pressing keys on the grid,
 this will be called to let the editor do something about
@@ -105,7 +105,7 @@ called.
 
 h3(#GridCellEditor_handlereturn). GridCellEditor#handle_return
 
-  *handle_return*(%(arg-type)KeyEvent% event)
+  *handle_return*(%(arg-type)"KeyEvent":keyevent.html% event)
 
 Some types of controls on some platforms may need some help
 with the Return key.

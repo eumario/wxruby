@@ -53,11 +53,11 @@ h2. Methods
 
 h3(#PageSetupDialogData_new). PageSetupDialogData.new
 
-  *PageSetupDialogData.new*(%(arg-type)PageSetupDialogData% data)
+  *PageSetupDialogData.new*(%(arg-type)"PageSetupDialogData":pagesetupdialogdata.html% data)
 
 Copy constructor.
 
-  *PageSetupDialogData.new*(%(arg-type)PrintData% printData)
+  *PageSetupDialogData.new*(%(arg-type)"PrintData":printdata.html% printData)
 
 Construct an object from a print data object.
 
@@ -209,33 +209,33 @@ selected printer properties. Windows only. Units are in millimetres
 
 h3(#PageSetupDialogData_setmargintopleft). PageSetupDialogData#set_margin_top_left
 
-  *set_margin_top_left*(%(arg-type)Point% pt)
+  *set_margin_top_left*(%(arg-type)"Point":point.html% pt)
 
 Sets the left (x) and top (y) margins in millimetres.
 
 h3(#PageSetupDialogData_setmarginbottomright). PageSetupDialogData#set_margin_bottom_right
 
-  *set_margin_bottom_right*(%(arg-type)Point% pt)
+  *set_margin_bottom_right*(%(arg-type)"Point":point.html% pt)
 
 Sets the right (x) and bottom (y) margins in millimetres.
 
 h3(#PageSetupDialogData_setminmargintopleft). PageSetupDialogData#set_min_margin_top_left
 
-  *set_min_margin_top_left*(%(arg-type)Point% pt)
+  *set_min_margin_top_left*(%(arg-type)"Point":point.html% pt)
 
 Sets the left (x) and top (y) minimum margins the user can enter (Windows only). Units are
 in millimetres.
 
 h3(#PageSetupDialogData_setminmarginbottomright). PageSetupDialogData#set_min_margin_bottom_right
 
-  *set_min_margin_bottom_right*(%(arg-type)Point% pt)
+  *set_min_margin_bottom_right*(%(arg-type)"Point":point.html% pt)
 
 Sets the right (x) and bottom (y) minimum margins the user can enter (Windows only). Units are
 in millimetres.
 
 h3(#PageSetupDialogData_setpaperid). PageSetupDialogData#set_paper_id
 
-  *set_paper_id*(%(arg-type)PaperSize% id)
+  *set_paper_id*(%(arg-type)"PaperSize":papersize.html% id)
 
 Sets the paper size id. For further information, see "PrintData#set_paper_id":printdata.html#PrintData_setpaperid.
 
@@ -243,24 +243,24 @@ Calling this function overrides the explicit paper dimensions passed in "PageSet
 
 h3(#PageSetupDialogData_setpapersize). PageSetupDialogData#set_paper_size
 
-  *set_paper_size*(%(arg-type)Size% size)
+  *set_paper_size*(%(arg-type)"Size":size.html% size)
 
 Sets the paper size in millimetres. If a corresponding paper id is found, it will be set in the
 internal PrintData object, otherwise the paper size overrides the paper id.
 
 h3(#PageSetupDialogData_setprintdata). PageSetupDialogData#set_print_data
 
-  *set_print_data*(%(arg-type)PrintData% printData)
+  *set_print_data*(%(arg-type)"PrintData":printdata.html% printData)
 
 Sets the "print data":printdata.html associated with this object.
 
 h3(#PageSetupDialogData_assign). PageSetupDialogData#=
 
-  *operator $=$*(%(arg-type)PrintData% data)
+  *operator $=$*(%(arg-type)"PrintData":printdata.html% data)
 
 Assigns print data to this object.
 
-  *operator $=$*(%(arg-type)PageSetupDialogData% data)
+  *operator $=$*(%(arg-type)"PageSetupDialogData":pagesetupdialogdata.html% data)
 
 Assigns page setup data to this object.
 

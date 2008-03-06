@@ -154,7 +154,7 @@ Note that this method does not trigger relayout.
 
 h3(#FlexGridSizer_setnonflexiblegrowmode). FlexGridSizer#set_non_flexible_grow_mode
 
-  *set_non_flexible_grow_mode*(%(arg-type)FlexSizerGrowMode% mode)
+  *set_non_flexible_grow_mode*(%(arg-type)"FlexSizerGrowMode":flexsizergrowmode.html% mode)
 
 Specifies how the sizer should grow in the non flexible direction if
 there is one (so

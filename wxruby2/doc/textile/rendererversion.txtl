@@ -31,7 +31,7 @@ h2. Methods
 
 h3(#wxrenderernativeiscompatible). RendererVersion#is_compatible
 
- Boolean *is_compatible*(%(arg-type)RendererVersion% ver)
+ Boolean *is_compatible*(%(arg-type)"RendererVersion":rendererversion.html% ver)
 
 Checks if the main program is compatible with the renderer having the version 
 ver, returns  if it is and  otherwise.

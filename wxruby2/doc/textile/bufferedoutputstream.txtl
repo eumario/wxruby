@@ -29,7 +29,7 @@ h2. Methods
 
 h3(#BufferedOutputStream_new). BufferedOutputStream.new
 
-  *BufferedOutputStream.new*(%(arg-type)OutputStream% parent)
+  *BufferedOutputStream.new*(%(arg-type)"OutputStream":outputstream.html% parent)
 
 Creates a buffered stream using a buffer of a default size of 1024 bytes for cashing
 the stream _parent_.
@@ -40,7 +40,7 @@ Destructor. Calls Sync() and destroys the internal buffer.
 
 h3(#BufferedOutputStream_seeko). BufferedOutputStream#seek_o
 
- off_t *seek_o*(%(arg-type)off_t% pos,  %(arg-type)SeekMode% mode)
+ off_t *seek_o*(%(arg-type)"off_t":off_t.html% pos,  %(arg-type)"SeekMode":seekmode.html% mode)
 
 Calls Sync() and changes the stream position.
 

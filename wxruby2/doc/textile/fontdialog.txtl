@@ -29,9 +29,9 @@ h2. Methods
 
 h3(#FontDialog_new). FontDialog.new
 
- *FontDialog.new*(%(arg-type)Window% parent)
+ *FontDialog.new*(%(arg-type)"Window":window.html% parent)
 
- *FontDialog.new*(%(arg-type)Window% parent, %(arg-type)FontData% data)
+ *FontDialog.new*(%(arg-type)"Window":window.html% parent, %(arg-type)"FontData":fontdata.html% data)
 
 
 Constructor. Pass a parent window, and optionally the font data object to be used to initialize the dialog controls. 

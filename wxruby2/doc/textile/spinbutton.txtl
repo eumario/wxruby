@@ -60,9 +60,9 @@ h2. Methods
 
 h3(#SpinButton_new). SpinButton.new
 
-  *SpinButton.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                 %(arg-type)Size% size = DEFAULT_SIZE, 
+  *SpinButton.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                  %(arg-type)Integer% style = SP_HORIZONTAL, 
                  %(arg-type)String% name = "spinButton")
 
@@ -87,9 +87,9 @@ Destructor, destroys the spin button control.
 
 h3(#SpinButton_create). SpinButton#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = SP_HORIZONTAL, 
                 %(arg-type)String% name = "spinButton")
 

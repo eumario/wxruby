@@ -30,7 +30,7 @@ h2. Methods
 
 h3(#LogWindow_new). LogWindow.new
 
-  *LogWindow.new*(%(arg-type)Frame% parent,  %(arg-type)Char% title, 
+  *LogWindow.new*(%(arg-type)"Frame":frame.html% parent,  %(arg-type)"Char":char.html% title, 
                 %(arg-type)Boolean% show = @true@, 
                 %(arg-type)Boolean% passToOld = @true@)
 
@@ -61,14 +61,14 @@ it but use "LogWindow#show":logwindow.html#LogWindow_show to show or hide it.
 
 h3(#LogWindow_onframecreate). LogWindow#on_frame_create
 
-  *on_frame_create*(%(arg-type)Frame% frame)
+  *on_frame_create*(%(arg-type)"Frame":frame.html% frame)
 
 Called immediately after the log frame creation allowing for
 any extra initializations.
 
 h3(#LogWindow_onframeclose). LogWindow#on_frame_close
 
- Boolean *on_frame_close*(%(arg-type)Frame% frame)
+ Boolean *on_frame_close*(%(arg-type)"Frame":frame.html% frame)
 
 Called if the user closes the window interactively, will not be
 called if it is destroyed for another reason (such as when program
@@ -83,7 +83,7 @@ h4. See also
 
 h3(#LogWindow_onframedelete). LogWindow#on_frame_delete
 
-  *on_frame_delete*(%(arg-type)Frame% frame)
+  *on_frame_delete*(%(arg-type)"Frame":frame.html% frame)
 
 Called right before the log frame is going to be deleted: will
 always be called unlike "on_frame_close()":#LogWindow_onframeclose().

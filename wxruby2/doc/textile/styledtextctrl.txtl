@@ -395,7 +395,7 @@ Retrieve the position at the start of a line.
 
 h3(#STC_positionfrompoint). StyledTextCtrl#position_from_point
 
- Integer *position_from_point*(%(arg-type)Point% pt)
+ Integer *position_from_point*(%(arg-type)"Point":point.html% pt)
 
 Find the position from a point within the window.
 
@@ -592,13 +592,13 @@ Set the alpha of the selection.
 
 h3(#STC_setselbackground). StyledTextCtrl#set_sel_background
 
-  *set_sel_background*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% back)
+  *set_sel_background*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
 
 Set the background colour of the selection and whether to use this setting.
 
 h3(#STC_setselforeground). StyledTextCtrl#set_sel_foreground
 
-  *set_sel_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% fore)
+  *set_sel_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour of the selection and whether to use this setting.
 
@@ -815,7 +815,7 @@ Sets the scroll range so that maximum scroll position has     the last line at t
 
 h3(#STC_sethscrollbar). StyledTextCtrl#set_hscroll_bar
 
-  *set_hscroll_bar*(%(arg-type)ScrollBar% bar)
+  *set_hscroll_bar*(%(arg-type)"ScrollBar":scrollbar.html% bar)
 
 Set the horizontal scrollbar to use instead of the ont that's built-in.
 
@@ -845,7 +845,7 @@ Set the way the display area is determined when a particular line     is to be m
 
 h3(#STC_setvscrollbar). StyledTextCtrl#set_vscroll_bar
 
-  *set_vscroll_bar*(%(arg-type)ScrollBar% bar)
+  *set_vscroll_bar*(%(arg-type)"ScrollBar":scrollbar.html% bar)
 
 Set the vertical scrollbar to use instead of the ont that's built-in.
 
@@ -1202,13 +1202,13 @@ Retrieve number of bits in style bytes used to hold the lexical state.
 
 h3(#STC_sethotspotactivebackground). StyledTextCtrl#set_hotspot_active_background
 
-  *set_hotspot_active_background*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% back)
+  *set_hotspot_active_background*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
 
 Set a back colour for active hotspots.
 
 h3(#STC_sethotspotactiveforeground). StyledTextCtrl#set_hotspot_active_foreground
 
-  *set_hotspot_active_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% fore)
+  *set_hotspot_active_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
 
 Set a fore colour for active hotspots.
 
@@ -1268,7 +1268,7 @@ Reset the default style to its state at startup
 
 h3(#STC_stylesetbackground). StyledTextCtrl#style_set_background
 
-  *style_set_background*(%(arg-type)Integer% style, %(arg-type)Colour% back)
+  *style_set_background*(%(arg-type)Integer% style, %(arg-type)"Colour":colour.html% back)
 
 Set the background colour of a style.
 
@@ -1310,25 +1310,25 @@ Set the font of a style.
 
 h3(#STC_stylesetfont). StyledTextCtrl#style_set_font
 
-  *style_set_font*(%(arg-type)Integer% styleNum, %(arg-type)Font% font)
+  *style_set_font*(%(arg-type)Integer% styleNum, %(arg-type)"Font":font.html% font)
 
 Set style size, face, bold, italic, and underline attributes from     a wxFont's attributes.
 
 h3(#STC_stylesetfontattr). StyledTextCtrl#style_set_font_attr
 
-  *style_set_font_attr*(%(arg-type)Integer% styleNum, %(arg-type)Integer% size, %(arg-type)String% faceName, %(arg-type)Boolean% bold, %(arg-type)Boolean% italic, %(arg-type)Boolean% underline, %(arg-type)FontEncoding% encoding=wxFONTENCODING_DEFAULT)
+  *style_set_font_attr*(%(arg-type)Integer% styleNum, %(arg-type)Integer% size, %(arg-type)String% faceName, %(arg-type)Boolean% bold, %(arg-type)Boolean% italic, %(arg-type)Boolean% underline, %(arg-type)"FontEncoding":fontencoding.html% encoding=wxFONTENCODING_DEFAULT)
 
 Set all font style attributes at once.
 
 h3(#STC_stylesetfontencoding). StyledTextCtrl#style_set_font_encoding
 
-  *style_set_font_encoding*(%(arg-type)Integer% style, %(arg-type)FontEncoding% encoding)
+  *style_set_font_encoding*(%(arg-type)Integer% style, %(arg-type)"FontEncoding":fontencoding.html% encoding)
 
 Set the font encoding to be used by a style.
 
 h3(#STC_stylesetforeground). StyledTextCtrl#style_set_foreground
 
-  *style_set_foreground*(%(arg-type)Integer% style, %(arg-type)Colour% fore)
+  *style_set_foreground*(%(arg-type)Integer% style, %(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour of a style.
 
@@ -1391,7 +1391,7 @@ Retrieve the style of an indicator.
 
 h3(#STC_indicatorsetforeground). StyledTextCtrl#indicator_set_foreground
 
-  *indicator_set_foreground*(%(arg-type)Integer% indic, %(arg-type)Colour% fore)
+  *indicator_set_foreground*(%(arg-type)Integer% indic, %(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour of an indicator.
 
@@ -1562,7 +1562,7 @@ Move the caret inside current view if it's not there already.
 
 h3(#STC_setcaretforeground). StyledTextCtrl#set_caret_foreground
 
-  *set_caret_foreground*(%(arg-type)Colour% fore)
+  *set_caret_foreground*(%(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour of the caret.
 
@@ -1574,7 +1574,7 @@ Set background alpha of the caret line.
 
 h3(#STC_setcaretlinebackground). StyledTextCtrl#set_caret_line_background
 
-  *set_caret_line_background*(%(arg-type)Colour% back)
+  *set_caret_line_background*(%(arg-type)"Colour":colour.html% back)
 
 Set the colour of the background of the line containing the caret.
 
@@ -1771,13 +1771,13 @@ Add a set of markers to a line.
 
 h3(#STC_markerdefine). StyledTextCtrl#marker_define
 
-  *marker_define*(%(arg-type)Integer% markerNumber, %(arg-type)Integer% markerSymbol, %(arg-type)Colour% foreground, %(arg-type)Colour% background)
+  *marker_define*(%(arg-type)Integer% markerNumber, %(arg-type)Integer% markerSymbol, %(arg-type)"Colour":colour.html% foreground, %(arg-type)"Colour":colour.html% background)
 
 Set the symbol used for a particular marker number,     and optionally the fore and background colours.
 
 h3(#STC_markerdefinebitmap). StyledTextCtrl#marker_define_bitmap
 
-  *marker_define_bitmap*(%(arg-type)Integer% markerNumber, %(arg-type)Bitmap% bmp)
+  *marker_define_bitmap*(%(arg-type)Integer% markerNumber, %(arg-type)"Bitmap":bitmap.html% bmp)
 
 Define a marker from a bitmap
 
@@ -1831,13 +1831,13 @@ Set the alpha used for a marker that is drawn in the text area, not the margin.
 
 h3(#STC_markersetbackground). StyledTextCtrl#marker_set_background
 
-  *marker_set_background*(%(arg-type)Integer% markerNumber, %(arg-type)Colour% back)
+  *marker_set_background*(%(arg-type)Integer% markerNumber, %(arg-type)"Colour":colour.html% back)
 
 Set the background colour used for a particular marker number.
 
 h3(#STC_markersetforeground). StyledTextCtrl#marker_set_foreground
 
-  *marker_set_foreground*(%(arg-type)Integer% markerNumber, %(arg-type)Colour% fore)
+  *marker_set_foreground*(%(arg-type)Integer% markerNumber, %(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour used for a particular marker number.
 
@@ -1968,7 +1968,7 @@ Retrieve the edge highlight mode.
 
 h3(#STC_setedgecolour). StyledTextCtrl#set_edge_colour
 
-  *set_edge_colour*(%(arg-type)Colour% edgeColour)
+  *set_edge_colour*(%(arg-type)"Colour":colour.html% edgeColour)
 
 Change the colour used in edge indication.
 
@@ -2080,13 +2080,13 @@ Set the fold level of a line.     This encodes an integer level along with flags
 
 h3(#STC_setfoldmargincolour). StyledTextCtrl#set_fold_margin_colour
 
-  *set_fold_margin_colour*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% back)
+  *set_fold_margin_colour*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
 
 Set the colours used as a chequerboard pattern in the fold margin
 
 h3(#STC_setfoldmarginhicolour). StyledTextCtrl#set_fold_margin_hi_colour
 
-  *set_fold_margin_hi_colour*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% fore)
+  *set_fold_margin_hi_colour*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
 
 
 h3(#STC_showlines). StyledTextCtrl#show_lines
@@ -2338,7 +2338,7 @@ Clear all the registered images.
 
 h3(#STC_registerimage). StyledTextCtrl#register_image
 
-  *register_image*(%(arg-type)Integer% type, %(arg-type)Bitmap% bmp)
+  *register_image*(%(arg-type)Integer% type, %(arg-type)"Bitmap":bitmap.html% bmp)
 
 Register an image for use in autocompletion lists.
 
@@ -2382,19 +2382,19 @@ Retrieve the position where the caret was before displaying the call tip.
 
 h3(#STC_calltipsetbackground). StyledTextCtrl#call_tip_set_background
 
-  *call_tip_set_background*(%(arg-type)Colour% back)
+  *call_tip_set_background*(%(arg-type)"Colour":colour.html% back)
 
 Set the background colour for the call tip.
 
 h3(#STC_calltipsetforeground). StyledTextCtrl#call_tip_set_foreground
 
-  *call_tip_set_foreground*(%(arg-type)Colour% fore)
+  *call_tip_set_foreground*(%(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour for the call tip.
 
 h3(#STC_calltipsetforegroundhighlight). StyledTextCtrl#call_tip_set_foreground_highlight
 
-  *call_tip_set_foreground_highlight*(%(arg-type)Colour% fore)
+  *call_tip_set_foreground_highlight*(%(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour for the highlighted part of the call tip.
 
@@ -2456,13 +2456,13 @@ Make white space characters invisible, always visible or visible outside indenta
 
 h3(#STC_setwhitespacebackground). StyledTextCtrl#set_whitespace_background
 
-  *set_whitespace_background*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% back)
+  *set_whitespace_background*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
 
 Set the background colour of all whitespace and whether to use this setting.
 
 h3(#STC_setwhitespaceforeground). StyledTextCtrl#set_whitespace_foreground
 
-  *set_whitespace_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)Colour% fore)
+  *set_whitespace_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour of all whitespace and whether to use this setting.
 
@@ -2729,7 +2729,7 @@ Clear all the registered images.
 
 h3(#STC_registerimage). StyledTextCtrl#register_image
 
-  *register_image*(%(arg-type)Integer% type, %(arg-type)Bitmap% bmp)
+  *register_image*(%(arg-type)Integer% type, %(arg-type)"Bitmap":bitmap.html% bmp)
 
 Register an image for use in autocompletion lists.
 
@@ -2773,19 +2773,19 @@ Retrieve the position where the caret was before displaying the call tip.
 
 h3(#STC_calltipsetbackground). StyledTextCtrl#call_tip_set_background
 
-  *call_tip_set_background*(%(arg-type)Colour% back)
+  *call_tip_set_background*(%(arg-type)"Colour":colour.html% back)
 
 Set the background colour for the call tip.
 
 h3(#STC_calltipsetforeground). StyledTextCtrl#call_tip_set_foreground
 
-  *call_tip_set_foreground*(%(arg-type)Colour% fore)
+  *call_tip_set_foreground*(%(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour for the call tip.
 
 h3(#STC_calltipsetforegroundhighlight). StyledTextCtrl#call_tip_set_foreground_highlight
 
-  *call_tip_set_foreground_highlight*(%(arg-type)Colour% fore)
+  *call_tip_set_foreground_highlight*(%(arg-type)"Colour":colour.html% fore)
 
 Set the foreground colour for the highlighted part of the call tip.
 
@@ -3463,7 +3463,7 @@ h2(#printing). Printing
 
 h3(#STC_formatrange). StyledTextCtrl#format_range
 
- Integer *format_range*(%(arg-type)Boolean% doDraw, %(arg-type)Integer% startPos, %(arg-type)Integer% endPos, %(arg-type)DC% draw, %(arg-type)DC% target, %(arg-type)Rect% renderRect, %(arg-type)Rect% pageRect)
+ Integer *format_range*(%(arg-type)Boolean% doDraw, %(arg-type)Integer% startPos, %(arg-type)Integer% endPos, %(arg-type)"DC":dc.html% draw, %(arg-type)"DC":dc.html% target, %(arg-type)"Rect":rect.html% renderRect, %(arg-type)"Rect":rect.html% pageRect)
 
 On Windows, will draw the document into a display context such as a printer.
 
@@ -3512,7 +3512,7 @@ h2(#drag_and_drop). Drag and drop
 
 h3(#STC_dodragover). StyledTextCtrl#do_drag_over
 
- "DragResult":dragresult.html *do_drag_over*(%(arg-type)Coord% x, %(arg-type)Coord% y, %(arg-type)DragResult% def)
+ "DragResult":dragresult.html *do_drag_over*(%(arg-type)"Coord":coord.html% x, %(arg-type)"Coord":coord.html% y, %(arg-type)"DragResult":dragresult.html% def)
 
 #ifdef STC_USE_DND     Allow for simulating a DnD DragOver
 

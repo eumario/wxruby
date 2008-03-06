@@ -23,12 +23,12 @@ h2. Methods
 
 h3(#PostScriptDC_new). PostScriptDC.new
 
-  *PostScriptDC.new*(%(arg-type)PrintData% printData)
+  *PostScriptDC.new*(%(arg-type)"PrintData":printdata.html% printData)
 
 Constructs a PostScript printer device context from a "PrintData":printdata.html object.
 
   *PostScriptDC.new*(%(arg-type)String% output,  %(arg-type)Boolean% interactive = true, 
                   
-  %(arg-type)Window% parent)
+  %(arg-type)"Window":window.html% parent)
 
 Constructor. _output_ is an optional file for printing to, and if

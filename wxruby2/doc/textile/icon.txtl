@@ -67,7 +67,7 @@ h2. Methods
 
 h3(#Icon_new). Icon.new
 
-  *Icon.new*(%(arg-type)Icon% icon)
+  *Icon.new*(%(arg-type)"Icon":icon.html% icon)
 
 Copy constructor.
 
@@ -77,7 +77,7 @@ Copy constructor.
 
 Creates an icon from the given data, which can be of arbitrary type.
 
-  *Icon.new*(%(arg-type)char% bits[],  %(arg-type)Integer% width, 
+  *Icon.new*(%(arg-type)"char":char.html% bits[],  %(arg-type)Integer% width, 
            %(arg-type)Integer% height
   %(arg-type)Integer% depth = 1)
 
@@ -87,19 +87,19 @@ Creates an icon from an array of bits.
 
 Creates a new icon.
 
-  *Icon.new*(%(arg-type)char% bits)
+  *Icon.new*(%(arg-type)"char":char.html% bits)
 
-  *Icon.new*(%(arg-type)char% bits)
+  *Icon.new*(%(arg-type)"char":char.html% bits)
 
 Creates an icon from XPM data.
 
-  *Icon.new*(%(arg-type)String% name,  %(arg-type)BitmapType% type, 
+  *Icon.new*(%(arg-type)String% name,  %(arg-type)"BitmapType":bitmaptype.html% type, 
             %(arg-type)Integer% desiredWidth = -1, 
            %(arg-type)Integer% desiredHeight = -1)
 
 Loads an icon from a file or resource.
 
-  *Icon.new*(%(arg-type)IconLocation% loc)
+  *Icon.new*(%(arg-type)"IconLocation":iconlocation.html% loc)
 
 Loads an icon from the specified "location":iconlocation.html.
 
@@ -198,7 +198,7 @@ h4. See also
 
 h3(#Icon_copyfrombitmap). Icon#copy_from_bitmap
 
-  *copy_from_bitmap*(%(arg-type)Bitmap% bmp)
+  *copy_from_bitmap*(%(arg-type)"Bitmap":bitmap.html% bmp)
 
 Copies _bmp_ bitmap to this icon. Under MS Windows the bitmap
 must have mask colour set.
@@ -245,7 +245,7 @@ h4. See also
 
 h3(#Icon_loadfile). Icon#load_file
 
- Boolean *load_file*(%(arg-type)String% name,  %(arg-type)BitmapType% type)
+ Boolean *load_file*(%(arg-type)String% name,  %(arg-type)"BitmapType":bitmaptype.html% type)
 
 Loads an icon from a file or resource.
 
@@ -283,8 +283,8 @@ Returns true if icon data is present.
 
 h3(#Icon_savefile). Icon#save_file
 
- Boolean *save_file*(%(arg-type)String% name,  %(arg-type)BitmapType% type, 
-                   %(arg-type)Palette% palette = nil)
+ Boolean *save_file*(%(arg-type)String% name,  %(arg-type)"BitmapType":bitmaptype.html% type, 
+                   %(arg-type)"Palette":palette.html% palette = nil)
 
 Saves an icon in the named file.
 
@@ -347,7 +347,7 @@ h4. Parameters
 
 h3(#Icon_assign). Icon#=
 
- "Icon& ":icon& .html *operator $=$*(%(arg-type)Icon% icon)
+ "Icon& ":icon& .html *operator $=$*(%(arg-type)"Icon":icon.html% icon)
 
 Assignment operator. This operator does not copy any data, but instead
 passes a pointer to the data in _icon_ and increments a reference
@@ -363,7 +363,7 @@ Returns 'this' object.
 
 h3(#Icon_equal). Icon#==
 
- Boolean *operator $==$*(%(arg-type)Icon% icon)
+ Boolean *operator $==$*(%(arg-type)"Icon":icon.html% icon)
 
 Equality operator. This operator tests whether the internal data pointers are
 equal (a fast test).
@@ -378,7 +378,7 @@ Returns true if the icons were effectively equal, false otherwise.
 
 h3(#Icon_notequal). Icon#!=
 
- Boolean *operator $!=$*(%(arg-type)Icon% icon)
+ Boolean *operator $!=$*(%(arg-type)"Icon":icon.html% icon)
 
 Inequality operator. This operator tests whether the internal data pointers are
 unequal (a fast test).

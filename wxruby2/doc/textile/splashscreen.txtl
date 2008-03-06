@@ -39,12 +39,12 @@ h2. Methods
 
 h3(#SplashScreen_wxsplashscreen). SplashScreen.new
 
-  *SplashScreen.new*(%(arg-type)Bitmap% bitmap,  %(arg-type)Integer% splashStyle, 
+  *SplashScreen.new*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% splashStyle, 
                    %(arg-type)Integer% milliseconds, 
-                   %(arg-type)Window% parent, 
+                   %(arg-type)"Window":window.html% parent, 
                    %(arg-type)Integer% id, 
-                   %(arg-type)Point% pos = DEFAULT_POSITION, 
-                   %(arg-type)Size% size = DEFAULT_SIZE, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                    %(arg-type)Integer% style = SIMPLE_BORDER|FRAME_NO_TASKBAR|STAY_ON_TOP)
 
 Construct the splash screen passing a bitmap, a style, a timeout, a window id, optional position
@@ -66,7 +66,7 @@ Destroys the splash screen.
 
 h3(#SplashScreen_onclosewindow). SplashScreen#on_close_window
 
-  *on_close_window*(%(arg-type)CloseEvent% event)
+  *on_close_window*(%(arg-type)"CloseEvent":closeevent.html% event)
 
 Reimplement this event handler if you want to set an application variable on window destruction, for example.
 

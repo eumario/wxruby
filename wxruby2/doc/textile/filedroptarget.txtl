@@ -35,8 +35,8 @@ appropriately for files, and calls "FileDropTarget#on_drop_files":filedroptarget
 
 h3(#FileDropTarget_ondropfiles). FileDropTarget#on_drop_files
 
- Boolean *on_drop_files*(%(arg-type)Coord% x,  %(arg-type)Coord% y, 
-                       %(arg-type)ArrayString% filenames)
+ Boolean *on_drop_files*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y, 
+                       %(arg-type)"ArrayString":arraystring.html% filenames)
 
 Override this function to receive dropped files.
 

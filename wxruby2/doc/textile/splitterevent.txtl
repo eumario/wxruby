@@ -51,8 +51,8 @@ h2. Methods
 
 h3(#SplitterEvent_constr). SplitterEvent.new
 
-  *SplitterEvent.new*(%(arg-type)EventType% eventType = EVT_NULL, 
-                                            %(arg-type)SplitterWindow% splitter = nil)
+  *SplitterEvent.new*(%(arg-type)"EventType":eventtype.html% eventType = EVT_NULL, 
+                                            %(arg-type)"SplitterWindow":splitterwindow.html% splitter = nil)
 
 Constructor. Used internally by Widgets only.
 

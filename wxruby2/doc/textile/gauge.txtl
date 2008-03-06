@@ -68,11 +68,11 @@ h2. Methods
 
 h3(#Gauge_new). Gauge.new
 
-  *Gauge.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% range, 
-            %(arg-type)Point% pos = DEFAULT_POSITION, 
-            %(arg-type)Size% size = DEFAULT_SIZE, 
+  *Gauge.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% range, 
+            %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+            %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
             %(arg-type)Integer% style = GA_HORIZONTAL, 
-            %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+            %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
             %(arg-type)String% name = "gauge")
 
 Constructor, creating and showing a gauge.
@@ -99,11 +99,11 @@ Destructor, destroying the gauge.
 
 h3(#Gauge_create). Gauge#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% range, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% range, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = GA_HORIZONTAL, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "gauge")
 
 Creates the gauge for two-step construction. See "Gauge.new":gauge.html#Gauge_new for further details.

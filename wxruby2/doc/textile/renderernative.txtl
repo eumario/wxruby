@@ -95,7 +95,7 @@ h2. Methods
 </div>
 h3(#RendererNative_drawcheckbox). RendererNative#draw_check_box
 
-  *draw_check_box*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+  *draw_check_box*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                  %(arg-type)Integer% flags)
 
 Draw a check box (used by DataViewCtrl).
@@ -106,7 +106,7 @@ flags may have the @CONTROL_CHECKED@, @CONTROL_CURRENT@ or
 
 h3(#RendererNative_drawcomboboxdropbutton). RendererNative#draw_combo_box_drop_button
 
-  *draw_combo_box_drop_button*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+  *draw_combo_box_drop_button*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                              %(arg-type)Integer% flags)
 
 Draw a button like the one used by "ComboBox":combobox.html to show a
@@ -117,7 +117,7 @@ flags may have the @CONTROL_PRESSED@ or @CONTROL_CURRENT@ bit set.
 
 h3(#RendererNative_drawdroparrow). RendererNative#draw_drop_arrow
 
-  *draw_drop_arrow*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+  *draw_drop_arrow*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                   %(arg-type)Integer% flags)
 
 Draw a drop down arrow that is suitable for use outside a combo box. Arrow will have
@@ -130,10 +130,10 @@ flags may have the @CONTROL_PRESSED@ or @CONTROL_CURRENT@ bit set.
 
 h3(#RendererNative_drawheaderbutton). RendererNative#draw_header_button
 
- Integer *draw_header_button*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+ Integer *draw_header_button*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                             %(arg-type)Integer% flags = 0, 
-                            %(arg-type)HeaderSortIconType% sortArrow = HDR_SORT_ICON_NONE, 
-                            %(arg-type)HeaderButtonParams% params = nil)
+                            %(arg-type)"HeaderSortIconType":headersorticontype.html% sortArrow = HDR_SORT_ICON_NONE, 
+                            %(arg-type)"HeaderButtonParams":headerbuttonparams.html% params = nil)
 
 Draw the header control button (used, for example, by
 "ListCtrl":listctrl.html).  Depending on platforms the
@@ -150,7 +150,7 @@ label text or bitmap, the sort arrow if present, and internal margins.
 
 h3(#RendererNative_drawitemselectionrect). RendererNative#draw_item_selection_rect
 
-  *draw_item_selection_rect*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+  *draw_item_selection_rect*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                            %(arg-type)Integer% flags = 0)
 
 Draw a selection rectangle underneath the text as used e.g. in a 
@@ -165,7 +165,7 @@ or deduced by the code directly from the win.
 
 h3(#RendererNative_drawpushbutton). RendererNative#draw_push_button
 
-  *draw_push_button*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+  *draw_push_button*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                    %(arg-type)Integer% flags)
 
 Draw a blank push button that looks very similar to "Button":button.html.
@@ -176,7 +176,7 @@ flags may have the @CONTROL_PRESSED@, @CONTROL_CURRENT@ or
 
 h3(#RendererNative_drawsplitterborder). RendererNative#draw_splitter_border
 
-  *draw_splitter_border*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+  *draw_splitter_border*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                        %(arg-type)Integer% flags = 0)
 
 Draw the border for sash window: this border must be such that the sash
@@ -186,9 +186,9 @@ well.
 
 h3(#RendererNative_drawsplittersash). RendererNative#draw_splitter_sash
 
-  *draw_splitter_sash*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Size% size, 
-                     %(arg-type)Coord% position, 
-                     %(arg-type)Orientation% orient, 
+  *draw_splitter_sash*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Size":size.html% size, 
+                     %(arg-type)"Coord":coord.html% position, 
+                     %(arg-type)"Orientation":orientation.html% orient, 
                      %(arg-type)Integer% flags = 0)
 
 Draw a sash. The orient parameter defines whether the sash should be
@@ -197,7 +197,7 @@ vertical or horizontal and how the position should be interpreted.
 
 h3(#RendererNative_drawtreeitembutton). RendererNative#draw_tree_item_button
 
-  *draw_tree_item_button*(%(arg-type)Window% win,  %(arg-type)DC% dc,  %(arg-type)Rect% rect, 
+  *draw_tree_item_button*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect, 
                         %(arg-type)Integer% flags = 0)
 
 Draw the expanded/collapsed icon for a tree control item. To draw an expanded
@@ -232,7 +232,7 @@ renderer which can be retrieved by calling "get_default":#RendererNative_getdefa
 
 h3(#RendererNative_getheaderbuttonheight). RendererNative#get_header_button_height
 
- Integer *get_header_button_height*(%(arg-type)Window% win)
+ Integer *get_header_button_height*(%(arg-type)"Window":window.html% win)
 
 Returns the height of a header button, either a fixed platform height if available, or a 
 generic height based on the window's font.
@@ -240,7 +240,7 @@ generic height based on the window's font.
 
 h3(#RendererNative_getsplitterparams). RendererNative#get_splitter_params
 
- SplitterRenderParams *get_splitter_params*(%(arg-type)Window% win)
+ SplitterRenderParams *get_splitter_params*(%(arg-type)"Window":window.html% win)
 
 Gets the parameters for platform-native splitter. 
 
@@ -285,7 +285,7 @@ on different systems.
 
 h3(#RendererNative_set). RendererNative#set
 
- "RendererNative":renderernative.html *set*(%(arg-type)RendererNative% renderer)
+ "RendererNative":renderernative.html *set*(%(arg-type)"RendererNative":renderernative.html% renderer)
 
 Set the renderer to use, passing @NULL@ reverts to using the default
 renderer (the global renderer must always exist).

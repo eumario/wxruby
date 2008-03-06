@@ -45,7 +45,7 @@ h3(#EncodingConverter_wxencodingconverter). EncodingConverter.new
 
 h3(#EncodingConverter_init). EncodingConverter#init
 
- Boolean *init*(%(arg-type)FontEncoding% input_enc,  %(arg-type)FontEncoding% output_enc, 
+ Boolean *init*(%(arg-type)"FontEncoding":fontencoding.html% input_enc,  %(arg-type)"FontEncoding":fontencoding.html% output_enc, 
               %(arg-type)Integer% method = CONVERT_STRICT)
 
 Initialize conversion. Both output or input encoding may
@@ -77,7 +77,7 @@ or output encoding is not supported.)
 
 h3(#EncodingConverter_canconvert). EncodingConverter#can_convert
 
- Boolean *can_convert*(%(arg-type)FontEncoding% encIn,  %(arg-type)FontEncoding% encOut)
+ Boolean *can_convert*(%(arg-type)"FontEncoding":fontencoding.html% encIn,  %(arg-type)"FontEncoding":fontencoding.html% encOut)
 
 Return true if (any text in) multibyte encoding encIn can be converted to
 another one (_encOut_) losslessly.
@@ -89,20 +89,20 @@ on the text to convert in the other).
 
 h3(#EncodingConverter_convert). EncodingConverter#convert
 
- Boolean *convert*(%(arg-type)char% input,  %(arg-type)char% output)
+ Boolean *convert*(%(arg-type)"char":char.html% input,  %(arg-type)"char":char.html% output)
 
- Boolean *convert*(%(arg-type)wchar_t% input,  %(arg-type)wchar_t% output)
+ Boolean *convert*(%(arg-type)"wchar_t":wchar_t.html% input,  %(arg-type)"wchar_t":wchar_t.html% output)
 
- Boolean *convert*(%(arg-type)char% input,  %(arg-type)wchar_t% output)
+ Boolean *convert*(%(arg-type)"char":char.html% input,  %(arg-type)"wchar_t":wchar_t.html% output)
 
- Boolean *convert*(%(arg-type)wchar_t% input,  %(arg-type)char% output)
+ Boolean *convert*(%(arg-type)"wchar_t":wchar_t.html% input,  %(arg-type)"char":char.html% output)
 
 Convert input string according to settings passed to
 "Init":encodingconverterinit.html and writes the result to _output_.
 
- Boolean *convert*(%(arg-type)char% str)
+ Boolean *convert*(%(arg-type)"char":char.html% str)
 
- Boolean *convert*(%(arg-type)wchar_t% str)
+ Boolean *convert*(%(arg-type)"wchar_t":wchar_t.html% str)
 
 Convert input string according to settings passed to
 "Init":encodingconverterinit.html in-place, i.e. write the result to the
@@ -128,7 +128,7 @@ with @USE_WCHAR_T@ set to 0.
 
 h3(#EncodingConverter_getplatformequivalents). EncodingConverter#get_platform_equivalents
 
- "FontEncodingArray":fontencodingarray.html *get_platform_equivalents*(%(arg-type)FontEncoding% enc, 
+ "FontEncodingArray":fontencodingarray.html *get_platform_equivalents*(%(arg-type)"FontEncoding":fontencoding.html% enc, 
                                               %(arg-type)Integer% platform = PLATFORM_CURRENT)
 
 Return equivalents for given font that are used
@@ -183,7 +183,7 @@ item of it.
 
 h3(#EncodingConverter_getallequivalents). EncodingConverter#get_all_equivalents
 
- "FontEncodingArray":fontencodingarray.html *get_all_equivalents*(%(arg-type)FontEncoding% enc)
+ "FontEncodingArray":fontencodingarray.html *get_all_equivalents*(%(arg-type)"FontEncoding":fontencoding.html% enc)
 
 Similar to 
 "get_platform_equivalents":#EncodingConverter_getplatformequivalents, 

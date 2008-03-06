@@ -58,15 +58,15 @@ h3(#Rect_new). Rect.new
 
 Creates a Rect object from x, y, width and height values.
 
-  *Rect.new*(%(arg-type)Point% topLeft,  %(arg-type)Point% bottomRight)
+  *Rect.new*(%(arg-type)"Point":point.html% topLeft,  %(arg-type)"Point":point.html% bottomRight)
 
 Creates a Rect object from top-left and bottom-right points.
 
-  *Rect.new*(%(arg-type)Point% pos,  %(arg-type)Size% size)
+  *Rect.new*(%(arg-type)"Point":point.html% pos,  %(arg-type)"Size":size.html% size)
 
 Creates a Rect object from position and size values.
 
-  *Rect.new*(%(arg-type)Size% size)
+  *Rect.new*(%(arg-type)"Size":size.html% size)
 
 Creates a Rect object from size values at the origin.
 
@@ -101,9 +101,9 @@ Height member.
 
 h3(#Rect_centrein). Rect#centre_in
 
- "Rect":rect.html *centre_in*(%(arg-type)Rect% r,  %(arg-type)Integer% dir = BOTH)
+ "Rect":rect.html *centre_in*(%(arg-type)"Rect":rect.html% r,  %(arg-type)Integer% dir = BOTH)
 
- "Rect":rect.html *center_in*(%(arg-type)Rect% r,  %(arg-type)Integer% dir = BOTH)
+ "Rect":rect.html *center_in*(%(arg-type)"Rect":rect.html% r,  %(arg-type)Integer% dir = BOTH)
 
 Returns the rectangle having the same size as this one but centered relatively
 to the given rectangle r. By default, rectangle is centred in both
@@ -116,12 +116,12 @@ h3(#Rect_contains). Rect#contains
 
  Boolean *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
- Boolean *contains*(%(arg-type)Point% pt)
+ Boolean *contains*(%(arg-type)"Point":point.html% pt)
 
 Returns @true@ if the given point is inside the rectangle (or on its
 boundary) and @false@ otherwise.
 
- Boolean *contains*(%(arg-type)Rect% rect)
+ Boolean *contains*(%(arg-type)"Rect":rect.html% rect)
 
 Returns  if the given rectangle is completely inside this rectangle
 (or touches its boundary) and  otherwise.
@@ -129,13 +129,13 @@ Returns  if the given rectangle is completely inside this rectangle
 
 h3(#Rect_deflate). Rect#deflate
 
-  *deflate*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
+  *deflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
 
-  *deflate*(%(arg-type)Size% diff)
+  *deflate*(%(arg-type)"Size":size.html% diff)
 
-  *deflate*(%(arg-type)Coord% diff)
+  *deflate*(%(arg-type)"Coord":coord.html% diff)
 
- "Rect":rect.html *deflate*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
+ "Rect":rect.html *deflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
 
 Decrease the rectangle size.
 
@@ -253,13 +253,13 @@ Gets the y member.
 
 h3(#Rect_inflate). Rect#inflate
 
-  *inflate*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
+  *inflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
 
-  *inflate*(%(arg-type)Size% diff)
+  *inflate*(%(arg-type)"Size":size.html% diff)
 
-  *inflate*(%(arg-type)Coord% diff)
+  *inflate*(%(arg-type)"Coord":coord.html% diff)
 
- "Rect":rect.html *inflate*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
+ "Rect":rect.html *inflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
 
 Increases the size of the rectangle.
 
@@ -301,7 +301,7 @@ h4. See also
 
 h3(#Rect_intersects). Rect#intersects
 
- Boolean *intersects*(%(arg-type)Rect% rect)
+ Boolean *intersects*(%(arg-type)"Rect":rect.html% rect)
 
 Returns @true@ if this rectangle has a non-empty intersection with the
 rectangle _rect_ and @false@ otherwise.
@@ -317,9 +317,9 @@ Returns @true@ if this rectangle has a width or height less than or equal to
 
 h3(#Rect_offset). Rect#offset
 
-  *offset*(%(arg-type)Coord% dx,  %(arg-type)Coord% dy)
+  *offset*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
 
-  *offset*(%(arg-type)Point% pt)
+  *offset*(%(arg-type)"Point":point.html% pt)
 
 Moves the rectangle by the specified offset. If _dx_ is positive, the
 rectangle is moved to the right, if _dy_ is positive, it is moved to the
@@ -335,7 +335,7 @@ Sets the height.
 
 h3(#Rect_setsize). Rect#set_size
 
-  *set_size*(%(arg-type)Size% s)
+  *set_size*(%(arg-type)"Size":size.html% s)
 
 Sets the size.
 
@@ -367,9 +367,9 @@ Sets the y position.
 
 h3(#Rect_union). Rect#union
 
- "Rect":rect.html *union*(%(arg-type)Rect% rect)
+ "Rect":rect.html *union*(%(arg-type)"Rect":rect.html% rect)
 
- "Rect":rect.html *union*(%(arg-type)Rect% rect)
+ "Rect":rect.html *union*(%(arg-type)"Rect":rect.html% rect)
 
 Modifies the rectangle to contain the bounding box of this rectangle and the
 one passed in as parameter. The const version returns the new rectangle, the
@@ -378,21 +378,21 @@ other one modifies this rectangle in place.
 
 h3(#Rect_assign). Rect#=
 
-  *operator $=$*(%(arg-type)Rect% rect)
+  *operator $=$*(%(arg-type)"Rect":rect.html% rect)
 
 Assignment operator.
 
 
 h3(#Rect_equal). Rect#==
 
- Boolean *operator $==$*(%(arg-type)Rect% rect)
+ Boolean *operator $==$*(%(arg-type)"Rect":rect.html% rect)
 
 Equality operator.
 
 
 h3(#Rect_notequal). Rect#!=
 
- Boolean *operator $!=$*(%(arg-type)Rect% rect)
+ Boolean *operator $!=$*(%(arg-type)"Rect":rect.html% rect)
 
 Inequality operator.
 

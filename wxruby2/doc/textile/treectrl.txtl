@@ -218,11 +218,11 @@ h2. Methods
 
 h3(#TreeCtrl_constr). TreeCtrl.new
 
-  *TreeCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+  *TreeCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style = TR_HAS_BUTTONS, 
-               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "treeCtrl")
 
 Constructor, creating and showing a tree control.
@@ -260,7 +260,7 @@ both selected and unselected items.
 
 h3(#TreeCtrl_appenditem). TreeCtrl#append_item
 
- "TreeItemId":treeitemid.html *append_item*(%(arg-type)TreeItemId% parent,  %(arg-type)String% text, 
+ "TreeItemId":treeitemid.html *append_item*(%(arg-type)"TreeItemId":treeitemid.html% parent,  %(arg-type)String% text, 
                           %(arg-type)Integer% image = -1, 
                           %(arg-type)Integer% selImage = -1, 
                           %(arg-type)Object% item_data = @nil@)
@@ -286,7 +286,7 @@ h4. See also
 
 h3(#TreeCtrl_collapseallchildren). TreeCtrl#collapse_all_children
 
-  *collapse_all_children*(%(arg-type)TreeItemId% item)
+  *collapse_all_children*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Collapses this item and all of its children, recursively.
 
@@ -297,18 +297,18 @@ h4. See also
 
 h3(#TreeCtrl_collapseandreset). TreeCtrl#collapse_and_reset
 
-  *collapse_and_reset*(%(arg-type)TreeItemId% item)
+  *collapse_and_reset*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Collapses the given item and removes all children.
 
 
 h3(#TreeCtrl_create). TreeCtrl#create
 
- Boolean *TreeCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                      %(arg-type)Point% pos = DEFAULT_POSITION, 
-                      %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *TreeCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                      %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                      %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                       %(arg-type)Integer% style = TR_HAS_BUTTONS, 
-                      %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                      %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                       %(arg-type)String% name = "treeCtrl")
 
 Creates the tree control. See "TreeCtrl.new":treectrl.html#TreeCtrl_new for further details.
@@ -316,7 +316,7 @@ Creates the tree control. See "TreeCtrl.new":treectrl.html#TreeCtrl_new for furt
 
 h3(#TreeCtrl_delete). TreeCtrl#delete
 
-  *delete*(%(arg-type)TreeItemId% item)
+  *delete*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Deletes the specified item. A @EVT_TREE_DELETE_ITEM@ event will be
 generated.
@@ -335,7 +335,7 @@ normally such event is generated for each removed item.
 
 h3(#TreeCtrl_deletechildren). TreeCtrl#delete_children
 
-  *delete_children*(%(arg-type)TreeItemId% item)
+  *delete_children*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Deletes all children of the given item (but not the item itself). Note that
 this will *not* generate any events unlike
@@ -354,7 +354,7 @@ passed block, allowing iteration of the control's contents.
 
 h3(#TreeCtrl_editlabel). TreeCtrl#edit_label
 
-  *edit_label*(%(arg-type)TreeItemId% item)
+  *edit_label*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Starts editing the label of the given item. This function generates a
 EVT_TREE_BEGIN_LABEL_EDIT event which can be vetoed so that no
@@ -385,14 +385,14 @@ h4. See also
 
 h3(#TreeCtrl_ensurevisible). TreeCtrl#ensure_visible
 
-  *ensure_visible*(%(arg-type)TreeItemId% item)
+  *ensure_visible*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Scrolls and/or expands items to ensure that the given item is visible.
 
 
 h3(#TreeCtrl_expand). TreeCtrl#expand
 
-  *expand*(%(arg-type)TreeItemId% item)
+  *expand*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Expands the given item.
 
@@ -406,7 +406,7 @@ Expands all items in the tree.
 
 h3(#TreeCtrl_expandallchildren). TreeCtrl#expand_all_children
 
-  *expand_all_children*(%(arg-type)TreeItemId% item)
+  *expand_all_children*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Expands the given item and all its children recursively.
 
@@ -420,13 +420,13 @@ This function is only available in the generic version.
 
 h3(#TreeCtrl_getchildren). TreeCtrl#get_children
 
- Array *get_children*(%(arg-type)TreeItemId% item)
+ Array *get_children*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns all of the children of the item as an Array of Tree Item Ids.
 
 h3(#TreeCtrl_getchildrencount). TreeCtrl#get_children_count
 
- Integer *get_children_count*(%(arg-type)TreeItemId% item, 
+ Integer *get_children_count*(%(arg-type)"TreeItemId":treeitemid.html% item, 
                                  %(arg-type)Boolean% recursively = @true@)
 
 Returns the number of items in the branch. If _recursively_ is @true@,
@@ -452,7 +452,7 @@ if no label is being edited.
 
 h3(#TreeCtrl_getfirstchild). TreeCtrl#get_first_child
 
- "TreeItemId":treeitemid.html *get_first_child*(%(arg-type)TreeItemId% item)
+ "TreeItemId":treeitemid.html *get_first_child*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the id of the first child of an item. Returns @0@ if the item
 has no children. Use  "get_next_child":#TreeCtrl_getnextchild, to
@@ -481,29 +481,29 @@ Returns the current tree control indentation.
 
 h3(#TreeCtrl_getitembackgroundcolour). TreeCtrl#get_item_background_colour
 
- "Colour":colour.html *get_item_background_colour*(%(arg-type)TreeItemId% item)
+ "Colour":colour.html *get_item_background_colour*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the background colour of the item.
 
 
 h3(#TreeCtrl_getitemdata). TreeCtrl#get_item_data
 
- Object *get_item_data*(%(arg-type)TreeItemId% item)
+ Object *get_item_data*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the tree item data associated with the item.
 
 
 h3(#TreeCtrl_getitemfont). TreeCtrl#get_item_font
 
- "Font":font.html *get_item_font*(%(arg-type)TreeItemId% item)
+ "Font":font.html *get_item_font*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the font of the item label.
 
 
 h3(#TreeCtrl_getitemimage). TreeCtrl#get_item_image
 
- Integer *get_item_image*(%(arg-type)TreeItemId% item, 
-                          %(arg-type)int% which = Wx::TREE_ITEM_ICON_NORMAL)
+ Integer *get_item_image*(%(arg-type)"TreeItemId":treeitemid.html% item, 
+                          %(arg-type)"int":int.html% which = Wx::TREE_ITEM_ICON_NORMAL)
 
 Gets the specified item image. The value of _which_ may be:
 
@@ -514,7 +514,7 @@ Gets the specified item image. The value of _which_ may be:
 
 h3(#TreeCtrl_getitemrect). TreeCtrl#get_item_rect
 
-  "Rect":rect.html *get_item_rect*(%(arg-type)TreeItemId% item)
+  "Rect":rect.html *get_item_rect*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Retrieves the pixel location and size of a tree item, including any
 image or button. Returns a the "rectangle":rect.html bounding the
@@ -529,20 +529,20 @@ See also "get_label_rect":#TreeCtrl_getlabelrect.
 
 h3(#TreeCtrl_getitemtext). TreeCtrl#get_item_text
 
- String *get_item_text*(%(arg-type)TreeItemId% item)
+ String *get_item_text*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the item label.
 
 
 h3(#TreeCtrl_getitemtextcolour). TreeCtrl#get_item_text_colour
 
- "Colour":colour.html *get_item_text_colour*(%(arg-type)TreeItemId% item)
+ "Colour":colour.html *get_item_text_colour*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the colour of the item label.
 
 h3(#TreeCtrl_getitemrect). TreeCtrl#get_label_rect
 
-  "Rect":rect.html *get_label_rect*(%(arg-type)TreeItemId% item)
+  "Rect":rect.html *get_label_rect*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Retrieves the pixel location and size of a tree item's label. Returns a
 the "rectangle":rect.html bounding the _item_ label, or @nil@ if the item is
@@ -557,7 +557,7 @@ See also "get_item_rect":#TreeCtrl_getitemrect.
 
 h3(#TreeCtrl_getlastchild). TreeCtrl#get_last_child
 
- "TreeItemId":treeitemid.html *get_last_child*(%(arg-type)TreeItemId% item)
+ "TreeItemId":treeitemid.html *get_last_child*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the last child of the item (or an invalid tree item if this item has no children).
 
@@ -570,7 +570,7 @@ h4. See also
 
 h3(#TreeCtrl_getnextsibling). TreeCtrl#get_next_sibling
 
- "TreeItemId":treeitemid.html *get_next_sibling*(%(arg-type)TreeItemId% item)
+ "TreeItemId":treeitemid.html *get_next_sibling*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the next sibling of the specified item; call "TreeCtrl#get_prev_sibling":treectrl.html#TreeCtrl_getprevsibling for the previous sibling.
 
@@ -583,21 +583,21 @@ h4. See also
 
 h3(#TreeCtrl_getnextvisible). TreeCtrl#get_next_visible
 
- "TreeItemId":treeitemid.html *get_next_visible*(%(arg-type)TreeItemId% item)
+ "TreeItemId":treeitemid.html *get_next_visible*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the next visible item.
 
 
 h3(#TreeCtrl_getitemparent). TreeCtrl#get_item_parent
 
- "TreeItemId":treeitemid.html *get_item_parent*(%(arg-type)TreeItemId% item)
+ "TreeItemId":treeitemid.html *get_item_parent*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the item's parent.
 
 
 h3(#TreeCtrl_getprevsibling). TreeCtrl#get_prev_sibling
 
- "TreeItemId":treeitemid.html *get_prev_sibling*(%(arg-type)TreeItemId% item)
+ "TreeItemId":treeitemid.html *get_prev_sibling*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the previous sibling of the specified item; call "TreeCtrl#get_next_sibling":treectrl.html#TreeCtrl_getnextsibling for the next sibling.
 
@@ -610,7 +610,7 @@ h4. See also
 
 h3(#TreeCtrl_getprevvisible). TreeCtrl#get_prev_visible
 
- "TreeItemId":treeitemid.html *get_prev_visible*(%(arg-type)TreeItemId% item)
+ "TreeItemId":treeitemid.html *get_prev_visible*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns the previous visible item.
 
@@ -637,7 +637,7 @@ always return 0, an invalid tree id.
 
 h3(#TreeCtrl_getitemselectedimage). TreeCtrl#get_item_selected_image
 
- Integer *get_item_selected_image*(%(arg-type)TreeItemId% item)
+ Integer *get_item_selected_image*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Gets the selected item image (this function is obsolete, use
 @GetItemImage(item, TreeItemIcon_Selected@) instead).
@@ -655,7 +655,7 @@ this style.
 
 h3(#TreeCtrl_getselections). TreeCtrl#get_selections
 
- unsigned int *get_selections*(%(arg-type)ArrayTreeItemIds% selection)
+ unsigned int *get_selections*(%(arg-type)"ArrayTreeItemIds":arraytreeitemids.html% selection)
 
 Fills the array of tree items passed in with the currently selected items. This
 function can be called only if the control has the TR_MULTIPLE style.
@@ -670,7 +670,7 @@ Returns the state image list (from which application-defined state images are ta
 
 h3(#TreeCtrl_hittest). TreeCtrl#hit_test
 
- "TreeItemId":treeitemid.html *hit_test*(%(arg-type)Point% point,  %(arg-type)Integer% flags)
+ "TreeItemId":treeitemid.html *hit_test*(%(arg-type)"Point":point.html% point,  %(arg-type)Integer% flags)
 
 Calculates which (if any) item is under the given point, returning the tree item
 id at this point plus extra information _flags_. _flags_ is a bitlist of the following:
@@ -697,8 +697,8 @@ id at this point plus extra information _flags_. _flags_ is a bitlist of the fol
 
 h3(#TreeCtrl_insertitem). TreeCtrl#insert_item
 
- "TreeItemId":treeitemid.html *insert_item*(%(arg-type)TreeItemId% parent, 
-                          %(arg-type)TreeItemId% previous,  %(arg-type)String% text, 
+ "TreeItemId":treeitemid.html *insert_item*(%(arg-type)"TreeItemId":treeitemid.html% parent, 
+                          %(arg-type)"TreeItemId":treeitemid.html% previous,  %(arg-type)String% text, 
                           %(arg-type)Integer% image = -1, 
                           %(arg-type)Integer% selImage = -1, 
                           %(arg-type)Object% item_data = @nil@)
@@ -714,7 +714,7 @@ both selected and unselected items.
 
 h3(#TreeCtrl_insertitembefore). TreeCtrl#insert_item_before
 
-	"TreeItemId":treeitemid.html *insert_item_before*(%(arg-type)TreeItemId% parent, 
+	"TreeItemId":treeitemid.html *insert_item_before*(%(arg-type)"TreeItemId":treeitemid.html% parent, 
 	                         %(arg-type)Integer% before,  %(arg-type)String% text, 
 	                         %(arg-type)Integer% image = -1, 
 	                         %(arg-type)Integer% selImage = -1, 
@@ -732,7 +732,7 @@ both selected and unselected items.
 
 h3(#TreeCtrl_isbold). TreeCtrl#is_bold
 
- Boolean *is_bold*(%(arg-type)TreeItemId% item)
+ Boolean *is_bold*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns @true@ if the given item is in bold state.
 
@@ -748,35 +748,35 @@ Returns  if the control is empty (i.e. has no items, even no root one).
 
 h3(#TreeCtrl_isexpanded). TreeCtrl#is_expanded
 
- Boolean *is_expanded*(%(arg-type)TreeItemId% item)
+ Boolean *is_expanded*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns @true@ if the item is expanded (only makes sense if it has children).
 
 
 h3(#TreeCtrl_isselected). TreeCtrl#is_selected
 
- Boolean *is_selected*(%(arg-type)TreeItemId% item)
+ Boolean *is_selected*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns @true@ if the item is selected.
 
 
 h3(#TreeCtrl_isvisible). TreeCtrl#is_visible
 
- Boolean *is_visible*(%(arg-type)TreeItemId% item)
+ Boolean *is_visible*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns @true@ if the item is visible (it might be outside the view, or not expanded).
 
 
 h3(#TreeCtrl_itemhaschildren). TreeCtrl#item_has_children
 
- Boolean *item_has_children*(%(arg-type)TreeItemId% item)
+ Boolean *item_has_children*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Returns @true@ if the item has children.
 
 
 h3(#TreeCtrl_oncompareitems). TreeCtrl#on_compare_items
 
- Integer *on_compare_items*(%(arg-type)TreeItemId% item1,  %(arg-type)TreeItemId% item2)
+ Integer *on_compare_items*(%(arg-type)"TreeItemId":treeitemid.html% item1,  %(arg-type)"TreeItemId":treeitemid.html% item2)
 
 Override this function in the derived class to change the sort order of the
 items in the tree control. The function should return a negative, zero or
@@ -787,7 +787,7 @@ See also: "sort_children":#TreeCtrl_sortchildren
 
 h3(#TreeCtrl_prependitem). TreeCtrl#prepend_item
 
- "TreeItemId":treeitemid.html *prepend_item*(%(arg-type)TreeItemId% parent,  %(arg-type)String% text, 
+ "TreeItemId":treeitemid.html *prepend_item*(%(arg-type)"TreeItemId":treeitemid.html% parent,  %(arg-type)String% text, 
                            %(arg-type)Integer% image = -1, 
                            %(arg-type)Integer% selImage = -1, 
                            %(arg-type)Object% item_data = @nil@)
@@ -803,14 +803,14 @@ both selected and unselected items.
 
 h3(#TreeCtrl_scrollto). TreeCtrl#scroll_to
 
-  *scroll_to*(%(arg-type)TreeItemId% item)
+  *scroll_to*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Scrolls the specified item into view.
 
 
 h3(#TreeCtrl_selectitem). TreeCtrl#select_item
 
-  *select_item*(%(arg-type)TreeItemId% item,  %(arg-type)Boolean% select = )
+  *select_item*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)Boolean% select = )
 
 Selects the given item. In multiple selection controls, can be also used to
 deselect a currently selected item if the value of select is false.
@@ -818,7 +818,7 @@ deselect a currently selected item if the value of select is false.
 
 h3(#TreeCtrl_setbuttonsimagelist). TreeCtrl#set_buttons_image_list
 
-  *set_buttons_image_list*(%(arg-type)ImageList% imageList)
+  *set_buttons_image_list*(%(arg-type)"ImageList":imagelist.html% imageList)
 
 Sets the buttons image list (from which application-defined button images are taken).
 
@@ -837,20 +837,20 @@ Sets the indentation for the tree control.
 
 h3(#TreeCtrl_setimagelist). TreeCtrl#set_image_list
 
-  *set_image_list*(%(arg-type)ImageList% imageList)
+  *set_image_list*(%(arg-type)"ImageList":imagelist.html% imageList)
 
 Sets the normal image list.
 
 h3(#TreeCtrl_setitembackgroundcolour). TreeCtrl#set_item_background_colour
 
-  *set_item_background_colour*(%(arg-type)TreeItemId% item,  %(arg-type)Colour% col)
+  *set_item_background_colour*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)"Colour":colour.html% col)
 
 Sets the colour of the item's background.
 
 
 h3(#TreeCtrl_setitembold). TreeCtrl#set_item_bold
 
-  *set_item_bold*(%(arg-type)TreeItemId% item,  %(arg-type)Boolean% bold = @true@)
+  *set_item_bold*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)Boolean% bold = @true@)
 
 Makes item appear in bold font if _bold_ parameter is @true@ or resets it to
 the normal state.
@@ -860,7 +860,7 @@ See also: "is_bold":#TreeCtrl_isbold
 
 h3(#TreeCtrl_setitemdata). TreeCtrl#set_item_data
 
-  *set_item_data*(%(arg-type)TreeItemId% item,  %(arg-type)Object% data)
+  *set_item_data*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)Object% data)
 
 Sets the item client data.
 
@@ -868,7 +868,7 @@ Sets the item client data.
 
 h3(#TreeCtrl_setitemdrophighlight). TreeCtrl#set_item_drop_highlight
 
-  *set_item_drop_highlight*(%(arg-type)TreeItemId% item,  %(arg-type)Boolean% highlight = @true@)
+  *set_item_drop_highlight*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)Boolean% highlight = @true@)
 
 Gives the item the visual feedback for Drag'n'Drop actions, which is
 useful if something is dragged from the outside onto the tree control
@@ -877,7 +877,7 @@ is implemented internally).
 
 h3(#TreeCtrl_setitemfont). TreeCtrl#set_item_font
 
-  *set_item_font*(%(arg-type)TreeItemId% item,  %(arg-type)Font% font)
+  *set_item_font*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)"Font":font.html% font)
 
 Sets the item's font. All items in the tree should have the same height to avoid
 text clipping, so the fonts height should be the same for all of them,
@@ -890,7 +890,7 @@ h4. See also
 
 h3(#TreeCtrl_setitemhaschildren). TreeCtrl#set_item_has_children
 
-  *set_item_has_children*(%(arg-type)TreeItemId% item,  %(arg-type)Boolean% hasChildren = @true@)
+  *set_item_has_children*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)Boolean% hasChildren = @true@)
 
 Force appearance of the button next to the item. This is useful to
 allow the user to expand the items which don't have any children now,
@@ -900,8 +900,8 @@ usage and loading time.
 
 h3(#TreeCtrl_setitemimage). TreeCtrl#set_item_image
 
-  *set_item_image*(%(arg-type)TreeItemId% item,  %(arg-type)Integer% image, 
-                 %(arg-type)TreeItemIcon% which = TreeItemIcon_Normal)
+  *set_item_image*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)Integer% image, 
+                 %(arg-type)"TreeItemIcon":treeitemicon.html% which = TreeItemIcon_Normal)
 
 Sets the specified item image. See "get_item_image":#TreeCtrl_getitemimage
 for the description of the _which_ parameter.
@@ -909,21 +909,21 @@ for the description of the _which_ parameter.
 
 h3(#TreeCtrl_setitemselectedimage). TreeCtrl#set_item_selected_image
 
-  *set_item_selected_image*(%(arg-type)TreeItemId% item,  %(arg-type)Integer% selImage)
+  *set_item_selected_image*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)Integer% selImage)
 
 Sets the selected item image (this function is obsolete, use @SetItemImage(item, TreeItemIcon_Selected@) instead).
 
 
 h3(#TreeCtrl_setitemtext). TreeCtrl#set_item_text
 
-  *set_item_text*(%(arg-type)TreeItemId% item,  %(arg-type)String% text)
+  *set_item_text*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)String% text)
 
 Sets the item label.
 
 
 h3(#TreeCtrl_setitemtextcolour). TreeCtrl#set_item_text_colour
 
-  *set_item_text_colour*(%(arg-type)TreeItemId% item,  %(arg-type)Colour% col)
+  *set_item_text_colour*(%(arg-type)"TreeItemId":treeitemid.html% item,  %(arg-type)"Colour":colour.html% col)
 
 Sets the colour of the item's text.
 
@@ -943,7 +943,7 @@ h4. See also
 
 h3(#TreeCtrl_setstateimagelist). TreeCtrl#set_state_image_list
 
-  *set_state_image_list*(%(arg-type)ImageList% imageList)
+  *set_state_image_list*(%(arg-type)"ImageList":imagelist.html% imageList)
 
 Sets the state image list (from which application-defined state images are taken).
 
@@ -958,7 +958,7 @@ The new mode takes effect immediately.
 
 h3(#TreeCtrl_sortchildren). TreeCtrl#sort_children
 
-  *sort_children*(%(arg-type)TreeItemId% item)
+  *sort_children*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Sorts the children of the given item using
 "on_compare_items":#TreeCtrl_oncompareitems method of TreeCtrl. You
@@ -972,14 +972,14 @@ h4. See also
 
 h3(#TreeCtrl_toggle). TreeCtrl#toggle
 
-  *toggle*(%(arg-type)TreeItemId% item)
+  *toggle*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Toggles the given item between collapsed and expanded states.
 
 
 h3(#TreeCtrl_toggleitemselection). TreeCtrl#toggle_item_selection
 
-  *toggle_item_selection*(%(arg-type)TreeItemId% item)
+  *toggle_item_selection*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Toggles the given item between selected and unselected states. For
 multiselection controls only.
@@ -992,7 +992,7 @@ Removes the selection from the currently selected item (if any).
 
 h3(#TreeCtrl_traverse). TreeCtrl#traverse
 
-  *traverse*(%(arg-type)TreeItemId% start_item = root_id) { &#124; item_id &#124; ... }
+  *traverse*(%(arg-type)"TreeItemId":treeitemid.html% start_item = root_id) { &#124; item_id &#124; ... }
 
 Recurses over the TreeCtrl's items, passing each TreeItemId successively
 into the passed block. This TreeItemId can be used as an argument to
@@ -1015,7 +1015,7 @@ all items if it does have this style.
 
 h3(#TreeCtrl_unselectitem). TreeCtrl#unselect_item
 
-  *unselect_item*(%(arg-type)TreeItemId% item)
+  *unselect_item*(%(arg-type)"TreeItemId":treeitemid.html% item)
 
 Unselects the given item. This works in multiselection controls only.
 

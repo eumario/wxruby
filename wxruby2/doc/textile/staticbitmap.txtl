@@ -48,9 +48,9 @@ h2. Methods
 
 h3(#StaticBitmap_constr). StaticBitmap.new
 
-  *StaticBitmap.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Bitmap% label, 
-                   %(arg-type)Point% pos = DEFAULT_POSITION, 
-                   %(arg-type)Size% size = DEFAULT_SIZE, 
+  *StaticBitmap.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% label, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                    %(arg-type)Integer% style = 0, 
                    %(arg-type)String% name = "staticBitmap")
 
@@ -73,9 +73,9 @@ h4. See also
 
 h3(#StaticBitmap_create). StaticBitmap#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Bitmap% label, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = 0, 
                 %(arg-type)String% name = "staticBitmap")
 
@@ -110,7 +110,7 @@ h4. See also
 
 h3(#StaticBitmap_setbitmap). StaticBitmap#set_bitmap
 
-  *set_bitmap*(%(arg-type)Bitmap% label)
+  *set_bitmap*(%(arg-type)"Bitmap":bitmap.html% label)
 
 Sets the bitmap label.
 
@@ -125,7 +125,7 @@ h4. See also
 
 h3(#StaticBitmap_seticon). StaticIcon#set_icon
 
-  *set_icon*(%(arg-type)Icon% label)
+  *set_icon*(%(arg-type)"Icon":icon.html% label)
 
 Sets the label to the given icon.
 

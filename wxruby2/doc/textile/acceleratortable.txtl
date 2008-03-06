@@ -52,7 +52,7 @@ h2. Methods
 
 h3(#AcceleratorTable_new). AcceleratorTable.new
 
-  *AcceleratorTable.new*(%(arg-type)Array% entries)
+  *AcceleratorTable.new*(%(arg-type)"Array":array.html% entries)
 
 Creates from an array of "AcceleratorEntry":acceleratorentry.html objects.
 
@@ -68,7 +68,7 @@ Returns true if the accelerator table is valid.
 
 h3(#AcceleratorTable_equal). AcceleratorTable#==
 
- Boolean *==*(%(arg-type)AcceleratorTable% accel)
+ Boolean *==*(%(arg-type)"AcceleratorTable":acceleratortable.html% accel)
 
 Equality operator. This operator tests whether the internal data pointers are
 equal (a fast test).

@@ -166,11 +166,11 @@ h2. Methods
 
 h3(#ListCtrl_new). ListCtrl.new
 
-  *ListCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-               %(arg-type)Point% pos = DEFAULT_POSITION, 
-               %(arg-type)Size% size = DEFAULT_SIZE, 
+  *ListCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style = @LC_ICON@, 
-               %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = ListCtrlNameStr)
 
 Constructor, creating and showing a list control.
@@ -217,11 +217,11 @@ Deletes all items and all columns.
 
 h3(#ListCtrl_create). ListCtrl#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% style = LC_ICON, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = ListCtrlNameStr)
 
 Creates the list control. See "ListCtrl.new":listctrl.html#ListCtrl_new for further details.
@@ -294,7 +294,7 @@ the beginning if _start_ is -1.
 Find an item whose data matches this data, starting from _start_ or
 the beginning if 'start' is -1.
 
- Integer *find_item*(%(arg-type)Integer% start,  %(arg-type)Point% pt, 
+ Integer *find_item*(%(arg-type)Integer% start,  %(arg-type)"Point":point.html% pt, 
                    %(arg-type)Integer% direction)
 
 Find an item nearest this position in the specified direction, starting from
@@ -303,7 +303,7 @@ _start_ or the beginning if _start_ is -1.
 
 h3(#ListCtrl_getcolumn). ListCtrl#get_column
 
- Boolean *get_column*(%(arg-type)Integer% col,  %(arg-type)ListItem% item)
+ Boolean *get_column*(%(arg-type)Integer% col,  %(arg-type)"ListItem":listitem.html% item)
 
 Gets information about this column. See "ListCtrl#set_item":listctrl.html#ListCtrl_setitem for more
 information.
@@ -409,7 +409,7 @@ Returns the item's font.
 
 h3(#ListCtrl_getitemposition). ListCtrl#get_item_position
 
- Boolean *get_item_position*(%(arg-type)Integer% item,  %(arg-type)Point% pos)
+ Boolean *get_item_position*(%(arg-type)Integer% item,  %(arg-type)"Point":point.html% pos)
 
 Returns the position of the item, in icon or small icon view.
 
@@ -557,7 +557,7 @@ list or report views (this is a limitation of the native Win32 control).
 
 h3(#ListCtrl_hittest). ListCtrl#hit_test
 
- [ Integer item, Integer flags ] = *hit_test*(%(arg-type)Point% point)
+ [ Integer item, Integer flags ] = *hit_test*(%(arg-type)"Point":point.html% point)
 
 Determines which item (if any) is at the specified point, giving details
 in _flags_. Returns a two-element array, with the first element being
@@ -583,7 +583,7 @@ point.  _flags_ will be a combination of the following flags:
 
 h3(#ListCtrl_insertcolumn). ListCtrl#insert_column
 
- Integer *insert_column*(%(arg-type)Integer% col,  %(arg-type)ListItem% info)
+ Integer *insert_column*(%(arg-type)Integer% col,  %(arg-type)"ListItem":listitem.html% info)
 
  Integer *insert_column*(%(arg-type)Integer% col,  %(arg-type)String% heading, 
                        %(arg-type)Integer% format = LIST_FORMAT_LEFT, 
@@ -596,7 +596,7 @@ For report view mode (only), inserts a column. For more details, see "ListCtrl#s
 
 h3(#ListCtrl_insertitem). ListCtrl#insert_item
 
- Integer *insert_item*(%(arg-type)ListItem% info)
+ Integer *insert_item*(%(arg-type)"ListItem":listitem.html% info)
 
 Inserts an item, returning the index of the new item if successful,
 -1 otherwise.
@@ -729,7 +729,7 @@ the number of pixels to scroll vertically.
 
 h3(#ListCtrl_setbackgroundcolour). ListCtrl#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% col)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% col)
 
 Sets the background colour (GetBackgroundColour already implicit in
 Window class).
@@ -737,7 +737,7 @@ Window class).
 
 h3(#ListCtrl_setcolumn). ListCtrl#set_column
 
- Boolean *set_column*(%(arg-type)Integer% col,  %(arg-type)ListItem% item)
+ Boolean *set_column*(%(arg-type)Integer% col,  %(arg-type)"ListItem":listitem.html% item)
 
 Sets information about this column. See "ListCtrl#set_item":listctrl.html#ListCtrl_setitem for more
 information.
@@ -758,7 +758,7 @@ In small or normal icon view, _col_ must be -1, and the column width is set for 
 
 h3(#ListCtrl_setimagelist). ListCtrl#set_image_list
 
-  *set_image_list*(%(arg-type)ImageList% imageList,  %(arg-type)Integer% which)
+  *set_image_list*(%(arg-type)"ImageList":imagelist.html% imageList,  %(arg-type)Integer% which)
 
 Sets the image list associated with the control. _which_ is one of
 IMAGE_LIST_NORMAL, IMAGE_LIST_SMALL, IMAGE_LIST_STATE (the last is unimplemented).
@@ -768,7 +768,7 @@ h3(#ListCtrl_setitem). ListCtrl#set_item
                      %(arg-type)String% label, 
                     %(arg-type)Integer% imageId = -1)
 
- Boolean *set_item*(%(arg-type)ListItem% info)
+ Boolean *set_item*(%(arg-type)"ListItem":listitem.html% info)
 
 Sets information about the item. The first form of the method sets the
 label in the specified row and column to the specified string.
@@ -817,7 +817,7 @@ colour/font is used.
 
 h3(#ListCtrl_setitembackgroundcolour). ListCtrl#set_item_background_colour
 
-  *set_item_background_colour*(%(arg-type)Integer% item,  %(arg-type)Colour% col)
+  *set_item_background_colour*(%(arg-type)Integer% item,  %(arg-type)"Colour":colour.html% col)
 
 Sets the background colour for this item. This function only works in report view.
 
@@ -847,7 +847,7 @@ created with @Wx::LC_REPORT@, item data is still stored per-row.
 
 h3(#ListCtrl_setitemfont). ListCtrl#set_item_font
 
-  *set_item_font*(%(arg-type)Integer% item,  %(arg-type)Font% font)
+  *set_item_font*(%(arg-type)Integer% item,  %(arg-type)"Font":font.html% font)
 
 Sets the item's font.
 
@@ -879,7 +879,7 @@ The image is an index into the image list associated with the list control.
 
 h3(#ListCtrl_setitemposition). ListCtrl#set_item_position
 
- Boolean *set_item_position*(%(arg-type)Integer% item,  %(arg-type)Point% pos)
+ Boolean *set_item_position*(%(arg-type)Integer% item,  %(arg-type)"Point":point.html% pos)
 
 Sets the position of the item, in icon or small icon view. Windows only.
 
@@ -903,7 +903,7 @@ Sets the item text for this item.
 
 h3(#ListCtrl_setitemtextcolour). ListCtrl#set_item_text_colour
 
-  *set_item_text_colour*(%(arg-type)Integer% item,  %(arg-type)Colour% col)
+  *set_item_text_colour*(%(arg-type)Integer% item,  %(arg-type)"Colour":colour.html% col)
 
 Sets the colour for this item. This function only works in report view.
 
@@ -920,7 +920,7 @@ Adds or removes a single window style.
 
 h3(#ListCtrl_settextcolour). ListCtrl#set_text_colour
 
-  *set_text_colour*(%(arg-type)Colour% col)
+  *set_text_colour*(%(arg-type)"Colour":colour.html% col)
 
 Sets the text colour of the list control.
 

@@ -46,7 +46,7 @@ h2. Methods
 
 h3(#SizeEvent_new). SizeEvent.new
 
-  *SizeEvent.new*(%(arg-type)Size% sz,  %(arg-type)Integer% id = 0)
+  *SizeEvent.new*(%(arg-type)"Size":size.html% sz,  %(arg-type)Integer% id = 0)
 
 Constructor.
 

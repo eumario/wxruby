@@ -168,7 +168,7 @@ See also the help sample for notes on how to specify section numbers for various
 
 h3(#HelpController_displaytextpopup). HelpController#display_text_popup
 
- Boolean *display_text_popup*(%(arg-type)String% text,  %(arg-type)Point% pos)
+ Boolean *display_text_popup*(%(arg-type)String% text,  %(arg-type)"Point":point.html% pos)
 
 Displays the text in a popup window, if possible.
 
@@ -176,7 +176,7 @@ Returns false if unsuccessful or not implemented.
 
 h3(#HelpController_getframeparameters). HelpController#get_frame_parameters
 
- "Frame":frame.html *get_frame_parameters*(%(arg-type)Size% size = nil,  %(arg-type)Point% pos = nil, 
+ "Frame":frame.html *get_frame_parameters*(%(arg-type)"Size":size.html% size = nil,  %(arg-type)"Point":point.html% pos = nil, 
                               %(arg-type)Boolean% newFrameEachTime = nil)
 
 HtmlHelpController returns the frame, size and position.
@@ -200,7 +200,7 @@ by CHMHelpController, WinHelpController and HtmlHelpController.
 h3(#HelpController_keywordsearch). HelpController#keyword_search
 
  Boolean *keyword_search*(%(arg-type)String% keyWord, 
-                        %(arg-type)HelpSearchMode% mode = HELP_SEARCH_ALL)
+                        %(arg-type)"HelpSearchMode":helpsearchmode.html% mode = HELP_SEARCH_ALL)
 
 If the help viewer is not running, runs it, and searches for sections matching
 the given keyword. If one match is found, the file is displayed at this
@@ -239,8 +239,8 @@ This does not work for all help controllers.
 
 h3(#HelpController_setframeparameters). HelpController#set_frame_parameters
 
-  *set_frame_parameters*(%(arg-type)String% title,  %(arg-type)Size% size, 
-                       %(arg-type)Point% pos = DEFAULT_POSITION, 
+  *set_frame_parameters*(%(arg-type)String% title,  %(arg-type)"Size":size.html% size, 
+                       %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
                        %(arg-type)Boolean% newFrameEachTime = false)
 
 For HtmlHelpController, the title is set (again with \%s indicating the
@@ -251,7 +251,7 @@ For all other help controllers this function has no effect.
 
 h3(#HelpController_setparentwindow). HelpController#set_parent_window
 
-  *set_parent_window*(%(arg-type)Window% parentWindow)
+  *set_parent_window*(%(arg-type)"Window":window.html% parentWindow)
 
 Sets the window to be used as the parent for the help window. This is used
 by CHMHelpController, WinHelpController and HtmlHelpController.

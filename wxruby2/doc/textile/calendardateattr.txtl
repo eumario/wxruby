@@ -53,48 +53,48 @@ h2. Methods
 
 h3(#CalendarDateAttr_wxcalendardateattr). CalendarDateAttr.new
 
-  *CalendarDateAttr.new*(%(arg-type)Colour% colText,  %(arg-type)Colour% colBack = NullColour, 
-                       %(arg-type)Colour% colBorder = NullColour, 
-                       %(arg-type)Font% font = NullFont, 
-                       %(arg-type)CalendarDateBorder% border = CAL_BORDER_NONE)
+  *CalendarDateAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack = NullColour, 
+                       %(arg-type)"Colour":colour.html% colBorder = NullColour, 
+                       %(arg-type)"Font":font.html% font = NullFont, 
+                       %(arg-type)"CalendarDateBorder":calendardateborder.html% border = CAL_BORDER_NONE)
 
-  *CalendarDateAttr.new*(%(arg-type)CalendarDateBorder% border, 
-                       %(arg-type)Colour% colBorder = NullColour)
+  *CalendarDateAttr.new*(%(arg-type)"CalendarDateBorder":calendardateborder.html% border, 
+                       %(arg-type)"Colour":colour.html% colBorder = NullColour)
 
 The constructors.
 
 
 h3(#CalendarDateAttr_settextcolour). CalendarDateAttr#set_text_colour
 
-  *set_text_colour*(%(arg-type)Colour% colText)
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colText)
 
 Sets the text (foreground) colour to use.
 
 
 h3(#CalendarDateAttr_setbackgroundcolour). CalendarDateAttr#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% colBack)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colBack)
 
 Sets the text background colour to use.
 
 
 h3(#CalendarDateAttr_setbordercolour). CalendarDateAttr#set_border_colour
 
-  *set_border_colour*(%(arg-type)Colour% col)
+  *set_border_colour*(%(arg-type)"Colour":colour.html% col)
 
 Sets the border colour to use.
 
 
 h3(#CalendarDateAttr_setfont). CalendarDateAttr#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets the font to use.
 
 
 h3(#CalendarDateAttr_setborder). CalendarDateAttr#set_border
 
-  *set_border*(%(arg-type)CalendarDateBorder% border)
+  *set_border*(%(arg-type)"CalendarDateBorder":calendardateborder.html% border)
 
 Sets the "border kind":calendardateattr.html
 

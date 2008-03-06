@@ -316,7 +316,7 @@ h4. See also
 
 h3(#Joystick_setcapture). Joystick#set_capture
 
- Boolean *set_capture*(%(arg-type)Window% win,  %(arg-type)Integer% pollingFreq = 0)
+ Boolean *set_capture*(%(arg-type)"Window":window.html% win,  %(arg-type)Integer% pollingFreq = 0)
 
 Sets the capture to direct joystick events to _win_.
 

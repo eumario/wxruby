@@ -33,7 +33,7 @@ h2. Methods
 
 h3(#PrintDialog_new). PrintDialog.new
 
-  *PrintDialog.new*(%(arg-type)Window% parent,  %(arg-type)PrintDialogData% data = nil)
+  *PrintDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"PrintDialogData":printdialogdata.html% data = nil)
 
 Constructor. Pass a parent window, and optionally a pointer to a block of print
 data, which will be copied to the print dialog's print data.

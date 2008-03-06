@@ -296,7 +296,7 @@ h2. Methods
 
 h3(#Accessible_wxaccessible). Accessible.new
 
-  *Accessible.new*(%(arg-type)Window% win = nil)
+  *Accessible.new*(%(arg-type)"Window":window.html% win = nil)
 
 Constructor, taking an optional window. The object can be associated with
 a window later.
@@ -315,7 +315,7 @@ is no default action for this window (e.g. an edit control).
 
 h3(#Accessible_getchild). Accessible#get_child
 
- "AccStatus":accstatus.html *get_child*(%(arg-type)Integer% childId,  %(arg-type)Accessible% child)
+ "AccStatus":accstatus.html *get_child*(%(arg-type)Integer% childId,  %(arg-type)"Accessible":accessible.html% child)
 
 Gets the specified child (starting from 1). If _child_ is NULL and the return value is ACC_OK,
 this means that the child is a simple element and not an accessible object.
@@ -346,7 +346,7 @@ Returns the description for this object or a child.
 
 h3(#Accessible_getfocus). Accessible#get_focus
 
- "AccStatus":accstatus.html *get_focus*(%(arg-type)Integer% childId,  %(arg-type)Accessible% child)
+ "AccStatus":accstatus.html *get_focus*(%(arg-type)Integer% childId,  %(arg-type)"Accessible":accessible.html% child)
 
 Gets the window with the keyboard focus. If childId is 0 and child is NULL, no object in
 this subhierarchy has the focus. If this object has the focus, child should be 'this'.
@@ -368,7 +368,7 @@ Return e.g. ALT+K.
 
 h3(#Accessible_getlocation). Accessible#get_location
 
- "AccStatus":accstatus.html *get_location*(%(arg-type)Rect% rect,  %(arg-type)Integer% elementId)
+ "AccStatus":accstatus.html *get_location*(%(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% elementId)
 
 Returns the rectangle for this object (id is 0) or a child element (id is greater than 0).
 _rect_ is in screen coordinates.
@@ -381,20 +381,20 @@ Gets the name of the specified object.
 
 h3(#Accessible_getparent). Accessible#get_parent
 
- "AccStatus":accstatus.html *get_parent*(%(arg-type)Accessible% parent)
+ "AccStatus":accstatus.html *get_parent*(%(arg-type)"Accessible":accessible.html% parent)
 
 Returns the parent of this object, or NULL.
 
 h3(#Accessible_getrole). Accessible#get_role
 
- "AccStatus":accstatus.html *get_role*(%(arg-type)Integer% childId,  %(arg-type)AccRole% role)
+ "AccStatus":accstatus.html *get_role*(%(arg-type)Integer% childId,  %(arg-type)"AccRole":accrole.html% role)
 
 Returns a role constant describing this object. See "Accessible":accessible.html for a list
 of these roles.
 
 h3(#Accessible_getselections). Accessible#get_selections
 
- "AccStatus":accstatus.html *get_selections*(%(arg-type)Variant% selections)
+ "AccStatus":accstatus.html *get_selections*(%(arg-type)"Variant":variant.html% selections)
 
 Gets a variant representing the selected children
 of this object.
@@ -431,8 +431,8 @@ Returns the window associated with this object.
 
 h3(#Accessible_hittest). Accessible#hit_test
 
- "AccStatus":accstatus.html *hit_test*(%(arg-type)Point% pt,  %(arg-type)Integer% childId, 
-                      %(arg-type)Accessible% childObject)
+ "AccStatus":accstatus.html *hit_test*(%(arg-type)"Point":point.html% pt,  %(arg-type)Integer% childId, 
+                      %(arg-type)"Accessible":accessible.html% childObject)
 
 Returns a status value and object id to indicate whether the given point was on this or
 a child object. Can return either a child object, or an integer
@@ -442,16 +442,16 @@ _pt_ is in screen coordinates.
 
 h3(#Accessible_navigate). Accessible#navigate
 
- "AccStatus":accstatus.html *navigate*(%(arg-type)NavDir% navDir,  %(arg-type)Integer% fromId, 
+ "AccStatus":accstatus.html *navigate*(%(arg-type)"NavDir":navdir.html% navDir,  %(arg-type)Integer% fromId, 
                       %(arg-type)Integer% toId, 
-                      %(arg-type)Accessible% toObject)
+                      %(arg-type)"Accessible":accessible.html% toObject)
 
 Navigates from _fromId_ to _toId_/_toObject_.
 
 h3(#Accessible_notifyevent). Accessible#notify_event
 
-  *notify_event*(%(arg-type)Integer% eventType,  %(arg-type)Window% window, 
-               %(arg-type)AccObject% objectType, 
+  *notify_event*(%(arg-type)Integer% eventType,  %(arg-type)"Window":window.html% window, 
+               %(arg-type)"AccObject":accobject.html% objectType, 
                %(arg-type)Integer% objectType)
 
 Allows the application to send an event when something changes in an accessible object.
@@ -459,14 +459,14 @@ Allows the application to send an event when something changes in an accessible 
 h3(#Accessible_select). Accessible#select
 
  "AccStatus":accstatus.html *select*(%(arg-type)Integer% childId, 
-                    %(arg-type)AccSelectionFlags% selectFlags)
+                    %(arg-type)"AccSelectionFlags":accselectionflags.html% selectFlags)
 
 Selects the object or child. See "Accessible":accessible.html for a list
 of the selection actions.
 
 h3(#Accessible_setwindow). Accessible#set_window
 
-  *set_window*(%(arg-type)Window% window)
+  *set_window*(%(arg-type)"Window":window.html% window)
 
 Sets the window associated with this object.
 

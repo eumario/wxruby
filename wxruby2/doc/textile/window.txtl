@@ -244,9 +244,9 @@ h2. Methods
 
 h3(#Window_new). Window.new
 
-  *Window.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
-             %(arg-type)Point% pos = DEFAULT_POSITION, 
-             %(arg-type)Size% size = DEFAULT_SIZE,  
+  *Window.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+             %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+             %(arg-type)"Size":size.html% size = DEFAULT_SIZE,  
              %(arg-type)Integer% style = 0, 
              %(arg-type)String% name = "") { ... }
 
@@ -292,7 +292,7 @@ h4. See also
 
 h3(#Window_addchild). Window#add_child
 
-  *add_child*(%(arg-type)Window% child)
+  *add_child*(%(arg-type)"Window":window.html% child)
 
 Adds a child window.  This is called automatically by window creation
 functions so should not be required by the application programmer.
@@ -307,7 +307,7 @@ h4. Parameters
 
 h3(#Window_cachebestsize). Window#cache_best_size
 
-  *cache_best_size*(%(arg-type)Size% size)
+  *cache_best_size*(%(arg-type)"Size":size.html% size)
 
 Sets the cached best size value.
 
@@ -408,7 +408,7 @@ h3(#Window_clienttoscreen). Window#client_to_screen
 
  x, y = *client_to_screen*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
- "Point":point.html = *client_to_screen*(%(arg-type)Point% pt)
+ "Point":point.html = *client_to_screen*(%(arg-type)"Point":point.html% pt)
 
 Converts to screen coordinates from coordinates relative to this
 window. The method may be passed _either_ two integers, representing the 
@@ -457,9 +457,9 @@ h4. See also
 
 h3(#Window_convertdialogtopixels). Window#convert_dialog_to_pixels
 
- "Point":point.html *convert_dialog_to_pixels*(%(arg-type)Point% pt)
+ "Point":point.html *convert_dialog_to_pixels*(%(arg-type)"Point":point.html% pt)
 
- "Size":size.html *convert_dialog_to_pixels*(%(arg-type)Size% sz)
+ "Size":size.html *convert_dialog_to_pixels*(%(arg-type)"Size":size.html% sz)
 
 Converts a point or size from dialog units to pixels.
 
@@ -479,9 +479,9 @@ h4. See also
 
 h3(#Window_convertpixelstodialog). Window#convert_pixels_to_dialog
 
- "Point":point.html *convert_pixels_to_dialog*(%(arg-type)Point% pt)
+ "Point":point.html *convert_pixels_to_dialog*(%(arg-type)"Point":point.html% pt)
 
- "Size":size.html *convert_pixels_to_dialog*(%(arg-type)Size% sz)
+ "Size":size.html *convert_pixels_to_dialog*(%(arg-type)"Size":size.html% sz)
 
 Converts a point or size from pixels to dialog units.
 
@@ -546,7 +546,7 @@ same size as it would have after a call to "Fit()":windowfit.html.
 
 h3(#Window_doupdatewindowui). Window#do_update_window_ui
 
-  *do_update_window_ui*(%(arg-type)UpdateUIEvent% event)
+  *do_update_window_ui*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
 
 Does the window-specific updating after processing the update event.
 This function is called by "Window#update_window_ui":window.html#Window_updatewindowui
@@ -640,7 +640,7 @@ Find a child of this window, by name.
 
 h3(#Window_findwindowbyid). Window#find_window_by_id
 
- "Window":window.html *find_window_by_id*(%(arg-type)Integer% id, %(arg-type)Window% parent = nil)
+ "Window":window.html *find_window_by_id*(%(arg-type)Integer% id, %(arg-type)"Window":window.html% parent = nil)
 
 Find the first window with the given _id_.
 
@@ -655,7 +655,7 @@ h4. See also
 
 h3(#Window_findwindowbyname). Window#find_window_by_name
 
- "Window":window.html *find_window_by_name*(%(arg-type)String% name, %(arg-type)Window% parent = nil)
+ "Window":window.html *find_window_by_name*(%(arg-type)String% name, %(arg-type)"Window":window.html% parent = nil)
 
 Find a window by its name (as given in a window constructor or *Create* function call).
 If _parent_ is NULL, the search will start from all top-level
@@ -672,7 +672,7 @@ h4. See also
 
 h3(#Window_findwindowbylabel). Window#find_window_by_label
 
- "Window":window.html *find_window_by_label*(%(arg-type)String% label, %(arg-type)Window% parent = nil)
+ "Window":window.html *find_window_by_label*(%(arg-type)String% label, %(arg-type)"Window":window.html% parent = nil)
 
 Find a window by its label. Depending on the type of window, the label may be a window title
 or panel item label. If _parent_ is NULL, the search will start from all top-level
@@ -844,7 +844,7 @@ Returns a reference to the list of the window's children.
 
 h3(#Window_getclassdefaultattributes). Window#get_class_default_attributes
 
- "VisualAttributes":visualattributes.html *get_class_default_attributes*(%(arg-type)WindowVariant% variant = @WINDOW_VARIANT_NORMAL@)
+ "VisualAttributes":visualattributes.html *get_class_default_attributes*(%(arg-type)"WindowVariant":windowvariant.html% variant = @WINDOW_VARIANT_NORMAL@)
 
 Returns the default font and colours which are used by the control. This is
 useful if you want to use the same font or colour in your own control as in a
@@ -1034,7 +1034,7 @@ handle, such as *HWND* for Windows, *Widget* for Motif, *GtkWidget* for GTK or *
 
 h3(#Window_gethelptextatpoint). Window#get_help_text_at_point
 
- String *get_help_text_at_point*(%(arg-type)Point% point,  %(arg-type)HelpEvent::Origin% origin)
+ String *get_help_text_at_point*(%(arg-type)"Point":point.html% point,  %(arg-type)HelpEvent::Origin% origin)
 
 Gets the help text to be used as context-sensitive help for this window. This
 method should be overridden if the help message depends on the position inside
@@ -1262,7 +1262,7 @@ Return the sizer associated with the window by a previous call to
 h3(#Window_gettextextent). Window#get_text_extent
 
  Integer x, Integer y, Integer descent, Integer external_leading =  
-   *get_text_extent*(%(arg-type)String% string, %(arg-type)Font% font = nil, %(arg-type)Boolean% use16 = @false@)
+   *get_text_extent*(%(arg-type)String% string, %(arg-type)"Font":font.html% font = nil, %(arg-type)Boolean% use16 = @false@)
 
 Gets the dimensions of the string as it would be drawn on the
 window with the currently selected font. The dimensions are returned as
@@ -1485,11 +1485,11 @@ h3(#Window_isexposed). Window#is_exposed
 
  Boolean *is_exposed*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
- Boolean *is_exposed*(%(arg-type)Point% &pt)
+ Boolean *is_exposed*(%(arg-type)"Point":point.html% &pt)
 
  Boolean *is_exposed*(%(arg-type)Integer% x, %(arg-type)Integer% y, %(arg-type)Integer% w, %(arg-type)Integer% h)
 
- Boolean *is_exposed*(%(arg-type)Rect% &rect)
+ Boolean *is_exposed*(%(arg-type)"Rect":rect.html% &rect)
 
 Returns @true@ if the given point or rectangle area has been exposed since the
 last repaint. Call this in an paint event handler to optimize redrawing by
@@ -1602,7 +1602,7 @@ h3(#Window_move). Window#move
 
   *move*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
-  *move*(%(arg-type)Point% pt)
+  *move*(%(arg-type)"Point":point.html% pt)
 
 Moves the window to the given position.
 
@@ -1631,7 +1631,7 @@ h4. See also
 
 h3(#Window_moveafterintaborder). Window#move_after_in_tab_order
 
-  *move_after_in_tab_order*(%(arg-type)Window% win)
+  *move_after_in_tab_order*(%(arg-type)"Window":window.html% win)
 
 Moves this window in the tab navigation order after the specified win.
 This means that when the user presses @TAB@ key on that other window,
@@ -1649,7 +1649,7 @@ must not be nil.
 
 h3(#Window_movebeforeintaborder). Window#move_before_in_tab_order
 
-  *move_before_in_tab_order*(%(arg-type)Window% win)
+  *move_before_in_tab_order*(%(arg-type)"Window":window.html% win)
 
 Same as "move_after_in_tab_order":#Window_moveafterintaborder except that
 it inserts this window just before win instead of putting it right after
@@ -1766,9 +1766,9 @@ h4. See also
 
 h3(#Window_popupmenu). Window#popup_menu
 
- Boolean *popup_menu*(%(arg-type)Menu% menu, %(arg-type)Point% pos = DEFAULT_POSITION)
+ Boolean *popup_menu*(%(arg-type)"Menu":menu.html% menu, %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
 
- Boolean *popup_menu*(%(arg-type)Menu% menu, %(arg-type)Integer% x, %(arg-type)Integer% y)
+ Boolean *popup_menu*(%(arg-type)"Menu":menu.html% menu, %(arg-type)Integer% x, %(arg-type)Integer% y)
 
 Pops up the given menu at the specified coordinates, relative to this
 window, and returns control when the user has dismissed the menu. If a
@@ -1802,7 +1802,7 @@ a better job of positioning the menu in that case.
 
 h3(#Window_pusheventhandler). Window#push_event_handler
 
-  *push_event_handler*(%(arg-type)EvtHandler% handler)
+  *push_event_handler*(%(arg-type)"EvtHandler":evthandler.html% handler)
 
 Pushes this event handler onto the event stack for the window.
 
@@ -1843,7 +1843,7 @@ h4. See also
 
 h3(#Window_refresh). Window#refresh
 
-  *refresh*(%(arg-type)Boolean% eraseBackground = @true@, %(arg-type)Rect% rect = nil)
+  *refresh*(%(arg-type)Boolean% eraseBackground = @true@, %(arg-type)"Rect":rect.html% rect = nil)
 
 Causes this window, and all of its children recursively (except under GTK1
 where this is not implemented), to be repainted. Note that repainting doesn't
@@ -1865,7 +1865,7 @@ h4. See also
 
 h3(#Window_refreshrect). Window#refresh_rect
 
-  *refresh_rect*(%(arg-type)Rect% rect, %(arg-type)Boolean% eraseBackground = @true@)
+  *refresh_rect*(%(arg-type)"Rect":rect.html% rect, %(arg-type)Boolean% eraseBackground = @true@)
 
 Redraws the contents of the given rectangle: only the area inside it will be
 repainted.
@@ -1926,7 +1926,7 @@ h4. See also
 
 h3(#Window_removechild). Window#remove_child
 
-  *remove_child*(%(arg-type)Window% child)
+  *remove_child*(%(arg-type)"Window":window.html% child)
 
 Removes a child window.  This is called automatically by window deletion
 functions so should not be required by the application programmer.
@@ -1941,7 +1941,7 @@ h4. Parameters
 
 h3(#Window_removeeventhandler). Window#remove_event_handler
 
- Boolean *remove_event_handler*(%(arg-type)EvtHandler% handler)
+ Boolean *remove_event_handler*(%(arg-type)"EvtHandler":evthandler.html% handler)
 
 Find the given _handler_ in the windows event handler chain and remove (but
 not delete) it from it.
@@ -1964,7 +1964,7 @@ h4. See also
 
 h3(#Window_reparent). Window#reparent
 
- Boolean *reparent*(%(arg-type)Window% newParent)
+ Boolean *reparent*(%(arg-type)"Window":window.html% newParent)
 
 Reparents the window, i.e the window will be removed from its
 current parent window (e.g. a non-standard toolbar in a Frame)
@@ -1979,7 +1979,7 @@ h3(#Window_screentoclient). Window#screen_to_client
 
  x, y  *screen_to_client*(%(arg-type)Integer% x, %(arg-type)Integer% y)
 
- "Point":point.html *screen_to_client*(%(arg-type)Point% pt)
+ "Point":point.html *screen_to_client*(%(arg-type)"Point":point.html% pt)
 
 Converts from screen to client window coordinates. The method may be
 passed _either_ two integers, representing the _x_ and _y_ coordinates,
@@ -2033,7 +2033,7 @@ h4. See also
 
 h3(#Window_scrollwindow). Window#scroll_window
 
-  *scroll_window*(%(arg-type)Integer% dx, %(arg-type)Integer% dy, %(arg-type)Rect% rect = nil)
+  *scroll_window*(%(arg-type)Integer% dx, %(arg-type)Integer% dy, %(arg-type)"Rect":rect.html% rect = nil)
 
 Physically scrolls the pixels in the window and move child windows accordingly.
 
@@ -2053,14 +2053,14 @@ instead of using this function directly.
 
 h3(#Window_setacceleratortable). Window#set_accelerator_table
 
-  *set_accelerator_table*(%(arg-type)AcceleratorTable% accel)
+  *set_accelerator_table*(%(arg-type)"AcceleratorTable":acceleratortable.html% accel)
 
 Sets the accelerator table for this window. See "AcceleratorTable":acceleratortable.html.
 
 
 h3(#Window_setaccessible). Window#set_accessible
 
-  *set_accessible*(%(arg-type)Accessible% accessible)
+  *set_accessible*(%(arg-type)"Accessible":accessible.html% accessible)
 
 Sets the accessible for this window. Any existing accessible for this window
 will be deleted first, if not identical to _accessible_.
@@ -2096,7 +2096,7 @@ h4. See also
 
 h3(#Window_setbackgroundcolour). Window#set_background_colour
 
- Boolean *set_background_colour*(%(arg-type)Colour% colour)
+ Boolean *set_background_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the background colour of the window.
 
@@ -2130,7 +2130,7 @@ h4. See also
 
 h3(#Window_setbackgroundstyle). Window#set_background_style
 
-  *set_background_style*(%(arg-type)BackgroundStyle% style)
+  *set_background_style*(%(arg-type)"BackgroundStyle":backgroundstyle.html% style)
 
 Sets the background style of the window. The background style indicates
 whether background colour should be determined by the system (BG_STYLE_SYSTEM),
@@ -2147,7 +2147,7 @@ h4. See also
 
 h3(#Window_setinitialsize). Window#set_initial_size
 
-  *set_initial_size*(%(arg-type)Size% size = DEFAULT_SIZE)
+  *set_initial_size*(%(arg-type)"Size":size.html% size = DEFAULT_SIZE)
 
 A _smart_ SetSize that will fill in default size components with the
 window's _best_ size values.  Also sets the window's minsize to
@@ -2167,7 +2167,7 @@ h4. See also
 
 h3(#Window_setcaret). Window#set_caret
 
-  *set_caret*(%(arg-type)Caret% caret)
+  *set_caret*(%(arg-type)"Caret":caret.html% caret)
 
 Sets the "caret":caret.html associated with the window.
 
@@ -2176,7 +2176,7 @@ h3(#Window_setclientsize). Window#set_client_size
 
   *set_client_size*(%(arg-type)Integer% width, %(arg-type)Integer% height)
 
-  *set_client_size*(%(arg-type)Size% size)
+  *set_client_size*(%(arg-type)"Size":size.html% size)
 
 This sets the size of the window client area in pixels. Using this function to size a window
 tends to be more device-independent than "Window#set_size":window.html#Window_setsize, since the application need not
@@ -2194,7 +2194,7 @@ h4. Parameters
 
 h3(#Window_setcontainingsizer). Window#set_containing_sizer
 
-  *set_containing_sizer*(%(arg-type)Sizer% sizer)
+  *set_containing_sizer*(%(arg-type)"Sizer":sizer.html% sizer)
 
 This normally does not need to be called by user code.  It is called
 when a window is added to a sizer, and is used so the window can
@@ -2203,7 +2203,7 @@ remove itself from the sizer when it is destroyed.
 
 h3(#Window_setcursor). Window#set_cursor
 
-  *set_cursor*(%(arg-type)Cursor% cursor)
+  *set_cursor*(%(arg-type)"Cursor":cursor.html% cursor)
 
 Sets the window's cursor. Notice that the window cursor also sets it for the
 children of the window implicitly.
@@ -2265,7 +2265,7 @@ h4. See also
 
 h3(#Window_setcontainingsizer). Window#set_containing_sizer
 
-  *set_containing_sizer*(%(arg-type)Sizer% sizer)
+  *set_containing_sizer*(%(arg-type)"Sizer":sizer.html% sizer)
 
 This normally does not need to be called by user code.  It is called
 when a window is added to a sizer, and is used so the window can
@@ -2274,7 +2274,7 @@ remove itself from the sizer when it is destroyed.
 
 h3(#Window_setcursor). Window#set_cursor
 
-  *set_cursor*(%(arg-type)Cursor% cursor)
+  *set_cursor*(%(arg-type)"Cursor":cursor.html% cursor)
 
 Sets the window's cursor. Notice that the window cursor also sets it for the
 children of the window implicitly.
@@ -2292,7 +2292,7 @@ h4. See also
 
 h3(#Window_setdroptarget). Window#set_drop_target
 
-  *set_drop_target*(%(arg-type)DropTarget% target)
+  *set_drop_target*(%(arg-type)"DropTarget":droptarget.html% target)
 
 Associates a drop target with this window.
 
@@ -2304,14 +2304,14 @@ h4. See also
 
 h3(#Window_setinitialbestsize). Window#set_initial_best_size
 
-  *set_initial_best_size*(%(arg-type)Size% size)
+  *set_initial_best_size*(%(arg-type)"Size":size.html% size)
 
 Sets the initial window size if none is given (i.e. at least one of the
 components of the size passed to ctor/Create() is DefaultCoord).
 
 h3(#Window_seteventhandler). Window#set_event_handler
 
-  *set_event_handler*(%(arg-type)EvtHandler% handler)
+  *set_event_handler*(%(arg-type)"EvtHandler":evthandler.html% handler)
 
 Sets the event handler for this window.
 
@@ -2377,7 +2377,7 @@ can be overridden to do something in addition to this in the derived classes.
 
 h3(#Window_setfont). Window#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets the font for this window. This function should not be called for the
 parent window if you don't want its font to be inherited by its children,
@@ -2405,7 +2405,7 @@ h4. See also
 
 h3(#Window_setforegroundcolour). Window#set_foreground_colour
 
-  *set_foreground_colour*(%(arg-type)Colour% colour)
+  *set_foreground_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the foreground colour of the window.
 
@@ -2483,14 +2483,14 @@ h4. See also
 
 h3(#Window_setmaxsize). Window#set_max_size
 
-  *set_max_size*(%(arg-type)Size% size)
+  *set_max_size*(%(arg-type)"Size":size.html% size)
 
 Sets the maximum size of the window, to indicate to the sizer layout mechanism
 that this is the maximum possible size.
 
 h3(#Window_setminsize). Window#set_min_size
 
-  *set_min_size*(%(arg-type)Size% size)
+  *set_min_size*(%(arg-type)"Size":size.html% size)
 
 Sets the minimum size of the window, to indicate to the sizer layout mechanism
 that this is the minimum required size. You may need to call this
@@ -2514,7 +2514,7 @@ h4. See also
 
 h3(#Window_setownbackgroundcolour). Window#set_own_background_colour
 
-  *set_own_background_colour*(%(arg-type)Colour% colour)
+  *set_own_background_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the background colour of the window but prevents it from being inherited
 by the children of this window.
@@ -2526,7 +2526,7 @@ h4. See also
 
 h3(#Window_setownfont). Window#set_own_font
 
-  *set_own_font*(%(arg-type)Font% font)
+  *set_own_font*(%(arg-type)"Font":font.html% font)
 
 Sets the font of the window but prevents it from being inherited by the
 children of this window.
@@ -2538,7 +2538,7 @@ h4. See also
 
 h3(#Window_setownforegroundcolour). Window#set_own_foreground_colour
 
-  *set_own_foreground_colour*(%(arg-type)Colour% colour)
+  *set_own_foreground_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the foreground colour of the window but prevents it from being inherited
 by the children of this window.
@@ -2550,7 +2550,7 @@ h4. See also
 
 h3(#Window_setpalette). Window#set_palette
 
-  *set_palette*(%(arg-type)Palette% palette)
+  *set_palette*(%(arg-type)"Palette":palette.html% palette)
 
 Obsolete - use "DC#set_palette":dc.html#DC_setpalette instead.
 
@@ -2689,9 +2689,9 @@ h4. See also
 
 h3(#Window_setsize). Window#set_size
 
-  *set_size*(%(arg-type)Size% size)
+  *set_size*(%(arg-type)"Size":size.html% size)
 
-  *set_size*(%(arg-type)Rect% rect)
+  *set_size*(%(arg-type)"Rect":rect.html% rect)
 
 Sets the size of the window using either a "Size":size.html or "Rect":rect.html
 object. The former just specifies the size of the window, in pixels; a
@@ -2716,8 +2716,8 @@ h3(#Window_setsizehints). Window#set_size_hints
                  %(arg-type)Integer% incW=-1, 
                  %(arg-type)Integer% incH=-1)
 
-  *set_size_hints*(%(arg-type)Size% minSize, %(arg-type)Size% maxSize=DefaultSize, 
-                 %(arg-type)Size% incSize=DefaultSize)
+  *set_size_hints*(%(arg-type)"Size":size.html% minSize, %(arg-type)"Size":size.html% maxSize=DefaultSize, 
+                 %(arg-type)"Size":size.html% incSize=DefaultSize)
 
 
 Allows specification of minimum and maximum window sizes, and window size increments.
@@ -2745,7 +2745,7 @@ The resizing increments are only significant under Motif or Xt.
 
 h3(#Window_setsizer). Window#set_sizer
 
-  *set_sizer*(%(arg-type)Sizer% sizer, %(arg-type)Boolean% deleteOld=true)
+  *set_sizer*(%(arg-type)"Sizer":sizer.html% sizer, %(arg-type)Boolean% deleteOld=true)
 
 Sets the window to have the given layout sizer. The window
 will then own the object, and will take care of its deletion.
@@ -2776,7 +2776,7 @@ only the sizer will have effect.
 
 h3(#Window_setsizerandfit). Window#set_sizer_and_fit
 
-  *set_sizer_and_fit*(%(arg-type)Sizer% sizer, %(arg-type)Boolean% deleteOld=true)
+  *set_sizer_and_fit*(%(arg-type)"Sizer":sizer.html% sizer, %(arg-type)Boolean% deleteOld=true)
 
 The same as "set_sizer":#Window_setsizer, except it also sets the size hints
 for the window based on the sizer's minimum size.
@@ -2800,7 +2800,7 @@ h3(#Window_settooltip). Window#set_tool_tip
 
   *set_tool_tip*(%(arg-type)String% tip)
 
-  *set_tool_tip*(%(arg-type)ToolTip% tip)
+  *set_tool_tip*(%(arg-type)"ToolTip":tooltip.html% tip)
 
 Attach a tooltip to the window.
 
@@ -2810,7 +2810,7 @@ See also: "get_tool_tip":#Window_gettooltip,
 
 h3(#Window_setvalidator). Window#set_validator
 
-  *set_validator*(%(arg-type)Validator% validator)
+  *set_validator*(%(arg-type)"Validator":validator.html% validator)
 
 Deletes the current validator (if any) and sets the window validator, having called Validator::Clone to
 create a new validator of this type.
@@ -2820,7 +2820,7 @@ h3(#Window_setvirtualsize). Window#set_virtual_size
 
   *set_virtual_size*(%(arg-type)Integer% width, %(arg-type)Integer% height)
 
-  *set_virtual_size*(%(arg-type)Size% size)
+  *set_virtual_size*(%(arg-type)"Size":size.html% size)
 
 Sets the virtual size of the window in pixels.
 
@@ -2831,8 +2831,8 @@ h3(#Window_setvirtualsizehints). Window#set_virtual_size_hints
                          %(arg-type)Integer% maxW=-1, 
                          %(arg-type)Integer% maxH=-1)
 
-  *set_virtual_size_hints*(%(arg-type)Size% minSize=DefaultSize, 
-                        %(arg-type)Size% maxSize=DefaultSize)
+  *set_virtual_size_hints*(%(arg-type)"Size":size.html% minSize=DefaultSize, 
+                        %(arg-type)"Size":size.html% maxSize=DefaultSize)
 
 
 Allows specification of minimum and maximum virtual window sizes.
@@ -2878,7 +2878,7 @@ h4. See also
 
 h3(#Window_setwindowvariant). Window#set_window_variant
 
-  *set_window_variant*(%(arg-type)WindowVariant% variant)
+  *set_window_variant*(%(arg-type)"WindowVariant":windowvariant.html% variant)
 
 This function can be called under all platforms but only does anything under
 Mac OS X 10.3+ currently. Under this system, each of the standard control can

@@ -29,10 +29,10 @@ h2. Methods
 
 h3(#MessageDialog_new). MessageDialog.new
 
-  *MessageDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message, 
+  *MessageDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
                     %(arg-type)String% caption = "Message box", 
                     %(arg-type)Integer% style = OK CANCEL, 
-                    %(arg-type)Point% pos = DEFAULT_POSITION)
+                    %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
 
 Constructor. Use "MessageDialog#show_modal":messagedialog.html#MessageDialog_showmodal to show the dialog.
 

@@ -44,7 +44,7 @@ h2. Methods
 h3(#MouseCaptureChangedEvent_new). MouseCaptureChangedEvent.new
 
   *MouseCaptureChangedEvent.new*(%(arg-type)Integer% windowId = 0, 
-                               %(arg-type)Window% gainedCapture = nil)
+                               %(arg-type)"Window":window.html% gainedCapture = nil)
 
 Constructor.
 

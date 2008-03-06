@@ -59,44 +59,44 @@ h2. Methods
 
 h3(#GraphicsContext_create). GraphicsContext#create
 
- "GraphicsContext":graphicscontext.html *create*(%(arg-type)WindowDC% dc)
+ "GraphicsContext":graphicscontext.html *create*(%(arg-type)"WindowDC":windowdc.html% dc)
 
 Creates a GraphicsContext from a WindowDC (eg a PaintDC).
 
- "GraphicsContext":graphicscontext.html *create*(%(arg-type)Window% window)
+ "GraphicsContext":graphicscontext.html *create*(%(arg-type)"Window":window.html% window)
 
 Creates a GraphicsContext from a Window.
 
 h3(#GraphicsContext_createpen). GraphicsContext#create_pen
 
- "GraphicsPen":graphicspen.html *create_pen*(%(arg-type)Pen% pen)
+ "GraphicsPen":graphicspen.html *create_pen*(%(arg-type)"Pen":pen.html% pen)
 
 Creates a native pen from a Pen.
 
 h3(#GraphicsContext_createbrush). GraphicsContext#create_brush
 
- "GraphicsBrush":graphicsbrush.html *create_brush*(%(arg-type)Brush% brush)
+ "GraphicsBrush":graphicsbrush.html *create_brush*(%(arg-type)"Brush":brush.html% brush)
 
 Creates a native brush from a Brush.
 
 h3(#GraphicsContext_createradialgradientbrush). GraphicsContext#create_radial_gradient_brush
 
- "GraphicsBrush":graphicsbrush.html *create_radial_gradient_brush*(%(arg-type)Double% xo, 
-                                              %(arg-type)Double% yo, 
-                                              %(arg-type)Double% xc, 
-                                              %(arg-type)Double% yc, 
-                                              %(arg-type)Double% radius, 
-                                              %(arg-type)Colour% oColor, 
-                                              %(arg-type)Colour% cColor)
+ "GraphicsBrush":graphicsbrush.html *create_radial_gradient_brush*(%(arg-type)"Double":double.html% xo, 
+                                              %(arg-type)"Double":double.html% yo, 
+                                              %(arg-type)"Double":double.html% xc, 
+                                              %(arg-type)"Double":double.html% yc, 
+                                              %(arg-type)"Double":double.html% radius, 
+                                              %(arg-type)"Colour":colour.html% oColor, 
+                                              %(arg-type)"Colour":colour.html% cColor)
 
 Creates a native brush, having a radial gradient originating at (xo,yc) with color oColour and ends on a circle around (xc,yc) with radius r and color cColour
 
 h3(#GraphicsContext_createlineargradientbrush). GraphicsContext#create_linear_gradient_brush
 
- "GraphicsBrush":graphicsbrush.html *create_linear_gradient_brush*(%(arg-type)Double% x1, 
-                                              %(arg-type)Double% y1, 
-                                              %(arg-type)Double% x2, 
-                                              %(arg-type)Double% y2, 
+ "GraphicsBrush":graphicsbrush.html *create_linear_gradient_brush*(%(arg-type)"Double":double.html% x1, 
+                                              %(arg-type)"Double":double.html% y1, 
+                                              %(arg-type)"Double":double.html% x2, 
+                                              %(arg-type)"Double":double.html% y2, 
                                               %(arg-type)% Colour&c1, 
                                               %(arg-type)% Colour&c2)
 
@@ -104,19 +104,19 @@ Creates a native brush, having a linear gradient, starting at (x1,y1) with color
 
 h3(#GraphicsContext_createfont). GraphicsContext#create_font
 
- "GraphicsFont":graphicsfont.html *create_font*(%(arg-type)Font% font, 
-                            %(arg-type)Colour% col = BLACK)
+ "GraphicsFont":graphicsfont.html *create_font*(%(arg-type)"Font":font.html% font, 
+                            %(arg-type)"Colour":colour.html% col = BLACK)
 
 Creates a native graphics font from a Font and a text colour.
 
 h3(#GraphicsContext_creatematrix). GraphicsContext#create_matrix
 
- "GraphicsMatrix":graphicsmatrix.html *create_matrix*(%(arg-type)Double% a = 1.0, 
-                                %(arg-type)Double% b = 0.0, 
-                                %(arg-type)Double% c = 0.0, 
-                                %(arg-type)Double% d = 1.0, 
-                                %(arg-type)Double% tx = 0.0, 
-                                %(arg-type)Double% ty = 0.0)
+ "GraphicsMatrix":graphicsmatrix.html *create_matrix*(%(arg-type)"Double":double.html% a = 1.0, 
+                                %(arg-type)"Double":double.html% b = 0.0, 
+                                %(arg-type)"Double":double.html% c = 0.0, 
+                                %(arg-type)"Double":double.html% d = 1.0, 
+                                %(arg-type)"Double":double.html% tx = 0.0, 
+                                %(arg-type)"Double":double.html% ty = 0.0)
 
 Creates a native affine transformation matrix from the passed in values. The defaults result in an identity matrix.
 
@@ -128,11 +128,11 @@ Creates a native graphics path which is initially empty.
 
 h3(#GraphicsContext_clip). GraphicsContext#clip
 
-  *clip*(%(arg-type)Region% region)
+  *clip*(%(arg-type)"Region":region.html% region)
 
 Clips drawings to the region, combined to current clipping region
 
-  *clip*(%(arg-type)Double% x,  %(arg-type)Double% y,  %(arg-type)Double% w,  %(arg-type)Double% h)
+  *clip*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w,  %(arg-type)"Double":double.html% h)
 
 Clips drawings to the rectangle.
 
@@ -144,31 +144,31 @@ Resets the clipping to original shape.
 
 h3(#GraphicsContext_drawbitmap). GraphicsContext#draw_bitmap
 
-  *draw_bitmap*(%(arg-type)Bitmap% bmp,  %(arg-type)Double% x,  %(arg-type)Double% y, 
-              %(arg-type)Double% w, 
-              %(arg-type)Double% h)
+  *draw_bitmap*(%(arg-type)"Bitmap":bitmap.html% bmp,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y, 
+              %(arg-type)"Double":double.html% w, 
+              %(arg-type)"Double":double.html% h)
 
 Draws the bitmap. In case of a mono bitmap, this is treated as a mask and the current brushed is used for filling.
 
 h3(#GraphicsContext_drawellipse). GraphicsContext#draw_ellipse
 
-  *draw_ellipse*(%(arg-type)Double% x,  %(arg-type)Double% y,  %(arg-type)Double% w, 
-               %(arg-type)Double% h)
+  *draw_ellipse*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+               %(arg-type)"Double":double.html% h)
 
 Draws an ellipse.
 
 h3(#GraphicsContext_drawicon). GraphicsContext#draw_icon
 
-  *draw_icon*(%(arg-type)Icon% icon,  %(arg-type)Double% x,  %(arg-type)Double% y, 
-            %(arg-type)Double% w, 
-            %(arg-type)Double% h)
+  *draw_icon*(%(arg-type)"Icon":icon.html% icon,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y, 
+            %(arg-type)"Double":double.html% w, 
+            %(arg-type)"Double":double.html% h)
 
 Draws the icon.
 
 
 h3(#GraphicsContext_drawlines). GraphicsContext#draw_lines
 
-  *draw_lines*(%(arg-type)Integer% n,  %(arg-type)Point2DDouble% points, 
+  *draw_lines*(%(arg-type)Integer% n,  %(arg-type)"Point2DDouble":point2ddouble.html% points, 
              %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
 
 Draws a polygon.
@@ -176,45 +176,45 @@ Draws a polygon.
 
 h3(#GraphicsContext_drawpath). GraphicsContext#draw_path
 
-  *draw_path*(%(arg-type)GraphicsPath% path,  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
+  *draw_path*(%(arg-type)"GraphicsPath":graphicspath.html% path,  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
 
 Draws the path by first filling and then stroking.
 
 
 h3(#GraphicsContext_drawrectangle). GraphicsContext#draw_rectangle
 
-  *draw_rectangle*(%(arg-type)Double% x,  %(arg-type)Double% y,  %(arg-type)Double% w, 
-                 %(arg-type)Double% h)
+  *draw_rectangle*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+                 %(arg-type)"Double":double.html% h)
 
 Draws a rectangle.
 
 
 h3(#GraphicsContext_drawroundedrectangle). GraphicsContext#draw_rounded_rectangle
 
-  *draw_rounded_rectangle*(%(arg-type)Double% x,  %(arg-type)Double% y,  %(arg-type)Double% w, 
-                         %(arg-type)Double% h, 
-                         %(arg-type)Double% radius)
+  *draw_rounded_rectangle*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+                         %(arg-type)"Double":double.html% h, 
+                         %(arg-type)"Double":double.html% radius)
 
 Draws a rounded rectangle.
 
 h3(#GraphicsContext_drawtext). GraphicsContext#draw_text
 
-  *draw_text*(%(arg-type)String% str,  %(arg-type)Double% x,  %(arg-type)Double% y, 
-            %(arg-type)Double% angle)
+  *draw_text*(%(arg-type)String% str,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y, 
+            %(arg-type)"Double":double.html% angle)
 
-  *draw_text*(%(arg-type)String% str,  %(arg-type)Double% x,  %(arg-type)Double% y)
+  *draw_text*(%(arg-type)String% str,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y)
 
 Draws a text at the defined position, at the given angle.
 
 h3(#GraphicsContext_fillpath). GraphicsContext#fill_path
 
-  *fill_path*(%(arg-type)GraphicsPath% path,  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
+  *fill_path*(%(arg-type)"GraphicsPath":graphicspath.html% path,  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
 
 Fills the path with the current brush.
 
 h3(#GraphicsContext_strokepath). GraphicsContext#stroke_path
 
-  *stroke_path*(%(arg-type)GraphicsPath% path)
+  *stroke_path*(%(arg-type)"GraphicsPath":graphicspath.html% path)
 
 Strokes along a path with the current pen.
 
@@ -227,15 +227,15 @@ Returns the native context (CGContextRef for Core Graphics, Graphics pointer for
 
 h3(#GraphicsContext_getpartialtextextents). GraphicsContext#get_partial_text_extents
 
-  *get_partial_text_extents*(%(arg-type)String% text,  %(arg-type)ArrayDouble% widths)
+  *get_partial_text_extents*(%(arg-type)String% text,  %(arg-type)"ArrayDouble":arraydouble.html% widths)
 
 Fills the _widths_ array with the widths from the beginning of 
 _text_ to the corresponding character of _text_.  
 
 h3(#GraphicsContext_gettextextent). GraphicsContext#get_text_extent
 
-  *get_text_extent*(%(arg-type)String% text,  %(arg-type)Double% width,  %(arg-type)Double% height, 
-                  %(arg-type)Double% descent, 
-                  %(arg-type)Double% externalLeading)
+  *get_text_extent*(%(arg-type)String% text,  %(arg-type)"Double":double.html% width,  %(arg-type)"Double":double.html% height, 
+                  %(arg-type)"Double":double.html% descent, 
+                  %(arg-type)"Double":double.html% externalLeading)
 
 Gets the dimensions of the string using the currently selected font.

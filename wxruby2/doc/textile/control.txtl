@@ -30,7 +30,7 @@ h2. Methods
 
 h3(#Control_command). Control#command
 
-  *command*(%(arg-type)CommandEvent% event)
+  *command*(%(arg-type)"CommandEvent":commandevent.html% event)
 
 Simulates the effect of the user issuing a command to the item. See "CommandEvent":commandevent.html.
 

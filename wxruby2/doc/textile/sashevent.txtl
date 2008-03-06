@@ -65,7 +65,7 @@ h2. Methods
 
 h3(#SashEvent_new). SashEvent.new
 
-  *SashEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)SashEdgePosition% edge = SASH_NONE)
+  *SashEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)"SashEdgePosition":sashedgeposition.html% edge = SASH_NONE)
 
 Constructor.
 

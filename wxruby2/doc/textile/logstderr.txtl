@@ -23,7 +23,7 @@ h2. Methods
 
 h3(#LogStderr_new). LogStderr.new
 
-  *LogStderr.new*(%(arg-type)FILE% fp = nil)
+  *LogStderr.new*(%(arg-type)"FILE":file.html% fp = nil)
 
 Constructs a log target which sends all the log messages to the given
 @FILE@. If it is @NULL@, the messages are sent to @stderr@.

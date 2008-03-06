@@ -60,12 +60,12 @@ Adds the item to the end of the list box.
 
  Integer *append*(%(arg-type)String% item, %(arg-type)Object% clientData)
 
- Integer *append*(%(arg-type)String% item, %(arg-type)ClientData% clientData)
+ Integer *append*(%(arg-type)String% item, %(arg-type)"ClientData":clientdata.html% clientData)
 
 Adds the item to the end of the list box, associating the given, typed or
 untyped, client data pointer with the item.
 
-  *append*(%(arg-type)ArrayString% strings)
+  *append*(%(arg-type)"ArrayString":arraystring.html% strings)
 
 Appends several items at once to the control. Notice that calling this method
 may be much faster than appending the items one by one if you need to add a lot
@@ -228,7 +228,7 @@ Not valid for @LB_SORT@ or @CB_SORT@ styles, use Append instead.
 
  Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, %(arg-type)Object% clientData)
 
- Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, %(arg-type)ClientData% clientData)
+ Integer *insert*(%(arg-type)String% item, %(arg-type)Integer% pos, %(arg-type)"ClientData":clientdata.html% clientData)
 
 Inserts the item into the list before pos, associating the given, typed or
 untyped, client data pointer with the item.

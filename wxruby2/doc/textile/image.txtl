@@ -147,11 +147,11 @@ h2. Methods
 
 h3(#Image_new). Image.new
 
-  *Image.new*(%(arg-type)Image% image)
+  *Image.new*(%(arg-type)"Image":image.html% image)
 
 Copy constructor, uses "reference counting":trefcount.html.
 
-  *Image.new*(%(arg-type)Bitmap% bitmap)
+  *Image.new*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
 (Deprecated form, use "Bitmap#convert_to_image":bitmap.html#Bitmap_converttoimage
 instead.) Constructs an image from a platform-dependent bitmap. This preserves
@@ -179,15 +179,15 @@ _free()_.
 
 Loads an image from a file.
 
-  *Image.new*(%(arg-type)InputStream% stream,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
+  *Image.new*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
             %(arg-type)Integer% index = -1)
 
-  *Image.new*(%(arg-type)InputStream% stream,  %(arg-type)String% mimetype, 
+  *Image.new*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)String% mimetype, 
             %(arg-type)Integer% index = -1)
 
 Loads an image from an input stream.
 
-  *Image.new*(%(arg-type)char% xpmData)
+  *Image.new*(%(arg-type)"char":char.html% xpmData)
 
 Creates an image from XPM data.
 
@@ -254,7 +254,7 @@ See "reference-counted object destruction":refcountdestruct.html for more info.
 
 h3(#Image_addhandler). Image#add_handler
 
-  *add_handler*(%(arg-type)ImageHandler% handler)
+  *add_handler*(%(arg-type)"ImageHandler":imagehandler.html% handler)
 
 Adds a handler to the end of the static list of format handlers.
 
@@ -322,7 +322,7 @@ This function is called by Widgets on exit.
 
 h3(#Image_computehistogram). Image#compute_histogram
 
- Integer *compute_histogram*(%(arg-type)ImageHistogram% histogram)
+ Integer *compute_histogram*(%(arg-type)"ImageHistogram":imagehistogram.html% histogram)
 
 Computes the histogram of the image. _histogram_ is a reference to
 ImageHistogram object. ImageHistogram is a specialization of
@@ -374,9 +374,9 @@ Deprecated, use equivalent "Bitmap constructor":bitmapctor.html
 
 h3(#Image_converttogreyscale). Image#convert_to_greyscale
 
- "Image":image.html *convert_to_greyscale*(%(arg-type)double% lr = 0.299, 
-                              %(arg-type)double% lg = 0.587, 
-                              %(arg-type)double% lb = 0.114)
+ "Image":image.html *convert_to_greyscale*(%(arg-type)Float% lr = 0.299, 
+                              %(arg-type)Float% lg = 0.587, 
+                              %(arg-type)Float% lb = 0.114)
 
 Returns a greyscale version of the image. The returned image uses the luminance
 component of the original to calculate the greyscale. Defaults to using
@@ -565,7 +565,7 @@ h3(#Image_getimagecount). Image#get_image_count
 
  Integer *get_image_count*(%(arg-type)String% filename,  %(arg-type)Integer% type = BITMAP_TYPE_ANY)
 
- Integer *get_image_count*(%(arg-type)InputStream% stream, 
+ Integer *get_image_count*(%(arg-type)"InputStream":inputstream.html% stream, 
                          %(arg-type)Integer% type = BITMAP_TYPE_ANY)
 
 If the image file contains more than one image and the image handler is capable
@@ -664,7 +664,7 @@ Returns the red intensity at the given coordinate.
 
 h3(#Image_getsubimage). Image#get_sub_image
 
- "Image":image.html *get_sub_image*(%(arg-type)Rect% rect)
+ "Image":image.html *get_sub_image*(%(arg-type)"Rect":rect.html% rect)
 
 Returns a sub image of the current one as long as the rect belongs entirely to
 the image.
@@ -683,7 +683,7 @@ h4. See also
 
 h3(#hsvvaluehsvvalue). HSVValue::HSVValue
 
-  *hsv_value*(%(arg-type)double% h = 0.0,  %(arg-type)double% s = 0.0,  %(arg-type)double% v = 0.0)
+  *hsv_value*(%(arg-type)Float% h = 0.0,  %(arg-type)Float% s = 0.0,  %(arg-type)Float% v = 0.0)
 
 Constructor for HSVValue, an object that contains values for hue, saturation and value which
 represent the value of a color. It is used by "Image#hs_vto_rgb":image.html#Image_hsvtorgb
@@ -696,7 +696,7 @@ converts between HSV color space and RGB color space.
 
 h3(#Image_hsvtorgb). Image#hs_vto_rgb
 
- "Image::RGBValue":image::rgbvalue.html *hs_vto_rgb*(%(arg-type)HSVValue% hsv)
+ "Image::RGBValue":image::rgbvalue.html *hs_vto_rgb*(%(arg-type)"HSVValue":hsvvalue.html% hsv)
 
 Converts a color in HSV color space to RGB color space.
 
@@ -801,7 +801,7 @@ h4. See also
 
 h3(#Image_inserthandler). Image#insert_handler
 
-  *insert_handler*(%(arg-type)ImageHandler% handler)
+  *insert_handler*(%(arg-type)"ImageHandler":imagehandler.html% handler)
 
 Adds a handler at the start of the static list of format handlers.
 
@@ -834,10 +834,10 @@ h3(#Image_loadfile). Image#load_file
 Loads an image from a file. If no handler type is provided, the library will
 try to autodetect the format.
 
- Boolean *load_file*(%(arg-type)InputStream% stream,  %(arg-type)Integer% type, 
+ Boolean *load_file*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)Integer% type, 
                    %(arg-type)Integer% index = -1)
 
- Boolean *load_file*(%(arg-type)InputStream% stream,  %(arg-type)String% mimetype, 
+ Boolean *load_file*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)String% mimetype, 
                    %(arg-type)Integer% index = -1)
 
 Loads an image from an input stream.
@@ -916,7 +916,7 @@ converts between HSV color space and RGB color space.
 
 h3(#Image_rgbtohsv). Image#rg_bto_hsv
 
- "Image::HSVValue":image::hsvvalue.html *rg_bto_hsv*(%(arg-type)RGBValue% rgb)
+ "Image::HSVValue":image::hsvvalue.html *rg_bto_hsv*(%(arg-type)"RGBValue":rgbvalue.html% rgb)
 
 Converts a color in RGB color space to HSV color space.
 
@@ -976,7 +976,7 @@ h4. See also
 
 h3(#Image_resize). Image#resize
 
- "Image":image.html *resize*(%(arg-type)Size% size,  %(arg-type)Point% pos, 
+ "Image":image.html *resize*(%(arg-type)"Size":size.html% size,  %(arg-type)"Point":point.html% pos, 
                 %(arg-type)Integer% red = -1, 
                 %(arg-type)Integer% green = -1, 
                 %(arg-type)Integer% blue = -1)
@@ -997,9 +997,9 @@ h4. See also
 
 h3(#Image_rotate). Image#rotate
 
- "Image":image.html *rotate*(%(arg-type)double% angle,  %(arg-type)Point% rotationCentre, 
+ "Image":image.html *rotate*(%(arg-type)Float% angle,  %(arg-type)"Point":point.html% rotationCentre, 
                 %(arg-type)Boolean% interpolating = true, 
-                %(arg-type)Point% offsetAfterRotation = nil)
+                %(arg-type)"Point":point.html% offsetAfterRotation = nil)
 
 Rotates the image about the given point, by _angle_ radians. Passing true
 to _interpolating_ results in better image quality, but is slower. If the
@@ -1011,7 +1011,7 @@ Returns the rotated image, leaving this image intact.
 
 h3(#Image_rotatehue). Image#rotate_hue
 
-  *rotate_hue*(%(arg-type)double% angle)
+  *rotate_hue*(%(arg-type)Float% angle)
 
 Rotates the hue of each pixel in the image by _angle_, which is a double in
 the range of -1.0 to +1.0, where -1.0 corresponds to -360 degrees and +1.0 corresponds
@@ -1040,9 +1040,9 @@ Saves an image in the named file. File type is determined from the extension of 
 file name. Note that this function may fail if the extension is not recognized! You
 can use one of the forms above to save images to files with non-standard extensions.
 
- Boolean *save_file*(%(arg-type)OutputStream% stream,  %(arg-type)Integer% type)
+ Boolean *save_file*(%(arg-type)"OutputStream":outputstream.html% stream,  %(arg-type)Integer% type)
 
- Boolean *save_file*(%(arg-type)OutputStream% stream,  %(arg-type)String% mimetype)
+ Boolean *save_file*(%(arg-type)"OutputStream":outputstream.html% stream,  %(arg-type)String% mimetype)
 
 Saves an image in the given stream.
 
@@ -1145,7 +1145,7 @@ h4. See also
 
 h3(#Image_size). Image#size
 
- "Image":image.html *size*(%(arg-type)Size% size,  %(arg-type)Point% pos, 
+ "Image":image.html *size*(%(arg-type)"Size":size.html% size,  %(arg-type)"Point":point.html% pos, 
               %(arg-type)Integer% red = -1, 
               %(arg-type)Integer% green = -1, 
               %(arg-type)Integer% blue = -1)
@@ -1215,7 +1215,7 @@ Sets the mask colour for this image (and tells the image to use the mask).
 
 h3(#Image_setmaskfromimage). Image#set_mask_from_image
 
- Boolean *set_mask_from_image*(%(arg-type)Image% mask,  %(arg-type)Integer% mr, 
+ Boolean *set_mask_from_image*(%(arg-type)"Image":image.html% mask,  %(arg-type)Integer% mr, 
                              %(arg-type)Integer% mg, 
                              %(arg-type)Integer% mb)
 
@@ -1260,7 +1260,7 @@ h4. See also
 
 h3(#Image_setpalette). Image#set_palette
 
-  *set_palette*(%(arg-type)Palette% palette)
+  *set_palette*(%(arg-type)"Palette":palette.html% palette)
 
 Associates a palette with the image. The palette may be used when converting
 Image to Bitmap (MSW only at present) or in file save operations (none as yet).
@@ -1281,7 +1281,7 @@ using the "get_data":#Image_getdata method.
 
 h3(#Image_setrgbrect). Image#set_rgb
 
-  *set_rgb*(%(arg-type)Rect% rect,  %(arg-type)Integer% red,  %(arg-type)Integer% green, 
+  *set_rgb*(%(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% red,  %(arg-type)Integer% green, 
           %(arg-type)Integer% blue)
 
 Sets the colour of the pixels within the given rectangle. This routine performs
@@ -1291,7 +1291,7 @@ data.
 
 h3(#Image_assign). Image#=
 
- "Image& ":image& .html *operator $=$*(%(arg-type)Image% image)
+ "Image& ":image& .html *operator $=$*(%(arg-type)"Image":image.html% image)
 
 Assignment operator, using "reference counting":trefcount.html.
 

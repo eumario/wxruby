@@ -23,7 +23,7 @@ h3(#Quantize_wxquantize). Quantize.new
 
 h3(#Quantize_quantize). Quantize#quantize
 
- Boolean *quantize*(%(arg-type)Image% src,  %(arg-type)Image% dest,  %(arg-type)Palette% pPalette, 
+ Boolean *quantize*(%(arg-type)"Image":image.html% src,  %(arg-type)"Image":image.html% dest,  %(arg-type)"Palette":palette.html% pPalette, 
                   %(arg-type)Integer% desiredNoColours = 236, 
                   %(arg-type)Integer% eightBitData = 0, 
                   %(arg-type)Integer% flags = QUANTIZE_INCLUDE_WINDOWS_COLOURS|QUANTIZE_FILL_DESTINATION_IMAGE|QUANTIZE_RETURN_8BIT_DATA)
@@ -35,7 +35,7 @@ This palette may be passed to ConvertImageToBitmap, for example.
 
 If you pass a palette pointer, you must free the palette yourself.
 
- Boolean *quantize*(%(arg-type)Image% src,  %(arg-type)Image% dest, 
+ Boolean *quantize*(%(arg-type)"Image":image.html% src,  %(arg-type)"Image":image.html% dest, 
                   %(arg-type)Integer% desiredNoColours = 236, 
                   %(arg-type)Integer% eightBitData = 0, 
                   %(arg-type)Integer% flags = QUANTIZE_INCLUDE_WINDOWS_COLOURS|QUANTIZE_FILL_DESTINATION_IMAGE|QUANTIZE_RETURN_8BIT_DATA)
@@ -45,7 +45,7 @@ have to manage it yourself.
 
 h3(#Quantize_doquantize). Quantize#do_quantize
 
-  *do_quantize*(%(arg-type)unsigned% w,  %(arg-type)unsigned% h,  %(arg-type)Integer% in_rows, 
+  *do_quantize*(%(arg-type)"unsigned":unsigned.html% w,  %(arg-type)"unsigned":unsigned.html% h,  %(arg-type)Integer% in_rows, 
               %(arg-type)Integer% out_rows, 
               %(arg-type)Integer% palette, 
               %(arg-type)Integer% desiredNoColours)

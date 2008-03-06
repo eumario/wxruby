@@ -32,7 +32,7 @@ h2. Class Methods
 h3(#BusyInfo_busy). BusyInfo.busy
 
   *BusyInfo.new*(%(arg-type)String% msg,  
-                   %(arg-type)Window% parent = nil) { ... }
+                   %(arg-type)"Window":window.html% parent = nil) { ... }
 
 Displays a busy info window as child of _parent_ and displays _msg_
 in it, while running the block. When the block's execution is completed,

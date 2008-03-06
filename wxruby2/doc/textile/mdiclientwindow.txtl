@@ -41,7 +41,7 @@ h2. Methods
 
 h3(#MDIClientWindow_new). MDIClientWindow.new
 
-  *MDIClientWindow.new*(%(arg-type)MDIParentFrame% parent,  %(arg-type)Integer% style = 0)
+  *MDIClientWindow.new*(%(arg-type)"MDIParentFrame":mdiparentframe.html% parent,  %(arg-type)Integer% style = 0)
 
 Constructor, creating the window.
 
@@ -64,7 +64,7 @@ Destructor.
 
 h3(#MDIClientWindow_createclient). MDIClientWindow#create_client
 
- Boolean *create_client*(%(arg-type)MDIParentFrame% parent,  %(arg-type)Integer% style = 0)
+ Boolean *create_client*(%(arg-type)"MDIParentFrame":mdiparentframe.html% parent,  %(arg-type)Integer% style = 0)
 
 Used in two-step frame construction. See "MDIClientWindow.new":mdiclientwindow.html#MDIClientWindow_new for further details.
 

@@ -24,10 +24,10 @@ h2. Methods
 
 h3(#DCClipper_new). DCClipper.new
 
-  *DCClipper.new*(%(arg-type)DC% dc,  %(arg-type)Coord% x, %(arg-type)Coord% y, %(arg-type)Coord% w, 
-               %(arg-type)Coord% h)
+  *DCClipper.new*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Coord":coord.html% x, %(arg-type)"Coord":coord.html% y, %(arg-type)"Coord":coord.html% w, 
+               %(arg-type)"Coord":coord.html% h)
 
-  *DCClipper.new*(%(arg-type)DC% dc,  %(arg-type)Rect% rect)
+  *DCClipper.new*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect)
 
 Constructor: sets the clipping region for the given device context to the
 specified rectangle.

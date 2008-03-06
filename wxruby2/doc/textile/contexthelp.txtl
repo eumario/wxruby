@@ -47,7 +47,7 @@ h2. Methods
 
 h3(#ContextHelp_new). ContextHelp.new
 
-  *ContextHelp.new*(%(arg-type)Window% window = nil,  %(arg-type)Boolean% doNow = true)
+  *ContextHelp.new*(%(arg-type)"Window":window.html% window = nil,  %(arg-type)Boolean% doNow = true)
 
 Constructs a context help object, calling "begin_context_help":#ContextHelp_begincontexthelp if _doNow_ is true (the default).
 
@@ -59,7 +59,7 @@ Destroys the context help object.
 
 h3(#ContextHelp_begincontexthelp). ContextHelp#begin_context_help
 
- Boolean *begin_context_help*(%(arg-type)Window% window = nil)
+ Boolean *begin_context_help*(%(arg-type)"Window":window.html% window = nil)
 
 Puts the application into context-sensitive help mode. _window_ is the window
 which will be used to catch events; if NULL, the top window will be used.

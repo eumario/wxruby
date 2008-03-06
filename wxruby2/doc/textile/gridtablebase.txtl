@@ -181,7 +181,7 @@ h3(#GridTableBase_setvalueaslong). GridTableBase#set_value_as_long
 
 h3(#GridTableBase_setvalueasdouble). GridTableBase#set_value_as_double
 
-  *set_value_as_double*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)double% value)
+  *set_value_as_double*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)Float% value)
 
 
 h3(#GridTableBase_setvalueasbool). GridTableBase#set_value_as_bool
@@ -205,7 +205,7 @@ h3(#GridTableBase_setvalueascustom). GridTableBase#set_value_as_custom
 
 h3(#GridTableBase_setview). GridTableBase#set_view
 
-  *set_view*(%(arg-type)Grid% grid)
+  *set_view*(%(arg-type)"Grid":grid.html% grid)
 
 Overriding these is optional
 
@@ -272,7 +272,7 @@ h3(#GridTableBase_setcollabelvalue). GridTableBase#set_col_label_value
 
 h3(#GridTableBase_setattrprovider). GridTableBase#set_attr_provider
 
-  *set_attr_provider*(%(arg-type)GridCellAttrProvider% attrProvider)
+  *set_attr_provider*(%(arg-type)"GridCellAttrProvider":gridcellattrprovider.html% attrProvider)
 
 Attribute handling
 give us the attr provider to use - we take ownership of the pointer
@@ -315,7 +315,7 @@ May be overridden to handle attributes directly in the table.
 
 h3(#GridTableBase_setattr). GridTableBase#set_attr
 
-  *set_attr*(%(arg-type)GridCellAttr% attr,  
+  *set_attr*(%(arg-type)"GridCellAttr":gridcellattr.html% attr,  
              %(arg-type)Integer% row,  
              %(arg-type)Integer% col)
 
@@ -323,10 +323,10 @@ Set the attribute for a cell.
 
 h3(#GridTableBase_setrowattr). GridTableBase#set_row_attr
 
-  *set_row_attr*(%(arg-type)GridCellAttr% attr,  %(arg-type)Integer% row)
+  *set_row_attr*(%(arg-type)"GridCellAttr":gridcellattr.html% attr,  %(arg-type)Integer% row)
 
 
 h3(#GridTableBase_setcolattr). GridTableBase#set_col_attr
 
-  *set_col_attr*(%(arg-type)GridCellAttr% attr,  %(arg-type)Integer% col)
+  *set_col_attr*(%(arg-type)"GridCellAttr":gridcellattr.html% attr,  %(arg-type)Integer% col)
 

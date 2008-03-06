@@ -45,7 +45,7 @@ h2. Methods
 
 h3(#StreamToTextRedirector_new). StreamToTextRedirector.new
 
-  *StreamToTextRedirector.new*(%(arg-type)TextCtrl% text,  %(arg-type)ostream% ostr = nil)
+  *StreamToTextRedirector.new*(%(arg-type)"TextCtrl":textctrl.html% text,  %(arg-type)"ostream":ostream.html% ostr = nil)
 
 The constructor starts redirecting output sent to _ostr_ or _cout_ for
 the default parameter value to the text control _text_.

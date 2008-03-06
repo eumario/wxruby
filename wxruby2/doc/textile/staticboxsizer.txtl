@@ -29,9 +29,9 @@ h2. Methods
 
 h3(#StaticBoxSizer_wxstaticboxsizer). StaticBoxSizer.new
 
-  *StaticBoxSizer.new*(%(arg-type)StaticBox% box,  %(arg-type)Integer% orient)
+  *StaticBoxSizer.new*(%(arg-type)"StaticBox":staticbox.html% box,  %(arg-type)Integer% orient)
 
-  *StaticBoxSizer.new*(%(arg-type)Integer% orient,  %(arg-type)Window% parent, 
+  *StaticBoxSizer.new*(%(arg-type)Integer% orient,  %(arg-type)"Window":window.html% parent, 
                      %(arg-type)String% label = '')
 
 The first constructor uses an already existing static box. It takes the

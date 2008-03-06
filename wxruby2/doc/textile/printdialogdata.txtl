@@ -48,11 +48,11 @@ h2. Methods
 
 h3(#PrintDialogData_new). PrintDialogData.new
 
-  *PrintDialogData.new*(%(arg-type)PrintDialogData% dialogData)
+  *PrintDialogData.new*(%(arg-type)"PrintDialogData":printdialogdata.html% dialogData)
 
 Copy constructor.
 
-  *PrintDialogData.new*(%(arg-type)PrintData% printData)
+  *PrintDialogData.new*(%(arg-type)"PrintData":printdata.html% printData)
 
 Construct an object from a print dialog data object.
 
@@ -207,7 +207,7 @@ Sets the default number of copies the user has requested to be printed out.
 
 h3(#PrintDialogData_setprintdata). PrintDialogData#set_print_data
 
-  *set_print_data*(%(arg-type)PrintData% printData)
+  *set_print_data*(%(arg-type)"PrintData":printdata.html% printData)
 
 Sets the internal PrintData.
 
@@ -245,11 +245,11 @@ Sets the _to_ page number.
 
 h3(#PrintDialogData_assign). PrintDialogData#=
 
-  *operator $=$*(%(arg-type)PrintData% data)
+  *operator $=$*(%(arg-type)"PrintData":printdata.html% data)
 
 Assigns print data to this object.
 
-  *operator $=$*(%(arg-type)PrintDialogData% data)
+  *operator $=$*(%(arg-type)"PrintDialogData":printdialogdata.html% data)
 
 Assigns another print dialog data object to this object.
 

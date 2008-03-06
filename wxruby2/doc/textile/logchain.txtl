@@ -41,7 +41,7 @@ h2. Methods
 
 h3(#LogChain_new). LogChain.new
 
-  *LogChain.new*(%(arg-type)Log% logger)
+  *LogChain.new*(%(arg-type)"Log":log.html% logger)
 
 Sets the specified @logger@ (which may be @NULL@) as the default log
 target but the log messages are also passed to the previous log target if any.
@@ -77,7 +77,7 @@ true.
 
 h3(#LogChain_setlog). LogChain#set_log
 
-  *set_log*(%(arg-type)Log% logger)
+  *set_log*(%(arg-type)"Log":log.html% logger)
 
 Sets another log target to use (may be @NULL@). The log target specified
 in the "constructor":logchainctor.html or in a previous call to

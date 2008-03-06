@@ -46,7 +46,7 @@ h2. Methods
 
 h3(#AutomationObject_new). AutomationObject.new
 
-  *AutomationObject.new*(%(arg-type)IDISPATCH% dispatchPtr = nil)
+  *AutomationObject.new*(%(arg-type)"IDISPATCH":idispatch.html% dispatchPtr = nil)
 
 Constructor, taking an optional IDispatch pointer which will be released when the
 object is deleted.
@@ -58,7 +58,7 @@ Destructor. If the internal IDispatch pointer is non-null, it will be released.
 h3(#AutomationObject_callmethod). AutomationObject#call_method
 
  "Variant":variant.html *call_method*(%(arg-type)String% method,  %(arg-type)Integer% noArgs, 
-                       %(arg-type)Variant% args[])
+                       %(arg-type)"Variant":variant.html% args[])
 
  "Variant":variant.html *call_method*(%(arg-type)String% method,  %(arg-type)...% )
 
@@ -109,9 +109,9 @@ such as two copies of Excel running. Which object is referenced cannot currently
 
 h3(#AutomationObject_getobject). AutomationObject#get_object
 
- Boolean *get_object*(%(arg-type)AutomationObject% obj %(arg-type)String% property, 
+ Boolean *get_object*(%(arg-type)"AutomationObject":automationobject.html% obj %(arg-type)String% property, 
                     %(arg-type)Integer% noArgs = 0, 
-                    %(arg-type)Variant% args[] = nil)
+                    %(arg-type)"Variant":variant.html% args[] = nil)
 
 Retrieves a property from this object, assumed to be a dispatch pointer, and initialises _obj_ with it.
 To avoid having to deal with IDispatch pointers directly, use this function in preference
@@ -127,7 +127,7 @@ h4. See also
 h3(#AutomationObject_getproperty). AutomationObject#get_property
 
  "Variant":variant.html *get_property*(%(arg-type)String% property,  %(arg-type)Integer% noArgs, 
-                        %(arg-type)Variant% args[])
+                        %(arg-type)"Variant":variant.html% args[])
 
  "Variant":variant.html *get_property*(%(arg-type)String% property,  %(arg-type)...% )
 
@@ -150,10 +150,10 @@ needing to call GetProperty several times using several temporary objects.
 h3(#AutomationObject_invoke). AutomationObject#invoke
 
  Boolean *invoke*(%(arg-type)String% member,  %(arg-type)Integer% action, 
-                %(arg-type)Variant% retValue, 
+                %(arg-type)"Variant":variant.html% retValue, 
                 %(arg-type)Integer% noArgs, 
-                %(arg-type)Variant% args[], 
-                %(arg-type)Variant% ptrArgs[] = 0)
+                %(arg-type)"Variant":variant.html% args[], 
+                %(arg-type)"Variant":variant.html% ptrArgs[] = 0)
 
 This function is a low-level implementation that allows access to the IDispatch Invoke function.
 It is not meant to be called directly by the application, but is used by other convenience functions.
@@ -180,7 +180,7 @@ Two types of argument array are provided, so that when possible pointers are use
 h3(#AutomationObject_putproperty). AutomationObject#put_property
 
  Boolean *put_property*(%(arg-type)String% property,  %(arg-type)Integer% noArgs, 
-                      %(arg-type)Variant% args[])
+                      %(arg-type)"Variant":variant.html% args[])
 
  Boolean *put_property*(%(arg-type)String% property,  %(arg-type)...% )
 
@@ -202,7 +202,7 @@ needing to call GetProperty several times using several temporary objects.
 
 h3(#AutomationObject_setdispatchptr). AutomationObject#set_dispatch_ptr
 
-  *set_dispatch_ptr*(%(arg-type)IDISPATCH% dispatchPtr)
+  *set_dispatch_ptr*(%(arg-type)"IDISPATCH":idispatch.html% dispatchPtr)
 
 Sets the IDispatch pointer. This function does not check if there is already an IDispatch pointer.
 

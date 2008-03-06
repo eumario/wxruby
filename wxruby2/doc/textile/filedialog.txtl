@@ -85,13 +85,13 @@ h2. Methods
 
 h3(#FileDialog_new). FileDialog.new
 
-  *FileDialog.new*(%(arg-type)Window% parent,  %(arg-type)String% message = "Choose a file", 
+  *FileDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message = "Choose a file", 
                  %(arg-type)String% defaultDir = "", 
                  %(arg-type)String% defaultFile = "", 
                  %(arg-type)String% wildcard = ".<notextile>*</notextile>", 
                  %(arg-type)Integer% style = FD_DEFAULT_STYLE, 
-                 %(arg-type)Point% pos = DEFAULT_POSITION, 
-                 %(arg-type)Size% sz = DEFAULT_SIZE, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% sz = DEFAULT_SIZE, 
                  %(arg-type)String% name = "filedlg")
 
 Constructor. Use "FileDialog#show_modal":filedialog.html#FileDialog_showmodal to show the dialog.

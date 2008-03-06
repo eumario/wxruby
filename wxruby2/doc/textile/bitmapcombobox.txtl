@@ -69,22 +69,22 @@ h2. Methods
 
 h3(#BitmapComboBox_new). BitmapComboBox.new
 
-  *BitmapComboBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+  *BitmapComboBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
                      %(arg-type)String% value = "", 
-                     %(arg-type)Point% pos = DEFAULT_POSITION, 
-                     %(arg-type)Size% size = DEFAULT_SIZE, 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                      %(arg-type)Integer% n = 0, 
                      %(arg-type)String% choices[] = nil, 
                      %(arg-type)Integer% style = 0, 
-                     %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                     %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                      %(arg-type)String% name = "comboBox")
 
-  *BitmapComboBox.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
-                     %(arg-type)Point% pos, 
-                     %(arg-type)Size% size, 
-                     %(arg-type)ArrayString% choices, 
+  *BitmapComboBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+                     %(arg-type)"Point":point.html% pos, 
+                     %(arg-type)"Size":size.html% size, 
+                     %(arg-type)"ArrayString":arraystring.html% choices, 
                      %(arg-type)Integer% style = 0, 
-                     %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                     %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                      %(arg-type)String% name = "comboBox")
 
 Constructor, creating and showing a combobox.
@@ -109,21 +109,21 @@ h4. See also
 
 h3(#BitmapComboBox_create). BitmapComboBox#create
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
-                %(arg-type)Point% pos = DEFAULT_POSITION, 
-                %(arg-type)Size% size = DEFAULT_SIZE, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                 %(arg-type)Integer% n, 
                 %(arg-type)String% choices[], 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "comboBox")
 
- Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
-                %(arg-type)Point% pos, 
-                %(arg-type)Size% size, 
-                %(arg-type)ArrayString% choices, 
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+                %(arg-type)"Point":point.html% pos, 
+                %(arg-type)"Size":size.html% size, 
+                %(arg-type)"ArrayString":arraystring.html% choices, 
                 %(arg-type)Integer% style = 0, 
-                %(arg-type)Validator% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "comboBox")
 
 Creates the combobox for two-step construction. Derived classes
@@ -133,12 +133,12 @@ should call or replace this function. See "BitmapComboBox.new":bitmapcombobox.ht
 h3(#BitmapComboBox_append). BitmapComboBox#append
 
  Integer *append*(%(arg-type)String% item,  
-                 %(arg-type)Bitmap% bitmap = Wx::NULL_BITMAP)
+                 %(arg-type)"Bitmap":bitmap.html% bitmap = Wx::NULL_BITMAP)
 
 Adds the item to the end of the combo box.
 
  Integer *append*(%(arg-type)String% item,  
-                  %(arg-type)Bitmap% bitmap,  
+                  %(arg-type)"Bitmap":bitmap.html% bitmap,  
                   %(arg-type)Object% item_data)
 
 Adds the item to the end of the combo box, associating the given item
@@ -161,14 +161,14 @@ Returns the bitmap of the item with the given index.
 h3(#BitmapComboBox_insert). BitmapComboBox#insert
 
  Integer *insert*(%(arg-type)String% item,  
-                  %(arg-type)Bitmap% bitmap,  
+                  %(arg-type)"Bitmap":bitmap.html% bitmap,  
                   %(arg-type)Integer% pos)
 
 Inserts the item into the list before pos. Not valid for @CB_SORT@
 style, use "append":#BitmapComboBox_append instead.
 
  Integer *insert*(%(arg-type)String% item,  
-                  %(arg-type)Bitmap% bitmap,  
+                  %(arg-type)"Bitmap":bitmap.html% bitmap,  
                   %(arg-type)Integer% pos,
                   %(arg-type)Object% item_data)
 
@@ -180,7 +180,7 @@ data with the item. Not valid for @CB_SORT@ style, use
 
 h3(#BitmapComboBox_setitembitmap). BitmapComboBox#set_item_bitmap
 
-  *set_item_bitmap*(%(arg-type)Integer% n,  %(arg-type)Bitmap% bitmap)
+  *set_item_bitmap*(%(arg-type)Integer% n,  %(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap for the given item.
 

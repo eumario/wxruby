@@ -37,7 +37,7 @@ h2. Methods
 
 h3(#DelegateRendererNative_new). DelegateRendererNative.new
 
-  *DelegateRendererNative.new*(%(arg-type)RendererNative% rendererNative)
+  *DelegateRendererNative.new*(%(arg-type)"RendererNative":renderernative.html% rendererNative)
 
 The default constructor does the same thing as the other one except that it
 uses the "generic renderer":renderernativegetgeneric.html instead of the

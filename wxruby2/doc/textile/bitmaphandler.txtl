@@ -43,7 +43,7 @@ Destroys the BitmapHandler object.
 
 h3(#BitmapHandler_create). BitmapHandler#create
 
- Boolean *create*(%(arg-type)Bitmap% bitmap,  %(arg-type)% data,  %(arg-type)Integer% type, 
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)% data,  %(arg-type)Integer% type, 
                 %(arg-type)Integer% width, 
                 %(arg-type)Integer% height, 
                 %(arg-type)Integer% depth = -1)
@@ -85,7 +85,7 @@ Gets the bitmap type associated with this handler.
 
 h3(#BitmapHandler_loadfile). BitmapHandler#load_file
 
- Boolean *load_file*(%(arg-type)Bitmap% bitmap,  %(arg-type)String% name,  %(arg-type)Integer% type)
+ Boolean *load_file*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)String% name,  %(arg-type)Integer% type)
 
 Loads a bitmap from a file or resource, putting the resulting data into _bitmap_.
 
@@ -110,8 +110,8 @@ h4. See also
 
 h3(#BitmapHandler_savefile). BitmapHandler#save_file
 
- Boolean *save_file*(%(arg-type)Bitmap% bitmap,  %(arg-type)String% name,  %(arg-type)Integer% type, 
-                   %(arg-type)Palette% palette = nil)
+ Boolean *save_file*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)String% name,  %(arg-type)Integer% type, 
+                   %(arg-type)"Palette":palette.html% palette = nil)
 
 Saves a bitmap in the named file.
 

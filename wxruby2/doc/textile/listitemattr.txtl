@@ -27,7 +27,7 @@ h2. Methods
 
 h3(#ListItemAttr_new). ListItemAttr.new
 
-  *ListItemAttr.new*(%(arg-type)Colour% colText,  %(arg-type)Colour% colBack,  %(arg-type)Font% font)
+  *ListItemAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack,  %(arg-type)"Font":font.html% font)
 
 Construct a ListItemAttr with the specified foreground and
 background colors and font.
@@ -76,21 +76,21 @@ Returns  if the currently set text color is valid.
 
 h3(#ListItemAttr_setbackgroundcolour). ListItemAttr#set_background_colour
 
-  *set_background_colour*(%(arg-type)Colour% colour)
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets a new background color.
 
 
 h3(#ListItemAttr_setfont). ListItemAttr#set_font
 
-  *set_font*(%(arg-type)Font% font)
+  *set_font*(%(arg-type)"Font":font.html% font)
 
 Sets a new font.
 
 
 h3(#ListItemAttr_settextcolour). ListItemAttr#set_text_colour
 
-  *set_text_colour*(%(arg-type)Colour% colour)
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets a new text color.
 
