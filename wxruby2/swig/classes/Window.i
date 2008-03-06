@@ -22,8 +22,10 @@ enum wxWindowVariant
 // LayoutConstraints are deprecated and not supported in WxRuby
 %ignore wxWindow::SetConstraints;
 
-// A custom method is required to do the correct casting - see below
+// These are windows only and work with HWNDs; custom methods are
+// required to do the correct casting - see below
 %ignore wxWindow::GetHandle;
+%ignore wxWindow::AssociateHandle;
 
 // only support the variants that return an Point or Size object
 %ignore wxWindow::GetSize(int*  width , int*  height ) const;
@@ -194,4 +196,13 @@ enum wxWindowVariant
     long handle = (long)win->GetHandle();
 	return LONG2NUM(handle);
   }
+
+  // Attach a wx Object to an existing Windows handle (MSW only)
+  VALUE associate_handle(long handle)
+	{
+	  WXWidget wx_handle = (WXWidget)handle;
+	  $self->AssociateHandle(wx_handle);
+	  return Qnil;
+	}
+
 }
