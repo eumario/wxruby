@@ -117,7 +117,7 @@ Sets the font for drawing text for selected UI elements.
 
 h3(#AuiTabArt_setsizinginfo). AuiTabArt#set_sizing_info
 
-  *set_sizing_info*(%(arg-type)Size% tab_ctrl_size,  %(arg-type)size_t% tab_count)
+  *set_sizing_info*(%(arg-type)Size% tab_ctrl_size,  %(arg-type)Integer% tab_count)
 
 Sets sizing information.
 

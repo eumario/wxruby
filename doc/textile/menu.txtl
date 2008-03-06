@@ -379,7 +379,7 @@ before matching.
 
 h3(#Menu_finditembyposition). Menu#find_item_by_position
 
- "MenuItem":menuitem.html *find_item_by_position*(%(arg-type)size_t% position)
+ "MenuItem":menuitem.html *find_item_by_position*(%(arg-type)Integer% position)
 
 Returns the "MenuItem":menuitem.html at the given position in the menu.
 
@@ -430,7 +430,7 @@ h4. See also
 
 h3(#Menu_getmenuitemcount). Menu#get_menu_item_count
 
- size_t *get_menu_item_count*()
+ Integer *get_menu_item_count*()
 
 Returns the number of items in the menu.
 
@@ -459,10 +459,10 @@ h4. See also
 
 h3(#Menu_insert). Menu#insert
 
- "MenuItem":menuitem.html *insert*(%(arg-type)size_t% pos,  
+ "MenuItem":menuitem.html *insert*(%(arg-type)Integer% pos,  
                                    %(arg-type)MenuItem% item)
 
- "MenuItem":menuitem.html *insert*(%(arg-type)size_t% pos,  
+ "MenuItem":menuitem.html *insert*(%(arg-type)Integer% pos,  
                                    %(arg-type)Integer% id = Wx::ID_ANY, 
                                    %(arg-type)String% item, 
                                    %(arg-type)String% helpString = "", 
@@ -478,7 +478,7 @@ h4. See also
 
 h3(#Menu_insertcheckitem). Menu#insert_check_item
 
- "MenuItem":menuitem.html *insert_check_item*(%(arg-type)size_t% pos,  
+ "MenuItem":menuitem.html *insert_check_item*(%(arg-type)Integer% pos,  
                                               %(arg-type)Integer% id = Wx::ID_ANY, 
                                               %(arg-type)String% item, 
                                               %(arg-type)String% helpString = "")
@@ -491,7 +491,7 @@ h4. See also
 
 h3(#Menu_insertradioitem). Menu#insert_radio_item
 
- "MenuItem":menuitem.html *insert_radio_item*(%(arg-type)size_t% pos,  
+ "MenuItem":menuitem.html *insert_radio_item*(%(arg-type)Integer% pos,  
                                               %(arg-type)Integer% id = Wx::ID_ANY, 
                                               %(arg-type)String% item, 
                                               %(arg-type)String% helpString = "")
@@ -504,7 +504,7 @@ h4. See also
 
 h3(#Menu_insertseparator). Menu#insert_separator
 
- "MenuItem":menuitem.html *insert_separator*(%(arg-type)size_t% pos)
+ "MenuItem":menuitem.html *insert_separator*(%(arg-type)Integer% pos)
 
 Inserts a separator at the given position.
 

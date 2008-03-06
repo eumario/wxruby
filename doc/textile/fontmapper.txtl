@@ -154,7 +154,7 @@ can consequently be passed to Font constructor.
 
 h3(#FontMapper_getencoding). FontMapper#get_encoding
 
- "FontEncoding":fontencoding.html *get_encoding*(%(arg-type)size_t% n)
+ "FontEncoding":fontencoding.html *get_encoding*(%(arg-type)Integer% n)
 
 Returns the _n_-th supported encoding. Together with 
 "get_supported_encodings_count()":#FontMapper_getsupportedencodingscount() 
@@ -195,7 +195,7 @@ h4. See also
 
 h3(#FontMapper_getsupportedencodingscount). FontMapper#get_supported_encodings_count
 
- size_t *get_supported_encodings_count*()
+ Integer *get_supported_encodings_count*()
 
 Returns the number of the font encodings supported by this class. Together with 
 "get_encoding":#FontMapper_getencoding this method may be used to get

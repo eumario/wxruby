@@ -328,7 +328,7 @@ h4. See also
 
 h3(#ToolBar_deletetoolbypos). ToolBar#delete_tool_by_pos
 
- Boolean *delete_tool_by_pos*(%(arg-type)size_t% pos)
+ Boolean *delete_tool_by_pos*(%(arg-type)Integer% pos)
 
 This function behaves like "delete_tool":#ToolBar_deletetool but it
 deletes the tool at the specified position and not the one with the given id.
@@ -515,7 +515,7 @@ h4. See also
 
 h3(#ToolBar_insertcontrol). ToolBar#insert_control
 
- "ToolBarToolBase":toolbartoolbase.html *insert_control*(%(arg-type)size_t% pos, 
+ "ToolBarToolBase":toolbartoolbase.html *insert_control*(%(arg-type)Integer% pos, 
                                   %(arg-type)Control% control)
 
 Inserts the control into the toolbar at the given position.
@@ -530,7 +530,7 @@ h4. See also
 
 h3(#ToolBar_insertseparator). ToolBar#insert_separator
 
- "ToolBarToolBase":toolbartoolbase.html *insert_separator*(%(arg-type)size_t% pos)
+ "ToolBarToolBase":toolbartoolbase.html *insert_separator*(%(arg-type)Integer% pos)
 
 Inserts the separator into the toolbar at the given position.
 
@@ -544,7 +544,7 @@ h4. See also
 
 h3(#ToolBar_inserttool). ToolBar#insert_tool
 
- Integer *insert_tool*(%(arg-type)size_t% pos, 
+ Integer *insert_tool*(%(arg-type)Integer% pos, 
                          %(arg-type)Integer% toolId,
 						 %(arg-type)String% label, 
                          %(arg-type)Bitmap% bitmap1, 

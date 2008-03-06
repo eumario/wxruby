@@ -49,14 +49,14 @@ files.
 
 h3(#FileHistory_mfilehistoryn). FileHistory#m__file_history_n
 
-size_tm_fileHistoryN
+Integerm_fileHistoryN
 
 The number of files stored in the history array.
 
 
 h3(#FileHistory_mfilemaxfiles). FileHistory#m__file_max_files
 
-size_tm_fileMaxFiles
+Integerm_fileMaxFiles
 
 The maximum number of files to be stored and displayed on the menu.
 
@@ -70,7 +70,7 @@ The file menu used to display the file history list (if enabled).
 
 h3(#FileHistory_new). FileHistory.new
 
-  *FileHistory.new*(%(arg-type)size_t% maxFiles = 9,  %(arg-type)Integer% idBase = ID_FILE1)
+  *FileHistory.new*(%(arg-type)Integer% maxFiles = 9,  %(arg-type)Integer% idBase = ID_FILE1)
 
 Constructor. Pass the maximum number of files that should be stored and
 displayed.
@@ -106,21 +106,21 @@ Appends the files in the history list, to the given menu only.
 
 h3(#FileHistory_gethistoryfile). FileHistory#get_history_file
 
- String *get_history_file*(%(arg-type)size_t% index)
+ String *get_history_file*(%(arg-type)Integer% index)
 
 Returns the file at this index (zero-based).
 
 
 h3(#FileHistory_getmaxfiles). FileHistory#get_max_files
 
- size_t *get_max_files*()
+ Integer *get_max_files*()
 
 Returns the maximum number of files that can be stored.
 
 
 h3(#FileHistory_getcount). FileHistory#get_count
 
- size_t *get_count*()
+ Integer *get_count*()
 
 Returns the number of files currently stored in the file history.
 
@@ -138,7 +138,7 @@ h4. See also
 
 h3(#FileHistory_fromfilefromhistory). FileHistory#remove_file_from_history
 
-  *remove_file_from_history*(%(arg-type)size_t% i)
+  *remove_file_from_history*(%(arg-type)Integer% i)
 
 Removes the specified file from the history.
 

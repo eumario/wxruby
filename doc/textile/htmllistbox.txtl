@@ -112,7 +112,7 @@ h4. See also
 
 h3(#HtmlListBox_ongetitem). HtmlListBox#on_get_item
 
- String *on_get_item*(%(arg-type)size_t% n)
+ String *on_get_item*(%(arg-type)Integer% n)
 
 This method must be implemented in the derived class and should return
 the body (i.e. without @<html>@ nor @<body>@ tags) of the HTML fragment
@@ -121,7 +121,7 @@ for the given item.
 
 h3(#HtmlListBox_ongetitemmarkup). HtmlListBox#on_get_item_markup
 
- String *on_get_item_markup*(%(arg-type)size_t% n)
+ String *on_get_item_markup*(%(arg-type)Integer% n)
 
 This function may be overridden to decorate HTML returned by
 "on_get_item()":#HtmlListBox_ongetitem().

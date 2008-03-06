@@ -22,7 +22,7 @@ h2. Methods
 
 h3(#GridCellChoiceEditor_constr). GridCellChoiceEditor.new
 
-  *GridCellChoiceEditor.new*(%(arg-type)size_t% count = 0,  %(arg-type)String% choices[] = nil, 
+  *GridCellChoiceEditor.new*(%(arg-type)Integer% count = 0,  %(arg-type)String% choices[] = nil, 
                            %(arg-type)Boolean% allowOthers = false)
 
   *GridCellChoiceEditor.new*(%(arg-type)ArrayString% choices, 

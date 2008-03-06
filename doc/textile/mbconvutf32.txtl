@@ -30,14 +30,14 @@ h2. Methods
 
 h3(#MBConvUTF32_mb2wc). MBConvUTF32#mb2_wc
 
- size_t *mb2_wc*(%(arg-type)wchar_t% buf,  %(arg-type)char% psz,  %(arg-type)size_t% n)
+ Integer *mb2_wc*(%(arg-type)wchar_t% buf,  %(arg-type)char% psz,  %(arg-type)Integer% n)
 
 Converts from UTF-32 encoding to Unicode. Returns the size of the destination
 buffer.
 
 h3(#MBConvUTF32_wc2mb). MBConvUTF32#wc2_mb
 
- size_t *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)size_t% n)
+ Integer *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)Integer% n)
 
 Converts from Unicode to UTF-32 encoding. Returns the size of the destination
 buffer.

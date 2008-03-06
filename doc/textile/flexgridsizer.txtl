@@ -61,7 +61,7 @@ all children.
 
 h3(#FlexGridSizer_addgrowablecol). FlexGridSizer#add_growable_col
 
-  *add_growable_col*(%(arg-type)size_t% idx,  %(arg-type)Integer% proportion = $0$)
+  *add_growable_col*(%(arg-type)Integer% idx,  %(arg-type)Integer% proportion = $0$)
 
 Specifies that column _idx_ (starting from zero) should be grown if
 there is extra space available to the sizer.
@@ -72,7 +72,7 @@ then all columns are resized equally (instead of not being resized at all).
 
 h3(#FlexGridSizer_addgrowablerow). FlexGridSizer#add_growable_row
 
-  *add_growable_row*(%(arg-type)size_t% idx,  %(arg-type)Integer% proportion = $0$)
+  *add_growable_row*(%(arg-type)Integer% idx,  %(arg-type)Integer% proportion = $0$)
 
 Specifies that row idx (starting from zero) should be grown if there
 is extra space available to the sizer.
@@ -127,14 +127,14 @@ h4. See also
 
 h3(#FlexGridSizer_removegrowablecol). FlexGridSizer#remove_growable_col
 
-  *remove_growable_col*(%(arg-type)size_t% idx)
+  *remove_growable_col*(%(arg-type)Integer% idx)
 
 Specifies that column idx is no longer growable.
 
 
 h3(#FlexGridSizer_removegrowablerow). FlexGridSizer#remove_growable_row
 
-  *remove_growable_row*(%(arg-type)size_t% idx)
+  *remove_growable_row*(%(arg-type)Integer% idx)
 
 Specifies that row idx is no longer growable.
 

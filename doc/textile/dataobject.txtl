@@ -149,13 +149,13 @@ buf and return true on success, false on failure.
 
 h3(#DataObject_getdatasize). DataObject#get_data_size
 
- size_t *get_data_size*(%(arg-type)DataFormat% format )
+ Integer *get_data_size*(%(arg-type)DataFormat% format )
 
 Returns the data size of the given format _format_.
 
 h3(#DataObject_getformatcount). DataObject#get_format_count
 
- size_t *get_format_count*(%(arg-type)Direction% dir = Get)
+ Integer *get_format_count*(%(arg-type)Direction% dir = Get)
 
 Returns the number of available formats for rendering or setting the data.
 
@@ -169,7 +169,7 @@ native format of the DataObject.
 
 h3(#DataObject_setdata). DataObject#set_data
 
- Boolean *set_data*( %(arg-type)DataFormat% format,  %(arg-type)size_t% len,  %(arg-type)% buf )
+ Boolean *set_data*( %(arg-type)DataFormat% format,  %(arg-type)Integer% len,  %(arg-type)% buf )
 
 Set the data in the format _format_ of the length _len_ provided in the
 buffer _buf_.

@@ -46,13 +46,13 @@ h2. Methods
 
 h3(#MBConvFile_mb2wc). MBConvFile#mb2_wc
 
- size_t *mb2_wc*(%(arg-type)wchar_t% buf,  %(arg-type)char% psz,  %(arg-type)size_t% n)
+ Integer *mb2_wc*(%(arg-type)wchar_t% buf,  %(arg-type)char% psz,  %(arg-type)Integer% n)
 
 Converts from multibyte filename encoding to Unicode. Returns the size of the destination buffer.
 
 h3(#MBConvFile_wc2mb). MBConvFile#wc2_mb
 
- size_t *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)size_t% n)
+ Integer *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)Integer% n)
 
 Converts from Unicode to multibyte filename encoding. Returns the size of the destination buffer.
 

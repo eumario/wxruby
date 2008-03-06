@@ -49,7 +49,7 @@ Software\\MyKey");
  strTemp.Printf("MessageBox(strTemp,"Registry Value",0,this);
  
  //Retrive the number of SubKeys and enumerate them
- size_t nSubKeys;
+ Integer nSubKeys;
  pRegKey->GetKeyInfo(&nSubKeys,NULL,NULL,NULL);
  
  pRegKey->GetFirstKey(strTemp,1);
@@ -169,8 +169,8 @@ Gets the first value of this key.
 
 h3(#RegKey_getkeyinfo). RegKey#get_key_info
 
- Boolean *exists*(%(arg-type)size_t% pnSubKeys,  %(arg-type)size_t% pnValues, 
-                %(arg-type)size_t% pnMaxValueLen)
+ Boolean *exists*(%(arg-type)Integer% pnSubKeys,  %(arg-type)Integer% pnValues, 
+                %(arg-type)Integer% pnMaxValueLen)
 
 Gets information about the key.
 

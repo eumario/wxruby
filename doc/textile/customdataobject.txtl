@@ -70,7 +70,7 @@ just call the derived class' version of @Free()@).
 
 h3(#CustomDataObject_alloc). CustomDataObject#alloc
 
-  *alloc*(%(arg-type)size_t% size)
+  *alloc*(%(arg-type)Integer% size)
 
 This function is called to allocate _size_ bytes of memory from SetData().
 The default version just uses the operator new.
@@ -85,7 +85,7 @@ delete$[]$ on the data.
 
 h3(#CustomDataObject_getsize). CustomDataObject#get_size
 
- size_t *get_size*()
+ Integer *get_size*()
 
 Returns the data size in bytes.
 
@@ -97,7 +97,7 @@ Returns a pointer to the data.
 
 h3(#CustomDataObject_setdata). CustomDataObject#set_data
 
-  *set_data*( %(arg-type)size_t% size,  %(arg-type)% data)
+  *set_data*( %(arg-type)Integer% size,  %(arg-type)% data)
 
 Set the data. The data object will make an internal copy.
 
@@ -105,7 +105,7 @@ Set the data. The data object will make an internal copy.
 
 h3(#CustomDataObject_takedata). CustomDataObject#take_data
 
-  *take_data*( %(arg-type)size_t% size,  %(arg-type)% data)
+  *take_data*( %(arg-type)Integer% size,  %(arg-type)% data)
 
 Like "set_data":#CustomDataObject_setdata, but doesn't copy the data -
 instead the object takes ownership of the pointer.

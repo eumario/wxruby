@@ -20,7 +20,7 @@ h2. Methods
 
 h3(#MemoryInputStream_new). MemoryInputStream.new
 
-  *MemoryInputStream.new*(%(arg-type)char% data,  %(arg-type)size_t% len)
+  *MemoryInputStream.new*(%(arg-type)char% data,  %(arg-type)Integer% len)
 
 Initializes a new read-only memory stream which will use the specified buffer
 _data_ of length _len_. The stream does not take ownership of the 

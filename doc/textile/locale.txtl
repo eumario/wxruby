@@ -275,7 +275,7 @@ h3(#Locale_getstring). Locale#get_string
  char *get_string*(%(arg-type)char% szOrigString,  %(arg-type)char% szDomain = nil)
 
  char *get_string*(%(arg-type)char% szOrigString,  %(arg-type)char% szOrigString2, 
-                 %(arg-type)size_t% n, 
+                 %(arg-type)Integer% n, 
                  %(arg-type)char% szDomain = nil)
 
 Retrieves the translation for a string in all loaded domains unless the

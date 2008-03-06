@@ -168,7 +168,7 @@ Draws the icon.
 
 h3(#GraphicsContext_drawlines). GraphicsContext#draw_lines
 
-  *draw_lines*(%(arg-type)size_t% n,  %(arg-type)Point2DDouble% points, 
+  *draw_lines*(%(arg-type)Integer% n,  %(arg-type)Point2DDouble% points, 
              %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
 
 Draws a polygon.

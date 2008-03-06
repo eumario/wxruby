@@ -57,7 +57,7 @@ Constructor, may be used to initialise the text (otherwise
 
 h3(#TextDataObject_gettextlength). TextDataObject#get_text_length
 
- size_t *get_text_length*()
+ Integer *get_text_length*()
 
 Returns the data size. By default, returns the size of the text data
 set in the constructor or using "set_text":#TextDataObject_settext.

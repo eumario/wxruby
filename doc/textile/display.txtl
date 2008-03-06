@@ -32,7 +32,7 @@ h2. Methods
 
 h3(#Display_new). Display.new
 
-  *Display.new*(%(arg-type)size_t% index = 0)
+  *Display.new*(%(arg-type)Integer% index = 0)
 
 Constructor, setting up a Display instance with the specified display.
 
@@ -70,7 +70,7 @@ default by using the system's 'scrn' resource.
 
 h3(#Display_getcount). Display#get_count
 
- size_t *get_count*()
+ Integer *get_count*()
 
 Returns the number of connected displays.
 

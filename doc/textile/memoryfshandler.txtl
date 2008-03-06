@@ -75,7 +75,7 @@ h3(#MemoryFSHandler_addfile). MemoryFSHandler#add_file
 
   *add_file*(%(arg-type)String% filename,  %(arg-type)String% textdata)
 
-  *add_file*(%(arg-type)String% filename,  %(arg-type)% binarydata,  %(arg-type)size_t% size)
+  *add_file*(%(arg-type)String% filename,  %(arg-type)% binarydata,  %(arg-type)Integer% size)
 
 Add file to list of files stored in memory. Stored 
 data (bitmap, text or raw data)
