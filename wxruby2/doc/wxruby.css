@@ -67,6 +67,12 @@ pre {
     color: #999999;
 }
 
+/* links to types within a parameter list */
+.arg-type a {
+    color: #999999;
+    text-decoration: underline;
+}
+
 a[href="#top"] { 
     font-size: smaller;
     font-weight: bold;
