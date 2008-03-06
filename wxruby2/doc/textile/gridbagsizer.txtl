@@ -144,7 +144,7 @@ h3(#GridBagSizer_getitemposition). GridBagSizer#get_item_position
 
  "GBPosition":gbposition.html *get_item_position*(%(arg-type)Sizer% sizer)
 
- "GBPosition":gbposition.html *get_item_position*(%(arg-type)size_t% index)
+ "GBPosition":gbposition.html *get_item_position*(%(arg-type)Integer% index)
 
 Get the grid position of the specified item.
 
@@ -154,7 +154,7 @@ h3(#GridBagSizer_getitemspan). GridBagSizer#get_item_span
 
  "GBSpan":gbspan.html *get_item_span*(%(arg-type)Sizer% sizer)
 
- "GBSpan":gbspan.html *get_item_span*(%(arg-type)size_t% index)
+ "GBSpan":gbspan.html *get_item_span*(%(arg-type)Integer% index)
 
 Get the row/col spanning of the specified item
 
@@ -177,7 +177,7 @@ h3(#GridBagSizer_setitemposition). GridBagSizer#set_item_position
 
  Boolean *set_item_position*(%(arg-type)Sizer% sizer,  %(arg-type)GBPosition% pos)
 
- Boolean *set_item_position*(%(arg-type)size_t% index,  %(arg-type)GBPosition% pos)
+ Boolean *set_item_position*(%(arg-type)Integer% index,  %(arg-type)GBPosition% pos)
 
 Set the grid position of the specified item. Returns true on success.
 If the move is not allowed (because an item is already there) then
@@ -189,7 +189,7 @@ h3(#GridBagSizer_setitemspan). GridBagSizer#set_item_span
 
  Boolean *set_item_span*(%(arg-type)Sizer% sizer,  %(arg-type)GBSpan% span)
 
- Boolean *set_item_span*(%(arg-type)size_t% index,  %(arg-type)GBSpan% span)
+ Boolean *set_item_span*(%(arg-type)Integer% index,  %(arg-type)GBSpan% span)
 
 Set the row/col spanning of the specified item. Returns true on
 success. If the move is not allowed (because an item is already there)

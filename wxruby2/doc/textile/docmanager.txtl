@@ -326,7 +326,7 @@ Returns the number of documents that can be open simultaneously.
 
 h3(#DocManager_gethistoryfilescount). DocManager#get_history_files_count
 
- size_t *get_history_files_count*()
+ Integer *get_history_files_count*()
 
 Returns the number of files currently stored in the file history.
 

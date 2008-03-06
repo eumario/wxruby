@@ -27,7 +27,7 @@ h3(#TextDropTarget_wxtextdroptarget). TextDropTarget.new
 h3(#TextDropTarget_ondrop). TextDropTarget#on_drop
 
  Boolean *on_drop*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)% data, 
-                 %(arg-type)size_t% size)
+                 %(arg-type)Integer% size)
 
 See "DropTarget#on_drop":droptarget.html#DropTarget_ondrop. This function is implemented
 appropriately for text, and calls "TextDropTarget#on_drop_text":textdroptarget.html#TextDropTarget_ondroptext.

@@ -222,32 +222,32 @@ h3(#GridTableBase_clear). GridTableBase#clear
 
 h3(#GridTableBase_insertrows). GridTableBase#insert_rows
 
- Boolean *insert_rows*(%(arg-type)size_t% pos = 0,  %(arg-type)size_t% numRows = 1)
+ Boolean *insert_rows*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numRows = 1)
 
 
 h3(#GridTableBase_appendrows). GridTableBase#append_rows
 
- Boolean *append_rows*(%(arg-type)size_t% numRows = 1)
+ Boolean *append_rows*(%(arg-type)Integer% numRows = 1)
 
 
 h3(#GridTableBase_deleterows). GridTableBase#delete_rows
 
- Boolean *delete_rows*(%(arg-type)size_t% pos = 0,  %(arg-type)size_t% numRows = 1)
+ Boolean *delete_rows*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numRows = 1)
 
 
 h3(#GridTableBase_insertcols). GridTableBase#insert_cols
 
- Boolean *insert_cols*(%(arg-type)size_t% pos = 0,  %(arg-type)size_t% numCols = 1)
+ Boolean *insert_cols*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numCols = 1)
 
 
 h3(#GridTableBase_appendcols). GridTableBase#append_cols
 
- Boolean *append_cols*(%(arg-type)size_t% numCols = 1)
+ Boolean *append_cols*(%(arg-type)Integer% numCols = 1)
 
 
 h3(#GridTableBase_deletecols). GridTableBase#delete_cols
 
- Boolean *delete_cols*(%(arg-type)size_t% pos = 0,  %(arg-type)size_t% numCols = 1)
+ Boolean *delete_cols*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numCols = 1)
 
 
 h3(#GridTableBase_getrowlabelvalue). GridTableBase#get_row_label_value
@@ -295,14 +295,14 @@ a GridCellAttrProvider if necessary.
 
 h3(#GridTableBase_updateattrrows). GridTableBase#update_attr_rows
 
-  *update_attr_rows*(%(arg-type)size_t% pos,  %(arg-type)Integer% numRows)
+  *update_attr_rows*(%(arg-type)Integer% pos,  %(arg-type)Integer% numRows)
 
 change row/col number in attribute if needed
 
 
 h3(#GridTableBase_updateattrcols). GridTableBase#update_attr_cols
 
-  *update_attr_cols*(%(arg-type)size_t% pos,  %(arg-type)Integer% numCols)
+  *update_attr_cols*(%(arg-type)Integer% pos,  %(arg-type)Integer% numCols)
 
 
 h3(#GridTableBase_getattr). GridTableBase#get_attr

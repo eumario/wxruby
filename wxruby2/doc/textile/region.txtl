@@ -46,7 +46,7 @@ Constructs a rectangular region a Rect object.
 
 Constructs a region by copying another region.
 
-  *Region.new*(%(arg-type)size_t% n,  %(arg-type)Point% points, 
+  *Region.new*(%(arg-type)Integer% n,  %(arg-type)Point% points, 
              %(arg-type)Integer% fillStyle = WINDING_RULE)
 
 Constructs a region corresponding to the polygon made of _n_ points in the

@@ -285,7 +285,7 @@ h4. See also
 
 h3(#CalendarCtrl_getattr). CalendarCtrl#get_attr
 
- "CalendarDateAttr":calendardateattr.html *get_attr*(%(arg-type)size_t% day)
+ "CalendarDateAttr":calendardateattr.html *get_attr*(%(arg-type)Integer% day)
 
 Returns the attribute for the given date (should be in the range $1$).
 
@@ -294,7 +294,7 @@ The returned pointer may be @NULL@.
 
 h3(#CalendarCtrl_setattr). CalendarCtrl#set_attr
 
-  *set_attr*(%(arg-type)size_t% day,  %(arg-type)CalendarDateAttr% attr)
+  *set_attr*(%(arg-type)Integer% day,  %(arg-type)CalendarDateAttr% attr)
 
 Associates the attribute with the specified date (in the range $1$).
 
@@ -303,14 +303,14 @@ If the pointer is @NULL@, the items attribute is cleared.
 
 h3(#CalendarCtrl_setholiday). CalendarCtrl#set_holiday
 
-  *set_holiday*(%(arg-type)size_t% day)
+  *set_holiday*(%(arg-type)Integer% day)
 
 Marks the specified day as being a holiday in the current month.
 
 
 h3(#CalendarCtrl_resetattr). CalendarCtrl#reset_attr
 
-  *reset_attr*(%(arg-type)size_t% day)
+  *reset_attr*(%(arg-type)Integer% day)
 
 Clears any attributes associated with the given day (in the range
 $1$).

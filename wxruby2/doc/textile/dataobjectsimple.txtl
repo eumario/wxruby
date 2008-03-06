@@ -69,7 +69,7 @@ Sets the supported format.
 
 h3(#DataObjectSimple_getdatasize). DataObjectSimple#get_data_size
 
- size_t *get_data_size*()
+ Integer *get_data_size*()
 
 Gets the size of our data. Must be implemented in the derived class if the
 object supports rendering its data.
@@ -85,7 +85,7 @@ derived class if the object supports rendering its data.
 
 h3(#DataObjectSimple_setdata). DataObjectSimple#set_data
 
- Boolean *set_data*(%(arg-type)size_t% len,  %(arg-type)% buf)
+ Boolean *set_data*(%(arg-type)Integer% len,  %(arg-type)% buf)
 
 Copy the data from the buffer, return true on success. Must be implemented in
 the derived class if the object supports setting its data.

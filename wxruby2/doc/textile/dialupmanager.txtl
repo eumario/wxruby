@@ -82,7 +82,7 @@ Destructor.
 
 h3(#DialUpManager_getispnames). DialUpManager#get_isp_names
 
- size_t *get_isp_names*(%(arg-type)ArrayString% names)
+ Integer *get_isp_names*(%(arg-type)ArrayString% names)
 
 This function is only implemented under Windows.
 
@@ -178,7 +178,7 @@ h4. See also
 
 h3(#DialUpManager_enableautocheckonlinestatus). DialUpManager#enable_auto_check_online_status
 
- Boolean *enable_auto_check_online_status*(%(arg-type)size_t% nSeconds = 60)
+ Boolean *enable_auto_check_online_status*(%(arg-type)Integer% nSeconds = 60)
 
 Enable automatic checks for the connection status and sending of 
 @EVT_DIALUP_CONNECTED/EVT_DIALUP_DISCONNECTED@ events. The interval

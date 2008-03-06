@@ -390,11 +390,11 @@ Inequality test operators.
 
 h3(#Variant_array). Variant#[]
 
- "Variant":variant.html *operator $[]$*(%(arg-type)size_t% idx)
+ "Variant":variant.html *operator $[]$*(%(arg-type)Integer% idx)
 
 Returns the value at _idx_ (zero-based).
 
- "Variant":variant.html *operator $[]$*(%(arg-type)size_t% idx)
+ "Variant":variant.html *operator $[]$*(%(arg-type)Integer% idx)
 
 Returns a reference to the value at _idx_ (zero-based). This can be used
 to change the value at this index.

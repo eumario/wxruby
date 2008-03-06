@@ -291,7 +291,7 @@ h3(#Sizer_detach). Sizer#detach
 
  Boolean *detach*(%(arg-type)Sizer% sizer)
 
- Boolean *detach*(%(arg-type)size_t% index)
+ Boolean *detach*(%(arg-type)Integer% index)
 
 Detach a child from the sizer without destroying it. _window_ is the window to be
 detached, _sizer_ is the equivalent sizer and _index_ is the position of
@@ -345,7 +345,7 @@ h3(#Sizer_getitem). Sizer#get_item
  "SizerItem":sizeritem.html *get_item*(%(arg-type)Sizer% sizer, 
                       %(arg-type)Boolean% recursive = false)
 
- "SizerItem":sizeritem.html *get_item*(%(arg-type)size_t% index)
+ "SizerItem":sizeritem.html *get_item*(%(arg-type)Integer% index)
 
 Finds item of the sizer which holds given _window_, _sizer_ or is
 located in sizer at position _index_.  Use parameter _recursive_ to
@@ -376,21 +376,21 @@ size of all the children and their borders or the minimal size set by
 
 h3(#Sizer_insert). Sizer#insert
 
- "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index, 
+ "SizerItem":sizeritem.html *insert*(%(arg-type)Integer% index, 
                     %(arg-type)Window% window, 
                     %(arg-type)Integer% proportion = 0, 
                     %(arg-type)Integer% flag = 0, 
                     %(arg-type)Integer% border = 0, 
                     %(arg-type)Object% userData = nil)
 
- "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index,  
+ "SizerItem":sizeritem.html *insert*(%(arg-type)Integer% index,  
                     %(arg-type)Sizer% sizer, 
                     %(arg-type)Integer% proportion = 0, 
                     %(arg-type)Integer% flag = 0, 
                     %(arg-type)Integer% border = 0, 
                     %(arg-type)Object% userData = nil)
 
- "SizerItem":sizeritem.html *insert*(%(arg-type)size_t% index,  
+ "SizerItem":sizeritem.html *insert*(%(arg-type)Integer% index,  
                     %(arg-type)Integer% width, 
                     %(arg-type)Integer% height, 
                     %(arg-type)Integer% proportion = 0, 
@@ -406,14 +406,14 @@ See "Sizer#add":sizer.html#Sizer_add for the meaning of the other parameters.
 
 h3(#Sizer_insertspacer). Sizer#insert_spacer
 
- "SizerItem":sizeritem.html *insert_spacer*(%(arg-type)size_t% index,  %(arg-type)Integer% size)
+ "SizerItem":sizeritem.html *insert_spacer*(%(arg-type)Integer% index,  %(arg-type)Integer% size)
 
 Inserts non-stretchable space to the sizer. More readable way of calling
 "Insert":sizerinsert.html(size, size, 0).
 
 h3(#Sizer_insertstretchspacer). Sizer#insert_stretch_spacer
 
- "SizerItem":sizeritem.html *insert_stretch_spacer*(%(arg-type)size_t% index, 
+ "SizerItem":sizeritem.html *insert_stretch_spacer*(%(arg-type)Integer% index, 
                                    %(arg-type)Integer% prop = 1)
 
 Inserts stretchable space to the sizer. More readable way of calling

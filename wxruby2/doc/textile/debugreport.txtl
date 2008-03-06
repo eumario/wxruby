@@ -220,7 +220,7 @@ wish to add to the report using "add_file":#DebugReport_addfile.
 
 h3(#DebugReport_getfile). DebugReport#get_file
 
- Boolean *get_file*(%(arg-type)size_t% n,  %(arg-type)String% name,  %(arg-type)String% desc)
+ Boolean *get_file*(%(arg-type)Integer% n,  %(arg-type)String% name,  %(arg-type)String% desc)
 
 Retrieves the name (relative to 
 "get_directory()":#DebugReport_getdirectory()) and the description of the
@@ -230,7 +230,7 @@ filse,  is returned.
 
 h3(#DebugReport_getfilescount). DebugReport#get_files_count
 
- size_t *get_files_count*()
+ Integer *get_files_count*()
 
 Gets the current number files in this report.
 

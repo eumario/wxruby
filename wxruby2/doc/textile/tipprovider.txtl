@@ -31,7 +31,7 @@ h2. Methods
 
 h3(#TipProvider_new). TipProvider.new
 
-  *TipProvider.new*(%(arg-type)size_t% currentTip)
+  *TipProvider.new*(%(arg-type)Integer% currentTip)
 
 Constructor.
 
@@ -57,7 +57,7 @@ skipped, and the next one is read.
 
 h3(#TipProvider_getcurrenttip). CurrentTipProvider#get_current_tip
 
- size_t *get_current_tip*()
+ Integer *get_current_tip*()
 
 Returns the index of the current tip (i.e. the one which would be returned by 
 GetTip).

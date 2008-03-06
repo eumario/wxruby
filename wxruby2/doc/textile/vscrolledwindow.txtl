@@ -118,7 +118,7 @@ try to make the best guess possible.
 
 h3(#VScrolledWindow_getfirstvisibleline). VScrolledWindow#get_first_visible_line
 
- size_t *get_first_visible_line*()
+ Integer *get_first_visible_line*()
 
 Returns the index of the first currently visible line.
 
@@ -128,10 +128,10 @@ exists only for symmetry with "get_last_visible_line":#VScrolledWindow_getlastvi
 
 h3(#VScrolledWindow_getlastvisibleline). VScrolledWindow#get_last_visible_line
 
- size_t *get_last_visible_line*()
+ Integer *get_last_visible_line*()
 
 Returns the index of the last currently visible line. Note that this method
-returns @(size_t)-1@ (i.e. a huge positive number) if the control is
+returns @(Integer)-1@ (i.e. a huge positive number) if the control is
 empty so if this is possible you should use "get_visible_end":#VScrolledWindow_getvisibleend 
 instead.
 
@@ -142,7 +142,7 @@ h4. See also
 
 h3(#VScrolledWindow_getlinecount). VScrolledWindow#get_line_count
 
- size_t *get_line_count*()
+ Integer *get_line_count*()
 
 Get the number of lines this window contains (previously set by 
 "set_line_count()":#VScrolledWindow_setlinecount())
@@ -150,7 +150,7 @@ Get the number of lines this window contains (previously set by
 
 h3(#VScrolledWindow_getvisiblebegin). VScrolledWindow#get_visible_begin
 
- size_t *get_visible_begin*()
+ Integer *get_visible_begin*()
 
 Returns the index of the first currently visible line.
 
@@ -161,7 +161,7 @@ h4. See also
 
 h3(#VScrolledWindow_getvisibleend). VScrolledWindow#get_visible_end
 
- size_t *get_visible_end*()
+ Integer *get_visible_end*()
 
 Returns the index of the first line after the currently visible one. If the
 return value is $0$ it means that no lines are currently shown (which only
@@ -185,7 +185,7 @@ Return the item at the specified (in physical coordinates) position or
 
 h3(#VScrolledWindow_isvisible). VScrolledWindow#is_visible
 
- Boolean *is_visible*(%(arg-type)size_t% line)
+ Boolean *is_visible*(%(arg-type)Integer% line)
 
 Returns @true@ if the given line is (at least partially) visible or 
 @false@ otherwise.
@@ -193,7 +193,7 @@ Returns @true@ if the given line is (at least partially) visible or
 
 h3(#VScrolledWindow_ongetlineheight). VScrolledWindow#on_get_line_height
 
- "Coord":coord.html *on_get_line_height*(%(arg-type)size_t% n)
+ "Coord":coord.html *on_get_line_height*(%(arg-type)Integer% n)
 
 This protected virtual function must be overridden in the derived class and it
 should return the height of the given line in pixels.
@@ -205,7 +205,7 @@ h4. See also
 
 h3(#VScrolledWindow_ongetlineshint). VScrolledWindow#on_get_lines_hint
 
-  *on_get_lines_hint*(%(arg-type)size_t% lineMin,  %(arg-type)size_t% lineMax)
+  *on_get_lines_hint*(%(arg-type)Integer% lineMin,  %(arg-type)Integer% lineMax)
 
 This function doesn't have to be overridden but it may be useful to do
 it if calculating the lines heights is a relatively expensive operation
@@ -225,7 +225,7 @@ as usual.
 
 h3(#VScrolledWindow_refreshline). VScrolledWindow#refresh_line
 
-  *refresh_line*(%(arg-type)size_t% line)
+  *refresh_line*(%(arg-type)Integer% line)
 
 Refreshes the specified line -- it will be redrawn during the next main loop
 iteration.
@@ -237,7 +237,7 @@ h4. See also
 
 h3(#VScrolledWindow_refreshlines). VScrolledWindow#refresh_lines
 
-  *refresh_lines*(%(arg-type)size_t% from,  %(arg-type)size_t% to)
+  *refresh_lines*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
 
 Refreshes all lines between _from_ and _to_, inclusive. _from_
 should be less than or equal to _to_.
@@ -289,7 +289,7 @@ h4. See also
 
 h3(#VScrolledWindow_scrolltoline). VScrolledWindow#scroll_to_line
 
- Boolean *scroll_to_line*(%(arg-type)size_t% line)
+ Boolean *scroll_to_line*(%(arg-type)Integer% line)
 
 Scroll to the specified line: it will become the first visible line in
 the window.
@@ -299,7 +299,7 @@ Return @true@ if we scrolled the window, @false@ if nothing was done.
 
 h3(#VScrolledWindow_setlinecount). VScrolledWindow#set_line_count
 
-  *set_line_count*(%(arg-type)size_t% count)
+  *set_line_count*(%(arg-type)Integer% count)
 
 Set the number of lines the window contains: the derived class must
 provide the heights for all lines with indices up to the one given here

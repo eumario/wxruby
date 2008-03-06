@@ -187,7 +187,7 @@ h4. Parameters
 
 h3(#FFile_read). FFile#read
 
- size_t *read*(%(arg-type)% buffer,  %(arg-type)size_t% count)
+ Integer *read*(%(arg-type)% buffer,  %(arg-type)Integer% count)
 
 Reads the specified number of bytes into a buffer, returning the actual number read.
 
@@ -251,7 +251,7 @@ Returns the current position.
 
 h3(#FFile_write). FFile#write
 
- size_t *write*(%(arg-type)% buffer,  %(arg-type)size_t% count)
+ Integer *write*(%(arg-type)% buffer,  %(arg-type)Integer% count)
 
 Writes the specified number of bytes from a buffer.
 

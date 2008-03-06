@@ -37,8 +37,8 @@ h3(#MBConv_wxmbconv). MBConv.new
 
 h3(#MBConv_mb2wc). MBConv#mb2_wc
 
- size_t *mb2_wc*(%(arg-type)wchar_t% outputBuf,  %(arg-type)char% psz, 
-               %(arg-type)size_t% outputSize)
+ Integer *mb2_wc*(%(arg-type)wchar_t% outputBuf,  %(arg-type)char% psz, 
+               %(arg-type)Integer% outputSize)
 
 Converts from a string _psz_ in multibyte encoding to Unicode putting the
 output into the buffer _outputBuf_ of the maximum size _outputSize_ (in wide
@@ -63,7 +63,7 @@ The length of the converted string (in wide characters, *excluding* the NUL)
 
 h3(#MBConv_wc2mb). MBConv#wc2_mb
 
- size_t *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)size_t% n)
+ Integer *wc2_mb*(%(arg-type)char% buf,  %(arg-type)wchar_t% psz,  %(arg-type)Integer% n)
 
 Converts from Unicode to multibyte encoding. The semantics of this function
 (including the return value meaning) is the same as for 

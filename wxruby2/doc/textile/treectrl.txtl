@@ -715,7 +715,7 @@ both selected and unselected items.
 h3(#TreeCtrl_insertitembefore). TreeCtrl#insert_item_before
 
 	"TreeItemId":treeitemid.html *insert_item_before*(%(arg-type)TreeItemId% parent, 
-	                         %(arg-type)size_t% before,  %(arg-type)String% text, 
+	                         %(arg-type)Integer% before,  %(arg-type)String% text, 
 	                         %(arg-type)Integer% image = -1, 
 	                         %(arg-type)Integer% selImage = -1, 
 	                         %(arg-type)Object% item_data = @nil@)

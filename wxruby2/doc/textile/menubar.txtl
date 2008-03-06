@@ -62,7 +62,7 @@ h3(#MenuBar_new). MenuBar.new
 
 Default constructor.
 
-  *MenuBar.new*(%(arg-type)size_t% n,  %(arg-type)Menu% menus[],  %(arg-type)String% titles[], 
+  *MenuBar.new*(%(arg-type)Integer% n,  %(arg-type)Menu% menus[],  %(arg-type)String% titles[], 
               %(arg-type)Integer% style = 0)
 
 Construct a menu bar from arrays of menus and titles.
@@ -269,7 +269,7 @@ Returns the number of menus in this menubar.
 
 h3(#MenuBar_insert). MenuBar#insert
 
- Boolean *insert*(%(arg-type)size_t% pos,  %(arg-type)Menu% menu,  %(arg-type)String% title)
+ Boolean *insert*(%(arg-type)Integer% pos,  %(arg-type)Menu% menu,  %(arg-type)String% title)
 
 Inserts the menu at the given position into the menu bar. Inserting menu at
 position $0$ will insert it in the very beginning of it, inserting at position 
@@ -326,7 +326,7 @@ Redraw the menu bar
 
 h3(#MenuBar_remove). MenuBar#remove
 
- "Menu":menu.html *remove*(%(arg-type)size_t% pos)
+ "Menu":menu.html *remove*(%(arg-type)Integer% pos)
 
 Removes the menu from the menu bar and returns the menu object - the caller is
 responsible for deleting it. This function may be used together with 
@@ -339,7 +339,7 @@ h4. See also
 
 h3(#MenuBar_replace). MenuBar#replace
 
- "Menu":menu.html *replace*(%(arg-type)size_t% pos,  %(arg-type)Menu% menu, 
+ "Menu":menu.html *replace*(%(arg-type)Integer% pos,  %(arg-type)Menu% menu, 
                 %(arg-type)String% title)
 
 Replaces the menu at the given position with another one.

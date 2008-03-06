@@ -36,7 +36,7 @@ Copy constructor, refcounting is used for performance , but MemoryBuffer
 is not a copy-on-write structure so changes made to one buffer effect
 all copies made from it.
 
-  *MemoryBuffer.new*(%(arg-type)size_t% size)
+  *MemoryBuffer.new*(%(arg-type)Integer% size)
 
 Create a new buffer.
 
@@ -50,25 +50,25 @@ Return a pointer to the data in the buffer.
 
 h3(#MemoryBuffer_getbufsize). MemoryBuffer#get_buf_size
 
- size_t *get_buf_size*()
+ Integer *get_buf_size*()
 
 Returns the size of the buffer.
 
 h3(#MemoryBuffer_getdatalen). MemoryBuffer#get_data_len
 
- size_t *get_data_len*()
+ Integer *get_data_len*()
 
 Returns the length of the valid data in the buffer.
 
 h3(#MemoryBuffer_setbufsize). MemoryBuffer#set_buf_size
 
-  *set_buf_size*(%(arg-type)size_t% size)
+  *set_buf_size*(%(arg-type)Integer% size)
 
 Ensures the buffer has at least _size_ bytes available.
 
 h3(#MemoryBuffer_setdatalen). MemoryBuffer#set_data_len
 
-  *set_data_len*(%(arg-type)size_t% size)
+  *set_data_len*(%(arg-type)Integer% size)
 
 Sets the length of the data stored in the buffer.  Mainly useful for truncating existing data.
 
@@ -77,7 +77,7 @@ distinct from the allocated size
 
 h3(#MemoryBuffer_getwritebuf). MemoryBuffer#get_write_buf
 
-  *get_write_buf*(%(arg-type)size_t% sizeNeeded)
+  *get_write_buf*(%(arg-type)Integer% sizeNeeded)
 
 Ensure the buffer is big enough and return a pointer to the
 buffer which can be used to directly write into the buffer
@@ -85,7 +85,7 @@ up to _sizeNeeded_ bytes.
 
 h3(#MemoryBuffer_ungetwritebuf). MemoryBuffer#unget_write_buf
 
-  *unget_write_buf*(%(arg-type)size_t% sizeUsed)
+  *unget_write_buf*(%(arg-type)Integer% sizeUsed)
 
 Update the buffer after completing a direct write, which
 you must have used GetWriteBuf() to initialise.
@@ -95,7 +95,7 @@ by the direct write
 
 h3(#MemoryBuffer_getappendbuf). MemoryBuffer#get_append_buf
 
-  *get_append_buf*(%(arg-type)size_t% sizeNeeded)
+  *get_append_buf*(%(arg-type)Integer% sizeNeeded)
 
 Ensure that the buffer is big enough and return a pointer to the start
 of the empty space in the buffer. This pointer can be used to directly 
@@ -107,7 +107,7 @@ the append operation
 
 h3(#MemoryBuffer_ungetappendbuf). MemoryBuffer#unget_append_buf
 
-  *unget_append_buf*(%(arg-type)size_t% sizeUsed)
+  *unget_append_buf*(%(arg-type)Integer% sizeUsed)
 
 Update the length after completing a direct append, which
 you must have used GetAppendBuf() to initialise.
@@ -125,7 +125,7 @@ Append a single byte to the buffer.
 
 h3(#MemoryBuffer_appenddata). MemoryBuffer#append_data
 
-  *append_data*(%(arg-type)% data,  %(arg-type)size_t% len)
+  *append_data*(%(arg-type)% data,  %(arg-type)Integer% len)
 
 Single call to append a data block to the buffer.
 

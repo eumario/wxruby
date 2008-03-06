@@ -21,7 +21,7 @@ h2. Methods
 
 h3(#MemoryOutputStream_new). MemoryOutputStream.new
 
-  *MemoryOutputStream.new*(%(arg-type)char% data = nil,  %(arg-type)size_t% length = 0)
+  *MemoryOutputStream.new*(%(arg-type)char% data = nil,  %(arg-type)Integer% length = 0)
 
 If _data_ is NULL, then it will initialize a new empty buffer which will
 grow if required.
@@ -37,7 +37,7 @@ Destructor.
 
 h3(#MemoryOutputStream_copyto). MemoryOutputStream#copy_to
 
- size_t *copy_to*(%(arg-type)char% buffer,  %(arg-type)size_t% len)
+ Integer *copy_to*(%(arg-type)char% buffer,  %(arg-type)Integer% len)
 
 CopyTo allowed you to transfer data from the internal buffer of
 MemoryOutputStream to an external buffer. _len_ specifies the size of
