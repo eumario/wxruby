@@ -100,6 +100,7 @@ h2. Methods
 * "Window#get_children":#Window_getchildren
 * "Window#get_class_default_attributes":#Window_getclassdefaultattributes
 * "Window#get_client_size":#Window_getclientsize
+* "Window#get_client_rect":#Window_getclientrect
 * "Window#get_constraints":#Window_getconstraints
 * "Window#get_containing_sizer":#Window_getcontainingsizer
 * "Window#get_cursor":#Window_getcursor
@@ -895,6 +896,22 @@ h4. Parameters
 h4. See also
 
 "get_size":#Window_getsize, "get_virtual_size":#Window_getvirtualsize
+
+
+
+h3(#Window_getclientrect). Window#get_client_rect
+
+  "Rect":rect.html *get_client_rect*()
+
+Returns the client area position and size as a "Rect":rect.html
+object. The client area is the window space available for drawing -
+i.e. its whole size minus window decorations like scrollbars, title bars
+and so on.
+
+h4. See also
+
+"get_client_size":#Window_getclientsize
+
 
 
 

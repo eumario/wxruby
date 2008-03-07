@@ -60,6 +60,7 @@ public:
   wxWindowList& GetChildren() ;
   void GetClientSize(int*  width , int*  height ) const;
   wxSize GetClientSize() const;
+  wxRect GetClientRect() const;
   wxLayoutConstraints* GetConstraints() const;
   const wxSizer * GetContainingSizer() const;
   wxDropTarget* GetDropTarget() const;
