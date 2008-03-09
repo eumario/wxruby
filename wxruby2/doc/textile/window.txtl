@@ -504,12 +504,22 @@ h3(#Window_destroy). Window#destroy
 
  Boolean *destroy*()
 
-Destroys the window safely. Use this function instead of the delete operator, since
-different window classes can be destroyed differently. Frames and dialogs
-are not destroyed immediately when this function is called -- they are added
-to a list of windows to be deleted on idle time, when all the window's events
-have been processed. This prevents problems with events being sent to non-existent
-windows.
+Destroys the window safely. Frames and dialogs are not destroyed
+immediately when this function is called -- they are added to a list of
+windows to be deleted on idle time, when all the window's events have
+been processed. This prevents problems with events being sent to
+non-existent windows.
+
+Note that it is unusual for wxRuby code to need to explicitly call this
+method; normally, windows are automatically destroyed when their
+containing Frame or Dialog is closed.
+
+Two circumstances where it can be important to call destroy are firstly,
+if a window is detached from a "Sizer":sizer.html and replaced with
+another window. In this case destroy will immediately dispose of the
+detached window. Secondly, if a "dialog":dialog.html is created with no
+parent argument, it can be necessary to call destroy when the dialog is
+finished to signal that the dialog will not be re-used.
 
 h4. Return value
 
