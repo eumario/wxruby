@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 #if !defined(_wxToolBar_h_)
@@ -22,7 +22,7 @@ public:
   void EnableTool(int  toolId , const bool  enable ) ;
   wxToolBarToolBase* FindById(int  id) ;
   wxControl* FindControl(int  id) ;
-  wxToolBarToolBase* FindToolForPosition(const float  x , const float  y ) const;
+  wxToolBarToolBase* FindToolForPosition(wxCoord x, wxCoord y) const;
   int GetToolsCount() ;
   wxSize GetToolSize() ;
   wxSize GetToolBitmapSize() ;
