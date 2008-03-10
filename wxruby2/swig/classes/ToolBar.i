@@ -39,16 +39,23 @@ enum
 // access to ToolBar changing methods is via Wx::ToolBar.
 %typemap(out) wxToolBarToolBase* {
   // arg1 here is the typecase C++ self; $1 is the new ToolBarToolBase
-  int pos_of_tool = arg1->GetToolPos($1->GetId());
-  $result = INT2NUM(pos_of_tool);
+  if ( $1 ) 
+    { 
+      int pos_of_tool = arg1->GetToolPos($1->GetId());
+      $result = INT2NUM(pos_of_tool);
+    }
+  else
+    {
+      $result = Qnil;
+    }
 }
 
 
 // Versions of methods that accept a ToolBarTool argument are not
 // supported in wxRuby, because that class is not ported.
 %ignore wxToolBar::AddTool(wxToolBarToolBase *tool);
-%ignore wxToolBar::FindToolForPosition(const float  x , const float  y ) const;
 %ignore wxToolBar::InsertTool(size_t pos, wxToolBarToolBase *tool);
+
 
 // VERY weird swig bug here...
 // If we have the comment, the %if, %ignore and %endif,
@@ -57,7 +64,7 @@ enum
 // all of it makes the problem go away!
 // under GTK, this doesn't exist
 //%if !defined(SWIGMAC) && !defined(SWIGWIN)
-  %ignore SetMargins(const wxSize&);
+%ignore SetMargins(const wxSize&);
 //%endif
 
 
