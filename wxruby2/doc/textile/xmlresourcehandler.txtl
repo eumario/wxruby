@@ -144,7 +144,7 @@ Returns the current file system.
 
 h3(#XmlResourceHandler_getdimension). XmlResourceHandler#get_dimension
 
- "Coord":coord.html *get_dimension*(%(arg-type)String% param,  %(arg-type)"Coord":coord.html% defaultv = 0)
+ Integer *get_dimension*(%(arg-type)String% param,  %(arg-type)Integer% defaultv = 0)
 
 Gets a dimension (may be in dialog units).
 

@@ -43,31 +43,31 @@ Creates an iterator object given a region.
 
 h3(#RegionIterator_getx). RegionIterator#get_x
 
- "Coord":coord.html *get_x*()
+ Integer *get_x*()
 
 Returns the x value for the current region.
 
 h3(#RegionIterator_gety). RegionIterator#get_y
 
- "Coord":coord.html *get_y*()
+ Integer *get_y*()
 
 Returns the y value for the current region.
 
 h3(#RegionIterator_getw). RegionIterator#get_w
 
- "Coord":coord.html *get_w*()
+ Integer *get_w*()
 
 An alias for GetWidth.
 
 h3(#RegionIterator_getheight). RegionIterator#get_height
 
- "Coord":coord.html *get_height*()
+ Integer *get_height*()
 
 Returns the height value for the current region.
 
 h3(#RegionIterator_geth). RegionIterator#get_h
 
- "Coord":coord.html *get_h*()
+ Integer *get_h*()
 
 An alias for GetHeight.
 
@@ -79,7 +79,7 @@ Returns the current rectangle.
 
 h3(#RegionIterator_getwidth). RegionIterator#get_width
 
- "Coord":coord.html *get_width*()
+ Integer *get_width*()
 
 Returns the width value for the current region.
 
