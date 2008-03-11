@@ -129,13 +129,13 @@ Returns  if the given rectangle is completely inside this rectangle
 
 h3(#Rect_deflate). Rect#deflate
 
-  *deflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
+  *deflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
 
   *deflate*(%(arg-type)"Size":size.html% diff)
 
-  *deflate*(%(arg-type)"Coord":coord.html% diff)
+  *deflate*(%(arg-type)Integer% diff)
 
- "Rect":rect.html *deflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
+ "Rect":rect.html *deflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
 
 Decrease the rectangle size.
 
@@ -253,13 +253,13 @@ Gets the y member.
 
 h3(#Rect_inflate). Rect#inflate
 
-  *inflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
+  *inflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
 
   *inflate*(%(arg-type)"Size":size.html% diff)
 
-  *inflate*(%(arg-type)"Coord":coord.html% diff)
+  *inflate*(%(arg-type)Integer% diff)
 
- "Rect":rect.html *inflate*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
+ "Rect":rect.html *inflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
 
 Increases the size of the rectangle.
 
@@ -317,7 +317,7 @@ Returns @true@ if this rectangle has a width or height less than or equal to
 
 h3(#Rect_offset). Rect#offset
 
-  *offset*(%(arg-type)"Coord":coord.html% dx,  %(arg-type)"Coord":coord.html% dy)
+  *offset*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
 
   *offset*(%(arg-type)"Point":point.html% pt)
 

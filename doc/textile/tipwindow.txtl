@@ -33,7 +33,7 @@ h2. Methods
 h3(#TipWindow_wxtipwindow). TipWindow.new
 
   *TipWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% text, 
-                %(arg-type)"Coord":coord.html% maxLength = 100, 
+                %(arg-type)Integer% maxLength = 100, 
                 %(arg-type)"TipWindow":tipwindow.html% windowPtr)
 
 Constructor. The tip is shown immediately the window is constructed.

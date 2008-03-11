@@ -44,7 +44,7 @@ h2. Methods
 
 h3(#SetCursorEvent_new). SetCursorEvent.new
 
-  *SetCursorEvent.new*(%(arg-type)"Coord":coord.html% x = 0,  %(arg-type)"Coord":coord.html% y = 0)
+  *SetCursorEvent.new*(%(arg-type)Integer% x = 0,  %(arg-type)Integer% y = 0)
 
 Constructor, used by the library itself internally to initialize the event
 object.
@@ -59,14 +59,14 @@ Returns a reference to the cursor specified by this event.
 
 h3(#SetCursorEvent_getx). SetCursorEvent#get_x
 
- "Coord":coord.html *get_x*()
+ Integer *get_x*()
 
 Returns the X coordinate of the mouse in client coordinates.
 
 
 h3(#SetCursorEvent_gety). SetCursorEvent#get_y
 
- "Coord":coord.html *get_y*()
+ Integer *get_y*()
 
 Returns the Y coordinate of the mouse in client coordinates.
 

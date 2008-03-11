@@ -330,7 +330,7 @@ h3(#MouseEvent_getposition). MouseEvent#get_position
 
  "Point":point.html *get_position*()
 
-  *get_position*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
+  *get_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
   *get_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 

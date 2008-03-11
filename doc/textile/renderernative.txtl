@@ -187,7 +187,7 @@ well.
 h3(#RendererNative_drawsplittersash). RendererNative#draw_splitter_sash
 
   *draw_splitter_sash*(%(arg-type)"Window":window.html% win,  %(arg-type)"DC":dc.html% dc,  %(arg-type)"Size":size.html% size, 
-                     %(arg-type)"Coord":coord.html% position, 
+                     %(arg-type)Integer% position, 
                      %(arg-type)"Orientation":orientation.html% orient, 
                      %(arg-type)Integer% flags = 0)
 

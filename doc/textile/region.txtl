@@ -29,8 +29,8 @@ h2. Methods
 
 h3(#Region_new). Region.new
 
-  *Region.new*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
-             %(arg-type)"Coord":coord.html% height)
+  *Region.new*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+             %(arg-type)Integer% height)
 
 Constructs a rectangular region with the given position and size.
 
@@ -118,8 +118,8 @@ Returns the outer bounds of the region.
 
 h3(#Region_intersect). Region#intersect
 
- Boolean *intersect*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
-                   %(arg-type)"Coord":coord.html% height)
+ Boolean *intersect*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                   %(arg-type)Integer% height)
 
 Finds the intersection of this region and another, rectangular region, specified using position and size.
 
@@ -167,7 +167,7 @@ The result is stored in this region.
 
 h3(#Region_offset). Region#offset
 
- Boolean *offset*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
+ Boolean *offset*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Moves the region by the specified offsets in horizontal and vertical
 directions.
@@ -178,8 +178,8 @@ h4. Return value
 
 h3(#Region_union). Region#union
 
- Boolean *union*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
-               %(arg-type)"Coord":coord.html% height)
+ Boolean *union*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+               %(arg-type)Integer% height)
 
 Finds the union of this region and another, rectangular region, specified using position and size.
 
@@ -216,8 +216,8 @@ The result is stored in this region.
 
 h3(#Region_xor). Region#xor
 
- Boolean *xor*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y,  %(arg-type)"Coord":coord.html% width, 
-             %(arg-type)"Coord":coord.html% height)
+ Boolean *xor*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+             %(arg-type)Integer% height)
 
 Finds the Xor of this region and another, rectangular region, specified using position and size.
 

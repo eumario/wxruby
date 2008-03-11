@@ -286,7 +286,7 @@ h4. Parameters
 
 h3(#VListBox_onmeasureitem). VListBox#on_measure_item
 
- "Coord":coord.html *on_measure_item*(%(arg-type)Integer% n)
+ Integer *on_measure_item*(%(arg-type)Integer% n)
 
 The derived class must implement this method to return the height of the
 specified item (in pixels).
@@ -351,7 +351,7 @@ h3(#VListBox_setmargins). VListBox#set_margins
 
   *set_margins*(%(arg-type)"Point":point.html% pt)
 
-  *set_margins*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
+  *set_margins*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Set the margins: horizontal margin is the distance between the window
 border and the item contents while vertical margin is half of the

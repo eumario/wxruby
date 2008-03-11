@@ -99,7 +99,7 @@ need to specify it explicitly.
 
 h3(#VScrolledWindow_estimatetotalheight). VScrolledWindow#estimate_total_height
 
- "Coord":coord.html *estimate_total_height*()
+ Integer *estimate_total_height*()
 
 This protected function is used internally by VScrolledWindow to estimate the
 total height of the window when "set_line_count":#VScrolledWindow_setlinecount 
@@ -175,7 +175,7 @@ h4. See also
 
 h3(#VScrolledWindow_hittest). VScrolledWindow#hit_test
 
- Integer *hit_test*(%(arg-type)"Coord":coord.html% x,  %(arg-type)"Coord":coord.html% y)
+ Integer *hit_test*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
  Integer *hit_test*(%(arg-type)"Point":point.html% pt)
 
@@ -193,7 +193,7 @@ Returns @true@ if the given line is (at least partially) visible or
 
 h3(#VScrolledWindow_ongetlineheight). VScrolledWindow#on_get_line_height
 
- "Coord":coord.html *on_get_line_height*(%(arg-type)Integer% n)
+ Integer *on_get_line_height*(%(arg-type)Integer% n)
 
 This protected virtual function must be overridden in the derived class and it
 should return the height of the given line in pixels.

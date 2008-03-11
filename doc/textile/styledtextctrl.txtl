@@ -3512,7 +3512,7 @@ h2(#drag_and_drop). Drag and drop
 
 h3(#STC_dodragover). StyledTextCtrl#do_drag_over
 
- "DragResult":dragresult.html *do_drag_over*(%(arg-type)"Coord":coord.html% x, %(arg-type)"Coord":coord.html% y, %(arg-type)"DragResult":dragresult.html% def)
+ "DragResult":dragresult.html *do_drag_over*(%(arg-type)Integer% x, %(arg-type)Integer% y, %(arg-type)"DragResult":dragresult.html% def)
 
 #ifdef STC_USE_DND     Allow for simulating a DnD DragOver
 

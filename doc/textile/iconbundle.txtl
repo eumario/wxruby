@@ -61,7 +61,7 @@ if no such icon exists,
 returns the first icon in the bundle. If size = Size( -1, -1 ),
 returns the icon with size SYS_ICON_X/SYS_ICON_Y.
 
- "Icon":icon.html *get_icon*(%(arg-type)"Coord":coord.html% size = -1)
+ "Icon":icon.html *get_icon*(%(arg-type)Integer% size = -1)
 
 Same as GetIcon( Size( size, size ) ).
 
