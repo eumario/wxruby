@@ -1,0 +1,36 @@
+h1(#wxkeymodifier). Key Modifiers
+
+KeyModifiers are a set of Ruby integer constants that represent
+modifying control keys that may be pressed alongside normal keys. These
+values may be returned, for example, by methods in
+"KeyEvent":keyevent.html.
+
+h2(#keymodifiers). Key Modifier Constants
+
+The following key modifier constants are defined:
+
+<pre>
+<code>
+    MOD_NONE      = 0x0000,
+    MOD_ALT       = 0x0001,
+    MOD_CONTROL   = 0x0002,
+    MOD_ALTGR     = MOD_ALT | MOD_CONTROL,
+    MOD_SHIFT     = 0x0004,
+    MOD_META      = 0x0008,
+    MOD_ALL       = 0xffff
+    MOD_CMD       = Platform Specific
+</code>
+</pre>
+
+*Note:* On Mac OS X, @MOD_CMD@ is the same as @MOD_META@, while on other
+platforms, it is the same as @MOD_CONTROL@.  In portable code, @MOD_CMD@
+should be used instead of @MOD_CONTROL@ to account for the fact that
+although the @Control@ modifier exists under Mac OS X, it is not used
+for the same purpose as under Windows or Unix.
+
+h2. See also:
+
+"Wx::KeyEvent":keyevent.html, "WxRuby Key Codes":keycode.html
+
+
+

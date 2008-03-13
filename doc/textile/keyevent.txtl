@@ -12,29 +12,29 @@ one up event corresponding to each down one.
 
 Both key events provide untranslated key codes while the char event carries
 the translated one. The untranslated code for alphanumeric keys is always
-an upper case value. For the other keys it is one of @WXK_XXX@ values
-from the "keycodes table":keycodes.html. The translated key is, in
+an upper case value. For the other keys it is one of @K_XXX@ values
+from "Keycode Constants":keycode.html#keycodes. The translated key is, in
 general, the character the user expects to appear as the result of the key
 combination when typing the text into a text entry zone, for example.
 
 A few examples to clarify this (all assume that Caps Lock is unpressed
 and the standard US keyboard): when the @'A'@ key is pressed, the key down
-event key code is equal to @ASCII A@ $== 65$. But the char event key code
-is @ASCII a@ $== 97$. On the other hand, if you press both Shift and
+event key code is equal to @ASCII A == 65@. But the char event key code
+is @ASCII a == 97@. On the other hand, if you press both Shift and
 @'A'@ keys simultaneously , the key code in key down event will still be
 just @'A'@ while the char event key code parameter will now be @'A'@
 as well.
 
 Although in this simple case it is clear that the correct key code could be
 found in the key down event handler by checking the value returned by
-"shift_down()":#KeyEvent_shiftdown(), in general you should use
+"shift_down()":#KeyEvent_shiftdown, in general you should use
 @EVT_CHAR@ for this as for non-alphanumeric keys the translation is
 keyboard-layout dependent and can only be done properly by the system itself.
 
 Another kind of translation is done when the control key is pressed: for
 example, for Ctrl-A key press the key down event still carries the
 same key code @'a'@ as usual but the char event will have key code of
-$1$, the ASCII value of this key combination.
+@1@, the ASCII value of this key combination.
 
 You may discover how the other keys on your system behave interactively by
 running the "text":sampletext.html Widgets sample and pressing some keys
@@ -118,8 +118,8 @@ platforms but the special Apple (a.k.a as Command) key under
 Macs: it makes often sense to use it instead of, say, ControlDown() because Cmd
 key is used for the same thing under Mac as Ctrl elsewhere (but Ctrl still
 exists, just not used for this purpose under Mac). So for non-Mac platforms
-this is the same as "control_down()":#KeyEvent_controldown() and under
-Mac this is the same as "meta_down()":#KeyEvent_metadown().
+this is the same as "control_down()":#KeyEvent_controldown and under
+Mac this is the same as "meta_down()":#KeyEvent_metadown.
 
 
 h3(#KeyEvent_controldown). KeyEvent#control_down
@@ -137,8 +137,8 @@ h3(#KeyEvent_getkeycode). KeyEvent#get_key_code
  Integer *get_key_code*()
 
 Returns the virtual key code. ASCII events return normal ASCII values,
-while non-ASCII events return values such as *WXK_LEFT* for the
-left cursor key. See "Keycodes":keycodes.html for a full list of
+while non-ASCII events return values such as @K_LEFT@ for the
+left cursor key. See "Key Codes":keycode.html for a full list of
 the virtual key codes.
 
 Note that in Unicode build, the returned value is meaningful only if the
@@ -152,7 +152,7 @@ h3(#KeyEvent_getmodifiers). KeyEvent#get_modifiers
  Integer *get_modifiers*()
 
 Return the bitmask of modifier keys which were pressed when this event
-happened. See "key modifier constants":keymodifiers.html for the full list
+happened. See "key modifier constants":keymod.html for the full list
 of modifiers.
 
 Notice that this function is easier to use correctly than, for example, 
@@ -192,9 +192,8 @@ h3(#KeyEvent_getrawkeycode). KeyEvent#get_raw_key_code
 Returns the raw key code for this event. This is a platform-dependent scan code
 which should only be used in advanced applications.
 
-*NB:* Currently the raw key codes are not supported by all ports, use
-\#ifdef HAS_RAW_KEY_CODES to determine if this feature is available.
-
+*Note:* Currently the raw key codes are not supported by all ports. wxRuby does not
+currently have a mechanism to test for their availability.
 
 h3(#KeyEvent_getrawkeyflags). KeyEvent#get_raw_key_flags
 
@@ -203,9 +202,8 @@ h3(#KeyEvent_getrawkeyflags). KeyEvent#get_raw_key_flags
 Returns the low level key flags for this event. The flags are
 platform-dependent and should only be used in advanced applications.
 
-*NB:* Currently the raw key flags are not supported by all ports, use
-@\#ifdef HAS_RAW_KEY_CODES@ to determine if this feature is available.
-
+*Note:* Currently the raw key codes are not supported by all ports. wxRuby does not
+currently have a mechanism to test for their availability.
 
 h3(#KeyEvent_getunicodekey). KeyEvent#get_unicode_key
 
@@ -214,7 +212,7 @@ h3(#KeyEvent_getunicodekey). KeyEvent#get_unicode_key
 Returns the Unicode character corresponding to this key event.
 
 This function is only available in Unicode build, i.e. when
-@USE_UNICODE@ is $1$.
+@USE_UNICODE@ is @1@.
 
 
 h3(#KeyEvent_getx). KeyEvent#get_x
