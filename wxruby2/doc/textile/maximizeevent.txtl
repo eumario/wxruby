@@ -10,9 +10,8 @@ h2. Derived from
 
 h2. Event table macros
 
-To process a maximize event, use this event handler macro to direct input to a
-member function that takes a MaximizeEvent argument.
-
+To handle iconize events, use this handler method to direct the event
+object to a block that takes a MaximizeEvent argument:
 
 
 |*evt_maximize()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_MAXIMIZE event.|
@@ -20,6 +19,9 @@ member function that takes a MaximizeEvent argument.
 h2. See also
 
 "Event handling overview":eventhandlingoverview.html, "TopLevelWindow#maximize":toplevelwindow.html#TopLevelWindow_maximize, "TopLevelWindow#is_maximized":toplevelwindow.html#TopLevelWindow_ismaximized
+
+The opposite of a MaximizeEvent is an "IconizeEvent":iconizeevent.html,
+when a frame is minimized to an icon.
 
 <div id="methods">
 

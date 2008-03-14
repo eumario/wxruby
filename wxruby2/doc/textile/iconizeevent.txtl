@@ -10,18 +10,18 @@ h2. Derived from
 
 "Object":object.html
 
-h2. Event table macros
+h2. Event handlers
 
-To process an iconize event, use this event handler macro to direct input to a
-member function that takes a IconizeEvent argument.
-
-
+To handle iconize events, use this handler method to direct the event
+object to a block that takes a IconizeEvent argument:
 
 |*evt_iconize()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_ICONIZE event.|
 
 h2. See also
 
 "Event handling overview":eventhandlingoverview.html, "TopLevelWindow#iconize":toplevelwindow.html#TopLevelWindow_iconize, "TopLevelWindow#is_iconized":toplevelwindow.html#TopLevelWindow_isiconized
+
+The opposite of an IconizeEvent is a "MaximizeEvent":maximizeevent.html.
 
 <div id="methods">
 
