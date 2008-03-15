@@ -6,6 +6,12 @@
 %module(directors="1") wxHtmlWindow
 GC_MANAGE_AS_WINDOW(wxHtmlWindow);
 
+// This class has to be implemented internally with a hand-written C++
+// class, in order that the virtual OnOpeningURL method can work
+// properly. Unfortunately there's no way to make this work using SWIG
+// typemaps.r
+%rename(HtmlWindow) wxRubyHtmlWindow;
+
 %{
 #include <wx/html/htmlwin.h>
 %}
@@ -28,22 +34,92 @@ enum wxHtmlOpeningStatus
 // implement in ruby
 %ignore wxHtmlWindow::LoadFile;
 
-// OnOpeningURL: for some reason this ignore doesn't actually ignore
-// %ignore wxHtmlWindow::OnOpeningURL(wxHtmlURLType  type , const wxString&  url , wxString * redirect ) const;
-
-// TODO: fix typemaps so that on_opening_url will be called in subclass method. 
-// The default typemap for WxString. * is not correct for this method, but ignore doesn't seem to be working (SWIG 1.3.29). The typemaps below just stop a compile error
-%typemap(in, numinputs=0) wxString * redirect "//*$1 = *$1;";
-%typemap(directorargin) wxString * redirect "$1 = obj2;";
-%typemap(directorargout, fragment="output_helper") wxString * redirect {
-  //VALUE o = rb_str_new2((const char*)$1->mb_str());
-  //$result = output_helper($result, o);
-}
+// dealt with below
+%ignore wxHtmlWindow::OnOpeningURL;
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
 %import "include/wxPanel.h"
 %import "include/wxScrolledWindow.h"
+ // %import "include/wxHtmlWindow.h"
 
-%include "include/wxHtmlWindow.h"
+%ignore wxHtmlWindow;
+
+%{
+  class wxRubyHtmlWindow : public wxHtmlWindow
+  {
+  public:
+    wxRubyHtmlWindow(wxWindow *parent, 
+                     wxWindowID  id = -1, 
+                     const wxPoint&  pos = wxDefaultPosition, 
+                     const wxSize&  size = wxDefaultSize, 
+                     long style = wxHW_SCROLLBAR_AUTO, 
+                     const wxString&  name = wxT("htmlWindow")) :      
+      wxHtmlWindow(parent, id, pos, size, style, name)
+    {  }
+    // This is the actual method called from C++ when a URL is clicked
+    // etc. The Ruby interface accepts a single argument, the URL, and
+    // can return True = allow, False = block or a String = redirect.
+    // The standard version in the base class (in
+    // lib/wx/classes/htmlwin.rb) always allows
+    virtual wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type, 
+                                     const wxString&  url, 
+                                     wxString* redirect) const
+    {
+      VALUE self = SWIG_RubyInstanceFor((void *)this);
+      VALUE rb_url = rb_str_new2((const char *)url.mb_str(wxConvUTF8));
+      VALUE ret = rb_funcall(self, rb_intern("on_opening_url"), 1, rb_url);
+      if ( ret == Qtrue )
+        return wxHTML_OPEN;
+      else if ( ret == Qfalse || ret == Qnil )
+        return wxHTML_BLOCK;
+      else if ( TYPE(ret) == T_STRING ) 
+        {
+          wxString temp = new wxString( StringValuePtr(ret), wxConvUTF8 );
+          *redirect = temp;
+          return wxHTML_REDIRECT;
+        }
+      else 
+        {
+          rb_raise(rb_eTypeError, 
+                   "Wrong return value for on_opening_url, should be true, false, or String redirect");
+        }
+    }
+  };
+%}
+
+class wxRubyHtmlWindow : public wxHtmlWindow
+{
+public:
+  wxRubyHtmlWindow(wxWindow *parent, 
+                   wxWindowID  id = -1, 
+                   const wxPoint&  pos = wxDefaultPosition, 
+                   const wxSize&  size = wxDefaultSize, 
+                   long style = wxHW_SCROLLBAR_AUTO, 
+                   const wxString&  name = wxT("htmlWindow"));
+  static void AddFilter(wxHtmlFilter  *filter ) ;
+  bool AppendToPage(const wxString&  source ) ;
+  wxHtmlContainerCell* GetInternalRepresentation() const;
+  wxString GetOpenedAnchor() ;
+  wxString GetOpenedPage() ;
+  wxString GetOpenedPageTitle() ;
+  wxFrame* GetRelatedFrame() const;
+  bool HistoryBack() ;
+  bool HistoryCanBack() ;
+  bool HistoryCanForward() ;
+  void HistoryClear() ;
+  bool HistoryForward() ;
+  virtual bool LoadFile(const wxFileName&  filename ) ;
+  virtual bool LoadPage(const wxString&  location ) ;
+  wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType  type , const wxString&  url , wxString * redirect ) const;
+  virtual void OnSetTitle(const wxString&  title ) ;
+  virtual void ReadCustomization(wxConfigBase  *cfg , wxString  path = wxEmptyString) ;
+  void SetBorders(int  b ) ;
+  void SetFonts(wxString  normal_face , wxString  fixed_face , const int  *sizes = NULL) ;
+  bool SetPage(const wxString&  source ) ;
+  void SetRelatedFrame(wxFrame*  frame , const wxString&  format ) ;
+  void SetRelatedStatusBar(int  bar ) ;
+  virtual void WriteCustomization(wxConfigBase  *cfg , wxString  path = wxEmptyString) ;
+
+};
