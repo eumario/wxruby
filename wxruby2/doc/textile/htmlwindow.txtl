@@ -228,7 +228,7 @@ h4. See also
 
 h3(#HtmlWindow_onopeningurl). HtmlWindow#on_opening_url
 
-  *on_set_title*(%(arg-type)String% url)
+  Boolean _or_ String *on_opening_url*(%(arg-type)String% url)
 
 This method is called whenever the HtmlWindow attempts to open a URL,
 either a page, or an image within a page. It can be used to block access
