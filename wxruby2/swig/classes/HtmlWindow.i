@@ -76,6 +76,7 @@ enum wxHtmlOpeningStatus
         return wxHTML_BLOCK;
       else if ( TYPE(ret) == T_STRING ) 
         {
+          // FIXME - this leaks memory
           wxString temp = new wxString( StringValuePtr(ret), wxConvUTF8 );
           *redirect = temp;
           return wxHTML_REDIRECT;
