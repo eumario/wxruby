@@ -16,14 +16,6 @@ GC_MANAGE_AS_WINDOW(wxHtmlWindow);
 #include <wx/html/htmlwin.h>
 %}
 
-// enums for wxHtmlWindow::OnOpeningURL
-enum wxHtmlOpeningStatus
-{
-    wxHTML_OPEN,
-    wxHTML_BLOCK,
-    wxHTML_REDIRECT
-};
-
 // wxHtmlWindow flags:
 #define wxHW_SCROLLBAR_NEVER    0x0002
 #define wxHW_SCROLLBAR_AUTO     0x0004
@@ -77,8 +69,9 @@ enum wxHtmlOpeningStatus
       else if ( TYPE(ret) == T_STRING ) 
         {
           // FIXME - this leaks memory
-          wxString temp = new wxString( StringValuePtr(ret), wxConvUTF8 );
-          *redirect = temp;
+
+          wxString* temp = new wxString( StringValuePtr(ret), wxConvUTF8 );
+          *redirect = *temp;
           return wxHTML_REDIRECT;
         }
       else 
