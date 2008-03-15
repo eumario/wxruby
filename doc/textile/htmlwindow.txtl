@@ -226,11 +226,29 @@ h4. See also
 
 "load_file":#HtmlWindow_loadfile
 
+h3(#HtmlWindow_onopeningurl). HtmlWindow#on_opening_url
+
+  *on_set_title*(%(arg-type)String% url)
+
+This method is called whenever the HtmlWindow attempts to open a URL,
+either a page, or an image within a page. It can be used to block access
+to certain URLs, or rewrite them. This method should return @true@, if
+access to the URL should be allowed or @false@ if it should be
+blocked. It may also return a string containing a new URL to which the
+request should be redirected.
+
+Note that if redirecting, the method will immediately be called again
+with the new URL, so to avoid entering an endless loop, you should test
+for this and return true if no rewriting is to be done.
+
+The default implementation in the standard Wx::HtmlWindow class always
+returns @true@, ie allow the URL.
+
 h3(#HtmlWindow_onsettitle). HtmlWindow#on_set_title
 
   *on_set_title*(%(arg-type)String% title)
 
-Called on parsing @<TITLE>@ tag. This can be overloaded in subclasses to
+Called on parsing <TITLE> tag. This can be overloaded in subclasses to
 customise what happens as that part of an HTML page is read.
 
 
