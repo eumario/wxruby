@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 #if !defined(_wxWizard_h_)
@@ -20,12 +20,16 @@ public:
               const wxPoint& pos = wxDefaultPosition, 
               long style = wxDEFAULT_DIALOG_STYLE);
   void FitToPage(const wxWizardPage* firstPage);
+  const wxBitmap& GetBitmap() const;
   wxWizardPage* GetCurrentPage() const;
   wxSize GetPageSize() const;
-  virtual bool HasNextPage(wxWizardPage * page ) ;
-  virtual bool HasPrevPage(wxWizardPage * page ) ;
-  bool RunWizard(wxWizardPage*  firstPage ) ;
-  void SetPageSize(const wxSize&  sizePage ) ;
+  virtual wxSizer* GetPageAreaSizer() const;
+  virtual bool HasNextPage(wxWizardPage * page);
+  virtual bool HasPrevPage(wxWizardPage * page);
+  bool RunWizard(wxWizardPage* firstPage);
+  void SetBitmap(const wxBitmap& bitmap);
+  void SetBorder(int border);
+  void SetPageSize(const wxSize& sizePage);
 };
 
 
