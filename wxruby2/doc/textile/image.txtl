@@ -1,41 +1,41 @@
 h1(#wximage). Wx::Image
 
-This class encapsulates a platform-independent image. An image can be created
-from data, or using "Bitmap#convert_to_image":bitmap.html#Bitmap_converttoimage. An image
-can be loaded from a file in a variety of formats, and is extensible to new formats
-via image format handlers. Functions are available to set and get image bits, so
-it can be used for basic image manipulation.
+This class encapsulates a platform-independent image. An image can be
+created from data, or using
+"Bitmap#convert_to_image":bitmap.html#Bitmap_converttoimage. An image
+can be loaded from a file in a variety of formats, and is extensible to
+new formats via image format handlers. Functions are available to set
+and get image bits, so it can be used for basic image manipulation.
 
 A Image cannot (currently) be drawn directly to a "DC":dc.html. Instead,
-a platform-specific "Bitmap":bitmap.html object must be created from it using
-the "Bitmap::Bitmap(Image,int depth)":bitmapctor.html constructor.
-This bitmap can then
-be drawn in a device context, using "DC#draw_bitmap":dc.html#DC_drawbitmap.
+a platform-specific "Bitmap":bitmap.html object must be created from it
+using the "Bitmap::Bitmap(Image,int depth)":bitmapctor.html constructor.
+This bitmap can then be drawn in a device context, using
+"DC#draw_bitmap":dc.html#DC_drawbitmap.
 
-One colour value of the image may be used as a mask colour which will lead to the automatic
-creation of a "Mask":mask.html object associated to the bitmap object.
+One colour value of the image may be used as a mask colour which will
+lead to the automatic creation of a "Mask":mask.html object associated
+to the bitmap object.
 
 h2. Alpha channel support
 
-Starting from Widgets 2.5.0 Image supports alpha channel data, that is in
-addition to a byte for the red, green and blue colour components for each pixel
-it also stores a byte representing the pixel opacity. An alpha value of $0$
-corresponds to a transparent pixel (null opacity) while a value of $255$
-means that the pixel is 100\% opaque.
+Wx::Image supports alpha channel data: in addition to a byte for the
+red, green and blue colour components for each pixel it also stores a
+byte representing the pixel opacity. An alpha value of 0 corresponds
+to a transparent pixel (null opacity) while a value of 255$ means that
+the pixel is 100\% opaque.
 
 Unlike RGB data, not all images have an alpha channel and before using
-"get_alpha":#Image_getalpha you should check if this image contains
-an alpha channel with "has_alpha":#Image_hasalpha. Note that currently only
-images loaded from PNG files with transparency information will have an alpha
-channel but alpha support will be added to the other formats as well (as well
-as support for saving images with alpha channel which also isn't implemented).
+"get_alpha":#Image_getalpha you should check if this image contains an
+alpha channel with "has_alpha":#Image_hasalpha. Note that currently only
+images loaded from PNG files with transparency information will have an
+alpha channel but alpha support will be added to the other formats as
+well (as well as support for saving images with alpha channel which also
+isn't implemented).
 
 h2. Available image handlers
 
-The following image handlers are available. *BMPHandler* is always
-installed by default. To use other image formats, install the appropriate
-handler with "Image#add_handler":image.html#Image_addhandler or call 
-"InitAllImageHandlers":initallimagehandlers.html.
+The following image handlers are available.
 
 
 |BMPHandler|For loading and saving, always installed.|
@@ -67,18 +67,16 @@ h2. Derived from
 h2. See also
 
 "Bitmap":bitmap.html,
-"InitAllImageHandlers":initallimagehandlers.html
 
 <div id="methods">
 
 h2. Methods
 
 * "Image.new":#Image_new
-* "Image#add_handler":#Image_addhandler
+* "Image.from_bitmap":Image_frombitmap
 * "Image#blur":#Image_blur
 * "Image#blur_horizontal":#Image_blurhorizontal
 * "Image#blur_vertical":#Image_blurvertical
-* "Image#clean_up_handlers":#Image_cleanuphandlers
 * "Image#compute_histogram":#Image_computehistogram
 * "Image#convert_alpha_to_mask":#Image_convertalphatomask
 * "Image#convert_to_bitmap":#Image_converttobitmap
@@ -88,14 +86,12 @@ h2. Methods
 * "Image#create":#Image_create
 * "Image#destroy":#Image_destroy
 * "Image#find_first_unused_colour":#Image_findfirstunusedcolour
-* "Image#find_handler":#Image_findhandler
 * "Image#get_image_ext_wildcard":#Image_getimageextwildcard
 * "Image#get_alpha":#Image_getalpha
 * "Image#get_blue":#Image_getblue
 * "Image#get_data":#Image_getdata
 * "Image#get_green":#Image_getgreen
 * "Image#get_image_count":#Image_getimagecount
-* "Image#get_handlers":#Image_gethandlers
 * "Image#get_height":#Image_getheight
 * "Image#get_mask_blue":#Image_getmaskblue
 * "Image#get_mask_green":#Image_getmaskgreen
@@ -113,14 +109,11 @@ h2. Methods
 * "Image#get_option_int":#Image_getoptionint
 * "Image#has_option":#Image_hasoption
 * "Image#init_alpha":#Image_initalpha
-* "Image#init_standard_handlers":#Image_initstandardhandlers
-* "Image#insert_handler":#Image_inserthandler
 * "Image#is_transparent":#Image_istransparent
 * "Image#load_file":#Image_loadfile
 * "Image#is_ok":#Image_isok
 * "RGBValue::RGBValue":#Image_RGBValue
 * "Image#rg_bto_hsv":#Image_rgbtohsv
-* "Image#remove_handler":#Image_removehandler
 * "Image#mirror":#Image_mirror
 * "Image#replace":#Image_replace
 * "Image#rescale":#Image_rescale
@@ -151,10 +144,8 @@ h3(#Image_new). Image.new
 
 Copy constructor, uses "reference counting":trefcount.html.
 
-  *Image.new*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
-(Deprecated form, use "Bitmap#convert_to_image":bitmap.html#Bitmap_converttoimage
-instead.) Constructs an image from a platform-dependent bitmap. This preserves
+ Constructs an image from a platform-dependent bitmap. This preserves
 mask information so that bitmaps and images can be converted back
 and forth without loss in that respect.
 
@@ -223,53 +214,28 @@ the GIF and TIFF handler and as the largest and most colourful one by the ICO ha
 
 h4. Remarks
 
-Depending on how Widgets has been configured, not all formats may be available.
-
-Note: any handler other than BMP must be previously
-initialized with "Image#add_handler":image.html#Image_addhandler or
-"InitAllImageHandlers":initallimagehandlers.html.
+Depending on how wxWidgets has been configured, not all formats may be
+available. In standard wxRuby, all of standard file types listed above
+are supported on all platforms; the only exceptions are Windows-only
+icon and cursor files, which are only available on Windows.
 
 Note: you can use "get_option_int":#Image_getoptionint to get the
 hotspot for loaded cursor file:
 
-     int hotspot_x = image.GetOptionInt(IMAGE_OPTION_CUR_HOTSPOT_X);
-     int hotspot_y = image.GetOptionInt(IMAGE_OPTION_CUR_HOTSPOT_Y);
+  hotspot_x = image.get_option_int(IMAGE_OPTION_CUR_HOTSPOT_X)
+  hotspot_y = image.get_option_int(IMAGE_OPTION_CUR_HOTSPOT_Y)
  
- 
-
 h4. See also
 
 "Image#load_file":image.html#Image_loadfile
 
 
+h3(#Image_frombitmap). Image.from_bitmap
 
+  *Image.from_bitmap*(%(arg-type)"Bitmap":bitmap.html% bitmap)
 
-
-
-  *destructor*()
-
-Destructor.
-See "reference-counted object destruction":refcountdestruct.html for more info.
-
-
-h3(#Image_addhandler). Image#add_handler
-
-  *add_handler*(%(arg-type)"ImageHandler":imagehandler.html% handler)
-
-Adds a handler to the end of the static list of format handlers.
-
-* _handler_ A new image format handler object. There is usually only one instance
-of a given handler class in an application session.
-
-h4. See also
-
-"ImageHandler":imagehandler.html
-
- Boolean *can_read*(%(arg-type)String% filename)
-
-returns true if the current image handlers can read this file
-
-
+Creates a new image from an platform-dependent bitmap, preserving mask
+information.
 
 
 h3(#Image_blur). Image#blur
@@ -309,15 +275,6 @@ h4. See also
 
 "Blur":imageblur.html
 "blur_horizontal":#Image_blurhorizontal
-
-
-h3(#Image_cleanuphandlers). Image#clean_up_handlers
-
-  *clean_up_handlers*()
-
-Deletes all image handlers.
-
-This function is called by Widgets on exit.
 
 
 h3(#Image_computehistogram). Image#compute_histogram
@@ -454,39 +411,6 @@ Note that this method involves computing the histogram, which is
 computationally intensive operation.
 
 
-h3(#Image_findhandler). Image#find_handler
-
- "ImageHandler":imagehandler.html *find_handler*(%(arg-type)String% name)
-
-Finds the handler with the given name.
-
- "ImageHandler":imagehandler.html *find_handler*(%(arg-type)String% extension, 
-                             %(arg-type)Integer% imageType)
-
-Finds the handler associated with the given extension and type.
-
- "ImageHandler":imagehandler.html *find_handler*(%(arg-type)Integer% imageType)
-
-Finds the handler associated with the given image type.
-
- "ImageHandler":imagehandler.html *find_handler_mime*(%(arg-type)String% mimetype)
-
-Finds the handler associated with the given MIME type.
-
-* _name_ The handler name.
-* _extension_ The file extension, such as ``bmp".
-* _imageType_ The image type, such as BITMAP_TYPE_BMP.
-* _mimetype_ MIME type.
-
-h4. Return value
-
-A pointer to the handler if found, NULL otherwise.
-
-h4. See also
-
-"ImageHandler":imagehandler.html
-
-
 h3(#Image_getimageextwildcard). Image#get_image_ext_wildcard
 
  String *get_image_ext_wildcard*()
@@ -499,16 +423,6 @@ h4. Return value
 The format of the returned string is "(*.ext1;*.ext2)|*.ext1;*.ext2".
 
 It is usually a good idea to prepend a description before passing the result to the dialog.
-
-Example:
-
-
-     FileDialog FileDlg( this, "Choose Image", ::GetCwd(), "", _("Image Files ") + Image::GetImageExtWildcard(), OPEN );
- 
-
-h4. See also
-
-"ImageHandler":imagehandler.html
 
 
 h3(#Image_getalpha). Image#get_alpha
@@ -595,18 +509,6 @@ h4. Return value
 
 Number of available images. For most image handlers, this is 1 (exceptions
 are TIFF and ICO formats).
-
-
-h3(#Image_gethandlers). Image#get_handlers
-
- "List":list.html *get_handlers*()
-
-Returns the static list of image format handlers.
-
-h4. See also
-
-"ImageHandler":imagehandler.html
-
 
 h3(#Image_getheight). Image#get_height
 
@@ -783,36 +685,6 @@ by default initialized to all pixels being fully opaque. But if the image has a
 a mask colour, all mask pixels will be completely transparent.
 
 
-h3(#Image_initstandardhandlers). Image#init_standard_handlers
-
-  *init_standard_handlers*()
-
-Internal use only. Adds standard image format handlers. It only install BMP
-for the time being, which is used by Bitmap.
-
-This function is called by Widgets on startup, and shouldn't be called by
-the user.
-
-h4. See also
-
-"ImageHandler":imagehandler.html,
-"InitAllImageHandlers":initallimagehandlers.html
-
-
-h3(#Image_inserthandler). Image#insert_handler
-
-  *insert_handler*(%(arg-type)"ImageHandler":imagehandler.html% handler)
-
-Adds a handler at the start of the static list of format handlers.
-
-* _handler_ A new image format handler object. There is usually only one instance
-of a given handler class in an application session.
-
-h4. See also
-
-"ImageHandler":imagehandler.html
-
-
 h3(#Image_istransparent). Image#is_transparent
 
  Boolean *is_transparent*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
@@ -919,24 +791,6 @@ h3(#Image_rgbtohsv). Image#rg_bto_hsv
  "Image::HSVValue":image::hsvvalue.html *rg_bto_hsv*(%(arg-type)"RGBValue":rgbvalue.html% rgb)
 
 Converts a color in RGB color space to HSV color space.
-
-
-h3(#Image_removehandler). Image#remove_handler
-
- Boolean *remove_handler*(%(arg-type)String% name)
-
-Finds the handler with the given name, and removes it. The handler
-is not deleted.
-
-* _name_ The handler name.
-
-h4. Return value
-
-true if the handler was found and removed, false otherwise.
-
-h4. See also
-
-"ImageHandler":imagehandler.html
 
 
 h3(#Image_mirror). Image#mirror
