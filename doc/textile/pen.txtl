@@ -12,49 +12,31 @@ h2. Derived from
 
 h2. Predefined objects
 
-Objects:
+The following standard pens are available to all applications:
 
-*NullPen*
-
-Pointers:
-
-*RED_PEN
-
-CYAN_PEN\\
-GREEN_PEN\\
-BLACK_PEN\\
-WHITE_PEN\\
-TRANSPARENT_PEN\\
-BLACK_DASHED_PEN\\
-GREY_PEN\\
-MEDIUM_GREY_PEN\\
-LIGHT_GREY_PEN*
+ Wx::NULL_PEN
+ Wx::RED_PEN
+ Wx::CYAN_PEN
+ Wx::GREEN_PEN
+ Wx::BLACK_PEN
+ Wx::WHITE_PEN
+ Wx::TRANSPARENT_PEN
+ Wx::BLACK_DASHED_PEN
+ Wx::GREY_PEN
+ Wx::MEDIUM_GREY_PEN
+ Wx::LIGHT_GREY_PEN
 
 h2. Remarks
 
-On a monochrome display, Widgets shows all non-white pens as black.
+On a monochrome display, wxRUby shows all non-white pens as black.
 
-Do not initialize objects on the stack before the program commences,
-since other required structures may not have been set up yet. Instead,
-define global pointers to objects and create them in _OnInit_ or
-when required.
-
-An application may wish to dynamically create pens with different
-characteristics, and there is the consequent danger that a large number
-of duplicate pens will be created. Therefore an application may wish to
-get a pointer to a pen by using the global list of pens 
-ThePenList, and calling the member function *FindOrCreatePen*.
-See the entry for "PenList":penlist.html.
-
-Pen uses a reference counting system, so assignments between brushes are very
-cheap. You can therefore use actual Pen objects instead of pointers without
-efficiency problems. Once one Pen object changes its data it will create its
-own pen data internally so that other pens, which previously shared the
-data using the reference counting, are not affected.
+Do not initialize Pens before the application commences, since other
+required structures may not have been set up yet. Instead, define
+methods which return Pens, and initialize them on first call.
 
 h2. See also
 
-"PenList":penlist.html, "DC":dc.html, "DC#set_pen":dc.html#DC_setpen
+"PenList":penlist.html, "DC":dc.html, "DC#set_pen":dc.html#DC_setpen, "Brush":brush.html
 
 <div id="methods">
 
@@ -82,22 +64,22 @@ h2. Methods
 
 h3(#Pen_new). Pen.new
 
-  *Pen.new*(%(arg-type)"Colour":colour.html% colour,  %(arg-type)Integer% width = $1$, 
-          %(arg-type)Integer% style = @SOLID@)
+  *Pen.new*(%(arg-type)"Colour":colour.html% colour,  
+             %(arg-type)Integer% width = 1, 
+             %(arg-type)Integer% style = @SOLID@)
 
 Constructs a pen from a colour object, pen width and style.
 
-  *Pen.new*(%(arg-type)String% colourName,  %(arg-type)Integer% width,  %(arg-type)Integer% style)
+  *Pen.new*(%(arg-type)String% colourName,  
+             %(arg-type)Integer% width, 
+             %(arg-type)Integer% style)
 
 Constructs a pen from a colour name, pen width and style.
 
-  *Pen.new*(%(arg-type)"Bitmap":bitmap.html% stipple,  %(arg-type)Integer% width)
+  *Pen.new*(%(arg-type)"Bitmap":bitmap.html% stipple, 
+             %(arg-type)Integer% width)
 
 Constructs a stippled pen from a stipple bitmap and a width.
-
-  *Pen.new*(%(arg-type)"Pen":pen.html% pen)
-
-Copy constructor. This uses reference counting so is a cheap operation.
 
 h4. Parameters
 
@@ -106,9 +88,7 @@ h4. Parameters
 * _width_ Pen width. Under Windows, the pen width cannot be greater than 1 if
 the style is DOT, LONG_DASH, SHORT_DASH, DOT_DASH, or USER_DASH.
 * _stipple_ A stipple bitmap.
-* _pen_ A pointer or reference to a pen to copy.
 * _style_ The style may be one of the following:
-
 
 |*SOLID*|Solid style.|
 |*TRANSPARENT*|No pen is used.|
@@ -130,33 +110,119 @@ h4. Remarks
 
 Different versions of Windows and different versions of other platforms
 support _very_ different subsets of the styles above - there is no
-similarity even between Windows95 and Windows98 - so handle with care.
+similarity even between Windows95 and Windows98 - so handle with care,
+and test across platforms.
 
-If the named colour form is used, an appropriate *Colour* structure
-is found in the colour database.
+If the named colour form is used, an appropriate
+"Wx::Colour":colour.html structure is found in the colour database.
 
 h4. See also
 
 "Pen#set_style":pen.html#Pen_setstyle, "Pen#set_colour":pen.html#Pen_setcolour, "Pen#set_width":pen.html#Pen_setwidth, "Pen#set_stipple":pen.html#Pen_setstipple
 
 
-
-  *destructor*()
-
-Destructor.
-
-h4. Remarks
-
-The destructor may not delete the underlying pen object of the native windowing
-system, since Brush uses a reference counting system for efficiency.
-
-Although all remaining pens are deleted when the application exits,
-the application should try to clean up all pens itself. This is because
-Widgets cannot know if a pointer to the pen object is stored in an
-application data structure, and there is a risk of double deletion.
-
 h3(#Pen_getcap). Pen#get_cap
 
  Integer *get_cap*()
 
-Returns the pen cap style, which may be one of *CAP_ROUND*, *CAP_PROJECTING* and
+Returns the pen cap style, which may be one of @Wx::CAP_ROUND@,
+@Wx::CAP_PROJECTING@ and @Wx::CAP_BUTT@. The default is @Wx::CAP_ROUND@.
+
+h3(#Pen_getcolour). Pen#get_colour
+
+ "Colour":colour.html *get_colour*()
+
+Returns the pen's colour
+
+h3(Pen_getdashes). Pen#get_dashes
+
+ wxDashes *get_dashes*()
+
+Gets an array of dashes (defined as char in X, DWORD under
+Windows). dashes is a pointer to the internal array. Do not deallocate
+or store this pointer. The function returns the number of dashes
+associated with this pen.
+
+Not currently supported in wxRuby.
+
+h3(Pen_getjoin). Pen#get_join
+
+ Integer *get_join*()
+
+Returns the pen join style, which may be one of @Wx::JOIN_BEVEL@,
+@Wx::JOIN_ROUND@ and @Wx::JOIN_MITER@. The default is @Wx::JOIN_ROUND@.
+
+h3(Pen_getstipple). Pen#get_stipple
+
+ "Bitmap":bitmap.html *get_stipple*()
+
+Gets the stipple bitmap.
+
+h3(Pen_getstyle). Pen#get_style
+
+ Integer *get_style*()
+
+Returns the pen style, for example @Wx::SOLID@.
+
+h3(Pen_getwidth). Pen#get_width
+
+ Integer *get_width*()
+
+Returns the pen width.
+
+h3(Pen_isok). Pen#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if the pen is initialised.
+
+h3(Pen_setcap). Pen#set_cap
+
+ *set_cap*(%(arg-type)Integer% capStyle)
+
+Sets the pen cap style, which may be one of @Wx::CAP_ROUND@,
+@Wx::CAP_PROJECTING@ and @Wx::CAP_BUTT@. The default is
+@Wx::CAP_ROUND@. 
+
+h3(Pen_setcolour). Pen#set_colour
+
+ *set_colour*(%(arg-type)"Colour":colour.html% colour)
+
+ *set_colour*(%(arg-type)String% colour_name)
+
+ *set_colour*(%(arg-type)Integer% red, %(arg-type)Integer% blue, %(arg-type)Integer% green)
+
+Specifies the colour of the pen by using a "Colour":colour.html, a
+colour name (see "Colour":colour.html for more details), or a set of
+red, green and blue values.
+
+h3(Pen_setdashes). Pen#set_dashes
+
+ *set_dashes*(%(arg-type)wxDashes%)
+
+Sets dashes. Not currently supported in wxRuby.
+
+h3(Pen_setjoin). Pen#set_join
+
+ *set_join*(%(arg-type)Integer% join_style)
+
+Returns the pen join style, which may be one of @Wx::JOIN_BEVEL@,
+@Wx::JOIN_ROUND@ and @Wx::JOIN_MITER@. The default is @Wx::JOIN_ROUND@.
+
+h3(Pen_setstipple). Pen#set_stipple
+
+ *set_stipple*(%(arg-type)"Bitmap":bitmap.html% stipple)
+
+Sets the bitmap for stippling.
+
+h3(Pen_setstyle). Pen#set_style
+
+ *set_style*(%(arg-type)Integer% style)
+
+Sets the pen style; see "Pen.new":#Pen_new for valid styles.
+
+h3(Pen_setwidth). Pen#set_width
+
+ *set_width*(%(arg-type)Integer% width)
+
+Sets the pen width, in pixels.
