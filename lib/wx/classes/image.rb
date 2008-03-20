@@ -1,4 +1,9 @@
 class Wx::Image
+  # Create a new image from Wx::Bitmap, preserving mask information
+  def self.from_bitmap(bmp)
+    bmp.convert_to_image
+  end
+
   # Redefine the initialize method so it raises an exception if a
   # non-existent file is given to the constructor; otherwise, wx Widgets
   # just carries on with an invalid image, which may cause faults later
@@ -10,5 +15,10 @@ class Wx::Image
       end
     end
     wx_init.bind(self).call(*args)
+  end
+  
+  # Convert to bitmap
+  def convert_to_bitmap
+    Wx::Bitmap.from_image(self)
   end
 end
