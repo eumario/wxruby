@@ -110,7 +110,7 @@ in a way similar to 'A'[0], or you can use the pre-defined *WXK_* constants.
 
 h4. See Also
 
-"Wx::WXK_ Constants":wx_wxkconstants.html
+"WxRuby Key Codes":keycode.txtl, "WxRuby Key Modifiers":keymod.html
 
 h3(#Functions_xrcid). Wx::xrcid
 
