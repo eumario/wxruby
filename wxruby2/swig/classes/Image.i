@@ -17,13 +17,15 @@ GC_MANAGE_AS_OBJECT(wxImage);
 		SWIG_exception_fail(SWIG_ERROR, "in method 'set_data', expected argument of type 'string'");
 }
 
+
 %apply unsigned char * OUTPUT { unsigned char * r, unsigned char * g, unsigned char * b }
 
 %ignore wxImage::Create();
 
-// Handler methods are not supported in wxRuby; if these methods are
-// added, corrected freearg typemap for input wxString in static method
-// will be required
+// Handler methods are not supported in wxRuby; all standard handlers
+// are loaded at startup, and we don't allow custom image handlers to be
+// written in Ruby. Note if these methods are added, corrected freearg
+// typemap for input wxString in static methods will be required.
 %ignore wxImage::AddHandler;
 %ignore wxImage::FindHandler;
 %ignore wxImage::FindHandlerMime;

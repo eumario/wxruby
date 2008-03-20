@@ -1,4 +1,9 @@
 class Wx::Bitmap
+  # Constructor copying data from an image
+  def self.from_image(img, depth = -1)
+    new(img, depth)
+  end
+
   # Redefine the initialize method so it raises an exception if a
   # non-existent file is given to the constructor; otherwise, wx Widgets
   # just carries on with an empty bitmap, which may cause faults later

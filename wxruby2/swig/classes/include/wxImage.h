@@ -10,7 +10,6 @@ class wxImage : public wxObject
 public:
    wxImage() ;
    wxImage(const wxImage&  image ) ;
-  //wxImage(const wxBitmap&  bitmap );
   wxImage(int  width , int  height);
    wxImage(int  width , int  height , unsigned char*  data , bool static_data = false) ;
    wxImage(const wxString&  name , long type = wxBITMAP_TYPE_ANY, int index = -1) ;
@@ -28,8 +27,7 @@ public:
   unsigned long ComputeHistogram(wxImageHistogram&  histogram ) const;
   bool ConvertAlphaToMask(unsigned char threshold = wxIMAGE_ALPHA_THRESHOLD);
 
-  //wxBitmap ConvertToBitmap() const;
-    wxImage ConvertToGreyscale( double lr = 0.299, double lg = 0.587, double lb = 0.114 ) const;
+  wxImage ConvertToGreyscale( double lr = 0.299, double lg = 0.587, double lb = 0.114 ) const;
   wxImage ConvertToMono(unsigned char  r , unsigned char  g , unsigned char  b ) const;
   wxImage Copy() const;
   void Create(int  width , int  height );
