@@ -255,7 +255,7 @@ class MyFrame < Frame
       log_warning("And then something went wrong!")
       
       # and if ~BusyCursor doesn't do it, then call it manually
-      Wx::yield()
+      Wx::get_app.yield()
       
       log_error("Intermediary error handler decided to abort.")
       log_error("DEMO: The top level caller detected an unrecoverable error.")
