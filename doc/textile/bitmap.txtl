@@ -1,7 +1,15 @@
 h1(#wxbitmap). Wx::Bitmap
 
 This class encapsulates the concept of a platform-dependent bitmap,
-either monochrome or colour or colour with alpha channel support.
+either monochrome, colour, or colour with alpha channel (transparency)
+support. 
+
+wxRuby provides two classes for handling images. "Bitmap":bitmap.html is
+used for drawing upon the screen, for example using a
+"DeviceContext":dc.html. The other class "Image":image.html cannot be
+drawn directly upon the screen, but supports a variety of image
+manipulation functions such as rescaling, blurring, and directly
+manipulating pixels.
 
 h2. Derived from
 
@@ -20,7 +28,7 @@ h2. See also
 "Bitmap overview":bitmapoverview.html,
 "supported bitmap file formats":supportedbitmapformats.html,
 "DC#blit":dc.html#DC_blit,
-"Icon":icon.html, "Cursor":cursor.html, "Bitmap":bitmap.html,
+"Icon":icon.html, "Cursor":cursor.html, "Image":image.html,
 "MemoryDC":memorydc.html
 
 <div id="methods">
@@ -28,24 +36,19 @@ h2. See also
 h2. Methods
 
 * "Bitmap.new":#Bitmap_new
-* "Bitmap#add_handler":#Bitmap_addhandler
+* "Bitmap.from_image":#Bitmap_fromimage
 * "Bitmap#clean_up_handlers":#Bitmap_cleanuphandlers
 * "Bitmap#convert_to_image":#Bitmap_converttoimage
 * "Bitmap#copy_from_icon":#Bitmap_copyfromicon
 * "Bitmap#create":#Bitmap_create
-* "Bitmap#find_handler":#Bitmap_findhandler
 * "Bitmap#get_depth":#Bitmap_getdepth
-* "Bitmap#get_handlers":#Bitmap_gethandlers
 * "Bitmap#get_height":#Bitmap_getheight
 * "Bitmap#get_palette":#Bitmap_getpalette
 * "Bitmap#get_mask":#Bitmap_getmask
 * "Bitmap#get_width":#Bitmap_getwidth
 * "Bitmap#get_sub_bitmap":#Bitmap_getsubbitmap
-* "Bitmap#init_standard_handlers":#Bitmap_initstandardhandlers
-* "Bitmap#insert_handler":#Bitmap_inserthandler
 * "Bitmap#load_file":#Bitmap_loadfile
 * "Bitmap#is_ok":#Bitmap_isok
-* "Bitmap#remove_handler":#Bitmap_removehandler
 * "Bitmap#save_file":#Bitmap_savefile
 * "Bitmap#set_depth":#Bitmap_setdepth
 * "Bitmap#set_height":#Bitmap_setheight
@@ -58,19 +61,26 @@ h2. Methods
 
 h3(#Bitmap_new). Bitmap.new
 
-  *Bitmap.new*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+The two main constructors for this class are used to create a blank
+bitmap, or to load a bitmap from a file. "from_image":#Bitmap_fromimage
+can be used to convert an "Image":image.html into a bitmap.
 
-Copy constructor. Note that this does not take a fresh copy of the data,
-but instead makes the internal data point to _bitmap_'s data. So
-changing one bitmap will change the other. To make a real copy, you can
-use:
+  *Bitmap.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+             %(arg-type)Integer% depth = -1)
 
+Creates a new bitmap. A depth of -1 indicates the depth of the current screen
+or visual. Some platforms only support 1 for monochrome and -1 for the current
+colour setting. 
 
-     Bitmap newBitmap = oldBitmap.GetSubBitmap(
-                              Rect(0, 0, oldBitmap.GetWidth(), oldBitmap.GetHeight()));
- 
+  *Bitmap.new*(%(arg-type)String% name,  %(arg-type)Integer% type)
 
-  *Bitmap.new*(%(arg-type)% data,  %(arg-type)Integer% type,  %(arg-type)Integer% width, 
+Loads a bitmap from a file or resource.
+
+The following constructors are not fully supported or tested:
+
+  *Bitmap.new*(%(arg-type)% data,  
+             %(arg-type)Integer% type, 
+             %(arg-type)Integer% width, 
              %(arg-type)Integer% height, 
              %(arg-type)Integer% depth = -1)
 
@@ -93,38 +103,9 @@ Under other platforms, only monochrome bitmaps may be created using this
 constructor and "Image":image.html should be used for creating colour
 bitmaps from static data.
 
-  *Bitmap.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
-             %(arg-type)Integer% depth = -1)
-
-Creates a new bitmap. A depth of -1 indicates the depth of the current screen
-or visual. Some platforms only support 1 for monochrome and -1 for the current
-colour setting. Beginning with version 2.5.4 of Widgets a depth of 32 including
-an alpha channel is supported under MSW, Mac and GTK+.
-
   *Bitmap.new*(%(arg-type)"char":char.html% bits)
 
 Creates a bitmap from XPM data.
-
-  *Bitmap.new*(%(arg-type)String% name,  %(arg-type)Integer% type)
-
-Loads a bitmap from a file or resource.
-
-  *Bitmap.new*(%(arg-type)"Image":image.html% img,  %(arg-type)Integer% depth = -1)
-
-Creates bitmap object from the image. This has to be done
-to actually display an image as you cannot draw an image directly on a window.
-The resulting bitmap will use the provided colour depth (or that of the
-current system if depth is -1) which entails that a colour reduction has
-to take place.
-
-When in 8-bit mode (PseudoColour mode), the GTK port will use a color cube created
-on program start-up to look up colors. This ensures a very fast conversion, but
-the image quality won't be perfect (and could be better for photo images using more
-sophisticated dithering algorithms).
-
-On Windows, if there is a palette present (set with SetPalette), it will be used when
-creating the Bitmap (most useful in 8-bit display mode). On other platforms,
-the palette is currently ignored.
 
 h4. Parameters
 
@@ -146,59 +127,47 @@ Its meaning is determined by the _type_ parameter.
 |BITMAP_TYPE_XBM|Load an X bitmap file.|
 |BITMAP_TYPE_XPM|Load an XPM bitmap file.|
 
+The validity of these flags depends on the platform and Widgets
+configuration.  If all possible Widgets settings are used, the Windows
+platform supports BMP file, BMP resource, XPM data, and XPM. Under GTK,
+the available formats are BMP file, XPM data, XPM file, and PNG file.
+Under Motif, the available formats are XBM data, XBM file, XPM data, XPM
+file.
 
-The validity of these flags depends on the platform and Widgets configuration.
-If all possible Widgets settings are used, the Windows platform supports BMP file, BMP resource,
-XPM data, and XPM. Under GTK, the available formats are BMP file, XPM data, XPM file, and PNG file.
-Under Motif, the available formats are XBM data, XBM file, XPM data, XPM file.
-
-In addition, Bitmap can read all formats that "Image":image.html can, which currently include
-BITMAP_TYPE_JPEG, BITMAP_TYPE_TIF, BITMAP_TYPE_PNG, BITMAP_TYPE_GIF, BITMAP_TYPE_PCX,
-and BITMAP_TYPE_PNM. Of course, you must have Image handlers loaded. 
-* _img_ Platform-independent Image object.
+In addition, Bitmap can read all formats that "Image":image.html can,
+which currently include BITMAP_TYPE_JPEG, BITMAP_TYPE_TIF,
+BITMAP_TYPE_PNG, BITMAP_TYPE_GIF, BITMAP_TYPE_PCX, and
+BITMAP_TYPE_PNM. Of course, you must have Image handlers loaded.  *
+_img_ Platform-independent Image object.
 
 h4. Remarks
 
-The first form constructs a bitmap object with no data; an assignment or another member function such as Create
-or LoadFile must be called subsequently.
-
-The second and third forms provide copy constructors. Note that these do not copy the
-bitmap data, but instead a pointer to the data, keeping a reference count. They are therefore
-very efficient operations.
-
-The fourth form constructs a bitmap from data whose type and value depends on
-the value of the _type_ argument.
-
-The fifth form constructs a (usually monochrome) bitmap from an array of pixel values, under both
-X and Windows.
-
-The sixth form constructs a new bitmap.
-
-The seventh form constructs a bitmap from pixmap (XPM) data, if Widgets has been configured
-to incorporate this feature.
-
-To use this constructor, you must first include an XPM file. For
-example, assuming that the file @mybitmap.xpm@ contains an XPM array
-of character pointers called mybitmap:
-
-
- #include "mybitmap.xpm"
- 
- ...
- 
- Bitmap *bitmap = new Bitmap(mybitmap);
- 
-
-The eighth form constructs a bitmap from a file or resource. _name_ can refer
-to a resource name under MS Windows, or a filename under MS Windows and X.
-
-Under Windows, _type_ defaults to BITMAP_TYPE_BMP_RESOURCE.
-Under X, _type_ defaults to BITMAP_TYPE_XPM.
+Under Windows, _type_ defaults to BITMAP_TYPE_BMP_RESOURCE.  Under X,
+_type_ defaults to BITMAP_TYPE_XPM.
 
 h4. See also
 
 "Bitmap#load_file":bitmap.html#Bitmap_loadfile
 
+
+h3(#Bitmap_fromimage). Bitmap.from_image
+
+  *Bitmap.from_image*(%(arg-type)"Image":image.html% img,  %(arg-type)Integer% depth = -1)
+
+Creates bitmap object from the image. This has to be done
+to actually display an image as you cannot draw an image directly on a window.
+The resulting bitmap will use the provided colour depth (or that of the
+current system if depth is -1) which entails that a colour reduction has
+to take place.
+
+When in 8-bit mode (PseudoColour mode), the GTK port will use a color cube created
+on program start-up to look up colors. This ensures a very fast conversion, but
+the image quality won't be perfect (and could be better for photo images using more
+sophisticated dithering algorithms).
+
+On Windows, if there is a palette present (set with SetPalette), it will be used when
+creating the Bitmap (most useful in 8-bit display mode). On other platforms,
+the palette is currently ignored.
 
 
 
@@ -216,26 +185,6 @@ destroyed automatically by Widgets when the application exits.
 Do not delete a bitmap that is selected into a memory device context,
 for example during a call to "draw":#Bitmap_draw .
 
-h3(#Bitmap_addhandler). Bitmap#add_handler
-
-  *add_handler*(%(arg-type)"BitmapHandler":bitmaphandler.html% handler)
-
-Adds a handler to the end of the static list of format handlers.
-
-* _handler_ A new bitmap format handler object. There is usually only one instance
-of a given handler class in an application session.
-
-h4. See also
-
-"BitmapHandler":bitmaphandler.html
-
-h3(#Bitmap_cleanuphandlers). Bitmap#clean_up_handlers
-
-  *clean_up_handlers*()
-
-Deletes all bitmap handlers.
-
-This function is called by Widgets on exit.
 
 h3(#Bitmap_converttoimage). Bitmap#convert_to_image
 
@@ -301,32 +250,6 @@ use before drawing starts, and disposed of when drawing is
 finished. It's recommended you use this draw method rather than
 instantiating MemoryDC directly.
 
-h3(#Bitmap_findhandler). Bitmap#find_handler
-
- "BitmapHandler":bitmaphandler.html *find_handler*(%(arg-type)String% name)
-
-Finds the handler with the given name.
-
- "BitmapHandler":bitmaphandler.html *find_handler*(%(arg-type)String% extension, 
-                              %(arg-type)"BitmapType":bitmaptype.html% bitmapType)
-
-Finds the handler associated with the given extension and type.
-
- "BitmapHandler":bitmaphandler.html *find_handler*(%(arg-type)"BitmapType":bitmaptype.html% bitmapType)
-
-Finds the handler associated with the given bitmap type.
-
-* _name_ The handler name.
-* _extension_ The file extension, such as ``bmp".
-* _bitmapType_ The bitmap type, such as BITMAP_TYPE_BMP.
-
-h4. Return value
-
-A pointer to the handler if found, NULL otherwise.
-
-h4. See also
-
-"BitmapHandler":bitmaphandler.html
 
 h3(#Bitmap_getdepth). Bitmap#get_depth
 
@@ -334,16 +257,6 @@ h3(#Bitmap_getdepth). Bitmap#get_depth
 
 Gets the colour depth of the bitmap. A value of 1 indicates a
 monochrome bitmap.
-
-h3(#Bitmap_gethandlers). Bitmap#get_handlers
-
- "List":list.html *get_handlers*()
-
-Returns the static list of bitmap format handlers.
-
-h4. See also
-
-"BitmapHandler":bitmaphandler.html
 
 h3(#Bitmap_getheight). Bitmap#get_height
 
@@ -390,32 +303,6 @@ h3(#Bitmap_getsubbitmap). Bitmap#get_sub_bitmap
 Returns a sub bitmap of the current one as long as the rect belongs entirely to
 the bitmap. This function preserves bit depth and mask information.
 
-h3(#Bitmap_initstandardhandlers). Bitmap#init_standard_handlers
-
-  *init_standard_handlers*()
-
-Adds the standard bitmap format handlers, which, depending on Widgets
-configuration, can be handlers for Windows bitmap, Windows bitmap resource, and XPM.
-
-This function is called by Widgets on startup.
-
-h4. See also
-
-"BitmapHandler":bitmaphandler.html
-
-h3(#Bitmap_inserthandler). Bitmap#insert_handler
-
-  *insert_handler*(%(arg-type)"BitmapHandler":bitmaphandler.html% handler)
-
-Adds a handler at the start of the static list of format handlers.
-
-* _handler_ A new bitmap format handler object. There is usually only one instance
-of a given handler class in an application session.
-
-h4. See also
-
-"BitmapHandler":bitmaphandler.html
-
 h3(#Bitmap_loadfile). Bitmap#load_file
 
  Boolean *load_file*(%(arg-type)String% name,  %(arg-type)"BitmapType":bitmaptype.html% type)
@@ -441,8 +328,9 @@ The meaning of _name_ is determined by the _type_ parameter.
 The validity of these flags depends on the platform and Widgets configuration.
 
 In addition, Bitmap can read all formats that "Image":image.html can
-(BITMAP_TYPE_JPEG, BITMAP_TYPE_PNG, BITMAP_TYPE_GIF, BITMAP_TYPE_PCX, BITMAP_TYPE_PNM).
-(Of course you must have Image handlers loaded.) 
+(BITMAP_TYPE_JPEG, BITMAP_TYPE_PNG, BITMAP_TYPE_GIF, BITMAP_TYPE_PCX,
+BITMAP_TYPE_PNM).
+
 
 h4. Return value
 
@@ -463,23 +351,6 @@ h3(#Bitmap_isok). Bitmap#is_ok
  Boolean *is_ok*()
 
 Returns true if bitmap data is present.
-
-h3(#Bitmap_removehandler). Bitmap#remove_handler
-
- Boolean *remove_handler*(%(arg-type)String% name)
-
-Finds the handler with the given name, and removes it. The handler
-is not deleted.
-
-* _name_ The handler name.
-
-h4. Return value
-
-true if the handler was found and removed, false otherwise.
-
-h4. See also
-
-"BitmapHandler":bitmaphandler.html
 
 h3(#Bitmap_savefile). Bitmap#save_file
 
@@ -505,7 +376,7 @@ The validity of these flags depends on the platform and Widgets configuration.
 
 In addition, Bitmap can save all formats that "Image":image.html can
 (BITMAP_TYPE_JPEG, BITMAP_TYPE_PNG).
-(Of course you must have Image handlers loaded.) 
+
 * _palette_ An optional palette used for saving the bitmap.
 
 h4. Return value
