@@ -110,7 +110,7 @@ in a way similar to 'A'[0], or you can use the pre-defined *WXK_* constants.
 
 h4. See Also
 
-"WxRuby Key Codes":keycode.txtl, "WxRuby Key Modifiers":keymod.html
+"WxRuby Key Codes":keycode.html, "WxRuby Key Modifiers":keymod.html
 
 h3(#Functions_xrcid). Wx::xrcid
 
@@ -125,12 +125,12 @@ h4. See Also
 h3(#Functions_fileselector). Wx::file_selector
 
 	*(arg-type)String* *Wx::file_selector*(*(arg-type)String* title,
-	                                       *(arg-type)String* defaultDir,
-											                   *(arg-type)String* defaultFile,
-											                   *(arg-type)String* ext_default,
-																				 *(arg-type)String* wildcard,
-											                   *(arg-type)Integer* style,
-											                   *(arg-type)"Window":window.html* parent)
+								*(arg-type)String* defaultDir,
+								*(arg-type)String* defaultFile,
+								*(arg-type)String* ext_default,
+								*(arg-type)String* wildcard,
+								*(arg-type)Integer* style,
+								*(arg-type)"Window":window.html* parent)
 
 This is a convenience method, in which to create a File Dialog, to get an input file.
 
@@ -141,10 +141,10 @@ h4. See Also
 h3(#Functions_messagebox). Wx::message_box
 
 	*(arg-type)Integer* *Wx::message_box*(*(arg-type)String* message,
-																				*(arg-type)String* title,
-																				*(arg-type)Integer* style)
+								*(arg-type)String* title,
+								*(arg-type)Integer* style)
 
-This function allows a Message Dialog to be displayed, similar to "Wx::MessageDialog":messagedialog.html, however
+This function allows a Message Dialog to be displayed, similar to "MessageDialog":messagedialog.html, however
 it uses a different set of constants for style.  For style, you can specify
 the icon with the following constants:
 
@@ -175,9 +175,9 @@ h4. See Also
 h3(#Functions_getmultiplechoices). Wx::get_multiple_choices
 
   *(arg-type)Array* *Wx::get_multiple_choices*(*(arg-type)String* message,
-																							 *(arg-type)String* title,
-																							 *(arg-type)Array* choices,
-																							 *(arg-type)"Window":window.html* parent)
+									*(arg-type)String* title,
+									*(arg-type)Array* choices,
+									*(arg-type)"Window":window.html* parent)
 
 This creates a "CheckListBox":checklistbox.html "Dialog":dialog.html, in which the user can select
 any number of items from a list of choices.  It returns the selected choices in
@@ -190,12 +190,12 @@ h4. See Also
 h3(#Functions_getnumberfromuser). Wx::get_number_from_user
 
   *(arg-type)Integer* *Wx::get_number_from_user*(*(arg-type)String* message,
-																								 *(arg-type)String* title,
-																								 *(arg-type)String* label,
-																								 *(arg-type)Integer* default,
-																								 *(arg-type)Integer* minimum,
-																								 *(arg-type)Integer* maximum,
-																								 *(arg-type)"Window":window.html* parent)
+									*(arg-type)String* title,
+									*(arg-type)String* label,
+									*(arg-type)Integer* default,
+									*(arg-type)Integer* minimum,
+									*(arg-type)Integer* maximum,
+									*(arg-type)"Window":window.html* parent)
 
 This creates a "SpinCtrl":spinctrl.html "Dialog":dialog.html, in which a user can choose a number
 between minimum range and maximum range, with a default value given.
@@ -207,9 +207,9 @@ h4. See Also
 h3(#Functions_gettextfromuser). Wx::get_text_from_user
 
   *(arg-type)String* *Wx::get_text_from_user*(*(arg-type)String* message,
-																							*(arg-type)String* title,
-																							*(arg-type)String* default,
-																							*(arg-type)"Window":window.html* parent)
+									*(arg-type)String* title,
+									*(arg-type)String* default,
+									*(arg-type)"Window":window.html* parent)
 
 This creates a "TextCtrl":textctrl.html "Dialog":dialog.html, in which a user can enter text
 for the program to process.
@@ -221,9 +221,9 @@ h4. See Also
 h3(#Functions_getpasswordfromuser). Wx::get_password_from_user
 
   *(arg-type)String* *Wx::get_password_from_user*(*(arg-type)String* message,
-																									*(arg-type)String* title,
-																									*(arg-type)String* default,
-																									*(arg-type)"Window":window.html* parent)
+									*(arg-type)String* title,
+									*(arg-type)String* default,
+									*(arg-type)"Window":window.html* parent)
 
 This creates a "TextCtrl":textctrl.html "Dialog":dialog.html with TE_PASSWORD style set.  This
 is similar in operation as "Wx::get_text_from_user":#Functions_gettextfromuser, the only difference
@@ -234,13 +234,19 @@ h4. See Also
 "Dialog":dialog.html, "TextCtrl":textctrl.html, "Wx::get_text_from_user":#Functions_gettextfromuser
 
 h3(#Functions_logmessage). Wx::log_message
+  
+	*Wx::log_message*(*(arg-type)String* message)
+
 h3(#Functions_logwarning). Wx::log_warning
+
+	*Wx::log_warning*(*(arg-type)String* message)
+
 h3(#Functions_logerror). Wx::log_error
+
+	*Wx::log_error*(*(arg-type)String* message)
+
 h3(#Functions_logstatus). Wx::log_status
 
-  *Wx::log_message*(*(arg-type)String* message)
-	*Wx::log_warning*(*(arg-type)String* message)
-	*Wx::log_error*(*(arg-type)String* message)
 	*Wx::log_status*(*(arg-type)String* message)
 
 These methods interface with the "Log":log.html class, in which logging can be done to
