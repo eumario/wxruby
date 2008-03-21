@@ -1,4 +1,11 @@
 class Wx::Icon
+  # Analogous to Image.from_bitmap
+  def self.from_bitmap(bmp)
+    ico = new
+    ico.copy_from_bitmap(bmp)
+    ico
+  end
+
   # Redefine the initialize method so it raises an exception if a
   # non-existent file is given to the constructor; otherwise, wx Widgets
   # just carries on with an empty icon, which may cause faults later
