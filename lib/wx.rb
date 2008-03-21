@@ -38,6 +38,5 @@ end
 require 'wx/accessors'
 require 'wx/keyword_ctors'
 require 'wx/keyword_defs'
-require 'wx/wx_constants'
 
 
