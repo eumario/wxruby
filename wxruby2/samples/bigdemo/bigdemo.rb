@@ -22,7 +22,6 @@ rescue LoadError => no_wx_err
   end
 end
 
-
 OVR_TEXT = "This is the WxRuby Demo.  It was ported from the wxPython Demo, created by Robin Dunn.  Many thanks to him for all his hard work - this demo is what it is because of him.  Click on any of the items in the tree control to start the demo.  Don't forget to check out the Demo Code tab - you can see the source code for each demo!\nHope you like it!"
 
 $tree_list = [
@@ -311,10 +310,9 @@ class WxRubyDemo < Wx::Frame
         
         
         # Create a Notebook
-        @nb = Wx::Notebook.new(splitter2, -1, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::CLIP_CHILDREN)
+        @nb = Wx::Notebook.new(splitter2, :style => Wx::CLIP_CHILDREN)
         
-        @ovr = Wx::TextCtrl.new(@nb, -1, OVR_TEXT, Wx::DEFAULT_POSITION, 
-                                Wx::Size.new(400,400), 
+        @ovr = Wx::TextCtrl.new(@nb, :value => OVR_TEXT, :style =>
                                 Wx::TE_MULTILINE|Wx::TE_READONLY|
                                 Wx::TE_RICH|Wx::TE_NOHIDESEL)
         @nb.add_page(@ovr, "Overview")
@@ -326,10 +324,10 @@ class WxRubyDemo < Wx::Frame
           # FIXME: Should use DemoCodeViewer, but when we do (on Windows) it
           #         puts all text on one line!  Can remove instance_eval
           #         once that's resolved
-          @txt = Wx::TextCtrl.new(@nb, -1, OVR_TEXT, Wx::DEFAULT_POSITION, 
-                                  Wx::Size.new(400,400), 
-                                  Wx::TE_MULTILINE|Wx::TE_READONLY|
-                                  Wx::HSCROLL|Wx::TE_RICH|Wx::TE_NOHIDESEL)
+          @txt = Wx::TextCtrl.new(@nb, :value => OVR_TEXT, :style =>
+                                   Wx::TE_MULTILINE|Wx::TE_READONLY|
+                                   Wx::HSCROLL|Wx::TE_RICH|Wx::TE_RICH2|
+                                   Wx::TE_NOHIDESEL)
           @txt.instance_eval { alias clear_all clear }
           @txt.set_max_length(0)
           @nb.add_page(@txt, "Demo Code")
@@ -349,8 +347,8 @@ class WxRubyDemo < Wx::Frame
         @log.set_max_length(0)
         Wx::Log::set_active_target(Wx::LogTextCtrl.new(@log))
         
-        splitter.split_vertically(@tree, splitter2, 190)
-        splitter2.split_horizontally(@nb, @log, 200)
+        splitter.split_vertically(@tree, splitter2, 220)
+        splitter2.split_horizontally(@nb, @log, 300)
 
         
         splitter.set_minimum_pane_size(20)        
@@ -390,7 +388,9 @@ class WxRubyDemo < Wx::Frame
     end
     
     def on_tree_sel_changed(event)
+
         item = event.get_item()
+
         if item.nonzero?
           itemText = @tree.get_item_text(item)
           run_demo(itemText)
@@ -403,7 +403,9 @@ class WxRubyDemo < Wx::Frame
         if item == @tree.get_selection()
             set_overview(@tree.get_item_text(item) + " Overview", @curOverview)
             Wx::log_message(@tree.get_item_text(item) + " Overview")
+
         end
+
         event.skip()
     end
     
@@ -543,7 +545,7 @@ class WxRubyDemo < Wx::Frame
                 @finddlg.set_focus()
                 return
             else
-                @finddlg.destroy()
+                @finddlg.hide()
             end
           end
           @txt.show_position(loc)
