@@ -15,6 +15,7 @@ public:
   wxColour& GetColour() const;
   wxBitmap * GetStipple() const;
   int GetStyle() const;
+  bool IsHatch() const;
   bool IsOk() const;
   void SetColour(wxColour& colour);
   void SetColour(const wxString& colourName);
