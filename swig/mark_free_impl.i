@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 // mark_free_impl.i - this contains the C++ implementation of various
@@ -133,18 +133,25 @@ void GC_mark_wxFrame(void *ptr)
 	{ GC_mark_MenuBarBelongingToFrame(menu_bar); }
 }
 
-// TODO - need some way to mark the ClientData associated with custom
-// ruby event types - but this doesn't work, as it marks non-ruby
-// ClientData associated with core wx event classes - which crashes
+
+// Find the minimum event type ID associated with custom events written
+// in Ruby
+static wxEventType wxRuby_CustomEventsMinimum = wxNewEventType();
+
+// wxRuby must mark ruby objects associated as ClientData with command
+// events that have been written in ruby. The standard wxWidgets
+// CommandEvent classes also use ClientData for their own purposes, and
+// this must not be marked as the data is not a ruby object.
 void GC_mark_wxEvent(void *ptr)
 {
   if ( ! ptr ) return;
   wxEvent* wx_event = (wxEvent*)ptr;
-  if ( wx_event->IsCommandEvent() )
+  if ( wx_event->IsCommandEvent() &&
+       wx_event->GetEventType() > wxRuby_CustomEventsMinimum )
 	{
 	  wxCommandEvent* wx_cm_event = (wxCommandEvent*)ptr;
-	  // VALUE rb_client_data = (VALUE)wx_cm_event->GetClientData();
-	  // rb_gc_mark(rb_client_data);
+	  VALUE rb_client_data = (VALUE)wx_cm_event->GetClientData();
+	  rb_gc_mark(rb_client_data);
 	}
 }
 
