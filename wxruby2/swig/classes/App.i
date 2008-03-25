@@ -77,7 +77,7 @@ public:
   void OnWindowDestroy(wxWindowDestroyEvent &event) 
   {
 	wxObject* wx_obj = event.GetEventObject();
-	GC_SetWindowDeleted(wx_obj);
+	GC_SetWindowDeleted((void *)wx_obj);
 	event.Skip();
   }
 	
@@ -91,9 +91,7 @@ public:
 	// Check if it's a valid object (sometimes SWIG doesn't return what we're
 	// expecting), a descendant of Wx::Window, and if it has not yet been
 	// deleted by WxWidgets; if so, mark it.
-	if ( TYPE(rb_obj) == T_DATA &&
-		 rb_obj_is_kind_of(rb_obj, cWxWindow.klass) && 
-		 ! rb_ivar_defined(rb_obj, rb_intern("@__wx_destroyed__") ) )
+	if ( TYPE(rb_obj) == T_DATA && rb_obj_is_kind_of(rb_obj, cWxWindow.klass) )
 	  {
 		rb_gc_mark(rb_obj);
 	  }
