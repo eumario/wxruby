@@ -25,6 +25,7 @@ extern void GcNullFreeFunc(void *);
 extern void GC_mark_wxWindow(void *);
 extern void GC_mark_wxFrame(void *);
 extern void GC_mark_wxEvent(void *);
+extern void GC_free_wxEvent(void *);
 %}
 
 // Macro definitions.
@@ -66,10 +67,18 @@ GC_NEVER(kls);
 %feature("markfunc") kls "GC_mark_wxWindow";
 %enddef
 
-// Events - cleaned up by WxWidgets when handling is complete, shouldn't 
-// be stored so not tracked.
+// Events - most are created within wxWidgets C++ on the stack and thus
+// do not need deletion. When these are passed into ruby via EvtHandler
+// or App methods, they are given a void freefunc in the call to
+// Data_Wrap_Struct (see swig/classes/EvtHandler.i -EventThunker and
+// swig/classes/App.i - FilterEvent).
+ //
+// However, custom events created on the ruby side need to be deleted to
+// avoid leakage as SWIG wrappers call new to allocate the underlying
+// wxEvent object. SWIG automatically handles the marking of such
+// instances as being ruby-owned.
 %define GC_MANAGE_AS_EVENT(kls)
-%feature("freefunc") kls "GcNullFreeFunc";
+%feature("freefunc") kls "GC_free_wxEvent";
 %feature("markfunc") kls "GC_mark_wxEvent";
 %feature("nodirector") kls;
 %enddef
