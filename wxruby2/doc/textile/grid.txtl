@@ -455,10 +455,8 @@ h3(#Grid_celltorect). Grid#cell_to_rect
 
  "Rect":rect.html *cell_to_rect*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
- "Rect":rect.html *cell_to_rect*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
-
-Return the rectangle corresponding to the grid cell's size and position in logical
-coordinates.
+Return the rectangle corresponding to the grid cell's size and position
+in logical coordinates.
 
 
 
@@ -743,17 +741,18 @@ h3(#Grid_getcellvalue). Grid#get_cell_value
 
  String *get_cell_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
- String *get_cell_value*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
+Returns the string contained in the cell at the specified location. For
+simple applications where a grid object automatically uses a default
+grid table of string values you use this function together with
+"Grid#set_cell_value":grid.html#Grid_setcellvalue to access cell values.
 
-Returns the string contained in the cell at the specified location. For simple applications where a
-grid object automatically uses a default grid table of string values you use this function together
-with "Grid#set_cell_value":grid.html#Grid_setcellvalue to access cell values.
+For more complex applications where you have derived your own grid table
+class that contains various data types (e.g. numeric, boolean or
+user-defined custom types) then you only use this function for those
+cells that contain string values.
 
-For more complex applications where you have derived your own grid table class that contains
-various data types (e.g. numeric, boolean or user-defined custom types) then you only use this
-function for those cells that contain string values.
-
-See "GridTableBase#can_get_value_as":gridtablebase.html#GridTableBase_cangetvalueas
+See
+"GridTableBase#can_get_value_as":gridtablebase.html#GridTableBase_cangetvalueas
 and the "Grid overview":gridoverview.html for more information.
 
 
@@ -1357,8 +1356,6 @@ h3(#Grid_isinselection). Grid#is_in_selection
 
  Boolean *is_in_selection*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
- Boolean *is_in_selection*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
-
 Is this cell currently selected.
 
 
@@ -1385,11 +1382,8 @@ h3(#Grid_isvisible). Grid#is_visible
  Boolean *is_visible*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
                     %(arg-type)Boolean% wholeCellVisible = true)
 
- Boolean *is_visible*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords, 
-                    %(arg-type)Boolean% wholeCellVisible = true)
-
-Returns true if a cell is either wholly visible (the default) or at least partially
-visible in the grid window.
+Returns true if a cell is either wholly visible (the default) or at
+least partially visible in the grid window.
 
 
 
@@ -1397,10 +1391,8 @@ h3(#Grid_makecellvisible). Grid#make_cell_visible
 
   *make_cell_visible*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-  *make_cell_visible*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords)
-
-Brings the specified cell into the visible grid cell area with minimal scrolling. Does
-nothing if the cell is already visible.
+Brings the specified cell into the visible grid cell area with minimal
+scrolling. Does nothing if the cell is already visible.
 
 
 
@@ -1573,11 +1565,9 @@ h3(#Grid_selectblock). Grid#select_block
                %(arg-type)Integer% rightCol, 
                %(arg-type)Boolean% addToSelected = false)
 
-  *select_block*(%(arg-type)"GridCellCoords":gridcellcoords.html% topLeft, %(arg-type)"GridCellCoords":gridcellcoords.html% bottomRight, 
-               %(arg-type)Boolean% addToSelected = false)
-
-Selects a rectangular block of cells. If addToSelected is false then any existing selection will be
-deselected; if true the column will be added to the existing selection.
+Selects a rectangular block of cells. If addToSelected is false then any
+existing selection will be deselected; if true the column will be added
+to the existing selection.
 
 
 
@@ -1669,33 +1659,27 @@ h3(#Grid_setcelltextcolour). Grid#set_cell_text_colour
   *set_cell_text_colour*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
                        %(arg-type)"Colour":colour.html% colour)
 
-  *set_cell_text_colour*(%(arg-type)"Colour":colour.html% val,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
-
   *set_cell_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the text colour for the grid cell at the specified location.
-
-
 
 h3(#Grid_setcellvalue). Grid#set_cell_value
 
   *set_cell_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)String% s)
 
-  *set_cell_value*(%(arg-type)"GridCellCoords":gridcellcoords.html% coords,  %(arg-type)String% s)
+Sets the string value for the cell at the specified location. For simple
+applications where a grid object automatically uses a default grid table
+of string values you use this function together with
+"Grid#get_cell_value":grid.html#Grid_getcellvalue to access cell values.
 
-  *set_cell_value*(%(arg-type)String% val,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
+For more complex applications where you have derived your own grid table
+class that contains various data types (e.g. numeric, boolean or
+user-defined custom types) then you only use this function for those
+cells that contain string values.
 
-Sets the string value for the cell at the specified location. For simple applications where a
-grid object automatically uses a default grid table of string values you use this function together
-with "Grid#get_cell_value":grid.html#Grid_getcellvalue to access cell values.
 
-For more complex applications where you have derived your own grid table class that contains
-various data types (e.g. numeric, boolean or user-defined custom types) then you only use this
-function for those cells that contain string values.
-
-The last form is for backward compatibility only.
-
-See "GridTableBase#can_set_value_as":gridtablebase.html#GridTableBase_cansetvalueas
+See
+"GridTableBase#can_set_value_as":gridtablebase.html#GridTableBase_cansetvalueas
 and the "Grid overview":gridoverview.html for more information.
 
 
