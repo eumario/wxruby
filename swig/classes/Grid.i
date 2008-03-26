@@ -7,6 +7,33 @@
 GC_MANAGE_AS_WINDOW(wxGrid);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
 
+
+// All of the methods have alternate versions that accept row, col pair
+// of integers, so these are redundant
+%ignore wxGrid::CellToRect( const wxGridCellCoords& coords );
+%ignore wxGrid::GetCellValue( wxGridCellCoords& coords );
+%ignore wxGrid::IsInSelection( const wxGridCellCoords& coords ) const;
+%ignore wxGrid::IsVisible( const wxGridCellCoords& coords, 
+                           bool wholeCellVisible = true );
+%ignore wxGrid::MakeCellVisible( const wxGridCellCoords& coords );
+%ignore wxGrid::SelectBlock( const wxGridCellCoords& topLeft,
+                    const wxGridCellCoords& bottomRight,
+                    bool addToSelected = false );
+%ignore wxGrid::SetCellValue( const wxGridCellCoords& coords, 
+                              const wxString& s );
+
+/* check these are working 
+  void GetDefaultCellAlignment( int *horiz, int *vert );
+  void GetColLabelAlignment( int *horiz, int *vert );
+  wxGridCellEditor* GetDefaultEditorForCell(const wxGridCellCoords& c) const;
+  void GetRowLabelAlignment( int *horiz, int *vert );
+*/
+
+/* May need additional wrapping
+  wxGridCellCoordsArray GetSelectedCells() const;
+  wxGridCellCoordsArray GetSelectionBlockTopLeft() const;
+  wxGridCellCoordsArray GetSelectionBlockBottomRight() const;
+*/
 %{
 #include <wx/grid.h>
 %}
