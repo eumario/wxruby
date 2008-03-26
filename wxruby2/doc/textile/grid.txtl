@@ -678,18 +678,15 @@ the grid's batch count is greater than zero the display will not be updated.
 
 h3(#Grid_getcellalignment). Grid#get_cell_alignment
 
-  *get_cell_alignment*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)Integer% horiz, 
-                     %(arg-type)Integer% vert)
+  Array *get_cell_alignment*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-Sets the arguments to the horizontal and vertical text alignment values for the
-grid cell at the specified location.
+Returns a two-element array containing constants for the horizontal and
+vertical alignment setting of the specified cell.
 
-Horizontal alignment will be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT. 
+Horizontal alignment will be one of @Wx::ALIGN_LEFT@, @Wx::ALIGN_CENTRE@
+or @Wx::ALIGN_RIGHT@.
 
-Vertical alignment will be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
-
-
-
+Vertical alignment will be one of @Wx::ALIGN_TOP@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_BOTTOM@.
 
 
 h3(#Grid_getcellbackgroundcolour). Grid#get_cell_background_colour
@@ -775,17 +772,14 @@ h3(#Grid_getcolleft). Grid#get_col_left
 
 h3(#Grid_getcollabelalignment). Grid#get_col_label_alignment
 
-  *get_col_label_alignment*(%(arg-type)Integer% horiz,  %(arg-type)Integer% vert)
+  Array *get_col_label_alignment*()
 
-Sets the arguments to the current column label alignment values.
+Gets the current column label alignment values as a two-element array
+of constants for the horizontal and vertical alignment.
 
-Horizontal alignment will be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT.
+Horizontal alignment will be one of @Wx::ALIGN_LEFT@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_RIGHT@.
 
-Vertical alignment will be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
-
-
-
-
+Vertical alignment will be one of @Wx::ALIGN_TOP@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_BOTTOM@.
 
 h3(#Grid_getcollabelsize). Grid#get_col_label_size
 
@@ -1115,13 +1109,14 @@ h3(#Grid_getrowminimalheight). Grid#get_row_minimal_height
 
 h3(#Grid_getrowlabelalignment). Grid#get_row_label_alignment
 
-  *get_row_label_alignment*(%(arg-type)Integer% horiz,  %(arg-type)Integer% vert)
+ Array *get_row_label_alignment*()
 
-Sets the arguments to the current row label alignment values.
+Returns a two-element array containing constants for the horizontal and
+vertical alignment of row labels.
 
-Horizontal alignment will be one of LEFT, CENTRE or RIGHT. 
+Horizontal alignment will be one of @Wx::ALIGN_LEFT@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_RIGHT@.
 
-Vertical alignment will be one of TOP, CENTRE or BOTTOM.
+Vertical alignment will be one of @Wx::ALIGN_TOP@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_BOTTOM@.
 
 
 

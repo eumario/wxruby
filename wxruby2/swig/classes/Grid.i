@@ -14,6 +14,9 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
 // Typemaps for GridCoords
 %include "../shared/grid_coords.i"
 
+ // Needed for methods that return cell and label alignments
+%apply int *OUTPUT { int *horiz, int *vert };
+
 // All of the methods have alternate versions that accept row, col pair
 // of integers, so these are redundant
 %ignore wxGrid::CellToRect( const wxGridCellCoords& coords );
@@ -28,12 +31,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
                     bool addToSelected = false );
 %ignore wxGrid::SetCellValue( const wxGridCellCoords& coords, 
                               const wxString& s );
-
-/* check these are working 
-  void GetDefaultCellAlignment( int *horiz, int *vert );
-  void GetColLabelAlignment( int *horiz, int *vert );
-  void GetRowLabelAlignment( int *horiz, int *vert );
-*/
 
 // The main memory management for this class is done in Ruby in
 // lib/wx/classes/grid.rb because the wxWidgets wxGrid public API does
