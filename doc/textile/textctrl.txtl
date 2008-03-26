@@ -246,14 +246,26 @@ h3(#TextCtrl_appendtext). TextCtrl#append_text
 
 Appends the text to the end of the text control.
 
+After the text is appended, the insertion point will be at the end of
+the text control. If this behaviour is not desired, the programmer
+should use "get_insertion_point":#TextCtrl_getinsertionpoint and
+"set_insertion_point":#TextCtrl_setinsertionpoint.
+
+Note also that this means that appending text will normally auto-scroll
+a multiline TextCtrl to the end. However, the exact scrolling behaviour
+may vary by platform and by the presence of styles such as
+@Wx::TE_WORDWRAP@ and @Wx::TE_RICH@, as different native controls are
+being used underneath. Scrolling behaviour can be controlled more
+precisely by using methods such as
+"get_last_position":#TextCtrl_getlastposition, 
+"show_position":#TextCtrl_showposition, and
+"scroll_lines":#TextCtrl_scrolllines after calling append_text. For
+displaying a log of, for example, events, "ListCtrl":listctrl.html may
+also be a more suitable alternative.
+
 h4. Parameters
 
 * _text_ Text to write to the text control.
-
-h4. Remarks
-
-After the text is appended, the insertion point will be at the end of the text control. If this behaviour is not desired,
-the programmer should use "get_insertion_point":#TextCtrl_getinsertionpoint and "set_insertion_point":#TextCtrl_setinsertionpoint.
 
 h4. See also
 
