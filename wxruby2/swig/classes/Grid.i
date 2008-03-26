@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -7,11 +7,18 @@
 GC_MANAGE_AS_WINDOW(wxGrid);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
 
+%{
+#include <wx/grid.h>
+%}
+
+// Typemaps for GridCoords
+%include "../shared/grid_coords.i"
 
 // All of the methods have alternate versions that accept row, col pair
 // of integers, so these are redundant
 %ignore wxGrid::CellToRect( const wxGridCellCoords& coords );
 %ignore wxGrid::GetCellValue( wxGridCellCoords& coords );
+%ignore wxGrid::GetDefaultEditorForCell(const wxGridCellCoords& c) const;
 %ignore wxGrid::IsInSelection( const wxGridCellCoords& coords ) const;
 %ignore wxGrid::IsVisible( const wxGridCellCoords& coords, 
                            bool wholeCellVisible = true );
@@ -25,18 +32,8 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
 /* check these are working 
   void GetDefaultCellAlignment( int *horiz, int *vert );
   void GetColLabelAlignment( int *horiz, int *vert );
-  wxGridCellEditor* GetDefaultEditorForCell(const wxGridCellCoords& c) const;
   void GetRowLabelAlignment( int *horiz, int *vert );
 */
-
-/* May need additional wrapping
-  wxGridCellCoordsArray GetSelectedCells() const;
-  wxGridCellCoordsArray GetSelectionBlockTopLeft() const;
-  wxGridCellCoordsArray GetSelectionBlockBottomRight() const;
-*/
-%{
-#include <wx/grid.h>
-%}
 
 // The main memory management for this class is done in Ruby in
 // lib/wx/classes/grid.rb because the wxWidgets wxGrid public API does
