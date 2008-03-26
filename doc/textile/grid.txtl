@@ -484,7 +484,7 @@ Deselects all cells that are currently selected.
 h3(#Grid_creategrid). Grid#create_grid
 
  Boolean *create_grid*(%(arg-type)Integer% numRows,  %(arg-type)Integer% numCols, 
-                     %(arg-type)Grid::GridSelectionModes% selmode = Grid::GridSelectCells)
+                     %(arg-type)Grid::GridSelectionModes% selmode = Wx::Grid::GridSelectCells)
 
 Creates a grid with the specified initial number of rows and columns.
 Call this directly after the grid constructor. When you use this
@@ -2104,32 +2104,33 @@ h3(#Grid_setselectionforeground). Grid#set_selection_foreground
 
 h3(#Grid_setselectionmode). Grid#set_selection_mode
 
-  *set_selection_mode*(%(arg-type)Grid::GridSelectionModes% selmode)
+  *set_selection_mode*(%(arg-type)Integer% selmode)
 
-Set the selection behaviour of the grid.
+Set the selection behaviour of the grid. The parameter should be one of
+the following integer constants:
 
 h4. Parameters
 
-* _Grid::GridSelectCells_ The default mode where individual cells are selected.
-* _Grid::GridSelectRows_ Selections will consist of whole rows.
-* _Grid::GridSelectColumns_ Selections will consist of whole columns.
+* @Wx::Grid::GridSelectCells@ The default mode where individual cells are selected.
+* @Wx::Grid::GridSelectRows@ Selections will consist of whole rows.
+* @Wx::Grid::GridSelectColumns@ Selections will consist of whole columns.
 
 
 
 h3(#Grid_settable). Grid#set_table
 
  Boolean *set_table*(%(arg-type)"GridTableBase":gridtablebase.html% table,  %(arg-type)Boolean% takeOwnership = false, 
-                   %(arg-type)Grid::GridSelectionModes% selmode = Grid::GridSelectCells)
+                   %(arg-type)Grid::GridSelectionModes% selmode = Wx::Grid::GridSelectCells)
 
-Passes a pointer to a custom grid table to be used by the grid. This should be called
-after the grid constructor and before using the grid object. If takeOwnership is set to
-true then the table will be deleted by the Grid destructor.
+Passes to a custom grid table to be used by the grid. This should be
+called after the grid constructor and before using the grid object. If
+takeOwnership is set to true then the table will be deleted by the Grid
+destructor.
 
-Use this function instead of "Grid#create_grid":grid.html#Grid_creategrid when your
-application involves complex or non-string data or data sets that are too large to fit
-wholly in memory.
-
-
+Use this function instead of
+"Grid#create_grid":grid.html#Grid_creategrid when your application
+involves complex or non-string data or data sets that are too large to
+fit wholly in memory.
 
 h3(#Grid_showcelleditcontrol). Grid#show_cell_edit_control
 
