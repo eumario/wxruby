@@ -386,14 +386,17 @@ screen flicker. The final EndBatch will cause the grid to be repainted.
 
 h3(#Grid_blocktodevicerect). Grid#block_to_device_rect
 
- "Rect":rect.html *block_to_device_rect*(%(arg-type)"GridCellCoords":gridcellcoords.html% topLeft, 
-                             %(arg-type)"GridCellCoords":gridcellcoords.html% bottomRight)
+ "Rect":rect.html *block_to_device_rect*(%(arg-type)Array% topLeft, 
+                                            %(arg-type)Array% bottomRight)
 
 This function returns the rectangle that encloses the block of cells
 limited by TopLeft and BottomRight cell in device coords and clipped
 to the client size of the grid window.
 
+The top-left and bottom-right positions should be passed in as two
+element arrays, each representing a row, col grid coordinate; for example:
 
+  block_to_device_rect( [1, 1], [4, 2] )
 
 h3(#Grid_candragcolmove). Grid#can_drag_col_move
 
@@ -722,7 +725,7 @@ h3(#Grid_getcellrenderer). Grid#get_cell_renderer
  "GridCellRenderer":gridcellrenderer.html *get_cell_renderer*(%(arg-type)Integer% row, 
                                       %(arg-type)Integer% col)
 
-Returns a pointer to the renderer for the grid cell at the specified location.
+Returns the renderer for the grid cell at the specified location.
 
 See "GridCellRenderer":gridcellrenderer.html and
 the "Grid overview":gridoverview.html for more information about cell editors and renderers.
@@ -910,9 +913,6 @@ h3(#Grid_getdefaulteditorforcell). Grid#get_default_editor_for_cell
 
  "GridCellEditor":gridcelleditor.html *get_default_editor_for_cell*(%(arg-type)Integer% row, 
                                               %(arg-type)Integer% col)
-
- "GridCellEditor":gridcelleditor.html *get_default_editor_for_cell*(%(arg-type)"GridCellCoords":gridcellcoords.html% c)
-
 
 
 h3(#Grid_getdefaulteditorfortype). Grid#get_default_editor_for_type
@@ -1180,23 +1180,28 @@ h4. See also
 
 h3(#Grid_getselectionmode). Grid#get_selection_mode
 
- "Grid::GridSelectionModes":grid::wxgridselectionmodes.html *get_selection_mode*()
+ Integer *get_selection_mode*()
 
-Returns the current selection mode, see "Grid#set_selection_mode":grid.html#Grid_setselectionmode.
-
+Returns the current selection mode as a constant, see
+"Grid#set_selection_mode":grid.html#Grid_setselectionmode.
 
 
 h3(#Grid_getselectedcells). Grid#get_selected_cells
 
- "GridCellCoordsArray":gridcellcoordsarray.html *get_selected_cells*()
+ Array *get_selected_cells*()
 
-Returns an array of singly selected cells.
+Returns an array of singly selected cells, each represented by a
+two-element array containing the row and column position. 
 
-
+Note that *only* cells selected singly in sequence (eg, by
+CTRL-clicking) will be returned; block selections will not be
+included. To find block selections, use
+"get_selection_block_top_left":#Grid_getselectionblocktopleft and
+"get_selection_block_bottom_right":#Grid_getselectionblockbottomright
 
 h3(#Grid_getselectedcols). Grid#get_selected_cols
 
- "ArrayInt":arrayint.html *get_selected_cols*()
+ Array *get_selected_cols*()
 
 Returns an array of selected cols.
 
@@ -1204,7 +1209,7 @@ Returns an array of selected cols.
 
 h3(#Grid_getselectedrows). Grid#get_selected_rows
 
- "ArrayInt":arrayint.html *get_selected_rows*()
+ Array *get_selected_rows*()
 
 Returns an array of selected rows.
 
@@ -1220,16 +1225,24 @@ Access or update the selection fore/back colours
 
 h3(#Grid_getselectionblocktopleft). Grid#get_selection_block_top_left
 
- "GridCellCoordsArray":gridcellcoordsarray.html *get_selection_block_top_left*()
+ Array *get_selection_block_top_left*()
 
-Returns an array of the top left corners of blocks of selected cells,
-see "Grid#get_selection_block_bottom_right":grid.html#Grid_getselectionblockbottomright.
+Returns an array of the top left corners of blocks of selected
+cells. The corner of each block is represented as a two-element array
+containing the row and column of the cell.
 
+The corresponding bottom right corner of each block selection can be got
+by 
+"Grid#get_selection_block_bottom_right":grid.html#Grid_getselectionblockbottomright. 
+
+Note that both these methods return *only* block-selected cells, not
+singly-selected ones. To find singly-selected cells, use
+"Grid#get_selected_Cells":#Grid_getselectedcells
 
 
 h3(#Grid_getselectionblockbottomright). Grid#get_selection_block_bottom_right
 
- "GridCellCoordsArray":gridcellcoordsarray.html *get_selection_block_bottom_right*()
+ Array *get_selection_block_bottom_right*()
 
 Returns an array of the bottom right corners of blocks of selected cells,
 see "Grid#get_selection_block_top_left":grid.html#Grid_getselectionblocktopleft.
@@ -1593,8 +1606,9 @@ h3(#Grid_selectrow). Grid#select_row
 
   *select_row*(%(arg-type)Integer% row,  %(arg-type)Boolean% addToSelected = false)
 
-Selects the specified row. If addToSelected is false then any existing selection will be
-deselected; if true the row will be added to the existing selection.
+Selects the specified row. If addToSelected is false then any existing
+selection will be deselected; if true the row will be added to the
+existing selection.
 
 
 
@@ -1605,7 +1619,8 @@ h3(#Grid_setcellalignment). Grid#set_cell_alignment
 
   *set_cell_alignment*(%(arg-type)Integer% align,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-Sets the horizontal and vertical alignment for grid cell text at the specified location.
+Sets the horizontal and vertical alignment for grid cell text at the
+specified location.
 
 Horizontal alignment should be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT. 
 
@@ -1662,6 +1677,7 @@ h3(#Grid_setcelltextcolour). Grid#set_cell_text_colour
   *set_cell_text_colour*(%(arg-type)"Colour":colour.html% colour)
 
 Sets the text colour for the grid cell at the specified location.
+
 
 h3(#Grid_setcellvalue). Grid#set_cell_value
 

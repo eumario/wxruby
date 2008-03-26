@@ -45,8 +45,8 @@ h3(#GridRangeSelectEvent_constr). GridRangeSelectEvent.new
 
   *GridRangeSelectEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type, 
                            %(arg-type)Object% obj, 
-                           %(arg-type)"GridCellCoords":gridcellcoords.html% topLeft, 
-                           %(arg-type)"GridCellCoords":gridcellcoords.html% bottomRight, 
+                           %(arg-type)Array% topLeft, 
+                           %(arg-type)Array% bottomRight, 
                            %(arg-type)Boolean% sel = true, 
                            %(arg-type)Boolean% control = false, 
                            %(arg-type)Boolean% shift = false, 
@@ -67,9 +67,10 @@ Returns true if the Control key was down at the time of the event.
 
 h3(#GridRangeSelectEvent_getbottomrightcoords). GridRangeSelectEvent#get_bottom_right_coords
 
- "GridCellCoords":gridcellcoords.html *get_bottom_right_coords*()
+ Array *get_bottom_right_coords*()
 
-Top left corner of the rectangular area that was (de)selected.
+Top left corner of the rectangular area that was (de)selected, returned
+as an row, column pair.
 
 h3(#GridRangeSelectEvent_getbottomrow). GridRangeSelectEvent#get_bottom_row
 
@@ -91,9 +92,10 @@ Right column of the rectangular area that was (de)selected.
 
 h3(#GridRangeSelectEvent_gettopleftcoords). GridRangeSelectEvent#get_top_left_coords
 
- "GridCellCoords":gridcellcoords.html *get_top_left_coords*()
+ Array *get_top_left_coords*()
 
-Top left corner of the rectangular area that was (de)selected.
+Top left corner of the rectangular area that was (de)selected, returned
+as a row, column pair.
 
 h3(#GridRangeSelectEvent_gettoprow). GridRangeSelectEvent#get_top_row
 
