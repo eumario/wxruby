@@ -12,7 +12,11 @@ public:
   wxBrush(const wxBitmap& stippleBitmap);
   wxBrush(const wxBrush&  brush);
   virtual  ~wxBrush() ;
+#ifdef __WXMSW__
+  wxColour GetColour() const;
+#else
   wxColour& GetColour() const;
+#endif
   wxBitmap * GetStipple() const;
   int GetStyle() const;
   bool IsHatch() const;
