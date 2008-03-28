@@ -391,6 +391,10 @@
 			   "Window parent argument must not be nil"); }
 }
 
+%typemap(out) wxWindow*, wxSizer* {
+  $result = wxRuby_WrapWxObjectInRuby($1);
+}
+
 %apply int *OUTPUT { int * x , int * y , int * w, int * h };
 
 

@@ -28,12 +28,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNotebook);
 // No default ctor
 %ignore wxNotebook::wxNotebook();
 
-// These are dealt with below - need to wrap return value in the correct
-// ruby class (see get_ruby_window.i)
-%ignore wxNotebook::GetCurrentPage;
-%ignore wxNotebook::GetPage;
-%include "../shared/get_ruby_window.i"
-
 // Protect panels etc added as Notebook pages from being GC'd by Ruby;
 // avoids double-free segfaults on exit on GTK
 %apply SWIGTYPE *DISOWN { wxNotebookPage* page };
@@ -50,26 +44,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNotebook);
 // Users should handle page changes with events, not virtual methods
 %ignore wxNotebook::OnSelChange;
 %feature("nodirector") wxNotebook::OnSelChange;
-
-// These two methods return a wxWindow, which needs to be wrapped in teh
-// correct ruby subclass of Wx::Window
-%extend wxNotebook {
-VALUE get_current_page()
-  {
-    VALUE returnVal = Qnil;
-    wxObject* obj = self->GetCurrentPage(); 
-    returnVal = get_ruby_window_wrapper(obj);
-    return returnVal;    
-  }  
-
-VALUE get_page(size_t page)
-  {
-    VALUE returnVal = Qnil;
-    wxObject* obj = self->GetPage(page); 
-    returnVal = get_ruby_window_wrapper(obj);
-    return returnVal;    
-  }  
-}
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
