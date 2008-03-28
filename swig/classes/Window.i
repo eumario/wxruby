@@ -70,7 +70,7 @@ enum wxWindowVariant
 %typemap(out) wxWindowList& {
   $result = rb_ary_new();
 
-  wxWindowListNode *node = $1->GetFirst();
+  wxWindowList::compatibility_iterator node = $1->GetFirst();
   while (node)
   {
     wxObject *obj = node->GetData();

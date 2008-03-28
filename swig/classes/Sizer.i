@@ -16,7 +16,7 @@ GC_MANAGE_AS_SIZER(wxSizer);
 %typemap(out) wxSizerItemList& {
   $result = rb_ary_new();
 
-  wxwxSizerItemListNode *node = $1->GetFirst();
+  wxSizerItemList::compatibility_iterator node = $1->GetFirst();
   while (node)
   {
     wxSizerItem *wx_si = node->GetData();
