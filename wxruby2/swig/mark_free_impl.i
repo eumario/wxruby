@@ -50,7 +50,7 @@ void GC_mark_SizerBelongingToWindow(wxSizer *wx_sizer, VALUE rb_sizer)
   
   // Then loop over hte sizer's content and mark each sub-sizer in turn
   wxSizerItemList& children = wx_sizer->GetChildren();
-  for ( wxwxSizerItemListNode *node = children.GetFirst(); 
+  for ( wxSizerItemList::compatibility_iterator node = children.GetFirst(); 
 		node;
 		node = node->GetNext() )
 	{
