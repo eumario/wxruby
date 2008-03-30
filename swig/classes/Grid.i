@@ -44,6 +44,14 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGrid);
 %apply SWIGTYPE *DISOWN { wxGridCellEditor* editor };
 %apply SWIGTYPE *DISOWN { wxGridCellRenderer* renderer };
 
+// wxGrid::SetTable has a flag to let wxWidgets take ownership of the
+// GridTableBase and automatically delete the C++ object. We need the
+// current ruby table object to stay around during GC, so it's protected
+// in lib/wx/classes/grid.rb, but we also want it C++ object to be
+// deleted promptly when the Grid is destroyed or a new table is set.
+%apply SWIGTYPE *DISOWN { wxGridTableBase* table };
+%typemap(in, numinputs=0) (bool takeOwnership) "$1 = true;"
+
 // If invalid grid-cell co-ordinates are passed into wxWidgets,
 // segfaults may result, so check to avoid this.
 %typemap(check) int row, int col {
