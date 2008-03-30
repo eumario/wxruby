@@ -133,21 +133,18 @@ void GC_mark_wxFrame(void *ptr)
 	{ GC_mark_MenuBarBelongingToFrame(menu_bar); }
 }
 
-
-// Find the minimum event type ID associated with custom events written
-// in Ruby
-static wxEventType wxRuby_CustomEventsMinimum = wxNewEventType();
-
-// wxRuby must mark ruby objects associated as ClientData with command
-// events that have been written in ruby. The standard wxWidgets
-// CommandEvent classes also use ClientData for their own purposes, and
-// this must not be marked as the data is not a ruby object.
+// wxRuby must preserve ruby objects attached as the ClientData of
+// command events that have been user-defined in ruby. Some of the
+// standard wxWidgets CommandEvent classes (which have a constant event
+// id less than wxEVT_USER_FIRST, from wx/event.h) also use ClientData
+// for their own purposes, and this must not be marked as the data is
+// not a ruby object, and will thus crash.
 void GC_mark_wxEvent(void *ptr)
 {
   if ( ! ptr ) return;
   wxEvent* wx_event = (wxEvent*)ptr;
-  if ( wx_event->IsCommandEvent() &&
-       wx_event->GetEventType() > wxRuby_CustomEventsMinimum )
+  if ( wx_event->GetEventType() > wxEVT_USER_FIRST && 
+       wx_event->IsCommandEvent() )
 	{
 	  wxCommandEvent* wx_cm_event = (wxCommandEvent*)ptr;
 	  VALUE rb_client_data = (VALUE)wx_cm_event->GetClientData();
