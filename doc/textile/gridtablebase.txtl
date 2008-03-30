@@ -31,21 +31,21 @@ GridTableBase will depend on the interactions that are permitted by the
 "Grid":grid.html class it will be associated with. The minimal set of
 methods that must be implemented in a read-only grid is:
 
-* get_attr
-* get_number_cols
-* get_number_rows
-* get_value
-* is_empty_cell
+* "get_attr":#GridTableBase_getattr
+* "get_number_cols":#GridTableBase_getnumbercols
+* "get_number_rows":#GridTableBase_getnumberrows
+* "get_value":#GridTableBase_getvalue
+* "is_empty_cell":#GridTableBase_isemptycell
 
 In addition, you may wish to override:
 
-* get_row_label_value
-* get_col_label_value
+* "get_row_label_value":#GridTableBase_getrowlabelvalue
+* "get_col_label_value":#GridTableBase_getcollabelvalue
 
 In order for a user to be able to edit values within the grid, you must
 also override:
 
-* set_value
+* "set_value":#GridTableBase_setvalue
 
 Additional methods will be needed if the Grid class provides a way to
 insert or delete rows or columns, or if custom
@@ -124,8 +124,8 @@ h3(#GridTableBase_isemptycell). GridTableBase#is_empty_cell
 
  Boolean *is_empty_cell*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-Should return true if a cell is empty. You must override this
-function in a derived table class.
+Should return true if a cell is empty. You must override this function
+in a derived table class.
 
 h3(#GridTableBase_getvalue). GridTableBase#get_value
 
@@ -262,42 +262,20 @@ h3(#GridTableBase_getcollabelvalue). GridTableBase#get_col_label_value
 
 h3(#GridTableBase_setrowlabelvalue). GridTableBase#set_row_label_value
 
-  *set_row_label_value*(%(arg-type)Integer% WXUNUSED(row),  %(arg-type)% String&)
+  *set_row_label_value*(%(arg-type)Integer% (row),  %(arg-type)String% label)
 
 
 h3(#GridTableBase_setcollabelvalue). GridTableBase#set_col_label_value
 
-  *set_col_label_value*(%(arg-type)Integer% WXUNUSED(col),  %(arg-type)% String&)
+  *set_col_label_value*(%(arg-type)Integer% col, %(arg-type)String% label)
 
-
-h3(#GridTableBase_setattrprovider). GridTableBase#set_attr_provider
-
-  *set_attr_provider*(%(arg-type)"GridCellAttrProvider":gridcellattrprovider.html% attrProvider)
-
-Attribute handling
-give us the attr provider to use - we take ownership of the pointer
-
-
-h3(#GridTableBase_getattrprovider). GridTableBase#get_attr_provider
-
- "GridCellAttrProvider":gridcellattrprovider.html *get_attr_provider*()
-
-get the currently used attr provider (may be NULL)
-
-
-h3(#GridTableBase_canhaveattributes). GridTableBase#can_have_attributes
-
- Boolean *can_have_attributes*()
-
-Does this table allow attributes?  Default implementation creates
-a GridCellAttrProvider if necessary.
-
+Handle setting the column label.
 
 h3(#GridTableBase_updateattrrows). GridTableBase#update_attr_rows
 
   *update_attr_rows*(%(arg-type)Integer% pos,  %(arg-type)Integer% numRows)
 
-change row/col number in attribute if needed
+Change row/col number in attribute if needed
 
 
 h3(#GridTableBase_updateattrcols). GridTableBase#update_attr_cols
@@ -311,7 +289,16 @@ h3(#GridTableBase_getattr). GridTableBase#get_attr
                                              %(arg-type)Integer% col,
                                              %(arg-type)Integer% attr_kind)
 
-May be overridden to handle attributes directly in the table.
+Should return a "grid cell attribute":gridcellattr.html that should be
+applied to the cell specified by _row_ and _column_. This can set the
+cell's text and background colour, editor and renderer. 
+
+Note that this method must return a *new* GridCellAttr for each call; do
+*not* attempt to share the same GridCellAttr between cells. If you wish
+to use the same style across a whole grid, create the attribute as a
+class variable or constant, then call its
+"clone":gridcellattr.html#GridCellAttr_clone method to return a copy for
+each call to get_attr.
 
 h3(#GridTableBase_setattr). GridTableBase#set_attr
 
