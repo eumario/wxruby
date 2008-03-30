@@ -259,15 +259,6 @@ Constructor to create a grid object. Call either "Grid#create_grid":grid.html#Gr
 it.
 
 
-
-  *destructor*()
-
-Destructor. This will also destroy the associated grid table unless you passed a table
-object to the grid and specified that the grid should not take ownership of the
-table (see "Grid#set_table":grid.html#Grid_settable).
-
-
-
 h3(#Grid_appendcols). Grid#append_cols
 
  Boolean *append_cols*(%(arg-type)Integer% numCols = 1,  %(arg-type)Boolean% updateLabels = true)
@@ -2114,18 +2105,21 @@ h4. Parameters
 
 h3(#Grid_settable). Grid#set_table
 
- Boolean *set_table*(%(arg-type)"GridTableBase":gridtablebase.html% table,  %(arg-type)Boolean% takeOwnership = false, 
+ Boolean *set_table*(%(arg-type)"GridTableBase":gridtablebase.html% table,
                    %(arg-type)Grid::GridSelectionModes% selmode = Wx::Grid::GridSelectCells)
 
 Passes to a custom grid table to be used by the grid. This should be
-called after the grid constructor and before using the grid object. If
-takeOwnership is set to true then the table will be deleted by the Grid
-destructor.
+called after the grid constructor and before using the grid object.  Use
+this function instead of "Grid#create_grid":grid.html#Grid_creategrid
+when your application involves complex or non-string data or data sets
+that are too large to fit wholly in memory.
 
-Use this function instead of
-"Grid#create_grid":grid.html#Grid_creategrid when your application
-involves complex or non-string data or data sets that are too large to
-fit wholly in memory.
+The table should be an instance of a subclass of
+"GridTableBase":gridtablebase.html which provides a set of methods for
+retrieving the size of the grid, cell data and optionally other row,
+column and cell information such as labels and
+"attributes":GridCellAttr.html. See that class and the sample for more
+information on the required methods.
 
 h3(#Grid_showcelleditcontrol). Grid#show_cell_edit_control
 
