@@ -4,15 +4,17 @@ class Wx::Grid
   # garbage collection of Grid-related classes; they do not extend the
   # public functionality of the class in any way. 
   # 
-  # The GridCellRenderers and GridCellEditors pose a problem for ruby's
-  # GC, in that Wx makes them owned by the grid once they have been set
-  # for a cell or group of cells. However, because they are SWIG
-  # directors we cannot allow the ruby object they are originally
-  # associated with to be swept by GC.
+  # GridTableBase, and the GridCellRenderers and GridCellEditors pose a
+  # problem for ruby's GC, in that Wx makes them owned by the grid once
+  # they have been set for a cell or group of cells. However, because
+  # they are SWIG directors we cannot allow the ruby object they are
+  # originally associated with to be swept by GC, as C++ method calls
+  # are routed to ruby method calls.
   #
   # The code below stores Ruby redefines all methods that may
-  # potentially set an Editor or Renderer, and stores a reference to
-  # it in an instance variable, so they are not disposed of up when GC sweeps.
+  # potentially set a GridTableBase, Editor or Renderer, and stores a
+  # reference to them in an instance variable, so they are not disposed
+  # of up when GC sweeps.
   
   # These all need to be set up as private methods which default to an
   # array. This can't be done in initialize b/c that may not be called
@@ -24,6 +26,13 @@ class Wx::Grid
         instance_variable_set("@#{meth}", [])
     end
     private meth
+  end
+
+  # Set a grid table base to provide data
+  alias :__set_table :set_table
+  def set_table(table, sel_mode = Wx::Grid::GridSelectCells)
+    __set_table(table, sel_mode)
+    @__grid_table = table
   end
 
   # store default editor
