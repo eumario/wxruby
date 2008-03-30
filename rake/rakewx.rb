@@ -1,6 +1,6 @@
 # rakewx.rb
-#   Copyright 2004-2006 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+# Copyright 2004-2008, wxRuby Development Team
+# released under the MIT-style wxruby2 license
 
 # Skim all the SWIG sources to detect import/include dependencies that
 # should force recompiles
@@ -101,7 +101,7 @@ file TARGET_LIB => all_obj_files do | t |
 end
 
 # The main source module - which needs to initialize all the other modules
-file 'src/wx.cpp' => all_swig_files do | t |
+file 'src/wx.cpp' => all_swig_files + SWIG_DEPENDS['swig/wx.i'] do | t |
   do_swig("swig/wx.i", "src/wx.cpp")
   post_process(t.name, 'renamer', 'fixmainmodule')
   # RubyStockObjects are loaded later, after App has been started
