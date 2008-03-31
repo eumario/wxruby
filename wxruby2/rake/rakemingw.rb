@@ -16,6 +16,7 @@ $WXLIBDIR      = File.join("#$WXDIR", "lib")
 $WXSETUPINCDIR = File.join("#$WXDIR", "lib", "wx", "include", 
                             "msw-unicode-release-static-2.8")
 
+
 WXWIDGETS_SETUP_H  = File.join($WXSETUPINCDIR, 'wx', 'setup.h')
 
 $wx_cppflags = "-I#{$WXINCDIR} -D__WXMSW__ -I#{$WXSETUPINCDIR}"
@@ -42,8 +43,6 @@ windows_libs = %W|wx_msw#{$POSTFIX}-#{$WXVERSION}
 
 windows_libs.map! { | lib | File.join($WXLIBDIR, "lib#{lib}.a") }
 
-$wx_libs = windows_libs.join(' ')
-
 # Windows-specific routines for checking for supported features
 # Test for presence of StyledTextCtrl (scintilla) library; link it in if
 # present, skip that class if not 
@@ -55,8 +54,8 @@ else
   $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
 end
 
-# Test for presence of OpenGL library; link it in if
-# present, skip that class if not 
+# Test for presence of OpenGL library; link it in if present, skip that
+# class if not
 gl_lib = File.join( $WXLIBDIR, "libwx_wxmsw#{$POSTFIX}_gl-#{$WXVERSION}.a" )
 if File.exists?(gl_lib)
   windows_libs << gl_lib 
@@ -64,7 +63,16 @@ else
   $excluded_classes << "GLCanvas"
 end
 
+# If either of the above classes are in use, we need to add the contrib
+# include directory so the compiler can find the relevant headers
+if File.exists?(scintilla_lib) or File.exists?(gl_lib) 
+  wx_contrib_inc_dir = File.join($WXDIR, 'contrib', 'include')
+  $wx_cppflags += " -I#{wx_contrib_inc_dir}"
+end
 
+# Collect all the Wx libs that will be included in to the final library in
+# a an argument to be passed to the linker
+$wx_libs = windows_libs.join(' ')
 
 libs = WINDOWS_SYS_LIBS.map! { | lib | "-l#{lib}" }
 
