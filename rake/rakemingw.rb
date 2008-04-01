@@ -12,9 +12,19 @@ $ld  = "g++ -shared" # not ld directly
 
 # Some secondary directories in the wxWidgets layout
 $WXINCDIR      = File.join("#$WXDIR", "include")
+if File.exists?(File.join("#$WXDIR",'lib','wx','include',
+													'msw-unicode-release-static-2.8',
+													'wx','setup.h'))
 $WXLIBDIR      = File.join("#$WXDIR", "lib")
 $WXSETUPINCDIR = File.join("#$WXDIR", "lib", "wx", "include", 
                             "msw-unicode-release-static-2.8")
+elsif File.exists?(File.join("#$WXDIR",'build','lib','wx','include',
+															'msw-unicode-release-static-2.8',
+															'wx','setup.h'))
+	$WXLIBDIR				= File.join("#$WXDIR","build","lib")
+	$WXSETUPINCDIR	= File.join("#$WXDIR","build","lib","wx","include",
+															"msw-unicode-release-static-2.8")
+end
 
 
 WXWIDGETS_SETUP_H  = File.join($WXSETUPINCDIR, 'wx', 'setup.h')
