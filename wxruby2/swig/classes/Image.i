@@ -48,9 +48,10 @@ GC_MANAGE_AS_OBJECT(wxImage);
 %ignore wxImage::InsertHandler;
 %ignore wxImage::RemoveHandler;
 
-// For Image#set_data and ctor with this arg: copy raw string data from
-// a Ruby strin to a memory block that will be managed by wxWidgets
-%typemap(in) unsigned char* data {
+// For Image#set_data, Image#set_alpha and Image.new with raw data arg:
+// copy raw string data from a Ruby string to a memory block that will be
+// managed by wxWidgets
+%typemap(in) unsigned char* data, unsigned char* alpha {
   if ( TYPE($input) == T_STRING )
     {
       int data_len = RSTRING_LEN($input);
@@ -59,8 +60,15 @@ GC_MANAGE_AS_OBJECT(wxImage);
     }
   else
     SWIG_exception_fail(SWIG_ERROR, 
-                        "String required as argument to Image#set_data");
+                        "String required as raw Image data argument");
 }
+
+// Image.new(data...) and Image#set_alpha both accept a static_data
+// argument to specify whether wxWidgets should delete the data
+// pointer. Since in wxRuby we always copy from the Ruby string object
+// to the Image, we always want wxWidgets to handle deletion of the copy
+%typemap(in, numinputs=0) bool static_data "$1 = false;"
+
 
 %apply unsigned char *OUTPUT { unsigned char* r, 
                                unsigned char* g, 
