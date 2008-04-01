@@ -10,26 +10,61 @@ GC_MANAGE_AS_OBJECT(wxImage);
 #include <wx/image.h>
 %}
 
-%typemap(in) unsigned char * data {
-	if(TYPE($input) == T_STRING)
-		$1 = reinterpret_cast< unsigned char * >(StringValuePtr($input));
-	else
-		SWIG_exception_fail(SWIG_ERROR, "in method 'set_data', expected argument of type 'string'");
-}
-
-
-%apply unsigned char * OUTPUT { unsigned char * r, unsigned char * g, unsigned char * b }
-
+// No default ctor
 %ignore wxImage::Create();
+
+// These forms of creation, querying, loading and saving are not
+// supported in wxRuby; could possibly map Ruby IO.read/IO.write to
+// wxWidgets InputStream/OutputStream, but this seems difficult
+%ignore wxImage(wxInputStream& stream, 
+                long type = wxBITMAP_TYPE_ANY, 
+                int index = -1);
+%ignore wxImage(wxInputStream& stream, 
+                const wxString& mimetype, 
+                int index = -1);
+%ignore wxImage::GetImageCount(wxInputStream& stream, 
+                               long type = wxBITMAP_TYPE_ANY);
+%ignore wxImage::LoadFile(wxInputStream& stream, 
+                          long type, 
+                          int index = -1);
+%ignore wxImage::LoadFile(wxInputStream& stream, 
+                          const wxString& mimetype, 
+                          int index = -1);
+%ignore wxImage::SaveFile(wxOutputStream& stream, 
+                          int type) const;
+%ignore wxImage::SaveFile(wxOutputStream& stream, 
+                          const wxString& mimetype) const;
 
 // Handler methods are not supported in wxRuby; all standard handlers
 // are loaded at startup, and we don't allow custom image handlers to be
 // written in Ruby. Note if these methods are added, corrected freearg
 // typemap for input wxString in static methods will be required.
 %ignore wxImage::AddHandler;
+%ignore wxImage::CleanUpHandlers;
 %ignore wxImage::FindHandler;
 %ignore wxImage::FindHandlerMime;
+%ignore wxImage::GetHandlers;
+%ignore wxImage::InitStandardHandlers;
+%ignore wxImage::InsertHandler;
 %ignore wxImage::RemoveHandler;
+
+// For Image#set_data and ctor with this arg: copy raw string data from
+// a Ruby strin to a memory block that will be managed by wxWidgets
+%typemap(in) unsigned char* data {
+  if ( TYPE($input) == T_STRING )
+    {
+      int data_len = RSTRING_LEN($input);
+      $1 = (unsigned char*)malloc(data_len);
+      memcpy($1, StringValuePtr($input), data_len);
+    }
+  else
+    SWIG_exception_fail(SWIG_ERROR, 
+                        "String required as argument to Image#set_data");
+}
+
+%apply unsigned char *OUTPUT { unsigned char* r, 
+                               unsigned char* g, 
+                               unsigned char* b }
 
 %import "include/wxObject.h"
 
