@@ -15,7 +15,7 @@ GC_MANAGE_AS_OBJECT(wxImage);
 
 // These forms of creation, querying, loading and saving are not
 // supported in wxRuby; could possibly map Ruby IO.read/IO.write to
-// wxWidgets InputStream/OutputStream, but this seems difficult
+// wxWidgets InputStream/OutputStream
 %ignore wxImage(wxInputStream& stream, 
                 long type = wxBITMAP_TYPE_ANY, 
                 int index = -1);
@@ -48,9 +48,14 @@ GC_MANAGE_AS_OBJECT(wxImage);
 %ignore wxImage::InsertHandler;
 %ignore wxImage::RemoveHandler;
 
+// The data methods require special handling using %extend; note that
+// set_data is dealt with by typemaps also below.
+%ignore wxImage::GetData;
+%ignore wxImage::GetAlpha;
+
 // For Image#set_data, Image#set_alpha and Image.new with raw data arg:
 // copy raw string data from a Ruby string to a memory block that will be
-// managed by wxWidgets
+// managed by wxWidgets (see static_data typemap below)
 %typemap(in) unsigned char* data, unsigned char* alpha {
   if ( TYPE($input) == T_STRING )
     {
@@ -58,6 +63,8 @@ GC_MANAGE_AS_OBJECT(wxImage);
       $1 = (unsigned char*)malloc(data_len);
       memcpy($1, StringValuePtr($input), data_len);
     }
+  else if ( $input == Qnil ) // Needed for SetAlpha, an error for SetData
+    $1 = NULL;
   else
     SWIG_exception_fail(SWIG_ERROR, 
                         "String required as raw Image data argument");
@@ -69,11 +76,37 @@ GC_MANAGE_AS_OBJECT(wxImage);
 // to the Image, we always want wxWidgets to handle deletion of the copy
 %typemap(in, numinputs=0) bool static_data "$1 = false;"
 
-
+// For get_or_find_mask_colour, which should returns a triplet
+// containing the mask colours, plus its normal Boolean return value.
 %apply unsigned char *OUTPUT { unsigned char* r, 
                                unsigned char* g, 
                                unsigned char* b }
 
-%import "include/wxObject.h"
+// GetData and GetAlpha methods return an unsigned char* pointer to the
+// internal representation of the image's data. We can't simply use
+// rb_str_new2 because the data is not NUL terminated, so strlen won't
+// return the right length; we have to know the image's height and
+// width to give the ruby string the right length.
+// 
+// Unlike the C++ version of these methods, these return copies of the
+// data; the ruby string is NOT a pointer to that internal data and
+// cannot be directly manipulated to change the image. This is tricky
+// b/c of Ruby's GC; it might be possible, as in mmap (see
+// http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/296601)
+// but is beyond my C skills
+%extend wxImage {
+  VALUE get_alpha() {
+    unsigned char* alpha_data = $self->GetAlpha();
+    int length = $self->GetWidth() * $self->GetHeight();
+    return rb_str_new( (const char*)alpha_data, length);
+  }
 
+  VALUE get_data() {
+    unsigned char* rgb_data = $self->GetData();
+    int length = $self->GetWidth() * $self->GetHeight() * 3;
+    return rb_str_new( (const char*)rgb_data, length);
+  }
+}
+
+%import "include/wxObject.h"
 %include "include/wxImage.h"
