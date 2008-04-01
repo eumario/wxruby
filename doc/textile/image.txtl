@@ -3,9 +3,9 @@ h1(#wximage). Wx::Image
 This class encapsulates a platform-independent image. An image can be
 created from data, or using
 "Bitmap#convert_to_image":bitmap.html#Bitmap_converttoimage. An image
-can be loaded from a file in a variety of formats, and is extensible to
-new formats via image format handlers. Functions are available to set
-and get image bits, so it can be used for basic image manipulation.
+can be loaded from a file in a variety of formats. Functions are
+available to set and get image bits, so it can be used for basic image
+manipulation.
 
 A Image cannot (currently) be drawn directly to a "DC":dc.html. Instead,
 a platform-specific "Bitmap":bitmap.html object must be created from it
@@ -35,8 +35,8 @@ isn't implemented).
 
 h2. Available image handlers
 
-The following image handlers are available.
-
+The following image handlers are available and are initialised
+automatically when wxRuby is loaded.
 
 |BMPHandler|For loading and saving, always installed.|
 |PNGHandler|For loading (including alpha support) and saving.|
@@ -136,47 +136,34 @@ h2. Methods
 
 </div>
 
-
-
 h3(#Image_new). Image.new
 
   *Image.new*(%(arg-type)"Image":image.html% image)
 
 Copy constructor, uses "reference counting":trefcount.html.
 
+  *Image.new*(%(arg-type)String% file_name,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, %(arg-type)Integer% index = -1)
 
- Constructs an image from a platform-dependent bitmap. This preserves
-mask information so that bitmaps and images can be converted back
-and forth without loss in that respect.
+  *Image.new*(%(arg-type)String% file_name,  %(arg-type)String% mimetype,  %(arg-type)Integer% index = -1)
+
+Loads an image from a file. The type should specify the file type; the
+index argument is only needed for image file types which support
+multiple images, such as GIF or TIF.
 
   *Image.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
-            %(arg-type)Boolean% clear=true)
+               %(arg-type)Boolean% clear=true)
 
-Creates an image with the given width and height.  If _clear_ is true, the new image will be initialized to black.
-Otherwise, the image data will be uninitialized.
+Creates an image with the given width and height.  If _clear_ is true,
+the new image will be initialized to black.  Otherwise, the image data
+will be uninitialized.
 
-  *Image.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height,  %(arg-type)Integer% data, 
-            %(arg-type)Boolean% static_data = )
+  *Image.new*(%(arg-type)Integer% width, %(arg-type)Integer% height, 
+               %(arg-type)String% data)
 
-Creates an image from given data with the given width and height. If
-_static_data_ is true, then Image will not delete the actual
-image data in its destructor, otherwise it will free it by calling
-_free()_.
+Creates an image from given data string, with the given width and
+height. See "set_data":#Image_setdata for a description of the raw data
+format. The string's length should be equal to width x height x 3.
 
-  *Image.new*(%(arg-type)String% name,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
-            %(arg-type)Integer% index = -1)
-
-  *Image.new*(%(arg-type)String% name,  %(arg-type)String% mimetype,  %(arg-type)Integer% index = -1)
-
-Loads an image from a file.
-
-  *Image.new*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
-            %(arg-type)Integer% index = -1)
-
-  *Image.new*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)String% mimetype, 
-            %(arg-type)Integer% index = -1)
-
-Loads an image from an input stream.
 
   *Image.new*(%(arg-type)"char":char.html% xpmData)
 
@@ -187,7 +174,6 @@ h4. Parameters
 * _width_ Specifies the width of the image.
 * _height_ Specifies the height of the image.
 * _name_ Name of the file from which to load the image.
-* _stream_ Opened input stream from which to load the image. Currently, the stream must support seeking.
 * _type_ May be one of the following:
 
 
@@ -454,19 +440,41 @@ Returns the blue intensity at the given coordinate.
 
 h3(#Image_getdata). Image#get_data
 
- Integer *get_data*()
+ String *get_data*()
 
-Returns the image data as an array. This is most often used when doing
-direct image manipulation. The return value points to an array of
-characters in RGBRGBRGB$$ format in the top-to-bottom, left-to-right
-order, that is the first RGB triplet corresponds to the pixel first pixel of
-the first row, the second one --- to the second pixel of the first row and so
-on until the end of the first row, with second row following after it and so
-on.
+Returns the raw image data as a string. This is most often used when
+doing direct image manipulation. The returned string contains a sequence
+of bytes (characters) each of which represents the value of one red,
+green or blue component in the range 0 to 255. 
 
-You should not delete the returned pointer nor pass it to
-"Image#set_data":image.html#Image_setdata.
+The values are in a series of triplets in RGB-RGB-RGB-RGB format from
+top-to-bottom, left-to-right order. Thus the first RGB triplet
+corresponds to the pixel first pixel of the first row, the second one to
+the second pixel of the first row and so on until the end of the first
+row, with second row following after it and so on.
 
+To extract the integer values for the RGB components, use Ruby's
+String.unpack method; for example, to convert the whole data string to a
+set of integer values:
+
+ my_image.data.unpack("C*") # returns something like [255, 128, 0, 255 ...]
+
+This would mean that the first pixel had a red value of 255, a green
+value of 128, and a blue value of 0; the second pixel a red value of
+255, and so on.
+
+Note that unlike the C++ wxWidgets API, the returned string is a copy of
+the internal data; methods that alter the string will *not* change the
+Image's content. If you wish to do this, alter the string then call
+"set_data":#Image_setdata, for example:
+
+ my_image.data = my_image.data.reverse
+
+This would flip the image diagonally around it's bottom-left to
+top-right axis, and swap the red and blue components of each pixel,
+leaving the green the same. If you understand why this is the result,
+you can consider yourself in a good position to make use of these
+methods.
 
 h3(#Image_getgreen). Image#get_green
 
@@ -479,15 +487,11 @@ h3(#Image_getimagecount). Image#get_image_count
 
  Integer *get_image_count*(%(arg-type)String% filename,  %(arg-type)Integer% type = BITMAP_TYPE_ANY)
 
- Integer *get_image_count*(%(arg-type)"InputStream":inputstream.html% stream, 
-                         %(arg-type)Integer% type = BITMAP_TYPE_ANY)
-
 If the image file contains more than one image and the image handler is capable
 of retrieving these individually, this function will return the number of
 available images.
 
 * _name_ Name of the file to query.
-* _stream_ Opened input stream with image data. Currently, the stream must support seeking.
 * _type_ May be one of the following:
 
 
@@ -537,25 +541,28 @@ h3(#Image_getmaskred). Image#get_mask_red
 
 Gets the red value of the mask colour.
 
-
 h3(#Image_getgetorsetmaskcolour). Image#get_or_find_mask_colour
 
- Boolean *get_or_find_mask_colour*(%(arg-type)Integer% r,  %(arg-type)Integer% g, 
-                                 %(arg-type)Integer% b)
+ Array *get_or_find_mask_colour*()
 
-Get the current mask colour or find a suitable unused colour that could be
-used as a mask colour. Returns @true@ if the image currently has a mask.
+Get the current mask colour or find a suitable unused colour that could
+be used as a mask colour. 
+
+Returns four values. This first is a Boolean: @true@ if the image
+currently has a mask, or false if not. The remaining three values are
+Integers containing the red, green and blue values of the mask.
 
 
 h3(#Image_getpalette). Image#get_palette
 
  "Palette":palette.html *get_palette*()
 
-Returns the palette associated with the image. Currently the palette is only
-used when converting to Bitmap under Windows. Some of the Image handlers
-have been modified to set the palette if one exists in the image file (usually
-256 or less colour images in GIF or PNG format).
+Not currently supported in wxRuby. 
 
+Returns the palette associated with the image. Currently the palette is
+only used when converting to Bitmap under Windows. Some of the Image
+handlers have been modified to set the palette if one exists in the
+image file (usually 256 or less colour images in GIF or PNG format).
 
 h3(#Image_getred). Image#get_red
 
@@ -688,12 +695,12 @@ a mask colour, all mask pixels will be completely transparent.
 h3(#Image_istransparent). Image#is_transparent
 
  Boolean *is_transparent*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
-                        %(arg-type)Integer% threshold = $128$)
+                            %(arg-type)Integer% threshold = 128)
 
-Returns  if the given pixel is transparent, i.e. either has the mask
-colour if this image has a mask or if this image has alpha channel and alpha
-value of this pixel is strictly less than threshold.
-
+Returns @true@ if the given pixel is transparent, i.e. either it the
+image has a mask, and the pixel has the mask colour, or the image has
+alpha channel and alpha value of this pixel is strictly less than
+threshold.
 
 h3(#Image_loadfile). Image#load_file
 
@@ -706,18 +713,9 @@ h3(#Image_loadfile). Image#load_file
 Loads an image from a file. If no handler type is provided, the library will
 try to autodetect the format.
 
- Boolean *load_file*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)Integer% type, 
-                   %(arg-type)Integer% index = -1)
-
- Boolean *load_file*(%(arg-type)"InputStream":inputstream.html% stream,  %(arg-type)String% mimetype, 
-                   %(arg-type)Integer% index = -1)
-
-Loads an image from an input stream.
-
 h4. Parameters
 
 * _name_ Name of the file from which to load the image.
-* _stream_ Opened input stream from which to load the image. Currently, the stream must support seeking.
 * _type_ One of the following values:
 
 
@@ -894,16 +892,9 @@ Saves an image in the named file. File type is determined from the extension of 
 file name. Note that this function may fail if the extension is not recognized! You
 can use one of the forms above to save images to files with non-standard extensions.
 
- Boolean *save_file*(%(arg-type)"OutputStream":outputstream.html% stream,  %(arg-type)Integer% type)
-
- Boolean *save_file*(%(arg-type)"OutputStream":outputstream.html% stream,  %(arg-type)String% mimetype)
-
-Saves an image in the given stream.
-
 h4. Parameters
 
 * _name_ Name of the file to save the image to.
-* _stream_ Opened output stream to save the image to.
 * _type_ Currently these types can be used:
 
 
@@ -1015,43 +1006,48 @@ h4. See also
 
 "Resize":imageresize.html
 
-
 h3(#Image_setalpha). Image#set_alpha
 
-  *set_alpha*(%(arg-type)Integer% alpha = @NULL@, %(arg-type)Boolean% static_data = )
+  *set_alpha*(%(arg-type)String% alpha = @nil@)
 
-This function is similar to "set_data":#Image_setdata and has similar
-restrictions. The pointer passed to it may however be @NULL@ in which case
-the function will allocate the alpha array internally -- this is useful to add
-alpha channel data to an image which doesn't have any. If the pointer is not
-@NULL@, it must have one byte for each image pixel and be allocated with
-@malloc()@. Image takes ownership of the pointer and will free it unless
-static_data parameter is set to  -- in this case the caller should
-do it.
+This function is similar to "set_data":#Image_setdata, setting the alpha
+channel from a string. It has similar restrictions; don't use it if you
+don't know what you're doing.
+
+The string should contain one byte (character) for each pixel,
+representing the transparency in the range 0 to 255. If necessary, use
+Ruby's Array#pack with the C* to create a suitable string.
+
+Unlike set_data this method may be passed @nil@ in which case the
+function will allocate the alpha array internally -- this is useful to
+add alpha channel data to an image which doesn't have any.
 
   *set_alpha*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% alpha)
 
-Sets the alpha value for the given pixel. This function should only be called
-if the image has alpha channel data, use "has_alpha":#Image_hasalpha to
-check for this.
-
+Sets the alpha value for the given pixel. This function should only be
+called if the image has alpha channel data, use
+"has_alpha":#Image_hasalpha to check for this.
 
 h3(#Image_setdata). Image#set_data
 
-  *set_data*(%(arg-type)Integer% data)
+  *set_data*(%(arg-type)String% data)
 
-Sets the image data without performing checks. The data given must have
-the size (width*height*3) or results will be unexpected. Don't use this
-method if you aren't sure you know what you are doing.
+Sets the raw image data from a string without performing checks. Don't
+use this method if you aren't sure you know what you are doing.
 
-The data must have been allocated with @malloc()@, *NOT* with
-@operator new@.
+The string should contain three bytes (characters) for each pixel in the
+image, representing the red, green and blue components in a range of 0
+to 255, reading top-to-bottom, left-to-right. If you were creating this
+from scratch, you can use Ruby's Array#pack to create the string.
 
-After this call the pointer to the data is owned by the Image object,
-that will be responsible for deleting it.
-Do not pass to this function a pointer obtained through
-"Image#get_data":image.html#Image_getdata.
+For example, a four-pixel image with pure-red pixels in the left and
+pure-blue pixels on the right could be set with string data created
+thus:
 
+ [ 255, 0, 0,
+   0, 0, 255,
+   255, 0, 0,
+   0, 0, 255 ].pack("C*")
 
 h3(#Image_setmask). Image#set_mask
 
@@ -1117,45 +1113,32 @@ h3(#Image_setpalette). Image#set_palette
   *set_palette*(%(arg-type)"Palette":palette.html% palette)
 
 Associates a palette with the image. The palette may be used when converting
-Image to Bitmap (MSW only at present) or in file save operations (none as yet).
+Image to Bitmap (MSW only at present) or in file save operations (none
+as yet). Not supported in wxRuby.
 
 
 h3(#Image_setrgb). Image#set_rgb
 
-  *set_rgb*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% red, 
-          %(arg-type)Integer% green, 
-          %(arg-type)Integer% blue)
+  *set_rgb*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  
+            %(arg-type)Integer% red, %(arg-type)Integer% green, %(arg-type)Integer% blue)
 
-Sets the pixel at the given coordinate. This routine performs bounds-checks
-for the coordinate so it can be considered a safe way to manipulate the
-data, but in some cases this might be too slow so that the data will have to
-be set directly. In that case you will have to get access to the image data
-using the "get_data":#Image_getdata method.
+Sets the colour of the pixel at the given coordinate using red, green
+and blue intensities. The red, green and blue values should be in the
+range 0 to 255.
 
+This routine performs bounds-checks for the coordinate so it can be
+considered a safe way to manipulate the data, but in some cases this
+might be too slow so that the data will have to be set directly. In that
+case you will have to get access to the image data using the
+"get_data":#Image_getdata method.
 
 h3(#Image_setrgbrect). Image#set_rgb
 
-  *set_rgb*(%(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% red,  %(arg-type)Integer% green, 
-          %(arg-type)Integer% blue)
+  *set_rgb*(%(arg-type)"Rect":rect.html% rect,  
+             %(arg-type)Integer% red,  %(arg-type)Integer% green, %(arg-type)Integer% blue)
 
-Sets the colour of the pixels within the given rectangle. This routine performs
-bounds-checks for the coordinate so it can be considered a safe way to manipulate the
-data.
-
-
-h3(#Image_assign). Image#=
-
- "Image& ":image& .html *operator $=$*(%(arg-type)"Image":image.html% image)
-
-Assignment operator, using "reference counting":trefcount.html.
-
-h4. Parameters
-
-* _image_ Image to assign.
-
-h4. Return value
-
-Returns 'this' object.
-
-
+Sets the colour of the pixels within the given rectangle using red,
+green and blue intensities. The values should be in the range 0 to
+255. This routine performs bounds-checks for the coordinate so it can be
+considered a safe way to manipulate the data.
 
