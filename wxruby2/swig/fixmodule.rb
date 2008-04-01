@@ -17,7 +17,6 @@ def fixmodule(filename)
   found_define_module = false
   found_init = false
   found_define_class = false
-  found_gcitem_destructor = false
   
   core_name = File.basename(filename, ".cpp")
   puts("core_name: #{core_name}")
@@ -135,12 +134,6 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
         found_define_class = true
       end
       
-      # remove the bogus GCItem destructor
-      if(line.strip == 'GCItem::~GCItem()')
-        found_gcitem_destructor = true
-        skip_until_blank_line = true
-      end
-      
       # remove the UnknownExceptionHandler::handler method
       if(line.index('void UnknownExceptionHandler::handler()'))
         skip_entire_method = true
@@ -190,10 +183,6 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
   if(!found_define_class)
     puts("ERROR! #{__FILE__} Didn't find define class")
     exit(1)
-  end
-  
-  if(!found_gcitem_destructor)
-    puts("NOTE: #{__FILE__} Didn't find gcitem destructor")
   end
   
   File.delete(broken)
