@@ -1316,7 +1316,9 @@ Set style size, face, bold, italic, and underline attributes from     a wxFont's
 
 h3(#STC_stylesetfontattr). StyledTextCtrl#style_set_font_attr
 
-  *style_set_font_attr*(%(arg-type)Integer% styleNum, %(arg-type)Integer% size, %(arg-type)String% faceName, %(arg-type)Boolean% bold, %(arg-type)Boolean% italic, %(arg-type)Boolean% underline, %(arg-type)"FontEncoding":fontencoding.html% encoding=wxFONTENCODING_DEFAULT)
+  *style_set_font_attr*(%(arg-type)Integer% styleNum, %(arg-type)Integer% size, %(arg-type)String% faceName, 
+                          %(arg-type)Boolean% bold, %(arg-type)Boolean% italic, %(arg-type)Boolean% underline, 
+                         %(arg-type)"FontEncoding":fontencoding.html% encoding=wxFONTENCODING_DEFAULT)
 
 Set all font style attributes at once.
 
@@ -1525,7 +1527,7 @@ h3(#STC_getcaretlinebackground). StyledTextCtrl#get_caret_line_background
 Get the colour of the background of the line containing the caret.
 
 h3(#STC_getcaretlinevisible). StyledTextCtrl#get_caret_line_visible
-
+ 
  Boolean *get_caret_line_visible*()
 
 Is the background of the line containing the caret in a different colour?
