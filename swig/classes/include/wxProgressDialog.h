@@ -13,8 +13,10 @@ public:
                    int style = wxPD_APP_MODAL|wxPD_AUTO_HIDE);
   virtual  ~wxProgressDialog();
   void Resume() ;
-  virtual bool Pulse(const wxString& newmsg = "", bool *skip = NULL);
-  virtual bool Update(int value, const wxString& newmsg = "", bool *skip = NULL);
+  virtual bool Pulse(const wxString& newmsg = wxEmptyString, 
+                     bool *skip = NULL);
+  virtual bool Update(int value, const wxString& newmsg = wxEmptyString, 
+                      bool *skip = NULL);
 };
 
 
