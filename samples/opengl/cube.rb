@@ -1,19 +1,13 @@
 #!/usr/bin/env ruby
-
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
 begin
- require 'wx'
- require 'gl'
- require 'glu'
-rescue LoadError => e
- begin
-   require 'rubygems'
-   require 'wx'
-   require 'gl'
-   require 'glu'
- rescue
-   raise e
- end
+  require 'rubygems' 
+rescue LoadError
 end
+require 'wx'
+require 'gl'
+require 'glu'
 
 include Gl
 include Glu

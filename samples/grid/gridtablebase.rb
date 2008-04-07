@@ -1,13 +1,11 @@
 #!/usr/bin/env ruby
 # wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
-
 begin
-  require 'rubygems'
-  require 'wx'
+  require 'rubygems' 
 rescue LoadError
-  require 'wx'
 end
+require 'wx'
 
 # GridTableBase is an alternative way to provide data to a Wx::Grid. A
 # subclass of Wx::GridTableBase is created which is reqiured to provide

@@ -1,40 +1,11 @@
-# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+#!/usr/bin/env ruby
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
-
-# Tell ruby this script is written in UTF-8 encoded text.
-$KCODE = 'u'
-
-# Library to get character lengths (as opposed to byte lengths) from
-# Ruby strings.
-require 'jcode'
-
-require 'wx'
-
-$utf8_file = File.join( File.dirname(__FILE__), 'utf8.txt')
-
-class UnicodeDemoTextCtrl < Wx::TextCtrl
-  NEWLINE_CORRECTION_FACTOR = 0
-  
-  DEFAULT_TEXT = "If you have a unicode version of wxruby, you should be able to see a range of characters from different languages displayed, and be able to type multilingual strings in the text area. Note that some scripts may only be displayed if you are using a suitable font; otherwise characters will appear as blank boxes.
-
-" << File.read( $utf8_file )
-
-  def initialize(parent, text = DEFAULT_TEXT)
-    super(parent, -1, text, 
-          Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::TE_MULTILINE)
-  end
-
-  # run through a few useful methods of textctrl and report the results
-  # as a string
-  def report()
-    report = ''
-    sel = get_string_selection()
-    report << 'Selected string byte length: ' << sel.length.to_s << "\n"
-    report << 'Selected string character length: ' << sel.jlength.to_s << "\n"
-    report << 'Selected string:: ' << sel.inspect << "\n"
-    return report
-  end
+begin
+  require 'rubygems' 
+rescue LoadError
 end
+require 'wx'
 
 # A read-only text ctrl useful for displaying output
 class LogTextCtrl < Wx::TextCtrl
