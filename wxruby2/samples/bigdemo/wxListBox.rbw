@@ -1,15 +1,13 @@
 #!/usr/bin/env ruby
-
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
 begin
-  require 'wx'
-rescue LoadError => no_wx_err
-  begin
-    require 'rubygems'
-    require 'wx'
-  rescue LoadError
-    raise no_wx_err
-  end
+  require 'rubygems' 
+rescue LoadError
 end
+require 'wx'
+
+
 
 class FindPrefixListBox < Wx::ListBox
     def initialize(parent, id, pos=Wx::DEFAULT_POSITION, size=Wx::DEFAULT_SIZE, choices=[], style=0)

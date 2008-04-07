@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
-# wxRuby2 Sample Code. Copyright (c) 2004-2009 wxRuby development team
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
-
 begin
-  require 'rubygems'
+  require 'rubygems' 
 rescue LoadError
 end
+require 'wx'
+
+
 require 'wx'
 
 

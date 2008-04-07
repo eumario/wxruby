@@ -1,15 +1,13 @@
 #!/usr/bin/env ruby
-
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
 begin
-  require 'wx'
-rescue LoadError => no_wx_err
-  begin
-    require 'rubygems'
-    require 'wx'
-  rescue LoadError
-    raise no_wx_err
-  end
+  require 'rubygems' 
+rescue LoadError
 end
+require 'wx'
+
+
 
 TEXT = "Right-click on the panel (or Ctrl-click on the Mac) to show a popup\nmenu.  Then look at the code for this sample.  Notice how the\nPopupMenu method is similar to the ShowModal method of a wxDialog in\nthat it doesn't return until the popup menu has been dismissed.  The\nevent handlers for the popup menu items can either be attached to the\nmenu itself, or to the window that invokes PopupMenu."
 

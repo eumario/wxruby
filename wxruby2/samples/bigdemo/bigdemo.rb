@@ -1,7 +1,15 @@
 #!/usr/bin/env ruby
-# Demo created by Robert Carlin, 
-#  based on the wxPython demo by Robin Dunn
-#  Modified a bit by Kevin Smith and Roy Sutton
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
+begin
+  require 'rubygems' 
+rescue LoadError
+end
+require 'wx'
+
+# Demo created by Robert Carlin, based on the wxPython demo by Robin Dunn
+# Modified by Kevin Smith, Roy Sutton, Alex Fenton
+
 
 #  TODO:
 #    Finish Scintilla integration
@@ -10,17 +18,6 @@
 #    More samples
 #    Finish 'rubification' of source
 #    Fix non-scintilla code viewer
-
-begin
-  require 'wx'
-rescue LoadError => no_wx_err
-  begin
-    require 'rubygems'
-    require 'wx'
-  rescue LoadError
-    raise no_wx_err
-  end
-end
 
 OVR_TEXT = "This is the WxRuby Demo.  It was ported from the wxPython Demo, created by Robin Dunn.  Many thanks to him for all his hard work - this demo is what it is because of him.  Click on any of the items in the tree control to start the demo.  Don't forget to check out the Demo Code tab - you can see the source code for each demo!\nHope you like it!"
 
