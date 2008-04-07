@@ -1,13 +1,11 @@
 #!/usr/bin/env ruby
-# wxRuby2 Sample Code. Copyright (c) 2004-2007 wxRuby development team
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
-
 begin
-  require 'rubygems'
-  require 'wx'
+  require 'rubygems' 
 rescue LoadError
-  require 'wx'
 end
+require 'wx'
 
 # This sample demonstrates how to dynamically connect and disconnect
 # event handlers, and how to create custom event types and listeners

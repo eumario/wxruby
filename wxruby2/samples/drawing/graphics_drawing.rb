@@ -1,12 +1,11 @@
+#!/usr/bin/env ruby
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
+# Freely reusable code: see SAMPLES-LICENSE.TXT for details
 begin
-  require 'wx'
-rescue LoadError => no_wx_err
-  begin
-    require 'rubygems'
-  rescue LoadError
-    raise no_wx_err
-  end
+  require 'rubygems' 
+rescue LoadError
 end
+require 'wx'
 
 class GfxInfo
   attr_accessor :font, :w, :h, :x, :y, :x_axis, :y_axis, :txt, :rotation

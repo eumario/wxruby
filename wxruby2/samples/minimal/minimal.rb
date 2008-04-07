@@ -1,17 +1,11 @@
 #!/usr/bin/env ruby
-# wxRuby2 Sample Code. Copyright (c) 2004-2006 Kevin B. Smith
+# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
-
 begin
-  require 'wx'
-rescue LoadError => no_wx_err
-  begin
-    require 'rubygems' 
-    load 'wx'
-  rescue
-    raise no_wx_err
-  end
+  require 'rubygems' 
+rescue LoadError
 end
+require 'wx'
 
 # This sample shows a fairly minimal Wx::App using a Frame, with a
 # MenuBar and StatusBar but no controls. For the absolute minimum app,
