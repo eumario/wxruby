@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -7,6 +7,9 @@
 
 %{
 #include <wx/init.h>
+extern "C" {
+#include <st.h>
+}
 %}
 
 
@@ -80,14 +83,13 @@ public:
 	GC_SetWindowDeleted((void *)wx_obj);
 	event.Skip();
   }
-	
-  static VALUE mark_iterate(VALUE pair, VALUE arg, VALUE self) 
-  {
-	VALUE key, val;
 
-	key = rb_ary_entry(pair, 0);
-	val = rb_ary_entry(pair, 1);
-	VALUE rb_obj = SWIG_RubyReferenceToObject(val);
+  // When ruby's garbage collection runs, if the app is still active, it
+  // cycles through all currently known SWIG objects and calls this
+  // function on each to preserve still active Wx::Windows.
+  static int markIterate(VALUE key, VALUE value, int lev)
+  {
+	VALUE rb_obj = SWIG_RubyReferenceToObject(value);
 	// Check if it's a valid object (sometimes SWIG doesn't return what we're
 	// expecting), a descendant of Wx::Window, and if it has not yet been
 	// deleted by WxWidgets; if so, mark it.
@@ -95,17 +97,16 @@ public:
 	  {
 		rb_gc_mark(rb_obj);
 	  }
-	return Qnil;
+	return ST_CONTINUE;
   }
 
-  // Implements GC protection. Always called because Wx::THE_APP is a 
-  // so always checked in GC mark phase. 
+  // Implements GC protection across wxRuby. Always called because
+  // Wx::THE_APP is a constant so always checked in GC mark phase.
   static void mark_wxRubyApp(void *ptr)
   {
 
 #ifdef __WXDEBUG__
 	printf("=== Starting App GC mark phase\n");
-    VALUE before = rb_funcall(rb_cTime, rb_intern("now"), 0);
 #endif
 
 	// If the App has ended, the ruby object will have been unlinked from 
@@ -120,15 +121,14 @@ public:
         return;
       }
 
-	// To do the marking, iterate over SWIG's hash list of known wrapped
-	// objects (swig_ruby_trackings) and check each one.
-	rb_iterate(rb_each, swig_ruby_trackings, (VALUE(*)(...))mark_iterate, Qnil);
-
+	// To do the marking, iterate over SWIG's list of objects. Note, we
+	// have to use the low-level st_foreach here, b/c rb_iterate creates
+	// a new object which is a bug in latest 1.8 ruby.
+    st_foreach(RHASH(swig_ruby_trackings)->tbl,
+               (int(*)(...))(wxRubyApp::markIterate), 0);
 
 #ifdef __WXDEBUG__
-    VALUE after = rb_funcall(rb_cTime, rb_intern("now"), 0);
-	printf("=== App GC mark phase completed; marking took %f s\n",
-           NUM2DBL(rb_funcall(after, rb_intern("-"), 1, before)));
+	printf("=== App GC mark phase completed\n");
 #endif
 
   }
