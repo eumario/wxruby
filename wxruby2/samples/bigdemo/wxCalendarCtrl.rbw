@@ -6,9 +6,7 @@ begin
 rescue LoadError
 end
 require 'wx'
-
-
-require 'wx'
+require 'date'
 
 class TestPanel < Wx::Panel
   def initialize(parent, id, log)
