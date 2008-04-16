@@ -28,6 +28,10 @@ enum wxXmlResourceFlags
 
 %rename(LoadFrameSubclass) wxXmlResource::LoadFrame(wxFrame *frame, wxWindow *parent, const wxString &name);
 
+// Can't write XRC handlers in Ruby
+%ignore wxXmlResource::AddHandler;
+%ignore wxXmlResource::InsertHandler;
+
 // XmlResource is an exception to the general rule in typemap.i - it has
 // methods which accept a 'wxWindow* parent' argument which may be
 // null. The standard typemap checks if the parent is NULL, but Dialogs
