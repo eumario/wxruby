@@ -29,10 +29,16 @@ bool GC_IsWindowDeleted(void *ptr)
 	return false;
 }
 
-// Notes that the window has been signalled as destroyed by a
-// WindowDestroyEvent handled by wxRubyApp
+// Records when a wxWindow has been signalled as destroyed by a
+// WindowDestroyEvent, handled by wxRubyApp (see swig/classes/App.i).
 void GC_SetWindowDeleted(void *ptr)
 {
+  // All Windows are EvtHandlers, so prevent any pending events being
+  // sent after destruction (other ObjectPreviouslyDeleted errors result)
+  wxEvtHandler* evt_handler = (wxEvtHandler*)ptr;
+  evt_handler->SetEvtHandlerEnabled(false);
+
+  // Disassociate the C++ and Ruby objects
   SWIG_RubyUnlinkObjects(ptr);
   SWIG_RubyRemoveTracking(ptr);
 }
