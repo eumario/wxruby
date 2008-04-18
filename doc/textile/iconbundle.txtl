@@ -33,10 +33,6 @@ Initializes the bundle with a single icon.
 
 Copy constructor.
 
-  *destructor*()
-
-Destructor.
-
 h3(#IconBundle_addicon). IconBundle#add_icon
 
   *add_icon*(%(arg-type)String% file,  %(arg-type)Integer% type)
@@ -50,6 +46,8 @@ width and height, they are replaced by the new ones.
 Adds the icon to the collection; if the collection already
 contains an icon with the same width and height, it is
 replaced by the new one.
+
+Note that "<<" is an alias for "add_icon".
 
 h3(#IconBundle_geticon). IconBundle#get_icon
 
@@ -65,9 +63,4 @@ returns the icon with size SYS_ICON_X/SYS_ICON_Y.
 
 Same as GetIcon( Size( size, size ) ).
 
-h3(#IconBundle_operatorassign). IconBundle::operator=
-
- "IconBundle":iconbundle.html *operator=*(%(arg-type)"IconBundle":iconbundle.html% ic)
-
-Assignment operator.
 
