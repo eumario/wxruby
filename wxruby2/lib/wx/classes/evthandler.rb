@@ -133,12 +133,15 @@ class Wx::EvtHandler
   # parameter or by calling the wx_id method of a passed Window.
   def acquire_id(window_or_id)
     case window_or_id
-    when Fixnum then window_or_id
-    when Wx::Window, Wx::MenuItem then window_or_id.wx_id
-    else Kernel.raise ArgumentError, 
-                     "Must specify Wx::Window event source or its Wx id, " +
-                     "not '#{window_or_id.inspect}'",
-                      caller
+    when Fixnum 
+      window_or_id
+    when Wx::Window, Wx::MenuItem, Wx::ToolBarTool 
+      window_or_id.wx_id
+    else 
+      Kernel.raise ArgumentError, 
+                   "Must specify Wx::Window event source or its Wx id, " +
+                   "not '#{window_or_id.inspect}'",
+                   caller
     end
   end
   private :acquire_id, :acquire_handler
