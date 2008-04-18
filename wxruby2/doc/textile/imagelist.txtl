@@ -76,6 +76,8 @@ Adds a new image using a bitmap and mask colour.
 
 Adds a new image using an icon.
 
+Note that "<<" is an alias for "add".
+
 h4. Parameters
 
 * _bitmap_ Bitmap representing the opaque areas of the image.
@@ -89,8 +91,8 @@ The new zero-based image index.
 
 h4. Remarks
 
-The original bitmap or icon is not affected by the *Add* operation, and can be deleted afterwards.
-
+The original bitmap or icon is not affected by the *add* operation, and
+can be deleted afterwards.
 
 h3(#ImageList_create). ImageList#create
 
@@ -201,7 +203,8 @@ true if the replacement was successful, false otherwise.
 
 h4. Remarks
 
-The original bitmap or icon is not affected by the *Replace* operation, and can be deleted afterwards.
+The original bitmap or icon is not affected by the *replace* operation,
+and can be deleted afterwards.
 
 
 
