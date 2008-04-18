@@ -33,30 +33,6 @@ enum
     wxTB_RIGHT        = 0x4000
 };
 
-// Numerous adding methods in wxToolBar return an undocumented C++
-// wxToolBarToolBase class. Rather than port this class, these methods
-// return the integer position of the new tool in wxRuby. Hence, all
-// access to ToolBar changing methods is via Wx::ToolBar.
-%typemap(out) wxToolBarToolBase* {
-  // arg1 here is the typecase C++ self; $1 is the new ToolBarToolBase
-  if ( $1 ) 
-    { 
-      int pos_of_tool = arg1->GetToolPos($1->GetId());
-      $result = INT2NUM(pos_of_tool);
-    }
-  else
-    {
-      $result = Qnil;
-    }
-}
-
-
-// Versions of methods that accept a ToolBarTool argument are not
-// supported in wxRuby, because that class is not ported.
-%ignore wxToolBar::AddTool(wxToolBarToolBase *tool);
-%ignore wxToolBar::InsertTool(size_t pos, wxToolBarToolBase *tool);
-
-
 // VERY weird swig bug here...
 // If we have the comment, the %if, %ignore and %endif,
 // no code is generated. 
