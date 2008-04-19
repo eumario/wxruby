@@ -1,23 +1,16 @@
-// wxBusyCursor.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004-2008, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
+// Don't add this class, as it's written in ruby instead
+// (lib/wx/classes/busycursor.rb). It's easier to ensure that the cursor
+// gets restored, and it's such a trivial class it's not worth having a
+// whole SWIG class for it.
 #if !defined(_wxBusyCursor_h_)
 #define _wxBusyCursor_h_
 class wxBusyCursor
 {
 public:
-	/**
-	 * \brief Constructs a busy cursor object, calling  . 
-	 * \param wxCursor*  
-	*/
-
-   wxBusyCursor(wxCursor* cursor = wxHOURGLASS_CURSOR) ;
-	/**
-	 * \brief Destroys the busy cursor object, calling  . 
-	*/
-
+  wxBusyCursor(wxCursor* cursor = wxHOURGLASS_CURSOR) ;
   virtual  ~wxBusyCursor() ;
 
 };
