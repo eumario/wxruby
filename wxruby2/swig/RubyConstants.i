@@ -602,7 +602,8 @@ enum
     wxID_CLOSE_ALL,
     wxID_PREFERENCES ,
 
-    wxID_CUT = 5030,
+    wxID_EDIT = 5030,
+    wxID_CUT,
     wxID_COPY,
     wxID_PASTE,
     wxID_CLEAR,
@@ -612,7 +613,7 @@ enum
     wxID_DELETE,
     wxID_REPLACE,
     wxID_REPLACE_ALL,
-    wxID_PROPERTIES,    
+    wxID_PROPERTIES,
 
     wxID_VIEW_DETAILS,
     wxID_VIEW_LARGEICONS,
