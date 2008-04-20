@@ -160,7 +160,7 @@ module Wx
       
       def describe_constructor()
         param_spec.inject("") do | desc, param |
-          desc << "#{param.name} (#{param.default.class.name})\n"
+          desc << ":#{param.name} => (#{param.default.class.name})\n"
         end
       end
     end
@@ -184,12 +184,15 @@ module Wx
           real_args = [ parent ] + self.class.args_as_list(*mixed_args)
           begin
             pre_wx_kwctor_init(*real_args)
-          rescue
-            msg = "Error initializing #{self.inspect} \n" +
-                  "Sent parameters: #{real_args.inspect}\n" +
-                   "Correct parameters are:\n" + 
+          rescue => err
+            msg = "Error initializing #{self.inspect}\n"+
+                  " : #{err.message} \n" +
+                  "Correct parameters for #{self.class.name}.new are:\n" + 
                    self.class.describe_constructor()
-            Kernel.raise ArgumentError, msg
+
+            new_err = err.class.new(msg)
+            new_err.set_backtrace(caller)
+            Kernel.raise new_err
           end
 
           # If a block was given, pass the newly created Window instance
