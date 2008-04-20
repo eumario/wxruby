@@ -20,6 +20,7 @@
 #include <wx/numdlg.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/utils.h>
+#include <wx/stockitem.h>
 
 class wxRubyApp
 {
@@ -159,6 +160,16 @@ wxString wxFileSelector(const wxString& message,
 int wxDisplayDepth();
 wxSize wxGetDisplaySize();
 wxSize wxGetDisplaySizeMM();
+
+bool wxIsStockID(wxWindowID id);
+bool wxIsStockLabel(wxWindowID id, const wxString& label);
+wxString wxGetStockLabel(wxWindowID id,
+                         long flags = wxSTOCK_WITH_MNEMONIC);
+
+wxAcceleratorEntry wxGetStockAccelerator(wxWindowID id);
+wxString wxGetStockHelpString(wxWindowID id,
+                              wxStockHelpStringClient client = wxSTOCK_MENU);
+
 
 %init %{
     rb_define_module_function(mWxruby2, "log_message", VALUEFUNC(log_message), -1);
