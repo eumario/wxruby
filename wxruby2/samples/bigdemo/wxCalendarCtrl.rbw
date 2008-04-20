@@ -9,12 +9,14 @@ require 'wx'
 require 'date'
 
 class TestPanel < Wx::Panel
+  attr_reader :cal
+
   def initialize(parent, id, log)
     super(parent, id)
     @log = log
     
     date = DateTime.now
-    @cal = Wx::CalendarCtrl.new(self, date, :pos => [ 25, 50 ], 
+    @cal = Wx::CalendarCtrl.new(self, :date => date, :pos => [ 25, 50 ], 
                                 :style => Wx::CAL_SHOW_HOLIDAYS| 
                                           Wx::CAL_SUNDAY_FIRST| 
                                           Wx::CAL_SEQUENTIAL_MONTH_SELECTION)
