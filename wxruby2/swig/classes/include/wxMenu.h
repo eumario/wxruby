@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 #if !defined(_wxMenu_h_)
@@ -24,6 +24,9 @@ public:
   wxMenuItem* AppendRadioItem(int id, 
                               const wxString& item, 
                               const wxString&  helpString = wxT(""));
+  wxMenuItem* AppendSubMenu(wxMenu *submenu, 
+                            const wxString& text, 
+                            const wxString& help = wxEmptyString);
   void AppendSeparator();
   void Break();
   void Check(int id, const bool check );
