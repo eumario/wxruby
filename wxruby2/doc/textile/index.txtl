@@ -75,6 +75,7 @@ appear modally (on top of all other windows).
 |PropertySheetDialog|Property sheet dialog|
 |TipWindow|Shows text in a small window|
 |Wizard|A wizard dialog|
+|AboutDialogInfo|A specialised, platform-native "About" dialog|
 
 "top":#top
 
@@ -115,6 +116,7 @@ of user input and interaction.
 |Slider|A slider that can be dragged by the user|
 |VListBox|A listbox supporting variable height rows|
 |MediaCtrl|A control for playing sound and video|
+|AnimationCtrl|For displaying a looping animation|
 
 "top":#top
 
@@ -315,6 +317,7 @@ These classes are related to drawing on device contexts and windows.
 
 |Colour|Represents the red, blue and green elements of a colour|
 |DCClipper|Wraps the operations of setting and destroying the clipping region|
+|Animation|Represents an animation, such as an animated GIF|
 |Bitmap|Represents a bitmap|
 |Brush|Used for filling areas on a device context|
 |BrushList|The list of previously-created brushes|

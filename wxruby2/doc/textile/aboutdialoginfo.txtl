@@ -1,0 +1,236 @@
+h1(#wxaboutdialoginfo). Wx::AboutDialogInfo
+
+The Wx module function @Wx::about_box@ displays a platform-native
+"About" dialog with information about the application. AboutDialogInfo
+is a simple class for passing information to it. You construct an
+AboutDialogInfo object, set the relevant fields, and then pass it to 
+the function. The only required field is version. For convenience, you
+may also just pass Wx::about_box keyword arguments, and skip creating an
+AboutDialogInfo object altogether:
+
+ Wx::about_box( :name       => 'A Tasty Application',
+                :version    => '3.0.2', 
+                :developers => ['Joe Bloggs'] )
+               
+
+The information for the dialog includes general application details like
+its name, version, copyright and so on, as well as lists of the program
+developers, documentation writers, artists and translators. The simple
+properties from the former group are represented as a string with the
+exception of the program icon and the program web site, while the lists
+from the latter group are stored as as an array of strings and can be
+either set entirely at once using
+"set_developers":#AboutDialogInfo_setdevelopers and similar functions or
+built one by one using "add_developer":#AboutDialogInfo_adddeveloper
+etc.
+
+Please also notice that while all the main platforms have the native
+implementation of the about dialog, they are often more limited than the
+generic version provided by Widgets and so the generic version is used
+if AboutDialogInfo has any fields not supported by the native
+version. Currently GTK+ version supports all the possible fields
+natively but MSW and Mac versions don't support URLs, licence text nor
+custom icons in the about dialog and if either of those is used,
+"AboutBox()":aboutbox.html will automatically use the generic version so
+you should avoid specifying these fields to achieve more native look and
+feel.
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "AboutDialogInfo.new":#AboutDialogInfo_new
+* "AboutDialogInfo#add_artist":#AboutDialogInfo_addartist
+* "AboutDialogInfo#add_developer":#AboutDialogInfo_adddeveloper
+* "AboutDialogInfo#add_doc_writer":#AboutDialogInfo_adddocwriter
+* "AboutDialogInfo#add_translator":#AboutDialogInfo_addtranslator
+* "AboutDialogInfo#set_artists":#AboutDialogInfo_setartists
+* "AboutDialogInfo#set_copyright":#AboutDialogInfo_setcopyright
+* "AboutDialogInfo#set_description":#AboutDialogInfo_setdescription
+* "AboutDialogInfo#set_developers":#AboutDialogInfo_setdevelopers
+* "AboutDialogInfo#set_doc_writers":#AboutDialogInfo_setdocwriters
+* "AboutDialogInfo#set_icon":#AboutDialogInfo_seticon
+* "AboutDialogInfo#set_licence":#AboutDialogInfo_setlicence
+* "AboutDialogInfo#set_license":#AboutDialogInfo_setlicense
+* "AboutDialogInfo#set_name":#AboutDialogInfo_setname
+* "AboutDialogInfo#set_translators":#AboutDialogInfo_settranslators
+* "AboutDialogInfo#set_version":#AboutDialogInfo_setversion
+* "AboutDialogInfo#set_web_site":#AboutDialogInfo_setwebsite
+
+</div>
+
+
+
+h3(#AboutDialogInfo_wxaboutdialoginfo). AboutDialogInfo.new
+
+h3(#AboutDialogInfo_addartist). AboutDialogInfo#add_artist
+
+  *add_artist*(%(arg-type)String% artist)
+
+Adds an artist name to be shown in the program credits.
+
+h4. See also
+
+"set_artists":#AboutDialogInfo_setartists
+
+
+h3(#AboutDialogInfo_adddeveloper). AboutDialogInfo#add_developer
+
+  *add_developer*(%(arg-type)String% developer)
+
+Adds a developer name to be shown in the program credits.
+
+h4. See also
+
+"set_developers":#AboutDialogInfo_setdevelopers
+
+
+h3(#AboutDialogInfo_adddocwriter). AboutDialogInfo#add_doc_writer
+
+  *add_doc_writer*(%(arg-type)String% docwriter)
+
+Adds a documentation writer name to be shown in the program credits.
+
+h4. See also
+
+"set_doc_writers":#AboutDialogInfo_setdocwriters
+
+
+h3(#AboutDialogInfo_addtranslator). AboutDialogInfo#add_translator
+
+  *add_translator*(%(arg-type)String% translator)
+
+Adds a translator name to be shown in the program credits. Notice that if no
+translator names are specified explicitely, "AboutBox()":aboutbox.html 
+will try to use the translation of the string @translator-credits@ from
+the currently used message catalog -- this can be used to show just the name of
+the translator of the program in the current language.
+
+h4. See also
+
+"set_translators":#AboutDialogInfo_settranslators
+
+
+h3(#AboutDialogInfo_setartists). AboutDialogInfo#set_artists
+
+  *set_artists*(%(arg-type)ArrayString% artists)
+
+Sets the the list of artists to be shown in the program credits.
+
+h4. See also
+
+"add_artist":#AboutDialogInfo_addartist
+
+
+h3(#AboutDialogInfo_setcopyright). AboutDialogInfo#set_copyright
+
+  *set_copyright*(%(arg-type)String% copyright)
+
+Set the short string containing the program copyright information. Notice that
+any occurrences of @"(C)"@ in copyright will be replaced by the
+copyright symbol (circled C) automatically, which means that you can avoid
+using this symbol in the program source code which can be problematic,
+
+
+h3(#AboutDialogInfo_setdescription). AboutDialogInfo#set_description
+
+  *set_description*(%(arg-type)String% desc)
+
+Set brief, but possibly multiline, description of the program.
+
+
+h3(#AboutDialogInfo_setdevelopers). AboutDialogInfo#set_developers
+
+  *set_developers*(%(arg-type)ArrayString% developers)
+
+Set the list of developers of the program.
+
+h4. See also
+
+"add_developer":#AboutDialogInfo_adddeveloper
+
+
+h3(#AboutDialogInfo_setdocwriters). AboutDialogInfo#set_doc_writers
+
+  *set_doc_writers*(%(arg-type)ArrayString% docwriters)
+
+Set the list of documentation writers.
+
+h4. See also
+
+"add_doc_writer":#AboutDialogInfo_adddocwriter
+
+
+h3(#AboutDialogInfo_seticon). AboutDialogInfo#set_icon
+
+  *set_icon*(%(arg-type)Icon% icon)
+
+Set the icon to be shown in the dialog. By default the icon of the main frame
+will be shown if the native about dialog supports custom icons. If it doesn't
+but a valid icon is specified using this method, the generic about dialog is
+used instead so you should avoid calling this function for maximally native
+look and feel.
+
+
+h3(#AboutDialogInfo_setlicence). AboutDialogInfo#set_licence
+
+  *set_licence*(%(arg-type)String% licence)
+
+Set the long, multiline string containing the text of the program licence.
+
+Only GTK+ version supports showing the licence text in the native about dialog
+currently so the generic version will be used under all the other platforms if
+this method is called. To preserve the native look and feel it is advised that
+you do not call this method but provide a separate menu item in the 
+@"Help"@ menu for displaying the text of your program licence.
+
+
+h3(#AboutDialogInfo_setlicense). AboutDialogInfo#set_license
+
+  *set_license*(%(arg-type)String% licence)
+
+This is the same as "set_licence":#AboutDialogInfo_setlicence.
+
+
+h3(#AboutDialogInfo_setname). AboutDialogInfo#set_name
+
+  *set_name*(%(arg-type)String% name)
+
+Set the name of the program. If this method is not called, the string returned
+by "App::GetAppName()":appgetappname.html will be shown in the dialog.
+
+
+h3(#AboutDialogInfo_settranslators). AboutDialogInfo#set_translators
+
+  *set_translators*(%(arg-type)ArrayString% translators)
+
+Set the list of translators. Please see 
+"add_translator":#AboutDialogInfo_addtranslator for additional
+discussion.
+
+
+h3(#AboutDialogInfo_setversion). AboutDialogInfo#set_version
+
+  *set_version*(%(arg-type)String% version)
+
+Set the version of the program. The version is in free format, i.e. not
+necessarily in the @x.y.z@ form but it shouldn't contain the "version"
+word.
+
+
+h3(#AboutDialogInfo_setwebsite). AboutDialogInfo#set_web_site
+
+  *set_web_site*(%(arg-type)String% url,  %(arg-type)String% desc = '')
+
+Set the web site for the program and its description (which defaults to URL
+itself if empty).
+
+Please notice that only GTK+ version currently supports showing the link in the
+native about dialog so if this method is called, the generic version will be
+used under all the other platforms.
+
+

@@ -1,0 +1,134 @@
+h1(#wxanimation). Wx::Animation
+
+This class encapsulates the concept of a platform-dependent animation.
+An animation is a sequence of frames of the same size.
+Sound is not supported by Animation. To display an animation on screen,
+use "AnimationCtrl":animationctrl.html
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Predefined objects
+
+ *Wx::NULL_ANIMATION*
+
+h2. See also
+
+"AnimationCtrl":animationctrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Animation.new":#Animation_new
+* "Animation#get_delay":#Animation_getdelay
+* "Animation#get_frame_count":#Animation_getframecount
+* "Animation#get_frame":#Animation_getframe
+* "Animation#get_size":#Animation_getsize
+* "Animation#is_ok":#Animation_isok
+* "Animation#load":#Animation_load
+* "Animation#load_file":#Animation_loadfile
+
+</div>
+
+
+
+h3(#Animation_new). Animation.new
+
+  *Animation.new*(%(arg-type)Animation% anim)
+
+Copy constructor, uses "reference counting":trefcount.html.
+
+  *Animation.new*(%(arg-type)String% name,  %(arg-type)AnimationType% type = ANIMATION_TYPE_ANY)
+
+Loads an animation from a file.
+
+* _name_ The name of the file to load.
+* _type_ See "load_file":#Animation_loadfile for more info.
+
+h3(#Animation_getdelay). Animation#get_delay
+
+ Integer *get_delay*(%(arg-type)unsigned int% i)
+
+Returns the delay for the i-th frame in milliseconds.
+If @-1@ is returned the frame is to be displayed forever.
+
+
+h3(#Animation_getframecount). Animation#get_frame_count
+
+ unsigned int *get_frame_count*()
+
+Returns the number of frames for this animation.
+
+
+h3(#Animation_getframe). Animation#get_frame
+
+ "Image":image.html *get_frame*(%(arg-type)unsigned int% i)
+
+Returns the i-th frame as a "Image":image.html.
+
+
+h3(#Animation_getsize). Animation#get_size
+
+ "Size":size.html *get_size*()
+
+Returns the size of the animation.
+
+
+h3(#Animation_isok). Animation#is_ok
+
+ Boolean *is_ok*()
+
+Returns  if animation data is present.
+
+
+h3(#Animation_load). Animation#load
+
+ Boolean *load*(%(arg-type)InputStream% stream,  %(arg-type)AnimationType% type = ANIMATION_TYPE_ANY)
+
+Loads an animation from the given stream. This is not currently
+supported in wxRuby.
+
+h4. Parameters
+
+* _stream_ The stream to use to load the animation.
+* _type_ One of the following values:
+
+
+
+|ANIMATION_TYPE_GIF|Load an animated GIF file.|
+|ANIMATION_TYPE_ANI|Load an ANI file.|
+|ANIMATION_TYPE_ANY|Try to autodetect the filetype.|
+
+
+
+h4. Return value
+
+ if the operation succeeded,  otherwise.
+
+
+h3(#Animation_loadfile). Animation#load_file
+
+ Boolean *load_file*(%(arg-type)String% name,  %(arg-type)AnimationType% type = ANIMATION_TYPE_ANY)
+
+Loads an animation from a file.
+
+h4. Parameters
+
+* _name_ A filename.
+* _type_ One of the following values:
+
+
+
+|ANIMATION_TYPE_GIF|Load an animated GIF file.|
+|ANIMATION_TYPE_ANI|Load an ANI file.|
+|ANIMATION_TYPE_ANY|Try to autodetect the filetype.|
+
+h4. Return value
+
+@true@ if the operation succeeded, @false@ otherwise.
+
+
