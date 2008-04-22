@@ -18,32 +18,33 @@ class MinimalFrame < Wx::Frame
     # The main application frame has no parent (nil)
     super(nil, :title => title, :size => [ 400, 300 ])
 
-    icon_file = File.join( File.dirname(__FILE__), "mondrian.png")
     # PNG can be used on all platforms, but icon type must be specified
-    # to work on Windows; OS X doesn't have "Frame" icons.
+    # to work on Windows. Note that OS X doesn't have "Frame" icons. 
+    icon_file = File.join( File.dirname(__FILE__), "mondrian.png")
     self.icon = Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_PNG)
 
     menu_bar = Wx::MenuBar.new
     # The "file" menu
     menu_file = Wx::Menu.new
+    # Using Wx::ID_EXIT standard id means the menu item will be given
+    # the right label for the platform and language, and placed in the
+    # correct platform-specific menu - eg on OS X, in the Application's menu
     menu_file.append(Wx::ID_EXIT, "E&xit\tAlt-X", "Quit this program")
     menu_bar.append(menu_file, "&File")
 
     # The "help" menu
     menu_help = Wx::Menu.new
-    # Using Wx::ID_ABOUT default id means the menu item will be placed
-    # in the correct platform-specific place - eg on OS X
     menu_help.append(Wx::ID_ABOUT, "&About...\tF1", "Show about dialog")
     menu_bar.append(menu_help, "&Help")
 
     # Assign the menubar to this frame
     self.menu_bar = menu_bar
 
-    # Create a status bar
+    # Create a status bar at the bottom of the frame
     create_status_bar(2)
     self.status_text = "Welcome to wxRuby!"
 
-    # Set it up to handle menu events using the relevant methods
+    # Set it up to handle menu events using the relevant methods. 
     evt_menu Wx::ID_EXIT, :on_quit
     evt_menu Wx::ID_ABOUT, :on_about
   end
@@ -54,17 +55,14 @@ class MinimalFrame < Wx::Frame
     close()
   end
 
-  # show an 'About' dialog
+  # show an 'About' dialog - WxRuby's about_box function will show a
+  # platform-native 'About' dialog, but you could also use an ordinary
+  # Wx::MessageDialog here.
   def on_about
-    msg =  sprintf("This is the About dialog of the minimal sample.\n" \
-                   "Welcome to wxRuby, version %s", Wx::WXRUBY_VERSION)
-
-    # create a simple message dialog with OK button
-    about_dlg = Wx::MessageDialog.new( self, msg, 'About Minimal',
-                                       Wx::OK|Wx::ICON_INFORMATION )
-    # Display the dialog on top of and blocking other windows, until
-    # dismissed by clicking the 'OK' button
-    about_dlg.show_modal
+    Wx::about_box(:name => self.title,
+                   :version     => Wx::WXRUBY_VERSION,
+                   :description => "This is the minimal sample",
+                   :developers  => ['The wxRuby Development Team'] )
   end
 end
 
