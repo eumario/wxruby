@@ -12,25 +12,21 @@ h2. Derived from
 
 h2. Constants
 
-
- enum XmlResourceFlags
- {
-     XRC_USE_LOCALE     = 1,
-     XRC_NO_SUBCLASSING = 2,
-     XRC_NO_RELOADING   = 4
- };
- 
+  Wx::XRC_USE_LOCALE     = 1
+  Wx::XRC_NO_SUBCLASSING = 2
+  Wx::XRC_NO_RELOADING   = 4
 
 <div id="methods">
 
 h2. Methods
 
 * "XmlResource.new":#XmlResource_new
+* "XmlResource.get":#XmlResource_get
+* "XmlResource.set":#XmlResource_set
 * "XmlResource#add_handler":#XmlResource_addhandler
 * "XmlResource#attach_unknown_control":#XmlResource_attachunknowncontrol
 * "XmlResource#clear_handlers":#XmlResource_clearhandlers
 * "XmlResource#compare_version":#XmlResource_compareversion
-* "XmlResource#get":#XmlResource_get
 * "XmlResource#get_flags":#XmlResource_getflags
 * "XmlResource#get_version":#XmlResource_getversion
 * "XmlResource#get_xrcid":#XmlResource_getxrcid
@@ -47,7 +43,6 @@ h2. Methods
 * "XmlResource#load_panel":#XmlResource_loadpanel
 * "XmlResource#load_panel_subclass":#XmlResource_loadpanelsubclass
 * "XmlResource#load_tool_bar":#XmlResource_loadtoolbar
-* "XmlResource#set":#XmlResource_set
 * "XmlResource#set_flags":#XmlResource_setflags
 * "XmlResource#unload":#XmlResource_unload
 
@@ -69,29 +64,27 @@ XRC_NO_SUBCLASSING: subclass property of object nodes will be ignored
 
   *XmlResource.new*(%(arg-type)Integer% flags = XRC_USE_LOCALE)
 
-Constructor.
+The flags in Wx::XmlResource are not useful in ruby. All XmlResources
+created will have the optimal flags.
 
-* _flags_ XRC_USE_LOCALE: translatable strings will be translated via _().
-XRC_NO_SUBCLASSING: subclass property of object nodes will be ignored
-(useful for previews in XRC editors). XRC_NO_RELOADING will prevent the
-XRC files from being reloaded from disk in case they have been modified there
-since being last loaded (may slightly speed up loading them).
-
-
-  *destructor*()
-
-Destructor.
+* @Wx::XRC_USE_LOCALE@: translatable strings will be translated via _().
+* @Wx::XRC_NO_SUBCLASSING@: subclass property of object nodes will be ignored (useful for previews in XRC editors). 
+* @Wx::XRC_NO_RELOADING@ will prevent the XRC files from being reloaded from disk in case they have been modified there since being last loaded (may slightly speed up loading them).
 
 
-h3(#XmlResource_addhandler). XmlResource#add_handler
+h3(#XmlResource_get). XmlResource#get
 
-  *add_handler*(%(arg-type)"XmlResourceHandler":xmlresourcehandler.html% handler)
+ "XmlResource":xmlresource.html *XmlResource.get*()
 
-Initializes only a specific handler (or custom handler). Convention says
-that the handler name is equal to the control's name plus 'XmlHandler', for example
-TextCtrlXmlHandler, HtmlWindowXmlHandler. The XML resource compiler
-(wxxrc) can create include file that contains initialization code for
-all controls used within the resource.
+Class method to get the global XmlResource object. 
+
+
+h3(#XmlResource_set). XmlResource#set
+
+ "XmlResource":xmlresource.html *XmlResource.set*(%(arg-type)"XmlResource":xmlresource.html% res)
+
+Class method to set the global resources object. Returns the pointer to
+the previous one, or nil if there was not one.
 
 
 h3(#XmlResource_attachunknowncontrol). XmlResource#attach_unknown_control
@@ -103,13 +96,6 @@ Attaches an unknown control to the given panel/window/dialog.
 Unknown controls are used in conjunction with @<object class="unknown">@.
 
 
-h3(#XmlResource_clearhandlers). XmlResource#clear_handlers
-
-  *clear_handlers*()
-
-Removes all handlers.
-
-
 h3(#XmlResource_compareversion). XmlResource#compare_version
 
  Integer *compare_version*(%(arg-type)Integer% major, %(arg-type)Integer% minor, 
@@ -118,13 +104,6 @@ h3(#XmlResource_compareversion). XmlResource#compare_version
 
 Compares the XRC version to the argument. Returns -1 if the XRC version
 is less than the argument, +1 if greater, and 0 if they equal.
-
-
-h3(#XmlResource_get). XmlResource#get
-
- "XmlResource":xmlresource.html *get*()
-
-Gets the global resources object or creates one if none exists.
 
 
 h3(#XmlResource_getflags). XmlResource#get_flags
@@ -154,10 +133,9 @@ h3(#XmlResource_initallhandlers). XmlResource#init_all_handlers
 
   *init_all_handlers*()
 
-Initializes handlers for all supported controls/windows. This will
-make the executable quite big because it forces linking against
-most of the Widgets library.
-
+Initializes handlers for all supported controls/windows. In wxRuby
+versions 1.9.6 and later, this is called automatically for you, so there
+is no need to call this method
 
 h3(#XmlResource_load). XmlResource#load
 
@@ -255,14 +233,6 @@ h3(#XmlResource_loadtoolbar). XmlResource#load_tool_bar
  "ToolBar":toolbar.html *load_tool_bar*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a toolbar.
-
-
-h3(#XmlResource_set). XmlResource#set
-
- "XmlResource":xmlresource.html *set*(%(arg-type)"XmlResource":xmlresource.html% res)
-
-Sets the global resources object and returns a pointer to the previous one (may be NULL).
-
 
 h3(#XmlResource_setflags). XmlResource#set_flags
 
