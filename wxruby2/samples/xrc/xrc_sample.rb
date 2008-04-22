@@ -82,14 +82,9 @@ end
 class XrcApp < Wx::App
 
 	def on_init
-		# Create a resource handler
-		$xml = Wx::XmlResource.get();
-		$xml.init_all_handlers();
-
-
-		# Load a resource file
+		# Get a new resources object
         xrc_file = File.join( File.dirname(__FILE__), 'samples.xrc' )
-		$xml.load(xrc_file)
+		$xml = Wx::XmlResource.new(xrc_file)
 
 		# Show the main frame.
 		main = SimpleFrame.new()

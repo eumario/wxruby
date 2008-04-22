@@ -9,6 +9,7 @@
 
 #include <wx/gdicmn.h>
 #include <wx/image.h>
+#include <wx/xrc/xmlres.h>
 
 #include <wx/filesys.h>
 #include <wx/fs_zip.h>
@@ -87,9 +88,15 @@ VALUE wxRuby_WrapWxObjectInRuby(wxObject *wx_obj)
 %include "mark_free_impl.i"
 
 %init %{
+    // Load all the other known wxRuby modules; the function is built by rake
     extern void InitializeOtherModules();
     InitializeOtherModules();
+
+    // Set up all image formats
     wxInitAllImageHandlers();
+
+    // Load handlers on the global resources object
+    wxXmlResource::Get()->InitAllHandlers();
 
 	// This is needed so HtmlHelp can load docs from a zip file
 	wxFileSystem::AddHandler(new wxArchiveFSHandler);

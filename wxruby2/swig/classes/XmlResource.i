@@ -30,6 +30,7 @@ enum wxXmlResourceFlags
 
 // Can't write XRC handlers in Ruby
 %ignore wxXmlResource::AddHandler;
+%ignore wxXmlResource::ClearHandlers;
 %ignore wxXmlResource::InsertHandler;
 
 // XmlResource is an exception to the general rule in typemap.i - it has
