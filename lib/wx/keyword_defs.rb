@@ -483,3 +483,10 @@ Wx::define_keyword_ctors('SearchCtrl') do
   wx_ctor_params :validator, :name => 'searchCtrl'
 end
 
+
+Wx::define_keyword_ctors('AnimationCtrl') do
+  wx_ctor_params :id, :anim
+  wx_ctor_params :pos, :size, :style => Wx::AC_DEFAULT_STYLE
+  wx_ctor_params :name => 'animationCtrl'
+end
+
