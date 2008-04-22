@@ -23,13 +23,17 @@ module Wx
         ab_info.description = info[:description] || ''
         ab_info.copyright   = info[:copyright] || ''
         ab_info.licence     = info[:licence] || ''
-        if info.key?(:website)
-          ab_info.set_website(*info[:website])
-        end
         ab_info.developers  = info[:developers] || []
         ab_info.doc_writers = info[:doc_writers] || []
         ab_info.artists     = info[:artists] || []
         ab_info.translators = info[:translators] || []
+        if info.key?(:website)
+          ab_info.set_website(*info[:website])
+        end
+        if info.key?(:icon)
+          ab_info.icon = info[:icon]
+        end
+
       else
         Kernel.raise ArgumentError,
                      "Can't use #{info.inspect} for AboutDialogInfo"
