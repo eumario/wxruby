@@ -21,7 +21,7 @@
 #include <wx/xrc/xmlres.h>
 #include <wx/utils.h>
 #include <wx/stockitem.h>
-
+#include <wx/aboutdlg.h>
 class wxRubyApp
 {
 public:
@@ -156,6 +156,8 @@ wxString wxFileSelector(const wxString& message,
 						wxWindow *parent = 0,
 						int x = -1, 
 						int y = -1);
+
+void wxAboutBox(const wxAboutDialogInfo& info);
 
 int wxDisplayDepth();
 wxSize wxGetDisplaySize();
