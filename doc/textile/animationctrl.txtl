@@ -1,0 +1,171 @@
+h1(#wxanimationctrl). Wx::AnimationCtrl
+
+This is a static control which displays an animation.
+AnimationCtrl API is simple as possible and won't give you full control on the
+animation; if you need it then use "MediaCtrl":mediactrl.html.
+
+This control is useful to display a (small) animation while doing a long task
+(e.g. a "throbber").
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+|@AC_DEFAULT_STYLE@|The default style: NO_BORDER.|
+|@AC_NO_AUTORESIZE@|By default, the control will adjustits size to exactly fit to the size of the animation when "set_animation":#AnimationCtrl_setanimationis called. If this style flag is given, the control will not change its size|
+
+
+
+h2. See also
+
+"Animation":animation.html
+
+
+<div id="methods">
+
+h2. Methods
+
+* "AnimationCtrl.new":#AnimationCtrl_new
+* "AnimationCtrl#create":#AnimationCtrl_create
+* "AnimationCtrl#get_animation":#AnimationCtrl_getanimation
+* "AnimationCtrl#get_inactive_bitmap":#AnimationCtrl_getinactivebitmap
+* "AnimationCtrl#is_playing":#AnimationCtrl_isplaying
+* "AnimationCtrl#load_file":#AnimationCtrl_loadfile
+* "AnimationCtrl#play":#AnimationCtrl_play
+* "AnimationCtrl#set_animation":#AnimationCtrl_setanimation
+* "AnimationCtrl#set_inactive_bitmap":#AnimationCtrl_setinactivebitmap
+* "AnimationCtrl#stop":#AnimationCtrl_stop
+
+</div>
+
+
+h3(#AnimationCtrl_new). AnimationCtrl.new
+
+  *AnimationCtrl.new*(%(arg-type)Window% parent,  %(arg-type)Integer% id, 
+                    %(arg-type)Animation% anim, 
+                    %(arg-type)Point% pos = DEFAULT_POSITION, 
+                    %(arg-type)Size% size = DEFAULT_SIZE, 
+                    %(arg-type)Integer% style = AC_DEFAULT_STYLE, 
+                    %(arg-type)String% name = "animationctrl")
+
+Initializes the object and calls "Create":animationctrlcreate.html with
+all the parameters.
+
+
+h3(#AnimationCtrl_create). AnimationCtrl#create
+
+ Boolean *create*(%(arg-type)Window% parent,  %(arg-type)Integer% id,  %(arg-type)Animation% anim, 
+                %(arg-type)Point% pos = DEFAULT_POSITION, 
+                %(arg-type)Size% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = AC_DEFAULT_STYLE, 
+                %(arg-type)String% name = "animationctrl")
+
+h4. Parameters
+
+* _parent_ Parent window, must be non-.
+* _id_ The identifier for the control.
+* _anim_ The initial animation shown in the control.
+* _pos_ Initial position.
+* _size_ Initial size.
+* _style_ The window style, see @AC_*@ flags.
+* _name_ Control name.
+
+After control creation you must explicitely call "Play":animationctrlplay.html
+to start to play the animation. Until that function won't be called, the first frame
+of the animation is displayed.
+
+h4. Return value
+
+ if the control was successfully created or  if creation failed.
+
+
+h3(#AnimationCtrl_getanimation). AnimationCtrl#get_animation
+
+ "Animation":animation.html *get_animation*()
+
+Returns the animation associated with this control.
+
+
+h3(#AnimationCtrl_getinactivebitmap). AnimationCtrl#get_inactive_bitmap
+
+ "Bitmap":bitmap.html *get_inactive_bitmap*()
+
+Returns the inactive bitmap shown in this control when the;
+see "set_inactive_bitmap":#AnimationCtrl_setinactivebitmap for more info.
+
+
+h3(#AnimationCtrl_isplaying). AnimationCtrl#is_playing
+
+ Boolean *is_playing*()
+
+Returns  if the animation is being played.
+
+
+h3(#AnimationCtrl_loadfile). AnimationCtrl#load_file
+
+ Boolean *load_file*(%(arg-type)String% file, 
+                   %(arg-type)AnimationType% animType = ANIMATION_TYPE_ANY)
+
+Loads the animation from the given file and calls "set_animation":#AnimationCtrl_setanimation.
+See "Animation#load_file":animation.html#Animation_loadfile for more info.
+
+
+h3(#AnimationCtrl_play). AnimationCtrl#play
+
+ Boolean *play*()
+
+Starts playing the animation.
+The animation is always played in loop mode (unless the last frame of the animation
+has an infinite delay time) and always start from the first frame
+(even if you "stopped":animationctrlstop.html it while some other frame was
+displayed).
+
+
+h3(#AnimationCtrl_setanimation). AnimationCtrl#set_animation
+
+  *set_animation*(%(arg-type)Animation% anim)
+
+Sets the animation to play in this control.
+If the previous animation is being played, it's "Stopped":animationctrlstop.html.
+
+Until "Play":animationctrlplay.html isn't called, a static image, the first
+frame of the given animation or the background colour will be shown
+(see "set_inactive_bitmap":#AnimationCtrl_setinactivebitmap for more info).
+
+
+h3(#AnimationCtrl_setinactivebitmap). AnimationCtrl#set_inactive_bitmap
+
+  *set_inactive_bitmap*(%(arg-type)Bitmap% bmp)
+
+Sets the bitmap to show on the control when it's not playing an animation.
+If you set as inactive bitmap @NullBitmap@ (which is the default), then the
+first frame of the animation is instead shown when the control is inactive; in this case,
+if there's no valid animation associated with the control (see "set_animation":#AnimationCtrl_setanimation),
+then the background colour of the window is shown.
+
+If the control is not playing the animation, the given bitmap will be immediately
+shown, otherwise it will be shown as soon as "Stop":animationctrlstop.html
+is called.
+
+Note that the inactive bitmap, if smaller than the control's size, will be centered in
+the control; if bigger, it will be stretched to fit it.
+
+
+h3(#AnimationCtrl_stop). AnimationCtrl#stop
+
+  *stop*()
+
+Stops playing the animation.
+The control will show the first frame of the animation, a custom static image or
+the window's background colour as specified by the
+last "set_inactive_bitmap":#AnimationCtrl_setinactivebitmap call.
+
