@@ -101,8 +101,13 @@ $wx_libs = windows_libs.join(' ')
 
 libs = WINDOWS_SYS_LIBS.map! { | lib | "-l#{lib}" }
 
-# not currently included with mingw
-libs.delete('-lgdiplus')
+# Delete use of -lgdiplus if wxUSE_GRAPHICS_CONTEXT is not set to 1.
+File.read(WXWIDGETS_SETUP_H).scan(/^#define\s+wxUSE_GRAPHICS_CONTEXT\s+([01])/) do |define|
+  if $1.to_i.zero?
+    # not currently included with mingw
+    libs.delete('-lgdiplus')
+  end
+end
 
 $extra_libs = "#{libs.join(' ')} " +
   File.join(Config::CONFIG['libdir'], Config::CONFIG['LIBRUBY'])
