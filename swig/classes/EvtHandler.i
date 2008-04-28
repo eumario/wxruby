@@ -91,17 +91,9 @@ public:
     // into the ruby proc for handling on the ruby side
     void EventThunker(wxEvent &event)
     {
-        VALUE event_type_id =  INT2NUM(event.GetEventType());
-        VALUE cEvent = rb_funcall(cWxEvtHandler.klass, 
-								  rb_intern("event_class_for_type"),
-								  1, event_type_id ); 	  
-        
-        static VALUE vevent;
-        vevent = Data_Wrap_Struct(cEvent, 0, 0, 0);
-        DATA_PTR(vevent) = &event;
-        
-        wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
-        rb_funcall(cb->m_func, rb_intern("call"),1,vevent);
+      VALUE rb_event = wxRuby_WrapWxEventInRuby(&event);
+      wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
+      rb_funcall(cb->m_func, rb_intern("call"),1, rb_event);
     }
 
     VALUE m_func;

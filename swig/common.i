@@ -47,6 +47,7 @@ extern bool GC_IsWindowDeleted(void *ptr);
 extern swig_type_info* wxRuby_GetSwigTypeForClass(VALUE cls);
 extern void wxRuby_SetSwigTypeForClass(VALUE cls, swig_type_info* ty);
 extern VALUE wxRuby_WrapWxObjectInRuby(wxObject* obj);
+extern VALUE wxRuby_WrapWxEventInRuby(wxEvent* event);
 %}
 
 %include "typedefs.i"

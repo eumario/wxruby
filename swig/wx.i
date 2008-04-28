@@ -83,6 +83,37 @@ VALUE wxRuby_WrapWxObjectInRuby(wxObject *wx_obj)
   return r_obj;
 }
 
+
+// The passage of wxEvents from the C++ to the ruby side has to be
+// controlled carefully because normal Wx events are created on the
+// stack, and hence the underlying object is often deleted while the
+// ruby object is still around. This (plus typemap in typemap.i) gets
+// round this by tracking Event objects created on the ruby side with eg
+// CommandEvent.new, but never tracking, marking or freeing those
+// generated on the C++ side.
+extern swig_class cWxEvtHandler; 
+VALUE wxRuby_WrapWxEventInRuby(wxEvent *wx_event)
+{
+  // Test for tracked instances
+  VALUE rb_event = SWIG_RubyInstanceFor((void *)wx_event);
+  // An event created on the ruby side and hence tracked; return
+  // relevant instance.
+  if ( rb_event != Qnil )
+    return rb_event;
+
+  // An event from the C++ side; wrap simply without associating
+  // mark/free functions as these are all dealt with by Wx
+  VALUE event_type_id =  INT2NUM(wx_event->GetEventType());
+  VALUE cEvent = rb_funcall(cWxEvtHandler.klass, 
+                            rb_intern("event_class_for_type"),
+                            1, event_type_id ); 	  
+  
+  // Wrap without mark or free functions - Wx deals with this
+  rb_event = Data_Wrap_Struct(cEvent, 0, 0, 0);
+  DATA_PTR(rb_event) = wx_event;
+  return rb_event;
+}
+
 %} 
 
 %include "mark_free_impl.i"

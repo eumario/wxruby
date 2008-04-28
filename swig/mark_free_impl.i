@@ -158,25 +158,6 @@ void GC_mark_wxEvent(void *ptr)
 	}
 }
 
-// Most events are normally created on the C++ side on the stack and
-// passed into Ruby via EvtHandler, and do not need to be
-// deleted. However, the SWIG wrappings mean that events initialised on
-// the Ruby side are created calling C++ "new" so must be deleted.
-void GC_free_wxEvent(void *ptr)
-{
-  wxEvent* wx_event = (wxEvent*)ptr;
-
-  if ( wx_event->IsCommandEvent() )
-	{
-	  wxCommandEvent* wx_cm_event = (wxCommandEvent*)ptr;
-      delete(wx_cm_event);
-	}
-  else 
-    {
-      delete(wx_event);
-    }
-}
-
 // Prevents Ruby's GC sweeping up items that are stored as client data
 // Checks whether the C++ object is still around first...
 void mark_wxControlWithItems(void* ptr) {
