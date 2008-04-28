@@ -391,9 +391,12 @@
 			   "Window parent argument must not be nil"); }
 }
 
-%typemap(out) wxWindow*, wxSizer* {
-  $result = wxRuby_WrapWxObjectInRuby($1);
-}
+// For numerous methods that return arbitrary windows
+%typemap(out) wxWindow*, wxSizer* "$result = wxRuby_WrapWxObjectInRuby($1);"
+// For ProcessEvent and AddPendingEvent
+%typemap("directorin") wxEvent &event "$input = wxRuby_WrapWxEventInRuby(&$1);"
+
+
 
 %apply int *OUTPUT { int * x , int * y , int * w, int * h };
 

@@ -25,7 +25,6 @@ extern void GcNullFreeFunc(void *);
 extern void GC_mark_wxWindow(void *);
 extern void GC_mark_wxFrame(void *);
 extern void GC_mark_wxEvent(void *);
-extern void GC_free_wxEvent(void *);
 %}
 
 // Macro definitions.
@@ -78,9 +77,9 @@ GC_NEVER(kls);
 // wxEvent object. SWIG automatically handles the marking of such
 // instances as being ruby-owned.
 %define GC_MANAGE_AS_EVENT(kls)
-%feature("freefunc") kls "GC_free_wxEvent";
 %feature("markfunc") kls "GC_mark_wxEvent";
 %feature("nodirector") kls;
+%trackobjects;
 %enddef
 
 // Other descendants of Wx::Object - eg Colour, Pen, Bitmap - that Wx 
