@@ -1,4 +1,11 @@
 class Wx::Image
+  # Load a new image from an IO-like object that supports "read"
+  def self.read(an_io, type_or_mime, index = -1)
+    img = new
+    img.load_stream(an_io, type_or_mime, index)
+    img
+  end
+
   # Create a new image from Wx::Bitmap, preserving mask information
   def self.from_bitmap(bmp)
     bmp.convert_to_image

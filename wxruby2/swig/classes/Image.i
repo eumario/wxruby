@@ -10,12 +10,10 @@ GC_MANAGE_AS_OBJECT(wxImage);
 #include <wx/image.h>
 %}
 
-// No default ctor
-%ignore wxImage::Create();
+// Typemaps and classes for dealing with Input/Output stream
+%include "../shared/streams.i"
 
-// These forms of creation, querying, loading and saving are not
-// supported in wxRuby; could possibly map Ruby IO.read/IO.write to
-// wxWidgets InputStream/OutputStream
+// Handled in Ruby: lib/wx/classes/image.rb
 %ignore wxImage(wxInputStream& stream, 
                 long type = wxBITMAP_TYPE_ANY, 
                 int index = -1);
@@ -24,16 +22,18 @@ GC_MANAGE_AS_OBJECT(wxImage);
                 int index = -1);
 %ignore wxImage::GetImageCount(wxInputStream& stream, 
                                long type = wxBITMAP_TYPE_ANY);
-%ignore wxImage::LoadFile(wxInputStream& stream, 
-                          long type, 
-                          int index = -1);
-%ignore wxImage::LoadFile(wxInputStream& stream, 
-                          const wxString& mimetype, 
-                          int index = -1);
-%ignore wxImage::SaveFile(wxOutputStream& stream, 
-                          int type) const;
-%ignore wxImage::SaveFile(wxOutputStream& stream, 
-                          const wxString& mimetype) const;
+
+
+%rename(LoadStream) wxImage::LoadFile(wxInputStream& stream, 
+                                      long type, 
+                                      int index = -1);
+%rename(LoadStream) wxImage::LoadFile(wxInputStream& stream, 
+                                      const wxString& mimetype, 
+                                      int index = -1);
+%rename(Write) wxImage::SaveFile(wxOutputStream& stream, 
+                                 int type) const;
+%rename(Write) wxImage::SaveFile(wxOutputStream& stream, 
+                                 const wxString& mimetype) const;
 
 // Handler methods are not supported in wxRuby; all standard handlers
 // are loaded at startup, and we don't allow custom image handlers to be
