@@ -270,6 +270,7 @@ $parents = {
     'wxScrollWinEvent' => 'wxEvent',
     'wxScrolledWindow' => 'wxPanel',
     'wxSearchCtrl' => 'wxTextCtrl',
+    'wxShowEvent' => 'wxEvent',
     'wxSimpleHelpProvider' => 'wxHelpProvider',
     'wxSingleChoiceDialog' => 'wxDialog',
     'wxSizeEvent' => 'wxEvent',
