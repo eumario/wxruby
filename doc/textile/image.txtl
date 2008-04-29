@@ -74,6 +74,7 @@ h2. Methods
 
 * "Image.new":#Image_new
 * "Image.from_bitmap":Image_frombitmap
+* "Image.read":Image_read
 * "Image#blur":#Image_blur
 * "Image#blur_horizontal":#Image_blurhorizontal
 * "Image#blur_vertical":#Image_blurvertical
@@ -111,6 +112,7 @@ h2. Methods
 * "Image#init_alpha":#Image_initalpha
 * "Image#is_transparent":#Image_istransparent
 * "Image#load_file":#Image_loadfile
+* "Image#load_stream":#Image_loadstream
 * "Image#is_ok":#Image_isok
 * "RGBValue::RGBValue":#Image_RGBValue
 * "Image#rg_bto_hsv":#Image_rgbtohsv
@@ -132,7 +134,7 @@ h2. Methods
 * "Image#set_option":#Image_setoption
 * "Image#set_palette":#Image_setpalette
 * "Image#set_rgb":#Image_setrgb
-* "Image#set_rgb":#Image_setrgb
+* "Image#write":#Image_write
 
 </div>
 
@@ -165,7 +167,7 @@ height. See "set_data":#Image_setdata for a description of the raw data
 format. The string's length should be equal to width x height x 3.
 
 
-  *Image.new*(%(arg-type)"char":char.html% xpmData)
+  *Image.new*(%(arg-type)"String":char.html% xpmData)
 
 Creates an image from XPM data.
 
@@ -224,6 +226,19 @@ Creates a new image from an platform-dependent bitmap, preserving mask
 information.
 
 
+h3(#Image_read). Image.read
+
+  *Image.read*(%(arg-type)IO% an_io, %(arg-type)Integer% type = BITMAP_TYPE_ANY, %(arg-type)Integer% index = -1) )
+
+  *Image.read*(%(arg-type)IO% an_io,  %(arg-type)String% mimetype,  %(arg-type)Integer% index = -1)
+
+Creates a new image using data read from _an_io_. _an_io_ may be any
+ruby object which implements a _read_ method and similar basic IO
+operations, such as a @File@, @IO@, @Socket@ or @StringIO@ object.
+
+The _type_ and _mimetype_ parameters have the same meaning as in the
+standard constructor.
+
 h3(#Image_blur). Image#blur
 
  "Image":image.html *blur*(%(arg-type)Integer% blurRadius)
@@ -233,7 +248,7 @@ _blurRadius_. This should not be used when using a single mask colour
 for transparency.
 
 h4. See also
-
+v
 "blur_horizontal":#Image_blurhorizontal
 "blur_vertical":#Image_blurvertical
 
@@ -753,16 +768,23 @@ hotspot for loaded cursor file:
 h4. Return value
 
 true if the operation succeeded, false otherwise. If the optional index parameter is out of range,
-false is returned and a call to LogError() takes place.
+false is returned and a call to Wx::log_error takes place.
 
 h4. See also
 
 "Image#save_file":image.html#Image_savefile
 
+h3(#Image_loadstream). Image#load_stream
 
+ Boolean *load_stream*(%(arg-type)IO% an_io,  %(arg-type)Integer% type = BITMAP_TYPE_ANY, 
+                   %(arg-type)Integer% index = -1)
 
+ Boolean *load_stream*(%(arg-type)IO% an_io,  %(arg-type)String% mimetype, 
+                   %(arg-type)Integer% index = -1)
 
-
+Loads image data from an IO-like object. It is normally simpler to use
+"Image.read":#Image_read to read data from an IO; see that method for
+more information on the parameters.
 
 
 h3(#Image_isok). Image#is_ok
@@ -888,9 +910,10 @@ Saves an image in the named file.
 
  Boolean *save_file*(%(arg-type)String% name)
 
-Saves an image in the named file. File type is determined from the extension of the
-file name. Note that this function may fail if the extension is not recognized! You
-can use one of the forms above to save images to files with non-standard extensions.
+Saves an image in the named file. File type is determined from the
+extension of the file name. Note that this function may fail if the
+extension is not recognized! You can use one of the forms above to save
+images to files with non-standard extensions.
 
 h4. Parameters
 
@@ -903,7 +926,7 @@ h4. Parameters
 |*BITMAP_TYPE_PNG*|Save a PNG image file.|
 |*BITMAP_TYPE_PCX*|Save a PCX image file (tries to save as 8-bit if possible, falls back to 24-bit otherwise).|
 |*BITMAP_TYPE_PNM*|Save a PNM image file (as raw RGB always).|
-|*BITMAP_TYPE_TIFF*|Save a TIFF image file.|
+|*BITMAP_TYPE_TIF*|Save a TIFF image file.|
 |*BITMAP_TYPE_XPM*|Save a XPM image file.|
 |*BITMAP_TYPE_ICO*|Save a Windows icon file (ICO) (the size may be up to 255 wide by 127 high. A single image is saved in 8 colors at the size supplied).|
 |*BITMAP_TYPE_CUR*|Save a Windows cursor file (CUR).|
@@ -922,18 +945,13 @@ Note: you can use "get_option_int":#Image_getoptionint to set the
 hotspot before saving an image into a cursor file (default hotspot is in
 the centre of the image):
 
-     image.SetOption(IMAGE_OPTION_CUR_HOTSPOT_X, hotspotX);
-     image.SetOption(IMAGE_OPTION_CUR_HOTSPOT_Y, hotspotY);
- 
- 
+     image.set_option(IMAGE_OPTION_CUR_HOTSPOT_X, hotspotX);
+     image.set_option(IMAGE_OPTION_CUR_HOTSPOT_Y, hotspotY);
+  
 
 h4. See also
 
-"Image#load_file":image.html#Image_loadfile
-
-
-
-
+"Image#load_file":#Image_loadfile, "Image#write":#Image_write
 
 
 h3(#Image_scale). Image#scale
@@ -966,27 +984,18 @@ will work.
 
 Example:
 
+  # get the bitmap from somewhere
+  bmp = Wx::Bitmap.new(...)
 
-     // get the bitmap from somewhere
-     Bitmap bmp = ...;
- 
-     // rescale it to have size of 32*32
-     if ( bmp.GetWidth() != 32 || bmp.GetHeight() != 32 )
-     {
-         Image image = bmp.ConvertToImage();
-         bmp = Bitmap(image.Scale(32, 32));
- 
-         // another possibility:
-         image.Rescale(32, 32);
-         bmp = image;
-     }
- 
- 
+  # rescale it to have size of 32*32
+  if bmp.width != 32 or bmp.height != 32 )
+    img = Wx::Image.from_bitmap(bmp)
+    bmp = Wx::Bitmap.from_image( img.scale(32, 32) )
+  end
 
 h4. See also
 
 "Rescale":imagerescale.html
-
 
 h3(#Image_size). Image#size
 
@@ -1142,3 +1151,16 @@ green and blue intensities. The values should be in the range 0 to
 255. This routine performs bounds-checks for the coordinate so it can be
 considered a safe way to manipulate the data.
 
+h3(#Image_write). Image#write
+
+ Boolean *write*(%(arg-type)IO% an_io,  %(arg-type)Integer% type)
+
+ Boolean *write*(%(arg-type)IO% an_io,  %(arg-type)String% mimetype)
+
+Writes the image data in the specified image format to an IO-like
+object. _an_io_ may be any Ruby IO-like object which responds to _write_
+and other basic IO methods. For example, it may be an @IO@, a @File@, a
+@Socket@ or a @StringIO@.
+
+See also "save_file":#Image_savefile for more information on the
+supported output formats.
