@@ -31,15 +31,14 @@ extern "C" {
 
 // Redefined below
 %ignore MainLoop;
-%ignore FilterEvent;
-%feature("nodirector") FilterEvent; // director-like custom method below
-%feature("nodirector") GetTopWindow; // avoid exception on exit
 
-
+// Avoid exception on exit
+%feature("nodirector") GetTopWindow;
 
 %rename(wx_initialize) Initialize;
 
-#//////////////////////////////////
+// The App class in wxRuby is actually a custom-written subclass, but it
+// is presented to the user as Wx::App
 %rename(App) wxRubyApp;
 
 // Prevent the App being destroyed prematurely when Ruby exits down with
