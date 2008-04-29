@@ -395,7 +395,9 @@
 %typemap(out) wxWindow*, wxSizer* "$result = wxRuby_WrapWxObjectInRuby($1);"
 // For ProcessEvent and AddPendingEvent
 %typemap("directorin") wxEvent &event "$input = wxRuby_WrapWxEventInRuby(&$1);"
-
+// Thin and trusting wrapping to bypass SWIG's normal mechanisms; we
+// don't want SWIG changing ownership or typechecking these. 
+%typemap("in") wxEvent &event "$1 = (wxEvent*)DATA_PTR($input);"
 
 
 %apply int *OUTPUT { int * x , int * y , int * w, int * h };
