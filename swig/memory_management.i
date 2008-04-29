@@ -67,15 +67,16 @@ GC_NEVER(kls);
 %enddef
 
 // Events - most are created within wxWidgets C++ on the stack and thus
-// do not need deletion. When these are passed into ruby via EvtHandler
-// or App methods, they are given a void freefunc in the call to
-// Data_Wrap_Struct (see swig/classes/EvtHandler.i -EventThunker and
-// swig/classes/App.i - FilterEvent).
+// do not need deletion. These are passed into ruby via EvtHandler or
+// App methods, and are wrapped using wxRuby_WrapWxEventInRuby (see
+// wx.i). This gives them a void freefunc and markfunc and are NOT
+// tracked - they are treated as one-shot short-lived objects.
  //
 // However, custom events created on the ruby side need to be deleted to
-// avoid leakage as SWIG wrappers call new to allocate the underlying
-// wxEvent object. SWIG automatically handles the marking of such
-// instances as being ruby-owned.
+// avoid leakage as SWIG wrappers call C++ "new" to allocate the
+// underlying wxEvent object. In the allocate function SWIG will assign
+// the tracking and mark/free functions for these objects. The default
+// free func will delete the C++ Event.
 %define GC_MANAGE_AS_EVENT(kls)
 %feature("markfunc") kls "GC_mark_wxEvent";
 %feature("nodirector") kls;
