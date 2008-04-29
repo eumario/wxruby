@@ -16,6 +16,13 @@ class Wx::App
     the_app.main_loop
   end
 
+  # This method is called so the App may trap events before they are
+  # passed to handlers. This default implementation allows the event to
+  # pass.
+  def filter_event(unused_e)
+    -1
+  end
+
   # This is a class method in Wx, but permit it to be an instance method
   # in wxRuby
   def is_main_loop_running
