@@ -69,7 +69,12 @@ set up the block to accept a single parameter, the Event object.
 The event object will be of the appropriate class for the type of event
 being handled - for example, a "SizeEvent":sizeevent.html for a evt_size
 handler, or a "TreeEvent":treeevent.html from a TreeCtrl. All the event
-classes are listed "on the home page":/#events . 
+classes are listed "on the home page":/#events. 
+
+Note that Events are short-lived objects and are destroyed by wxWidgets
+once all the relevant handlers have been called. Therefore you shouldn't
+attempt to store an event object passed into a handler in a variable
+referenced outside the handler block.
 
 h3. Using methods to handle events
 
