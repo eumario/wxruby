@@ -57,9 +57,6 @@ extern swig_class cWxEvent;
 extern void GC_SetWindowDeleted(void*);
 extern "C" void Init_wxRubyStockObjects();
 
-// Pre-fetched id because it's called very frequently in wxRubyApp::FilterEvent
-static VALUE filter_event_sym = rb_intern("filter_event");
-
 class wxRubyApp : public wxApp
 {
     
@@ -231,7 +228,7 @@ public:
    wxRubyApp() ;
   virtual  ~wxApp() ;
   void Dispatch() ;
-  virtual int FilterEvent(wxEvent&  event ) ;
+  virtual int FilterEvent(wxEvent& event) { return -1 };
   wxString GetAppName() const;
   bool GetAuto3D() const;
   wxString GetClassName() const;
