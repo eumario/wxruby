@@ -16,7 +16,6 @@ module Demo
         if dlg.show_modal() == Wx::ID_OK
             log.write_text("You entered: " + dlg.get_value().to_s + "\n")
         end     
-        dlg.destroy()
         return nil
     end
     

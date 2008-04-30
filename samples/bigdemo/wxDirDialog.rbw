@@ -15,7 +15,6 @@ module Demo
         if dlg.show_modal() == Wx::ID_OK
             log.write_text("You selected: " + dlg.get_path())
         end
-        dlg.destroy()
     end
     
     def Demo.overview

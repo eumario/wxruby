@@ -17,7 +17,6 @@ module Demo
             data = dlg.get_colour_data().get_colour()
             log.write_text("You selected: (%d, %d, %d)" % [data.red, data.green, data.blue])
         end
-        dlg.destroy()
     end
     
     def Demo.overview

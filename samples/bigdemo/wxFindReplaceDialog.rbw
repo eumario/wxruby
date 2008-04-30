@@ -60,7 +60,6 @@ class TestPanel < Wx::Panel
     
     def on_find_close(evt)
         @log.write_text("Wx::FindReplaceDialog closing...")
-        evt.get_dialog().destroy()
     end
     
 end
