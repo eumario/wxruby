@@ -44,6 +44,11 @@
 %constant const int wxWXWIDGETS_SUBRELEASE_NUMBER = wxSUBRELEASE_NUMBER;
 // WXWIDGETS_VERSION is defined in lib/wx/version.rb
 
+#ifdef __WXDEBUG__
+%constant const bool wxDEBUG = true;
+#else
+%constant const bool wxDEBUG = false;
+#endif
 
 //** ---------------------------------------------------------------------------- **
 //   Start constants from wx/defs.h
