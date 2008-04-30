@@ -18,7 +18,15 @@ class ImageFrame < Wx::Frame
 
     # Load a PNG bitmap from a file for drawing
     img_file = File.join( File.dirname(__FILE__), 'paperclip.png')
-    @bitmap = Wx::Bitmap.new(img_file, Wx::BITMAP_TYPE_PNG)
+    require 'stringio'
+    str = ''
+    File.open(img_file, 'rb') { | f | str = f.read }
+    
+    img_io = StringIO.new(str, 'rb')
+
+    image = Wx::Image.new
+    image.load_stream(img_io, Wx::BITMAP_TYPE_PNG)
+    @bitmap = image.convert_to_bitmap
 
     # Set up the drawing to be done when the frame needs re-painting
     evt_paint :on_paint
@@ -27,6 +35,13 @@ class ImageFrame < Wx::Frame
   def on_paint
     paint do | dc |
       dc.draw_bitmap(@bitmap, 0, 0, false)
+      gdc = Wx::GraphicsContext.create(dc)
+      trans_blue = Wx::Colour.new(0, 0, 255, 128)
+      gdc.pen = Wx::Pen.new(trans_blue, 20)
+      gdc.stroke_line(0, 0, 100, 100)
+      trans_red = Wx::Colour.new(255, 0, 0, 100)
+      gdc.pen = Wx::Pen.new(trans_red, 20)
+      gdc.stroke_line(0, 100, 100, 0)
     end
   end
 end
