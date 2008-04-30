@@ -112,7 +112,6 @@ class FontTestPanel < Wx::Panel
             @curClr = colour
             update_ui()
         end
-        dlg.destroy()
     end
     
     def map_font_value_to_name(constant)
