@@ -23,7 +23,6 @@ Calendar_Cal_Year = 204
 Calendar_Cal_SeqMonth = 205
 Calendar_Cal_SurroundWeeks = 206
 
-p Wx::EvtHandler.const_to_name(10251)
 
 def format_date(d)
     return "#{d.year}-#{d.mon}-#{d.day}"
@@ -239,17 +238,15 @@ class MyFrame < Frame
       # This wraps correctly, but causes problems because the colour is freed
       # when the attribute is reset.
       #
-          pink = Wx::Colour.new(255, 128, 128)
-      attr_header_like = CalendarDateAttr.new(CAL_BORDER_ROUND, 
-                                               pink)
+      # attr_header_like = CalendarDateAttr.new(BLUE, LIGHT_GREY)
 
       @calendar.set_attr(17, attr_red_circle)
       @calendar.set_attr(29, attr_green_square)
-       @calendar.set_attr(13, attr_header_like)
+      # @calendar.set_attr(13, attr_header_like)
         else
       @calendar.reset_attr(17)
       @calendar.reset_attr(29)
-       @calendar.reset_attr(13)
+      # @calendar.reset_attr(13)
         end
     @calendar.refresh()
     end
@@ -265,9 +262,8 @@ end
 
 class RbApp < App
     def on_init()
-      gc_stress
-      frame = MyFrame.new("Calendar Windows sample")
-      frame.show(true)
+  	    frame = MyFrame.new("Calendar Windows sample")
+    frame.show(true)
     end
 end
 
