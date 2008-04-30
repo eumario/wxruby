@@ -29,7 +29,9 @@ class Wx::EvtHandler
     if evt_klass = EVENT_TYPE_CLASS_MAP[id]
       return evt_klass
     else
-      warn "No event class defined for event type #{id}"
+      if Wx::DEBUG
+        warn "No event class defined for event type #{id}"
+      end
       return Wx::Event
     end
   end
