@@ -20,7 +20,6 @@ module Demo
             path = dlg.get_path()
             log.write_text("You selected " + path)
         log.write_text("CWD: " + Dir.getwd())
-        dlg.destroy()
         end
     end
     
