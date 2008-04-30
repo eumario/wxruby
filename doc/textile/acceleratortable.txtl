@@ -5,8 +5,9 @@ keyboard shortcuts for menus or other commands. On Windows, menu or
 button commands are supported; on GTK (and OS X?), only menu commands
 are supported.
 
-The object *NullAcceleratorTable* is defined to be a table with no data,
-and is the initial accelerator table for a window.
+A window initially has no accelerator table entries, although
+"menus":menu.html associated with "frames":frame.html may have shortcut
+keys for their entries.
 
 h2. Derived from
 
@@ -15,26 +16,42 @@ h2. Derived from
 h2. Example
 
 This example shows how to create an accelerator table with three
-shortcut key entries. Note the use of the ruby method String[0] to
-retrieve the integer keycode corresponding to an alphanumeric key,
-and the use of the Wx::K_XXX constant to get the keycode for a
-non-alphanumeric key.
+shortcut key "entries":acceleratorentry.html. Each entry specifies:
 
-  entries = [ Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, 'N'[0], 
-                                       ID_NEW_WINDOW),
-              Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, 'X'[0], 
-                                       Wx::ID_EXIT),
-              Wx::AcceleratorEntry.new(Wx::ACCEL_CTRL, Wx::K_DELETE, 
-                                       Wx::ID_CUT) ]
-  table	= Wx::AcceleratorTable.new(entries)
-  frame.set_accelerator_table(table)
+* A key modifier, for example Wx::ACCEL_CTRL, definining what modifier key if any has to be pressed at the same time to get the shortcut
+* An integer character identifier, giving the "normal key" that is pressed with the modifier. 
+* An event id that will be caught by an event handler
+
+  acc_table = Wx::AcceleratorTable[
+    [ Wx::MOD_CTRL, ?n,           ID_NEW_WINDOW ],
+    [ Wx::MOD_ALT,  ?x,           Wx::ID_EXIT ], 
+	[ Wx::MOD_CTRL, Wx::K_DELETE, Wx::ID_CUT)
+  ]							
+  frame.accelerator_table = acc_table		   
  
+Note that in ruby, using the @?x@ notation is an easy way to retrieve
+the integer value of the character "x". To use keys with special
+characters that can't be typed, such as "Delete", use wxRuby's
+@Wx::K_XXX@ "key code":keycode.html constants.
+
+Any of wxRuby's "modifier keys":keymod.html may be used to refine an
+entry. For portability between OS X and GTK and Windows, it may be
+preferable to use the @Wx::MOD_CMD@ modifier instead of
+@Wx::MOD_CTRL@. This will map to "keypress + APPLE" on OS X - the
+normal modifier for shortcuts, but "keypress + CTRL" on GTK and
+Windows. 
+
+Using the events from this accelerator table, the corresponding event
+handler declaration to catch the first of these would look like:
+
+  evt_menu(ID_NEW_WINDOW) { .... }
+
 h2. Remarks
 
 An accelerator takes precedence over normal processing and can be a
-convenient way to program some event handling. 
-For example, you can use an accelerator table to enable a dialog with a
-multi-line text control to accept CTRL-Enter as meaning `OK' (but not in GTK+ at present).
+convenient way to program some event handling.  For example, you can use
+an accelerator table to enable a dialog with a multi-line text control
+to accept CTRL-Enter as meaning `OK' (but not in GTK+ at present).
 
 h2. See also
 
@@ -44,6 +61,7 @@ h2. See also
 
 h2. Methods
 
+* "AcceleratorTable.[]":#AcceleratorTable_new
 * "AcceleratorTable.new":#AcceleratorTable_new
 * "AcceleratorTable#isok":#AcceleratorTable_isok
 
@@ -52,9 +70,14 @@ h2. Methods
 
 h3(#AcceleratorTable_new). AcceleratorTable.new
 
-  *AcceleratorTable.new*(%(arg-type)"Array":array.html% entries)
+  *AcceleratorTable.new*(%(arg-type)"AcceleratorEntry":acceleratorentry.html% *entries)
 
-Creates from an array of "AcceleratorEntry":acceleratorentry.html objects.
+  *AcceleratorTable*[*(%(arg-type)"AcceleratorEntry":acceleratorentry.html% *entries]
+
+Creates a new accelerator table from the list of entries. The entries
+may be passed in as "AcceleratorEntry":acceleratorentry.html% objects,
+or for convenience, may be specified as three-element arrays,
+reprsenting the modifiers, the key, and the event id in turn.
 
 h4. Parameters
 
@@ -65,18 +88,3 @@ h3(#AcceleratorTable_isok). AcceleratorTable#is_ok
  Boolean *is_ok*()
 
 Returns true if the accelerator table is valid.
-
-h3(#AcceleratorTable_equal). AcceleratorTable#==
-
- Boolean *==*(%(arg-type)"AcceleratorTable":acceleratortable.html% accel)
-
-Equality operator. This operator tests whether the internal data pointers are
-equal (a fast test).
-
-h4. Parameters
-
-* _accel_ Accelerator table to compare with
-
-h4. Return value
-
-Returns true if the accelerator tables were effectively equal, false otherwise.
