@@ -11,6 +11,7 @@ require 'wx'
 # This is the minimum code to start a WxRuby app - create a Frame, and
 # show it.
 Wx::App.run do 
-  frame = Wx::Frame.new(nil, :title => "Minimal wxRuby App")
-  frame.show
+  #frame = Wx::Frame.new(nil, :title => "Minimal wxRuby App")
+  #frame.show
+  GC.start
 end

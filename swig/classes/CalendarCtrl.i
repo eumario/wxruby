@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -13,15 +13,8 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCalendarCtrl);
 #include <wx/calctrl.h>
 %}
 
-
-
-%typemap(in) wxCalendarDateBorder {
-	$1 = (wxCalendarDateBorder)NUM2INT($input);
-}
-
-%typemap(out) wxCalendarDateBorder {
-    $result = INT2NUM((int)$1);
-}
+// These are managed by the CalendarCtrl once set via set_attr
+%apply SWIGTYPE *DISOWN { wxCalendarDateAttr* attr };
 
 %ignore wxCalendarCtrl::wxCalendarCtrl();
 

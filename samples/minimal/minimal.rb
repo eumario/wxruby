@@ -7,6 +7,10 @@ rescue LoadError
 end
 require 'wx'
 
+Wx::constants.grep(/^EVT/) do | c |
+  p c if Wx::const_get(c) == 10261
+end
+
 # This sample shows a fairly minimal Wx::App using a Frame, with a
 # MenuBar and StatusBar but no controls. For the absolute minimum app,
 # see nothing.rb
@@ -22,7 +26,7 @@ class MinimalFrame < Wx::Frame
     # to work on Windows. Note that OS X doesn't have "Frame" icons. 
     icon_file = File.join( File.dirname(__FILE__), "mondrian.png")
     self.icon = Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_PNG)
-
+    b = Wx::Button.new(self, -1, 'foo')
     menu_bar = Wx::MenuBar.new
     # The "file" menu
     menu_file = Wx::Menu.new

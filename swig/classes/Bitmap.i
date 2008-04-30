@@ -29,6 +29,7 @@ GC_MANAGE_AS_OBJECT(wxBitmap);
 // FIXME - wrapping to create image from raw data
 %ignore Create(void* data, int type, int width, int height, int depth = -1);
 
+
 // wxPalette not supported in wxRuby
 %ignore wxBitmap::SetPalette;
 
