@@ -1,4 +1,6 @@
 === 1.9.6 tag on 2008-04-30 included all of this: ===
+- Suppress unknown event warnings from Wx::EvtHandler in release mode (AF)
+- Added Wx::DEBUG boolean const to show whether release/debug (AF)
 - Nicer syntax for constructing AcceleratorTables (AF)
 - Remove dangerous and unneeded calls to destroy in bigdemo (AF)
 - Avoid double-free of FontData owned by FontDialog (AF)
