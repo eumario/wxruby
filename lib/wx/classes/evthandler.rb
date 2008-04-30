@@ -42,9 +42,16 @@ class Wx::EvtHandler
 
   # Given the Integer constant Wx::EVT_XXX, returns the convenience
   # handler method name associated with that type of event.
-
   def self.event_name_for_type(name)
     EVENT_NAME_TYPE_MAP.index(name)
+  end
+
+  # Given an integer value +int_val+, returns the name of the EVT_xxx
+  # constant which points to it. Mainly useful for debugging.
+  def self.const_to_name(int_val)
+    Wx::constants.grep(/^EVT/).find do | c_name |
+      Wx::const_get(c_name) == int_val
+    end
   end
 
   # Public method to register the mapping of a custom event type
@@ -588,6 +595,9 @@ class Wx::EvtHandler
     EventType['evt_move', 0,
               Wx::EVT_MOVE, 
               Wx::MoveEvent],
+    EventType['evt_moving', 0,
+              Wx::EVT_MOVING, 
+              Wx::MoveEvent],
     EventType['evt_nc_paint', 0,
               Wx::EVT_NC_PAINT, 
               Wx::Event],
@@ -601,7 +611,7 @@ class Wx::EvtHandler
               Wx::EVT_PAINT, 
               Wx::PaintEvent],
     EventType['evt_query_end_session', 0,
-              Wx::EVT_QUERY_END_SESSION, 
+              Wx::EVT_QUERY_END_SESSION,
               Wx::Event],
     EventType['evt_query_layout_info', 0,
               Wx::EVT_QUERY_LAYOUT_INFO, 
