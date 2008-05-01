@@ -66,9 +66,9 @@ end
 # Now actually run the program to fill in some variables
 $wx_version  = wx_config("--version")
 $wx_cppflags = wx_config("--cppflags")
-$wx_libs     = wx_config("--libs std,stc,gl")
 $cpp         = wx_config("--cxx")
 $ld          = wx_config("--ld")
+$wx_libs     = wx_config("--libs std,stc,gl,media")
 
 # Find out where the wxWidgets setup.h file being used is located; this
 # will be used later in rakeconfigure.rb
@@ -134,6 +134,11 @@ else
     libs_str << ',gl'
   end
 end  
+
+
+if not $excluded_classes.include?('MediaCtrl')
+  libs_str << ',media'
+end
 
 # Set the final list of libs to be used
 $wx_libs = wx_config(libs_str)
