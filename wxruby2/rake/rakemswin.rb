@@ -2,7 +2,8 @@
 # Copyright 2004-2008 by wxRuby development team
 # Released under the MIT-style wxruby2 license
 
-# Compiling on Windows with Microsoft compiler
+# Compiling on Windows with Microsoft compiler - this is currently set
+# up to support VS2005 (version 8.0 of the runtime)
 $cpp  = "cl.exe"
 $ld   = "link"
 
@@ -111,5 +112,33 @@ rule('.res' => '.rc') do | t |
     sh("rc -I#$WXINC #{t.prerequisites}")
 end
 
+def find_in_path(basename)
+  ENV['PATH'].split(';').each do | path |
+    maybe = File.join(path, basename)
+    return maybe if File.exists?(maybe)
+  end
+  raise "Cannot find #{basename} in PATH"
+end
 
-
+# Redistribute and install VC8 runtime
+directory 'temp'
+file 'temp' do
+  cp 'lib/wxruby2.so.manifest', 'temp'
+  cp find_in_path('msvcp80.dll'), 'temp'
+  cp find_in_path('msvcr80.dll'), 'temp'
+  File.open('temp/Rakefile', 'w') do | f |
+    f.puts <<TEMP_RAKEFILE
+# This is a temporary rakefile to install the Microsoft v8 runtime
+require 'rbconfig'
+task :default do
+  mv 'msvcp80.dll', Config::CONFIG['bindir']
+  mv 'msvcr80.dll', Config::CONFIG['bindir']
+  ruby_manifest = File.join(Config::CONFIG['bindir'], 'ruby.exe.manifest')
+  if File.exists? ruby_manifest 
+    mv ruby_manifest, ruby_manifest + ".old"
+  end
+  mv 'wxruby2.so.manifest', ruby_manifest
+end
+TEMP_RAKEFILE
+  end
+end

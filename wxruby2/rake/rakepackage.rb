@@ -54,14 +54,26 @@ def create_gem_tasks
       self.platform = Gem::Platform::CURRENT
       self.files += [ TARGET_LIB ]
       # If building on OS X, test for splitting OS universal gem into two 
-      if self.platform.os == 'darwin' and self.platform.cpu == 'universal'
-        if $osx_split_gem_name
-          self.platform.cpu = $osx_split_gem_name
-        end
+      if self.platform.os == 'darwin' and 
+         self.platform.cpu == 'universal' and 
+         $osx_split_gem_name
+        self.platform.cpu = $osx_split_gem_name
+      end
+
+      # If using VC80, bundle MS VC80 dlls, and use a small rakefile to
+      # install these & manifest to ruby bin dir - see rakemswin.rb
+      if $mswin
+        self.files += [ 'temp/msvcp80.dll', 'temp/msvcr80.dll',
+                        'temp/Rakefile', 'temp/wxruby2.so.manifest' ]
+        self.extensions << 'temp/Rakefile'
       end
     end
     Gem::manage_gems()
     Gem::Builder.new(this_gemspec).build
+  end
+  # Assemble MSVC 8.0 redistributables before packaging on Windows
+  if $mswin
+    Rake::Task['gem'].prerequisites << 'temp'
   end
 end
 
