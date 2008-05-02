@@ -137,7 +137,12 @@ task :default do
   if File.exists? ruby_manifest 
     mv ruby_manifest, ruby_manifest + ".old"
   end
-  mv 'wxruby2.so.manifest', ruby_manifest
+  cp 'wxruby2.so.manifest', ruby_manifest
+  rubyw_manifest = File.join(Config::CONFIG['bindir'], 'rubyw.exe.manifest')
+  if File.exists? rubyw_manifest 
+    mv rubyw_manifest, rubyw_manifest + ".old"
+  end
+  cp 'wxruby2.so.manifest', rubyw_manifest
 end
 TEMP_RAKEFILE
   end
