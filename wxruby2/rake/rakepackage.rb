@@ -66,6 +66,8 @@ def create_gem_tasks
         self.files += [ 'temp/msvcp80.dll', 'temp/msvcr80.dll',
                         'temp/Rakefile', 'temp/wxruby2.so.manifest' ]
         self.extensions << 'temp/Rakefile'
+        # Rake is required to install the dlls
+        self.add_dependency('rake')
       end
     end
     Gem::manage_gems()
