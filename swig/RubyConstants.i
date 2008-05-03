@@ -20,6 +20,7 @@
 #include <wx/sashwin.h>
 #include <wx/prntbase.h>
 #include <wx/listbase.h>
+#include <wx/animate.h>
 
 // All of these exist on only one platform, so in those
 // cases I'm defining them so the compiler doesn't freak out
@@ -2141,7 +2142,7 @@ enum wxSashDragStatus
 // 'Null' objects
 %constant wxBitmap const    NULL_BITMAP = wxNullBitmap;
 %constant wxIcon const      NULL_ICON = wxNullIcon;
-%constant wxAnimation const NULL_BITMAP = wxNullAnimation;
+%constant wxAnimation const NULL_ANIMATION = wxNullAnimation;
 %constant wxCursor const    NULL_CURSOR = wxNullCursor;
 %constant wxPen const       NULL_PEN = wxNullPen;
 %constant wxBrush const     NULL_BRUSH = wxNullBrush;
