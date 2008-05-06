@@ -190,6 +190,7 @@ class wxGrid : public wxScrolledWindow
   void SetColFormatFloat(int col, int width = -1, int precision = -1);
   void SetColFormatCustom(int col, const wxString& typeName);
   void SetColLabelAlignment( int horiz, int vert );
+  void SetColLabelTextOrientation( int textOrientation ); 
   void SetColLabelSize( int height );
   void SetColLabelValue( int col, const wxString& );
   void SetColMinimalAcceptableWidth( int width );
