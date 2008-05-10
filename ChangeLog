@@ -1,3 +1,10 @@
+=== 1.9.7 tag on 2008-05-10 included all of this: ===
+- Restored Grid#set_col_label_text_orientation method (AF)
+- Fixed linking to wx_media with different wx build flavours on OS X (AF)
+- Fixed misnaming of Wx::NULL_ANIMATION constant (AF)
+- Added bundling of MSVC80 dlls for windows gem (AF)
+- Added a drag and drop / clipboard sample (AF)
+	
 === 1.9.6 tag on 2008-04-30 included all of this: ===
 - Suppress unknown event warnings from Wx::EvtHandler in release mode (AF)
 - Added Wx::DEBUG boolean const to show whether release/debug (AF)
