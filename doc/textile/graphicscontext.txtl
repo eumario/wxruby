@@ -239,3 +239,73 @@ h3(#GraphicsContext_gettextextent). GraphicsContext#get_text_extent
                   %(arg-type)"Double":double.html% externalLeading)
 
 Gets the dimensions of the string using the currently selected font.
+
+h3(#GraphicsContext_rotate). GraphicsContext#rotate
+
+	*rotate*(%(arg-type)Double% angle)
+	
+Rotates the current transformation matrix (radians)
+
+h3(#GraphicsContext_scale). GraphicsContext#scale
+
+	*scale*(%(arg-type)Double% x_scale, %(arg-type)Double% y_scale)
+	
+Scales the current transformation matrix.
+
+h3(#GraphicsContext_translate). GraphicsContext#translate
+
+	*translate*(%(arg-type)Double% dx, %(arg-type)Double% dy)
+	
+Translates the current transformation matrix.
+
+h3(#GraphicsContext_gettransform). GraphicsContext#get_transform
+
+	"GraphicsMatrix":graphicsmatrix.html *get_transform*()
+	
+Gets the current transformation matrix of this context.
+
+h3(#GraphicsContext_settransform). GraphicsContext#set_transform
+
+	*set_transform*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% matrix)
+	
+Sets the current transformation matrix of this context.
+
+h3(#GraphicsContext_concattransform). GraphicsContext#concat_transform
+
+	*concat_transform*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% matrix)
+	
+Concatenates the passed in transform with the current transform of this context.
+
+h3(#GraphicsContext_setbrush). GraphicsContext#set_brush
+
+	*set_brush*(%(arg-type)"Brush":brush.html% brush)
+	*set_brush*(%(arg-type)"GraphicsBrush":graphicsbrush.html% brush)	
+	
+Sets the brush for filling paths.
+
+h3(#GraphicsContext_setfont). GraphicsContext#set_font
+
+	*set_font*(%(arg-type)"Font":font.html% font, %(arg-type)"Colour":colour.html% colour)
+	*set_font*(%(arg-type)"GraphicsFont":graphicsfont.html% font)	
+	
+Sets the font for drawing text.
+
+h3(#GraphicsContext_setpen). GraphicsContext#set_pen
+
+	*set_pen*(%(arg-type)"Pen":pen.html% pen)
+	*set_pen*(%(arg-type)"GraphicsPen":graphicspen.html% pen)	
+	
+Sets the pen used for stroking.
+
+h3(#GraphicsContext_strokeline). GraphicsContext#strokeline
+
+	*strokeline*(%(arg-type)Double% x1,%(arg-type)Double% y1,%(arg-type)Double% x2,%(arg-type)Double% y2)
+	
+Strokes a single line.
+
+h3(#GraphicsContext_strokelines). GraphicsContext#strokelines
+
+	*strokelines*(%(arg-type)Integer% n,%(arg-type)"Point2DDouble":point2ddouble.html% begin_points,%(arg-type)"Point2DDouble":point2ddouble.html% end_points)
+	*strokelines*(%(arg-type)Integer% n,%(arg-type)"Point2DDouble":point2ddouble.html% points)
+	
+Stroke disconnected lines from begin to end points, fastest method available for this purpose.
