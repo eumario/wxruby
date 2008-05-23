@@ -306,6 +306,7 @@ used for high-quality anti-aliased drawing:
 |GraphicsContext|An anti-aliased Device Context|
 |GraphicsBrush|Brush for use with GraphicsContext|
 |GraphicsFont|Font for use with GraphicsContext|
+|GraphicsPath| Geometric path for use with GraphicsContext|
 |GraphicsPen|Pen for use with GraphicsContext|
 |GraphicsMatrix|Matrix for specifying transformations in a GraphicsContext|
 
