@@ -655,12 +655,11 @@ this style.
 
 h3(#TreeCtrl_getselections). TreeCtrl#get_selections
 
- unsigned int *get_selections*(%(arg-type)"ArrayTreeItemIds":arraytreeitemids.html% selection)
+ Array *get_selections*()
 
-Fills the array of tree items passed in with the currently selected items. This
-function can be called only if the control has the TR_MULTIPLE style.
+Returns an array of tree item ids for the currently selected items. This
+function can be called only if the control has the @TR_MULTIPLE@ style.
 
-Returns the number of selected items.
 h3(#TreeCtrl_getstateimagelist). TreeCtrl#get_state_image_list
 
  "ImageList":imagelist.html *get_state_image_list*()
