@@ -22,6 +22,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTreeCtrl);
 
 // Dealt with below
 %ignore wxTreeCtrl::GetRootItem;
+%ignore wxTreeCtrl::GetSelections;
 
 // Only support the version that returns more info in flags
 %ignore wxTreeCtrl::HitTest(const wxPoint& point);
@@ -239,7 +240,20 @@ protected:
 		else
 		  return TREEID2RUBY( self->GetRootItem() );
 	  }
-	
+    
+	// Just return a simple array in ruby
+    VALUE get_selections()
+    {
+      VALUE rb_tree_ids = rb_ary_new();
+      wxArrayTreeItemIds tree_ids = wxArrayTreeItemIds();
+      size_t sel_count = self->GetSelections(tree_ids);
+      for ( int i = 0; i < sel_count; i++ )
+        {
+          rb_ary_push(rb_tree_ids, TREEID2RUBY(tree_ids.Item(i)));
+        }
+      return rb_tree_ids;
+    }
+    
 	// Changed this version of insert_item to insert_item_before so SWIG
 	// does not get confused between the 2 method signatures
 	// This behaviour matches that used by wxPython.
