@@ -75,7 +75,7 @@ h3(#AuiNotebook_addpage). AuiNotebook#add_page
 
  Boolean *add_page*(%(arg-type)"Window":window.html% page,  %(arg-type)String% caption, 
                   %(arg-type)Boolean% select = false, 
-                  %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap)
+                  %(arg-type)"Bitmap":bitmap.html% bitmap = Wx::NULL_BITMAP)
 
 Adds a page.  If the _select_ parameter is true, calling this will generate a page change event.
 
@@ -142,7 +142,7 @@ h3(#AuiNotebook_insertpage). AuiNotebook#insert_page
  Boolean *insert_page*(%(arg-type)Integer% page_idx,  %(arg-type)"Window":window.html% page, 
                      %(arg-type)String% caption, 
                      %(arg-type)Boolean% select = false, 
-                     %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap)
+                     %(arg-type)"Bitmap":bitmap.html% bitmap = Wx::NULL_BITMAP)
 
 InsertPage() is similar to AddPage, but allows the ability to specify the insert location.
 If the _select_ parameter is true, calling this will generate a page change event.
@@ -164,7 +164,7 @@ h3(#AuiNotebook_setpagebitmap). AuiNotebook#set_page_bitmap
  Boolean *set_page_bitmap*(%(arg-type)Integer% page,  %(arg-type)"Bitmap":bitmap.html% bitmap)
 
 Sets the bitmap for the page.  To remove a bitmap from the tab caption, pass
-NullBitmap.
+@Wx::NULL_BITMAP@.
 
 h3(#AuiNotebook_setpagetext). AuiNotebook#set_page_text
 
