@@ -202,7 +202,7 @@ public:
         // Note in a global variable that the App has ended, so that we
         // can skip any GC marking later
         rb_gv_set("__wx_app_ended__", Qtrue);
-		VALUE the_app = rb_const_get(mWxruby2, rb_intern("THE_APP"));
+
         wxLog *oldlog = wxLog::SetActiveTarget(new wxLogStderr);
         SetTopWindow(0);
         if ( oldlog )
