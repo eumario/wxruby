@@ -120,7 +120,7 @@ public:
 	// To do the marking, iterate over SWIG's list of objects. Note, we
 	// have to use the low-level st_foreach here, b/c rb_iterate creates
 	// a new object which is a bug in latest 1.8 ruby.
-    st_foreach(RHASH(swig_ruby_trackings)->tbl,
+    st_foreach(RHASH_TBL(swig_ruby_trackings),
                (int(*)(...))(wxRubyApp::markIterate), 0);
 
 #ifdef __WXDEBUG__

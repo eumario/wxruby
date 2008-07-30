@@ -40,9 +40,10 @@ if RUBY_VERSION >= "1.9.0"
   includes = [ Config::CONFIG["rubyhdrdir"],
     Config::CONFIG["sitehdrdir"],
     Config::CONFIG["vendorhdrdir"],
-    File.join(Config::CONFIG["rubyhdrdir"], Config::CONFIG['arch'])  ]
+    File.join(Config::CONFIG["rubyhdrdir"], Config::CONFIG['arch']),
+    File.join(Config::CONFIG["rubyhdrdir"], "ruby") ]
 
-  $ruby_includes = " -I. " + includes.join(' -I ')
+  $ruby_includes = " -I. -I " + includes.join(' -I ')
 else
   $ruby_includes = " -I. -I " + Config::CONFIG["archdir"]
 end
