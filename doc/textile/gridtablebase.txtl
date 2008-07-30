@@ -48,9 +48,14 @@ also override:
 * "set_value":#GridTableBase_setvalue
 
 Additional methods will be needed if the Grid class provides a way to
-insert or delete rows or columns, or if custom
-"renderers":gridcellrenderer.html or "editors":gridcelleditor.html are
-used.
+insert or delete rows or columns.
+
+h3. Limitations
+
+At present, it is not recommended to use GridTableBase with non-standard
+"cell editors":gridcelleditor.html or "cell renderers":gridcellrenderer.html 
+Difficulties with the memory management of these mean that errors may
+result. 
 
 h2. Derived from
 
