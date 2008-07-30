@@ -171,6 +171,9 @@ public:
     // be initialized any earlier than this without crashing
     bool OnInit()
     {
+      // Signal that we're started
+      rb_gv_set("__wx_app_ended__", Qfalse);
+      // Set up the GDI objects
       Init_wxRubyStockObjects();
       // Get the ruby representation of the App object, and call the
       // ruby on_init method to set up the initial window state
