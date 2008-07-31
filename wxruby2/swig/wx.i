@@ -20,9 +20,8 @@ WX_DECLARE_HASH_MAP(VALUE,
 					swig_type_info*, 
 					wxIntegerHash,
 					wxIntegerEqual,
-					SwigTypeHash);
-
-SwigTypeHash Global_Type_Map;
+					RbClassToSwigTypeHash);
+RbClassToSwigTypeHash Global_Type_Map;
 
 // Record swig_type_info for a wxRuby class; called in class
 // initialisation
@@ -36,6 +35,44 @@ void wxRuby_SetSwigTypeForClass(VALUE cls, swig_type_info* ty) {
 swig_type_info* wxRuby_GetSwigTypeForClass(VALUE cls) {
   return Global_Type_Map[cls];
 }
+
+// Overriding standard SWIG tracking - SWIG's implementation is not
+// compatible with ruby 1.8.7 / 1.9.x as it can allocate BigNum objects
+// during GC , which is an error. So instead we provide a C++ ptr->Ruby
+// object map using Wx's hashmap class.
+WX_DECLARE_VOIDPTR_HASH_MAP(VALUE,
+                            PtrToRbObjHash);
+PtrToRbObjHash Global_Ptr_Map;
+
+// Add a tracking from ptr -> object
+void wxRuby_AddTracking(void* ptr, VALUE object) {
+  Global_Ptr_Map[ptr] = object;
+}
+
+// Return the ruby object for ptr
+VALUE wxRuby_FindTracking(void* ptr) {
+  if ( Global_Ptr_Map.count(ptr) == 0 )
+    return Qnil;
+  else
+    return Global_Ptr_Map[ptr];
+}
+
+// Remove the tracking for ptr
+void wxRuby_RemoveTracking(void* ptr) {
+  Global_Ptr_Map.erase(ptr);
+}
+
+// Iterate over all the trackings, calling the passed-in method on each
+void wxRuby_IterateTracking( void(*meth)(void* ptr, VALUE obj) ) {
+  PtrToRbObjHash::iterator it;
+  for( it = Global_Ptr_Map.begin(); it != Global_Ptr_Map.end(); ++it )
+    {
+      void* ptr = it->first;
+      VALUE obj = it->second;
+      (*meth)(ptr, obj);
+    }
+}
+
 
 // Returns a ruby object wrapped around a wxObject. This is used for
 // methods whose return type is a generic C++ class (eg wxWindow), but

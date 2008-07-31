@@ -7,9 +7,6 @@
 
 %{
 #include <wx/init.h>
-extern "C" {
-#include <st.h>
-}
 %}
 
 
@@ -83,9 +80,8 @@ public:
   // When ruby's garbage collection runs, if the app is still active, it
   // cycles through all currently known SWIG objects and calls this
   // function on each to preserve still active Wx::Windows.
-  static int markIterate(VALUE key, VALUE value, int lev)
+  static void markIterate(void* ptr, VALUE rb_obj)
   {
-	VALUE rb_obj = SWIG_RubyReferenceToObject(value);
 	// Check if it's a valid object (sometimes SWIG doesn't return what we're
 	// expecting), a descendant of Wx::Window, and if it has not yet been
 	// deleted by WxWidgets; if so, mark it.
@@ -93,7 +89,6 @@ public:
 	  {
 		rb_gc_mark(rb_obj);
 	  }
-	return ST_CONTINUE;
   }
 
   // Implements GC protection across wxRuby. Always called because
@@ -117,11 +112,8 @@ public:
         return;
       }
 
-	// To do the marking, iterate over SWIG's list of objects. Note, we
-	// have to use the low-level st_foreach here, b/c rb_iterate creates
-	// a new object which is a bug in latest 1.8 ruby.
-    st_foreach(RHASH_TBL(swig_ruby_trackings),
-               (int(*)(...))(wxRubyApp::markIterate), 0);
+	// To do the marking, iterate over SWIG's list of objects. 
+    wxRuby_IterateTracking(&wxRubyApp::markIterate);
 
 #ifdef __WXDEBUG__
 	printf("=== App GC mark phase completed\n");
