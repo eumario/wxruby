@@ -81,7 +81,7 @@ end
 # file) 
 def do_swig(source, target)
   check_swig if not $have_good_swig
-  sh "#{SWIG_CMD} #{$wx_cppflags} " + 
+  sh "#{SWIG_CMD} #{$wx_cppflags} -Iswig/custom " + 
     "-w401 -w801 -w515 -c++ -ruby " + 
     "-o #{target} #{source}"
 end
