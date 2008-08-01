@@ -23,6 +23,7 @@ h3. Miscellaneous methods
 
 h3. Dialog shortcut methods
 
+* "Wx::about_box":#Functions_aboutbox
 * "Wx::file_selector":#Functions_fileselector
 * "Wx::message_box":#Functions_messagebox
 * "Wx::get_multiple_choices":#Functions_getmultiplechoices
@@ -116,11 +117,22 @@ h3(#Functions_xrcid). Wx::xrcid
 
  Integer *Wx::xrcid*(*(arg-type)String* name)
 
-This is a convience function for "XmlResource#get_xrcid":xmlresource.html#XmlResource_getxmlid.
+This is a convenience function for "XmlResource#get_xrcid":xmlresource.html#XmlResource_getxmlid.
 
 h4. See Also
 
 "XmlResource#get_xrcid":xmlresource.html#XmlResource_getxmlid
+
+h3(#Functions_aboutbox). Wx::about_box
+
+ *Wx::about_box*(*(arg-type)Hash* contents)
+
+ *Wx::about_box*(*(arg-type)"AboutDialogInfo":aboutdialoginfo.html* contents)
+
+This shows an application "About" information in a platform native
+style. See "AboutDialogInfo":aboutdialoginfo.html for more information
+about the arguments which describe the application that can be passed to
+this method.
 
 h3(#Functions_fileselector). Wx::file_selector
 
