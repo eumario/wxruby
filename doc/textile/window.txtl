@@ -1049,15 +1049,13 @@ Returns the grandparent of a window, or @nil@ if there isn't one.
 
 h3(#Window_gethandle). Window#get_handle
 
-  *get_handle*()
+  Integer *get_handle*()
 
-Returns the platform-specific handle of the physical window. Cast it to an appropriate
-handle, such as *HWND* for Windows, *Widget* for Motif, *GtkWidget* for GTK or *WinHandle* for PalmOS.
-
-
-
-
-
+Returns the platform-specific handle of the physical window. This is a
+platform-specific Integer, which may be used to make native API calls,
+eg via Ruby's Win32API library. It will correspond to a *HWND* for
+Windows, *Widget* for Motif, *GtkWidget* for GTK or *WinHandle* for
+PalmOS.
 
 h3(#Window_gethelptextatpoint). Window#get_help_text_at_point
 
