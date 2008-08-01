@@ -14,7 +14,10 @@
 #include <wx/filesys.h>
 #include <wx/fs_zip.h>
 
+%}
 
+// Some common functions
+%{
 // Mapping of known wxRuby classes to SWIG type information
 WX_DECLARE_HASH_MAP(VALUE, 
 					swig_type_info*, 
@@ -129,6 +132,10 @@ VALUE wxRuby_WrapWxObjectInRuby(wxObject *wx_obj)
 // CommandEvent.new, but never tracking, marking or freeing those
 // generated on the C++ side.
 extern swig_class cWxEvtHandler; 
+extern swig_class cWxEvent;
+// Cached reference to EvtHandler evt_type_id -> ruby_event_class map
+VALUE Evt_Type_Map = NULL;
+
 VALUE wxRuby_WrapWxEventInRuby(wxEvent *wx_event)
 {
   // Test for tracked instances
@@ -139,11 +146,18 @@ VALUE wxRuby_WrapWxEventInRuby(wxEvent *wx_event)
     return rb_event;
 
   // An event from the C++ side; wrap simply without associating
-  // mark/free functions as these are all dealt with by Wx
-  VALUE event_type_id =  INT2NUM(wx_event->GetEventType());
-  VALUE cEvent = rb_funcall(cWxEvtHandler.klass, 
-                            rb_intern("event_class_for_type"),
-                            1, event_type_id ); 	  
+  // mark/free functions as these are all dealt with by Wx.
+  // First, get the hash mapping of event types to classes from EvtHandler
+  if ( ! Evt_Type_Map )
+    {
+      VALUE map_name = rb_str_new2("EVENT_TYPE_CLASS_MAP");
+      Evt_Type_Map = rb_const_get(cWxEvtHandler.klass, 
+                                  rb_to_id(map_name) );
+    }
+  // Then, look up the event type in this hash (MUCH faster than calling
+  // EvtHandler.evt_class_for_type method)
+  VALUE event_type_id =  INT2NUM( wx_event->GetEventType() );
+  VALUE cEvent = rb_hash_aref(Evt_Type_Map, event_type_id);
   
   // Wrap without mark or free functions - Wx deals with this
   rb_event = Data_Wrap_Struct(cEvent, 0, 0, 0);

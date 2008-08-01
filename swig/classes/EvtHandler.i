@@ -76,13 +76,17 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 extern swig_class cWxEvtHandler;
 static VALUE callbacks = Qnil;
 
-// Class which stores the ruby proc associated with an event handler. 
+// Class which stores the ruby proc associated with an event handler. We
+// also cache the "call" symbol as this improves speed for event
+// handlers which are called many times (eg evt_motion)
 class wxRbCallback : public wxObject 
 {
 
 public:
-    wxRbCallback(VALUE func) { m_func = func; }
-    wxRbCallback(const wxRbCallback &other) { m_func = other.m_func; }
+    wxRbCallback(VALUE func) { m_func = func; 
+                               m_call_id = rb_intern("call"); }
+    wxRbCallback(const wxRbCallback &other) { m_func = other.m_func; 
+                                             m_call_id = rb_intern("call"); }
 
     // This method handles all events on the WxWidgets/C++ side. It link
     // inspects the event and based on the event's type wraps it in the
@@ -93,9 +97,10 @@ public:
     {
       VALUE rb_event = wxRuby_WrapWxEventInRuby(&event);
       wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
-      rb_funcall(cb->m_func, rb_intern("call"),1, rb_event);
+      rb_funcall(cb->m_func, cb->m_call_id, 1, rb_event);
     }
 
+    ID m_call_id;
     VALUE m_func;
 };
 }
