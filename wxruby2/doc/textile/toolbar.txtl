@@ -1,16 +1,16 @@
 h1(#wxtoolbar). Wx::ToolBar
 
-The name ToolBar is defined to be a synonym for one of the following classes:
+A ToolBar is a collection of graphical buttons and/or controls which is attached
+to the edge of a "Wx::Frame":frame.html. It provides quick access to
+one-step application functions, such as opening or saving a file, or
+cutting and pasting text.
 
-
-* *ToolBar95* The native Windows 95 toolbar. Used on Windows 95, NT 4 and above.
-* *ToolBarMSW* A Windows implementation. Used on 16-bit Windows.
-* *ToolBarGTK* The GTK toolbar.
-
+It has a native style on all platforms; note that on OS X, native
+toolbars may only be placed at the top of a Frame. Use
+Frame#set_tool_bar to set a toolbar to be managed by a Frame and ensure
+native appearance.
 
 h2. Derived from
-
-ToolBarBase
 
 "Control":control.html
 
@@ -29,31 +29,8 @@ to be managed by the frame, so that Widgets can use a combined
 menubar and toolbar. Where you manage your own toolbars, create a ToolBar
 as usual.
 
-The meaning of a "separator" is a vertical line under Windows and simple space under GTK+.
-
-*ToolBar95:* Note that this toolbar paints tools to reflect system-wide colours.
-If you use more than 16 colours in your tool bitmaps, you may wish to suppress
-this behaviour, otherwise system colours in your bitmaps will inadvertently be
-mapped to system colours. To do this, set the @msw.remap@ system option
-before creating the toolbar:
-
-
-   SystemOptions::SetOption(T("msw.remap"), 0);
- 
-
-If you wish to use 32-bit images (which include an alpha channel for transparency)
-use:
-
-
-   SystemOptions::SetOption(T("msw.remap"), 2);
- 
-
-then colour remapping is switched off, and a transparent background used. But only
-use this option under Windows XP with true colour:
-
-
-   (TheApp->GetComCtl32Version() >= 600 && ::DisplayDepth() >= 32)
- 
+The meaning of a "separator" is a vertical line under Windows and simple
+space under GTK+.
 
 h2. Window styles
 
