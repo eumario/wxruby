@@ -1,7 +1,5 @@
-// wxListCtrl.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004-2008, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
 #if !defined(_wxListCtrl_h_)
 #define _wxListCtrl_h_
@@ -30,6 +28,7 @@ public:
   wxTextCtrl * GetEditControl() const;
   wxImageList* GetImageList(int  which ) const;
   bool GetItem(wxListItem&  info ) const;
+  wxColour GetItemBackgroundColour(long item) const;
   int GetItemCount() const;
   long GetItemData(long  item ) const;
   bool GetItemPosition(long  item , wxPoint&  pos ) const;
@@ -66,6 +65,7 @@ public:
   void SetImageList(wxImageList*  imageList , int  which ) ;
   bool SetItem(wxListItem&  info ) ;
   long SetItem(long  index , int  col , const  wxString& label , int  imageId = -1) ;
+  void SetItemBackgroundColour(long item, const wxColour& col);
   void SetItemCount(long  count ) ;
   bool SetItemData(long  item , long  data ) ;
   bool SetItemImage(long  item , int  image , int  selImage ) ;
