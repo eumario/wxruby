@@ -98,7 +98,7 @@ a class derived from TaskBarIcon.
 h4. Note
 
 It is recommended to override
-"create_popup_icon":#TaskBarIcon_createpopupicon
+"create_popup_menu":#TaskBarIcon_createpopupmenu
 callback instead of calling this method from event handler, because some
 ports (e.g. Cocoa) may not implement PopupMenu and mouse click events at all.
 
