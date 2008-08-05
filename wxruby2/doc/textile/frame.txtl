@@ -440,27 +440,18 @@ h4. See also
 
 h3(#Frame_setstatuswidths). Frame#set_status_widths
 
-  *set_status_widths*(%(arg-type)Integer% n,  %(arg-type)Integer% widths)
+  *set_status_widths*(%(arg-type)Array% widths)
 
-Sets the widths of the fields in the status bar.
+Sets the widths of the fields in the status bar. This should be an array
+of integers corresponding to the desired pixel widths of each field. The
+array should therefore be have the same length as the number of fields
+set up by a previous call to "set_status_bar":#Frame_setstatusbar. 
 
-h4. Parameters
-
-* _n_ The number of fields in the status bar. It must be the
-same used in "create_status_bar":#Frame_createstatusbar.
-* _widths_ Must contain an array of _n_ integers, each of which is a status field width
-in pixels. A value of -1 indicates that the field is variable width; at least one
-field must be -1. You should delete this array after calling *SetStatusWidths*.
-
-h4. Remarks
-
-The widths of the variable fields are calculated from the total width of all fields,
-minus the sum of widths of the non-variable fields, divided by the number of
-variable fields.
-
-
-
-
+As an alternative to specifying a fixed pixel width for a field, the
+value -1 can be used to request a variable-width field. The widths of
+the variable fields are calculated from the total width of all fields,
+minus the sum of widths of the non-variable fields, divided by the
+number of variable fields.
 
 h3(#Frame_settoolbar). Frame#set_tool_bar
 
