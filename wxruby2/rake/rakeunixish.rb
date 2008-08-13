@@ -135,11 +135,13 @@ else
   end
 end  
 
-# Bit ugly - if MEdiaCtrl is included, need to test if we have a
-# monolithic build (in which case, the link deps are the same). If not
-# monolithic, need to add wxmedia to the list of required libs
+# Bit ugly - if MEdiaCtrl is included, need to test if 
+# 1) we have a dynamic build (esp Linux, non-monolithic)
+# 2) we have a non-monolithic static build (identified by linkdeps)
+# PRobably not 100% correct but deals with the common cases..
 if not $excluded_classes.include?('MediaCtrl') 
-  if wx_config('--linkdeps std') != wx_config('--linkdeps std,media')
+  if $dynamic_build or
+     wx_config('--linkdeps std') != wx_config('--linkdeps std,media') # 2)
     libs_str << ',media'
   end
 end
