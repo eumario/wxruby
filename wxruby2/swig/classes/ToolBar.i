@@ -33,16 +33,9 @@ enum
     wxTB_RIGHT        = 0x4000
 };
 
-// VERY weird swig bug here...
-// If we have the comment, the %if, %ignore and %endif,
-// no code is generated. 
-// Removing any single element doesn't help, but removing 
-// all of it makes the problem go away!
-// under GTK, this doesn't exist
-//%if !defined(SWIGMAC) && !defined(SWIGWIN)
-%ignore SetMargins(const wxSize&);
-//%endif
-
+// These don't work as you would think...
+%ignore wxToolBar::AddTool(wxToolBarToolBase* tool);
+%ignore wxToolBar::InsertTool(size_t pos, wxToolBarToolBase* tool);
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
