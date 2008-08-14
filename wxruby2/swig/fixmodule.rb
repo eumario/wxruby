@@ -96,7 +96,7 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
 
       # Instead of defining a new module, set the container module equal
       # to the real main Wx:: module.
-      if line['rb_define_module("Wx")']
+      if line['rb_define_module("Wx']
         line = "  mWx#{core_name} = #{$main_module}; // fixmodule.rb"
         found_define_module = true
       end
