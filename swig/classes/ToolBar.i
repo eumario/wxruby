@@ -37,6 +37,9 @@ enum
 %ignore wxToolBar::AddTool(wxToolBarToolBase* tool);
 %ignore wxToolBar::InsertTool(size_t pos, wxToolBarToolBase* tool);
 
+// This is missing on GTK
+%ignore wxToolBar::SetMargins(const wxSize& size);
+
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
