@@ -34,8 +34,6 @@ space under GTK+.
 
 h2. Window styles
 
-
-
 |@TB_FLAT@|Gives the toolbar a flat look (Windows and GTK only).|
 |@TB_DOCKABLE@|Makes the toolbar floatable and dockable (GTK only).|
 |@TB_HORIZONTAL@|Specifies horizontal layout (default).|
@@ -188,28 +186,28 @@ h4. See also
 
 h3(#ToolBar_addtool). ToolBar#add_tool
 
- Integer *add_tool*(%(arg-type)Integer% toolId, 
-                     %(arg-type)String% label,
-                     %(arg-type)"Bitmap":bitmap.html% bitmap1, 
-                     %(arg-type)String% shortHelpString = "", 
-                     %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
+ "ToolBarTool":toolbartool.html *add_tool*(%(arg-type)Integer% toolId, 
+                         %(arg-type)String% label,
+                         %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                         %(arg-type)String% shortHelpString = "", 
+                         %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
 
- Integer *add_tool*(%(arg-type)Integer% toolId, 
-                     %(arg-type)String% label, 
-                     %(arg-type)"Bitmap":bitmap.html% bitmap1, 
-                     %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
-                     %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL, 
-                     %(arg-type)String% shortHelpString = "", 
-                     %(arg-type)String% longHelpString = "", 
-                     %(arg-type)Object% clientData = nil)
+ "ToolBarTool":toolbartool.html *add_tool*(%(arg-type)Integer% toolId, 
+                         %(arg-type)String% label, 
+                         %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                         %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
+                         %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL, 
+                         %(arg-type)String% shortHelpString = "", 
+                         %(arg-type)String% longHelpString = "", 
+                         %(arg-type)Object% clientData = nil)
 
 
-Adds a tool to the toolbar, and return the integer position of the newly
-added tool. 
+Adds a tool to the toolbar. Returns a "ToolBarTool":toolbartool.html object with
+information about the newly added item.
 
-The first (short and most commonly used) version
-has fewer parameters than the full version at the price of not being able to
-specify some of the more rarely used button features. 
+The first (short and most commonly used) version has fewer parameters
+than the full version at the price of not being able to specify some of
+the more rarely used button features.
 
 h4. Parameters
 
@@ -241,7 +239,7 @@ h4. See also
 
 h3(#ToolBar_addchecktool). ToolBar#add_check_tool
 
- "ToolBarToolBase":toolbartoolbase.html *add_check_tool*(%(arg-type)Integer% toolId, 
+ "ToolBarTool":toolbartool.html *add_check_tool*(%(arg-type)Integer% toolId, 
                                   %(arg-type)String% label, 
                                   %(arg-type)"Bitmap":bitmap.html% bitmap1, 
                                   %(arg-type)"Bitmap":bitmap.html% bitmap2, 
@@ -259,7 +257,7 @@ h4. See also
 
 h3(#ToolBar_addradiotool). ToolBar#add_radio_tool
 
- "ToolBarToolBase":toolbartoolbase.html *add_radio_tool*(%(arg-type)Integer% toolId, 
+ "ToolBarTool":toolbartool.html *add_radio_tool*(%(arg-type)Integer% toolId, 
                                   %(arg-type)String% label, 
                                   %(arg-type)"Bitmap":bitmap.html% bitmap1, 
                                   %(arg-type)"Bitmap":bitmap.html% bitmap2, 
@@ -433,6 +431,7 @@ h4. Parameters
 h4. See also
 
 "ToolBar#set_tool_long_help":toolbar.html#ToolBar_settoollonghelp, "ToolBar#set_tool_short_help":toolbar.html#ToolBar_settoolshorthelp 
+
 h3(#ToolBar_gettoolpacking). ToolBar#get_tool_packing
 
  Integer *get_tool_packing*()
@@ -492,7 +491,7 @@ h4. See also
 
 h3(#ToolBar_insertcontrol). ToolBar#insert_control
 
- "ToolBarToolBase":toolbartoolbase.html *insert_control*(%(arg-type)Integer% pos, 
+ "ToolBarTool":toolbartool.html *insert_control*(%(arg-type)Integer% pos, 
                                   %(arg-type)"Control":control.html% control)
 
 Inserts the control into the toolbar at the given position.
@@ -507,7 +506,7 @@ h4. See also
 
 h3(#ToolBar_insertseparator). ToolBar#insert_separator
 
- "ToolBarToolBase":toolbartoolbase.html *insert_separator*(%(arg-type)Integer% pos)
+ "ToolBarTool":toolbartool.html *insert_separator*(%(arg-type)Integer% pos)
 
 Inserts the separator into the toolbar at the given position.
 
@@ -521,18 +520,19 @@ h4. See also
 
 h3(#ToolBar_inserttool). ToolBar#insert_tool
 
- Integer *insert_tool*(%(arg-type)Integer% pos, 
-                         %(arg-type)Integer% toolId,
-						 %(arg-type)String% label, 
-                         %(arg-type)"Bitmap":bitmap.html% bitmap1, 
-                         %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
-						 %(arg-type)Integer% type = Wx::ITEM_NORMAL,
-                         %(arg-type)String% shortHelp = "", 
-                         %(arg-type)String% longHelp = "",
-                         %(arg-type)Object% clientData = nil)
+  "ToolBarTool":toolbartool.html *insert_tool*(%(arg-type)Integer% pos, 
+                              %(arg-type)Integer% toolId,
+		          	          %(arg-type)String% label, 
+                              %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                              %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
+			    			  %(arg-type)Integer% type = Wx::ITEM_NORMAL,
+                              %(arg-type)String% shortHelp = "", 
+                              %(arg-type)String% longHelp = "",
+                              %(arg-type)Object% clientData = nil)
 
 Inserts the tool with the specified attributes into the toolbar at the given
-position. Returns the position of the newly inserted tool.
+position. Returns a "ToolBarTool":toolbartool.html object with
+information about the newly inserted item.
 
 You must call "Realize":toolbarrealize.html for the change to take place.
 
@@ -622,7 +622,7 @@ This function should be called after you have added tools.
 
 h3(#ToolBar_removetool). ToolBar#remove_tool
 
- "ToolBarToolBase":toolbartoolbase.html *remove_tool*(%(arg-type)Integer% id)
+ "ToolBarTool":toolbartool.html *remove_tool*(%(arg-type)Integer% id)
 
 Removes the given tool from the toolbar but doesn't delete it. This allows to
 insert/add this tool back to this (or another) toolbar later.
