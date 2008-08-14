@@ -4,10 +4,12 @@
 %include "../common.i"
 
 %module(directors="1") wxMenu
-// FIXME - deletion of pop-up menus
-// MEnus associated with a MenuBar and Frame are deleted automatically
-// on the C++ side when the MenuBar is destroyed.
-// However, popup menus may not be being collected
+// NB: wxMenu receives special memory management in fixmodule.rb. A
+// wxMenu is automatically deleted by wxWidgets when the associated
+// Frame/MenuBar or popup is closed. However, deletion isn't notified by
+// the normal WindowDestroyEvent mechanism in App.i, b/c Menu isn't a
+// Window. So we have to hack into the director dtor to detach the ruby
+// object from the now-destroyed C++ object, else crashes will occur on GC. 
 GC_NEVER(wxMenu);
 
 // Any MenuItems passed in to wx become owned by C++
