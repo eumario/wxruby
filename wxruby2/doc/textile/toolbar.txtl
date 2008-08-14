@@ -332,10 +332,9 @@ h4. See also
 
 h3(#ToolBar_findbyid). ToolBar#find_by_id
 
- Integer *find_by_id*(%(arg-type)Integer% id)
+ "ToolBarTool":toolbartool.html *find_by_id*(%(arg-type)Integer% id)
 
-Returns the position of the tool identified by _id_ or nil if no
-corresponding tool is found.
+Returns information about the item with the passed-in id.
 
 h3(#ToolBar_findcontrol). ToolBar#find_control
 
