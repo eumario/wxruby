@@ -1,11 +1,13 @@
 # fixmodule.rb
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+# Copyright 2004-2008 wxRuby Development Team
+# Released under the MIT-style wxruby2 license
 
-#   This script post-processes the SWIG output
-#   to allow a single Ruby module to be defined 
-#   across multiple SWIG modules
-#   I know it's ugly :-(
+# This script post-processes the SWIG output to allow a single Ruby
+# module to be defined across multiple SWIG modules - ie so that all
+# the Wx classes are defined within the Wx:: module, and have the
+# correct inheritance hierarchy.
+#
+# It also fixes a number of other problems with SWIG's output
 
 require 'swig/classes/include/parents'
 
@@ -19,11 +21,10 @@ def fixmodule(filename)
   found_define_class = false
   
   core_name = File.basename(filename, ".cpp")
-  puts("core_name: #{core_name}")
-  wx_name = "wx"+core_name
-  this_module = 'mWx' + core_name
+  puts "Class: #{core_name}"
+  wx_name = "wx" + core_name
   parent_wxklass = $parents[wx_name]
-  if (parent_wxklass)
+  if parent_wxklass
     parent_name = parent_wxklass[2..-1]
     puts("      : #{parent_name}")
   end
@@ -71,6 +72,13 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
         end
       end # end horrible TreeCtrl fixes
 
+      # Ugly: special fixes for Menu - can be deleted by wxWidgets from
+      # the C++ side, so we need to unhook the ruby object in the dtor
+      if core_name == 'Menu' and line['~SwigDirector_wxMenu()']
+        line += "  SWIG_RubyUnlinkObjects(this);\n  SWIG_RubyRemoveTracking(this);\n"
+      end
+
+      
       # comment out swig_up because it is defined global in every module
       if(line.index("bool Swig::Director::swig_up"))
         line = "//" + line
@@ -86,16 +94,16 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
       #TODO 1.3.30
       #			end
 
-      # instead of defining a new module,
-      if(line.index("rb_define_module(\"Wx"))
-        # set this module equal to the real main module
-        line = "#{this_module} = #{$main_module};"
+      # Instead of defining a new module, set the container module equal
+      # to the real main Wx:: module.
+      if line['rb_define_module("Wx")']
+        line = "  mWx#{core_name} = #{$main_module}; // fixmodule.rb"
         found_define_module = true
       end
       
-      # at the top of our Init_ function,
+      # at the top of our Init_ function, make sure we only initialize
+      # ourselves once
       if(line.index("Init_#{wx_name}("))
-        # make sure we only initialize ourselves once
         line += "static bool initialized;\n"
         line += "if(initialized) return;\n"
         line += "initialized = true;\n"
