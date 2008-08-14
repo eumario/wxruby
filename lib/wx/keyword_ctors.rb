@@ -106,10 +106,6 @@ module Wx
         :choices   => [] # for Choice, ComboBox etc
       }
 
-      
-      # A named parameter in a Wx constructor parameter list
-      Parameter = Struct.new( :name, :default )
-
       attr_writer :param_spec
       def param_spec
         @param_spec ||= []
@@ -132,22 +128,7 @@ module Wx
       end
 
       def args_as_list(*mixed_args)
-        # get keyword arguments from mixed args if supplied, else empty
-        kwa = mixed_args.last.kind_of?(Hash) ? mixed_args.pop : {}
-        out_args = []
-        param_spec.each_with_index do | param, i |
-          if arg = mixed_args[i] # use the supplied list arg 
-            out_args << arg
-          elsif kwa.key?(param.name) # use the keyword arg
-            out_args << kwa[param.name]
-          else # use the default argument
-            out_args << param.default
-          end
-        end
-        out_args
-      rescue
-        Kernel.raise ArgumentError, 
-                     "Bad arg composition of #{mixed_args.inspect}"
+        Wx::args_as_list(param_spec, *mixed_args)
       end
 
       def args_as_hash(*mixed_args)
