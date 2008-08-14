@@ -35,6 +35,7 @@ Dir.glob(class_files) do | class_file |
 end
 
 # Load in syntax sweetner
+require 'wx/helpers'
 require 'wx/accessors'
 require 'wx/keyword_ctors'
 require 'wx/keyword_defs'
