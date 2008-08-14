@@ -284,29 +284,32 @@ h2(#device_contexts). Device contexts
 
 Device contexts are surfaces that may be drawn on. They allow the
 application to draw lines, shapes, images and text directly. This can be
-on-screen within an application GUI, or onto paper.  They provide
-abstraction that allows parameterisation of your drawing code by passing
-different device contexts.
+on-screen within an application GUI, or onto paper via a printer. They
+provide abstraction by allowing the same set of drawing methods,
+documented in "DC":dc.html, to be used with different output targets.
 
-|ClientDC|A device context to access the client area outside OnPaint events|
-|PaintDC|A device context to access the client area inside OnPaint events|
+|DC|The device context base class; all drawing methods are listed here|
+|ClientDC|A device context to access the client area outside Paint events|
+|PaintDC|A device context to access the client area inside Paint events|
 |WindowDC|A device context to access the non-client area|
 |ScreenDC|A device context to access the entire screen|
-|DC|The device context base class|
 |MemoryDC|A device context for drawing into bitmaps|
+|GCDC|A device context for anti-aliased drawing|
 |MetafileDC|A device context for drawing into metafiles|
 |MirrorDC|A proxy device context allowing for simple mirroring.|
 |PostScriptDC|A device context for drawing into PostScript files|
 |PrinterDC|A device context for drawing to printers|
 |RendererNative|Assists drawing native-look GUI elements in custom controls|
 
-wxRuby also provides an alternative set of Graphics classes that can be
-used for high-quality anti-aliased drawing:
+The interface provided by the DeviceContext classes will be sufficient
+for most normal drawing needs. wxRuby also provides an advanced set of
+drawing classes which offer complex lines, splines and matrix
+transformations:
 
-|GraphicsContext|An anti-aliased Device Context|
+|GraphicsContext|An anti-aliased drawing context|
 |GraphicsBrush|Brush for use with GraphicsContext|
 |GraphicsFont|Font for use with GraphicsContext|
-|GraphicsPath| Geometric path for use with GraphicsContext|
+|GraphicsPath|Geometric path for use with GraphicsContext|
 |GraphicsPen|Pen for use with GraphicsContext|
 |GraphicsMatrix|Matrix for specifying transformations in a GraphicsContext|
 

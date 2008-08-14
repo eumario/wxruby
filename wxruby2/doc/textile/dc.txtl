@@ -2,25 +2,37 @@ h1(#wxdc). Wx::DC
 
 A DC is a _device context_ onto which graphics and text can be drawn.
 It is intended to represent a number of output devices in a generic way,
-so a window can have a device context associated with it, and a printer also has a device context.
-In this way, the same piece of code may write to a number of different devices,
-if the device context is used as a parameter.
+so a window can have a device context associated with it, and a printer
+also has a device context.  In this way, the same piece of code may
+write to a number of different devices, if the device context is used as
+a parameter.
 
-Derived types of DC have documentation for specific features
-only, so refer to this section for most device context information.
+This DC class itself is not used directly; instead, a particular type of
+DC is used depending on the surface to be drawn upon. However, the
+common drawing methods are all documented here. Derived types of DC
+have documentation for specific features only, such as when to use them,
+and how to instantiate them.
 
 Please note that in addition to the versions of the methods documented here,
 there are also versions which accept single @Point@ parameter instead of
 two @Integer@ ones or @Point@ and @Size@ instead of four of
 them.
 
-h2. Support for Transparency / Alpha Channel
+h2. Support for Transparency / Alpha Channel / Anti-aliasing
 
-On Mac OS X when using Core Graphics (_MAC_USE_CORE_GRAPHICS set to 1)
-colors with alpha are supported, so instances of "Pen":pen.html or
-"Brush":brush.html that are built from "Colour":colour.html use the
-color's alpha values when stroking or filling.
+The standard Device Contexts such as "WindowDC":windowdc.html do not, on
+Windows and GTK, support anti-aliasing of lines and drawing and painting
+with semi-transparent colours. Colours with an alpha channel
+(transparency level) will be drawn solid. To get anti-aliased drawing
+and support for alpha channels, use "GCDC":gcdc.html. The same drawing
+methods can be used with that class. See also
+"GraphicsContext":graphicscontext.html and associated classes for
+advanced drawing. 
 
+In wxRuby on Mac OS X, drawing and painting with semi-transparent
+colours is supported by normal Device Contexts; however, GCDC can be
+used without harm so the same code can be used cross-platform if
+anti-aliased drawing is desired.
 
 h2. Derived from
 
