@@ -11,27 +11,8 @@ GC_MANAGE_AS_OBJECT(wxTextDataObject);
 %}
 
 %include "../shared/data_format_typemap.i"
-
-%ignore GetAllFormats;
-%feature("nodirector") GetAllFormats;
-
-%ignore GetDataSize;
-%feature("nodirector") GetDataSize;
-
-%ignore GetDataHere;
-%feature("nodirector") GetDataHere;
-
-%ignore GetDataHere;
-%feature("nodirector") GetDataHere;
-
-%ignore GetFormatCount;
-%feature("nodirector") GetFormatCount;
-
-%ignore GetPreferredFormat;
-%feature("nodirector") GetPreferredFormat;
-
-%ignore SetData;
-%feature("nodirector") SetData;
+// This is a directly-usable class, so don't generate directors
+%include "../shared/data_object_final_class.i"
 
 %import "include/wxDataObjectSimple.h"
 %import "include/wxDataObject.h"
