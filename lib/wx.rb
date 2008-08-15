@@ -25,6 +25,8 @@ Wx::WXWIDGETS_VERSION = '%i.%i.%i' % [ Wx::WXWIDGETS_MAJOR_VERSION,
                                        Wx::WXWIDGETS_MINOR_VERSION,
                                        Wx::WXWIDGETS_RELEASE_NUMBER ]
 
+# Helper functions
+require 'wx/helpers'
 
 # Load in all the class extension methods written in ruby
 # evthandler must be required first b/c it sets up methods modified elsewhere
@@ -34,8 +36,7 @@ Dir.glob(class_files) do | class_file |
   require 'wx/classes/' + class_file[/\w+\.rb$/]
 end
 
-# Load in syntax sweetner
-require 'wx/helpers'
+# Load in syntax sweeteners
 require 'wx/accessors'
 require 'wx/keyword_ctors'
 require 'wx/keyword_defs'
