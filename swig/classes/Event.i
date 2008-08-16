@@ -139,6 +139,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_QUERY_END_SESSION;// 404)
 %constant const int wxEVT_ACTIVATE_APP;// 405)
 
+%constant const int wxEVT_HIBERNATE; // 443
 #ifdef wxHAS_POWER_EVENTS  // currently Win32 only
 %constant const int wxEVT_POWER_SUSPENDING;// 406)
 %constant const int wxEVT_POWER_SUSPENDED;// 407)
@@ -187,6 +188,11 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_IDLE;// 439)
 %constant const int wxEVT_UPDATE_UI;// 440)
 %constant const int wxEVT_END_PROCESS; // 440
+
+// Clipboard events
+%constant const int wxEVT_COMMAND_TEXT_COPY; // 444
+%constant const int wxEVT_COMMAND_TEXT_CUT; // 445 
+%constant const int wxEVT_COMMAND_TEXT_PASTE; // 446
 
 %constant const int wxEVT_COMMAND_LEFT_CLICK;// 500)
 %constant const int wxEVT_COMMAND_LEFT_DCLICK;// 501)
