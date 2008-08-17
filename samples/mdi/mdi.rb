@@ -7,60 +7,56 @@ rescue LoadError
 end
 require 'wx'
 
-
-# MDI sample for wxRuby
-# slapped together quickly by Kevin Smith
-
-ID_NEXT = 1
-ID_PREVIOUS = 2
-ID_CASCADE = 3
-ID_TILE = 4
-ID_CREATE = 5
-ID_CLOSE = 6
-ID_EXIT = 99
-
+# Simple MDI-based parent frame with menus to create, cycle through and
+# close child frames within in.
+#
+# NB: MDI is only properly implemented on Windows, and is simulated by
+# using a Notebook on Linux and OS X. Therefore its use is not
+# recommended for cross-platform applications. An alternative interface
+# strategy may be to use separate frames, or possibly the AUI classes.
 class MyFrame < Wx::MDIParentFrame
   def initialize(title)
-    super(nil, -1, title,Wx::DEFAULT_POSITION,Wx::Size.new(500,400))
+    super(nil, :title => title, :size => [ 500, 400 ] )
     
     @child_number = 0
     
     menuFile = Wx::Menu.new
-    menuFile.append(ID_EXIT, "E&xit\tAlt-X")
+    menuFile.append(Wx::ID_EXIT, "E&xit\tAlt-X")
+    evt_menu Wx::ID_EXIT, :close
+
     menuMDI = Wx::Menu.new
-    menuMDI.append(ID_NEXT, "&Next Child\tCtrl-F6")
-    menuMDI.append(ID_PREVIOUS, "&Previous Child")
-    menuMDI.append_separator()
-    menuMDI.append(ID_CASCADE, "&Cascade")
-    menuMDI.append(ID_TILE, "&Tile")
-    menuMDI.append_separator()
-    menuMDI.append(ID_CREATE, "&Add Child")
-    menuMDI.append(ID_CLOSE, "&Remove Child\tCtrl-F4")
+    menuMDI.append(Wx::ID_FORWARD, "&Next Child\tCtrl-F6")
+    evt_menu Wx::ID_FORWARD, :activate_next
+    menuMDI.append(Wx::ID_BACKWARD, "&Previous Child")
+    evt_menu Wx::ID_BACKWARD, :activate_previous
+    menuMDI.append_separator
+
+    mi_cascade = menuMDI.append("&Cascade")
+    evt_menu mi_cascade, :cascade
+    mi_tile    = menuMDI.append("&Tile")
+    evt_menu mi_tile, :tile
+    menuMDI.append_separator
+
+    menuMDI.append(Wx::ID_NEW, "&Add Child")
+    evt_menu Wx::ID_NEW, :create_child
+    menuMDI.append(Wx::ID_CLOSE, "&Remove Child\tCtrl-F4")
+    evt_menu Wx::ID_CLOSE, :on_close_child
+
     menuBar = Wx::MenuBar.new
     menuBar.append(menuFile, "&File")
     menuBar.append(menuMDI, "&Window")
-    set_menu_bar(menuBar)
-    
-    evt_menu(ID_EXIT) { close }
-    evt_menu(ID_NEXT) { activate_next }
-    evt_menu(ID_PREVIOUS) { activate_previous }
-    evt_menu(ID_CASCADE) { cascade }
-    evt_menu(ID_TILE) { tile }
-    evt_menu(ID_CREATE) { create_child }
-    evt_menu(ID_CLOSE) { on_close_child }
+
+    self.menu_bar = menuBar
     
     create_status_bar(2).set_status_widths([100, -1])
     set_status_text("Some features only work on MS Windows", 1)
 
-    create_child
-    create_child
-    create_child
+    3.times { create_child }
   end
   
   def on_close_child
-    active = get_active_child
-    if(active)
-        active.close
+    if active_child
+        active_child.close
     end
   end
   
@@ -71,12 +67,11 @@ class MyFrame < Wx::MDIParentFrame
   end
 end
 
-class NothingApp < Wx::App
+class MDIApp < Wx::App
   def on_init
     frame = MyFrame.new("MDI App")
 	frame.show
   end
 end
 
-a = NothingApp.new
-a.main_loop()
+MDIApp.new.main_loop
