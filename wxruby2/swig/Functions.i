@@ -9,6 +9,9 @@
 // * shortcut methods for displaying simple dialogs
 // * logging functions
 // * the xrcid macro
+// * display information methods
+// * global mouse/keyboard information
+
 
 %{
 //NO_CLASS - This tells fixmodule not to expect a class
@@ -105,6 +108,7 @@ void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
 void wxEndBusyCursor();
 void wxBell();
 
+// System information
 wxString wxGetEmailAddress();
 wxString wxGetHostName();
 wxString wxGetFullHostName();
@@ -112,8 +116,14 @@ wxString wxGetUserId();
 wxString wxGetUserName();
 wxString wxGetHomeDir();
 
+// Mouse / keyboard information
 bool wxGetKeyState(wxKeyCode key);
+wxWindow* wxFindWindowAtPoint(const wxPoint& pt);
+wxWindow * wxGetActiveWindow();
+wxPoint wxGetMousePosition();
 
+
+// Dialog shortcuts
 int wxMessageBox(const wxString& message, 
 				 const wxString& caption = wxT("Message"), 
 				 int style = wxOK, 
@@ -159,6 +169,7 @@ wxString wxFileSelector(const wxString& message,
 
 void wxAboutBox(const wxAboutDialogInfo& info);
 
+// Display information methods
 int wxDisplayDepth();
 wxSize wxGetDisplaySize();
 wxSize wxGetDisplaySizeMM();
