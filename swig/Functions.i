@@ -30,7 +30,7 @@ class wxRubyApp
 public:
 
 };
-
+// Log a Wx Message to the current Wx log output
 static VALUE log_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
@@ -38,6 +38,7 @@ static VALUE log_message(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+// Log a Wx Status message to the current Wx log output
 static VALUE log_status(int argc, VALUE *argv, VALUE self)
 {
     if(TYPE(argv[0])==T_DATA) {
@@ -53,7 +54,7 @@ static VALUE log_status(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-
+// Log a Wx Warning message to the current Wx log output
 static VALUE log_warning(int argc, VALUE *argv, VALUE self)
 {
     VALUE str = rb_f_sprintf(argc, argv);
@@ -69,18 +70,30 @@ static VALUE log_error(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-
+// Returns the global app object
 static VALUE get_app(VALUE self)
 {
   return rb_const_get(mWxruby2, rb_intern("THE_APP"));
 }
 
+// Converts a string XRC id into a Wx id
 static VALUE 
 xrcid(VALUE self,VALUE str_id)  
 {
   wxString temp(StringValuePtr(str_id), wxConvUTF8);
   int ret = wxXmlResource::GetXRCID(temp);
   return INT2NUM(ret);
+}
+
+
+// Returns the pointer address of the underlying C++ object as a hex
+// string - useful for debugging
+static VALUE
+cpp_ptr_addr(VALUE self, VALUE obj)
+{
+  size_t ptr = (size_t)DATA_PTR(obj);
+  return rb_funcall( rb_mKernel, rb_intern("sprintf"), 2, 
+                     rb_str_new2("0x%x"), OFFT2NUM(ptr) );
 }
 %} // end of Header code
 
@@ -191,4 +204,5 @@ wxString wxGetStockHelpString(wxWindowID id,
     rb_define_module_function(mWxruby2, "log_error", VALUEFUNC(log_error), -1);
     rb_define_module_function(mWxruby2, "get_app", VALUEFUNC(get_app), 0);
     rb_define_module_function(mWxruby2, "xrcid", VALUEFUNC(xrcid), 1);
+    rb_define_module_function(mWxruby2, "ptr_addr", VALUEFUNC(cpp_ptr_addr), 1);
 %}
