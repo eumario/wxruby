@@ -6,9 +6,13 @@
 
 // First hide the old Wx definitions of these methods - which segfault
 %ignore *::GetClientData(int n) const;
+%feature("nodirector") *::GetClientData(int n) const;
 %ignore *::SetClientData(int n, void *data);
+%feature("nodirector") *::SetClientData(int n, void *data);
 %ignore *::GetClientObject(int n) const;
+%feature("nodirector") *::GetClientObject(int n) const;
 %ignore *::SetClientObject(int  n, wxClientData * data);
+%feature("nodirector") *::SetClientObject(int  n, wxClientData * data);
 
 %{
   extern swig_class cWxControlWithItems;
