@@ -116,7 +116,7 @@ cpp_ptr_addr(VALUE self, VALUE obj)
 %typemap(freearg) wxString & "if ( argc > $argnum - 1 ) delete $1;"
 %typemap(freearg) wxString* "if ( argc > $argnum - 1 ) delete $1;"
 
-
+// App-wide user information methods
 void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
 void wxEndBusyCursor();
 void wxBell();
@@ -186,12 +186,14 @@ void wxAboutBox(const wxAboutDialogInfo& info);
 int wxDisplayDepth();
 wxSize wxGetDisplaySize();
 wxSize wxGetDisplaySizeMM();
+bool wxColourDisplay();
+wxRect wxGetClientDisplayRect();
 
+// Managing stock ids
 bool wxIsStockID(wxWindowID id);
 bool wxIsStockLabel(wxWindowID id, const wxString& label);
 wxString wxGetStockLabel(wxWindowID id,
                          long flags = wxSTOCK_WITH_MNEMONIC);
-
 wxAcceleratorEntry wxGetStockAccelerator(wxWindowID id);
 wxString wxGetStockHelpString(wxWindowID id,
                               wxStockHelpStringClient client = wxSTOCK_MENU);
