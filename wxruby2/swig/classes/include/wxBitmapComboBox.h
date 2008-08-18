@@ -4,7 +4,7 @@
 #if !defined(_wxBitmapComboBox_h_)
 #define _wxBitmapComboBox_h_
 
-class wxBitmapComboBox : public wxOwnerDrawnComboBox, public wxBitmapComboBoxBase
+class wxBitmapComboBox : public wxComboBox
 {
  public:
 
