@@ -5,6 +5,6 @@ class Wx::ControlWithItems
   include Enumerable
   # Passes each valid item index into the passed block
   def each
-    0.upto(count - 1) { | i | yield i }
+    0.upto(get_count - 1) { | i | yield i }
   end
 end
