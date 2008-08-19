@@ -158,6 +158,13 @@ VALUE wxRuby_WrapWxEventInRuby(wxEvent *wx_event)
   // EvtHandler.evt_class_for_type method)
   VALUE event_type_id =  INT2NUM( wx_event->GetEventType() );
   VALUE cEvent = rb_hash_aref(Evt_Type_Map, event_type_id);
+
+  // Check we have a valid class; warn and map to default Wx::Event if not
+  if ( NIL_P(cEvent) )
+    {
+      cEvent = cWxEvent.klass;
+      rb_warn("Unmapped event type %i", event_type_id);
+    }
   
   // Wrap without mark or free functions - Wx deals with this
   rb_event = Data_Wrap_Struct(cEvent, 0, 0, 0);
