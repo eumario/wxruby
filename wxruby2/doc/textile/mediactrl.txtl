@@ -30,6 +30,9 @@ h2. Methods
 * "MediaCtrl#get_playback_rate":#MediaCtrl_getplaybackrate
 * "MediaCtrl#get_volume":#MediaCtrl_getvolume
 * "MediaCtrl#get_state":#MediaCtrl_getstate
+* "MediaCtrl#is_paused":#MediaCtrl_ispaused
+* "MediaCtrl#is_playing":#MediaCtrl_isplaying
+* "MediaCtrl#is_stopped":#MediaCtrl_isstopped
 * "MediaCtrl#length":#MediaCtrl_length
 * "MediaCtrl#load":#MediaCtrl_load
 * "MediaCtrl#load":#MediaCtrl_load
@@ -207,6 +210,24 @@ be one of the following constants:
 |*Wx::MEDIASTATE_STOPPED*|The movie has stopped.|
 |*Wx::MEDIASTATE_PAUSED*|The movie is paused.|
 |*Wx::MEDIASTATE_PLAYING*|The movie is currently playing.|
+
+h3(#MediaCtrl_ispaused). MediaCtrl#is_paused
+
+ Boolean *is_paused*()
+
+  Returns @true@ if media playback is currently paused, else @false@.
+
+h3(#MediaCtrl_isplaying). MediaCtrl#is_playing
+
+ Boolean *is_playing*()
+
+Returns @true@ if the media is currently playing, else @false@.
+
+h3(#MediaCtrl_isstopped). MediaCtrl#is_stopped
+
+ Boolean *is_stopped*()
+
+Returns @true@ if media playback is currently stopped, else @false@.
 
 h3(#MediaCtrl_length). MediaCtrl#length
 
