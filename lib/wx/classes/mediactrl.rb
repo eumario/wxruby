@@ -19,4 +19,21 @@ if defined?(Wx::MediaCtrl)
   mediactrl_event_types.each do | ev_type | 
     Wx::EvtHandler.register_event_type(ev_type)
   end
+
+  # Extend with a nicer interface to get_state
+  class Wx::MediaCtrl
+    # Returns true if the media is currently paused, else false
+    def is_paused
+      get_state == Wx::MEDIASTATE_PAUSED
+    end
+    # Returns true if the media is currently playing, else false
+    def is_playing
+      get_state == Wx::MEDIASTATE_PLAYING
+    end
+    # Returns true if the media is currently stopped, else false
+    def is_stopped
+      get_state == Wx::MEDIASTATE_STOPPED
+    end
+  end
 end
+
