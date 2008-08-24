@@ -840,20 +840,20 @@ usually zero.
 
 See also "Font":font.html, "DC#set_font":dc.html#DC_setfont.
 
-h3. DC#get_text_foreground
+h3(#DC_gettextforeground). DC#get_text_foreground
 
  "Colour":colour.html *get_text_foreground*()
 
 Gets the current text foreground colour (see "DC#set_text_foreground":dc.html#DC_settextforeground).
 
 
-h3. DC#get_user_scale
+h3(#DC_getuserscale). DC#get_user_scale
 
   *get_user_scale*(%(arg-type)Float% x,  %(arg-type)Float% y)
 
 Gets the current user scale factor (set by "set_user_scale":#DC_setuserscale).
 
-h3. DC#gradient_fill_concentric
+h3(#DC_gradientfillconcentric). DC#gradient_fill_concentric
 
   *gradient_fill_concentric*(%(arg-type)"Rect":rect.html% rect, %(arg-type)"Colour":colour.html% initial_colour, 
                                 %(arg-type)"Colour":colour.html% dest_colour, %(arg-type)"Point":point.html% centre = nil )
@@ -868,14 +868,14 @@ rect.
 
 *Note*: Currently this function is very slow, don't use it for real-time drawing.
 
-h3. DC#gradient_fill_linear
+h3(#DC_gradientfilllinear). DC#gradient_fill_linear
 
   *gradient_fill_concentric*(%(arg-type)"Rect":rect.html% rect, %(arg-type)"Colour":colour.html% initial_colour, 
                                 %(arg-type)"Colour":colour.html% dest_colour, %(arg-type)"Direction":direction.html% dir = @Wx::EAST@ )
 
 Fill the area specified by rect with a linear gradient, starting from initialColour and eventually fading to destColour. The nDirection specifies the direction of the colour change, default is to use initialColour on the left part of the rectangle and destColour on the right one.
 
-h3. DC#logical_to_device_x
+h3(#DC_logicaltodevicex). DC#logical_to_device_x
 
  "Integer":coord.html *logical_to_device_x*(%(arg-type)Integer% x)
 
@@ -883,7 +883,7 @@ Converts logical X coordinate to device coordinate, using the current
 mapping mode.
 
 
-h3. DC#logical_to_device_xrel
+h3(#DC_logicaltodevicexrel). DC#logical_to_device_xrel
 
  "Integer":coord.html *logical_to_device_xrel*(%(arg-type)Integer% x)
 
@@ -892,7 +892,7 @@ mapping mode but ignoring the x axis orientation.
 Use this for converting a width, for example.
 
 
-h3. DC#logical_to_device_y
+h3(#DC_logicaltodevicey). DC#logical_to_device_y
 
  "Integer":coord.html *logical_to_device_y*(%(arg-type)Integer% y)
 
@@ -900,7 +900,7 @@ Converts logical Y coordinate to device coordinate, using the current
 mapping mode.
 
 
-h3. DC#logical_to_device_yrel
+h3(#DC_logicaltodeviceyrel). DC#logical_to_device_yrel
 
  "Integer":coord.html *logical_to_device_yrel*(%(arg-type)Integer% y)
 
@@ -909,42 +909,42 @@ mapping mode but ignoring the y axis orientation.
 Use this for converting a height, for example.
 
 
-h3. DC#max_x
+h3(#DC_maxx). DC#max_x
 
  "Integer":coord.html *max_x*()
 
 Gets the maximum horizontal extent used in drawing commands so far.
 
 
-h3. DC#max_y
+h3(#DC_maxy). DC#max_y
 
  "Integer":coord.html *max_y*()
 
 Gets the maximum vertical extent used in drawing commands so far.
 
 
-h3. DC#min_x
+h3(#DC_minx). DC#min_x
 
  "Integer":coord.html *min_x*()
 
 Gets the minimum horizontal extent used in drawing commands so far.
 
 
-h3. DC#min_y
+h3(#DC_miny). DC#min_y
 
  "Integer":coord.html *min_y*()
 
 Gets the minimum vertical extent used in drawing commands so far.
 
 
-h3. DC#is_ok
+h3(#DC_isok). DC#is_ok
 
  Boolean *is_ok*()
 
 Returns true if the DC is ok to use.
 
 
-h3. DC#reset_bounding_box
+h3(#DC_resetboundingbox). DC#reset_bounding_box
 
   *reset_bounding_box*()
 
@@ -956,7 +956,7 @@ h4. See also
 "calc_bounding_box":#DC_calcboundingbox
 
 
-h3. DC#set_axis_orientation
+h3(#DC_setaxisorientation). DC#set_axis_orientation
 
   *set_axis_orientation*(%(arg-type)Boolean% xLeftRight, 
                                                       %(arg-type)Boolean% yBottomUp)
@@ -973,14 +973,14 @@ left to right orientation, false to invert it.
 bottom up orientation, false to invert it.
 
 
-h3. DC#set_background
+h3(#DC_setbackground). DC#set_background
 
   *set_background*(%(arg-type)"Brush":brush.html% brush)
 
 Sets the current background brush for the DC.
 
 
-h3. DC#set_background_mode
+h3(#DC_setbackgroundmode). DC#set_background_mode
 
   *set_background_mode*(%(arg-type)Integer% mode)
 
@@ -988,15 +988,15 @@ _mode_ may be one of SOLID and TRANSPARENT. This setting determines
 whether text will be drawn with a background colour or not.
 
 
-h3. DC#set_brush
+h3(#DC_setbrush). DC#set_brush
 
   *set_brush*(%(arg-type)"Brush":brush.html% brush)
 
 Sets the current brush for the DC.
 
-If the argument is NullBrush, the current brush is selected out of the device
-context, and the original brush restored, allowing the current brush to
-be destroyed safely.
+If the argument is @Wx::NULL_BRUSH@, the current brush is selected out
+of the device context, and the original brush restored, allowing the
+current brush to be destroyed safely.
 
 See also "Brush":brush.html.
 
@@ -1004,7 +1004,7 @@ See also "MemoryDC":memorydc.html for the interpretation of colours
 when drawing into a monochrome bitmap.
 
  
-h3. DC#set_clipping_region
+h3(#DC_setclippingregion). DC#set_clipping_region
 
   *set_clipping_region*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
                       %(arg-type)Integer% height)
@@ -1030,7 +1030,7 @@ h4. See also
 "DC#destroy_clipping_region":dc.html#DC_destroyclippingregion, "Region":region.html
 
 
-h3. DC#set_device_origin
+h3(#DC_setdeviceorigin). DC#set_device_origin
 
   *set_device_origin*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
@@ -1041,7 +1041,7 @@ This function may be useful in Windows printing
 operations for placing a graphic on a page.
 
 
-h3. DC#set_font
+h3(#DC_setfont). DC#set_font
 
   *set_font*(%(arg-type)"Font":font.html% font)
 
@@ -1051,7 +1051,7 @@ should not pass @NullFont@ to this method.
 See also "Font":font.html.
 
 
-h3. DC#set_layout_direction
+h3(#DC_setlayoutdirection). DC#set_layout_direction
 
   *set_layout_direction*(%(arg-type)"LayoutDirection":layoutdirection.html% dir)
 
@@ -1061,7 +1061,7 @@ either @Wx::LAYOUT_DEFAULT@, @Wx::LAYOUT_LEFT_TO_RIGHT@ or
 
 See also "get_layout_direction":#DC_getlayoutdirection
 
-h3. DC#set_logical_function
+h3(#DC_setlogicalfunction). DC#set_logical_function
 
   *set_logical_function*(%(arg-type)Integer% function)
 
@@ -1099,7 +1099,7 @@ logical operation.  INVERT is commonly used for drawing rubber bands or
 moving outlines, since drawing twice reverts to the original colour.
 
 
-h3. DC#set_map_mode
+h3(#DC_setmapmode). DC#set_map_mode
 
   *set_map_mode*(%(arg-type)Integer% int)
 

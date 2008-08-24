@@ -40,12 +40,6 @@ _style_ may be a bit list of the following:
 |TAB_STYLE_COLOUR_INTERIOR|Draw tab backgrounds in the specified colour. Omitting this stylewill ensure that the tab background matches the dialog background.|
 
 
-  *destructor*()
-
-Destructor. This destructor deletes all the panels associated with the view.
-If you do not wish this to happen, call ClearWindows with argument false before the
-view is likely to be destroyed. This will clear the list of windows, without deleting them.
-
 h3(#PanelTabView_addtabwindow). PanelTabView#add_tab_window
 
   *add_tab_panel*(%(arg-type)Integer% id,  %(arg-type)"Window":window.html% window)
@@ -53,25 +47,25 @@ h3(#PanelTabView_addtabwindow). PanelTabView#add_tab_window
 Adds a window to the view. The window is associated with the tab identifier, and will be shown or hidden as the tab
 is selected or deselected.
 
-h3. PanelTabView#clear_windows
+h3(#PanelTabView_clearwindows). PanelTabView#clear_windows
 
   *clear_windows*(%(arg-type)Boolean% deleteWindows = true)
 
 Removes the child windows from the view. If _deleteWindows_ is true, the windows will be deleted.
 
-h3. PanelTabView#get_current_window
+h3(#PanelTabView_getcurrentwindow). PanelTabView#get_current_window
 
  "Panel":panel.html *get_current_window*()
 
 Returns the child window currently being displayed on the tabbed panel or dialog box.
 
-h3. PanelTabView#get_tab_window
+h3(#PanelTabView_gettabwindow). PanelTabView#get_tab_window
 
  "Window":window.html *get_tab_window*(%(arg-type)Integer% id)
 
 Returns the window associated with the tab identifier.
 
-h3. PanelTabView#show_window_for_tab
+h3(#PanelTabView_showwindowfortab). PanelTabView#show_window_for_tab
 
   *show_window_for_tab*(%(arg-type)Integer% id)
 
