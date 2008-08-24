@@ -55,7 +55,7 @@ h2. Methods
 * "Brush#set_style":#Brush_setstyle
 
 </div>
-h3(Brush_new). Brush.new
+h3(#Brush_new). Brush.new
 
  *Brush.new*()
 
@@ -87,37 +87,37 @@ The style for a brush may be one of the following constants:
 * @Wx::HORIZONTAL_HATCH@ : Horizontal hatch.
 * @Wx::VERTICAL_HATCH@ : Vertical hatch.
 
-h3(Brush_getcolour). Brush#get_colour
+h3(#Brush_getcolour). Brush#get_colour
 
  "Colour":colour.html *get_colour*()
 
 Returns this brush's colour.
 
-h3(Brush_getstipple). Brush#get_stipple
+h3(#Brush_getstipple). Brush#get_stipple
 
  "Bitmap":bitmap.html *get_stipple*()
 
 Returns the stipple bitmap used by this brush
 
-h3(Brush_getstyle). Brush#get_style
+h3(#Brush_getstyle). Brush#get_style
 
  Integer *get_style*()
 
 Returns the integer fill-style constant for this brush.
 
-h3(Brush_ishatch). Brush#is_hatch
+h3(#Brush_ishatch). Brush#is_hatch
 
  Boolean *is_hatch*()
 
 Returns @true@ if this brush has any of the hatched fill styles.
 
-h3(Brush_isok). Brush#is_ok
+h3(#Brush_isok). Brush#is_ok
 
  Boolean *is_ok*()
 
 Returns @true@ if this brush is properly initialized and ready for use.
 
-h3(Brush_setcolour). #Brush_set_colour
+h3(#Brush_setcolour). #Brush_set_colour
 
  *set_colour*(%(arg-type)"Colour":colour.html% colour)
 
@@ -128,13 +128,13 @@ h3(Brush_setcolour). #Brush_set_colour
 Sets the fill colour used by this brush, by using a "Colour":colour.html
 object, a colour name, or a set of red/green/blue components.
 
-h3(Brush_setstipple). Brush#set_stipple
+h3(#Brush_setstipple). Brush#set_stipple
 
  *set_bitmap*(%(arg-type)"Bitmap":bitmap.html% stipple_bitmap)
 
 Sets the stipple bitmap to be used by this brush.
 
-h3(Brush_setstyle). Brush#set_style
+h3(#Brush_setstyle). Brush#set_style
 
  *set_style*(%(arg-type)Integer% style)
 

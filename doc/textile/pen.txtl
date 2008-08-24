@@ -134,7 +134,7 @@ h3(#Pen_getcolour). Pen#get_colour
 
 Returns the pen's colour
 
-h3(Pen_getdashes). Pen#get_dashes
+h3(#Pen_getdashes). Pen#get_dashes
 
  wxDashes *get_dashes*()
 
@@ -145,38 +145,38 @@ associated with this pen.
 
 Not currently supported in wxRuby.
 
-h3(Pen_getjoin). Pen#get_join
+h3(#Pen_getjoin). Pen#get_join
 
  Integer *get_join*()
 
 Returns the pen join style, which may be one of @Wx::JOIN_BEVEL@,
 @Wx::JOIN_ROUND@ and @Wx::JOIN_MITER@. The default is @Wx::JOIN_ROUND@.
 
-h3(Pen_getstipple). Pen#get_stipple
+h3(#Pen_getstipple). Pen#get_stipple
 
  "Bitmap":bitmap.html *get_stipple*()
 
 Gets the stipple bitmap.
 
-h3(Pen_getstyle). Pen#get_style
+h3(#Pen_getstyle). Pen#get_style
 
  Integer *get_style*()
 
 Returns the pen style, for example @Wx::SOLID@.
 
-h3(Pen_getwidth). Pen#get_width
+h3(#Pen_getwidth). Pen#get_width
 
  Integer *get_width*()
 
 Returns the pen width.
 
-h3(Pen_isok). Pen#is_ok
+h3(#Pen_isok). Pen#is_ok
 
  Boolean *is_ok*()
 
 Returns true if the pen is initialised.
 
-h3(Pen_setcap). Pen#set_cap
+h3(#Pen_setcap). Pen#set_cap
 
  *set_cap*(%(arg-type)Integer% capStyle)
 
@@ -184,7 +184,7 @@ Sets the pen cap style, which may be one of @Wx::CAP_ROUND@,
 @Wx::CAP_PROJECTING@ and @Wx::CAP_BUTT@. The default is
 @Wx::CAP_ROUND@. 
 
-h3(Pen_setcolour). Pen#set_colour
+h3(#Pen_setcolour). Pen#set_colour
 
  *set_colour*(%(arg-type)"Colour":colour.html% colour)
 
@@ -196,32 +196,32 @@ Specifies the colour of the pen by using a "Colour":colour.html, a
 colour name (see "Colour":colour.html for more details), or a set of
 red, green and blue values.
 
-h3(Pen_setdashes). Pen#set_dashes
+h3(#Pen_setdashes). Pen#set_dashes
 
  *set_dashes*(%(arg-type)wxDashes%)
 
 Sets dashes. Not currently supported in wxRuby.
 
-h3(Pen_setjoin). Pen#set_join
+h3(#Pen_setjoin). Pen#set_join
 
  *set_join*(%(arg-type)Integer% join_style)
 
 Returns the pen join style, which may be one of @Wx::JOIN_BEVEL@,
 @Wx::JOIN_ROUND@ and @Wx::JOIN_MITER@. The default is @Wx::JOIN_ROUND@.
 
-h3(Pen_setstipple). Pen#set_stipple
+h3(#Pen_setstipple). Pen#set_stipple
 
  *set_stipple*(%(arg-type)"Bitmap":bitmap.html% stipple)
 
 Sets the bitmap for stippling.
 
-h3(Pen_setstyle). Pen#set_style
+h3(#Pen_setstyle). Pen#set_style
 
  *set_style*(%(arg-type)Integer% style)
 
 Sets the pen style; see "Pen.new":#Pen_new for valid styles.
 
-h3(Pen_setwidth). Pen#set_width
+h3(#Pen_setwidth). Pen#set_width
 
  *set_width*(%(arg-type)Integer% width)
 
