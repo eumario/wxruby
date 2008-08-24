@@ -26,6 +26,7 @@ public:
   virtual int Insert(const wxString&   item , int  pos , void * clientData ) = 0;
   virtual int Insert(const wxString&   item , int  pos , wxClientData * clientData ) = 0;
   virtual bool IsEmpty() const = 0;
+  virtual void Select(int n) = 0;
   void SetClientData(int  n , void * data ) = 0;
   void SetClientObject(int  n , wxClientData * data ) = 0;
   virtual void SetSelection(int  n ) = 0;
