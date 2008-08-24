@@ -1,8 +1,7 @@
-// wxSimpleHelpProvider.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004-2008, wxRuby development team
+// released under the MIT-like wxRuby2 license
 
+// IGNORE - implemented in pure ruby: lib/wx/classes/simplehelpprovider.rb
 #if !defined(_wxSimpleHelpProvider_h_)
 #define _wxSimpleHelpProvider_h_
 class wxSimpleHelpProvider : public wxHelpProvider
