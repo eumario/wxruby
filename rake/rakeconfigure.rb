@@ -125,7 +125,7 @@ end
 
 # GraphicsContext is not enabled by default on some platforms
 unless WX_FEATURES['wxUSE_GRAPHICS_CONTEXT']
-  $excluded_classes += %w|GraphicsBrush GraphicsContext GraphicsFont
+  $excluded_classes += %w|GCDC GraphicsBrush GraphicsContext GraphicsFont
                           GraphicsMatrix GraphicsObject GraphicsPath GraphicsPen|
 end
 
