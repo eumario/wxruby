@@ -3,7 +3,7 @@
 
 %include "../common.i"
 
-%module(directors="1") wxToolTip
+%module wxToolTip
 GC_MANAGE_AS_OBJECT(wxToolTip);
 
 %{
