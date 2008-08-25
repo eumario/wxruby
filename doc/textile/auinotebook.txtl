@@ -43,6 +43,7 @@ h2. Methods
 * "AuiNotebook#add_page":#AuiNotebook_addpage
 * "AuiNotebook#create":#AuiNotebook_create
 * "AuiNotebook#delete_page":#AuiNotebook_deletepage
+* "AuiNotebook#each_page":#AuiNotebook_eachpage
 * "AuiNotebook#get_art_provider":#AuiNotebook_getartprovider
 * "AuiNotebook#get_page":#AuiNotebook_getpage
 * "AuiNotebook#get_page_bitmap":#AuiNotebook_getpagebitmap
@@ -93,6 +94,13 @@ h3(#AuiNotebook_deletepage). AuiNotebook#delete_page
  Boolean *delete_page*(%(arg-type)Integer% page)
 
 Deletes a page at the given index.  Calling this method will generate a page change event.
+
+h3(#AuiNotebook_eachpage). AuiNotebook#each_page
+
+ *each_page*() { ... }
+
+Iterates over all the pages in the notebook, from first to last. Each
+page (a "Window":window.html object) will be passed to the associated block.
 
 h3(#AuiNotebook_getartprovider). AuiNotebook#get_art_provider
 
