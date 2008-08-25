@@ -6,6 +6,9 @@
 // methods for checking and setting whether a wxWidgets window has been
 // destroyed. It is compiled into wx.cpp.
 
+%header %{
+#include <wx/cshelp.h>
+%}
 
 %{
 // Code to be run when the ruby object is swept by GC - this only
@@ -37,6 +40,13 @@ void GC_SetWindowDeleted(void *ptr)
   // sent after destruction (other ObjectPreviouslyDeleted errors result)
   wxEvtHandler* evt_handler = (wxEvtHandler*)ptr;
   evt_handler->SetEvtHandlerEnabled(false);
+
+  // Wx calls this by standard after the window destroy event is
+  // handled, but we need to call it before while the object link is
+  // still around
+  wxHelpProvider *helpProvider = wxHelpProvider::Get();
+  if ( helpProvider )
+    helpProvider->RemoveHelp((wxWindowBase*)ptr);
 
   // Disassociate the C++ and Ruby objects
   SWIG_RubyUnlinkObjects(ptr);

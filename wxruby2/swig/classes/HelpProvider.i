@@ -27,6 +27,8 @@ typedef wxWindow wxWindowBase;
 class wxRubyHelpProvider : public wxHelpProvider
 {
 public:
+  // This is pure virtual in base Wx class, so won't compile unless an
+  // implementation is provided
   wxString GetHelp(const wxWindowBase* window)
   {
     VALUE rb_win = wxRuby_WrapWxObjectInRuby( (wxWindow*)window );
@@ -42,10 +44,27 @@ public:
     
     return result;
   }
+
+  // RemoveHelp is called by Wx after the window deletion event has been
+  // handled. A standard director here re-wraps the already destroyed
+  // object, which will cause rapid segfaults when it is later marked.
+  void RemoveHelp(wxWindowBase* window) 
+  {
+    VALUE rb_win = SWIG_RubyInstanceFor( (void *)window );
+    if ( ! NIL_P(rb_win) )
+      {
+        VALUE self   = SWIG_RubyInstanceFor(this);
+        rb_funcall(self, rb_intern("remove_help"), 1, rb_win);
+      }
+  }
 };
 %}
 
 %ignore wxHelpProvider::GetHelp; // Must be supplied in Ruby
+
+// Need to avoid standard director as it will call with destroyed
+// objects
+%feature("nodirector") wxHelpProvider::RemoveHelp;
 
 class wxRubyHelpProvider : public wxHelpProvider
 {
