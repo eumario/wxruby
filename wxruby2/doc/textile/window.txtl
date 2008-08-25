@@ -2465,8 +2465,10 @@ h3(#Window_sethelptext). Window#set_help_text
 
 Sets the help text to be used as context-sensitive help for this window.
 
-Note that the text is actually stored by the current "HelpProvider":helpprovider.html implementation,
-and not in the window object itself.
+Note that the text is actually stored by the current
+"HelpProvider":helpprovider.html by calling its
+"add_help":helpprovider.html#HelpProvider_add_help method, and not in
+the window object itself.
 
 h4. See also
 
@@ -2640,19 +2642,22 @@ h4. Parameters
 
 h4. Remarks
 
-The page size of a scrollbar is the number of scroll units that the scroll thumb travels when you
-click on the area above/left of or below/right of the thumb. Normally you will want a whole visible
-page to be scrolled, i.e. the size of the current view (perhaps the window client size). This
-value has to be adjusted when the window is resized, since the page size will have changed.
+The page size of a scrollbar is the number of scroll units that the
+scroll thumb travels when you click on the area above/left of or
+below/right of the thumb. Normally you will want a whole visible page to
+be scrolled, i.e. the size of the current view (perhaps the window
+client size). This value has to be adjusted when the window is resized,
+since the page size will have changed.
 
-In addition to specifying how far the scroll thumb travels when paging, in Motif and some versions of Windows
-the thumb changes size to reflect the page size relative to the length of the document. When the
-document size is only slightly bigger than the current view (window) size, almost all of the scrollbar
-will be taken up by the thumb. When the two values become the same, the scrollbar will (on some systems)
-disappear.
+In addition to specifying how far the scroll thumb travels when paging,
+in Motif and some versions of Windows the thumb changes size to reflect
+the page size relative to the length of the document. When the document
+size is only slightly bigger than the current view (window) size, almost
+all of the scrollbar will be taken up by the thumb. When the two values
+become the same, the scrollbar will (on some systems) disappear.
 
-Currently, this function should be called before SetPageRange, because of a quirk in the Windows
-handling of pages and ranges.
+Currently, this function should be called before "set_page_range", because
+of a quirk in the Windows handling of pages and ranges.
 
 h4. See also
 
