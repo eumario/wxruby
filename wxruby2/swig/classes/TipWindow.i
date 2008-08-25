@@ -5,20 +5,18 @@
 
 %module(directors="1") wxTipWindow
 GC_MANAGE_AS_WINDOW(wxTipWindow);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTipWindow);
+
 
 %{
 #include  <wx/tipwin.h>
 %}
 
+// Not useful in wxRuby
+%ignore wxTipWindow::SetTipWindowPtr;
 
-%typemap(default,numinputs=0) wxTipWindow **windowPtr {
-  $1 = NULL;
-}
-
-%typemap(in,numinputs=0) wxTipWindow** windowPtr (wxTipWindow *ptr){
-  $1 = &ptr;
-}
-
+// Ignore this argument in the constructor
+%typemap(default,numinputs=0) wxTipWindow **windowPtr "$1 = NULL;"
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
