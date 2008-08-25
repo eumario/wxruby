@@ -1,12 +1,12 @@
 h1(#wxnotebook). Wx::Notebook
 
-This class represents a notebook control, which manages multiple windows with associated tabs.
+This class represents a notebook control, which manages multiple windows
+with associated tabs.
 
-To use the class, create a Notebook object and call "add_page":#Notebook_addpage or "insert_page":#Notebook_insertpage,
-passing a window to be used as the page. Do not explicitly delete the window for a page that is currently
-managed by Notebook.
-
-*NotebookPage* is a typedef for Window.
+To use the class, create a Notebook object and call
+"add_page":#Notebook_addpage or "insert_page":#Notebook_insertpage,
+passing a window to be used as the page. Do not explicitly delete the
+window for a page that is currently managed by Notebook.
 
 h2. Derived from
 
@@ -38,39 +38,6 @@ supported under Microsoft Windows XP when using visual themes.
 
 See also "window styles overview":windowstyles.html.
 
- noteevt.inc
-
-h2. Page backgrounds
-
-On Windows XP, the default theme paints a gradient on the notebook's pages.
-If you wish to suppress this theme, for aesthetic or performance reasons,
-there are three ways of doing it. You can use NB_NOPAGETHEME to disable
-themed drawing for a particular notebook, you can call @SystemOptions::SetOption@ 
-to disable it for the whole application, or you can disable it for individual
-pages by using @SetBackgroundColour@.
-
-To disable themed pages globally:
-
-
-     SystemOptions::SetOption(T("msw.notebook.themed-background"), 0);
- 
-
-Set the value to 1 to enable it again.
-
-To give a single page a solid background that more or less fits in with the
-overall theme, use:
-
-
-     Colour col = notebook->GetThemeBackgroundColour();
-     if (col.Ok())
-     {
-         page->SetBackgroundColour(col);
-     }
- 
-
-On platforms other than Windows, or if the application is not using Windows
-themes, @GetThemeBackgroundColour@ will return an uninitialised colour object,
-and the above code will therefore work on all platforms.
 
 h2. See also
 
@@ -85,6 +52,7 @@ h2. Methods
 * "Notebook#create":#Notebook_create
 * "Notebook#delete_all_pages":#Notebook_deleteallpages
 * "Notebook#delete_page":#Notebook_deletepage
+* "Notebook#each_page":#Notebook_eachpage
 * "Notebook#get_current_page":#Notebook_getcurrentpage
 * "Notebook#get_image_list":#Notebook_getimagelist
 * "Notebook#get_page":#Notebook_getpage
@@ -136,7 +104,7 @@ Destroys the Notebook object.
 
 h3(#Notebook_addpage). Notebook#add_page
 
- Boolean *add_page*(%(arg-type)"NotebookPage":notebookpage.html% page,  %(arg-type)String% text, 
+ Boolean *add_page*(%(arg-type)"Window":window.html% page,  %(arg-type)String% text, 
                   %(arg-type)Boolean% select = false, 
                   %(arg-type)Integer% imageId = -1)
 
@@ -198,6 +166,12 @@ Deletes the specified page, and the associated window.
 
 The call to this function generates the page changing events.
 
+h3(#Notebook_eachpage). Notebook#each_page
+
+ *each_page*() { ... }
+
+Iterates over all the pages in the notebook, from first to last, passing
+them into the associated block as a "Window":window.html object.
 
 h3(#Notebook_getcurrentpage). Notebook#get_current_page
 
@@ -219,7 +193,7 @@ h4. See also
 
 h3(#Notebook_getpage). Notebook#get_page
 
- "NotebookPage":notebookpage.html *get_page*(%(arg-type)Integer% page)
+ "Window":window.html *get_page*(%(arg-type)Integer% page)
 
 Returns the window at the given page position.
 
@@ -293,17 +267,15 @@ h4. Parameters
 |*NB_HITTEST_ONITEM*|The point was over an item, but not on the label or icon.|
 
 
-
 h4. Return value
 
 Returns the zero-based tab index or @NOT_FOUND@ if there is no tab is at
 the specified position.
 
 
-
 h3(#Notebook_insertpage). Notebook#insert_page
 
- Boolean *insert_page*(%(arg-type)Integer% index,  %(arg-type)"NotebookPage":notebookpage.html% page, 
+ Boolean *insert_page*(%(arg-type)Integer% index,  %(arg-type)"Window":window.html% page, 
                      %(arg-type)String% text, 
                      %(arg-type)Boolean% select = false, 
                      %(arg-type)Integer% imageId = -1)
