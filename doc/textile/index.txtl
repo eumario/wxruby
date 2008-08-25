@@ -427,20 +427,26 @@ interface elements from specifications stored in an XML format.
 
 h2(#online_help). Online help
 
+Set of classes for providing context-sensitive help and online
+documentation. These allow an application to enter a "help" mode and
+provide information about specific UI elements, and to display HTML
+documentation in a standalone Window.
+
 |HelpController|Family of classes for controlling help windows|
 |HtmlHelpController|HTML help controller class|
 |ContextHelp|Class to put application into context-sensitive help mode|
 |ContextHelpButton|Button class for putting application into context-sensitive help mode|
-|HelpProvider|Abstract class for context-sensitive help provision|
-|SimpleHelpProvider|Class for simple context-sensitive help provision|
-|HelpControllerHelpProvider|Class for context-sensitive help provision via a help controller|
+|HelpProvider|Base class for providing context-sensitive help; inherit from this to write your own |
+|SimpleHelpProvider|Simple TipWindow provider of context-sensitive help|
+|HelpControllerHelpProvider|Provides context-sensitive help provision via a help controller|
+|TipWindow|Window class for displaying tips|
 |ToolTip|Class implementing tooltips|
 
 "top":#top
 
-h2(#misc). Miscellaneous
+h2(#misc). miscellaneous
 
-|App|Application class|
+|App|application class|
 |Caret|A caret (cursor) object|
 |Config|Classes for configuration reading/writing (using either INI files or registry)|
 |DragImage|An image that can be dragged across windows|
