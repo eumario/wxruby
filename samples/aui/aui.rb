@@ -994,7 +994,7 @@ class AuiFrame < Wx::Frame
       event.check((@notebook_style & Wx::AUI_NB_CLOSE_ON_ALL_TABS) != 0)
     when ID_NotebookCloseButtonActive
       event.check((@notebook_style & Wx::AUI_NB_CLOSE_ON_ACTIVE_TAB) != 0)
-    when ID_NotebookAllowTabSplit:
+    when ID_NotebookAllowTabSplit
         event.check((@notebook_style & Wx::AUI_NB_TAB_SPLIT) != 0)
     when ID_NotebookAllowTabMove
       event.check((@notebook_style & Wx::AUI_NB_TAB_MOVE) != 0)
