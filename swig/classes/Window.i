@@ -5,6 +5,7 @@
 
 %module(directors="1") wxWindow
 GC_MANAGE_AS_WINDOW(wxWindow);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxWindow);
 
 enum wxWindowVariant
 {
