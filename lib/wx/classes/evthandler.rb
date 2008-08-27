@@ -126,10 +126,11 @@ class Wx::EvtHandler
         when Proc then meth
         when Method then meth.to_proc
       end
+      # Create an anonymous block to call the relevant method
       if h_meth.arity == 1
-        return lambda { | evt | h_meth.call(evt) }
+        return proc { | evt | h_meth.call(evt) }
       else
-        return lambda { h_meth.call }
+        return proc { h_meth.call }
       end
     else
       Kernel.raise ArgumentError,
