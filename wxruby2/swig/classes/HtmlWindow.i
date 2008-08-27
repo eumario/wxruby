@@ -1,15 +1,16 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
 
 %module(directors="1") wxHtmlWindow
 GC_MANAGE_AS_WINDOW(wxHtmlWindow);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxHtmlWindow);
 
 // This class has to be implemented internally with a hand-written C++
 // class, in order that the virtual OnOpeningURL method can work
 // properly. Unfortunately there's no way to make this work using SWIG
-// typemaps.r
+// typemaps.
 %rename(HtmlWindow) wxRubyHtmlWindow;
 
 %{
