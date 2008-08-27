@@ -9,11 +9,20 @@ if defined?(Wx::MediaCtrl)
     evt_type['evt_media_finished', 1,
               Wx::EVT_MEDIA_FINISHED,
               Wx::MediaEvent],
-    evt_type['evt_media_stop', 1,
-              Wx::EVT_MEDIA_STOP,
-              Wx::MediaEvent],
     evt_type['evt_media_loaded', 1,
               Wx::EVT_MEDIA_LOADED,
+              Wx::MediaEvent],
+    evt_type['evt_media_pause', 1,
+              Wx::EVT_MEDIA_PAUSE,
+              Wx::MediaEvent],
+    evt_type['evt_media_play', 1,
+              Wx::EVT_MEDIA_PLAY,
+              Wx::MediaEvent],
+    evt_type['evt_media_statechanged', 1,
+              Wx::EVT_MEDIA_STATECHANGED,
+              Wx::MediaEvent],
+    evt_type['evt_media_stop', 1,
+              Wx::EVT_MEDIA_STOP,
               Wx::MediaEvent]
   ]
   mediactrl_event_types.each do | ev_type | 

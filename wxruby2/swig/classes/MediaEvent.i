@@ -12,6 +12,9 @@ GC_MANAGE_AS_EVENT(wxMediaEvent);
 %constant const int wxEVT_MEDIA_FINISHED;
 %constant const int wxEVT_MEDIA_STOP;
 %constant const int wxEVT_MEDIA_LOADED;
+%constant const int wxEVT_MEDIA_STATECHANGED;
+%constant const int wxEVT_MEDIA_PLAY;
+%constant const int wxEVT_MEDIA_PAUSE;
 
 %import "include/wxNotifyEvent.h"
 %import "include/wxCommandEvent.h"
