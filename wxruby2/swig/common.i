@@ -23,6 +23,21 @@
 #  undef Connect
 #  undef connect
 
+// We need different string conversions for ruby 1.8 and ruby 1.9; in
+// particular, on the latter, we need to correctly set the encoding of
+// the string
+// Ruby 1.9
+#ifdef RUBY_RUBY_H
+
+#define WXSTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str.mb_str(wxConvUTF8), strlen((const char *)wx_str.mb_str(wxConvUTF8)), rb_utf8_encoding())
+#define WXSTR_PTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str->mb_str(wxConvUTF8), strlen((const char *)wx_str->mb_str(wxConvUTF8)), rb_utf8_encoding())
+
+// Ruby 1.8
+#else
+#define WXSTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str.mb_str(wxConvUTF8))
+#define WXSTR_PTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str->mb_str(wxConvUTF8))
+#endif
+
 // problematic Wx definition of _ macro conflicts with SWIG 
 #define WXINTL_NO_GETTEXT_MACRO 1
 
