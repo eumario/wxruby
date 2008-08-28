@@ -272,7 +272,7 @@ protected:
       VALUE rb_tree_ids = rb_ary_new();
       wxArrayTreeItemIds tree_ids = wxArrayTreeItemIds();
       size_t sel_count = self->GetSelections(tree_ids);
-      for ( int i = 0; i < sel_count; i++ )
+      for ( size_t i = 0; i < sel_count; i++ )
         {
           rb_ary_push(rb_tree_ids, TREEID2RUBY(tree_ids.Item(i)));
         }

@@ -93,7 +93,7 @@ void GC_mark_MenuBarBelongingToFrame(wxMenuBar *menu_bar)
 {
   rb_gc_mark( SWIG_RubyInstanceFor(menu_bar) );
   // Mark each menu in the menubar in turn
-  for ( int i = 0; i < menu_bar->GetMenuCount(); i++ )
+  for ( size_t i = 0; i < menu_bar->GetMenuCount(); i++ )
 	{
 	  wxMenu* menu  = menu_bar->GetMenu(i);
 	  rb_gc_mark( SWIG_RubyInstanceFor(menu) );
