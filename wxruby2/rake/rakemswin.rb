@@ -4,9 +4,13 @@
 
 # Compiling on Windows with Microsoft compiler - this is currently set
 # up to support VS2005 (version 8.0 of the runtime)
+
+# First, common Windows settings (shared with MingW)
+require 'rake/rakewindows'
+
+# The name of the compiler and linker
 $cpp  = "cl.exe"
 $ld   = "link"
-
 $cpp_out_flag     = "/Fo"
 $link_output_flag = "/dll /out:"
 
@@ -15,15 +19,6 @@ if $dynamic_build
   raise "Dynamically-linked build is not allowed on Windows, use static"
 else
   $static_build = true
-end
-
-# Use the "WXWIN" environment variable to specify path to unpacked
-# wxWidgets distribution
-$WXDIR = ENV['WXWIN']
-
-unless $WXDIR
-  raise "Location of wxWidgets library must be specified " +
-        "with WXWIN environment variable"
 end
 
 # Variants within wxWidgets directory layout are identified by these tags
@@ -100,11 +95,12 @@ if $unicode_build
   $wx_cppflags += " -D_UNICODE -DUNICODE"
 end
 
-$extra_libs = [
-    "gdi32.lib", "gdiplus.lib", "winspool.lib", "comdlg32.lib",
-    "shell32.lib", "ole32.lib", "oleaut32.lib", "uuid.lib",
-    "odbc32.lib ", "odbccp32.lib", "comctl32.lib", 
-    "rpcrt4.lib", "winmm.lib", "#{Config::TOPDIR}/lib/#{Config::CONFIG['RUBY_SO_NAME']}.lib"].join(' ')
+# Extra files for the linker - WINDOWS_SYS_LIBS are common in rakewindows.rb
+lib_ruby =   File.join(Config::CONFIG['libdir'], Config::CONFIG['LIBRUBY'])
+$extra_libs = WINDOWS_SYS_LIBS.map { | lib | "#{lib}.lib" }.join(" ")
+$extra_libs << " #{lib_ruby}"
+
+
     
 $extra_objs = "swig/wx.res"
 
@@ -120,7 +116,7 @@ def find_in_path(basename)
   raise "Cannot find #{basename} in PATH"
 end
 
-# Redistribute and install VC8 runtime
+# Redistribute and install VC8 runtime - not recommended
 directory 'temp'
 file 'temp' do
   cp 'lib/wxruby2.so.manifest', 'temp'

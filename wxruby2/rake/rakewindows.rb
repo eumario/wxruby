@@ -8,8 +8,7 @@
 # compiled wxWidgets library has to be specified using an environment
 # variable 
 $WXDIR = ENV['WXWIN']
-
-unless $WXDIR
+if not $WXDIR or $WXDIR.empty?
   raise "Location of wxWidgets library must be specified " +
         "with WXWIN environment variable"
 end
