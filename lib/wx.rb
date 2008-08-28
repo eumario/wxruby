@@ -41,4 +41,13 @@ require 'wx/accessors'
 require 'wx/keyword_ctors'
 require 'wx/keyword_defs'
 
+# If a program is ended by ruby's exit, it can bypass doing the proper
+# Wx clean-up routines called by Wx::App#on_exit. This can under some
+# circumstances cause crashes as the application ends.
+Kernel::at_exit do
+  # This is set in wxRubyApp.OnExit (see swig/classes/App.i)
+  if not $__wx_app_ended__
+    Wx::THE_APP.on_exit
+  end
+end
 
