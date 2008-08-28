@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -21,7 +21,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTreeCtrl);
 %ignore wxTreeCtrl::AssignStateImageList;
 
 // Dealt with below
-%ignore wxTreeCtrl::GetRootItem;
 %ignore wxTreeCtrl::GetSelections;
 
 // Only support the version that returns more info in flags
@@ -67,7 +66,8 @@ protected:
 // End item data fixes
 
 
-// GC handling for item data objects
+// GC handling for item data objects. These are static because it avoids
+// having to wrap a complete subclass
 %{
   // general recursion over a treectrl, starting from a base_id
   // the function rec_func will be called in turn for each tree item, 
@@ -88,6 +88,26 @@ protected:
 	  }
   }
 
+  // Only really useful for HIDDEN_ROOT style; manually detect the first
+  // root-like item.
+  static wxTreeItemId FindFirstRoot(wxTreeCtrl *tree_ctrl) {
+	wxTreeItemId base_id = tree_ctrl->GetFirstVisibleItem();
+	wxTreeItemId prev_id = tree_ctrl->GetItemParent(base_id);
+	wxTreeItemId root_id = tree_ctrl->GetRootItem();
+	while ( prev_id.IsOk() && prev_id != root_id )
+	  {
+		base_id = prev_id;
+		prev_id = tree_ctrl->GetItemParent(base_id);
+	  }
+	prev_id = tree_ctrl->GetPrevSibling(base_id);
+	while ( prev_id.IsOk()  )
+	  {
+		base_id = prev_id;
+		prev_id = tree_ctrl->GetPrevSibling(base_id);
+	  }
+	return base_id;
+  }
+
   // Safe version of recursion from base across all contained items that
   // works whether or not the TreeCtrl has the TR_HIDE_ROOT
   // style. Required to ensure that marking of item data is done
@@ -104,20 +124,7 @@ protected:
 	  // Find the top-left most item, then recurse over it and siblings
 	  else
 		{
-		  wxTreeItemId base_id = tree_ctrl->GetFirstVisibleItem();
-		  wxTreeItemId prev_id = tree_ctrl->GetItemParent(base_id);
-		  wxTreeItemId root_id = tree_ctrl->GetRootItem();
-		  while ( prev_id.IsOk() && prev_id != root_id )
-			{
-			  base_id = prev_id;
-			  prev_id = tree_ctrl->GetItemParent(base_id);
-			}
-		  prev_id = tree_ctrl->GetPrevSibling(base_id);
-		  while ( prev_id.IsOk()  )
-			{
-			  base_id = prev_id;
-			  prev_id = tree_ctrl->GetPrevSibling(base_id);
-			}
+		  wxTreeItemId base_id = FindFirstRoot(tree_ctrl);
 		  // now do recursion
 		  RecurseOverTreeIds(tree_ctrl, base_id, *rec_func);
 		  while ( ( base_id = tree_ctrl->GetNextSibling(base_id) ) &&
@@ -126,7 +133,6 @@ protected:
 		  return;
 		}
 	}
-
 
   // Recursively-called function to implement of TreeCtrl#traverse
   static void DoTreeCtrlYielding(void *ptr, const wxTreeItemId& item_id)
@@ -231,16 +237,35 @@ protected:
 		return array;		
 	}
 
-	// If this must fail with TR_HIDE_ROOT, at least fail detectably and
-	// reliably across platforms
-	VALUE get_root_item()
-	  {
-		if ( self->GetWindowStyle() & wxTR_HIDE_ROOT )
-		  return INT2NUM(0);
-		else
-		  return TREEID2RUBY( self->GetRootItem() );
-	  }
-    
+	// Return an array of root items; mainly useful for TR_HIDE_ROOT
+	// style where there are multiple root-like items, and GetItemRoot
+	// doesn't work properly
+    VALUE get_root_items()
+    {
+      VALUE rb_tree_ids = rb_ary_new();
+	  if ( self->GetWindowStyle() & wxTR_HIDE_ROOT )	  
+		{
+		  wxTreeItemId base_id = FindFirstRoot(self);
+
+		  // now do recursion
+		  if ( base_id.IsOk() ) 
+			{
+			  rb_ary_push(rb_tree_ids, TREEID2RUBY(base_id));
+			  
+			  while ( ( base_id = self->GetNextSibling(base_id) ) &&
+					    base_id.IsOk() )
+				rb_ary_push(rb_tree_ids, TREEID2RUBY(base_id));
+			}
+		}
+	  // Standard single-root TreeCtrl
+	  else
+		{
+		  rb_ary_push(rb_tree_ids, 
+					  TREEID2RUBY( self->GetRootItem() ));
+        }
+	  return rb_tree_ids;
+    }
+
 	// Just return a simple array in ruby
     VALUE get_selections()
     {
