@@ -163,7 +163,7 @@ VALUE wxRuby_WrapWxEventInRuby(wxEvent *wx_event)
   if ( NIL_P(cEvent) )
     {
       cEvent = cWxEvent.klass;
-      rb_warn("Unmapped event type %i", event_type_id);
+      rb_warn("Unmapped event type %i", wx_event->GetEventType());
     }
   
   // Wrap without mark or free functions - Wx deals with this
