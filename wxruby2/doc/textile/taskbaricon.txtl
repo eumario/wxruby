@@ -1,21 +1,31 @@
 h1(#wxtaskbaricon). Wx::TaskBarIcon
 
-This class represents a taskbar icon. A taskbar icon is an icon that appears in the `system tray' and responds to mouse clicks, optionally with a tooltip above it to help provide information.
+This class represents a taskbar icon. A taskbar icon is an icon that
+appears in the `system tray' and responds to mouse clicks, optionally
+with a tooltip above it to help provide information. The "taskbar" and,
+particularly, the "system tray" are concepts which do not have exact
+equivalents on all so the class works differently on each.
 
-h2. X Window System Note
+On *Microsoft Windows* the TaskBarIcon appears in the system tray,
+which, by default, is in the lower right corner of the screen. On
+Windows, an application may continue whilst having no open Frames but
+only a TaskBarIcon. Therefore, if you want to end an application with a
+TaskBarIcon when all its Frames are closed, you also need to
+"destroy":#TaskBarIcon_destroy the icon.
 
-Under X Window System, the window manager must support either
-the System Tray Protocol by freedesktop.orghttp://freedesktop.org/Standards/systemtray-spec
-(WMs used by modern desktop environments such as GNOME >= 2, KDE
->= 3 and XFCE >= 4 all do) or the older methods used in GNOME 1.2 and
-KDE 1 and 2. If it doesn't, the icon will appear as a toplevel window on
-user's desktop.
+On *Linux*, various window managers may or may not have a system tray,
+and so a TaskBarIcon should be an optional component of a user
+interface. Don't rely on the TaskBarIcon as the only way to provide
+access to your program's functions. However, the TaskBarIcon is
+supported on all modern versions of the leading window managers, Gnome,
+KDE and XFCE.
 
-Because not all window managers have system tray, there's no guarantee that
-TaskBarIcon will work correctly under X Window System and so the applications
-should use it only as an optional component of their user interface. The user
-should be required to explicitly enable the taskbar icon on Unix, it shouldn't
-be on by default.
+On *Mac OS X* the TaskBarIcon is placed in the Dock, _not_ in the
+notification area in the top right of the screen. Therefore this class
+provides a way to present a high-resolution (128x128) icon to represent
+the app in the Dock. Note that there is no class in WxWidgets which
+supports showing an icon in the notification area; doing this is
+explicitly forbidden by Apple's UI guidelines. 
 
 
 h2. Derived from
@@ -26,11 +36,13 @@ h2. Derived from
 
 h2. Event handling
 
-To process input from a taskbar icon, use the following event handler macros to direct input to member
-functions that take a TaskBarIconEvent argument. Note that not all ports are
-required to send these events and so it's better to override
-"create_popup_menu":#TaskBarIcon_createpopupmenu if all that
-the application does is that it shows a popup menu in reaction to mouse click.
+To process input from a taskbar icon, use the following event handler
+methods to direct input to a block that takes a TaskBarIconEvent
+argument. Note that not all ports are required to send these events and
+so it's better to override
+"create_popup_menu":#TaskBarIcon_createpopupmenu if all that the
+application does is that it shows a popup menu in reaction to mouse
+click.
 
 
 
@@ -48,6 +60,7 @@ h2. Methods
 
 * "TaskBarIcon.new":#TaskBarIcon_new
 * "TaskBarIcon#create_popup_menu":#TaskBarIcon_createpopupmenu
+* "TaskBarIcon#destroy":#TaskBarIcon_destroy
 * "TaskBarIcon#is_icon_installed":#TaskBarIcon_isiconinstalled
 * "TaskBarIcon#is_ok":#TaskBarIcon_isok
 * "TaskBarIcon#popup_menu":#TaskBarIcon_popupmenu
@@ -68,13 +81,22 @@ h3(#TaskBarIcon_createpopupmenu). TaskBarIcon#create_popup_menu
  "Menu":menu.html *create_popup_menu*()
 
 This method is called by the library when the user requests popup menu
-(on Windows and Unix platforms, this is when the user right-clicks the icon).
-Override this function in order to provide popup menu associated with the icon.
+(on Windows and Unix platforms, this is when the user right-clicks the
+icon).  Override this instance method in your own subclass of TaskBarIcon in
+order to provide popup menu associated with the icon.
 
-If CreatePopupIcon returns NULL (this happens by default),
-no menu is shown, otherwise the menu is
-displayed and then deleted by the library as soon as the user dismisses it.
-The events can be handled by a class derived from TaskBarIcon.
+If create_popup_menu returns @nil@ (this happens by default), no menu is
+shown, otherwise the menu is displayed and then deleted by the library
+as soon as the user dismisses it.  The events can be handled by a class
+derived from TaskBarIcon.
+
+h3(#TaskBarIcon_destroy). TaskBarIcon#destroy
+
+  *destroy*()
+
+Permanently disposes of the TaskBarIcon, typically at an application's
+end. You may need to call this method to exit an application on
+Windows. 
 
 h3(#TaskBarIcon_isiconinstalled). TaskBarIcon#is_icon_installed
 
