@@ -14,6 +14,10 @@ end
 
 $base_gemspec = Gem::Specification.new do | spec |
   spec.name = 'wxruby'
+  if RUBY_VERSION >= "1.9.0"
+    spec.name << "-ruby19"
+  end
+
   spec.version = WXRUBY_VERSION
 
   spec.require_path = 'lib'
