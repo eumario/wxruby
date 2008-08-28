@@ -9,12 +9,13 @@ require 'wx'
 
 # This sample demonstrates the use of Wx::MediaCtrl, which can be used
 # to playback sounds or movies using a platform-native player.
-class MediaPanel<Wx::Panel
+class MediaPanel < Wx::Panel
   def initialize(parent)
     super(parent, :style => Wx::TAB_TRAVERSAL|Wx::CLIP_CHILDREN)
 
     # The actual media player control
-    @mc = Wx::MediaCtrl.new(self, :pos => [100,100], :size => [300,300])
+    @mc = Wx::MediaCtrl.new(self)
+
     evt_media_loaded @mc,:on_media_loaded
 
     # Some buttons to control playback
@@ -102,7 +103,6 @@ class MediaPanel<Wx::Panel
     if dlg.show_modal == Wx::ID_OK
       do_load_file(dlg.path)
     end
-    dlg.destroy
   end
 
   # Move the media to a position in the file, using the slider
