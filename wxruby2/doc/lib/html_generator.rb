@@ -5,7 +5,13 @@ require 'redcloth'
 
 # This is a subclass of redcloth which strips out all the ugly (to my
 # eyes) tab indenting.
-class WxRubyCloth < RedCloth
+# 
+# Permit use of RedCloth version 3 or version 4
+s_klass = ( RedCloth.const_defined?(:TextileDoc) ) ?
+              RedCloth::TextileDoc : 
+              RedCloth
+
+class WxRubyCloth < s_klass
   def to_html()
     super(:textile).gsub(/^\t+/, '')
   end
