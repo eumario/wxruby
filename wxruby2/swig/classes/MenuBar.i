@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -6,6 +6,7 @@
 %module(directors="1") wxMenuBar;
 // Memory management is handled via the containing Frame
 GC_NEVER(wxMenuBar);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMenuBar);
 
 %ignore wxMenuBar(int  n , wxMenu*  menus[] , const wxString  titles[] ) ;
 
