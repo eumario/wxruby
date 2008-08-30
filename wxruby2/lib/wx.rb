@@ -45,8 +45,8 @@ require 'wx/keyword_defs'
 # Wx clean-up routines called by Wx::App#on_exit. This can under some
 # circumstances cause crashes as the application ends.
 Kernel::at_exit do
-  # This is set in wxRubyApp.OnExit (see swig/classes/App.i)
-  if not $__wx_app_ended__
+  # These are set at App startup and wxRuby shut down respectively - see App.i
+  if Wx::const_defined?(:THE_APP) and not $__wx_app_ended__ 
     Wx::THE_APP.on_exit
   end
 end
