@@ -11,7 +11,8 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCollapsiblePane);
 #include <wx/collpane.h>
 %}
 
-#define wxCP_DEFAULT_STYLE 0
+#define wxCP_DEFAULT_STYLE (wxTAB_TRAVERSAL | wxNO_BORDER)
+#define wxCP_NO_TLW_RESIZE (0x0002)
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
