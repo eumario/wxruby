@@ -42,7 +42,8 @@ h2. Derived from
 
 h2. Window styles
 
-|@CP_DEFAULT_STYLE@|The default style: 0.|
+|@CP_DEFAULT_STYLE@|The default style|
+|@CP_TLW_NO_RESIZE@|Don't resize the containing frame when collapsed|
 
 h2. Event handling
 
