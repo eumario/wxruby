@@ -462,6 +462,7 @@ h2(#misc). miscellaneous
 |TaskBarIcon|Icon that appears in the task bar, system tray or dock, and can have a popup menu|
 |StopWatch|Stop watch class|
 |MimeTypesManager|MIME-types manager class|
+|StandardPaths|Get OS-standard directory locations for settings, config etc|
 |SystemSettings|System settings class for obtaining various global parameters|
 |SystemOptions|System options class for run-time configuration|
 |AcceleratorTable|Accelerator table for setting up shortcut keys|
