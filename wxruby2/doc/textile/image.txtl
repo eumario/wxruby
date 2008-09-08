@@ -73,8 +73,8 @@ h2. See also
 h2. Methods
 
 * "Image.new":#Image_new
-* "Image.from_bitmap":Image_frombitmap
-* "Image.read":Image_read
+* "Image.from_bitmap":#Image_frombitmap
+* "Image.read":#Image_read
 * "Image#blur":#Image_blur
 * "Image#blur_horizontal":#Image_blurhorizontal
 * "Image#blur_vertical":#Image_blurvertical
