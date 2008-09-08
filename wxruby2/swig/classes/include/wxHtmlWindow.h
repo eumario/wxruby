@@ -1,7 +1,6 @@
-// wxHtmlWindow.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
+// Copyright 2004-2008, wxRuby development team
+// released under the MIT-like wxRuby2 license
+
 
 #if !defined(_wxHtmlWindow_h_)
 #define _wxHtmlWindow_h_
@@ -27,6 +26,10 @@ public:
   virtual wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType  type , const wxString&  url , wxString * redirect ) const;
   virtual void OnSetTitle(const wxString&  title ) ;
   virtual void ReadCustomization(wxConfigBase  *cfg , wxString  path = wxEmptyString) ;
+  void SelectAll();
+  wxString SelectionToText();
+  void SelectLine(const wxPoint& pos);
+  void SelectWord(const wxPoint& pos);
   void SetBorders(int  b ) ;
   void SetFonts(wxString  normal_face , wxString  fixed_face , const int  *sizes = NULL) ;
   bool SetPage(const wxString&  source ) ;
