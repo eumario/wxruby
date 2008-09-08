@@ -110,6 +110,10 @@ public:
   wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType  type , const wxString&  url , wxString * redirect ) const;
   virtual void OnSetTitle(const wxString&  title ) ;
   virtual void ReadCustomization(wxConfigBase  *cfg , wxString  path = wxEmptyString) ;
+  void SelectAll();
+  wxString SelectionToText();
+  void SelectLine(const wxPoint& pos);
+  void SelectWord(const wxPoint& pos);
   void SetBorders(int  b ) ;
   void SetFonts(wxString  normal_face , wxString  fixed_face , const int  *sizes = NULL) ;
   bool SetPage(const wxString&  source ) ;
