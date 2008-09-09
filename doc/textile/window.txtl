@@ -60,6 +60,7 @@ h2. See also
 h2. Methods
 
 * "Window.new":#Window_new
+* "Window.find_focus":#Window_findfocus
 * "Window#add_child":#Window_addchild
 * "Window#cache_best_size":#Window_cachebestsize
 * "Window#capture_mouse":#Window_capturemouse
@@ -77,9 +78,7 @@ h2. Methods
 * "Window#disable":#Window_disable
 * "Window#do_get_best_size":#Window_dogetbestsize
 * "Window#do_update_window_ui":#Window_doupdatewindowui
-* "Window#drag_accept_files":#Window_dragacceptfiles
 * "Window#enable":#Window_enable
-* "Window#find_focus":#Window_findfocus
 * "Window#find_window":#Window_findwindow
 * "Window#find_window_by_id":#Window_findwindowbyid
 * "Window#find_window_by_label":#Window_findwindowbylabel
@@ -289,6 +288,23 @@ correctly sized.
 h4. See also
 
 "Window deletion overview":windowdeletionoverview.html, "Window#destroy":window.html#Window_destroy, "CloseEvent":closeevent.html
+
+
+h3(#Window_findfocus). Window.find_focus
+
+ "Window":window.html *find_focus*()
+
+Finds the window or control which currently has the keyboard focus.
+
+h4. Remarks
+
+Note that this is a class method, so it can be called without needing a
+Window receiver.
+
+h4. See also
+
+"Window#set_focus":window.html#Window_setfocus
+
 
 
 h3(#Window_addchild). Window#add_child
@@ -504,7 +520,7 @@ h3(#Window_destroy). Window#destroy
 
  Boolean *destroy*()
 
-Destroys the window safely. Frames and dialogs are not destroyed
+Destroys the window. Frames and dialogs are not destroyed
 immediately when this function is called -- they are added to a list of
 windows to be deleted on idle time, when all the window's events have
 been processed. This prevents problems with events being sent to
@@ -552,7 +568,7 @@ h3(#Window_dogetbestsize). Window#do_get_best_size
 
 Gets the size which best suits the window: for a control, it would be
 the minimal size which doesn't truncate the control, for a panel - the
-same size as it would have after a call to "Fit()":windowfit.html.
+same size as it would have after a call to "fit":#Window_fit.
 
 
 h3(#Window_doupdatewindowui). Window#do_update_window_ui
@@ -560,10 +576,11 @@ h3(#Window_doupdatewindowui). Window#do_update_window_ui
   *do_update_window_ui*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
 
 Does the window-specific updating after processing the update event.
-This function is called by "Window#update_window_ui":window.html#Window_updatewindowui
-in order to check return values in the "UpdateUIEvent":updateuievent.html and
-act appropriately. For example, to allow frame and dialog title updating, Widgets
-implements this function as follows:
+This function is called by
+"Window#update_window_ui":window.html#Window_updatewindowui in order to
+check return values in the "UpdateUIEvent":updateuievent.html and act
+appropriately. For example, to allow frame and dialog title updating,
+Widgets implements this function as follows:
 
 
  // do the window-specific processing after processing the update event
@@ -579,24 +596,6 @@ implements this function as follows:
      }
  }
  
-
-
-
-h3(#Window_dragacceptfiles). Window#drag_accept_files
-
-  *drag_accept_files*(%(arg-type)Boolean% accept)
-
-Enables or disables eligibility for drop file events (OnDropFiles).
-
-h4. Parameters
-
-* _accept_ If @true@, the window is eligible for drop file events. If @false@, the window
-will not accept drop file events.
-
-h4. Remarks
-
-Windows only.
-
 
 h3(#Window_enable). Window#enable
 
@@ -620,22 +619,6 @@ h4. See also
 "Window#is_enabled":window.html#Window_isenabled, "Window#disable":window.html#Window_disable, "RadioBox#enable":radiobox.html#RadioBox_enable
 
 
-h3(#Window_findfocus). Window#find_focus
-
- "Window":window.html *find_focus*()
-
-Finds the window or control which currently has the keyboard focus.
-
-h4. Remarks
-
-Note that this is a static function, so it can be called without needing a Window pointer.
-
-h4. See also
-
-"Window#set_focus":window.html#Window_setfocus
-
-
-
 h3(#Window_findwindow). Window#find_window
 
  "Window":window.html *find_window*(%(arg-type)Integer% id)
@@ -655,9 +638,9 @@ h3(#Window_findwindowbyid). Window#find_window_by_id
 
 Find the first window with the given _id_.
 
-If _parent_ is NULL, the search will start from all top-level
-frames and dialog boxes; if non-NULL, the search will be limited to the given window hierarchy.
-The search is recursive in both cases.
+If _parent_ is @nil@, the search will start from all top-level frames
+and dialog boxes; otherwise, the search will be limited to the given
+window hierarchy.  The search is recursive in both cases.
 
 h4. See also
 
@@ -668,10 +651,10 @@ h3(#Window_findwindowbyname). Window#find_window_by_name
 
  "Window":window.html *find_window_by_name*(%(arg-type)String% name, %(arg-type)"Window":window.html% parent = nil)
 
-Find a window by its name (as given in a window constructor or *Create* function call).
-If _parent_ is NULL, the search will start from all top-level
-frames and dialog boxes; if non-NULL, the search will be limited to the given window hierarchy.
-The search is recursive in both cases.
+Find a window by its name (as given in a window constructor or *create*
+function call).  If _parent_ is @nil@, the search will start from all
+top-level frames and dialog boxes; otherwise, the search will be limited
+to the given window hierarchy.  The search is recursive in both cases.
 
 If no window with such name is found,
 "find_window_by_label":#Window_findwindowbylabel is called.
@@ -685,10 +668,11 @@ h3(#Window_findwindowbylabel). Window#find_window_by_label
 
  "Window":window.html *find_window_by_label*(%(arg-type)String% label, %(arg-type)"Window":window.html% parent = nil)
 
-Find a window by its label. Depending on the type of window, the label may be a window title
-or panel item label. If _parent_ is NULL, the search will start from all top-level
-frames and dialog boxes; if non-NULL, the search will be limited to the given window hierarchy.
-The search is recursive in both cases.
+Find a window by its label. Depending on the type of window, the label
+may be a window title or panel item label. If _parent_ is @nil@, the
+search will start from all top-level frames and dialog boxes; if
+not @nil@, the search will be limited to the given window hierarchy.  The
+search is recursive in both cases.
 
 h4. See also
 
@@ -699,14 +683,15 @@ h3(#Window_fit). Window#fit
 
   *fit*()
 
-Sizes the window so that it fits around its subwindows. This function won't do
-anything if there are no subwindows and will only really work correctly if the
-sizers are used for the subwindows layout. Also, if the window has exactly one
-subwindow it is better (faster and the result is more precise as Fit adds some
-margin to account for fuzziness of its calculations) to call
+Sizes the window so that it fits around its subwindows. This function
+won't do anything if there are no subwindows and will only really work
+correctly if the sizers are used for the subwindows layout. Also, if the
+window has exactly one subwindow it is better (faster and the result is
+more precise as "fit":#Window_fit adds some margin to account for
+fuzziness of its calculations) to call
 
 
-     window.set_client_size(child.get_size)
+  window.client_size = child.size
  
 
 instead of calling Fit.
@@ -2788,7 +2773,7 @@ parameter if the _sizer_ is non-nil and @false@ otherwise.
 
 h4. Parameters
 
-* _sizer_ The sizer to set. Pass NULL to disassociate and conditionally delete
+* _sizer_ The sizer to set. Pass @nil@ to disassociate and conditionally delete
 the window's sizer.  See below.
 * _deleteOld_ If true (the default), this will delete any prexisting sizer.
 Pass false if you wish to handle deleting the old sizer yourself.
