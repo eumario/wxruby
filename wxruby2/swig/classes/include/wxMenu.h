@@ -10,7 +10,7 @@ public:
    wxMenu(long  style ) ;
   virtual  ~wxMenu() ;
   wxMenuItem* Append(int itemid, 
-                     const wxString& text, 
+                     const wxString& text = wxEmptyString, 
                      const wxString& help = wxEmptyString, 
                      wxItemKind kind = wxITEM_NORMAL);
   wxMenuItem* Append(int itemid, 
