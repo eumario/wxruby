@@ -11,6 +11,10 @@ drawn directly upon the screen, but supports a variety of image
 manipulation functions such as rescaling, blurring, and directly
 manipulating pixels.
 
+Note that because this class wraps a platform-specific GUI resource, you
+shouldn't create instances of it until the app is running; ie until
+after you have called App#main_loop or App.run.
+
 h2. Derived from
 
 "GDIObject":gdiobject.html

@@ -2,9 +2,14 @@ h1(#wxfont). Wx::Font
 
 A font is an object which determines the appearance of text. Fonts are
 used for drawing text to a device context, and setting the appearance of
-a window's text. You can retrieve the current system font settings with "SystemSettings":systemsettings.html.
+a window's text. You can retrieve the current system font settings with
+"SystemSettings":systemsettings.html.
 
 "SystemSettings":systemsettings.html
+
+Note that because this class wraps a platform-specific GUI resource, you
+shouldn't create instances of it until the app is running; ie until
+after you have called App#main_loop or App.run.
 
 h2. Derived from
 
