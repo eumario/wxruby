@@ -222,6 +222,7 @@ $parents = {
     'wxMouseEvent' => 'wxEvent',
     'wxMoveEvent' => 'wxEvent',
     'wxMultiChoiceDialog' => 'wxDialog',
+    'wxNavigationKeyEvent' => 'wxEvent',
     'wxNotebook' => 'wxControl',
     'wxNotebookEvent' => 'wxNotifyEvent',
     'wxNotebookSizer' => 'wxSizer',
