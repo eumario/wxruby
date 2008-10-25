@@ -5,6 +5,7 @@
 
 %module(directors="1") wxRichTextCtrl;
 GC_MANAGE_AS_WINDOW(wxRichTextCtrl);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 
 %{
 #include <wx/richtext/richtextctrl.h>
