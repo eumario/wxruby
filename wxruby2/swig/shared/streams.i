@@ -118,13 +118,13 @@ class wxRubyOutputStream : public wxOutputStream
 
 // Typemaps to create temporary wxStream objects
 %typemap(in) wxInputStream& "$1 = new wxRubyInputStream($input);"
-%typemap(typecheck) wxInputStream& {
-  RTEST(rb_respond_to($input, rb_intern("read")));
+%typemap(typecheck, precedence=1) wxInputStream & {
+  $1 = ( RTEST(rb_respond_to($input, rb_intern("read") ) ) );
 }
 %typemap(freearg) wxInputStream& "delete $1;"
 
 %typemap(in) wxOutputStream& "$1 = new wxRubyOutputStream($input);"
-%typemap(typecheck) wxOutputStream& {
-  RTEST(rb_respond_to($input, rb_intern("write")));
+%typemap(typecheck, precedence=1) wxOutputStream& {
+  $1 = ( RTEST(rb_respond_to($input, rb_intern("write") ) ) );
 }
 %typemap(freearg) wxOutputStream& "delete $1;"
