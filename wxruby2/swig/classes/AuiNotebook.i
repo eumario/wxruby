@@ -40,4 +40,15 @@ enum wxAuiNotebookOption
 %import "include/wxWindow.h"
 %import "include/wxObject.h"
 
+// wxWidgets provides a whole class for writing custom styles for the
+// tabs in AuiNotebooks. Rather than add the whole API, provide access
+// to allow switching between the two styles that come with wxWidgets.
+%extend wxAuiNotebook {
+  void use_glossy_art()
+    { $self->SetArtProvider(new wxAuiDefaultTabArt); }
+
+  void use_simple_art()
+    { $self->SetArtProvider(new wxAuiSimpleTabArt); }
+}
+
 %include "include/wxAuiNotebook.h"
