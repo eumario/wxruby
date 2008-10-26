@@ -37,13 +37,13 @@ public:
     bool IsEditable() const;
 	bool IsEmpty() const;
 
-    virtual void GetSelection(long* from, long* to) const;
-    virtual void Clear();
-    virtual void Replace(long from, long to, const wxString& value);
-    virtual void Remove(long from, long to);
+    void GetSelection(long* from, long* to) const;
+    void Clear();
+    void Replace(long from, long to, const wxString& value);
+    void Remove(long from, long to);
     void MarkDirty();
     void DiscardEdits();
-    virtual void SetMaxLength(unsigned long len);
+    void SetMaxLength(unsigned long len);
     void WriteText(const wxString& text);
     void AppendText(const wxString& text);
     bool SetStyle(long start, long end, const wxTextAttr& style);
@@ -54,24 +54,24 @@ public:
     wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
                                             wxTextCoord *row) const;
-    virtual void Copy();
-    virtual void Cut();
-    virtual void Paste();
-    virtual void Undo();
-    virtual void Redo();
+    void Copy();
+    void Cut();
+    void Paste();
+    void Undo();
+    void Redo();
 
-    virtual bool CanCopy() const;
-    virtual bool CanCut() const;
-    virtual bool CanPaste() const;
-    virtual bool CanUndo() const;
-    virtual bool CanRedo() const;
+    bool CanCopy() const;
+    bool CanCut() const;
+    bool CanPaste() const;
+    bool CanUndo() const;
+    bool CanRedo() const;
 
-    virtual void SetInsertionPoint(long pos);
-    virtual void SetInsertionPointEnd();
-    virtual long GetInsertionPoint() const;
-    virtual wxTextPos GetLastPosition() const;
-    virtual void SetSelection(long from, long to);
-    virtual void SetEditable(bool editable);
+    void SetInsertionPoint(long pos);
+    void SetInsertionPointEnd();
+    long GetInsertionPoint() const;
+    wxTextPos GetLastPosition() const;
+    void SetSelection(long from, long to);
+    void SetEditable(bool editable);
 
     void OnDropFiles( wxDropFilesEvent &event );
     void OnChar( wxKeyEvent &event );
