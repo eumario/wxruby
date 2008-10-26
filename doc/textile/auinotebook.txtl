@@ -59,6 +59,8 @@ h2. Methods
 * "AuiNotebook#set_selection":#AuiNotebook_setselection
 * "AuiNotebook#set_tab_ctrl_height":#AuiNotebook_settabctrlheight
 * "AuiNotebook#set_uniform_bitmap_size":#AuiNotebook_setuniformbitmapsize
+* "AuiNotebook#use_glossy_art":#AuiNotebook_useglossyart
+* "AuiNotebook#use_simple_art":#AuiNotebook_usesimpleart
 
 </div>
 
@@ -208,12 +210,21 @@ height will automatically increase to accommodate the larger bitmap.
 
   *split*(%(arg-type)Integer% page,  %(arg-type)Integer% direction)
 
-Split performs a split operation programmatically. The argument page indicates
-the page that will be split off.  This page will also become the active page after the
-split.  The direction argument specifies where the pane should go, it should be one
-of the following: TOP, BOTTOM, LEFT, or RIGHT.
+Split performs a split operation programmatically. The argument page
+indicates the page that will be split off.  This page will also become
+the active page after the split.  The direction argument specifies where
+the pane should go, it should be one of the following: TOP, BOTTOM,
+LEFT, or RIGHT.
 
+h3(#AuiNotebook_useglossyart). AuiNotebook#use_glossy_art
 
+ *use_glossy_art*()
 
+Makes the notebook tabs be drawn with a 'glossy' style, including a
+gradient. This is the default.
 
+h3(#AuiNotebook_usesimpleart). AuiNotebook#use_simple_art
 
+ *use_simple_art*()
+
+Makes the notebook tabs be drawn with a simple, flat style.
