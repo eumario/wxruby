@@ -13,7 +13,15 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 
 %include "../shared/richtext.i"
 
+// Use the non-const one, identical signature
 %ignore wxRichTextCtrl::GetBuffer() const;
+
+// FIXME
+// SWIG's normal wrapping of these causes a compile error 
+%ignore wxRichTextCtrl::IsSelectionAligned;
+%ignore wxRichTextCtrl::IsSelectionBold;
+%ignore wxRichTextCtrl::IsSelectionItalics;
+%ignore wxRichTextCtrl::IsSelectionUnderlined;
 
 // Deal with some output values from TextCtrl methods - PositionToXY
 %apply long * OUTPUT { long * }

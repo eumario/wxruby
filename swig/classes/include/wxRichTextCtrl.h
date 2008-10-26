@@ -150,10 +150,10 @@ public:
     bool IsModified() const;
     bool IsMultiLine() const;
     bool IsPositionVisible(long pos) const;
-    /*    bool IsSelectionAligned(wxTextAttrAlignment alignment) const;
+    bool IsSelectionAligned(wxTextAttrAlignment alignment) const;
     bool IsSelectionBold() const;
     bool IsSelectionItalics() const;
-    bool IsSelectionUnderlined() const; */
+    bool IsSelectionUnderlined() const;
     bool IsSingleLine() const;
     bool KeyboardNavigate(int keyCode, int flags);
     bool LayoutContent(bool onlyVisibleRect = false);
