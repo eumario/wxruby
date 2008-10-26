@@ -4,7 +4,7 @@
 #if !defined(_wxRichTextCtrl_h_)
 #define _wxRichTextCtrl_h_
 
-class wxRichTextCtrl
+class wxRichTextCtrl : public wxTextCtrl
 {
 public:
     wxRichTextCtrl();
