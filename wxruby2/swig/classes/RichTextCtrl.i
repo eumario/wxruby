@@ -15,7 +15,13 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 
 %ignore wxRichTextCtrl::GetBuffer() const;
 
+// Deal with some output values from TextCtrl methods - PositionToXY
+%apply long * OUTPUT { long * }
+%apply long * OUTPUT { wxTextCoord *col, wxTextCoord *row }
+
 %import "include/wxObject.h"
 %import "include/wxWindow.h"
 %import "include/wxControl.h"
+%import "include/wxTextCtrl.h"
+
 %include "include/wxRichTextCtrl.h"
