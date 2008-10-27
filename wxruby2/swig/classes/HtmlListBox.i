@@ -35,8 +35,6 @@ public:
   // may be over-ridden in Ruby
   virtual wxString OnGetItemMarkup(size_t n) const
     { return wxHtmlListBox::OnGetItemMarkup(n); }
-  virtual void OnDrawItem(wxDC dc, wxRect rect, size_t n) const
-    { wxHtmlListBox::OnDrawItem(dc, rect, n); }
 };
 %}
 
