@@ -78,6 +78,7 @@ public:
   bool Select(size_t item, bool select = true);
   bool SelectAll();
   bool SelectRange(size_t from, size_t to);
+  void SetItemCount(size_t count);
   void SetMargins(const wxPoint& pt);
   void SetMargins(wxCoord x, wxCoord  y);
   void SetSelection(int selection);

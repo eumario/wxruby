@@ -1,26 +1,5 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
-
-
-/* 
-
-TODO - Not yet wrapped. This class is tricky for two reasons:
-
- 1) The bigger problem: the design of the C++ class requires that
-    several methods are over-ridden in Ruby (eg OnDrawItem). THis is
-    fine and possible and director methods calling into ruby are
-    correctly generated. However, SWIG also generates a constructor
-    option for this class in itself (ie, not as a superclass of a ruby
-    class), and this triggers a compile error b/c wxVListBox contains
-    pure virtual methods. So we need a way to either: tell SWIG to only
-    generate a director constructor, or (as wxPython) create an aliased
-    class wxRbVListBox (urgh). This latter doesn't seem worth the effort
-    at the moment.
-
- 2) The smaller problem: the compiler gets cross because SWIG wraps some
-    methods that are marked "protected" - eg OnMeasureItem
-
-*/
 
 #if !defined(_wxVListBox_h_)
 #define _wxVListBox_h_
@@ -60,6 +39,7 @@ public:
   bool Select(size_t item, bool select = true);
   bool SelectAll();
   bool SelectRange(size_t from, size_t to);
+  void SetItemCount(size_t count);
   void SetMargins(const wxPoint& pt);
   void SetMargins(wxCoord x, wxCoord  y);
   void SetSelection(int selection);
