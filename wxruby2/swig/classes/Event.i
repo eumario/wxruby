@@ -44,6 +44,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 #include <wx/srchctrl.h>
 #include <wx/mediactrl.h>
 #include <wx/html/htmlwin.h>
+#include <wx/richtext/richtextctrl.h>
 
 #ifdef WXSCINTILLA
 #    include <wx/wxscintilla.h>
@@ -360,5 +361,27 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_COMMAND_SEARCHCTRL_SEARCH_BTN;
 %constant const int wxEVT_COMMAND_SEARCHCTRL_CANCEL_BTN;
 
+%constant const int wxEVT_COMMAND_RICHTEXT_LEFT_CLICK;
+%constant const int wxEVT_COMMAND_RICHTEXT_RIGHT_CLICK;
+%constant const int wxEVT_COMMAND_RICHTEXT_MIDDLE_CLICK;
+%constant const int wxEVT_COMMAND_RICHTEXT_LEFT_DCLICK;
+%constant const int wxEVT_COMMAND_RICHTEXT_RETURN;
+%constant const int wxEVT_COMMAND_RICHTEXT_CHARACTER;
+%constant const int wxEVT_COMMAND_RICHTEXT_DELETE;
+
+%constant const int wxEVT_COMMAND_RICHTEXT_STYLESHEET_CHANGING;
+%constant const int wxEVT_COMMAND_RICHTEXT_STYLESHEET_CHANGED;
+%constant const int wxEVT_COMMAND_RICHTEXT_STYLESHEET_REPLACING;
+%constant const int wxEVT_COMMAND_RICHTEXT_STYLESHEET_REPLACED;
+
+%constant const int wxEVT_COMMAND_RICHTEXT_CONTENT_INSERTED;
+%constant const int wxEVT_COMMAND_RICHTEXT_CONTENT_DELETED;
+%constant const int wxEVT_COMMAND_RICHTEXT_STYLE_CHANGED;
+%constant const int wxEVT_COMMAND_RICHTEXT_SELECTION_CHANGED;
+
 %import "include/wxObject.h"
 %include "include/wxEvent.h"
+
+
+
+

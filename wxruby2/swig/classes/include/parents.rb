@@ -263,6 +263,7 @@ $parents = {
     'wxRegionIterator' => 'wxObject',
     'wxRichTextCharacterStyleDefinition' => 'wxRichTextStyleDefinition',
     'wxRichTextCtrl' => 'wxTextCtrl',
+    'wxRichTextEvent' => 'wxNotifyEvent',
     'wxRichTextFileHandler' => 'wxObject',
     'wxRichTextHTMLHandler' => 'wxRichTextFileHandler',
     'wxRichTextListStyleDefinition' => 'wxRichTextParagraphStyleDefinition',
