@@ -3,10 +3,11 @@ h1(#wxtipwindow). Wx::TipWindow
 Shows simple text in a popup tip window on creation. This is used by 
 "SimpleHelpProvider":simplehelpprovider.html to show popup help. The
 window automatically destroys itself when the user clicks on it or it loses the
-focus.
+focus. It can also be set to destroy itself automatically when the mouse
+moves outside of a defined bounding rectangle.
 
 You may also use this class to emulate the tooltips when you need finer
-control over them than what the standard tooltips provide.
+control over them than provided by the standard tooltips.
 
 h2. Derived from
 
@@ -28,8 +29,9 @@ h2. Methods
 
 h3(#TipWindow_wxtipwindow). TipWindow.new
 
-  *TipWindow.new*(%(arg-type)"Window":window.html% parent, %(arg-type)String% text,  
-                  %(arg-type)Integer% maxLength = 100,  %(arg-type)"Rect":rect.html% rectBounds = nil)
+  *TipWindow.new*(%(arg-type)"Window":window.html% parent,
+                    %(arg-type)String% text,  
+                    %(arg-type)Integer% maxLength = 100)
 
 Constructor. The tip is shown immediately the window is constructed.
 
@@ -37,10 +39,7 @@ h4. Parameters
 
 * _parent_ The parent window, must be non @NULL@
 * _text_ The text to show, may contain the new line characters
-* _windowPtr_ Simply passed to 
-* _rectBounds_ If non @NULL@, passed to 
-"set_bounding_rect":#TipWindow_setboundingrect below, please see its
-documentation for the description of this parameter
+* _maxLength_ The length of line, in pixels; set very high to avoid wrapping
 
 h3(#TipWindow_setboundingrect). TipWindow#set_bounding_rect
 
