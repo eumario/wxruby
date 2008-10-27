@@ -23,6 +23,19 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 %ignore wxRichTextCtrl::IsSelectionItalics;
 %ignore wxRichTextCtrl::IsSelectionUnderlined;
 
+// We only support the version which returns its value as a
+// RichTextAttr. Note that these methods are further manipulated in ruby
+// so that they accept a single argument and return the RichTextAttr
+// object.
+%ignore wxRichTextCtrl::GetStyle(long position, wxTextAttr& style);
+%ignore wxRichTextCtrl::GetStyle(long position, wxTextAttrEx& style);
+%ignore wxRichTextCtrl::GetStyleForRange(const wxRichTextRange& range, 
+                                         wxTextAttr& style);
+%ignore wxRichTextCtrl::GetStyleForRange(const wxRichTextRange& range, 
+                                         wxTextAttrEx& style);
+%ignore wxRichTextCtrl::GetUncombinedStyle(long position, wxTextAttr& style);
+%ignore wxRichTextCtrl::GetUncombinedStyle(long position, wxTextAttrEx& style);
+
 // Deal with some output values from TextCtrl methods - PositionToXY
 %apply long * OUTPUT { long * }
 %apply long * OUTPUT { wxTextCoord *col, wxTextCoord *row }
