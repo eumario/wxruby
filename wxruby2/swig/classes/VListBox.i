@@ -26,10 +26,21 @@ public:
     wxVListBox(parent, id, pos, size, style, name) { }
   wxRubyVListBox() :
     wxVListBox() { };
-  virtual void OnDrawItem(wxDC&  dc, const wxRect& rect, size_t n) const { };
-  virtual void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const { };
-  virtual wxCoord OnMeasureItem(size_t n) const { return 0; }
-
+  // These must be overridden in ruby class
+  virtual wxCoord OnMeasureItem(size_t n) const 
+    { 
+      rb_raise(rb_eNoMethodError, 
+               "on_measure_item method must be defined for VListBox");
+      return 0; 
+    }
+  virtual void OnDrawItem(wxDC&  dc, const wxRect& rect, size_t n) const 
+    { 
+      rb_raise(rb_eNoMethodError, 
+               "on_draw_item method must be defined for VListBox"); 
+    }
+  // This may be overridden in ruby class
+  virtual void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const 
+    { wxVListBox::OnDrawSeparator(dc, rect, n); };
 };
 %}
 

@@ -34,12 +34,16 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxVScrolledWindow);
     wxRubyVScrolledWindow() : wxVScrolledWindow() { }
     // wxRuby classes must override this method...
     virtual wxCoord OnGetLineHeight(size_t n) const 
-      { return 0; }
+      { 
+        rb_raise(rb_eNoMethodError, 
+                 "on_get_line_height method must be defined for VScrolledWindow");
+        return 0; 
+      }
     // And may override these:
     virtual wxCoord EstimateTotalHeight() const
       { wxVScrolledWindow::EstimateTotalHeight(); }
     virtual void OnGetLinesHint(size_t lineMin, size_t lineMax) const
-      { };
+      { wxVScrolledWindow::OnGetLinesHint(lineMin, lineMax); }
   };
 %}
 
