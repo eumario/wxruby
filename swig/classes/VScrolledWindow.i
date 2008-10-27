@@ -7,12 +7,17 @@
 GC_MANAGE_AS_WINDOW(wxVScrolledWindow);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxVScrolledWindow);
 
+// Actual class is implemented in C++ below
 %rename(VScrolledWindow) wxRubyVScrolledWindow;
 
 %{
 #include <wx/vscroll.h>
 %}
 
+// This is a pure-abstract class in wxWidgets. Therefore
+// Wx::ScrolledWindow in wxRuby actually wraps a bridging C++ class,
+// which should delegate its calls to on_get_line_height etc using
+// SWIG's directors
 %{
   class wxRubyVScrolledWindow : public wxVScrolledWindow
   {
@@ -27,9 +32,11 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxVScrolledWindow);
       { }
 
     wxRubyVScrolledWindow() : wxVScrolledWindow() { }
-    virtual wxCoord EstimateTotalHeight() const;
-    virtual wxCoord OnGetLineHeight(size_t n) const;
-    virtual void OnGetLinesHint(size_t lineMin, size_t lineMax);
+    // wxRuby classes must override this method...
+    virtual wxCoord OnGetLineHeight(size_t n) const { return 0; }
+    // And may override these:
+    virtual wxCoord EstimateTotalHeight() const { return 0; }
+    virtual void OnGetLinesHint(size_t lineMin, size_t lineMax) const { };
   };
 %}
 
