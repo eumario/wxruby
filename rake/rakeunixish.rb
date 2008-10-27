@@ -65,10 +65,18 @@ end
 
 # Now actually run the program to fill in some variables
 $wx_version  = wx_config("--version")
-$wx_cppflags = wx_config("--cppflags")
+$wx_cppflags = wx_config("--cppflags") 
 $cpp         = wx_config("--cxx")
 $ld          = wx_config("--ld")
 $wx_libs     = wx_config("--libs std,stc,gl,media")
+
+# wxWidgets 2.8.9 added a new class wxAuiToolBar, and wxRuby compile
+# currently fails on some part of the new class's declaration. So
+# compile support for the latest pre-2.8.8 version of the API which
+# excludes this class (but still benefits from bugfixes in newer
+# versions)
+version = [ $wx_version, "2.8.8" ].min
+$wx_cppflags << " -DwxABI_VERSION=%s" % version.tr(".", "0")
 
 # Find out where the wxWidgets setup.h file being used is located; this
 # will be used later in rakeconfigure.rb
