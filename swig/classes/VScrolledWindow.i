@@ -8,7 +8,7 @@ GC_MANAGE_AS_WINDOW(wxVScrolledWindow);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxVScrolledWindow);
 
 // Actual class is implemented in C++ below
-%rename(VScrolledWindow) wxRubyVScrolledWindow;
+%rename(wxVScrolledWindow) wxRubyVScrolledWindow;
 
 %{
 #include <wx/vscroll.h>
@@ -33,10 +33,13 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxVScrolledWindow);
 
     wxRubyVScrolledWindow() : wxVScrolledWindow() { }
     // wxRuby classes must override this method...
-    virtual wxCoord OnGetLineHeight(size_t n) const { return 0; }
+    virtual wxCoord OnGetLineHeight(size_t n) const 
+      { return 0; }
     // And may override these:
-    virtual wxCoord EstimateTotalHeight() const { return 0; }
-    virtual void OnGetLinesHint(size_t lineMin, size_t lineMax) const { };
+    virtual wxCoord EstimateTotalHeight() const
+      { wxVScrolledWindow::EstimateTotalHeight(); }
+    virtual void OnGetLinesHint(size_t lineMin, size_t lineMax) const
+      { };
   };
 %}
 
@@ -70,7 +73,7 @@ public:
   int HitTest(const wxPoint&  pt ) const;
   bool IsVisible(size_t  line ) const;
   virtual wxCoord OnGetLineHeight(size_t  n ) const;
-  virtual void OnGetLinesHint(size_t  lineMin , size_t  lineMax ) const;
+  virtual void OnGetLinesHint(size_t lineMin, size_t lineMax) const;
   void RefreshLine(size_t  line ) ;
   void RefreshLines(size_t  from , size_t  to ) ;
   void RefreshAll() ;
