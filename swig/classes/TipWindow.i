@@ -16,7 +16,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTipWindow);
 %ignore wxTipWindow::SetTipWindowPtr;
 
 // Ignore this argument in the constructor
-%typemap(default,numinputs=0) wxTipWindow **windowPtr "$1 = NULL;"
+%typemap(in,numinputs=0) (wxTipWindow **windowPtr) "$1 = NULL;"
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
