@@ -64,9 +64,9 @@
 %typemap(freearg) wxString & "if ( argc > $argnum - 2 ) delete $1;"
 %typemap(freearg) wxString* "if ( argc > $argnum - 2 ) delete $1;"
 
-%typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2((const char *)$1.mb_str());";
+%typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2((const char *)$1.utf8_str());";
 
-%typemap(directorin) wxString *, const wxString * "TODO: $1_name->mb_str()";
+%typemap(directorin) wxString *, const wxString * "TODO: $1_name->utf8_str()";
 
 // These macros are defined in common.i; they deal with 1.8 / 1.9 differences
 %typemap(out) wxString "$result = WXSTR_TO_RSTR($1);"
@@ -93,17 +93,17 @@
 }
 
 %typemap(out) wxChar const * {
-	$result = rb_str_new2((const char *)wxString(*$1).mb_str(wxConvUTF8));
+  $result = rb_str_new2((const char *)wxString(*$1).utf8_str());
 }
 
-%typemap(directorin) wxChar const * "$input = rb_str_new2((const char *)wxString($1).mb_str());";
+%typemap(directorin) wxChar const * "$input = rb_str_new2((const char *)wxString($1).utf8_str());";
 
 %typemap(typecheck, precedence=SWIG_TYPECHECK_STRING) wxChar const *{
 	$1 = (TYPE($input) == T_STRING);
 }
 
 %typemap(varout) wxChar const * {
-	$result = rb_str_new2((const char *)wxString($1).mb_str(wxConvUTF8));
+	$result = rb_str_new2((const char *)wxString($1).utf8_str());
 }
 
 
