@@ -31,7 +31,11 @@ public:
     wxHtmlListBox() { };
   // must be over-ridden in Ruby
   virtual wxString OnGetItem(size_t n) const 
-    { return wxString("x", wxConvUTF8); }
+    {       
+      rb_raise(rb_eNoMethodError, 
+               "on_get_item method must be defined for VListBox");
+      return wxEmptyString;
+    }
   // may be over-ridden in Ruby
   virtual wxString OnGetItemMarkup(size_t n) const
     { return wxHtmlListBox::OnGetItemMarkup(n); }
