@@ -29,13 +29,13 @@
 // Ruby 1.9
 #ifdef RUBY_RUBY_H
 
-#define WXSTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str.mb_str(wxConvUTF8), strlen((const char *)wx_str.mb_str(wxConvUTF8)), rb_utf8_encoding())
-#define WXSTR_PTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str->mb_str(wxConvUTF8), strlen((const char *)wx_str->mb_str(wxConvUTF8)), rb_utf8_encoding())
+#define WXSTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str.utf8_str(), strlen((const char *)wx_str.utf8_str()), rb_utf8_encoding())
+#define WXSTR_PTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str->utf8_str(), strlen((const char *)wx_str->utf8_str()), rb_utf8_encoding())
 
 // Ruby 1.8
 #else
-#define WXSTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str.mb_str(wxConvUTF8))
-#define WXSTR_PTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str->mb_str(wxConvUTF8))
+#define WXSTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str.utf8_str())
+#define WXSTR_PTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str->utf8_str())
 #endif
 
 // problematic Wx definition of _ macro conflicts with SWIG 
