@@ -315,6 +315,7 @@ $parents = {
     'wxStyledTextCtrl' => 'wxTextCtrl',
     'wxStyledTextEvent' => 'wxCommandEvent',
     'wxSysColourChangedEvent' => 'wxEvent',
+    'wxSymbolPickerDialog' => 'wxDialog',
     'wxSystemOptions' => 'wxObject',
     'wxSystemSettings' => 'wxObject',
     'wxTabCtrl' => 'wxControl',
