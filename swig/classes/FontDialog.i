@@ -5,7 +5,7 @@
 
 %module(directors="1") wxFontDialog
 GC_MANAGE_AS_DIALOG(wxFontDialog);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxFontDialog);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxFontDialog);
 
 %{
 #include <wx/fontdlg.h>

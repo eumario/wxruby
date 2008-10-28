@@ -5,7 +5,7 @@
 
 %module(directors="1") wxMiniFrame
 GC_MANAGE_AS_FRAME(wxMiniFrame);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMiniFrame);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxMiniFrame);
 
 %{
 #include <wx/minifram.h>

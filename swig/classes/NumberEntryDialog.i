@@ -3,14 +3,13 @@
 
 %include "../common.i"
 
-%{
-#include <wx/wx.h>
-#include <wx/numdlg.h>
-%}
-
 %module(directors="1") wxNumberEntryDialog
 GC_MANAGE_AS_DIALOG(wxNumberEntryDialog);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNumberEntryDialog);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxNumberEntryDialog);
+
+%{
+#include <wx/numdlg.h>
+%}
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"

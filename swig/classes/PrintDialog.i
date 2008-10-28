@@ -5,12 +5,13 @@
 
 %module(directors="1") wxPrintDialog
 GC_MANAGE_AS_DIALOG(wxPrintDialog);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPrintDialog);
-%feature("nodirector") wxPrintDialog;
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxPrintDialog);
 
 %{
 #include <wx/printdlg.h>
 %}
+
+%feature("nodirector") wxPrintDialog;
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
