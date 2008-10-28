@@ -5,7 +5,7 @@
 
 %module(directors="1") wxDialog
 GC_MANAGE_AS_DIALOG(wxDialog);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxDialog);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxDialog);
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"

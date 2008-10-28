@@ -5,7 +5,7 @@
 
 %module(directors="1") wxPasswordEntryDialog
 GC_MANAGE_AS_DIALOG(wxPasswordEntryDialog);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPasswordEntryDialog);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxPasswordEntryDialog);
 
 %{
 #include <wx/textdlg.h>

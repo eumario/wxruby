@@ -3,14 +3,13 @@
 
 %include "../common.i"
 
-%{
-#include <wx/wx.h>
-#include <wx/msgdlg.h>
-%}
-
 %module(directors="1") wxMessageDialog
 GC_MANAGE_AS_DIALOG(wxMessageDialog);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMessageDialog);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxMessageDialog);
+
+%{
+#include <wx/msgdlg.h>
+%}
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"

@@ -5,12 +5,13 @@
 
 %module(directors="1") wxPageSetupDialog
 GC_MANAGE_AS_DIALOG(wxPageSetupDialog);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxPageSetupDialog);
-%feature("nodirector") wxPageSetupDialog;
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxPageSetupDialog);
 
 %{
 #include <wx/printdlg.h>
 %}
+
+%feature("nodirector") wxPageSetupDialog;
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
