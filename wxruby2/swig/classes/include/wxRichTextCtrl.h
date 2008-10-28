@@ -126,10 +126,18 @@ public:
     void GetSelection(long* from, long* to) const;
     const wxRichTextRange GetSelectionRange() const;
     wxString GetStringSelection() const;
+    bool GetStyle(long position, wxRichTextAttr& style);
     bool GetStyle(long position, wxTextAttr& style);
+    bool GetStyle(long position, wxTextAttrEx& style);
     bool GetStyleForRange(const wxRichTextRange& range,
                           wxRichTextAttr& style);
+    bool GetStyleForRange(const wxRichTextRange& range,
+                          wxTextAttr& style);
+    bool GetStyleForRange(const wxRichTextRange& range,
+                          wxTextAttrEx& style);
     wxRichTextStyleSheet* GetStyleSheet() const;
+    bool GetUncombinedStyle(long position, wxRichTextAttr& style);
+    bool GetUncombinedStyle(long position, wxTextAttrEx& style);
     bool GetUncombinedStyle(long position, wxTextAttr& style);
     wxString GetValue() const;
     wxRichTextLine* GetVisibleLineForCaretPosition(long caretPosition) const;
