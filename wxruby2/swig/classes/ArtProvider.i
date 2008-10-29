@@ -38,9 +38,9 @@ class wxRubyArtProvider : public wxArtProvider
 
 	VALUE self = SWIG_RubyInstanceFor(this);
 
-    v_id = rb_str_new2((const char *)id.mb_str(wxConvUTF8));
-    v_client = rb_str_new2((const char *)client.mb_str(wxConvUTF8));
-    v_size = SWIG_NewClassInstance(cWxSize.klass,SWIGTYPE_p_wxSize);
+    v_id     = WXSTR_TO_RSTR(id);
+    v_client = WXSTR_TO_RSTR(client);
+    v_size   = SWIG_NewClassInstance(cWxSize.klass, SWIGTYPE_p_wxSize);
     wxSize *size_ptr = new wxSize(size);
     DATA_PTR(v_size) = size_ptr;
 	

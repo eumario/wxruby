@@ -21,7 +21,7 @@ GC_MANAGE_AS_OBJECT(wxFileDropTarget);
   $input = rb_ary_new();
   for (int i = 0; i < $1.GetCount(); i++)
   {
-    rb_ary_push($input,rb_str_new2((const char *)($1)[i].mb_str()));
+    rb_ary_push($input, WXSTR_TO_RSTR($1[i]));
   }
 }
 
