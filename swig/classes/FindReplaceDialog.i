@@ -10,7 +10,10 @@ SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxFindReplaceDialog);
 %{
 #include <wx/fdrepdlg.h>
 %}
+
 %ignore wxFindReplaceDialog::wxFindReplaceDialog();
+
+%apply SWIGTYPE *DISOWN { wxFindReplaceData* data };
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
