@@ -6,6 +6,7 @@
 
 class wxSymbolPickerDialog: public wxDialog
 {
+
  public:
   wxSymbolPickerDialog( );
   wxSymbolPickerDialog(const wxString& symbol, 
@@ -13,7 +14,7 @@ class wxSymbolPickerDialog: public wxDialog
                        const wxString& normalTextFont,
                        wxWindow* parent, 
                        wxWindowID id = wxID_ANY, 
-                       const wxString& caption = wxT("Symbols"),
+                       const wxString& caption = wxGetTranslation(_T("Symbols")),
                        const wxPoint& pos = wxDefaultPosition, 
                        const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, 
                        long style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
@@ -23,7 +24,7 @@ class wxSymbolPickerDialog: public wxDialog
               const wxString& normalTextFont,
               wxWindow* parent, 
               wxWindowID id = wxID_ANY, 
-              const wxString& caption = wxT("Symbols"), 
+              const wxString& caption = wxGetTranslation(_T("Symbols")), 
               const wxPoint& pos = wxDefaultPosition, 
               const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, 
               long style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
