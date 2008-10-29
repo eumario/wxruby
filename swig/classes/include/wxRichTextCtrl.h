@@ -232,7 +232,8 @@ public:
     void SelectAll();
     void SelectNone();
     void SetAndShowDefaultStyle(const wxRichTextAttr& attr);
-    void SetBasicStyle(const wxTextAttr& style);
+    void SetBasicStyle(const wxRichTextAttr& style);
+    void SetBasicStyle(const wxTextAttrEx& style);
     void SetCaretPosition(long position,
                           bool showAtLineStart = false);
     bool SetDefaultStyle(const wxTextAttr& style);
