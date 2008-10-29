@@ -15,13 +15,15 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTreeCtrl);
 // wxTreeItemId fixes - these typemaps convert them to ruby Integers
 %include "../shared/treeitemid_typemaps.i"
 
-// These only differ from SetXXXList in the way memory ownership is transferred
+// These only differ from SetXXXList in the way memory ownership is
+// transferred. So only support the version that won't leak on wxRuby.
 %ignore wxTreeCtrl::AssignImageList;
 %ignore wxTreeCtrl::AssignButtonsImageList;
 %ignore wxTreeCtrl::AssignStateImageList;
 
 // Dealt with below
 %ignore wxTreeCtrl::GetSelections;
+%ignore wxTreeCtrl::EndEditLabel;
 
 // Only support the version that returns more info in flags
 %ignore wxTreeCtrl::HitTest(const wxPoint& point);
@@ -196,6 +198,18 @@ protected:
 %include "include/wxTreeCtrl.h"
 
 %extend wxTreeCtrl {
+  // This method has different method signatures on different platforms,
+  // so make it consistent
+  VALUE end_edit_label(const wxTreeItemId& item, VALUE rb_cancel_edit)
+  {
+    bool cancel = RTEST(rb_cancel_edit);
+#if defined(__WXMSW__)
+    $self->EndEditLabel(cancel);
+#else
+    $self->EndEditLabel(item, cancel);
+#endif
+    return Qnil;
+  }
 
   // The C++ interface uses a "cookie" to enable iteration over the
   // children. This is clumsy, unrubyish and broken as of wxRuby 1.9.1
