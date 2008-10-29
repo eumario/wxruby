@@ -301,7 +301,7 @@ public:
     // This method's signature is different on OS X / Linux - accepts
     // two arguments, the first being the tree item id whose editing
     // should be cancelled. Dealt with in SWIG file
-    bool EndEditLabel(bool cancel);
+    void EndEditLabel(const wxTreeItemId& item, bool cancel);
 
         // returns a pointer to the text edit control if the item is being
         // edited, NULL otherwise (it's assumed that no more than one item may

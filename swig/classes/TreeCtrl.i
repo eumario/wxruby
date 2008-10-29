@@ -23,7 +23,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTreeCtrl);
 
 // Dealt with below
 %ignore wxTreeCtrl::GetSelections;
-%ignore wxTreeCtrl::EndEditLabel;
 
 // Only support the version that returns more info in flags
 %ignore wxTreeCtrl::HitTest(const wxPoint& point);
@@ -198,19 +197,6 @@ protected:
 %include "include/wxTreeCtrl.h"
 
 %extend wxTreeCtrl {
-  // This method has different method signatures on different platforms,
-  // so make it consistent
-  VALUE end_edit_label(const wxTreeItemId& item, VALUE rb_cancel_edit)
-  {
-    bool cancel = RTEST(rb_cancel_edit);
-#if defined(__WXMSW__)
-    $self->EndEditLabel(cancel);
-#else
-    $self->EndEditLabel(item, cancel);
-#endif
-    return Qnil;
-  }
-
   // The C++ interface uses a "cookie" to enable iteration over the
   // children. This is clumsy, unrubyish and broken as of wxRuby 1.9.1
   // so just return the first child TreeItemId. Iteration should then be
