@@ -94,7 +94,7 @@ libs_str = "--libs std"
 if $dynamic_build
   if $macosx
     stc_lib = $wx_libs[/\S+wx_mac\S+_stc\S+/]
-    if stc_lib.nil? or not File.exists?(stc_lib)
+    if stc_lib.nil? or ( stc_lib !~ /^-l/ and not File.exists?(stc_lib) )
       $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
     else
       libs_str << ',stc'
@@ -121,7 +121,7 @@ end
 if $dynamic_build
   if $macosx
     gl_lib = $wx_libs[/\S+wx_mac\S+_gl\S+/]
-    if gl_lib.nil? or not File.exists?(gl_lib)
+    if gl_lib.nil? or ( gl_lib !~ /^-l/ and not File.exists?(gl_lib) )
       $excluded_classes << 'GLCanvas'
     else
       libs_str << ',gl'
