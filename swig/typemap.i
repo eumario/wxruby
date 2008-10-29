@@ -61,12 +61,13 @@
 // one fewer argument. Fortunately there are very few static methods in
 // Wx that accept wxString, and can be dealt with on a case-by-case
 // basis in the appropriate class .i files.
-%typemap(freearg) wxString & "if ( argc > $argnum - 2 ) delete $1;"
+%typemap(freearg) wxString& "if ( argc > $argnum - 2 ) delete $1;"
 %typemap(freearg) wxString* "if ( argc > $argnum - 2 ) delete $1;"
 
-%typemap(directorin) wxString, const wxString &, wxString & "$input = rb_str_new2((const char *)$1.utf8_str());";
+%typemap(directorin) wxString  "$input = WXSTR_TO_RSTR($1);";
+%typemap(directorin) wxString& "$input = WXSTR_TO_RSTR($1);";
+%typemap(directorin) wxString* "$input = WXSTR_PTR_TO_RSTR($1);";
 
-%typemap(directorin) wxString *, const wxString * "TODO: $1_name->utf8_str()";
 
 // These macros are defined in common.i; they deal with 1.8 / 1.9 differences
 %typemap(out) wxString "$result = WXSTR_TO_RSTR($1);"

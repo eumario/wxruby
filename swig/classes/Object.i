@@ -23,7 +23,7 @@ GC_MANAGE_AS_OBJECT(wxObject);
   // The actual final method is called wx_class
   VALUE wxwx_class() {
 	wxString class_name( self->GetClassInfo()->GetClassName() );
-	VALUE rb_class_name = rb_str_new2((const char *)class_name.mb_str(wxConvUTF8));
+	VALUE rb_class_name = WXSTR_TO_RSTR(class_name);
 	return rb_class_name;
   }
 }

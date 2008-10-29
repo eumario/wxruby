@@ -26,9 +26,9 @@
 
 %typemap(out) wxDataFormat {
   if ( $1.GetType() )
-      $result = INT2NUM( $1.GetType() );
+    $result = INT2NUM( $1.GetType() );
   else
-    $result = rb_str_new2((const char *)$1.GetId().mb_str(wxConvUTF8));
+    $result = WXSTR_TO_RSTR( $1.GetId() );
  }
 
 // wxDataFormat is widely used in the director methods of wxDataObject,
@@ -37,7 +37,7 @@
   if ( $1.GetType() )
     $input = INT2NUM( $1.GetType() );
   else
-    $input = rb_str_new2((const char *)$1.GetId().mb_str(wxConvUTF8));
+    $input = WXSTR_TO_RSTR( $1.GetId() );
  }
 
 %typemap(directorout) wxDataFormat {

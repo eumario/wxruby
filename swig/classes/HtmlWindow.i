@@ -57,11 +57,11 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxHtmlWindow);
     // The standard version in the base class (in
     // lib/wx/classes/htmlwin.rb) always allows
     virtual wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type, 
-                                     const wxString&  url, 
-                                     wxString* redirect) const
+                                             const wxString&  url, 
+                                             wxString* redirect) const
     {
-      VALUE self = SWIG_RubyInstanceFor((void *)this);
-      VALUE rb_url = rb_str_new2((const char *)url.mb_str(wxConvUTF8));
+      VALUE self   = SWIG_RubyInstanceFor((void *)this);
+      VALUE rb_url = WXSTR_TO_RSTR(url);
       VALUE ret = rb_funcall(self, rb_intern("on_opening_url"), 1, rb_url);
       if ( ret == Qtrue )
         return wxHTML_OPEN;
