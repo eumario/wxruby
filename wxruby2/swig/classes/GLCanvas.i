@@ -20,23 +20,35 @@ static int _T_DATA = T_DATA;
 
 enum
 {
-    WX_GL_RGBA=1,          /* use true color palette */
-    WX_GL_BUFFER_SIZE,     /* bits for buffer if not WX_GL_RGBA */
-    WX_GL_LEVEL,           /* 0 for main buffer, >0 for overlay, <0 for underlay */
-    WX_GL_DOUBLEBUFFER,    /* use doublebuffer */
-    WX_GL_STEREO,          /* use stereoscopic display */
-    WX_GL_AUX_BUFFERS,     /* number of auxiliary buffers */
-    WX_GL_MIN_RED,         /* use red buffer with most bits (> MIN_RED bits) */
-    WX_GL_MIN_GREEN,       /* use green buffer with most bits (> MIN_GREEN bits) */
-    WX_GL_MIN_BLUE,        /* use blue buffer with most bits (> MIN_BLUE bits) */
-    WX_GL_MIN_ALPHA,       /* use blue buffer with most bits (> MIN_ALPHA bits) */
-    WX_GL_DEPTH_SIZE,      /* bits for Z-buffer (0,16,32) */
-    WX_GL_STENCIL_SIZE,    /* bits for stencil buffer */
-    WX_GL_MIN_ACCUM_RED,   /* use red accum buffer with most bits (> MIN_ACCUM_RED bits) */
-    WX_GL_MIN_ACCUM_GREEN, /* use green buffer with most bits (> MIN_ACCUM_GREEN bits) */
-    WX_GL_MIN_ACCUM_BLUE,  /* use blue buffer with most bits (> MIN_ACCUM_BLUE bits) */
-    WX_GL_MIN_ACCUM_ALPHA  /* use blue buffer with most bits (> MIN_ACCUM_ALPHA bits) */
+    WX_GL_RGBA = 1,
+    WX_GL_BUFFER_SIZE,
+    WX_GL_LEVEL,
+    WX_GL_DOUBLEBUFFER,
+    WX_GL_STEREO,
+    WX_GL_AUX_BUFFERS,
+    WX_GL_MIN_RED,
+    WX_GL_MIN_GREEN,
+    WX_GL_MIN_BLUE,
+    WX_GL_MIN_ALPHA, 
+    WX_GL_DEPTH_SIZE,
+    WX_GL_STENCIL_SIZE,
+    WX_GL_MIN_ACCUM_RED,
+    WX_GL_MIN_ACCUM_GREEN,
+    WX_GL_MIN_ACCUM_BLUE,
+    WX_GL_MIN_ACCUM_ALPHA
 };
+
+// This version is not supported because the GLContext class is not
+// ported. Having it around causes a SWIG warning
+%ignore wxGLCanvas::wxGLCanvas(wxWindow* parent, 
+                               wxGLContext* sharedContext, 
+                               wxWindowID id, 
+                               const wxPoint& pos, 
+                               const wxSize& size, 
+                               long style, 
+                               const wxString& name, 
+                               int* attribList, 
+                               const wxPalette& palette);
 
 %typemap(typecheck) (int* attribList) {
   $1 = CLASS_OF($input)==rb_cArray ? 1 : 0;
