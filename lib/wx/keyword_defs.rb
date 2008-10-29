@@ -505,3 +505,32 @@ Wx::define_keyword_ctors('AnimationCtrl') do
   wx_ctor_params :name => 'animationCtrl'
 end
 
+Wx::define_keyword_ctors('VScrolledWindow') do
+  wx_ctor_params :id, :pos, :size, :style, :name => 'VScrolledWindowNameStr'
+end
+
+Wx::define_keyword_ctors('VListBox') do
+  wx_ctor_params :id, :pos, :size, :style, :name => 'VListBoxNameStr'
+end
+
+Wx::define_keyword_ctors('HtmlListBox') do
+  wx_ctor_params :id, :pos, :size, :style, :name => 'HtmlListBoxNameStr'
+end
+
+Wx::define_keyword_ctors('RichTextCtrl') do
+  wx_ctor_params :id, :value => ''
+  wx_ctor_params :pos, :size, :style => Wx::TE_MULTILINE
+  wx_ctor_params :validator, :name => 'textCtrl'
+end
+
+Wx::define_keyword_ctors('RichTextStyleListBox') do
+  wx_ctor_params :id, :pos, :size, :style
+end
+
+Wx::define_keyword_ctors('RichTextStyleListCtrl') do
+  wx_ctor_params :id, :pos, :size, :style
+end
+
+# FIXME - SymbolPickerDialog is hard to because the parent argument is
+# in a strange place.
+
