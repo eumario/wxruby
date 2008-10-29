@@ -40,6 +40,8 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 %apply long * OUTPUT { long * }
 %apply long * OUTPUT { wxTextCoord *col, wxTextCoord *row }
 
+%apply SWIGTYPE *DISOWN { wxRichTextStyleSheet* styleSheet };
+
 %import "include/wxObject.h"
 %import "include/wxWindow.h"
 %import "include/wxControl.h"
