@@ -373,11 +373,15 @@ h4. See also
 
 h3(#TreeCtrl_endeditlabel). TreeCtrl#end_edit_label
 
-  *end_edit_label*(%(arg-type)Boolean% cancelEdit)
+  *end_edit_label*(%(arg-type)Integer% item, %(arg-type)Boolean% cancelEdit)
 
-Ends label editing. If _cancelEdit_ is @true@, the edit will be cancelled.
+Ends the editing of the label of the given item. If _cancelEdit_ is
+@true@, the edit will be cancelled.
 
-This function is currently supported under Windows only.
+The item argument is not important under Windows, where it always
+defaults to the item currently being editing. Having to specify the item
+is a necessary irritation on Linux / OS X, but if developing for Windows
+only, the argument can have any value.
 
 h4. See also
 
