@@ -23,6 +23,8 @@ class WxWLatexParser < LatexParser
                         'unsigned long' => 'Integer', 
                         'int'  => 'Integer',
                         'wxDouble' => 'Float',
+                        'wxRichTextRange' => 'Range',
+                        'wxString' => 'String',
                         'double' => 'Float',
                         'unsigned char' => 'Integer',
                         'wxWindowID' => 'Integer',
@@ -211,8 +213,10 @@ class WxWLatexParser < LatexParser
       @param_type = content
       @param_type.gsub!(/(?:const|\*|\&)/, '')
       @param_type.strip!
+      is_standard_class = true if CPP_TO_RUBY_TYPES.key?(@param_type)
       fix_type(@param_type)
-      if CPP_TO_RUBY_TYPES.key?(cpp_type) # normal ruby class
+
+      if is_standard_class # normal ruby class
         append "%(arg-type)#{@param_type}%"
       else # looks like wxRuby class
         append "%(arg-type)\"#{@param_type}\":#{@param_type.downcase}.html%"
@@ -466,7 +470,8 @@ class WxWLatexClassParser < WxWLatexParser
       end
       meths << "\n\n</div>\n"
     end
-    out_file = File.join(@out_dir, rb_class.downcase + '.txtl')
+    out_file = File.join(@out_dir, 
+                          rb_class.gsub(/\W/, '').downcase + '.txtl')
     File.open(out_file, 'w+') { | f | f.write output }
   end
 end
