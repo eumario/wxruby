@@ -34,6 +34,9 @@ elsif File.exists?(File.join($WXDIR,'build','lib','wx','include',
                               setup_dir, 'wx','setup.h'))
   $WXLIBDIR      = File.join($WXDIR,"build","lib")
   $WXSETUPINCDIR = File.join($WXDIR,"build","lib","wx","include", setup_dir)
+else
+  raise RuntimeError, 
+        "Couldn't find compiled wxWidgets library in #{$WXDIR}"
 end
 
 # Define the location of setup.h that we'll be using
