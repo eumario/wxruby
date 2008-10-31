@@ -243,6 +243,7 @@ about events and setting up event handlers, see the
 |MouseCaptureChangedEvent|A mouse capture changed event|
 |MouseEvent|A mouse event|
 |MoveEvent|A move event|
+|NavigationKeyEvent|An event caused when the user TABs between controls|
 |NotebookEvent|A notebook control event|
 |NotifyEvent|A notification event, which can be vetoed|
 |PaintEvent|A paint event|
