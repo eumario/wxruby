@@ -44,6 +44,25 @@ public:
 };
 %}
 
+// These methods use the awkward "cookie" style of iterating over the
+// selected items in the control. Instead we offer a get_selections
+// method, defined below, which returns an array.
+%ignore wxVListBox::GetFirstSelected;
+%ignore wxVListBox::GetNextSelected;
+
+%extend wxRubyVListBox {
+  VALUE get_selections() {
+    VALUE rb_sels = rb_ary_new();
+    unsigned long cookie;
+    int item = $self->GetFirstSelected(cookie);
+    while ( item != -1 )
+      {
+        rb_ary_push(rb_sels, INT2NUM(item));
+        item = $self->GetNextSelected(cookie);
+      }
+    return rb_sels;
+  }
+};
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
