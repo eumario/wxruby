@@ -10,7 +10,7 @@ public:
    wxMenu(long  style ) ;
   virtual  ~wxMenu() ;
   wxMenuItem* Append(int itemid, 
-                     const wxString& text = wxEmptyString, 
+                     const wxString& item = wxEmptyString, 
                      const wxString& help = wxEmptyString, 
                      wxItemKind kind = wxITEM_NORMAL);
   wxMenuItem* Append(int itemid, 
@@ -47,7 +47,7 @@ public:
   wxMenuItem* Insert(size_t pos, wxMenuItem * item );
   wxMenuItem* Insert(size_t  pos, 
                      int  id, 
-                     const wxString& item, 
+                     const wxString& item = wxEmptyString, 
                      const wxString& helpString = wxT(""), 
                      wxItemKind kind = wxITEM_NORMAL);
   wxMenuItem* InsertCheckItem(size_t pos , 
