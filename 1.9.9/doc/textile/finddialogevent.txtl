@@ -1,0 +1,70 @@
+h1(#wxfinddialogevent). Wx::FindDialogEvent
+
+FindReplaceDialog events
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+h2. Event table macros
+
+To process a command event from 
+"FindReplaceDialog":findreplacedialog.html, use these event handler
+macros to direct input to member functions that take a FindDialogEvent
+argument. The _id_ parameter is the identifier of the find dialog and you
+may usually specify $-1$ for it unless you plan to have several find dialogs
+sending events to the same owner window simultaneously.
+
+
+
+|*evt_find(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Find button was pressed in the dialog.|
+|*evt_find_next(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Find next button was pressed in the dialog.|
+|*evt_find_replace(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Replace button was pressed in the dialog.|
+|*evt_find_replace_all(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Replace all button was pressed in the dialog.|
+|*evt_find_close(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The dialog is being destroyed,any pointers to it cannot be used any longer.|
+
+<div id="methods">
+
+h2. Methods
+
+* "FindDialogEvent.new":#FindDialogEvent_new
+* "FindDialogEvent#get_flags":#FindDialogEvent_getflags
+* "FindDialogEvent#get_find_string":#FindDialogEvent_getfindstring
+* "FindDialogEvent#get_replace_string":#FindDialogEvent_getreplacestring
+* "FindDialogEvent#get_dialog":#FindDialogEvent_getdialog
+
+</div>
+
+
+h3(#FindDialogEvent_wxfinddialogevent). FindDialogEvent.new
+
+  *FindDialogEvent.new*(%(arg-type)"EventType":eventtype.html% commandType = EVT_NULL,  %(arg-type)Integer% id = 0)
+
+Constuctor used by Widgets only.
+
+h3(#FindDialogEvent_getflags). FindDialogEvent#get_flags
+
+ Integer *get_flags*()
+
+Get the currently selected flags: this is the combination of @FR_DOWN@,
+@FR_WHOLEWORD@ and @FR_MATCHCASE@ flags.
+
+h3(#FindDialogEvent_getfindstring). FindDialogEvent#get_find_string
+
+ String *get_find_string*()
+
+Return the string to find (never empty).
+
+h3(#FindDialogEvent_getreplacestring). FindDialogEvent#get_replace_string
+
+ String *get_replace_string*()
+
+Return the string to replace the search string with (only for replace and
+replace all events).
+
+h3(#FindDialogEvent_getdialog). FindDialogEvent#get_dialog
+
+ "FindReplaceDialog":findreplacedialog.html *get_dialog*()
+
+Return the pointer to the dialog which generated this event.
+

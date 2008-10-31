@@ -1,0 +1,278 @@
+h1(#wxdebugreport). Wx::DebugReport
+
+DebugReport is used to generate a debug report, containing information about
+the program current state. It is usually used from 
+"App::OnFatalException()":apponfatalexception.html as shown in the 
+"sample":sampledebugrpt.html.
+
+A DebugReport object contains one or more files. A few of them can be created by the
+class itself but more can be created from the outside and then added to the
+report. Also note that several virtual functions may be overridden to further
+customize the class behaviour.
+
+Once a report is fully assembled, it can simply be left in the temporary
+directory so that the user can email it to the developers (in which case you
+should still use "DebugReportCompress":debugreportcompress.html to
+compress it in a single file) or uploaded to a Web server using 
+"DebugReportUpload":debugreportupload.html (setting up the Web server
+to accept uploads is your responsibility, of course). Other handlers, for example for
+automatically emailing the report, can be defined as well but are not currently
+included in Widgets.
+
+h2. Example of use
+
+
+     DebugReport report;
+     DebugReportPreviewStd preview;
+ 
+     report.AddCurrentContext();  // could also use AddAll()
+     report.AddCurrentDump();     // to do both at once
+ 
+     if ( preview.Show(report) )
+         report.Process();
+ 
+
+h2. Derived from
+
+No base class
+
+h2. Data structures
+
+This enum is used for functions that report either the current state
+or the state during the last (fatal) exception:
+
+
+ enum DebugReport::Context
+ {
+     Context_Current,
+     Context_Exception
+ };
+ 
+
+<div id="methods">
+
+h2. Methods
+
+* "DebugReport.new":#DebugReport_new
+* "DebugReport#add_all":#DebugReport_addall
+* "DebugReport#add_context":#DebugReport_addcontext
+* "DebugReport#add_current_context":#DebugReport_addcurrentcontext
+* "DebugReport#add_current_dump":#DebugReport_addcurrentdump
+* "DebugReport#add_dump":#DebugReport_adddump
+* "DebugReport#add_exception_context":#DebugReport_addexceptioncontext
+* "DebugReport#add_exception_dump":#DebugReport_addexceptiondump
+* "DebugReport#add_file":#DebugReport_addfile
+* "DebugReport#add_text":#DebugReport_addtext
+* "DebugReport#do_add_custom_context":#DebugReport_doaddcustomcontext
+* "DebugReport#do_add_exception_info":#DebugReport_doaddexceptioninfo
+* "DebugReport#do_add_loaded_modules":#DebugReport_doaddloadedmodules
+* "DebugReport#do_add_system_info":#DebugReport_doaddsysteminfo
+* "DebugReport#get_directory":#DebugReport_getdirectory
+* "DebugReport#get_file":#DebugReport_getfile
+* "DebugReport#get_files_count":#DebugReport_getfilescount
+* "DebugReport#get_report_name":#DebugReport_getreportname
+* "DebugReport#is_ok":#DebugReport_isok
+* "DebugReport#process":#DebugReport_process
+* "DebugReport#remove_file":#DebugReport_removefile
+* "DebugReport#reset":#DebugReport_reset
+
+</div>
+
+
+
+h3(#DebugReport_wxdebugreport). DebugReport.new
+
+  *destructor*()
+
+The destructor normally destroys the temporary directory created in the constructor
+with all the files it contains. Call "Reset()":debugreportreset.html to
+prevent this from happening.
+
+
+h3(#DebugReport_addall). DebugReport#add_all
+
+  *add_all*(%(arg-type)"Context":context.html% context = Context_Exception)
+
+Adds all available information to the report. Currently this includes a
+text (XML) file describing the process context and, under Win32, a minidump
+file.
+
+
+h3(#DebugReport_addcontext). DebugReport#add_context
+
+ Boolean *add_context*(%(arg-type)"Context":context.html% ctx)
+
+Add an XML file containing the current or exception context and the
+stack trace.
+
+
+h3(#DebugReport_addcurrentcontext). DebugReport#add_current_context
+
+ Boolean *add_current_context*()
+
+The same as "add_context(context__current)":#DebugReport_addcontext(contextcurrent).
+
+
+h3(#DebugReport_addcurrentdump). DebugReport#add_current_dump
+
+ Boolean *add_current_dump*()
+
+The same as "add_dump(context__current)":#DebugReport_adddump(contextcurrent).
+
+
+h3(#DebugReport_adddump). DebugReport#add_dump
+
+ Boolean *add_dump*(%(arg-type)"Context":context.html% ctx)
+
+Adds the minidump file to the debug report.
+
+Minidumps are only available under recent Win32 versions (@dbghlp32.dll@ 
+can be installed under older systems to make minidumps available).
+
+
+h3(#DebugReport_addexceptioncontext). DebugReport#add_exception_context
+
+ Boolean *add_exception_context*()
+
+The same as "add_context(context__exception)":#DebugReport_addcontext(contextexception).
+
+
+h3(#DebugReport_addexceptiondump). DebugReport#add_exception_dump
+
+ Boolean *add_exception_dump*()
+
+The same as "add_dump(context__exception)":#DebugReport_adddump(contextexception).
+
+
+h3(#DebugReport_addfile). DebugReport#add_file
+
+  *add_file*(%(arg-type)String% filename,  %(arg-type)String% description)
+
+Add another file to the report. If filename is an absolute path, it is
+copied to a file in the debug report directory with the same name. Otherwise
+the file should already exist in this directory
+
+description only exists to be displayed to the user in the report summary
+shown by "DebugReportPreview":debugreportpreview.html.
+
+h4. See also 
+
+"get_directory()":#DebugReport_getdirectory(),
+
+"add_text()":#DebugReport_addtext()
+
+
+h3(#DebugReport_addtext). DebugReport#add_text
+
+ Boolean *add_text*(%(arg-type)String% filename,  %(arg-type)String% text, 
+                  %(arg-type)String% description)
+
+This is a convenient wrapper around "add_file":#DebugReport_addfile. It
+creates the file with the given name and writes text to it, then
+adds the file to the report. The filename shouldn't contain the path.
+
+Returns  if file could be added successfully,  if an IO error
+occurred.
+
+
+h3(#DebugReport_doaddcustomcontext). DebugReport#do_add_custom_context
+
+  *do_add_custom_context*(%(arg-type)"XmlNode":xmlnode.html% nodeRoot)
+
+This function may be overridden to add arbitrary custom context to the XML
+context file created by "add_context":#DebugReport_addcontext. By
+default, it does nothing.
+
+
+h3(#DebugReport_doaddexceptioninfo). DebugReport#do_add_exception_info
+
+ Boolean *do_add_exception_info*(%(arg-type)"XmlNode":xmlnode.html% nodeContext)
+
+This function may be overridden to modify the contents of the exception tag in
+the XML context file.
+
+
+h3(#DebugReport_doaddloadedmodules). DebugReport#do_add_loaded_modules
+
+ Boolean *do_add_loaded_modules*(%(arg-type)"XmlNode":xmlnode.html% nodeModules)
+
+This function may be overridden to modify the contents of the modules tag in
+the XML context file.
+
+
+h3(#DebugReport_doaddsysteminfo). DebugReport#do_add_system_info
+
+ Boolean *do_add_system_info*(%(arg-type)"XmlNode":xmlnode.html% nodeSystemInfo)
+
+This function may be overridden to modify the contents of the system tag in
+the XML context file.
+
+
+h3(#DebugReport_getdirectory). DebugReport#get_directory
+
+ String *get_directory*()
+
+Returns the name of the temporary directory used for the files in this report.
+
+This method should be used to construct the full name of the files which you
+wish to add to the report using "add_file":#DebugReport_addfile.
+
+
+h3(#DebugReport_getfile). DebugReport#get_file
+
+ Boolean *get_file*(%(arg-type)Integer% n,  %(arg-type)String% name,  %(arg-type)String% desc)
+
+Retrieves the name (relative to 
+"get_directory()":#DebugReport_getdirectory()) and the description of the
+file with the given index. If n is greater than or equal to the number of
+filse,  is returned.
+
+
+h3(#DebugReport_getfilescount). DebugReport#get_files_count
+
+ Integer *get_files_count*()
+
+Gets the current number files in this report.
+
+
+h3(#DebugReport_getreportname). DebugReport#get_report_name
+
+ String *get_report_name*()
+
+Gets the name used as a base name for various files, by default 
+"App::GetAppName()":appgetappname.html is used.
+
+
+h3(#DebugReport_isok). DebugReport#is_ok
+
+ Boolean *is_ok*()
+
+Returns  if the object was successfully initialized. If this method returns 
+ the report can't be used.
+
+
+h3(#DebugReport_process). DebugReport#process
+
+ Boolean *process*()
+
+Processes this report: the base class simply notifies the user that the
+report has been generated. This is usually not enough -- instead you
+should override this method to do something more useful to you.
+
+
+h3(#DebugReport_removefile). DebugReport#remove_file
+
+  *remove_file*(%(arg-type)String% name)
+
+Removes the file from report: this is used by 
+"DebugReportPreview":debugreportpreview.html to allow the user to
+remove files potentially containing private information from the report.
+
+
+h3(#DebugReport_reset). DebugReport#reset
+
+  *reset*()
+
+Resets the directory name we use. The object can't be used any more after
+this as it becomes uninitialized and invalid.
+

@@ -1,0 +1,243 @@
+h1(#wxhtmlcontainercell). Wx::HtmlContainerCell
+
+The HtmlContainerCell class is an implementation of a cell that may
+contain more cells in it. It is heavily used in the HTML layout algorithm.
+
+h2. Derived from
+
+"HtmlCell":htmlcell.html
+
+h2. See Also
+
+"Cells Overview":cells.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlContainerCell.new":#HtmlContainerCell_new
+* "HtmlContainerCell#get_align_hor":#HtmlContainerCell_getalignhor
+* "HtmlContainerCell#get_align_ver":#HtmlContainerCell_getalignver
+* "HtmlContainerCell#get_background_colour":#HtmlContainerCell_getbackgroundcolour
+* "HtmlContainerCell#get_indent":#HtmlContainerCell_getindent
+* "HtmlContainerCell#get_indent_units":#HtmlContainerCell_getindentunits
+* "HtmlContainerCell#insert_cell":#HtmlContainerCell_insertcell
+* "HtmlContainerCell#set_align":#HtmlContainerCell_setalign
+* "HtmlContainerCell#set_align_hor":#HtmlContainerCell_setalignhor
+* "HtmlContainerCell#set_align_ver":#HtmlContainerCell_setalignver
+* "HtmlContainerCell#set_background_colour":#HtmlContainerCell_setbackgroundcolour
+* "HtmlContainerCell#set_border":#HtmlContainerCell_setborder
+* "HtmlContainerCell#set_indent":#HtmlContainerCell_setindent
+* "HtmlContainerCell#set_min_height":#HtmlContainerCell_setminheight
+* "HtmlContainerCell#set_width_float":#HtmlContainerCell_setwidthfloat
+
+</div>
+
+
+h3(#HtmlContainerCell_wxhtmlcontainercell). HtmlContainerCell.new
+
+  *HtmlContainerCell.new*(%(arg-type)"HtmlContainerCell":htmlcontainercell.html% parent)
+
+Constructor. _parent_ is pointer to parent container or NULL.
+
+
+h3(#HtmlContainerCell_getalignhor). HtmlContainerCell#get_align_hor
+
+ Integer *get_align_hor*()
+
+Returns container's horizontal alignment.
+
+h3(#HtmlContainerCell_getalignver). HtmlContainerCell#get_align_ver
+
+ Integer *get_align_ver*()
+
+Returns container's vertical alignment.
+
+h3(#HtmlContainerCell_getbackgroundcolour). HtmlContainerCell#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+Returns the background colour of the container or @NullColour@ if no background
+colour is set.
+
+h3(#HtmlContainerCell_getindent). HtmlContainerCell#get_indent
+
+ Integer *get_indent*(%(arg-type)Integer% ind)
+
+Returns the indentation. _ind_ is one of the *HTML_INDENT_** constants.
+
+*Note:* You must call "get_indent_units":#HtmlContainerCell_getindentunits 
+with same _ind_ parameter in order to correctly interpret the returned integer value.
+It is NOT always in pixels!
+
+h3(#HtmlContainerCell_getindentunits). HtmlContainerCell#get_indent_units
+
+ Integer *get_indent_units*(%(arg-type)Integer% ind)
+
+Returns the units of indentation for _ind_ where _ind_ is one
+of the *HTML_INDENT_** constants.
+
+h3(#HtmlContainerCell_insertcell). HtmlContainerCell#insert_cell
+
+  *insert_cell*(%(arg-type)"HtmlCell":htmlcell.html% cell)
+
+Inserts new cell into the container.
+
+h3(#HtmlContainerCell_setalign). HtmlContainerCell#set_align
+
+  *set_align*(%(arg-type)"HtmlTag":htmltag.html% tag)
+
+Sets the container's alignment (both horizontal and vertical) according to
+the values stored in _tag_. (Tags @ALIGN@ parameter is extracted.) In fact
+it is only a front-end to "set_align_hor":#HtmlContainerCell_setalignhor 
+and "set_align_ver":#HtmlContainerCell_setalignver.
+
+h3(#HtmlContainerCell_setalignhor). HtmlContainerCell#set_align_hor
+
+  *set_align_hor*(%(arg-type)Integer% al)
+
+Sets the container's _horizontal alignment_. During "Layout":htmlcelllayout.html 
+each line is aligned according to _al_ value.
+
+h4. Parameters
+
+* _al_ new horizontal alignment. May be one of these values:
+
+
+|*HTML_ALIGN_LEFT*|lines are left-aligned (default)|
+|*HTML_ALIGN_JUSTIFY*|lines are justified|
+|*HTML_ALIGN_CENTER*|lines are centered|
+|*HTML_ALIGN_RIGHT*|lines are right-aligned|
+
+
+
+h3(#HtmlContainerCell_setalignver). HtmlContainerCell#set_align_ver
+
+  *set_align_ver*(%(arg-type)Integer% al)
+
+Sets the container's _vertical alignment_. This is per-line alignment!
+
+h4. Parameters
+
+* _al_ new vertical alignment. May be one of these values:
+
+
+|*HTML_ALIGN_BOTTOM*|cells are over the line (default)|
+|*HTML_ALIGN_CENTER*|cells are centered on line|
+|*HTML_ALIGN_TOP*|cells are under the line|
+
+
+alignv.bmp
+
+
+h3(#HtmlContainerCell_setbackgroundcolour). HtmlContainerCell#set_background_colour
+
+  *set_background_colour*(%(arg-type)"Colour":colour.html% clr)
+
+Sets the background colour for this container.
+
+h3(#HtmlContainerCell_setborder). HtmlContainerCell#set_border
+
+  *set_border*(%(arg-type)"Colour":colour.html% clr1,  %(arg-type)"Colour":colour.html% clr2)
+
+Sets the border (frame) colours. A border is a rectangle around the container.
+
+h4. Parameters
+
+* _clr1_ Colour of top and left lines
+* _clr2_ Colour of bottom and right lines
+
+h3(#HtmlContainerCell_setindent). HtmlContainerCell#set_indent
+
+  *set_indent*(%(arg-type)Integer% i,  %(arg-type)Integer% what, 
+             %(arg-type)Integer% units = HTML_UNITS_PIXELS)
+
+Sets the indentation (free space between borders of container and subcells).
+
+h4. Parameters
+
+* _i_ Indentation value.
+* _what_ Determines which of the four borders we're setting. It is OR
+combination of following constants:
+
+
+|*HTML_INDENT_TOP*|top border|
+|*HTML_INDENT_BOTTOM*|bottom|
+|*HTML_INDENT_LEFT*|left|
+|*HTML_INDENT_RIGHT*|right|
+|*HTML_INDENT_HORIZONTAL*|left and right|
+|*HTML_INDENT_VERTICAL*|top and bottom|
+|*HTML_INDENT_ALL*|all 4 borders|
+
+
+indent.bmp
+
+* _units_ Units of _i_. This parameter affects interpretation of  value.
+
+
+|*HTML_UNITS_PIXELS*|_i_ is number of pixels|
+|*HTML_UNITS_PERCENT*|_i_ is interpreted as percents of widthof parent container|
+
+
+
+h3(#HtmlContainerCell_setminheight). HtmlContainerCell#set_min_height
+
+  *set_min_height*(%(arg-type)Integer% h,  %(arg-type)Integer% align = HTML_ALIGN_TOP)
+
+Sets minimal height of the container.
+
+When container's "Layout":htmlcelllayout.html is called, m_Height
+is set depending on layout of subcells to the height of area covered
+by layed-out subcells. Calling this method guarantees you that the height
+of container is never smaller than _h_ - even if the subcells cover
+much smaller area.
+
+h4. Parameters
+
+* _h_ The minimal height.
+* _align_ If height of the container is lower than the minimum height, empty space must be inserted
+somewhere in order to ensure minimal height. This parameter is one of *HTML_ALIGN_TOP,
+HTML_ALIGN_BOTTOM, HTML_ALIGN_CENTER*. It refers to the _contents_, not to the
+empty place.
+
+h3(#HtmlContainerCell_setwidthfloat). HtmlContainerCell#set_width_float
+
+  *set_width_float*(%(arg-type)Integer% w,  %(arg-type)Integer% units)
+
+  *set_width_float*(%(arg-type)"HtmlTag":htmltag.html% tag,  %(arg-type)Float% pixel_scale = 1.0)
+
+Sets floating width adjustment.
+
+The normal behaviour of container is that its width is the same as the width of
+parent container (and thus you can have only one sub-container per line).
+You can change this by setting FWA.
+
+_pixel_scale_ is number of real pixels that equals to 1 HTML pixel.
+
+h4. Parameters
+
+* _w_ Width of the container. If the value is negative it means
+complement to full width of parent container (e.g.
+@SetWidthFloat(-50, HTML_UNITS_PIXELS)@ sets the width
+of container to parent's width minus 50 pixels. This is useful when
+creating tables - you can call SetWidthFloat(50) and SetWidthFloat(-50))
+* _units_ Units of _w_ This parameter affects the interpretation of  value.
+
+
+|*HTML_UNITS_PIXELS*|_w_ is number of pixels|
+|*HTML_UNITS_PERCENT*|_w_ is interpreted as percents of widthof parent container|
+
+
+
+* _tag_ In the second version of method, _w_ and _units_
+info is extracted from tag's @WIDTH@ parameter.
+
+
+
+
+
+
+
+
+
+

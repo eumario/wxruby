@@ -1,0 +1,279 @@
+h1(#wxregkey). Wx::RegKey
+
+RegKey is a class representing the Windows registry (it is only available
+under Windows). One can create, query and delete registry keys using this
+class.
+
+The Windows registry is easy to understand. There are five registry keys,
+namely:
+
+
+# HKEY_CLASSES_ROOT (HKCR)
+# HKEY_CURRENT_USER (HKCU)
+# HKEY_LOCAL_MACHINE (HKLM)
+# HKEY_CURRENT_CONFIG (HKCC)
+# HKEY_USERS (HKU)
+
+
+After creating a key, it can hold a value. The values can be:
+
+
+# String Value
+# Binary Value
+# DWORD Value
+# Multi String Value
+# Expandable String Value
+
+
+h2. Derived from
+
+None
+
+h2. Example
+
+
+ RegKey *pRegKey = new RegKey("HKEY_LOCAL_MACHINE
+Software\\MyKey");
+ 
+ //will create the Key if it does not exist
+ if( !pRegKey->Exists() )
+     pRegKey->Create();
+ 
+ //will create a new value MYVALUE and set it to 12
+ pRegKey->SetValue("MYVALUE",12);
+ 
+ //Query for the Value and Retrieve it
+ long lMyVal;
+ String strTemp;
+ pRegKey->QueryValue("MYVALUE",&lMyVal); 
+ strTemp.Printf("MessageBox(strTemp,"Registry Value",0,this);
+ 
+ //Retrive the number of SubKeys and enumerate them
+ Integer nSubKeys;
+ pRegKey->GetKeyInfo(&nSubKeys,NULL,NULL,NULL);
+ 
+ pRegKey->GetFirstKey(strTemp,1);
+ for(int i=0;i<nSubKeys;i++)
+ {
+      MessageBox(strTemp,"SubKey Name",0,this);
+      pRegKey->GetNextKey(strTemp,1);
+ }
+ 
+
+<div id="methods">
+
+h2. Methods
+
+* "RegKey.new":#RegKey_new
+* "RegKey#close":#RegKey_close
+* "RegKey#create":#RegKey_create
+* "RegKey#delete_self":#RegKey_deleteself
+* "RegKey#delete_key":#RegKey_deletekey
+* "RegKey#delete_value":#RegKey_deletevalue
+* "RegKey#exists":#RegKey_exists
+* "RegKey#get_name":#RegKey_getname
+* "RegKey#get_first_key":#RegKey_getfirstkey
+* "RegKey#get_first_value":#RegKey_getfirstvalue
+* "RegKey#get_key_info":#RegKey_getkeyinfo
+* "RegKey#get_next_key":#RegKey_getnextkey
+* "RegKey#get_next_value":#RegKey_getnextvalue
+* "RegKey#has_value":#RegKey_hasvalue
+* "RegKey#has_values":#RegKey_hasvalues
+* "RegKey#has_sub_key":#RegKey_hassubkey
+* "RegKey#has_sub_keys":#RegKey_hassubkeys
+* "RegKey#is_empty":#RegKey_isempty
+* "RegKey#is_opened":#RegKey_isopened
+* "RegKey#open":#RegKey_open
+* "RegKey#query_value":#RegKey_queryvalue
+* "RegKey#rename":#RegKey_rename
+* "RegKey#rename_value":#RegKey_renamevalue
+* "RegKey#set_value":#RegKey_setvalue
+
+</div>
+
+
+
+h3(#RegKey_new). RegKey.new
+
+  *RegKey.new*(%(arg-type)String% strKey)
+
+The constructor to set the full name of the key.
+
+  *RegKey.new*(%(arg-type)"RegKey":regkey.html% keyParent,  %(arg-type)String% strKey)
+
+The constructor to set the full name of the key under a previously created parent.
+
+
+h3(#RegKey_close). RegKey#close
+
+  *close*()
+
+Closes the key.
+
+
+h3(#RegKey_create). RegKey#create
+
+ Boolean *create*(%(arg-type)Boolean% bOkIfExists = true)
+
+Creates the key. Will fail if the key already exists and _bOkIfExists_ is false.
+
+
+h3(#RegKey_deleteself). RegKey#delete_self
+
+  *delete_self*()
+
+Deletes this key and all of its subkeys and values recursively.
+
+
+h3(#RegKey_deletekey). RegKey#delete_key
+
+  *delete_key*(%(arg-type)"Char":char.html% szKey)
+
+Deletes the subkey with all of its subkeys/values recursively.
+
+
+h3(#RegKey_deletevalue). RegKey#delete_value
+
+  *delete_value*(%(arg-type)"Char":char.html% szKey)
+
+Deletes the named value.
+
+
+h3(#RegKey_exists). RegKey#exists
+
+ Boolean *exists*()
+
+Returns true if the key exists.
+
+
+h3(#RegKey_getname). RegKey#get_name
+
+ String *get_name*(%(arg-type)Boolean% bShortPrefix = true)
+
+Gets the name of the registry key.
+
+
+h3(#RegKey_getfirstkey). RegKey#get_first_key
+
+ Boolean *get_key_value*(%(arg-type)String% strKeyName,  %(arg-type)Integer% lIndex)
+
+Gets the first key.
+
+
+h3(#RegKey_getfirstvalue). RegKey#get_first_value
+
+ Boolean *get_first_value*(%(arg-type)String% strValueName,  %(arg-type)Integer% lIndex)
+
+Gets the first value of this key.
+
+
+h3(#RegKey_getkeyinfo). RegKey#get_key_info
+
+ Boolean *exists*(%(arg-type)Integer% pnSubKeys,  %(arg-type)Integer% pnValues, 
+                %(arg-type)Integer% pnMaxValueLen)
+
+Gets information about the key.
+
+h4. Parameters
+
+* _pnSubKeys_ The number of subkeys.
+* _pnMaxKeyLen_ The maximum length of the subkey name.
+* _pnValues_ The number of values.
+
+
+h3(#RegKey_getnextkey). RegKey#get_next_key
+
+ Boolean *get_next_key*(%(arg-type)String% strKeyName,  %(arg-type)Integer% lIndex)
+
+Gets the next key.
+
+
+h3(#RegKey_getnextvalue). RegKey#get_next_value
+
+ Boolean *get_next_value*(%(arg-type)String% strValueName,  %(arg-type)Integer% lIndex)
+
+Gets the next key value for this key.
+
+
+h3(#RegKey_hasvalue). RegKey#has_value
+
+ Boolean *has_value*(%(arg-type)"Char":char.html% szValue)
+
+Returns true if the value exists.
+
+
+h3(#RegKey_hasvalues). RegKey#has_values
+
+ Boolean *has_values*()
+
+Returns true if any values exist.
+
+
+h3(#RegKey_hassubkey). RegKey#has_sub_key
+
+ Boolean *has_sub_key*(%(arg-type)"Char":char.html% szKey)
+
+Returns true if given subkey exists.
+
+
+h3(#RegKey_hassubkeys). RegKey#has_sub_keys
+
+ Boolean *has_sub_keys*()
+
+Returns true if any subkeys exist.
+
+
+h3(#RegKey_isempty). RegKey#is_empty
+
+ Boolean *is_empty*()
+
+Returns true if this key is empty, nothing under this key.
+
+
+h3(#RegKey_isopened). RegKey#is_opened
+
+ Boolean *is_opened*()
+
+Returns true if the key is opened.
+
+
+h3(#RegKey_open). RegKey#open
+
+ Boolean *open*(%(arg-type)"AccessMode":accessmode.html% mode = Write)
+
+Explicitly opens the key. This method also allows the key to be opened in
+read-only mode by passing @RegKey::Read@ instead of default 
+@RegKey::Write@ parameter.
+
+
+h3(#RegKey_queryvalue). RegKey#query_value
+
+ Boolean *query_value*(%(arg-type)"Char":char.html% szValue,  %(arg-type)String% strValue)
+
+Retrieves the string value.
+
+ Boolean *query_value*(%(arg-type)"Char":char.html% szValue,  %(arg-type)Integer% plValue)
+
+Retrieves the numeric value.
+
+
+h3(#RegKey_rename). RegKey#rename
+
+ Boolean *rename*(%(arg-type)"Char":char.html% szNewName)
+
+Renames the key.
+
+
+h3(#RegKey_renamevalue). RegKey#rename_value
+
+ Boolean *rename_value*(%(arg-type)"Char":char.html% szValueOld,  %(arg-type)"Char":char.html% szValueNew)
+
+Renames a value.
+
+
+h3(#RegKey_setvalue). RegKey#set_value
+
+ Boolean *set_value*(%(arg-type)"Char":char.html% szValue,  %(arg-type)Integer% lValue)
+
+Sets the numeric value.
+

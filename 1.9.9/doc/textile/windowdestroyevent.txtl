@@ -1,0 +1,46 @@
+h1(#wxwindowdestroyevent). Wx::WindowDestroyEvent
+
+This event is sent when a window is destroyed. It is a subclass of
+"CommandEvent":commandevent.html and so it is propagated up the window
+hierarchy. This means that frames, panels and other container windows
+can listen for the destruction of controls that they contain.
+
+h2. Derived from
+
+"CommandEvent":event.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event hooks
+
+To process a window destruction event, use the @evt_window_destroy@ event hook
+to handle the event using a block. The block receives a
+WindowDestroyEvent argument.
+
+Note that if you specify your own evt_window_destroy handler, you *MUST*
+call "event.skip":event.html#Event_skip on the event. This ensures it is
+passed on to wxRuby's internal evt_window_destroy handlers, where it
+used in memory management.
+
+|*evt_destroy(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_DESTROY event.|
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "WindowCreateEvent":windowcreateevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "WindowDestroyEvent.new":#WindowDestroyEvent_new
+
+</div>
+
+h3(#WindowDestroyEvent_new). WindowDestroyEvent.new
+
+  *WindowDestroyEvent.new*(%(arg-type)"Window":window.html% win = nil)
+
+Constructor. Unlikely to be required in user code.
+

@@ -1,0 +1,142 @@
+h1(#wxmdichildframe). Wx::MDIChildFrame
+
+An MDI child frame is a frame that can only exist on a "MDIClientWindow":mdiclientwindow.html,
+which is itself a child of "MDIParentFrame":mdiparentframe.html.
+
+h2. Derived from
+
+"Frame":frame.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@CAPTION@|Puts a caption on the frame.|
+|@DEFAULT_FRAME_STYLE@|Defined as *MINIMIZE_BOX ** MAXIMIZE_BOX ** THICK_FRAME ** SYSTEM_MENU ** CAPTION*.|
+|@ICONIZE@|Display the frame iconized (minimized) (Windows only).|
+|@MAXIMIZE@|Displays the frame maximized (Windows only).|
+|@MAXIMIZE_BOX@|Displays a maximize box on the frame (Windows and Motif only).|
+|@MINIMIZE@|Identical to *ICONIZE*.|
+|@MINIMIZE_BOX@|Displays a minimize box on the frame (Windows and Motif only).|
+|@RESIZE_BORDER@|Displays a resizeable border around the window (Motif only;for Windows, it is implicit in THICK_FRAME).|
+|@STAY_ON_TOP@|Stay on top of other windows (Windows only).|
+|@SYSTEM_MENU@|Displays a system menu (Windows and Motif only).|
+|@THICK_FRAME@|Displays a thick frame around the window (Windows and Motif only).|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Remarks
+
+Although internally an MDI child frame is a child of the MDI client window, in Widgets
+you create it as a child of "MDIParentFrame":mdiparentframe.html. You can usually
+forget that the client window exists.
+
+MDI child frames are clipped to the area of the MDI client window, and may be iconized
+on the client window.
+
+You can associate a menubar with a child frame as usual, although an MDI child doesn't display
+its menubar under its own title bar. The MDI parent frame's menubar will be changed to
+reflect the currently active child frame. If there are currently no children, the parent
+frame's own menubar will be displayed.
+
+h2. See also
+
+"MDIClientWindow":mdiclientwindow.html, "MDIParentFrame":mdiparentframe.html, "Frame":frame.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MDIChildFrame.new":#MDIChildFrame_new
+* "MDIChildFrame#activate":#MDIChildFrame_activate
+* "MDIChildFrame#create":#MDIChildFrame_create
+* "MDIChildFrame#maximize":#MDIChildFrame_maximize
+* "MDIChildFrame#restore":#MDIChildFrame_restore
+
+</div>
+
+
+h3(#MDIChildFrame_new). MDIChildFrame.new
+
+  *MDIChildFrame.new*(%(arg-type)"MDIParentFrame":mdiparentframe.html% parent,  %(arg-type)Integer% id, 
+                    %(arg-type)String% title, 
+                    %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                    %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                    %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                    %(arg-type)String% name = "frame")
+
+Constructor, creating the window.
+
+h4. Parameters
+
+* _parent_ The window parent. This should not be NULL.
+* _id_ The window identifier. It may take a value of -1 to indicate a default value.
+* _title_ The caption to be displayed on the frame's title bar.
+* _pos_ The window position. A value of (-1, -1) indicates a default position, chosen by
+either the windowing system or Widgets, depending on platform.
+* _size_ The window size. A value of (-1, -1) indicates a default size, chosen by
+either the windowing system or Widgets, depending on platform.
+* _style_ The window style. See "MDIChildFrame":mdichildframe.html.
+* _name_ The name of the window. This parameter is used to associate a name with the item,
+allowing the application user to set Motif resource values for
+individual windows.
+
+h4. Remarks
+
+None.
+
+h4. See also
+
+"MDIChildFrame#create":mdichildframe.html#MDIChildFrame_create
+
+  *destructor*()
+
+Destructor. Destroys all child windows and menu bar if present.
+
+h3(#MDIChildFrame_activate). MDIChildFrame#activate
+
+  *activate*()
+
+Activates this MDI child frame.
+
+h4. See also
+
+"MDIChildFrame#maximize":mdichildframe.html#MDIChildFrame_maximize, "MDIChildFrame#restore":mdichildframe.html#MDIChildFrame_restore
+
+h3(#MDIChildFrame_create). MDIChildFrame#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                %(arg-type)String% name = "frame")
+
+Used in two-step frame construction. See "MDIChildFrame.new":mdichildframe.html#MDIChildFrame_new for further details.
+
+h3(#MDIChildFrame_maximize). MDIChildFrame#maximize
+
+  *maximize*(%(arg-type)Boolean% maximize)
+
+Maximizes this MDI child frame.
+
+h4. See also
+
+"MDIChildFrame#activate":mdichildframe.html#MDIChildFrame_activate, "MDIChildFrame#restore":mdichildframe.html#MDIChildFrame_restore
+
+h3(#MDIChildFrame_restore). MDIChildFrame#restore
+
+  *restore*()
+
+Restores this MDI child frame (unmaximizes).
+
+h4. See also
+
+"MDIChildFrame#activate":mdichildframe.html#MDIChildFrame_activate, "MDIChildFrame#maximize":mdichildframe.html#MDIChildFrame_maximize
+

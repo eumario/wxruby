@@ -1,0 +1,357 @@
+h1(#wxauimanager). Wx::AuiManager
+
+AuiManager is the central class of the AUI class framework.
+
+See also "AUI overview":auioverview.html.
+
+AuiManager manages the panes associated with it
+for a particular Frame, using a pane's AuiPaneInfo information to
+determine each pane's docking and floating behavior. AuiManager
+uses Widgets' sizer mechanism to plan the layout of each frame. It
+uses a replaceable dock art class to do all drawing, so all drawing is
+localized in one area, and may be customized depending on an
+application's specific needs.
+
+AuiManager works as follows: the programmer adds panes to the class,
+or makes changes to existing pane properties (dock position, floating
+state, show state, etc.). To apply these changes, AuiManager's
+Update() function is called. This batch processing can be used to avoid
+flicker, by modifying more than one pane at a time, and then "committing"
+all of the changes at once by calling Update().
+
+Panes can be added quite easily:
+
+
+ TextCtrl* text1 = new TextCtrl(this, -1);
+ TextCtrl* text2 = new TextCtrl(this, -1);
+ m_mgr.AddPane(text1, LEFT, T("Pane Caption"));
+ m_mgr.AddPane(text2, BOTTOM, T("Pane Caption"));
+ m_mgr.Update();
+ 
+
+Later on, the positions can be modified easily. The following will float
+an existing pane in a tool window:
+
+
+ m_mgr.GetPane(text1).Float();
+ 
+
+h2. Layers, Rows and Directions, Positions
+
+Inside AUI, the docking layout is figured out by checking several
+pane parameters. Four of these are important for determining where a
+pane will end up:
+
+*Direction:*
+Each docked pane has a direction, Top, Bottom, Left, Right, or
+Center. This is fairly self-explanatory. The pane will be placed in the
+location specified by this variable.
+
+*Position:*
+More than one pane can be placed inside of a dock. Imagine two panes
+being docked on the left side of a window. One pane can be placed over
+another. In proportionally managed docks, the pane position indicates
+its sequential position, starting with zero. So, in our scenario with
+two panes docked on the left side, the top pane in the dock would have
+position 0, and the second one would occupy position 1.
+
+*Row:*
+A row can allow for two docks to be placed next to each other. One of
+the most common places for this to happen is in the toolbar. Multiple
+toolbar rows are allowed, the first row being row 0, and the second
+row 1. Rows can also be used on vertically docked panes.
+
+*Layer:*
+A layer is akin to an onion. Layer 0 is the very center of the
+managed pane. Thus, if a pane is in layer 0, it will be closest to the
+center window (also sometimes known as the "content window").
+Increasing layers "swallow up" all layers of a lower value. This can
+look very similar to multiple rows, but is different because all panes
+in a lower level yield to panes in higher levels. The best way to
+understand layers is by running the AUI sample.
+
+h2. Derived from
+
+"EvtHandler":evthandler.html
+
+h2. See also
+
+"AuiPaneInfo":auipaneinfo.html,
+"AuiDockArt":auidockart.html
+
+h2. Data structures
+
+
+ enum AuiManagerDock
+ {
+     AUI_DOCK_NONE = 0,
+     AUI_DOCK_TOP = 1,
+     AUI_DOCK_RIGHT = 2,
+     AUI_DOCK_BOTTOM = 3,
+     AUI_DOCK_LEFT = 4,
+     AUI_DOCK_CENTER = 5,
+     AUI_DOCK_CENTRE = AUI_DOCK_CENTER
+ }
+ 
+
+
+ enum AuiManagerOption
+ {
+     AUI_MGR_ALLOW_FLOATING           = 1 << 0,
+     AUI_MGR_ALLOW_ACTIVE_PANE        = 1 << 1,
+     AUI_MGR_TRANSPARENT_DRAG         = 1 << 2,
+     AUI_MGR_TRANSPARENT_HINT         = 1 << 3,
+     AUI_MGR_VENETIAN_BLINDS_HINT     = 1 << 4,
+     AUI_MGR_RECTANGLE_HINT           = 1 << 5,
+     AUI_MGR_HINT_FADE                = 1 << 6,
+     AUI_MGR_NO_VENETIAN_BLINDS_FADE  = 1 << 7,
+ 
+     AUI_MGR_DEFAULT = AUI_MGR_ALLOW_FLOATING |
+                         AUI_MGR_TRANSPARENT_HINT |
+                         AUI_MGR_HINT_FADE |
+                         AUI_MGR_NO_VENETIAN_BLINDS_FADE
+ }
+ 
+
+
+<div id="methods">
+
+h2. Methods
+
+* "AuiManager.new":#AuiManager_new
+* "AuiManager#add_pane":#AuiManager_addpane
+* "AuiManager#detach_pane":#AuiManager_detachpane
+* "AuiManager#each_pane":#AuiManager_eachpane
+* "AuiManager#get_art_provider":#AuiManager_getartprovider
+* "AuiManager#get_dock_size_constraint":#AuiManager_getdocksizeconstraint
+* "AuiManager#get_flags":#AuiManager_getflags
+* "AuiManager#get_managed_window":#AuiManager_getmanagedwindow
+* "AuiManager#get_manager":#AuiManager_getmanager
+* "AuiManager#get_pane":#AuiManager_getpane
+* "AuiManager#hide_hint":#AuiManager_hidehint
+* "AuiManager#insert_pane":#AuiManager_insertpane
+* "AuiManager#load_pane_info":#AuiManager_loadpaneinfo
+* "AuiManager#load_perspective":#AuiManager_loadperspective
+* "AuiManager#process_dock_result":#AuiManager_processdockresult
+* "AuiManager#save_pane_info":#AuiManager_savepaneinfo
+* "AuiManager#save_perspective":#AuiManager_saveperspective
+* "AuiManager#set_art_provider":#AuiManager_setartprovider
+* "AuiManager#set_dock_size_constraint":#AuiManager_setdocksizeconstraint
+* "AuiManager#set_flags":#AuiManager_setflags
+* "AuiManager#set_managed_window":#AuiManager_setmanagedwindow
+* "AuiManager#show_hint":#AuiManager_showhint
+* "AuiManager#un_init":#AuiManager_uninit
+* "AuiManager#update":#AuiManager_update
+
+</div>
+
+
+
+h3(#AuiManager_wxauimanager). AuiManager.new
+
+  *AuiManager.new*(%(arg-type)"Window":window.html% managed_wnd = nil, 
+                 %(arg-type)unsigned int% flags = AUI_MGR_DEFAULT)
+
+Constructor. managed_wnd specifies the Frame which should be managed.
+flags  specifies options which allow the frame management behavior
+to be modified.
+
+  *destructor*()
+
+h3(#AuiManager_addpane). AuiManager#add_pane
+
+ Boolean *add_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane_info)
+
+ Boolean *add_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)Integer% direction = LEFT, 
+                  %(arg-type)String% caption = '')
+
+ Boolean *add_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane_info, 
+                  %(arg-type)"Point":point.html% drop_pos)
+
+
+AddPane() tells the frame manager to start managing a child window. There are several versions of this function. The first version allows the full spectrum of pane parameter possibilities. The second version is used for simpler user interfaces which do not require as much configuration.  The last version allows a drop position to be specified, which will determine where the pane will be added.
+
+h3(#AuiManager_detachpane). AuiManager#detach_pane
+
+ Boolean *detach_pane*(%(arg-type)"Window":window.html% window)
+
+Tells the AuiManager to stop managing the pane specified by window.
+The window, if in a floated frame, is reparented to the frame managed
+by AuiManager.
+
+h3(#AuiManager_eachpane). AuiManager#each_pane
+
+ *get_all_panes*() { ... }
+
+Iterates over all the panes contained in the AuiManager, passing each
+one in turn into the passed block as an "AuiPaneInfo":auipaneinfo.html
+object. 
+
+Note that changes can be made to the panes as they are iterated over by
+this method, but such changes will not be displayed until
+"update":#AuiManager_update is called. 
+
+h3(#AuiManager_getartprovider). AuiManager#get_art_provider
+
+ "AuiDockArt":auidockart.html *get_art_provider*()
+
+Returns the current art provider being used.
+
+See also: "AuiDockArt":auidockart.html.
+
+h3(#AuiManager_getdocksizeconstraint). AuiManager#get_dock_size_constraint
+
+  *get_dock_size_constraint*(%(arg-type)Float% widthpct,  %(arg-type)Float% heightpct)
+
+Returns the current dock constraint values.  See "set_dock_size_constraint()":#AuiManager_setdocksizeconstraint() for more information.
+
+h3(#AuiManager_getflags). AuiManager#get_flags
+
+ unsigned int *get_flags*()
+
+Returns the current manager's flags.
+
+h3(#AuiManager_getmanagedwindow). AuiManager#get_managed_window
+
+ "Window":window.html *get_managed_window*()
+
+Returns the frame currently being managed by AuiManager.
+
+h3(#AuiManager_getmanager). AuiManager#get_manager
+
+ "AuiManager":auimanager.html *get_manager*(%(arg-type)"Window":window.html% window)
+
+Calling this method will return the AuiManager for a given window.  The window parameter should
+specify any child window or sub-child window of the frame or window managed by AuiManager.
+The window parameter need not be managed by the manager itself, nor does it even need to be a child
+or sub-child of a managed window.  It must however be inside the window hierarchy underneath the managed
+window.
+
+h3(#AuiManager_getpane). AuiManager#get_pane
+
+ "AuiPaneInfo":auipaneinfo.html *get_pane*(%(arg-type)"Window":window.html% window)
+
+ "AuiPaneInfo":auipaneinfo.html *get_pane*(%(arg-type)String% name)
+
+_GetPane_ is used to lookup a AuiPaneInfo object
+either by window pointer or by pane name, which acts as a unique id for
+a window pane. The returned AuiPaneInfo object may then be modified to
+change a pane's look, state or position. After one or more
+modifications to AuiPaneInfo, AuiManager::Update() should be called
+to commit the changes to the user interface. If the lookup failed
+(meaning the pane could not be found in the manager), a call to the
+returned AuiPaneInfo's IsOk() method will return false.
+
+h3(#AuiManager_hidehint). AuiManager#hide_hint
+
+  *hide_hint*()
+
+HideHint() hides any docking hint that may be visible.
+
+h3(#AuiManager_insertpane). AuiManager#insert_pane
+
+ Boolean *insert_pane*(%(arg-type)"Window":window.html% window,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% insert_location, 
+                     %(arg-type)Integer% insert_level = AUI_INSERT_PANE)
+
+This method is used to insert either a previously unmanaged pane window
+into the frame manager, or to insert a currently managed pane somewhere 
+else. _InsertPane_ will push all panes, rows, or docks aside and
+insert the window into the position specified by insert_location. 
+Because insert_location can specify either a pane, dock row, or dock
+layer, the insert_level parameter is used to disambiguate this. The
+parameter insert_level can take a value of AUI_INSERT_PANE, AUI_INSERT_ROW 
+or AUI_INSERT_DOCK.
+
+h3(#AuiManager_loadpaneinfo). AuiManager#load_pane_info
+
+  *load_pane_info*(%(arg-type)String% pane_part,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
+
+LoadPaneInfo() is similar to to LoadPerspective, with the exception that it only loads information about a single pane.  It is used in combination with SavePaneInfo().
+
+h3(#AuiManager_loadperspective). AuiManager#load_perspective
+
+ Boolean *load_perspective*(%(arg-type)String% perspective,  %(arg-type)Boolean% update = true)
+
+Loads a saved perspective. If update is true, AuiManager::Update()
+is automatically invoked, thus realizing the saved perspective on screen.
+
+h3(#AuiManager_processdockresult). AuiManager#process_dock_result
+
+ Boolean *process_dock_result*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% target,  %(arg-type)"AuiPaneInfo":auipaneinfo.html% new_pos)
+
+ProcessDockResult() is a protected member of the AUI layout manager.  It can be overridden by derived classes to provide custom docking calculations.
+
+h3(#AuiManager_savepaneinfo). AuiManager#save_pane_info
+
+ String *save_pane_info*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
+
+SavePaneInfo() is similar to SavePerspective, with the exception that it only saves information about a single pane.  It is used in combination with LoadPaneInfo().
+
+h3(#AuiManager_saveperspective). AuiManager#save_perspective
+
+ String *save_perspective*()
+
+Saves the entire user interface layout into an encoded String, which
+can then be stored by the application (probably using Config). When
+a perspective is restored using LoadPerspective(), the entire user
+interface will return to the state it was when the perspective was saved.
+
+h3(#AuiManager_setartprovider). AuiManager#set_art_provider
+
+  *set_art_provider*(%(arg-type)"AuiDockArt":auidockart.html% art_provider)
+
+Instructs AuiManager to use art provider specified by parameter
+art_provider for all drawing calls. This allows plugable
+look-and-feel features. The previous art provider object, if any,
+will be deleted by AuiManager.
+
+See also: "AuiDockArt":auidockart.html.
+
+h3(#AuiManager_setdocksizeconstraint). AuiManager#set_dock_size_constraint
+
+  *set_dock_size_constraint*(%(arg-type)Float% widthpct,  %(arg-type)Float% heightpct)
+
+When a user creates a new dock by dragging a window into a docked position, often times the large size of the
+window will create a dock that is unwieldly large.  AuiManager by default limits the size of any
+new dock to 1/3 of the window size.  For horizontal docks, this would be 1/3 of the window height.  For
+vertical docks, 1/3 of the width.  Calling this function will adjust this constraint value.  The numbers
+must be between 0.0 and 1.0.  For instance, calling SetDockSizeContraint with 0.5, 0.5 will cause new
+docks to be limited to half of the size of the entire managed window. 
+
+h3(#AuiManager_setflags). AuiManager#set_flags
+
+  *set_flags*(%(arg-type)unsigned int% flags)
+
+This method is used to specify AuiManager's settings flags. flags
+specifies options which allow the frame management behavior to be modified.
+
+h3(#AuiManager_setmanagedwindow). AuiManager#set_managed_window
+
+  *set_managed_window*(%(arg-type)"Window":window.html% managed_wnd)
+
+Called to specify the frame or window which is to be managed by AuiManager.  Frame management is not restricted to just frames.  Child windows or custom controls are also allowed.
+
+h3(#AuiManager_showhint). AuiManager#show_hint
+
+  *show_hint*(%(arg-type)"Rect":rect.html% rect)
+
+This function is used by controls to explicitly show a hint window at the specified rectangle.  It is rarely called, and is mostly used by controls implementing custom pane drag/drop behaviour.  The specified rectangle should be in screen coordinates.
+
+h3(#AuiManager_uninit). AuiManager#un_init
+
+  *un_init*()
+
+Uninitializes the framework and should be called before a managed frame or window is destroyed. UnInit() is usually called in the managed Frame's destructor.  It is necessary to call this function before the managed frame or window is destroyed, otherwise the manager cannot remove its custom event handlers from a window.
+
+h3(#AuiManager_update). AuiManager#update
+
+  *update*()
+
+This method is called after any number of changes are
+made to any of the managed panes. Update() must be invoked after
+AddPane() or InsertPane() are called in order to "realize" or "commit"
+the changes. In addition, any number of changes may be made to
+AuiPaneInfo structures (retrieved with AuiManager::GetPane), but to
+realize the changes, Update() must be called. This construction allows
+pane flicker to be avoided by updating the whole layout at one time.
+

@@ -1,0 +1,224 @@
+h1(#wxfiledialog). Wx::FileDialog
+
+This class represents the file chooser dialog.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+|@FD_DEFAULT_STYLE@|Equivalent to FD_OPEN.|
+|@FD_OPEN@|This is an open dialog; usually this means that the default button's label of the dialog is "Open". Cannot be combined with FD_SAVE.|
+|@FD_SAVE@|This is a save dialog; usually this means that the default button's label of the dialog is "Save". Cannot be combined with FD_OPEN.|
+|@FD_OVERWRITE_PROMPT@|For save dialog only: prompt for a confirmation if a file will be overwritten.|
+|@FD_FILE_MUST_EXIST@|For open dialog only: the user may only select files that actually exist.|
+|@FD_MULTIPLE@|For open dialog only: allows selecting multiple files.|
+|@FD_CHANGE_DIR@|Change the current working directory to the directory where the file(s) chosen by the user are.|
+|@FD_PREVIEW@|Show the preview of the selected files (currently only supported by GTK using GTK+ 2.4 or later).|
+
+
+*NB:* Previous versions of wxRuby used @FD_CHANGE_DIR@ by default
+under MS Windows which allowed the program to simply remember the last
+directory where user selected the files to open/save. This (desired)
+functionality must be implemented in the program itself now (manually remember
+the last path used and pass it to the dialog the next time it is called) or
+by using this flag.
+
+h2. Remarks
+
+Pops up a file selector box. In Windows and GTK2.4+, this is the common
+file selector dialog. In X, this is a file selector box with somewhat
+less functionality. The path and filename are distinct elements of a
+full file pathname.  If path is ``", the current directory will be
+used. If filename is ``", no default filename will be supplied. The
+wildcard determines what files are displayed in the file selector, and
+file extension supplies a type extension for the required filename.
+
+Both the X and Windows versions implement a wildcard filter. Typing a
+filename containing wildcards (&#42;, ?) in the filename text item, and
+clicking on Ok, will result in only those files matching the pattern being
+displayed. The wildcard may be a specification for multiple
+types of file with a description for each, such as:
+
+
+_BMP and GIF files (&#42;.bmp;&#42;.gif)|&#42;.bmp;&#42;.gif|PNG files (&#42;.png)|&#42;.png_
+ 
+
+It must be noted that wildcard support in the native Motif file dialog
+is quite limited: only one alternative is supported, and it is displayed
+without the descriptive test; _BMP files (&#42;.bmp)|&#42;.bmp_ is
+displayed as _&#42;.bmp_, and both 
+_BMP files(&#42;.bmp)|&#42;.bmp|GIF files (&#42;.gif)|&#42;.gif_ and 
+_Image files|&#42;.bmp;&#42;.gif_ are errors.
+
+<div id="methods">
+
+h2. Methods
+
+* "FileDialog.new":#FileDialog_new
+* "FileDialog#get_directory":#FileDialog_getdirectory
+* "FileDialog#get_filename":#FileDialog_getfilename
+* "FileDialog#get_filenames":#FileDialog_getfilenames
+* "FileDialog#get_filter_index":#FileDialog_getfilterindex
+* "FileDialog#get_message":#FileDialog_getmessage
+* "FileDialog#get_path":#FileDialog_getpath
+* "FileDialog#get_paths":#FileDialog_getpaths
+* "FileDialog#get_wildcard":#FileDialog_getwildcard
+* "FileDialog#set_directory":#FileDialog_setdirectory
+* "FileDialog#set_filename":#FileDialog_setfilename
+* "FileDialog#set_filter_index":#FileDialog_setfilterindex
+* "FileDialog#set_message":#FileDialog_setmessage
+* "FileDialog#set_path":#FileDialog_setpath
+* "FileDialog#set_wildcard":#FileDialog_setwildcard
+* "FileDialog#show_modal":#FileDialog_showmodal
+
+</div>
+
+
+h3(#FileDialog_new). FileDialog.new
+
+  *FileDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message = "Choose a file", 
+                 %(arg-type)String% defaultDir = "", 
+                 %(arg-type)String% defaultFile = "", 
+                 %(arg-type)String% wildcard = ".<notextile>*</notextile>", 
+                 %(arg-type)Integer% style = FD_DEFAULT_STYLE, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% sz = DEFAULT_SIZE, 
+                 %(arg-type)String% name = "filedlg")
+
+Constructor. Use "FileDialog#show_modal":filedialog.html#FileDialog_showmodal to show the dialog.
+
+h4. Parameters
+
+* _parent_ Parent window.
+* _message_ Message to show on the dialog.
+* _defaultDir_ The default directory, or the empty string.
+* _defaultFile_ The default filename, or the empty string.
+* _wildcard_ A wildcard, such as _&#42;.&#42;_ or _BMP files (&#42;.bmp)|&#42;.bmp|GIF files (&#42;.gif)|&#42;.gif"_
+
+Note that the native Motif dialog has some limitations with respect to
+wildcards; see the Remarks section above.
+* _style_ A dialog style. See the @FD_*@ styles, above, for more info.
+* _pos_ Dialog position. Not implemented.
+* _size_ Dialog size. Not implemented.
+* _name_ Dialog name. Not implemented.
+
+
+h3(#FileDialog_getdirectory). FileDialog#get_directory
+
+ String *get_directory*()
+
+Returns the default directory.
+
+h3(#FileDialog_getfilename). FileDialog#get_filename
+
+ String *get_filename*()
+
+Returns the default filename.
+
+h3(#FileDialog_getfilenames). FileDialog#get_filenames
+
+  Array *get_filenames*()
+
+Returns an array of strings of the names of the files chosen. This
+function should only be used with the dialogs which have @MULTIPLE@
+style, use "get_filename":#FileDialog_getfilename for the others.
+
+Note that under Windows, if the user selects shortcuts, the filenames
+include paths, since the application cannot determine the full path of
+each referenced file by appending the directory containing the shortcuts
+to the filename.
+
+h3(#FileDialog_getfilterindex). FileDialog#get_filter_index
+
+ Integer *get_filter_index*()
+
+Returns the index into the list of filters supplied, optionally, in the
+wildcard parameter.  Before the dialog is shown, this is the index which
+will be used when the dialog is first displayed.  After the dialog is
+shown, this is the index selected by the user.
+
+h3(#FileDialog_getmessage). FileDialog#get_message
+
+ String *get_message*()
+
+Returns the message that will be displayed on the dialog.
+
+h3(#FileDialog_getpath). FileDialog#get_path
+
+ String *get_path*()
+
+Returns the full path (directory and filename) of the selected file.
+
+h3(#FileDialog_getpaths). FileDialog#get_paths
+
+  Array *get_paths*()
+
+Returns an array with the full paths of the files chosen. This function
+should only be used with the dialogs which have @MULTIPLE@ style, use
+"get_path":#FileDialog_getpath for the others.
+
+h3(#FileDialog_getwildcard). FileDialog#get_wildcard
+
+ String *get_wildcard*()
+
+Returns the file dialog wildcard.
+
+h3(#FileDialog_setdirectory). FileDialog#set_directory
+
+  *set_directory*(%(arg-type)String% directory)
+
+Sets the default directory.
+
+h3(#FileDialog_setfilename). FileDialog#set_filename
+
+  *set_filename*(%(arg-type)String% setfilename)
+
+Sets the default filename.
+
+h3(#FileDialog_setfilterindex). FileDialog#set_filter_index
+
+  *set_filter_index*(%(arg-type)Integer% filterIndex)
+
+Sets the default filter index, starting from zero.
+
+h3(#FileDialog_setmessage). FileDialog#set_message
+
+  *set_message*(%(arg-type)String% message)
+
+Sets the message that will be displayed on the dialog.
+
+h3(#FileDialog_setpath). FileDialog#set_path
+
+  *set_path*(%(arg-type)String% path)
+
+Sets the path (the combined directory and filename that will be returned
+when the dialog is dismissed).
+
+h3(#FileDialog_setwildcard). FileDialog#set_wildcard
+
+  *set_wildcard*(%(arg-type)String% wildCard)
+
+Sets the wildcard, which can contain multiple file types, for example:
+
+_BMP files (&#42;.bmp)|&#42;.bmp|GIF files (&#42;.gif)|&#42;.gif_
+
+Note that the native Motif dialog has some limitations with respect to
+wildcards; see the Remarks section above.
+
+h3(#FileDialog_showmodal). FileDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning @Wx::ID_OK@ if the user pressed OK, and
+@Wx::ID_CANCEL@ otherwise.
+
+

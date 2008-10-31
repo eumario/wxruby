@@ -1,0 +1,114 @@
+h1(#wxcustomdataobject). Wx::CustomDataObject
+
+CustomDataObject is a specialization of 
+"DataObjectSimple":dataobjectsimple.html for some
+application-specific data in arbitrary (either custom or one of the standard
+ones). The only restriction is that it is supposed that this data can be
+copied bitwise (i.e. with @memcpy()@), so it would be a bad idea to make
+it contain a C++ object (though C struct is fine).
+
+By default, CustomDataObject stores the data inside in a buffer. To put the
+data into the buffer you may use either 
+"set_data":#CustomDataObject_setdata or 
+"take_data":#CustomDataObject_takedata depending on whether you want
+the object to make a copy of data or not.
+
+If you already store the data in another place, it may be more convenient and
+efficient to provide the data on-demand which is possible too if you override
+the virtual functions mentioned below.
+
+h2. Virtual functions to override
+
+This class may be used as is, but if you don't want store the data inside the
+object but provide it on demand instead, you should override 
+"get_size":#CustomDataObject_getsize, 
+"get_data":#CustomDataObject_getdata and 
+"set_data":#CustomDataObject_setdata (or may be only the first two or
+only the last one if you only allow reading/writing the data)
+
+h2. Derived from
+
+"DataObjectSimple":dataobjectsimple.html
+
+"DataObject":dataobject.html
+
+h2. See also
+
+"DataObject":dataobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "CustomDataObject.new":#CustomDataObject_new
+* "CustomDataObject#alloc":#CustomDataObject_alloc
+* "CustomDataObject#free":#CustomDataObject_free
+* "CustomDataObject#get_size":#CustomDataObject_getsize
+* "CustomDataObject#get_data":#CustomDataObject_getdata
+* "CustomDataObject#set_data":#CustomDataObject_setdata
+* "CustomDataObject#take_data":#CustomDataObject_takedata
+
+</div>
+
+
+h3(#CustomDataObject_wxcustomdataobject). CustomDataObject.new
+
+  *CustomDataObject.new*(%(arg-type)"DataFormat":dataformat.html% format = FormatInvalid)
+
+The constructor accepts a _format_ argument which specifies the (single)
+format supported by this object. If it isn't set here, 
+"set_format":#CustomDataObject_setformat should be used.
+
+  *destructor*()
+
+The destructor will free the data hold by the object. Notice that although it
+calls a virtual "Free()":customdataobjectfree.html function, the base
+class version will always be called (C++ doesn't allow calling virtual
+functions from constructors or destructors), so if you override @Free()@, you
+should override the destructor in your class as well (which would probably
+just call the derived class' version of @Free()@).
+
+h3(#CustomDataObject_alloc). CustomDataObject#alloc
+
+  *alloc*(%(arg-type)Integer% size)
+
+This function is called to allocate _size_ bytes of memory from SetData().
+The default version just uses the operator new.
+
+h3(#CustomDataObject_free). CustomDataObject#free
+
+  *free*()
+
+This function is called when the data is freed, you may override it to anything
+you want (or may be nothing at all). The default version calls operator
+delete$[]$ on the data.
+
+h3(#CustomDataObject_getsize). CustomDataObject#get_size
+
+ Integer *get_size*()
+
+Returns the data size in bytes.
+
+h3(#CustomDataObject_getdata). CustomDataObject#get_data
+
+  *get_data*()
+
+Returns a pointer to the data.
+
+h3(#CustomDataObject_setdata). CustomDataObject#set_data
+
+  *set_data*( %(arg-type)Integer% size,  %(arg-type)% data)
+
+Set the data. The data object will make an internal copy.
+
+
+
+h3(#CustomDataObject_takedata). CustomDataObject#take_data
+
+  *take_data*( %(arg-type)Integer% size,  %(arg-type)% data)
+
+Like "set_data":#CustomDataObject_setdata, but doesn't copy the data -
+instead the object takes ownership of the pointer.
+
+
+

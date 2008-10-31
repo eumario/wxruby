@@ -1,0 +1,344 @@
+h1(#wxjoystick). Wx::Joystick
+
+Joystick allows an application to control one or more joysticks.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"JoystickEvent":joystickevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Joystick.new":#Joystick_new
+* "Joystick#get_button_state":#Joystick_getbuttonstate
+* "Joystick#get_manufacturer_id":#Joystick_getmanufacturerid
+* "Joystick#get_movement_threshold":#Joystick_getmovementthreshold
+* "Joystick#get_number_axes":#Joystick_getnumberaxes
+* "Joystick#get_number_buttons":#Joystick_getnumberbuttons
+* "Joystick#get_number_joysticks":#Joystick_getnumberjoysticks
+* "Joystick#get_polling_max":#Joystick_getpollingmax
+* "Joystick#get_polling_min":#Joystick_getpollingmin
+* "Joystick#get_product_id":#Joystick_getproductid
+* "Joystick#get_product_name":#Joystick_getproductname
+* "Joystick#get_position":#Joystick_getposition
+* "Joystick#get_pov_position":#Joystick_getpovposition
+* "Joystick#get_povcts_position":#Joystick_getpovctsposition
+* "Joystick#get_rudder_max":#Joystick_getruddermax
+* "Joystick#get_rudder_min":#Joystick_getruddermin
+* "Joystick#get_rudder_position":#Joystick_getrudderposition
+* "Joystick#get_umax":#Joystick_getumax
+* "Joystick#get_umin":#Joystick_getumin
+* "Joystick#get_uposition":#Joystick_getuposition
+* "Joystick#get_vmax":#Joystick_getvmax
+* "Joystick#get_vmin":#Joystick_getvmin
+* "Joystick#get_vposition":#Joystick_getvposition
+* "Joystick#get_xmax":#Joystick_getxmax
+* "Joystick#get_xmin":#Joystick_getxmin
+* "Joystick#get_ymax":#Joystick_getymax
+* "Joystick#get_ymin":#Joystick_getymin
+* "Joystick#get_zmax":#Joystick_getzmax
+* "Joystick#get_zmin":#Joystick_getzmin
+* "Joystick#get_zposition":#Joystick_getzposition
+* "Joystick#has_pov":#Joystick_haspov
+* "Joystick#has_pov4__dir":#Joystick_haspov4dir
+* "Joystick#has_povcts":#Joystick_haspovcts
+* "Joystick#has_rudder":#Joystick_hasrudder
+* "Joystick#has_u":#Joystick_hasu
+* "Joystick#has_v":#Joystick_hasv
+* "Joystick#has_z":#Joystick_hasz
+* "Joystick#is_ok":#Joystick_isok
+* "Joystick#release_capture":#Joystick_releasecapture
+* "Joystick#set_capture":#Joystick_setcapture
+* "Joystick#set_movement_threshold":#Joystick_setmovementthreshold
+
+</div>
+
+
+h3(#Joystick_new). Joystick.new
+
+  *Joystick.new*(%(arg-type)Integer% joystick = JOYSTICK1)
+
+Constructor. _joystick_ may be one of JOYSTICK1, JOYSTICK2, indicating the joystick
+controller of interest.
+
+  *destructor*()
+
+Destroys the Joystick object.
+
+h3(#Joystick_getbuttonstate). Joystick#get_button_state
+
+ Integer *get_button_state*()
+
+Returns the state of the joystick buttons. Every button is mapped to a single
+bit in the returned integer, with the first button being mapped to the least
+significant bit, and so on.
+A bitlist of JOY_BUTTONn identifiers, where n is 1, 2, 3 or 4 
+is available for historical reasons.
+
+h3(#Joystick_getmanufacturerid). Joystick#get_manufacturer_id
+
+ Integer *get_manufacturer_id*()
+
+Returns the manufacturer id.
+
+h3(#Joystick_getmovementthreshold). Joystick#get_movement_threshold
+
+ Integer *get_movement_threshold*()
+
+Returns the movement threshold, the number of steps outside which the joystick is deemed to have
+moved.
+
+h3(#Joystick_getnumberaxes). Joystick#get_number_axes
+
+ Integer *get_number_axes*()
+
+Returns the number of axes for this joystick.
+
+h3(#Joystick_getnumberbuttons). Joystick#get_number_buttons
+
+ Integer *get_number_buttons*()
+
+Returns the number of buttons for this joystick.
+
+h3(#Joystick_getnumberjoysticks). Joystick#get_number_joysticks
+
+ Integer *get_number_joysticks*()
+
+Returns the number of joysticks currently attached to the computer.
+
+h3(#Joystick_getpollingmax). Joystick#get_polling_max
+
+ Integer *get_polling_max*()
+
+Returns the maximum polling frequency.
+
+h3(#Joystick_getpollingmin). Joystick#get_polling_min
+
+ Integer *get_polling_min*()
+
+Returns the minimum polling frequency.
+
+h3(#Joystick_getproductid). Joystick#get_product_id
+
+ Integer *get_product_id*()
+
+Returns the product id for the joystick.
+
+h3(#Joystick_getproductname). Joystick#get_product_name
+
+ String *get_product_name*()
+
+Returns the product name for the joystick.
+
+h3(#Joystick_getposition). Joystick#get_position
+
+ "Point":point.html *get_position*()
+
+Returns the x, y position of the joystick.
+
+h3(#Joystick_getpovposition). Joystick#get_pov_position
+
+ Integer *get_pov_position*()
+
+Returns the point-of-view position, expressed in continuous, one-hundredth of a degree units,
+but limited to return 0, 9000, 18000 or 27000.
+Returns -1 on error.
+
+h3(#Joystick_getpovctsposition). Joystick#get_povcts_position
+
+ Integer *get_povcts_position*()
+
+Returns the point-of-view position, expressed in continuous, one-hundredth of a degree units.
+Returns -1 on error.
+
+h3(#Joystick_getruddermax). Joystick#get_rudder_max
+
+ Integer *get_rudder_max*()
+
+Returns the maximum rudder position.
+
+h3(#Joystick_getruddermin). Joystick#get_rudder_min
+
+ Integer *get_rudder_min*()
+
+Returns the minimum rudder position.
+
+h3(#Joystick_getrudderposition). Joystick#get_rudder_position
+
+ Integer *get_rudder_position*()
+
+Returns the rudder position.
+
+h3(#Joystick_getumax). Joystick#get_umax
+
+ Integer *get_umax*()
+
+Returns the maximum U position.
+
+h3(#Joystick_getumin). Joystick#get_umin
+
+ Integer *get_umin*()
+
+Returns the minimum U position.
+
+h3(#Joystick_getuposition). Joystick#get_uposition
+
+ Integer *get_uposition*()
+
+Gets the position of the fifth axis of the joystick, if it exists.
+
+h3(#Joystick_getvmax). Joystick#get_vmax
+
+ Integer *get_vmax*()
+
+Returns the maximum V position.
+
+h3(#Joystick_getvmin). Joystick#get_vmin
+
+ Integer *get_vmin*()
+
+Returns the minimum V position.
+
+h3(#Joystick_getvposition). Joystick#get_vposition
+
+ Integer *get_vposition*()
+
+Gets the position of the sixth axis of the joystick, if it exists.
+
+h3(#Joystick_getxmax). Joystick#get_xmax
+
+ Integer *get_xmax*()
+
+Returns the maximum x position.
+
+h3(#Joystick_getxmin). Joystick#get_xmin
+
+ Integer *get_xmin*()
+
+Returns the minimum x position.
+
+h3(#Joystick_getymax). Joystick#get_ymax
+
+ Integer *get_ymax*()
+
+Returns the maximum y position.
+
+h3(#Joystick_getymin). Joystick#get_ymin
+
+ Integer *get_ymin*()
+
+Returns the minimum y position.
+
+h3(#Joystick_getzmax). Joystick#get_zmax
+
+ Integer *get_zmax*()
+
+Returns the maximum z position.
+
+h3(#Joystick_getzmin). Joystick#get_zmin
+
+ Integer *get_zmin*()
+
+Returns the minimum z position.
+
+h3(#Joystick_getzposition). Joystick#get_zposition
+
+ Integer *get_zposition*()
+
+Returns the z position of the joystick.
+
+h3(#Joystick_haspov). Joystick#has_pov
+
+ Boolean *has_pov*()
+
+Returns true if the joystick has a point of view control.
+
+h3(#Joystick_haspovfdir). Joystick#has_pov4__dir
+
+ Boolean *has_pov4__dir*()
+
+Returns true if the joystick point-of-view supports discrete values (centered, forward, backward, left, and right).
+
+h3(#Joystick_haspovcts). Joystick#has_povcts
+
+ Boolean *has_povcts*()
+
+Returns true if the joystick point-of-view supports continuous degree bearings.
+
+h3(#Joystick_hasrudder). Joystick#has_rudder
+
+ Boolean *has_rudder*()
+
+Returns true if there is a rudder attached to the computer.
+
+h3(#Joystick_hasu). Joystick#has_u
+
+ Boolean *has_u*()
+
+Returns true if the joystick has a U axis.
+
+h3(#Joystick_hasv). Joystick#has_v
+
+ Boolean *has_v*()
+
+Returns true if the joystick has a V axis.
+
+h3(#Joystick_hasz). Joystick#has_z
+
+ Boolean *has_z*()
+
+Returns true if the joystick has a Z axis.
+
+h3(#Joystick_isok). Joystick#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if the joystick is functioning.
+
+h3(#Joystick_releasecapture). Joystick#release_capture
+
+ Boolean *release_capture*()
+
+Releases the capture set by *SetCapture*.
+
+h4. Return value
+
+true if the capture release succeeded.
+
+h4. See also
+
+"Joystick#set_capture":joystick.html#Joystick_setcapture, "JoystickEvent":joystickevent.html
+
+h3(#Joystick_setcapture). Joystick#set_capture
+
+ Boolean *set_capture*(%(arg-type)"Window":window.html% win,  %(arg-type)Integer% pollingFreq = 0)
+
+Sets the capture to direct joystick events to _win_.
+
+h4. Parameters
+
+* _win_ The window that will receive joystick events.
+* _pollingFreq_ If zero, movement events are sent when above the
+threshold. If greater than zero, events are received every _pollingFreq_ milliseconds.
+
+h4. Return value
+
+true if the capture succeeded.
+
+h4. See also
+
+"Joystick#release_capture":joystick.html#Joystick_releasecapture, "JoystickEvent":joystickevent.html
+
+h3(#Joystick_setmovementthreshold). Joystick#set_movement_threshold
+
+  *set_movement_threshold*(%(arg-type)Integer% threshold)
+
+Sets the movement threshold, the number of steps outside which the joystick is deemed to have
+moved.
+
+

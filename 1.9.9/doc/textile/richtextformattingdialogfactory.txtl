@@ -1,0 +1,86 @@
+h1(#wxrichtextformattingdialogfactory). Wx::RichTextFormattingDialogFactory
+
+This class provides pages for RichTextFormattingDialog, and allows other customization of the dialog.
+A default instance of this class is provided automatically. If you wish to change the behaviour of the
+formatting dialog (for example add or replace a page), you may derive from this class,
+override one or more functions, and call the static function RichTextFormattingDialog::SetFormattingDialogFactory.
+ 
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextFormattingDialogFactory.new":#RichTextFormattingDialogFactory_new
+* "RichTextFormattingDialogFactory#create_buttons":#RichTextFormattingDialogFactory_createbuttons
+* "RichTextFormattingDialogFactory#create_page":#RichTextFormattingDialogFactory_createpage
+* "RichTextFormattingDialogFactory#create_pages":#RichTextFormattingDialogFactory_createpages
+* "RichTextFormattingDialogFactory#get_page_id":#RichTextFormattingDialogFactory_getpageid
+* "RichTextFormattingDialogFactory#get_page_id_count":#RichTextFormattingDialogFactory_getpageidcount
+* "RichTextFormattingDialogFactory#get_page_image":#RichTextFormattingDialogFactory_getpageimage
+* "RichTextFormattingDialogFactory#set_sheet_style":#RichTextFormattingDialogFactory_setsheetstyle
+* "RichTextFormattingDialogFactory#show_help":#RichTextFormattingDialogFactory_showhelp
+
+</div>
+
+
+
+h3(#RichTextFormattingDialogFactory_wxrichtextformattingdialogfactory). RichTextFormattingDialogFactory.new
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextFormattingDialogFactory_createbuttons). RichTextFormattingDialogFactory#create_buttons
+
+ Boolean *create_buttons*(%(arg-type)"RichTextFormattingDialog":richtextformattingdialog.html% dialog)
+
+Creates the main dialog buttons.
+
+h3(#RichTextFormattingDialogFactory_createpage). RichTextFormattingDialogFactory#create_page
+
+ "Panel":panel.html *create_page*(%(arg-type)Integer% page,  %(arg-type)String% title, 
+                     %(arg-type)"RichTextFormattingDialog":richtextformattingdialog.html% dialog)
+
+Creates a page, given a page identifier.
+
+h3(#RichTextFormattingDialogFactory_createpages). RichTextFormattingDialogFactory#create_pages
+
+ Boolean *create_pages*(%(arg-type)Integer% pages, 
+                      %(arg-type)"RichTextFormattingDialog":richtextformattingdialog.html% dialog)
+
+Creates all pages under the dialog's book control, also calling AddPage.
+
+h3(#RichTextFormattingDialogFactory_getpageid). RichTextFormattingDialogFactory#get_page_id
+
+ Integer *get_page_id*(%(arg-type)Integer% i)
+
+Enumerate all available page identifiers.
+
+h3(#RichTextFormattingDialogFactory_getpageidcount). RichTextFormattingDialogFactory#get_page_id_count
+
+ Integer *get_page_id_count*()
+
+Gets the number of available page identifiers.
+
+h3(#RichTextFormattingDialogFactory_getpageimage). RichTextFormattingDialogFactory#get_page_image
+
+ Integer *get_page_image*(%(arg-type)Integer% id)
+
+Gets the image index for the given page identifier.
+
+h3(#RichTextFormattingDialogFactory_setsheetstyle). RichTextFormattingDialogFactory#set_sheet_style
+
+ Boolean *set_sheet_style*(%(arg-type)"RichTextFormattingDialog":richtextformattingdialog.html% dialog)
+
+Set the property sheet style, called at the start of RichTextFormattingDialog::Create.
+
+h3(#RichTextFormattingDialogFactory_showhelp). RichTextFormattingDialogFactory#show_help
+
+ Boolean *show_help*(%(arg-type)Integer% page, 
+                   %(arg-type)"RichTextFormattingDialog":richtextformattingdialog.html% dialog)
+
+Invokes help for the dialog.
+

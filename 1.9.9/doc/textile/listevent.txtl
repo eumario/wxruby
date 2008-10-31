@@ -1,0 +1,177 @@
+h1(#wxlistevent). Wx::ListEvent
+
+A list event holds information about events associated with ListCtrl objects.
+
+h2. Derived from
+
+"NotifyEvent":notifyevent.html
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process input from a list control, use these event handler macros to direct input to member
+functions that take a ListEvent argument.
+
+
+
+|*evt_list_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the left mouse button.|
+|*evt_list_begin_rdrag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the right mouse button.|
+|*evt_list_begin_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin editing a label. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_list_end_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Finish editing a label. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_list_delete_item(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Delete an item.|
+|*evt_list_delete_all_items(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Delete all items.|
+|*evt_list_item_selected(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been selected.|
+|*evt_list_item_deselected(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been deselected.|
+|*evt_list_item_activated(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been activated (ENTER or double click).|
+|*evt_list_item_focused(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The currently focused item has changed.|
+|*evt_list_item_middle_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The middle mouse button has been clicked on an item.|
+|*evt_list_item_right_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The right mouse button has been clicked on an item.|
+|*evt_list_key_down(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A key has been pressed.|
+|*evt_list_insert_item(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|An item has been inserted.|
+|*evt_list_col_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A column (*m_col*) has been left-clicked.|
+|*evt_list_col_right_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A column (*m_col*) (which can be $-1$ if the click occurred outside any column) has been right-clicked.|
+|*evt_list_col_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user started resizing a column - can be vetoed.|
+|*evt_list_col_dragging(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The divider between columns is being dragged.|
+|*evt_list_col_end_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A column has been resized by the user.|
+|*evt_list_cache_hint(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Prepare cache for a virtual list control|
+
+h2. See also
+
+"ListCtrl":listctrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ListEvent.new":#ListEvent_new
+* "ListEvent#get_cache_from":#ListEvent_getcachefrom
+* "ListEvent#get_cache_to":#ListEvent_getcacheto
+* "ListEvent#get_key_code":#ListEvent_getkeycode
+* "ListEvent#get_index":#ListEvent_getindex
+* "ListEvent#get_column":#ListEvent_getcolumn
+* "ListEvent#get_point":#ListEvent_getpoint
+* "ListEvent#get_label":#ListEvent_getlabel
+* "ListEvent#get_text":#ListEvent_gettext
+* "ListEvent#get_image":#ListEvent_getimage
+* "ListEvent#get_data":#ListEvent_getdata
+* "ListEvent#get_mask":#ListEvent_getmask
+* "ListEvent#get_item":#ListEvent_getitem
+* "ListEvent#is_edit_cancelled":#ListEvent_iseditcancelled
+
+</div>
+
+
+
+h3(#ListEvent_new). ListEvent.new
+
+  *ListEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% id = 0)
+
+Constructor.
+
+
+h3(#ListEvent_getcachefrom). ListEvent#get_cache_from
+
+ Integer *get_cache_from*()
+
+For @EVT_LIST_CACHE_HINT@ event only: return the first item which the
+list control advises us to cache.
+
+
+h3(#ListEvent_getcacheto). ListEvent#get_cache_to
+
+ Integer *get_cache_to*()
+
+For @EVT_LIST_CACHE_HINT@ event only: return the last item (inclusive)
+which the list control advises us to cache.
+
+
+h3(#ListEvent_getkeycode). ListEvent#get_key_code
+
+ Integer *get_key_code*()
+
+Key code if the event is a keypress event.
+
+
+h3(#ListEvent_getindex). ListEvent#get_index
+
+ Integer *get_index*()
+
+The item index.
+
+
+h3(#ListEvent_getcolumn). ListEvent#get_column
+
+ Integer *get_column*()
+
+The column position: it is only used with @COL@ events. For the column
+dragging events, it is the column to the left of the divider being dragged, for
+the column click events it may be $-1$ if the user clicked in the list control
+header outside any column.
+
+
+h3(#ListEvent_getpoint). ListEvent#get_point
+
+ "Point":point.html *get_point*()
+
+The position of the mouse pointer if the event is a drag event.
+
+
+
+h3(#ListEvent_getlabel). ListEvent#get_label
+
+ String *get_label*()
+
+The (new) item label for @EVT_LIST_END_LABEL_EDIT@ event.
+
+
+h3(#ListEvent_gettext). ListEvent#get_text
+
+ String *get_text*()
+
+The text.
+
+
+h3(#ListEvent_getimage). ListEvent#get_image
+
+ Integer *get_image*()
+
+The image.
+
+
+h3(#ListEvent_getdata). ListEvent#get_data
+
+ Integer *get_data*()
+
+The data.
+
+
+h3(#ListEvent_getmask). ListEvent#get_mask
+
+ Integer *get_mask*()
+
+The mask.
+
+
+h3(#ListEvent_getitem). ListEvent#get_item
+
+ "ListItem":listitem.html *get_item*()
+
+An item object, used by some events. See also "ListCtrl#set_item":listctrl.html#ListCtrl_setitem.
+
+
+h3(#ListEvent_iseditcancelled). ListEvent#is_edit_cancelled
+
+ Boolean *is_edit_cancelled*()
+
+This method only makes sense for @EVT_LIST_END_LABEL_EDIT@ message
+and returns  if it the label editing has been cancelled by the user
+("get_label":#ListEvent_getlabel returns an empty string in this case
+but it doesn't allow the application to distinguish between really cancelling the edit and
+the admittedly rare case when the user wants to rename it to an empty string).
+
+

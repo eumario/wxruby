@@ -1,0 +1,158 @@
+h1(#wxbutton). Wx::Button
+
+A button is a control that contains a text string,
+and is one of the most common elements of a GUI. It may be placed on a
+ "dialog box":dialog.html or "panel":panel.html, or indeed
+almost any other window.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+|@BU_LEFT@|Left-justifies the label. Windows and GTK+ only.|
+|@BU_TOP@|Aligns the label to the top of the button. Windows and GTK+ only.|
+|@BU_RIGHT@|Right-justifies the bitmap label. Windows and GTK+ only.|
+|@BU_BOTTOM@|Aligns the label to the bottom of the button. Windows and GTK+ only.|
+|@BU_EXACTFIT@|Creates the button as small as possible instead of making it of the standard size (which is the default behaviour ).|
+|@NO_BORDER@|Creates a flat button. Windows and GTK+ only.|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+|*evt_button(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_BUTTON_CLICKED event,when the button is clicked.|
+
+
+h2. See also
+
+"BitmapButton":bitmapbutton.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Button.new":#Button_new
+* "Button#create":#Button_create
+* "Button#get_label":#Button_getlabel
+* "Button#get_default_size":#Button_getdefaultsize
+* "Button#set_default":#Button_setdefault
+* "Button#set_label":#Button_setlabel
+
+</div>
+
+
+h3(#Button_new). Button.new
+
+  *Button.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label = '', 
+             %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+             %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+             %(arg-type)Integer% style = 0, 
+             %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+             %(arg-type)String% name = "button")
+
+Constructor, creating and showing a button.
+
+The preferred way to create standard buttons is to use default value of
+label. If no label is supplied and id is one of standard IDs from
+"this list":stockitems.html, standard label will be used. In addition to
+that, the button will be decorated with stock icons under GTK+ 2.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Button identifier. A value of @ID_ANY@ indicates a default value.
+* _label_ Text to be displayed on the button.
+* _pos_ Button position.
+* _size_ Button size. If the default size is specified then the button is sized
+appropriately for the text.
+* _style_ Window style. See "Button":button.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"Button#create":button.html#Button_create, "Validator":validator.html
+
+  *destructor*()
+
+Destructor, destroying the button.
+
+h3(#Button_create). Button#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label = '', 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% validator, 
+                %(arg-type)String% name = "button")
+
+Button creation function for two-step creation. For more details, see
+"Button.new":button.html#Button_new.
+
+h3(#Button_getlabel). Button#get_label
+
+ String *get_label*()
+
+Returns the string label for the button.
+
+h4. Return value
+
+The button's label.
+
+h4. See also
+
+"Button#set_label":button.html#Button_setlabel
+
+h3(#Button_getdefaultsize). Button#get_default_size
+
+ "Size":size.html *get_default_size*()
+
+Returns the default size for the buttons. It is advised to make all the dialog
+buttons of the same size and this function allows to retrieve the (platform and
+current font dependent size) which should be the best suited for this.
+
+h3(#Button_setdefault). Button#set_default
+
+  *set_default*()
+
+This sets the button to be the default item for the panel or dialog
+box.
+
+h4. Remarks
+
+Under Windows, only dialog box buttons respond to this function.  As
+normal under Windows and Motif, pressing return causes the default button to
+be depressed when the return key is pressed. See also "Window#set_focus":window.html#Window_setfocus which sets the keyboard focus for windows and text panel items, and "TopLevelWindow#set_default_item":toplevelwindow.html#TopLevelWindow_setdefaultitem.
+
+Note that under Motif, calling this function immediately after
+creation of a button and before the creation of other buttons
+will cause misalignment of the row of buttons, since default
+buttons are larger. To get around this, call _SetDefault_ after you have created a row of buttons: Widgets will
+then set the size of all buttons currently on the panel to
+the same size.
+
+h3(#Button_setlabel). Button#set_label
+
+  *set_label*(%(arg-type)String% label)
+
+Sets the string label for the button.
+
+h4. Parameters
+
+* _label_ The label to set.
+
+h4. See also
+
+"Button#get_label":button.html#Button_getlabel
+

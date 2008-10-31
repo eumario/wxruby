@@ -1,0 +1,59 @@
+h1(#wxcontextmenuevent). Wx::ContextMenuEvent
+
+This class is used for context menu events, sent to give
+the application a chance to show a context (popup) menu.
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a menu event, use these event handler macros to direct input to member
+functions that take a ContextMenuEvent argument.
+
+
+
+|*evt_context_menu()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A right click (or other context menu command depending on platform) has been detected.|
+
+
+h2. See also
+
+"Command events":commandevent.html,
+
+"Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ContextMenuEvent.new":#ContextMenuEvent_new
+* "ContextMenuEvent#get_position":#ContextMenuEvent_getposition
+* "ContextMenuEvent#set_position":#ContextMenuEvent_setposition
+
+</div>
+
+
+h3(#ContextMenuEvent_new). ContextMenuEvent.new
+
+  *ContextMenuEvent.new*(%(arg-type)"TYPE":type.html% id = 0,  %(arg-type)Integer% id = 0, 
+                       %(arg-type)"Point":point.html% pos=DefaultPosition)
+
+Constructor.
+
+h3(#ContextMenuEvent_getposition). ContextMenuEvent#get_position
+
+ "Point":point.html *get_position*()
+
+Returns the position at which the menu should be shown.
+
+h3(#ContextMenuEvent_setposition). ContextMenuEvent#set_position
+
+  *set_position*(%(arg-type)"Point":point.html% point)
+
+Sets the position at which the menu should be shown.
+

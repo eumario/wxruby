@@ -1,0 +1,255 @@
+h1(#wxprintdialogdata). Wx::PrintDialogData
+
+This class holds information related to the visual characteristics of PrintDialog.
+It contains a PrintData object with underlying printing settings.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"PrintDialog":printdialog.html, "PrintDialog Overview":printdialogoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PrintDialogData.new":#PrintDialogData_new
+* "PrintDialogData#enable_help":#PrintDialogData_enablehelp
+* "PrintDialogData#enable_page_numbers":#PrintDialogData_enablepagenumbers
+* "PrintDialogData#enable_print_to_file":#PrintDialogData_enableprinttofile
+* "PrintDialogData#enable_selection":#PrintDialogData_enableselection
+* "PrintDialogData#get_all_pages":#PrintDialogData_getallpages
+* "PrintDialogData#get_collate":#PrintDialogData_getcollate
+* "PrintDialogData#get_from_page":#PrintDialogData_getfrompage
+* "PrintDialogData#get_max_page":#PrintDialogData_getmaxpage
+* "PrintDialogData#get_min_page":#PrintDialogData_getminpage
+* "PrintDialogData#get_no_copies":#PrintDialogData_getnocopies
+* "PrintDialogData#get_print_data":#PrintDialogData_getprintdata
+* "PrintDialogData#get_print_to_file":#PrintDialogData_getprinttofile
+* "PrintDialogData#get_selection":#PrintDialogData_getselection
+* "PrintDialogData#get_to_page":#PrintDialogData_gettopage
+* "PrintDialogData#ok":#PrintDialogData_ok
+* "PrintDialogData#set_collate":#PrintDialogData_setcollate
+* "PrintDialogData#set_from_page":#PrintDialogData_setfrompage
+* "PrintDialogData#set_max_page":#PrintDialogData_setmaxpage
+* "PrintDialogData#set_min_page":#PrintDialogData_setminpage
+* "PrintDialogData#set_no_copies":#PrintDialogData_setnocopies
+* "PrintDialogData#set_print_data":#PrintDialogData_setprintdata
+* "PrintDialogData#set_print_to_file":#PrintDialogData_setprinttofile
+* "PrintDialogData#set_selection":#PrintDialogData_setselection
+* "PrintDialogData#set_setup_dialog":#PrintDialogData_setsetupdialog
+* "PrintDialogData#set_to_page":#PrintDialogData_settopage
+
+</div>
+
+
+
+h3(#PrintDialogData_new). PrintDialogData.new
+
+  *PrintDialogData.new*(%(arg-type)"PrintDialogData":printdialogdata.html% dialogData)
+
+Copy constructor.
+
+  *PrintDialogData.new*(%(arg-type)"PrintData":printdata.html% printData)
+
+Construct an object from a print dialog data object.
+
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#PrintDialogData_enablehelp). PrintDialogData#enable_help
+
+  *enable_help*(%(arg-type)Boolean% flag)
+
+Enables or disables the `Help' button.
+
+
+h3(#PrintDialogData_enablepagenumbers). PrintDialogData#enable_page_numbers
+
+  *enable_page_numbers*(%(arg-type)Boolean% flag)
+
+Enables or disables the `Page numbers' controls.
+
+
+h3(#PrintDialogData_enableprinttofile). PrintDialogData#enable_print_to_file
+
+  *enable_print_to_file*(%(arg-type)Boolean% flag)
+
+Enables or disables the `Print to file' checkbox.
+
+
+h3(#PrintDialogData_enableselection). PrintDialogData#enable_selection
+
+  *enable_selection*(%(arg-type)Boolean% flag)
+
+Enables or disables the `Selection' radio button.
+
+
+h3(#PrintDialogData_getallpages). PrintDialogData#get_all_pages
+
+ Boolean *get_all_pages*()
+
+Returns true if the user requested that all pages be printed.
+
+
+h3(#PrintDialogData_getcollate). PrintDialogData#get_collate
+
+ Boolean *get_collate*()
+
+Returns true if the user requested that the document(s) be collated.
+
+
+h3(#PrintDialogData_getfrompage). PrintDialogData#get_from_page
+
+ Integer *get_from_page*()
+
+Returns the _from_ page number, as entered by the user.
+
+
+h3(#PrintDialogData_getmaxpage). PrintDialogData#get_max_page
+
+ Integer *get_max_page*()
+
+Returns the _maximum_ page number.
+
+
+h3(#PrintDialogData_getminpage). PrintDialogData#get_min_page
+
+ Integer *get_min_page*()
+
+Returns the _minimum_ page number.
+
+
+h3(#PrintDialogData_getnocopies). PrintDialogData#get_no_copies
+
+ Integer *get_no_copies*()
+
+Returns the number of copies requested by the user.
+
+
+h3(#PrintDialogData_getprintdata). PrintDialogData#get_print_data
+
+ "PrintData":printdata.html *get_print_data*()
+
+Returns a reference to the internal PrintData object.
+
+
+h3(#PrintDialogData_getprinttofile). PrintDialogData#get_print_to_file
+
+ Boolean *get_print_to_file*()
+
+Returns true if the user has selected printing to a file.
+
+
+h3(#PrintDialogData_getselection). PrintDialogData#get_selection
+
+ Boolean *get_selection*()
+
+Returns true if the user requested that the selection be printed (where 'selection' is
+a concept specific to the application).
+
+
+h3(#PrintDialogData_gettopage). PrintDialogData#get_to_page
+
+ Integer *get_to_page*()
+
+Returns the _to_ page number, as entered by the user.
+
+
+h3(#PrintDialogData_ok). PrintDialogData#ok
+
+ Boolean *ok*()
+
+Returns true if the print data is valid for using in print dialogs.
+This can return false on Windows if the current printer is not set, for example.
+On all other platforms, it returns true.
+
+
+h3(#PrintDialogData_setcollate). PrintDialogData#set_collate
+
+  *set_collate*(%(arg-type)Boolean% flag)
+
+Sets the 'Collate' checkbox to true or false.
+
+
+h3(#PrintDialogData_setfrompage). PrintDialogData#set_from_page
+
+  *set_from_page*(%(arg-type)Integer% page)
+
+Sets the _from_ page number.
+
+
+h3(#PrintDialogData_setmaxpage). PrintDialogData#set_max_page
+
+  *set_max_page*(%(arg-type)Integer% page)
+
+Sets the _maximum_ page number.
+
+
+h3(#PrintDialogData_setminpage). PrintDialogData#set_min_page
+
+  *set_min_page*(%(arg-type)Integer% page)
+
+Sets the _minimum_ page number.
+
+
+h3(#PrintDialogData_setnocopies). PrintDialogData#set_no_copies
+
+  *set_no_copies*(%(arg-type)Integer% n)
+
+Sets the default number of copies the user has requested to be printed out.
+
+
+h3(#PrintDialogData_setprintdata). PrintDialogData#set_print_data
+
+  *set_print_data*(%(arg-type)"PrintData":printdata.html% printData)
+
+Sets the internal PrintData.
+
+
+h3(#PrintDialogData_setprinttofile). PrintDialogData#set_print_to_file
+
+  *set_print_to_file*(%(arg-type)Boolean% flag)
+
+Sets the 'Print to file' checkbox to true or false.
+
+
+h3(#PrintDialogData_setselection). PrintDialogData#set_selection
+
+  *set_selection*(%(arg-type)Boolean% flag)
+
+Selects the 'Selection' radio button. The effect of printing the selection depends on how the application
+implements this command, if at all.
+
+
+h3(#PrintDialogData_setsetupdialog). PrintDialogData#set_setup_dialog
+
+  *set_setup_dialog*(%(arg-type)Boolean% flag)
+
+Determines whether the dialog to be shown will be the Print dialog
+(pass false) or Print Setup dialog (pass true).
+
+This function has been deprecated since version 2.5.4.
+
+h3(#PrintDialogData_settopage). PrintDialogData#set_to_page
+
+  *set_to_page*(%(arg-type)Integer% page)
+
+Sets the _to_ page number.
+
+
+h3(#PrintDialogData_assign). PrintDialogData#=
+
+  *operator $=$*(%(arg-type)"PrintData":printdata.html% data)
+
+Assigns print data to this object.
+
+  *operator $=$*(%(arg-type)"PrintDialogData":printdialogdata.html% data)
+
+Assigns another print dialog data object to this object.
+

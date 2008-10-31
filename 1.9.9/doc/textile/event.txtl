@@ -1,0 +1,208 @@
+h1(#wxevent). Wx::Event
+
+An event is a structure holding information about an event passed to a
+callback or member function. *Event* used to be a multipurpose
+event object, and is an abstract base class for other event classes (see below).
+
+For more information about events, see the "Event handling overview":eventhandlingoverview.html.
+
+
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"CommandEvent":commandevent.html, "MouseEvent":mouseevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Event.new":#Event_new
+* "Event.new_event_type":#Event_neweventtype
+* "Event#clone":#Event_clone
+* "Event#get_event_object":#Event_geteventobject
+* "Event#get_event_type":#Event_geteventtype
+* "Event#get_id":#Event_getid
+* "Event#get_skipped":#Event_getskipped
+* "Event#get_timestamp":#Event_gettimestamp
+* "Event#is_command_event":#Event_iscommandevent
+* "Event#resume_propagation":#Event_resumepropagation
+* "Event#set_event_object":#Event_seteventobject
+* "Event#set_event_type":#Event_seteventtype
+* "Event#set_id":#Event_setid
+* "Event#set_timestamp":#Event_settimestamp
+* "Event#should_propagate":#Event_shouldpropagate
+* "Event#skip":#Event_skip
+* "Event#stop_propagation":#Event_stoppropagation
+
+</div>
+
+
+
+h3(#Event_new). Event.new
+
+  *Event.new*(%(arg-type)Integer% id = 0,  %(arg-type)"EventType":eventtype.html% eventType = @EVT_NULL@)
+
+Constructor. Should not need to be used directly by an application.
+
+h3(#Event_neweventtype). Event.new_event_type
+
+  Integer event_id *Event.new_event_type*()
+
+
+Returns a new, unique identifier for use by a custom user-defined event
+type.
+
+Different types of events in wxRuby are identified by unique integer
+constant, for example @Wx::EVT_COMMAND_LEFT_CLICK@ (see
+"Event":event.html) Since this is used to wrap events triggered in the
+API (or in user Ruby code) with the appropriate Ruby class, if you
+create your own custom events, you may wish to use this
+method to get an id which is guaranteed to be unique.
+
+h3(#Event_clone). Event#clone
+
+ "Event":event.html *clone*()
+
+Returns a copy of the event.
+
+Any event that is posted to the Widgets event system for later action (via
+"EvtHandler#add_pending_event":evthandler.html#EvtHandler_addpendingevent or
+"PostEvent":postevent.html) must implement this method. All Widgets
+events fully implement this method, but any derived events implemented by the
+user should also implement this method just in case they (or some event
+derived from them) are ever posted.
+
+All Widgets events implement a copy constructor, so the easiest way of
+implementing the Clone function is to implement a copy constructor for
+a new event (call it MyEvent) and then define the Clone function like this:
+
+
+     Event *Clone(void) const { return new MyEvent(*this); }
+ 
+
+
+h3(#Event_geteventobject). Event#get_event_object
+
+ "Object":object.html *get_event_object*()
+
+Returns the object (usually a window) associated with the
+event, if any.
+
+
+h3(#Event_geteventtype). Event#get_event_type
+
+ Integer *get_event_type*()
+
+Returns the integer identifier of the given event type, such as
+@Wx::EVT_COMMAND_BUTTON_CLICKED@.
+
+
+h3(#Event_getid). Event#get_id
+
+ Integer *get_id*()
+
+Returns the identifier associated with this event, such as a button command id.
+
+
+h3(#Event_getskipped). Event#get_skipped
+
+ Boolean *get_skipped*()
+
+Returns true if the event handler should be skipped, false otherwise.
+
+
+h3(#Event_gettimestamp). Event#get_timestamp
+
+ Integer *get_timestamp*()
+
+Gets the timestamp for the event. The timestamp is the time in milliseconds
+since some fixed moment (not necessarily the standard Unix Epoch, so
+only differences between the timestamps and not their absolute values usually
+make sense).
+
+
+h3(#Event_iscommandevent). Event#is_command_event
+
+ Boolean *is_command_event*()
+
+Returns true if the event is or is derived from
+"CommandEvent":commandevent.html else it returns false.
+Note: Exists only for optimization purposes.
+
+
+h3(#Event_resumepropagation). Event#resume_propagation
+
+  *resume_propagation*(%(arg-type)Integer% propagationLevel)
+
+Sets the propagation level to the given value (for example returned from an
+earlier call to "stop_propagation":#Event_stoppropagation).
+
+
+h3(#Event_seteventobject). Event#set_event_object
+
+  *set_event_object*(%(arg-type)Object% object)
+
+Sets the originating object.
+
+
+h3(#Event_seteventtype). Event#set_event_type
+
+  *set_event_type*(%(arg-type)Integer% type)
+
+Sets the event type, which should be one of the event type constants,
+such as @Wx::EVT_COMMAND_BUTTON_CLICKED@.
+
+
+h3(#Event_setid). Event#set_id
+
+  *set_id*(%(arg-type)Integer% id)
+
+Sets the identifier associated with this event, such as a button command id.
+
+
+h3(#Event_settimestamp). Event#set_timestamp
+
+  *set_timestamp*(%(arg-type)Integer% timeStamp)
+
+Sets the timestamp for the event.
+
+
+h3(#Event_shouldpropagate). Event#should_propagate
+
+ Boolean *should_propagate*()
+
+Test if this event should be propagated or not, i.e. if the propagation level
+is currently greater than 0.
+
+
+h3(#Event_skip). Event#skip
+
+  *skip*(%(arg-type)Boolean% skip = true)
+
+This method can be used inside an event handler to control whether further
+event handlers bound to this event will be called after the current one
+returns. Without skip() (or equivalently if skip(false) is used),
+the event will not be processed any more. If skip(true) is called, the event
+processing system continues searching for a further handler function for this
+event, even though it has been processed already in the current handler.
+
+In general, it is recommended to skip all non-command events to allow the
+default handling to take place. The command events are, however, normally not
+skipped as usually a single command such as a button click or menu item
+selection must only be processed by one handler.
+
+
+h3(#Event_stoppropagation). Event#stop_propagation
+
+ Integer *stop_propagation*()
+
+Stop the event from propagating to its parent window.
+
+Returns the old propagation level value which may be later passed to 
+"resume_propagation":#Event_resumepropagation to allow propagating the
+event again.
+

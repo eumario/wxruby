@@ -1,0 +1,257 @@
+h1(#wxfontmapper). Wx::FontMapper
+
+FontMapper manages user-definable correspondence between logical font
+names and the fonts present on the machine.
+
+The default implementations of all functions will ask the user if they are
+not capable of finding the answer themselves and store the answer in a
+config file (configurable via SetConfigXXX functions). This behaviour may
+be disabled by giving the value of false to "interactive" parameter.
+
+However, the functions will always consult the config file to allow the
+user-defined values override the default logic and there is no way to
+disable this - which shouldn't be ever needed because if "interactive" was
+never true, the config file is never created anyhow.
+
+In case everything else fails (i.e. there is no record in config file
+and "interactive" is false or user denied to choose any replacement), 
+the class queries "EncodingConverter":encodingconverter.html 
+for "equivalent" encodings (e.g. iso8859-2 and cp1250) and tries them.
+
+h2. Using FontMapper in conjunction with MBConv classes
+
+If you need to display text in encoding which is not available at
+host system (see "is_encoding_available":#FontMapper_isencodingavailable),
+you may use these two classes to find font in some similar encoding
+(see "get_alt_for_encoding":#FontMapper_getaltforencoding)
+and convert the text to this encoding 
+("MBConv classes":mbconvclasses.html).
+
+Following code snippet demonstrates it:
+
+
+ if (!FontMapper::Get()->IsEncodingAvailable(enc, facename))
+ {
+    FontEncoding alternative;
+    if (FontMapper::Get()->GetAltForEncoding(enc, &alternative,
+                                               facename, false))
+    {
+        CSConv convFrom(FontMapper::Get()->GetEncodingName(enc));
+        CSConv convTo(FontMapper::Get()->GetEncodingName(alternative));
+        text = String(text.mb_str(convFrom), convTo);
+    }
+    else
+        ...failure (or we may try iso8859-1/7bit ASCII)...
+ }
+ ...display text...
+ 
+
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"EncodingConverter":encodingconverter.html, 
+"Writing non-English applications":nonenglishoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FontMapper.new":#FontMapper_new
+* "FontMapper#charset_to_encoding":#FontMapper_charsettoencoding
+* "FontMapper#get":#FontMapper_get
+* "FontMapper#get_all_encoding_names":#FontMapper_getallencodingnames
+* "FontMapper#get_alt_for_encoding":#FontMapper_getaltforencoding
+* "FontMapper#get_encoding":#FontMapper_getencoding
+* "FontMapper#get_encoding_description":#FontMapper_getencodingdescription
+* "FontMapper#get_encoding_from_name":#FontMapper_getencodingfromname
+* "FontMapper#get_encoding_name":#FontMapper_getencodingname
+* "FontMapper#get_supported_encodings_count":#FontMapper_getsupportedencodingscount
+* "FontMapper#is_encoding_available":#FontMapper_isencodingavailable
+* "FontMapper#set_dialog_parent":#FontMapper_setdialogparent
+* "FontMapper#set_dialog_title":#FontMapper_setdialogtitle
+* "FontMapper#set":#FontMapper_set
+* "FontMapper#set_config":#FontMapper_setconfig
+* "FontMapper#set_config_path":#FontMapper_setconfigpath
+
+</div>
+
+
+
+h3(#FontMapper_wxfontmapper). FontMapper.new
+
+h4. Note
+
+The preferred way of creating a FontMapper instance is to call 
+"FontMapper#get":fontmapper.html#FontMapper_get.
+
+
+  *destructor*()
+
+Virtual dtor for a base class.
+
+
+h3(#FontMapper_charsettoencoding). FontMapper#charset_to_encoding
+
+ "FontEncoding":fontencoding.html *charset_to_encoding*(%(arg-type)String% charset, 
+                                    %(arg-type)Boolean% interactive = true)
+
+Returns the encoding for the given charset (in the form of RFC 2046) or
+@FONTENCODING_SYSTEM@ if couldn't decode it.
+
+Be careful when using this function with interactive set to 
+(default value) as the function then may show a dialog box to the user which
+may lead to unexpected reentrancies and may also take a significantly longer
+time than a simple function call. For these reasons, it is almost always a bad
+idea to call this function from the event handlers for repeatedly generated
+events such as @EVT_PAINT@.
+
+
+h3(#FontMapper_get). FontMapper#get
+
+ "FontMapper":fontmapper.html *get*()
+
+Get the current font mapper object. If there is no current object, creates
+one.
+
+h4. See also
+
+"FontMapper#set":fontmapper.html#FontMapper_set
+
+
+h3(#FontMapper_getallencodingnames). FontMapper#get_all_encoding_names
+
+ "Char*":char*.html *get_all_encoding_names*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
+
+Returns the array of all possible names for the given encoding. The array is
+-terminated. IF it isn't empty, the first name in it is the canonical
+encoding name, i.e. the same string as returned by 
+"get_encoding_name()":#FontMapper_getencodingname().
+
+
+h3(#FontMapper_getaltforencoding). FontMapper#get_alt_for_encoding
+
+ Boolean *get_alt_for_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding, 
+                              %(arg-type)"NativeEncodingInfo":nativeencodinginfo.html% info,  %(arg-type)String% facename = '', 
+                              %(arg-type)Boolean% interactive = true)
+
+ Boolean *get_alt_for_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding, 
+                              %(arg-type)"FontEncoding":fontencoding.html% alt_encoding,  %(arg-type)String% facename = '', 
+                              %(arg-type)Boolean% interactive = true)
+
+Find an alternative for the given encoding (which is supposed to not be
+available on this system). If successful, return true and fill info
+structure with the parameters required to create the font, otherwise
+return false.
+
+The first form is for Widgets' internal use while the second one
+is better suitable for general use -- it returns FontEncoding which
+can consequently be passed to Font constructor.
+
+
+h3(#FontMapper_getencoding). FontMapper#get_encoding
+
+ "FontEncoding":fontencoding.html *get_encoding*(%(arg-type)Integer% n)
+
+Returns the _n_-th supported encoding. Together with 
+"get_supported_encodings_count()":#FontMapper_getsupportedencodingscount() 
+this method may be used to get all supported encodings.
+
+
+h3(#FontMapper_getencodingdescription). FontMapper#get_encoding_description
+
+ String *get_encoding_description*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
+
+Return user-readable string describing the given encoding.
+
+
+h3(#FontMapper_getencodingfromname). FontMapper#get_encoding_from_name
+
+ "FontEncoding":fontencoding.html *get_encoding_from_name*(%(arg-type)String% encoding)
+
+Return the encoding corresponding to the given internal name. This function is
+the inverse of "get_encoding_name":#FontMapper_getencodingname and is
+intentionally less general than 
+"charset_to_encoding":#FontMapper_charsettoencoding, i.e. it doesn't
+try to make any guesses nor ever asks the user. It is meant just as a way of
+restoring objects previously serialized using 
+"get_encoding_name":#FontMapper_getencodingname.
+
+
+h3(#FontMapper_getencodingname). FontMapper#get_encoding_name
+
+ String *get_encoding_name*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
+
+Return internal string identifier for the encoding (see also 
+"get_encoding_description()":#FontMapper_getencodingdescription())
+
+h4. See also
+
+"get_encoding_from_name":#FontMapper_getencodingfromname
+
+
+h3(#FontMapper_getsupportedencodingscount). FontMapper#get_supported_encodings_count
+
+ Integer *get_supported_encodings_count*()
+
+Returns the number of the font encodings supported by this class. Together with 
+"get_encoding":#FontMapper_getencoding this method may be used to get
+all supported encodings.
+
+
+h3(#FontMapper_isencodingavailable). FontMapper#is_encoding_available
+
+ Boolean *is_encoding_available*(%(arg-type)"FontEncoding":fontencoding.html% encoding, 
+                               %(arg-type)String% facename = '')
+
+Check whether given encoding is available in given face or not.
+If no facename is given, find _any_ font in this encoding.
+
+
+h3(#FontMapper_setdialogparent). FontMapper#set_dialog_parent
+
+  *set_dialog_parent*(%(arg-type)"Window":window.html% parent)
+
+The parent window for modal dialogs.
+
+
+h3(#FontMapper_setdialogtitle). FontMapper#set_dialog_title
+
+  *set_dialog_title*(%(arg-type)String% title)
+
+The title for the dialogs (note that default is quite reasonable).
+
+
+h3(#FontMapper_set). FontMapper#set
+
+ "FontMapper":fontmapper.html *set*(%(arg-type)"FontMapper":fontmapper.html% mapper)
+
+Set the current font mapper object and return previous one (may be NULL).
+This method is only useful if you want to plug-in an alternative font mapper
+into Widgets.
+
+h4. See also
+
+"FontMapper#get":fontmapper.html#FontMapper_get
+
+
+h3(#FontMapper_setconfig). FontMapper#set_config
+
+  *set_config*(%(arg-type)"ConfigBase":configbase.html% config)
+
+Set the config object to use (may be NULL to use default).
+
+By default, the global one (from ConfigBase::Get() will be used) 
+and the default root path for the config settings is the string returned by
+GetDefaultConfigPath().
+
+
+h3(#FontMapper_setconfigpath). FontMapper#set_config_path
+
+  *set_config_path*(%(arg-type)String% prefix)
+
+Set the root config path to use (should be an absolute path).
+

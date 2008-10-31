@@ -1,0 +1,90 @@
+h1(#wxhelpprovider). Wx::HelpProvider
+
+HelpProvider is an abstract class used by a program implementing context-sensitive help to
+show the help text for the given window.
+
+The current help provider must be explicitly set by the application using
+HelpProvider::Set().
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"ContextHelp":contexthelp.html, "ContextHelpButton":contexthelpbutton.html, 
+"SimpleHelpProvider":simplehelpprovider.html, "HelpControllerHelpProvider":helpcontrollerhelpprovider.html, 
+"Window#set_help_text":window.html#Window_sethelptext, "Window#get_help_text":window.html#Window_gethelptext
+
+<div id="methods">
+
+h2. Methods
+
+* "HelpProvider#add_help":#HelpProvider_addhelp
+* "HelpProvider#get":#HelpProvider_get
+* "HelpProvider#get_help":#HelpProvider_gethelp
+* "HelpProvider#remove_help":#HelpProvider_removehelp
+* "HelpProvider#set":#HelpProvider_set
+* "HelpProvider#show_help":#HelpProvider_showhelp
+
+</div>
+
+
+  *destructor*()
+
+Virtual destructor for any base class.
+
+h3(#HelpProvider_addhelp). HelpProvider#add_help
+
+  *add_help*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)String% text)
+
+Associates the text with the given window or id. Although all help
+providers have these functions to allow making "Window#set_help_text":window.html#Window_sethelptext 
+work, not all of them implement the functions.
+
+h3(#HelpProvider_get). HelpProvider#get
+
+ "HelpProvider":helpprovider.html *get*()
+
+Unlike some other classes, the help provider is not created on demand.
+This must be explicitly done by the application.
+
+h3(#HelpProvider_gethelp). HelpProvider#get_help
+
+ String *get_help*(%(arg-type)"WindowBase":windowbase.html% window)
+
+Gets the help string for this window. Its interpretation is dependent on the help provider
+except that empty string always means that no help is associated with
+the window.
+
+  *add_help*(%(arg-type)Integer% id,  %(arg-type)String% text)
+
+This version associates the given text with all windows with this id.
+May be used to set the same help string for all Cancel buttons in
+the application, for example.
+
+h3(#HelpProvider_removehelp). HelpProvider#remove_help
+
+  *remove_help*(%(arg-type)"WindowBase":windowbase.html% window)
+
+Removes the association between the window pointer and the help text. This is
+called by the Window destructor. Without this, the table of help strings will fill up
+and when window pointers are reused, the wrong help string will be found.
+
+h3(#HelpProvider_set). HelpProvider#set
+
+ "HelpProvider":helpprovider.html *set*(%(arg-type)"HelpProvider":helpprovider.html% helpProvider)
+
+Get/set the current, application-wide help provider. Returns
+the previous one.
+
+h3(#HelpProvider_showhelp). HelpProvider#show_help
+
+ Boolean *show_help*(%(arg-type)"WindowBase":windowbase.html% window)
+
+Shows help for the given window. Uses "get_help":#HelpProvider_gethelp internally if
+applicable.
+
+Returns true if it was done, or false if no help was available
+for this window.
+

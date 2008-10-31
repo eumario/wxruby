@@ -1,0 +1,40 @@
+h1(#wxgridcellfloateditor). Wx::GridCellFloatEditor
+
+The editor for floating point numbers data.
+
+h2. Derived from
+
+"GridCellTextEditor":gridcelltexteditor.html
+
+"GridCellEditor":gridcelleditor.html
+
+h2. See also
+
+"GridCellEditor":gridcelleditor.html, "GridCellNumberEditor":gridcellnumbereditor.html, "GridCellBoolEditor":gridcellbooleditor.html, "GridCellTextEditor":gridcelltexteditor.html, "GridCellChoiceEditor":gridcellchoiceeditor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellFloatEditor.new":#GridCellFloatEditor_new
+* "GridCellFloatEditor#set_parameters":#GridCellFloatEditor_setparameters
+
+</div>
+
+
+h3(#GridCellFloatEditor_constr). GridCellFloatEditor.new
+
+  *GridCellFloatEditor.new*(%(arg-type)Integer% width = -1,  %(arg-type)Integer% precision = -1)
+
+* _width_ Minimum number of characters to be shown.
+* _precision_ Number of digits after the decimal dot.
+
+
+h3(#GridCellFloatEditor_setparameters). GridCellFloatEditor#set_parameters
+
+  *set_parameters*(%(arg-type)String% params)
+
+Parameters string format is "width,precision"
+
+
+

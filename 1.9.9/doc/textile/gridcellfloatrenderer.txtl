@@ -1,0 +1,65 @@
+h1. Wx::GridCellFloatRenderer
+
+h2. Derived from
+
+"GridCellStringRenderer":gridcellstringrenderer.html
+
+"GridCellRenderer":gridcellrenderer.html
+
+h2. See also
+
+"GridCellRenderer":gridcellrenderer.html, "GridCellNumberRenderer":gridcellnumberrenderer.html, "GridCellStringRenderer":gridcellstringrenderer.html, "GridCellBoolRenderer":gridcellboolrenderer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellFloatRenderer.new":#GridCellFloatRenderer_new
+* "GridCellFloatRenderer#get_precision":#GridCellFloatRenderer_getprecision
+* "GridCellFloatRenderer#get_width":#GridCellFloatRenderer_getwidth
+* "GridCellFloatRenderer#set_parameters":#GridCellFloatRenderer_setparameters
+* "GridCellFloatRenderer#set_precision":#GridCellFloatRenderer_setprecision
+* "GridCellFloatRenderer#set_width":#GridCellFloatRenderer_setwidth
+
+</div>
+
+
+h3(#GridCellFloatRenderer_constr). GridCellFloatRenderer.new
+
+  *GridCellFloatRenderer.new*(%(arg-type)Integer% width = -1,  %(arg-type)Integer% precision = -1)
+
+* _width_ Minimum number of characters to be shown.
+* _precision_ Number of digits after the decimal dot.
+
+h3(#GridCellFloatRenderer_getprecision). GridCellFloatRenderer#get_precision
+
+ Integer *get_precision*()
+
+Returns the precision ( see "GridCellFloatRenderer":gridcellfloatrendererconstr.html ).
+
+h3(#GridCellFloatRenderer_getwidth). GridCellFloatRenderer#get_width
+
+ Integer *get_width*()
+
+Returns the width ( see "GridCellFloatRenderer":gridcellfloatrendererconstr.html ).
+
+h3(#GridCellFloatRenderer_setparameters). GridCellFloatRenderer#set_parameters
+
+  *set_parameters*(%(arg-type)String% params)
+
+Parameters string format is "width[,precision]".
+
+h3(#GridCellFloatRenderer_setprecision). GridCellFloatRenderer#set_precision
+
+  *set_precision*(%(arg-type)Integer% precision)
+
+Sets the precision ( see "GridCellFloatRenderer":gridcellfloatrendererconstr.html ).
+
+h3(#GridCellFloatRenderer_setwidth). GridCellFloatRenderer#set_width
+
+  *set_width*(%(arg-type)Integer% width)
+
+Sets the width ( see "GridCellFloatRenderer":gridcellfloatrendererconstr.html )
+
+
+

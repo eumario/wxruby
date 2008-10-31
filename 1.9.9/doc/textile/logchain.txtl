@@ -1,0 +1,90 @@
+h1(#wxlogchain). Wx::LogChain
+
+This simple class allows to chain log sinks, that is to install a new sink but
+keep passing log messages to the old one instead of replacing it completely as
+"set_active_target":#LogChain_setactivetarget does.
+
+It is especially useful when you want to divert the logs somewhere (for
+example to a file or a log window) but also keep showing the error messages
+using the standard dialogs as "LogGui":logoverview.html does by default.
+
+Example of usage:
+
+
+ LogChain *logChain = new LogChain(new LogStderr);
+ 
+ // all the log messages are sent to stderr and also processed as usually
+ ...
+ 
+ // don't delete logChain directly as this would leave a dangling
+ // pointer as active log target, use SetActiveTarget() instead
+ delete Log::SetActiveTarget(...something else or NULL...);
+ 
+ 
+
+h2. Derived from
+
+"Log":log.html
+
+<div id="methods">
+
+h2. Methods
+
+* "LogChain.new":#LogChain_new
+* "LogChain#get_old_log":#LogChain_getoldlog
+* "LogChain#is_passing_messages":#LogChain_ispassingmessages
+* "LogChain#pass_messages":#LogChain_passmessages
+* "LogChain#set_log":#LogChain_setlog
+
+</div>
+
+
+h3(#LogChain_new). LogChain.new
+
+  *LogChain.new*(%(arg-type)"Log":log.html% logger)
+
+Sets the specified @logger@ (which may be @NULL@) as the default log
+target but the log messages are also passed to the previous log target if any.
+
+  *destructor*()
+
+Destroys the previous log target.
+
+h3(#LogChain_getoldlog). LogChain#get_old_log
+
+ "Log":log.html *get_old_log*()
+
+Returns the pointer to the previously active log target (which may be 
+NULL).
+
+h3(#LogChain_ispassingmessages). LogChain#is_passing_messages
+
+ Boolean *is_passing_messages*()
+
+Returns @true@ if the messages are passed to the previously active log
+target (default) or @false@ if "pass_messages":#LogChain_passmessages
+had been called.
+
+h3(#LogChain_passmessages). LogChain#pass_messages
+
+  *pass_messages*(%(arg-type)Boolean% passMessages)
+
+By default, the log messages are passed to the previously active log target.
+Calling this function with @false@ parameter disables this behaviour
+(presumably temporarily, as you shouldn't use LogChain at all otherwise) and
+it can be reenabled by calling it again with _passMessages_ set to 
+true.
+
+h3(#LogChain_setlog). LogChain#set_log
+
+  *set_log*(%(arg-type)"Log":log.html% logger)
+
+Sets another log target to use (may be @NULL@). The log target specified
+in the "constructor":logchainctor.html or in a previous call to
+this function is deleted.
+
+This doesn't change the old log target value (the one the messages are
+forwarded to) which still remains the same as was active when LogChain
+object was created.
+
+

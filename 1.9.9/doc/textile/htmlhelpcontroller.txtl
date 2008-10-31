@@ -1,0 +1,400 @@
+h1(#wxhtmlhelpcontroller). Wx::HtmlHelpController
+
+This help controller provides an easy way of displaying HTML help in
+your application. It provides a sophisticated system for showing help
+that includes a hierarchical contents listing, index, keyword search and
+bookmarking. 
+
+It is similar to the Microsoft Windows HTML Help Viewer, but unlike that
+viewer it is available and uses the same help file format on all
+platforms. The native Windows help viewer is available in WxRuby by
+using the "Wx::HelpController":helpcontroller.html class, which will
+create an OS-native viewer on Windows and an HtmlHelpController on
+Linux/GTk and OS X. However, unless you have a strong preference for
+using the native control on Windows, you are recommended to use this
+class, as it means you can provide your help file(s) in a single format
+only.
+
+The help system is based on *books* (see). A book is a logical section
+of documentation (for example "User's Guide" or "Programmer's Guide" or
+"Ruby Reference" or "Class Reference"). The help controller can handle
+as many books as you want.
+
+h2(#html_help_file_format). Html Help File Format
+
+@Wx::HtmlHelpController@ library uses a reduced version of Microsoft's
+HTML Workshop format. This consists of standard HTML 4.0 files, plus a
+set of three files (.hhp, .hhc, .hhk) that are a project header file, a
+help contents file and a help index file, respectively. These are all
+simple text files that are easily authored or generated using any of a
+wide variety of tools.
+
+A HtmlHelpController can use an .hhp header file directly as an argument
+to "add_book":#HtmlHelpController_addbook to open documentation. 
+
+You can make a regular zip archive of these files, plus the HTML and any
+image files, for wxHTML (or helpview) to read; and the .zip file can
+optionally be renamed to .htb.
+
+h3(#hhp_header_file). Header file (.hhp)
+
+Header file must contain these lines (and may contain additional lines which are ignored) :
+
+ Contents file=[filename.hhc]
+ Index file=[filename.hhk]
+ Title=[title of your book]
+ Default topic=[default page to be displayed.htm]
+
+All filenames (including the Default topic) are relative to the location
+of .hhp file.
+
+_Localization note_ In addition, .hhp file may contain the line
+
+ Charset=<rfc_charset>
+
+which specifies what charset (e.g. "iso8859_1") was used in contents and
+index files. Please note that this line is incompatible with MS HTML
+Help Workshop and it would either silently remove it or complain with
+some error.
+
+h3(#hhc_contents_file). Contents file (.hhc)
+
+The contents file lists the hierarchical structure of the help
+documentation. The contents file has HTML syntax and it can be parsed by
+regular HTML parser. It contains exactly one list
+(&lt;ul&gt;....&lt;/ul&gt; statement), with &lt;li&gt; elements
+containing an &lt;object&gt; of type @text/sitemap@ for each node of the
+contents:
+
+<pre>
+ <ul>
+  <li>
+	<object type="text/sitemap">
+      <param name="Name" value="@topic name@">
+      <param name="ID" value=@numeric_id@>
+      <param name="Local" value="@filename.htm@">
+    </object>
+  <li>
+    <object type="text/sitemap">
+      <param name="Name" value="@topic name@">
+      <param name="ID" value=@numeric_id@>
+      <param name="Local" value="@filename.htm@">
+    </object>
+  ...    
+ </ul>
+</pre>
+
+You can modify the value attributes of param tags. @topic name@ is name
+of chapter/topic as is displayed in the contents listing, @filename.htm@
+is the HTML page name (relative to .hhp file) and @numeric_id@ is
+optional - it is used only when you use the HtmlHelpController#display()
+method to show a specific part of the help documentation.
+
+Items in the list may be nested to produce a hierarchical tree-like
+organisation of content topics. To do this, one &lt;li&gt; statement may
+contain one or more &lt;ul&gt; sub-statements in the .hhc file:
+
+<pre>
+ <ul>
+   <li> 
+     <object type="text/sitemap">
+       <param name="Name" value="Top node">
+       <param name="Local" value="top.htm">
+     </object>
+     <ul>
+       <li>
+	     <object type="text/sitemap">
+           <param name="Name" value="subnode in topnode">
+           <param name="Local" value="subnode1.htm">
+         </object>
+      ...
+    </ul>
+  <li> 
+    <object type="text/sitemap">
+      <param name="Name" value="Another Top">
+      <param name="Local" value="top2.htm">
+    </object>
+  ...    
+ </ul>
+</pre>
+
+h3(#hhk_index_file). Index file (.hhk)
+
+The index file is a listing of keywords, associated with locations that
+describe those keywords. Index files have same format as contents file
+except that ID params are ignored and sublists are not allowed.
+
+h3(#html_content_files). Html Content Files
+
+HtmlHelpController uses "HtmlWindow":htmlwindow.html to display the HTML
+content pages of the help documentation. Therefore, it understand the
+large subset of HTML 4.0 that is understood by that widget.
+
+One "feature" to note is that it does *not* support anchors specified
+using the modern @id@ attribute used on any HTML element. Only
+old-fashioned named anchors (using the @name@ attribute on an @a@ tag)
+are recognised.
+
+h3(#htb_bundle_files). Bundling help files (.htb)
+
+Distributing help using the file format described above means
+distributing a reasonably number of files (at least the header file,
+contents page and the actual documentation), and maintaining the
+directory organisation. It can be more convenient to bundle all the
+content and index files together into a single file.
+
+A help file bundle can be created by zipping up the .hhp, .hhc, .hhk
+plus the HTML content files and any images into a single standard .zip
+archive. WxRuby can then load help from this single archive file instead of
+from an .hhp file. If you prefer, the .zip file can be renamed .htb
+('HTml help Book') to indicate that it contains help documentation.
+
+The .chm (Compiled Help) format that is generated by Microsoft's Help
+Workshop is a similar concept.  However, this file format is *not*
+compatible with WxRuby's Wx::HtmlHelpController. These .chm files can be
+read by the native Microsoft Help Viewer, which is accessible in WxRuby
+by using the "HelpController":helpcontroller.html class, on Windows
+only.
+
+h3(#creating_html_help_files). Generating HTML Help files
+
+There are several tools that can be used to automate the creation of
+.hhp, .hhc, .hhk and .html files for use with the help viewer.
+
+You can use Tex2RTF, a utility included with the wxWidgets distribution
+to produce these files when generating HTML from Latex. To do so, set
+*htmlWorkshopFiles* to *true* in your tex2rtf.ini file.
+
+The files can also be generated from Docbook XML documentation, by using
+the *htmlhelp.xsl* stylesheet.
+
+If you prefer to use a GUI, Microsoft offers a free HTML Help Workshop
+for authoring Help documentation.
+
+Although we do not know of any tool to automatically create the contents
+and index files from Ruby's RDoc system, it should be relatively
+straightforward to adapt RDoc's output for use with HtmlHelpController.
+
+h3(#note_on_caching). Note on caching
+
+The WxWidgets documentation recommends the use of preprocessed
+*.hhp.cached* version of projects. These can be either created
+on-the-fly (see "set_temp_dir":#HtmlHelpController_settempdir) or you
+can use *hhp2cached* utility from _utils/hhp2cached_ directory in the
+WxWidgets distribution to create it and distribute the cached version
+together with helpfiles.
+
+h2(#see_also). See also
+
+"Wx::HelpController":helpcontroller.html
+
+h2(#superclasses). Inherits from
+
+ "Wx::Object":object.html
+
+<div id="methods">
+
+h2. Class Methods
+
+* "HtmlHelpController.instance":#HtmlHelpController_instance
+* "HtmlHelpController.new":#HtmlHelpController_new
+
+h2. Instance Methods
+
+* "HtmlHelpController#add_book":#HtmlHelpController_addbook
+* "HtmlHelpController#create_help_frame":#HtmlHelpController_createhelpframe
+* "HtmlHelpController#display":#HtmlHelpController_display
+* "HtmlHelpController#display_contents":#HtmlHelpController_displaycontents
+* "HtmlHelpController#display_index":#HtmlHelpController_displayindex
+* "HtmlHelpController#keyword_search":#HtmlHelpController_keywordsearch
+* "HtmlHelpController#read_customization":#HtmlHelpController_readcustomization
+* "HtmlHelpController#set_temp_dir":#HtmlHelpController_settempdir
+* "HtmlHelpController#set_title_format":#HtmlHelpController_settitleformat
+* "HtmlHelpController#use_config":#HtmlHelpController_useconfig
+* "HtmlHelpController#write_customization":#HtmlHelpController_writecustomization
+
+</div>
+
+h2(#class_methods). Class Methods
+
+h3(#HtmlHelpController_instance). HtmlHelpController.instance
+
+  *HtmlHelpController.instance*(%(arg-type)Integer% style = HF_DEFAULT_STYLE)
+
+Returns a new HtmlHelpController if one hasn't already been created, or
+returns the previously created one if there is such.
+
+Users typically expect only a single help window to be running for
+any particular application, with the help shown and hidden as
+required. To avoid showing multiple help windows within a single
+application, use this method in preference to
+"new":#HtmlHelpController_new . 
+
+h4. Parameters
+
+_style_ defines optional styles for the help window; the options are
+described below in the "new":#HtmlHelpController_new method. Note that
+the style argument will only be processed in the first call to this
+method - subsequent calls will return a controller with the original
+style.
+
+h3(#HtmlHelpController_new). HtmlHelpController.new
+
+  *HtmlHelpController.new*(%(arg-type)Integer% style = HF_DEFAULT_STYLE)
+
+Constructor. To avoid a proliferation of help frames, you may prefer
+to use the "instance":#HtmlHelpController_instance class method instead
+to display help.
+
+h4. Parameters
+
+_style_ is combination of these flags:
+
+
+|@HF_TOOLBAR@|Help frame has toolbar.|
+|@HF_FLAT_TOOLBAR@|Help frame has toolbar with flat buttons (aka coolbar).|
+|@HF_CONTENTS@|Help frame has contents panel.|
+|@HF_INDEX@|Help frame has index panel.|
+|@HF_SEARCH@|Help frame has search panel.|
+|@HF_BOOKMARKS@|Help frame has bookmarks controls.|
+|@HF_OPEN_FILES@|Allow user to open arbitrary HTML document.|
+|@HF_PRINT@|Toolbar contains "print" button.|
+|@HF_MERGE_BOOKS@|Contents pane does not showbook nodes. All books are merged together and appear as single book to theuser.|
+|@HF_ICONS_BOOK@|All nodes in contents panehave a book icon. This is how Microsoft's HTML help viewer behaves.|
+|@HF_ICONS_FOLDER@|Book nodes in contents pane havea book icon, book's sections have a folder icon. This is the default.|
+|@HF_ICONS_BOOK_CHAPTER@|Both book nodes andnodes of top-level sections of a book (i.e. chapters) have a book icon,all other sections (sections, subsections, ...) have a folder icon.|
+|@HF_DEFAULT_STYLE@|@HF_TOOLBAR@&#124;@HF_CONTENTS@&#124;@HF_INDEX@&#124;@HF_SEARCH@&#124;@HF_BOOKMARKS@&#124;@HF_PRINT@|
+
+
+h2(#instance_methods). Instance Methods
+
+h3(#HtmlHelpController_addbook). HtmlHelpController#add_book
+
+ Boolean *add_book*(%(arg-type)String% book_file,  %(arg-type)Boolean% show_wait_msg)
+
+Adds book into the list of loaded books. This must be called at least
+once before displaying any help. 
+
+_book_file_ may be either .hhp file or ZIP archive that contains
+arbitrary number of .hhp files in top-level directory. This ZIP archive
+must have the .zip or .htb extension (the latter stands for "HTML
+book"). See above for more information about the format of the help
+files. 
+
+h4. Parameters
+
+* _book_file_ Help book filename; this should be a fully-qualified path to the helpfile; @File.expand_path@ may be useful here.
+* _show_wait_msg_ If true then a decoration-less window with progress message is displayed while the help file is loaded.
+
+h3(#HtmlHelpController_createhelpframe). HtmlHelpController#create_help_frame
+
+ "HtmlHelpFrame":htmlhelpframe.html *create_help_frame*(%(arg-type)"HtmlHelpData":htmlhelpdata.html% data)
+
+This protected virtual method may be overridden so that the controller
+uses slightly different frame. See _samples/html/helpview_ sample for
+an example.
+
+h3(#HtmlHelpController_display). HtmlHelpController#display
+
+  *display*(%(arg-type)String% x)
+
+Displays page _x_. This is THE important function - it is used to display
+the help in application.
+
+You can specify the page in many ways:
+
+
+* as direct filename of HTML document
+* as chapter name (from contents) or as a book name
+* as some word from index
+* even as any word (will be searched)
+
+
+Looking for the page runs in these steps:
+
+
+# try to locate file named x (if x is for example "doc/howto.htm")
+# try to open starting page of book named x
+# try to find x in contents (if x is for example "How To ...")
+# try to find x in index (if x is for example "How To ...")
+# switch to Search panel and start searching
+
+
+  *display*(%(arg-type)Integer% id)
+
+This alternative form is used to search help contents by numeric IDs.
+
+h3(#HtmlHelpController_displaycontents). HtmlHelpController#display_contents
+
+  *display_contents*()
+
+Displays help window and focuses contents panel.
+
+h3(#HtmlHelpController_displayindex). HtmlHelpController#display_index
+
+  *display_index*()
+
+Displays help window and focuses index panel.
+
+h3(#HtmlHelpController_keywordsearch). HtmlHelpController#keyword_search
+
+ Boolean *keyword_search*(%(arg-type)String% keyword, 
+                        %(arg-type)"HelpSearchMode":helpsearchmode.html% mode = HELP_SEARCH_ALL)
+
+Displays help window, focuses search panel and starts searching.  Returns true
+if the keyword was found. Optionally it searches through the index (mode =
+HELP_SEARCH_INDEX), default the content (mode = HELP_SEARCH_ALL).
+
+*Important:* KeywordSearch searches only pages listed in .hhc file(s).
+You should list all pages in the contents file.
+
+h3(#HtmlHelpController_readcustomization). HtmlHelpController#read_customization
+
+  *read_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
+
+Reads the controller's setting (position of window, etc.)
+
+h3(#HtmlHelpController_settempdir). HtmlHelpController#set_temp_dir
+
+  *set_temp_dir*(%(arg-type)String% path)
+
+Sets the path for storing temporary files - cached binary versions of
+index and contents files. These binary forms are much faster to
+read. Default value is empty string (empty string means that no cached
+data are stored). Note that these files are _not_ deleted when program
+exits.
+
+Once created these cached files will be used in all subsequent
+executions of your application. If cached files become older than
+corresponding .hhp file (e.g. if you regenerate documentation) it will
+be refreshed.
+
+h3(#HtmlHelpController_settitleformat). HtmlHelpController#set_title_format
+
+  *set_title_format*(%(arg-type)String% format)
+
+Sets format of title of the frame. Must contain exactly one "\%s" (for
+title of displayed HTML page).
+
+h3(#HtmlHelpController_useconfig). HtmlHelpController#use_config
+
+  *use_config*(%(arg-type)"ConfigBase":configbase.html% config,  %(arg-type)String% rootpath = '')
+
+Associates _config_ object with the controller.
+
+If there is associated config object, HtmlHelpController automatically
+reads and writes settings (including HtmlWindow's settings) when needed.
+
+The only thing you must do is create Config object and call UseConfig.
+
+If you do not use _UseConfig_, HtmlHelpController will use 
+default Config object if available (for details see 
+"ConfigBase#get":configbase.html#ConfigBase_get and 
+"ConfigBase#set":configbase.html#ConfigBase_set).
+
+h3(#HtmlHelpController_writecustomization). HtmlHelpController#write_customization
+
+  *write_customization*(%(arg-type)"ConfigBase":configbase.html% cfg,  %(arg-type)String% path = '')
+
+Stores controllers setting (position of window etc.)
+

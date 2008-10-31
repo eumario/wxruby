@@ -1,0 +1,46 @@
+h1(#wxclientdata). Wx::ClientData
+
+All classes deriving from "EvtHandler":evthandler.html
+(such as all controls and "App":app.html)
+can hold arbitrary data which is here referred to as "client data".
+This is useful e.g. for scripting languages which need to handle
+shadow objects for most of Widgets' classes and which store
+a handle to such a shadow class as client data in that class.
+This data can either be of type void - in which case the data
+_container_ does not take care of freeing the data again
+or it is of type ClientData or its derivatives. In that case the
+container (e.g. a control) will free the memory itself later.
+Note that you _must not_ assign both void data and data
+derived from the ClientData class to a container.
+
+Some controls can hold various items and these controls can
+additionally hold client data for each item. This is the case for
+"Choice":choice.html, "ComboBox":combobox.html
+and "ListBox":listbox.html. "TreeCtrl":treectrl.html
+has a specialized class "TreeItemData":treeitemdata.html
+for each item in the tree.
+
+If you want to add client data to your own classes, you may
+use the mix-in class "ClientDataContainer":clientdatacontainer.html.
+
+h2. See also
+
+"EvtHandler":evthandler.html, "TreeItemData":treeitemdata.html,
+"StringClientData":stringclientdata.html, "ClientDataContainer":clientdatacontainer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ClientData.new":#ClientData_new
+
+</div>
+
+
+
+h3(#ClientData_wxclientdata). ClientData.new
+
+  *destructor*()
+
+Virtual destructor.
+

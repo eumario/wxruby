@@ -1,0 +1,33 @@
+h1(#wxlogtextctrl). Wx::LogTextCtrl
+
+Using these target all the log messages can be redirected to a text control.
+The text control must have been created with @TE_MULTILINE@ style by the
+caller previously.
+
+h2. Derived from
+
+"Log":log.html
+
+h2. See also
+
+"LogTextCtrl":logtextctrl.html,
+
+"StreamToTextRedirector":streamtotextredirector.html
+
+<div id="methods">
+
+h2. Methods
+
+* "LogTextCtrl.new":#LogTextCtrl_new
+
+</div>
+
+
+h3(#LogTextCtrl_new). LogTextCtrl.new
+
+  *LogTextCtrl.new*(%(arg-type)"TextCtrl":textctrl.html% textctrl)
+
+Constructs a log target which sends all the log messages to the given text
+control. The _textctrl_ parameter cannot be @NULL@.
+
+

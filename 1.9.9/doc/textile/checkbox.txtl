@@ -1,0 +1,172 @@
+h1(#wxcheckbox). Wx::CheckBox
+
+A checkbox is a labelled box which by default is either on (checkmark is
+visible) or off (no checkmark). Optionally (when the CHK_3STATE style flag
+is set) it can have a third state, called the mixed or undetermined state.
+Often this is used as a "Does Not Apply" state.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@CHK_2STATE@|Create a 2-state checkbox. This is the default.|
+|@CHK_3STATE@|Create a 3-state checkbox.Not implemented in MGL, OS2 and GTK built against GTK+ 1.2.|
+|@CHK_ALLOW_3RD_STATE_FOR_USER@|By default a user can't set a 3-state checkboxto the third state. It can only be done from code. Using this flags allows the user to set the checkbox to the third state by clicking. |
+|@ALIGN_RIGHT@|Makes the text appear on the left of the checkbox.|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+
+|*evt_checkbox(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_CHECKBOX_CLICKED event,when the checkbox is clicked.|
+
+
+h2. See also
+
+"RadioButton":radiobutton.html, "CommandEvent":commandevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "CheckBox.new":#CheckBox_new
+* "CheckBox#create":#CheckBox_create
+* "CheckBox#get_value":#CheckBox_getvalue
+* "CheckBox#get_3_state_value":#CheckBox_get3statevalue
+* "CheckBox#is_3_rd_state_allowed_for_user":#CheckBox_is3rdstateallowedforuser
+* "CheckBox#is_3_state":#CheckBox_is3state
+* "CheckBox#is_checked":#CheckBox_ischecked
+* "CheckBox#set_value":#CheckBox_setvalue
+* "CheckBox#set_3_state_value":#CheckBox_set3statevalue
+
+</div>
+
+
+h3(#CheckBox_new). CheckBox.new
+
+  *CheckBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+               %(arg-type)Integer% style = 0, 
+               %(arg-type)"Validator":validator.html% val, 
+               %(arg-type)String% name = "checkBox")
+
+Constructor, creating and showing a checkbox.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Checkbox identifier. A value of -1 indicates a default value.
+* _label_ Text to be displayed next to the checkbox.
+* _pos_ Checkbox position. If the position (-1, -1) is specified then a default position is chosen.
+* _size_ Checkbox size. If the default size (-1, -1) is specified then a default size is chosen.
+* _style_ Window style. See "CheckBox":checkbox.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"CheckBox#create":checkbox.html#CheckBox_create, "Validator":validator.html
+
+  *destructor*()
+
+Destructor, destroying the checkbox.
+
+h3(#CheckBox_create). CheckBox#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% val, 
+                %(arg-type)String% name = "checkBox")
+
+Creates the checkbox for two-step construction. See "CheckBox.new":checkbox.html#CheckBox_new for details.
+
+h3(#CheckBox_getvalue). CheckBox#get_value
+
+ Boolean *get_value*()
+
+Gets the state of a 2-state checkbox.
+
+h4. Return value
+
+Returns  if it is checked,  otherwise.
+
+h3(#CheckBox_getthreestatevalue). CheckBox#get_3_state_value
+
+ "CheckBoxState":checkboxstate.html *get_3_state_value*()
+
+Gets the state of a 3-state checkbox.
+
+h4. Return value
+
+Returns CHK_UNCHECKED when the checkbox is unchecked, CHK_CHECKED
+ when it is checked and CHK_UNDETERMINED when it's in the undetermined
+state. Asserts when the function is used with a 2-state checkbox.
+
+h3(#CheckBox_is3rdstateallowedforuser). CheckBox#is_3_rd_state_allowed_for_user
+
+ Boolean *is_3_rd_state_allowed_for_user*()
+
+Returns whether or not the user can set the checkbox to the third state.
+
+h4. Return value
+
+Returns  if the user can set the third state of this checkbox,  if it can only be set
+programmatically or if it's a 2-state checkbox.
+
+h3(#CheckBox_is3state). CheckBox#is_3_state
+
+ Boolean *is_3_state*()
+
+Returns whether or not the checkbox is a 3-state checkbox.
+
+h4. Return value
+
+Returns  if this checkbox is a 3-state checkbox,  if it's a 2-state checkbox.
+
+h3(#CheckBox_ischecked). CheckBox#is_checked
+
+ Boolean *is_checked*()
+
+This is just a maybe more readable synonym for 
+"get_value":#CheckBox_getvalue: just as the latter, it returns 
+ if the checkbox is checked and  otherwise.
+
+h3(#CheckBox_setvalue). CheckBox#set_value
+
+  *set_value*(%(arg-type)Boolean% state)
+
+Sets the checkbox to the given state. This does not cause a
+EVT_COMMAND_CHECKBOX_CLICKED event to get emitted.
+
+h4. Parameters
+
+* _state_ If , the check is on, otherwise it is off.
+
+h3(#CheckBox_set3statevalue). CheckBox#set_3_state_value
+
+  *set_3_state_value*(%(arg-type)"CheckBoxState":checkboxstate.html% state)
+
+Sets the checkbox to the given state. This does not cause a
+EVT_COMMAND_CHECKBOX_CLICKED event to get emitted.
+
+h4. Parameters
+
+* _state_ Can be one of: CHK_UNCHECKED (Check is off), CHK_CHECKED
+ (Check is on) or CHK_UNDETERMINED (Check is mixed). Asserts when the checkbox
+ is a 2-state checkbox and setting the state to CHK_UNDETERMINED.

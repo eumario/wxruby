@@ -1,0 +1,110 @@
+h1(#wxcloseevent). Wx::CloseEvent
+
+This event class contains information about window and session close events.
+
+The handler function for EVT_CLOSE is called when the user has tried to close a a frame
+or dialog box using the window manager (X) or system menu (Windows). It can
+also be invoked by the application itself programmatically, for example by
+calling the "Window#close":window.html#Window_close function.
+
+You should check whether the application is forcing the deletion of the window
+using "CloseEvent#can_veto":closeevent.html#CloseEvent_canveto. If this is @false@,
+you _must_ destroy the window using "Window#destroy":window.html#Window_destroy.
+If the return value is true, it is up to you whether you respond by destroying the window.
+
+If you don't destroy the window, you should call "CloseEvent#veto":closeevent.html#CloseEvent_veto to
+let the calling code know that you did not destroy the window. This allows the "Window#close":window.html#Window_close function
+to return @true@ or @false@ depending on whether the close instruction was honoured or not.
+
+h2. Derived from
+
+"Event":event.html
+
+h2. Event table macros
+
+To process a close event, use these event handler macros to direct input to member
+functions that take a CloseEvent argument.
+
+
+
+|*evt_close()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a close event, supplying the member function. Thisevent applies to Frame and Dialog classes.|
+|*evt_query_end_session()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a query end session event, supplying the member function.This event applies to App only.|
+|*evt_end_session()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process an end session event, supplying the member function.This event applies to App only.|
+
+h2. See also
+
+"Window#close":window.html#Window_close, "Window deletion overview":windowdeletionoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "CloseEvent.new":#CloseEvent_new
+* "CloseEvent#can_veto":#CloseEvent_canveto
+* "CloseEvent#get_logging_off":#CloseEvent_getloggingoff
+* "CloseEvent#set_can_veto":#CloseEvent_setcanveto
+* "CloseEvent#set_force":#CloseEvent_setforce
+* "CloseEvent#set_logging_off":#CloseEvent_setloggingoff
+* "CloseEvent#veto":#CloseEvent_veto
+
+</div>
+
+
+
+h3(#CloseEvent_new). CloseEvent.new
+
+  *CloseEvent.new*(%(arg-type)"TYPE":type.html% commandEventType = 0,  %(arg-type)Integer% id = 0)
+
+Constructor.
+
+
+h3(#CloseEvent_canveto). CloseEvent#can_veto
+
+ Boolean *can_veto*()
+
+Returns true if you can veto a system shutdown or a window close event.
+Vetoing a window close event is not possible if the calling code wishes to
+force the application to exit, and so this function must be called to check this.
+
+
+h3(#CloseEvent_getloggingoff). CloseEvent#get_logging_off
+
+ Boolean *get_logging_off*()
+
+Returns true if the user is just logging off or false if the system is
+shutting down. This method can only be called for end session and query end
+session events, it doesn't make sense for close window event.
+
+
+h3(#CloseEvent_setcanveto). CloseEvent#set_can_veto
+
+  *set_can_veto*(%(arg-type)Boolean% canVeto)
+
+Sets the 'can veto' flag.
+
+
+h3(#CloseEvent_setforce). CloseEvent#set_force
+
+  *set_force*(%(arg-type)Boolean% force)
+
+Sets the 'force' flag.
+
+
+h3(#CloseEvent_setloggingoff). CloseEvent#set_logging_off
+
+  *set_logging_off*(%(arg-type)Boolean% loggingOff)
+
+Sets the 'logging off' flag.
+
+
+h3(#CloseEvent_veto). CloseEvent#veto
+
+  *veto*(%(arg-type)Boolean% veto = true)
+
+Call this from your event handler to veto a system shutdown or to signal
+to the calling application that a window close did not happen.
+
+You can only veto a shutdown if "CloseEvent#can_veto":closeevent.html#CloseEvent_canveto returns
+true.
+
+

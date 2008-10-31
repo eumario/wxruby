@@ -1,0 +1,196 @@
+h1(#wxhtmltag). Wx::HtmlTag
+
+This class represents a single HTML tag. 
+It is used by "tag handlers":handlers.html.
+
+h2. Derived from
+
+Object
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlTag.new":#HtmlTag_new
+* "HtmlTag#get_all_params":#HtmlTag_getallparams
+* "HtmlTag#get_begin_pos":#HtmlTag_getbeginpos
+* "HtmlTag#get_end_pos_1":#HtmlTag_getendpos1
+* "HtmlTag#get_end_pos_2":#HtmlTag_getendpos2
+* "HtmlTag#get_name":#HtmlTag_getname
+* "HtmlTag#get_param":#HtmlTag_getparam
+* "HtmlTag#get_param_as_colour":#HtmlTag_getparamascolour
+* "HtmlTag#get_param_as_int":#HtmlTag_getparamasint
+* "HtmlTag#has_ending":#HtmlTag_hasending
+* "HtmlTag#has_param":#HtmlTag_hasparam
+* "HtmlTag#scan_param":#HtmlTag_scanparam
+
+</div>
+
+
+h3(#HtmlTag_wxhtmltag). HtmlTag.new
+
+  *HtmlTag.new*(%(arg-type)"HtmlTag":htmltag.html% parent,  %(arg-type)String% source,  %(arg-type)Integer% pos, 
+              %(arg-type)Integer% end_pos, 
+              %(arg-type)"HtmlTagsCache":htmltagscache.html% cache, 
+              %(arg-type)"HtmlEntitiesParser":htmlentitiesparser.html% entParser)
+
+Constructor. You will probably never have to construct a HtmlTag object
+yourself. Feel free to ignore the constructor parameters.
+Have a look at src/html/htmlpars.cpp if you're interested in creating it.
+
+h3(#HtmlTag_getallparams). HtmlTag#get_all_params
+
+ String *get_all_params*()
+
+Returns a string containing all parameters.
+
+Example : tag contains @<FONT SIZE=+2 COLOR="\#000000">@. Call to
+tag.GetAllParams() would return @SIZE=+2 COLOR="\#000000"@.
+
+
+h3(#HtmlTag_getbeginpos). HtmlTag#get_begin_pos
+
+ Integer *get_begin_pos*()
+
+Returns beginning position of the text _between_ this tag and paired
+ending tag. 
+See explanation (returned position is marked with `|'):
+
+
+ bla bla bla <MYTAG> bla bla internal text</MYTAG> bla bla
+                    |
+ 
+
+
+h3(#HtmlTag_getendpos1). HtmlTag#get_end_pos_1
+
+ Integer *get_end_pos_1*()
+
+Returns ending position of the text _between_ this tag and paired
+ending tag.
+See explanation (returned position is marked with `|'):
+
+
+ bla bla bla <MYTAG> bla bla internal text</MYTAG> bla bla
+                                         |
+ 
+
+
+h3(#HtmlTag_getendpos2). HtmlTag#get_end_pos_2
+
+ Integer *get_end_pos_2*()
+
+Returns ending position 2 of the text _between_ this tag and paired
+ending tag.
+See explanation (returned position is marked with `|'):
+
+
+ bla bla bla <MYTAG> bla bla internal text</MYTAG> bla bla
+                                                |
+ 
+
+h3(#HtmlTag_getname). HtmlTag#get_name
+
+ String *get_name*()
+
+Returns tag's name. The name is always in uppercase and it doesn't contain
+'<' or '/' characters. (So the name of @<FONT SIZE=+2>@ tag is "FONT"
+and name of @</table>@ is "TABLE")
+
+
+h3(#HtmlTag_getparam). HtmlTag#get_param
+
+ String *get_param*(%(arg-type)String% par,  %(arg-type)Boolean% with_commas = false)
+
+Returns the value of the parameter. You should check whether the
+parameter exists or not (use "has_param":#HtmlTag_hasparam) first.
+
+h4. Parameters
+
+* _par_ The parameter's name.
+* _with_commas_ true if you want to get commas as well. See example.
+
+h4. Example
+
+
+ ...
+ /* you have HtmlTag variable tag which is equal to
+    HTML tag <FONT SIZE=+2 COLOR="#0000FF"> */
+ dummy = tag.GetParam("SIZE");
+    // dummy == "+2"
+ dummy = tag.GetParam("COLOR");
+    // dummy == "#0000FF"
+ dummy = tag.GetParam("COLOR", true);
+    // dummy == "\"#0000FF\"" -- see the difference!!
+ 
+
+h3(#HtmlTag_getparamascolour). HtmlTag#get_param_as_colour
+
+ Boolean *get_param_as_colour*(%(arg-type)String% par,  %(arg-type)"Colour":colour.html% clr)
+
+Interprets tag parameter _par_ as colour specification and saves its value
+into Colour variable pointed by _clr_.
+
+Returns true on success and false if _par_ is not colour specification or
+if the tag has no such parameter.
+
+h3(#HtmlTag_getparamasint). HtmlTag#get_param_as_int
+
+ Boolean *get_param_as_int*(%(arg-type)String% par,  %(arg-type)Integer% value)
+
+Interprets tag parameter _par_ as an integer and saves its value
+into int variable pointed by _value_.
+
+Returns true on success and false if _par_ is not an integer or
+if the tag has no such parameter.
+
+h3(#HtmlTag_hasending). HtmlTag#has_ending
+
+ Boolean *has_ending*()
+
+Returns true if this tag is paired with ending tag, false otherwise.
+
+See the example of HTML document:
+
+
+ <html><body>
+ Hello<p>
+ How are you?
+ <p align=center>This is centered...</p>
+ Oops<br>Oooops!
+ </body></html>
+ 
+
+In this example tags HTML and BODY have ending tags, first P and BR 
+doesn't have ending tag while the second P has. The third P tag (which
+is ending itself) of course doesn't have ending tag.
+
+h3(#HtmlTag_hasparam). HtmlTag#has_param
+
+ Boolean *has_param*(%(arg-type)String% par)
+
+Returns true if the tag has a parameter of the given name. 
+Example : @<FONT SIZE=+2 COLOR="\#FF00FF">@ has two parameters named
+"SIZE" and "COLOR".
+
+h4. Parameters
+
+* _par_ the parameter you're looking for.
+
+h3(#HtmlTag_scanparam). HtmlTag#scan_param
+
+ String *scan_param*(%(arg-type)String% par,  %(arg-type)"Char":char.html% format,  %(arg-type)% value)
+
+This method scans the given parameter. Usage is exactly the same as sscanf's 
+usage except that you don't pass a string but a parameter name as the first
+argument
+and you can only retrieve one value (i.e. you can use only one "\%" element
+in _format_).
+
+
+h4. Parameters
+
+* _par_ The name of the tag you want to query
+* _format_ scanf()-like format string.
+* _value_ pointer to a variable to store the value in 
+

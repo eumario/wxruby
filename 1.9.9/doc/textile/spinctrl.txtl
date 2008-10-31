@@ -1,0 +1,155 @@
+h1(#wxspinctrl). Wx::SpinCtrl
+
+SpinCtrl combines "TextCtrl":textctrl.html and 
+"SpinButton":spinbutton.html in one control.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@SP_ARROW_KEYS@|The user can use arrow keys to change the value.|
+|@SP_WRAP@|The value wraps at the minimum and maximum.|
+
+
+h2. Event handling
+
+To process input from a spin button, use one of these event handler macros to direct input to member
+functions that take a "SpinEvent":spinevent.html argument:
+
+
+
+|*evt_spinctrl(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Generated whenever the numeric valueof the spinctrl is updated|
+
+You may also use the "SpinButton":spinbutton.html event macros, however
+the corresponding events will not be generated under all platforms. Finally, if
+the user modifies the text in the edit part of the spin control directly, the
+@EVT_TEXT@ is generated, like for the "TextCtrl":textctrl.html.
+
+When the use enters text into the text area, the text is not
+validated until the control loses focus (e.g. by using the TAB
+key). The value is then adjusted to the range and a 
+"SpinEvent":spinevent.html sent then if the value
+is different from the last value sent.
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html,
+"SpinButton":spinbutton.html,
+"Control":control.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SpinCtrl.new":#SpinCtrl_new
+* "SpinCtrl#create":#SpinCtrl_create
+* "SpinCtrl#set_value":#SpinCtrl_setvalue
+* "SpinCtrl#get_value":#SpinCtrl_getvalue
+* "SpinCtrl#set_range":#SpinCtrl_setrange
+* "SpinCtrl#set_selection":#SpinCtrl_setselection
+* "SpinCtrl#get_min":#SpinCtrl_getmin
+* "SpinCtrl#get_max":#SpinCtrl_getmax
+
+</div>
+
+
+h3(#SpinCtrl_wxspinctrl). SpinCtrl.new
+
+  *SpinCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+               %(arg-type)String% value = '', 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+               %(arg-type)Integer% style = SP_ARROW_KEYS, 
+               %(arg-type)Integer% min = 0, 
+               %(arg-type)Integer% max = 100, 
+               %(arg-type)Integer% initial = 0, 
+               %(arg-type)String% name = _T("SpinCtrl"))
+
+Constructor, creating and showing a spin control.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _value_ Default value.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position. If the position (-1, -1) is specified then a default position is chosen.
+* _size_ Window size. If the default size (-1, -1) is specified then a default size is chosen.
+* _style_ Window style. See "SpinButton":spinbutton.html.
+* _min_ Minimal value.
+* _max_ Maximal value.
+* _initial_ Initial value.
+* _name_ Window name.
+
+h4. See also
+
+"SpinCtrl#create":spinctrl.html#SpinCtrl_create
+
+h3(#SpinCtrl_create). SpinCtrl#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+                %(arg-type)String% value = '', 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = SP_ARROW_KEYS, 
+                %(arg-type)Integer% min = 0, 
+                %(arg-type)Integer% max = 100, 
+                %(arg-type)Integer% initial = 0, 
+                %(arg-type)String% name = _T("SpinCtrl"))
+
+Creation function called by the spin control constructor.
+
+See "SpinCtrl.new":spinctrl.html#SpinCtrl_new for details.
+
+h3(#SpinCtrl_setvalue). SpinCtrl#set_value
+
+  *set_value*(%(arg-type)String% text)
+
+  *set_value*(%(arg-type)Integer% value)
+
+Sets the value of the spin control.
+
+h3(#SpinCtrl_getvalue). SpinCtrl#get_value
+
+ Integer *get_value*()
+
+Gets the value of the spin control.
+
+h3(#SpinCtrl_setrange). SpinCtrl#set_range
+
+  *set_range*(%(arg-type)Integer% minVal,  %(arg-type)Integer% maxVal)
+
+Sets range of allowable values.
+
+h3(#SpinCtrl_setselection). SpinCtrl#set_selection
+
+  *set_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Select the text in the text part of the control between  positions 
+_from_ (inclusive) and _to_ (exclusive). This is similar to 
+"TextCtrl#set_selection":textctrl.html#TextCtrl_setselection.
+
+*NB:* this is currently only implemented for Windows and generic versions
+of the control.
+
+h3(#SpinCtrl_getmin). SpinCtrl#get_min
+
+ Integer *get_min*()
+
+Gets minimal allowable value.
+
+h3(#SpinCtrl_getmax). SpinCtrl#get_max
+
+ Integer *get_max*()
+
+Gets maximal allowable value.
+

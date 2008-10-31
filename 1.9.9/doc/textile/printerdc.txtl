@@ -1,0 +1,50 @@
+h1(#wxprinterdc). Wx::PrinterDC
+
+A printer device context is specific to Windows, and allows access to
+any printer with a Windows driver. See "DC":dc.html for further information
+on device contexts, and "DC#get_size":dc.html#DC_getsize for advice on
+achieving the correct scaling for the page.
+
+h2. Derived from
+
+"DC":dc.html
+
+"Object":dc.html
+
+h2. See also
+
+"DC":dc.html, "Printing framework overview":printingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PrinterDC.new":#PrinterDC_new
+
+</div>
+
+
+
+h3(#PrinterDC_new). PrinterDC.new
+
+  *PrinterDC.new*(%(arg-type)"PrintData":printdata.html% printData)
+
+Pass a "PrintData":printdata.html object with information
+necessary for setting up a suitable printer device context. This
+is the recommended way to construct a PrinterDC.  Make sure you 
+specify a reference to a "PrintData":printdata.html object,
+not a pointer - you may not even get a warning if you pass a pointer
+instead.
+
+  *PrinterDC.new*(%(arg-type)String% driver,  %(arg-type)String% device,  %(arg-type)String% output, 
+                %(arg-type)Boolean% interactive = true, 
+                %(arg-type)Integer% orientation = PORTRAIT)
+
+Constructor. With empty strings for the first three arguments, the default printer dialog is
+displayed. _device_ indicates the type of printer and _output_
+is an optional file for printing to. The _driver_ parameter is
+currently unused.  Use the _Ok_ member to test whether the
+constructor was successful in creating a usable device context.
+
+This constructor is deprecated and retained only for backward compatibility.
+

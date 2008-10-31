@@ -1,0 +1,92 @@
+h1(#wxsetcursorevent). Wx::SetCursorEvent
+
+A SetCursorEvent is generated when the mouse cursor is about to be set as a
+result of mouse motion. This event gives the application the chance to perform
+specific mouse cursor processing based on the current position of the mouse
+within the window. Use "set_cursor":#SetCursorEvent_setcursor to
+specify the cursor you want to be displayed.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. See also
+
+"::SetCursor":setcursor.html
+"Window#set_cursor":window.html#Window_setcursor
+
+h2. Event table macros
+
+To process a set cursor event, use this event handler macro to direct input to a member
+function that takes a SetCursorEvent argument.
+
+
+
+|*evt_set_cursor()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_SET_CURSOR event.|
+
+<div id="methods">
+
+h2. Methods
+
+* "SetCursorEvent.new":#SetCursorEvent_new
+* "SetCursorEvent#get_cursor":#SetCursorEvent_getcursor
+* "SetCursorEvent#get_x":#SetCursorEvent_getx
+* "SetCursorEvent#get_y":#SetCursorEvent_gety
+* "SetCursorEvent#has_cursor":#SetCursorEvent_hascursor
+* "SetCursorEvent#set_cursor":#SetCursorEvent_setcursor
+
+</div>
+
+
+
+
+h3(#SetCursorEvent_new). SetCursorEvent.new
+
+  *SetCursorEvent.new*(%(arg-type)Integer% x = 0,  %(arg-type)Integer% y = 0)
+
+Constructor, used by the library itself internally to initialize the event
+object.
+
+
+h3(#SetCursorEvent_getcursor). SetCursorEvent#get_cursor
+
+ "Cursor":cursor.html *get_cursor*()
+
+Returns a reference to the cursor specified by this event.
+
+
+h3(#SetCursorEvent_getx). SetCursorEvent#get_x
+
+ Integer *get_x*()
+
+Returns the X coordinate of the mouse in client coordinates.
+
+
+h3(#SetCursorEvent_gety). SetCursorEvent#get_y
+
+ Integer *get_y*()
+
+Returns the Y coordinate of the mouse in client coordinates.
+
+
+h3(#SetCursorEvent_hascursor). SetCursorEvent#has_cursor
+
+ Boolean *has_cursor*()
+
+Returns  if the cursor specified by this event is a valid cursor.
+
+h4. Remarks
+
+You cannot specify @NullCursor@ with this event, as it is not
+considered a valid cursor.
+
+
+h3(#SetCursorEvent_setcursor). SetCursorEvent#set_cursor
+
+  *set_cursor*(%(arg-type)"Cursor":cursor.html% cursor)
+
+Sets the cursor associated with this event.
+
+

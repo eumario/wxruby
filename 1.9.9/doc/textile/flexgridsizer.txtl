@@ -1,0 +1,167 @@
+h1(#wxflexgridsizer). Wx::FlexGridSizer
+
+A flex grid sizer is a sizer which lays out its children in a two-dimensional
+table with all table fields in one row having the same
+height and all fields in one column having the same width, but all
+rows or all columns are not necessarily the same height or width as in
+the "GridSizer":gridsizer.html.
+
+Since Widgets 2.5.0, FlexGridSizer can also size items equally in one
+direction but unequally ("flexibly") in the other. If the sizer is only
+flexible in one direction (this can be changed using 
+"set_flexible_drection":#FlexGridSizer_setflexibledrection),
+it needs to be decided how the sizer should grow in the other ("non flexible")
+direction in order to fill the available space. The 
+"set_non_flexible_grow_mode":#FlexGridSizer_setnonflexiblegrowmode method
+serves this purpose.
+
+h2. Derived from
+
+"GridSizer":gridsizer.html
+
+"Sizer":sizer.html
+
+"Object":object.html
+
+h2. See also
+
+"Sizer":sizer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FlexGridSizer.new":#FlexGridSizer_new
+* "FlexGridSizer#add_growable_col":#FlexGridSizer_addgrowablecol
+* "FlexGridSizer#add_growable_row":#FlexGridSizer_addgrowablerow
+* "FlexGridSizer#get_flexible_direction":#FlexGridSizer_getflexibledirection
+* "FlexGridSizer#get_non_flexible_grow_mode":#FlexGridSizer_getnonflexiblegrowmode
+* "FlexGridSizer#remove_growable_col":#FlexGridSizer_removegrowablecol
+* "FlexGridSizer#remove_growable_row":#FlexGridSizer_removegrowablerow
+* "FlexGridSizer#set_flexible_direction":#FlexGridSizer_setflexibledirection
+* "FlexGridSizer#set_non_flexible_grow_mode":#FlexGridSizer_setnonflexiblegrowmode
+
+</div>
+
+
+h3(#FlexGridSizer_wxflexgridsizer). FlexGridSizer.new
+
+  *FlexGridSizer.new*(%(arg-type)Integer% rows,  %(arg-type)Integer% cols,  %(arg-type)Integer% vgap, 
+                    %(arg-type)Integer% hgap)
+
+  *FlexGridSizer.new*(%(arg-type)Integer% cols,  %(arg-type)Integer% vgap = 0, 
+                    %(arg-type)Integer% hgap = 0)
+
+Constructor for a GridSizer. _rows_ and _cols_ determine the number of
+columns and rows in the sizer - if either of the parameters is zero, it will be
+calculated to form the total number of children in the sizer, thus making the
+sizer grow dynamically. _vgap_ and _hgap_ define extra space between
+all children.
+
+
+h3(#FlexGridSizer_addgrowablecol). FlexGridSizer#add_growable_col
+
+  *add_growable_col*(%(arg-type)Integer% idx,  %(arg-type)Integer% proportion = $0$)
+
+Specifies that column _idx_ (starting from zero) should be grown if
+there is extra space available to the sizer.
+
+The _proportion_ parameter has the same meaning as the stretch factor for
+the "sizers":sizeroverview.html except that if all proportions are $0$,
+then all columns are resized equally (instead of not being resized at all).
+
+h3(#FlexGridSizer_addgrowablerow). FlexGridSizer#add_growable_row
+
+  *add_growable_row*(%(arg-type)Integer% idx,  %(arg-type)Integer% proportion = $0$)
+
+Specifies that row idx (starting from zero) should be grown if there
+is extra space available to the sizer.
+
+See "add_growable_col":#FlexGridSizer_addgrowablecol for the description
+of _proportion_ parameter.
+
+h3(#FlexGridSizer_getflexibledrection). FlexGridSizer#get_flexible_direction
+
+ Integer *get_flexible_directions*()
+
+Returns a Orientation value that specifies whether the sizer flexibly
+resizes its columns, rows, or both (default).
+
+h4. Return value
+
+One of the following values:
+
+
+|VERTICAL|Rows are flexibly sized.|
+|HORIZONTAL|Columns are flexibly sized.|
+|BOTH|Both rows and columns are flexibly sized (this is the default value).|
+
+
+h4. See also
+
+"set_flexible_drection":#FlexGridSizer_setflexibledrection
+
+
+h3(#FlexGridSizer_getnonflexiblegrowmode). FlexGridSizer#get_non_flexible_grow_mode
+
+ Integer *get_non_flexible_grow_mode*()
+
+Returns the value that specifies how the sizer grows in the "non flexible"
+direction if there is one.
+
+h4. Return value
+
+One of the following values:
+
+
+|FLEX_GROWMODE_NONE|Sizer doesn't grow in the non flexible direction.|
+|FLEX_GROWMODE_SPECIFIED|Sizer honors growable columns/rows set with"add_growable_col":#FlexGridSizer_addgrowablecol and "add_growable_row":#FlexGridSizer_addgrowablerow.In this case equal sizing applies to minimum sizes of columns orrows (this is the default value).|
+|FLEX_GROWMODE_ALL|Sizer equally stretches all columns or rowsin the non flexible direction, whether they are growable or not in the flexibledirection.|
+
+
+h4. See also
+
+"set_flexible_drection":#FlexGridSizer_setflexibledrection, 
+"set_non_flexible_grow_mode":#FlexGridSizer_setnonflexiblegrowmode
+
+
+h3(#FlexGridSizer_removegrowablecol). FlexGridSizer#remove_growable_col
+
+  *remove_growable_col*(%(arg-type)Integer% idx)
+
+Specifies that column idx is no longer growable.
+
+
+h3(#FlexGridSizer_removegrowablerow). FlexGridSizer#remove_growable_row
+
+  *remove_growable_row*(%(arg-type)Integer% idx)
+
+Specifies that row idx is no longer growable.
+
+
+h3(#FlexGridSizer_setflexibledirection). FlexGridSizer#set_flexible_direction
+
+  *set_flexible_directions*(%(arg-type)Integer% direction)
+
+Specifies whether the sizer should flexibly resize its columns, rows, or
+both. Argument @direction@ can be @VERTICAL@, @HORIZONTAL@ 
+or @BOTH@ (which is the default value). Any other value is ignored. See
+"get_flexible_direction()":#FlexGridSizer_getflexibledirection() for the
+explanation of these values.
+
+Note that this method does not trigger relayout.
+
+
+h3(#FlexGridSizer_setnonflexiblegrowmode). FlexGridSizer#set_non_flexible_grow_mode
+
+  *set_non_flexible_grow_mode*(%(arg-type)"FlexSizerGrowMode":flexsizergrowmode.html% mode)
+
+Specifies how the sizer should grow in the non flexible direction if
+there is one (so
+"set_flexible_directions()":#FlexGridSizer_setflexibledirections() must have
+been called previously). Argument _mode_ can be one of those documented in
+"get_non_flexible_grow_mode":#FlexGridSizer_getnonflexiblegrowmode, please
+see there for their explanation.
+
+Note that this method does not trigger relayout.
+

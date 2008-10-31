@@ -1,0 +1,66 @@
+h1(#wxscreendc). Wx::ScreenDC
+
+A ScreenDC can be used to paint on the screen.
+This should normally be constructed as a temporary stack object; don't store
+a ScreenDC object.
+
+h2. Derived from
+
+"DC":dc.html
+
+h2. See also
+
+"DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html, "ClientDC":clientdc.html, "WindowDC":windowdc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ScreenDC.new":#ScreenDC_new
+* "ScreenDC#start_drawing_on_top":#ScreenDC_startdrawingontop
+* "ScreenDC#end_drawing_on_top":#ScreenDC_enddrawingontop
+
+</div>
+
+
+h3(#ScreenDC_new). ScreenDC.new
+
+h3(#ScreenDC_startdrawingontop). ScreenDC#start_drawing_on_top
+
+ Boolean *start_drawing_on_top*(%(arg-type)"Window":window.html% window)
+
+ Boolean *start_drawing_on_top*(%(arg-type)"Rect":rect.html% rect = nil)
+
+Use this in conjunction with "end_drawing_on_top":#ScreenDC_enddrawingontop to
+ensure that drawing to the screen occurs on top of existing windows. Without this,
+some window systems (such as X) only allow drawing to take place underneath
+other windows.
+
+By using the first form of this function, an application is specifying that
+the area that will be drawn on coincides with the given window.
+
+By using the second form, an application can specify an area of the screen
+which is to be drawn on. If NULL is passed, the whole screen is available.
+
+It is recommended that an area of the screen is specified because with large regions,
+flickering effects are noticeable when destroying the temporary transparent window used
+to implement this feature.
+
+You might use this pair of functions when implementing a drag feature, for example
+as in the "SplitterWindow":splitterwindow.html implementation.
+
+h4. Remarks
+
+This function is probably obsolete since the X implementations
+allow drawing directly on the screen now. However, the fact that this
+function allows the screen to be refreshed afterwards, may be useful to
+some applications.
+
+h3(#ScreenDC_enddrawingontop). ScreenDC#end_drawing_on_top
+
+ Boolean *end_drawing_on_top*()
+
+Use this in conjunction with "start_drawing_on_top":#ScreenDC_startdrawingontop.
+
+This function destroys the temporary window created to implement on-top drawing (X only).
+

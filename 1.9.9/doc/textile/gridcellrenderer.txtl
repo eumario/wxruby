@@ -1,0 +1,77 @@
+h1. Wx::GridCellRenderer
+
+This class and its subclasses are responsible for actually drawing the
+cell in the grid. You may pass instances of this class as arguments to
+"Grid":grid.html or "GridCellAttr":gridcellattr.html to specify a
+renderer to be used by a single cell, a row, a column, or the whole
+grid, using "grid#set_default_renderer":grid.html#Grid_setdefaultrenderer
+
+As well as predefined renderers for displaying numbers, text and so
+forth, completely custom subclasses can be defined to draw arbitrary
+content in grid cells, including text and graphics. To define your own
+renderer, inherit from one of the predefined classes (for example,
+"GridCellStringRenderer":gridcellstringrenderer.html, and define your
+own "draw":#GridCellRenderer_draw method. Among the arguments passed to
+draw is a "DC":dc.html which can be used for drawing. Note that it is
+not possible to inherit directly from this class.
+
+This example draws the text content normally, with a red diagonal line
+running through the cell:
+
+  class MyGridCellRenderer < Wx::GridCellStringRenderer
+    def draw(grid, attr, dc, rect, row, col, is_selected)
+      super(grid, attr, dc, rect, row, col, is_selected)
+      dc.pen = Wx::RED_PEN
+      dc.draw_line(rect.left, rect.top, rect.right, rect.bottom)
+    end
+  end
+
+
+h2. Derived from
+
+GridCellWorker
+
+h2. See also
+
+"GridCellStringRenderer":gridcellstringrenderer.html, "GridCellNumberRenderer":gridcellnumberrenderer.html, "GridCellFloatRenderer":gridcellfloatrenderer.html, "GridCellBoolRenderer":gridcellboolrenderer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellRenderer#draw":#GridCellRenderer_draw
+* "GridCellRenderer#get_best_size":#GridCellRenderer_getbestsize
+* "GridCellRenderer#clone":#GridCellRenderer_clone
+
+</div>
+
+
+h3(#GridCellRenderer_draw). GridCellRenderer#draw
+
+  *draw*(%(arg-type)"Grid":grid.html% grid,  %(arg-type)"GridCellAttr":gridcellattr.html% attr,  %(arg-type)"DC":dc.html% dc, 
+       %(arg-type)"Rect":rect.html% rect, 
+       %(arg-type)Integer% row, 
+       %(arg-type)Integer% col, 
+       %(arg-type)Boolean% isSelected)
+
+Draw the given cell on the provided DC inside the given rectangle
+using the style specified by the attribute and the default or selected
+state corresponding to the isSelected value.
+
+This pure virtual function has a default implementation which will
+prepare the DC using the given attribute: it will draw the rectangle
+with the background colour from attr and set the text colour and font.
+
+h3(#GridCellRenderer_getbestsize). GridCellRenderer#get_best_size
+
+ "Size":size.html *get_best_size*(%(arg-type)"Grid":grid.html% grid,  %(arg-type)"GridCellAttr":gridcellattr.html% attr, 
+                      %(arg-type)"DC":dc.html% dc, 
+                      %(arg-type)Integer% row, 
+                      %(arg-type)Integer% col)
+
+Get the preferred size of the cell for its contents.
+
+h3(#GridCellRenderer_clone). GridCellRenderer#clone
+
+ "GridCellRenderer":gridcellrenderer.html *clone*()
+

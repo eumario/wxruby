@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<resource version="2.3.0.1" xmlns="http://www.wxwidgets.org/wxxrc">
+    <object class="wxFrame" name="ID_FRAME" subclass="MyFrame">
+        <style>wxCAPTION|wxRESIZE_BORDER|wxSYSTEM_MENU|wxCLOSE_BOX</style>
+        <size>400,300d</size>
+        <title>Pizza Palace</title>
+        <object class="wxPanel" name="ID_MAIN_PANEL">
+            <style>wxSUNKEN_BORDER|wxTAB_TRAVERSAL</style>
+            <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                    <flag>wxGROW|wxALL</flag>
+                    <border>5</border>
+                    <option>2</option>
+                    <object class="wxListbook" name="ID_LISTBOOK">
+                        <pos>200,200d</pos>
+                        <style>wxLB_LEFT</style>
+                        <object class="listbookpage">
+                            <label>Pizza</label>
+                            <object class="wxPanel" name="ID_PANEL_PIZZA">
+                                <style>wxSUNKEN_BORDER|wxTAB_TRAVERSAL</style>
+                                <object class="wxFlexGridSizer">
+                                    <cols>2</cols>
+                                    <rows>2</rows>
+                                    <vgap>0</vgap>
+                                    <hgap>0</hgap>
+                                    <growablecols>1</growablecols>
+                                    <growablerows>7</growablerows>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Your pizza size:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_PIZZA_SIZE_CHOICE">
+                                            <content>
+                                                <item>small</item>
+                                                <item>medium</item>
+                                                <item>large</item>
+                                                <item>x-large</item>
+                                            </content>
+                                            <selection>1</selection>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Your preferred crust style:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_PIZZA_CRUST_CHOICE">
+                                            <content>
+                                                <item>thin</item>
+                                                <item>thick</item>
+                                                <item>stuffed</item>
+                                            </content>
+                                            <selection>1</selection>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Your sauce type:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_PIZZA_SAUCE_CHOICE">
+                                            <content>
+                                                <item>red mild</item>
+                                                <item>red spicy</item>
+                                                <item>pesto</item>
+                                                <item>creamy garlic</item>
+                                            </content>
+                                            <selection>0</selection>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Cheese style:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_PIZZA_CHEESE_CHOICE">
+                                            <content>
+                                                <item>no cheese</item>
+                                                <item>normal cheese</item>
+                                                <item>lots of cheese</item>
+                                                <item>I am a mouse</item>
+                                            </content>
+                                            <selection>1</selection>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Topping 1:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_PIZZA_TOPPING_1_CHOICE">
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Topping 2:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_PIZZA_TOPPING_2_CHOICE">
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Topping 3:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_PIZZA_TOPPING_3_CHOICE">
+                                        </object>
+                                    </object>
+                                    <object class="spacer">
+                                        <flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <size>5,5d</size>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_BOTTOM|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxButton" name="ID_PIZZA_BUTTON">
+                                            <label>Add to order</label>
+                                        </object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                        <object class="listbookpage">
+                            <label>Drink</label>
+                            <object class="wxPanel" name="ID_PANEL_DRINK">
+                                <style>wxSUNKEN_BORDER|wxTAB_TRAVERSAL</style>
+                                <object class="wxFlexGridSizer">
+                                    <cols>2</cols>
+                                    <rows>2</rows>
+                                    <vgap>0</vgap>
+                                    <hgap>0</hgap>
+                                    <growablecols>1</growablecols>
+                                    <growablerows>2</growablerows>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Your drink size:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_DRINK_SIZE_CHOICE">
+                                            <content>
+                                                <item>small</item>
+                                                <item>medium</item>
+                                                <item>large</item>
+                                                <item>gut buster</item>
+                                            </content>
+                                            <selection>1</selection>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Your preferred drink:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_DRINK_TYPE_CHOICE">
+                                            <content>
+                                                <item>soda</item>
+                                                <item>tea</item>
+                                                <item>lemonade</item>
+                                                <item>coffee</item>
+                                                <item>water</item>
+                                            </content>
+                                            <selection>0</selection>
+                                        </object>
+                                    </object>
+                                    <object class="spacer">
+                                        <flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <size>5,5d</size>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_BOTTOM|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxButton" name="ID_DRINK_BUTTON">
+                                            <label>Add to order</label>
+                                        </object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                        <object class="listbookpage">
+                            <label>Ice Cream</label>
+                            <object class="wxPanel" name="ID_PANEL_ICE_CREAM">
+                                <pos>200,200d</pos>
+                                <style>wxSUNKEN_BORDER|wxTAB_TRAVERSAL</style>
+                                <object class="wxFlexGridSizer">
+                                    <cols>2</cols>
+                                    <rows>2</rows>
+                                    <vgap>0</vgap>
+                                    <hgap>0</hgap>
+                                    <growablecols>1</growablecols>
+                                    <growablerows>6</growablerows>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Your ice cream size:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_ICE_CREAM_SIZE_CHOICE">
+                                            <content>
+                                                <item>child</item>
+                                                <item>small</item>
+                                                <item>medium</item>
+                                                <item>large</item>
+                                            </content>
+                                            <selection>2</selection>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Your ice cream:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_ICE_CREAM_TYPE_CHOICE">
+                                            <content>
+                                                <item>vanilla</item>
+                                                <item>chocolate</item>
+                                                <item>strawberry</item>
+                                                <item>chocolate chip</item>
+                                                <item>cookie dough</item>
+                                                <item>cherry</item>
+                                            </content>
+                                            <selection>0</selection>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Topping 1:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_ICE_CREAM_TOPPING_1_CHOICE">
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Topping 2:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_ICE_CREAM_TOPPING_2_CHOICE">
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Topping 3:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_ICE_CREAM_TOPPING_3_CHOICE">
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL|wxADJUST_MINSIZE</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="wxID_STATIC">
+                                            <label>Topping 4:</label>
+                                        </object>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="ID_ICE_CREAM_TOPPING_4_CHOICE">
+                                        </object>
+                                    </object>
+                                    <object class="spacer">
+                                        <flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                        <border>5</border>
+                                        <size>5,5d</size>
+                                    </object>
+                                    <object class="sizeritem">
+                                        <flag>wxALIGN_RIGHT|wxALIGN_BOTTOM|wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxButton" name="ID_ICE_CREAM_BUTTON">
+                                            <label>Add to order</label>
+                                        </object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                    </object>
+                </object>
+                <object class="sizeritem">
+                    <flag>wxALIGN_LEFT|wxALL|wxADJUST_MINSIZE</flag>
+                    <border>5</border>
+                    <object class="wxStaticText" name="wxID_STATIC">
+                        <label>Order:</label>
+                    </object>
+                </object>
+                <object class="sizeritem">
+                    <flag>wxGROW|wxALL</flag>
+                    <border>5</border>
+                    <option>1</option>
+                    <object class="wxTextCtrl" name="ID_ORDER_TEXTCTRL">
+                        <style>wxTE_MULTILINE</style>
+                    </object>
+                </object>
+            </object>
+        </object>
+    </object>
+</resource>

@@ -1,0 +1,228 @@
+h1(#wxpen). Wx::Pen
+
+A pen is a drawing tool for drawing outlines. It is used for drawing
+lines and painting the outline of rectangles, ellipses, etc. It has a
+colour, a width and a style. 
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Predefined objects
+
+The following standard pens are available to all applications:
+
+ Wx::NULL_PEN
+ Wx::RED_PEN
+ Wx::CYAN_PEN
+ Wx::GREEN_PEN
+ Wx::BLACK_PEN
+ Wx::WHITE_PEN
+ Wx::TRANSPARENT_PEN
+ Wx::BLACK_DASHED_PEN
+ Wx::GREY_PEN
+ Wx::MEDIUM_GREY_PEN
+ Wx::LIGHT_GREY_PEN
+
+h2. Remarks
+
+On a monochrome display, wxRUby shows all non-white pens as black.
+
+Do not initialize Pens before the application commences, since other
+required structures may not have been set up yet. Instead, define
+methods which return Pens, and initialize them on first call.
+
+h2. See also
+
+"PenList":penlist.html, "DC":dc.html, "DC#set_pen":dc.html#DC_setpen, "Brush":brush.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Pen.new":#Pen_new
+* "Pen#get_cap":#Pen_getcap
+* "Pen#get_colour":#Pen_getcolour
+* "Pen#get_dashes":#Pen_getdashes
+* "Pen#get_join":#Pen_getjoin
+* "Pen#get_stipple":#Pen_getstipple
+* "Pen#get_style":#Pen_getstyle
+* "Pen#get_width":#Pen_getwidth
+* "Pen#ok":#Pen_ok
+* "Pen#set_cap":#Pen_setcap
+* "Pen#set_colour":#Pen_setcolour
+* "Pen#set_dashes":#Pen_setdashes
+* "Pen#set_join":#Pen_setjoin
+* "Pen#set_stipple":#Pen_setstipple
+* "Pen#set_style":#Pen_setstyle
+* "Pen#set_width":#Pen_setwidth
+
+</div>
+
+
+h3(#Pen_new). Pen.new
+
+  *Pen.new*(%(arg-type)"Colour":colour.html% colour,  
+             %(arg-type)Integer% width = 1, 
+             %(arg-type)Integer% style = @SOLID@)
+
+Constructs a pen from a colour object, pen width and style.
+
+  *Pen.new*(%(arg-type)String% colourName,  
+             %(arg-type)Integer% width, 
+             %(arg-type)Integer% style)
+
+Constructs a pen from a colour name, pen width and style.
+
+  *Pen.new*(%(arg-type)"Bitmap":bitmap.html% stipple, 
+             %(arg-type)Integer% width)
+
+Constructs a stippled pen from a stipple bitmap and a width.
+
+h4. Parameters
+
+* _colour_ A colour object.
+* _colourName_ A colour name.
+* _width_ Pen width. Under Windows, the pen width cannot be greater than 1 if
+the style is DOT, LONG_DASH, SHORT_DASH, DOT_DASH, or USER_DASH.
+* _stipple_ A stipple bitmap.
+* _style_ The style may be one of the following:
+
+|*SOLID*|Solid style.|
+|*TRANSPARENT*|No pen is used.|
+|*DOT*|Dotted style.|
+|*LONG_DASH*|Long dashed style.|
+|*SHORT_DASH*|Short dashed style.|
+|*DOT_DASH*|Dot and dash style.|
+|*STIPPLE*|Use the stipple bitmap.|
+|*USER_DASH*|Use the user dashes: see "Pen#set_dashes":pen.html#Pen_setdashes.|
+|*BDIAGONAL_HATCH*|Backward diagonal hatch.|
+|*CROSSDIAG_HATCH*|Cross-diagonal hatch.|
+|*FDIAGONAL_HATCH*|Forward diagonal hatch.|
+|*CROSS_HATCH*|Cross hatch.|
+|*HORIZONTAL_HATCH*|Horizontal hatch.|
+|*VERTICAL_HATCH*|Vertical hatch.|
+
+
+h4. Remarks
+
+Different versions of Windows and different versions of other platforms
+support _very_ different subsets of the styles above - there is no
+similarity even between Windows95 and Windows98 - so handle with care,
+and test across platforms.
+
+If the named colour form is used, an appropriate
+"Wx::Colour":colour.html structure is found in the colour database.
+
+h4. See also
+
+"Pen#set_style":pen.html#Pen_setstyle, "Pen#set_colour":pen.html#Pen_setcolour, "Pen#set_width":pen.html#Pen_setwidth, "Pen#set_stipple":pen.html#Pen_setstipple
+
+
+h3(#Pen_getcap). Pen#get_cap
+
+ Integer *get_cap*()
+
+Returns the pen cap style, which may be one of @Wx::CAP_ROUND@,
+@Wx::CAP_PROJECTING@ and @Wx::CAP_BUTT@. The default is @Wx::CAP_ROUND@.
+
+h3(#Pen_getcolour). Pen#get_colour
+
+ "Colour":colour.html *get_colour*()
+
+Returns the pen's colour
+
+h3(#Pen_getdashes). Pen#get_dashes
+
+ wxDashes *get_dashes*()
+
+Gets an array of dashes (defined as char in X, DWORD under
+Windows). dashes is a pointer to the internal array. Do not deallocate
+or store this pointer. The function returns the number of dashes
+associated with this pen.
+
+Not currently supported in wxRuby.
+
+h3(#Pen_getjoin). Pen#get_join
+
+ Integer *get_join*()
+
+Returns the pen join style, which may be one of @Wx::JOIN_BEVEL@,
+@Wx::JOIN_ROUND@ and @Wx::JOIN_MITER@. The default is @Wx::JOIN_ROUND@.
+
+h3(#Pen_getstipple). Pen#get_stipple
+
+ "Bitmap":bitmap.html *get_stipple*()
+
+Gets the stipple bitmap.
+
+h3(#Pen_getstyle). Pen#get_style
+
+ Integer *get_style*()
+
+Returns the pen style, for example @Wx::SOLID@.
+
+h3(#Pen_getwidth). Pen#get_width
+
+ Integer *get_width*()
+
+Returns the pen width.
+
+h3(#Pen_isok). Pen#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if the pen is initialised.
+
+h3(#Pen_setcap). Pen#set_cap
+
+ *set_cap*(%(arg-type)Integer% capStyle)
+
+Sets the pen cap style, which may be one of @Wx::CAP_ROUND@,
+@Wx::CAP_PROJECTING@ and @Wx::CAP_BUTT@. The default is
+@Wx::CAP_ROUND@. 
+
+h3(#Pen_setcolour). Pen#set_colour
+
+ *set_colour*(%(arg-type)"Colour":colour.html% colour)
+
+ *set_colour*(%(arg-type)String% colour_name)
+
+ *set_colour*(%(arg-type)Integer% red, %(arg-type)Integer% blue, %(arg-type)Integer% green)
+
+Specifies the colour of the pen by using a "Colour":colour.html, a
+colour name (see "Colour":colour.html for more details), or a set of
+red, green and blue values.
+
+h3(#Pen_setdashes). Pen#set_dashes
+
+ *set_dashes*(%(arg-type)wxDashes%)
+
+Sets dashes. Not currently supported in wxRuby.
+
+h3(#Pen_setjoin). Pen#set_join
+
+ *set_join*(%(arg-type)Integer% join_style)
+
+Returns the pen join style, which may be one of @Wx::JOIN_BEVEL@,
+@Wx::JOIN_ROUND@ and @Wx::JOIN_MITER@. The default is @Wx::JOIN_ROUND@.
+
+h3(#Pen_setstipple). Pen#set_stipple
+
+ *set_stipple*(%(arg-type)"Bitmap":bitmap.html% stipple)
+
+Sets the bitmap for stippling.
+
+h3(#Pen_setstyle). Pen#set_style
+
+ *set_style*(%(arg-type)Integer% style)
+
+Sets the pen style; see "Pen.new":#Pen_new for valid styles.
+
+h3(#Pen_setwidth). Pen#set_width
+
+ *set_width*(%(arg-type)Integer% width)
+
+Sets the pen width, in pixels.

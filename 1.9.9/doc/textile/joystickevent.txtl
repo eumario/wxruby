@@ -1,0 +1,137 @@
+h1(#wxjoystickevent). Wx::JoystickEvent
+
+This event class contains information about mouse events, particularly
+events received by windows.
+
+h2. Derived from
+
+"Event":event.html
+
+h2. Event table macros
+
+To process a mouse event, use these event handler macros to direct input to member
+functions that take a JoystickEvent argument.
+
+
+
+|*evt_joy_button_down()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_JOY_BUTTON_DOWN event.|
+|*evt_joy_button_up()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_JOY_BUTTON_UP event.|
+|*evt_joy_move()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_JOY_MOVE event.|
+|*evt_joy_zmove()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_JOY_ZMOVE event.|
+|*evt_joystick_events()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Processes all joystick events.|
+
+h2. See also
+
+"Joystick":joystick.html
+
+<div id="methods">
+
+h2. Methods
+
+* "JoystickEvent.new":#JoystickEvent_new
+* "JoystickEvent#button_down":#JoystickEvent_buttondown
+* "JoystickEvent#button_is_down":#JoystickEvent_buttonisdown
+* "JoystickEvent#button_up":#JoystickEvent_buttonup
+* "JoystickEvent#get_button_change":#JoystickEvent_getbuttonchange
+* "JoystickEvent#get_button_state":#JoystickEvent_getbuttonstate
+* "JoystickEvent#get_joystick":#JoystickEvent_getjoystick
+* "JoystickEvent#get_position":#JoystickEvent_getposition
+* "JoystickEvent#get_zposition":#JoystickEvent_getzposition
+* "JoystickEvent#is_button":#JoystickEvent_isbutton
+* "JoystickEvent#is_move":#JoystickEvent_ismove
+* "JoystickEvent#is_zmove":#JoystickEvent_iszmove
+
+</div>
+
+
+h3(#JoystickEvent_new). JoystickEvent.new
+
+  *JoystickEvent.new*(%(arg-type)"TYPE":type.html% eventType = 0,  %(arg-type)Integer% state = 0, 
+                    %(arg-type)Integer% joystick = JOYSTICK1, 
+                    %(arg-type)Integer% change = 0)
+
+Constructor.
+
+h3(#JoystickEvent_buttondown). JoystickEvent#button_down
+
+ Boolean *button_down*(%(arg-type)Integer% button = JOY_BUTTON_ANY)
+
+Returns true if the event was a down event from the specified button (or any button).
+
+h4. Parameters
+
+* _button_ Can be JOY_BUTTONn where n is 1, 2, 3 or 4; or JOY_BUTTON_ANY to
+indicate any button down event.
+
+h3(#JoystickEvent_buttonisdown). JoystickEvent#button_is_down
+
+ Boolean *button_is_down*(%(arg-type)Integer% button = JOY_BUTTON_ANY)
+
+Returns true if the specified button (or any button) was in a down state.
+
+h4. Parameters
+
+* _button_ Can be JOY_BUTTONn where n is 1, 2, 3 or 4; or JOY_BUTTON_ANY to
+indicate any button down event.
+
+h3(#JoystickEvent_buttonup). JoystickEvent#button_up
+
+ Boolean *button_up*(%(arg-type)Integer% button = JOY_BUTTON_ANY)
+
+Returns true if the event was an up event from the specified button (or any button).
+
+h4. Parameters
+
+* _button_ Can be JOY_BUTTONn where n is 1, 2, 3 or 4; or JOY_BUTTON_ANY to
+indicate any button down event.
+
+h3(#JoystickEvent_getbuttonchange). JoystickEvent#get_button_change
+
+ Integer *get_button_change*()
+
+Returns the identifier of the button changing state. This is a JOY_BUTTONn identifier, where
+n is one of 1, 2, 3, 4.
+
+h3(#JoystickEvent_getbuttonstate). JoystickEvent#get_button_state
+
+ Integer *get_button_state*()
+
+Returns the down state of the buttons. This is a bitlist of JOY_BUTTONn identifiers, where
+n is one of 1, 2, 3, 4.
+
+h3(#JoystickEvent_getjoystick). JoystickEvent#get_joystick
+
+ Integer *get_joystick*()
+
+Returns the identifier of the joystick generating the event - one of JOYSTICK1 and JOYSTICK2.
+
+h3(#JoystickEvent_getposition). JoystickEvent#get_position
+
+ "Point":point.html *get_position*()
+
+Returns the x, y position of the joystick event.
+
+h3(#JoystickEvent_getzposition). JoystickEvent#get_zposition
+
+ Integer *get_zposition*()
+
+Returns the z position of the joystick event.
+
+h3(#JoystickEvent_isbutton). JoystickEvent#is_button
+
+ Boolean *is_button*()
+
+Returns true if this was a button up or down event (_not_ 'is any button down?').
+
+h3(#JoystickEvent_ismove). JoystickEvent#is_move
+
+ Boolean *is_move*()
+
+Returns true if this was an x, y move event.
+
+h3(#JoystickEvent_iszmove). JoystickEvent#is_zmove
+
+ Boolean *is_zmove*()
+
+Returns true if this was a z move event.
+

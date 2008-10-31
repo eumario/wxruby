@@ -1,0 +1,168 @@
+h1(#wxbitmaphandler). Wx::BitmapHandler
+
+Overviewwxbitmapoverview
+
+This is the base class for implementing bitmap file loading/saving, and bitmap creation from data.
+It is used within Bitmap and is not normally seen by the application.
+
+If you wish to extend the capabilities of Bitmap, derive a class from BitmapHandler
+and add the handler using "Bitmap#add_handler":bitmap.html#Bitmap_addhandler in your
+application initialisation.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Bitmap":bitmap.html, "Icon":icon.html, "Cursor":cursor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "BitmapHandler.new":#BitmapHandler_new
+* "BitmapHandler#create":#BitmapHandler_create
+* "BitmapHandler#get_name":#BitmapHandler_getname
+* "BitmapHandler#get_extension":#BitmapHandler_getextension
+* "BitmapHandler#get_type":#BitmapHandler_gettype
+* "BitmapHandler#load_file":#BitmapHandler_loadfile
+* "BitmapHandler#save_file":#BitmapHandler_savefile
+* "BitmapHandler#set_name":#BitmapHandler_setname
+* "BitmapHandler#set_extension":#BitmapHandler_setextension
+* "BitmapHandler#set_type":#BitmapHandler_settype
+
+</div>
+
+
+h3(#BitmapHandler_new). BitmapHandler.new
+
+  *destructor*()
+
+Destroys the BitmapHandler object.
+
+h3(#BitmapHandler_create). BitmapHandler#create
+
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)% data,  %(arg-type)Integer% type, 
+                %(arg-type)Integer% width, 
+                %(arg-type)Integer% height, 
+                %(arg-type)Integer% depth = -1)
+
+Creates a bitmap from the given data, which can be of arbitrary type. The Bitmap object _bitmap_ is
+manipulated by this function.
+
+h4. Parameters
+
+* _bitmap_ The Bitmap object.
+* _width_ The width of the bitmap in pixels.
+* _height_ The height of the bitmap in pixels.
+* _depth_ The depth of the bitmap in pixels. If this is -1, the screen depth is used.
+* _data_ Data whose type depends on the value of _type_.
+* _type_ A bitmap type identifier - see "BitmapHandler.new":bitmaphandler.html#BitmapHandler_new for a list
+of possible values.
+
+h4. Return value
+
+true if the call succeeded, false otherwise (the default).
+
+h3(#BitmapHandler_getname). BitmapHandler#get_name
+
+ String *get_name*()
+
+Gets the name of this handler.
+
+h3(#BitmapHandler_getextension). BitmapHandler#get_extension
+
+ String *get_extension*()
+
+Gets the file extension associated with this handler.
+
+h3(#BitmapHandler_gettype). BitmapHandler#get_type
+
+ Integer *get_type*()
+
+Gets the bitmap type associated with this handler.
+
+h3(#BitmapHandler_loadfile). BitmapHandler#load_file
+
+ Boolean *load_file*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)String% name,  %(arg-type)Integer% type)
+
+Loads a bitmap from a file or resource, putting the resulting data into _bitmap_.
+
+h4. Parameters
+
+* _bitmap_ The bitmap object which is to be affected by this operation.
+* _name_ Either a filename or a Windows resource name.
+The meaning of _name_ is determined by the _type_ parameter.
+* _type_ See "Bitmap.new":bitmap.html#Bitmap_new for values this can take.
+
+h4. Return value
+
+true if the operation succeeded, false otherwise.
+
+h4. See also
+
+"Bitmap#load_file":bitmap.html#Bitmap_loadfile
+
+"Bitmap#save_file":bitmap.html#Bitmap_savefile
+
+"BitmapHandler#save_file":bitmaphandler.html#BitmapHandler_savefile
+
+h3(#BitmapHandler_savefile). BitmapHandler#save_file
+
+ Boolean *save_file*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)String% name,  %(arg-type)Integer% type, 
+                   %(arg-type)"Palette":palette.html% palette = nil)
+
+Saves a bitmap in the named file.
+
+h4. Parameters
+
+* _bitmap_ The bitmap object which is to be affected by this operation.
+* _name_ A filename. The meaning of _name_ is determined by the _type_ parameter.
+* _type_ See "Bitmap.new":bitmap.html#Bitmap_new for values this can take.
+* _palette_ An optional palette used for saving the bitmap.
+
+h4. Return value
+
+true if the operation succeeded, false otherwise.
+
+h4. See also
+
+"Bitmap#load_file":bitmap.html#Bitmap_loadfile
+
+"Bitmap#save_file":bitmap.html#Bitmap_savefile
+
+"BitmapHandler#load_file":bitmaphandler.html#BitmapHandler_loadfile
+
+h3(#BitmapHandler_setname). BitmapHandler#set_name
+
+  *set_name*(%(arg-type)String% name)
+
+Sets the handler name.
+
+h4. Parameters
+
+* _name_ Handler name.
+
+h3(#BitmapHandler_setextension). BitmapHandler#set_extension
+
+  *set_extension*(%(arg-type)String% extension)
+
+Sets the handler extension.
+
+h4. Parameters
+
+* _extension_ Handler extension.
+
+h3(#BitmapHandler_settype). BitmapHandler#set_type
+
+  *set_type*(%(arg-type)Integer% type)
+
+Sets the handler type.
+
+h4. Parameters
+
+* _name_ Handler type.
+
+
+

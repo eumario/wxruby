@@ -1,0 +1,57 @@
+h1(#wxpoint). Wx::Point
+
+A *Point* is a useful data structure for graphics operations.
+It simply contains integer _x_ and _y_ members.
+
+See also "RealPoint":realpoint.html for a floating point version.
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"RealPoint":realpoint.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Point.new":#Point_new
+* "Point#x":#Point_x
+* "Point#y":#Point_y
+
+</div>
+
+
+h3(#Point_new). Point.new
+
+  *Point.new*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Create a point.
+
+h3(#Point_x). Point#x
+
+intx
+
+x member.
+
+h3(#Point_y). Point#y
+
+int y
+
+y member.
+
+h3(#Point_equal). Point#==
+
+ Boolean *operator $==$*(%(arg-type)"Point":point.html% pt)
+
+Equality operator: returns  if two points are the same.
+
+
+h3(#Point_notequal). Point#!=
+
+ Boolean *operator $!=$*(%(arg-type)"Point":point.html% pt)
+
+Inequality operator: returns  if two points are different.
+

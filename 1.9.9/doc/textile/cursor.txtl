@@ -1,0 +1,143 @@
+h1(#wxcursor). Wx::Cursor
+
+A cursor is a small bitmap usually used for denoting where the mouse
+pointer is, with a picture that might indicate the interpretation of a
+mouse click. As with icons, cursors in X and MS Windows are created
+in a different manner. Therefore, separate cursors will be created for the
+different environments.  Platform-specific methods for creating a 
+Cursor object are catered for, and this is an occasion where
+conditional compilation will probably be required (see "Icon":icon.html for
+an example).
+
+A single cursor object may be used in many windows (any subwindow type).
+The Widgets convention is to set the cursor for a window, as in X,
+rather than to set it globally as in MS Windows, although a
+global "::SetCursor":setcursor.html is also available for MS Windows use.
+
+h2. Derived from
+
+"Bitmap":bitmap.html
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Predefined objects
+
+The following predefined cursors are accessed via Ruby constants. Note
+that the standard, hourglass and cross cursors are not loaded until the
+App enters its main loop.
+
+ *Wx::NULL_CURSOR*
+ *Wx::STANDARD_CURSOR*
+ *Wx::HOURGLASS_CURSOR*
+ *Wx::CROSS_CURSOR*
+
+h2. See also
+
+"Bitmap":bitmap.html, "Icon":icon.html, "Window#set_cursor":window.html#Window_setcursor, "::SetCursor":setcursor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Cursor.new":#Cursor_new
+* "Cursor#is_ok":#Cursor_isok
+
+</div>
+
+
+h3(#Cursor_new). Cursor.new
+
+  *Cursor.new*(%(arg-type)Integer% cursorId)
+
+Constructs a cursor using a cursor identifier; valid constants for this
+parameter are given below.
+
+  *Cursor.new*(%(arg-type)"Image":image.html% image)
+
+Constructs a cursor from a Image. The cursor is monochrome, colors with the RGB elements all greater
+than 127 will be foreground, colors less than this background. The mask (if any) will be used as transparent.
+
+In MSW the foreground will be white and the background black. If the cursor is larger than 32x32 it is resized.
+In GTK, the two most frequent colors will be used for foreground and background. The cursor will be displayed
+at the size of the image.
+On MacOS if the cursor is larger than 16x16 it is resized and currently only shown as black/white (mask respected).
+
+  *Cursor.new*(%(arg-type)"Cursor":cursor.html% cursor)
+
+Copy constructor. This uses reference counting so is a cheap operation.
+
+h4. Parameters
+
+* _bits_ An array of bits.
+* _maskBits_ Bits for a mask bitmap.
+* _width_ Cursor width.
+* _height_ Cursor height.
+* _hotSpotX_ Hotspot x coordinate.
+* _hotSpotY_ Hotspot y coordinate.
+* _type_ Icon type to load. Under Motif, _type_ defaults to *BITMAP_TYPE_XBM*. Under Windows,
+it defaults to *BITMAP_TYPE_CUR_RESOURCE*. Under MacOS, it defaults to *BITMAP_TYPE_MACCURSOR_RESOURCE*.
+
+Under X, the permitted cursor types are:
+
+
+
+|@BITMAP_TYPE_XBM@|Load an X bitmap file.|
+
+
+Under Windows, the permitted types are:
+
+
+
+|@BITMAP_TYPE_CUR@|Load a cursor from a .cur cursor file (only if USE_RESOURCE_LOADING_IN_MSWis enabled in setup.h).|
+|@BITMAP_TYPE_CUR_RESOURCE@|Load a Windows resource (as specified in the .rc file).|
+|@BITMAP_TYPE_ICO@|Load a cursor from a .ico icon file (only if USE_RESOURCE_LOADING_IN_MSWis enabled in setup.h). Specify _hotSpotX_ and _hotSpotY_.|
+
+* _cursorId_ A stock cursor identifier. May be one of:
+
+
+
+|*CURSOR_ARROW*|A standard arrow cursor.|
+|*CURSOR_RIGHT_ARROW*|A standard arrow cursorpointing to the right.|
+|*CURSOR_BLANK*|Transparent cursor.|
+|*CURSOR_BULLSEYE*|Bullseye cursor.|
+|*CURSOR_CHAR*|Rectangular character cursor.|
+|*CURSOR_CROSS*|A cross cursor.|
+|*CURSOR_HAND*|A hand cursor.|
+|*CURSOR_IBEAM*|An I-beam cursor (vertical line).|
+|*CURSOR_LEFT_BUTTON*|Represents a mouse with the left button depressed.|
+|*CURSOR_MAGNIFIER*|A magnifier icon.|
+|*CURSOR_MIDDLE_BUTTON*|Represents a mouse with the middle button depressed.|
+|*CURSOR_NO_ENTRY*|A no-entry sign cursor.|
+|*CURSOR_PAINT_BRUSH*|A paintbrush cursor.|
+|*CURSOR_PENCIL*|A pencil cursor.|
+|*CURSOR_POINT_LEFT*|A cursor that points left.|
+|*CURSOR_POINT_RIGHT*|A cursor that points right.|
+|*CURSOR_QUESTION_ARROW*|An arrow and question mark.|
+|*CURSOR_RIGHT_BUTTON*|Represents a mouse with the right button depressed.|
+|*CURSOR_SIZENESW*|A sizing cursor pointing NE-SW.|
+|*CURSOR_SIZENS*|A sizing cursor pointing N-S.|
+|*CURSOR_SIZENWSE*|A sizing cursor pointing NW-SE.|
+|*CURSOR_SIZEWE*|A sizing cursor pointing W-E.|
+|*CURSOR_SIZING*|A general sizing cursor.|
+|*CURSOR_SPRAYCAN*|A spraycan cursor.|
+|*CURSOR_WAIT*|A wait cursor.|
+|*CURSOR_WATCH*|A watch cursor.|
+|*CURSOR_ARROWWAIT*|A cursor with both an arrow andan hourglass, (windows.)|
+
+Note that not all cursors are available on all platforms.
+h3(#Cursor_isok). Cursor#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if cursor data is present.
+
+h3(#Cursor_equals). Cursor#==
+
+ Boolean *operator $==$*(%(arg-type)"Cursor":cursor.html% cursor)
+
+Equality operator. Two cursors are equal if they point to to the same
+underlying cursor data. It does not compare each attribute, so two
+independently-created cursors using the same parameters will fail the
+test.

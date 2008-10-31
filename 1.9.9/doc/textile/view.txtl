@@ -1,0 +1,220 @@
+h1(#wxview). Wx::View
+
+The view class can be used to model the viewing and editing component of
+an application's file-based data. It is part of the document/view framework supported by Widgets,
+and cooperates with the "Document":document.html, "DocTemplate":doctemplate.html 
+and "DocManager":docmanager.html classes.
+
+h2. Derived from
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"View overview":viewoverview.html, "Document":document.html, "DocTemplate":doctemplate.html, "DocManager":docmanager.html
+
+<div id="methods">
+
+h2. Methods
+
+* "View#m__view_document":#View_mviewdocument
+* "View#m__view_frame":#View_mviewframe
+* "View#m__view_type_name":#View_mviewtypename
+* "View.new":#View_new
+* "View#activate":#View_activate
+* "View#close":#View_close
+* "View#get_document":#View_getdocument
+* "View#get_document_manager":#View_getdocumentmanager
+* "View#get_frame":#View_getframe
+* "View#get_view_name":#View_getviewname
+* "View#on_activate_view":#View_onactivateview
+* "View#on_change_filename":#View_onchangefilename
+* "View#on_close":#View_onclose
+* "View#on_closing_document":#View_onclosingdocument
+* "View#on_create":#View_oncreate
+* "View#on_create_printout":#View_oncreateprintout
+* "View#on_draw":#View_ondraw
+* "View#on_update":#View_onupdate
+* "View#set_document":#View_setdocument
+* "View#set_frame":#View_setframe
+* "View#set_view_name":#View_setviewname
+
+</div>
+
+
+h3(#View_mviewdocument). View#m__view_document
+
+Document*m_viewDocument
+
+The document associated with this view. There may be more than one view per
+document, but there can never be more than one document for one view.
+
+h3(#View_mviewframe). View#m__view_frame
+
+Frame*m_viewFrame
+
+Frame associated with the view, if any.
+
+h3(#View_mviewtypename). View#m__view_type_name
+
+Stringm_viewTypeName
+
+The view type name given to the DocTemplate constructor, copied to this
+variable when the view is created. Not currently used by the framework.
+
+h3(#View_new). View.new
+
+  *destructor*()
+
+Destructor. Removes itself from the document's list of views.
+
+h3(#View_activate). View#activate
+
+  *activate*(%(arg-type)Boolean% activate)
+
+Call this from your view frame's OnActivate member to tell the framework which view is
+currently active. If your windowing system doesn't call OnActivate, you may need to
+call this function from OnMenuCommand or any place where you know the view must
+be active, and the framework will need to get the current view.
+
+The prepackaged view frame DocChildFrame calls View::Activate from its OnActivate member
+and from its OnMenuCommand member.
+
+This function calls View::OnActivateView.
+
+h3(#View_close). View#close
+
+ Boolean *close*(%(arg-type)Boolean% deleteWindow = true)
+
+Closes the view by calling OnClose. If _deleteWindow_ is true, this function should
+delete the window associated with the view.
+
+h3(#View_getdocument). View#get_document
+
+ "Document":document.html *get_document*()
+
+Gets a pointer to the document associated with the view.
+
+h3(#View_getdocumentmanager). View#get_document_manager
+
+ "DocManager":docmanager.html *get_document_manager*()
+
+Returns a pointer to the document manager instance associated with this view.
+
+h3(#View_getframe). View#get_frame
+
+ "Window":window.html *get_frame*()
+
+Gets the frame associated with the view (if any). Note that this ``frame'' is
+not a Frame at all in the generic MDI implementation which uses the notebook
+pages instead of the frames and this is why this method returns a Window and
+not a Frame.
+
+h3(#View_getviewname). View#get_view_name
+
+ String *get_view_name*()
+
+Gets the name associated with the view (passed to the DocTemplate constructor).
+Not currently used by the framework.
+
+h3(#View_onactivateview). View#on_activate_view
+
+  *on_activate_view*(%(arg-type)Boolean% activate,  %(arg-type)"View":view.html% activeView, 
+                   %(arg-type)"View":view.html% deactiveView)
+
+Called when a view is activated by means of View::Activate. The default implementation does
+nothing.
+
+h3(#View_onchangefilename). View#on_change_filename
+
+  *on_change_filename*()
+
+Called when the filename has changed. The default implementation constructs a
+suitable title and sets the title of the view frame (if any).
+
+h3(#View_onclose). View#on_close
+
+ Boolean *on_close*(%(arg-type)Boolean% deleteWindow)
+
+Implements closing behaviour. The default implementation calls Document::Close
+to close the associated document. Does not delete the view. The application
+may wish to do some cleaning up operations in this function, _if_ a
+call to Document::Close succeeded. For example, if your views
+all share the same window, you need to disassociate the window from the view
+and perhaps clear the window. If _deleteWindow_ is true, delete the
+frame associated with the view.
+
+h3(#View_onclosingdocument). View#on_closing_document
+
+  *on_closing_doocument*()
+
+Override this to clean up the view when the document is being
+closed.
+
+h3(#View_oncreate). View#on_create
+
+ Boolean *on_create*(%(arg-type)"Document":document.html% doc,  %(arg-type)Integer% flags)
+
+DocManager or Document creates a View via a DocTemplate.
+Just after the DocTemplate creates the View, it calls
+View::OnCreate. In its OnCreate member function, the View can create a DocChildFrame
+or a derived class. This DocChildFrame provides user interface
+elements to view and/or edit the contents of the Document.
+
+By default, simply returns true. If the function returns false, the
+view will be deleted.
+
+h3(#View_oncreateprintout). View#on_create_printout
+
+ "Printout":printout.html *on_create_printout*()
+
+If the printing framework is enabled in the library, this function returns a
+ "Printout":printout.html object for the purposes of printing. It should create a new object
+every time it is called; the framework will delete objects it creates.
+
+By default, this function returns an instance of DocPrintout, which prints
+and previews one page by calling View::OnDraw.
+
+Override to return an instance of a class other than DocPrintout.
+
+h3(#onviewondraw). View#on_draw
+
+  *on_draw*(%(arg-type)"DC":dc.html% dc)
+
+Override this function to render the view on the given device context.
+
+h3(#onviewonupdate). View#on_update
+
+  *on_update*(%(arg-type)"View":view.html% sender,  %(arg-type)Object% hint)
+
+Called when the view should be updated. _sender_ is a pointer to the view
+that sent the update request, or NULL if no single view requested the update (for instance,
+when the document is opened). _hint_ is as yet unused but may in future contain
+application-specific information for making updating more efficient.
+
+h3(#View_setdocument). View#set_document
+
+  *set_document*(%(arg-type)"Document":document.html% doc)
+
+Associates the given document with the view. Normally called by the
+framework.
+
+h3(#View_setframe). View#set_frame
+
+  *set_frame*(%(arg-type)"Window":window.html% frame)
+
+Sets the frame associated with this view. The application should call this
+if possible, to tell the view about the frame.
+
+See "get_frame":#View_getframe for the explanation about the mismatch
+between the ``Frame'' in the method name and the type of its parameter.
+
+h3(#View_setviewname). View#set_view_name
+
+  *set_view_name*(%(arg-type)String% name)
+
+Sets the view type name. Should only be called by the framework.
+
+

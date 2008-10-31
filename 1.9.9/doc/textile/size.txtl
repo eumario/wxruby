@@ -1,0 +1,145 @@
+h1(#wxsize). Wx::Size
+
+A *Size* is a useful data structure for graphics operations.
+It simply contains integer _width_ and _height_ members.
+
+Size is used throughout Widgets as well as Point which, although almost
+equivalent to Size, has a different meaning: Point represents a position
+while Size - the size.
+
+
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"Point":point.html, "RealPoint":realpoint.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Size.new":#Size_new
+* "Size#dec_to":#Size_decto
+* "Size#is_fully_specified":#Size_isfullyspecified
+* "Size#get_width":#Size_getwidth
+* "Size#get_height":#Size_getheight
+* "Size#inc_to":#Size_incto
+* "Size#set":#Size_set
+* "Size#set_defaults":#Size_setdefaults
+* "Size#set_height":#Size_setheight
+* "Size#set_width":#Size_setwidth
+
+</div>
+
+
+
+h3(#Size_new). Size.new
+
+  *Size.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+Creates a size object.
+
+
+
+h3(#Size_decto). Size#dec_to
+
+  *dec_to*(%(arg-type)"Size":size.html% size)
+
+Decrements this object so that both of its dimensions are not greater than the
+corresponding dimensions of the size.
+
+h4. See also
+
+"inc_to":#Size_incto
+
+
+h3(#Size_isfullyspecified). Size#is_fully_specified
+
+ Boolean *is_fully_specified*()
+
+Returns  if neither of the size object components is equal to $-1$, which
+is used as default for the size values in Widgets (hence the predefined 
+@DefaultSize@ has both of its components equal to $-1$).
+
+This method is typically used before calling 
+"set_defaults":#Size_setdefaults.
+
+
+h3(#Size_getwidth). Size#get_width
+
+ Integer *get_width*()
+
+Gets the width member.
+
+
+h3(#Size_getheight). Size#get_height
+
+ Integer *get_height*()
+
+Gets the height member.
+
+
+
+h3(#Size_incto). Size#inc_to
+
+  *inc_to*(%(arg-type)"Size":size.html% size)
+
+Increments this object so that both of its dimensions are not less than the
+corresponding dimensions of the size.
+
+h4. See also
+
+"dec_to":#Size_decto
+
+
+
+h3(#Size_set). Size#set
+
+  *set*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+Sets the width and height members.
+
+
+h3(#Size_setdefaults). Size#set_defaults
+
+  *set_defaults*(%(arg-type)"Size":size.html% sizeDefault)
+
+Combine this size object with another one replacing the default (i.e. equal
+to $-1$) components of this object with those of the other. It is typically
+used like this:
+
+     if ( !size.IsFullySpecified() )
+     {
+         size.SetDefaults(GetDefaultSize());
+     }
+ 
+
+h4. See also
+
+"is_fully_specified":#Size_isfullyspecified
+
+
+h3(#Size_setheight). Size#set_height
+
+  *set_height*(%(arg-type)Integer% height)
+
+Sets the height.
+
+
+h3(#Size_setwidth). Size#set_width
+
+  *set_width*(%(arg-type)Integer% width)
+
+Sets the width.
+
+
+h3(#Size_assign). Size#=
+
+  *operator $=$*(%(arg-type)"Size":size.html% sz)
+
+Assignment operator.
+
+

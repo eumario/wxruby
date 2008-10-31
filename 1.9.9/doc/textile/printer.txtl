@@ -1,0 +1,131 @@
+h1(#wxprinter). Wx::Printer
+
+This class represents the Windows or PostScript printer, and is the vehicle through
+which printing may be launched by an application. Printing can also
+be achieved through using of lower functions and classes, but
+this and associated classes provide a more convenient and general
+method of printing.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Printing framework overview":printingoverview.html, "PrinterDC":printerdc.html, "PrintDialog":printdialog.html, "Printout":printout.html, "PrintPreview":printpreview.html.
+
+<div id="methods">
+
+h2. Methods
+
+* "Printer.new":#Printer_new
+* "Printer#create_abort_window":#Printer_createabortwindow
+* "Printer#get_abort":#Printer_getabort
+* "Printer#get_last_error":#Printer_getlasterror
+* "Printer#get_print_dialog_data":#Printer_getprintdialogdata
+* "Printer#print":#Printer_print
+* "Printer#print_dialog":#Printer_printdialog
+* "Printer#report_error":#Printer_reporterror
+* "Printer#setup":#Printer_setup
+
+</div>
+
+
+
+h3(#Printer_new). Printer.new
+
+  *Printer.new*(%(arg-type)"PrintDialogData":printdialogdata.html% data = nil)
+
+Constructor. Pass an optional pointer to a block of print
+dialog data, which will be copied to the printer object's local data.
+
+h4. See also
+
+"PrintDialogData":printdialogdata.html,
+"PrintData":printdata.html
+
+
+
+h3(#Printer_createabortwindow). Printer#create_abort_window
+
+  *create_abort_window*(%(arg-type)"Window":window.html% parent,  %(arg-type)"Printout":printout.html% printout)
+
+Creates the default printing abort window, with a cancel button.
+
+
+h3(#Printer_getabort). Printer#get_abort
+
+ Boolean *get_abort*()
+
+Returns true if the user has aborted the print job.
+
+
+h3(#Printer_getlasterror). Printer#get_last_error
+
+ "PrinterError":printererror.html *get_last_error*()
+
+Return last error. Valid after calling "Print":printerprint.html,
+"print_dialog":#Printer_printdialog or 
+"PrintPreview#print":printpreview.html#PrintPreview_print. These functions 
+set last error to *PRINTER_NO_ERROR* if no error happened.
+
+Returned value is one of the following:
+
+
+
+|*PRINTER_NO_ERROR*|No error happened.|
+|*PRINTER_CANCELLED*|The user cancelled printing.|
+|*PRINTER_ERROR*|There was an error during printing.|
+
+
+
+
+h3(#Printer_getprintdialogdata). Printer#get_print_dialog_data
+
+ "PrintDialogData":printdialogdata.html *get_print_dialog_data*()
+
+Returns the "print data":printdata.html associated with the printer object.
+
+
+h3(#Printer_print). Printer#print
+
+ Boolean *print*(%(arg-type)"Window":window.html% parent,  %(arg-type)"Printout":printout.html% printout, 
+               %(arg-type)Boolean% prompt=true)
+
+Starts the printing process. Provide a parent window, a user-defined Printout object which controls
+the printing of a document, and whether the print dialog should be invoked first.
+
+Print could return false if there was a problem initializing the printer device context
+(current printer not set, for example) or the user cancelled printing. Call
+"Printer#get_last_error":printer.html#Printer_getlasterror to get detailed
+information about the kind of the error.
+
+
+h3(#Printer_printdialog). Printer#print_dialog
+
+ "DC":dc.html *print_dialog*(%(arg-type)"Window":window.html% parent)
+
+Invokes the print dialog. If successful (the user did not press Cancel
+and no error occurred), a suitable device context will be returned
+(otherwise NULL is returned -- call
+"Printer#get_last_error":printer.html#Printer_getlasterror to get detailed
+information about the kind of the error).
+
+The application must delete this device context to avoid a memory leak.
+
+
+h3(#Printer_reporterror). Printer#report_error
+
+  *report_error*(%(arg-type)"Window":window.html% parent,  %(arg-type)"Printout":printout.html% printout, 
+               %(arg-type)String% message)
+
+Default error-reporting function.
+
+
+h3(#Printer_setup). Printer#setup
+
+ Boolean *setup*(%(arg-type)"Window":window.html% parent)
+
+Invokes the print setup dialog. Note that the setup dialog is obsolete from
+Windows 95, though retained for backward compatibility.
+

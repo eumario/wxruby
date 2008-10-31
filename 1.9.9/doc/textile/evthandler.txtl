@@ -1,0 +1,398 @@
+h1(#wxevthandler). Wx::EvtHandler
+
+A class that can handle events from the windowing system.
+Window (and therefore all window classes) are derived from
+this class, and Wx::App is also an EvtHandler.
+
+The methods listed here are relatively rarely needed in user code,
+unless you wish to write your own event-generating classes, or to
+dynamically remove event handlers in a running program.
+
+This is because, in addition to the methods listed here, all event
+handler classes support a number of convenience methods for seting up
+event handlers. These methods have names of the form evt_xxx, for
+example, evt_button or evt_close. The names of these methods can be
+found in the documentation on the control class which generates the
+events (for example "Button":button.html), or in the documentation for
+the event class (for example "CloseEvent".closeevent.html).
+
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+Event handling overvieweventhandlingoverview
+
+<div id="methods">
+
+h2. Methods
+
+* "EvtHandler.register_class":#EvtHandler_registerclass
+* "EvtHandler#add_pending_event":#EvtHandler_addpendingevent
+* "EvtHandler#connect":#EvtHandler_connect
+* "EvtHandler#disconnect":#EvtHandler_disconnect
+* "EvtHandler#get_client_data":#EvtHandler_getclientdata
+* "EvtHandler#get_client_object":#EvtHandler_getclientobject
+* "EvtHandler#get_evt_handler_enabled":#EvtHandler_getevthandlerenabled
+* "EvtHandler#get_next_handler":#EvtHandler_getnexthandler
+* "EvtHandler#get_previous_handler":#EvtHandler_getprevioushandler
+* "EvtHandler#process_event":#EvtHandler_processevent
+* "EvtHandler#search_event_table":#EvtHandler_searcheventtable
+* "EvtHandler#set_client_data":#EvtHandler_setclientdata
+* "EvtHandler#set_client_object":#EvtHandler_setclientobject
+* "EvtHandler#set_evt_handler_enabled":#EvtHandler_setevthandlerenabled
+* "EvtHandler#set_next_handler":#EvtHandler_setnexthandler
+* "EvtHandler#set_previous_handler":#EvtHandler_setprevioushandler
+
+</div>
+
+h2. Class Methods
+
+h3(#EvtHandler_neweventtype). EvtHandler.new_event_type
+
+  Integer *new_event_type*()
+
+h3(#EvtHandler_neweventtype). EvtHandler.register_class
+
+  Integer *register_class*(%(arg-type)"Class":class.html% klass, 
+                           %(arg-type)Integer% konstant = nil,
+                           %(arg-type)String% meth = nil,
+                           %(arg-type)"Event":event.html% arity = nil)
+
+Registers the mapping of user-defined events identified by the constant
+@konstant@ to the user-defined ruby event class @klass@. If @konstant@
+is not specified, a new, unique identifier will be created by the API
+(using "Event.new_event_type":event.html#Event_neweventtype) and
+returned by the method.
+
+Optionally, if @meth@ and @arity@ are specified, this method will also
+create a shortcut method for setting up event handlers, comparable to
+the in-built methods such as @evt_menu@, @evt_button@ or @evt_close@. 
+
+If you wish to have such a method created, @meth@ should contain the
+name of the new method (for example "@evt_foo@"), and @arity@ should be 
+the number of arguments the method should accept. Normally, for events
+similar to the "CommandEvents":commandevent.html fired by in-built
+control types like "Button":button.html and "TextCtrl":textctrl.html,
+this argument should be 1, which will be the id of the control whose
+CommandEvents are being listened for.
+
+h4. Example
+
+ class MyCustomControl < Wx::Window
+   ...
+ end
+
+ class MyCustomEvent < Wx::CommandEvent
+
+ end
+ 
+ EVT_MY_CUSTOM = Wx::EvtHandler.new_event_type
+ Wx::EvtHandler.register_class(MyCustomEvent, EVT_MY_CUSTOM,
+                               "evt_my_custom", 1)
+
+h2. Instance Methods
+
+h3(#EvtHandler_addpendingevent). EvtHandler#add_pending_event
+
+  *add_pending_event*(%(arg-type)"Event":event.html% event)
+
+This function posts an event to be processed later.
+
+h4. Parameters
+
+* _event_ Event to add to process queue.
+
+h4. Remarks
+
+The difference between sending an event (using the
+"process_event":#EvtHandler_processevent method) and posting it is
+that in the first case the event is processed before the function returns,
+while in the second case, the function returns immediately and the event will
+be processed sometime later (usually during the next event loop iteration).
+
+A copy of _event_ is made by the function, so the original can be deleted
+as soon as function returns (it is common that the original is created on the
+stack).  This requires that the "Event#clone":event.html#Event_clone method
+be implemented by _event_ so that it can be duplicated and stored until
+it gets processed.
+
+This is also the method to call for inter-thread communication---it will
+post events safely between different threads which means that this method is
+thread-safe by using critical sections where needed.  In a multi-threaded
+program, you often need to inform the main GUI thread about the status of
+other working threads and such notification should be done using this method.
+
+This method automatically wakes up idle handling if the underlying window 
+system is currently idle and thus would not send any idle events. (Waking
+up idle handling is done calling "::WakeUpIdle":wakeupidle.html.)
+
+h3(#EvtHandler_connect). EvtHandler#connect
+
+  *connect*(%(arg-type)Integer% id, 
+            %(arg-type)Integer% lastId,
+            %(arg-type)"EventType":eventtype.html% eventType) { ... }
+
+Listens for events of the specified type and runs the associated block
+when they occur. The id parameters are required for some events to
+specify a particular object whose events are to be listened for -
+typically, a control. A small number of event types accept a range, but
+the second parameter is normally Wx::ID_ANY.
+
+Note that it is usually simpler and more convenient to use the evt_xxx
+methods than using connect directly. 
+
+h4. Parameters
+
+* _id_ The identifier (or first of the identifier range) to be
+associated with the event handler function. For the version not taking this
+argument, it defaults to @ID_ANY@.
+* _lastId_ The second part of the identifier range to be associated with the event handler function.
+* _eventType_ The event type to be associated with this event handler.
+
+h3(#EvtHandler_disconnect). EvtHandler#disconnect
+
+ Boolean *disconnect*(%(arg-type)Integer% first_id, 
+                     %(arg-type)Integer% last_id = @ID_ANY@,
+                     %(arg-type)"EventType":eventtype.html% evt_type = nil)
+
+Disconnects event handlers which match the criteria passed in as
+arguments. Returns @true@ if any matching event handlers were found and
+disconnected, or @false@ if no changes were made.
+
+The @first_id@ is the wx identifier of the window whose events are no
+longer to be responded to. The @second_id@ is the optional upper part of
+an id range, for those types of event handlers that accept ranges. 
+
+The @evt_type@ is the type of events that should no longer be
+handled. @evt_type@ may be passed as either a Integer constant (for
+example @Wx::EVT_COMMAND_BUTTON_CLICKED@), or may be the symbol name of
+the method used to set up the event handler (for example :evt_button).
+If evt_type is @nil@ - the default - then all event types will be
+disconnected.
+
+h3(#EvtHandler_getclientdata). EvtHandler#get_client_data
+
+ Object *get_client_data*()
+
+Gets user-supplied client data.
+
+h4. Remarks
+
+Normally, any extra data the programmer wishes to associate with the object
+should be made available by deriving a new class with new data members.
+
+h4. See also
+
+"EvtHandler#set_client_data":evthandler.html#EvtHandler_setclientdata
+
+h3(#EvtHandler_getclientobject). EvtHandler#get_client_object
+
+ "ClientData":clientdata.html *get_client_object*()
+
+Get a pointer to the user-supplied client data object.
+
+h4. See also
+
+"EvtHandler#set_client_object":evthandler.html#EvtHandler_setclientobject,
+"ClientData":clientdata.html
+
+h3(#EvtHandler_getevthandlerenabled). EvtHandler#get_evt_handler_enabled
+
+ Boolean *get_evt_handler_enabled*()
+
+Returns true if the event handler is enabled, false otherwise.
+
+h4. See also
+
+"EvtHandler#set_evt_handler_enabled":evthandler.html#EvtHandler_setevthandlerenabled
+
+h3(#EvtHandler_getnexthandler). EvtHandler#get_next_handler
+
+ "EvtHandler":evthandler.html *get_next_handler*()
+
+Gets the pointer to the next handler in the chain.
+
+h4. See also
+
+"EvtHandler#set_next_handler":evthandler.html#EvtHandler_setnexthandler, "EvtHandler#get_previous_handler":evthandler.html#EvtHandler_getprevioushandler, "EvtHandler#set_previous_handler":evthandler.html#EvtHandler_setprevioushandler, "Window#push_event_handler":window.html#Window_pusheventhandler, "Window#pop_event_handler":window.html#Window_popeventhandler
+
+h3(#EvtHandler_getprevioushandler). EvtHandler#get_previous_handler
+
+ "EvtHandler":evthandler.html *get_previous_handler*()
+
+Gets the pointer to the previous handler in the chain.
+
+h4. See also
+
+"EvtHandler#set_previous_handler":evthandler.html#EvtHandler_setprevioushandler, "EvtHandler#get_next_handler":evthandler.html#EvtHandler_getnexthandler, "EvtHandler#set_next_handler":evthandler.html#EvtHandler_setnexthandler, "Window#push_event_handler":window.html#Window_pusheventhandler, "Window#pop_event_handler":window.html#Window_popeventhandler
+
+h3(#EvtHandler_processevent). EvtHandler#process_event
+
+ Boolean *process_event*(%(arg-type)"Event":event.html% event)
+
+Processes an event, searching event tables and calling zero or more suitable event handler function(s).
+
+h4. Parameters
+
+* _event_ Event to process.
+
+h4. Return value
+
+true if a suitable event handler function was found and executed, and the function did not
+call "Event#skip":event.html#Event_skip.
+
+h4. Remarks
+
+Normally, your application would not call this function: it is called in the Widgets
+implementation to dispatch incoming user interface events to the framework (and application).
+
+However, you might need to call it if implementing new functionality (such as a new control) where
+you define new event types, as opposed to allowing the user to override virtual functions.
+
+An instance where you might actually override the *ProcessEvent* function is where you want
+to direct event processing to event handlers not normally noticed by Widgets. For example,
+in the document/view architecture, documents and views are potential event handlers.
+When an event reaches a frame, *ProcessEvent* will need to be called on the associated
+document and view in case event handler functions are associated with these objects.
+The property classes library (Property) also overrides *ProcessEvent* for similar reasons.
+
+The normal order of event table searching is as follows:
+
+
+# If the object is disabled (via a call to "EvtHandler#set_evt_handler_enabled":evthandler.html#EvtHandler_setevthandlerenabled)
+the function skips to step (6).
+# If the object is a Window, *ProcessEvent* is recursively called on the window's "Validator":validator.html. If this returns true, the function exits.
+# *SearchEventTable* is called for this event handler. If this fails, the base
+class table is tried, and so on until no more tables exist or an appropriate function was found,
+in which case the function exits.
+# The search is applied down the entire chain of event handlers (usually the chain has a length
+of one). If this succeeds, the function exits.
+# If the object is a Window and the event is a CommandEvent, *ProcessEvent* is
+recursively applied to the parent window's event handler. If this returns true, the function exits.
+# Finally, *ProcessEvent* is called on the App object.
+
+
+h4. See also
+
+"EvtHandler#search_event_table":evthandler.html#EvtHandler_searcheventtable
+
+h3(#EvtHandler_searcheventtable). EvtHandler#search_event_table
+
+ Boolean *search_event_table*(%(arg-type)"EventTable":eventtable.html% table,  %(arg-type)"Event":event.html% event)
+
+Searches the event table, executing an event handler function if an appropriate one
+is found.
+
+h4. Parameters
+
+* _table_ Event table to be searched.
+* _event_ Event to be matched against an event table entry.
+
+h4. Return value
+
+true if a suitable event handler function was found and executed, and the function did not
+call "Event#skip":event.html#Event_skip.
+
+h4. Remarks
+
+This function looks through the object's event table and tries to find an entry
+that will match the event.
+
+An entry will match if:
+
+
+# The event type matches, and
+# the identifier or identifier range matches, or the event table entry's identifier is zero.
+
+
+If a suitable function is called but calls "Event#skip":event.html#Event_skip, this function will
+fail, and searching will continue.
+
+h4. See also
+
+"EvtHandler#process_event":evthandler.html#EvtHandler_processevent
+
+h3(#EvtHandler_setclientdata). EvtHandler#set_client_data
+
+  *set_client_data*(%(arg-type)% data)
+
+Sets user-supplied client data.
+
+h4. Parameters
+
+* _data_ Data to be associated with the event handler.
+
+h4. Remarks
+
+Normally, any extra data the programmer wishes to associate with 
+the object should be made available by deriving a new class
+with new data members. You must not call this method and
+"set_client_object":#EvtHandler_setclientobject on the
+same class - only one of them.
+
+h4. See also
+
+"EvtHandler#get_client_data":evthandler.html#EvtHandler_getclientdata
+
+h3(#EvtHandler_setclientobject). EvtHandler#set_client_object
+
+  *set_client_object*(%(arg-type)"ClientData":clientdata.html% data)
+
+Set the client data object. Any previous object will be deleted.
+
+h4. See also
+
+"EvtHandler#get_client_object":evthandler.html#EvtHandler_getclientobject,
+"ClientData":clientdata.html
+
+h3(#EvtHandler_setevthandlerenabled). EvtHandler#set_evt_handler_enabled
+
+  *set_evt_handler_enabled*(%(arg-type)Boolean% enabled)
+
+Enables or disables the event handler.
+
+h4. Parameters
+
+* _enabled_ true if the event handler is to be enabled, false if it is to be disabled.
+
+h4. Remarks
+
+You can use this function to avoid having to remove the event handler from the chain, for example
+when implementing a dialog editor and changing from edit to test mode.
+
+h4. See also
+
+"EvtHandler#get_evt_handler_enabled":evthandler.html#EvtHandler_getevthandlerenabled
+
+h3(#EvtHandler_setnexthandler). EvtHandler#set_next_handler
+
+  *set_next_handler*(%(arg-type)"EvtHandler":evthandler.html% handler)
+
+Sets the pointer to the next handler.
+
+h4. Parameters
+
+* _handler_ Event handler to be set as the next handler.
+
+h4. See also
+
+"EvtHandler#get_next_handler":evthandler.html#EvtHandler_getnexthandler, "EvtHandler#set_previous_handler":evthandler.html#EvtHandler_setprevioushandler, "EvtHandler#get_previous_handler":evthandler.html#EvtHandler_getprevioushandler, "Window#push_event_handler":window.html#Window_pusheventhandler, "Window#pop_event_handler":window.html#Window_popeventhandler
+
+h3(#EvtHandler_setprevioushandler). EvtHandler#set_previous_handler
+
+  *set_previous_handler*(%(arg-type)"EvtHandler":evthandler.html% handler)
+
+Sets the pointer to the previous handler.
+
+h4. Parameters
+
+* _handler_ Event handler to be set as the previous handler.
+
+h4. See also
+
+"EvtHandler#get_previous_handler":evthandler.html#EvtHandler_getprevioushandler, "EvtHandler#set_next_handler":evthandler.html#EvtHandler_setnexthandler, "EvtHandler#get_next_handler":evthandler.html#EvtHandler_getnexthandler, "Window#push_event_handler":window.html#Window_pusheventhandler, "Window#pop_event_handler":window.html#Window_popeventhandler
+
+

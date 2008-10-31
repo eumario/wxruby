@@ -1,0 +1,328 @@
+h1(#wxcalendarctrl). Wx::CalendarCtrl
+
+The calendar control allows the user to pick a date. For this,
+it displays a window containing several parts: a control at the top to pick the month
+and the year (either or both of them may be disabled), and a month
+area below them which shows all the days in the month. The user can move the
+current selection using the keyboard and select the date (generating 
+@EVT_CALENDAR@ event) by pressing @<Return>@ or double clicking it.
+
+It has advanced possibilities for the customization of its display. All global
+settings (such as colours and fonts used) can, of course, be changed. But
+also, the display style for each day in the month can be set independently
+using "CalendarDateAttr":calendardateattr.html class.
+
+An item without custom attributes is drawn with the default colours and
+font and without border, but setting custom attributes with 
+"set_attr":#CalendarCtrl_setattr allows to modify its appearance. Just
+create a custom attribute object and set it for the day you want to be
+displayed specially (note that the control will take ownership of the pointer,
+i.e. it will delete it itself). A day may be marked as being a holiday, even
+if it is not recognized as one by "DateTime":tdateholidays.html using 
+"set_holiday":#CalendarCtrl_setholiday method.
+
+As the attributes are specified for each day, they may change when the month
+is changed, so you will often want to update them in 
+@EVT_CALENDAR_MONTH@ event handler.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@CAL_SUNDAY_FIRST@|Show Sunday as the first day in the week|
+|@CAL_MONDAY_FIRST@|Show Monday as the first day in the week|
+|@CAL_SHOW_HOLIDAYS@|Highlight holidays in the calendar|
+|@CAL_NO_YEAR_CHANGE@|Disable the year changing|
+|@CAL_NO_MONTH_CHANGE@|Disable the month (and, implicitly, the year) changing|
+|@CAL_SHOW_SURROUNDING_WEEKS@|Show the neighbouring weeks in the previous and next months|
+|@CAL_SEQUENTIAL_MONTH_SELECTION@|Use alternative, more compact, style for the month and year selection controls.|
+
+
+The default calendar style is @CAL_SHOW_HOLIDAYS@.
+
+h2. Event table macros
+
+To process input from a calendar control, use these event handler macros to
+direct input to member functions that take a 
+"CalendarEvent":calendarevent.html argument.
+
+
+
+|*evt_calendar(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A day was double clicked in the calendar.|
+|*evt_calendar_sel_changed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The selected date changed.|
+|*evt_calendar_day(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The selected day changed.|
+|*evt_calendar_month(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The selected month changed.|
+|*evt_calendar_year(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The selected year changed.|
+|*evt_calendar_weekday_clicked(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|User clicked on the week day header|
+
+Note that changing the selected date will result in either of 
+@EVT_CALENDAR_DAY@, @MONTH@ or @YEAR@ events and 
+@EVT_CALENDAR_SEL_CHANGED@ one.
+
+h2. Constants
+
+The following are the possible return values for 
+"hit_test":#CalendarCtrl_hittest method:
+
+
+
+ enum CalendarHitTestResult
+ {
+     CAL_HITTEST_NOWHERE,      // outside of anything
+     CAL_HITTEST_HEADER,       // on the header (weekdays)
+     CAL_HITTEST_DAY           // on a day in the calendar
+ }
+ 
+
+
+h2. See also
+
+"Calendar sample":samplecalendar.html
+
+"CalendarDateAttr":calendardateattr.html
+
+"CalendarEvent":calendarevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "CalendarCtrl.new":#CalendarCtrl_new
+* "CalendarCtrl#create":#CalendarCtrl_create
+* "CalendarCtrl#set_date":#CalendarCtrl_setdate
+* "CalendarCtrl#get_date":#CalendarCtrl_getdate
+* "CalendarCtrl#enable_year_change":#CalendarCtrl_enableyearchange
+* "CalendarCtrl#enable_month_change":#CalendarCtrl_enablemonthchange
+* "CalendarCtrl#enable_holiday_display":#CalendarCtrl_enableholidaydisplay
+* "CalendarCtrl#set_header_colours":#CalendarCtrl_setheadercolours
+* "CalendarCtrl#get_header_colour_fg":#CalendarCtrl_getheadercolourfg
+* "CalendarCtrl#get_header_colour_bg":#CalendarCtrl_getheadercolourbg
+* "CalendarCtrl#set_highlight_colours":#CalendarCtrl_sethighlightcolours
+* "CalendarCtrl#get_highlight_colour_fg":#CalendarCtrl_gethighlightcolourfg
+* "CalendarCtrl#get_highlight_colour_bg":#CalendarCtrl_gethighlightcolourbg
+* "CalendarCtrl#set_holiday_colours":#CalendarCtrl_setholidaycolours
+* "CalendarCtrl#get_holiday_colour_fg":#CalendarCtrl_getholidaycolourfg
+* "CalendarCtrl#get_holiday_colour_bg":#CalendarCtrl_getholidaycolourbg
+* "CalendarCtrl#get_attr":#CalendarCtrl_getattr
+* "CalendarCtrl#set_attr":#CalendarCtrl_setattr
+* "CalendarCtrl#set_holiday":#CalendarCtrl_setholiday
+* "CalendarCtrl#reset_attr":#CalendarCtrl_resetattr
+* "CalendarCtrl#hit_test":#CalendarCtrl_hittest
+
+</div>
+
+
+
+h3(#CalendarCtrl_wxcalendarctrldef). CalendarCtrl.new
+
+  *CalendarCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                   %(arg-type)"DateTime":datetime.html% date = DefaultDateTime, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                   %(arg-type)Integer% style = CAL_SHOW_HOLIDAYS, 
+                   %(arg-type)String% name = CalendarNameStr)
+
+Does the same as "Create":calendarctrlcreate.html method.
+
+
+h3(#CalendarCtrl_create). CalendarCtrl#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"DateTime":datetime.html% date = DefaultDateTime, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = CAL_SHOW_HOLIDAYS, 
+                %(arg-type)String% name = CalendarNameStr)
+
+Creates the control. See "Window":windowctor.html for the meaning of
+the parameters and the control overview for the possible styles.
+
+
+  *destructor*()
+
+Destroys the control.
+
+
+h3(#CalendarCtrl_setdate). CalendarCtrl#set_date
+
+  *set_date*(%(arg-type)"DateTime":datetime.html% date)
+
+Sets the current date.
+
+
+h3(#CalendarCtrl_getdate). CalendarCtrl#get_date
+
+ "DateTime":datetime.html *get_date*()
+
+Gets the currently selected date.
+
+
+h3(#CalendarCtrl_enableyearchange). CalendarCtrl#enable_year_change
+
+  *enable_year_change*(%(arg-type)Boolean% enable = true)
+
+This function should be used instead of changing @CAL_NO_YEAR_CHANGE@
+style bit directly. It allows or disallows the user to change the year
+interactively.
+
+
+h3(#CalendarCtrl_enablemonthchange). CalendarCtrl#enable_month_change
+
+  *enable_month_change*(%(arg-type)Boolean% enable = true)
+
+This function should be used instead of changing 
+@CAL_NO_MONTH_CHANGE@ style bit. It allows or disallows the user to
+change the month interactively. Note that if the month can not be changed, the
+year can not be changed neither.
+
+
+h3(#CalendarCtrl_enableholidaydisplay). CalendarCtrl#enable_holiday_display
+
+  *enable_holiday_display*(%(arg-type)Boolean% display = true)
+
+This function should be used instead of changing @CAL_SHOW_HOLIDAYS@
+style bit directly. It enables or disables the special highlighting of the
+holidays.
+
+
+h3(#CalendarCtrl_setheadercolours). CalendarCtrl#set_header_colours
+
+  *set_header_colours*(%(arg-type)"Colour":colour.html% colFg,  %(arg-type)"Colour":colour.html% colBg)
+
+Set the colours used for painting the weekdays at the top of the control.
+
+
+h3(#CalendarCtrl_getheadercolourfg). CalendarCtrl#get_header_colour_fg
+
+ "Colour":colour.html *get_header_colour_fg*()
+
+Gets the foreground colour of the header part of the calendar window.
+
+h4. See also
+
+"set_header_colours":#CalendarCtrl_setheadercolours
+
+
+h3(#CalendarCtrl_getheadercolourbg). CalendarCtrl#get_header_colour_bg
+
+ "Colour":colour.html *get_header_colour_bg*()
+
+Gets the background colour of the header part of the calendar window.
+
+h4. See also
+
+"set_header_colours":#CalendarCtrl_setheadercolours
+
+
+h3(#CalendarCtrl_sethighlightcolours). CalendarCtrl#set_highlight_colours
+
+  *set_highlight_colours*(%(arg-type)"Colour":colour.html% colFg,  %(arg-type)"Colour":colour.html% colBg)
+
+Set the colours to be used for highlighting the currently selected date.
+
+
+h3(#CalendarCtrl_gethighlightcolourfg). CalendarCtrl#get_highlight_colour_fg
+
+ "Colour":colour.html *get_highlight_colour_fg*()
+
+Gets the foreground highlight colour.
+
+h4. See also
+
+"set_highlight_colours":#CalendarCtrl_sethighlightcolours
+
+
+h3(#CalendarCtrl_gethighlightcolourbg). CalendarCtrl#get_highlight_colour_bg
+
+ "Colour":colour.html *get_highlight_colour_bg*()
+
+Gets the background highlight colour.
+
+h4. See also
+
+"set_highlight_colours":#CalendarCtrl_sethighlightcolours
+
+
+h3(#CalendarCtrl_setholidaycolours). CalendarCtrl#set_holiday_colours
+
+  *set_holiday_colours*(%(arg-type)"Colour":colour.html% colFg,  %(arg-type)"Colour":colour.html% colBg)
+
+Sets the colours to be used for the holidays highlighting (only used if the
+window style includes @CAL_SHOW_HOLIDAYS@ flag).
+
+
+h3(#CalendarCtrl_getholidaycolourfg). CalendarCtrl#get_holiday_colour_fg
+
+ "Colour":colour.html *get_holiday_colour_fg*()
+
+Return the foreground colour currently used for holiday highlighting.
+
+h4. See also
+
+"set_holiday_colours":#CalendarCtrl_setholidaycolours
+
+
+h3(#CalendarCtrl_getholidaycolourbg). CalendarCtrl#get_holiday_colour_bg
+
+ "Colour":colour.html *get_holiday_colour_bg*()
+
+Return the background colour currently used for holiday highlighting.
+
+h4. See also
+
+"set_holiday_colours":#CalendarCtrl_setholidaycolours
+
+
+h3(#CalendarCtrl_getattr). CalendarCtrl#get_attr
+
+ "CalendarDateAttr":calendardateattr.html *get_attr*(%(arg-type)Integer% day)
+
+Returns the attribute for the given date (should be in the range $1$).
+
+The returned pointer may be @NULL@.
+
+
+h3(#CalendarCtrl_setattr). CalendarCtrl#set_attr
+
+  *set_attr*(%(arg-type)Integer% day,  %(arg-type)"CalendarDateAttr":calendardateattr.html% attr)
+
+Associates the attribute with the specified date (in the range $1$).
+
+If the pointer is @NULL@, the items attribute is cleared.
+
+
+h3(#CalendarCtrl_setholiday). CalendarCtrl#set_holiday
+
+  *set_holiday*(%(arg-type)Integer% day)
+
+Marks the specified day as being a holiday in the current month.
+
+
+h3(#CalendarCtrl_resetattr). CalendarCtrl#reset_attr
+
+  *reset_attr*(%(arg-type)Integer% day)
+
+Clears any attributes associated with the given day (in the range
+$1$).
+
+
+h3(#CalendarCtrl_hittest). CalendarCtrl#hit_test
+
+ "CalendarHitTestResult":calendarhittestresult.html *hit_test*(%(arg-type)"Point":point.html% pos, 
+                                  %(arg-type)"DateTime":datetime.html% date = nil, 
+                                  %(arg-type)DateTime::WeekDay% wd = nil)
+
+Returns one of @CAL_HITTEST_XXX@ 
+"constants":calendarctrl.html and fills either _date_ or 
+_wd_ pointer with the corresponding value depending on the hit test code.
+

@@ -1,0 +1,89 @@
+h1(#wxdocchildframe). Wx::DocChildFrame
+
+The DocChildFrame class provides a default frame for displaying documents
+on separate windows. This class can only be used for SDI (not MDI) child frames.
+
+The class is part of the document/view framework supported by Widgets,
+and cooperates with the "View":view.html, "Document":document.html,
+ "DocManager":docmanager.html and "DocTemplate":doctemplate.html classes.
+
+See the example application in @samples/docview@.
+
+h2. Derived from
+
+"Frame":frame.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Methods
+
+<div id="methods">
+* "DocChildFrame.new":#DocChildFrame_new
+* "DocChildFrame#get_document":#DocChildFrame_getdocument
+* "DocChildFrame#get_view":#DocChildFrame_getview
+* "DocChildFrame#on_activate":#DocChildFrame_onactivate
+* "DocChildFrame#on_close_window":#DocChildFrame_onclosewindow
+* "DocChildFrame#set_document":#DocChildFrame_setdocument
+* "DocChildFrame#set_view":#DocChildFrame_setview
+
+</div>
+
+h2. See also
+
+"Document/view overview":docviewoverview.html, "Frame":frame.html
+
+h3(#DocChildFrame_new). DocChildFrame.new
+
+  *DocChildFrame.new*(%(arg-type)"Document":document.html% doc,  %(arg-type)"View":view.html% view,  %(arg-type)"Frame":frame.html% parent, 
+                    %(arg-type)Integer% id, 
+                    %(arg-type)String% title, 
+                    %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                    %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                    %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                    %(arg-type)String% name = "frame")
+
+Constructor.
+
+h3(#DocChildFrame_getdocument). DocChildFrame#get_document
+
+ "Document":document.html *get_document*()
+
+Returns the document associated with this frame.
+
+h3(#DocChildFrame_getview). DocChildFrame#get_view
+
+ "View":view.html *get_view*()
+
+Returns the view associated with this frame.
+
+h3(#DocChildFrame_onactivate). DocChildFrame#on_activate
+
+  *on_activate*(%(arg-type)"ActivateEvent":activateevent.html% event)
+
+Sets the currently active view to be the frame's view. You may need
+to override (but still call) this function in order to set the keyboard
+focus for your subwindow.
+
+h3(#DocChildFrame_onclosewindow). DocChildFrame#on_close_window
+
+  *on_close_window*(%(arg-type)"CloseEvent":closeevent.html% event)
+
+Closes and deletes the current view and document.
+
+h3(#DocChildFrame_setdocument). DocChildFrame#set_document
+
+  *set_document*(%(arg-type)"Document":document.html% doc)
+
+Sets the document for this frame.
+
+h3(#DocChildFrame_setview). DocChildFrame#set_view
+
+  *set_view*(%(arg-type)"View":view.html% view)
+
+Sets the view for this frame.
+
+

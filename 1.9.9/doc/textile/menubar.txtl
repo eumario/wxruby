@@ -1,0 +1,414 @@
+h1(#wxmenubar). Wx::MenuBar
+
+A menu bar is a series of menus accessible from the top of a frame.
+
+h2. Derived from
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Event handling
+
+To respond to a menu selection, provide a handler for EVT_MENU, in the frame
+that contains the menu bar. If you have a toolbar which uses the same identifiers
+as your EVT_MENU entries, events from the toolbar will also be processed by your
+EVT_MENU event handlers.
+
+*Tip:* under Windows, if you discover that menu shortcuts (for example, Alt-F to show the file menu)
+are not working, check any EVT_CHAR events you are handling in child windows.
+If you are not calling @event.Skip()@ for events that you don't process in these event handlers,
+menu shortcuts may cease to work.
+
+h2. See also
+
+"Menu":menu.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MenuBar.new":#MenuBar_new
+* "MenuBar#append":#MenuBar_append
+* "MenuBar#check":#MenuBar_check
+* "MenuBar#enable":#MenuBar_enable
+* "MenuBar#enable_top":#MenuBar_enabletop
+* "MenuBar#find_menu":#MenuBar_findmenu
+* "MenuBar#find_menu_item":#MenuBar_findmenuitem
+* "MenuBar#find_item":#MenuBar_finditem
+* "MenuBar#get_help_string":#MenuBar_gethelpstring
+* "MenuBar#get_label":#MenuBar_getlabel
+* "MenuBar#get_label_top":#MenuBar_getlabeltop
+* "MenuBar#get_menu":#MenuBar_getmenu
+* "MenuBar#get_menu_count":#MenuBar_getmenucount
+* "MenuBar#insert":#MenuBar_insert
+* "MenuBar#is_checked":#MenuBar_ischecked
+* "MenuBar#is_enabled":#MenuBar_isenabled
+* "MenuBar#refresh":#MenuBar_refresh
+* "MenuBar#remove":#MenuBar_remove
+* "MenuBar#replace":#MenuBar_replace
+* "MenuBar#set_help_string":#MenuBar_sethelpstring
+* "MenuBar#set_label":#MenuBar_setlabel
+* "MenuBar#set_label_top":#MenuBar_setlabeltop
+
+</div>
+
+
+h3(#MenuBar_new). MenuBar.new
+
+  *MenuBar.new*(%(arg-type)Integer% style = 0)
+
+Default constructor.
+
+  *MenuBar.new*(%(arg-type)Integer% n,  %(arg-type)"Menu":menu.html% menus[],  %(arg-type)String% titles[], 
+              %(arg-type)Integer% style = 0)
+
+Construct a menu bar from arrays of menus and titles.
+
+h4. Parameters
+
+* _n_ The number of menus.
+* _menus_ An array of menus. Do not use this array again - it now belongs to the
+menu bar.
+* _titles_ An array of title strings. Deallocate this array after creating the menu bar.
+* _style_ If @MB_DOCKABLE@ the menu bar can be detached (GTK only).
+
+
+
+
+
+  *destructor*()
+
+Destructor, destroying the menu bar and removing it from the parent frame (if any).
+
+h3(#MenuBar_append). MenuBar#append
+
+ Boolean *append*(%(arg-type)"Menu":menu.html% menu,  %(arg-type)String% title)
+
+Adds the item to the end of the menu bar.
+
+h4. Parameters
+
+* _menu_ The menu to add. Do not deallocate this menu after calling *Append*.
+* _title_ The title of the menu.
+
+h4. Return value
+
+true on success, false if an error occurred.
+
+h4. See also
+
+"MenuBar#insert":menubar.html#MenuBar_insert
+
+h3(#MenuBar_check). MenuBar#check
+
+  *check*(%(arg-type)Integer% id,  %(arg-type)Boolean% check)
+
+Checks or unchecks a menu item.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+* _check_ If true, checks the menu item, otherwise the item is unchecked.
+
+h4. Remarks
+
+Only use this when the menu bar has been associated
+with a frame; otherwise, use the Menu equivalent call.
+
+h3(#MenuBar_enable). MenuBar#enable
+
+  *enable*(%(arg-type)Integer% id,  %(arg-type)Boolean% enable)
+
+Enables or disables (greys out) a menu item.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+* _enable_ true to enable the item, false to disable it.
+
+h4. Remarks
+
+Only use this when the menu bar has been
+associated with a frame; otherwise, use the Menu equivalent call.
+
+h3(#MenuBar_enabletop). MenuBar#enable_top
+
+  *enable_top*(%(arg-type)Integer% pos,  %(arg-type)Boolean% enable)
+
+Enables or disables a whole menu.
+
+h4. Parameters
+
+* _pos_ The position of the menu, starting from zero.
+* _enable_ true to enable the menu, false to disable it.
+
+h4. Remarks
+
+Only use this when the menu bar has been
+associated with a frame.
+
+h3(#MenuBar_findmenu). MenuBar#find_menu
+
+ Integer *find_menu*(%(arg-type)String% title)
+
+Returns the index of the menu with the given _title_ or @NOT_FOUND@ if no
+such menu exists in this menubar. The _title_ parameter may specify either
+the menu title (with accelerator characters, i.e. @"&File"@) or just the
+menu label (@"File"@) indifferently.
+
+h3(#MenuBar_findmenuitem). MenuBar#find_menu_item
+
+ Integer *find_menu_item*(%(arg-type)String% menuString,  %(arg-type)String% itemString)
+
+Finds the menu item id for a menu name/menu item string pair.
+
+h4. Parameters
+
+* _menuString_ Menu title to find.
+* _itemString_ Item to find.
+
+h4. Return value
+
+The menu item identifier, or @NOT_FOUND@ if none was found.
+
+h4. Remarks
+
+Any special menu codes are stripped out of source and target strings
+before matching.
+
+h3(#MenuBar_finditem). MenuBar#find_item
+
+ "MenuItem":menuitem.html *find_item*(%(arg-type)Integer% id,  %(arg-type)"Menu":menu.html% *menu = nil)
+
+Finds the menu item object associated with the given menu item identifier.
+
+h4. Parameters
+
+* _id_ Menu item identifier.
+* _menu_ If not NULL, menu will get set to the associated menu.
+
+h4. Return value
+
+The found menu item object, or NULL if one was not found.
+
+h3(#MenuBar_gethelpstring). MenuBar#get_help_string
+
+ String *get_help_string*(%(arg-type)Integer% id)
+
+Gets the help string associated with the menu item identifier.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+The help string, or the empty string if there was no help string or the menu item
+was not found.
+
+h4. See also
+
+"MenuBar#set_help_string":menubar.html#MenuBar_sethelpstring
+
+h3(#MenuBar_getlabel). MenuBar#get_label
+
+ String *get_label*(%(arg-type)Integer% id)
+
+Gets the label associated with a menu item.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+The menu item label, or the empty string if the item was not found.
+
+h4. Remarks
+
+Use only after the menubar has been associated with a frame.
+
+h3(#MenuBar_getlabeltop). MenuBar#get_label_top
+
+ String *get_label_top*(%(arg-type)Integer% pos)
+
+Returns the label of a top-level menu. Note that the returned string does not
+include the accelerator characters which could have been specified in the menu
+title string during its construction.
+
+h4. Parameters
+
+* _pos_ Position of the menu on the menu bar, starting from zero.
+
+h4. Return value
+
+The menu label, or the empty string if the menu was not found.
+
+h4. Remarks
+
+Use only after the menubar has been associated with a frame.
+
+h4. See also
+
+"MenuBar#set_label_top":menubar.html#MenuBar_setlabeltop
+
+h3(#MenuBar_getmenu). MenuBar#get_menu
+
+ "Menu":menu.html *get_menu*(%(arg-type)Integer% menuIndex)
+
+Returns the menu at _menuIndex_ (zero-based).
+
+h3(#MenuBar_getmenucount). MenuBar#get_menu_count
+
+ Integer *get_menu_count*()
+
+Returns the number of menus in this menubar.
+
+h3(#MenuBar_insert). MenuBar#insert
+
+ Boolean *insert*(%(arg-type)Integer% pos,  %(arg-type)"Menu":menu.html% menu,  %(arg-type)String% title)
+
+Inserts the menu at the given position into the menu bar. Inserting menu at
+position $0$ will insert it in the very beginning of it, inserting at position 
+"get_menu_count()":#MenuBar_getmenucount() is the same as calling 
+"Append()":menubarappend.html.
+
+h4. Parameters
+
+* _pos_ The position of the new menu in the menu bar
+* _menu_ The menu to add. MenuBar owns the menu and will free it.
+* _title_ The title of the menu.
+
+h4. Return value
+
+true on success, false if an error occurred.
+
+h4. See also
+
+"MenuBar#append":menubar.html#MenuBar_append
+
+h3(#MenuBar_ischecked). MenuBar#is_checked
+
+ Boolean *is_checked*(%(arg-type)Integer% id)
+
+Determines whether an item is checked.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+true if the item was found and is checked, false otherwise.
+
+h3(#MenuBar_isenabled). MenuBar#is_enabled
+
+ Boolean *is_enabled*(%(arg-type)Integer% id)
+
+Determines whether an item is enabled.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+true if the item was found and is enabled, false otherwise.
+
+h3(#MenuBar_refresh). MenuBar#refresh
+
+  *refresh*()
+
+Redraw the menu bar
+
+h3(#MenuBar_remove). MenuBar#remove
+
+ "Menu":menu.html *remove*(%(arg-type)Integer% pos)
+
+Removes the menu from the menu bar and returns the menu object - the caller is
+responsible for deleting it. This function may be used together with 
+"MenuBar#insert":menubar.html#MenuBar_insert to change the menubar
+dynamically.
+
+h4. See also
+
+"MenuBar#replace":menubar.html#MenuBar_replace
+
+h3(#MenuBar_replace). MenuBar#replace
+
+ "Menu":menu.html *replace*(%(arg-type)Integer% pos,  %(arg-type)"Menu":menu.html% menu, 
+                %(arg-type)String% title)
+
+Replaces the menu at the given position with another one.
+
+h4. Parameters
+
+* _pos_ The position of the new menu in the menu bar
+* _menu_ The menu to add.
+* _title_ The title of the menu.
+
+h4. Return value
+
+The menu which was previously at position _pos_. The caller is
+responsible for deleting it.
+
+h4. See also
+
+"MenuBar#insert":menubar.html#MenuBar_insert, "MenuBar#remove":menubar.html#MenuBar_remove
+
+h3(#MenuBar_sethelpstring). MenuBar#set_help_string
+
+  *set_help_string*(%(arg-type)Integer% id,  %(arg-type)String% helpString)
+
+Sets the help string associated with a menu item.
+
+h4. Parameters
+
+* _id_ Menu item identifier.
+* _helpString_ Help string to associate with the menu item.
+
+h4. See also
+
+"MenuBar#get_help_string":menubar.html#MenuBar_gethelpstring
+
+h3(#MenuBar_setlabel). MenuBar#set_label
+
+  *set_label*(%(arg-type)Integer% id,  %(arg-type)String% label)
+
+Sets the label of a menu item.
+
+h4. Parameters
+
+* _id_ Menu item identifier.
+* _label_ Menu item label.
+
+h4. Remarks
+
+Use only after the menubar has been associated with a frame.
+
+h4. See also
+
+"MenuBar#get_label":menubar.html#MenuBar_getlabel
+
+h3(#MenuBar_setlabeltop). MenuBar#set_label_top
+
+  *set_label_top*(%(arg-type)Integer% pos,  %(arg-type)String% label)
+
+Sets the label of a top-level menu.
+
+h4. Parameters
+
+* _pos_ The position of a menu on the menu bar, starting from zero.
+* _label_ The menu label.
+
+h4. Remarks
+
+Use only after the menubar has been associated with a frame.
+
+h4. See also
+
+"MenuBar#get_label_top":menubar.html#MenuBar_getlabeltop
+

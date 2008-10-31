@@ -1,0 +1,84 @@
+h1(#wxstaticbox). Wx::StaticBox
+
+A static box is a rectangle drawn around other panel items to denote
+a logical grouping of items.
+
+Please note that a static box should *not* be used as the parent for the
+controls it contains, instead they should be siblings of each other. Although
+using a static box as a parent might work in some versions of Widgets, it
+results in a crash under, for example, GTK. 
+
+Also, please note that because of this, the order in which you create new 
+controls is important. Create your StaticBox control *before* any 
+siblings that are to appear inside the StaticBox in order to preserve the 
+correct Z-Order of controls.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+There are no special styles for this control.
+
+See also "window styles overview":windowstyles.html.
+
+h2. See also
+
+"StaticText":statictext.html
+
+<div id="methods">
+
+h2. Methods
+
+* "StaticBox.new":#StaticBox_new
+* "StaticBox#create":#StaticBox_create
+
+</div>
+
+
+h3(#StaticBox_new). StaticBox.new
+
+  *StaticBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)String% name = "staticBox")
+
+Constructor, creating and showing a static box.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _label_ Text to be displayed in the static box, the empty string for no label.
+* _pos_ Window position. If the position (-1, -1) is specified then a default position is chosen.
+* _size_ Checkbox size. If the size (-1, -1) is specified then a default size is chosen.
+* _style_ Window style. See "StaticBox":staticbox.html.
+* _name_ Window name.
+
+h4. See also
+
+"StaticBox#create":staticbox.html#StaticBox_create
+
+  *destructor*()
+
+Destructor, destroying the group box.
+
+h3(#StaticBox_create). StaticBox#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)String% name = "staticBox")
+
+Creates the static box for two-step construction. See "StaticBox.new":staticbox.html#StaticBox_new for further details.
+
+

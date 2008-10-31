@@ -1,0 +1,176 @@
+h1(#wxstandardpaths). Wx::StandardPaths
+
+StandardPaths returns standard locations in the file system and should
+be used by applications to find their data files in a portable way. This
+class can't be instantiated; all of its features are accessed through
+class methods. 
+
+In the description of the methods below, the example return values are
+given for the Unix, Windows and Mac OS X systems. However, please note
+that these are just the examples and the actual values may differ. For
+example, under Windows: the system administrator may change the standard
+directories locations, i.e.  the Windows directory may be named
+@$Win2003@ instead of the default @$Windows@.
+
+The strings @appname@ and @username@ should be replaced with the value
+returned by "App#get_app_name":app.html#App_getappname and the name of
+the currently logged in user, respectively. The string @prefix@ is only
+used under Unix and is @/usr/local@ by default but may be changed using
+"set_install_prefix":#StandardPaths_setinstallprefix.
+
+The directories returned by the methods of this class may or may not
+exist. If they don't exist, it's up to the caller to create them,
+StandardPaths doesn't do it.
+
+Finally note that these functions only work with standardly packaged
+applications. I.e. under Unix you should follow the standard
+installation conventions and under Mac you should create your
+application bundle according to the Apple guidelines. Again, this class
+doesn't help you to do it.
+
+h2. Inherits from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "StandardPaths.get_config_dir":#StandardPaths_getconfigdir
+* "StandardPaths.get_data_dir":#StandardPaths_getdatadir
+* "StandardPaths.get_install_prefix":#StandardPaths_getinstallprefix
+* "StandardPaths.get_local_data_dir":#StandardPaths_getlocaldatadir
+* "StandardPaths.get_plugins_dir":#StandardPaths_getpluginsdir
+* "StandardPaths.get_user_config_dir":#StandardPaths_getuserconfigdir
+* "StandardPaths.get_user_data_dir":#StandardPaths_getuserdatadir
+* "StandardPaths.get_user_local_data_dir":#StandardPaths_getuserlocaldatadir
+* "StandardPaths.set_install_prefix":#StandardPaths_setinstallprefix
+
+</div>
+
+
+h3(#StandardPaths_getconfigdir). StandardPaths.get_config_dir
+
+ String *get_config_dir*()
+
+Return the directory containing the system config files.
+
+Example return values:
+
+    * Unix: @/etc@
+    * Windows: @C:$@@$Documents and Settings$@@$All Users$@@$Application Data@
+    * Mac: @/Library/Preferences@
+
+h3(#StandardPaths_getdatadir). StandardPaths.get_data_dir
+
+ String *get_data_dir*()
+
+Return the location of the applications global, i.e. not user-specific,
+data files.
+
+Example return values:
+
+    * Unix: @prefix@@/share/@@appname@
+    * Windows: the directory where the executable file is located
+    * Mac: @appname@@.app/Contents/SharedSupport@ bundle subdirectory
+
+
+h4. See also
+
+"get_local_data_dir":#StandardPaths_getlocaldatadir
+
+
+h3(#StandardPaths_getinstallprefix). StandardPaths.get_install_prefix
+
+ String *get_install_prefix*()
+
+Note:  This function is only available under Unix.
+
+Return the program installation prefix, e.g. @/usr@, @/opt@ or 
+@/home/zeitlin@.
+
+If the prefix had been previously by 
+"set_install_prefix":#StandardPaths_setinstallprefix, returns that
+value, otherwise tries to determine it automatically (Linux only right
+now) and finally returns the default @/usr/local@ value if it failed.
+
+
+h3(#StandardPaths_getlocaldatadir). StandardPaths.get_local_data_dir
+
+ String *get_local_data_dir*()
+
+Return the location for application data files which are host-specific and
+can't, or shouldn't, be shared with the other machines.
+
+This is the same as "get_data_dir()":#StandardPaths_getdatadir() except
+under Unix where it returns @/etc/@@appname@.
+
+
+h3(#StandardPaths_getpluginsdir). StandardPaths.get_plugins_dir
+
+ String *get_plugins_dir*()
+
+Return the directory where the loadable modules (plugins) live.
+
+Example return values:
+
+    * Unix: @prefix@@/lib/@@appname@
+    * Windows: the directory of the executable file
+    * Mac: @appname@@.app/Contents/PlugIns@ bundle subdirectory
+
+h3(#StandardPaths_getuserconfigdir). StandardPaths.get_user_config_dir
+
+ String *get_user_config_dir*()
+
+Return the directory for the user config files:
+
+    * Unix: @~@ (the home directory)
+    * Windows: @C:$@@$Documents and Settings$@@$@@username@
+    * Mac: @~/Library/Preferences@
+
+
+Only use this method if you have a single configuration file to put in this
+directory, otherwise "get_user_data_dir()":#StandardPaths_getuserdatadir() is
+more appropriate.
+
+
+h3(#StandardPaths_getuserdatadir). StandardPaths.get_user_data_dir
+
+ String *get_user_data_dir*()
+
+Return the directory for the user-dependent application data files:
+
+    * Unix: @~/.@@appname@
+    * Windows: @C:$@@$Documents and Settings$@@$@@username@@$@@$Application Data$@@$@@appname@
+    * Mac: @~/Library/Application Support/@@appname@
+
+
+
+h3(#StandardPaths_getuserlocaldatadir). StandardPaths.get_user_local_data_dir
+
+ String *get_user_local_data_dir*()
+
+Return the directory for user data files which shouldn't be shared with
+the other machines.
+
+This is the same as "get_user_data_dir()":#StandardPaths_getuserdatadir() for
+all platforms except Windows where it returns 
+@C:$@@$Documents and Settings$@@$@@username@@$@@$Local Settings$@@$Application Data$@@$@@appname@
+
+
+h3(#StandardPaths_setinstallprefix). StandardPaths.set_install_prefix
+
+  *set_install_prefix*(%(arg-type)String% prefix)
+
+Note: This function is only available under Unix.
+
+Lets StandardPaths know about the real program installation prefix on a Unix
+system. By default, the value returned by 
+"get_install_prefix":#StandardPaths_getinstallprefix is used.
+
+Although under Linux systems the program prefix may usually be determined
+automatically, portable programs should call this function. Usually the prefix
+is set during program configuration if using GNU autotools and so it is enough
+to pass its value defined in @config.h@ to this function.
+
+

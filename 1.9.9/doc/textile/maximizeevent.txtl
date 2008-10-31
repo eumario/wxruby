@@ -1,0 +1,40 @@
+h1(#wxmaximizeevent). Wx::MaximizeEvent
+
+An event being sent when the frame is maximized or restored.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To handle iconize events, use this handler method to direct the event
+object to a block that takes a MaximizeEvent argument:
+
+
+|*evt_maximize()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_MAXIMIZE event.|
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "TopLevelWindow#maximize":toplevelwindow.html#TopLevelWindow_maximize, "TopLevelWindow#is_maximized":toplevelwindow.html#TopLevelWindow_ismaximized
+
+The opposite of a MaximizeEvent is an "IconizeEvent":iconizeevent.html,
+when a frame is minimized to an icon.
+
+<div id="methods">
+
+h2. Methods
+
+* "MaximizeEvent.new":#MaximizeEvent_new
+
+</div>
+
+
+h3(#MaximizeEvent_new). MaximizeEvent.new
+
+  *MaximizeEvent.new*(%(arg-type)Integer% id = 0)
+
+Constructor.
+

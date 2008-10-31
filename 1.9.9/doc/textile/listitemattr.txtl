@@ -1,0 +1,96 @@
+h1(#wxlistitemattr). Wx::ListItemAttr
+
+Represents the attributes (color, font, ) of a
+"ListCtrl":listctrl.html "ListItem":listctrl.html.
+
+h2. See also
+
+"ListCtrl overview":listctrloverview.html, "ListCtrl":listctrl.html, "ListItem":listitem.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ListItemAttr.new":#ListItemAttr_new
+* "ListItemAttr#get_background_colour":#ListItemAttr_getbackgroundcolour
+* "ListItemAttr#get_font":#ListItemAttr_getfont
+* "ListItemAttr#get_text_colour":#ListItemAttr_gettextcolour
+* "ListItemAttr#has_background_colour":#ListItemAttr_hasbackgroundcolour
+* "ListItemAttr#has_font":#ListItemAttr_hasfont
+* "ListItemAttr#has_text_colour":#ListItemAttr_hastextcolour
+* "ListItemAttr#set_background_colour":#ListItemAttr_setbackgroundcolour
+* "ListItemAttr#set_font":#ListItemAttr_setfont
+* "ListItemAttr#set_text_colour":#ListItemAttr_settextcolour
+
+</div>
+
+
+h3(#ListItemAttr_new). ListItemAttr.new
+
+  *ListItemAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack,  %(arg-type)"Font":font.html% font)
+
+Construct a ListItemAttr with the specified foreground and
+background colors and font.
+
+h3(#ListItemAttr_getbackgroundcolour). ListItemAttr#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+Returns the currently set background color.
+
+
+h3(#ListItemAttr_getfont). ListItemAttr#get_font
+
+ "Font":font.html *get_font*()
+
+Returns the currently set font.
+
+
+h3(#ListItemAttr_gettextcolour). ListItemAttr#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+Returns the currently set text color.
+
+
+h3(#ListItemAttr_hasbackgroundcolour). ListItemAttr#has_background_colour
+
+ Boolean *has_background_colour*()
+
+Returns  if the currently set background color is valid.
+
+
+h3(#ListItemAttr_hasfont). ListItemAttr#has_font
+
+ Boolean *has_font*()
+
+Returns  if the currently set font is valid.
+
+
+h3(#ListItemAttr_hastextcolour). ListItemAttr#has_text_colour
+
+ Boolean *has_text_colour*()
+
+Returns  if the currently set text color is valid.
+
+
+h3(#ListItemAttr_setbackgroundcolour). ListItemAttr#set_background_colour
+
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets a new background color.
+
+
+h3(#ListItemAttr_setfont). ListItemAttr#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets a new font.
+
+
+h3(#ListItemAttr_settextcolour). ListItemAttr#set_text_colour
+
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets a new text color.
+

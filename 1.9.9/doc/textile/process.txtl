@@ -1,0 +1,280 @@
+h1(#wxprocess). Wx::Process
+
+The objects of this class are used in conjunction with the
+"Execute":execute.html function. When a Process object is passed to
+Execute(), its "on_terminate()":#Process_onterminate() virtual method
+is called when the process terminates. This allows the program to be
+(asynchronously) notified about the process termination and also retrieve its
+exit status which is unavailable from Execute() in the case of
+asynchronous execution.
+
+Please note that if the process termination notification is processed by the
+parent, it is responsible for deleting the Process object which sent it.
+However, if it is not processed, the object will delete itself and so the
+library users should only delete those objects whose notifications have been
+processed (and call "Detach()":processdetach.html for others).
+
+Process also supports IO redirection of the child process. For this, you have
+to call its "Redirect":processredirect.html method before passing it to
+"Execute":execute.html. If the child process was launched successfully,
+"get_input_stream":#Process_getinputstream,
+"get_output_stream":#Process_getoutputstream and
+"get_error_stream":#Process_geterrorstream can then be used to retrieve
+the streams corresponding to the child process standard output, input and
+error output respectively.
+
+
+
+h2. Derived from
+
+"EvtHandler":evthandler.html
+
+h2. See also
+
+"Execute":execute.html
+
+"exec sample":sampleexec.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Process.new":#Process_new
+* "Process#close_output":#Process_closeoutput
+* "Process#detach":#Process_detach
+* "Process#get_error_stream":#Process_geterrorstream
+* "Process#get_input_stream":#Process_getinputstream
+* "Process#get_output_stream":#Process_getoutputstream
+* "Process#is_error_available":#Process_iserroravailable
+* "Process#is_input_available":#Process_isinputavailable
+* "Process#is_input_opened":#Process_isinputopened
+* "Process#kill":#Process_kill
+* "Process#exists":#Process_exists
+* "Process#on_terminate":#Process_onterminate
+* "Process#open":#Process_open
+* "Process#redirect":#Process_redirect
+
+</div>
+
+
+h3(#Process_new). Process.new
+
+  *Process.new*(%(arg-type)"EvtHandler":evthandler.html% parent = nil,  %(arg-type)Integer% id = -1)
+
+  *Process.new*(%(arg-type)Integer% flags)
+
+Constructs a process object. _id_ is only used in the case you want to
+use Widgets events. It identifies this object, or another window that will
+receive the event.
+
+If the _parent_ parameter is different from NULL, it will receive
+a EVT_END_PROCESS notification event (you should insert EVT_END_PROCESS
+macro in the event table of the parent to handle it) with the given _id_.
+
+The second constructor creates an object without any associated parent (and
+hence no id neither) but allows to specify the _flags_ which can have the
+value of @PROCESS_DEFAULT@ or @PROCESS_REDIRECT@. Specifying the
+former value has no particular effect while using the latter one is equivalent
+to calling "Redirect":processredirect.html.
+
+h4. Parameters
+
+* _parent_ The event handler parent.
+* _id_ id of an event.
+* _flags_ either @PROCESS_DEFAULT@ or @PROCESS_REDIRECT@
+
+  *destructor*()
+
+Destroys the Process object.
+
+h3(#Process_closeoutput). Process#close_output
+
+  *close_output*()
+
+Closes the output stream (the one connected to the stdin of the child
+process). This function can be used to indicate to the child process that
+there is no more data to be read - usually, a filter program will only
+terminate when the input stream is closed.
+
+h3(#Process_detach). Process#detach
+
+  *detach*()
+
+Normally, a Process object is deleted by its parent when it receives the
+notification about the process termination. However, it might happen that the
+parent object is destroyed before the external process is terminated (e.g. a
+window from which this external process was launched is closed by the user)
+and in this case it *should not delete* the Process object, but
+*should call Detach()* instead. After the Process object is detached
+from its parent, no notification events will be sent to the parent and the
+object will delete itself upon reception of the process termination
+notification.
+
+h3(#Process_geterrorstream). Process#get_error_stream
+
+ "InputStream* ":inputstream* .html *get_error_stream*()
+
+Returns an input stream which corresponds to the standard error output (stderr)
+of the child process.
+
+h3(#Process_getinputstream). Process#get_input_stream
+
+ "InputStream* ":inputstream* .html *get_input_stream*()
+
+It returns an input stream corresponding to the standard output stream of the
+subprocess. If it is NULL, you have not turned on the redirection.
+See "Process#redirect":process.html#Process_redirect.
+
+h3(#Process_getoutputstream). Process#get_output_stream
+
+ "OutputStream* ":outputstream* .html *get_output_stream*()
+
+It returns an output stream correspoding to the input stream of the subprocess.
+If it is NULL, you have not turned on the redirection.
+See "Process#redirect":process.html#Process_redirect.
+
+h3(#Process_iserroravailable). Process#is_error_available
+
+ Boolean *is_error_available*()
+
+Returns @true@ if there is data to be read on the child process standard
+error stream.
+
+h4. See also
+
+"is_input_available":#Process_isinputavailable
+
+h3(#Process_isinputavailable). Process#is_input_available
+
+ Boolean *is_input_available*()
+
+Returns @true@ if there is data to be read on the child process standard
+output stream. This allows to write simple (and extremely inefficient)
+polling-based code waiting for a better mechanism in future Widgets versions.
+
+See the "exec sample":sampleexec.html for an example of using this
+function.
+
+h4. See also
+
+"is_input_opened":#Process_isinputopened
+
+h3(#Process_isinputopened). Process#is_input_opened
+
+ Boolean *is_input_opened*()
+
+Returns @true@ if the child process standard output stream is opened.
+
+h3(#Process_kill). Process#kill
+
+ "KillError":killerror.html *kill*(%(arg-type)Integer% pid,  %(arg-type)"Signal":signal.html% signal = SIGNONE, 
+                  %(arg-type)Integer% flags = KILL_NOCHILDREN)
+
+Send the specified signal to the given process. Possible signal values are:
+
+
+ enum Signal
+ {
+     SIGNONE = 0,  // verify if the process exists under Unix
+     SIGHUP,
+     SIGINT,
+     SIGQUIT,
+     SIGILL,
+     SIGTRAP,
+     SIGABRT,
+     SIGEMT,
+     SIGFPE,
+     SIGKILL,      // forcefully kill, dangerous!
+     SIGBUS,
+     SIGSEGV,
+     SIGSYS,
+     SIGPIPE,
+     SIGALRM,
+     SIGTERM       // terminate the process gently
+ };
+ 
+
+@SIGNONE@, @SIGKILL@ and @SIGTERM@ have the same meaning
+under both Unix and Windows but all the other signals are equivalent to
+@SIGTERM@ under Windows.
+
+The _flags_ parameter can be KILL_NOCHILDREN (the default),
+or KILL_CHILDREN, in which case the child processes of this
+process will be killed too. Note that under Unix, for KILL_CHILDREN
+to work you should have created the process passing EXEC_MAKE_GROUP_LEADER.
+
+Returns the element of @KillError@ enum:
+
+
+ enum KillError
+ {
+     KILL_OK,              // no error
+     KILL_BAD_SIGNAL,      // no such signal
+     KILL_ACCESS_DENIED,   // permission denied
+     KILL_NO_PROCESS,      // no such process
+     KILL_ERROR            // another, unspecified error
+ };
+ 
+
+h4. See also
+
+"Process#exists":process.html#Process_exists, "Kill":kill.html, "Exec sample":sampleexec.html
+
+h3(#Process_exists). Process#exists
+
+ Boolean *exists*(%(arg-type)Integer% pid)
+
+Returns @true@ if the given process exists in the system.
+
+h4. See also
+
+"Process#kill":process.html#Process_kill, "Exec sample":sampleexec.html
+
+h3(#Process_onterminate). Process#on_terminate
+
+  *on_terminate*(%(arg-type)Integer% pid,  %(arg-type)Integer% status)
+
+It is called when the process with the pid _pid_ finishes.
+It raises a Widgets event when it isn't overridden.
+
+* _pid_ The pid of the process which has just terminated.
+* _status_ The exit code of the process.
+
+h3(#Process_open). Process#open
+
+ "Process":process.html *open*(%(arg-type)String% cmd,  %(arg-type)Integer% flags = EXEC_ASYNC)
+
+This static method replaces the standard @popen()@ function: it launches
+the process specified by the _cmd_ parameter and returns the Process
+object which can be used to retrieve the streams connected to the standard
+input, output and error output of the child process.
+
+If the process couldn't be launched, @NULL@ is returned. Note that in any
+case the returned pointer should *not* be deleted, rather the process
+object will be destroyed automatically when the child process terminates. This
+does mean that the child process should be told to quit before the main program
+exits to avoid memory leaks.
+
+h4. Parameters
+
+* _cmd_ The command to execute, including optional arguments.
+* _flags_ The flags to pass to "Execute":execute.html.
+  NOTE: EXEC_SYNC should not be used.
+
+h4. Return value
+
+A pointer to new Process object or @NULL@ on error.
+
+h4. See also
+
+"Execute":execute.html
+
+h3(#Process_redirect). Process#redirect
+
+  *redirect*()
+
+Turns on redirection. Execute will try to open a couple of pipes
+to catch the subprocess stdio. The caught input stream is returned by
+GetOutputStream() as a non-seekable stream. The caught output stream is returned
+by GetInputStream() as a non-seekable stream.
+

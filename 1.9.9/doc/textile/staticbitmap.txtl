@@ -1,0 +1,139 @@
+h1(#wxstaticbitmap). Wx::StaticBitmap
+
+A static bitmap control displays a bitmap. It is meant for display of the
+small icons in the dialog boxes and is not meant to be a general purpose image
+display control. In particular, under Windows 9x the size of bitmap is limited
+to $64*64$ pixels and thus you should use your own control if you want to
+display larger images portably.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+There are no special styles for this control.
+
+See also "window styles overview":windowstyles.html.
+
+h2. See also
+
+"StaticBitmap":staticbitmap.html, "StaticBox":staticbox.html
+
+h2. Remarks
+
+The bitmap to be displayed should have a small number of colours, such as 16, to avoid
+palette problems.
+
+<div id="methods">
+
+h2. Methods
+
+* "StaticBitmap.new":#StaticBitmap_new
+* "StaticBitmap#create":#StaticBitmap_create
+* "StaticBitmap#get_bitmap":#StaticBitmap_getbitmap
+* "StaticIcon#get_icon":#StaticBitmap_geticon
+* "StaticBitmap#set_bitmap":#StaticBitmap_setbitmap
+* "StaticIcon#set_icon":#StaticBitmap_seticon
+
+</div>
+
+
+
+h3(#StaticBitmap_constr). StaticBitmap.new
+
+  *StaticBitmap.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% label, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                   %(arg-type)Integer% style = 0, 
+                   %(arg-type)String% name = "staticBitmap")
+
+Constructor, creating and showing a text control.
+
+h4. Parameters
+
+* _parent_ Parent window. Should not be NULL.
+* _id_ Control identifier. A value of -1 denotes a default value.
+* _label_ Bitmap label.
+* _pos_ Window position.
+* _size_ Window size.
+* _style_ Window style. See "StaticBitmap":staticbitmap.html.
+* _name_ Window name.
+
+h4. See also
+
+"StaticBitmap#create":staticbitmap.html#StaticBitmap_create
+
+
+h3(#StaticBitmap_create). StaticBitmap#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)String% name = "staticBitmap")
+
+Creation function, for two-step construction. For details see "StaticBitmap.new":staticbitmap.html#StaticBitmap_new.
+
+
+h3(#StaticBitmap_getbitmap). StaticBitmap#get_bitmap
+
+ "Bitmap":bitmap.html *get_bitmap*()
+
+Returns the bitmap currently used in the control. Notice that this method can
+be called even if "set_icon":#StaticBitmap_seticon had been used.
+
+h4. See also
+
+"StaticBitmap#set_bitmap":staticbitmap.html#StaticBitmap_setbitmap
+
+
+h3(#StaticBitmap_geticon). StaticIcon#get_icon
+
+ "Icon":icon.html *get_icon*()
+
+Returns the icon currently used in the control. Notice that this method can
+only be called if "set_icon":#StaticBitmap_seticon had been used: an icon
+can't be retrieved from the control if a bitmap had been set (using 
+"set_bitmap":#StaticBitmap_setbitmap).
+
+h4. See also
+
+"StaticIcon#set_icon":staticicon.html#StaticIcon_seticon
+
+
+h3(#StaticBitmap_setbitmap). StaticBitmap#set_bitmap
+
+  *set_bitmap*(%(arg-type)"Bitmap":bitmap.html% label)
+
+Sets the bitmap label.
+
+h4. Parameters
+
+* _label_ The new bitmap.
+
+h4. See also
+
+"StaticBitmap#get_bitmap":staticbitmap.html#StaticBitmap_getbitmap
+
+
+h3(#StaticBitmap_seticon). StaticIcon#set_icon
+
+  *set_icon*(%(arg-type)"Icon":icon.html% label)
+
+Sets the label to the given icon.
+
+h4. Parameters
+
+* _label_ The new icon.
+
+h4. See also
+
+"StaticIcon#get_icon":staticicon.html#StaticIcon_geticon
+

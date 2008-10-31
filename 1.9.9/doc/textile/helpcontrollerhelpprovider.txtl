@@ -1,0 +1,53 @@
+h1(#wxhelpcontrollerhelpprovider). Wx::HelpControllerHelpProvider
+
+HelpControllerHelpProvider is an implementation of HelpProvider which supports
+both context identifiers and plain text help strings. If the help text is an integer,
+it is passed to HelpController::DisplayContextPopup. Otherwise, it shows the string
+in a tooltip as per SimpleHelpProvider. If you use this with a CHMHelpController instance
+on windows, it will use the native style of tip window instead of "TipWindow":tipwindow.html.
+
+You can use the convenience function *ContextId* to convert an integer context
+id to a string for passing to "Window#set_help_text":window.html#Window_sethelptext.
+
+h2. Derived from
+
+"SimpleHelpProvider":simplehelpprovider.html
+
+"HelpProvider":helpprovider.html
+
+h2. See also
+
+"HelpProvider":helpprovider.html, "SimpleHelpProvider":simplehelpprovider.html, 
+"ContextHelp":contexthelp.html, "Window#set_help_text":window.html#Window_sethelptext, 
+"Window#get_help_text":window.html#Window_gethelptext
+
+<div id="methods">
+
+h2. Methods
+
+* "HelpControllerHelpProvider.new":#HelpControllerHelpProvider_new
+* "HelpControllerHelpProvider#set_help_controller":#HelpControllerHelpProvider_sethelpcontroller
+* "HelpControllerHelpProvider#get_help_controller":#HelpControllerHelpProvider_gethelpcontroller
+
+</div>
+
+
+h3(#HelpControllerHelpProvider_wxhelpcontrollerhelpprovider). HelpControllerHelpProvider.new
+
+  *HelpControllerHelpProvider.new*(%(arg-type)"HelpControllerBase":helpcontrollerbase.html% hc = nil)
+
+Note that the instance doesn't own the help controller. The help controller
+should be deleted separately.
+
+h3(#HelpControllerHelpProvider_sethelpcontroller). HelpControllerHelpProvider#set_help_controller
+
+  *set_help_controller*(%(arg-type)"HelpControllerBase":helpcontrollerbase.html% hc)
+
+Sets the help controller associated with this help provider.
+
+h3(#HelpControllerHelpProvider_gethelpcontroller). HelpControllerHelpProvider#get_help_controller
+
+ "HelpControllerBase":helpcontrollerbase.html *get_help_controller*()
+
+Returns the help controller associated with this help provider.
+

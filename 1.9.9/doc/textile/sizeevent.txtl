@@ -1,0 +1,58 @@
+h1(#wxsizeevent). Wx::SizeEvent
+
+A size event holds information about size change events.
+
+The EVT_SIZE handler function will be called when the window has been resized.
+
+You may wish to use this for frames to resize their child windows as appropriate.
+
+Note that the size passed is of
+the whole window: call "Window#get_client_size":window.html#Window_getclientsize for the area which may be
+used by the application.
+
+When a window is resized, usually only a small part of the window is damaged and you
+may only need to repaint that area. However, if your drawing depends on the size of the window,
+you may need to clear the DC explicitly and repaint the whole window. In which case, you
+may need to call "Window#refresh":window.html#Window_refresh to invalidate the entire window.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a size event, use this event handler macro to direct input to a member
+function that takes a SizeEvent argument.
+
+
+
+|*evt_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_SIZE event.|
+
+h2. See also
+
+"Size":size.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SizeEvent.new":#SizeEvent_new
+* "SizeEvent#get_size":#SizeEvent_getsize
+
+</div>
+
+
+h3(#SizeEvent_new). SizeEvent.new
+
+  *SizeEvent.new*(%(arg-type)"Size":size.html% sz,  %(arg-type)Integer% id = 0)
+
+Constructor.
+
+h3(#SizeEvent_getsize). SizeEvent#get_size
+
+ "Size":size.html *get_size*()
+
+Returns the entire size of the window generating the size change event.
+

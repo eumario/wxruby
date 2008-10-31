@@ -1,0 +1,53 @@
+h1(#wxfiledroptarget). Wx::FileDropTarget
+
+This is a "drop target":droptarget.html which accepts files (dragged
+from File Manager or Explorer).
+
+h2. Derived from
+
+"DropTarget":droptarget.html
+
+h2. See also
+
+"Drag and drop overview":dndoverview.html, "DropSource":dropsource.html, 
+"DropTarget":droptarget.html, "TextDropTarget":textdroptarget.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FileDropTarget.new":#FileDropTarget_new
+* "FileDropTarget#on_drop":#FileDropTarget_ondrop
+* "FileDropTarget#on_drop_files":#FileDropTarget_ondropfiles
+
+</div>
+
+
+h3(#FileDropTarget_wxfiledroptarget). FileDropTarget.new
+
+h3(#FileDropTarget_ondrop). FileDropTarget#on_drop
+
+ Boolean *on_drop*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)% data, 
+                 %(arg-type)Integer% size)
+
+See "DropTarget#on_drop":droptarget.html#DropTarget_ondrop. This function is implemented
+appropriately for files, and calls "FileDropTarget#on_drop_files":filedroptarget.html#FileDropTarget_ondropfiles.
+
+h3(#FileDropTarget_ondropfiles). FileDropTarget#on_drop_files
+
+ Boolean *on_drop_files*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                       %(arg-type)"ArrayString":arraystring.html% filenames)
+
+Override this function to receive dropped files.
+
+h4. Parameters
+
+* _x_ The x coordinate of the mouse.
+* _y_ The y coordinate of the mouse.
+* _filenames_ An array of filenames.
+
+h4. Return value
+
+Return true to accept the data, false to veto the operation.
+
+

@@ -1,0 +1,74 @@
+h1(#wxpaneltabview). Wx::PanelTabView
+
+The PanelTabView is responsible for input and output on a Panel.
+
+h2. Derived from
+
+"TabView":tabview.html
+
+"Object":object.html
+
+h2. See also
+
+"TabView overview":tabviewoverview.html, "TabView":tabview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PanelTabView.new":#PanelTabView_new
+* "PanelTabView#add_tab_window":#PanelTabView_addtabwindow
+* "PanelTabView#clear_windows":#PanelTabView_clearwindows
+* "PanelTabView#get_current_window":#PanelTabView_getcurrentwindow
+* "PanelTabView#get_tab_window":#PanelTabView_gettabwindow
+* "PanelTabView#show_window_for_tab":#PanelTabView_showwindowfortab
+
+</div>
+
+
+h3(#PanelTabView_constr). PanelTabView.new
+
+  *PanelTabView.new*(%(arg-type)"Panel":panel.html% panel, 
+                   %(arg-type)Integer% style = TAB_STYLE_DRAW_BOX TAB_STYLE_COLOUR_INTERIOR)
+
+Constructor. _panel_ should be a TabbedPanel or TabbedDialog: the type will be checked by the view at run time.
+
+_style_ may be a bit list of the following:
+
+
+|TAB_STYLE_DRAW_BOX|Draw a box around the view area. Most commonly used for dialogs.|
+|TAB_STYLE_COLOUR_INTERIOR|Draw tab backgrounds in the specified colour. Omitting this stylewill ensure that the tab background matches the dialog background.|
+
+
+h3(#PanelTabView_addtabwindow). PanelTabView#add_tab_window
+
+  *add_tab_panel*(%(arg-type)Integer% id,  %(arg-type)"Window":window.html% window)
+
+Adds a window to the view. The window is associated with the tab identifier, and will be shown or hidden as the tab
+is selected or deselected.
+
+h3(#PanelTabView_clearwindows). PanelTabView#clear_windows
+
+  *clear_windows*(%(arg-type)Boolean% deleteWindows = true)
+
+Removes the child windows from the view. If _deleteWindows_ is true, the windows will be deleted.
+
+h3(#PanelTabView_getcurrentwindow). PanelTabView#get_current_window
+
+ "Panel":panel.html *get_current_window*()
+
+Returns the child window currently being displayed on the tabbed panel or dialog box.
+
+h3(#PanelTabView_gettabwindow). PanelTabView#get_tab_window
+
+ "Window":window.html *get_tab_window*(%(arg-type)Integer% id)
+
+Returns the window associated with the tab identifier.
+
+h3(#PanelTabView_showwindowfortab). PanelTabView#show_window_for_tab
+
+  *show_window_for_tab*(%(arg-type)Integer% id)
+
+Shows the child window corresponding to the tab identifier, and hides the previously shown window.
+
+

@@ -1,0 +1,352 @@
+h1(#wxscrolledwindow). Wx::ScrolledWindow
+
+The ScrolledWindow class manages scrolling for its client area,
+transforming the coordinates according to the scrollbar positions, and
+setting the scroll positions, thumb sizes and ranges according to the
+area in view.  There are several ways to set the size of the scrolling
+area.
+
+h2. Manual Control of Scrolling
+
+One way is to set the scrollbars directly using a call to
+"ScrolledWindow#set_scrollbars":#ScrolledWindow_setscrollbars. This
+requires you to calculate the scrolling area size and increments yourself.
+
+An additional method of manual control, which requires a little less
+computation of your own, is to set the total size of the scrolling area
+by calling either
+"Window#set_virtual_size":window.html#Window_setvirtualsize, or
+"Window#fit_inside":window.html#Window_fitinside, and setting the
+scrolling increments for it by calling
+"ScrolledWindow#set_scroll_rate":scrolledwindow.html#ScrolledWindow_setscrollrate.
+Scrolling in some orientation is enabled by setting a non zero increment
+for it.
+
+
+h2. Controlling Scrolling with Sizers
+
+The most automatic way is to simply let "sizers":sizer.html determine
+the scrolling area. This is now the default when you set an interior
+sizer into a ScrolledWindow with
+"Window#set_sizer":window.html#Window_setsizer.  The scrolling area will
+be set to the size requested by the sizer and the scrollbars will be
+assigned for each orientation according to the need for them and the
+scrolling increment set by
+"ScrolledWindow#set_scroll_rate":scrolledwindow.html#ScrolledWindow_setscrollrate.
+As above, scrolling is only enabled in orientations with a non-zero
+increment.  You can influence the minimum size of the scrolled area
+controlled by a sizer by calling
+"Window#set_virtual_size_hints":window.html#Window_setvirtualsizehints.
+
+h2. Drawing upon a ScrolledWindow
+
+As with all windows, an application can draw onto a ScrolledWindow using
+a "device context":dc.html.
+
+You have the option of handling the OnPaint handler or overriding the
+"on_draw":#ScrolledWindow_ondraw function, which is passed a
+pre-scrolled device context (prepared by
+"do_prepare_dc":#ScrolledWindow_dopreparedc).
+
+If you don't wish to calculate your own scrolling, you must call
+DoPrepareDC when not drawing from within OnDraw, to set the device
+origin for the device context according to the current scroll position.
+
+A ScrolledWindow will normally scroll itself and therefore its child
+windows as well. It might however be desired to scroll a different
+window than itself: e.g. when designing a spreadsheet, you will normally
+only have to scroll the (usually white) cell area, whereas the (usually
+grey) label area will scroll very differently. For this special purpose,
+you can call "set_target_window":#ScrolledWindow_settargetwindow which
+means that pressing the scrollbars will scroll a different window.
+
+Note that the underlying system knows nothing about scrolling
+coordinates, so that all system functions (mouse events, expose events,
+refresh calls etc) as well as the position of subwindows are relative to
+the "physical" origin of the scrolled window. If the user insert a child
+window at position (10,10) and scrolls the window down 100 pixels
+(moving the child window out of the visible area), the child window will
+report a position of (10,-90).
+
+
+h2. Derived from
+
+"Panel":panel.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+Use ScrolledWindow for applications where the user scrolls by a fixed
+amount, and where a `page' can be interpreted to be the current visible
+portion of the window. For more sophisticated applications, use the
+ScrolledWindow implementation as a guide to build your own scroll
+behaviour.
+
+h2. See also
+
+"ScrollBar":scrollbar.html, "ClientDC":clientdc.html,
+
+"PaintDC":paintdc.html, "VScrolledWindow":vscrolledwindow.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ScrolledWindow.new":#ScrolledWindow_new
+* "ScrolledWindow#calc_scrolled_position":#ScrolledWindow_calcscrolledposition
+* "ScrolledWindow#calc_unscrolled_position":#ScrolledWindow_calcunscrolledposition
+* "ScrolledWindow#create":#ScrolledWindow_create
+* "ScrolledWindow#enable_scrolling":#ScrolledWindow_enablescrolling
+* "ScrolledWindow#get_scroll_pixels_per_unit":#ScrolledWindow_getscrollpixelsperunit
+* "ScrolledWindow#get_view_start":#ScrolledWindow_getviewstart
+* "ScrolledWindow#get_virtual_size":#ScrolledWindow_getvirtualsize
+* "ScrolledWindow#is_retained":#ScrolledWindow_isretained
+* "ScrolledWindow#do_prepare_dc":#ScrolledWindow_dopreparedc
+* "ScrolledWindow#on_draw":#ScrolledWindow_ondraw
+* "ScrolledWindow#prepare_dc":#ScrolledWindow_preparedc
+* "ScrolledWindow#scroll":#ScrolledWindow_scroll
+* "ScrolledWindow#set_scrollbars":#ScrolledWindow_setscrollbars
+* "ScrolledWindow#set_scroll_rate":#ScrolledWindow_setscrollrate
+* "ScrolledWindow#set_target_window":#ScrolledWindow_settargetwindow
+
+</div>
+
+
+
+h3(#ScrolledWindow_new). ScrolledWindow.new
+
+  *ScrolledWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                     %(arg-type)Integer% style = HSCROLL VSCROLL, 
+                     %(arg-type)String% name = "scrolledWindow")
+
+Constructor.
+
+h4. Parameters
+
+* _parent_ Parent window.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position. If a position of (-1, -1) is specified then a default position
+is chosen.
+* _size_ Window size. If a size of (-1, -1) is specified then the window is sized
+appropriately.
+* _style_ Window style. See "ScrolledWindow":scrolledwindow.html.
+* _name_ Window name.
+
+h4. Remarks
+
+The window is initially created without visible scrollbars.  Call
+"ScrolledWindow#set_scrollbars":scrolledwindow.html#ScrolledWindow_setscrollbars
+to specify how big the virtual window size should be.
+
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#ScrolledWindow_calcscrolledposition). ScrolledWindow#calc_scrolled_position
+
+  [ Integer x, Integer y ] *calc_scrolled_position*(%(arg-type)Integer% x,    %(arg-type)Integer% y)
+
+
+Translates the logical coordinates to the device ones. For example, if a
+window is scrolled 10 pixels to the bottom, the device coordinates of
+the origin are (0, 0) (as always), but the logical coordinates are (0,
+10) and so the call to calc_scrolled_position(0, 10) will return [ 0, 0 ]
+
+h4. See also
+
+"calc_unscrolled_position":#ScrolledWindow_calcunscrolledposition
+
+
+h3(#ScrolledWindow_calcunscrolledposition). ScrolledWindow#calc_unscrolled_position
+
+  [ Integer x, Integer y ] *calc_unscrolled_position*( %(arg-type)Integer% x, %(arg-type)Integer% y)
+
+Translates the device coordinates to the logical ones. For example, if a
+window is scrolled 10 pixels to the bottom, the device coordinates of
+the origin are (0, 0) (as always), but the logical coordinates are (0,
+10) and so the call to calc_unscrolled_position(0, 0) will return [0,
+10].
+
+h4. See also
+
+"calc_scrolled_position":#ScrolledWindow_calcscrolledposition
+
+h3(#ScrolledWindow_create). ScrolledWindow#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = HSCROLL VSCROLL, 
+                %(arg-type)String% name = "scrolledWindow")
+
+Creates the window for two-step construction. Derived classes should
+call or replace this function. See
+"ScrolledWindow.new":scrolledwindow.html#ScrolledWindow_new for details.
+
+
+h3(#ScrolledWindow_enablescrolling). ScrolledWindow#enable_scrolling
+
+  *enable_scrolling*(%(arg-type)Boolean% xScrolling,  %(arg-type)Boolean% yScrolling)
+
+Enable or disable physical scrolling in the given direction. Physical
+scrolling is the physical transfer of bits up or down the screen when a
+scroll event occurs. If the application scrolls by a variable amount
+(e.g. if there are different font sizes) then physical scrolling will
+not work, and you should switch it off. Note that you will have to
+reposition child windows yourself, if physical scrolling is disabled.
+
+h4. Parameters
+
+* _xScrolling_ If true, enables physical scrolling in the x direction.
+* _yScrolling_ If true, enables physical scrolling in the y direction.
+
+h4. Remarks
+
+Physical scrolling may not be available on all platforms. Where it is
+available, it is enabled by default.
+
+
+h3(#ScrolledWindow_getscrollpixelsperunit). ScrolledWindow#get_scroll_pixels_per_unit
+
+  [ Integer x_unit, Integer y_unit ] *get_scroll_pixels_per_unit*()
+
+Get the number of pixels per scroll unit (line), in each direction, as
+set by
+"ScrolledWindow#set_scrollbars":scrolledwindow.html#ScrolledWindow_setscrollbars. A
+value of zero indicates no scrolling in that direction.
+
+h4. See also
+
+"ScrolledWindow#set_scrollbars":scrolledwindow.html#ScrolledWindow_setscrollbars, "ScrolledWindow#get_virtual_size":scrolledwindow.html#ScrolledWindow_getvirtualsize
+
+h3(#ScrolledWindow_getviewstart). ScrolledWindow#get_view_start
+
+  [ Integer x, Integer y ] *get_view_start*()
+
+Get the x and y position at which the visible portion of the window starts.
+
+h4. Remarks
+
+If either of the scrollbars is not at the home position, _x_ and/or _y_
+will be greater than zero. Combined with
+"Window#get_client_size":window.html#Window_getclientsize, the
+application can use this function to efficiently redraw only the visible
+portion of the window. The positions are in logical scroll units, not
+pixels, so to convert to pixels you will have to multiply by the number
+of pixels per scroll increment.
+
+h3(#ScrolledWindow_getvirtualsize). ScrolledWindow#get_virtual_size
+
+  [ Integer x, Integer y ] *get_virtual_size*()
+
+Gets the size in device units of the scrollable window area (as opposed
+to the client size, which is the area of the window currently
+visible). Use "DC#device_to_logical_x":dc.html#DC_devicetologicalx and
+"DC#device_to_logical_y":dc.html#DC_devicetologicaly to convert these
+units to logical units.
+
+h3(ScrolledWindow_isretained). ScrolledWindow#is_retained
+
+ Boolean *is_retained*()
+
+Motif only: true if the window has a backing bitmap.
+
+h3(#ScrolledWindow_dopreparedc). ScrolledWindow#do_prepare_dc
+
+ *do_prepare_dc*(%(arg-type)"DC":dc.html% dc) 
+
+Call this function to prepare the device context for drawing a scrolled
+image. It sets the device origin according to the current scroll
+position.
+
+This method is called automatically within the default on_paint event
+handler, so your on_draw override will be passed a 'pre-scrolled' device
+context. However, if you wish to draw from outside of on_draw (via
+on_paint), or you wish to implement on_paint yourself, you must call
+this function yourself.
+
+h3(#ScrolledWindow_ondraw). ScrolledWindow#on_draw
+
+ *on_draw*(%(arg-type)"DC":dc.html% dc) 
+
+Called by the default paint event handler to allow the application to
+define painting behaviour without having to worry about calling
+ScrolledWindow#do_prepare_dc.
+
+Instead of overriding this function you may also just process the paint
+event in the derived class as usual, but then you will have to call
+do_prepare_dc() yourself
+
+h3(#ScrolledWindow_preparedc). ScrolledWindow#prepare_dc
+
+ *on_draw*(%(arg-type)"DC":dc.html% dc)
+
+This function is for backwards compatibility only and simply calls
+do_prepare_dc now. Overriding this method in your derived class is
+useless.
+
+h3(ScrolledWindow_scroll). ScrolledWindow#scroll
+
+ *scroll*(%(arg-type)Integer% x, %(arg-type)Integer% y)
+
+Scrolls a window so the view start is at the given point. _x_ and _y_
+are *scroll units* not *pixels*, so to convert to pixels you will have
+to multiply by the number of pixels per scroll increment (see
+"get_scroll_pixels_per_unit":#ScrolledWindow_getscrollpixelsperunit.
+
+If either parameter is -1, that position will be ignored - there will be
+no change in that direction. 
+
+h3(#ScrolledWindow_setscrollbars). ScrolledWindow#set_scrollbars
+
+ *set_scroll_bars*(%(arg-type)Integer% pixels_per_unit_x, %(arg-type)Integer% pixels_per_unit_y,
+                     %(arg-type)Integer% no_units_x, %(arg-type)Integer% no_units_y,
+                     %(arg-type)Integer% pos_x = 0, %(arg-type)Integer% pos_y = 0,
+                     %(arg-type)Boolean% no_refresh = false)
+
+Sets up vertical and/or horizontal scrollbars. This method accepts
+three pairs of parameters for the x and y axes.
+
+* _pixels_per_unit_ - the number of pixels per scrolling unit in each
+  direction. This is the 'scroll step': the number of pixels moved left
+  or right, or up or down when the scroll arrows are pressed.
+* _no_units_ - the number of units in each direction; this is the total
+  number of scroll steps. This, multiplied by the pixel size of each
+  step, gives the total size of the virtual window.
+* _pos_ - the initial position of the scrolled window
+
+In addition _no_refresh_, if true, means the window will not be
+refreshed.
+
+The following example would set up the scrollbars to create a virtual
+scrolling area of 1000 pixels wide by 500 pixels wide, scrolling in
+increments of 20 pixels. The initial view position would be offset by
+100 pixels in the horizontal direction:
+
+ scrollwin.set_scroll_bars(20, 20, 50, 25, 100, 0)
+
+h3(#ScrolledWindow_setscrollrate). ScrolledWindow#set_scroll_rate
+
+ set_scroll_rate(%(arg-type)Integer% x_step, %(arg-type)Integer% y_step)
+
+Sets the horizontal and vertical scrolling rate only. See the pixels per
+unit parameters to "set_scroll_bars":#ScrolledWindow_setscrollbars
+
+h3(#ScrolledWindow_settargetwindow). ScrolledWindow#set_target_window
+
+ set_target_window(%(arg-type)"Window":window.html% window)
+
+Call this function to tell a ScrolledWindow to perform the actual
+scrolling on a different window (and not on itself). This is useful, for
+example, where there are elements that should remain fixed within the
+scrolling area - for example, the row and column headers within a grid
+or spreadsheet-like widget.

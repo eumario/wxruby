@@ -1,0 +1,34 @@
+h1(#wxhtmlcolourcell). Wx::HtmlColourCell
+
+This cell changes the colour of either the background or the foreground. 
+
+h2. Derived from
+
+"HtmlCell":htmlcell.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlColourCell.new":#HtmlColourCell_new
+
+</div>
+
+
+h3(#HtmlColourCell_wxhtmlcolourcell). HtmlColourCell.new
+
+  *HtmlColourCell.new*(%(arg-type)"Colour":colour.html% clr,  %(arg-type)Integer% flags = HTML_CLR_FOREGROUND)
+
+Constructor.
+
+h4. Parameters
+
+* _clr_ The color
+* _flags_ Can be one of following:
+
+
+|*HTML_CLR_FOREGROUND*|change color of text|
+|*HTML_CLR_BACKGROUND*|change background color|
+
+
+

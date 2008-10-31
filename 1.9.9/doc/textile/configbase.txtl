@@ -1,0 +1,767 @@
+h1(#wxconfigbase). Wx::ConfigBase
+
+ConfigBase class defines the basic interface of all config classes. It can
+not be used by itself (it is an abstract base class) and you will always use one
+of its derivations: "FileConfig":fileconfig.html,
+RegConfig or any other.
+
+However, usually you don't even need to know the precise nature of the class
+you're working with but you would just use the ConfigBase methods. This
+allows you to write the same code regardless of whether you're working with
+the registry under Win32 or text-based config files under Unix (or even
+Windows 3.1 .INI files if you're really unlucky). To make writing the portable
+code even easier, Widgets provides a typedef Config
+which is mapped onto the native ConfigBase implementation on the given
+platform: i.e. RegConfig under Win32 and
+FileConfig otherwise.
+
+See "config overview":configoverview.html for the descriptions of all
+features of this class.
+
+It is highly recommended to use static functions _Get()_ and/or _Set()_, 
+so please have a "look at them.":configstaticfunctions.html
+
+h2. Derived from
+
+No base class
+
+h2. Example
+
+Here is how you would typically use this class:
+
+
+   // using Config instead of writing FileConfig or RegConfig enhances
+   // portability of the code
+   Config *config = new Config("MyAppName");
+ 
+   String str;
+   if ( config->Read("LastPrompt", &str) ) {
+     // last prompt was found in the config file/registry and its value is now
+     // in str
+     ...
+   }
+   else {
+     // no last prompt...
+   }
+ 
+   // another example: using default values and the full path instead of just
+   // key name: if the key is not found , the value 17 is returned
+   long value = config->Read("/LastRun/CalculatedValues/MaxValue", 17);
+   ...
+   ...
+   ...
+   // at the end of the program we would save everything back
+   config->Write("LastPrompt", str);
+   config->Write("/LastRun/CalculatedValues/MaxValue", value);
+ 
+   // the changes will be written back automatically
+   delete config;
+ 
+
+This basic example, of course, doesn't show all Config features, such as
+enumerating, testing for existence and deleting the entries and groups of
+entries in the config file, its abilities to automatically store the default
+values or expand the environment variables on the fly. However, the main idea
+is that using this class is easy and that it should normally do what you
+expect it to.
+
+NB: in the documentation of this class, the words "config file" also mean
+"registry hive" for RegConfig and, generally speaking, might mean any
+physical storage where a ConfigBase-derived class stores its data.
+
+h2. Function groups
+
+
+h3(#wxconfigstaticfunctions). Static functions
+
+These functions deal with the "default" config object. Although its usage is
+not at all mandatory it may be convenient to use a global config object
+instead of creating and deleting the local config objects each time you need
+one (especially because creating a FileConfig object might be a time
+consuming operation). In this case, you may create this global config object
+in the very start of the program and _Set()_ it as the default. Then, from
+anywhere in your program, you may access it using the _Get()_ function.
+Note that you must delete this object (usually in "App#on_exit":app.html#App_onexit) 
+in order to avoid memory leaks, Widgets won't do it automatically.
+
+As it happens, you may even further simplify the procedure described above:
+you may forget about calling _Set()_. When _Get()_ is called and there
+is no current object, it will create one using _Create()_ function. To
+disable this behaviour _DontCreateOnDemand()_ is provided.
+
+*Note:* You should use either _Set()_ or _Get()_ because Widgets
+library itself would take advantage of it and could save various information
+in it. For example "FontMapper":fontmapper.html or Unix version
+of "FileDialog":filedialog.html have the ability to use Config class.
+
+"Set":configbaseset.html
+
+"Get":configbaseget.html
+
+"Create":configbasecreate.html
+
+"dont_create_on_demand":#ConfigBase_dontcreateondemand
+
+
+h3(#congigconstructordestrunew). Constructor and destructor
+
+"ConfigBase":configbasector.html
+
+"DESTRUCTOR":configbasedtor.html
+
+
+h3(#configpathmanagement). Path management
+
+As explained in "config overview":configoverview.html, the config classes
+support a file system-like hierarchy of keys (files) and groups (directories).
+As in the file system case, to specify a key in the config class you must use
+a path to it. Config classes also support the notion of the current group,
+which makes it possible to use the relative paths. To clarify all this, here
+is an example (it is only for the sake of demonstration, it doesn't do anything
+sensible!):
+
+
+   Config *config = new Config("FooBarApp");
+ 
+   // right now the current path is '/'
+   conf->Write("RootEntry", 1);
+ 
+   // go to some other place: if the group(s) don't exist, they will be created
+   conf->SetPath("/Group/Subgroup");
+ 
+   // create an entry in subgroup
+   conf->Write("SubgroupEntry", 3);
+ 
+   // '..' is understood
+   conf->Write("../GroupEntry", 2);
+   conf->SetPath("..");
+ 
+   ASSERT( conf->Read("Subgroup/SubgroupEntry", 0l) == 3 );
+ 
+   // use absolute path: it is allowed, too
+   ASSERT( conf->Read("/RootEntry", 0l) == 1 );
+ 
+
+_Warning_: it is probably a good idea to always restore the path to its
+old value on function exit:
+
+
+   void foo(ConfigBase *config)
+   {
+     String strOldPath = config->GetPath();
+ 
+     config->SetPath("/Foo/Data");
+     ...
+ 
+     config->SetPath(strOldPath);
+   }
+ 
+
+because otherwise the assert in the following example will surely fail
+(we suppose here that _foo()_ function is the same as above except that it
+doesn't save and restore the path):
+
+
+   void bar(ConfigBase *config)
+   {
+     config->Write("Test", 17);
+ 
+     foo(config);
+ 
+     // we're reading "/Foo/Data/Test" here! -1 will probably be returned...
+     ASSERT( config->Read("Test", -1) == 17 );
+   }
+ 
+
+Finally, the path separator in ConfigBase and derived classes is always '/',
+regardless of the platform (i.e. it is *not* '$$' under Windows).
+
+"set_path":#ConfigBase_setpath
+
+"get_path":#ConfigBase_getpath
+
+
+h3(#configenumeration). Enumeration
+
+The functions in this section allow to enumerate all entries and groups in the
+config file. All functions here return  when there are no more items.
+
+You must pass the same index to GetNext and GetFirst (don't modify it).
+Please note that it is *not* the index of the current item (you will have
+some great surprises with RegConfig if you assume this) and you shouldn't
+even look at it: it is just a "cookie" which stores the state of the
+enumeration. It can't be stored inside the class because it would prevent you
+from running several enumerations simultaneously, that's why you must pass it
+explicitly.
+
+Having said all this, enumerating the config entries/groups is very simple:
+
+
+   ConfigBase *config = ...;
+   ArrayString aNames;
+ 
+   // enumeration variables
+   String str;
+   long dummy;
+ 
+   // first enum all entries
+   bool bCont = config->GetFirstEntry(str, dummy);
+   while ( bCont ) {
+     aNames.Add(str);
+ 
+     bCont = GetConfig()->GetNextEntry(str, dummy);
+   }
+ 
+   ... we have all entry names in aNames...
+ 
+   // now all groups...
+   bCont = GetConfig()->GetFirstGroup(str, dummy);
+   while ( bCont ) {
+     aNames.Add(str);
+ 
+     bCont = GetConfig()->GetNextGroup(str, dummy);
+   }
+ 
+   ... we have all group (and entry) names in aNames...
+ 
+ 
+
+There are also functions to get the number of entries/subgroups without
+actually enumerating them, but you will probably never need them.
+
+"get_first_group":#ConfigBase_getfirstgroup
+
+"get_next_group":#ConfigBase_getnextgroup
+
+"get_first_entry":#ConfigBase_getfirstentry
+
+"get_next_entry":#ConfigBase_getnextentry
+
+"get_number_of_entries":#ConfigBase_getnumberofentries
+
+"get_number_of_groups":#ConfigBase_getnumberofgroups
+
+
+h3(#configtestsofexistence). Tests of existence
+
+"has_group":#ConfigBase_hasgroup
+
+"has_entry":#ConfigBase_hasentry
+
+"Exists":configbaseexists.html
+
+"get_entry_type":#ConfigBase_getentrytype
+
+
+h3(#configmiscellaneous). Miscellaneous functions
+
+"get_app_name":#ConfigBase_getappname
+
+"get_vendor_name":#ConfigBase_getvendorname
+
+"set_umask":#ConfigBase_setumask
+
+
+h3(#configkeyaccess). Key access
+
+These function are the core of ConfigBase class: they allow you to read and
+write config file data. All _Read_ function take a default value which
+will be returned if the specified key is not found in the config file.
+
+Currently, only two types of data are supported: string and long (but it might
+change in the near future). To work with other types: for _int_ or 
+bool you can work with function taking/returning _long_ and just use the
+casts. Better yet, just use _long_ for all variables which you're going to
+save in the config file: chances are that @sizeof(bool) == sizeof(int) == sizeof(long)@ anyhow on your system. For _float_, _double_ and, in
+general, any other type you'd have to translate them to/from string
+representation and use string functions.
+
+Try not to read long values into string variables and vice versa: although it
+just might work with FileConfig, you will get a system error with
+RegConfig because in the Windows registry the different types of entries are
+indeed used.
+
+Final remark: the _szKey_ parameter for all these functions can contain an
+arbitrary path (either relative or absolute), not just the key name.
+
+"Read":configbaseread.html
+
+"Write":configbasewrite.html
+
+"Flush":configbaseflush.html
+
+
+h3(#configrenaming). Rename entries/groups
+
+The functions in this section allow to rename entries or subgroups of the
+current group. They will return  on error. typically because either the
+entry/group with the original name doesn't exist, because the entry/group with
+the new name already exists or because the function is not supported in this
+Config implementation.
+
+"rename_entry":#ConfigBase_renameentry
+
+"rename_group":#ConfigBase_renamegroup
+
+
+h3(#configdeleting). Delete entries/groups
+
+The functions in this section delete entries and/or groups of entries from the
+config file. _DeleteAll()_ is especially useful if you want to erase all
+traces of your program presence: for example, when you uninstall it.
+
+"delete_entry":#ConfigBase_deleteentry
+
+"delete_group":#ConfigBase_deletegroup
+
+"delete_all":#ConfigBase_deleteall
+
+
+h3(#configoptions). Options
+
+Some aspects of ConfigBase behaviour can be changed during run-time. The
+first of them is the expansion of environment variables in the string values
+read from the config file: for example, if you have the following in your
+config file:
+
+
+   # config file for my program
+   UserData = $HOME/data
+ 
+   # the following syntax is valud only under Windows
+   UserData = 
+the call to @config->Read("UserData")@ will return something like
+@"/home/zeitlin/data"@ if you're lucky enough to run a Linux system ;-)
+
+Although this feature is very useful, it may be annoying if you read a value
+which containts '\$' or '\%' symbols (\% is used for environment variables
+expansion under Windows) which are not used for environment variable
+expansion. In this situation you may call SetExpandEnvVars(false) just before
+reading this value and SetExpandEnvVars(true) just after. Another solution
+would be to prefix the offending symbols with a backslash.
+
+The following functions control this option:
+
+"is_expanding_env_vars":#ConfigBase_isexpandingenvvars
+
+"set_expand_env_vars":#ConfigBase_setexpandenvvars
+
+"set_record_defaults":#ConfigBase_setrecorddefaults
+
+"is_recording_defaults":#ConfigBase_isrecordingdefaults
+
+2
+
+h4. Members
+
+
+
+
+h3(#ConfigBase_new). ConfigBase.new
+
+  *ConfigBase.new*(%(arg-type)String% appName = '',  %(arg-type)String% vendorName = '', 
+                 %(arg-type)String% localFilename = '', 
+                 %(arg-type)String% globalFilename = '', 
+                 %(arg-type)Integer% style = 0, 
+                 %(arg-type)"MBConv":mbconv.html% conv = ConvUTF8)
+
+This is the default and only constructor of the ConfigBase class, and
+derived classes.
+
+h4. Parameters
+
+* _appName_ The application name. If this is empty, the class will
+normally use "App#get_app_name":app.html#App_getappname to set it. The
+application name is used in the registry key on Windows, and can be used to
+deduce the local filename parameter if that is missing.
+* _vendorName_ The vendor name. If this is empty, it is assumed that
+no vendor name is wanted, if this is optional for the current config class.
+The vendor name is appended to the application name for RegConfig.
+* _localFilename_ Some config classes require a local filename. If this
+is not present, but required, the application name will be used instead.
+* _globalFilename_ Some config classes require a global filename. If
+this is not present, but required, the application name will be used instead.
+* _style_ Can be one of CONFIG_USE_LOCAL_FILE and
+CONFIG_USE_GLOBAL_FILE. The style interpretation depends on the config
+class and is ignored by some. For FileConfig, these styles determine whether
+a local or global config file is created or used. If the flag is present but
+the parameter is empty, the parameter will be set to a default. If the
+parameter is present but the style flag not, the relevant flag will be added
+to the style. For FileConfig you can also add CONFIG_USE_RELATIVE_PATH 
+by logically or'ing it to either of the _FILE options to tell FileConfig to 
+use relative instead of absolute paths.  For FileConfig, you can also 
+add CONFIG_USE_NO_ESCAPE_CHARACTERS which will turn off character 
+escaping for the values of entries stored in the config file: for example 
+a _foo_ key with some backslash characters will be stored as @foo=C:$@@$mydir@ instead
+of the usual storage of @foo=C:$@@$mydir@.
+For RegConfig, this flag refers to HKLM, and provides read-only access.
+
+The CONFIG_USE_NO_ESCAPE_CHARACTERS style can be helpful if your config 
+file must be read or written to by a non-Widgets program (which might not 
+understand the escape characters). Note, however, that if 
+CONFIG_USE_NO_ESCAPE_CHARACTERS style is used, it is is now 
+your application's responsibility to ensure that there is no newline or 
+other illegal characters in a value, before writing that value to the file.
+* _conv_ This parameter is only used by FileConfig when compiled
+in Unicode mode. It specifies the encoding in which the configuration file
+is written.
+
+
+h4. Remarks
+
+By default, environment variable expansion is on and recording defaults is
+off.
+
+
+  *destructor*()
+
+Empty but ensures that dtor of all derived classes is virtual.
+
+
+h3(#ConfigBase_create). ConfigBase#create
+
+ "ConfigBase":configbase.html *create*()
+
+Create a new config object: this function will create the "best"
+implementation of Config available for the current platform, see comments
+near the definition of CONFIG_WIN32_NATIVE for details. It returns the
+created object and also sets it as the current one.
+
+
+h3(#ConfigBase_dontcreateondemand). ConfigBase#dont_create_on_demand
+
+  *dont_create_on_demand*()
+
+Calling this function will prevent _Get()_ from automatically creating a
+new config object if the current one is NULL. It might be useful to call it
+near the program end to prevent "accidental" creation of a new config object.
+
+
+h3(#ConfigBase_deleteall). ConfigBase#delete_all
+
+ Boolean *delete_all*()
+
+Delete the whole underlying object (disk file, registry key, ...). Primarly
+for use by uninstallation routine.
+
+
+h3(#ConfigBase_deleteentry). ConfigBase#delete_entry
+
+ Boolean *delete_entry*(%(arg-type)String% key,  %(arg-type)Boolean% bDeleteGroupIfEmpty = true)
+
+Deletes the specified entry and the group it belongs to if it was the last key
+in it and the second parameter is true.
+
+
+h3(#ConfigBase_deletegroup). ConfigBase#delete_group
+
+ Boolean *delete_group*(%(arg-type)String% key)
+
+Delete the group (with all subgroups)
+
+
+h3(#ConfigBase_exists). ConfigBase#exists
+
+ Boolean *exists*(%(arg-type)String% strName)
+
+returns  if either a group or an entry with a given name exists
+
+
+h3(#ConfigBase_flush). ConfigBase#flush
+
+ Boolean *flush*(%(arg-type)Boolean% bCurrentOnly = false)
+
+permanently writes all changes (otherwise, they're only written from object's
+destructor)
+
+
+h3(#ConfigBase_get). ConfigBase#get
+
+ "ConfigBase":configbase.html *get*(%(arg-type)Boolean% CreateOnDemand = true)
+
+Get the current config object. If there is no current object and
+_CreateOnDemand_ is true, creates one
+(using _Create_) unless DontCreateOnDemand was called previously.
+
+
+h3(#ConfigBase_getappname). ConfigBase#get_app_name
+
+ String *get_app_name*()
+
+Returns the application name.
+
+
+h3(#ConfigBase_getentrytype). ConfigBase#get_entry_type
+
+ enum ConfigBase::EntryType *get_entry_type*(%(arg-type)String% name)
+
+Returns the type of the given entry or _Unknown_ if the entry doesn't
+exist. This function should be used to decide which version of Read() should
+be used because some of Config implementations will complain about type
+mismatch otherwise: e.g., an attempt to read a string value from an integer
+key with RegConfig will fail.
+
+The result is an element of enum EntryType:
+
+
+   enum EntryType
+   {
+     Type_Unknown,
+     Type_String,
+     Type_Boolean,
+     Type_Integer,
+     Type_Float
+   };
+ 
+
+
+h3(#ConfigBase_getfirstgroup). ConfigBase#get_first_group
+
+ Boolean *get_first_group*(%(arg-type)String% str,  %(arg-type)Integer% index)
+
+Gets the first group.
+
+
+
+
+
+
+h3(#ConfigBase_getfirstentry). ConfigBase#get_first_entry
+
+ Boolean *get_first_entry*(%(arg-type)String% str,  %(arg-type)Integer% index)
+
+Gets the first entry.
+
+
+
+
+
+
+h3(#ConfigBase_getnextgroup). ConfigBase#get_next_group
+
+ Boolean *get_next_group*(%(arg-type)String% str,  %(arg-type)Integer% index)
+
+Gets the next group.
+
+
+
+
+
+
+h3(#ConfigBase_getnextentry). ConfigBase#get_next_entry
+
+ Boolean *get_next_entry*(%(arg-type)String% str,  %(arg-type)Integer% index)
+
+Gets the next entry.
+
+
+
+
+
+
+h3(#ConfigBase_getnumberofentries). ConfigBase#get_number_of_entries
+
+ uint  *get_number_of_entries*(%(arg-type)Boolean% bRecursive = false)
+
+
+h3(#ConfigBase_getnumberofgroups). ConfigBase#get_number_of_groups
+
+ uint *get_number_of_groups*(%(arg-type)Boolean% bRecursive = false)
+
+Get number of entries/subgroups in the current group, with or without its
+subgroups.
+
+
+h3(#ConfigBase_getpath). ConfigBase#get_path
+
+ String *get_path*()
+
+Retrieve the current path (always as absolute path).
+
+
+h3(#ConfigBase_getvendorname). ConfigBase#get_vendor_name
+
+ String *get_vendor_name*()
+
+Returns the vendor name.
+
+
+h3(#ConfigBase_hasentry). ConfigBase#has_entry
+
+ Boolean *has_entry*(%(arg-type)String% strName)
+
+returns  if the entry by this name exists
+
+
+h3(#ConfigBase_hasgroup). ConfigBase#has_group
+
+ Boolean *has_group*(%(arg-type)String% strName)
+
+returns  if the group by this name exists
+
+
+h3(#ConfigBase_isexpandingenvvars). ConfigBase#is_expanding_env_vars
+
+ Boolean *is_expanding_env_vars*()
+
+Returns  if we are expanding environment variables in key values.
+
+
+h3(#ConfigBase_isrecordingdefaults). ConfigBase#is_recording_defaults
+
+ Boolean *is_recording_defaults*()
+
+Returns  if we are writing defaults back to the config file.
+
+
+h3(#ConfigBase_read). ConfigBase#read
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)String% str)
+
+Read a string from the key, returning  if the value was read. If the key
+was not found, _str_ is not changed.
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)String% str,  %(arg-type)String% defaultVal)
+
+Read a string from the key. The default value is returned if the key was not
+found.
+
+Returns  if value was really read,  if the default was used.
+
+ String *read*(%(arg-type)String% key,  %(arg-type)String% defaultVal)
+
+Another version of _Read()_, returning the string value directly.
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Integer% l)
+
+Reads a long value, returning  if the value was found. If the value was
+not found, _l_ is not changed.
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Integer% l, %(arg-type)Integer% defaultVal)
+
+Reads a long value, returning  if the value was found. If the value was
+not found, _defaultVal_ is used instead.
+
+ long  *read*(%(arg-type)String% key,  %(arg-type)Integer% defaultVal)
+
+Reads a long value from the key and returns it. _defaultVal_ is returned
+if the key is not found.
+
+NB: writing
+
+
+
+     conf->Read("key", 0);
+ 
+
+
+won't work because the call is ambiguous: compiler can not choose between two
+_Read_ functions. Instead, write:
+
+
+
+     conf->Read("key", 0l);
+ 
+
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Float% d)
+
+Reads a double value, returning  if the value was found. If the value was
+not found, _d_ is not changed.
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Float% d,  %(arg-type)Float% defaultVal)
+
+Reads a double value, returning  if the value was found. If the value was
+not found, _defaultVal_ is used instead.
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Boolean% b)
+
+Reads a bool value, returning  if the value was found. If the value was
+not found, _b_ is not changed.
+
+ Boolean *read*(%(arg-type)String% key,  %(arg-type)Boolean% d, %(arg-type)Boolean% defaultVal)
+
+Reads a bool value, returning  if the value was found. If the value was
+not found, _defaultVal_ is used instead.
+
+
+
+
+
+
+h3(#ConfigBase_renameentry). ConfigBase#rename_entry
+
+ Boolean *rename_entry*(%(arg-type)String% oldName,  %(arg-type)String% newName)
+
+Renames an entry in the current group. The entries names (both the old and
+the new one) shouldn't contain backslashes, i.e. only simple names and not
+arbitrary paths are accepted by this function.
+
+Returns  if _oldName_ doesn't exist or if _newName_ already
+exists.
+
+
+h3(#ConfigBase_renamegroup). ConfigBase#rename_group
+
+ Boolean *rename_group*(%(arg-type)String% oldName,  %(arg-type)String% newName)
+
+Renames a subgroup of the current group. The subgroup names (both the old and
+the new one) shouldn't contain backslashes, i.e. only simple names and not
+arbitrary paths are accepted by this function.
+
+Returns  if _oldName_ doesn't exist or if _newName_ already
+exists.
+
+
+h3(#ConfigBase_set). ConfigBase#set
+
+ "ConfigBase":configbase.html *set*(%(arg-type)"ConfigBase":configbase.html% pConfig)
+
+Sets the config object as the current one, returns the pointer to the previous
+current object (both the parameter and returned value may be NULL)
+
+
+h3(#ConfigBase_setexpandenvvars). ConfigBase#set_expand_env_vars
+
+  *set_expand_env_vars *(%(arg-type)Boolean% bDoIt = true)
+
+Determine whether we wish to expand environment variables in key values.
+
+
+h3(#ConfigBase_setpath). ConfigBase#set_path
+
+  *set_path*(%(arg-type)String% strPath)
+
+Set current path: if the first character is '/', it is the absolute path,
+otherwise it is a relative path. '..' is supported. If strPath doesn't
+exist it is created.
+
+
+h3(#ConfigBase_setrecorddefaults). ConfigBase#set_record_defaults
+
+  *set_record_defaults*(%(arg-type)Boolean% bDoIt = true)
+
+Sets whether defaults are recorded to the config file whenever an attempt to
+read the value which is not present in it is done.
+
+If on (default is off) all default values for the settings used by the program
+are written back to the config file. This allows the user to see what config
+options may be changed and is probably useful only for FileConfig.
+
+
+h3(#ConfigBase_write). ConfigBase#write
+
+ Boolean *write*(%(arg-type)String% key,  %(arg-type)String% value)
+
+ Boolean *write*(%(arg-type)String% key,  %(arg-type)Integer% value)
+
+ Boolean *write*(%(arg-type)String% key,  %(arg-type)Float% value)
+
+ Boolean *write*(%(arg-type)String% key,  %(arg-type)Boolean% value)
+
+These functions write the specified value to the config file and return  on success.
+
+
+
+
+

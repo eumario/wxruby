@@ -1,0 +1,169 @@
+h1(#wxpalette). Wx::Palette
+
+A palette is a table that maps pixel values to RGB colours. It allows the colours
+of a low-depth bitmap, for example, to be mapped to the available colours in a display.
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Predefined objects
+
+Objects:
+
+*NullPalette*
+
+h2. See also
+
+"DC#set_palette":dc.html#DC_setpalette, "Bitmap":bitmap.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Palette.new":#Palette_new
+* "Palette#create":#Palette_create
+* "Palette#get_colours_count":#Palette_getcolourscount
+* "Palette#get_pixel":#Palette_getpixel
+* "Palette#get_rgb":#Palette_getrgb
+* "Palette#ok":#Palette_ok
+
+</div>
+
+
+h3(#Palette_new). Palette.new
+
+  *Palette.new*(%(arg-type)"Palette":palette.html% palette)
+
+Copy constructor. This uses reference counting so is a cheap operation.
+
+  *Palette.new*(%(arg-type)Integer% n,  %(arg-type)Integer% red, 
+ %(arg-type)Integer% green, 
+              %(arg-type)Integer% blue)
+
+Creates a palette from arrays of size _n_, one for each
+red, blue or green component.
+
+h4. Parameters
+
+* _palette_ A pointer or reference to the palette to copy.
+* _n_ The number of indices in the palette.
+* _red_ An array of red values.
+* _green_ An array of green values.
+* _blue_ An array of blue values.
+
+h4. See also
+
+"Palette#create":palette.html#Palette_create
+
+
+
+  *destructor*()
+
+Destructor.
+
+h3(#Palette_create). Palette#create
+
+ Boolean *create*(%(arg-type)Integer% n,  %(arg-type)Integer% red,   %(arg-type)Integer% green, 
+                %(arg-type)Integer% blue)
+
+Creates a palette from arrays of size _n_, one for each
+red, blue or green component.
+
+h4. Parameters
+
+* _n_ The number of indices in the palette.
+* _red_ An array of red values.
+* _green_ An array of green values.
+* _blue_ An array of blue values.
+
+h4. Return value
+
+true if the creation was successful, false otherwise.
+
+h4. See also
+
+"Palette.new":palette.html#Palette_new
+
+h3(#Palette_getcolourscount). Palette#get_colours_count
+
+ Integer *get_colours_count*()
+
+Returns number of entries in palette.
+
+h3(#Palette_getpixel). Palette#get_pixel
+
+ Integer *get_pixel*(%(arg-type)Integer% red,  %(arg-type)Integer% green,   %(arg-type)Integer% blue)
+
+Returns a pixel value (index into the palette) for the given RGB values.
+
+h4. Parameters
+
+* _red_ Red value.
+* _green_ Green value.
+* _blue_ Blue value.
+
+h4. Return value
+
+The nearest palette index.
+
+h4. See also
+
+"Palette#get_rgb":palette.html#Palette_getrgb
+
+h3(#Palette_getrgb). Palette#get_rgb
+
+ Boolean *get_rgb*(%(arg-type)Integer% pixel,  %(arg-type)Integer% red,  %(arg-type)Integer% green, 
+                  %(arg-type)Integer% blue)
+
+Returns RGB values for a given palette index.
+
+h4. Parameters
+
+* _pixel_ The palette index.
+* _red_ Receives the red value.
+* _green_ Receives the green value.
+* _blue_ Receives the blue value.
+
+h4. Return value
+
+true if the operation was successful.
+
+h4. See also
+
+"Palette#get_pixel":palette.html#Palette_getpixel
+
+
+
+h3(#Palette_ok). Palette#ok
+
+ Boolean *ok*()
+
+Returns true if palette data is present.
+
+h3(#Palette_assignment). Palette#=
+
+ "Palette":palette.html *operator $=$*(%(arg-type)"Palette":palette.html% palette)
+
+Assignment operator, using reference counting. Returns a reference
+to `this'.
+
+h3(#Palette_equals). Palette#==
+
+ Boolean *operator $==$*(%(arg-type)"Palette":palette.html% palette)
+
+Equality operator. Two palettes are equal if they contain pointers
+to the same underlying palette data. It does not compare each attribute,
+so two independently-created palettes using the same parameters will
+fail the test.
+
+h3(#Palette_notequals). Palette#!=
+
+ Boolean *operator $!=$*(%(arg-type)"Palette":palette.html% palette)
+
+Inequality operator. Two palettes are not equal if they contain pointers
+to different underlying palette data. It does not compare each attribute.
+
+

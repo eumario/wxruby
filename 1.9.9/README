@@ -1,0 +1,297 @@
+README for wxruby2
+
+Version 1.9.x
+
+This is wxruby2, the second generation of wxRuby, a library 
+that allows Ruby programs to use the wxWidgets GUI toolkit. 
+It is released under a permissive MIT-style license
+(see the LICENSE file for details).
+
+This version is a beta release, in preparation for a stable release of
+wxruby version 2.0.
+
+------------------------FAQ---------------------------
+
+- What platforms and operating systems are supported in wxRuby2?
+
+  Currently the following are fully supported:
+
+  Windows NT/2000/XP/Vista (i686)
+  OS X 10.4+ (i686 and PowerPc)
+  Linux (i686 + AMD-64)
+
+  It is unlikely that support for old Windows OS's (3.1, 95, 98, ME)
+  will be added to wxRuby2 in the near future, as these operating
+  systems have very limited support for Unicode.
+
+- Why would I choose wxruby over FXRuby, Ruby/GTK, or one of the other 
+   GUI toolkits? Isn't wxruby arriving "too late"?
+   
+   There are several great GUI toolkits available for Ruby, but we 
+   like wxruby better because it has a combination of features that no 
+   other toolkit has:
+   
+     - Cross-platform (MSWindows, Mac OS X, Linux)
+     - Native widgets when possible
+     - Provides a wide selection of widgets
+     - Simple license that is compatible with proprietary and Free Software 
+     - Mature foundation (wxWidgets has been around for over 10 years)
+
+   The really big feature is native widgets. The only other cross-platform 
+   toolkits that use native widgets are either limited (Tk) or expensive if 
+   you want to develop proprietary software (Qt). We are not saying that 
+   those toolkits are bad! Just that wxruby offers a unique set of 
+   features.
+   
+- Why are native widgets important or helpful?
+
+   For one thing, it means that end-users do not have to adjust to a 
+   "foreign" interface. It also ensures maximum compatibility with 
+   "assistive technology" such as screen readers for blind users. 
+   It also allows apps to respect any themes the user may have chosen 
+   through their operating system. No matter how hard a toolkit may try 
+   to emulate a particular UI, there will always be differences in the 
+   look or behavior.
+   
+- How does wxruby2 relate to wxruby (and the wxruby 0.6.0 release)?
+
+   wxruby2 is the "next generation" of wxruby. It is being developed 
+   by the same wxruby team, and is intended to replace the older 
+   code base. wxruby2 is built using SWIG, a powerful tool that makes 
+   it much easier to create and maintain wrappers around C/C++ libraries.
+   
+- Why should I use wxruby2 instead of wxruby?
+
+   First, because development on the original wxruby codebase has stopped. 
+   Everyone is working on wxruby2, so it will continue to improve. Beyond 
+   that, wxruby2 has these advantages over wxruby 0.6.0:
+   
+     - Available as binary gems for MSWindows, OS X, and Linux (GTK)
+	 - Support for more classes, and more methods within classes
+	 - Unicode support
+	 - Vastly improved support for OS X
+	 - Looks much better under Linux because it uses GTK+2
+	 - Simpler and more permissive license 
+	 - Wraps wxWidgets 2.8.7 instead of the older 2.4 series
+	 
+- Is wxruby2 ready for "production" use?
+
+  Yes, pretty much. This is a beta release, and there may be some bugs
+  in some methods, or memory leaks. This release includes all the
+  classes and features that are proposed for inclusion in wxruby 2.0.
+
+  It is considerably more stable and fully-featured than the old 0.6.0
+  release, which was never really stable enough for heavy-duty
+  production use.
+   
+- Does wxruby2 support the Xxx class?
+
+   See the "Documentation" section of the README file, or check the 
+   wxruby web site: http://wxruby.org
+   
+- How are the wxruby 0.6.0 and wxruby2 licenses different?
+
+  wxruby 0.6.0 was released under the wxWindows license, which is a 
+  modified LGPL. It is a good, fair license, allowing use in both Free 
+  Software and proprietary applications. However, it is long and complex, 
+  and is more appropriate for compiled code. wxruby2 is available under a 
+  *very* simple MIT-style license, which allows just about any use with 
+  very few restrictions.
+   
+- I am getting an error trying to compile wxruby2
+
+  Please double-check the requirements. You may be using the wrong
+  version of SWIG, wxWidgets, or some other tool. Double-check the
+  instructions on the wxRuby wiki (http://wxruby.rubyforge.org/)
+  
+  If you need help, please ask your question on the wxruby mailing list 
+  (see the link at http://wxruby.org). 
+
+- I am getting an error trying to run any wxruby2 application, such as 
+  the samples that are included in the gem.
+  
+  If you are using Linux, be sure you have configured your system to 
+  have RUBYOPT=-rubygems. This can be done in .bashrc or /etc/environment, 
+  depending on your distribution and preferences. [More details to follow].
+  
+- Why aren't the wx network, file, date, database and other non-GUI
+  classes supported?
+
+  Because Ruby has its own versions of each of them, providing
+  cross-platform abstractions of these functions with familiar syntax
+  and methods. We assume you are writing your application in Ruby, so it
+  makes sense to keep as much code as possible in Ruby. We have only
+  wrapped the wx classes that are necessary to write GUI code.
+
+  There may be some advantages to porting the Wx network classes into
+  ruby, if they work better with multi-(native)-threaded code. This is
+  currently under evaluation.
+  
+- Why has it taken so long for wxruby2 to be released?
+
+  Nobody is getting paid to develop wxruby, so each of the wxruby developers 
+  are limited in the amount of time they can dedicate to the project. We are 
+  always looking for more volunteers to help code, test, document, manage 
+  the bug list, handle publicity, or do other necessary chores.
+  
+  Wrapping wx is a big project that requires a wide variety of skills. As of 
+  February 2008, the wxRuby project has over 100,000 lines of code, including 
+  ruby, C++, and SWIG scripts. If we weren't using SWIG it would be far bigger.
+
+
+For more details, see the project home page:
+  http://wxruby.org/
+
+
+------------------------USING WXRUBY---------------------------
+INSTALLING:
+
+wxRuby is available as binary gems for MS Windows, Mac OS X, and Linux
+with GTK+ 2. Unless you wish to work on wxRuby itself, we strongly
+recommend installing the gem rather than building from source.
+
+REQUIREMENTS TO CREATE AND RUN WXRUBY APPS:
+
+- Ruby 1.8
+- MS Windows NT/2000/XP/Vista, Mac OS X 10.4+, or Linux with GTK+ 2, 
+
+- On Windows, gdiplus.pll and msvcp71.dll. These are available on most
+  systems, but can be downloaded and installed for free from the
+  internet
+- On Linux, libgstreamer. This can be installed from most package sources
+
+SAMPLES:
+
+There is a samples/ directory containing many small sample wxRuby apps 
+that demonstrate how to use various classes. A few samples do not work 
+across all platforms at this time.
+	
+The bigdemo sample is fairly comprehensive, but not all of the 
+sections work on all platforms. 
+
+
+WRITING YOUR OWN WXRUBY APP:
+
+To use wxruby-swig in your app, use:
+  require 'wx'
+  
+samples/minimal.rb can be used as a template for creating your 
+own wxruby application.
+
+
+DOCUMENTATION:
+
+- wxRuby-specific API documentation can be found here:
+
+    http://wxruby.org/doc/
+	
+   (Note: This documentation is auto-generated from the C++ wxWidgets API
+   docs. There are some broken links, some sample code in C++, and some
+   sections which do not apply to ruby. The documentation is continually
+   being improved.)
+
+- The latest version of the documentation can be downloaded from the
+  wxRuby 'Files' section on Rubyforge.
+
+  http://www.rubyforge.org/frs/?group_id=35
+
+- Tables summarizing which wx classes are and are not supported can 
+  be found here:
+  
+    http://wxruby.org/wiki/wiki.pl?ClassesSupportedByCategory
+	
+- Most wxWidgets and wxPython tutorials and references can also be used, if 
+  you remember that wxRuby uses ruby_style_naming for methods and variables 
+  instead of MixedCase as used by wxWidgets.
+  
+
+
+API DIFFERENCES FROM WXWIDGETS:
+- In many cases, wxRuby follows the lead of wxPython (or in some cases, 
+  wxPerl), adjusting certain method calls when the C++ style doesn't fit 
+  dynamic languages.
+- Since initialize is reserved in ruby, use SplitterWindow#init instead.
+- Many wx classes have not been wrapped because native ruby classes work 
+  as well or better. These include wxDateTime, wxString, networking 
+  classes, database classes.
+- log_message and log_status take a single string parameter, 
+  rather than a format string followed by additional values 
+  to be inserted. Use Ruby's sprintf if required.
+
+----------------------COMPILING WXRUBY--------------------------
+REQUIREMENTS TO COMPILE/BUILD WXRUBY ITSELF
+
+- rake 
+- SWIG, version 1.3.32 or later. Earlier versions will not work correctly.
+- wxWidgets 2.8.x SDK. See further information on the wxruby website for
+  recommended compile-time options for wxWidgets.
+
+
+OBTAINING THE SOURCE:
+
+Source code is hosted in Subversion at rubyforge.org. See the links on
+the wxruby web site (http://wxruby.org). Check out the wxruby2
+Subversion module (not the old wxruby module).
+  
+
+BUILDING:
+
+From the top-level directory (typically wxruby2/), 
+just start the rake build with the command:
+
+  rake
+  
+There is no ./configure step, nor do you need to run ruby extconf.rb.
+
+
+INSTALLING THE LIBRARY:
+
+You can install the library using:
+  rake install
+  
+Note that on some systems you may need to be "root" to do this.
+To manually install, copy all the files in the lib/ subdirectory 
+to somewhere on your ruby library path, such as a ruby extensions 
+directory.
+
+
+PORTING TO OTHER PLATFORMS
+
+Platform-dependent rakefiles are used to set up compiler-specific
+settings. The following platforms are currently fully supported:
+
+  Mac OSX (gcc):        rakemacosx.rb
+  MS Windows (VC++):    rakemswin.rb
+  Linux (GTK2 + gcc):   rakelinux.rb
+  
+For other platforms, you may need to edit the appropriate
+platform-dependent rake file if your system is not yet supported, or if
+it is unusual. These files are found in the rake subdirectory:
+
+  MS Windows BC++:      rakebccwin.rb
+  MS Windows MingGW:    rakemingw.rb
+  MS Windows Cygwin:    rakecygwin.rb
+  NetBSD:               rakenetbsd.rb
+
+When editing a platform-dependent rakefile, you might 
+merely need to set one or more of the following variables:
+
+    $extra_cppflags
+    $extra_ldflags
+    $extra_objs
+    $extra_libs
+
+
+CREDITS
+
+Kevin Smith set up the wxruby2 project using SWIG and did much of the
+work that still forms the core of the library in its present form. Over
+the years dozens of volunteers have contributed invaluable patches and
+new functionality. The list is too long to give here, but their
+contributions are recorded in the wxruby mailing list archives.
+
+-----------------------------------------------------------
+
+LEAD MAINTAINER:
+  Alex Fenton
+  alex at pressure dot to

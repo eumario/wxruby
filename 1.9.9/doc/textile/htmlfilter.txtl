@@ -1,0 +1,58 @@
+h1(#wxhtmlfilter). Wx::HtmlFilter
+
+This class is the parent class of input filters for "HtmlWindow":htmlwindow.html.
+It allows you to read and display files of different file formats.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See Also
+
+"Overview":filters.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlFilter.new":#HtmlFilter_new
+* "HtmlFilter#can_read":#HtmlFilter_canread
+* "HtmlFilter#read_file":#HtmlFilter_readfile
+
+</div>
+
+
+h3(#HtmlFilter_wxhtmlfilter). HtmlFilter.new
+
+h3(#HtmlFilter_canread). HtmlFilter#can_read
+
+ Boolean *can_read*(%(arg-type)"FSFile":fsfile.html% file)
+
+Returns true if this filter is capable of reading file _file_.
+
+Example:
+
+
+ bool MyFilter::CanRead(const FSFile& file)
+ {
+     return (file.GetMimeType() == "application/x-ugh");
+ }
+ 
+
+h3(#HtmlFilter_readfile). HtmlFilter#read_file
+
+ String *read_file*(%(arg-type)"FSFile":fsfile.html% file)
+
+Reads the file and returns string with HTML document.
+
+Example:
+
+
+ String MyImgFilter::ReadFile(const FSFile& file)
+ {
+     return "<html><body><img src=\"" +
+            file.GetLocation() +
+ 	   "\"></body></html>";
+ }
+ 
+

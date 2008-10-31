@@ -1,0 +1,66 @@
+h1(#wxgbspan). Wx::GBSpan
+
+This class is used to hold the row and column spanning attributes of
+items in a "GridBagSizer":gridbagsizer.html.
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "GBSpan.new":#GBSpan_new
+* "GBSpan#get_colspan":#GBSpan_getcolspan
+* "GBSpan#get_rowspan":#GBSpan_getrowspan
+* "GBSpan#set_colspan":#GBSpan_setcolspan
+* "GBSpan#set_rowspan":#GBSpan_setrowspan
+
+</div>
+
+
+h3(#GBSpan_wxgbspan). GBSpan.new
+
+  *GBSpan.new*(%(arg-type)Integer% rowspan,  %(arg-type)Integer% colspan)
+
+Construct a new GBSpan, optionally setting the rowspan and colspan.
+The default is (1,1).  (Meaning that the item occupies one cell in
+each direction.
+
+h3(#GBSpan_getcolspan). GBSpan#get_colspan
+
+ Integer *get_colspan*()
+
+Get the current colspan value.
+
+h3(#GBSpan_getrowspan). GBSpan#get_rowspan
+
+ Integer *get_rowspan*()
+
+Get the current rowspan value.
+
+h3(#GBSpan_setcolspan). GBSpan#set_colspan
+
+  *set_colspan*(%(arg-type)Integer% colspan)
+
+Set a new colspan value.
+
+h3(#GBSpan_setrowspan). GBSpan#set_rowspan
+
+  *set_rowspan*(%(arg-type)Integer% rowspan)
+
+Set a new rowspan value.
+
+h3(#GBSpan_operatorunknown). GBSpan::operator!
+
+ Boolean *operator!*(%(arg-type)"GBSpan":gbspan.html% o)
+
+Is the GBSpan valid?  (An invalid GBSpan is (-1,-1). )
+
+h3(#GBSpan_operatorequal). GBSpan::operator==
+
+ bool operator *operator==*(%(arg-type)"GBSpan":gbspan.html% o)
+
+Compare equality of two GBSpans.
+

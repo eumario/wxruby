@@ -1,0 +1,197 @@
+h1(#wxgridbagsizer). Wx::GridBagSizer
+
+A "Sizer":sizer.html that can lay out items in a virtual grid
+like a "FlexGridSizer":flexgridsizer.html but in this case
+explicit positioning of the items is allowed using 
+"GBPosition":gbposition.html, and items can optionally span
+more than one row and/or column using "GBSpan":gbspan.html.
+
+h2. Derived from
+
+"FlexGridSizer":flexgridsizer.html
+
+"GridSizer":gridsizer.html
+
+"Sizer":sizer.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridBagSizer.new":#GridBagSizer_new
+* "GridBagSizer#add":#GridBagSizer_add
+* "GridBagSizer#calc_min":#GridBagSizer_calcmin
+* "GridBagSizer#check_for_intersection":#GridBagSizer_checkforintersection
+* "GridBagSizer#find_item":#GridBagSizer_finditem
+* "GridBagSizer#find_item_at_point":#GridBagSizer_finditematpoint
+* "GridBagSizer#find_item_at_position":#GridBagSizer_finditematposition
+* "GridBagSizer#find_item_with_data":#GridBagSizer_finditemwithdata
+* "GridBagSizer#get_cell_size":#GridBagSizer_getcellsize
+* "GridBagSizer#get_empty_cell_size":#GridBagSizer_getemptycellsize
+* "GridBagSizer#get_item_position":#GridBagSizer_getitemposition
+* "GridBagSizer#get_item_span":#GridBagSizer_getitemspan
+* "GridBagSizer#recalc_sizes":#GridBagSizer_recalcsizes
+* "GridBagSizer#set_empty_cell_size":#GridBagSizer_setemptycellsize
+* "GridBagSizer#set_item_position":#GridBagSizer_setitemposition
+* "GridBagSizer#set_item_span":#GridBagSizer_setitemspan
+
+</div>
+
+
+h3(#GridBagSizer_wxgridbagsizer). GridBagSizer.new
+
+  *GridBagSizer.new*(%(arg-type)Integer% vgap = 0,  %(arg-type)Integer% hgap = 0)
+
+Constructor, with optional parameters to specify the gap between the
+rows and columns.
+
+h3(#GridBagSizer_add). GridBagSizer#add
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)"Window":window.html% window,  %(arg-type)"GBPosition":gbposition.html% pos, 
+                 %(arg-type)"GBSpan":gbspan.html% span = DefaultSpan, 
+                 %(arg-type)Integer% flag = 0, 
+                 %(arg-type)Integer% border = 0, 
+                 %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)"Sizer":sizer.html% sizer,  %(arg-type)"GBPosition":gbposition.html% pos, 
+                 %(arg-type)"GBSpan":gbspan.html% span = DefaultSpan, 
+                 %(arg-type)Integer% flag = 0, 
+                 %(arg-type)Integer% border = 0, 
+                 %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                 %(arg-type)"GBPosition":gbposition.html% pos, 
+                 %(arg-type)"GBSpan":gbspan.html% span = DefaultSpan, 
+                 %(arg-type)Integer% flag = 0, 
+                 %(arg-type)Integer% border = 0, 
+                 %(arg-type)Object% userData = nil)
+
+ "SizerItem":sizeritem.html *add*(%(arg-type)"GBSizerItem":gbsizeritem.html% item)
+
+The Add methods return a valid pointer if the item was successfully placed at the
+given position, NULL if something was already there.
+
+h3(#GridBagSizer_calcmin). GridBagSizer#calc_min
+
+ "Size":size.html *calc_min*()
+
+Called when the managed size of the sizer is needed or when layout
+needs done.
+
+h3(#GridBagSizer_checkforintersection). GridBagSizer#check_for_intersection
+
+ Boolean *check_for_intersection*(%(arg-type)"GBSizerItem":gbsizeritem.html% item, 
+                                %(arg-type)"GBSizerItem":gbsizeritem.html% excludeItem = nil)
+
+ Boolean *check_for_intersection*(%(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span, 
+                                %(arg-type)"GBSizerItem":gbsizeritem.html% excludeItem = nil)
+
+Look at all items and see if any intersect (or would overlap) the given
+item. Returns true if so, false if there would be no overlap. If an
+excludeItem is given then it will not be checked for intersection, for
+example it may be the item we are checking the position of.
+
+h3(#GridBagSizer_finditem). GridBagSizer#find_item
+
+ "GBSizerItem":gbsizeritem.html *find_item*(%(arg-type)"Window":window.html% window)
+
+ "GBSizerItem":gbsizeritem.html *find_item*(%(arg-type)"Sizer":sizer.html% sizer)
+
+Find the sizer item for the given window or subsizer, returns NULL if
+not found. (non-recursive)
+
+h3(#GridBagSizer_finditematpoint). GridBagSizer#find_item_at_point
+
+ "GBSizerItem":gbsizeritem.html *find_item_at_point*(%(arg-type)"Point":point.html% pt)
+
+Return the sizer item located at the point given in pt, or NULL if
+there is no item at that point. The (x,y) coordinates in pt correspond
+to the client coordinates of the window using the sizer for
+layout. (non-recursive)
+
+h3(#GridBagSizer_finditematposition). GridBagSizer#find_item_at_position
+
+ "GBSizerItem":gbsizeritem.html *find_item_at_position*(%(arg-type)"GBPosition":gbposition.html% pos)
+
+Return the sizer item for the given grid cell, or NULL if there is no
+item at that position. (non-recursive)
+
+h3(#GridBagSizer_finditemwithdata). GridBagSizer#find_item_with_data
+
+ "GBSizerItem":gbsizeritem.html *find_item_with_data*(%(arg-type)Object% userData)
+
+Return the sizer item that has a matching user data (it only compares
+pointer values) or NULL if not found. (non-recursive)
+
+h3(#GridBagSizer_getcellsize). GridBagSizer#get_cell_size
+
+ "Size":size.html *get_cell_size*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Get the size of the specified cell, including hgap and vgap. Only
+valid after a Layout.
+
+h3(#GridBagSizer_getemptycellsize). GridBagSizer#get_empty_cell_size
+
+ "Size":size.html *get_empty_cell_size*()
+
+Get the size used for cells in the grid with no item.
+
+h3(#GridBagSizer_getitemposition). GridBagSizer#get_item_position
+
+ "GBPosition":gbposition.html *get_item_position*(%(arg-type)"Window":window.html% window)
+
+ "GBPosition":gbposition.html *get_item_position*(%(arg-type)"Sizer":sizer.html% sizer)
+
+ "GBPosition":gbposition.html *get_item_position*(%(arg-type)Integer% index)
+
+Get the grid position of the specified item.
+
+h3(#GridBagSizer_getitemspan). GridBagSizer#get_item_span
+
+ "GBSpan":gbspan.html *get_item_span*(%(arg-type)"Window":window.html% window)
+
+ "GBSpan":gbspan.html *get_item_span*(%(arg-type)"Sizer":sizer.html% sizer)
+
+ "GBSpan":gbspan.html *get_item_span*(%(arg-type)Integer% index)
+
+Get the row/col spanning of the specified item
+
+h3(#GridBagSizer_recalcsizes). GridBagSizer#recalc_sizes
+
+  *recalc_sizes*()
+
+Called when the managed size of the sizer is needed or when layout
+needs done.
+
+h3(#GridBagSizer_setemptycellsize). GridBagSizer#set_empty_cell_size
+
+  *set_empty_cell_size*(%(arg-type)"Size":size.html% sz)
+
+Set the size used for cells in the grid with no item.
+
+h3(#GridBagSizer_setitemposition). GridBagSizer#set_item_position
+
+ Boolean *set_item_position*(%(arg-type)"Window":window.html% window,  %(arg-type)"GBPosition":gbposition.html% pos)
+
+ Boolean *set_item_position*(%(arg-type)"Sizer":sizer.html% sizer,  %(arg-type)"GBPosition":gbposition.html% pos)
+
+ Boolean *set_item_position*(%(arg-type)Integer% index,  %(arg-type)"GBPosition":gbposition.html% pos)
+
+Set the grid position of the specified item. Returns true on success.
+If the move is not allowed (because an item is already there) then
+false is returned. 
+
+h3(#GridBagSizer_setitemspan). GridBagSizer#set_item_span
+
+ Boolean *set_item_span*(%(arg-type)"Window":window.html% window,  %(arg-type)"GBSpan":gbspan.html% span)
+
+ Boolean *set_item_span*(%(arg-type)"Sizer":sizer.html% sizer,  %(arg-type)"GBSpan":gbspan.html% span)
+
+ Boolean *set_item_span*(%(arg-type)Integer% index,  %(arg-type)"GBSpan":gbspan.html% span)
+
+Set the row/col spanning of the specified item. Returns true on
+success. If the move is not allowed (because an item is already there)
+then false is returned.
+

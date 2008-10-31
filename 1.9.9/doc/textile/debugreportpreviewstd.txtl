@@ -1,0 +1,32 @@
+h1(#wxdebugreportpreviewstd). Wx::DebugReportPreviewStd
+
+DebugReportPreviewStd is a standard debug report preview window. It displays
+a GUIdialog allowing the user to examine the contents of a debug report, remove
+files from and add notes to it.
+
+
+h2. Derived from
+
+"DebugReportPreview":debugreportpreview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DebugReportPreviewStd.new":#DebugReportPreviewStd_new
+* "DebugReportPreviewStd#show":#DebugReportPreviewStd_show
+
+</div>
+
+
+
+h3(#DebugReportPreviewStd_wxdebugreportpreviewstd). DebugReportPreviewStd.new
+
+h3(#DebugReportPreviewStd_show). DebugReportPreviewStd#show
+
+ Boolean *show*(%(arg-type)"DebugReport":debugreport.html% dbgrpt)
+
+Show the dialog, see 
+"DebugReportPreview::Show()":debugreportpreviewshow.html for more
+information.
+

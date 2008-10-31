@@ -1,0 +1,297 @@
+h1(#wxscrollbar). Wx::ScrollBar
+
+A ScrollBar is a control that represents a horizontal or
+vertical scrollbar. It is distinct from the two scrollbars that some windows
+provide automatically, but the two types of scrollbar share the way
+events are received.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+A scrollbar has the following main attributes: _range_, _thumb size_, _page size_, and _position_.
+
+The range is the total number of units associated with the view represented by the scrollbar.
+For a table with 15 columns, the range would be 15.
+
+The thumb size is the number of units that are currently visible. For the table example, the window
+might be sized so that only 5 columns are currently visible, in which case the application would
+set the thumb size to 5. When the thumb size becomes the same as or greater than the range,
+the scrollbar will be automatically hidden on most platforms.
+
+The page size is the number of units that the scrollbar should scroll by, when `paging' through
+the data. This value is normally the same as the thumb size length, because
+it is natural to assume that the visible window size defines a page.
+
+The scrollbar position is the current thumb position.
+
+Most applications will find it convenient to provide a function called *AdjustScrollbars* which can
+be called initially, from an *OnSize* event handler, and whenever the application data
+changes in size. It will adjust the view, object and page size according
+to the size of the window and the size of the data.
+
+h2. Window styles
+
+
+
+|@SB_HORIZONTAL@|Specifies a horizontal scrollbar.|
+|@SB_VERTICAL@|Specifies a vertical scrollbar.|
+
+
+See also "window styles overview":windowstyles.html.
+
+ scrolevt.inc
+
+h2. See also
+
+"Scrolling overview":scrollingoverview.html, "Event handling overview":eventhandlingoverview.html, "ScrolledWindow":scrolledwindow.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ScrollBar.new":#ScrollBar_new
+* "ScrollBar#create":#ScrollBar_create
+* "ScrollBar#get_range":#ScrollBar_getrange
+* "ScrollBar#get_page_size":#ScrollBar_getpagesize
+* "ScrollBar#get_thumb_position":#ScrollBar_getthumbposition
+* "ScrollBar#get_thumb_size":#ScrollBar_getthumbsize
+* "ScrollBar#set_object_length":#ScrollBar_setobjectlength
+* "ScrollBar#set_page_size":#ScrollBar_setpagesize
+* "ScrollBar#set_thumb_position":#ScrollBar_setthumbposition
+* "ScrollBar#set_scrollbar":#ScrollBar_setscrollbar
+* "ScrollBar#set_view_length":#ScrollBar_setviewlength
+
+</div>
+
+
+
+h3(#ScrollBar_new). ScrollBar.new
+
+  *ScrollBar.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = SB_HORIZONTAL, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "scrollBar")
+
+Constructor, creating and showing a scrollbar.
+
+h4. Parameters
+
+* _parent_ Parent window. Must be non-NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position. If the position (-1, -1) is specified then a default position is chosen.
+* _size_ Window size. If the default size (-1, -1) is specified then a default size is chosen.
+* _style_ Window style. See "ScrollBar":scrollbar.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"ScrollBar#create":scrollbar.html#ScrollBar_create, "Validator":validator.html
+
+
+  *destructor*()
+
+Destructor, destroying the scrollbar.
+
+
+h3(#ScrollBar_create). ScrollBar#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = SB_HORIZONTAL, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "scrollBar")
+
+Scrollbar creation function called by the scrollbar constructor.
+See "ScrollBar.new":scrollbar.html#ScrollBar_new for details.
+
+
+h3(#ScrollBar_getrange). ScrollBar#get_range
+
+ Integer *get_range*()
+
+Returns the length of the scrollbar.
+
+h4. See also
+
+"ScrollBar#set_scrollbar":scrollbar.html#ScrollBar_setscrollbar
+
+
+h3(#ScrollBar_getpagesize). ScrollBar#get_page_size
+
+ Integer *get_page_size*()
+
+Returns the page size of the scrollbar. This is the number of scroll units
+that will be scrolled when the user pages up or down. Often it is the
+same as the thumb size.
+
+h4. See also
+
+"ScrollBar#set_scrollbar":scrollbar.html#ScrollBar_setscrollbar
+
+
+h3(#ScrollBar_getthumbposition). ScrollBar#get_thumb_position
+
+ Integer *get_thumb_position*()
+
+Returns the current position of the scrollbar thumb.
+
+h4. See also
+
+"ScrollBar#set_thumb_position":scrollbar.html#ScrollBar_setthumbposition
+
+
+h3(#ScrollBar_getthumbsize). ScrollBar#get_thumb_size
+
+ Integer *get_thumb_size*()
+
+Returns the thumb or `view' size.
+
+h4. See also
+
+"ScrollBar#set_scrollbar":scrollbar.html#ScrollBar_setscrollbar
+
+
+
+h3(#ScrollBar_setobjectlength). ScrollBar#set_object_length
+
+  *set_object_length*(%(arg-type)Integer% objectLength)
+
+Sets the object length for the scrollbar. This is the total object size (virtual size). You must
+call "set_view_length":#ScrollBar_setviewlength _before_ calling SetObjectLength.
+
+h4. Parameters
+
+* _objectLength_ The object length of the scrollbar.
+
+h4. Remarks
+
+Example: you are implementing scrollbars on a text window, where text lines have a maximum width
+of 100 characters. Your text window has a current width of 60 characters. So the view length is 60,
+and the object length is 100. The scrollbar will then enable you to scroll to see the other 40 characters.
+
+You will need to call *SetViewLength* and *SetObjectLength* whenever there
+is a change in the size of the window (the view size) or the size of the
+contents (the object length).
+
+h4. See also
+
+"ScrollBar#get_object_length":scrollbar.html#ScrollBar_getobjectlength
+
+
+h3(#ScrollBar_setpagesize). ScrollBar#set_page_size
+
+  *set_page_size*(%(arg-type)Integer% pageSize)
+
+Sets the page size for the scrollbar. This is the number of scroll units which are scrolled when the
+user pages down (clicks on the scrollbar outside the thumbtrack area).
+
+h4. Parameters
+
+* _pageSize_ The page size in scroll units.
+
+h4. Remarks
+
+At present, this needs to be called _before_ other set functions.
+
+h4. See also
+
+"ScrollBar#get_page_size":scrollbar.html#ScrollBar_getpagesize
+
+
+
+h3(#ScrollBar_setthumbposition). ScrollBar#set_thumb_position
+
+  *set_thumb_position*(%(arg-type)Integer% viewStart)
+
+Sets the position of the scrollbar.
+
+h4. Parameters
+
+* _viewStart_ The position of the scrollbar thumb.
+
+h4. See also
+
+"ScrollBar#get_thumb_position":scrollbar.html#ScrollBar_getthumbposition
+
+
+h3(#ScrollBar_setscrollbar). ScrollBar#set_scrollbar
+
+  *set_scrollbar*(%(arg-type)Integer% position,  %(arg-type)Integer% thumbSize, 
+                %(arg-type)Integer% range, 
+                %(arg-type)Integer% pageSize, 
+                %(arg-type)Boolean% refresh = true)
+
+Sets the scrollbar properties.
+
+h4. Parameters
+
+* _position_ The position of the scrollbar in scroll units.
+* _thumbSize_ The size of the thumb, or visible portion of the scrollbar, in scroll units.
+* _range_ The maximum position of the scrollbar.
+* _pageSize_ The size of the page size in scroll units. This is the number of units
+the scrollbar will scroll when it is paged up or down. Often it is the same as
+the thumb size.
+* _refresh_ true to redraw the scrollbar, false otherwise.
+
+h4. Remarks
+
+Let's say you wish to display 50 lines of text, using the same font.
+The window is sized so that you can only see 16 lines at a time.
+
+You would use:
+
+
+   scrollbar->SetScrollbar(0, 16, 50, 15);
+ 
+
+
+The page size is 1 less than the thumb size so that the last line of the previous
+page will be visible on the next page, to help orient the user.
+
+Note that with the window at this size, the thumb position can never go
+above 50 minus 16, or 34.
+
+You can determine how many lines are currently visible by dividing the current view
+size by the character height in pixels.
+
+When defining your own scrollbar behaviour, you will always need to recalculate
+the scrollbar settings when the window size changes. You could therefore put your
+scrollbar calculations and SetScrollbar
+call into a function named AdjustScrollbars, which can be called initially and also
+from a "SizeEvent":sizeevent.html event handler function.
+
+h4. See also
+
+"Scrolling overview":scrollingoverview.html, "Window#set_scrollbar":window.html#Window_setscrollbar, "ScrolledWindow":scrolledwindow.html
+
+
+
+
+h3(#ScrollBar_setviewlength). ScrollBar#set_view_length
+
+  *set_view_length*(%(arg-type)Integer% viewLength)
+
+Sets the view length for the scrollbar.
+
+h4. Parameters
+
+* _viewLength_ View length.
+
+h4. See also
+
+"ScrollBar#get_view_length":scrollbar.html#ScrollBar_getviewlength
+
+

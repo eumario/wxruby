@@ -1,0 +1,256 @@
+h1(#wxxmlresourcehandler). Wx::XmlResourceHandler
+
+XmlResourceHandler is an abstract base class for resource handlers
+capable of creating a control from an XML node.
+
+See "XML-based resource system overview":xrcoverview.html for details.
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "XmlResourceHandler.new":#XmlResourceHandler_new
+* "XmlResourceHandler#add_style":#XmlResourceHandler_addstyle
+* "XmlResourceHandler#add_window_styles":#XmlResourceHandler_addwindowstyles
+* "XmlResourceHandler#can_handle":#XmlResourceHandler_canhandle
+* "XmlResourceHandler#create_children":#XmlResourceHandler_createchildren
+* "XmlResourceHandler#create_children_privately":#XmlResourceHandler_createchildrenprivately
+* "XmlResourceHandler#create_res_from_node":#XmlResourceHandler_createresfromnode
+* "XmlResourceHandler#create_resource":#XmlResourceHandler_createresource
+* "XmlResourceHandler#do_create_resource":#XmlResourceHandler_docreateresource
+* "XmlResourceHandler#get_bitmap":#XmlResourceHandler_getbitmap
+* "XmlResourceHandler#get_bool":#XmlResourceHandler_getbool
+* "XmlResourceHandler#get_colour":#XmlResourceHandler_getcolour
+* "XmlResourceHandler#get_cur_file_system":#XmlResourceHandler_getcurfilesystem
+* "XmlResourceHandler#get_dimension":#XmlResourceHandler_getdimension
+* "XmlResourceHandler#get_font":#XmlResourceHandler_getfont
+* "XmlResourceHandler#get_id":#XmlResourceHandler_getid
+* "XmlResourceHandler#get_icon":#XmlResourceHandler_geticon
+* "XmlResourceHandler#get_long":#XmlResourceHandler_getlong
+* "XmlResourceHandler#get_name":#XmlResourceHandler_getname
+* "XmlResourceHandler#get_node_content":#XmlResourceHandler_getnodecontent
+* "XmlResourceHandler#get_param_node":#XmlResourceHandler_getparamnode
+* "XmlResourceHandler#get_param_value":#XmlResourceHandler_getparamvalue
+* "XmlResourceHandler#get_position":#XmlResourceHandler_getposition
+* "XmlResourceHandler#get_size":#XmlResourceHandler_getsize
+* "XmlResourceHandler#get_style":#XmlResourceHandler_getstyle
+* "XmlResourceHandler#get_text":#XmlResourceHandler_gettext
+* "XmlResourceHandler#has_param":#XmlResourceHandler_hasparam
+* "XmlResourceHandler#is_of_class":#XmlResourceHandler_isofclass
+* "XmlResourceHandler#set_parent_resource":#XmlResourceHandler_setparentresource
+* "XmlResourceHandler#setup_window":#XmlResourceHandler_setupwindow
+
+</div>
+
+
+h3(#XmlResourceHandler_new). XmlResourceHandler.new
+
+  *destructor*()
+
+Destructor.
+
+h3(#XmlResourceHandler_addstyle). XmlResourceHandler#add_style
+
+  *add_style*(%(arg-type)String% name,  %(arg-type)Integer% value)
+
+Add a style flag (e.g. MB_DOCKABLE) to the list of flags
+understood by this handler.
+
+h3(#XmlResourceHandler_addwindowstyles). XmlResourceHandler#add_window_styles
+
+  *add_window_styles*()
+
+Add styles common to all Window-derived classes.
+
+h3(#XmlResourceHandler_canhandle). XmlResourceHandler#can_handle
+
+ Boolean *can_handle*(%(arg-type)"XmlNode":xmlnode.html% node)
+
+Returns true if it understands this node and can create
+a resource from it, false otherwise.
+
+h4. Note
+
+You must *not* call any XmlResourceHandler methods except 
+"is_of_class":#XmlResourceHandler_isofclass from this method! The instance
+is not yet initialized with node data at the time CanHandle is called and it is only
+safe to operate on _node_ directly or to call IsOfClass.
+
+h3(#XmlResourceHandler_createchildren). XmlResourceHandler#create_children
+
+  *create_children*(%(arg-type)Object% parent,  %(arg-type)Boolean% this_hnd_only = false)
+
+Creates children.
+
+h3(#XmlResourceHandler_createchildrenprivately). XmlResourceHandler#create_children_privately
+
+  *create_children_privately*(%(arg-type)Object% parent,  %(arg-type)"XmlNode":xmlnode.html% rootnode = nil)
+
+Helper function.
+
+h3(#XmlResourceHandler_createresfromnode). XmlResourceHandler#create_res_from_node
+
+ "Object":object.html *create_res_from_node*(%(arg-type)"XmlNode":xmlnode.html% node,  %(arg-type)Object% parent, 
+                               %(arg-type)Object% instance = nil)
+
+Creates a resource from a node.
+
+h3(#XmlResourceHandler_createresource). XmlResourceHandler#create_resource
+
+ "Object":object.html *create_resource*(%(arg-type)"XmlNode":xmlnode.html% node,  %(arg-type)Object% parent, 
+                          %(arg-type)Object% instance)
+
+Creates an object (menu, dialog, control, ...) from an XML node.
+Should check for validity. _parent_ is a higher-level object (usually window, dialog or panel)
+that is often necessary to create the resource.
+If *instance* is non-NULL it should not create a new instance via 'new' but
+should rather use this one, and call its Create method.
+
+h3(#XmlResourceHandler_docreateresource). XmlResourceHandler#do_create_resource
+
+ "Object":object.html *do_create_resource*()
+
+Called from CreateResource after variables
+were filled.
+
+h3(#XmlResourceHandler_getbitmap). XmlResourceHandler#get_bitmap
+
+ "Bitmap":bitmap.html *get_bitmap*(%(arg-type)String% param = T("bitmap"), 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
+
+Gets a bitmap.
+
+h3(#XmlResourceHandler_getbool). XmlResourceHandler#get_bool
+
+ Boolean *get_bool*(%(arg-type)String% param,  %(arg-type)Boolean% defaultv = false)
+
+Gets a bool flag (1, t, yes, on, true are true, everything else is false).
+
+h3(#XmlResourceHandler_getcolour). XmlResourceHandler#get_colour
+
+ "Colour":colour.html *get_colour*(%(arg-type)String% param)
+
+Gets colour in HTML syntax (\#RRGGBB).
+
+h3(#XmlResourceHandler_getcurfilesystem). XmlResourceHandler#get_cur_file_system
+
+ "FileSystem":filesystem.html *get_cur_file_system*()
+
+Returns the current file system.
+
+h3(#XmlResourceHandler_getdimension). XmlResourceHandler#get_dimension
+
+ Integer *get_dimension*(%(arg-type)String% param,  %(arg-type)Integer% defaultv = 0)
+
+Gets a dimension (may be in dialog units).
+
+h3(#XmlResourceHandler_getfont). XmlResourceHandler#get_font
+
+ "Font":font.html *get_font*(%(arg-type)String% param = T("font"))
+
+Gets a font.
+
+h3(#XmlResourceHandler_getid). XmlResourceHandler#get_id
+
+ Integer *get_id*()
+
+Returns the XRCID.
+
+h3(#XmlResourceHandler_geticon). XmlResourceHandler#get_icon
+
+ "Icon":icon.html *get_icon*(%(arg-type)String% param = T("icon"), 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
+
+Returns an icon.
+
+h3(#XmlResourceHandler_getlong). XmlResourceHandler#get_long
+
+ Integer *get_long*(%(arg-type)String% param,  %(arg-type)Integer% defaultv = 0)
+
+Gets the integer value from the parameter.
+
+h3(#XmlResourceHandler_getname). XmlResourceHandler#get_name
+
+ String *get_name*()
+
+Returns the resource name.
+
+h3(#XmlResourceHandler_getnodecontent). XmlResourceHandler#get_node_content
+
+ String *get_node_content*(%(arg-type)"XmlNode":xmlnode.html% node)
+
+Gets node content from XML_ENTITY_NODE.
+
+h3(#XmlResourceHandler_getparamnode). XmlResourceHandler#get_param_node
+
+ "XmlNode":xmlnode.html *get_param_node*(%(arg-type)String% param)
+
+Finds the node or returns NULL.
+
+h3(#XmlResourceHandler_getparamvalue). XmlResourceHandler#get_param_value
+
+ String *get_param_value*(%(arg-type)String% param)
+
+Finds the parameter value or returns the empty string.
+
+h3(#XmlResourceHandler_getposition). XmlResourceHandler#get_position
+
+ "Point":point.html *get_position*(%(arg-type)String% param = T("pos"))
+
+Gets the position (may be in dialog units).
+
+h3(#XmlResourceHandler_getsize). XmlResourceHandler#get_size
+
+ "Size":size.html *get_size*(%(arg-type)String% param = T("size"))
+
+Gets the size (may be in dialog units).
+
+h3(#XmlResourceHandler_getstyle). XmlResourceHandler#get_style
+
+ Integer *get_style*(%(arg-type)String% param = T("style"),  %(arg-type)Integer% defaults = 0)
+
+Gets style flags from text in form "flag | flag2| flag3 |..."
+Only understands flags added with AddStyle.
+
+h3(#XmlResourceHandler_gettext). XmlResourceHandler#get_text
+
+ String *get_text*(%(arg-type)String% param)
+
+Gets text from param and does some conversions:
+
+
+* replaces $$n, $$r, $$t by respective characters (according to C syntax)
+* replaces \$ by & and \$\$ by \$ (needed for  to &File
+translation because of XML syntax)
+* calls GetTranslations (unless disabled in XmlResource)
+
+
+h3(#XmlResourceHandler_hasparam). XmlResourceHandler#has_param
+
+ Boolean *has_param*(%(arg-type)String% param)
+
+Check to see if a parameter exists.
+
+h3(#XmlResourceHandler_isofclass). XmlResourceHandler#is_of_class
+
+ Boolean *is_of_class*(%(arg-type)"XmlNode":xmlnode.html% node,  %(arg-type)String% classname)
+
+Convenience function. Returns true if the node has a property class equal to classname,
+e.g. <object class="Dialog">.
+
+h3(#XmlResourceHandler_setparentresource). XmlResourceHandler#set_parent_resource
+
+  *set_parent_resource*(%(arg-type)"XmlResource":xmlresource.html% res)
+
+Sets the parent resource.
+
+h3(#XmlResourceHandler_setupwindow). XmlResourceHandler#setup_window
+
+  *setup_window*(%(arg-type)"Window":window.html% wnd)
+
+Sets common window options.
+

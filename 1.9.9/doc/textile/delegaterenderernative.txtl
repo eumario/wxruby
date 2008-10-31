@@ -1,0 +1,60 @@
+h1(#wxdelegaterenderernative). Wx::DelegateRendererNative
+
+DelegateRendererNative allows reuse of renderers code by forwarding all the 
+"RendererNative":renderernative.html methods to the given object and
+thus allowing you to only modify some of its methods -- without having to
+reimplement all of them.
+
+Note that the ``normal'', inheritance-based approach, doesn't work with the
+renderers as it is impossible to derive from a class unknown at compile-time
+and the renderer is only chosen at run-time. So suppose that you want to only
+add something to the drawing of the tree control buttons but leave all the
+other methods unchanged -- the only way to do it, considering that the renderer
+class which you want to customize might not even be written yet when you write
+your code (it could be written later and loaded from a DLL during run-time), is
+by using this class.
+
+Except for the constructor, it has exactly the same methods as 
+"RendererNative":renderernative.html and their implementation is
+trivial: they are simply forwarded to the real renderer. Note that the ``real''
+renderer may, in turn, be a DelegateRendererNative as well and that there may
+be arbitrarily many levels like this -- but at the end of the chain there must
+be a real renderer which does the drawing.
+
+h2. Derived from
+
+"RendererNative":renderernative.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DelegateRendererNative.new":#DelegateRendererNative_new
+* "DelegateRendererNative#draw_xxx":#DelegateRendererNative_drawxxx
+
+</div>
+
+
+h3(#DelegateRendererNative_new). DelegateRendererNative.new
+
+  *DelegateRendererNative.new*(%(arg-type)"RendererNative":renderernative.html% rendererNative)
+
+The default constructor does the same thing as the other one except that it
+uses the "generic renderer":renderernativegetgeneric.html instead of the
+user-specified rendererNative.
+
+In any case, this sets up the delegate renderer object to follow all calls to
+the specified real renderer.
+
+Note that this object does not take ownership of (i.e. won't delete)
+rendererNative.
+
+
+h3(#DelegateRendererNative_drawxxx). DelegateRendererNative#draw_xxx
+
+  *draw_xxx*(%(arg-type)% $$)
+
+This class also provides all the virtual methods of 
+"RendererNative":renderernative.html, please refer to that class
+documentation for the details.
+

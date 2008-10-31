@@ -1,0 +1,331 @@
+h1(#wxhtmlwinparser). Wx::HtmlWinParser
+
+This class is derived from "HtmlParser":htmlparser.html and
+its main goal is to parse HTML input so that it can be displayed in
+"HtmlWindow":htmlwindow.html. It uses a special 
+"HtmlWinTagHandler":htmlwintaghandler.html.
+
+h2. Notes
+
+The product of parsing is a HtmlCell (resp. HtmlContainer) object.
+
+h2. Derived from
+
+"HtmlParser":htmlparser.html
+
+h2. See Also
+
+"Handlers overview":handlers.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlWinParser.new":#HtmlWinParser_new
+* "HtmlWinParser#add_module":#HtmlWinParser_addmodule
+* "HtmlWinParser#close_container":#HtmlWinParser_closecontainer
+* "HtmlWinParser#create_current_font":#HtmlWinParser_createcurrentfont
+* "HtmlWinParser#get_actual_color":#HtmlWinParser_getactualcolor
+* "HtmlWinParser#get_align":#HtmlWinParser_getalign
+* "HtmlWinParser#get_char_height":#HtmlWinParser_getcharheight
+* "HtmlWinParser#get_char_width":#HtmlWinParser_getcharwidth
+* "HtmlWinParser#get_container":#HtmlWinParser_getcontainer
+* "HtmlWinParser#get_dc":#HtmlWinParser_getdc
+* "HtmlWinParser#get_encoding_converter":#HtmlWinParser_getencodingconverter
+* "HtmlWinParser#get_font_bold":#HtmlWinParser_getfontbold
+* "HtmlWinParser#get_font_face":#HtmlWinParser_getfontface
+* "HtmlWinParser#get_font_fixed":#HtmlWinParser_getfontfixed
+* "HtmlWinParser#get_font_italic":#HtmlWinParser_getfontitalic
+* "HtmlWinParser#get_font_size":#HtmlWinParser_getfontsize
+* "HtmlWinParser#get_font_underlined":#HtmlWinParser_getfontunderlined
+* "HtmlWinParser#get_input_encoding":#HtmlWinParser_getinputencoding
+* "HtmlWinParser#get_link":#HtmlWinParser_getlink
+* "HtmlWinParser#get_link_color":#HtmlWinParser_getlinkcolor
+* "HtmlWinParser#get_output_encoding":#HtmlWinParser_getoutputencoding
+* "HtmlWinParser#get_window":#HtmlWinParser_getwindow
+* "HtmlWinParser#open_container":#HtmlWinParser_opencontainer
+* "HtmlWinParser#set_actual_color":#HtmlWinParser_setactualcolor
+* "HtmlWinParser#set_align":#HtmlWinParser_setalign
+* "HtmlWinParser#set_container":#HtmlWinParser_setcontainer
+* "HtmlWinParser#set_dc":#HtmlWinParser_setdc
+* "HtmlWinParser#set_font_bold":#HtmlWinParser_setfontbold
+* "HtmlWinParser#set_font_face":#HtmlWinParser_setfontface
+* "HtmlWinParser#set_font_fixed":#HtmlWinParser_setfontfixed
+* "HtmlWinParser#set_font_italic":#HtmlWinParser_setfontitalic
+* "HtmlWinParser#set_font_size":#HtmlWinParser_setfontsize
+* "HtmlWinParser#set_font_underlined":#HtmlWinParser_setfontunderlined
+* "HtmlWinParser#set_fonts":#HtmlWinParser_setfonts
+* "HtmlWinParser#set_input_encoding":#HtmlWinParser_setinputencoding
+* "HtmlWinParser#set_link":#HtmlWinParser_setlink
+* "HtmlWinParser#set_link_color":#HtmlWinParser_setlinkcolor
+
+</div>
+
+
+h3(#HtmlWinParser_wxhtmlwinparser). HtmlWinParser.new
+
+  *HtmlWinParser.new*(%(arg-type)"HtmlWindow":htmlwindow.html% wnd)
+
+Constructor. Don't use the default one, use constructor with
+_wnd_ parameter (_wnd_ is pointer to associated "HtmlWindow":htmlwindow.html)
+
+h3(#HtmlWinParser_addmodule). HtmlWinParser#add_module
+
+  *add_module*(%(arg-type)"HtmlTagsModule":htmltagsmodule.html% module)
+
+Adds "module":handlers.html to the list of HtmlWinParser tag handler.
+
+h3(#HtmlWinParser_closecontainer). HtmlWinParser#close_container
+
+ "HtmlContainerCell":htmlcontainercell.html *close_container*()
+
+Closes the container, sets actual container to the parent one
+and returns pointer to it (see "Overview":cells.html).
+
+h3(#HtmlWinParser_createcurrentfont). HtmlWinParser#create_current_font
+
+ "Font":font.html *create_current_font*()
+
+Creates font based on current setting (see 
+"set_font_size":#HtmlWinParser_setfontsize, 
+"set_font_bold":#HtmlWinParser_setfontbold, 
+"set_font_italic":#HtmlWinParser_setfontitalic, 
+"set_font_fixed":#HtmlWinParser_setfontfixed, 
+"set_font_underlined":#HtmlWinParser_setfontunderlined)
+and returns pointer to it.
+If the font was already created only a pointer is returned.
+
+
+h3(#HtmlWinParser_getactualcolor). HtmlWinParser#get_actual_color
+
+ "Colour":colour.html *get_actual_color*()
+
+Returns actual text colour.
+
+h3(#HtmlWinParser_getalign). HtmlWinParser#get_align
+
+ Integer *get_align*()
+
+Returns default horizontal alignment.
+
+h3(#HtmlWinParser_getcharheight). HtmlWinParser#get_char_height
+
+ Integer *get_char_height*()
+
+Returns (average) char height in standard font. It is used as DC-independent metrics.
+
+*Note:* This function doesn't return the _actual_ height. If you want to
+know the height of the current font, call @GetDC -> GetCharHeight()@.
+
+h3(#HtmlWinParser_getcharwidth). HtmlWinParser#get_char_width
+
+ Integer *get_char_width*()
+
+Returns average char width in standard font. It is used as DC-independent metrics.
+
+*Note:* This function doesn't return the _actual_ width. If you want to
+know the height of the current font, call @GetDC -> GetCharWidth()@
+
+h3(#HtmlWinParser_getcontainer). HtmlWinParser#get_container
+
+ "HtmlContainerCell":htmlcontainercell.html *get_container*()
+
+Returns pointer to the currently opened container (see "Overview":cells.html).
+Common use:
+
+
+ m_WParser -> GetContainer() -> InsertCell(new ...);
+ 
+
+h3(#HtmlWinParser_getdc). HtmlWinParser#get_dc
+
+ "DC":dc.html *get_dc*()
+
+Returns pointer to the DC used during parsing.
+
+h3(#HtmlWinParser_getencodingconverter). HtmlWinParser#get_encoding_converter
+
+ "EncodingConverter":encodingconverter.html *get_encoding_converter*()
+
+Returns "EncodingConverter":encodingconverter.html class used
+to do conversion between "input encoding":htmlwinparsergetinputencoding.html 
+and "output encoding":htmlwinparsergetoutputencoding.html.
+
+h3(#HtmlWinParser_getfontbold). HtmlWinParser#get_font_bold
+
+ Integer *get_font_bold*()
+
+Returns true if actual font is bold, false otherwise.
+
+h3(#HtmlWinParser_getfontface). HtmlWinParser#get_font_face
+
+ String *get_font_face*()
+
+Returns actual font face name.
+
+h3(#HtmlWinParser_getfontfixed). HtmlWinParser#get_font_fixed
+
+ Integer *get_font_fixed*()
+
+Returns true if actual font is fixed face, false otherwise.
+
+h3(#HtmlWinParser_getfontitalic). HtmlWinParser#get_font_italic
+
+ Integer *get_font_italic*()
+
+Returns true if actual font is italic, false otherwise.
+
+h3(#HtmlWinParser_getfontsize). HtmlWinParser#get_font_size
+
+ Integer *get_font_size*()
+
+Returns actual font size (HTML size varies from -2 to +4)
+
+h3(#HtmlWinParser_getfontunderlined). HtmlWinParser#get_font_underlined
+
+ Integer *get_font_underlined*()
+
+Returns true if actual font is underlined, false otherwise.
+
+h3(#HtmlWinParser_getinputencoding). HtmlWinParser#get_input_encoding
+
+ "FontEncoding":fontencoding.html *get_input_encoding*()
+
+Returns input encoding.
+
+h3(#HtmlWinParser_getlink). HtmlWinParser#get_link
+
+ "HtmlLinkInfo":htmllinkinfo.html *get_link*()
+
+Returns actual hypertext link. (This value has a non-empty 
+"Href":htmllinkinfogethref.html string
+if the parser is between @<A>@ and @</A>@ tags,
+EmptyString otherwise.)
+
+h3(#HtmlWinParser_getlinkcolor). HtmlWinParser#get_link_color
+
+ "Colour":colour.html *get_link_color*()
+
+Returns the colour of hypertext link text.
+
+h3(#HtmlWinParser_getoutputencoding). HtmlWinParser#get_output_encoding
+
+ "FontEncoding":fontencoding.html *get_output_encoding*()
+
+Returns output encoding, i.e. closest match to document's input encoding
+that is supported by operating system.
+
+h3(#HtmlWinParser_getwindow). HtmlWinParser#get_window
+
+ "HtmlWindow":htmlwindow.html *get_window*()
+
+Returns associated window (HtmlWindow). This may be NULL! (You should always
+test if it is non-NULL. For example @TITLE@ handler sets window
+title only if some window is associated, otherwise it does nothing)
+
+h3(#HtmlWinParser_opencontainer). HtmlWinParser#open_container
+
+ "HtmlContainerCell":htmlcontainercell.html *open_container*()
+
+Opens new container and returns pointer to it (see "Overview":cells.html).
+
+h3(#HtmlWinParser_setactualcolor). HtmlWinParser#set_actual_color
+
+  *set_actual_color*(%(arg-type)"Colour":colour.html% clr)
+
+Sets actual text colour. Note: this DOESN'T change the colour!
+You must create "HtmlColourCell":htmlcolourcell.html yourself.
+
+h3(#HtmlWinParser_setalign). HtmlWinParser#set_align
+
+  *set_align*(%(arg-type)Integer% a)
+
+Sets default horizontal alignment (see 
+"HtmlContainerCell#set_align_hor":htmlcontainercell.html#HtmlContainerCell_setalignhor.)
+Alignment of newly opened container is set to this value.
+
+h3(#HtmlWinParser_setcontainer). HtmlWinParser#set_container
+
+ "HtmlContainerCell":htmlcontainercell.html *set_container*(%(arg-type)"HtmlContainerCell":htmlcontainercell.html% c)
+
+Allows you to directly set opened container. This is not recommended - you should use OpenContainer
+wherever possible.
+
+h3(#HtmlWinParser_setdc). HtmlWinParser#set_dc
+
+  *set_dc*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Float% pixel_scale = 1.0)
+
+Sets the DC. This must be called before "Parse":htmlparserparse.html!
+_pixel_scale_  can be used when rendering to high-resolution 
+DCs (e.g. printer) to adjust size of pixel metrics. (Many dimensions in 
+HTML are given in pixels -- e.g. image sizes. 300x300 image would be only one
+inch wide on typical printer. With pixel_scale = 3.0 it would be 3 inches.)
+
+h3(#HtmlWinParser_setfontbold). HtmlWinParser#set_font_bold
+
+  *set_font_bold*(%(arg-type)Integer% x)
+
+Sets bold flag of actualfont. _x_ is either true of false.
+
+h3(#HtmlWinParser_setfontface). HtmlWinParser#set_font_face
+
+  *set_font_face*(%(arg-type)String% face)
+
+Sets current font face to _face_. This affects either fixed size
+font or proportional, depending on context (whether the parser is 
+inside @<TT>@ tag or not).
+
+h3(#HtmlWinParser_setfontfixed). HtmlWinParser#set_font_fixed
+
+  *set_font_fixed*(%(arg-type)Integer% x)
+
+Sets fixed face flag of actualfont. _x_ is either true of false.
+
+h3(#HtmlWinParser_setfontitalic). HtmlWinParser#set_font_italic
+
+  *set_font_italic*(%(arg-type)Integer% x)
+
+Sets italic flag of actualfont. _x_ is either true of false.
+
+h3(#HtmlWinParser_setfontsize). HtmlWinParser#set_font_size
+
+  *set_font_size*(%(arg-type)Integer% s)
+
+Sets actual font size (HTML size varies from 1 to 7)
+
+h3(#HtmlWinParser_setfontunderlined). HtmlWinParser#set_font_underlined
+
+  *set_font_underlined*(%(arg-type)Integer% x)
+
+Sets underlined flag of actualfont. _x_ is either true of false.
+
+h3(#HtmlWinParser_setfonts). HtmlWinParser#set_fonts
+
+  *set_fonts*(%(arg-type)String% normal_face,  %(arg-type)String% fixed_face, 
+            %(arg-type)Integer% sizes = nil)
+
+Sets fonts. See "HtmlWindow#set_fonts":htmlwindow.html#HtmlWindow_setfonts for
+detailed description.
+
+h3(#HtmlWinParser_setinputencoding). HtmlWinParser#set_input_encoding
+
+  *set_input_encoding*(%(arg-type)"FontEncoding":fontencoding.html% enc)
+
+Sets input encoding. The parser uses this information to build conversion
+tables from document's encoding to some encoding supported by operating
+system.
+
+h3(#HtmlWinParser_setlink). HtmlWinParser#set_link
+
+  *set_link*(%(arg-type)"HtmlLinkInfo":htmllinkinfo.html% link)
+
+Sets actual hypertext link. Empty link is represented
+by "HtmlLinkInfo":htmllinkinfo.html with _Href_ equal
+to EmptyString.
+
+h3(#HtmlWinParser_setlinkcolor). HtmlWinParser#set_link_color
+
+  *set_link_color*(%(arg-type)"Colour":colour.html% clr)
+
+Sets colour of hypertext link.
+

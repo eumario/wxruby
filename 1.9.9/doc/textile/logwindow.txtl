@@ -1,0 +1,90 @@
+h1(#wxlogwindow). Wx::LogWindow
+
+This class represents a background log window: to be precise, it collects all
+log messages in the log frame which it manages but also passes them on to the
+log target which was active at the moment of its creation. This allows, for
+example, to show all the log messages in a frame but still continue to process
+them normally by showing the standard log dialog.
+
+h2. Derived from
+
+"LogPassThrough":logpassthrough.html
+
+h2. See also
+
+"LogTextCtrl":logtextctrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "LogWindow.new":#LogWindow_new
+* "LogWindow#show":#LogWindow_show
+* "LogWindow#get_frame":#LogWindow_getframe
+* "LogWindow#on_frame_create":#LogWindow_onframecreate
+* "LogWindow#on_frame_close":#LogWindow_onframeclose
+* "LogWindow#on_frame_delete":#LogWindow_onframedelete
+
+</div>
+
+
+h3(#LogWindow_new). LogWindow.new
+
+  *LogWindow.new*(%(arg-type)"Frame":frame.html% parent,  %(arg-type)"Char":char.html% title, 
+                %(arg-type)Boolean% show = @true@, 
+                %(arg-type)Boolean% passToOld = @true@)
+
+Creates the log frame window and starts collecting the messages in it.
+
+h4. Parameters
+
+* _parent_ The parent window for the log frame, may be @NULL@
+* _title_ The title for the log frame
+* _show_ @true@ to show the frame initially (default), otherwise
+"LogWindow#show":logwindow.html#LogWindow_show must be called later.
+* _passToOld_ @true@ to process the log messages normally in addition to
+logging them in the log frame (default), @false@ to only log them in the
+log frame.
+
+h3(#LogWindow_show). LogWindow#show
+
+  *show*(%(arg-type)Boolean% show = @true@)
+
+Shows or hides the frame.
+
+h3(#LogWindow_getframe). LogWindow#get_frame
+
+ "Frame":frame.html *get_frame*()
+
+Returns the associated log frame window. This may be used to position or resize
+it but use "LogWindow#show":logwindow.html#LogWindow_show to show or hide it.
+
+h3(#LogWindow_onframecreate). LogWindow#on_frame_create
+
+  *on_frame_create*(%(arg-type)"Frame":frame.html% frame)
+
+Called immediately after the log frame creation allowing for
+any extra initializations.
+
+h3(#LogWindow_onframeclose). LogWindow#on_frame_close
+
+ Boolean *on_frame_close*(%(arg-type)"Frame":frame.html% frame)
+
+Called if the user closes the window interactively, will not be
+called if it is destroyed for another reason (such as when program
+exits).
+
+Return @true@ from here to allow the frame to close, @false@ to
+prevent this from happening.
+
+h4. See also
+
+"LogWindow#on_frame_delete":logwindow.html#LogWindow_onframedelete
+
+h3(#LogWindow_onframedelete). LogWindow#on_frame_delete
+
+  *on_frame_delete*(%(arg-type)"Frame":frame.html% frame)
+
+Called right before the log frame is going to be deleted: will
+always be called unlike "on_frame_close()":#LogWindow_onframeclose().
+

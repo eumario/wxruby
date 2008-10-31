@@ -1,0 +1,86 @@
+h1(#wxstddialogbuttonsizer). Wx::StdDialogButtonSizer
+
+This class creates button layouts which conform to the standard button spacing and ordering defined by the platform
+or toolkit's user interface guidelines (if such things exist). By using this class, you can ensure that all your
+standard dialogs look correct on all major platforms. Currently it conforms to the Windows, GTK+ and Mac OS X
+human interface guidelines.
+
+When there aren't interface guidelines defined for a particular platform or toolkit, StdDialogButtonSizer reverts
+to the Windows implementation. 
+
+To use this class, first add buttons to the sizer by calling AddButton (or SetAffirmativeButton, SetNegativeButton,
+or SetCancelButton) and then call Realize in order to create the actual button layout used. Other than these special
+operations, this sizer works like any other sizer. 
+
+If you add a button with ID_SAVE, on Mac OS X the button will be renamed to "Save" and
+the ID_NO button will be renamed to "Don't Save" in accordance with the Mac OS X Human Interface Guidelines.
+
+h2. Derived from
+
+"BoxSizer":boxsizer.html
+
+"Sizer":sizer.html
+
+"Object":object.html
+
+h2. See also
+
+"Sizer":sizer.html, "Dialog#create_button_sizer":dialog.html#Dialog_createbuttonsizer
+
+
+h2. Methods
+
+<div id="methods">
+
+* "StdDialogButtonSizer.new":#StdDialogButtonSizer_new
+* "StdDialogButtonSizer#add_button":#StdDialogButtonSizer_addbutton
+* "StdDialogButtonSizer#realize":#StdDialogButtonSizer_realize
+* "StdDialogButtonSizer#set_affirmative_button":#StdDialogButtonSizer_setaffirmativebutton
+* "StdDialogButtonSizer#set_cancel_button":#StdDialogButtonSizer_setcancelbutton
+* "StdDialogButtonSizer#set_negative_button":#StdDialogButtonSizer_setnegativebutton
+
+</div>
+
+h3(#StdDialogButtonSizer_new). StdDialogButtonSizer.new
+
+h3(#StdDialogButtonSizer_addbutton). StdDialogButtonSizer#add_button
+
+  *add_button*(%(arg-type)"Button":button.html% button)
+
+Adds a button to the StdDialogButtonSizer. The button must have one of the following identifiers:
+
+
+* ID_OK
+* ID_YES
+* ID_SAVE
+* ID_APPLY
+* ID_NO
+* ID_CANCEL
+* ID_HELP
+* ID_CONTEXT_HELP
+
+
+h3(#StdDialogButtonSizer_realize). StdDialogButtonSizer#realize
+
+  *realize*()
+
+Rearranges the buttons and applies proper spacing between buttons to make them match the platform or toolkit's interface guidelines.
+
+h3(#StdDialogButtonSizer_setaffirmativebutton). StdDialogButtonSizer#set_affirmative_button
+
+  *set_affirmative_button*(%(arg-type)"Button":button.html% button)
+
+Sets the affirmative button for the sizer. This allows you to use identifiers other than the standard identifiers outlined above.
+
+h3(#StdDialogButtonSizer_setcancelbutton). StdDialogButtonSizer#set_cancel_button
+
+  *set_cancel_button*(%(arg-type)"Button":button.html% button)
+
+Sets the cancel button for the sizer. This allows you to use identifiers other than the standard identifiers outlined above.
+
+h3(#StdDialogButtonSizer_setnegativebutton). StdDialogButtonSizer#set_negative_button
+
+  *set_negative_button*(%(arg-type)"Button":button.html% button)
+
+Sets the negative button for the sizer. This allows you to use identifiers other than the standard identifiers outlined above.
+

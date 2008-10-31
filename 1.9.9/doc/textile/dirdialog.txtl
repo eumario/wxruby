@@ -1,0 +1,102 @@
+h1(#wxdirdialog). Wx::DirDialog
+
+This class represents the directory chooser dialog.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+|@DD_DEFAULT_STYLE@|Equivalent to a combination of DEFAULT_DIALOG_STYLE and RESIZE_BORDER (the last one is not used under WinCE).|
+|@DD_DIR_MUST_EXIST@|The dialog will allow the user to choose only an existing folder. When this style is not given, a "Create new directory" button is added to the dialog (on Windows) or some other way is provided to the user to type the name of a new folder.|
+|@DD_CHANGE_DIR@|Change the current working directory to the directory chosen by the user.|
+
+
+*NB:* on Windows the new directory button is only available with recent versions of the common dialogs.
+
+See also "Generic window styles":windowstyles.html.
+
+h2. See also
+
+"DirDialog overview":dirdialogoverview.html, "FileDialog":filedialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DirDialog.new":#DirDialog_new
+* "DirDialog#get_path":#DirDialog_getpath
+* "DirDialog#get_message":#DirDialog_getmessage
+* "DirDialog#set_message":#DirDialog_setmessage
+* "DirDialog#set_path":#DirDialog_setpath
+* "DirDialog#show_modal":#DirDialog_showmodal
+
+</div>
+
+
+h3(#DirDialog_new). DirDialog.new
+
+  *DirDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message = "Choose a directory", 
+                %(arg-type)String% defaultPath = "", 
+                %(arg-type)Integer% style = DD_DEFAULT_STYLE, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)String% name = "DirCtrl")
+
+Constructor. Use "DirDialog#show_modal":dirdialog.html#DirDialog_showmodal to show
+the dialog.
+
+h4. Parameters
+
+* _parent_ Parent window.
+* _message_ Message to show on the dialog.
+* _defaultPath_ The default path, or the empty string.
+* _style_ The dialog style. See "DirDialog":dirdialog.html
+* _pos_ Dialog position. Ignored under Windows.
+* _size_ Dialog size. Ignored under Windows.
+* _name_ The dialog name, not used.
+
+  *destructor*()
+
+Destructor.
+
+h3(#DirDialog_getpath). DirDialog#get_path
+
+ String *get_path*()
+
+Returns the default or user-selected path.
+
+h3(#DirDialog_getmessage). DirDialog#get_message
+
+ String *get_message*()
+
+Returns the message that will be displayed on the dialog.
+
+h3(#DirDialog_setmessage). DirDialog#set_message
+
+  *set_message*(%(arg-type)String% message)
+
+Sets the message that will be displayed on the dialog.
+
+h3(#DirDialog_setpath). DirDialog#set_path
+
+  *set_path*(%(arg-type)String% path)
+
+Sets the default path.
+
+h3(#DirDialog_showmodal). DirDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning ID_OK if the user pressed OK, and ID_CANCEL
+otherwise.
+
+

@@ -1,0 +1,83 @@
+h1(#wxmenuevent). Wx::MenuEvent
+
+This class is used to represent a variety of menu-related events such as
+highlighting, opening and closing items. Note that the commonest event
+to be handled from menus - that of actually choosing a menu item - is
+not a MenuEvent but a "CommandEvent":commandevent.html, captured by
+using @evt_menu@.
+
+The default handler for @evt_menu_highlight@ displays help text in the
+first field of the status bar.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a menu event, use these event handler macros to direct input to member
+functions that take a MenuEvent argument. They can only be processed by
+a menubar's frame.
+
+
+
+|*evt_menu_open()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A menu is about to be opened. On Windows,this is only sent once for each navigation of the menubar (up until all menus have closed).|
+|*evt_menu_close()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A menu has been just closed.|
+|*evt_menu_highlight(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The menu item with thespecified id has been highlighted: used to show help prompts in the status barby "Frame":frame.html|
+|*evt_menu_highlight_all()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A menu item has beenhighlighted, i.e. the currently selected menu item has changed.|
+
+
+h2. See also
+
+"Command events":commandevent.html,
+
+"Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MenuEvent.new":#MenuEvent_new
+* "MenuEvent#get_menu":#MenuEvent_getmenu
+* "MenuEvent#get_menu_id":#MenuEvent_getmenuid
+* "MenuEvent#is_popup":#MenuEvent_ispopup
+
+</div>
+
+
+
+h3(#MenuEvent_new). MenuEvent.new
+
+  *MenuEvent.new*(%(arg-type)"TYPE":type.html% id = 0,  %(arg-type)Integer% id = 0,  %(arg-type)"Menu":menu.html% menu = nil)
+
+Constructor.
+
+
+h3(#MenuEvent_getmenu). MenuEvent#get_menu
+
+ "Menu":menu.html *get_menu*()
+
+Returns the menu which is being opened or closed. This method should only be
+used with the @OPEN@ and @CLOSE@ events.
+
+
+h3(#MenuEvent_getmenuid). MenuEvent#get_menu_id
+
+ Integer *get_menu_id*()
+
+Returns the menu identifier associated with the event. This method should be
+only used with the @HIGHLIGHT@ events.
+
+
+h3(#MenuEvent_ispopup). MenuEvent#is_popup
+
+ Boolean *is_popup*()
+
+Returns @true@ if the menu which is being opened or closed is a popup menu, 
+@false@ if it is a normal one.
+
+This method should only be used with the @OPEN@ and @CLOSE@ events.
+
+

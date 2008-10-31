@@ -1,0 +1,68 @@
+h1(#wxtooltip). Wx::ToolTip
+
+This class holds information about a tooltip associated with a window
+(see "Window#set_tool_tip":window.html#Window_settooltip).
+
+The two class methods, "ToolTip.enable":tooltip.html#ToolTip_enable and
+"ToolTip.set_delay":tooltip.html#ToolTip_setdelay can be used to
+globally alter tooltips behaviour.
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ToolTip.enable":#ToolTip_enable
+* "ToolTip.set_delay":#ToolTip_setdelay
+* "ToolTip.new":#ToolTip_new
+* "ToolTip#set_tip":#ToolTip_settip
+* "ToolTip#get_tip":#ToolTip_gettip
+* "ToolTip#get_window":#ToolTip_getwindow
+
+</div>
+
+
+
+h3(#ToolTip_enable). ToolTip.enable
+
+  *ToolTip.enable*(%(arg-type)Boolean% flag)
+
+Enable or disable tooltips globally. May not be supported on all
+platforms (eg. Cocoa).
+                                    
+
+h3(#ToolTip_setdelay). ToolTip.set_delay
+
+  *ToolTip.set_delay*(%(arg-type)Integer% msecs)
+
+Set the delay after which tooltips appear. May not be supported on all
+platforms (eg. Cocoa).
+
+h3(#ToolTip_wxtooltip). ToolTip.new
+
+  *ToolTip.new*(%(arg-type)String% tip)
+
+Constructor.
+
+h3(#ToolTip_settip). ToolTip#set_tip
+
+  *set_tip*(%(arg-type)String% tip)
+
+Set the tooltip text.
+
+
+h3(#ToolTip_gettip). ToolTip#get_tip
+
+ String *get_tip*()
+
+Get the tooltip text.
+
+h3(#ToolTip_getwindow). ToolTip#get_window
+
+ "Window":window.html *get_window*()
+
+Get the associated window.
+

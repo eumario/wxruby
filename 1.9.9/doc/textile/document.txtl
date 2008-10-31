@@ -1,0 +1,398 @@
+h1(#wxdocument). Wx::Document
+
+The document class can be used to model an application's file-based
+data. It is part of the document/view framework supported by Widgets,
+and cooperates with the "View":view.html, "DocTemplate":doctemplate.html and "DocManager":docmanager.html classes.
+
+h2. Derived from
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"Document overview":documentoverview.html, "View":view.html, "DocTemplate":doctemplate.html, "DocManager":docmanager.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Document#m__command_processor":#Document_mcommandprocessor
+* "Document#m__document_file":#Document_mdocumentfile
+* "Document#m__document_modified":#Document_mdocumentmodified
+* "Document#m__document_template":#Document_mdocumenttemplate
+* "Document#m__document_title":#Document_mdocumenttitle
+* "Document#m__document_type_name":#Document_mdocumenttypename
+* "Document#m__document_views":#Document_mdocumentviews
+* "Document.new":#Document_new
+* "Document#add_view":#Document_addview
+* "Document#close":#Document_close
+* "Document#delete_all_views":#Document_deleteallviews
+* "Document#get_command_processor":#Document_getcommandprocessor
+* "Document#get_document_template":#Document_getdocumenttemplate
+* "Document#get_document_manager":#Document_getdocumentmanager
+* "Document#get_document_name":#Document_getdocumentname
+* "Document#get_document_window":#Document_getdocumentwindow
+* "Document#get_filename":#Document_getfilename
+* "Document#get_first_view":#Document_getfirstview
+* "Document#get_printable_name":#Document_getprintablename
+* "Document#get_title":#Document_gettitle
+* "Document#get_views":#Document_getviews
+* "Document#is_modified":#Document_ismodified
+* "Document#load_object":#Document_loadobject
+* "Document#modify":#Document_modify
+* "Document#on_changed_view_list":#Document_onchangedviewlist
+* "Document#on_close_document":#Document_onclosedocument
+* "Document#on_create":#Document_oncreate
+* "Document#on_create_command_processor":#Document_oncreatecommandprocessor
+* "Document#on_new_document":#Document_onnewdocument
+* "Document#on_open_document":#Document_onopendocument
+* "Document#on_save_document":#Document_onsavedocument
+* "Document#on_save_modified":#Document_onsavemodified
+* "Document#remove_view":#Document_removeview
+* "Document#save":#Document_save
+* "Document#save_as":#Document_saveas
+* "Document#save_object":#Document_saveobject
+* "Document#set_command_processor":#Document_setcommandprocessor
+* "Document#set_document_name":#Document_setdocumentname
+* "Document#set_document_template":#Document_setdocumenttemplate
+* "Document#set_filename":#Document_setfilename
+* "Document#set_title":#Document_settitle
+* "Document#update_all_views":#Document_updateallviews
+
+</div>
+
+
+h3(#Document_mcommandprocessor). Document#m__command_processor
+
+CommandProcessor*m_commandProcessor
+
+A pointer to the command processor associated with this document.
+
+h3(#Document_mdocumentfile). Document#m__document_file
+
+Stringm_documentFile
+
+Filename associated with this document (``" if none).
+
+h3(#Document_mdocumentmodified). Document#m__document_modified
+
+boolm_documentModified
+
+true if the document has been modified, false otherwise.
+
+h3(#Document_mdocumenttemplate). Document#m__document_template
+
+DocTemplate *m_documentTemplate
+
+A pointer to the template from which this document was created.
+
+h3(#Document_mdocumenttitle). Document#m__document_title
+
+Stringm_documentTitle
+
+Document title. The document title is used for an associated
+frame (if any), and is usually constructed by the framework from
+the filename.
+
+h3(#documenttypename). Document#m__document_type_name
+
+Stringm_documentTypeName
+
+The document type name given to the DocTemplate constructor, copied to this
+variable when the document is created. If several document templates are
+created that use the same document type, this variable is used in DocManager::CreateView
+to collate a list of alternative view types that can be used on this kind of
+document. Do not change the value of this variable.
+
+h3(#Document_mdocumentviews). Document#m__document_views
+
+Listm_documentViews
+
+List of View instances associated with this document.
+
+h3(#Document_new). Document.new
+
+  *destructor*()
+
+Destructor. Removes itself from the document manager.
+
+h3(#Document_addview). Document#add_view
+
+ Boolean *add_view*(%(arg-type)"View":view.html% view)
+
+If the view is not already in the list of views, adds the view and calls OnChangedViewList.
+
+h3(#Document_close). Document#close
+
+ Boolean *close*()
+
+Closes the document, by calling OnSaveModified and then (if this returned true) OnCloseDocument.
+This does not normally delete the document object: use DeleteAllViews to do this implicitly.
+
+h3(#Document_deleteviews). Document#delete_all_views
+
+ Boolean *delete_all_views*()
+
+Calls View::Close and deletes each view. Deleting the final view will implicitly
+delete the document itself, because the View destructor calls RemoveView. This
+in turns calls Document::OnChangedViewList, whose default implemention is to
+save and delete the document if no views exist.
+
+h3(#Document_getcommandprocessor). Document#get_command_processor
+
+ "CommandProcessor":commandprocessor.html *get_command_processor*()
+
+Returns a pointer to the command processor associated with this document.
+
+See "CommandProcessor":commandprocessor.html.
+
+h3(#Document_getdocumenttemplate). Document#get_document_template
+
+ "DocTemplate":doctemplate.html *get_document_template*()
+
+Gets a pointer to the template that created the document.
+
+h3(#Document_getdocumentmanager). Document#get_document_manager
+
+ "DocManager":docmanager.html *get_document_manager*()
+
+Gets a pointer to the associated document manager.
+
+h3(#Document_getdocumentname). Document#get_document_name
+
+ String *get_document_name*()
+
+Gets the document type name for this document. See the comment for "documentTypeName":documenttypename.html.
+
+h3(#Document_getdocumentwindow). Document#get_document_window
+
+ "Window":window.html *get_document_window*()
+
+Intended to return a suitable window for using as a parent for document-related
+dialog boxes. By default, uses the frame associated with the first view.
+
+h3(#Document_getfilename). Document#get_filename
+
+ String *get_filename*()
+
+Gets the filename associated with this document, or "" if none is
+associated.
+
+h3(#Document_getfirstview). Document#get_first_view
+
+ "View":view.html *get_first_view*()
+
+A convenience function to get the first view for a document, because
+in many cases a document will only have a single view.
+
+See also: "get_views":#Document_getviews
+
+h3(#Document_getprintablename). Document#get_printable_name
+
+  *get_printable_name*(%(arg-type)String% name)
+
+Copies a suitable document name into the supplied _name_ buffer. The default
+function uses the title, or if there is no title, uses the filename; or if no
+filename, the string *unnamed*. 
+
+
+
+h3(#Document_gettitle). Document#get_title
+
+ String *get_title*()
+
+Gets the title for this document. The document title is used for an associated
+frame (if any), and is usually constructed by the framework from
+the filename.
+
+h3(#Document_getviews). Document#get_views
+
+ "List":list.html *get_views*()
+
+Returns the list whose elements are the views on the document.
+
+See also: "get_first_view":#Document_getfirstview
+
+h3(#Document_ismodified). Document#is_modified
+
+ Boolean *is_modified*()
+
+Returns true if the document has been modified since the last save, false otherwise.
+You may need to override this if your document view maintains its own
+record of being modified (for example if using TextWindow to view and edit the document).
+
+See also "Modify":documentmodify.html.
+
+h3(#Document_loadobject). Document#load_object
+
+ istream *load_object*(%(arg-type)"istream":istream.html% stream)
+
+ "InputStream":inputstream.html *load_object*(%(arg-type)"InputStream":inputstream.html% stream)
+
+Override this function and call it from your own LoadObject before
+streaming your own data. LoadObject is called by the framework
+automatically when the document contents need to be loaded.
+
+Note that only one of these forms exists, depending on how Widgets
+was configured.
+
+h3(#Document_modify). Document#modify
+
+  *modify*(%(arg-type)Boolean% modify)
+
+Call with true to mark the document as modified since the last save, false otherwise.
+You may need to override this if your document view maintains its own
+record of being modified (for example if using TextWindow to view and edit the document).
+
+See also "is_modified":#Document_ismodified.
+
+h3(#Document_onchangedviewlist). Document#on_changed_view_list
+
+  *on_changed_view_list*()
+
+Called when a view is added to or deleted from this document. The default
+implementation saves and deletes the document if no views exist (the last
+one has just been removed).
+
+h3(#Document_onclosedocument). Document#on_close_document
+
+ Boolean *on_close_document*()
+
+The default implementation calls DeleteContents (an empty implementation)
+sets the modified flag to false. Override this to
+supply additional behaviour when the document is closed with Close.
+
+h3(#Document_oncreate). Document#on_create
+
+ Boolean *on_create*(%(arg-type)String% path,  %(arg-type)Integer% flags)
+
+Called just after the document object is created to give it a chance
+to initialize itself. The default implementation uses the
+template associated with the document to create an initial view.
+If this function returns false, the document is deleted.
+
+h3(#Document_oncreatecommandprocessor). Document#on_create_command_processor
+
+ "CommandProcessor":commandprocessor.html *on_create_command_processor*()
+
+Override this function if you want a different (or no) command processor
+to be created when the document is created. By default, it returns
+an instance of CommandProcessor.
+
+See "CommandProcessor":commandprocessor.html.
+
+h3(#Document_onnewdocument). Document#on_new_document
+
+ Boolean *on_new_document*()
+
+The default implementation calls OnSaveModified and DeleteContents, makes a default title for the
+document, and notifies the views that the filename (in fact, the title) has changed.
+
+h3(#Document_onopendocument). Document#on_open_document
+
+ Boolean *on_open_document*(%(arg-type)String% filename)
+
+Constructs an input file stream for the given filename (which must not be empty),
+and calls LoadObject. If LoadObject returns true, the document is set to
+unmodified; otherwise, an error message box is displayed. The document's
+views are notified that the filename has changed, to give windows an opportunity
+to update their titles. All of the document's views are then updated.
+
+h3(#Document_onsavedocument). Document#on_save_document
+
+ Boolean *on_save_document*(%(arg-type)String% filename)
+
+Constructs an output file stream for the given filename (which must not be empty),
+and calls SaveObject. If SaveObject returns true, the document is set to
+unmodified; otherwise, an error message box is displayed.
+
+h3(#Document_onsavemodified). Document#on_save_modified
+
+ Boolean *on_save_modified*()
+
+If the document has been modified, prompts the user to ask if the changes should
+be changed. If the user replies Yes, the Save function is called. If No, the
+document is marked as unmodified and the function succeeds. If Cancel, the
+function fails.
+
+h3(#Document_removeview). Document#remove_view
+
+ Boolean *remove_view*(%(arg-type)"View":view.html% view)
+
+Removes the view from the document's list of views, and calls OnChangedViewList.
+
+h3(#Document_save). Document#save
+
+ Boolean *save*()
+
+Saves the document by calling OnSaveDocument if there is an associated filename,
+or SaveAs if there is no filename.
+
+h3(#Document_saveas). Document#save_as
+
+ Boolean *save_as*()
+
+Prompts the user for a file to save to, and then calls OnSaveDocument.
+
+h3(#Document_saveobject). Document#save_object
+
+ ostream *save_object*(%(arg-type)"ostream":ostream.html% stream)
+
+ "OutputStream":outputstream.html *save_object*(%(arg-type)"OutputStream":outputstream.html% stream)
+
+Override this function and call it from your own SaveObject before
+streaming your own data. SaveObject is called by the framework
+automatically when the document contents need to be saved.
+
+Note that only one of these forms exists, depending on how Widgets
+was configured.
+
+h3(#Document_setcommandprocessor). Document#set_command_processor
+
+  *set_command_processor*(%(arg-type)"CommandProcessor":commandprocessor.html% processor)
+
+Sets the command processor to be used for this document. The document will then be responsible
+for its deletion. Normally you should not call this; override OnCreateCommandProcessor
+instead.
+
+See "CommandProcessor":commandprocessor.html.
+
+h3(#Document_setdocumentname). Document#set_document_name
+
+  *set_document_name*(%(arg-type)String% name)
+
+Sets the document type name for this document. See the comment for "documentTypeName":documenttypename.html.
+
+h3(#Document_setdocumenttemplate). Document#set_document_template
+
+  *set_document_template*(%(arg-type)"DocTemplate":doctemplate.html% templ)
+
+Sets the pointer to the template that created the document. Should only be called by the
+framework.
+
+h3(#Document_setfilename). Document#set_filename
+
+  *set_filename*(%(arg-type)String% filename,  %(arg-type)Boolean% notifyViews = false)
+
+Sets the filename for this document. Usually called by the framework.
+
+If _notifyViews_ is true, View::OnChangeFilename is called for all views.
+
+h3(#Document_settitle). Document#set_title
+
+  *set_title*(%(arg-type)String% title)
+
+Sets the title for this document. The document title is used for an associated
+frame (if any), and is usually constructed by the framework from
+the filename.
+
+h3(#Document_updateallviews). Document#update_all_views
+
+  *update_all_views*(%(arg-type)"View":view.html% sender = nil,  %(arg-type)Object% hint = nil)
+
+Updates all views. If _sender_ is non-NULL, does not update this view.
+
+_hint_ represents optional information to allow a view to optimize its update.
+

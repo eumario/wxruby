@@ -1,0 +1,187 @@
+h1(#wxcalendardateattr). Wx::CalendarDateAttr
+
+CalendarDateAttr is a custom attributes for a calendar date. The objects of
+this class are used with "CalendarCtrl":calendarctrl.html.
+
+h2. Derived from
+
+No base class
+
+h2. Constants
+
+Here are the possible kinds of borders which may be used to decorate a date:
+
+
+ enum CalendarDateBorder
+ {
+     CAL_BORDER_NONE,          // no border (default)
+     CAL_BORDER_SQUARE,        // a rectangular border
+     CAL_BORDER_ROUND          // a round border
+ }
+ 
+
+h2. See also
+
+"CalendarCtrl":calendarctrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "CalendarDateAttr.new":#CalendarDateAttr_new
+* "CalendarDateAttr#set_text_colour":#CalendarDateAttr_settextcolour
+* "CalendarDateAttr#set_background_colour":#CalendarDateAttr_setbackgroundcolour
+* "CalendarDateAttr#set_border_colour":#CalendarDateAttr_setbordercolour
+* "CalendarDateAttr#set_font":#CalendarDateAttr_setfont
+* "CalendarDateAttr#set_border":#CalendarDateAttr_setborder
+* "CalendarDateAttr#set_holiday":#CalendarDateAttr_setholiday
+* "CalendarDateAttr#has_text_colour":#CalendarDateAttr_hastextcolour
+* "CalendarDateAttr#has_background_colour":#CalendarDateAttr_hasbackgroundcolour
+* "CalendarDateAttr#has_border_colour":#CalendarDateAttr_hasbordercolour
+* "CalendarDateAttr#has_font":#CalendarDateAttr_hasfont
+* "CalendarDateAttr#has_border":#CalendarDateAttr_hasborder
+* "CalendarDateAttr#is_holiday":#CalendarDateAttr_isholiday
+* "CalendarDateAttr#get_text_colour":#CalendarDateAttr_gettextcolour
+* "CalendarDateAttr#get_background_colour":#CalendarDateAttr_getbackgroundcolour
+* "CalendarDateAttr#get_border_colour":#CalendarDateAttr_getbordercolour
+* "CalendarDateAttr#get_font":#CalendarDateAttr_getfont
+* "CalendarDateAttr#get_border":#CalendarDateAttr_getborder
+
+</div>
+
+
+
+h3(#CalendarDateAttr_wxcalendardateattr). CalendarDateAttr.new
+
+  *CalendarDateAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack = NullColour, 
+                       %(arg-type)"Colour":colour.html% colBorder = NullColour, 
+                       %(arg-type)"Font":font.html% font = NullFont, 
+                       %(arg-type)"CalendarDateBorder":calendardateborder.html% border = CAL_BORDER_NONE)
+
+  *CalendarDateAttr.new*(%(arg-type)"CalendarDateBorder":calendardateborder.html% border, 
+                       %(arg-type)"Colour":colour.html% colBorder = NullColour)
+
+The constructors.
+
+
+h3(#CalendarDateAttr_settextcolour). CalendarDateAttr#set_text_colour
+
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colText)
+
+Sets the text (foreground) colour to use.
+
+
+h3(#CalendarDateAttr_setbackgroundcolour). CalendarDateAttr#set_background_colour
+
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colBack)
+
+Sets the text background colour to use.
+
+
+h3(#CalendarDateAttr_setbordercolour). CalendarDateAttr#set_border_colour
+
+  *set_border_colour*(%(arg-type)"Colour":colour.html% col)
+
+Sets the border colour to use.
+
+
+h3(#CalendarDateAttr_setfont). CalendarDateAttr#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font to use.
+
+
+h3(#CalendarDateAttr_setborder). CalendarDateAttr#set_border
+
+  *set_border*(%(arg-type)"CalendarDateBorder":calendardateborder.html% border)
+
+Sets the "border kind":calendardateattr.html
+
+
+h3(#CalendarDateAttr_setholiday). CalendarDateAttr#set_holiday
+
+  *set_holiday*(%(arg-type)Boolean% holiday)
+
+Display the date with this attribute as a holiday.
+
+
+h3(#CalendarDateAttr_hastextcolour). CalendarDateAttr#has_text_colour
+
+ Boolean *has_text_colour*()
+
+Returns @true@ if this item has a non default text foreground colour.
+
+
+h3(#CalendarDateAttr_hasbackgroundcolour). CalendarDateAttr#has_background_colour
+
+ Boolean *has_background_colour*()
+
+Returns @true@ if this attribute specifies a non default text background colour.
+
+
+h3(#CalendarDateAttr_hasbordercolour). CalendarDateAttr#has_border_colour
+
+ Boolean *has_border_colour*()
+
+Returns @true@ if this attribute specifies a non default border colour.
+
+
+h3(#CalendarDateAttr_hasfont). CalendarDateAttr#has_font
+
+ Boolean *has_font*()
+
+Returns @true@ if this attribute specifies a non default font.
+
+
+h3(#CalendarDateAttr_hasborder). CalendarDateAttr#has_border
+
+ Boolean *has_border*()
+
+Returns @true@ if this attribute specifies a non default (i.e. any) border.
+
+
+h3(#CalendarDateAttr_isholiday). CalendarDateAttr#is_holiday
+
+ Boolean *is_holiday*()
+
+Returns @true@ if this attribute specifies that this item should be
+displayed as a holiday.
+
+
+h3(#CalendarDateAttr_gettextcolour). CalendarDateAttr#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+Returns the text colour to use for the item with this attribute.
+
+
+h3(#CalendarDateAttr_getbackgroundcolour). CalendarDateAttr#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+Returns the background colour to use for the item with this attribute.
+
+
+h3(#CalendarDateAttr_getbordercolour). CalendarDateAttr#get_border_colour
+
+ "Colour":colour.html *get_border_colour*()
+
+Returns the border colour to use for the item with this attribute.
+
+
+h3(#CalendarDateAttr_getfont). CalendarDateAttr#get_font
+
+ "Font":font.html *get_font*()
+
+Returns the font to use for the item with this attribute.
+
+
+h3(#CalendarDateAttr_getborder). CalendarDateAttr#get_border
+
+ "CalendarDateBorder":calendardateborder.html *get_border*()
+
+Returns the "border":calendardateattr.html to use for the item with this attribute.
+
+
+

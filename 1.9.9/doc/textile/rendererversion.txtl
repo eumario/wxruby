@@ -1,0 +1,56 @@
+h1(#wxrendererversion). Wx::RendererVersion
+
+This simple struct represents the "RendererNative":renderernative.html 
+interface version and is only used as the return value of 
+"RendererNative#get_version":renderernative.html#RendererNative_getversion.
+
+The version has two components: the version itself and the age. If the main
+program and the renderer have different versions they are never compatible with
+each other because the version is only changed when an existing virtual
+function is modified or removed. The age, on the other hand, is incremented
+each time a new virtual method is added and so, at least for the compilers
+using a common C++ object model, the calling program is compatible with any
+renderer which has the age greater or equal to its age. This verification is
+done by "is_compatible":#RendererVersion_iscompatible method.
+
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "RendererVersion#is_compatible":#RendererVersion_iscompatible
+* "RendererVersion#version":#RendererVersion_version
+* "RendererVersion#age":#RendererVersion_age
+
+</div>
+
+
+h3(#wxrenderernativeiscompatible). RendererVersion#is_compatible
+
+ Boolean *is_compatible*(%(arg-type)"RendererVersion":rendererversion.html% ver)
+
+Checks if the main program is compatible with the renderer having the version 
+ver, returns  if it is and  otherwise.
+
+This method is used by 
+"RendererNative#load":renderernative.html#RendererNative_load to determine whether a
+renderer can be used.
+
+
+h3(#RendererVersion_version). RendererVersion#version
+
+const intversion
+
+The version component.
+
+
+h3(#RendererVersion_age). RendererVersion#age
+
+const intage
+
+The age component.
+

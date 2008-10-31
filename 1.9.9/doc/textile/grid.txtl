@@ -1,0 +1,2170 @@
+h1(#wxgrid). Wx::Grid
+
+Grid and its related classes are used for displaying and editing tabular
+data. They provide a rich set of features for display, editing, and
+interacting with a variety of data sources. For simple applications, and to
+help you get started, Grid is the only class you need to refer to
+directly. It will set up default instances of the other classes and manage
+them for you. For more complex applications you can derive your own
+classes for custom grid views, grid data tables, cell editors and
+renderers. The "Grid classes overview":gridoverview.html has
+examples of simple and more complex applications, explains the
+relationship between the various grid classes and has a summary of the
+keyboard shortcuts and mouse functions provided by Grid.
+
+h2. Derived from
+
+"ScrolledWindow":scrolledwindow.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+There are presently no specific window styles for Grid.
+
+h2. Event handling
+
+ gridevt.inc
+
+The event handler for the following functions takes a
+ "GridSizeEvent":gridsizeevent.html parameter.
+The ..._CMD_... variants also take a window identifier.
+
+
+
+|*evt_grid_col_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a column by dragging it. Processes a EVT_GRID_COL_SIZE.|
+|*evt_grid_row_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a row by dragging it. Processes a EVT_GRID_ROW_SIZE.|
+|*evt_grid_cmd_col_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a column by dragging it; variant taking a window identifier. Processes a EVT_GRID_COL_SIZE.|
+|*evt_grid_cmd_row_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a row by dragging it; variant taking a window identifier. Processes a EVT_GRID_ROW_SIZE.|
+
+The event handler for the following functions takes a
+ "GridRangeSelectEvent":gridrangeselectevent.html parameter.
+The ..._CMD_... variant also takes a window identifier.
+
+
+
+|*evt_grid_range_select()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user selected a group of contiguous cells. Processes a EVT_GRID_RANGE_SELECT.|
+|*evt_grid_cmd_range_select(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user selected a group of contiguous cells; variant taking a window identifier. Processes a EVT_GRID_RANGE_SELECT.|
+
+The event handler for the following functions takes a
+ "GridEditorCreatedEvent":grideditorcreatedevent.html parameter.
+The ..._CMD_... variant also takes a window identifier.
+
+
+
+|*evt_grid_editor_created()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The editor for a cell was created. Processes a EVT_GRID_EDITOR_CREATED.|
+|*evt_grid_cmd_editor_created(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The editor for a cell was created; variant taking a window identifier. Processes a EVT_GRID_EDITOR_CREATED.|
+
+h2. See also
+
+"Grid overview":gridoverview.html
+
+h2. Methods
+
+<div id="methods">
+
+* "Grid.new":#Grid_new
+* "Grid#append_cols":#Grid_appendcols
+* "Grid#append_rows":#Grid_appendrows
+* "Grid#auto_size":#Grid_autosize
+* "Grid#auto_size_col_or_row":#Grid_autosizecolorrow
+* "Grid#auto_size_column":#Grid_autosizecolumn
+* "Grid#auto_size_columns":#Grid_autosizecolumns
+* "Grid#auto_size_row":#Grid_autosizerow
+* "Grid#auto_size_rows":#Grid_autosizerows
+* "Grid#begin_batch":#Grid_beginbatch
+* "Grid#block_to_device_rect":#Grid_blocktodevicerect
+* "Grid#can_drag_col_size":#Grid_candragcolsize
+* "Grid#can_drag_row_size":#Grid_candragrowsize
+* "Grid#can_drag_grid_size":#Grid_candraggridsize
+* "Grid#can_enable_cell_control":#Grid_canenablecellcontrol
+* "Grid#can_have_attributes":#Grid_canhaveattributes
+* "Grid#cell_to_rect":#Grid_celltorect
+* "Grid#clear_grid":#Grid_cleargrid
+* "Grid#clear_selection":#Grid_clearselection
+* "Grid#create_grid":#Grid_creategrid
+* "Grid#delete_cols":#Grid_deletecols
+* "Grid#delete_rows":#Grid_deleterows
+* "Grid#disable_cell_edit_control":#Grid_disablecelleditcontrol
+* "Grid#disable_drag_col_size":#Grid_disabledragcolsize
+* "Grid#disable_drag_grid_size":#Grid_disabledraggridsize
+* "Grid#disable_drag_row_size":#Grid_disabledragrowsize
+* "Grid#enable_cell_edit_control":#Grid_enablecelleditcontrol
+* "Grid#enable_drag_col_size":#Grid_enabledragcolsize
+* "Grid#enable_drag_grid_size":#Grid_enabledraggridsize
+* "Grid#enable_drag_row_size":#Grid_enabledragrowsize
+* "Grid#enable_editing":#Grid_enableediting
+* "Grid#enable_grid_lines":#Grid_enablegridlines
+* "Grid#end_batch":#Grid_endbatch
+* "Grid#fit":#Grid_fit
+* "Grid#force_refresh":#Grid_forcerefresh
+* "Grid#get_batch_count":#Grid_getbatchcount
+* "Grid#get_cell_alignment":#Grid_getcellalignment
+* "Grid#get_cell_background_colour":#Grid_getcellbackgroundcolour
+* "Grid#get_cell_editor":#Grid_getcelleditor
+* "Grid#get_cell_font":#Grid_getcellfont
+* "Grid#get_cell_renderer":#Grid_getcellrenderer
+* "Grid#get_cell_text_colour":#Grid_getcelltextcolour
+* "Grid#get_cell_value":#Grid_getcellvalue
+* "Grid#get_col_left":#Grid_getcolleft
+* "Grid#get_col_label_alignment":#Grid_getcollabelalignment
+* "Grid#get_col_label_size":#Grid_getcollabelsize
+* "Grid#get_col_label_value":#Grid_getcollabelvalue
+* "Grid#get_col_minimal_acceptable_width":#Grid_getcolminimalacceptablewidth
+* "Grid#get_col_minimal_width":#Grid_getcolminimalwidth
+* "Grid#get_col_right":#Grid_getcolright
+* "Grid#get_col_size":#Grid_getcolsize
+* "Grid#get_default_cell_alignment":#Grid_getdefaultcellalignment
+* "Grid#get_default_cell_background_colour":#Grid_getdefaultcellbackgroundcolour
+* "Grid#get_default_cell_font":#Grid_getdefaultcellfont
+* "Grid#get_default_cell_text_colour":#Grid_getdefaultcelltextcolour
+* "Grid#get_default_col_label_size":#Grid_getdefaultcollabelsize
+* "Grid#get_default_col_size":#Grid_getdefaultcolsize
+* "Grid#get_default_editor":#Grid_getdefaulteditor
+* "Grid#get_default_editor_for_cell":#Grid_getdefaulteditorforcell
+* "Grid#get_default_editor_for_type":#Grid_getdefaulteditorfortype
+* "Grid#get_default_renderer":#Grid_getdefaultrenderer
+* "Grid#get_default_renderer_for_cell":#Grid_getdefaultrendererforcell
+* "Grid#get_default_renderer_for_type":#Grid_getdefaultrendererfortype
+* "Grid#get_default_row_label_size":#Grid_getdefaultrowlabelsize
+* "Grid#get_default_row_size":#Grid_getdefaultrowsize
+* "Grid#get_grid_cursor_col":#Grid_getgridcursorcol
+* "Grid#get_grid_cursor_row":#Grid_getgridcursorrow
+* "Grid#get_grid_line_colour":#Grid_getgridlinecolour
+* "Grid#grid_lines_enabled":#Grid_gridlinesenabled
+* "Grid#get_label_background_colour":#Grid_getlabelbackgroundcolour
+* "Grid#get_label_font":#Grid_getlabelfont
+* "Grid#get_label_text_colour":#Grid_getlabeltextcolour
+* "Grid#get_number_cols":#Grid_getnumbercols
+* "Grid#get_number_rows":#Grid_getnumberrows
+* "Grid#get_or_create_cell_attr":#Grid_getorcreatecellattr
+* "Grid#get_row_minimal_acceptable_height":#Grid_getrowminimalacceptableheight
+* "Grid#get_row_minimal_height":#Grid_getrowminimalheight
+* "Grid#get_row_label_alignment":#Grid_getrowlabelalignment
+* "Grid#get_row_label_size":#Grid_getrowlabelsize
+* "Grid#get_row_label_value":#Grid_getrowlabelvalue
+* "Grid#get_row_size":#Grid_getrowsize
+* "Grid#get_scroll_line_x":#Grid_getscrolllinex
+* "Grid#get_scroll_line_y":#Grid_getscrollliney
+* "Grid#get_selection_mode":#Grid_getselectionmode
+* "Grid#get_selected_cells":#Grid_getselectedcells
+* "Grid#get_selected_cols":#Grid_getselectedcols
+* "Grid#get_selected_rows":#Grid_getselectedrows
+* "Grid#get_selection_background":#Grid_getselectionbackground
+* "Grid#get_selection_block_top_left":#Grid_getselectionblocktopleft
+* "Grid#get_selection_block_bottom_right":#Grid_getselectionblockbottomright
+* "Grid#get_selection_foreground":#Grid_getselectionforeground
+* "Grid#get_table":#Grid_gettable
+* "Grid#get_view_width":#Grid_getviewwidth
+* "Grid#hide_cell_edit_control":#Grid_hidecelleditcontrol
+* "Grid#init_col_widths":#Grid_initcolwidths
+* "Grid#init_row_heights":#Grid_initrowheights
+* "Grid#insert_cols":#Grid_insertcols
+* "Grid#insert_rows":#Grid_insertrows
+* "Grid#is_cell_edit_control_enabled":#Grid_iscelleditcontrolenabled
+* "Grid#is_current_cell_read_only":#Grid_iscurrentcellreadonly
+* "Grid#is_editable":#Grid_iseditable
+* "Grid#is_in_selection":#Grid_isinselection
+* "Grid#is_read_only":#Grid_isreadonly
+* "Grid#is_selection":#Grid_isselection
+* "Grid#is_visible":#Grid_isvisible
+* "Grid#make_cell_visible":#Grid_makecellvisible
+* "Grid#move_cursor_down":#Grid_movecursordown
+* "Grid#move_cursor_left":#Grid_movecursorleft
+* "Grid#move_cursor_right":#Grid_movecursorright
+* "Grid#move_cursor_up":#Grid_movecursorup
+* "Grid#move_cursor_down_block":#Grid_movecursordownblock
+* "Grid#move_cursor_left_block":#Grid_movecursorleftblock
+* "Grid#move_cursor_right_block":#Grid_movecursorrightblock
+* "Grid#move_cursor_up_block":#Grid_movecursorupblock
+* "Grid#move_page_down":#Grid_movepagedown
+* "Grid#move_page_up":#Grid_movepageup
+* "Grid#register_data_type":#Grid_registerdatatype
+* "Grid#save_edit_control_value":#Grid_saveeditcontrolvalue
+* "Grid#select_all":#Grid_selectall
+* "Grid#select_block":#Grid_selectblock
+* "Grid#select_col":#Grid_selectcol
+* "Grid#selection_to_device_rect":#Grid_selectiontodevicerect
+* "Grid#select_row":#Grid_selectrow
+* "Grid#set_cell_alignment":#Grid_setcellalignment
+* "Grid#set_cell_background_colour":#Grid_setcellbackgroundcolour
+* "Grid#set_cell_editor":#Grid_setcelleditor
+* "Grid#set_cell_font":#Grid_setcellfont
+* "Grid#set_cell_renderer":#Grid_setcellrenderer
+* "Grid#set_cell_text_colour":#Grid_setcelltextcolour
+* "Grid#set_cell_value":#Grid_setcellvalue
+* "Grid#set_col_attr":#Grid_setcolattr
+* "Grid#set_col_format_bool":#Grid_setcolformatbool
+* "Grid#set_col_format_number":#Grid_setcolformatnumber
+* "Grid#set_col_format_float":#Grid_setcolformatfloat
+* "Grid#set_col_format_custom":#Grid_setcolformatcustom
+* "Grid#set_col_label_alignment":#Grid_setcollabelalignment
+* "Grid#set_col_label_size":#Grid_setcollabelsize
+* "Grid#set_col_label_value":#Grid_setcollabelvalue
+* "Grid#set_col_minimal_width":#Grid_setcolminimalwidth
+* "Grid#set_col_minimal_acceptable_width":#Grid_setcolminimalacceptablewidth
+* "Grid#set_col_size":#Grid_setcolsize
+* "Grid#set_default_cell_alignment":#Grid_setdefaultcellalignment
+* "Grid#set_default_cell_background_colour":#Grid_setdefaultcellbackgroundcolour
+* "Grid#set_default_cell_font":#Grid_setdefaultcellfont
+* "Grid#set_default_cell_text_colour":#Grid_setdefaultcelltextcolour
+* "Grid#set_default_editor":#Grid_setdefaulteditor
+* "Grid#set_default_renderer":#Grid_setdefaultrenderer
+* "Grid#set_default_col_size":#Grid_setdefaultcolsize
+* "Grid#set_default_row_size":#Grid_setdefaultrowsize
+* "Grid#set_grid_cursor":#Grid_setgridcursor
+* "Grid#set_grid_line_colour":#Grid_setgridlinecolour
+* "Grid#set_label_background_colour":#Grid_setlabelbackgroundcolour
+* "Grid#set_label_font":#Grid_setlabelfont
+* "Grid#set_label_text_colour":#Grid_setlabeltextcolour
+* "Grid#set_margins":#Grid_setmargins
+* "Grid#set_or_calc_column_sizes":#Grid_setorcalccolumnsizes
+* "Grid#set_or_calc_row_sizes":#Grid_setorcalcrowsizes
+* "Grid#set_read_only":#Grid_setreadonly
+* "Grid#set_row_attr":#Grid_setrowattr
+* "Grid#set_row_label_alignment":#Grid_setrowlabelalignment
+* "Grid#set_row_label_size":#Grid_setrowlabelsize
+* "Grid#set_row_label_value":#Grid_setrowlabelvalue
+* "Grid#set_row_minimal_height":#Grid_setrowminimalheight
+* "Grid#set_row_minimal_acceptable_height":#Grid_setrowminimalacceptableheight
+* "Grid#set_row_size":#Grid_setrowsize
+* "Grid#set_scroll_line_x":#Grid_setscrolllinex
+* "Grid#set_scroll_line_y":#Grid_setscrollliney
+* "Grid#set_selection_background":#Grid_setselectionbackground
+* "Grid#set_selection_foreground":#Grid_setselectionforeground
+* "Grid#set_selection_mode":#Grid_setselectionmode
+* "Grid#set_table":#Grid_settable
+* "Grid#show_cell_edit_control":#Grid_showcelleditcontrol
+* "Grid#xto_col":#Grid_xtocol
+* "Grid#xto_edge_of_col":#Grid_xtoedgeofcol
+* "Grid#yto_edge_of_row":#Grid_ytoedgeofrow
+* "Grid#yto_row":#Grid_ytorow
+
+</div>
+
+h3(#Grid_new). Grid.new
+
+  *Grid.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+           %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+           %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+           %(arg-type)Integer% style = WANTS_CHARS, 
+           %(arg-type)String% name = PanelNameStr)
+
+Constructor to create a grid object. Call either "Grid#create_grid":grid.html#Grid_creategrid or
+"Grid#set_table":grid.html#Grid_settable directly after this to initialize the grid before using
+it.
+
+
+h3(#Grid_appendcols). Grid#append_cols
+
+ Boolean *append_cols*(%(arg-type)Integer% numCols = 1,  %(arg-type)Boolean% updateLabels = true)
+
+Appends one or more new columns to the right of the grid and returns true if
+successful. The updateLabels argument is not used at present.
+
+If you are using a derived grid table class you will need to override
+"GridTableBase#append_cols":gridtablebase.html#GridTableBase_appendcols. See
+"Grid#insert_cols":grid.html#Grid_insertcols for further information.
+
+
+
+h3(#Grid_appendrows). Grid#append_rows
+
+ Boolean *append_rows*(%(arg-type)Integer% numRows = 1,  %(arg-type)Boolean% updateLabels = true)
+
+Appends one or more new rows to the bottom of the grid and returns true if
+successful. The updateLabels argument is not used at present.
+
+If you are using a derived grid table class you will need to override
+"GridTableBase#append_rows":gridtablebase.html#GridTableBase_appendrows. See
+"Grid#insert_rows":grid.html#Grid_insertrows for further information.
+
+
+
+h3(#Grid_autosize). Grid#auto_size
+
+  *auto_size*()
+
+Automatically sets the height and width of all rows and columns to fit their contents.
+
+h4. Note
+
+Grid sets up arrays to store individual row and column sizes when non-default sizes are used.
+The memory requirements for this could become prohibitive if your grid is very large.
+
+
+
+h3(#Grid_autosizecolorrow). Grid#auto_size_col_or_row
+
+  *auto_size_col_or_row*(%(arg-type)Integer% n,  %(arg-type)Boolean% setAsMin, 
+                       %(arg-type)Boolean% column)
+
+Common part of AutoSizeColumn/Row() or row?
+
+
+
+h3(#Grid_autosizecolumn). Grid#auto_size_column
+
+  *auto_size_column*(%(arg-type)Integer% col,  %(arg-type)Boolean% setAsMin = true)
+
+Automatically sizes the column to fit its contents. If setAsMin is true the calculated width will
+also be set as the minimal width for the column.
+
+h4. Note
+
+Grid sets up arrays to store individual row and column sizes when non-default sizes are used.
+The memory requirements for this could become prohibitive if your grid is very large.
+
+
+
+h3(#Grid_autosizecolumns). Grid#auto_size_columns
+
+  *auto_size_columns*(%(arg-type)Boolean% setAsMin = true)
+
+Automatically sizes all columns to fit their contents. If setAsMin is true the calculated widths will
+also be set as the minimal widths for the columns.
+
+h4. Note
+
+Grid sets up arrays to store individual row and column sizes when non-default sizes are used.
+The memory requirements for this could become prohibitive if your grid is very large.
+
+
+
+h3(#Grid_autosizerow). Grid#auto_size_row
+
+  *auto_size_row*(%(arg-type)Integer% row,  %(arg-type)Boolean% setAsMin = true)
+
+Automatically sizes the row to fit its contents. If setAsMin is true the calculated height will
+also be set as the minimal height for the row.
+
+h4. Note
+
+Grid sets up arrays to store individual row and column sizes when non-default sizes are used.
+The memory requirements for this could become prohibitive if your grid is very large.
+
+
+
+h3(#Grid_autosizerows). Grid#auto_size_rows
+
+  *auto_size_rows*(%(arg-type)Boolean% setAsMin = true)
+
+Automatically sizes all rows to fit their contents. If setAsMin is true the calculated heights will
+also be set as the minimal heights for the rows.
+
+h4. Note
+
+Grid sets up arrays to store individual row and column sizes when non-default sizes are used.
+The memory requirements for this could become prohibitive if your grid is very large.
+
+
+
+h3(#Grid_beginbatch). Grid#begin_batch
+
+  *begin_batch*()
+
+Increments the grid's batch count. When the count is greater than zero repainting of
+the grid is suppressed. Each call to BeginBatch must be matched by a later call to
+"Grid#end_batch":grid.html#Grid_endbatch. Code that does a lot of grid
+modification can be enclosed between BeginBatch and EndBatch calls to avoid
+screen flicker. The final EndBatch will cause the grid to be repainted.
+
+
+
+h3(#Grid_blocktodevicerect). Grid#block_to_device_rect
+
+ "Rect":rect.html *block_to_device_rect*(%(arg-type)Array% topLeft, 
+                                            %(arg-type)Array% bottomRight)
+
+This function returns the rectangle that encloses the block of cells
+limited by TopLeft and BottomRight cell in device coords and clipped
+to the client size of the grid window.
+
+The top-left and bottom-right positions should be passed in as two
+element arrays, each representing a row, col grid coordinate; for example:
+
+  block_to_device_rect( [1, 1], [4, 2] )
+
+h3(#Grid_candragcolmove). Grid#can_drag_col_move
+
+ Boolean *can_drag_col_move*()
+
+Returns true if columns can be moved by dragging with the mouse. Columns can be moved
+by dragging on their labels.
+
+
+
+h3(#Grid_candragcolsize). Grid#can_drag_col_size
+
+ Boolean *can_drag_col_size*()
+
+Returns true if columns can be resized by dragging with the mouse. Columns can be resized
+by dragging the edges of their labels. If grid line dragging is enabled they can also be
+resized by dragging the right edge of the column in the grid cell area
+(see "Grid#enable_drag_grid_size":grid.html#Grid_enabledraggridsize).
+
+
+
+h3(#Grid_candragrowsize). Grid#can_drag_row_size
+
+ Boolean *can_drag_row_size*()
+
+Returns true if rows can be resized by dragging with the mouse. Rows can be resized
+by dragging the edges of their labels. If grid line dragging is enabled they can also be
+resized by dragging the lower edge of the row in the grid cell area
+(see "Grid#enable_drag_grid_size":grid.html#Grid_enabledraggridsize).
+
+
+
+h3(#Grid_candraggridsize). Grid#can_drag_grid_size
+
+ Boolean *can_drag_grid_size*()
+
+Return true if the dragging of grid lines to resize rows and columns is enabled or false otherwise.
+
+
+
+h3(#Grid_canenablecellcontrol). Grid#can_enable_cell_control
+
+ Boolean *can_enable_cell_control*()
+
+Returns true if the in-place edit control for the current grid cell can be used and
+false otherwise (e.g. if the current cell is read-only).
+
+
+
+h3(#Grid_canhaveattributes). Grid#can_have_attributes
+
+ Boolean *can_have_attributes*()
+
+Do we have some place to store attributes in?
+
+
+
+h3(#Grid_celltorect). Grid#cell_to_rect
+
+ "Rect":rect.html *cell_to_rect*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Return the rectangle corresponding to the grid cell's size and position
+in logical coordinates.
+
+
+
+h3(#Grid_cleargrid). Grid#clear_grid
+
+  *clear_grid*()
+
+Clears all data in the underlying grid table and repaints the grid. The table is not deleted by
+this function. If you are using a derived table class then you need to override
+"GridTableBase#clear":gridtablebase.html#GridTableBase_clear for this function to have any effect.
+
+
+
+h3(#Grid_clearselection). Grid#clear_selection
+
+  *clear_selection*()
+
+Deselects all cells that are currently selected.
+
+
+
+h3(#Grid_creategrid). Grid#create_grid
+
+ Boolean *create_grid*(%(arg-type)Integer% numRows,  %(arg-type)Integer% numCols, 
+                     %(arg-type)Grid::GridSelectionModes% selmode = Wx::Grid::GridSelectCells)
+
+Creates a grid with the specified initial number of rows and columns.
+Call this directly after the grid constructor. When you use this
+function Grid will create and manage a simple table of string values
+for you. All of the grid data will be stored in memory.
+
+For applications with more complex data types or relationships, or for
+dealing with very large datasets, you should derive your own grid table
+class and pass a table object to the grid with "Grid#set_table":grid.html#Grid_settable.
+
+
+
+h3(#Grid_deletecols). Grid#delete_cols
+
+ Boolean *delete_cols*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numCols = 1, 
+                     %(arg-type)Boolean% updateLabels = true)
+
+Deletes one or more columns from a grid starting at the specified position and returns
+true if successful. The updateLabels argument is not used at present.
+
+If you are using a derived grid table class you will need to override
+"GridTableBase#delete_cols":gridtablebase.html#GridTableBase_deletecols. See
+"Grid#insert_cols":grid.html#Grid_insertcols for further information.
+
+
+
+h3(#Grid_deleterows). Grid#delete_rows
+
+ Boolean *delete_rows*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numRows = 1, 
+                     %(arg-type)Boolean% updateLabels = true)
+
+Deletes one or more rows from a grid starting at the specified position and returns
+true if successful. The updateLabels argument is not used at present.
+
+If you are using a derived grid table class you will need to override
+"GridTableBase#delete_rows":gridtablebase.html#GridTableBase_deleterows. See
+"Grid#insert_rows":grid.html#Grid_insertrows for further information.
+
+
+
+h3(#Grid_disablecelleditcontrol). Grid#disable_cell_edit_control
+
+  *disable_cell_edit_control*()
+
+Disables in-place editing of grid cells.
+Equivalent to calling EnableCellEditControl(false).
+
+
+
+h3(#Grid_disabledragcolmove). Grid#disable_drag_col_move
+
+  *disable_drag_col_move*()
+
+Disables column moving by dragging with the mouse. Equivalent to passing false to
+"Grid#enable_drag_col_move":grid.html#Grid_enabledragcolmove.
+
+
+
+h3(#Grid_disabledragcolsize). Grid#disable_drag_col_size
+
+  *disable_drag_col_size*()
+
+Disables column sizing by dragging with the mouse. Equivalent to passing false to
+"Grid#enable_drag_col_size":grid.html#Grid_enabledragcolsize.
+
+
+
+h3(#Grid_disabledraggridsize). Grid#disable_drag_grid_size
+
+  *disable_drag_grid_size*()
+
+Disable mouse dragging of grid lines to resize rows and columns. Equivalent to passing
+false to "Grid#enable_drag_grid_size":grid.html#Grid_enabledraggridsize
+
+
+
+h3(#Grid_disabledragrowsize). Grid#disable_drag_row_size
+
+  *disable_drag_row_size*()
+
+Disables row sizing by dragging with the mouse. Equivalent to passing false to
+"Grid#enable_drag_row_size":grid.html#Grid_enabledragrowsize.
+
+
+
+h3(#Grid_enablecelleditcontrol). Grid#enable_cell_edit_control
+
+  *enable_cell_edit_control*(%(arg-type)Boolean% enable = true)
+
+Enables or disables in-place editing of grid cell data. The grid will issue either a
+EVT_GRID_EDITOR_SHOWN or EVT_GRID_EDITOR_HIDDEN event.
+
+
+
+h3(#Grid_enabledragcolsize). Grid#enable_drag_col_size
+
+  *enable_drag_col_size*(%(arg-type)Boolean% enable = true)
+
+Enables or disables column sizing by dragging with the mouse.
+
+
+
+h3(#Grid_enabledragcolmove). Grid#enable_drag_col_move
+
+  *enable_drag_col_move*(%(arg-type)Boolean% enable = true)
+
+Enables or disables column moving by dragging with the mouse.
+
+
+
+h3(#Grid_enabledraggridsize). Grid#enable_drag_grid_size
+
+  *enable_drag_grid_size*(%(arg-type)Boolean% enable = true)
+
+Enables or disables row and column resizing by dragging gridlines with the mouse.
+
+
+
+h3(#Grid_enabledragrowsize). Grid#enable_drag_row_size
+
+  *enable_drag_row_size*(%(arg-type)Boolean% enable = true)
+
+Enables or disables row sizing by dragging with the mouse.
+
+
+
+h3(#Grid_enableediting). Grid#enable_editing
+
+  *enable_editing*(%(arg-type)Boolean% edit)
+
+If the edit argument is false this function sets the whole grid as read-only. If the
+argument is true the grid is set to the default state where cells may be editable. In the
+default state you can set single grid cells and whole rows and columns to be editable or
+read-only via
+"GridCellAttribute#set_read_only":gridcellattribute.html#GridCellAttribute_setreadonly. For single
+cells you can also use the shortcut function
+"Grid#set_read_only":grid.html#Grid_setreadonly.
+
+For more information about controlling grid cell attributes see the
+"GridCellAttr":gridcellattr.html cell attribute class and the
+"Grid classes overview":gridoverview.html.
+
+
+
+h3(#Grid_enablegridlines). Grid#enable_grid_lines
+
+  *enable_grid_lines*(%(arg-type)Boolean% enable = true)
+
+Turns the drawing of grid lines on or off.
+
+
+
+h3(#Grid_endbatch). Grid#end_batch
+
+  *end_batch*()
+
+Decrements the grid's batch count. When the count is greater than zero repainting of
+the grid is suppressed. Each previous call to
+"Grid#begin_batch":grid.html#Grid_beginbatch must be matched by a later call to
+EndBatch. Code that does a lot of grid modification can be enclosed between
+BeginBatch and EndBatch calls to avoid screen flicker. The final EndBatch will
+cause the grid to be repainted.
+
+
+
+h3(#Grid_fit). Grid#fit
+
+  *fit*()
+
+Overridden Window method.
+
+
+
+h3(#Grid_forcerefresh). Grid#force_refresh
+
+  *force_refresh*()
+
+Causes immediate repainting of the grid. Use this instead of the usual Window::Refresh.
+
+
+
+h3(#Grid_getbatchcount). Grid#get_batch_count
+
+ Integer *get_batch_count*()
+
+Returns the number of times that "Grid#begin_batch":grid.html#Grid_beginbatch has been called
+without (yet) matching calls to "Grid#end_batch":grid.html#Grid_endbatch. While
+the grid's batch count is greater than zero the display will not be updated.
+
+
+
+h3(#Grid_getcellalignment). Grid#get_cell_alignment
+
+  Array *get_cell_alignment*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Returns a two-element array containing constants for the horizontal and
+vertical alignment setting of the specified cell.
+
+Horizontal alignment will be one of @Wx::ALIGN_LEFT@, @Wx::ALIGN_CENTRE@
+or @Wx::ALIGN_RIGHT@.
+
+Vertical alignment will be one of @Wx::ALIGN_TOP@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_BOTTOM@.
+
+
+h3(#Grid_getcellbackgroundcolour). Grid#get_cell_background_colour
+
+ "Colour":colour.html *get_cell_background_colour*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Returns the background colour of the cell at the specified location.
+
+
+
+h3(#Grid_getcelleditor). Grid#get_cell_editor
+
+ "GridCellEditor":gridcelleditor.html *get_cell_editor*(%(arg-type)Integer% row, 
+                                  %(arg-type)Integer% col)
+
+Returns a pointer to the editor for the cell at the specified location.
+
+See "GridCellEditor":gridcelleditor.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_getcellfont). Grid#get_cell_font
+
+ "Font":font.html *get_cell_font*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Returns the font for text in the grid cell at the specified location.
+
+
+
+h3(#Grid_getcellrenderer). Grid#get_cell_renderer
+
+ "GridCellRenderer":gridcellrenderer.html *get_cell_renderer*(%(arg-type)Integer% row, 
+                                      %(arg-type)Integer% col)
+
+Returns the renderer for the grid cell at the specified location.
+
+See "GridCellRenderer":gridcellrenderer.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_getcelltextcolour). Grid#get_cell_text_colour
+
+ "Colour":colour.html *get_cell_text_colour*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Returns the text colour for the grid cell at the specified location.
+
+
+
+h3(#Grid_getcellvalue). Grid#get_cell_value
+
+ String *get_cell_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Returns the string contained in the cell at the specified location. For
+simple applications where a grid object automatically uses a default
+grid table of string values you use this function together with
+"Grid#set_cell_value":grid.html#Grid_setcellvalue to access cell values.
+
+For more complex applications where you have derived your own grid table
+class that contains various data types (e.g. numeric, boolean or
+user-defined custom types) then you only use this function for those
+cells that contain string values.
+
+See
+"GridTableBase#can_get_value_as":gridtablebase.html#GridTableBase_cangetvalueas
+and the "Grid overview":gridoverview.html for more information.
+
+
+
+h3(#Grid_getcolat). Grid#get_col_at
+
+ Integer *get_col_at*(%(arg-type)Integer% colPos)
+
+Returns the column ID of the specified column position.
+
+
+h3(#Grid_getcolleft). Grid#get_col_left
+
+ Integer *get_col_left*(%(arg-type)Integer% col)
+
+
+
+h3(#Grid_getcollabelalignment). Grid#get_col_label_alignment
+
+  Array *get_col_label_alignment*()
+
+Gets the current column label alignment values as a two-element array
+of constants for the horizontal and vertical alignment.
+
+Horizontal alignment will be one of @Wx::ALIGN_LEFT@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_RIGHT@.
+
+Vertical alignment will be one of @Wx::ALIGN_TOP@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_BOTTOM@.
+
+h3(#Grid_getcollabelsize). Grid#get_col_label_size
+
+ Integer *get_col_label_size*()
+
+Returns the current height of the column labels.
+
+
+
+h3(#Grid_getcollabelvalue). Grid#get_col_label_value
+
+ String *get_col_label_value*(%(arg-type)Integer% col)
+
+Returns the specified column label. The default grid table class provides column labels of
+the form A,B...Z,AA,AB...ZZ,AAA... If you are using a custom grid table you can override
+"GridTableBase#get_col_label_value":gridtablebase.html#GridTableBase_getcollabelvalue to provide
+your own labels.
+
+
+
+h3(#Grid_getcolminimalacceptablewidth). Grid#get_col_minimal_acceptable_width
+
+ Integer *get_col_minimal_acceptable_width*()
+
+This returns the value of the lowest column width that can be handled correctly. See
+member "set_col_minimal_acceptable_width":#Grid_setcolminimalacceptablewidth for details.
+
+
+
+h3(#Grid_getcolminimalwidth). Grid#get_col_minimal_width
+
+ Integer *get_col_minimal_width*(%(arg-type)Integer% col)
+
+Get the minimal width of the given column/row.
+
+
+
+h3(#Grid_getcolpos). Grid#get_col_pos
+
+ Integer *get_col_pos*(%(arg-type)Integer% colID)
+
+Returns the position of the specified column.
+
+
+
+h3(#Grid_getcolright). Grid#get_col_right
+
+ Integer *get_col_right*(%(arg-type)Integer% col)
+
+
+
+h3(#Grid_getcolsize). Grid#get_col_size
+
+ Integer *get_col_size*(%(arg-type)Integer% col)
+
+Returns the width of the specified column.
+
+
+
+h3(#Grid_getdefaultcellalignment). Grid#get_default_cell_alignment
+
+  *get_default_cell_alignment*(%(arg-type)Integer% horiz,  %(arg-type)Integer% vert)
+
+Sets the arguments to the current default horizontal and vertical text alignment
+values.
+
+Horizontal alignment will be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT. 
+
+Vertical alignment will be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
+
+
+
+h3(#Grid_getdefaultcellbackgroundcolour). Grid#get_default_cell_background_colour
+
+ "Colour":colour.html *get_default_cell_background_colour*()
+
+Returns the current default background colour for grid cells.
+
+
+
+h3(#Grid_getdefaultcellfont). Grid#get_default_cell_font
+
+ "Font":font.html *get_default_cell_font*()
+
+Returns the current default font for grid cell text.
+
+
+
+h3(#Grid_getdefaultcelltextcolour). Grid#get_default_cell_text_colour
+
+ "Colour":colour.html *get_default_cell_text_colour*()
+
+Returns the current default colour for grid cell text.
+
+
+
+h3(#Grid_getdefaultcollabelsize). Grid#get_default_col_label_size
+
+ Integer *get_default_col_label_size*()
+
+Returns the default height for column labels.
+
+
+
+h3(#Grid_getdefaultcolsize). Grid#get_default_col_size
+
+ Integer *get_default_col_size*()
+
+Returns the current default width for grid columns.
+
+
+
+h3(#Grid_getdefaulteditor). Grid#get_default_editor
+
+ "GridCellEditor":gridcelleditor.html *get_default_editor*()
+
+Returns a pointer to the current default grid cell editor.
+
+See "GridCellEditor":gridcelleditor.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_getdefaulteditorforcell). Grid#get_default_editor_for_cell
+
+ "GridCellEditor":gridcelleditor.html *get_default_editor_for_cell*(%(arg-type)Integer% row, 
+                                              %(arg-type)Integer% col)
+
+
+h3(#Grid_getdefaulteditorfortype). Grid#get_default_editor_for_type
+
+ "GridCellEditor":gridcelleditor.html *get_default_editor_for_type*(%(arg-type)String% typeName)
+
+
+
+h3(#Grid_getdefaultrenderer). Grid#get_default_renderer
+
+ "GridCellRenderer":gridcellrenderer.html *get_default_renderer*()
+
+Returns a pointer to the current default grid cell renderer.
+
+See "GridCellRenderer":gridcellrenderer.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_getdefaultrendererforcell). Grid#get_default_renderer_for_cell
+
+ "GridCellRenderer":gridcellrenderer.html *get_default_renderer_for_cell*(%(arg-type)Integer% row, 
+                                                  %(arg-type)Integer% col)
+
+
+
+h3(#Grid_getdefaultrendererfortype). Grid#get_default_renderer_for_type
+
+ "GridCellRenderer":gridcellrenderer.html *get_default_renderer_for_type*(%(arg-type)String% typeName)
+
+
+
+h3(#Grid_getdefaultrowlabelsize). Grid#get_default_row_label_size
+
+ Integer *get_default_row_label_size*()
+
+Returns the default width for the row labels.
+
+
+
+h3(#Grid_getdefaultrowsize). Grid#get_default_row_size
+
+ Integer *get_default_row_size*()
+
+Returns the current default height for grid rows.
+
+
+
+h3(#Grid_getgridcursorcol). Grid#get_grid_cursor_col
+
+ Integer *get_grid_cursor_col*()
+
+Returns the current grid cell column position.
+
+
+
+h3(#Grid_getgridcursorrow). Grid#get_grid_cursor_row
+
+ Integer *get_grid_cursor_row*()
+
+Returns the current grid cell row position.
+
+
+
+h3(#Grid_getgridlinecolour). Grid#get_grid_line_colour
+
+ "Colour":colour.html *get_grid_line_colour*()
+
+Returns the colour used for grid lines.
+
+h4. See also
+
+"get_default_grid_line_pen()":#Grid_getdefaultgridlinepen()
+
+
+h3(#Grid_getdefaultgridlinepen). Grid#get_default_grid_line_pen
+
+ "Pen":pen.html *get_default_grid_line_pen*()
+
+Returns the pen used for grid lines. This virtual function may be overridden in
+derived classes in order to change the appearance of grid lines. Note that
+currently the pen width must be $1$.
+
+h4. See also
+
+"get_col_grid_line_pen()":#Grid_getcolgridlinepen(),
+
+"get_row_grid_line_pen()":#Grid_getrowgridlinepen()
+
+
+
+
+h3(#Grid_getrowgridlinepen). Grid#get_row_grid_line_pen
+
+ "Pen":pen.html *get_row_grid_line_pen*(%(arg-type)Integer% row)
+
+Returns the pen used for horizontal grid lines. This virtual function may be
+overridden in derived classes in order to change the appearance of individual
+grid line for the given row row.
+
+Example: 
+
+\\
+
+    // in a grid displaying music notation, use a solid black pen between
+    // octaves (C0=row 127, C1=row 115 etc.)
+    Pen MidiGrid::GetRowGridLinePen(int row)
+    {
+        if ( row          return Pen(*BLACK, 1, SOLID);
+        else 
+           return GetDefaultGridLinePen();
+    }
+ 
+
+
+
+h3(#Grid_getcolgridlinepen). Grid#get_col_grid_line_pen
+
+ "Pen":pen.html *get_col_grid_line_pen*(%(arg-type)Integer% col)
+
+Returns the pen used for vertical grid lines. This virtual function may be
+overridden in derived classes in order to change the appearance of individual
+grid lines for the given column col.
+
+See "get_row_grid_line_pen()":#Grid_getrowgridlinepen() for an example.
+
+
+
+
+h3(#Grid_gridlinesenabled). Grid#grid_lines_enabled
+
+ Boolean *grid_lines_enabled*()
+
+Returns true if drawing of grid lines is turned on, false otherwise.
+
+
+
+h3(#Grid_getlabelbackgroundcolour). Grid#get_label_background_colour
+
+ "Colour":colour.html *get_label_background_colour*()
+
+Returns the colour used for the background of row and column labels.
+
+
+
+h3(#Grid_getlabelfont). Grid#get_label_font
+
+ "Font":font.html *get_label_font*()
+
+Returns the font used for row and column labels.
+
+
+
+h3(#Grid_getlabeltextcolour). Grid#get_label_text_colour
+
+ "Colour":colour.html *get_label_text_colour*()
+
+Returns the colour used for row and column label text.
+
+
+
+h3(#Grid_getnumbercols). Grid#get_number_cols
+
+ Integer *get_number_cols*()
+
+Returns the total number of grid columns (actually the number of columns in the underlying grid
+table).
+
+
+
+h3(#Grid_getnumberrows). Grid#get_number_rows
+
+ Integer *get_number_rows*()
+
+Returns the total number of grid rows (actually the number of rows in the underlying grid table).
+
+
+
+h3(#Grid_getorcreatecellattr). Grid#get_or_create_cell_attr
+
+ "GridCellAttr":gridcellattr.html *get_or_create_cell_attr*(%(arg-type)Integer% row, 
+                                        %(arg-type)Integer% col)
+
+
+
+h3(#Grid_getrowminimalacceptableheight). Grid#get_row_minimal_acceptable_height
+
+ Integer *get_row_minimal_acceptable_height*()
+
+This returns the value of the lowest row width that can be handled correctly. See
+member "set_row_minimal_acceptable_height":#Grid_setrowminimalacceptableheight for details.
+
+
+
+h3(#Grid_getrowminimalheight). Grid#get_row_minimal_height
+
+ Integer *get_row_minimal_height*(%(arg-type)Integer% col)
+
+
+
+h3(#Grid_getrowlabelalignment). Grid#get_row_label_alignment
+
+ Array *get_row_label_alignment*()
+
+Returns a two-element array containing constants for the horizontal and
+vertical alignment of row labels.
+
+Horizontal alignment will be one of @Wx::ALIGN_LEFT@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_RIGHT@.
+
+Vertical alignment will be one of @Wx::ALIGN_TOP@, @Wx::ALIGN_CENTRE@ or @Wx::ALIGN_BOTTOM@.
+
+
+
+
+
+h3(#Grid_getrowlabelsize). Grid#get_row_label_size
+
+ Integer *get_row_label_size*()
+
+Returns the current width of the row labels.
+
+
+
+h3(#Grid_getrowlabelvalue). Grid#get_row_label_value
+
+ String *get_row_label_value*(%(arg-type)Integer% row)
+
+Returns the specified row label. The default grid table class provides numeric row labels.
+If you are using a custom grid table you can override
+"GridTableBase#get_row_label_value":gridtablebase.html#GridTableBase_getrowlabelvalue to provide
+your own labels.
+
+
+
+h3(#Grid_getrowsize). Grid#get_row_size
+
+ Integer *get_row_size*(%(arg-type)Integer% row)
+
+Returns the height of the specified row.
+
+
+
+h3(#Grid_getscrolllinex). Grid#get_scroll_line_x
+
+ Integer *get_scroll_line_x*()
+
+Returns the number of pixels per horizontal scroll increment. The default is 15.
+
+h4. See also
+
+"Grid#get_scroll_line_y":grid.html#Grid_getscrollliney, "Grid#set_scroll_line_x":grid.html#Grid_setscrolllinex, "Grid#set_scroll_line_y":grid.html#Grid_setscrollliney
+
+
+
+h3(#Grid_getscrollliney). Grid#get_scroll_line_y
+
+ Integer *get_scroll_line_y*()
+
+Returns the number of pixels per vertical scroll increment. The default is 15.
+
+h4. See also
+
+"Grid#get_scroll_line_x":grid.html#Grid_getscrolllinex, "Grid#set_scroll_line_x":grid.html#Grid_setscrolllinex, "Grid#set_scroll_line_y":grid.html#Grid_setscrollliney
+
+
+
+h3(#Grid_getselectionmode). Grid#get_selection_mode
+
+ Integer *get_selection_mode*()
+
+Returns the current selection mode as a constant, see
+"Grid#set_selection_mode":grid.html#Grid_setselectionmode.
+
+
+h3(#Grid_getselectedcells). Grid#get_selected_cells
+
+ Array *get_selected_cells*()
+
+Returns an array of singly selected cells, each represented by a
+two-element array containing the row and column position. 
+
+Note that *only* cells selected singly in sequence (eg, by
+CTRL-clicking) will be returned; block selections will not be
+included. To find block selections, use
+"get_selection_block_top_left":#Grid_getselectionblocktopleft and
+"get_selection_block_bottom_right":#Grid_getselectionblockbottomright
+
+h3(#Grid_getselectedcols). Grid#get_selected_cols
+
+ Array *get_selected_cols*()
+
+Returns an array of selected cols.
+
+
+
+h3(#Grid_getselectedrows). Grid#get_selected_rows
+
+ Array *get_selected_rows*()
+
+Returns an array of selected rows.
+
+
+
+h3(#Grid_getselectionbackground). Grid#get_selection_background
+
+ "Colour":colour.html *get_selection_background*()
+
+Access or update the selection fore/back colours
+
+
+
+h3(#Grid_getselectionblocktopleft). Grid#get_selection_block_top_left
+
+ Array *get_selection_block_top_left*()
+
+Returns an array of the top left corners of blocks of selected
+cells. The corner of each block is represented as a two-element array
+containing the row and column of the cell.
+
+The corresponding bottom right corner of each block selection can be got
+by 
+"Grid#get_selection_block_bottom_right":grid.html#Grid_getselectionblockbottomright. 
+
+Note that both these methods return *only* block-selected cells, not
+singly-selected ones. To find singly-selected cells, use
+"Grid#get_selected_Cells":#Grid_getselectedcells
+
+
+h3(#Grid_getselectionblockbottomright). Grid#get_selection_block_bottom_right
+
+ Array *get_selection_block_bottom_right*()
+
+Returns an array of the bottom right corners of blocks of selected cells,
+see "Grid#get_selection_block_top_left":grid.html#Grid_getselectionblocktopleft.
+
+
+
+h3(#Grid_getselectionforeground). Grid#get_selection_foreground
+
+ "Colour":colour.html *get_selection_foreground*()
+
+
+
+h3(#Grid_gettable). Grid#get_table
+
+ "GridTableBase":gridtablebase.html *get_table*()
+
+Returns a base pointer to the current table object.
+
+
+
+h3(#Grid_getviewwidth). Grid#get_view_width
+
+ Integer *get_view_width*()
+
+Returned number of whole cols visible.
+
+
+
+h3(#Grid_hidecelleditcontrol). Grid#hide_cell_edit_control
+
+  *hide_cell_edit_control*()
+
+Hides the in-place cell edit control.
+
+
+
+h3(#Grid_initcolwidths). Grid#init_col_widths
+
+  *init_col_widths*()
+
+Init the m_colWidths/Rights arrays
+
+
+
+h3(#Grid_initrowheights). Grid#init_row_heights
+
+  *init_row_heights*()
+
+NB: _never_ access m_row/col arrays directly because they are created
+on demand, _always_ use accessor functions instead!
+
+Init the m_rowHeights/Bottoms arrays with default values.
+
+
+
+h3(#Grid_insertcols). Grid#insert_cols
+
+ Boolean *insert_cols*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numCols = 1, 
+                     %(arg-type)Boolean% updateLabels = true)
+
+Inserts one or more new columns into a grid with the first new column at the
+specified position and returns true if successful. The updateLabels argument is not
+used at present.
+
+The sequence of actions begins with the grid object requesting the underlying grid
+table to insert new columns. If this is successful the table notifies the grid and the
+grid updates the display. For a default grid (one where you have called
+"Grid#create_grid":grid.html#Grid_creategrid) this process is automatic. If you are
+using a custom grid table (specified with "Grid#set_table":grid.html#Grid_settable)
+then you must override
+"GridTableBase#insert_cols":gridtablebase.html#GridTableBase_insertcols in your derived
+table class.
+
+
+
+h3(#Grid_insertrows). Grid#insert_rows
+
+ Boolean *insert_rows*(%(arg-type)Integer% pos = 0,  %(arg-type)Integer% numRows = 1, 
+                     %(arg-type)Boolean% updateLabels = true)
+
+Inserts one or more new rows into a grid with the first new row at the specified
+position and returns true if successful. The updateLabels argument is not used at
+present.
+
+The sequence of actions begins with the grid object requesting the underlying grid
+table to insert new rows. If this is successful the table notifies the grid and the
+grid updates the display. For a default grid (one where you have called
+"Grid#create_grid":grid.html#Grid_creategrid) this process is automatic. If you are
+using a custom grid table (specified with "Grid#set_table":grid.html#Grid_settable)
+then you must override
+"GridTableBase#insert_rows":gridtablebase.html#GridTableBase_insertrows in your derived
+table class.
+
+
+
+h3(#Grid_iscelleditcontrolenabled). Grid#is_cell_edit_control_enabled
+
+ Boolean *is_cell_edit_control_enabled*()
+
+Returns true if the in-place edit control is currently enabled.
+
+
+
+h3(#Grid_iscurrentcellreadonly). Grid#is_current_cell_read_only
+
+ Boolean *is_current_cell_read_only*()
+
+Returns true if the current cell has been set to read-only
+(see "Grid#set_read_only":grid.html#Grid_setreadonly).
+
+
+
+h3(#Grid_iseditable). Grid#is_editable
+
+ Boolean *is_editable*()
+
+Returns false if the whole grid has been set as read-only or true otherwise.
+See "Grid#enable_editing":grid.html#Grid_enableediting for more information about
+controlling the editing status of grid cells.
+
+
+
+h3(#Grid_isinselection). Grid#is_in_selection
+
+ Boolean *is_in_selection*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Is this cell currently selected.
+
+
+
+h3(#Grid_isreadonly). Grid#is_read_only
+
+ Boolean *is_read_only*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Returns true if the cell at the specified location can't be edited.
+See also "Grid#is_read_only":grid.html#Grid_isreadonly.
+
+
+
+h3(#Grid_isselection). Grid#is_selection
+
+ Boolean *is_selection*()
+
+Returns true if there are currently rows, columns or blocks of cells selected.
+
+
+
+h3(#Grid_isvisible). Grid#is_visible
+
+ Boolean *is_visible*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
+                    %(arg-type)Boolean% wholeCellVisible = true)
+
+Returns true if a cell is either wholly visible (the default) or at
+least partially visible in the grid window.
+
+
+
+h3(#Grid_makecellvisible). Grid#make_cell_visible
+
+  *make_cell_visible*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Brings the specified cell into the visible grid cell area with minimal
+scrolling. Does nothing if the cell is already visible.
+
+
+
+h3(#Grid_movecursordown). Grid#move_cursor_down
+
+ Boolean *move_cursor_down*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor down by one row. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for Down cursor key presses or Shift+Down to expand a selection.
+
+
+
+h3(#Grid_movecursorleft). Grid#move_cursor_left
+
+ Boolean *move_cursor_left*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor left by one column. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for Left cursor key presses or Shift+Left to expand a selection.
+
+
+
+h3(#Grid_movecursorright). Grid#move_cursor_right
+
+ Boolean *move_cursor_right*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor right by one column. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for Right cursor key presses or Shift+Right to expand a selection.
+
+
+
+h3(#Grid_movecursorup). Grid#move_cursor_up
+
+ Boolean *move_cursor_up*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor up by one row. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for Up cursor key presses or Shift+Up to expand a selection.
+
+
+
+h3(#Grid_movecursordownblock). Grid#move_cursor_down_block
+
+ Boolean *move_cursor_down_block*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor down in the current column such that it skips to the beginning or
+end of a block of non-empty cells. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for the Ctrl+Down key combination. Shift+Ctrl+Down expands a selection.
+
+
+
+h3(#Grid_movecursorleftblock). Grid#move_cursor_left_block
+
+ Boolean *move_cursor_left_block*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor left in the current row such that it skips to the beginning or
+end of a block of non-empty cells. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for the Ctrl+Left key combination. Shift+Ctrl+left expands a selection.
+
+
+
+h3(#Grid_movecursorrightblock). Grid#move_cursor_right_block
+
+ Boolean *move_cursor_right_block*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor right in the current row such that it skips to the beginning or
+end of a block of non-empty cells. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for the Ctrl+Right key combination. Shift+Ctrl+Right expands a selection.
+
+
+
+h3(#Grid_movecursorupblock). Grid#move_cursor_up_block
+
+ Boolean *move_cursor_up_block*(%(arg-type)Boolean% expandSelection)
+
+Moves the grid cursor up in the current column such that it skips to the beginning or
+end of a block of non-empty cells. If a block of cells was previously selected it
+will expand if the argument is true or be cleared if the argument is false.
+
+h4. Keyboard
+
+This function is called for the Ctrl+Up key combination. Shift+Ctrl+Up expands a selection.
+
+
+
+h3(#Grid_movepagedown). Grid#move_page_down
+
+ Boolean *move_page_down*()
+
+Moves the grid cursor down by some number of rows so that the previous bottom visible row
+becomes the top visible row.
+
+h4. Keyboard
+
+This function is called for PgDn keypresses.
+
+
+
+h3(#Grid_movepageup). Grid#move_page_up
+
+ Boolean *move_page_up*()
+
+Moves the grid cursor up by some number of rows so that the previous top visible row
+becomes the bottom visible row.
+
+h4. Keyboard
+
+This function is called for PgUp keypresses.
+
+
+
+h3(#Grid_registerdatatype). Grid#register_data_type
+
+  *register_data_type*(%(arg-type)String% typeName,  %(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer, 
+                     %(arg-type)"GridCellEditor":gridcelleditor.html% editor)
+
+Methods for a registry for mapping data types to Renderers/Editors
+
+
+
+h3(#Grid_saveeditcontrolvalue). Grid#save_edit_control_value
+
+  *save_edit_control_value*()
+
+Sets the value of the current grid cell to the current in-place edit control value.
+This is called automatically when the grid cursor moves from the current cell to a
+new cell. It is also a good idea to call this function when closing a grid since
+any edits to the final cell location will not be saved otherwise.
+
+
+
+h3(#Grid_selectall). Grid#select_all
+
+  *select_all*()
+
+Selects all cells in the grid.
+
+
+
+h3(#Grid_selectblock). Grid#select_block
+
+  *select_block*(%(arg-type)Integer% topRow,  %(arg-type)Integer% leftCol, 
+              %(arg-type)Integer% bottomRow, 
+               %(arg-type)Integer% rightCol, 
+               %(arg-type)Boolean% addToSelected = false)
+
+Selects a rectangular block of cells. If addToSelected is false then any
+existing selection will be deselected; if true the column will be added
+to the existing selection.
+
+
+
+h3(#Grid_selectcol). Grid#select_col
+
+  *select_col*(%(arg-type)Integer% col,  %(arg-type)Boolean% addToSelected = false)
+
+Selects the specified column. If addToSelected is false then any existing selection will be
+deselected; if true the column will be added to the existing selection.
+
+
+
+h3(#Grid_selectiontodevicerect). Grid#selection_to_device_rect
+
+ "Rect":rect.html *selection_to_device_rect*()
+
+This function returns the rectangle that encloses the selected cells
+in device coords and clipped to the client size of the grid window.
+
+
+
+h3(#Grid_selectrow). Grid#select_row
+
+  *select_row*(%(arg-type)Integer% row,  %(arg-type)Boolean% addToSelected = false)
+
+Selects the specified row. If addToSelected is false then any existing
+selection will be deselected; if true the row will be added to the
+existing selection.
+
+
+
+h3(#Grid_setcellalignment). Grid#set_cell_alignment
+
+  *set_cell_alignment*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)Integer% horiz, 
+                     %(arg-type)Integer% vert)
+
+  *set_cell_alignment*(%(arg-type)Integer% align,  %(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Sets the horizontal and vertical alignment for grid cell text at the
+specified location.
+
+Horizontal alignment should be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT. 
+
+Vertical alignment should be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
+
+
+
+h3(#Grid_setcellbackgroundcolour). Grid#set_cell_background_colour
+
+  *set_cell_background_colour*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
+                             %(arg-type)"Colour":colour.html% colour)
+
+
+
+h3(#Grid_setcelleditor). Grid#set_cell_editor
+
+  *set_cell_editor*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
+                  %(arg-type)"GridCellEditor":gridcelleditor.html% editor)
+
+Sets the editor for the grid cell at the specified location.
+The grid will take ownership of the pointer.
+
+See "GridCellEditor":gridcelleditor.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_setcellfont). Grid#set_cell_font
+
+  *set_cell_font*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)"Font":font.html% font)
+
+Sets the font for text in the grid cell at the specified location.
+
+
+
+h3(#Grid_setcellrenderer). Grid#set_cell_renderer
+
+  *set_cell_renderer*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
+                    %(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer)
+
+Sets the renderer for the grid cell at the specified location.
+The grid will take ownership of the pointer.
+
+See "GridCellRenderer":gridcellrenderer.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_setcelltextcolour). Grid#set_cell_text_colour
+
+  *set_cell_text_colour*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
+                       %(arg-type)"Colour":colour.html% colour)
+
+  *set_cell_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the text colour for the grid cell at the specified location.
+
+
+h3(#Grid_setcellvalue). Grid#set_cell_value
+
+  *set_cell_value*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)String% s)
+
+Sets the string value for the cell at the specified location. For simple
+applications where a grid object automatically uses a default grid table
+of string values you use this function together with
+"Grid#get_cell_value":grid.html#Grid_getcellvalue to access cell values.
+
+For more complex applications where you have derived your own grid table
+class that contains various data types (e.g. numeric, boolean or
+user-defined custom types) then you only use this function for those
+cells that contain string values.
+
+
+See
+"GridTableBase#can_set_value_as":gridtablebase.html#GridTableBase_cansetvalueas
+and the "Grid overview":gridoverview.html for more information.
+
+
+
+h3(#Grid_setcolattr). Grid#set_col_attr
+
+  *set_col_attr*(%(arg-type)Integer% col,  %(arg-type)"GridCellAttr":gridcellattr.html% attr)
+
+Sets the cell attributes for all cells in the specified column.
+
+For more information about controlling grid cell attributes see the
+"GridCellAttr":gridcellattr.html cell attribute class and the
+"Grid classes overview":gridoverview.html.
+
+
+
+h3(#Grid_setcolformatbool). Grid#set_col_format_bool
+
+  *set_col_format_bool*(%(arg-type)Integer% col)
+
+Sets the specified column to display boolean values. Grid displays boolean values with a checkbox.
+
+
+
+h3(#Grid_setcolformatnumber). Grid#set_col_format_number
+
+  *set_col_format_number*(%(arg-type)Integer% col)
+
+Sets the specified column to display integer values.
+
+
+
+h3(#Grid_setcolformatfloat). Grid#set_col_format_float
+
+  *set_col_format_float*(%(arg-type)Integer% col,  %(arg-type)Integer% width = -1, 
+                       %(arg-type)Integer% precision = -1)
+
+Sets the specified column to display floating point values with the given width and precision.
+
+
+
+h3(#Grid_setcolformatcustom). Grid#set_col_format_custom
+
+  *set_col_format_custom*(%(arg-type)Integer% col,  %(arg-type)String% typeName)
+
+Sets the specified column to display data in a custom format.
+See the "Grid overview":gridoverview.html for more information on working
+with custom data types.
+
+
+
+h3(#Grid_setcollabelalignment). Grid#set_col_label_alignment
+
+  *set_col_label_alignment*(%(arg-type)Integer% horiz,  %(arg-type)Integer% vert)
+
+Sets the horizontal and vertical alignment of column label text.
+
+Horizontal alignment should be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT.
+
+Vertical alignment should be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
+
+
+
+h3(#Grid_setcollabelsize). Grid#set_col_label_size
+
+  *set_col_label_size*(%(arg-type)Integer% height)
+
+Sets the height of the column labels.
+
+
+
+h3(#Grid_setcollabelvalue). Grid#set_col_label_value
+
+  *set_col_label_value*(%(arg-type)Integer% col,  %(arg-type)String% value)
+
+Set the value for the given column label. If you are using a derived grid table you must
+override "GridTableBase#set_col_label_value":gridtablebase.html#GridTableBase_setcollabelvalue
+for this to have any effect.
+
+
+
+h3(#Grid_setcolminimalwidth). Grid#set_col_minimal_width
+
+  *set_col_minimal_width*(%(arg-type)Integer% col,  %(arg-type)Integer% width)
+
+Sets the minimal width for the specified column. This should normally be called when creating the grid
+because it will not resize a column that is already narrower than the minimal width.
+The width argument must be higher than the minimimal acceptable column width, see
+"Grid#get_col_minimal_acceptable_width":grid.html#Grid_getcolminimalacceptablewidth.
+
+
+
+h3(#Grid_setcolminimalacceptablewidth). Grid#set_col_minimal_acceptable_width
+
+  *set_col_minimal_acceptable_width*(%(arg-type)Integer% width)
+
+This modifies the minimum column width that can be handled correctly. Specifying a low value here
+allows smaller grid cells to be dealt with correctly. Specifying a value here which is much smaller
+than the actual minimum size will incur a performance penalty in the functions which perform
+grid cell index lookup on the basis of screen coordinates.
+This should normally be called when creating the grid because it will not resize existing columns
+with sizes smaller than the value specified here.
+
+
+
+h3(#Grid_setcolpos). Grid#set_col_pos
+
+  *set_col_pos*(%(arg-type)Integer% colID,  %(arg-type)Integer% newPos)
+
+Sets the position of the specified column.
+
+
+
+h3(#Grid_setcolsize). Grid#set_col_size
+
+  *set_col_size*(%(arg-type)Integer% col,  %(arg-type)Integer% width)
+
+Sets the width of the specified column.
+
+This function does not refresh the grid. If you are calling it outside of a BeginBatch / EndBatch
+block you can use "Grid#force_refresh":grid.html#Grid_forcerefresh to see the changes.
+
+Automatically sizes the column to fit its contents. If setAsMin is true the calculated width will
+also be set as the minimal width for the column.
+
+h4. Note
+
+Grid sets up arrays to store individual row and column sizes when non-default sizes are used.
+The memory requirements for this could become prohibitive if your grid is very large.
+
+
+
+h3(#Grid_setdefaultcellalignment). Grid#set_default_cell_alignment
+
+  *set_default_cell_alignment*(%(arg-type)Integer% horiz,  %(arg-type)Integer% vert)
+
+Sets the default horizontal and vertical alignment for grid cell text.
+
+Horizontal alignment should be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT.
+
+Vertical alignment should be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
+
+
+
+h3(#Grid_setdefaultcellbackgroundcolour). Grid#set_default_cell_background_colour
+
+  *set_default_cell_background_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the default background colour for grid cells.
+
+
+
+h3(#Grid_setdefaultcellfont). Grid#set_default_cell_font
+
+  *set_default_cell_font*(%(arg-type)"Font":font.html% font)
+
+Sets the default font to be used for grid cell text.
+
+
+
+h3(#Grid_setdefaultcelltextcolour). Grid#set_default_cell_text_colour
+
+  *set_default_cell_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the current default colour for grid cell text.
+
+
+
+h3(#Grid_setdefaulteditor). Grid#set_default_editor
+
+  *set_default_editor*(%(arg-type)"GridCellEditor":gridcelleditor.html% editor)
+
+Sets the default editor for grid cells. The grid will take ownership of the pointer.
+
+See "GridCellEditor":gridcelleditor.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_setdefaultrenderer). Grid#set_default_renderer
+
+  *set_default_renderer*(%(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer)
+
+Sets the default renderer for grid cells. The grid will take ownership of the pointer.
+
+See "GridCellRenderer":gridcellrenderer.html and
+the "Grid overview":gridoverview.html for more information about cell editors and renderers.
+
+
+
+h3(#Grid_setdefaultcolsize). Grid#set_default_col_size
+
+  *set_default_col_size*(%(arg-type)Integer% width,  %(arg-type)Boolean% resizeExistingCols = false)
+
+Sets the default width for columns in the grid. This will only affect columns subsequently added to
+the grid unless resizeExistingCols is true.
+
+
+
+h3(#Grid_setdefaultrowsize). Grid#set_default_row_size
+
+  *set_default_row_size*(%(arg-type)Integer% height,  %(arg-type)Boolean% resizeExistingRows = false)
+
+Sets the default height for rows in the grid. This will only affect rows subsequently added
+to the grid unless resizeExistingRows is true.
+
+
+
+h3(#Grid_setgridcursor). Grid#set_grid_cursor
+
+  *set_grid_cursor*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Set the grid cursor to the specified cell.
+This function calls "Grid#make_cell_visible":grid.html#Grid_makecellvisible.
+
+
+
+h3(#Grid_setgridlinecolour). Grid#set_grid_line_colour
+
+  *set_grid_line_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the colour used to draw grid lines.
+
+
+
+h3(#Grid_setlabelbackgroundcolour). Grid#set_label_background_colour
+
+  *set_label_background_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the background colour for row and column labels.
+
+
+
+h3(#Grid_setlabelfont). Grid#set_label_font
+
+  *set_label_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font for row and column labels.
+
+
+
+h3(#Grid_setlabeltextcolour). Grid#set_label_text_colour
+
+  *set_label_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the colour for row and column label text.
+
+
+
+h3(#Grid_setmargins). Grid#set_margins
+
+  *set_margins*(%(arg-type)Integer% extraWidth,  %(arg-type)Integer% extraHeight)
+
+A grid may occupy more space than needed for its rows/columns. This
+function allows to set how big this extra space is
+
+
+
+h3(#Grid_setorcalccolumnsizes). Grid#set_or_calc_column_sizes
+
+ Integer *set_or_calc_column_sizes*(%(arg-type)Boolean% calcOnly, 
+                                  %(arg-type)Boolean% setAsMin = true)
+
+Common part of AutoSizeColumn/Row() and GetBestSize()
+
+
+
+h3(#Grid_setorcalcrowsizes). Grid#set_or_calc_row_sizes
+
+ Integer *set_or_calc_row_sizes*(%(arg-type)Boolean% calcOnly,  %(arg-type)Boolean% setAsMin = true)
+
+
+
+h3(#Grid_setreadonly). Grid#set_read_only
+
+  *set_read_only*(%(arg-type)Integer% row,  %(arg-type)Integer% col, 
+                %(arg-type)Boolean% isReadOnly = true)
+
+Makes the cell at the specified location read-only or editable.
+See also "Grid#is_read_only":grid.html#Grid_isreadonly.
+
+
+
+h3(#Grid_setrowattr). Grid#set_row_attr
+
+  *set_row_attr*(%(arg-type)Integer% row,  %(arg-type)"GridCellAttr":gridcellattr.html% attr)
+
+Sets the cell attributes for all cells in the specified row.
+See the "GridCellAttr":gridcellattr.html class for more information
+about controlling cell attributes.
+
+
+
+h3(#Grid_setrowlabelalignment). Grid#set_row_label_alignment
+
+  *set_row_label_alignment*(%(arg-type)Integer% horiz,  %(arg-type)Integer% vert)
+
+Sets the horizontal and vertical alignment of row label text.
+
+Horizontal alignment should be one of ALIGN_LEFT, ALIGN_CENTRE or ALIGN_RIGHT.
+
+Vertical alignment should be one of ALIGN_TOP, ALIGN_CENTRE or ALIGN_BOTTOM.
+
+
+
+h3(#Grid_setrowlabelsize). Grid#set_row_label_size
+
+  *set_row_label_size*(%(arg-type)Integer% width)
+
+Sets the width of the row labels.
+
+
+
+h3(#Grid_setrowlabelvalue). Grid#set_row_label_value
+
+  *set_row_label_value*(%(arg-type)Integer% row,  %(arg-type)String% value)
+
+Set the value for the given row label. If you are using a derived grid table you must
+override "GridTableBase#set_row_label_value":gridtablebase.html#GridTableBase_setrowlabelvalue
+for this to have any effect.
+
+
+
+h3(#Grid_setrowminimalheight). Grid#set_row_minimal_height
+
+  *set_row_minimal_height*(%(arg-type)Integer% row,  %(arg-type)Integer% height)
+
+Sets the minimal height for the specified row. This should normally be called when creating the grid
+because it will not resize a row that is already shorter than the minimal height.
+The height argument must be higher than the minimimal acceptable row height, see
+"Grid#get_row_minimal_acceptable_height":grid.html#Grid_getrowminimalacceptableheight.
+
+
+
+h3(#Grid_setrowminimalacceptableheight). Grid#set_row_minimal_acceptable_height
+
+  *set_row_minimal_acceptable_height*(%(arg-type)Integer% height)
+
+This modifies the minimum row width that can be handled correctly. Specifying a low value here
+allows smaller grid cells to be dealt with correctly. Specifying a value here which is much smaller
+than the actual minimum size will incur a performance penalty in the functions which perform
+grid cell index lookup on the basis of screen coordinates.
+This should normally be called when creating the grid because it will not resize existing rows
+with sizes smaller than the value specified here.
+
+
+
+h3(#Grid_setrowsize). Grid#set_row_size
+
+  *set_row_size*(%(arg-type)Integer% row,  %(arg-type)Integer% height)
+
+Sets the height of the specified row.
+
+This function does not refresh the grid. If you are calling it outside of a BeginBatch / EndBatch
+block you can use "Grid#force_refresh":grid.html#Grid_forcerefresh to see the changes.
+
+Automatically sizes the column to fit its contents. If setAsMin is true the calculated width will
+also be set as the minimal width for the column.
+
+h4. Note
+
+Grid sets up arrays to store individual row and column sizes when non-default sizes are used.
+The memory requirements for this could become prohibitive if your grid is very large.
+
+
+
+h3(#Grid_setscrolllinex). Grid#set_scroll_line_x
+
+  *set_scroll_line_x*(%(arg-type)Integer% x)
+
+Sets the number of pixels per horizontal scroll increment. The default is 15.
+Sometimes Grid has trouble setting the scrollbars correctly due to rounding
+errors: setting this to 1 can help.
+
+h4. See also
+
+"Grid#get_scroll_line_x":grid.html#Grid_getscrolllinex, "Grid#get_scroll_line_y":grid.html#Grid_getscrollliney, "Grid#set_scroll_line_y":grid.html#Grid_setscrollliney
+
+
+
+h3(#Grid_setscrollliney). Grid#set_scroll_line_y
+
+  *set_scroll_line_y*(%(arg-type)Integer% y)
+
+Sets the number of pixels per vertical scroll increment. The default is 15.
+Sometimes Grid has trouble setting the scrollbars correctly due to rounding
+errors: setting this to 1 can help.
+
+h4. See also
+
+"Grid#get_scroll_line_x":grid.html#Grid_getscrolllinex, "Grid#get_scroll_line_y":grid.html#Grid_getscrollliney, "Grid#set_scroll_line_x":grid.html#Grid_setscrolllinex
+
+
+
+h3(#Grid_setselectionbackground). Grid#set_selection_background
+
+  *set_selection_background*(%(arg-type)"Colour":colour.html% c)
+
+
+
+h3(#Grid_setselectionforeground). Grid#set_selection_foreground
+
+  *set_selection_foreground*(%(arg-type)"Colour":colour.html% c)
+
+
+
+h3(#Grid_setselectionmode). Grid#set_selection_mode
+
+  *set_selection_mode*(%(arg-type)Integer% selmode)
+
+Set the selection behaviour of the grid. The parameter should be one of
+the following integer constants:
+
+h4. Parameters
+
+* @Wx::Grid::GridSelectCells@ The default mode where individual cells are selected.
+* @Wx::Grid::GridSelectRows@ Selections will consist of whole rows.
+* @Wx::Grid::GridSelectColumns@ Selections will consist of whole columns.
+
+
+
+h3(#Grid_settable). Grid#set_table
+
+ Boolean *set_table*(%(arg-type)"GridTableBase":gridtablebase.html% table,
+                   %(arg-type)Grid::GridSelectionModes% selmode = Wx::Grid::GridSelectCells)
+
+Passes to a custom grid table to be used by the grid. This should be
+called after the grid constructor and before using the grid object.  Use
+this function instead of "Grid#create_grid":grid.html#Grid_creategrid
+when your application involves complex or non-string data or data sets
+that are too large to fit wholly in memory.
+
+The table should be an instance of a subclass of
+"GridTableBase":gridtablebase.html which provides a set of methods for
+retrieving the size of the grid, cell data and optionally other row,
+column and cell information such as labels and
+"attributes":GridCellAttr.html. See that class and the sample for more
+information on the required methods.
+
+h3(#Grid_showcelleditcontrol). Grid#show_cell_edit_control
+
+  *show_cell_edit_control*()
+
+Displays the in-place cell edit control for the current cell.
+
+
+
+h3(#Grid_xtocol). Grid#xto_col
+
+ Integer *xto_col*(%(arg-type)Integer% x,  %(arg-type)Boolean% clipToMinMax = false)
+
+h4. Parameters
+* _x_ The x position to evaluate.
+* _clipToMinMax_ If true, rather than returning NOT_FOUND, it returns either the first or last column depending on whether x is too far to the left or right respectively.
+
+h4. Return value
+The grid column that corresponds to the logical x coordinate. Returns
+@NOT_FOUND@ if there is no column at the x position.
+
+
+
+h3(#Grid_xtoedgeofcol). Grid#xto_edge_of_col
+
+ Integer *xto_edge_of_col*(%(arg-type)Integer% x)
+
+Returns the column whose right hand edge is close to the given logical x position.
+If no column edge is near to this position @NOT_FOUND@ is returned.
+
+
+
+h3(#Grid_ytoedgeofrow). Grid#yto_edge_of_row
+
+ Integer *yto_edge_of_row*(%(arg-type)Integer% y)
+
+Returns the row whose bottom edge is close to the given logical y position.
+If no row edge is near to this position @NOT_FOUND@ is returned.
+
+
+
+h3(#Grid_ytorow). Grid#yto_row
+
+ Integer *yto_row*(%(arg-type)Integer% y)
+
+Returns the grid row that corresponds to the logical y coordinate. Returns
+@NOT_FOUND@ if there is no row at the y position.
+

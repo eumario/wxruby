@@ -1,0 +1,343 @@
+h1(#wx_functions). WxRuby module functions
+
+Most of the functionality in wxRuby is provided through classes, but
+there are a number of useful functions provided within the Wx:: module.
+
+h2. See also
+
+"App":app.html, 
+"Locale":locale.html
+
+<div id="methods">
+
+h2. Methods
+
+h3. Miscellaneous methods
+
+* "Wx::begin_busy_cursor":#Functions_beginbusycursor
+* "Wx::end_busy_cursor":#Functions_endbusycursor
+* "Wx::bell":#Functions_bell
+* "Wx::get_app":#Functions_getapp
+* "Wx::get_key_state":#Functions_getkeystate
+* "Wx::xrcid":#Functions_xrcid
+
+h3. Dialog shortcut methods
+
+* "Wx::about_box":#Functions_aboutbox
+* "Wx::file_selector":#Functions_fileselector
+* "Wx::message_box":#Functions_messagebox
+* "Wx::get_multiple_choices":#Functions_getmultiplechoices
+* "Wx::get_number_from_user":#Functions_getnumberfromuser
+* "Wx::get_text_from_user":#Functions_gettextfromuser
+* "Wx::get_password_from_user":#Functions_getpasswordfromuser
+
+h3. Logging methods                        
+
+* "Wx::log_message":#Functions_logmessage
+* "Wx::log_warning":#Functions_logwarning
+* "Wx::log_error":#Functions_logerror
+* "Wx::log_status":#Functions_logstatus
+
+h3. System information methods
+
+* "Wx::get_email_address":#Functions_getemailaddress
+* "Wx::get_host_name":#Functions_gethostname
+* "Wx::get_full_host_name":#Functions_getfullhostname
+* "Wx::get_user_id":#Functions_getuserid
+* "Wx::get_home_dir":#Functions_gethomedir
+
+h3. Display information methods
+
+* "Wx::display_depth":#Functions_displaydepth
+* "Wx::get_display_size":#Functions_displaysize
+* "Wx::get_display_size_mm":#Functions_displaysize
+
+h3(#Functions_beginbusycursor). Wx::begin_busy_cursor
+
+ *Wx::begin_busy_cursor*()
+
+This function allows the mouse to be changed into an Hourglass cursor,
+when it is moved into your Application's Main Window.  This is often
+used to let your user know, that your application is busy processing
+information, and won't accept user input.  To return the pointer to
+normal, use "Wx::end_busy_cursor()":wx_functions.html#Functions_endbusycursor.
+
+h4. See Also
+
+"Wx::end_busy_cursor":wx_functions.html#Functions_endbusycursor
+
+
+h3(#Functions_endbusycursor). Wx::end_busy_cursor
+
+ *Wx::end_busy_cursor*()
+
+This function returns the pointer to the standard pointer.  This is
+useful to let the user know when they may start inputing new data into
+your application.
+
+h4. See Also
+
+"Wx::begin_busy_cursor":wx_functions.html#Functions_beginbusycursor
+
+h3(#Functions_bell). Wx::bell
+
+ *Wx::bell*()
+
+This function sends an alert sound to be played to the user.  Often this
+is used when the user enters something, and it's not correct, or cannot
+type anymore text into a "TextCtrl":textctrl.html.
+
+h3(#Functions_getapp). Wx::get_app
+
+ "App":app.html* *Wx::get_app*()
+
+This returns the main instance of the Application created for the program.
+Generally, in CPP, this is the constant THE_APP.  THE_APP constant is set
+when you create your Application, and enter the main_loop.  If your not
+in the main_loop, THE_APP will be invalid, and raise an uninitalized
+cosntant error in Ruby.
+
+h4. See Also
+
+"App#new":app.html#App_new, "App#main_loop":app.html#App_mainloop
+
+h3(#Functions_getkeystate). Wx::get_key_state
+
+  *Wx::get_key_state*(*(arg-type)Integer* key)
+
+This checks the given state of a key being pressed or not.  If it is pressed,
+it will return true, otherwise will return false.  You can use normal letters
+in a way similar to 'A'[0], or you can use the pre-defined *WXK_* constants.
+
+h4. See Also
+
+"WxRuby Key Codes":keycode.html, "WxRuby Key Modifiers":keymod.html
+
+h3(#Functions_xrcid). Wx::xrcid
+
+ Integer *Wx::xrcid*(*(arg-type)String* name)
+
+This is a convenience function for "XmlResource#get_xrcid":xmlresource.html#XmlResource_getxmlid.
+
+h4. See Also
+
+"XmlResource#get_xrcid":xmlresource.html#XmlResource_getxmlid
+
+h3(#Functions_aboutbox). Wx::about_box
+
+ *Wx::about_box*(*(arg-type)Hash* contents)
+
+ *Wx::about_box*(*(arg-type)"AboutDialogInfo":aboutdialoginfo.html* contents)
+
+This shows an application "About" information in a platform native
+style. See "AboutDialogInfo":aboutdialoginfo.html for more information
+about the arguments which describe the application that can be passed to
+this method.
+
+h3(#Functions_fileselector). Wx::file_selector
+
+ String *Wx::file_selector*(*(arg-type)String* title,
+								*(arg-type)String* defaultDir,
+								*(arg-type)String* defaultFile,
+								*(arg-type)String* ext_default,
+								*(arg-type)String* wildcard,
+								*(arg-type)Integer* style,
+								*(arg-type)"Window":window.html* parent)
+
+This is a convenience method, in which to create a File Dialog, to get an input file.
+
+h4. See Also
+
+"FileDialog#new":filedialog.html#FileDialog_new
+
+h3(#Functions_messagebox). Wx::message_box
+
+ Integer *Wx::message_box*(*(arg-type)String* message,
+                             *(arg-type)String* title,
+                             *(arg-type)Integer* style)
+
+This function allows a Message Dialog to be displayed, similar to "MessageDialog":messagedialog.html, however
+it uses a different set of constants for style.  For style, you can specify
+the icon with the following constants:
+
+* ICON_INFORMATION
+* ICON_QUESTION
+* ICON_EXCLAMATION
+* ICON_HAND
+* ICON_WARNING
+* ICON_ERROR
+* ICON_STOP
+* ICON_ASTERISK
+
+To set the buttons to use, use the following constants:
+
+* OK
+* CANCEL
+* YES
+* NO
+* YES_NO
+* YES_DEFAULT (Sets Yes to be the Default Button)
+
+To detect what the return value is, use the above constants as well.
+
+h4. See Also
+
+"Wx::MessageDialog":messagedialog.html
+
+h3(#Functions_getmultiplechoices). Wx::get_multiple_choices
+
+ Array *Wx::get_multiple_choices*(*(arg-type)String* message,
+									*(arg-type)String* title,
+									*(arg-type)Array* choices,
+									*(arg-type)"Window":window.html* parent)
+
+This creates a "CheckListBox":checklistbox.html "Dialog":dialog.html, in which the user can select
+any number of items from a list of choices.  It returns the selected choices in
+an array back to you.
+
+h4. See Also
+
+"Dialog":dialog.html, "CheckListBox":checklistbox.html
+
+h3(#Functions_getnumberfromuser). Wx::get_number_from_user
+
+  Integer *Wx::get_number_from_user*(*(arg-type)String* message,
+			 						*(arg-type)String* title,
+									*(arg-type)String* label,
+									*(arg-type)Integer* default,
+									*(arg-type)Integer* minimum,
+									*(arg-type)Integer* maximum,
+									*(arg-type)"Window":window.html* parent)
+
+This creates a "SpinCtrl":spinctrl.html "Dialog":dialog.html, in which a user can choose a number
+between minimum range and maximum range, with a default value given.
+
+h4. See Also
+
+"Dialog":dialog.html, "SpinCtrl":spinctrl.html
+
+h3(#Functions_gettextfromuser). Wx::get_text_from_user
+
+  String *Wx::get_text_from_user*(*(arg-type)String* message,
+									*(arg-type)String* title,
+									*(arg-type)String* default,
+									*(arg-type)"Window":window.html* parent)
+
+This creates a "TextCtrl":textctrl.html "Dialog":dialog.html, in which a user can enter text
+for the program to process.
+
+h4. See Also
+
+"Dialog":dialog.html, "TextCtrl":textctrl.html, "Wx::get_password_from_user":#Functions_getpasswordfromuser
+
+h3(#Functions_getpasswordfromuser). Wx::get_password_from_user
+
+  String *Wx::get_password_from_user*(*(arg-type)String* message,
+									*(arg-type)String* title,
+									*(arg-type)String* default,
+									*(arg-type)"Window":window.html* parent)
+
+This creates a "TextCtrl":textctrl.html "Dialog":dialog.html with TE_PASSWORD style set.  This
+is similar in operation as "Wx::get_text_from_user":#Functions_gettextfromuser, the only difference
+is that the user will only see <notextile>*</notextile> instead of the actual characters typed.
+
+h4. See Also
+
+"Dialog":dialog.html, "TextCtrl":textctrl.html, "Wx::get_text_from_user":#Functions_gettextfromuser
+
+h3(#Functions_logmessage). Wx::log_message
+  
+ *Wx::log_message*(*(arg-type)String* message)
+
+h3(#Functions_logwarning). Wx::log_warning
+
+ *Wx::log_warning*(*(arg-type)String* message)
+
+h3(#Functions_logerror). Wx::log_error
+
+ *Wx::log_error*(*(arg-type)String* message)
+
+h3(#Functions_logstatus). Wx::log_status
+
+ *Wx::log_status*(*(arg-type)String* message)
+
+These methods interface with the "Log":log.html class, in which logging
+can be done to log programs progress, or trouble.  You can have these
+messages displayed to the user as message boxes, which is default, or
+you can utilize "LogTextCtrl":logtextctrl.html to display log messages
+in a TextCtrl.
+
+h4. See Also
+
+"Log":log.html, "LogTextCtrl":logtextctrl.html, "TextCtrl":textctrl.html
+
+h3(#Functions_getemailaddress). Wx::get_email_address
+
+ String *Wx::get_email_address*()
+
+Returns a combination of the User's ID, and Full host name.
+
+h4. See Also
+
+"Wx::get_full_host_name":#Functions_getfullhostname, "Wx::get_user_id":#Functions_getuserid
+
+h3(#Functions_gethostname). Wx::get_host_name
+
+ String *Wx::get_host_name*()
+
+Returns the HOSTNAME, or Computer name for the computer.
+
+h4. See Also
+
+"Wx::get_full_host_name":#Functions_getfullhostname
+
+h3(#Functions_getfullhostname). Wx::get_full_host_name
+
+ String *Wx::get_full_host_name*()
+
+Returns the HOSTNAME, or Computer name for the computer, plus the domain that
+the computer is a member of.  Generally this is a fully qualified domain name
+that is assigned by the ISP.
+
+h4. See Also
+
+"Wx::get_host_name":#Functions_gethostname
+
+h3(#Functions_getuserid). Wx::get_user_id
+
+ String *Wx::get_user_id*()
+
+Returns the USERNAME of the user currently logged onto the system.
+
+h3(#Functions_gethomedir). Wx::get_home_dir
+
+ String *Wx::get_home_dir*()
+
+Returns the home directory of the User currently logged onto the system.
+
+On Windows NT/2000/XP/Vista:
+  C:\Documents and Settings\*username*
+
+On Linux:
+  /home/*username*
+
+On MacOS X:
+  /Users/*username*
+
+h3(#Functions_displaydepth). Wx::display_depth
+
+ Integer *Wx::display_depth*()
+
+Returns the current desktop display depth, which should be 16,24,32
+
+h3(#Functions_getdisplaysize). Wx::get_display_size
+
+ "Size":size.html *Wx::get_display_size*()
+
+Returns the current desktop display resolution in pixels.
+
+h3(#Functions_getdisplaysizemm). Wx::get_display_size_mm
+
+ "Size":size.html *Wx::get_display_size_mm*()
+
+Returns the current desktop display resolution in millimeters.

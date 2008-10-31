@@ -1,0 +1,55 @@
+h1(#wxfontdialog). Wx::FontDialog
+
+This class represents the font chooser dialog.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+
+h2. See also
+
+"FontData":fontdata.html
+
+h2. Methods
+
+<div id="methods"
+
+"FontDialog.new":#FontDialog_new
+"FontDialog::get_font_data":#FontDialog_getfontdata
+"FontDialog::show_modal":#FontDialog_showmodal
+
+</div>
+
+h3(#FontDialog_new). FontDialog.new
+
+ *FontDialog.new*(%(arg-type)"Window":window.html% parent)
+
+ *FontDialog.new*(%(arg-type)"Window":window.html% parent, %(arg-type)"FontData":fontdata.html% data)
+
+
+Constructor. Pass a parent window, and optionally the font data object to be used to initialize the dialog controls. 
+
+h3(#FontDialog_getfontdata). FontDialog#get_font_data
+
+ "FontData":fontdata.html *get_font_data*()
+
+Returns the font data associated with the font dialog.
+
+h3(#FontDialog_showmodal). wxFontDialog::show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning @ID_OK@ if the user pressed Ok, and
+@ID_CANCEL@ otherwise.
+
+If the user cancels the dialog (show_modal returns @ID_CANCEL@), no font
+will be created. If the user presses OK, a new "Font":font.html will be created
+and stored in the font dialog's "FontData":fontdata.html structure.
+

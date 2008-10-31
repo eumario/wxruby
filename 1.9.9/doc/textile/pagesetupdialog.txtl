@@ -1,0 +1,66 @@
+h1(#wxpagesetupdialog). Wx::PageSetupDialog
+
+This class represents the page setup common dialog. The page setup dialog is standard from
+Windows 95 on, replacing the print setup dialog (which is retained in Windows and Widgets
+for backward compatibility). On Windows 95 and NT 4.0 and above, the page setup dialog is
+native to the windowing system, otherwise it is emulated.
+
+The page setup dialog contains controls for paper size (A4, A5 etc.), orientation (landscape
+or portrait), and controls for setting left, top, right and bottom margin sizes in millimetres.
+
+When the dialog has been closed, you need to query the "PageSetupDialogData":pagesetupdialogdata.html object
+associated with the dialog.
+
+Note that the OK and Cancel buttons do not destroy the dialog; this must be done by the
+application.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"PrintDialog":printdialog.html, "PageSetupDialogData":pagesetupdialogdata.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PageSetupDialog.new":#PageSetupDialog_new
+* "PageSetupDialog#get_page_setup_data":#PageSetupDialog_getpagesetupdata
+* "PageSetupDialog#show_modal":#PageSetupDialog_showmodal
+
+</div>
+
+
+h3(#PageSetupDialog_new). PageSetupDialog.new
+
+  *PageSetupDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"PageSetupDialogData":pagesetupdialogdata.html% data = nil)
+
+Constructor. Pass a parent window, and optionally a pointer to a block of page setup
+data, which will be copied to the print dialog's internal data.
+
+  *destructor*()
+
+Destructor.
+
+h3(#PageSetupDialog_getpagesetupdata). PageSetupDialog#get_page_setup_data
+
+ "PageSetupDialogData":pagesetupdialogdata.html *get_page_setup_data*()
+
+Returns the "page setup data":pagesetupdialogdata.html associated with the dialog.
+
+
+h3(#PageSetupDialog_showmodal). PageSetupDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning ID_OK if the user pressed OK, and ID_CANCEL
+otherwise.
+

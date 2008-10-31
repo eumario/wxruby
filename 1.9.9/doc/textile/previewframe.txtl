@@ -1,0 +1,87 @@
+h1(#wxpreviewframe). Wx::PreviewFrame
+
+This class provides the default method of managing the print preview interface.
+Member functions may be overridden to replace functionality, or the
+class may be used without derivation.
+
+h2. Derived from
+
+"Frame":frame.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"PreviewCanvas":previewcanvas.html, "PreviewControlBar":previewcontrolbar.html, "PrintPreview":printpreview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PreviewFrame.new":#PreviewFrame_new
+* "PreviewFrame#create_control_bar":#PreviewFrame_createcontrolbar
+* "PreviewFrame#create_canvas":#PreviewFrame_createcanvas
+* "PreviewFrame#init":#PreviewFrame_init
+* "PreviewFrame#on_close_window":#PreviewFrame_onclosewindow
+
+</div>
+
+
+h3(#PreviewFrame_new). PreviewFrame.new
+
+  *PreviewFrame.new*(%(arg-type)"PrintPreview":printpreview.html% preview,  %(arg-type)"Window":window.html% parent, 
+                   %(arg-type)String% title, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)Size size% size = DEFAULT_SIZE, 
+                   %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                   %(arg-type)String% name = "frame")
+
+Constructor. Pass a print preview object plus other normal frame arguments.
+The print preview object will be destroyed by the frame when it closes.
+
+  *destructor*()
+
+Destructor. 
+
+h3(#PreviewFrame_createcontrolbar). PreviewFrame#create_control_bar
+
+  *create_control_bar*()
+
+Creates a PreviewControlBar. Override this function to allow
+a user-defined preview control bar object to be created.
+
+h3(#PreviewFrame_createcanvas). PreviewFrame#create_canvas
+
+  *create_canvas*()
+
+Creates a PreviewCanvas. Override this function to allow
+a user-defined preview canvas object to be created.
+
+h3(#PreviewFrame_init). PreviewFrame#init
+
+  *init*()
+
+Creates the preview canvas and control bar, and calls
+Window::make_modal(true) to disable other top-level windows
+in the application.
+
+This function should be called by the application prior to
+showing the frame.
+
+h4. Remarks
+
+This method is called *initialize*() in the C++ implementation of wxWidgets in wxRuby
+this had to be changed to *init*() because of the conflict with Ruby's built in *initialize*().
+
+h3(#PreviewFrame_onclosewindow). PreviewFrame#on_close_window
+
+  *on_close_window*(%(arg-type)"CloseEvent":closeevent.html% event)
+
+Enables the other frames in the application, and deletes the print preview
+object, implicitly deleting any printout objects associated with the print
+preview object.
+

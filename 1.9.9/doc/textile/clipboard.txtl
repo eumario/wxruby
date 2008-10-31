@@ -1,0 +1,158 @@
+h1(#wxclipboard). Wx::Clipboard
+
+A class for manipulating the clipboard.
+
+Call "Clipboard#open":clipboard.html#Clipboard_open to get ownership of
+the clipboard. The resulting block will be passed a Wx::Clipboard, and
+you now own the clipboard. Call
+"Clipboard#set_data":clipboard.html#Clipboard_setdata to put data on the
+clipboard, or "Clipboard#get_data":clipboard.html#Clipboard_getdata to
+retrieve data from the clipboard.
+
+You should keep the clipboard open only momentarily. It is strongly
+recommended that you use the block form of Clipboard::open as this will
+ensure the clipboard is closed in a timely fashion.
+
+For example:
+
+   # Write some text to the clipboard
+   Wx::Clipboard.open do | clip |
+     clip.data = Wx::TextDataObject.new("Some text")
+   end  
+ 
+   # Read some text
+   Wx::Clipboard.open do | clip |
+     if clip.supported?( Wx::DF_TEXT )
+       txt = Wx::TextDataObject.new
+       clip.get_data(txt)
+       message_box(txt.text)
+     end
+   end
+ 
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"DataObject":dataobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Clipboard.new":#Clipboard_new
+* "Clipboard.open":#Clipboard_open
+* "Clipboard#add_data":#Clipboard_adddata
+* "Clipboard#clear":#Clipboard_clear
+* "Clipboard#close":#Clipboard_close
+* "Clipboard#flush":#Clipboard_flush
+* "Clipboard#get_data":#Clipboard_getdata
+* "Clipboard#is_opened":#Clipboard_isopened
+* "Clipboard#is_supported":#Clipboard_issupported
+* "Clipboard#open":#Clipboard_open
+* "Clipboard#set_data":#Clipboard_setdata
+* "Clipboard#use_primary_selection":#Clipboard_useprimaryselection
+
+</div>
+
+
+h3(#Clipboard_new). Clipboard.new
+
+h3(#Clipboard_new). Clipboard.open
+
+ Clipboard.open() { ... }
+
+Opens the clipboard and passes it to the enclosed block. Ensures that
+the clipboard is closed when the block is ended.
+
+h3(#Clipboard_adddata). Clipboard#add_data
+
+ Boolean *add_data*(%(arg-type)"DataObject":dataobject.html% data)
+
+Call this function to add the data object to the clipboard. You may call
+this function repeatedly after having cleared the clipboard using "Clipboard#clear":clipboard.html#Clipboard_clear.
+
+After this function has been called, the clipboard owns the data, so do not delete
+the data explicitly.
+
+h4. See also
+
+"Clipboard#set_data":clipboard.html#Clipboard_setdata
+
+h3(#Clipboard_clear). Clipboard#clear
+
+  *clear*()
+
+Clears the global clipboard object and the system's clipboard if possible.
+
+h3(#Clipboard_close). Clipboard#close
+
+  *close*()
+
+Call this function to close the clipboard, having opened it with "Clipboard#open":clipboard.html#Clipboard_open.
+
+h3(#Clipboard_flush). Clipboard#flush
+
+ Boolean *flush*()
+
+Flushes the clipboard: this means that the data which is currently on
+clipboard will stay available even after the application exits (possibly
+eating memory), otherwise the clipboard will be emptied on exit.
+Returns false if the operation is unsuccessful for any reason.
+
+h3(#Clipboard_getdata). Clipboard#get_data
+
+ Boolean *get_data*(%(arg-type)"DataObject":dataobject.html% data)
+
+Call this function to fill _data_ with data on the clipboard, if available in the required
+format. Returns true on success.
+
+h3(#Clipboard_isopened). Clipboard#is_opened
+
+ Boolean *is_opened*()
+
+Returns true if the clipboard has been opened.
+
+h3(#Clipboard_issupported). Clipboard#is_supported
+
+ Boolean *is_supported*(%(arg-type)"DataFormat":dataformat.html% format)
+
+Returns true if there is data which matches the data format of the given data object currently *available* (IsSupported sounds like a misnomer, FIXME: better deprecate this name?) on the clipboard.
+
+h3(#Clipboard_open). Clipboard#open
+
+ Boolean *open*()
+
+Call this function to open the clipboard before calling "Clipboard#set_data":clipboard.html#Clipboard_setdata 
+and "Clipboard#get_data":clipboard.html#Clipboard_getdata.
+
+Call "Clipboard#close":clipboard.html#Clipboard_close when you have finished with the clipboard. You
+should keep the clipboard open for only a very short time.
+
+Returns true on success. This should be tested (as in the sample shown above).
+
+h3(#Clipboard_setdata). Clipboard#set_data
+
+ Boolean *set_data*(%(arg-type)"DataObject":dataobject.html% data)
+
+Call this function to set the data object to the clipboard. This function will
+clear all previous contents in the clipboard, so calling it several times
+does not make any sense.
+
+After this function has been called, the clipboard owns the data, so do not delete
+the data explicitly.
+
+h4. See also
+
+"Clipboard#add_data":clipboard.html#Clipboard_adddata
+
+h3(#Clipboard_useprimary). Clipboard#use_primary_selection
+
+  *use_primary_selection*(%(arg-type)Boolean% primary = true)
+
+On platforms supporting it (currently only GTK), selects the so called
+PRIMARY SELECTION as the clipboard as opposed to the normal clipboard,
+if _primary_ is true.
+
+

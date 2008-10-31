@@ -1,0 +1,72 @@
+h1(#wxmessagedialog). Wx::MessageDialog
+
+This class represents a dialog that shows a single or multi-line message,
+with a choice of OK, Yes, No and Cancel buttons.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"MessageDialog overview":messagedialogoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MessageDialog.new":#MessageDialog_new
+* "MessageDialog#show_modal":#MessageDialog_showmodal
+
+</div>
+
+
+h3(#MessageDialog_new). MessageDialog.new
+
+  *MessageDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
+                    %(arg-type)String% caption = "Message box", 
+                    %(arg-type)Integer% style = OK CANCEL, 
+                    %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
+
+Constructor. Use "MessageDialog#show_modal":messagedialog.html#MessageDialog_showmodal to show the dialog.
+
+h4. Parameters
+
+* _parent_ Parent window.
+* _message_ Message to show on the dialog.
+* _caption_ The dialog caption.
+* _style_ A dialog style (bitlist) containing flags chosen from the following:
+
+
+
+|*OK*|Show an OK button.|
+|*CANCEL*|Show a Cancel button.|
+|*YES_NO*|Show Yes and No buttons.|
+|*YES_DEFAULT*|Used with *YES_NO*, makes *Yes* button the default - which is the default behaviour.|
+|*NO_DEFAULT*|Used with *YES_NO*, makes *No* button the default.|
+|*ICON_EXCLAMATION*|Shows an exclamation mark icon.|
+|*ICON_HAND*|Shows an error icon.|
+|*ICON_ERROR*|Shows an error icon - the same as ICON_HAND.|
+|*ICON_QUESTION*|Shows a question mark icon.|
+|*ICON_INFORMATION*|Shows an information (i) icon.|
+|*STAY_ON_TOP*|The message box stays on top of all other window, even those of the other applications (Windows only).|
+
+
+* _pos_ Dialog position. Not Windows.
+
+  *destructor*()
+
+Destructor.
+
+h3(#MessageDialog_showmodal). MessageDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning one of ID_OK, ID_CANCEL, ID_YES, ID_NO.
+

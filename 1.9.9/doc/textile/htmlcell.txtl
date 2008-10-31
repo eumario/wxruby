@@ -1,0 +1,283 @@
+h1(#wxhtmlcell). Wx::HtmlCell
+
+Internal data structure. It represents fragments of parsed HTML
+page, the so-called *cell* - a word, picture, table, horizontal line and so on.
+It is used by "HtmlWindow":htmlwindow.html and 
+"HtmlWinParser":htmlwinparser.html to represent HTML page in memory.
+
+You can divide cells into two groups : _visible_ cells with non-zero width and
+height and _helper_ cells (usually with zero width and height) that
+perform special actions such as color or font change.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See Also
+
+"Cells Overview":cells.html,
+"HtmlContainerCell":htmlcontainercell.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlCell.new":#HtmlCell_new
+* "HtmlCell#adjust_pagebreak":#HtmlCell_adjustpagebreak
+* "HtmlCell#draw":#HtmlCell_draw
+* "HtmlCell#draw_invisible":#HtmlCell_drawinvisible
+* "HtmlCell#find":#HtmlCell_find
+* "HtmlCell#get_descent":#HtmlCell_getdescent
+* "HtmlCell#get_first_child":#HtmlCell_getfirstchild
+* "HtmlCell#get_height":#HtmlCell_getheight
+* "HtmlCell#get_id":#HtmlCell_getid
+* "HtmlCell#get_link":#HtmlCell_getlink
+* "HtmlCell#get_next":#HtmlCell_getnext
+* "HtmlCell#get_parent":#HtmlCell_getparent
+* "HtmlCell#get_pos_x":#HtmlCell_getposx
+* "HtmlCell#get_pos_y":#HtmlCell_getposy
+* "HtmlCell#get_width":#HtmlCell_getwidth
+* "HtmlCell#layout":#HtmlCell_layout
+* "HtmlCell#on_mouse_click":#HtmlCell_onmouseclick
+* "HtmlCell#set_id":#HtmlCell_setid
+* "HtmlCell#set_link":#HtmlCell_setlink
+* "HtmlCell#set_next":#HtmlCell_setnext
+* "HtmlCell#set_parent":#HtmlCell_setparent
+* "HtmlCell#set_pos":#HtmlCell_setpos
+
+</div>
+
+
+h3(#HtmlCell_wxhtmlcell). HtmlCell.new
+
+h3(#HtmlCell_adjustpagebreak). HtmlCell#adjust_pagebreak
+
+ Boolean *adjust_pagebreak*(%(arg-type)Integer% pagebreak)
+
+This method is used to adjust pagebreak position. The parameter is
+variable that contains y-coordinate of page break (= horizontal line that
+should not be crossed by words, images etc.). If this cell cannot be divided
+into two pieces (each one on another page) then it moves the pagebreak
+few pixels up.
+
+Returns true if pagebreak was modified, false otherwise
+
+Usage: 
+
+ while (container->AdjustPagebreak(&p)) {}
+ 
+
+h3(#HtmlCell_draw). HtmlCell#draw
+
+  *draw*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
+       %(arg-type)Integer% view_y1, 
+       %(arg-type)Integer% view_y2)
+
+Renders the cell.
+
+h4. Parameters
+
+* _dc_ Device context to which the cell is to be drawn
+* _x,y_ Coordinates of parent's upper left corner (origin). You must
+add this to m_PosX,m_PosY when passing coordinates to dc's methods
+Example : @dc -> DrawText("hello", x + m_PosX, y + m_PosY)@
+* _view_y1_ y-coord of the first line visible in window. This is
+used to optimize rendering speed
+* _view_y2_ y-coord of the last line visible in window. This is
+used to optimize rendering speed
+
+h3(#HtmlCell_drawinvisible). HtmlCell#draw_invisible
+
+  *draw_invisible*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+This method is called instead of "Draw":htmlcelldraw.html when the
+cell is certainly out of the screen (and thus invisible). This is not
+nonsense - some tags (like "HtmlColourCell":htmlcolourcell.html
+or font setter) must be drawn even if they are invisible!
+
+h4. Parameters
+
+* _dc_ Device context to which the cell is to be drawn
+* _x,y_ Coordinates of parent's upper left corner. You must
+add this to m_PosX,m_PosY when passing coordinates to dc's methods
+Example : @dc -> DrawText("hello", x + m_PosX, y + m_PosY)@
+
+h3(#HtmlCell_find). HtmlCell#find
+
+ "HtmlCell":htmlcell.html *find*(%(arg-type)Integer% condition,  %(arg-type)% param)
+
+Returns pointer to itself if this cell matches condition (or if any of the cells
+following in the list matches), NULL otherwise.
+(In other words if you call top-level container's Find it will
+return pointer to the first cell that matches the condition)
+
+It is recommended way how to obtain pointer to particular cell or
+to cell of some type (e.g. HtmlAnchorCell reacts on
+HTML_COND_ISANCHOR condition)
+
+h4. Parameters
+
+* _condition_ Unique integer identifier of condition
+* _param_ Optional parameters
+
+h4. Defined conditions
+
+
+|*HTML_COND_ISANCHOR*|Finds particular anchor. _param_ is pointer to String with name of the anchor.|
+|*HTML_COND_USER*|User-defined conditions startfrom this number.|
+
+
+h3(#HtmlCell_getdescent). HtmlCell#get_descent
+
+ Integer *get_descent*()
+
+Returns descent value of the cell (m_Descent member). 
+See explanation:
+
+descent.bmp
+
+
+h3(#HtmlCell_getfirstchild). HtmlCell#get_first_child
+
+ "HtmlCell":htmlcell.html *get_first_child*()
+
+Returns pointer to the first cell in the list.
+You can then use child's "get_next":#HtmlCell_getnext
+method to obtain pointer to the next cell in list.
+
+*Note:* This shouldn't be used by the end user. If you need some way of
+finding particular cell in the list, try "Find":htmlcellfind.html method
+instead.
+
+h3(#HtmlCell_getheight). HtmlCell#get_height
+
+ Integer *get_height*()
+
+Returns height of the cell (m_Height member).
+
+h3(#HtmlCell_getid). HtmlCell#get_id
+
+ String *get_id*()
+
+Returns unique cell identifier if there is any, empty string otherwise.
+
+h3(#HtmlCell_getlink). HtmlCell#get_link
+
+ "HtmlLinkInfo":htmllinkinfo.html *get_link*(%(arg-type)Integer% x = 0,  %(arg-type)Integer% y = 0)
+
+Returns hypertext link if associated with this cell or NULL otherwise.
+See "HtmlLinkInfo":htmllinkinfo.html.
+(Note: this makes sense only for visible tags).
+
+h4. Parameters
+
+* _x,y_ Coordinates of position where the user pressed mouse button.
+These coordinates are used e.g. by COLORMAP. Values are relative to the
+upper left corner of THIS cell (i.e. from 0 to m_Width or m_Height)
+
+h3(#HtmlCell_getnext). HtmlCell#get_next
+
+ "HtmlCell":htmlcell.html *get_next*()
+
+Returns pointer to the next cell in list (see htmlcell.h if you're
+interested in details).
+
+h3(#HtmlCell_getparent). HtmlCell#get_parent
+
+ "HtmlContainerCell":htmlcontainercell.html *get_parent*()
+
+Returns pointer to parent container.
+
+h3(#HtmlCell_getposx). HtmlCell#get_pos_x
+
+ Integer *get_pos_x*()
+
+Returns X position within parent (the value is relative to parent's
+upper left corner). The returned value is meaningful only if
+parent's "Layout":htmlcelllayout.html was called before!
+
+h3(#HtmlCell_getposy). HtmlCell#get_pos_y
+
+ Integer *get_pos_y*()
+
+Returns Y position within parent (the value is relative to parent's
+upper left corner). The returned value is meaningful only if
+parent's "Layout":htmlcelllayout.html was called before!
+
+h3(#HtmlCell_getwidth). HtmlCell#get_width
+
+ Integer *get_width*()
+
+Returns width of the cell (m_Width member).
+
+h3(#HtmlCell_layout). HtmlCell#layout
+
+  *layout*(%(arg-type)Integer% w)
+
+This method performs two actions:
+
+
+# adjusts the cell's width according to the fact that maximal possible width is _w_.
+(this has sense when working with horizontal lines, tables etc.)
+# prepares layout (=fill-in m_PosX, m_PosY (and sometimes m_Height) members)
+based on actual width _w_
+
+
+It must be called before displaying cells structure because
+m_PosX and m_PosY are undefined (or invalid)
+before calling Layout.
+
+h3(#HtmlCell_onmouseclick). HtmlCell#on_mouse_click
+
+  *on_mouse_click*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                 %(arg-type)"MouseEvent":mouseevent.html% event)
+
+This function is simple event handler. Each time the user clicks mouse button over a cell
+within "HtmlWindow":htmlwindow.html this method of that cell is called. Default behavior is
+that it calls "HtmlWindow#load_page":htmlwindow.html#HtmlWindow_loadpage.
+
+h4. Note
+
+If you need more "advanced" event handling
+you should use HtmlBinderCell instead.
+
+h4. Parameters
+
+* _parent_ parent window (always HtmlWindow!)
+* _x, y_ coordinates of mouse click (this is relative to cell's origin
+* _left, middle, right_ boolean flags for mouse buttons. true if the left/middle/right
+button is pressed, false otherwise
+
+h3(#HtmlCell_setid). HtmlCell#set_id
+
+  *set_id*(%(arg-type)String% id)
+
+Sets unique cell identifier. Default value is no identifier, i.e. empty string.
+
+h3(#HtmlCell_setlink). HtmlCell#set_link
+
+  *set_link*(%(arg-type)"HtmlLinkInfo":htmllinkinfo.html% link)
+
+Sets the hypertext link associated with this cell. (Default value
+is "HtmlLinkInfo":htmllinkinfo.html("", "") (no link))
+
+h3(#HtmlCell_setnext). HtmlCell#set_next
+
+  *set_next*(%(arg-type)"HtmlCell":htmlcell.html% cell)
+
+Sets the next cell in the list. This shouldn't be called by user - it is
+to be used only by "HtmlContainerCell#insert_cell":htmlcontainercell.html#HtmlContainerCell_insertcell.
+
+h3(#HtmlCell_setparent). HtmlCell#set_parent
+
+  *set_parent*(%(arg-type)"HtmlContainerCell":htmlcontainercell.html% p)
+
+Sets parent container of this cell. This is called from
+"HtmlContainerCell#insert_cell":htmlcontainercell.html#HtmlContainerCell_insertcell.
+
+h3(#HtmlCell_setpos). HtmlCell#set_pos
+
+  *set_pos*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Sets the cell's position within parent container.
+

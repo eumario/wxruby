@@ -1,0 +1,94 @@
+h1(#wxdataobjectsimple). Wx::DataObjectSimple
+
+This is the simplest possible implementation of the 
+"DataObject":dataobject.html class. The data object of (a class derived
+from) this class only supports one format, so the number of virtual functions
+to be implemented is reduced.
+
+Notice that this is still an abstract base class and cannot be used but should
+be derived from.
+
+
+
+
+
+h2. Virtual functions to override
+
+The objects supporting rendering the data must override 
+"get_data_size":#DataObjectSimple_getdatasize and 
+"get_data_here":#DataObjectSimple_getdatahere while the objects which
+may be set must override "set_data":#DataObjectSimple_setdata. Of
+course, the objects supporting both operations must override all three
+methods.
+
+h2. Derived from
+
+"DataObject":dataobject.html
+
+h2. See also
+
+"Clipboard and drag and drop overview":dndoverview.html, 
+"DnD sample":samplednd.html, 
+"FileDataObject":filedataobject.html, 
+"TextDataObject":textdataobject.html, 
+"BitmapDataObject":bitmapdataobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DataObjectSimple.new":#DataObjectSimple_new
+* "DataObjectSimple#get_format":#DataObjectSimple_getformat
+* "DataObjectSimple#set_format":#DataObjectSimple_setformat
+* "DataObjectSimple#get_data_size":#DataObjectSimple_getdatasize
+* "DataObjectSimple#get_data_here":#DataObjectSimple_getdatahere
+* "DataObjectSimple#set_data":#DataObjectSimple_setdata
+
+</div>
+
+
+h3(#DataObjectSimple_wxdataobjectsimple). DataObjectSimple.new
+
+  *DataObjectSimple.new*(%(arg-type)"DataFormat":dataformat.html% format = FormatInvalid)
+
+Constructor accepts the supported format (none by default) which may also be
+set later with "set_format":#DataObjectSimple_setformat.
+
+h3(#DataObjectSimple_getformat). DataObjectSimple#get_format
+
+ "DataFormat":dataformat.html *get_format*()
+
+Returns the (one and only one) format supported by this object. It is supposed
+that the format is supported in both directions.
+
+h3(#DataObjectSimple_setformat). DataObjectSimple#set_format
+
+  *set_format*(%(arg-type)"DataFormat":dataformat.html% format)
+
+Sets the supported format.
+
+h3(#DataObjectSimple_getdatasize). DataObjectSimple#get_data_size
+
+ Integer *get_data_size*()
+
+Gets the size of our data. Must be implemented in the derived class if the
+object supports rendering its data.
+
+h3(#DataObjectSimple_getdatahere). DataObjectSimple#get_data_here
+
+ Boolean *get_data_here*(%(arg-type)% buf)
+
+Copy the data to the buffer, return true on success. Must be implemented in the
+derived class if the object supports rendering its data.
+
+
+
+h3(#DataObjectSimple_setdata). DataObjectSimple#set_data
+
+ Boolean *set_data*(%(arg-type)Integer% len,  %(arg-type)% buf)
+
+Copy the data from the buffer, return true on success. Must be implemented in
+the derived class if the object supports setting its data.
+
+
+

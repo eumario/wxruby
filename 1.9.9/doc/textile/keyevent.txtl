@@ -1,0 +1,262 @@
+h1(#wxkeyevent). Wx::KeyEvent
+
+This event class contains information about keypress (character) events.
+
+Notice that there are three different kinds of keyboard events in Widgets:
+key down and up events and char events. The difference between the first two
+is clear - the first corresponds to a key press and the second to a key
+release - otherwise they are identical. Just note that if the key is
+maintained in a pressed state you will typically get a lot of (automatically
+generated) down events but only one up so it is wrong to assume that there is
+one up event corresponding to each down one.
+
+Both key events provide untranslated key codes while the char event carries
+the translated one. The untranslated code for alphanumeric keys is always
+an upper case value. For the other keys it is one of @K_XXX@ values
+from "Keycode Constants":keycode.html#keycodes. The translated key is, in
+general, the character the user expects to appear as the result of the key
+combination when typing the text into a text entry zone, for example.
+
+A few examples to clarify this (all assume that Caps Lock is unpressed
+and the standard US keyboard): when the @'A'@ key is pressed, the key down
+event key code is equal to @ASCII A == 65@. But the char event key code
+is @ASCII a == 97@. On the other hand, if you press both Shift and
+@'A'@ keys simultaneously , the key code in key down event will still be
+just @'A'@ while the char event key code parameter will now be @'A'@
+as well.
+
+Although in this simple case it is clear that the correct key code could be
+found in the key down event handler by checking the value returned by
+"shift_down()":#KeyEvent_shiftdown, in general you should use
+@EVT_CHAR@ for this as for non-alphanumeric keys the translation is
+keyboard-layout dependent and can only be done properly by the system itself.
+
+Another kind of translation is done when the control key is pressed: for
+example, for Ctrl-A key press the key down event still carries the
+same key code @'a'@ as usual but the char event will have key code of
+@1@, the ASCII value of this key combination.
+
+You may discover how the other keys on your system behave interactively by
+running the "text":sampletext.html Widgets sample and pressing some keys
+in any of the text controls shown in it.
+
+*Note:* If a key down (@EVT_KEY_DOWN@) event is caught and
+the event handler does not call @event.Skip()@ then the corresponding
+char event (@EVT_CHAR@) will not happen.  This is by design and
+enables the programs that handle both types of events to be a bit
+simpler.
+
+*Note for Windows programmers:* The key and char events in Widgets are
+similar to but slightly different from Windows @WM_KEYDOWN@ and
+@WM_CHAR@ events. In particular, Alt-x combination will generate a char
+event in Widgets (unless it is used as an accelerator).
+
+*Tip:* be sure to call @event.Skip()@ for events that you don't process in
+key event function, otherwise menu shortcuts may cease to work under Windows.
+
+h2. Derived from
+
+"Event":event.html
+
+h2. Event table macros
+
+To process a key event, use these event handler macros to direct input to member
+functions that take a KeyEvent argument.
+
+
+
+|*evt_key_down()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_KEY_DOWN event (any key has been pressed).|
+|*evt_key_up()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_KEY_UP event (any key has been released).|
+|*evt_char()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_CHAR event.|
+
+
+<div id="methods">
+
+h2. Methods
+
+* "KeyEvent.new":#KeyEvent_new
+* "KeyEvent#alt_down":#KeyEvent_altdown
+* "KeyEvent#cmd_down":#KeyEvent_cmddown
+* "KeyEvent#control_down":#KeyEvent_controldown
+* "KeyEvent#get_key_code":#KeyEvent_getkeycode
+* "KeyEvent#get_modifiers":#KeyEvent_getmodifiers
+* "KeyEvent#get_position":#KeyEvent_getposition
+* "KeyEvent#get_raw_key_code":#KeyEvent_getrawkeycode
+* "KeyEvent#get_raw_key_flags":#KeyEvent_getrawkeyflags
+* "KeyEvent#get_unicode_key":#KeyEvent_getunicodekey
+* "KeyEvent#get_x":#KeyEvent_getx
+* "KeyEvent#get_y":#KeyEvent_gety
+* "KeyEvent#has_modifiers":#KeyEvent_hasmodifiers
+* "KeyEvent#meta_down":#KeyEvent_metadown
+* "KeyEvent#shift_down":#KeyEvent_shiftdown
+
+</div>
+
+h3(#KeyEvent_new). KeyEvent.new
+
+  *KeyEvent.new*(%(arg-type)"TYPE":type.html% keyEventType)
+
+Constructor. Currently, the only valid event types are EVT_CHAR and EVT_CHAR_HOOK.
+
+
+h3(#KeyEvent_altdown). KeyEvent#alt_down
+
+ Boolean *alt_down*()
+
+Returns true if the Alt key was down at the time of the key event.
+
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
+
+
+h3(#KeyEvent_cmddown). KeyEvent#cmd_down
+
+ Boolean *cmd_down*()
+
+Cmd is a pseudo key which is the same as Control for PC and Unix
+platforms but the special Apple (a.k.a as Command) key under
+Macs: it makes often sense to use it instead of, say, ControlDown() because Cmd
+key is used for the same thing under Mac as Ctrl elsewhere (but Ctrl still
+exists, just not used for this purpose under Mac). So for non-Mac platforms
+this is the same as "control_down()":#KeyEvent_controldown and under
+Mac this is the same as "meta_down()":#KeyEvent_metadown.
+
+
+h3(#KeyEvent_controldown). KeyEvent#control_down
+
+ Boolean *control_down*()
+
+Returns true if the control key was down at the time of the key event.
+
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
+
+
+h3(#KeyEvent_getkeycode). KeyEvent#get_key_code
+
+ Integer *get_key_code*()
+
+Returns the virtual key code. ASCII events return normal ASCII values,
+while non-ASCII events return values such as @K_LEFT@ for the
+left cursor key. See "Key Codes":keycode.html for a full list of
+the virtual key codes.
+
+Note that in Unicode build, the returned value is meaningful only if the
+user entered a character that can be represented in current locale's default
+charset. You can obtain the corresponding Unicode character using
+"get_unicode_key":#KeyEvent_getunicodekey.
+
+
+h3(#KeyEvent_getmodifiers). KeyEvent#get_modifiers
+
+ Integer *get_modifiers*()
+
+Return the bitmask of modifier keys which were pressed when this event
+happened. See "key modifier constants":keymod.html for the full list
+of modifiers.
+
+Notice that this function is easier to use correctly than, for example, 
+"control_down":#KeyEvent_controldown because when using the latter you
+also have to remember to test that none of the other modifiers is pressed:
+
+
+     if ( control_down && ! alt_down && ! shift_down && ! meta_down )
+         ... handle Ctrl-XXX ...
+ 
+
+and forgetting to do it can result in serious program bugs (e.g. program not
+working with European keyboard layout where AltGr key which is seen by
+the program as combination of Ctrl and Alt is used). On the
+other hand, you can simply write
+
+
+     if ( get_modifiers == Wx::MOD_CONTROL )
+         ... handle Ctrl-XXX ...
+ 
+
+with this function.
+
+h3(#KeyEvent_getposition). KeyEvent#get_position
+
+ "Point":point.html *get_position*()
+
+  *get_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Obtains the position (in client coordinates) at which the key was pressed.
+
+
+h3(#KeyEvent_getrawkeycode). KeyEvent#get_raw_key_code
+
+ "Uint32":uint32.html *get_raw_key_code*()
+
+Returns the raw key code for this event. This is a platform-dependent scan code
+which should only be used in advanced applications.
+
+*Note:* Currently the raw key codes are not supported by all ports. wxRuby does not
+currently have a mechanism to test for their availability.
+
+h3(#KeyEvent_getrawkeyflags). KeyEvent#get_raw_key_flags
+
+ "Uint32":uint32.html *get_raw_key_flags*()
+
+Returns the low level key flags for this event. The flags are
+platform-dependent and should only be used in advanced applications.
+
+*Note:* Currently the raw key codes are not supported by all ports. wxRuby does not
+currently have a mechanism to test for their availability.
+
+h3(#KeyEvent_getunicodekey). KeyEvent#get_unicode_key
+
+ "Char":char.html *get_unicode_key*()
+
+Returns the Unicode character corresponding to this key event.
+
+This function is only available in Unicode build, i.e. when
+@USE_UNICODE@ is @1@.
+
+
+h3(#KeyEvent_getx). KeyEvent#get_x
+
+ Integer *get_x*()
+
+Returns the X position (in client coordinates) of the event.
+
+
+h3(#KeyEvent_gety). KeyEvent#get_y
+
+ Integer *get_y*()
+
+Returns the Y (in client coordinates) position of the event.
+
+
+h3(#KeyEvent_hasmodifiers). KeyEvent#has_modifiers
+
+ Boolean *has_modifiers*()
+
+Returns true if either Ctrl or Alt keys was down
+at the time of the key event. Note that this function does not take into
+account neither Shift nor Meta key states (the reason for ignoring
+the latter is that it is common for NumLock key to be configured as
+Meta under X but the key presses even while NumLock is on should
+be still processed normally).
+
+
+h3(#KeyEvent_metadown). KeyEvent#meta_down
+
+ Boolean *meta_down*()
+
+Returns true if the Meta key was down at the time of the key event.
+
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
+
+
+h3(#KeyEvent_shiftdown). KeyEvent#shift_down
+
+ Boolean *shift_down*()
+
+Returns true if the shift key was down at the time of the key event.
+
+Notice that "get_modifiers":#KeyEvent_getmodifiers is easier to use
+correctly than this function so you should consider using it in new code.
+

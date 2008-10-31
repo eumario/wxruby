@@ -1,0 +1,66 @@
+h1(#wxclientdatacontainer). Wx::ClientDataContainer
+
+This class is a mixin that provides storage and management of "client
+data." This data can either be of type void - in which case the data
+_container_ does not take care of freeing the data again
+or it is of type ClientData or its derivatives. In that case the
+container will free the memory itself later.
+Note that you _must not_ assign both void data and data
+derived from the ClientData class to a container.
+
+NOTE: This functionality is currently duplicated in EvtHandler in
+order to avoid having more than one vtable in that class hierarchy.
+
+h2. See also
+
+"EvtHandler":evthandler.html, "ClientData":clientdata.html
+
+h2. Derived from
+
+No base class
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "ClientDataContainer.new":#ClientDataContainer_new
+* "ClientDataContainer#get_client_data":#ClientDataContainer_getclientdata
+* "ClientDataContainer#get_client_object":#ClientDataContainer_getclientobject
+* "ClientDataContainer#set_client_data":#ClientDataContainer_setclientdata
+* "ClientDataContainer#set_client_object":#ClientDataContainer_setclientobject
+
+</div>
+
+
+
+h3(#ClientDataContainer_wxclientdatacontainer). ClientDataContainer.new
+
+  *destructor*()
+
+
+h3(#ClientDataContainer_getclientdata). ClientDataContainer#get_client_data
+
+  *get_client_data*()
+
+Get the untyped client data.
+
+h3(#ClientDataContainer_getclientobject). ClientDataContainer#get_client_object
+
+ "ClientData":clientdata.html *get_client_object*()
+
+Get a pointer to the client data object.
+
+h3(#ClientDataContainer_setclientdata). ClientDataContainer#set_client_data
+
+  *set_client_data*(%(arg-type)% data)
+
+Set the untyped client data.
+
+h3(#ClientDataContainer_setclientobject). ClientDataContainer#set_client_object
+
+  *set_client_object*(%(arg-type)"ClientData":clientdata.html% data)
+
+Set the client data object. Any previous object will be deleted.
+

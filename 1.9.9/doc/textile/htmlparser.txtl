@@ -1,0 +1,273 @@
+h1(#wxhtmlparser). Wx::HtmlParser
+
+Classes derived from this handle the *generic* parsing of HTML documents: it scans
+the document and divide it into blocks of tags (where one block
+consists of beginning and ending tag and of text between these
+two tags).
+
+It is independent from HtmlWindow and can be used as stand-alone parser
+(Julian Smart's idea of speech-only HTML viewer or wget-like utility -
+see InetGet sample for example).
+
+It uses system of tag handlers to parse the HTML document. Tag handlers
+are not statically shared by all instances but are created for each
+HtmlParser instance. The reason is that the handler may contain
+document-specific temporary data used during parsing (e.g. complicated
+structures like tables).
+
+Typically the user calls only the "Parse":htmlparserparse.html method.
+
+h2. Derived from
+
+Object
+
+h2. See also
+
+"Cells Overview":cells.html,
+"Tag Handlers Overview":handlers.html,
+"HtmlTag":htmltag.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlParser.new":#HtmlParser_new
+* "HtmlParser#add_tag":#HtmlParser_addtag
+* "HtmlParser#add_tag_handler":#HtmlParser_addtaghandler
+* "HtmlParser#add_text":#HtmlParser_addtext
+* "HtmlParser#do_parsing":#HtmlParser_doparsing
+* "HtmlParser#done_parser":#HtmlParser_doneparser
+* "HtmlParser#get_fs":#HtmlParser_getfs
+* "HtmlParser#get_product":#HtmlParser_getproduct
+* "HtmlParser#get_source":#HtmlParser_getsource
+* "HtmlParser#init_parser":#HtmlParser_initparser
+* "HtmlParser#open_url":#HtmlParser_openurl
+* "HtmlParser#parse":#HtmlParser_parse
+* "HtmlParser#push_tag_handler":#HtmlParser_pushtaghandler
+* "HtmlParser#pop_tag_handler":#HtmlParser_poptaghandler
+* "HtmlParser#set_fs":#HtmlParser_setfs
+* "HtmlParser#stop_parsing":#HtmlParser_stopparsing
+
+</div>
+
+
+h3(#HtmlParser_wxhtmlparser). HtmlParser.new
+
+h3(#HtmlParser_addtag). HtmlParser#add_tag
+
+  *add_tag*(%(arg-type)"HtmlTag":htmltag.html% tag)
+
+This may (and may not) be overwritten in derived class.
+
+This method is called each time new tag is about to be added. 
+_tag_ contains information about the tag. (See "HtmlTag":htmltag.html
+for details.)
+
+Default (HtmlParser) behaviour is this:
+First it finds a handler capable of handling this tag and then it calls
+handler's HandleTag method.
+
+h3(#HtmlParser_addtaghandler). HtmlParser#add_tag_handler
+
+  *add_tag_handler*(%(arg-type)"HtmlTagHandler":htmltaghandler.html% handler)
+
+Adds handler to the internal list (& hash table) of handlers. This
+method should not be called directly by user but rather by derived class'
+constructor.
+
+This adds the handler to this *instance* of HtmlParser, not to
+all objects of this class! (Static front-end to AddTagHandler is provided
+by HtmlWinParser).
+
+All handlers are deleted on object deletion.
+
+h3(#HtmlParser_addword). HtmlParser#add_text
+
+  *add_word*(%(arg-type)"char":char.html% txt)
+
+Must be overwritten in derived class.
+
+This method is called by "do_parsing":#HtmlParser_doparsing
+each time a part of text is parsed. _txt_ is NOT only one word, it is
+substring of input. It is not formatted or preprocessed (so white spaces are
+unmodified).
+
+h3(#HtmlParser_doparsing). HtmlParser#do_parsing
+
+  *do_parsing*(%(arg-type)Integer% begin_pos,  %(arg-type)Integer% end_pos)
+
+  *do_parsing*()
+
+Parses the m_Source from begin_pos to end_pos-1.
+(in noparams version it parses whole m_Source)
+
+h3(#HtmlParser_doneparser). HtmlParser#done_parser
+
+  *done_parser*()
+
+This must be called after DoParsing().
+
+h3(#HtmlParser_getfs). HtmlParser#get_fs
+
+ "FileSystem":filesystem.html *get_fs*()
+
+Returns pointer to the file system. Because each tag handler has
+reference to it is parent parser it can easily request the file by
+calling
+
+
+ FSFile *f = m_Parser -> GetFS() -> OpenFile("image.jpg");
+ 
+
+h3(#HtmlParser_getproduct). HtmlParser#get_product
+
+ "Object":object.html *get_product*()
+
+Returns product of parsing. Returned value is result of parsing
+of the document. The type of this result depends on internal
+representation in derived parser (but it must be derived from Object!).
+
+See HtmlWinParser for details.
+
+h3(#HtmlParser_getsource). HtmlParser#get_source
+
+ String *get_source*()
+
+Returns pointer to the source being parsed.
+
+
+h3(#HtmlParser_initparser). HtmlParser#init_parser
+
+  *init_parser*(%(arg-type)String% source)
+
+Setups the parser for parsing the _source_ string. (Should be overridden
+in derived class)
+
+h3(#HtmlParser_openurl). HtmlParser#open_url
+
+ "FSFile":fsfile.html *open_url*(%(arg-type)"HtmlURLType":htmlurltype.html% type,  %(arg-type)String% url)
+
+Opens given URL and returns @FSFile@ object that can be used to read data
+from it. This method may return NULL in one of two cases: either the URL doesn't
+point to any valid resource or the URL is blocked by overridden implementation
+of _OpenURL_ in derived class.
+
+h4. Parameters
+
+* _type_ Indicates type of the resource. Is one of:
+
+
+|*HTML_URL_PAGE*|Opening a HTML page.|
+|*HTML_URL_IMAGE*|Opening an image.|
+|*HTML_URL_OTHER*|Opening a resource that doesn't fall intoany other category.|
+
+* _url_ URL being opened.
+
+h4. Notes
+
+Always use this method in tag handlers instead of @GetFS()->OpenFile()@ 
+because it can block the URL and is thus more secure.
+
+Default behaviour is to call "HtmlWindow#on_opening_url":htmlwindow.html#HtmlWindow_onopeningurl
+of the associated HtmlWindow object (which may decide to block the URL or
+redirect it to another one),if there's any, and always open the URL if the 
+parser is not used with HtmlWindow.
+
+Returned @FSFile@ object is not guaranteed to point to _url_, it might
+have been redirected!
+
+h3(#HtmlParser_parse). HtmlParser#parse
+
+ "Object":object.html *parse*(%(arg-type)String% source)
+
+Proceeds parsing of the document. This is end-user method. You can simply
+call it when you need to obtain parsed output (which is parser-specific)
+
+The method does these things:
+
+
+# calls "init_parser(source)":#HtmlParser_initparser(source)
+# calls "do_parsing":#HtmlParser_doparsing
+# calls "get_product":#HtmlParser_getproduct
+# calls "done_parser":#HtmlParser_doneparser
+# returns value returned by GetProduct
+
+
+You shouldn't use InitParser, DoParsing, GetProduct or DoneParser directly.
+
+h3(#HtmlParser_pushtaghandler). HtmlParser#push_tag_handler
+
+  *push_tag_handler*(%(arg-type)"HtmlTagHandler":htmltaghandler.html% handler,  %(arg-type)String% tags)
+
+Forces the handler to handle additional tags 
+(not returned by "get_supported_tags":#HtmlParser_getsupportedtags). 
+The handler should already be added to this parser.
+
+h4. Parameters
+
+* _handler_ the handler
+* _tags_ List of tags (in same format as GetSupportedTags's return value). The parser
+will redirect these tags to _handler_ (until call to "pop_tag_handler":#HtmlParser_poptaghandler). 
+
+h4. Example
+
+Imagine you want to parse following pseudo-html structure:
+
+
+ <myitems>
+     <param name="one" value="1">
+     <param name="two" value="2">
+ </myitems>
+ 
+ <execute>
+     <param program="text.exe">
+ </execute>
+ 
+
+It is obvious that you cannot use only one tag handler for <param> tag.
+Instead you must use context-sensitive handlers for <param> inside <myitems>
+and <param> inside <execute>.        
+
+This is the preferred solution:
+
+
+ TAG_HANDLER_BEGIN(MYITEM, "MYITEMS")
+     TAG_HANDLER_PROC(tag)
+     {
+         // ...something...
+ 
+         m_Parser -> PushTagHandler(this, "PARAM");
+         ParseInner(tag);
+         m_Parser -> PopTagHandler();
+ 
+         // ...something...
+      }
+ TAG_HANDLER_END(MYITEM)
+ 
+
+
+h3(#HtmlParser_poptaghandler). HtmlParser#pop_tag_handler
+
+  *pop_tag_handler*()
+
+Restores parser's state before last call to 
+"push_tag_handler":#HtmlParser_pushtaghandler.
+
+
+h3(#HtmlParser_setfs). HtmlParser#set_fs
+
+  *set_fs*(%(arg-type)"FileSystem":filesystem.html% fs)
+
+Sets the virtual file system that will be used to request additional
+files. (For example @<IMG>@ tag handler requests FSFile with the
+image data.)
+
+h3(#HtmlParser_stopparsing). HtmlParser#stop_parsing
+
+  *stop_parsing*()
+
+Call this function to interrupt parsing from a tag handler. No more tags
+will be parsed afterward. This function may only be called from
+"HtmlParser#parse":htmlparser.html#HtmlParser_parse or any function called
+by it (i.e. from tag handlers).
+

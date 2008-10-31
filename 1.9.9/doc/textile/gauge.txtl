@@ -1,0 +1,236 @@
+h1(#wxgauge). Wx::Gauge
+
+A gauge is a horizontal or vertical bar which shows a quantity (often time).
+
+Gauge supports two working modes: determinate and indeterminate progress.
+
+The first is the usual working mode (see "set_value":#Gauge_setvalue
+and "set_range":#Gauge_setrange) while the second can be used when
+the program is doing some processing but you don't know how much progress is
+being done.
+In this case, you can periodically call the "Pulse":gaugepulse.html
+function to make the progress bar switch to indeterminate mode (graphically
+it's usually a set of blocks which move or bounce in the bar control).
+
+Gauge supports dynamic switch between these two work modes.
+
+There are no user commands for the gauge.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@GA_HORIZONTAL@|Creates a horizontal gauge.|
+|@GA_VERTICAL@|Creates a vertical gauge.|
+|@GA_SMOOTH@|Creates smooth progress bar with one pixel wide update step (not supported by all platforms).|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+Gauge is read-only so generates no events.
+
+h2. See also
+
+"Slider":slider.html, "ScrollBar":scrollbar.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Gauge.new":#Gauge_new
+* "Gauge#create":#Gauge_create
+* "Gauge#get_bezel_face":#Gauge_getbezelface
+* "Gauge#get_range":#Gauge_getrange
+* "Gauge#get_shadow_width":#Gauge_getshadowwidth
+* "Gauge#get_value":#Gauge_getvalue
+* "Gauge#is_vertical":#Gauge_isvertical
+* "Gauge#set_bezel_face":#Gauge_setbezelface
+* "Gauge#set_range":#Gauge_setrange
+* "Gauge#set_shadow_width":#Gauge_setshadowwidth
+* "Gauge#set_value":#Gauge_setvalue
+* "Gauge#pulse":#Gauge_pulse
+
+</div>
+
+
+
+h3(#Gauge_new). Gauge.new
+
+  *Gauge.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% range, 
+            %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+            %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+            %(arg-type)Integer% style = GA_HORIZONTAL, 
+            %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+            %(arg-type)String% name = "gauge")
+
+Constructor, creating and showing a gauge.
+
+h4. Parameters
+
+* _parent_ Window parent.
+* _id_ Window identifier.
+* _range_ Integer range (maximum value) of the gauge. It is ignored when the gauge is used in indeterminate mode.
+* _pos_ Window position.
+* _size_ Window size.
+* _style_ Gauge style. See "Gauge":gauge.html.
+* _name_ Window name.
+
+h4. See also
+
+"Gauge#create":gauge.html#Gauge_create
+
+
+  *destructor*()
+
+Destructor, destroying the gauge.
+
+
+h3(#Gauge_create). Gauge#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% range, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = GA_HORIZONTAL, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "gauge")
+
+Creates the gauge for two-step construction. See "Gauge.new":gauge.html#Gauge_new for further details.
+
+
+h3(#Gauge_getbezelface). Gauge#get_bezel_face
+
+ Integer *get_bezel_face*()
+
+Returns the width of the 3D bezel face.
+
+h4. Remarks
+
+This method is not implemented (returns $0$) for most platforms.
+
+h4. See also
+
+"Gauge#set_bezel_face":gauge.html#Gauge_setbezelface
+
+
+h3(#Gauge_getrange). Gauge#get_range
+
+ Integer *get_range*()
+
+Returns the maximum position of the gauge.
+
+h4. See also
+
+"Gauge#set_range":gauge.html#Gauge_setrange
+
+
+h3(#Gauge_getshadowwidth). Gauge#get_shadow_width
+
+ Integer *get_shadow_width*()
+
+Returns the 3D shadow margin width.
+
+h4. Remarks
+
+This method is not implemented (returns $0$) for most platforms.
+
+h4. See also
+
+"Gauge#set_shadow_width":gauge.html#Gauge_setshadowwidth
+
+
+h3(#Gauge_getvalue). Gauge#get_value
+
+ Integer *get_value*()
+
+Returns the current position of the gauge.
+
+h4. See also
+
+"Gauge#set_value":gauge.html#Gauge_setvalue
+
+
+h3(#Gauge_isvertical). Gauge#is_vertical
+
+ Boolean *is_vertical*()
+
+Returns  if the gauge is vertical (has @GA_VERTICAL@ style) and 
+ otherwise.
+
+
+h3(#Gauge_setbezelface). Gauge#set_bezel_face
+
+  *set_bezel_face*(%(arg-type)Integer% width)
+
+Sets the 3D bezel face width.
+
+h4. Remarks
+
+This method is not implemented (doesn't do anything) for most platforms.
+
+h4. See also
+
+"Gauge#get_bezel_face":gauge.html#Gauge_getbezelface
+
+
+h3(#Gauge_setrange). Gauge#set_range
+
+  *set_range*(%(arg-type)Integer% range)
+
+Sets the range (maximum value) of the gauge.
+This function makes the gauge switch to determinate mode, if it's not already.
+
+h4. See also
+
+"Gauge#get_range":gauge.html#Gauge_getrange
+
+
+h3(#Gauge_setshadowwidth). Gauge#set_shadow_width
+
+  *set_shadow_width*(%(arg-type)Integer% width)
+
+Sets the 3D shadow width.
+
+h4. Remarks
+
+This method is not implemented (doesn't do anything) for most platforms.
+
+
+h3(#Gauge_setvalue). Gauge#set_value
+
+  *set_value*(%(arg-type)Integer% pos)
+
+Sets the position of the gauge.
+This function makes the gauge switch to determinate mode, if it's not already.
+
+h4. Parameters
+
+* _pos_ Position for the gauge level.
+
+h4. See also
+
+"Gauge#get_value":gauge.html#Gauge_getvalue
+
+
+h3(#Gauge_pulse). Gauge#pulse
+
+  *pulse*()
+
+Switch the gauge to indeterminate mode (if required) and makes the gauge move
+a bit to indicate the user that some progress has been made.
+
+Note that after calling this function the value returned by "get_value":#Gauge_getvalue
+is undefined and thus you need to explicitely call "set_value":#Gauge_setvalue if you
+want to restore the determinate mode.
+

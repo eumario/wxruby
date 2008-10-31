@@ -1,0 +1,75 @@
+h1(#wxcontexthelp). Wx::ContextHelp
+
+This class changes the cursor to a query and puts the application into a 'context-sensitive help mode'.
+When the user left-clicks on a window within the specified window, a EVT_HELP event is
+sent to that control, and the application may respond to it by popping up some help.
+
+For example:
+
+
+   ContextHelp contextHelp(myWindow);
+ 
+
+There are a couple of ways to invoke this behaviour implicitly:
+
+
+* Use the DIALOG_EX_CONTEXTHELP style for a dialog (Windows only). This will put a question mark
+in the titlebar, and Windows will put the application into context-sensitive help mode automatically,
+with further programming.
+* Create a "ContextHelpButton":contexthelpbutton.html, whose predefined behaviour is to create a context help object.
+Normally you will write your application so that this button is only added to a dialog for non-Windows platforms
+(use DIALOG_EX_CONTEXTHELP on Windows).
+
+
+Note that on Mac OS X, the cursor does not change when in context-sensitive
+help mode.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"HelpEvent":helpevent.html, 
+"HelpController":helpcontroller.html, 
+"ContextHelpButton":contexthelpbutton.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ContextHelp.new":#ContextHelp_new
+* "ContextHelp#begin_context_help":#ContextHelp_begincontexthelp
+* "ContextHelp#end_context_help":#ContextHelp_endcontexthelp
+
+</div>
+
+
+h3(#ContextHelp_new). ContextHelp.new
+
+  *ContextHelp.new*(%(arg-type)"Window":window.html% window = nil,  %(arg-type)Boolean% doNow = true)
+
+Constructs a context help object, calling "begin_context_help":#ContextHelp_begincontexthelp if _doNow_ is true (the default).
+
+If _window_ is NULL, the top window is used.
+
+  *destructor*()
+
+Destroys the context help object.
+
+h3(#ContextHelp_begincontexthelp). ContextHelp#begin_context_help
+
+ Boolean *begin_context_help*(%(arg-type)"Window":window.html% window = nil)
+
+Puts the application into context-sensitive help mode. _window_ is the window
+which will be used to catch events; if NULL, the top window will be used.
+
+Returns true if the application was successfully put into context-sensitive help mode.
+This function only returns when the event loop has finished.
+
+h3(#ContextHelp_endcontexthelp). ContextHelp#end_context_help
+
+ Boolean *end_context_help*()
+
+Ends context-sensitive help mode. Not normally called by the application.
+

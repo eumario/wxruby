@@ -1,0 +1,56 @@
+h1(#wxmousecapturechangedevent). Wx::MouseCaptureChangedEvent
+
+An mouse capture changed event is sent to a window that loses its
+mouse capture. This is called even if Window::ReleaseCapture
+was called by the application code. Handling this event allows
+an application to cater for unexpected capture releases which
+might otherwise confuse mouse handling code.
+
+This event is implemented under Windows only.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process this event, use the following event handler macro to direct input to a member
+function that takes a MouseCaptureChangedEvent argument.
+
+
+
+|*evt_mouse_capture_changed()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_MOUSE_CAPTURE_CHANGED event.|
+
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, 
+"Window#capture_mouse":window.html#Window_capturemouse, 
+"Window#release_mouse":window.html#Window_releasemouse, 
+"Window#get_capture":window.html#Window_getcapture
+
+<div id="methods">
+
+h2. Methods
+
+* "MouseCaptureChangedEvent.new":#MouseCaptureChangedEvent_new
+* "ActivateEvent#get_captured_window":#MouseCaptureChangedEvent_getcapturedwindow
+
+</div>
+
+
+h3(#MouseCaptureChangedEvent_new). MouseCaptureChangedEvent.new
+
+  *MouseCaptureChangedEvent.new*(%(arg-type)Integer% windowId = 0, 
+                               %(arg-type)"Window":window.html% gainedCapture = nil)
+
+Constructor.
+
+h3(#MouseCaptureChangedEvent_getcapturedwindow). ActivateEvent#get_captured_window
+
+ "Window":window.html *get_captured_window*()
+
+Returns the window that gained the capture, or NULL if it was a non-Widgets window.
+

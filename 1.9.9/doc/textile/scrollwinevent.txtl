@@ -1,0 +1,65 @@
+h1(#wxscrollwinevent). Wx::ScrollWinEvent
+
+A scroll event holds information about events sent from scrolling windows.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a scroll window event, use these event handler macros to direct input to member
+functions that take a ScrollWinEvent argument. You can use the  EVT_SCROLLWIN... macros
+for intercepting scroll window events from the receiving window.
+
+
+
+|*evt_scrollwin()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process all scroll events.|
+|*evt_scrollwin_top()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_TOP scroll-to-top events.|
+|*evt_scrollwin_bottom()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_TOP scroll-to-bottom events.|
+|*evt_scrollwin_lineup()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_LINEUP line up events.|
+|*evt_scrollwin_linedown()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_LINEDOWN line down events.|
+|*evt_scrollwin_pageup()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_PAGEUP page up events.|
+|*evt_scrollwin_pagedown()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_PAGEDOWN page down events.|
+|*evt_scrollwin_thumbtrack()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_THUMBTRACK thumbtrack events (frequent eventssent as the user drags the thumbtrack).|
+|*evt_scrollwin_thumbrelease()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process EVT_SCROLLWIN_THUMBRELEASE thumb release events.|
+
+h2. See also
+
+"ScrollEvent":scrollevent.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ScrollWinEvent.new":#ScrollWinEvent_new
+* "ScrollWinEvent#get_orientation":#ScrollWinEvent_getorientation
+* "ScrollWinEvent#get_position":#ScrollWinEvent_getposition
+
+</div>
+
+
+h3(#ScrollWinEvent_new). ScrollWinEvent.new
+
+  *ScrollWinEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% pos = 0, 
+                     %(arg-type)Integer% orientation = 0)
+
+Constructor.
+
+h3(#ScrollWinEvent_getorientation). ScrollWinEvent#get_orientation
+
+ Integer *get_orientation*()
+
+Returns HORIZONTAL or VERTICAL, depending on the orientation of the scrollbar.
+
+h3(#ScrollWinEvent_getposition). ScrollWinEvent#get_position
+
+ Integer *get_position*()
+
+Returns the position of the scrollbar for the thumb track and release events.
+Note that this field can't be used for the other events, you need to query
+the window itself for the current position in that case.
+
+

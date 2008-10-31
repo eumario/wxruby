@@ -1,0 +1,105 @@
+h1(#wxwizardpage). Wx::WizardPage
+
+WizardPage is one of the screens in "Wizard":wizard.html: it must
+know what are the following and preceding pages (which may be @NULL@ for the
+first/last page). Except for this extra knowledge, WizardPage is just a
+panel, so the controls may be placed directly on it in the usual way.
+
+This class allows the programmer to decide the order of pages in the wizard
+dynamically (during run-time) and so provides maximal flexibility. Usually,
+however, the order of pages is known in advance in which case 
+"WizardPageSimple":wizardpagesimple.html class is enough and it is simpler
+to use.
+
+h2. Virtual functions to override
+
+To use this class, you must override "get_prev":#WizardPage_getprev 
+and "get_next":#WizardPage_getnext pure virtual functions (or you
+may use "WizardPageSimple":wizardpagesimple.html instead).
+
+"get_bitmap":#WizardPage_getbitmap can also be overridden, but this
+should be very rarely needed.
+
+h2. Derived from
+
+"Panel":panel.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"Wizard":wizard.html, "Wizard sample":samplewizard.html
+
+<div id="methods">
+
+h2. Methods
+
+* "WizardPage.new":#WizardPage_new
+* "WizardPage#get_prev":#WizardPage_getprev
+* "WizardPage#get_next":#WizardPage_getnext
+* "WizardPage#get_bitmap":#WizardPage_getbitmap
+
+</div>
+
+
+h3(#WizardPage_wxwizardpage). WizardPage.new
+
+  *WizardPage.new*(%(arg-type)"Wizard":wizard.html% parent,  %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap, 
+                 %(arg-type)"Char":char.html% resource = nil)
+
+Constructor accepts an optional bitmap which will be used for this page
+instead of the default one for this wizard (note that all bitmaps used should
+be of the same size). Notice that no other parameters are needed because the
+wizard will resize and reposition the page anyhow.
+
+h4. Parameters
+
+* _parent_ The parent wizard
+* _bitmap_ The page-specific bitmap if different from the global one
+* _resource_ Load the page from the specified resource if non NULL
+
+h3(#WizardPage_getprev). WizardPage#get_prev
+
+ "WizardPage":wizardpage.html *get_prev*()
+
+Get the page which should be shown when the user chooses the @"Back"@
+button: if @NULL@ is returned, this button will be disabled. The first
+page of the wizard will usually return @NULL@ from here, but the others
+will not.
+
+h4. See also
+
+"get_next":#WizardPage_getnext
+
+h3(#WizardPage_getnext). WizardPage#get_next
+
+ "WizardPage":wizardpage.html *get_next*()
+
+Get the page which should be shown when the user chooses the @"Next"@
+button: if @NULL@ is returned, this button will be disabled. The last
+page of the wizard will usually return @NULL@ from here, but the others
+will not.
+
+h4. See also
+
+"get_prev":#WizardPage_getprev
+
+h3(#WizardPage_getbitmap). WizardPage#get_bitmap
+
+ "Bitmap":bitmap.html *get_bitmap*()
+
+This method is called by Wizard to get the bitmap to display alongside the
+page. By default, @m_bitmap@ member variable which was set in the 
+"constructor":wizardpagewxwizardpage.html.
+
+If the bitmap was not explicitly set (i.e. if @NullBitmap@ is returned),
+the default bitmap for the wizard should be used.
+
+The only cases when you would want to override this function is if the page
+bitmap depends dynamically on the user choices, i.e. almost never.
+
+

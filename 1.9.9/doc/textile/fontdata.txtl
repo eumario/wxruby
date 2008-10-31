@@ -1,0 +1,38 @@
+h1(#wxfontdata). Wx::FontData
+
+FontDialog overviewwxfontdialogoverview
+
+This class holds a variety of information related to font dialogs.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Overview":fontdialogoverview.html, "Font":font.html, "FontDialog":fontdialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FontData.new":#FontData_new
+* "FontData#enable_effects":#FontData_enableeffects
+* "FontData#get_allow_symbols":#FontData_getallowsymbols
+* "FontData#get_colour":#FontData_getcolour
+* "FontData#get_chosen_font":#FontData_getchosenfont
+* "FontData#get_enable_effects":#FontData_getenableeffects
+* "FontData#get_initial_font":#FontData_getinitialfont
+* "FontData#get_show_help":#FontData_getshowhelp
+* "FontData#set_allow_symbols":#FontData_setallowsymbols
+* "FontData#set_chosen_font":#FontData_setchosenfont
+* "FontData#set_colour":#FontData_setcolour
+* "FontData#set_initial_font":#FontData_setinitialfont
+* "FontData#set_range":#FontData_setrange
+* "FontData#set_show_help":#FontData_setshowhelp
+
+</div>
+
+
+h3(#FontData_new). FontData.new
+

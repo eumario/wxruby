@@ -1,0 +1,65 @@
+h1(#wxgbposition). Wx::GBPosition
+
+This class represents the position of an item in a virtual grid of
+rows and columns managed by a "GridBagSizer":gridbagsizer.html.
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "GBPosition.new":#GBPosition_new
+* "GBPosition#get_col":#GBPosition_getcol
+* "GBPosition#get_row":#GBPosition_getrow
+* "GBPosition#set_col":#GBPosition_setcol
+* "GBPosition#set_row":#GBPosition_setrow
+
+</div>
+
+
+h3(#GBPosition_wxgbposition). GBPosition.new
+
+  *GBPosition.new*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Construct a new GBPosition, optionally setting the row and column.
+The default is (0,0).
+
+h3(#GBPosition_getcol). GBPosition#get_col
+
+ Integer *get_col*()
+
+Get the current column value.
+
+h3(#GBPosition_getrow). GBPosition#get_row
+
+ Integer *get_row*()
+
+Get the current row value.
+
+h3(#GBPosition_setcol). GBPosition#set_col
+
+  *set_col*(%(arg-type)Integer% col)
+
+Set a new column value.
+
+h3(#GBPosition_setrow). GBPosition#set_row
+
+  *set_row*(%(arg-type)Integer% row)
+
+Set a new row value.
+
+h3(#GBPosition_operatorunknown). GBPosition::operator!
+
+ Boolean *operator!*(%(arg-type)"GBPosition":gbposition.html% p)
+
+Is the GBPosition valid?  (An invalid GBPosition is (-1,-1). )
+
+h3(#GBPosition_operatorequal). GBPosition::operator==
+
+ bool operator *operator==*(%(arg-type)"GBPosition":gbposition.html% p)
+
+Compare equality of two GBPositions.
+

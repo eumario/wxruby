@@ -1,0 +1,5 @@
+h1(#wxlayoutconstraints). Wx::LayoutConstraints
+
+*Note:* constraints are deprecated in WxWidgets and are not supported in
+WxRuby. You should use "sizers":sizer.html instead to create flexible
+resizeable layouts.

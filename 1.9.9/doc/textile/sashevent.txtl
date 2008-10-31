@@ -1,0 +1,92 @@
+h1(#wxsashevent). Wx::SashEvent
+
+A sash event is sent when the sash of a "SashWindow":sashwindow.html has been
+dragged by the user.
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process an activate event, use these event handler macros to direct input to a member
+function that takes a SashEvent argument.
+
+
+|*evt_sash_dragged(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_SASH_DRAGGED event,when the user has finished dragging a sash.|
+|*EVT_SASH_DRAGGED_RANGE(id1, id2, func)*|Process a EVT_SASH_DRAGGED_RANGE event,when the user has finished dragging a sash. The event handler is called when windows with ids in thegiven range have their sashes dragged.|
+
+
+h2. Data structures
+
+
+
+ enum SashDragStatus
+ {
+     SASH_STATUS_OK,
+     SASH_STATUS_OUT_OF_RANGE
+ };
+ 
+
+
+h2. Remarks
+
+When a sash belonging to a sash window is dragged by the user, and then released,
+this event is sent to the window, where it may be processed by an event table
+entry in a derived class, a plug-in event handler or an ancestor class.
+
+Note that the SashWindow doesn't change the window's size itself. It relies on the application's
+event handler to do that. This is because the application may have to handle other consequences
+of the resize, or it may wish to veto it altogether. The event handler should
+look at the drag rectangle: see "SashEvent#get_drag_rect":sashevent.html#SashEvent_getdragrect to see
+what the new size of the window would be if the resize were to be applied. It should
+also call "SashEvent#get_drag_status":sashevent.html#SashEvent_getdragstatus to see whether the
+drag was OK or out of the current allowed range.
+
+h2. See also
+
+"SashWindow":sashwindow.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SashEvent.new":#SashEvent_new
+* "SashEvent#get_edge":#SashEvent_getedge
+* "SashEvent#get_drag_rect":#SashEvent_getdragrect
+* "SashEvent#get_drag_status":#SashEvent_getdragstatus
+
+</div>
+
+
+h3(#SashEvent_new). SashEvent.new
+
+  *SashEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)"SashEdgePosition":sashedgeposition.html% edge = SASH_NONE)
+
+Constructor.
+
+h3(#SashEvent_getedge). SashEvent#get_edge
+
+ "SashEdgePosition":sashedgeposition.html *get_edge*()
+
+Returns the dragged edge. The return value is one of SASH_TOP, SASH_RIGHT, SASH_BOTTOM, SASH_LEFT.
+
+h3(#SashEvent_getdragrect). SashEvent#get_drag_rect
+
+ "Rect":rect.html *get_drag_rect*()
+
+Returns the rectangle representing the new size the window would be if the resize was applied. It is
+up to the application to set the window size if required.
+
+h3(#SashEvent_getdragstatus). SashEvent#get_drag_status
+
+ "SashDragStatus":sashdragstatus.html *get_drag_status*()
+
+Returns the status of the sash: one of SASH_STATUS_OK, SASH_STATUS_OUT_OF_RANGE.
+If the drag caused the notional bounding box of the window to flip over, for example, the drag will be out of rage.
+
+

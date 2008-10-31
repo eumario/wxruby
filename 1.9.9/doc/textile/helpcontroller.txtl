@@ -1,0 +1,280 @@
+h1(#wxhelpcontroller). Wx::HelpController
+
+This is a family of classes by which applications invoke a viewer to
+provide on-line help. A help controller allows an application to display
+help, at the index page or on a particular topic, and shut the help
+program down on termination.  This avoids proliferation of many
+instances of the help viewer whenever the user requests a different
+topics via the application's menus or buttons.
+
+Typically, an application will create a help controller instance when it
+starts, and immediately call *load_file* to load the help content from a
+file. The help viewer will only get run, however, just before the first
+call to display something.
+
+Using this class will invoke the most appropriate help viewer on each
+different platform, using the native help controller where
+possible. This means:
+
+* On desktop Windows, Microsoft HTML Help is used
+* On all other platforms, "HtmlHelpController":htmlhelpcontroller.html is used
+
+These two classes are very similar in functionality and
+appearance. Unless you have a strong preference for using the native
+help viewer on Windows, it's recommended that you use
+"HtmlHelpController":htmlhelpcontroller.html directly, rather than using
+this class. This has the additional advantage that you only need to
+provide help files in one format (.htb) to cover all desktop platforms,
+instead of needing to provide a format (.chm) specially for windows. See
+"HtmlHelpController":htmlhelpcontroller.html for more details on the
+file formats used.
+
+WxWidgets also provides classes for viewing help on Win CE, but WxRuby
+is not currently ported to this platform. 
+
+
+h2. Derived from
+
+ "Wx::Object":object.html
+
+h2. See also
+
+"HtmlHelpController":htmlhelpcontroller.html
+
+<div id="methods">
+
+h2. Class Methods
+
+* "HelpController.instance":#HelpController_instance
+* "HelpController.new":#HelpController_new
+
+h2. Instance Methods
+
+* "HelpController#init":#HelpController_init
+* "HelpController#display_block":#HelpController_displayblock
+* "HelpController#display_contents":#HelpController_displaycontents
+* "HelpController#display_context_popup":#HelpController_displaycontextpopup
+* "HelpController#display_section":#HelpController_displaysection
+* "HelpController#display_text_popup":#HelpController_displaytextpopup
+* "HelpController#get_frame_parameters":#HelpController_getframeparameters
+* "HelpController#get_parent_window":#HelpController_getparentwindow
+* "HelpController#keyword_search":#HelpController_keywordsearch
+* "HelpController#load_file":#HelpController_loadfile
+* "HelpController#on_quit":#HelpController_onquit
+* "HelpController#set_frame_parameters":#HelpController_setframeparameters
+* "HelpController#set_parent_window":#HelpController_setparentwindow
+* "HelpController#set_viewer":#HelpController_setviewer
+* "HelpController#quit":#HelpController_quit
+
+</div>
+
+h2(#class_methods). Class Methods
+
+h3(#HelpController_new). HtmlHelpController.instance
+
+  *HelpController.instance*()
+
+Returns a new HelpController if one hasn't already been created, or
+returns the previously created one if there is such.
+
+Users typically expect only a single help window to be running for
+any particular application, with the help shown and hidden as
+required. To avoid showing multiple help windows within a single
+application, use this method in preference to
+"new":#HelpController_new . 
+
+h3(#HelpController_new). HelpController.new
+
+  *HelpController.new*()
+
+Constructor.
+
+h2(#instance_methods). Instance Methods
+
+h3(#HelpController_init). HelpController#init
+
+  *init*(%(arg-type)String% file)
+
+Initializes the help instance with a help filename. Does not invoke the
+help viewer.  This must be called directly after the help instance
+object is created and before any attempts to communicate with the
+viewer.
+
+You may omit the file extension and a suitable one will be chosen. For
+HtmlHelpController, the extensions zip, htb and hhp will be appended
+while searching for a suitable file. For WinHelp, the hlp extension is
+appended.
+
+h3(#HelpController_displayblock). HelpController#display_block
+
+ Boolean *display_block*(%(arg-type)Integer% blockNo)
+
+If the help viewer is not running, runs it and displays the file at the given block number.
+
+_WinHelp:_ Refers to the context number.
+
+_MS HTML Help:_ Refers to the context number.
+
+_External HTML help:_ the same as for "HelpController#display_section":helpcontroller.html#HelpController_displaysection.
+
+_HtmlHelpController:_ _sectionNo_ is an identifier as specified in the @.hhc@ file. See "Help files format":helpformat.html.
+
+This function is for backward compatibility only, and applications should use "HelpController":helpcontrollerdisplaysection.html instead.
+
+h3(#HelpController_displaycontents). HelpController#display_contents
+
+ Boolean *display_contents*()
+
+If the help viewer is not running, runs it and displays the
+contents.
+
+h3(#HelpController_displaycontextpopup). HelpController#display_context_popup
+
+ Boolean *display_context_popup*(%(arg-type)Integer% contextId)
+
+Displays the section as a popup window using a context id.
+
+Returns false if unsuccessful or not implemented.
+
+h3(#HelpController_displaysection). HelpController#display_section
+
+ Boolean *display_section*(%(arg-type)String% section)
+
+If the help viewer is not running, runs it and displays the given section.
+
+The interpretation of _section_ differs between help viewers. For most viewers,
+this call is equivalent to KeywordSearch. For MS HTML Help, HTML help and external HTML help,
+if _section_ has a .htm
+or .html extension, that HTML file will be displayed; otherwise
+a keyword search is done.
+
+ Boolean *display_section*(%(arg-type)Integer% sectionNo)
+
+If the help viewer is not running, runs it and displays the given section.
+
+_WinHelp, MS HTML Help_ _sectionNo_ is a context id.
+
+_External HTML help:_ ExtHelpController implements _sectionNo_ as an id in a map file, which is of the form:
+
+
+ 0  wx.html             ; Index
+ 1  wx34.html#classref  ; Class reference
+ 2  wx204.html          ; Function reference
+ 
+
+_HtmlHelpController:_ _sectionNo_ is an identifier as specified in the @.hhc@ file. See "Help files format":helpformat.html.
+
+See also the help sample for notes on how to specify section numbers for various help file formats.
+
+h3(#HelpController_displaytextpopup). HelpController#display_text_popup
+
+ Boolean *display_text_popup*(%(arg-type)String% text,  %(arg-type)"Point":point.html% pos)
+
+Displays the text in a popup window, if possible.
+
+Returns false if unsuccessful or not implemented.
+
+h3(#HelpController_getframeparameters). HelpController#get_frame_parameters
+
+ "Frame":frame.html *get_frame_parameters*(%(arg-type)"Size":size.html% size = nil,  %(arg-type)"Point":point.html% pos = nil, 
+                              %(arg-type)Boolean% newFrameEachTime = nil)
+
+HtmlHelpController returns the frame, size and position.
+
+For all other help controllers, this function does nothing
+and just returns NULL.
+
+h4. Parameters
+
+* _viewer_ This defaults to "netscape" for ExtHelpController.
+* _flags_ This defaults to HELP_NETSCAPE for ExtHelpController, indicating
+that the viewer is a variant of Netscape Navigator.
+
+h3(#HelpController_getparentwindow). HelpController#get_parent_window
+
+ Boolean *get_parent_window*()
+
+Returns the window to be used as the parent for the help window. This window is used
+by CHMHelpController, WinHelpController and HtmlHelpController.
+
+h3(#HelpController_keywordsearch). HelpController#keyword_search
+
+ Boolean *keyword_search*(%(arg-type)String% keyWord, 
+                        %(arg-type)"HelpSearchMode":helpsearchmode.html% mode = HELP_SEARCH_ALL)
+
+If the help viewer is not running, runs it, and searches for sections matching
+the given keyword. If one match is found, the file is displayed at this
+section. The optional parameter allows the search the index
+(HELP_SEARCH_INDEX) but this currently only supported by the
+HtmlHelpController.
+
+_WinHelp, MS HTML Help:_ If more than one match is found, 
+the first topic is displayed.
+
+_External HTML help, simple HTML help:_ If more than one match is found, 
+a choice of topics is displayed.
+
+_HtmlHelpController:_ see "HtmlHelpController#keyword_search":htmlhelpcontroller.html#HtmlHelpController_keywordsearch.
+
+h3(#HelpController_loadfile). HelpController#load_file
+
+ Boolean *load_file*(%(arg-type)String% file = "")
+
+If the help viewer is not running, runs it and loads the given file.
+If the filename is not supplied or is
+empty, the file specified in *Initialize* is used. If the viewer is
+already displaying the specified file, it will not be reloaded. This
+member function may be used before each display call in case the user
+has opened another file.
+
+HtmlHelpController ignores this call.
+
+h3(#HelpController_onquit). HelpController#on_quit
+
+ Boolean *on_quit*()
+
+Overridable member called when this application's viewer is quit by the user.
+
+This does not work for all help controllers.
+
+h3(#HelpController_setframeparameters). HelpController#set_frame_parameters
+
+  *set_frame_parameters*(%(arg-type)String% title,  %(arg-type)"Size":size.html% size, 
+                       %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                       %(arg-type)Boolean% newFrameEachTime = false)
+
+For HtmlHelpController, the title is set (again with \%s indicating the
+page title) and also the size and position of the frame if the frame is already
+open. _newFrameEachTime_ is ignored.
+
+For all other help controllers this function has no effect.
+
+h3(#HelpController_setparentwindow). HelpController#set_parent_window
+
+  *set_parent_window*(%(arg-type)"Window":window.html% parentWindow)
+
+Sets the window to be used as the parent for the help window. This is used
+by CHMHelpController, WinHelpController and HtmlHelpController.
+
+h3(#HelpController_setviewer). HelpController#set_viewer
+
+  *set_viewer*(%(arg-type)String% viewer,  %(arg-type)Integer% flags)
+
+Sets detailed viewer information. So far this is only relevant to ExtHelpController.
+
+Some examples of usage:
+
+
+   m_help.SetViewer("kdehelp");
+   m_help.SetViewer("gnome-help-browser");
+   m_help.SetViewer("netscape", HELP_NETSCAPE);
+ 
+
+h3(#HelpController_quit). HelpController#quit
+
+ Boolean *quit*()
+
+If the viewer is running, quits it by disconnecting.
+
+For Windows Help, the viewer will only close if no other application is using it.
+

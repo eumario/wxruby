@@ -1,0 +1,75 @@
+h1(#wxcolourdialog). Wx::ColourDialog
+
+This class represents the colour chooser dialog.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"ColourDialog Overview":colourdialogoverview.html,
+
+"Colour":colour.html,
+
+"ColourData":colourdata.html,
+
+"GetColourFromUser":getcolourfromuser.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ColourDialog.new":#ColourDialog_new
+* "ColourDialog#create":#ColourDialog_create
+* "ColourDialog#get_colour_data":#ColourDialog_getcolourdata
+* "ColourDialog#show_modal":#ColourDialog_showmodal
+
+</div>
+
+
+h3(#ColourDialog_new). ColourDialog.new
+
+  *ColourDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"ColourData":colourdata.html% data = nil)
+
+Constructor. Pass a parent window, and optionally a pointer to a block of colour
+data, which will be copied to the colour dialog's colour data. Custom
+colours from colour data object will be be used in dialog's colour palette.
+Invalid entries in custom colours list will be ignored on some platforms (GTK)
+or replaced with white colour on platforms where custom colours palette has
+fixed size (MSW).
+
+h4. See also
+
+"ColourData":colourdata.html
+
+  *destructor*()
+
+Destructor.
+
+h3(#ColourDialog_create). ColourDialog#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)"ColourData":colourdata.html% data = nil)
+
+Same as "constructor":colourdialogctor.html.
+
+h3(#ColourDialog_getcolourdata). ColourDialog#get_colour_data
+
+ "ColourData":colourdata.html *get_colour_data*()
+
+Returns the "colour data":colourdata.html associated with the colour dialog.
+
+h3(#ColourDialog_showmodal). ColourDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning ID_OK if the user pressed OK, and ID_CANCEL
+otherwise.
+
+

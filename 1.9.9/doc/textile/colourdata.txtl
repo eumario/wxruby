@@ -1,0 +1,104 @@
+h1(#wxcolourdata). Wx::ColourData
+
+This class holds a variety of information related to colour dialogs.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Colour":colour.html, "ColourDialog":colourdialog.html, "ColourDialog overview":colourdialogoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ColourData.new":#ColourData_new
+* "ColourData#get_choose_full":#ColourData_getchoosefull
+* "ColourData#get_colour":#ColourData_getcolour
+* "ColourData#get_custom_colour":#ColourData_getcustomcolour
+* "ColourData#set_choose_full":#ColourData_setchoosefull
+* "ColourData#set_colour":#ColourData_setcolour
+* "ColourData#set_custom_colour":#ColourData_setcustomcolour
+
+</div>
+
+
+
+h3(#ColourData_new). ColourData.new
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#ColourData_getchoosefull). ColourData#get_choose_full
+
+ Boolean *get_choose_full*()
+
+Under Windows, determines whether the Windows colour dialog will display the full dialog
+with custom colour selection controls. Under PalmOS, determines whether colour dialog
+will display full rgb colour picker or only available palette indexer.
+Has no meaning under other platforms.
+
+The default value is true.
+
+
+h3(#ColourData_getcolour). ColourData#get_colour
+
+ "Colour":colour.html *get_colour*()
+
+Gets the current colour associated with the colour dialog.
+
+The default colour is black.
+
+
+h3(#ColourData_getcustomcolour). ColourData#get_custom_colour
+
+ "Colour":colour.html *get_custom_colour*(%(arg-type)Integer% i)
+
+Gets the _i_th custom colour associated with the colour dialog. _i_ should
+be an integer between 0 and 15.
+
+The default custom colours are invalid colours.
+
+
+h3(#ColourData_setchoosefull). ColourData#set_choose_full
+
+  *set_choose_full*(%(arg-type)Boolean% flag)
+
+Under Windows, tells the Windows colour dialog to display the full dialog
+with custom colour selection controls. Under other platforms, has no effect.
+
+The default value is true.
+
+
+h3(#ColourData_setcolour). ColourData#set_colour
+
+  *set_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the default colour for the colour dialog.
+
+The default colour is black.
+
+
+h3(#ColourData_setcustomcolour). ColourData#set_custom_colour
+
+  *set_custom_colour*(%(arg-type)Integer% i,  %(arg-type)"Colour":colour.html% colour)
+
+Sets the _i_th custom colour for the colour dialog. _i_ should
+be an integer between 0 and 15.
+
+The default custom colours are invalid colours.
+
+
+h3(#ColourData_assign). ColourData#=
+
+  *operator $=$*(%(arg-type)"ColourData":colourdata.html% data)
+
+Assignment operator for the colour data.
+
+
+
+

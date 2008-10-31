@@ -1,0 +1,289 @@
+h1(#wxdoctemplate). Wx::DocTemplate
+
+The DocTemplate class is used to model the relationship between a
+document class and a view class.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"DocTemplate overview":doctemplateoverview.html, "Document":document.html, "View":view.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DocTemplate#m__default_ext":#DocTemplate_mdefaultext
+* "DocTemplate#m__description":#DocTemplate_mdescription
+* "DocTemplate#m__directory":#DocTemplate_mdirectory
+* "DocTemplate#m__doc_class_info":#DocTemplate_mdocclassinfo
+* "DocTemplate#m__doc_type_name":#DocTemplate_mdoctypename
+* "DocTemplate#m__document_manager":#DocTemplate_mdocumentmanager
+* "DocTemplate#m__file_filter":#DocTemplate_mfilefilter
+* "DocTemplate#m__flags":#DocTemplate_mflags
+* "DocTemplate#m__view_class_info":#DocTemplate_mviewclassinfo
+* "DocTemplate#m__view_type_name":#DocTemplate_mviewtypename
+* "DocTemplate.new":#DocTemplate_new
+* "DocTemplate#create_document":#DocTemplate_createdocument
+* "DocTemplate#create_view":#DocTemplate_createview
+* "DocTemplate#get_default_extension":#DocTemplate_getdefaultextension
+* "DocTemplate#get_description":#DocTemplate_getdescription
+* "DocTemplate#get_directory":#DocTemplate_getdirectory
+* "DocTemplate#get_document_manager":#DocTemplate_getdocumentmanager
+* "DocTemplate#get_document_name":#DocTemplate_getdocumentname
+* "DocTemplate#get_file_filter":#DocTemplate_getfilefilter
+* "DocTemplate#get_flags":#DocTemplate_getflags
+* "DocTemplate#get_view_name":#DocTemplate_getviewname
+* "DocTemplate#init_document":#DocTemplate_initdocument
+* "DocTemplate#is_visible":#DocTemplate_isvisible
+* "DocTemplate#set_default_extension":#DocTemplate_setdefaultextension
+* "DocTemplate#set_description":#DocTemplate_setdescription
+* "DocTemplate#set_directory":#DocTemplate_setdirectory
+* "DocTemplate#set_document_manager":#DocTemplate_setdocumentmanager
+* "DocTemplate#set_file_filter":#DocTemplate_setfilefilter
+* "DocTemplate#set_flags":#DocTemplate_setflags
+
+</div>
+
+
+h3(#DocTemplate_mdefaultext). DocTemplate#m__default_ext
+
+Stringm_defaultExt
+
+The default extension for files of this type.
+
+h3(#DocTemplate_mdescription). DocTemplate#m__description
+
+Stringm_description
+
+A short description of this template.
+
+h3(#DocTemplate_mdirectory). DocTemplate#m__directory
+
+Stringm_directory
+
+The default directory for files of this type.
+
+h3(#DocTemplate_mdocclassinfo). DocTemplate#m__doc_class_info
+
+ClassInfo* m_docClassInfo
+
+Run-time class information that allows document instances to be constructed dynamically.
+
+h3(#DocTemplate_mdoctypename). DocTemplate#m__doc_type_name
+
+Stringm_docTypeName
+
+The named type of the document associated with this template.
+
+h3(#DocTemplate_documentmanager). DocTemplate#m__document_manager
+
+DocTemplate*m_documentManager
+
+A pointer to the document manager for which this template was created.
+
+h3(#DocTemplate_mfilefilter). DocTemplate#m__file_filter
+
+Stringm_fileFilter
+
+The file filter (such as @*.txt@) to be used in file selector dialogs.
+
+h3(#DocTemplate_mflags). DocTemplate#m__flags
+
+longm_flags
+
+The flags passed to the constructor.
+
+h3(#DocTemplate_mviewclassinfo). DocTemplate#m__view_class_info
+
+ClassInfo*m_viewClassInfo
+
+Run-time class information that allows view instances to be constructed dynamically.
+
+h3(#DocTemplate_mviewtypename). DocTemplate#m__view_type_name
+
+Stringm_viewTypeName
+
+The named type of the view associated with this template.
+
+h3(#DocTemplate_new). DocTemplate.new
+
+  *DocTemplate.new*(%(arg-type)"DocManager":docmanager.html% manager,  %(arg-type)String% descr, 
+                  %(arg-type)String% filter, 
+                  %(arg-type)String% dir, 
+                  %(arg-type)String% ext, 
+                  %(arg-type)String% docTypeName, 
+                  %(arg-type)String% viewTypeName, 
+                  %(arg-type)"ClassInfo":classinfo.html% docClassInfo = nil, 
+                  %(arg-type)"ClassInfo":classinfo.html% viewClassInfo = nil, 
+                  %(arg-type)Integer% flags = DEFAULT_TEMPLATE_FLAGS)
+
+Constructor. Create instances dynamically near the start of your application after creating
+a DocManager instance, and before doing any document or view operations.
+
+_manager_ is the document manager object which manages this template.
+
+_descr_ is a short description of what the template is for. This string will be displayed in the
+file filter list of Windows file selectors.
+
+_filter_ is an appropriate file filter such as @*.txt@.
+
+_dir_ is the default directory to use for file selectors.
+
+_ext_ is the default file extension (such as txt).
+
+_docTypeName_ is a name that should be unique for a given type of document, used for
+gathering a list of views relevant to a particular document.
+
+_viewTypeName_ is a name that should be unique for a given view.
+
+_docClassInfo_ is a pointer to the run-time document class information as returned
+by the CLASSINFO macro, e.g. CLASSINFO(MyDocumentClass). If this is not supplied,
+you will need to derive a new DocTemplate class and override the CreateDocument
+member to return a new document instance on demand.
+
+_viewClassInfo_ is a pointer to the run-time view class information as returned
+by the CLASSINFO macro, e.g. CLASSINFO(MyViewClass). If this is not supplied,
+you will need to derive a new DocTemplate class and override the CreateView
+member to return a new view instance on demand.
+
+_flags_ is a bit list of the following:
+
+
+* TEMPLATE_VISIBLE The template may be displayed to the user in dialogs.
+* TEMPLATE_INVISIBLE The template may not be displayed to the user in dialogs.
+* DEFAULT_TEMPLATE_FLAGS Defined as TEMPLATE_VISIBLE.
+
+
+):
+
+2cm
+|*Wx::DocTemplate->new( docmgr, descr, filter, dir,ext, docTypeName, viewTypeName, docClassInfo, viewClassInfo, flags)*| will construct document and view objects from the class information|
+|*Wx::DocTemplate->new( docmgr, descr, filter, dir,ext, docTypeName, viewTypeName, docClassName, viewClassName, flags)*| will construct document and view objects from perl packages|
+|*Wx::DocTemplate->new( docmgr, descr, filter, dir,ext, docTypeName, viewTypeName )*|@Wx::DocTemplate::CreateDocument()@ and@Wx::DocTemplate::CreateView()@ must be overridden|
+
+
+  *destructor*()
+
+Destructor.
+
+h3(#DocTemplate_createdocument). DocTemplate#create_document
+
+ "Document":document.html *create_document*(%(arg-type)String% path,  %(arg-type)Integer% flags = 0)
+
+Creates a new instance of the associated document class. If you have not supplied
+a ClassInfo parameter to the template constructor, you will need to override this
+function to return an appropriate document instance.
+
+This function calls DocTemplate::InitDocument which in turns
+calls Document::OnCreate.
+
+h3(#DocTemplate_createview). DocTemplate#create_view
+
+ "View":view.html *create_view*(%(arg-type)"Document":document.html% doc,  %(arg-type)Integer% flags = 0)
+
+Creates a new instance of the associated view class. If you have not supplied
+a ClassInfo parameter to the template constructor, you will need to override this
+function to return an appropriate view instance.
+
+h3(#DocTemplate_getdefaultextension). DocTemplate#get_default_extension
+
+ String *get_default_extension*()
+
+Returns the default file extension for the document data, as passed to the document template constructor.
+
+h3(#DocTemplate_getdescription). DocTemplate#get_description
+
+ String *get_description*()
+
+Returns the text description of this template, as passed to the document template constructor.
+
+h3(#DocTemplate_getdirectory). DocTemplate#get_directory
+
+ String *get_directory*()
+
+Returns the default directory, as passed to the document template constructor.
+
+h3(#DocTemplate_getdocumentmanager). DocTemplate#get_document_manager
+
+ "DocManager":docmanager.html *get_document_manager*()
+
+Returns a pointer to the document manager instance for which this template was created.
+
+h3(#DocTemplate_getdocumentname). DocTemplate#get_document_name
+
+ String *get_document_name*()
+
+Returns the document type name, as passed to the document template constructor.
+
+h3(#DocTemplate_getfilefilter). DocTemplate#get_file_filter
+
+ String *get_file_filter*()
+
+Returns the file filter, as passed to the document template constructor.
+
+h3(#DocTemplate_getflags). DocTemplate#get_flags
+
+ Integer *get_flags*()
+
+Returns the flags, as passed to the document template constructor.
+
+h3(#DocTemplate_getviewname). DocTemplate#get_view_name
+
+ String *get_view_name*()
+
+Returns the view type name, as passed to the document template constructor.
+
+h3(#DocTemplate_initdocument). DocTemplate#init_document
+
+ Boolean *init_document*(%(arg-type)"Document":document.html% doc,  %(arg-type)String% path, 
+                       %(arg-type)Integer% flags = 0)
+
+Initialises the document, calling Document::OnCreate. This is called from
+DocTemplate::CreateDocument.
+
+h3(#DocTemplate_isvisible). DocTemplate#is_visible
+
+ Boolean *is_visible*()
+
+Returns true if the document template can be shown in user dialogs, false otherwise.
+
+h3(#DocTemplate_setdefaultextension). DocTemplate#set_default_extension
+
+  *set_default_extension*(%(arg-type)String% ext)
+
+Sets the default file extension.
+
+h3(#DocTemplate_setdescription). DocTemplate#set_description
+
+  *set_description*(%(arg-type)String% descr)
+
+Sets the template description.
+
+h3(#DocTemplate_setdirectory). DocTemplate#set_directory
+
+  *set_directory*(%(arg-type)String% dir)
+
+Sets the default directory.
+
+h3(#DocTemplate_setdocumentmanager). DocTemplate#set_document_manager
+
+  *set_document_manager*(%(arg-type)"DocManager":docmanager.html% manager)
+
+Sets the pointer to the document manager instance for which this template was created.
+Should not be called by the application.
+
+h3(#DocTemplate_setfilefilter). DocTemplate#set_file_filter
+
+  *set_file_filter*(%(arg-type)String% filter)
+
+Sets the file filter.
+
+h3(#DocTemplate_setflags). DocTemplate#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Sets the internal document template flags (see the constructor description for more details).
+

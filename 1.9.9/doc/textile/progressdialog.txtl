@@ -1,0 +1,124 @@
+h1(#wxprogressdialog). Wx::ProgressDialog
+
+This class represents a dialog that shows a short message and a progress
+bar. It is typically used to keep a user informed of progress through
+some potentially long-running task, whilst disabling interaction with
+the application or frame.
+
+It can run in 'determinate' mode where the total length of the task is
+known; in this case, calls to "update":#ProgressDialog_update are used
+to update steps through the task. Alternatively, if the total task
+length is unknown, "pulse":#ProgressDialog_pulse can be used to indicate
+some progress. See "Wx::Gauge":gauge.html for more information.
+
+Optionally, it can display an *ABORT* and/or a *SKIP* button. If an
+*ABORT* is shown, the return value from @update@ or @pulse@ can be
+tested to see whether the user has chosen to abort the task. If a *SKIP*
+button is used, use the extended methods
+"update_and_check":#ProgressDialog_updateandcheck and
+"pulse_and_check":#ProgressDialog_pulseandcheck which return additional
+information about whether the skip button has been pressed since the
+last update.
+
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ProgressDialog.new":#ProgressDialog_new
+* "ProgressDialog#pulse":#ProgressDialog_pulse
+* "ProgressDialog#pulse_and_check":#ProgressDialog_pulseandcheck
+* "ProgressDialog#resume":#ProgressDialog_resume
+* "ProgressDialog#update":#ProgressDialog_update
+* "ProgressDialog#update_and_check":#ProgressDialog_updateandcheck
+</div>
+
+h3(#ProgressDialog_new). ProgressDialog.new
+
+  *ProgressDialog.new*(%(arg-type)String% title,  %(arg-type)String% message, 
+                      %(arg-type)Integer% maximum = 100, 
+                     %(arg-type)"Window":window.html% parent = nil, 
+                      %(arg-type)Integer% style = PD_AUTO_HIDE | PD_APP_MODAL)
+
+Creates the dialog, displays it and disables user input for other
+windows, or, if PD_APP_MODAL flag is not given, for its parent window
+only.
+
+h4. Parameters
+
+* _title_ Dialog title to show in titlebar.
+* _message_ Message displayed above the progress bar.
+* _maximum_ Maximum value for the progress bar.
+* _parent_ Parent window.
+* _style_ The dialog style. 
+
+|*PD_APP_MODAL*|Make the progress dialog modal. If this flag isnot given, it is only "locally" modal - that is the input to the parentwindow is disabled, but not to the other ones.|
+|*PD_AUTO_HIDE*|Causes the progress dialog to disappearfrom screen as soon as the maximum value of the progress meter has beenreached.|
+|*PD_SMOOTH*|Causes smooth progress of the gauge control.|
+|*PD_CAN_ABORT*|This flag tells the dialog that it should have a"Cancel" button which the user may press.|
+|*PD_CAN_SKIP*|This flag tells the dialog that it should have a "Skip" button which the user may press.|
+|*PD_ELAPSED_TIME*|This flag tells the dialog that it should show elapsed time (since creating the dialog).|
+|*PD_ESTIMATED_TIME*|This flag tells the dialog that it should show estimated time.|
+|*PD_REMAINING_TIME*|This flag tells the dialog that it should show remaining time.|
+
+h3(#ProgressDialog_pulse). ProgressDialog#pulse
+
+  Boolean *pulse*(%(arg-type)String% newmsg = "")
+
+Updates the dialog, optionally with a new message, as with
+"update":#ProgressDialog_update but makes the gauge control run in
+indeterminate mode, sets the remaining and the estimated time labels (if
+present) to _Unknown_ and moves the progress bar a bit to indicate that
+some progress was made.
+
+h3(#ProgressDialog_pulseandcheck). ProgressDialog#pulse_and_check
+
+  Boolean, Boolean *pulse*(%(arg-type)String% newmsg = "")
+
+Just like "pulse":#ProgressDialog_pulse but returns a pair of boolean
+values. The first of these is false if the dialog was aborted, and true
+if it should continue. The second of these will be true if the *SKIP*
+button was pressed, and otherwise false.
+
+h3(#ProgressDialog_resume). ProgressDialog#resume
+
+  *resume*()
+
+Can be used to continue with the dialog after the user had chosen *ABORT*.
+
+h3(#ProgressDialog_update). ProgressDialog#update
+
+ Boolean *update*( %(arg-type)Integer% value, %(arg-type)String% newmsg = "")
+
+Updates the dialog, setting the progress bar to the new value and, if
+given, changes the message above it. Returns true unless the *ABORT*
+button has been pressed.
+
+If false is returned, the application can either immediately destroy the
+dialog or ask the user for the confirmation and if the abort is not
+confirmed the dialog may be resumed with
+"resume":#ProgressDialog_result method.
+
+h4. Parameters
+
+* _value_ The new value of the progress meter. It should be less than or equal to the maximum value given to the constructor and the dialog is closed if it is equal to the maximum.
+* _newmsg_ The new messages for the progress dialog text; if it is empty (which is the default) the message is not changed.
+
+h3(#ProgressDialog_updateandcheck). ProgressDialog#pulse_and_check
+
+  Boolean, Boolean *update_and_check*( %(arg-type)Integer% value, %(arg-type)String% newmsg = "")
+
+Just like "update":#ProgressDialog_pulse but returns a pair of boolean
+values. The first of these is false if the dialog was aborted, and true
+if it should continue. The second of these will be true if the *SKIP*
+button was pressed, and otherwise false.

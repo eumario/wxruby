@@ -1,0 +1,37 @@
+h1(#wxwindowdc). Wx::WindowDC
+
+A WindowDC must be constructed if an application wishes to paint on the
+whole area of a window (client and decorations such as the
+toolbar). This class is Windows only.
+
+To draw on a window from inside *OnPaint*, construct a
+"PaintDC":paintdc.html object.
+
+To draw on the client area of a window from outside *OnPaint*, construct
+a "ClientDC":clientdc.html object.
+
+h2. Derived from
+
+"DC":dc.html
+
+h2. See also
+
+"DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html, "ClientDC":clientdc.html, "ScreenDC":screendc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "WindowDC.new":#WindowDC_new
+
+</div>
+
+
+h3(#WindowDC_wxwindowdc). WindowDC.new
+
+  *WindowDC.new*(%(arg-type)"Window":window.html% window)
+
+Constructor. Pass a pointer to the window on which you wish to paint.
+
+
+

@@ -1,0 +1,137 @@
+h1(#wxcolour). Wx::Colour
+
+A colour is an object representing a combination of Red, Green, and Blue
+(RGB) intensity values, and is used to determine drawing colours. See
+the entry for "ColourDatabase":colourdatabase.html for how a pointer to
+a predefined, named colour may be returned instead of creating a new
+colour.
+
+Valid RGB values are in the range 0 to 255.
+
+You can retrieve the current system colour settings for different UI
+elements with "SystemSettings":systemsettings.html.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Predefined objects
+
+These predefined colours are defined as constants in wxRuby.
+
+ Wx::NULL_COLOUR
+ Wx::BLACK
+ Wx::WHITE
+ Wx::RED
+ Wx::BLUE
+ Wx::GREEN
+ Wx::CYAN
+ Wx::LIGHT_GREY
+
+h2. See also
+
+"ColourDatabase":colourdatabase.html, "Pen":pen.html, "Brush":brush.html, "ColourDialog":colourdialog.html, "SystemSettings":systemsettings.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Colour.new":#Colour_new
+* "Colour#alpha":#Colour_alpha
+* "Colour#blue":#Colour_blue
+* "Colour#get_pixel":#Colour_getpixel
+* "Colour#get_as_string":#Colour_getasstring
+* "Colour#green":#Colour_green
+* "Colour#is_ok":#Colour_isok
+* "Colour#red":#Colour_red
+* "Colour#set":#Colour_set
+
+</div>
+
+h3(#Colour_constr). Colour.new
+
+  *Colour.new*(%(arg-type)Integer% red, %(arg-type)Integer% green,  %(arg-type)Integer% blue, %(arg-type)Integer% alpha = 255)
+
+Constructs a colour from red, green and blue values and an optional
+alpha value for transparency. Each value should
+be between 0 and 255; the default value for alpha is 255, which is
+completely opaque.
+
+  *Colour.new*(%(arg-type)String% colour_name)
+
+Constructs a colour object using the colour named @colour_name@, listed
+in the global colour database *Wx::TheColourDatabase*.
+
+h4. See also
+
+"ColourDatabase":colourdatabase.html
+
+h3(#Colour_alpha). Colour#alpha
+
+ Integer *alpha*()
+
+Returns the alpha value, or opacity, for the colour.
+
+h3(#Colour_blue). Colour#blue
+
+ Integer *blue*()
+
+Returns the blue intensity.
+
+h3(#Colour_getasstring). Colour#get_as_string
+
+ String *get_as_string*(%(arg-type)Integer% format)
+
+Returns a string representation of this colour, in the format
+@format@. Format should be one of the constants:
+
+* @Wx::C2S_HTML_SYNTAX@ to obtain the colour as "#" followed by 6 hexadecimal digits (e.g. wxColour(255,0,0) -> "#FF0000").
+* @Wx::C2S_CSS_SYNTAX@ to obtain the colour in the "rgb(r,g,b)" syntax (e.g. wxColour(255,0,0) -> "rgb(255,0,0)")
+* @Wx::C2S_NAME@ to obtain the colour name (e.g. wxColour(255,0,0) -> "red"), where possible
+h3(#Colour_getpixel). Colour#get_pixel
+
+ Integer *get_pixel*()
+
+Returns a pixel value which is platform-dependent. On Windows, a
+COLORREF is returned. On X, an allocated pixel value is returned.
+
+-1 is returned if the pixel is invalid (on X, unallocated).
+
+
+h3(#Colour_green). Colour#green
+
+ Integer *green*()
+
+Returns the green intensity.
+
+
+h3(#Colour_isok). Colour#is_ok
+
+ Boolean *is_ok*()
+
+Returns  if the colour object is valid (the colour has been initialised
+with valid RGB values).
+
+
+h3(#Colour_red). Colour#red
+
+ Integer *red*()
+
+Returns the red intensity.
+
+h3(#Colour_set). Colour#set
+
+  *set*(%(arg-type)Integer% red,  %(arg-type)Integer% green,  %(arg-type)Integer% blue)
+
+Sets the RGB intensity values.
+
+h4. See also
+
+"ColourDatabase":colourdatabase.html
+
+h3(#Colour_equality). Colour#==
+
+ Boolean *operator ==*(%(arg-type)"Colour":colour.html% colour)
+
+Tests the equality of two colours by comparing individual red, green blue colours.
+

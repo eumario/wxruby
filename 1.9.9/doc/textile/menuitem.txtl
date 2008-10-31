@@ -1,0 +1,335 @@
+h1(#wxmenuitem). Wx::MenuItem
+
+A menu item represents an item in a menu. Note that you usually don't have to
+deal with it directly as "Menu":menu.html methods usually construct an
+object of this class for you.
+
+Also please note that the methods related to fonts and bitmaps are currently
+only implemented for Windows and GTK+.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"MenuBar":menubar.html, "Menu":menu.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MenuItem.new":#MenuItem_new
+* "MenuItem#check":#MenuItem_check
+* "MenuItem#enable":#MenuItem_enable
+* "MenuItem#get_background_colour":#MenuItem_getbackgroundcolour
+* "MenuItem#get_bitmap":#MenuItem_getbitmap
+* "MenuItem#get_font":#MenuItem_getfont
+* "MenuItem#get_help":#MenuItem_gethelp
+* "MenuItem#get_id":#MenuItem_getid
+* "MenuItem#get_kind":#MenuItem_getkind
+* "MenuItem#get_label":#MenuItem_getlabel
+* "MenuItem#get_label_from_text":#MenuItem_getlabelfromtext
+* "MenuItem#get_margin_width":#MenuItem_getmarginwidth
+* "MenuItem#get_menu":#MenuItem_getmenu
+* "MenuItem#get_name":#MenuItem_getname
+* "MenuItem#get_text":#MenuItem_gettext
+* "MenuItem#get_sub_menu":#MenuItem_getsubmenu
+* "MenuItem#get_text_colour":#MenuItem_gettextcolour
+* "MenuItem#is_checkable":#MenuItem_ischeckable
+* "MenuItem#is_checked":#MenuItem_ischecked
+* "MenuItem#is_enabled":#MenuItem_isenabled
+* "MenuItem#is_separator":#MenuItem_isseparator
+* "MenuItem#is_sub_menu":#MenuItem_issubmenu
+* "MenuItem#set_background_colour":#MenuItem_setbackgroundcolour
+* "MenuItem#set_bitmap":#MenuItem_setbitmap
+* "MenuItem#set_bitmaps":#MenuItem_setbitmaps
+* "MenuItem#set_font":#MenuItem_setfont
+* "MenuItem#set_help":#MenuItem_sethelp
+* "MenuItem#set_margin_width":#MenuItem_setmarginwidth
+* "MenuItem#set_menu":#MenuItem_setmenu
+* "MenuItem#set_sub_menu":#MenuItem_setsubmenu
+* "MenuItem#set_text":#MenuItem_settext
+* "MenuItem#set_text_colour":#MenuItem_settextcolour
+
+</div>
+
+
+
+h3(#MenuItem_new). MenuItem.new
+
+  *MenuItem.new*(%(arg-type)"Menu":menu.html% parentMenu = nil,  %(arg-type)Integer% id = ID_SEPARATOR, 
+               %(arg-type)String% text = "", 
+                %(arg-type)String% helpString = "", 
+               %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL, 
+               %(arg-type)"Menu":menu.html% subMenu = nil)
+
+Constructs a MenuItem object.
+
+h4. Parameters
+
+* _parentMenu_ Menu that the menu item belongs to.
+* _id_ Identifier for this menu item, or ID_SEPARATOR to indicate a separator.
+* _text_ Text for the menu item, as shown on the menu. An accelerator
+key can be specified using the ampersand '&' character. In order to embed an
+ampersand character in the menu item text, the ampersand must be doubled.
+* _helpString_ Optional help string that will be shown on the status bar.
+* _kind_ May be @ITEM_SEPARATOR@, @ITEM_NORMAL@, 
+@ITEM_CHECK@ or @ITEM_RADIO@
+* _subMenu_ If non-NULL, indicates that the menu item is a submenu.
+
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#MenuItem_check). MenuItem#check
+
+  *check*(%(arg-type)Boolean% check = true)
+
+Checks or unchecks the menu item.
+
+Note that this only works when the item is already appended to a menu.
+
+
+h3(#MenuItem_enable). MenuItem#enable
+
+  *enable*(%(arg-type)Boolean% enable = true)
+
+Enables or disables the menu item.
+
+
+h3(#MenuItem_getbackgroundcolour). MenuItem#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+Returns the background colour associated with the menu item (Windows only).
+
+
+h3(#MenuItem_getbitmap). MenuItem#get_bitmap
+
+ "Bitmap":bitmap.html *get_bitmap*(%(arg-type)Boolean% checked = true)
+
+Returns the checked or unchecked bitmap (Windows only).
+
+
+h3(#MenuItem_getfont). MenuItem#get_font
+
+ "Font":font.html *get_font*()
+
+Returns the font associated with the menu item (Windows only).
+
+
+h3(#MenuItem_gethelp). MenuItem#get_help
+
+ String *get_help*()
+
+Returns the help string associated with the menu item.
+
+
+h3(#MenuItem_getid). MenuItem#get_id
+
+ Integer *get_id*()
+
+Returns the menu item identifier.
+
+
+h3(#MenuItem_getkind). MenuItem#get_kind
+
+ "ItemKind":itemkind.html *get_kind*()
+
+Returns the item kind, one of @ITEM_SEPARATOR@, @ITEM_NORMAL@, 
+@ITEM_CHECK@ or @ITEM_RADIO@.
+
+
+h3(#MenuItem_getlabel). MenuItem#get_label
+
+ String *get_label*()
+
+Returns the text associated with the menu item without any accelerator
+characters it might contain.
+
+h4. See also
+
+"get_text":#MenuItem_gettext, 
+"get_label_from_text":#MenuItem_getlabelfromtext
+
+
+h3(#MenuItem_getlabelfromtext). MenuItem#get_label_from_text
+
+ String *get_label_from_text*(%(arg-type)String% text)
+
+Strips all accelerator characters and mnemonics from the given _text_.
+For example,
+
+
+ MenuItem::GetLabelFromText("&Hello\tCtrl-H");
+ 
+
+will return just @"Hello"@.
+
+h4. See also
+
+"get_text":#MenuItem_gettext, 
+"get_label":#MenuItem_getlabel
+
+
+h3(#MenuItem_getmarginwidth). MenuItem#get_margin_width
+
+ Integer *get_margin_width*()
+
+Gets the width of the menu item checkmark bitmap (Windows only).
+
+
+h3(#MenuItem_getmenu). MenuItem#get_menu
+
+ "Menu":menu.html *get_menu*()
+
+Returns the menu this menu item is in, or NULL if this menu item is not attached.
+
+
+h3(#MenuItem_getname). MenuItem#get_name
+
+ String *get_name*()
+
+Returns the text associated with the menu item.
+
+*NB:* this function is deprecated, please use 
+"get_text":#MenuItem_gettext or "get_label":#MenuItem_getlabel 
+instead.
+
+
+h3(#MenuItem_gettext). MenuItem#get_text
+
+ String *get_text*()
+
+Returns the text associated with the menu item, such as it was passed to the
+MenuItem constructor, i.e. with any accelerator characters it may contain.
+
+h4. See also
+
+"get_label":#MenuItem_getlabel, 
+"get_label_from_text":#MenuItem_getlabelfromtext
+
+
+h3(#MenuItem_getsubmenu). MenuItem#get_sub_menu
+
+ "Menu":menu.html *get_sub_menu*()
+
+Returns the submenu associated with the menu item, or NULL if there isn't one.
+
+
+h3(#MenuItem_gettextcolour). MenuItem#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+Returns the text colour associated with the menu item (Windows only).
+
+
+h3(#MenuItem_ischeckable). MenuItem#is_checkable
+
+ Boolean *is_checkable*()
+
+Returns true if the item is checkable.
+
+
+h3(#MenuItem_ischecked). MenuItem#is_checked
+
+ Boolean *is_checked*()
+
+Returns true if the item is checked.
+
+
+h3(#MenuItem_isenabled). MenuItem#is_enabled
+
+ Boolean *is_enabled*()
+
+Returns true if the item is enabled.
+
+
+h3(#MenuItem_isseparator). MenuItem#is_separator
+
+ Boolean *is_separator*()
+
+Returns true if the item is a separator.
+
+
+h3(#MenuItem_issubmenu). MenuItem#is_sub_menu
+
+ Boolean *is_sub_menu*()
+
+Returns true if the item is a submenu.
+
+
+h3(#MenuItem_setbackgroundcolour). MenuItem#set_background_colour
+
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the background colour associated with the menu item (Windows only).
+
+
+h3(#MenuItem_setbitmap). MenuItem#set_bitmap
+
+  *set_bitmap*(%(arg-type)"Bitmap":bitmap.html% bmp)
+
+Sets the bitmap for the menu item (Windows and GTK+ only). It is
+equivalent to "set_bitmaps":#MenuItem_setbitmaps(bmp, NullBitmap).
+
+
+h3(#MenuItem_setbitmaps). MenuItem#set_bitmaps
+
+  *set_bitmaps*(%(arg-type)"Bitmap":bitmap.html% checked,  %(arg-type)"Bitmap":bitmap.html% unchecked = NullBitmap)
+
+Sets the checked/unchecked bitmaps for the menu item (Windows only). The first bitmap
+is also used as the single bitmap for uncheckable menu items.
+
+
+h3(#MenuItem_setfont). MenuItem#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font associated with the menu item (Windows only).
+
+
+h3(#MenuItem_sethelp). MenuItem#set_help
+
+  *set_help*(%(arg-type)String% helpString)
+
+Sets the help string.
+
+
+h3(#MenuItem_setmarginwidth). MenuItem#set_margin_width
+
+  *set_margin_width*(%(arg-type)Integer% width)
+
+Sets the width of the menu item checkmark bitmap (Windows only).
+
+
+h3(#MenuItem_setmenu). MenuItem#set_menu
+
+  *set_menu*(%(arg-type)"Menu":menu.html% menu)
+
+Sets the parent menu which will contain this menu item.
+
+
+h3(#MenuItem_setsubmenu). MenuItem#set_sub_menu
+
+  *set_sub_menu*(%(arg-type)"Menu":menu.html% menu)
+
+Sets the submenu of this menu item.
+
+
+h3(#MenuItem_settext). MenuItem#set_text
+
+  *set_text*(%(arg-type)String% text)
+
+Sets the text associated with the menu item.
+
+
+h3(#MenuItem_settextcolour). MenuItem#set_text_colour
+
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the text colour associated with the menu item (Windows only).
+

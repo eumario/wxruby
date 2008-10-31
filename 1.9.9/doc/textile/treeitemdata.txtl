@@ -1,0 +1,57 @@
+h1(#wxtreeitemdata). Wx::TreeItemData
+
+TreeItemData is some (arbitrary) user class associated with some item. The
+main advantage of having this class is that TreeItemData objects are
+destroyed automatically by the tree and, as this class has virtual destructor,
+it means that the memory and any other resources associated with a tree item
+will be automatically freed when it is deleted. Note that we don't use Object
+as the base class for TreeItemData because the size of this class is
+critical: in many applications, each tree leaf will have TreeItemData
+associated with it and the number of leaves may be quite big.
+
+Also please note that because the objects of this class are deleted by the tree
+using the operator @delete@, they must always be allocated on the heap
+using @new@.
+
+h2. Derived from
+
+"ClientData":clientdata.html
+
+h2. See also
+
+"TreeCtrl":treectrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TreeItemData.new":#TreeItemData_new
+* "TreeItemData#get_id":#TreeItemData_getid
+* "TreeItemData#set_id":#TreeItemData_setid
+
+</div>
+
+
+h3(#TreeItemData_new). TreeItemData.new
+
+
+
+
+
+  *destructor*()
+
+Virtual destructor.
+
+h3(#TreeItemData_getid). TreeItemData#get_id
+
+ "TreeItemId":treeitemid.html *get_id*()
+
+Returns the item associated with this node.
+
+h3(#TreeItemData_setid). TreeItemData#set_id
+
+  *set_id*(%(arg-type)"TreeItemId":treeitemid.html% id)
+
+Sets the item associated with this node.
+
+

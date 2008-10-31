@@ -1,0 +1,85 @@
+h1(#wxtextdataobject). Wx::TextDataObject
+
+TextDataObject is a specialization of DataObject for text data. It can be
+used without change to paste data into the "Clipboard":clipboard.html 
+or a "DropSource":dropsource.html. A user may wish to derive a new
+class from this class for providing text on-demand in order to minimize memory
+consumption when offering data in several formats, such as plain text and RTF
+because by default the text is stored in a string in this class, but it might
+as well be generated when requested. For this, 
+"get_text_length":#TextDataObject_gettextlength and 
+"get_text":#TextDataObject_gettext will have to be overridden.
+
+Note that if you already have the text inside a string, you will not achieve
+any efficiency gain by overriding these functions because copying Strings is
+already a very efficient operation (data is not actually copied because
+Strings are reference counted).
+
+
+
+h2. Virtual functions to override
+
+This class may be used as is, but all of the data transfer functions may be
+overridden to increase efficiency.
+
+h2. Derived from
+
+"DataObjectSimple":dataobjectsimple.html
+
+"DataObject":dataobject.html
+
+h2. See also
+
+"Clipboard and drag and drop overview":dndoverview.html, 
+"DataObject":dataobject.html, 
+"DataObjectSimple":dataobjectsimple.html, 
+"FileDataObject":filedataobject.html, 
+"BitmapDataObject":bitmapdataobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TextDataObject.new":#TextDataObject_new
+* "TextDataObject#get_text_length":#TextDataObject_gettextlength
+* "TextDataObject#get_text":#TextDataObject_gettext
+* "TextDataObject#set_text":#TextDataObject_settext
+
+</div>
+
+
+h3(#TextDataObject_wxtextdataobject). TextDataObject.new
+
+  *TextDataObject.new*(%(arg-type)String% text = '')
+
+Constructor, may be used to initialise the text (otherwise 
+"set_text":#TextDataObject_settext should be used later).
+
+h3(#TextDataObject_gettextlength). TextDataObject#get_text_length
+
+ Integer *get_text_length*()
+
+Returns the data size. By default, returns the size of the text data
+set in the constructor or using "set_text":#TextDataObject_settext.
+This can be overridden to provide text size data on-demand. It is recommended
+to return the text length plus 1 for a trailing zero, but this is not
+strictly required.
+
+h3(#TextDataObject_gettext). TextDataObject#get_text
+
+ String *get_text*()
+
+Returns the text associated with the data object. You may wish to override
+this method when offering data on-demand, but this is not required by
+Widgets' internals. Use this method to get data in text form from
+the "Clipboard":clipboard.html.
+
+h3(#TextDataObject_settext). TextDataObject#set_text
+
+  *set_text*(%(arg-type)String% strText)
+
+Sets the text associated with the data object. This method is called
+when the data object receives the data and, by default, copies the text into
+the member variable. If you want to process the text on the fly you may wish to
+override this function.
+

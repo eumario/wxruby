@@ -1,0 +1,91 @@
+h1(#wxsplashscreen). Wx::SplashScreen
+
+SplashScreen shows a window with a thin border, displaying a bitmap describing your
+application. Show it in application initialisation, and then either explicitly destroy
+it or let it time-out.
+
+Example usage - displays the image *a_splash.png* for 3 seconds as a
+splash screen. 
+
+ splash_bitmap = Wx::Bitmap.new('a_splash.png', Wx::BITMAP_TYPE_PNG)
+ splash = Wx::SplashScreen.new(splash_bitmap,
+                               Wx::SPLASH_CENTRE_ON_SCREEN|Wx::SPLASH_TIMEOUT,
+							   3000, nil, -1)
+                               
+ 
+
+h2. Derived from
+
+"Frame":frame.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SplashScreen.new":#SplashScreen_new
+* "SplashScreen#on_close_window":#SplashScreen_onclosewindow
+* "SplashScreen#get_splash_style":#SplashScreen_getsplashstyle
+* "SplashScreen#get_splash_window":#SplashScreen_getsplashwindow
+* "SplashScreen#get_timeout":#SplashScreen_gettimeout
+
+</div>
+
+
+h3(#SplashScreen_wxsplashscreen). SplashScreen.new
+
+  *SplashScreen.new*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% splashStyle, 
+                   %(arg-type)Integer% milliseconds, 
+                   %(arg-type)"Window":window.html% parent, 
+                   %(arg-type)Integer% id, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                   %(arg-type)Integer% style = SIMPLE_BORDER|FRAME_NO_TASKBAR|STAY_ON_TOP)
+
+Construct the splash screen passing a bitmap, a style, a timeout, a window id, optional position
+and size, and a window style.
+
+_splashStyle_ is a bitlist of some of the following:
+
+* SPLASH_CENTRE_ON_PARENT
+* SPLASH_CENTRE_ON_SCREEN
+* SPLASH_NO_CENTRE
+* SPLASH_TIMEOUT
+* SPLASH_NO_TIMEOUT
+
+_milliseconds_ is the timeout in milliseconds.
+
+  *destructor*()
+
+Destroys the splash screen.
+
+h3(#SplashScreen_onclosewindow). SplashScreen#on_close_window
+
+  *on_close_window*(%(arg-type)"CloseEvent":closeevent.html% event)
+
+Reimplement this event handler if you want to set an application variable on window destruction, for example.
+
+h3(#SplashScreen_getsplashstyle). SplashScreen#get_splash_style
+
+ Integer *get_splash_style*()
+
+Returns the splash style (see "SplashScreen.new":splashscreen.html#SplashScreen_new for
+details).
+
+h3(#SplashScreen_getsplashwindow). SplashScreen#get_splash_window
+
+ "SplashScreenWindow":splashscreenwindow.html *get_splash_window*()
+
+Returns the window used to display the bitmap.
+
+h3(#SplashScreen_gettimeout). SplashScreen#get_timeout
+
+ Integer *get_timeout*()
+
+Returns the timeout in milliseconds.
+

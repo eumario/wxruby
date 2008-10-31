@@ -1,0 +1,3697 @@
+h1(#wxstyledtextctrl). Wx::StyledTextCtrl
+
+Wx::StyledTextCtrl is a sophisticated text editing control. It is
+based on the open-source "Scintilla":http://www.scintilla.org component, 
+wrapped to form part of the wxWidgets and wxRuby APIs.
+
+It is particularly suited for editing source code of a variety of
+programming languages. It has built-in support in the form of
+"Lexers":#styling_for_programming_languages for many common languages,
+including Ruby, Python, HTML, C/C++ and SQL. As well as customisable
+"syntax highlighting":#styling_text, it also supports
+code-folding, autocompletion and indentation.
+
+However, its use is not restricted to source-code editing. It has a wide
+set of features for text navigation, editing, viewing and printing. For
+complex uses, it can be a useful alternative to using
+"TextCtrl":textctrl.html with the @TE_RICH@ flag; it has a richer set of
+features, which are implemented more consistently across platforms than
+the native-based control.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Documentation
+
+The methods listed here are a complete listing of all the methods
+supported by StyledTextCtrl in wxRuby. However, at present only a stub
+description of each method is available. For much more thorough
+discussion of the capabilities of StyledTextCtrl, please consult the 
+"Scintilla documentation":http://scintilla.sourceforge.net/ScintillaDoc.html
+. 
+
+Many methods listed as accepting @Integer@ require a specific flag; for
+example, "Markers":#startofline_special_markers are selected by a set of
+special constants. At the moment, the names can be got from the
+Scintilla documentation. They then need to be converted to wxRuby
+constant names by changing the prefix from @SC_@ (Scintilla) to @STC_@
+(StyledTextCtrl)
+
+h2. Event Handling
+
+A StyledTextCtrl has a number of event handlers, each of which will be
+passed a "StyledTextEvent":styledtextevent. 
+
+|*evt_stc_calltip_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A calltip was clicked|
+|*evt_stc_change(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The text contents was changed|
+|*evt_stc_charadded(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A character was added|
+|*evt_stc_doubleclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Double-click on the control|
+|*evt_stc_do_drop(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Drag and drop ended on the control|
+|*evt_stc_drag_over(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The cursor was moved over the control while dragging|
+|*evt_stc_dwellend(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|THe mouse ceased to dwell over a point|
+|*evt_stc_dwellstart(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The cursor was dwelling over a point for the user-defined dwell period |
+|*evt_stc_hotspot_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A hotspot was clicked|
+|*evt_stc_hotspot_dclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A hotspot was double-clicked|
+|*evt_stc_key(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A command key was pressed|
+|*evt_stc_macrorecord(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A recordable action took place while macro recording|
+|*evt_stc_marginclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A margin was clicked|
+|*evt_stc_modified(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The contents was modified|
+|*evt_stc_savepointleft(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The control was changed from it's last-saved state|
+|*evt_stc_savepointreached(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The last-saved state was reached in an undo/redo chain|
+|*evt_stc_start_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Dragging started in the control|
+|*evt_stc_styleneeded(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A language lexer requested a style|
+|*evt_stc_updateui(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|An update UI event|
+|*evt_stc_uridropped(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A URL was dropped in the control started in the control|
+|*evt_stc_userlistselection(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|An user-defined auto-completion entry was chosen|
+|*evt_stc_zoom(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The control view was zoomed by keyboard or "set_zoom":#STC_setzoom|
+
+h2. Methods
+
+Since StyledTextCtrl supports so many methods, they are broken down here
+into groups.
+
+* "Autocompletion":#autocompletion
+* "Basic movement":#basic_movement
+* "Brace matching and highlighting":#brace_matching_and_highlighting
+* "Popup call tips":#popup_call_tips
+* "Caret features":#caret_features
+* "Cut, copy and paste":#cut_copy_and_paste
+* "Drag and drop":#drag_and_drop
+* "Event handling":#event_handling
+* "Folding":#folding
+* "Indentation and Tabs":#indentation_and_tabs
+* "Indicators":#indicators
+* "Key bindings":#key_bindings
+* "Keyboard commands functions":#keyboard_commands_functions
+* "Line Endings":#line_endings
+* "Load and save to file":#load_and_save_to_file
+* "Long line markers":#long_line_markers
+* "Macro recording":#macro_recording
+* "Margins":#margins
+* "Markers":#markers
+* "Miscellaneous other settings":#miscellaneous_other_settings
+* "Multiple views of one document":#multiple_views_of_one_document
+* "Printing":#printing
+* "Scrolling and scrollbars":#scrolling_and_scrollbars
+* "Search and replace":#search_and_replace
+* "Selection, anchor and cursor":#anchor_selection_and_cursor
+* "Styling text":#styling_text
+* "Styling for programming languages":#styling_for_programming_languages
+* "Text coordinates":#text_coordinates
+* "Text encoding":#text_encoding
+* "Text retrieval and modification":#text_retrieval_and_modification
+* "Undo and redo":#undo_and_redo
+* "White space, zoom and other view options":#miscellaneous_view_options
+* "Wrapping lines":#line_wrapping
+* "WxRuby interaction":#wxruby_interaction
+
+
+
+h2(#text_retrieval_and_modification). Text retrieval and modification
+
+* "StyledTextCtrl.add_text":#STC_addtext
+* "StyledTextCtrl.allocate":#STC_allocate
+* "StyledTextCtrl.append_text":#STC_appendtext
+* "StyledTextCtrl.clear_all":#STC_clearall
+* "StyledTextCtrl.find_column":#STC_findcolumn
+* "StyledTextCtrl.get_char_at":#STC_getcharat
+* "StyledTextCtrl.get_length":#STC_getlength
+* "StyledTextCtrl.get_line":#STC_getline
+* "StyledTextCtrl.get_line_count":#STC_getlinecount
+* "StyledTextCtrl.get_modify":#STC_getmodify
+* "StyledTextCtrl.get_overtype":#STC_getovertype
+* "StyledTextCtrl.get_read_only":#STC_getreadonly
+* "StyledTextCtrl.get_text":#STC_gettext
+* "StyledTextCtrl.get_text_length":#STC_gettextlength
+* "StyledTextCtrl.get_text_range":#STC_gettextrange
+* "StyledTextCtrl.insert_text":#STC_inserttext
+* "StyledTextCtrl.line_length":#STC_linelength
+* "StyledTextCtrl.position_after":#STC_positionafter
+* "StyledTextCtrl.position_before":#STC_positionbefore
+* "StyledTextCtrl.send_msg":#STC_sendmsg
+* "StyledTextCtrl.set_overtype":#STC_setovertype
+* "StyledTextCtrl.set_read_only":#STC_setreadonly
+* "StyledTextCtrl.set_text":#STC_settext
+
+h3(#STC_addtext). StyledTextCtrl#add_text
+
+  *add_text*(%(arg-type)String% text)
+
+Add text to the document at current position.
+
+h3(#STC_allocate). StyledTextCtrl#allocate
+
+  *allocate*(%(arg-type)Integer% bytes)
+
+Enlarge the document to a particular size of text bytes.
+
+h3(#STC_appendtext). StyledTextCtrl#append_text
+
+  *append_text*(%(arg-type)String% text)
+
+Append a string to the end of the document without changing the selection.
+
+h3(#STC_clearall). StyledTextCtrl#clear_all
+
+  *clear_all*()
+
+Delete all text in the document.
+
+h3(#STC_findcolumn). StyledTextCtrl#find_column
+
+ Integer *find_column*(%(arg-type)Integer% line, %(arg-type)Integer% column)
+
+Find the position of a column on a line taking into account tabs and     multi-byte characters. If beyond end of line, return line end position.
+
+h3(#STC_getcharat). StyledTextCtrl#get_char_at
+
+ Integer *get_char_at*(%(arg-type)Integer% pos)
+
+Returns the character byte at the position.
+
+h3(#STC_getlength). StyledTextCtrl#get_length
+
+ Integer *get_length*()
+
+Returns the number of characters in the document.
+
+h3(#STC_getline). StyledTextCtrl#get_line
+
+ "String":string.html *get_line*(%(arg-type)Integer% line)
+
+Retrieve the contents of a line.
+
+h3(#STC_getlinecount). StyledTextCtrl#get_line_count
+
+ Integer *get_line_count*()
+
+Returns the number of lines in the document. There is always at least one.
+
+h3(#STC_getmodify). StyledTextCtrl#get_modify
+
+ Boolean *get_modify*()
+
+Is the document different from when it was last saved?
+
+h3(#STC_getovertype). StyledTextCtrl#get_overtype
+
+ Boolean *get_overtype*()
+
+Returns true if overtype mode is active otherwise false is returned.
+
+h3(#STC_getreadonly). StyledTextCtrl#get_read_only
+
+ Boolean *get_read_only*()
+
+In read-only mode?
+
+h3(#STC_gettext). StyledTextCtrl#get_text
+
+ "String":string.html *get_text*()
+
+Retrieve all the text in the document.
+
+h3(#STC_gettextlength). StyledTextCtrl#get_text_length
+
+ Integer *get_text_length*()
+
+Retrieve the number of characters in the document.
+
+h3(#STC_gettextrange). StyledTextCtrl#get_text_range
+
+ "String":string.html *get_text_range*(%(arg-type)Integer% startPos, %(arg-type)Integer% endPos)
+
+Retrieve a range of text.
+
+h3(#STC_inserttext). StyledTextCtrl#insert_text
+
+  *insert_text*(%(arg-type)Integer% pos, %(arg-type)String% text)
+
+Insert string at a position.
+
+h3(#STC_linelength). StyledTextCtrl#line_length
+
+ Integer *line_length*(%(arg-type)Integer% line)
+
+How many characters are on a line, not including end of line characters?
+
+h3(#STC_positionafter). StyledTextCtrl#position_after
+
+ Integer *position_after*(%(arg-type)Integer% pos)
+
+Given a valid document position, return the next position taking code     page into account. Maximum value returned is the last position in the document.
+
+h3(#STC_positionbefore). StyledTextCtrl#position_before
+
+ Integer *position_before*(%(arg-type)Integer% pos)
+
+Given a valid document position, return the previous position taking code     page into account. Returns 0 if passed 0.
+
+h3(#STC_sendmsg). StyledTextCtrl#send_msg
+
+ Integer *send_msg*(%(arg-type)Integer% msg, %(arg-type)Integer% wp=0, %(arg-type)Integer% lp=0)
+
+Send a message to Scintilla
+
+h3(#STC_setovertype). StyledTextCtrl#set_overtype
+
+  *set_overtype*(%(arg-type)Boolean% overtype)
+
+Set to overtype (true) or insert mode.
+
+h3(#STC_setreadonly). StyledTextCtrl#set_read_only
+
+  *set_read_only*(%(arg-type)Boolean% readOnly)
+
+Set to read only or read write.
+
+h3(#STC_settext). StyledTextCtrl#set_text
+
+  *set_text*(%(arg-type)String% text)
+
+Replace the contents of the document with the argument text.
+
+
+
+h2(#text_encoding). Text encoding
+
+* "StyledTextCtrl.get_code_page":#STC_getcodepage
+* "StyledTextCtrl.set_code_page":#STC_setcodepage
+
+h3(#STC_getcodepage). StyledTextCtrl#get_code_page
+
+ Integer *get_code_page*()
+
+Get the code page used to interpret the bytes of the document as characters.
+
+h3(#STC_setcodepage). StyledTextCtrl#set_code_page
+
+  *set_code_page*(%(arg-type)Integer% codePage)
+
+Set the code page used to interpret the bytes of the document as characters.
+
+
+
+h2(#line_endings). Line endings
+
+* "StyledTextCtrl.convert_eo_ls":#STC_converteols
+* "StyledTextCtrl.get_eol_mode":#STC_geteolmode
+* "StyledTextCtrl.get_view_eol":#STC_getvieweol
+* "StyledTextCtrl.set_eol_mode":#STC_seteolmode
+* "StyledTextCtrl.set_view_eol":#STC_setvieweol
+
+h3(#STC_converteols). StyledTextCtrl#convert_eo_ls
+
+  *convert_eo_ls*(%(arg-type)Integer% eolMode)
+
+Convert all line endings in the document to one mode.
+
+h3(#STC_geteolmode). StyledTextCtrl#get_eol_mode
+
+ Integer *get_eol_mode*()
+
+Retrieve the current end of line mode - one of CRLF, CR, or LF.
+
+h3(#STC_getvieweol). StyledTextCtrl#get_view_eol
+
+ Boolean *get_view_eol*()
+
+Are the end of line characters visible?
+
+h3(#STC_seteolmode). StyledTextCtrl#set_eol_mode
+
+  *set_eol_mode*(%(arg-type)Integer% eolMode)
+
+Set the current end of line mode.
+
+h3(#STC_setvieweol). StyledTextCtrl#set_view_eol
+
+  *set_view_eol*(%(arg-type)Boolean% visible)
+
+Make the end of line characters visible or invisible.
+
+
+
+h2(#text_coordinates). Text coordinates
+
+* "StyledTextCtrl.get_column":#STC_getcolumn
+* "StyledTextCtrl.get_cur_line":#STC_getcurline
+* "StyledTextCtrl.get_first_visible_line":#STC_getfirstvisibleline
+* "StyledTextCtrl.get_line_end_position":#STC_getlineendposition
+* "StyledTextCtrl.line_from_position":#STC_linefromposition
+* "StyledTextCtrl.point_from_position":#STC_pointfromposition
+* "StyledTextCtrl.position_from_line":#STC_positionfromline
+* "StyledTextCtrl.position_from_point":#STC_positionfrompoint
+* "StyledTextCtrl.position_from_point_close":#STC_positionfrompointclose
+
+h3(#STC_getcolumn). StyledTextCtrl#get_column
+
+ Integer *get_column*(%(arg-type)Integer% pos)
+
+Retrieve the column number of a position, taking tab width into account.
+
+h3(#STC_getcurline). StyledTextCtrl#get_cur_line
+
+ "String":string.html *get_cur_line*(%(arg-type)Integer% linePos=NULL)
+
+#else
+
+h3(#STC_getfirstvisibleline). StyledTextCtrl#get_first_visible_line
+
+ Integer *get_first_visible_line*()
+
+Retrieve the display line at the top of the display.
+
+h3(#STC_getlineendposition). StyledTextCtrl#get_line_end_position
+
+ Integer *get_line_end_position*(%(arg-type)Integer% line)
+
+Get the position after the last visible characters on a line.
+
+h3(#STC_linefromposition). StyledTextCtrl#line_from_position
+
+ Integer *line_from_position*(%(arg-type)Integer% pos)
+
+Retrieve the line containing a position.
+
+h3(#STC_pointfromposition). StyledTextCtrl#point_from_position
+
+ Integer *point_from_position*(%(arg-type)Integer% pos)
+
+#endif     Retrieve the point in the window where a position is displayed.    wxPo
+
+h3(#STC_positionfromline). StyledTextCtrl#position_from_line
+
+ Integer *position_from_line*(%(arg-type)Integer% line)
+
+Retrieve the position at the start of a line.
+
+h3(#STC_positionfrompoint). StyledTextCtrl#position_from_point
+
+ Integer *position_from_point*(%(arg-type)"Point":point.html% pt)
+
+Find the position from a point within the window.
+
+h3(#STC_positionfrompointclose). StyledTextCtrl#position_from_point_close
+
+ Integer *position_from_point_close*(%(arg-type)Integer% x, %(arg-type)Integer% y)
+
+Find the position from a point within the window but return     INVALID_POSITION if not close to text.
+
+
+
+h2(#basic_movement). Basic movement
+
+* "StyledTextCtrl.goto_line":#STC_gotoline
+* "StyledTextCtrl.goto_pos":#STC_gotopos
+* "StyledTextCtrl.line_down":#STC_linedown
+* "StyledTextCtrl.scroll_to_column":#STC_scrolltocolumn
+* "StyledTextCtrl.scroll_to_line":#STC_scrolltoline
+
+h3(#STC_gotoline). StyledTextCtrl#goto_line
+
+  *goto_line*(%(arg-type)Integer% line)
+
+Set caret to start of a line and ensure it is visible.
+
+h3(#STC_gotopos). StyledTextCtrl#goto_pos
+
+  *goto_pos*(%(arg-type)Integer% pos)
+
+Set caret to a position and ensure it is visible.
+
+h3(#STC_linedown). StyledTextCtrl#line_down
+
+  *line_down*()
+
+Move caret down one line.
+
+h3(#STC_scrolltocolumn). StyledTextCtrl#scroll_to_column
+
+  *scroll_to_column*(%(arg-type)Integer% column)
+
+Scroll enough to make the given column visible
+
+h3(#STC_scrolltoline). StyledTextCtrl#scroll_to_line
+
+  *scroll_to_line*(%(arg-type)Integer% line)
+
+Scroll enough to make the given line visible
+
+
+
+h2(#anchor_selection_and_cursor). Anchor, selection and cursor
+
+* "StyledTextCtrl.get_anchor":#STC_getanchor
+* "StyledTextCtrl.get_current_line":#STC_getcurrentline
+* "StyledTextCtrl.get_current_pos":#STC_getcurrentpos
+* "StyledTextCtrl.get_line_sel_end_position":#STC_getlineselendposition
+* "StyledTextCtrl.get_line_sel_start_position":#STC_getlineselstartposition
+* "StyledTextCtrl.get_sel_alpha":#STC_getselalpha
+* "StyledTextCtrl.get_selected_text":#STC_getselectedtext
+* "StyledTextCtrl.get_selection":#STC_getselection
+* "StyledTextCtrl.get_selection_end":#STC_getselectionend
+* "StyledTextCtrl.get_selection_mode":#STC_getselectionmode
+* "StyledTextCtrl.get_selection_start":#STC_getselectionstart
+* "StyledTextCtrl.get_stc_cursor":#STC_getstccursor
+* "StyledTextCtrl.hide_selection":#STC_hideselection
+* "StyledTextCtrl.replace_selection":#STC_replaceselection
+* "StyledTextCtrl.select_all":#STC_selectall
+* "StyledTextCtrl.selection_is_rectangle":#STC_selectionisrectangle
+* "StyledTextCtrl.set_anchor":#STC_setanchor
+* "StyledTextCtrl.set_current_pos":#STC_setcurrentpos
+* "StyledTextCtrl.set_sel_alpha":#STC_setselalpha
+* "StyledTextCtrl.set_sel_background":#STC_setselbackground
+* "StyledTextCtrl.set_sel_foreground":#STC_setselforeground
+* "StyledTextCtrl.set_selection":#STC_setselection
+* "StyledTextCtrl.set_selection_end":#STC_setselectionend
+* "StyledTextCtrl.set_selection_mode":#STC_setselectionmode
+* "StyledTextCtrl.set_selection_start":#STC_setselectionstart
+* "StyledTextCtrl.set_stc_cursor":#STC_setstccursor
+
+h3(#STC_getanchor). StyledTextCtrl#get_anchor
+
+ Integer *get_anchor*()
+
+Returns the position of the opposite end of the selection to the caret.
+
+h3(#STC_getcurrentline). StyledTextCtrl#get_current_line
+
+ Integer *get_current_line*()
+
+Returns the line number of the line with the caret.
+
+h3(#STC_getcurrentpos). StyledTextCtrl#get_current_pos
+
+ Integer *get_current_pos*()
+
+Returns the position of the caret.
+
+h3(#STC_getlineselendposition). StyledTextCtrl#get_line_sel_end_position
+
+ Integer *get_line_sel_end_position*(%(arg-type)Integer% line)
+
+Retrieve the position of the end of the selection at the given line (INVALID_POSITION if no selection on this line).
+
+h3(#STC_getlineselstartposition). StyledTextCtrl#get_line_sel_start_position
+
+ Integer *get_line_sel_start_position*(%(arg-type)Integer% line)
+
+Retrieve the position of the start of the selection at the given line (INVALID_POSITION if no selection on this line).
+
+h3(#STC_getselalpha). StyledTextCtrl#get_sel_alpha
+
+ Integer *get_sel_alpha*()
+
+Get the alpha of the selection.
+
+h3(#STC_getselectedtext). StyledTextCtrl#get_selected_text
+
+ "String":string.html *get_selected_text*()
+
+Retrieve the selected text.
+
+h3(#STC_getselection). StyledTextCtrl#get_selection
+
+  *get_selection*(%(arg-type)Integer% startPos, %(arg-type)Integer% endPos)
+
+#else
+
+h3(#STC_getselectionend). StyledTextCtrl#get_selection_end
+
+ Integer *get_selection_end*()
+
+Returns the position at the end of the selection.
+
+h3(#STC_getselectionmode). StyledTextCtrl#get_selection_mode
+
+ Integer *get_selection_mode*()
+
+Get the mode of the current selection.
+
+h3(#STC_getselectionstart). StyledTextCtrl#get_selection_start
+
+ Integer *get_selection_start*()
+
+Returns the position at the start of the selection.
+
+h3(#STC_getstccursor). StyledTextCtrl#get_stc_cursor
+
+ Integer *get_stc_cursor*()
+
+Get cursor type.
+
+h3(#STC_hideselection). StyledTextCtrl#hide_selection
+
+  *hide_selection*(%(arg-type)Boolean% normal)
+
+Draw the selection in normal style or with selection highlighted.
+
+h3(#STC_replaceselection). StyledTextCtrl#replace_selection
+
+  *replace_selection*(%(arg-type)String% text)
+
+Replace the selected text with the argument text.
+
+h3(#STC_selectall). StyledTextCtrl#select_all
+
+  *select_all*()
+
+Select all the text in the document.
+
+h3(#STC_selectionisrectangle). StyledTextCtrl#selection_is_rectangle
+
+ Boolean *selection_is_rectangle*()
+
+Is the selection rectangular? The alternative is the more common stream selection.
+
+h3(#STC_setanchor). StyledTextCtrl#set_anchor
+
+  *set_anchor*(%(arg-type)Integer% posAnchor)
+
+Set the selection anchor to a position. The anchor is the opposite     end of the selection from the caret.
+
+h3(#STC_setcurrentpos). StyledTextCtrl#set_current_pos
+
+  *set_current_pos*(%(arg-type)Integer% pos)
+
+Sets the position of the caret.
+
+h3(#STC_setselalpha). StyledTextCtrl#set_sel_alpha
+
+  *set_sel_alpha*(%(arg-type)Integer% alpha)
+
+Set the alpha of the selection.
+
+h3(#STC_setselbackground). StyledTextCtrl#set_sel_background
+
+  *set_sel_background*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
+
+Set the background colour of the selection and whether to use this setting.
+
+h3(#STC_setselforeground). StyledTextCtrl#set_sel_foreground
+
+  *set_sel_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour of the selection and whether to use this setting.
+
+h3(#STC_setselection). StyledTextCtrl#set_selection
+
+  *set_selection*(%(arg-type)Integer% start, %(arg-type)Integer% end)
+
+Select a range of text.
+
+h3(#STC_setselectionend). StyledTextCtrl#set_selection_end
+
+  *set_selection_end*(%(arg-type)Integer% pos)
+
+Sets the position that ends the selection - this becomes the currentPosition.
+
+h3(#STC_setselectionmode). StyledTextCtrl#set_selection_mode
+
+  *set_selection_mode*(%(arg-type)Integer% mode)
+
+Set the selection mode to stream (SC_SEL_STREAM) or rectangular (SC_SEL_RECTANGLE) or     by lines (SC_SEL_LINES).
+
+h3(#STC_setselectionstart). StyledTextCtrl#set_selection_start
+
+  *set_selection_start*(%(arg-type)Integer% pos)
+
+Sets the position that starts the selection - this becomes the anchor.
+
+h3(#STC_setstccursor). StyledTextCtrl#set_stc_cursor
+
+  *set_stc_cursor*(%(arg-type)Integer% cursorType)
+
+Sets the cursor to one of the SC_CURSOR* values.
+
+
+
+h2(#line_wrapping). Wrapping lines
+
+* "StyledTextCtrl.get_layout_cache":#STC_getlayoutcache
+* "StyledTextCtrl.get_wrap_mode":#STC_getwrapmode
+* "StyledTextCtrl.get_wrap_start_indent":#STC_getwrapstartindent
+* "StyledTextCtrl.get_wrap_visual_flags":#STC_getwrapvisualflags
+* "StyledTextCtrl.get_wrap_visual_flags_location":#STC_getwrapvisualflagslocation
+* "StyledTextCtrl.lines_join":#STC_linesjoin
+* "StyledTextCtrl.lines_split":#STC_linessplit
+* "StyledTextCtrl.set_layout_cache":#STC_setlayoutcache
+* "StyledTextCtrl.set_wrap_mode":#STC_setwrapmode
+* "StyledTextCtrl.set_wrap_start_indent":#STC_setwrapstartindent
+* "StyledTextCtrl.set_wrap_visual_flags":#STC_setwrapvisualflags
+* "StyledTextCtrl.set_wrap_visual_flags_location":#STC_setwrapvisualflagslocation
+* "StyledTextCtrl.word_end_position":#STC_wordendposition
+* "StyledTextCtrl.word_start_position":#STC_wordstartposition
+* "StyledTextCtrl.wrap_count":#STC_wrapcount
+
+h3(#STC_getlayoutcache). StyledTextCtrl#get_layout_cache
+
+ Integer *get_layout_cache*()
+
+Retrieve the degree of caching of layout information.
+
+h3(#STC_getwrapmode). StyledTextCtrl#get_wrap_mode
+
+ Integer *get_wrap_mode*()
+
+Retrieve whether text is word wrapped.
+
+h3(#STC_getwrapstartindent). StyledTextCtrl#get_wrap_start_indent
+
+ Integer *get_wrap_start_indent*()
+
+Retrive the start indent for wrapped lines.
+
+h3(#STC_getwrapvisualflags). StyledTextCtrl#get_wrap_visual_flags
+
+ Integer *get_wrap_visual_flags*()
+
+Retrive the display mode of visual flags for wrapped lines.
+
+h3(#STC_getwrapvisualflagslocation). StyledTextCtrl#get_wrap_visual_flags_location
+
+ Integer *get_wrap_visual_flags_location*()
+
+Retrive the location of visual flags for wrapped lines.
+
+h3(#STC_linesjoin). StyledTextCtrl#lines_join
+
+  *lines_join*()
+
+Join the lines in the target.
+
+h3(#STC_linessplit). StyledTextCtrl#lines_split
+
+  *lines_split*(%(arg-type)Integer% pixelWidth)
+
+Split the lines in the target into lines that are less wide than pixelWidth     where possible.
+
+h3(#STC_setlayoutcache). StyledTextCtrl#set_layout_cache
+
+  *set_layout_cache*(%(arg-type)Integer% mode)
+
+Sets the degree of caching of layout information.
+
+h3(#STC_setwrapmode). StyledTextCtrl#set_wrap_mode
+
+  *set_wrap_mode*(%(arg-type)Integer% mode)
+
+Sets whether text is word wrapped.
+
+h3(#STC_setwrapstartindent). StyledTextCtrl#set_wrap_start_indent
+
+  *set_wrap_start_indent*(%(arg-type)Integer% indent)
+
+Set the start indent for wrapped lines.
+
+h3(#STC_setwrapvisualflags). StyledTextCtrl#set_wrap_visual_flags
+
+  *set_wrap_visual_flags*(%(arg-type)Integer% wrapVisualFlags)
+
+Set the display mode of visual flags for wrapped lines.
+
+h3(#STC_setwrapvisualflagslocation). StyledTextCtrl#set_wrap_visual_flags_location
+
+  *set_wrap_visual_flags_location*(%(arg-type)Integer% wrapVisualFlagsLocation)
+
+Set the location of visual flags for wrapped lines.
+
+h3(#STC_wordendposition). StyledTextCtrl#word_end_position
+
+ Integer *word_end_position*(%(arg-type)Integer% pos, %(arg-type)Boolean% onlyWordCharacters)
+
+Get position of end of word.
+
+h3(#STC_wordstartposition). StyledTextCtrl#word_start_position
+
+ Integer *word_start_position*(%(arg-type)Integer% pos, %(arg-type)Boolean% onlyWordCharacters)
+
+Get position of start of word.
+
+h3(#STC_wrapcount). StyledTextCtrl#wrap_count
+
+ Integer *wrap_count*(%(arg-type)Integer% line)
+
+The number of display lines needed to wrap a document line
+
+
+
+h2(#scrolling_and_scrollbars). Scrolling and scrollbars
+
+* "StyledTextCtrl.choose_caret_x":#STC_choosecaretx
+* "StyledTextCtrl.get_end_at_last_line":#STC_getendatlastline
+* "StyledTextCtrl.get_scroll_width":#STC_getscrollwidth
+* "StyledTextCtrl.get_use_horizontal_scroll_bar":#STC_getusehorizontalscrollbar
+* "StyledTextCtrl.get_use_vertical_scroll_bar":#STC_getuseverticalscrollbar
+* "StyledTextCtrl.get_xoffset":#STC_getxoffset
+* "StyledTextCtrl.line_scroll":#STC_linescroll
+* "StyledTextCtrl.set_end_at_last_line":#STC_setendatlastline
+* "StyledTextCtrl.set_hscroll_bar":#STC_sethscrollbar
+* "StyledTextCtrl.set_scroll_width":#STC_setscrollwidth
+* "StyledTextCtrl.set_use_horizontal_scroll_bar":#STC_setusehorizontalscrollbar
+* "StyledTextCtrl.set_use_vertical_scroll_bar":#STC_setuseverticalscrollbar
+* "StyledTextCtrl.set_visible_policy":#STC_setvisiblepolicy
+* "StyledTextCtrl.set_vscroll_bar":#STC_setvscrollbar
+* "StyledTextCtrl.set_xcaret_policy":#STC_setxcaretpolicy
+* "StyledTextCtrl.set_xoffset":#STC_setxoffset
+* "StyledTextCtrl.set_ycaret_policy":#STC_setycaretpolicy
+* "StyledTextCtrl.text_height":#STC_textheight
+* "StyledTextCtrl.text_width":#STC_textwidth
+
+h3(#STC_choosecaretx). StyledTextCtrl#choose_caret_x
+
+  *choose_caret_x*()
+
+Set the last x chosen value to be the caret x position.
+
+h3(#STC_getendatlastline). StyledTextCtrl#get_end_at_last_line
+
+ Boolean *get_end_at_last_line*()
+
+Retrieve whether the maximum scroll position has the last     line at the bottom of the view.
+
+h3(#STC_getscrollwidth). StyledTextCtrl#get_scroll_width
+
+ Integer *get_scroll_width*()
+
+Retrieve the document width assumed for scrolling.
+
+h3(#STC_getusehorizontalscrollbar). StyledTextCtrl#get_use_horizontal_scroll_bar
+
+ Boolean *get_use_horizontal_scroll_bar*()
+
+Is the horizontal scroll bar visible?
+
+h3(#STC_getuseverticalscrollbar). StyledTextCtrl#get_use_vertical_scroll_bar
+
+ Boolean *get_use_vertical_scroll_bar*()
+
+Is the vertical scroll bar visible?
+
+h3(#STC_getxoffset). StyledTextCtrl#get_xoffset
+
+ Integer *get_xoffset*()
+
+
+h3(#STC_linescroll). StyledTextCtrl#line_scroll
+
+  *line_scroll*(%(arg-type)Integer% columns, %(arg-type)Integer% lines)
+
+Scroll horizontally and vertically.
+
+h3(#STC_setendatlastline). StyledTextCtrl#set_end_at_last_line
+
+  *set_end_at_last_line*(%(arg-type)Boolean% endAtLastLine)
+
+Sets the scroll range so that maximum scroll position has     the last line at the bottom of the view (default).     Setting this to false allows scrolling one page below the last line.
+
+h3(#STC_sethscrollbar). StyledTextCtrl#set_hscroll_bar
+
+  *set_hscroll_bar*(%(arg-type)"ScrollBar":scrollbar.html% bar)
+
+Set the horizontal scrollbar to use instead of the ont that's built-in.
+
+h3(#STC_setscrollwidth). StyledTextCtrl#set_scroll_width
+
+  *set_scroll_width*(%(arg-type)Integer% pixelWidth)
+
+Sets the document width assumed for scrolling.
+
+h3(#STC_setusehorizontalscrollbar). StyledTextCtrl#set_use_horizontal_scroll_bar
+
+  *set_use_horizontal_scroll_bar*(%(arg-type)Boolean% show)
+
+Show or hide the horizontal scroll bar.
+
+h3(#STC_setuseverticalscrollbar). StyledTextCtrl#set_use_vertical_scroll_bar
+
+  *set_use_vertical_scroll_bar*(%(arg-type)Boolean% show)
+
+Show or hide the vertical scroll bar.
+
+h3(#STC_setvisiblepolicy). StyledTextCtrl#set_visible_policy
+
+  *set_visible_policy*(%(arg-type)Integer% visiblePolicy, %(arg-type)Integer% visibleSlop)
+
+Set the way the display area is determined when a particular line     is to be moved to by Find, FindNext, GotoLine, etc.
+
+h3(#STC_setvscrollbar). StyledTextCtrl#set_vscroll_bar
+
+  *set_vscroll_bar*(%(arg-type)"ScrollBar":scrollbar.html% bar)
+
+Set the vertical scrollbar to use instead of the ont that's built-in.
+
+h3(#STC_setxcaretpolicy). StyledTextCtrl#set_xcaret_policy
+
+  *set_xcaret_policy*(%(arg-type)Integer% caretPolicy, %(arg-type)Integer% caretSlop)
+
+Set the way the caret is kept visible when going sideway.     The exclusion zone is given in pixels.
+
+h3(#STC_setxoffset). StyledTextCtrl#set_xoffset
+
+  *set_xoffset*(%(arg-type)Integer% newOffset)
+
+Get and Set the xOffset (ie, horizonal scroll position).
+
+h3(#STC_setycaretpolicy). StyledTextCtrl#set_ycaret_policy
+
+  *set_ycaret_policy*(%(arg-type)Integer% caretPolicy, %(arg-type)Integer% caretSlop)
+
+Set the way the line the caret is on is kept visible.     The exclusion zone is given in lines.
+
+h3(#STC_textheight). StyledTextCtrl#text_height
+
+ Integer *text_height*(%(arg-type)Integer% line)
+
+Retrieve the height of a particular line of text in pixels.
+
+h3(#STC_textwidth). StyledTextCtrl#text_width
+
+ Integer *text_width*(%(arg-type)Integer% style, %(arg-type)String% text)
+
+Measure the pixel width of some text in a particular style.     NUL terminated text argument.     Does not handle tab or control characters.
+
+
+
+h2(#cut_copy_and_paste). Cut, copy and paste
+
+* "StyledTextCtrl.can_paste":#STC_canpaste
+* "StyledTextCtrl.clear":#STC_clear
+* "StyledTextCtrl.copy":#STC_copy
+* "StyledTextCtrl.copy_range":#STC_copyrange
+* "StyledTextCtrl.copy_text":#STC_copytext
+* "StyledTextCtrl.cut":#STC_cut
+* "StyledTextCtrl.get_paste_convert_endings":#STC_getpasteconvertendings
+* "StyledTextCtrl.paste":#STC_paste
+* "StyledTextCtrl.set_paste_convert_endings":#STC_setpasteconvertendings
+
+h3(#STC_canpaste). StyledTextCtrl#can_paste
+
+ Boolean *can_paste*()
+
+Will a paste succeed?
+
+h3(#STC_clear). StyledTextCtrl#clear
+
+  *clear*()
+
+Clear the selection.
+
+h3(#STC_copy). StyledTextCtrl#copy
+
+  *copy*()
+
+Copy the selection to the clipboard.
+
+h3(#STC_copyrange). StyledTextCtrl#copy_range
+
+  *copy_range*(%(arg-type)Integer% start, %(arg-type)Integer% end)
+
+Copy a range of text to the clipboard. Positions are clipped into the document.
+
+h3(#STC_copytext). StyledTextCtrl#copy_text
+
+  *copy_text*(%(arg-type)Integer% length, %(arg-type)String% text)
+
+Copy argument text to the clipboard.
+
+h3(#STC_cut). StyledTextCtrl#cut
+
+  *cut*()
+
+Cut the selection to the clipboard.
+
+h3(#STC_getpasteconvertendings). StyledTextCtrl#get_paste_convert_endings
+
+ Boolean *get_paste_convert_endings*()
+
+Get convert-on-paste setting
+
+h3(#STC_paste). StyledTextCtrl#paste
+
+  *paste*()
+
+Paste the contents of the clipboard into the document replacing the selection.
+
+h3(#STC_setpasteconvertendings). StyledTextCtrl#set_paste_convert_endings
+
+  *set_paste_convert_endings*(%(arg-type)Boolean% convert)
+
+Enable/Disable convert-on-paste for line endings
+
+
+
+h2(#undo_and_redo). Undo and redo
+
+* "StyledTextCtrl.begin_undo_action":#STC_beginundoaction
+* "StyledTextCtrl.can_redo":#STC_canredo
+* "StyledTextCtrl.can_undo":#STC_canundo
+* "StyledTextCtrl.empty_undo_buffer":#STC_emptyundobuffer
+* "StyledTextCtrl.end_undo_action":#STC_endundoaction
+* "StyledTextCtrl.get_undo_collection":#STC_getundocollection
+* "StyledTextCtrl.redo":#STC_redo
+* "StyledTextCtrl.set_save_point":#STC_setsavepoint
+* "StyledTextCtrl.set_undo_collection":#STC_setundocollection
+* "StyledTextCtrl.undo":#STC_undo
+
+h3(#STC_beginundoaction). StyledTextCtrl#begin_undo_action
+
+  *begin_undo_action*()
+
+Start a sequence of actions that is undone and redone as a unit.     May be nested.
+
+h3(#STC_canredo). StyledTextCtrl#can_redo
+
+ Boolean *can_redo*()
+
+Are there any redoable actions in the undo history?
+
+h3(#STC_canundo). StyledTextCtrl#can_undo
+
+ Boolean *can_undo*()
+
+Are there any undoable actions in the undo history?
+
+h3(#STC_emptyundobuffer). StyledTextCtrl#empty_undo_buffer
+
+  *empty_undo_buffer*()
+
+Delete the undo history.
+
+h3(#STC_endundoaction). StyledTextCtrl#end_undo_action
+
+  *end_undo_action*()
+
+End a sequence of actions that is undone and redone as a unit.
+
+h3(#STC_getundocollection). StyledTextCtrl#get_undo_collection
+
+ Boolean *get_undo_collection*()
+
+Is undo history being collected?
+
+h3(#STC_redo). StyledTextCtrl#redo
+
+  *redo*()
+
+Redoes the next action on the undo history.
+
+h3(#STC_setsavepoint). StyledTextCtrl#set_save_point
+
+  *set_save_point*()
+
+Remember the current position in the undo history as the position     at which the document was saved.
+
+h3(#STC_setundocollection). StyledTextCtrl#set_undo_collection
+
+  *set_undo_collection*(%(arg-type)Boolean% collectUndo)
+
+Choose between collecting actions into the undo     history and discarding them.
+
+h3(#STC_undo). StyledTextCtrl#undo
+
+  *undo*()
+
+Undo one action in the undo history.
+
+
+
+h2(#search_and_replace). Search and replace
+
+* "StyledTextCtrl.find_text":#STC_findtext
+* "StyledTextCtrl.get_search_flags":#STC_getsearchflags
+* "StyledTextCtrl.get_target_end":#STC_gettargetend
+* "StyledTextCtrl.get_target_start":#STC_gettargetstart
+* "StyledTextCtrl.replace_target":#STC_replacetarget
+* "StyledTextCtrl.replace_target_re":#STC_replacetargetre
+* "StyledTextCtrl.search_anchor":#STC_searchanchor
+* "StyledTextCtrl.search_in_target":#STC_searchintarget
+* "StyledTextCtrl.search_next":#STC_searchnext
+* "StyledTextCtrl.search_prev":#STC_searchprev
+* "StyledTextCtrl.set_search_flags":#STC_setsearchflags
+* "StyledTextCtrl.set_target_end":#STC_settargetend
+* "StyledTextCtrl.set_target_start":#STC_settargetstart
+* "StyledTextCtrl.target_from_selection":#STC_targetfromselection
+
+h3(#STC_findtext). StyledTextCtrl#find_text
+
+ Integer *find_text*(%(arg-type)Integer% minPos, %(arg-type)Integer% maxPos, %(arg-type)String% text, %(arg-type)Integer% flags=0)
+
+Find some text in the document.
+
+h3(#STC_getsearchflags). StyledTextCtrl#get_search_flags
+
+ Integer *get_search_flags*()
+
+Get the search flags used by SearchInTarget.
+
+h3(#STC_gettargetend). StyledTextCtrl#get_target_end
+
+ Integer *get_target_end*()
+
+Get the position that ends the target.
+
+h3(#STC_gettargetstart). StyledTextCtrl#get_target_start
+
+ Integer *get_target_start*()
+
+Get the position that starts the target.
+
+h3(#STC_replacetarget). StyledTextCtrl#replace_target
+
+ Integer *replace_target*(%(arg-type)String% text)
+
+Replace the target text with the argument text.     Text is counted so it can contain NULs.     Returns the length of the replacement text.
+
+h3(#STC_replacetargetre). StyledTextCtrl#replace_target_re
+
+ Integer *replace_target_re*(%(arg-type)String% text)
+
+Replace the target text with the argument text after \d processing.     Text is counted so it can contain NULs.     Looks for \d where d is between 1 and 9 and replaces these with the strings     matched in the last search operation which were surrounded by \( and \).     Returns the length of the replacement text including any change     caused by processing the \d patterns.
+
+h3(#STC_searchanchor). StyledTextCtrl#search_anchor
+
+  *search_anchor*()
+
+Sets the current caret position to be the search anchor.
+
+h3(#STC_searchintarget). StyledTextCtrl#search_in_target
+
+ Integer *search_in_target*(%(arg-type)String% text)
+
+Search for a counted string in the target and set the target to the found     range. Text is counted so it can contain NULs.     Returns length of range or -1 for failure in which case target is not moved.
+
+h3(#STC_searchnext). StyledTextCtrl#search_next
+
+ Integer *search_next*(%(arg-type)Integer% flags, %(arg-type)String% text)
+
+Find some text starting at the search anchor.     Does not ensure the selection is visible.
+
+h3(#STC_searchprev). StyledTextCtrl#search_prev
+
+ Integer *search_prev*(%(arg-type)Integer% flags, %(arg-type)String% text)
+
+Find some text starting at the search anchor and moving backwards.     Does not ensure the selection is visible.
+
+h3(#STC_setsearchflags). StyledTextCtrl#set_search_flags
+
+  *set_search_flags*(%(arg-type)Integer% flags)
+
+Set the search flags used by SearchInTarget.
+
+h3(#STC_settargetend). StyledTextCtrl#set_target_end
+
+  *set_target_end*(%(arg-type)Integer% pos)
+
+Sets the position that ends the target which is used for updating the     document without affecting the scroll position.
+
+h3(#STC_settargetstart). StyledTextCtrl#set_target_start
+
+  *set_target_start*(%(arg-type)Integer% pos)
+
+Sets the position that starts the target which is used for updating the     document without affecting the scroll position.
+
+h3(#STC_targetfromselection). StyledTextCtrl#target_from_selection
+
+  *target_from_selection*()
+
+Make the target range start and end be the same as the selection range start and end.
+
+
+
+h2(#styling_text). Styling text
+
+* "StyledTextCtrl.clear_document_style":#STC_cleardocumentstyle
+* "StyledTextCtrl.get_end_styled":#STC_getendstyled
+* "StyledTextCtrl.get_line_state":#STC_getlinestate
+* "StyledTextCtrl.get_max_line_state":#STC_getmaxlinestate
+* "StyledTextCtrl.get_style_at":#STC_getstyleat
+* "StyledTextCtrl.get_style_bits":#STC_getstylebits
+* "StyledTextCtrl.set_hotspot_active_background":#STC_sethotspotactivebackground
+* "StyledTextCtrl.set_hotspot_active_foreground":#STC_sethotspotactiveforeground
+* "StyledTextCtrl.set_hotspot_active_underline":#STC_sethotspotactiveunderline
+* "StyledTextCtrl.set_hotspot_single_line":#STC_sethotspotsingleline
+* "StyledTextCtrl.set_line_state":#STC_setlinestate
+* "StyledTextCtrl.set_style_bits":#STC_setstylebits
+* "StyledTextCtrl.set_style_bytes":#STC_setstylebytes
+* "StyledTextCtrl.set_styling":#STC_setstyling
+* "StyledTextCtrl.start_styling":#STC_startstyling
+* "StyledTextCtrl.style_clear_all":#STC_styleclearall
+* "StyledTextCtrl.style_reset_default":#STC_styleresetdefault
+* "StyledTextCtrl.style_set_background":#STC_stylesetbackground
+* "StyledTextCtrl.style_set_bold":#STC_stylesetbold
+* "StyledTextCtrl.style_set_case":#STC_stylesetcase
+* "StyledTextCtrl.style_set_changeable":#STC_stylesetchangeable
+* "StyledTextCtrl.style_set_character_set":#STC_stylesetcharacterset
+* "StyledTextCtrl.style_set_eol_filled":#STC_styleseteolfilled
+* "StyledTextCtrl.style_set_face_name":#STC_stylesetfacename
+* "StyledTextCtrl.style_set_font":#STC_stylesetfont
+* "StyledTextCtrl.style_set_font_attr":#STC_stylesetfontattr
+* "StyledTextCtrl.style_set_font_encoding":#STC_stylesetfontencoding
+* "StyledTextCtrl.style_set_foreground":#STC_stylesetforeground
+* "StyledTextCtrl.style_set_hot_spot":#STC_stylesethotspot
+* "StyledTextCtrl.style_set_italic":#STC_stylesetitalic
+* "StyledTextCtrl.style_set_size":#STC_stylesetsize
+* "StyledTextCtrl.style_set_spec":#STC_stylesetspec
+* "StyledTextCtrl.style_set_underline":#STC_stylesetunderline
+* "StyledTextCtrl.style_set_visible":#STC_stylesetvisible
+
+h3(#STC_cleardocumentstyle). StyledTextCtrl#clear_document_style
+
+  *clear_document_style*()
+
+Set all style bytes to 0, remove all folding information.
+
+h3(#STC_getendstyled). StyledTextCtrl#get_end_styled
+
+ Integer *get_end_styled*()
+
+#endif     Retrieve the position of the last correctly styled character.
+
+h3(#STC_getlinestate). StyledTextCtrl#get_line_state
+
+ Integer *get_line_state*(%(arg-type)Integer% line)
+
+Retrieve the extra styling information for a line.
+
+h3(#STC_getmaxlinestate). StyledTextCtrl#get_max_line_state
+
+ Integer *get_max_line_state*()
+
+Retrieve the last line number that has line state.
+
+h3(#STC_getstyleat). StyledTextCtrl#get_style_at
+
+ Integer *get_style_at*(%(arg-type)Integer% pos)
+
+Returns the style byte at the position.
+
+h3(#STC_getstylebits). StyledTextCtrl#get_style_bits
+
+ Integer *get_style_bits*()
+
+Retrieve number of bits in style bytes used to hold the lexical state.
+
+h3(#STC_sethotspotactivebackground). StyledTextCtrl#set_hotspot_active_background
+
+  *set_hotspot_active_background*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
+
+Set a back colour for active hotspots.
+
+h3(#STC_sethotspotactiveforeground). StyledTextCtrl#set_hotspot_active_foreground
+
+  *set_hotspot_active_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
+
+Set a fore colour for active hotspots.
+
+h3(#STC_sethotspotactiveunderline). StyledTextCtrl#set_hotspot_active_underline
+
+  *set_hotspot_active_underline*(%(arg-type)Boolean% underline)
+
+Enable / Disable underlining active hotspots.
+
+h3(#STC_sethotspotsingleline). StyledTextCtrl#set_hotspot_single_line
+
+  *set_hotspot_single_line*(%(arg-type)Boolean% singleLine)
+
+Limit hotspots to single line so hotspots on two lines don't merge.
+
+h3(#STC_setlinestate). StyledTextCtrl#set_line_state
+
+  *set_line_state*(%(arg-type)Integer% line, %(arg-type)Integer% state)
+
+Used to hold extra styling information for each line.
+
+h3(#STC_setstylebits). StyledTextCtrl#set_style_bits
+
+  *set_style_bits*(%(arg-type)Integer% bits)
+
+Divide each styling byte into lexical class bits (default: 5) and indicator     bits (default: 3). If a lexer requires more than 32 lexical states, then this     is used to expand the possible states.
+
+h3(#STC_setstylebytes). StyledTextCtrl#set_style_bytes
+
+  *set_style_bytes*(%(arg-type)Integer% length, %(arg-type)% styleBytes)
+
+Set the styles for a segment of the document.
+
+h3(#STC_setstyling). StyledTextCtrl#set_styling
+
+  *set_styling*(%(arg-type)Integer% length, %(arg-type)Integer% style)
+
+Change style from current styling position for length characters to a style     and move the current styling position to after this newly styled segment.
+
+h3(#STC_startstyling). StyledTextCtrl#start_styling
+
+  *start_styling*(%(arg-type)Integer% pos, %(arg-type)Integer% mask)
+
+Set the current styling position to pos and the styling mask to mask.     The styling mask can be used to protect some bits in each styling byte from modification.
+
+h3(#STC_styleclearall). StyledTextCtrl#style_clear_all
+
+  *style_clear_all*()
+
+Clear all the styles and make equivalent to the global default style.
+
+h3(#STC_styleresetdefault). StyledTextCtrl#style_reset_default
+
+  *style_reset_default*()
+
+Reset the default style to its state at startup
+
+h3(#STC_stylesetbackground). StyledTextCtrl#style_set_background
+
+  *style_set_background*(%(arg-type)Integer% style, %(arg-type)"Colour":colour.html% back)
+
+Set the background colour of a style.
+
+h3(#STC_stylesetbold). StyledTextCtrl#style_set_bold
+
+  *style_set_bold*(%(arg-type)Integer% style, %(arg-type)Boolean% bold)
+
+Set a style to be bold or not.
+
+h3(#STC_stylesetcase). StyledTextCtrl#style_set_case
+
+  *style_set_case*(%(arg-type)Integer% style, %(arg-type)Integer% caseForce)
+
+Set a style to be mixed case, or to force upper or lower case.
+
+h3(#STC_stylesetchangeable). StyledTextCtrl#style_set_changeable
+
+  *style_set_changeable*(%(arg-type)Integer% style, %(arg-type)Boolean% changeable)
+
+Set a style to be changeable or not (read only).     Experimental feature, currently buggy.
+
+h3(#STC_stylesetcharacterset). StyledTextCtrl#style_set_character_set
+
+  *style_set_character_set*(%(arg-type)Integer% style, %(arg-type)Integer% characterSet)
+
+Set the character set of the font in a style.  Converts the Scintilla     character set values to a wxFontEncoding.
+
+h3(#STC_styleseteolfilled). StyledTextCtrl#style_set_eol_filled
+
+  *style_set_eol_filled*(%(arg-type)Integer% style, %(arg-type)Boolean% filled)
+
+Set a style to have its end of line filled or not.
+
+h3(#STC_stylesetfacename). StyledTextCtrl#style_set_face_name
+
+  *style_set_face_name*(%(arg-type)Integer% style, %(arg-type)String% fontName)
+
+Set the font of a style.
+
+h3(#STC_stylesetfont). StyledTextCtrl#style_set_font
+
+  *style_set_font*(%(arg-type)Integer% styleNum, %(arg-type)"Font":font.html% font)
+
+Set style size, face, bold, italic, and underline attributes from     a wxFont's attributes.
+
+h3(#STC_stylesetfontattr). StyledTextCtrl#style_set_font_attr
+
+  *style_set_font_attr*(%(arg-type)Integer% styleNum, %(arg-type)Integer% size, %(arg-type)String% faceName, 
+                          %(arg-type)Boolean% bold, %(arg-type)Boolean% italic, %(arg-type)Boolean% underline, 
+                         %(arg-type)"FontEncoding":fontencoding.html% encoding=wxFONTENCODING_DEFAULT)
+
+Set all font style attributes at once.
+
+h3(#STC_stylesetfontencoding). StyledTextCtrl#style_set_font_encoding
+
+  *style_set_font_encoding*(%(arg-type)Integer% style, %(arg-type)"FontEncoding":fontencoding.html% encoding)
+
+Set the font encoding to be used by a style.
+
+h3(#STC_stylesetforeground). StyledTextCtrl#style_set_foreground
+
+  *style_set_foreground*(%(arg-type)Integer% style, %(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour of a style.
+
+h3(#STC_stylesethotspot). StyledTextCtrl#style_set_hot_spot
+
+  *style_set_hot_spot*(%(arg-type)Integer% style, %(arg-type)Boolean% hotspot)
+
+Set a style to be a hotspot or not.
+
+h3(#STC_stylesetitalic). StyledTextCtrl#style_set_italic
+
+  *style_set_italic*(%(arg-type)Integer% style, %(arg-type)Boolean% italic)
+
+Set a style to be italic or not.
+
+h3(#STC_stylesetsize). StyledTextCtrl#style_set_size
+
+  *style_set_size*(%(arg-type)Integer% style, %(arg-type)Integer% sizePoints)
+
+Set the size of characters of a style.
+
+h3(#STC_stylesetspec). StyledTextCtrl#style_set_spec
+
+  *style_set_spec*(%(arg-type)Integer% styleNum, %(arg-type)String% spec)
+
+Extract style settings from a spec-string which is composed of one or     more of the following comma separated elements:              bold                    turns on bold          italic                  turns on italics          fore:[name or #RRGGBB]  sets the foreground colour          back:[name or #RRGGBB]  sets the background colour          face:[facename]         sets the font face name to use          size:[num]              sets the font size in points          eol                     turns on eol filling          underline               turns on underlining
+
+h3(#STC_stylesetunderline). StyledTextCtrl#style_set_underline
+
+  *style_set_underline*(%(arg-type)Integer% style, %(arg-type)Boolean% underline)
+
+Set a style to be underlined or not.
+
+h3(#STC_stylesetvisible). StyledTextCtrl#style_set_visible
+
+  *style_set_visible*(%(arg-type)Integer% style, %(arg-type)Boolean% visible)
+
+Set a style to be visible or not.
+
+
+
+h2(#indicators). Indicators
+
+* "StyledTextCtrl.indicator_get_foreground":#STC_indicatorgetforeground
+* "StyledTextCtrl.indicator_get_style":#STC_indicatorgetstyle
+* "StyledTextCtrl.indicator_set_foreground":#STC_indicatorsetforeground
+* "StyledTextCtrl.indicator_set_style":#STC_indicatorsetstyle
+
+h3(#STC_indicatorgetforeground). StyledTextCtrl#indicator_get_foreground
+
+ "Colour":colour.html *indicator_get_foreground*(%(arg-type)Integer% indic)
+
+Retrieve the foreground colour of an indicator.
+
+h3(#STC_indicatorgetstyle). StyledTextCtrl#indicator_get_style
+
+ Integer *indicator_get_style*(%(arg-type)Integer% indic)
+
+Retrieve the style of an indicator.
+
+h3(#STC_indicatorsetforeground). StyledTextCtrl#indicator_set_foreground
+
+  *indicator_set_foreground*(%(arg-type)Integer% indic, %(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour of an indicator.
+
+h3(#STC_indicatorsetstyle). StyledTextCtrl#indicator_set_style
+
+  *indicator_set_style*(%(arg-type)Integer% indic, %(arg-type)Integer% style)
+
+Set an indicator to plain, squiggle or TT.
+
+
+
+h2(#styling_for_programming_languages). Styling for programming languages
+
+* "StyledTextCtrl.colourise":#STC_colourise
+* "StyledTextCtrl.get_lexer":#STC_getlexer
+* "StyledTextCtrl.get_property":#STC_getproperty
+* "StyledTextCtrl.get_property_expanded":#STC_getpropertyexpanded
+* "StyledTextCtrl.get_property_int":#STC_getpropertyint
+* "StyledTextCtrl.get_style_bits_needed":#STC_getstylebitsneeded
+* "StyledTextCtrl.set_key_words":#STC_setkeywords
+* "StyledTextCtrl.set_lexer":#STC_setlexer
+* "StyledTextCtrl.set_lexer_language":#STC_setlexerlanguage
+* "StyledTextCtrl.set_property":#STC_setproperty
+
+h3(#STC_colourise). StyledTextCtrl#colourise
+
+  *colourise*(%(arg-type)Integer% start, %(arg-type)Integer% end)
+
+Colourise a segment of the document using the current lexing language.
+
+h3(#STC_getlexer). StyledTextCtrl#get_lexer
+
+ Integer *get_lexer*()
+
+Retrieve the lexing language of the document.
+
+h3(#STC_getproperty). StyledTextCtrl#get_property
+
+ "String":string.html *get_property*(%(arg-type)String% key)
+
+Retrieve a 'property' value previously set with SetProperty.
+
+h3(#STC_getpropertyexpanded). StyledTextCtrl#get_property_expanded
+
+ "String":string.html *get_property_expanded*(%(arg-type)String% key)
+
+Retrieve a 'property' value previously set with SetProperty,     with '$()' variable replacement on returned buffer.
+
+h3(#STC_getpropertyint). StyledTextCtrl#get_property_int
+
+ Integer *get_property_int*(%(arg-type)String% key)
+
+Retrieve a 'property' value previously set with SetProperty,     interpreted as an int AFTER any '$()' variable replacement.
+
+h3(#STC_getstylebitsneeded). StyledTextCtrl#get_style_bits_needed
+
+ Integer *get_style_bits_needed*()
+
+Retrieve the number of bits the current lexer needs for styling.
+
+h3(#STC_setkeywords). StyledTextCtrl#set_key_words
+
+  *set_key_words*(%(arg-type)Integer% keywordSet, %(arg-type)String% keyWords)
+
+Set up the key words used by the lexer.
+
+h3(#STC_setlexer). StyledTextCtrl#set_lexer
+
+  *set_lexer*(%(arg-type)Integer% lexer)
+
+Set the lexing language of the document.
+
+h3(#STC_setlexerlanguage). StyledTextCtrl#set_lexer_language
+
+  *set_lexer_language*(%(arg-type)String% language)
+
+Set the lexing language of the document based on string name.
+
+h3(#STC_setproperty). StyledTextCtrl#set_property
+
+  *set_property*(%(arg-type)String% key, %(arg-type)String% value)
+
+Set up a value that may be used by a lexer for some optional feature.
+
+
+
+h2(#caret_features). Caret features
+
+* "StyledTextCtrl.ensure_caret_visible":#STC_ensurecaretvisible
+* "StyledTextCtrl.get_caret_foreground":#STC_getcaretforeground
+* "StyledTextCtrl.get_caret_line_back_alpha":#STC_getcaretlinebackalpha
+* "StyledTextCtrl.get_caret_line_background":#STC_getcaretlinebackground
+* "StyledTextCtrl.get_caret_line_visible":#STC_getcaretlinevisible
+* "StyledTextCtrl.get_caret_period":#STC_getcaretperiod
+* "StyledTextCtrl.get_caret_sticky":#STC_getcaretsticky
+* "StyledTextCtrl.get_caret_width":#STC_getcaretwidth
+* "StyledTextCtrl.get_control_char_symbol":#STC_getcontrolcharsymbol
+* "StyledTextCtrl.move_caret_inside_view":#STC_movecaretinsideview
+* "StyledTextCtrl.set_caret_foreground":#STC_setcaretforeground
+* "StyledTextCtrl.set_caret_line_back_alpha":#STC_setcaretlinebackalpha
+* "StyledTextCtrl.set_caret_line_background":#STC_setcaretlinebackground
+* "StyledTextCtrl.set_caret_line_visible":#STC_setcaretlinevisible
+* "StyledTextCtrl.set_caret_period":#STC_setcaretperiod
+* "StyledTextCtrl.set_caret_sticky":#STC_setcaretsticky
+* "StyledTextCtrl.set_caret_width":#STC_setcaretwidth
+* "StyledTextCtrl.set_control_char_symbol":#STC_setcontrolcharsymbol
+* "StyledTextCtrl.toggle_caret_sticky":#STC_togglecaretsticky
+
+h3(#STC_ensurecaretvisible). StyledTextCtrl#ensure_caret_visible
+
+  *ensure_caret_visible*()
+
+Ensure the caret is visible.
+
+h3(#STC_getcaretforeground). StyledTextCtrl#get_caret_foreground
+
+ "Colour":colour.html *get_caret_foreground*()
+
+Get the foreground colour of the caret.
+
+h3(#STC_getcaretlinebackalpha). StyledTextCtrl#get_caret_line_back_alpha
+
+ Integer *get_caret_line_back_alpha*()
+
+Get the background alpha of the caret line.
+
+h3(#STC_getcaretlinebackground). StyledTextCtrl#get_caret_line_background
+
+ "Colour":colour.html *get_caret_line_background*()
+
+Get the colour of the background of the line containing the caret.
+
+h3(#STC_getcaretlinevisible). StyledTextCtrl#get_caret_line_visible
+ 
+ Boolean *get_caret_line_visible*()
+
+Is the background of the line containing the caret in a different colour?
+
+h3(#STC_getcaretperiod). StyledTextCtrl#get_caret_period
+
+ Integer *get_caret_period*()
+
+Get the time in milliseconds that the caret is on and off.
+
+h3(#STC_getcaretsticky). StyledTextCtrl#get_caret_sticky
+
+ Boolean *get_caret_sticky*()
+
+Can the caret preferred x position only be changed by explicit movement commands?
+
+h3(#STC_getcaretwidth). StyledTextCtrl#get_caret_width
+
+ Integer *get_caret_width*()
+
+Returns the width of the insert mode caret.
+
+h3(#STC_getcontrolcharsymbol). StyledTextCtrl#get_control_char_symbol
+
+ Integer *get_control_char_symbol*()
+
+Get the way control characters are displayed.
+
+h3(#STC_movecaretinsideview). StyledTextCtrl#move_caret_inside_view
+
+  *move_caret_inside_view*()
+
+Move the caret inside current view if it's not there already.
+
+h3(#STC_setcaretforeground). StyledTextCtrl#set_caret_foreground
+
+  *set_caret_foreground*(%(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour of the caret.
+
+h3(#STC_setcaretlinebackalpha). StyledTextCtrl#set_caret_line_back_alpha
+
+  *set_caret_line_back_alpha*(%(arg-type)Integer% alpha)
+
+Set background alpha of the caret line.
+
+h3(#STC_setcaretlinebackground). StyledTextCtrl#set_caret_line_background
+
+  *set_caret_line_background*(%(arg-type)"Colour":colour.html% back)
+
+Set the colour of the background of the line containing the caret.
+
+h3(#STC_setcaretlinevisible). StyledTextCtrl#set_caret_line_visible
+
+  *set_caret_line_visible*(%(arg-type)Boolean% show)
+
+Display the background of the line containing the caret in a different colour.
+
+h3(#STC_setcaretperiod). StyledTextCtrl#set_caret_period
+
+  *set_caret_period*(%(arg-type)Integer% periodMilliseconds)
+
+Get the time in milliseconds that the caret is on and off. 0 = steady on.
+
+h3(#STC_setcaretsticky). StyledTextCtrl#set_caret_sticky
+
+  *set_caret_sticky*(%(arg-type)Boolean% useCaretStickyBehaviour)
+
+Stop the caret preferred x position changing when the user types.
+
+h3(#STC_setcaretwidth). StyledTextCtrl#set_caret_width
+
+  *set_caret_width*(%(arg-type)Integer% pixelWidth)
+
+Set the width of the insert mode caret.
+
+h3(#STC_setcontrolcharsymbol). StyledTextCtrl#set_control_char_symbol
+
+  *set_control_char_symbol*(%(arg-type)Integer% symbol)
+
+Change the way control characters are displayed:     If symbol is < 32, keep the drawn way, else, use the given character.
+
+h3(#STC_togglecaretsticky). StyledTextCtrl#toggle_caret_sticky
+
+  *toggle_caret_sticky*()
+
+Switch between sticky and non-sticky: meant to be bound to a key.
+
+
+
+h2(#indentation_and_tabs). Indentation and Tabs
+
+* "StyledTextCtrl.get_back_space_un_indents":#STC_getbackspaceunindents
+* "StyledTextCtrl.get_highlight_guide":#STC_gethighlightguide
+* "StyledTextCtrl.get_indent":#STC_getindent
+* "StyledTextCtrl.get_indentation_guides":#STC_getindentationguides
+* "StyledTextCtrl.get_line_indent_position":#STC_getlineindentposition
+* "StyledTextCtrl.get_line_indentation":#STC_getlineindentation
+* "StyledTextCtrl.get_tab_indents":#STC_gettabindents
+* "StyledTextCtrl.get_tab_width":#STC_gettabwidth
+* "StyledTextCtrl.get_use_tabs":#STC_getusetabs
+* "StyledTextCtrl.set_back_space_un_indents":#STC_setbackspaceunindents
+* "StyledTextCtrl.set_highlight_guide":#STC_sethighlightguide
+* "StyledTextCtrl.set_indent":#STC_setindent
+* "StyledTextCtrl.set_indentation_guides":#STC_setindentationguides
+* "StyledTextCtrl.set_line_indentation":#STC_setlineindentation
+* "StyledTextCtrl.set_tab_indents":#STC_settabindents
+* "StyledTextCtrl.set_tab_width":#STC_settabwidth
+* "StyledTextCtrl.set_use_tabs":#STC_setusetabs
+
+h3(#STC_getbackspaceunindents). StyledTextCtrl#get_back_space_un_indents
+
+ Boolean *get_back_space_un_indents*()
+
+Does a backspace pressed when caret is within indentation unindent?
+
+h3(#STC_gethighlightguide). StyledTextCtrl#get_highlight_guide
+
+ Integer *get_highlight_guide*()
+
+Get the highlighted indentation guide column.
+
+h3(#STC_getindent). StyledTextCtrl#get_indent
+
+ Integer *get_indent*()
+
+Retrieve indentation size.
+
+h3(#STC_getindentationguides). StyledTextCtrl#get_indentation_guides
+
+ Boolean *get_indentation_guides*()
+
+Are the indentation guides visible?
+
+h3(#STC_getlineindentposition). StyledTextCtrl#get_line_indent_position
+
+ Integer *get_line_indent_position*(%(arg-type)Integer% line)
+
+Retrieve the position before the first non indentation character on a line.
+
+h3(#STC_getlineindentation). StyledTextCtrl#get_line_indentation
+
+ Integer *get_line_indentation*(%(arg-type)Integer% line)
+
+Retrieve the number of columns that a line is indented.
+
+h3(#STC_gettabindents). StyledTextCtrl#get_tab_indents
+
+ Boolean *get_tab_indents*()
+
+Does a tab pressed when caret is within indentation indent?
+
+h3(#STC_gettabwidth). StyledTextCtrl#get_tab_width
+
+ Integer *get_tab_width*()
+
+Retrieve the visible size of a tab.
+
+h3(#STC_getusetabs). StyledTextCtrl#get_use_tabs
+
+ Boolean *get_use_tabs*()
+
+Retrieve whether tabs will be used in indentation.
+
+h3(#STC_setbackspaceunindents). StyledTextCtrl#set_back_space_un_indents
+
+  *set_back_space_un_indents*(%(arg-type)Boolean% bsUnIndents)
+
+Sets whether a backspace pressed when caret is within indentation unindents.
+
+h3(#STC_sethighlightguide). StyledTextCtrl#set_highlight_guide
+
+  *set_highlight_guide*(%(arg-type)Integer% column)
+
+Set the highlighted indentation guide column.     0 = no highlighted guide.
+
+h3(#STC_setindent). StyledTextCtrl#set_indent
+
+  *set_indent*(%(arg-type)Integer% indentSize)
+
+Set the number of spaces used for one level of indentation.
+
+h3(#STC_setindentationguides). StyledTextCtrl#set_indentation_guides
+
+  *set_indentation_guides*(%(arg-type)Boolean% show)
+
+Show or hide indentation guides.
+
+h3(#STC_setlineindentation). StyledTextCtrl#set_line_indentation
+
+  *set_line_indentation*(%(arg-type)Integer% line, %(arg-type)Integer% indentSize)
+
+Change the indentation of a line to a number of columns.
+
+h3(#STC_settabindents). StyledTextCtrl#set_tab_indents
+
+  *set_tab_indents*(%(arg-type)Boolean% tabIndents)
+
+Sets whether a tab pressed when caret is within indentation indents.
+
+h3(#STC_settabwidth). StyledTextCtrl#set_tab_width
+
+  *set_tab_width*(%(arg-type)Integer% tabWidth)
+
+Change the visible size of a tab to be a multiple of the width of a space character.
+
+h3(#STC_setusetabs). StyledTextCtrl#set_use_tabs
+
+  *set_use_tabs*(%(arg-type)Boolean% useTabs)
+
+Indentation will only use space characters if useTabs is false, otherwise     it will use a combination of tabs and spaces.
+
+
+
+h2(#markers). Markers
+
+* "StyledTextCtrl.marker_add":#STC_markeradd
+* "StyledTextCtrl.marker_add_set":#STC_markeraddset
+* "StyledTextCtrl.marker_define":#STC_markerdefine
+* "StyledTextCtrl.marker_define_bitmap":#STC_markerdefinebitmap
+* "StyledTextCtrl.marker_delete":#STC_markerdelete
+* "StyledTextCtrl.marker_delete_all":#STC_markerdeleteall
+* "StyledTextCtrl.marker_delete_handle":#STC_markerdeletehandle
+* "StyledTextCtrl.marker_get":#STC_markerget
+* "StyledTextCtrl.marker_line_from_handle":#STC_markerlinefromhandle
+* "StyledTextCtrl.marker_next":#STC_markernext
+* "StyledTextCtrl.marker_previous":#STC_markerprevious
+* "StyledTextCtrl.marker_set_alpha":#STC_markersetalpha
+* "StyledTextCtrl.marker_set_background":#STC_markersetbackground
+* "StyledTextCtrl.marker_set_foreground":#STC_markersetforeground
+
+h3(#STC_markeradd). StyledTextCtrl#marker_add
+
+ Integer *marker_add*(%(arg-type)Integer% line, %(arg-type)Integer% markerNumber)
+
+Add a marker to a line, returning an ID which can be used to find or delete the marker.
+
+h3(#STC_markeraddset). StyledTextCtrl#marker_add_set
+
+  *marker_add_set*(%(arg-type)Integer% line, %(arg-type)Integer% set)
+
+Add a set of markers to a line.
+
+h3(#STC_markerdefine). StyledTextCtrl#marker_define
+
+  *marker_define*(%(arg-type)Integer% markerNumber, %(arg-type)Integer% markerSymbol, %(arg-type)"Colour":colour.html% foreground, %(arg-type)"Colour":colour.html% background)
+
+Set the symbol used for a particular marker number,     and optionally the fore and background colours.
+
+h3(#STC_markerdefinebitmap). StyledTextCtrl#marker_define_bitmap
+
+  *marker_define_bitmap*(%(arg-type)Integer% markerNumber, %(arg-type)"Bitmap":bitmap.html% bmp)
+
+Define a marker from a bitmap
+
+h3(#STC_markerdelete). StyledTextCtrl#marker_delete
+
+  *marker_delete*(%(arg-type)Integer% line, %(arg-type)Integer% markerNumber)
+
+Delete a marker from a line.
+
+h3(#STC_markerdeleteall). StyledTextCtrl#marker_delete_all
+
+  *marker_delete_all*(%(arg-type)Integer% markerNumber)
+
+Delete all markers with a particular number from all lines.
+
+h3(#STC_markerdeletehandle). StyledTextCtrl#marker_delete_handle
+
+  *marker_delete_handle*(%(arg-type)Integer% handle)
+
+Delete a marker.
+
+h3(#STC_markerget). StyledTextCtrl#marker_get
+
+ Integer *marker_get*(%(arg-type)Integer% line)
+
+Get a bit mask of all the markers set on a line.
+
+h3(#STC_markerlinefromhandle). StyledTextCtrl#marker_line_from_handle
+
+ Integer *marker_line_from_handle*(%(arg-type)Integer% handle)
+
+Retrieve the line number at which a particular marker is located.
+
+h3(#STC_markernext). StyledTextCtrl#marker_next
+
+ Integer *marker_next*(%(arg-type)Integer% lineStart, %(arg-type)Integer% markerMask)
+
+Find the next line after lineStart that includes a marker in mask.
+
+h3(#STC_markerprevious). StyledTextCtrl#marker_previous
+
+ Integer *marker_previous*(%(arg-type)Integer% lineStart, %(arg-type)Integer% markerMask)
+
+Find the previous line before lineStart that includes a marker in mask.
+
+h3(#STC_markersetalpha). StyledTextCtrl#marker_set_alpha
+
+  *marker_set_alpha*(%(arg-type)Integer% markerNumber, %(arg-type)Integer% alpha)
+
+Set the alpha used for a marker that is drawn in the text area, not the margin.
+
+h3(#STC_markersetbackground). StyledTextCtrl#marker_set_background
+
+  *marker_set_background*(%(arg-type)Integer% markerNumber, %(arg-type)"Colour":colour.html% back)
+
+Set the background colour used for a particular marker number.
+
+h3(#STC_markersetforeground). StyledTextCtrl#marker_set_foreground
+
+  *marker_set_foreground*(%(arg-type)Integer% markerNumber, %(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour used for a particular marker number.
+
+
+
+h2(#margins). Margins
+
+* "StyledTextCtrl.get_margin_left":#STC_getmarginleft
+* "StyledTextCtrl.get_margin_mask":#STC_getmarginmask
+* "StyledTextCtrl.get_margin_right":#STC_getmarginright
+* "StyledTextCtrl.get_margin_sensitive":#STC_getmarginsensitive
+* "StyledTextCtrl.get_margin_type":#STC_getmargintype
+* "StyledTextCtrl.get_margin_width":#STC_getmarginwidth
+* "StyledTextCtrl.set_margin_left":#STC_setmarginleft
+* "StyledTextCtrl.set_margin_mask":#STC_setmarginmask
+* "StyledTextCtrl.set_margin_right":#STC_setmarginright
+* "StyledTextCtrl.set_margin_sensitive":#STC_setmarginsensitive
+* "StyledTextCtrl.set_margin_type":#STC_setmargintype
+* "StyledTextCtrl.set_margin_width":#STC_setmarginwidth
+* "StyledTextCtrl.set_margins":#STC_setmargins
+
+h3(#STC_getmarginleft). StyledTextCtrl#get_margin_left
+
+ Integer *get_margin_left*()
+
+Returns the size in pixels of the left margin.
+
+h3(#STC_getmarginmask). StyledTextCtrl#get_margin_mask
+
+ Integer *get_margin_mask*(%(arg-type)Integer% margin)
+
+Retrieve the marker mask of a margin.
+
+h3(#STC_getmarginright). StyledTextCtrl#get_margin_right
+
+ Integer *get_margin_right*()
+
+Returns the size in pixels of the right margin.
+
+h3(#STC_getmarginsensitive). StyledTextCtrl#get_margin_sensitive
+
+ Boolean *get_margin_sensitive*(%(arg-type)Integer% margin)
+
+Retrieve the mouse click sensitivity of a margin.
+
+h3(#STC_getmargintype). StyledTextCtrl#get_margin_type
+
+ Integer *get_margin_type*(%(arg-type)Integer% margin)
+
+Retrieve the type of a margin.
+
+h3(#STC_getmarginwidth). StyledTextCtrl#get_margin_width
+
+ Integer *get_margin_width*(%(arg-type)Integer% margin)
+
+Retrieve the width of a margin in pixels.
+
+h3(#STC_setmarginleft). StyledTextCtrl#set_margin_left
+
+  *set_margin_left*(%(arg-type)Integer% pixelWidth)
+
+Sets the size in pixels of the left margin.
+
+h3(#STC_setmarginmask). StyledTextCtrl#set_margin_mask
+
+  *set_margin_mask*(%(arg-type)Integer% margin, %(arg-type)Integer% mask)
+
+Set a mask that determines which markers are displayed in a margin.
+
+h3(#STC_setmarginright). StyledTextCtrl#set_margin_right
+
+  *set_margin_right*(%(arg-type)Integer% pixelWidth)
+
+Sets the size in pixels of the right margin.
+
+h3(#STC_setmarginsensitive). StyledTextCtrl#set_margin_sensitive
+
+  *set_margin_sensitive*(%(arg-type)Integer% margin, %(arg-type)Boolean% sensitive)
+
+Make a margin sensitive or insensitive to mouse clicks.
+
+h3(#STC_setmargintype). StyledTextCtrl#set_margin_type
+
+  *set_margin_type*(%(arg-type)Integer% margin, %(arg-type)Integer% marginType)
+
+Set a margin to be either numeric or symbolic.
+
+h3(#STC_setmarginwidth). StyledTextCtrl#set_margin_width
+
+  *set_margin_width*(%(arg-type)Integer% margin, %(arg-type)Integer% pixelWidth)
+
+Set the width of a margin to a width expressed in pixels.
+
+h3(#STC_setmargins). StyledTextCtrl#set_margins
+
+  *set_margins*(%(arg-type)Integer% left, %(arg-type)Integer% right)
+
+Set the left and right margin in the edit area, measured in pixels.
+
+
+
+h2(#long_line_markers). Long line markers
+
+* "StyledTextCtrl.get_edge_colour":#STC_getedgecolour
+* "StyledTextCtrl.get_edge_column":#STC_getedgecolumn
+* "StyledTextCtrl.get_edge_mode":#STC_getedgemode
+* "StyledTextCtrl.set_edge_colour":#STC_setedgecolour
+* "StyledTextCtrl.set_edge_column":#STC_setedgecolumn
+* "StyledTextCtrl.set_edge_mode":#STC_setedgemode
+
+h3(#STC_getedgecolour). StyledTextCtrl#get_edge_colour
+
+ "Colour":colour.html *get_edge_colour*()
+
+Retrieve the colour used in edge indication.
+
+h3(#STC_getedgecolumn). StyledTextCtrl#get_edge_column
+
+ Integer *get_edge_column*()
+
+Retrieve the column number which text should be kept within.
+
+h3(#STC_getedgemode). StyledTextCtrl#get_edge_mode
+
+ Integer *get_edge_mode*()
+
+Retrieve the edge highlight mode.
+
+h3(#STC_setedgecolour). StyledTextCtrl#set_edge_colour
+
+  *set_edge_colour*(%(arg-type)"Colour":colour.html% edgeColour)
+
+Change the colour used in edge indication.
+
+h3(#STC_setedgecolumn). StyledTextCtrl#set_edge_column
+
+  *set_edge_column*(%(arg-type)Integer% column)
+
+Set the column number of the edge.     If text goes past the edge then it is highlighted.
+
+h3(#STC_setedgemode). StyledTextCtrl#set_edge_mode
+
+  *set_edge_mode*(%(arg-type)Integer% mode)
+
+The edge may be displayed by a line (EDGE_LINE) or by highlighting text that     goes beyond it (EDGE_BACKGROUND) or not displayed at all (EDGE_NONE).
+
+
+
+h2(#folding). Folding
+
+* "StyledTextCtrl.doc_line_from_visible":#STC_doclinefromvisible
+* "StyledTextCtrl.ensure_visible":#STC_ensurevisible
+* "StyledTextCtrl.ensure_visible_enforce_policy":#STC_ensurevisibleenforcepolicy
+* "StyledTextCtrl.get_fold_expanded":#STC_getfoldexpanded
+* "StyledTextCtrl.get_fold_level":#STC_getfoldlevel
+* "StyledTextCtrl.get_fold_parent":#STC_getfoldparent
+* "StyledTextCtrl.get_last_child":#STC_getlastchild
+* "StyledTextCtrl.get_line_visible":#STC_getlinevisible
+* "StyledTextCtrl.hide_lines":#STC_hidelines
+* "StyledTextCtrl.set_fold_expanded":#STC_setfoldexpanded
+* "StyledTextCtrl.set_fold_flags":#STC_setfoldflags
+* "StyledTextCtrl.set_fold_level":#STC_setfoldlevel
+* "StyledTextCtrl.set_fold_margin_colour":#STC_setfoldmargincolour
+* "StyledTextCtrl.set_fold_margin_hi_colour":#STC_setfoldmarginhicolour
+* "StyledTextCtrl.show_lines":#STC_showlines
+* "StyledTextCtrl.toggle_fold":#STC_togglefold
+* "StyledTextCtrl.visible_from_doc_line":#STC_visiblefromdocline
+
+h3(#STC_doclinefromvisible). StyledTextCtrl#doc_line_from_visible
+
+ Integer *doc_line_from_visible*(%(arg-type)Integer% lineDisplay)
+
+Find the document line of a display line taking hidden lines into account.
+
+h3(#STC_ensurevisible). StyledTextCtrl#ensure_visible
+
+  *ensure_visible*(%(arg-type)Integer% line)
+
+Ensure a particular line is visible by expanding any header line hiding it.
+
+h3(#STC_ensurevisibleenforcepolicy). StyledTextCtrl#ensure_visible_enforce_policy
+
+  *ensure_visible_enforce_policy*(%(arg-type)Integer% line)
+
+Ensure a particular line is visible by expanding any header line hiding it.     Use the currently set visibility policy to determine which range to display.
+
+h3(#STC_getfoldexpanded). StyledTextCtrl#get_fold_expanded
+
+ Boolean *get_fold_expanded*(%(arg-type)Integer% line)
+
+Is a header line expanded?
+
+h3(#STC_getfoldlevel). StyledTextCtrl#get_fold_level
+
+ Integer *get_fold_level*(%(arg-type)Integer% line)
+
+Retrieve the fold level of a line.
+
+h3(#STC_getfoldparent). StyledTextCtrl#get_fold_parent
+
+ Integer *get_fold_parent*(%(arg-type)Integer% line)
+
+Find the parent line of a child line.
+
+h3(#STC_getlastchild). StyledTextCtrl#get_last_child
+
+ Integer *get_last_child*(%(arg-type)Integer% line, %(arg-type)Integer% level)
+
+Find the last child line of a header line.
+
+h3(#STC_getlinevisible). StyledTextCtrl#get_line_visible
+
+ Boolean *get_line_visible*(%(arg-type)Integer% line)
+
+Is a line visible?
+
+h3(#STC_hidelines). StyledTextCtrl#hide_lines
+
+  *hide_lines*(%(arg-type)Integer% lineStart, %(arg-type)Integer% lineEnd)
+
+Make a range of lines invisible.
+
+h3(#STC_setfoldexpanded). StyledTextCtrl#set_fold_expanded
+
+  *set_fold_expanded*(%(arg-type)Integer% line, %(arg-type)Boolean% expanded)
+
+Show the children of a header line.
+
+h3(#STC_setfoldflags). StyledTextCtrl#set_fold_flags
+
+  *set_fold_flags*(%(arg-type)Integer% flags)
+
+Set some style options for folding.
+
+h3(#STC_setfoldlevel). StyledTextCtrl#set_fold_level
+
+  *set_fold_level*(%(arg-type)Integer% line, %(arg-type)Integer% level)
+
+Set the fold level of a line.     This encodes an integer level along with flags indicating whether the     line is a header and whether it is effectively white space.
+
+h3(#STC_setfoldmargincolour). StyledTextCtrl#set_fold_margin_colour
+
+  *set_fold_margin_colour*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
+
+Set the colours used as a chequerboard pattern in the fold margin
+
+h3(#STC_setfoldmarginhicolour). StyledTextCtrl#set_fold_margin_hi_colour
+
+  *set_fold_margin_hi_colour*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
+
+
+h3(#STC_showlines). StyledTextCtrl#show_lines
+
+  *show_lines*(%(arg-type)Integer% lineStart, %(arg-type)Integer% lineEnd)
+
+Make a range of lines visible.
+
+h3(#STC_togglefold). StyledTextCtrl#toggle_fold
+
+  *toggle_fold*(%(arg-type)Integer% line)
+
+Switch a header line between expanded and contracted.
+
+h3(#STC_visiblefromdocline). StyledTextCtrl#visible_from_doc_line
+
+ Integer *visible_from_doc_line*(%(arg-type)Integer% line)
+
+Find the display line of a document line taking hidden lines into account.
+
+
+
+h2(#brace_matching_and_highlighting). Brace matching and highlighting
+
+* "StyledTextCtrl.brace_bad_light":#STC_bracebadlight
+* "StyledTextCtrl.brace_highlight":#STC_bracehighlight
+* "StyledTextCtrl.brace_match":#STC_bracematch
+
+h3(#STC_bracebadlight). StyledTextCtrl#brace_bad_light
+
+  *brace_bad_light*(%(arg-type)Integer% pos)
+
+Highlight the character at a position indicating there is no matching brace.
+
+h3(#STC_bracehighlight). StyledTextCtrl#brace_highlight
+
+  *brace_highlight*(%(arg-type)Integer% pos1, %(arg-type)Integer% pos2)
+
+Highlight the characters at two positions.
+
+h3(#STC_bracematch). StyledTextCtrl#brace_match
+
+ Integer *brace_match*(%(arg-type)Integer% pos)
+
+Find the position of a matching brace or INVALID_POSITION if no match.
+
+
+
+h2(#autocompletion). Autocompletion
+
+* "StyledTextCtrl.auto_comp_active":#STC_autocompactive
+* "StyledTextCtrl.auto_comp_cancel":#STC_autocompcancel
+* "StyledTextCtrl.auto_comp_complete":#STC_autocompcomplete
+* "StyledTextCtrl.auto_comp_get_auto_hide":#STC_autocompgetautohide
+* "StyledTextCtrl.auto_comp_get_cancel_at_start":#STC_autocompgetcancelatstart
+* "StyledTextCtrl.auto_comp_get_choose_single":#STC_autocompgetchoosesingle
+* "StyledTextCtrl.auto_comp_get_current":#STC_autocompgetcurrent
+* "StyledTextCtrl.auto_comp_get_drop_rest_of_word":#STC_autocompgetdroprestofword
+* "StyledTextCtrl.auto_comp_get_ignore_case":#STC_autocompgetignorecase
+* "StyledTextCtrl.auto_comp_get_max_height":#STC_autocompgetmaxheight
+* "StyledTextCtrl.auto_comp_get_max_width":#STC_autocompgetmaxwidth
+* "StyledTextCtrl.auto_comp_get_separator":#STC_autocompgetseparator
+* "StyledTextCtrl.auto_comp_get_type_separator":#STC_autocompgettypeseparator
+* "StyledTextCtrl.auto_comp_pos_start":#STC_autocompposstart
+* "StyledTextCtrl.auto_comp_select":#STC_autocompselect
+* "StyledTextCtrl.auto_comp_set_auto_hide":#STC_autocompsetautohide
+* "StyledTextCtrl.auto_comp_set_cancel_at_start":#STC_autocompsetcancelatstart
+* "StyledTextCtrl.auto_comp_set_choose_single":#STC_autocompsetchoosesingle
+* "StyledTextCtrl.auto_comp_set_drop_rest_of_word":#STC_autocompsetdroprestofword
+* "StyledTextCtrl.auto_comp_set_fill_ups":#STC_autocompsetfillups
+* "StyledTextCtrl.auto_comp_set_ignore_case":#STC_autocompsetignorecase
+* "StyledTextCtrl.auto_comp_set_max_height":#STC_autocompsetmaxheight
+* "StyledTextCtrl.auto_comp_set_max_width":#STC_autocompsetmaxwidth
+* "StyledTextCtrl.auto_comp_set_separator":#STC_autocompsetseparator
+* "StyledTextCtrl.auto_comp_set_type_separator":#STC_autocompsettypeseparator
+* "StyledTextCtrl.auto_comp_show":#STC_autocompshow
+* "StyledTextCtrl.auto_comp_stops":#STC_autocompstops
+* "StyledTextCtrl.clear_registered_images":#STC_clearregisteredimages
+* "StyledTextCtrl.register_image":#STC_registerimage
+* "StyledTextCtrl.user_list_show":#STC_userlistshow
+
+h3(#STC_autocompactive). StyledTextCtrl#auto_comp_active
+
+ Boolean *auto_comp_active*()
+
+Is there an auto-completion list visible?
+
+h3(#STC_autocompcancel). StyledTextCtrl#auto_comp_cancel
+
+  *auto_comp_cancel*()
+
+Remove the auto-completion list from the screen.
+
+h3(#STC_autocompcomplete). StyledTextCtrl#auto_comp_complete
+
+  *auto_comp_complete*()
+
+User has selected an item so remove the list and insert the selection.
+
+h3(#STC_autocompgetautohide). StyledTextCtrl#auto_comp_get_auto_hide
+
+ Boolean *auto_comp_get_auto_hide*()
+
+Retrieve whether or not autocompletion is hidden automatically when nothing matches.
+
+h3(#STC_autocompgetcancelatstart). StyledTextCtrl#auto_comp_get_cancel_at_start
+
+ Boolean *auto_comp_get_cancel_at_start*()
+
+Retrieve whether auto-completion cancelled by backspacing before start.
+
+h3(#STC_autocompgetchoosesingle). StyledTextCtrl#auto_comp_get_choose_single
+
+ Boolean *auto_comp_get_choose_single*()
+
+Retrieve whether a single item auto-completion list automatically choose the item.
+
+h3(#STC_autocompgetcurrent). StyledTextCtrl#auto_comp_get_current
+
+ Integer *auto_comp_get_current*()
+
+Get currently selected item position in the auto-completion list
+
+h3(#STC_autocompgetdroprestofword). StyledTextCtrl#auto_comp_get_drop_rest_of_word
+
+ Boolean *auto_comp_get_drop_rest_of_word*()
+
+Retrieve whether or not autocompletion deletes any word characters     after the inserted text upon completion.
+
+h3(#STC_autocompgetignorecase). StyledTextCtrl#auto_comp_get_ignore_case
+
+ Boolean *auto_comp_get_ignore_case*()
+
+Retrieve state of ignore case flag.
+
+h3(#STC_autocompgetmaxheight). StyledTextCtrl#auto_comp_get_max_height
+
+ Integer *auto_comp_get_max_height*()
+
+Set the maximum height, in rows, of auto-completion and user lists.
+
+h3(#STC_autocompgetmaxwidth). StyledTextCtrl#auto_comp_get_max_width
+
+ Integer *auto_comp_get_max_width*()
+
+Get the maximum width, in characters, of auto-completion and user lists.
+
+h3(#STC_autocompgetseparator). StyledTextCtrl#auto_comp_get_separator
+
+ Integer *auto_comp_get_separator*()
+
+Retrieve the auto-completion list separator character.
+
+h3(#STC_autocompgettypeseparator). StyledTextCtrl#auto_comp_get_type_separator
+
+ Integer *auto_comp_get_type_separator*()
+
+Retrieve the auto-completion list type-separator character.
+
+h3(#STC_autocompposstart). StyledTextCtrl#auto_comp_pos_start
+
+ Integer *auto_comp_pos_start*()
+
+Retrieve the position of the caret when the auto-completion list was displayed.
+
+h3(#STC_autocompselect). StyledTextCtrl#auto_comp_select
+
+  *auto_comp_select*(%(arg-type)String% text)
+
+Select the item in the auto-completion list that starts with a string.
+
+h3(#STC_autocompsetautohide). StyledTextCtrl#auto_comp_set_auto_hide
+
+  *auto_comp_set_auto_hide*(%(arg-type)Boolean% autoHide)
+
+Set whether or not autocompletion is hidden automatically when nothing matches.
+
+h3(#STC_autocompsetcancelatstart). StyledTextCtrl#auto_comp_set_cancel_at_start
+
+  *auto_comp_set_cancel_at_start*(%(arg-type)Boolean% cancel)
+
+Should the auto-completion list be cancelled if the user backspaces to a     position before where the box was created.
+
+h3(#STC_autocompsetchoosesingle). StyledTextCtrl#auto_comp_set_choose_single
+
+  *auto_comp_set_choose_single*(%(arg-type)Boolean% chooseSingle)
+
+Should a single item auto-completion list automatically choose the item.
+
+h3(#STC_autocompsetdroprestofword). StyledTextCtrl#auto_comp_set_drop_rest_of_word
+
+  *auto_comp_set_drop_rest_of_word*(%(arg-type)Boolean% dropRestOfWord)
+
+Set whether or not autocompletion deletes any word characters     after the inserted text upon completion.
+
+h3(#STC_autocompsetfillups). StyledTextCtrl#auto_comp_set_fill_ups
+
+  *auto_comp_set_fill_ups*(%(arg-type)String% characterSet)
+
+Define a set of characters that when typed will cause the autocompletion to     choose the selected item.
+
+h3(#STC_autocompsetignorecase). StyledTextCtrl#auto_comp_set_ignore_case
+
+  *auto_comp_set_ignore_case*(%(arg-type)Boolean% ignoreCase)
+
+Set whether case is significant when performing auto-completion searches.
+
+h3(#STC_autocompsetmaxheight). StyledTextCtrl#auto_comp_set_max_height
+
+  *auto_comp_set_max_height*(%(arg-type)Integer% rowCount)
+
+Set the maximum height, in rows, of auto-completion and user lists.     The default is 5 rows.
+
+h3(#STC_autocompsetmaxwidth). StyledTextCtrl#auto_comp_set_max_width
+
+  *auto_comp_set_max_width*(%(arg-type)Integer% characterCount)
+
+Set the maximum width, in characters, of auto-completion and user lists.     Set to 0 to autosize to fit longest item, which is the default.
+
+h3(#STC_autocompsetseparator). StyledTextCtrl#auto_comp_set_separator
+
+  *auto_comp_set_separator*(%(arg-type)Integer% separatorCharacter)
+
+Change the separator character in the string setting up an auto-completion list.     Default is space but can be changed if items contain space.
+
+h3(#STC_autocompsettypeseparator). StyledTextCtrl#auto_comp_set_type_separator
+
+  *auto_comp_set_type_separator*(%(arg-type)Integer% separatorCharacter)
+
+Change the type-separator character in the string setting up an auto-completion list.     Default is '?' but can be changed if items contain '?'.
+
+h3(#STC_autocompshow). StyledTextCtrl#auto_comp_show
+
+  *auto_comp_show*(%(arg-type)Integer% lenEntered, %(arg-type)String% itemList)
+
+Display a auto-completion list.     The lenEntered parameter indicates how many characters before     the caret should be used to provide context.
+
+h3(#STC_autocompstops). StyledTextCtrl#auto_comp_stops
+
+  *auto_comp_stops*(%(arg-type)String% characterSet)
+
+Define a set of character that when typed cancel the auto-completion list.
+
+h3(#STC_clearregisteredimages). StyledTextCtrl#clear_registered_images
+
+  *clear_registered_images*()
+
+Clear all the registered images.
+
+h3(#STC_registerimage). StyledTextCtrl#register_image
+
+  *register_image*(%(arg-type)Integer% type, %(arg-type)"Bitmap":bitmap.html% bmp)
+
+Register an image for use in autocompletion lists.
+
+h3(#STC_userlistshow). StyledTextCtrl#user_list_show
+
+  *user_list_show*(%(arg-type)Integer% listType, %(arg-type)String% itemList)
+
+Display a list of strings and send notification when user chooses one.
+
+
+
+h2(#popup_call_tips). Pop-up call tips
+
+* "StyledTextCtrl.call_tip_active":#STC_calltipactive
+* "StyledTextCtrl.call_tip_cancel":#STC_calltipcancel
+* "StyledTextCtrl.call_tip_pos_at_start":#STC_calltipposatstart
+* "StyledTextCtrl.call_tip_set_background":#STC_calltipsetbackground
+* "StyledTextCtrl.call_tip_set_foreground":#STC_calltipsetforeground
+* "StyledTextCtrl.call_tip_set_foreground_highlight":#STC_calltipsetforegroundhighlight
+* "StyledTextCtrl.call_tip_set_highlight":#STC_calltipsethighlight
+* "StyledTextCtrl.call_tip_show":#STC_calltipshow
+* "StyledTextCtrl.call_tip_use_style":#STC_calltipusestyle
+
+h3(#STC_calltipactive). StyledTextCtrl#call_tip_active
+
+ Boolean *call_tip_active*()
+
+Is there an active call tip?
+
+h3(#STC_calltipcancel). StyledTextCtrl#call_tip_cancel
+
+  *call_tip_cancel*()
+
+Remove the call tip from the screen.
+
+h3(#STC_calltipposatstart). StyledTextCtrl#call_tip_pos_at_start
+
+ Integer *call_tip_pos_at_start*()
+
+Retrieve the position where the caret was before displaying the call tip.
+
+h3(#STC_calltipsetbackground). StyledTextCtrl#call_tip_set_background
+
+  *call_tip_set_background*(%(arg-type)"Colour":colour.html% back)
+
+Set the background colour for the call tip.
+
+h3(#STC_calltipsetforeground). StyledTextCtrl#call_tip_set_foreground
+
+  *call_tip_set_foreground*(%(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour for the call tip.
+
+h3(#STC_calltipsetforegroundhighlight). StyledTextCtrl#call_tip_set_foreground_highlight
+
+  *call_tip_set_foreground_highlight*(%(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour for the highlighted part of the call tip.
+
+h3(#STC_calltipsethighlight). StyledTextCtrl#call_tip_set_highlight
+
+  *call_tip_set_highlight*(%(arg-type)Integer% start, %(arg-type)Integer% end)
+
+Highlight a segment of the definition.
+
+h3(#STC_calltipshow). StyledTextCtrl#call_tip_show
+
+  *call_tip_show*(%(arg-type)Integer% pos, %(arg-type)String% definition)
+
+Show a call tip containing a definition near position pos.
+
+h3(#STC_calltipusestyle). StyledTextCtrl#call_tip_use_style
+
+  *call_tip_use_style*(%(arg-type)Integer% tabSize)
+
+Enable use of STYLE_CALLTIP and set call tip tab size in pixels.
+
+
+
+h2(#miscellaneous_view_options). White space, zoom and other view options
+
+* "StyledTextCtrl.get_view_white_space":#STC_getviewwhitespace
+* "StyledTextCtrl.get_zoom":#STC_getzoom
+* "StyledTextCtrl.lines_on_screen":#STC_linesonscreen
+* "StyledTextCtrl.set_view_white_space":#STC_setviewwhitespace
+* "StyledTextCtrl.set_whitespace_background":#STC_setwhitespacebackground
+* "StyledTextCtrl.set_whitespace_foreground":#STC_setwhitespaceforeground
+* "StyledTextCtrl.set_zoom":#STC_setzoom
+* "StyledTextCtrl.zoom_in":#STC_zoomin
+* "StyledTextCtrl.zoom_out":#STC_zoomout
+
+h3(#STC_getviewwhitespace). StyledTextCtrl#get_view_white_space
+
+ Integer *get_view_white_space*()
+
+Are white space characters currently visible?     Returns one of SCWS_* constants.
+
+h3(#STC_getzoom). StyledTextCtrl#get_zoom
+
+ Integer *get_zoom*()
+
+Retrieve the zoom level.
+
+h3(#STC_linesonscreen). StyledTextCtrl#lines_on_screen
+
+ Integer *lines_on_screen*()
+
+Retrieves the number of lines completely visible.
+
+h3(#STC_setviewwhitespace). StyledTextCtrl#set_view_white_space
+
+  *set_view_white_space*(%(arg-type)Integer% viewWS)
+
+Make white space characters invisible, always visible or visible outside indentation.
+
+h3(#STC_setwhitespacebackground). StyledTextCtrl#set_whitespace_background
+
+  *set_whitespace_background*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% back)
+
+Set the background colour of all whitespace and whether to use this setting.
+
+h3(#STC_setwhitespaceforeground). StyledTextCtrl#set_whitespace_foreground
+
+  *set_whitespace_foreground*(%(arg-type)Boolean% useSetting, %(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour of all whitespace and whether to use this setting.
+
+h3(#STC_setzoom). StyledTextCtrl#set_zoom
+
+  *set_zoom*(%(arg-type)Integer% zoom)
+
+Set the zoom level. This number of points is added to the size of all fonts.     It may be positive to magnify or negative to reduce.
+
+h3(#STC_zoomin). StyledTextCtrl#zoom_in
+
+  *zoom_in*()
+
+Magnify the displayed text by increasing the sizes by 1 point.
+
+h3(#STC_zoomout). StyledTextCtrl#zoom_out
+
+  *zoom_out*()
+
+Make the displayed text smaller by decreasing the sizes by 1 point.
+
+
+
+h2(#multiple_views_of_one_document). Multiple views of one document
+
+* "StyledTextCtrl.add_ref_document":#STC_addrefdocument
+* "StyledTextCtrl.create_document":#STC_createdocument
+* "StyledTextCtrl.get_doc_pointer":#STC_getdocpointer
+* "StyledTextCtrl.release_document":#STC_releasedocument
+* "StyledTextCtrl.set_doc_pointer":#STC_setdocpointer
+
+h3(#STC_addrefdocument). StyledTextCtrl#add_ref_document
+
+  *add_ref_document*(%(arg-type)% docPointer)
+
+Extend life of document.
+
+h3(#STC_createdocument). StyledTextCtrl#create_document
+
+  *create_document*()
+
+Create a new document object.     Starts with reference count of 1 and not selected into editor.
+
+h3(#STC_getdocpointer). StyledTextCtrl#get_doc_pointer
+
+  *get_doc_pointer*()
+
+Retrieve a pointer to the document object.
+
+h3(#STC_releasedocument). StyledTextCtrl#release_document
+
+  *release_document*(%(arg-type)% docPointer)
+
+Release a reference to the document, deleting document if it fades to black.
+
+h3(#STC_setdocpointer). StyledTextCtrl#set_doc_pointer
+
+  *set_doc_pointer*(%(arg-type)% docPointer)
+
+Change the document object used.
+
+
+
+h2(#autocompletion). Autocompletion
+
+* "StyledTextCtrl.auto_comp_active":#STC_autocompactive
+* "StyledTextCtrl.auto_comp_cancel":#STC_autocompcancel
+* "StyledTextCtrl.auto_comp_complete":#STC_autocompcomplete
+* "StyledTextCtrl.auto_comp_get_auto_hide":#STC_autocompgetautohide
+* "StyledTextCtrl.auto_comp_get_cancel_at_start":#STC_autocompgetcancelatstart
+* "StyledTextCtrl.auto_comp_get_choose_single":#STC_autocompgetchoosesingle
+* "StyledTextCtrl.auto_comp_get_current":#STC_autocompgetcurrent
+* "StyledTextCtrl.auto_comp_get_drop_rest_of_word":#STC_autocompgetdroprestofword
+* "StyledTextCtrl.auto_comp_get_ignore_case":#STC_autocompgetignorecase
+* "StyledTextCtrl.auto_comp_get_max_height":#STC_autocompgetmaxheight
+* "StyledTextCtrl.auto_comp_get_max_width":#STC_autocompgetmaxwidth
+* "StyledTextCtrl.auto_comp_get_separator":#STC_autocompgetseparator
+* "StyledTextCtrl.auto_comp_get_type_separator":#STC_autocompgettypeseparator
+* "StyledTextCtrl.auto_comp_pos_start":#STC_autocompposstart
+* "StyledTextCtrl.auto_comp_select":#STC_autocompselect
+* "StyledTextCtrl.auto_comp_set_auto_hide":#STC_autocompsetautohide
+* "StyledTextCtrl.auto_comp_set_cancel_at_start":#STC_autocompsetcancelatstart
+* "StyledTextCtrl.auto_comp_set_choose_single":#STC_autocompsetchoosesingle
+* "StyledTextCtrl.auto_comp_set_drop_rest_of_word":#STC_autocompsetdroprestofword
+* "StyledTextCtrl.auto_comp_set_fill_ups":#STC_autocompsetfillups
+* "StyledTextCtrl.auto_comp_set_ignore_case":#STC_autocompsetignorecase
+* "StyledTextCtrl.auto_comp_set_max_height":#STC_autocompsetmaxheight
+* "StyledTextCtrl.auto_comp_set_max_width":#STC_autocompsetmaxwidth
+* "StyledTextCtrl.auto_comp_set_separator":#STC_autocompsetseparator
+* "StyledTextCtrl.auto_comp_set_type_separator":#STC_autocompsettypeseparator
+* "StyledTextCtrl.auto_comp_show":#STC_autocompshow
+* "StyledTextCtrl.auto_comp_stops":#STC_autocompstops
+* "StyledTextCtrl.clear_registered_images":#STC_clearregisteredimages
+* "StyledTextCtrl.register_image":#STC_registerimage
+* "StyledTextCtrl.user_list_show":#STC_userlistshow
+
+h3(#STC_autocompactive). StyledTextCtrl#auto_comp_active
+
+ Boolean *auto_comp_active*()
+
+Is there an auto-completion list visible?
+
+h3(#STC_autocompcancel). StyledTextCtrl#auto_comp_cancel
+
+  *auto_comp_cancel*()
+
+Remove the auto-completion list from the screen.
+
+h3(#STC_autocompcomplete). StyledTextCtrl#auto_comp_complete
+
+  *auto_comp_complete*()
+
+User has selected an item so remove the list and insert the selection.
+
+h3(#STC_autocompgetautohide). StyledTextCtrl#auto_comp_get_auto_hide
+
+ Boolean *auto_comp_get_auto_hide*()
+
+Retrieve whether or not autocompletion is hidden automatically when nothing matches.
+
+h3(#STC_autocompgetcancelatstart). StyledTextCtrl#auto_comp_get_cancel_at_start
+
+ Boolean *auto_comp_get_cancel_at_start*()
+
+Retrieve whether auto-completion cancelled by backspacing before start.
+
+h3(#STC_autocompgetchoosesingle). StyledTextCtrl#auto_comp_get_choose_single
+
+ Boolean *auto_comp_get_choose_single*()
+
+Retrieve whether a single item auto-completion list automatically choose the item.
+
+h3(#STC_autocompgetcurrent). StyledTextCtrl#auto_comp_get_current
+
+ Integer *auto_comp_get_current*()
+
+Get currently selected item position in the auto-completion list
+
+h3(#STC_autocompgetdroprestofword). StyledTextCtrl#auto_comp_get_drop_rest_of_word
+
+ Boolean *auto_comp_get_drop_rest_of_word*()
+
+Retrieve whether or not autocompletion deletes any word characters     after the inserted text upon completion.
+
+h3(#STC_autocompgetignorecase). StyledTextCtrl#auto_comp_get_ignore_case
+
+ Boolean *auto_comp_get_ignore_case*()
+
+Retrieve state of ignore case flag.
+
+h3(#STC_autocompgetmaxheight). StyledTextCtrl#auto_comp_get_max_height
+
+ Integer *auto_comp_get_max_height*()
+
+Set the maximum height, in rows, of auto-completion and user lists.
+
+h3(#STC_autocompgetmaxwidth). StyledTextCtrl#auto_comp_get_max_width
+
+ Integer *auto_comp_get_max_width*()
+
+Get the maximum width, in characters, of auto-completion and user lists.
+
+h3(#STC_autocompgetseparator). StyledTextCtrl#auto_comp_get_separator
+
+ Integer *auto_comp_get_separator*()
+
+Retrieve the auto-completion list separator character.
+
+h3(#STC_autocompgettypeseparator). StyledTextCtrl#auto_comp_get_type_separator
+
+ Integer *auto_comp_get_type_separator*()
+
+Retrieve the auto-completion list type-separator character.
+
+h3(#STC_autocompposstart). StyledTextCtrl#auto_comp_pos_start
+
+ Integer *auto_comp_pos_start*()
+
+Retrieve the position of the caret when the auto-completion list was displayed.
+
+h3(#STC_autocompselect). StyledTextCtrl#auto_comp_select
+
+  *auto_comp_select*(%(arg-type)String% text)
+
+Select the item in the auto-completion list that starts with a string.
+
+h3(#STC_autocompsetautohide). StyledTextCtrl#auto_comp_set_auto_hide
+
+  *auto_comp_set_auto_hide*(%(arg-type)Boolean% autoHide)
+
+Set whether or not autocompletion is hidden automatically when nothing matches.
+
+h3(#STC_autocompsetcancelatstart). StyledTextCtrl#auto_comp_set_cancel_at_start
+
+  *auto_comp_set_cancel_at_start*(%(arg-type)Boolean% cancel)
+
+Should the auto-completion list be cancelled if the user backspaces to a     position before where the box was created.
+
+h3(#STC_autocompsetchoosesingle). StyledTextCtrl#auto_comp_set_choose_single
+
+  *auto_comp_set_choose_single*(%(arg-type)Boolean% chooseSingle)
+
+Should a single item auto-completion list automatically choose the item.
+
+h3(#STC_autocompsetdroprestofword). StyledTextCtrl#auto_comp_set_drop_rest_of_word
+
+  *auto_comp_set_drop_rest_of_word*(%(arg-type)Boolean% dropRestOfWord)
+
+Set whether or not autocompletion deletes any word characters     after the inserted text upon completion.
+
+h3(#STC_autocompsetfillups). StyledTextCtrl#auto_comp_set_fill_ups
+
+  *auto_comp_set_fill_ups*(%(arg-type)String% characterSet)
+
+Define a set of characters that when typed will cause the autocompletion to     choose the selected item.
+
+h3(#STC_autocompsetignorecase). StyledTextCtrl#auto_comp_set_ignore_case
+
+  *auto_comp_set_ignore_case*(%(arg-type)Boolean% ignoreCase)
+
+Set whether case is significant when performing auto-completion searches.
+
+h3(#STC_autocompsetmaxheight). StyledTextCtrl#auto_comp_set_max_height
+
+  *auto_comp_set_max_height*(%(arg-type)Integer% rowCount)
+
+Set the maximum height, in rows, of auto-completion and user lists.     The default is 5 rows.
+
+h3(#STC_autocompsetmaxwidth). StyledTextCtrl#auto_comp_set_max_width
+
+  *auto_comp_set_max_width*(%(arg-type)Integer% characterCount)
+
+Set the maximum width, in characters, of auto-completion and user lists.     Set to 0 to autosize to fit longest item, which is the default.
+
+h3(#STC_autocompsetseparator). StyledTextCtrl#auto_comp_set_separator
+
+  *auto_comp_set_separator*(%(arg-type)Integer% separatorCharacter)
+
+Change the separator character in the string setting up an auto-completion list.     Default is space but can be changed if items contain space.
+
+h3(#STC_autocompsettypeseparator). StyledTextCtrl#auto_comp_set_type_separator
+
+  *auto_comp_set_type_separator*(%(arg-type)Integer% separatorCharacter)
+
+Change the type-separator character in the string setting up an auto-completion list.     Default is '?' but can be changed if items contain '?'.
+
+h3(#STC_autocompshow). StyledTextCtrl#auto_comp_show
+
+  *auto_comp_show*(%(arg-type)Integer% lenEntered, %(arg-type)String% itemList)
+
+Display a auto-completion list.     The lenEntered parameter indicates how many characters before     the caret should be used to provide context.
+
+h3(#STC_autocompstops). StyledTextCtrl#auto_comp_stops
+
+  *auto_comp_stops*(%(arg-type)String% characterSet)
+
+Define a set of character that when typed cancel the auto-completion list.
+
+h3(#STC_clearregisteredimages). StyledTextCtrl#clear_registered_images
+
+  *clear_registered_images*()
+
+Clear all the registered images.
+
+h3(#STC_registerimage). StyledTextCtrl#register_image
+
+  *register_image*(%(arg-type)Integer% type, %(arg-type)"Bitmap":bitmap.html% bmp)
+
+Register an image for use in autocompletion lists.
+
+h3(#STC_userlistshow). StyledTextCtrl#user_list_show
+
+  *user_list_show*(%(arg-type)Integer% listType, %(arg-type)String% itemList)
+
+Display a list of strings and send notification when user chooses one.
+
+
+
+h2(#popup_call_tips). Pop-up call tips
+
+* "StyledTextCtrl.call_tip_active":#STC_calltipactive
+* "StyledTextCtrl.call_tip_cancel":#STC_calltipcancel
+* "StyledTextCtrl.call_tip_pos_at_start":#STC_calltipposatstart
+* "StyledTextCtrl.call_tip_set_background":#STC_calltipsetbackground
+* "StyledTextCtrl.call_tip_set_foreground":#STC_calltipsetforeground
+* "StyledTextCtrl.call_tip_set_foreground_highlight":#STC_calltipsetforegroundhighlight
+* "StyledTextCtrl.call_tip_set_highlight":#STC_calltipsethighlight
+* "StyledTextCtrl.call_tip_show":#STC_calltipshow
+* "StyledTextCtrl.call_tip_use_style":#STC_calltipusestyle
+
+h3(#STC_calltipactive). StyledTextCtrl#call_tip_active
+
+ Boolean *call_tip_active*()
+
+Is there an active call tip?
+
+h3(#STC_calltipcancel). StyledTextCtrl#call_tip_cancel
+
+  *call_tip_cancel*()
+
+Remove the call tip from the screen.
+
+h3(#STC_calltipposatstart). StyledTextCtrl#call_tip_pos_at_start
+
+ Integer *call_tip_pos_at_start*()
+
+Retrieve the position where the caret was before displaying the call tip.
+
+h3(#STC_calltipsetbackground). StyledTextCtrl#call_tip_set_background
+
+  *call_tip_set_background*(%(arg-type)"Colour":colour.html% back)
+
+Set the background colour for the call tip.
+
+h3(#STC_calltipsetforeground). StyledTextCtrl#call_tip_set_foreground
+
+  *call_tip_set_foreground*(%(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour for the call tip.
+
+h3(#STC_calltipsetforegroundhighlight). StyledTextCtrl#call_tip_set_foreground_highlight
+
+  *call_tip_set_foreground_highlight*(%(arg-type)"Colour":colour.html% fore)
+
+Set the foreground colour for the highlighted part of the call tip.
+
+h3(#STC_calltipsethighlight). StyledTextCtrl#call_tip_set_highlight
+
+  *call_tip_set_highlight*(%(arg-type)Integer% start, %(arg-type)Integer% end)
+
+Highlight a segment of the definition.
+
+h3(#STC_calltipshow). StyledTextCtrl#call_tip_show
+
+  *call_tip_show*(%(arg-type)Integer% pos, %(arg-type)String% definition)
+
+Show a call tip containing a definition near position pos.
+
+h3(#STC_calltipusestyle). StyledTextCtrl#call_tip_use_style
+
+  *call_tip_use_style*(%(arg-type)Integer% tabSize)
+
+Enable use of STYLE_CALLTIP and set call tip tab size in pixels.
+
+
+
+h2(#key_bindings). Key Bindings
+
+* "StyledTextCtrl.cmd_key_assign":#STC_cmdkeyassign
+* "StyledTextCtrl.cmd_key_clear":#STC_cmdkeyclear
+* "StyledTextCtrl.cmd_key_clear_all":#STC_cmdkeyclearall
+* "StyledTextCtrl.cmd_key_execute":#STC_cmdkeyexecute
+
+h3(#STC_cmdkeyassign). StyledTextCtrl#cmd_key_assign
+
+  *cmd_key_assign*(%(arg-type)Integer% key, %(arg-type)Integer% modifiers, %(arg-type)Integer% cmd)
+
+When key+modifier combination km is pressed perform msg.
+
+h3(#STC_cmdkeyclear). StyledTextCtrl#cmd_key_clear
+
+  *cmd_key_clear*(%(arg-type)Integer% key, %(arg-type)Integer% modifiers)
+
+When key+modifier combination km is pressed do nothing.
+
+h3(#STC_cmdkeyclearall). StyledTextCtrl#cmd_key_clear_all
+
+  *cmd_key_clear_all*()
+
+Drop all key mappings.
+
+h3(#STC_cmdkeyexecute). StyledTextCtrl#cmd_key_execute
+
+  *cmd_key_execute*(%(arg-type)Integer% cmd)
+
+Perform one of the operations defined by the wxSTC_CMD_* constants.
+
+
+
+h2(#keyboard_commands_functions). Keyboard Commands Functions
+
+* "StyledTextCtrl.back_tab":#STC_backtab
+* "StyledTextCtrl.cancel":#STC_cancel
+* "StyledTextCtrl.char_left":#STC_charleft
+* "StyledTextCtrl.char_left_extend":#STC_charleftextend
+* "StyledTextCtrl.char_left_rect_extend":#STC_charleftrectextend
+* "StyledTextCtrl.char_right":#STC_charright
+* "StyledTextCtrl.char_right_extend":#STC_charrightextend
+* "StyledTextCtrl.char_right_rect_extend":#STC_charrightrectextend
+* "StyledTextCtrl.del_line_left":#STC_dellineleft
+* "StyledTextCtrl.del_line_right":#STC_dellineright
+* "StyledTextCtrl.del_word_left":#STC_delwordleft
+* "StyledTextCtrl.del_word_right":#STC_delwordright
+* "StyledTextCtrl.delete_back":#STC_deleteback
+* "StyledTextCtrl.delete_back_not_line":#STC_deletebacknotline
+* "StyledTextCtrl.document_end":#STC_documentend
+* "StyledTextCtrl.document_end_extend":#STC_documentendextend
+* "StyledTextCtrl.document_start":#STC_documentstart
+* "StyledTextCtrl.document_start_extend":#STC_documentstartextend
+* "StyledTextCtrl.edit_toggle_overtype":#STC_edittoggleovertype
+* "StyledTextCtrl.form_feed":#STC_formfeed
+* "StyledTextCtrl.home":#STC_home
+* "StyledTextCtrl.home_display":#STC_homedisplay
+* "StyledTextCtrl.home_display_extend":#STC_homedisplayextend
+* "StyledTextCtrl.home_extend":#STC_homeextend
+* "StyledTextCtrl.home_rect_extend":#STC_homerectextend
+* "StyledTextCtrl.home_wrap":#STC_homewrap
+* "StyledTextCtrl.home_wrap_extend":#STC_homewrapextend
+* "StyledTextCtrl.line_copy":#STC_linecopy
+* "StyledTextCtrl.line_cut":#STC_linecut
+* "StyledTextCtrl.line_delete":#STC_linedelete
+* "StyledTextCtrl.line_down_extend":#STC_linedownextend
+* "StyledTextCtrl.line_down_rect_extend":#STC_linedownrectextend
+* "StyledTextCtrl.line_duplicate":#STC_lineduplicate
+* "StyledTextCtrl.line_end":#STC_lineend
+* "StyledTextCtrl.line_end_display":#STC_lineenddisplay
+* "StyledTextCtrl.line_end_display_extend":#STC_lineenddisplayextend
+* "StyledTextCtrl.line_end_extend":#STC_lineendextend
+* "StyledTextCtrl.line_end_rect_extend":#STC_lineendrectextend
+* "StyledTextCtrl.line_end_wrap":#STC_lineendwrap
+* "StyledTextCtrl.line_end_wrap_extend":#STC_lineendwrapextend
+* "StyledTextCtrl.line_scroll_down":#STC_linescrolldown
+* "StyledTextCtrl.line_scroll_up":#STC_linescrollup
+* "StyledTextCtrl.line_transpose":#STC_linetranspose
+* "StyledTextCtrl.line_up":#STC_lineup
+* "StyledTextCtrl.line_up_extend":#STC_lineupextend
+* "StyledTextCtrl.line_up_rect_extend":#STC_lineuprectextend
+* "StyledTextCtrl.lower_case":#STC_lowercase
+* "StyledTextCtrl.new_line":#STC_newline
+* "StyledTextCtrl.page_down":#STC_pagedown
+* "StyledTextCtrl.page_down_extend":#STC_pagedownextend
+* "StyledTextCtrl.page_down_rect_extend":#STC_pagedownrectextend
+* "StyledTextCtrl.page_up":#STC_pageup
+* "StyledTextCtrl.page_up_extend":#STC_pageupextend
+* "StyledTextCtrl.page_up_rect_extend":#STC_pageuprectextend
+* "StyledTextCtrl.para_down":#STC_paradown
+* "StyledTextCtrl.para_down_extend":#STC_paradownextend
+* "StyledTextCtrl.para_up":#STC_paraup
+* "StyledTextCtrl.para_up_extend":#STC_paraupextend
+* "StyledTextCtrl.selection_duplicate":#STC_selectionduplicate
+* "StyledTextCtrl.stuttered_page_down":#STC_stutteredpagedown
+* "StyledTextCtrl.stuttered_page_down_extend":#STC_stutteredpagedownextend
+* "StyledTextCtrl.stuttered_page_up":#STC_stutteredpageup
+* "StyledTextCtrl.stuttered_page_up_extend":#STC_stutteredpageupextend
+* "StyledTextCtrl.tab":#STC_tab
+* "StyledTextCtrl.upper_case":#STC_uppercase
+* "StyledTextCtrl.vc_home":#STC_vchome
+* "StyledTextCtrl.vc_home_extend":#STC_vchomeextend
+* "StyledTextCtrl.vc_home_rect_extend":#STC_vchomerectextend
+* "StyledTextCtrl.vc_home_wrap":#STC_vchomewrap
+* "StyledTextCtrl.vc_home_wrap_extend":#STC_vchomewrapextend
+* "StyledTextCtrl.word_left":#STC_wordleft
+* "StyledTextCtrl.word_left_end":#STC_wordleftend
+* "StyledTextCtrl.word_left_end_extend":#STC_wordleftendextend
+* "StyledTextCtrl.word_left_extend":#STC_wordleftextend
+* "StyledTextCtrl.word_part_left":#STC_wordpartleft
+* "StyledTextCtrl.word_part_left_extend":#STC_wordpartleftextend
+* "StyledTextCtrl.word_part_right":#STC_wordpartright
+* "StyledTextCtrl.word_part_right_extend":#STC_wordpartrightextend
+* "StyledTextCtrl.word_right":#STC_wordright
+* "StyledTextCtrl.word_right_end":#STC_wordrightend
+* "StyledTextCtrl.word_right_end_extend":#STC_wordrightendextend
+* "StyledTextCtrl.word_right_extend":#STC_wordrightextend
+
+h3(#STC_backtab). StyledTextCtrl#back_tab
+
+  *back_tab*()
+
+Dedent the selected lines.
+
+h3(#STC_cancel). StyledTextCtrl#cancel
+
+  *cancel*()
+
+Cancel any modes such as call tip or auto-completion list display.
+
+h3(#STC_charleft). StyledTextCtrl#char_left
+
+  *char_left*()
+
+Move caret left one character.
+
+h3(#STC_charleftextend). StyledTextCtrl#char_left_extend
+
+  *char_left_extend*()
+
+Move caret left one character extending selection to new caret position.
+
+h3(#STC_charleftrectextend). StyledTextCtrl#char_left_rect_extend
+
+  *char_left_rect_extend*()
+
+Move caret left one character, extending rectangular selection to new caret position.
+
+h3(#STC_charright). StyledTextCtrl#char_right
+
+  *char_right*()
+
+Move caret right one character.
+
+h3(#STC_charrightextend). StyledTextCtrl#char_right_extend
+
+  *char_right_extend*()
+
+Move caret right one character extending selection to new caret position.
+
+h3(#STC_charrightrectextend). StyledTextCtrl#char_right_rect_extend
+
+  *char_right_rect_extend*()
+
+Move caret right one character, extending rectangular selection to new caret position.
+
+h3(#STC_dellineleft). StyledTextCtrl#del_line_left
+
+  *del_line_left*()
+
+Delete back from the current position to the start of the line.
+
+h3(#STC_dellineright). StyledTextCtrl#del_line_right
+
+  *del_line_right*()
+
+Delete forwards from the current position to the end of the line.
+
+h3(#STC_delwordleft). StyledTextCtrl#del_word_left
+
+  *del_word_left*()
+
+Delete the word to the left of the caret.
+
+h3(#STC_delwordright). StyledTextCtrl#del_word_right
+
+  *del_word_right*()
+
+Delete the word to the right of the caret.
+
+h3(#STC_deleteback). StyledTextCtrl#delete_back
+
+  *delete_back*()
+
+Delete the selection or if no selection, the character before the caret.
+
+h3(#STC_deletebacknotline). StyledTextCtrl#delete_back_not_line
+
+  *delete_back_not_line*()
+
+Delete the selection or if no selection, the character before the caret.     Will not delete the character before at the start of a line.
+
+h3(#STC_documentend). StyledTextCtrl#document_end
+
+  *document_end*()
+
+Move caret to last position in document.
+
+h3(#STC_documentendextend). StyledTextCtrl#document_end_extend
+
+  *document_end_extend*()
+
+Move caret to last position in document extending selection to new caret position.
+
+h3(#STC_documentstart). StyledTextCtrl#document_start
+
+  *document_start*()
+
+Move caret to first position in document.
+
+h3(#STC_documentstartextend). StyledTextCtrl#document_start_extend
+
+  *document_start_extend*()
+
+Move caret to first position in document extending selection to new caret position.
+
+h3(#STC_edittoggleovertype). StyledTextCtrl#edit_toggle_overtype
+
+  *edit_toggle_overtype*()
+
+Switch from insert to overtype mode or the reverse.
+
+h3(#STC_formfeed). StyledTextCtrl#form_feed
+
+  *form_feed*()
+
+Insert a Form Feed character.
+
+h3(#STC_home). StyledTextCtrl#home
+
+  *home*()
+
+Move caret to first position on line.
+
+h3(#STC_homedisplay). StyledTextCtrl#home_display
+
+  *home_display*()
+
+Move caret to first position on display line.
+
+h3(#STC_homedisplayextend). StyledTextCtrl#home_display_extend
+
+  *home_display_extend*()
+
+Move caret to first position on display line extending selection to     new caret position.
+
+h3(#STC_homeextend). StyledTextCtrl#home_extend
+
+  *home_extend*()
+
+Move caret to first position on line extending selection to new caret position.
+
+h3(#STC_homerectextend). StyledTextCtrl#home_rect_extend
+
+  *home_rect_extend*()
+
+Move caret to first position on line, extending rectangular selection to new caret position.
+
+h3(#STC_homewrap). StyledTextCtrl#home_wrap
+
+  *home_wrap*()
+
+These are like their namesakes Home(Extend)?, LineEnd(Extend)?, VCHome(Extend)?     except they behave differently when word-wrap is enabled:     They go first to the start / end of the display line, like (Home|LineEnd)Display     The difference is that, the cursor is already at the point, it goes on to the start     or end of the document line, as appropriate for (Home|LineEnd|VCHome)(Extend)?.
+
+h3(#STC_homewrapextend). StyledTextCtrl#home_wrap_extend
+
+  *home_wrap_extend*()
+
+
+h3(#STC_linecopy). StyledTextCtrl#line_copy
+
+  *line_copy*()
+
+Copy the line containing the caret.
+
+h3(#STC_linecut). StyledTextCtrl#line_cut
+
+  *line_cut*()
+
+Cut the line containing the caret.
+
+h3(#STC_linedelete). StyledTextCtrl#line_delete
+
+  *line_delete*()
+
+Delete the line containing the caret.
+
+h3(#STC_linedownextend). StyledTextCtrl#line_down_extend
+
+  *line_down_extend*()
+
+Move caret down one line extending selection to new caret position.
+
+h3(#STC_linedownrectextend). StyledTextCtrl#line_down_rect_extend
+
+  *line_down_rect_extend*()
+
+Move caret down one line, extending rectangular selection to new caret position.
+
+h3(#STC_lineduplicate). StyledTextCtrl#line_duplicate
+
+  *line_duplicate*()
+
+Duplicate the current line.
+
+h3(#STC_lineend). StyledTextCtrl#line_end
+
+  *line_end*()
+
+Move caret to last position on line.
+
+h3(#STC_lineenddisplay). StyledTextCtrl#line_end_display
+
+  *line_end_display*()
+
+Move caret to last position on display line.
+
+h3(#STC_lineenddisplayextend). StyledTextCtrl#line_end_display_extend
+
+  *line_end_display_extend*()
+
+Move caret to last position on display line extending selection to new     caret position.
+
+h3(#STC_lineendextend). StyledTextCtrl#line_end_extend
+
+  *line_end_extend*()
+
+Move caret to last position on line extending selection to new caret position.
+
+h3(#STC_lineendrectextend). StyledTextCtrl#line_end_rect_extend
+
+  *line_end_rect_extend*()
+
+Move caret to last position on line, extending rectangular selection to new caret position.
+
+h3(#STC_lineendwrap). StyledTextCtrl#line_end_wrap
+
+  *line_end_wrap*()
+
+
+h3(#STC_lineendwrapextend). StyledTextCtrl#line_end_wrap_extend
+
+  *line_end_wrap_extend*()
+
+
+h3(#STC_linescrolldown). StyledTextCtrl#line_scroll_down
+
+  *line_scroll_down*()
+
+Scroll the document down, keeping the caret visible.
+
+h3(#STC_linescrollup). StyledTextCtrl#line_scroll_up
+
+  *line_scroll_up*()
+
+Scroll the document up, keeping the caret visible.
+
+h3(#STC_linetranspose). StyledTextCtrl#line_transpose
+
+  *line_transpose*()
+
+Switch the current line with the previous.
+
+h3(#STC_lineup). StyledTextCtrl#line_up
+
+  *line_up*()
+
+Move caret up one line.
+
+h3(#STC_lineupextend). StyledTextCtrl#line_up_extend
+
+  *line_up_extend*()
+
+Move caret up one line extending selection to new caret position.
+
+h3(#STC_lineuprectextend). StyledTextCtrl#line_up_rect_extend
+
+  *line_up_rect_extend*()
+
+Move caret up one line, extending rectangular selection to new caret position.
+
+h3(#STC_lowercase). StyledTextCtrl#lower_case
+
+  *lower_case*()
+
+Transform the selection to lower case.
+
+h3(#STC_newline). StyledTextCtrl#new_line
+
+  *new_line*()
+
+Insert a new line, may use a CRLF, CR or LF depending on EOL mode.
+
+h3(#STC_pagedown). StyledTextCtrl#page_down
+
+  *page_down*()
+
+Move caret one page down.
+
+h3(#STC_pagedownextend). StyledTextCtrl#page_down_extend
+
+  *page_down_extend*()
+
+Move caret one page down extending selection to new caret position.
+
+h3(#STC_pagedownrectextend). StyledTextCtrl#page_down_rect_extend
+
+  *page_down_rect_extend*()
+
+Move caret one page down, extending rectangular selection to new caret position.
+
+h3(#STC_pageup). StyledTextCtrl#page_up
+
+  *page_up*()
+
+Move caret one page up.
+
+h3(#STC_pageupextend). StyledTextCtrl#page_up_extend
+
+  *page_up_extend*()
+
+Move caret one page up extending selection to new caret position.
+
+h3(#STC_pageuprectextend). StyledTextCtrl#page_up_rect_extend
+
+  *page_up_rect_extend*()
+
+Move caret one page up, extending rectangular selection to new caret position.
+
+h3(#STC_paradown). StyledTextCtrl#para_down
+
+  *para_down*()
+
+Move caret between paragraphs (delimited by empty lines).
+
+h3(#STC_paradownextend). StyledTextCtrl#para_down_extend
+
+  *para_down_extend*()
+
+
+h3(#STC_paraup). StyledTextCtrl#para_up
+
+  *para_up*()
+
+
+h3(#STC_paraupextend). StyledTextCtrl#para_up_extend
+
+  *para_up_extend*()
+
+
+h3(#STC_selectionduplicate). StyledTextCtrl#selection_duplicate
+
+  *selection_duplicate*()
+
+Duplicate the selection. If selection empty duplicate the line containing the caret.
+
+h3(#STC_stutteredpagedown). StyledTextCtrl#stuttered_page_down
+
+  *stuttered_page_down*()
+
+Move caret to bottom of page, or one page down if already at bottom of page.
+
+h3(#STC_stutteredpagedownextend). StyledTextCtrl#stuttered_page_down_extend
+
+  *stuttered_page_down_extend*()
+
+Move caret to bottom of page, or one page down if already at bottom of page, extending selection to new caret position.
+
+h3(#STC_stutteredpageup). StyledTextCtrl#stuttered_page_up
+
+  *stuttered_page_up*()
+
+Move caret to top of page, or one page up if already at top of page.
+
+h3(#STC_stutteredpageupextend). StyledTextCtrl#stuttered_page_up_extend
+
+  *stuttered_page_up_extend*()
+
+Move caret to top of page, or one page up if already at top of page, extending selection to new caret position.
+
+h3(#STC_tab). StyledTextCtrl#tab
+
+  *tab*()
+
+If selection is empty or all on one line replace the selection with a tab character.     If more than one line selected, indent the lines.
+
+h3(#STC_uppercase). StyledTextCtrl#upper_case
+
+  *upper_case*()
+
+Transform the selection to upper case.
+
+h3(#STC_vchome). StyledTextCtrl#vc_home
+
+  *vc_home*()
+
+Move caret to before first visible character on line.     If already there move to first character on line.
+
+h3(#STC_vchomeextend). StyledTextCtrl#vc_home_extend
+
+  *vc_home_extend*()
+
+Like VCHome but extending selection to new caret position.
+
+h3(#STC_vchomerectextend). StyledTextCtrl#vc_home_rect_extend
+
+  *vc_home_rect_extend*()
+
+Move caret to before first visible character on line.     If already there move to first character on line.     In either case, extend rectangular selection to new caret position.
+
+h3(#STC_vchomewrap). StyledTextCtrl#vc_home_wrap
+
+  *vc_home_wrap*()
+
+
+h3(#STC_vchomewrapextend). StyledTextCtrl#vc_home_wrap_extend
+
+  *vc_home_wrap_extend*()
+
+
+h3(#STC_wordleft). StyledTextCtrl#word_left
+
+  *word_left*()
+
+Move caret left one word.
+
+h3(#STC_wordleftend). StyledTextCtrl#word_left_end
+
+  *word_left_end*()
+
+Move caret left one word, position cursor at end of word.
+
+h3(#STC_wordleftendextend). StyledTextCtrl#word_left_end_extend
+
+  *word_left_end_extend*()
+
+Move caret left one word, position cursor at end of word, extending selection to new caret position.
+
+h3(#STC_wordleftextend). StyledTextCtrl#word_left_extend
+
+  *word_left_extend*()
+
+Move caret left one word extending selection to new caret position.
+
+h3(#STC_wordpartleft). StyledTextCtrl#word_part_left
+
+  *word_part_left*()
+
+Move to the previous change in capitalisation.
+
+h3(#STC_wordpartleftextend). StyledTextCtrl#word_part_left_extend
+
+  *word_part_left_extend*()
+
+Move to the previous change in capitalisation extending selection     to new caret position.
+
+h3(#STC_wordpartright). StyledTextCtrl#word_part_right
+
+  *word_part_right*()
+
+Move to the change next in capitalisation.
+
+h3(#STC_wordpartrightextend). StyledTextCtrl#word_part_right_extend
+
+  *word_part_right_extend*()
+
+Move to the next change in capitalisation extending selection     to new caret position.
+
+h3(#STC_wordright). StyledTextCtrl#word_right
+
+  *word_right*()
+
+Move caret right one word.
+
+h3(#STC_wordrightend). StyledTextCtrl#word_right_end
+
+  *word_right_end*()
+
+Move caret right one word, position cursor at end of word.
+
+h3(#STC_wordrightendextend). StyledTextCtrl#word_right_end_extend
+
+  *word_right_end_extend*()
+
+Move caret right one word, position cursor at end of word, extending selection to new caret position.
+
+h3(#STC_wordrightextend). StyledTextCtrl#word_right_extend
+
+  *word_right_extend*()
+
+Move caret right one word extending selection to new caret position.
+
+
+
+h2(#macro_recording). Macro recording
+
+* "StyledTextCtrl.start_record":#STC_startrecord
+* "StyledTextCtrl.stop_record":#STC_stoprecord
+
+h3(#STC_startrecord). StyledTextCtrl#start_record
+
+  *start_record*()
+
+Start notifying the container of all key presses and commands.
+
+h3(#STC_stoprecord). StyledTextCtrl#stop_record
+
+  *stop_record*()
+
+Stop notifying the container of all key presses and commands.
+
+
+
+h2(#load_and_save_to_file). Load and save to file
+
+* "StyledTextCtrl.load_file":#STC_loadfile
+* "StyledTextCtrl.save_file":#STC_savefile
+
+h3(#STC_loadfile). StyledTextCtrl#load_file
+
+ Boolean *load_file*(%(arg-type)String% filename)
+
+Load the contents of filename into the editor
+
+h3(#STC_savefile). StyledTextCtrl#save_file
+
+ Boolean *save_file*(%(arg-type)String% filename)
+
+}     Write the contents of the editor to filename
+
+
+
+h2(#printing). Printing
+
+* "StyledTextCtrl.format_range":#STC_formatrange
+* "StyledTextCtrl.get_print_colour_mode":#STC_getprintcolourmode
+* "StyledTextCtrl.get_print_magnification":#STC_getprintmagnification
+* "StyledTextCtrl.get_print_wrap_mode":#STC_getprintwrapmode
+* "StyledTextCtrl.set_print_colour_mode":#STC_setprintcolourmode
+* "StyledTextCtrl.set_print_magnification":#STC_setprintmagnification
+* "StyledTextCtrl.set_print_wrap_mode":#STC_setprintwrapmode
+
+h3(#STC_formatrange). StyledTextCtrl#format_range
+
+ Integer *format_range*(%(arg-type)Boolean% doDraw, %(arg-type)Integer% startPos, %(arg-type)Integer% endPos, %(arg-type)"DC":dc.html% draw, %(arg-type)"DC":dc.html% target, %(arg-type)"Rect":rect.html% renderRect, %(arg-type)"Rect":rect.html% pageRect)
+
+On Windows, will draw the document into a display context such as a printer.
+
+h3(#STC_getprintcolourmode). StyledTextCtrl#get_print_colour_mode
+
+ Integer *get_print_colour_mode*()
+
+Returns the print colour mode.
+
+h3(#STC_getprintmagnification). StyledTextCtrl#get_print_magnification
+
+ Integer *get_print_magnification*()
+
+Returns the print magnification.
+
+h3(#STC_getprintwrapmode). StyledTextCtrl#get_print_wrap_mode
+
+ Integer *get_print_wrap_mode*()
+
+Is printing line wrapped?
+
+h3(#STC_setprintcolourmode). StyledTextCtrl#set_print_colour_mode
+
+  *set_print_colour_mode*(%(arg-type)Integer% mode)
+
+Modify colours when printing for clearer printed text.
+
+h3(#STC_setprintmagnification). StyledTextCtrl#set_print_magnification
+
+  *set_print_magnification*(%(arg-type)Integer% magnification)
+
+Sets the print magnification added to the point size of each style for printing.
+
+h3(#STC_setprintwrapmode). StyledTextCtrl#set_print_wrap_mode
+
+  *set_print_wrap_mode*(%(arg-type)Integer% mode)
+
+Set printing to line wrapped (SC_WRAP_WORD) or not line wrapped (SC_WRAP_NONE).
+
+
+
+h2(#drag_and_drop). Drag and drop
+
+* "StyledTextCtrl.do_drag_over":#STC_dodragover
+* "StyledTextCtrl.do_drop_text":#STC_dodroptext
+
+h3(#STC_dodragover). StyledTextCtrl#do_drag_over
+
+ "DragResult":dragresult.html *do_drag_over*(%(arg-type)Integer% x, %(arg-type)Integer% y, %(arg-type)"DragResult":dragresult.html% def)
+
+#ifdef STC_USE_DND     Allow for simulating a DnD DragOver
+
+h3(#STC_dodroptext). StyledTextCtrl#do_drop_text
+
+ Boolean *do_drop_text*(%(arg-type)Integer% x, %(arg-type)Integer% y, %(arg-type)String% data)
+
+Allow for simulating a DnD DropText
+
+
+
+h2(#wxruby_interaction). Wxruby interaction
+
+* "StyledTextCtrl.get_mouse_down_captures":#STC_getmousedowncaptures
+* "StyledTextCtrl.get_status":#STC_getstatus
+* "StyledTextCtrl.get_stc_focus":#STC_getstcfocus
+* "StyledTextCtrl.set_mouse_down_captures":#STC_setmousedowncaptures
+* "StyledTextCtrl.set_status":#STC_setstatus
+* "StyledTextCtrl.set_stc_focus":#STC_setstcfocus
+
+h3(#STC_getmousedowncaptures). StyledTextCtrl#get_mouse_down_captures
+
+ Boolean *get_mouse_down_captures*()
+
+Get whether mouse gets captured.
+
+h3(#STC_getstatus). StyledTextCtrl#get_status
+
+ Integer *get_status*()
+
+Get error status.
+
+h3(#STC_getstcfocus). StyledTextCtrl#get_stc_focus
+
+ Boolean *get_stc_focus*()
+
+Get internal focus flag.
+
+h3(#STC_setmousedowncaptures). StyledTextCtrl#set_mouse_down_captures
+
+  *set_mouse_down_captures*(%(arg-type)Boolean% captures)
+
+Set whether the mouse is captured when its button is pressed.
+
+h3(#STC_setstatus). StyledTextCtrl#set_status
+
+  *set_status*(%(arg-type)Integer% statusCode)
+
+Change error status - 0 = OK.
+
+h3(#STC_setstcfocus). StyledTextCtrl#set_stc_focus
+
+  *set_stc_focus*(%(arg-type)Boolean% focus)
+
+Change internal focus flag.
+
+
+
+h2(#event_handling). Event handling
+
+* "StyledTextCtrl.get_last_keydown_processed":#STC_getlastkeydownprocessed
+* "StyledTextCtrl.get_mod_event_mask":#STC_getmodeventmask
+* "StyledTextCtrl.get_mouse_dwell_time":#STC_getmousedwelltime
+* "StyledTextCtrl.set_last_keydown_processed":#STC_setlastkeydownprocessed
+* "StyledTextCtrl.set_mod_event_mask":#STC_setmodeventmask
+* "StyledTextCtrl.set_mouse_dwell_time":#STC_setmousedwelltime
+
+h3(#STC_getlastkeydownprocessed). StyledTextCtrl#get_last_keydown_processed
+
+ Boolean *get_last_keydown_processed*()
+
+Can be used to prevent the EVT_CHAR handler from adding the char
+
+h3(#STC_getmodeventmask). StyledTextCtrl#get_mod_event_mask
+
+ Integer *get_mod_event_mask*()
+
+Get which document modification events are sent to the container.
+
+h3(#STC_getmousedwelltime). StyledTextCtrl#get_mouse_dwell_time
+
+ Integer *get_mouse_dwell_time*()
+
+Retrieve the time the mouse must sit still to generate a mouse dwell event.
+
+h3(#STC_setlastkeydownprocessed). StyledTextCtrl#set_last_keydown_processed
+
+  *set_last_keydown_processed*(%(arg-type)Boolean% val)
+
+}
+
+h3(#STC_setmodeventmask). StyledTextCtrl#set_mod_event_mask
+
+  *set_mod_event_mask*(%(arg-type)Integer% mask)
+
+Set which document modification events are sent to the container.
+
+h3(#STC_setmousedwelltime). StyledTextCtrl#set_mouse_dwell_time
+
+  *set_mouse_dwell_time*(%(arg-type)Integer% periodMilliseconds)
+
+Sets the time the mouse must sit still to generate a mouse dwell event.
+
+
+
+h2(#miscellaneous_other_settings). Miscellaneous other settings
+
+* "StyledTextCtrl.get_buffered_draw":#STC_getbuffereddraw
+* "StyledTextCtrl.get_two_phase_draw":#STC_gettwophasedraw
+* "StyledTextCtrl.get_use_anti_aliasing":#STC_getuseantialiasing
+* "StyledTextCtrl.set_buffered_draw":#STC_setbuffereddraw
+* "StyledTextCtrl.set_chars_default":#STC_setcharsdefault
+* "StyledTextCtrl.set_two_phase_draw":#STC_settwophasedraw
+* "StyledTextCtrl.set_use_anti_aliasing":#STC_setuseantialiasing
+* "StyledTextCtrl.set_whitespace_chars":#STC_setwhitespacechars
+* "StyledTextCtrl.set_word_chars":#STC_setwordchars
+* "StyledTextCtrl.use_pop_up":#STC_usepopup
+
+h3(#STC_getbuffereddraw). StyledTextCtrl#get_buffered_draw
+
+ Boolean *get_buffered_draw*()
+
+Is drawing done first into a buffer or direct to the screen?
+
+h3(#STC_gettwophasedraw). StyledTextCtrl#get_two_phase_draw
+
+ Boolean *get_two_phase_draw*()
+
+Is drawing done in two phases with backgrounds drawn before foregrounds?
+
+h3(#STC_getuseantialiasing). StyledTextCtrl#get_use_anti_aliasing
+
+ Boolean *get_use_anti_aliasing*()
+
+Returns the current UseAntiAliasing setting.
+
+h3(#STC_setbuffereddraw). StyledTextCtrl#set_buffered_draw
+
+  *set_buffered_draw*(%(arg-type)Boolean% buffered)
+
+If drawing is buffered then each line of text is drawn into a bitmap buffer     before drawing it to the screen to avoid flicker.
+
+h3(#STC_setcharsdefault). StyledTextCtrl#set_chars_default
+
+  *set_chars_default*()
+
+Reset the set of characters for whitespace and word characters to the defaults.
+
+h3(#STC_settwophasedraw). StyledTextCtrl#set_two_phase_draw
+
+  *set_two_phase_draw*(%(arg-type)Boolean% twoPhase)
+
+In twoPhaseDraw mode, drawing is performed in two phases, first the background     and then the foreground. This avoids chopping off characters that overlap the next run.
+
+h3(#STC_setuseantialiasing). StyledTextCtrl#set_use_anti_aliasing
+
+  *set_use_anti_aliasing*(%(arg-type)Boolean% useAA)
+
+#endif     Specify whether anti-aliased fonts should be used.  Will have no effect     on some platforms, but on some (wxMac for example) can greatly improve     performance.
+
+h3(#STC_setwhitespacechars). StyledTextCtrl#set_whitespace_chars
+
+  *set_whitespace_chars*(%(arg-type)String% characters)
+
+Set the set of characters making up whitespace for when moving or selecting by word.     Should be called after SetWordChars.
+
+h3(#STC_setwordchars). StyledTextCtrl#set_word_chars
+
+  *set_word_chars*(%(arg-type)String% characters)
+
+Set the set of characters making up words for when moving or selecting by word.     First sets deaults like SetCharsDefault.
+
+h3(#STC_usepopup). StyledTextCtrl#use_pop_up
+
+  *use_pop_up*(%(arg-type)Boolean% allowPopUp)
+
+Set whether a pop up menu is displayed automatically when the user presses     the wrong mouse button.
+
+
+

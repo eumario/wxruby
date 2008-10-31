@@ -1,0 +1,129 @@
+h1(#wxidleevent). Wx::IdleEvent
+
+This class is used for idle events, which are generated when the system becomes
+idle. Note that, unless you do something specifically, the idle events are not
+sent if the system remains idle once it has become it, e.g. only a single idle
+event will be generated until something else resulting in more normal events
+happens and only then is the next idle event sent again. If you need to ensure
+a continuous stream of idle events, you can either use 
+"request_more":#IdleEvent_requestmore method in your handler or call 
+"WakeUpIdle":wakeupidle.html periodically (for example from timer
+event), but note that both of these approaches (and especially the first one)
+increase the system load and so should be avoided if possible.
+
+By default, idle events are sent to all windows (and also 
+"App":app.html, as usual). If this is causing a significant
+overhead in your application, you can call "IdleEvent#set_mode":idleevent.html#IdleEvent_setmode with
+the value IDLE_PROCESS_SPECIFIED, and set the WS_EX_PROCESS_IDLE extra
+window style for every window which should receive idle events.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process an idle event, use this event handler macro to direct input to a member
+function that takes a IdleEvent argument.
+
+
+
+|*evt_idle()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_IDLE event.|
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "UpdateUIEvent":updateuievent.html, 
+"Window#on_internal_idle":window.html#Window_oninternalidle
+
+<div id="methods">
+
+h2. Methods
+
+* "IdleEvent.new":#IdleEvent_new
+* "IdleEvent#can_send":#IdleEvent_cansend
+* "IdleEvent#get_mode":#IdleEvent_getmode
+* "IdleEvent#request_more":#IdleEvent_requestmore
+* "IdleEvent#more_requested":#IdleEvent_morerequested
+* "IdleEvent#set_mode":#IdleEvent_setmode
+
+</div>
+
+
+h3(#IdleEvent_new). IdleEvent.new
+
+h3(#IdleEvent_cansend). IdleEvent#can_send
+
+ Boolean *can_send*(%(arg-type)"Window":window.html% window)
+
+Returns @true@ if it is appropriate to send idle events to
+this window.
+
+This function looks at the mode used (see "IdleEvent#set_mode":idleevent.html#IdleEvent_setmode),
+and the WS_EX_PROCESS_IDLE style in _window_ to determine whether idle events should be sent to
+this window now. By default this will always return @true@ because
+the update mode is initially IDLE_PROCESS_ALL. You can change the mode
+to only send idle events to windows with the WS_EX_PROCESS_IDLE extra window style set.
+
+h4. See also
+
+"IdleEvent#set_mode":idleevent.html#IdleEvent_setmode
+
+h3(#IdleEvent_getmode). IdleEvent#get_mode
+
+ "IdleMode":idlemode.html *get_mode*()
+
+Static function returning a value specifying how Widgets
+will send idle events: to all windows, or only to those which specify that they
+will process the events.
+
+See "IdleEvent#set_mode":idleevent.html#IdleEvent_setmode.
+
+h3(#IdleEvent_requestmore). IdleEvent#request_more
+
+  *request_more*(%(arg-type)Boolean% needMore = true)
+
+Tells Widgets that more processing is required. This function can be called by an OnIdle
+handler for a window or window event handler to indicate that App::OnIdle should
+forward the OnIdle event once more to the application windows. If no window calls this function
+during OnIdle, then the application will remain in a passive event loop (not calling OnIdle) until a
+new event is posted to the application by the windowing system.
+
+h4. See also
+
+"IdleEvent#more_requested":idleevent.html#IdleEvent_morerequested
+
+h3(#IdleEvent_morerequested). IdleEvent#more_requested
+
+ Boolean *more_requested*()
+
+Returns true if the OnIdle function processing this event requested more processing time.
+
+h4. See also
+
+"IdleEvent#request_more":idleevent.html#IdleEvent_requestmore
+
+h3(#IdleEvent_setmode). IdleEvent#set_mode
+
+  *set_mode*(%(arg-type)"IdleMode":idlemode.html% mode)
+
+Static function for specifying how Widgets will send idle events: to
+all windows, or only to those which specify that they
+will process the events.
+
+_mode_ can be one of the following values.
+The default is IDLE_PROCESS_ALL.
+
+
+ enum IdleMode
+ {
+         // Send idle events to all windows
+     IDLE_PROCESS_ALL,
+ 
+         // Send idle events to windows that have
+         // the WS_EX_PROCESS_IDLE flag specified
+     IDLE_PROCESS_SPECIFIED
+ };
+ 
+

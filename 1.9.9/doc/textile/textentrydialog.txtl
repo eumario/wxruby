@@ -1,0 +1,76 @@
+h1(#wxtextentrydialog). Wx::TextEntryDialog
+
+This class represents a dialog that requests a one-line text string from the user.
+It is implemented as a generic Widgets dialog.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"TextEntryDialog overview":textentrydialogoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TextEntryDialog.new":#TextEntryDialog_new
+* "TextEntryDialog#get_value":#TextEntryDialog_getvalue
+* "TextEntryDialog#set_value":#TextEntryDialog_setvalue
+* "TextEntryDialog#show_modal":#TextEntryDialog_showmodal
+
+</div>
+
+
+h3(#TextEntryDialog_new). TextEntryDialog.new
+
+  *TextEntryDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
+                      %(arg-type)String% caption = "Please enter text", 
+                      %(arg-type)String% defaultValue = "", 
+                      %(arg-type)Integer% style = OK CANCEL CENTRE, 
+                      %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
+
+Constructor. Use "TextEntryDialog#show_modal":textentrydialog.html#TextEntryDialog_showmodal to show the dialog.
+
+h4. Parameters
+
+* _parent_ Parent window.
+* _message_ Message to show on the dialog.
+* _defaultValue_ The default value, which may be the empty string.
+* _style_ A dialog style, specifying the buttons (OK, CANCEL)
+and an optional CENTRE style. Additionally, TextCtrl styles (such as
+@TE_PASSWORD@) may be specified here.
+* _pos_ Dialog position.
+
+  *destructor*()
+
+Destructor.
+
+h3(#TextEntryDialog_getvalue). TextEntryDialog#get_value
+
+ String *get_value*()
+
+Returns the text that the user has entered if the user has pressed OK, or the original value
+if the user has pressed Cancel.
+
+h3(#TextEntryDialog_setvalue). TextEntryDialog#set_value
+
+  *set_value*(%(arg-type)String% value)
+
+Sets the default text value.
+
+h3(#TextEntryDialog_showmodal). TextEntryDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning ID_OK if the user pressed OK, and ID_CANCEL
+otherwise.
+
+

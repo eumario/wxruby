@@ -1,0 +1,176 @@
+h1(#wxgraphicspath). Wx::GraphicsPath
+
+A GraphicsPath is a native representation of an geometric path. The contents are specific an private to the respective renderer. Instances are ref counted and can 
+therefore be assigned as usual. The only way to get a valid instance is via a CreatePath call on the graphics context or the renderer instance.
+
+h2. Derived from
+
+"GraphicsObject":graphicsobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GraphicsPath#move_to_point":#GraphicsPath_movetopoint
+* "GraphicsPath#add_arc":#GraphicsPath_addarc
+* "GraphicsPath#add_arc_to_point":#GraphicsPath_addarctopoint
+* "GraphicsPath#add_circle":#GraphicsPath_addcircle
+* "GraphicsPath#add_curve_to_point":#GraphicsPath_addcurvetopoint
+* "GraphicsPath#add_ellipse":#GraphicsPath_addellipse
+* "GraphicsPath#add_line_to_point":#GraphicsPath_addlinetopoint
+* "GraphicsPath#add_path":#GraphicsPath_addpath
+* "GraphicsPath#add_quad_curve_to_point":#GraphicsPath_addquadcurvetopoint
+* "GraphicsPath#add_rectangle":#GraphicsPath_addrectangle
+* "GraphicsPath#add_rounded_rectangle":#GraphicsPath_addroundedrectangle
+* "GraphicsPath#close_subpath":#GraphicsPath_closesubpath
+* "GraphicsPath#contains":#GraphicsPath_contains
+* "GraphicsPath#get_box":#GraphicsPath_getbox
+* "GraphicsPath#get_current_point":#GraphicsPath_getcurrentpoint
+* "GraphicsPath#transform":#GraphicsPath_transform
+* "GraphicsPath#get_native_path":#GraphicsPath_getnativepath
+* "GraphicsPath#un_get_native_path":#GraphicsPath_ungetnativepath
+
+</div>
+
+
+h3(#GraphicsPath_movetopoint). GraphicsPath#move_to_point
+
+  *move_to_point*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y)
+
+  *move_to_point*(%(arg-type)"Point2DDouble":point2ddouble.html% p)
+
+Begins a new subpath at (x,y)
+
+h3(#GraphicsPath_addarc). GraphicsPath#add_arc
+
+  *add_arc*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% r, 
+          %(arg-type)"Double":double.html% startAngle, 
+          %(arg-type)"Double":double.html% endAngle, 
+          %(arg-type)Boolean% clockwise)
+
+Adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle.
+
+  *add_arc*(%(arg-type)"Point2DDouble":point2ddouble.html% c,  %(arg-type)"Double":double.html% r,  %(arg-type)"Double":double.html% startAngle, 
+          %(arg-type)"Double":double.html% endAngle, 
+          %(arg-type)Boolean% clockwise)
+
+h3(#GraphicsPath_addarctopoint). GraphicsPath#add_arc_to_point
+
+  *add_arc_to_point*(%(arg-type)"Double":double.html% x1,  %(arg-type)"Double":double.html% y1,  %(arg-type)"Double":double.html% x2, 
+                   %(arg-type)"Double":double.html% y2, 
+                   %(arg-type)"Double":double.html% r)
+
+Appends a an arc to two tangents connecting (current) to (x1,y1) and (x1,y1) to (x2,y2), also a straight line from (current) to (x1,y1).
+
+h3(#GraphicsPath_addcircle). GraphicsPath#add_circle
+
+  *add_circle*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% r)
+
+Appends a circle around (x,y) with radius r as a new closed subpath.
+
+h3(#GraphicsPath_addcurvetopoint). GraphicsPath#add_curve_to_point
+
+  *add_curve_to_point*(%(arg-type)"Double":double.html% cx1,  %(arg-type)"Double":double.html% cy1,  %(arg-type)"Double":double.html% cx2, 
+                     %(arg-type)"Double":double.html% cy2, 
+                     %(arg-type)"Double":double.html% x, 
+                     %(arg-type)"Double":double.html% y)
+
+Adds a cubic Bezier curve from the current point, using two control points and an end point.
+
+  *add_curve_to_point*(%(arg-type)"Point2DDouble":point2ddouble.html% c1,  %(arg-type)"Point2DDouble":point2ddouble.html% c2, 
+                     %(arg-type)"Point2DDouble":point2ddouble.html% e)
+
+h3(#GraphicsPath_addellipse). GraphicsPath#add_ellipse
+
+  *add_ellipse*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+              %(arg-type)"Double":double.html% h)
+
+Appends an ellipse fitting into the passed in rectangle.
+
+h3(#GraphicsPath_addlinetopoint). GraphicsPath#add_line_to_point
+
+  *add_line_to_point*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y)
+
+Adds a straight line from the current point to (x,y).
+
+  *add_line_to_point*(%(arg-type)"Point2DDouble":point2ddouble.html% p)
+
+h3(#GraphicsPath_addpath). GraphicsPath#add_path
+
+  *add_path*(%(arg-type)"GraphicsPath":graphicspath.html% path)
+
+Adds another path.
+
+h3(#GraphicsPath_addquadcurvetopoint). GraphicsPath#add_quad_curve_to_point
+
+  *add_quad_curve_to_point*(%(arg-type)"Double":double.html% cx,  %(arg-type)"Double":double.html% cy,  %(arg-type)"Double":double.html% x, 
+                          %(arg-type)"Double":double.html% y)
+
+Adds a quadratic Bezier curve from the current point, using a control point and an end point.
+
+h3(#GraphicsPath_addrectangle). GraphicsPath#add_rectangle
+
+  *add_rectangle*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+                %(arg-type)"Double":double.html% h)
+
+Appends a rectangle as a new closed subpath.
+
+h3(#GraphicsPath_addroundedrectangle). GraphicsPath#add_rounded_rectangle
+
+  *add_rounded_rectangle*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+                        %(arg-type)"Double":double.html% h, 
+                        %(arg-type)"Double":double.html% radius)
+
+Appends a rounded rectangle as a new closed subpath.
+
+h3(#GraphicsPath_closesubpath). GraphicsPath#close_subpath
+
+  *close_subpath*()
+
+Closes the current sub-path.
+
+h3(#GraphicsPath_contains). GraphicsPath#contains
+
+ Boolean *contains*(%(arg-type)"Point2DDouble":point2ddouble.html% c,  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
+
+ Boolean *contains*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y, 
+                  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
+
+Returns true if the point is within the path.
+
+h3(#GraphicsPath_getbox). GraphicsPath#get_box
+
+ "Rect2DDouble":rect2ddouble.html *get_box*()
+
+  *get_box*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+          %(arg-type)"Double":double.html% h)
+
+Gets the bounding box enclosing all points (possibly including control points).
+
+h3(#GraphicsPath_getcurrentpoint). GraphicsPath#get_current_point
+
+  *get_current_point*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y)
+
+ "Point2DDouble":point2ddouble.html *get_current_point*()
+
+Gets the last point of the current path, (0,0) if not yet set.
+
+h3(#GraphicsPath_transform). GraphicsPath#transform
+
+  *transform*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% matrix)
+
+Transforms each point of this path by the matrix.
+
+h3(#GraphicsPath_getnativepath). GraphicsPath#get_native_path
+
+  *get_native_path*()
+
+Returns the native path (CGPathRef for Core Graphics, Path pointer for GDIPlus and a cairo_path_t pointer for cairo).
+
+h3(#GraphicsPath_ungetnativepath). GraphicsPath#un_get_native_path
+
+  *un_get_native_path*(%(arg-type)% p)
+
+Gives back the native path returned by GetNativePath() because there might be some deallocations necessary (eg on cairo the native path returned by 
+GetNativePath is newly allocated each time).
+

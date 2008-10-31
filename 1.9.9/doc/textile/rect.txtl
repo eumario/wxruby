@@ -1,0 +1,398 @@
+h1(#wxrect). Wx::Rect
+
+A class for manipulating rectangles.
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"Point":point.html, "Size":size.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Rect.new":#Rect_new
+* "Rect#x":#Rect_x
+* "Rect#y":#Rect_y
+* "Rect#width":#Rect_width
+* "Rect#height":#Rect_height
+* "Rect#centre_in":#Rect_centrein
+* "Rect#contains":#Rect_contains
+* "Rect#deflate":#Rect_deflate
+* "Rect#get_bottom":#Rect_getbottom
+* "Rect#get_height":#Rect_getheight
+* "Rect#get_left":#Rect_getleft
+* "Rect#get_position":#Rect_getposition
+* "Rect#get_top_left":#Rect_gettopleft
+* "Rect#get_top_right":#Rect_gettopright
+* "Rect#get_bottom_left":#Rect_getbottomleft
+* "Rect#get_bottom_right":#Rect_getbottomright
+* "Rect#get_right":#Rect_getright
+* "Rect#get_size":#Rect_getsize
+* "Rect#get_top":#Rect_gettop
+* "Rect#get_width":#Rect_getwidth
+* "Rect#get_x":#Rect_getx
+* "Rect#get_y":#Rect_gety
+* "Rect#inflate":#Rect_inflate
+* "Rect#intersects":#Rect_intersects
+* "Rect#is_empty":#Rect_isempty
+* "Rect#offset":#Rect_offset
+* "Rect#set_height":#Rect_setheight
+* "Rect#set_size":#Rect_setsize
+* "Rect#set_width":#Rect_setwidth
+* "Rect#set_x":#Rect_setx
+* "Rect#set_y":#Rect_sety
+* "Rect#union":#Rect_union
+
+</div>
+
+
+
+h3(#Rect_new). Rect.new
+
+  *Rect.new*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+           %(arg-type)Integer% height)
+
+Creates a Rect object from x, y, width and height values.
+
+  *Rect.new*(%(arg-type)"Point":point.html% topLeft,  %(arg-type)"Point":point.html% bottomRight)
+
+Creates a Rect object from top-left and bottom-right points.
+
+  *Rect.new*(%(arg-type)"Point":point.html% pos,  %(arg-type)"Size":size.html% size)
+
+Creates a Rect object from position and size values.
+
+  *Rect.new*(%(arg-type)"Size":size.html% size)
+
+Creates a Rect object from size values at the origin.
+
+
+h3(#Rect_x). Rect#x
+
+intx
+
+x coordinate of the top-level corner of the rectangle.
+
+
+h3(#Rect_y). Rect#y
+
+inty
+
+y coordinate of the top-level corner of the rectangle.
+
+
+h3(#Rect_width). Rect#width
+
+intwidth
+
+Width member.
+
+
+h3(#Rect_height). Rect#height
+
+intheight
+
+Height member.
+
+
+h3(#Rect_centrein). Rect#centre_in
+
+ "Rect":rect.html *centre_in*(%(arg-type)"Rect":rect.html% r,  %(arg-type)Integer% dir = BOTH)
+
+ "Rect":rect.html *center_in*(%(arg-type)"Rect":rect.html% r,  %(arg-type)Integer% dir = BOTH)
+
+Returns the rectangle having the same size as this one but centered relatively
+to the given rectangle r. By default, rectangle is centred in both
+directions but if dir includes only @VERTICAL@ or only 
+@HORIZONTAL@ flag, then it is only centered in this direction while
+the other component of its position remains unchanged.
+
+
+h3(#Rect_contains). Rect#contains
+
+ Boolean *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+ Boolean *contains*(%(arg-type)"Point":point.html% pt)
+
+Returns @true@ if the given point is inside the rectangle (or on its
+boundary) and @false@ otherwise.
+
+ Boolean *contains*(%(arg-type)"Rect":rect.html% rect)
+
+Returns  if the given rectangle is completely inside this rectangle
+(or touches its boundary) and  otherwise.
+
+
+h3(#Rect_deflate). Rect#deflate
+
+  *deflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
+
+  *deflate*(%(arg-type)"Size":size.html% diff)
+
+  *deflate*(%(arg-type)Integer% diff)
+
+ "Rect":rect.html *deflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
+
+Decrease the rectangle size.
+
+This method is the opposite from "Inflate":rectinflate.html:
+Deflate(a, b) is equivalent to Inflate(-a, -b).
+Please refer to "Inflate":rectinflate.html for full description.
+
+h4. See also
+
+"Inflate":rectinflate.html
+
+
+h3(#Rect_getbottom). Rect#get_bottom
+
+ Integer *get_bottom*()
+
+Gets the bottom point of the rectangle.
+
+
+h3(#Rect_getheight). Rect#get_height
+
+ Integer *get_height*()
+
+Gets the height member.
+
+
+h3(#Rect_getleft). Rect#get_left
+
+ Integer *get_left*()
+
+Gets the left point of the rectangle (the same as "Rect#get_x":rect.html#Rect_getx).
+
+
+h3(#Rect_getposition). Rect#get_position
+
+ "Point":point.html *get_position*()
+
+Gets the position.
+
+
+h3(#Rect_gettopleft). Rect#get_top_left
+
+ "Point":point.html *get_top_left*()
+
+Gets the position of the top left corner of the rectangle, same as 
+"get_position":#Rect_getposition.
+
+
+h3(#Rect_gettopright). Rect#get_top_right
+
+ "Point":point.html *get_top_right*()
+
+Gets the position of the top right corner.
+
+
+h3(#Rect_getbottomleft). Rect#get_bottom_left
+
+ "Point":point.html *get_bottom_left*()
+
+Gets the position of the bottom left corner.
+
+
+h3(#Rect_getbottomright). Rect#get_bottom_right
+
+ "Point":point.html *get_bottom_right*()
+
+Gets the position of the bottom right corner.
+
+
+h3(#Rect_getright). Rect#get_right
+
+ Integer *get_right*()
+
+Gets the right point of the rectangle.
+
+
+h3(#Rect_getsize). Rect#get_size
+
+ "Size":size.html *get_size*()
+
+Gets the size.
+
+h4. See also
+
+"Rect#set_size":rect.html#Rect_setsize
+
+
+h3(#Rect_gettop). Rect#get_top
+
+ Integer *get_top*()
+
+Gets the top point of the rectangle (the same as "Rect#get_y":rect.html#Rect_gety).
+
+
+h3(#Rect_getwidth). Rect#get_width
+
+ Integer *get_width*()
+
+Gets the width member.
+
+
+h3(#Rect_getx). Rect#get_x
+
+ Integer *get_x*()
+
+Gets the x member.
+
+
+h3(#Rect_gety). Rect#get_y
+
+ Integer *get_y*()
+
+Gets the y member.
+
+
+h3(#Rect_inflate). Rect#inflate
+
+  *inflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
+
+  *inflate*(%(arg-type)"Size":size.html% diff)
+
+  *inflate*(%(arg-type)Integer% diff)
+
+ "Rect":rect.html *inflate*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
+
+Increases the size of the rectangle.
+
+The second form uses the same _diff_ for both _dx_ and _dy_.
+
+The first two versions modify the rectangle in place, the last one returns a
+new rectangle leaving this one unchanged.
+
+The left border is moved farther left and the right border is moved farther
+right by _dx_. The upper border is moved farther up and the bottom border
+is moved farther down by _dy_. (Note the the width and height of the
+rectangle thus change by 2*_dx_ and 2*_dy_, respectively.) If one or
+both of _dx_ and _dy_ are negative, the opposite happens: the rectangle
+size decreases in the respective direction.
+
+Inflating and deflating behaves ``naturally''. Defined more precisely, that
+means:
+
+    # ``Real'' inflates (that is, _dx_ and/or _dy_ >= 0) are not
+        constrained. Thus inflating a rectangle can cause its upper left corner
+        to move into the negative numbers. (the versions prior to 2.5.4 forced
+        the top left coordinate to not fall below (0, 0), which implied a
+        forced move of the rectangle.)
+
+    # Deflates are clamped to not reduce the width or height of the
+        rectangle below zero. In such cases, the top-left corner is nonetheless
+        handled properly. For example, a rectangle at (10, 10) with size (20,
+        40) that is inflated by (-15, -15) will become located at (20, 25) at
+        size (0, 10). Finally, observe that the width and height are treated
+        independently. In the above example, the width is reduced by 20,
+        whereas the height is reduced by the full 30 (rather than also stopping
+        at 20, when the width reached zero).
+
+
+h4. See also
+
+"Deflate":rectdeflate.html
+
+
+h3(#Rect_intersects). Rect#intersects
+
+ Boolean *intersects*(%(arg-type)"Rect":rect.html% rect)
+
+Returns @true@ if this rectangle has a non-empty intersection with the
+rectangle _rect_ and @false@ otherwise.
+
+
+h3(#Rect_isempty). Rect#is_empty
+
+ Boolean *is_empty*()
+
+Returns @true@ if this rectangle has a width or height less than or equal to 
+0 and @false@ otherwise.
+
+
+h3(#Rect_offset). Rect#offset
+
+  *offset*(%(arg-type)Integer% dx,  %(arg-type)Integer% dy)
+
+  *offset*(%(arg-type)"Point":point.html% pt)
+
+Moves the rectangle by the specified offset. If _dx_ is positive, the
+rectangle is moved to the right, if _dy_ is positive, it is moved to the
+bottom, otherwise it is moved to the left or top respectively.
+
+
+h3(#Rect_setheight). Rect#set_height
+
+  *set_height*(%(arg-type)Integer% height)
+
+Sets the height.
+
+
+h3(#Rect_setsize). Rect#set_size
+
+  *set_size*(%(arg-type)"Size":size.html% s)
+
+Sets the size.
+
+h4. See also
+
+"Rect#get_size":rect.html#Rect_getsize
+
+
+h3(#Rect_setwidth). Rect#set_width
+
+  *set_width*(%(arg-type)Integer% width)
+
+Sets the width.
+
+
+h3(#Rect_setx). Rect#set_x
+
+  *set_x*(%(arg-type)Integer% x)
+
+Sets the x position.
+
+
+h3(#Rect_sety). Rect#set_y
+
+  *set_y*(%(arg-type)Integer% y)
+
+Sets the y position.
+
+
+h3(#Rect_union). Rect#union
+
+ "Rect":rect.html *union*(%(arg-type)"Rect":rect.html% rect)
+
+ "Rect":rect.html *union*(%(arg-type)"Rect":rect.html% rect)
+
+Modifies the rectangle to contain the bounding box of this rectangle and the
+one passed in as parameter. The const version returns the new rectangle, the
+other one modifies this rectangle in place.
+
+
+h3(#Rect_assign). Rect#=
+
+  *operator $=$*(%(arg-type)"Rect":rect.html% rect)
+
+Assignment operator.
+
+
+h3(#Rect_equal). Rect#==
+
+ Boolean *operator $==$*(%(arg-type)"Rect":rect.html% rect)
+
+Equality operator.
+
+
+h3(#Rect_notequal). Rect#!=
+
+ Boolean *operator $!=$*(%(arg-type)"Rect":rect.html% rect)
+
+Inequality operator.
+

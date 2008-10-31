@@ -1,0 +1,35 @@
+h1(#wxobject). Wx::Object
+
+This is the base class for most wxRuby classes. Almost all of the useful
+functions it provides to the C++ library, such as exploration of
+object-oriented class relationships and memory management, are handled
+within the Ruby language or the wxRuby wrapping. Therefore, this class
+has very few methods.
+
+<div id="methods">
+
+h2. Methods
+
+* "Object.new":#Object_new
+* "Object#wx_class":#Object_wxclass
+
+</div>
+
+
+h3(#Object_new). Object.new
+
+  *Object.new*(%(arg-type)Object% other)
+
+Default constructor. Should not need to be called in ruby code.
+
+h3(#Object_wxclass). Object#wx_class
+
+  String *wx_class*()
+
+Returns the name of the C++ wxWidgets class which this object is
+wrapping, for example 'wxTextCtrl' or 'wxFrame'. Note that if a wxRuby
+class has been subclassed, this will still return the name of the core
+C++ class which this object is wrapping.
+
+This method is normally only required for development and debugging -
+user code should not need to call it.

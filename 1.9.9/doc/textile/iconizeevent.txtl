@@ -1,0 +1,48 @@
+h1(#wxiconizeevent). Wx::IconizeEvent
+
+An event being sent when the frame is iconized (minimized) or restored.
+
+Currently only MSW and GTK generate such events.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event handlers
+
+To handle iconize events, use this handler method to direct the event
+object to a block that takes a IconizeEvent argument:
+
+|*evt_iconize()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_ICONIZE event.|
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "TopLevelWindow#iconize":toplevelwindow.html#TopLevelWindow_iconize, "TopLevelWindow#is_iconized":toplevelwindow.html#TopLevelWindow_isiconized
+
+The opposite of an IconizeEvent is a "MaximizeEvent":maximizeevent.html.
+
+<div id="methods">
+
+h2. Methods
+
+* "IconizeEvent.new":#IconizeEvent_new
+* "IconizeEvent#iconized":#IconizeEvent_iconized
+
+</div>
+
+
+h3(#IconizeEvent_new). IconizeEvent.new
+
+  *IconizeEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)Boolean% iconized = true)
+
+Constructor.
+
+h3(#IconizeEvent_iconized). IconizeEvent#iconized
+
+ Boolean *iconized*()
+
+Returns @true@ if the frame has been iconized, @false@ if it has been
+restored.
+

@@ -1,0 +1,153 @@
+h1(#wxmimetypesmanager). Wx::MimeTypesManager
+
+This class allows the application to retrieve the information about all known
+MIME types from a system-specific location and the filename extensions to the
+MIME types and vice versa. After initialization the functions
+"MimeTypesManager#get_file_type_from_mime_type":mimetypesmanager.html#MimeTypesManager_getfiletypefrommimetype 
+and "MimeTypesManager#get_file_type_from_extension":mimetypesmanager.html#MimeTypesManager_getfiletypefromextension 
+may be called: they will return a "FileType":filetype.html object which
+may be further queried for file description, icon and other attributes.
+
+*Windows:* MIME type information is stored in the registry and no additional
+initialization is needed.
+
+*Unix:* MIME type information is stored in the files mailcap and mime.types
+(system-wide) and .mailcap and .mime.types in the current user's home directory:
+all of these files can be searched for and loaded (disabled by default). However,
+
+h2. Additional Functions 
+
+"MimeTypesManager#read_mailcap":mimetypesmanager.html#MimeTypesManager_readmailcap and 
+"MimeTypesManager#read_mime_types":mimetypesmanager.html#MimeTypesManager_readmimetypes are
+provided to load additional files.
+
+If GNOME or KDE desktop environment is installed, then MimeTypesManager 
+gathers MIME information from respective files (e.g. .kdelnk files under KDE).
+
+NB: Currently, MimeTypesManager is limited to reading MIME type information
+but it will support modifying it as well in future versions.
+
+h2. Global objects
+
+Global instance of MimeTypesManager is always available. It is defined
+as follows:
+
+
+ MimeTypesManager *TheMimeTypesManager;
+ 
+
+It is recommended to use this instance instead of creating your own because
+gathering MIME information may take quite a long time on Unix systems.
+
+h2. Derived from
+
+No base class.
+
+h2. See also
+
+"FileType":filetype.html
+
+h2. Function groups
+
+h3(#mimehelperfunctions). Helper functions
+
+All of these functions are static (i.e. don't need a MimeTypesManager object
+to call them) and provide some useful operations for string representations of
+MIME types. Their usage is recommended instead of directly working with MIME
+types using String functions.
+
+"is_of_type":#MimeTypesManager_isoftype
+
+h3(#mimeconstructordestrunew). Constructor and destructor
+
+NB: You won't normally need to use more than one MimeTypesManager object in a
+program.
+
+"MimeTypesManager":mimetypesmanagerctor.html
+
+h3(#mimequerydatabase). Query database
+
+These functions are the heart of this class: they allow to find a "file type":filetype.html object
+from either file extension or MIME type.
+If the function is successful, it returns a pointer to the FileType object
+which *must* be deleted by the caller, otherwise NULL will be returned.
+
+"get_file_type_from_mime_type":#MimeTypesManager_getfiletypefrommimetype
+"get_file_type_from_extension":#MimeTypesManager_getfiletypefromextension
+
+h3(#MimeTypesManager_init). Initialization functions
+
+*Unix:* These functions may be used to load additional files (except for the
+default ones which are loaded automatically) containing MIME
+information in either mailcap(5) or mime.types(5) format.
+
+"read_mailcap":#MimeTypesManager_readmailcap
+"read_mime_types":#MimeTypesManager_readmimetypes
+"add_fallbacks":#MimeTypesManager_addfallbacks
+
+h3(#MimeTypesManager_addfallbacks). MimeTypesManager#add_fallbacks
+
+  *add_fallbacks*(%(arg-type)"FileTypeInfo":filetypeinfo.html% fallbacks)
+
+This function may be used to provide hard-wired fallbacks for the MIME types
+and extensions that might not be present in the system MIME database.
+
+
+Please see the typetest sample for an example of using it.
+
+h3(#MimeTypesManager_getfiletypefromextension). MimeTypesManager#get_file_type_from_extension
+
+ "FileType":filetype.html *get_file_type_from_extension*(%(arg-type)String% extension)
+
+Gather information about the files with given extension and return the
+corresponding "FileType":filetype.html object or NULL if the extension
+is unknown.
+
+h3(#MimeTypesManager_getfiletypefrommimetype). MimeTypesManager#get_file_type_from_mime_type
+
+ "FileType":filetype.html *get_file_type_from_mime_type*(%(arg-type)String% mimeType)
+
+Gather information about the files with given MIME type and return the
+corresponding "FileType":filetype.html object or NULL if the MIME type
+is unknown.
+
+h3(#MimeTypesManager_isoftype). MimeTypesManager#is_of_type
+
+ Boolean *is_of_type*(%(arg-type)String% mimeType,  %(arg-type)String% wildcard)
+
+This function returns true if either the given _mimeType_ is exactly the
+same as _wildcard_ or if it has the same category and the subtype of
+_wildcard_ is '*'. Note that the '*' wildcard is not allowed in
+_mimeType_ itself.
+
+The comparison don by this function is case insensitive so it is not
+necessary to convert the strings to the same case before calling it.
+
+h3(#MimeTypesManager_readmailcap). MimeTypesManager#read_mailcap
+
+ Boolean *read_mailcap*(%(arg-type)String% filename,  %(arg-type)Boolean% fallback = false)
+
+Load additional file containing information about MIME types and associated
+information in mailcap format. See metamail(1) and mailcap(5) for more
+information.
+
+_fallback_ parameter may be used to load additional mailcap files without
+overriding the settings found in the standard files: normally, entries from
+files loaded with ReadMailcap will override the entries from files loaded
+previously (and the standard ones are loaded in the very beginning), but this
+will not happen if this parameter is set to true (default is false).
+
+The return value is true if there were no errors in the file or false
+otherwise.
+
+h3(#MimeTypesManager_readmimetypes). MimeTypesManager#read_mime_types
+
+ Boolean *read_mime_types*(%(arg-type)String% filename)
+
+Load additional file containing information about MIME types and associated
+information in mime.types file format. See metamail(1) and mailcap(5) for more
+information.
+
+The return value is true if there were no errors in the file or false
+otherwise.
+

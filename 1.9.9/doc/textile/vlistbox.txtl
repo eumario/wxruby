@@ -1,0 +1,345 @@
+h1(#wxvlistbox). Wx::VListBox
+
+VListBox is a control with multiple items like
+"listbox":listbox.html. It has two major differences: it can have an
+arbitrarily huge number of items because it doesn't store them itself
+but uses an "on_draw_item":#VListBox_ondrawitem method to draw them (so
+it is a *V*irtual listbox), and its items can have variable height as
+determined by "on_measure_item":#VListBox_onmeasureitem (so it is also a
+listbox with the lines of *V*ariable height).
+
+To use this class, you must inherit from it and create your own subclass
+in Ruby. It doesn't have any methods to append or insert items. Instead
+you just have to call "set_item_count":#VListBox_setitemcount to tell
+the control how many items it should display. Your subclass must define
+the methods "on_measure_item":#VListBox_onmeasureitem, to tell the GUI
+how tall a given item is, and "on_draw_item":#VListBox_ondrawitem, which
+should accept a "DC":dc.html which is used to draw each element in the
+list.
+
+It emits the same events as "ListBox":listbox.html and the same event
+handler methods may be used with it.
+ 
+h2. Derived from
+
+"VScrolledWindow":vscrolledwindow.html
+
+<div id="methods">
+
+h2. Methods
+
+* "VListBox.new":#VListBox_new
+* "VListBox#clear":#VListBox_clear
+* "VListBox#deselect_all":#VListBox_deselectall
+* "VListBox#get_item_count":#VListBox_getitemcount
+* "VListBox#get_margins":#VListBox_getmargins
+* "VListBox#get_selected_count":#VListBox_getselectedcount
+* "VListBox#get_selection":#VListBox_getselection
+* "VListBox#get_selections":#VListBox_getselections
+* "VListBox#get_selection_background":#VListBox_getselectionbackground
+* "VListBox#has_multiple_selection":#VListBox_hasmultipleselection
+* "VListBox#is_current":#VListBox_iscurrent
+* "VListBox#is_selected":#VListBox_isselected
+* "VListBox#on_draw_background":#VListBox_ondrawbackground
+* "VListBox#on_draw_item":#VListBox_ondrawitem
+* "VListBox#on_draw_separator":#VListBox_ondrawseparator
+* "VListBox#on_measure_item":#VListBox_onmeasureitem
+* "VListBox#select":#VListBox_select
+* "VListBox#select_all":#VListBox_selectall
+* "VListBox#select_range":#VListBox_selectrange
+* "VListBox#set_item_count":#VListBox_setitemcount
+* "VListBox#set_margins":#VListBox_setmargins
+* "VListBox#set_selection":#VListBox_setselection
+* "VListBox#set_selection_background":#VListBox_setselectionbackground
+* "VListBox#toggle":#VListBox_toggle
+
+</div>
+
+h3(#VListBox_new). VListBox.new
+
+  *VListBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+               %(arg-type)Integer% countItems = 0, 
+               %(arg-type)Integer% style = 0, 
+               %(arg-type)String% name = "VListBox")
+
+Normal constructor. The only special style which may be used with
+VListBox is @LB_MULTIPLE@ which indicates that the listbox should
+support multiple selection.
+
+h3(#VListBox_clear). VListBox#clear
+
+  *clear*()
+
+Deletes all items from the control.
+
+h3(#VListBox_deselectall). VListBox#deselect_all
+
+ Boolean *deselect_all*()
+
+Deselects all the items in the listbox. Returns @true@ if any items were
+changed, i.e. if there had been any selected items before, or @false@ if
+all the items were already deselected.
+
+This method is only valid for multi selection listboxes.
+
+h4. See also
+
+"select_all":#VListBox_selectall, "Select":vlistboxselect.html
+
+
+h3(#VListBox_getitemcount). VListBox#get_item_count
+
+ Integer *get_item_count*()
+
+Get the number of items in the control.
+
+h4. See also
+
+"set_item_count()":#VListBox_setitemcount()
+
+
+h3(#VListBox_getmargins). VListBox#get_margins
+
+ "Point":point.html *get_margins*()
+
+Returns the margins used by the control. The @x@ field of the returned
+point is the horizontal margin and the @y@ field is the vertical one.
+
+h4. See also
+
+"set_margins":#VListBox_setmargins
+
+h3(#VListBox_getselectedcount). VListBox#get_selected_count
+
+ Integer *get_selected_count*()
+
+Returns the number of the items currently selected.
+
+It is valid for both single and multi selection controls. In the former case it
+may only return $0$ or $1$ however.
+
+h4. See also
+
+"is_selected":#VListBox_isselected,
+
+"get_first_selected":#VListBox_getfirstselected,
+
+"get_next_selected":#VListBox_getnextselected
+
+
+h3(#VListBox_getselection). VListBox#get_selection
+
+ Integer *get_selection*()
+
+Get the currently selected item or @-1@ if there is no selection.
+
+h3(#VListBox_getselection). VListBox#get_selections
+
+ Array *get_selections*()
+
+For list boxes supporting multiple selection only, returns an array with
+the integer indices of all the selected items.
+
+h3(#VListBox_getselectionbackground). VListBox#get_selection_background
+
+ "Colour":colour.html *get_selection_background*()
+
+Returns the background colour used for the selected cells. By default the
+standard system colour is used.
+
+h4. See also
+
+"SystemSettings#get_colour":systemsettings.html#SystemSettings_getcolour,
+
+"set_selection_background":#VListBox_setselectionbackground
+
+
+h3(#VListBox_ishasmultipleselection). VListBox#has_multiple_selection
+
+ Boolean *has_multiple_selection*()
+
+Returns @true@ if the listbox was created with @LB_MULTIPLE@ style
+and so supports multiple selection or @false@ if it is a single selection
+listbox.
+
+h3(#VListBox_iscurrent). VListBox#is_current
+
+ Boolean *is_current*(%(arg-type)Integer% item)
+
+Returns @true@ if this item is the current one, @false@ otherwise.
+
+Current item is always the same as selected one for the single selection
+listbox and in this case this method is equivalent to 
+"is_selected":#VListBox_isselected but they are different for multi
+selection listboxes where many items may be selected but only one (at most) is
+current.
+
+
+h3(#VListBox_isselected). VListBox#is_selected
+
+ Boolean *is_selected*(%(arg-type)Integer% item)
+
+Returns @true@ if this item is selected, @false@ otherwise.
+
+
+h3(#VListBox_ondrawbackground). VListBox#on_draw_background
+
+  *on_draw_background*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% n)
+
+This method is used to draw the items background and, maybe, a border
+around it.
+
+The base class version implements a reasonable default behaviour which
+consists in drawing the selected item with the standard background
+colour and drawing a border around the item if it is either selected or
+current.
+
+
+h3(#VListBox_ondrawitem). VListBox#on_draw_item
+
+  *on_draw_item*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% n)
+
+The ruby subclass must implement this function to actually draw the item
+with the given index on the provided DC. Note that the origin
+co-ordinates of the DC are relative to the top-left corner of the whole
+control, not of the individual item. So to draw elements such as text
+within each item correctly, when you call DC drawing methods, you should
+add the "y":rect.html#Rect_y value of the rect to the y value
+representing where within the individual item the text or other drawing
+should appear.
+
+h4. Parameters
+
+* _dc_ The device context to use for drawing
+* _rect_ The bounding rectangle for the item being drawn (DC clipping
+region is set to this rectangle before calling this function)
+* _n_ The index of the item to be drawn
+
+
+h3(#VListBox_ondrawseparator). VListBox#on_draw_separator
+
+  *on_draw_separator*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% n)
+
+This method may be used to draw separators between the lines. The rectangle
+passed to it may be modified, typically to deflate it a bit before passing to
+"on_draw_item()":#VListBox_ondrawitem(). 
+
+The base class version of this method doesn't do anything.
+
+h4. Parameters
+
+* _dc_ The device context to use for drawing
+* _rect_ The bounding rectangle for the item
+* _n_ The index of the item
+
+
+h3(#VListBox_onmeasureitem). VListBox#on_measure_item
+
+ Integer *on_measure_item*(%(arg-type)Integer% n)
+
+The derived class must implement this method to return the height of the
+specified item (in pixels).
+
+h3(#VListBox_select). VListBox#select
+
+ Boolean *select*(%(arg-type)Integer% item,  %(arg-type)Boolean% select = true)
+
+Selects or deselects the specified item which must be valid (i.e. not
+equal to @NOT_FOUND@).
+
+Return @true@ if the items selection status has changed or @false@
+otherwise.
+
+This function is only valid for the multiple selection listboxes, use 
+"set_selection":#VListBox_setselection for the single selection ones.
+
+
+h3(#VListBox_selectall). VListBox#select_all
+
+ Boolean *select_all*()
+
+Selects all the items in the listbox.
+
+Returns @true@ if any items were changed, i.e. if there had been any
+unselected items before, or @false@ if all the items were already selected.
+
+This method is only valid for multi selection listboxes.
+
+h4. See also
+
+"deselect_all":#VListBox_deselectall, "Select":vlistboxselect.html
+
+
+h3(#VListBox_selectrange). VListBox#select_range
+
+ Boolean *select_range*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Selects all items in the specified range which may be given in any order.
+
+Return @true@ if the items selection status has changed or @false@
+otherwise.
+
+This method is only valid for multi selection listboxes.
+
+h4. See also
+p
+"select_all":#VListBox_selectall, "Select":vlistboxselect.html
+
+h3(#VListBox_setitemcount). VListBox#set_item_count
+
+  *set_item_count*(%(arg-type)Integer% count)
+
+Set the number of items to be shown in the control.
+
+This is just a synonym for
+"VScrolledWindow::set_line_count":vscrolledwindow.html#VScrolledWindow_setlinecount.
+
+h3(#VListBox_setmargins). VListBox#set_margins
+
+  *set_margins*(%(arg-type)"Point":point.html% pt)
+
+  *set_margins*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Set the margins: horizontal margin is the distance between the window
+border and the item contents while vertical margin is half of the
+distance between items.
+
+By default both margins are @0@.
+
+h3(#VListBox_setselection). VListBox#set_selection
+
+  *set_selection*(%(arg-type)Integer% selection)
+
+Set the selection to the specified item, if it is $-1$ the selection is
+unset. The selected item will be automatically scrolled into view if it isn't
+currently visible.
+
+This method may be used both with single and multiple selection listboxes.
+
+
+h3(#VListBox_setselectionbackground). VListBox#set_selection_background
+
+  *set_selection_background*(%(arg-type)"Colour":colour.html% col)
+
+Sets the colour to be used for the selected cells background. The background of
+the standard cells may be changed by simply calling 
+"set_background_colour":#VListBox_setbackgroundcolour.
+
+h4. See also
+
+"get_selection_background":#VListBox_getselectionbackground
+
+
+h3(#VListBox_toggle). VListBox#toggle
+
+  *toggle*(%(arg-type)Integer% item)
+
+Toggles the state of the specified item, i.e. selects it if it was
+unselected and deselects it if it was selected. This method is only
+valid for multi selection listboxes.
+
+h4. See also
+
+"Select":vlistboxselect.html

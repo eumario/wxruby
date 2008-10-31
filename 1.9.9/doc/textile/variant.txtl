@@ -1,0 +1,435 @@
+h1(#wxvariant). Wx::Variant
+
+The *Variant* class represents a container for any type.
+A variant's value can be changed at run time, possibly to a different type of value.
+
+As standard, Variant can store values of type bool, char, double, long, string,
+string list, time, date, void pointer, list of strings, and list of variants. However, an application can extend Variant's capabilities by deriving from the class "VariantData":variantdata.html and using the VariantData form of the Variant constructor or assignment operator to assign this data to a variant. Actual values for user-defined types will need to be accessed via the VariantData object, unlike the case for basic data types where convenience functions such as GetLong can be used.
+
+This class is useful for reducing the programming for certain tasks, such as an editor
+for different data types, or a remote procedure call protocol.
+
+An optional name member is associated with a Variant. This might be used, for example, in CORBA
+or OLE automation classes, where named parameters are required.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"VariantData":variantdata.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Variant.new":#Variant_new
+* "Variant#append":#Variant_append
+* "Variant#clear_list":#Variant_clearlist
+* "Variant#convert":#Variant_convert
+* "Variant#get_count":#Variant_getcount
+* "Variant#delete":#Variant_delete
+* "Variant#get_array_string":#Variant_getarraystring
+* "Variant#get_bool":#Variant_getbool
+* "Variant#get_char":#Variant_getchar
+* "Variant#get_data":#Variant_getdata
+* "Variant#get_date_time":#Variant_getdatetime
+* "Variant#get_double":#Variant_getdouble
+* "Variant#get_long":#Variant_getlong
+* "Variant#get_name":#Variant_getname
+* "Variant#get_string":#Variant_getstring
+* "Variant#get_type":#Variant_gettype
+* "Variant#get_void_ptr":#Variant_getvoidptr
+* "Variant#get_wx_object_ptr":#Variant_getwxobjectptr
+* "Variant#insert":#Variant_insert
+* "Variant#is_null":#Variant_isnull
+* "Variant#is_type":#Variant_istype
+* "Variant#is_value_kind_of":#Variant_isvaluekindof
+* "Variant#make_null":#Variant_makenull
+* "Variant#make_string":#Variant_makestring
+* "Variant#member":#Variant_member
+* "Variant#null_list":#Variant_nulllist
+* "Variant#set_data":#Variant_setdata
+* "wxVariant::operator char":#Variant_char
+* "wxVariant::operator double":#Variant_double
+* "wxVariant::operator wxString":#Variant_wxString
+* "wxVariant::operator wxDateTime":#Variant_wxDateTime
+
+</div>
+
+
+h3(#Variant_new). Variant.new
+
+  *Variant.new*(%(arg-type)"Variant":variant.html% variant)
+
+Copy constructor.
+
+  *Variant.new*(%(arg-type)"char":char.html% value,  %(arg-type)String% name = "")
+
+  *Variant.new*(%(arg-type)String% value,  %(arg-type)String% name = "")
+
+Construction from a string value.
+
+  *Variant.new*(%(arg-type)"char":char.html% value,  %(arg-type)String% name = "")
+
+Construction from a character value.
+
+  *Variant.new*(%(arg-type)Integer% value,  %(arg-type)String% name = "")
+
+Construction from an integer value. You may need to cast to (long) to
+avoid confusion with other constructors (such as the bool constructor).
+
+  *Variant.new*(%(arg-type)Boolean% value,  %(arg-type)String% name = "")
+
+Construction from a boolean value.
+
+  *Variant.new*(%(arg-type)Float% value,  %(arg-type)String% name = "")
+
+Construction from a double-precision floating point value.
+
+  *Variant.new*(%(arg-type)"List":list.html% value,  %(arg-type)String% name = "")
+
+Construction from a list of Variant objects. This constructor
+copies _value_, the application is still responsible for
+deleting _value_ and its contents.
+
+  *Variant.new*(%(arg-type)% value,  %(arg-type)String% name = "")
+
+Construction from a void pointer.
+
+  *Variant.new*(%(arg-type)Object% value,  %(arg-type)String% name = "")
+
+Construction from a Object pointer.
+
+  *Variant.new*(%(arg-type)"VariantData":variantdata.html% data,  %(arg-type)String% name = "")
+
+Construction from user-defined data.  The variant holds onto the _data_ pointer.
+
+  *Variant.new*(%(arg-type)"DateTime":datetime.html% val,  %(arg-type)String% name = "")
+
+Construction from a "DateTime":datetime.html.  
+
+  *Variant.new*(%(arg-type)"ArrayString":arraystring.html% val,  %(arg-type)String% name = "")
+
+Construction from an array of strings.  This constructor copies _value_ and its contents.
+
+  *Variant.new*(%(arg-type)"DATE_STRUCT":date_struct.html% val,  %(arg-type)String% name = "")
+
+Construction from a odbc date value.  Represented internally by a "DateTime":datetime.html value.
+
+  *Variant.new*(%(arg-type)"TIME_STRUCT":time_struct.html% val,  %(arg-type)String% name = "")
+
+Construction from a odbc time value.  Represented internally by a "DateTime":datetime.html value.
+
+  *Variant.new*(%(arg-type)"TIMESTAMP_STRUCT":timestamp_struct.html% val,  %(arg-type)String% name = "")
+
+Construction from a odbc timestamp value.  Represented internally by a "DateTime":datetime.html value.
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#Variant_append). Variant#append
+
+  *append*(%(arg-type)"Variant":variant.html% value)
+
+Appends a value to the list.
+
+h3(#Variant_clearlist). Variant#clear_list
+
+  *clear_list*()
+
+Deletes the contents of the list.
+
+
+h3(#Variant_convert). Variant#convert
+
+ Boolean *convert*(%(arg-type)Integer% value)
+
+ Boolean *convert*(%(arg-type)Boolean% value)
+
+ Boolean *convert*(%(arg-type)Float% value)
+
+ Boolean *convert*(%(arg-type)String% value)
+
+ Boolean *convert*(%(arg-type)"char":char.html% value)
+
+ Boolean *convert*(%(arg-type)"DateTime":datetime.html% value)
+
+Retrieves and converts the value of this variant to the type that _value_ is.
+
+
+h3(#Variant_getcount). Variant#get_count
+
+ Integer *get_count*()
+
+Returns the number of elements in the list.
+
+h3(#Variant_delete). Variant#delete
+
+ Boolean *delete*(%(arg-type)Integer% item)
+
+Deletes the zero-based _item_ from the list.
+
+h3(#Variant_getarraystring). Variant#get_array_string
+
+ "ArrayString":arraystring.html *get_array_string*()
+
+Returns the string array value.
+
+h3(#Variant_getbool). Variant#get_bool
+
+ Boolean *get_bool*()
+
+Returns the boolean value.
+
+h3(#Variant_getchar). Variant#get_char
+
+ char *get_char*()
+
+Returns the character value.
+
+h3(#Variant_getdata). Variant#get_data
+
+ "VariantData":variantdata.html *get_data*()
+
+Returns a pointer to the internal variant data.
+
+h3(#Variant_getdatetime). Variant#get_date_time
+
+ "DateTime":datetime.html *get_date_time*()
+
+Returns the date value.
+
+h3(#Variant_getdouble). Variant#get_double
+
+ double *get_double*()
+
+Returns the floating point value.
+
+h3(#Variant_getlong). Variant#get_long
+
+ Integer *get_long*()
+
+Returns the integer value.
+
+h3(#Variant_getname). Variant#get_name
+
+ String *get_name*()
+
+Returns a constant reference to the variant name.
+
+h3(#Variant_getstring). Variant#get_string
+
+ String *get_string*()
+
+Gets the string value.
+
+h3(#Variant_gettype). Variant#get_type
+
+ String *get_type*()
+
+Returns the value type as a string. The built-in types are: bool, char, date, double, list, long, string, stringlist, time, void*.
+
+If the variant is null, the value type returned is the string ``null" (not the empty string).
+
+h3(#Variant_getvoidptr). Variant#get_void_ptr
+
+  *get_void_ptr*()
+
+Gets the void pointer value.
+
+h3(#Variant_getwxobjectptr). Variant#get__object_ptr
+
+  *get__object_ptr*()
+
+Gets the Object pointer value.
+
+h3(#Variant_insert). Variant#insert
+
+  *insert*(%(arg-type)"Variant":variant.html% value)
+
+Inserts a value at the front of the list.
+
+h3(#Variant_isnull). Variant#is_null
+
+ Boolean *is_null*()
+
+Returns true if there is no data associated with this variant, false if there is data.
+
+h3(#Variant_istype). Variant#is_type
+
+ Boolean *is_type*(%(arg-type)String% type)
+
+Returns true if _type_ matches the type of the variant, false otherwise.
+
+h3(#Variant_isvaluekindof). Variant#is_value_kind_of
+
+ Boolean *is_value_kind_of*(%(arg-type)ClassInfo type% type)
+
+Returns true if the data is derived from the class described by _type_, false otherwise.
+
+h3(#Variant_makenull). Variant#make_null
+
+  *make_null*()
+
+Makes the variant null by deleting the internal data.
+
+h3(#Variant_makestring). Variant#make_string
+
+ String *make_string*()
+
+Makes a string representation of the variant value (for any type).
+
+h3(#Variant_member). Variant#member
+
+ Boolean *member*(%(arg-type)"Variant":variant.html% value)
+
+Returns true if _value_ matches an element in the list.
+
+h3(#Variant_nulllist). Variant#null_list
+
+  *null_list*()
+
+Makes an empty list. This differs from a null variant which has no data; a null list
+is of type list, but the number of elements in the list is zero.
+
+h3(#Variant_setdata). Variant#set_data
+
+  *set_data*(%(arg-type)"VariantData":variantdata.html% data)
+
+Sets the internal variant data, deleting the existing data if there is any.
+
+h3(#Variant_assignment). Variant#=
+
+  *operator $=$*(%(arg-type)"Variant":variant.html% value)
+
+  *operator $=$*(%(arg-type)"VariantData":variantdata.html% value)
+
+  *operator $=$*(%(arg-type)String% value)
+
+  *operator $=$*(%(arg-type)"char":char.html% value)
+
+  *operator $=$*(%(arg-type)"char":char.html% value)
+
+  *operator $=$*(%(arg-type)Integer% value)
+
+  *operator $=$*(%(arg-type)Boolean% value)
+
+  *operator $=$*(%(arg-type)Float% value)
+
+  *operator $=$*(%(arg-type)% value)
+
+  *operator $=$*(%(arg-type)"List":list.html% value)
+
+  *operator $=$*(%(arg-type)"DateTime":datetime.html% value)
+
+  *operator $=$*(%(arg-type)"ArrayString":arraystring.html% value)
+
+  *operator $=$*(%(arg-type)"DATE_STRUCT":date_struct.html% value)
+
+  *operator $=$*(%(arg-type)"TIME_STRUCT":time_struct.html% value)
+
+  *operator $=$*(%(arg-type)"TIMESTAMP_STRUCT":timestamp_struct.html% value)
+
+Assignment operators.
+
+h3(#Variant_eq). Variant#==
+
+ Boolean *operator $==$*(%(arg-type)"Variant":variant.html% value)
+
+ Boolean *operator $==$*(%(arg-type)String% value)
+
+ Boolean *operator $==$*(%(arg-type)"char":char.html% value)
+
+ Boolean *operator $==$*(%(arg-type)"char":char.html% value)
+
+ Boolean *operator $==$*(%(arg-type)Integer% value)
+
+ Boolean *operator $==$*(%(arg-type)Boolean% value)
+
+ Boolean *operator $==$*(%(arg-type)Float% value)
+
+ Boolean *operator $==$*(%(arg-type)% value)
+
+ Boolean *operator $==$*(%(arg-type)"List":list.html% value)
+
+ Boolean *operator $==$*(%(arg-type)"ArrayString":arraystring.html% value)
+
+ Boolean *operator $==$*(%(arg-type)"DateTime":datetime.html% value)
+
+Equality test operators.
+
+h3(#Variant_neq). Variant#!=
+
+ Boolean *operator $!=$*(%(arg-type)"Variant":variant.html% value)
+
+ Boolean *operator $!=$*(%(arg-type)String% value)
+
+ Boolean *operator $!=$*(%(arg-type)"char":char.html% value)
+
+ Boolean *operator $!=$*(%(arg-type)"char":char.html% value)
+
+ Boolean *operator $!=$*(%(arg-type)Integer% value)
+
+ Boolean *operator $!=$*(%(arg-type)Boolean% value)
+
+ Boolean *operator $!=$*(%(arg-type)Float% value)
+
+ Boolean *operator $!=$*(%(arg-type)% value)
+
+ Boolean *operator $!=$*(%(arg-type)"List":list.html% value)
+
+ Boolean *operator $!=$*(%(arg-type)"ArrayString":arraystring.html% value)
+
+ Boolean *operator $!=$*(%(arg-type)"DateTime":datetime.html% value)
+
+Inequality test operators.
+
+h3(#Variant_array). Variant#[]
+
+ "Variant":variant.html *operator $[]$*(%(arg-type)Integer% idx)
+
+Returns the value at _idx_ (zero-based).
+
+ "Variant":variant.html *operator $[]$*(%(arg-type)Integer% idx)
+
+Returns a reference to the value at _idx_ (zero-based). This can be used
+to change the value at this index.
+
+h3(#Variant_char). Variant::operator char
+
+ char *operator char*()
+
+Operator for implicit conversion to a char, using "Variant#get_char":variant.html#Variant_getchar.
+
+h3(#Variant_double). Variant::operator double
+
+ double *operator double*()
+
+Operator for implicit conversion to a double, using "Variant#get_double":variant.html#Variant_getdouble.
+
+ Integer *operator long*()
+
+Operator for implicit conversion to a long, using "Variant#get_long":variant.html#Variant_getlong.
+
+h3(#Variant_wxstring). Variant::operator String
+
+ String *operator _string*()
+
+Operator for implicit conversion to a string, using "Variant#make_string":variant.html#Variant_makestring.
+
+h3(#Variant_void). Variant::operator void*
+
+  *operator void**()
+
+Operator for implicit conversion to a pointer to a void, using "Variant#get_void_ptr":variant.html#Variant_getvoidptr.
+
+h3(#Variant_datetime). Variant::operator DateTime
+
+  *operator _date_time*()
+
+Operator for implicit conversion to a pointer to a "DateTime":datetime.html, using "Variant#get_date_time":variant.html#Variant_getdatetime.
+

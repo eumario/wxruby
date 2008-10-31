@@ -1,0 +1,42 @@
+h1(#wxhtmltagsmodule). Wx::HtmlTagsModule
+
+This class provides easy way of filling HtmlWinParser's table of
+tag handlers. It is used almost exclusively together with the set of
+"TAGS_MODULE_* macros":handlers.html
+
+h2. Derived from
+
+"Module":module.html
+
+h2. See Also
+
+"Tag Handlers":handlers.html,
+"HtmlTagHandler":htmltaghandler.html,
+"HtmlWinTagHandler":htmlwintaghandler.html,
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlTagsModule#fill_handlers_table":#HtmlTagsModule_fillhandlerstable
+
+</div>
+
+
+h3(#HtmlTagsModule_fillhandlerstable). HtmlTagsModule#fill_handlers_table
+
+  *fill_handlers_table*(%(arg-type)"HtmlWinParser":htmlwinparser.html% parser)
+
+You must override this method. In most common case its body consists
+only of lines of the following type:
+
+
+ parser -> AddTagHandler(new MyHandler);
+ 
+
+I recommend using the *TAGS_MODULE_** macros.
+
+h4. Paremeters
+
+* _parser_ Pointer to the parser that requested tables filling.
+

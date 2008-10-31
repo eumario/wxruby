@@ -1,0 +1,206 @@
+h1(#wxsashwindow). Wx::SashWindow
+
+SashWindow allows any of its edges to have a sash which can be dragged
+to resize the window. The actual content window will be created by the application
+as a child of SashWindow. The window (or an ancestor) will be notified of a drag
+via a "SashEvent":sashevent.html notification.
+
+h2. Derived from
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+The following styles apply in addition to the normal Window styles.
+
+
+|@SW_3D@|Draws a 3D effect sash and border.|
+|@SW_3DSASH@|Draws a 3D effect sash.|
+|@SW_3DBORDER@|Draws a 3D effect border.|
+|@SW_BORDER@|Draws a thin black border.|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+|*evt_sash_dragged(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_SASH_DRAGGED event,when the user has finished dragging a sash.|
+|*EVT_SASH_DRAGGED_RANGE(id1, id2, func)*|Process a EVT_SASH_DRAGGED_RANGE event,when the user has finished dragging a sash. The event handler is called when windows with ids in thegiven range have their sashes dragged.|
+
+
+h2. Data types
+
+
+
+ enum SashEdgePosition {
+     SASH_TOP = 0,
+     SASH_RIGHT,
+     SASH_BOTTOM,
+     SASH_LEFT,
+     SASH_NONE = 100
+ };
+ 
+
+
+h2. See also
+
+"SashEvent":sashevent.html, "SashLayoutWindow":sashlayoutwindow.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SashWindow.new":#SashWindow_new
+* "SashWindow#get_sash_visible":#SashWindow_getsashvisible
+* "SashWindow#get_maximum_size_x":#SashWindow_getmaximumsizex
+* "SashWindow#get_maximum_size_y":#SashWindow_getmaximumsizey
+* "SashWindow#get_minimum_size_x":#SashWindow_getminimumsizex
+* "SashWindow#get_minimum_size_y":#SashWindow_getminimumsizey
+* "SashWindow#has_border":#SashWindow_hasborder
+* "SashWindow#set_maximum_size_x":#SashWindow_setmaximumsizex
+* "SashWindow#set_maximum_size_y":#SashWindow_setmaximumsizey
+* "SashWindow#set_minimum_size_x":#SashWindow_setminimumsizex
+* "SashWindow#set_minimum_size_y":#SashWindow_setminimumsizey
+* "SashWindow#set_sash_visible":#SashWindow_setsashvisible
+* "SashWindow#set_sash_border":#SashWindow_setsashborder
+
+</div>
+
+
+h3(#SashWindow_new). SashWindow.new
+
+  *SashWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                 %(arg-type)Integer% style = CLIP_CHILDREN SW_3D, 
+                 %(arg-type)String% name = "sashWindow")
+
+Constructs a sash window, which can be a child of a frame, dialog or any other non-control window.
+
+h4. Parameters
+
+* _parent_ Pointer to a parent window.
+* _id_ Window identifier. If -1, will automatically create an identifier.
+* _pos_ Window position. DefaultPosition is (-1, -1) which indicates that SashWindows
+should generate a default position for the window. If using the SashWindow class directly, supply
+an actual position.
+* _size_ Window size. DefaultSize is (-1, -1) which indicates that SashWindows
+should generate a default size for the window.
+* _style_ Window style. For window styles, please see "SashWindow":sashwindow.html.
+* _name_ Window name.
+
+  *destructor*()
+
+Destructor.
+
+h3(#SashWindow_getsashvisible). SashWindow#get_sash_visible
+
+ Boolean *get_sash_visible*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge)
+
+Returns true if a sash is visible on the given edge, false otherwise.
+
+h4. Parameters
+
+* _edge_ Edge. One of SASH_TOP, SASH_RIGHT, SASH_BOTTOM, SASH_LEFT.
+
+h4. See also
+
+"SashWindow#set_sash_visible":sashwindow.html#SashWindow_setsashvisible
+
+h3(#SashWindow_getmaximumsizex). SashWindow#get_maximum_size_x
+
+ Integer *get_maximum_size_x*()
+
+Gets the maximum window size in the x direction.
+
+h3(#SashWindow_getmaximumsizey). SashWindow#get_maximum_size_y
+
+ Integer *get_maximum_size_y*()
+
+Gets the maximum window size in the y direction.
+
+h3(#SashWindow_getminimumsizex). SashWindow#get_minimum_size_x
+
+ Integer *get_minimum_size_x*()
+
+Gets the minimum window size in the x direction.
+
+h3(#SashWindow_getminimumsizey). SashWindow#get_minimum_size_y
+
+ Integer *get_minimum_size_y*()
+
+Gets the minimum window size in the y direction.
+
+h3(#SashWindow_hasborder). SashWindow#has_border
+
+ Boolean *has_border*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge)
+
+Returns true if the sash has a border, false otherwise.
+
+h4. Parameters
+
+* _edge_ Edge. One of SASH_TOP, SASH_RIGHT, SASH_BOTTOM, SASH_LEFT.
+
+h4. See also
+
+"SashWindow#set_sash_border":sashwindow.html#SashWindow_setsashborder
+
+h3(#SashWindow_setmaximumsizex). SashWindow#set_maximum_size_x
+
+  *set_maximum_size_x*(%(arg-type)Integer% min)
+
+Sets the maximum window size in the x direction.
+
+h3(#SashWindow_setmaximumsizey). SashWindow#set_maximum_size_y
+
+  *set_maximum_size_y*(%(arg-type)Integer% min)
+
+Sets the maximum window size in the y direction.
+
+h3(#SashWindow_setminimumsizex). SashWindow#set_minimum_size_x
+
+  *set_minimum_size_x*(%(arg-type)Integer% min)
+
+Sets the minimum window size in the x direction.
+
+h3(#SashWindow_setminimumsizey). SashWindow#set_minimum_size_y
+
+  *set_minimum_size_y*(%(arg-type)Integer% min)
+
+Sets the minimum window size in the y direction.
+
+h3(#SashWindow_setsashvisible). SashWindow#set_sash_visible
+
+  *set_sash_visible*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge,  %(arg-type)Boolean% visible)
+
+Call this function to make a sash visible or invisible on a particular edge.
+
+h4. Parameters
+
+* _edge_ Edge to change. One of SASH_TOP, SASH_RIGHT, SASH_BOTTOM, SASH_LEFT.
+* _visible_ true to make the sash visible, false to make it invisible.
+
+h4. See also
+
+"SashWindow#get_sash_visible":sashwindow.html#SashWindow_getsashvisible
+
+h3(#SashWindow_setsashborder). SashWindow#set_sash_border
+
+  *set_sash_border*(%(arg-type)"SashEdgePosition":sashedgeposition.html% edge,  %(arg-type)Boolean% hasBorder)
+
+Call this function to give the sash a border, or remove the border.
+
+h4. Parameters
+
+* _edge_ Edge to change. One of SASH_TOP, SASH_RIGHT, SASH_BOTTOM, SASH_LEFT.
+* _hasBorder_ true to give the sash a border visible, false to remove it.
+
+h4. See also
+
+"SashWindow#has_border":sashwindow.html#SashWindow_hasborder
+

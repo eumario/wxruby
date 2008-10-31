@@ -1,0 +1,82 @@
+h1(#wxmask). Wx::Mask
+
+This class encapsulates a monochrome mask bitmap, where the masked area is black and
+the unmasked area is white. When associated with a bitmap and drawn in a device context,
+the unmasked area of the bitmap will be drawn, and the masked area will not be drawn.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Remarks
+
+A mask may be associated with a "Bitmap":bitmap.html. It is used in "DC#blit":dc.html#DC_blit when
+the source device context is a "MemoryDC":memorydc.html with Bitmap selected into it that
+contains a mask.
+
+h2. See also
+
+"Bitmap":bitmap.html, "DC#blit":dc.html#DC_blit, "MemoryDC":memorydc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Mask.new":#Mask_new
+* "Mask#create":#Mask_create
+
+</div>
+
+
+h3(#Mask_new). Mask.new
+
+  *Mask.new*(%(arg-type)% "Bitmap":bitmap.html& bitmap)
+
+Constructs a mask from a monochrome bitmap.
+
+
+
+  *Mask.new*(%(arg-type)% "Bitmap":bitmap.html& bitmap, 
+           %(arg-type)% "Colour":colour.html& colour)
+
+Constructs a mask from a bitmap and a colour that indicates the background.
+
+
+
+  *Mask.new*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% index)
+
+Constructs a mask from a bitmap and a palette index that indicates the background. Not
+yet implemented for GTK.
+
+h4. Parameters
+
+* _bitmap_ A valid bitmap.
+* _colour_ A colour specifying the transparency RGB values.
+* _index_ Index into a palette, specifying the transparency colour.
+
+  *destructor*()
+
+Destroys the Mask object and the underlying bitmap data.
+
+h3(#Mask_create). Mask#create
+
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Constructs a mask from a monochrome bitmap.
+
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)"Colour":colour.html% colour)
+
+Constructs a mask from a bitmap and a colour that indicates the background.
+
+ Boolean *create*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% index)
+
+Constructs a mask from a bitmap and a palette index that indicates the background. Not
+yet implemented for GTK.
+
+h4. Parameters
+
+* _bitmap_ A valid bitmap.
+* _colour_ A colour specifying the transparency RGB values.
+* _index_ Index into a palette, specifying the transparency colour.
+
+

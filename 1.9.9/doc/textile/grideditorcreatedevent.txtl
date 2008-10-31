@@ -1,0 +1,80 @@
+h1(#wxgrideditorcreatedevent). Wx::GridEditorCreatedEvent
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event handling
+
+The event handler for the following functions takes a 
+ "GridEditorCreatedEvent":grideditorcreatedevent.html parameter.
+The ..._CMD_... variants also take a window identifier.
+
+
+
+|*evt_grid_editor_created()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The editor for a cell was created. Processes a EVT_GRID_EDITOR_CREATED.|
+|*evt_grid_cmd_editor_created(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The editor for a cell was created; variant taking a window identifier. Processes a EVT_GRID_EDITOR_CREATED.|
+
+<div id="methods">
+
+h2. Methods
+
+* "GridEditorCreatedEvent.new":#GridEditorCreatedEvent_new
+* "GridEditorCreatedEvent#get_col":#GridEditorCreatedEvent_getcol
+* "GridEditorCreatedEvent#get_control":#GridEditorCreatedEvent_getcontrol
+* "GridEditorCreatedEvent#get_row":#GridEditorCreatedEvent_getrow
+* "GridEditorCreatedEvent#set_col":#GridEditorCreatedEvent_setcol
+* "GridEditorCreatedEvent#set_control":#GridEditorCreatedEvent_setcontrol
+* "GridEditorCreatedEvent#set_row":#GridEditorCreatedEvent_setrow
+
+</div>
+
+
+h3(#GridEditorCreatedEvent_constr). GridEditorCreatedEvent.new
+
+  *GridEditorCreatedEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type, 
+                             %(arg-type)Object% obj, 
+                             %(arg-type)Integer% row, 
+                             %(arg-type)Integer% col, 
+                             %(arg-type)"Control":control.html% ctrl)
+
+h3(#GridEditorCreatedEvent_getcol). GridEditorCreatedEvent#get_col
+
+ Integer *get_col*()
+
+Returns the column at which the event occurred.
+
+h3(#GridEditorCreatedEvent_getcontrol). GridEditorCreatedEvent#get_control
+
+ "Control":control.html *get_control*()
+
+Returns the edit control.
+
+h3(#GridEditorCreatedEvent_getrow). GridEditorCreatedEvent#get_row
+
+ Integer *get_row*()
+
+Returns the row at which the event occurred.
+
+h3(#GridEditorCreatedEvent_setcol). GridEditorCreatedEvent#set_col
+
+  *set_col*(%(arg-type)Integer% col)
+
+Sets the column at which the event occurred.
+
+h3(#GridEditorCreatedEvent_setcontrol). GridEditorCreatedEvent#set_control
+
+  *set_control*(%(arg-type)"Control":control.html% ctrl)
+
+Sets the edit control.
+
+h3(#GridEditorCreatedEvent_setrow). GridEditorCreatedEvent#set_row
+
+  *set_row*(%(arg-type)Integer% row)
+
+Sets the row at which the event occurred.
+

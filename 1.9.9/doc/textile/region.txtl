@@ -1,0 +1,246 @@
+h1(#wxregion). Wx::Region
+
+A Region represents a simple or complex region on a device context or window. It uses
+reference counting, so copying and assignment operations are fast.
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Region.new":#Region_new
+* "Region#clear":#Region_clear
+* "Region#contains":#Region_contains
+* "Region#convert_to_bitmap":#Region_converttobitmap
+* "Region#get_box":#Region_getbox
+* "Region#intersect":#Region_intersect
+* "Region#is_empty":#Region_isempty
+* "Region#subtract":#Region_subtract
+* "Region#offset":#Region_offset
+* "Region#union":#Region_union
+* "Region#xor":#Region_xor
+
+</div>
+
+
+h3(#Region_new). Region.new
+
+  *Region.new*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+             %(arg-type)Integer% height)
+
+Constructs a rectangular region with the given position and size.
+
+  *Region.new*(%(arg-type)"Point":point.html% topLeft,  %(arg-type)"Point":point.html% bottomRight)
+
+Constructs a rectangular region from the top left point and the bottom right point.
+
+  *Region.new*(%(arg-type)"Rect":rect.html% rect)
+
+Constructs a rectangular region a Rect object.
+
+  *Region.new*(%(arg-type)"Region":region.html% region)
+
+Constructs a region by copying another region.
+
+  *Region.new*(%(arg-type)Integer% n,  %(arg-type)"Point":point.html% points, 
+             %(arg-type)Integer% fillStyle = WINDING_RULE)
+
+Constructs a region corresponding to the polygon made of _n_ points in the
+provided array. _fillStyle_ parameter may have values
+@WINDING_RULE@ or @ODDEVEN_RULE@.
+
+*NB:* This constructor is only implemented for Win32 and GTK+ Widgets ports.
+
+  *Region.new*(%(arg-type)"Bitmap":bitmap.html% bmp)
+
+  *Region.new*(%(arg-type)"Bitmap":bitmap.html% bmp,                   %(arg-type)"Colour":colour.html% transColour, 
+            		  %(arg-type)Integer% tolerance = 0)
+
+Constructs a region using the non-transparent pixels of a bitmap.  See
+"Union":regionunion.html for more details.
+
+
+  *destructor*()
+
+Destructor.
+
+h3(#Region_clear). Region#clear
+
+  *clear*()
+
+Clears the current region.
+
+h3(#Region_contains). Region#contains
+
+ Integer *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+ Integer *contains*(%(arg-type)"Point":point.html% pt)
+
+Returns a false or true value indicating whether the given point is
+contained within the region.
+
+ Integer *contains*(%(arg-type)"Rect":rect.html% rect)
+ Integer *contains*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                    %(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+Returns a false or true value indicating whether the given rectangle is
+contained within the region.
+
+h4. Return value
+
+All these methods test whether a given point or rectangle is contained
+with the region. If the point or rectangle is completely outside the
+rectangle, returns @false@. If the point or rectangle is contained,
+returns an integer (which will be true in Ruby). 
+
+If testing a Rectangle the return value will distinguish between a
+wholly-contained rectangle (which will return value equal to
+@Wx::IN_REGION@) and a partly overlapping rectangle (which will have a
+return value of @Wx::PART_REGION@). Note that on Windows, this
+distinction is not made; the return value will always be @false@ or
+@Wx::IN_REGION@)
+
+h3(#Region_converttobitmap). Region#convert_to_bitmap
+
+ "Bitmap":bitmap.html *convert_to_bitmap*()
+
+Convert the region to a black and white bitmap with the white pixels
+being inside the region.
+
+h3(#Region_getbox). Region#get_box
+
+ "Rect":rect.html *get_box*()
+
+Returns the outer bounds of the region.
+
+h3(#Region_intersect). Region#intersect
+
+ Boolean *intersect*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                   %(arg-type)Integer% height)
+
+Finds the intersection of this region and another, rectangular region, specified using position and size.
+
+ Boolean *intersect*(%(arg-type)"Rect":rect.html% rect)
+
+Finds the intersection of this region and another, rectangular region.
+
+ Boolean *intersect*(%(arg-type)"Region":region.html% region)
+
+Finds the intersection of this region and another region.
+
+h4. Return value
+
+@true@ if successful, @false@ otherwise.
+
+h4. Remarks
+
+Creates the intersection of the two regions, that is, the parts which are in both regions. The result
+is stored in this region.
+
+h3(#Region_isempty). Region#is_empty
+
+ Boolean *is_empty*()
+
+Returns @true@ if the region is empty, @false@ otherwise.
+
+h3(#Region_subtract). Region#subtract
+
+ Boolean *subtract*(%(arg-type)"Rect":rect.html% rect)
+
+Subtracts a rectangular region from this region.
+
+ Boolean *subtract*(%(arg-type)"Region":region.html% region)
+
+Subtracts a region from this region.
+
+h4. Return value
+
+@true@ if successful, @false@ otherwise.
+
+h4. Remarks
+
+This operation combines the parts of 'this' region that are not part of the second region.
+The result is stored in this region.
+
+h3(#Region_offset). Region#offset
+
+ Boolean *offset*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Moves the region by the specified offsets in horizontal and vertical
+directions.
+
+h4. Return value
+
+@true@ if successful, @false@ otherwise (the region is unchanged then).
+
+h3(#Region_union). Region#union
+
+ Boolean *union*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+               %(arg-type)Integer% height)
+
+Finds the union of this region and another, rectangular region, specified using position and size.
+
+ Boolean *union*(%(arg-type)"Rect":rect.html% rect)
+
+Finds the union of this region and another, rectangular region.
+
+ Boolean *union*(%(arg-type)"Region":region.html% region)
+
+Finds the union of this region and another region.
+
+ Boolean *union*(%(arg-type)"Bitmap":bitmap.html% bmp)
+
+Finds the union of this region and the non-transparent pixels of a
+bitmap. Bitmap's mask is used to determine transparency. If the bitmap doesn't
+have a mask, solid rectangle of bitmap's dimensions is used.
+
+ Boolean *union*(%(arg-type)"Bitmap":bitmap.html% bmp,                   %(arg-type)"Colour":colour.html% transColour, 
+              		  %(arg-type)Integer% tolerance = 0)
+
+Finds the union of this region and the non-transparent pixels of a
+bitmap. Colour to be treated as transparent is specified in the
+transColour argument, along with an
+optional colour tolerance value.
+
+h4. Return value
+
+@true@ if successful, @false@ otherwise.
+
+h4. Remarks
+
+This operation creates a region that combines all of this region and the second region.
+The result is stored in this region.
+
+h3(#Region_xor). Region#xor
+
+ Boolean *xor*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+             %(arg-type)Integer% height)
+
+Finds the Xor of this region and another, rectangular region, specified using position and size.
+
+ Boolean *xor*(%(arg-type)"Rect":rect.html% rect)
+
+Finds the Xor of this region and another, rectangular region.
+
+ Boolean *xor*(%(arg-type)"Region":region.html% region)
+
+Finds the Xor of this region and another region.
+
+h4. Return value
+
+@true@ if successful, @false@ otherwise.
+
+h4. Remarks
+
+This operation creates a region that combines all of this region and the second region, except
+for any overlapping areas. The result is stored in this region.
+
+h3(#Region_assign). Region#=
+
+  *operator $=$*(%(arg-type)"Region":region.html% region)
+
+Copies _region_ by reference counting.
+

@@ -1,0 +1,599 @@
+h1(#wxfont). Wx::Font
+
+A font is an object which determines the appearance of text. Fonts are
+used for drawing text to a device context, and setting the appearance of
+a window's text. You can retrieve the current system font settings with
+"SystemSettings":systemsettings.html.
+
+"SystemSettings":systemsettings.html
+
+Note that because this class wraps a platform-specific GUI resource, you
+shouldn't create instances of it until the app is running; ie until
+after you have called App#main_loop or App.run.
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Constants
+
+The possible constant values for the family parameter of "Font
+constructor":fontctor.html are (the old names are for compatibility only):
+
+     FONTFAMILY_DEFAULT = DEFAULT,
+     FONTFAMILY_DECORATIVE = DECORATIVE,
+     FONTFAMILY_ROMAN = ROMAN,
+     FONTFAMILY_SCRIPT = SCRIPT,
+     FONTFAMILY_SWISS = SWISS,
+     FONTFAMILY_MODERN = MODERN,
+     FONTFAMILY_TELETYPE = TELETYPE,
+     FONTFAMILY_MAX
+ 
+
+The possible values for the weight parameter are (the old names
+are for compatibility only):
+
+     FONTWEIGHT_NORMAL = NORMAL,
+     FONTWEIGHT_LIGHT = LIGHT,
+     FONTWEIGHT_BOLD = BOLD,
+     FONTWEIGHT_MAX
+
+The font flags which can be used during the font creation are:
+
+     # no special flags: font with default weight/slant/anti-aliasing
+     FONTFLAG_DEFAULT          = 0,
+ 
+     # slant flags (default: no slant)
+     FONTFLAG_ITALIC           = 1 << 0,
+     FONTFLAG_SLANT            = 1 << 1,
+ 
+     # weight flags (default: medium)
+     FONTFLAG_LIGHT            = 1 << 2,
+     FONTFLAG_BOLD             = 1 << 3,
+ 
+     # anti-aliasing flag: force on or off (default: the current system default)
+     FONTFLAG_ANTIALIASED      = 1 << 4,
+     FONTFLAG_NOT_ANTIALIASED  = 1 << 5,
+ 
+     # underlined/strikethrough flags (default: no lines)
+     FONTFLAG_UNDERLINED       = 1 << 6,
+     FONTFLAG_STRIKETHROUGH    = 1 << 7,
+
+The known font encodings are:
+
+     FONTENCODING_SYSTEM = -1,     // system default
+     FONTENCODING_DEFAULT,         // current default encoding
+ 
+     // ISO8859 standard defines a number of single-byte charsets
+     FONTENCODING_ISO8859_1,       // West European (Latin1)
+     FONTENCODING_ISO8859_2,       // Central and East European (Latin2)
+     FONTENCODING_ISO8859_3,       // Esperanto (Latin3)
+     FONTENCODING_ISO8859_4,       // Baltic (old) (Latin4)
+     FONTENCODING_ISO8859_5,       // Cyrillic
+     FONTENCODING_ISO8859_6,       // Arabic
+     FONTENCODING_ISO8859_7,       // Greek
+     FONTENCODING_ISO8859_8,       // Hebrew
+     FONTENCODING_ISO8859_9,       // Turkish (Latin5)
+     FONTENCODING_ISO8859_10,      // Variation of Latin4 (Latin6)
+     FONTENCODING_ISO8859_11,      // Thai
+     FONTENCODING_ISO8859_12,      // doesn't exist currently, but put it
+                                     // here anyhow to make all ISO8859
+                                     // consecutive numbers
+     FONTENCODING_ISO8859_13,      // Baltic (Latin7)
+     FONTENCODING_ISO8859_14,      // Latin8
+     FONTENCODING_ISO8859_15,      // Latin9 (a.k.a. Latin0, includes euro)
+     FONTENCODING_ISO8859_MAX,
+ 
+     // Cyrillic charset soup (see http://czyborra.com/charsets/cyrillic.html)
+     FONTENCODING_KOI8,            // we don't support any of KOI8 variants
+     FONTENCODING_ALTERNATIVE,     // same as MS-DOS CP866
+     FONTENCODING_BULGARIAN,       // used under Linux in Bulgaria
+ 
+     // what would we do without Microsoft? They have their own encodings
+         // for DOS
+     FONTENCODING_CP437,           // original MS-DOS codepage
+     FONTENCODING_CP850,           // CP437 merged with Latin1
+     FONTENCODING_CP852,           // CP437 merged with Latin2
+     FONTENCODING_CP855,           // another cyrillic encoding
+     FONTENCODING_CP866,           // and another one
+         // and for Windows
+     FONTENCODING_CP874,           // WinThai
+     FONTENCODING_CP1250,          // WinLatin2
+     FONTENCODING_CP1251,          // WinCyrillic
+     FONTENCODING_CP1252,          // WinLatin1
+     FONTENCODING_CP1253,          // WinGreek (8859-7)
+     FONTENCODING_CP1254,          // WinTurkish
+     FONTENCODING_CP1255,          // WinHebrew
+     FONTENCODING_CP1256,          // WinArabic
+     FONTENCODING_CP1257,          // WinBaltic (same as Latin 7)
+     FONTENCODING_CP12_MAX,
+ 
+     FONTENCODING_UTF7,            // UTF-7 Unicode encoding
+     FONTENCODING_UTF8,            // UTF-8 Unicode encoding
+ 
+     FONTENCODING_UNICODE,         // Unicode - currently used only by
+                                     // EncodingConverter class
+ 
+     FONTENCODING_MAX
+
+h2. Predefined font constants
+
+Note that with the exception of @WX::NULL_FONT@, these are not defined
+until the App's main loop has begun.
+
+* @Wx::NULL_FONT@
+* @Wx::NORMAL_FONT@
+* @Wx::SMALL_FONT@
+* @Wx::ITALIC_FONT@
+* @Wx::SWISS_FONT@
+
+
+
+h2. See also
+
+"Font overview":fontoverview.html, "DC#set_font":dc.html#DC_setfont, "DC#draw_text":dc.html#DC_drawtext, "DC#get_text_extent":dc.html#DC_gettextextent, "FontDialog":fontdialog.html, "SystemSettings":systemsettings.html
+
+<div id="methods">
+
+h2. Methods
+
+h3. Class Methods
+
+* "Font#get_default_encoding":#Font_getdefaultencoding
+* "Font#get_default_encoding_name":#Font_getdefaultencodingname
+* "Font.new":#Font_new
+
+h3. Instance Methods
+
+
+* "Font#is_fixed_width":#Font_isfixedwidth
+
+* "Font#get_face_name":#Font_getfacename
+* "Font#get_family":#Font_getfamily
+* "Font#get_native_font_info_desc":#Font_getnativefontinfodesc
+* "Font#get_native_font_info_user_desc":#Font_getnativefontinfouserdesc
+* "Font#get_point_size":#Font_getpointsize
+* "Font#get_style":#Font_getstyle
+* "Font#get_underlined":#Font_getunderlined
+* "Font#get_weight":#Font_getweight
+* "Font#new":#Font_new
+* "Font#is_ok":#Font_isok
+* "Font#set_default_encoding":#Font_setdefaultencoding
+* "Font#set_face_name":#Font_setfacename
+* "Font#set_family":#Font_setfamily
+* "Font#set_native_font_info":#Font_setnativefontinfo
+* "Font#set_native_font_info_user_desc":#Font_setnativefontinfouserdesc
+* "Font#set_point_size":#Font_setpointsize
+* "Font#set_style":#Font_setstyle
+* "Font#set_underlined":#Font_setunderlined
+* "Font#set_weight":#Font_setweight
+
+</div>
+
+h2. Class Methods
+
+
+h3(#Font_getdefaultencoding). Font.get_default_encoding
+
+ Integer *get_default_encoding*()
+
+Returns an integer constant identifying the current application's
+default encoding. This is set by the OS, and may be changed by using
+"set_default_encoding":#Font_setdefaultencoding 
+
+h4. See also
+
+"get_default_encoding_name":#Font_getdefaultencodingname
+
+h3(#Font_getdefaultencodingname). Font.get_default_encoding_name
+
+ String *get_default_encoding_name*()
+
+Returns the name of the current application's default encoding. This is
+returned as a string suitable for use with Ruby's 'iconv' library.
+
+h4. See also
+
+"Font encoding overview":fontencodingoverview.html,
+
+h3(#Font_new). Font.new
+
+  *Font.new*(%(arg-type)"Font":font.html% font)
+
+Copy constructor, uses "reference counting":trefcount.html.
+
+  *Font.new*(%(arg-type)Integer% pointSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
+           %(arg-type)Integer% style, 
+           %(arg-type)"FontWeight":fontweight.html% weight, 
+           %(arg-type)Boolean% underline = false, 
+           %(arg-type)String% faceName = "", 
+           %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
+
+  *Font.new*(%(arg-type)"Size":size.html% pixelSize,  %(arg-type)"FontFamily":fontfamily.html% family,  %(arg-type)Integer% style, 
+           %(arg-type)"FontWeight":fontweight.html% weight, 
+           %(arg-type)Boolean% underline = false, 
+           %(arg-type)String% faceName = "", 
+           %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
+
+Creates a font object with the specified attributes.
+
+h4. Parameters
+
+* _pointSize_ Size in points.
+* _pixelSize_ Size in pixels: this is directly supported only under MSW
+currently where this constructor can be used directly, under other platforms a
+font with the closest size to the given one is found using binary search and
+the static "New":fontnew.html method must be used.
+* _family_ Font family, a generic way of referring to fonts without specifying actual facename. One of:
+
+
+
+|*FONTFAMILY_DEFAULT*|Chooses a default font.|
+|*FONTFAMILY_DECORATIVE*|A decorative font.|
+|*FONTFAMILY_ROMAN*|A formal, serif font.|
+|*FONTFAMILY_SCRIPT*|A handwriting font.|
+|*FONTFAMILY_SWISS*|A sans-serif font.|
+|*FONTFAMILY_MODERN*|A fixed pitch font.|
+|*FONTFAMILY_TELETYPE*|A teletype font.|
+
+* _style_ One of *FONTSTYLE_NORMAL*, *FONTSTYLE_SLANT* and *FONTSTYLE_ITALIC*.
+* _weight_ Font weight, sometimes also referred to as font boldness. One of:
+
+
+
+|*FONTWEIGHT_NORMAL*|Normal font.|
+|*FONTWEIGHT_LIGHT*|Light font.|
+|*FONTWEIGHT_BOLD*|Bold font.|
+
+* _underline_ The value can be true or false. At present this has an effect on Windows and Motif 2.x only.
+* _faceName_ An optional string specifying the actual typeface to be used. If it is an empty string,
+a default typeface will be chosen based on the family.
+* _encoding_ An encoding which may be one of
+
+
+|*FONTENCODING_SYSTEM*|Default system encoding.|
+|*FONTENCODING_DEFAULT*|Default application encoding: thisis the encoding set by calls to"set_default_encoding":#Font_setdefaultencoding and which may be set to,say, KOI8 to create all fonts by default with KOI8 encoding. Initially, thedefault application encoding is the same as default system encoding.|
+|*FONTENCODING_ISO8859_1...15*|ISO8859 encodings.|
+|*FONTENCODING_KOI8*|The standard Russian encoding for Internet.|
+|*FONTENCODING_CP1250...1252*|Windows encodings similar to ISO8859 (but not identical).|
+
+If the specified encoding isn't available, no font is created
+(see also "font encoding overview":fontencodingoverview.html).
+
+
+h4. Remarks
+
+If the desired font does not exist, the closest match will be chosen.
+Under Windows, only scalable TrueType fonts are used.
+
+See also "DC#set_font":dc.html#DC_setfont, "DC#draw_text":dc.html#DC_drawtext
+and "DC#get_text_extent":dc.html#DC_gettextextent.
+
+h3(#Font_setdefaultencoding). Font#set_default_encoding
+
+  *set_default_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
+
+Sets the default font encoding, passing a valid @Wx::FONTENCODING_XX@ constant.
+
+h4. See also
+
+"Font encoding overview":fontencodingoverview.html,
+"get_default_encoding":#Font_getdefaultencoding
+
+
+h3(#Font_setdefaultencoding). Font#set_default_encoding_name
+
+  *set_default_encoding*(%(arg-type)"FontEncoding":fontencoding.html% encoding)
+
+Sets the default font encoding, passing an encoding name.
+
+h4. See also
+
+"Font encoding overview":fontencodingoverview.html,
+"get_default_encoding":#Font_getdefaultencoding
+
+
+
+h2. Instance Methods
+
+h3(#Font_isfixedwidth). Font#is_fixed_width
+
+ Boolean *is_fixed_width*()
+
+Returns @true@ if the font is a fixed width (or monospaced) font,
+@false@ if it is a proportional one or font is invalid.
+
+h3(#Font_getfacename). Font#get_face_name
+
+ String *get_face_name*()
+
+Returns the typeface name associated with the font, or the empty string if there is no
+typeface information.
+
+h4. See also
+
+"Font#set_face_name":font.html#Font_setfacename
+
+
+h3(#Font_getfamily). Font#get_family
+
+ "FontFamily":fontfamily.html *get_family*()
+
+Gets the font family. See "Font#set_family":font.html#Font_setfamily for a list of valid
+family identifiers.
+
+h4. See also
+
+"Font#set_family":font.html#Font_setfamily
+
+
+h3(#Font_getnativefontinfodesc). Font#get_native_font_info_desc
+
+ String *get_native_font_info_desc*()
+
+Returns the platform-dependent string completely describing this font.
+Returned string is always non-empty.
+Note that the returned string is not meant to be shown or edited by the user: a typical
+use of this function is for serializing in string-form a Font object.
+
+h4. See also
+
+"Font#set_native_font_info":font.html#Font_setnativefontinfo,"Font#get_native_font_info_user_desc":font.html#Font_getnativefontinfouserdesc
+
+
+h3(#Font_getnativefontinfouserdesc). Font#get_native_font_info_user_desc
+
+ String *get_native_font_info_user_desc*()
+
+Returns a user-friendly string for this font object. Returned string is always non-empty.
+Some examples of the formats of returned strings (which are platform-dependent) are in "set_native_font_info_user_desc":#Font_setnativefontinfouserdesc.
+
+h4. See also
+
+"Font#get_native_font_info_desc":font.html#Font_getnativefontinfodesc
+
+
+h3(#Font_getpointsize). Font#get_point_size
+
+ Integer *get_point_size*()
+
+Gets the point size.
+
+h4. See also
+
+"Font#set_point_size":font.html#Font_setpointsize
+
+
+h3(#Font_getstyle). Font#get_style
+
+ Integer *get_style*()
+
+Gets the font style. See "Font.new":font.html#Font_new for a list of valid
+styles.
+
+h4. See also
+
+"Font#set_style":font.html#Font_setstyle
+
+
+h3(#Font_getunderlined). Font#get_underlined
+
+ Boolean *get_underlined*()
+
+Returns true if the font is underlined, false otherwise.
+
+h4. See also
+
+"Font#set_underlined":font.html#Font_setunderlined
+
+
+h3(#Font_getweight). Font#get_weight
+
+ "FontWeight":fontweight.html *get_weight*()
+
+Gets the font weight. See "Font.new":font.html#Font_new for a list of valid
+weight identifiers.
+
+h4. See also
+
+"Font#set_weight":font.html#Font_setweight
+
+
+h3(#Font_new). Font#new
+
+ "Font":font.html *new*(%(arg-type)Integer% pointSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
+            %(arg-type)Integer% style, 
+            %(arg-type)"FontWeight":fontweight.html% weight, 
+            %(arg-type)Boolean% underline = false, 
+            %(arg-type)String% faceName = "", 
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
+
+ "Font":font.html *new*(%(arg-type)Integer% pointSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
+            %(arg-type)Integer% flags = @FONTFLAG_DEFAULT@, 
+            %(arg-type)String% faceName = "", 
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
+
+ "Font":font.html *new*(%(arg-type)"Size":size.html% pixelSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
+            %(arg-type)Integer% style, 
+            %(arg-type)"FontWeight":fontweight.html% weight, 
+            %(arg-type)Boolean% underline = false, 
+            %(arg-type)String% faceName = "", 
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
+
+ "Font":font.html *new*(%(arg-type)"Size":size.html% pixelSize,  %(arg-type)"FontFamily":fontfamily.html% family, 
+            %(arg-type)Integer% flags = @FONTFLAG_DEFAULT@, 
+            %(arg-type)String% faceName = "", 
+            %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_DEFAULT)
+
+These functions take the same parameters as "Font
+constructor":fontctor.html and return a new font object allocated on the heap.
+
+Using @New()@ is currently the only way to directly create a font with
+the given size in pixels on platforms other than MSW.
+
+
+h3(#Font_isok). Font#is_ok
+
+ Boolean *is_ok*()
+
+Returns @true@ if this object is a valid font, @false@ otherwise.
+
+
+h3(#Font_setfacename). Font#set_face_name
+
+ Boolean *set_face_name*(%(arg-type)String% faceName)
+
+Sets the facename for the font.
+Returns  if the given face name exists;  otherwise.
+
+h4. Parameters
+
+* _faceName_ A valid facename, which should be on the end-user's system.
+
+h4. Remarks
+
+To avoid portability problems, don't rely on a specific face, but specify the font family
+instead or as well. A suitable font will be found on the end-user's system. If both the
+family and the facename are specified, Widgets will first search for the specific face,
+and then for a font belonging to the same family.
+
+h4. See also
+
+"Font#get_face_name":font.html#Font_getfacename, "Font#set_family":font.html#Font_setfamily
+
+
+h3(#Font_setfamily). Font#set_family
+
+  *set_family*(%(arg-type)"FontFamily":fontfamily.html% family)
+
+Sets the font family.
+
+h4. Parameters
+
+* _family_ One of:
+
+
+
+|*FONTFAMILY_DEFAULT*|Chooses a default font.|
+|*FONTFAMILY_DECORATIVE*|A decorative font.|
+|*FONTFAMILY_ROMAN*|A formal, serif font.|
+|*FONTFAMILY_SCRIPT*|A handwriting font.|
+|*FONTFAMILY_SWISS*|A sans-serif font.|
+|*FONTFAMILY_MODERN*|A fixed pitch font.|
+|*FONTFAMILY_TELETYPE*|A teletype font.|
+
+
+h4. See also
+
+"Font#get_family":font.html#Font_getfamily, "Font#set_face_name":font.html#Font_setfacename
+
+
+h3(#Font_setnativefontinfo). Font#set_native_font_info
+
+ Boolean *set_native_font_info*(%(arg-type)String% info)
+
+Creates the font corresponding to the given native font description string and returns  if
+the creation was successful.
+which must have been previously returned by
+"get_native_font_info_desc":#Font_getnativefontinfodesc. If the string is
+invalid, font is unchanged. This function is typically used for de-serializing a Font
+object previously saved in a string-form.
+
+h4. See also
+
+"Font#set_native_font_info_user_desc":font.html#Font_setnativefontinfouserdesc
+
+
+h3(#Font_setnativefontinfouserdesc). Font#set_native_font_info_user_desc
+
+ Boolean *set_native_font_info_user_desc*(%(arg-type)String% info)
+
+Creates the font corresponding to the given native font description string and returns  if
+the creation was successful.
+Unlike "set_native_font_info":#Font_setnativefontinfo, this function accepts
+strings which are user-friendly.
+Examples of accepted string formats are:
+
+
+
+|Generic syntax|Example|
+|on |*GTK2*: @$[FACE-NAME]$ $[bold]$ $[oblique|italic]$ $[POINTSIZE]$@Monospace bold 10|
+|on |*MSW*: @$[light|bold]$ $[italic]$ $[FACE-NAME]$ $[POINTSIZE]$ $[ENCODING]$@Tahoma 10 WINDOWS-1252|
+|on |*Mac*: FIXMEFIXME|
+
+
+For more detailed information about the allowed syntaxes you can look at the documentation of the native API used for font-rendering (e.g. pango_font_description_from_stringhttp://developer.gnome.org/doc/API/2.0/pango/pango-Fonts.html\#pango-font-description-from-string).
+
+h4. See also
+
+"Font#set_native_font_info":font.html#Font_setnativefontinfo
+
+
+
+h3(#Font_setpointsize). Font#set_point_size
+
+  *set_point_size*(%(arg-type)Integer% pointSize)
+
+Sets the point size.
+
+h4. Parameters
+
+* _pointSize_ Size in points.
+
+h4. See also
+
+"Font#get_point_size":font.html#Font_getpointsize
+
+
+h3(#Font_setstyle). Font#set_style
+
+  *set_style*(%(arg-type)Integer% style)
+
+Sets the font style.
+
+h4. Parameters
+
+* _style_ One of *FONTSTYLE_NORMAL*, *FONTSTYLE_SLANT* and *FONTSTYLE_ITALIC*.
+
+h4. See also
+
+"Font#get_style":font.html#Font_getstyle
+
+
+h3(#Font_setunderlined). Font#set_underlined
+
+  *set_underlined*(%(arg-type)Boolean% underlined)
+
+Sets underlining.
+
+h4. Parameters
+
+* _underlining_ true to underline, false otherwise.
+
+h4. See also
+
+"Font#get_underlined":font.html#Font_getunderlined
+
+
+h3(#Font_setweight). Font#set_weight
+
+  *set_weight*(%(arg-type)"FontWeight":fontweight.html% weight)
+
+Sets the font weight.
+
+h4. Parameters
+
+* _weight_ One of:
+
+
+
+|*FONTWEIGHT_NORMAL*|Normal font.|
+|*FONTWEIGHT_LIGHT*|Light font.|
+|*FONTWEIGHT_BOLD*|Bold font.|
+
+
+h4. See also
+
+"Font#get_weight":font.html#Font_getweight

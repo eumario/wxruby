@@ -1,0 +1,332 @@
+h1(#wxmdiparentframe). Wx::MDIParentFrame
+
+An MDI (Multiple Document Interface) parent frame is a window which can contain
+MDI child frames in its own `desktop'. It is a convenient way to avoid window clutter,
+and is used in many popular Windows applications, such as Microsoft Word(TM).
+
+h2. Derived from
+
+"Frame":frame.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+There may be multiple MDI parent frames in a single application, but this probably only makes sense
+within programming development environments.
+
+Child frames may be of class "MDIChildFrame":mdichildframe.html (contained
+within the parent frame) or "Frame":frame.html (shown as a top-level frame).
+
+An MDI parent frame always has a "MDIClientWindow":mdiclientwindow.html associated with it, which
+is the parent for MDI client frames.
+This client window may be resized to accommodate non-MDI windows, as seen in Microsoft Visual C++ (TM) and
+Microsoft Publisher (TM), where a documentation window is placed to one side of the workspace.
+
+MDI remains popular despite dire warnings from Microsoft itself that MDI is an obsolete
+user interface style.
+
+The implementation is native in Windows, and simulated under Motif. Under Motif,
+the child window frames will often have a different appearance from other frames
+because the window decorations are simulated.
+
+h2. Window styles
+
+
+
+|@CAPTION@|Puts a caption on the frame.|
+|@DEFAULT_FRAME_STYLE@|Defined as *MINIMIZE_BOX ** MAXIMIZE_BOX ** THICK_FRAME ** SYSTEM_MENU ** CAPTION*.|
+|@HSCROLL@|Displays a horizontal scrollbar in the _client window_, allowingthe user to view child frames that are off the current view.|
+|@ICONIZE@|Display the frame iconized (minimized) (Windows only).|
+|@MAXIMIZE@|Displays the frame maximized (Windows only).|
+|@MAXIMIZE_BOX@|Displays a maximize box on the frame (Windows and Motif only).|
+|@MINIMIZE@|Identical to *ICONIZE*.|
+|@MINIMIZE_BOX@|Displays a minimize box on the frame (Windows and Motif only).|
+|@RESIZE_BORDER@|Displays a resizeable border around the window (Motif only;for Windows, it is implicit in THICK_FRAME).|
+|@STAY_ON_TOP@|Stay on top of other windows (Windows only).|
+|@SYSTEM_MENU@|Displays a system menu (Windows and Motif only).|
+|@THICK_FRAME@|Displays a thick frame around the window (Windows and Motif only).|
+|@VSCROLL@|Displays a vertical scrollbar in the _client window_, allowingthe user to view child frames that are off the current view.|
+|@FRAME_NO_WINDOW_MENU@|Under Windows, removes the Window menu that is normallyadded automatically.|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. See also
+
+"MDIChildFrame":mdichildframe.html, "MDIClientWindow":mdiclientwindow.html, "Frame":frame.html, "Dialog":dialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MDIParentFrame.new":#MDIParentFrame_new
+* "MDIParentFrame#activate_next":#MDIParentFrame_activatenext
+* "MDIParentFrame#activate_previous":#MDIParentFrame_activateprevious
+* "MDIParentFrame#arrange_icons":#MDIParentFrame_arrangeicons
+* "MDIParentFrame#cascade":#MDIParentFrame_cascade
+* "MDIParentFrame#create":#MDIParentFrame_create
+* "MDIParentFrame#get_client_size":#MDIParentFrame_getclientsize
+* "MDIParentFrame#get_active_child":#MDIParentFrame_getactivechild
+* "MDIParentFrame#get_client_window":#MDIParentFrame_getclientwindow
+* "MDIParentFrame#get_tool_bar":#MDIParentFrame_gettoolbar
+* "MDIParentFrame#get_window_menu":#MDIParentFrame_getwindowmenu
+* "MDIParentFrame#on_create_client":#MDIParentFrame_oncreateclient
+* "MDIParentFrame#set_tool_bar":#MDIParentFrame_settoolbar
+* "MDIParentFrame#set_window_menu":#MDIParentFrame_setwindowmenu
+* "MDIParentFrame#tile":#MDIParentFrame_tile
+
+</div>
+
+
+h3(#MDIParentFrame_new). MDIParentFrame.new
+
+  *MDIParentFrame.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                     %(arg-type)Integer% style = DEFAULT_FRAME_STYLE VSCROLL HSCROLL, 
+                     %(arg-type)String% name = "frame")
+
+Constructor, creating the window.
+
+h4. Parameters
+
+* _parent_ The window parent. This should be NULL.
+* _id_ The window identifier. It may take a value of -1 to indicate a default value.
+* _title_ The caption to be displayed on the frame's title bar.
+* _pos_ The window position. A value of (-1, -1) indicates a default position, chosen by
+either the windowing system or Widgets, depending on platform.
+* _size_ The window size. A value of (-1, -1) indicates a default size, chosen by
+either the windowing system or Widgets, depending on platform.
+* _style_ The window style. See "MDIParentFrame":mdiparentframe.html.
+* _name_ The name of the window. This parameter is used to associate a name with the item,
+allowing the application user to set Motif resource values for
+individual windows.
+
+h4. Remarks
+
+During the construction of the frame, the client window will be created. To use a different class
+from "MDIClientWindow":mdiclientwindow.html, override "MDIParentFrame#on_create_client":mdiparentframe.html#MDIParentFrame_oncreateclient.
+
+Under Windows 95, the client window will automatically have a sunken border style when
+the active child is not maximized, and no border style when a child is maximized.
+
+h4. See also
+
+"MDIParentFrame#create":mdiparentframe.html#MDIParentFrame_create, "MDIParentFrame#on_create_client":mdiparentframe.html#MDIParentFrame_oncreateclient
+
+  *destructor*()
+
+Destructor. Destroys all child windows and menu bar if present.
+
+h3(#MDIParentFrame_activatenext). MDIParentFrame#activate_next
+
+  *activate_next*()
+
+Activates the MDI child following the currently active one.
+
+h4. See also
+
+"MDIParentFrame#activate_previous":mdiparentframe.html#MDIParentFrame_activateprevious
+
+h3(#MDIParentFrame_activateprevious). MDIParentFrame#activate_previous
+
+  *activate_previous*()
+
+Activates the MDI child preceding the currently active one.
+
+h4. See also
+
+"MDIParentFrame#activate_next":mdiparentframe.html#MDIParentFrame_activatenext
+
+
+h3(#MDIParentFrame_arrangeicons). MDIParentFrame#arrange_icons
+
+  *arrange_icons*()
+
+Arranges any iconized (minimized) MDI child windows.
+
+h4. See also
+
+"MDIParentFrame#cascade":mdiparentframe.html#MDIParentFrame_cascade, "MDIParentFrame#tile":mdiparentframe.html#MDIParentFrame_tile
+
+h3(#MDIParentFrame_cascade). MDIParentFrame#cascade
+
+  *cascade*()
+
+Arranges the MDI child windows in a cascade.
+
+h4. See also
+
+"MDIParentFrame#tile":mdiparentframe.html#MDIParentFrame_tile, "MDIParentFrame#arrange_icons":mdiparentframe.html#MDIParentFrame_arrangeicons
+
+h3(#MDIParentFrame_create). MDIParentFrame#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_FRAME_STYLE VSCROLL HSCROLL, 
+                %(arg-type)String% name = "frame")
+
+Used in two-step frame construction. See "MDIParentFrame.new":mdiparentframe.html#MDIParentFrame_new for further details.
+
+h3(#MDIParentFrame_getclientsize). MDIParentFrame#get_client_size
+
+  *get_client_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+This gets the size of the frame `client area' in pixels.
+
+h4. Parameters
+
+* _width_ Receives the client width in pixels.
+* _height_ Receives the client height in pixels.
+
+h4. Remarks
+
+The client area is the area which may be drawn on by the programmer, excluding title bar, border, status bar,
+and toolbar if present.
+
+If you wish to manage your own toolbar (or perhaps you have more than one),
+provide an *OnSize* event handler. Call *GetClientSize* to
+find how much space there is for your windows and don't forget to set the size and position
+of the MDI client window as well as your toolbar and other windows (but not the status bar).
+
+If you have set a toolbar with "MDIParentFrame#set_toolbar":mdiparentframe.html#MDIParentFrame_settoolbar,
+the client size returned will have subtracted the toolbar height. However, the available positions
+for the client window and other windows of the frame do not start at zero - you must add the toolbar height.
+
+The position and size of the status bar and toolbar (if known to the frame) are always managed
+by *MDIParentFrame*, regardless of what behaviour is defined in your *OnSize* event handler.
+However, the client window position and size are always set in *OnSize*, so if you override this
+event handler, make sure you deal with the client window.
+
+You do not have to manage the size and position of MDI child windows, since they are managed
+automatically by the client window.
+
+h4. See also
+
+"MDIParentFrame#get_tool_bar":mdiparentframe.html#MDIParentFrame_gettoolbar, "MDIParentFrame#set_tool_bar":mdiparentframe.html#MDIParentFrame_settoolbar, "MDIClientWindow":mdiclientwindow.html
+
+
+
+
+h3(#MDIParentFrame_getactivechild). MDIParentFrame#get_active_child
+
+ "MDIChildFrame":mdichildframe.html *get_active_child*()
+
+Returns a pointer to the active MDI child, if there is one.
+
+h3(#MDIParentFrame_getclientwindow). MDIParentFrame#get_client_window
+
+ "MDIClientWindow":mdiclientwindow.html *get_client_window*()
+
+Returns a pointer to the client window.
+
+h4. See also
+
+"MDIParentFrame#on_create_client":mdiparentframe.html#MDIParentFrame_oncreateclient
+
+h3(#MDIParentFrame_gettoolbar). MDIParentFrame#get_tool_bar
+
+ "Window":window.html *get_tool_bar*()
+
+Returns the window being used as the toolbar for this frame.
+
+h4. See also
+
+"MDIParentFrame#set_tool_bar":mdiparentframe.html#MDIParentFrame_settoolbar
+
+h3(#MDIParentFrame_getwindowmenu). MDIParentFrame#get_window_menu
+
+ "Menu":menu.html *get_window_menu*()
+
+Returns the current Window menu (added by Widgets to the menubar). This function
+is available under Windows only.
+
+h3(#MDIParentFrame_oncreateclient). MDIParentFrame#on_create_client
+
+ "MDIClientWindow":mdiclientwindow.html *on_create_client*()
+
+Override this to return a different kind of client window. If you override this function,
+you must create your parent frame in two stages, or your function will never be called,
+due to the way C++ treats virtual functions called from constructors. For example:
+
+
+   frame = new MyParentFrame;
+   frame->Create(parent, myParentFrameId, T("My Parent Frame"));
+ 
+
+h4. Remarks
+
+You might wish to derive from "MDIClientWindow":mdiclientwindow.html in order
+to implement different erase behaviour, for example, such as painting a bitmap
+on the background.
+
+Note that it is probably impossible to have a client window that scrolls as well as painting
+a bitmap or pattern, since in *OnScroll*, the scrollbar positions always return zero.
+(Solutions to: @julian.smart@btopenworld.com@).
+
+h4. See also
+
+"MDIParentFrame#get_client_window":mdiparentframe.html#MDIParentFrame_getclientwindow, "MDIClientWindow":mdiclientwindow.html
+
+h3(#MDIParentFrame_settoolbar). MDIParentFrame#set_tool_bar
+
+  *set_tool_bar*(%(arg-type)"Window":window.html% toolbar)
+
+Sets the window to be used as a toolbar for this
+MDI parent window. It saves the application having to manage the positioning
+of the toolbar MDI client window.
+
+h4. Parameters
+
+* _toolbar_ Toolbar to manage.
+
+h4. Remarks
+
+When the frame is resized, the toolbar is resized to be the width of
+the frame client area, and the toolbar height is kept the same.
+
+The parent of the toolbar must be this frame.
+
+If you wish to manage your own toolbar (or perhaps you have more than one),
+don't call this function, and instead manage your subwindows and the MDI client window by
+providing an *OnSize* event handler. Call "MDIParentFrame#get_client_size":mdiparentframe.html#MDIParentFrame_getclientsize to
+find how much space there is for your windows.
+
+Note that SDI (normal) frames and MDI child windows must always have their
+toolbars managed by the application.
+
+h4. See also
+
+"MDIParentFrame#get_tool_bar":mdiparentframe.html#MDIParentFrame_gettoolbar, "MDIParentFrame#get_client_size":mdiparentframe.html#MDIParentFrame_getclientsize
+
+h3(#MDIParentFrame_setwindowmenu). MDIParentFrame#set_window_menu
+
+  *set_window_menu*(%(arg-type)"Menu":menu.html% menu)
+
+Call this to change the current Window menu. Ownership of the menu object passes to
+the frame when you call this function.
+
+This call is available under Windows only.
+
+To remove the window completely, use the FRAME_NO_WINDOW_MENU window style.
+
+h3(#MDIParentFrame_tile). MDIParentFrame#tile
+
+  *tile*(%(arg-type)"Orientation":orientation.html% orient = HORIZONTAL)
+
+Tiles the MDI child windows either horizontally or vertically depending on
+whether orient is HORIZONTAL or VERTICAL.
+
+Currently only implemented for MSW, does nothing under the other platforms.
+
+h4. See also
+
+"MDIParentFrame#cascade":mdiparentframe.html#MDIParentFrame_cascade, "MDIParentFrame#arrange_icons":mdiparentframe.html#MDIParentFrame_arrangeicons
+
+

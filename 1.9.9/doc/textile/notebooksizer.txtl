@@ -1,0 +1,46 @@
+h1(#wxnotebooksizer). Wx::NotebookSizer
+
+*This class is deprecated and should not be used in new code! It is no
+longer needed, **"Notebook":notebook.html** control can be inserted
+into any sizer class and its minimal size will be determined correctly.
+See **"Sizer overview":sizeroverview.html** for more information.*
+
+NotebookSizer is a specialized sizer to make sizers work in connection
+with using notebooks. This sizer is different from any other sizer as 
+you must not add any children to it - instead, it queries the notebook class itself.
+The only thing this sizer does is to determine the size of the biggest
+page of the notebook and report an adjusted minimal size to a more toplevel
+sizer.
+
+h2. Derived from
+
+"Sizer":sizer.html
+
+"Object":object.html
+
+h2. See also
+
+"Sizer":sizer.html, "Notebook":notebook.html, "Sizer overview":sizeroverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "NotebookSizer.new":#NotebookSizer_new
+* "NotebookSizer#get_notebook":#NotebookSizer_getnotebook
+
+</div>
+
+
+h3(#NotebookSizer_wxnotebooksizer). NotebookSizer.new
+
+  *NotebookSizer.new*(%(arg-type)"Notebook":notebook.html% notebook)
+
+Constructor. It takes an associated notebook as its only parameter.
+
+h3(#NotebookSizer_getnotebook). NotebookSizer#get_notebook
+
+ "Notebook":notebook.html *get_notebook*()
+
+Returns the notebook associated with the sizer.
+

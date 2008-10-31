@@ -1,0 +1,311 @@
+h1(#wxgraphicscontext). Wx::GraphicsContext
+
+GraphicsContext is a drawing context that can be used to do high-quality
+anti-aliased drawing, and sophisticated transforms upon text, lines and
+images such as shears and rotations. 
+
+The GraphicsContext instance is the object that carries out the drawing
+upon a Window or other graphics surface, such as a Bitmap or Printer. In
+wxRuby, one is created by calling
+"GraphicsContext.create":#GraphicsContext_create and passing either an
+ordinary "DeviceContext":dc.html instance, or a "Window":window.html
+that should be drawn upon.
+
+h2. Derived from
+
+"GraphicsObject":graphicsobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GraphicsContext#create":#GraphicsContext_create
+* "GraphicsContext#create_pen":#GraphicsContext_createpen
+* "GraphicsContext#create_brush":#GraphicsContext_createbrush
+* "GraphicsContext#create_radial_gradient_brush":#GraphicsContext_createradialgradientbrush
+* "GraphicsContext#create_linear_gradient_brush":#GraphicsContext_createlineargradientbrush
+* "GraphicsContext#create_font":#GraphicsContext_createfont
+* "GraphicsContext#create_matrix":#GraphicsContext_creatematrix
+* "GraphicsContext#create_path":#GraphicsContext_createpath
+* "GraphicsContext#clip":#GraphicsContext_clip
+* "GraphicsContext#reset_clip":#GraphicsContext_resetclip
+* "GraphicsContext#draw_bitmap":#GraphicsContext_drawbitmap
+* "GraphicsContext#draw_ellipse":#GraphicsContext_drawellipse
+* "GraphicsContext#draw_icon":#GraphicsContext_drawicon
+* "GraphicsContext#draw_lines":#GraphicsContext_drawlines
+* "GraphicsContext#draw_path":#GraphicsContext_drawpath
+* "GraphicsContext#draw_rectangle":#GraphicsContext_drawrectangle
+* "GraphicsContext#draw_rounded_rectangle":#GraphicsContext_drawroundedrectangle
+* "GraphicsContext#draw_text":#GraphicsContext_drawtext
+* "GraphicsContext#fill_path":#GraphicsContext_fillpath
+* "GraphicsContext#stroke_path":#GraphicsContext_strokepath
+* "GraphicsContext#get_native_context":#GraphicsContext_getnativecontext
+* "GraphicsContext#get_partial_text_extents":#GraphicsContext_getpartialtextextents
+* "GraphicsContext#get_text_extent":#GraphicsContext_gettextextent
+* "GraphicsContext#rotate":#GraphicsContext_rotate
+* "GraphicsContext#scale":#GraphicsContext_scale
+* "GraphicsContext#translate":#GraphicsContext_translate
+* "GraphicsContext#get_transform":#GraphicsContext_gettransform
+* "GraphicsContext#set_transform":#GraphicsContext_settransform
+* "GraphicsContext#concat_transform":#GraphicsContext_concattransform
+* "GraphicsContext#set_brush":#GraphicsContext_setbrush
+* "GraphicsContext#set_font":#GraphicsContext_setfont
+* "GraphicsContext#set_pen":#GraphicsContext_setpen
+* "GraphicsContext#stroke_line":#GraphicsContext_strokeline
+* "GraphicsContext#stroke_lines":#GraphicsContext_strokelines
+
+</div>
+
+
+h3(#GraphicsContext_create). GraphicsContext#create
+
+ "GraphicsContext":graphicscontext.html *create*(%(arg-type)"WindowDC":windowdc.html% dc)
+
+Creates a GraphicsContext from a WindowDC (eg a PaintDC).
+
+ "GraphicsContext":graphicscontext.html *create*(%(arg-type)"Window":window.html% window)
+
+Creates a GraphicsContext from a Window.
+
+h3(#GraphicsContext_createpen). GraphicsContext#create_pen
+
+ "GraphicsPen":graphicspen.html *create_pen*(%(arg-type)"Pen":pen.html% pen)
+
+Creates a native pen from a Pen.
+
+h3(#GraphicsContext_createbrush). GraphicsContext#create_brush
+
+ "GraphicsBrush":graphicsbrush.html *create_brush*(%(arg-type)"Brush":brush.html% brush)
+
+Creates a native brush from a Brush.
+
+h3(#GraphicsContext_createradialgradientbrush). GraphicsContext#create_radial_gradient_brush
+
+ "GraphicsBrush":graphicsbrush.html *create_radial_gradient_brush*(%(arg-type)"Double":double.html% xo, 
+                                              %(arg-type)"Double":double.html% yo, 
+                                              %(arg-type)"Double":double.html% xc, 
+                                              %(arg-type)"Double":double.html% yc, 
+                                              %(arg-type)"Double":double.html% radius, 
+                                              %(arg-type)"Colour":colour.html% oColor, 
+                                              %(arg-type)"Colour":colour.html% cColor)
+
+Creates a native brush, having a radial gradient originating at (xo,yc) with color oColour and ends on a circle around (xc,yc) with radius r and color cColour
+
+h3(#GraphicsContext_createlineargradientbrush). GraphicsContext#create_linear_gradient_brush
+
+ "GraphicsBrush":graphicsbrush.html *create_linear_gradient_brush*(%(arg-type)"Double":double.html% x1, 
+                                              %(arg-type)"Double":double.html% y1, 
+                                              %(arg-type)"Double":double.html% x2, 
+                                              %(arg-type)"Double":double.html% y2, 
+                                              %(arg-type)% Colour&c1, 
+                                              %(arg-type)% Colour&c2)
+
+Creates a native brush, having a linear gradient, starting at (x1,y1) with color c1 to (x2,y2) with color c2
+
+h3(#GraphicsContext_createfont). GraphicsContext#create_font
+
+ "GraphicsFont":graphicsfont.html *create_font*(%(arg-type)"Font":font.html% font, 
+                            %(arg-type)"Colour":colour.html% col = BLACK)
+
+Creates a native graphics font from a Font and a text colour.
+
+h3(#GraphicsContext_creatematrix). GraphicsContext#create_matrix
+
+ "GraphicsMatrix":graphicsmatrix.html *create_matrix*(%(arg-type)"Double":double.html% a = 1.0, 
+                                %(arg-type)"Double":double.html% b = 0.0, 
+                                %(arg-type)"Double":double.html% c = 0.0, 
+                                %(arg-type)"Double":double.html% d = 1.0, 
+                                %(arg-type)"Double":double.html% tx = 0.0, 
+                                %(arg-type)"Double":double.html% ty = 0.0)
+
+Creates a native affine transformation matrix from the passed in values. The defaults result in an identity matrix.
+
+h3(#GraphicsContext_createpath). GraphicsContext#create_path
+
+ "GraphicsPath":graphicspath.html *create_path*()
+
+Creates a native graphics path which is initially empty.
+
+h3(#GraphicsContext_clip). GraphicsContext#clip
+
+  *clip*(%(arg-type)"Region":region.html% region)
+
+Clips drawings to the region, combined to current clipping region
+
+  *clip*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w,  %(arg-type)"Double":double.html% h)
+
+Clips drawings to the rectangle.
+
+h3(#GraphicsContext_resetclip). GraphicsContext#reset_clip
+
+  *reset_clip*()
+
+Resets the clipping to original shape.
+
+h3(#GraphicsContext_drawbitmap). GraphicsContext#draw_bitmap
+
+  *draw_bitmap*(%(arg-type)"Bitmap":bitmap.html% bmp,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y, 
+              %(arg-type)"Double":double.html% w, 
+              %(arg-type)"Double":double.html% h)
+
+Draws the bitmap. In case of a mono bitmap, this is treated as a mask and the current brushed is used for filling.
+
+h3(#GraphicsContext_drawellipse). GraphicsContext#draw_ellipse
+
+  *draw_ellipse*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+               %(arg-type)"Double":double.html% h)
+
+Draws an ellipse.
+
+h3(#GraphicsContext_drawicon). GraphicsContext#draw_icon
+
+  *draw_icon*(%(arg-type)"Icon":icon.html% icon,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y, 
+            %(arg-type)"Double":double.html% w, 
+            %(arg-type)"Double":double.html% h)
+
+Draws the icon.
+
+
+h3(#GraphicsContext_drawlines). GraphicsContext#draw_lines
+
+  *draw_lines*(%(arg-type)Integer% n,  %(arg-type)"Point2DDouble":point2ddouble.html% points, 
+             %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
+
+Draws a polygon.
+
+
+h3(#GraphicsContext_drawpath). GraphicsContext#draw_path
+
+  *draw_path*(%(arg-type)"GraphicsPath":graphicspath.html% path,  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
+
+Draws the path by first filling and then stroking.
+
+
+h3(#GraphicsContext_drawrectangle). GraphicsContext#draw_rectangle
+
+  *draw_rectangle*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+                 %(arg-type)"Double":double.html% h)
+
+Draws a rectangle.
+
+
+h3(#GraphicsContext_drawroundedrectangle). GraphicsContext#draw_rounded_rectangle
+
+  *draw_rounded_rectangle*(%(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y,  %(arg-type)"Double":double.html% w, 
+                         %(arg-type)"Double":double.html% h, 
+                         %(arg-type)"Double":double.html% radius)
+
+Draws a rounded rectangle.
+
+h3(#GraphicsContext_drawtext). GraphicsContext#draw_text
+
+  *draw_text*(%(arg-type)String% str,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y, 
+            %(arg-type)"Double":double.html% angle)
+
+  *draw_text*(%(arg-type)String% str,  %(arg-type)"Double":double.html% x,  %(arg-type)"Double":double.html% y)
+
+Draws a text at the defined position, at the given angle.
+
+h3(#GraphicsContext_fillpath). GraphicsContext#fill_path
+
+  *fill_path*(%(arg-type)"GraphicsPath":graphicspath.html% path,  %(arg-type)Integer% fillStyle = ODDEVEN_RULE)
+
+Fills the path with the current brush.
+
+h3(#GraphicsContext_strokepath). GraphicsContext#stroke_path
+
+  *stroke_path*(%(arg-type)"GraphicsPath":graphicspath.html% path)
+
+Strokes along a path with the current pen.
+
+
+h3(#GraphicsContext_getnativecontext). GraphicsContext#get_native_context
+
+  *get_native_context*()
+
+Returns the native context (CGContextRef for Core Graphics, Graphics pointer for GDIPlus and cairo_t pointer for cairo).
+
+h3(#GraphicsContext_getpartialtextextents). GraphicsContext#get_partial_text_extents
+
+  *get_partial_text_extents*(%(arg-type)String% text,  %(arg-type)"ArrayDouble":arraydouble.html% widths)
+
+Fills the _widths_ array with the widths from the beginning of 
+_text_ to the corresponding character of _text_.  
+
+h3(#GraphicsContext_gettextextent). GraphicsContext#get_text_extent
+
+  *get_text_extent*(%(arg-type)String% text,  %(arg-type)"Double":double.html% width,  %(arg-type)"Double":double.html% height, 
+                  %(arg-type)"Double":double.html% descent, 
+                  %(arg-type)"Double":double.html% externalLeading)
+
+Gets the dimensions of the string using the currently selected font.
+
+h3(#GraphicsContext_rotate). GraphicsContext#rotate
+
+	*rotate*(%(arg-type)Double% angle)
+	
+Rotates the current transformation matrix (radians)
+
+h3(#GraphicsContext_scale). GraphicsContext#scale
+
+	*scale*(%(arg-type)Double% x_scale, %(arg-type)Double% y_scale)
+	
+Scales the current transformation matrix.
+
+h3(#GraphicsContext_translate). GraphicsContext#translate
+
+	*translate*(%(arg-type)Double% dx, %(arg-type)Double% dy)
+	
+Translates the current transformation matrix.
+
+h3(#GraphicsContext_gettransform). GraphicsContext#get_transform
+
+	"GraphicsMatrix":graphicsmatrix.html *get_transform*()
+	
+Gets the current transformation matrix of this context.
+
+h3(#GraphicsContext_settransform). GraphicsContext#set_transform
+
+	*set_transform*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% matrix)
+	
+Sets the current transformation matrix of this context.
+
+h3(#GraphicsContext_concattransform). GraphicsContext#concat_transform
+
+	*concat_transform*(%(arg-type)"GraphicsMatrix":graphicsmatrix.html% matrix)
+	
+Concatenates the passed in transform with the current transform of this context.
+
+h3(#GraphicsContext_setbrush). GraphicsContext#set_brush
+
+	*set_brush*(%(arg-type)"Brush":brush.html% brush)
+	*set_brush*(%(arg-type)"GraphicsBrush":graphicsbrush.html% brush)	
+	
+Sets the brush for filling paths.
+
+h3(#GraphicsContext_setfont). GraphicsContext#set_font
+
+	*set_font*(%(arg-type)"Font":font.html% font, %(arg-type)"Colour":colour.html% colour)
+	*set_font*(%(arg-type)"GraphicsFont":graphicsfont.html% font)	
+	
+Sets the font for drawing text.
+
+h3(#GraphicsContext_setpen). GraphicsContext#set_pen
+
+	*set_pen*(%(arg-type)"Pen":pen.html% pen)
+	*set_pen*(%(arg-type)"GraphicsPen":graphicspen.html% pen)	
+	
+Sets the pen used for stroking.
+
+h3(#GraphicsContext_strokeline). GraphicsContext#strokeline
+
+	*strokeline*(%(arg-type)Double% x1,%(arg-type)Double% y1,%(arg-type)Double% x2,%(arg-type)Double% y2)
+	
+Strokes a single line.
+
+h3(#GraphicsContext_strokelines). GraphicsContext#strokelines
+
+	*strokelines*(%(arg-type)Integer% n,%(arg-type)"Point2DDouble":point2ddouble.html% begin_points,%(arg-type)"Point2DDouble":point2ddouble.html% end_points)
+	*strokelines*(%(arg-type)Integer% n,%(arg-type)"Point2DDouble":point2ddouble.html% points)
+	
+Stroke disconnected lines from begin to end points, fastest method available for this purpose.

@@ -1,0 +1,471 @@
+h1(#wxdialog). Wx::Dialog
+
+A dialog box is a window with a title bar and sometimes a system menu, which
+can be moved around the screen. It can contain controls and other windows and
+is usually used to allow the user to make some choice or to answer a
+question. 
+
+Many common interactions such as choosing a file or entering a
+password are encapsulated in subclasses of Wx::Dialog, and will be
+displayed using native dialogs.
+
+h2. Derived from
+
+"TopLevelWindow":toplevelwindow.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Dialog Buttons
+
+The dialog usually contains either a single button allowing to close the
+dialog or two buttons, one accepting the changes and the other one
+discarding them (such button, if present, is automatically activated if
+the user presses the @"Esc"@ key). By default, buttons with the standard
+@ID_OK@ and @ID_CANCEL@ identifiers behave as expected. It is also
+possible to use a button with a different identifier nstead, see
+"set_affirmative_id":#Dialog_setaffirmativeid and
+"set_escape_id":#Dialog_setescapeid.
+
+Also notice that the "create_button_sizer":#Dialog_createbuttonsizer 
+should be used to create the buttons appropriate for the current platform and
+positioned correctly (including their order which is
+platform-dependent).
+
+h2. Modal and modeless dialogs
+
+There are two kinds of dialog -- _modal_ and _modeless_. A modal dialog
+blocks program flow and user input on other windows until it is dismissed,
+whereas a modeless dialog behaves more like a frame in that program flow
+continues, and input in other windows is still possible. To show a modal dialog
+you should use the "show_modal":#Dialog_showmodal method while to show
+a dialog modelessly you simply use "show":dialogshow.html, just as with
+frames. 
+
+These methods return a value representing the user's choice from the
+dialog, such as 'OK' or 'Cancel'. To test these, do:
+
+ dlg = MyAskDialog.new(...)
+ case dlg.show_modal
+ when Wx::ID_OK # user clicked ok
+   ...
+ when Wx::ID_CANCEL # user clicked cancel or closed the dialog
+   ...
+ end
+
+As well as handling the ending of dialogs this way, an application can
+also define a "CloseEvent":closeevent.html handler for the dialog to
+respond to system close events, by calling @evt_close@.
+
+h2. Window styles
+
+|@CAPTION@|Puts a caption on the dialog box.|
+|@DEFAULT_DIALOG_STYLE@|Equivalent to a combination of CAPTION, CLOSE_BOX and SYSTEM_MENU (the last one is not used under Unix)|
+|@RESIZE_BORDER@|Display a resizeable frame around the window.|
+|@SYSTEM_MENU@|Display a system menu.|
+|@CLOSE_BOX@|Displays a close box on the frame.|
+|@MAXIMIZE_BOX@|Displays a maximize box on the dialog.|
+|@MINIMIZE_BOX@|Displays a minimize box on the dialog.|
+|@THICK_FRAME@|Display a thick frame around the window.|
+|@STAY_ON_TOP@|The dialog stays on top of all other windows.|
+|@NO_3D@|Under Windows, specifies that the child controlsshould not have 3D borders unless specified in the control.|
+|@DIALOG_NO_PARENT@|By default, a dialog created with a @nil@ parent window will be given the "application's top level window":app.html as parent. Use thisstyle to prevent this from happening and create an orphan dialog. This is not recommended for modal dialogs.|
+|@DIALOG_EX_CONTEXTHELP@|Under Windows, puts a query button on thecaption. When pressed, Windows will go into a context-sensitive help mode and Widgets will senda EVT_HELP event if the user clicked on an application window. _Note_ that this is an extendedstyle and must be set by calling "set_extra_style":#Dialog_setextrastyle before Create is called (two-step construction).|
+|@DIALOG_EX_METAL@|On Mac OS X, frames with this style will be shown with a metallic look. This is an _extra_ style.|
+
+
+Under Unix or Linux, MWM (the Motif Window Manager) or other window managers
+recognizing the MHM hints should be running for any of these styles to have an
+effect.
+
+See also "Generic window styles":windowstyles.html.
+
+h2. See also
+
+"Dialog overview":dialogoverview.html, "Frame":frame.html, "Validator overview":validatoroverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Dialog.new":#Dialog_new
+* "Dialog#centre":#Dialog_centre
+* "Dialog#create":#Dialog_create
+* "Dialog#create_button_sizer":#Dialog_createbuttonsizer
+* "Dialog#create_separated_button_sizer":#Dialog_createseparatedbuttonsizer
+* "Dialog#create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer
+* "Dialog#destroy":#Dialog_destroy
+* "Dialog#do_ok":#Dialog_dook
+* "Dialog#end_modal":#Dialog_endmodal
+* "Dialog#get_affirmative_id":#Dialog_getaffirmativeid
+* "Dialog#get_escape_id":#Dialog_getescapeid
+* "Dialog#get_return_code":#Dialog_getreturncode
+* "Dialog#get_tool_bar":#Dialog_gettoolbar
+* "Dialog#iconize":#Dialog_iconize
+* "Dialog#is_iconized":#Dialog_isiconized
+* "Dialog#is_modal":#Dialog_ismodal
+* "Dialog#on_sys_colour_changed":#Dialog_onsyscolourchanged
+* "Dialog#set_affirmative_id":#Dialog_setaffirmativeid
+* "Dialog#set_escape_id":#Dialog_setescapeid
+* "Dialog#set_icon":#Dialog_seticon
+* "Dialog#set_icons":#Dialog_seticons
+* "Dialog#set_modal":#Dialog_setmodal
+* "Dialog#set_return_code":#Dialog_setreturncode
+* "Dialog#show":#Dialog_show
+* "Dialog#show_modal":#Dialog_showmodal
+
+</div>
+
+
+
+h3(#Dialog_new). Dialog.new
+
+  *Dialog.new*()
+
+  *Dialog.new*(%(arg-type)"Window":window.html% parent,  
+               %(arg-type)Integer% id,  
+               %(arg-type)String% title, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+               %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
+               %(arg-type)String% name = "dialogBox")
+
+Constructors. A Dialog may be attached to a particular parent frame, in
+which case it will be automatically destroyed when that parent is
+closed. However, the _parent_ argument may be @nil@ - indeed it is
+possible to create an application that consists only of Dialogs. If a
+Dialog is created with a @nil@ parent, you must be sure to call
+"destroy":#Dialog_destroy on the dialog once it is no longer being
+used. Otherwise, your application may hang when it exits because there
+is a window still remaining in use, even if it is not visible.
+
+The zero-argument form is only useful when loading dialog subclasses
+using "XRC":xmlresource.html.
+
+h4. Parameters
+
+* _parent_ Can be nil, a frame or another dialog box.
+* _id_ An identifier for the dialog. A value of -1 is taken to mean a default.
+* _title_ The title of the dialog.
+* _pos_ The dialog position. A value of (-1, -1) indicates a default position, chosen by either the windowing system or wxRuby, depending on platform.
+* _size_ The dialog size. A value of (-1, -1) indicates a default size, chosen by either the windowing system or wxRuby, depending on platform.
+* _style_ The window style. See "Dialog":dialog.html.
+* _name_ Used to associate a name with the window,
+allowing the application user to set Motif resource values for
+individual dialog boxes.
+
+h4. See also
+
+"Dialog#create":dialog.html#Dialog_create
+
+
+  *destructor*()
+
+Destructor. Deletes any child windows before deleting the physical window.
+
+
+h3(#Dialog_centre). Dialog#centre
+
+  *centre*(%(arg-type)Integer% direction = BOTH)
+
+Centres the dialog box on the display.
+
+h4. Parameters
+
+* _direction_ May be @HORIZONTAL@, @VERTICAL@ or @BOTH@.
+
+
+h3(#Dialog_create). Dialog#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
+                %(arg-type)String% name = "dialogBox")
+
+Used for two-step dialog box construction. See "Dialog.new":dialog.html#Dialog_new for details.
+
+
+h3(#Dialog_createbuttonsizer). Dialog#create_button_sizer
+
+ "Sizer":sizer.html *create_button_sizer*(%(arg-type)Integer% flags)
+
+Creates a sizer with standard buttons. _flags_ is a bit list
+of the following flags: OK, CANCEL, YES, NO, HELP, NO_DEFAULT.
+
+The sizer lays out the buttons in a manner appropriate to the platform.
+
+This function uses "create_std_dialog_button_sizer":#Dialog_createstddialogbuttonsizer 
+internally for most platforms but doesn't create the sizer at all for the
+platforms with hardware buttons (such as smartphones) for which it sets up the
+hardware buttons appropriately and returns , so don't forget to test that
+the return value is valid before using it.
+
+
+h3(#Dialog_createseparatedbuttonsizer). Dialog#create_separated_button_sizer
+
+ "Sizer":sizer.html *create_separated_button_sizer*(%(arg-type)Integer% flags)
+
+Creates a sizer with standard buttons using 
+"create_button_sizer":#Dialog_createbuttonsizer separated from the rest
+of the dialog contents by a horizontal "StaticLine":staticline.html.
+
+Please notice that just like CreateButtonSizer() this function may return  
+if no buttons were created.
+
+
+h3(#Dialog_createstddialogbuttonsizer). Dialog#create_std_dialog_button_sizer
+
+ "StdDialogButtonSizer":stddialogbuttonsizer.html *create_std_dialog_button_sizer*(%(arg-type)Integer% flags)
+
+Creates a "StdDialogButtonSizer":stddialogbuttonsizer.html with standard buttons. _flags_ is a bit list
+of the following flags: OK, CANCEL, YES, NO, HELP, NO_DEFAULT.
+
+The sizer lays out the buttons in a manner appropriate to the platform.
+
+h3(#Dialog_destroy). Dialog#destroy
+
+ Boolean *destroy*()
+
+Tells wxRuby that this Dialog can be disposed of. This is normally only
+required if the Dialog was created with no parent frame (see
+"new":#Dialog_new). Dialogs that are associated with a parent frame will
+be automatically destroyed by wxRuby when the frame is closed.
+
+h3(#Dialog_dook). Dialog#do_ok
+
+ Boolean *do_ok*()
+
+This function is called when the titlebar OK button is pressed (PocketPC only).
+A command event for the identifier returned by "get_affirmative_id":dialog.html#Dialog_getaffirmativeid is sent by
+default. You can override this function. If the function returns false, Widgets
+will call "close":window.html#Window_close for the dialog.
+
+
+h3(#Dialog_endmodal). Dialog#end_modal
+
+  *end_modal*(%(arg-type)Integer% ret_code)
+
+Ends a modal dialog, passing a value to be returned from the "Dialog#show_modal":dialog.html#Dialog_showmodal invocation.
+
+h4. Parameters
+
+* _ret_code_ The value that should be returned by *show_modal*.
+
+h4. See also
+
+"Dialog#show_modal":dialog.html#Dialog_showmodal, "Dialog#get_return_code":dialog.html#Dialog_getreturncode, "Dialog#set_return_code":dialog.html#Dialog_setreturncode
+
+
+h3(#Dialog_getaffirmativeid). Dialog#get_affirmative_id
+
+ Integer *get_affirmative_id*()
+
+Gets the identifier of the button which works like standard OK button in this
+dialog.
+
+h4. See also
+
+"Dialog#set_affirmative_id":dialog.html#Dialog_setaffirmativeid
+
+
+h3(#Dialog_getescapeid). Dialog#get_escape_id
+
+ Integer *get_escape_id*()
+
+Gets the identifier of the button to map presses of @ESC@
+button to.
+
+h4. See also
+
+"Dialog#set_escape_id":dialog.html#Dialog_setescapeid
+
+
+h3(#Dialog_getreturncode). Dialog#get_return_code
+
+ Integer *get_return_code*()
+
+Gets the return code for this window.
+
+h4. Remarks
+
+A return code is normally associated with a modal dialog, where "Dialog#show_modal":dialog.html#Dialog_showmodal returns
+a code to the application.
+
+h4. See also
+
+"Dialog#set_return_code":dialog.html#Dialog_setreturncode, "Dialog#show_modal":dialog.html#Dialog_showmodal, "Dialog#end_modal":dialog.html#Dialog_endmodal
+
+
+h3(#Dialog_gettoolbar). Dialog#get_tool_bar
+
+ "ToolBar":toolbar.html *get_tool_bar*()
+
+On PocketPC, a dialog is automatically provided with an empty toolbar. *get_tool_bar*
+allows you to access the toolbar and add tools to it. Removing tools and adding
+arbitrary controls are not currently supported.
+
+This function is not available on any other platform.
+
+
+h3(#Dialog_iconize). Dialog#iconize
+
+  *iconize*(%(arg-type)Boolean% iconize)
+
+Iconizes or restores the dialog. Windows only.
+
+h4. Parameters
+
+* _iconize_ If true, iconizes the dialog box; if false, shows and restores it.
+
+h4. Remarks
+
+Note that in Windows, iconization has no effect since dialog boxes cannot be
+iconized. However, applications may need to explicitly restore dialog
+boxes under Motif which have user-iconizable frames, and under Windows
+calling @iconize(false)@ will bring the window to the front, as does
+
+
+h3(#Dialog_isiconized). Dialog#is_iconized
+
+  Boolean *is_iconized*()
+
+Returns true if the dialog box is iconized. Windows only.
+
+h4. Remarks
+
+Always returns false under Windows since dialogs cannot be iconized.
+
+h3(#Dialog_ismodal). Dialog#is_modal
+
+  Boolean *is_modal*()
+
+Returns true if the dialog box is modal, false otherwise.
+
+h3(#Dialog_onsyscolourchanged). Dialog#on_sys_colour_changed
+
+  *on_sys_colour_changed*(%(arg-type)"SysColourChangedEvent":syscolourchangedevent.html% event)
+
+The default handler for EVT_SYS_COLOUR_CHANGED.
+
+h4. Parameters
+
+* _event_ The colour change event.
+
+h4. Remarks
+
+Changes the dialog's colour to conform to the current settings (Windows only). Add an event table entry for your dialog class if you wish the behaviour to be different (such as keeping a user-defined background colour). If you do override this function, call "Event::skip":event.html#Event_skip to propagate the notification to child windows and controls.
+
+h4. See also
+
+"SysColourChangedEvent":syscolourchangedevent.html
+
+h3(#Dialog_setaffirmativeid). Dialog#set_affirmative_id
+
+  *set_affirmative_id*(%(arg-type)Integer% id)
+
+Sets the identifier to be used as OK button. When the button with this identifier is pressed, the dialog calls "validate":window.html#Window_validate and "Window::transfer_data_from_window":window.html#Window_transferdatafromwindow and, if they both return true, closes the dialog with ID_OK return code.
+
+Also, when the user presses a hardware OK button on the devices having one or the special OK button in the PocketPC title bar, an event with this id is generated.
+
+By default, the affirmative id is ID_OK.
+
+h4. See also
+
+"Dialog::get_affirmative_id":dialog.html#Dialog_getaffirmativeid, "Dialog::set_escape_id":dialog.html#Dialog_setescapeid
+
+h3(#Dialog_setescapeid). Dialog#set_escape_id
+
+  *set_escape_id*(%(arg-type)Integer% id)
+
+Sets the identifier of the button which should work like the standard CANCEL button in this dialog. When the button with this id is clicked, the dialog is closed. Also, when the user presses ESC key in the dialog or closes the dialog using the close button in the title bar, this is mapped to the click of the button with the specified id.
+
+By default, the escape id is the special value ID_ANY meaning that ID_CANCEL button is used if it's present in the dialog and otherwise the button with "get_affirmative_id":dialog.html#Dialog_getaffirmativeid is used. Another special value for _id_ is ID_NONE meaning that ESC presses should be ignored. If any other value is given, it is interpreted as the id of the button to map the escape key to.
+
+h3(#Dialog_seticon). Dialog#set_icon
+
+  *set_icon*(%(arg-type)"Icon":icon.html% icon)
+
+Sets the icon for this dialog.
+
+h4. Parameters
+
+* _icon_ The icon to associate with this dialog.
+
+h4. See also 
+
+"Icon":icon.html
+
+h3(#Dialog_seticons). Dialog#set_icons
+
+  *set_icons*(%(arg-type)"IconBundle":iconbundle.html% icons)
+
+Sets the icons for this dialog.
+
+h4. Parameters
+
+* _icons_ The icons to associate with this dialog.
+
+h4. See also 
+
+"IconBundle":iconbundle.html
+
+h3(#Dialog_setmodal). Dialog#set_modal
+
+  *set_modal*(%(arg-type)Boolean% flag)
+
+*NB:* This function is deprecated and doesn't work for all ports, just use "show_modal":dialog.html#Dialog_showmodal to show a modal dialog instead.
+
+Allows the programmer to specify whether the dialog box is modal ("Dialog::show":dialog.html#Dialog_show blocks control until the dialog is hidden) or modeless (control returns immediately).
+
+h4. Parameters
+
+* _flag_ If true, the dialog will be modal, otherwise it will be modeless.
+
+h3(#Dialog_setreturncode). Dialog#set_return_code
+
+  *set_return_code*(%(arg-type)Integer% ret_code)
+
+h4. Parameters
+
+* _ret_code_ The integer return code, usually a control identifier.
+
+h4. Remarks
+
+A return code is normally associated with a modal dialog, where "Dialog::show_modal":dialog.html#Dialog_showmodal returns a code to the application. The function "Dialog::end_modal":dialog.html#Dialog_endmodal calls *set_return_code*.
+
+h4. See also
+
+"Dialog::get_return_code":dialog.html#Dialog_getreturncode, "Dialog::show_modal":dialog.html#Dialog_showmodal, "Dialog::end_modal":dialog.html#Dialog_endmodal
+
+h3(#Dialog_show). Dialog#show
+
+  Boolean *show*(%(arg-type)Boolean% show)
+
+Hides or shows the dialog.
+
+h4. Parameters
+
+* _show_ If true, the dialog box is shown and brought to the front; otherwise the box is hidden. If false and the dialog is modal, control is returned to the calling program.
+
+h4. Remarks
+
+The preferred way of dismissing a modal dialog is to use "Dialog::end_modal":dialog.html#Dialog_endmodal.
+
+h3(#Dialog_showmodal). Dialog#show_modal
+
+  Integer *show_modal*()
+
+Shows a modal dialog. Program flow does not return until the dialog has been dismissed with "Dialog::end_modal":dialog.html#Dialog_endmodal.
+
+h4. Return value
+
+The return value is the value set with "Dialog::set_return_code":dialog.html#Dialog_setreturncode.
+
+h4. See also
+
+"Dialog::end_modal":dialog.html#Dialog_endmodal, "Dialog::get_return_code":dialog.html#Dialog_getreturncode, "Dialog::set_return_code":dialog.html#Dialog_setreturncode
+

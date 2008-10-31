@@ -1,0 +1,110 @@
+h1(#wxhtmldcrenderer). Wx::HtmlDCRenderer
+
+This class can render HTML document into a specified area of a DC. You can use it
+in your own printing code, although use of "HtmlEasyPrinting":htmleasyprinting.html 
+or "HtmlPrintout":htmlprintout.html is strongly recommended.
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlDCRenderer.new":#HtmlDCRenderer_new
+* "HtmlDCRenderer#set_dc":#HtmlDCRenderer_setdc
+* "HtmlDCRenderer#set_fonts":#HtmlDCRenderer_setfonts
+* "HtmlDCRenderer#set_size":#HtmlDCRenderer_setsize
+* "HtmlDCRenderer#set_html_text":#HtmlDCRenderer_sethtmltext
+* "HtmlDCRenderer#render":#HtmlDCRenderer_render
+* "HtmlDCRenderer#get_total_height":#HtmlDCRenderer_gettotalheight
+
+</div>
+
+
+h3(#HtmlDCRenderer_wxhtmldcrenderer). HtmlDCRenderer.new
+
+h3(#HtmlDCRenderer_setdc). HtmlDCRenderer#set_dc
+
+  *set_dc*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Float% pixel_scale = 1.0)
+
+Assign DC instance to the renderer.
+
+_pixel_scale_ can be used when rendering to high-resolution DCs (e.g. printer) to adjust size of pixel metrics.
+(Many dimensions in HTML are given in pixels -- e.g. image sizes. 300x300 image would be only one
+inch wide on typical printer. With pixel_scale = 3.0 it would be 3 inches.)
+
+h3(#HtmlDCRenderer_setfonts). HtmlDCRenderer#set_fonts
+
+  *set_fonts*(%(arg-type)String% normal_face,  %(arg-type)String% fixed_face, 
+            %(arg-type)Integer% sizes = nil)
+
+Sets fonts. See "HtmlWindow#set_fonts":htmlwindow.html#HtmlWindow_setfonts for
+detailed description.
+
+See also "set_size":#HtmlDCRenderer_setsize.
+
+h3(#HtmlDCRenderer_setsize). HtmlDCRenderer#set_size
+
+  *set_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+Set size of output rectangle, in pixels. Note that you *can't* change
+width of the rectangle between calls to "Render":htmldcrendererrender.html!
+(You can freely change height.)
+
+h3(#HtmlDCRenderer_sethtmltext). HtmlDCRenderer#set_html_text
+
+  *set_html_text*(%(arg-type)String% html,  %(arg-type)String% basepath = '', 
+                %(arg-type)Boolean% isdir = true)
+
+Assign text to the renderer. "Render":htmldcrendererrender.html then draws 
+the text onto DC.
+
+h4. Parameters
+
+* _html_ HTML text. This is _not_ a filename.
+* _basepath_ base directory (html string would be stored there if it was in
+file). It is used to determine path for loading images, for example.
+* _isdir_ false if basepath is filename, true if it is directory name
+(see "FileSystem":filesystem.html for detailed explanation)
+
+h3(#HtmlDCRenderer_render). HtmlDCRenderer#render
+
+ Integer *render*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% from = 0, 
+                %(arg-type)Integer% dont_render = false)
+
+Renders HTML text to the DC.
+
+h4. Parameters
+
+* _x,y_  position of upper-left corner of printing rectangle (see "set_size":#HtmlDCRenderer_setsize)
+* _from_ y-coordinate of the very first visible cell
+* _dont_render_ if true then this method only returns y coordinate of the next page
+and does not output anything
+
+Returned value is y coordinate of first cell than didn't fit onto page.
+Use this value as _from_ in next call to Render in order to print multipages
+document.
+
+h4. Caution!
+
+The Following three methods *must* always be called before any call to Render (preferably
+in this order):
+
+
+* "SetDC":htmldcrenderersetdc.html
+* "set_size":#HtmlDCRenderer_setsize
+* "set_html_text":#HtmlDCRenderer_sethtmltext
+
+
+*Render() changes the DC's user scale and does NOT restore it.*
+
+h3(#HtmlDCRenderer_gettotalheight). HtmlDCRenderer#get_total_height
+
+ Integer *get_total_height*()
+
+Returns the height of the HTML text. This is important if area height (see "set_size":#HtmlDCRenderer_setsize)
+is smaller that total height and thus the page cannot fit into it. In that case you're supposed to
+call "Render":htmldcrendererrender.html as long as its return value is smaller than GetTotalHeight's.
+

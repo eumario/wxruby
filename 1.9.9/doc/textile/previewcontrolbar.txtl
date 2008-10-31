@@ -1,0 +1,83 @@
+h1(#wxpreviewcontrolbar). Wx::PreviewControlBar
+
+This is the default implementation of the preview control bar, a panel
+with buttons and a zoom control. You can derive a new class from this and
+override some or all member functions to change the behaviour and appearance;
+or you can leave it as it is.
+
+h2. Derived from
+
+"Panel":panel.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"PreviewFrame":previewframe.html, "PreviewCanvas":previewcanvas.html, "PrintPreview":printpreview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PreviewControlBar#preview_controlbar":#PreviewControlBar_previewcontrolbar
+* "PreviewControlBar#create_buttons":#PreviewControlBar_createbuttons
+* "PreviewControlBar#get_print_preview":#PreviewControlBar_getprintpreview
+* "PreviewControlBar#get_zoom_control":#PreviewControlBar_getzoomcontrol
+* "PreviewControlBar#set_zoom_control":#PreviewControlBar_setzoomcontrol
+
+</div>
+
+
+h3(#PreviewControlBar_new). PreviewControlBar#preview_controlbar
+
+  *PreviewControlBar.new*(%(arg-type)"PrintPreview":printpreview.html% preview,  %(arg-type)Integer% buttons, 
+                        %(arg-type)"Window":window.html% parent, 
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                        %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                        %(arg-type)Integer% style = 0, 
+                        %(arg-type)String% name = "panel")
+
+Constructor.
+
+The buttons parameter may be a combination of the following, using the bitwise `or' operator.
+
+
+|PREVIEW_PRINT|Create a print button.|
+|PREVIEW_NEXT|Create a next page button.|
+|PREVIEW_PREVIOUS|Create a previous page button.|
+|PREVIEW_ZOOM|Create a zoom control.|
+|PREVIEW_DEFAULT|Equivalent to a combination of PREVIEW_PREVIOUS, PREVIEW_NEXT andPREVIEW_ZOOM.|
+
+
+  *destructor*()
+
+Destructor.
+
+h3(#PreviewControlBar_createbuttons). PreviewControlBar#create_buttons
+
+  *create_buttons*()
+
+Creates buttons, according to value of the button style flags.
+
+h3(#PreviewControlBar_getprintpreview). PreviewControlBar#get_print_preview
+
+ "PrintPreview":printpreview.html *get_print_preview*()
+
+Gets the print preview object associated with the control bar.
+
+h3(#PreviewControlBar_getzoomcontrol). PreviewControlBar#get_zoom_control
+
+ Integer *get_zoom_control*()
+
+Gets the current zoom setting in percent.
+
+h3(#PreviewControlBar_setzoomcontrol). PreviewControlBar#set_zoom_control
+
+  *set_zoom_control*(%(arg-type)Integer% percent)
+
+Sets the zoom control.
+

@@ -1,0 +1,95 @@
+h1(#wxmultichoicedialog). Wx::MultiChoiceDialog
+
+This class represents a dialog that shows a list of strings, and allows
+the user to select one or more.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"MultiChoiceDialog overview":multichoicedialogoverview.html,
+"SingleChoiceDialog":singlechoicedialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MultiChoiceDialog.new":#MultiChoiceDialog_new
+* "MultiChoiceDialog#get_selections":#MultiChoiceDialog_getselections
+* "MultiChoiceDialog#set_selections":#MultiChoiceDialog_setselections
+* "MultiChoiceDialog#show_modal":#MultiChoiceDialog_showmodal
+
+</div>
+
+
+h3(#MultiChoiceDialog_constr). MultiChoiceDialog.new
+
+  *MultiChoiceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
+                        %(arg-type)String% caption, 
+                        %(arg-type)Integer% n, 
+                        %(arg-type)String% choices, 
+                        %(arg-type)Integer% style = CHOICEDLG_STYLE, 
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
+
+  *MultiChoiceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)String% message, 
+                        %(arg-type)String% caption, 
+                        %(arg-type)"ArrayString":arraystring.html% choices, 
+                        %(arg-type)Integer% style = CHOICEDLG_STYLE, 
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION)
+
+Constructor taking an array of String choices.
+
+h4. Parameters
+
+* _parent_ Parent window.
+* _message_ Message to show on the dialog.
+* _caption_ The dialog caption.
+* _n_ The number of choices.
+* _choices_ An array of strings, or a string list, containing the choices.
+* _style_ A dialog style (bitlist) containing flags chosen from standard
+dialog styles and the following:
+
+
+
+|*OK*|Show an OK button.|
+|*CANCEL*|Show a Cancel button.|
+|*CENTRE*|Centre the message. Not Windows.|
+
+The default value is equivalent to *DEFAULT_DIALOG_STYLE ** RESIZE_BORDER ** OK ** CANCEL ** CENTRE*.
+
+* _pos_ Dialog position. Not Windows.
+
+h4. Remarks
+
+Use "MultiChoiceDialog#show_modal":multichoicedialog.html#MultiChoiceDialog_showmodal to show the dialog.
+
+
+
+
+
+h3(#MultiChoiceDialog_getselections). MultiChoiceDialog#get_selections
+
+ "ArrayInt":arrayint.html *get_selection*()
+
+Returns array with indexes of selected items.
+
+h3(#MultiChoiceDialog_setselections). MultiChoiceDialog#set_selections
+
+  *set_selections*(%(arg-type)"ArrayInt":arrayint.html% selections)
+
+Sets selected items from the array of selected items' indexes.
+
+h3(#MultiChoiceDialog_showmodal). MultiChoiceDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning either ID_OK or ID_CANCEL.
+

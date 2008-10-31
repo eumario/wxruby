@@ -1,0 +1,153 @@
+h1(#wxrichtextstylelistbox). Wx::RichTextStyleListBox
+
+This is a listbox that can display the styles in a "RichTextStyleSheet":richtextstylesheet.html,
+and apply the selection to an associated "RichTextCtrl":richtextctrl.html.
+
+See @samples/richtext@ for an example of how to use it.
+
+h2. Derived from
+
+"HtmlListBox":htmllistbox.html
+
+h2. See also
+
+"RichTextStyleComboCtrl":richtextstylecomboctrl.html, "RichTextCtrl overview":richtextctrloverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextStyleListBox.new":#RichTextStyleListBox_new
+* "RichTextStyleListBox#apply_style":#RichTextStyleListBox_applystyle
+* "RichTextStyleListBox#convert_tenths_mm_to_pixels":#RichTextStyleListBox_converttenthsmmtopixels
+* "RichTextStyleListBox#create_html":#RichTextStyleListBox_createhtml
+* "RichTextStyleListBox#get_apply_on_selection":#RichTextStyleListBox_getapplyonselection
+* "RichTextStyleListBox#get_rich_text_ctrl":#RichTextStyleListBox_getrichtextctrl
+* "RichTextStyleListBox#get_style":#RichTextStyleListBox_getstyle
+* "RichTextStyleListBox#get_style_sheet":#RichTextStyleListBox_getstylesheet
+* "RichTextStyleListBox#get_style_type":#RichTextStyleListBox_getstyletype
+* "RichTextStyleListBox#on_get_item":#RichTextStyleListBox_ongetitem
+* "RichTextStyleListBox#on_left_down":#RichTextStyleListBox_onleftdown
+* "RichTextStyleListBox#on_select":#RichTextStyleListBox_onselect
+* "RichTextStyleListBox#set_apply_on_selection":#RichTextStyleListBox_setapplyonselection
+* "RichTextStyleListBox#set_rich_text_ctrl":#RichTextStyleListBox_setrichtextctrl
+* "RichTextStyleListBox#set_style_sheet":#RichTextStyleListBox_setstylesheet
+* "RichTextStyleListBox#set_style_type":#RichTextStyleListBox_setstyletype
+* "RichTextStyleListBox#update_styles":#RichTextStyleListBox_updatestyles
+
+</div>
+
+
+h3(#RichTextStyleListBox_wxrichtextstylelistbox). RichTextStyleListBox.new
+
+  *RichTextStyleListBox.new*(%(arg-type)"Window":window.html% parent, 
+                           %(arg-type)Integer% id = ID_ANY, 
+                           %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                           %(arg-type)"Size":size.html% size = DEFAULT_SIZE,  %(arg-type)Integer% style = 0)
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextStyleListBox_applystyle). RichTextStyleListBox#apply_style
+
+  *apply_style*(%(arg-type)Integer% i)
+
+Applies the _i_th style to the associated rich text control.
+
+h3(#RichTextStyleListBox_converttenthsmmtopixels). RichTextStyleListBox#convert_tenths_mm_to_pixels
+
+ Integer *convert_tenths_mm_to_pixels*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Integer% units)
+
+Converts units in tenths of a millimetre to device units.
+
+h3(#RichTextStyleListBox_createhtml). RichTextStyleListBox#create_html
+
+ String *create_html*(%(arg-type)"RichTextStyleDefinition":richtextstyledefinition.html% def)
+
+Creates a suitable HTML fragment for a definition.
+
+h3(#RichTextStyleListBox_getapplyonselection). RichTextStyleListBox#get_apply_on_selection
+
+ Boolean *get_apply_on_selection*()
+
+If the return value is , clicking on a style name in the list will immediately
+apply the style to the associated rich text control.
+
+h3(#RichTextStyleListBox_getrichtextctrl). RichTextStyleListBox#get_rich_text_ctrl
+
+ "RichTextCtrl":richtextctrl.html *get_rich_text_ctrl*()
+
+Returns the "RichTextCtrl":richtextctrl.html associated with this listbox.
+
+h3(#RichTextStyleListBox_getstyle). RichTextStyleListBox#get_style
+
+ "RichTextStyleDefinition":richtextstyledefinition.html *get_style*(%(arg-type)"size_t":size_t.html% i)
+
+Gets a style for a listbox index.
+
+h3(#RichTextStyleListBox_getstylesheet). RichTextStyleListBox#get_style_sheet
+
+ "RichTextStyleSheet":richtextstylesheet.html *get_style_sheet*()
+
+Returns the style sheet associated with this listbox.
+
+h3(#RichTextStyleListBox_getstyletype). RichTextStyleListBox#get_style_type
+
+ "RichTextStyleListBox::RichTextStyleType":richtextstylelistbox::wxrichtextstyletype.html *get_style_type*()
+
+Returns the type of style to show in the list box.
+
+h3(#RichTextStyleListBox_ongetitem). RichTextStyleListBox#on_get_item
+
+ String *on_get_item*(%(arg-type)"size_t":size_t.html% n)
+
+Returns the HTML for this item.
+
+h3(#RichTextStyleListBox_onleftdown). RichTextStyleListBox#on_left_down
+
+  *on_left_down*(%(arg-type)"MouseEvent":mouseevent.html% event)
+
+Implements left click behaviour, applying the clicked style to the RichTextCtrl.
+
+h3(#RichTextStyleListBox_onselect). RichTextStyleListBox#on_select
+
+  *on_select*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Reacts to selection.
+
+h3(#RichTextStyleListBox_setapplyonselection). RichTextStyleListBox#set_apply_on_selection
+
+  *set_apply_on_selection*(%(arg-type)Boolean% applyOnSelection)
+
+If _applyOnSelection_ is , clicking on a style name in the list will immediately
+apply the style to the associated rich text control.
+
+h3(#RichTextStyleListBox_setrichtextctrl). RichTextStyleListBox#set_rich_text_ctrl
+
+  *set_rich_text_ctrl*(%(arg-type)"RichTextCtrl":richtextctrl.html% ctrl)
+
+Associates the listbox with a "RichTextCtrl":richtextctrl.html.
+
+h3(#RichTextStyleListBox_setstylesheet). RichTextStyleListBox#set_style_sheet
+
+  *set_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% styleSheet)
+
+Associates the control with a style sheet.
+
+h3(#RichTextStyleListBox_setstyletype). RichTextStyleListBox#set_style_type
+
+  *set_style_type*(%(arg-type)"RichTextStyleListBox::RichTextStyleType":richtextstylelistbox::wxrichtextstyletype.html% styleType)
+
+Sets the style type to display. One of RichTextStyleListBox::RICHTEXT_STYLE_ALL, RichTextStyleListBox::RICHTEXT_STYLE_PARAGRAPH,
+RichTextStyleListBox::RICHTEXT_STYLE_CHARACTER and RichTextStyleListBox::RICHTEXT_STYLE_LIST.
+
+h3(#RichTextStyleListBox_updatestyles). RichTextStyleListBox#update_styles
+
+  *update_styles*()
+
+Updates the list from the associated style sheet.
+
+

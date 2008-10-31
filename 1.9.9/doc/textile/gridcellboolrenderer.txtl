@@ -1,0 +1,24 @@
+h1(#wxgridcellboolrenderer). Wx::GridCellBoolRenderer
+
+This class may be used to format boolean data in a cell.
+for string cells.
+
+h2. Derived from
+
+"GridCellRenderer":gridcellrenderer.html
+
+h2. See also
+
+"GridCellRenderer":gridcellrenderer.html, "GridCellStringRenderer":gridcellstringrenderer.html, "GridCellFloatRenderer":gridcellfloatrenderer.html, "GridCellNumberRenderer":gridcellnumberrenderer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellBoolRenderer.new":#GridCellBoolRenderer_new
+
+</div>
+
+
+h3(#GridCellBoolRenderer_constr). GridCellBoolRenderer.new
+

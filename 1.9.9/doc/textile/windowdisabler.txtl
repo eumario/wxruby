@@ -1,0 +1,41 @@
+h1(#wxwindowdisabler). Wx::WindowDisabler
+
+This class disables all windows of the application temporarily while
+some code is executed. This comes in handy when you want to indicate to
+the user that the application is currently busy and cannot respond to
+user input. Optionally, one window may be excepted and not disabled.
+
+To use this, call the class method "disable":WindowDisabler_disable and
+pass it a block:
+
+ Wx::WindowDisabler.disable do
+   # do some lengthy operation
+   # ...
+ end
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"BusyCursor":busycursor.html, "BusyInfo":busyinfo.html
+
+<div id="methods">
+
+h2. Class methods
+
+* "WindowDisabler.disable":#WindowDisabler_disable
+
+</div>
+
+
+h3(#WindowDisabler_disable). WindowDisabler.disable
+
+  *WindowDisabler.disable*(%(arg-type)"Window":window.html% winToSkip = nil) { ... }
+
+Disables all top level windows of the applications with the exception of 
+_winToSkip_ if it is not @nil@. The passed block is then executed, and
+when it is completed, all windows are re-enabled.
+
+

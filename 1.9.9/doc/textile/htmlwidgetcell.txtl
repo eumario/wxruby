@@ -1,0 +1,34 @@
+h1(#wxhtmlwidgetcell). Wx::HtmlWidgetCell
+
+HtmlWidgetCell is a class that provides a connection between HTML cells and widgets (an object derived
+from Window). You can use it to display things like forms, input boxes etc. in an HTML window.
+
+HtmlWidgetCell takes care of resizing and moving window.
+
+h2. Derived from
+
+"HtmlCell":htmlcell.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlWidgetCell.new":#HtmlWidgetCell_new
+
+</div>
+
+
+h3(#HtmlWidgetCell_wxhtmlwidgetcell). HtmlWidgetCell.new
+
+  *HtmlWidgetCell.new*(%(arg-type)"Window":window.html% wnd,  %(arg-type)Integer% w = 0)
+
+Constructor.
+
+h4. Parameters
+
+* _wnd_ Connected window. It is parent window *must* be the HtmlWindow object within
+which it is displayed!
+* _w_ Floating width. If non-zero width of _wnd_ window is adjusted so that it is
+always _w_ percents of parent container's width. (For example w = 100 means that the window
+will always have same width as parent container)
+

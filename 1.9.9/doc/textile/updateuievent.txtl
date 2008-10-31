@@ -1,0 +1,272 @@
+h1(#wxupdateuievent). Wx::UpdateUIEvent
+
+This class is used for pseudo-events which are called by Widgets
+to give an application the chance to update various user interface elements.
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process an update event, use these event handler macros to direct input to member
+functions that take a UpdateUIEvent argument.
+
+
+
+|*evt_update_ui(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_UPDATE_UI event for the command with the given id.|
+|*EVT_UPDATE_UI_RANGE(id1, id2, func)*|Process a EVT_UPDATE_UI event for any command with id included in the given range.|
+
+
+h2. Remarks
+
+Without update UI events, an application has to work hard to check/uncheck, enable/disable,
+show/hide, and set the text for elements such as menu items and toolbar buttons.
+The code for doing this has to be mixed up with the code that is invoked when
+an action is invoked for a menu item or button.
+
+With update UI events, you define an event handler to look at the state of
+the application and change UI elements accordingly. Widgets will call your
+member functions in idle time, so you don't have to worry where to call this code.
+In addition to being a clearer and more declarative method, it also means you
+don't have to worry whether you're updating a toolbar or menubar identifier.
+The same handler can update a menu item and toolbar button, if the identifier is the same.
+
+Instead of directly manipulating the menu or button, you call functions in the event
+object, such as "UpdateUIEvent#check":updateuievent.html#UpdateUIEvent_check. Widgets
+will determine whether such a call has been made, and which UI element to update.
+
+These events will work for popup menus as well as menubars. Just before a menu is popped
+up, "Menu#update_ui":menu.html#Menu_updateui is called to process any UI events for
+the window that owns the menu.
+
+If you find that the overhead of UI update processing is affecting
+your application, you can do one or both of the following:
+
+
+# Call "UpdateUIEvent#set_mode":updateuievent.html#UpdateUIEvent_setmode with
+a value of UPDATE_UI_PROCESS_SPECIFIED, and set the extra style
+WS_EX_PROCESS_UPDATE_EVENTS for every window that should receive update events.
+No other windows will receive update events.
+# Call "UpdateUIEvent#set_update_interval":updateuievent.html#UpdateUIEvent_setupdateinterval with
+a millisecond value to set the delay between updates. You may need
+to call "Window#update_window_ui":window.html#Window_updatewindowui at critical
+points, for example when a dialog is about to be shown, in case the user
+sees a slight delay before windows are updated.
+
+
+Note that although events are sent in idle time, defining a IdleEvent
+handler for a window does not affect this because the events are sent from "Window#on_internal_idle":window.html#Window_oninternalidle 
+which is *always* called in idle time.
+
+Widgets tries to optimize update events on some platforms. On Windows
+and GTK+, events for menubar items are only sent when the menu is about
+to be shown, and not in idle time.
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "UpdateUIEvent.new":#UpdateUIEvent_new
+* "UpdateUIEvent#can_update":#UpdateUIEvent_canupdate
+* "UpdateUIEvent#check":#UpdateUIEvent_check
+* "UpdateUIEvent#enable":#UpdateUIEvent_enable
+* "UpdateUIEvent#show":#UpdateUIEvent_show
+* "UpdateUIEvent#get_checked":#UpdateUIEvent_getchecked
+* "UpdateUIEvent#get_enabled":#UpdateUIEvent_getenabled
+* "UpdateUIEvent#get_shown":#UpdateUIEvent_getshown
+* "UpdateUIEvent#get_set_checked":#UpdateUIEvent_getsetchecked
+* "UpdateUIEvent#get_set_enabled":#UpdateUIEvent_getsetenabled
+* "UpdateUIEvent#get_set_shown":#UpdateUIEvent_getsetshown
+* "UpdateUIEvent#get_set_text":#UpdateUIEvent_getsettext
+* "UpdateUIEvent#get_text":#UpdateUIEvent_gettext
+* "UpdateUIEvent#get_mode":#UpdateUIEvent_getmode
+* "UpdateUIEvent#get_update_interval":#UpdateUIEvent_getupdateinterval
+* "UpdateUIEvent#reset_update_time":#UpdateUIEvent_resetupdatetime
+* "UpdateUIEvent#set_mode":#UpdateUIEvent_setmode
+* "UpdateUIEvent#set_text":#UpdateUIEvent_settext
+* "UpdateUIEvent#set_update_interval":#UpdateUIEvent_setupdateinterval
+
+</div>
+
+
+h3(#UpdateUIEvent_new). UpdateUIEvent.new
+
+  *UpdateUIEvent.new*(%(arg-type)Integer% commandId = 0)
+
+Constructor.
+
+h3(#UpdateUIEvent_canupdate). UpdateUIEvent#can_update
+
+ Boolean *can_update*(%(arg-type)"Window":window.html% window)
+
+Returns @true@ if it is appropriate to update (send UI update events to)
+this window.
+
+This function looks at the mode used (see "UpdateUIEvent#set_mode":updateuievent.html#UpdateUIEvent_setmode),
+the WS_EX_PROCESS_UPDATE_EVENTS flag in _window_,
+the time update events were last sent in idle time, and
+the update interval, to determine whether events should be sent to
+this window now. By default this will always return @true@ because
+the update mode is initially UPDATE_UI_PROCESS_ALL and
+the interval is set to 0; so update events will be sent as
+often as possible. You can reduce the frequency that events
+are sent by changing the mode and/or setting an update interval.
+
+h4. See also
+
+"UpdateUIEvent#reset_update_time":updateuievent.html#UpdateUIEvent_resetupdatetime, 
+"UpdateUIEvent#set_update_interval":updateuievent.html#UpdateUIEvent_setupdateinterval, 
+"UpdateUIEvent#set_mode":updateuievent.html#UpdateUIEvent_setmode
+
+h3(#UpdateUIEvent_check). UpdateUIEvent#check
+
+  *check*(%(arg-type)Boolean% check)
+
+Check or uncheck the UI element.
+
+h3(#UpdateUIEvent_enable). UpdateUIEvent#enable
+
+  *enable*(%(arg-type)Boolean% enable)
+
+Enable or disable the UI element.
+
+h3(#UpdateUIEvent_show). UpdateUIEvent#show
+
+  *show*(%(arg-type)Boolean% show)
+
+Show or hide the UI element.
+
+h3(#UpdateUIEvent_getchecked). UpdateUIEvent#get_checked
+
+ Boolean *get_checked*()
+
+Returns true if the UI element should be checked.
+
+h3(#UpdateUIEvent_getenabled). UpdateUIEvent#get_enabled
+
+ Boolean *get_enabled*()
+
+Returns true if the UI element should be enabled.
+
+h3(#UpdateUIEvent_getshown). UpdateUIEvent#get_shown
+
+ Boolean *get_shown*()
+
+Returns true if the UI element should be shown.
+
+h3(#UpdateUIEvent_getsetchecked). UpdateUIEvent#get_set_checked
+
+ Boolean *get_set_checked*()
+
+Returns true if the application has called "UpdateUIEvent#check":updateuievent.html#UpdateUIEvent_check. For Widgets internal use only.
+
+h3(#UpdateUIEvent_getsetenabled). UpdateUIEvent#get_set_enabled
+
+ Boolean *get_set_enabled*()
+
+Returns true if the application has called "UpdateUIEvent#enable":updateuievent.html#UpdateUIEvent_enable. For Widgets internal use only.
+
+h3(#UpdateUIEvent_getsetshown). UpdateUIEvent#get_set_shown
+
+ Boolean *get_set_shown*()
+
+Returns true if the application has called "UpdateUIEvent#show":updateuievent.html#UpdateUIEvent_show. For Widgets internal use only.
+
+h3(#UpdateUIEvent_getsettext). UpdateUIEvent#get_set_text
+
+ Boolean *get_set_text*()
+
+Returns true if the application has called "UpdateUIEvent#set_text":updateuievent.html#UpdateUIEvent_settext. For Widgets internal use only.
+
+h3(#UpdateUIEvent_gettext). UpdateUIEvent#get_text
+
+ String *get_text*()
+
+Returns the text that should be set for the UI element.
+
+h3(#UpdateUIEvent_getmode). UpdateUIEvent#get_mode
+
+ "UpdateUIMode":updateuimode.html *get_mode*()
+
+Static function returning a value specifying how Widgets
+will send update events: to all windows, or only to those which specify that they
+will process the events.
+
+See "UpdateUIEvent#set_mode":updateuievent.html#UpdateUIEvent_setmode.
+
+h3(#UpdateUIEvent_getupdateinterval). UpdateUIEvent#get_update_interval
+
+ Integer *get_update_interval*()
+
+Returns the current interval between updates in milliseconds.
+-1 disables updates, 0 updates as frequently as possible.
+
+See "UpdateUIEvent#set_update_interval":updateuievent.html#UpdateUIEvent_setupdateinterval.
+
+h3(#UpdateUIEvent_resetupdatetime). UpdateUIEvent#reset_update_time
+
+  *reset_update_time*()
+
+Used internally to reset the last-updated time to the
+current time. It is assumed that update events are
+normally sent in idle time, so this is called at the end of
+idle processing.
+
+h4. See also
+
+"UpdateUIEvent#can_update":updateuievent.html#UpdateUIEvent_canupdate, 
+"UpdateUIEvent#set_update_interval":updateuievent.html#UpdateUIEvent_setupdateinterval, 
+"UpdateUIEvent#set_mode":updateuievent.html#UpdateUIEvent_setmode
+
+h3(#UpdateUIEvent_setmode). UpdateUIEvent#set_mode
+
+  *set_mode*(%(arg-type)"UpdateUIMode":updateuimode.html% mode)
+
+Specify how Widgets will send update events: to
+all windows, or only to those which specify that they
+will process the events.
+
+_mode_ may be one of the following values.
+The default is UPDATE_UI_PROCESS_ALL.
+
+
+ enum UpdateUIMode
+ {
+         // Send UI update events to all windows
+     UPDATE_UI_PROCESS_ALL,
+ 
+         // Send UI update events to windows that have
+         // the WS_EX_PROCESS_UI_UPDATES flag specified
+     UPDATE_UI_PROCESS_SPECIFIED
+ };
+ 
+
+h3(#UpdateUIEvent_settext). UpdateUIEvent#set_text
+
+  *set_text*(%(arg-type)String% text)
+
+Sets the text for this UI element.
+
+h3(#UpdateUIEvent_setupdateinterval). UpdateUIEvent#set_update_interval
+
+  *set_update_interval*(%(arg-type)Integer% updateInterval)
+
+Sets the interval between updates in milliseconds.
+Set to -1 to disable updates, or to 0 to update as frequently as possible.
+The default is 0.
+
+Use this to reduce the overhead of UI update events if your application
+has a lot of windows. If you set the value to -1 or greater than 0,
+you may also need to call "Window#update_window_ui":window.html#Window_updatewindowui 
+at appropriate points in your application, such as when a dialog
+is about to be shown.
+

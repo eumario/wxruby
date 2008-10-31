@@ -1,0 +1,71 @@
+h1(#wxnotifyevent). Wx::NotifyEvent
+
+This class is not used by the event handlers by itself, but is a base class
+for other event classes (such as "NotebookEvent":notebookevent.html).
+
+It (or an object of a derived class) is sent when the controls state is being
+changed and allows the program to "Veto()":notifyeventveto.html this
+change if it wants to prevent it from happening.
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Event table macros
+
+None
+
+h2. See also
+
+"NotebookEvent":notebookevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "NotifyEvent.new":#NotifyEvent_new
+* "NotifyEvent#allow":#NotifyEvent_allow
+* "NotifyEvent#is_allowed":#NotifyEvent_isallowed
+* "NotifyEvent#veto":#NotifyEvent_veto
+
+</div>
+
+
+h3(#NotifyEvent_constr). NotifyEvent.new
+
+  *NotifyEvent.new*(%(arg-type)"EventType":eventtype.html% eventType = EVT_NULL,  %(arg-type)Integer% id = 0)
+
+Constructor (used internally by Widgets only).
+
+h3(#NotifyEvent_allow). NotifyEvent#allow
+
+  *allow*()
+
+This is the opposite of "Veto()":notifyeventveto.html: it explicitly
+allows the event to be processed. For most events it is not necessary to call
+this method as the events are allowed anyhow but some are forbidden by default
+(this will be mentioned in the corresponding event description).
+
+h3(#NotifyEvent_isallowed). NotifyEvent#is_allowed
+
+ Boolean *is_allowed*()
+
+Returns true if the change is allowed ("Veto()":notifyeventveto.html 
+hasn't been called) or false otherwise (if it was).
+
+h3(#NotifyEvent_veto). NotifyEvent#veto
+
+  *veto*()
+
+Prevents the change announced by this event from happening.
+
+It is in general a good idea to notify the user about the reasons for vetoing
+the change because otherwise the applications behaviour (which just refuses to
+do what the user wants) might be quite surprising.
+

@@ -1,0 +1,141 @@
+h1(#wxdropsource). Wx::DropSource
+
+This class represents a source for a drag and drop operation.
+
+See "Drag and drop overview":dndoverview.html and "DataObject overview":dataobjectoverview.html 
+for more information.
+
+h2. Derived from
+
+None
+
+h2. Types
+
+DragResultDragResult is defined as follows:
+
+
+ enum DragResult
+ {
+     DragError,    // error prevented the d&d operation from completing
+     DragNone,     // drag target didn't accept the data
+     DragCopy,     // the data was successfully copied
+     DragMove,     // the data was successfully moved (MSW only)
+     DragLink,     // operation is a drag-link
+     DragCancel    // the operation was cancelled by user (not an error)
+ };
+ 
+
+h2. See also
+
+"DropTarget":droptarget.html, 
+"TextDropTarget":textdroptarget.html, "FileDropTarget":filedroptarget.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DropSource.new":#DropSource_new
+* "DropSource#set_data":#DropSource_setdata
+* "DropSource#do_drag_drop":#DropSource_dodragdrop
+* "DropSource#get_data_object":#DropSource_getdataobject
+* "DropSource#give_feedback":#DropSource_givefeedback
+* "DropSource#set_cursor":#DropSource_setcursor
+
+</div>
+
+
+h3(#DropSource_wxdropsource). DropSource.new
+
+  *DropSource.new*(%(arg-type)"Window":window.html% win = nil, 
+                %(arg-type)"IconOrCursor":iconorcursor.html% iconCopy = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconMove = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconNone = NullIconOrCursor)
+
+  *DropSource.new*(%(arg-type)"DataObject":dataobject.html% data,  %(arg-type)"Window":window.html% win = nil, 
+                %(arg-type)"IconOrCursor":iconorcursor.html% iconCopy = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconMove = NullIconOrCursor, 
+                 %(arg-type)"IconOrCursor":iconorcursor.html% iconNone = NullIconOrCursor)
+
+The constructors for DataObject.
+
+If you use the constructor without _data_ parameter you must call 
+"set_data":#DropSource_setdata later.
+
+Note that the exact type of _iconCopy_ and subsequent parameters differs
+between MSW and GTK: these are cursors under Windows but icons for GTK.
+You should use the macro "DROP_ICON":dropicon.html in portable
+programs instead of directly using either of these types.
+
+h4. Parameters
+
+* _win_ The window which initiates the drag and drop operation.
+* _iconCopy_ The icon or cursor used for feedback for copy operation.
+* _iconMove_ The icon or cursor used for feedback for move operation.
+* _iconNone_ The icon or cursor used for feedback when operation can't be done.
+
+_win_ is the window which initiates the drag and drop operation.
+
+  *destructor*()
+
+h3(#DropSource_setdata). DropSource#set_data
+
+  *set_data*(%(arg-type)"DataObject":dataobject.html% data)
+
+Sets the data "DataObject":dataobject.html associated with the 
+drop source. This will not delete any previously associated data.
+
+h3(#DropSource_dodragdrop). DropSource#do_drag_drop
+
+ "DragResult":dragresult.html *do_drag_drop*(%(arg-type)Integer% flags = @Drag_CopyOnly@)
+
+Do it (call this in response to a mouse button press, for example). This starts
+the drag-and-drop operation which will terminate when the user releases the
+mouse.
+
+h4. Parameters
+
+* _flags_ If @Drag_AllowMove@ is included in the flags, data may
+be moved and not only copied (default). If @Drag_DefaultMove@ is
+specified (which includes the previous flag), this is even the default
+operation.
+
+h4. Return value
+
+Returns the operation requested by the user, may be @DragCopy@, 
+DragMove, @DragLink@, @DragCancel@ or @DragNone@ if an error occurred.
+
+h3(#DropSource_getdataobject). DropSource#get_data_object
+
+ "DataObject":dataobject.html *get_data_object*()
+
+Returns the DataObject object that has been assigned previously.
+
+h3(#DropSource_givefeedback). DropSource#give_feedback
+
+ Boolean *give_feedback*(%(arg-type)"DragResult":dragresult.html% effect)
+
+Overridable: you may give some custom UI feedback during the drag and drop operation
+in this function. It is called on each mouse move, so your implementation must not be too
+slow.
+
+h4. Parameters
+
+* _effect_ The effect to implement. One of @DragCopy@, @DragMove@, @DragLink@ and @DragNone@. 
+* _scrolling_ true if the window is scrolling. MSW only. 
+
+h4. Return value
+
+Return false if you want default feedback, or true if you implement your own
+feedback. The return values is ignored under GTK.
+
+h3(#DropSource_setcursor). DropSource#set_cursor
+
+  *set_cursor*(%(arg-type)"DragResult":dragresult.html% res,  %(arg-type)"Cursor":cursor.html% cursor)
+
+Set the icon to use for a certain drag result.
+
+h4. Parameters
+
+* _res_ The drag result to set the icon for. 
+* _cursor_ The ion to show when this drag result occurs. 
+

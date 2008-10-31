@@ -1,0 +1,70 @@
+h1(#wxmdiclientwindow). Wx::MDIClientWindow
+
+An MDI client window is a child of "MDIParentFrame":mdiparentframe.html, and manages zero or
+more "MDIChildFrame":mdichildframe.html objects.
+
+h2. Derived from
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+The client window is the area where MDI child windows exist. It doesn't have to cover the whole
+parent frame; other windows such as toolbars and a help window might coexist with it.
+There can be scrollbars on a client window, which are controlled by the parent window style.
+
+The *MDIClientWindow* class is usually adequate without further derivation, and it is created
+automatically when the MDI parent frame is created. If the application needs to derive a new class,
+the function "MDIParentFrame#on_create_client":mdiparentframe.html#MDIParentFrame_oncreateclient must be
+overridden in order to give an opportunity to use a different class of client window.
+
+Under Windows 95, the client window will automatically have a sunken border style when
+the active child is not maximized, and no border style when a child is maximized.
+
+h2. See also
+
+"MDIChildFrame":mdichildframe.html, "MDIParentFrame":mdiparentframe.html, "Frame":frame.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MDIClientWindow.new":#MDIClientWindow_new
+* "MDIClientWindow#create_client":#MDIClientWindow_createclient
+
+</div>
+
+
+h3(#MDIClientWindow_new). MDIClientWindow.new
+
+  *MDIClientWindow.new*(%(arg-type)"MDIParentFrame":mdiparentframe.html% parent,  %(arg-type)Integer% style = 0)
+
+Constructor, creating the window.
+
+h4. Parameters
+
+* _parent_ The window parent.
+* _style_ The window style. Currently unused.
+
+h4. Remarks
+
+The second style of constructor is called within "MDIParentFrame#on_create_client":mdiparentframe.html#MDIParentFrame_oncreateclient.
+
+h4. See also
+
+"MDIParentFrame.new":mdiparentframe.html#MDIParentFrame_new, "MDIParentFrame#on_create_client":mdiparentframe.html#MDIParentFrame_oncreateclient
+
+  *destructor*()
+
+Destructor.
+
+h3(#MDIClientWindow_createclient). MDIClientWindow#create_client
+
+ Boolean *create_client*(%(arg-type)"MDIParentFrame":mdiparentframe.html% parent,  %(arg-type)Integer% style = 0)
+
+Used in two-step frame construction. See "MDIClientWindow.new":mdiclientwindow.html#MDIClientWindow_new for further details.
+

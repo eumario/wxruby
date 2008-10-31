@@ -1,0 +1,290 @@
+h1(#wxcombobox). Wx::ComboBox
+
+A combobox is like a combination of an edit control and a listbox. It can be
+displayed as static list with editable or read-only text field; or a drop-down list with
+text field; or a drop-down list without a text field.
+
+A combobox permits a single selection only. Combobox items are numbered from zero.
+
+h2. Derived from
+
+"ControlWithItems":controlwithitems.html
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2(#window_styles). Window styles
+
+
+|@CB_SIMPLE@|Creates a combobox with a permanently displayed list. Windows only. |
+|@CB_DROPDOWN@|Creates a combobox with a drop-down list.|
+|@CB_READONLY@|Same as CB_DROPDOWN but only thestrings specified as the combobox choices can be selected, it is impossible toselect (even from a program) a string which is not in the choices list.|
+|@CB_SORT@|Sorts the entries in the list alphabetically.|
+|@TE_PROCESS_ENTER@|The control will generatethe event EVT_COMMAND_TEXT_ENTER (otherwise pressing Enter keyis either processed internally by the control or used for navigation betweendialog controls). Windows only.|
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+
+|*evt_combobox(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_COMBOBOX_SELECTED event,when an item on the list is selected. Note that calling"get_value":#ComboBox_getvalue returns the new value of selection.|
+|*evt_text(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_TEXT_UPDATED event,when the combobox text changes.|
+|*evt_text_enter(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_TEXT_ENTER event,when <RETURN> is pressed in the combobox.|
+
+
+h2. See also
+
+"ListBox":listbox.html, "TextCtrl":textctrl.html, "Choice":choice.html,
+ "CommandEvent":commandevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ComboBox.new":#ComboBox_new
+* "ComboBox#create":#ComboBox_create
+* "ComboBox#can_copy":#ComboBox_cancopy
+* "ComboBox#can_cut":#ComboBox_cancut
+* "ComboBox#can_paste":#ComboBox_canpaste
+* "ComboBox#can_redo":#ComboBox_canredo
+* "ComboBox#can_undo":#ComboBox_canundo
+* "ComboBox#copy":#ComboBox_copy
+* "ComboBox#cut":#ComboBox_cut
+* "ComboBox#get_value":#ComboBox_getvalue
+* "ComboBox#get_insertion_point":#ComboBox_getinsertionpoint
+* "ComboBox#get_last_position":#ComboBox_getlastposition
+* "ComboBox#get_current_selection":#ComboBox_getcurrentselection
+* "ComboBox#get_text_selection_range":#ComboBox_gettextselectionrange
+* "ComboBox#paste":#ComboBox_paste
+* "ComboBox#redo":#ComboBox_redo
+* "ComboBox#replace":#ComboBox_replace
+* "ComboBox#remove":#ComboBox_remove
+* "ComboBox#set_insertion_point":#ComboBox_setinsertionpoint
+* "ComboBox#set_insertion_point_end":#ComboBox_setinsertionpointend
+* "ComboBox#set_text_selection_range":#ComboBox_settextselectionrange
+* "ComboBox#set_value":#ComboBox_setvalue
+* "ComboBox#undo":#ComboBox_undo
+
+</div>
+
+
+h3(#ComboBox_new). ComboBox.new
+
+  *ComboBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+               %(arg-type)"Point":point.html% pos, 
+               %(arg-type)"Size":size.html% size, 
+               %(arg-type)"Array":array.html% choices, 
+               %(arg-type)Integer% style = 0, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)String% name = "comboBox")
+
+Constructor, creating and showing a combobox. 
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be nil.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _value_ Initial selection string. An empty string indicates no selection.
+* _pos_ Window position.
+* _size_ Window size. If the default size (-1, -1) is specified then the window is sized
+appropriately.
+* _choices_ An array of strings with which to initialise the control.
+* _style_ Window style. See "ComboBox Window Styles":#window_styles
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"ComboBox#create":combobox.html#ComboBox_create, "Validator":validator.html
+
+
+h3(#ComboBox_create). ComboBox#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+                %(arg-type)"Point":point.html% pos, 
+                %(arg-type)"Size":size.html% size, 
+                %(arg-type)"ArrayString":arraystring.html% choices, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "comboBox")
+
+Creates the combobox for two-step construction. Derived classes should call or replace this function. See "ComboBox.new":combobox.html#ComboBox_new for further details.
+
+h3(#ComboBox_cancopy). ComboBox#can_copy
+
+ Boolean *can_copy*()
+
+Returns true if the combobox is editable and there is a text selection
+to copy to the clipboard. 
+
+Only available on Windows.
+
+h3(#ComboBox_cancut). ComboBox#can_cut
+
+ Boolean *can_cut*()
+
+Returns true if the combobox is editable and there is a text selection to copy to the clipboard.
+Only available on Windows.
+
+h3(#ComboBox_canpaste). ComboBox#can_paste
+
+ Boolean *can_paste*()
+
+Returns true if the combobox is editable and there is text on the clipboard that can be pasted into the
+text field. Only available on Windows.
+
+h3(#ComboBox_canredo). ComboBox#can_redo
+
+ Boolean *can_redo*()
+
+Returns true if the combobox is editable and the last undo can be redone.
+Only available on Windows.
+
+h3(#ComboBox_canundo). ComboBox#can_undo
+
+ Boolean *can_undo*()
+
+Returns true if the combobox is editable and the last edit can be undone.
+Only available on Windows.
+
+h3(#ComboBox_copy). ComboBox#copy
+
+  *copy*()
+
+Copies the selected text to the clipboard.
+
+h3(#ComboBox_cut). ComboBox#cut
+
+  *cut*()
+
+Copies the selected text to the clipboard and removes the selection.
+
+h3(#ComboBox_getcurrentselection). ComboBox#get_current_selection
+
+ Integer *get_current_selection*()
+
+This function does the same things as 
+"Choice#get_current_selection":choice.html#Choice_getcurrentselection and
+returns the item currently selected in the dropdown list if it's open or the
+same thing as "get_selection":#ComboBox_getselection otherwise.
+
+
+h3(#ComboBox_getinsertionpoint). ComboBox#get_insertion_point
+
+ Integer *get_insertion_point*()
+
+Returns the insertion point for the combobox's text field.
+
+Note: Under MSW, this function always returns 0 if the combobox
+doesn't have the focus.
+
+h3(#ComboBox_getlastposition). ComboBox#get_last_position
+
+ "TextPos":textpos.html *get_last_position*()
+
+Returns the last position in the combobox text field.
+
+h3(#ComboBox_gettextselectionrange). ComboBox#get_text_selection_range
+
+  Integer from, Integer to = *get_text_selection_range*()
+
+This is the same as
+"TextCtrl#get_selection":textctrl.html#TextCtrl_getselection  
+for the text control which is part of the combobox, returning the
+start and end position of the text selection.
+
+Currently this method is only implemented in MSW and GTK.
+
+h3(#ComboBox_getvalue). ComboBox#get_value
+
+ String *get_value*()
+
+Returns the current value in the combobox text field.
+
+h3(#ComboBox_paste). ComboBox#paste
+
+  *paste*()
+
+Pastes text from the clipboard to the text field.
+
+h3(#ComboBox_redo). ComboBox#redo
+
+  *redo*()
+
+Redoes the last undo in the text field. Windows only.
+
+h3(#ComboBox_replace). ComboBox#replace
+
+  *replace*(%(arg-type)Integer% from,  %(arg-type)Integer% to,  %(arg-type)String% text)
+
+Replaces the text between two positions with the given text, in the combobox text field.
+
+h4. Parameters
+
+* _from_ The first position.
+* _to_ The second position.
+* _text_ The text to insert.
+
+h3(#ComboBox_remove). ComboBox#remove
+
+  *remove*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Removes the text between the two positions in the combobox text field.
+
+h4. Parameters
+
+* _from_ The first position.
+* _to_ The last position.
+
+h3(#ComboBox_setinsertionpoint). ComboBox#set_insertion_point
+
+  *set_insertion_point*(%(arg-type)Integer% pos)
+
+Sets the insertion point in the combobox text field.
+
+h4. Parameters
+
+* _pos_ The new insertion point.
+
+h3(#ComboBox_setinsertionpointend). ComboBox#set_insertion_point_end
+
+  *set_insertion_point_end*()
+
+Sets the insertion point at the end of the combobox text field.
+
+h3(#ComboBox_settextselectionrange). ComboBox#set_text_selection_range
+
+  *set_text_selection_range*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Selects the text between the two positions, in the combobox text field.
+
+h4. Parameters
+
+* _from_ The first position.
+* _to_ The second position.
+
+h3(#ComboBox_setvalue). ComboBox#set_value
+
+  *set_value*(%(arg-type)String% text)
+
+Sets the text for the combobox text field.
+
+*NB:* For a combobox with @CB_READONLY@ style the string must be in
+the combobox choices list, otherwise the call to SetValue() is ignored.
+
+h4. Parameters
+
+* _text_ The text to set.
+
+h3(#ComboBox_undo). ComboBox#undo
+
+  *undo*()
+
+Undoes the last edit in the text field. Windows only.
+

@@ -1,0 +1,267 @@
+h1(#wxwizard). Wx::Wizard
+
+Wizard is the central class for implementing `wizard-like' dialogs. These
+dialogs are mostly familiar to Windows users and are nothing other than a
+sequence of `pages', each displayed inside a dialog which has the
+buttons to navigate to the next (and previous) pages.
+
+The wizards are typically used to decompose a complex dialog into several
+simple steps and are mainly useful to the novice users, hence it is important
+to keep them as simple as possible.
+
+To show a wizard dialog, you must first create an instance of the Wizard class
+using either the non-default constructor or a default one followed by call to the 
+"Create":wizardcreate.html function. Then you should add all pages you
+want the wizard to show and call "run_wizard":#Wizard_runwizard.
+Finally, don't forget to call @wizard->Destroy()@, otherwise your application will hang on exit due to an undestroyed window.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Panel":panel.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process input from a wizard dialog, use these event handler macros to
+direct input to member functions that take a 
+"WizardEvent":wizardevent.html argument. For some events, 
+"Veto()":notifyeventveto.html can be called to prevent the event from
+happening.
+
+
+
+|*evt_wizard_page_changed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The page has just beenchanged (this event cannot be vetoed).|
+|*evt_wizard_page_changing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The page is beingchanged (this event can be vetoed).|
+|*evt_wizard_cancel(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user attempted to cancelthe wizard (this event may also be vetoed).|
+|*evt_wizard_help(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The wizard help button was pressed.|
+|*evt_wizard_finished(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The wizard finished button was pressed.|
+
+
+h2. Extended styles
+
+Use the "Window#set_extra_style":window.html#Window_setextrastyle function to set the following
+style. You will need to use two-step construction (use the default constructor, call *SetExtraStyle*, then call *Create*).
+
+
+|@WIZARD_EX_HELPBUTTON@|Shows a Help button using ID_HELP.|
+
+
+See also "Dialog":dialog.html for other extended styles.
+
+h2. See also
+
+"WizardEvent":wizardevent.html, "WizardPage":wizardpage.html, "Wizard sample":samplewizard.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Wizard.new":#Wizard_new
+* "Wizard#create":#Wizard_create
+* "Wizard#fit_to_page":#Wizard_fittopage
+* "Wizard#get_current_page":#Wizard_getcurrentpage
+* "Wizard#get_page_area_sizer":#Wizard_getpageareasizer
+* "Wizard#get_page_size":#Wizard_getpagesize
+* "Wizard#has_next_page":#Wizard_hasnextpage
+* "Wizard#has_prev_page":#Wizard_hasprevpage
+* "Wizard#run_wizard":#Wizard_runwizard
+* "Wizard#set_page_size":#Wizard_setpagesize
+* "Wizard#set_border":#Wizard_setborder
+
+</div>
+
+
+h3(#Wizard_new). Wizard.new
+
+  *Wizard.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+             %(arg-type)String% title = '', 
+             %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap, 
+             %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+             %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE)
+
+Constructor which really creates the wizard -- if you use this constructor, you
+shouldn't call "Create":wizardcreate.html.
+
+Notice that unlike almost all other Widgets classes, there is no _size_ 
+parameter in the Wizard constructor because the wizard will have a predefined
+default size by default. If you want to change this, you should use the 
+"get_page_area_sizer":#Wizard_getpageareasizer function.
+
+h4. Parameters
+
+* _parent_ The parent window, may be NULL.
+* _id_ The id of the dialog, will usually be just $-1$.
+* _title_ The title of the dialog.
+* _bitmap_ The default bitmap used in the left side of the wizard. See
+also "get_bitmap":#Wizard_getbitmap.
+* _pos_ The position of the dialog, it will be centered on the screen
+by default.
+* _style_ Window style is passed to Dialog.
+
+
+h3(#Wizard_create). Wizard#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+                %(arg-type)String% title = '', 
+                %(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE)
+
+Creates the wizard dialog. Must be called if the default constructor had been
+used to create the object.
+
+Notice that unlike almost all other Widgets classes, there is no _size_ 
+parameter in the Wizard constructor because the wizard will have a predefined
+default size by default. If you want to change this, you should use the 
+"get_page_area_sizer":#Wizard_getpageareasizer function.
+
+h4. Parameters
+
+* _parent_ The parent window, may be NULL.
+* _id_ The id of the dialog, will usually be just $-1$.
+* _title_ The title of the dialog.
+* _bitmap_ The default bitmap used in the left side of the wizard. See
+also "get_bitmap":#Wizard_getbitmap.
+* _pos_ The position of the dialog, it will be centered on the screen
+by default.
+* _style_ Window style is passed to Dialog.
+
+
+h3(#Wizard_fittopage). Wizard#fit_to_page
+
+  *fit_to_page*(%(arg-type)"WizardPage":wizardpage.html% firstPage)
+
+This method is obsolete, use
+"get_page_area_sizer":#Wizard_getpageareasizer instead.
+
+Sets the page size to be big enough for all the pages accessible via the
+given _firstPage_, i.e. this page, its next page and so on.
+
+This method may be called more than once and it will only change the page size
+if the size required by the new page is bigger than the previously set one.
+This is useful if the decision about which pages to show is taken during
+run-time, as in this case, the wizard won't be able to get to all pages starting
+from a single one and you should call _Fit_ separately for the others.
+
+
+h3(#Wizard_getcurrentpage). Wizard#get_current_page
+
+ "WizardPage":wizardpage.html *get_current_page*()
+
+Get the current page while the wizard is running. @NULL@ is returned if 
+"run_wizard()":#Wizard_runwizard() is not being executed now.
+
+
+h3(#Wizard_getpageareasizer). Wizard#get_page_area_sizer
+
+ "Sizer":sizer.html *get_page_area_sizer*()
+
+Returns pointer to page area sizer. The wizard is laid out using sizers and
+the page area sizer is the place-holder for the pages. All pages are resized before
+being shown to match the wizard page area.
+
+Page area sizer has a minimal size that is the maximum of several values. First,
+all pages (or other objects) added to the sizer. Second, all pages reachable
+by repeatedly applying 
+"WizardPage#get_next":wizardpage.html#WizardPage_getnext to
+any page inserted into the sizer. Third,
+the minimal size specified using "set_page_size":#Wizard_setpagesize and 
+"fit_to_page":#Wizard_fittopage. Fourth, the total wizard height may
+be increased to accommodate the bitmap height. Fifth and finally, wizards are
+never smaller than some built-in minimal size to avoid wizards that are too small.
+
+The caller can use "Sizer#set_min_size":sizer.html#Sizer_setminsize to enlarge it
+beyond the minimal size. If @RESIZE_BORDER@ was passed to constructor, user
+can resize wizard and consequently the page area (but not make it smaller than the
+minimal size).
+
+It is recommended to add the first page to the page area sizer. For simple wizards,
+this will enlarge the wizard to fit the biggest page. For non-linear wizards,
+the first page of every separate chain should be added. Caller-specified size
+can be accomplished using "Sizer#set_min_size":sizer.html#Sizer_setminsize.
+
+Adding pages to the page area sizer affects the default border width around page
+area that can be altered with "set_border":#Wizard_setborder.
+
+
+h3(#Wizard_getpagesize). Wizard#get_page_size
+
+ "Size":size.html *get_page_size*()
+
+Returns the size available for the pages.
+
+
+h3(#Wizard_hasnextpage). Wizard#has_next_page
+
+ Boolean *has_next_page*(%(arg-type)"WizardPage":wizardpage.html% page)
+
+Return @true@ if this page is not the last one in the wizard. The base
+class version implements this by calling 
+"page->GetNext":wizardpagegetnext.html but this could be undesirable if,
+for example, the pages are created on demand only.
+
+h4. See also
+
+"has_prev_page":#Wizard_hasprevpage
+
+
+h3(#Wizard_hasprevpage). Wizard#has_prev_page
+
+ Boolean *has_prev_page*(%(arg-type)"WizardPage":wizardpage.html% page)
+
+Returns @true@ if this page is not the last one in the wizard. The base
+class version implements this by calling 
+"page->GetPrev":wizardpagegetprev.html but this could be undesirable if,
+for example, the pages are created on demand only.
+
+h4. See also
+
+"has_next_page":#Wizard_hasnextpage
+
+
+h3(#Wizard_runwizard). Wizard#run_wizard
+
+ Boolean *run_wizard*(%(arg-type)"WizardPage":wizardpage.html% firstPage)
+
+Executes the wizard starting from the given page, returning @true@ if it was
+successfully finished or @false@ if user cancelled it. The _firstPage_ 
+can not be @NULL@.
+
+
+h3(#Wizard_setpagesize). Wizard#set_page_size
+
+  *set_page_size*(%(arg-type)"Size":size.html% sizePage)
+
+This method is obsolete, use
+"get_page_area_sizer":#Wizard_getpageareasizer instead.
+
+Sets the minimal size to be made available for the wizard pages. The wizard
+will take into account the size of the bitmap (if any) itself. Also, the
+wizard will never be smaller than the default size.
+
+The recommended way to use this function is to lay out all wizard pages using
+the sizers (even though the wizard is not resizeable) and then use 
+"Sizer#calc_min":sizer.html#Sizer_calcmin in a loop to calculate the maximum
+of minimal sizes of the pages and pass it to SetPageSize().
+
+
+h3(#Wizard_setborder). Wizard#set_border
+
+  *set_border*(%(arg-type)Integer% border)
+
+Sets width of border around page area. Default is zero. For backward
+compatibility, if there are no pages in
+"get_page_area_sizer":#Wizard_getpageareasizer, the default is $5$ pixels.
+
+If there is a five point border around all controls in a page and the border around
+page area is left as zero, a five point white space along all dialog borders
+will be added to the control border in order to space page controls ten points from the dialog
+border and non-page controls.
+

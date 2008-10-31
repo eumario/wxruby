@@ -1,0 +1,89 @@
+h1(#wxgridsizeevent). Wx::GridSizeEvent
+
+This event class contains information about a row/column resize event.
+
+h2. Derived from
+
+"NotifyEvent":notifyevent.html
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event handling
+
+The event handler for the following functions takes a 
+ "GridSizeEvent":gridsizeevent.html parameter.
+The ..._CMD_... variants also take a window identifier.
+
+
+
+|*evt_grid_col_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a column by dragging it. Processes a EVT_GRID_COL_SIZE.|
+|*evt_grid_row_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a row by dragging it. Processes a EVT_GRID_ROW_SIZE.|
+|*evt_grid_cmd_col_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a column by dragging it; variant taking a window identifier. Processes a EVT_GRID_COL_SIZE.|
+|*evt_grid_cmd_row_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user resized a row by dragging it; variant taking a window identifier. Processes a EVT_GRID_ROW_SIZE.|
+
+<div id="methods">
+
+h2. Methods
+
+* "GridSizeEvent.new":#GridSizeEvent_new
+* "GridSizeEvent#alt_down":#GridSizeEvent_altdown
+* "GridSizeEvent#control_down":#GridSizeEvent_controldown
+* "GridSizeEvent#get_position":#GridSizeEvent_getposition
+* "GridSizeEvent#get_row_or_col":#GridSizeEvent_getroworcol
+* "GridSizeEvent#meta_down":#GridSizeEvent_metadown
+* "GridSizeEvent#shift_down":#GridSizeEvent_shiftdown
+
+</div>
+
+
+h3(#GridSizeEvent_constr). GridSizeEvent.new
+
+  *GridSizeEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type,  %(arg-type)Object% obj, 
+                    %(arg-type)Integer% rowOrCol = -1, 
+                    %(arg-type)Integer% x = -1, 
+                    %(arg-type)Integer% y = -1, 
+                    %(arg-type)Boolean% control = false, 
+                    %(arg-type)Boolean% shift = false, 
+                    %(arg-type)Boolean% alt = false, 
+                    %(arg-type)Boolean% meta = false)
+
+h3(#GridSizeEvent_altdown). GridSizeEvent#alt_down
+
+ Boolean *alt_down*()
+
+Returns true if the Alt key was down at the time of the event.
+
+h3(#GridSizeEvent_controldown). GridSizeEvent#control_down
+
+ Boolean *control_down*()
+
+Returns true if the Control key was down at the time of the event.
+
+h3(#GridSizeEvent_getposition). GridSizeEvent#get_position
+
+ "Point":point.html *get_position*()
+
+Position in pixels at which the event occurred.
+
+h3(#GridSizeEvent_getroworcol). GridSizeEvent#get_row_or_col
+
+ Integer *get_row_or_col*()
+
+Row or column at that was resized.
+
+h3(#GridSizeEvent_metadown). GridSizeEvent#meta_down
+
+ Boolean *meta_down*()
+
+Returns true if the Meta key was down at the time of the event.
+
+h3(#GridSizeEvent_shiftdown). GridSizeEvent#shift_down
+
+ Boolean *shift_down*()
+
+Returns true if the Shift key was down at the time of the event.
+

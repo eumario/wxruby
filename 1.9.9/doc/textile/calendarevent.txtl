@@ -1,0 +1,49 @@
+h1(#wxcalendarevent). Wx::CalendarEvent
+
+The CalendarEvent class is used together with 
+"CalendarCtrl":calendarctrl.html.
+
+h2. Derived from
+
+"DateEvent":dateevent.html
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. See also
+
+"CalendarCtrl":calendarctrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "CalendarEvent#get_week_day":#CalendarEvent_getweekday
+* "CalendarEvent#set_week_day":#CalendarEvent_setweekday
+
+</div>
+
+
+
+h3(#CalendarEvent_getweekday). CalendarEvent#get_week_day
+
+ Integer *get_week_day*()
+
+Returns an integer for the weekday clicked in an
+@EVT_CALENDAR_WEEKDAY_CLICKED@ handler. This is an integer corresponding
+to the day name that the user clicked upon in a
+"CalendarCtrl":calendarctrl.html (Sunday = 0, Monday = 1, Tuesday = 2
+etc, as in Ruby's Time class).
+
+It doesn't make sense to call this method in other handlers.
+
+h3(#CalendarEvent_setweekday). CalendarEvent#set_week_day
+
+  *set_week_day*(%(arg-type)Integer% day)
+
+Sets the week day carried by the event, normally only used by the library
+internally.
+

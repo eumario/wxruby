@@ -1,0 +1,1041 @@
+h1(#wxtreectrl). Wx::TreeCtrl
+
+A tree control presents information as a hierarchy, with items that may
+be expanded to show further items. Desktop OSes commonly make use of
+this type of control to present a navigable representation of folders
+and files on a hard drive.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+The behaviour and appearance of a TreeCtrl can be modified in several
+ways by applying styles when constructing the widget.
+
+|@TR_EDIT_LABELS@|Use this style if you wish the user to be able to edit labels in the tree control.|
+|@TR_NO_BUTTONS@|For convenience to document that no buttons are to be drawn.|
+|@TR_HAS_BUTTONS@|Use this style to show + and - buttons to the left of parent items.|
+|@TR_NO_LINES@|Use this style to hide vertical level connectors.|
+|@TR_FULL_ROW_HIGHLIGHT@|Use this style to have the background colour and the selection highlight extend over the entire horizontal row of the tree control window. (This flag is ignored under Windows unless you specify TR_NO_LINES as well.) |
+|@TR_LINES_AT_ROOT@|Use this style to show lines between root nodes. Only applicable if TR_HIDE_ROOT is set and TR_NO_LINES is not set.|
+|@TR_HIDE_ROOT@|Use this style to suppress the display of the root node,effectively causing the first-level nodes to appear as a series of root nodes.|
+|@TR_ROW_LINES@|Use this style to draw a contrasting border between displayed rows.|
+|@TR_HAS_VARIABLE_ROW_HEIGHT@|Use this style to cause row heights to be just big enough to fit the content. If not set, all rows use the largest row height.The default is that this flag is unset.Generic only.|
+|@TR_SINGLE@|For convenience to document that only one item may be selected at a time. Selecting another item causes the current selection, if any,to be deselected.  This is the default.|
+|@TR_MULTIPLE@|Use this style to allow a range of items to be selected.If a second range is selected, the current range, if any, is deselected.|
+|@TR_EXTENDED@|Use this style to allow disjoint items to be selected.  (Only partially implemented; may not work in all cases.)|
+|@TR_DEFAULT_STYLE@|The set of flags that are closest to the defaults for the native control for a particular toolkit.|
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event hooks
+
+TreeCtrls can generate a large number of events, reflecting the variety
+of ways in which users can interact with such controls. Handled events
+include selecting items, expanding branches, dragging items, and editing
+item labels as well as standard mouse and keyboard interactions. To
+intercept events from a tree control, use the event table macros
+described below and in "TreeEvent":treeevent.html.
+
+To process input from a tree control, use these event methods to direct
+input to blocks that take a "TreeEvent":treeevent.html argument.
+
+|*evt_tree_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the left mouse button.|
+|*evt_tree_begin_rdrag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin dragging with the right mouse button.|
+|*evt_tree_end_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|End dragging with the left or right mouse button.|
+|*evt_tree_begin_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin editing a label. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
+|*evt_tree_end_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Finish editing a label. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
+|*evt_tree_delete_item(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Delete an item.|
+|*evt_tree_get_info(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Request information from the application.|
+|*evt_tree_set_info(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Information is being supplied.|
+|*evt_tree_item_activated(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been activated, i.e. chosen by double clicking it with mouse or from keyboard|
+|*evt_tree_item_collapsed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been collapsed.|
+|*evt_tree_item_collapsing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being collapsed. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
+|*evt_tree_item_expanded(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been expanded.|
+|*evt_tree_item_expanding(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being expanded. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
+|*evt_tree_item_right_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has clicked the item with the right mouse button.|
+|*evt_tree_item_middle_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has clicked the item with the middle mouse button.|
+|*evt_tree_sel_changed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Selection has changed.|
+|*evt_tree_sel_changing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Selection is changing. This can be prevented by calling "veto()":notifyevent.html#NotifyEvent_veto.|
+|*evt_tree_key_down(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A key has been pressed.|
+|*evt_tree_item_gettooltip(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The opportunity to set the item tooltipis being given to the application (call TreeEvent::SetToolTip). Windows only.|
+|*evt_tree_item_menu(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The context menu for the selected item has been requested, either by a right click or by using the menu key.|
+|*evt_tree_state_image_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The state image has been clicked. Windows only.|
+
+h2. See also
+
+"TreeItemData":treeitemdata.html, "ListBox":listbox.html, "ListCtrl":listctrl.html, "ImageList":imagelist.html, "TreeEvent":treeevent.html
+
+h2. Working with TreeCtrl items
+
+A TreeCtrl contains one, or more usually, many items. As well as the
+text label and parent, tree items can have several other properties,
+such as being bold or italic, and icons for expanded and collapsed
+states.
+
+In wxRuby, individual items (including branches) in a tree control are
+referenced by *TreeItemIds*. These ids are returned by methods such as
+"append_item":#TreeCtrl_appenditem which add items to a tree, and by
+TreeEvents which can be queried to find which item is being acted
+upon. The ids are passed in as arguments to methods which modify items
+within the tree, such as "set_item_text":#TreeCtrl_setitemtext. This
+class includes Ruby's Enumerable module, so methods such as find,
+collect and select can be used to iterate over the control's contents.
+
+TreeItemIds are Integers, but the number itself is an opaque identifier;
+you should not carry out arithmetic on it, or assume anything about the
+id of one item relative to another. The only useful operation that can
+be carried out on a TreeItemId is to test whether it refers to a valid
+item. If the id is equal to zero, then the id does not refer to a valid
+item. This is most useful when testing whether any item has been clicked
+as part of a "TreeEvent":treeevent.html handler; for example:
+
+ def on_tree_clicked(event)
+   if event.get_item.nonzero?
+     # .. an item was clicked, make it bold
+     set_item_bold(event.get_item)
+   else
+     # otherwise the click didn't happen over an item
+   ...
+
+h3. Associating Ruby objects with TreeCtrl items
+
+TreeCtrls can be linked to non-GUI application objects by using the
+item_data methods. Methods which add items to the tree all accept an
+optional @item_data@ argument, which may be any normal Ruby
+object. Alternatively, a Ruby object can be explicitly associated with a
+TreeCtrl item by calling "set_item_data":#TreeCtrl_setitemdata . The
+same Ruby object can later be retrieved from a TreeCtrlItemId by calling
+"get_item_data":#TreeCtrl_getitemdata .
+
+h2. Win32 notes
+
+TreeCtrl class uses the standard common treeview control under Win32
+implemented in the system library @comctl32.dll@. Some versions of this
+library are known to have bugs with handling the tree control colours: the
+usual symptom is that the expanded items leave black (or otherwise incorrectly
+coloured) background behind them, especially for the controls using non
+default background colour. The recommended solution is to upgrade the
+@comctl32.dll@ to a newer version: see "http://www.microsoft.com/downloads/release.asp?ReleaseID=11916":http://www.microsoft.com/downloads/release.asp?ReleaseID=11916.
+
+<div id="methods">
+
+h2. Methods
+
+* "TreeCtrl.new":#TreeCtrl_new
+* "TreeCtrl#add_root":#TreeCtrl_addroot
+* "TreeCtrl#append_item":#TreeCtrl_appenditem
+* "TreeCtrl#collapse":#TreeCtrl_collapse
+* "TreeCtrl#collapse_all":#TreeCtrl_collapseall
+* "TreeCtrl#collapse_all_children":#TreeCtrl_collapseallchildren
+* "TreeCtrl#collapse_and_reset":#TreeCtrl_collapseandreset
+* "TreeCtrl#create":#TreeCtrl_create
+* "TreeCtrl#delete":#TreeCtrl_delete
+* "TreeCtrl#delete_all_items":#TreeCtrl_deleteallitems
+* "TreeCtrl#delete_children":#TreeCtrl_deletechildren
+* "TreeCtrl#each":#TreeCtrl_each
+* "TreeCtrl#edit_label":#TreeCtrl_editlabel
+* "TreeCtrl#end_edit_label":#TreeCtrl_endeditlabel
+* "TreeCtrl#ensure_visible":#TreeCtrl_ensurevisible
+* "TreeCtrl#expand":#TreeCtrl_expand
+* "TreeCtrl#expand_all":#TreeCtrl_expandall
+* "TreeCtrl#expand_all_children":#TreeCtrl_expandallchildren
+* "TreeCtrl#get_buttons_image_list":#TreeCtrl_getbuttonsimagelist
+* "TreeCtrl#get_children":#TreeCtrl_getchildren
+* "TreeCtrl#get_children_count":#TreeCtrl_getchildrencount
+* "TreeCtrl#get_count":#TreeCtrl_getcount
+* "TreeCtrl#get_edit_control":#TreeCtrl_geteditcontrol
+* "TreeCtrl#get_first_child":#TreeCtrl_getfirstchild
+* "TreeCtrl#get_first_visible_item":#TreeCtrl_getfirstvisibleitem
+* "TreeCtrl#get_image_list":#TreeCtrl_getimagelist
+* "TreeCtrl#get_indent":#TreeCtrl_getindent
+* "TreeCtrl#get_item_background_colour":#TreeCtrl_getitembackgroundcolour
+* "TreeCtrl#get_item_data":#TreeCtrl_getitemdata
+* "TreeCtrl#get_item_font":#TreeCtrl_getitemfont
+* "TreeCtrl#get_item_image":#TreeCtrl_getitemimage
+* "TreeCtrl#get_item_rect":#TreeCtrl_getitemrect
+* "TreeCtrl#get_item_text":#TreeCtrl_getitemtext
+* "TreeCtrl#get_item_text_colour":#TreeCtrl_getitemtextcolour
+* "TreeCtrl#get_label_rect":#TreeCtrl_getlabelrect
+* "TreeCtrl#get_last_child":#TreeCtrl_getlastchild
+* "TreeCtrl#get_next_sibling":#TreeCtrl_getnextsibling
+* "TreeCtrl#get_next_visible":#TreeCtrl_getnextvisible
+* "TreeCtrl#get_item_parent":#TreeCtrl_getitemparent
+* "TreeCtrl#get_prev_sibling":#TreeCtrl_getprevsibling
+* "TreeCtrl#get_prev_visible":#TreeCtrl_getprevvisible
+* "TreeCtrl#get_quick_best_size":#TreeCtrl_getquickbestsize
+* "TreeCtrl#get_root_item":#TreeCtrl_getrootitem
+* "TreeCtrl#get_root_items":#TreeCtrl_getrootitems
+* "TreeCtrl#get_item_selected_image":#TreeCtrl_getitemselectedimage
+* "TreeCtrl#get_selection":#TreeCtrl_getselection
+* "TreeCtrl#get_selections":#TreeCtrl_getselections
+* "TreeCtrl#get_state_image_list":#TreeCtrl_getstateimagelist
+* "TreeCtrl#hit_test":#TreeCtrl_hittest
+* "TreeCtrl#insert_item":#TreeCtrl_insertitem
+* "TreeCtrl#insert_item_before":#TreeCtrl_insertitembefore
+* "TreeCtrl#is_bold":#TreeCtrl_isbold
+* "TreeCtrl#is_empty":#TreeCtrl_isempty
+* "TreeCtrl#is_expanded":#TreeCtrl_isexpanded
+* "TreeCtrl#is_selected":#TreeCtrl_isselected
+* "TreeCtrl#is_visible":#TreeCtrl_isvisible
+* "TreeCtrl#item_has_children":#TreeCtrl_itemhaschildren
+* "TreeCtrl#on_compare_items":#TreeCtrl_oncompareitems
+* "TreeCtrl#prepend_item":#TreeCtrl_prependitem
+* "TreeCtrl#scroll_to":#TreeCtrl_scrollto
+* "TreeCtrl#select_item":#TreeCtrl_selectitem
+* "TreeCtrl#set_buttons_image_list":#TreeCtrl_setbuttonsimagelist
+* "TreeCtrl#set_indent":#TreeCtrl_setindent
+* "TreeCtrl#set_image_list":#TreeCtrl_setimagelist
+* "TreeCtrl#set_item_background_colour":#TreeCtrl_setitembackgroundcolour
+* "TreeCtrl#set_item_bold":#TreeCtrl_setitembold
+* "TreeCtrl#set_item_data":#TreeCtrl_setitemdata
+* "TreeCtrl#set_item_drop_highlight":#TreeCtrl_setitemdrophighlight
+* "TreeCtrl#set_item_font":#TreeCtrl_setitemfont
+* "TreeCtrl#set_item_has_children":#TreeCtrl_setitemhaschildren
+* "TreeCtrl#set_item_image":#TreeCtrl_setitemimage
+* "TreeCtrl#set_item_selected_image":#TreeCtrl_setitemselectedimage
+* "TreeCtrl#set_item_text":#TreeCtrl_setitemtext
+* "TreeCtrl#set_item_text_colour":#TreeCtrl_setitemtextcolour
+* "TreeCtrl#set_quick_best_size":#TreeCtrl_setquickbestsize
+* "TreeCtrl#set_state_image_list":#TreeCtrl_setstateimagelist
+* "TreeCtrl#set_window_style":#TreeCtrl_setwindowstyle
+* "TreeCtrl#sort_children":#TreeCtrl_sortchildren
+* "TreeCtrl#toggle":#TreeCtrl_toggle
+* "TreeCtrl#toggle_item_selection":#TreeCtrl_toggleitemselection
+* "TreeCtrl#traverse":#TreeCtrl_traverse
+* "TreeCtrl#unselect":#TreeCtrl_unselect
+* "TreeCtrl#unselect_all":#TreeCtrl_unselectall
+* "TreeCtrl#unselect_item":#TreeCtrl_unselectitem
+
+</div>
+
+h3(#TreeCtrl_constr). TreeCtrl.new
+
+  *TreeCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+               %(arg-type)Integer% style = TR_HAS_BUTTONS, 
+               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+               %(arg-type)String% name = "treeCtrl")
+
+Constructor, creating and showing a tree control.
+
+h4. Parameters
+
+* _parent_ Parent window. Must be a valid Wx::Window, and not nil.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position.
+* _size_ Window size. If the default size (-1, -1) is specified then the window is sized
+appropriately.
+* _style_ Window style. See "TreeCtrl":treectrl.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"TreeCtrl#create":treectrl.html#TreeCtrl_create, "Validator":validator.html
+
+
+h3(#TreeCtrl_addroot). TreeCtrl#add_root
+
+ Integer *add_root*(%(arg-type)String% text,  %(arg-type)Integer% image = -1, 
+                       %(arg-type)Integer% selImage = -1, 
+                       %(arg-type)Object% item_data = @nil@)
+
+Adds the root node to the tree, returning the new item.
+
+The _image_ and _selImage_ parameters are an index within
+the normal image list specifying the image to use for unselected and
+selected items, respectively.
+If _image_ > -1 and _selImage_ is -1, the same image is used for
+both selected and unselected items.
+
+
+h3(#TreeCtrl_appenditem). TreeCtrl#append_item
+
+ Integer *append_item*(%(arg-type)Integer% parent,  %(arg-type)String% text, 
+                          %(arg-type)Integer% image = -1, 
+                          %(arg-type)Integer% selImage = -1, 
+                          %(arg-type)Object% item_data = @nil@)
+
+Appends an item to the end of the branch identified by _parent_, return a new item id.
+
+The _image_ and _selImage_ parameters are an index within
+the normal image list specifying the image to use for unselected and
+selected items, respectively.
+If _image_ > -1 and _selImage_ is -1, the same image is used for
+both selected and unselected items.
+
+h3(#TreeCtrl_collapseall). TreeCtrl#collapse_all
+
+  *collapse_all*()
+
+Collapses the root item.
+
+h4. See also
+
+"expand_all":#TreeCtrl_expandall
+
+
+h3(#TreeCtrl_collapseallchildren). TreeCtrl#collapse_all_children
+
+  *collapse_all_children*(%(arg-type)Integer% item)
+
+Collapses this item and all of its children, recursively.
+
+h4. See also
+
+"expand_all_children":#TreeCtrl_expandallchildren
+
+
+h3(#TreeCtrl_collapseandreset). TreeCtrl#collapse_and_reset
+
+  *collapse_and_reset*(%(arg-type)Integer% item)
+
+Collapses the given item and removes all children.
+
+
+h3(#TreeCtrl_create). TreeCtrl#create
+
+ Boolean *TreeCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                      %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                      %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                      %(arg-type)Integer% style = TR_HAS_BUTTONS, 
+                      %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                      %(arg-type)String% name = "treeCtrl")
+
+Creates the tree control. See "TreeCtrl.new":treectrl.html#TreeCtrl_new for further details.
+
+
+h3(#TreeCtrl_delete). TreeCtrl#delete
+
+  *delete*(%(arg-type)Integer% item)
+
+Deletes the specified item. A @EVT_TREE_DELETE_ITEM@ event will be
+generated.
+
+This function may cause a subsequent call to GetNextChild to fail.
+
+
+h3(#TreeCtrl_deleteallitems). TreeCtrl#delete_all_items
+
+  *delete_all_items*()
+
+Deletes all items in the control. Note that this may not generate
+@EVT_TREE_DELETE_ITEM@ events under some Windows versions although
+normally such event is generated for each removed item.
+
+
+h3(#TreeCtrl_deletechildren). TreeCtrl#delete_children
+
+  *delete_children*(%(arg-type)Integer% item)
+
+Deletes all children of the given item (but not the item itself). Note that
+this will *not* generate any events unlike
+"Delete":treectrldelete.html method.
+
+If you have called "TreeCtrl#set_item_has_children":treectrl.html#TreeCtrl_setitemhaschildren, you
+may need to call it again since _DeleteChildren_ does not automatically
+clear the setting.
+
+h3(#TreeCtrl_each). TreeCtrl#each
+
+  *each*() { &#124; item_id &#124; ... }
+
+Passes the item id of each and every item in the TreeCtrl into the
+passed block, allowing iteration of the control's contents.
+
+h3(#TreeCtrl_editlabel). TreeCtrl#edit_label
+
+  *edit_label*(%(arg-type)Integer% item)
+
+Starts editing the label of the given item. This function generates a
+EVT_TREE_BEGIN_LABEL_EDIT event which can be vetoed so that no
+text control will appear for in-place editing.
+
+If the user changed the label (i.e. s/he does not press ESC or leave
+the text control without changes, a EVT_TREE_END_LABEL_EDIT event
+will be sent which can be vetoed as well.
+
+h4. See also
+
+"TreeCtrl#end_edit_label":treectrl.html#TreeCtrl_endeditlabel,
+"TreeEvent":treeevent.html
+
+
+h3(#TreeCtrl_endeditlabel). TreeCtrl#end_edit_label
+
+  *end_edit_label*(%(arg-type)Integer% item, %(arg-type)Boolean% cancelEdit)
+
+Ends the editing of the label of the given item. If _cancelEdit_ is
+@true@, the edit will be cancelled.
+
+The item argument is not important under Windows, where it always
+defaults to the item currently being editing. Having to specify the item
+is a necessary irritation on Linux / OS X, but if developing for Windows
+only, the argument can have any value.
+
+h4. See also
+
+"TreeCtrl#edit_label":treectrl.html#TreeCtrl_editlabel
+
+
+h3(#TreeCtrl_ensurevisible). TreeCtrl#ensure_visible
+
+  *ensure_visible*(%(arg-type)Integer% item)
+
+Scrolls and/or expands items to ensure that the given item is visible.
+
+
+h3(#TreeCtrl_expand). TreeCtrl#expand
+
+  *expand*(%(arg-type)Integer% item)
+
+Expands the given item.
+
+
+h3(#TreeCtrl_expandall). TreeCtrl#expand_all
+
+  *expand_all*()
+
+Expands all items in the tree.
+
+
+h3(#TreeCtrl_expandallchildren). TreeCtrl#expand_all_children
+
+  *expand_all_children*(%(arg-type)Integer% item)
+
+Expands the given item and all its children recursively.
+
+h3(#TreeCtrl_getbuttonsimagelist). TreeCtrl#get_buttons_image_list
+
+ "ImageList":imagelist.html *get_buttons_image_list*()
+
+Returns the buttons image list (from which application-defined button images are taken).
+
+This function is only available in the generic version.
+
+h3(#TreeCtrl_getchildren). TreeCtrl#get_children
+
+ Array *get_children*(%(arg-type)Integer% item)
+
+Returns all of the children of the item as an Array of Tree Item Ids.
+
+h3(#TreeCtrl_getchildrencount). TreeCtrl#get_children_count
+
+ Integer *get_children_count*(%(arg-type)Integer% item, 
+                                 %(arg-type)Boolean% recursively = @true@)
+
+Returns the number of items in the branch. If _recursively_ is @true@,
+returns the total number of descendants, otherwise only one level of
+children is counted.
+
+h3(#TreeCtrl_getcount). TreeCtrl#get_count
+
+ unsigned int *get_count*()
+
+Returns the number of items in the control.
+
+
+h3(#TreeCtrl_geteditcontrol). TreeCtrl#get_edit_control
+
+ "TextCtrl":textctrl.html *get_edit_control*()
+
+Returns the edit control being currently used to edit a label. Returns @NULL@
+if no label is being edited.
+
+*NB:* It is currently only implemented for MSW.
+
+
+h3(#TreeCtrl_getfirstchild). TreeCtrl#get_first_child
+
+ Integer *get_first_child*(%(arg-type)Integer% item)
+
+Returns the id of the first child of an item. Returns @0@ if the item
+has no children. Use  "get_next_child":#TreeCtrl_getnextchild, to
+iterate through the remaining children.
+
+h3(#TreeCtrl_getfirstvisibleitem). TreeCtrl#get_first_visible_item
+
+ Integer *get_first_visible_item*()
+
+Returns the first visible item.
+
+
+h3(#TreeCtrl_getimagelist). TreeCtrl#get_image_list
+
+ "ImageList":imagelist.html *get_image_list*()
+
+Returns the normal image list.
+
+
+h3(#TreeCtrl_getindent). TreeCtrl#get_indent
+
+ Integer *get_indent*()
+
+Returns the current tree control indentation.
+
+
+h3(#TreeCtrl_getitembackgroundcolour). TreeCtrl#get_item_background_colour
+
+ "Colour":colour.html *get_item_background_colour*(%(arg-type)Integer% item)
+
+Returns the background colour of the item.
+
+
+h3(#TreeCtrl_getitemdata). TreeCtrl#get_item_data
+
+ Object *get_item_data*(%(arg-type)Integer% item)
+
+Returns the tree item data associated with the item.
+
+
+h3(#TreeCtrl_getitemfont). TreeCtrl#get_item_font
+
+ "Font":font.html *get_item_font*(%(arg-type)Integer% item)
+
+Returns the font of the item label.
+
+
+h3(#TreeCtrl_getitemimage). TreeCtrl#get_item_image
+
+ Integer *get_item_image*(%(arg-type)Integer% item, 
+                          %(arg-type)"int":int.html% which = Wx::TREE_ITEM_ICON_NORMAL)
+
+Gets the specified item image. The value of _which_ may be:
+
+* @TREE_ITEM_ICON_NORMAL@ to get the normal item image
+* @TREE_ITEM_ICON_SELECTED@ to get the selected item image (i.e. the image which is shown when the item is currently selected)
+* @TREE_ITEM_ICON_EXPANDED@ to get the expanded image (this only makes sense for items which have children - then this image is shown when the item is expanded and the normal image is shown when it is collapsed)
+* @TREE_ITEM_ICON_SELECTED_EXPANDED@ to get the selected expanded image (which is shown when an expanded item is currently selected)
+
+h3(#TreeCtrl_getitemrect). TreeCtrl#get_item_rect
+
+  "Rect":rect.html *get_item_rect*(%(arg-type)Integer% item)
+
+Retrieves the pixel location and size of a tree item, including any
+image or button. Returns a the "rectangle":rect.html bounding the
+_item_, or @nil@ if the item is not valid, for example, if it is
+currently invisible within a collapsed parent.
+
+Notice that the rectangle coordinates are logical, not physical
+ones. So, for example, the x coordinate may be negative if the tree has
+a horizontal scrollbar and its position is not @0@.
+
+See also "get_label_rect":#TreeCtrl_getlabelrect.
+
+h3(#TreeCtrl_getitemtext). TreeCtrl#get_item_text
+
+ String *get_item_text*(%(arg-type)Integer% item)
+
+Returns the item label.
+
+
+h3(#TreeCtrl_getitemtextcolour). TreeCtrl#get_item_text_colour
+
+ "Colour":colour.html *get_item_text_colour*(%(arg-type)Integer% item)
+
+Returns the colour of the item label.
+
+h3(#TreeCtrl_getitemrect). TreeCtrl#get_label_rect
+
+  "Rect":rect.html *get_label_rect*(%(arg-type)Integer% item)
+
+Retrieves the pixel location and size of a tree item's label. Returns a
+the "rectangle":rect.html bounding the _item_ label, or @nil@ if the item is
+not valid, for example, if it is currently invisible within a collapsed
+parent.
+
+Notice that the rectangle coordinates are logical, not physical
+ones. So, for example, the x coordinate may be negative if the tree has
+a horizontal scrollbar and its position is not @0@.
+
+See also "get_item_rect":#TreeCtrl_getitemrect.
+
+h3(#TreeCtrl_getlastchild). TreeCtrl#get_last_child
+
+ Integer *get_last_child*(%(arg-type)Integer% item)
+
+Returns the last child of the item (or an invalid tree item if this item has no children).
+
+h4. See also
+
+"get_first_child":#TreeCtrl_getfirstchild,
+"TreeCtrl#get_next_sibling":treectrl.html#TreeCtrl_getnextsibling,
+"get_last_child":#TreeCtrl_getlastchild
+
+
+h3(#TreeCtrl_getnextsibling). TreeCtrl#get_next_sibling
+
+ Integer *get_next_sibling*(%(arg-type)Integer% item)
+
+Returns the next sibling of the specified item; call "TreeCtrl#get_prev_sibling":treectrl.html#TreeCtrl_getprevsibling for the previous sibling.
+
+Returns an invalid tree item if there are no further siblings.
+
+h4. See also
+
+"TreeCtrl#get_prev_sibling":treectrl.html#TreeCtrl_getprevsibling
+
+
+h3(#TreeCtrl_getnextvisible). TreeCtrl#get_next_visible
+
+ Integer *get_next_visible*(%(arg-type)Integer% item)
+
+Returns the next visible item.
+
+
+h3(#TreeCtrl_getitemparent). TreeCtrl#get_item_parent
+
+ Integer *get_item_parent*(%(arg-type)Integer% item)
+
+Returns the item's parent.
+
+
+h3(#TreeCtrl_getprevsibling). TreeCtrl#get_prev_sibling
+
+ Integer *get_prev_sibling*(%(arg-type)Integer% item)
+
+Returns the previous sibling of the specified item; call "TreeCtrl#get_next_sibling":treectrl.html#TreeCtrl_getnextsibling for the next sibling.
+
+Returns an invalid tree item if there are no further children.
+
+h4. See also
+
+"TreeCtrl#get_next_sibling":treectrl.html#TreeCtrl_getnextsibling
+
+
+h3(#TreeCtrl_getprevvisible). TreeCtrl#get_prev_visible
+
+ Integer *get_prev_visible*(%(arg-type)Integer% item)
+
+Returns the previous visible item.
+
+
+h3(#TreeCtrl_getquickbestsize). TreeCtrl#get_quick_best_size
+
+ Boolean *get_quick_best_size*()
+
+Returns true if the control will use a quick calculation for the best size,
+looking only at the first and last items. The default is false.
+
+h4. See also
+
+"TreeCtrl#set_quick_best_size":treectrl.html#TreeCtrl_setquickbestsize
+
+
+h3(#TreeCtrl_getrootitem). TreeCtrl#get_root_item
+
+ Integer *get_root_item*()
+
+Returns the root item for the tree control. Note that if the tree was
+created with a hidden root (using the @TR_HIDE_ROOT@ style), this will
+return an invalid item id in which cannot be used in other calls (for
+example, get_children). See also get_root_items, below.
+
+h3(#TreeCtrl_getrootitems). TreeCtrl#get_root_items
+
+ Array *get_root_items*()
+
+This returns an array of ids of the base items in the tree. It is
+intended primarily for use with TreeCtrls with the @TR_HIDDEN_ROOT@
+style applied, for which get_root_item, above, will not work correctly.
+
+
+h3(#TreeCtrl_getitemselectedimage). TreeCtrl#get_item_selected_image
+
+ Integer *get_item_selected_image*(%(arg-type)Integer% item_id)
+
+Gets the selected item image (this function is obsolete, use
+@GetItemImage(item, TreeItemIcon_Selected@) instead).
+
+
+h3(#TreeCtrl_getselection). TreeCtrl#get_selection
+
+Integer *get_selection*()
+
+Returns the selection, or an invalid item if there is no selection.
+This function only works with the controls without TR_MULTIPLE style, use
+"get_selections":#TreeCtrl_getselections for the controls which do have
+this style.
+
+
+h3(#TreeCtrl_getselections). TreeCtrl#get_selections
+
+ Array *get_selections*()
+
+Returns an array of tree item ids for the currently selected items. This
+function can be called only if the control has the @TR_MULTIPLE@ style.
+
+h3(#TreeCtrl_getstateimagelist). TreeCtrl#get_state_image_list
+
+ "ImageList":imagelist.html *get_state_image_list*()
+
+Returns the state image list (from which application-defined state images are taken).
+
+
+h3(#TreeCtrl_hittest). TreeCtrl#hit_test
+
+Integer *hit_test*(%(arg-type)"Point":point.html% point,  %(arg-type)Integer% flags)
+
+Calculates which (if any) item is under the given point, returning the tree item
+id at this point plus extra information _flags_. _flags_ is a bitlist of the following:
+
+
+
+|TREE_HITTEST_ABOVE|Above the client area.|
+|TREE_HITTEST_BELOW|Below the client area.|
+|TREE_HITTEST_NOWHERE|In the client area but below the last item.|
+|TREE_HITTEST_ONITEMBUTTON|On the button associated with an item.|
+|TREE_HITTEST_ONITEMICON|On the bitmap associated with an item.|
+|TREE_HITTEST_ONITEMINDENT|In the indentation associated with an item.|
+|TREE_HITTEST_ONITEMLABEL|On the label (string) associated with an item.|
+|TREE_HITTEST_ONITEMRIGHT|In the area to the right of an item.|
+|TREE_HITTEST_ONITEMSTATEICON|On the state icon for a tree view item that is in a user-defined state.|
+|TREE_HITTEST_TOLEFT|To the right of the client area.|
+|TREE_HITTEST_TORIGHT|To the left of the client area.|
+
+
+
+
+
+
+
+h3(#TreeCtrl_insertitem). TreeCtrl#insert_item
+
+Integer *insert_item*(%(arg-type)Integer% parent, 
+                          %(arg-type)Integer% previous,  %(arg-type)String% text, 
+                          %(arg-type)Integer% image = -1, 
+                          %(arg-type)Integer% selImage = -1, 
+                          %(arg-type)Object% item_data = @nil@)
+
+Inserts an item after a given one (_previous_).
+
+The _image_ and _selImage_ parameters are an index within
+the normal image list specifying the image to use for unselected and
+selected items, respectively.
+If _image_ > -1 and _selImage_ is -1, the same image is used for
+both selected and unselected items.
+
+
+h3(#TreeCtrl_insertitembefore). TreeCtrl#insert_item_before
+
+	Integer *insert_item_before*(%(arg-type)Integer% parent, 
+	                         %(arg-type)Integer% before,  %(arg-type)String% text, 
+	                         %(arg-type)Integer% image = -1, 
+	                         %(arg-type)Integer% selImage = -1, 
+	                         %(arg-type)Object% item_data = @nil@)
+
+Inserts an item before one identified by its position (_before_).
+_before_ must be less than the number of children.
+
+The _image_ and _selImage_ parameters are an index within
+the normal image list specifying the image to use for unselected and
+selected items, respectively.
+If _image_ > -1 and _selImage_ is -1, the same image is used for
+both selected and unselected items.
+
+
+h3(#TreeCtrl_isbold). TreeCtrl#is_bold
+
+ Boolean *is_bold*(%(arg-type)Integer% item)
+
+Returns @true@ if the given item is in bold state.
+
+See also: "set_item_bold":#TreeCtrl_setitembold
+
+
+h3(#TreeCtrl_isempty). TreeCtrl#is_empty
+
+ Boolean *is_empty*()
+
+Returns  if the control is empty (i.e. has no items, even no root one).
+
+
+h3(#TreeCtrl_isexpanded). TreeCtrl#is_expanded
+
+ Boolean *is_expanded*(%(arg-type)Integer% item)
+
+Returns @true@ if the item is expanded (only makes sense if it has children).
+
+
+h3(#TreeCtrl_isselected). TreeCtrl#is_selected
+
+ Boolean *is_selected*(%(arg-type)Integer% item)
+
+Returns @true@ if the item is selected.
+
+
+h3(#TreeCtrl_isvisible). TreeCtrl#is_visible
+
+ Boolean *is_visible*(%(arg-type)Integer% item)
+
+Returns @true@ if the item is visible (it might be outside the view, or not expanded).
+
+
+h3(#TreeCtrl_itemhaschildren). TreeCtrl#item_has_children
+
+ Boolean *item_has_children*(%(arg-type)Integer% item)
+
+Returns @true@ if the item has children.
+
+
+h3(#TreeCtrl_oncompareitems). TreeCtrl#on_compare_items
+
+ Integer *on_compare_items*(%(arg-type)Integer% item1,  %(arg-type)Integer% item2)
+
+Override this function in the derived class to change the sort order of the
+items in the tree control. The function should return a negative, zero or
+positive value if the first item is less than, equal to or greater than the
+second one.
+
+See also: "sort_children":#TreeCtrl_sortchildren
+
+h3(#TreeCtrl_prependitem). TreeCtrl#prepend_item
+
+Integer *prepend_item*(%(arg-type)Integer% parent,  %(arg-type)String% text, 
+                           %(arg-type)Integer% image = -1, 
+                           %(arg-type)Integer% selImage = -1, 
+                           %(arg-type)Object% item_data = @nil@)
+
+Appends an item as the first child of _parent_, return a new item id.
+
+The _image_ and _selImage_ parameters are an index within
+the normal image list specifying the image to use for unselected and
+selected items, respectively.
+If _image_ > -1 and _selImage_ is -1, the same image is used for
+both selected and unselected items.
+
+
+h3(#TreeCtrl_scrollto). TreeCtrl#scroll_to
+
+  *scroll_to*(%(arg-type)Integer% item)
+
+Scrolls the specified item into view.
+
+
+h3(#TreeCtrl_selectitem). TreeCtrl#select_item
+
+  *select_item*(%(arg-type)Integer% item,  %(arg-type)Boolean% select = )
+
+Selects the given item. In multiple selection controls, can be also used to
+deselect a currently selected item if the value of select is false.
+
+
+h3(#TreeCtrl_setbuttonsimagelist). TreeCtrl#set_buttons_image_list
+
+  *set_buttons_image_list*(%(arg-type)"ImageList":imagelist.html% imageList)
+
+Sets the buttons image list (from which application-defined button images are taken).
+
+Setting the button image list enables the display of image buttons.
+Once enabled, the only way to disable the display of button images is to
+set the button image list to @nil@.
+
+This function is only available in the generic version.
+
+h3(#TreeCtrl_setindent). TreeCtrl#set_indent
+
+  *set_indent*(%(arg-type)Integer% indent)
+
+Sets the indentation for the tree control.
+
+
+h3(#TreeCtrl_setimagelist). TreeCtrl#set_image_list
+
+  *set_image_list*(%(arg-type)"ImageList":imagelist.html% imageList)
+
+Sets the normal image list.
+
+h3(#TreeCtrl_setitembackgroundcolour). TreeCtrl#set_item_background_colour
+
+  *set_item_background_colour*(%(arg-type)Integer% item,  %(arg-type)"Colour":colour.html% col)
+
+Sets the colour of the item's background.
+
+
+h3(#TreeCtrl_setitembold). TreeCtrl#set_item_bold
+
+  *set_item_bold*(%(arg-type)Integer% item,  %(arg-type)Boolean% bold = @true@)
+
+Makes item appear in bold font if _bold_ parameter is @true@ or resets it to
+the normal state.
+
+See also: "is_bold":#TreeCtrl_isbold
+
+
+h3(#TreeCtrl_setitemdata). TreeCtrl#set_item_data
+
+  *set_item_data*(%(arg-type)Integer% item,  %(arg-type)Object% data)
+
+Sets the item client data.
+
+
+
+h3(#TreeCtrl_setitemdrophighlight). TreeCtrl#set_item_drop_highlight
+
+  *set_item_drop_highlight*(%(arg-type)Integer% item,  %(arg-type)Boolean% highlight = @true@)
+
+Gives the item the visual feedback for Drag'n'Drop actions, which is
+useful if something is dragged from the outside onto the tree control
+(as opposed to a DnD operation within the tree control, which already
+is implemented internally).
+
+h3(#TreeCtrl_setitemfont). TreeCtrl#set_item_font
+
+  *set_item_font*(%(arg-type)Integer% item,  %(arg-type)"Font":font.html% font)
+
+Sets the item's font. All items in the tree should have the same height to avoid
+text clipping, so the fonts height should be the same for all of them,
+although font attributes may vary.
+
+h4. See also
+
+"set_item_bold":#TreeCtrl_setitembold
+
+
+h3(#TreeCtrl_setitemhaschildren). TreeCtrl#set_item_has_children
+
+  *set_item_has_children*(%(arg-type)Integer% item,  %(arg-type)Boolean% hasChildren = @true@)
+
+Force appearance of the button next to the item. This is useful to
+allow the user to expand the items which don't have any children now,
+but instead adding them only when needed, thus minimizing memory
+usage and loading time.
+
+
+h3(#TreeCtrl_setitemimage). TreeCtrl#set_item_image
+
+  *set_item_image*(%(arg-type)Integer% item,  %(arg-type)Integer% image, 
+                 %(arg-type)"TreeItemIcon":treeitemicon.html% which = TreeItemIcon_Normal)
+
+Sets the specified item image. See "get_item_image":#TreeCtrl_getitemimage
+for the description of the _which_ parameter.
+
+
+h3(#TreeCtrl_setitemselectedimage). TreeCtrl#set_item_selected_image
+
+  *set_item_selected_image*(%(arg-type)Integer% item,  %(arg-type)Integer% selImage)
+
+Sets the selected item image (this function is obsolete, use @SetItemImage(item, TreeItemIcon_Selected@) instead).
+
+
+h3(#TreeCtrl_setitemtext). TreeCtrl#set_item_text
+
+  *set_item_text*(%(arg-type)Integer% item,  %(arg-type)String% text)
+
+Sets the item label.
+
+
+h3(#TreeCtrl_setitemtextcolour). TreeCtrl#set_item_text_colour
+
+  *set_item_text_colour*(%(arg-type)Integer% item,  %(arg-type)"Colour":colour.html% col)
+
+Sets the colour of the item's text.
+
+
+h3(#TreeCtrl_setquickbestsize). TreeCtrl#set_quick_best_size
+
+  *set_quick_best_size*(%(arg-type)Boolean% quickBestSize)
+
+If true is passed, specifies that the control will use a quick calculation for the best size,
+looking only at the first and last items. Otherwise, it will look at all items.
+The default is false.
+
+h4. See also
+
+"TreeCtrl#get_quick_best_size":treectrl.html#TreeCtrl_getquickbestsize
+
+
+h3(#TreeCtrl_setstateimagelist). TreeCtrl#set_state_image_list
+
+  *set_state_image_list*(%(arg-type)"ImageList":imagelist.html% imageList)
+
+Sets the state image list (from which application-defined state images are taken).
+
+h3(#TreeCtrl_setwindowstyle). TreeCtrl#set_window_style
+
+  *set_window_style*(%(arg-type)Integer% styles)
+
+Sets the mode flags associated with the display of the tree control.
+The new mode takes effect immediately.
+(Generic only; MSW ignores changes.)
+
+
+h3(#TreeCtrl_sortchildren). TreeCtrl#sort_children
+
+  *sort_children*(%(arg-type)Integer% item)
+
+Sorts the children of the given item using
+"on_compare_items":#TreeCtrl_oncompareitems method of TreeCtrl. You
+should override that method to change the sort order (the default is ascending
+case-sensitive alphabetical order).
+
+h4. See also
+
+"on_compare_items":#TreeCtrl_oncompareitems
+
+
+h3(#TreeCtrl_toggle). TreeCtrl#toggle
+
+  *toggle*(%(arg-type)Integer% item)
+
+Toggles the given item between collapsed and expanded states.
+
+
+h3(#TreeCtrl_toggleitemselection). TreeCtrl#toggle_item_selection
+
+  *toggle_item_selection*(%(arg-type)Integer% item)
+
+Toggles the given item between selected and unselected states. For
+multiselection controls only.
+
+h3(#TreeCtrl_unselect). TreeCtrl#unselect
+
+  *unselect*()
+
+Removes the selection from the currently selected item (if any).
+
+h3(#TreeCtrl_traverse). TreeCtrl#traverse
+
+  *traverse*(%(arg-type)Integer% start_item = root_id) { &#124; item_id &#124; ... }
+
+Recurses over the TreeCtrl's items, passing each TreeItemId successively
+into the passed block. This TreeItemId can be used as an argument to
+many other methods in this class.
+
+The @start_item@ argument will be the first item_id passed into the
+block, followed by its children and descendants, depth first. If
+@start_item@ is not specified, it will traverse over all the items in
+the tree. It will starting from the root item, or, if the tree has a
+hidden root, the bottom-most items.
+
+h3(#TreeCtrl_unselectall). TreeCtrl#unselect_all
+
+  *unselect_all*()
+
+This function either behaves the same as "Unselect":treectrlunselect.html
+if the control doesn't have TR_MULTIPLE style, or removes the selection from
+all items if it does have this style.
+
+
+h3(#TreeCtrl_unselectitem). TreeCtrl#unselect_item
+
+  *unselect_item*(%(arg-type)Integer% item)
+
+Unselects the given item. This works in multiselection controls only.
+
+
+
+
+
+
+

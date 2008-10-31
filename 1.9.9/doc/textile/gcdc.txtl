@@ -1,0 +1,41 @@
+h1(#wxwindowdc). Wx::GCDC
+
+GCDC is a "Device Context":dc.html that supports anti-aliased drawing
+and semi-transparent colours on all platforms. It is somewhat slower
+than normal device contexts, so it is not enabled by default (except on
+OS X). It is used by taking a normal WindowDC and creating a GCDC from it.
+
+"GraphicsContext":graphicscontext.html and associated classes provides a
+more advanced interface to the native anti-aliased drawing features.
+
+h2. Derived from
+
+"DC":dc.html
+
+h2. See also
+
+"DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html,
+"ClientDC":clientdc.html, "ScreenDC":screendc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GCDC.new":#GCDC_new
+
+</div>
+
+
+h3(#GCDC_new). GCDC.new
+
+  *GCDC.new*(%(arg-type)"WindowDC":windowdc.html% windowdc)
+
+Constructs an anti-aliased drawing surface from a normal
+"WindowDC":windowdc.html, typically within an on_paint handler.
+
+  *GCDC.new*(%(arg-type)"WindowDC":memorydc.html% memorydc)
+
+Windows only: constructs an anti-aliased drawing surface for drawing on
+a bitmap in memory.
+
+

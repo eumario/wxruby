@@ -1,0 +1,539 @@
+h1(#wxauipaneinfo). Wx::AuiPaneInfo
+
+AuiPaneInfo is part of the AUI class framework.
+See also "AUI overview":auioverview.html.
+
+AuiPaneInfo specifies all the parameters for a pane.
+These parameters specify where the pane is on the
+screen, whether it is docked or floating, or hidden.
+In addition, these parameters specify the pane's
+docked position, floating position, preferred size,
+minimum size, caption text among many other parameters.
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"AuiManager":auimanager.html, 
+"AuiDockArt":auidockart.html
+
+h2. Data structures
+
+
+ enum AuiPaneInsertLevel
+ {
+     AUI_INSERT_PANE = 0,
+     AUI_INSERT_ROW = 1,
+     AUI_INSERT_DOCK = 2
+ }
+ 
+
+<div id="methods">
+
+h2. Methods
+
+* "AuiPaneInfo.new":#AuiPaneInfo_new
+* "AuiPaneInfo#best_size":#AuiPaneInfo_bestsize
+* "AuiPaneInfo#bottom":#AuiPaneInfo_bottom
+* "AuiPaneInfo#bottom_dockable":#AuiPaneInfo_bottomdockable
+* "AuiPaneInfo#caption":#AuiPaneInfo_caption
+* "AuiPaneInfo#caption_visible":#AuiPaneInfo_captionvisible
+* "AuiPaneInfo#centre":#AuiPaneInfo_centre
+* "AuiPaneInfo#centre_pane":#AuiPaneInfo_centrepane
+* "AuiPaneInfo#close_button":#AuiPaneInfo_closebutton
+* "AuiPaneInfo#default_pane":#AuiPaneInfo_defaultpane
+* "AuiPaneInfo#destroy_on_close":#AuiPaneInfo_destroyonclose
+* "AuiPaneInfo#direction":#AuiPaneInfo_direction
+* "AuiPaneInfo#dock":#AuiPaneInfo_dock
+* "AuiPaneInfo#dockable":#AuiPaneInfo_dockable
+* "AuiPaneInfo#fixed":#AuiPaneInfo_fixed
+* "AuiPaneInfo#float":#AuiPaneInfo_float
+* "AuiPaneInfo#floatable":#AuiPaneInfo_floatable
+* "AuiPaneInfo#floating_position":#AuiPaneInfo_floatingposition
+* "AuiPaneInfo#floating_size":#AuiPaneInfo_floatingsize
+* "AuiPaneInfo#gripper":#AuiPaneInfo_gripper
+* "AuiPaneInfo#gripper_top":#AuiPaneInfo_grippertop
+* "AuiPaneInfo#has_border":#AuiPaneInfo_hasborder
+* "AuiPaneInfo#has_caption":#AuiPaneInfo_hascaption
+* "AuiPaneInfo#has_close_button":#AuiPaneInfo_hasclosebutton
+* "AuiPaneInfo#has_flag":#AuiPaneInfo_hasflag
+* "AuiPaneInfo#has_gripper":#AuiPaneInfo_hasgripper
+* "AuiPaneInfo#has_gripper_top":#AuiPaneInfo_hasgrippertop
+* "AuiPaneInfo#has_maximize_button":#AuiPaneInfo_hasmaximizebutton
+* "AuiPaneInfo#has_minimize_button":#AuiPaneInfo_hasminimizebutton
+* "AuiPaneInfo#has_pin_button":#AuiPaneInfo_haspinbutton
+* "AuiPaneInfo#hide":#AuiPaneInfo_hide
+* "AuiPaneInfo#is_bottom_dockable":#AuiPaneInfo_isbottomdockable
+* "AuiPaneInfo#is_docked":#AuiPaneInfo_isdocked
+* "AuiPaneInfo#is_fixed":#AuiPaneInfo_isfixed
+* "AuiPaneInfo#is_floatable":#AuiPaneInfo_isfloatable
+* "AuiPaneInfo#is_floating":#AuiPaneInfo_isfloating
+* "AuiPaneInfo#is_left_dockable":#AuiPaneInfo_isleftdockable
+* "AuiPaneInfo#is_movable":#AuiPaneInfo_ismovable
+* "AuiPaneInfo#is_ok":#AuiPaneInfo_isok
+* "AuiPaneInfo#is_resizable":#AuiPaneInfo_isresizable
+* "AuiPaneInfo#is_right_dockable":#AuiPaneInfo_isrightdockable
+* "AuiPaneInfo#is_shown":#AuiPaneInfo_isshown
+* "AuiPaneInfo#is_toolbar":#AuiPaneInfo_istoolbar
+* "AuiPaneInfo#is_top_dockable":#AuiPaneInfo_istopdockable
+* "AuiPaneInfo#layer":#AuiPaneInfo_layer
+* "AuiPaneInfo#left":#AuiPaneInfo_left
+* "AuiPaneInfo#left_dockable":#AuiPaneInfo_leftdockable
+* "AuiPaneInfo#max_size":#AuiPaneInfo_maxsize
+* "AuiPaneInfo#maximize_button":#AuiPaneInfo_maximizebutton
+* "AuiPaneInfo#min_size":#AuiPaneInfo_minsize
+* "AuiPaneInfo#minimize_button":#AuiPaneInfo_minimizebutton
+* "AuiPaneInfo#movable":#AuiPaneInfo_movable
+* "AuiPaneInfo#name":#AuiPaneInfo_name
+* "AuiPaneInfo#pane_border":#AuiPaneInfo_paneborder
+* "AuiPaneInfo#pin_button":#AuiPaneInfo_pinbutton
+* "AuiPaneInfo#position":#AuiPaneInfo_position
+* "AuiPaneInfo#resizable":#AuiPaneInfo_resizable
+* "AuiPaneInfo#right":#AuiPaneInfo_right
+* "AuiPaneInfo#right_dockable":#AuiPaneInfo_rightdockable
+* "AuiPaneInfo#row":#AuiPaneInfo_row
+* "AuiPaneInfo#safe_set":#AuiPaneInfo_safeset
+* "AuiPaneInfo#set_flag":#AuiPaneInfo_setflag
+* "AuiPaneInfo#show":#AuiPaneInfo_show
+* "AuiPaneInfo#toolbar_pane":#AuiPaneInfo_toolbarpane
+* "AuiPaneInfo#top":#AuiPaneInfo_top
+* "AuiPaneInfo#top_dockable":#AuiPaneInfo_topdockable
+* "AuiPaneInfo#window":#AuiPaneInfo_window
+
+</div>
+
+
+
+h3(#AuiPaneInfo_wxauipaneinfo). AuiPaneInfo.new
+
+  *AuiPaneInfo.new*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% c)
+
+Copy constructor.
+
+  *destructor*()
+
+
+h3(#AuiPaneInfo_bestsize). AuiPaneInfo#best_size
+
+ "AuiPaneInfo":auipaneinfo.html *best_size*(%(arg-type)"Size":size.html% size)
+
+ "AuiPaneInfo":auipaneinfo.html *best_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+BestSize() sets the ideal size for the pane. The docking manager will attempt to use this size as much as possible when docking or floating the pane.
+
+h3(#AuiPaneInfo_bottom). AuiPaneInfo#bottom
+
+ "AuiPaneInfo":auipaneinfo.html *bottom*()
+
+Bottom() sets the pane dock position to the bottom side of the frame. This is
+the same thing as calling Direction(AUI_DOCK_BOTTOM).
+
+h3(#AuiPaneInfo_bottomdockable). AuiPaneInfo#bottom_dockable
+
+ "AuiPaneInfo":auipaneinfo.html *bottom_dockable*(%(arg-type)Boolean% b = true)
+
+BottomDockable() indicates whether a pane can be docked at the bottom of the frame.
+
+h3(#AuiPaneInfo_caption). AuiPaneInfo#caption
+
+ "AuiPaneInfo":auipaneinfo.html *caption*(%(arg-type)String% c)
+
+Caption() sets the caption of the pane.
+
+h3(#AuiPaneInfo_captionvisible). AuiPaneInfo#caption_visible
+
+ "AuiPaneInfo":auipaneinfo.html *caption_visible*(%(arg-type)Boolean% visible = true)
+
+CaptionVisible indicates that a pane caption should be visible. If false, no pane caption is drawn.
+
+h3(#AuiPaneInfo_centre). AuiPaneInfo#centre
+
+ "AuiPaneInfo":auipaneinfo.html *centre*()
+
+ "AuiPaneInfo":auipaneinfo.html *center*()
+
+Center() sets the pane dock position to the left side of the frame.
+The centre pane is the space in the middle after all border panes (left, top, right, bottom) are subtracted from the layout.
+
+This is the same thing as calling Direction(AUI_DOCK_CENTRE). 
+
+h3(#AuiPaneInfo_centrepane). AuiPaneInfo#centre_pane
+
+ "AuiPaneInfo":auipaneinfo.html *centre_pane*()
+
+ "AuiPaneInfo":auipaneinfo.html *center_pane*()
+
+CentrePane() specifies that the pane should adopt the default center pane settings. Centre panes usually do not have caption bars. This function provides an easy way of preparing a pane to be displayed in the center dock position.
+
+h3(#AuiPaneInfo_closebutton). AuiPaneInfo#close_button
+
+ "AuiPaneInfo":auipaneinfo.html *close_button*(%(arg-type)Boolean% visible = true)
+
+CloseButton() indicates that a close button should be drawn for the pane.
+
+h3(#AuiPaneInfo_defaultpane). AuiPaneInfo#default_pane
+
+ "AuiPaneInfo":auipaneinfo.html *default_pane*()
+
+DefaultPane() specifies that the pane should adopt the default pane settings.
+
+h3(#AuiPaneInfo_destroyonclose). AuiPaneInfo#destroy_on_close
+
+ "AuiPaneInfo":auipaneinfo.html *destroy_on_close*(%(arg-type)Boolean% b = true)
+
+DestroyOnClose() indicates whether a pane should be detroyed when it is closed. Normally a pane is simply hidden when the close button is clicked. Setting DestroyOnClose to true will cause the window to be destroyed when the user clicks the pane's close button.
+
+h3(#AuiPaneInfo_direction). AuiPaneInfo#direction
+
+ "AuiPaneInfo":auipaneinfo.html *direction*(%(arg-type)Integer% direction)
+
+Direction() determines the direction of the docked pane. It is functionally the same as calling Left(), Right(), Top() or Bottom(), except that docking direction may be specified programmatically via the parameter.
+
+h3(#AuiPaneInfo_dock). AuiPaneInfo#dock
+
+ "AuiPaneInfo":auipaneinfo.html *dock*()
+
+
+h3(#AuiPaneInfo_dockable). AuiPaneInfo#dockable
+
+ "AuiPaneInfo":auipaneinfo.html *dockable*(%(arg-type)Boolean% b = true)
+
+Dockable() specifies whether a frame can be docked or not. It is the same as specifying TopDockable(b).BottomDockable(b).LeftDockable(b).RightDockable(b).
+
+h3(#AuiPaneInfo_fixed). AuiPaneInfo#fixed
+
+ "AuiPaneInfo":auipaneinfo.html *fixed*()
+
+Fixed() forces a pane to be fixed size so that it cannot be resized. After calling Fixed(), IsFixed() will return true.
+
+h3(#AuiPaneInfo_float). AuiPaneInfo#float
+
+ "AuiPaneInfo":auipaneinfo.html *float*()
+
+Float() indicates that a pane should be floated.
+
+h3(#AuiPaneInfo_floatable). AuiPaneInfo#floatable
+
+ "AuiPaneInfo":auipaneinfo.html *floatable*(%(arg-type)Boolean% b = true)
+
+Floatable() sets whether the user will be able to undock a pane and turn it into a floating window.
+
+h3(#AuiPaneInfo_floatingposition). AuiPaneInfo#floating_position
+
+ "AuiPaneInfo":auipaneinfo.html *floating_position*(%(arg-type)"Point":point.html% pos)
+
+ "AuiPaneInfo":auipaneinfo.html *floating_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+FloatingPosition() sets the position of the floating pane.
+
+h3(#AuiPaneInfo_floatingsize). AuiPaneInfo#floating_size
+
+ "AuiPaneInfo":auipaneinfo.html *floating_size*(%(arg-type)"Size":size.html% size)
+
+ "AuiPaneInfo":auipaneinfo.html *floating_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+FloatingSize() sets the size of the floating pane.
+
+h3(#AuiPaneInfo_gripper). AuiPaneInfo#gripper
+
+ "AuiPaneInfo":auipaneinfo.html *gripper*(%(arg-type)Boolean% visible = true)
+
+Gripper() indicates that a gripper should be drawn for the pane.
+
+h3(#AuiPaneInfo_grippertop). AuiPaneInfo#gripper_top
+
+ "AuiPaneInfo":auipaneinfo.html *gripper_top*(%(arg-type)Boolean% attop = true)
+
+GripperTop() indicates that a gripper should be drawn at the top of the pane.
+
+h3(#AuiPaneInfo_hasborder). AuiPaneInfo#has_border
+
+ Boolean *has_border*()
+
+HasBorder() returns true if the pane displays a border.
+
+h3(#AuiPaneInfo_hascaption). AuiPaneInfo#has_caption
+
+ Boolean *has_caption*()
+
+HasCaption() returns true if the pane displays a caption.
+
+h3(#AuiPaneInfo_hasclosebutton). AuiPaneInfo#has_close_button
+
+ Boolean *has_close_button*()
+
+HasCloseButton() returns true if the pane displays a button to close the pane.
+
+h3(#AuiPaneInfo_hasflag). AuiPaneInfo#has_flag
+
+ Boolean *has_flag*(%(arg-type)unsigned int% flag)
+
+HasFlag() returns true if the the property specified by flag is active for the pane.
+
+h3(#AuiPaneInfo_hasgripper). AuiPaneInfo#has_gripper
+
+ Boolean *has_gripper*()
+
+HasGripper() returns true if the pane displays a gripper.
+
+h3(#AuiPaneInfo_hasgrippertop). AuiPaneInfo#has_gripper_top
+
+ Boolean *has_gripper_top*()
+
+HasGripper() returns true if the pane displays a gripper at the top.
+
+h3(#AuiPaneInfo_hasmaximizebutton). AuiPaneInfo#has_maximize_button
+
+ Boolean *has_maximize_button*()
+
+HasMaximizeButton() returns true if the pane displays a button to maximize the pane.
+
+h3(#AuiPaneInfo_hasminimizebutton). AuiPaneInfo#has_minimize_button
+
+ Boolean *has_minimize_button*()
+
+HasMinimizeButton() returns true if the pane displays a button to minimize the pane.
+
+h3(#AuiPaneInfo_haspinbutton). AuiPaneInfo#has_pin_button
+
+ Boolean *has_pin_button*()
+
+HasPinButton() returns true if the pane displays a button to float the pane.
+
+h3(#AuiPaneInfo_hide). AuiPaneInfo#hide
+
+ "AuiPaneInfo":auipaneinfo.html *hide*()
+
+Hide() indicates that a pane should be hidden.
+
+h3(#AuiPaneInfo_isbottomdockable). AuiPaneInfo#is_bottom_dockable
+
+ Boolean *is_bottom_dockable*()
+
+IsBottomDockable() returns true if the pane can be docked at the bottom of the managed frame.
+
+h3(#AuiPaneInfo_isdocked). AuiPaneInfo#is_docked
+
+ Boolean *is_docked*()
+
+IsDocked() returns true if the pane is docked.
+
+h3(#AuiPaneInfo_isfixed). AuiPaneInfo#is_fixed
+
+ Boolean *is_fixed*()
+
+IsFixed() returns true if the pane cannot be resized.
+
+h3(#AuiPaneInfo_isfloatable). AuiPaneInfo#is_floatable
+
+ Boolean *is_floatable*()
+
+IsFloatable() returns true if the pane can be undocked and displayed as a floating window.
+
+h3(#AuiPaneInfo_isfloating). AuiPaneInfo#is_floating
+
+ Boolean *is_floating*()
+
+IsFloating() returns true if the pane is floating.
+
+h3(#AuiPaneInfo_isleftdockable). AuiPaneInfo#is_left_dockable
+
+ Boolean *is_left_dockable*()
+
+IsLeftDockable() returns true if the pane can be docked on the left of the managed frame.
+
+h3(#AuiPaneInfo_ismovable). AuiPaneInfo#is_movable
+
+ Boolean *is_movable*()
+
+IsMoveable() returns true if the docked frame can be undocked or moved to another dock position.
+
+h3(#AuiPaneInfo_isok). AuiPaneInfo#is_ok
+
+ Boolean *is_ok*()
+
+IsOk() returns true if the AuiPaneInfo structure is valid. A pane structure is valid if it has an associated window.
+
+h3(#AuiPaneInfo_isresizable). AuiPaneInfo#is_resizable
+
+ Boolean *is_resizable*()
+
+IsResizable() returns true if the pane can be resized.
+
+h3(#AuiPaneInfo_isrightdockable). AuiPaneInfo#is_right_dockable
+
+ Boolean *is_right_dockable*()
+
+IsRightDockable() returns true if the pane can be docked on the right of the managed frame.
+
+h3(#AuiPaneInfo_isshown). AuiPaneInfo#is_shown
+
+ Boolean *is_shown*()
+
+IsShown() returns true if the pane is currently shown.
+
+h3(#AuiPaneInfo_istoolbar). AuiPaneInfo#is_toolbar
+
+ Boolean *is_toolbar*()
+
+IsToolbar() returns true if the pane contains a toolbar.
+
+h3(#AuiPaneInfo_istopdockable). AuiPaneInfo#is_top_dockable
+
+ Boolean *is_top_dockable*()
+
+IsTopDockable() returns true if the pane can be docked at the top of the managed frame.
+
+h3(#AuiPaneInfo_layer). AuiPaneInfo#layer
+
+ "AuiPaneInfo":auipaneinfo.html *layer*(%(arg-type)Integer% layer)
+
+Layer() determines the layer of the docked pane. The dock layer is similar to an onion, the inner-most layer being layer 0. Each shell moving in the outward direction has a higher layer number. This allows for more complex docking layout formation.
+
+h3(#AuiPaneInfo_left). AuiPaneInfo#left
+
+ "AuiPaneInfo":auipaneinfo.html *left*()
+
+Left() sets the pane dock position to the left side of the frame. This is the
+same thing as calling Direction(AUI_DOCK_LEFT).
+
+h3(#AuiPaneInfo_leftdockable). AuiPaneInfo#left_dockable
+
+ "AuiPaneInfo":auipaneinfo.html *left_dockable*(%(arg-type)Boolean% b = true)
+
+LeftDockable() indicates whether a pane can be docked on the left of the frame.
+
+h3(#AuiPaneInfo_maxsize). AuiPaneInfo#max_size
+
+ "AuiPaneInfo":auipaneinfo.html *max_size*(%(arg-type)"Size":size.html% size)
+
+ "AuiPaneInfo":auipaneinfo.html *max_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+MaxSize() sets the maximum size of the pane.
+
+h3(#AuiPaneInfo_maximizebutton). AuiPaneInfo#maximize_button
+
+ "AuiPaneInfo":auipaneinfo.html *maximize_button*(%(arg-type)Boolean% visible = true)
+
+MaximizeButton() indicates that a maximize button should be drawn for the pane.
+
+h3(#AuiPaneInfo_minsize). AuiPaneInfo#min_size
+
+ "AuiPaneInfo":auipaneinfo.html *min_size*(%(arg-type)"Size":size.html% size)
+
+ "AuiPaneInfo":auipaneinfo.html *min_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+MinSize() sets the minimum size of the pane. Please note that this is only partially supported as of this writing.
+
+h3(#AuiPaneInfo_minimizebutton). AuiPaneInfo#minimize_button
+
+ "AuiPaneInfo":auipaneinfo.html *minimize_button*(%(arg-type)Boolean% visible = true)
+
+MinimizeButton() indicates that a minimize button should be drawn for the pane.
+
+h3(#AuiPaneInfo_movable). AuiPaneInfo#movable
+
+ "AuiPaneInfo":auipaneinfo.html *movable*(%(arg-type)Boolean% b = true)
+
+Movable indicates whether a frame can be moved.
+
+h3(#AuiPaneInfo_name). AuiPaneInfo#name
+
+ "AuiPaneInfo":auipaneinfo.html *name*(%(arg-type)String% n)
+
+Name() sets the name of the pane so it can be referenced in lookup functions. If a name is not specified by the user, a random name is assigned to the pane when it is added to the manager.
+
+h3(#AuiPaneInfo_paneborder). AuiPaneInfo#pane_border
+
+ "AuiPaneInfo":auipaneinfo.html *pane_border*(%(arg-type)Boolean% visible = true)
+
+PaneBorder indicates that a border should be drawn for the pane.
+
+h3(#AuiPaneInfo_pinbutton). AuiPaneInfo#pin_button
+
+ "AuiPaneInfo":auipaneinfo.html *pin_button*(%(arg-type)Boolean% visible = true)
+
+PinButton() indicates that a pin button should be drawn for the pane.
+
+h3(#AuiPaneInfo_position). AuiPaneInfo#position
+
+ "AuiPaneInfo":auipaneinfo.html *position*(%(arg-type)Integer% pos)
+
+Position() determines the position of the docked pane.
+
+h3(#AuiPaneInfo_resizable). AuiPaneInfo#resizable
+
+ "AuiPaneInfo":auipaneinfo.html *resizable*(%(arg-type)Boolean% resizable = true)
+
+Resizable() allows a pane to be resized if the parameter is true, and forces it to be a fixed size if the parameter is false. This is simply an antonym for Fixed().
+
+h3(#AuiPaneInfo_right). AuiPaneInfo#right
+
+ "AuiPaneInfo":auipaneinfo.html *right*()
+
+Right() sets the pane dock position to the right side of the frame.
+
+h3(#AuiPaneInfo_rightdockable). AuiPaneInfo#right_dockable
+
+ "AuiPaneInfo":auipaneinfo.html *right_dockable*(%(arg-type)Boolean% b = true)
+
+RightDockable() indicates whether a pane can be docked on the right of the frame.
+
+h3(#AuiPaneInfo_row). AuiPaneInfo#row
+
+ "AuiPaneInfo":auipaneinfo.html *row*(%(arg-type)Integer% row)
+
+Row() determines the row of the docked pane.
+
+h3(#AuiPaneInfo_safeset). AuiPaneInfo#safe_set
+
+  *safe_set*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% source)
+
+Write the safe parts of a newly loaded PaneInfo structure "source" into "this"
+used on loading perspectives etc.
+
+h3(#AuiPaneInfo_setflag). AuiPaneInfo#set_flag
+
+ "AuiPaneInfo":auipaneinfo.html *set_flag*(%(arg-type)unsigned int% flag, 
+                        %(arg-type)Boolean% option_state)
+
+SetFlag() turns the property given by flag on or off with the option_state parameter.
+
+h3(#AuiPaneInfo_show). AuiPaneInfo#show
+
+ "AuiPaneInfo":auipaneinfo.html *show*(%(arg-type)Boolean% show = true)
+
+Show() indicates that a pane should be shown.
+
+h3(#AuiPaneInfo_toolbarpane). AuiPaneInfo#toolbar_pane
+
+ "AuiPaneInfo":auipaneinfo.html *toolbar_pane*()
+
+ToolbarPane() specifies that the pane should adopt the default toolbar pane settings.
+
+h3(#AuiPaneInfo_top). AuiPaneInfo#top
+
+ "AuiPaneInfo":auipaneinfo.html *top*()
+
+Top() sets the pane dock position to the top of the frame.
+
+h3(#AuiPaneInfo_topdockable). AuiPaneInfo#top_dockable
+
+ "AuiPaneInfo":auipaneinfo.html *top_dockable*(%(arg-type)Boolean% b = true)
+
+TopDockable() indicates whether a pane can be docked at the top of the frame.
+
+h3(#AuiPaneInfo_window). AuiPaneInfo#window
+
+ "AuiPaneInfo":auipaneinfo.html *window*(%(arg-type)"Window":window.html% w)
+
+Window() assigns the window pointer that the AuiPaneInfo should use. This normally does not need to be specified, as the window pointer is automatically assigned to the AuiPaneInfo structure as soon as it is added to the manager.
+
+h3(#AuiPaneInfo_operatorassign). AuiPaneInfo::operator=
+
+ "AuiPaneInfo& operator":auipaneinfo& operator.html *operator=*(%(arg-type)"AuiPaneInfo":auipaneinfo.html% c)
+
+Makes a copy of the AuiPaneInfo object.
+

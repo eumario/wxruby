@@ -1,0 +1,60 @@
+h1(#wxeraseevent). Wx::EraseEvent
+
+An erase event is sent when a window's background needs to be repainted.
+
+On some platforms, such as GTK+, this event is simulated (simply generated just before the
+paint event) and may cause flicker. It is therefore recommended that
+you set the text background colour explicitly in order to prevent flicker.
+The default background colour under GTK+ is grey.
+
+To intercept this event, use the EVT_ERASE_BACKGROUND macro in an event table definition.
+
+You must call EraseEvent::GetDC and use the returned device context if it is non-NULL.
+If it is NULL, create your own temporary ClientDC object. 
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process an erase event, use this event handler macro to direct input to a member
+function that takes a EraseEvent argument.
+
+
+
+|*evt_erase_background()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_ERASE_BACKGROUND event.|
+
+h2. Remarks
+
+Use the device context returned by "GetDC":eraseeventgetdc.html to draw on,
+don't create a PaintDC in the event handler.
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "EraseEvent.new":#EraseEvent_new
+* "EraseEvent#get_dc":#EraseEvent_getdc
+
+</div>
+
+
+h3(#EraseEvent_new). EraseEvent.new
+
+  *EraseEvent.new*(%(arg-type)Integer% id = 0,  %(arg-type)"DC":dc.html% dc = nil)
+
+Constructor.
+
+h3(#EraseEvent_getdc). EraseEvent#get_dc
+
+ "DC":dc.html *get_dc*()
+
+Returns the device context associated with the erase event to draw on.
+

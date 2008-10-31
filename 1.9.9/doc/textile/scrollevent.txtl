@@ -1,0 +1,61 @@
+h1(#wxscrollevent). Wx::ScrollEvent
+
+A scroll event holds information about events sent from stand-alone
+"scrollbars":scrollbar.html and "sliders":slider.html. Note that
+starting from Widgets 2.1, scrolled windows send the 
+"ScrollWinEvent":scrollwinevent.html which does not derive from
+CommandEvent, but from Event directly - don't confuse these two kinds of
+events and use the event table macros mentioned below only for the
+scrollbar-like controls.
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Remarks
+
+Note that unless specifying a scroll control identifier, you will need to test for scrollbar
+orientation with "ScrollEvent#get_orientation":scrollevent.html#ScrollEvent_getorientation, since
+horizontal and vertical scroll events are processed using the same event handler.
+
+h2. See also
+
+"ScrollBar":scrollbar.html, "Slider":slider.html, "SpinButton":spinbutton.html, 
+
+"ScrollWinEvent":scrollwinevent.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ScrollEvent.new":#ScrollEvent_new
+* "ScrollEvent#get_orientation":#ScrollEvent_getorientation
+* "ScrollEvent#get_position":#ScrollEvent_getposition
+
+</div>
+
+
+h3(#ScrollEvent_new). ScrollEvent.new
+
+  *ScrollEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% id = 0, 
+                  %(arg-type)Integer% pos = 0, 
+                  %(arg-type)Integer% orientation = 0)
+
+Constructor.
+
+h3(#ScrollEvent_getorientation). ScrollEvent#get_orientation
+
+ Integer *get_orientation*()
+
+Returns HORIZONTAL or VERTICAL, depending on the orientation of the scrollbar.
+
+h3(#ScrollEvent_getposition). ScrollEvent#get_position
+
+ Integer *get_position*()
+
+Returns the position of the scrollbar.
+

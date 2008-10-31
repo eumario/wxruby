@@ -1,0 +1,124 @@
+h1(#wxtreeevent). Wx::TreeEvent
+
+A tree event holds information about events associated with TreeCtrl objects.
+
+h2. Derived from
+
+"NotifyEvent":notifyevent.html
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process input from a tree control, use these methods to set up event
+handler blocks that take a TreeEvent argument.
+
+|*evt_tree_begin_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has started dragging an item with the left mouse button. The event handler must call *TreeEvent::Allow()* for the drag operation to continue.|
+|*evt_tree_begin_rdrag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has started dragging an item with the right mouse button. The event handler must call *TreeEvent::Allow()* for the drag operation to continue.|
+|*evt_tree_begin_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Begin editing a label. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_end_drag(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has released the mouse after dragging an item.|
+|*evt_tree_end_label_edit(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has finished editing a label. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_delete_item(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A tree item has been deleted.|
+|*evt_tree_item_activated(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|An item has been activated (e.g. double clicked).|
+|*evt_tree_item_collapsed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been collapsed.|
+|*evt_tree_item_collapsing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being collapsed. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_item_expanded(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item has been expanded.|
+|*evt_tree_item_expanding(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The item is being expanded. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_item_right_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has clicked the item with the right mouse button.|
+|*evt_tree_item_middle_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user has clicked the item with the middle mouse button.|
+|*evt_tree_key_down(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A key has been pressed.|
+|*evt_tree_sel_changed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Selection has changed.|
+|*evt_tree_sel_changing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Selection is changing. This can be prevented by calling "Veto()":notifyeventveto.html.|
+|*evt_tree_key_down(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A key has been pressed.|
+|*evt_tree_item_gettooltip(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The opportunity to set the item tooltipis being given to the application (call TreeEvent::SetToolTip). Windows only.|
+|*evt_tree_item_menu(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The context menu for the selected item has been requested, either by a right click or by using the menu key.|
+|*evt_tree_state_image_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The state image has been clicked. Windows only.|
+
+
+h2. See also
+
+"TreeCtrl":treectrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TreeEvent.new":#TreeEvent_new
+* "TreeEvent#get_key_code":#TreeEvent_getkeycode
+* "TreeEvent#get_item":#TreeEvent_getitem
+* "TreeEvent#get_key_event":#TreeEvent_getkeyevent
+* "TreeEvent#get_label":#TreeEvent_getlabel
+* "TreeEvent#get_old_item":#TreeEvent_getolditem
+* "TreeEvent#set_tool_tip":#TreeEvent_settooltip
+
+</div>
+
+
+h3(#TreeEvent_new). TreeEvent.new
+
+  *TreeEvent.new*(%(arg-type)"TYPE":type.html% commandType = 0,  %(arg-type)Integer% id = 0)
+
+Constructor.
+
+h3(#TreeEvent_getkeycode). TreeEvent#get_key_code
+
+ Integer *get_key_code*()
+
+Returns the key code if the event was is a key event. Use 
+"get_key_event":#TreeEvent_getkeyevent to get the values of the
+modifier keys for this event (i.e. Shift or Ctrl).
+
+h3(#TreeEvent_getitem). TreeEvent#get_item
+
+ "TreeItemId":treeitemid.html *get_item*()
+
+Returns the item (valid for all events). See "TreeCtrl":treectrl.html
+for information about TreeItemIds.
+
+h3(#TreeEvent_getkeyevent). TreeEvent#get_key_event
+
+ "KeyEvent":keyevent.html *get_key_event*()
+
+Returns the key event for @EVT_TREE_KEY_DOWN@ events.
+
+h3(#TreeEvent_getlabel). TreeEvent#get_label
+
+ String *get_label*()
+
+Returns the label if the event was a begin or end edit label event.
+
+h3(#TreeEvent_getolditem). TreeEvent#get_old_item
+
+ "TreeItemId":treeitemid.html *get_old_item*()
+
+Returns the old item index (valid for EVT_TREE_ITEM_CHANGING and CHANGED events)
+
+
+h3(#TreeEvent_getpoint). TreeEvent#get_point
+
+ "Point":point.html *get_point*()
+
+Returns the position of the mouse pointer if the event is a drag or menu-context event.
+In both cases the position is in client coordinates - i.e. relative to the TreeCtrl
+window (so that you can pass it directly to e.g. "Window#popup_menu":window.html#Window_popupmenu).
+
+
+h3(#TreeEvent_iseditcancelled). TreeEvent#is_edit_cancelled
+
+ Boolean *is_edit_cancelled*()
+
+Returns true if the label edit was cancelled. This should be
+called from within an EVT_TREE_END_LABEL_EDIT handler.
+
+
+h3(#TreeEvent_settooltip). TreeEvent#set_tool_tip
+
+  *set_tool_tip*(%(arg-type)String% tooltip)
+
+Set the tooltip for the item (valid for EVT_TREE_ITEM_GETTOOLTIP events).
+Windows only.
+

@@ -1,0 +1,118 @@
+h1(#wxhtmlprintout). Wx::HtmlPrintout
+
+This class serves as printout class for HTML documents.
+
+h2. Derived from
+
+"Printout":printout.html
+
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlPrintout.new":#HtmlPrintout_new
+* "HtmlPrintout#add_filter":#HtmlPrintout_addfilter
+* "HtmlPrintout#set_fonts":#HtmlPrintout_setfonts
+* "HtmlPrintout#set_footer":#HtmlPrintout_setfooter
+* "HtmlPrintout#set_header":#HtmlPrintout_setheader
+* "HtmlPrintout#set_html_file":#HtmlPrintout_sethtmlfile
+* "HtmlPrintout#set_html_text":#HtmlPrintout_sethtmltext
+* "HtmlPrintout#set_margins":#HtmlPrintout_setmargins
+
+</div>
+
+
+
+h3(#HtmlPrintout_wxhtmlprintout). HtmlPrintout.new
+
+  *HtmlPrintout.new*(%(arg-type)String% title = "Printout")
+
+Constructor. 
+
+
+h3(#HtmlPrintout_addfilter). HtmlPrintout#add_filter
+
+  *add_filter*(%(arg-type)"HtmlFilter":htmlfilter.html% filter)
+
+Adds a filter to the static list of filters for HtmlPrintout. See "HtmlFilter":htmlfilter.html for
+further information.
+
+h3(#HtmlPrintout_setfonts). HtmlPrintout#set_fonts
+
+  *set_fonts*(%(arg-type)String% normal_face,  %(arg-type)String% fixed_face, 
+            %(arg-type)Integer% sizes = nil)
+
+Sets fonts. See "HtmlWindow#set_fonts":htmlwindow.html#HtmlWindow_setfonts for
+detailed description.
+
+h3(#HtmlPrintout_setfooter). HtmlPrintout#set_footer
+
+  *set_footer*(%(arg-type)String% footer,  %(arg-type)Integer% pg = PAGE_ALL)
+
+Sets page footer.
+
+h4. Parameters
+
+* _footer_ HTML text to be used as footer. You can use macros in it:
+
+* @PAGENUM@ is replaced by page number
+* @PAGESCNT@ is replaced by total number of pages
+
+
+* _pg_ one of PAGE_ODD, PAGE_EVEN and PAGE_ALL constants.
+
+
+h3(#HtmlPrintout_setheader). HtmlPrintout#set_header
+
+  *set_header*(%(arg-type)String% header,  %(arg-type)Integer% pg = PAGE_ALL)
+
+Sets page header.
+
+h4. Parameters
+
+* _header_ HTML text to be used as header. You can use macros in it:
+
+* @PAGENUM@ is replaced by page number
+* @PAGESCNT@ is replaced by total number of pages
+
+
+* _pg_ one of PAGE_ODD, PAGE_EVEN and PAGE_ALL constants.
+
+
+h3(#HtmlPrintout_sethtmlfile). HtmlPrintout#set_html_file
+
+  *set_html_file*(%(arg-type)String% htmlfile)
+
+Prepare the class for printing this HTML *file*. The file may be located on 
+any virtual file system or it may be normal file.
+
+
+
+h3(#HtmlPrintout_sethtmltext). HtmlPrintout#set_html_text
+
+  *set_html_text*(%(arg-type)String% html,  %(arg-type)String% basepath = '', 
+                %(arg-type)Boolean% isdir = true)
+
+Prepare the class for printing this HTML text.
+
+h4. Parameters
+
+* _html_ HTML text. (NOT file!)
+* _basepath_ base directory (html string would be stored there if it was in
+file). It is used to determine path for loading images, for example.
+* _isdir_ false if basepath is filename, true if it is directory name
+(see "FileSystem":filesystem.html for detailed explanation)
+
+
+
+h3(#HtmlPrintout_setmargins). HtmlPrintout#set_margins
+
+  *set_margins*(%(arg-type)Float% top = 25.2,  %(arg-type)Float% bottom = 25.2, 
+              %(arg-type)Float% left = 25.2, 
+              %(arg-type)Float% right = 25.2, 
+              %(arg-type)Float% spaces = 5)
+
+Sets margins in millimeters. Defaults to 1 inch for margins and 0.5cm for space
+between text and header and/or footer
+

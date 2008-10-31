@@ -1,0 +1,19 @@
+h1(#wxclientdc). Wx::ClientDC
+
+This class is used to draw upon Windows outside of @evt_paint@
+handlers. It is not instantiated directly; rather, call the
+"paint":window.html#Window_paint method of the Window you wish to draw
+upon, and pass a block which will receive a ClientDC object.
+
+This class has no methods of its own; all the drawing methods are
+described in the documentation for "DC":dc.html.
+
+h2. Derived from
+
+"WindowDC":windowdc.html
+
+"DC":dc.html
+
+h2. See also
+
+"DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html, "WindowDC":windowdc.html, "ScreenDC":screendc.html

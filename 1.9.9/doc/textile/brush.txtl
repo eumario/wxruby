@@ -1,0 +1,142 @@
+h1(#wxbrush). Wx::Brush
+
+A brush is a drawing tool for filling in areas. It is used for painting
+the background of rectangles, ellipses, etc within a
+"DeviceContext":dc.html. It has a colour and a style.
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Predefined objects
+
+The following predefined brushes are available everywhere once the
+application has started.
+
+ Wx::NULL_BRUSH
+ Wx::BLUE_BRUSH
+ Wx::GREEN_BRUSH
+ Wx::WHITE_BRUSH
+ Wx::BLACK_BRUSH
+ Wx::GREY_BRUSH
+ Wx::MEDIUM_GREY_BRUSH
+ Wx::LIGHT_GREY_BRUSH
+ Wx::TRANSPARENT_BRUSH
+ Wx::CYAN_BRUSH
+ Wx::RED_BRUSH
+
+h2. Remarks
+
+On a monochrome display, Widgets shows all brushes as white unless the
+colour is really black.
+
+Do not initialize brushes before the program commences, since other
+required structures may not have been set up yet. Instead, reference them
+using methods which create them if necessary.
+
+h2. See also
+
+"DC":dc.html, "DC#set_brush":dc.html#DC_setbrush, "Pen":pen.html
+ 
+h2. Methods
+
+<div id="methods">
+
+* "Brush.new":#Brush_new
+* "Brush#get_colour":#Brush_getcolour
+* "Brush#get_stipple":#Brush_getstipple
+* "Brush#get_style":#Brush_getstyle
+* "Brush#is_hatch":#Brush_ishatch
+* "Brush#is_ok":#Brush_isok
+* "Brush#set_colour":#Brush#setcolour
+* "Brush#set_stipple":#Brush_setstipple
+* "Brush#set_style":#Brush_setstyle
+
+</div>
+h3(#Brush_new). Brush.new
+
+ *Brush.new*()
+
+Default constructor. The brush will be uninitialised, and "is_ok" will
+return false.
+
+ *Brush.new*(%(arg-type)"Colour":colour.html% colour, %(arg-type)Integer% style = Wx::SOLID)
+
+Constructs a brush from a "colour":coour.html object and a fill style.
+
+ *Brush.new*(%(arg-type)String% colour_name, %(arg-type)Integer% style)
+
+Constructs a brush from a colour name and a fill style.
+
+ *Brush.new*(%(arg-type)"Bitmap":bitmap.html% stipple_bitmap)
+
+Constructs a stippled brush using a bitmap. The brush style will
+automatically be set to @Wx::STIPPLE@
+
+The style for a brush may be one of the following constants:
+
+* @Wx::TRANSPARENT@ : Transparent (no fill).
+* @Wx::SOLID@ :	Solid.
+* @Wx::STIPPLE@ : Uses a bitmap as a stipple.
+* @Wx::BDIAGONAL_HATCH@ : Backward diagonal hatch.
+* @Wx::CROSSDIAG_HATCH@ : Cross-diagonal hatch.
+* @Wx::FDIAGONAL_HATCH@ : Forward diagonal hatch.
+* @Wx::CROSS_HATCH@ : Cross hatch.
+* @Wx::HORIZONTAL_HATCH@ : Horizontal hatch.
+* @Wx::VERTICAL_HATCH@ : Vertical hatch.
+
+h3(#Brush_getcolour). Brush#get_colour
+
+ "Colour":colour.html *get_colour*()
+
+Returns this brush's colour.
+
+h3(#Brush_getstipple). Brush#get_stipple
+
+ "Bitmap":bitmap.html *get_stipple*()
+
+Returns the stipple bitmap used by this brush
+
+h3(#Brush_getstyle). Brush#get_style
+
+ Integer *get_style*()
+
+Returns the integer fill-style constant for this brush.
+
+h3(#Brush_ishatch). Brush#is_hatch
+
+ Boolean *is_hatch*()
+
+Returns @true@ if this brush has any of the hatched fill styles.
+
+h3(#Brush_isok). Brush#is_ok
+
+ Boolean *is_ok*()
+
+Returns @true@ if this brush is properly initialized and ready for use.
+
+h3(#Brush_setcolour). #Brush_set_colour
+
+ *set_colour*(%(arg-type)"Colour":colour.html% colour)
+
+ *set_colour*(%(arg-type)String% colour_name)
+
+ *set_colour*(%(arg-type)Integer% red, %(arg-type)Integer% green, %(arg-type)Integer% blue)
+
+Sets the fill colour used by this brush, by using a "Colour":colour.html
+object, a colour name, or a set of red/green/blue components.
+
+h3(#Brush_setstipple). Brush#set_stipple
+
+ *set_bitmap*(%(arg-type)"Bitmap":bitmap.html% stipple_bitmap)
+
+Sets the stipple bitmap to be used by this brush.
+
+h3(#Brush_setstyle). Brush#set_style
+
+ *set_style*(%(arg-type)Integer% style)
+
+Sets the fill style to be used by this brush. See "Brush.new":#Brush_new
+for a list of the available styles.

@@ -1,0 +1,36 @@
+h1(#wxrealpoint). Wx::RealPoint
+
+A *RealPoint* is a useful data structure for graphics operations.
+It contains floating point point _x_ and _y_ members.
+See also "Point":point.html for an integer version.
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"Point":point.html
+
+<div id="methods">
+
+h2. Methods
+
+* "RealPoint.new":#RealPoint_new
+
+</div>
+
+
+h3(#RealPoint_new). RealPoint.new
+
+  *RealPoint.new*(%(arg-type)Float% x,  %(arg-type)Float% y)
+
+Create a point.
+
+double x
+
+double y
+
+Members of the *RealPoint* object.
+
+

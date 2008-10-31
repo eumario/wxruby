@@ -1,0 +1,46 @@
+h1(#wxmoveevent). Wx::MoveEvent
+
+A move event holds information about move change events.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a move event, use this event handler macro to direct input to a member
+function that takes a MoveEvent argument.
+
+
+
+|*evt_move()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_MOVE event, which is generatedwhen a window is moved.|
+
+
+h2. See also
+
+"Point":point.html, "Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MoveEvent.new":#MoveEvent_new
+* "MoveEvent#get_position":#MoveEvent_getposition
+
+</div>
+
+
+h3(#MoveEvent_new). MoveEvent.new
+
+  *MoveEvent.new*(%(arg-type)"Point":point.html% pt,  %(arg-type)Integer% id = 0)
+
+Constructor.
+
+h3(#MoveEvent_getposition). MoveEvent#get_position
+
+ "Point":point.html *get_position*()
+
+Returns the position of the window generating the move change event.
+

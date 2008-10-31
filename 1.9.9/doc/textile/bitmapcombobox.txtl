@@ -1,0 +1,186 @@
+h1(#wxbitmapcombobox). Wx::BitmapComboBox
+
+A combobox that displays bitmap in front of the list items.
+It currently only allows using bitmaps of one size, and resizes itself
+so that a bitmap can be shown next to the text field.
+
+h2. Derived from
+
+"ComboBox":combobox.html
+
+"ControlWithItems":controlwithitems.html
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+While BitmapComboBox contains the "ComboBox":combobox.html
+API, but it might not actually be derived from that class. In fact,
+if the platform does not have a native implementation, BitmapComboBox
+will inherit from "OwnerDrawnComboBox":ownerdrawncombobox.html.
+You can determine if the implementation is generic by checking whether
+GENERIC_BITMAPCOMBOBOX is defined.
+
+h2. Window styles
+
+
+|@CB_READONLY@|Creates a combobox without a texteditor. On some platforms the control may appear very different when thisstyle is used.|
+|@CB_SORT@|Sorts the entries in the list alphabetically.|
+|@TE_PROCESS_ENTER@|The control will generatethe event EVT_COMMAND_TEXT_ENTER (otherwise pressing Enter keyis either processed internally by the control or used for navigation betweendialog controls). Windows only.|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+
+|*evt_combobox(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_COMBOBOX_SELECTED event,when an item on the list is selected.|
+|*evt_text(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_TEXT_UPDATED event,when the combobox text changes.|
+|*evt_text_enter(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_TEXT_ENTER event,when <RETURN> is pressed in the combobox.|
+
+
+h2. See also
+
+"ComboBox":combobox.html, "Choice":choice.html, "OwnerDrawnComboBox":ownerdrawncombobox.html,
+ "CommandEvent":commandevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "BitmapComboBox.new":#BitmapComboBox_new
+* "BitmapComboBox#create":#BitmapComboBox_create
+* "BitmapComboBox#append":#BitmapComboBox_append
+* "BitmapComboBox#get_bitmap_size":#BitmapComboBox_getbitmapsize
+* "BitmapComboBox#get_item_bitmap":#BitmapComboBox_getitembitmap
+* "BitmapComboBox#insert":#BitmapComboBox_insert
+* "BitmapComboBox#set_item_bitmap":#BitmapComboBox_setitembitmap
+
+</div>
+
+
+
+h3(#BitmapComboBox_new). BitmapComboBox.new
+
+  *BitmapComboBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                     %(arg-type)String% value = "", 
+                     %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                     %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                     %(arg-type)Integer% n = 0, 
+                     %(arg-type)String% choices[] = nil, 
+                     %(arg-type)Integer% style = 0, 
+                     %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                     %(arg-type)String% name = "comboBox")
+
+  *BitmapComboBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+                     %(arg-type)"Point":point.html% pos, 
+                     %(arg-type)"Size":size.html% size, 
+                     %(arg-type)"ArrayString":arraystring.html% choices, 
+                     %(arg-type)Integer% style = 0, 
+                     %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                     %(arg-type)String% name = "comboBox")
+
+Constructor, creating and showing a combobox.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _value_ Initial selection string. An empty string indicates no selection.
+* _pos_ Window position.
+* _size_ Window size. If the default size (-1, -1) is specified then the window is sized
+appropriately.
+* _n_ Number of strings with which to initialise the control.
+* _choices_ An array of strings with which to initialise the control.
+* _style_ Window style. See "BitmapComboBox":bitmapcombobox.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"BitmapComboBox#create":bitmapcombobox.html#BitmapComboBox_create, "Validator":validator.html
+
+h3(#BitmapComboBox_create). BitmapComboBox#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value = "", 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% n, 
+                %(arg-type)String% choices[], 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "comboBox")
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% value, 
+                %(arg-type)"Point":point.html% pos, 
+                %(arg-type)"Size":size.html% size, 
+                %(arg-type)"ArrayString":arraystring.html% choices, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "comboBox")
+
+Creates the combobox for two-step construction. Derived classes
+should call or replace this function. See "BitmapComboBox.new":bitmapcombobox.html#BitmapComboBox_new for further details.
+
+
+h3(#BitmapComboBox_append). BitmapComboBox#append
+
+ Integer *append*(%(arg-type)String% item,  
+                 %(arg-type)"Bitmap":bitmap.html% bitmap = Wx::NULL_BITMAP)
+
+Adds the item to the end of the combo box.
+
+ Integer *append*(%(arg-type)String% item,  
+                  %(arg-type)"Bitmap":bitmap.html% bitmap,  
+                  %(arg-type)Object% item_data)
+
+Adds the item to the end of the combo box, associating the given item
+data with the item. As with other "controls with items":controlwithitems.html,
+any normal ruby object may be set as item data.
+
+h3(#BitmapComboBox_getbitmapsize). BitmapComboBox#get_bitmap_size
+
+ "Size":size.html *get_bitmap_size*()
+
+Returns size of bitmaps used in the list.
+
+h3(#BitmapComboBox_getitembitmap). BitmapComboBox#get_item_bitmap
+
+ "Bitmap":bitmap.html *get_item_bitmap*(%(arg-type)unsigned int% n)
+
+Returns the bitmap of the item with the given index.
+
+
+h3(#BitmapComboBox_insert). BitmapComboBox#insert
+
+ Integer *insert*(%(arg-type)String% item,  
+                  %(arg-type)"Bitmap":bitmap.html% bitmap,  
+                  %(arg-type)Integer% pos)
+
+Inserts the item into the list before pos. Not valid for @CB_SORT@
+style, use "append":#BitmapComboBox_append instead.
+
+ Integer *insert*(%(arg-type)String% item,  
+                  %(arg-type)"Bitmap":bitmap.html% bitmap,  
+                  %(arg-type)Integer% pos,
+                  %(arg-type)Object% item_data)
+
+
+Inserts the item into the list before pos, associating the given item
+data with the item. Not valid for @CB_SORT@ style, use
+"append":#BitmapComboBox_append instead.
+
+
+h3(#BitmapComboBox_setitembitmap). BitmapComboBox#set_item_bitmap
+
+  *set_item_bitmap*(%(arg-type)Integer% n,  %(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap for the given item.
+

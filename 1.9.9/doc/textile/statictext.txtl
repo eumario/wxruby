@@ -1,0 +1,110 @@
+h1(#wxstatictext). Wx::StaticText
+
+A static text control displays one or more lines of read-only text.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@ALIGN_LEFT@|Align the text to the left|
+|@ALIGN_RIGHT@|Align the text to the right|
+|@ALIGN_CENTRE@|Center the text (horizontally)|
+|@ST_NO_AUTORESIZE@|By default, the control willadjust its size to exactly fit to the size of the text when "set_label":#StaticText_setlabel is called. If this style flag isgiven, the control will not change its size (this style is especially usefulwith controls which also have ALIGN_RIGHT or CENTER style because otherwisethey won't make sense any longer after a call to SetLabel)|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. See also
+
+"StaticBitmap":staticbitmap.html, "StaticBox":staticbox.html
+
+<div id="methods">
+
+h2. Methods
+
+* "StaticText.new":#StaticText_new
+* "StaticText#create":#StaticText_create
+* "StaticText#get_label":#StaticText_getlabel
+* "StaticText#set_label":#StaticText_setlabel
+* "StaticText#wrap":#StaticText_wrap
+
+</div>
+
+
+
+h3(#StaticText_constr). StaticText.new
+
+  *StaticText.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                 %(arg-type)Integer% style = 0, 
+                 %(arg-type)String% name = "staticText")
+
+Constructor, creating and showing a text control.
+
+h4. Parameters
+
+* _parent_ Parent window. Should not be NULL.
+* _id_ Control identifier. A value of -1 denotes a default value.
+* _label_ Text label.
+* _pos_ Window position.
+* _size_ Window size.
+* _style_ Window style. See "StaticText":statictext.html.
+* _name_ Window name.
+
+h4. See also
+
+"StaticText#create":statictext.html#StaticText_create
+
+
+h3(#StaticText_create). StaticText#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)String% name = "staticText")
+
+Creation function, for two-step construction. For details see "StaticText.new":statictext.html#StaticText_new.
+
+
+h3(#StaticText_getlabel). StaticText#get_label
+
+ String *get_label*()
+
+Returns the contents of the control.
+
+
+h3(#StaticText_setlabel). StaticText#set_label
+
+  *set_label*(%(arg-type)String% label)
+
+Sets the static text label and updates the controls size to exactly fit the
+label unless the control has ST_NO_AUTORESIZE flag.
+
+h4. Parameters
+
+* _label_ The new label to set. It may contain newline characters.
+
+
+h3(#StaticText_wrpa). StaticText#wrap
+
+  *wrap*(%(arg-type)Integer% width)
+
+This functions wraps the controls label so that each of its lines becomes at
+most width pixels wide if possible (the lines are broken at words
+boundaries so it might not be the case if words are too long). If width
+is negative, no wrapping is done.
+
+2.6.2
+

@@ -1,0 +1,203 @@
+h1(#wxauidockart). Wx::AuiDockArt
+
+AuiDockArt is part of the AUI class framework.
+See also "AUI overview":auioverview.html.
+
+Dock art provider code - a dock provider provides all drawing
+functionality to the Aui dock manager. This allows the dock
+manager to have a plugable look-and-feel.
+
+By default, a "AuiManager":auimanager.html uses an
+instance of this class called *AuiDefaultDockArt* which
+provides bitmap art and a colour scheme that is adapted to
+the major platforms' look. You can either derive from that
+class to alter its behaviour or write a completely new dock
+art class. Call "AuiManager#set_art_provider":auimanager.html#AuiManager_setartprovider
+to make use this new dock art.
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"AuiManager":auimanager.html, 
+"AuiPaneInfo":auipaneinfo.html
+
+h2. Data structures
+
+
+ enum AuiPaneDockArtSetting
+ {
+     AUI_DOCKART_SASH_SIZE = 0,
+     AUI_DOCKART_CAPTION_SIZE = 1,
+     AUI_DOCKART_GRIPPER_SIZE = 2,
+     AUI_DOCKART_PANE_BORDER_SIZE = 3,
+     AUI_DOCKART_PANE_BUTTON_SIZE = 4,
+     AUI_DOCKART_BACKGROUND_COLOUR = 5,
+     AUI_DOCKART_SASH_COLOUR = 6,
+     AUI_DOCKART_ACTIVE_CAPTION_COLOUR = 7,
+     AUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR = 8,
+     AUI_DOCKART_INACTIVE_CAPTION_COLOUR = 9,
+     AUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR = 10,
+     AUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR = 11,
+     AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR = 12,
+     AUI_DOCKART_BORDER_COLOUR = 13,
+     AUI_DOCKART_GRIPPER_COLOUR = 14,
+     AUI_DOCKART_CAPTION_FONT = 15,
+     AUI_DOCKART_GRADIENT_TYPE = 16
+ }
+ 
+
+
+ enum AuiPaneDockArtGradients
+ {
+     AUI_GRADIENT_NONE = 0,
+     AUI_GRADIENT_VERTICAL = 1,
+     AUI_GRADIENT_HORIZONTAL = 2
+ }
+ 
+
+
+ enum AuiPaneButtonState
+ {
+     AUI_BUTTON_STATE_NORMAL = 0,
+     AUI_BUTTON_STATE_HOVER = 1,
+     AUI_BUTTON_STATE_PRESSED = 2
+ }
+ 
+
+
+ enum AuiButtonId
+ {
+     AUI_BUTTON_CLOSE = 101,
+     AUI_BUTTON_MAXIMIZE_RESTORE = 102,
+     AUI_BUTTON_MINIMIZE = 103,
+     AUI_BUTTON_PIN = 104,
+     AUI_BUTTON_OPTIONS = 105,
+     AUI_BUTTON_WINDOWLIST = 106,
+     AUI_BUTTON_LEFT = 107,
+     AUI_BUTTON_RIGHT = 108,
+     AUI_BUTTON_UP = 109,
+     AUI_BUTTON_DOWN = 110,
+     AUI_BUTTON_CUSTOM1 = 201,
+     AUI_BUTTON_CUSTOM2 = 202,
+     AUI_BUTTON_CUSTOM3 = 203
+ };
+ 
+
+
+
+h3(#AuiDockArt_wxauidockart). AuiDockArt.new
+
+  *destructor*()
+
+Destructor.
+
+h3(#AuiDockArt_drawbackground). AuiDockArt#draw_background
+
+  *draw_background*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)Integer% orientation, 
+                  %(arg-type)"Rect":rect.html% rect)
+
+Draws a background.
+
+h3(#AuiDockArt_drawborder). AuiDockArt#draw_border
+
+  *draw_border*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)"Rect":rect.html% rect, 
+              %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
+
+Draws a border.
+
+h3(#AuiDockArt_drawcaption). AuiDockArt#draw_caption
+
+  *draw_caption*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)String% text, 
+               %(arg-type)"Rect":rect.html% rect, 
+               %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
+
+Draws a caption.
+
+h3(#AuiDockArt_drawgripper). AuiDockArt#draw_gripper
+
+  *draw_gripper*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)"Rect":rect.html% rect, 
+               %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
+
+Draws a gripper.
+
+h3(#AuiDockArt_drawpanebutton). AuiDockArt#draw_pane_button
+
+  *draw_pane_button*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)Integer% button, 
+                   %(arg-type)Integer% button_state, 
+                   %(arg-type)"Rect":rect.html% rect, 
+                   %(arg-type)"AuiPaneInfo":auipaneinfo.html% pane)
+
+Draws a button in the pane's title bar.
+
+_button_ can be one of the values of *AuiButtonId*.
+
+_button_state_ can be one of the values of *AuiPaneButtonState*.
+
+h3(#AuiDockArt_drawsash). AuiDockArt#draw_sash
+
+  *draw_sash*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% window,  %(arg-type)Integer% orientation, 
+            %(arg-type)"Rect":rect.html% rect)
+
+Draws a sash between two windows.
+
+h3(#AuiDockArt_getcolor). AuiDockArt#get_color
+
+ "Colour":colour.html *get_color*(%(arg-type)Integer% id)
+
+The same as "get_colour":#AuiDockArt_getcolour.
+
+h3(#AuiDockArt_getcolour). AuiDockArt#get_colour
+
+ "Colour":colour.html *get_colour*(%(arg-type)Integer% id)
+
+Get the colour of a certain setting.
+
+_id_ can be one of the colour values of *AuiPaneDockArtSetting*.
+
+
+h3(#AuiDockArt_getfont). AuiDockArt#get_font
+
+ "Font":font.html *get_font*(%(arg-type)Integer% id)
+
+Get a font setting.
+
+h3(#AuiDockArt_getmetric). AuiDockArt#get_metric
+
+ Integer *get_metric*(%(arg-type)Integer% id)
+
+Get the value of a certain setting.
+
+_id_ can be one of the size values of *AuiPaneDockArtSetting*.
+
+
+h3(#AuiDockArt_setcolor). AuiDockArt#set_color
+
+  *set_color*(%(arg-type)Integer% id,  %(arg-type)"Colour":colour.html% color)
+
+The same as "set_colour":#AuiDockArt_setcolour.
+
+h3(#AuiDockArt_setcolour). AuiDockArt#set_colour
+
+  *set_colour*(%(arg-type)Integer% id,  %(arg-type)"Color":color.html% colour)
+
+Set a certain setting with the value _colour_.
+
+_id_ can be one of the colour values of *AuiPaneDockArtSetting*.
+
+h3(#AuiDockArt_setfont). AuiDockArt#set_font
+
+  *set_font*(%(arg-type)Integer% id,  %(arg-type)"Font":font.html% font)
+
+Set a font setting.
+
+h3(#AuiDockArt_setmetric). AuiDockArt#set_metric
+
+  *set_metric*(%(arg-type)Integer% id,  %(arg-type)Integer% new_val)
+
+Set a certain setting with the value _new_val_.
+
+_id_ can be one of the size values of *AuiPaneDockArtSetting*.
+

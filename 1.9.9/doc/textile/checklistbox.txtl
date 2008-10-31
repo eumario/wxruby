@@ -1,0 +1,100 @@
+h1(#wxchecklistbox). Wx::CheckListBox
+
+A checklistbox is like a listbox, but allows items to be checked or
+unchecked. Only the new functions for this class are documented; see
+also "ListBox":listbox.html and
+"ControlWithItems":controlwithitems.html. As with other classes that
+inherit from ControlWithItems, items inside a CheckListBox may have
+item_data associated with them.
+
+h2. Derived from
+
+"ListBox":listbox.html
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+See "ListBox":listbox.html.
+
+h2. Event handling
+
+|*evt_checklistbox(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_CHECKLISTBOX_TOGGLED event,when an item in the check list box is checked or unchecked.|
+
+
+h2. See also
+
+"ListBox":listbox.html, "Choice":choice.html, "ComboBox":combobox.html, "ListCtrl":listctrl.html,
+ "CommandEvent":commandevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "CheckListBox.new":#CheckListBox_new
+* "CheckListBox#check":#CheckListBox_check
+* "CheckListBox#get_checked_items":#CheckListBox_getcheckeditems
+* "CheckListBox#is_checked":#CheckListBox_ischecked
+
+</div>
+
+h3(#CheckListBox_new). CheckListBox.new
+
+  *CheckListBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE,
+                   %(arg-type)"Array":array.html% choices = [], 
+                   %(arg-type)Integer% style = 0, 
+                   %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                   %(arg-type)String% name = "listBox")
+
+Constructor, creating and showing a list box.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position.
+* _size_ Window size. If the default size (-1, -1) is specified then the window is sized
+appropriately.
+* _choices_ An array of strings with which to initialise the control.
+* _style_ Window style. See "CheckListBox":checklistbox.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h3(#CheckListBox_check). CheckListBox#check
+
+  *check*(%(arg-type)Integer% item,  %(arg-type)Boolean% check = true)
+
+Checks the given item. Note that calling this method doesn't result in
+EVT_COMMAND_CHECKLISTBOX_TOGGLE being emitted.
+
+h4. Parameters
+
+* _item_ Index of item to check.
+* _check_ true if the item is to be checked, false otherwise.
+
+h3(#CheckListBox_getcheckeditems). CheckListBox#is_checked
+
+ Array *get_checked_items*()
+
+Returns an array containing the indices of the items in the controls
+that are currently checked.
+
+h3(#CheckListBox_ischecked). CheckListBox#is_checked
+
+ Boolean *is_checked*(%(arg-type)Integer% item)
+
+Returns true if the given item is checked, false otherwise.
+
+h4. Parameters
+
+* _item_ Index of item whose check status is to be returned.
+
+

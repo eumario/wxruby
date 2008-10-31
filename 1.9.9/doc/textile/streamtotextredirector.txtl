@@ -1,0 +1,63 @@
+h1(#wxstreamtotextredirenew). Wx::StreamToTextRedirector
+
+This class can be used to (temporarily) redirect all output sent to a C++
+ostream object to a "TextCtrl":textctrl.html instead.
+
+*NB:* Some compilers and/or build configurations don't support multiply
+inheriting "TextCtrl":textctrl.html from @std::streambuf@ in which
+case this class is not compiled in. You also must have @USE_STD_IOSTREAM@ 
+option on (i.e. set to $1$) in your setup.h to be able to use it. Under Unix,
+specify @--enable-std_iostreams@ switch when running configure for this.
+
+Example of usage:
+
+   using namespace std;
+ 
+   TextCtrl *text = new TextCtrl(...);
+ 
+   {
+     StreamToTextRedirector redirect(text);
+ 
+     // this goes to the text control
+     cout << "Hello, text!" << endl;
+   }
+ 
+   // this goes somewhere else, presumably to stdout
+   cout << "Hello, console!" << endl;
+ 
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"TextCtrl":textctrl.html
+
+<div id="methods">
+
+h2. Methods
+
+* "StreamToTextRedirector.new":#StreamToTextRedirector_new
+
+</div>
+
+
+h3(#StreamToTextRedirector_new). StreamToTextRedirector.new
+
+  *StreamToTextRedirector.new*(%(arg-type)"TextCtrl":textctrl.html% text,  %(arg-type)"ostream":ostream.html% ostr = nil)
+
+The constructor starts redirecting output sent to _ostr_ or _cout_ for
+the default parameter value to the text control _text_.
+
+h4. Parameters
+
+* _text_ The text control to append output too, must be non NULL
+* _ostr_ The C++ stream to redirect, _cout_ is used if it is NULL
+
+  *destructor*()
+
+When a StreamToTextRedirector object is destroyed, the redirection is ended
+and any output sent to the C++ ostream which had been specified at the time of
+the object construction will go to its original destination.
+

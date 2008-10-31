@@ -1,0 +1,31 @@
+h1(#wxlogstderr). Wx::LogStderr
+
+This class can be used to redirect the log messages to a C file stream (not to
+be confused with C++ streams). It is the default log target for the non-GUI
+Widgets applications which send all the output to @stderr@.
+
+h2. Derived from
+
+"Log":log.html
+
+h2. See also
+
+"LogStream":logstream.html
+
+<div id="methods">
+
+h2. Methods
+
+* "LogStderr.new":#LogStderr_new
+
+</div>
+
+
+h3(#LogStderr_new). LogStderr.new
+
+  *LogStderr.new*(%(arg-type)"FILE":file.html% fp = nil)
+
+Constructs a log target which sends all the log messages to the given
+@FILE@. If it is @NULL@, the messages are sent to @stderr@.
+
+

@@ -1,0 +1,76 @@
+h1(#wxprintdialog). Wx::PrintDialog
+
+This class represents the print and print setup common dialogs.
+You may obtain a "PrinterDC":printerdc.html device context from
+a successfully dismissed print dialog.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"PrintDialog Overview":printdialogoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PrintDialog.new":#PrintDialog_new
+* "PrintDialog#get_print_dialog_data":#PrintDialog_getprintdialogdata
+* "PrintDialog#get_print_dc":#PrintDialog_getprintdc
+* "PrintDialog#show_modal":#PrintDialog_showmodal
+
+</div>
+
+
+
+h3(#PrintDialog_new). PrintDialog.new
+
+  *PrintDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"PrintDialogData":printdialogdata.html% data = nil)
+
+Constructor. Pass a parent window, and optionally a pointer to a block of print
+data, which will be copied to the print dialog's print data.
+
+h4. See also
+
+"PrintDialogData":printdialogdata.html
+
+
+  *destructor*()
+
+Destructor. If PrintDialog::GetPrintDC has _not_ been called,
+the device context obtained by the dialog (if any) will be deleted.
+
+
+h3(#PrintDialog_getprintdialogdata). PrintDialog#get_print_dialog_data
+
+ "PrintDialogData":printdialogdata.html *get_print_dialog_data*()
+
+Returns the "print dialog data":printdialogdata.html associated with the print dialog.
+
+
+h3(#PrintDialog_getprintdc). PrintDialog#get_print_dc
+
+ "DC* ":dc* .html *get_print_dc*()
+
+Returns the device context created by the print dialog, if any.
+When this function has been called, the ownership of the device context
+is transferred to the application, so it must then be deleted
+explicitly.
+
+
+h3(#PrintDialog_showmodal). PrintDialog#show_modal
+
+ Integer *show_modal*()
+
+Shows the dialog, returning ID_OK if the user pressed OK, and ID_CANCEL
+otherwise. After this function is called, a device context may
+be retrievable using "PrintDialog#get_print_dc":printdialog.html#PrintDialog_getprintdc.
+

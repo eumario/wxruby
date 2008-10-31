@@ -1,0 +1,90 @@
+h1(#wxhtmltaghandler). Wx::HtmlTagHandler
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See Also
+
+"Overview":handlers.html,
+"HtmlTag":htmltag.html
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlTagHandler#m__parser":#HtmlTagHandler_mparser
+* "HtmlTagHandler.new":#HtmlTagHandler_new
+* "HtmlTagHandler#get_supported_tags":#HtmlTagHandler_getsupportedtags
+* "HtmlTagHandler#handle_tag":#HtmlTagHandler_handletag
+* "HtmlTagHandler#parse_inner":#HtmlTagHandler_parseinner
+* "HtmlTagHandler#set_parser":#HtmlTagHandler_setparser
+
+</div>
+
+
+h3(#HtmlTagHandler_mparser). HtmlTagHandler#m__parser
+
+*HtmlParser* m_Parser*
+
+This attribute is used to access parent parser. It is protected so that
+it can't be accessed by user but can be accessed from derived classes.
+
+h3(#HtmlTagHandler_wxhtmltaghandler). HtmlTagHandler.new
+
+h3(#HtmlTagHandler_getsupportedtags). HtmlTagHandler#get_supported_tags
+
+ String *get_supported_tags*()
+
+Returns list of supported tags. The list is in uppercase and tags
+are delimited by ','. Example : @"I,B,FONT,P" @
+
+h3(#HtmlTagHandler_handletag). HtmlTagHandler#handle_tag
+
+ Boolean *handle_tag*(%(arg-type)"HtmlTag":htmltag.html% tag)
+
+This is the core method of each handler. It is called each time
+one of supported tags is detected. _tag_ contains all necessary
+info (see "HtmlTag":htmltag.html for details).
+
+h4. Return value
+
+true if "parse_inner":#HtmlTagHandler_parseinner was called,
+false otherwise.
+
+h4. Example
+
+
+ bool MyHandler::HandleTag(const HtmlTag& tag)
+ {
+     ...
+     // change state of parser (e.g. set bold face)
+     ParseInner(tag);
+     ...
+     // restore original state of parser
+ }
+ 
+
+You shouldn't call ParseInner if the tag is not paired with an ending one.
+
+h3(#HtmlTagHandler_parseinner). HtmlTagHandler#parse_inner
+
+  *parse_inner*(%(arg-type)"HtmlTag":htmltag.html% tag)
+
+This method calls parser's "do_parsing":#HtmlTagHandler_doparsing method
+for the string between this tag and the paired ending tag:
+
+
+ ...<A HREF="x.htm">Hello, world!</A>...
+ 
+
+In this example, a call to ParseInner (with _tag_ pointing to A tag)
+will parse 'Hello, world!'.
+
+h3(#HtmlTagHandler_setparser). HtmlTagHandler#set_parser
+
+  *set_parser*(%(arg-type)"HtmlParser":htmlparser.html% parser)
+
+Assigns _parser_ to this handler. Each *instance* of handler 
+is guaranteed to be called only from the parser.
+

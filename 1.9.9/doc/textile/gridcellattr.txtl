@@ -1,0 +1,197 @@
+h1(#wxgridcellattr). Wx::GridCellAttr
+
+This class can be used to alter the cells' appearance in
+the grid by changing their colour/font/... from default. An object of this
+class may be returned by GridTable::GetAttr().
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellAttr.new":#GridCellAttr_new
+* "GridCellAttr#clone":#GridCellAttr_clone
+* "GridCellAttr#inc_ref":#GridCellAttr_incref
+* "GridCellAttr#dec_ref":#GridCellAttr_decref
+* "GridCellAttr#set_text_colour":#GridCellAttr_settextcolour
+* "GridCellAttr#set_background_colour":#GridCellAttr_setbackgroundcolour
+* "GridCellAttr#set_font":#GridCellAttr_setfont
+* "GridCellAttr#set_alignment":#GridCellAttr_setalignment
+* "GridCellAttr#set_read_only":#GridCellAttr_setreadonly
+* "GridCellAttr#set_renderer":#GridCellAttr_setrenderer
+* "GridCellAttr#set_editor":#GridCellAttr_seteditor
+* "GridCellAttr#has_text_colour":#GridCellAttr_hastextcolour
+* "GridCellAttr#has_background_colour":#GridCellAttr_hasbackgroundcolour
+* "GridCellAttr#has_font":#GridCellAttr_hasfont
+* "GridCellAttr#has_alignment":#GridCellAttr_hasalignment
+* "GridCellAttr#has_renderer":#GridCellAttr_hasrenderer
+* "GridCellAttr#has_editor":#GridCellAttr_haseditor
+* "GridCellAttr#get_text_colour":#GridCellAttr_gettextcolour
+* "GridCellAttr#get_background_colour":#GridCellAttr_getbackgroundcolour
+* "GridCellAttr#get_font":#GridCellAttr_getfont
+* "GridCellAttr#get_alignment":#GridCellAttr_getalignment
+* "GridCellAttr#get_renderer":#GridCellAttr_getrenderer
+* "GridCellAttr#get_editor":#GridCellAttr_geteditor
+* "GridCellAttr#is_read_only":#GridCellAttr_isreadonly
+* "GridCellAttr#set_def_attr":#GridCellAttr_setdefattr
+
+</div>
+
+
+h3(#GridCellAttr_wxgridcellattr). GridCellAttr.new
+
+  *GridCellAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack,  %(arg-type)"Font":font.html% font, 
+                   %(arg-type)Integer% hAlign, 
+                   %(arg-type)Integer% vAlign)
+
+Constructor specifying some of the often used attributes.
+
+
+h3(#GridCellAttr_clone). GridCellAttr#clone
+
+ "GridCellAttr":gridcellattr.html *clone*()
+
+Creates a new copy of this object.
+
+
+h3(#GridCellAttr_incref). GridCellAttr#inc_ref
+
+  *inc_ref*()
+
+This class is ref counted: it is created with ref count of 1, so
+calling DecRef() once will delete it. Calling IncRef() allows to lock
+it until the matching DecRef() is called
+
+
+h3(#GridCellAttr_decref). GridCellAttr#dec_ref
+
+  *dec_ref*()
+
+h3(#GridCellAttr_settextcolour). GridCellAttr#set_text_colour
+
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colText)
+
+Sets the text colour.
+
+
+h3(#GridCellAttr_setbackgroundcolour). GridCellAttr#set_background_colour
+
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colBack)
+
+Sets the background colour.
+
+
+h3(#GridCellAttr_setfont). GridCellAttr#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font.
+
+
+h3(#GridCellAttr_setalignment). GridCellAttr#set_alignment
+
+  *set_alignment*(%(arg-type)Integer% hAlign,  %(arg-type)Integer% vAlign)
+
+Sets the alignment. hAlign can be one of @ALIGN_LEFT@, 
+@ALIGN_CENTRE@ or @ALIGN_RIGHT@ and vAlign can be one
+of @ALIGN_TOP@, @ALIGN_CENTRE@ or @ALIGN_BOTTOM@.
+
+
+h3(#GridCellAttr_setreadonly). GridCellAttr#set_read_only
+
+  *set_read_only*(%(arg-type)Boolean% isReadOnly = true)
+
+
+h3(#GridCellAttr_setrenderer). GridCellAttr#set_renderer
+
+  *set_renderer*(%(arg-type)"GridCellRenderer":gridcellrenderer.html% renderer)
+
+takes ownership of the pointer
+
+
+h3(#GridCellAttr_seteditor). GridCellAttr#set_editor
+
+  *set_editor*(%(arg-type)"GridCellEditor":gridcelleditor.html% editor)
+
+
+h3(#GridCellAttr_hastextcolour). GridCellAttr#has_text_colour
+
+ Boolean *has_text_colour*()
+
+accessors
+
+
+h3(#GridCellAttr_hasbackgroundcolour). GridCellAttr#has_background_colour
+
+ Boolean *has_background_colour*()
+
+
+h3(#GridCellAttr_hasfont). GridCellAttr#has_font
+
+ Boolean *has_font*()
+
+
+h3(#GridCellAttr_hasalignment). GridCellAttr#has_alignment
+
+ Boolean *has_alignment*()
+
+
+h3(#GridCellAttr_hasrenderer). GridCellAttr#has_renderer
+
+ Boolean *has_renderer*()
+
+
+h3(#GridCellAttr_haseditor). GridCellAttr#has_editor
+
+ Boolean *has_editor*()
+
+
+h3(#GridCellAttr_gettextcolour). GridCellAttr#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+
+h3(#GridCellAttr_getbackgroundcolour). GridCellAttr#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+
+h3(#GridCellAttr_getfont). GridCellAttr#get_font
+
+ "Font":font.html *get_font*()
+
+
+h3(#GridCellAttr_getalignment). GridCellAttr#get_alignment
+
+  *get_alignment*(%(arg-type)Integer% hAlign,  %(arg-type)Integer% vAlign)
+
+
+
+See "set_alignment":#GridCellAttr_setalignment for the returned values.
+
+
+h3(#GridCellAttr_getrenderer). GridCellAttr#get_renderer
+
+ "GridCellRenderer":gridcellrenderer.html *get_renderer*(%(arg-type)"Grid":grid.html% grid, 
+                                 %(arg-type)Integer% row, 
+                                 %(arg-type)Integer% col)
+
+
+h3(#GridCellAttr_geteditor). GridCellAttr#get_editor
+
+ "GridCellEditor":gridcelleditor.html *get_editor*(%(arg-type)"Grid":grid.html% grid,  %(arg-type)Integer% row, 
+                             %(arg-type)Integer% col)
+
+
+h3(#GridCellAttr_isreadonly). GridCellAttr#is_read_only
+
+ Boolean *is_read_only*()
+
+
+h3(#GridCellAttr_setdefattr). GridCellAttr#set_def_attr
+
+  *set_def_attr*(%(arg-type)"GridCellAttr":gridcellattr.html% defAttr)
+

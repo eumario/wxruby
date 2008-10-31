@@ -1,0 +1,47 @@
+h1(#wxwindowcreateevent). Wx::WindowCreateEvent
+
+This event is sent just after the actual window associated with a Window object
+has been created. Since it is derived from CommandEvent, the event propagates up
+the window hierarchy. This means that a frame can observe the creation
+of child windows within it.
+
+h2. Derived from
+
+"CommandEvent":event.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event hooks
+
+To process a window creation event, use the @evt_create@ event hook to
+handle the event with a block. The block can optionally receive a
+WindowCreateEvent argument. @id@ should be the id of the window whose
+creation should be handled. It is possible to observe the creation of
+any window by using the special identifier @Wx::ID_ANY@. If this
+identifier is used, the newly created window can be obtained from the
+event object; call the @get_event_object@ method of the event.
+
+|*evt_create(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_CREATE event.|
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "WindowDestroyEvent":windowdestroyevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "WindowCreateEvent.new":#WindowCreateEvent_new
+
+</div>
+
+
+h3(#WindowCreateEvent_new). WindowCreateEvent.new
+
+  *WindowCreateEvent.new*(%(arg-type)"Window":window.html% win = nil)
+
+Constructor. Unlikely to be used in user code, except if simulating
+event sequences.
+

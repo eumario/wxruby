@@ -1,0 +1,238 @@
+h1(#wxbitmapbutton). Wx::BitmapButton
+
+A bitmap button is a control that contains a bitmap.
+It may be placed on a "dialog box":dialog.html or "panel":panel.html, or indeed
+almost any other window.
+
+h2. Derived from
+
+"Button":button.html
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+A bitmap button can be supplied with a single bitmap, and Widgets will draw
+all button states using this bitmap. If the application needs more
+control, additional bitmaps for the selected state, unpressed focused
+state, hover state and and greyed-out disabled state may be supplied.
+
+h2. Window styles
+
+
+
+|@BU_AUTODRAW@|Ifthis is specified, the button will be drawn automatically using the label bitmap only, providinga 3D-look border. If this style is not specified, the button will be drawn without borders and using allprovided bitmaps. WIN32 only.|
+|@BU_LEFT@|Left-justifies the bitmap label. WIN32 only.|
+|@BU_TOP@|Aligns the bitmap label to the top of the button. WIN32 only.|
+|@BU_RIGHT@|Right-justifies the bitmap label. WIN32 only.|
+|@BU_BOTTOM@|Aligns the bitmap label to the bottom of the button. WIN32 only.|
+
+
+Note that @BU_EXACTFIT@ supported by 
+"Button":button.html is not used by this class as bitmap buttons
+don't have any minimal standard size by default.
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+
+|*evt_button(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_BUTTON_CLICKED event,when the button is clicked.|
+
+
+h2. See also
+
+"Button":button.html
+
+<div id="methods">
+
+h2. Methods
+
+* "BitmapButton.new":#BitmapButton_new
+* "BitmapButton#create":#BitmapButton_create
+* "BitmapButton#get_bitmap_disabled":#BitmapButton_getbitmapdisabled
+* "BitmapButton#get_bitmap_focus":#BitmapButton_getbitmapfocus
+* "BitmapButton#get_bitmap_hover":#BitmapButton_getbitmaphover
+* "BitmapButton#get_bitmap_label":#BitmapButton_getbitmaplabel
+* "BitmapButton#get_bitmap_selected":#BitmapButton_getbitmapselected
+* "BitmapButton#set_bitmap_disabled":#BitmapButton_setbitmapdisabled
+* "BitmapButton#set_bitmap_focus":#BitmapButton_setbitmapfocus
+* "BitmapButton#set_bitmap_hover":#BitmapButton_setbitmaphover
+* "BitmapButton#set_bitmap_label":#BitmapButton_setbitmaplabel
+* "BitmapButton#set_bitmap_selected":#BitmapButton_setbitmapselected
+
+</div>
+
+
+h3(#BitmapButton_new). BitmapButton.new
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Button identifier. A value of -1 indicates a default value.
+* _bitmap_ Bitmap to be displayed.
+* _pos_ Button position.
+* _size_ Button size. If the default size (-1, -1) is specified then the button is sized
+appropriately for the bitmap.
+* _style_ Window style. See "BitmapButton":bitmapbutton.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. Remarks
+
+The _bitmap_ parameter is normally the only bitmap you need to provide, and Widgets will
+draw the button correctly in its different states. If you want more control, call
+any of the functions
+"BitmapButton#set_bitmap_selected":bitmapbutton.html#BitmapButton_setbitmapselected,
+"BitmapButton#set_bitmap_focus":bitmapbutton.html#BitmapButton_setbitmapfocus,
+"BitmapButton#set_bitmap_hover":bitmapbutton.html#BitmapButton_setbitmaphover, "BitmapButton#set_bitmap_disabled":bitmapbutton.html#BitmapButton_setbitmapdisabled.
+
+Note that the bitmap passed is smaller than the actual button created.
+
+h4. See also
+
+"BitmapButton#create":bitmapbutton.html#BitmapButton_create, "Validator":validator.html
+
+h3(#BitmapButton_create). BitmapButton#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% bitmap, 
+                %(arg-type)"Point":point.html% pos, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% validator, 
+                %(arg-type)String% name = "button")
+
+Button creation function for two-step creation. For more details, see "BitmapButton.new":bitmapbutton.html#BitmapButton_new.
+
+h3(#BitmapButton_getbitmapdisabled). BitmapButton#get_bitmap_disabled
+
+ "Bitmap":bitmap.html *get_bitmap_disabled*()
+
+Returns the bitmap for the disabled state.
+
+h4. See also
+
+"BitmapButton#set_bitmap_disabled":bitmapbutton.html#BitmapButton_setbitmapdisabled
+
+h3(#BitmapButton_getbitmapfocus). BitmapButton#get_bitmap_focus
+
+ "Bitmap":bitmap.html *get_bitmap_focus*()
+
+Returns the bitmap for the focused state.
+
+h4. See also
+
+"BitmapButton#set_bitmap_focus":bitmapbutton.html#BitmapButton_setbitmapfocus
+
+h3(#BitmapButton_getbitmaphover). BitmapButton#get_bitmap_hover
+
+ "Bitmap":bitmap.html *get_bitmap_hover*()
+
+Returns the bitmap for the focused state.
+
+h4. See also
+
+"BitmapButton#set_bitmap_hover":bitmapbutton.html#BitmapButton_setbitmaphover
+
+h3(#BitmapButton_getbitmaplabel). BitmapButton#get_bitmap_label
+
+ "Bitmap":bitmap.html *get_bitmap_label*()
+
+Returns the label bitmap (the one passed to the constructor).
+
+h4. See also
+
+"BitmapButton#set_bitmap_label":bitmapbutton.html#BitmapButton_setbitmaplabel
+
+h3(#BitmapButton_getbitmapselected). BitmapButton#get_bitmap_selected
+
+ "Bitmap":bitmap.html *get_bitmap_selected*()
+
+Returns the bitmap for the selected state.
+
+h4. See also
+
+"BitmapButton#set_bitmap_selected":bitmapbutton.html#BitmapButton_setbitmapselected
+
+h3(#BitmapButton_setbitmapdisabled). BitmapButton#set_bitmap_disabled
+
+  *set_bitmap_disabled*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap for the disabled button appearance.
+
+h4. Parameters
+
+* _bitmap_ The bitmap to set.
+
+h4. See also
+
+"BitmapButton#get_bitmap_disabled":bitmapbutton.html#BitmapButton_getbitmapdisabled, "BitmapButton#set_bitmap_label":bitmapbutton.html#BitmapButton_setbitmaplabel, "BitmapButton#set_bitmap_selected":bitmapbutton.html#BitmapButton_setbitmapselected, "BitmapButton#set_bitmap_focus":bitmapbutton.html#BitmapButton_setbitmapfocus
+
+h3(#BitmapButton_setbitmapfocus). BitmapButton#set_bitmap_focus
+
+  *set_bitmap_focus*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap for the button appearance when it has the keyboard focus.
+
+h4. Parameters
+
+* _bitmap_ The bitmap to set.
+
+h4. See also
+
+"BitmapButton#get_bitmap_focus":bitmapbutton.html#BitmapButton_getbitmapfocus, "BitmapButton#set_bitmap_label":bitmapbutton.html#BitmapButton_setbitmaplabel, "BitmapButton#set_bitmap_selected":bitmapbutton.html#BitmapButton_setbitmapselected, "BitmapButton#set_bitmap_disabled":bitmapbutton.html#BitmapButton_setbitmapdisabled
+
+h3(#BitmapButton_setbitmaphover). BitmapButton#set_bitmap_hover
+
+  *set_bitmap_focus*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap for the button appearance when it has the keyboard focus.
+
+h4. Parameters
+
+* _bitmap_ The bitmap to set.
+
+h4. See also
+
+"BitmapButton#get_bitmap_focus":bitmapbutton.html#BitmapButton_getbitmapfocus, "BitmapButton#set_bitmap_label":bitmapbutton.html#BitmapButton_setbitmaplabel, "BitmapButton#set_bitmap_selected":bitmapbutton.html#BitmapButton_setbitmapselected, "BitmapButton#set_bitmap_disabled":bitmapbutton.html#BitmapButton_setbitmapdisabled
+
+h3(#BitmapButton_setbitmaplabel). BitmapButton#set_bitmap_label
+
+  *set_bitmap_label*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap label for the button.
+
+h4. Parameters
+
+* _bitmap_ The bitmap label to set.
+
+h4. Remarks
+
+This is the bitmap used for the unselected state, and for all other states
+if no other bitmaps are provided.
+
+h4. See also
+
+"BitmapButton#get_bitmap_label":bitmapbutton.html#BitmapButton_getbitmaplabel
+
+h3(#BitmapButton_setbitmapselected). BitmapButton#set_bitmap_selected
+
+  *set_bitmap_selected*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap for the selected (depressed) button appearance.
+
+h4. Parameters
+
+* _bitmap_ The bitmap to set.
+
+h4. See also
+
+"BitmapButton#get_bitmap_selected":bitmapbutton.html#BitmapButton_getbitmapselected, "BitmapButton#set_bitmap_label":bitmapbutton.html#BitmapButton_setbitmaplabel, "BitmapButton#set_bitmap_focus":bitmapbutton.html#BitmapButton_setbitmapfocus, "BitmapButton#set_bitmap_disabled":bitmapbutton.html#BitmapButton_setbitmapdisabled
+

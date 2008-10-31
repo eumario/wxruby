@@ -1,0 +1,33 @@
+h1(#wxmirrordc). Wx::MirrorDC
+
+MirrorDC is a simple wrapper class which is always associated with a real 
+"DC":dc.html object and either forwards all of its operations to it
+without changes (no mirroring takes place) or exchanges _x_ and _y_ 
+coordinates which makes it possible to reuse the same code to draw a figure and
+its mirror -- i.e. reflection related to the diagonal line $x == y$.
+
+MirrorDC has been added in Widgets version 2.5.0.
+
+h2. Derived from
+
+"DC":dc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MirrorDC.new":#MirrorDC_new
+
+</div>
+
+
+h3(#MirrorDC_wxmirrordc). MirrorDC.new
+
+  *MirrorDC.new*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Boolean% mirror)
+
+Creates a (maybe) mirrored DC associated with the real dc. Everything
+drawn on MirrorDC will appear (and maybe mirrored) on dc.
+
+mirror specifies if we do mirror (if it is ) or not (if it is 
+).
+

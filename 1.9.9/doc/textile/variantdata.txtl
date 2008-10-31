@@ -1,0 +1,88 @@
+h1(#wxvariantdata). Wx::VariantData
+
+The *VariantData* is used to implement a new type for Variant. Derive from VariantData,
+and override the pure virtual functions.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Variant":variant.html
+
+<div id="methods">
+
+h2. Methods
+
+* "VariantData.new":#VariantData_new
+* "VariantData#copy":#VariantData_copy
+* "VariantData#eq":#VariantData_eq
+* "VariantData#get_type":#VariantData_gettype
+* "VariantData#get_value_class_info":#VariantData_getvalueclassinfo
+* "VariantData#read":#VariantData_read
+* "VariantData#write":#VariantData_write
+* "wxGetVariantCast":#VariantData_wxGetVariantCast
+
+</div>
+
+
+h3(#VariantData_new). VariantData.new
+
+h3(#VariantData_copy). VariantData#copy
+
+  *copy*(%(arg-type)"VariantData":variantdata.html% data)
+
+Copy the data from `this' object to _data_.
+
+h3(#VariantData_eq). VariantData#eq
+
+ Boolean *eq*(%(arg-type)"VariantData":variantdata.html% data)
+
+Returns true if this object is equal to _data_.
+
+h3(#VariantData_gettype). VariantData#get_type
+
+ String *get_type*()
+
+Returns the string type of the data.
+
+h3(#VariantData_getvalueclassinfo). VariantData#get_value_class_info
+
+ "ClassInfo":classinfo.html *get_value_class_info*()
+
+If the data is a Object returns a pointer to the objects ClassInfo structure, if
+the data isn't a Object the method returns NULL.
+
+h3(#VariantData_read). VariantData#read
+
+ Boolean *read*(%(arg-type)"ostream":ostream.html% stream)
+
+ Boolean *read*(%(arg-type)String% string)
+
+Reads the data from _stream_ or _string_.
+
+h3(#VariantData_write). VariantData#write
+
+ Boolean *write*(%(arg-type)"ostream":ostream.html% stream)
+
+ Boolean *write*(%(arg-type)String% string)
+
+Writes the data to _stream_ or _string_.
+
+
+h3(#wxgetvariantcast). GetVariantCast
+
+ classname *_get_variant_cast*(Variant&,  classname)
+
+This macro returns the data stored in _variant_ cast to the type _classname *_ if
+the data is of this type (the check is done during the run-time) or
+@NULL@ otherwise. 
+
+
+h4. See also
+
+"RTTI overview":runtimeclassoverview.html
+
+"DynamicCast":dynamiccast.html
+

@@ -1,0 +1,157 @@
+h1(#wxspinbutton). Wx::SpinButton
+
+A SpinButton has two small up and down (or left and right) arrow buttons. It
+is often used next to a text control for increment and decrementing a value.
+Portable programs should try to use "SpinCtrl":spinctrl.html instead
+as SpinButton is not implemented for all platforms but SpinCtrl is as it
+degenerates to a simple "TextCtrl":textctrl.html on such platforms.
+
+*NB:* the range supported by this control (and SpinCtrl) depends on the
+platform but is at least @-0x8000@ to @0x7fff@. Under GTK and
+Win32 with sufficiently new version of @comctrl32.dll@ (at least 4.71 is
+required, 5.80 is recommended) the full 32 bit range is supported.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"SpinCtrl":spinctrl.html 
+
+h2. Window styles
+
+
+
+|@SP_HORIZONTAL@|Specifies a horizontal spin button (note that this style is not supported in GTK).|
+|@SP_VERTICAL@|Specifies a vertical spin button.|
+|@SP_ARROW_KEYS@|The user can use arrow keys to change the value.|
+|@SP_WRAP@|The value wraps at the minimum and maximum.|
+
+
+See also "window styles overview":windowstyles.html.
+
+ spinevt.inc
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SpinButton.new":#SpinButton_new
+* "SpinButton#create":#SpinButton_create
+* "SpinButton#get_max":#SpinButton_getmax
+* "SpinButton#get_min":#SpinButton_getmin
+* "SpinButton#get_value":#SpinButton_getvalue
+* "SpinButton#set_range":#SpinButton_setrange
+* "SpinButton#set_value":#SpinButton_setvalue
+
+</div>
+
+
+h3(#SpinButton_new). SpinButton.new
+
+  *SpinButton.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                 %(arg-type)Integer% style = SP_HORIZONTAL, 
+                 %(arg-type)String% name = "spinButton")
+
+Constructor, creating and showing a spin button.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position. If the position (-1, -1) is specified then a default position is chosen.
+* _size_ Window size. If the default size (-1, -1) is specified then a default size is chosen.
+* _style_ Window style. See "SpinButton":spinbutton.html.
+* _name_ Window name.
+
+h4. See also
+
+"SpinButton#create":spinbutton.html#SpinButton_create
+
+  *destructor*()
+
+Destructor, destroys the spin button control.
+
+h3(#SpinButton_create). SpinButton#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = SP_HORIZONTAL, 
+                %(arg-type)String% name = "spinButton")
+
+Scrollbar creation function called by the spin button constructor.
+See "SpinButton.new":spinbutton.html#SpinButton_new for details.
+
+h3(#SpinButton_getmax). SpinButton#get_max
+
+ Integer *get_max*()
+
+Returns the maximum permissible value.
+
+h4. See also
+
+"SpinButton#set_range":spinbutton.html#SpinButton_setrange
+
+h3(#SpinButton_getmin). SpinButton#get_min
+
+ Integer *get_min*()
+
+Returns the minimum permissible value.
+
+h4. See also
+
+"SpinButton#set_range":spinbutton.html#SpinButton_setrange
+
+h3(#SpinButton_getvalue). SpinButton#get_value
+
+ Integer *get_value*()
+
+Returns the current spin button value.
+
+h4. See also
+
+"SpinButton#set_value":spinbutton.html#SpinButton_setvalue
+
+h3(#SpinButton_setrange). SpinButton#set_range
+
+  *set_range*(%(arg-type)Integer% min,  %(arg-type)Integer% max)
+
+Sets the range of the spin button.
+
+h4. Parameters
+
+* _min_ The minimum value for the spin button.
+* _max_ The maximum value for the spin button.
+
+h4. See also
+
+"SpinButton#get_min":spinbutton.html#SpinButton_getmin, "SpinButton#get_max":spinbutton.html#SpinButton_getmax
+
+h3(#SpinButton_setvalue). SpinButton#set_value
+
+  *set_value*(%(arg-type)Integer% value)
+
+Sets the value of the spin button.
+
+h4. Parameters
+
+* _value_ The value for the spin button.
+
+h4. See also
+
+"SpinButton#get_value":spinbutton.html#SpinButton_getvalue
+

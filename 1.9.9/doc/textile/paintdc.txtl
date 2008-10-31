@@ -1,0 +1,24 @@
+h1(#wxpaintdc). Wx::PaintDC
+
+This class is used to draw upon Windows within an @evt_paint@
+handler. This is the recommended technique to draw lines, shapes and
+bitmaps on the screen. 
+
+This class is not instantiated directly. Rather, define an @evt_paint@
+handler, and within it call the "paint":window.html#Window_paint method
+of the Window you wish to draw upon. This method accepts a block, 
+which receives a PaintDC object upon which drawing methods can be called.
+
+This class has no methods of its own; all the drawing methods are
+described in the documentation for "DC":dc.html.
+
+h2. Derived from
+
+"WindowDC":windowdc.html
+
+"DC":dc.html
+
+h2. See also
+
+"DC":dc.html, "MemoryDC":memorydc.html, "PaintDC":paintdc.html, "WindowDC":windowdc.html, "ScreenDC":screendc.html
+

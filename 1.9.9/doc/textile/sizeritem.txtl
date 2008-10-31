@@ -1,0 +1,287 @@
+h1(#wxsizeritem). Wx::SizerItem
+
+The SizerItem class is used to track the position, size and other
+attributes of each item managed by a "Sizer":sizer.html.  In
+normal usage user code should never need to deal directly with a
+SizerItem, but derived sizer classes will.
+
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "SizerItem.new":#SizerItem_new
+* "SizerItem#calc_min":#SizerItem_calcmin
+* "SizerItem#delete_windows":#SizerItem_deletewindows
+* "SizerItem#detach_sizer":#SizerItem_detachsizer
+* "SizerItem#get_border":#SizerItem_getborder
+* "SizerItem#get_flag":#SizerItem_getflag
+* "SizerItem#get_min_size":#SizerItem_getminsize
+* "SizerItem#get_position":#SizerItem_getposition
+* "SizerItem#get_proportion":#SizerItem_getproportion
+* "SizerItem#get_ratio":#SizerItem_getratio
+* "SizerItem#get_rect":#SizerItem_getrect
+* "SizerItem#get_size":#SizerItem_getsize
+* "SizerItem#get_sizer":#SizerItem_getsizer
+* "SizerItem#get_spacer":#SizerItem_getspacer
+* "SizerItem#get_user_data":#SizerItem_getuserdata
+* "SizerItem#get_window":#SizerItem_getwindow
+* "SizerItem#is_shown":#SizerItem_isshown
+* "SizerItem#is_sizer":#SizerItem_issizer
+* "SizerItem#is_spacer":#SizerItem_isspacer
+* "SizerItem#is_window":#SizerItem_iswindow
+* "SizerItem#set_border":#SizerItem_setborder
+* "SizerItem#set_dimension":#SizerItem_setdimension
+* "SizerItem#set_flag":#SizerItem_setflag
+* "SizerItem#set_init_size":#SizerItem_setinitsize
+* "SizerItem#set_proportion":#SizerItem_setproportion
+* "SizerItem#set_ratio":#SizerItem_setratio
+* "SizerItem#set_sizer":#SizerItem_setsizer
+* "SizerItem#set_spacer":#SizerItem_setspacer
+* "SizerItem#set_window":#SizerItem_setwindow
+* "SizerItem#show":#SizerItem_show
+
+</div>
+
+
+
+h3(#SizerItem_wxsizeritem). SizerItem.new
+
+  *SizerItem.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                %(arg-type)Integer% proportion,  %(arg-type)Integer% flag, 
+                %(arg-type)Integer% border, 
+                %(arg-type)Object% userData)
+
+Construct a sizer item for tracking a spacer.
+
+
+  *SizerItem.new*(%(arg-type)"Window":window.html% window,  %(arg-type)"SizerFlags":sizerflags.html% flags)
+
+  *SizerItem.new*(%(arg-type)"Window":window.html% window,  %(arg-type)Integer% proportion, 
+                %(arg-type)Integer% flag, 
+                %(arg-type)Integer% border, 
+                %(arg-type)Object% userData)
+
+Construct a sizer item for tracking a window.
+
+
+  *SizerItem.new*(%(arg-type)"Sizer":sizer.html% window,  %(arg-type)"SizerFlags":sizerflags.html% flags)
+
+  *SizerItem.new*(%(arg-type)"Sizer":sizer.html% sizer,  %(arg-type)Integer% proportion, 
+                %(arg-type)Integer% flag, 
+                %(arg-type)Integer% border, 
+                %(arg-type)Object% userData)
+
+Construct a sizer item for tracking a subsizer.
+
+
+
+  *destructor*()
+
+Deletes the user data and subsizer, if any.
+
+
+h3(#SizerItem_calcmin). SizerItem#calc_min
+
+ "Size":size.html *calc_min*()
+
+Calculates the minimum desired size for the item, including any space
+needed by borders.
+
+
+h3(#SizerItem_deletewindows). SizerItem#delete_windows
+
+  *delete_windows*()
+
+Destroy the window or the windows in a subsizer, depending on the type
+of item.
+
+
+h3(#SizerItem_detachsizer). SizerItem#detach_sizer
+
+  *detach_sizer*()
+
+Enable deleting the SizerItem without destroying the contained sizer.
+
+
+h3(#SizerItem_getborder). SizerItem#get_border
+
+ Integer *get_border*()
+
+Return the border attribute.
+
+h3(#SizerItem_getflag). SizerItem#get_flag
+
+ Integer *get_flag*()
+
+Return the flags attribute.
+
+
+h3(#SizerItem_getminsize). SizerItem#get_min_size
+
+ "Size":size.html *get_min_size*()
+
+Get the minimum size needed for the item.
+
+h3(#SizerItem_getposition). SizerItem#get_position
+
+ "Point":point.html *get_position*()
+
+What is the current position of the item, as set in the last Layout.
+
+h3(#SizerItem_getproportion). SizerItem#get_proportion
+
+ Integer *get_proportion*()
+
+Get the proportion item attribute.
+
+h3(#SizerItem_getratio). SizerItem#get_ratio
+
+ float *get_ratio*()
+
+Get the ration item attribute.
+
+h3(#SizerItem_getrect). SizerItem#get_rect
+
+ "Rect":rect.html *get_rect*()
+
+Get the rectangle of the item on the parent window, excluding borders.
+
+h3(#SizerItem_getsize). SizerItem#get_size
+
+ "Size":size.html *get_size*()
+
+Get the current size of the item, as set in the last Layout.
+
+h3(#SizerItem_getsizer). SizerItem#get_sizer
+
+ "Sizer":sizer.html *get_sizer*()
+
+If this item is tracking a sizer, return it.  NULL otherwise.
+
+
+h3(#SizerItem_getspacer). SizerItem#get_spacer
+
+ "Size":size.html *get_spacer*()
+
+If this item is tracking a spacer, return its size.
+
+
+h3(#SizerItem_getuserdata). SizerItem#get_user_data
+
+ "Object":object.html *get_user_data*()
+
+Get the userData item attribute.
+
+
+h3(#SizerItem_getwindow). SizerItem#get_window
+
+ "Window":window.html *get_window*()
+
+If this item is tracking a window then return it.  NULL otherwise.
+
+h3(#SizerItem_isshown). SizerItem#is_shown
+
+ Boolean *is_shown*()
+
+Is this item shown?
+
+
+h3(#SizerItem_issizer). SizerItem#is_sizer
+
+ Boolean *is_sizer*()
+
+Is this item a sizer?
+
+
+h3(#SizerItem_isspacer). SizerItem#is_spacer
+
+ Boolean *is_spacer*()
+
+Is this item a spacer?
+
+
+h3(#SizerItem_iswindow). SizerItem#is_window
+
+ Boolean *is_window*()
+
+Is this item a window?
+
+
+h3(#SizerItem_setborder). SizerItem#set_border
+
+  *set_border*(%(arg-type)Integer% border)
+
+Set the border item attribute.
+
+h3(#SizerItem_setdimension). SizerItem#set_dimension
+
+  *set_dimension*(%(arg-type)"Point":point.html% pos,  %(arg-type)"Size":size.html% size)
+
+Set the position and size of the space allocated to the sizer, and
+adjust the position and size of the item to be within that space
+taking alignment and borders into account.
+
+
+h3(#SizerItem_setflag). SizerItem#set_flag
+
+  *set_flag*(%(arg-type)Integer% flag)
+
+Set the flag  item attribute.
+
+
+h3(#SizerItem_setinitsize). SizerItem#set_init_size
+
+  *set_init_size*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+
+h3(#SizerItem_setproportion). SizerItem#set_proportion
+
+  *set_proportion*(%(arg-type)Integer% proportion)
+
+Set the proportion item attribute.
+
+h3(#SizerItem_setratio). SizerItem#set_ratio
+
+  *set_ratio*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+  *set_ratio*(%(arg-type)"Size":size.html% size)
+
+  *set_ratio*(%(arg-type)Float% ratio)
+
+Set the ratio item attribute.
+
+
+h3(#SizerItem_setsizer). SizerItem#set_sizer
+
+  *set_sizer*(%(arg-type)"Sizer":sizer.html% sizer)
+
+Set the sizer tracked by this item.
+
+
+h3(#SizerItem_setspacer). SizerItem#set_spacer
+
+  *set_spacer*(%(arg-type)"Size":size.html% size)
+
+Set the size of the spacer tracked by this item.
+
+
+h3(#SizerItem_setwindow). SizerItem#set_window
+
+  *set_window*(%(arg-type)"Window":window.html% window)
+
+Set the window to be tracked by thsi item.
+
+
+h3(#SizerItem_show). SizerItem#show
+
+  *show*(%(arg-type)Boolean% show)
+
+Set the show item attribute, which sizers use to determine if the item
+is to be made part of the layout or not.  If the item is tracking a
+window then it is shown or hidden as needed.
+

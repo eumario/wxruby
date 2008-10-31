@@ -1,0 +1,502 @@
+h1(#wxbitmap). Wx::Bitmap
+
+This class encapsulates the concept of a platform-dependent bitmap,
+either monochrome, colour, or colour with alpha channel (transparency)
+support. 
+
+wxRuby provides two classes for handling images. "Bitmap":bitmap.html is
+used for drawing upon the screen, for example using a
+"DeviceContext":dc.html. The other class "Image":image.html cannot be
+drawn directly upon the screen, but supports a variety of image
+manipulation functions such as rescaling, blurring, and directly
+manipulating pixels.
+
+Note that because this class wraps a platform-specific GUI resource, you
+shouldn't create instances of it until the app is running; ie until
+after you have called App#main_loop or App.run.
+
+h2. Derived from
+
+"GDIObject":gdiobject.html
+
+"Object":object.html
+
+h2. Predefined objects
+
+Objects:
+
+*NullBitmap*
+
+h2. See also
+
+"Bitmap overview":bitmapoverview.html,
+"supported bitmap file formats":supportedbitmapformats.html,
+"DC#blit":dc.html#DC_blit,
+"Icon":icon.html, "Cursor":cursor.html, "Image":image.html,
+"MemoryDC":memorydc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Bitmap.new":#Bitmap_new
+* "Bitmap.from_image":#Bitmap_fromimage
+* "Bitmap#clean_up_handlers":#Bitmap_cleanuphandlers
+* "Bitmap#convert_to_image":#Bitmap_converttoimage
+* "Bitmap#copy_from_icon":#Bitmap_copyfromicon
+* "Bitmap#create":#Bitmap_create
+* "Bitmap#get_depth":#Bitmap_getdepth
+* "Bitmap#get_height":#Bitmap_getheight
+* "Bitmap#get_palette":#Bitmap_getpalette
+* "Bitmap#get_mask":#Bitmap_getmask
+* "Bitmap#get_width":#Bitmap_getwidth
+* "Bitmap#get_sub_bitmap":#Bitmap_getsubbitmap
+* "Bitmap#load_file":#Bitmap_loadfile
+* "Bitmap#is_ok":#Bitmap_isok
+* "Bitmap#save_file":#Bitmap_savefile
+* "Bitmap#set_depth":#Bitmap_setdepth
+* "Bitmap#set_height":#Bitmap_setheight
+* "Bitmap#set_mask":#Bitmap_setmask
+* "Bitmap#set_palette":#Bitmap_setpalette
+* "Bitmap#set_width":#Bitmap_setwidth
+
+</div>
+
+
+h3(#Bitmap_new). Bitmap.new
+
+The two main constructors for this class are used to create a blank
+bitmap, or to load a bitmap from a file. "from_image":#Bitmap_fromimage
+can be used to convert an "Image":image.html into a bitmap.
+
+  *Bitmap.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+             %(arg-type)Integer% depth = -1)
+
+Creates a new bitmap. A depth of -1 indicates the depth of the current screen
+or visual. Some platforms only support 1 for monochrome and -1 for the current
+colour setting. 
+
+  *Bitmap.new*(%(arg-type)String% name,  %(arg-type)Integer% type)
+
+Loads a bitmap from a file or resource.
+
+The following constructors are not fully supported or tested:
+
+  *Bitmap.new*(%(arg-type)% data,  
+             %(arg-type)Integer% type, 
+             %(arg-type)Integer% width, 
+             %(arg-type)Integer% height, 
+             %(arg-type)Integer% depth = -1)
+
+Creates a bitmap from the given data which is interpreted in platform-dependent
+manner.
+
+  *Bitmap.new*(%(arg-type)"char":char.html% bits[],  %(arg-type)Integer% width, 
+             %(arg-type)Integer% height
+  %(arg-type)Integer% depth = 1)
+
+Creates a bitmap from an array of bits.
+
+You should only use this function for monochrome bitmaps (_depth_ 1) in
+portable programs: in this case the _bits_ parameter should contain an XBM
+image.
+
+For other bit depths, the behaviour is platform dependent: under Windows, the
+data is passed without any changes to the underlying @CreateBitmap()@ API.
+Under other platforms, only monochrome bitmaps may be created using this
+constructor and "Image":image.html should be used for creating colour
+bitmaps from static data.
+
+  *Bitmap.new*(%(arg-type)"char":char.html% bits)
+
+Creates a bitmap from XPM data.
+
+h4. Parameters
+
+* _bits_ Specifies an array of pixel values.
+* _width_ Specifies the width of the bitmap.
+* _height_ Specifies the height of the bitmap.
+* _depth_ Specifies the depth of the bitmap. If this is omitted, the display depth of the
+screen is used.
+* _name_ This can refer to a resource name under MS Windows, or a filename under MS Windows and X.
+Its meaning is determined by the _type_ parameter.
+* _type_ May be one of the following:
+
+
+
+|BITMAP_TYPE_BMP|Load a Windows bitmap file.|
+|BITMAP_TYPE_BMP_RESOURCE|Load a Windows bitmap resource from the executable. Windows only.|
+|BITMAP_TYPE_PICT_RESOURCE|Load a PICT image resource from the executable. Mac OS only.|
+|BITMAP_TYPE_GIF|Load a GIF bitmap file.|
+|BITMAP_TYPE_XBM|Load an X bitmap file.|
+|BITMAP_TYPE_XPM|Load an XPM bitmap file.|
+
+The validity of these flags depends on the platform and Widgets
+configuration.  If all possible Widgets settings are used, the Windows
+platform supports BMP file, BMP resource, XPM data, and XPM. Under GTK,
+the available formats are BMP file, XPM data, XPM file, and PNG file.
+Under Motif, the available formats are XBM data, XBM file, XPM data, XPM
+file.
+
+In addition, Bitmap can read all formats that "Image":image.html can,
+which currently include BITMAP_TYPE_JPEG, BITMAP_TYPE_TIF,
+BITMAP_TYPE_PNG, BITMAP_TYPE_GIF, BITMAP_TYPE_PCX, and
+BITMAP_TYPE_PNM. Of course, you must have Image handlers loaded.  *
+_img_ Platform-independent Image object.
+
+h4. Remarks
+
+Under Windows, _type_ defaults to BITMAP_TYPE_BMP_RESOURCE.  Under X,
+_type_ defaults to BITMAP_TYPE_XPM.
+
+h4. See also
+
+"Bitmap#load_file":bitmap.html#Bitmap_loadfile
+
+
+h3(#Bitmap_fromimage). Bitmap.from_image
+
+  *Bitmap.from_image*(%(arg-type)"Image":image.html% img,  %(arg-type)Integer% depth = -1)
+
+Creates bitmap object from the image. This has to be done
+to actually display an image as you cannot draw an image directly on a window.
+The resulting bitmap will use the provided colour depth (or that of the
+current system if depth is -1) which entails that a colour reduction has
+to take place.
+
+When in 8-bit mode (PseudoColour mode), the GTK port will use a color cube created
+on program start-up to look up colors. This ensures a very fast conversion, but
+the image quality won't be perfect (and could be better for photo images using more
+sophisticated dithering algorithms).
+
+On Windows, if there is a palette present (set with SetPalette), it will be used when
+creating the Bitmap (most useful in 8-bit display mode). On other platforms,
+the palette is currently ignored.
+
+
+
+
+  *destructor*()
+
+Destroys the Bitmap object and possibly the underlying bitmap data.
+Because reference counting is used, the bitmap may not actually be
+destroyed at this point - only when the reference count is zero will the
+data be deleted.
+
+If the application omits to delete the bitmap explicitly, the bitmap will be
+destroyed automatically by Widgets when the application exits.
+
+Do not delete a bitmap that is selected into a memory device context,
+for example during a call to "draw":#Bitmap_draw .
+
+
+h3(#Bitmap_converttoimage). Bitmap#convert_to_image
+
+ "Image":image.html *convert_to_image*()
+
+Creates an image from a platform-dependent bitmap. This preserves
+mask information so that bitmaps and images can be converted back
+and forth without loss in that respect.
+
+h3(#Bitmap_copyfromicon). Bitmap#copy_from_icon
+
+ Boolean *copy_from_icon*(%(arg-type)"Icon":icon.html% icon)
+
+Creates the bitmap from an icon.
+
+h3(#Bitmap_create). Bitmap#create
+
+ Boolean *create*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                %(arg-type)Integer% depth = -1)
+
+Creates a fresh bitmap. If the final argument is omitted, the display depth of
+the screen is used.
+
+ Boolean *create*(%(arg-type)% data,  %(arg-type)Integer% type,  %(arg-type)Integer% width, 
+                %(arg-type)Integer% height, 
+                %(arg-type)Integer% depth = -1)
+
+Creates a bitmap from the given data, which can be of arbitrary type.
+
+h4. Parameters
+
+* _width_ The width of the bitmap in pixels.
+* _height_ The height of the bitmap in pixels.
+* _depth_ The depth of the bitmap in pixels. If this is -1, the screen depth is used.
+* _data_ Data whose type depends on the value of _type_.
+* _type_ A bitmap type identifier - see "Bitmap.new":bitmap.html#Bitmap_new for a list
+of possible values.
+
+h4. Return value
+
+true if the call succeeded, false otherwise.
+
+h4. Remarks
+
+The first form works on all platforms. The portability of the second form depends on the
+type of data.
+
+h4. See also
+
+"Bitmap.new":bitmap.html#Bitmap_new
+
+h3(#Bitmap_draw). Bitmap#draw
+
+ *draw*() { | device_context | ... }
+
+Allows drawing directly onto a Bitmap. Accepts a block which will be
+passed a "MemoryDC":memorydc.html device context, which can be used to
+draw lines, shapes and text upon a bitmap. See "DC":dc.html for the full
+range of drawing methods that are available.
+
+Using this call ensures that the device context is properly set up for
+use before drawing starts, and disposed of when drawing is
+finished. It's recommended you use this draw method rather than
+instantiating MemoryDC directly.
+
+
+h3(#Bitmap_getdepth). Bitmap#get_depth
+
+ Integer *get_depth*()
+
+Gets the colour depth of the bitmap. A value of 1 indicates a
+monochrome bitmap.
+
+h3(#Bitmap_getheight). Bitmap#get_height
+
+ Integer *get_height*()
+
+Gets the height of the bitmap in pixels.
+
+h3(#Bitmap_getpalette). Bitmap#get_palette
+
+ "Palette":palette.html *get_palette*()
+
+Gets the associated palette (if any) which may have been loaded from a file
+or set for the bitmap.
+
+h4. See also
+
+"Palette":palette.html
+
+h3(#Bitmap_getmask). Bitmap#get_mask
+
+ "Mask":mask.html *get_mask*()
+
+Gets the associated mask (if any) which may have been loaded from a file
+or set for the bitmap.
+
+h4. See also
+
+"Bitmap#set_mask":bitmap.html#Bitmap_setmask, "Mask":mask.html
+
+h3(#Bitmap_getwidth). Bitmap#get_width
+
+ Integer *get_width*()
+
+Gets the width of the bitmap in pixels.
+
+h4. See also
+
+"Bitmap#get_height":bitmap.html#Bitmap_getheight
+
+h3(#Bitmap_getsubbitmap). Bitmap#get_sub_bitmap
+
+ "Bitmap":bitmap.html *get_sub_bitmap*(%(arg-type)"Rect":rect.html% rect)
+
+Returns a sub bitmap of the current one as long as the rect belongs entirely to
+the bitmap. This function preserves bit depth and mask information.
+
+h3(#Bitmap_loadfile). Bitmap#load_file
+
+ Boolean *load_file*(%(arg-type)String% name,  %(arg-type)"BitmapType":bitmaptype.html% type)
+
+Loads a bitmap from a file or resource.
+
+h4. Parameters
+
+* _name_ Either a filename or a Windows resource name.
+The meaning of _name_ is determined by the _type_ parameter.
+* _type_ One of the following values:
+
+
+
+|*BITMAP_TYPE_BMP*|Load a Windows bitmap file.|
+|*BITMAP_TYPE_BMP_RESOURCE*|Load a Windows bitmap resource from the executable.|
+|*BITMAP_TYPE_PICT_RESOURCE*|Load a PICT image resource from the executable. Mac OS only.|
+|*BITMAP_TYPE_GIF*|Load a GIF bitmap file.|
+|*BITMAP_TYPE_XBM*|Load an X bitmap file.|
+|*BITMAP_TYPE_XPM*|Load an XPM bitmap file.|
+
+
+The validity of these flags depends on the platform and Widgets configuration.
+
+In addition, Bitmap can read all formats that "Image":image.html can
+(BITMAP_TYPE_JPEG, BITMAP_TYPE_PNG, BITMAP_TYPE_GIF, BITMAP_TYPE_PCX,
+BITMAP_TYPE_PNM).
+
+
+h4. Return value
+
+true if the operation succeeded, false otherwise.
+
+h4. Remarks
+
+A palette may be associated with the bitmap if one exists (especially for
+colour Windows bitmaps), and if the code supports it. You can check
+if one has been created by using the "get_palette":#Bitmap_getpalette member.
+
+h4. See also
+
+"Bitmap#save_file":bitmap.html#Bitmap_savefile
+
+h3(#Bitmap_isok). Bitmap#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if bitmap data is present.
+
+h3(#Bitmap_savefile). Bitmap#save_file
+
+ Boolean *save_file*(%(arg-type)String% name,  %(arg-type)"BitmapType":bitmaptype.html% type, 
+                   %(arg-type)"Palette":palette.html% palette = nil)
+
+Saves a bitmap in the named file.
+
+h4. Parameters
+
+* _name_ A filename. The meaning of _name_ is determined by the _type_ parameter.
+* _type_ One of the following values:
+
+
+
+|*BITMAP_TYPE_BMP*|Save a Windows bitmap file.|
+|*BITMAP_TYPE_GIF*|Save a GIF bitmap file.|
+|*BITMAP_TYPE_XBM*|Save an X bitmap file.|
+|*BITMAP_TYPE_XPM*|Save an XPM bitmap file.|
+
+
+The validity of these flags depends on the platform and Widgets configuration.
+
+In addition, Bitmap can save all formats that "Image":image.html can
+(BITMAP_TYPE_JPEG, BITMAP_TYPE_PNG).
+
+* _palette_ An optional palette used for saving the bitmap.
+
+h4. Return value
+
+true if the operation succeeded, false otherwise.
+
+h4. Remarks
+
+Depending on how Widgets has been configured, not all formats may be available.
+
+h4. See also
+
+"Bitmap#load_file":bitmap.html#Bitmap_loadfile
+
+h3(#Bitmap_setdepth). Bitmap#set_depth
+
+  *set_depth*(%(arg-type)Integer% depth)
+
+Sets the depth member (does not affect the bitmap data).
+
+h4. Parameters
+
+* _depth_ Bitmap depth.
+
+h3(#Bitmap_setheight). Bitmap#set_height
+
+  *set_height*(%(arg-type)Integer% height)
+
+Sets the height member (does not affect the bitmap data).
+
+h4. Parameters
+
+* _height_ Bitmap height in pixels.
+
+h3(#Bitmap_setmask). Bitmap#set_mask
+
+  *set_mask*(%(arg-type)"Mask":mask.html% mask)
+
+Sets the mask for this bitmap.
+
+h4. Remarks
+
+The bitmap object owns the mask once this has been called.
+
+h4. See also
+
+"Bitmap#get_mask":bitmap.html#Bitmap_getmask, "Mask":mask.html
+
+
+h3(#Bitmap_setpalette). Bitmap#set_palette
+
+  *set_palette*(%(arg-type)"Palette":palette.html% palette)
+
+Sets the associated palette. (Not implemented under GTK+).
+
+h4. Parameters
+
+* _palette_ The palette to set.
+
+h4. See also
+
+"Palette":palette.html
+
+h3(#Bitmap_setwidth). Bitmap#set_width
+
+  *set_width*(%(arg-type)Integer% width)
+
+Sets the width member (does not affect the bitmap data).
+
+h4. Parameters
+
+* _width_ Bitmap width in pixels.
+
+h3(#Bitmap_assign). Bitmap#=
+
+ "Bitmap& ":bitmap& .html *operator $=$*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Assignment operator. This operator does not copy any data, but instead
+passes a pointer to the data in _bitmap_ and increments a reference
+counter. It is a fast operation.
+
+h4. Parameters
+
+* _bitmap_ Bitmap to assign.
+
+h4. Return value
+
+Returns 'this' object.
+
+h3(#Bitmap_equal). Bitmap#==
+
+ Boolean *operator $==$*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Equality operator. This operator tests whether the internal data pointers are
+equal (a fast test).
+
+h4. Parameters
+
+* _bitmap_ Bitmap to compare with 'this'
+
+h4. Return value
+
+Returns true if the bitmaps were effectively equal, false otherwise.
+
+h3(#Bitmap_notequal). Bitmap#!=
+
+ Boolean *operator $!=$*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Inequality operator. This operator tests whether the internal data pointers are
+unequal (a fast test).
+
+h4. Parameters
+
+* _bitmap_ Bitmap to compare with 'this'
+
+h4. Return value
+
+Returns true if the bitmaps were unequal, false otherwise.
+

@@ -1,0 +1,266 @@
+h1(#wxpagesetupdialogdata). Wx::PageSetupDialogData
+
+This class holds a variety of information related to "PageSetupDialog":pagesetupdialog.html.
+
+It contains a "PrintData":printdata.html member which is used to hold basic printer configuration data (as opposed to the
+user-interface configuration settings stored by PageSetupDialogData).
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"PageSetupDialog":pagesetupdialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PageSetupDialogData.new":#PageSetupDialogData_new
+* "PageSetupDialogData#enable_help":#PageSetupDialogData_enablehelp
+* "PageSetupDialogData#enable_margins":#PageSetupDialogData_enablemargins
+* "PageSetupDialogData#enable_orientation":#PageSetupDialogData_enableorientation
+* "PageSetupDialogData#enable_paper":#PageSetupDialogData_enablepaper
+* "PageSetupDialogData#enable_printer":#PageSetupDialogData_enableprinter
+* "PageSetupDialogData#get_default_min_margins":#PageSetupDialogData_getdefaultminmargins
+* "PageSetupDialogData#get_enable_margins":#PageSetupDialogData_getenablemargins
+* "PageSetupDialogData#get_enable_orientation":#PageSetupDialogData_getenableorientation
+* "PageSetupDialogData#get_enable_paper":#PageSetupDialogData_getenablepaper
+* "PageSetupDialogData#get_enable_printer":#PageSetupDialogData_getenableprinter
+* "PageSetupDialogData#get_enable_help":#PageSetupDialogData_getenablehelp
+* "PageSetupDialogData#get_default_info":#PageSetupDialogData_getdefaultinfo
+* "PageSetupDialogData#get_margin_top_left":#PageSetupDialogData_getmargintopleft
+* "PageSetupDialogData#get_margin_bottom_right":#PageSetupDialogData_getmarginbottomright
+* "PageSetupDialogData#get_min_margin_top_left":#PageSetupDialogData_getminmargintopleft
+* "PageSetupDialogData#get_min_margin_bottom_right":#PageSetupDialogData_getminmarginbottomright
+* "PageSetupDialogData#get_paper_id":#PageSetupDialogData_getpaperid
+* "PageSetupDialogData#get_paper_size":#PageSetupDialogData_getpapersize
+* "PageSetupDialogData#get_print_data":#PageSetupDialogData_getprintdata
+* "PageSetupDialogData#ok":#PageSetupDialogData_ok
+* "PageSetupDialogData#set_default_info":#PageSetupDialogData_setdefaultinfo
+* "PageSetupDialogData#set_default_min_margins":#PageSetupDialogData_setdefaultminmargins
+* "PageSetupDialogData#set_margin_top_left":#PageSetupDialogData_setmargintopleft
+* "PageSetupDialogData#set_margin_bottom_right":#PageSetupDialogData_setmarginbottomright
+* "PageSetupDialogData#set_min_margin_top_left":#PageSetupDialogData_setminmargintopleft
+* "PageSetupDialogData#set_min_margin_bottom_right":#PageSetupDialogData_setminmarginbottomright
+* "PageSetupDialogData#set_paper_id":#PageSetupDialogData_setpaperid
+* "PageSetupDialogData#set_paper_size":#PageSetupDialogData_setpapersize
+* "PageSetupDialogData#set_print_data":#PageSetupDialogData_setprintdata
+
+</div>
+
+
+h3(#PageSetupDialogData_new). PageSetupDialogData.new
+
+  *PageSetupDialogData.new*(%(arg-type)"PageSetupDialogData":pagesetupdialogdata.html% data)
+
+Copy constructor.
+
+  *PageSetupDialogData.new*(%(arg-type)"PrintData":printdata.html% printData)
+
+Construct an object from a print data object.
+
+  *destructor*()
+
+Destructor.
+
+h3(#PageSetupDialogData_enablehelp). PageSetupDialogData#enable_help
+
+  *enable_help*(%(arg-type)Boolean% flag)
+
+Enables or disables the `Help' button (Windows only).
+
+h3(#PageSetupDialogData_enablemargins). PageSetupDialogData#enable_margins
+
+  *enable_margins*(%(arg-type)Boolean% flag)
+
+Enables or disables the margin controls (Windows only).
+
+h3(#PageSetupDialogData_enableorientation). PageSetupDialogData#enable_orientation
+
+  *enable_orientation*(%(arg-type)Boolean% flag)
+
+Enables or disables the orientation control (Windows only).
+
+h3(#PageSetupDialogData_enablepaper). PageSetupDialogData#enable_paper
+
+  *enable_paper*(%(arg-type)Boolean% flag)
+
+Enables or disables the paper size control (Windows only).
+
+h3(#PageSetupDialogData_enableprinter). PageSetupDialogData#enable_printer
+
+  *enable_printer*(%(arg-type)Boolean% flag)
+
+Enables or disables the *Printer* button, which invokes a printer setup dialog.
+
+h3(#PageSetupDialogData_getdefaultminmargins). PageSetupDialogData#get_default_min_margins
+
+ Boolean *get_default_min_margins*()
+
+Returns true if the page setup dialog will take its minimum margin values from the currently
+selected printer properties. Windows only.
+
+h3(#PageSetupDialogData_getenablemargins). PageSetupDialogData#get_enable_margins
+
+ Boolean *get_enable_margins*()
+
+Returns true if the margin controls are enabled (Windows only).
+
+h3(#PageSetupDialogData_getenableorientation). PageSetupDialogData#get_enable_orientation
+
+ Boolean *get_enable_orientation*()
+
+Returns true if the orientation control is enabled (Windows only).
+
+h3(#PageSetupDialogData_getenablepaper). PageSetupDialogData#get_enable_paper
+
+ Boolean *get_enable_paper*()
+
+Returns true if the paper size control is enabled (Windows only).
+
+h3(#PageSetupDialogData_getenableprinter). PageSetupDialogData#get_enable_printer
+
+ Boolean *get_enable_printer*()
+
+Returns true if the printer setup button is enabled.
+
+h3(#PageSetupDialogData_getenablehelp). PageSetupDialogData#get_enable_help
+
+ Boolean *get_enable_help*()
+
+Returns true if the printer setup button is enabled.
+
+h3(#PageSetupDialogData_getdefaultinfo). PageSetupDialogData#get_default_info
+
+ Boolean *get_default_info*()
+
+Returns true if the dialog will simply return default printer information (such as orientation)
+instead of showing a dialog. Windows only.
+
+h3(#PageSetupDialogData_getmargintopleft). PageSetupDialogData#get_margin_top_left
+
+ "Point":point.html *get_margin_top_left*()
+
+Returns the left (x) and top (y) margins in millimetres.
+
+h3(#PageSetupDialogData_getmarginbottomright). PageSetupDialogData#get_margin_bottom_right
+
+ "Point":point.html *get_margin_bottom_right*()
+
+Returns the right (x) and bottom (y) margins in millimetres.
+
+h3(#PageSetupDialogData_getminmargintopleft). PageSetupDialogData#get_min_margin_top_left
+
+ "Point":point.html *get_min_margin_top_left*()
+
+Returns the left (x) and top (y) minimum margins the user can enter (Windows only). Units
+are in millimetres
+
+h3(#PageSetupDialogData_getminmarginbottomright). PageSetupDialogData#get_min_margin_bottom_right
+
+ "Point":point.html *get_min_margin_bottom_right*()
+
+Returns the right (x) and bottom (y) minimum margins the user can enter (Windows only). Units
+are in millimetres
+
+h3(#PageSetupDialogData_getpaperid). PageSetupDialogData#get_paper_id
+
+ "PaperSize":papersize.html *get_paper_id*()
+
+Returns the paper id (stored in the internal PrintData object).
+
+For further information, see "PrintData#set_paper_id":printdata.html#PrintData_setpaperid.
+
+h3(#PageSetupDialogData_getpapersize). PageSetupDialogData#get_paper_size
+
+ "Size":size.html *get_paper_size*()
+
+Returns the paper size in millimetres.
+
+h3(#PageSetupDialogData_getprintdata). PageSetupDialogData#get_print_data
+
+ "PrintData":printdata.html *get_print_data*()
+
+Returns a reference to the "print data":printdata.html associated with this object.
+
+h3(#PageSetupDialogData_ok). PageSetupDialogData#ok
+
+ Boolean *ok*()
+
+Returns true if the print data associated with the dialog data is valid.
+This can return false on Windows if the current printer is not set, for example.
+On all other platforms, it returns true.
+
+h3(#PageSetupDialogData_setdefaultinfo). PageSetupDialogData#set_default_info
+
+  *set_default_info*(%(arg-type)Boolean% flag)
+
+Pass true if the dialog will simply return default printer information (such as orientation)
+instead of showing a dialog. Windows only.
+
+h3(#PageSetupDialogData_setdefaultminmargins). PageSetupDialogData#set_default_min_margins
+
+  *set_default_min_margins*(%(arg-type)Boolean% flag)
+
+Pass true if the page setup dialog will take its minimum margin values from the currently
+selected printer properties. Windows only. Units are in millimetres
+
+h3(#PageSetupDialogData_setmargintopleft). PageSetupDialogData#set_margin_top_left
+
+  *set_margin_top_left*(%(arg-type)"Point":point.html% pt)
+
+Sets the left (x) and top (y) margins in millimetres.
+
+h3(#PageSetupDialogData_setmarginbottomright). PageSetupDialogData#set_margin_bottom_right
+
+  *set_margin_bottom_right*(%(arg-type)"Point":point.html% pt)
+
+Sets the right (x) and bottom (y) margins in millimetres.
+
+h3(#PageSetupDialogData_setminmargintopleft). PageSetupDialogData#set_min_margin_top_left
+
+  *set_min_margin_top_left*(%(arg-type)"Point":point.html% pt)
+
+Sets the left (x) and top (y) minimum margins the user can enter (Windows only). Units are
+in millimetres.
+
+h3(#PageSetupDialogData_setminmarginbottomright). PageSetupDialogData#set_min_margin_bottom_right
+
+  *set_min_margin_bottom_right*(%(arg-type)"Point":point.html% pt)
+
+Sets the right (x) and bottom (y) minimum margins the user can enter (Windows only). Units are
+in millimetres.
+
+h3(#PageSetupDialogData_setpaperid). PageSetupDialogData#set_paper_id
+
+  *set_paper_id*(%(arg-type)"PaperSize":papersize.html% id)
+
+Sets the paper size id. For further information, see "PrintData#set_paper_id":printdata.html#PrintData_setpaperid.
+
+Calling this function overrides the explicit paper dimensions passed in "PageSetupDialogData#set_paper_size":pagesetupdialogdata.html#PageSetupDialogData_setpapersize.
+
+h3(#PageSetupDialogData_setpapersize). PageSetupDialogData#set_paper_size
+
+  *set_paper_size*(%(arg-type)"Size":size.html% size)
+
+Sets the paper size in millimetres. If a corresponding paper id is found, it will be set in the
+internal PrintData object, otherwise the paper size overrides the paper id.
+
+h3(#PageSetupDialogData_setprintdata). PageSetupDialogData#set_print_data
+
+  *set_print_data*(%(arg-type)"PrintData":printdata.html% printData)
+
+Sets the "print data":printdata.html associated with this object.
+
+h3(#PageSetupDialogData_assign). PageSetupDialogData#=
+
+  *operator $=$*(%(arg-type)"PrintData":printdata.html% data)
+
+Assigns print data to this object.
+
+  *operator $=$*(%(arg-type)"PageSetupDialogData":pagesetupdialogdata.html% data)
+
+Assigns page setup data to this object.
+

@@ -1,0 +1,129 @@
+h1(#wxgridcelleditor). Wx::GridCellEditor
+
+This class is responsible for providing and manipulating
+the in-place edit controls for the grid.  Instances of GridCellEditor
+(actually, instances of derived classes since it is an abstract class) can be
+associated with the cell attributes for individual cells, rows, columns, or
+even for the entire grid.
+
+h2. Derived from
+
+GridCellWorker
+
+h2. See also
+
+"GridCellTextEditor":gridcelltexteditor.html, "GridCellFloatEditor":gridcellfloateditor.html, "GridCellBoolEditor":gridcellbooleditor.html, "GridCellNumberEditor":gridcellnumbereditor.html, "GridCellChoiceEditor":gridcellchoiceeditor.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellEditor.new":#GridCellEditor_new
+* "GridCellEditor#is_created":#GridCellEditor_iscreated
+* "GridCellEditor#create":#GridCellEditor_create
+* "GridCellEditor#set_size":#GridCellEditor_setsize
+* "GridCellEditor#show":#GridCellEditor_show
+* "GridCellEditor#paint_background":#GridCellEditor_paintbackground
+* "GridCellEditor#begin_edit":#GridCellEditor_beginedit
+* "GridCellEditor#end_edit":#GridCellEditor_endedit
+* "GridCellEditor#reset":#GridCellEditor_reset
+* "GridCellEditor#starting_key":#GridCellEditor_startingkey
+* "GridCellEditor#starting_click":#GridCellEditor_startingclick
+* "GridCellEditor#handle_return":#GridCellEditor_handlereturn
+* "GridCellEditor#destroy":#GridCellEditor_destroy
+* "GridCellEditor#clone":#GridCellEditor_clone
+
+</div>
+
+
+h3(#GridCellEditor_wxgridcelleditor). GridCellEditor.new
+
+h3(#GridCellEditor_iscreated). GridCellEditor#is_created
+
+ Boolean *is_created*()
+
+h3(#GridCellEditor_create). GridCellEditor#create
+
+  *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)"EvtHandler":evthandler.html% evtHandler)
+
+Creates the actual edit control.
+
+h3(#GridCellEditor_setsize). GridCellEditor#set_size
+
+  *set_size*(%(arg-type)"Rect":rect.html% rect)
+
+Size and position the edit control.
+
+h3(#GridCellEditor_show). GridCellEditor#show
+
+  *show*(%(arg-type)Boolean% show,  %(arg-type)"GridCellAttr":gridcellattr.html% attr = nil)
+
+Show or hide the edit control, use the specified attributes to set
+colours/fonts for it.
+
+h3(#GridCellEditor_paintbackground). GridCellEditor#paint_background
+
+  *paint_background*(%(arg-type)"Rect":rect.html% rectCell,  %(arg-type)"GridCellAttr":gridcellattr.html% attr)
+
+Draws the part of the cell not occupied by the control: the base class
+version just fills it with background colour from the attribute.
+
+h3(#GridCellEditor_beginedit). GridCellEditor#begin_edit
+
+  *begin_edit*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)"Grid":grid.html% grid)
+
+Fetch the value from the table and prepare the edit control
+to begin editing. Set the focus to the edit control.
+
+h3(#GridCellEditor_endedit). GridCellEditor#end_edit
+
+ Boolean *end_edit*(%(arg-type)Integer% row,  %(arg-type)Integer% col,  %(arg-type)"Grid":grid.html% grid)
+
+Complete the editing of the current cell. Returns true if the value has
+changed. If necessary, the control may be destroyed.
+
+h3(#GridCellEditor_reset). GridCellEditor#reset
+
+  *reset*()
+
+Reset the value in the control back to its starting value.
+
+h3(#GridCellEditor_startingkey). GridCellEditor#starting_key
+
+  *starting_key*(%(arg-type)"KeyEvent":keyevent.html% event)
+
+If the editor is enabled by pressing keys on the grid,
+this will be called to let the editor do something about
+that first key if desired.
+
+h3(#GridCellEditor_startingclick). GridCellEditor#starting_click
+
+  *starting_click*()
+
+If the editor is enabled by clicking on the cell, this method will be
+called.
+
+h3(#GridCellEditor_handlereturn). GridCellEditor#handle_return
+
+  *handle_return*(%(arg-type)"KeyEvent":keyevent.html% event)
+
+Some types of controls on some platforms may need some help
+with the Return key.
+
+h3(#GridCellEditor_destroy). GridCellEditor#destroy
+
+  *destroy*()
+
+Final cleanup.
+
+h3(#GridCellEditor_clone). GridCellEditor#clone
+
+ "GridCellEditor":gridcelleditor.html *clone*()
+
+Create a new object which is the copy of this one.
+
+  *destructor*()
+
+The dtor is private because only DecRef() can delete us.
+
+

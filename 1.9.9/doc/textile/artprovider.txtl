@@ -1,0 +1,212 @@
+h1(#wxartprovider). Wx::ArtProvider
+
+The ArtProvider class is used to customize the look of wxRuby
+applications.  When wxRuby needs to display an icon or a bitmap (e.g. in
+the standard file dialog), it does not use a hard-coded resource but
+asks ArtProvider for it instead. This way users can plug in their own
+ArtProvider class and easily replace standard art with their own
+version. All that is needed is to derive a class from ArtProvider,
+override its "create_bitmap":#ArtProvider_createbitmap method and
+register the provider with
+"ArtProvider#push":artprovider.html#ArtProvider_push:
+
+  class MyProvider < Wx::ArtProvider
+  	def create_bitmap(art_id, art_client, art_size)
+      ..
+      return Wx::Bitmap.new(...)
+    end
+  end
+
+  Wx::ArtProvider.push(MyProvider.new)
+ 
+There's another way of taking advantage of this class: you can use it in
+your code and use platform native icons as provided by
+"ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap or
+"ArtProvider#get_icon":artprovider.html#ArtProvider_geticon.
+
+h3(#artprovideridentifying). Identifying art resources
+
+Every bitmap is known to ArtProvider under an unique ID that is used by when
+requesting a resource from it. The ID is represented by ArtID type and can
+have one of these predefined values (you can see bitmaps represented by these
+constants in the art provider section in the bigdemo sample):
+
+* ART_ADD_BOOKMARK     
+* ART_DEL_BOOKMARK     
+* ART_HELP_SIDE_PANEL  
+* ART_HELP_SETTINGS    
+* ART_HELP_BOOK        
+* ART_HELP_FOLDER      
+* ART_HELP_PAGE        
+* ART_GO_BACK          
+* ART_GO_FORWARD       
+* ART_GO_UP            
+* ART_GO_DOWN          
+* ART_GO_TO_PARENT     
+* ART_GO_HOME          
+* ART_FILE_OPEN        
+* ART_PRINT            
+* ART_HELP             
+* ART_TIP              
+* ART_REPORT_VIEW      
+* ART_LIST_VIEW        
+* ART_NEW_DIR          
+* ART_FOLDER           
+* ART_GO_DIR_UP        
+* ART_EXECUTABLE_FILE  
+* ART_NORMAL_FILE      
+* ART_TICK_MARK        
+* ART_CROSS_MARK       
+* ART_ERROR            
+* ART_QUESTION         
+* ART_WARNING          
+* ART_INFORMATION      
+* ART_MISSING_IMAGE      
+
+
+Additionally, any string recognized by custom art providers registered using
+"push_provider":#ArtProvider_pushprovider may be used.
+
+h4. GTK+ Note
+
+When running under GTK+ 2, GTK+ stock item IDs (e.g. @"gtk-cdrom"@) may
+be used as well. Additionally, if GTK was compiled against GTK+ >= 2.4, then
+it is also possible to load icons from current icon theme by specifying their
+name (without extension and directory components). Icon themes recognized
+by GTK+ follow the
+"freedesktop.org Icon Themes specification":http://freedesktop.org/Standards/icon-theme-spec. Note that themes are not guaranteed to contain all
+icons, so ArtProvider may return @Wx::NULL_BITMAP@ or @Wx::NULL_ICON@.
+Default theme is typically installed in @/usr/share/icons/hicolor@.
+
+h3(#artproviderclients). Clients
+
+Client is the entity that calls ArtProvider's GetBitmap or GetIcon
+function. It is represented by ClientID type and can have one of these 
+values:
+
+* ART_TOOLBAR
+* ART_MENU
+* ART_BUTTON
+* ART_FRAME_ICON
+* ART_CMN_DIALOG
+* ART_HELP_BROWSER
+* ART_MESSAGE_BOX
+* ART_OTHER (used for all requests that don't fit into any of the categories above)
+
+Client ID servers as a hint to ArtProvider that is supposed to help it to
+choose the best looking bitmap. For example it is often desirable to use
+slightly different icons in menus and toolbars even though they represent the
+same action (e.g. @_ART_FILE_OPEN@). Remember that this is really
+only a hint for ArtProvider -- it is common that
+"ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap 
+returns identical bitmap for different _client_ values!
+
+h4. Derived from
+
+"Object":object.html
+
+h2. Methods
+
+<div id="methods">
+
+* "ArtProvider.get_bitmap":#ArtProvider_getbitmap
+* "ArtProvider.get_icon":#ArtProvider_geticon
+* "ArtProvider.insert":#ArtProvider_insert
+* "ArtProvider.pop":#ArtProvider_pop
+* "ArtProvider.push":#ArtProvider_push
+* "ArtProvider.remove":#ArtProvider_remove
+
+* "ArtProvider#create_bitmap":#ArtProvider_createbitmap
+
+</div>
+
+h2. Instance Methods
+
+h3(#ArtProvider_createbitmap). ArtProvider#create_bitmap
+
+ "Bitmap":bitmap.html *create_bitmap*(%(arg-type)String% id,  
+                                      %(arg-type)String% client, 
+                                      %(arg-type)"Size":size.html% size)
+
+If you create your own custom Wx::ArtProvider subclasses, they must
+include an instance method @create_bitmap@. This method should accept
+three arguments, as above, identifying the name, use and size of the
+bitmap requested. The method should return a "Wx::Bitmap":bitmap.html
+appropriate to the request, or @nil@ if the requested bitmap cannot be
+supplied by the provider.
+
+Note that it is not necessary for your custom Ruby ArtProvider classes
+to perform any caching - wxRuby will cache repeated requests for the
+same bitmap.
+
+h4. Parameters
+
+* _id_ ArtID unique identifier of the bitmap.
+* _client_ ArtClient identifier of the client (i.e. who is asking for the bitmap).
+This only serves as a hint.
+* _size_ Preferred size of the bitmap. The function may return a bitmap of different dimensions, it will be automatically rescaled to meet client's request.
+
+h4. Note
+
+This is *not* part of ArtProvider's public API and should not normally
+be called directly in wxRuby code. Use
+"ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap or
+"ArtProvider#get_icon":artprovider.html#ArtProvider_geticon to query
+ArtProvider for a resource.
+
+h2. Class Methods
+
+h3(#ArtProvider_getbitmap). ArtProvider.get_bitmap
+
+ "Bitmap":bitmap.html *get_bitmap*(%(arg-type)String% id,  
+                                   %(arg-type)"Stringt":stringt.html% client = "ART_OTHER_C", 
+                                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
+
+Query registered providers for bitmap with given ID.
+
+h4. Parameters
+
+* _id_ ArtID unique identifier of the bitmap.
+* _client_ ArtClient identifier of the client (i.e. who is asking for the bitmap).
+* _size_ Size of the returned bitmap or @Wx::DEFAULT_SIZE@ if size doesn't matter.
+
+h4. Return value
+
+The bitmap if one of registered providers recognizes the ID or NullBitmap otherwise.
+
+h3(#ArtProvider_geticon). ArtProvider.get_icon
+
+ "Icon":icon.html *get_icon*(%(arg-type)String% id,  
+                             %(arg-type)"ArtClient":artclient.html% client = "ART_OTHER_C", 
+                             %(arg-type)"Size":size.html% size = DEFAULT_SIZE)
+
+Same as "ArtProvider#get_bitmap":artprovider.html#ArtProvider_getbitmap, but
+return a Icon object (or @Wx::NULL_ICON@ on failure).
+
+h3(#ArtProvider_push). ArtProvider.insert
+
+  *insert*(%(arg-type)"ArtProvider":artprovider.html% provider)
+
+Registers a new art provider and adds it to the bottom of the providers
+stack (i.e. it will be queried last).
+
+h3(#ArtProvider_push). ArtProvider.pop
+
+  *pop*()
+
+Removes the latest added provider.
+
+h3(#ArtProvider_push). ArtProvider.push
+
+  *push*(%(arg-type)"ArtProvider":artprovider.html% provider)
+
+Registers a new art provider and adds it to the top of providers stack
+(i.e. it will be queried first).
+
+h3(#ArtProvider_remove). ArtProvider.remove
+
+ Boolean *remove*(%(arg-type)"ArtProvider":artprovider.html% provider)
+
+Removes a provider from the stack. The provider must have been added
+previously.
+

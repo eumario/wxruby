@@ -1,0 +1,243 @@
+h1(#wxconnection). Wx::Connection
+
+A Connection object represents the connection between a client
+and a server. It is created by making a connection using a "Client":client.html object, or by the acceptance of a
+connection by a  "Server":server.html object. The
+bulk of a DDE-like (Dynamic Data Exchange) conversation is
+controlled by calling members in a *Connection* object or
+by overriding its members. The actual DDE-based implementation
+using DDEConnection is available on Windows only, but a
+platform-independent, socket-based version of this API is
+available using TCPConnection, which has the same API.
+
+An application should normally derive a new connection class from
+Connection, in order to override the communication event
+handlers to do something interesting.
+
+h2. Derived from
+
+ConnectionBase
+
+"Object":object.html
+
+h2. Types
+
+IPCFormatIPCFormat is defined as follows:
+
+
+ enum IPCFormat
+ {
+   IPC_INVALID =          0,
+   IPC_TEXT =             1,  /* CF_TEXT */
+   IPC_BITMAP =           2,  /* CF_BITMAP */
+   IPC_METAFILE =         3,  /* CF_METAFILEPICT */
+   IPC_SYLK =             4,
+   IPC_DIF =              5,
+   IPC_TIFF =             6,
+   IPC_OEMTEXT =          7,  /* CF_OEMTEXT */
+   IPC_DIB =              8,  /* CF_DIB */
+   IPC_PALETTE =          9,
+   IPC_PENDATA =          10,
+   IPC_RIFF =             11,
+   IPC_WAVE =             12,
+   IPC_UNICODETEXT =      13,
+   IPC_ENHMETAFILE =      14,
+   IPC_FILENAME =         15, /* CF_HDROP */
+   IPC_LOCALE =           16,
+   IPC_PRIVATE =          20
+ };
+ 
+
+h2. See also
+
+"Client":client.html, "Server":server.html,
+"Interprocess communications overview":ipcoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Connection.new":#Connection_new
+* "Connection#advise":#Connection_advise
+* "Connection#execute":#Connection_execute
+* "Connection#disconnect":#Connection_disconnect
+* "Connection#on_advise":#Connection_onadvise
+* "Connection#on_disconnect":#Connection_ondisconnect
+* "Connection#on_execute":#Connection_onexecute
+* "Connection#on_poke":#Connection_onpoke
+* "Connection#on_request":#Connection_onrequest
+* "Connection#on_start_advise":#Connection_onstartadvise
+* "Connection#on_stop_advise":#Connection_onstopadvise
+* "Connection#poke":#Connection_poke
+* "Connection#request":#Connection_request
+* "Connection#start_advise":#Connection_startadvise
+* "Connection#stop_advise":#Connection_stopadvise
+
+</div>
+
+
+h3(#Connection_new). Connection.new
+
+  *Connection.new*(%(arg-type)"char":char.html% buffer,  %(arg-type)Integer% size)
+
+Constructs a connection object. If no user-defined connection
+object is to be derived from Connection, then the constructor
+should not be called directly, since the default connection
+object will be provided on requesting (or accepting) a
+connection. However, if the user defines his or her own derived
+connection object, the "Server#on_accept_connection":server.html#Server_onacceptconnection and/or "Client#on_make_connection":client.html#Client_onmakeconnection 
+members should be replaced by functions which construct the new
+connection object.
+
+If the arguments of the Connection constructor are void then
+the Connection object manages its own connection buffer,
+allocating memory as needed. A programmer-supplied buffer cannot
+be increased if necessary, and the program will assert if it is
+not large enough. The programmer-supplied buffer is included
+mainly for backwards compatibility.
+
+h3(#Connection_advise). Connection#advise
+
+ Boolean *advise*(%(arg-type)String% item,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+                %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
+
+Called by the server application to advise the client of a change
+in the data associated with the given item. Causes the client
+connection's "Connection#on_advise":connection.html#Connection_onadvise member
+to be called. Returns true if successful.
+
+h3(#Connection_execute). Connection#execute
+
+ Boolean *execute*(%(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+                 %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
+
+Called by the client application to execute a command on the
+server. Can also be used to transfer arbitrary data to the server
+(similar to "Connection#poke":connection.html#Connection_poke in
+that respect). Causes the server connection's "Connection#on_execute":connection.html#Connection_onexecute 
+member to be called. Returns true if successful.
+
+h3(#Connection_disconnect). Connection#disconnect
+
+ Boolean *disconnect*()
+
+Called by the client or server application to disconnect from the
+other program; it causes the "Connection#on_disconnect":connection.html#Connection_ondisconnect 
+message to be sent to the corresponding connection object in the
+other program. Returns true if successful or already disconnected.
+The application that calls *Disconnect* must explicitly delete
+its side of the connection.
+
+h3(#Connection_onadvise). Connection#on_advise
+
+ Boolean *on_advise*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)"char":char.html% data, 
+                   %(arg-type)Integer% size, 
+                   %(arg-type)"IPCFormat":ipcformat.html% format)
+
+Message sent to the client application when the server notifies
+it of a change in the data associated with the given item, using
+"Advise":connectionadvise.html.
+
+h3(#Connection_ondisconnect). Connection#on_disconnect
+
+ Boolean *on_disconnect*()
+
+Message sent to the client or server application when the other
+application notifies it to end the connection. The default
+behaviour is to delete the connection object and return true, so
+applications should generally override *OnDisconnect*
+(finally calling the inherited method as well) so that they know
+the connection object is no longer available.
+
+h3(#Connection_onexecute). Connection#on_execute
+
+ Boolean *on_execute*(%(arg-type)String% topic,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size, 
+                    %(arg-type)"IPCFormat":ipcformat.html% format)
+
+Message sent to the server application when the client notifies
+it to execute the given data, using "Execute":connectionexecute.html.
+Note that there is no item associated with this message.
+
+h3(#Connection_onpoke). Connection#on_poke
+
+ Boolean *on_poke*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)"char":char.html% data, 
+                 %(arg-type)Integer% size, 
+                 %(arg-type)"IPCFormat":ipcformat.html% format)
+
+Message sent to the server application when the client notifies it to
+accept the given data.
+
+h3(#Connection_onrequest). Connection#on_request
+
+ char *on_request*(%(arg-type)String% topic,  %(arg-type)String% item,  %(arg-type)Integer% size, 
+                 %(arg-type)"IPCFormat":ipcformat.html% format)
+
+Message sent to the server application when the client calls 
+"Connection#request":connection.html#Connection_request. The
+server's "on_request":#Connection_onrequest method
+should respond by returning a character string, or NULL to
+indicate no data, and setting *size. The character string must of
+course persist after the call returns.
+
+h3(#Connection_onstartadvise). Connection#on_start_advise
+
+ Boolean *on_start_advise*(%(arg-type)String% topic,  %(arg-type)String% item)
+
+Message sent to the server application by the client, when the client
+wishes to start an `advise loop' for the given topic and item. The
+server can refuse to participate by returning false.
+
+h3(#Connection_onstopadvise). Connection#on_stop_advise
+
+ Boolean *on_stop_advise*(%(arg-type)String% topic,  %(arg-type)String% item)
+
+Message sent to the server application by the client, when the client
+wishes to stop an `advise loop' for the given topic and item. The
+server can refuse to stop the advise loop by returning false, although
+this doesn't have much meaning in practice.
+
+h3(#Connection_poke). Connection#poke
+
+ Boolean *poke*(%(arg-type)String% item,  %(arg-type)"char":char.html% data,  %(arg-type)Integer% size = -1, 
+              %(arg-type)"IPCFormat":ipcformat.html% format = CF_TEXT)
+
+Called by the client application to poke data into the server.
+Can be used to transfer arbitrary data to the server. Causes the
+server connection's "Connection#on_poke":connection.html#Connection_onpoke member to
+be called. If size is -1 the size is computed from the string
+length of data.
+
+Returns true if successful.
+
+h3(#Connection_request). Connection#request
+
+ char *request*(%(arg-type)String% item,  %(arg-type)Integer% size, 
+              %(arg-type)"IPCFormat":ipcformat.html% format = IPC_TEXT)
+
+Called by the client application to request data from the server.
+Causes the server connection's "Connection#on_request":connection.html#Connection_onrequest 
+member to be called. Size may be NULL or a pointer to a variable
+to receive the size of the requested item.
+
+Returns a character string (actually a pointer to the
+connection's buffer) if successful, NULL otherwise. This buffer
+does not need to be deleted.
+
+h3(#Connection_startadvise). Connection#start_advise
+
+ Boolean *start_advise*(%(arg-type)String% item)
+
+Called by the client application to ask if an advise loop can be
+started with the server. Causes the server connection's 
+"Connection#on_start_advise":connection.html#Connection_onstartadvise member to be called. Returns true if the server okays it, false
+otherwise.
+
+h3(#Connection_stopadvise). Connection#stop_advise
+
+ Boolean *stop_advise*(%(arg-type)String% item)
+
+Called by the client application to ask if an advise loop can be
+stopped. Causes the server connection's "Connection#on_stop_advise":connection.html#Connection_onstopadvise 
+member to be called. Returns true if the server okays it, false
+otherwise.
+

@@ -1,0 +1,195 @@
+h1(#wxencodingconverter). Wx::EncodingConverter
+
+This class is capable of converting strings between two
+8-bit encodings/charsets. It can also convert from/to Unicode (but only
+if you compiled Widgets with USE_WCHAR_T set to 1). Only a limited subset
+of encodings is supported by EncodingConverter:
+@FONTENCODING_ISO8859_1..15@, @FONTENCODING_CP1250..1257@ and 
+@FONTENCODING_KOI8@.
+
+h2. Note
+
+Please use "MBConv classes":mbconvclasses.html instead
+if possible. "CSConv":csconv.html has much better support for various
+encodings than EncodingConverter. EncodingConverter is useful only
+if you rely on @CONVERT_SUBSTITUTE@ mode of operation (see 
+"Init":encodingconverterinit.html).
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"FontMapper":fontmapper.html, 
+"MBConv":mbconv.html, 
+"Writing non-English applications":nonenglishoverview.html
+
+
+<div id="methods">
+
+h2. Methods
+
+* "EncodingConverter.new":#EncodingConverter_new
+* "EncodingConverter#init":#EncodingConverter_init
+* "EncodingConverter#can_convert":#EncodingConverter_canconvert
+* "EncodingConverter#convert":#EncodingConverter_convert
+* "EncodingConverter#get_platform_equivalents":#EncodingConverter_getplatformequivalents
+* "EncodingConverter#get_all_equivalents":#EncodingConverter_getallequivalents
+
+</div>
+
+
+
+h3(#EncodingConverter_wxencodingconverter). EncodingConverter.new
+
+h3(#EncodingConverter_init). EncodingConverter#init
+
+ Boolean *init*(%(arg-type)"FontEncoding":fontencoding.html% input_enc,  %(arg-type)"FontEncoding":fontencoding.html% output_enc, 
+              %(arg-type)Integer% method = CONVERT_STRICT)
+
+Initialize conversion. Both output or input encoding may
+be FONTENCODING_UNICODE, but only if USE_ENCODING is set to 1.
+All subsequent calls to "Convert()":encodingconverterconvert.html 
+will interpret its argument
+as a string in _input_enc_ encoding and will output string in 
+_output_enc_ encoding.
+You must call this method before calling Convert. You may call 
+it more than once in order to switch to another conversion.
+_Method_ affects behaviour of Convert() in case input character
+cannot be converted because it does not exist in output encoding:
+
+
+|*CONVERT_STRICT*|follow behaviour of GNU Recode -just copy unconvertible  characters to output and don't change them (its integer value will stay the same)|
+|*CONVERT_SUBSTITUTE*|try some (lossy) substitutions - e.g. replace unconvertible latin capitals with acute by ordinarycapitals, replace en-dash or em-dash by '-' etc.|
+
+
+Both modes guarantee that output string will have same length
+as input string.
+
+h4. Return value 
+
+false if given conversion is impossible, true otherwise
+(conversion may be impossible either if you try to convert
+to Unicode with non-Unicode build of Widgets or if input
+or output encoding is not supported.)
+
+
+h3(#EncodingConverter_canconvert). EncodingConverter#can_convert
+
+ Boolean *can_convert*(%(arg-type)"FontEncoding":fontencoding.html% encIn,  %(arg-type)"FontEncoding":fontencoding.html% encOut)
+
+Return true if (any text in) multibyte encoding encIn can be converted to
+another one (_encOut_) losslessly.
+
+Do not call this method with @FONTENCODING_UNICODE@ as either
+parameter, it doesn't make sense (always works in one sense and always depends
+on the text to convert in the other).
+
+
+h3(#EncodingConverter_convert). EncodingConverter#convert
+
+ Boolean *convert*(%(arg-type)"char":char.html% input,  %(arg-type)"char":char.html% output)
+
+ Boolean *convert*(%(arg-type)"wchar_t":wchar_t.html% input,  %(arg-type)"wchar_t":wchar_t.html% output)
+
+ Boolean *convert*(%(arg-type)"char":char.html% input,  %(arg-type)"wchar_t":wchar_t.html% output)
+
+ Boolean *convert*(%(arg-type)"wchar_t":wchar_t.html% input,  %(arg-type)"char":char.html% output)
+
+Convert input string according to settings passed to
+"Init":encodingconverterinit.html and writes the result to _output_.
+
+ Boolean *convert*(%(arg-type)"char":char.html% str)
+
+ Boolean *convert*(%(arg-type)"wchar_t":wchar_t.html% str)
+
+Convert input string according to settings passed to
+"Init":encodingconverterinit.html in-place, i.e. write the result to the
+same memory area.
+
+All of the versions above return  if the conversion was lossless and
+ if at least one of the characters couldn't be converted and was replaced
+with @'?'@ in the output. Note that if @CONVERT_SUBSTITUTE@ was
+passed to "Init":encodingconverterinit.html, substitution is considered
+lossless operation.
+
+ String *convert*(%(arg-type)String% input)
+
+Convert String and return new String object.
+
+h4. Notes
+
+You must call "Init":encodingconverterinit.html before using this method!
+
+@wchar_t@ versions of the method are not available if Widgets was compiled
+with @USE_WCHAR_T@ set to 0.
+
+
+h3(#EncodingConverter_getplatformequivalents). EncodingConverter#get_platform_equivalents
+
+ "FontEncodingArray":fontencodingarray.html *get_platform_equivalents*(%(arg-type)"FontEncoding":fontencoding.html% enc, 
+                                              %(arg-type)Integer% platform = PLATFORM_CURRENT)
+
+Return equivalents for given font that are used
+under given platform. Supported platforms:
+
+
+* PLATFORM_UNIX
+* PLATFORM_WINDOWS
+* PLATFORM_OS2
+* PLATFORM_MAC
+* PLATFORM_CURRENT
+
+
+PLATFORM_CURRENT means the platform this binary was compiled for.
+
+Examples:
+
+
+ current platform   enc          returned value
+ ----------------------------------------------
+ unix            CP1250             {ISO8859_2}
+ unix         ISO8859_2             {ISO8859_2}
+ windows      ISO8859_2                {CP1250}
+ unix            CP1252  {ISO8859_1,ISO8859_15}
+ 
+
+Equivalence is defined in terms of convertibility:
+two encodings are equivalent if you can convert text between
+then without losing information (it may - and will - happen
+that you lose special chars like quotation marks or em-dashes
+but you shouldn't lose any diacritics and language-specific
+characters when converting between equivalent encodings).
+
+Remember that this function does *NOT* check for presence of
+fonts in system. It only tells you what are most suitable
+encodings. (It usually returns only one encoding.)
+
+h4. Notes
+
+
+* Note that argument _enc_ itself may be present in the returned array,
+so that you can, as a side-effect, detect whether the
+encoding is native for this platform or not.
+* "Convert":encodingconverterconvert.html is not limited to 
+converting between equivalent encodings, it can convert between two arbitrary
+encodings.
+* If _enc_ is present in the returned array, then it is *always* the first
+item of it.
+* Please note that the returned array may contain no items at all.
+
+
+
+h3(#EncodingConverter_getallequivalents). EncodingConverter#get_all_equivalents
+
+ "FontEncodingArray":fontencodingarray.html *get_all_equivalents*(%(arg-type)"FontEncoding":fontencoding.html% enc)
+
+Similar to 
+"get_platform_equivalents":#EncodingConverter_getplatformequivalents, 
+but this one will return ALL 
+equivalent encodings, regardless of the platform, and including itself.
+
+This platform's encodings are before others in the array. And again, if _enc_ is in the array,
+it is the very first item in it.
+

@@ -1,0 +1,152 @@
+h1(#wxcaret). Wx::Caret
+
+A caret is a blinking cursor showing the position where the typed text will
+appear. The text controls usually have a caret but Caret class also allows
+to use a caret in other windows.
+
+Currently, the caret appears as a rectangle of the given size. In the future,
+it will be possible to specify a bitmap to be used for the caret shape.
+
+A caret is always associated with a window and the current caret can be
+retrieved using "Window#get_caret":window.html#Window_getcaret. The same caret
+can't be reused in two different windows.
+
+h2. Derived from
+
+No base class
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "Caret.new":#Caret_new
+* "Caret#create":#Caret_create
+* "Caret#get_blink_time":#Caret_getblinktime
+* "Caret#get_position":#Caret_getposition
+* "Caret#get_size":#Caret_getsize
+* "Caret#get_window":#Caret_getwindow
+* "Caret#hide":#Caret_hide
+* "Caret#is_ok":#Caret_isok
+* "Caret#is_visible":#Caret_isvisible
+* "Caret#move":#Caret_move
+* "Caret#set_blink_time":#Caret_setblinktime
+* "Caret#set_size":#Caret_setsize
+* "Caret#show":#Caret_show
+
+</div>
+
+
+h3(#Caret_wxcaret). Caret.new
+
+  *Caret.new*(%(arg-type)"Window":window.html% window,  %(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+  *Caret.new*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)"Size":size.html% size)
+
+Create the caret of given (in pixels) width and height and associates it
+with the given window.
+
+h3(#Caret_create). Caret#create
+
+ Boolean *create*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)Integer% width, 
+                %(arg-type)Integer% height)
+
+ Boolean *create*(%(arg-type)"WindowBase":windowbase.html% window,  %(arg-type)"Size":size.html% size)
+
+Create the caret of given (in pixels) width and height and associates it
+with the given window (same as constructor).
+
+h3(#Caret_getblinktime). Caret#get_blink_time
+
+ Integer *get_blink_time*()
+
+Returns the blink time which is measured in milliseconds and is the time elapsed
+between 2 inversions of the caret (blink time of the caret is the same
+for all carets, so this functions is static).
+
+h3(#Caret_getposition). Caret#get_position
+
+  *get_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+ "Point":point.html *get_position*()
+
+Get the caret position (in pixels).
+
+
+
+h3(#Caret_getsize). Caret#get_size
+
+  *get_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+ "Size":size.html *get_size*()
+
+Get the caret size.
+
+
+
+h3(#Caret_getwindow). Caret#get_window
+
+ "Window":window.html *get_window*()
+
+Get the window the caret is associated with.
+
+h3(#Caret_hide). Caret#hide
+
+  *hide*()
+
+Same as "Caret::Show(false)":caretshow.html.
+
+h3(#Caret_isok). Caret#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if the caret was created successfully.
+
+h3(#Caret_isvisible). Caret#is_visible
+
+ Boolean *is_visible*()
+
+Returns true if the caret is visible and false if it is permanently
+hidden (if it is is blinking and not shown currently but will be after the
+next blink, this method still returns true).
+
+h3(#Caret_move). Caret#move
+
+  *move*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+  *move*(%(arg-type)"Point":point.html% pt)
+
+Move the caret to given position (in logical coordinates).
+
+h3(#Caret_setblinktime). Caret#set_blink_time
+
+  *set_blink_time*(%(arg-type)Integer% milliseconds)
+
+Sets the blink time for all the carets.
+
+h4. Remarks
+
+Under Windows, this function will change the blink time for *all* carets
+permanently (until the next time it is called), even for the carets in other
+applications.
+
+h4. See also
+
+"get_blink_time":#Caret_getblinktime
+
+h3(#Caret_setsize). Caret#set_size
+
+  *set_size*(%(arg-type)Integer% width,  %(arg-type)Integer% height)
+
+  *set_size*(%(arg-type)"Size":size.html% size)
+
+Changes the size of the caret.
+
+h3(#Caret_show). Caret#show
+
+  *show*(%(arg-type)Boolean% show = true)
+
+Shows or hides the caret. Notice that if the caret was hidden $N$ times, it
+must be shown $N$ times as well to reappear on the screen.
+

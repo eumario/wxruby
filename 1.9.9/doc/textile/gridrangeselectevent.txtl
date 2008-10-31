@@ -1,0 +1,123 @@
+h1(#wxgridrangeselectevent). Wx::GridRangeSelectEvent
+
+h2. Derived from
+
+"NotifyEvent":notifyevent.html
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event handling
+
+The event handler for the following functions takes a 
+ "GridRangeSelectEvent":gridrangeselectevent.html parameter.
+The ..._CMD_... variants also take a window identifier.
+
+
+
+|*evt_grid_range_select()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user selected a group of contiguous cells. Processes a EVT_GRID_RANGE_SELECT.|
+|*evt_grid_cmd_range_select()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The user selected a group of contiguous cells; variant taking a window identifier. Processes a EVT_GRID_RANGE_SELECT.|
+
+<div id="methods">
+
+h2. Methods
+
+* "GridRangeSelectEvent.new":#GridRangeSelectEvent_new
+* "GridRangeSelectEvent#alt_down":#GridRangeSelectEvent_altdown
+* "GridRangeSelectEvent#control_down":#GridRangeSelectEvent_controldown
+* "GridRangeSelectEvent#get_bottom_right_coords":#GridRangeSelectEvent_getbottomrightcoords
+* "GridRangeSelectEvent#get_bottom_row":#GridRangeSelectEvent_getbottomrow
+* "GridRangeSelectEvent#get_left_col":#GridRangeSelectEvent_getleftcol
+* "GridRangeSelectEvent#get_right_col":#GridRangeSelectEvent_getrightcol
+* "GridRangeSelectEvent#get_top_left_coords":#GridRangeSelectEvent_gettopleftcoords
+* "GridRangeSelectEvent#get_top_row":#GridRangeSelectEvent_gettoprow
+* "GridRangeSelectEvent#meta_down":#GridRangeSelectEvent_metadown
+* "GridRangeSelectEvent#selecting":#GridRangeSelectEvent_selecting
+* "GridRangeSelectEvent#shift_down":#GridRangeSelectEvent_shiftdown
+
+</div>
+
+
+h3(#GridRangeSelectEvent_constr). GridRangeSelectEvent.new
+
+  *GridRangeSelectEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type, 
+                           %(arg-type)Object% obj, 
+                           %(arg-type)Array% topLeft, 
+                           %(arg-type)Array% bottomRight, 
+                           %(arg-type)Boolean% sel = true, 
+                           %(arg-type)Boolean% control = false, 
+                           %(arg-type)Boolean% shift = false, 
+                           %(arg-type)Boolean% alt = false, 
+                           %(arg-type)Boolean% meta = false)
+
+h3(#GridRangeSelectEvent_altdown). GridRangeSelectEvent#alt_down
+
+ Boolean *alt_down*()
+
+Returns true if the Alt key was down at the time of the event.
+
+h3(#GridRangeSelectEvent_controldown). GridRangeSelectEvent#control_down
+
+ Boolean *control_down*()
+
+Returns true if the Control key was down at the time of the event.
+
+h3(#GridRangeSelectEvent_getbottomrightcoords). GridRangeSelectEvent#get_bottom_right_coords
+
+ Array *get_bottom_right_coords*()
+
+Top left corner of the rectangular area that was (de)selected, returned
+as an row, column pair.
+
+h3(#GridRangeSelectEvent_getbottomrow). GridRangeSelectEvent#get_bottom_row
+
+ Integer *get_bottom_row*()
+
+Bottom row of the rectangular area that was (de)selected.
+
+h3(#GridRangeSelectEvent_getleftcol). GridRangeSelectEvent#get_left_col
+
+ Integer *get_left_col*()
+
+Left column of the rectangular area that was (de)selected.
+
+h3(#GridRangeSelectEvent_getrightcol). GridRangeSelectEvent#get_right_col
+
+ Integer *get_right_col*()
+
+Right column of the rectangular area that was (de)selected.
+
+h3(#GridRangeSelectEvent_gettopleftcoords). GridRangeSelectEvent#get_top_left_coords
+
+ Array *get_top_left_coords*()
+
+Top left corner of the rectangular area that was (de)selected, returned
+as a row, column pair.
+
+h3(#GridRangeSelectEvent_gettoprow). GridRangeSelectEvent#get_top_row
+
+ Integer *get_top_row*()
+
+Top row of the rectangular area that was (de)selected.
+
+h3(#GridRangeSelectEvent_metadown). GridRangeSelectEvent#meta_down
+
+ Boolean *meta_down*()
+
+Returns true if the Meta key was down at the time of the event.
+
+h3(#GridRangeSelectEvent_selecting). GridRangeSelectEvent#selecting
+
+ Boolean *selecting*()
+
+Returns true if the area was selected, false otherwise.
+
+h3(#GridRangeSelectEvent_shiftdown). GridRangeSelectEvent#shift_down
+
+ Boolean *shift_down*()
+
+Returns true if the Shift key was down at the time of the event.
+

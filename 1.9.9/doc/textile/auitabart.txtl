@@ -1,0 +1,130 @@
+h1(#wxauitabart). Wx::AuiTabArt
+
+Tab art class.
+
+h2. Derived from
+
+No base class
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "AuiTabArt.new":#AuiTabArt_new
+* "AuiTabArt#clone":#AuiTabArt_clone
+* "AuiTabArt#draw_background":#AuiTabArt_drawbackground
+* "AuiTabArt#draw_button":#AuiTabArt_drawbutton
+* "AuiTabArt#draw_tab":#AuiTabArt_drawtab
+* "AuiTabArt#get_best_tab_ctrl_size":#AuiTabArt_getbesttabctrlsize
+* "AuiTabArt#get_indent_size":#AuiTabArt_getindentsize
+* "AuiTabArt#get_tab_size":#AuiTabArt_gettabsize
+* "AuiTabArt#set_flags":#AuiTabArt_setflags
+* "AuiTabArt#set_measuring_font":#AuiTabArt_setmeasuringfont
+* "AuiTabArt#set_normal_font":#AuiTabArt_setnormalfont
+* "AuiTabArt#set_selected_font":#AuiTabArt_setselectedfont
+* "AuiTabArt#set_sizing_info":#AuiTabArt_setsizinginfo
+* "AuiTabArt#show_window_list":#AuiTabArt_showwindowlist
+
+</div>
+
+
+h3(#AuiTabArt_wxauitabart). AuiTabArt.new
+
+h3(#AuiTabArt_clone). AuiTabArt#clone
+
+ "AuiTabArt":auitabart.html *clone*()
+
+Clones the art object.
+
+h3(#AuiTabArt_drawbackground). AuiTabArt#draw_background
+
+  *draw_background*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% wnd,  %(arg-type)"Rect":rect.html% rect)
+
+Draws a background on the given area.
+
+h3(#AuiTabArt_drawbutton). AuiTabArt#draw_button
+
+  *draw_button*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% wnd,  %(arg-type)"Rect":rect.html% in_rect, 
+              %(arg-type)Integer% bitmap_id, 
+              %(arg-type)Integer% button_state, 
+              %(arg-type)Integer% orientation, 
+              %(arg-type)"Bitmap":bitmap.html% bitmap_override, 
+              %(arg-type)"Rect":rect.html% out_rect)
+
+Draws a button.
+
+h3(#AuiTabArt_drawtab). AuiTabArt#draw_tab
+
+  *draw_tab*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% wnd,  %(arg-type)"Rect":rect.html% in_rect, 
+           %(arg-type)String% caption, 
+           %(arg-type)"Bitmap":bitmap.html% bitmap, 
+           %(arg-type)Boolean% active, 
+           %(arg-type)Integer% close_button_state, 
+           %(arg-type)"Rect":rect.html% out_tab_rect, 
+           %(arg-type)"Rect":rect.html% out_button_rect, 
+           %(arg-type)Integer% x_extent)
+
+Draws a tab.
+
+h3(#AuiTabArt_getbesttabctrlsize). AuiTabArt#get_best_tab_ctrl_size
+
+ Integer *get_best_tab_ctrl_size*(%(arg-type)"Window":window.html% wnd,  %(arg-type)"AuiNotebookPageArray":auinotebookpagearray.html% pages)
+
+Returns the tab control size.
+
+h3(#AuiTabArt_getindentsize). AuiTabArt#get_indent_size
+
+ Integer *get_indent_size*()
+
+Returns the indent size.
+
+h3(#AuiTabArt_gettabsize). AuiTabArt#get_tab_size
+
+ "Size":size.html *get_tab_size*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Window":window.html% wnd, 
+                     %(arg-type)String% caption, 
+                     %(arg-type)"Bitmap":bitmap.html% bitmap, 
+                     %(arg-type)Boolean% active, 
+                     %(arg-type)Integer% close_button_state, 
+                     %(arg-type)Integer% x_extent)
+
+Returns the tab size for the given caption, bitmap and state.
+
+h3(#AuiTabArt_setflags). AuiTabArt#set_flags
+
+  *set_flags*(%(arg-type)unsigned int% flags)
+
+Sets flags.
+
+h3(#AuiTabArt_setmeasuringfont). AuiTabArt#set_measuring_font
+
+  *set_measuring_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font used for calculating measurements.
+
+h3(#AuiTabArt_setnormalfont). AuiTabArt#set_normal_font
+
+  *set_normal_font*(%(arg-type)"Font":font.html% font)
+
+Sets the normal font for drawing labels.
+
+h3(#AuiTabArt_setselectedfont). AuiTabArt#set_selected_font
+
+  *set_selected_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font for drawing text for selected UI elements.
+
+h3(#AuiTabArt_setsizinginfo). AuiTabArt#set_sizing_info
+
+  *set_sizing_info*(%(arg-type)"Size":size.html% tab_ctrl_size,  %(arg-type)Integer% tab_count)
+
+Sets sizing information.
+
+h3(#AuiTabArt_showwindowlist). AuiTabArt#show_window_list
+
+ Integer *show_window_list*(%(arg-type)"Window":window.html% wnd,  %(arg-type)"ArrayString":arraystring.html% items, 
+                          %(arg-type)Integer% active_idx)
+
+Pops up a menu to show the list of windows managed by Aui.
+

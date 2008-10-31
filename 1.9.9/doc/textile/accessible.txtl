@@ -1,0 +1,472 @@
+h1(#wxaccessible). Wx::Accessible
+
+The Accessible class allows Widgets applications, and
+Widgets itself, to return extended information about user interface elements
+to client applications such as screen readers. This is the
+main way in which Widgets implements accessibility features.
+
+At present, only Microsoft Active Accessibility is supported
+by this class.
+
+To use this class, derive from Accessible, implement appropriate
+functions, and associate an object of the class with a
+window using "Window#set_accessible":window.html#Window_setaccessible.
+
+All functions return an indication of success, failure, or not implemented
+using values of the AccStatus enum type.
+
+If you return ACC_NOT_IMPLEMENTED from any function, the system will try to
+implement the appropriate functionality. However this will not work with
+all functions.
+
+Most functions work with an _object id_, which can be zero to refer to
+'this' UI element, or greater than zero to refer to the nth child element.
+This allows you to specify elements that don't have a corresponding Window or
+Accessible; for example, the sash of a splitter window.
+
+For details on the semantics of functions and types, please refer to the
+Microsoft Active Accessibility 1.2 documentation.
+
+This class is compiled into Widgets only if the USE_ACCESSIBILITY setup
+symbol is set to 1.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Data structures
+
+Functions return a AccStatus error code, which
+may be one of the following:
+
+
+
+ typedef enum
+ {
+     ACC_FAIL,            // The function failed
+     ACC_FALSE,           // The function returned false
+     ACC_OK,              // The function completed successfully
+     ACC_NOT_IMPLEMENTED, // The function is not implemented
+     ACC_NOT_SUPPORTED    // The function is not supported
+ } AccStatus
+ 
+
+
+Directions of navigation are represented by
+the following:
+
+
+
+ typedef enum
+ {
+     NAVDIR_DOWN,
+     NAVDIR_FIRSTCHILD,
+     NAVDIR_LASTCHILD,
+     NAVDIR_LEFT,
+     NAVDIR_NEXT,
+     NAVDIR_PREVIOUS,
+     NAVDIR_RIGHT,
+     NAVDIR_UP
+ } NavDir
+ 
+
+
+The role of a user interface element is represented
+by the following type:
+
+
+
+ typedef enum {  
+     ROLE_NONE,
+     ROLE_SYSTEM_ALERT,
+     ROLE_SYSTEM_ANIMATION,
+     ROLE_SYSTEM_APPLICATION,
+     ROLE_SYSTEM_BORDER,
+     ROLE_SYSTEM_BUTTONDROPDOWN,
+     ROLE_SYSTEM_BUTTONDROPDOWNGRID,
+     ROLE_SYSTEM_BUTTONMENU,
+     ROLE_SYSTEM_CARET,
+     ROLE_SYSTEM_CELL,
+     ROLE_SYSTEM_CHARACTER,
+     ROLE_SYSTEM_CHART,
+     ROLE_SYSTEM_CHECKBUTTON,
+     ROLE_SYSTEM_CLIENT,
+     ROLE_SYSTEM_CLOCK,
+     ROLE_SYSTEM_COLUMN,
+     ROLE_SYSTEM_COLUMNHEADER,
+     ROLE_SYSTEM_COMBOBOX,
+     ROLE_SYSTEM_CURSOR,
+     ROLE_SYSTEM_DIAGRAM,
+     ROLE_SYSTEM_DIAL,
+     ROLE_SYSTEM_DIALOG,
+     ROLE_SYSTEM_DOCUMENT,
+     ROLE_SYSTEM_DROPLIST,
+     ROLE_SYSTEM_EQUATION,
+     ROLE_SYSTEM_GRAPHIC,
+     ROLE_SYSTEM_GRIP,
+     ROLE_SYSTEM_GROUPING,
+     ROLE_SYSTEM_HELPBALLOON,
+     ROLE_SYSTEM_HOTKEYFIELD,
+     ROLE_SYSTEM_INDICATOR,
+     ROLE_SYSTEM_LINK,
+     ROLE_SYSTEM_LIST,
+     ROLE_SYSTEM_LISTITEM,
+     ROLE_SYSTEM_MENUBAR,
+     ROLE_SYSTEM_MENUITEM,
+     ROLE_SYSTEM_MENUPOPUP,
+     ROLE_SYSTEM_OUTLINE,
+     ROLE_SYSTEM_OUTLINEITEM,
+     ROLE_SYSTEM_PAGETAB,
+     ROLE_SYSTEM_PAGETABLIST,
+     ROLE_SYSTEM_PANE,
+     ROLE_SYSTEM_PROGRESSBAR,
+     ROLE_SYSTEM_PROPERTYPAGE,
+     ROLE_SYSTEM_PUSHBUTTON,
+     ROLE_SYSTEM_RADIOBUTTON,
+     ROLE_SYSTEM_ROW,
+     ROLE_SYSTEM_ROWHEADER,
+     ROLE_SYSTEM_SCROLLBAR,
+     ROLE_SYSTEM_SEPARATOR,
+     ROLE_SYSTEM_SLIDER,
+     ROLE_SYSTEM_SOUND,
+     ROLE_SYSTEM_SPINBUTTON,
+     ROLE_SYSTEM_STATICTEXT,
+     ROLE_SYSTEM_STATUSBAR,
+     ROLE_SYSTEM_TABLE,
+     ROLE_SYSTEM_TEXT,
+     ROLE_SYSTEM_TITLEBAR,
+     ROLE_SYSTEM_TOOLBAR,
+     ROLE_SYSTEM_TOOLTIP,
+     ROLE_SYSTEM_WHITESPACE,
+     ROLE_SYSTEM_WINDOW
+ } AccRole
+ 
+
+
+Objects are represented by the following type:
+
+
+
+ typedef enum {
+     OBJID_WINDOW =    0x00000000,
+     OBJID_SYSMENU =   0xFFFFFFFF,
+     OBJID_TITLEBAR =  0xFFFFFFFE,
+     OBJID_MENU =      0xFFFFFFFD,
+     OBJID_CLIENT =    0xFFFFFFFC,
+     OBJID_VSCROLL =   0xFFFFFFFB,
+     OBJID_HSCROLL =   0xFFFFFFFA,
+     OBJID_SIZEGRIP =  0xFFFFFFF9,
+     OBJID_CARET =     0xFFFFFFF8,
+     OBJID_CURSOR =    0xFFFFFFF7,
+     OBJID_ALERT =     0xFFFFFFF6,
+     OBJID_SOUND =     0xFFFFFFF5
+ } AccObject
+ 
+
+
+Selection actions are identified by
+this type:
+
+
+
+ typedef enum
+ {
+     ACC_SEL_NONE            = 0,
+     ACC_SEL_TAKEFOCUS       = 1,
+     ACC_SEL_TAKESELECTION   = 2,
+     ACC_SEL_EXTENDSELECTION = 4,
+     ACC_SEL_ADDSELECTION    = 8,
+     ACC_SEL_REMOVESELECTION = 16
+ } AccSelectionFlags
+ 
+
+
+States are represented by the following:
+
+
+
+ #define ACC_STATE_SYSTEM_ALERT_HIGH       0x00000001
+ #define ACC_STATE_SYSTEM_ALERT_MEDIUM     0x00000002
+ #define ACC_STATE_SYSTEM_ALERT_LOW        0x00000004
+ #define ACC_STATE_SYSTEM_ANIMATED         0x00000008
+ #define ACC_STATE_SYSTEM_BUSY             0x00000010
+ #define ACC_STATE_SYSTEM_CHECKED          0x00000020
+ #define ACC_STATE_SYSTEM_COLLAPSED        0x00000040
+ #define ACC_STATE_SYSTEM_DEFAULT          0x00000080
+ #define ACC_STATE_SYSTEM_EXPANDED         0x00000100
+ #define ACC_STATE_SYSTEM_EXTSELECTABLE    0x00000200
+ #define ACC_STATE_SYSTEM_FLOATING         0x00000400
+ #define ACC_STATE_SYSTEM_FOCUSABLE        0x00000800
+ #define ACC_STATE_SYSTEM_FOCUSED          0x00001000
+ #define ACC_STATE_SYSTEM_HOTTRACKED       0x00002000
+ #define ACC_STATE_SYSTEM_INVISIBLE        0x00004000
+ #define ACC_STATE_SYSTEM_MARQUEED         0x00008000
+ #define ACC_STATE_SYSTEM_MIXED            0x00010000
+ #define ACC_STATE_SYSTEM_MULTISELECTABLE  0x00020000
+ #define ACC_STATE_SYSTEM_OFFSCREEN        0x00040000
+ #define ACC_STATE_SYSTEM_PRESSED          0x00080000
+ #define ACC_STATE_SYSTEM_PROTECTED        0x00100000
+ #define ACC_STATE_SYSTEM_READONLY         0x00200000
+ #define ACC_STATE_SYSTEM_SELECTABLE       0x00400000
+ #define ACC_STATE_SYSTEM_SELECTED         0x00800000
+ #define ACC_STATE_SYSTEM_SELFVOICING      0x01000000
+ #define ACC_STATE_SYSTEM_UNAVAILABLE      0x02000000
+ 
+
+
+Event identifiers that can be sent via "Accessible#notify_event":accessible.html#Accessible_notifyevent are
+as follows:
+
+
+
+ #define ACC_EVENT_SYSTEM_SOUND              0x0001
+ #define ACC_EVENT_SYSTEM_ALERT              0x0002
+ #define ACC_EVENT_SYSTEM_FOREGROUND         0x0003
+ #define ACC_EVENT_SYSTEM_MENUSTART          0x0004
+ #define ACC_EVENT_SYSTEM_MENUEND            0x0005
+ #define ACC_EVENT_SYSTEM_MENUPOPUPSTART     0x0006
+ #define ACC_EVENT_SYSTEM_MENUPOPUPEND       0x0007
+ #define ACC_EVENT_SYSTEM_CAPTURESTART       0x0008
+ #define ACC_EVENT_SYSTEM_CAPTUREEND         0x0009
+ #define ACC_EVENT_SYSTEM_MOVESIZESTART      0x000A
+ #define ACC_EVENT_SYSTEM_MOVESIZEEND        0x000B
+ #define ACC_EVENT_SYSTEM_CONTEXTHELPSTART   0x000C
+ #define ACC_EVENT_SYSTEM_CONTEXTHELPEND     0x000D
+ #define ACC_EVENT_SYSTEM_DRAGDROPSTART      0x000E
+ #define ACC_EVENT_SYSTEM_DRAGDROPEND        0x000F
+ #define ACC_EVENT_SYSTEM_DIALOGSTART        0x0010
+ #define ACC_EVENT_SYSTEM_DIALOGEND          0x0011
+ #define ACC_EVENT_SYSTEM_SCROLLINGSTART     0x0012
+ #define ACC_EVENT_SYSTEM_SCROLLINGEND       0x0013
+ #define ACC_EVENT_SYSTEM_SWITCHSTART        0x0014
+ #define ACC_EVENT_SYSTEM_SWITCHEND          0x0015
+ #define ACC_EVENT_SYSTEM_MINIMIZESTART      0x0016
+ #define ACC_EVENT_SYSTEM_MINIMIZEEND        0x0017
+ #define ACC_EVENT_OBJECT_CREATE                 0x8000
+ #define ACC_EVENT_OBJECT_DESTROY                0x8001
+ #define ACC_EVENT_OBJECT_SHOW                   0x8002
+ #define ACC_EVENT_OBJECT_HIDE                   0x8003
+ #define ACC_EVENT_OBJECT_REORDER                0x8004
+ #define ACC_EVENT_OBJECT_FOCUS                  0x8005
+ #define ACC_EVENT_OBJECT_SELECTION              0x8006
+ #define ACC_EVENT_OBJECT_SELECTIONADD           0x8007
+ #define ACC_EVENT_OBJECT_SELECTIONREMOVE        0x8008
+ #define ACC_EVENT_OBJECT_SELECTIONWITHIN        0x8009
+ #define ACC_EVENT_OBJECT_STATECHANGE            0x800A
+ #define ACC_EVENT_OBJECT_LOCATIONCHANGE         0x800B
+ #define ACC_EVENT_OBJECT_NAMECHANGE             0x800C
+ #define ACC_EVENT_OBJECT_DESCRIPTIONCHANGE      0x800D
+ #define ACC_EVENT_OBJECT_VALUECHANGE            0x800E
+ #define ACC_EVENT_OBJECT_PARENTCHANGE           0x800F
+ #define ACC_EVENT_OBJECT_HELPCHANGE             0x8010
+ #define ACC_EVENT_OBJECT_DEFACTIONCHANGE        0x8011
+ #define ACC_EVENT_OBJECT_ACCELERATORCHANGE      0x8012
+ 
+
+
+<div id="methods">
+
+h2. Methods
+
+* "Accessible.new":#Accessible_new
+* "Accessible#do_default_action":#Accessible_dodefaultaction
+* "Accessible#get_child":#Accessible_getchild
+* "Accessible#get_child_count":#Accessible_getchildcount
+* "Accessible#get_default_action":#Accessible_getdefaultaction
+* "Accessible#get_description":#Accessible_getdescription
+* "Accessible#get_focus":#Accessible_getfocus
+* "Accessible#get_help_text":#Accessible_gethelptext
+* "Accessible#get_keyboard_shortcut":#Accessible_getkeyboardshortcut
+* "Accessible#get_location":#Accessible_getlocation
+* "Accessible#get_name":#Accessible_getname
+* "Accessible#get_parent":#Accessible_getparent
+* "Accessible#get_role":#Accessible_getrole
+* "Accessible#get_selections":#Accessible_getselections
+* "Accessible#get_state":#Accessible_getstate
+* "Accessible#get_value":#Accessible_getvalue
+* "Accessible#get_window":#Accessible_getwindow
+* "Accessible#hit_test":#Accessible_hittest
+* "Accessible#navigate":#Accessible_navigate
+* "Accessible#notify_event":#Accessible_notifyevent
+* "Accessible#select":#Accessible_select
+* "Accessible#set_window":#Accessible_setwindow
+
+</div>
+
+
+h3(#Accessible_wxaccessible). Accessible.new
+
+  *Accessible.new*(%(arg-type)"Window":window.html% win = nil)
+
+Constructor, taking an optional window. The object can be associated with
+a window later.
+
+  *destructor*()
+
+Destructor.
+
+h3(#Accessible_dodefaultaction). Accessible#do_default_action
+
+ "AccStatus":accstatus.html *do_default_action*(%(arg-type)Integer% childId)
+
+Performs the default action for the object. _childId_ is 0 (the action for this object)
+or greater than 0 (the action for a child). Return ACC_NOT_SUPPORTED if there
+is no default action for this window (e.g. an edit control).
+
+h3(#Accessible_getchild). Accessible#get_child
+
+ "AccStatus":accstatus.html *get_child*(%(arg-type)Integer% childId,  %(arg-type)"Accessible":accessible.html% child)
+
+Gets the specified child (starting from 1). If _child_ is NULL and the return value is ACC_OK,
+this means that the child is a simple element and not an accessible object.
+
+h3(#Accessible_getchildcount). Accessible#get_child_count
+
+ "AccStatus":accstatus.html *get_child_count*(%(arg-type)Integer% childCount)
+
+Returns the number of children in _childCount_.
+
+h3(#Accessible_getdefaultaction). Accessible#get_default_action
+
+ "AccStatus":accstatus.html *get_default_action*(%(arg-type)Integer% childId, 
+                                %(arg-type)String% actionName)
+
+Gets the default action for this object (0) or a child (greater than 0).
+Return ACC_OK even if there is no action. _actionName_ is the action, or the empty
+string if there is no action. The retrieved string describes the action that is performed on an object,
+not what the object does as a result. For example, a toolbar button that prints
+a document has a default action of "Press" rather than "Prints the current document."
+
+h3(#Accessible_getdescription). Accessible#get_description
+
+ "AccStatus":accstatus.html *get_description*(%(arg-type)Integer% childId, 
+                             %(arg-type)String% description)
+
+Returns the description for this object or a child.
+
+h3(#Accessible_getfocus). Accessible#get_focus
+
+ "AccStatus":accstatus.html *get_focus*(%(arg-type)Integer% childId,  %(arg-type)"Accessible":accessible.html% child)
+
+Gets the window with the keyboard focus. If childId is 0 and child is NULL, no object in
+this subhierarchy has the focus. If this object has the focus, child should be 'this'.
+
+h3(#Accessible_gethelptext). Accessible#get_help_text
+
+ "AccStatus":accstatus.html *get_help_text*(%(arg-type)Integer% childId, 
+                           %(arg-type)String% helpText)
+
+Returns help text for this object or a child, similar to tooltip text.
+
+h3(#Accessible_getkeyboardshortcut). Accessible#get_keyboard_shortcut
+
+ "AccStatus":accstatus.html *get_keyboard_shortcut*(%(arg-type)Integer% childId, 
+                                   %(arg-type)String% shortcut)
+
+Returns the keyboard shortcut for this object or child.
+Return e.g. ALT+K.
+
+h3(#Accessible_getlocation). Accessible#get_location
+
+ "AccStatus":accstatus.html *get_location*(%(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% elementId)
+
+Returns the rectangle for this object (id is 0) or a child element (id is greater than 0).
+_rect_ is in screen coordinates.
+
+h3(#Accessible_getname). Accessible#get_name
+
+ "AccStatus":accstatus.html *get_name*(%(arg-type)Integer% childId,  %(arg-type)String% name)
+
+Gets the name of the specified object.
+
+h3(#Accessible_getparent). Accessible#get_parent
+
+ "AccStatus":accstatus.html *get_parent*(%(arg-type)"Accessible":accessible.html% parent)
+
+Returns the parent of this object, or NULL.
+
+h3(#Accessible_getrole). Accessible#get_role
+
+ "AccStatus":accstatus.html *get_role*(%(arg-type)Integer% childId,  %(arg-type)"AccRole":accrole.html% role)
+
+Returns a role constant describing this object. See "Accessible":accessible.html for a list
+of these roles.
+
+h3(#Accessible_getselections). Accessible#get_selections
+
+ "AccStatus":accstatus.html *get_selections*(%(arg-type)"Variant":variant.html% selections)
+
+Gets a variant representing the selected children
+of this object.
+
+Acceptable values are:
+
+
+*  a null variant (IsNull() returns TRUE)
+*  a list variant (GetType() == T("list"))
+*  an integer representing the selected child element,
+or 0 if this object is selected (GetType() == T("long"))
+* a "void*" pointer to a Accessible child object
+
+
+h3(#Accessible_getstate). Accessible#get_state
+
+ "AccStatus":accstatus.html *get_state*(%(arg-type)Integer% childId,  %(arg-type)Integer% state)
+
+Returns a state constant. See "Accessible":accessible.html for a list
+of these states.
+
+h3(#Accessible_getvalue). Accessible#get_value
+
+ "AccStatus":accstatus.html *get_value*(%(arg-type)Integer% childId,  %(arg-type)String% strValue)
+
+Returns a localized string representing the value for the object
+or child.
+
+h3(#Accessible_getwindow). Accessible#get_window
+
+ "Window":window.html *get_window*()
+
+Returns the window associated with this object.
+
+h3(#Accessible_hittest). Accessible#hit_test
+
+ "AccStatus":accstatus.html *hit_test*(%(arg-type)"Point":point.html% pt,  %(arg-type)Integer% childId, 
+                      %(arg-type)"Accessible":accessible.html% childObject)
+
+Returns a status value and object id to indicate whether the given point was on this or
+a child object. Can return either a child object, or an integer
+representing the child element, starting from 1.
+
+_pt_ is in screen coordinates.
+
+h3(#Accessible_navigate). Accessible#navigate
+
+ "AccStatus":accstatus.html *navigate*(%(arg-type)"NavDir":navdir.html% navDir,  %(arg-type)Integer% fromId, 
+                      %(arg-type)Integer% toId, 
+                      %(arg-type)"Accessible":accessible.html% toObject)
+
+Navigates from _fromId_ to _toId_/_toObject_.
+
+h3(#Accessible_notifyevent). Accessible#notify_event
+
+  *notify_event*(%(arg-type)Integer% eventType,  %(arg-type)"Window":window.html% window, 
+               %(arg-type)"AccObject":accobject.html% objectType, 
+               %(arg-type)Integer% objectType)
+
+Allows the application to send an event when something changes in an accessible object.
+
+h3(#Accessible_select). Accessible#select
+
+ "AccStatus":accstatus.html *select*(%(arg-type)Integer% childId, 
+                    %(arg-type)"AccSelectionFlags":accselectionflags.html% selectFlags)
+
+Selects the object or child. See "Accessible":accessible.html for a list
+of the selection actions.
+
+h3(#Accessible_setwindow). Accessible#set_window
+
+  *set_window*(%(arg-type)"Window":window.html% window)
+
+Sets the window associated with this object.
+

@@ -1,0 +1,45 @@
+h1(#wxdebugreportupload). Wx::DebugReportUpload
+
+This class is used to upload a compressed file using HTTP POST request. As this
+class derives from DebugReportCompress, before upload the report is
+compressed in a single .ZIP file.
+
+h2. Derived from
+
+"DebugReportCompress":debugreportcompress.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DebugReportUpload.new":#DebugReportUpload_new
+* "DebugReportUpload#on_server_reply":#DebugReportUpload_onserverreply
+
+</div>
+
+
+h3(#DebugReportUpload_wxdebugreportupload). DebugReportUpload.new
+
+  *DebugReportUpload.new*(%(arg-type)String% url,  %(arg-type)String% input, 
+                        %(arg-type)String% action, 
+                        %(arg-type)String% curl = _T("curl"))
+
+This class will upload the compressed file created by its base class to an HTML
+multipart/form-data form at the specified address. The url is the upload
+page address, input is the name of the @"type=file"@ control on
+the form used for the file name and action is the value of the form
+action field. The report is uploaded using @curl@ program which
+should be available, the curl parameter may be used to specify the full
+path to it.
+
+
+h3(#DebugReportUpload_onserverreply). DebugReportUpload#on_server_reply
+
+ Boolean *on_server_reply*(%(arg-type)"ArrayString":arraystring.html% WXUNUSED(reply))
+
+This function may be overridden in a derived class to show the output from
+curl: this may be an HTML page or anything else that the server returned.
+Value returned by this function becomes the return value of 
+"DebugReport::Process()":debugreportprocess.html.
+
+

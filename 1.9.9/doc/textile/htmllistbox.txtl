@@ -1,0 +1,123 @@
+h1(#wxhtmllistbox). Wx::HtmlListBox
+
+HtmlListBox is a subclass of "VListBox":vlistbox.html which shows HTML
+content in the listbox rows. It is an abstract class, and in order to
+use it, you must inherit from it in your own Ruby class. The only method
+that must be defined in your subclass is
+"on_get_item()":#HtmlListBox_ongetitem(). This method should return the
+snippet of HTML that should be displayed for the given
+item. Optionally, "on_get_item_markup":#HtmlListBox_ongetitemmarkup can
+also be redefined in your subclass.
+
+This control supports only the limited subset of HTML supported by
+"Wx::HtmlWindow":htmlwindow.html. In particular, CSS is not supported,
+although attributes of the <FONT> tag may be used to customise the
+appearance of text.
+
+h2. Derived from
+
+"VListBox":vlistbox.html
+
+"VScrolledWindow":vscrolledwindow.html
+
+"Panel":panel.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+
+
+h2. Event handling
+
+
+To process user interaction with an HtmlListBox, use these event handler
+methods to direct input to methods or blocks that take a
+"HtmlCellEvent":htmlcellevent.html argument or a
+"HtmlLinkEvent":htmllinkevent.html.
+
+|*evt_html_cell_clicked(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A "HtmlCell":htmlcell.html was clicked.|
+|*evt_html_cell_hover(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The mouse passed over a "HtmlCell":htmlcell.html.|
+|*evt_html_link_clicked(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A "HtmlCell":htmlcell.html which contains an hyperlink was clicked.|
+
+The class also responds to the selection and clicking event handlers
+offered by "Wx::ListBox":listbox.html.
+
+<div id="methods">
+
+h2. Methods
+
+* "HtmlListBox.new":#HtmlListBox_new
+* "HtmlListBox#get_file_system":#HtmlListBox_getfilesystem
+* "HtmlListBox#on_get_item":#HtmlListBox_ongetitem
+* "HtmlListBox#on_get_item_markup":#HtmlListBox_ongetitemmarkup
+* "HtmlListBox#on_link_clicked":#HtmlListBox_onlinkclicked
+
+</div>
+
+
+
+h3(#HtmlListBox_wxhtmllistbox). HtmlListBox.new
+
+  *HtmlListBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                  %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                  %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                  %(arg-type)Integer% style = 0, 
+                  %(arg-type)"String":string.html% name = "HtmlListBox")
+
+
+Standard constructor. There are no special styles defined for
+HtmlListBox; in particular the "ListBox":listbox.html styles (with the
+exception of @LB_MULTIPLE@) can not be used here.
+
+h3(#HtmlListBox_getfilesystem). HtmlListBox#get_file_system
+
+ "FileSystem":filesystem.html *get_file_system*()
+
+ "FileSystem":filesystem.html *get_file_system*()
+
+Returns the "FileSystem":filesystem.html used by the HTML parser of
+this object. The file system object is used to resolve the paths in HTML
+fragments displayed in the control and you should use
+"FileSystem#change_path_to":filesystem.html#FileSystem_changepathto if you use
+relative paths for the images or other resources embedded in your HTML.
+
+
+h3(#HtmlListBox_getselectedtextbgcolour). HtmlListBox#get_selected_text_bg_colour
+
+ "Colour":colour.html *get_selected_text_bg_colour*(%(arg-type)"Colour":colour.html% colBg)
+
+This virtual function may be overridden to change the appearance of the
+background of the selected cells in the same way as
+"get_selected_text_colour":#HtmlListBox_getselectedtextcolour.
+
+h3(#HtmlListBox_ongetitem). HtmlListBox#on_get_item
+
+ String *on_get_item*(%(arg-type)Integer% n)
+
+This method must be implemented in the derived class and should return
+the body (i.e. without @<html>@ or @<body>@ tags) of the HTML fragment
+for the given item.
+
+Note that this function should always return a text fragment for the n
+item which renders with the same height both when it is selected and
+when it's not: i.e. if you call, inside your OnGetItem() implementation,
+@IsSelected(n)@ to make the items appear differently when they are
+selected, then you should make sure that the returned HTML fragment will
+render with the same height or else you'll see some artifacts when the
+user selects an item.
+
+h3(#HtmlListBox_ongetitemmarkup). HtmlListBox#on_get_item_markup
+
+ String *on_get_item_markup*(%(arg-type)Integer% n)
+
+This method may be overridden to decorate HTML returned by
+"on_get_item()":#HtmlListBox_ongetitem().
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+h1(#wxradiobutton). Wx::RadioButton
+
+A radio button item is a button which usually denotes one of several mutually
+exclusive options. It has a text label next to a (usually) round button.
+
+You can create a group of mutually-exclusive radio buttons by specifying @RB_GROUP@ for
+the first in the group. The group ends when another radio button group is created, or there are no more radio buttons.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@RB_GROUP@|Marks the beginning of a new group of radio buttons.|
+|@RB_SINGLE@|In some circumstances, radio buttons that are notconsecutive siblings trigger a hang bug in Windows (only). If this happens, add this styleto mark the button as not belonging to a group, and implement the mutually-exclusive group behaviour yourself.|
+|@RB_USE_CHECKBOX@|Use a checkbox button instead of radiobutton (currently supported only on PalmOS).|
+
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+
+|*evt_radiobutton(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RADIOBUTTON_SELECTED event,when the radiobutton is clicked.|
+
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "RadioBox":radiobox.html, "CheckBox":checkbox.html
+
+<div id="methods">
+
+h2. Methods
+
+* "RadioButton.new":#RadioButton_new
+* "RadioButton#create":#RadioButton_create
+* "RadioButton#get_value":#RadioButton_getvalue
+* "RadioButton#set_value":#RadioButton_setvalue
+
+</div>
+
+
+h3(#RadioButton_new). RadioButton.new
+
+  *RadioButton.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                  %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                  %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                  %(arg-type)Integer% style = 0, 
+                  %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                  %(arg-type)String% name = "radioButton")
+
+Constructor, creating and showing a radio button.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _label_ Label for the radio button.
+* _pos_ Window position. If the position (-1, -1) is specified then a default position is chosen.
+* _size_ Window size. If the default size (-1, -1) is specified then a default size is chosen.
+* _style_ Window style. See "RadioButton":radiobutton.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"RadioButton#create":radiobutton.html#RadioButton_create, "Validator":validator.html
+
+  *destructor*()
+
+Destructor, destroying the radio button item.
+
+h3(#RadioButton_create). RadioButton#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "radioButton")
+
+Creates the choice for two-step construction. See "RadioButton.new":radiobutton.html#RadioButton_new for
+further details.
+
+h3(#RadioButton_getvalue). RadioButton#get_value
+
+ Boolean *get_value*()
+
+Returns true if the radio button is depressed, false otherwise.
+
+h3(#RadioButton_setvalue). RadioButton#set_value
+
+  *set_value*(%(arg-type)Boolean% value)
+
+Sets the radio button to selected or deselected status. This does not cause a
+EVT_COMMAND_RADIOBUTTON_SELECTED event to get emitted.
+
+h4. Parameters
+
+* _value_ true to select, false to deselect.
+
+

@@ -1,0 +1,59 @@
+h1(#wxtipwindow). Wx::TipWindow
+
+Shows simple text in a popup tip window on creation. This is used by 
+"SimpleHelpProvider":simplehelpprovider.html to show popup help. The
+window automatically destroys itself when the user clicks on it or it loses the
+focus. It can also be set to destroy itself automatically when the mouse
+moves outside of a defined bounding rectangle.
+
+You may also use this class to emulate the tooltips when you need finer
+control over them than provided by the standard tooltips.
+
+h2. Derived from
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TipWindow.new":#TipWindow_new
+* "TipWindow#set_bounding_rect":#TipWindow_setboundingrect
+
+</div>
+
+
+h3(#TipWindow_wxtipwindow). TipWindow.new
+
+  *TipWindow.new*(%(arg-type)"Window":window.html% parent,
+                    %(arg-type)String% text,  
+                    %(arg-type)Integer% maxLength = 100)
+
+Constructor. The tip is shown immediately the window is constructed.
+
+h4. Parameters
+
+* _parent_ The parent window, must be non @NULL@
+* _text_ The text to show, may contain the new line characters
+* _maxLength_ The length of line, in pixels; set very high to avoid wrapping
+
+h3(#TipWindow_setboundingrect). TipWindow#set_bounding_rect
+
+  *set_bounding_rect*(%(arg-type)"Rect":rect.html% rectBound)
+
+By default, the tip window disappears when the user clicks the mouse or presses
+a keyboard key or if it loses focus in any other way - for example because the
+user switched to another application window.
+
+Additionally, if a non empty _rectBound_ is provided, the tip window will
+also automatically close if the mouse leaves this area. This is useful to
+dismiss the tip mouse when the mouse leaves the object it is associated with.
+
+h4. Parameters
+
+* _rectBound_ The bounding rectangle for the mouse in the screen coordinates
+

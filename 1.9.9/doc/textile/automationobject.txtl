@@ -1,0 +1,210 @@
+h1(#wxautomationobject). Wx::AutomationObject
+
+The *AutomationObject* class represents an OLE automation object containing a single data member,
+an IDispatch pointer. It contains a number of functions that make it easy to perform
+automation operations, and set and get properties. The class makes heavy use of the "Variant":variant.html class.
+
+The usage of these classes is quite close to OLE automation usage in Visual Basic. The API is
+high-level, and the application can specify multiple properties in a single string. The following example
+gets the current Excel instance, and if it exists, makes the active cell bold.
+
+
+
+   AutomationObject excelObject;
+   if (excelObject.GetInstance("Excel.Application"))
+       excelObject.PutProperty("ActiveCell.Font.Bold", true);
+ 
+
+
+Note that this class obviously works under Windows only.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Variant":variant.html
+
+<div id="methods">
+
+h2. Methods
+
+* "AutomationObject.new":#AutomationObject_new
+* "AutomationObject#call_method":#AutomationObject_callmethod
+* "AutomationObject#create_instance":#AutomationObject_createinstance
+* "AutomationObject#get_dispatch_ptr":#AutomationObject_getdispatchptr
+* "AutomationObject#get_instance":#AutomationObject_getinstance
+* "AutomationObject#get_object":#AutomationObject_getobject
+* "AutomationObject#get_property":#AutomationObject_getproperty
+* "AutomationObject#invoke":#AutomationObject_invoke
+* "AutomationObject#put_property":#AutomationObject_putproperty
+* "AutomationObject#set_dispatch_ptr":#AutomationObject_setdispatchptr
+
+</div>
+
+
+h3(#AutomationObject_new). AutomationObject.new
+
+  *AutomationObject.new*(%(arg-type)"IDISPATCH":idispatch.html% dispatchPtr = nil)
+
+Constructor, taking an optional IDispatch pointer which will be released when the
+object is deleted.
+
+  *destructor*()
+
+Destructor. If the internal IDispatch pointer is non-null, it will be released.
+
+h3(#AutomationObject_callmethod). AutomationObject#call_method
+
+ "Variant":variant.html *call_method*(%(arg-type)String% method,  %(arg-type)Integer% noArgs, 
+                       %(arg-type)"Variant":variant.html% args[])
+
+ "Variant":variant.html *call_method*(%(arg-type)String% method,  %(arg-type)...% )
+
+Calls an automation method for this object. The first form takes a method name, number of
+arguments, and an array of variants. The second form takes a method name and zero to six
+constant references to variants. Since the variant class has constructors for the basic
+data types, and C++ provides temporary objects automatically, both of the following lines
+are syntactically valid:
+
+
+
+   Variant res = obj.CallMethod("Sum", Variant(1.2), Variant(3.4));
+   Variant res = obj.CallMethod("Sum", 1.2, 3.4);
+ 
+
+
+Note that _method_ can contain dot-separated property names, to save the application
+needing to call GetProperty several times using several temporary objects. For example:
+
+
+
+   object.CallMethod("ActiveCell.Font.ShowDialog", "My caption");
+ 
+
+
+h3(#AutomationObject_createinstance). AutomationObject#create_instance
+
+ Boolean *create_instance*(%(arg-type)String% classId)
+
+Creates a new object based on the class id, returning true if the object was successfully created,
+or false if not.
+
+h3(#AutomationObject_getdispatchptr). AutomationObject#get_dispatch_ptr
+
+ IDispatch *get_dispatch_ptr*()
+
+Gets the IDispatch pointer.
+
+h3(#AutomationObject_getinstance). AutomationObject#get_instance
+
+ Boolean *get_instance*(%(arg-type)String% classId)
+
+Retrieves the current object associated with a class id, and attaches the IDispatch pointer
+to this object. Returns true if a pointer was successfully retrieved, false otherwise.
+
+Note that this cannot cope with two instances of a given OLE object being active simultaneously,
+such as two copies of Excel running. Which object is referenced cannot currently be specified.
+
+h3(#AutomationObject_getobject). AutomationObject#get_object
+
+ Boolean *get_object*(%(arg-type)"AutomationObject":automationobject.html% obj %(arg-type)String% property, 
+                    %(arg-type)Integer% noArgs = 0, 
+                    %(arg-type)"Variant":variant.html% args[] = nil)
+
+Retrieves a property from this object, assumed to be a dispatch pointer, and initialises _obj_ with it.
+To avoid having to deal with IDispatch pointers directly, use this function in preference
+to "AutomationObject#get_property":automationobject.html#AutomationObject_getproperty when retrieving objects
+from other objects.
+
+Note that an IDispatch pointer is stored as a void* pointer in Variant objects.
+
+h4. See also
+
+"AutomationObject#get_property":automationobject.html#AutomationObject_getproperty
+
+h3(#AutomationObject_getproperty). AutomationObject#get_property
+
+ "Variant":variant.html *get_property*(%(arg-type)String% property,  %(arg-type)Integer% noArgs, 
+                        %(arg-type)"Variant":variant.html% args[])
+
+ "Variant":variant.html *get_property*(%(arg-type)String% property,  %(arg-type)...% )
+
+Gets a property value from this object. The first form takes a property name, number of
+arguments, and an array of variants. The second form takes a property name and zero to six
+constant references to variants. Since the variant class has constructors for the basic
+data types, and C++ provides temporary objects automatically, both of the following lines
+are syntactically valid:
+
+
+
+   Variant res = obj.GetProperty("Range", Variant("A1"));
+   Variant res = obj.GetProperty("Range", "A1");
+ 
+
+
+Note that _property_ can contain dot-separated property names, to save the application
+needing to call GetProperty several times using several temporary objects.
+
+h3(#AutomationObject_invoke). AutomationObject#invoke
+
+ Boolean *invoke*(%(arg-type)String% member,  %(arg-type)Integer% action, 
+                %(arg-type)"Variant":variant.html% retValue, 
+                %(arg-type)Integer% noArgs, 
+                %(arg-type)"Variant":variant.html% args[], 
+                %(arg-type)"Variant":variant.html% ptrArgs[] = 0)
+
+This function is a low-level implementation that allows access to the IDispatch Invoke function.
+It is not meant to be called directly by the application, but is used by other convenience functions.
+
+h4. Parameters
+
+* _member_ The member function or property name.
+* _action_ Bitlist: may contain DISPATCH_PROPERTYPUT, DISPATCH_PROPERTYPUTREF,
+DISPATCH_METHOD.
+* _retValue_ Return value (ignored if there is no return value).
+
+* _noArgs_ Number of arguments in _args_ or _ptrArgs_.
+* _args_ If non-null, contains an array of variants.
+* _ptrArgs_ If non-null, contains an array of constant pointers to variants.
+
+h4. Return value
+
+true if the operation was successful, false otherwise.
+
+h4. Remarks
+
+Two types of argument array are provided, so that when possible pointers are used for efficiency.
+
+h3(#AutomationObject_putproperty). AutomationObject#put_property
+
+ Boolean *put_property*(%(arg-type)String% property,  %(arg-type)Integer% noArgs, 
+                      %(arg-type)"Variant":variant.html% args[])
+
+ Boolean *put_property*(%(arg-type)String% property,  %(arg-type)...% )
+
+Puts a property value into this object. The first form takes a property name, number of
+arguments, and an array of variants. The second form takes a property name and zero to six
+constant references to variants. Since the variant class has constructors for the basic
+data types, and C++ provides temporary objects automatically, both of the following lines
+are syntactically valid:
+
+
+
+   obj.PutProperty("Value", Variant(23));
+   obj.PutProperty("Value", 23);
+ 
+
+
+Note that _property_ can contain dot-separated property names, to save the application
+needing to call GetProperty several times using several temporary objects.
+
+h3(#AutomationObject_setdispatchptr). AutomationObject#set_dispatch_ptr
+
+  *set_dispatch_ptr*(%(arg-type)"IDISPATCH":idispatch.html% dispatchPtr)
+
+Sets the IDispatch pointer. This function does not check if there is already an IDispatch pointer.
+
+You may need to cast from IDispatch* to WXIDISPATCH* when calling this function.
+

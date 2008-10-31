@@ -1,0 +1,1193 @@
+h1(#wxdc). Wx::DC
+
+A DC is a _device context_ onto which graphics and text can be drawn.
+It is intended to represent a number of output devices in a generic way,
+so a window can have a device context associated with it, and a printer
+also has a device context.  In this way, the same piece of code may
+write to a number of different devices, if the device context is used as
+a parameter.
+
+This DC class itself is not used directly; instead, a particular type of
+DC is used depending on the surface to be drawn upon. However, the
+common drawing methods are all documented here. Derived types of DC
+have documentation for specific features only, such as when to use them,
+and how to instantiate them.
+
+Please note that in addition to the versions of the methods documented here,
+there are also versions which accept single @Point@ parameter instead of
+two @Integer@ ones or @Point@ and @Size@ instead of four of
+them.
+
+h2. Support for Transparency / Alpha Channel / Anti-aliasing
+
+The standard Device Contexts such as "WindowDC":windowdc.html do not, on
+Windows and GTK, support anti-aliasing of lines and drawing and painting
+with semi-transparent colours. Colours with an alpha channel
+(transparency level) will be drawn solid. To get anti-aliased drawing
+and support for alpha channels, use "GCDC":gcdc.html. The same drawing
+methods can be used with that class. See also
+"GraphicsContext":graphicscontext.html and associated classes for
+advanced drawing. 
+
+In wxRuby on Mac OS X, drawing and painting with semi-transparent
+colours is supported by normal Device Contexts; however, GCDC can be
+used without harm so the same code can be used cross-platform if
+anti-aliased drawing is desired.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Overview":dcoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DC.new":#DC_new
+* "DC#blit":#DC_blit
+* "DC#cache_enabled":#DC_cacheenabled
+* "DC#calc_bounding_box":#DC_calcboundingbox
+* "DC#clear":#DC_clear
+* "DC#clear_cache":#DC_clearcache
+* "DC#compute_scale_and_origin":#DC_computescaleandorigin
+* "DC#cross_hair":#DC_crosshair
+* "DC#destroy_clipping_region":#DC_destroyclippingregion
+* "DC#device_to_logical_x":#DC_devicetologicalx
+* "DC#device_to_logical_xrel":#DC_devicetologicalxrel
+* "DC#device_to_logical_y":#DC_devicetologicaly
+* "DC#device_to_logical_yrel":#DC_devicetologicalyrel
+* "DC#draw_arc":#DC_drawarc
+* "DC#draw_bitmap":#DC_drawbitmap
+* "DC#draw_check_mark":#DC_drawcheckmark
+* "DC#draw_circle":#DC_drawcircle
+* "DC#draw_ellipse":#DC_drawellipse
+* "DC#draw_elliptic_arc":#DC_drawellipticarc
+* "DC#draw_icon":#DC_drawicon
+* "DC#draw_label":#DC_drawlabel
+* "DC#draw_line":#DC_drawline
+* "DC#draw_lines":#DC_drawlines
+* "DC#draw_polygon":#DC_drawpolygon
+* "DC#draw_poly_polygon":#DC_drawpolypolygon
+* "DC#draw_point":#DC_drawpoint
+* "DC#draw_rectangle":#DC_drawrectangle
+* "DC#draw_rotated_text":#DC_drawrotatedtext
+* "DC#draw_rounded_rectangle":#DC_drawroundedrectangle
+* "DC#draw_spline":#DC_drawspline
+* "DC#draw_text":#DC_drawtext
+* "DC#enable_cache":#DC_enablecache
+* "DC#end_doc":#DC_enddoc
+* "DC#end_page":#DC_endpage
+* "DC#flood_fill":#DC_floodfill
+* "DC#get_background":#DC_getbackground
+* "DC#get_background_mode":#DC_getbackgroundmode
+* "DC#get_brush":#DC_getbrush
+* "DC#get_char_height":#DC_getcharheight
+* "DC#get_char_width":#DC_getcharwidth
+* "DC#get_clipping_box":#DC_getclippingbox
+* "DC#get_font":#DC_getfont
+* "DC#get_layout_direction":#DC_getlayoutdirection
+* "DC#get_logical_function":#DC_getlogicalfunction
+* "DC#get_map_mode":#DC_getmapmode
+* "DC#get_multi_line_text_extent":#DC_getmultilinetextextent
+* "DC#get_partial_text_extents":#DC_getpartialtextextents
+* "DC#get_pen":#DC_getpen
+* "DC#get_pixel":#DC_getpixel
+* "DC#get_ppi":#DC_getppi
+* "DC#get_size":#DC_getsize
+* "DC#get_size_mm":#DC_getsizemm
+* "DC#get_text_background":#DC_gettextbackground
+* "DC#get_text_extent":#DC_gettextextent
+* "DC#get_text_foreground":#DC_gettextforeground
+* "DC#get_user_scale":#DC_getuserscale
+* "DC#gradient_fill_concentric":#DC_gradientfillconcentric
+* "DC#gradient_fill_linear":#DC_gradientfilllinear
+* "DC#logical_to_device_x":#DC_logicaltodevicex
+* "DC#logical_to_device_xrel":#DC_logicaltodevicexrel
+* "DC#logical_to_device_y":#DC_logicaltodevicey
+* "DC#logical_to_device_yrel":#DC_logicaltodeviceyrel
+* "DC#max_x":#DC_maxx
+* "DC#max_y":#DC_maxy
+* "DC#min_x":#DC_minx
+* "DC#min_y":#DC_miny
+* "DC#is_ok":#DC_isok
+* "DC#reset_bounding_box":#DC_resetboundingbox
+* "DC#set_axis_orientation":#DC_setaxisorientation
+* "DC#set_background":#DC_setbackground
+* "DC#set_background_mode":#DC_setbackgroundmode
+* "DC#set_brush":#DC_setbrush
+* "DC#set_clipping_region":#DC_setclippingregion
+* "DC#set_device_origin":#DC_setdeviceorigin
+* "DC#set_font":#DC_setfont
+* "DC#set_layout_direction":#DC_setlayoutdirection
+* "DC#set_logical_function":#DC_setlogicalfunction
+* "DC#set_map_mode":#DC_setmapmode
+* "DC#set_palette":#DC_setpalette
+* "DC#set_pen":#DC_setpen
+* "DC#set_text_background":#DC_settextbackground
+* "DC#set_text_foreground":#DC_settextforeground
+* "DC#set_user_scale":#DC_setuserscale
+* "DC#start_doc":#DC_startdoc
+* "DC#start_page":#DC_startpage
+
+</div>
+
+
+
+h3(#DC_new). DC.new
+
+h3(#DC_blit). DC#blit
+
+ Boolean *blit*(%(arg-type)Integer% xdest,  %(arg-type)Integer% ydest,  %(arg-type)Integer% width, 
+              %(arg-type)Integer% height, 
+               %(arg-type)"DC":dc.html% source, 
+              %(arg-type)Integer% xsrc, 
+              %(arg-type)Integer% ysrc, 
+              %(arg-type)Integer% logicalFunc = COPY, 
+               %(arg-type)Boolean% useMask = false, 
+              %(arg-type)Integer% xsrcMask = -1, 
+              %(arg-type)Integer% ysrcMask = -1)
+
+Copy from a source DC to this DC, specifying the destination
+coordinates, size of area to copy, source DC, source coordinates,
+logical function, whether to use a bitmap mask, and mask source position.
+
+h4. Parameters
+
+* _xdest_ Destination device context x position.
+* _ydest_ Destination device context y position.
+* _width_ Width of source area to be copied.
+* _height_ Height of source area to be copied.
+* _source_ Source device context.
+* _xsrc_ Source device context x position.
+* _ysrc_ Source device context y position.
+* _logicalFunc_ Logical function to use: see "DC#set_logical_function":dc.html#DC_setlogicalfunction.
+* _useMask_ If true, Blit does a transparent blit using the mask that is associated with the bitmap
+selected into the source device context. The Windows implementation does the following if MaskBlt cannot be used:
+
+
+ #Creates a temporary bitmap and copies the destination area into it.
+# Copies the source area into the temporary bitmap using the specified logical function.
+# Sets the masked area in the temporary bitmap to BLACK by ANDing the
+mask bitmap with the temp bitmap with the foreground colour set to WHITE
+and the bg colour set to BLACK.
+# Sets the unmasked area in the destination area to BLACK by ANDing the
+mask bitmap with the destination area with the foreground colour set to BLACK
+and the background colour set to WHITE.
+# ORs the temporary bitmap with the destination area.
+# Deletes the temporary bitmap.
+
+
+This sequence of operations ensures that the source's transparent area need not be black,
+and logical functions are supported.
+
+*Note:* on Windows, blitting with masks can be speeded up considerably by compiling
+Widgets with the USE_DC_CACHE option enabled. You can also influence whether MaskBlt
+or the explicit mask blitting code above is used, by using "SystemOptions":systemoptions.html and
+setting the *no-maskblt* option to 1.
+
+
+* _xsrcMask_ Source x position on the mask. If both xsrcMask and ysrcMask are -1, xsrc and ysrc
+will be assumed for the mask source position. Currently only implemented on Windows.
+* _ysrcMask_ Source y position on the mask. If both xsrcMask and ysrcMask are -1, xsrc and ysrc
+will be assumed for the mask source position. Currently only implemented on Windows.
+
+
+h4. Remarks
+
+There is partial support for Blit in PostScriptDC, under X.
+
+See "MemoryDC":memorydc.html for typical usage.
+
+h4. See also
+
+"MemoryDC":memorydc.html, "Bitmap":bitmap.html, "Mask":mask.html
+
+
+
+h3(#DC_cacheenabled). DC#cache_enabled
+
+ Boolean *cache_enabled*()
+
+On supported platforms (currently only Windows), returns true
+if the DC cache is enabled. The DC cache
+can speed up the "Blit":dcblit.html operation when
+drawing a large number of masked bitmaps.
+
+If using the cache functions in your code, please test for the
+USE_DC_CACHEING preprocessor symbol for portability.
+
+h4. See also
+
+"DC#enable_cache":dc.html#DC_enablecache, "DC#clear_cache":dc.html#DC_clearcache
+
+
+
+h3(#DC_calcboundingbox). DC#calc_bounding_box
+
+  *calc_bounding_box*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Adds the specified point to the bounding box which can be retrieved with 
+"MinX":dcminx.html, "MaxX":dcmaxx.html and 
+"MinY":dcminy.html, "MaxY":dcmaxy.html functions.
+
+h4. See also
+
+"reset_bounding_box":#DC_resetboundingbox
+
+
+h3(#DC_clear). DC#clear
+
+  *clear*()
+
+Clears the device context using the current background brush.
+
+
+
+h3(#DC_clearcache). DC#clear_cache
+
+  *clear_cache*()
+
+On supported platforms (currently only Windows), clears
+the contents of the DC cache (one bitmap and two Windows device contexts). The DC cache
+can speed up the "Blit":dcblit.html operation when
+drawing a large number of masked bitmaps. You should
+call ClearCache at the end of length DC operations if you wish to only use
+the cache transiently; you should also call it as your application exits.
+
+If using the cache functions in your code, please test for the
+USE_DC_CACHEING preprocessor symbol for portability.
+
+h4. See also
+
+"DC#enable_cache":dc.html#DC_enablecache, "DC#cache_enabled":dc.html#DC_cacheenabled
+
+
+
+h3(#DC_computescaleandorigin). DC#compute_scale_and_origin
+
+  *compute_scale_and_origin*()
+
+Performs all necessary computations for given platform and context type
+after each change of scale and origin parameters. Usually called automatically 
+internally after such changes.
+
+
+h3(#DC_crosshair). DC#cross_hair
+
+  *cross_hair*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Displays a cross hair using the current pen. This is a vertical
+and horizontal line the height and width of the window, centred
+on the given point.
+
+
+h3(#DC_destroyclippingregion). DC#destroy_clipping_region
+
+  *destroy_clipping_region*()
+
+Destroys the current clipping region so that none of the DC is clipped.
+See also "DC#set_clipping_region":dc.html#DC_setclippingregion.
+
+
+h3(#DC_devicetologicalx). DC#device_to_logical_x
+
+ Integer *device_to_logical_x*(%(arg-type)Integer% x)
+
+Convert device X coordinate to logical coordinate, using the current
+mapping mode.
+
+
+h3(#DC_devicetologicalxrel). DC#device_to_logical_xrel
+
+ Integer *device_to_logical_xrel*(%(arg-type)Integer% x)
+
+Convert device X coordinate to relative logical coordinate, using the current
+mapping mode but ignoring the x axis orientation.
+Use this function for converting a width, for example.
+
+
+h3(#DC_devicetologicaly). DC#device_to_logical_y
+
+ Integer *device_to_logical_y*(%(arg-type)Integer% y)
+
+Converts device Y coordinate to logical coordinate, using the current
+mapping mode.
+
+
+h3(#DC_devicetologicalyrel). DC#device_to_logical_yrel
+
+ Integer *device_to_logical_yrel*(%(arg-type)Integer% y)
+
+Convert device Y coordinate to relative logical coordinate, using the current
+mapping mode but ignoring the y axis orientation.
+Use this function for converting a height, for example.
+
+
+h3(#DC_drawarc). DC#draw_arc
+
+  *draw_arc*(%(arg-type)Integer% x1,  %(arg-type)Integer% y1,  
+              %(arg-type)Integer% x2,  %(arg-type)Integer% y2, 
+              %(arg-type)Integer% xc,  %(arg-type)Integer% yc)
+
+Draws an arc of a circle, centred on (_xc, yc_), with starting point (_x1, y1_)
+and ending at (_x2, y2_).   The current pen is used for the outline
+and the current brush for filling the shape.
+
+The arc is drawn in an anticlockwise direction from the start point to the end point.
+
+
+h3(#DC_drawbitmap). DC#draw_bitmap
+
+  *draw_bitmap*(%(arg-type)"Bitmap":bitmap.html% bitmap,  %(arg-type)Integer% x,  %(arg-type)Integer% y, 
+              %(arg-type)Boolean% transparent)
+
+Draw a bitmap on the device context at the specified point. If _transparent_ is true and the bitmap has
+a transparency mask, the bitmap will be drawn transparently.
+
+When drawing a mono-bitmap, the current text foreground colour will be used to draw the foreground
+of the bitmap (all bits set to 1), and the current text background colour to draw the background
+(all bits set to 0). See also "set_text_foreground":#DC_settextforeground, 
+"set_text_background":#DC_settextbackground and "MemoryDC":memorydc.html.
+
+
+h3(#DC_drawcheckmark). DC#draw_check_mark
+
+  *draw_check_mark*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                  %(arg-type)Integer% height)
+
+  *draw_check_mark*(%(arg-type)"Rect":rect.html% rect)
+
+Draws a check mark inside the given rectangle.
+
+
+h3(#DC_drawcircle). DC#draw_circle
+
+  *draw_circle*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% radius)
+
+  *draw_circle*(%(arg-type)"Point":point.html% pt,  %(arg-type)Integer% radius)
+
+Draws a circle with the given centre and radius.
+
+h4. See also
+
+"draw_ellipse":#DC_drawellipse
+
+
+h3(#DC_drawellipse). DC#draw_ellipse
+
+  *draw_ellipse*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+               %(arg-type)Integer% height)
+
+  *draw_ellipse*(%(arg-type)"Point":point.html% pt,  %(arg-type)"Size":size.html% size)
+
+  *draw_ellipse*(%(arg-type)"Rect":rect.html% rect)
+
+Draws an ellipse contained in the rectangle specified either with the given top
+left corner and the given size or directly. The current pen is used for the
+outline and the current brush for filling the shape.
+
+h4. See also
+
+"draw_circle":#DC_drawcircle
+
+
+h3(#DC_drawellipticarc). DC#draw_elliptic_arc
+
+  *draw_elliptic_arc*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                    %(arg-type)Integer% height, 
+                    %(arg-type)Float% start, 
+                    %(arg-type)Float% end)
+
+Draws an arc of an ellipse. The current pen is used for drawing the arc and
+the current brush is used for drawing the pie.
+
+_x_ and _y_ specify the x and y coordinates of the upper-left corner of the rectangle that contains
+the ellipse.
+
+_width_ and _height_ specify the width and height of the rectangle that contains
+the ellipse.
+
+_start_ and _end_ specify the start and end of the arc relative to the three-o'clock
+position from the center of the rectangle. Angles are specified
+in degrees (360 is a complete circle). Positive values mean
+counter-clockwise motion. If _start_ is equal to _end_, a
+complete ellipse will be drawn.
+
+
+h3(#DC_drawicon). DC#draw_icon
+
+  *draw_icon*(%(arg-type)"Icon":icon.html% icon,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Draw an icon on the display (does nothing if the device context is PostScript).
+This can be the simplest way of drawing bitmaps on a window.
+
+
+h3(#DC_drawlabel). DC#draw_label
+
+  *draw_label*(%(arg-type)String% text,                                %(arg-type)"Bitmap":bitmap.html% image, 
+                                           %(arg-type)"Rect":rect.html% rect, 
+                                           %(arg-type)Integer% alignment = ALIGN_LEFT | ALIGN_TOP, 
+                                           %(arg-type)Integer% indexAccel = -1, 
+                                           %(arg-type)"Rect":rect.html% rectBounding = nil)
+
+  *draw_label*(%(arg-type)String% text,  %(arg-type)"Rect":rect.html% rect, 
+                                   %(arg-type)Integer% alignment = ALIGN_LEFT | ALIGN_TOP, 
+                                   %(arg-type)Integer% indexAccel = -1)
+
+Draw optional bitmap and the text into the given rectangle and aligns it as specified
+by alignment parameter; it also will emphasize the character with the given index if
+it is != -1 and return the bounding rectangle if required.
+
+
+h3(#DC_drawline). DC#draw_line
+
+  *draw_line*(%(arg-type)Integer% x1,  %(arg-type)Integer% y1, 
+               %(arg-type)Integer% x2,  %(arg-type)Integer% y2)
+
+Draws a line from the first point to the second. The current pen is used
+for drawing the line. Note that the point (x2, y2) is not part of the
+line and is not drawn by this function (this is consistent with the
+behaviour of many other toolkits).
+
+h3(#DC_drawlines). DC#draw_lines
+
+  *draw_lines*(%(arg-type)"Array":array.html% points,  
+                %(arg-type)Integer% xoffset = 0, 
+                %(arg-type)Integer% yoffset = 0)
+
+
+Draws lines between each element in _points_, which should be an Array of
+co-ordinates. These may be passed as "Point":point.html objects, or
+using the shorter notation of two-element arrays representing _x_ and
+_y_. This example draws from (20, 25) to (50, 75) to (0, 100)
+
+ points = [ [20, 25], [50, 75], [0, 100] ]
+ dc.draw_lines(points)
+
+An optional offset may be supplied which will be added to each
+point. The current pen is used for drawing the lines.
+
+h3(#DC_drawpolygon). DC#draw_polygon
+
+  *draw_polygon*(%(arg-type)"Array":array.html% points,  
+                   %(arg-type)Integer% xoffset = 0, 
+                   %(arg-type)Integer% yoffset = 0, 
+                   %(arg-type)Integer% fill_style = Wx::ODDEVEN_RULE)
+
+Draws a filled polygon using _points_, which should be an Array of
+co-ordinates. These may be passed as "Point":point.html objects, or
+using the shorter notation of two-element arrays representing _x_ and
+_y_. See "draw_lines":#DC_drawlines for an example. wxRuby automatically
+closes the first and last points.
+
+An optional offset may be supplied which will be added to each point.
+
+The current pen is used for drawing the outline, and the current brush
+for filling the shape.  Using a transparent brush suppresses filling.
+The last argument specifies the fill rule: *Wx::ODDEVEN_RULE* (the
+default) or *Wx::WINDING_RULE*.
+
+h3(#DC_drawpolypolygon). DC#draw_poly_polygon
+
+  *draw_poly_polygon*(%(arg-type)"Array":array.html% points, 
+                        %(arg-type)Integer% xoffset = 0, 
+                        %(arg-type)Integer% yoffset = 0, 
+                        %(arg-type)Integer% fill_style = Wx::ODDEVEN_RULE)
+
+Draws two or more filled polygons using an set of polygons described in
+_points_, adding the optional offset coordinates. The main reason to use
+this method is for efficiency if drawing many polygons at one
+time. "draw_polygon":#DC_draw_polygon is simpler, but on some platforms,
+including Windows "draw_poly_polygon":#DC_drawpolypolygonis more
+efficient than using "draw_polygon":#DC_drawpolygon in a loop.
+
+The argument _points_ should be an array of arrays of co-ordinates. Each
+array should describe the points of a polygon, with each point specified
+using either a "Point":point.html object, or a two-element array
+containing _x_ and _y_ coordinates using integers. 
+
+The polygons maybe disjoint or overlapping. Each polygon specified in a
+call to "draw_poly_polygon":#DC_drawpolypolygon must be closed. Unlike
+polygons created by "draw_polygon":#DC_drawpolygon, the polygons created
+by this method are not closed automatically.
+
+The last argument specifies the fill rule: *Wx::ODDEVEN_RULE* (the
+default) or *Wx::WINDING_RULE*. The current pen is used for drawing the
+outline, and the current brush for filling the shape.  Using a
+transparent brush suppresses filling.
+
+This example draws two triangles, offsetting to the right by 20 pixels
+and to the top by 10 pixels.
+
+ polygon1 = [ [5, 5], [50, 50], [100, 50], [5, 5] ]
+ polygon2 = [ [100, 200], [250, 250], [100, 75], [100, 200]]
+ dc.draw_poly_polygon( [ polygon1, polygon2 ], 20, -10)
+
+h3(#DC_drawpoint). DC#draw_point
+
+  *draw_point*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Draws a point using the color of the current pen. Note that the other properties of the pen are not used, such as width etc..
+
+
+h3(#DC_drawrectangle). DC#draw_rectangle
+
+  *draw_rectangle*(%(arg-type)Integer% x, %(arg-type)Integer% y,  
+                     %(arg-type)Integer% width, %(arg-type)Integer% height)
+
+Draws a rectangle with the given top left corner, and with the given
+size.  The current pen is used for the outline and the current brush
+for filling the shape.
+
+h3(#DC_drawrotatedtext). DC#draw_rotated_text
+
+  *draw_rotated_text*(%(arg-type)String% text,  
+                        %(arg-type)Integer% x,  
+                        %(arg-type)Integer% y, 
+                        %(arg-type)Float% angle)
+
+Draws the text rotated by _angle_ degrees.
+
+*NB:* Under Win9x only TrueType fonts can be drawn by this function. In
+particular, a font different from @NORMAL_FONT@ should be used as the
+latter is not a TrueType font. @SWISS_FONT@ is an example of a font
+which is.
+
+h4. See also
+
+"draw_text":#DC_drawtext
+
+
+h3(#DC_drawroundedrectangle). DC#draw_rounded_rectangle
+
+  *draw_rounded_rectangle*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                         %(arg-type)Integer% height, 
+                         %(arg-type)Float% radius)
+
+Draws a rectangle with the given top left corner, and with the given
+size.  The corners are quarter-circles using the given radius. The
+current pen is used for the outline and the current brush for filling
+the shape.
+
+If _radius_ is positive, the value is assumed to be the
+radius of the rounded corner. If _radius_ is negative,
+the absolute value is assumed to be the _proportion_ of the smallest
+dimension of the rectangle. This means that the corner can be
+a sensible size relative to the size of the rectangle, and also avoids
+the strange effects X produces when the corners are too big for
+the rectangle.
+
+
+h3(#DC_drawspline). DC#draw_spline
+
+  *draw_spline*(%(arg-type)"Array":array.html% points)
+
+Draws a spline between all given control points, using the current
+pen. _points_ should be an Array of co-ordinates. These may be passed as
+"Point":point.html objects, or using the shorter notation of two-element
+arrays representing _x_ and _y_. See "draw_lines":#DC_drawlines for an
+example.
+
+
+  *draw_spline*(%(arg-type)Integer% x1, %(arg-type)Integer% y1,  
+                  %(arg-type)Integer% x2, %(arg-type)Integer% y2, 
+                  %(arg-type)Integer% x3, %(arg-type)Integer% y3)
+
+Draws a three-point spline using the current pen.
+
+
+
+
+
+
+h3(#DC_drawtext). DC#draw_text
+
+  *draw_text*(%(arg-type)String% text,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Draws a text string at the specified point, using the current text font,
+and the current text foreground and background colours.
+
+The coordinates refer to the top-left corner of the rectangle bounding
+the string. See "DC#get_text_extent":dc.html#DC_gettextextent for how
+to get the dimensions of a text string, which can be used to position the
+text more precisely.
+
+*NB:* under GTK the current 
+"logical function":dcgetlogicalfunction.html is used by this function
+but it is ignored by MSW. Thus, you should avoid using logical functions
+with this function in portable programs.
+
+
+
+h3(#DC_enablecache). DC#enable_cache
+
+  *enable_cache*(%(arg-type)Boolean% enableCache)
+
+On supported platforms (currently only Windows), enables the DC cache
+which can speed up the "Blit":dcblit.html operation when
+drawing a large number of masked bitmaps.
+
+If using the cache functions in your code, please test for the
+USE_DC_CACHEING preprocessor symbol for portability.
+
+h4. See also
+
+"DC#cache_enabled":dc.html#DC_cacheenabled, "DC#clear_cache":dc.html#DC_clearcache
+
+
+
+h3(#DC_enddoc). DC#end_doc
+
+  *end_doc*()
+
+Ends a document (only relevant when outputting to a printer).
+
+h3(#DC_endpage). DC#end_page
+
+  *end_page*()
+
+Ends a document page (only relevant when outputting to a printer).
+
+
+h3(#DC_floodfill). DC#flood_fill
+
+ Boolean *flood_fill*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)"Colour":colour.html% colour, 
+                    %(arg-type)Integer% style=FLOOD_SURFACE)
+
+Flood fills the device context starting from the given point, using
+the _current brush colour_, and using a style:
+
+
+* FLOOD_SURFACE: the flooding occurs until a colour other than the given colour is encountered.
+* FLOOD_BORDER: the area to be flooded is bounded by the given colour.
+
+
+Returns false if the operation failed.
+
+_Note:_ The present implementation for non-Windows platforms may fail to find
+colour borders if the pixels do not match the colour exactly. However the
+function will still return true.
+
+
+h3(#DC_getbackground). DC#get_background
+
+ "Brush":brush.html *get_background*()
+
+Gets the brush used for painting the background (see "DC#set_background":dc.html#DC_setbackground).
+
+
+h3(#DC_getbackgroundmode). DC#get_background_mode
+
+ Integer *get_background_mode*()
+
+Returns the current background mode: @SOLID@ or @TRANSPARENT@.
+
+h4. See also
+
+"set_background_mode":#DC_setbackgroundmode
+
+
+h3(#DC_getbrush). DC#get_brush
+
+ "Brush":brush.html *get_brush*()
+
+Gets the current brush (see "DC#set_brush":dc.html#DC_setbrush).
+
+
+h3(#DC_getcharheight). DC#get_char_height
+
+ Integer *get_char_height*()
+
+Gets the character height of the currently set font.
+
+
+h3(#DC_getcharwidth). DC#get_char_width
+
+ Integer *get_char_width*()
+
+Gets the average character width of the currently set font.
+
+
+h3(#DC_getclippingbox). DC#get_clipping_box
+
+  *get_clipping_box*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  
+                       %(arg-type)Integer% width, %(arg-type)Integer% height)
+
+Gets the rectangle surrounding the current clipping region.
+
+
+h3(#DC_getfont). DC#get_font
+
+ "Font":font.html *get_font*()
+
+Gets the current font (see "DC#set_font":dc.html#DC_setfont).
+
+h3(#DC_getlayoutdirection). DC#get_layout_direction
+
+ Integer *get_layout_direction*()
+
+Gets the current layout direction of the device context. On platforms
+where RTL layout is supported, the return value will either be
+@Layout_LeftToRight@ or @Layout_RightToLeft@. If RTL layout is not
+supported, the return value will be @Layout_Default@.
+
+h4. See also
+
+"set_layout_direction":#DC_setlayoutdirection
+
+h3(#DC_getlogicalfunction). DC#get_logical_function
+
+ Integer *get_logical_function*()
+
+Gets the current logical function (see "DC#set_logical_function":dc.html#DC_setlogicalfunction).
+
+
+h3(#DC_getmapmode). DC#get_map_mode
+
+ Integer *get_map_mode*()
+
+Gets the _mapping mode_ for the device context (see "DC#set_map_mode":dc.html#DC_setmapmode).
+
+
+h3(#DC_getpartialtextextents). DC#get_partial_text_extents
+
+ Boolean *get_partial_text_extents*(%(arg-type)String% text,  %(arg-type)"ArrayInt":arrayint.html% widths)
+
+Fills the _widths_ array with the widths from the beginning of 
+_text_ to the corresponding character of _text_.  The generic
+version simply builds a running total of the widths of each character
+using "get_text_extent":#DC_gettextextent, however if the
+various platforms have a native API function that is faster or more
+accurate than the generic implementation then it should be used
+instead. 
+
+
+
+
+h3(#DC_getpen). DC#get_pen
+
+ "Pen":pen.html *get_pen*()
+
+Gets the current pen (see "DC#set_pen":dc.html#DC_setpen).
+
+
+h3(#DC_getpixel). DC#get_pixel
+
+ Boolean *get_pixel*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)"Colour":colour.html% colour)
+
+Gets in _colour_ the colour at the specified location.
+Not available for PostScriptDC or MetafileDC.
+
+Note that setting a pixel can be done using "draw_point":#DC_drawpoint.
+h3(#DC_getppi). DC#get_ppi
+
+ "Size":size.html *get_ppi*()
+
+Returns the resolution of the device in pixels per inch.
+
+h3(#DC_getsize). DC#get_size
+
+ "Size":size.html *get_size*()
+
+This gets the horizontal and vertical resolution in device units. It can
+be used to scale graphics to fit the page.  
+   
+For example, if _max_x_ and _max_y_ represent the maximum horizontal and
+vertical `pixel' values used in your application, the following code
+will scale the graphic to fit on the printer page:
+
+
+   scale_x = max_x / dc.size.width
+   scale_y = max_y / dc.size.height
+   dc.set_user_scale( [scale_x, scale_y].min, [scale_x, scale_y].min)
+ 
+
+h3(#DC_getsizemm). DC#get_size_mm
+
+ "Size":size.html *get_size_mm*()
+
+Returns the horizontal and vertical resolution in millimetres.
+
+h3(#DC_gettextbackground). DC#get_text_background
+
+ "Colour":colour.html *get_text_background*()
+
+Gets the current text background colour (see
+"DC#set_text_background":dc.html#DC_settextbackground).
+
+
+h3(#DC_gettextextent). DC#get_text_extent
+
+  Integer w, Integer h, 
+  Integer descent,
+  Integer external_leading = *get_text_extent*(%(arg-type)String% string,  
+  		  				                         %(arg-type)"Font":font.html% font = nil)
+
+Gets the dimensions of the string using the currently selected font.
+_string_ is the text string to measure, and the optional parameter
+_font_ specifies an alternative to the currently selected font: but note
+that this does not yet work under Windows, so you need to set a font for
+the device context first.
+
+The method returns an array of values. _w_ and _h_ are the total width
+and height respectively, _descent_ is the dimension from the baseline of
+the font to the bottom of the descender, and _external_leading_ is any
+extra vertical space added to the font by the font designer. This is
+usually zero.
+
+See also "Font":font.html, "DC#set_font":dc.html#DC_setfont.
+
+h3(#DC_gettextforeground). DC#get_text_foreground
+
+ "Colour":colour.html *get_text_foreground*()
+
+Gets the current text foreground colour (see "DC#set_text_foreground":dc.html#DC_settextforeground).
+
+
+h3(#DC_getuserscale). DC#get_user_scale
+
+  *get_user_scale*(%(arg-type)Float% x,  %(arg-type)Float% y)
+
+Gets the current user scale factor (set by "set_user_scale":#DC_setuserscale).
+
+h3(#DC_gradientfillconcentric). DC#gradient_fill_concentric
+
+  *gradient_fill_concentric*(%(arg-type)"Rect":rect.html% rect, %(arg-type)"Colour":colour.html% initial_colour, 
+                                %(arg-type)"Colour":colour.html% dest_colour, %(arg-type)"Point":point.html% centre = nil )
+
+Fill the area specified by rect with a radial gradient, starting from
+_initial_colour_ at the centre of the circle and fading to _dest_colour_ on
+the circle outside.
+
+_centre_ is the relative coordinates of centre of the circle in the
+specified rect. If not specified, the circle is placed at the centre of
+rect.
+
+*Note*: Currently this function is very slow, don't use it for real-time drawing.
+
+h3(#DC_gradientfilllinear). DC#gradient_fill_linear
+
+  *gradient_fill_concentric*(%(arg-type)"Rect":rect.html% rect, %(arg-type)"Colour":colour.html% initial_colour, 
+                                %(arg-type)"Colour":colour.html% dest_colour, %(arg-type)"Direction":direction.html% dir = @Wx::EAST@ )
+
+Fill the area specified by rect with a linear gradient, starting from initialColour and eventually fading to destColour. The nDirection specifies the direction of the colour change, default is to use initialColour on the left part of the rectangle and destColour on the right one.
+
+h3(#DC_logicaltodevicex). DC#logical_to_device_x
+
+ "Integer":coord.html *logical_to_device_x*(%(arg-type)Integer% x)
+
+Converts logical X coordinate to device coordinate, using the current
+mapping mode.
+
+
+h3(#DC_logicaltodevicexrel). DC#logical_to_device_xrel
+
+ "Integer":coord.html *logical_to_device_xrel*(%(arg-type)Integer% x)
+
+Converts logical X coordinate to relative device coordinate, using the current
+mapping mode but ignoring the x axis orientation.
+Use this for converting a width, for example.
+
+
+h3(#DC_logicaltodevicey). DC#logical_to_device_y
+
+ "Integer":coord.html *logical_to_device_y*(%(arg-type)Integer% y)
+
+Converts logical Y coordinate to device coordinate, using the current
+mapping mode.
+
+
+h3(#DC_logicaltodeviceyrel). DC#logical_to_device_yrel
+
+ "Integer":coord.html *logical_to_device_yrel*(%(arg-type)Integer% y)
+
+Converts logical Y coordinate to relative device coordinate, using the current
+mapping mode but ignoring the y axis orientation.
+Use this for converting a height, for example.
+
+
+h3(#DC_maxx). DC#max_x
+
+ "Integer":coord.html *max_x*()
+
+Gets the maximum horizontal extent used in drawing commands so far.
+
+
+h3(#DC_maxy). DC#max_y
+
+ "Integer":coord.html *max_y*()
+
+Gets the maximum vertical extent used in drawing commands so far.
+
+
+h3(#DC_minx). DC#min_x
+
+ "Integer":coord.html *min_x*()
+
+Gets the minimum horizontal extent used in drawing commands so far.
+
+
+h3(#DC_miny). DC#min_y
+
+ "Integer":coord.html *min_y*()
+
+Gets the minimum vertical extent used in drawing commands so far.
+
+
+h3(#DC_isok). DC#is_ok
+
+ Boolean *is_ok*()
+
+Returns true if the DC is ok to use.
+
+
+h3(#DC_resetboundingbox). DC#reset_bounding_box
+
+  *reset_bounding_box*()
+
+Resets the bounding box: after a call to this function, the bounding box
+doesn't contain anything.
+
+h4. See also
+
+"calc_bounding_box":#DC_calcboundingbox
+
+
+h3(#DC_setaxisorientation). DC#set_axis_orientation
+
+  *set_axis_orientation*(%(arg-type)Boolean% xLeftRight, 
+                                                      %(arg-type)Boolean% yBottomUp)
+
+Sets the x and y axis orientation (i.e., the direction from lowest to
+highest values on the axis). The default orientation is 
+x axis from left to right and y axis from top down.
+
+h4. Parameters
+
+* _xLeftRight_ True to set the x axis orientation to the natural
+left to right orientation, false to invert it.
+* _yBottomUp_ True to set the y axis orientation to the natural
+bottom up orientation, false to invert it.
+
+
+h3(#DC_setbackground). DC#set_background
+
+  *set_background*(%(arg-type)"Brush":brush.html% brush)
+
+Sets the current background brush for the DC.
+
+
+h3(#DC_setbackgroundmode). DC#set_background_mode
+
+  *set_background_mode*(%(arg-type)Integer% mode)
+
+_mode_ may be one of SOLID and TRANSPARENT. This setting determines
+whether text will be drawn with a background colour or not.
+
+
+h3(#DC_setbrush). DC#set_brush
+
+  *set_brush*(%(arg-type)"Brush":brush.html% brush)
+
+Sets the current brush for the DC.
+
+If the argument is @Wx::NULL_BRUSH@, the current brush is selected out
+of the device context, and the original brush restored, allowing the
+current brush to be destroyed safely.
+
+See also "Brush":brush.html.
+
+See also "MemoryDC":memorydc.html for the interpretation of colours
+when drawing into a monochrome bitmap.
+
+ 
+h3(#DC_setclippingregion). DC#set_clipping_region
+
+  *set_clipping_region*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% width, 
+                      %(arg-type)Integer% height)
+
+  *set_clipping_region*(%(arg-type)"Point":point.html% pt,  %(arg-type)"Size":size.html% sz)
+
+  *set_clipping_region*(%(arg-type)"Rect":rect.html% rect)
+
+  *set_clipping_region*(%(arg-type)"Region":region.html% region)
+
+Sets the clipping region for this device context to the intersection of the
+given region described by the parameters of this method and the previously set
+clipping region. You should call 
+"destroy_clipping_region":#DC_destroyclippingregion if you want to set
+the clipping region exactly to the region specified.
+
+The clipping region is an area to which drawing is restricted. Possible uses
+for the clipping region are for clipping text or for speeding up window redraws
+when only a known area of the screen is damaged.
+
+h4. See also
+
+"DC#destroy_clipping_region":dc.html#DC_destroyclippingregion, "Region":region.html
+
+
+h3(#DC_setdeviceorigin). DC#set_device_origin
+
+  *set_device_origin*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Sets the device origin (i.e., the origin in pixels after scaling has been
+applied).
+
+This function may be useful in Windows printing
+operations for placing a graphic on a page.
+
+
+h3(#DC_setfont). DC#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the current font for the DC. It must be a valid font, in particular you
+should not pass @NullFont@ to this method.
+
+See also "Font":font.html.
+
+
+h3(#DC_setlayoutdirection). DC#set_layout_direction
+
+  *set_layout_direction*(%(arg-type)"LayoutDirection":layoutdirection.html% dir)
+
+Sets the current layout direction for the device context. _dir_ may be
+either @Wx::LAYOUT_DEFAULT@, @Wx::LAYOUT_LEFT_TO_RIGHT@ or
+@Wx::LAYOUT_RIGHT_TO_LEFT@.
+
+See also "get_layout_direction":#DC_getlayoutdirection
+
+h3(#DC_setlogicalfunction). DC#set_logical_function
+
+  *set_logical_function*(%(arg-type)Integer% function)
+
+Sets the current logical function for the device context.  This determines how
+a source pixel (from a pen or brush colour, or source device context if
+using "DC#blit":dc.html#DC_blit) combines with a destination pixel in the
+current device context.
+
+The possible values
+and their meaning in terms of source and destination pixel values are
+as follows:
+
+
+ AND                 src AND dst
+ AND_INVERT          (NOT src) AND dst
+ AND_REVERSE         src AND (NOT dst)
+ CLEAR               0
+ COPY                src
+ EQUIV               (NOT src) XOR dst
+ INVERT              NOT dst
+ NAND                (NOT src) OR (NOT dst)
+ NOR                 (NOT src) AND (NOT dst)
+ NO_OP               dst
+ OR                  src OR dst
+ OR_INVERT           (NOT src) OR dst
+ OR_REVERSE          src OR (NOT dst)
+ SET                 1
+ SRC_INVERT          NOT src
+ XOR                 src XOR dst
+ 
+
+The default is COPY, which simply draws with the current colour.
+The others combine the current colour and the background using a
+logical operation.  INVERT is commonly used for drawing rubber bands or
+moving outlines, since drawing twice reverts to the original colour.
+
+
+h3(#DC_setmapmode). DC#set_map_mode
+
+  *set_map_mode*(%(arg-type)Integer% int)
+
+The _mapping mode_ of the device context defines the unit of
+measurement used to convert logical units to device units. Note that
+in X, text drawing isn't handled consistently with the mapping mode; a
+font is always specified in point size. However, setting the 
+user scale (see "DC#set_user_scale":dc.html#DC_setuserscale) scales the text appropriately. In
+Windows, scalable TrueType fonts are always used; in X, results depend
+on availability of fonts, but usually a reasonable match is found.
+
+The coordinate origin is always at the top left of the screen/printer.
+
+Drawing to a Windows printer device context uses the current mapping mode,
+but mapping mode is currently ignored for PostScript output.
+
+The mapping mode can be one of the following:
+
+
+|MM_TWIPS|Each logical unit is 1/20 of a point, or 1/1440 of  an inch.|
+|MM_POINTS|Each logical unit is a point, or 1/72 of an inch.|
+|MM_METRIC|Each logical unit is 1 mm.|
+|MM_LOMETRIC|Each logical unit is 1/10 of a mm.|
+|MM_TEXT|Each logical unit is 1 pixel.|
+
+
+
+h3(#DC_setpalette). DC#set_palette
+
+  *set_palette*(%(arg-type)"Palette":palette.html% palette)
+
+If this is a window DC or memory DC, assigns the given palette to the window
+or bitmap associated with the DC. If the argument is NullPalette, the current
+palette is selected out of the device context, and the original palette
+restored.
+
+See "Palette":palette.html for further details. 
+
+
+h3(#DC_setpen). DC#set_pen
+
+  *set_pen*(%(arg-type)"Pen":pen.html% pen)
+
+Sets the current pen for the DC.
+
+If the argument is NullPen, the current pen is selected out of the device
+context, and the original pen restored.
+
+See also "MemoryDC":memorydc.html for the interpretation of colours
+when drawing into a monochrome bitmap.
+
+
+h3(#DC_settextbackground). DC#set_text_background
+
+  *set_text_background*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the current text background colour for the DC.
+
+
+h3(#DC_settextforeground). DC#set_text_foreground
+
+  *set_text_foreground*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the current text foreground colour for the DC.
+
+See also "MemoryDC":memorydc.html for the interpretation of colours
+when drawing into a monochrome bitmap.
+
+
+h3(#DC_setuserscale). DC#set_user_scale
+
+  *set_user_scale*(%(arg-type)Float% xScale,  %(arg-type)Float% yScale)
+
+Sets the user scaling factor, useful for applications which require
+`zooming'.
+
+
+h3(#DC_startdoc). DC#start_doc
+
+ Boolean *start_doc*(%(arg-type)String% message)
+
+Starts a document (only relevant when outputting to a printer).
+Message is a message to show while printing.
+
+
+h3(#DC_startpage). DC#start_page
+
+ Boolean *start_page*()
+
+Starts a document page (only relevant when outputting to a printer).
+

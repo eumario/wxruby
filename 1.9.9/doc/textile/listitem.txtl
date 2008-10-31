@@ -1,0 +1,236 @@
+h1(#wxlistitem). Wx::ListItem
+
+This class stores information about a ListCtrl item or column.
+
+h2. Derived from
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ListItem.new":#ListItem_new
+* "ListItem#clear":#ListItem_clear
+* "ListItem#get_align":#ListItem_getalign
+* "ListItem#get_background_colour":#ListItem_getbackgroundcolour
+* "ListItem#get_column":#ListItem_getcolumn
+* "ListItem#get_data":#ListItem_getdata
+* "ListItem#get_font":#ListItem_getfont
+* "ListItem#get_id":#ListItem_getid
+* "ListItem#get_image":#ListItem_getimage
+* "ListItem#get_mask":#ListItem_getmask
+* "ListItem#get_state":#ListItem_getstate
+* "ListItem#get_text":#ListItem_gettext
+* "ListItem#get_text_colour":#ListItem_gettextcolour
+* "ListItem#get_width":#ListItem_getwidth
+* "ListItem#set_align":#ListItem_setalign
+* "ListItem#set_background_colour":#ListItem_setbackgroundcolour
+* "ListItem#set_column":#ListItem_setcolumn
+* "ListItem#set_data":#ListItem_setdata
+* "ListItem#set_font":#ListItem_setfont
+* "ListItem#set_id":#ListItem_setid
+* "ListItem#set_image":#ListItem_setimage
+* "ListItem#set_mask":#ListItem_setmask
+* "ListItem#set_state":#ListItem_setstate
+* "ListItem#set_state_mask":#ListItem_setstatemask
+* "ListItem#set_text":#ListItem_settext
+* "ListItem#set_text_colour":#ListItem_settextcolour
+* "ListItem#set_width":#ListItem_setwidth
+
+</div>
+
+
+h3(#ListItem_wxlistitem). ListItem.new
+
+h3(#ListItem_clear). ListItem#clear
+
+  *clear*()
+
+Resets the item state to the default.
+
+h3(#ListItem_getalign). ListItem#get_align
+
+ "ListColumnFormat":listcolumnformat.html *get_align*()
+
+Returns the alignment for this item. Can be one of
+LIST_FORMAT_LEFT, LIST_FORMAT_RIGHT or LIST_FORMAT_CENTRE.
+
+h3(#ListItem_getbackgroundcolour). ListItem#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+Returns the background colour for this item.
+
+h3(#ListItem_getcolumn). ListItem#get_column
+
+ Integer *get_column*()
+
+Returns the zero-based column; meaningful only in report mode.
+
+h3(#ListItem_getdata). ListItem#get_data
+
+ Object *get_data*()
+
+Returns the ruby object set as client data for this item (see
+"set_data":#ListItem_setdata, or @nil@ if no such data is set. Please
+note that client data is associated with the item and not with subitems
+in columns.
+
+h3(#ListItem_getfont). ListItem#get_font
+
+ "Font":font.html *get_font*()
+
+Returns the font used to display the item.
+
+h3(#ListItem_getid). ListItem#get_id
+
+ Integer *get_id*()
+
+Returns the zero-based item position.
+
+h3(#ListItem_getimage). ListItem#get_image
+
+ Integer *get_image*()
+
+Returns the zero-based index of the image
+associated with the item into the image list.
+
+h3(#ListItem_getmask). ListItem#get_mask
+
+ Integer *get_mask*()
+
+Returns a bit mask indicating which fields of the structure are valid;
+can be any combination of the following values:
+
+
+
+|LIST_MASK_STATE|*GetState* is valid.|
+|LIST_MASK_TEXT|*GetText* is valid.|
+|LIST_MASK_IMAGE|*GetImage* is valid.|
+|LIST_MASK_DATA|*GetData* is valid.|
+|LIST_MASK_WIDTH|*GetWidth* is valid.|
+|LIST_MASK_FORMAT|*GetFormat* is valid.|
+
+
+h3(#ListItem_getstate). ListItem#get_state
+
+ Integer *get_state*()
+
+Returns a bit field representing the state of the item. Can be any
+combination of:
+
+
+
+|LIST_STATE_DONTCARE|Don't care what the state is. Win32 only. |
+|LIST_STATE_DROPHILITED|The item is highlighted to receive a drop event. Win32 only. |
+|LIST_STATE_FOCUSED|The item has the focus.|
+|LIST_STATE_SELECTED|The item is selected.|
+|LIST_STATE_CUT|The item is in the cut state. Win32 only. |
+
+
+h3(#ListItem_gettext). ListItem#get_text
+
+ String *get_text*()
+
+Returns the label/header text.
+
+h3(#ListItem_gettextcolour). ListItem#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+Returns the text colour.
+
+h3(#ListItem_getwidth). ListItem#get_width
+
+ Integer *get_width*()
+
+Meaningful only for column headers in report mode. Returns the column width.
+
+h3(#ListItem_setalign). ListItem#set_align
+
+  *set_align*(%(arg-type)"ListColumnFormat":listcolumnformat.html% align)
+
+Sets the alignment for the item. See also
+"ListItem#get_align":listitem.html#ListItem_getalign
+
+h3(#ListItem_setbackgroundcolour). ListItem#set_background_colour
+
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colBack)
+
+Sets the background colour for the item.
+
+h3(#ListItem_setcolumn). ListItem#set_column
+
+  *set_column*(%(arg-type)Integer% col)
+
+Sets the zero-based column. Meaningful only in report mode.
+
+h3(#ListItem_setdata). ListItem#set_data
+
+  *set_data*(%(arg-type)Object% data)
+
+Sets client data for the item, which can be any arbitrary object. Please
+note that client data is associated with the item and not with subitem
+columns..
+
+h3(#ListItem_setfont). ListItem#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font for the item.
+
+h3(#ListItem_setid). ListItem#set_id
+
+  *set_id*(%(arg-type)Integer% id)
+
+Sets the zero-based item position.
+
+h3(#ListItem_setimage). ListItem#set_image
+
+  *set_image*(%(arg-type)Integer% image)
+
+Sets the zero-based index of the image associated with the item
+into the image list.
+
+h3(#ListItem_setmask). ListItem#set_mask
+
+  *set_mask*(%(arg-type)Integer% mask)
+
+Sets the mask of valid fields. See "ListItem#get_mask":listitem.html#ListItem_getmask.
+
+h3(#ListItem_setstate). ListItem#set_state
+
+  *set_state*(%(arg-type)Integer% state)
+
+Sets the item state flags (note that the valid state flags are influenced
+by the value of the state mask, see
+"ListItem#set_state_mask":listitem.html#ListItem_setstatemask).
+See "ListItem#get_state":listitem.html#ListItem_getstate for valid flag
+values.
+
+h3(#ListItem_setstatemask). ListItem#set_state_mask
+
+  *set_state_mask*(%(arg-type)Integer% stateMask)
+
+Sets the bitmask that is used to determine which of the state flags
+are to be set. See also "ListItem#set_state":listitem.html#ListItem_setstate.
+
+h3(#ListItem_settext). ListItem#set_text
+
+  *set_text*(%(arg-type)String% text)
+
+Sets the text label for the item.
+
+h3(#ListItem_settextcolour). ListItem#set_text_colour
+
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colText)
+
+Sets the text colour for the item.
+
+h3(#ListItem_setwidth). ListItem#set_width
+
+  *set_width*(%(arg-type)Integer% width)
+
+Meaningful only for column headers in report mode. Sets the column width.
+

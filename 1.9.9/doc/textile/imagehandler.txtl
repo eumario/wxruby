@@ -1,0 +1,190 @@
+h1(#wximagehandler). Wx::ImageHandler
+
+This is the base class for implementing image file loading/saving, and image creation from data.
+It is used within Image and is not normally seen by the application.
+
+If you wish to extend the capabilities of Image, derive a class from ImageHandler
+and add the handler using "Image#add_handler":image.html#Image_addhandler in your
+application initialisation.
+
+h2. Note (Legal Issue)
+
+This software is based in part on the work of the Independent JPEG Group.
+
+(Applies when Widgets is linked with JPEG support. JPEGHandler uses libjpeg
+created by IJG.)
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"Image":image.html, 
+"InitAllImageHandlers":initallimagehandlers.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ImageHandler.new":#ImageHandler_new
+* "ImageHandler#get_name":#ImageHandler_getname
+* "ImageHandler#get_extension":#ImageHandler_getextension
+* "ImageHandler#get_image_count":#ImageHandler_getimagecount
+* "ImageHandler#get_type":#ImageHandler_gettype
+* "ImageHandler#get_mime_type":#ImageHandler_getmimetype
+* "ImageHandler#load_file":#ImageHandler_loadfile
+* "ImageHandler#save_file":#ImageHandler_savefile
+* "ImageHandler#set_name":#ImageHandler_setname
+* "ImageHandler#set_extension":#ImageHandler_setextension
+* "ImageHandler#set_mime_type":#ImageHandler_setmimetype
+* "ImageHandler#set_type":#ImageHandler_settype
+
+</div>
+
+
+
+h3(#ImageHandler_new). ImageHandler.new
+
+  *destructor*()
+
+Destroys the ImageHandler object.
+
+
+h3(#ImageHandler_getname). ImageHandler#get_name
+
+ String *get_name*()
+
+Gets the name of this handler.
+
+
+h3(#ImageHandler_getextension). ImageHandler#get_extension
+
+ String *get_extension*()
+
+Gets the file extension associated with this handler.
+
+
+h3(#ImageHandler_getimagecount). ImageHandler#get_image_count
+
+ Integer *get_image_count*(%(arg-type)"InputStream":inputstream.html% stream)
+
+If the image file contains more than one image and the image handler is capable 
+of retrieving these individually, this function will return the number of
+available images.
+
+* _stream_ Opened input stream for reading image data. Currently, the stream must support seeking.
+
+h4. Return value
+
+Number of available images. For most image handlers, this is 1 (exceptions
+are TIFF and ICO formats).
+
+
+h3(#ImageHandler_gettype). ImageHandler#get_type
+
+ Integer *get_type*()
+
+Gets the image type associated with this handler.
+
+
+h3(#ImageHandler_getmimetype). ImageHandler#get_mime_type
+
+ String *get_mime_type*()
+
+Gets the MIME type associated with this handler.
+
+
+h3(#ImageHandler_loadfile). ImageHandler#load_file
+
+ Boolean *load_file*(%(arg-type)"Image":image.html% image,  %(arg-type)"InputStream":inputstream.html% stream, 
+                   %(arg-type)Boolean% verbose=true, 
+                   %(arg-type)Integer% index=0)
+
+Loads a image from a stream, putting the resulting data into _image_. If the image file contains
+more than one image and the image handler is capable of retrieving these individually, _index_
+indicates which image to read from the stream.
+
+h4. Parameters
+
+* _image_ The image object which is to be affected by this operation.
+* _stream_ Opened input stream for reading image data.
+* _verbose_ If set to true, errors reported by the image handler will produce LogMessages.
+* _index_ The index of the image in the file (starting from zero).
+
+h4. Return value
+
+true if the operation succeeded, false otherwise.
+
+h4. See also
+
+"Image#load_file":image.html#Image_loadfile, 
+"Image#save_file":image.html#Image_savefile, 
+"ImageHandler#save_file":imagehandler.html#ImageHandler_savefile
+
+
+h3(#ImageHandler_savefile). ImageHandler#save_file
+
+ Boolean *save_file*(%(arg-type)"Image":image.html% image,  %(arg-type)"OutputStream":outputstream.html% stream)
+
+Saves a image in the output stream.
+
+h4. Parameters
+
+* _image_ The image object which is to be affected by this operation.
+* _stream_ Opened output stream for writing the data.
+
+h4. Return value
+
+true if the operation succeeded, false otherwise.
+
+h4. See also
+
+"Image#load_file":image.html#Image_loadfile, 
+"Image#save_file":image.html#Image_savefile, 
+"ImageHandler#load_file":imagehandler.html#ImageHandler_loadfile
+
+
+h3(#ImageHandler_setname). ImageHandler#set_name
+
+  *set_name*(%(arg-type)String% name)
+
+Sets the handler name.
+
+h4. Parameters
+
+* _name_ Handler name.
+
+
+h3(#ImageHandler_setextension). ImageHandler#set_extension
+
+  *set_extension*(%(arg-type)String% extension)
+
+Sets the handler extension.
+
+h4. Parameters
+
+* _extension_ Handler extension.
+
+
+h3(#ImageHandler_setmimetype). ImageHandler#set_mime_type
+
+  *set_mime_type*(%(arg-type)String% mimetype)
+
+Sets the handler MIME type.
+
+h4. Parameters
+
+* _mimename_ Handler MIME type.
+
+
+h3(#ImageHandler_settype). ImageHandler#set_type
+
+  *set_type*(%(arg-type)Integer% type)
+
+Sets the handler type.
+
+h4. Parameters
+
+* _name_ Handler type.
+

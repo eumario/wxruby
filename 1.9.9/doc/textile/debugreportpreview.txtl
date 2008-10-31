@@ -1,0 +1,44 @@
+h1(#wxdebugreportpreview). Wx::DebugReportPreview
+
+This class presents the debug report to the user and allows him to veto report
+entirely or remove some parts of it. Although not mandatory, using this class
+is strongly recommended as data included in the debug report might contain
+sensitive private information and the user should be notified about it as well
+as having a possibility to examine the data which had been gathered to check
+whether this is effectively the case and discard the debug report if it is.
+
+DebugReportPreview is an abstract base class, currently the only concrete
+class deriving from it is 
+"DebugReportPreviewStd":debugreportpreviewstd.html.
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "DebugReportPreview.new":#DebugReportPreview_new
+* "DebugReportPreview#show":#DebugReportPreview_show
+
+</div>
+
+
+
+h3(#DebugReportPreview_wxdebugreportpreview). DebugReportPreview.new
+
+  *destructor*()
+
+dtor is trivial as well but should be virtual for a base class
+
+
+h3(#DebugReportPreview_show). DebugReportPreview#show
+
+ Boolean *show*(%(arg-type)"DebugReport":debugreport.html% dbgrpt)
+
+Present the report to the user and allow him to modify it by removing some or
+all of the files and, potentially, adding some notes. Return  if the
+report should be processed or  if the user chose to cancel report
+generation or removed all files from it.
+

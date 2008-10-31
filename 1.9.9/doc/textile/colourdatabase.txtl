@@ -1,0 +1,82 @@
+h1(#wxcolourdatabase). Wx::ColourDatabase
+
+Widgets maintains a database of standard RGB colours for a predefined
+set of named colours (such as ``BLACK'', ``LIGHT GREY''). The
+application may add to this set if desired by using 
+"add_colour":#ColourDatabase_addcolour and may use it to look up
+colours by names using "Find":colourdatabasefind.html or find the names
+for the standard colour suing "find_name":#ColourDatabase_findname.
+
+There is one predefined instance of this class called 
+*TheColourDatabase*.
+
+h2. Derived from
+
+None
+
+h2. Remarks
+
+The standard database contains at least the following colours:
+
+AQUAMARINE, BLACK, BLUE, BLUE VIOLET, BROWN, CADET BLUE, CORAL,
+CORNFLOWER BLUE, CYAN, DARK GREY, DARK GREEN, DARK OLIVE GREEN, DARK
+ORCHID, DARK SLATE BLUE, DARK SLATE GREY DARK TURQUOISE, DIM GREY,
+FIREBRICK, FOREST GREEN, GOLD, GOLDENROD, GREY, GREEN, GREEN YELLOW,
+INDIAN RED, KHAKI, LIGHT BLUE, LIGHT GREY, LIGHT STEEL BLUE, LIME GREEN,
+MAGENTA, MAROON, MEDIUM AQUAMARINE, MEDIUM BLUE, MEDIUM FOREST GREEN,
+MEDIUM GOLDENROD, MEDIUM ORCHID, MEDIUM SEA GREEN, MEDIUM SLATE BLUE,
+MEDIUM SPRING GREEN, MEDIUM TURQUOISE, MEDIUM VIOLET RED, MIDNIGHT BLUE,
+NAVY, ORANGE, ORANGE RED, ORCHID, PALE GREEN, PINK, PLUM, PURPLE, RED,
+SALMON, SEA GREEN, SIENNA, SKY BLUE, SLATE BLUE, SPRING GREEN, STEEL
+BLUE, TAN, THISTLE, TURQUOISE, VIOLET, VIOLET RED, WHEAT, WHITE, YELLOW,
+YELLOW GREEN.
+
+h2. See also
+
+"Colour":colour.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ColourDatabase.new":#ColourDatabase_new
+* "ColourDatabase#add_colour":#ColourDatabase_addcolour
+* "ColourDatabase#find":#ColourDatabase_find
+* "ColourDatabase#find_name":#ColourDatabase_findname
+
+</div>
+
+
+
+h3(#ColourDatabase_constr). ColourDatabase.new
+
+h3(#ColourDatabase_addcolour). ColourDatabase#add_colour
+
+  *add_colour*(%(arg-type)String% colourName,  %(arg-type)"Colour":colour.html% colour)
+
+  *add_colour*(%(arg-type)String% colourName,  %(arg-type)"Colour":colour.html% colour)
+
+Adds a colour to the database. If a colour with the same name already exists,
+it is replaced.
+
+Please note that the overload taking a pointer is deprecated and will be
+removed in the next Widgets version, please don't use it.
+
+
+h3(#ColourDatabase_find). ColourDatabase#find
+
+ "Colour":colour.html *find*(%(arg-type)String% colourName)
+
+Finds a colour given the name. Returns an invalid colour object (that is, such
+that its "Ok()":colourok.html method returns ) if the colour wasn't
+found in the database.
+
+
+h3(#ColourDatabase_findname). ColourDatabase#find_name
+
+ String *find_name*(%(arg-type)"Colour":colour.html% colour)
+
+Finds a colour name given the colour. Returns an empty string if the colour is
+not found in the database.
+
+

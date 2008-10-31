@@ -1,0 +1,38 @@
+h1(#wxbusycursor). Wx::BusyCursor
+
+This class makes it easy to tell your user that the program is
+temporarily busy.  Just call the class method "busy":BusyCursor_busy,
+passing it a block; while the block is executed, the system's hourglass
+cursor will be displayed.
+
+For example:
+
+ Wx::BusyCursor.busy do 
+   # do some lengthy operation
+   # ...
+ end
+ 
+h2. Derived from
+
+None
+
+h2. See also
+
+"BusyInfo":busyinfo.html, "WindowDisabler":windowdisabler.html
+
+<div id="methods">
+
+h2. Class methods
+
+* "BusyCursor.busy":#BusyCursor_busy
+
+</div>
+
+
+h3(#BusyCursor_busy). BusyCursor.busy
+
+  *BusyCursor.busy*() { ... }
+
+Changes the cursor into the system's 'busy' indicator (typically an
+hourglass), calls the passed block, then returns the cursor to normal
+once the block is completed.

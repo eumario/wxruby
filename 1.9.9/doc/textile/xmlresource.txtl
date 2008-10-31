@@ -1,0 +1,253 @@
+h1(#wxxmlresource). Wx::XmlResource
+
+This is the main class for interacting with the XML-based resource system.
+
+The class holds XML resources from one or more .xml files, binary files or zip archive files.
+
+See "XML-based resource system overview":xrcoverview.html for details.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Constants
+
+  Wx::XRC_USE_LOCALE     = 1
+  Wx::XRC_NO_SUBCLASSING = 2
+  Wx::XRC_NO_RELOADING   = 4
+
+<div id="methods">
+
+h2. Methods
+
+* "XmlResource.new":#XmlResource_new
+* "XmlResource.get":#XmlResource_get
+* "XmlResource.set":#XmlResource_set
+* "XmlResource#add_handler":#XmlResource_addhandler
+* "XmlResource#attach_unknown_control":#XmlResource_attachunknowncontrol
+* "XmlResource#clear_handlers":#XmlResource_clearhandlers
+* "XmlResource#compare_version":#XmlResource_compareversion
+* "XmlResource#get_flags":#XmlResource_getflags
+* "XmlResource#get_version":#XmlResource_getversion
+* "XmlResource#get_xrcid":#XmlResource_getxrcid
+* "XmlResource#init_all_handlers":#XmlResource_initallhandlers
+* "XmlResource#load":#XmlResource_load
+* "XmlResource#load_bitmap":#XmlResource_loadbitmap
+* "XmlResource#load_dialog":#XmlResource_loaddialog
+* "XmlResource#load_dialog_subclass":#XmlResource_loaddialogsubclass
+* "XmlResource#load_frame":#XmlResource_loadframe
+* "XmlResource#load_frame_subclass":#XmlResource_loadframesubclass
+* "XmlResource#load_icon":#XmlResource_loadicon
+* "XmlResource#load_menu":#XmlResource_loadmenu
+* "XmlResource#load_menu_bar":#XmlResource_loadmenubar
+* "XmlResource#load_panel":#XmlResource_loadpanel
+* "XmlResource#load_panel_subclass":#XmlResource_loadpanelsubclass
+* "XmlResource#load_tool_bar":#XmlResource_loadtoolbar
+* "XmlResource#set_flags":#XmlResource_setflags
+* "XmlResource#unload":#XmlResource_unload
+
+</div>
+
+
+
+h3(#XmlResource_new). XmlResource.new
+
+  *XmlResource.new*(%(arg-type)String% filemask, %(arg-type)Integer% flags = XRC_USE_LOCALE)
+
+Constructor.
+
+* _filemask_ The XRC file, archive file, or wildcard specification that will be used to
+load all resource files inside a zip archive.
+* _flags_ XRC_USE_LOCALE: translatable strings will be translated via _().
+XRC_NO_SUBCLASSING: subclass property of object nodes will be ignored
+(useful for previews in XRC editors).
+
+  *XmlResource.new*(%(arg-type)Integer% flags = XRC_USE_LOCALE)
+
+The flags in Wx::XmlResource are not useful in ruby. All XmlResources
+created will have the optimal flags.
+
+* @Wx::XRC_USE_LOCALE@: translatable strings will be translated via _().
+* @Wx::XRC_NO_SUBCLASSING@: subclass property of object nodes will be ignored (useful for previews in XRC editors). 
+* @Wx::XRC_NO_RELOADING@ will prevent the XRC files from being reloaded from disk in case they have been modified there since being last loaded (may slightly speed up loading them).
+
+
+h3(#XmlResource_get). XmlResource#get
+
+ "XmlResource":xmlresource.html *XmlResource.get*()
+
+Class method to get the global XmlResource object. 
+
+
+h3(#XmlResource_set). XmlResource#set
+
+ "XmlResource":xmlresource.html *XmlResource.set*(%(arg-type)"XmlResource":xmlresource.html% res)
+
+Class method to set the global resources object. Returns the pointer to
+the previous one, or nil if there was not one.
+
+
+h3(#XmlResource_attachunknowncontrol). XmlResource#attach_unknown_control
+
+ Boolean *attach_unknown_control*(%(arg-type)String% name, %(arg-type)"Window":window.html% control, 
+                                %(arg-type)"Window":window.html% parent = nil)
+
+Attaches an unknown control to the given panel/window/dialog.
+Unknown controls are used in conjunction with @<object class="unknown">@.
+
+
+h3(#XmlResource_compareversion). XmlResource#compare_version
+
+ Integer *compare_version*(%(arg-type)Integer% major, %(arg-type)Integer% minor, 
+                         %(arg-type)Integer% release, 
+                         %(arg-type)Integer% revision)
+
+Compares the XRC version to the argument. Returns -1 if the XRC version
+is less than the argument, +1 if greater, and 0 if they equal.
+
+
+h3(#XmlResource_getflags). XmlResource#get_flags
+
+ Integer *get_flags*()
+
+Returns flags, which may be a bitlist of XRC_USE_LOCALE and XRC_NO_SUBCLASSING.
+
+
+h3(#XmlResource_getversion). XmlResource#get_version
+
+ Integer *get_version*()
+
+Returns version information (a.b.c.d = d+ 256*c + 256*b + 256*a).
+
+
+h3(#XmlResource_getxmlid). XmlResource#get_xrcid
+
+ Integer *get_xrcid*(%(arg-type)"Char":char.html% str_id)
+
+Returns a numeric ID that is equivalent to the string ID used in an XML
+resource. To be used in event tables.
+The module method @Wx::xrcid(name)@ is provided for convenience.
+
+
+h3(#XmlResource_initallhandlers). XmlResource#init_all_handlers
+
+  *init_all_handlers*()
+
+Initializes handlers for all supported controls/windows. In wxRuby
+versions 1.9.6 and later, this is called automatically for you, so there
+is no need to call this method
+
+h3(#XmlResource_load). XmlResource#load
+
+ Boolean *load*(%(arg-type)String% file)
+
+Loads resources from the XML file @file@. If this file does not exist,
+or contains invalid XML, an exception will be raised; if successful, the
+loaded file name will be returneed.
+
+h3(#XmlResource_loadbitmap). XmlResource#load_bitmap
+
+ "Bitmap":bitmap.html *load_bitmap*(%(arg-type)String% name)
+
+Loads a bitmap resource from a file.
+
+
+h3(#XmlResource_loaddialog). XmlResource#load_dialog
+
+ "Dialog":dialog.html *load_dialog*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a dialog. _dlg_ points to a parent window (if any).
+
+h3(#XmlResource_loaddialogsubclass). XmlResource#load_dialog_subclass
+
+ Boolean *load_dialog_subclass*(%(arg-type)"Dialog":dialog.html% dlg, %(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a dialog. _dlg_ points to parent window (if any).
+
+This form is used to finish creation of an already existing instance (the main reason
+for this is that you may want to use derived class with a new event table).
+
+Example:
+
+
+   dlg = MyDialog.new
+   the_xml_resource.load_dialog_subclass(dlg, main_frame, "my_dialog")
+   dlg.show_modal
+ 
+
+
+h3(#XmlResource_loadframe). XmlResource#load_frame
+
+ "Frame":frame.html *load_frame*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a frame.
+
+h3(#XmlResource_loadframesubclass). XmlResource#load_frame_subclass
+
+ Boolean *load_frame_subclass*(%(arg-type)"Frame":frame.html% frame, %(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a frame. This form is used to finish creation of an already existing instance.
+
+
+h3(#XmlResource_loadicon). XmlResource#load_icon
+
+ "Icon":icon.html *load_icon*(%(arg-type)String% name)
+
+Loads an icon resource from a file.
+
+
+h3(#XmlResource_loadmenu). XmlResource#load_menu
+
+ "Menu":menu.html *load_menu*(%(arg-type)String% name)
+
+Loads menu from resource. Returns NULL on failure.
+
+
+h3(#XmlResource_loadmenubar). XmlResource#load_menu_bar
+
+ "MenuBar":menubar.html *load_menu_bar*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a menubar from resource. Returns NULL on failure.
+
+ "MenuBar":menubar.html *load_menu_bar*(%(arg-type)String% name)
+
+Loads a menubar from resource. Returns NULL on failure.
+
+
+h3(#XmlResource_loadpanel). XmlResource#load_panel
+
+ "Panel":panel.html *load_panel*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a panel. _panel_ points to parent window (if any).
+
+h3(#XmlResource_loadpanelsubclass). XmlResource#load_panel_subclass
+
+ Boolean *load_panel_subclass*(%(arg-type)"Panel":panel.html% panel, %(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a panel. _panel_ points to parent window (if any). This form
+is used to finish creation of an already existing instance.
+
+
+h3(#XmlResource_loadtoolbar). XmlResource#load_tool_bar
+
+ "ToolBar":toolbar.html *load_tool_bar*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a toolbar.
+
+h3(#XmlResource_setflags). XmlResource#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Sets flags (bitlist of XRC_USE_LOCALE and XRC_NO_SUBCLASSING).
+
+
+h3(#XmlResource_unload). XmlResource#unload
+
+ Boolean *unload*(%(arg-type)String% filename)
+
+This function unloads a resource previously loaded by 
+"load()":xmlresource.html#XmlResource_load.
+
+Returns  if the resource was successfully unloaded and  if it hasn't
+been found in the list of loaded resources.
+

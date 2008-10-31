@@ -1,0 +1,371 @@
+h1(#wxslider). Wx::Slider
+
+A slider is a control with a handle which can be pulled
+back and forth to change the value.
+
+On Windows, the track bar control is used.
+
+Slider events are handled in the same way as a scrollbar.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@SL_HORIZONTAL@|Displays the slider horizontally (this is the default).|
+|@SL_VERTICAL@|Displays the slider vertically.|
+|@SL_AUTOTICKS@|Displays tick marks.|
+|@SL_LABELS@|Displays minimum, maximum and value labels.|
+|@SL_LEFT@|Displays ticks on the left and forces the slider to be vertical.|
+|@SL_RIGHT@|Displays ticks on the right and forces the slider to be vertical.|
+|@SL_TOP@|Displays ticks on the top.|
+|@SL_BOTTOM@|Displays ticks on the bottom (this is the default).|
+|@SL_SELRANGE@|Allows the user to select a range on the slider. Windows only.|
+|@SL_INVERSE@|Inverses the mininum and maximum endpoints on the slider. Not compatible with SL_SELRANGE.|
+
+
+See also "window styles overview":windowstyles.html.
+
+ scrolevt.inc
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html, "ScrollBar":scrollbar.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Slider.new":#Slider_new
+* "Slider#clear_sel":#Slider_clearsel
+* "Slider#clear_ticks":#Slider_clearticks
+* "Slider#create":#Slider_create
+* "Slider#get_line_size":#Slider_getlinesize
+* "Slider#get_max":#Slider_getmax
+* "Slider#get_min":#Slider_getmin
+* "Slider#get_page_size":#Slider_getpagesize
+* "Slider#get_sel_end":#Slider_getselend
+* "Slider#get_sel_start":#Slider_getselstart
+* "Slider#get_thumb_length":#Slider_getthumblength
+* "Slider#get_tick_freq":#Slider_gettickfreq
+* "Slider#get_value":#Slider_getvalue
+* "Slider#set_line_size":#Slider_setlinesize
+* "Slider#set_page_size":#Slider_setpagesize
+* "Slider#set_range":#Slider_setrange
+* "Slider#set_selection":#Slider_setselection
+* "Slider#set_thumb_length":#Slider_setthumblength
+* "Slider#set_tick":#Slider_settick
+* "Slider#set_tick_freq":#Slider_settickfreq
+* "Slider#set_value":#Slider_setvalue
+
+</div>
+
+
+h3(#Slider_new). Slider.new
+
+  *Slider.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% value , 
+             %(arg-type)Integer% minValue, 
+             %(arg-type)Integer% maxValue, 
+             %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+             %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+             %(arg-type)Integer% style = SL_HORIZONTAL, 
+             %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+             %(arg-type)String% name = "slider")
+
+Constructor, creating and showing a slider.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _value_ Initial position for the slider.
+* _minValue_ Minimum slider position.
+* _maxValue_ Maximum slider position.
+* _size_ Window size. If the default size (-1, -1) is specified then a default size is chosen.
+* _style_ Window style. See "Slider":slider.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"Slider#create":slider.html#Slider_create, "Validator":validator.html
+
+  *destructor*()
+
+Destructor, destroying the slider.
+
+h3(#Slider_clearsel). Slider#clear_sel
+
+  *clear_sel*()
+
+Clears the selection, for a slider with the *SL_SELRANGE* style.
+
+h4. Remarks
+
+Windows 95 only.
+
+h3(#Slider_clearticks). Slider#clear_ticks
+
+  *clear_ticks*()
+
+Clears the ticks.
+
+h4. Remarks
+
+Windows 95 only.
+
+h3(#Slider_create). Slider#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)Integer% value , 
+                %(arg-type)Integer% minValue, 
+                %(arg-type)Integer% maxValue, 
+                %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = SL_HORIZONTAL, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "slider")
+
+Used for two-step slider construction. See "Slider.new":slider.html#Slider_new for further details.
+
+h3(#Slider_getlinesize). Slider#get_line_size
+
+ Integer *get_line_size*()
+
+Returns the line size.
+
+h4. See also
+
+"Slider#set_line_size":slider.html#Slider_setlinesize
+
+h3(#Slider_getmax). Slider#get_max
+
+ Integer *get_max*()
+
+Gets the maximum slider value.
+
+h4. See also
+
+"Slider#get_min":slider.html#Slider_getmin, "Slider#set_range":slider.html#Slider_setrange
+
+h3(#Slider_getmin). Slider#get_min
+
+ Integer *get_min*()
+
+Gets the minimum slider value.
+
+h4. See also
+
+"Slider#get_min":slider.html#Slider_getmin, "Slider#set_range":slider.html#Slider_setrange
+
+h3(#Slider_getpagesize). Slider#get_page_size
+
+ Integer *get_page_size*()
+
+Returns the page size.
+
+h4. See also
+
+"Slider#set_page_size":slider.html#Slider_setpagesize
+
+h3(#Slider_getselend). Slider#get_sel_end
+
+ Integer *get_sel_end*()
+
+Returns the selection end point.
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#get_sel_start":slider.html#Slider_getselstart, "Slider#set_selection":slider.html#Slider_setselection
+
+h3(#Slider_getselstart). Slider#get_sel_start
+
+ Integer *get_sel_start*()
+
+Returns the selection start point.
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#get_sel_end":slider.html#Slider_getselend, "Slider#set_selection":slider.html#Slider_setselection
+
+h3(#Slider_getthumblength). Slider#get_thumb_length
+
+ Integer *get_thumb_length*()
+
+Returns the thumb length.
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#set_thumb_length":slider.html#Slider_setthumblength
+
+h3(#Slider_gettickfreq). Slider#get_tick_freq
+
+ Integer *get_tick_freq*()
+
+Returns the tick frequency.
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#set_tick_freq":slider.html#Slider_settickfreq
+
+h3(#Slider_getvalue). Slider#get_value
+
+ Integer *get_value*()
+
+Gets the current slider value.
+
+h4. See also
+
+"Slider#get_min":slider.html#Slider_getmin, "Slider#get_max":slider.html#Slider_getmax, "Slider#set_value":slider.html#Slider_setvalue
+
+h3(#Slider_setlinesize). Slider#set_line_size
+
+  *set_line_size*(%(arg-type)Integer% lineSize)
+
+Sets the line size for the slider.
+
+h4. Parameters
+
+* _lineSize_ The number of steps the slider moves when the user moves it up or down a line.
+
+h4. See also
+
+"Slider#get_line_size":slider.html#Slider_getlinesize
+
+h3(#Slider_setpagesize). Slider#set_page_size
+
+  *set_page_size*(%(arg-type)Integer% pageSize)
+
+Sets the page size for the slider.
+
+h4. Parameters
+
+* _pageSize_ The number of steps the slider moves when the user pages up or down.
+
+h4. See also
+
+"Slider#get_page_size":slider.html#Slider_getpagesize
+
+h3(#Slider_setrange). Slider#set_range
+
+  *set_range*(%(arg-type)Integer% minValue,  %(arg-type)Integer% maxValue)
+
+Sets the minimum and maximum slider values.
+
+h4. See also
+
+"Slider#get_min":slider.html#Slider_getmin, "Slider#get_max":slider.html#Slider_getmax
+
+h3(#Slider_setselection). Slider#set_selection
+
+  *set_selection*(%(arg-type)Integer% startPos,  %(arg-type)Integer% endPos)
+
+Sets the selection.
+
+h4. Parameters
+
+* _startPos_ The selection start position.
+* _endPos_ The selection end position.
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#get_sel_start":slider.html#Slider_getselstart, "Slider#get_sel_end":slider.html#Slider_getselend
+
+h3(#Slider_setthumblength). Slider#set_thumb_length
+
+  *set_thumb_length*(%(arg-type)Integer% len)
+
+Sets the slider thumb length.
+
+h4. Parameters
+
+* _len_ The thumb length.
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#get_thumb_length":slider.html#Slider_getthumblength
+
+h3(#Slider_settick). Slider#set_tick
+
+  *set_tick*(%(arg-type)Integer% tickPos)
+
+Sets a tick position.
+
+h4. Parameters
+
+* _tickPos_ The tick position.
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#set_tick_freq":slider.html#Slider_settickfreq
+
+h3(#Slider_settickfreq). Slider#set_tick_freq
+
+  *set_tick_freq*(%(arg-type)Integer% n,  %(arg-type)Integer% pos)
+
+Sets the tick mark frequency and position.
+
+h4. Parameters
+
+* _n_ Frequency. For example, if the frequency is set to two, a tick mark is displayed for
+every other increment in the slider's range.
+* _pos_ Position. Must be greater than zero. TODO: what is this for?
+
+h4. Remarks
+
+Windows 95 only.
+
+h4. See also
+
+"Slider#get_tick_freq":slider.html#Slider_gettickfreq
+
+h3(#Slider_setvalue). Slider#set_value
+
+  *set_value*(%(arg-type)Integer% value)
+
+Sets the slider position.
+
+h4. Parameters
+
+* _value_ The slider position.
+
+h4. See also
+
+"Slider#get_value":slider.html#Slider_getvalue
+

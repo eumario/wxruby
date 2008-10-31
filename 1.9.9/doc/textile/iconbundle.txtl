@@ -1,0 +1,66 @@
+h1(#wxiconbundle). Wx::IconBundle
+
+This class contains multiple copies of an icon in different sizes,
+see also "Dialog#set_icons":dialog.html#Dialog_seticons and
+"TopLevelWindow#set_icons":toplevelwindow.html#TopLevelWindow_seticons.
+
+h2. Derived from
+
+No base class
+
+<div id="methods">
+
+h2. Methods
+
+* "IconBundle.new":#IconBundle_new
+* "IconBundle#add_icon":#IconBundle_addicon
+* "IconBundle#get_icon":#IconBundle_geticon
+
+</div>
+
+
+h3(#IconBundle_wxiconbundle). IconBundle.new
+
+  *IconBundle.new*(%(arg-type)String% file,  %(arg-type)Integer% type)
+
+Initializes the bundle with the icon(s) found in the file.
+
+  *IconBundle.new*(%(arg-type)"Icon":icon.html% icon)
+
+Initializes the bundle with a single icon.
+
+  *IconBundle.new*(%(arg-type)"IconBundle":iconbundle.html% ic)
+
+Copy constructor.
+
+h3(#IconBundle_addicon). IconBundle#add_icon
+
+  *add_icon*(%(arg-type)String% file,  %(arg-type)Integer% type)
+
+Adds all the icons contained in the file to the bundle;
+if the collection already contains icons with the same
+width and height, they are replaced by the new ones.
+
+  *add_icon*(%(arg-type)"Icon":icon.html% icon)
+
+Adds the icon to the collection; if the collection already
+contains an icon with the same width and height, it is
+replaced by the new one.
+
+Note that "<<" is an alias for "add_icon".
+
+h3(#IconBundle_geticon). IconBundle#get_icon
+
+ "Icon":icon.html *get_icon*(%(arg-type)"Size":size.html% size)
+
+Returns the icon with the given size; if no such icon exists,
+returns the icon with size SYS_ICON_X/SYS_ICON_Y;
+if no such icon exists,
+returns the first icon in the bundle. If size = Size( -1, -1 ),
+returns the icon with size SYS_ICON_X/SYS_ICON_Y.
+
+ "Icon":icon.html *get_icon*(%(arg-type)Integer% size = -1)
+
+Same as GetIcon( Size( size, size ) ).
+
+

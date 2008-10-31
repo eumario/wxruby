@@ -1,0 +1,113 @@
+h1(#wxtogglebutton). Wx::ToggleButton
+
+ToggleButton is a button that stays pressed when clicked by the user. In
+other words, it is similar to "CheckBox":checkbox.html in
+functionality but looks like a "Button":button.html.
+
+You can see ToggleButton in action in the sixth page of the 
+"controls":samplecontrols.html sample.
+
+*NB:* This class is not available under Universal ports such
+as X11.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+There are no special styles for ToggleButton.
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+
+
+|*evt_togglebutton(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Handles a button click event.|
+
+
+h2. See also
+
+"CheckBox":checkbox.html, "Button":button.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ToggleButton.new":#ToggleButton_new
+* "ToggleButton#create":#ToggleButton_create
+* "ToggleButton#get_value":#ToggleButton_getvalue
+* "ToggleButton#set_value":#ToggleButton_setvalue
+
+</div>
+
+
+h3(#ToggleButton_constr). ToggleButton.new
+
+  *ToggleButton.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                   %(arg-type)Integer% style = 0, 
+                   %(arg-type)"Validator":validator.html% val, 
+                   %(arg-type)String% name = "checkBox")
+
+Constructor, creating and showing a toggle button.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be @NULL@.
+* _id_ Toggle button identifier. A value of $-1$ indicates a default value.
+* _label_ Text to be displayed next to the toggle button.
+* _pos_ Toggle button position. If the position $(-1, -1)$ is specified then a default position is chosen.
+* _size_ Toggle button size. If the default size $(-1, -1)$ is specified then a default size is chosen.
+* _style_ Window style. See "ToggleButton":togglebutton.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"ToggleButton#create":togglebutton.html#ToggleButton_create, "Validator":validator.html
+
+  *destructor*()
+
+Destructor, destroying the toggle button.
+
+h3(#ToggleButton_create). ToggleButton#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% val, 
+                %(arg-type)String% name = "checkBox")
+
+Creates the toggle button for two-step construction. See "ToggleButton.new":togglebutton.html#ToggleButton_new for details.
+
+h3(#ToggleButton_getvalue). ToggleButton#get_value
+
+ Boolean *get_value*()
+
+Gets the state of the toggle button.
+
+h4. Return value
+
+Returns @true@ if it is pressed, @false@ otherwise.
+
+h3(#ToggleButton_setvalue). ToggleButton#set_value
+
+  *set_value*(%(arg-type)Boolean% state)
+
+Sets the toggle button to the given state. This does not cause a 
+@EVT_TOGGLEBUTTON@ event to be emitted.
+
+h4. Parameters
+
+* _state_ If @true@, the button is pressed.
+

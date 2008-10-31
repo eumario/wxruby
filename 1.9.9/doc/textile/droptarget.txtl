@@ -1,0 +1,151 @@
+h1(#wxdroptarget). Wx::DropTarget
+
+This class represents a target for a drag and drop operation. A "DataObject":dataobject.html
+can be associated with it and by default, this object will be filled with the data from the
+drag source, if the data formats supported by the data object match the drag source data 
+format.
+
+There are various virtual handler functions defined in this class which may be overridden
+to give visual feedback or react in a more fine-tuned way, e.g. by not accepting data on
+the whole window area, but only a small portion of it. The normal sequence of calls is
+"on_enter":#DropTarget_onenter, possibly many times "on_drag_over":#DropTarget_ondragover,
+"on_drop":#DropTarget_ondrop and finally "on_data":#DropTarget_ondata.
+
+See "Drag and drop overview":dndoverview.html and "DataObject overview":dataobjectoverview.html
+for more information.
+
+h2. Derived from
+
+None
+
+h2. Types
+
+DragResultDragResult is defined as follows:
+
+
+ enum DragResult
+ {
+     DragError,    // error prevented the d&d operation from completing
+     DragNone,     // drag target didn't accept the data
+     DragCopy,     // the data was successfully copied
+     DragMove,     // the data was successfully moved (MSW only)
+     DragLink,     // operation is a drag-link
+     DragCancel    // the operation was cancelled by user (not an error)
+ };
+ 
+
+h2. See also
+
+"DropSource":dropsource.html, 
+"TextDropTarget":textdroptarget.html, "FileDropTarget":filedroptarget.html,
+"DataFormat":dataformat.html, "DataObject":dataobject.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DropTarget.new":#DropTarget_new
+* "DropTarget#get_data":#DropTarget_getdata
+* "DropTarget#on_data":#DropTarget_ondata
+* "DropTarget#on_drop":#DropTarget_ondrop
+* "DropTarget#on_enter":#DropTarget_onenter
+* "DropTarget#on_drag_over":#DropTarget_ondragover
+* "DropTarget#on_leave":#DropTarget_onleave
+* "DropTarget#set_data_object":#DropTarget_setdataobject
+
+</div>
+
+
+h3(#DropTarget_wxdroptarget). DropTarget.new
+
+  *DropTarget.new*(%(arg-type)"DataObject":dataobject.html% data = nil)
+
+Constructor. _data_ is the data to be associated with the drop target.
+
+  *destructor*()
+
+Destructor. Deletes the associated data object, if any.
+
+h3(#DropTarget_getdata). DropTarget#get_data
+
+  *get_data*()
+
+This method may only be called from within "on_data":#DropTarget_ondata.
+By default, this method copies the data from the drop source to the 
+"DataObject":dataobject.html associated with this drop target,
+calling its "DataObject#set_data":dataobject.html#DataObject_setdata method.
+
+h3(#DropTarget_ondata). DropTarget#on_data
+
+ "DragResult":dragresult.html *on_data*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                      %(arg-type)"DragResult":dragresult.html% def)
+
+Called after "on_drop":#DropTarget_ondrop returns true. By default this
+will usually "get_data":#DropTarget_getdata and will return the suggested
+default value _def_.
+
+h3(#DropTarget_ondrop). DropTarget#on_drop
+
+ Boolean *on_drop*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Called when the user drops a data object on the target. Return false to veto the operation.
+
+h4. Parameters
+
+* _x_ The x coordinate of the mouse.
+* _y_ The y coordinate of the mouse.
+
+h4. Return value
+
+Return true to accept the data, false to veto the operation.
+
+h3(#DropTarget_onenter). DropTarget#on_enter
+
+ "DragResult":dragresult.html *on_enter*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                       %(arg-type)"DragResult":dragresult.html% def)
+
+Called when the mouse enters the drop target. By default, this calls "on_drag_over":#DropTarget_ondragover.
+
+h4. Parameters
+
+* _x_ The x coordinate of the mouse.
+* _y_ The y coordinate of the mouse.
+* _def_ Suggested default for return value. Determined by SHIFT or CONTROL key states.
+
+h4. Return value
+
+Returns the desired operation or @DragNone@. This is used for optical feedback
+from the side of the drop source, typically in form of changing the icon.
+
+h3(#DropTarget_ondragover). DropTarget#on_drag_over
+
+ "DragResult":dragresult.html *on_drag_over*(%(arg-type)Integer% x,  %(arg-type)Integer% y, 
+                           %(arg-type)"DragResult":dragresult.html% def)
+
+Called when the mouse is being dragged over the drop target. By default, 
+this calls functions return the suggested return value _def_.
+
+h4. Parameters
+
+* _x_ The x coordinate of the mouse.
+* _y_ The y coordinate of the mouse.
+* _def_ Suggested value for return value. Determined by SHIFT or CONTROL key states.
+
+h4. Return value
+
+Returns the desired operation or @DragNone@. This is used for optical feedback
+from the side of the drop source, typically in form of changing the icon.
+
+h3(#DropTarget_onleave). DropTarget#on_leave
+
+  *on_leave*()
+
+Called when the mouse leaves the drop target.
+
+h3(#DropTarget_setdataobject). DropTarget#set_data_object
+
+  *set_data_object*(%(arg-type)"DataObject":dataobject.html% data)
+
+Sets the data "DataObject":dataobject.html associated with the 
+drop target and deletes any previously associated data object.
+

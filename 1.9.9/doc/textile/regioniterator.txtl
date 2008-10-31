@@ -1,0 +1,117 @@
+h1(#wxregioniterator). Wx::RegionIterator
+
+This class is used to iterate through the rectangles in a region,
+typically when examining the damaged regions of a window within an OnPaint call.
+
+To use it, construct an iterator object on the stack and loop through the
+regions, testing the object and incrementing the iterator at the end of the loop.
+
+See "PaintEvent":paintevent.html for an example of use.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"PaintEvent":paintevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "RegionIterator.new":#RegionIterator_new
+* "RegionIterator#get_x":#RegionIterator_getx
+* "RegionIterator#get_y":#RegionIterator_gety
+* "RegionIterator#get_w":#RegionIterator_getw
+* "RegionIterator#get_height":#RegionIterator_getheight
+* "RegionIterator#get_h":#RegionIterator_geth
+* "RegionIterator#get_rect":#RegionIterator_getrect
+* "RegionIterator#get_width":#RegionIterator_getwidth
+* "RegionIterator#have_rects":#RegionIterator_haverects
+* "RegionIterator#reset":#RegionIterator_reset
+* "wxRegionIterator::operator bool":#RegionIterator_bool
+
+</div>
+
+
+h3(#RegionIterator_new). RegionIterator.new
+
+  *RegionIterator.new*(%(arg-type)"Region":region.html% region)
+
+Creates an iterator object given a region.
+
+h3(#RegionIterator_getx). RegionIterator#get_x
+
+ Integer *get_x*()
+
+Returns the x value for the current region.
+
+h3(#RegionIterator_gety). RegionIterator#get_y
+
+ Integer *get_y*()
+
+Returns the y value for the current region.
+
+h3(#RegionIterator_getw). RegionIterator#get_w
+
+ Integer *get_w*()
+
+An alias for GetWidth.
+
+h3(#RegionIterator_getheight). RegionIterator#get_height
+
+ Integer *get_height*()
+
+Returns the height value for the current region.
+
+h3(#RegionIterator_geth). RegionIterator#get_h
+
+ Integer *get_h*()
+
+An alias for GetHeight.
+
+h3(#RegionIterator_getrect). RegionIterator#get_rect
+
+ "Rect":rect.html *get_rect*()
+
+Returns the current rectangle.
+
+h3(#RegionIterator_getwidth). RegionIterator#get_width
+
+ Integer *get_width*()
+
+Returns the width value for the current region.
+
+h3(#RegionIterator_haverects). RegionIterator#have_rects
+
+ Boolean *have_rects*()
+
+Returns @true@ if there are still some rectangles; otherwise returns @false@.
+
+h3(#RegionIterator_reset). RegionIterator#reset
+
+  *reset*()
+
+Resets the iterator to the beginning of the rectangles.
+
+  *reset*(%(arg-type)"Region":region.html% region)
+
+Resets the iterator to the given region.
+
+h3(#RegionIterator_inc). RegionIterator#++
+
+  *operator $++$*()
+
+Increment operator. Increments the iterator to the next region.
+
+
+
+h3(#RegionIterator_bool). RegionIterator::operator bool
+
+  *operator bool*()
+
+Returns @true@ if there are still some rectangles; otherwise returns @false@.
+
+You can use this to test the iterator object as if it were of type bool.
+

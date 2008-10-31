@@ -1,0 +1,50 @@
+h1(#wxtextdroptarget). Wx::TextDropTarget
+
+A predefined drop target for dealing with text data.
+
+h2. Derived from
+
+"DropTarget":droptarget.html
+
+h2. See also
+
+"Drag and drop overview":dndoverview.html, "DropSource":dropsource.html, 
+"DropTarget":droptarget.html, "FileDropTarget":filedroptarget.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TextDropTarget.new":#TextDropTarget_new
+* "TextDropTarget#on_drop":#TextDropTarget_ondrop
+* "TextDropTarget#on_drop_text":#TextDropTarget_ondroptext
+
+</div>
+
+
+h3(#TextDropTarget_wxtextdroptarget). TextDropTarget.new
+
+h3(#TextDropTarget_ondrop). TextDropTarget#on_drop
+
+ Boolean *on_drop*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)% data, 
+                 %(arg-type)Integer% size)
+
+See "DropTarget#on_drop":droptarget.html#DropTarget_ondrop. This function is implemented
+appropriately for text, and calls "TextDropTarget#on_drop_text":textdroptarget.html#TextDropTarget_ondroptext.
+
+h3(#TextDropTarget_ondroptext). TextDropTarget#on_drop_text
+
+ Boolean *on_drop_text*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)String% data)
+
+Override this function to receive dropped text.
+
+h4. Parameters
+
+* _x_ The x coordinate of the mouse.
+* _y_ The y coordinate of the mouse.
+* _data_ The data being dropped: a String.
+
+h4. Return value
+
+Return true to accept the data, false to veto the operation.
+

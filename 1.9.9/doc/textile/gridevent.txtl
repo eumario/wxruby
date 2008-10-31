@@ -1,0 +1,99 @@
+h1(#wxgridevent). Wx::GridEvent
+
+This event class contains information about various grid events.
+
+h2. Derived from
+
+"NotifyEvent":notifyevent.html
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event handling
+
+ gridevt.inc
+
+<div id="methods">
+
+h2. Methods
+
+* "GridEvent.new":#GridEvent_new
+* "GridEvent#alt_down":#GridEvent_altdown
+* "GridEvent#control_down":#GridEvent_controldown
+* "GridEvent#get_col":#GridEvent_getcol
+* "GridEvent#get_position":#GridEvent_getposition
+* "GridEvent#get_row":#GridEvent_getrow
+* "GridEvent#meta_down":#GridEvent_metadown
+* "GridEvent#selecting":#GridEvent_selecting
+* "GridEvent#shift_down":#GridEvent_shiftdown
+
+</div>
+
+
+h3(#GridEvent_constr). GridEvent.new
+
+  *GridEvent.new*(%(arg-type)Integer% id,  %(arg-type)"EventType":eventtype.html% type,  %(arg-type)Object% obj, 
+                %(arg-type)Integer% row = -1, 
+                %(arg-type)Integer% col = -1, 
+                %(arg-type)Integer% x = -1, 
+                %(arg-type)Integer% y = -1, 
+                %(arg-type)Boolean% sel = true, 
+                %(arg-type)Boolean% control = false, 
+                %(arg-type)Boolean% shift = false, 
+                %(arg-type)Boolean% alt = false, 
+                %(arg-type)Boolean% meta = false)
+
+h4. Parameters
+
+h3(#GridEvent_altdown). GridEvent#alt_down
+
+ Boolean *alt_down*()
+
+Returns true if the Alt key was down at the time of the event.
+
+h3(#GridEvent_controldown). GridEvent#control_down
+
+ Boolean *control_down*()
+
+Returns true if the Control key was down at the time of the event.
+
+h3(#GridEvent_getcol). GridEvent#get_col
+
+ Integer *get_col*()
+
+Column at which the event occurred.
+
+h3(#GridEvent_getposition). GridEvent#get_position
+
+ "Point":point.html *get_position*()
+
+Position in pixels at which the event occurred.
+
+h3(#GridEvent_getrow). GridEvent#get_row
+
+ Integer *get_row*()
+
+Row at which the event occurred.
+
+h3(#GridEvent_metadown). GridEvent#meta_down
+
+ Boolean *meta_down*()
+
+Returns true if the Meta key was down at the time of the event.
+
+h3(#GridEvent_selecting). GridEvent#selecting
+
+ Boolean *selecting*()
+
+Returns true if the user deselected a cell, false if the user
+deselected a cell.
+
+h3(#GridEvent_shiftdown). GridEvent#shift_down
+
+ Boolean *shift_down*()
+
+Returns true if the Shift key was down at the time of the event.
+

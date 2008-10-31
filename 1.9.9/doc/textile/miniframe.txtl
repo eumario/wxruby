@@ -1,0 +1,107 @@
+h1(#wxminiframe). Wx::MiniFrame
+
+A miniframe is a frame with a small title bar. It is suitable for floating toolbars that must not
+take up too much screen area.
+
+h2. Derived from
+
+"Frame":frame.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@ICONIZE@|Display the frame iconized (minimized) (Windows only).|
+|@CAPTION@|Puts a caption on the frame.|
+|@DEFAULT_FRAME_STYLE@|Defined as *MINIMIZE_BOX ** MAXIMIZE_BOX ** THICK_FRAME ** SYSTEM_MENU ** CAPTION ** CLOSE_BOX*.|
+|@MINIMIZE@|Identical to *ICONIZE*.|
+|@MINIMIZE_BOX@|Displays a minimize box on the frame (Windows and Motif only).|
+|@MAXIMIZE@|Displays the frame maximized (Windows only).|
+|@MAXIMIZE_BOX@|Displays a maximize box on the frame (Windows and Motif only).|
+|@CLOSE_BOX@|Displays a close box on the frame.|
+|@STAY_ON_TOP@|Stay on top of other windows (Windows only).|
+|@SYSTEM_MENU@|Displays a system menu (Windows and Motif only).|
+|@THICK_FRAME@|Displays a thick frame around the window (Windows and Motif only).|
+|@TINY_CAPTION_HORIZ@|This style is obsolete andnot used any longer.|
+|@TINY_CAPTION_VERT@|This style is obsolete and notused any longer.|
+|@RESIZE_BORDER@|Displays a resizeable border around the window (Motif only;for Windows, it is implicit in *THICK_FRAME*).|
+
+
+See also "window styles overview":windowstyles.html. Note that all the window styles
+above are ignored under GTK and the mini frame cannot be resized by the user.
+
+h2. Remarks
+
+This class has miniframe functionality under Windows and GTK, i.e. the presence
+of mini frame will not be noted in the task bar and focus behaviour is different.
+On other platforms, it behaves like a normal frame.
+
+h2. See also
+
+"MDIParentFrame":mdiparentframe.html, "MDIChildFrame":mdichildframe.html, "Frame":frame.html, "Dialog":dialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "MiniFrame.new":#MiniFrame_new
+* "MiniFrame#create":#MiniFrame_create
+
+</div>
+
+
+h3(#MiniFrame_new). MiniFrame.new
+
+  *MiniFrame.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                %(arg-type)String% name = "frame")
+
+Constructor, creating the window.
+
+h4. Parameters
+
+* _parent_ The window parent. This may be NULL. If it is non-NULL, the frame will
+always be displayed on top of the parent window on Windows.
+* _id_ The window identifier. It may take a value of -1 to indicate a default value.
+* _title_ The caption to be displayed on the frame's title bar.
+* _pos_ The window position. A value of (-1, -1) indicates a default position, chosen by
+either the windowing system or Widgets, depending on platform.
+* _size_ The window size. A value of (-1, -1) indicates a default size, chosen by
+either the windowing system or Widgets, depending on platform.
+* _style_ The window style. See "MiniFrame":miniframe.html.
+* _name_ The name of the window. This parameter is used to associate a name with the item,
+allowing the application user to set Motif resource values for
+individual windows.
+
+h4. Remarks
+
+The frame behaves like a normal frame on non-Windows platforms.
+
+h4. See also
+
+"MiniFrame#create":miniframe.html#MiniFrame_create
+
+  *destructor*()
+
+Destructor. Destroys all child windows and menu bar if present.
+
+h3(#MiniFrame_create). MiniFrame#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                %(arg-type)String% name = "frame")
+
+Used in two-step frame construction. See "MiniFrame.new":miniframe.html#MiniFrame_new for further details.
+
+
+

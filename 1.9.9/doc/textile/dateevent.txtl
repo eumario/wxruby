@@ -1,0 +1,38 @@
+h1(#wxdateevent). Wx::DateEvent
+
+This event class holds information about a date change and is used together
+with "DatePickerCtrl":datepickerctrl.html. It also serves as a base class
+for "CalendarEvent":calendarevent.html.
+
+h2. Derived from
+
+"CommandEvent":commandevent.html
+
+"Event":event.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DateEvent#get_date":#DateEvent_getdate
+* "DateEvent#set_date":#DateEvent_setdate
+
+</div>
+
+
+h3(#DateEvent_getdate). DateEvent#get_date
+
+ "DateTime":datetime.html *get_date*()
+
+Returns the date.
+
+
+h3(#DateEvent_setdate). DateEvent#set_date
+
+  *set_date*(%(arg-type)"DateTime":datetime.html% date)
+
+Sets the date carried by the event, normally only used by the library
+internally.
+

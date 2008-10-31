@@ -1,0 +1,173 @@
+h1(#wxtimer). Wx::Timer
+
+The Timer class allows you to execute code at specified intervals. Its
+precision is platform-dependent, but in general will not be better than 1ms nor
+worse than 1s.
+
+There are several different ways to use this class:
+
+The most convenient way is to use the Timer.every class method, which accepts
+a Integer to specify the millisecond interval at which the Timer should
+fire, and a block to specify what should happen at that interval. For
+example, to print a message to STDOUT every 1/2 second:
+
+  Wx::Timer.every(500) do
+    puts "Tick"
+  end                               
+
+Secondly you may use the event handling mechanism to direct events to
+any object which inherits from "EvtHandler":evthandler.html. To do this
+use the longer constructor or "set_owner":#Timer_setowner. Then use the
+@evt_timer@ method to connect it to the event handler which will receive
+"TimerEvent":timerevent.html notifications.
+
+  # assuming 'self' is some Window or Wx::App
+  timer = Wx::Timer.new(self)
+  evt_timer(timer.id) { puts "Timer ticked" }
+  timer.start(100)
+
+Lastly, you may derive a new class from Timer and define your own
+"notify":timernotify.html instance method in that to perform the
+required action. For example:
+
+ class MyTimer < Wx::Timer
+   def notify
+     puts "Timer ticked" 
+   end 
+ end
+ 
+ timer = MyTimer.new
+ timer.start(100) # every 1/10 second
+
+Unless you use Timer.every, you must start the timer with "start":#Timer_start
+after constructing it before it actually starts sending notifications. It can
+be stopped later with "stop":#Timer_stop
+
+h2. Derived from
+
+"EvtHandler":evthandler.html, "Object":object.html
+
+h2. See also
+
+"::StartTimer":starttimer.html, "::GetElapsedTime":getelapsedtime.html, "StopWatch":stopwatch.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Timer.new":#Timer_new
+* "Timer.after":#Timer_after
+* "Timer.every":#Timer_every
+* "Timer#get_id":#Timer_getid
+* "Timer#get_interval":#Timer_getinterval
+* "Timer#is_one_shot":#Timer_isoneshot
+* "Timer#is_running":#Timer_isrunning
+* "Timer#notify":#Timer_notify
+* "Timer#set_owner":#Timer_setowner
+* "Timer#start":#Timer_start
+* "Timer#stop":#Timer_stop
+
+</div>
+
+
+h3(#Timer_wxtimer). Timer.new
+
+  *Timer.new*(%(arg-type)"EvtHandler":evthandler.html% owner,  %(arg-type)Integer% id = -1)
+
+Creates a timer and associates it with _owner_. Please see 
+"set_owner":#Timer_setowner for the description of parameters.
+
+h3(#Timer_after). Timer.after
+
+  *Timer.after*(%(arg-type)Integer% interval) { ... }
+
+Carries out the action specified in the passed block after _interval_
+milliseconds have passed. Note that the action will happen only once; if
+you want a repeating action, use "Timer.every":#Timer_every
+
+If you wish to interrupt the timed event before it may have happened,
+capture the return value which is the newly created timer for this
+action, and call "stop":#Timer_stop on it.
+
+h3(#Timer_every). Timer.every
+
+  *Timer.every*(%(arg-type)Integer% interval) { ... }
+
+Repeats the action specified in the passed block every _interval_
+milliseconds. The timer is owned by the application object and will fire
+as long as the application is running.
+
+The method returns the new timer; if you may wish to stop the timer
+before the application finishes, you should capture this return value so
+you can call "stop":#Timer_stop on it later.
+
+h3(#Timer_getid). Timer#get_id
+
+ Integer *get_id*()
+
+Returns the id of the timer.
+
+h3(#Timer_getinterval). Timer#get_interval
+
+ Integer *get_interval*()
+
+Returns the current interval for the timer (in milliseconds).
+
+h3(#Timer_isoneshot). Timer#is_one_shot
+
+ Boolean *is_one_shot*()
+
+Returns @true@ if the timer is one shot, i.e. if it will stop after firing the
+first notification automatically.
+
+h3(#Timer_isrunning). Timer#is_running
+
+ Boolean *is_running*()
+
+Returns @true@ if the timer is running, @false@ if it is stopped.
+
+h3(#Timer_notify). Timer#notify
+
+  *notify*()
+
+This member should be overridden by the user if the default constructor was
+used and "set_owner":#Timer_setowner wasn't called.
+
+Perform whatever action which is to be taken periodically here.
+
+h3(#Timer_setowner). Timer#set_owner
+
+  *set_owner*(%(arg-type)"EvtHandler":evthandler.html% owner,  %(arg-type)Integer% id = -1)
+
+Associates the timer with the given _owner_\/ object. When the timer is
+running, the owner will receive "timer events":timerevent.html with
+id equal to _id_\/ specified here.
+
+h3(#Timer_start). Timer#start
+
+ Boolean *start*(%(arg-type)Integer% milliseconds = -1,  %(arg-type)Boolean% oneShot = @false@)
+
+(Re)starts the timer. If _milliseconds_\/ parameter is -1 (value by default),
+the previous value is used. Returns @false@ if the timer could not be started,
+@true@ otherwise (in MS Windows timers are a limited resource).
+
+If _oneShot_\/ is @false@ (the default), the "Notify":timernotify.html 
+function will be called repeatedly until the timer is stopped. If @true@,
+it will be called only once and the timer will stop automatically. To make your
+code more readable you may also use the following symbolic constants:
+
+
+
+|TIMER_CONTINUOUS|Start a normal, continuously running, timer|
+|TIMER_ONE_SHOT|Start a one shot timer|
+
+
+If the timer was already running, it will be stopped by this method before
+restarting it.
+
+h3(#Timer_stop). Timer#stop
+
+  *stop*()
+
+Stops the timer.
+

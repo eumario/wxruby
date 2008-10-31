@@ -1,0 +1,230 @@
+h1(#wxauinotebook). Wx::AuiNotebook
+
+AuiNotebook is part of the AUI class framework.
+See also "AUI overview":auioverview.html.
+
+AuiNotebook is a notebook control which implements many features common in applications with dockable panes.
+Specifically, AuiNotebook implements functionality which allows the user to rearrange tab order via drag-and-drop,
+split the tab window into many different splitter configurations, and toggle through different themes to customize
+the control's look and feel.
+
+An effort has been made to try to maintain an API as similar to that of Notebook.
+
+The default theme that is used is AuiDefaultTabArt, which provides a modern, glossy look and feel.
+The theme can be changed by calling "AuiNotebook#set_art_provider":auinotebook.html#AuiNotebook_setartprovider.
+
+h2. Derived from
+
+"Control":control.html
+
+h2. Window styles
+
+
+|@AUI_NB_DEFAULT_STYLE@|Defined as AUI_NB_TOP | AUI_NB_TAB_SPLIT | AUI_NB_TAB_MOVE | AUI_NB_SCROLL_BUTTONS | AUI_NB_CLOSE_ON_ACTIVE_TAB.|
+|@AUI_NB_TAB_SPLIT@|Allows the tab control to be split by dragging a tab.|
+|@AUI_NB_TAB_MOVE@|Allows a tab to be moved horizontally by dragging.|
+|@AUI_NB_TAB_EXTERNAL_MOVE@|Allows a tab to be moved to another tab control.|
+|@AUI_NB_TAB_FIXED_WIDTH@|With this style, all tabs have the same width.|
+|@AUI_NB_SCROLL_BUTTONS@|With this style, left and right scroll buttons are displayed.|
+|@AUI_NB_WINDOWLIST_BUTTON@|With this style, a drop-down list of windows is available.|
+|@AUI_NB_CLOSE_BUTTON@|With this style, a close button is available on the tab bar.|
+|@AUI_NB_CLOSE_ON_ACTIVE_TAB@|With this style, the close button is visible on the active tab.|
+|@AUI_NB_CLOSE_ON_ALL_TABS@|With this style, the close button is visible on all tabs.|
+
+
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "AuiNotebook.new":#AuiNotebook_new
+* "AuiNotebook#add_page":#AuiNotebook_addpage
+* "AuiNotebook#create":#AuiNotebook_create
+* "AuiNotebook#delete_page":#AuiNotebook_deletepage
+* "AuiNotebook#each_page":#AuiNotebook_eachpage
+* "AuiNotebook#get_art_provider":#AuiNotebook_getartprovider
+* "AuiNotebook#get_page":#AuiNotebook_getpage
+* "AuiNotebook#get_page_bitmap":#AuiNotebook_getpagebitmap
+* "AuiNotebook#get_page_count":#AuiNotebook_getpagecount
+* "AuiNotebook#get_page_index":#AuiNotebook_getpageindex
+* "AuiNotebook#get_page_text":#AuiNotebook_getpagetext
+* "AuiNotebook#get_selection":#AuiNotebook_getselection
+* "AuiNotebook#insert_page":#AuiNotebook_insertpage
+* "AuiNotebook#remove_page":#AuiNotebook_removepage
+* "AuiNotebook#set_art_provider":#AuiNotebook_setartprovider
+* "AuiNotebook#set_page_bitmap":#AuiNotebook_setpagebitmap
+* "AuiNotebook#set_page_text":#AuiNotebook_setpagetext
+* "AuiNotebook#set_selection":#AuiNotebook_setselection
+* "AuiNotebook#set_tab_ctrl_height":#AuiNotebook_settabctrlheight
+* "AuiNotebook#set_uniform_bitmap_size":#AuiNotebook_setuniformbitmapsize
+* "AuiNotebook#use_glossy_art":#AuiNotebook_useglossyart
+* "AuiNotebook#use_simple_art":#AuiNotebook_usesimpleart
+
+</div>
+
+
+h3(#AuiNotebook_wxauinotebook). AuiNotebook.new
+
+  *AuiNotebook.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                  %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                  %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                  %(arg-type)Integer% style = AUI_NB_DEFAULT_STYLE)
+
+Constructor. Creates a AuiNotebok control.
+
+h3(#AuiNotebook_addpage). AuiNotebook#add_page
+
+ Boolean *add_page*(%(arg-type)"Window":window.html% page,  %(arg-type)String% caption, 
+                  %(arg-type)Boolean% select = false, 
+                  %(arg-type)"Bitmap":bitmap.html% bitmap = Wx::NULL_BITMAP)
+
+Adds a page.  If the _select_ parameter is true, calling this will generate a page change event.
+
+h3(#AuiNotebook_create). AuiNotebook#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0)
+
+Creates the notebook window.
+
+h3(#AuiNotebook_deletepage). AuiNotebook#delete_page
+
+ Boolean *delete_page*(%(arg-type)Integer% page)
+
+Deletes a page at the given index.  Calling this method will generate a page change event.
+
+h3(#AuiNotebook_eachpage). AuiNotebook#each_page
+
+ *each_page*() { ... }
+
+Iterates over all the pages in the notebook, from first to last. Each
+page (a "Window":window.html object) will be passed to the associated block.
+
+h3(#AuiNotebook_getartprovider). AuiNotebook#get_art_provider
+
+ "AuiTabArt":auitabart.html *get_art_provider*()
+
+Returns the associated art provider.
+
+h3(#AuiNotebook_getpage). AuiNotebook#get_page
+
+ "Window":window.html *get_page*(%(arg-type)Integer% page_idx)
+
+Returns the page specified by the given index.
+
+h3(#AuiNotebook_getpagebitmap). AuiNotebook#get_page_bitmap
+
+ "Bitmap":bitmap.html *get_page_bitmap*(%(arg-type)Integer% page)
+
+Returns the tab bitmap for the page.
+
+h3(#AuiNotebook_getpagecount). AuiNotebook#get_page_count
+
+ Integer *get_page_count*()
+
+Returns the number of pages in the notebook.
+
+h3(#AuiNotebook_getpageindex). AuiNotebook#get_page_index
+
+ Integer *get_page_index*(%(arg-type)"Window":window.html% page_wnd)
+
+Returns the page index for the specified window.  If the window is not found in
+the notebook, NOT_FOUND is returned.
+
+h3(#AuiNotebook_getpagetext). AuiNotebook#get_page_text
+
+ String *get_page_text*(%(arg-type)Integer% page)
+
+Returns the tab label for the page.
+
+h3(#AuiNotebook_getselection). AuiNotebook#get_selection
+
+ Integer *get_selection*()
+
+Returns the currently selected page.
+
+h3(#AuiNotebook_insertpage). AuiNotebook#insert_page
+
+ Boolean *insert_page*(%(arg-type)Integer% page_idx,  %(arg-type)"Window":window.html% page, 
+                     %(arg-type)String% caption, 
+                     %(arg-type)Boolean% select = false, 
+                     %(arg-type)"Bitmap":bitmap.html% bitmap = Wx::NULL_BITMAP)
+
+InsertPage() is similar to AddPage, but allows the ability to specify the insert location.
+If the _select_ parameter is true, calling this will generate a page change event.
+
+h3(#AuiNotebook_removepage). AuiNotebook#remove_page
+
+ Boolean *remove_page*(%(arg-type)Integer% page)
+
+Removes a page, without deleting the window pointer.
+
+h3(#AuiNotebook_setartprovider). AuiNotebook#set_art_provider
+
+  *set_art_provider*(%(arg-type)"AuiTabArt":auitabart.html% art)
+
+Sets the art provider to be used by the notebook.
+
+h3(#AuiNotebook_setpagebitmap). AuiNotebook#set_page_bitmap
+
+ Boolean *set_page_bitmap*(%(arg-type)Integer% page,  %(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap for the page.  To remove a bitmap from the tab caption, pass
+@Wx::NULL_BITMAP@.
+
+h3(#AuiNotebook_setpagetext). AuiNotebook#set_page_text
+
+ Boolean *set_page_text*(%(arg-type)Integer% page,  %(arg-type)String% text)
+
+Sets the tab label for the page.
+
+h3(#AuiNotebook_setselection). AuiNotebook#set_selection
+
+ Integer *set_selection*(%(arg-type)Integer% new_page)
+
+Sets the page selection.  Calling this method will generate a page change event.
+
+h3(#AuiNotebook_settabctrlheight). AuiNotebook#set_tab_ctrl_height
+
+  *set_tab_ctrl_height*(%(arg-type)Integer% height)
+
+Sets the tab height.  By default, the tab control height is calculated
+by measuring the text height and bitmap sizes on the tab captions.  Calling this
+method will override that calculation and set the tab control to the specified
+height parameter.  A call to this method will override any call to SetUniformBitmapSize().
+Specifying -1 as the height will return the control to its default auto-sizing behaviour.
+
+h3(#AuiNotebook_setuniformbitmapsize). AuiNotebook#set_uniform_bitmap_size
+
+  *set_uniform_bitmap_size*(%(arg-type)"Size":size.html% size)
+
+SetUniformBitmapSize() ensures that all tabs will have the same height, even
+if some tabs don't have bitmaps.  Passing DefaultSize to this function will
+instruct the control to use dynamic tab height, which is the default behaviour.
+Under the default behaviour, when a tab with a large bitmap is added, the tab control's
+height will automatically increase to accommodate the larger bitmap.
+
+  *split*(%(arg-type)Integer% page,  %(arg-type)Integer% direction)
+
+Split performs a split operation programmatically. The argument page
+indicates the page that will be split off.  This page will also become
+the active page after the split.  The direction argument specifies where
+the pane should go, it should be one of the following: TOP, BOTTOM,
+LEFT, or RIGHT.
+
+h3(#AuiNotebook_useglossyart). AuiNotebook#use_glossy_art
+
+ *use_glossy_art*()
+
+Makes the notebook tabs be drawn with a 'glossy' style, including a
+gradient. This is the default.
+
+h3(#AuiNotebook_usesimpleart). AuiNotebook#use_simple_art
+
+ *use_simple_art*()
+
+Makes the notebook tabs be drawn with a simple, flat style.

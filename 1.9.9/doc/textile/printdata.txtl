@@ -1,0 +1,370 @@
+h1(#wxprintdata). Wx::PrintData
+
+This class holds a variety of information related to printers and
+printer device contexts. This class is used to create a PrinterDC
+and a PostScriptDC. It is also used as a data member of PrintDialogData
+and PageSetupDialogData, as part of the mechanism for transferring data
+between the print dialogs and the application.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"PrintDialog":printdialog.html, 
+"PageSetupDialog":pagesetupdialog.html, 
+"PrintDialogData":printdialogdata.html, 
+"PageSetupDialogData":pagesetupdialogdata.html, 
+"PrintDialog Overview":printdialogoverview.html, 
+"PrinterDC":printerdc.html, 
+"PostScriptDC":postscriptdc.html
+
+h2. Remarks
+
+The following functions are specific to PostScript printing
+and have not yet been documented:
+
+
+ const String& GetPrinterCommand() const ;
+ const String& GetPrinterOptions() const ;
+ const String& GetPreviewCommand() const ;
+ const String& GetFilename() const ;
+ const String& GetFontMetricPath() const ;
+ double GetPrinterScaleX() const ;
+ double GetPrinterScaleY() const ;
+ long GetPrinterTranslateX() const ;
+ long GetPrinterTranslateY() const ;
+ // PRINT_MODE_PREVIEW, PRINT_MODE_FILE, PRINT_MODE_PRINTER
+ PrintMode GetPrintMode() const ;
+ 
+ void SetPrinterCommand(const String& command) ;
+ void SetPrinterOptions(const String& options) ;
+ void SetPreviewCommand(const String& command) ;
+ void SetFilename(const String& filename) ;
+ void SetFontMetricPath(const String& path) ;
+ void SetPrinterScaleX(double x) ;
+ void SetPrinterScaleY(double y) ;
+ void SetPrinterScaling(double x, double y) ;
+ void SetPrinterTranslateX(long x) ;
+ void SetPrinterTranslateY(long y) ;
+ void SetPrinterTranslation(long x, long y) ;
+ void SetPrintMode(PrintMode printMode) ;
+ 
+
+<div id="methods">
+
+h2. Methods
+
+* "PrintData.new":#PrintData_new
+* "PrintData#get_collate":#PrintData_getcollate
+* "PrintData#get_bin":#PrintData_getbin
+* "PrintData#get_colour":#PrintData_getcolour
+* "PrintData#get_duplex":#PrintData_getduplex
+* "PrintData#get_no_copies":#PrintData_getnocopies
+* "PrintData#get_orientation":#PrintData_getorientation
+* "PrintData#get_paper_id":#PrintData_getpaperid
+* "PrintData#get_printer_name":#PrintData_getprintername
+* "PrintData#get_quality":#PrintData_getquality
+* "PrintData#ok":#PrintData_ok
+* "PrintData#set_bin":#PrintData_setbin
+* "PrintData#set_collate":#PrintData_setcollate
+* "PrintData#set_colour":#PrintData_setcolour
+* "PrintData#set_duplex":#PrintData_setduplex
+* "PrintData#set_no_copies":#PrintData_setnocopies
+* "PrintData#set_orientation":#PrintData_setorientation
+* "PrintData#set_paper_id":#PrintData_setpaperid
+* "PrintData#set_printer_name":#PrintData_setprintername
+* "PrintData#set_quality":#PrintData_setquality
+
+</div>
+
+
+
+h3(#PrintData_new). PrintData.new
+
+  *PrintData.new*(%(arg-type)"PrintData":printdata.html% data)
+
+Copy constructor.
+
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#PrintData_getcollate). PrintData#get_collate
+
+ Boolean *get_collate*()
+
+Returns true if collation is on.
+
+
+h3(#PrintData_getbin). PrintData#get_bin
+
+ "PrintBin":printbin.html *get_bin*()
+
+Returns the current bin (papersource). By default, the system is left to select
+the bin (@PRINTBIN_DEFAULT@ is returned).
+
+See "set_bin()":#PrintData_setbin() for the full list of bin values.
+
+
+h3(#PrintData_getcolour). PrintData#get_colour
+
+ Boolean *get_colour*()
+
+Returns true if colour printing is on.
+
+
+h3(#PrintData_getduplex). PrintData#get_duplex
+
+ "DuplexMode":duplexmode.html *get_duplex*()
+
+Returns the duplex mode. One of DUPLEX_SIMPLEX, DUPLEX_HORIZONTAL, DUPLEX_VERTICAL.
+
+
+h3(#PrintData_getnocopies). PrintData#get_no_copies
+
+ Integer *get_no_copies*()
+
+Returns the number of copies requested by the user.
+
+
+h3(#PrintData_getorientation). PrintData#get_orientation
+
+ Integer *get_orientation*()
+
+Gets the orientation. This can be LANDSCAPE or PORTRAIT.
+
+
+h3(#PrintData_getpaperid). PrintData#get_paper_id
+
+ "PaperSize":papersize.html *get_paper_id*()
+
+Returns the paper size id. For more information, see "PrintData#set_paper_id":printdata.html#PrintData_setpaperid.
+
+
+h3(#PrintData_getprintername). PrintData#get_printer_name
+
+ String *get_printer_name*()
+
+Returns the printer name. If the printer name is the empty string, it indicates that the default
+printer should be used.
+
+
+h3(#PrintData_getquality). PrintData#get_quality
+
+ "PrintQuality":printquality.html *get_quality*()
+
+Returns the current print quality. This can be a positive integer, denoting the number of dots per inch, or
+one of the following identifiers:
+
+
+ PRINT_QUALITY_HIGH
+ PRINT_QUALITY_MEDIUM
+ PRINT_QUALITY_LOW
+ PRINT_QUALITY_DRAFT
+ 
+
+On input you should pass one of these identifiers, but on return you may get back a positive integer
+indicating the current resolution setting.
+
+
+h3(#PrintData_ok). PrintData#ok
+
+ Boolean *ok*()
+
+Returns true if the print data is valid for using in print dialogs.
+This can return false on Windows if the current printer is not set, for example.
+On all other platforms, it returns true.
+
+
+h3(#PrintData_setbin). PrintData#set_bin
+
+  *set_bin*(%(arg-type)"PrintBin":printbin.html% flag)
+
+Sets the current bin. Possible values are:
+
+
+
+ enum PrintBin
+ {
+     PRINTBIN_DEFAULT,
+ 
+     PRINTBIN_ONLYONE,
+     PRINTBIN_LOWER,
+     PRINTBIN_MIDDLE,
+     PRINTBIN_MANUAL,
+     PRINTBIN_ENVELOPE,
+     PRINTBIN_ENVMANUAL,
+     PRINTBIN_AUTO,
+     PRINTBIN_TRACTOR,
+     PRINTBIN_SMALLFMT,
+     PRINTBIN_LARGEFMT,
+     PRINTBIN_LARGECAPACITY,
+     PRINTBIN_CASSETTE,
+     PRINTBIN_FORMSOURCE,
+ 
+     PRINTBIN_USER,
+ };
+ 
+
+
+
+h3(#PrintData_setcollate). PrintData#set_collate
+
+  *set_collate*(%(arg-type)Boolean% flag)
+
+Sets collation to on or off.
+
+
+h3(#PrintData_setcolour). PrintData#set_colour
+
+  *set_colour*(%(arg-type)Boolean% flag)
+
+Sets colour printing on or off.
+
+
+h3(#PrintData_setduplex). PrintData#set_duplex
+
+  *set_duplex*(%(arg-type)"DuplexMode":duplexmode.html% mode)
+
+Returns the duplex mode. One of DUPLEX_SIMPLEX, DUPLEX_HORIZONTAL, DUPLEX_VERTICAL.
+
+
+h3(#PrintData_setnocopies). PrintData#set_no_copies
+
+  *set_no_copies*(%(arg-type)Integer% n)
+
+Sets the default number of copies to be printed out.
+
+
+h3(#PrintData_setorientation). PrintData#set_orientation
+
+  *set_orientation*(%(arg-type)Integer% orientation)
+
+Sets the orientation. This can be LANDSCAPE or PORTRAIT.
+
+
+h3(#PrintData_setpaperid). PrintData#set_paper_id
+
+  *set_paper_id*(%(arg-type)"PaperSize":papersize.html% paperId)
+
+PaperSizeSets the paper id. This indicates the type of paper to be used. For a mapping between
+paper id, paper size and string name, see PrintPaperDatabase in @paper.h@ (not yet documented).
+
+_paperId_ can be one of:
+
+
+
+     PAPER_NONE,               // Use specific dimensions
+     PAPER_LETTER,             // Letter, 8 1/2 by 11 inches
+     PAPER_LEGAL,              // Legal, 8 1/2 by 14 inches
+     PAPER_A4,                 // A4 Sheet, 210 by 297 millimeters
+     PAPER_CSHEET,             // C Sheet, 17 by 22 inches
+     PAPER_DSHEET,             // D Sheet, 22 by 34 inches
+     PAPER_ESHEET,             // E Sheet, 34 by 44 inches
+     PAPER_LETTERSMALL,        // Letter Small, 8 1/2 by 11 inches
+     PAPER_TABLOID,            // Tabloid, 11 by 17 inches
+     PAPER_LEDGER,             // Ledger, 17 by 11 inches
+     PAPER_STATEMENT,          // Statement, 5 1/2 by 8 1/2 inches
+     PAPER_EXECUTIVE,          // Executive, 7 1/4 by 10 1/2 inches
+     PAPER_A3,                 // A3 sheet, 297 by 420 millimeters
+     PAPER_A4SMALL,            // A4 small sheet, 210 by 297 millimeters
+     PAPER_A5,                 // A5 sheet, 148 by 210 millimeters
+     PAPER_B4,                 // B4 sheet, 250 by 354 millimeters
+     PAPER_B5,                 // B5 sheet, 182-by-257-millimeter paper
+     PAPER_FOLIO,              // Folio, 8-1/2-by-13-inch paper
+     PAPER_QUARTO,             // Quarto, 215-by-275-millimeter paper
+     PAPER_10X14,              // 10-by-14-inch sheet
+     PAPER_11X17,              // 11-by-17-inch sheet
+     PAPER_NOTE,               // Note, 8 1/2 by 11 inches
+     PAPER_ENV_9,              // #9 Envelope, 3 7/8 by 8 7/8 inches
+     PAPER_ENV_10,             // #10 Envelope, 4 1/8 by 9 1/2 inches
+     PAPER_ENV_11,             // #11 Envelope, 4 1/2 by 10 3/8 inches
+     PAPER_ENV_12,             // #12 Envelope, 4 3/4 by 11 inches
+     PAPER_ENV_14,             // #14 Envelope, 5 by 11 1/2 inches
+     PAPER_ENV_DL,             // DL Envelope, 110 by 220 millimeters
+     PAPER_ENV_C5,             // C5 Envelope, 162 by 229 millimeters
+     PAPER_ENV_C3,             // C3 Envelope, 324 by 458 millimeters
+     PAPER_ENV_C4,             // C4 Envelope, 229 by 324 millimeters
+     PAPER_ENV_C6,             // C6 Envelope, 114 by 162 millimeters
+     PAPER_ENV_C65,            // C65 Envelope, 114 by 229 millimeters
+     PAPER_ENV_B4,             // B4 Envelope, 250 by 353 millimeters
+     PAPER_ENV_B5,             // B5 Envelope, 176 by 250 millimeters
+     PAPER_ENV_B6,             // B6 Envelope, 176 by 125 millimeters
+     PAPER_ENV_ITALY,          // Italy Envelope, 110 by 230 millimeters
+     PAPER_ENV_MONARCH,        // Monarch Envelope, 3 7/8 by 7 1/2 inches
+     PAPER_ENV_PERSONAL,       // 6 3/4 Envelope, 3 5/8 by 6 1/2 inches
+     PAPER_FANFOLD_US,         // US Std Fanfold, 14 7/8 by 11 inches
+     PAPER_FANFOLD_STD_GERMAN, // German Std Fanfold, 8 1/2 by 12 inches
+     PAPER_FANFOLD_LGL_GERMAN, // German Legal Fanfold, 8 1/2 by 13 inches
+ 
+ Windows 95 only:
+     PAPER_ISO_B4,             // B4 (ISO) 250 x 353 mm
+     PAPER_JAPANESE_POSTCARD,  // Japanese Postcard 100 x 148 mm
+     PAPER_9X11,               // 9 x 11 in
+     PAPER_10X11,              // 10 x 11 in
+     PAPER_15X11,              // 15 x 11 in
+     PAPER_ENV_INVITE,         // Envelope Invite 220 x 220 mm
+     PAPER_LETTER_EXTRA,       // Letter Extra 9 \275 x 12 in
+     PAPER_LEGAL_EXTRA,        // Legal Extra 9 \275 x 15 in
+     PAPER_TABLOID_EXTRA,      // Tabloid Extra 11.69 x 18 in
+     PAPER_A4_EXTRA,           // A4 Extra 9.27 x 12.69 in
+     PAPER_LETTER_TRANSVERSE,  // Letter Transverse 8 \275 x 11 in
+     PAPER_A4_TRANSVERSE,      // A4 Transverse 210 x 297 mm
+     PAPER_LETTER_EXTRA_TRANSVERSE, // Letter Extra Transverse 9\275 x 12 in
+     PAPER_A_PLUS,             // SuperA/SuperA/A4 227 x 356 mm
+     PAPER_B_PLUS,             // SuperB/SuperB/A3 305 x 487 mm
+     PAPER_LETTER_PLUS,        // Letter Plus 8.5 x 12.69 in
+     PAPER_A4_PLUS,            // A4 Plus 210 x 330 mm
+     PAPER_A5_TRANSVERSE,      // A5 Transverse 148 x 210 mm
+     PAPER_B5_TRANSVERSE,      // B5 (JIS) Transverse 182 x 257 mm
+     PAPER_A3_EXTRA,           // A3 Extra 322 x 445 mm
+     PAPER_A5_EXTRA,           // A5 Extra 174 x 235 mm
+     PAPER_B5_EXTRA,           // B5 (ISO) Extra 201 x 276 mm
+     PAPER_A2,                 // A2 420 x 594 mm
+     PAPER_A3_TRANSVERSE,      // A3 Transverse 297 x 420 mm
+     PAPER_A3_EXTRA_TRANSVERSE // A3 Extra Transverse 322 x 445 mm
+ 
+
+
+
+h3(#PrintData_setprintername). PrintData#set_printer_name
+
+  *set_printer_name*(%(arg-type)String% printerName)
+
+Sets the printer name. This can be the empty string to indicate that the default
+printer should be used.
+
+
+h3(#PrintData_setquality). PrintData#set_quality
+
+  *set_quality*(%(arg-type)"PrintQuality":printquality.html% quality)
+
+Sets the desired print quality. This can be a positive integer, denoting the number of dots per inch, or
+one of the following identifiers:
+
+
+ PRINT_QUALITY_HIGH
+ PRINT_QUALITY_MEDIUM
+ PRINT_QUALITY_LOW
+ PRINT_QUALITY_DRAFT
+ 
+
+On input you should pass one of these identifiers, but on return you may get back a positive integer
+indicating the current resolution setting.
+
+
+h3(#PrintData_assign). PrintData#=
+
+  *operator $=$*(%(arg-type)"PrintData":printdata.html% data)
+
+Assigns print data to this object.
+
+  *operator $=$*(%(arg-type)"PrintSetupData":printsetupdata.html% data)
+
+Assigns print setup data to this object. PrintSetupData is deprecated,
+but retained for backward compatibility.
+

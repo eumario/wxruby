@@ -1,0 +1,190 @@
+h1(#wxhyperlinkctrl). Wx::HyperlinkCtrl
+
+This class shows a static text element which links to an URL.
+Appearance and behaviour is completely customizable. In fact, when the user
+clicks on the hyperlink, a "HyperlinkEvent":hyperlinkevent.html is
+sent but if that event is not handled (or it's skipped; see
+"Event#skip":event.html#Event_skip), then a call to
+"LaunchDefaultBrowser":launchdefaultbrowser.html is done with the
+hyperlink's URL.
+
+Note that standard "Window":window.html functions like "set_background_colour":#HyperlinkCtrl_setbackgroundcolour, "set_font":#HyperlinkCtrl_setfont, "set_cursor":#HyperlinkCtrl_setcursor, "set_label":#HyperlinkCtrl_setlabel can be used to customize appearance of the hyperlink.
+
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+
+h2. Window styles
+
+
+
+|@HL_ALIGN_LEFT@|Align the text to the left.|
+|@HL_ALIGN_RIGHT@|Align the text to the right.|
+|@HL_ALIGN_CENTRE@|Center the text (horizontally).|
+|@HL_CONTEXTMENU@|Pop up a context menu when the hyperlink is right-clicked. The context menu contains a @``Copy URL"@ menu item which is automatically handled by the hyperlink and which just copies in the clipboard the URL (not the label) of the control.|
+|@HL_DEFAULT_STYLE@|The default style for HyperlinkCtrl: @NO_BORDER|HL_CONTEXTMENU|HL_ALIGN_CENTRE@.|
+
+
+See also "window styles overview":windowstyles.html.
+
+
+h2. Event handling
+
+To process input from an hyperlink control, use these event handler macros to
+direct input to member functions that take a
+"HyperlinkEvent":hyperlinkevent.html argument.
+
+
+
+|*evt_hyperlink(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The hyperlink was (left) clicked. If this event is not handled in user's code (or it's skipped; see "Event#skip":event.html#Event_skip), then a call to "LaunchDefaultBrowser":launchdefaultbrowser.html is done with the hyperlink's URL.|
+
+
+
+h2. See also
+
+"URL":url.html, "HyperlinkEvent":hyperlinkevent.html
+
+
+<div id="methods">
+
+h2. Methods
+
+* "HyperlinkCtrl#hyper_link":#HyperlinkCtrl_hyperlink
+* "HyperlinkCtrl#create":#HyperlinkCtrl_create
+* "HyperlinkCtrl#get_hover_colour":#HyperlinkCtrl_gethovercolour
+* "HyperlinkCtrl#set_hover_colour":#HyperlinkCtrl_sethovercolour
+* "HyperlinkCtrl#get_normal_colour":#HyperlinkCtrl_getnormalcolour
+* "HyperlinkCtrl#set_normal_colour":#HyperlinkCtrl_setnormalcolour
+* "HyperlinkCtrl#get_visited_colour":#HyperlinkCtrl_getvisitedcolour
+* "HyperlinkCtrl#set_visited_colour":#HyperlinkCtrl_setvisitedcolour
+* "HyperlinkCtrl#get_visited":#HyperlinkCtrl_getvisited
+* "HyperlinkCtrl#set_visited":#HyperlinkCtrl_setvisited
+* "HyperlinkCtrl#get_url":#HyperlinkCtrl_geturl
+* "HyperlinkCtrl#set_url":#HyperlinkCtrl_seturl
+
+</div>
+
+
+h3(#HyperlinkCtrl_new). HyperlinkCtrl#hyper_link
+
+  *_hyper_link*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)String% url, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style, 
+                %(arg-type)String% name = "hyperlink")
+
+Constructor. See "Create":hyperlinkctrlcreate.html for more info.
+
+
+h3(#HyperlinkCtrl_create). HyperlinkCtrl#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
+                %(arg-type)String% url, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style, 
+                %(arg-type)String% name = "hyperlink")
+
+Creates the hyperlink control.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be .
+* _id_ Window identifier. A value of ID_ANY indicates a default value.
+* _label_ The label of the hyperlink.
+* _url_ The URL associated with the given label.
+* _pos_ Window position.
+* _size_ Window size. If the DefaultSize is specified then the window is sized
+appropriately.
+* _style_ Window style. See "HyperlinkCtrl":hyperlinkctrl.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+
+h3(#HyperlinkCtrl_gethovercolour). HyperlinkCtrl#get_hover_colour
+
+ "Colour":colour.html *get_hover_colour*()
+
+Returns the colour used to print the label of the hyperlink when the mouse is over the control.
+
+
+h3(#HyperlinkCtrl_sethovercolour). HyperlinkCtrl#set_hover_colour
+
+  *set_hover_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the colour used to print the label of the hyperlink when the mouse is over the control.
+
+
+h3(#HyperlinkCtrl_getnormalcolour). HyperlinkCtrl#get_normal_colour
+
+ "Colour":colour.html *get_normal_colour*()
+
+Returns the colour used to print the label when the link has never been clicked before
+(i.e. the link has not been _visited_) and the mouse is not over the control.
+
+
+h3(#HyperlinkCtrl_setnormalcolour). HyperlinkCtrl#set_normal_colour
+
+  *set_normal_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the colour used to print the label when the link has never been clicked before
+(i.e. the link has not been _visited_) and the mouse is not over the control.
+
+
+h3(#HyperlinkCtrl_getvisitedcolour). HyperlinkCtrl#get_visited_colour
+
+ "Colour":colour.html *get_visited_colour*()
+
+Returns the colour used to print the label when the mouse is not over the control
+and the link has already been clicked before (i.e. the link has been _visited_).
+
+
+h3(#HyperlinkCtrl_setvisitedcolour). HyperlinkCtrl#set_visited_colour
+
+  *set_visited_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the colour used to print the label when the mouse is not over the control
+and the link has already been clicked before (i.e. the link has been _visited_).
+
+
+h3(#HyperlinkCtrl_getvisited). HyperlinkCtrl#get_visited
+
+ Boolean *get_visited*()
+
+Returns  if the hyperlink has already been clicked by the user at least one time.
+
+
+h3(#HyperlinkCtrl_setvisited). HyperlinkCtrl#set_visited
+
+  *set_visited*(%(arg-type)Boolean% visited = true)
+
+Marks the hyperlink as visited (see "set_visited_colour":#HyperlinkCtrl_setvisitedcolour).
+
+
+h3(#HyperlinkCtrl_geturl). HyperlinkCtrl#get_url
+
+ String *get_url*()
+
+Returns the URL associated with the hyperlink.
+
+
+h3(#HyperlinkCtrl_seturl). HyperlinkCtrl#set_url
+
+  *set_url*(%(arg-type)String% url)
+
+Sets the URL associated with the hyperlink.
+
+
+
+
+
+

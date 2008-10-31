@@ -1,0 +1,56 @@
+h1(#wxfocusevent). Wx::FocusEvent
+
+A focus event is sent when a window's focus changes. The window losing focus
+receives a ``kill focus'' event while the window gaining it gets a ``set
+focus'' one.
+
+Notice that the set focus event happens both when the user gives focus to the
+window (whether using the mouse or keyboard) and when it is done from the
+program itself using "set_focus":#FocusEvent_setfocus.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+To process a focus event, use these event handler macros to direct input to a member
+function that takes a FocusEvent argument.
+
+
+
+|*evt_set_focus()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_SET_FOCUS event.|
+|*evt_kill_focus()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_KILL_FOCUS event.|
+
+h2. See also
+
+"Event handling overview":eventhandlingoverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FocusEvent.new":#FocusEvent_new
+* "FocusEvent#get_window":#FocusEvent_getwindow
+
+</div>
+
+
+
+h3(#FocusEvent_new). FocusEvent.new
+
+  *FocusEvent.new*(%(arg-type)"TYPE":type.html% eventType = 0,  %(arg-type)Integer% id = 0)
+
+Constructor.
+
+
+h3(#FocusEvent_getwindow). FocusEvent#get_window
+
+Returns the window associated with this event, that is the window which had the
+focus before for the @EVT_SET_FOCUS@ event and the window which is
+going to receive focus for the @EVT_KILL_FOCUS@ one.
+
+Warning: the window pointer may be @NULL@!
+

@@ -1,0 +1,133 @@
+h1(#wxpropertysheetdialog). Wx::PropertySheetDialog
+
+This class represents a property sheet dialog: a tabbed dialog
+for showing settings. It is optimized to show with flat tabs
+on PocketPC devices.
+
+To use this class, call "PropertySheetDialog#create":propertysheetdialog.html#PropertySheetDialog_create from your own
+Create function. Then call "create_buttons":#PropertySheetDialog_createbuttons, and create pages, adding them to the book control.
+Finally call "layout_dialog":#PropertySheetDialog_layoutdialog.
+
+For example:
+
+
+ bool MyPropertySheetDialog::Create(...)
+ {
+     if (!PropertySheetDialog::Create(...))
+         return false;
+ 
+     CreateButtons(OK|CANCEL|HELP);
+ 
+     // Add page
+     Panel* panel = new Panel(GetBookCtrl(), ...);
+     GetBookCtrl()->AddPage(panel, T("General"));
+ 
+     LayoutDialog();
+     return true;
+ }
+ 
+
+If necessary, override CreateBookCtrl and AddBookCtrl to create and add a different
+kind of book control. You would then need to use two-step construction for the dialog.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PropertySheetDialog.new":#PropertySheetDialog_new
+* "PropertySheetDialog#add_book_ctrl":#PropertySheetDialog_addbookctrl
+* "PropertySheetDialog#create":#PropertySheetDialog_create
+* "PropertySheetDialog#create_book_ctrl":#PropertySheetDialog_createbookctrl
+* "PropertySheetDialog#create_buttons":#PropertySheetDialog_createbuttons
+* "PropertySheetDialog#get_book_ctrl":#PropertySheetDialog_getbookctrl
+* "PropertySheetDialog#get_inner_sizer":#PropertySheetDialog_getinnersizer
+* "PropertySheetDialog#layout_dialog":#PropertySheetDialog_layoutdialog
+* "PropertySheetDialog#set_book_ctrl":#PropertySheetDialog_setbookctrl
+* "PropertySheetDialog#set_inner_sizer":#PropertySheetDialog_setinnersizer
+
+</div>
+
+
+h3(#PropertySheetDialog_new). PropertySheetDialog.new
+
+  *PropertySheetDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                          %(arg-type)String% title, 
+                          %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                          %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                          %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
+                          %(arg-type)String% name = "dialogBox")
+
+Constructor.
+
+h3(#PropertySheetDialog_addbookctrl). PropertySheetDialog#add_book_ctrl
+
+  *add_book_ctrl*(%(arg-type)"Sizer":sizer.html% sizer)
+
+Override this if you wish to add the book control in a way different from the
+standard way (for example, using different spacing).
+
+h3(#PropertySheetDialog_create). PropertySheetDialog#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE, 
+                %(arg-type)String% name = "dialogBox")
+
+Call this from your own Create function, before adding buttons and pages.
+
+h3(#PropertySheetDialog_createbookctrl). PropertySheetDialog#create_book_ctrl
+
+ "BookCtrlBase":bookctrlbase.html *create_book_ctrl*()
+
+Override this if you wish to create a different kind of book control; by default, a Notebook
+is created.
+
+h3(#PropertySheetDialog_createbuttons). PropertySheetDialog#create_buttons
+
+  *create_buttons*(%(arg-type)Integer% flags=OK|CANCEL)
+
+Call this to create the buttons for the dialog. This calls "Dialog#create_button_sizer":dialog.html#Dialog_createbuttonsizer, and
+the flags are the same. On PocketPC, no buttons are created.
+
+h3(#PropertySheetDialog_getbookctrl). PropertySheetDialog#get_book_ctrl
+
+ "BookCtrlBase":bookctrlbase.html *get_book_ctrl*()
+
+Returns the book control that will contain your settings pages.
+
+h3(#PropertySheetDialog_getinnersizer). PropertySheetDialog#get_inner_sizer
+
+ "Sizer":sizer.html *get_inner_sizer*()
+
+Returns the inner sizer that contains the book control and button sizer.
+
+h3(#PropertySheetDialog_layoutdialog). PropertySheetDialog#layout_dialog
+
+  *layout_dialog*()
+
+Call this to lay out the dialog. On PocketPC, this does nothing, since the dialog will be shown
+full-screen, and the layout will be done when the dialog receives a size event.
+
+h3(#PropertySheetDialog_setbookctrl). PropertySheetDialog#set_book_ctrl
+
+  *set_book_ctrl*(%(arg-type)"BookCtrlBase":bookctrlbase.html% bookCtrl)
+
+Sets the book control used for the dialog. You will normally not need to use this.
+
+h3(#PropertySheetDialog_setinnersizer). PropertySheetDialog#set_inner_sizer
+
+  *set_inner_sizer*(%(arg-type)"Sizer":sizer.html% sizer)
+
+Sets the inner sizer that contains the book control and button sizer. You will normally not need to use this.
+

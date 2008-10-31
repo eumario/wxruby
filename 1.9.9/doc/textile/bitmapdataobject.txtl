@@ -1,0 +1,55 @@
+h1(#wxbitmapdataobject). Wx::BitmapDataObject
+
+BitmapDataObject is a specialization of DataObject for bitmap data. It can
+be used without change to paste data into the 
+"Clipboard":clipboard.html or a "DropSource":dropsource.html. A
+user may wish to derive a new class from this class for providing a bitmap
+on-demand in order to minimize memory consumption when offering data in several
+formats, such as a bitmap and GIF.
+
+h2. Derived from
+
+"DataObjectSimple":dataobjectsimple.html
+
+"DataObject":dataobject.html
+
+h2. Methods
+
+<div id="methods">
+
+* "BitmapDataObject#get_bitmap":#BitmapDataObject_getbitmap
+* "BitmapDataObject#set_bitmap":#BitmapDataObject_setbitmap
+
+</div>
+
+h2. See also
+
+"Clipboard and drag and drop overview":dndoverview.html, 
+"DataObject":dataobject.html, 
+"DataObjectSimple":dataobjectsimple.html, 
+"FileDataObject":filedataobject.html, 
+"TextDataObject":textdataobject.html, 
+"DataObject":dataobject.html
+
+  *BitmapDataObject.new*(%(arg-type)"Bitmap":bitmap.html% bitmap = NullBitmap)
+
+Constructor, optionally passing a bitmap (otherwise use 
+"set_bitmap":#BitmapDataObject_setbitmap later).
+
+h3(#BitmapDataObject_getbitmap). BitmapDataObject#get_bitmap
+
+ "Bitmap":bitmap.html *get_bitmap*()
+
+Returns the bitmap associated with the data object. You may wish to override
+this method when offering data on-demand, but this is not required by
+Widgets' internals. Use this method to get data in bitmap form from
+the "Clipboard":clipboard.html.
+
+h3(#BitmapDataObject_setbitmap). BitmapDataObject#set_bitmap
+
+  *set_bitmap*(%(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap associated with the data object. This method is called when the
+data object receives data. Usually there will be no reason to override this
+function.
+

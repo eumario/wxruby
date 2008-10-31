@@ -1,0 +1,39 @@
+h1(#wxdcclipper). Wx::DCClipper
+
+This is a small helper class which sets the specified DC to its constructor
+clipping region and then automatically destroys it in its destructor. Using
+it ensures that an unwanted clipping region is not left set on the DC.
+
+h2. Derived from
+
+No base class
+
+h2. See also
+
+"DC":dc.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DCClipper.new":#DCClipper_new
+
+</div>
+
+
+
+h3(#DCClipper_new). DCClipper.new
+
+  *DCClipper.new*(%(arg-type)"DC":dc.html% dc,  %(arg-type)Integer% x, %(arg-type)Integer% y, %(arg-type)Integer% w, 
+               %(arg-type)Integer% h)
+
+  *DCClipper.new*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect)
+
+Constructor: sets the clipping region for the given device context to the
+specified rectangle.
+
+
+  *destructor*()
+
+Destructor: destroys the clipping region set in the constructor.
+

@@ -1,0 +1,193 @@
+h1(#wxlistbox). Wx::ListBox
+
+A listbox is used to select one or more of a list of strings. The
+strings are displayed in a scrolling box, with the selected string(s)
+marked in reverse video. A listbox can be single selection (if an item
+is selected, the previous selection is removed) or multiple selection
+(clicking an item toggles the item on or off independently of other
+selections). This is controlled by changing the style passed to the
+constructor. 
+
+List box elements are numbered from zero. Their number is limited in
+some platforms - for example, around 2000 on GTK.
+
+A listbox callback gets an event EVT_COMMAND_LISTBOX_SELECT for single
+clicks, and EVT_COMMAND_LISTBOX_DOUBLE_CLICKED for double clicks.
+
+h2. Derived from
+
+"ControlWithItems":controlwithitems.html
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+|@LB_SINGLE@|Single-selection list.|
+|@LB_MULTIPLE@|Multiple-selection list: the user can toggle multipleitems on and off.|
+|@LB_EXTENDED@|Extended-selection list: the user canselect multiple items using the SHIFT key and the mouse or special key combinations.|
+|@LB_HSCROLL@|Create horizontal scrollbar if contents are too wide (Windows only).|
+|@LB_ALWAYS_SB@|Always show a vertical scrollbar.|
+|@LB_NEEDED_SB@|Only create a vertical scrollbar if needed.|
+|@LB_SORT@|The listbox contents are sorted in alphabetical order.|
+
+
+Note that @LB_SINGLE@, @LB_MULTIPLE@ and @LB_EXTENDED@
+styles are mutually exclusive and you can specify at most one of them (single
+selection is the default).
+
+See also "window styles overview":windowstyles.html.
+
+h2. Event handling
+
+|*evt_listbox(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_LISTBOX_SELECTED event,when an item on the list is selected.|
+|*evt_listbox_dclick(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_LISTBOX_DOUBLECLICKED event,when the listbox is double-clicked.|
+
+
+h2. See also
+
+"Choice":choice.html, "ComboBox":combobox.html, "ListCtrl":listctrl.html,
+ "CommandEvent":commandevent.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ListBox.new":#ListBox_new
+* "ListBox#create":#ListBox_create
+* "ListBox#deselect":#ListBox_deselect
+* "ListBox#get_selections":#ListBox_getselections
+* "ListBox#insert_items":#ListBox_insertitems
+* "ListBox#is_selected":#ListBox_isselected
+* "ListBox#set":#ListBox_set
+* "ListBox#set_first_item":#ListBox_setfirstitem
+
+</div>
+
+
+h3(#ListBox_new). ListBox.new
+
+  *ListBox.new*(%(arg-type)"Window":window.html% parent, %(arg-type)Integer% id, 
+              %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+              %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+              %(arg-type)"Array":array.html% choices = nil,  
+			  %(arg-type)Integer% style = 0, 
+              %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+              %(arg-type)String% name = "listBox")
+
+Constructor, creating and showing a list box.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position.
+* _size_ Window size. If the default size (-1, -1) is specified then the window is sized
+appropriately.
+* _choices_ An array of strings with which to initialise the control.
+* _style_ Window style. See "ListBox":listbox.html.
+* _validator_ Window validator.
+* _name_ Window name.
+
+h4. See also
+
+"ListBox#create":listbox.html#ListBox_create, "Validator":validator.html
+
+h3(#ListBox_create). ListBox#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent, %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE,
+                %(arg-type)String% choices[] = nil, 
+				%(arg-type)Integer% style = 0, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = "listBox")
+
+Creates the listbox for two-step construction. See "ListBox.new":listbox.html#ListBox_new for further details.
+
+h3(#ListBox_deselect). ListBox#deselect
+
+  *deselect*(%(arg-type)Integer% n)
+
+Deselects an item in the list box.
+
+h4. Parameters
+
+* _n_ The zero-based item to deselect.
+
+h4. Remarks
+
+This applies to multiple selection listboxes only.
+
+h3(#ListBox_getselections). ListBox#get_selections
+
+ Array *get_selections*()
+
+Returns an array of integers corresponding to the selected items in the
+listbox. Use this with a multiple selection listbox.
+
+h4. See also
+
+"ControlWithItems#get_selection":controlwithitems.html#ControlWithItems_getselection, "ControlWithItems#get_string_selection":controlwithitems.html#ControlWithItems_getstringselection, "ControlWithItems#set_selection":controlwithitems.html#ControlWithItems_setselection
+
+
+h3(#ListBox_insertitems). ListBox#insert_items
+
+  *insert_items*(%(arg-type)"Array":array.html% items, %(arg-type)Integer% pos)
+
+Insert a number of strings before the specified position.
+
+h4. Parameters
+
+* _items_ Array of strings for the labels of items to be inserted
+* _pos_ Position before which to insert the items: for example, if _pos_ is 0 the items
+will be inserted in the beginning of the listbox
+
+
+
+
+
+h3(#ListBox_isselected). ListBox#is_selected
+
+ Boolean *is_selected*(%(arg-type)Integer% n)
+
+Determines whether an item is selected.
+
+h4. Parameters
+
+* _n_ The zero-based item index.
+
+h4. Return value
+
+true if the given item is selected, false otherwise.
+
+h3(#ListBox_set). ListBox#set
+
+  *set*(%(arg-type)"Array":array.html% choices, %(arg-type)"Array":array.html% client_data = @nil@)
+
+Clears the list box and adds the given strings to it.
+
+h4. Parameters
+
+* _choices_ An array of strings to set.
+* _client_data_ Optional array of client data pointers - not currently supported
+
+h3(#ListBox_setfirstitem). ListBox#set_first_item
+
+  *set_first_item*(%(arg-type)Integer% n)
+
+  *set_first_item*(%(arg-type)String% string)
+
+Set the specified item to be the first visible item. Windows only.
+
+h4. Parameters
+
+* _n_ The zero-based item index.
+* _string_ The string that should be visible.
+

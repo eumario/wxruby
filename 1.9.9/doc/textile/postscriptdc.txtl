@@ -1,0 +1,34 @@
+h1(#wxpostscriptdc). Wx::PostScriptDC
+
+This defines the Widgets Encapsulated PostScript device context,
+which can write PostScript files on any platform. See "DC":dc.html for
+descriptions of the member functions.
+
+h2. Derived from
+
+"DC":dc.html
+
+"Object":object.html
+
+<div id="methods">
+
+h2. Methods
+
+* "PostScriptDC.new":#PostScriptDC_new
+* "PostScriptDC#set_resolution":#PostScriptDC_setresolution
+* "PostScriptDC#get_resolution":#PostScriptDC_getresolution
+
+</div>
+
+
+h3(#PostScriptDC_new). PostScriptDC.new
+
+  *PostScriptDC.new*(%(arg-type)"PrintData":printdata.html% printData)
+
+Constructs a PostScript printer device context from a "PrintData":printdata.html object.
+
+  *PostScriptDC.new*(%(arg-type)String% output,  %(arg-type)Boolean% interactive = true, 
+                  
+  %(arg-type)"Window":window.html% parent)
+
+Constructor. _output_ is an optional file for printing to, and if

@@ -1,0 +1,105 @@
+h1(#wxgridsizer). Wx::GridSizer
+
+A grid sizer is a sizer which lays out its children in a two-dimensional
+table with all table fields having the same size,
+i.e. the width of each field is the width of the widest child,
+the height of each field is the height of the tallest child.
+
+h2. Derived from
+
+"Sizer":sizer.html
+
+"Object":object.html
+
+h2. See also
+
+"Sizer":sizer.html
+
+h2. Methods
+
+<div id="methods">
+
+* "GridSizer.new":#GridSizer_wxgridsizer
+* "GridSizer#get_cols":#GridSizer_getcols
+* "GridSizer#get_hgap":#GridSizer_gethgap
+* "GridSizer#get_rows":#GridSizer_getrows
+* "GridSizer#get_vgap":#GridSizer_getvgap
+* "GridSizer#set_cols":#GridSizer_setcols
+* "GridSizer#set_hgap":#GridSizer_sethgap
+* "GridSizer#set_rows":#GridSizer_setrows
+* "GridSizer#set_vgap":#GridSizer_setvgap
+
+</div>
+
+h3(#GridSizer_wxgridsizer). GridSizer.new
+
+  *GridSizer.new*(%(arg-type)Integer% rows,  %(arg-type)Integer% cols,  %(arg-type)Integer% vgap, 
+                %(arg-type)Integer% hgap)
+
+  *GridSizer.new*(%(arg-type)Integer% cols,  %(arg-type)Integer% vgap = 0, 
+                %(arg-type)Integer% hgap = 0)
+
+Constructor for a GridSizer. _rows_ and _cols_ determine the number of
+columns and rows in the sizer - if either of the parameters is zero, it will be
+calculated to form the total number of children in the sizer, thus making the
+sizer grow dynamically. _vgap_ and _hgap_ define extra space between
+all children.
+
+h3(#GridSizer_getcols). GridSizer#get_cols
+
+ Integer *get_cols*()
+
+Returns the number of columns in the sizer.
+
+
+h3(#GridSizer_gethgap). GridSizer#get_hgap
+
+ Integer *get_hgap*()
+
+Returns the horizontal gap (in pixels) between cells in the sizer.
+
+
+h3(#GridSizer_getrows). GridSizer#get_rows
+
+ Integer *get_rows*()
+
+Returns the number of rows in the sizer.
+
+
+h3(#GridSizer_getvgap). GridSizer#get_vgap
+
+ Integer *get_vgap*()
+
+Returns the vertical gap (in pixels) between the cells in the sizer.
+
+
+h3(#GridSizer_setcols). GridSizer#set_cols
+
+  *set_cols*(%(arg-type)Integer% cols)
+
+Sets the number of columns in the sizer.
+
+
+h3(#GridSizer_sethgap). GridSizer#set_hgap
+
+  *set_hgap*(%(arg-type)Integer% gap)
+
+Sets the horizontal gap (in pixels) between cells in the sizer.
+
+
+h3(#GridSizer_setrows). GridSizer#set_rows
+
+  *set_rows*(%(arg-type)Integer% rows)
+
+Sets the number of rows in the sizer.
+
+
+h3(#GridSizer_setvgap). GridSizer#set_vgap
+
+  *set_vgap*(%(arg-type)Integer% gap)
+
+Sets the vertical gap (in pixels) between the cells in the sizer.
+
+
+
+

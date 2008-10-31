@@ -1,0 +1,58 @@
+h1(#wxfindreplacedialog). Wx::FindReplaceDialog
+
+FindReplaceDialog is a standard modeless dialog which is used to allow the
+user to search for some text (and possibly replace it with something else).
+The actual searching is supposed to be done in the owner window which is the
+parent of this dialog. Note that it means that unlike for the other standard
+dialogs this one *must* have a parent window. Also note that there is no
+way to use this dialog in a modal way; it is always, by design and
+implementation, modeless.
+
+Please see the dialogs sample for an example of using it.
+
+h2. Derived from
+
+"Dialog":dialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FindReplaceDialog.new":#FindReplaceDialog_new
+* "FindReplaceDialog#create":#FindReplaceDialog_create
+* "FindReplaceDialog#get_data":#FindReplaceDialog_getdata
+
+</div>
+
+
+h3(#FindReplaceDialog_new). FindReplaceDialog.new
+
+  *FindReplaceDialog.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"FindReplaceData":findreplacedata.html% data, 
+                        %(arg-type)String% title, 
+                        %(arg-type)Integer% style = 0)
+
+After using default constructor "Create()":findreplacedialogcreate.html 
+must be called.
+
+The _parent_ and _data_ parameters must be non-@NULL@.
+
+  *destructor*()
+
+Destructor.
+
+h3(#FindReplaceDialog_create). FindReplaceDialog#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)"FindReplaceData":findreplacedata.html% data, 
+                %(arg-type)String% title, 
+                %(arg-type)Integer% style = 0)
+
+Creates the dialog; use "Show":windowshow.html to show it on screen.
+
+The _parent_ and _data_ parameters must be non-@NULL@.
+h3(#FindReplaceDialog_getdata). FindReplaceDialog#get_data
+
+ "FindReplaceData":findreplacedata.html *get_data*()
+
+Get the "FindReplaceData":findreplacedata.html object used by this
+dialog.
+

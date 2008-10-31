@@ -1,0 +1,138 @@
+h1(#wxtextvalidator). Wx::TextValidator
+
+TextValidator validates text controls, providing a variety of filtering behaviours.
+
+For more information, please see "Validator overview":validatoroverview.html.
+
+h2. Derived from
+
+"Validator":validator.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"Validator overview":validatoroverview.html, "Validator":validator.html,
+"GenericValidator":genericvalidator.html
+
+<div id="methods">
+
+h2. Methods
+
+* "TextValidator.new":#TextValidator_new
+* "TextValidator#clone":#TextValidator_clone
+* "TextValidator#get_excludes":#TextValidator_getexcludes
+* "TextValidator#get_includes":#TextValidator_getincludes
+* "TextValidator#get_style":#TextValidator_getstyle
+* "TextValidator#on_char":#TextValidator_onchar
+* "TextValidator#set_excludes":#TextValidator_setexcludes
+* "TextValidator#set_includes":#TextValidator_setincludes
+* "TextValidator#set_style":#TextValidator_setstyle
+* "TextValidator#transfer_from_window":#TextValidator_transferfromwindow
+* "TextValidator#transfer_to_window":#TextValidator_transfertowindow
+* "TextValidator#validate":#TextValidator_validate
+
+</div>
+
+
+h3(#TextValidator_new). TextValidator.new
+
+  *TextValidator.new*(%(arg-type)"TextValidator":textvalidator.html% validator)
+
+Copy constructor.
+
+  *TextValidator.new*(%(arg-type)Integer% style = FILTER_NONE,  %(arg-type)String% valPtr = nil)
+
+Constructor, taking a style and optional pointer to a String variable.
+
+h4. Parameters
+
+* _style_ A bitlist of flags, which can be:
+
+
+
+|*FILTER_NONE*|No filtering takes place.|
+|*FILTER_ASCII*|Non-ASCII characters are filtered out.|
+|*FILTER_ALPHA*|Non-alpha characters are filtered out.|
+|*FILTER_ALPHANUMERIC*|Non-alphanumeric characters are filtered out.|
+|*FILTER_NUMERIC*|Non-numeric characters are filtered out.|
+|*FILTER_INCLUDE_LIST*|Use an include list. The validatorchecks if the user input is on the list, complaining if not. See "TextValidator#set_includes":textvalidator.html#TextValidator_setincludes.|
+|*FILTER_EXCLUDE_LIST*|Use an exclude list. The validatorchecks if the user input is on the list, complaining if it is. See "TextValidator#set_excludes":textvalidator.html#TextValidator_setexcludes.|
+|*FILTER_INCLUDE_CHAR_LIST*|Use an include list. The validatorchecks if each input character is in the list (one character per list element), complaining if not.See "TextValidator#set_includes":textvalidator.html#TextValidator_setincludes.|
+|*FILTER_EXCLUDE_CHAR_LIST*|Use an include list. The validatorchecks if each input character is in the list (one character per list element), complaining if it is.See "TextValidator#set_excludes":textvalidator.html#TextValidator_setexcludes.|
+
+
+* _valPtr_ A pointer to a String variable that contains the value. This variable
+should have a lifetime equal to or longer than the validator lifetime (which is usually
+determined by the lifetime of the window). 
+
+h3(#TextValidator_clone). TextValidator#clone
+
+ "Validator":validator.html *clone*()
+
+Clones the text validator using the copy constructor.
+
+h3(#TextValidator_getexcludes). TextValidator#get_excludes
+
+ "ArrayString":arraystring.html *get_excludes*()
+
+Returns a reference to the exclude list (the list of invalid values).
+
+h3(#TextValidator_getincludes). TextValidator#get_includes
+
+ "ArrayString":arraystring.html *get_includes*()
+
+Returns a reference to the include list (the list of valid values).
+
+h3(#TextValidator_getstyle). TextValidator#get_style
+
+ Integer *get_style*()
+
+Returns the validator style.
+
+h3(#TextValidator_onchar). TextValidator#on_char
+
+  *on_char*(%(arg-type)"KeyEvent":keyevent.html% event)
+
+Receives character input from the window and filters it according to the
+current validator style.
+
+h3(#TextValidator_setexcludes). TextValidator#set_excludes
+
+  *set_excludes*(%(arg-type)"ArrayString":arraystring.html% stringList)
+
+Sets the exclude list (invalid values for the user input).
+
+h3(#TextValidator_setincludes). TextValidator#set_includes
+
+  *set_includes*(%(arg-type)"ArrayString":arraystring.html% stringList)
+
+Sets the include list (valid values for the user input).
+
+h3(#TextValidator_setstyle). TextValidator#set_style
+
+  *set_style*(%(arg-type)Integer% style)
+
+Sets the validator style.
+
+h3(#TextValidator_transferfromwindow). TextValidator#transfer_from_window
+
+ Boolean *transfer_from_window*()
+
+Transfers the value in the text control to the string.
+
+h3(#TextValidator_transfertowindow). TextValidator#transfer_to_window
+
+ Boolean *transfer_to_window*()
+
+Transfers the string value to the text control.
+
+h3(#TextValidator_validate). TextValidator#validate
+
+ Boolean *validate*(%(arg-type)"Window":window.html% parent)
+
+Validates the window contents against the include or exclude lists, depending
+on the validator style.
+

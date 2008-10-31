@@ -1,0 +1,41 @@
+h1. Wx::GridCellChoiceEditor
+
+h2. Derived from
+
+"GridCellEditor":gridcelleditor.html
+
+h2. See also
+
+"GridCellEditor":gridcelleditor.html, "GridCellFloatEditor":gridcellfloateditor.html, "GridCellBoolEditor":gridcellbooleditor.html, "GridCellTextEditor":gridcelltexteditor.html, "GridCellNumberEditor":gridcellnumbereditor.html
+
+
+<div id="methods">
+
+h2. Methods
+
+* "GridCellChoiceEditor.new":#GridCellChoiceEditor_new
+* "GridCellChoiceEditor#set_parameters":#GridCellChoiceEditor_setparameters
+
+</div>
+
+
+
+h3(#GridCellChoiceEditor_constr). GridCellChoiceEditor.new
+
+  *GridCellChoiceEditor.new*(%(arg-type)Integer% count = 0,  %(arg-type)String% choices[] = nil, 
+                           %(arg-type)Boolean% allowOthers = false)
+
+  *GridCellChoiceEditor.new*(%(arg-type)"ArrayString":arraystring.html% choices, 
+                           %(arg-type)Boolean% allowOthers = false)
+
+* _count_ Number of strings from which the user can choose.
+* _choices_ An array of strings from which the user can choose.
+* _allowOthers_ If allowOthers if true, the user can type a string not in choices array.
+
+
+h3(#GridCellChoiceEditor_setparameters). GridCellChoiceEditor#set_parameters
+
+  *set_parameters*(%(arg-type)String% params)
+
+Parameters string format is "item1[,item2[...,itemN]]"
+

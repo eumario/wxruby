@@ -1,0 +1,17 @@
+h1. Wx::LogNull
+
+h2. Derived from
+
+"Log":log.html
+
+<div id="methods">
+
+h2. Methods
+
+* "LogNull.new":#LogNull_new
+
+</div>
+
+
+h3(#LogNull_new). LogNull.new
+

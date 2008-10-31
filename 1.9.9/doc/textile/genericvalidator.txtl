@@ -1,0 +1,90 @@
+h1(#wxgenericvalidator). Wx::GenericValidator
+
+GenericValidator performs data transfer (but not validation or filtering) for the following
+basic controls: Button, CheckBox, ListBox, StaticText, RadioButton, RadioBox,
+Choice, ComboBox, Gauge, Slider, ScrollBar, SpinButton, TextCtrl, CheckListBox.
+
+It checks the type of the window and uses an appropriate type for that window. For example,
+Button and TextCtrl transfer data to and from a String variable; ListBox uses a
+ArrayInt; CheckBox uses a bool.
+
+For more information, please see "Validator overview":validatoroverview.html.
+
+h2. Derived from
+
+"Validator":validator.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"Validator overview":validatoroverview.html, "Validator":validator.html,
+"TextValidator":textvalidator.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GenericValidator.new":#GenericValidator_new
+* "GenericValidator#clone":#GenericValidator_clone
+* "GenericValidator#transfer_from_window":#GenericValidator_transferfromwindow
+* "GenericValidator#transfer_to_window":#GenericValidator_transfertowindow
+
+</div>
+
+
+h3(#GenericValidator_new). GenericValidator.new
+
+  *GenericValidator.new*(%(arg-type)"GenericValidator":genericvalidator.html% validator)
+
+Copy constructor.
+
+  *GenericValidator.new*(%(arg-type)Boolean% valPtr)
+
+Constructor taking a bool pointer. This will be used for CheckBox and RadioButton.
+
+  *GenericValidator.new*(%(arg-type)String% valPtr)
+
+Constructor taking a String pointer. This will be used for Button, ComboBox, StaticText,
+TextCtrl.
+
+  *GenericValidator.new*(%(arg-type)Integer% valPtr)
+
+Constructor taking an integer pointer. This will be used for Gauge, ScrollBar, RadioBox, SpinButton,
+Choice.
+
+  *GenericValidator.new*(%(arg-type)"ArrayInt":arrayint.html% valPtr)
+
+Constructor taking a ArrayInt pointer. This will be used for ListBox, CheckListBox.
+
+h4. Parameters
+
+* _validator_ Validator to copy.
+* _valPtr_ A pointer to a variable that contains the value. This variable
+should have a lifetime equal to or longer than the validator lifetime (which is usually
+determined by the lifetime of the window).
+
+  *destructor*()
+
+Destructor.
+
+h3(#GenericValidator_clone). GenericValidator#clone
+
+ "Validator":validator.html *clone*()
+
+Clones the generic validator using the copy constructor.
+
+h3(#GenericValidator_transferfromwindow). GenericValidator#transfer_from_window
+
+ Boolean *transfer_from_window*()
+
+Transfers the value from the window to the appropriate data type.
+
+h3(#GenericValidator_transfertowindow). GenericValidator#transfer_to_window
+
+ Boolean *transfer_to_window*()
+
+Transfers the value to the window.
+

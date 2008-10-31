@@ -1,0 +1,293 @@
+h1(#wxvscrolledwindow). Wx::VScrolledWindow
+
+In the name of this class, "V" may stand for "*V*ariable" because it can be
+used for scrolling lines of variable heights; "*V*irtual" because it is not
+necessary to know the heights of all lines in advance -- only those which
+are shown on the screen need to be measured; or, even, "*V*ertical" because
+this class only supports scrolling in one direction currently (this could
+and probably will change in the future however).
+
+In any case, this is a generalization of the
+"ScrolledWindow":scrolledwindow.html class which can be only used when
+all lines have the same height. It lacks some other ScrolledWindow
+features however, notably there is currently no support for horizontal
+scrolling; it can't scroll another window nor only a rectangle of the
+window and not its entire client area.
+ 
+To use this class, you need to inherit from it in Ruby and implement
+"on_get_line_height":#VScrolledWindow_ongetlineheight. You also must
+call "set_line_count":#VScrolledWindow_setlinecount to let the base
+class know how many lines it should display but from that moment on the
+scrolling is handled entirely by VScrolledWindow, you only need to draw
+the visible part of contents in your "paint":window.html#Window_paint
+method as usual. You should use
+"get_first_visible_line":#VScrolledWindow_getfirstvisibleline() and
+"get_last_visible_line":#VScrolledWindow_getlastvisibleline() to
+select the lines to display. Note that the device context origin is not
+shifted so the first visible line always appears at the point @(0, 0)@
+in physical as well as logical coordinates.
+
+h2. Derived from
+
+"Panel":panel.html
+
+<div id="methods">
+
+h2. Methods
+
+* "VScrolledWindow.new":#VScrolledWindow_new
+* "VScrolledWindow#estimate_total_height":#VScrolledWindow_estimatetotalheight
+* "VScrolledWindow#get_first_visible_line":#VScrolledWindow_getfirstvisibleline
+* "VScrolledWindow#get_last_visible_line":#VScrolledWindow_getlastvisibleline
+* "VScrolledWindow#get_line_count":#VScrolledWindow_getlinecount
+* "VScrolledWindow#get_visible_begin":#VScrolledWindow_getvisiblebegin
+* "VScrolledWindow#get_visible_end":#VScrolledWindow_getvisibleend
+* "VScrolledWindow#hit_test":#VScrolledWindow_hittest
+* "VScrolledWindow#is_visible":#VScrolledWindow_isvisible
+* "VScrolledWindow#on_get_line_height":#VScrolledWindow_ongetlineheight
+* "VScrolledWindow#on_get_lines_hint":#VScrolledWindow_ongetlineshint
+* "VScrolledWindow#refresh_line":#VScrolledWindow_refreshline
+* "VScrolledWindow#refresh_lines":#VScrolledWindow_refreshlines
+* "VScrolledWindow#refresh_all":#VScrolledWindow_refreshall
+* "VScrolledWindow#scroll_lines":#VScrolledWindow_scrolllines
+* "VScrolledWindow#scroll_pages":#VScrolledWindow_scrollpages
+* "VScrolledWindow#scroll_to_line":#VScrolledWindow_scrolltoline
+* "VScrolledWindow#set_line_count":#VScrolledWindow_setlinecount
+
+</div>
+
+
+
+h3(#VScrolledWindow_new). VScrolledWindow.new
+
+  *VScrolledWindow.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                      %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                      %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                      %(arg-type)Integer% style = 0, 
+                      %(arg-type)String% name = PanelNameStr)
+
+This is the normal constructor, no need to call Create() after using this one.
+
+Note that @VSCROLL@ is always automatically added to our style, there is
+no need to specify it explicitly.
+
+h4. Parameters
+
+* _parent_ The parent window, must not be @NULL@
+* _id_ The identifier of this window, @ID_ANY@ by default
+* _pos_ The initial window position
+* _size_ The initial window size
+* _style_ The window style. There are no special style bits defined for
+this class.
+* _name_ The name for this window; usually not used
+
+
+
+h3(#VScrolledWindow_estimatetotalheight). VScrolledWindow#estimate_total_height
+
+ Integer *estimate_total_height*()
+
+This method is used internally by VScrolledWindow to estimate the total
+height of the window when "set_line_count":#VScrolledWindow_setlinecount
+is called. The default implementation uses the brute force approach if
+the number of the items in the control is small enough. Otherwise, it
+tries to find the average line height using some lines in the beginning,
+middle and the end.
+
+If it is undesirable to access all these lines (some of which might be
+never shown) just for the total height calculation, you may override the
+function and provide your own guess better and/or faster.
+
+Note that although returning a totally wrong value would still work, it
+risks to result in very strange scrollbar behaviour so this function
+should really try to make the best guess possible.
+
+h3(#VScrolledWindow_getfirstvisibleline). VScrolledWindow#get_first_visible_line
+
+ Integer *get_first_visible_line*()
+
+Returns the index of the first currently visible line.
+
+This is same as "get_visible_begin":#VScrolledWindow_getvisiblebegin and
+exists only for symmetry with "get_last_visible_line":#VScrolledWindow_getlastvisibleline.
+
+
+h3(#VScrolledWindow_getlastvisibleline). VScrolledWindow#get_last_visible_line
+
+ Integer *get_last_visible_line*()
+
+Returns the index of the last currently visible line. Note that this method
+returns @(Integer)-1@ (i.e. a huge positive number) if the control is
+empty so if this is possible you should use "get_visible_end":#VScrolledWindow_getvisibleend 
+instead.
+
+h4. See also
+
+"get_first_visible_line":#VScrolledWindow_getfirstvisibleline
+
+
+h3(#VScrolledWindow_getlinecount). VScrolledWindow#get_line_count
+
+ Integer *get_line_count*()
+
+Get the number of lines this window contains (previously set by 
+"set_line_count()":#VScrolledWindow_setlinecount())
+
+
+h3(#VScrolledWindow_getvisiblebegin). VScrolledWindow#get_visible_begin
+
+ Integer *get_visible_begin*()
+
+Returns the index of the first currently visible line.
+
+h4. See also
+
+"get_visible_end":#VScrolledWindow_getvisibleend
+
+
+h3(#VScrolledWindow_getvisibleend). VScrolledWindow#get_visible_end
+
+ Integer *get_visible_end*()
+
+Returns the index of the first line after the currently visible one. If the
+return value is $0$ it means that no lines are currently shown (which only
+happens if the control is empty). Note that the index returned by this method
+is not always a valid index as it may be equal to "get_line_count":#VScrolledWindow_getlinecount.
+
+h4. See also
+
+"get_visible_begin":#VScrolledWindow_getvisiblebegin
+
+
+h3(#VScrolledWindow_hittest). VScrolledWindow#hit_test
+
+ Integer *hit_test*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+ Integer *hit_test*(%(arg-type)"Point":point.html% pt)
+
+Return the item at the specified (in physical coordinates) position or
+@NOT_FOUND@ if none, i.e. if it is below the last item.
+
+
+h3(#VScrolledWindow_isvisible). VScrolledWindow#is_visible
+
+ Boolean *is_visible*(%(arg-type)Integer% line)
+
+Returns @true@ if the given line is (at least partially) visible or 
+@false@ otherwise.
+
+
+h3(#VScrolledWindow_ongetlineheight). VScrolledWindow#on_get_line_height
+
+ Integer *on_get_line_height*(%(arg-type)Integer% n)
+
+This protected virtual function must be overridden in the derived class and it
+should return the height of the given line in pixels.
+
+h4. See also
+
+"on_get_lines_hint":#VScrolledWindow_ongetlineshint
+
+
+h3(#VScrolledWindow_ongetlineshint). VScrolledWindow#on_get_lines_hint
+
+  *on_get_lines_hint*(%(arg-type)Integer% lineMin,  %(arg-type)Integer% lineMax)
+
+This function doesn't have to be overridden but it may be useful to do
+it if calculating the lines heights is a relatively expensive operation
+as it gives the user code a possibility to calculate several of them at
+once.
+
+@on_get_lines_hint@ is normally called just before
+"on_get_line_height":#VScrolledWindow_ongetlineheight but you shouldn't
+rely on the latter being called for all lines in the interval specified
+here. It is also possible that @on_get_lines_hint@ will be called for the
+lines outside of this interval, so this is really just a hint, not a
+promise.
+
+Finally note that _lineMin_ is inclusive, while _lineMax_ is exclusive,
+as usual.
+
+h3(#VScrolledWindow_refreshline). VScrolledWindow#refresh_line
+
+  *refresh_line*(%(arg-type)Integer% line)
+
+Refreshes the specified line -- it will be redrawn during the next main loop
+iteration.
+
+h4. See also
+
+"refresh_lines":#VScrolledWindow_refreshlines
+
+
+h3(#VScrolledWindow_refreshlines). VScrolledWindow#refresh_lines
+
+  *refresh_lines*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Refreshes all lines between _from_ and _to_, inclusive. _from_
+should be less than or equal to _to_.
+
+h4. See also
+
+"refresh_line":#VScrolledWindow_refreshline
+
+
+h3(#VScrolledWindow_refreshall). VScrolledWindow#refresh_all
+
+  *refresh_all*()
+
+This function completely refreshes the control, recalculating the number of
+items shown on screen and repainting them. It should be called when the values
+returned by "on_get_line_height":#VScrolledWindow_ongetlineheight change
+for some reason and the window must be updated to reflect this.
+
+
+h3(#VScrolledWindow_scrolllines). VScrolledWindow#scroll_lines
+
+ Boolean *scroll_lines*(%(arg-type)Integer% lines)
+
+Scroll by the specified number of lines which may be positive (to scroll down)
+or negative (to scroll up).
+
+Returns @true@ if the window was scrolled, @false@ otherwise (for
+example if we're trying to scroll down but we are already showing the last
+line).
+
+h4. See also
+
+"line_up":#VScrolledWindow_lineup, "line_down":#VScrolledWindow_linedown
+
+
+h3(#VScrolledWindow_scrollpages). VScrolledWindow#scroll_pages
+
+ Boolean *scroll_pages*(%(arg-type)Integer% pages)
+
+Scroll by the specified number of pages which may be positive (to scroll down)
+or negative (to scroll up).
+
+h4. See also
+
+"scroll_lines":#VScrolledWindow_scrolllines,
+
+"page_up":#VScrolledWindow_pageup, "page_down":#VScrolledWindow_pagedown
+
+
+h3(#VScrolledWindow_scrolltoline). VScrolledWindow#scroll_to_line
+
+ Boolean *scroll_to_line*(%(arg-type)Integer% line)
+
+Scroll to the specified line: it will become the first visible line in
+the window.
+
+Return @true@ if we scrolled the window, @false@ if nothing was done.
+
+
+h3(#VScrolledWindow_setlinecount). VScrolledWindow#set_line_count
+
+  *set_line_count*(%(arg-type)Integer% count)
+
+Set the number of lines the window contains: the derived class must
+provide the heights for all lines with indices up to the one given here
+in its "on_get_line_height":#VScrolledWindow_ongetlineheight().
+
+

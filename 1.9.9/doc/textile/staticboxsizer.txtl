@@ -1,0 +1,49 @@
+h1(#wxstaticboxsizer). Wx::StaticBoxSizer
+
+StaticBoxSizer is a sizer derived from BoxSizer but adds a static
+box around the sizer. This static box has to be created independently or the
+sizer may create it itself as a convenience.
+
+h2. Derived from
+
+"BoxSizer":boxsizer.html
+
+"Sizer":sizer.html
+
+"Object":object.html
+
+h2. See also
+
+"Sizer":sizer.html, "StaticBox":staticbox.html, "BoxSizer":boxsizer.html
+
+<div id="methods">
+
+h2. Methods
+
+* "StaticBoxSizer.new":#StaticBoxSizer_new
+* "StaticBoxSizer#get_static_box":#StaticBoxSizer_getstaticbox
+
+</div>
+
+
+
+h3(#StaticBoxSizer_wxstaticboxsizer). StaticBoxSizer.new
+
+  *StaticBoxSizer.new*(%(arg-type)"StaticBox":staticbox.html% box,  %(arg-type)Integer% orient)
+
+  *StaticBoxSizer.new*(%(arg-type)Integer% orient,  %(arg-type)"Window":window.html% parent, 
+                     %(arg-type)String% label = '')
+
+The first constructor uses an already existing static box. It takes the
+associated static box and the orientation orient, which can be either
+@VERTICAL@ or @HORIZONTAL@ as parameters.
+
+The second one creates a new static box with the given label and parent window.
+
+
+h3(#StaticBoxSizer_getstaticbox). StaticBoxSizer#get_static_box
+
+ "StaticBox":staticbox.html *get_static_box*()
+
+Returns the static box associated with the sizer.
+

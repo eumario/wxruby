@@ -1,0 +1,68 @@
+h1(#wxcalculatelayoutevent). Wx::CalculateLayoutEvent
+
+This event is sent by "LayoutAlgorithm":layoutalgorithm.html to
+calculate the amount of the remaining client area that the window should
+occupy.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+
+|*evt_calculate_layout()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_CALCULATE_LAYOUT event,which asks the window to take a 'bite' out of a rectangle provided by the algorithm.|
+
+
+h2. See also
+
+"QueryLayoutInfoEvent":querylayoutinfoevent.html, "SashLayoutWindow":sashlayoutwindow.html, "LayoutAlgorithm":layoutalgorithm.html.
+
+<div id="methods">
+
+h2. Methods
+
+* "CalculateLayoutEvent.new":#CalculateLayoutEvent_new
+* "CalculateLayoutEvent#get_flags":#CalculateLayoutEvent_getflags
+* "CalculateLayoutEvent#get_rect":#CalculateLayoutEvent_getrect
+* "CalculateLayoutEvent#set_flags":#CalculateLayoutEvent_setflags
+* "CalculateLayoutEvent#set_rect":#CalculateLayoutEvent_setrect
+
+</div>
+
+
+h3(#CalculateLayoutEvent_new). CalculateLayoutEvent.new
+
+  *CalculateLayoutEvent.new*(%(arg-type)Integer% id = 0)
+
+Constructor.
+
+h3(#CalculateLayoutEvent_getflags). CalculateLayoutEvent#get_flags
+
+ Integer *get_flags*()
+
+Returns the flags associated with this event. Not currently used.
+
+h3(#CalculateLayoutEvent_getrect). CalculateLayoutEvent#get_rect
+
+ "Rect":rect.html *get_rect*()
+
+Before the event handler is entered, returns the remaining parent client area that the window
+could occupy. When the event handler returns, this should contain the remaining parent client rectangle,
+after the event handler has subtracted the area that its window occupies.
+
+h3(#CalculateLayoutEvent_setflags). CalculateLayoutEvent#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Sets the flags associated with this event. Not currently used.
+
+h3(#CalculateLayoutEvent_setrect). CalculateLayoutEvent#set_rect
+
+  *set_rect*(%(arg-type)"Rect":rect.html% rect)
+
+Call this to specify the new remaining parent client area, after the space occupied by the
+window has been subtracted.
+

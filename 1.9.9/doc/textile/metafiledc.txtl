@@ -1,0 +1,4 @@
+h1(#wxmetafiledc). Wx::MetafileDC
+
+This is a type of device context that allows a metafile object to be
+created (Windows only), and has most of the characteristics of a normal

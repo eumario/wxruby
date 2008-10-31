@@ -1,0 +1,87 @@
+h1(#wxstaticline). Wx::StaticLine
+
+A static line is just a line which may be used in a dialog to separate the
+groups of controls. The line may be only vertical or horizontal.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@LI_HORIZONTAL@|Creates a horizontal line.|
+|@LI_VERTICAL@|Creates a vertical line.|
+
+
+h2. See also
+
+"StaticBox":staticbox.html
+
+<div id="methods">
+
+h2. Methods
+
+* "StaticLine.new":#StaticLine_new
+* "StaticLine#create":#StaticLine_create
+* "StaticLine#is_vertical":#StaticLine_isvertical
+* "StaticLine#get_default_size":#StaticLine_getdefaultsize
+
+</div>
+
+
+h3(#StaticLine_new). StaticLine.new
+
+  *StaticLine.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                 %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                 %(arg-type)Integer% style = LI_HORIZONTAL, 
+                 %(arg-type)String% name = "staticLine")
+
+Constructor, creating and showing a static line.
+
+h4. Parameters
+
+* _parent_ Parent window. Must not be NULL.
+* _id_ Window identifier. A value of -1 indicates a default value.
+* _pos_ Window position. If the position (-1, -1) is specified then a default position is chosen.
+* _size_ Size. Note that either the height or the width (depending on
+whether the line if horizontal or vertical) is ignored.
+* _style_ Window style (either LI_HORIZONTAL or LI_VERTICAL).
+* _name_ Window name.
+
+h4. See also
+
+"StaticLine#create":staticline.html#StaticLine_create
+
+h3(#StaticLine_create). StaticLine#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0, 
+                %(arg-type)String% name = "staticLine")
+
+Creates the static line for two-step construction. See "StaticLine.new":staticline.html#StaticLine_new for further details.
+
+h3(#StaticLine_isvertical). StaticLine#is_vertical
+
+ Boolean *is_vertical*()
+
+Returns true if the line is vertical, false if horizontal.
+
+h3(#StaticLine_getdefaultsize). StaticLine#get_default_size
+
+ Integer *get_default_size*()
+
+This static function returns the size which will be given to the smaller
+dimension of the static line, i.e. its height for a horizontal line or its
+width for a vertical one.
+

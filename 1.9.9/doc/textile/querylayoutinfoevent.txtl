@@ -1,0 +1,132 @@
+h1(#wxquerylayoutinfoevent). Wx::QueryLayoutInfoEvent
+
+This event is sent when "LayoutAlgorithm":layoutalgorithm.html wishes to get
+the size, orientation and alignment of a window. More precisely, the event is sent
+by the OnCalculateLayout handler which is itself invoked by LayoutAlgorithm.
+
+h2. Derived from
+
+"Event":event.html
+
+"Object":object.html
+
+h2. Event table macros
+
+
+|*evt_query_layout_info()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_QUERY_LAYOUT_INFO event,to get size, orientation and alignment from a window.|
+
+
+h2. Data structures
+
+
+
+ enum LayoutOrientation {
+     LAYOUT_HORIZONTAL,
+     LAYOUT_VERTICAL
+ };
+ 
+ enum LayoutAlignment {
+     LAYOUT_NONE,
+     LAYOUT_TOP,
+     LAYOUT_LEFT,
+     LAYOUT_RIGHT,
+     LAYOUT_BOTTOM,
+ };
+ 
+
+
+h2. See also
+
+"CalculateLayoutEvent":calculatelayoutevent.html, "SashLayoutWindow":sashlayoutwindow.html, "LayoutAlgorithm":layoutalgorithm.html.
+
+<div id="methods">
+
+h2. Methods
+
+* "QueryLayoutInfoEvent.new":#QueryLayoutInfoEvent_new
+* "QueryLayoutInfoEvent#get_alignment":#QueryLayoutInfoEvent_getalignment
+* "QueryLayoutInfoEvent#get_flags":#QueryLayoutInfoEvent_getflags
+* "QueryLayoutInfoEvent#get_orientation":#QueryLayoutInfoEvent_getorientation
+* "QueryLayoutInfoEvent#get_requested_length":#QueryLayoutInfoEvent_getrequestedlength
+* "QueryLayoutInfoEvent#get_size":#QueryLayoutInfoEvent_getsize
+* "QueryLayoutInfoEvent#set_alignment":#QueryLayoutInfoEvent_setalignment
+* "QueryLayoutInfoEvent#set_flags":#QueryLayoutInfoEvent_setflags
+* "QueryLayoutInfoEvent#set_orientation":#QueryLayoutInfoEvent_setorientation
+* "QueryLayoutInfoEvent#set_requested_length":#QueryLayoutInfoEvent_setrequestedlength
+* "QueryLayoutInfoEvent#set_size":#QueryLayoutInfoEvent_setsize
+
+</div>
+
+
+h3(#QueryLayoutInfoEvent_new). QueryLayoutInfoEvent.new
+
+  *QueryLayoutInfoEvent.new*(%(arg-type)Integer% id = 0)
+
+Constructor.
+
+h3(#QueryLayoutInfoEvent_getalignment). QueryLayoutInfoEvent#get_alignment
+
+  *get_alignment*()
+
+Specifies the alignment of the window (which side of the remaining parent client area
+the window sticks to). One of LAYOUT_TOP, LAYOUT_LEFT, LAYOUT_RIGHT, LAYOUT_BOTTOM.
+
+h3(#QueryLayoutInfoEvent_getflags). QueryLayoutInfoEvent#get_flags
+
+ Integer *get_flags*()
+
+Returns the flags associated with this event. Not currently used.
+
+h3(#QueryLayoutInfoEvent_getorientation). QueryLayoutInfoEvent#get_orientation
+
+ "LayoutOrientation":layoutorientation.html *get_orientation*()
+
+Returns the orientation that the event handler specified to the event object. May be one of LAYOUT_HORIZONTAL,
+LAYOUT_VERTICAL.
+
+h3(#QueryLayoutInfoEvent_getrequestedlength). QueryLayoutInfoEvent#get_requested_length
+
+ Integer *get_requested_length*()
+
+Returns the requested length of the window in the direction of the window orientation. This information
+is not yet used.
+
+h3(#QueryLayoutInfoEvent_getsize). QueryLayoutInfoEvent#get_size
+
+ "Size":size.html *get_size*()
+
+Returns the size that the event handler specified to the event object as being the requested size of the window.
+
+h3(#QueryLayoutInfoEvent_setalignment). QueryLayoutInfoEvent#set_alignment
+
+  *set_alignment*(%(arg-type)"LayoutAlignment":layoutalignment.html% alignment)
+
+Call this to specify the alignment of the window (which side of the remaining parent client area
+the window sticks to). May be one of LAYOUT_TOP, LAYOUT_LEFT, LAYOUT_RIGHT, LAYOUT_BOTTOM.
+
+h3(#QueryLayoutInfoEvent_setflags). QueryLayoutInfoEvent#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Sets the flags associated with this event. Not currently used.
+
+h3(#QueryLayoutInfoEvent_setorientation). QueryLayoutInfoEvent#set_orientation
+
+  *set_orientation*(%(arg-type)"LayoutOrientation":layoutorientation.html% orientation)
+
+Call this to specify the orientation of the window. May be one of LAYOUT_HORIZONTAL,
+LAYOUT_VERTICAL.
+
+h3(#QueryLayoutInfoEvent_setrequestedlength). QueryLayoutInfoEvent#set_requested_length
+
+  *set_requested_length*(%(arg-type)Integer% length)
+
+Sets the requested length of the window in the direction of the window orientation. This information
+is not yet used.
+
+h3(#QueryLayoutInfoEvent_setsize). QueryLayoutInfoEvent#set_size
+
+  *set_size*(%(arg-type)"Size":size.html% size)
+
+Call this to let the calling code know what the size of the window is.
+

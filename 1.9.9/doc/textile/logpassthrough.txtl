@@ -1,0 +1,20 @@
+h1. Wx::LogPassThrough
+
+h2. Derived from
+
+"LogChain":logchain.html
+
+<div id="methods">
+
+h2. Methods
+
+* "LogPassThrough.new":#LogPassThrough_new
+
+</div>
+
+
+h3(#LogPassThrough_new). LogPassThrough.new
+
+Default ctor installs this object as the current active log target.
+
+

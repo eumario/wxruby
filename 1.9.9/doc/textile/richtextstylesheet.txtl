@@ -1,0 +1,195 @@
+h1(#wxrichtextstylesheet). Wx::RichTextStyleSheet
+
+A style sheet contains named paragraph and character styles that make it
+easy for a user to apply combinations of attributes to a "RichTextCtrl":richtextctrl.html.
+
+You can use a "RichTextStyleListBox":richtextstylelistbox.html in your
+user interface to show available styles to the user, and allow application
+of styles to the control.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextStyleSheet.new":#RichTextStyleSheet_new
+* "RichTextStyleSheet#add_character_style":#RichTextStyleSheet_addcharacterstyle
+* "RichTextStyleSheet#add_list_style":#RichTextStyleSheet_addliststyle
+* "RichTextStyleSheet#add_paragraph_style":#RichTextStyleSheet_addparagraphstyle
+* "RichTextStyleSheet#add_style":#RichTextStyleSheet_addstyle
+* "RichTextStyleSheet#delete_styles":#RichTextStyleSheet_deletestyles
+* "RichTextStyleSheet#find_character_style":#RichTextStyleSheet_findcharacterstyle
+* "RichTextStyleSheet#find_list_style":#RichTextStyleSheet_findliststyle
+* "RichTextStyleSheet#find_paragraph_style":#RichTextStyleSheet_findparagraphstyle
+* "RichTextStyleSheet#find_style":#RichTextStyleSheet_findstyle
+* "RichTextStyleSheet#get_character_style":#RichTextStyleSheet_getcharacterstyle
+* "RichTextStyleSheet#get_character_style_count":#RichTextStyleSheet_getcharacterstylecount
+* "RichTextStyleSheet#get_description":#RichTextStyleSheet_getdescription
+* "RichTextStyleSheet#get_list_style":#RichTextStyleSheet_getliststyle
+* "RichTextStyleSheet#get_list_style_count":#RichTextStyleSheet_getliststylecount
+* "RichTextStyleSheet#get_name":#RichTextStyleSheet_getname
+* "RichTextStyleSheet#get_paragraph_style":#RichTextStyleSheet_getparagraphstyle
+* "RichTextStyleSheet#get_paragraph_style_count":#RichTextStyleSheet_getparagraphstylecount
+* "RichTextStyleSheet#remove_character_style":#RichTextStyleSheet_removecharacterstyle
+* "RichTextStyleSheet#remove_list_style":#RichTextStyleSheet_removeliststyle
+* "RichTextStyleSheet#remove_paragraph_style":#RichTextStyleSheet_removeparagraphstyle
+* "RichTextStyleSheet#remove_style":#RichTextStyleSheet_removestyle
+* "RichTextStyleSheet#set_description":#RichTextStyleSheet_setdescription
+* "RichTextStyleSheet#set_name":#RichTextStyleSheet_setname
+
+</div>
+
+
+h3(#RichTextStyleSheet_wxrichtextstylesheet). RichTextStyleSheet.new
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextStyleSheet_addcharacterstyle). RichTextStyleSheet#add_character_style
+
+ Boolean *add_character_style*(%(arg-type)"RichTextCharacterStyleDefinition":richtextcharacterstyledefinition.html% def)
+
+Adds a definition to the character style list.
+
+h3(#RichTextStyleSheet_addliststyle). RichTextStyleSheet#add_list_style
+
+ Boolean *add_list_style*(%(arg-type)"RichTextListStyleDefinition":richtextliststyledefinition.html% def)
+
+Adds a definition to the list style list.
+
+h3(#RichTextStyleSheet_addparagraphstyle). RichTextStyleSheet#add_paragraph_style
+
+ Boolean *add_paragraph_style*(%(arg-type)"RichTextParagraphStyleDefinition":richtextparagraphstyledefinition.html% def)
+
+Adds a definition to the paragraph style list.
+
+h3(#RichTextStyleSheet_addstyle). RichTextStyleSheet#add_style
+
+ Boolean *add_style*(%(arg-type)"RichTextStyleDefinition":richtextstyledefinition.html% def)
+
+Adds a definition to the appropriate style list.
+
+h3(#RichTextStyleSheet_deletestyles). RichTextStyleSheet#delete_styles
+
+  *delete_styles*()
+
+Deletes all styles.
+
+h3(#RichTextStyleSheet_findcharacterstyle). RichTextStyleSheet#find_character_style
+
+ "RichTextCharacterStyleDefinition":richtextcharacterstyledefinition.html *find_character_style*(%(arg-type)String% name)
+
+Finds a character definition by name.
+
+h3(#RichTextStyleSheet_findliststyle). RichTextStyleSheet#find_list_style
+
+ "RichTextListStyleDefinition":richtextliststyledefinition.html *find_list_style*(%(arg-type)String% name)
+
+Finds a list definition by name.
+
+h3(#RichTextStyleSheet_findparagraphstyle). RichTextStyleSheet#find_paragraph_style
+
+ "RichTextParagraphStyleDefinition":richtextparagraphstyledefinition.html *find_paragraph_style*(%(arg-type)String% name)
+
+Finds a paragraph definition by name.
+
+h3(#RichTextStyleSheet_findstyle). RichTextStyleSheet#find_style
+
+ "RichTextStyleDefinition":richtextstyledefinition.html *find_style*(%(arg-type)String% name)
+
+Finds a style definition by name.
+
+h3(#RichTextStyleSheet_getcharacterstyle). RichTextStyleSheet#get_character_style
+
+ "RichTextCharacterStyleDefinition":richtextcharacterstyledefinition.html *get_character_style*(%(arg-type)"size_t":size_t.html% n)
+
+Returns the _n_th character style.
+
+h3(#RichTextStyleSheet_getcharacterstylecount). RichTextStyleSheet#get_character_style_count
+
+ size_t *get_character_style_count*()
+
+Returns the number of character styles.
+
+h3(#RichTextStyleSheet_getdescription). RichTextStyleSheet#get_description
+
+ String *get_description*()
+
+Returns the style sheet's description.
+
+h3(#RichTextStyleSheet_getliststyle). RichTextStyleSheet#get_list_style
+
+ "RichTextListStyleDefinition":richtextliststyledefinition.html *get_list_style*(%(arg-type)"size_t":size_t.html% n)
+
+Returns the _n_th list style.
+
+h3(#RichTextStyleSheet_getliststylecount). RichTextStyleSheet#get_list_style_count
+
+ size_t *get_list_style_count*()
+
+Returns the number of list styles.
+
+h3(#RichTextStyleSheet_getname). RichTextStyleSheet#get_name
+
+ String *get_name*()
+
+Returns the style sheet's name.
+
+h3(#RichTextStyleSheet_getparagraphstyle). RichTextStyleSheet#get_paragraph_style
+
+ "RichTextParagraphStyleDefinition":richtextparagraphstyledefinition.html *get_paragraph_style*(%(arg-type)"size_t":size_t.html% n)
+
+Returns the _n_th paragraph style.
+
+h3(#RichTextStyleSheet_getparagraphstylecount). RichTextStyleSheet#get_paragraph_style_count
+
+ size_t *get_paragraph_style_count*()
+
+Returns the number of paragraph styles.
+
+h3(#RichTextStyleSheet_removecharacterstyle). RichTextStyleSheet#remove_character_style
+
+ Boolean *remove_character_style*(%(arg-type)"RichTextStyleDefinition":richtextstyledefinition.html% def, 
+                                %(arg-type)Boolean% deleteStyle = false)
+
+Removes a character style.
+
+h3(#RichTextStyleSheet_removeliststyle). RichTextStyleSheet#remove_list_style
+
+ Boolean *remove_list_style*(%(arg-type)"RichTextStyleDefinition":richtextstyledefinition.html% def, 
+                           %(arg-type)Boolean% deleteStyle = false)
+
+Removes a list style.
+
+h3(#RichTextStyleSheet_removeparagraphstyle). RichTextStyleSheet#remove_paragraph_style
+
+ Boolean *remove_paragraph_style*(%(arg-type)"RichTextStyleDefinition":richtextstyledefinition.html% def, 
+                                %(arg-type)Boolean% deleteStyle = false)
+
+Removes a paragraph style.
+
+h3(#RichTextStyleSheet_removestyle). RichTextStyleSheet#remove_style
+
+ Boolean *remove_style*(%(arg-type)"RichTextStyleDefinition":richtextstyledefinition.html% def, 
+                      %(arg-type)Boolean% deleteStyle = false)
+
+Removes a style.
+
+h3(#RichTextStyleSheet_setdescription). RichTextStyleSheet#set_description
+
+  *set_description*(%(arg-type)String% descr)
+
+Sets the style sheet's description.
+
+h3(#RichTextStyleSheet_setname). RichTextStyleSheet#set_name
+
+  *set_name*(%(arg-type)String% name)
+
+Sets the style sheet's name.
+

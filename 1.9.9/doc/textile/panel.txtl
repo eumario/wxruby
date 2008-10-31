@@ -1,0 +1,171 @@
+h1(#wxpanel). Wx::Panel
+
+A panel is a window on which controls are placed. It is usually placed within a frame.
+It contains minimal extra functionality over and above its parent class Window; its main
+purpose is to be similar in appearance and functionality to a dialog, but with the flexibility of
+having any window as a parent.
+
+_Note:_ if not all characters are being intercepted by your OnKeyDown or OnChar handler,
+it may be because you are using the TAB_TRAVERSAL style, which grabs some keypresses for use
+by child controls.
+
+h2. Derived from
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+There are no specific styles for this window.
+
+See also "window styles overview":windowstyles.html.
+
+h2. Remarks
+
+By default, a panel has the same colouring as a dialog.
+
+h2. See also
+
+"Dialog":dialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Panel.new":#Panel_new
+* "Panel#create":#Panel_create
+* "Panel#get_default_item":#Panel_getdefaultitem
+* "Panel#init_dialog":#Panel_initdialog
+* "Panel#on_sys_colour_changed":#Panel_onsyscolourchanged
+* "Panel#set_default_item":#Panel_setdefaultitem
+* "Panel#set_focus":#Panel_setfocus
+* "Panel#set_focus_ignoring_children":#Panel_setfocusignoringchildren
+
+</div>
+
+
+h3(#Panel_new). Panel.new
+
+  *Panel.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = $-1$, 
+            %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+            %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+            %(arg-type)Integer% style = TAB_TRAVERSAL, 
+            %(arg-type)String% name = "panel")
+
+Constructor.
+
+h4. Parameters
+
+* _parent_ The parent window.
+* _id_ An identifier for the panel. A value of -1 is taken to mean a default.
+* _pos_ The panel position. A value of (-1, -1) indicates a default position, chosen by
+either the windowing system or Widgets, depending on platform.
+* _size_ The panel size. A value of (-1, -1) indicates a default size, chosen by
+either the windowing system or Widgets, depending on platform.
+* _style_ The window style. See "Panel":panel.html.
+* _name_ Used to associate a name with the window,
+allowing the application user to set Motif resource values for
+individual dialog boxes.
+
+h4. See also
+
+"Panel#create":panel.html#Panel_create
+
+  *destructor*()
+
+Destructor. Deletes any child windows before deleting the physical window.
+
+h3(#Panel_create). Panel#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = TAB_TRAVERSAL, 
+                %(arg-type)String% name = "panel")
+
+Used for two-step panel construction. See "Panel.new":panel.html#Panel_new for details.
+
+h3(#Panel_getdefaultitem). Panel#get_default_item
+
+ "Window":window.html *get_default_item*()
+
+Returns a pointer to the button which is the default for this window, or NULL.
+The default button is the one activated by pressing the Enter key.
+
+h3(#Panel_initdialog). Panel#init_dialog
+
+  *init_dialog*()
+
+Sends a "InitDialogEvent":initdialogevent.html, which
+in turn transfers data to the dialog via validators.
+
+h4. See also
+
+"InitDialogEvent":initdialogevent.html
+
+h3(#Panel_onsyscolourchanged). Panel#on_sys_colour_changed
+
+  *on_sys_colour_changed*(%(arg-type)"SysColourChangedEvent":syscolourchangedevent.html% event)
+
+The default handler for EVT_SYS_COLOUR_CHANGED.
+
+h4. Parameters
+
+* _event_ The colour change event.
+
+h4. Remarks
+
+Changes the panel's colour to conform to the current settings (Windows only).
+Add an event table entry for your panel class if you wish the behaviour
+to be different (such as keeping a user-defined
+background colour). If you do override this function, call Event::Skip to
+propagate the notification to child windows and controls.
+
+h4. See also
+
+"SysColourChangedEvent":syscolourchangedevent.html
+
+
+h3(#Panel_setdefaultitem). Panel#set_default_item
+
+  *set_default_item*(%(arg-type)"Button":button.html% btn)
+
+Changes the default button for the panel.
+
+h4. See also
+
+"get_default_item":#Panel_getdefaultitem
+
+
+h3(#Panel_setfocus). Panel#set_focus
+
+  *set_focus*()
+
+Overrides "Window#set_focus":window.html#Window_setfocus. This method
+uses the (undocumented) mix-in class ControlContainer which manages
+the focus and TAB logic for controls which usually have child controls.
+In practice, if you call this method and the control has at least
+one child window, the focus will be given to the child window.
+
+h4. See also
+
+"FocusEvent":focusevent.html
+"Window#set_focus":window.html#Window_setfocus
+
+
+h3(#Panel_setfocusignoringchildren). Panel#set_focus_ignoring_children
+
+  *set_focus_ignoring_children*()
+
+In contrast to "Panel#set_focus":panel.html#Panel_setfocus (see above)
+this will set the focus to the panel even of there are child windows
+in the panel. This is only rarely needed.
+
+h4. See also
+
+"FocusEvent":focusevent.html
+"Panel#set_focus":panel.html#Panel_setfocus
+

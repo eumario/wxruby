@@ -1,0 +1,681 @@
+h1(#wxmenu). Wx::Menu
+
+A menu is a pull-down or pop-up list of items. The Wx::Menu class may be
+used to construct either menu bars (associated with a "Frame":frame.html
+via its "Menubar":menubar.html ) or popup menus. Items are represented
+as text, and some platforms, they may also have icons. One item is
+selected by clicking on it, or by using a key shortcut, to start an
+application action. Clicking elsewhere dismisses the menu.
+
+A menu item has an integer ID associated with it is used to identify it
+when it is clicked, and to access and change the menu item after it has
+been created (for example, disabling or enabling items in response to
+particular application states). In common with other parts of the wxRuby
+API, it is not always necessary to give explicit ids; it can omitted,
+and wxRuby will supply a reasonable, unique default. These can be used
+to set up "event handling for Menus":#event_handling.
+
+h2. Special Menu Ids
+
+There are cases where it is desirable to explicitly set the id to one of
+the special constants built into wxRuby, in order to get better native
+appearance and behaviour across different window systems. 
+
+Most importantly, @Wx::ID_ABOUT@ and @Wx::ID_EXIT@ are predefined and
+have special meaning: "Display an About dialog" and "Exit the
+application". If these ids are used, the menu items will be taken out of
+the normal menus under MacOS X and will be inserted into the 'system'
+(Apple) menu, following the appropriate MacOS X interface guideline. In
+addition, they will be given the standard label ('Quit', on OS X,
+'Exit', on GTK and Windows).
+
+Secondly, predefined ids corresponding to a set of common application
+actions are also available, such as @Wx::ID_SAVE@, @Wx::ID_CUT@ and
+@Wx::ID_PROPERTIES@. If these are used as the ids for the relevant items
+in Frame menus, they will be displayed with the GTK-theme supplied
+system standard icon. 
+
+See also, "the list of standard ids":standardsids.html.
+
+h2. Types of menu item
+
+Menu items may be either normal items, check items or radio
+items. Normal items don't have any special properties. Check items have
+a boolean flag associated to them and they show a checkmark in the menu
+when the flag is set.  Widgets automatically toggles the flag value when
+the item is clicked and its value may be retrieved using either
+"is_checked":#Menu_ischecked method of Menu or MenuBar itself or by
+using "Event#is_checked":event.html#Event_ischecked when you get the
+menu notification for the item in question.
+
+The radio items are similar to the check items except that all the other items
+in the same radio group are unchecked when a radio item is checked. The radio
+group is formed by a contiguous range of radio items, i.e. it starts at the
+first item of this kind and ends with the first item of a different kind (or
+the end of the menu). Notice that because the radio groups are defined in terms
+of the item positions inserting or removing the items in the menu containing
+the radio items risks to not work correctly. Finally note that radio items
+are not supported under Motif.
+
+h2. Derived from
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2(#event_handling). Event handling
+
+The event of the user selecting an item from a menu can be captured by
+the @evt_menu@ handler. This is used whether the Menu is part of a
+Frame's MenuBar, or whether it is a standalone pop-up menu. This event
+handler receives events of type "CommandEvent":commandevent.html. 
+
+"As with other CommandEvents":eventhandlingoverview.html#events_with_ids
+, the event "bubbles" upwards through the containing windows, so the
+event handlers can be set up in the containing frame. And, as with other
+CommandEvents, @evt_menu@ must be told which MenuItem's events it should
+listen for. It can be passed either a "MenuItem":menuitem.html object,
+or the integer id of a menu item.
+
+Note that there are also events fired when a menu in a menubar is opened
+up by the user, of class "MenuEvent":menuevent.html. However, these are
+rarely required in practice.
+
+h3. Event Handling Example
+
+ my_menu = Wx::Menu.new
+
+  ==#== Menu items are returned by all adding methods
+ menu_item1 = my_menu.append('Do something', 'Help text')
+ evt_menu menu_item1, :on_do_something
+
+  ==#== Use a menu item with a specialid
+ my_menu.append(Wx::ID_OPEN, '&Open file', 'Open a file')
+  ==#== Handle this menu event, specifying by id
+ evt_menu Wx::ID_OPEN, on_open_file
+
+h2. See also
+
+"MenuBar":menubar.html, "Window#popup_menu":window.html#Window_popupmenu, "Event handling overview":eventhandlingoverview.html, "FileHistory (most recently used files menu)":filehistory.html
+
+
+
+<div id="methods">
+
+h2. Methods
+
+* "Menu.new":#Menu_new
+* "Menu#append":#Menu_append
+* "Menu#append_item":#Menu_appenditem
+* "Menu#append_menu":#Menu_appendmenu
+* "Menu#append_check_item":#Menu_appendcheckitem
+* "Menu#append_radio_item":#Menu_appendradioitem
+* "Menu#append_separator":#Menu_appendseparator
+* "Menu#break":#Menu_break
+* "Menu#check":#Menu_check
+* "Menu#delete":#Menu_delete
+* "Menu#destroy":#Menu_destroy
+* "Menu#enable":#Menu_enable
+* "Menu#find_item":#Menu_finditem
+* "Menu#find_item_by_position":#Menu_finditembyposition
+* "Menu#get_help_string":#Menu_gethelpstring
+* "Menu#get_label":#Menu_getlabel
+* "Menu#get_label_text":#Menu_getlabeltext
+* "Menu#get_menu_item_count":#Menu_getmenuitemcount
+* "Menu#get_menu_items":#Menu_getmenuitems
+* "Menu#get_title":#Menu_gettitle
+* "Menu#insert":#Menu_insert
+* "Menu#insert_check_item":#Menu_insertcheckitem
+* "Menu#insert_radio_item":#Menu_insertradioitem
+* "Menu#insert_separator":#Menu_insertseparator
+* "Menu#is_checked":#Menu_ischecked
+* "Menu#is_enabled":#Menu_isenabled
+* "Menu#prepend":#Menu_prepend
+* "Menu#prepend_check_item":#Menu_prependcheckitem
+* "Menu#prepend_radio_item":#Menu_prependradioitem
+* "Menu#prepend_separator":#Menu_prependseparator
+* "Menu#remove":#Menu_remove
+* "Menu#set_help_string":#Menu_sethelpstring
+* "Menu#set_label":#Menu_setlabel
+* "Menu#set_title":#Menu_settitle
+* "Menu#update_ui":#Menu_updateui
+
+</div>
+
+
+h3(#Menu_new). Menu.new
+
+  *Menu.new*(%(arg-type)String% title = "",  %(arg-type)Integer% style = 0)
+
+Constructs a Menu object.
+
+h4. Parameters
+
+* _title_ A title for the popup menu: the empty string denotes no title.
+* _style_ If set to @MENU_TEAROFF@, the menu will be detachable (GTK only).
+
+h3(#Menu_append). Menu#append
+
+ "MenuItem":menuitem.html *append*(%(arg-type)Integer% id = Wx::ID_ANY,
+                                  %(arg-type)String% item = "", 
+                                  %(arg-type)String% helpString = "", 
+                                  %(arg-type)"ItemKind":itemkind.html% kind = Wx::ITEM_NORMAL)
+
+Adds a string item to the end of the menu. Note that the only required
+item is the string label for the menu item; if the id is omitted, wxRuby
+will supply a reasonable default.
+
+h3(#Menu_appenditem). Menu#append_item
+
+ "MenuItem":menuitem.html *append_item*(%(arg-type)"MenuItem":menuitem.html% menuItem)
+
+Adds a "MenuItem":menuitem.html object. This is the most generic variant
+of Append() method because it may be used for both items (including
+separators) and submenus and because you can also specify various extra
+properties of a menu item this way, such as bitmaps and fonts.
+
+h3(#Menu_appendmenu). Menu#append_menu
+
+ "MenuItem":menuitem.html *append_menu*(%(arg-type)Integer% id = Wx::ID_ANY, 
+                                        %(arg-type)String% item, 
+                                        %(arg-type)"Menu":menu.html% subMenu, 
+                                        %(arg-type)String% helpString = "")
+
+Adds a pull-right submenu to the end of the menu. Append the submenu to
+the parent menu _after_ you have added your menu items, or accelerators
+may not be registered properly.
+
+h4. Parameters
+
+* _id_ The menu command identifier.
+* _item_ The string to appear on the menu item.
+* _menu_ Pull-right submenu.
+* _kind_ May be @ITEM_SEPARATOR@, @ITEM_NORMAL@, @ITEM_CHECK@ or @ITEM_RADIO@
+* _helpString_ An optional help string associated with the item. By
+default, the handler for the EVT_MENU_HIGHLIGHT event displays this
+string in the status line. 
+* _menuItem_ A menuitem object. It will be owned by the Menu object
+after this function is called, so do not delete it yourself.
+
+h4. Remarks
+
+This command can be used after the menu has been shown, as well as on initial
+creation of a menu or menubar.
+
+The _item_ string for the normal menu items (not submenus or separators)
+may include the accelerator which can be used to activate the menu item
+from keyboard. The accelerator string follows the item label and is separated
+from it by a @TAB@ character "\t". Its general syntax is
+any combination of @CTRL@, @ALT@ and @SHIFT@ strings (case
+doesn't matter) separated by either @'-'@ or @'+'@ characters and
+followed by the accelerator itself. The accelerator may be any alphanumeric
+character, any function key (from @F1@ to @F12@) or one of the special
+characters listed in the table below (again, case doesn't matter):
+
+
+|@DEL@ or @DELETE@|Delete key|
+|@INS@ or @INSERT@|Insert key|
+|@ENTER@ or @RETURN@|Enter key|
+|@PGUP@|PageUp key|
+|@PGDN@|PageDown key|
+|@LEFT@|Left cursor arrow key|
+|@RIGHT@|Right cursor arrow key|
+|@UP@|Up cursor arrow key|
+|@DOWN@|Down cursor arrow key|
+|@HOME@|Home key|
+|@END@|End key|
+|@SPACE@|Space|
+|@TAB@|Tab key|
+|@ESC@ or @ESCAPE@| Escape key (Windows only)|
+
+
+h4. See also
+
+"Menu#append_separator":menu.html#Menu_appendseparator, "Menu#append_check_item":menu.html#Menu_appendcheckitem, "Menu#append_radio_item":menu.html#Menu_appendradioitem, "Menu#insert":menu.html#Menu_insert, "Menu#set_label":menu.html#Menu_setlabel, "Menu#get_help_string":menu.html#Menu_gethelpstring, "Menu#set_help_string":menu.html#Menu_sethelpstring, "MenuItem":menuitem.html
+
+h3(#Menu_appendcheckitem). Menu#append_check_item
+
+ "MenuItem":menuitem.html *append_check_item*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
+
+Adds a checkable item to the end of the menu.
+
+h4. See also
+
+"Menu#append":menu.html#Menu_append, "Menu#insert_check_item":menu.html#Menu_insertcheckitem
+
+h3(#Menu_appendradioitem). Menu#append_radio_item
+
+ "MenuItem":menuitem.html *append_radio_item*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
+
+Adds a radio item to the end of the menu. All consequent radio items form a
+group and when an item in the group is checked, all the others are
+automatically unchecked.
+
+Currently only implemented under Windows and GTK
+
+
+h4. See also
+
+"Menu#append":menu.html#Menu_append, "Menu#insert_radio_item":menu.html#Menu_insertradioitem
+
+h3(#Menu_appendseparator). Menu#append_separator
+
+ "MenuItem":menuitem.html *append_separator*()
+
+Adds a separator to the end of the menu.
+
+h4. See also
+
+"Menu#append":menu.html#Menu_append, "Menu#insert_separator":menu.html#Menu_insertseparator
+
+h3(#Menu_break). Menu#break
+
+  *break*()
+
+Inserts a break in a menu, causing the next appended item to appear in a new column.
+
+h3(#Menu_check). Menu#check
+
+  *check*(%(arg-type)Integer% id,  %(arg-type)Boolean% check)
+
+Checks or unchecks the menu item.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+* _check_ If true, the item will be checked, otherwise it will be unchecked.
+
+h4. See also
+
+"Menu#is_checked":menu.html#Menu_ischecked
+
+h3(#Menu_delete). Menu#delete
+
+  *delete*(%(arg-type)Integer% id)
+
+  *delete*(%(arg-type)"MenuItem":menuitem.html% item)
+
+Deletes the menu item from the menu. If the item is a submenu, it will
+*not* be deleted. Use "Destroy":menudestroy.html if you want to
+delete a submenu.
+
+h4. Parameters
+
+* _id_ Id of the menu item to be deleted.
+* _item_ Menu item to be deleted.
+
+h4. See also
+
+"Menu#find_item":menu.html#Menu_finditem, "Menu#destroy":menu.html#Menu_destroy, "Menu#remove":menu.html#Menu_remove
+
+h3(#Menu_destroy). Menu#destroy
+
+  *destroy*(%(arg-type)Integer% id)
+
+  *destroy*(%(arg-type)"MenuItem":menuitem.html% item)
+
+Deletes the menu item from the menu. If the item is a submenu, it will
+be deleted. Use "Remove":menuremove.html if you want to keep the submenu
+(for example, to reuse it later).
+
+h4. Parameters
+
+* _id_ Id of the menu item to be deleted.
+* _item_ Menu item to be deleted.
+
+h4. See also
+
+"Menu#find_item":menu.html#Menu_finditem, "Menu#deletes":menu.html#Menu_deletes, "Menu#remove":menu.html#Menu_remove
+
+h3(#Menu_enable). Menu#enable
+
+  *enable*(%(arg-type)Integer% id,  %(arg-type)Boolean% enable)
+
+Enables or disables (greys out) a menu item.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+* _enable_ true to enable the menu item, false to disable it.
+
+h4. See also
+
+"Menu#is_enabled":menu.html#Menu_isenabled
+
+h3(#Menu_finditem). Menu#find_item
+
+ Integer *find_item*(%(arg-type)String% itemString)
+
+Finds the menu item id for a menu item string.
+
+ "MenuItem":menuitem.html *find_item*(%(arg-type)Integer% id,  %(arg-type)"Menu":menu.html% menu = nil)
+
+Finds the menu item object associated with the given menu item identifier and,
+optionally, the (sub)menu it belongs to.
+
+h4. Parameters
+
+* _itemString_ Menu item string to find.
+* _id_ Menu item identifier.
+* _menu_ If the pointer is not NULL, it will be filled with the item's
+parent menu (if the item was found)
+
+h4. Return value
+
+First form: menu item identifier, or @NOT_FOUND@ if none is found.
+
+Second form: returns the "MenuItem":menuitem.html object, or NULL if it is not found.
+
+h4. Remarks
+
+Any special menu codes are stripped out of source and target strings
+before matching.
+
+
+
+h3(#Menu_finditembyposition). Menu#find_item_by_position
+
+ "MenuItem":menuitem.html *find_item_by_position*(%(arg-type)Integer% position)
+
+Returns the "MenuItem":menuitem.html at the given position in the menu.
+
+h3(#Menu_gethelpstring). Menu#get_help_string
+
+ String *get_help_string*(%(arg-type)Integer% id)
+
+Returns the help string associated with a menu item.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+The help string, or the empty string if there is no help string or the
+item was not found.
+
+h4. See also
+
+"Menu#set_help_string":menu.html#Menu_sethelpstring, "Menu#append":menu.html#Menu_append
+
+h3(#Menu_getlabel). Menu#get_label
+
+ String *get_label*(%(arg-type)Integer% id)
+
+Returns the menu item label for the item identified by _id_. An empty
+string is returned if the item was not found.
+
+h3(#Menu_getlabeltext). Menu#get_label_text
+
+ String *get_label_text*(%(arg-type)Integer% id)
+
+Returns a menu item label, without any of the original mnemonics and
+accelerators. An empty string is returned if the item was not found.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+The item label, or the empty string if the item was not found.
+
+h4. See also
+
+"Menu#set_label":menu.html#Menu_setlabel
+
+h3(#Menu_getmenuitemcount). Menu#get_menu_item_count
+
+ Integer *get_menu_item_count*()
+
+Returns the number of items in the menu.
+
+h3(#Menu_getmenuitems). Menu#get_menu_items
+
+ Array *get_menu_items*()
+
+Returns the list of items in the menu. MenuItemList is a pseudo-template
+list class containing MenuItem pointers.
+
+h3(#Menu_gettitle). Menu#get_title
+
+ String *get_title*()
+
+Returns the title of the menu.
+
+h4. Remarks
+
+This is relevant only to popup menus, use 
+"MenuBar#get_label_top":menubar.html#MenuBar_getlabeltop for the menus in the
+menubar.
+
+h4. See also
+
+"Menu#set_title":menu.html#Menu_settitle
+
+h3(#Menu_insert). Menu#insert
+
+ "MenuItem":menuitem.html *insert*(%(arg-type)Integer% pos,  
+                                   %(arg-type)"MenuItem":menuitem.html% item)
+
+ "MenuItem":menuitem.html *insert*(%(arg-type)Integer% pos,  
+                                   %(arg-type)Integer% id = Wx::ID_ANY, 
+                                   %(arg-type)String% item, 
+                                   %(arg-type)String% helpString = "", 
+                                   %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
+
+Inserts the given _item_ before the position _pos_. Inserting the item
+at position "get_menu_item_count":#Menu_getmenuitemcount is the same
+as appending it.
+
+h4. See also
+
+"Menu#append":menu.html#Menu_append, "Menu#prepend":menu.html#Menu_prepend
+
+h3(#Menu_insertcheckitem). Menu#insert_check_item
+
+ "MenuItem":menuitem.html *insert_check_item*(%(arg-type)Integer% pos,  
+                                              %(arg-type)Integer% id = Wx::ID_ANY, 
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
+
+Inserts a checkable item at the given position.
+
+h4. See also
+
+"Menu#insert":menu.html#Menu_insert, "Menu#append_check_item":menu.html#Menu_appendcheckitem
+
+h3(#Menu_insertradioitem). Menu#insert_radio_item
+
+ "MenuItem":menuitem.html *insert_radio_item*(%(arg-type)Integer% pos,  
+                                              %(arg-type)Integer% id = Wx::ID_ANY, 
+                                              %(arg-type)String% item, 
+                                              %(arg-type)String% helpString = "")
+
+Inserts a radio item at the given position.
+
+h4. See also
+
+"Menu#insert":menu.html#Menu_insert, "Menu#append_radio_item":menu.html#Menu_appendradioitem
+
+h3(#Menu_insertseparator). Menu#insert_separator
+
+ "MenuItem":menuitem.html *insert_separator*(%(arg-type)Integer% pos)
+
+Inserts a separator at the given position.
+
+h4. See also
+
+"Menu#insert":menu.html#Menu_insert, "Menu#append_separator":menu.html#Menu_appendseparator
+
+h3(#Menu_ischecked). Menu#is_checked
+
+ Boolean *is_checked*(%(arg-type)Integer% id)
+
+Determines whether a menu item is checked.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+true if the menu item is checked, false otherwise.
+
+h4. See also
+
+"Menu#check":menu.html#Menu_check
+
+h3(#Menu_isenabled). Menu#is_enabled
+
+ Boolean *is_enabled*(%(arg-type)Integer% id)
+
+Determines whether a menu item is enabled.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+
+h4. Return value
+
+true if the menu item is enabled, false otherwise.
+
+h4. See also
+
+"Menu#enable":menu.html#Menu_enable
+
+h3(#Menu_prepend). Menu#prepend
+
+ "MenuItem":menuitem.html *prepend*(%(arg-type)"MenuItem":menuitem.html% item)
+
+ "MenuItem":menuitem.html *prepend*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                    %(arg-type)String% item, 
+                                    %(arg-type)String% helpString = "", 
+                                    %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
+
+Inserts the given _item_ at position $0$, i.e. before all the other
+existing items.
+
+h4. See also
+
+"Menu#append":menu.html#Menu_append, "Menu#insert":menu.html#Menu_insert
+
+h3(#Menu_prependcheckitem). Menu#prepend_check_item
+
+ "MenuItem":menuitem.html *prepend_check_item*(%(arg-type)Integer% id = Wx::ID_ANY,  
+                                               %(arg-type)String% item,
+                                               %(arg-type)String% helpString = "")
+
+Inserts a checkable item at position $0$.
+
+h4. See also
+
+"Menu#prepend":menu.html#Menu_prepend, "Menu#append_check_item":menu.html#Menu_appendcheckitem
+
+h3(#Menu_prependradioitem). Menu#prepend_radio_item
+
+ "MenuItem":menuitem.html *prepend_radio_item*(%(arg-type)Integer% id = Wx::ID_ANY, 
+                                               %(arg-type)String% item, 
+                                               %(arg-type)String% helpString = "")
+
+Inserts a radio item at position $0$.
+
+h4. See also
+
+"Menu#prepend":menu.html#Menu_prepend, "Menu#append_radio_item":menu.html#Menu_appendradioitem
+
+h3(#Menu_prependseparator). Menu#prepend_separator
+
+ "MenuItem":menuitem.html *prepend_separator*()
+
+Inserts a separator at position $0$.
+
+h4. See also
+
+"Menu#prepend":menu.html#Menu_prepend, "Menu#append_separator":menu.html#Menu_appendseparator
+
+h3(#Menu_remove). Menu#remove
+
+ "MenuItem":menuitem.html *remove*(%(arg-type)Integer% id)
+
+ "MenuItem":menuitem.html *remove*(%(arg-type)"MenuItem":menuitem.html% item)
+
+Removes the menu item from the menu but doesn't delete the associated C++
+object. This allows to reuse the same item later by adding it back to the menu
+(especially useful with submenus).
+
+h4. Parameters
+
+* _id_ The identifier of the menu item to remove.
+* _item_ The menu item to remove.
+
+h4. Return value
+
+The item which was detached from the menu.
+
+h3(#Menu_sethelpstring). Menu#set_help_string
+
+  *set_help_string*(%(arg-type)Integer% id,  %(arg-type)String% helpString)
+
+Sets an item's help string.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+* _helpString_ The help string to set.
+
+h4. See also
+
+"Menu#get_help_string":menu.html#Menu_gethelpstring
+
+h3(#Menu_setlabel). Menu#set_label
+
+  *set_label*(%(arg-type)Integer% id,  %(arg-type)String% label)
+
+Sets the label of a menu item.
+
+h4. Parameters
+
+* _id_ The menu item identifier.
+* _label_ The menu item label to set.
+
+h4. See also
+
+"Menu#append":menu.html#Menu_append, "Menu#get_label":menu.html#Menu_getlabel
+
+h3(#Menu_settitle). Menu#set_title
+
+  *set_title*(%(arg-type)String% title)
+
+Sets the title of the menu.
+
+h4. Parameters
+
+* _title_ The title to set.
+
+h4. Remarks
+									
+This is relevant only to popup menus, use 
+"MenuBar#set_label_top":menubar.html#MenuBar_setlabeltop for the menus in the
+menubar.
+
+h4. See also
+
+"Menu#get_title":menu.html#Menu_gettitle
+
+h3(#Menu_updateui). Menu#update_ui
+
+  *update_ui*(%(arg-type)"EvtHandler":evthandler.html% source = nil)
+
+Sends events to _source_ (or owning window if NULL) to update the
+menu UI. This is called just before the menu is popped up with "Window#popup_menu":window.html#Window_popupmenu, but
+the application may call it at other times if required.
+
+h4. See also
+
+"UpdateUIEvent":updateuievent.html
+

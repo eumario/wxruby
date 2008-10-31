@@ -1,0 +1,172 @@
+h1(#wxfilehistory). Wx::FileHistory
+
+The FileHistory encapsulates a user interface convenience, the
+list of most recently visited files as shown on a menu (usually the File menu).
+
+FileHistory can manage one or more file menus. More than one menu may be required
+in an MDI application, where the file history should appear on each MDI child menu
+as well as the MDI parent frame.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. See also
+
+"FileHistory overview":filehistoryoverview.html, "DocManager":docmanager.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FileHistory#m__file_history":#FileHistory_mfilehistory
+* "FileHistory#m__file_history_n":#FileHistory_mfilehistoryn
+* "FileHistory#m__file_max_files":#FileHistory_mfilemaxfiles
+* "FileHistory#m__file_menu":#FileHistory_mfilemenu
+* "FileHistory.new":#FileHistory_new
+* "FileHistory#add_file_to_history":#FileHistory_addfiletohistory
+* "FileHistory#add_files_to_menu":#FileHistory_addfilestomenu
+* "FileHistory#get_history_file":#FileHistory_gethistoryfile
+* "FileHistory#get_max_files":#FileHistory_getmaxfiles
+* "FileHistory#get_count":#FileHistory_getcount
+* "FileHistory#load":#FileHistory_load
+* "FileHistory#remove_file_from_history":#FileHistory_removefilefromhistory
+* "FileHistory#remove_menu":#FileHistory_removemenu
+* "FileHistory#save":#FileHistory_save
+* "FileHistory#use_menu":#FileHistory_usemenu
+
+</div>
+
+
+
+h3(#FileHistory_mfilehistory). FileHistory#m__file_history
+
+char**m_fileHistory
+
+A character array of strings corresponding to the most recently opened
+files.
+
+
+h3(#FileHistory_mfilehistoryn). FileHistory#m__file_history_n
+
+Integerm_fileHistoryN
+
+The number of files stored in the history array.
+
+
+h3(#FileHistory_mfilemaxfiles). FileHistory#m__file_max_files
+
+Integerm_fileMaxFiles
+
+The maximum number of files to be stored and displayed on the menu.
+
+
+h3(#FileHistory_mfilemenu). FileHistory#m__file_menu
+
+Menu*m_fileMenu
+
+The file menu used to display the file history list (if enabled).
+
+
+h3(#FileHistory_new). FileHistory.new
+
+  *FileHistory.new*(%(arg-type)Integer% maxFiles = 9,  %(arg-type)Integer% idBase = ID_FILE1)
+
+Constructor. Pass the maximum number of files that should be stored and
+displayed.
+
+_idBase_ defaults to ID_FILE1 and represents the id given to the first
+history menu item.  Since menu items can't share the same ID you should change
+idBase (To one of your own defined IDs) when using more than one FileHistory
+in your application.
+
+
+  *destructor*()
+
+Destructor.
+
+
+h3(#FileHistory_addfiletohistory). FileHistory#add_file_to_history
+
+  *add_file_to_history*(%(arg-type)String% filename)
+
+Adds a file to the file history list, if the object has a pointer to an appropriate file menu.
+
+
+h3(#FileHistory_addfilestomenu). FileHistory#add_files_to_menu
+
+  *add_files_to_menu*()
+
+Appends the files in the history list, to all menus managed by the file history object.
+
+  *add_files_to_menu*(%(arg-type)"Menu":menu.html% menu)
+
+Appends the files in the history list, to the given menu only.
+
+
+h3(#FileHistory_gethistoryfile). FileHistory#get_history_file
+
+ String *get_history_file*(%(arg-type)Integer% index)
+
+Returns the file at this index (zero-based).
+
+
+h3(#FileHistory_getmaxfiles). FileHistory#get_max_files
+
+ Integer *get_max_files*()
+
+Returns the maximum number of files that can be stored.
+
+
+h3(#FileHistory_getcount). FileHistory#get_count
+
+ Integer *get_count*()
+
+Returns the number of files currently stored in the file history.
+
+
+h3(#FileHistory_load). FileHistory#load
+
+  *load*(%(arg-type)"ConfigBase":configbase.html% config)
+
+Loads the file history from the given config object. This function should be called explicitly by the application.
+
+h4. See also
+
+"Config":configbase.html
+
+
+h3(#FileHistory_fromfilefromhistory). FileHistory#remove_file_from_history
+
+  *remove_file_from_history*(%(arg-type)Integer% i)
+
+Removes the specified file from the history.
+
+h3(#FileHistory_removemenu). FileHistory#remove_menu
+
+  *remove_menu*(%(arg-type)"Menu":menu.html% menu)
+
+Removes this menu from the list of those managed by this object.
+
+
+h3(#FileHistory_save). FileHistory#save
+
+  *save*(%(arg-type)"ConfigBase":configbase.html% config)
+
+Saves the file history into the given config object. This must be called
+explicitly by the application.
+
+h4. See also
+
+"Config":configbase.html
+
+
+h3(#FileHistory_usemenu). FileHistory#use_menu
+
+  *use_menu*(%(arg-type)"Menu":menu.html% menu)
+
+Adds this menu to the list of those menus that are managed by this file history object.
+Also see "add_files_to_menu()":#FileHistory_addfilestomenu() for
+initializing the menu with filenames that are already in the history when this
+function is called, as this is not done automatically.
+

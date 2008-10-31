@@ -1,0 +1,279 @@
+h1(#wxtextattr). Wx::TextAttr
+
+TextAttr represents the character and paragraph attributes, or style, for a range of text in a "TextCtrl":textctrl.html.
+
+When setting up a TextAttr object, pass a bitlist mask to SetFlags to indicate
+which style elements should be changed. As a convenience, when you call a
+setter such as SetFont, the relevant bit will be set.
+
+h2. Derived from
+
+No base class
+
+h2. Typedefs
+
+@TextPos@ is the type containing the index of a position in a text
+control. @TextCoord@ contains the index of a column or a row in the
+control.
+
+Note that although both of these types should probably have been unsigned, due
+to backwards compatibility reasons, are defined as @long@ currently.
+Their use (instead of plain @long@) is still encouraged as it makes the
+code more readable.
+
+h2. Constants
+
+The following values can be passed to SetAlignment to determine
+paragraph alignment.
+
+
+
+ enum TextAttrAlignment
+ {
+     TEXT_ALIGNMENT_DEFAULT,
+     TEXT_ALIGNMENT_LEFT,
+     TEXT_ALIGNMENT_CENTRE,
+     TEXT_ALIGNMENT_CENTER = TEXT_ALIGNMENT_CENTRE,
+     TEXT_ALIGNMENT_RIGHT,
+     TEXT_ALIGNMENT_JUSTIFIED
+ };
+ 
+
+
+These values are passed in a bitlist to SetFlags to determine
+what attributes will be considered when setting the attributes
+for a text control.
+
+
+
+ #define TEXT_ATTR_TEXT_COLOUR             0x0001
+ #define TEXT_ATTR_BACKGROUND_COLOUR       0x0002
+ #define TEXT_ATTR_FONT_FACE               0x0004
+ #define TEXT_ATTR_FONT_SIZE               0x0008
+ #define TEXT_ATTR_FONT_WEIGHT             0x0010
+ #define TEXT_ATTR_FONT_ITALIC             0x0020
+ #define TEXT_ATTR_FONT_UNDERLINE          0x0040
+ #define TEXT_ATTR_FONT \
+   TEXT_ATTR_FONT_FACE | TEXT_ATTR_FONT_SIZE | TEXT_ATTR_FONT_WEIGHT \
+ | TEXT_ATTR_FONT_ITALIC | TEXT_ATTR_FONT_UNDERLINE
+ #define TEXT_ATTR_ALIGNMENT               0x0080
+ #define TEXT_ATTR_LEFT_INDENT             0x0100
+ #define TEXT_ATTR_RIGHT_INDENT            0x0200
+ #define TEXT_ATTR_TABS                    0x0400
+ 
+
+
+The values below are the possible return codes of the
+"hit_test":#TextAttr_hittest method:
+
+
+ // the point asked is ...
+ enum TextCtrlHitTestResult
+ {
+     TE_HT_UNKNOWN = -2,   // this means HitTest() is simply not implemented
+     TE_HT_BEFORE,         // either to the left or upper
+     TE_HT_ON_TEXT,        // directly on
+     TE_HT_BELOW,          // below [the last line]
+     TE_HT_BEYOND          // after [the end of line]
+ };
+ // ... the character returned
+ 
+
+
+
+<div id="methods">
+
+h2. Methods
+
+* "TextAttr.new":#TextAttr_new
+* "TextAttr#get_alignment":#TextAttr_getalignment
+* "TextAttr#get_background_colour":#TextAttr_getbackgroundcolour
+* "TextAttr#get_font":#TextAttr_getfont
+* "TextAttr#get_left_indent":#TextAttr_getleftindent
+* "TextAttr#get_left_sub_indent":#TextAttr_getleftsubindent
+* "TextAttr#get_right_indent":#TextAttr_getrightindent
+* "TextAttr#get_tabs":#TextAttr_gettabs
+* "TextAttr#get_text_colour":#TextAttr_gettextcolour
+* "TextAttr#has_background_colour":#TextAttr_hasbackgroundcolour
+* "TextAttr#has_font":#TextAttr_hasfont
+* "TextAttr#has_text_colour":#TextAttr_hastextcolour
+* "TextAttr#get_flags":#TextAttr_getflags
+* "TextAttr#is_default":#TextAttr_isdefault
+* "TextAttr#set_alignment":#TextAttr_setalignment
+* "TextAttr#set_background_colour":#TextAttr_setbackgroundcolour
+* "TextAttr#set_flags":#TextAttr_setflags
+* "TextAttr#set_font":#TextAttr_setfont
+* "TextAttr#set_left_indent":#TextAttr_setleftindent
+* "TextAttr#set_right_indent":#TextAttr_setrightindent
+* "TextAttr#set_tabs":#TextAttr_settabs
+* "TextAttr#set_text_colour":#TextAttr_settextcolour
+
+</div>
+
+
+
+h3(#TextAttr_new). TextAttr.new
+
+  *TextAttr.new*(%(arg-type)"Colour":colour.html% colText,  %(arg-type)"Colour":colour.html% colBack = NullColour, 
+               %(arg-type)"Font":font.html% font = NullFont, 
+               %(arg-type)"TextAttrAlignment":textattralignment.html% alignment = TEXT_ALIGNMENT_DEFAULT)
+
+The constructors initialize one or more of the text foreground colour, background
+colour, font, and alignment. The values not initialized in the constructor can be set
+later, otherwise "TextCtrl#set_style":textctrl.html#TextCtrl_setstyle will use
+the default values for them.
+
+
+h3(#TextAttr_getalignment). TextAttr#get_alignment
+
+ "TextAttrAlignment":textattralignment.html *get_alignment*()
+
+Returns the paragraph alignment.
+
+
+h3(#TextAttr_getbackgroundcolour). TextAttr#get_background_colour
+
+ "Colour":colour.html *get_background_colour*()
+
+Return the background colour specified by this attribute.
+
+
+h3(#TextAttr_getfont). TextAttr#get_font
+
+ "Font":font.html *get_font*()
+
+Return the text font specified by this attribute.
+
+
+h3(#TextAttr_getleftindent). TextAttr#get_left_indent
+
+ Integer *get_left_indent*()
+
+Returns the left indent in tenths of a millimetre.
+
+
+h3(#TextAttr_getleftsubindent). TextAttr#get_left_sub_indent
+
+ Integer *get_left_sub_indent*()
+
+Returns the left sub indent for all lines but the first line in a paragraph in
+tenths of a millimetre.
+
+
+h3(#TextAttr_getrightindent). TextAttr#get_right_indent
+
+ Integer *get_right_indent*()
+
+Returns the right indent in tenths of a millimetre.
+
+
+h3(#TextAttr_gettabs). TextAttr#get_tabs
+
+ "ArrayInt":arrayint.html *get_tabs*()
+
+Returns the array of integers representing the tab stops. Each
+array element specifies the tab stop in tenths of a millimetre.
+
+
+h3(#TextAttr_gettextcolour). TextAttr#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+Return the text colour specified by this attribute.
+
+
+h3(#TextAttr_hasbackgroundcolour). TextAttr#has_background_colour
+
+ Boolean *has_background_colour*()
+
+Returns @true@ if this style specifies the background colour to use.
+
+
+h3(#TextAttr_hasfont). TextAttr#has_font
+
+ Boolean *has_font*()
+
+Returns @true@ if this style specifies the font to use.
+
+
+h3(#TextAttr_hastextcolour). TextAttr#has_text_colour
+
+ Boolean *has_text_colour*()
+
+Returns @true@ if this style specifies the foreground colour to use.
+
+
+h3(#TextAttr_getflags). TextAttr#get_flags
+
+ Integer *get_flags*()
+
+Returns a bitlist indicating which attributes will be set.
+
+
+h3(#TextAttr_isdefault). TextAttr#is_default
+
+ Boolean *is_default*()
+
+Returns @true@ if this style specifies any non-default attributes.
+
+
+h3(#TextAttr_setalignment). TextAttr#set_alignment
+
+  *set_alignment*(%(arg-type)"TextAttrAlignment":textattralignment.html% alignment)
+
+Sets the paragraph alignment.
+
+
+h3(#TextAttr_setbackgroundcolour). TextAttr#set_background_colour
+
+  *set_background_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the background colour.
+
+
+h3(#TextAttr_setflags). TextAttr#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Pass a bitlist indicating which attributes will be set.
+
+
+h3(#TextAttr_setfont). TextAttr#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the text font.
+
+
+h3(#TextAttr_setleftindent). TextAttr#set_left_indent
+
+  *set_left_indent*(%(arg-type)Integer% indent,  %(arg-type)Integer% subIndent = 0)
+
+Sets the left indent in tenths of a millimetre.
+subIndent sets the indent for all lines but the first line in a paragraph
+relative to the first line.
+
+
+h3(#TextAttr_setrightindent). TextAttr#set_right_indent
+
+  *set_right_indent*(%(arg-type)Integer% indent)
+
+Sets the right indent in tenths of a millimetre.
+
+
+h3(#TextAttr_settabs). TextAttr#set_tabs
+
+  *set_tabs*(%(arg-type)"ArrayInt":arrayint.html% tabs)
+
+Sets the array of integers representing the tab stops. Each
+array element specifies the tab stop in tenths of a millimetre.
+
+
+h3(#TextAttr_settextcolour). TextAttr#set_text_colour
+
+  *set_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the text colour.
+
+
+

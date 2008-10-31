@@ -1,0 +1,465 @@
+h1(#wxframe). Wx::Frame
+
+A frame is a window whose size and position can (usually) be changed by the
+user. It usually has thick borders and a title bar, and can optionally contain
+a menu bar, toolbar and status bar. A frame can contain any window that is not
+a frame or dialog.
+
+A frame that has a status bar and toolbar created via the
+CreateStatusBar/CreateToolBar functions manages these windows, and adjusts the
+value returned by GetClientSize to reflect the remaining size available to
+application windows.
+
+h2. Derived from
+
+"TopLevelWindow":toplevelwindow.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Window styles
+
+
+
+|@DEFAULT_FRAME_STYLE@|Defined as
+@MINIMIZE_BOX@&#124;@MAXIMIZE_BOX@&#124;@RESIZE_BORDER@&#124;
+@SYSTEM_MENU@&#124;@CAPTION@&#124;@CLOSE_BOX@&#124;@CLIP_CHILDREN@|
+|@ICONIZE@|Display the frame iconized (minimized). Windows only. |
+|@CAPTION@|Puts a caption on the frame.|
+|@MINIMIZE@|Identical to *ICONIZE*. Windows only.|
+|@MINIMIZE_BOX@|Displays a minimize box on the frame.|
+|@MAXIMIZE@|Displays the frame maximized. Windows only.|
+|@MAXIMIZE_BOX@|Displays a maximize box on the frame.|
+|@CLOSE_BOX@|Displays a close box on the frame.|
+|@STAY_ON_TOP@|Stay on top of all other windows, see also @FRAME_FLOAT_ON_PARENT@.|
+|@SYSTEM_MENU@|Displays a system menu.|
+|@RESIZE_BORDER@|Displays a resizeable border around the window.|
+|@FRAME_TOOL_WINDOW@|Causes a frame with a small titlebar to be created; the frame does not appear in the taskbar under Windows or GTK+.|
+|@FRAME_NO_TASKBAR@|Creates an otherwise normal frame but it does not
+appear in the taskbar under Windows or GTK+ (note that it will minimize
+to the desktop window under Windows which may seem strange to the users
+and thus it might be better to use this style only without @MINIMIZE_BOX@
+style). In GTK, the flag is respected only if GTK+ is at least version
+2.2. Has no effect under other platforms.|
+|@FRAME_FLOAT_ON_PARENT@|The frame will always beon top of its parent (unlike STAY_ON_TOP). A frame created with this stylemust have a non-NULL parent.|
+|@FRAME_EX_CONTEXTHELP@|Under Windows, puts a query button on the
+caption. When pressed, Windows will go into a context-sensitive help
+mode and Widgets will senda EVT_HELP event if the user clicked on an
+application window. _Note_ that this is not currently supported in wxRuby|
+|@FRAME_SHAPED@|Windows with this style are  allowed to have their shape changed with the "set_shape":#Frame_setshape method.|
+|@FRAME_EX_METAL@|On Mac OS X, frames with this style will be shown with a metallic look. This is an _extra_ style.|
+
+
+The default frame style is for normal, resizeable frames. To create a frame
+which can not be resized by user, you may use the following combination of
+styles: 
+
+@DEFAULT_FRAME_STYLE@ & ~ (@RESIZE_BORDER@|@RESIZE_BOX@|@MAXIMIZE_BOX@).
+
+See also "window styles overview":windowstyles.html.
+
+h2. Default event processing
+
+The following event handlers are available for Frame:
+
+|*evt_size()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|If the frame has exactly one child window, not counting the status and
+toolbar, this child is resized to take the entire frame client area. If
+two or more windows are present, they should be laid out explicitly
+either by manually handling the "SizeEvent":sizeevent.html from this
+handler, or, preferably, using "sizers":sizer.html|
+|*evt_menu_highlight()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The default implementation displays the 
+"help string":menuitem.html#MenuItem_gethelp associated with the selected item
+in the first pane of the status bar, if there is one. The
+"MenuEvent":menuevent.html may be manually handled if preferred| 
+
+
+h2. Remarks
+
+An application should normally define an "CloseEvent":closeevent.html handler for the
+frame to respond to system close events, for example so that related data and subwindows can be cleaned up.
+
+h2. See also
+
+"MDIParentFrame":mdiparentframe.html, "MDIChildFrame":mdichildframe.html, "MiniFrame":miniframe.html, "Dialog":dialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "Frame.new":#Frame_new
+* "Frame#centre":#Frame_centre
+* "Frame#create":#Frame_create
+* "Frame#create_status_bar":#Frame_createstatusbar
+* "Frame#create_tool_bar":#Frame_createtoolbar
+* "Frame#get_client_area_origin":#Frame_getclientareaorigin
+* "Frame#get_menu_bar":#Frame_getmenubar
+* "Frame#get_status_bar":#Frame_getstatusbar
+* "Frame#get_status_bar_pane":#Frame_getstatusbarpane
+* "Frame#get_tool_bar":#Frame_gettoolbar
+* "Frame#on_create_status_bar":#Frame_oncreatestatusbar
+* "Frame#on_create_tool_bar":#Frame_oncreatetoolbar
+* "Frame#process_command":#Frame_processcommand
+* "Frame#send_size_event":#Frame_sendsizeevent
+* "Frame#set_menu_bar":#Frame_setmenubar
+* "Frame#set_status_bar":#Frame_setstatusbar
+* "Frame#set_status_bar_pane":#Frame_setstatusbarpane
+* "Frame#set_status_text":#Frame_setstatustext
+* "Frame#set_status_widths":#Frame_setstatuswidths
+* "Frame#set_tool_bar":#Frame_settoolbar
+
+</div>
+
+
+h3(#Frame_new). Frame.new
+
+  *Frame.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+            %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+            %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+            %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+            %(arg-type)String% name = "frame")
+
+Constructor, creating the window.
+
+h4. Parameters
+
+* _parent_ The window parent. This may be NULL. If it is non-NULL, the frame will
+always be displayed on top of the parent window on Windows.
+* _id_ The window identifier. It may take a value of -1 to indicate a default value.
+* _title_ The caption to be displayed on the frame's title bar.
+* _pos_ The window position. A value of (-1, -1) indicates a default position, chosen by
+either the windowing system or Widgets, depending on platform.
+* _size_ The window size. A value of (-1, -1) indicates a default size, chosen by
+either the windowing system or Widgets, depending on platform.
+* _style_ The window style. See "Frame":frame.html.
+* _name_ The name of the window. This parameter is used to associate a name with the item,
+allowing the application user to set Motif resource values for
+individual windows.
+
+h4. Remarks
+
+For Motif, MWM (the Motif Window Manager) should be running for any window styles to work
+(otherwise all styles take effect).
+
+h4. See also
+
+"Frame#create":frame.html#Frame_create
+
+h3(#Frame_centre). Frame#centre
+
+  *centre*(%(arg-type)Integer% direction = BOTH)
+
+Centres the frame on the display.
+
+h4. Parameters
+
+* _direction_ The parameter may be @HORIZONTAL@, @VERTICAL@ or @BOTH@.
+
+h3(#Frame_create). Frame#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                %(arg-type)String% name = "frame")
+
+Used in two-step frame construction. See "Frame.new":frame.html#Frame_new for further details.
+
+h3(#Frame_createstatusbar). Frame#create_status_bar
+
+ "StatusBar":statusbar.html *create_status_bar*(%(arg-type)Integer% number = 1, 
+                               %(arg-type)Integer% style = 0, 
+                               %(arg-type)Integer% id = -1, 
+                               %(arg-type)String% name = "statusBar")
+
+Creates a status bar at the bottom of the frame.
+
+h4. Parameters
+
+* _number_ The number of fields to create. Specify a
+value greater than 1 to create a multi-field status bar.
+* _style_ The status bar style. See "StatusBar":statusbar.html for a list
+of valid styles.
+* _id_ The status bar window identifier. If -1, an identifier will be chosen by
+Widgets.
+* _name_ The status bar window name.
+
+h4. Return value
+
+A pointer to the status bar if it was created successfully, NULL otherwise.
+
+h4. Remarks
+
+The width of the status bar is the whole width of the frame (adjusted automatically when
+resizing), and the height and text size are chosen by the host windowing system.
+
+By default, the status bar is an instance of StatusBar. To use a different class,
+override "Frame#on_create_status_bar":frame.html#Frame_oncreatestatusbar.
+
+Note that you can put controls and other windows on the status bar if you wish.
+
+h4. See also
+
+"Frame#set_status_text":frame.html#Frame_setstatustext, "Frame#on_create_status_bar":frame.html#Frame_oncreatestatusbar, "Frame#get_status_bar":frame.html#Frame_getstatusbar
+
+h3(#Frame_createtoolbar). Frame#create_tool_bar
+
+ "ToolBar":toolbar.html *create_tool_bar*(%(arg-type)Integer% style = NO_BORDER TB_HORIZONTAL, 
+                           %(arg-type)Integer% id = -1, 
+                           %(arg-type)String% name = "toolBar")
+
+Creates a toolbar at the top or left of the frame.
+
+h4. Parameters
+
+* _style_ The toolbar style. See "ToolBar":toolbar.html for a list
+of valid styles.
+* _id_ The toolbar window identifier. If -1, an identifier will be chosen by
+Widgets.
+* _name_ The toolbar window name.
+
+h4. Return value
+
+A pointer to the toolbar if it was created successfully, NULL otherwise.
+
+h4. Remarks
+
+By default, the toolbar is an instance of ToolBar (which is defined to be
+a suitable toolbar class on each platform, such as ToolBar95). To use a different class,
+override "Frame#on_create_tool_bar":frame.html#Frame_oncreatetoolbar.
+
+When a toolbar has been created with this function, or made known to the frame
+with "Frame#set_tool_bar":frame.html#Frame_settoolbar, the frame will manage the toolbar
+position and adjust the return value from "Window#get_client_size":window.html#Window_getclientsize to
+reflect the available space for application windows.
+
+Under Pocket PC, you should _always_ use this function for creating the toolbar
+to be managed by the frame, so that Widgets can use a combined
+menubar and toolbar. Where you manage your own toolbars, create a ToolBar
+as usual.
+
+h4. See also
+
+"Frame#create_status_bar":frame.html#Frame_createstatusbar, "Frame#on_create_tool_bar":frame.html#Frame_oncreatetoolbar, "Frame#set_tool_bar":frame.html#Frame_settoolbar, "Frame#get_tool_bar":frame.html#Frame_gettoolbar
+
+h3(#Frame_getclientareaorigin). Frame#get_client_area_origin
+
+ "Point":point.html *get_client_area_origin*()
+
+Returns the origin of the frame client area (in client coordinates). It may be
+different from (0, 0) if the frame has a toolbar.
+
+h3(#Frame_getmenubar). Frame#get_menu_bar
+
+ "MenuBar":menubar.html *get_menu_bar*()
+
+Returns a pointer to the menubar currently associated with the frame (if any).
+
+h4. See also
+
+"Frame#set_menu_bar":frame.html#Frame_setmenubar, "MenuBar":menubar.html, "Menu":menu.html
+
+h3(#Frame_getstatusbar). Frame#get_status_bar
+
+ "StatusBar":statusbar.html *get_status_bar*()
+
+Returns a pointer to the status bar currently associated with the frame (if any).
+
+h4. See also
+
+"Frame#create_status_bar":frame.html#Frame_createstatusbar, "StatusBar":statusbar.html
+
+h3(#Frame_getstatusbarpane). Frame#get_status_bar_pane
+
+ Integer *get_status_bar_pane*()
+
+Returns the status bar pane used to display menu and toolbar help.
+
+h4. See also
+
+"Frame#set_status_bar_pane":frame.html#Frame_setstatusbarpane
+
+h3(#Frame_gettoolbar). Frame#get_tool_bar
+
+ "ToolBar":toolbar.html *get_tool_bar*()
+
+Returns a pointer to the toolbar currently associated with the frame (if any).
+
+h4. See also
+
+"Frame#create_tool_bar":frame.html#Frame_createtoolbar, "ToolBar":toolbar.html, "Frame#set_tool_bar":frame.html#Frame_settoolbar
+
+h3(#Frame_oncreatestatusbar). Frame#on_create_status_bar
+
+ "StatusBar":statusbar.html *on_create_status_bar*(%(arg-type)Integer% number, 
+                                  %(arg-type)Integer% style, 
+                                  %(arg-type)Integer% id, 
+                                  %(arg-type)String% name)
+
+Virtual function called when a status bar is requested by "Frame#create_status_bar":frame.html#Frame_createstatusbar.
+
+h4. Parameters
+
+* _number_ The number of fields to create.
+* _style_ The window style. See "StatusBar":statusbar.html for a list
+of valid styles.
+* _id_ The window identifier. If -1, an identifier will be chosen by
+Widgets.
+* _name_ The window name.
+
+h4. Return value
+
+A status bar object.
+
+h4. Remarks
+
+An application can override this function to return a different kind of status bar. The default
+implementation returns an instance of "StatusBar":statusbar.html.
+
+h4. See also
+
+"Frame#create_status_bar":frame.html#Frame_createstatusbar, "StatusBar":statusbar.html.
+
+h3(#Frame_oncreatetoolbar). Frame#on_create_tool_bar
+
+ "ToolBar":toolbar.html *on_create_tool_bar*(%(arg-type)Integer% style,  %(arg-type)Integer% id, 
+                              %(arg-type)String% name)
+
+Virtual function called when a toolbar is requested by "Frame#create_tool_bar":frame.html#Frame_createtoolbar.
+
+h4. Parameters
+
+* _style_ The toolbar style. See "ToolBar":toolbar.html for a list
+of valid styles.
+* _id_ The toolbar window identifier. If -1, an identifier will be chosen by
+Widgets.
+* _name_ The toolbar window name.
+
+h4. Return value
+
+A toolbar object.
+
+h4. Remarks
+
+An application can override this function to return a different kind of toolbar. The default
+implementation returns an instance of "ToolBar":toolbar.html.
+
+h4. See also
+
+"Frame#create_tool_bar":frame.html#Frame_createtoolbar, "ToolBar":toolbar.html.
+
+
+h3(#Frame_processcommand). Frame#process_command
+
+  *process_command*(%(arg-type)Integer% id)
+
+Simulate a menu command.
+
+h4. Parameters
+
+* _id_ The identifier for a menu item.
+
+
+h3(#Frame_sendsizeevent). Frame#send_size_event
+
+  *send_size_event*()
+
+This function sends a dummy "size event":sizeevent.html to the frame
+forcing it to reevaluate its children positions. It is sometimes useful to call
+this function after adding or deleting a children after the frame creation or
+if a child size changes.
+
+Note that if the frame is using either sizers or constraints for the children
+layout, it is enough to call "Layout()":windowlayout.html directly and
+this function should not be used in this case.
+
+
+h3(#Frame_setmenubar). Frame#set_menu_bar
+
+  *set_menu_bar*(%(arg-type)"MenuBar":menubar.html% menuBar)
+
+Tells the frame to show the given menu bar.
+
+h4. Parameters
+
+* _menuBar_ The menu bar to associate with the frame.
+
+h4. Remarks
+
+If the frame is destroyed, the
+menu bar and its menus will be destroyed also, so do not delete the menu
+bar explicitly (except by resetting the frame's menu bar to another
+frame or NULL).
+
+Under Windows, a size event is generated, so be sure to initialize
+data members properly before calling *SetMenuBar*.
+
+Note that on some platforms, it is not possible to call this function twice for the same frame object.
+
+h4. See also
+
+"Frame#get_menu_bar":frame.html#Frame_getmenubar, "MenuBar":menubar.html, "Menu":menu.html.
+
+h3(#Frame_setstatusbar). Frame#set_status_bar
+
+  *set_status_bar*(%(arg-type)"StatusBar":statusbar.html% statusBar)
+
+Associates a status bar with the frame.
+
+h4. See also
+
+"Frame#create_status_bar":frame.html#Frame_createstatusbar, "StatusBar":statusbar.html, "Frame#get_status_bar":frame.html#Frame_getstatusbar
+
+h3(#Frame_setstatusbarpane). Frame#set_status_bar_pane
+
+  *set_status_bar_pane*(%(arg-type)Integer% n)
+
+Set the status bar pane used to display menu and toolbar help.
+Using -1 disables help display.
+
+h3(#Frame_setstatustext). Frame#set_status_text
+
+  *set_status_text*(%(arg-type)String% text,  %(arg-type)Integer% number = 0)
+
+Sets the status bar text and redraws the status bar.
+
+h4. Parameters
+
+* _text_ The text for the status field.
+* _number_ The status field (starting from zero).
+
+h4. Remarks
+
+Use an empty string to clear the status bar.
+
+h4. See also
+
+"Frame#create_status_bar":frame.html#Frame_createstatusbar, "StatusBar":statusbar.html
+
+h3(#Frame_setstatuswidths). Frame#set_status_widths
+
+  *set_status_widths*(%(arg-type)Array% widths)
+
+Sets the widths of the fields in the status bar. This should be an array
+of integers corresponding to the desired pixel widths of each field. The
+array should therefore be have the same length as the number of fields
+set up by a previous call to "set_status_bar":#Frame_setstatusbar. 
+
+As an alternative to specifying a fixed pixel width for a field, the
+value -1 can be used to request a variable-width field. The widths of
+the variable fields are calculated from the total width of all fields,
+minus the sum of widths of the non-variable fields, divided by the
+number of variable fields.
+
+h3(#Frame_settoolbar). Frame#set_tool_bar
+
+  *set_tool_bar*(%(arg-type)"ToolBar":toolbar.html% toolBar)
+
+Associates a toolbar with the frame.
+
+h4. See also
+
+"Frame#create_tool_bar":frame.html#Frame_createtoolbar, "ToolBar":toolbar.html, "Frame#get_tool_bar":frame.html#Frame_gettoolbar
+

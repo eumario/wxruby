@@ -1,0 +1,114 @@
+h1(#wxfindreplacedata). Wx::FindReplaceData
+
+FindReplaceData holds the data for 
+"FindReplaceDialog":findreplacedialog.html. It is used to initialize
+the dialog with the default values and will keep the last values from the
+dialog when it is closed. It is also updated each time a 
+"FindDialogEvent":finddialogevent.html is generated so instead of
+using the FindDialogEvent methods you can also directly query this object.
+
+Note that all @SetXXX()@ methods may only be called before showing the
+dialog and calling them has no effect later.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Data structures
+
+Flags used by 
+"FindReplaceData::GetFlags()":findreplacedatagetflags.html and
+"FindDialogEvent::GetFlags()":finddialogeventgetflags.html:
+
+
+ enum FindReplaceFlags
+ {
+     // downward search/replace selected (otherwise - upwards)
+     FR_DOWN       = 1,
+ 
+     // whole word search/replace selected
+     FR_WHOLEWORD  = 2,
+ 
+     // case sensitive search/replace selected (otherwise - case insensitive)
+     FR_MATCHCASE  = 4
+ }
+ 
+
+These flags can be specified in 
+"FindReplaceDialog ctor":findreplacedialogctor.html or 
+"Create()":findreplacedialogcreate.html:
+
+
+ enum FindReplaceDialogStyles
+ {
+     // replace dialog (otherwise find dialog)
+     FR_REPLACEDIALOG = 1,
+ 
+     // don't allow changing the search direction
+     FR_NOUPDOWN      = 2,
+ 
+     // don't allow case sensitive searching
+     FR_NOMATCHCASE   = 4,
+ 
+     // don't allow whole word searching
+     FR_NOWHOLEWORD   = 8
+ }
+ 
+
+<div id="methods">
+
+h2. Methods
+
+* "FindReplaceData.new":#FindReplaceData_new
+* "FindReplaceData#get_find_string":#FindReplaceData_getfindstring
+* "FindReplaceData#get_replace_string":#FindReplaceData_getreplacestring
+* "FindReplaceData#get_flags":#FindReplaceData_getflags
+* "FindReplaceData#set_flags":#FindReplaceData_setflags
+* "FindReplaceData#set_find_string":#FindReplaceData_setfindstring
+* "FindReplaceData#set_replace_string":#FindReplaceData_setreplacestring
+
+</div>
+
+
+h3(#FindReplaceData_new). FindReplaceData.new
+
+  *FindReplaceData.new*(%(arg-type)"Uint32":uint32.html% flags = 0)
+
+Constuctor initializes the flags to default value ($0$).
+
+h3(#FindReplaceData_getfindstring). FindReplaceData#get_find_string
+
+ String *get_find_string*()
+
+Get the string to find.
+
+h3(#FindReplaceData_getreplacestring). FindReplaceData#get_replace_string
+
+ String *get_replace_string*()
+
+Get the replacement string.
+
+h3(#FindReplaceData_getflags). FindReplaceData#get_flags
+
+ Integer *get_flags*()
+
+Get the combination of @FindReplaceFlags@ values.
+
+h3(#FindReplaceData_setflags). FindReplaceData#set_flags
+
+  *set_flags*(%(arg-type)"Uint32":uint32.html% flags)
+
+Set the flags to use to initialize the controls of the dialog.
+
+h3(#FindReplaceData_setfindstring). FindReplaceData#set_find_string
+
+  *set_find_string*(%(arg-type)String% str)
+
+Set the string to find (used as initial value by the dialog).
+
+h3(#FindReplaceData_setreplacestring). FindReplaceData#set_replace_string
+
+  *set_replace_string*(%(arg-type)String% str)
+
+Set the replacement string (used as initial value by the dialog).
+

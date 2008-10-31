@@ -1,0 +1,103 @@
+h1(#wxfontenumerator). Wx::FontEnumerator
+
+FontEnumerator enumerates either all available fonts on the system or only
+the ones with given attributes - either only fixed-width (suited for use in
+programs such as terminal emulators and the like) or the fonts available in
+the given "encoding":fontencodingoverview.html.
+
+To do this, you just have to call one of EnumerateXXX() functions - either 
+"enumerate_facenames":#FontEnumerator_enumeratefacenames or 
+"enumerate_encodings":#FontEnumerator_enumerateencodings and the
+corresponding callback ("on_facename":#FontEnumerator_onfacename or 
+"on_font_encoding":#FontEnumerator_onfontencoding) will be called
+repeatedly until either all fonts satisfying the specified criteria are
+exhausted or the callback returns false.
+
+h2. Virtual functions to override
+
+Either "on_facename":#FontEnumerator_onfacename or 
+"on_font_encoding":#FontEnumerator_onfontencoding should be overridden
+depending on whether you plan to call 
+"enumerate_facenames":#FontEnumerator_enumeratefacenames or 
+"enumerate_encodings":#FontEnumerator_enumerateencodings. Of course,
+if you call both of them, you should override both functions.
+
+h2. Derived from
+
+None
+
+h2. See also
+
+"Font encoding overview":fontencodingoverview.html, 
+"Font sample":samplefont.html, 
+"Font":font.html, 
+"FontMapper":fontmapper.html
+
+<div id="methods">
+
+h2. Methods
+
+* "FontEnumerator#enumerate_facenames":#FontEnumerator_enumeratefacenames
+* "FontEnumerator#enumerate_encodings":#FontEnumerator_enumerateencodings
+* "FontEnumerator#get_encodings":#FontEnumerator_getencodings
+* "FontEnumerator#get_facenames":#FontEnumerator_getfacenames
+* "FontEnumerator#on_facename":#FontEnumerator_onfacename
+* "FontEnumerator#on_font_encoding":#FontEnumerator_onfontencoding
+
+</div>
+
+
+h3(#FontEnumerator_enumeratefacenames). FontEnumerator#enumerate_facenames
+
+ Boolean *enumerate_facenames*(    %(arg-type)"FontEncoding":fontencoding.html% encoding = FONTENCODING_SYSTEM, 
+                                %(arg-type)Boolean% fixedWidthOnly = false)
+
+Call "on_facename":#FontEnumerator_onfacename for each font which
+supports given encoding (only if it is not FONTENCODING_SYSTEM) and is of
+fixed width (if _fixedWidthOnly_ is true).
+
+Calling this function with default arguments will result in enumerating all
+fonts available on the system.
+
+h3(#FontEnumerator_enumerateencodings). FontEnumerator#enumerate_encodings
+
+ Boolean *enumerate_encodings*(%(arg-type)String% font = "")
+
+Call "on_font_encoding":#FontEnumerator_onfontencoding for each
+encoding supported by the given font - or for each encoding supported by at
+least some font if _font_ is not specified.
+
+
+h3(#FontEnumerator_getencodings). FontEnumerator#get_encodings
+
+ "ArrayString":arraystring.html *get_encodings*()
+
+Return array of strings containing all encodings found by 
+"enumerate_encodings":#FontEnumerator_enumerateencodings. This is convenience function. It is 
+based on default implementation of "on_font_encoding":#FontEnumerator_onfontencoding so don't expect
+it to work if you overwrite that method.
+
+h3(#FontEnumerator_getfacenames). FontEnumerator#get_facenames
+
+ "ArrayString":arraystring.html *get_facenames*()
+
+Return array of strings containing all facenames found by 
+"enumerate_facenames":#FontEnumerator_enumeratefacenames. This is convenience function. It is 
+based on default implementation of "on_facename":#FontEnumerator_onfacename so don't expect
+it to work if you overwrite that method.
+
+
+h3(#FontEnumerator_onfacename). FontEnumerator#on_facename
+
+ Boolean *on_facename*(%(arg-type)String% font)
+
+Called by "enumerate_facenames":#FontEnumerator_enumeratefacenames for
+each match. Return true to continue enumeration or false to stop it.
+
+h3(#FontEnumerator_onfontencoding). FontEnumerator#on_font_encoding
+
+ Boolean *on_font_encoding*( %(arg-type)String% font,  %(arg-type)String% encoding)
+
+Called by "enumerate_encodings":#FontEnumerator_enumerateencodings for
+each match. Return true to continue enumeration or false to stop it.
+

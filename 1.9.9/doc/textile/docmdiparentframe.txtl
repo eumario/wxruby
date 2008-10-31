@@ -1,0 +1,86 @@
+h1(#wxdocmdiparentframe). Wx::DocMDIParentFrame
+
+The DocMDIParentFrame class provides a default top-level frame for
+applications using the document/view framework. This class can only be used for MDI parent frames.
+
+It cooperates with the "View":view.html, "Document":document.html,
+ "DocManager":docmanager.html and "DocTemplates":doctemplate.html classes.
+
+See the example application in @samples/docview@.
+
+h2. Derived from
+
+"MDIParentFrame":mdiparentframe.html
+
+"Frame":frame.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"Document/view overview":docviewoverview.html, "MDIParentFrame":mdiparentframe.html
+
+<div id="methods">
+
+h2. Methods
+
+* "DocMDIParentFrame.new":#DocMDIParentFrame_new
+* "DocMDIParentFrame.new":#DocMDIParentFrame_new
+* "DocMDIParentFrame#on_close_window":#DocMDIParentFrame_onclosewindow
+
+</div>
+
+
+h3(#DocMDIParentFrame_new). DocMDIParentFrame.new
+
+  *DocMDIParentFrame.new*(%(arg-type)"DocManager":docmanager.html% manager,  %(arg-type)"Frame":frame.html% parent, 
+                        %(arg-type)Integer% id, 
+                        %(arg-type)String% title, 
+                        %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                        %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                        %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                        %(arg-type)String% name = "frame")
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+
+h3(#DocMDIParentFrame_create). DocMDIParentFrame.new
+
+ Boolean *create*(%(arg-type)"DocManager":docmanager.html% manager,  %(arg-type)"Frame":frame.html% parent,  %(arg-type)Integer% id, 
+                %(arg-type)String% title, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_FRAME_STYLE, 
+                %(arg-type)String% name = "frame")
+
+Creates the window.
+
+h3(#DocMDIParentFrame_onclosewindow). DocMDIParentFrame#on_close_window
+
+  *on_close_window*(%(arg-type)"CloseEvent":closeevent.html% event)
+
+Deletes all views and documents. If no user input cancelled the
+operation, the frame will be destroyed and the application will exit.
+
+Since understanding how document/view clean-up takes place can be difficult,
+the implementation of this function is shown below.
+
+
+ void DocParentFrame::OnCloseWindow(CloseEvent& event)
+ {
+   if (m_docManager->Clear(!event.CanVeto()))
+   {
+     this->Destroy();
+   }
+   else
+     event.Veto();
+ }
+ 
+

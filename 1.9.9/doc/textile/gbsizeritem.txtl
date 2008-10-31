@@ -1,0 +1,104 @@
+h1(#wxgbsizeritem). Wx::GBSizerItem
+
+The GBSizerItem class is used by the 
+"GridBagSizer":gridbagsizer.html for tracking the items in the
+sizer. It adds grid position and spanning information to the normal 
+"SizerItem":sizeritem.html by adding
+"GBPosition":gbposition.html and "GBSpan":gbspan.html
+attrbibutes. Most of the time you will not need to use a
+GBSizerItem directly in your code, but there are a couple of cases
+where it is handy.
+
+h2. Derived from
+
+"SizerItem":sizeritem.html
+
+<div id="methods">
+
+h2. Methods
+
+* "GBSizerItem.new":#GBSizerItem_new
+* "GBSizerItem#get_end_pos":#GBSizerItem_getendpos
+* "GBSizerItem#get_pos":#GBSizerItem_getpos
+* "GBSizerItem#get_span":#GBSizerItem_getspan
+* "GBSizerItem#intersects":#GBSizerItem_intersects
+* "GBSizerItem#set_pos":#GBSizerItem_setpos
+* "GBSizerItem#set_span":#GBSizerItem_setspan
+
+</div>
+
+
+h3(#GBSizerItem_wxgbsizeritem). GBSizerItem.new
+
+  *GBSizerItem.new*(%(arg-type)Integer% width,  %(arg-type)Integer% height, 
+                  %(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span, 
+                  %(arg-type)Integer% flag, 
+                  %(arg-type)Integer% border, 
+                  %(arg-type)Object% userData)
+
+Construct a sizer item for tracking a spacer.
+
+  *GBSizerItem.new*(%(arg-type)"Window":window.html% window,  %(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span, 
+                  %(arg-type)Integer% flag, 
+                  %(arg-type)Integer% border, 
+                  %(arg-type)Object% userData)
+
+Construct a sizer item for tracking a window.
+
+  *GBSizerItem.new*(%(arg-type)"Sizer":sizer.html% sizer,  %(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span, 
+                  %(arg-type)Integer% flag, 
+                  %(arg-type)Integer% border, 
+                  %(arg-type)Object% userData)
+
+Construct a sizer item for tracking a subsizer.
+
+h3(#GBSizerItem_getendpos). GBSizerItem#get_end_pos
+
+  *get_end_pos*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Get the row and column of the endpoint of this item
+
+h3(#GBSizerItem_getpos). GBSizerItem#get_pos
+
+ "GBPosition":gbposition.html *get_pos*()
+
+  *get_pos*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+
+Get the grid position of the item.
+
+h3(#GBSizerItem_getspan). GBSizerItem#get_span
+
+ "GBSpan":gbspan.html *get_span*()
+
+  *get_span*(%(arg-type)Integer% rowspan,  %(arg-type)Integer% colspan)
+
+Get the row and column spanning of the item.
+
+h3(#GBSizerItem_intersects). GBSizerItem#intersects
+
+ Boolean *intersects*(%(arg-type)"GBSizerItem":gbsizeritem.html% other)
+
+Returns true if this item and the other item instersect
+
+ Boolean *intersects*(%(arg-type)"GBPosition":gbposition.html% pos,  %(arg-type)"GBSpan":gbspan.html% span)
+
+Returns true if the given pos/span would intersect with this item.
+
+h3(#GBSizerItem_setpos). GBSizerItem#set_pos
+
+ Boolean *set_pos*(%(arg-type)"GBPosition":gbposition.html% pos)
+
+If the item is already a member of a sizer then first ensure that
+there is no other item that would intersect with this one at the new
+position, then set the new position. Returns true if the change is
+successful and after the next Layout the item will be moved.
+
+h3(#GBSizerItem_setspan). GBSizerItem#set_span
+
+ Boolean *set_span*(%(arg-type)"GBSpan":gbspan.html% span)
+
+If the item is already a member of a sizer then first ensure that
+there is no other item that would intersect with this one with its new
+spanning size, then set the new spanning. Returns true if the change
+is successful and after the next Layout the item will be resized.
+

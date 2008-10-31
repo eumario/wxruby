@@ -1,0 +1,109 @@
+h1(#wxvalidator). Wx::Validator
+
+Validator is the base class for a family of validator classes that mediate
+between a class of control, and application data.
+
+A validator has three major roles:
+
+
+# to transfer data from a C++ variable or own storage to and from a control;
+# to validate data in a control, and show an appropriate error message;
+# to filter events (such as keystrokes), thereby changing the behaviour of the
+associated control.
+
+
+Validators can be plugged into controls dynamically.
+
+To specify a default, `null' validator, use the symbol *DefaultValidator*.
+
+For more information, please see "Validator overview":validatoroverview.html.
+
+
+
+h2. Derived from
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. See also
+
+"Validator overview":validatoroverview.html, 
+"TextValidator":textvalidator.html, 
+"GenericValidator":genericvalidator.html,
+
+<div id="methods">
+
+h2. Methods
+
+* "Validator.new":#Validator_new
+* "Validator#clone":#Validator_clone
+* "Validator#get_window":#Validator_getwindow
+* "Validator#set_bell_on_error":#Validator_setbellonerror
+* "Validator#set_window":#Validator_setwindow
+* "Validator#transfer_from_window":#Validator_transferfromwindow
+* "Validator#transfer_to_window":#Validator_transfertowindow
+* "Validator#validate":#Validator_validate
+
+</div>
+
+
+h3(#Validator_new). Validator.new
+
+  *destructor*()
+
+Destructor.
+
+h3(#Validator_clone). Validator#clone
+
+ "Object":object.html *clone*()
+
+All validator classes must implement the *Clone* function, which returns
+an identical copy of itself. This is because validators are passed to control
+constructors as references which must be copied. Unlike objects such as pens
+and brushes, it does not make sense to have a reference counting scheme
+to do this cloning, because all validators should have separate
+data.
+
+This base function returns NULL.
+
+h3(#Validator_getwindow). Validator#get_window
+
+ "Window":window.html *get_window*()
+
+Returns the window associated with the validator.
+
+h3(#Validator_setbellonerror). Validator#set_bell_on_error
+
+  *set_bell_on_error*(%(arg-type)Boolean% doIt = true)
+
+This functions switches on or turns off the error sound produced by the
+validators if an invalid key is pressed.
+
+h3(#Validator_setwindow). Validator#set_window
+
+  *set_window*(%(arg-type)"Window":window.html% window)
+
+Associates a window with the validator.
+
+h3(#Validator_transferfromwindow). Validator#transfer_from_window
+
+ Boolean *transfer_to_window*()
+
+This overridable function is called when the value in the window must be
+transferred to the validator. Return false if there is a problem.
+
+h3(#Validator_transfertowindow). Validator#transfer_to_window
+
+ Boolean *transfer_to_window*()
+
+This overridable function is called when the value associated with the validator must be
+transferred to the window. Return false if there is a problem.
+
+h3(#Validator_validate). Validator#validate
+
+ Boolean *validate*(%(arg-type)"Window":window.html% parent)
+
+This overridable function is called when the value in the associated window must be validated.
+Return false if the value in the window is not valid; you may pop up an error dialog.
+

@@ -1,0 +1,43 @@
+h1(#wxbusyinfo). Wx::BusyInfo
+
+This class makes it easy to tell your user that the program is
+temporarily busy. Just call the class method 'busy' and run the code
+that your program is busy with within a block. A small window with an
+informational message will be displayed on top of the application
+
+For example:
+
+ Wx::BusyInfo.busy("Please wait, working...") do 
+   # do some lengthy operation
+   # ...
+ end		
+ 
+h2. Derived from
+
+None
+
+h2. See also
+
+"BusyCursor":busycursor.html, "WindowDisabler":windowdisabler.html
+
+<div id="methods">
+
+h2. Class Methods
+
+* "BusyInfo.busy":#BusyInfo_busy
+
+</div>
+
+
+h3(#BusyInfo_busy). BusyInfo.busy
+
+  *BusyInfo.new*(%(arg-type)String% msg,  
+                   %(arg-type)"Window":window.html% parent = nil) { ... }
+
+Displays a busy info window as child of _parent_ and displays _msg_
+in it, while running the block. When the block's execution is completed,
+the busy info window is removed from the display.
+
+*NB:* If _parent_ is not @nil@ you must ensure that it is not
+closed while the busy info is shown.
+

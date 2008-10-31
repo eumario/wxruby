@@ -1,0 +1,800 @@
+h1(#wxtoolbar). Wx::ToolBar
+
+A ToolBar is a collection of graphical buttons and/or controls which is attached
+to the edge of a "Wx::Frame":frame.html. It provides quick access to
+one-step application functions, such as opening or saving a file, or
+cutting and pasting text.
+
+It has a native style on all platforms; note that on OS X, native
+toolbars may only be placed at the top of a Frame. Use
+Frame#set_tool_bar to set a toolbar to be managed by a Frame and ensure
+native appearance.
+
+h2. Derived from
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+h2. Remarks
+
+You may also create a toolbar that is managed by the frame, by
+calling "Frame#create_tool_bar":frame.html#Frame_createtoolbar. Under Pocket PC,
+you should always use this function for creating the toolbar
+to be managed by the frame, so that Widgets can use a combined
+menubar and toolbar. Where you manage your own toolbars, create a ToolBar
+as usual.
+
+The meaning of a "separator" is a vertical line under Windows and simple
+space under GTK+.
+
+h2. Window styles
+
+|@TB_FLAT@|Gives the toolbar a flat look (Windows and GTK only).|
+|@TB_DOCKABLE@|Makes the toolbar floatable and dockable (GTK only).|
+|@TB_HORIZONTAL@|Specifies horizontal layout (default).|
+|@TB_VERTICAL@|Specifies vertical layout.|
+|@TB_TEXT@|Shows the text in the toolbar buttons; by default only icons are shown.|
+|@TB_NOICONS@|Specifies no icons in the toolbar buttons; by default they are shown.|
+|@TB_NODIVIDER@|Specifies no divider (border) above the toolbar (Windows only).|
+|@TB_NOALIGN@|Specifies no alignment with the parent window (Windows only, not very useful).|
+|@TB_HORZ_LAYOUT@|Shows the text and the icons alongside, not vertically stacked (Windows and GTK2 only). This style must be used with TB_TEXT.|
+|@TB_HORZ_TEXT@|Combination of TB_HORZ_LAYOUT and TB_TEXT.|
+|@TB_NO_TOOLTIPS@|Don't show the short help tooltips for the tools when the mouse hovers over them.|
+|@TB_BOTTOM@|Align the toolbar at the bottom of parent window.|
+|@TB_RIGHT@|Align the toolbar at the right side of parent window.|
+
+
+See also "window styles overview":windowstyles.html. Note that the Win32
+native toolbar ignores @TB_NOICONS@ style. Also, toggling the 
+@TB_TEXT@ works only if the style was initially on.
+
+h2. Event handling
+
+The toolbar class emits menu commands in the same way that a frame menubar does,
+so you can use one EVT_MENU macro for both a menu item and a toolbar button.
+The event handler functions take a CommandEvent argument. For most event macros,
+the identifier of the tool is passed, but for EVT_TOOL_ENTER the toolbar
+window identifier is passed and the tool identifier is retrieved from the CommandEvent.
+This is because the identifier may be -1 when the mouse moves off a tool, and -1 is not
+allowed as an identifier in the event system.
+
+
+
+|*evt_tool(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_TOOL_CLICKED event(a synonym for EVT_COMMAND_MENU_SELECTED). Pass the id of the tool.|
+|*evt_menu(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The same as EVT_TOOL.|
+|*EVT_TOOL_RANGE(id1, id2, func)*|Process a EVT_COMMAND_TOOL_CLICKED eventfor a range of identifiers. Pass the ids of the tools.|
+|*EVT_MENU_RANGE(id1, id2, func)*|The same as EVT_TOOL_RANGE.|
+|*evt_tool_rclicked(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_TOOL_RCLICKED event.Pass the id of the tool.|
+|*EVT_TOOL_RCLICKED_RANGE(id1, id2, func)*|Process a EVT_COMMAND_TOOL_RCLICKED eventfor a range of ids. Pass the ids of the tools.|
+|*evt_tool_enter(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_TOOL_ENTER event.Pass the id of the toolbar itself. The value of CommandEvent::GetSelection is the tool id, or -1 if the mouse cursor has moved off a tool.|
+
+
+h2. See also
+
+Toolbar overviewwxtoolbaroverview, "ScrolledWindow":scrolledwindow.html
+
+<div id="methods">
+
+h2. Methods
+
+* "ToolBar.new":#ToolBar_new
+* "ToolBar#add_control":#ToolBar_addcontrol
+* "ToolBar#add_separator":#ToolBar_addseparator
+* "ToolBar#add_tool":#ToolBar_addtool
+* "ToolBar#add_check_tool":#ToolBar_addchecktool
+* "ToolBar#add_radio_tool":#ToolBar_addradiotool
+* "ToolBar#clear_tools":#ToolBar_cleartools
+* "ToolBar#delete_tool":#ToolBar_deletetool
+* "ToolBar#delete_tool_by_pos":#ToolBar_deletetoolbypos
+* "ToolBar#enable_tool":#ToolBar_enabletool
+* "ToolBar#find_by_id":#ToolBar_findbyid
+* "ToolBar#find_control":#ToolBar_findcontrol
+* "ToolBar#find_tool_for_position":#ToolBar_findtoolforposition
+* "ToolBar#get_tools_count":#ToolBar_gettoolscount
+* "ToolBar#get_tool_size":#ToolBar_gettoolsize
+* "ToolBar#get_tool_bitmap_size":#ToolBar_gettoolbitmapsize
+* "ToolBar#get_margins":#ToolBar_getmargins
+* "ToolBar#get_tool_client_data":#ToolBar_gettoolclientdata
+* "ToolBar#get_tool_enabled":#ToolBar_gettoolenabled
+* "ToolBar#get_tool_long_help":#ToolBar_gettoollonghelp
+* "ToolBar#get_tool_packing":#ToolBar_gettoolpacking
+* "ToolBar#get_tool_pos":#ToolBar_gettoolpos
+* "ToolBar#get_tool_separation":#ToolBar_gettoolseparation
+* "ToolBar#get_tool_short_help":#ToolBar_gettoolshorthelp
+* "ToolBar#get_tool_state":#ToolBar_gettoolstate
+* "ToolBar#insert_control":#ToolBar_insertcontrol
+* "ToolBar#insert_separator":#ToolBar_insertseparator
+* "ToolBar#insert_tool":#ToolBar_inserttool
+* "ToolBar#on_left_click":#ToolBar_onleftclick
+* "ToolBar#on_mouse_enter":#ToolBar_onmouseenter
+* "ToolBar#on_right_click":#ToolBar_onrightclick
+* "ToolBar#realize":#ToolBar_realize
+* "ToolBar#remove_tool":#ToolBar_removetool
+* "ToolBar#set_bitmap_resource":#ToolBar_setbitmapresource
+* "ToolBar#set_margins":#ToolBar_setmargins
+* "ToolBar#set_tool_bitmap_size":#ToolBar_settoolbitmapsize
+* "ToolBar#set_tool_client_data":#ToolBar_settoolclientdata
+* "ToolBar#set_tool_disabled_bitmap":#ToolBar_settooldisabledbitmap
+* "ToolBar#set_tool_long_help":#ToolBar_settoollonghelp
+* "ToolBar#set_tool_packing":#ToolBar_settoolpacking
+* "ToolBar#set_tool_short_help":#ToolBar_settoolshorthelp
+* "ToolBar#set_tool_normal_bitmap":#ToolBar_settoolnormalbitmap
+* "ToolBar#set_tool_separation":#ToolBar_settoolseparation
+* "ToolBar#toggle_tool":#ToolBar_toggletool
+
+</div>
+
+
+h3(#ToolBar_constr). ToolBar.new
+
+  *ToolBar.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id, 
+              %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+              %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+              %(arg-type)Integer% style = TB_HORIZONTAL NO_BORDER, 
+              %(arg-type)String% name = PanelNameStr)
+
+Constructs a toolbar.
+
+h4. Parameters
+
+* _parent_ Pointer to a parent window.
+* _id_ Window identifier. If -1, will automatically create an identifier.
+* _pos_ Window position. DefaultPosition is (-1, -1) which indicates that Widgets
+should generate a default position for the window. If using the Window class directly, supply
+an actual position.
+* _size_ Window size. DefaultSize is (-1, -1) which indicates that Widgets
+should generate a default size for the window.
+* _style_ Window style. See "ToolBar":toolbar.html for details.
+* _name_ Window name.
+
+h4. Remarks
+
+After a toolbar is created, you use "ToolBar#add_tool":toolbar.html#ToolBar_addtool and
+perhaps "ToolBar#add_separator":toolbar.html#ToolBar_addseparator, and then you
+must call "ToolBar#realize":toolbar.html#ToolBar_realize to construct and display the toolbar
+tools.
+
+You may also create a toolbar that is managed by the frame, by
+calling "Frame#create_tool_bar":frame.html#Frame_createtoolbar.
+
+  *destructor*()
+
+Toolbar destructor.
+
+h3(#ToolBar_addcontrol). ToolBar#add_control
+
+ Boolean *add_control*(%(arg-type)"Control":control.html% control)
+
+Adds any control to the toolbar, typically e.g. a combobox.
+
+* _control_ The control to be added.
+
+h3(#ToolBar_addseparator). ToolBar#add_separator
+
+  *add_separator*()
+
+Adds a separator for spacing groups of tools.
+
+h4. See also
+
+"ToolBar#add_tool":toolbar.html#ToolBar_addtool, "ToolBar#set_tool_separation":toolbar.html#ToolBar_settoolseparation
+
+h3(#ToolBar_addtool). ToolBar#add_tool
+
+ "ToolBarTool":toolbartool.html *add_tool*(%(arg-type)Integer% toolId, 
+                         %(arg-type)String% label,
+                         %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                         %(arg-type)String% shortHelpString = "", 
+                         %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL)
+
+ "ToolBarTool":toolbartool.html *add_tool*(%(arg-type)Integer% toolId, 
+                         %(arg-type)String% label, 
+                         %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                         %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
+                         %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL, 
+                         %(arg-type)String% shortHelpString = "", 
+                         %(arg-type)String% longHelpString = "", 
+                         %(arg-type)Object% clientData = nil)
+
+
+Adds a tool to the toolbar. Returns a "ToolBarTool":toolbartool.html object with
+information about the newly added item.
+
+The first (short and most commonly used) version has fewer parameters
+than the full version at the price of not being able to specify some of
+the more rarely used button features.
+
+h4. Parameters
+
+* _toolId_ An integer by which
+the tool may be identified in subsequent operations.
+* _kind_ May be ITEM_NORMAL for a normal button (default),
+ITEM_CHECK for a checkable tool (such tool stays pressed after it had been
+toggled) or ITEM_RADIO for a checkable tool which makes part of a radio
+group of tools each of which is automatically unchecked whenever another button
+in the group is checked
+* _bitmap1_ The primary tool bitmap.
+* _bitmap2_ The bitmap used when the tool is disabled. If it is equal to
+NullBitmap, the disabled bitmap is automatically generated by greing the
+normal one.
+* _shortHelpString_ This string is used for the tools tooltip
+* _longHelpString_ This string is shown in the statusbar (if any) of the
+parent frame when the mouse pointer is inside the tool
+* _clientData_ An optional pointer to client data which can be
+retrieved later using "ToolBar#get_tool_client_data":toolbar.html#ToolBar_gettoolclientdata.
+
+h4. Remarks
+
+After you have added tools to a toolbar, you must call "ToolBar#realize":toolbar.html#ToolBar_realize in
+order to have the tools appear.
+
+h4. See also
+
+"ToolBar#add_separator":toolbar.html#ToolBar_addseparator, "ToolBar#add_check_tool":toolbar.html#ToolBar_addchecktool, "ToolBar#add_radio_tool":toolbar.html#ToolBar_addradiotool, "ToolBar#insert_tool":toolbar.html#ToolBar_inserttool, "ToolBar#delete_tool":toolbar.html#ToolBar_deletetool, "ToolBar#realize":toolbar.html#ToolBar_realize
+
+h3(#ToolBar_addchecktool). ToolBar#add_check_tool
+
+ "ToolBarTool":toolbartool.html *add_check_tool*(%(arg-type)Integer% toolId, 
+                                  %(arg-type)String% label, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap2, 
+                                  %(arg-type)String% shortHelp = "", 
+                                  %(arg-type)String% longHelp = "", 
+                                  %(arg-type)Object% clientData = nil)
+
+Adds a new check (or toggle) tool to the toolbar. The parameters are the same
+as in "ToolBar#add_tool":toolbar.html#ToolBar_addtool.
+
+h4. See also
+
+"ToolBar#add_tool":toolbar.html#ToolBar_addtool
+
+
+h3(#ToolBar_addradiotool). ToolBar#add_radio_tool
+
+ "ToolBarTool":toolbartool.html *add_radio_tool*(%(arg-type)Integer% toolId, 
+                                  %(arg-type)String% label, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                                  %(arg-type)"Bitmap":bitmap.html% bitmap2, 
+                                  %(arg-type)String% shortHelpString = "", 
+                                  %(arg-type)String% longHelpString = "", 
+                                  %(arg-type)Object% clientData = nil)
+
+Adds a new radio tool to the toolbar. Consecutive radio tools form a radio
+group such that exactly one button in the group is pressed at any moment, in
+other words whenever a button in the group is pressed the previously pressed
+button is automatically released. You should avoid having the radio groups of
+only one element as it would be impossible for the user to use such button.
+
+By default, the first button in the radio group is initially pressed, the
+others are not.
+
+h4. See also
+
+"ToolBar#add_tool":toolbar.html#ToolBar_addtool
+
+h3(#ToolBar_cleartools). ToolBar#clear_tools
+
+ *clear_tools*()
+
+Deletes all the tools in the toolbar.
+
+h3(#ToolBar_deletetool). ToolBar#delete_tool
+
+ Boolean *delete_tool*(%(arg-type)Integer% toolId)
+
+Removes the specified tool from the toolbar and deletes it. If you don't want
+to delete the tool, but just to remove it from the toolbar (to possibly add it
+back later), you may use "remove_tool":#ToolBar_removetool instead.
+
+Note that it is unnecessary to call "Realize":toolbarrealize.html for the
+change to take place, it will happen immediately.
+
+Returns true if the tool was deleted, false otherwise.
+
+h4. See also
+
+"delete_tool_by_pos":#ToolBar_deletetoolbypos
+
+h3(#ToolBar_deletetoolbypos). ToolBar#delete_tool_by_pos
+
+ Boolean *delete_tool_by_pos*(%(arg-type)Integer% pos)
+
+This function behaves like "delete_tool":#ToolBar_deletetool but it
+deletes the tool at the specified position and not the one with the given id.
+
+h3(#ToolBar_enabletool). ToolBar#enable_tool
+
+  *enable_tool*(%(arg-type)Integer% toolId,  %(arg-type)Boolean% enable)
+
+Enables or disables the tool.
+
+h4. Parameters
+
+* _toolId_ Tool to enable or disable.
+* _enable_ If true, enables the tool, otherwise disables it.
+
+*NB:* This function should only be called after 
+"Realize":toolbarrealize.html.
+
+h4. Remarks
+
+Some implementations will change the visible state of the tool to indicate that it is disabled.
+
+h4. See also
+
+"ToolBar#get_tool_enabled":toolbar.html#ToolBar_gettoolenabled, "ToolBar#toggle_tool":toolbar.html#ToolBar_toggletool
+
+h3(#ToolBar_findbyid). ToolBar#find_by_id
+
+ "ToolBarTool":toolbartool.html *find_by_id*(%(arg-type)Integer% id)
+
+Returns information about the item with the passed-in id.
+
+h3(#ToolBar_findcontrol). ToolBar#find_control
+
+ "Control":control.html *find_control*(%(arg-type)Integer% id)
+
+Returns a pointer to the Wx::Control identified by _id_ or nil if no
+corresponding control is found.
+
+h3(#ToolBar_gettoolscount). ToolBar#get_tools_count
+
+ Integer *get_tools_count*()
+
+Returns the number of tools in the toolbar.
+
+h3(#ToolBar_gettoolsize). ToolBar#get_tool_size
+
+ "Size":size.html *get_tool_size*()
+
+Returns the size of a whole button, which is usually larger than a tool bitmap because
+of added 3D effects.
+
+h4. See also
+
+"ToolBar#set_tool_bitmap_size":toolbar.html#ToolBar_settoolbitmapsize, "ToolBar#get_tool_bitmap_size":toolbar.html#ToolBar_gettoolbitmapsize
+
+h3(#ToolBar_gettoolbitmapsize). ToolBar#get_tool_bitmap_size
+
+ "Size":size.html *get_tool_bitmap_size*()
+
+Returns the size of bitmap that the toolbar expects to have. The default bitmap size is 16 by 15 pixels.
+
+h4. Remarks
+
+Note that this is the size of the bitmap you pass to "ToolBar#add_tool":toolbar.html#ToolBar_addtool,
+and not the eventual size of the tool button.
+
+h4. See also
+
+"ToolBar#set_tool_bitmap_size":toolbar.html#ToolBar_settoolbitmapsize, "ToolBar#get_tool_size":toolbar.html#ToolBar_gettoolsize
+
+h3(#ToolBar_getmargins). ToolBar#get_margins
+
+ "Size":size.html *get_margins*()
+
+Returns the left/right and top/bottom margins, which are also used for inter-toolspacing.
+
+h4. See also
+
+"ToolBar#set_margins":toolbar.html#ToolBar_setmargins
+
+h3(#ToolBar_gettoolclientdata). ToolBar#get_tool_client_data
+
+ "Object":object.html *get_tool_client_data*(%(arg-type)Integer% toolId)
+
+Get any client data associated with the tool.
+
+h4. Parameters
+
+* _toolId_ Id of the tool, as passed to "ToolBar#add_tool":toolbar.html#ToolBar_addtool.
+
+h4. Return value
+
+Client data, or NULL if there is none.
+
+h3(#ToolBar_gettoolenabled). ToolBar#get_tool_enabled
+
+ Boolean *get_tool_enabled*(%(arg-type)Integer% toolId)
+
+Called to determine whether a tool is enabled (responds to user input).
+
+h4. Parameters
+
+* _toolId_ Id of the tool in question.
+
+h4. Return value
+
+true if the tool is enabled, false otherwise.
+
+h4. See also
+
+"ToolBar#enable_tool":toolbar.html#ToolBar_enabletool
+
+h3(#ToolBar_gettoollonghelp). ToolBar#get_tool_long_help
+
+ String *get_tool_long_help*(%(arg-type)Integer% toolId)
+
+Returns the long help for the given tool.
+
+h4. Parameters
+
+* _toolId_ The tool in question.
+
+h4. See also
+
+"ToolBar#set_tool_long_help":toolbar.html#ToolBar_settoollonghelp, "ToolBar#set_tool_short_help":toolbar.html#ToolBar_settoolshorthelp 
+
+h3(#ToolBar_gettoolpacking). ToolBar#get_tool_packing
+
+ Integer *get_tool_packing*()
+
+Returns the value used for packing tools.
+
+h4. See also
+
+"ToolBar#set_tool_packing":toolbar.html#ToolBar_settoolpacking
+
+h3(#ToolBar_gettoolpos). ToolBar#get_tool_pos
+
+ Integer *get_tool_pos*(%(arg-type)Integer% toolId)
+
+Returns the tool position in the toolbar, or @NOT_FOUND@ if the tool is not found.
+
+h3(#ToolBar_gettoolseparation). ToolBar#get_tool_separation
+
+ Integer *get_tool_separation*()
+
+Returns the default separator size.
+
+h4. See also
+
+"ToolBar#set_tool_separation":toolbar.html#ToolBar_settoolseparation
+
+h3(#ToolBar_gettoolshorthelp). ToolBar#get_tool_short_help
+
+ String *get_tool_short_help*(%(arg-type)Integer% toolId)
+
+Returns the short help for the given tool.
+
+h4. Parameters
+
+* _toolId_ The tool in question.
+
+h4. See also
+
+"ToolBar#get_tool_long_help":toolbar.html#ToolBar_gettoollonghelp, "ToolBar#set_tool_short_help":toolbar.html#ToolBar_settoolshorthelp 
+h3(#ToolBar_gettoolstate). ToolBar#get_tool_state
+
+ Boolean *get_tool_state*(%(arg-type)Integer% toolId)
+
+Gets the on/off state of a toggle tool.
+
+h4. Parameters
+
+* _toolId_ The tool in question.
+
+h4. Return value
+
+true if the tool is toggled on, false otherwise.
+
+h4. See also
+
+"ToolBar#toggle_tool":toolbar.html#ToolBar_toggletool
+
+h3(#ToolBar_insertcontrol). ToolBar#insert_control
+
+ "ToolBarTool":toolbartool.html *insert_control*(%(arg-type)Integer% pos, 
+                                  %(arg-type)"Control":control.html% control)
+
+Inserts the control into the toolbar at the given position.
+
+You must call "Realize":toolbarrealize.html for the change to take place.
+
+h4. See also
+
+"add_control":#ToolBar_addcontrol,
+
+"insert_tool":#ToolBar_inserttool
+
+h3(#ToolBar_insertseparator). ToolBar#insert_separator
+
+ "ToolBarTool":toolbartool.html *insert_separator*(%(arg-type)Integer% pos)
+
+Inserts the separator into the toolbar at the given position.
+
+You must call "Realize":toolbarrealize.html for the change to take place.
+
+h4. See also
+
+"add_separator":#ToolBar_addseparator,
+
+"insert_tool":#ToolBar_inserttool
+
+h3(#ToolBar_inserttool). ToolBar#insert_tool
+
+  "ToolBarTool":toolbartool.html *insert_tool*(%(arg-type)Integer% pos, 
+                              %(arg-type)Integer% toolId,
+		          	          %(arg-type)String% label, 
+                              %(arg-type)"Bitmap":bitmap.html% bitmap1, 
+                              %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
+			    			  %(arg-type)Integer% type = Wx::ITEM_NORMAL,
+                              %(arg-type)String% shortHelp = "", 
+                              %(arg-type)String% longHelp = "",
+                              %(arg-type)Object% clientData = nil)
+
+Inserts the tool with the specified attributes into the toolbar at the given
+position. Returns a "ToolBarTool":toolbartool.html object with
+information about the newly inserted item.
+
+You must call "Realize":toolbarrealize.html for the change to take place.
+
+h4. See also
+
+"add_tool":#ToolBar_addtool,
+
+"insert_control":#ToolBar_insertcontrol,
+
+"insert_separator":#ToolBar_insertseparator
+
+h3(#ToolBar_onleftclick). ToolBar#on_left_click
+
+ Boolean *on_left_click*(%(arg-type)Integer% toolId,  %(arg-type)Boolean% toggleDown)
+
+Called when the user clicks on a tool with the left mouse button.
+
+This is the old way of detecting tool clicks; although it will still work,
+you should use the EVT_MENU or EVT_TOOL macro instead.
+
+h4. Parameters
+
+* _toolId_ The identifier passed to "ToolBar#add_tool":toolbar.html#ToolBar_addtool.
+* _toggleDown_ true if the tool is a toggle and the toggle is down, otherwise is false.
+
+h4. Return value
+
+If the tool is a toggle and this function returns false, the toggle
+toggle state (internal and visual) will not be changed. This provides a way of
+specifying that toggle operations are not permitted in some circumstances.
+
+h4. See also
+
+"ToolBar#on_mouse_enter":toolbar.html#ToolBar_onmouseenter, "ToolBar#on_right_click":toolbar.html#ToolBar_onrightclick
+
+h3(#ToolBar_onmouseenter). ToolBar#on_mouse_enter
+
+  *on_mouse_enter*(%(arg-type)Integer% toolId)
+
+This is called when the mouse cursor moves into a tool or out of
+the toolbar.
+
+This is the old way of detecting mouse enter events; although it will still work,
+you should use the EVT_TOOL_ENTER macro instead.
+
+h4. Parameters
+
+* _toolId_ Greater than -1 if the mouse cursor has moved into the tool,
+or -1 if the mouse cursor has moved. The
+programmer can override this to provide extra information about the tool,
+such as a short description on the status line.
+
+h4. Remarks
+
+With some derived toolbar classes, if the mouse moves quickly out of the toolbar, Widgets may not be able to
+detect it. Therefore this function may not always be called when expected.
+
+h3(#ToolBar_onrightclick). ToolBar#on_right_click
+
+  *on_right_click*(%(arg-type)Integer% toolId,  %(arg-type)Float% x,  %(arg-type)Float% y)
+
+Called when the user clicks on a tool with the right mouse button. The
+programmer should override this function to detect right tool clicks.
+
+This is the old way of detecting tool right clicks; although it will still work,
+you should use the EVT_TOOL_RCLICKED macro instead.
+
+h4. Parameters
+
+* _toolId_ The identifier passed to "ToolBar#add_tool":toolbar.html#ToolBar_addtool.
+* _x_ The x position of the mouse cursor.
+* _y_ The y position of the mouse cursor.
+
+h4. Remarks
+
+A typical use of this member might be to pop up a menu.
+
+h4. See also
+
+"ToolBar#on_mouse_enter":toolbar.html#ToolBar_onmouseenter, "ToolBar#on_left_click":toolbar.html#ToolBar_onleftclick
+
+h3(#ToolBar_realize). ToolBar#realize
+
+ Boolean *realize*()
+
+This function should be called after you have added tools.
+
+h3(#ToolBar_removetool). ToolBar#remove_tool
+
+ "ToolBarTool":toolbartool.html *remove_tool*(%(arg-type)Integer% id)
+
+Removes the given tool from the toolbar but doesn't delete it. This allows to
+insert/add this tool back to this (or another) toolbar later.
+
+Note that it is unnecessary to call "Realize":toolbarrealize.html for the
+change to take place, it will happen immediately.
+
+h4. See also
+
+"delete_tool":#ToolBar_deletetool
+
+h3(#ToolBar_setbitmapresource). ToolBar#set_bitmap_resource
+
+  *set_bitmap_resource*(%(arg-type)Integer% resourceId)
+
+Sets the bitmap resource identifier for specifying tool bitmaps as indices
+into a custom bitmap. Windows CE only.
+
+h3(#ToolBar_setmargins). ToolBar#set_margins
+
+  *set_margins*(%(arg-type)"Size":size.html% size)
+
+  *set_margins*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Set the values to be used as margins for the toolbar.
+
+h4. Parameters
+
+* _size_ Margin size.
+* _x_ Left margin, right margin and inter-tool separation value.
+* _y_ Top margin, bottom margin and inter-tool separation value.
+
+h4. Remarks
+
+This must be called before the tools are added if absolute positioning is to be used, and the
+default (zero-size) margins are to be overridden.
+
+h4. See also
+
+"ToolBar#get_margins":toolbar.html#ToolBar_getmargins, "Size":size.html
+
+h3(#ToolBar_settoolbitmapsize). ToolBar#set_tool_bitmap_size
+
+  *set_tool_bitmap_size*(%(arg-type)"Size":size.html% size)
+
+Sets the default size of each tool bitmap. The default bitmap size is 16 by 15 pixels.
+
+h4. Parameters
+
+* _size_ The size of the bitmaps in the toolbar.
+
+h4. Remarks
+
+This should be called to tell the toolbar what the tool bitmap size is. Call
+it before you add tools.
+
+Note that this is the size of the bitmap you pass to "ToolBar#add_tool":toolbar.html#ToolBar_addtool,
+and not the eventual size of the tool button.
+
+h4. See also
+
+"ToolBar#get_tool_bitmap_size":toolbar.html#ToolBar_gettoolbitmapsize, "ToolBar#get_tool_size":toolbar.html#ToolBar_gettoolsize
+
+h3(#ToolBar_settoolclientdata). ToolBar#set_tool_client_data
+
+  *set_tool_client_data*(%(arg-type)Integer% id,  %(arg-type)Object% clientData)
+
+Sets the client data associated with the tool.
+
+h3(#ToolBar_settooldisabledbitmap). ToolBar#set_tool_disabled_bitmap
+
+  *set_tool_disabled_bitmap*(%(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap to be used by the tool with the given ID when the tool
+is in a disabled state. This can only be used on Button tools, not
+controls. NOTE: The native toolbar classes on the main platforms all
+synthesize the disabled bitmap from the normal bitmap, so this function
+will have no effect on those platforms.
+
+h3(#ToolBar_settoollonghelp). ToolBar#set_tool_long_help
+
+  *set_tool_long_help*(%(arg-type)Integer% toolId,  %(arg-type)String% helpString)
+
+Sets the long help for the given tool.
+
+h4. Parameters
+
+* _toolId_ The tool in question.
+* _helpString_ A string for the long help.
+
+h4. Remarks
+
+You might use the long help for displaying the tool purpose on the status line.
+
+h3(#ToolBar_settoolnormalbitmap). ToolBar#set_tool_normal_bitmap
+
+  *set_tool_normal_bitmap*(%(arg-type)Integer% id,  %(arg-type)"Bitmap":bitmap.html% bitmap)
+
+Sets the bitmap to be used by the tool with the given ID. This can only
+be used on Button tools, not controls.
+
+
+h4. See also
+
+"ToolBar#get_tool_long_help":toolbar.html#ToolBar_gettoollonghelp, "ToolBar#set_tool_short_help":toolbar.html#ToolBar_settoolshorthelp, 
+h3(#ToolBar_settoolpacking). ToolBar#set_tool_packing
+
+  *set_tool_packing*(%(arg-type)Integer% packing)
+
+Sets the value used for spacing tools. The default value is 1.
+
+h4. Parameters
+
+* _packing_ The value for packing.
+
+h4. Remarks
+
+The packing is used for spacing in the vertical direction if the toolbar is horizontal,
+and for spacing in the horizontal direction if the toolbar is vertical.
+
+h4. See also
+
+"ToolBar#get_tool_packing":toolbar.html#ToolBar_gettoolpacking
+
+h3(#ToolBar_settoolshorthelp). ToolBar#set_tool_short_help
+
+  *set_tool_short_help*(%(arg-type)Integer% toolId,  %(arg-type)String% helpString)
+
+Sets the short help for the given tool.
+
+h4. Parameters
+
+* _toolId_ The tool in question.
+* _helpString_ The string for the short help.
+
+h4. Remarks
+
+An application might use short help for identifying the tool purpose in a tooltip.
+
+h4. See also
+
+"ToolBar#get_tool_short_help":toolbar.html#ToolBar_gettoolshorthelp, "ToolBar#set_tool_long_help":toolbar.html#ToolBar_settoollonghelp
+
+h3(#ToolBar_settoolseparation). ToolBar#set_tool_separation
+
+  *set_tool_separation*(%(arg-type)Integer% separation)
+
+Sets the default separator size. The default value is 5.
+
+h4. Parameters
+
+* _separation_ The separator size.
+
+h4. See also
+
+"ToolBar#add_separator":toolbar.html#ToolBar_addseparator
+
+h3(#ToolBar_toggletool). ToolBar#toggle_tool
+
+  *toggle_tool*(%(arg-type)Integer% toolId,  %(arg-type)Boolean% toggle)
+
+Toggles a tool on or off. This does not cause any event to get emitted.
+
+h4. Parameters
+
+* _toolId_ Tool in question.
+* _toggle_ If true, toggles the tool on, otherwise toggles it off.
+
+h4. Remarks
+
+Only applies to a tool that has been specified as a toggle tool.
+
+h4. See also
+
+"ToolBar#get_tool_state":toolbar.html#ToolBar_gettoolstate
+
