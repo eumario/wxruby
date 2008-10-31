@@ -46,6 +46,7 @@ windows_libs = %W|wxbase#{$WXVERSION}#{$POSTFIX}
                   wxmsw#{$WXVERSION}#{$POSTFIX}_media
                   wxmsw#{$WXVERSION}#{$POSTFIX}_xrc
                   wxmsw#{$WXVERSION}#{$POSTFIX}_aui
+                  wxmsw#{$WXVERSION}#{$POSTFIX}_richtext
                   wxexpat#{$DEBUGPOSTFIX}
                   wxjpeg#{$DEBUGPOSTFIX}
                   wxpng#{$DEBUGPOSTFIX}
