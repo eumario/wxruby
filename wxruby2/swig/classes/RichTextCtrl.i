@@ -36,6 +36,10 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 %ignore wxRichTextCtrl::GetUncombinedStyle(long position, wxTextAttr& style);
 %ignore wxRichTextCtrl::GetUncombinedStyle(long position, wxTextAttrEx& style);
 
+
+// This is unsupported - class is not ported
+%ignore wxRichTextCtrl::WriteImage(const wxRichTextImageBlock& imageBlock);
+
 // Ignore the versions that use TextAttrEx as not used in wxRuby
 %ignore wxRichTextCtrl::SetBasicStyle(const wxTextAttrEx& style);
 
