@@ -1,0 +1,204 @@
+h1(#wxrichtextheaderfooterdata). Wx::RichTextHeaderFooterData
+
+
+This class represents header and footer data to be passed to the "RichTextPrinting":richtextprinting.html and
+"RichTextPrintout":richtextprintout.html classes.
+
+Headers and footers can be specified independently for odd, even or both page sides. Different text can be specified
+for left, centre and right locations on the page, and the font and text colour can also
+be specified. You can specify the following keywords in header and footer text, which will
+be substituted for the actual values during printing and preview.
+
+
+* @DATE@: the current date.
+* @PAGESCNT@: the total number of pages.
+* @PAGENUM@: the current page number.
+* @TIME@: the current time.
+* @TITLE@: the title of the document, as passed to the RichTextPrinting or RichTextLayout constructor.
+
+ 
+h2. Derived from
+
+"Object":object.html
+
+h2. Data structures
+
+These are the header and footer page identifiers, passed to functions such as SetFooterText to specify
+the odd or even page for the text:
+
+
+ enum RichTextOddEvenPage {
+     RICHTEXT_PAGE_ODD,
+     RICHTEXT_PAGE_EVEN,
+     RICHTEXT_PAGE_ALL,
+ }
+ 
+
+These are the location identifiers for passing to functions such as SetFooterText, to specify
+whether the text is on the left, centre or right of the page:
+
+
+ enum RichTextPageLocation {
+     RICHTEXT_PAGE_LEFT,
+     RICHTEXT_PAGE_CENTRE,
+     RICHTEXT_PAGE_RIGHT
+ }
+ 
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextHeaderFooterData.new":#RichTextHeaderFooterData_new
+* "RichTextHeaderFooterData#clear":#RichTextHeaderFooterData_clear
+* "RichTextHeaderFooterData#copy":#RichTextHeaderFooterData_copy
+* "RichTextHeaderFooterData#get_font":#RichTextHeaderFooterData_getfont
+* "RichTextHeaderFooterData#get_footer_margin":#RichTextHeaderFooterData_getfootermargin
+* "RichTextHeaderFooterData#get_footer_text":#RichTextHeaderFooterData_getfootertext
+* "RichTextHeaderFooterData#get_header_margin":#RichTextHeaderFooterData_getheadermargin
+* "RichTextHeaderFooterData#get_header_text":#RichTextHeaderFooterData_getheadertext
+* "RichTextHeaderFooterData#get_show_on_first_page":#RichTextHeaderFooterData_getshowonfirstpage
+* "RichTextHeaderFooterData#get_text":#RichTextHeaderFooterData_gettext
+* "RichTextHeaderFooterData#get_text_colour":#RichTextHeaderFooterData_gettextcolour
+* "RichTextHeaderFooterData#init":#RichTextHeaderFooterData_init
+* "RichTextHeaderFooterData#set_font":#RichTextHeaderFooterData_setfont
+* "RichTextHeaderFooterData#set_footer_text":#RichTextHeaderFooterData_setfootertext
+* "RichTextHeaderFooterData#set_header_text":#RichTextHeaderFooterData_setheadertext
+* "RichTextHeaderFooterData#set_margins":#RichTextHeaderFooterData_setmargins
+* "RichTextHeaderFooterData#set_show_on_first_page":#RichTextHeaderFooterData_setshowonfirstpage
+* "RichTextHeaderFooterData#set_text":#RichTextHeaderFooterData_settext
+* "RichTextHeaderFooterData#set_text_colour":#RichTextHeaderFooterData_settextcolour
+
+</div>
+
+
+h3(#RichTextHeaderFooterData_wxrichtextheaderfooterdata). RichTextHeaderFooterData.new
+
+  *RichTextHeaderFooterData.new*(%(arg-type)"RichTextHeaderFooterData":richtextheaderfooterdata.html% data)
+
+Constructors.
+
+h3(#RichTextHeaderFooterData_clear). RichTextHeaderFooterData#clear
+
+  *clear*()
+
+Clears all text.
+
+h3(#RichTextHeaderFooterData_copy). RichTextHeaderFooterData#copy
+
+  *copy*(%(arg-type)"RichTextHeaderFooterData":richtextheaderfooterdata.html% data)
+
+Copies the data.
+
+h3(#RichTextHeaderFooterData_getfont). RichTextHeaderFooterData#get_font
+
+ "Font":font.html *get_font*()
+
+Returns the font specified for printing the header and footer.
+
+h3(#RichTextHeaderFooterData_getfootermargin). RichTextHeaderFooterData#get_footer_margin
+
+ Integer *get_footer_margin*()
+
+Returns the margin between the text and the footer.
+
+h3(#RichTextHeaderFooterData_getfootertext). RichTextHeaderFooterData#get_footer_text
+
+ String *get_footer_text*(%(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_EVEN, 
+                        %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+Returns the footer text on odd or even pages, and at a given position on the page (left, centre or right).
+
+h3(#RichTextHeaderFooterData_getheadermargin). RichTextHeaderFooterData#get_header_margin
+
+ Integer *get_header_margin*()
+
+Returns the margin between the text and the header.
+
+h3(#RichTextHeaderFooterData_getheadertext). RichTextHeaderFooterData#get_header_text
+
+ String *get_header_text*(%(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_EVEN, 
+                        %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+Returns the header text on odd or even pages, and at a given position on the page (left, centre or right).
+
+h3(#RichTextHeaderFooterData_getshowonfirstpage). RichTextHeaderFooterData#get_show_on_first_page
+
+ Boolean *get_show_on_first_page*()
+
+Returns  if the header and footer will be shown on the first page.
+
+h3(#RichTextHeaderFooterData_gettext). RichTextHeaderFooterData#get_text
+
+ String *get_text*(%(arg-type)Integer% headerFooter, 
+                 %(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page, 
+                 %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location)
+
+Helper function for getting the header or footer text, odd or even pages, and at a given position on the page (left, centre or right).
+
+h3(#RichTextHeaderFooterData_gettextcolour). RichTextHeaderFooterData#get_text_colour
+
+ "Colour":colour.html *get_text_colour*()
+
+Returns the text colour for drawing the header and footer.
+
+h3(#RichTextHeaderFooterData_init). RichTextHeaderFooterData#init
+
+  *init*()
+
+Initialises the object.
+
+h3(#RichTextHeaderFooterData_setfont). RichTextHeaderFooterData#set_font
+
+  *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font for drawing the header and footer.
+
+h3(#RichTextHeaderFooterData_setfootertext). RichTextHeaderFooterData#set_footer_text
+
+  *set_footer_text*(%(arg-type)String% text, 
+                  %(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_ALL, 
+                  %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+Sets the footer text on odd or even pages, and at a given position on the page (left, centre or right).
+
+h3(#RichTextHeaderFooterData_setheadertext). RichTextHeaderFooterData#set_header_text
+
+  *set_header_text*(%(arg-type)String% text, 
+                  %(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_ALL, 
+                  %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+Sets the header text on odd or even pages, and at a given position on the page (left, centre or right).
+
+h3(#RichTextHeaderFooterData_setmargins). RichTextHeaderFooterData#set_margins
+
+  *set_margins*(%(arg-type)Integer% headerMargin,  %(arg-type)Integer% footerMargin)
+
+Sets the margins between text and header or footer, in tenths of a millimeter.
+
+h3(#RichTextHeaderFooterData_setshowonfirstpage). RichTextHeaderFooterData#set_show_on_first_page
+
+  *set_show_on_first_page*(%(arg-type)Boolean% showOnFirstPage)
+
+Pass  to show the header or footer on first page (the default).
+
+h3(#RichTextHeaderFooterData_settext). RichTextHeaderFooterData#set_text
+
+  *set_text*(%(arg-type)String% text,  %(arg-type)Integer% headerFooter, 
+           %(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page, 
+           %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location)
+
+Helper function for setting the header or footer text, odd or even pages, and at a given position on the page (left, centre or right).
+
+h3(#RichTextHeaderFooterData_settextcolour). RichTextHeaderFooterData#set_text_colour
+
+  *set_text_colour*(%(arg-type)"Colour":colour.html% col)
+
+Sets the text colour for drawing the header and footer.
+
+h3(#RichTextHeaderFooterData_operatorassign). RichTextHeaderFooterData::operator=
+
+ void operator *operator=*(%(arg-type)"RichTextHeaderFooterData":richtextheaderfooterdata.html% data)
+
+Assignment operator.
+

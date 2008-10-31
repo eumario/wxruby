@@ -1,0 +1,117 @@
+h1(#wxrichtextstylelistctrl). Wx::RichTextStyleListCtrl
+
+This class incorporates a "RichTextStyleListBox":richtextstylelistbox.html and
+a choice control that allows the user to select the category of style to view.
+It is demonstrated in the RichTextCtrl sample in @samples/richtext@.
+
+To use RichTextStyleListCtrl, add the control to your window hierarchy and
+call "set_style_type":#RichTextStyleListCtrl_setstyletype with
+one of RichTextStyleListBox::RICHTEXT_STYLE_ALL, RichTextStyleListBox::RICHTEXT_STYLE_PARAGRAPH,
+RichTextStyleListBox::RICHTEXT_STYLE_CHARACTER and RichTextStyleListBox::RICHTEXT_STYLE_LIST to set the current view.
+Associate the control with a style sheet and rich text control with SetStyleSheet and SetRichTextCtrl,
+so that when a style is double-clicked, it is applied to the selection.
+
+h2. Window styles
+
+
+
+|@RICHTEXTSTYLELIST_HIDE_TYPE_SELECTOR@|This style hides the category selection control.|
+
+
+h2. Derived from
+
+"Control":control.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextStyleListCtrl.new":#RichTextStyleListCtrl_new
+* "RichTextStyleListCtrl#create":#RichTextStyleListCtrl_create
+* "RichTextStyleListCtrl#get_rich_text_ctrl":#RichTextStyleListCtrl_getrichtextctrl
+* "RichTextStyleListCtrl#get_style_choice":#RichTextStyleListCtrl_getstylechoice
+* "RichTextStyleListCtrl#get_style_list_box":#RichTextStyleListCtrl_getstylelistbox
+* "RichTextStyleListCtrl#get_style_sheet":#RichTextStyleListCtrl_getstylesheet
+* "RichTextStyleListCtrl#get_style_type":#RichTextStyleListCtrl_getstyletype
+* "RichTextStyleListCtrl#set_rich_text_ctrl":#RichTextStyleListCtrl_setrichtextctrl
+* "RichTextStyleListCtrl#set_style_sheet":#RichTextStyleListCtrl_setstylesheet
+* "RichTextStyleListCtrl#set_style_type":#RichTextStyleListCtrl_setstyletype
+* "RichTextStyleListCtrl#update_styles":#RichTextStyleListCtrl_updatestyles
+
+</div>
+
+
+h3(#RichTextStyleListCtrl_wxrichtextstylelistctrl). RichTextStyleListCtrl.new
+
+  *RichTextStyleListCtrl.new*(%(arg-type)"Window":window.html% parent, 
+                            %(arg-type)Integer% id = ID_ANY, 
+                            %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                            %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                            %(arg-type)Integer% style = 0)
+
+h3(#RichTextStyleListCtrl_create). RichTextStyleListCtrl#create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = 0)
+
+Creates the windows.
+
+h3(#RichTextStyleListCtrl_getrichtextctrl). RichTextStyleListCtrl#get_rich_text_ctrl
+
+ "RichTextCtrl":richtextctrl.html *get_rich_text_ctrl*()
+
+Returns the associated rich text control, if any.
+
+h3(#RichTextStyleListCtrl_getstylechoice). RichTextStyleListCtrl#get_style_choice
+
+ "Choice":choice.html *get_style_choice*()
+
+Returns the Choice control used for selecting the style category.
+
+h3(#RichTextStyleListCtrl_getstylelistbox). RichTextStyleListCtrl#get_style_list_box
+
+ "RichTextStyleListBox":richtextstylelistbox.html *get_style_list_box*()
+
+Returns the ListBox control used to view the style list.
+
+h3(#RichTextStyleListCtrl_getstylesheet). RichTextStyleListCtrl#get_style_sheet
+
+ "RichTextStyleSheet":richtextstylesheet.html *get_style_sheet*()
+
+Returns the associated style sheet, if any.
+
+h3(#RichTextStyleListCtrl_getstyletype). RichTextStyleListCtrl#get_style_type
+
+ "RichTextStyleListBox::RichTextStyleType":richtextstylelistbox::wxrichtextstyletype.html *get_style_type*()
+
+Returns the type of style to show in the list box.
+
+h3(#RichTextStyleListCtrl_setrichtextctrl). RichTextStyleListCtrl#set_rich_text_ctrl
+
+  *set_rich_text_ctrl*(%(arg-type)"RichTextCtrl":richtextctrl.html% ctrl)
+
+Associates the control with a RichTextCtrl.
+
+h3(#RichTextStyleListCtrl_setstylesheet). RichTextStyleListCtrl#set_style_sheet
+
+  *set_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% styleSheet)
+
+Associates the control with a style sheet.
+
+h3(#RichTextStyleListCtrl_setstyletype). RichTextStyleListCtrl#set_style_type
+
+  *set_style_type*(%(arg-type)"RichTextStyleListBox::RichTextStyleType":richtextstylelistbox::wxrichtextstyletype.html% styleType)
+
+Sets the style type to display. One of RichTextStyleListBox::RICHTEXT_STYLE_ALL, RichTextStyleListBox::RICHTEXT_STYLE_PARAGRAPH,
+RichTextStyleListBox::RICHTEXT_STYLE_CHARACTER and RichTextStyleListBox::RICHTEXT_STYLE_LIST.
+
+h3(#RichTextStyleListCtrl_updatestyles). RichTextStyleListCtrl#update_styles
+
+  *update_styles*()
+
+Updates the style list box. 
+

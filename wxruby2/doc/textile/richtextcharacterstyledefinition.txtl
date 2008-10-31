@@ -1,0 +1,29 @@
+h1(#wxrichtextcharacterstyledefinition). Wx::RichTextCharacterStyleDefinition
+
+This class represents a character style definition, usually added to a "RichTextStyleSheet":richtextstylesheet.html.
+
+h2. Derived from
+
+"RichTextStyleDefinition":richtextstyledefinition.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextCharacterStyleDefinition.new":#RichTextCharacterStyleDefinition_new
+
+</div>
+
+
+h3(#RichTextCharacterStyleDefinition_wxrichtextcharacterstyledefinition). RichTextCharacterStyleDefinition.new
+
+  *RichTextCharacterStyleDefinition.new*(%(arg-type)String% name = '')
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+

@@ -1,0 +1,179 @@
+h1(#wxrichtextfilehandler). Wx::RichTextFileHandler
+
+This is the base class for file handlers, for loading and/or saving content
+associated with a "RichTextBuffer":richtextbuffer.html.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextFileHandler.new":#RichTextFileHandler_new
+* "RichTextFileHandler#can_handle":#RichTextFileHandler_canhandle
+* "RichTextFileHandler#can_load":#RichTextFileHandler_canload
+* "RichTextFileHandler#can_save":#RichTextFileHandler_cansave
+* "RichTextFileHandler#do_load_file":#RichTextFileHandler_doloadfile
+* "RichTextFileHandler#do_save_file":#RichTextFileHandler_dosavefile
+* "RichTextFileHandler#get_encoding":#RichTextFileHandler_getencoding
+* "RichTextFileHandler#get_extension":#RichTextFileHandler_getextension
+* "RichTextFileHandler#get_flags":#RichTextFileHandler_getflags
+* "RichTextFileHandler#get_name":#RichTextFileHandler_getname
+* "RichTextFileHandler#get_type":#RichTextFileHandler_gettype
+* "RichTextFileHandler#is_visible":#RichTextFileHandler_isvisible
+* "RichTextFileHandler#load_file":#RichTextFileHandler_loadfile
+* "RichTextFileHandler#save_file":#RichTextFileHandler_savefile
+* "RichTextFileHandler#set_encoding":#RichTextFileHandler_setencoding
+* "RichTextFileHandler#set_extension":#RichTextFileHandler_setextension
+* "RichTextFileHandler#set_flags":#RichTextFileHandler_setflags
+* "RichTextFileHandler#set_name":#RichTextFileHandler_setname
+* "RichTextFileHandler#set_type":#RichTextFileHandler_settype
+* "RichTextFileHandler#set_visible":#RichTextFileHandler_setvisible
+
+</div>
+
+
+h3(#RichTextFileHandler_wxrichtextfilehandler). RichTextFileHandler.new
+
+  *RichTextFileHandler.new*(%(arg-type)String% name = '',  %(arg-type)String% ext = '', 
+                          %(arg-type)Integer% type = 0)
+
+Constructor.
+
+h3(#RichTextFileHandler_canhandle). RichTextFileHandler#can_handle
+
+ Boolean *can_handle*(%(arg-type)String% filename)
+
+Override this function and return  if this handler can we handle _filename_. By default,
+this function checks the extension.
+
+h3(#RichTextFileHandler_canload). RichTextFileHandler#can_load
+
+ Boolean *can_load*()
+
+Override and return  if this handler can load content.
+
+h3(#RichTextFileHandler_cansave). RichTextFileHandler#can_save
+
+ Boolean *can_save*()
+
+Override and return  if this handler can save content.
+
+h3(#RichTextFileHandler_doloadfile). RichTextFileHandler#do_load_file
+
+ Boolean *do_load_file*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer, 
+                      %(arg-type)"InputStream":inputstream.html% stream)
+
+Override to load content from _stream_ into _buffer_.
+
+h3(#RichTextFileHandler_dosavefile). RichTextFileHandler#do_save_file
+
+ Boolean *do_save_file*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer, 
+                      %(arg-type)"OutputStream":outputstream.html% stream)
+
+Override to save content to _stream_ from _buffer_.
+
+h3(#RichTextFileHandler_getencoding). RichTextFileHandler#get_encoding
+
+ String *get_encoding*()
+
+Returns the encoding associated with the handler (if any).
+
+h3(#RichTextFileHandler_getextension). RichTextFileHandler#get_extension
+
+ String *get_extension*()
+
+Returns the extension associated with the handler.
+
+h3(#RichTextFileHandler_getflags). RichTextFileHandler#get_flags
+
+ Integer *get_flags*()
+
+Returns flags that change the behaviour of loading or saving. See the documentation for each
+handler class to see what flags are relevant for each handler.
+
+h3(#RichTextFileHandler_getname). RichTextFileHandler#get_name
+
+ String *get_name*()
+
+Returns the name of the handler.
+
+h3(#RichTextFileHandler_gettype). RichTextFileHandler#get_type
+
+ Integer *get_type*()
+
+Returns the type of the handler.
+
+h3(#RichTextFileHandler_isvisible). RichTextFileHandler#is_visible
+
+ Boolean *is_visible*()
+
+Returns  if this handler should be visible to the user.
+
+h3(#RichTextFileHandler_loadfile). RichTextFileHandler#load_file
+
+ Boolean *load_file*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer, 
+                   %(arg-type)"InputStream":inputstream.html% stream)
+
+ Boolean *load_file*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer, 
+                   %(arg-type)String% filename)
+
+Loads content from a stream or file. Not all handlers will implement file loading.
+
+h3(#RichTextFileHandler_savefile). RichTextFileHandler#save_file
+
+ Boolean *save_file*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer, 
+                   %(arg-type)"OutputStream":outputstream.html% stream)
+
+ Boolean *save_file*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer, 
+                   %(arg-type)String% filename)
+
+Saves content to a stream or file. Not all handlers will implement file saving.
+
+h3(#RichTextFileHandler_setencoding). RichTextFileHandler#set_encoding
+
+  *set_encoding*(%(arg-type)String% encoding)
+
+Sets the encoding to use when saving a file. If empty, a suitable encoding is chosen.
+
+h3(#RichTextFileHandler_setextension). RichTextFileHandler#set_extension
+
+  *set_extension*(%(arg-type)String% ext)
+
+Sets the default extension to recognise.
+
+h3(#RichTextFileHandler_setflags). RichTextFileHandler#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Sets flags that change the behaviour of loading or saving. See the documentation for each
+handler class to see what flags are relevant for each handler.
+
+You call this function directly if you are using a file handler explicitly (without
+going through the text control or buffer LoadFile/SaveFile API). Or, you can
+call the control or buffer's SetHandlerFlags function to set the flags that will
+be used for subsequent load and save operations.
+
+h3(#RichTextFileHandler_setname). RichTextFileHandler#set_name
+
+  *set_name*(%(arg-type)String% name)
+
+Sets the name of the handler.
+
+h3(#RichTextFileHandler_settype). RichTextFileHandler#set_type
+
+  *set_type*(%(arg-type)Integer% type)
+
+Sets the handler type.
+
+h3(#RichTextFileHandler_setvisible). RichTextFileHandler#set_visible
+
+  *set_visible*(%(arg-type)Boolean% visible)
+
+Sets whether the handler should be visible to the user (via the application's load and save
+dialogs).
+

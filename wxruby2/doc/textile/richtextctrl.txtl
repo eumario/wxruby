@@ -1,0 +1,1697 @@
+h1(#wxrichtextctrl). Wx::RichTextCtrl
+
+RichTextCtrl provides a generic, ground-up implementation of a text control
+capable of showing multiple styles and images. It inherits from
+"TextCtrl":textctrl.html and so supports all methods and event handlers
+available in that class.
+
+RichTextCtrl also sends notification events specific to the rich text
+class: see "RichTextEvent":richtextevent.html.  It also sends the
+standard TextCtrl events EVT_COMMAND_TEXT_ENTER and
+EVT_COMMAND_TEXT_UPDATED, and "TextUrlEvent":texturlevent.html when URL
+content is clicked.
+
+h2. Derived from
+
+"TextCtrl":textctrl.html
+
+"Control":control.html
+
+"Window":window.html
+
+"EvtHandler":evthandler.html
+
+"Object":object.html
+
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextCtrl.new":#RichTextCtrl_new
+* "RichTextCtrl#add_image":#RichTextCtrl_addimage
+* "RichTextCtrl#add_paragraph":#RichTextCtrl_addparagraph
+* "RichTextCtrl#append_text":#RichTextCtrl_appendtext
+* "RichTextCtrl#apply_alignment_to_selection":#RichTextCtrl_applyalignmenttoselection
+* "RichTextCtrl#apply_bold_to_selection":#RichTextCtrl_applyboldtoselection
+* "RichTextCtrl#apply_italic_to_selection":#RichTextCtrl_applyitalictoselection
+* "RichTextCtrl#apply_style":#RichTextCtrl_applystyle
+* "RichTextCtrl#apply_style_sheet":#RichTextCtrl_applystylesheet
+* "RichTextCtrl#apply_underline_to_selection":#RichTextCtrl_applyunderlinetoselection
+* "RichTextCtrl#batching_undo":#RichTextCtrl_batchingundo
+* "RichTextCtrl#begin_alignment":#RichTextCtrl_beginalignment
+* "RichTextCtrl#begin_batch_undo":#RichTextCtrl_beginbatchundo
+* "RichTextCtrl#begin_bold":#RichTextCtrl_beginbold
+* "RichTextCtrl#begin_character_style":#RichTextCtrl_begincharacterstyle
+* "RichTextCtrl#begin_font":#RichTextCtrl_beginfont
+* "RichTextCtrl#begin_font_size":#RichTextCtrl_beginfontsize
+* "RichTextCtrl#begin_italic":#RichTextCtrl_beginitalic
+* "RichTextCtrl#begin_left_indent":#RichTextCtrl_beginleftindent
+* "RichTextCtrl#begin_line_spacing":#RichTextCtrl_beginlinespacing
+* "RichTextCtrl#begin_list_style":#RichTextCtrl_beginliststyle
+* "RichTextCtrl#begin_numbered_bullet":#RichTextCtrl_beginnumberedbullet
+* "RichTextCtrl#begin_paragraph_spacing":#RichTextCtrl_beginparagraphspacing
+* "RichTextCtrl#begin_paragraph_style":#RichTextCtrl_beginparagraphstyle
+* "RichTextCtrl#begin_right_indent":#RichTextCtrl_beginrightindent
+* "RichTextCtrl#begin_style":#RichTextCtrl_beginstyle
+* "RichTextCtrl#begin_suppress_undo":#RichTextCtrl_beginsuppressundo
+* "RichTextCtrl#begin_symbol_bullet":#RichTextCtrl_beginsymbolbullet
+* "RichTextCtrl#begin_text_colour":#RichTextCtrl_begintextcolour
+* "RichTextCtrl#begin_underline":#RichTextCtrl_beginunderline
+* "RichTextCtrl#begin_url":#RichTextCtrl_beginurl
+* "RichTextCtrl#can_copy":#RichTextCtrl_cancopy
+* "RichTextCtrl#can_cut":#RichTextCtrl_cancut
+* "RichTextCtrl#can_delete_selection":#RichTextCtrl_candeleteselection
+* "RichTextCtrl#can_paste":#RichTextCtrl_canpaste
+* "RichTextCtrl#can_redo":#RichTextCtrl_canredo
+* "RichTextCtrl#can_undo":#RichTextCtrl_canundo
+* "RichTextCtrl#clear":#RichTextCtrl_clear
+* "RichTextCtrl#clear_list_style":#RichTextCtrl_clearliststyle
+* "RichTextCtrl#command":#RichTextCtrl_command
+* "RichTextCtrl#copy":#RichTextCtrl_copy
+* "RichTextCtrl#create":#RichTextCtrl_create
+* "RichTextCtrl#cut":#RichTextCtrl_cut
+* "RichTextCtrl#delete":#RichTextCtrl_delete
+* "RichTextCtrl#delete_selected_content":#RichTextCtrl_deleteselectedcontent
+* "RichTextCtrl#delete_selection":#RichTextCtrl_deleteselection
+* "RichTextCtrl#discard_edits":#RichTextCtrl_discardedits
+* "RichTextCtrl#do_get_best_size":#RichTextCtrl_dogetbestsize
+* "RichTextCtrl#end_alignment":#RichTextCtrl_endalignment
+* "RichTextCtrl#end_all_styles":#RichTextCtrl_endallstyles
+* "RichTextCtrl#end_batch_undo":#RichTextCtrl_endbatchundo
+* "RichTextCtrl#end_bold":#RichTextCtrl_endbold
+* "RichTextCtrl#end_character_style":#RichTextCtrl_endcharacterstyle
+* "RichTextCtrl#end_font":#RichTextCtrl_endfont
+* "RichTextCtrl#end_font_size":#RichTextCtrl_endfontsize
+* "RichTextCtrl#end_italic":#RichTextCtrl_enditalic
+* "RichTextCtrl#end_left_indent":#RichTextCtrl_endleftindent
+* "RichTextCtrl#end_line_spacing":#RichTextCtrl_endlinespacing
+* "RichTextCtrl#end_list_style":#RichTextCtrl_endliststyle
+* "RichTextCtrl#end_numbered_bullet":#RichTextCtrl_endnumberedbullet
+* "RichTextCtrl#end_paragraph_spacing":#RichTextCtrl_endparagraphspacing
+* "RichTextCtrl#end_paragraph_style":#RichTextCtrl_endparagraphstyle
+* "RichTextCtrl#end_right_indent":#RichTextCtrl_endrightindent
+* "RichTextCtrl#end_style":#RichTextCtrl_endstyle
+* "RichTextCtrl#end_suppress_undo":#RichTextCtrl_endsuppressundo
+* "RichTextCtrl#end_symbol_bullet":#RichTextCtrl_endsymbolbullet
+* "RichTextCtrl#end_text_colour":#RichTextCtrl_endtextcolour
+* "RichTextCtrl#end_underline":#RichTextCtrl_endunderline
+* "RichTextCtrl#end_url":#RichTextCtrl_endurl
+* "RichTextCtrl#extend_selection":#RichTextCtrl_extendselection
+* "RichTextCtrl#find_next_word_position":#RichTextCtrl_findnextwordposition
+* "RichTextCtrl#freeze":#RichTextCtrl_freeze
+* "RichTextCtrl#get_basic_style":#RichTextCtrl_getbasicstyle
+* "RichTextCtrl#get_buffer":#RichTextCtrl_getbuffer
+* "RichTextCtrl#get_caret_position":#RichTextCtrl_getcaretposition
+* "RichTextCtrl#get_caret_position_for_index":#RichTextCtrl_getcaretpositionforindex
+* "RichTextCtrl#get_command_processor":#RichTextCtrl_getcommandprocessor
+* "RichTextCtrl#get_default_style_ex":#RichTextCtrl_getdefaultstyleex
+* "RichTextCtrl#get_delayed_layout_threshold":#RichTextCtrl_getdelayedlayoutthreshold
+* "RichTextCtrl#get_filename":#RichTextCtrl_getfilename
+* "RichTextCtrl#get_first_visible_position":#RichTextCtrl_getfirstvisibleposition
+* "RichTextCtrl#get_handler_flags":#RichTextCtrl_gethandlerflags
+* "RichTextCtrl#get_insertion_point":#RichTextCtrl_getinsertionpoint
+* "RichTextCtrl#get_last_position":#RichTextCtrl_getlastposition
+* "RichTextCtrl#get_line_length":#RichTextCtrl_getlinelength
+* "RichTextCtrl#get_line_text":#RichTextCtrl_getlinetext
+* "RichTextCtrl#get_logical_point":#RichTextCtrl_getlogicalpoint
+* "RichTextCtrl#get_number_of_lines":#RichTextCtrl_getnumberoflines
+* "RichTextCtrl#get_physical_point":#RichTextCtrl_getphysicalpoint
+* "RichTextCtrl#get_range":#RichTextCtrl_getrange
+* "RichTextCtrl#get_selection":#RichTextCtrl_getselection
+* "RichTextCtrl#get_selection_range":#RichTextCtrl_getselectionrange
+* "RichTextCtrl#get_string_selection":#RichTextCtrl_getstringselection
+* "RichTextCtrl#get_style":#RichTextCtrl_getstyle
+* "RichTextCtrl#get_style_for_range":#RichTextCtrl_getstyleforrange
+* "RichTextCtrl#get_style_sheet":#RichTextCtrl_getstylesheet
+* "RichTextCtrl#get_uncombined_style":#RichTextCtrl_getuncombinedstyle
+* "RichTextCtrl#get_value":#RichTextCtrl_getvalue
+* "RichTextCtrl#get_visible_line_for_caret_position":#RichTextCtrl_getvisiblelineforcaretposition
+* "RichTextCtrl#has_character_attributes":#RichTextCtrl_hascharacterattributes
+* "RichTextCtrl#has_paragraph_attributes":#RichTextCtrl_hasparagraphattributes
+* "RichTextCtrl#has_selection":#RichTextCtrl_hasselection
+* "RichTextCtrl#hit_test":#RichTextCtrl_hittest
+* "RichTextCtrl#init":#RichTextCtrl_init
+* "RichTextCtrl#init_command_event":#RichTextCtrl_initcommandevent
+* "RichTextCtrl#is_default_style_showing":#RichTextCtrl_isdefaultstyleshowing
+* "RichTextCtrl#is_editable":#RichTextCtrl_iseditable
+* "RichTextCtrl#is_frozen":#RichTextCtrl_isfrozen
+* "RichTextCtrl#is_modified":#RichTextCtrl_ismodified
+* "RichTextCtrl#is_multi_line":#RichTextCtrl_ismultiline
+* "RichTextCtrl#is_position_visible":#RichTextCtrl_ispositionvisible
+* "RichTextCtrl#is_selection_aligned":#RichTextCtrl_isselectionaligned
+* "RichTextCtrl#is_selection_bold":#RichTextCtrl_isselectionbold
+* "RichTextCtrl#is_selection_italics":#RichTextCtrl_isselectionitalics
+* "RichTextCtrl#is_selection_underlined":#RichTextCtrl_isselectionunderlined
+* "RichTextCtrl#is_single_line":#RichTextCtrl_issingleline
+* "RichTextCtrl#keyboard_navigate":#RichTextCtrl_keyboardnavigate
+* "RichTextCtrl#layout_content":#RichTextCtrl_layoutcontent
+* "RichTextCtrl#line_break":#RichTextCtrl_linebreak
+* "RichTextCtrl#load_file":#RichTextCtrl_loadfile
+* "RichTextCtrl#mark_dirty":#RichTextCtrl_markdirty
+* "RichTextCtrl#move_caret":#RichTextCtrl_movecaret
+* "RichTextCtrl#move_caret_back":#RichTextCtrl_movecaretback
+* "RichTextCtrl#move_caret_forward":#RichTextCtrl_movecaretforward
+* "RichTextCtrl#move_down":#RichTextCtrl_movedown
+* "RichTextCtrl#move_end":#RichTextCtrl_moveend
+* "RichTextCtrl#move_home":#RichTextCtrl_movehome
+* "RichTextCtrl#move_left":#RichTextCtrl_moveleft
+* "RichTextCtrl#move_right":#RichTextCtrl_moveright
+* "RichTextCtrl#move_to_line_end":#RichTextCtrl_movetolineend
+* "RichTextCtrl#move_to_line_start":#RichTextCtrl_movetolinestart
+* "RichTextCtrl#move_to_paragraph_end":#RichTextCtrl_movetoparagraphend
+* "RichTextCtrl#move_to_paragraph_start":#RichTextCtrl_movetoparagraphstart
+* "RichTextCtrl#move_up":#RichTextCtrl_moveup
+* "RichTextCtrl#newline":#RichTextCtrl_newline
+* "RichTextCtrl#number_list":#RichTextCtrl_numberlist
+* "RichTextCtrl#on_clear":#RichTextCtrl_onclear
+* "RichTextCtrl#on_context_menu":#RichTextCtrl_oncontextmenu
+* "RichTextCtrl#on_copy":#RichTextCtrl_oncopy
+* "RichTextCtrl#on_cut":#RichTextCtrl_oncut
+* "RichTextCtrl#on_drop_files":#RichTextCtrl_ondropfiles
+* "RichTextCtrl#on_paste":#RichTextCtrl_onpaste
+* "RichTextCtrl#on_redo":#RichTextCtrl_onredo
+* "RichTextCtrl#on_select_all":#RichTextCtrl_onselectall
+* "RichTextCtrl#on_undo":#RichTextCtrl_onundo
+* "RichTextCtrl#on_update_clear":#RichTextCtrl_onupdateclear
+* "RichTextCtrl#on_update_copy":#RichTextCtrl_onupdatecopy
+* "RichTextCtrl#on_update_cut":#RichTextCtrl_onupdatecut
+* "RichTextCtrl#on_update_paste":#RichTextCtrl_onupdatepaste
+* "RichTextCtrl#on_update_redo":#RichTextCtrl_onupdateredo
+* "RichTextCtrl#on_update_select_all":#RichTextCtrl_onupdateselectall
+* "RichTextCtrl#on_update_undo":#RichTextCtrl_onupdateundo
+* "RichTextCtrl#page_down":#RichTextCtrl_pagedown
+* "RichTextCtrl#page_up":#RichTextCtrl_pageup
+* "RichTextCtrl#paint_background":#RichTextCtrl_paintbackground
+* "RichTextCtrl#paste":#RichTextCtrl_paste
+* "RichTextCtrl#position_caret":#RichTextCtrl_positioncaret
+* "RichTextCtrl#position_to_xy":#RichTextCtrl_positiontoxy
+* "RichTextCtrl#promote_list":#RichTextCtrl_promotelist
+* "RichTextCtrl#redo":#RichTextCtrl_redo
+* "RichTextCtrl#remove":#RichTextCtrl_remove
+* "RichTextCtrl#replace":#RichTextCtrl_replace
+* "RichTextCtrl#save_file":#RichTextCtrl_savefile
+* "RichTextCtrl#scroll_into_view":#RichTextCtrl_scrollintoview
+* "RichTextCtrl#select_all":#RichTextCtrl_selectall
+* "RichTextCtrl#select_none":#RichTextCtrl_selectnone
+* "RichTextCtrl#set_and_show_default_style":#RichTextCtrl_setandshowdefaultstyle
+* "RichTextCtrl#set_basic_style":#RichTextCtrl_setbasicstyle
+* "RichTextCtrl#set_caret_position":#RichTextCtrl_setcaretposition
+* "RichTextCtrl#set_default_style":#RichTextCtrl_setdefaultstyle
+* "RichTextCtrl#set_default_style_to_cursor_style":#RichTextCtrl_setdefaultstyletocursorstyle
+* "RichTextCtrl#set_delayed_layout_threshold":#RichTextCtrl_setdelayedlayoutthreshold
+* "RichTextCtrl#set_editable":#RichTextCtrl_seteditable
+* "RichTextCtrl#set_filename":#RichTextCtrl_setfilename
+* "RichTextCtrl#set_font":#RichTextCtrl_setfont
+* "RichTextCtrl#set_handler_flags":#RichTextCtrl_sethandlerflags
+* "RichTextCtrl#set_insertion_point":#RichTextCtrl_setinsertionpoint
+* "RichTextCtrl#set_insertion_point_end":#RichTextCtrl_setinsertionpointend
+* "RichTextCtrl#set_list_style":#RichTextCtrl_setliststyle
+* "RichTextCtrl#set_selection":#RichTextCtrl_setselection
+* "RichTextCtrl#set_selection_range":#RichTextCtrl_setselectionrange
+* "RichTextCtrl#set_style":#RichTextCtrl_setstyle
+* "RichTextCtrl#set_style_ex":#RichTextCtrl_setstyleex
+* "RichTextCtrl#set_style_sheet":#RichTextCtrl_setstylesheet
+* "RichTextCtrl#set_value":#RichTextCtrl_setvalue
+* "RichTextCtrl#setup_scrollbars":#RichTextCtrl_setupscrollbars
+* "RichTextCtrl#show_position":#RichTextCtrl_showposition
+* "RichTextCtrl#suppressing_undo":#RichTextCtrl_suppressingundo
+* "RichTextCtrl#thaw":#RichTextCtrl_thaw
+* "RichTextCtrl#undo":#RichTextCtrl_undo
+* "RichTextCtrl#word_left":#RichTextCtrl_wordleft
+* "RichTextCtrl#word_right":#RichTextCtrl_wordright
+* "RichTextCtrl#write_image":#RichTextCtrl_writeimage
+* "RichTextCtrl#write_text":#RichTextCtrl_writetext
+* "RichTextCtrl#xy_to_position":#RichTextCtrl_xytoposition
+
+</div>
+
+
+h3(#RichTextCtrl_wxrichtextctrl). RichTextCtrl.new
+
+  *RichTextCtrl.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                   %(arg-type)String% value = '', 
+                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                   %(arg-type)Integer% style = RE_MULTILINE, 
+                   %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                   %(arg-type)String% name = TextCtrlNameStr)
+
+Constructors.
+
+
+h3(#RichTextCtrl_addimage). add_image
+
+ Range *add_image*(%(arg-type)"Image":image.html% image)
+
+Adds an image to the control's buffer.
+
+h3(#RichTextCtrl_addparagraph). add_paragraph
+
+ Range *add_paragraph*(%(arg-type)String% text)
+
+Adds a new paragraph of text to the end of the buffer.
+
+h3(#RichTextCtrl_appendtext). append_text
+
+  *append_text*(%(arg-type)String% text)
+
+Sets the insertion point to the end of the buffer and writes the text.
+
+h3(#RichTextCtrl_applyalignmenttoselection). apply_alignment_to_selection
+
+ Boolean *apply_alignment_to_selection*(%(arg-type)"TextAttrAlignment":textattralignment.html% alignment)
+
+Applies the given alignment to the selection (undoable).
+
+For alignment values, see "TextAttrEx":textattrex.html.
+
+h3(#RichTextCtrl_applyboldtoselection). apply_bold_to_selection
+
+ Boolean *apply_bold_to_selection*()
+
+Apples bold to the selection (undoable).
+
+h3(#RichTextCtrl_applyitalictoselection). apply_italic_to_selection
+
+ Boolean *apply_italic_to_selection*()
+
+Applies italic to the selection (undoable).
+
+h3(#RichTextCtrl_applystyle). apply_style
+
+ Boolean *apply_style*(%(arg-type)"RichTextStyleDefinition":richtextstyledefinition.html% def)
+
+Applies the given style to the selection.
+
+h3(#RichTextCtrl_applystylesheet). apply_style_sheet
+
+ Boolean *apply_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% sheet $=$ NULL)
+
+Applies the style sheet to the buffer, matching paragraph styles in the sheet against named styles
+in the buffer. This might be useful if the styles have changed. If _sheet_ is NULL, the
+sheet set with SetStyleSheet is used.
+
+Currently this applies paragraph styles only.
+
+h3(#RichTextCtrl_applyunderlinetoselection). apply_underline_to_selection
+
+ Boolean *apply_underline_to_selection*()
+
+Applies underline to the selection (undoable).
+
+h3(#RichTextCtrl_batchingundo). batching_undo
+
+ Boolean *batching_undo*()
+
+Returns  if undo commands are being batched.
+
+h3(#RichTextCtrl_beginalignment). begin_alignment
+
+ Boolean *begin_alignment*(%(arg-type)"TextAttrAlignment":textattralignment.html% alignment)
+
+Begins using alignment
+
+For alignment values, see "TextAttrEx":textattrex.html.
+
+h3(#RichTextCtrl_beginbatchundo). begin_batch_undo
+
+ Boolean *begin_batch_undo*(%(arg-type)String% cmdName)
+
+Starts batching undo history for commands.
+
+h3(#RichTextCtrl_beginbold). begin_bold
+
+ Boolean *begin_bold*()
+
+Begins using bold.
+
+h3(#RichTextCtrl_begincharacterstyle). begin_character_style
+
+ Boolean *begin_character_style*(%(arg-type)String% characterStyle)
+
+Begins using the named character style.
+
+h3(#RichTextCtrl_beginfont). begin_font
+
+ Boolean *begin_font*(%(arg-type)"Font":font.html% font)
+
+Begins using this font.
+
+h3(#RichTextCtrl_beginfontsize). begin_font_size
+
+ Boolean *begin_font_size*(%(arg-type)Integer% pointSize)
+
+Begins using the given point size.
+
+h3(#RichTextCtrl_beginitalic). begin_italic
+
+ Boolean *begin_italic*()
+
+Begins using italic.
+
+h3(#RichTextCtrl_beginleftindent). begin_left_indent
+
+ Boolean *begin_left_indent*(%(arg-type)Integer% leftIndent,  %(arg-type)Integer% leftSubIndent = 0)
+
+Begins applying a left indent and subindent in tenths of a millimetre.
+
+The sub-indent is an offset from the left of the paragraph, and is used for all but the
+first line in a paragraph. A positive value will cause the first line to appear to the left
+of the subsequent lines, and a negative value will cause the first line to be indented
+relative to the subsequent lines.
+
+RichTextBuffer uses indentation to render a bulleted item. The left indent is the distance between
+the margin and the bullet. The content of the paragraph, including the first line, starts
+at leftMargin + leftSubIndent. So the distance between the left edge of the bullet and the
+left of the actual paragraph is leftSubIndent.
+
+h3(#RichTextCtrl_beginlinespacing). begin_line_spacing
+
+ Boolean *begin_line_spacing*(%(arg-type)Integer% lineSpacing)
+
+Begins appling line spacing. _spacing_ is a multiple, where 10 means single-spacing,
+15 means 1.5 spacing, and 20 means double spacing. The following constants are
+defined for convenience:
+
+
+
+ #define TEXT_ATTR_LINE_SPACING_NORMAL         10
+ #define TEXT_ATTR_LINE_SPACING_HALF           15
+ #define TEXT_ATTR_LINE_SPACING_TWICE          20
+ 
+
+
+h3(#RichTextCtrl_beginliststyle). begin_list_style
+
+ Boolean *begin_list_style*(%(arg-type)String% listStyle,  %(arg-type)Integer% level=1, 
+                          %(arg-type)Integer% number=1)
+
+Begins using a specified list style. Optionally, you can also pass a level and a number.
+
+h3(#RichTextCtrl_beginnumberedbullet). begin_numbered_bullet
+
+ Boolean *begin_numbered_bullet*(%(arg-type)Integer% bulletNumber,  %(arg-type)Integer% leftIndent, 
+                               %(arg-type)Integer% leftSubIndent, 
+                               %(arg-type)Integer% bulletStyle = TEXT_ATTR_BULLET_STYLE_ARABIC|TEXT_ATTR_BULLET_STYLE_PERIOD)
+
+Begins a numbered bullet. This call will be needed for each item in the list, and the
+application should take care of incrementing the numbering.
+
+_bulletNumber_ is a number, usually starting with 1.
+
+_leftIndent_ and _leftSubIndent_ are values in tenths of a millimetre.
+
+_bulletStyle_ is a bitlist of the following values:
+
+
+
+ #define TEXT_ATTR_BULLET_STYLE_NONE               0x00000000
+ #define TEXT_ATTR_BULLET_STYLE_ARABIC             0x00000001
+ #define TEXT_ATTR_BULLET_STYLE_LETTERS_UPPER      0x00000002
+ #define TEXT_ATTR_BULLET_STYLE_LETTERS_LOWER      0x00000004
+ #define TEXT_ATTR_BULLET_STYLE_ROMAN_UPPER        0x00000008
+ #define TEXT_ATTR_BULLET_STYLE_ROMAN_LOWER        0x00000010
+ #define TEXT_ATTR_BULLET_STYLE_SYMBOL             0x00000020
+ #define TEXT_ATTR_BULLET_STYLE_BITMAP             0x00000040
+ #define TEXT_ATTR_BULLET_STYLE_PARENTHESES        0x00000080
+ #define TEXT_ATTR_BULLET_STYLE_PERIOD             0x00000100
+ #define TEXT_ATTR_BULLET_STYLE_STANDARD           0x00000200
+ #define TEXT_ATTR_BULLET_STYLE_RIGHT_PARENTHESIS  0x00000400
+ #define TEXT_ATTR_BULLET_STYLE_OUTLINE            0x00000800
+ #define TEXT_ATTR_BULLET_STYLE_ALIGN_LEFT         0x00000000
+ #define TEXT_ATTR_BULLET_STYLE_ALIGN_RIGHT        0x00001000
+ #define TEXT_ATTR_BULLET_STYLE_ALIGN_CENTRE       0x00002000
+ 
+
+
+RichTextBuffer uses indentation to render a bulleted item. The left indent is the distance between
+the margin and the bullet. The content of the paragraph, including the first line, starts
+at leftMargin + leftSubIndent. So the distance between the left edge of the bullet and the
+left of the actual paragraph is leftSubIndent.
+
+h3(#RichTextCtrl_beginparagraphspacing). begin_paragraph_spacing
+
+ Boolean *begin_paragraph_spacing*(%(arg-type)Integer% before,  %(arg-type)Integer% after)
+
+Begins paragraph spacing; pass the before-paragraph and after-paragraph spacing in tenths of
+a millimetre.
+
+h3(#RichTextCtrl_beginparagraphstyle). begin_paragraph_style
+
+ Boolean *begin_paragraph_style*(%(arg-type)String% paragraphStyle)
+
+Begins applying the named paragraph style.
+
+h3(#RichTextCtrl_beginrightindent). begin_right_indent
+
+ Boolean *begin_right_indent*(%(arg-type)Integer% rightIndent)
+
+Begins a right indent, specified in tenths of a millimetre.
+
+h3(#RichTextCtrl_beginstyle). begin_style
+
+ Boolean *begin_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
+
+Begins applying a style.
+
+h3(#RichTextCtrl_beginsuppressundo). begin_suppress_undo
+
+ Boolean *begin_suppress_undo*()
+
+Starts suppressing undo history for commands.
+
+h3(#RichTextCtrl_beginsymbolbullet). begin_symbol_bullet
+
+ Boolean *begin_symbol_bullet*(%(arg-type)"Char":char.html% symbol,  %(arg-type)Integer% leftIndent, 
+                             %(arg-type)Integer% leftSubIndent, 
+                             %(arg-type)Integer% bulletStyle = TEXT_ATTR_BULLET_STYLE_SYMBOL)
+
+Begins applying a symbol bullet, using a character from the current font. See "begin_numbered_bullet":#RichTextCtrl_beginnumberedbullet for
+an explanation of how indentation is used to render the bulleted paragraph.
+
+h3(#RichTextCtrl_begintextcolour). begin_text_colour
+
+ Boolean *begin_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Begins using this colour.
+
+h3(#RichTextCtrl_beginunderline). begin_underline
+
+ Boolean *begin_underline*()
+
+Begins using underlining.
+
+h3(#RichTextCtrl_beginurl). begin_url
+
+ Boolean *begin_url*(%(arg-type)String% url,  %(arg-type)String% characterStyle = '')
+
+Begins applying TEXT_ATTR_URL to the content. Pass a URL and optionally, a character style to apply,
+since it is common to mark a URL with a familiar style such as blue text with underlining.
+
+h3(#RichTextCtrl_cancopy). can_copy
+
+ Boolean *can_copy*()
+
+Returns  if selected content can be copied to the clipboard.
+
+h3(#RichTextCtrl_cancut). can_cut
+
+ Boolean *can_cut*()
+
+Returns  if selected content can be copied to the clipboard and deleted.
+
+h3(#RichTextCtrl_candeleteselection). can_delete_selection
+
+ Boolean *can_delete_selection*()
+
+Returns  if selected content can be deleted.
+
+h3(#RichTextCtrl_canpaste). can_paste
+
+ Boolean *can_paste*()
+
+Returns  if the clipboard content can be pasted to the buffer.
+
+h3(#RichTextCtrl_canredo). can_redo
+
+ Boolean *can_redo*()
+
+Returns  if there is a command in the command history that can be redone.
+
+h3(#RichTextCtrl_canundo). can_undo
+
+ Boolean *can_undo*()
+
+Returns  if there is a command in the command history that can be undone.
+
+h3(#RichTextCtrl_clear). clear
+
+  *clear*()
+
+Clears the buffer content, leaving a single empty paragraph. Cannot be undone.
+
+h3(#RichTextCtrl_clearliststyle). clear_list_style
+
+ Boolean *clear_list_style*(%(arg-type)Range% range, 
+                          %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
+
+ Boolean *clear_list_style*(%(arg-type)Range% range, 
+                          %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
+
+Clears the list style from the given range, clearing list-related attributes and applying any named paragraph style associated with each paragraph.
+
+_flags_ is a bit list of the following:
+
+
+* RICHTEXT_SETSTYLE_WITH_UNDO: specifies that this command will be undoable.
+
+
+See also "set_list_style":richtextctrl.html#RichTextCtrl_setliststyle, "promote_list":richtextctrl.html#RichTextCtrl_promotelist, "number_list":richtextctrl.html#RichTextCtrl_numberlist.
+
+h3(#RichTextCtrl_command). command
+
+  *command*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Sends the event to the control.
+
+h3(#RichTextCtrl_copy). copy
+
+  *copy*()
+
+Copies the selected content (if any) to the clipboard.
+
+h3(#RichTextCtrl_create). create
+
+ Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                %(arg-type)String% value = '', 
+                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = RE_MULTILINE, 
+                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
+                %(arg-type)String% name = TextCtrlNameStr)
+
+Creates the underlying window.
+
+h3(#RichTextCtrl_cut). cut
+
+  *cut*()
+
+Copies the selected content (if any) to the clipboard and deletes the selection.
+This is undoable.
+
+h3(#RichTextCtrl_delete). delete
+
+ Boolean *delete*(%(arg-type)Range% range)
+
+Deletes the content within the given range.
+
+h3(#RichTextCtrl_deleteselectedcontent). delete_selected_content
+
+ Boolean *delete_selected_content*(%(arg-type)Integer% newPos = nil)
+
+Deletes content if there is a selection, e.g. when pressing a key.
+Returns the new caret position in _newPos_, or leaves it if there
+was no action. This is undoable.
+
+h3(#RichTextCtrl_deleteselection). delete_selection
+
+  *delete_selection*()
+
+Deletes the content in the selection, if any. This is undoable.
+
+h3(#RichTextCtrl_discardedits). discard_edits
+
+  *discard_edits*()
+
+Sets the buffer's modified status to , and clears the buffer's command history.
+
+h3(#RichTextCtrl_dogetbestsize). do_get_best_size
+
+ "Size":size.html *do_get_best_size*()
+
+Currently this simply returns @Size(10, 10)@.
+
+h3(#RichTextCtrl_endalignment). end_alignment
+
+ Boolean *end_alignment*()
+
+Ends alignment.
+
+h3(#RichTextCtrl_endallstyles). end_all_styles
+
+ Boolean *end_all_styles*()
+
+Ends application of all styles in the current style stack.
+
+h3(#RichTextCtrl_endbatchundo). end_batch_undo
+
+ Boolean *end_batch_undo*()
+
+Ends batching undo command history.
+
+h3(#RichTextCtrl_endbold). end_bold
+
+ Boolean *end_bold*()
+
+Ends using bold.
+
+h3(#RichTextCtrl_endcharacterstyle). end_character_style
+
+ Boolean *end_character_style*()
+
+Ends application of a named character style.
+
+h3(#RichTextCtrl_endfont). end_font
+
+ Boolean *end_font*()
+
+Ends using a font.
+
+h3(#RichTextCtrl_endfontsize). end_font_size
+
+ Boolean *end_font_size*()
+
+Ends using a point size.
+
+h3(#RichTextCtrl_enditalic). end_italic
+
+ Boolean *end_italic*()
+
+Ends using italic.
+
+h3(#RichTextCtrl_endleftindent). end_left_indent
+
+ Boolean *end_left_indent*()
+
+Ends left indent.
+
+h3(#RichTextCtrl_endlinespacing). end_line_spacing
+
+ Boolean *end_line_spacing*()
+
+Ends line spacing.
+
+h3(#RichTextCtrl_endliststyle). end_list_style
+
+ Boolean *end_list_style*()
+
+Ends using a specified list style.
+
+h3(#RichTextCtrl_endnumberedbullet). end_numbered_bullet
+
+ Boolean *end_numbered_bullet*()
+
+Ends application of a numbered bullet.
+
+h3(#RichTextCtrl_endparagraphspacing). end_paragraph_spacing
+
+ Boolean *end_paragraph_spacing*()
+
+Ends paragraph spacing.
+
+h3(#RichTextCtrl_endparagraphstyle). end_paragraph_style
+
+ Boolean *end_paragraph_style*()
+
+Ends application of a named character style.
+
+h3(#RichTextCtrl_endrightindent). end_right_indent
+
+ Boolean *end_right_indent*()
+
+Ends right indent.
+
+h3(#RichTextCtrl_endstyle). end_style
+
+ Boolean *end_style*()
+
+Ends the current style.
+
+h3(#RichTextCtrl_endsuppressundo). end_suppress_undo
+
+ Boolean *end_suppress_undo*()
+
+Ends suppressing undo command history.
+
+h3(#RichTextCtrl_endsymbolbullet). end_symbol_bullet
+
+ Boolean *end_symbol_bullet*()
+
+Ends applying a symbol bullet.
+
+h3(#RichTextCtrl_endtextcolour). end_text_colour
+
+ Boolean *end_text_colour*()
+
+Ends applying a text colour.
+
+h3(#RichTextCtrl_endunderline). end_underline
+
+ Boolean *end_underline*()
+
+End applying underlining.
+
+h3(#RichTextCtrl_endurl). end_url
+
+ Boolean *end_url*()
+
+Ends applying a URL.
+
+h3(#RichTextCtrl_extendselection). extend_selection
+
+ Boolean *extend_selection*(%(arg-type)Integer% oldPosition,  %(arg-type)Integer% newPosition, 
+                          %(arg-type)Integer% flags)
+
+Helper function for extending the selection, returning  if the selection was
+changed. Selections are in caret positions.
+
+h3(#RichTextCtrl_findnextwordposition). find_next_word_position
+
+ Integer *find_next_word_position*(%(arg-type)Integer% direction = 1)
+
+Helper function for finding the caret position for the next word. Direction
+is 1 (forward) or -1 (backwards).
+
+h3(#RichTextCtrl_freeze). freeze
+
+  *freeze*()
+
+Call this function to prevent refresh and allow fast updates, and then "Thaw":richtextctrlthaw.html to
+refresh the control.
+
+h3(#RichTextCtrl_getbasicstyle). get_basic_style
+
+ "TextAttrEx":textattrex.html *get_basic_style*()
+
+Gets the basic (overall) style. This is the style of the whole
+buffer before further styles are applied, unlike the default style, which
+only affects the style currently being applied (for example, setting the default
+style to bold will cause subsequently inserted text to be bold).
+
+h3(#RichTextCtrl_getbuffer). get_buffer
+
+ "RichTextBuffer":richtextbuffer.html *get_buffer*()
+
+Returns the buffer associated with the control.
+
+h3(#RichTextCtrl_getcaretposition). get_caret_position
+
+ Integer *get_caret_position*()
+
+Returns the current caret position.
+
+h3(#RichTextCtrl_getcaretpositionforindex). get_caret_position_for_index
+
+ Boolean *get_caret_position_for_index*(%(arg-type)Integer% position, 
+                                      %(arg-type)"Rect":rect.html% rect)
+
+Returns the caret height and position for the given character position
+
+h3(#RichTextCtrl_getcommandprocessor). get_command_processor
+
+ "CommandProcessor":commandprocessor.html *get_command_processor*()
+
+Gets the command processor associated with the control's buffer.
+
+h3(#RichTextCtrl_getdefaultstyleex). get_default_style_ex
+
+ "TextAttrEx":textattrex.html *get_default_style_ex*()
+
+Returns the current default style, which can be used to change how subsequently inserted
+text is displayed. When TextAttrEx is merged with TextAttr, this function
+will become GetDefaultStyle.
+
+h3(#RichTextCtrl_getdelayedlayoutthreshold). get_delayed_layout_threshold
+
+ Integer *get_delayed_layout_threshold*()
+
+Gets the size of the buffer beyond which layout is delayed during resizing.
+This optimizes sizing for large buffers. The default is 20000.
+
+h3(#RichTextCtrl_getfilename). get_filename
+
+ String *get_filename*()
+
+Gets the current filename associated with the control.
+
+h3(#RichTextCtrl_getfirstvisibleposition). get_first_visible_position
+
+ Integer *get_first_visible_position*()
+
+Returns the first visible position in the current view.
+
+h3(#wxrichtextfilehandlergethandlerflags). get_handler_flags
+
+ Integer *get_handler_flags*()
+
+Returns flags that change the behaviour of loading or saving. See the documentation for each
+handler class to see what flags are relevant for each handler.
+
+h3(#RichTextCtrl_getinsertionpoint). get_insertion_point
+
+ Integer *get_insertion_point*()
+
+Returns the current insertion point.
+
+h3(#RichTextCtrl_getlastposition). get_last_position
+
+ "TextPos":textpos.html *get_last_position*()
+
+Returns the last position in the buffer.
+
+h3(#RichTextCtrl_getlinelength). get_line_length
+
+ Integer *get_line_length*(%(arg-type)Integer% lineNo)
+
+Returns the length of the specified line in characters.
+
+h3(#RichTextCtrl_getlinetext). get_line_text
+
+ String *get_line_text*(%(arg-type)Integer% lineNo)
+
+Returns the text for the given line.
+
+h3(#RichTextCtrl_getlogicalpoint). get_logical_point
+
+ "Point":point.html *get_logical_point*(%(arg-type)"Point":point.html% ptPhysical)
+
+Transforms physical window position to logical (unscrolled) position.
+
+h3(#RichTextCtrl_getnumberoflines). get_number_of_lines
+
+ Integer *get_number_of_lines*()
+
+Returns the number of lines in the buffer.
+
+h3(#RichTextCtrl_getphysicalpoint). get_physical_point
+
+ "Point":point.html *get_physical_point*(%(arg-type)"Point":point.html% ptLogical)
+
+Transforms logical (unscrolled) position to physical window position.
+
+h3(#RichTextCtrl_getrange). get_range
+
+ String *get_range*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Gets the text for the given range.
+
+The end point of range is specified as the last character position of the span of text, plus one.
+
+h3(#RichTextCtrl_getselection). get_selection
+
+  *get_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Returns the range of the current selection.
+
+The end point of range is specified as the last character position of the span of text, plus one.
+
+If the return values _from_ and _to_ are the same, there is no selection.
+
+h3(#RichTextCtrl_getselectionrange). get_selection_range
+
+ Range *get_selection_range*()
+
+Returns the selection range in character positions. -1, -1 means no selection.
+
+h3(#RichTextCtrl_getstringselection). get_string_selection
+
+ String *get_string_selection*()
+
+Returns the text within the current selection range, if any.
+
+h3(#RichTextCtrl_getstyle). get_style
+
+ "RichTextAttr":richtextattr.html%  *get_style*(%(arg-type)Integer% position)
+
+Gets the attributes at the given position. This function gets the
+combined style - that is, the style you see on the screen as a result of
+combining base style, paragraph style and character style attributes. To
+get the character or paragraph style alone, use
+"get_uncombined_style":#RichTextCtrl_getuncombinedstyle.
+
+h3(#RichTextCtrl_getstyleforrange). get_style_for_range
+
+ "RichTextAttr":richtextattr.htm *get_style_for_range*(%(arg-type)Range% range)
+
+
+Gets the attributes common to the specified range. Attributes that
+differ in value within the range will not be included in _style_'s
+flags.
+
+h3(#RichTextCtrl_getstylesheet). get_style_sheet
+
+ "RichTextStyleSheet":richtextstylesheet.html *get_style_sheet*()
+
+Returns the style sheet associated with the control, if any. A style
+sheet allows named character and paragraph styles to be applied.
+
+h3(#RichTextCtrl_getuncombinedstyle). get_uncombined_style
+
+ "RichTextAttr":richtextattr.htm *get_uncombined_style*(%(arg-type)Integer% position)
+
+Gets the attributes at the given position. 
+
+This function gets the _uncombined style_ - that is, the attributes
+associated with the paragraph or character content, and not necessarily
+the combined attributes you see on the screen. To get the combined
+attributes, use "get_style":#RichTextCtrl_getstyle.
+
+h3(#RichTextCtrl_getvalue). get_value
+
+ String *get_value*()
+
+Returns the content of the entire control as a string.
+
+h3(#RichTextCtrl_getvisiblelineforcaretposition). get_visible_line_for_caret_position
+
+ "RichTextLine":richtextline.html *get_visible_line_for_caret_position*(%(arg-type)Integer% caretPosition)
+
+Internal helper function returning the line for the visible caret position. If the caret is
+shown at the very end of the line, it means the next character is actually
+on the following line. So this function gets the line we're expecting to find
+if this is the case.
+
+h3(#RichTextCtrl_hascharacterattributes). has_character_attributes
+
+ Boolean *has_character_attributes*(%(arg-type)Range% range, 
+                                  %(arg-type)"TextAttrEx":textattrex.html% style)
+
+ Boolean *has_character_attributes*(%(arg-type)Range% range, 
+                                  %(arg-type)"RichTextAttr":richtextattr.html% style)
+
+Test if this whole range has character attributes of the specified kind. If any
+of the attributes are different within the range, the test fails. You
+can use this to implement, for example, bold button updating. _style_ must have
+flags indicating which attributes are of interest.
+
+h3(#RichTextCtrl_hasparagraphattributes). has_paragraph_attributes
+
+ Boolean *has_paragraph_attributes*(%(arg-type)Range% range, 
+                                  %(arg-type)"TextAttrEx":textattrex.html% style)
+
+ Boolean *has_paragraph_attributes*(%(arg-type)Range% range, 
+                                  %(arg-type)"RichTextAttr":richtextattr.html% style)
+
+Test if this whole range has paragraph attributes of the specified kind. If any
+of the attributes are different within the range, the test fails. You
+can use this to implement, for example, centering button updating. _style_ must have
+flags indicating which attributes are of interest.
+
+h3(#RichTextCtrl_hasselection). has_selection
+
+ Boolean *has_selection*()
+
+Returns  if there is a selection.
+
+h3(#RichTextCtrl_hittest). hit_test
+
+ "TextCtrlHitTestResult":textctrlhittestresult.html *hit_test*(%(arg-type)"Point":point.html% pt, 
+                                  %(arg-type)Integer% pos)
+
+ "TextCtrlHitTestResult":textctrlhittestresult.html *hit_test*(%(arg-type)"Point":point.html% pt, 
+                                  %(arg-type)"TextCoord":textcoord.html% col, 
+                                  %(arg-type)"TextCoord":textcoord.html% row)
+
+Finds the character at the given position in pixels.
+
+_pt_ is in device coords (not adjusted for the client area origin nor for scrolling).
+
+h3(#RichTextCtrl_init). init
+
+  *init*()
+
+Initialises the members of the control.
+
+h3(#RichTextCtrl_initcommandevent). init_command_event
+
+  *init_command_event*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Initialises the command event.
+
+h3(#RichTextCtrl_isdefaultstyleshowing). is_default_style_showing
+
+ Boolean *is_default_style_showing*()
+
+Returns if the user has recently set the default style without moving
+the caret, and therefore the UI needs to reflect the default style and
+not the style at the caret.
+
+See also "set_and_show_default_style":#RichTextCtrl_setandshowdefaultstyle.
+
+h3(#RichTextCtrl_iseditable). is_editable
+
+ Boolean *is_editable*()
+
+Returns  if the control is editable.
+
+h3(#RichTextCtrl_isfrozen). is_frozen
+
+ Boolean *is_frozen*()
+
+Returns  if Freeze has been called without a Thaw.
+
+h3(#RichTextCtrl_ismodified). is_modified
+
+ Boolean *is_modified*()
+
+Returns  if the buffer has been modified.
+
+h3(#RichTextCtrl_ismultiline). is_multi_line
+
+ Boolean *is_multi_line*()
+
+Returns  if the control is multiline.
+
+h3(#RichTextCtrl_ispositionvisible). is_position_visible
+
+ Boolean *is_position_visible*(%(arg-type)Integer% pos)
+
+Returns  if the given position is visible on the screen.
+
+h3(#RichTextCtrl_isselectionaligned). is_selection_aligned
+
+ Boolean *is_selection_aligned*(%(arg-type)"TextAttrAlignment":textattralignment.html% alignment)
+
+Returns  if all of the selection is aligned according to the specified flag.
+
+h3(#RichTextCtrl_isselectionbold). is_selection_bold
+
+ Boolean *is_selection_bold*()
+
+Returns  if all of the selection is bold.
+
+h3(#RichTextCtrl_isselectionitalics). is_selection_italics
+
+ Boolean *is_selection_italics*()
+
+Returns  if all of the selection is italic.
+
+h3(#RichTextCtrl_isselectionunderlined). is_selection_underlined
+
+ Boolean *is_selection_underlined*()
+
+Returns  if all of the selection is underlined.
+
+h3(#RichTextCtrl_issingleline). is_single_line
+
+ Boolean *is_single_line*()
+
+Returns  if the control is single-line. Currently RichTextCtrl does not
+support single-line editing.
+
+h3(#RichTextCtrl_keyboardnavigate). keyboard_navigate
+
+ Boolean *keyboard_navigate*(%(arg-type)Integer% keyCode,  %(arg-type)Integer% flags)
+
+Helper function implementing keyboard navigation.
+
+h3(#RichTextCtrl_layoutcontent). layout_content
+
+ Boolean *layout_content*(%(arg-type)Boolean% onlyVisibleRect = false)
+
+Lays out the buffer, which must be done before certain operations, such as
+setting the caret position. This function should not normally be required by the
+application.
+
+h3(#RichTextCtrl_linebreak). line_break
+
+ Boolean *line_break*()
+
+Inserts a line break at the current insertion point. A line break forces wrapping within a paragraph, and
+can be introduced by using this function, by appending the Char value *RichTextLineBreakChar* to text content,
+or by typing Shift-Return.
+
+h3(#RichTextCtrl_loadfile). load_file
+
+ Boolean *load_file*(%(arg-type)String% file,  %(arg-type)Integer% type = RICHTEXT_TYPE_ANY)
+
+Loads content into the control's buffer using the given type. If the specified type
+is RICHTEXT_TYPE_ANY, the type is deduced from the filename extension.
+
+This function looks for a suitable "RichTextFileHandler":richtextfilehandler.html object.
+
+h3(#RichTextCtrl_markdirty). mark_dirty
+
+  *mark_dirty*()
+
+Marks the buffer as modified.
+
+h3(#RichTextCtrl_movecaret). move_caret
+
+ Boolean *move_caret*(%(arg-type)Integer% pos,  %(arg-type)Boolean% showAtLineStart = false)
+
+Move the caret to the given character position.
+
+h3(#RichTextCtrl_movecaretback). move_caret_back
+
+  *move_caret_back*(%(arg-type)Integer% oldPosition)
+
+Move the caret one visual step forward: this may mean setting a flag
+and keeping the same position if we're going from the end of one line
+to the start of the next, which may be the exact same caret position.
+
+h3(#RichTextCtrl_movecaretforward). move_caret_forward
+
+  *move_caret_forward*(%(arg-type)Integer% oldPosition)
+
+Move the caret one visual step forward: this may mean setting a flag
+and keeping the same position if we're going from the end of one line
+to the start of the next, which may be the exact same caret position.
+
+h3(#RichTextCtrl_movedown). move_down
+
+ Boolean *move_down*(%(arg-type)Integer% noLines = 1,  %(arg-type)Integer% flags = 0)
+
+Moves the caret down.
+
+h3(#RichTextCtrl_moveend). move_end
+
+ Boolean *move_end*(%(arg-type)Integer% flags = 0)
+
+Moves to the end of the buffer.
+
+h3(#RichTextCtrl_movehome). move_home
+
+ Boolean *move_home*(%(arg-type)Integer% flags = 0)
+
+Moves to the start of the buffer.
+
+h3(#RichTextCtrl_moveleft). move_left
+
+ Boolean *move_left*(%(arg-type)Integer% noPositions = 1,  %(arg-type)Integer% flags = 0)
+
+Moves left.
+
+h3(#RichTextCtrl_moveright). move_right
+
+ Boolean *move_right*(%(arg-type)Integer% noPositions = 1,  %(arg-type)Integer% flags = 0)
+
+Moves right.
+
+h3(#RichTextCtrl_movetolineend). move_to_line_end
+
+ Boolean *move_to_line_end*(%(arg-type)Integer% flags = 0)
+
+Moves to the end of the line.
+
+h3(#RichTextCtrl_movetolinestart). move_to_line_start
+
+ Boolean *move_to_line_start*(%(arg-type)Integer% flags = 0)
+
+Moves to the start of the line.
+
+h3(#RichTextCtrl_movetoparagraphend). move_to_paragraph_end
+
+ Boolean *move_to_paragraph_end*(%(arg-type)Integer% flags = 0)
+
+Moves to the end of the paragraph.
+
+h3(#RichTextCtrl_movetoparagraphstart). move_to_paragraph_start
+
+ Boolean *move_to_paragraph_start*(%(arg-type)Integer% flags = 0)
+
+Moves to the start of the paragraph.
+
+h3(#RichTextCtrl_moveup). move_up
+
+ Boolean *move_up*(%(arg-type)Integer% noLines = 1,  %(arg-type)Integer% flags = 0)
+
+Moves up.
+
+h3(#RichTextCtrl_newline). newline
+
+ Boolean *newline*()
+
+Inserts a new paragraph at the current insertion point. See also "line_break":richtextctrl.html#RichTextCtrl_linebreak.
+
+h3(#RichTextCtrl_numberlist). number_list
+
+ Boolean *number_list*(%(arg-type)Range% range, 
+                     %(arg-type)"RichTextListStyleDefinition":richtextliststyledefinition.html% style, 
+                     %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO,  %(arg-type)Integer% startFrom = -1,  %(arg-type)Integer% listLevel = -1)
+
+ Boolean *number*(%(arg-type)Range% range,  %(arg-type)String% styleName, 
+                %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO, 
+                %(arg-type)Integer% startFrom = -1, 
+                %(arg-type)Integer% listLevel = -1)
+
+Numbers the paragraphs in the given range. Pass flags to determine how the attributes are set.
+Either the style definition or the name of the style definition (in the current sheet) can be passed.
+
+_flags_ is a bit list of the following:
+
+
+* RICHTEXT_SETSTYLE_WITH_UNDO: specifies that this command will be undoable.
+* RICHTEXT_SETSTYLE_RENUMBER: specifies that numbering should start from _startFrom_, otherwise existing attributes are used.
+* RICHTEXT_SETSTYLE_SPECIFY_LEVEL: specifies that _listLevel_ should be used as the level for all paragraphs, otherwise the current indentation will be used.
+
+
+See also "set_list_style":richtextctrl.html#RichTextCtrl_setliststyle, "promote_list":richtextctrl.html#RichTextCtrl_promotelist, "clear_list_style":richtextctrl.html#RichTextCtrl_clearliststyle.
+
+h3(#RichTextCtrl_onclear). on_clear
+
+  *on_clear*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Standard handler for the ID_CLEAR command.
+
+h3(#RichTextCtrl_oncontextmenu). on_context_menu
+
+  *on_context_menu*(%(arg-type)"ContextMenuEvent":contextmenuevent.html% event)
+
+Shows a standard context menu with undo, redo, cut, copy, paste, clear, and select all commands.
+
+h3(#RichTextCtrl_oncopy). on_copy
+
+  *on_copy*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Standard handler for the ID_COPY command.
+
+h3(#RichTextCtrl_oncut). on_cut
+
+  *on_cut*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Standard handler for the ID_CUT command.
+
+h3(#RichTextCtrl_ondropfiles). on_drop_files
+
+  *on_drop_files*(%(arg-type)"DropFilesEvent":dropfilesevent.html% event)
+
+Loads the first dropped file.
+
+h3(#RichTextCtrl_onpaste). on_paste
+
+  *on_paste*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Standard handler for the ID_PASTE command.
+
+h3(#RichTextCtrl_onredo). on_redo
+
+  *on_redo*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Standard handler for the ID_REDO command.
+
+h3(#RichTextCtrl_onselectall). on_select_all
+
+  *on_select_all*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Standard handler for the ID_SELECTALL command.
+
+h3(#RichTextCtrl_onundo). on_undo
+
+  *on_undo*(%(arg-type)"CommandEvent":commandevent.html% event)
+
+Standard handler for the ID_PASTE command.
+
+h3(#RichTextCtrl_onupdateclear). on_update_clear
+
+  *on_update_clear*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
+
+Standard update handler for the ID_CLEAR command.
+
+h3(#RichTextCtrl_onupdatecopy). on_update_copy
+
+  *on_update_copy*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
+
+Standard update handler for the ID_COPY command.
+
+h3(#RichTextCtrl_onupdatecut). on_update_cut
+
+  *on_update_cut*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
+
+Standard update handler for the ID_CUT command.
+
+h3(#RichTextCtrl_onupdatepaste). on_update_paste
+
+  *on_update_paste*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
+
+Standard update handler for the ID_PASTE command.
+
+h3(#RichTextCtrl_onupdateredo). on_update_redo
+
+  *on_update_redo*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
+
+Standard update handler for the ID_REDO command.
+
+h3(#RichTextCtrl_onupdateselectall). on_update_select_all
+
+  *on_update_select_all*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
+
+Standard update handler for the ID_SELECTALL command.
+
+h3(#RichTextCtrl_onupdateundo). on_update_undo
+
+  *on_update_undo*(%(arg-type)"UpdateUIEvent":updateuievent.html% event)
+
+Standard update handler for the ID_UNDO command.
+
+h3(#RichTextCtrl_pagedown). page_down
+
+ Boolean *page_down*(%(arg-type)Integer% noPages = 1,  %(arg-type)Integer% flags = 0)
+
+Moves one or more pages down.
+
+h3(#RichTextCtrl_pageup). page_up
+
+ Boolean *page_up*(%(arg-type)Integer% noPages = 1,  %(arg-type)Integer% flags = 0)
+
+Moves one or more pages up.
+
+h3(#RichTextCtrl_paintbackground). paint_background
+
+  *paint_background*(%(arg-type)"DC":dc.html% dc)
+
+Paints the background.
+
+h3(#RichTextCtrl_paste). paste
+
+  *paste*()
+
+Pastes content from the clipboard to the buffer.
+
+h3(#RichTextCtrl_positioncaret). position_caret
+
+  *position_caret*()
+
+Internal function to position the visible caret according to the current caret position.
+
+h3(#RichTextCtrl_positiontoxy). position_to_xy
+
+ Boolean *position_to_xy*(%(arg-type)Integer% pos,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Converts a text position to zero-based column and line numbers.
+
+h3(#RichTextCtrl_promotelist). promote_list
+
+ Boolean *promote_list*(%(arg-type)Integer% promoteBy,  %(arg-type)Range% range, 
+                      %(arg-type)"RichTextListStyleDefinition":richtextliststyledefinition.html% style, 
+                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO, 
+                      %(arg-type)Integer% listLevel = -1)
+
+ Boolean *promote_list*(%(arg-type)Integer% promoteBy,  %(arg-type)Range% range, 
+                      %(arg-type)String% styleName, 
+                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO, 
+                      %(arg-type)Integer% listLevel = -1)
+
+Promotes or demotes the paragraphs in the given range. A positive _promoteBy_ produces a smaller indent, and a negative number
+produces a larger indent. Pass flags to determine how the attributes are set.
+Either the style definition or the name of the style definition (in the current sheet) can be passed.
+
+_flags_ is a bit list of the following:
+
+
+* RICHTEXT_SETSTYLE_WITH_UNDO: specifies that this command will be undoable.
+* RICHTEXT_SETSTYLE_RENUMBER: specifies that numbering should start from _startFrom_, otherwise existing attributes are used.
+* RICHTEXT_SETSTYLE_SPECIFY_LEVEL: specifies that _listLevel_ should be used as the level for all paragraphs, otherwise the current indentation will be used.
+
+
+See also "set_list_style":richtextctrl.html#RichTextCtrl_setliststyle, See also "set_list_style":richtextctrl.html#RichTextCtrl_setliststyle, "clear_list_style":richtextctrl.html#RichTextCtrl_clearliststyle.
+
+h3(#RichTextCtrl_redo). redo
+
+  *redo*()
+
+Redoes the current command.
+
+h3(#RichTextCtrl_remove). remove
+
+  *remove*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Removes the content in the specified range.
+
+h3(#RichTextCtrl_replace). replace
+
+  *replace*(%(arg-type)Integer% from,  %(arg-type)Integer% to,  %(arg-type)String% value)
+
+Replaces the content in the specified range with the string specified by _value_.
+
+h3(#RichTextCtrl_savefile). save_file
+
+ Boolean *save_file*(%(arg-type)String% file = '',  %(arg-type)Integer% type = RICHTEXT_TYPE_ANY)
+
+Saves the buffer content using the given type. If the specified type
+is RICHTEXT_TYPE_ANY, the type is deduced from the filename
+extension.
+
+In order to use this method, a
+"RichTextFileHandler":richtextfilehandler.html object must have been set previously.
+
+
+
+h3(#RichTextCtrl_scrollintoview). scroll_into_view
+
+ Boolean *scroll_into_view*(%(arg-type)Integer% position,  %(arg-type)Integer% keyCode)
+
+Scrolls _position_ into view. This function takes a caret position.
+
+h3(#RichTextCtrl_selectall). select_all
+
+  *select_all*()
+
+Selects all the text in the buffer.
+
+h3(#RichTextCtrl_selectnone). select_none
+
+  *select_none*()
+
+Cancels any selection.
+
+h3(#RichTextCtrl_setandshowdefaultstyle). set_and_show_default_style
+
+  *set_and_show_default_style*(%(arg-type)"RichTextAttr":richtextattr.html% attr)
+
+Sets _attr_ as the default style and tells the control that the UI should reflect
+this attribute until the user moves the caret.
+
+See also "is_default_style_showing":#RichTextCtrl_isdefaultstyleshowing.
+
+h3(#RichTextCtrl_setbasicstyle). set_basic_style
+
+  *set_basic_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
+
+  *set_basic_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
+
+Sets the basic (overall) style. This is the style of the whole
+buffer before further styles are applied, unlike the default style, which
+only affects the style currently being applied (for example, setting the default
+style to bold will cause subsequently inserted text to be bold).
+
+h3(#RichTextCtrl_setcaretposition). set_caret_position
+
+  *set_caret_position*(%(arg-type)Integer% position,  %(arg-type)Boolean% showAtLineStart = false)
+
+The caret position is the character position just before the caret.
+A value of -1 means the caret is at the start of the buffer.
+
+h3(#RichTextCtrl_setdefaultstyle). set_default_style
+
+ Boolean *set_default_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
+
+Sets the current default style, which can be used to change how subsequently inserted
+text is displayed.
+
+h3(#RichTextCtrl_setdefaultstyletocursorstyle). set_default_style_to_cursor_style
+
+ Boolean *set_default_style_to_cursor_style*()
+
+Sets the default style to the style under the cursor.
+
+h3(#RichTextCtrl_setdelayedlayoutthreshold). set_delayed_layout_threshold
+
+  *set_delayed_layout_threshold*(%(arg-type)Integer% threshold)
+
+Sets the size of the buffer beyond which layout is delayed during resizing.
+This optimizes sizing for large buffers. The default is 20000.
+
+h3(#RichTextCtrl_seteditable). set_editable
+
+  *set_editable*(%(arg-type)Boolean% editable)
+
+Makes the control editable, or not.
+
+h3(#RichTextCtrl_setfilename). set_filename
+
+  *set_filename*(%(arg-type)String% filename)
+
+Sets the current filename.
+
+h3(#RichTextCtrl_setfont). set_font
+
+ Boolean *set_font*(%(arg-type)"Font":font.html% font)
+
+Sets the font, and also the basic and default attributes (see "set_default_style":#RichTextCtrl_setdefaultstyle).
+
+h3(#RichTextCtrl_sethandlerflags). set_handler_flags
+
+  *set_handler_flags*(%(arg-type)Integer% flags)
+
+Sets flags that change the behaviour of loading or saving. See the documentation for each
+handler class to see what flags are relevant for each handler.
+
+h3(#RichTextCtrl_setinsertionpoint). set_insertion_point
+
+  *set_insertion_point*(%(arg-type)Integer% pos)
+
+Sets the insertion point.
+
+h3(#RichTextCtrl_setinsertionpointend). set_insertion_point_end
+
+  *set_insertion_point_end*()
+
+Sets the insertion point to the end of the text control.
+
+h3(#RichTextCtrl_setliststyle). set_list_style
+
+ Boolean *set_list_style*(%(arg-type)Range% range, 
+                        %(arg-type)"RichTextListStyleDefinition":richtextliststyledefinition.html% style, 
+                        %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO,  %(arg-type)Integer% startFrom = -1,  %(arg-type)Integer% listLevel = -1)
+
+ Boolean *set_list_style*(%(arg-type)Range% range,  %(arg-type)String% styleName, 
+                        %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO, 
+                        %(arg-type)Integer% startFrom = -1, 
+                        %(arg-type)Integer% listLevel = -1)
+
+Sets the list attributes for the given range, passing flags to determine how the attributes are set.
+Either the style definition or the name of the style definition (in the current sheet) can be passed.
+
+_flags_ is a bit list of the following:
+
+
+* RICHTEXT_SETSTYLE_WITH_UNDO: specifies that this command will be undoable.
+* RICHTEXT_SETSTYLE_RENUMBER: specifies that numbering should start from _startFrom_, otherwise existing attributes are used.
+* RICHTEXT_SETSTYLE_SPECIFY_LEVEL: specifies that _listLevel_ should be used as the level for all paragraphs, otherwise the current indentation will be used.
+
+
+See also "number_list":richtextctrl.html#RichTextCtrl_numberlist, "promote_list":richtextctrl.html#RichTextCtrl_promotelist, "clear_list_style":richtextctrl.html#RichTextCtrl_clearliststyle.
+
+h3(#RichTextCtrl_setselection). set_selection
+
+  *set_selection*(%(arg-type)Integer% from,  %(arg-type)Integer% to)
+
+Sets the selection to the given range.
+
+The end point of range is specified as the last character position of the span of text, plus one.
+So, for example, to set the selection for a character at position 5, use the range (5,6).
+
+h3(#RichTextCtrl_setselectionrange). set_selection_range
+
+  *set_selection_range*(%(arg-type)Range% range)
+
+Sets the selection to the given range.
+
+The end point of range is specified as the last character position of the span of text, plus one.
+So, for example, to set the selection for a character at position 5, use the range (5,6).
+
+h3(#RichTextCtrl_setstyle). set_style
+
+ Boolean *set_style*(%(arg-type)Range% range,  %(arg-type)"RichTextAttr":richtextattr.html% style)
+
+ Boolean *set_style*(%(arg-type)Integer% start,  %(arg-type)Integer% end, 
+                   %(arg-type)"TextAttrEx":textattrex.html% style)
+
+ Boolean *set_style*(%(arg-type)Integer% start,  %(arg-type)Integer% end, 
+                   %(arg-type)"TextAttr":textattr.html% style)
+
+Sets the attributes for the given range. The RichTextAttr version is more efficient
+because it does not use Font objects.
+
+The end point of range is specified as the last character position of the span of text, plus one.
+So, for example, to set the style for a character at position 5, use the range (5,6).
+
+h3(#RichTextCtrl_setstyleex). set_style_ex
+
+ Boolean *set_style_ex*(%(arg-type)Range% range,  %(arg-type)"RichTextAttr":richtextattr.html% style, 
+                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
+
+ Boolean *set_style_ex*(%(arg-type)Range% range,  %(arg-type)"TextAttrEx":textattrex.html% style, 
+                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
+
+ Boolean *set_style_ex*(%(arg-type)Integer% start,  %(arg-type)Integer% end, 
+                      %(arg-type)"TextAttrEx":textattrex.html% style, 
+                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
+
+Sets the attributes for the given range, passing flags to determine how the attributes are set. The RichTextAttr version is more efficient
+because it does not use Font objects.
+
+The end point of range is specified as the last character position of the span of text, plus one.
+So, for example, to set the style for a character at position 5, use the range (5,6).
+
+_flags_ may contain a bit list of the following values:
+
+
+* RICHTEXT_SETSTYLE_NONE: no style flag.
+* RICHTEXT_SETSTYLE_WITH_UNDO: specifies that this operation should be undoable.
+* RICHTEXT_SETSTYLE_OPTIMIZE: specifies that the style should not be applied if the
+combined style at this point is already the style in question.
+* RICHTEXT_SETSTYLE_PARAGRAPHS_ONLY: specifies that the style should only be applied to paragraphs,
+and not the content. This allows content styling to be preserved independently from that of e.g. a named paragraph style.
+* RICHTEXT_SETSTYLE_CHARACTERS_ONLY: specifies that the style should only be applied to characters,
+and not the paragraph. This allows content styling to be preserved independently from that of e.g. a named paragraph style.
+* RICHTEXT_SETSTYLE_RESET: resets (clears) the existing style before applying the new style.
+* RICHTEXT_SETSTYLE_REMOVE: removes the specified style. Only the style flags are used in this operation.
+
+
+h3(#RichTextCtrl_setstylesheet). set_style_sheet
+
+  *set_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% styleSheet)
+
+Sets the style sheet associated with the control. A style sheet allows named
+character and paragraph styles to be applied.
+
+h3(#RichTextCtrl_setvalue). set_value
+
+  *set_value*(%(arg-type)String% value)
+
+Replaces existing content with the given text.
+
+h3(#RichTextCtrl_setupscrollbars). setup_scrollbars
+
+  *setup_scrollbars*(%(arg-type)Boolean% atTop = false)
+
+A helper function setting up scrollbars, for example after a resize.
+
+h3(#RichTextCtrl_showposition). show_position
+
+  *show_position*(%(arg-type)Integer% pos)
+
+Scrolls the buffer so that the given position is in view.
+
+h3(#RichTextCtrl_suppressingundo). suppressing_undo
+
+ Boolean *suppressing_undo*()
+
+Returns @true@  if undo history suppression is on.
+
+h3(#RichTextCtrl_thaw). thaw
+
+  *thaw*()
+
+Call this function to end a Freeze and refresh the display.
+
+h3(#RichTextCtrl_undo). undo
+
+  *undo*()
+
+Undoes the command at the top of the command history, if there is one.
+
+h3(#RichTextCtrl_wordleft). word_left
+
+ Boolean *word_left*(%(arg-type)Integer% noWords = 1,  %(arg-type)Integer% flags = 0)
+
+Moves a number of words to the left.
+
+h3(#RichTextCtrl_wordright). word_right
+
+ Boolean *word_right*(%(arg-type)Integer% noWords = 1,  %(arg-type)Integer% flags = 0)
+
+Move a nuber of words to the right.
+
+h3(#RichTextCtrl_writeimage). write_image
+
+ Boolean *write_image*(%(arg-type)String% filename,  %(arg-type)Integer% bitmapType)
+
+Loads an image from a file and writes it at the current insertion point.
+
+ Boolean *write_image*(%(arg-type)"Bitmap":bitmap.html% bitmap, 
+                     %(arg-type)Integer% bitmapType = BITMAP_TYPE_PNG)
+
+ Boolean *write_image*(%(arg-type)"Image":image.html% image, 
+                     %(arg-type)Integer% bitmapType = BITMAP_TYPE_PNG)
+
+Write a bitmap or image at the current insertion point. Supply an
+optional type to use for internal and file storage of the raw data.
+
+h3(#RichTextCtrl_writetext). write_text
+
+  *write_text*(%(arg-type)String% text)
+
+Writes text at the current position.
+
+h3(#RichTextCtrl_xytoposition). xy_to_position
+
+ Integer *xy_to_position*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
+
+Translates from column and line number to position.
+

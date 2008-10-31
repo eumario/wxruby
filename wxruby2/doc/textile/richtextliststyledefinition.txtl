@@ -1,0 +1,111 @@
+h1(#wxrichtextliststyledefinition). Wx::RichTextListStyleDefinition
+
+This class represents a list style definition, usually added to a "RichTextStyleSheet":richtextstylesheet.html.
+
+The class inherits paragraph attributes from RichTextStyleParagraphDefinition, and adds 10 further attribute objects, one for each level of a list.
+When applying a list style to a paragraph, the list style's base and appropriate level attributes are merged with the
+paragraph's existing attributes.
+
+You can apply a list style to one or more paragraphs using "RichTextCtrl#set_list_style":richtextctrl.html#RichTextCtrl_setliststyle. You
+can also use the functions "RichTextCtrl#number_list":richtextctrl.html#RichTextCtrl_numberlist, "RichTextCtrl#promote_list":richtextctrl.html#RichTextCtrl_promotelist and 
+"RichTextCtrl#clear_list_style":richtextctrl.html#RichTextCtrl_clearliststyle. As usual, there are RichTextBuffer versions of these functions
+so that you can apply them directly to a buffer without requiring a control.
+
+h2. Derived from
+
+"RichTextParagraphStyleDefinition":richtextparagraphstyledefinition.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextListStyleDefinition.new":#RichTextListStyleDefinition_new
+* "RichTextListStyleDefinition#combine_with_paragraph_style":#RichTextListStyleDefinition_combinewithparagraphstyle
+* "RichTextListStyleDefinition#find_level_for_indent":#RichTextListStyleDefinition_findlevelforindent
+* "RichTextListStyleDefinition#get_combined_style":#RichTextListStyleDefinition_getcombinedstyle
+* "RichTextListStyleDefinition#get_combined_style_for_level":#RichTextListStyleDefinition_getcombinedstyleforlevel
+* "RichTextListStyleDefinition#get_level_attributes":#RichTextListStyleDefinition_getlevelattributes
+* "RichTextListStyleDefinition#get_level_count":#RichTextListStyleDefinition_getlevelcount
+* "RichTextListStyleDefinition#is_numbered":#RichTextListStyleDefinition_isnumbered
+* "RichTextListStyleDefinition#set_level_attributes":#RichTextListStyleDefinition_setlevelattributes
+
+</div>
+
+
+h3(#RichTextListStyleDefinition_wxrichtextliststyledefinition). RichTextListStyleDefinition.new
+
+  *RichTextListStyleDefinition.new*(%(arg-type)String% name = '')
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextListStyleDefinition_combinewithparagraphstyle). RichTextListStyleDefinition#combine_with_paragraph_style
+
+ "RichTextAttr":richtextattr.html *combine_with_paragraph_style*(%(arg-type)Integer% indent, 
+                                             %(arg-type)"RichTextAttr":richtextattr.html% paraStyle, 
+                                             %(arg-type)"RichTextStyleSheet":richtextstylesheet.html% styleSheet = nil)
+
+This function combines the given paragraph style with the list style's base attributes and level style matching the given indent, returning the combined attributes.
+If _styleSheet_ is specified, the base style for this definition will also be included in the result.
+
+h3(#RichTextListStyleDefinition_findlevelforindent). RichTextListStyleDefinition#find_level_for_indent
+
+ Integer *find_level_for_indent*(%(arg-type)Integer% indent)
+
+This function finds the level (from 0 to 9) whose indentation attribute mostly closely matches _indent_ (expressed in tenths of a millimetre).
+
+h3(#RichTextListStyleDefinition_getcombinedstyle). RichTextListStyleDefinition#get_combined_style
+
+ "RichTextAttr":richtextattr.html *get_combined_style*(%(arg-type)Integer% indent, 
+                                   %(arg-type)"RichTextStyleSheet":richtextstylesheet.html% styleSheet = nil)
+
+This function combines the list style's base attributes and the level style matching the given indent, returning the combined attributes.
+If _styleSheet_ is specified, the base style for this definition will also be included in the result.
+
+h3(#RichTextListStyleDefinition_combinewithparagraphstyleforlevel). RichTextListStyleDefinition#get_combined_style_for_level
+
+ "RichTextAttr":richtextattr.html *get_combined_style_level*(%(arg-type)Integer% level, 
+                                         %(arg-type)"RichTextStyleSheet":richtextstylesheet.html% styleSheet = nil)
+
+This function combines the list style's base attributes and the style for the specified level, returning the combined attributes.
+If _styleSheet_ is specified, the base style for this definition will also be included in the result.
+
+h3(#RichTextListStyleDefinition_getlevelattributes). RichTextListStyleDefinition#get_level_attributes
+
+ "RichTextAttr":richtextattr.html *get_level_attributes*(%(arg-type)Integer% level)
+
+Returns the style for the given level. _level_ is a number between 0 and 9.
+
+h3(#RichTextListStyleDefinition_getlevelcount). RichTextListStyleDefinition#get_level_count
+
+ Integer *get_level_count*()
+
+Returns the number of levels. This is hard-wired to 10.
+
+Returns the style for the given level. _level_ is a number between 0 and 9.
+
+h3(#RichTextListStyleDefinition_isnumbered). RichTextListStyleDefinition#is_numbered
+
+ Integer *is_numbered*(%(arg-type)Integer% level)
+
+Returns  if the given level has numbered list attributes.
+
+h3(#RichTextListStyleDefinition_setlevelattributes). RichTextListStyleDefinition#set_level_attributes
+
+  *set_level_attributes*(%(arg-type)Integer% level, 
+                       %(arg-type)"RichTextAttr":richtextattr.html% attr)
+
+  *set_level_attributes*(%(arg-type)Integer% level,  %(arg-type)Integer% leftIndent, 
+                       %(arg-type)Integer% leftSubIndent, 
+                       %(arg-type)Integer% bulletStyle, 
+                       %(arg-type)String% bulletSymbol = '')
+
+Sets the style for the given level. _level_ is a number between 0 and 9.
+
+The first and most flexible form uses a RichTextAttr object, while the second form is for convenient setting of the most commonly-used attributes.
+

@@ -1,0 +1,141 @@
+h1(#wxrichtextevent). Wx::RichTextEvent
+
+This is the event class for "RichTextCtrl":richtextctrl.html notifications.
+
+h2. Event table macros
+
+To process a rich text event, use these event handler macros to direct input to a member
+function that takes a RichTextEvent argument.
+
+
+
+|*evt_richtext_character(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_CHARACTER event, generated when the user presses a character key. Valid event functions: GetFlags, GetPosition, GetCharacter.|
+|*evt_richtext_delete(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_DELETE event, generated when the user presses the backspace or delete key. Valid event functions: GetFlags, GetPosition.|
+|*evt_richtext_return(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_RETURN event, generated when the user presses the return key. Valid event functions: GetFlags, GetPosition.|
+|*evt_richtext_style_changed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_STYLE_CHANGED event, generated when styling has been applied to the control. Valid event functions: GetPosition, GetRange.|
+|*evt_richtext_stylesheet_changed(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_STYLESHEET_CHANGING event, generated when the control's stylesheet has changed, for example the user added, edited or deleted a style. Valid event functions: GetRange, GetPosition.|
+|*evt_richtext_stylesheet_replacing(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_STYLESHEET_REPLACING event, generated when the control's stylesheet is about to be replaced, for example when a file is loaded into the control. Valid event functions: Veto, GetOldStyleSheet, GetNewStyleSheet.|
+|*evt_richtext_stylesheet_replaced(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_STYLESHEET_REPLACED event, generated when the control's stylesheet has been replaced, for example when a file is loaded into the control. Valid event functions: GetOldStyleSheet, GetNewStyleSheet.|
+|*evt_richtext_content_inserted(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_CONTENT_INSERTED event, generated when content has been inserted into the control. Valid event functions: GetPosition, GetRange.|
+|*evt_richtext_content_deleted(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_CONTENT_DELETED event, generated when content has been deleted from the control. Valid event functions: GetPosition, GetRange.|
+|*evt_richtext_buffer_reset(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_COMMAND_RICHTEXT_BUFFER_RESET event, generated when the buffer has been reset by deleting all content. You can use this to set a default style for the first new paragraph.|
+ 
+h2. Derived from
+
+"NotifyEvent":notifyevent.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextEvent.new":#RichTextEvent_new
+* "RichTextEvent#clone":#RichTextEvent_clone
+* "RichTextEvent#get_character":#RichTextEvent_getcharacter
+* "RichTextEvent#get_flags":#RichTextEvent_getflags
+* "RichTextEvent#get_new_style_sheet":#RichTextEvent_getnewstylesheet
+* "RichTextEvent#get_old_style_sheet":#RichTextEvent_getoldstylesheet
+* "RichTextEvent#get_position":#RichTextEvent_getposition
+* "RichTextEvent#get_range":#RichTextEvent_getrange
+* "RichTextEvent#set_character":#RichTextEvent_setcharacter
+* "RichTextEvent#set_flags":#RichTextEvent_setflags
+* "RichTextEvent#set_new_style_sheet":#RichTextEvent_setnewstylesheet
+* "RichTextEvent#set_old_style_sheet":#RichTextEvent_setoldstylesheet
+* "RichTextEvent#set_position":#RichTextEvent_setposition
+* "RichTextEvent#set_range":#RichTextEvent_setrange
+
+</div>
+
+
+h3(#RichTextEvent_wxrichtextevent). RichTextEvent.new
+
+  *RichTextEvent.new*(%(arg-type)"RichTextEvent":richtextevent.html% event)
+
+  *RichTextEvent.new*(%(arg-type)"EventType":eventtype.html% commandType = EVT_NULL, 
+                    %(arg-type)Integer% winid = 0)
+
+Constructors.
+
+h3(#RichTextEvent_clone). RichTextEvent#clone
+
+ "Event":event.html *clone*()
+
+Clones the event.
+
+h3(#RichTextEvent_getcharacter). RichTextEvent#get_character
+
+ "Char":char.html *get_character*()
+
+Returns the character pressed, within a EVT_COMMAND_RICHTEXT_CHARACTER event.
+
+h3(#RichTextEvent_getflags). RichTextEvent#get_flags
+
+ Integer *get_flags*()
+
+Returns flags indicating modifier keys pressed. Possible values are RICHTEXT_CTRL_DOWN,
+RICHTEXT_SHIFT_DOWN, and RICHTEXT_ALT_DOWN.
+
+h3(#RichTextEvent_getnewstylesheet). RichTextEvent#get_new_style_sheet
+
+ "RichTextStyleSheet":richtextstylesheet.html *get_new_style_sheet*()
+
+Returns the new style sheet. Can be used in a EVT_COMMAND_RICHTEXT_STYLESHEET_CHANGING or
+EVT_COMMAND_RICHTEXT_STYLESHEET_CHANGED event handler.
+
+h3(#RichTextEvent_getoldstylesheet). RichTextEvent#get_old_style_sheet
+
+ "RichTextStyleSheet":richtextstylesheet.html *get_old_style_sheet*()
+
+Returns the old style sheet. Can be used in a EVT_COMMAND_RICHTEXT_STYLESHEET_CHANGING or
+EVT_COMMAND_RICHTEXT_STYLESHEET_CHANGED event handler.
+
+h3(#RichTextEvent_getposition). RichTextEvent#get_position
+
+ Integer *get_position*()
+
+Returns the buffer position at which the event occured.
+
+h3(#RichTextEvent_getrange). RichTextEvent#get_range
+
+ "Range":range.html *get_range*()
+
+Gets the range for the current operation.
+
+h3(#RichTextEvent_setcharacter). RichTextEvent#set_character
+
+  *set_character*(%(arg-type)"Char":char.html% ch)
+
+Sets the character variable.
+
+h3(#RichTextEvent_setflags). RichTextEvent#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Sets flags indicating modifier keys pressed. Possible values are RICHTEXT_CTRL_DOWN,
+RICHTEXT_SHIFT_DOWN, and RICHTEXT_ALT_DOWN.
+
+h3(#RichTextEvent_setnewstylesheet). RichTextEvent#set_new_style_sheet
+
+  *set_new_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% sheet)
+
+Sets the new style sheet variable.
+
+h3(#RichTextEvent_setoldstylesheet). RichTextEvent#set_old_style_sheet
+
+  *set_old_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% sheet)
+
+Sets the old style sheet variable.
+
+h3(#RichTextEvent_setposition). RichTextEvent#set_position
+
+  *set_position*(%(arg-type)Integer% pos)
+
+Sets the buffer position variable.
+
+h3(#RichTextEvent_setrange). RichTextEvent#set_range
+
+  *set_range*(%(arg-type)Range% range)
+
+Sets the range variable.
+

@@ -1,0 +1,126 @@
+h1(#wxrichtextstyleorganiserdialog). Wx::RichTextStyleOrganiserDialog
+
+This class shows a style sheet and allows the user to edit, add and remove styles.
+It can also be used as a style browser, for example if the application is not
+using a permanent "RichTextStyleComboCtrl":richtextstylecomboctrl.html or "RichTextStyleListCtrl":richtextstylelistctrl.html to
+present styles.
+ 
+h2. Derived from
+
+"Dialog":dialog.html
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextStyleOrganiserDialog.new":#RichTextStyleOrganiserDialog_new
+* "RichTextStyleOrganiserDialog#apply_style":#RichTextStyleOrganiserDialog_applystyle
+* "RichTextStyleOrganiserDialog#create":#RichTextStyleOrganiserDialog_create
+* "RichTextStyleOrganiserDialog.new":#RichTextStyleOrganiserDialog_new
+* "wxrichtextstyleorganiserdialogwxrichtextstyleorganiserdialog":#RichTextStyleOrganiserDialog_wxrichtextstyleorganiserdialogwxrichtextstyleorganiserdialog
+* "RichTextStyleOrganiserDialog#get_flags":#RichTextStyleOrganiserDialog_getflags
+* "RichTextStyleOrganiserDialog#get_restart_numbering":#RichTextStyleOrganiserDialog_getrestartnumbering
+* "RichTextStyleOrganiserDialog#get_rich_text_ctrl":#RichTextStyleOrganiserDialog_getrichtextctrl
+* "RichTextStyleOrganiserDialog#get_selected_style":#RichTextStyleOrganiserDialog_getselectedstyle
+* "RichTextStyleOrganiserDialog#get_selected_style_definition":#RichTextStyleOrganiserDialog_getselectedstyledefinition
+* "RichTextStyleOrganiserDialog#get_style_sheet":#RichTextStyleOrganiserDialog_getstylesheet
+* "RichTextStyleOrganiserDialog#set_flags":#RichTextStyleOrganiserDialog_setflags
+* "RichTextStyleOrganiserDialog#set_restart_numbering":#RichTextStyleOrganiserDialog_setrestartnumbering
+* "RichTextStyleOrganiserDialog#set_rich_text_ctrl":#RichTextStyleOrganiserDialog_setrichtextctrl
+* "RichTextStyleOrganiserDialog#set_show_tool_tips":#RichTextStyleOrganiserDialog_setshowtooltips
+* "RichTextStyleOrganiserDialog#set_style_sheet":#RichTextStyleOrganiserDialog_setstylesheet
+
+</div>
+
+
+h3(#RichTextStyleOrganiserDialog_wxrichtextstyleorganiserdialog). RichTextStyleOrganiserDialog.new
+
+  *RichTextStyleOrganiserDialog.new*(%(arg-type)Integer% flags, 
+                                   %(arg-type)"RichTextStyleSheet":richtextstylesheet.html% sheet, 
+                                   %(arg-type)"RichTextCtrl":richtextctrl.html% ctrl, 
+                                   %(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
+                                   %(arg-type)String% caption = _("Style Organiser"), 
+                                   %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                                   %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                                   %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE|RESIZE_BORDER|SYSTEM_MENU|CLOSE_BOX)
+
+h3(#RichTextStyleOrganiserDialog_applystyle). RichTextStyleOrganiserDialog#apply_style
+
+ Boolean *apply_style*(%(arg-type)"RichTextCtrl":richtextctrl.html% ctrl = nil)
+
+Applies the selected style to selection in the given control or the control passed to the constructor.
+
+h3(#RichTextStyleOrganiserDialog_create). RichTextStyleOrganiserDialog#create
+
+ Boolean *create*(%(arg-type)Integer% flags, 
+                %(arg-type)"RichTextStyleSheet":richtextstylesheet.html% sheet,  %(arg-type)"RichTextCtrl":richtextctrl.html% ctrl,  %(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY,  %(arg-type)String% caption = _("Style Organiser"),  %(arg-type)"Point":point.html% pos = DEFAULT_POSITION,  %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                %(arg-type)Integer% style = DEFAULT_DIALOG_STYLE|RESIZE_BORDER|SYSTEM_MENU|CLOSE_BOX)
+
+Creates the dialog. See h3. RichTextStyleOrganiserDialog.newwxrichtextstyleorganiserdialogwxrichtextstyleorganiserdialog for details.
+
+h3(#RichTextStyleOrganiserDialog_getflags). RichTextStyleOrganiserDialog#get_flags
+
+ Integer *get_flags*()
+
+Returns the flags used to control the interface presented to the user.
+
+h3(#RichTextStyleOrganiserDialog_getrestartnumbering). RichTextStyleOrganiserDialog#get_restart_numbering
+
+ Boolean *get_restart_numbering*()
+
+Returns  if the user has opted to restart numbering.
+
+h3(#RichTextStyleOrganiserDialog_getrichtextctrl). RichTextStyleOrganiserDialog#get_rich_text_ctrl
+
+ "RichTextCtrl":richtextctrl.html *get_rich_text_ctrl*()
+
+Returns the associated rich text control (if any).
+
+h3(#RichTextStyleOrganiserDialog_getselectedstyle). RichTextStyleOrganiserDialog#get_selected_style
+
+ String *get_selected_style*()
+
+Returns selected style name.
+
+h3(#RichTextStyleOrganiserDialog_getselectedstyledefinition). RichTextStyleOrganiserDialog#get_selected_style_definition
+
+ "RichTextStyleDefinition":richtextstyledefinition.html *get_selected_style_definition*()
+
+Returns selected style definition.
+
+h3(#RichTextStyleOrganiserDialog_getstylesheet). RichTextStyleOrganiserDialog#get_style_sheet
+
+ "RichTextStyleSheet":richtextstylesheet.html *get_style_sheet*()
+
+Returns the associated style sheet.
+
+h3(#RichTextStyleOrganiserDialog_setflags). RichTextStyleOrganiserDialog#set_flags
+
+  *set_flags*(%(arg-type)Integer% flags)
+
+Sets the flags used to control the interface presented to the user.
+
+h3(#RichTextStyleOrganiserDialog_setrestartnumbering). RichTextStyleOrganiserDialog#set_restart_numbering
+
+  *set_restart_numbering*(%(arg-type)Boolean% restartNumbering)
+
+Checks or unchecks the restart numbering checkbox.
+
+h3(#RichTextStyleOrganiserDialog_setrichtextctrl). RichTextStyleOrganiserDialog#set_rich_text_ctrl
+
+  *set_rich_text_ctrl*(%(arg-type)"RichTextCtrl":richtextctrl.html% ctrl)
+
+Sets the control to be associated with the dialog, for the purposes of applying a style to the selection.
+
+h3(#RichTextStyleOrganiserDialog_setshowtooltips). RichTextStyleOrganiserDialog#set_show_tool_tips
+
+  *set_show_tool_tips*(%(arg-type)Boolean% show)
+
+Determines whether tooltips will be shown.
+
+h3(#RichTextStyleOrganiserDialog_setstylesheet). RichTextStyleOrganiserDialog#set_style_sheet
+
+  *set_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% sheet)
+
+Sets the associated style sheet.
+

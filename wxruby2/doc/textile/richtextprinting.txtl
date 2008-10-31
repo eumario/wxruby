@@ -1,0 +1,204 @@
+h1(#wxrichtextprinting). Wx::RichTextPrinting
+
+This class provides a simple interface for performing "RichTextBuffer":richtextbuffer.html printing
+and previewing. It uses "RichTextPrintout":richtextprintout.html for layout and rendering.
+ 
+h2. Derived from
+
+"Object":object.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextPrinting.new":#RichTextPrinting_new
+* "RichTextPrinting#get_footer_text":#RichTextPrinting_getfootertext
+* "RichTextPrinting#get_header_footer_data":#RichTextPrinting_getheaderfooterdata
+* "RichTextPrinting#get_header_text":#RichTextPrinting_getheadertext
+* "RichTextPrinting#get_page_setup_data":#RichTextPrinting_getpagesetupdata
+* "RichTextPrinting#get_parent_window":#RichTextPrinting_getparentwindow
+* "RichTextPrinting#get_preview_rect":#RichTextPrinting_getpreviewrect
+* "RichTextPrinting#get_print_data":#RichTextPrinting_getprintdata
+* "RichTextPrinting#get_title":#RichTextPrinting_gettitle
+* "RichTextPrinting#page_setup":#RichTextPrinting_pagesetup
+* "RichTextPrinting#preview_buffer":#RichTextPrinting_previewbuffer
+* "RichTextPrinting#preview_file":#RichTextPrinting_previewfile
+* "RichTextPrinting#print_buffer":#RichTextPrinting_printbuffer
+* "RichTextPrinting#print_file":#RichTextPrinting_printfile
+* "RichTextPrinting#set_footer_text":#RichTextPrinting_setfootertext
+* "RichTextPrinting#set_header_footer_data":#RichTextPrinting_setheaderfooterdata
+* "RichTextPrinting#set_header_footer_font":#RichTextPrinting_setheaderfooterfont
+* "RichTextPrinting#set_header_footer_text_colour":#RichTextPrinting_setheaderfootertextcolour
+* "RichTextPrinting#set_header_text":#RichTextPrinting_setheadertext
+* "RichTextPrinting#set_page_setup_data":#RichTextPrinting_setpagesetupdata
+* "RichTextPrinting#set_parent_window":#RichTextPrinting_setparentwindow
+* "RichTextPrinting#set_preview_rect":#RichTextPrinting_setpreviewrect
+* "RichTextPrinting#set_print_data":#RichTextPrinting_setprintdata
+* "RichTextPrinting#set_show_on_first_page":#RichTextPrinting_setshowonfirstpage
+* "RichTextPrinting#set_title":#RichTextPrinting_settitle
+
+</div>
+
+
+h3(#RichTextPrinting_wxrichtextprinting). RichTextPrinting.new
+
+  *RichTextPrinting.new*(%(arg-type)String% name = T("Printing"), 
+                       %(arg-type)"Window":window.html% parentWindow = nil)
+
+Constructor. Optionally pass a title to be used in the preview frame and printing wait dialog, and
+also a parent window for these windows.
+
+h3(#RichTextPrinting_getfootertext). RichTextPrinting#get_footer_text
+
+ String *get_footer_text*(%(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_EVEN, 
+                        %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+A convenience function to get the footer text. See "RichTextHeaderFooterData":richtextheaderfooterdata.html for details.
+
+h3(#RichTextPrinting_getheaderfooterdata). RichTextPrinting#get_header_footer_data
+
+ "RichTextHeaderFooterData":richtextheaderfooterdata.html *get_header_footer_data*()
+
+Returns the internal "RichTextHeaderFooterData":richtextheaderfooterdata.html object.
+
+h3(#RichTextPrinting_getheadertext). RichTextPrinting#get_header_text
+
+ String *get_header_text*(%(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_EVEN, 
+                        %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+A convenience function to get the header text. See "RichTextHeaderFooterData":richtextheaderfooterdata.html for details.
+
+h3(#RichTextPrinting_getpagesetupdata). RichTextPrinting#get_page_setup_data
+
+ "PageSetupDialogData":pagesetupdialogdata.html *get_page_setup_data*()
+
+Returns a pointer to the internal page setup data.
+
+h3(#RichTextPrinting_getparentwindow). RichTextPrinting#get_parent_window
+
+ "Window":window.html *get_parent_window*()
+
+Returns the parent window to be used for the preview window and printing wait dialog.
+
+h3(#RichTextPrinting_getpreviewrect). RichTextPrinting#get_preview_rect
+
+ "Rect":rect.html *get_preview_rect*()
+
+Returns the dimensions to be used for the preview window.
+
+h3(#RichTextPrinting_getprintdata). RichTextPrinting#get_print_data
+
+ "PrintData":printdata.html *get_print_data*()
+
+Returns a pointer to the internal print data.
+
+h3(#RichTextPrinting_gettitle). RichTextPrinting#get_title
+
+ String *get_title*()
+
+Returns the title of the preview window or printing wait caption.
+
+h3(#RichTextPrinting_pagesetup). RichTextPrinting#page_setup
+
+  *page_setup*()
+
+Shows the page setup dialog.
+
+h3(#RichTextPrinting_previewbuffer). RichTextPrinting#preview_buffer
+
+ Boolean *preview_buffer*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer)
+
+Shows a preview window for the given buffer. The function takes its own copy of _buffer_.
+
+h3(#RichTextPrinting_previewfile). RichTextPrinting#preview_file
+
+ Boolean *preview_file*(%(arg-type)String% richTextFile)
+
+Shows a preview window for the given file. _richTextFile_ can be a text file or XML file, or other file
+depending on the available file handlers.
+
+h3(#RichTextPrinting_printbuffer). RichTextPrinting#print_buffer
+
+ Boolean *print_buffer*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer)
+
+Prints the given buffer. The function takes its own copy of _buffer_.
+
+h3(#RichTextPrinting_printfile). RichTextPrinting#print_file
+
+ Boolean *print_file*(%(arg-type)String% richTextFile)
+
+Prints the given file. _richTextFile_ can be a text file or XML file, or other file
+depending on the available file handlers.
+
+h3(#RichTextPrinting_setfootertext). RichTextPrinting#set_footer_text
+
+  *set_footer_text*(%(arg-type)String% text, 
+                  %(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_ALL, 
+                  %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+A convenience function to set the footer text. See "RichTextHeaderFooterData":richtextheaderfooterdata.html for details.
+
+h3(#RichTextPrinting_setheaderfooterdata). RichTextPrinting#set_header_footer_data
+
+  *set_header_footer_data*(%(arg-type)"RichTextHeaderFooterData":richtextheaderfooterdata.html% data)
+
+Sets the internal "RichTextHeaderFooterData":richtextheaderfooterdata.html object.
+
+h3(#RichTextPrinting_setheaderfooterfont). RichTextPrinting#set_header_footer_font
+
+  *set_header_footer_font*(%(arg-type)"Font":font.html% font)
+
+Sets the "RichTextHeaderFooterData":richtextheaderfooterdata.html font.
+
+h3(#RichTextPrinting_setheaderfootertextcolour). RichTextPrinting#set_header_footer_text_colour
+
+  *set_header_footer_text_colour*(%(arg-type)"Colour":colour.html% colour)
+
+Sets the "RichTextHeaderFooterData":richtextheaderfooterdata.html text colour.
+
+h3(#RichTextPrinting_setheadertext). RichTextPrinting#set_header_text
+
+  *set_header_text*(%(arg-type)String% text, 
+                  %(arg-type)"RichTextOddEvenPage":richtextoddevenpage.html% page = RICHTEXT_PAGE_ALL, 
+                  %(arg-type)"RichTextPageLocation":richtextpagelocation.html% location = RICHTEXT_PAGE_CENTRE)
+
+A convenience function to set the header text. See "RichTextHeaderFooterData":richtextheaderfooterdata.html for details.
+
+h3(#RichTextPrinting_setpagesetupdata). RichTextPrinting#set_page_setup_data
+
+  *set_page_setup_data*(%(arg-type)"PageSetupData":pagesetupdata.html% pageSetupData)
+
+Sets the page setup data.
+
+h3(#RichTextPrinting_setparentwindow). RichTextPrinting#set_parent_window
+
+  *set_parent_window*(%(arg-type)"Window":window.html% parent)
+
+Sets the parent window to be used for the preview window and printing wait dialog.
+
+h3(#RichTextPrinting_setpreviewrect). RichTextPrinting#set_preview_rect
+
+  *set_preview_rect*(%(arg-type)"Rect":rect.html% rect)
+
+Sets the dimensions to be used for the preview window.
+
+h3(#RichTextPrinting_setprintdata). RichTextPrinting#set_print_data
+
+  *set_print_data*(%(arg-type)"PrintData":printdata.html% printData)
+
+Sets the print data.
+
+h3(#RichTextPrinting_setshowonfirstpage). RichTextPrinting#set_show_on_first_page
+
+  *set_show_on_first_page*(%(arg-type)Boolean% show)
+
+Pass  to show the header and footer on the first page.
+
+h3(#RichTextPrinting_settitle). RichTextPrinting#set_title
+
+  *set_title*(%(arg-type)String% title)
+
+Pass the title of the preview window or printing wait caption.
+

@@ -1,0 +1,94 @@
+h1(#wxrichtextstyledefinition). Wx::RichTextStyleDefinition
+
+This is a base class for paragraph and character styles.
+
+h2. Derived from
+
+"Object":object.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextStyleDefinition.new":#RichTextStyleDefinition_new
+* "RichTextStyleDefinition#get_base_style":#RichTextStyleDefinition_getbasestyle
+* "RichTextStyleDefinition#get_description":#RichTextStyleDefinition_getdescription
+* "RichTextStyleDefinition#get_name":#RichTextStyleDefinition_getname
+* "RichTextStyleDefinition#get_style":#RichTextStyleDefinition_getstyle
+* "RichTextStyleDefinition#get_style_merged_with_base":#RichTextStyleDefinition_getstylemergedwithbase
+* "RichTextStyleDefinition#set_base_style":#RichTextStyleDefinition_setbasestyle
+* "RichTextStyleDefinition#set_description":#RichTextStyleDefinition_setdescription
+* "RichTextStyleDefinition#set_name":#RichTextStyleDefinition_setname
+* "RichTextStyleDefinition#set_style":#RichTextStyleDefinition_setstyle
+
+</div>
+
+
+h3(#RichTextStyleDefinition_wxrichtextstyledefinition). RichTextStyleDefinition.new
+
+  *RichTextStyleDefinition.new*(%(arg-type)String% name = '')
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextStyleDefinition_getbasestyle). RichTextStyleDefinition#get_base_style
+
+ String *get_base_style*()
+
+Returns the style on which this style is based.
+
+h3(#RichTextStyleDefinition_getdescription). RichTextStyleDefinition#get_description
+
+ String *get_description*()
+
+Returns the style's description.
+
+h3(#RichTextStyleDefinition_getname). RichTextStyleDefinition#get_name
+
+ String *get_name*()
+
+Returns the style name.
+
+h3(#RichTextStyleDefinition_getstyle). RichTextStyleDefinition#get_style
+
+ "RichTextAttr":richtextattr.html *get_style*()
+
+ "RichTextAttr":richtextattr.html *get_style*()
+
+Returns the attributes associated with this style.
+
+h3(#RichTextStyleDefinition_getstylemergedwithbase). RichTextStyleDefinition#get_style_merged_with_base
+
+ "RichTextAttr":richtextattr.html *get_style_merged_with_base*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% sheet)
+
+Returns the style attributes combined with the attributes of the specified base style, if any. This function works recursively.
+
+h3(#RichTextStyleDefinition_setbasestyle). RichTextStyleDefinition#set_base_style
+
+  *set_base_style*(%(arg-type)String% name)
+
+Sets the name of the style that this style is based on.
+
+h3(#RichTextStyleDefinition_setdescription). RichTextStyleDefinition#set_description
+
+  *set_description*(%(arg-type)String% descr)
+
+Sets the style description.
+
+h3(#RichTextStyleDefinition_setname). RichTextStyleDefinition#set_name
+
+  *set_name*(%(arg-type)String% name)
+
+Sets the name of the style.
+
+h3(#RichTextStyleDefinition_setstyle). RichTextStyleDefinition#set_style
+
+  *set_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
+
+Sets the attributes for this style.
+

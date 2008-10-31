@@ -1,0 +1,43 @@
+h1(#wxrichtextparagraphstyledefinition). Wx::RichTextParagraphStyleDefinition
+
+This class represents a paragraph style definition, usually added to a "RichTextStyleSheet":richtextstylesheet.html.
+
+h2. Derived from
+
+"RichTextStyleDefinition":richtextstyledefinition.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextParagraphStyleDefinition.new":#RichTextParagraphStyleDefinition_new
+* "RichTextParagraphStyleDefinition#get_next_style":#RichTextParagraphStyleDefinition_getnextstyle
+* "RichTextParagraphStyleDefinition#set_next_style":#RichTextParagraphStyleDefinition_setnextstyle
+
+</div>
+
+
+h3(#RichTextParagraphStyleDefinition_wxrichtextparagraphstyledefinition). RichTextParagraphStyleDefinition.new
+
+  *RichTextParagraphStyleDefinition.new*(%(arg-type)String% name = '')
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextParagraphStyleDefinition_getnextstyle). RichTextParagraphStyleDefinition#get_next_style
+
+ String *get_next_style*()
+
+Returns the style that should normally follow this style.
+
+h3(#RichTextParagraphStyleDefinition_setnextstyle). RichTextParagraphStyleDefinition#set_next_style
+
+  *set_next_style*(%(arg-type)String% name)
+
+Sets the style that should normally follow this style.
+
