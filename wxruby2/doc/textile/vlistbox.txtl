@@ -1,22 +1,24 @@
 h1(#wxvlistbox). Wx::VListBox
 
-VListBox is a listbox-like control with the following two main differences
-from a regular listbox: it can have an arbitrarily huge number of items because
-it doesn't store them itself but uses "on_draw_item()":#VListBox_ondrawitem() 
-callback to draw them (so it is a Virtual listbox) and its items can
-have variable height as determined by 
-"on_measure_item()":#VListBox_onmeasureitem() (so it is also a listbox
-with the lines of Variable height).
+VListBox is a control with multiple items like
+"listbox":listbox.html. It has two major differences: it can have an
+arbitrarily huge number of items because it doesn't store them itself
+but uses an "on_draw_item":#VListBox_ondrawitem method to draw them (so
+it is a *V*irtual listbox), and its items can have variable height as
+determined by "on_measure_item":#VListBox_onmeasureitem (so it is also a
+listbox with the lines of *V*ariable height).
 
-Also, as a consequence of its virtual nature, it doesn't have any methods to
-append or insert items in it as it isn't necessary to do it: you just have to
-call "set_item_count()":#VListBox_setitemcount() to tell the control how
-many items it should display. Of course, this also means that you will never
-use this class directly because it has pure virtual functions, but will need to
-derive your own class, such as "HtmlListBox":htmllistbox.html, from it.
+To use this class, you must inherit from it and create your own subclass
+in Ruby. It doesn't have any methods to append or insert items. Instead
+you just have to call "set_item_count":#VListBox_setitemcount to tell
+the control how many items it should display. Your subclass must define
+the methods "on_measure_item":#VListBox_onmeasureitem, to tell the GUI
+how tall a given item is, and "on_draw_item":#VListBox_ondrawitem, which
+should accept a "DC":dc.html which is used to draw each element in the
+list.
 
-However it emits the same events as "ListBox":listbox.html and the same
-event macros may be used with it.
+It emits the same events as "ListBox":listbox.html and the same event
+handler methods may be used with it.
  
 h2. Derived from
 
@@ -28,14 +30,12 @@ h2. Methods
 
 * "VListBox.new":#VListBox_new
 * "VListBox#clear":#VListBox_clear
-* "VListBox#create":#VListBox_create
 * "VListBox#deselect_all":#VListBox_deselectall
-* "VListBox#get_first_selected":#VListBox_getfirstselected
 * "VListBox#get_item_count":#VListBox_getitemcount
 * "VListBox#get_margins":#VListBox_getmargins
-* "VListBox#get_next_selected":#VListBox_getnextselected
 * "VListBox#get_selected_count":#VListBox_getselectedcount
 * "VListBox#get_selection":#VListBox_getselection
+* "VListBox#get_selections":#VListBox_getselections
 * "VListBox#get_selection_background":#VListBox_getselectionbackground
 * "VListBox#has_multiple_selection":#VListBox_hasmultipleselection
 * "VListBox#is_current":#VListBox_iscurrent
@@ -55,8 +55,6 @@ h2. Methods
 
 </div>
 
-
-
 h3(#VListBox_new). VListBox.new
 
   *VListBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
@@ -64,9 +62,11 @@ h3(#VListBox_new). VListBox.new
                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% countItems = 0, 
                %(arg-type)Integer% style = 0, 
-               %(arg-type)String% name = VListBoxNameStr)
+               %(arg-type)String% name = "VListBox")
 
-Normal constructor which calls "Create()":vlistboxcreate.html internally.
+Normal constructor. The only special style which may be used with
+VListBox is @LB_MULTIPLE@ which indicates that the listbox should
+support multiple selection.
 
 h3(#VListBox_clear). VListBox#clear
 
@@ -74,64 +74,19 @@ h3(#VListBox_clear). VListBox#clear
 
 Deletes all items from the control.
 
-
-h3(#VListBox_create). VListBox#create
-
- Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
-                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
-                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
-                %(arg-type)Integer% style = 0, 
-                %(arg-type)String% name = VListBoxNameStr)
-
-Creates the control. To finish creating it you also should call 
-"set_item_count()":#VListBox_setitemcount() to let it know about the
-number of items it contains.
-
-The only special style which may be used with VListBox is @LB_MULTIPLE@ 
-which indicates that the listbox should support multiple selection.
-
-Returns @true@ on success or @false@ if the control couldn't be created
-
-
 h3(#VListBox_deselectall). VListBox#deselect_all
 
  Boolean *deselect_all*()
 
-Deselects all the items in the listbox.
-
-Returns @true@ if any items were changed, i.e. if there had been any
-selected items before, or @false@ if all the items were already deselected.
+Deselects all the items in the listbox. Returns @true@ if any items were
+changed, i.e. if there had been any selected items before, or @false@ if
+all the items were already deselected.
 
 This method is only valid for multi selection listboxes.
 
 h4. See also
 
 "select_all":#VListBox_selectall, "Select":vlistboxselect.html
-
-
-h3(#VListBox_getfirstselected). VListBox#get_first_selected
-
- Integer *get_first_selected*(%(arg-type)Integer% cookie)
-
-Returns the index of the first selected item in the listbox or 
-@NOT_FOUND@ if no items are currently selected.
-
-cookie is an opaque parameter which should be passed to the subsequent
-calls to "get_next_selected":#VListBox_getnextselected. It is needed in
-order to allow parallel iterations over the selected items.
-
-Here is a typical example of using these functions:
-
- unsigned long cookie;
- int item = hlbox->GetFirstSelected(cookie);
- while ( item != NOT_FOUND )
- {
-     ... process item ...
-     item = hlbox->GetNextSelected(cookie);
- }
- 
-
-This method is only valid for multi selection listboxes.
 
 
 h3(#VListBox_getitemcount). VListBox#get_item_count
@@ -156,21 +111,6 @@ h4. See also
 
 "set_margins":#VListBox_setmargins
 
-
-h3(#VListBox_getnextselected). VListBox#get_next_selected
-
- Integer *get_next_selected*(%(arg-type)Integer% cookie)
-
-Returns the index of the next selected item or @NOT_FOUND@ if there are
-no more.
-
-This method is only valid for multi selection listboxes.
-
-h4. See also
-
-"get_first_selected":#VListBox_getfirstselected
-
-
 h3(#VListBox_getselectedcount). VListBox#get_selected_count
 
  Integer *get_selected_count*()
@@ -193,8 +133,14 @@ h3(#VListBox_getselection). VListBox#get_selection
 
  Integer *get_selection*()
 
-Get the currently selected item or $-1$ if there is no selection.
+Get the currently selected item or @-1@ if there is no selection.
 
+h3(#VListBox_getselection). VListBox#get_selections
+
+ Array *get_selections*()
+
+For list boxes supporting multiple selection only, returns an array with
+the integer indices of all the selected items.
 
 h3(#VListBox_getselectionbackground). VListBox#get_selection_background
 
@@ -217,7 +163,6 @@ h3(#VListBox_ishasmultipleselection). VListBox#has_multiple_selection
 Returns @true@ if the listbox was created with @LB_MULTIPLE@ style
 and so supports multiple selection or @false@ if it is a single selection
 listbox.
-
 
 h3(#VListBox_iscurrent). VListBox#is_current
 
@@ -256,8 +201,14 @@ h3(#VListBox_ondrawitem). VListBox#on_draw_item
 
   *on_draw_item*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% rect,  %(arg-type)Integer% n)
 
-The derived class must implement this function to actually draw the item
-with the given index on the provided DC.
+The ruby subclass must implement this function to actually draw the item
+with the given index on the provided DC. Note that the origin
+co-ordinates of the DC are relative to the top-left corner of the whole
+control, not of the individual item. So to draw elements such as text
+within each item correctly, when you call DC drawing methods, you should
+add the "y":rect.html#Rect_y value of the rect to the y value
+representing where within the individual item the text or other drawing
+should appear.
 
 h4. Parameters
 
@@ -273,7 +224,7 @@ h3(#VListBox_ondrawseparator). VListBox#on_draw_separator
 
 This method may be used to draw separators between the lines. The rectangle
 passed to it may be modified, typically to deflate it a bit before passing to
-"on_draw_item()":#VListBox_ondrawitem().
+"on_draw_item()":#VListBox_ondrawitem(). 
 
 The base class version of this method doesn't do anything.
 
@@ -290,7 +241,6 @@ h3(#VListBox_onmeasureitem). VListBox#on_measure_item
 
 The derived class must implement this method to return the height of the
 specified item (in pixels).
-
 
 h3(#VListBox_select). VListBox#select
 
@@ -334,7 +284,7 @@ otherwise.
 This method is only valid for multi selection listboxes.
 
 h4. See also
-
+p
 "select_all":#VListBox_selectall, "Select":vlistboxselect.html
 
 h3(#VListBox_setitemcount). VListBox#set_item_count
@@ -344,8 +294,7 @@ h3(#VListBox_setitemcount). VListBox#set_item_count
 Set the number of items to be shown in the control.
 
 This is just a synonym for
-"VScrolledWindow::SetLineCount()":vscrolledwindowsetlinecount.html.
-
+"VScrolledWindow::set_line_count":vscrolledwindow.html#VScrolledWindow_setlinecount.
 
 h3(#VListBox_setmargins). VListBox#set_margins
 
@@ -357,8 +306,7 @@ Set the margins: horizontal margin is the distance between the window
 border and the item contents while vertical margin is half of the
 distance between items.
 
-By default both margins are $0$.
-
+By default both margins are @0@.
 
 h3(#VListBox_setselection). VListBox#set_selection
 
@@ -389,11 +337,9 @@ h3(#VListBox_toggle). VListBox#toggle
   *toggle*(%(arg-type)Integer% item)
 
 Toggles the state of the specified item, i.e. selects it if it was
-unselected and deselects it if it was selected.
-
-This method is only valid for multi selection listboxes.
+unselected and deselects it if it was selected. This method is only
+valid for multi selection listboxes.
 
 h4. See also
 
 "Select":vlistboxselect.html
-
