@@ -41,7 +41,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxVScrolledWindow);
       }
     // And may override these:
     virtual wxCoord EstimateTotalHeight() const
-      { wxVScrolledWindow::EstimateTotalHeight(); }
+      { return wxVScrolledWindow::EstimateTotalHeight(); }
     virtual void OnGetLinesHint(size_t lineMin, size_t lineMax) const
       { wxVScrolledWindow::OnGetLinesHint(lineMin, lineMax); }
   };
