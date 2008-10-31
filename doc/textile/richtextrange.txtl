@@ -1,0 +1,149 @@
+h1(#wxrichtextrange). Wx::RichTextRange
+
+This class stores beginning and end positions for a range of data.
+
+h2. Derived from
+
+No base class
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextRange.new":#RichTextRange_new
+* "RichTextRange#contains":#RichTextRange_contains
+* "RichTextRange#get_end":#RichTextRange_getend
+* "RichTextRange#get_length":#RichTextRange_getlength
+* "RichTextRange#get_start":#RichTextRange_getstart
+* "RichTextRange#from_internal":#RichTextRange_frominternal
+* "RichTextRange#is_outside":#RichTextRange_isoutside
+* "RichTextRange#is_within":#RichTextRange_iswithin
+* "RichTextRange#limit_to":#RichTextRange_limitto
+* "RichTextRange#set_end":#RichTextRange_setend
+* "RichTextRange#set_range":#RichTextRange_setrange
+* "RichTextRange#set_start":#RichTextRange_setstart
+* "RichTextRange#swap":#RichTextRange_swap
+* "RichTextRange#to_internal":#RichTextRange_tointernal
+
+</div>
+
+
+h3(#RichTextRange_wxrichtextrange). RichTextRange.new
+
+  *RichTextRange.new*(%(arg-type)Integer% start,  %(arg-type)Integer% end)
+
+  *RichTextRange.new*(%(arg-type)Range% range)
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextRange_contains). RichTextRange#contains
+
+ Boolean *contains*(%(arg-type)Integer% pos)
+
+Returns  if the given position is within this range. Does not
+match if the range is empty.
+
+h3(#RichTextRange_getend). RichTextRange#get_end
+
+ Integer *get_end*()
+
+Returns the end position.
+
+h3(#RichTextRange_getlength). RichTextRange#get_length
+
+ Integer *get_length*()
+
+Returns the length of the range.
+
+h3(#RichTextRange_getstart). RichTextRange#get_start
+
+ Integer *get_start*()
+
+Returns the start of the range.
+
+h3(#RichTextRange_frominternal). RichTextRange#from_internal
+
+ "Range":range.html *from_internal*()
+
+Converts the internal range, which uses the first and last character positions of the range,
+to the API-standard range, whose end is one past the last character in the range.
+In other words, one is added to the end position.
+
+h3(#RichTextRange_isoutside). RichTextRange#is_outside
+
+ Boolean *is_outside*(%(arg-type)Range% range)
+
+Returns  if this range is completely outside _range_.
+
+h3(#RichTextRange_iswithin). RichTextRange#is_within
+
+ Boolean *is_within*(%(arg-type)Range% range)
+
+Returns  if this range is completely within _range_.
+
+h3(#RichTextRange_limitto). RichTextRange#limit_to
+
+ Boolean *limit_to*(%(arg-type)Range% range)
+
+Limits this range to be within _range_.
+
+h3(#RichTextRange_setend). RichTextRange#set_end
+
+  *set_end*(%(arg-type)Integer% end)
+
+Sets the end of the range.
+
+h3(#RichTextRange_setrange). RichTextRange#set_range
+
+  *set_range*(%(arg-type)Integer% start,  %(arg-type)Integer% end)
+
+Sets the range.
+
+h3(#RichTextRange_setstart). RichTextRange#set_start
+
+  *set_start*(%(arg-type)Integer% start)
+
+Sets the start of the range.
+
+h3(#RichTextRange_swap). RichTextRange#swap
+
+  *swap*()
+
+Swaps the start and end.
+
+h3(#RichTextRange_tointernal). RichTextRange#to_internal
+
+ "Range":range.html *to_internal*()
+
+Converts the API-standard range, whose end is one past the last character in the range,
+to the internal form, which uses the first and last character positions of the range.
+In other words, one is subtracted from the end position.
+
+h3(#RichTextRange_operatorplus). RichTextRange::operator+
+
+ "Range":range.html *operator+*(%(arg-type)Range% range)
+
+Adds _range_ to this range.
+
+h3(#RichTextRange_operatorminus). RichTextRange::operator-
+
+ "Range":range.html *operator-*(%(arg-type)Range% range)
+
+Subtracts _range_ from this range.
+
+h3(#RichTextRange_operatorassign). RichTextRange::operator=
+
+  *operator=*(%(arg-type)Range% range)
+
+Assigns _range_ to this range.
+
+h3(#RichTextRange_operatorequal). RichTextRange::operator==
+
+ Boolean *operator==*(%(arg-type)Range% range)
+
+Returns  if _range_ is the same as this range.
+

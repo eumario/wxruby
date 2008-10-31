@@ -1,0 +1,74 @@
+h1(#wxrichtextstylecomboctrl). Wx::RichTextStyleComboCtrl
+
+This is a combo control that can display the styles in a "RichTextStyleSheet":richtextstylesheet.html,
+and apply the selection to an associated "RichTextCtrl":richtextctrl.html.
+
+See @samples/richtext@ for an example of how to use it.
+
+h2. Derived from
+
+"ComboCtrl":comboctrl.html
+
+h2. See also
+
+"RichTextStyleListBox":richtextstylelistbox.html, "RichTextCtrl overview":richtextctrloverview.html
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextStyleComboCtrl.new":#RichTextStyleComboCtrl_new
+* "RichTextStyleComboCtrl#get_rich_text_ctrl":#RichTextStyleComboCtrl_getrichtextctrl
+* "RichTextStyleComboCtrl#get_style_sheet":#RichTextStyleComboCtrl_getstylesheet
+* "RichTextStyleComboCtrl#set_rich_text_ctrl":#RichTextStyleComboCtrl_setrichtextctrl
+* "RichTextStyleComboCtrl#set_style_sheet":#RichTextStyleComboCtrl_setstylesheet
+* "RichTextStyleComboCtrl#update_styles":#RichTextStyleComboCtrl_updatestyles
+
+</div>
+
+
+h3(#RichTextStyleComboCtrl_wxrichtextstylecomboctrl). RichTextStyleComboCtrl.new
+
+  *RichTextStyleComboCtrl.new*(%(arg-type)"Window":window.html% parent, 
+                             %(arg-type)Integer% id = ID_ANY, 
+                             %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
+                             %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
+                             %(arg-type)Integer% style = 0)
+
+Constructor.
+
+  *destructor*()
+
+Destructor.
+
+h3(#RichTextStyleComboCtrl_getrichtextctrl). RichTextStyleComboCtrl#get_rich_text_ctrl
+
+ "RichTextCtrl":richtextctrl.html *get_rich_text_ctrl*()
+
+Returns the "RichTextCtrl":richtextctrl.html associated with this control.
+
+h3(#RichTextStyleComboCtrl_getstylesheet). RichTextStyleComboCtrl#get_style_sheet
+
+ "RichTextStyleSheet":richtextstylesheet.html *get_style_sheet*()
+
+Returns the style sheet associated with this control.
+
+h3(#RichTextStyleComboCtrl_setrichtextctrl). RichTextStyleComboCtrl#set_rich_text_ctrl
+
+  *set_rich_text_ctrl*(%(arg-type)"RichTextCtrl":richtextctrl.html% ctrl)
+
+Associates the control with a "RichTextCtrl":richtextctrl.html.
+
+h3(#RichTextStyleComboCtrl_setstylesheet). RichTextStyleComboCtrl#set_style_sheet
+
+  *set_style_sheet*(%(arg-type)"RichTextStyleSheet":richtextstylesheet.html% styleSheet)
+
+Associates the control with a style sheet.
+
+h3(#RichTextStyleComboCtrl_updatestyles). RichTextStyleComboCtrl#update_styles
+
+  *update_styles*()
+
+Updates the combo control from the associated style sheet.
+
+

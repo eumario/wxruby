@@ -1,0 +1,103 @@
+h1(#wxrichtextprintout). Wx::RichTextPrintout
+
+This class implements print layout for "RichTextBuffer":richtextbuffer.html. Instead of using it directly, you
+should normally use the "RichTextPrinting":richtextprinting.html class.
+
+h2. Derived from
+
+"Printout":printout.html
+
+h2. Data structures
+
+<div id="methods">
+
+h2. Methods
+
+* "RichTextPrintout.new":#RichTextPrintout_new
+* "RichTextPrintout#calculate_scaling":#RichTextPrintout_calculatescaling
+* "RichTextPrintout#get_header_footer_data":#RichTextPrintout_getheaderfooterdata
+* "RichTextPrintout#get_page_info":#RichTextPrintout_getpageinfo
+* "RichTextPrintout#get_rich_text_buffer":#RichTextPrintout_getrichtextbuffer
+* "RichTextPrintout#has_page":#RichTextPrintout_haspage
+* "RichTextPrintout#on_prepare_printing":#RichTextPrintout_onprepareprinting
+* "RichTextPrintout#on_print_page":#RichTextPrintout_onprintpage
+* "RichTextPrintout#set_header_footer_data":#RichTextPrintout_setheaderfooterdata
+* "RichTextPrintout#set_margins":#RichTextPrintout_setmargins
+* "RichTextPrintout#set_rich_text_buffer":#RichTextPrintout_setrichtextbuffer
+
+</div>
+
+
+h3(#RichTextPrintout_wxrichtextprintout). RichTextPrintout.new
+
+  *RichTextPrintout.new*(%(arg-type)String% title = T("Printout"))
+
+Constructor.
+
+h3(#RichTextPrintout_calculatescaling). RichTextPrintout#calculate_scaling
+
+  *calculate_scaling*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Rect":rect.html% textRect, 
+                    %(arg-type)"Rect":rect.html% headerRect, 
+                    %(arg-type)"Rect":rect.html% footerRect)
+
+Calculates scaling and text, header and footer rectangles.
+
+h3(#RichTextPrintout_getheaderfooterdata). RichTextPrintout#get_header_footer_data
+
+ "RichTextHeaderFooterData":richtextheaderfooterdata.html *get_header_footer_data*()
+
+Returns the header and footer data associated with the printout.
+
+h3(#RichTextPrintout_getpageinfo). RichTextPrintout#get_page_info
+
+  *get_page_info*(%(arg-type)Integer% minPage,  %(arg-type)Integer% maxPage, 
+                %(arg-type)Integer% selPageFrom, 
+                %(arg-type)Integer% selPageTo)
+
+Gets the page information.
+
+h3(#RichTextPrintout_getrichtextbuffer). RichTextPrintout#get_rich_text_buffer
+
+ "RichTextBuffer":richtextbuffer.html *get_rich_text_buffer*()
+
+Returns a pointer to the buffer being rendered.
+
+h3(#RichTextPrintout_haspage). RichTextPrintout#has_page
+
+ Boolean *has_page*(%(arg-type)Integer% page)
+
+Returns  if the given page exists in the printout.
+
+h3(#RichTextPrintout_onprepareprinting). RichTextPrintout#on_prepare_printing
+
+  *on_prepare_printing*()
+
+Prepares for printing, laying out the buffer and calculating pagination.
+
+h3(#RichTextPrintout_onprintpage). RichTextPrintout#on_print_page
+
+ Boolean *on_print_page*(%(arg-type)Integer% page)
+
+Does the actual printing for this page.
+
+h3(#RichTextPrintout_setheaderfooterdata). RichTextPrintout#set_header_footer_data
+
+  *set_header_footer_data*(%(arg-type)"RichTextHeaderFooterData":richtextheaderfooterdata.html% data)
+
+Sets the header and footer data associated with the printout.
+
+h3(#RichTextPrintout_setmargins). RichTextPrintout#set_margins
+
+  *set_margins*(%(arg-type)Integer% top = 252,  %(arg-type)Integer% bottom = 252, 
+              %(arg-type)Integer% left = 252, 
+              %(arg-type)Integer% right = 252)
+
+Sets margins in 10ths of millimetre. Defaults to 1 inch for margins.
+
+h3(#RichTextPrintout_setrichtextbuffer). RichTextPrintout#set_rich_text_buffer
+
+  *set_rich_text_buffer*(%(arg-type)"RichTextBuffer":richtextbuffer.html% buffer)
+
+Sets the buffer to print. RichTextPrintout does not manage this pointer; it should
+be managed by the calling code, such as RichTextPrinting.
+
