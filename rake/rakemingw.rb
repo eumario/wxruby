@@ -84,7 +84,8 @@ end
 
 # Test for presence of OpenGL library; link it in if present, skip that
 # class if not
-gl_lib = File.join( $WXLIBDIR, "libwx_wxmsw#{$POSTFIX}_gl-#{WXVERSION}.a" )
+gl_lib = File.join( $WXLIBDIR, 
+                    "libwx_msw#{$POSTFIX}_gl-#{WXVERSION}.a" )
 if File.exists?(gl_lib)
   windows_libs << gl_lib 
 else
