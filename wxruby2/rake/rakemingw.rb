@@ -88,6 +88,7 @@ gl_lib = File.join( $WXLIBDIR,
                     "libwx_msw#{$POSTFIX}_gl-#{WXVERSION}.a" )
 if File.exists?(gl_lib)
   windows_libs << gl_lib 
+  WINDOWS_SYS_LIBS << 'opengl32'
 else
   $excluded_classes << "GLCanvas"
 end
