@@ -4,6 +4,14 @@ class Wx::Point
     "#<Wx::Point: (#{x}, #{y})>"
   end
 
+  # Correct comparison for Points - same if same x and y
+  def ==(other)
+    unless other.kind_of?(Wx::Point)
+      Kernel.raise TypeError, "Cannot compare Point to #{other}"
+    end
+    x == other.x and y == other.y
+  end
+
   # Return a new Wx::Point with the x and y parameters both divided by
   # parameter +div+, which should be a Numeric
   def /(div)

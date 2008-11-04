@@ -1,6 +1,15 @@
 class Wx::Size
+  # More informative output for inspect etc
   def to_s
     "#<Wx::Size: (#{get_width}, #{get_height})>"
+  end
+
+  # Compare with another size
+  def ==(other)
+    unless other.kind_of?(Wx::Size)
+      Kernel.raise TypeError, "Cannot compare Size to #{other}"
+    end
+    get_x == other.get_x and get_y == other.get_y
   end
 
   # Return a new Wx::Size with the width and height values both divided
