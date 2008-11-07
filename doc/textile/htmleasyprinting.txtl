@@ -114,49 +114,50 @@ detailed description.
 
 h3(#HtmlEasyPrinting_setheader). HtmlEasyPrinting#set_header
 
-  *set_header*(%(arg-type)String% header,  %(arg-type)Integer% pg = PAGE_ALL)
+  *set_header*(%(arg-type)String% header,  %(arg-type)Integer% page = @Wx::PAGE_ALL@)
 
-Set page header.
+Sets the page header to the text _header_. The header can contain HTML
+markup. It can also include placeholders, wrapped in the &#64; sign,
+which be will replaced on each page.
 
-h4. Parameters
+* &#64;DATE&#64; is replaced by the current date in default format
+* &#64;PAGENUM&#64; is replaced by page number
+* &#64;PAGESCNT&#64; is replaced by total number of pages
+* &#64;TIME&#64; is replaced by the current time in default format
+* &#64;TITLE&#64; is replaced with the title of the document 
 
-* _header_ HTML text to be used as header. You can use macros in it:
-
-
-* @PAGENUM@ is replaced by page number
-* @PAGESCNT@ is replaced by total number of pages
-
-
-* _pg_ one of PAGE_ODD, PAGE_EVEN and PAGE_ALL constants.
+The _page_ parameter can be used to control which set of pages the
+header is set for. It can be one of the constants @Wx::PAGE_ODD@, @Wx::PAGE_EVEN@ or @Wx::PAGE_ALL@.
 
 h3(#HtmlEasyPrinting_setfooter). HtmlEasyPrinting#set_footer
 
-  *set_footer*(%(arg-type)String% footer,  %(arg-type)Integer% pg = PAGE_ALL)
+  *set_footer*(%(arg-type)String% footer,  %(arg-type)Integer% page = @Wx::PAGE_ALL@)
 
-Set page footer.
+Sets the page footer to the text _footer_. The footer can contain HTML
+markup. It can also include placeholders, wrapped in the &#64; sign,
+which be will replaced on each page.
 
-h4. Parameters
+* &#64;DATE&#64; is replaced by the current date in default format
+* &#64;PAGENUM&#64; is replaced by page number
+* &#64;PAGESCNT&#64; is replaced by total number of pages
+* &#64;TIME&#64; is replaced by the current time in default format
+* &#64;TITLE&#64; is replaced with the title of the document 
 
-* _footer_ HTML text to be used as footer. You can use macros in it:
-
-
-* @PAGENUM@ is replaced by page number
-* @PAGESCNT@ is replaced by total number of pages
-
-
-* _pg_ one of PAGE_ODD, PAGE_EVEN and PAGE_ALL constants.
+The _page_ parameter can be used to control which set of pages the
+footer is set for. It can be one of the constants @Wx::PAGE_ODD@,
+@Wx::PAGE_EVEN@ or @Wx::PAGE_ALL@.
 
 h3(#HtmlEasyPrinting_getprintdata). HtmlEasyPrinting#get_print_data
 
  "PrintData":printdata.html *get_print_data*()
 
-Returns pointer to "PrintData":printdata.html instance used by this class. You can
-set its parameters (via SetXXXX methods).
+Returns the "PrintData":printdata.html instance used by this class. You can
+set its parameters (using its set_xxx methods).
 
 h3(#HtmlEasyPrinting_getpagesetupdata). HtmlEasyPrinting#get_page_setup_data
 
  "PageSetupDialogData":pagesetupdialogdata.html *get_page_setup_data*()
 
-Returns a pointer to "PageSetupDialogData":pagesetupdialogdata.html instance used by 
-this class. You can set its parameters (via SetXXXX methods).
+Returns the "PageSetupDialogData":pagesetupdialogdata.html instance used by 
+this class. You can set its parameters (using its set_xxx methods).
 
