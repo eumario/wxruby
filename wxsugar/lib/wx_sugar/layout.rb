@@ -51,7 +51,9 @@ require 'wx_sugar/class_definitions'
 module WxSugar
 module Arranger
   def self.included(klass)
-    unless klass.instance_methods.include?('add')
+    old_meths = klass.instance_methods
+    # Needs to be correct for both ruby 1.8 and ruby 1.9
+    unless old_meths.include?('add') or old_meths.include?(:add)
       # don't over-write methods in sizer
       klass.module_eval { alias_method :add, :nest }
     end
@@ -135,6 +137,7 @@ module Arranger
     proportion = layout_hints[:proportion] || 0
     siz = self.current_sizer
     padding = layout_hints[:padding] || @padding
+
     siz.add(child, proportion, layout, padding || 0)
     siz.layout()
     
