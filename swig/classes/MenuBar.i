@@ -8,6 +8,11 @@
 GC_NEVER(wxMenuBar);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMenuBar);
 
+// MenuBar#refresh has a different method signature from all other
+// Window classes. So don't attempt route calls to Window#refresh
+// downward from C++ to ruby, or exceptions will result
+%feature("nodirector") Refresh;
+
 %ignore wxMenuBar(int  n , wxMenu*  menus[] , const wxString  titles[] ) ;
 
 %import "include/wxObject.h"
