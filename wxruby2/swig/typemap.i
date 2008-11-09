@@ -235,10 +235,8 @@
 }
 
 %typemap(out) wxArrayString & {
-
   $result = rb_ary_new();
-
-  for (int i = 0; i < $1->GetCount(); i++)
+  for (size_t i = 0; i < $1->GetCount(); i++)
   {
     rb_ary_push($result,rb_str_new2((const char *)(*$1)[i].mb_str()));
   }
@@ -248,8 +246,6 @@
 {
    $1 = (TYPE($input) == T_ARRAY);
 }
-
-%apply wxArrayString & { const wxArrayString &}
 
 ##############################################################
 
@@ -274,10 +270,8 @@
 }
 
 %typemap(out) wxArrayInt {
-
   $result = rb_ary_new();
-
-  for (int i = 0; i < $1.GetCount(); i++)
+  for (size_t i = 0; i < $1.GetCount(); i++)
   {
     rb_ary_push($result,INT2NUM( $1.Item(i) ) );
   }
