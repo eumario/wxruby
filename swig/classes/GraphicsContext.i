@@ -17,13 +17,13 @@ GC_MANAGE_AS_OBJECT(wxGraphicsContext);
 
 %typemap(directorargout) ( wxDouble* width, wxDouble* height, 
                            wxDouble* descent, wxDouble* externalLeading) {
-  if ( (TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 2) )
+  if ( (TYPE(result) == T_ARRAY) && (RARRAY_LEN(result) >= 2) )
     {
       *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
       *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
-      if ( ($3 != NULL ) && RARRAY(result)->len >= 3)
+      if ( ($3 != NULL ) && RARRAY_LEN(result) >= 3)
         *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
-      if ( ( $4 != NULL ) && RARRAY(result)->len >= 4 )
+      if ( ( $4 != NULL ) && RARRAY_LEN(result) >= 4 )
         *$4 = ($*4_ltype)NUM2INT(rb_ary_entry(result,3));
     }
 }

@@ -11,7 +11,7 @@ SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxFrame);
 
 %typemap(in,numinputs=1) (int n, int * widths) (int size, int i, int *arr){
 
-  size = RARRAY($input)->len;
+  size = RARRAY_LEN($input);
   arr = new int[size];
 
   for(i = 0; i < size; i++)
