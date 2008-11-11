@@ -9,7 +9,7 @@
 %typemap(directorargout) ( int * OUTPUT ) {
   if($1 != NULL)
   {
-    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+    if((TYPE(result) == T_ARRAY) && ( RARRAY_LEN(result) >= 1 ) )
     {
       *$1 = (int)NUM2INT(rb_ary_entry(result,0));
       rb_ary_shift(result);
@@ -21,7 +21,7 @@
   }
   else
   {
-    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+    if((TYPE(result) == T_ARRAY) && ( RARRAY_LEN(result) >= 1) )
       rb_ary_shift(result);  // Guess we should shift it anyhow!
   }
 }
@@ -29,7 +29,7 @@
 %typemap(directorargout) ( long * OUTPUT ) {
   if($1 != NULL)
   {
-    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+    if((TYPE(result) == T_ARRAY) && ( RARRAY_LEN(result) >= 1))
     {
       *$1 = (long)NUM2LONG(rb_ary_entry(result,0));
       rb_ary_shift(result);
@@ -41,7 +41,7 @@
   }
   else
   {
-    if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 1))
+    if((TYPE(result) == T_ARRAY) && ( RARRAY_LEN(result) >= 1 ) )
       rb_ary_shift(result);  // Guess we should shift it anyhow!
   }
 }
@@ -148,7 +148,7 @@
 %typemap(typecheck, precedence=SWIG_TYPECHECK_POINTER) wxSize&, wxPoint& {
   void *vptr = 0;
   $1 = 0;
-  if ( TYPE($input) == T_ARRAY && RARRAY($input)->len == 2 )
+  if ( TYPE($input) == T_ARRAY && RARRAY_LEN($input) == 2 )
 	$1 = 1;
   if ( TYPE($input) == T_DATA &&
 	   SWIG_CheckState( SWIG_ConvertPtr($input, &vptr, $1_descriptor, 0) ) )
@@ -182,13 +182,13 @@
   }
   else
   {
-    arr = new wxString[RARRAY($input)->len];
-    for (int i = 0; i < RARRAY($input)->len; i++)
+    arr = new wxString[ RARRAY_LEN($input) ];
+    for (int i = 0; i < RARRAY_LEN($input); i++)
     {
 	  VALUE str = rb_ary_entry($input,i);
 	  arr[i] = wxString(StringValuePtr(str), wxConvUTF8);
     }
-    $1 = RARRAY($input)->len;
+    $1 = RARRAY_LEN($input);
     $2 = arr;
   }
 }
@@ -222,7 +222,7 @@
   else
   {
     
-    for (int i = 0; i < RARRAY($input)->len; i++)
+    for (int i = 0; i < RARRAY_LEN($input); i++)
     {
 	  VALUE str = rb_ary_entry($input, i);
 	  wxString item(StringValuePtr(str), wxConvUTF8);
@@ -258,7 +258,7 @@
   else
   {
     
-    for (int i = 0; i < RARRAY($input).len; i++)
+    for (int i = 0; i < RARRAY_LEN($input); i++)
     {
       int item = NUM2INT(rb_ary_entry($input,i));
       tmp.Add(item);
@@ -324,34 +324,34 @@
 %apply wxCoord *OUTPUT { wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading };
 
 %typemap(directorargout) ( int * x , int * y , int * descent, int * externalLeading ) {
-  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 2))
+  if((TYPE(result) == T_ARRAY) && ( RARRAY_LEN(result) >= 2 ) )
   {
     *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
     *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
-    if(($3 != NULL) && RARRAY(result)->len >= 3)
+    if(($3 != NULL) && RARRAY_LEN(result) >= 3)
       *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
-    if(($4 != NULL) && RARRAY(result)->len >= 4)
+    if(($4 != NULL) && RARRAY_LEN(result) >= 4)
       *$4 = ($*4_ltype)NUM2INT(rb_ary_entry(result,3));
   }
 }
 
 %typemap(directorargout) ( wxCoord * width , wxCoord * height , wxCoord * heightLine ) {
-  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 2))
+  if((TYPE(result) == T_ARRAY) && ( RARRAY_LEN(result) >= 2) )
   {
     *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
     *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
-    if(($3 != NULL) && RARRAY(result)->len >= 3)
+    if(($3 != NULL) && RARRAY_LEN(result) >= 3)
       *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
   }
 }
 %typemap(directorargout) ( wxCoord * w , wxCoord * h , wxCoord * descent, wxCoord * externalLeading ) {
-  if((TYPE(result) == T_ARRAY) && (RARRAY(result)->len >= 2))
+  if((TYPE(result) == T_ARRAY) && ( RARRAY_LEN(result) >= 2 ) )
   {
     *$1 = ($*1_ltype)NUM2INT(rb_ary_entry(result,0));
     *$2 = ($*2_ltype)NUM2INT(rb_ary_entry(result,1));
-    if(($3 != NULL) && RARRAY(result)->len >= 3)
+    if(($3 != NULL) && RARRAY_LEN(result) >= 3)
       *$3 = ($*3_ltype)NUM2INT(rb_ary_entry(result,2));
-    if(($4 != NULL) && RARRAY(result)->len >= 4)
+    if(($4 != NULL) && RARRAY_LEN(result) >= 4)
       *$4 = ($*4_ltype)NUM2INT(rb_ary_entry(result,3));
   }
 }

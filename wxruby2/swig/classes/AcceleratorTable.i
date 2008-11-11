@@ -36,15 +36,16 @@ GC_MANAGE_AS_OBJECT(wxAcceleratorTable);
   else
   {
     wxAcceleratorEntry *wx_acc_ent;
-    arr = new wxAcceleratorEntry[RARRAY($input)->len];
-    for (int i = 0; i < RARRAY($input)->len; i++)
+    arr = new wxAcceleratorEntry[ RARRAY_LEN($input) ];
+    for (int i = 0; i < RARRAY_LEN($input); i++)
     {
-	  SWIG_ConvertPtr(rb_ary_entry($input,i), (void **) &wx_acc_ent, SWIGTYPE_p_wxAcceleratorEntry, 1);
+	  SWIG_ConvertPtr(rb_ary_entry($input,i), (void **) &wx_acc_ent, 
+                      SWIGTYPE_p_wxAcceleratorEntry, 1);
 	  if (wx_acc_ent == NULL) 
 		rb_raise(rb_eTypeError, "Reference to null wxAcceleratorEntry");
 	  arr[i] = *wx_acc_ent;
     }
-    $1 = RARRAY($input)->len;
+    $1 = RARRAY_LEN($input);
     $2 = arr;
   }
 }
