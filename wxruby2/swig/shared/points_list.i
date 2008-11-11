@@ -12,7 +12,7 @@
   static void wxRuby_PointArrayRubyToC(VALUE rb_arr, wxPoint wx_arr[]) {
     wxPoint *wx_point;
     VALUE rb_item;
-    for (int i = 0; i < RARRAY(rb_arr)->len; i++)
+    for (int i = 0; i < RARRAY_LEN(rb_arr); i++)
       {
         rb_item = rb_ary_entry(rb_arr, i);
         SWIG_ConvertPtr(rb_item, (void **) &wx_point, 
@@ -34,8 +34,8 @@
   }
   else
   {
-    $1 = RARRAY($input)->len;
-    arr = new wxPoint[RARRAY($input)->len];
+    $1 = RARRAY_LEN($input);
+    arr = new wxPoint[ RARRAY_LEN($input)];
     wxRuby_PointArrayRubyToC($input, arr);
     $2 = arr;
   }
@@ -71,14 +71,14 @@
   else
   {
     // total number of polygons
-    $1 = RARRAY($input)->len; 
+    $1 = RARRAY_LEN($input); 
     $2 = (int*)malloc($1 * sizeof(int));
     // number of points in each polygon
-    for ( int i = 0; i < RARRAY($input)->len; i++ )
-        $2[i] = RARRAY( rb_ary_entry($input, i) )->len;
+    for ( int i = 0; i < RARRAY_LEN($input); i++ )
+        $2[i] = RARRAY_LEN( rb_ary_entry($input, i) );
     // array of all the points
     VALUE all_points = rb_funcall($input, rb_intern("flatten"), 0);
-    point_arr = new wxPoint[RARRAY(all_points)->len];
+    point_arr = new wxPoint[ RARRAY_LEN(all_points) ];
     wxRuby_PointArrayRubyToC(all_points, point_arr);
     $3 = point_arr;
   }
