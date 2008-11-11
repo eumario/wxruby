@@ -29,12 +29,16 @@ Windows, the initial dialog size will automatically be bigger on GTK
 than on Windows.
 
 Sizers may also be used to control the layout of custom drawn items on
-the window.  The "add":#Sizer_add, "insert":#Sizer_insert, and
-"prepend":#Sizer_prepend methods return the newly added
+the window.  The "add":#Sizer_add, "insert":#Sizer_insert,
+"prepend":#Sizer_prepend, and "add_item":#Sizer_additem methods return the newly added
 "SizerItem":sizeritem.html. Just add empty space of the desired size and
 attributes, and then use the
 "SizerItem#get_rect":sizeritem.html#SizerItem_getrect method to
 determine where the drawing operations should take place.
+It is worth noting that "add_item":#Sizer_additem is more generic than
+"add":#Sizer_add, "insert":#Sizer_insert, and "prepend":#Sizer_prepend as it supports :
+* both the addition and the insertion of an item,
+* both positional and keyword arguments (an argument may be specified by its position or by its keyword).
 
 h2. Sizer options
 
@@ -156,6 +160,7 @@ h2. Derived from
 h2. Methods
 
 * "Sizer.new":#Sizer_new
+* "Sizer#add_item":#Sizer_additem
 * "Sizer#add":#Sizer_add
 * "Sizer#add_spacer":#Sizer_addspacer
 * "Sizer#add_stretch_spacer":#Sizer_addstretchspacer
@@ -194,6 +199,33 @@ This method is abstract in this class - Wx::Sizer is never instantiated
 directly. See the specific subclass you are using (eg
 "BoxSizer":boxsizer.html ) for the parameters require by the
 constructor.
+
+h3(#Sizer_additem). Sizer#add_item
+
+ "SizerItem":sizeritem.html *add_item*(%(arg-type)Object% item,  %(arg-type)Integer% index = -1, 
+                  %(arg-type)Integer% proportion = 0, 
+                  %(arg-type)Integer% flag = 0, 
+                  %(arg-type)Integer% border = 0, 
+                  %(arg-type)Object% user_data = nil)
+
+Appends or inserts an item (a window, a child sizer, or a spacer) to the sizer.
+Optional parameters may also be specified by keywords in any order as following :
+sizer.add_item(an_item, :index => 1, :proportion => 1, :flag => Wx::EXPAND)
+
+h4. Parameters
+
+* _item_ A window,a child sizer, or a spacer to be added to the sizer.
+A spacer is defined by an array containing its width and its height. 
+* _index_ If equals to -1, the item is added at the end of the sizer.
+Otherwise, it is inserted at the specified position.
+* _proportion_ The proportion of the sizer's space to be allocated to this item
+* _flag_ Sets a number of options including border location, resizing and alignment
+* _border_ The size of the border, in pixels
+* _user_==_==_data_ Not currently supported in wxRuby, not needed in normal use
+
+h4. Flags
+
+See "Sizer#add":sizer.html#Sizer_add
 
 h3(#Sizer_add). Sizer#add
 
