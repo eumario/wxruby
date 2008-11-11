@@ -23,16 +23,16 @@
 #  undef Connect
 #  undef connect
 
-// We need different string conversions for ruby 1.8 and ruby 1.9; in
-// particular, on the latter, we need to correctly set the encoding of
-// the string
-// Ruby 1.9
-#ifdef RUBY_RUBY_H
+// Different string conversions for ruby 1.8 and ruby 1.9. In
+// particular, for 1.9, we need to set the encoding of the string.
+
+// For Ruby 1.9
+#ifdef HAVE_RUBY_ENCODING_H
 
 #define WXSTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str.utf8_str(), strlen((const char *)wx_str.utf8_str()), rb_utf8_encoding())
 #define WXSTR_PTR_TO_RSTR(wx_str) rb_enc_str_new((const char *)wx_str->utf8_str(), strlen((const char *)wx_str->utf8_str()), rb_utf8_encoding())
 
-// Ruby 1.8
+// For Ruby 1.8
 #else
 #define WXSTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str.utf8_str())
 #define WXSTR_PTR_TO_RSTR(wx_str) rb_str_new2((const char *)wx_str->utf8_str())
