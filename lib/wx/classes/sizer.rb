@@ -11,12 +11,27 @@ class Wx::Sizer
   def add_item(item, *mixed_args)
     args = Wx::args_as_list(ADD_ITEM_PARAMS, *mixed_args)
 
-    # Call add to append if default position
-    idx = args.shift
-    if idx == -1
-      add(item, *args)
+    full_args = []
+
+    # extract the width and the height in the case of a spacer
+    # defined as an array
+    if item.kind_of?(Array)
+      Kernel.raise ArgumentError,
+        "Invalid Sizer specification : [width, height] expected" if item.size != 2
+      full_args << item[0] << item[1]
     else
-      insert(idx, item, *args)
+      full_args << item
+    end
+
+    # update the full arguments list with the optional arguments (except index)
+    idx = args.shift
+    full_args.concat(args)
+
+    # Call add to append if default position
+    if idx == -1
+      add(*full_args)
+    else
+      insert(idx, *full_args)
     end
   end
 end
