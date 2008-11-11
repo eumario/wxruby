@@ -45,7 +45,7 @@ GC_MANAGE_AS_OBJECT(wxDC);
     wxArrayInt result = wxArrayInt();
     $self->GetPartialTextExtents(str, result);
     VALUE rb_result = rb_ary_new();
-    for (int i = 0; i < result.GetCount(); i++) 
+    for (size_t i = 0; i < result.GetCount(); i++) 
       {
         rb_ary_push(rb_result, INT2NUM( result.Item(i) ) );
       }
