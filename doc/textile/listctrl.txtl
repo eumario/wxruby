@@ -128,6 +128,7 @@ h2. Methods
 * "ListCtrl#get_item_text_colour":#ListCtrl_getitemtextcolour
 * "ListCtrl#get_next_item":#ListCtrl_getnextitem
 * "ListCtrl#get_selected_item_count":#ListCtrl_getselecteditemcount
+* "ListCtrl#get_selections":#ListCtrl_getselections
 * "ListCtrl#get_text_colour":#ListCtrl_gettextcolour
 * "ListCtrl#get_top_item":#ListCtrl_gettopitem
 * "ListCtrl#get_view_rect":#ListCtrl_getviewrect
@@ -477,25 +478,7 @@ the first item that matches the specified flags will be returned.
 Returns the first item with given state following _item_ or -1 if
 no such item found.
 
-This function may be used to find all selected items in the control like this:
-
-
-     long item = -1;
-     for ( ;; )
-     {
-         item = listctrl->GetNextItem(item,
-                                      LIST_NEXT_ALL,
-                                      LIST_STATE_SELECTED);
-         if ( item == -1 )
-             break;
- 
-         // this item is selected - do whatever is needed with it
-         LogMessage("Item     }
- 
-
 _geometry_ can be one of:
-
-
 
 |LIST_NEXT_ABOVE|Searches for an item above the specified item.|
 |LIST_NEXT_ALL|Searches for subsequent item by index.|
@@ -507,9 +490,7 @@ _geometry_ can be one of:
 *NB:* this parameter is only supported by MSW currently and ignored on
 other platforms.
 
-_state_ can be a bitlist of the following:
-
-
+_state_ can be a combination of the following:
 
 |LIST_STATE_DONTCARE|Don't care what the state is.|
 |LIST_STATE_DROPHILITED|The item indicates it is a drop target.|
@@ -518,13 +499,18 @@ _state_ can be a bitlist of the following:
 |LIST_STATE_CUT|The item is selected as part of a cut and paste operation.|
 
 
-
 h3(#ListCtrl_getselecteditemcount). ListCtrl#get_selected_item_count
 
  Integer *get_selected_item_count*()
 
 Returns the number of selected items in the list control.
 
+h3(#ListCtrl_getselections). ListCtrl#get_selections
+
+ Array *get_selections*()
+
+Returns an array containing the indexes of all the rows that are
+currently selected.
 
 h3(#ListCtrl_gettextcolour). ListCtrl#get_text_colour
 
