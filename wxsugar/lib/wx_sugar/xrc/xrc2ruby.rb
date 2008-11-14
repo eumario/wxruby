@@ -62,8 +62,8 @@ module XRC2Ruby
         when 'sizeritem'
           stack.push( SizerItem.new(last_sizer) )
 
-        # Some "special" object not corresponding to 
-        when 'panewindow', 'tool', 'separator'
+        # Some "special" object not corresponding to a standard class
+        when 'panewindow', 'tool', 'separator', 'button'
           special = ObjectTypes.const_get(attrs['class'].upcase)
           stack.push( special.new(last_parent, attrs['name']) )
         # An ordinary window
