@@ -163,7 +163,7 @@ h3(#GenericDirCtrl_getfilterlistctrl). GenericDirCtrl#get_filter_list_ctrl
 
  "DirFilterListCtrl":dirfilterlistctrl.html *get_filter_list_ctrl*()
 
-Returns a pointer to the filter list control (if present).
+Returns the filter list control (if present).
 
 h3(#GenericDirCtrl_getrootid). GenericDirCtrl#get_root_id
 
@@ -175,14 +175,18 @@ h3(#GenericDirCtrl_gettreectrl). GenericDirCtrl#get_tree_ctrl
 
  "TreeCtrl":treectrl.html *get_tree_ctrl*()
 
-Returns a pointer to the tree control.
+Returns the "TreeCtrl":treectrl.html used to display the items in the
+tree. Normal TreeCtrl methods may be used on this tree. The text for
+each item is the name of the corresponding directory or file. The
+data (which can be retrieved by calling get_item_data) for each item is
+a String containing the full path of the directory or file.
 
 h3(#GenericDirCtrl_recreatetree). GenericDirCtrl#re_create_tree
 
   *re_create_tree*()
 
-Collapse and expand the tree, thus re-creating it from scratch.
-May be used to update the displayed directory content.
+Collapse and expand the tree, thus re-creating it from scratch. May be
+used to update the displayed directory content.
 
 h3(#GenericDirCtrl_setdefaultpath). GenericDirCtrl#set_default_path
 
