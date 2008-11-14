@@ -44,7 +44,7 @@ module XRC2Ruby::ObjectTypes
     init_arg(:style) { | val | val.gsub(/wx/, "Wx::") }
 
     # Tooltip and help text, applicable to all windows
-    attr_accessor :tooltip, :help, :hidden, :enabled, :fg, :bg
+    attr_accessor :tooltip, :help, :hidden, :enabled, :fg, :bg, :exstyle
     
     def output
       # The base constructor
@@ -84,6 +84,11 @@ module XRC2Ruby::ObjectTypes
         base << "Wx::Colour.new(#{colour.join(', ')})\n"
       end
 
+      # If extra style set
+      if self.exstyle
+        base << "#{var_name}.extra_style = #{exstyle.gsub(/^wx/, "Wx::")}"
+      end
+      
       # If explicitly disabled or enabled
       if self.enabled 
         if self.enabled.to_i.zero?
