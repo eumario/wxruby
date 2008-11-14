@@ -1,5 +1,15 @@
 === WxSugar ===
 
+NOTE (November 2008) : WxSugar is slightly depleted at the moment
+because much of the core functionality has been folded into the core
+wxRuby library. The main purpose of the package at the moment is:
+
+1) To provide the xrcise add-on tool
+2) To provide backward compatibility and bugfixes for apps already using
+   the library
+
+CONTINUING ...
+
 wxSugar is a set of pure-ruby extensions that work on top of the core
 wxRuby library. wxRuby aims to provide a comprehensive port of the
 wxWidgets GUI API. This means that it inherits some of the rather
