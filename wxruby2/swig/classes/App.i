@@ -259,4 +259,11 @@ public:
   void SetUseBestVisual(bool  flag ) ;
   bool Yield(bool onlyIfNeeded = false) ;
   int main_loop();
+#ifdef __WXMAC__
+  // These virtual methods allow an app to deal with some Mac GUI Events
+  virtual void MacOpenFile(const wxString &fileName);
+  virtual void MacPrintFile(const wxString &fileName);
+  virtual void MacNewFile();
+  virtual void MacReopenApp();
+#endif
 };
