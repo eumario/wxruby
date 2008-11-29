@@ -15,9 +15,6 @@
 // Create a SWIG macro which will be called in all Window subclasses
 %define SWIG_WXWINDOW_NO_USELESS_VIRTUALS(kls)
 
-// Also not needed - used in C++ only for two-step window construction
-%ignore kls::Create;
-
 // Not supported
 %ignore kls::TransferDataFromWindow;
 %feature("nodirector") kls::TransferDataFromWindow;
