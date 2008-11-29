@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 
@@ -13,7 +13,6 @@ public:
    wxFontDialog(wxWindow*  parent ) ;
 #endif
 
-  bool Create() ;
   bool Create(wxWindow*  parent , const wxFontData&  data ) ;
 #if !defined(__WXMAC__)
   bool Create(wxWindow*  parent ) ;
