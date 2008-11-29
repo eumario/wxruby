@@ -11,7 +11,7 @@ public:
    wxBitmapButton() ;
    wxBitmapButton(wxWindow*  parent , wxWindowID  id , const wxBitmap&  bitmap , const wxPoint&  pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long  style = wxBU_AUTODRAW, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("button")) ;
   virtual  ~wxBitmapButton() ;
-  bool Create(wxWindow*  parent , wxWindowID  id , const wxBitmap&  bitmap , const wxPoint&  pos , const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("button"));
+  bool Create(wxWindow*  parent , wxWindowID  id , const wxBitmap&  bitmap , const wxPoint& pos = wxDefaultPosition, const wxSize&  size = wxDefaultSize, long style = 0, const wxValidator&  validator = wxDefaultValidator, const wxString&  name = wxT("button"));
   const wxBitmap& GetBitmapDisabled() const;
   const wxBitmap& GetBitmapFocus() const;
   const wxBitmap& GetBitmapHover() const;
