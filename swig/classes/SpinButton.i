@@ -10,8 +10,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxSpinButton);
 #include <wx/spinbutt.h>
 %}
 
-%ignore wxSpinButton::wxSpinButton();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

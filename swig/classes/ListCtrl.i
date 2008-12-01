@@ -13,9 +13,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxListCtrl);
 #include <wx/imaglist.h>
 %}
 
-// default constructor
-%ignore wxListCtrl::wxListCtrl();
-
 // Ruby handles memory management - always use SetImageList
 %ignore wxListCtrl::AssignImageList;
 

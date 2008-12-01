@@ -11,8 +11,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRadioBox);
 #include <wx/radiobox.h>
 %}
 
-%ignore wxRadioBox::wxRadioBox();
-%ignore wxRadioBox::Number;   # Obsolete
+%ignore wxRadioBox::Number; // Obsolete
 
 %ignore wxRadioBox::Show(int item, const bool show = true);
 

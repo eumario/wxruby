@@ -11,8 +11,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRadioButton);
 #include <wx/radiobut.h>
 %}
 
-%ignore wxRadioButton::wxRadioButton();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

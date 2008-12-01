@@ -10,8 +10,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxGauge);
 #include <wx/gauge.h>
 %}
 
-%ignore wxGauge::wxGauge();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

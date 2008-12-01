@@ -9,9 +9,6 @@ GC_MANAGE_AS_OBJECT(wxDC);
 // Used by draw_lines, draw_polygon etc
 %include "../shared/points_list.i"
 
-// No default ctor
-%ignore wxDC::wxDC();
-
 // raises 'void value is not ignored as it should be' compile error
 %ignore wxDC::StartPage;
 

@@ -10,7 +10,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxTextCtrl);
 %apply long * OUTPUT { long * }
 %apply long * OUTPUT { wxTextCoord *col, wxTextCoord *row }
 
-%ignore wxTextCtrl::wxTextCtrl();
 %ignore wxTextCtrl::operator<<;
 
 %rename(check_spelling) MacCheckSpelling;

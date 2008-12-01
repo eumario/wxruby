@@ -12,11 +12,9 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMDIParentFrame);
 %{
 #include <wx/mdi.h>
 %}
-%ignore wxMDIParentFrame::wxMDIParentFrame();
 
-//
+
 // Doesn't work on wxMac
-//
 %ignore wxMDIParentFrame::GetWindowMenu;
 %ignore wxMDIParentFrame::SetWindowMenu;
 

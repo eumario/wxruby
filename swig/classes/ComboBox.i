@@ -7,8 +7,6 @@
 GC_MANAGE_AS_WINDOW(wxComboBox);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxComboBox);
 
-%ignore wxComboBox::wxComboBox();
-
 // methods for getting and setting the text selection
 %rename (SetTextSelectionRange) wxComboBox::SetSelection(long from, long to);
 %rename (GetTextSelectionRange) wxComboBox::GetSelection(long *from, long *to) const;

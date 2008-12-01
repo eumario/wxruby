@@ -11,8 +11,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBitmapComboBox);
 #include <wx/bmpcbox.h>
 %}
 
-%ignore wxBitmapComboBox::wxBitmapComboBox();
-
 // start client_data fixes
 %include "../shared/control_with_items.i"
 CLIENT_DATA_FEATURES(wxBitmapComboBox);

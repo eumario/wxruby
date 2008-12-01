@@ -11,9 +11,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMDIChildFrame);
 #include <wx/mdi.h>
 %}
 
-%ignore wxMDIChildFrame::wxMDIChildFrame();
 
-//
 // Doesn't work on wxMac. We need a better workaround.
 //
 %ignore wxMdiChildFrame::GetWindowMenu;
