@@ -7,8 +7,6 @@
 GC_MANAGE_AS_WINDOW(wxStaticBitmap);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStaticBitmap);
 
-%ignore wxStaticBitmap::wxStaticBitmap();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

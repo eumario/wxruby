@@ -11,8 +11,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxToggleButton);
 #include <wx/tglbtn.h>
 %}
 
-%ignore wxToggleButton::wxToggleButton();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

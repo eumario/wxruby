@@ -10,7 +10,6 @@
 %module(directors="1") wxCaret
 GC_MANAGE_AS_OBJECT(wxCaret);
 
-%ignore wxCaret::wxCaret() ;
 %ignore wxCaret::wxCaret(wxWindow* window, int width, int height);
 
 // only support the variants that return an object

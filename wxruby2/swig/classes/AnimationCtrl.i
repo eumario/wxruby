@@ -15,9 +15,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxAnimationCtrl);
 #define wxAC_DEFAULT_STYLE (0x00200000)
 #define wxAC_NO_AUTORESIZE (0x0010)
 
-
-%ignore wxAnimationCtrl::wxAnimationCtrl();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

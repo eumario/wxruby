@@ -17,8 +17,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxHyperlinkCtrl);
 #define wxHL_ALIGN_CENTRE       0x0008
 #define wxHL_DEFAULT_STYLE      (wxHL_CONTEXTMENU|wxNO_BORDER|wxHL_ALIGN_CENTRE)
 
-%ignore wxHyperlinkCtrl::wxHyperlinkCtrl();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

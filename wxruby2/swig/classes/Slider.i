@@ -11,8 +11,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxSlider);
 #include <wx/slider.h>
 %}
 
-%ignore wxSlider::wxSlider();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

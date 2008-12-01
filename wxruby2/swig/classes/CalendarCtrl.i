@@ -16,8 +16,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxCalendarCtrl);
 // These are managed by the CalendarCtrl once set via set_attr
 %apply SWIGTYPE *DISOWN { wxCalendarDateAttr* attr };
 
-%ignore wxCalendarCtrl::wxCalendarCtrl();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

@@ -14,8 +14,6 @@ GC_MANAGE_AS_OBJECT(wxAcceleratorTable);
 
 // This form is supported on windows only
 %ignore wxAcceleratorTable::wxAcceleratorTable(const wxString& resource);
-// Default constructor
-%ignore wxAcceleratorTable::wxAcceleratorTable();
 // This ctor is probably not needed
 %ignore wxAcceleratorTable::wxAcceleratorTable(const wxAcceleratorTable& bitmap);
 

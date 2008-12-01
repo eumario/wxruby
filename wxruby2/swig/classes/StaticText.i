@@ -7,8 +7,6 @@
 GC_MANAGE_AS_WINDOW(wxStaticText);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxStaticText);
 
-%ignore wxStaticText::wxStaticText();
-
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
