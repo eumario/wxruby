@@ -8,10 +8,14 @@ end
 require 'wx'
 
 
-
+# A virtual ListCtrl loads its items as needed from a virtual store. So
+# it's useful for linking to existing data sources, or for displaying
+# very large lists. It's subclassed in ruby, and the item_count is set;
+# the get_item_text methods should return how to display a given line.
 class TestVirtualList < Wx::ListCtrl
     def initialize(parent, log)
-        super(parent, -1, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::LC_REPORT | Wx::LC_VIRTUAL | Wx::LC_HRULES | Wx::LC_VRULES)
+      super parent, :style => Wx::LC_REPORT|Wx::LC_VIRTUAL|
+                              Wx::LC_HRULES| Wx::LC_VRULES
         @log = log
         
         @il = Wx::ImageList.new(16,16)
@@ -27,7 +31,8 @@ class TestVirtualList < Wx::ListCtrl
         set_column_width(1,175)
         set_column_width(2,175)
         
-        set_item_count(1000000)
+        # Important - call this 
+        self.item_count = 10_000
         
         @attr1 = Wx::ListItemAttr.new()
         @attr1.set_background_colour(Wx::Colour.new("YELLOW"))
