@@ -122,8 +122,9 @@ module Wx
       # API constructor
       def wx_ctor_params(*params)
         self.param_spec += params.map do | param |
-          param.kind_of?(Hash) ? Parameter[*param.to_a.flatten] : 
-            Parameter[param, STANDARD_DEFAULTS[param] ]
+          param.kind_of?(Hash) ? 
+            Parameter[ param.keys.first, param.values.first ] : 
+            Parameter[ param, STANDARD_DEFAULTS[param] ]
         end
       end
 
