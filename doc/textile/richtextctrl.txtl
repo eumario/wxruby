@@ -785,24 +785,15 @@ Returns the current caret position.
 
 h3(#RichTextCtrl_getcaretpositionforindex). get_caret_position_for_index
 
- Boolean *get_caret_position_for_index*(%(arg-type)Integer% position, 
-                                      %(arg-type)"Rect":rect.html% rect)
+ "Rect":rect.html rect *get_caret_position_for_index*(%(arg-type)Integer% position)
 
-Returns the caret height and position for the given character position
+Returns the caret height and position for the given character position.
 
 h3(#RichTextCtrl_getcommandprocessor). get_command_processor
 
  "CommandProcessor":commandprocessor.html *get_command_processor*()
 
 Gets the command processor associated with the control's buffer.
-
-h3(#RichTextCtrl_getdefaultstyleex). get_default_style_ex
-
- "TextAttrEx":textattrex.html *get_default_style_ex*()
-
-Returns the current default style, which can be used to change how subsequently inserted
-text is displayed. When TextAttrEx is merged with TextAttr, this function
-will become GetDefaultStyle.
 
 h3(#RichTextCtrl_getdelayedlayoutthreshold). get_delayed_layout_threshold
 
@@ -1359,7 +1350,7 @@ Internal function to position the visible caret according to the current caret p
 
 h3(#RichTextCtrl_positiontoxy). position_to_xy
 
- Boolean *position_to_xy*(%(arg-type)Integer% pos,  %(arg-type)Integer% x,  %(arg-type)Integer% y)
+ Integer, Integer = *position_to_xy*(%(arg-type)Integer% pos)
 
 Converts a text position to zero-based column and line numbers.
 
