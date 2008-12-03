@@ -38,4 +38,26 @@ class Wx::RichTextCtrl
       Kernel.raise RuntimeError, "Could not retrieve style at position #{pos}"
     end
   end
+
+  # Fix to accept a single +pos+ argument and return a Wx::Rect
+  wx_car_pos_for_index = self.instance_method(:get_caret_position_for_index)
+  define_method(:get_caret_position_for_index) do | pos |
+    rect = Wx::Rect.new
+    if wx_car_pos_for_index.bind(self).call(pos, rect)
+      return rect
+    else
+      Kernel.raise RuntimeError, "Could not rect for position #{pos}"
+    end
+  end
+
+  # Fix to return a pair of col, row values
+  wx_pos_to_xy = self.instance_method(:position_to_xy)
+  define_method(:position_to_xy) do | pos |
+    success, x, y = wx_pos_to_xy.bind(self).call(pos)
+    if success
+      return x, y
+    else
+      Kernel.raise RuntimeError, "Could not convert position #{pos} to x, y"
+    end
+  end
 end
