@@ -134,7 +134,7 @@ bool wxGetKeyState(wxKeyCode key);
 wxWindow* wxFindWindowAtPoint(const wxPoint& pt);
 wxWindow * wxGetActiveWindow();
 wxPoint wxGetMousePosition();
-
+wxMouseState wxGetMouseState();
 
 // Dialog shortcuts
 int wxMessageBox(const wxString& message, 
