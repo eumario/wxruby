@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2008, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -15,7 +15,6 @@ GC_MANAGE_AS_EVENT(wxCalendarEvent);
 %import "include/wxObject.h"
 %import "include/wxEvent.h"
 %import "include/wxCommandEvent.h"
-// if/when we add this class, uncomment it
-//%import "include/wxDateEvent.h"
+%import "include/wxDateEvent.h"
 
 %include "include/wxCalendarEvent.h"

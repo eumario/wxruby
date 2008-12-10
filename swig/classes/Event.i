@@ -21,6 +21,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %{
 
 #include <wx/calctrl.h>
+#include <wx/datectrl.h>
 #include <wx/choicebk.h>
 #include <wx/collpane.h>
 #include <wx/fdrepdlg.h>
@@ -306,6 +307,8 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_CALENDAR_YEAR_CHANGED;//, 953)
 %constant const int wxEVT_CALENDAR_DOUBLECLICKED;//, 954)
 %constant const int wxEVT_CALENDAR_WEEKDAY_CLICKED;//, 955)
+%constant const int wxEVT_DATE_CHANGED;
+
 
 %constant const int wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING;
 %constant const int wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED;
