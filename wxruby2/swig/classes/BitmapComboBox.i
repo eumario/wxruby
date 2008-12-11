@@ -15,6 +15,13 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBitmapComboBox);
 %include "../shared/control_with_items.i"
 CLIENT_DATA_FEATURES(wxBitmapComboBox);
 
+// Avoids perpetual loop
+%feature("nodirector") wxBitmapComboBox::GetCount;
+// Deal with below
+%feature("nodirector") wxBitmapComboBox::IsEmpty;
+%feature("nodirector") wxBitmapComboBox::Select;
+%feature("nodirector") wxBitmapComboBox::SetSelection;
+
 %{
 void mark_wxBitmapComboBox(void* ptr) {
   if ( GC_IsWindowDeleted(ptr) )
@@ -38,6 +45,24 @@ void mark_wxBitmapComboBox(void* ptr) {
 }
 %}
 %markfunc wxBitmapComboBox "mark_wxBitmapComboBox";
+
+%extend wxBitmapComboBox {
+  // Make sure the call is routed to the right class - not ComboCtrl,
+  // which expects a string arg, which will crash
+  VALUE set_selection(VALUE sel)
+  {
+    int n = NUM2INT(sel);
+    $self->SetSelection(n);
+    return Qnil;
+  }
+  // The same as above
+  VALUE select(VALUE sel)
+  {
+    int n = NUM2INT(sel);
+    $self->SetSelection(n);
+    return Qnil;
+  }
+}
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
