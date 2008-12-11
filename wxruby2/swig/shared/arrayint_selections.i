@@ -9,7 +9,7 @@
 
 %typemap(out) (wxArrayInt& selections) {
   $result = rb_ary_new();
-  for (int i = 0; i < $1.GetCount(); i++)
+  for (size_t i = 0; i < $1.GetCount(); i++)
   {
     rb_ary_push($result,INT2NUM( $1.Item(i) ) );
   }
@@ -17,7 +17,7 @@
 
 %typemap(argout) (wxArrayInt& selections) {
    $result = rb_ary_new();
-   for (int i = 0; i < ($1)->GetCount(); i++)
+   for (size_t i = 0; i < ($1)->GetCount(); i++)
    {
      rb_ary_push($result,INT2NUM( ($1)->Item(i) ) );
    }
