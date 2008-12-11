@@ -16,6 +16,10 @@
 %ignore ProcessMessage;
 %ignore SetAuto3D;
 
+// Not useful - use on_run
+%ignore OnFatalException;
+%feature("nodirector") OnFatalException;
+
 // Not useful - command line parsing would be done using ruby's libraries
 %ignore OnCmdLineError;
 %feature("nodirector") OnCmdLineError;
@@ -242,6 +246,7 @@ public:
   virtual bool OnCmdLineParsed(wxCmdLineParser&  parser ) ;
   virtual void OnFatalException() ;
   bool OnInit() ;
+  virtual int OnRun();
   virtual void OnInitCmdLine(wxCmdLineParser&  parser ) ;
   ;
   bool ProcessMessage(WXMSG * msg ) ;
