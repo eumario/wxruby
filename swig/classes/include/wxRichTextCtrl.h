@@ -114,6 +114,7 @@ public:
     long GetDelayedLayoutThreshold() const;
     wxString GetFilename() const;
     long GetFirstVisiblePosition() const;
+    wxPoint GetFirstVisiblePoint() const;
     int GetHandlerFlags() const;
     long GetInsertionPoint() const;
     wxTextPos GetLastPosition() const;
@@ -283,6 +284,14 @@ public:
                     int bitmapType = wxBITMAP_TYPE_PNG);
     void WriteText(const wxString& text);
     long XYToPosition(long x, long y) const;
+
+    // These methods are not strictly part of wxRichTextCtrl, but
+    // inherited from the mix-in ScrollHelper
+
+    virtual void GetViewStart(int *x, int *y) const;
+    virtual void GetScrollPixelsPerUnit( int *pixelsPerUnitX,
+                                         int *pixelsPerUnitY ) const;
+    virtual void Scroll(int x, int y);
 };
 
 

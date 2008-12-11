@@ -36,18 +36,26 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 %ignore wxRichTextCtrl::GetUncombinedStyle(long position, wxTextAttr& style);
 %ignore wxRichTextCtrl::GetUncombinedStyle(long position, wxTextAttrEx& style);
 
-
 // This is unsupported - class is not ported
 %ignore wxRichTextCtrl::WriteImage(const wxRichTextImageBlock& imageBlock);
 
 // Ignore the versions that use TextAttrEx as not used in wxRuby
 %ignore wxRichTextCtrl::SetBasicStyle(const wxTextAttrEx& style);
 
+
+%feature("nodirector") wxRichTextCtrl::Scroll;
+%feature("nodirector") wxRichTextCtrl::GetViewStart;
+%feature("nodirector") wxRichTextCtrl::GetScrollPixelsPerUnit;
+
 // Deal with some output values from TextCtrl methods - PositionToXY
 %apply long * OUTPUT { long * }
 %apply long * OUTPUT { wxTextCoord *col, wxTextCoord *row }
 
+// GetViewStart
+%apply int * OUTPUT { int * }
+
 %apply SWIGTYPE *DISOWN { wxRichTextStyleSheet* styleSheet };
+
 
 %import "include/wxObject.h"
 %import "include/wxWindow.h"
