@@ -80,6 +80,7 @@ public:
   virtual bool IsEmpty() const;
   virtual void SetClientData(int  n , void * data ) ;
   virtual void SetClientObject(int  n , wxClientData * data ) ;
+  virtual void Select(int  n);
   virtual void SetSelection(int  n );
   virtual void SetString(int  n , const wxString&   string );
   virtual bool SetStringSelection(const wxString&   string );
