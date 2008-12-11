@@ -5,12 +5,14 @@ for a range of text in a "RichTextCtrl":richtextctrl.html. This class
 is specific to RichTextCtrl, although you can also use the
 standard "TextAttr":textattr.html class with RichTextCtrl.
 
-When setting up a RichTextAttr object, pass a bitlist mask to "set_flags":#RichTextAttr_setflags to
-indicate which style elements should be changed. As a convenience, when you call a setter such
-as SetFont, the relevant bit will be set.
+When setting up a RichTextAttr object, you can pass a bitlist mask to
+"set_flags":#RichTextAttr_setflags to indicate which style elements
+should be changed. As a convenience, when you call a setter such as
+"set_font":#RichTextAttr_setfont, the relevant bit will be set. This
+should cover most normal cases.
 
 RichTextAttr stores attributes without a Font object, so is a more
-efficient way to query styles than using a "TextAttr":textattr.html or "TextAttrEx":textattrex.html object.
+efficient way to query styles than using a "TextAttr":textattr.html object.
 
 h2. Derived from
 
@@ -22,84 +24,70 @@ The following values can be passed to RichTextAttr::SetAlignment to determine
 paragraph alignment.
 
 
-
- enum TextAttrAlignment
- {
      TEXT_ALIGNMENT_DEFAULT,
      TEXT_ALIGNMENT_LEFT,
      TEXT_ALIGNMENT_CENTRE,
      TEXT_ALIGNMENT_CENTER = TEXT_ALIGNMENT_CENTRE,
      TEXT_ALIGNMENT_RIGHT,
      TEXT_ALIGNMENT_JUSTIFIED
- };
+
+Of these, TEXT_ALIGNMENT_JUSTIFIED is unimplemented. In future
+justification may be supported when printing or previewing, only.
+
+The following values are passed in a bitlist to RichTextAttr::SetFlags
+to determine what attributes will be considered when setting the
+attributes for a text control.
+ 
+ TEXT_ATTR_TEXT_COLOUR             
+ TEXT_ATTR_BACKGROUND_COLOUR       
+ TEXT_ATTR_FONT_FACE               
+ TEXT_ATTR_FONT_SIZE               
+ TEXT_ATTR_FONT_WEIGHT             
+ TEXT_ATTR_FONT_ITALIC             
+ TEXT_ATTR_FONT_UNDERLINE          
+ TEXT_ATTR_FONT  # all font attributes: face, size, weight, italic, underline
+ TEXT_ATTR_ALIGNMENT
+ TEXT_ATTR_LEFT_INDENT
+ TEXT_ATTR_RIGHT_INDENT
+ TEXT_ATTR_TABS        
+ 
+Extra formatting flags not in TextAttr
+ 
+ TEXT_ATTR_PARA_SPACING_AFTER
+ TEXT_ATTR_PARA_SPACING_BEFORE
+ TEXT_ATTR_LINE_SPACING       
+ TEXT_ATTR_CHARACTER_STYLE_NAME
+ TEXT_ATTR_PARAGRAPH_STYLE_NAME
+ TEXT_ATTR_LIST_STYLE_NAME
+ TEXT_ATTR_BULLET_STYLE 
+ TEXT_ATTR_BULLET_NUMBER
+ TEXT_ATTR_BULLET_TEXT  
+ TEXT_ATTR_BULLET_NAME  
+ TEXT_ATTR_URL          
+ TEXT_ATTR_PAGE_BREAK   
+ TEXT_ATTR_EFFECTS      
+ TEXT_ATTR_OUTLINE_LEVEL
  
 
-
-Of these, TEXT_ALIGNMENT_JUSTIFIED is unimplemented. In future justification may be supported
-when printing or previewing, only.
-
-The following values are passed in a bitlist to RichTextAttr::SetFlags to determine
-what attributes will be considered when setting the attributes
-for a text control.
+The following styles can be passed to RichTextAttr#set_bullet_style
 
 
-
- // Standard TextAttr constants
- 
- #define TEXT_ATTR_TEXT_COLOUR             0x00000001
- #define TEXT_ATTR_BACKGROUND_COLOUR       0x00000002
- #define TEXT_ATTR_FONT_FACE               0x00000004
- #define TEXT_ATTR_FONT_SIZE               0x00000008
- #define TEXT_ATTR_FONT_WEIGHT             0x00000010
- #define TEXT_ATTR_FONT_ITALIC             0x00000020
- #define TEXT_ATTR_FONT_UNDERLINE          0x00000040
- #define TEXT_ATTR_FONT \
-   TEXT_ATTR_FONT_FACE | TEXT_ATTR_FONT_SIZE | TEXT_ATTR_FONT_WEIGHT \
- | TEXT_ATTR_FONT_ITALIC | TEXT_ATTR_FONT_UNDERLINE
- #define TEXT_ATTR_ALIGNMENT               0x00000080
- #define TEXT_ATTR_LEFT_INDENT             0x00000100
- #define TEXT_ATTR_RIGHT_INDENT            0x00000200
- #define TEXT_ATTR_TABS                    0x00000400
- 
- // Extra formatting flags not in TextAttr
- 
- #define TEXT_ATTR_PARA_SPACING_AFTER      0x00000800
- #define TEXT_ATTR_PARA_SPACING_BEFORE     0x00001000
- #define TEXT_ATTR_LINE_SPACING            0x00002000
- #define TEXT_ATTR_CHARACTER_STYLE_NAME    0x00004000
- #define TEXT_ATTR_PARAGRAPH_STYLE_NAME    0x00008000
- #define TEXT_ATTR_LIST_STYLE_NAME         0x00010000
- #define TEXT_ATTR_BULLET_STYLE            0x00020000
- #define TEXT_ATTR_BULLET_NUMBER           0x00040000
- #define TEXT_ATTR_BULLET_TEXT             0x00080000
- #define TEXT_ATTR_BULLET_NAME             0x00100000
- #define TEXT_ATTR_URL                     0x00200000
- #define TEXT_ATTR_PAGE_BREAK              0x00400000
- #define TEXT_ATTR_EFFECTS                 0x00800000
- #define TEXT_ATTR_OUTLINE_LEVEL           0x01000000
- 
-
-
-The following styles can be passed to RichTextAttr::SetBulletStyle:
-
-
-
- #define TEXT_ATTR_BULLET_STYLE_NONE               0x00000000
- #define TEXT_ATTR_BULLET_STYLE_ARABIC             0x00000001
- #define TEXT_ATTR_BULLET_STYLE_LETTERS_UPPER      0x00000002
- #define TEXT_ATTR_BULLET_STYLE_LETTERS_LOWER      0x00000004
- #define TEXT_ATTR_BULLET_STYLE_ROMAN_UPPER        0x00000008
- #define TEXT_ATTR_BULLET_STYLE_ROMAN_LOWER        0x00000010
- #define TEXT_ATTR_BULLET_STYLE_SYMBOL             0x00000020
- #define TEXT_ATTR_BULLET_STYLE_BITMAP             0x00000040
- #define TEXT_ATTR_BULLET_STYLE_PARENTHESES        0x00000080
- #define TEXT_ATTR_BULLET_STYLE_PERIOD             0x00000100
- #define TEXT_ATTR_BULLET_STYLE_STANDARD           0x00000200
- #define TEXT_ATTR_BULLET_STYLE_RIGHT_PARENTHESIS  0x00000400
- #define TEXT_ATTR_BULLET_STYLE_OUTLINE            0x00000800
- #define TEXT_ATTR_BULLET_STYLE_ALIGN_LEFT         0x00000000
- #define TEXT_ATTR_BULLET_STYLE_ALIGN_RIGHT        0x00001000
- #define TEXT_ATTR_BULLET_STYLE_ALIGN_CENTRE       0x00002000
+ TEXT_ATTR_BULLET_STYLE_NONE               
+ TEXT_ATTR_BULLET_STYLE_ARABIC             
+ TEXT_ATTR_BULLET_STYLE_LETTERS_UPPER      
+ TEXT_ATTR_BULLET_STYLE_LETTERS_LOWER      
+ TEXT_ATTR_BULLET_STYLE_ROMAN_UPPER        
+ TEXT_ATTR_BULLET_STYLE_ROMAN_LOWER        
+ TEXT_ATTR_BULLET_STYLE_SYMBOL             
+ TEXT_ATTR_BULLET_STYLE_BITMAP             
+ TEXT_ATTR_BULLET_STYLE_PARENTHESES        
+ TEXT_ATTR_BULLET_STYLE_PERIOD             
+ TEXT_ATTR_BULLET_STYLE_STANDARD           
+ TEXT_ATTR_BULLET_STYLE_RIGHT_PARENTHESIS  
+ TEXT_ATTR_BULLET_STYLE_OUTLINE       
+ TEXT_ATTR_BULLET_STYLE_ALIGN_LEFT    
+ TEXT_ATTR_BULLET_STYLE_ALIGN_RIGHT   
+ TEXT_ATTR_BULLET_STYLE_ALIGN_CENTRE  
  
 
 
@@ -109,9 +97,9 @@ The following constants can be passed to RichTextAttr::SetLineSpacing:
 
 
 
- #define TEXT_ATTR_LINE_SPACING_NORMAL         10
- #define TEXT_ATTR_LINE_SPACING_HALF           15
- #define TEXT_ATTR_LINE_SPACING_TWICE          20
+ TEXT_ATTR_LINE_SPACING_NORMAL         10
+ TEXT_ATTR_LINE_SPACING_HALF           15
+ TEXT_ATTR_LINE_SPACING_TWICE          20
  
 
 
@@ -119,17 +107,17 @@ The following styles can be passed to TextAttrEx::SetTextEffects:
 
 
 
- #define TEXT_ATTR_EFFECT_NONE                     0x00000000
- #define TEXT_ATTR_EFFECT_CAPITALS                 0x00000001
- #define TEXT_ATTR_EFFECT_SMALL_CAPITALS           0x00000002
- #define TEXT_ATTR_EFFECT_STRIKETHROUGH            0x00000004
- #define TEXT_ATTR_EFFECT_DOUBLE_STRIKETHROUGH     0x00000008
- #define TEXT_ATTR_EFFECT_SHADOW                   0x00000010
- #define TEXT_ATTR_EFFECT_EMBOSS                   0x00000020
- #define TEXT_ATTR_EFFECT_OUTLINE                  0x00000040
- #define TEXT_ATTR_EFFECT_ENGRAVE                  0x00000080
- #define TEXT_ATTR_EFFECT_SUPERSCRIPT              0x00000100
- #define TEXT_ATTR_EFFECT_SUBSCRIPT                0x00000200
+ TEXT_ATTR_EFFECT_NONE    
+ TEXT_ATTR_EFFECT_CAPITALS
+ TEXT_ATTR_EFFECT_SMALL_CAPITALS
+ TEXT_ATTR_EFFECT_STRIKETHROUGH
+ TEXT_ATTR_EFFECT_DOUBLE_STRIKETHROUGH
+ TEXT_ATTR_EFFECT_SHADOW              
+ TEXT_ATTR_EFFECT_EMBOSS              
+ TEXT_ATTR_EFFECT_OUTLINE             
+ TEXT_ATTR_EFFECT_ENGRAVE             
+ TEXT_ATTR_EFFECT_SUPERSCRIPT         
+ TEXT_ATTR_EFFECT_SUBSCRIPT           
  
 
 
@@ -242,17 +230,15 @@ h2. Methods
 h3(#RichTextAttr_wxrichtextattr). RichTextAttr.new
 
   *RichTextAttr.new*(%(arg-type)"Colour":colour.html% colText, 
-                   %(arg-type)"Colour":colour.html% colBack = NullColour, 
+                   %(arg-type)"Colour":colour.html% colBack = NULL_COLOUR, 
                    %(arg-type)"TextAttrAlignment":textattralignment.html% alignment = TEXT_ALIGNMENT_DEFAULT)
 
-  *RichTextAttr.new*(%(arg-type)"TextAttrEx":textattrex.html% attr)
-
-Constructors.
+Constructor.
 
 h3(#RichTextAttr_apply). RichTextAttr#apply
 
- Boolean *combine*(%(arg-type)"RichTextAttrEx":richtextattrex.html% style, 
-                 %(arg-type)"RichTextAttrEx":richtextattrex.html% compareWith = nil)
+ Boolean *apply*(%(arg-type)"RichTextAttr":richtextattr.html% style, 
+                 %(arg-type)"RichTextAttr":richtextattr.html% compareWith = nil)
 
 Applies the attributes in _style_ to the original object, but not those attributes from _style_ that are the same as those in _compareWith_ (if passed).
 
@@ -260,8 +246,8 @@ See also "RichTextAttr#combine":richtextattr.html#RichTextAttr_combine for a fun
 
 h3(#RichTextAttr_combine). RichTextAttr#combine
 
- "RichTextAttr":richtextattr.html *combine*(%(arg-type)"RichTextAttrEx":richtextattrex.html% style, 
-                        %(arg-type)"RichTextAttrEx":richtextattrex.html% compareWith = nil)
+ "RichTextAttr":richtextattr.html *combine*(%(arg-type)"RichTextAttr":richtextattr.html% style, 
+                        %(arg-type)"RichTextAttr":richtextattr.html% compareWith = nil)
 
 Combines 'this' with _style_, but not applying attributes from _style_ that are the same as those in _compareWith_ (if passed).
 A RichTextAttr object is returned and the original object is not changed.
@@ -322,8 +308,9 @@ h3(#RichTextAttr_getbulletstyle). RichTextAttr#get_bullet_style
 
  Integer *get_bullet_style*()
 
-Returns the bullet style.
-See "RichTextAttr#set_bullet_style":richtextattr.html#RichTextAttr_setbulletstyle for a list of available styles.
+Returns the bullet style.  See
+"RichTextAttr#set_bullet_style":richtextattr.html#RichTextAttr_setbulletstyle
+for a list of available styles.
 
 h3(#RichTextAttr_getbullettext). RichTextAttr#get_bullet_text
 
@@ -658,22 +645,15 @@ h3(#RichTextAttr_setalignment). RichTextAttr#set_alignment
 
 Sets the paragraph alignment. These are the possible values for _alignment_:
 
-
-
- enum TextAttrAlignment
- {
      TEXT_ALIGNMENT_DEFAULT,
      TEXT_ALIGNMENT_LEFT,
      TEXT_ALIGNMENT_CENTRE,
      TEXT_ALIGNMENT_CENTER = TEXT_ALIGNMENT_CENTRE,
      TEXT_ALIGNMENT_RIGHT,
      TEXT_ALIGNMENT_JUSTIFIED
- };
- 
 
-
-Of these, TEXT_ALIGNMENT_JUSTIFIED is unimplemented. In future justification may be supported
-when printing or previewing, only.
+Of these, TEXT_ALIGNMENT_JUSTIFIED is unimplemented. In future
+justification may be supported when printing or previewing, only.
 
 h3(#RichTextAttr_setbackgroundcolour). RichTextAttr#set_background_colour
 
@@ -708,26 +688,23 @@ h3(#RichTextAttr_setbulletstyle). RichTextAttr#set_bullet_style
 
 Sets the bullet style. The following styles can be passed:
 
-
-
- #define TEXT_ATTR_BULLET_STYLE_NONE               0x00000000
- #define TEXT_ATTR_BULLET_STYLE_ARABIC             0x00000001
- #define TEXT_ATTR_BULLET_STYLE_LETTERS_UPPER      0x00000002
- #define TEXT_ATTR_BULLET_STYLE_LETTERS_LOWER      0x00000004
- #define TEXT_ATTR_BULLET_STYLE_ROMAN_UPPER        0x00000008
- #define TEXT_ATTR_BULLET_STYLE_ROMAN_LOWER        0x00000010
- #define TEXT_ATTR_BULLET_STYLE_SYMBOL             0x00000020
- #define TEXT_ATTR_BULLET_STYLE_BITMAP             0x00000040
- #define TEXT_ATTR_BULLET_STYLE_PARENTHESES        0x00000080
- #define TEXT_ATTR_BULLET_STYLE_PERIOD             0x00000100
- #define TEXT_ATTR_BULLET_STYLE_STANDARD           0x00000200
- #define TEXT_ATTR_BULLET_STYLE_RIGHT_PARENTHESIS  0x00000400
- #define TEXT_ATTR_BULLET_STYLE_OUTLINE            0x00000800
- #define TEXT_ATTR_BULLET_STYLE_ALIGN_LEFT         0x00000000
- #define TEXT_ATTR_BULLET_STYLE_ALIGN_RIGHT        0x00001000
- #define TEXT_ATTR_BULLET_STYLE_ALIGN_CENTRE       0x00002000
+ TEXT_ATTR_BULLET_STYLE_NONE         
+ TEXT_ATTR_BULLET_STYLE_ARABIC       
+ TEXT_ATTR_BULLET_STYLE_LETTERS_UPPER
+ TEXT_ATTR_BULLET_STYLE_LETTERS_LOWER
+ TEXT_ATTR_BULLET_STYLE_ROMAN_UPPER  
+ TEXT_ATTR_BULLET_STYLE_ROMAN_LOWER  
+ TEXT_ATTR_BULLET_STYLE_SYMBOL       
+ TEXT_ATTR_BULLET_STYLE_BITMAP       
+ TEXT_ATTR_BULLET_STYLE_PARENTHESES  
+ TEXT_ATTR_BULLET_STYLE_PERIOD       
+ TEXT_ATTR_BULLET_STYLE_STANDARD     
+ TEXT_ATTR_BULLET_STYLE_RIGHT_PARENTHESIS
+ TEXT_ATTR_BULLET_STYLE_OUTLINE     
+ TEXT_ATTR_BULLET_STYLE_ALIGN_LEFT  
+ TEXT_ATTR_BULLET_STYLE_ALIGN_RIGHT 
+ TEXT_ATTR_BULLET_STYLE_ALIGN_CENTRE
  
-
 
 Currently TEXT_ATTR_BULLET_STYLE_BITMAP is not supported.
 
@@ -750,41 +727,37 @@ h3(#RichTextAttr_setflags). RichTextAttr#set_flags
 Sets the flags determining which styles are being specified. The following
 flags can be passed in a bitlist:
 
-
-
- // Standard TextAttr constants
+Standard TextAttr constants
  
- #define TEXT_ATTR_TEXT_COLOUR             0x00000001
- #define TEXT_ATTR_BACKGROUND_COLOUR       0x00000002
- #define TEXT_ATTR_FONT_FACE               0x00000004
- #define TEXT_ATTR_FONT_SIZE               0x00000008
- #define TEXT_ATTR_FONT_WEIGHT             0x00000010
- #define TEXT_ATTR_FONT_ITALIC             0x00000020
- #define TEXT_ATTR_FONT_UNDERLINE          0x00000040
- #define TEXT_ATTR_FONT \
-   TEXT_ATTR_FONT_FACE | TEXT_ATTR_FONT_SIZE | TEXT_ATTR_FONT_WEIGHT \
- | TEXT_ATTR_FONT_ITALIC | TEXT_ATTR_FONT_UNDERLINE
- #define TEXT_ATTR_ALIGNMENT               0x00000080
- #define TEXT_ATTR_LEFT_INDENT             0x00000100
- #define TEXT_ATTR_RIGHT_INDENT            0x00000200
- #define TEXT_ATTR_TABS                    0x00000400
+ TEXT_ATTR_TEXT_COLOUR             
+ TEXT_ATTR_BACKGROUND_COLOUR       
+ TEXT_ATTR_FONT_FACE               
+ TEXT_ATTR_FONT_SIZE               
+ TEXT_ATTR_FONT_WEIGHT             
+ TEXT_ATTR_FONT_ITALIC             
+ TEXT_ATTR_FONT_UNDERLINE          
+ TEXT_ATTR_FONT
+ TEXT_ATTR_ALIGNMENT           
+ TEXT_ATTR_LEFT_INDENT         
+ TEXT_ATTR_RIGHT_INDENT        
+ TEXT_ATTR_TABS                
  
- // Extra formatting flags not in TextAttr
+Extra formatting flags not in TextAttr
  
- #define TEXT_ATTR_PARA_SPACING_AFTER      0x00000800
- #define TEXT_ATTR_PARA_SPACING_BEFORE     0x00001000
- #define TEXT_ATTR_LINE_SPACING            0x00002000
- #define TEXT_ATTR_CHARACTER_STYLE_NAME    0x00004000
- #define TEXT_ATTR_PARAGRAPH_STYLE_NAME    0x00008000
- #define TEXT_ATTR_LIST_STYLE_NAME         0x00010000
- #define TEXT_ATTR_BULLET_STYLE            0x00020000
- #define TEXT_ATTR_BULLET_NUMBER           0x00040000
- #define TEXT_ATTR_BULLET_TEXT             0x00080000
- #define TEXT_ATTR_BULLET_NAME             0x00100000
- #define TEXT_ATTR_URL                     0x00200000
- #define TEXT_ATTR_PAGE_BREAK              0x00400000
- #define TEXT_ATTR_EFFECTS                 0x00800000
- #define TEXT_ATTR_OUTLINE_LEVEL           0x01000000
+ TEXT_ATTR_PARA_SPACING_AFTER  
+ TEXT_ATTR_PARA_SPACING_BEFORE 
+ TEXT_ATTR_LINE_SPACING        
+ TEXT_ATTR_CHARACTER_STYLE_NAME
+ TEXT_ATTR_PARAGRAPH_STYLE_NAME
+ TEXT_ATTR_LIST_STYLE_NAME
+ TEXT_ATTR_BULLET_STYLE  
+ TEXT_ATTR_BULLET_NUMBER 
+ TEXT_ATTR_BULLET_TEXT   
+ TEXT_ATTR_BULLET_NAME   
+ TEXT_ATTR_URL           
+ TEXT_ATTR_PAGE_BREAK    
+ TEXT_ATTR_EFFECTS       
+ TEXT_ATTR_OUTLINE_LEVEL 
  
 
 
@@ -824,15 +797,17 @@ h3(#RichTextAttr_setleftindent). RichTextAttr#set_left_indent
 
 Sets the left indent and left subindent in tenths of a millimetre.
 
-The sub-indent is an offset from the left of the paragraph, and is used for all but the
-first line in a paragraph. A positive value will cause the first line to appear to the left
-of the subsequent lines, and a negative value will cause the first line to be indented
-relative to the subsequent lines.
+The sub-indent is an offset from the left of the paragraph, and is used
+for all but the first line in a paragraph. A positive value will cause
+the first line to appear to the left of the subsequent lines, and a
+negative value will cause the first line to be indented relative to the
+subsequent lines.
 
-RichTextBuffer uses indentation to render a bulleted item. The left indent is the distance between
-the margin and the bullet. The content of the paragraph, including the first line, starts
-at leftMargin + leftSubIndent. So the distance between the left edge of the bullet and the
-left of the actual paragraph is leftSubIndent.
+RichTextBuffer uses indentation to render a bulleted item. The left
+indent is the distance between the margin and the bullet. The content of
+the paragraph, including the first line, starts at leftMargin +
+leftSubIndent. So the distance between the left edge of the bullet and
+the left of the actual paragraph is leftSubIndent.
 
 h3(#RichTextAttr_setlinespacing). RichTextAttr#set_line_spacing
 
@@ -844,9 +819,9 @@ defined for convenience:
 
 
 
- #define TEXT_ATTR_LINE_SPACING_NORMAL         10
- #define TEXT_ATTR_LINE_SPACING_HALF           15
- #define TEXT_ATTR_LINE_SPACING_TWICE          20
+ TEXT_ATTR_LINE_SPACING_NORMAL         10
+ TEXT_ATTR_LINE_SPACING_HALF           15
+ TEXT_ATTR_LINE_SPACING_TWICE          20
  
 
 
@@ -896,10 +871,11 @@ Sets the right indent in tenths of a millimetre.
 
 h3(#RichTextAttr_settabs). RichTextAttr#set_tabs
 
-  *set_tabs*(%(arg-type)"ArrayInt":arrayint.html% tabs)
+  *set_tabs*( %(arg-type)ArrayInt% tabs)
 
-Sets the tab stops, expressed in tenths of a millimetre.
-Each stop is measured from the left margin and therefore each value must be larger than the last.
+Sets the tab stops, expressed in tenths of a millimetre.  Each stop is
+measured from the left margin and therefore each value must be larger
+than the last.
 
 h3(#RichTextAttr_settextcolour). RichTextAttr#set_text_colour
 
@@ -924,23 +900,25 @@ The following styles can be passed:
 
 
 
- #define TEXT_ATTR_EFFECT_NONE                     0x00000000
- #define TEXT_ATTR_EFFECT_CAPITALS                 0x00000001
- #define TEXT_ATTR_EFFECT_SMALL_CAPITALS           0x00000002
- #define TEXT_ATTR_EFFECT_STRIKETHROUGH            0x00000004
- #define TEXT_ATTR_EFFECT_DOUBLE_STRIKETHROUGH     0x00000008
- #define TEXT_ATTR_EFFECT_SHADOW                   0x00000010
- #define TEXT_ATTR_EFFECT_EMBOSS                   0x00000020
- #define TEXT_ATTR_EFFECT_OUTLINE                  0x00000040
- #define TEXT_ATTR_EFFECT_ENGRAVE                  0x00000080
- #define TEXT_ATTR_EFFECT_SUPERSCRIPT              0x00000100
- #define TEXT_ATTR_EFFECT_SUBSCRIPT                0x00000200
+ TEXT_ATTR_EFFECT_NONE
+ TEXT_ATTR_EFFECT_CAPITALS
+ TEXT_ATTR_EFFECT_SMALL_CAPITALS
+ TEXT_ATTR_EFFECT_STRIKETHROUGH 
+ TEXT_ATTR_EFFECT_DOUBLE_STRIKETHROUGH
+ TEXT_ATTR_EFFECT_SHADOW              
+ TEXT_ATTR_EFFECT_EMBOSS              
+ TEXT_ATTR_EFFECT_OUTLINE             
+ TEXT_ATTR_EFFECT_ENGRAVE             
+ TEXT_ATTR_EFFECT_SUPERSCRIPT         
+ TEXT_ATTR_EFFECT_SUBSCRIPT           
  
 
 
-Of these, only TEXT_ATTR_EFFECT_CAPITALS and TEXT_ATTR_EFFECT_STRIKETHROUGH are implemented.
-TEXT_ATTR_EFFECT_CAPITALS capitalises text when displayed (leaving the case of the actual buffer
-text unchanged), and TEXT_ATTR_EFFECT_STRIKETHROUGH draws a line through text.
+Of these, only TEXT_ATTR_EFFECT_CAPITALS and
+TEXT_ATTR_EFFECT_STRIKETHROUGH are implemented.
+TEXT_ATTR_EFFECT_CAPITALS capitalises text when displayed (leaving the
+case of the actual buffer text unchanged), and
+TEXT_ATTR_EFFECT_STRIKETHROUGH draws a line through text.
 
 To set effects, you should also pass TEXT_ATTR_EFFECTS to "RichTextAttr#set_flags":richtextattr.html#RichTextAttr_setflags, and call "RichTextAttr#set_text_effect_flags":richtextattr.html#RichTextAttr_settexteffectflags with the styles (taken from the
 above set) that you are interested in setting.
