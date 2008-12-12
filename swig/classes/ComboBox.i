@@ -12,6 +12,8 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxComboBox);
 %rename (GetTextSelectionRange) wxComboBox::GetSelection(long *from, long *to) const;
 %apply long * OUTPUT { long *from, long *to }
 
+// Avoid compile warning with GCC 4
+%feature("nodirector") wxComboBox::GetCount;
 
 // redundant with good typemaps
 %ignore Create(wxWindow *parent,
