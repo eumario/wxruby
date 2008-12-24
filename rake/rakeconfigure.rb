@@ -38,11 +38,10 @@ $ruby_cppflags = Config::CONFIG["CFLAGS"]
 # Ruby 1.9.0 changes location of some header files
 if RUBY_VERSION >= "1.9.0"
   includes = [ Config::CONFIG["rubyhdrdir"],
-    Config::CONFIG["sitehdrdir"],
-    Config::CONFIG["vendorhdrdir"],
-    File.join(Config::CONFIG["rubyhdrdir"], Config::CONFIG['arch']),
-    File.join(Config::CONFIG["rubyhdrdir"], "ruby") ]
-
+               Config::CONFIG["sitehdrdir"],
+               Config::CONFIG["vendorhdrdir"],
+               File.join(Config::CONFIG["rubyhdrdir"], 
+                         Config::CONFIG['arch']) ]
   $ruby_includes = " -I. -I " + includes.join(' -I ')
 else
   $ruby_includes = " -I. -I " + Config::CONFIG["archdir"]
