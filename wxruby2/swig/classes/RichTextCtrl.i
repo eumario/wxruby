@@ -16,13 +16,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 // Use the non-const one, identical signature
 %ignore wxRichTextCtrl::GetBuffer() const;
 
-// FIXME
-// SWIG's normal wrapping of these causes a compile error 
-%ignore wxRichTextCtrl::IsSelectionAligned;
-%ignore wxRichTextCtrl::IsSelectionBold;
-%ignore wxRichTextCtrl::IsSelectionItalics;
-%ignore wxRichTextCtrl::IsSelectionUnderlined;
-
 // We only support the version which returns its value as a
 // RichTextAttr. Note that these methods are further manipulated in ruby
 // so that they accept a single argument and return the RichTextAttr
