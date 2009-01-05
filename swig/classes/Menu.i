@@ -36,7 +36,9 @@ GC_NEVER(wxMenu);
     }
 }
 
-// Need to protect sub-menus associated with particular items in the menu
+// Mark Function
+// Need to protect MenuItems which are included in the Menu, including
+// their associated sub-menus, recursively.
 %{
   static void mark_wxMenu(void *ptr) 
   {
@@ -49,6 +51,7 @@ GC_NEVER(wxMenu);
     for (iter = menu_items.begin(); iter != menu_items.end(); ++iter)
       {
         wxMenuItem *item = *iter;
+        rb_gc_mark( SWIG_RubyInstanceFor(item) ); 
         wxMenu* sub_menu = item->GetSubMenu();
         if ( sub_menu)
           rb_gc_mark( SWIG_RubyInstanceFor(sub_menu) );
