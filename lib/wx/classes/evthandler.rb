@@ -867,7 +867,7 @@ class Wx::EvtHandler
               Wx::TimerEvent],
     EventType['evt_togglebutton', 1,
               Wx::EVT_COMMAND_TOGGLEBUTTON_CLICKED, 
-              Wx::Event],
+              Wx::CommandEvent],
     EventType['evt_tool', 1,
               Wx::EVT_COMMAND_TOOL_CLICKED, 
               Wx::CommandEvent],
