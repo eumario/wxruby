@@ -81,8 +81,8 @@ class TestPanel < Wx::Panel
 
 
   def on_sash_drag(event)
-    if event.get_drag_status == Wx::SASH_STATUS_OUT_OF_RANGE:
-        @log.write_text('drag == out of range')
+    if event.get_drag_status == Wx::SASH_STATUS_OUT_OF_RANGE
+      @log.write_text('drag == out of range')
       return
     end
 

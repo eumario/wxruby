@@ -79,20 +79,21 @@ class TestTreeCtrlPanel < Wx::Panel
         @root = @tree.add_root("The Root Item")
         @tree.set_item_image(@root, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
         @tree.set_item_image(@root, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
-        
         0.upto(15) do |x|
             child = @tree.append_item(@root, "Item " + x.to_s())
             @tree.set_item_image(child, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
             @tree.set_item_image(child, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
+            character = "a"
             0.upto(4) do |y|
-                last = @tree.append_item(child, "item " + x.to_s() + "-" + (?a + y).chr)
+                last = @tree.append_item(child, "item " + x.to_s() + "-" + character)
                 @tree.set_item_image(last, fldridx, Wx::TREE_ITEM_ICON_NORMAL)
                 @tree.set_item_image(last, fldropenidx, Wx::TREE_ITEM_ICON_EXPANDED)
                 0.upto(4) do |z|
-                    item = @tree.append_item(last, "item " + x.to_s() + "-" + (?a + y).chr + "-" + z.to_s())
+                    item = @tree.append_item(last, "item " + x.to_s() + "-" + character + "-" + z.to_s())
                     @tree.set_item_image(item, fileidx, Wx::TREE_ITEM_ICON_NORMAL)
                     @tree.set_item_image(item, smileidx, Wx::TREE_ITEM_ICON_SELECTED)
                 end
+                character.succ!
             end
         end
         
