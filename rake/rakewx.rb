@@ -34,16 +34,14 @@ def check_swig
   # Very old versions put --version on STDERR, not STDOUT
   unless version
     raise "Could not get version info from SWIG; " + 
-          "is a very old version installed?.\n" + 
-          "The recommended version is #{SWIG_MAXIMUM_VERSION}"
+          "is a very old version installed?.\n"
   end
 
   if version < SWIG_MINIMUM_VERSION
-    raise "SWIG version '#{version}' installed, " +
-          "minimum version required is #{SWIG_MINIMUM_VERSION}.\n" + 
-          "The recommended version is #{SWIG_MAXIMUM_VERSION}"
+    raise "SWIG version #{version} is installed, " +
+          "minimum version required is #{SWIG_MINIMUM_VERSION}.\n"
   elsif version > SWIG_MAXIMUM_VERSION 
-    raise "SWIG version '#{version}' installed, " +
+    raise "SWIG version #{version} is installed, " +
           "maximum version permitted is #{SWIG_MAXIMUM_VERSION}"
   end
 
