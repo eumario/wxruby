@@ -8,7 +8,6 @@ module Wx
   # structs containing the keyword name and default value for each
   # possible argument. +mixed_args+ is an array which may optionally end
   # with a set of named arguments
-
   def self.args_as_list(param_spec, *mixed_args)
     # get keyword arguments from mixed args if supplied, else empty
     kwa = mixed_args.last.kind_of?(Hash) ? mixed_args.pop : {}
@@ -26,5 +25,21 @@ module Wx
   rescue
     Kernel.raise ArgumentError, 
                  "Bad arg composition of #{mixed_args.inspect}"
+  end
+
+  # Given an integer constant +int_const+, returns an array Wx constant
+  # names which have this value. If a string +prefix+ is supplied, find
+  # only constants whose names begin with this prefix. For example,
+  # passing "EVT" would return only constants with a name like
+  # Wx::EVT_XXX
+  # 
+  # This is primarily useful for debugging, when an unknown constant is
+  # returned, eg as an event type id.
+  def self.find_const(sought, prefix = "")
+    consts = constants.grep(/\A#{prefix}/)
+    consts.find_all do | c | 
+      c_val = const_get(c)
+      c_val.instance_of?(Fixnum) and c_val == sought
+    end
   end
 end
