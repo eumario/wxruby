@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2009, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -9,6 +9,7 @@ GC_MANAGE_AS_OBJECT(wxAuiManager);
 %{
 #include <wx/aui/aui.h>
 %}
+
 enum wxAuiManagerDock
   {
     wxAUI_DOCK_NONE = 0,
@@ -87,15 +88,34 @@ enum wxAuiButtonId
     wxAUI_BUTTON_CUSTOM1 = 201,
     wxAUI_BUTTON_CUSTOM2 = 202,
     wxAUI_BUTTON_CUSTOM3 = 203
-  };
+};
 
+// A ruby-based subclass of AuiDockArt may provide custom drawing of AUI
+// docks. Once set, the DockArt belongs to the AuiManager and will be
+// automatically deleted by wxWidgets, so should not be GC'd
+%apply SWIGTYPE *DISOWN { wxAuiDockArt* art_provider };
 
+// Any set AuiDockArt ruby object must be protected from GC once set,
+// even if it is no longer referenced anywhere else.
+%{
+  static void mark_wxAuiManager(void *ptr)
+  {
+    wxAuiManager* mgr = (wxAuiManager*)ptr;
+    wxAuiDockArt* art_prov = mgr->GetArtProvider();
+    VALUE rb_art_prov = SWIG_RubyInstanceFor( (void *)art_prov );
+    rb_gc_mark( rb_art_prov );
+  }
+%}
+%markfunc wxAuiManager "mark_wxAuiManager";
+
+// An alternative is provided below
 %ignore wxAuiManager::GetAllPanes;
 
+// Provide a method for iterating over all the constituent panes
 %extend wxAuiManager {
   VALUE each_pane() {
 	wxAuiPaneInfoArray panes = self->GetAllPanes();
-	for (int i = 0; i < panes.GetCount(); i++)
+	for (size_t i = 0; i < panes.GetCount(); i++)
 	  {
 		wxAuiPaneInfo &pi_ref = self->GetPane( panes.Item(i).name );
 		wxAuiPaneInfo *pi = (wxAuiPaneInfo*)&pi_ref;
