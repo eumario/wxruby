@@ -1,10 +1,13 @@
-# parents.rb
-#   Copyright 2004-2005 by Kevin Smith
-#   released under the MIT-style wxruby2 license
+# Copyright 2004-2009, wxRuby Development Team
+# released under the MIT-style wxruby2 license
 
-# this file was originally created based on an XML 
-# file describing the wx api, but now it is manually 
-# maintained. fix it if it is broken.
+# This file describes the class -> superclass relationships among all
+# wxRuby / wxWidgets classes. It's used by wxRuby's SWIG fixing script
+# fixmodule.rb to implement correct inheritance between all the
+# different classes defined in different SWIG modules. 
+#
+# The only time this file should normally need to be edited is when
+# adding a previously unported class that is not yet listed. 
 
 $parents = {
     'wxAcceleratorTable' => 'wxObject',
@@ -14,6 +17,7 @@ $parents = {
     'wxAnimationCtrl' => 'wxControl',
     'wxApp' => 'wxEvtHandler',
     'wxArtProvider' => 'wxObject',
+    'wxAuiDefaultDockArt' => 'wxAuiDockArt',
     'wxAuiManager' => 'wxEvtHandler',
     'wxAuiManagerEvent' => 'wxEvent',
     'wxAuiNotebook' => 'wxControl',
