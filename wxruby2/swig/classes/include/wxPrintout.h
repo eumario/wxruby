@@ -25,18 +25,32 @@ public:
 
     wxDC *GetDC() const;
     void SetDC(wxDC *dc);
+
+    void FitThisSizeToPaper(const wxSize& imageSize);
+    void FitThisSizeToPage(const wxSize& imageSize);
+    void FitThisSizeToPageMargins(const wxSize& imageSize, const wxPageSetupDialogData& pageSetupData);
+    void MapScreenSizeToPaper();
+    void MapScreenSizeToPage();
+    void MapScreenSizeToPageMargins(const wxPageSetupDialogData& pageSetupData);
+    void MapScreenSizeToDevice();
+
+    wxRect GetLogicalPaperRect() const;
+    wxRect GetLogicalPageRect() const;
+    wxRect GetLogicalPageMarginsRect(const wxPageSetupDialogData& pageSetupData) const;
+
     void SetPageSizePixels(int w, int  h);
     void GetPageSizePixels(int *w, int  *h) const;
     void SetPageSizeMM(int w, int  h);
     void GetPageSizeMM(int *w, int  *h) const;
-
     void SetPPIScreen(int x, int y);
     void GetPPIScreen(int *x, int *y) const;
     void SetPPIPrinter(int x, int y);
     void GetPPIPrinter(int *x, int *y) const;
 
-    virtual bool IsPreview() const;
+    wxRect GetPaperRectPixels() const;
+    void SetPaperRectPixels(const wxRect& paperRectPixels);
 
+    virtual bool IsPreview() const;
     virtual void SetIsPreview(bool p);
 
 };
