@@ -79,6 +79,7 @@ def create_package_tasks
     pkg_files.include('tests/**/*')
     pkg_files.include('rake/**/*')
     pkg_files.include('samples/**/*')
+    pkg_files.include('doc/**/*.txtl', 'doc/wxruby.css')
   end
 end
 task :package => :version
