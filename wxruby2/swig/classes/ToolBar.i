@@ -33,6 +33,12 @@ enum
     wxTB_RIGHT        = 0x4000
 };
 
+// Ensure that the C++ wxToolBar(Base) implementation of UpdateWindowUI
+// is called internally, so that UpdateUIEvents are also sent to each
+// button within the toolbar. This means update_window_ui can't be
+// overridden for this class in Ruby, but unlikely a real problem.
+%feature("nodirector") wxToolBar::UpdateWindowUI;
+
 // These don't work as you would think...
 %ignore wxToolBar::AddTool(wxToolBarToolBase* tool);
 %ignore wxToolBar::InsertTool(size_t pos, wxToolBarToolBase* tool);
