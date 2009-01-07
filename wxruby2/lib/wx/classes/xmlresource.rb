@@ -34,4 +34,21 @@ class Wx::XmlResource
     end
     fname
   end
+
+  # Returns a Wx::Wizard object from the element named +name+ in the
+  # loaded XRC file. The Wizard will have the parent +parent+.
+  # 
+  # This method is not available in wxWidgets, but is here for
+  # completeness and also to document how to use load_object (see
+  # below).
+  def load_wizard(parent, name)
+    wiz = Wx::Wizard.new()
+    load_wizard_subclass(wiz, parent, name)
+    wiz
+  end
+
+  # Completes the loading of a incomplete instance of Wx::Wizard.
+  def load_wizard_subclass(wizard, parent, name)
+    load_object(wizard, parent, name, "wxWizard")
+  end
 end
