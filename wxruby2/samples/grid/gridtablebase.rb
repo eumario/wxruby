@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# wxRuby2 Sample Code. Copyright (c) 2004-2008 wxRuby development team
+# wxRuby2 Sample Code. Copyright (c) 2004-2009 wxRuby development team
 # Freely reusable code: see SAMPLES-LICENSE.TXT for details
 begin
   require 'rubygems' 
@@ -24,8 +24,11 @@ class MyGridTable < Wx::GridTableBase
     super()
     @rows = rows
     @cols = cols
-    @val = 'a'
+    @number_col = 1
   end
+
+  # Letter labels for columns
+  COLS = ('AA' .. 'ZZ').to_a
 
   # Firstly, a GridTableBase must indicate the size of the grid in
   # terms of rows ...
@@ -41,8 +44,24 @@ class MyGridTable < Wx::GridTableBase
   # Most importantly, it should be able to return any given cell's
   # contents, given its row and column reference
   def get_value(row, col)
-    "#{@val} - #{row}"
+    if col == @number_col
+      (row * 5).to_s
+    else
+      "#{row}:#{COLS[col]}"
+    end
   end 
+
+  # This is not needed if the cell contents are simply strings. However,
+  # if you wish to use custom GridCellRenderers and/or GridCellEditors,
+  # this should return a type name which has the correct renderer /
+  # editor defined for it in the Grid, using register_
+  def get_type_name(row, col)
+    if col == @number_col
+      "NUMBER"
+    else
+      "STRING"
+    end
+  end
 
   # It should also return the attributes that should apply to any given
   # cell; this example give alternate rows red text letters
@@ -61,7 +80,7 @@ class MyGridTable < Wx::GridTableBase
 
   # It may also provide labels for the columns and rows
   def get_col_label_value(col)
-    "Col: #{col}"
+    COLS[col]
   end
 
   # If the Grid is to support write as well as read operations,
@@ -89,7 +108,20 @@ class GridFrame < Wx::Frame
     # Create a grid and associate an instance of the GridTable as the
     # data provider for the grid
     @grid = Wx::Grid.new(self)
+
+    # Define the renderers and editors used by the different data types
+    # displayed in this Grid. The type of a given cell is determined by
+    # calling the source's get_type_name method; see above.
+    @grid.register_data_type( "STRING", 
+                              Wx::GridCellStringRenderer.new,
+                              Wx::GridCellTextEditor.new )
+    @grid.register_data_type( "NUMBER", 
+                              Wx::GridCellNumberRenderer.new,
+                              Wx::GridCellNumberEditor.new(0, 500) )
+
+    # Set the data source
     @grid.table = MyMutableGridTable.new(10, 10)
+    
 
     main_sizer.add(@grid, 1, Wx::EXPAND|Wx::ALL, 5)
 
