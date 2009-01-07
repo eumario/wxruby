@@ -35,7 +35,7 @@ public:
                              int leftIndent,
                              int leftSubIndent,
                              int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_STANDARD);
-    bool BeginStyle(const wxTextAttr& style);
+    bool BeginStyle(const wxTextAttrEx& style);
     bool BeginSuppressUndo();
     bool BeginSymbolBullet(wxChar symbol, int leftIndent,
                            int leftSubIndent,
@@ -86,10 +86,10 @@ public:
     wxRichTextFileHandler* FindHandlerFilenameOrType(const wxString& filename,
             int imageType);
 
-    const wxTextAttr GetBasicStyle() const;
+    const wxTextAttrEx GetBasicStyle() const;
     wxRichTextCommand* GetBatchedCommand() const;
     wxCommandProcessor* GetCommandProcessor() const;
-    const wxTextAttr GetDefaultStyle() const;
+    const wxTextAttrEx GetDefaultStyle() const;
     wxString GetExtWildcard(bool combine = false, bool save = false,
                             wxArrayInt* types = NULL);
     wxList GetHandlers();
@@ -143,8 +143,8 @@ public:
                   int type = wxRICHTEXT_TYPE_ANY);
     bool SaveFile(const wxString& filename,
                   int type = wxRICHTEXT_TYPE_ANY);
-    void SetBasicStyle(const wxTextAttr& style);
-    void SetDefaultStyle(const wxTextAttr& style);
+    void SetBasicStyle(const wxTextAttrEx& style);
+    void SetDefaultStyle(const wxTextAttrEx& style);
     /* bool SetListStyle(const wxRichTextRange& range,
                       const wxRichTextListStyleDefinition* style,
                       int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO,
@@ -157,7 +157,10 @@ public:
                       int listLevel = -1);
     static void SetRenderer(wxRichTextRenderer* renderer);
     bool SetStyle(const wxRichTextRange& range,
-                  const wxTextAttr& style,
+                  const wxTextAttrEx& style,
+                  int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
+    bool SetStyle(const wxRichTextRange& range, 
+                  const wxRichTextAttr& style, 
                   int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
     void SetStyleSheet(wxRichTextStyleSheet* styleSheet);
     bool SubmitAction(wxRichTextAction* action);
