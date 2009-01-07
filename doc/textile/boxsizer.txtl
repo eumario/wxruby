@@ -1,9 +1,17 @@
 h1(#wxboxsizer). Wx::BoxSizer
 
-Theidea behind a box sizer is that windows will most often be laid out
-in rather simple basic geometry, a row or a column, or hierarchies of
-both. BoxSizers arrange their contents as either a column or a row, and
-may be nested to create sophisticated resizeable layouts.
+BoxSizers arrange their contents as either a column or a row, and may be
+nested to create sophisticated resizeable layouts. The idea behind a box
+sizer is that windows will most often be laid out in rather simple basic
+geometry, a row or a column, or hierarchies of both.
+
+The subclasses @Wx::HBoxSizer@ and @Wx::VBoxSizer@ are simply shortcuts
+for creating horizontal and vertical BoxSizers, respectively. The
+following are equivalent:
+
+  Wx::BoxSizer.new(Wx::HORIZONTAL)
+  
+  Wx::HBoxSizer.new
 
 h2. Derived from
 
