@@ -3,7 +3,8 @@ h1(#wxgridtablebase). Wx::GridTableBase
 GridTableBase is an advanced way of supplying data to the cells in a
 "Grid":grid.html. It is particularly useful for working with very large
 grids, and for closely connecting the Grid display with an underlying
-data source such as a SQL database.
+data source such as a SQL database. It can make for more efficient and
+cleaner code. 
 
 In a standard Grid, the size of the grid is specified using
 "Grid#create_table":grid.html#Grid_createtable, and then the contents of
@@ -26,36 +27,51 @@ visual attributes. Then, instead of calling "Grid#create_table" on the
 grid to set its size, call "Grid#set_table" and pass in an instance of
 your GridTableBase subclass.
 
+h3. Presenting data
+
 The number of methods that have to be defined in a subclass of
 GridTableBase will depend on the interactions that are permitted by the
 "Grid":grid.html class it will be associated with. The minimal set of
 methods that must be implemented in a read-only grid is:
 
-* "get_attr":#GridTableBase_getattr
 * "get_number_cols":#GridTableBase_getnumbercols
 * "get_number_rows":#GridTableBase_getnumberrows
 * "get_value":#GridTableBase_getvalue
 * "is_empty_cell":#GridTableBase_isemptycell
+* "get_attr":#GridTableBase_getattr
 
 In addition, you may wish to override:
 
 * "get_row_label_value":#GridTableBase_getrowlabelvalue
 * "get_col_label_value":#GridTableBase_getcollabelvalue
 
+h3. Data types, cell renderers and cell editors
+
+In order to use custom "GridCellRenderers":gridcellrenderer.html or
+"GridCellEditors":gridcelleditor.html for particular cells, you will
+need first to define the grid's data types using
+"Grid#register_data_type":grid.html#Grid_registerdatatype. This will
+link appropriate cell renderers and editors to particular named data
+types. Then, your GridTableBase class should override the following
+method to return the type name for each cell in the table:
+
+* "get_type_name":#GridTableBase_gettypename
+
+Note that you must *not* try to provide custom editors or renderers to
+specific cells by associating them with the GridCellAttr returned by the
+"get_attr":#GridTableBase_getattr method of your Table class.
+
+h3. Handling cell edits
+
 In order for a user to be able to edit values within the grid, you must
 also override:
 
 * "set_value":#GridTableBase_setvalue
 
-Additional methods will be needed if the Grid class provides a way to
-insert or delete rows or columns.
-
-h3. Limitations
-
-At present, it is not recommended to use GridTableBase with non-standard
-"cell editors":gridcelleditor.html or "cell renderers":gridcellrenderer.html 
-Difficulties with the memory management of these mean that errors may
-result. 
+This will be called when the user finishes editing a cell's value; it is
+up to your class to decide how to respond (for example, storing the
+value back in a database). Further methods will need to be provided if
+the user is permitted to add or delete columns and rows.
 
 h2. Derived from
 
@@ -150,7 +166,11 @@ h3(#GridTableBase_gettypename). GridTableBase#get_type_name
 
  String *get_type_name*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-Data type determination and value access.
+This method should return the name of the data type in the given
+cell. This is useful to enable different custom cell renderers and
+editors to be used for different cells in the grid.The name should match
+one that has previously been set in the grid using
+"Grid#register_data_type":grid.html#Grid_registerdatatype.
 
 h3(#GridTableBase_cangetvalueas). GridTableBase#can_get_value_as
 
@@ -296,7 +316,10 @@ h3(#GridTableBase_getattr). GridTableBase#get_attr
 
 Should return a "grid cell attribute":gridcellattr.html that should be
 applied to the cell specified by _row_ and _column_. This can set the
-cell's text and background colour, editor and renderer. 
+cell's text and background colour. However, it should not associate an
+editor or renderer with a cell; instead use
+"get_type_name":#GridTableBase_gettypename to link data types to
+specific presentations.
 
 Note that this method must return a *new* GridCellAttr for each call; do
 *not* attempt to share the same GridCellAttr between cells. If you wish
@@ -304,6 +327,8 @@ to use the same style across a whole grid, create the attribute as a
 class variable or constant, then call its
 "clone":gridcellattr.html#GridCellAttr_clone method to return a copy for
 each call to get_attr.
+
+
 
 h3(#GridTableBase_setattr). GridTableBase#set_attr
 
