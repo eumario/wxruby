@@ -93,7 +93,7 @@ The following styles can be passed to RichTextAttr#set_bullet_style
 
 Of these, TEXT_ATTR_BULLET_STYLE_BITMAP is unimplemented.
 
-The following constants can be passed to RichTextAttr::SetLineSpacing:
+The following constants can be passed to RichTextAttr#set_line_spacing
 
 
 
@@ -103,7 +103,7 @@ The following constants can be passed to RichTextAttr::SetLineSpacing:
  
 
 
-The following styles can be passed to TextAttrEx::SetTextEffects:
+The following styles can be passed to RichTextAttr#set_text_effects
 
 
 
@@ -125,7 +125,7 @@ Of these, only TEXT_ATTR_EFFECT_CAPITALS and TEXT_ATTR_EFFECT_STRIKETHROUGH are 
 
 h2. See also
 
-"TextAttr":textattr.html, "TextAttrEx":textattrex.html, "RichTextCtrl":richtextctrl.html
+"TextAttr":textattr.html, "RichTextCtrl":richtextctrl.html
 
 <div id="methods">
 
@@ -927,23 +927,7 @@ h3(#RichTextAttr_seturl). RichTextAttr#set_url
 
   *set_url*(%(arg-type)String% url)
 
-Sets the URL for the content. Sets the TEXT_ATTR_URL style; content with this style
-causes RichTextCtrl to show a hand cursor over it, and RichTextCtrl generates
-a TextUrlEvent when the content is clicked.
-
-h3(#RichTextAttr_operatorassign). RichTextAttr::operator=
-
- void operator *operator=*(%(arg-type)"TextAttrEx":textattrex.html% attr)
-
-Assignment from a "TextAttrEx":textattr.html object.
-
- void operator *operator=*(%(arg-type)"RichTextAttr":richtextattr.html% attr)
-
-Assignment from a "RichTextAttr":richtextattr.html object.
-
-h3(#RichTextAttr_wxtextattrex). RichTextAttr#text_attr_ex
-
- operator *_text_attr_ex*()
-
-Makes a "TextAttrEx":textattrex.html object from this object.
+Sets the URL for the content. Sets the TEXT_ATTR_URL style; content with
+this style causes RichTextCtrl to show a hand cursor over it, and
+RichTextCtrl generates a TextUrlEvent when the content is clicked.
 

@@ -66,7 +66,7 @@ Returns .
 
 h3(#RichTextXMLHandler_createstyle). RichTextXMLHandler#create_style
 
- String *create_style*(%(arg-type)"TextAttrEx":textattrex.html% attr, 
+ String *create_style*(%(arg-type)"RichTextAttr":richtextattr.html% attr, 
                      %(arg-type)Boolean% isPara = false)
 
 Creates XML code for a given character or paragraph style.
