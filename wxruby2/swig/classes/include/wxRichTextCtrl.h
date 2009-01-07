@@ -44,7 +44,7 @@ public:
     bool BeginParagraphSpacing(int before, int after);
     bool BeginParagraphStyle(const wxString& paragraphStyle);
     bool BeginRightIndent(int rightIndent);
-    bool BeginStyle(const wxTextAttr& style);
+    bool BeginStyle(const wxTextAttrEx& style);
     bool BeginSuppressUndo();
     bool BeginSymbolBullet(wxChar symbol, int leftIndent,
                            int leftSubIndent,
@@ -102,7 +102,7 @@ public:
                          int flags);
     long FindNextWordPosition(int direction = 1) const;
     void Freeze();
-    const wxTextAttr GetBasicStyle() const;
+    const wxTextAttrEx GetBasicStyle() const;
     // These do the same thing in wxRuby - but prefer the other b/c it
     // will not pass ownership of the buffer to Ruby.
     // const wxRichTextBuffer GetBuffer();
@@ -110,7 +110,7 @@ public:
     long GetCaretPosition() const;
     bool GetCaretPositionForIndex(long position, wxRect& rect);
     wxCommandProcessor* GetCommandProcessor() const;
-    const wxTextAttr GetDefaultStyle() const;
+    const wxTextAttrEx GetDefaultStyle() const;
     long GetDelayedLayoutThreshold() const;
     wxString GetFilename() const;
     long GetFirstVisiblePosition() const;
@@ -143,9 +143,13 @@ public:
     wxString GetValue() const;
     wxRichTextLine* GetVisibleLineForCaretPosition(long caretPosition) const;
     bool HasCharacterAttributes(const wxRichTextRange& range,
-                                const wxTextAttr& style) const;
+                                const wxRichTextAttr& style) const;
+    bool HasCharacterAttributes(const wxRichTextRange& range,
+                                const wxTextAttrEx& style) const;
     bool HasParagraphAttributes(const wxRichTextRange& range,
-                                const wxTextAttr& style) const;
+                                const wxRichTextAttr& style) const;
+    bool HasParagraphAttributes(const wxRichTextRange& range,
+                                const wxTextAttrEx& style) const;
     bool HasSelection() const;
     wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long* pos) const;
     const wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
@@ -237,7 +241,7 @@ public:
     void SetBasicStyle(const wxTextAttrEx& style);
     void SetCaretPosition(long position,
                           bool showAtLineStart = false);
-    bool SetDefaultStyle(const wxTextAttr& style);
+    bool SetDefaultStyle(const wxTextAttrEx& style);
     bool SetDefaultStyleToCursorStyle();
     void SetDelayedLayoutThreshold(long threshold);
     void SetEditable(bool editable);
@@ -258,14 +262,14 @@ public:
                       int listLevel = -1);
     void SetSelection(long from, long to);
     void SetSelectionRange(const wxRichTextRange& range);
-    bool SetStyle(const wxRichTextRange& range,
-                  const wxRichTextAttr& style);
+    bool SetStyle(const wxRichTextRange& range, const wxRichTextAttr& style);
+    bool SetStyle(long start, long end, const wxTextAttrEx& style);
     bool SetStyle(long start, long end, const wxTextAttr& style);
     bool SetStyleEx(const wxRichTextRange& range,
                     const wxRichTextAttr& style,
                     int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
     bool SetStyleEx(long start, long end,
-                    const wxTextAttr& style,
+                    const wxTextAttrEx& style,
                     int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
     void SetStyleSheet(wxRichTextStyleSheet* styleSheet);
     void SetValue(const wxString& value);
