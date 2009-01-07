@@ -21,7 +21,7 @@ SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxMDIParentFrame);
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
-%import "include/wxTopLeveLWindow.h"
+%import "include/wxTopLevelWindow.h"
 %import "include/wxFrame.h"
 
 %include "include/wxMDIParentFrame.h"
