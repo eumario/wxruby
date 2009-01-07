@@ -40,9 +40,12 @@ h2. Methods
 * "XmlResource#load_icon":#XmlResource_loadicon
 * "XmlResource#load_menu":#XmlResource_loadmenu
 * "XmlResource#load_menu_bar":#XmlResource_loadmenubar
+* "XmlResource#load_object":#XmlResource_loadobject
 * "XmlResource#load_panel":#XmlResource_loadpanel
 * "XmlResource#load_panel_subclass":#XmlResource_loadpanelsubclass
 * "XmlResource#load_tool_bar":#XmlResource_loadtoolbar
+* "XmlResource#load_wizard":#XmlResource_loadwizard
+* "XmlResource#load_wizard_subclass":#XmlResource_loadwizardsubclass
 * "XmlResource#set_flags":#XmlResource_setflags
 * "XmlResource#unload":#XmlResource_unload
 
@@ -213,6 +216,23 @@ Loads a menubar from resource. Returns NULL on failure.
 
 Loads a menubar from resource. Returns NULL on failure.
 
+h3(#XmlResource_loadobject). XmlResource#load_object
+
+ Boolean *load_object*(%(arg-type)"Object":object.html% instance,
+                        %(arg-type)"Window":window.html parent,
+                        %(arg-type)String% name,
+                        %(arg-type)String% class_name)
+
+Loads any arbitrary object from the XML resource. The object should be
+some Window (or a subclass) created with the no-arguments version of the
+constructor - ie, an incomplete instance. The layout definition in the
+XRC will complete the instance.
+
+The argument _instance_ is the incomplete object, and _parent_ is the
+Window to which it will be attached. _name_ is the name attribute of the
+object in the XML file, and _class_name_ is the wxWidgets name of the
+class of the instance being loaded. The _class_name_ needs to be in C++
+form, for example "wxWizard".
 
 h3(#XmlResource_loadpanel). XmlResource#load_panel
 
@@ -233,6 +253,19 @@ h3(#XmlResource_loadtoolbar). XmlResource#load_tool_bar
  "ToolBar":toolbar.html *load_tool_bar*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
 
 Loads a toolbar.
+
+h3(#XmlResource_loadwizard). XmlResource#load_wizard
+
+ "Wizard":wizard.html *load_wizard*(%(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Creates a wizard from the item named _name_ in the XRC.
+
+h3(#XmlResource_loadwizardsubclass). XmlResource#load_wizard_subclass
+
+ Boolean *load_panel_subclass*(%(arg-type)"Wizard":wizard.html% panel, %(arg-type)"Window":window.html% parent, %(arg-type)String% name)
+
+Loads a wizard. This form is used to finish creation of an already
+existing instance - which may be a custom Ruby subclass.
 
 h3(#XmlResource_setflags). XmlResource#set_flags
 
