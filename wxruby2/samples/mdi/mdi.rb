@@ -7,14 +7,22 @@ rescue LoadError
 end
 require 'wx'
 
-# Simple MDI-based parent frame with menus to create, cycle through and
-# close child frames within in.
+# Demonstrates a simple MDI (Multiple Document Interface) parent frame
+# with menus to create, cycle through and close child frames within in.
 #
-# NB: MDI is only properly implemented on Windows, and is simulated by
-# using a Notebook on Linux and OS X. Therefore its use is not
-# recommended for cross-platform applications. An alternative interface
-# strategy may be to use separate frames, or possibly the AUI classes.
-class MyFrame < Wx::MDIParentFrame
+# Note that MDI is only properly natively implemented on Windows, and
+# even there it is deprecated by Microsoft as an application interface
+# style.
+#
+# On Linux/GTK, Wx simulates an MDI by using a Notebook. On OS X, MDI is
+# simulated simply by ordinary separate frames, and Next/Preview and
+# Tile/Cascade are unimplemented.
+# 
+# For these reasons, MDI is not recommended for cross-platform
+# development. Alternative interface strategies include using separate
+# frames, or the AUI classes.
+
+class MDIFrame < Wx::MDIParentFrame
   def initialize(title)
     super(nil, :title => title, :size => [ 500, 400 ] )
     
@@ -63,15 +71,15 @@ class MyFrame < Wx::MDIParentFrame
   def create_child
     @child_number += 1
     name = "Child #{@child_number.to_s}"
-    Wx::MDIChildFrame.new(self, -1, name)
+    child = Wx::MDIChildFrame.new(self, :title => name)
+    # Note that this is required on OS X; if no child frames are shown,
+    # then nothing is shown at all.
+    child.show 
   end
 end
 
-class MDIApp < Wx::App
-  def on_init
-    frame = MyFrame.new("MDI App")
-	frame.show
-  end
+Wx::App.run do
+  MDIFrame.new("MDI Application").show # may return false on OS X
+  true
 end
 
-MDIApp.new.main_loop
