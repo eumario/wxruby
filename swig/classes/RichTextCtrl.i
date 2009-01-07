@@ -33,7 +33,17 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxRichTextCtrl);
 %ignore wxRichTextCtrl::WriteImage(const wxRichTextImageBlock& imageBlock);
 
 // Ignore the versions that use TextAttrEx as not used in wxRuby
+%ignore  wxRichTextCtrl::HasCharacterAttributes(const wxRichTextRange& range,
+                                                const wxTextAttrEx& style);
+%ignore  wxRichTextCtrl::HasParagraphAttributes(const wxRichTextRange& range,
+                                                const wxTextAttrEx& style);
+
 %ignore wxRichTextCtrl::SetBasicStyle(const wxTextAttrEx& style);
+%ignore wxRichTextCtrl::SetStyle(long start, long end, const wxTextAttrEx& style);
+%ignore wxRichTextCtrl::SetStyle(long start, long end, const wxTextAttr& style);
+%ignore wxRichTextCtrl::SetStyleEx(long start, long end,
+                                   const wxTextAttrEx& style,
+                                   int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
 
 
 %feature("nodirector") wxRichTextCtrl::Scroll;

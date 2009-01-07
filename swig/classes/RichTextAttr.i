@@ -61,4 +61,7 @@ GC_MANAGE(wxRichTextAttr);
 #define wxTEXT_ATTR_EFFECT_SUPERSCRIPT              0x00000100
 #define wxTEXT_ATTR_EFFECT_SUBSCRIPT                0x00000200
 
+// TextAttrEx not used in wxRuby
+%ignore wxRichTextAttr(const wxTextAttrEx& attr);
+
 %include "include/wxRichTextAttr.h"

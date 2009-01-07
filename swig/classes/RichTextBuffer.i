@@ -19,6 +19,15 @@ GC_NEVER(wxRichTextBuffer);
 #define wxRICHTEXT_TYPE_RTF             4
 #define wxRICHTEXT_TYPE_PDF             5
 
+// Use the RichTextAttr version
+%ignore wxRichTextBuffer::SetStyle(const wxRichTextRange& range,
+                                   const wxTextAttrEx& style,
+                                   int flags);
+
+// Not supported for now
+%ignore wxRichTextBuffer::GetBatchedCommand;
+%ignore wxRichTextBuffer::GetCommandProcessor;
+
 %apply SWIGTYPE *DISOWN { wxRichTextFileHandler* handler };
 
 %include "include/wxRichTextBuffer.h"

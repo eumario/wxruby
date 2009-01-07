@@ -12,6 +12,7 @@ GC_MANAGE_AS_OBJECT(wxRichTextXMLHandler);
 
 %include "../shared/richtext.i"
 
+%ignore wxRichTextXMLHandler::CreateStyle;
 %ignore wxRichTextXMLHandler::GetNodeContent;
 %ignore wxRichTextXMLHandler::GetParamNode;
 %ignore wxRichTextXMLHandler::GetParamValue;
