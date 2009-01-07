@@ -1,10 +1,10 @@
-// Copyright 2004-2008, wxRuby development team
+// Copyright 2004-2009, wxRuby development team
 // released under the MIT-like wxRuby2 license
-
 
 #if !defined(_wxNotebook_h_)
 #define _wxNotebook_h_
-class wxNotebook : public wxControl
+
+class wxNotebook : public wxBookCtrlBase
 {
 public:
    wxNotebook() ;

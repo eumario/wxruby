@@ -6,23 +6,28 @@
 %module(directors="1") wxListbook
 GC_MANAGE_AS_WINDOW(wxListbook);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxListbook);
-%feature("nodirector") wxListbook::OnSelChange;
 
 %{
-#include <wx/wx.h>
 #include <wx/listbook.h>
 %}
 
-
+%include "../shared/bookctrls.i"
+BOOKCTRL_FEATURES(wxListbook);
 
 #define wxListbookPage wxWindow
 
-%ignore wxListbook::OnSelChange;
+// wxListbook flags
+#define wxLB_DEFAULT          wxBK_DEFAULT
+#define wxLB_TOP              wxBK_TOP
+#define wxLB_BOTTOM           wxBK_BOTTOM
+#define wxLB_LEFT             wxBK_LEFT
+#define wxLB_RIGHT            wxBK_RIGHT
+#define wxLB_ALIGN_MASK       wxBK_ALIGN_MASK
 
-// TODO: Are these correct? Docs don't show Listbook
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
 %import "include/wxControl.h"
+%import "include/wxBookCtrlBase.h"
 
 %include "include/wxListbook.h"

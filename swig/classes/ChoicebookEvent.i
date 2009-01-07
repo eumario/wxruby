@@ -12,5 +12,8 @@ GC_MANAGE_AS_EVENT(wxChoicebookEvent);
 
 %import "include/wxObject.h"
 %import "include/wxEvent.h"
+%import "include/wxCommandEvent.h"
+%import "include/wxNotifyEvent.h"
+%import "include/wxBookCtrlBaseEvent.h"
 
 %include "include/wxChoicebookEvent.h"

@@ -11,6 +11,9 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNotebook);
 #include <wx/notebook.h>
 %}
 
+%include "../shared/bookctrls.i"
+BOOKCTRL_FEATURES(wxNotebook);
+
 // use common book wxBK_* flags for describing alignment
 #define wxNB_DEFAULT          0x0000
 #define wxNB_TOP              0x0010
@@ -24,23 +27,6 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxNotebook);
 #define wxNB_FLAT             0x0800
 
 #define wxNotebookPage wxWindow
-
-// Protect panels etc added as Notebook pages from being GC'd by Ruby;
-// avoids double-free segfaults on exit on GTK
-%apply SWIGTYPE *DISOWN { wxNotebookPage* page };
-
-// Avoid premature deletion of ImageList providing icons for notebook
-// tabs; wxRuby takes ownership when the ImageList is assigned,
-// wxWidgets will delete the ImageList with the Notebook.
-%apply SWIGTYPE *DISOWN { wxImageList* };
-// This version in Wx doesn't automatically delete
-%ignore wxNotebook::SetImageList;
-// Use the version that deletes the ImageList when the Notebook is destroyed
-%rename(SetImageList) wxNotebook::AssignImageList;
-
-// Users should handle page changes with events, not virtual methods
-%ignore wxNotebook::OnSelChange;
-%feature("nodirector") wxNotebook::OnSelChange;
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
