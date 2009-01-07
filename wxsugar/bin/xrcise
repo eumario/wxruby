@@ -1,10 +1,10 @@
 # == Synopsis
 # 
-# xrc-tool : Generates ruby code from wxWidgets XML
+# xrcise : Generates ruby code from wxWidgets XML
 #
 # == Usage
 # 
-# xrc-tool [OPTIONS] <FILE>
+# xrcise [OPTIONS] <FILE>
 #
 # == Arguments
 #
@@ -33,45 +33,48 @@
 
 require 'wx_sugar/xrc'
 require 'getoptlong'
-require 'rdoc/ri/ri_paths' # avoid a bug in Ruby 1.8.5 with rdoc/usage
-require 'rdoc/usage'
 
-# Hacked version of RDoc::usage that allows it to accept an argument
-# specifying which file the usage comment source should be taken from;
-# the standard version defaults to the main program file, and when
-# installed via Rubygems, this points to the gem executable stub, which
-# has not-very-enlightening comments
-module RDoc
-  class << self
-    undef_method :usage
-    def usage(main_program_file = nil, exit_status = 0)
-      usage_no_exit(main_program_file)
-      exit(exit_status)
-    end
+# RDoc before Ruby 1.9 was able to format the comment above into info
+# suitable for a terminal, but rdoc/usage has been dropped. So do it
+# manually below:
+XRCISE_USAGE = <<USAGE
+Synopsis
+--------
 
-    undef_method :usage_no_exit
-    def usage_no_exit(main_program_file = nil)
-      main_program_file ||= caller[-1].sub(/:\d+$/, '')
-      comment = File.open(main_program_file) do |file|
-        find_comment(file)
-      end
-      
-      comment = comment.gsub(/^\s*#/, '')
-      
-      markup = SM::SimpleMarkup.new
-      flow_convertor = SM::ToFlow.new
-      flow = markup.convert(comment, flow_convertor)
-      format = "plain"
-      
-      options = RI::Options.instance
-      if args = ENV["RI"]
-        options.parse(args.split)
-      end
-      formatter = options.formatter.new(options, "")
-      formatter.display_flow(flow)
-    end
-  end
-end
+xrcise : Generates ruby code from wxWidgets XML
+
+Usage
+-----
+
+xrcise [OPTIONS] <FILE>
+
+Arguments
+---------
+
+<FILE> should be a valid XRC file from where class definitions are
+extracted.
+
+Options
+-------
+
+-a, --appname [NAME]
+   Create a basic Wx::App wrapper to run a frame. Not valid if more
+   than one frame is identified in this file 
+
+-h, --help:
+   Show this help
+
+-n, --namespace:
+   Namespace module to wrap code in. If this is given, it  will be
+   used both to prefix generated subclasses, and extend subclassed 
+   controls contained in the windows.
+
+-o, --output:
+   Location for generated code. If this is a file, write all the
+   generated classes to this one file. If this is a directory, writes
+   each class as a separate file in it.
+
+USAGE
 
 # Back to the real program:
 opts = GetoptLong.new( [ '--appname', '-a', GetoptLong::OPTIONAL_ARGUMENT ],
@@ -85,7 +88,8 @@ output    = nil
 opts.each do | opt, arg |
   case opt
   when '--help'
-    RDoc::usage(__FILE__)
+    puts XRCISE_USAGE
+    exit
   when '--appname'
     options[:app_name] = ( arg.empty? ? 'MyApp' : arg )
   when '--namespace'
