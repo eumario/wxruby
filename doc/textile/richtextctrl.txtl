@@ -266,7 +266,7 @@ h3(#RichTextCtrl_applyalignmenttoselection). apply_alignment_to_selection
 
 Applies the given alignment to the selection (undoable).
 
-For alignment values, see "TextAttrEx":textattrex.html.
+For alignment values, see "RichTextAttr":richtextattr.html.
 
 h3(#RichTextCtrl_applyboldtoselection). apply_bold_to_selection
 
@@ -314,7 +314,7 @@ h3(#RichTextCtrl_beginalignment). begin_alignment
 
 Begins using alignment
 
-For alignment values, see "TextAttrEx":textattrex.html.
+For alignment values, see "RichTextAttr":richtextattr.html.
 
 h3(#RichTextCtrl_beginbatchundo). begin_batch_undo
 
@@ -453,7 +453,7 @@ Begins a right indent, specified in tenths of a millimetre.
 
 h3(#RichTextCtrl_beginstyle). begin_style
 
- Boolean *begin_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
+ Boolean *begin_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
 
 Begins applying a style.
 
@@ -764,7 +764,7 @@ refresh the control.
 
 h3(#RichTextCtrl_getbasicstyle). get_basic_style
 
- "TextAttrEx":textattrex.html *get_basic_style*()
+ "RichTextAttr":richtextattr.html *get_basic_style*()
 
 Gets the basic (overall) style. This is the style of the whole
 buffer before further styles are applied, unlike the default style, which
@@ -948,9 +948,6 @@ if this is the case.
 h3(#RichTextCtrl_hascharacterattributes). has_character_attributes
 
  Boolean *has_character_attributes*(%(arg-type)Range% range, 
-                                  %(arg-type)"TextAttrEx":textattrex.html% style)
-
- Boolean *has_character_attributes*(%(arg-type)Range% range, 
                                   %(arg-type)"RichTextAttr":richtextattr.html% style)
 
 Test if this whole range has character attributes of the specified kind. If any
@@ -959,9 +956,6 @@ can use this to implement, for example, bold button updating. _style_ must have
 flags indicating which attributes are of interest.
 
 h3(#RichTextCtrl_hasparagraphattributes). has_paragraph_attributes
-
- Boolean *has_paragraph_attributes*(%(arg-type)Range% range, 
-                                  %(arg-type)"TextAttrEx":textattrex.html% style)
 
  Boolean *has_paragraph_attributes*(%(arg-type)Range% range, 
                                   %(arg-type)"RichTextAttr":richtextattr.html% style)
@@ -1442,8 +1436,6 @@ h3(#RichTextCtrl_setbasicstyle). set_basic_style
 
   *set_basic_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
 
-  *set_basic_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
-
 Sets the basic (overall) style. This is the style of the whole
 buffer before further styles are applied, unlike the default style, which
 only affects the style currently being applied (for example, setting the default
@@ -1458,10 +1450,10 @@ A value of -1 means the caret is at the start of the buffer.
 
 h3(#RichTextCtrl_setdefaultstyle). set_default_style
 
- Boolean *set_default_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
+ Boolean *set_default_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
 
-Sets the current default style, which can be used to change how subsequently inserted
-text is displayed.
+Sets the current default style, which can be used to change how
+subsequently inserted text is displayed.
 
 h3(#RichTextCtrl_setdefaultstyletocursorstyle). set_default_style_to_cursor_style
 
@@ -1560,28 +1552,17 @@ h3(#RichTextCtrl_setstyle). set_style
  Boolean *set_style*(%(arg-type)Range% range,  %(arg-type)"RichTextAttr":richtextattr.html% style)
 
  Boolean *set_style*(%(arg-type)Integer% start,  %(arg-type)Integer% end, 
-                   %(arg-type)"TextAttrEx":textattrex.html% style)
+                   %(arg-type)"RichTextAttr":richtextattr.html% style)
 
- Boolean *set_style*(%(arg-type)Integer% start,  %(arg-type)Integer% end, 
-                   %(arg-type)"TextAttr":textattr.html% style)
-
-Sets the attributes for the given range. The RichTextAttr version is more efficient
-because it does not use Font objects.
-
-The end point of range is specified as the last character position of the span of text, plus one.
-So, for example, to set the style for a character at position 5, use the range (5,6).
+Sets the attributes for the given range. The end point of range is
+specified as the last character position of the span of text, plus one.
+So, for example, to set the style for a character at position 5, use the
+range (5,6).
 
 h3(#RichTextCtrl_setstyleex). set_style_ex
 
  Boolean *set_style_ex*(%(arg-type)Range% range,  %(arg-type)"RichTextAttr":richtextattr.html% style, 
-                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
-
- Boolean *set_style_ex*(%(arg-type)Range% range,  %(arg-type)"TextAttrEx":textattrex.html% style, 
-                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
-
- Boolean *set_style_ex*(%(arg-type)Integer% start,  %(arg-type)Integer% end, 
-                      %(arg-type)"TextAttrEx":textattrex.html% style, 
-                      %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
+                      %(arg-type)Integer% flags = RICHTEXT_SETSTYLE_WITH_UNDO)
 
 Sets the attributes for the given range, passing flags to determine how the attributes are set. The RichTextAttr version is more efficient
 because it does not use Font objects.

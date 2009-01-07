@@ -10,7 +10,7 @@ h2. Data structures
 
 h2. See also
 
-"TextAttr":textattr.html, "TextAttrEx":textattrex.html, "RichTextAttr":richtextattr.html, "RichTextCtrl":richtextctrl.html
+"TextAttr":textattr.html, "RichTextAttr":richtextattr.html, "RichTextCtrl":richtextctrl.html
 
 <div id="methods">
 
@@ -301,7 +301,7 @@ Begins a right indent, specified in tenths of a millimetre.
 
 h3(#RichTextBuffer_beginstyle). RichTextBuffer#begin_style
 
- Boolean *begin_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
+ Boolean *begin_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
 
 Begins using a specified style.
 
@@ -582,12 +582,12 @@ Finds a handler by filename or, if supplied, type.
 
 h3(#RichTextBuffer_getbasicstyle). RichTextBuffer#get_basic_style
 
- "TextAttrEx":textattrex.html *get_basic_style*()
+ "RichTextAttr":richtextattr.html *get_basic_style*()
 
-Gets the basic (overall) style. This is the style of the whole
-buffer before further styles are applied, unlike the default style, which
-only affects the style currently being applied (for example, setting the default
-style to bold will cause subsequently inserted text to be bold).
+Gets the basic (overall) style. This is the style of the whole buffer
+before further styles are applied, unlike the default style, which only
+affects the style currently being applied (for example, setting the
+default style to bold will cause subsequently inserted text to be bold).
 
 h3(#RichTextBuffer_getbatchedcommand). RichTextBuffer#get_batched_command
 
@@ -604,7 +604,7 @@ initialized.
 
 h3(#RichTextBuffer_getdefaultstyle). RichTextBuffer#get_default_style
 
- "TextAttrEx":textattrex.html *get_default_style*()
+ "RichTextAttr":richtextattr.html *get_default_style*()
 
 Returns the current default style, affecting the style currently being applied (for example, setting the default
 style to bold will cause subsequently inserted text to be bold).
@@ -632,10 +632,7 @@ Returns the object to be used to render certain aspects of the content, such as 
 
 h3(#RichTextBuffer_getstyle). RichTextBuffer#get_style
 
- Boolean *get_style*(%(arg-type)Integer% position, 
-                   %(arg-type)"RichTextAttr":richtextattr.html% style)
-
- Boolean *get_style*(%(arg-type)Integer% position,  %(arg-type)"TextAttrEx":textattrex.html% style)
+ "RichTextAttr":richtextattr.html *get_style*(%(arg-type)Integer% position)
 
 Gets the attributes at the given position.
 
@@ -645,16 +642,16 @@ or paragraph style alone, use "get_uncombined_style":#RichTextBuffer_getuncombin
 
 h3(#RichTextBuffer_getstyleforrange). RichTextBuffer#get_style_for_range
 
- Boolean *get_style_for_range*(%(arg-type)Range% range, 
-                             %(arg-type)"TextAttrEx":textattrex.html% style)
+ "RichTextAttr":richtextattr.html *get_style_for_range*(%(arg-type)Range% range)
 
-This function gets a style representing the common, combined attributes in the given range.
-Attributes which have different values within the specified range will not be included the style
-flags.
+This function gets a style representing the common, combined attributes
+in the given range.  Attributes which have different values within the
+specified range will not be included the style flags.
 
-The function is used to get the attributes to display in the formatting dialog: the user
-can edit the attributes common to the selection, and optionally specify the values of further
-attributes to be applied uniformly.
+The function is used to get the attributes to display in the formatting
+dialog: the user can edit the attributes common to the selection, and
+optionally specify the values of further attributes to be applied
+uniformly.
 
 To apply the edited attributes, you can use "set_style":#RichTextBuffer_setstyle specifying
 the RICHTEXT_SETSTYLE_OPTIMIZE flag, which will only apply attributes that are different
@@ -681,11 +678,7 @@ Get the size of the style stack, for example to check correct nesting.
 
 h3(#RichTextBuffer_getuncombinedstyle). RichTextBuffer#get_uncombined_style
 
- Boolean *get_uncombined_style*(%(arg-type)Integer% position, 
-                              %(arg-type)"RichTextAttr":richtextattr.html% style)
-
- Boolean *get_uncombined_style*(%(arg-type)Integer% position, 
-                              %(arg-type)"TextAttrEx":textattrex.html% style)
+  "RichTextAttr":richtextattr.html  *get_uncombined_style*(%(arg-type)Integer% position)
 
 Gets the attributes at the given position.
 
@@ -698,7 +691,7 @@ the paragraph attributes. Otherwise, it will return the character attributes.
 
 h3(#RichTextBuffer_hittest). RichTextBuffer#hit_test
 
- Integer *hit_test*(%(arg-type)"DC":dc.html% dc,  %(arg-type)"Point":point.html% pt, 
+ Integer *hit_test*(%(arg-type)"DC":dc.html% dc,      %(arg-type)"Point":point.html% pt, 
                   %(arg-type)Integer% textPosition)
 
 Finds the text position for the given position, putting the position in _textPosition_ if
@@ -876,8 +869,6 @@ h3(#RichTextBuffer_setbasicstyle). RichTextBuffer#set_basic_style
 
   *set_basic_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
 
-  *set_basic_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
-
 Sets the basic (overall) style. This is the style of the whole
 buffer before further styles are applied, unlike the default style, which
 only affects the style currently being applied (for example, setting the default
@@ -885,7 +876,7 @@ style to bold will cause subsequently inserted text to be bold).
 
 h3(#RichTextBuffer_setdefaultstyle). RichTextBuffer#set_default_style
 
-  *set_default_style*(%(arg-type)"TextAttrEx":textattrex.html% style)
+  *set_default_style*(%(arg-type)"RichTextAttr":richtextattr.html% style)
 
 Sets the default style, affecting the style currently being applied (for example, setting the default
 style to bold will cause subsequently inserted text to be bold).
@@ -927,10 +918,8 @@ overriding one or more virtual functions, and setting an instance of the class u
 h3(#RichTextBuffer_setstyle). RichTextBuffer#set_style
 
  Boolean *set_style*(%(arg-type)Range% range,  %(arg-type)"RichTextAttr":richtextattr.html% style, 
-                   %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
+                   %(arg-type)Integer% flags = RICHTEXT_SETSTYLE_WITH_UNDO)
 
- Boolean *set_style*(%(arg-type)Range% range,  %(arg-type)"TextAttrEx":textattrex.html% style, 
-                   %(arg-type)Integer% flags $=$ RICHTEXT_SETSTYLE_WITH_UNDO)
 
 Sets the attributes for the given range. Pass flags to determine how the attributes are set.
 

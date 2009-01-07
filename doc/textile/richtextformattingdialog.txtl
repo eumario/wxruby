@@ -112,9 +112,9 @@ Creation: see "the constructor":richtextformattingdialog.html for details about 
 
 h3(#RichTextFormattingDialog_getattributes). RichTextFormattingDialog#get_attributes
 
- "TextAttrEx":textattrex.html *get_attributes*()
+ "RichTextAttr":richtextattr.html *get_attributes*()
 
- "TextAttrEx":textattrex.html *get_attributes*()
+ "RichTextAttr":richtextattr.html *get_attributes*()
 
 Gets the attributes being edited.
 
@@ -126,7 +126,7 @@ Helper for pages to get the top-level dialog.
 
 h3(#RichTextFormattingDialog_getdialogattributes). RichTextFormattingDialog#get_dialog_attributes
 
- "TextAttrEx":textattrex.html *get_dialog_attributes*(%(arg-type)"Window":window.html% win)
+ "RichTextAttr":richtextattr.html *get_dialog_attributes*(%(arg-type)"Window":window.html% win)
 
 Helper for pages to get the attributes.
 
@@ -169,7 +169,7 @@ Gets the associated style sheet, if any.
 
 h3(#RichTextFormattingDialog_setattributes). RichTextFormattingDialog#set_attributes
 
-  *set_attributes*(%(arg-type)"TextAttrEx":textattrex.html% attr)
+  *set_attributes*(%(arg-type)"RichTextAttr":richtextattr.html% attr)
 
 Sets the attributes to be edited.
 
@@ -188,7 +188,7 @@ Sets the image list associated with the dialog's property sheet.
 
 h3(#RichTextFormattingDialog_setstyle). RichTextFormattingDialog#set_style
 
- Boolean *set_style*(%(arg-type)"TextAttrEx":textattrex.html% style, 
+ Boolean *set_style*(%(arg-type)"RichTextAttr":richtextattr.html% style, 
                    %(arg-type)Boolean% update = true)
 
 Sets the attributes and optionally updates the display, if _update_ is .
