@@ -2,7 +2,7 @@
 # subclasses of Frames, Dialog and Panels to be loaded from XRC. 
 class XRCClass
   # Only these classes may be subclassed in Ruby
-  VALID_CLASSES = %|wxFrame wxDialog wxPanel|
+  VALID_CLASSES = %|wxFrame wxDialog wxPanel wxWizard|
 
   # Simple struct to hold details of a individual named control
   Control = Struct.new(:name, :sub_class)
