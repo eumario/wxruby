@@ -286,6 +286,13 @@ Wx::define_keyword_ctors('MessageDialog') do
   wx_ctor_params :pos
 end
 
+# Property editing dialog
+Wx::define_keyword_ctors('PropertySheetDialog') do
+  wx_ctor_params :id, :title
+  wx_ctor_params :pos, :size, :style => Wx::DEFAULT_DIALOG_STYLE
+  wx_ctor_params :name => 'propertySheetDialog'
+end
+
 ### CONTROLS
 
 # Push button control, displaying text
