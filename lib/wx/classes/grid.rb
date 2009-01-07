@@ -35,6 +35,14 @@ class Wx::Grid
     @__grid_table = table
   end
 
+  # Store the renderers / editors associated with types, if used
+  alias :__register_data_type :register_data_type
+  def register_data_type(type_name, renderer, editor)
+    __register_data_type(type_name, renderer, editor)
+    @__named_type_info ||= {}
+    @__named_type_info[type_name] = [ renderer, editor ]
+  end
+
   # store default editor
   wx_set_default_editor = self.instance_method(:set_default_editor)
   define_method(:set_default_editor) do | editr |
