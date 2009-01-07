@@ -156,19 +156,29 @@ Wx::define_keyword_ctors('ToolBarTool') do
   wx_ctor_params :long_help => ''
 end
 
+# Similar to notebook but using choice control
+Wx::define_keyword_ctors('Choicebook') do
+  wx_ctor_params :id, :pos, :size, :style, :name => 'choiceBook'
+end
+
 # Notebook class
 Wx::define_keyword_ctors('Notebook') do
   wx_ctor_params :id, :pos, :size, :style, :name => 'noteBook' 
 end
 
-# Similar to notebook but using list control - undocumented
+# Similar to notebook but using list control
 Wx::define_keyword_ctors('Listbook') do
   wx_ctor_params :id, :pos, :size, :style, :name => 'listBook'
 end
 
-# Similar to notebook but using choice control
-Wx::define_keyword_ctors('Choicebook') do
-  wx_ctor_params :id, :pos, :size, :style, :name => 'choiceBook'
+# Similar to notebook but using toolbar
+Wx::define_keyword_ctors('Toolbook') do
+  wx_ctor_params :id, :pos, :size, :style, :name => 'toolBook'
+end
+
+# Similar to notebook but using tree control
+Wx::define_keyword_ctors('Treebook') do
+  wx_ctor_params :id, :pos, :size, :style, :name => 'treeBook'
 end
 
 # wxSashWindow:	Window with four optional sashes that can be dragged
@@ -267,7 +277,6 @@ end
 Wx::define_keyword_ctors('PrintDialog') do
   wx_ctor_params :data
 end
-
 
 # Simple message box dialog
 Wx::define_keyword_ctors('MessageDialog') do
