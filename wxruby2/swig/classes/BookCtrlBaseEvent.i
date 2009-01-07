@@ -3,17 +3,16 @@
 
 %include "../common.i"
 
-%module(directors="1") wxNotebookEvent
-GC_MANAGE_AS_EVENT(wxNotebookEvent);
+%module(directors="1") wxBookCtrlBaseEvent
+GC_MANAGE_AS_EVENT(wxBookCtrlBaseEvent);
 
 %{
-#include <wx/notebook.h>
+#include <wx/bookctrl.h>
 %}
 
 %import "include/wxObject.h"
 %import "include/wxEvent.h"
 %import "include/wxCommandEvent.h"
 %import "include/wxNotifyEvent.h"
-%import "include/wxBookCtrlBaseEvent.h"
 
-%include "include/wxNotebookEvent.h"
+%include "include/wxBookCtrlBaseEvent.h"

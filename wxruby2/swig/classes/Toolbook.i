@@ -3,18 +3,18 @@
 
 %include "../common.i"
 
-%module(directors="1") wxChoicebook
-GC_MANAGE_AS_WINDOW(wxChoicebook);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxChoicebook);
+%module(directors="1") wxToolbook
+GC_MANAGE_AS_WINDOW(wxToolbook);
+SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxToolbook);
 
 %{
-#include <wx/choicebk.h>
+#include <wx/toolbook.h>
 %}
 
 %include "../shared/bookctrls.i"
-BOOKCTRL_FEATURES(wxChoicebook);
+BOOKCTRL_FEATURES(wxToolbook);
 
-#define wxChoicebookPage wxWindow
+#define wxToolbookPage wxWindow
 
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
@@ -22,4 +22,4 @@ BOOKCTRL_FEATURES(wxChoicebook);
 %import "include/wxControl.h"
 %import "include/wxBookCtrlBase.h"
 
-%include "include/wxChoicebook.h"
+%include "include/wxToolbook.h"

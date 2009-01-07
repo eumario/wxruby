@@ -1,20 +1,19 @@
 // Copyright 2004-2009, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
-#if !defined(_wxChoicebook_h_)
-#define _wxChoicebook_h_
+#if !defined(_wxToolbook_h_)
+#define _wxToolbook_h_
 
-class wxChoicebook : public wxBookCtrlBase
+class wxToolbook : public wxBookCtrlBase
 {
  public:
-  wxChoicebook();
-  wxChoicebook(wxWindow *parent,
-               wxWindowID id,
-               const wxPoint& pos = wxDefaultPosition,
-               const wxSize& size = wxDefaultSize,
-               long style = 0,
-               const wxString& name = wxEmptyString);
-
+  wxToolbook();
+  wxToolbook(wxWindow *parent,
+             wxWindowID id,
+             const wxPoint& pos = wxDefaultPosition,
+             const wxSize& size = wxDefaultSize,
+             long style = 0,
+             const wxString& name = wxEmptyString);
   // quasi ctor
   bool Create(wxWindow *parent,
               wxWindowID id,
@@ -24,6 +23,7 @@ class wxChoicebook : public wxBookCtrlBase
               const wxString& name = wxEmptyString);
 
 
+  // implement base class virtuals
   virtual int GetSelection() const;
   virtual bool SetPageText(size_t n, const wxString& strText);
   virtual wxString GetPageText(size_t n) const;
@@ -46,10 +46,17 @@ class wxChoicebook : public wxBookCtrlBase
   virtual void SetImageList(wxImageList *imageList);
 
   virtual bool DeleteAllPages();
+  virtual int HitTest(const wxPoint& pt, long *flags = NULL) const;
 
-  // returns the choice control
-  wxChoice* GetChoiceCtrl() const;
+
+  // methods which are not part of base wxBookctrl API
+
+  // get the underlying toolbar
+  wxToolBarBase* GetToolBar();
+
+  // must be called in OnIdle or by application to realize the toolbar and
+  // select the initial page.
+  void Realize();
 };
-
 
 #endif

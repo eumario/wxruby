@@ -41,6 +41,7 @@ GC_MANAGE_AS_EVENT(wxEvent);
 #include <wx/tglbtn.h>
 #include <wx/aui/aui.h>
 #include <wx/treebook.h>
+#include <wx/toolbook.h>
 #include <wx/hyperlink.h>
 #include <wx/srchctrl.h>
 #include <wx/mediactrl.h>
@@ -309,13 +310,20 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_CALENDAR_WEEKDAY_CLICKED;//, 955)
 %constant const int wxEVT_DATE_CHANGED;
 
-
+%constant const int wxEVT_COMMAND_BOOKCTRL_PAGE_CHANGING;
+%constant const int wxEVT_COMMAND_BOOKCTRL_PAGE_CHANGED;
 %constant const int wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING;
 %constant const int wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED;
 %constant const int wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING;
 %constant const int wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED;
 %constant const int wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING;
 %constant const int wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED;
+%constant const int wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGING;
+%constant const int wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGED;
+%constant const int wxEVT_COMMAND_TREEBOOK_PAGE_CHANGING;
+%constant const int wxEVT_COMMAND_TREEBOOK_PAGE_CHANGED;
+%constant const int wxEVT_COMMAND_TREEBOOK_NODE_COLLAPSED;
+%constant const int wxEVT_COMMAND_TREEBOOK_NODE_EXPANDED;
 
 %constant const int wxEVT_COMMAND_HYPERLINK; // 3700 
 

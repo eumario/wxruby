@@ -3,11 +3,11 @@
 
 %include "../common.i"
 
-%module(directors="1") wxNotebookEvent
-GC_MANAGE_AS_EVENT(wxNotebookEvent);
+%module(directors="1") wxTreebookEvent
+GC_MANAGE_AS_EVENT(wxTreebookEvent);
 
 %{
-#include <wx/notebook.h>
+#include <wx/treebook.h>
 %}
 
 %import "include/wxObject.h"
@@ -16,4 +16,4 @@ GC_MANAGE_AS_EVENT(wxNotebookEvent);
 %import "include/wxNotifyEvent.h"
 %import "include/wxBookCtrlBaseEvent.h"
 
-%include "include/wxNotebookEvent.h"
+%include "include/wxTreebookEvent.h"
