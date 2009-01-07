@@ -89,6 +89,14 @@ GC_NEVER(kls);
 %trackobjects;
 %enddef
 
+// Strategy for objects whose pointer / id identity does not matter,
+// only their attributes: Size, Point and Rect. They are commonly
+// created as temporary objects on the stack in C++ and then passed into
+// director methods. Once the director method has run they should no
+// longer be referenced in ruby.
+%define GC_MANAGE_AS_FUNGIBLE_OBJECT(kls)
+%enddef
+
 // Sizers attached to windows are automatically destroyed by wxWidgets,
 // so they should not be deleted.  
 //
