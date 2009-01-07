@@ -8,8 +8,6 @@ end
 require 'wx'
 
 class InformativeTextCtrl < Wx::TextCtrl
-  NEWLINE_CORRECTION_FACTOR = 0
-  
   # These text controls are multiline, and may have rich (coloured,
   # styled) text in them
   STYLE = Wx::TE_MULTILINE|Wx::TE_RICH|Wx::TE_RICH2
