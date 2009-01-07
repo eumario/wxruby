@@ -3,12 +3,15 @@ h1(#wxtoolbartool). Wx::ToolBarTool
 A ToolBarTool contains information about an item added to a
 "ToolBar":toolbar.thml. It is returned by methods such as
 "ToolBar#add_tool":toolbar.html#ToolBar_addtool. It can be used to find
-out the "ID":#ToolBarTool_getid of the newly added button or control.
+out the numeric "ID":#ToolBarTool_getid of the newly added button or
+control.
 
-Note that its methods are read-only; to actually change the state of an
-item within a toolbar, make use of methods in "ToolBar":toolbar.html
-such as "enable_tool":toolbar.html#ToolBar_enabletool (to disable and
-enable a button), "toggle_tool":toolbar.html#ToolBar_toggletool (to
+Note that its methods are read-only. To actually change the state of an
+item within a toolbar, use the methods provided by
+"ToolBar":toolbar.html, passing in the ID of the ToolBarTool object (not
+the object itself, for now). Examples of such methods which accept tool
+IDs include "enable_tool":toolbar.html#ToolBar_enabletool (to disable
+and enable a button), "toggle_tool":toolbar.html#ToolBar_toggletool (to
 change the state of a toggle button) and
 "set_tool_normal_bitmap":toolbar.html#ToolBar_settoolnormalbitmap (to
 change the bitmap image used for a button).
