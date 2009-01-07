@@ -261,6 +261,7 @@ $parents = {
     'wxProcess' => 'wxEvtHandler',
     'wxProcessEvent' => 'wxEvent',
     'wxProgressDialog' => 'wxDialog',
+    'wxPropertySheetDialog' => 'wxDialog',
     'wxProtocol' => 'wxSocketClient',
     'wxQuantize' => 'wxObject',
     'wxQueryLayoutInfoEvent' => 'wxEvent',
