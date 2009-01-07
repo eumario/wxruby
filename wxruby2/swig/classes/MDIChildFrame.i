@@ -1,11 +1,11 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2009, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
 
 %module(directors="1") wxMDIChildFrame;
 GC_MANAGE_AS_FRAME(wxMDIChildFrame);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMDIChildFrame);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxMDIChildFrame);
 
 %{
 #include <wx/mdi.h>
@@ -27,6 +27,7 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxMDIChildFrame);
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
+%import "include/wxTopLeveLWindow.h"
 %import "include/wxFrame.h"
 
 %include "include/wxMDIChildFrame.h"
