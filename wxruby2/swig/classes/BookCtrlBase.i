@@ -3,7 +3,10 @@
 
 %include "../common.i"
 
-%module(directors="1") wxBookCtrlBase
+// NB - we'd expect this to be a Director, but this causes a compile
+// error on MingW; it doesn't matter as this class is never instantiated
+// anyway
+%module wxBookCtrlBase
 GC_MANAGE_AS_WINDOW(wxBookCtrlBase);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBookCtrlBase);
 
@@ -14,6 +17,12 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBookCtrlBase);
 %include "../shared/bookctrls.i"
 
 %ignore wxBookCtrlBase();
+%ignore wxBookCtrlBase(wxWindow *parent,
+					   wxWindowID winid,
+					   const wxPoint& pos,
+					   const wxSize& size,
+					   long style,
+					   const wxString& name);
 
 // wxBookCtrl hit results
 enum
