@@ -57,6 +57,7 @@ extern swig_class cWxWindow;
 extern swig_class cWxEvent;
 extern void GC_SetWindowDeleted(void*);
 extern "C" void Init_wxRubyStockObjects();
+extern void wxRuby_MarkProtectedEvtHandlerProcs();
 
 class wxRubyApp : public wxApp
 {
@@ -116,7 +117,12 @@ public:
         return;
       }
 
-	// To do the marking, iterate over SWIG's list of objects. 
+    // Mark evt handler procs associated with live windows - see
+    // classes/EvtHandler.i
+    wxRuby_MarkProtectedEvtHandlerProcs();
+
+	// To do the main marking, primarily of Windows, iterate over SWIG's
+	// list of tracked objects
     wxRuby_IterateTracking(&wxRubyApp::markIterate);
 
 #ifdef __WXDEBUG__
