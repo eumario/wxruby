@@ -106,7 +106,14 @@ class IndexPageGenerator < HTMLGenerator
 
   WX_CLASS_DESC = /^\|([A-Z]\w+)\|/
   def output( index_file, tpl_vars = {} )
-    lines = src.collect do | line | 
+    if src.respond_to? :collect
+      # Ruby 1.8.x String mixes Enumerable and String#each return each line
+      src_lines = src
+    else
+      # Ruby 1.9 String#lines method returns an enumerator for each line (if no block is given)
+      src_lines = src.lines
+    end
+    lines = src_lines.collect do | line | 
       if line.sub!(WX_CLASS_DESC) { | c | "|\"#{$1}\":#{$1.downcase}.html|" }
         # delete the line
         next line.replace('') unless wx_class_exists?($1)
