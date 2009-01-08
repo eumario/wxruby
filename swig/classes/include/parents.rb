@@ -273,6 +273,7 @@ $parents = {
     'wxRichTextCtrl' => 'wxTextCtrl',
     'wxRichTextEvent' => 'wxNotifyEvent',
     'wxRichTextFileHandler' => 'wxObject',
+    'wxRichTextFormattingDialog' => 'wxPropertySheetDialog',
     'wxRichTextHeaderFooterData' => 'wxObject',
     'wxRichTextHTMLHandler' => 'wxRichTextFileHandler',
     'wxRichTextListStyleDefinition' => 'wxRichTextParagraphStyleDefinition',
