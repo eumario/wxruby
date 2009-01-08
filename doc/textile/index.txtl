@@ -480,6 +480,7 @@ h2(#misc). miscellaneous
 |App|application class|
 |Caret|A caret (cursor) object|
 |Config|Classes for configuration reading/writing (using either INI files or registry)|
+|Display|Provides information about monitors / displays|
 |DragImage|An image that can be dragged across windows|
 |GLCanvas|Canvas that you can render OpenGL calls to.|
 |GLContext|Class to ease sharing of OpenGL data resources.|

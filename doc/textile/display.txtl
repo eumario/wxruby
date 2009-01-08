@@ -8,21 +8,19 @@ None
 
 h2. See also
 
-"ClientDisplayRect":clientdisplayrect.html, "DisplaySize":displaysize.html, "DisplaySizeMM":displaysizemm.html
+Wx::client_display_rect ClientDisplayRect":clientdisplayrect.html, "DisplaySize":displaysize.html, Wx::display_size_mm
 
 <div id="methods">
 
 h2. Methods
 
 * "Display.new":#Display_new
-* "Display#change_mode":#Display_changemode
-* "Display#get_count":#Display_getcount
+* "Display.get_count":#Display_getcount
+* "Display.get_from_point":#Display_getfrompoint
+* "Display.get_from_window":#Display_getfromwindow
 * "Display#get_current_mode":#Display_getcurrentmode
 * "Display#get_depth":#Display_getdepth
-* "Display#get_from_point":#Display_getfrompoint
-* "Display#get_from_window":#Display_getfromwindow
 * "Display#get_geometry":#Display_getgeometry
-* "Display#get_modes":#Display_getmodes
 * "Display#get_name":#Display_getname
 * "Display#is_primary":#Display_isprimary
 
@@ -41,71 +39,28 @@ h4. Parameters
 * _index_ The index of the display to use.  This must be non-negative
 and lower than the value returned by "get_count()":#Display_getcount().
 
-
-  *destructor*()
-
-Destructor.
-
-
-h3(#Display_changemode). Display#change_mode
-
- bool  *change_mode*(%(arg-type)"VideoMode":videomode.html% mode = DefaultVideoMode)
-
-Changes the video mode of this display to the mode specified
-in the mode parameter.
-
-If DefaultVideoMode is passed in as the mode parameter,
-the defined behaviour is that Display will reset the video
-mode to the default mode used by the display.  On Windows, 
-the behavior is normal.  However, there are differences on other
-platforms. On Unix variations using X11 extensions it should
-behave as defined, but some irregularities may occur.  
-
-On Mac passing in DefaultVideoMode as the mode
-parameter does nothing.  This happens because carbon 
-no longer has access to DMUseScreenPrefs, an undocumented
-function that changed the video mode to the system
-default by using the system's 'scrn' resource.
-
-
-h3(#Display_getcount). Display#get_count
+h3(#Display_getcount). Display.get_count
 
  Integer *get_count*()
 
-Returns the number of connected displays.
+Class methods which returns the number of connected displays.
 
-
-h3(#Display_getcurrentmode). Display#get_current_mode
-
- "VideoMode ":videomode .html *get_current_mode*()
-
-Returns the current video mode that this display is in. 
-
-
-h3(#Display_getdepth). Display#get_depth
-
- int  *get_depth*()
-
-Returns the bit depth of the display whose index was passed to the constructor.
-
-
-h3(#Display_getfrompoint). Display#get_from_point
+h3(#Display_getfrompoint). Display.get_from_point
 
  Integer *get_from_point*(%(arg-type)"Point":point.html% pt)
 
-Returns the index of the display on which the given point lies.  Returns -1 if
-the point is not on any connected display.
+Class method; returns the index of the display on which the given point
+lies.  Returns -1 if the point is not on any connected display.
 
 h4. Parameters
 
 * _pt_ The point to locate.
 
-
-h3(#Display_getfromwindow). Display#get_from_window
+h3(#Display_getfromwindow). Display.get_from_window
 
  Integer *get_from_window*(%(arg-type)"Window":window.html% win)
 
-Returns the index of the display on which the given window lies.
+Class method; returns the index of the display on which the given window lies.
 
 If the window is on more than one display it gets the display that overlaps the window the most.
 
@@ -116,6 +71,21 @@ Currently MSW only.
 h4. Parameters
 
 * _win_ The window to locate.
+
+h3(#Display_getclientrect). Display#get_client_area
+
+ "Rect":rect.html *get_client_area*()
+
+Returns the dimensions of the work area on the display. On Windows this
+means the area not covered by the taskbar, etc. Other platforms are
+currently defaulting to the whole display until a way is found to
+provide this info for all window managers, etc.
+
+h3(#Display_getdepth). Display#get_depth
+
+ int  *get_depth*()
+
+Returns the bit depth of the display whose index was passed to the constructor.
 
 
 h3(#Display_getgeometry). Display#get_geometry
