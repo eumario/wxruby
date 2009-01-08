@@ -12,6 +12,70 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 %import "include/wxObject.h"
 %include "include/wxEvtHandler.h"
 
+%runtime{
+extern swig_class cWxEvtHandler;
+
+// Internally, all event handlers are anonymous ruby Proc objects,
+// created by EvtHandler#connect. These need to be preserved from Ruby's
+// GC until the EvtHandler object itself is destroyed. So we keep a hash
+// which maps C++ pointer addresses of EvtHandlers to Ruby arrays of
+// the Proc objects which handle their events.
+WX_DECLARE_VOIDPTR_HASH_MAP(VALUE, PtrToEvtHandlerProcs);
+PtrToEvtHandlerProcs Evt_Handler_Handlers;
+
+// Add a proc to the list of protected handler for an EvtHandler object
+void wxRuby_ProtectEvtHandlerProc(void* evt_handler, VALUE proc) {
+  if ( Evt_Handler_Handlers.count(evt_handler) == 0 )
+    Evt_Handler_Handlers[evt_handler] = rb_ary_new();
+  VALUE protected_procs = Evt_Handler_Handlers[evt_handler];
+  rb_ary_push(protected_procs, proc);
+}
+
+// Called by App's mark function; protect all currently needed procs
+void wxRuby_MarkProtectedEvtHandlerProcs() {
+  PtrToEvtHandlerProcs::iterator it;
+  for( it = Evt_Handler_Handlers.begin(); 
+       it != Evt_Handler_Handlers.end(); 
+       ++it )
+    rb_gc_mark( it->second );
+}
+
+// Called when a Window is destroyed; allows handler procs associated
+// with this object to be garbage collected at next run. See
+// swig/mark_free_impl.i
+void wxRuby_ReleaseEvtHandlerProcs(void* evt_handler) {
+  Evt_Handler_Handlers.erase(evt_handler);
+}
+
+// Class which stores the ruby proc associated with an event handler. We
+// also cache the "call" symbol as this improves speed for event
+// handlers which are called many times (eg evt_motion)
+class wxRbCallback : public wxObject 
+{
+
+public:
+    wxRbCallback(VALUE func) { m_func = func; 
+                               m_call_id = rb_intern("call"); }
+    wxRbCallback(const wxRbCallback &other) { m_func = other.m_func; 
+                                             m_call_id = rb_intern("call"); }
+
+    // This method handles all events on the WxWidgets/C++ side. It link
+    // inspects the event and based on the event's type wraps it in the
+    // appropriate class (the mapping can be found in
+    // lib/wx/classes/evthandler.rb). This wrapped event is then passed
+    // into the ruby proc for handling on the ruby side
+    void EventThunker(wxEvent &event)
+    {
+      VALUE rb_event = wxRuby_WrapWxEventInRuby(&event);
+      wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
+      rb_funcall(cb->m_func, cb->m_call_id, 1, rb_event);
+    }
+
+    ID m_call_id;
+    VALUE m_func;
+};
+}
+
 
 // The EvtHandler instance event methods (evt_xxx) are not defined
 // here. Rather, they are set up in ruby in
@@ -21,10 +85,7 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
   VALUE connect(int firstId, int lastId, wxEventType eventType)
   {
     VALUE func = rb_funcall(rb_cProc, rb_intern("new"), 0);
-    rb_global_variable(&callbacks);
-    if(callbacks == Qnil)
-        callbacks = rb_ary_new();
-    rb_ary_push(callbacks, func);
+    wxRuby_ProtectEvtHandlerProc((void *)$self, func);
 
     wxObject* userData = new wxRbCallback(func);
     wxObjectEventFunction function = 
@@ -70,37 +131,3 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 
 }
 
-
-%runtime{
-
-extern swig_class cWxEvtHandler;
-static VALUE callbacks = Qnil;
-
-// Class which stores the ruby proc associated with an event handler. We
-// also cache the "call" symbol as this improves speed for event
-// handlers which are called many times (eg evt_motion)
-class wxRbCallback : public wxObject 
-{
-
-public:
-    wxRbCallback(VALUE func) { m_func = func; 
-                               m_call_id = rb_intern("call"); }
-    wxRbCallback(const wxRbCallback &other) { m_func = other.m_func; 
-                                             m_call_id = rb_intern("call"); }
-
-    // This method handles all events on the WxWidgets/C++ side. It link
-    // inspects the event and based on the event's type wraps it in the
-    // appropriate class (the mapping can be found in
-    // lib/wx/classes/evthandler.rb). This wrapped event is then passed
-    // into the ruby proc for handling on the ruby side
-    void EventThunker(wxEvent &event)
-    {
-      VALUE rb_event = wxRuby_WrapWxEventInRuby(&event);
-      wxRbCallback *cb = (wxRbCallback *)event.m_callbackUserData;
-      rb_funcall(cb->m_func, cb->m_call_id, 1, rb_event);
-    }
-
-    ID m_call_id;
-    VALUE m_func;
-};
-}

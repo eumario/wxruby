@@ -32,6 +32,9 @@ bool GC_IsWindowDeleted(void *ptr)
 	return false;
 }
 
+// See swig/classes/EvtHandler.i
+extern void wxRuby_ReleaseEvtHandlerProcs(void *);
+
 // Records when a wxWindow has been signalled as destroyed by a
 // WindowDestroyEvent, handled by wxRubyApp (see swig/classes/App.i).
 void GC_SetWindowDeleted(void *ptr)
@@ -40,6 +43,10 @@ void GC_SetWindowDeleted(void *ptr)
   // sent after destruction (other ObjectPreviouslyDeleted errors result)
   wxEvtHandler* evt_handler = (wxEvtHandler*)ptr;
   evt_handler->SetEvtHandlerEnabled(false);
+
+  // Allow the Ruby procs that are event handlers on this window to be
+  // garbage collected at next phase
+  wxRuby_ReleaseEvtHandlerProcs(ptr);
 
   // Wx calls this by standard after the window destroy event is
   // handled, but we need to call it before while the object link is
