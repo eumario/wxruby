@@ -837,6 +837,12 @@ Selects the text starting at the first position up to (but not including) the
 character at the last position. If both parameters are equal to -1 all text
 in the control is selected.
 
+Note that on Windows, by default, if the TextCtrl does not have focus
+the selection is not shown as highlighted. Therefore the results of
+calling this method may not be immediately visible. If you wish the
+selection always to be shown, create the TextCtrl with the style
+@Wx::TE_NOHIDESEL@.
+
 h4. Parameters
 
 * _from_ The first position.
