@@ -38,6 +38,7 @@ DIALOGS_PROGRESS = 22
 DIALOGS_BUSYINFO = 23
 DIALOGS_FIND = 24
 DIALOGS_REPLACE = 25
+DIALOGS_PREFS = 26
 
 $my_canvas = nil
 
@@ -125,6 +126,71 @@ class MyModelessDialog < Dialog
   end
 end
 
+# PropertySheetDialog is specialised for doing preferences dialogs; it
+# contains a BookCtrl of some sort
+class MyPrefsDialog < Wx::PropertySheetDialog
+  def initialize(parent)
+    # Using Book type other than Notebook needs two-step construction
+    super()
+    self.sheet_style = Wx::PROPSHEET_BUTTONTOOLBOOK
+    self.sheet_outer_border = 1
+    self.sheet_inner_border = 2
+    img_list = Wx::ImageList.new
+    img_list << std_bitmap(Wx::ART_NORMAL_FILE)
+    img_list << std_bitmap(Wx::ART_CDROM)
+    img_list << std_bitmap(Wx::ART_REPORT_VIEW)
+
+    create(parent, -1, "Preferences")
+    create_buttons(Wx::ID_OK|Wx::ID_CANCEL)
+    book_ctrl.image_list = img_list
+    book_ctrl.add_page(file_panel(book_ctrl), "File", false, 0)
+    book_ctrl.add_page(cdrom_panel(book_ctrl), "CD ROM", false, 1)
+
+    layout_dialog
+  end
+
+  # Gets one of the rather ugly standard bitmaps from ArtProvider
+  def std_bitmap(art_id)
+    Wx::ArtProvider.bitmap(art_id, Wx::ART_TOOLBAR, [32, 32])
+  end
+
+  def file_panel(book)
+    panel = Wx::Panel.new(book)
+    panel.sizer = Wx::VBoxSizer.new
+
+    cb1 = Wx::CheckBox.new(panel, :label => 'Show hidden files')
+    panel.sizer.add(cb1, 0, Wx::ALL, 5)
+
+    cb2 = Wx::CheckBox.new(panel, :label => 'Always show extensions')
+    panel.sizer.add(cb2, 0, Wx::ALL, 5)
+
+    cb3 = Wx::CheckBox.new(panel, :label => 'Show icons')
+    panel.sizer.add(cb3, 0, Wx::ALL, 5)
+
+    cb4 = Wx::CheckBox.new(panel, :label => 'Show owner')
+    panel.sizer.add(cb4, 0, Wx::ALL, 5)
+
+    st = Wx::StaticText.new(panel, :label => "Sort by:")
+    panel.sizer.add(st, 0, Wx::ALL, 5)
+
+    cb1 = Wx::Choice.new(panel, :choices => %w|Name Created Modified Size|)
+    panel.sizer.add(cb1, 0, Wx::ALL, 5)
+    panel
+  end
+
+  def cdrom_panel(book)
+    panel = Wx::Panel.new(book)
+    panel.sizer = Wx::VBoxSizer.new
+
+    choices = [ 'Show files', 'Play media', 'Run CD', 'Do nothing' ]
+    rb = Wx::RadioBox.new( panel, 
+                           :label => 'When opening CD',
+                           :choices => choices,
+                           :major_dimension => 1)
+    panel.sizer.add(rb, 0, Wx::GROW|Wx::ALL, 5)
+    panel
+  end
+end
 
 class MyCanvas < ScrolledWindow
   def initialize(parent)
@@ -185,6 +251,7 @@ class MyFrame < Frame
     evt_menu(DIALOGS_TIP) {|event| on_show_tip(event) }
     evt_menu(DIALOGS_PROGRESS) {|event| on_show_progress(event) }
     evt_menu(DIALOGS_BUSYINFO) {|event| on_show_busy_info(event) }
+    evt_menu(DIALOGS_PREFS) {|event| on_show_prefs(event) }
     evt_menu(DIALOGS_FIND) {|event| on_show_find_dialog(event) }
     evt_menu(DIALOGS_REPLACE) {|event| on_show_replace_dialog(event) }
     evt_find(-1) {|event| on_find_dialog(event) }
@@ -521,6 +588,11 @@ class MyFrame < Frame
   end
 
 
+  def on_show_prefs(event)
+    dialog = MyPrefsDialog.new(self)
+    dialog.show_modal
+  end
+
   def on_show_progress(event)
 
     dialog = ProgressDialog.new("Progress dialog example",
@@ -697,8 +769,10 @@ class MyApp < App
     file_menu.append(DIALOGS_DIR_CHOOSE,  "&Choose a directory\tCtrl-D")
     file_menu.append(DIALOGS_PROGRESS, "Pro&gress dialog\tCtrl-G")
     file_menu.append(DIALOGS_BUSYINFO, "&Busy info dialog\tCtrl-B")
+    file_menu.append(DIALOGS_PREFS, "Propert&y sheet dialog\tCtrl-Y")
     file_menu.append(DIALOGS_FIND, "&Find dialog\tCtrl-F", "", ITEM_CHECK)
     file_menu.append(DIALOGS_REPLACE, "Find and &replace dialog\tShift-Ctrl-F", "", ITEM_CHECK)
+
     file_menu.append_separator()
     file_menu.append(DIALOGS_MODAL, "Mo&dal dialog\tCtrl-W")
     file_menu.append(DIALOGS_MODELESS, "Modeless &dialog\tCtrl-Z", "", ITEM_CHECK)
