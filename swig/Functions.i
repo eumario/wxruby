@@ -120,6 +120,7 @@ cpp_ptr_addr(VALUE self, VALUE obj)
 void wxBeginBusyCursor(wxCursor *cursor = wxHOURGLASS_CURSOR);
 void wxEndBusyCursor();
 void wxBell();
+bool wxSafeYield(wxWindow* win = NULL, bool onlyIfNeeded = false);
 
 // System information
 wxString wxGetEmailAddress();
