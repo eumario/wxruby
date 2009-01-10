@@ -679,6 +679,7 @@ end
 class MyFrame < Wx::Frame
   def initialize(title, x, y, w, h)
     super( nil, :title => title, :pos => [ x, y ], :size => [ w, h ] )
+    @splitter = nil
     @treectrl = nil
     @textctrl = nil
     @s_num = 0
@@ -772,9 +773,11 @@ class MyFrame < Wx::Frame
     menu_bar.append(item_menu, "&Item")
     self.menu_bar = menu_bar
 
+    @splitter = Wx::SplitterWindow.new(self, :style => Wx::SP_BORDER)
+    @splitter.minimum_pane_size = 100
 
     # create the controls
-    @textctrl = Wx::TextCtrl.new( self, 
+    @textctrl = Wx::TextCtrl.new( @splitter, 
                                   :text => '', 
                                   :style => Wx::TE_MULTILINE|Wx::SUNKEN_BORDER)
 
@@ -789,8 +792,9 @@ class MyFrame < Wx::Frame
     # set our text control as the log target
     logWindow = Wx::LogTextCtrl.new(@textctrl)
     Wx::Log::active_target = logWindow
+    
+    @splitter.split_horizontally(@treectrl, @textctrl, 500)
 
-    evt_size :on_size
     evt_close :on_close
 
     evt_menu Wx::ID_EXIT, :on_quit
@@ -859,18 +863,18 @@ class MyFrame < Wx::Frame
   end
 
   def create_tree(style)
-    @treectrl = MyTreeCtrl.new(self, :style => style)
-    resize
+    @treectrl = MyTreeCtrl.new(@splitter, :style => style)
   end
 
   def tog_style(id,flag)
-
     style = @treectrl.window_style_flag ^ flag
 
     # most treectrl styles can't be changed on the fly using the native
     # control and the tree must be recreated
-    @treectrl.destroy
+    old_tree = @treectrl
     create_tree(style)
+    @splitter.replace_window old_tree, @treectrl
+    old_tree.destroy
     menu_bar.check(id, (style & flag) != 0)
   end
 
@@ -924,18 +928,6 @@ class MyFrame < Wx::Frame
 
   def on_sort_rev(event)
     do_sort(true)
-  end
-
-  def on_size(event)
-    if @treectrl && @textctrl
-      resize
-    end
-    event.skip
-  end
-
-  def resize
-    my_size = self.client_size
-    @treectrl.size = [ my_size.x, 2 * my_size.y / 3 ]
   end
 
   def on_close(event)
