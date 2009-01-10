@@ -23,10 +23,14 @@ class wxChoicebook : public wxBookCtrlBase
               long style = 0,
               const wxString& name = wxEmptyString);
 
-
+  void AdvanceSelection(bool forward = true);
+  virtual int SetSelection(size_t n);
+  virtual int ChangeSelection(size_t n);
   virtual int GetSelection() const;
-  virtual bool SetPageText(size_t n, const wxString& strText);
+
   virtual wxString GetPageText(size_t n) const;
+  virtual bool SetPageText(size_t n, const wxString& strText);
+
   virtual int GetPageImage(size_t n) const;
   virtual bool SetPageImage(size_t n, int imageId);
   virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const;
@@ -39,13 +43,12 @@ class wxChoicebook : public wxBookCtrlBase
                           const wxString& text,
                           bool bSelect = false,
                           int imageId = -1);
-  virtual int SetSelection(size_t n);
-  virtual int ChangeSelection(size_t n);
+  bool RemovePage(int page);
+  int GetPageCount() const;
+  virtual bool DeleteAllPages();
 
   virtual void AssignImageList(wxImageList *imageList);
   virtual void SetImageList(wxImageList *imageList);
-
-  virtual bool DeleteAllPages();
 
   // returns the choice control
   wxChoice* GetChoiceCtrl() const;
