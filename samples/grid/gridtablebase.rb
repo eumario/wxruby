@@ -92,19 +92,10 @@ class MyGridTable < Wx::GridTableBase
   end
 end
 
-# A derivative class illustrating that it is possible to change
-# parameters of the GridTable and have the main control update.
-class MyMutableGridTable < MyGridTable
-  def increment_value
-    @val = @val.succ
-  end
-end
-
-
 class GridFrame < Wx::Frame
   def initialize()
-    super(nil, :title => 'GridTableBase demo')
-    main_sizer = Wx::BoxSizer.new(Wx::VERTICAL)
+    super(nil, :title => 'GridTableBase demo', :size => [600, 300])
+    main_sizer = Wx::VBoxSizer.new
     # Create a grid and associate an instance of the GridTable as the
     # data provider for the grid
     @grid = Wx::Grid.new(self)
@@ -120,7 +111,7 @@ class GridFrame < Wx::Frame
                               Wx::GridCellNumberEditor.new(0, 500) )
 
     # Set the data source
-    @grid.table = MyMutableGridTable.new(10, 10)
+    @grid.table = MyGridTable.new(10, 10)
     
 
     main_sizer.add(@grid, 1, Wx::EXPAND|Wx::ALL, 5)
@@ -132,29 +123,20 @@ class GridFrame < Wx::Frame
     # When resizing the grid to have a new number of rows or columns,
     # need to allocate a new grid table source
     evt_button(butt_1) do
-      @grid.table = MyMutableGridTable.new( @grid.table.rows + 1, 
-                                            @grid.table.cols)
+      @grid.table = MyGridTable.new( @grid.table.rows + 1, 
+                                     @grid.table.cols)
       @grid.refresh
     end
     butt_sizer.add(butt_1)
 
     butt_2 = Wx::Button.new(self, :label => "Add column")
     evt_button(butt_2) do
-      @grid.table = MyMutableGridTable.new( @grid.table.rows, 
-                                            @grid.table.cols + 1)
+      @grid.table = MyGridTable.new( @grid.table.rows, 
+                                     @grid.table.cols + 1)
       @grid.refresh
     end
     butt_sizer.add(butt_2)
 
-    # For other changes, can just change a value in the existing
-    # GridTable
-    butt_3 = Wx::Button.new(self, :label => "Increment letter")
-    evt_button(butt_3) do
-      @grid.table.increment_value
-      @grid.refresh
-    end
-    butt_sizer.add(butt_3)
-    
     main_sizer.add(butt_sizer, 0, Wx::EXPAND|Wx::ALL, 5)
     self.sizer = main_sizer
   end
