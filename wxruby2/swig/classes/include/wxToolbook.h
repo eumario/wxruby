@@ -25,6 +25,7 @@ class wxToolbook : public wxBookCtrlBase
 
   // implement base class virtuals
   virtual int GetSelection() const;
+  int GetPageCount() const;
   virtual bool SetPageText(size_t n, const wxString& strText);
   virtual wxString GetPageText(size_t n) const;
   virtual int GetPageImage(size_t n) const;
@@ -46,6 +47,7 @@ class wxToolbook : public wxBookCtrlBase
   virtual void SetImageList(wxImageList *imageList);
 
   virtual bool DeleteAllPages();
+  bool RemovePage(int page);
   virtual int HitTest(const wxPoint& pt, long *flags = NULL) const;
 
 

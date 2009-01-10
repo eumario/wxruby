@@ -31,6 +31,7 @@
 // These are virtual in C++ but don't need directors as fully
 // implemented in the individual child classes
 %feature("nodirector") kls::AddPage;
+%feature("nodirector") kls::AssignImageList;
 %feature("nodirector") kls::AdvanceSelection;
 %feature("nodirector") kls::ChangeSelection;
 %feature("nodirector") kls::DeleteAllPages;
@@ -40,6 +41,7 @@
 %feature("nodirector") kls::GetSelection;
 %feature("nodirector") kls::HitTest;
 %feature("nodirector") kls::InsertPage;
+%feature("nodirector") kls::SetImageList;
 %feature("nodirector") kls::SetPageImage;
 %feature("nodirector") kls::SetPageText;
 %feature("nodirector") kls::SetSelection;
