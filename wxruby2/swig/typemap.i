@@ -128,16 +128,17 @@
 %typemap(in) wxSize&, wxPoint& {
   if ( TYPE($input) == T_DATA ) 
 	{
-	  void * argp$argnum;
+	  void* argp$argnum;
 	  SWIG_ConvertPtr($input, &argp$argnum, $1_descriptor, 1 );
 	  $1 = reinterpret_cast< $1_basetype * >(argp$argnum);
 	
 	}
   else if ( TYPE($input) == T_ARRAY )
 	{
-	  $1_basetype tmp  = $1_basetype( NUM2INT( rb_ary_entry($input, 0) ),
-									  NUM2INT( rb_ary_entry($input, 1) ) );
-	  $1 = &tmp;
+	  $1 = new $1_basetype( NUM2INT( rb_ary_entry($input, 0) ),
+                            NUM2INT( rb_ary_entry($input, 1) ) );
+      // Create a ruby object so the C++ obj is freed when GC runs
+      SWIG_NewPointerObj($1, $1_descriptor, 1);
 	}
   else
 	{
