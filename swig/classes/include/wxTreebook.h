@@ -52,6 +52,8 @@ public:
                             bool bSelect = false,
                             int imageId = wxNOT_FOUND);
 
+
+
     // Deletes the page and ALL its children. Could trigger page selection
     // change in a case when selected page is removed. In that case its parent
     // is selected (or the next page if no parent).
@@ -79,17 +81,20 @@ public:
     // -------------------------------------------------
 
     virtual int GetSelection() const;
+    int GetPageCount() const;
     virtual bool SetPageText(size_t n, const wxString& strText);
     virtual wxString GetPageText(size_t n) const;
     virtual int GetPageImage(size_t n) const;
     virtual bool SetPageImage(size_t n, int imageId);
     virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const;
-    virtual int SetSelection(size_t n) { return DoSetSelection(n, SetSelection_SendEvent); }
-    virtual int ChangeSelection(size_t n) { return DoSetSelection(n); }
+    virtual int SetSelection(size_t n);
+    virtual int ChangeSelection(size_t n);
     virtual int HitTest(const wxPoint& pt, long *flags = NULL) const;
     virtual void SetImageList(wxImageList *imageList);
     virtual void AssignImageList(wxImageList *imageList);
+    bool RemovePage(int page);
     virtual bool DeleteAllPages();
+
 };
 
 #endif
