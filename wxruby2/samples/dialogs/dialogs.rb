@@ -135,7 +135,7 @@ class MyPrefsDialog < Wx::PropertySheetDialog
     self.sheet_style = Wx::PROPSHEET_BUTTONTOOLBOOK
     self.sheet_outer_border = 1
     self.sheet_inner_border = 2
-    img_list = Wx::ImageList.new
+    img_list = Wx::ImageList.new(32, 32)
     img_list << std_bitmap(Wx::ART_NORMAL_FILE)
     img_list << std_bitmap(Wx::ART_CDROM)
     img_list << std_bitmap(Wx::ART_REPORT_VIEW)
