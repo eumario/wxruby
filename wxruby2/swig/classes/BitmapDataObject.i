@@ -10,7 +10,7 @@ GC_MANAGE_AS_OBJECT(wxBitmapDataObject);
 #include <wx/dataobj.h>
 %}
 
-%include "../shared/data_format_typemap.i"
+%include "../shared/data_object_common.i"
 %include "../shared/data_object_final_class.i"
 
 %import "include/wxDataObjectSimple.h"

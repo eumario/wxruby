@@ -6,7 +6,7 @@
 %module(directors="1") wxDataObjectSimple
 GC_MANAGE_AS_OBJECT(wxDataObjectSimple);
 
-%include "../shared/data_format_typemap.i"
+%include "../shared/data_object_common.i"
 
 %ignore SetData(size_t len, const void *buf);
 %ignore GetDataSize();

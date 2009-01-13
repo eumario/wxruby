@@ -6,7 +6,7 @@
 %module(directors="1") wxDataObject
 GC_MANAGE_AS_OBJECT(wxDataObject);
 
-%include "../shared/data_format_typemap.i"
+%include "../shared/data_object_common.i"
 
 //%typemap(in,numinputs=1) (wxDataFormat *formats, 
 //                          wxDataObject::Direction dir = Get) (wxString *arr)
