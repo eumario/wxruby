@@ -14,7 +14,7 @@ GC_NEVER(wxClipboard);
 // becomes owned by the clipboard and shouldn't be freed
 %apply SWIGTYPE *DISOWN {wxDataObject* data};
 
-%include "../shared/data_format_typemap.i"
+%include "../shared/data_object_common.i"
 
 %include "include/wxClipboard.h"
 
