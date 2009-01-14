@@ -8,8 +8,7 @@ GC_MANAGE_AS_OBJECT(wxDataObjectComposite);
 
 
 %include "../shared/data_object_common.i"
-%include "../shared/data_object_final_C.i"
-
+%include "../shared/data_object_final_class.i"
 
 // SWIG gets confused and doesn't realise that various virtual methods
 // from wxDataObject are implemented fully in this subclass, and so,
