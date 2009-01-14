@@ -1,8 +1,6 @@
 require 'test/unit'
 require 'wx'
 
-Wx::App.run do
-
 class TestTextData < Test::Unit::TestCase
   FMT_TEXT = Wx::DataFormat.new(Wx::DF_TEXT)
   # Using an in-built class
@@ -37,13 +35,33 @@ end
 
 
 class TestBitmapData < Test::Unit::TestCase
+  FMT_BMP = Wx::DataFormat.new(Wx::DF_BITMAP)
   # Using image data - this needs
   def test_bitmap_data
     bmp = Wx::Bitmap.new('samples/minimal/mondrian.png')
+    height = bmp.height
+    width  = bmp.width
+    assert bmp.ok?, "Bitmap is OK"
+
     d_obj = Wx::BitmapDataObject.new(bmp)
     d_obj.bitmap = bmp
-    # FIXME - bitmap isn't getting set
-    assert d_obj.bitmap.ok?, "Set bitmap of BitmapDataOBject"
+
+    assert d_obj.bitmap.ok?, "DataObject's bitmap is OK"
+    Wx::Clipboard.open do | clip |
+      clip.clear
+      clip.place d_obj
+      assert clip.supported? FMT_BMP
+    end
+
+    d_obj_2 = Wx::BitmapDataObject.new
+    Wx::Clipboard.open do | clip |
+      assert clip.supported? FMT_BMP
+      clip.fetch d_obj
+    end
+    out_bmp = d_obj_2.bitmap
+    assert out_bmp.ok?, "Fetched out bitmap"
+    assert_equal height, out_bmp.height
+    assert_equal width, out_bmp.width
   end
 end
 
@@ -94,6 +112,7 @@ class TestDataObjectComposite < Test::Unit::TestCase
     d_obj = Wx::DataObjectComposite.new
     d_obj.add( Wx::TextDataObject.new("THE TEXT") )
     bmp = Wx::Bitmap.new('samples/minimal/mondrian.png')
+
     d_obj.add( Wx::BitmapDataObject.new(bmp) )
 
     assert_nothing_raised {
@@ -185,4 +204,11 @@ class TestDataObject < Test::Unit::TestCase
   end
 end
 
+
+# FIXME - test is run twice
+Wx::App.run do
+  # Must run whilst App is alive
+  MiniTest::Unit.new.run
+
+  false
 end
