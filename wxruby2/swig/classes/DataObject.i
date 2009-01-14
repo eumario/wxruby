@@ -4,12 +4,9 @@
 %include "../common.i"
 
 %module(directors="1") wxDataObject
-GC_MANAGE_AS_OBJECT(wxDataObject);
+GC_MANAGE_AS_OBJECT(wxDataObject)
 
+%include "../shared/data_format.i"
 %include "../shared/data_object_common.i"
-
-//%typemap(in,numinputs=1) (wxDataFormat *formats, 
-//                          wxDataObject::Direction dir = Get) (wxString *arr)
-//)
 
 %include "include/wxDataObject.h"

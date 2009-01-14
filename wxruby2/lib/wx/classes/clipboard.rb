@@ -1,4 +1,7 @@
 class Wx::Clipboard
+  alias :place :set_data
+  alias :fetch :get_data
+
   class << self
     # Class method to provide access to the clipboard within a ruby
     # block. Tests that the clipboard could be accessed, and ensures

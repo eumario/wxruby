@@ -21,9 +21,6 @@
 %ignore GetDataHere;
 %feature("nodirector") GetDataHere;
 
-%ignore GetDataHere;
-%feature("nodirector") GetDataHere;
-
 %ignore GetFormatCount;
 %feature("nodirector") GetFormatCount;
 
