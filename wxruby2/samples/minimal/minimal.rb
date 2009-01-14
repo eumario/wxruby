@@ -18,10 +18,10 @@ class MinimalFrame < Wx::Frame
     # The main application frame has no parent (nil)
     super(nil, :title => title, :size => [ 400, 300 ])
 
-    # PNG can be used on all platforms, but icon type must be specified
-    # to work on Windows. Note that OS X doesn't have "Frame" icons. 
+    # Give the frame an icon. PNG is a good choice of format for
+    # cross-platform images. Note that OS X doesn't have "Frame" icons.
     icon_file = File.join( File.dirname(__FILE__), "mondrian.png")
-    self.icon = Wx::Icon.new(icon_file, Wx::BITMAP_TYPE_PNG)
+    self.icon = Wx::Icon.new(icon_file)
 
     menu_bar = Wx::MenuBar.new
     # The "file" menu
