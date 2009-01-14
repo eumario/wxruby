@@ -6,6 +6,7 @@
 class wxBitmapDataObject : public wxDataObjectSimple
 {
 public:
+  wxBitmapDataObject(const wxBitmap& bitmap = wxNullBitmap);
   virtual wxBitmap GetBitmap() const;
   virtual void SetBitmap(const wxBitmap& bitmap);
 };
