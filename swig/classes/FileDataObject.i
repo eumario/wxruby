@@ -6,9 +6,6 @@
 %module(directors="1") wxFileDataObject
 GC_MANAGE_AS_OBJECT(wxFileDataObject);
 
-%{
-#include <wx/dataobj.h>
-%}
 
 %include "../shared/data_object_common.i"
 %include "../shared/data_object_final_class.i"

@@ -1,53 +1,63 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2009, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
-// wxDataFormat is a class which represents a standard or
-// application-defined format for wxDataObject, used in clipboard and
-// drag and drop operations. It's a very simple class, and so in wxRuby
-// is passed using either just an integer (for a standard Data Type, eg
-// Wx::DF_TEXT), or a string for a user-defined one.
+// All classes require this header
+%{
+#include <wx/dataobj.h>
+%}
 
-%typemap(in) wxDataFormat & {
-  wxDataFormat wx_fmt = wxDataFormat();
-  if ( TYPE($input) == T_FIXNUM )
-    wx_fmt.SetType( (wxDataFormatId)NUM2INT($input) );
-  else if ( TYPE($input) == T_STRING )
-    wx_fmt.SetId( wxString(StringValuePtr($input), wxConvUTF8) );
-  $1 = &wx_fmt;
- }
+// We cheat in the headers and differentiate GetDataHere and SetData
+// methods by giving them these special names so that the correct
+// typemaps (see below) can be applied. For the sake of the compiler, we
+// need to map them back to the correct definitions (ie bool).
+//
+// TODO - this will be a problem when we can't edit the headers -
+// perhaps could use directorargout to copy the buffer data, then will
+// need some way of converting to true / false for the data set/get
+%{
+typedef bool WXRUBY_DATA_OUT;
+typedef bool WXRUBY_DATA_IN;
+%}
 
-%typemap(in) wxDataFormat {
-  $1 = wxDataFormat();
-  if ( TYPE($input) == T_FIXNUM )
-    $1.SetType( (wxDataFormatId)NUM2INT($input) );
-  else if ( TYPE(rb_fmt) == T_STRING )
-    $1.SetId( wxString(StringValuePtr($input), wxConvUTF8) );
- }
+typedef bool WXRUBY_DATA_OUT;
+typedef bool WXRUBY_DATA_IN;
 
-%typemap(out) wxDataFormat {
-  if ( $1.GetType() )
-    $result = INT2NUM( $1.GetType() );
+// For wxDataObject::GetDataHere: the ruby method is passed the
+// DataFormat for the sought data, and should return either a string
+// containing the data, or nil if the data cannot be provided for some
+// reason.
+%typemap(directorin) (const wxDataFormat& format, void *buf) "$input = SWIG_NewPointerObj(SWIG_as_voidptr(&$1), SWIGTYPE_p_wxDataFormat, 0);";
+
+%typemap(directorout) WXRUBY_DATA_OUT {
+  if ( RTEST($1) )
+    if ( TYPE($1) == T_STRING )
+      {
+        memcpy(buf, StringValuePtr($1), RSTRING_LEN($1) );
+        $result = true;
+      }
+    else
+      {
+        rb_raise(rb_eTypeError, 
+                 "get_data_here should return a string, or nil on failure");
+        $result = false;
+      }
   else
-    $result = WXSTR_TO_RSTR( $1.GetId() );
- }
+    $result = false;
+}
 
-// wxDataFormat is widely used in the director methods of wxDataObject,
-// eg GetPreferredFormat
-%typemap(directorin) wxDataFormat {
-  if ( $1.GetType() )
-    $input = INT2NUM( $1.GetType() );
-  else
-    $input = WXSTR_TO_RSTR( $1.GetId() );
- }
+// For SetData: the data contents to be set upon the data object is
+// passed in as a Ruby string; the ruby method should return a true
+// value if the data could be set successfully, or false/nil if it could
+// not.
+%typemap(directorin) (size_t len, const void* buf) {
+  $input = rb_external_str_new( (const char *)buf, len );
+}
+%typemap(directorout) WXRUBY_DATA_IN "$result = RTEST($1);"
 
-%typemap(directorout) wxDataFormat {
-  $result = wxDataFormat();
-  if ( TYPE($input) == T_FIXNUM )
-    $result.SetType( (wxDataFormatId)NUM2INT($input) );
-  else if ( TYPE($input) == T_STRING )
-    $result.SetId( wxString(StringValuePtr($input), wxConvUTF8) );
- }
-
-
+// These don't matter if called directly, since the ruby implementation
+// will return the right value anyway.
+%typemap(out) WXRUBY_DATA_FORMATS "";
+%typemap(out) WXRUBY_DATA_OUT "";
+%typemap(out) WXRUBY_DATA_IN "";
 
 

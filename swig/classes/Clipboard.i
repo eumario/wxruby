@@ -10,11 +10,12 @@ GC_NEVER(wxClipboard);
 #include <wx/clipbrd.h>
 %}
 
+%include "../shared/data_format.i"
+%include "../shared/data_object_common.i"
+
 // After a data object has been set to the clipboard using set_data, it
 // becomes owned by the clipboard and shouldn't be freed
-%apply SWIGTYPE *DISOWN {wxDataObject* data};
-
-%include "../shared/data_object_common.i"
+%apply SWIGTYPE *DISOWN { wxDataObject* data };
 
 %include "include/wxClipboard.h"
 

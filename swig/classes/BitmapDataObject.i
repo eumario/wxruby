@@ -6,15 +6,9 @@
 %module(directors="1") wxBitmapDataObject
 GC_MANAGE_AS_OBJECT(wxBitmapDataObject);
 
-%{
-#include <wx/dataobj.h>
-%}
-
 %include "../shared/data_object_common.i"
 %include "../shared/data_object_final_class.i"
 
 %import "include/wxDataObjectSimple.h"
 %import "include/wxDataObject.h"
-
-
 %include "include/wxBitmapDataObject.h"
