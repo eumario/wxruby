@@ -114,22 +114,37 @@ class TestDataObjectComposite < Test::Unit::TestCase
     bmp = Wx::Bitmap.new('samples/minimal/mondrian.png')
 
     d_obj.add( Wx::BitmapDataObject.new(bmp) )
+    assert_equal( 2, d_obj.format_count(0) )
 
-    assert_nothing_raised {
-      assert_equal( 2, d_obj.format_count(0) )
-    }
 
     Wx::Clipboard.open do | clip |
+      clip.clear
       clip.place d_obj
     end
 
     d_obj_2 = Wx::DataObjectComposite.new
-    d_obj_2.add Wx::TextDataObject.new
-    d_obj_2.add Wx::BitmapDataObject.new
+    text_out = Wx::TextDataObject.new
+    d_obj_2.add text_out
+
+    bmp_out = Wx::BitmapDataObject.new
+    d_obj_2.add bmp_out
+
+    assert_equal 2, d_obj_2.format_count(0) 
+
     Wx::Clipboard.open do | clip |
       assert clip.supported?( FMT_TXT )
       assert clip.supported?( FMT_BMP )
+
+      clip.fetch d_obj_2
     end
+    assert_equal "THE TEXT", text_out.text
+
+    # FIXME - only the first format is read from the clipboard
+    bmp_out = bmp_out.bitmap
+    assert bmp_out.ok?, "Read out bitmap OK"
+    assert_equal bmp.width, bmp_out.width
+    assert_equal bmp.height, bmp_out.height
+
   end
 end
 
@@ -199,6 +214,7 @@ class TestDataObject < Test::Unit::TestCase
       clip.fetch d_obj_2
     end
     assert_equal('<b>HELLO</b>', d_obj_2.get_data_here(FMT_HTML) )
+
     # FIXME - the non-preferred data object isn't set
     assert_equal('HELLO', d_obj_2.get_data_here(FMT_TEXT) )
   end
@@ -212,3 +228,4 @@ Wx::App.run do
 
   false
 end
+exit!

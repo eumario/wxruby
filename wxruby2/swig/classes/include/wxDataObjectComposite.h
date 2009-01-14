@@ -9,6 +9,7 @@ class wxDataObjectComposite : public wxDataObject
 public:
   wxDataObjectComposite();
   void Add(wxDataObjectSimple *dataObject, bool preferred = false);
+  wxDataFormat GetReceivedFormat() const;
 
   // implement base class pure virtuals
   virtual wxDataFormat GetPreferredFormat(wxDataObject::Direction dir = Get) const;
