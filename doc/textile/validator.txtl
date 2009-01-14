@@ -3,22 +3,15 @@ h1(#wxvalidator). Wx::Validator
 Validator is the base class for a family of validator classes that mediate
 between a class of control, and application data.
 
-A validator has three major roles:
+A validator in wxRuby has two major roles:
 
-
-# to transfer data from a C++ variable or own storage to and from a control;
 # to validate data in a control, and show an appropriate error message;
 # to filter events (such as keystrokes), thereby changing the behaviour of the
 associated control.
 
-
 Validators can be plugged into controls dynamically.
 
-To specify a default, `null' validator, use the symbol *DefaultValidator*.
-
-For more information, please see "Validator overview":validatoroverview.html.
-
-
+To specify a default, `null' validator, use the constant @Wx::DEFAULT_VALIDATOR@.
 
 h2. Derived from
 
@@ -28,9 +21,7 @@ h2. Derived from
 
 h2. See also
 
-"Validator overview":validatoroverview.html, 
-"TextValidator":textvalidator.html, 
-"GenericValidator":genericvalidator.html,
+"TextValidator":textvalidator.html
 
 <div id="methods">
 
@@ -41,8 +32,6 @@ h2. Methods
 * "Validator#get_window":#Validator_getwindow
 * "Validator#set_bell_on_error":#Validator_setbellonerror
 * "Validator#set_window":#Validator_setwindow
-* "Validator#transfer_from_window":#Validator_transferfromwindow
-* "Validator#transfer_to_window":#Validator_transfertowindow
 * "Validator#validate":#Validator_validate
 
 </div>
