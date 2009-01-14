@@ -1,5 +1,13 @@
 h1(#wxdataobject). Wx::DataObject
 
+*Note*: fully updated ruby documentation for DataObject classes is
+needed. For the time being, the test case in test/test_clipboard.rb and
+the dnd sample demonstrate how to use data object classes in some
+detail. For many purposes the ready-to-use classes
+"TextDataObject":textdataobject.html,
+"FiletDataObject":filedataobject.html, and
+"BitmapDataObject":bitmapdataobject.html will suffice.
+
 A DataObject represents data that can be copied to or from the clipboard, or
 dragged and dropped. The important thing about DataObject is that this is a
 'smart' piece of data unlike 'dumb' data containers such as memory
@@ -14,12 +22,8 @@ the general case, an object may support different formats on 'input' and
 created from data on this format or vice versa. DataObject defines an
 enumeration type
 
-
- enum Direction
- {
-     Get  = 0x01,    // format is supported by GetDataHere()
+     Get  = 0x01    // format is supported by GetDataHere()
      Set  = 0x02     // format is supported by SetData()
- };
  
 
 which distinguishes between them. See 
@@ -127,52 +131,51 @@ h2. Methods
 
 h3(#DataObject_wxdataobject). DataObject.new
 
-  *destructor*()
-
-Destructor.
 
 h3(#DataObject_getallformats). DataObject#get_all_formats
 
-  *get_all_formats*( %(arg-type)"DataFormat":dataformat.html% formats,  %(arg-type)"Direction":direction.html% dir = Get)
+  Array *get_all_formats*( %(arg-type)Integer% dir = Get)
 
-Copy all supported formats in the given direction to the array pointed to by 
-_formats_. There is enough space for GetFormatCount(dir) formats in it.
-
+Should return an Array of "DataFormat":dataformat.html objects supported
+in the given direction by this class.
 
 
 h3(#DataObject_getdatahere). DataObject#get_data_here
 
- Boolean *get_data_here*(%(arg-type)"DataFormat":dataformat.html% format,  %(arg-type)% buf )
+ String *get_data_here*(%(arg-type)"DataFormat":dataformat.html% format )
 
-The method will write the data of the format _format_ in the buffer 
-buf and return true on success, false on failure.
+Should return a String containing the object's data, or @nil@ on failure.
+
 
 h3(#DataObject_getdatasize). DataObject#get_data_size
 
  Integer *get_data_size*(%(arg-type)"DataFormat":dataformat.html% format )
 
-Returns the data size of the given format _format_.
+Returns the data size of the given format _format_; may be overridden if desired.
 
 h3(#DataObject_getformatcount). DataObject#get_format_count
 
- Integer *get_format_count*(%(arg-type)"Direction":direction.html% dir = Get)
+ Integer *get_format_count*(%(arg-type)Integer% direction = 1)
 
 Returns the number of available formats for rendering or setting the data.
 
-h3(#DataObject_getpreferredformat). DataObject#get_preferred_format
+h3(#DataObject_getpreferredformat). 
+DataObject#get_preferred_format
 
- "DataFormat":dataformat.html *get_preferred_format*(%(arg-type)"Direction":direction.html% dir = Get)
+ "DataFormat":dataformat.html *get_preferred_format*(%(arg-type)Integer% direction = 1)
 
 Returns the preferred format for either rendering the data (if _dir_ is @Get@,
 its default value) or for setting it. Usually this will be the
 native format of the DataObject.
 
+By default, the first member of the list returned by @get_all_formats@
+is the preferred format, but this method may be overridden.
+
 h3(#DataObject_setdata). DataObject#set_data
 
- Boolean *set_data*( %(arg-type)"DataFormat":dataformat.html% format,  %(arg-type)Integer% len,  %(arg-type)% buf )
+ Boolean *set_data*( %(arg-type)"DataFormat":dataformat.html% format,
+ %(arg-type)String% data )
 
-Set the data in the format _format_ of the length _len_ provided in the
-buffer _buf_.
+Should store and accept the data _data_ for the format _format_.
 
-Returns true on success, false on failure.
-
+Should returns true on success, false on failure.
