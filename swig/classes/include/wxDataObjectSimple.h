@@ -15,10 +15,10 @@ public:
   virtual bool GetDataHere(void *buf) const;
   virtual bool SetData(size_t len, const void *buf);
 
-  virtual wxDataFormat GetPreferredFormat(wxDataObjectBase::Direction dir = Get) const;
-  virtual size_t GetFormatCount(wxDataObjectBase::Direction dir = Get) const;
+  virtual wxDataFormat GetPreferredFormat(wxDataObject::Direction dir = Get) const;
+  virtual size_t GetFormatCount(wxDataObject::Direction dir = Get) const;
   virtual void GetAllFormats(wxDataFormat *formats,
-                             wxDataObjectBase::Direction dir = Get) const;
+                             wxDataObject::Direction dir = Get) const;
   virtual size_t GetDataSize(const wxDataFormat& format) const;
   virtual WXRUBY_DATA_OUT GetDataHere(const wxDataFormat& format, void *buf) const;
   virtual WXRUBY_DATA_IN SetData(const wxDataFormat& format,
