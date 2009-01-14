@@ -1,13 +1,20 @@
 require 'test/unit'
 require 'wx'
 
+Wx::App.run do
+
 class TestTextData < Test::Unit::TestCase
+  FMT_TEXT = Wx::DataFormat.new(Wx::DF_TEXT)
   # Using an in-built class
-  def _test_text_data
+  def test_text_data
     td = Wx::TextDataObject.new('WXRUBY')
     assert_equal("WXRUBY", td.text)
+
     Wx::Clipboard.open do | clip |
+      clip.clear
+      assert ! clip.supported?(FMT_TEXT)
       clip.place td
+      assert clip.supported?(FMT_TEXT)
     end
 
     td_2 = Wx::TextDataObject.new
@@ -25,6 +32,18 @@ class TestTextData < Test::Unit::TestCase
       clip.fetch td_3
     end
     assert_equal("", td_3.text)
+  end
+end
+
+
+class TestBitmapData < Test::Unit::TestCase
+  # Using image data - this needs
+  def test_bitmap_data
+    bmp = Wx::Bitmap.new('samples/minimal/mondrian.png')
+    d_obj = Wx::BitmapDataObject.new(bmp)
+    d_obj.bitmap = bmp
+    # FIXME - bitmap isn't getting set
+    assert d_obj.bitmap.ok?, "Set bitmap of BitmapDataOBject"
   end
 end
 
@@ -51,7 +70,7 @@ class TestDataObjSimple < Test::Unit::TestCase
     end
   end
 
-  def _test_data_obj_simple
+  def test_data_obj_simple
     dobj = MyDataObjectSimple.new('TUESDAY')
     assert_equal('TUESDAY', dobj.contents)
     Wx::Clipboard.open do | clip |
@@ -63,6 +82,35 @@ class TestDataObjSimple < Test::Unit::TestCase
       clip.get_data(dobj_2)
     end
     assert_equal('TUESDAY', dobj_2.contents)
+  end
+end
+
+class TestDataObjectComposite < Test::Unit::TestCase
+  FMT_TXT = Wx::DataFormat.new(Wx::DF_TEXT)
+  FMT_BMP = Wx::DataFormat.new(Wx::DF_BITMAP)
+
+  # FIXME generally
+  def test_data_object_composite
+    d_obj = Wx::DataObjectComposite.new
+    d_obj.add( Wx::TextDataObject.new("THE TEXT") )
+    bmp = Wx::Bitmap.new('samples/minimal/mondrian.png')
+    d_obj.add( Wx::BitmapDataObject.new(bmp) )
+
+    assert_nothing_raised {
+      assert_equal( 2, d_obj.format_count(0) )
+    }
+
+    Wx::Clipboard.open do | clip |
+      clip.place d_obj
+    end
+
+    d_obj_2 = Wx::DataObjectComposite.new
+    d_obj_2.add Wx::TextDataObject.new
+    d_obj_2.add Wx::BitmapDataObject.new
+    Wx::Clipboard.open do | clip |
+      assert clip.supported?( FMT_TXT )
+      assert clip.supported?( FMT_BMP )
+    end
   end
 end
 
@@ -87,7 +135,7 @@ class TestDataObject < Test::Unit::TestCase
     # treated as the 'preferred' format; this can be overridden by
     # providing a get_preferred format.
     def get_all_formats(direction)
-      [ FMT_TEXT, FMT_HTML ]
+      [ FMT_HTML, FMT_TEXT  ]
     end
 
     # Do setting the data
@@ -131,7 +179,10 @@ class TestDataObject < Test::Unit::TestCase
       assert clip.supported?( FMT_HTML )
       clip.fetch d_obj_2
     end
-    assert_equal('HELLO', d_obj_2.get_data_here(FMT_TEXT) )
     assert_equal('<b>HELLO</b>', d_obj_2.get_data_here(FMT_HTML) )
+    # FIXME - the non-preferred data object isn't set
+    assert_equal('HELLO', d_obj_2.get_data_here(FMT_TEXT) )
   end
+end
+
 end
