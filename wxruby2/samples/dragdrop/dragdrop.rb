@@ -126,14 +126,14 @@ class PastePane < Wx::Panel
     # Temporarily open the clipboard 
     Wx::Clipboard.open do | clip |
       # Test if bitmap data is available on the clipboard; if so, copy
-      if clip.supported?(Wx::DF_BITMAP)
+      if clip.supported?(Wx::DataFormat.new(Wx::DF_BITMAP))
         bmp = Wx::BitmapDataObject.new
         clip.get_data(bmp) # Fill the data object with bitmap`
         @canvas.bitmap = bmp.bitmap
         @canvas.refresh
       end      
       # Test if text data is available on the clipboard; if so, copy
-      if clip.supported?(Wx::DF_TEXT)
+      if clip.supported?(Wx::DataFormat.new(Wx::DF_TEXT))
         txt = Wx::TextDataObject.new
         clip.get_data(txt) # Fill the data object with text
         @text.value = txt.text
