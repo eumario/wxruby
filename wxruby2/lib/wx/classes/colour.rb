@@ -33,11 +33,13 @@ class Wx::Colour
   # Colours are equal to one another if they have the same red, green
   # and blue intensity, and the same alpha
   def ==(other)
-    if not other.is_a?(self.class)
-      raise ArgumentError, "No comparison of #{self} to #{other}"
-    end
-    [ red, green, blue, alpha ] == 
+    case other
+    when Wx::Colour
+      [  self.red,  self.green,  self.blue,  self.alpha ] == 
       [ other.red, other.green, other.blue, other.alpha ]
+    else
+      false
+    end
   end
 
   # More informative output for inspect etc
