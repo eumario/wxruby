@@ -5,7 +5,7 @@
 
 %module(directors="1") wxSplashScreen
 GC_MANAGE_AS_FRAME(wxSplashScreen);
-SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxSplashScreen);
+SWIG_WXTOPLEVELWINDOW_NO_USELESS_VIRTUALS(wxSplashScreen);
 
 %{
 #include <wx/splash.h>
