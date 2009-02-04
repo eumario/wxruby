@@ -1,5 +1,10 @@
 require 'test/unit'
-require 'test/unit/ui/console/testrunner'
+
+# Manual running of tests differs between 1.8 and 1.9
+if RUBY_VERSION < "1.9"
+  require 'test/unit/ui/console/testrunner'
+end
+
 require 'wx'
 
 class TestTextData < Test::Unit::TestCase
