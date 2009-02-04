@@ -14,7 +14,10 @@ end
 module Wx
   DF_TEXT        = DataFormat.new( DATA_FORMAT_ID_TEXT )
   DF_BITMAP      = DataFormat.new( DATA_FORMAT_ID_BITMAP )
-  DF_METAFILE    = DataFormat.new( DATA_FORMAT_ID_METAFILE )
+  if Wx::PLATFORM != 'WXGTK'
+    DF_METAFILE    = DataFormat.new( DATA_FORMAT_ID_METAFILE )
+  end
   DF_FILENAME    = DataFormat.new( DATA_FORMAT_ID_FILENAME )
   DF_UNICODETEXT = DataFormat.new( DATA_FORMAT_ID_UNICODETEXT )
+  # DF_HTML is only supported on Windows + MSVC, so don't offer it
 end
