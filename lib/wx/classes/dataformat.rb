@@ -2,10 +2,19 @@
 # doesn't work correctly in the SWIG binding
 class Wx::DataFormat
   def ==(other)
-    if self.get_type > Wx::DF_INVALID
+    if self.get_type > Wx::DATA_FORMAT_ID_INVALID
       self.get_type == other.get_type
     else
       self.id == other.id
     end
   end
+end
+
+# Provide pre-cooked data formats for the standard types
+module Wx
+  DF_TEXT        = DataFormat.new( DATA_FORMAT_ID_TEXT )
+  DF_BITMAP      = DataFormat.new( DATA_FORMAT_ID_BITMAP )
+  DF_METAFILE    = DataFormat.new( DATA_FORMAT_ID_METAFILE )
+  DF_FILENAME    = DataFormat.new( DATA_FORMAT_ID_FILENAME )
+  DF_UNICODETEXT = DataFormat.new( DATA_FORMAT_ID_UNICODETEXT )
 end
