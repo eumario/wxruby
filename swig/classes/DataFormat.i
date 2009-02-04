@@ -32,7 +32,7 @@ GC_MANAGE_AS_OBJECT(wxDataFormat);
 
 %typemap(in) wxDataFormatId "$1 = static_cast<wxDataFormatId>NUM2INT($input);"
 %typemap(typecheck) wxDataFormatId "$1 = ( TYPE($input) == T_FIXNUM );"
-%typemap(out) wxDataFormatId "$result = INT2NUM($1);"
+%typemap(out) wxDataFormatId, NativeFormat "$result = INT2NUM($1);"
 
 %constant const int DATA_FORMAT_ID_INVALID     = wxDF_INVALID;     
 %constant const int DATA_FORMAT_ID_TEXT        = wxDF_TEXT;        
