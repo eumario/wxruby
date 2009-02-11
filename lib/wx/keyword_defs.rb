@@ -246,8 +246,25 @@ Wx::define_keyword_ctors('FindReplaceDialog') do
   wx_ctor_params :style
 end
 
-# wxMultiChoiceDialog 	Dialog to get one or more selections from a list
-# wxSingleChoiceDialog 	Dialog to get a single selection from a list and return the string
+# Dialog to get one or more selections from a list
+Wx::define_keyword_ctors('MultiChoiceDialog') do
+  wx_ctor_params :message => ''
+  wx_ctor_params :caption => ''
+  wx_ctor_params :choices => []
+  wx_ctor_params :style => Wx::DEFAULT_DIALOG_STYLE|Wx::RESIZE_BORDER|
+                           Wx::OK|Wx::CANCEL|Wx::CENTRE
+  wx_ctor_params :pos
+end
+
+# Dialog to get a single selection from a list and return the string
+Wx::define_keyword_ctors('SingleChoiceDialog') do
+  wx_ctor_params :message => ''
+  wx_ctor_params :caption => ''
+  wx_ctor_params :choices => []
+  wx_ctor_params :style => Wx::DEFAULT_DIALOG_STYLE|Wx::RESIZE_BORDER|
+                           Wx::OK|Wx::CANCEL|Wx::CENTRE
+  wx_ctor_params :pos
+end
 
 # Dialog to get a single line of text from the user
 Wx::define_keyword_ctors('TextEntryDialog') do
