@@ -10,6 +10,7 @@ toolbars may only be placed at the top of a Frame. Use
 Frame#set_tool_bar to set a toolbar to be managed by a Frame and ensure
 native appearance.
 
+
 h2. Derived from
 
 "Control":control.html
@@ -194,7 +195,15 @@ h4. See also
 
 h3(#ToolBar_additem). ToolBar#add_item
 
- "ToolBarTool":toolbartool.html *add_item*(%(arg-type)"Bitmap":bitmap.html% bitmap, %(arg-type)Integer% position = -1, %(arg-type)Integer% id = -1, %(arg-type)String% label ='', %(arg-type)"Bitmap":bitmap.html% bitmap2 = NULL_BITMAP, %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL, %(arg-type)String% short_help = '', %(arg-type)String% long_help = '', %(arg-type)Object% client_data = nil)
+ "ToolBarTool":toolbartool.html *add_item*(%(arg-type)"Bitmap":bitmap.html% bitmap,
+                         %(arg-type)Integer% position = -1,
+                         %(arg-type)Integer% id = -1,
+                         %(arg-type)String% label ='',
+                         %(arg-type)"Bitmap":bitmap.html% bitmap2 = NULL_BITMAP,
+                         %(arg-type)"ItemKind":itemkind.html% kind = ITEM_NORMAL,
+                         %(arg-type)String% short_help = '',
+                         %(arg-type)String% long_help = '',
+                         %(arg-type)Object% client_data = nil)
 
 Adds or inserts a tool to the toolbar. Returns a "ToolBarTool":toolbartool.html object with
 information about the newly added item.
@@ -217,10 +226,10 @@ ITEM_CHECK for a checkable tool (such tool stays pressed after it had been
 toggled) or ITEM_RADIO for a checkable tool which makes part of a radio
 group of tools each of which is automatically unchecked whenever another button
 in the group is checked
-* _short_==_==_help_ This string is used for the tools tooltip
-* _long_==_==_help_ This string is shown in the statusbar (if any) of the
+* _short_help_ This string is used for the tools tooltip
+* _long_help_ This string is shown in the statusbar (if any) of the
 parent frame when the mouse pointer is inside the tool
-* _client_==_==_data_ An optional pointer to client data which can be
+* _client_data_ An optional pointer to client data which can be
 retrieved later using "ToolBar#get_tool_client_data":toolbar.html#ToolBar_gettoolclientdata.
 
 h4. Remarks
@@ -569,10 +578,10 @@ h3(#ToolBar_inserttool). ToolBar#insert_tool
 
   "ToolBarTool":toolbartool.html *insert_tool*(%(arg-type)Integer% pos, 
                               %(arg-type)Integer% toolId,
-		          	          %(arg-type)String% label, 
+                              %(arg-type)String% label, 
                               %(arg-type)"Bitmap":bitmap.html% bitmap1, 
                               %(arg-type)"Bitmap":bitmap.html% bitmap2 = NullBitmap, 
-			    			  %(arg-type)Integer% type = Wx::ITEM_NORMAL,
+                              %(arg-type)Integer% type = Wx::ITEM_NORMAL,
                               %(arg-type)String% shortHelp = "", 
                               %(arg-type)String% longHelp = "",
                               %(arg-type)Object% clientData = nil)

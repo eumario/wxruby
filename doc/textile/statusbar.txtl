@@ -4,11 +4,6 @@ A status bar is a narrow window that can be placed along the bottom of a frame t
 small amounts of status information. It can contain one or more fields, one or more of which can
 be variable length according to the size of the window.
 
-"Window":window.html
-
-"EvtHandler":evthandler.html
-
-"Object":object.html
 
 h2. Derived from
 
