@@ -2,7 +2,7 @@ h1(#wxsystemsettings). Wx::SystemSettings
 
 SystemSettings allows the application to ask for details about
 the system. This can include settings such as standard colours, fonts,
-and user interface element sizes.
+and user interface element sizes. These details are provided via class methods.
 
 h2. Derived from
 
@@ -16,7 +16,6 @@ h2. See also
 
 h2. Methods
 
-* "SystemSettings.new":#SystemSettings_new
 * "SystemSettings#get_colour":#SystemSettings_getcolour
 * "SystemSettings#get_font":#SystemSettings_getfont
 * "SystemSettings#get_metric":#SystemSettings_getmetric
@@ -24,8 +23,6 @@ h2. Methods
 
 </div>
 
-
-h3(#SystemSettings_new). SystemSettings.new
 
 h3(#SystemSettings_getcolour). SystemSettings#get_colour
 

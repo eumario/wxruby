@@ -202,7 +202,8 @@ constructor.
 
 h3(#Sizer_additem). Sizer#add_item
 
- "SizerItem":sizeritem.html *add_item*(%(arg-type)Object% item,  %(arg-type)Integer% index = -1, 
+ "SizerItem":sizeritem.html *add_item*(%(arg-type)Object% item,
+                  %(arg-type)Integer% index = -1, 
                   %(arg-type)Integer% proportion = 0, 
                   %(arg-type)Integer% flag = 0, 
                   %(arg-type)Integer% border = 0, 
@@ -221,7 +222,7 @@ Otherwise, it is inserted at the specified position.
 * _proportion_ The proportion of the sizer's space to be allocated to this item
 * _flag_ Sets a number of options including border location, resizing and alignment
 * _border_ The size of the border, in pixels
-* _user_==_==_data_ Not currently supported in wxRuby, not needed in normal use
+* _user_data_ Not currently supported in wxRuby, not needed in normal use
 
 h4. Flags
 
