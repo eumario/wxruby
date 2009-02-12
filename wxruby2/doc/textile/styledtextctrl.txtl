@@ -47,7 +47,7 @@ constant names by changing the prefix from @SC_@ (Scintilla) to @STC_@
 h2. Event Handling
 
 A StyledTextCtrl has a number of event handlers, each of which will be
-passed a "StyledTextEvent":styledtextevent. 
+passed a "StyledTextEvent":styledtextevent.html
 
 |*evt_stc_calltip_click(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|A calltip was clicked|
 |*evt_stc_change(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|The text contents was changed|
