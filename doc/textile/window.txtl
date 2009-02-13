@@ -2387,7 +2387,11 @@ h3(#Window_setfocus). Window#set_focus
 
   *set_focus*()
 
-This sets the window to receive keyboard input.
+This sets the window to receive keyboard input. 
+
+Note that on some platforms, the focus cannot be set until the Window is
+visible. Therefore, ensure that "show":#Window_show has been called on
+the Window, or its containing Frame, before calling this method.
 
 h4. See also
 
