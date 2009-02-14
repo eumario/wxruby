@@ -5,13 +5,18 @@
 #  * get_position()
 #  * set_size(a_size)
 #  * is_checked()
+#  * can_undo()
+#  * has_style(a_style)
 # 
 # and so on. Methods that retrieve set, or query attributes of an object
-# are more normally in Ruby called simply by the attribute name:
+# are more normally in Ruby called simply by the attribute name, or, in
+# other cases, with a predicate method:
 #
 #  * position()
 #  * size = a_size
 #  * checked?
+#  * can_undo?
+#  * has_style?
 #
 # This extension creates an alias for every WxRuby instance method that
 # begins with +get_+, +set_+ or +is_+. Note that if you are calling a
@@ -23,11 +28,18 @@
 #  size = Wx::Size.new
 
 module WxRubyStyleAccessors
+  # Ruby-style method named are implemented by method-missing; if an
+  # unknown method is called, see if it is a rubyish name for a real
+  # method. In principle it would be possible to set up real aliases for
+  # them at start-up, but in practice this is far too slow for all the
+  # classes that need to be tarted up.
   def method_missing(sym, *args)
     case sym.to_s
-    when /^(.*)\=$/
+    when /^(\w+)\=$/ 
       meth = "set_#{$1}"
-    when /^(.*)\?$/
+    when /^((?:has|can)\w+)\?$/
+      meth = $1
+    when /^(\w+)\?$/
       meth = "is_#{$1}"
     else
       meth = "get_#{sym}"
