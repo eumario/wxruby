@@ -12,14 +12,14 @@
 # are more normally in Ruby called simply by the attribute name, or, in
 # other cases, with a predicate method:
 #
-#  * position()
-#  * size = a_size
-#  * checked?
-#  * can_undo?
-#  * has_style?
+#  * pos = my_widget.position
+#  * my_widget.size = a_size
+#  * my_widget.checked?
+#  * my_widget.can_undo?
+#  * my_widget.has_style?
 #
 # This extension creates an alias for every WxRuby instance method that
-# begins with +get_+, +set_+ or +is_+. Note that if you are calling a
+# begins with +get_+, +set_+, +is_+, +can_+ and +has_+. Note that if you are calling a
 # 'setter' method on self, you must explicitly send the message to self:
 # 
 #  # set's self size to be 100px by 100px
@@ -32,7 +32,7 @@ module WxRubyStyleAccessors
   # unknown method is called, see if it is a rubyish name for a real
   # method. In principle it would be possible to set up real aliases for
   # them at start-up, but in practice this is far too slow for all the
-  # classes that need to be tarted up.
+  # classes that need to be started up.
   def method_missing(sym, *args)
     case sym.to_s
     when /^(\w+)\=$/ 
