@@ -192,7 +192,7 @@ and list styles, and includes support for stylesheets and
 printing. Import from XML, and export to XML and HTML is provided.
 
 
-|RichTextAttr|Definition of text style properties| 
+|RichTextAttr|Definition of text style properties|
 |RichTextBuffer|The internal representation of a RichTextCtrl's contents|
 |RichTextCharacterStyleDefinition|A named character-level style|
 |RichTextCtrl|GUI widget for editing rich text|
