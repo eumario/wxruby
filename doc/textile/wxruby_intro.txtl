@@ -21,7 +21,7 @@ must be passed. If default positioning and default sizing is
 desired (as is usually the case when using "Sizers":sizer.html to manage
 layouts), the call ends up looking like this:
 
- text = Wx::TextCtrl.new(parent, -1, 'some text'
+ text = Wx::TextCtrl.new(parent, Wx::ID_ANY, 'some text'
                          Wx::DEFAULT_POSITION,
                          Wx::DEFAULT_SIZE,
                          Wx::TE_MULTILINE)
@@ -43,6 +43,7 @@ instances are named according to the convention commonest in C++ and
 Java. For example, to get and set the size of a widget, the methods are
 named:
 
+  ==#== C++ style
  widget.get_size
  widget.set_size(new_size)
 
@@ -50,6 +51,7 @@ In Ruby, much the commoner convention is to have accessor methods named
 simply after the property. Therefore, in wxRuby, the following are valid
 alternatives to the above:
 
+  ==#== Ruby style
  widget.size
  widget.size = new_size
 
@@ -58,13 +60,14 @@ instance's method, you must explicitly specify @self@ as the
 receiver. Without this, Ruby will interpret the call as an assignment to
 a local variable rather than a method call:
 
-  ==#== won't work, seen as assignment to local variable "size"
+  ==#== won't work, seen as assignment to local variable 'size'
  size = new_size
 
-  ==#== correct way
+The correct way:
+
  self.size = new_size
  
-h4. is_ methods
+h4. Predicate methods (is_ , can_ , has_ )
 
 Similar to the getters and setters, there are numerous methods in the
 C++ API which test a condition, such as
@@ -73,12 +76,16 @@ return true or false to have a name ending with the "?"
 character. In wxRuby, therefore, both the following are permitted
 
   ==#== C++ style
- a_bitmap.is_ok
+ widget.is_checked
+ widget.can_undo
+ widget.has_flag(a_flag)
 
 Or
  
   ==#== Ruby style
- a_bitmap.ok?
+ widget.checked?
+ widget.can_undo?
+ widget.has_flag?(a_flag)
 
 h3. Size and Point argument shorthands
 
@@ -87,13 +94,13 @@ represent an x/y position and a width/height size respectively. They are
 widely used in the API, including in widget constructors. For example,
 to create a button at a specific position:
 
- button = Wx::Button.new( parent, -1, 'press me', Wx::Point.new(50, 50) )
+ button = Wx::Button.new( parent, Wx::ID_ANY, 'press me', Wx::Point.new(50, 50) )
 
 As a terser alternative, Point and Size arguments may be specified using
 a two-element Ruby array, specifying an x/y co-ordinate or a
 width/height size. The above could be re-written:
 
- button = Wx::Button.new( parent, -1, 'press me', [50, 50])
+ button = Wx::Button.new( parent, Wx::ID_ANY, 'press me', [50, 50])
 
 Or, neater, using keyword arguments:
 
