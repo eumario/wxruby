@@ -41,7 +41,7 @@ class MyCalendar < CalendarCtrl
 
   def on_calendar_change(event)
     @date = event.date
-    log_status("Selected date: #{@date.strftime('%Y-%M-%D')}")
+    log_status("Selected date: #{@date.strftime('%A %d %B %Y')}")
   end
 
   def on_cal_month_change
