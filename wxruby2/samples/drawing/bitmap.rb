@@ -11,14 +11,18 @@ require 'wx'
 # This sample demonstrates how to draw an image from a file onto a
 # window. This one uses a small PNG file, but other formats such as JPEG
 # are supported - see documentation for more details.
-
+# 
+# This sample uses the Wx::Bitmap class, which is a platform-specific
+# representation of an image. This is the class that must be used to
+# display an image, but see also Wx::Image, which allows a much wider
+# range of manipulations (such as rescaling) and writing to files.
 class ImageFrame < Wx::Frame
   def initialize
     super(nil, :title => 'Simple image demo')
 
     # Load a PNG bitmap from a file for drawing
     img_file = File.join( File.dirname(__FILE__), 'paperclip.png')
-    @bitmap = Wx::Bitmap.new(img_file, Wx::BITMAP_TYPE_PNG)
+    @bitmap = Wx::Bitmap.new(img_file)
 
     # Set up the drawing to be done when the frame needs re-painting
     evt_paint :on_paint
