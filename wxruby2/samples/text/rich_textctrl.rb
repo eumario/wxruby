@@ -131,16 +131,19 @@ class RichTextFrame < Wx::Frame
     evt_update_ui(Wx::ID_PASTE) do |evt|
       evt.enable(@editor.can_paste?)
     end
-    
-    accel_table = Wx::AcceleratorTable[
-      [Wx::MOD_CMD, "Z".ord, Wx::ID_UNDO],
-      [Wx::MOD_CMD, "Y".ord, Wx::ID_REDO],
-      [Wx::MOD_CMD, "C".ord, Wx::ID_COPY],
-      [Wx::MOD_CMD, "X".ord, Wx::ID_CUT],
-      [Wx::MOD_CMD, "V".ord, Wx::ID_PASTE]
-      ]
-    @editor.accelerator_table = accel_table
+    # Shortcut keys for the editor
+    accel_keys = { "Z" => Wx::ID_UNDO,
+                   "Y" => Wx::ID_REDO,
+                   "C" => Wx::ID_COPY,
+                   "X" => Wx::ID_CUT,
+                   "V" => Wx::ID_PASTE }
+    accel_table = accel_keys.keys.map do | k | 
+      # Ruby 1.9 / Ruby 1.8
+      int = k.respond_to?(:ord) ? k.ord : k[0]
+      [ Wx::MOD_CMD, int, accel_keys[k] ]
+    end
 
+    @editor.accelerator_table = Wx::AcceleratorTable[ *accel_table ]
   end
 
 
