@@ -17,6 +17,11 @@ class Wx::Image
     bmp.convert_to_image
   end
 
+  # Ruby methods that switch class are conventionally named to_foo
+  def to_bitmap
+    Wx::Bitmap.from_image(self)
+  end
+
   # Redefine the initialize method so it raises an exception if a
   # non-existent file is given to the constructor; otherwise, wx Widgets
   # just carries on with an invalid image, which may cause faults
