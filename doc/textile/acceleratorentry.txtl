@@ -28,13 +28,20 @@ h3(#AcceleratorEntry_new). AcceleratorEntry.new
   *AcceleratorEntry.new*(%(arg-type)Integer% flags,  %(arg-type)Integer% keyCode, 
                        %(arg-type)Integer% cmd)
 
-Constructor.
+  *AcceleratorEntry.new*(%(arg-type)Integer% flags,  %(arg-type)String% key, 
+                       %(arg-type)Integer% cmd)
+
+Constructor. The key for the shortcut may be specified as either a
+single-character ASCII string, eg "C", or as an integer
+"keycode":keycode.html. To use "special" keys, such as function keys,
+an integer keycode will have to be used.
 
 h4. Parameters
 
 * _flags_ One of ACCEL_ALT, ACCEL_SHIFT, ACCEL_CTRL and ACCEL_NORMAL. Indicates
 which modifier key is held down.
-* _keyCode_ The keycode to be detected. See "Keycodes":keycodes.html for a full list of keycodes.
+* _keyCode_ The keycode to be detected. See "Keycodes":keycode.html for a full list of keycodes.
+* _key_ The letter whose keypress is to be detected
 * _cmd_ The menu or control command identifier.
 
 h3(#AcceleratorEntry_getcommand). AcceleratorEntry#get_command
@@ -65,6 +72,6 @@ h4. Parameters
 
 * _flags_ One of ACCEL_ALT, ACCEL_SHIFT, ACCEL_CTRL and ACCEL_NORMAL. Indicates
 which modifier key is held down.
-* _keyCode_ The keycode to be detected. See "Keycodes":keycodes.html for a full list of keycodes.
+* _keyCode_ The keycode to be detected. See "Keycodes":keycode.html for a full list of keycodes.
 * _cmd_ The menu or control command identifier.
 

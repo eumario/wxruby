@@ -137,10 +137,8 @@ class RichTextFrame < Wx::Frame
                    "C" => Wx::ID_COPY,
                    "X" => Wx::ID_CUT,
                    "V" => Wx::ID_PASTE }
-    accel_table = accel_keys.keys.map do | k | 
-      # Ruby 1.9 / Ruby 1.8
-      int = k.respond_to?(:ord) ? k.ord : k[0]
-      [ Wx::MOD_CMD, int, accel_keys[k] ]
+    accel_table = accel_keys.keys.map do | key | 
+      [ Wx::MOD_CMD, key, accel_keys[key] ]
     end
 
     @editor.accelerator_table = Wx::AcceleratorTable[ *accel_table ]
