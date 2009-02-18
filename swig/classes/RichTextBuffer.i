@@ -19,6 +19,13 @@ GC_NEVER(wxRichTextBuffer);
 #define wxRICHTEXT_TYPE_RTF             4
 #define wxRICHTEXT_TYPE_PDF             5
 
+#define wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET       0x0001
+#define wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_MEMORY    0x0010
+#define wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_FILES     0x0020
+#define wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_BASE64    0x0040
+#define wxRICHTEXT_HANDLER_NO_HEADER_FOOTER         0x0080
+#define wxRICHTEXT_HANDLER_CONVERT_FACENAMES        0x0100
+
 // Use the RichTextAttr version
 %ignore wxRichTextBuffer::SetStyle(const wxRichTextRange& range,
                                    const wxTextAttrEx& style,
