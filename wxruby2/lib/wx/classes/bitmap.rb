@@ -25,6 +25,9 @@ class Wx::Bitmap
     new(img, depth)
   end
 
+  # Ruby methods that switch class are conventionally named to_foo
+  alias :to_image :convert_to_image
+
   # Redefine the initialize method so it raises an exception if a
   # non-existent file is given to the constructor; otherwise, wx Widgets
   # just carries on with an empty bitmap, which may cause faults
