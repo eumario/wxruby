@@ -38,7 +38,7 @@ $base_gemspec = Gem::Specification.new do | spec |
   # Platform specific binaries are added in later
   spec.files        = FileList[ 'lib/**/*' ].to_a +
                       FileList[ 'samples/**/*' ].to_a +
-                      FileList[ 'README', 'LICENSE' ].to_a
+                      FileList[ 'README', 'INSTALL', 'LICENSE' ].to_a
 
   spec.has_rdoc = false
 end
@@ -73,7 +73,7 @@ def create_package_tasks
   Rake::PackageTask.new('wxruby', WXRUBY_VERSION) do | p_task |
     p_task.need_tar_gz = true
     pkg_files = p_task.package_files
-    pkg_files.include('README', 'LICENSE', 'ChangeLog', 'rakefile')
+    pkg_files.include('README', 'INSTALL', 'LICENSE', 'ChangeLog', 'rakefile')
     pkg_files.include('lib/**/*.rb')
     pkg_files.include('swig/**/*')
     pkg_files.include('tests/**/*')
