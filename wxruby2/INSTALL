@@ -1,0 +1,254 @@
+= Installing wxRuby
+
+wxRuby is fully supported on Ruby 1.8 and Ruby 1.9.1. There are two
+ways of installing wxRuby2:
+
+ * Using Rubygems to install a precompiled binary gem
+ * Obtaining the sources and compiling wxRuby yourself
+
+For most users (especially on Windows and OS X), using rubygems will be
+most convenient, and is recommended. Compiling may be needed on systems
+which have very varied configurations (in particular, Linux). You'll
+also need to compile yourself if you want to use the latest development
+code, rather than a numbered release.
+
+= Installing wxRuby using Rubygems
+
+On Windows and OS X, the only normal prerequisite is Ruby itself and
+rubygems. On Linux, you will need your distro's wx library
+installed. See below for platform-specific information.
+
+== Temporary instructions for gem installation
+
+As of February 2009, Rubygems has a serious bug which means that the
+latest version of specific gems are not correctly offered by the
+automatic installation procedure. This affects a variety of gems and
+ruby and rubygems versions. Please follow these temporary instructions
+until this is resolved:
+
+Download the correct gem file for your platform from the wxRuby download
+page: http://rubyforge.org/frs/?group_id=35
+
+Gems for 1.8 are named: wxruby-[version]-[processor]-[os].gem
+Gems for 1.9 are named: wxruby-ruby19-[version]-[processor]-[os].gem
+
+Choose the latest version available for your processor and operating
+system: mswin32 or mingw32 for Windows, darwin for for OS X, linux for
+Linux.
+
+Save the file to your local hard drive. Open a command prompt or
+terminal, go to the directory where the gem file is saved, and do:
+
+ gem install <filename>
+
+For example:
+
+ gem install wxruby-1.9.10-x86-mswin32-60.gem
+
+On Linux and OS X, you may need to run this command as a privileged user, eg
+
+ sudo gem install <filename>
+
+== Proper instructions for gem installation
+
+To install wxRuby using Rubygems, open a command prompt and type:
+
+ gem install wxruby           # Ruby 1.8
+ gem install wxruby-ruby19    # Ruby 1.9 
+
+If you are on Linux or OS X, you will likely need to run this as a
+privileged user, something like:
+
+ sudo gem install wxruby
+
+Wait whilst rubygems updates its gem list. You will then be offered a
+choice of gems to install. Choose the most up-to-date one available for
+your platform. Rubygems will download and install the desired gem.
+
+On Linux, you should also install your distro's wxwidgets 2.8
+libraries. On Windows and OS X, the gem contains everything needed to
+create and run wxRuby applications; you're ready to go.
+
+=== Gem Installation Notes - Microsoft Windows
+
+* x86-mswin32 gems are for ruby on Windows NT/2000/XP/Vista on Intel-32,
+  built with the Microsoft compiler. This includes current releases of
+  the One-Click Installer.
+
+* x86-mingw gems are compatible with ruby built on Windows using the
+  MingW compiler
+
+* If using NT or 2000, you may need to install the free library
+  gdiplus.dll in your Windows/system32 directory.
+
+* If using a recent fresh install of NT, 2000 or XP, you may need to
+  install the dll msvcp71.dll. This can be downloaded for free.
+
+* To get native XP-style widgets on XP you need to create a manifest.exe
+  file for ruby; see here for more information:
+  http://rubyonwindows.blogspot.com/2007/10/windows-xp-visual-style-controls-with.html
+
+* Unfortunately, wxRuby2 does not currently work on Windows 3.1, 98 or
+  Me, as these do not have adequate unicode support. The old
+  wxruby-0.6.0 release should work (to the best of its limited
+  abilities) on these platforms.
+
+=== Gem Installation Notes - OS X
+
+* Gems are provided as single universal binary for both Intel and
+  PowerPC Apple machines
+
+* wxRuby binary gems are compatible with versions 10.4 (Tiger) and 10.5
+  (Leopard)
+
+=== Gem Installation Notes - Linux
+
+* The wxRuby gems for Linux are intended to work with your system's
+  existing packages and libraries. Therefore, you should install the
+  wxwidgets-2.8 package(s) for your system, eg libwx-2.8
+
+* The gems are built on recent versions of Ubuntu; due to the wide
+  variation between the configuration of different distros, they may not
+  work correctly with other distributions and versions. If you
+  experience errors after installing the gem, you will need to compile
+  your own version of wxRuby.
+
+* On some systems libselinux1-related shutdown crashs are reported with
+  wxRuby. On Ubuntu Hardy, this workaround fixed it:
+  http://www.libavg.de/wiki/index.php/Libavg_on_Ubuntu#8.04_known_issue
+
+= Compiling wxRuby from Source
+
+The remainder of this document covers compiling ruby from source.
+
+Compiling wxRuby is recommended if you wish to use the latest
+development version, or if you want to work with a specific
+configuration of wxWidgets - for example, that provided by a Linux
+distro. You may also need to compile wxRuby if a binary gem is not
+available for your platform.
+
+== Compilation prerequisites
+
+* A C++ compiler: MSVC or MingW for Windows; gcc (g++) for Linux and OS X
+* A recent version of SWIG, especially for Ruby 1.9. 
+* rake 
+* A compiled wxWidgets library, either built yourself or installed from 
+  via a package manager
+
+wxWidgets has a huge range of compile-time options, and wxRuby tries to
+support as many of these as possible. In particular, both debug and
+release builds are supported; a debug build is recommended if you're
+interested in working on wxRuby. On windows, only static builds are
+supported; on Linux and OS X, either statically or dynamically linked
+libraries can be used.
+
+wxRuby will skip several optional features if they are not supported by
+your wxWidgets library; these include StyledTextCtrl, GraphicsContext
+and OpenGL classes.
+
+== Obtaining wxRuby source code
+
+Tarballs containing the wxRuby source for released versions can be
+downloaded from the wxRuby Rubyforge pages:
+http://rubyforge.org/frs/?group_id=35
+
+If you wish to use the latest development code, it's hosted in
+Subversion at rubyforge.org. Note that this code may be incomplete or
+buggy. To check it out do
+
+ svn co svn://rubyforge.org/var/svn/wxruby/trunk/wxruby2
+  
+== Setting build options
+
+If you're compiling on Windows, you *must* set an environment variable
+to indicate where the WxWidgets libraries and header files can be found:
+
+ set WXWIN=C:/path/to/wxMSW-2.8.9
+
+The path should be the top-level directory of the unpacked wxWidgets
+tarball; it's recommended that the path does not contain spaces.
+
+If you have multiple parallel versions of wxWidgets installed, you may
+influence which build is selected by setting or unsetting the
+environment variables WXRUBY_DEBUG, WXRUBY_RELEASE, WXRUBY_STATIC and
+WXRUBY_DYNAMIC. eg
+
+ export WXRUBY_DEBUG=1 
+
+Forces wxRuby to be built against a -debug version of wxWidgets.
+
+Lastly, you may specifically exclude certain classes; this is most often
+useful if a particular class is causing problems:
+
+ export WXRUBY_EXCLUDE=ThisClass,ThatClass
+
+== Running the compile task
+
+From the top-level directory of the unpacked or downloaded wxRuby
+directory, just start the rake build with the command:
+
+ rake
+  
+There is no ./configure step, nor do you need to run ruby
+extconf.rb. wxRuby has approaching 300 classes to generate, compile and
+link, so the process may take some time. 
+
+== Using a compiled library
+
+To run a wxRuby program using the newly compiled library, you can run
+ruby with the -I flag pointing to the lib directory. For example, a
+quick test of a newly compiled library might be:
+
+ ruby -Ilib samples/minimal/minimal.rb
+
+== Installing a compiled library
+
+Rubygems has emerged as the standard for managing user ruby libraries,
+so you may wish to create a gem from your compiled code and install
+it. To create a gem, do:
+
+ rake gem
+
+This will create a gem file, which you can install as above.
+
+If you do not wish to use Rubygems, you can also do
+
+ rake install
+
+This will install wxRuby into your site_ruby directories. As with gem
+commands, you may need to be root do this. Note that as Rubygems has
+become the standard installation method for Ruby libraries, the
+'install' task is no longer regularly maintained and tested.
+
+= Porting to other platforms
+
+The instructions above cover all the platforms that are in current use
+for wxRuby. It should however be possible to use wxRuby on any platform
+supported by wxWidgets and Ruby:
+
+http://wiki.wxwidgets.org/Supported_Platforms
+
+Platform-dependent rakefiles are used to set up compiler-specific
+settings. The following platforms are currently fully supported:
+
+  Mac OSX (gcc):        rakemacosx.rb
+  Linux (GTK2 + gcc):   rakelinux.rb
+  Windows (shared):     rakewindows.rb
+  Windows (MSVC):       rakemswin.rb
+  Windows (MingW):      rakemingw.rb
+
+For other platforms, you will need to create or edit the appropriate
+platform-dependent rake file if your system is not yet supported, or if
+it is unusual. These files are found in the rake subdirectory, for
+example:
+
+  NetBSD:               rakenetbsd.rb
+
+The existing rake files should provide a starting point. When editing a
+platform-dependent rakefile, you might merely need to set one or more of
+the following variables:
+
+    $extra_cppflags
+    $extra_ldflags
+    $extra_objs
+    $extra_libs
