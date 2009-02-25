@@ -22,18 +22,26 @@ enum
 // Allow integer keycodes to be specified with a single-ASCII-character
 // Ruby string. Slightly different approaches are needed for Ruby 1.8 and
 // Ruby 1.9. 
-%typemap("in") int keyCode {
-  if ( TYPE($input) == T_FIXNUM ) {
-    $1 = NUM2INT($input);
-  }
-  else if ( TYPE($input) == T_STRING ) {
+%{
+  int wxRuby_RubyStringOrIntToKeyCode(VALUE rb_key) {
+    if ( TYPE(rb_key) == T_FIXNUM ) {
+      return NUM2INT(rb_key);
+    }
+    else if ( TYPE(rb_key) == T_STRING ) {
 #ifdef HAVE_RUBY_ENCODING_H
-    $1 = NUM2INT( rb_funcall($input, rb_intern("ord"), 0) );
+      return NUM2INT( rb_funcall(rb_key, rb_intern("ord"), 0) );
 #else
-    $1 = NUM2INT( rb_funcall($input, rb_intern("[]"), 1, INT2NUM(0)) );
+      return NUM2INT( rb_funcall(rb_key, rb_intern("[]"), 1, INT2NUM(0)) );
 #endif
+    }
+    else {
+      rb_raise(rb_eTypeError, 
+               "Specify key code for AcceleratorEntry with a String or Fixnum");
+    }
+      
   }
-}
+%}
+%typemap("in") int keyCode "$1 = wxRuby_RubyStringOrIntToKeyCode($input);"
 
 %typemap("typecheck") int keyCode {
   $1 = ( ( TYPE($input) == T_FIXNUM ) || 
