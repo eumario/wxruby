@@ -136,6 +136,13 @@ void GC_mark_wxWindow(void *ptr)
 	  VALUE rb_droptarget = SWIG_RubyInstanceFor(wx_droptarget);
 	  rb_gc_mark(rb_droptarget);
 	}
+
+  wxValidator* wx_validator = wx_win->GetValidator();
+  if ( wx_validator )
+	{
+	  VALUE rb_validator = SWIG_RubyInstanceFor(wx_validator);
+	  rb_gc_mark(rb_validator);
+	}
 }  
 
 
