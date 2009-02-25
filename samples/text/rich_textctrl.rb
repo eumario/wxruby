@@ -37,12 +37,10 @@ class RichTextFrame < Wx::Frame
 
     # Add extra handlers (plain text is automatically added)
     @editor.buffer.add_handler(Wx::RichTextXMLHandler.new)
-# FIXME Using RichTextHTMLHandler causes a crash on Linux
-#    @editor.buffer.add_handler(Wx::RichTextHTMLHandler.new)
+    @editor.buffer.add_handler(Wx::RichTextHTMLHandler.new)
     file_wildcard = "Text File (*.txt)|*.txt|XML File (*.xml)|*.xml"
     @file_open_wildcard = file_wildcard + "|All Supported File (*.*)|*.*"
-#    @file_save_wildcard = file_wildcard + "|HTML File (*.html)|*.html"
-    @file_save_wildcard = file_wildcard
+    @file_save_wildcard = file_wildcard + "|HTML File (*.html)|*.html"
 
     @cur_dir = Dir.getwd
     @cur_file = ""
@@ -191,24 +189,24 @@ class RichTextFrame < Wx::Frame
     toolbar.add_separator
 
     copy_bmp, copy_disabled_bmp = bitmaps_from_png("edit-copy.png")
-    toolbar.add_item(copy_bmp, :bitmap2 => copy_disabled_bmp, :id => Wx::ID_COPY,
-      :label => "Copy", :short_help => "Copy selection")
+    toolbar.add_item(copy_bmp, copy_disabled_bmp, :id => Wx::ID_COPY,
+      :label => "Copy", :short_help => "Copy selection (CMD+C)")
 
     cut_bmp, cut_disabled_bmp = bitmaps_from_png("edit-cut.png")
-    toolbar.add_item(cut_bmp, :bitmap2 => cut_disabled_bmp, :id => Wx::ID_CUT,
-      :label => "Cut", :short_help => "Cut selection")
+    toolbar.add_item(cut_bmp, cut_disabled_bmp, :id => Wx::ID_CUT,
+      :label => "Cut", :short_help => "Cut selection (CMD+X)")
 
     paste_bmp, paste_disabled_bmp = bitmaps_from_png("edit-paste.png")
-    toolbar.add_item(paste_bmp, :bitmap2 => paste_disabled_bmp, :id => Wx::ID_PASTE,
-      :label => "Paste", :short_help => "Paste clipboard")
+    toolbar.add_item(paste_bmp, paste_disabled_bmp, :id => Wx::ID_PASTE,
+      :label => "Paste", :short_help => "Paste clipboard (CMD+V)")
 
     undo_bmp, undo_disabled_bmp = bitmaps_from_png("edit-undo.png")
-    toolbar.add_item(undo_bmp, :bitmap2 => undo_disabled_bmp, :id => Wx::ID_UNDO,
-      :label => "Undo", :short_help => "Undo change")
+    toolbar.add_item(undo_bmp, undo_disabled_bmp, :id => Wx::ID_UNDO,
+      :label => "Undo", :short_help => "Undo change (CMD+Z)")
 
     redo_bmp, redo_disabled_bmp = bitmaps_from_png("edit-redo.png")
-    toolbar.add_item(redo_bmp, :bitmap2 => redo_disabled_bmp, :id => Wx::ID_REDO,
-      :label => "Redo", :short_help => "Redo change")
+    toolbar.add_item(redo_bmp, redo_disabled_bmp, :id => Wx::ID_REDO,
+      :label => "Redo", :short_help => "Redo change (CMD+Y)")
 
     toolbar.add_separator
 
