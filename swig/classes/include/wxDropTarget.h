@@ -14,6 +14,7 @@ public:
   virtual wxDragResult OnEnter(wxCoord x , wxCoord y, wxDragResult  def);
   virtual wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult  def);
   virtual void OnLeave() ;
+  wxDataObject *GetDataObject() const;
   void SetDataObject(wxDataObject*  data ) ;
 };
 
