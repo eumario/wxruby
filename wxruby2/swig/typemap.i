@@ -372,8 +372,17 @@
 			   "Window parent argument must not be nil"); }
 }
 
-// For numerous methods that return arbitrary windows
+// For numerous methods that return arbitrary objects that need to be
+// wrapped in correct subclasses
 %typemap(out) wxWindow*, wxSizer* "$result = wxRuby_WrapWxObjectInRuby($1);"
+
+// Validators must be cast to correct subclass, but internal validator
+// is a clone, and should not be freed, so disown after wrapping.
+%typemap(out) wxValidator* {
+  $result = wxRuby_WrapWxObjectInRuby($1);
+  RDATA($result)->dfree = SWIG_RubyRemoveTracking;
+}
+
 // For ProcessEvent and AddPendingEvent
 %typemap("directorin") wxEvent &event "$input = wxRuby_WrapWxEventInRuby(&$1);"
 // Thin and trusting wrapping to bypass SWIG's normal mechanisms; we
