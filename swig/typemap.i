@@ -239,7 +239,7 @@
   $result = rb_ary_new();
   for (size_t i = 0; i < $1->GetCount(); i++)
   {
-    rb_ary_push($result, WXSTR_TO_RSTR($1[i]));
+    rb_ary_push($result, WXSTR_TO_RSTR($1->Item(i)));
   }
 }
 
