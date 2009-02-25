@@ -21,6 +21,7 @@ public:
   virtual unsigned int GetCount() const = 0;
   virtual int GetSelection() const = 0;
   virtual wxString GetString(int  n ) const = 0;
+  wxArrayString GetStrings() const;
   virtual wxString GetStringSelection() const = 0;
   virtual int Insert(const wxString&   item , int  pos ) = 0;
   virtual int Insert(const wxString&   item , int  pos , void * clientData ) = 0;
