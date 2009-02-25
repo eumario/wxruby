@@ -11,7 +11,17 @@ associated control.
 
 Validators can be plugged into controls dynamically.
 
-To specify a default, `null' validator, use the constant @Wx::DEFAULT_VALIDATOR@.
+To specify a default, `null' validator, use the constant
+@Wx::DEFAULT_VALIDATOR@.
+
+When a Validator is added to a Window, its *clone* method is
+called. This should return an identical copy of the Validator; you may
+need to provide your own implementation if state / setting variables
+need to be copied.
+
+To filter keyboard input as the user enters it, define an evt_char
+handler, which will receive a "KeyEvent":keyevent.html for each key
+press. To accept the key press, call *skip* on the event. 
 
 h2. Derived from
 
