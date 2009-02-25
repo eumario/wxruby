@@ -36,5 +36,6 @@ CLIENT_DATA_FEATURES(wxComboBox);
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"
 %import "include/wxControl.h"
+%import "include/wxControlWithItems.h"
 
 %include "include/wxComboBox.h"
