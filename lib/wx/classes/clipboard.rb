@@ -1,8 +1,4 @@
 class Wx::Clipboard
-  # See if we like these better
-  alias :place :set_data
-  alias :fetch :get_data
-
   class << self
     # This is provided internally by the SWIG interface file, but all
     # public access should be via Clipboard.open; see below
@@ -53,4 +49,8 @@ class Wx::Clipboard
     @@__clip_data = [ the_data ]
     wx_set_data.bind(self).call(the_data)
   end
+
+  # Aliases, more clearly expressive?
+  alias :place :set_data
+  alias :fetch :get_data
 end
