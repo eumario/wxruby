@@ -41,6 +41,7 @@ end
 
 class TestBitmapData < Test::Unit::TestCase
   def test_bitmap_data
+    # FIXME - this doesn't appear to load correctly on MingW-Ruby 1.9
     bmp = Wx::Bitmap.new('samples/minimal/mondrian.png')
     height = bmp.height
     width  = bmp.width
@@ -59,8 +60,9 @@ class TestBitmapData < Test::Unit::TestCase
     d_obj_2 = Wx::BitmapDataObject.new
     Wx::Clipboard.open do | clip |
       assert clip.supported? Wx::DF_BITMAP
-      clip.fetch d_obj
+      clip.fetch d_obj_2
     end
+
     out_bmp = d_obj_2.bitmap
     assert out_bmp.ok?, "Fetched out bitmap"
     assert_equal height, out_bmp.height
@@ -68,7 +70,7 @@ class TestBitmapData < Test::Unit::TestCase
   end
 end
 
-class TestDataObjSimple < Test::Unit::TestCase
+class TestDataObjectSimple < Test::Unit::TestCase
   # A simple class supporting one format only - text
   class MyDataObjectSimple < Wx::DataObjectSimple
     attr_accessor :contents
@@ -107,10 +109,10 @@ class TestDataObjSimple < Test::Unit::TestCase
 end
 
 class TestDataObjectComposite < Test::Unit::TestCase
-  # FIXME generally
   def test_data_object_composite
     d_obj = Wx::DataObjectComposite.new
     d_obj.add( Wx::TextDataObject.new("THE TEXT") )
+    # FIXME - this doesn't appear to load correctly on MingW-Ruby 1.9
     bmp = Wx::Bitmap.new('samples/minimal/mondrian.png')
 
     d_obj.add( Wx::BitmapDataObject.new(bmp) )
@@ -226,9 +228,11 @@ Wx::App.run do
     MiniTest::Unit.new.run
   else
     Test::Unit::UI::Console::TestRunner.run(TestTextData)
-    Test::Unit::UI::Console::TestRunner.run(TestDataObjectComposite)
+    Test::Unit::UI::Console::TestRunner.run(TestBitmapData)
     Test::Unit::UI::Console::TestRunner.run(TestDataObject)
+    Test::Unit::UI::Console::TestRunner.run(TestDataObjectComposite)
+    Test::Unit::UI::Console::TestRunner.run(TestDataObjectSimple)
   end
   false
 end
-exit!
+
