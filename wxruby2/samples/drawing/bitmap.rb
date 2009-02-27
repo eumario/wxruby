@@ -16,12 +16,14 @@ require 'wx'
 # representation of an image. This is the class that must be used to
 # display an image, but see also Wx::Image, which allows a much wider
 # range of manipulations (such as rescaling) and writing to files.
+
+
 class ImageFrame < Wx::Frame
   def initialize
     super(nil, :title => 'Simple image demo')
 
     # Load a PNG bitmap from a file for drawing
-    img_file = File.join( File.dirname(__FILE__), 'paperclip.png')
+    img_file = File.join( File.dirname(__FILE__), 'wxruby-logo.png')
     @bitmap = Wx::Bitmap.new(img_file)
 
     # Set up the drawing to be done when the frame needs re-painting
@@ -30,7 +32,8 @@ class ImageFrame < Wx::Frame
 
   def on_paint
     paint do | dc |
-      dc.draw_bitmap(@bitmap, 0, 0, false)
+      # Draw the bitmap at offset 10px, 10px, with no transparency
+      dc.draw_bitmap(@bitmap, 10, 10, false)
     end
   end
 end
