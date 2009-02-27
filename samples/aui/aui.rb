@@ -169,37 +169,37 @@ class SettingsPanel < Wx::Panel
 
 
   def update_colours()
-    art = @frame.get_dock_art
+    art = @frame.dock_art
 
-    col = art.get_color(Wx::AUI_DOCKART_BACKGROUND_COLOUR)
-    @bckg_colour.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_BACKGROUND_COLOUR)
+    @bckg_colour.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_SASH_COLOUR)
-    @sash_colour.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_SASH_COLOUR)
+    @sash_colour.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_INACTIVE_CAPTION_COLOUR)
-    @capt_colour.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_INACTIVE_CAPTION_COLOUR)
+    @capt_colour.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR)
-    @capt_gradnt.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_INACTIVE_CAPTION_GRADIENT_COLOUR)
+    @capt_gradnt.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR)
-    @capt_text.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_INACTIVE_CAPTION_TEXT_COLOUR)
+    @capt_text.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_ACTIVE_CAPTION_COLOUR)
-    @acap_colour.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_ACTIVE_CAPTION_COLOUR)
+    @acap_colour.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR)
-    @acap_gradnt.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_ACTIVE_CAPTION_GRADIENT_COLOUR)
+    @acap_gradnt.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR)
-    @acap_text.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_ACTIVE_CAPTION_TEXT_COLOUR)
+    @acap_text.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_SASH_COLOUR)
-    @brdr_colour.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_SASH_COLOUR)
+    @brdr_colour.bitmap_label = ( create_colour_bitmap(col) )
 
-    col = art.get_color(Wx::AUI_DOCKART_GRIPPER_COLOUR)
-    @grip_colour.set_bitmap_label( create_colour_bitmap(col) )
+    col = art.colour(Wx::AUI_DOCKART_GRIPPER_COLOUR)
+    @grip_colour.bitmap_label = ( create_colour_bitmap(col) )
   end
 
   def on_pane_border_size(event)
