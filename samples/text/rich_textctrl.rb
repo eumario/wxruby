@@ -46,10 +46,11 @@ class RichTextFrame < Wx::Frame
     @cur_file = ""
     @cur_filter_index = 1 # XML file
 
-    system_font = Wx::SystemSettings.font(Wx::SYS_ANSI_VAR_FONT)
-    system_font.point_size = 18
-
-    @editor.font = system_font
+    # Use the system's standard sans-serif font at 18 point
+    @editor.font = Wx::Font.new( 18, 
+                                 Wx::FONTFAMILY_SWISS,
+                                 Wx::FONTSTYLE_NORMAL,
+                                 Wx::FONTWEIGHT_NORMAL )
 
     initialize_text
 
