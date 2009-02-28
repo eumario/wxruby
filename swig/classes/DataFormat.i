@@ -30,7 +30,7 @@ GC_MANAGE_AS_OBJECT(wxDataFormat);
 // lib/wx/classes/dataformat.rb) and the constants exposed as
 // Wx::DATA_FORMAT_ID_XXX, below.
 
-%typemap(in) wxDataFormatId "$1 = static_cast<wxDataFormatId>NUM2INT($input);"
+%typemap(in) wxDataFormatId "$1 = static_cast<wxDataFormatId>(NUM2INT($input));"
 %typemap(typecheck) wxDataFormatId "$1 = ( TYPE($input) == T_FIXNUM );"
 %typemap(out) wxDataFormatId, NativeFormat "$result = INT2NUM($1);"
 
