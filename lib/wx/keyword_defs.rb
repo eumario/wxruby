@@ -227,7 +227,8 @@ end
 Wx::define_keyword_ctors('DirDialog') do
   wx_ctor_params :message => 'Choose a directory'
   wx_ctor_params :default_path => ''
-  wx_ctor_params :style, :pos, :size, :name => 'wxDirCtrl'
+  wx_ctor_params :style => Wx::DD_DEFAULT_STYLE
+  wx_ctor_params :pos, :size, :name => 'wxDirCtrl'
 end
 
 # wxFileDialog 	File selector dialog
