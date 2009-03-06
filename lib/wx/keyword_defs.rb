@@ -236,7 +236,8 @@ Wx::define_keyword_ctors('FileDialog') do
   wx_ctor_params :default_dir  => ''
   wx_ctor_params :default_file => ''
   wx_ctor_params :wildcard => '*.*'
-  wx_ctor_params :style, :pos
+  wx_ctor_params :style => Wx::FD_DEFAULT_STYLE
+  wx_ctor_params :pos, :size, :name => 'filedlg'
 end
 
 # wxFindReplaceDialog 	Text search/replace dialog

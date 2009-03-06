@@ -18,6 +18,8 @@ enum
     wxFD_PREVIEW           = 0x0100
 };
 
+%constant const int wxFD_DEFAULT_STYLE = wxFD_OPEN;
+
 %typemap(in,numinputs=0) wxArrayString &(wxArrayString sel)
 {
 	$1 = &sel;
