@@ -64,7 +64,6 @@ def create_gem_tasks
         self.platform.cpu = $osx_split_gem_name
       end
     end
-    Gem::manage_gems()
     Gem::Builder.new(this_gemspec).build
   end
 end
