@@ -37,6 +37,7 @@ $base_gemspec = Gem::Specification.new do | spec |
   spec.require_path = 'lib'
   # Platform specific binaries are added in later
   spec.files        = FileList[ 'lib/**/*' ].to_a +
+                      FileList[ 'art/**/*' ].to_a +
                       FileList[ 'samples/**/*' ].to_a +
                       FileList[ 'README', 'INSTALL', 'LICENSE' ].to_a
 
@@ -77,7 +78,9 @@ def create_package_tasks
     pkg_files.include('swig/**/*')
     pkg_files.include('tests/**/*')
     pkg_files.include('rake/**/*')
+    pkg_files.include('art/**/*')
     pkg_files.include('samples/**/*')
+    pkg_files.include('doc/lib/**/*.rb')
     pkg_files.include('doc/**/*.txtl', 'doc/wxruby.css')
   end
 end
