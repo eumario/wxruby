@@ -1,31 +1,17 @@
-// wxFileDialog.h
-// This file was automatically generated
-// by extractxml.rb, part of the wxRuby project
-// Do not make changes directly to this file!
-
 #if !defined(_wxFileDialog_h_)
 #define _wxFileDialog_h_
 class wxFileDialog : public wxDialog
 {
 public:
-	/**
-	 * \brief Constructor. Use   to show the dialog.
-  Previous versions of wxWindows used   by default
-under MS Windows which allowed the program to simply remember the last
-directory where user selected the files to open/save. This (desired)
-functionality must be implemented in the program itself now (manually remember
-the last path used and pass it to the dialog the next time it is called) or
-by using this flag. 
-	 * \param wxWindow*   
-	 * \param const wxString&   
-	 * \param const wxString&   
-	 * \param const wxString&   
-	 * \param const wxString&   
-	 * \param long   
-	 * \param const wxPoint&   
-	*/
-
-   wxFileDialog(wxWindow*  parent , const wxString&  message = wxT("Choose"), const wxString&  defaultDir = wxT(""), const wxString&  defaultFile = wxT(""), const wxString&  wildcard = wxT("*.*"), long  style = 0, const wxPoint&  pos = wxDefaultPosition) ;
+  wxFileDialog(wxWindow* parent, 
+               const wxString& message = wxT("Choose a file"), 
+               const wxString& defaultDir = wxT(""), 
+               const wxString& defaultFile = wxT(""), 
+               const wxString& wildcard = wxT("*.*"), 
+               long  style = wxFD_DEFAULT_STYLE, 
+               const wxPoint& pos = wxDefaultPosition,
+               const wxSize& sz = wxDefaultSize,
+               const wxString& name = wxFileDialogNameStr) ;
 	/**
 	 * \brief Destructor. 
 	*/
