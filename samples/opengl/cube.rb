@@ -14,13 +14,25 @@ include Glu
 
 class CubeFrame < Wx::Frame
  def initialize(title)
-   super(nil, :title => title, :size => [ 400, 300 ])
+   super(nil, :title => title, :size => [ 600, 400 ])
+
+   sizer = Wx::VBoxSizer.new
+
    attrib = [Wx::GL_RGBA, Wx::GL_DOUBLEBUFFER, Wx::GL_DEPTH_SIZE, 24]
    @canvas = Wx::GLCanvas.new(self, -1, [-1, -1], [-1, -1],
                               Wx::FULL_REPAINT_ON_RESIZE, 'GLCanvas', attrib)
    @canvas.evt_paint { @canvas.paint { render } }
    @canvas.evt_key_down {|evt| on_key_down(evt.get_key_code) }
-   @rotate = [0.0, 0.0, 0.0]
+   @rotate = [30.0, 0.0, -30.0]
+
+   sizer.add_item @canvas, :proportion => 1, :flag => Wx::EXPAND
+
+   text = Wx::StaticText.new(self, :label => "Use Up/Down/Left/Right keys to rotate the cube")
+  
+   sizer.add_item text
+   self.sizer = sizer
+   self.show
+   @canvas.set_focus
  end
 
  def on_key_down(key)
@@ -58,7 +70,7 @@ class CubeFrame < Wx::Frame
    glRotate(@rotate[2], 0.0, 0.0, 1.0)
    glBegin(GL_TRIANGLES)
      #left
-     glColor3d(1.0, 1.0, 1.0)
+     glColor3d(1.0, 1.0, 0.0) # yellow
      glVertex3d(-1.0, 1.0, 1.0)
      glVertex3d(-1.0, 1.0,-1.0)
      glVertex3d(-1.0,-1.0, 1.0)
@@ -66,7 +78,7 @@ class CubeFrame < Wx::Frame
      glVertex3d(-1.0, 1.0,-1.0)
      glVertex3d(-1.0,-1.0,-1.0)
      #right
-     glColor3d(0.0, 1.0, 1.0)
+     glColor3d(0.0, 1.0, 0.0) # green
      glVertex3d( 1.0,-1.0, 1.0)
      glVertex3d( 1.0,-1.0,-1.0)
      glVertex3d( 1.0, 1.0, 1.0)
@@ -74,7 +86,7 @@ class CubeFrame < Wx::Frame
      glVertex3d( 1.0,-1.0,-1.0)
      glVertex3d( 1.0, 1.0,-1.0)
      #up
-     glColor3d(0.0, 0.0, 1.0)
+     glColor3d(0.0, 0.0, 1.0) # blue
      glVertex3d(-1.0, 1.0, 1.0)
      glVertex3d(-1.0,-1.0, 1.0)
      glVertex3d( 1.0, 1.0, 1.0)
@@ -82,7 +94,7 @@ class CubeFrame < Wx::Frame
      glVertex3d(-1.0,-1.0, 1.0)
      glVertex3d( 1.0,-1.0, 1.0)
      #down
-     glColor3d(1.0, 0.0, 0.0)
+     glColor3d(0.0, 1.0, 1.0) # cyan
      glVertex3d(-1.0,-1.0,-1.0)
      glVertex3d(-1.0, 1.0,-1.0)
      glVertex3d( 1.0,-1.0,-1.0)
@@ -90,7 +102,7 @@ class CubeFrame < Wx::Frame
      glVertex3d(-1.0, 1.0,-1.0)
      glVertex3d( 1.0, 1.0,-1.0)
      #front
-     glColor3d(1.0, 1.0, 0.0)
+     glColor3d(1.0, 0.0, 0.0) # red
      glVertex3d(-1.0,-1.0, 1.0)
      glVertex3d(-1.0,-1.0,-1.0)
      glVertex3d( 1.0,-1.0, 1.0)
@@ -98,7 +110,7 @@ class CubeFrame < Wx::Frame
      glVertex3d(-1.0,-1.0,-1.0)
      glVertex3d( 1.0,-1.0,-1.0)
      #back
-     glColor3d(0.0, 1.0, 0.0)
+     glColor3d(1.0, 0.0, 1.0) # magenta
      glVertex3d( 1.0, 1.0, 1.0)
      glVertex3d( 1.0, 1.0,-1.0)
      glVertex3d(-1.0, 1.0, 1.0)
@@ -113,5 +125,4 @@ end
 Wx::App.run do
  self.app_name = 'GLCanvas Cube'
  frame = CubeFrame.new("OpenGL Canvas wxRuby App")
- frame.show
 end
