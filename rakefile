@@ -36,7 +36,8 @@ when /^1\.9/
 else
   raise "This version of Ruby (#{RUBY_VERSION}) is not supported"
 end
-SWIG_MAXIMUM_VERSION = '1.3.99' # Doesn't currently need to be checked
+# SWIG 1.3.39 introduced changes incompatible with swig/fixmodule.rb etc
+SWIG_MAXIMUM_VERSION = '1.3.38'
 
 # SOURCE FILE GROUPS
 # THE UNADORNED NAMES OF ALL THE WX OBJECT CLASSES TO BE BUILT
