@@ -553,8 +553,7 @@ Wx::define_keyword_ctors('HtmlListBox') do
 end
 
 Wx::define_keyword_ctors('DatePickerCtrl') do
-  wx_ctor_params :id, :dt => Time.now
-  wx_ctor_params :pos, :size, :style, :validator, :name => 'dateCtrl'
+  wx_ctor_params :id, :dt, :pos, :size, :style, :validator, :name => 'dateCtrl'
 end
 
 Wx::define_keyword_ctors('RichTextCtrl') do

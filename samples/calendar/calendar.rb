@@ -17,6 +17,11 @@ Calendar_Cal_Year = 204
 Calendar_Cal_SeqMonth = 205
 Calendar_Cal_SurroundWeeks = 206
 
+Calendar_DatePicker_AskDate = 300
+Calendar_DatePicker_ShowCentury = 301
+Calendar_DatePicker_DropDown = 302
+Calendar_DatePicker_AllowNone = 303
+Calendar_DatePicker_StartWithNone = 304
 
 class MyCalendar < CalendarCtrl
   def initialize(parent, display_frame, initial_date, calendar_flags)
@@ -77,6 +82,9 @@ class MyFrame < Frame
   	evt_menu Wx::ID_EXIT, :on_quit
   	evt_menu Wx::ID_ABOUT, :on_about
 
+  	evt_menu Calendar_DatePicker_AskDate, :on_ask_date
+  	evt_update_ui Calendar_DatePicker_StartWithNone, :on_update_ui_start_with_none
+
   	evt_menu Calendar_Cal_Monday, :on_cal_monday
   	evt_menu Calendar_Cal_Holidays, :on_cal_holidays
   	evt_menu Calendar_Cal_Special, :on_cal_special
@@ -125,15 +133,26 @@ class MyFrame < Frame
                      "Allow changing the year in the calendar",
                      ITEM_CHECK)
 
+    menu_date = Menu.new
+    menu_date.append_check_item(Calendar_DatePicker_ShowCentury, "Al&ways show century")
+    menu_date.append_check_item(Calendar_DatePicker_DropDown, "Use &drop down control")
+    menu_date.append_check_item(Calendar_DatePicker_AllowNone, "Allow &no date")
+    menu_date.append_check_item(Calendar_DatePicker_StartWithNone, "Start &with no date")
+    menu_date.append_separator
+    menu_date.append(Calendar_DatePicker_AskDate, "&Choose date...\tCtrl-D", "Show dialog with DatePickerCtrl")
+
     # now append the freshly created menu to the menu bar...
     menu_bar = MenuBar.new
     menu_bar.append(menu_file, "&File")
     menu_bar.append(menu_cal, "&Calendar")
+    menu_bar.append(menu_date, "&Date picker")
 
     menu_bar.check(Calendar_Cal_Monday, TRUE)
     menu_bar.check(Calendar_Cal_Holidays, TRUE)
     menu_bar.check(Calendar_Cal_Month, TRUE)
     menu_bar.check(Calendar_Cal_Year, TRUE)
+
+    menu_bar.check(Calendar_DatePicker_ShowCentury, TRUE)
 
     # ... and attach self menu bar to the frame
     self.menu_bar = menu_bar
@@ -201,6 +220,36 @@ class MyFrame < Frame
     event.enable( get_menu_bar().is_checked(Calendar_Cal_Month))
   end
 
+  def on_update_ui_start_with_none(event)
+    event.enable( get_menu_bar().is_checked(Calendar_DatePicker_AllowNone))
+  end
+
+  def on_ask_date(event)
+    dt = @calendar.get_date
+    
+    style = DP_DEFAULT
+    style |= DP_SHOWCENTURY if get_menu_bar.is_checked(Calendar_DatePicker_ShowCentury)
+    style |= DP_DROPDOWN if get_menu_bar.is_checked(Calendar_DatePicker_DropDown)
+    if get_menu_bar.is_checked(Calendar_DatePicker_AllowNone)
+      style |= DP_ALLOWNONE
+      dt = nil if get_menu_bar.is_checked(Calendar_DatePicker_StartWithNone)
+    end
+    
+    dlg = MyDialog.new(self, dt, style)
+    if dlg.show_modal == ID_OK
+      if dt = dlg.get_date
+        today = Time.now
+        if dt.day == today.day && dt.month == today.month
+          message_box("Happy birthday", "Calendar Sample")
+        end
+        @calendar.set_date(dt)
+        log_status("Changed the date to your input")
+      else
+        log_status("No date entered")
+      end
+    end
+  end
+
   def toggle_cal_style(on,flag)
     style = @calendar.get_window_style_flag
     date = @calendar.date
@@ -244,6 +293,49 @@ class MyFrame < Frame
   
 end
 
+class MyDialog < Dialog
+  def initialize(parent, dt, picker_style)
+    super(parent, :style => DEFAULT_DIALOG_STYLE|RESIZE_BORDER)
+    sizer_buttons = StdDialogButtonSizer.new
+    sizer_buttons.add_button(Button.new(self, ID_OK))
+    sizer_buttons.add_button(Button.new(self, ID_CANCEL))
+    sizer_buttons.realize
+    
+    sizer_text = BoxSizer.new(HORIZONTAL)
+    sizer_text.add(StaticText.new(self, ID_ANY, "Date in ISO format:"), 0, ALL|ALIGN_CENTRE_VERTICAL, 10)
+    @text = TextCtrl.new(self)
+    sizer_text.add(@text, 1, ALL|ALIGN_CENTRE_VERTICAL|EXPAND, 10)
+    
+    sizer_top = BoxSizer.new(VERTICAL)
+    sizer_top.add(StaticText.new(self, ID_ANY, "Enter your birthday date (not before 20th century):"), 0, ALL, 10)
+
+    @picker = DatePickerCtrl.new(self, ID_ANY, dt, DEFAULT_POSITION, DEFAULT_SIZE, picker_style)
+    @picker.set_range(DateTime.new(1900, 1, 1), nil)
+    sizer_top.add(@picker, 0, ALL|EXPAND, 10)
+    sizer_top.add_stretch_spacer(1)
+    sizer_top.add(sizer_text, 0, EXPAND)
+    
+    sizer_top.add(sizer_buttons, 0, ALL|ALIGN_CENTER, 10)
+    
+    set_sizer_and_fit(sizer_top)
+    layout
+    
+    evt_date_changed(@picker, :on_date_changed)
+  end
+
+  def get_date
+    @picker.get_value
+  end
+
+  def on_date_changed(event)
+    if dt = event.get_date
+      @text.set_value(dt.to_s)
+    else
+      @text.set_value("")
+    end
+  end
+
+end
 
 class RbApp < App
   def on_init()
