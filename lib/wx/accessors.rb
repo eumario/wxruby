@@ -47,9 +47,7 @@ module WxRubyStyleAccessors
     if respond_to?(meth)
       send(meth, *args)
     else
-      e = NoMethodError.new("undefined method '#{sym}' for #{self.inspect}")
-      e.set_backtrace(caller)
-      Kernel.raise e
+      super
     end
   end
 end
