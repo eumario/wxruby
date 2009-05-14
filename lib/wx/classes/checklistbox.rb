@@ -11,8 +11,9 @@ class Wx::CheckListBox
 
   # Call method in ControlWithItems, then sync item data
   def append(item, data = nil)
-    super(item)
+    i = super(item)
     __wx_item_data[count - 1] = data
+    return i
   end
 
   # Call method in ControlWithItems, then sync item data
