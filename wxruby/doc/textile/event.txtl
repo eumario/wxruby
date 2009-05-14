@@ -40,18 +40,29 @@ h2. Methods
 
 </div>
 
-
-
 h3(#Event_new). Event.new
 
-  *Event.new*(%(arg-type)Integer% id = 0,  %(arg-type)"EventType":eventtype.html% eventType = @EVT_NULL@)
+  *Event.new*(%(arg-type)Integer% eventType = @EVT_NULL@, 
+                      %(arg-type)Integer% id = 0,   
+                      %(arg-type)Integer% propagation_level = 0)
 
-Constructor. Should not need to be used directly by an application.
+Constructor. Should not need to be used directly by an application, but
+will need to be called via @super@ by custom event classes written in Ruby. 
+
+The EventType is the unique integer identifier of a particular
+event. See below. The _id_ is an optional field which may be used to
+identify, for example, the window source of the event.
+
+The _propagation_level_ controls whether the event is passed upwards to parent
+event handlers, or is just dealt with by the first event handler to
+receive it. It can have the values 0 (or @Wx::EVENT_PROPAGATION_NONE@) (only
+deal with once,) @Wx::EVENT_PROPAGATION_MAX@ (propagate to all
+ancestors), or an integer of how many steps to send it. So a value of
+@1@ would pass the event to the parent handler, but no others.  Note that by default Events don't propagate, but CommandEvents do.
 
 h3(#Event_neweventtype). Event.new_event_type
 
   Integer event_id *Event.new_event_type*()
-
 
 Returns a new, unique identifier for use by a custom user-defined event
 type.
@@ -67,27 +78,12 @@ h3(#Event_clone). Event#clone
 
  "Event":event.html *clone*()
 
-Returns a copy of the event.
-
-Any event that is posted to the Widgets event system for later action (via
-"EvtHandler#add_pending_event":evthandler.html#EvtHandler_addpendingevent or
-"PostEvent":postevent.html) must implement this method. All Widgets
-events fully implement this method, but any derived events implemented by the
-user should also implement this method just in case they (or some event
-derived from them) are ever posted.
-
-All Widgets events implement a copy constructor, so the easiest way of
-implementing the Clone function is to implement a copy constructor for
-a new event (call it MyEvent) and then define the Clone function like this:
-
-
-     Event *Clone(void) const { return new MyEvent(*this); }
- 
-
+Returns a copy of the event. Important internally, but should not need
+to be called in user code.
 
 h3(#Event_geteventobject). Event#get_event_object
 
- "Object":object.html *get_event_object*()
+ Object *get_event_object*()
 
 Returns the object (usually a window) associated with the
 event, if any.

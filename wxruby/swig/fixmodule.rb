@@ -49,6 +49,19 @@ def fixmodule(filename)
         line = result.join("\n")
         found_swig_class = true
       end
+
+      # Fix for Event.i - because it is implemented with a custom Ruby
+      # subclass, need to make this subclass SWIG info available under
+      # the normal name "SWIGTYPE_p_wxEvent" as it's referenced by many
+      # other classes.
+      if core_name == 'Event' or core_name == 'CommandEvent'
+        if line[/SWIG_TypeClientData\(SWIGTYPE_p_wxRuby(Command)?Event/]
+          line = line + 
+                  "  // Inserted by fixmodule.rb\n" +
+                 line.sub(/SWIGTYPE_p_wxRuby(Command)?Event/, 
+                           "SWIGTYPE_p_wx\\1Event")
+        end
+      end
       
       # Ugly: special fixes for TreeCtrl - these macros and extra funcs
       # are needed to allow user-defined sorting to work
