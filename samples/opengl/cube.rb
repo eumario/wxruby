@@ -19,20 +19,23 @@ class CubeFrame < Wx::Frame
    sizer = Wx::VBoxSizer.new
 
    attrib = [Wx::GL_RGBA, Wx::GL_DOUBLEBUFFER, Wx::GL_DEPTH_SIZE, 24]
-   @canvas = Wx::GLCanvas.new(self, -1, [-1, -1], [-1, -1],
-                              Wx::FULL_REPAINT_ON_RESIZE, 'GLCanvas', attrib)
-   @canvas.evt_paint { @canvas.paint { render } }
-   @canvas.evt_key_down {|evt| on_key_down(evt.get_key_code) }
-   @rotate = [30.0, 0.0, -30.0]
-
+   @canvas = Wx::GLCanvas.new(self, -1, attrib, [-1, -1], [-1, -1],
+                              Wx::FULL_REPAINT_ON_RESIZE)
+   @context = Wx::GLContext.new(@canvas)
    sizer.add_item @canvas, :proportion => 1, :flag => Wx::EXPAND
 
    text = Wx::StaticText.new(self, :label => "Use Up/Down/Left/Right keys to rotate the cube")
-  
    sizer.add_item text
+
    self.sizer = sizer
    self.show
+
    @canvas.set_focus
+   @canvas.evt_key_down {|evt| on_key_down(evt.get_key_code) }
+
+   @canvas.evt_paint { @canvas.paint { render } }
+   @rotate = [30.0, 0.0, -30.0]
+
  end
 
  def on_key_down(key)
@@ -50,10 +53,10 @@ class CubeFrame < Wx::Frame
  end
 
  def render
-   @canvas.set_current
-   sz = @canvas.get_size
-   w = sz.get_width
-   h = sz.get_height
+   @canvas.current = @context
+   sz = @canvas.size
+   w = sz.width
+   h = sz.height
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
    glEnable(GL_DEPTH_TEST)
    glViewport(0, 0, w, h)

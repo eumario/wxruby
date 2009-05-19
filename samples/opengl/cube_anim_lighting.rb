@@ -26,63 +26,58 @@ class CubeFrame < Wx::Frame
     sizer = Wx::VBoxSizer.new
 
     attrib = [Wx::GL_RGBA, Wx::GL_DOUBLEBUFFER, Wx::GL_DEPTH_SIZE, 24]
-   
-    canvas_size = [ 600, 600 ]
-    @canvas = Wx::GLCanvas.new(self, -1, [-1, -1], canvas_size,
-      Wx::FULL_REPAINT_ON_RESIZE, 'GLCanvas', attrib)
-                              
+    # Use of keyword arguments for the GLCanvas initializer
+    @canvas = Wx::GLCanvas.new(self, :attrib_list => attrib, :size => [600, 600])
+    @context = Wx::GLContext.new(@canvas)
+    sizer.add_item @canvas, :proportion => 1, :flag => Wx::EXPAND
+
+    text = Wx::StaticText.new(self, :label => "Use Up/Down/Left/Right keys to change rotation direction")
+    sizer.add_item text
+
+    self.sizer = sizer
+    sizer.fit(self)
+
+    self.show
+    # A GL context can be set to a GL canvas only if the latter has been shown
+    opengl_init()
+    opengl_resize()
+
+    # set the focus on the GL canvas for key press
+    @canvas.set_focus
+    @canvas.evt_key_down {|evt| on_key_down(evt.get_key_code) }
+
     @canvas.evt_paint { @canvas.paint { opengl_render } }
     @canvas.evt_size do |e|
       opengl_resize
       e.skip()
     end
-   
-    @canvas.evt_key_down {|evt| on_key_down(evt.get_key_code) }
+
+    # set up the animation
     @rotate = [15.0, -30.0, 0.0]
-
-    sizer.add_item @canvas, :proportion => 1, :flag => Wx::EXPAND
-
-    text = Wx::StaticText.new(self, :label => "Up/Down keys : manual rotation - Left/Right keys : animation direction")
-  
-    sizer.add_item text
-    self.sizer = sizer
-    sizer.fit(self)
-    self.show
-
-    opengl_init()
-    opengl_resize()
-   
-    # set the focus on the GL canvas for key press
-    @canvas.set_focus
-
-    # start the animation
-    @animation_direction = -2.0
-    timer = Wx::Timer.new(self)
-    timer.start(25) # start the timer with a period of 25 ms
-    evt_timer timer.id, :animate
+    @anim_step_x_axis = -1.0
+    @anim_step_y_axis = -2.0
+    anim_timer = Wx::Timer.new(self)
+    anim_timer.start(25) # start the timer with a period of 25 ms
+    evt_timer anim_timer.id, :animate
     
-    # Wx::Timer.every(25) do
-      # animate
-    # end
-
   end
 
   def animate
-    @rotate[1] += @animation_direction
+    @rotate[0] += @anim_step_x_axis
+    @rotate[1] += @anim_step_y_axis
     opengl_render()
   end
-
 
   def on_key_down(key)
     case key
     when Wx::K_UP
-      @rotate[0] -= 2.0
+      @anim_step_x_axis = -1.0
     when Wx::K_DOWN
-      @rotate[0] += 2.0
+      @anim_step_x_axis = 1.0
     when Wx::K_LEFT
-      @animation_direction = -2.0
+      @anim_step_y_axis = -2.0
     when Wx::K_RIGHT
-      @animation_direction = 2.0
+      @anim_step_y_axis = 2.0
     end
     opengl_render()
   end
@@ -90,7 +85,7 @@ class CubeFrame < Wx::Frame
 
   def opengl_init
     # initialize the GL rendering
-    @canvas.set_current
+    @canvas.current = @context
 
     mat_specular = [1.0, 1.0, 1.0, 1.0]
     mat_shininess = [90.0]
@@ -117,7 +112,7 @@ class CubeFrame < Wx::Frame
   end
  
   def opengl_resize
-    @canvas.set_current
+    @canvas.current = @context
     sz = @canvas.size
     w = sz.width
     h = sz.height
@@ -129,7 +124,7 @@ class CubeFrame < Wx::Frame
   end
 
   def opengl_render
-    @canvas.set_current
+    @canvas.current = @context
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
    
