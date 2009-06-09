@@ -58,7 +58,7 @@ class CubeFrame < Wx::Frame
     @anim_step_y_axis = -2.0
     anim_timer = Wx::Timer.new(self)
     anim_timer.start(25) # start the timer with a period of 25 ms
-    evt_timer anim_timer.id, :animate
+    evt_timer anim_timer, :animate
     
   end
 
