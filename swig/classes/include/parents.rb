@@ -117,6 +117,7 @@ $parents = {
     'wxGCDC' => 'wxDC',
     'wxGDIObject' => 'wxObject',
     'wxGLCanvas' => 'wxWindow',
+    'wxGLContext' => 'wxObject',
     'wxGauge' => 'wxControl',
     'wxGenericDirCtrl' => 'wxControl',
     'wxGenericValidator' => 'wxValidator',
