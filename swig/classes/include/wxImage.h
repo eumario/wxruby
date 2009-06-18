@@ -118,9 +118,7 @@ class wxImage : public wxObject
   wxImage Scale(int width, int height, 
                 int quality = wxIMAGE_QUALITY_NORMAL) const;
   void SetAlpha(unsigned char* alpha = NULL, bool static_data = false);
-// TODO : Typemap and overloaded methods do not work well with SWIG
-// The overloaded SetAlpha method is hidden at the moment.
-//  void SetAlpha(int  x, int y, unsigned char alpha);
+  void SetAlpha(int  x, int y, unsigned char alpha);
   void SetData(unsigned char* data ) ;
   void SetMask(bool hasMask = true) ;
   void SetMaskColour(unsigned char red, 

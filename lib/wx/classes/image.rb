@@ -1,6 +1,11 @@
 # A platform-independent image; can be manipulated more extensively than
 # Bitmap, but must be converted to a Bitmap for drawing.
 class Wx::Image
+  
+  # alias for backward compatibility
+  alias :get_data :get_rgb_data
+  alias :set_data :set_rgb_data
+  
   # Load the type-guessing hash from Wx::Bitmap
   require 'wx/classes/bitmap'
   BITMAP_TYPE_GUESS = Wx::Bitmap::BITMAP_TYPE_GUESS

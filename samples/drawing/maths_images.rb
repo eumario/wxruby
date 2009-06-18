@@ -21,7 +21,7 @@ include Math
 # The sample demonstrates some uses of the Wx::Image class, a
 # platform-independent representation of an image which can be
 # manipulated (for example, resizing) and written to files in various
-# formats. It also shows how an image's data can be written directly, by
+# formats. It also shows how an image's rgb data can be written directly, by
 # using Array#pack.
 
 # A canvas that draws and displays a mathematically generated image
@@ -36,7 +36,7 @@ class MathsDrawing < Window
     super(parent)
     # Create a dummy image 
     @default_image = Image.new(1, 1)
-    @default_image.data = [255, 255, 255].pack('CCC')
+    @default_image.rgb_data = [255, 255, 255].pack('CCC')
     @img = @default_image
 
     @red   = lambda { | x, y | 1 }
@@ -88,7 +88,7 @@ class MathsDrawing < Window
     end
 
     start_time = Time.now
-    # The string holding raw image data
+    # The string holding raw rgb data
     data = ''
     x_factor = size_x.to_f
     y_factor = size_y.to_f
@@ -105,7 +105,7 @@ class MathsDrawing < Window
       end
     end
     img = Image.new(size_x, size_y)
-    img.data = data
+    img.rgb_data = data
     @render_time = Time.now - start_time
     img
   end

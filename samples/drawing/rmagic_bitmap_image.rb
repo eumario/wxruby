@@ -48,11 +48,11 @@ class ImageFrame < Wx::Frame
     wx_img = Wx::Image.new(magick_img.columns, magick_img.rows)
 
     # Set the image data
-    wx_img.data = magick_img.to_blob { self.format = "RGB" }
+    wx_img.rgb_data = magick_img.to_blob { self.format = "RGB" }
 
     # Set the alpha (transparency) if any
     if magick_img.alpha?
-      wx_img.alpha = magick_img.to_blob { self.format = "A" }
+      wx_img.alpha_data = magick_img.to_blob { self.format = "A" }
     end
 
     wx_img
