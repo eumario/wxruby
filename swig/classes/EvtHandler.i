@@ -123,7 +123,6 @@ public:
 	else 
 	  rb_raise(rb_eTypeError, "Invalid specifier for event type");
 
-
 	// TODO - enable switching off all handlers by type only - this
 	// version doesn't work if the first arg is wxID_ANY
 	if ( self->Disconnect(firstId, lastId, event_type))
