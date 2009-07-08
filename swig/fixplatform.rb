@@ -7,7 +7,7 @@
 #   platforms.
 #   I know it's ugly :-(
 
-require 'swig/classes/include/parents'
+require './swig/classes/include/parents'
 
 broken = ARGV[0]+".old"
 File.rename(ARGV[0], broken)
