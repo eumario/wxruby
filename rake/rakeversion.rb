@@ -1,6 +1,7 @@
 
 # The version file
-VERSION_FILE = File.join %w|lib wx version.rb |
+#VERSION_FILE = File.join %w|lib wx version.rb |
+VERSION_FILE = './lib/wx/version.rb'
 
 # Setting the version via an environment variable
 if ENV['WXRUBY_VERSION']

@@ -6,7 +6,7 @@
 # up to support VS2005 (version 8.0 of the runtime)
 
 # First, common Windows settings (shared with MingW)
-require 'rake/rakewindows'
+require './rake/rakewindows'
 
 # The name of the compiler and linker
 $cpp  = "cl.exe"

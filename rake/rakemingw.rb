@@ -4,7 +4,7 @@
 # This file provides settings for compiling with gcc on Windows (MingW)
 
 # First, common Windows settings
-require 'rake/rakewindows'
+require './rake/rakewindows'
 
 # The version by which the wxWidgets library files are identified
 WXVERSION = '2.8'

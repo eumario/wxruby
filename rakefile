@@ -9,10 +9,10 @@
 # WXRUBY_NO_UNICODE : try and build an ANSI version
 # WXRUBY_EXCLUDED   : exclude certian classes from being compiled, even if present
 
-require "rake/rakeutil"
+require "./rake/rakeutil"
 
 # Determine or set version of wxRuby library
-require 'rake/rakeversion'
+require './rake/rakeversion'
 
 # STANDARD BUILD DIRECTORIES
 SWIG_DIR = 'swig'
@@ -56,19 +56,19 @@ ALL_RUBY_LIB_FILES = FileList[ 'lib/**/*.rb' ]
 # Redcloth library is required to build the documentation, but not
 # required just to compile the lib.
 begin
-  require "rake/rakedocs"
+  require "./rake/rakedocs"
 rescue LoadError # documentation tasks will not be available
 end
 
 # Rubygems library is required to build a gem, but not just to compile
 # the lib.
 begin
-  require "rake/rakepackage"  
+  require "./rake/rakepackage"  
 rescue LoadError # package tasks will not be available
 end
 
-require 'rake/rakeconfigure'
-require "rake/rakewx"
+require './rake/rakeconfigure'
+require "./rake/rakewx"
 
 #############################
 # public tasks
