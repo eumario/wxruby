@@ -11,24 +11,20 @@ require 'wx'
 
 class TestPanel < Wx::Panel
   def initialize(parent, log)
-    super(parent, -1)
+    super(parent)
     
-    Wx::StaticText.new( self, -1, "This is a wxStaticBitmap.", 
-                        Wx::Point.new(45,5))
+    Wx::StaticText.new( self, :label => "This is a wxStaticBitmap.", :pos => [45,5])
     
     bmp_file1 = File.join(File.dirname(__FILE__), 'icons', 'test2.xpm')
-    Wx::StaticBitmap.new( self, -1, 
-                          Wx::Bitmap.new(bmp_file1, Wx::BITMAP_TYPE_XPM), 
-                          Wx::Point.new(80,25)) 
+    Wx::StaticBitmap.new( self, :label => Wx::Bitmap.new(bmp_file1), 
+                          :pos => [80,25]) 
     
     bmp_file2 = File.join(File.dirname(__FILE__), 'icons', 'robert.xpm')
-    Wx::StaticBitmap.new( self, -1, 
-                          Wx::Bitmap.new(bmp_file2,  Wx::BITMAP_TYPE_XPM), 
-                          Wx::Point.new(0, 100))
+    Wx::StaticBitmap.new( self, :label => Wx::Bitmap.new(bmp_file2), 
+                          :pos => [0, 100])
 
-    Wx::StaticText.new( self, -1, 
-                        "Hey, if Ousterhout (and Dunn) can do it, so can I.", 
-                        Wx::Point.new(100, 125) )
+    Wx::StaticText.new( self, :label => "Hey, if Ousterhout (and Dunn) can do it, so can I.", 
+                        :pos => [100, 125])
   end
 end
 
