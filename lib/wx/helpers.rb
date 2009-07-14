@@ -9,22 +9,31 @@ module Wx
   # possible argument. +mixed_args+ is an array which may optionally end
   # with a set of named arguments
   def self.args_as_list(param_spec, *mixed_args)
-    # get keyword arguments from mixed args if supplied, else empty
-    kwa = mixed_args.last.kind_of?(Hash) ? mixed_args.pop : {}
-    out_args = []
-    param_spec.each_with_index do | param, i |
-      if arg = mixed_args[i] # use the supplied list arg 
-        out_args << arg
-      elsif kwa.key?(param.name) # use the keyword arg
-        out_args << kwa[param.name]
-      else # use the default argument
-        out_args << param.default
+
+    begin
+      # get keyword arguments from mixed args if supplied, else empty
+      kwa = mixed_args.last.kind_of?(Hash) ? mixed_args.pop : {}
+      out_args = []
+      param_spec.each_with_index do | param, i |
+        if arg = mixed_args[i] # use the supplied list arg 
+          out_args << arg
+        elsif kwa.key?(param.name) # use the keyword arg
+          out_args << kwa.delete(param.name)
+        else # use the default argument
+          out_args << param.default
+        end
       end
-    end
-    out_args
-  rescue
-    Kernel.raise ArgumentError, 
+    rescue
+      Kernel.raise ArgumentError, 
                  "Bad arg composition of #{mixed_args.inspect}"
+    end
+
+    unless kwa.empty?
+      Kernel.raise ArgumentError, 
+                 "Unknown keyword argument(s) : #{kwa.keys.inspect}"
+    end
+
+    out_args
   end
 
   # Given an integer constant +int_const+, returns an array Wx constant
