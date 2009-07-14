@@ -3,7 +3,7 @@ h1(#wxstaticbitmap). Wx::StaticBitmap
 A static bitmap control displays a bitmap. It is meant for display of the
 small icons in the dialog boxes and is not meant to be a general purpose image
 display control. In particular, under Windows 9x the size of bitmap is limited
-to $64*64$ pixels and thus you should use your own control if you want to
+to 64x64 pixels and thus you should use your own control if you want to
 display larger images portably.
 
 h2. Derived from
@@ -38,9 +38,9 @@ h2. Methods
 * "StaticBitmap.new":#StaticBitmap_new
 * "StaticBitmap#create":#StaticBitmap_create
 * "StaticBitmap#get_bitmap":#StaticBitmap_getbitmap
-* "StaticIcon#get_icon":#StaticBitmap_geticon
+* "StaticBitmap#get_icon":#StaticBitmap_geticon
 * "StaticBitmap#set_bitmap":#StaticBitmap_setbitmap
-* "StaticIcon#set_icon":#StaticBitmap_seticon
+* "StaticBitmap#set_icon":#StaticBitmap_seticon
 
 </div>
 
@@ -94,7 +94,7 @@ h4. See also
 "StaticBitmap#set_bitmap":staticbitmap.html#StaticBitmap_setbitmap
 
 
-h3(#StaticBitmap_geticon). StaticIcon#get_icon
+h3(#StaticBitmap_geticon). StaticBitmap#get_icon
 
  "Icon":icon.html *get_icon*()
 
@@ -105,7 +105,7 @@ can't be retrieved from the control if a bitmap had been set (using
 
 h4. See also
 
-"StaticIcon#set_icon":staticicon.html#StaticIcon_seticon
+"StaticBitmap#set_icon":staticbitmap.html#StaticBitmap_seticon
 
 
 h3(#StaticBitmap_setbitmap). StaticBitmap#set_bitmap
@@ -123,7 +123,7 @@ h4. See also
 "StaticBitmap#get_bitmap":staticbitmap.html#StaticBitmap_getbitmap
 
 
-h3(#StaticBitmap_seticon). StaticIcon#set_icon
+h3(#StaticBitmap_seticon). StaticBitmap#set_icon
 
   *set_icon*(%(arg-type)"Icon":icon.html% label)
 
@@ -135,5 +135,5 @@ h4. Parameters
 
 h4. See also
 
-"StaticIcon#get_icon":staticicon.html#StaticIcon_geticon
+"StaticBitmap#get_icon":staticbitmap.html#StaticBitmap_geticon
 
