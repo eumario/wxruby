@@ -30,8 +30,8 @@ public:
   wxString SelectionToText();
   void SelectLine(const wxPoint& pos);
   void SelectWord(const wxPoint& pos);
-  void SetBorders(int  b ) ;
-  void SetFonts(wxString  normal_face , wxString  fixed_face , const int  *sizes = NULL) ;
+  void SetBorders(int b);
+  void SetFonts(wxString& normal_face, wxString& fixed_face, const int *sizes = NULL) ;
   bool SetPage(const wxString&  source ) ;
   void SetRelatedFrame(wxFrame*  frame , const wxString&  format ) ;
   void SetRelatedStatusBar(int  bar ) ;

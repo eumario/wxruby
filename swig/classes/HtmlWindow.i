@@ -35,7 +35,19 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxHtmlWindow);
 %import "include/wxWindow.h"
 %import "include/wxPanel.h"
 %import "include/wxScrolledWindow.h"
- // %import "include/wxHtmlWindow.h"
+// %import "include/wxHtmlWindow.h"
+
+// Deal with sizes argument to SetFonts
+%typemap(in) const int* sizes {
+  if ( TYPE($input) != T_ARRAY || RARRAY_LEN($input) != 7 )
+    rb_raise(rb_eTypeError, 
+             "The 'font sizes' argument must be an array with 7 integers");
+  $1 = new int[7];
+  for ( size_t i = 0; i < 7; i++ )
+    ($1)[i] = NUM2INT(rb_ary_entry($input, i));
+}
+
+%typemap(freearg) const int* sizes "if ($1) delete($1);"
 
 %ignore wxHtmlWindow;
 
@@ -115,7 +127,7 @@ public:
   void SelectLine(const wxPoint& pos);
   void SelectWord(const wxPoint& pos);
   void SetBorders(int  b ) ;
-  void SetFonts(wxString  normal_face , wxString  fixed_face , const int  *sizes = NULL) ;
+  void SetFonts(wxString& normal_face, wxString& fixed_face, const int *sizes = NULL) ;
   bool SetPage(const wxString&  source ) ;
   void SetRelatedFrame(wxFrame*  frame , const wxString&  format ) ;
   void SetRelatedStatusBar(int  bar ) ;
