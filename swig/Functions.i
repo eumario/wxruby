@@ -25,49 +25,89 @@
 #include <wx/utils.h>
 #include <wx/stockitem.h>
 #include <wx/aboutdlg.h>
+
 class wxRubyApp
 {
 public:
 
 };
+
+// Logging functions - these don't directly wrap the corresponding wx
+// LogXXX functions because those expect a literal format string and a
+// list of arguments, rather than a dynamic string. Instead we do the
+// sprintf in ruby, then pass the composed message directly to the
+// log. This also avoids format string attacks.
+
+
 // Log a Wx Message to the current Wx log output
 static VALUE log_message(int argc, VALUE *argv, VALUE self)
 {
-    VALUE str = rb_f_sprintf(argc, argv);
-    wxLogMessage(wxString(StringValuePtr(str), wxConvUTF8));
-    return Qnil;
-}
-
-// Log a Wx Status message to the current Wx log output
-static VALUE log_status(int argc, VALUE *argv, VALUE self)
-{
-    if(TYPE(argv[0])==T_DATA) {
-        wxFrame *ptr;
-        Data_Get_Struct(argv[0], wxFrame, ptr);
-        VALUE str = rb_f_sprintf(argc-1, &argv[1]);
-        wxLogStatus(ptr,wxString(StringValuePtr(str), wxConvUTF8));
+  if ( wxLog::IsEnabled() ) 
+    {
+      VALUE log_msg = rb_f_sprintf(argc, argv);
+      wxLog::OnLog( wxLOG_Message, 
+                    wxString(StringValuePtr(log_msg), wxConvUTF8),
+                    time(NULL) );
     }
-    else {
-        VALUE str = rb_f_sprintf(argc, argv);
-        wxLogStatus(wxString(StringValuePtr(str), wxConvUTF8));
-    }
-    return Qnil;
+  return Qnil;
 }
 
 // Log a Wx Warning message to the current Wx log output
 static VALUE log_warning(int argc, VALUE *argv, VALUE self)
 {
-    VALUE str = rb_f_sprintf(argc, argv);
-    wxLogWarning(wxString(StringValuePtr(str), wxConvUTF8));
-    return Qnil;
+  if ( wxLog::IsEnabled() ) 
+    {
+      VALUE log_msg = rb_f_sprintf(argc, argv);
+      wxLog::OnLog( wxLOG_Warning, 
+                    wxString(StringValuePtr(log_msg), wxConvUTF8),
+                    time(NULL) );
+    }
+  return Qnil;
 }
 
-
+// Log an error message to the current output
 static VALUE log_error(int argc, VALUE *argv, VALUE self)
 {
-    VALUE str = rb_f_sprintf(argc, argv);
-    wxLogError(wxString(StringValuePtr(str), wxConvUTF8));
+  if ( wxLog::IsEnabled() ) 
+    {
+      VALUE log_msg = rb_f_sprintf(argc, argv);
+      wxLog::OnLog( wxLOG_Error, 
+                    wxString(StringValuePtr(log_msg), wxConvUTF8),
+                    time(NULL) );
+    }
+  return Qnil;
+}
+
+// Log a Wx Status message - this is directed to the status bar of the
+// specified window, or the application main window if not specified. 
+// Based on wxWidgets code in src/generic/logg.cpp, WxLogGui::DoLog
+static VALUE log_status(int argc, VALUE *argv, VALUE self)
+{
+  if ( ! wxLog::IsEnabled() )
     return Qnil;
+
+  VALUE log_msg; // The message to be written
+  wxFrame* log_frame; // The frame whose status bar should display the logmsg
+  
+  // To a specific window's status bar
+  if( TYPE(argv[0]) == T_DATA ) {
+    log_msg = rb_f_sprintf(argc-1, &argv[1]);
+    Data_Get_Struct(argv[0], wxFrame, log_frame);
+  }
+  // To the application main window's status bar
+  else {
+    log_msg = rb_f_sprintf(argc, argv);
+    wxWindow* win = wxTheApp->GetTopWindow();
+    // Check the top window is actually a frame, not a dialog
+    if ( win != NULL && win->IsKindOf( CLASSINFO(wxFrame)  ) )
+      log_frame = (wxFrame*)win;
+  }
+
+  // Finally, display in the status bar if it has one
+  if ( log_frame && log_frame->GetStatusBar() )
+    log_frame->SetStatusText(wxString( StringValuePtr(log_msg), wxConvUTF8));
+
+  return Qnil;
 }
 
 // Returns the global app object
