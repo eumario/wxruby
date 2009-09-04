@@ -163,6 +163,9 @@ protected:
 	if ( GC_IsWindowDeleted(ptr) )
 	  return;
 
+    // Do standard marking routines as for all wxWindows
+    GC_mark_wxWindow(ptr);
+
 	wxTreeCtrl* tree_ctrl = (wxTreeCtrl*) ptr;
 
 	wxImageList* img_list;
