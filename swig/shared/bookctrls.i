@@ -35,6 +35,7 @@
 %feature("nodirector") kls::AdvanceSelection;
 %feature("nodirector") kls::ChangeSelection;
 %feature("nodirector") kls::DeleteAllPages;
+%feature("nodirector") kls::GetPageCount;
 %feature("nodirector") kls::GetPageImage;
 %feature("nodirector") kls::GetPageText;
 %feature("nodirector") kls::GetSelection;
