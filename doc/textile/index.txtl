@@ -103,7 +103,6 @@ of user input and interaction.
 |StaticBox|A static, or group box for visually grouping related controls|
 |ListBox|A list of strings for single or multiple selection|
 |ListCtrl|A control for displaying lists of strings and/or icons, plus a multicolumn report view|
-|ListView|A simpler interface (fa¹Âde for wxListCtrl in report mode|
 |TextCtrl|Single or multiline text editing control|
 |StyledTextCtrl|Sophisticated code text editor based on Scintilla|
 |RichTextCtrl|Advanced text-editing control with styles and inline images|

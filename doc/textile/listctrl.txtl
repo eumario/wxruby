@@ -91,7 +91,7 @@ functions that take a "ListEvent":listevent.html argument.
 
 h2. See also
 
-"ListCtrl overview":listctrloverview.html, "ListView":listview.html, "ListBox":listbox.html, "TreeCtrl":treectrl.html, "ImageList":imagelist.html, "ListEvent":listevent.html,
+"ListBox":listbox.html, "TreeCtrl":treectrl.html, "ImageList":imagelist.html, "ListEvent":listevent.html,
 "ListItem":listitem.html
 
 <div id="methods">
