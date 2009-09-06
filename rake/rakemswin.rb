@@ -73,7 +73,7 @@ gl_lib = File.join( $WXLIBDIR, "wxmsw#{$WXVERSION}#{$POSTFIX}_gl.lib" )
 if File.exists?(gl_lib)
   windows_libs << gl_lib 
 else
-  $excluded_classes << "GLCanvas"
+  $excluded_classes += %w|GLCanvas GLContext|
 end
 
 # Glue them all together into an argument passed to the linker

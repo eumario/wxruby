@@ -90,7 +90,7 @@ if File.exists?(gl_lib)
   windows_libs << gl_lib 
   WINDOWS_SYS_LIBS << 'opengl32'
 else
-  $excluded_classes << "GLCanvas"
+  $excluded_classes += %w|GLCanvas GLContext|
 end
 
 # If either of the above classes are in use, we need to add the contrib
