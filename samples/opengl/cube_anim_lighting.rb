@@ -28,7 +28,6 @@ class CubeFrame < Wx::Frame
     attrib = [Wx::GL_RGBA, Wx::GL_DOUBLEBUFFER, Wx::GL_DEPTH_SIZE, 24]
     # Use of keyword arguments for the GLCanvas initializer
     @canvas = Wx::GLCanvas.new(self, :attrib_list => attrib, :size => [600, 600])
-    @context = Wx::GLContext.new(@canvas)
     sizer.add_item @canvas, :proportion => 1, :flag => Wx::EXPAND
 
     text = Wx::StaticText.new(self, :label => "Use Up/Down/Left/Right keys to change rotation direction")
@@ -85,7 +84,7 @@ class CubeFrame < Wx::Frame
 
   def opengl_init
     # initialize the GL rendering
-    @canvas.current = @context
+    @canvas.set_current
 
     mat_specular = [1.0, 1.0, 1.0, 1.0]
     mat_shininess = [90.0]
@@ -112,7 +111,7 @@ class CubeFrame < Wx::Frame
   end
  
   def opengl_resize
-    @canvas.current = @context
+    @canvas.set_current
     sz = @canvas.size
     w = sz.width
     h = sz.height
@@ -124,7 +123,7 @@ class CubeFrame < Wx::Frame
   end
 
   def opengl_render
-    @canvas.current = @context
+    @canvas.set_current
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
    
