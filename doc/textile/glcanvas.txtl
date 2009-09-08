@@ -3,7 +3,7 @@ h1(#wxglcanvas). Wx::GLCanvas
 GLCanvas is a class for displaying OpenGL graphics. There are 
 wrappers for OpenGL on Windows, and GTK+ and Motif.
 
-Create a wxGLCanvas window, call "GLCanvas#set_current":glcanvas.html#GLCanvas_setcurrent 
+To use this class, create a wxGLCanvas window, call "GLCanvas#set_current":glcanvas.html#GLCanvas_setcurrent 
 to direct normal OpenGL commands to the window, and then call "GLCanvas#swap_buffers":glcanvas.html#GLCanvas_swapbuffers to 
 show the OpenGL buffer on the window.
 
