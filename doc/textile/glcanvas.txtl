@@ -50,11 +50,6 @@ alpha channel, and accum buffer. Other implementations may support them.
 |@WX::GL_MIN_ACCUM_BLUE@|Use blue buffer with most bits (> MIN_ACCUM_BLUE bits)|
 |@WX::GL_MIN_ACCUM_ALPHA@|Use blue buffer with most bits (> MIN_ACCUM_ALPHA bits)|
 
-
-h2. See also
-
-"GLContext":glcontext.html
-
 <div id="methods">
 
 h2. Methods
