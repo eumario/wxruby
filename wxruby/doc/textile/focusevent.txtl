@@ -34,23 +34,31 @@ h2. Methods
 
 * "FocusEvent.new":#FocusEvent_new
 * "FocusEvent#get_window":#FocusEvent_getwindow
-
+* "FocusEvent#set_window":#FocusEvent_setwindow
 </div>
 
 
 
 h3(#FocusEvent_new). FocusEvent.new
 
-  *FocusEvent.new*(%(arg-type)"TYPE":type.html% eventType = 0,  %(arg-type)Integer% id = 0)
+  *FocusEvent.new*(%(arg-type)Integer% type = 0,  %(arg-type)Integer% id = 0)
 
 Constructor.
 
 
 h3(#FocusEvent_getwindow). FocusEvent#get_window
 
+ "Window":window.html *get_window*()
+
 Returns the window associated with this event, that is the window which had the
 focus before for the @EVT_SET_FOCUS@ event and the window which is
 going to receive focus for the @EVT_KILL_FOCUS@ one.
 
-Warning: the window pointer may be @NULL@!
+Warning: the window pointer may be @nil@!
+
+ h3(#FocusEvent_setwindow). FocusEvent#set_window
+
+ *set_window*(%(arg-type)"Window":window.html% window)
+
+Set the window associated with this event.
 

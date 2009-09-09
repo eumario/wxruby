@@ -7,9 +7,9 @@ can be loaded from a file in a variety of formats. Functions are
 available to set and get image bits, so it can be used for basic image
 manipulation.
 
-A Image cannot (currently) be drawn directly to a "DC":dc.html. Instead,
+An Image cannot (currently) be drawn directly to a "DC":dc.html. Instead,
 a platform-specific "Bitmap":bitmap.html object must be created from it
-using the "Bitmap::Bitmap(Image,int depth)":bitmapctor.html constructor.
+using the "Bitmap.from_image":bitmap.html#Bitmap_fromimage class method.
 This bitmap can then be drawn in a device context, using
 "DC#draw_bitmap":dc.html#DC_drawbitmap.
 
@@ -22,8 +22,8 @@ h2. Alpha channel support
 Wx::Image supports alpha channel data: in addition to a byte for the
 red, green and blue colour components for each pixel it also stores a
 byte representing the pixel opacity. An alpha value of 0 corresponds
-to a transparent pixel (null opacity) while a value of 255$ means that
-the pixel is 100\% opaque.
+to a transparent pixel (null opacity) while a value of 255 means that
+the pixel is 100% opaque.
 
 Unlike RGB data, not all images have an alpha channel and before using
 "get_alpha":#Image_getalpha you should check if this image contains an
@@ -89,8 +89,10 @@ h2. Methods
 * "Image#find_first_unused_colour":#Image_findfirstunusedcolour
 * "Image#get_image_ext_wildcard":#Image_getimageextwildcard
 * "Image#get_alpha":#Image_getalpha
+* "Image#get_alpha_data":#Image_getalphadata
 * "Image#get_blue":#Image_getblue
-* "Image#get_data":#Image_getdata
+* "Image#get_data":#Image_getrgbdata
+* "Image#get_rgb_data":#Image_getrgbdata
 * "Image#get_green":#Image_getgreen
 * "Image#get_image_count":#Image_getimagecount
 * "Image#get_height":#Image_getheight
@@ -127,7 +129,9 @@ h2. Methods
 * "Image#scale":#Image_scale
 * "Image#size":#Image_size
 * "Image#set_alpha":#Image_setalpha
-* "Image#set_data":#Image_setdata
+* "Image#set_alpha_data":#Image_setalphadata
+* "Image#set_data":#Image_setrgbdata
+* "Image#set_rgb_data":#Image_setrgbdata
 * "Image#set_mask":#Image_setmask
 * "Image#set_mask_colour":#Image_setmaskcolour
 * "Image#set_mask_from_image":#Image_setmaskfromimage
@@ -431,19 +435,20 @@ h3(#Image_getalpha). Image#get_alpha
  Integer *get_alpha*(%(arg-type)Integer% x,  %(arg-type)Integer% y)
 
 Returns the alpha value for the given pixel. This function may only be called
-for the images with alpha channel, use "has_alpha":#Image_hasalpha to
+for images with alpha channel, use "has_alpha":#Image_hasalpha to
 check for this.
 
-The returned value is the _opacity_ of the image, i.e. the value of $0$
-corresponds to the transparent pixels while the value of $255$ -- to the opaque
+The returned value is the _opacity_ of the image, i.e. the value of _0_
+corresponds to the transparent pixels while the value of _255_ to the opaque
 ones.
 
- Integer *get_alpha*()
+h3(#Image_getalphadata). Image#get_alpha_data
 
-Returns pointer to the array storing the alpha values for this image. This
-pointer is @NULL@ for the images without the alpha channel. If the image
-does have it, this pointer may be used to directly manipulate the alpha values
-which are stored as the "RGB":imagegetdata.html ones.
+ String *get_alpha_data*()
+
+Returns the raw alpha data as a string. This is most often used when doing direct image manipulation.
+The returned string contains a sequence of bytes (characters) each of which represents the alpha value
+of a pixel in the range 0 to 255.
 
 
 h3(#Image_getblue). Image#get_blue
@@ -453,8 +458,9 @@ h3(#Image_getblue). Image#get_blue
 Returns the blue intensity at the given coordinate.
 
 
-h3(#Image_getdata). Image#get_data
+h3(#Image_getrgbdata). Image#get_rgb_data
 
+ String *get_rgb_data*()
  String *get_data*()
 
 Returns the raw image data as a string. This is most often used when
@@ -472,7 +478,8 @@ To extract the integer values for the RGB components, use Ruby's
 String.unpack method; for example, to convert the whole data string to a
 set of integer values:
 
- my_image.data.unpack("C*") # returns something like [255, 128, 0, 255 ...]
+ <pre>
+ my_image.rgb_data.unpack("C*") # returns something like [255, 128, 0, 255 ...]</pre>
 
 This would mean that the first pixel had a red value of 255, a green
 value of 128, and a blue value of 0; the second pixel a red value of
@@ -481,15 +488,18 @@ value of 128, and a blue value of 0; the second pixel a red value of
 Note that unlike the C++ wxWidgets API, the returned string is a copy of
 the internal data; methods that alter the string will *not* change the
 Image's content. If you wish to do this, alter the string then call
-"set_data":#Image_setdata, for example:
+"set_rgb_data":#Image_setrgbdata, for example:
 
- my_image.data = my_image.data.reverse
+ my_image.rgb_data = my_image.rgb_data.reverse
 
 This would flip the image diagonally around it's bottom-left to
 top-right axis, and swap the red and blue components of each pixel,
 leaving the green the same. If you understand why this is the result,
 you can consider yourself in a good position to make use of these
 methods.
+
+The get_data form is provided for backward compatibility but is not recommended. It 
+may be deprecated in a subsequent version of wxRuby. 
 
 h3(#Image_getgreen). Image#get_green
 
@@ -1017,7 +1027,15 @@ h4. See also
 
 h3(#Image_setalpha). Image#set_alpha
 
-  *set_alpha*(%(arg-type)String% alpha = @nil@)
+  *set_alpha*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% alpha)
+
+Sets the alpha value for the given pixel. This function should only be
+called if the image has alpha channel data, use
+"has_alpha":#Image_hasalpha to check for this.
+
+h3(#Image_setalphadata). Image#set_alpha_data
+
+  *set_alpha_data*(%(arg-type)String% alpha = @nil@)
 
 This function is similar to "set_data":#Image_setdata, setting the alpha
 channel from a string. It has similar restrictions; don't use it if you
@@ -1027,18 +1045,14 @@ The string should contain one byte (character) for each pixel,
 representing the transparency in the range 0 to 255. If necessary, use
 Ruby's Array#pack with the C* to create a suitable string.
 
-Unlike set_data this method may be passed @nil@ in which case the
+Unlike set_rgb_data this method may be passed @nil@ in which case the
 function will allocate the alpha array internally -- this is useful to
 add alpha channel data to an image which doesn't have any.
 
-  *set_alpha*(%(arg-type)Integer% x,  %(arg-type)Integer% y,  %(arg-type)Integer% alpha)
 
-Sets the alpha value for the given pixel. This function should only be
-called if the image has alpha channel data, use
-"has_alpha":#Image_hasalpha to check for this.
+h3(#Image_setrgbdata). Image#set_rgb_data
 
-h3(#Image_setdata). Image#set_data
-
+  *set_rgb_data*(%(arg-type)String% data)
   *set_data*(%(arg-type)String% data)
 
 Sets the raw image data from a string without performing checks. Don't
@@ -1053,14 +1067,17 @@ For example, a four-pixel image with pure-red pixels in the left and
 pure-blue pixels on the right could be set with string data created
 thus:
 
- [ 255, 0, 0,
+ <pre>[ 255, 0, 0,
    0, 0, 255,
    255, 0, 0,
-   0, 0, 255 ].pack("C*")
+   0, 0, 255 ].pack("C*")</pre>
+
+The set_data form is provided for backward compatibility but is not recommended. It 
+may be deprecated in a subsequent version of wxRuby. 
 
 h3(#Image_setmask). Image#set_mask
 
-  *set_mask*(%(arg-type)Boolean% hasMask = true)
+  *set_mask*(%(arg-type)Boolean% has_mask = true)
 
 Specifies whether there is a mask or not. The area of the mask is determined by the current mask colour.
 
@@ -1138,18 +1155,7 @@ range 0 to 255.
 This routine performs bounds-checks for the coordinate so it can be
 considered a safe way to manipulate the data, but in some cases this
 might be too slow so that the data will have to be set directly. In that
-case you will have to get access to the image data using the
-"get_data":#Image_getdata method.
-
-h3(#Image_setrgbrect). Image#set_rgb
-
-  *set_rgb*(%(arg-type)"Rect":rect.html% rect,  
-             %(arg-type)Integer% red,  %(arg-type)Integer% green, %(arg-type)Integer% blue)
-
-Sets the colour of the pixels within the given rectangle using red,
-green and blue intensities. The values should be in the range 0 to
-255. This routine performs bounds-checks for the coordinate so it can be
-considered a safe way to manipulate the data.
+case you will have to use the "set_rgb_data":#Image_setrgbdata method.
 
 h3(#Image_write). Image#write
 

@@ -64,13 +64,13 @@ OBJ_EXT = Config::CONFIG["OBJEXT"]
 # THIRD: load the platform-specific rakefiles; these can extend or
 # override many of the previously set options. These variables are set
 # in rake/rakeutil.rb
-if    $macosx then require "rake/rakemacosx"
-elsif $mswin  then require "rake/rakemswin"
-elsif $mingw  then require "rake/rakemingw"
-elsif $cygwin then require "rake/rakecygwin"
-elsif $bccwin then require "rake/rakebccwin"
-elsif $netbsd then require "rake/rakenetbsd"
-else               require "rake/rakelinux"
+if    $macosx then require "./rake/rakemacosx"
+elsif $mswin  then require "./rake/rakemswin"
+elsif $mingw  then require "./rake/rakemingw"
+elsif $cygwin then require "./rake/rakecygwin"
+elsif $bccwin then require "./rake/rakebccwin"
+elsif $netbsd then require "./rake/rakenetbsd"
+else               require "./rake/rakelinux"
 end
 
 # FOURTH: summarise the main options chosen back for the user

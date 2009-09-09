@@ -2,6 +2,9 @@
 # Copyright 2004-2008, wxRuby Development Team
 # released under the MIT-style wxruby2 license
 
+require "rbconfig"
+$ruby_exe = Config::CONFIG["ruby_install_name"]
+
 # Skim all the SWIG sources to detect import/include dependencies that
 # should force recompiles
 here = File.expand_path( File.dirname(__FILE__) ) + File::SEPARATOR
@@ -88,7 +91,7 @@ end
 # provide various SWIG fixes and workarounds
 def post_process(file, *processors)
   processors.each do | p |
-    sh "ruby swig/#{p}.rb #{file}"
+    sh "#{$ruby_exe} swig/#{p}.rb #{file}"
   end
 end
 

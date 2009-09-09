@@ -22,6 +22,21 @@ enum
     wxDP_ALLOWNONE = 8
 };
 
+// Dealt with below
+%ignore wxDatePickerCtrl::GetRange;
+
+%extend wxDatePickerCtrl {
+   VALUE get_range() {
+     wxDateTime dt1, dt2;
+     $self->GetRange(&dt1, &dt2);
+ 
+     VALUE items = rb_ary_new();
+     rb_ary_push(items, wxRuby_wxDateTimeToRuby(dt1));
+     rb_ary_push(items, wxRuby_wxDateTimeToRuby(dt2));
+   
+     return items;
+   }
+}
 %import "include/wxObject.h"
 %import "include/wxEvtHandler.h"
 %import "include/wxWindow.h"

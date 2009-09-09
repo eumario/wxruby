@@ -7,16 +7,13 @@ rescue LoadError
 end
 require 'wx'
 
-
 include Wx
-
-BUTTON_CLOSE = 1003
 
 class MyFrame < Frame
   def initialize(parent, log)
     @log = log
-    super(parent, -1, "Shaped Window", DEFAULT_POSITION, Size.new(350,200), 
-          FRAME_SHAPED|SIMPLE_BORDER|FRAME_NO_TASKBAR|STAY_ON_TOP)
+    super(parent, :title => "Shaped Window", :size => [350,200], 
+          :style => FRAME_SHAPED|SIMPLE_BORDER|FRAME_NO_TASKBAR|STAY_ON_TOP)
 
     @has_shape = false
     @delta = [0,0]
@@ -28,9 +25,9 @@ class MyFrame < Frame
     evt_right_up {on_exit}
     evt_paint {on_paint}
 
-    shape = File.join( File.dirname(__FILE__), 'icons', 'ruby.png' )
+    shape = File.join( File.dirname(__FILE__), 'icons', 'wxruby-128x128.png' )
     @bmp = Bitmap.new( Image.new(shape) )
-    set_client_size(@bmp.get_width, @bmp.get_height)
+    set_client_size(@bmp.width, @bmp.height)
 
     if Wx::PLATFORM == 'WXGTK'
       # wxGTK requires that the window be created before you can
@@ -69,8 +66,8 @@ class MyFrame < Frame
 
   def on_left_down(event)
     capture_mouse
-    point = client_to_screen(event.get_position)
-    origin = get_position
+    point = client_to_screen(event.position)
+    origin = position
     dx = point.x - origin.x
     dy = point.y - origin.y
     @delta = [dx, dy]
@@ -84,7 +81,7 @@ class MyFrame < Frame
 
   def on_mouse_move(event)
     if event.dragging and event.left_is_down
-      point = client_to_screen(event.get_position)
+      point = client_to_screen(event.position)
       move(point.x - @delta[0], point.y - @delta[1])
     end
   end
@@ -92,16 +89,16 @@ end
 
 class TestPanel < Wx::Panel
   def initialize(parent, log)
-    super(parent, -1, Wx::DEFAULT_POSITION, Wx::DEFAULT_SIZE, Wx::NO_FULL_REPAINT_ON_RESIZE)
+    super(parent, :style => Wx::NO_FULL_REPAINT_ON_RESIZE)
     @log = log
 
-    b = Button.new(self, -1, 'Show the ShapedWindow Sample', Wx::Point.new(50,50))
-    evt_button(b.get_id) { on_button }
+    b = Button.new(self, :label => 'Show the ShapedWindow Sample', :pos => [50,50])
+    evt_button(b) { on_button }
   end
 
   def on_button
     win = MyFrame.new(self, @log)
-    win.set_size(Wx::Size.new(200, 200))
+    win.size = [200, 200]
     win.center_on_parent(Wx::BOTH)
     win.show(true)
   end

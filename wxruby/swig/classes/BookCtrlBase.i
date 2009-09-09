@@ -6,7 +6,7 @@
 // NB - we'd expect this to be a Director, but this causes a compile
 // error on MingW; it doesn't matter as this class is never instantiated
 // anyway
-%module wxBookCtrlBase
+%module(directors="1") wxBookCtrlBase
 GC_MANAGE_AS_WINDOW(wxBookCtrlBase);
 SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxBookCtrlBase);
 

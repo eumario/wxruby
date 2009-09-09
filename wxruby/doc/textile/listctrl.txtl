@@ -23,9 +23,6 @@ practically infinite number of items. For example, in a multiple selection
 virtual list control, the selections won't be sent when many items are selected
 at once because this could mean iterating over all the items.
 
-Using many of ListCtrl features is shown in the
-"corresponding sample":samplelistctrl.html.
-
 To intercept events from a list control, use the event table macros described
 in "ListEvent":listevent.html.
 
@@ -91,7 +88,7 @@ functions that take a "ListEvent":listevent.html argument.
 
 h2. See also
 
-"ListCtrl overview":listctrloverview.html, "ListView":listview.html, "ListBox":listbox.html, "TreeCtrl":treectrl.html, "ImageList":imagelist.html, "ListEvent":listevent.html,
+"ListBox":listbox.html, "TreeCtrl":treectrl.html, "ImageList":imagelist.html, "ListEvent":listevent.html,
 "ListItem":listitem.html
 
 <div id="methods">

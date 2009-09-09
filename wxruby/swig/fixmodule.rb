@@ -9,7 +9,7 @@
 #
 # It also fixes a number of other problems with SWIG's output
 
-require 'swig/classes/include/parents'
+require './swig/classes/include/parents'
 
 def fixmodule(filename)
   broken = filename+".old"

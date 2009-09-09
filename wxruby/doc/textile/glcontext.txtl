@@ -1,12 +1,21 @@
 h1(#wxglcontext). Wx::GLContext
 
-GLContext is a class for sharing OpenGL data resources, such as display lists, with another "GLCanvas":glcanvas.html.
+An instance of a GLContext represents the state of an OpenGL state machine and the connection between 
+OpenGL and the system.
 
-By sharing data resources, you can prevent code duplication, save memory, and ultimately help optimize your application.
+The OpenGL state includes everything that can be set with the OpenGL API: colors, rendering variables, 
+display lists, texture objects, etc. Although it is possible to have multiple rendering contexts share 
+display lists in order to save resources, this method is hardly used today any more, because display 
+lists are only a tiny fraction of the overall state.
 
-As an example, let's say you want to draw a ball on two different windows that is identical on each one, but the dimensions of one is slightly different than the other one.  What you would do is create your display lists in the shared context, and then translate each ball on the individual canvas's context.  This way the actual data for the ball is only created once (in the shared context), and you won't have to duplicate your development efforts on the second ball.
+Therefore, one rendering context is usually used with or bound to multiple output windows in turn, so 
+that the application has access to the complete and identical state while rendering into each window.
 
-Note that some GLContext features are extremely platform-specific - its best to check your native platform's glcanvas header (on windows include/wx/msw/glcanvas.h) to see what features your native platform provides.
+Binding (making current) a rendering context with another instance of a "GLCanvas":glcanvas.html however works only 
+if the other "GLCanvas":glcanvas.html was created with the same attributes as the "GLCanvas":glcanvas.html from which the GLContext 
+was initialized. (This applies to sharing display lists among contexts analogously.)
+
+Note that some GLContext features are extremely platform-specific - it's best to check what features your native platform provides.
 
 h2. Derived from
 
@@ -21,49 +30,30 @@ h2. See also
 h2. Methods
 
 * "GLContext.new":#GLContext_new
-* "GLContext#get_window":#GLContext_getwindow
 * "GLContext#set_current":#GLContext_setcurrent
-* "GLContext#set_colour":#GLContext_setcolour
-* "GLContext#swap_buffers":#GLContext_swapbuffers
 
 </div>
 
 
 h3(#GLContext_constr). GLContext.new
 
-  *GLContext.new*(%(arg-type)Boolean% isRGB,  %(arg-type)"GLCanvas":glcanvas.html% win, 
-                %(arg-type)"Palette":palette.html% palette = NullPalette)
+  *GLContext.new*(%(arg-type)"GLCanvas":glcanvas.html% win, 
+                %(arg-type)"GLContext":glcontext.html% other=nil)
 
-  *GLContext.new*(%(arg-type)Boolean% isRGB,  %(arg-type)"GLCanvas":glcanvas.html% win, 
-                %(arg-type)"Palette":palette.html% palette = NullPalette,  %(arg-type)"GLContext":glcontext.html% other)
+* _win_ The canvas that is used to initialize this context. This parameter is needed only temporarily, 
+and the caller may do anything with it (e.g. destroy the window) after the constructor returned.
+It will be possible to bind (make current) this context to any other wxGLCanvas that has been created 
+with equivalent attributes as win.
+* _other_ Context to share display lists with or nil (the default) for no sharing.
 
-* _win_ Canvas to associate this shared context with.
-* _other_ Context to share data resources with.
-
-h3(#GLContext_getwindow). GLContext#get_window
-
- "Window":window.html *get_window*()
-
-Obtains the window that is associated with this context.
 
 h3(#GLContext_setcurrent). GLContext#set_current
 
-  *set_current*()
+  *set_current*(%(arg-type)"GLCanvas":glcanvas.html% win)
 
-Sets this context as the current recipient of OpenGL calls.
-Each context contains an OpenGL device context that has been created during
-the creation of this window. So this call sets the current device context
-as the target device context for OpenGL operations.
+Makes the OpenGL state that is represented by this rendering context current with the GLCanvas win. 
+Note that win can be a different GLCanvas window than the one that was passed to the constructor of this rendering context. 
+If rc is an object of type GLContext, the statements rc.set_current(win); and win.set_current(rc); are equivalent, 
+see "GLCanvas#set_current":glcanvas.html#GLCanvas_setcurrent_rec.
 
-h3(#GLContext_setcolour). GLContext#set_colour
-
-  *set_colour*(%(arg-type)"char":char.html% colour)
-
-Sets the current colour for this context, using the Widgets colour database to find a named colour.
-
-h3(#GLContext_swapbuffers). GLContext#swap_buffers
-
-  *swap_buffers*()
-
-Displays the previous OpenGL commands on the associated window.
 

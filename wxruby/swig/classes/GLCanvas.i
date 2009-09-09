@@ -38,18 +38,6 @@ enum
     WX_GL_MIN_ACCUM_ALPHA
 };
 
-// This version is not supported because the GLContext class is not
-// ported. Having it around causes a SWIG warning
-%ignore wxGLCanvas::wxGLCanvas(wxWindow* parent, 
-                               wxGLContext* sharedContext, 
-                               wxWindowID id, 
-                               const wxPoint& pos, 
-                               const wxSize& size, 
-                               long style, 
-                               const wxString& name, 
-                               int* attribList, 
-                               const wxPalette& palette);
-
 %typemap(typecheck) (int* attribList) {
   $1 = CLASS_OF($input)==rb_cArray ? 1 : 0;
 }

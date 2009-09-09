@@ -2,7 +2,7 @@
 
 #if !defined(_wxListbook_h_)
 #define _wxListbook_h_
-class wxListbook : public wxControl
+class wxListbook : public wxBookCtrlBase
 {
  public:
   wxListbook();

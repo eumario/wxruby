@@ -22,8 +22,13 @@ class ImageFrame < Wx::Frame
   def initialize
     super(nil, :title => 'Simple image demo')
 
+    @offset = 10
+    size = 256+2*@offset
+    self.client_size = [size, size]
+
     # Load a PNG bitmap from a file for drawing
-    img_file = File.join( File.dirname(__FILE__), 'wxruby-logo.png')
+    img_file = File.join( File.dirname(__FILE__)+"/../../art",
+      'wxruby-256x256.png')
     @bitmap = Wx::Bitmap.new(img_file)
 
     # Set up the drawing to be done when the frame needs re-painting
@@ -32,8 +37,8 @@ class ImageFrame < Wx::Frame
 
   def on_paint
     paint do | dc |
-      # Draw the bitmap at offset 10px, 10px, with no transparency
-      dc.draw_bitmap(@bitmap, 10, 10, false)
+      # Draw the bitmap at the specified offset with no transparency
+      dc.draw_bitmap(@bitmap, @offset, @offset, false)
     end
   end
 end

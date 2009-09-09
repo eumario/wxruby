@@ -145,7 +145,7 @@ class Wx::EvtHandler
     case window_or_id
     when Fixnum 
       window_or_id
-    when Wx::Window, Wx::MenuItem, Wx::ToolBarTool 
+    when Wx::Window, Wx::MenuItem, Wx::ToolBarTool, Wx::Timer
       window_or_id.wx_id
     else 
       Kernel.raise ArgumentError, 

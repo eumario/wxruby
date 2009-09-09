@@ -6,6 +6,7 @@
 
 class wxBookCtrlBase : public wxControl
 {
+public:
   wxBookCtrlBase();
   wxBookCtrlBase(wxWindow *parent,
                  wxWindowID winid,
@@ -28,7 +29,7 @@ class wxBookCtrlBase : public wxControl
 
   // get the panel which represents the given page
   wxWindow *GetPage(size_t n);
-  wxWindow *GetPage(size_t n);
+  wxWindow *GetPage(size_t n) const;
 
   // get the current page or NULL if none
   wxWindow *GetCurrentPage();
@@ -109,8 +110,8 @@ class wxBookCtrlBase : public wxControl
   void AdvanceSelection(bool forward = true);
 
   // hit test: returns which page is hit and, optionally, where (icon, label)
-  virtual int HitTest(const wxPoint& WXUNUSED(pt),
-                      long * WXUNUSED(flags) = NULL);
+  virtual int HitTest(const wxPoint& pt,
+                      long * flags = NULL);
 
   // we do have multiple pages
   virtual bool HasMultiplePages() const;

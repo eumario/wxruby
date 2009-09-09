@@ -163,8 +163,8 @@ module Wx
             return
           end
 
-          real_args = [ parent ] + self.class.args_as_list(*mixed_args)
           begin
+            real_args = [ parent ] + self.class.args_as_list(*mixed_args)
             pre_wx_kwctor_init(*real_args)
           rescue => err
             msg = "Error initializing #{self.inspect}\n"+

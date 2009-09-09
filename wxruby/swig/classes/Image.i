@@ -35,6 +35,14 @@ GC_MANAGE_AS_OBJECT(wxImage);
 %rename(Write) wxImage::SaveFile(wxOutputStream& stream, 
                                  const wxString& mimetype) const;
 
+// Renaming to avoid method overloading and thus conflicts at Ruby level
+%rename(GetAlphaData) wxImage::GetAlpha() const;
+%rename(SetAlphaData) wxImage::SetAlpha(unsigned char* alpha = NULL, bool static_data = false);
+
+// Renaming for consistency with above methods and SetRGB method
+%rename(GetRgbData) wxImage::GetData() const;
+%rename(SetRgbData) wxImage::SetData(unsigned char* data);
+
 // Handler methods are not supported in wxRuby; all standard handlers
 // are loaded at startup, and we don't allow custom image handlers to be
 // written in Ruby. Note if these methods are added, corrected freearg
@@ -48,12 +56,13 @@ GC_MANAGE_AS_OBJECT(wxImage);
 %ignore wxImage::InsertHandler;
 %ignore wxImage::RemoveHandler;
 
-// The data methods require special handling using %extend; note that
-// set_data is dealt with by typemaps also below.
-%ignore wxImage::GetData;
-%ignore wxImage::GetAlpha;
+// The GetRgbData and GetAlphaData methods require special handling using %extend;
+%ignore wxImage::GetRgbData;
+%ignore wxImage::GetAlphaData;
+// The SetRgbData and SetAlphaData are dealt with by typemaps (see below).
 
-// For Image#set_data, Image#set_alpha and Image.new with raw data arg:
+
+// For Image#set_rgb_data, Image#set_alpha_data and Image.new with raw data arg:
 // copy raw string data from a Ruby string to a memory block that will be
 // managed by wxWidgets (see static_data typemap below)
 %typemap(in) unsigned char* data, unsigned char* alpha {
@@ -70,7 +79,7 @@ GC_MANAGE_AS_OBJECT(wxImage);
                         "String required as raw Image data argument");
 }
 
-// Image.new(data...) and Image#set_alpha both accept a static_data
+// Image.new(data...) and Image#set_alpha_data both accept a static_data
 // argument to specify whether wxWidgets should delete the data
 // pointer. Since in wxRuby we always copy from the Ruby string object
 // to the Image, we always want wxWidgets to handle deletion of the copy
@@ -82,7 +91,7 @@ GC_MANAGE_AS_OBJECT(wxImage);
                                unsigned char* g, 
                                unsigned char* b }
 
-// GetData and GetAlpha methods return an unsigned char* pointer to the
+// GetRgbData and GetAlphaData methods return an unsigned char* pointer to the
 // internal representation of the image's data. We can't simply use
 // rb_str_new2 because the data is not NUL terminated, so strlen won't
 // return the right length; we have to know the image's height and
@@ -95,13 +104,13 @@ GC_MANAGE_AS_OBJECT(wxImage);
 // http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/296601)
 // but is beyond my C skills
 %extend wxImage {
-  VALUE get_alpha() {
+  VALUE get_alpha_data() {
     unsigned char* alpha_data = $self->GetAlpha();
     int length = $self->GetWidth() * $self->GetHeight();
     return rb_str_new( (const char*)alpha_data, length);
   }
 
-  VALUE get_data() {
+  VALUE get_rgb_data() {
     unsigned char* rgb_data = $self->GetData();
     int length = $self->GetWidth() * $self->GetHeight() * 3;
     return rb_str_new( (const char*)rgb_data, length);

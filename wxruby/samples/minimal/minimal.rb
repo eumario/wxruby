@@ -20,7 +20,7 @@ class MinimalFrame < Wx::Frame
 
     # Give the frame an icon. PNG is a good choice of format for
     # cross-platform images. Note that OS X doesn't have "Frame" icons.
-    icon_file = File.join( File.dirname(__FILE__), "mondrian.png")
+    icon_file = File.join( File.dirname(__FILE__)+"/../../art", "wxruby.png")
     self.icon = Wx::Icon.new(icon_file)
 
     menu_bar = Wx::MenuBar.new

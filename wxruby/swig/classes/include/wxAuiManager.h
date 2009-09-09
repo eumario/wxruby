@@ -50,7 +50,7 @@ public:
     void Update();
 
     wxString SavePaneInfo(wxAuiPaneInfo& pane);
-    void LoadPaneInfo(wxString pane_part, wxAuiPaneInfo &pane);
+    void LoadPaneInfo(wxString& pane_part, wxAuiPaneInfo &pane);
     wxString SavePerspective();
     bool LoadPerspective(const wxString& perspective, bool update = true);
 

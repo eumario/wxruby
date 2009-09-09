@@ -743,7 +743,7 @@ class DemoTaskBarIcon < Wx::TaskBarIcon
     @frame = frame
 
     # starting image
-    icon = make_icon('ruby.png')
+    icon = make_icon('wxruby-128x128.png')
     set_icon(icon, 'wxRuby Demo')
     @image_index = 1
 
@@ -796,7 +796,7 @@ class DemoTaskBarIcon < Wx::TaskBarIcon
   end
 
   def on_taskbar_change(evt)
-    names = [ "ruby.png", "wxwin16x16.xpm", "smiles.xpm", "mondrian.xpm" ]
+    names = [ "wxruby-128x128.png", "wxwin16x16.xpm", "smiles.xpm", "mondrian.xpm" ]
     name = names[@image_index]
     @image_index += 1
     if @image_index >= names.length

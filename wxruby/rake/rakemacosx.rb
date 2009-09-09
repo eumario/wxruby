@@ -7,7 +7,7 @@
 # platform-dependent settings
 
 
-require 'rake/rakeunixish'
+require './rake/rakeunixish'
 
 $cpp = "g++"
 $ld = "g++"

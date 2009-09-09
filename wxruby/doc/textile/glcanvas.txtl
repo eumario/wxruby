@@ -1,20 +1,16 @@
 h1(#wxglcanvas). Wx::GLCanvas
 
-GLCanvas is a class for displaying OpenGL graphics. There are
+GLCanvas is a class for displaying OpenGL graphics. There are 
 wrappers for OpenGL on Windows, and GTK+ and Motif.
 
-To use this class, create a GLCanvas window, call "GLCanvas#set_current":glcanvas.html#GLCanvas_setcurrent 
-to direct normal OpenGL commands to the window, and then call "GLCanvas#swap_buffers":glcanvas.html#GLCanvas_swapbuffers 
-to show the OpenGL buffer on the window.
+To use this class, create a wxGLCanvas window, call "GLCanvas#set_current":glcanvas.html#GLCanvas_setcurrent 
+to direct normal OpenGL commands to the window, and then call "GLCanvas#swap_buffers":glcanvas.html#GLCanvas_swapbuffers to 
+show the OpenGL buffer on the window.
+
 
 To set up the attributes for the rendering context (number of bits for the depth buffer,
 number of bits for the stencil buffer and so on) you should set up the correct values of
-the _attribList_ parameter. The values that should be set up and their meanings will be described below.
-
-To switch GLCanvas support on under Windows, edit setup.h and set
-@USE_GLCANVAS@ to $1$. You may also need to have to add
-@opengl32.lib@ to the list of libraries your program is linked with. On
-Unix, pass @--with-opengl@ to configure to compile using OpenGL or Mesa.
+the _attrib_list_ parameter. The values that should be set up and their meanings will be described below.
 
 h2. Derived from
 
@@ -37,34 +33,28 @@ alpha channel, and accum buffer. Other implementations may support them.
 
 
 
-|@WX_GL_RGBA@|Use true colour|
-|@WX_GL_BUFFER_SIZE@|Bits for buffer if not WX_GL_RGBA|
-|@WX_GL_LEVEL@|0 for main buffer, >0 for overlay, <0 for underlay|
-|@WX_GL_DOUBLEBUFFER@|Use doublebuffer|
-|@WX_GL_STEREO@|Use stereoscopic display|
-|@WX_GL_AUX_BUFFERS@|Number of auxiliary buffers (not all implementation support this option)|
-|@WX_GL_MIN_RED@|Use red buffer with most bits (> MIN_RED bits)|
-|@WX_GL_MIN_GREEN@|Use green buffer with most bits (> MIN_GREEN bits) |
-|@WX_GL_MIN_BLUE@|Use blue buffer with most bits (> MIN_BLUE bits) |
-|@WX_GL_MIN_ALPHA@|Use alpha buffer with most bits (> MIN_ALPHA bits)|
-|@WX_GL_DEPTH_SIZE@|Bits for Z-buffer (0,16,32)|
-|@WX_GL_STENCIL_SIZE@|Bits for stencil buffer|
-|@WX_GL_MIN_ACCUM_RED@|Use red accum buffer with most bits (> MIN_ACCUM_RED bits)|
-|@WX_GL_MIN_ACCUM_GREEN@|Use green buffer with most bits (> MIN_ACCUM_GREEN bits)|
-|@WX_GL_MIN_ACCUM_BLUE@|Use blue buffer with most bits (> MIN_ACCUM_BLUE bits)|
-|@WX_GL_MIN_ACCUM_ALPHA@|Use blue buffer with most bits (> MIN_ACCUM_ALPHA bits)|
-
-
-h2. See also
-
-"GLContext":glcontext.html
+|@WX::GL_RGBA@|Use true colour|
+|@WX::GL_BUFFER_SIZE@|Bits for buffer if not WX_GL_RGBA|
+|@WX::GL_LEVEL@|0 for main buffer, >0 for overlay, <0 for underlay|
+|@WX::GL_DOUBLEBUFFER@|Use doublebuffer|
+|@WX::GL_STEREO@|Use stereoscopic display|
+|@WX::GL_AUX_BUFFERS@|Number of auxiliary buffers (not all implementation support this option)|
+|@WX::GL_MIN_RED@|Use red buffer with most bits (> MIN_RED bits)|
+|@WX::GL_MIN_GREEN@|Use green buffer with most bits (> MIN_GREEN bits) |
+|@WX::GL_MIN_BLUE@|Use blue buffer with most bits (> MIN_BLUE bits) |
+|@WX::GL_MIN_ALPHA@|Use alpha buffer with most bits (> MIN_ALPHA bits)|
+|@WX::GL_DEPTH_SIZE@|Bits for Z-buffer (0,16,32)|
+|@WX::GL_STENCIL_SIZE@|Bits for stencil buffer|
+|@WX::GL_MIN_ACCUM_RED@|Use red accum buffer with most bits (> MIN_ACCUM_RED bits)|
+|@WX::GL_MIN_ACCUM_GREEN@|Use green buffer with most bits (> MIN_ACCUM_GREEN bits)|
+|@WX::GL_MIN_ACCUM_BLUE@|Use blue buffer with most bits (> MIN_ACCUM_BLUE bits)|
+|@WX::GL_MIN_ACCUM_ALPHA@|Use blue buffer with most bits (> MIN_ACCUM_ALPHA bits)|
 
 <div id="methods">
 
 h2. Methods
 
 * "GLCanvas.new":#GLCanvas_new
-* "GLCanvas#get_context":#GLCanvas_getcontext
 * "GLCanvas#set_current":#GLCanvas_setcurrent
 * "GLCanvas#set_colour":#GLCanvas_setcolour
 * "GLCanvas#swap_buffers":#GLCanvas_swapbuffers
@@ -75,76 +65,47 @@ h2. Methods
 
 h3(#GLCanvas_constr). GLCanvas.new
 
-  *GLCanvas.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = -1, 
+  *GLCanvas.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id = ID_ANY, 
                %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
                %(arg-type)Integer% style=0, 
                %(arg-type)String% name="GLCanvas", 
-               %(arg-type)Integer% attribList = 0, 
-               %(arg-type)"Palette":palette.html% palette = NullPalette)
+               %(arg-type)Integer% attrib_list = 0, 
+               %(arg-type)"Palette":palette.html% palette = NULL_PALETTE)
 
-  *GLCanvas.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"GLContext":glcontext.html% sharedContext, 
-               %(arg-type)Integer% id = -1, 
-               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
-               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
-               %(arg-type)Integer% style=0, 
-               %(arg-type)String% name="GLCanvas", 
-               %(arg-type)Integer% attribList = 0, 
-               %(arg-type)"Palette":palette.html% palette = NullPalette)
+The initializer implicitly creates an instance of "GLContext":glcontext.html. 
+Optional parameters may also be specified by keywords in any order as following :
 
-  *GLCanvas.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)"GLCanvas":glcanvas.html% sharedCanvas, 
-               %(arg-type)Integer% id = -1, 
-               %(arg-type)"Point":point.html% pos = DEFAULT_POSITION, 
-               %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
-               %(arg-type)Integer% style=0, 
-               %(arg-type)String% name="GLCanvas", 
-               %(arg-type)Integer% attribList = 0, 
-               %(arg-type)"Palette":palette.html% palette = NullPalette)
-
-Constructor.
+canvas = Wx::GLCanvas.new(parent, :size => [600, 600])
 
 * _parent_ Pointer to a parent window.
-* _sharedContext_ Context to share object resources with.
-
-
-* _id_ Window identifier. If -1, will automatically create an identifier.
-* _pos_ Window position. DefaultPosition is (-1, -1) which indicates that Widgets
+* _id_ Window identifier. If ID_ANY (-1), will automatically create an identifier.
+* _pos_ Window position. DEFAULT_POSITION is [-1, -1] which indicates that Widgets
 should generate a default position for the window.
-* _size_ Window size. DefaultSize is (-1, -1) which indicates that Widgets should
+* _size_ Window size. DEFAULT_SIZE is [-1, -1] which indicates that Widgets should
 generate a default size for the window. If no suitable size can be found, the window will be sized to 20x20 pixels so that the window is visible but obviously not correctly sized.
 * _style_ Window style.
 * _name_ Window name.
-* _attribList_ Array of int. With this parameter you can set the device context attributes associated to this window.
-This array is zero-terminated: it should be set up with constants described in the table above.
+* _attrib_list_ Array of int. With this parameter you can set the device context attributes associated to this window.
+It should be set up with constants described in the table above.
 If a constant should be followed by a value, put it in the next array position.
-For example, the WX_GL_DEPTH_SIZE should be followed by the value that indicates the number of
+For example, the WX::GL_DEPTH_SIZE should be followed by the value that indicates the number of
 bits for the depth buffer, so:
 
-
- attribList[index]= WX_GL_DEPTH_SIZE;
- attribList[index+1]=32;
+ attrib_list = [WX::GL_DEPTH_SIZE, 32]
  and so on.
- 
 
-* _palette_ If the window has the palette, it should by pass this value.
+* _palette_ If the window has the palette, it should by pass this value. 
 Note: palette and WX_GL_RGBA are mutually exclusive.
-
-
-h3(#GLCanvas_getcontext). GLCanvas#get_context
-
- "GLContext":glcontext.html *get_context*()
-
-Obtains the context that is associated with this canvas.
 
 
 h3(#GLCanvas_setcurrent). GLCanvas#set_current
 
   *set_current*()
 
-Sets this canvas as the current recipient of OpenGL calls.
-Each canvas contains an OpenGL device context that has been created during
-the creation of this window. So this call sets the current device context
-as the target device context for OpenGL operations.
+A call to this method makes the implicit rendering context of this canvas current with this canvas, so that subsequent 
+OpenGL calls modify the OpenGL state of the implicit rendering context.
+
 
 Note that this function may only be called after the window has been shown.
 

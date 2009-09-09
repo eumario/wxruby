@@ -63,18 +63,8 @@ h3(#RadioBox_new). RadioBox.new
   *RadioBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
                %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
                %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
-               %(arg-type)Integer% n = 0, 
-               %(arg-type)String% choices[] = nil, 
-               %(arg-type)Integer% majorDimension = 0, 
-               %(arg-type)Integer% style = RA_SPECIFY_COLS, 
-               %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
-               %(arg-type)String% name = "radioBox")
-
-  *RadioBox.new*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-               %(arg-type)"Point":point.html% point, 
-               %(arg-type)"Size":size.html% size, 
-               %(arg-type)"ArrayString":arraystring.html% choices, 
-               %(arg-type)Integer% majorDimension = 0, 
+               %(arg-type)Array% choices =[], 
+               %(arg-type)Integer% major_dimension = 0, 
                %(arg-type)Integer% style = RA_SPECIFY_COLS, 
                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                %(arg-type)String% name = "radioBox")
@@ -83,14 +73,13 @@ Constructor, creating and showing a radiobox.
 
 h4. Parameters
 
-* _parent_ Parent window. Must not be NULL.
+* _parent_ Parent window. Must not be @nil@.
 * _id_ Window identifier. A value of -1 indicates a default value.
 * _label_ Label for the static box surrounding the radio buttons.
 * _pos_ Window position. If the position (-1, -1) is specified then a default position is chosen.
 * _size_ Window size. If the default size (-1, -1) is specified then a default size is chosen.
-* _n_ Number of choices with which to initialize the radiobox.
-* _choices_ An array of choices with which to initialize the radiobox.
-* _majorDimension_ Specifies the maximum number of rows (if style contains RA_SPECIFY_ROWS) or columns (if style contains RA_SPECIFY_COLS) for a two-dimensional
+* _choices_ An array of String choices with which to initialize the radiobox.
+* _major_dimension_ Specifies the maximum number of rows (if style contains RA_SPECIFY_ROWS) or columns (if style contains RA_SPECIFY_COLS) for a two-dimensional
 radiobox.
 * _style_ Window style. See "RadioBox":radiobox.html.
 * _validator_ Window validator.
@@ -100,31 +89,13 @@ h4. See also
 
 "RadioBox#create":radiobox.html#RadioBox_create, "Validator":validator.html
 
-
-
-
-
-  *destructor*()
-
-Destructor, destroying the radiobox item.
-
 h3(#RadioBox_create). RadioBox#create
 
  Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
                 %(arg-type)"Point":point.html% point = DEFAULT_POSITION, 
                 %(arg-type)"Size":size.html% size = DEFAULT_SIZE, 
-                %(arg-type)Integer% n = 0, 
-                %(arg-type)String% choices[] = nil, 
-                %(arg-type)Integer% majorDimension = 0, 
-                %(arg-type)Integer% style = RA_SPECIFY_COLS, 
-                %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
-                %(arg-type)String% name = "radioBox")
-
- Boolean *create*(%(arg-type)"Window":window.html% parent,  %(arg-type)Integer% id,  %(arg-type)String% label, 
-                %(arg-type)"Point":point.html% point, 
-                %(arg-type)"Size":size.html% size, 
-                %(arg-type)"ArrayString":arraystring.html% choices, 
-                %(arg-type)Integer% majorDimension = 0, 
+                %(arg-type)Array% choices = [], 
+                %(arg-type)Integer% major_dimension = 0, 
                 %(arg-type)Integer% style = RA_SPECIFY_COLS, 
                 %(arg-type)"Validator":validator.html% validator = DEFAULT_VALIDATOR, 
                 %(arg-type)String% name = "radioBox")

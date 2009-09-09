@@ -6,7 +6,7 @@
 #############################
 # platform-dependent settings
 
-require 'rake/rakeunixish'
+require './rake/rakeunixish'
 
 $extra_cppflags = '-Wno-unused-function '
 

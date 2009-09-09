@@ -13,7 +13,13 @@ class Wx::ToolBar
                       Wx::Parameter[ :client_data, nil ] ]
   
   def add_item(bitmap1, *mixed_args)
-    args = Wx::args_as_list(ADD_ITEM_PARAMS, *mixed_args)
+
+    begin
+      args = Wx::args_as_list(ADD_ITEM_PARAMS, *mixed_args)
+    rescue => err
+      err.set_backtrace(caller)
+      Kernel.raise err
+    end
 
     bitmap2 = args.shift
     pos = args.shift

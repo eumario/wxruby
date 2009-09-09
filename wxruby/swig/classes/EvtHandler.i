@@ -111,15 +111,17 @@ public:
 		VALUE rb_evt_type = rb_funcall(cWxEvtHandler.klass, 
 									   rb_intern("event_type_for_name"),
 									   1, evtSpecifier);
-		if ( rb_evt_type )
+		if ( rb_evt_type != Qnil )
 		  event_type = NUM2INT( rb_evt_type );
 		else
-		  rb_raise(rb_eTypeError, "Unknown event handler %s", 
-				   STR2CSTR(rb_inspect(evtSpecifier)));
+	    {
+	      VALUE msg = rb_inspect(evtSpecifier);
+	      rb_raise(rb_eTypeError, "Unknown event handler %s", 
+	                    StringValuePtr(msg));
+	    }
 	  }
 	else 
 	  rb_raise(rb_eTypeError, "Invalid specifier for event type");
-
 
 	// TODO - enable switching off all handlers by type only - this
 	// version doesn't work if the first arg is wxID_ANY

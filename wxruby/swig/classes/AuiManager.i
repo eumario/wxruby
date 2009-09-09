@@ -7,6 +7,12 @@
 GC_MANAGE_AS_OBJECT(wxAuiManager);
 
 %{
+// Workaround for wx's auibar.h incompatibility 2.8.10 with OS X compiler
+// Should be fixed by future wxWidgets 
+#ifdef __WXMAC__
+#define id toolid
+#endif
+
 #include <wx/aui/aui.h>
 %}
 

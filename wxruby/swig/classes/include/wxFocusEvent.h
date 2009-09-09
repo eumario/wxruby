@@ -10,6 +10,9 @@ public:
 
   // override pure virtual methods from base classes
   virtual wxEvent* Clone() const;
+
+  wxWindow *GetWindow() const;
+  void SetWindow(wxWindow *win);
 };
 
 

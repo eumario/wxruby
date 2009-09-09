@@ -6,7 +6,7 @@
 # up to support VS2005 (version 8.0 of the runtime)
 
 # First, common Windows settings (shared with MingW)
-require 'rake/rakewindows'
+require './rake/rakewindows'
 
 # The name of the compiler and linker
 $cpp  = "cl.exe"
@@ -73,7 +73,7 @@ gl_lib = File.join( $WXLIBDIR, "wxmsw#{$WXVERSION}#{$POSTFIX}_gl.lib" )
 if File.exists?(gl_lib)
   windows_libs << gl_lib 
 else
-  $excluded_classes << "GLCanvas"
+  $excluded_classes += %w|GLCanvas GLContext|
 end
 
 # Glue them all together into an argument passed to the linker

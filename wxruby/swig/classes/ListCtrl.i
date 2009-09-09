@@ -115,6 +115,9 @@ SWIG_WXWINDOW_NO_USELESS_VIRTUALS(wxListCtrl);
 	if ( GC_IsWindowDeleted(ptr) )
 	  return;
 
+    // Do standard marking routines as for all wxWindows
+    GC_mark_wxWindow(ptr);
+
 	wxListCtrl* wx_lc = (wxListCtrl*) ptr;
 
 	// First check if there's ImageLists and mark if found

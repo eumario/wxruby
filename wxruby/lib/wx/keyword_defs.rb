@@ -105,6 +105,15 @@ end
 
 # MISCELLANEOUS WINDOWS
 
+# OpenGL Canvas
+Wx::define_keyword_ctors('GLCanvas') do
+  wx_ctor_params :id
+  wx_ctor_params :pos, :size, :style => Wx::FULL_REPAINT_ON_RESIZE
+  wx_ctor_params :name => 'GLCanvas'
+  wx_ctor_params :attrib_list => [Wx::GL_RGBA, Wx::GL_DOUBLEBUFFER]
+  wx_ctor_params :palette => Wx::NULL_PALETTE
+end
+
 # A window whose colour changes according to current user settings
 Wx::define_keyword_ctors('Panel') do
   wx_ctor_params :id, :pos, :size, :style => Wx::TAB_TRAVERSAL
@@ -227,7 +236,8 @@ end
 Wx::define_keyword_ctors('DirDialog') do
   wx_ctor_params :message => 'Choose a directory'
   wx_ctor_params :default_path => ''
-  wx_ctor_params :style, :pos, :size, :name => 'wxDirCtrl'
+  wx_ctor_params :style => Wx::DD_DEFAULT_STYLE
+  wx_ctor_params :pos, :size, :name => 'wxDirCtrl'
 end
 
 # wxFileDialog 	File selector dialog
@@ -236,7 +246,8 @@ Wx::define_keyword_ctors('FileDialog') do
   wx_ctor_params :default_dir  => ''
   wx_ctor_params :default_file => ''
   wx_ctor_params :wildcard => '*.*'
-  wx_ctor_params :style, :pos
+  wx_ctor_params :style => Wx::FD_DEFAULT_STYLE
+  wx_ctor_params :pos, :size, :name => 'filedlg'
 end
 
 # wxFindReplaceDialog 	Text search/replace dialog
@@ -551,8 +562,7 @@ Wx::define_keyword_ctors('HtmlListBox') do
 end
 
 Wx::define_keyword_ctors('DatePickerCtrl') do
-  wx_ctor_params :id, :dt => Time.now
-  wx_ctor_params :pos, :size, :style, :validator, :name => 'dateCtrl'
+  wx_ctor_params :id, :dt, :pos, :size, :style, :validator, :name => 'dateCtrl'
 end
 
 Wx::define_keyword_ctors('RichTextCtrl') do

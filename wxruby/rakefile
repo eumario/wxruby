@@ -9,10 +9,10 @@
 # WXRUBY_NO_UNICODE : try and build an ANSI version
 # WXRUBY_EXCLUDED   : exclude certian classes from being compiled, even if present
 
-require "rake/rakeutil"
+require "./rake/rakeutil"
 
 # Determine or set version of wxRuby library
-require 'rake/rakeversion'
+require './rake/rakeversion'
 
 # STANDARD BUILD DIRECTORIES
 SWIG_DIR = 'swig'
@@ -36,7 +36,8 @@ when /^1\.9/
 else
   raise "This version of Ruby (#{RUBY_VERSION}) is not supported"
 end
-SWIG_MAXIMUM_VERSION = '1.3.99' # Doesn't currently need to be checked
+# SWIG 1.3.39 introduced changes incompatible with swig/fixmodule.rb etc
+SWIG_MAXIMUM_VERSION = '1.3.38'
 
 # SOURCE FILE GROUPS
 # THE UNADORNED NAMES OF ALL THE WX OBJECT CLASSES TO BE BUILT
@@ -55,19 +56,19 @@ ALL_RUBY_LIB_FILES = FileList[ 'lib/**/*.rb' ]
 # Redcloth library is required to build the documentation, but not
 # required just to compile the lib.
 begin
-  require "rake/rakedocs"
+  require "./rake/rakedocs"
 rescue LoadError # documentation tasks will not be available
 end
 
 # Rubygems library is required to build a gem, but not just to compile
 # the lib.
 begin
-  require "rake/rakepackage"  
+  require "./rake/rakepackage"  
 rescue LoadError # package tasks will not be available
 end
 
-require 'rake/rakeconfigure'
-require "rake/rakewx"
+require './rake/rakeconfigure'
+require "./rake/rakewx"
 
 #############################
 # public tasks
