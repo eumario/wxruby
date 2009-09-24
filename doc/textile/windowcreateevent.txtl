@@ -15,7 +15,7 @@ h2. Derived from
 
 h2. Event hooks
 
-To process a window creation event, use the @evt_create@ event hook to
+To process a window creation event, use the @evt_window_create@ event hook to
 handle the event with a block. The block can optionally receive a
 WindowCreateEvent argument. @id@ should be the id of the window whose
 creation should be handled. It is possible to observe the creation of
@@ -23,7 +23,7 @@ any window by using the special identifier @Wx::ID_ANY@. If this
 identifier is used, the newly created window can be obtained from the
 event object; call the @get_event_object@ method of the event.
 
-|*evt_create(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_CREATE event.|
+|*evt_window_create(id)&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process a EVT_CREATE event.|
 
 h2. See also
 
