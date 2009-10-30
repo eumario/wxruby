@@ -43,6 +43,7 @@ public:
   int GetItemSpacing(bool  isSmall ) const;
   int GetItemState(long  item , long  stateMask ) const;
   wxString GetItemText(long  item ) const;
+  wxColour GetItemTextColour(long item) const;
   long GetNextItem(long  item , int  geometry = wxLIST_NEXT_ALL, int  state = wxLIST_STATE_DONTCARE) const;
   int GetSelectedItemCount() const;
 
@@ -72,6 +73,7 @@ public:
   bool SetItemPosition(long  item , const wxPoint&  pos ) ;
   bool SetItemState(long  item , long  state , long  stateMask ) ;
   void SetItemText(long  item , const wxString&  text ) ;
+  void SetItemTextColour(long item, const wxColour& col);
   void SetSingleStyle(long  style , const bool  add = true) ;
   void SetTextColour(const wxColour&  col ) ;
   void SetWindowStyleFlag(long  style ) ;
