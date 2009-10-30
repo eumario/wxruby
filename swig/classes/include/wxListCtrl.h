@@ -67,8 +67,10 @@ public:
   bool SetItem(wxListItem&  info ) ;
   long SetItem(long  index , int  col , const  wxString& label , int  imageId = -1) ;
   void SetItemBackgroundColour(long item, const wxColour& col);
+  bool SetItemColumnImage(long item, long column, int  image) ;
   void SetItemCount(long  count ) ;
   bool SetItemData(long  item , long  data ) ;
+  bool SetItemImage(long  item , int  image) ;
   bool SetItemImage(long  item , int  image , int  selImage ) ;
   bool SetItemPosition(long  item , const wxPoint&  pos ) ;
   bool SetItemState(long  item , long  state , long  stateMask ) ;
