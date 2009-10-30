@@ -598,8 +598,12 @@ Inserts an image item.
 Insert an image/string item.
 
 Note that if you are using a ListCtrl with the @Wx::LC_REPORT@ style,
-you *must* create one or more columns using the insert_column method
+you *must* create one or more columns using the "insert_column":#ListCtrl_insertcolumn method
 before inserting items, or it will not work, and WxRuby may crash.
+
+Also, when creating multi-column reports, use *insert_item* only for the
+first column, to create the row. To insert text in the second and
+subsequent columns in the row, use "set_item":#ListCtrl_setitem instead.
 
 h4. Parameters
 
