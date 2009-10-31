@@ -38,12 +38,12 @@ h2. Event handling
 
 To process input from a taskbar icon, use the following event handler
 methods to direct input to a block that takes a TaskBarIconEvent
-argument. Note that not all ports are required to send these events and
-so it's better to override
-"create_popup_menu":#TaskBarIcon_createpopupmenu if all that the
-application does is that it shows a popup menu in reaction to mouse
-click.
+argument. 
 
+Note that not all ports are required to send these events and so it's
+better to override "create_popup_menu":#TaskBarIcon_createpopupmenu if
+all that the application does is that it shows a popup menu in reaction
+to mouse click.
 
 
 |*evt_taskbar_move()&nbsp;{&nbsp;&#124;&nbsp;event&nbsp;&#124;&nbsp;...&nbsp;}*|Process aEVT_TASKBAR_MOVE event.|
@@ -72,9 +72,10 @@ h2. Methods
 
 h3(#TaskBarIcon_new). TaskBarIcon.new
 
-  *destructor*()
+ *TaskBarIcon.new*()
 
-Destroys the TaskBarIcon object, removing the icon if not already removed.
+Creates a TaskBarIcon. Use "set_icon":#TaskBarIcon_seticon to specify
+the appearance of the icon in the dock or taskbar.
 
 h3(#TaskBarIcon_createpopupmenu). TaskBarIcon#create_popup_menu
 
@@ -121,7 +122,7 @@ h4. Note
 
 It is recommended to override
 "create_popup_menu":#TaskBarIcon_createpopupmenu
-callback instead of calling this method from event handler, because some
+callback instead of calling this method from an event handler, because some
 ports (e.g. Cocoa) may not implement PopupMenu and mouse click events at all.
 
 h3(#TaskBarIcon_removeicon). TaskBarIcon#remove_icon
