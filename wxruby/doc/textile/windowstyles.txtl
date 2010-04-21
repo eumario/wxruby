@@ -1,4 +1,4 @@
-h1. Window Styles and WxRuby Constants Overview
+﻿h1. Window Styles and WxRuby Constants Overview
 
 h2. Window Styles
 
@@ -14,16 +14,16 @@ Some style flags are relevant for most windows, such as
 @Wx::SUNKEN_BORDER@. A full list of these constants can be found in the
 documentation for the "Window":window.html class.
 
-Other style flags are relevant for most varieties of frames and dialogs -
+Other style flags are relevant for most varieties of frames and dialogs -- 
 anything that is likely to be displayed with a title bar and a frame
-drawn by the desktop/window manager. An example of these constants is
-@MINIMIZE_BOX@, which displays a button to minimize the frame. A full
-list of these constants is in the "Frame":frame.html documentation.
+drawn by the desktop/window manager. An example of such a constant is
+@MINIMIZE_BOX@, which displays a button to minimize the frame. A complete
+listing of these constants can be found in the "Frame":frame.html documentation.
 
-There are also style flags that are relevant only to a specific class of
-window. An example is @Wx::TE_READONLY@, which is only meangingful for
-TextCtrl widgets. These names for these constants has a prefix
-indicating which class it is relevant to. @TE@ prefix for
+There are also style flags that apply only to a specific class of
+window. An example is @Wx::TE_READONLY@, which is meaningful only for
+TextCtrl widgets. Names for these constants begin with a prefix
+indicating the relevant class, e.g., the prefix @TE@  for
 "TextCtrl":textctrl.html, @SP@ for "SpinCtrl":spinctrl.html, @TR@ for
 "TreeCtrl":treectrl.html and so on. 
 
@@ -40,7 +40,7 @@ ruby's logical OR operator.
  text = WxTextCtrl.new(.....
                        Wx::TE_READONLY|Wx::SUNKEN_BORDER|Wx::TE_MULTILINE)
 
-If you hate typing 'Wx::' all the time, include the Wx module in your class:
+If typing 'Wx::' all the time bothers you, include the Wx module in your class:
 
  class MyTextCtrl
    include Wx
