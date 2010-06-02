@@ -18,7 +18,7 @@ $base_gemspec = Gem::Specification.new do | spec |
     spec.name << "-ruby19"
   end
 
-  spec.version = WXRUBY_VERSION
+  spec.version = "#{WXRUBY_VERSION}"
 
   spec.require_path = 'lib'
   spec.summary  = 'Ruby interface to the wxWidgets GUI library'
