@@ -1,0 +1,13 @@
+--- 
+- :package: wxruby
+  :message: Properly include examples and base README, INSTALL, etc, etc.
+  :distro: lucid
+  :author: Mario Steele
+  :author_email: mario@ruby-im.net
+  :version: 2.0.1-2
+- :package: wxruby
+  :message: Initial Release.
+  :distro: lucid
+  :author: Mario Steele
+  :author_email: mario@ruby-im.net
+  :version: 2.0.1-1
