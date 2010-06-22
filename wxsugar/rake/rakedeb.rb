@@ -133,7 +133,6 @@ task :package_deb do
 	lib_dir = File.join build_dir, "lib"
 	examples_dir = File.join build_dir, "data", "wxsugar", "examples"
 	docs_dir = File.join build_dir, "data", "wxsugar", "docs"
-	File.makedirs bin_dir
 	File.makedirs build_dir
 	File.makedirs lib_dir
 	File.makedirs docs_dir
