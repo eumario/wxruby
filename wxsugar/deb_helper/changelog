@@ -1,0 +1,13 @@
+--- 
+- :package: wxsugar
+  :message: Fixed package description.
+  :distro: lucid
+  :author: Mario Steele
+  :author_email: mario@ruby-im.net
+  :version: 0.1.22-2
+- :package: wxsugar
+  :message: Initial Release.
+  :distro: lucid
+  :author: Mario Steele
+  :author_email: mario@ruby-im.net
+  :version: 0.1.22-1

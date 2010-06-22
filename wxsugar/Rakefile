@@ -1,6 +1,12 @@
 require 'rake/packagetask'
 require 'rbconfig'
 
+# For building a Debian Package
+if (RUBY_PLATFORM =~ /linux/) && ((File.read("/etc/lsb-release") =~ /DISTRIB_ID\=Ubuntu$/) ||
+                (File.read("/etc/lsb-release") =~ /DISTRIB_ID\=Debian$/))
+        require "rake/rakedeb"
+end
+
 # find the file where the version is stored
 VERSION_FILE = File.join %w|lib wx_sugar version.rb|
 

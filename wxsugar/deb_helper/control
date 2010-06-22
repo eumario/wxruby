@@ -1,0 +1,14 @@
+Source: wxsugar
+Section: ruby
+Priority: extra
+Maintainer: %s <%s>
+Build-Depends: debhelper (>= 7), ruby, ruby-dev, cdbs, ruby-pkg-tools, libglu1-xorg-dev, libgtk2.0-dev, libwxgtk2.8-dev, libwxbase2.8-dev
+Standards-Version: 3.8.3
+Homepage: http://wxruby.rubyforge.org
+
+Package: wxsugar
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Ruby extension library for wxRuby
+ Ruby Sugar syntax for the wxWidgets Library, offering other tools such as xrcise
+ to convert XRC form files into Ruby Objects for wxWidgets.
