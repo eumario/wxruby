@@ -778,7 +778,7 @@ class MyFrame < Wx::Frame
 
     # create the controls
     @textctrl = Wx::TextCtrl.new( @splitter, 
-                                  :text => '', 
+                                  :value => "Log text\n",
                                   :style => Wx::TE_MULTILINE|Wx::SUNKEN_BORDER)
 
     create_tree_with_default_style()
