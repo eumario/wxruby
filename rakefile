@@ -27,17 +27,16 @@ TARGET_LIB = File.join(DEST_DIR, DLL_LIB)
 
 # FOR ENSURING SUITABLE SWIG VERSION IS AVAILABLE
 SWIG_CMD = ENV['SWIG_CMD'] || "swig"
-# Newer versions of Ruby-1.9 need fixes in very recent SWIGs
+
+# SWIG 2.0.0 is now the minimum version required for all versions of Ruby
 case RUBY_VERSION
 when /^1\.8/
-  SWIG_MINIMUM_VERSION = '1.3.32'
+  SWIG_MINIMUM_VERSION = '2.0.0'
 when /^1\.9/
-  SWIG_MINIMUM_VERSION = '1.3.37'
+  SWIG_MINIMUM_VERSION = '2.0.0'
 else
   raise "This version of Ruby (#{RUBY_VERSION}) is not supported"
 end
-# SWIG 1.3.39 introduced changes incompatible with swig/fixmodule.rb etc
-SWIG_MAXIMUM_VERSION = '1.3.38'
 
 # SOURCE FILE GROUPS
 # THE UNADORNED NAMES OF ALL THE WX OBJECT CLASSES TO BE BUILT

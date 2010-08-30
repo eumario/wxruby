@@ -367,7 +367,7 @@
   if ( ! rb_const_defined(mWxruby2, rb_intern("THE_APP") ) )
 	{ rb_raise(rb_eRuntimeError,
 			   "Cannot create a Window before App.main_loop has been called");}
-  if ( ! $1 && ! rb_obj_is_kind_of(self, cWxTopLevelWindow.klass) )
+  if ( ! $1 && ! rb_obj_is_kind_of(self, SwigClassWxTopLevelWindow.klass) )
 	{ rb_raise(rb_eArgError, 
 			   "Window parent argument must not be nil"); }
 }

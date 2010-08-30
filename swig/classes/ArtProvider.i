@@ -24,8 +24,8 @@ typedef wxString wxArtClient;
 
 %{
 
-extern swig_class cWxSize;
-extern swig_class cWxObject;
+extern swig_class SwigClassWxSize;
+extern swig_class SwigClassWxObject;
 
 class wxRubyArtProvider : public wxArtProvider
 {
@@ -40,7 +40,7 @@ class wxRubyArtProvider : public wxArtProvider
 
     v_id     = WXSTR_TO_RSTR(id);
     v_client = WXSTR_TO_RSTR(client);
-    v_size   = SWIG_NewClassInstance(cWxSize.klass, SWIGTYPE_p_wxSize);
+    v_size   = SWIG_NewClassInstance(SwigClassWxSize.klass, SWIGTYPE_p_wxSize);
     wxSize *size_ptr = new wxSize(size);
     DATA_PTR(v_size) = size_ptr;
 	

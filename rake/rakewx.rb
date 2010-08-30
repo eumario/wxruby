@@ -43,9 +43,9 @@ def check_swig
   if version < SWIG_MINIMUM_VERSION
     raise "SWIG version #{version} is installed, " +
           "minimum version required is #{SWIG_MINIMUM_VERSION}.\n"
-  elsif version > SWIG_MAXIMUM_VERSION 
-    raise "SWIG version #{version} is installed, " +
-          "maximum version permitted is #{SWIG_MAXIMUM_VERSION}"
+#  elsif version > SWIG_MAXIMUM_VERSION 
+#    raise "SWIG version #{version} is installed, " +
+#          "maximum version permitted is #{SWIG_MAXIMUM_VERSION}"
   end
 
   $have_good_swig = true

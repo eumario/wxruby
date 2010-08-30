@@ -131,8 +131,8 @@ VALUE wxRuby_WrapWxObjectInRuby(wxObject *wx_obj)
 // round this by tracking Event objects created on the ruby side with eg
 // CommandEvent.new, but never tracking, marking or freeing those
 // generated on the C++ side.
-extern swig_class cWxEvtHandler; 
-extern swig_class cWxEvent;
+extern swig_class SwigClassWxEvtHandler; 
+extern swig_class SwigClassWxEvent;
 // Cached reference to EvtHandler evt_type_id -> ruby_event_class map
 VALUE Evt_Type_Map = NULL;
 
@@ -142,7 +142,7 @@ VALUE wxRuby_WrapWxEventInRuby(wxEvent *wx_event)
   if ( ! Evt_Type_Map )
     {
       VALUE map_name = rb_str_new2("EVENT_TYPE_CLASS_MAP");
-      Evt_Type_Map = rb_const_get(cWxEvtHandler.klass, 
+      Evt_Type_Map = rb_const_get(SwigClassWxEvtHandler.klass, 
                                   rb_to_id(map_name) );
     }
 
@@ -154,7 +154,7 @@ VALUE wxRuby_WrapWxEventInRuby(wxEvent *wx_event)
   // Check we have a valid class; warn and map to default Wx::Event if not
   if ( NIL_P(rb_event_class) )
     {
-      rb_event_class = cWxEvent.klass;
+      rb_event_class = SwigClassWxEvent.klass;
       rb_warning("Unmapped event type %i", wx_event->GetEventType());
     }
 

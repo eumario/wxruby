@@ -11,6 +11,9 @@
 
 require './swig/classes/include/parents'
 
+# $swig_class_prefix = "c"          # For SWIG versions <= 1.3.38
+$swig_class_prefix = "SwigClass"  # For newer versions of SWIG
+
 def fixmodule(filename)
   broken = filename+".old"
   File.rename(filename, broken)
@@ -38,12 +41,12 @@ def fixmodule(filename)
     File.foreach(broken) do | line |
       
       # if we find the definition of our class variable,
-      if (line.index('swig_class c') and not line.index("extern"))
+      if (line.index("swig_class #{$swig_class_prefix}") and not line.index("extern"))
         puts("class #{wx_name}")
         # declare our (primary) base class so we can use it as our parent
         result = []
         if (parent_wxklass)
-          result << "extern swig_class cWx#{parent_name};"
+          result << "extern swig_class #{$swig_class_prefix}Wx#{parent_name};"
         end
         result << line
         line = result.join("\n")
@@ -117,8 +120,8 @@ DECLARE_DYNAMIC_CLASS(SwigDirector_wxTreeCtrl);
           #initialize our primary parent
           result << "    extern void Init_wx#{parent_name}();"
           result << "    Init_wx#{parent_name}();"
-          result << "    //extern swig_class cWx#{parent_name};"
-          parent_klass = "cWx#{parent_name}.klass"
+          result << "    //extern swig_class #{$swig_class_prefix}Wx#{parent_name};"
+          parent_klass = "#{$swig_class_prefix}Wx#{parent_name}.klass"
           # define us under our parent instead of under ruby's Object
           line = line.gsub(/rb_cObject/, parent_klass)
         end

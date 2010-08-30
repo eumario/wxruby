@@ -13,7 +13,7 @@ GC_MANAGE_AS_OBJECT(wxEvtHandler);
 %include "include/wxEvtHandler.h"
 
 %runtime{
-extern swig_class cWxEvtHandler;
+extern swig_class SwigClassWxEvtHandler;
 
 // Internally, all event handlers are anonymous ruby Proc objects,
 // created by EvtHandler#connect. These need to be preserved from Ruby's
@@ -108,7 +108,7 @@ public:
 	  event_type = wxEVT_NULL;
 	else if ( TYPE(evtSpecifier) == T_SYMBOL ) // Symbol handler method
 	  {
-		VALUE rb_evt_type = rb_funcall(cWxEvtHandler.klass, 
+		VALUE rb_evt_type = rb_funcall(SwigClassWxEvtHandler.klass, 
 									   rb_intern("event_type_for_name"),
 									   1, evtSpecifier);
 		if ( rb_evt_type != Qnil )

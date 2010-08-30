@@ -52,9 +52,9 @@ GC_NEVER(wxRubyApp);
 
 %{
 
-extern swig_class cWxEvtHandler;
-extern swig_class cWxWindow;
-extern swig_class cWxEvent;
+extern swig_class SwigClassWxEvtHandler;
+extern swig_class SwigClassWxWindow;
+extern swig_class SwigClassWxEvent;
 extern void GC_SetWindowDeleted(void*);
 extern "C" void Init_wxRubyStockObjects();
 extern void wxRuby_MarkProtectedEvtHandlerProcs();
@@ -90,7 +90,7 @@ public:
 	// Check if it's a valid object (sometimes SWIG doesn't return what we're
 	// expecting), a descendant of Wx::Window, and if it has not yet been
 	// deleted by WxWidgets; if so, mark it.
-	if ( TYPE(rb_obj) == T_DATA && rb_obj_is_kind_of(rb_obj, cWxWindow.klass) )
+	if ( TYPE(rb_obj) == T_DATA && rb_obj_is_kind_of(rb_obj, SwigClassWxWindow.klass) )
 	  {
 		rb_gc_mark(rb_obj);
 	  }

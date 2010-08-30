@@ -55,7 +55,7 @@
 #endif
 
 extern VALUE mWxruby2; // The global Wxruby2 module
-extern swig_class cWxTopLevelWindow; // used for wxWindow typemap in typemap.i
+extern swig_class SwigClassWxTopLevelWindow; // used for wxWindow typemap in typemap.i
 extern bool GC_IsWindowDeleted(void *ptr);
 
 // Defined in wx.i; getting, setting and using swig_type <-> ruby class
