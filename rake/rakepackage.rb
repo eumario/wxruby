@@ -23,8 +23,7 @@ $base_gemspec = Gem::Specification.new do | spec |
   spec.require_path = 'lib'
   spec.summary  = 'Ruby interface to the wxWidgets GUI library'
   spec.author   = 'wxRuby development team'
-  spec.homepage = 'http://wxruby.org/'
-  spec.email    = 'support@wxruby.org'
+  spec.homepage = 'http://wxruby.rubyforge.org'
 
   spec.rubyforge_project = 'wxruby'
   spec.description = <<-DESC
