@@ -12,7 +12,7 @@ class Wx::Rect
       Kernel.raise TypeError, "Cannot compare Rect to #{other}"
     end
     get_left == other.get_left and get_top == other.get_top and
-      get_right = other.get_right and get_bottom == other.get_bottom
+      get_right == other.get_right and get_bottom == other.get_bottom
   end
   # More ruby-ish names
   alias :contains? :contains
