@@ -180,7 +180,7 @@ Forces wxRuby to be built against a -debug version of wxWidgets.
 Lastly, you may specifically exclude certain classes; this is most often
 useful if a particular class is causing problems:
 
- export WXRUBY_EXCLUDE=ThisClass,ThatClass
+ export WXRUBY_EXCLUDED=ThisClass,ThatClass
 
 == Running the compile task
 
