@@ -327,9 +327,8 @@ h3(#Window_bringtofront). Window#bring_to_front
 
   *bring_to_front*()
 
-Raises the window to the top of the window hierarchy (z-order). In the
-current version of wxRuby this works both for managed windows (Frames)
-and child windows, although it is most often useful for Frames.
+Raises the window to the top of the window hierarchy (z-order).
+This function only works for TopLevelWindow-derived classes.
 
 h4. See also
 
@@ -2079,8 +2078,8 @@ h3(#Window_sendtoback). Window#send_to_back
 
   *send_to_back*()
 
-Lowers the window - most often, a Frame - to the bottom of the window
-hierarchy (z-order).
+Lowers the window to the bottom of the window hierarchy (z-order).
+This function only works for TopLevelWindow-derived classes.
 
 h3(#Window_setacceleratortable). Window#set_accelerator_table
 
