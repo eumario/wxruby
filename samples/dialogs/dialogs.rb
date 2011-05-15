@@ -766,7 +766,7 @@ class MyApp < App
     file_menu.append(DIALOGS_FILE_OPEN2,  "&Second open file\tCtrl-2")
     file_menu.append(DIALOGS_FILES_OPEN,  "Open &files\tShift-Ctrl-O")
     file_menu.append(DIALOGS_FILE_SAVE,  "Sa&ve file\tCtrl-S")
-    file_menu.append(DIALOGS_DIR_CHOOSE,  "&Choose a directory\tCtrl-D")
+    file_menu.append(DIALOGS_DIR_CHOOSE,  "Choose a &directory\tCtrl-D")
     file_menu.append(DIALOGS_PROGRESS, "Pro&gress dialog\tCtrl-G")
     file_menu.append(DIALOGS_BUSYINFO, "&Busy info dialog\tCtrl-B")
     file_menu.append(DIALOGS_PREFS, "Propert&y sheet dialog\tCtrl-Y")
