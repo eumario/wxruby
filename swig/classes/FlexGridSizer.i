@@ -6,12 +6,17 @@
 %module(directors="1") wxFlexGridSizer
 GC_MANAGE_AS_SIZER(wxFlexGridSizer);
 
-%ignore wxFlexGridSizer::GetFlexibleDirection;
-%ignore wxFlexGridSizer::GetNonFlexibleDirection;
-%ignore wxFlexGridSizer::SetFlexibleDirection;
-%ignore wxFlexGridSizer::SetNonFlexibleDirection;
-%ignore wxFlexGridSizer::GetNonFlexibleGrowMode;
-%ignore wxFlexGridSizer::SetNonFlexibleGrowMode;
+enum wxFlexSizerGrowMode
+{
+    // don't resize the cells in non-flexible direction at all
+    wxFLEX_GROWMODE_NONE,
+    // uniformly resize only the specified ones (default)
+    wxFLEX_GROWMODE_SPECIFIED,
+    // uniformly resize all cells
+    wxFLEX_GROWMODE_ALL
+};
+
+
 
 // shared functions
 %include "../shared/sizers.i"

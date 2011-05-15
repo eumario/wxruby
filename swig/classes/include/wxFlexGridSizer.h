@@ -15,7 +15,7 @@ public:
   void RemoveGrowableCol(size_t  idx ) ;
   void RemoveGrowableRow(size_t  idx ) ;
   void SetFlexibleDirection(int  direction ) ;
-  void SetNonFlexibleGrowMode(int  mode ) ;
+  void SetNonFlexibleGrowMode(wxFlexSizerGrowMode mode) ;
 
   virtual void RecalcSizes();
   virtual wxSize CalcMin();
