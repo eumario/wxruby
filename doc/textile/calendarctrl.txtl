@@ -87,11 +87,11 @@ The following are the possible return values for
 
 h2. See also
 
-"Calendar sample":samplecalendar.html
-
 "CalendarDateAttr":calendardateattr.html
 
 "CalendarEvent":calendarevent.html
+
+There is a sample demonstrating the use of the CalendarCtrl class included in the wxRuby distribution.
 
 <div id="methods">
 
