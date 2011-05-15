@@ -6,6 +6,12 @@
 %module wxUpdateUIEvent
 GC_MANAGE_AS_EVENT(wxUpdateUIEvent);
 
+enum wxUpdateUIMode
+{
+  wxUPDATE_UI_PROCESS_ALL,
+  wxUPDATE_UI_PROCESS_SPECIFIED
+};
+
 %import "include/wxObject.h"
 %import "include/wxEvent.h"
 %import "include/wxCommandEvent.h"
