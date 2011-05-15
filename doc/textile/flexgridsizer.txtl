@@ -158,7 +158,7 @@ h3(#FlexGridSizer_setnonflexiblegrowmode). FlexGridSizer#set_non_flexible_grow_m
 
 Specifies how the sizer should grow in the non flexible direction if
 there is one (so
-"set_flexible_directions()":#FlexGridSizer_setflexibledirections() must have
+"set_flexible_direction()":#FlexGridSizer_setflexibledirection() must have
 been called previously). Argument _mode_ can be one of those documented in
 "get_non_flexible_grow_mode":#FlexGridSizer_getnonflexiblegrowmode, please
 see there for their explanation.
