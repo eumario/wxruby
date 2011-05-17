@@ -54,23 +54,20 @@ Construct a sizer item for tracking a subsizer.
 
 h3(#GBSizerItem_getendpos). GBSizerItem#get_end_pos
 
-  *get_end_pos*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
+  Array *get_end_pos*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
-Get the row and column of the endpoint of this item
+Returns a two-element array with integers giving the row and column of
+the endpoint of this item
 
 h3(#GBSizerItem_getpos). GBSizerItem#get_pos
 
  "GBPosition":gbposition.html *get_pos*()
-
-  *get_pos*(%(arg-type)Integer% row,  %(arg-type)Integer% col)
 
 Get the grid position of the item.
 
 h3(#GBSizerItem_getspan). GBSizerItem#get_span
 
  "GBSpan":gbspan.html *get_span*()
-
-  *get_span*(%(arg-type)Integer% rowspan,  %(arg-type)Integer% colspan)
 
 Get the row and column spanning of the item.
 

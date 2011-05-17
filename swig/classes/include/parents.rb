@@ -114,6 +114,7 @@ $parents = {
     'wxFontDialog' => 'wxDialog',
     'wxFontList' => 'wxList',
     'wxFrame' => 'wxTopLevelWindow',
+    'wxGBSizerItem' => 'wxSizerItem',
     'wxGCDC' => 'wxDC',
     'wxGDIObject' => 'wxObject',
     'wxGLCanvas' => 'wxWindow',
