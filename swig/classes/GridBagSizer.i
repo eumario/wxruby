@@ -13,12 +13,6 @@ GC_MANAGE_AS_SIZER(wxGridBagSizer);
 // shared functions
 %include "../shared/sizers.i"
 
-// ignore these for now - are they useful?
-// require GBSizerItem to be wrapped
-%ignore wxGridBagSizer::FindItemWithData;
-%ignore wxGridBagSizer::FindItemAtPoint;
-%ignore wxGridBagSizer::FindItemAtPosition;
-
 %import "include/wxObject.h"
 %import "include/wxSizer.h"
 %import "include/wxGridSizer.h"
