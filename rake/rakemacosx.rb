@@ -1,11 +1,12 @@
-# rakemacosx.rb
-#   Copyright 2004-2006 by Kevin Smith
+#   Copyright 2004-2011, wxRuby development team
 #   released under the MIT-style wxruby2 license
 
-
-#############################
-# platform-dependent settings
-
+# Platform-dependent compile settings for Mac OS X.
+# From wxRuby 2.0.2 onwards, assumes compiling on OS X 10.6, Snow
+# Leopard, for a target of i386 architecture on 10.5/10.6
+#
+# Will NOT build with the standard Apple (64-bit) ruby included with
+# 10.6. Requires a ruby with i386 architecture support.
 
 require './rake/rakeunixish'
 
@@ -16,17 +17,10 @@ $wx_libs.chomp!
 $wx_libs.gsub!(/-framework (Cocoa|WebKit)/, '')
 $wx_libs << ' -framework Foundation -framework Appkit'
 
-# Defaults to building a universal binary, set WXRUBY_OSX_NO_UNIVERSAL to true
-# to build the default for the current computer
-$osx_universal = true
+# Only build for i386 - wxWidgets 2.8 cannot be compiled in 64-bit
+$ruby_cppflags.sub!(/-arch x86_64/, '')
+$ruby_ldflags.sub!(/-arch x86_64/, '')
 
-if ENV['WXRUBY_OSX_NO_UNIVERSAL']
-  $osx_universal = false
-end
-
-# Minimum system supported is 10.4.x, this is the minimum supported by
-# wxWidgets as of 01/15/2008
-$extra_cppflags = '-x objective-c++ -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
 # If release build, remove debugging info; if debug build, ensure
 # debugging info and remove optimisations
 if $release_build
@@ -36,13 +30,12 @@ elsif $debug_build
   $ruby_cppflags.sub!(/-Os/, '')
 end
 
-$extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress -isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4'
+# Support for Mac OS X 10.5, assuming compile on 10.6
+$extra_cppflags = '-x objective-c++ -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5'
+$extra_ldflags = '-dynamic -bundle -flat_namespace -undefined suppress -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5'
 
-if $osx_universal
-  $extra_cppflags << ' -arch ppc -arch i386'
-  $extra_ldflags << ' -arch ppc -arch i386'
-end
-
+###
+# AFF: Framework support not tested with recent OS X / wxRuby (May 2011) 
 task :framework do
 	build_framework
 end
