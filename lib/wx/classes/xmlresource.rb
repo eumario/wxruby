@@ -1,18 +1,19 @@
 class Wx::XmlResource
   # XRC_NO_SUBCLASSING should always be in place in wxRuby - we can't
-  # currently link directly to wxRuby subclasses.
+  # currently link directly to wxRuby subclasses. All handlers are
+  # always available in Ruby, since we can't reduce binary size by not
+  # including some.
   class << self
     wx_get = self.instance_method(:get)
     define_method(:get) do 
-      res = wx_get.bind(self).call
-      res.flags |= Wx::XRC_NO_SUBCLASSING
-      res
+      result = wx_get.bind(self).call
+      result.flags |= Wx::XRC_NO_SUBCLASSING
+      result.init_all_handlers
+      result
     end
   end
 
-  # WxRuby already has all XRC handlers built in so there's no way to
-  # control init_all_handlers to reduce binary size. So save users
-  # having to call it.
+  # Again, if created via new, switch subclassing off and init_all_handlers
   wx_init = self.instance_method(:initialize)
   define_method(:initialize) do | *args |
     result = wx_init.bind(self).call(*args)
