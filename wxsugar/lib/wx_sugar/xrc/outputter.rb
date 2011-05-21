@@ -52,7 +52,8 @@ class Outputter
         current_line_length += x.length      
       end 
     end
-    return new_string 
+    # Trim the last comma
+    return new_string.sub(/,\s*\Z/,'')
   end
 end
 
@@ -72,33 +73,26 @@ end
 # Generated at: <%= Time.now %>
 
 class <%= fq_name(klass.sub_class) %> < <%= klass.superclass %>
-  <% if not klass.controls.empty? %><% ids = klass.controls.map { | ctrl | ":#{ctrl.name.downcase}" }.join(', ') %>
+  ::XRCISE_LOADED = Hash.new unless defined?(::XRCISE_LOADED)
+	<% if not klass.controls.empty? %><% ids = klass.controls.map { | ctrl | ":#{ctrl.name.downcase}" }.join(', ') %>
   attr_reader <%= clean_id_attr_readers(ids) %>
   <% end %>
   def initialize(parent = nil)
     super()
     xml = Wx::XmlResource.get
-    xml.flags = 2 # Wx::XRC_NO_SUBCLASSING
-    xml.init_all_handlers
-    xml.load("<%= klass.file_name %>")
+    unless ::XRCISE_LOADED["<%= klass.file_name %>"]
+      xml.load("<%= klass.file_name %>")
+      ::XRCISE_LOADED["<%= klass.file_name %>"] = true
+    end
     xml.<%= klass.load_func %>(self, parent, "<%= klass.base_id %>")
 
     finder = lambda do | x | 
       int_id = Wx::xrcid(x)
-      begin
-        Wx::Window.find_window_by_id(int_id, self) || int_id
-      # Temporary hack to work around regression in 1.9.2; remove
-      # begin/rescue clause in later versions
-      rescue RuntimeError
-        int_id
-      end
+      Wx::Window.find_window_by_id(int_id, self) || int_id
     end
     <% klass.controls.each do | ctrl | %>
     @<%= ctrl.name.downcase %> = finder.call("<%= ctrl.name %>")<% if ctrl.sub_class %>
     @<%= ctrl.name.downcase %>.extend(<%= fq_name(ctrl.sub_class) %>)<% end %><% end %>
-    if self.class.method_defined? "on_init"
-      self.on_init()
-    end
   end
 end
 
