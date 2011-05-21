@@ -1,4 +1,4 @@
-// Copyright 2004-2008, wxRuby development team
+// Copyright 2004-2011, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -84,15 +84,20 @@ public:
 
   // When ruby's garbage collection runs, if the app is still active, it
   // cycles through all currently known SWIG objects and calls this
-  // function on each to preserve still active Wx::Windows.
+  // function on each to preserve still active Wx::Windows, and also
+  // pending Wx::Events which have been queued from the Ruby side (the
+  // only sort of events that will be in the tracking hash.
   static void markIterate(void* ptr, VALUE rb_obj)
   {
 	// Check if it's a valid object (sometimes SWIG doesn't return what we're
 	// expecting), a descendant of Wx::Window, and if it has not yet been
 	// deleted by WxWidgets; if so, mark it.
-	if ( TYPE(rb_obj) == T_DATA && rb_obj_is_kind_of(rb_obj, SwigClassWxWindow.klass) )
-	  {
-		rb_gc_mark(rb_obj);
+	if ( TYPE(rb_obj) == T_DATA ) 
+      {
+        if ( rb_obj_is_kind_of(rb_obj, SwigClassWxWindow.klass) )
+          rb_gc_mark(rb_obj);           
+        else if (rb_obj_is_kind_of(rb_obj, SwigClassWxEvent.klass) )
+          rb_gc_mark(rb_obj);           
 	  }
   }
 

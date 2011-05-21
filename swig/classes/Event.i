@@ -1,4 +1,4 @@
-// Copyright 2004-2007, wxRuby development team
+// Copyright 2004-2009, wxRuby development team
 // released under the MIT-like wxRuby2 license
 
 %include "../common.i"
@@ -6,7 +6,58 @@
 %module(directors="1") wxEvent
 GC_MANAGE_AS_EVENT(wxEvent);
 
-%extend wxEvent {
+// To allow instance variables to be attached to custom subclasses of
+// Wx::Event written in Ruby in a GC-safe, thread-safe way, wrap a
+// custom C++ subclass of wxEvent as Ruby's Wx::Event.
+// 
+// Note that this subclass only applies to Event objects created on the
+// Ruby side - for the large majority of normal event handling, objects
+// are created C++ side then given a shallow, transient wrapper for
+// their use in Ruby - see wxRuby_WrapWxEventInRuby in swig/wx.i.
+%rename(wxEvent) wxRubyEvent;
+
+%header %{
+#include <wx/event.h>
+%}
+
+// Custom subclass implementation. Provide a constructor, destructor and
+// clone functions to allow proper linking to a Ruby object.
+%{
+class wxRubyEvent : public wxEvent
+{
+  public:
+  wxRubyEvent(wxEventType commandType = wxEVT_NULL, 
+              int id = 0,
+              int prop_level = wxEVENT_PROPAGATE_NONE) : 
+    wxEvent(id, commandType) {  m_propagationLevel = prop_level; }
+
+  // When the C++ side event is destroyed, unlink from the Ruby object
+  // and remove that object from the tracking hash so it can be
+  // collected by GC.
+  virtual ~wxRubyEvent() {
+    wxRuby_RemoveTracking( (void*)this );
+  }
+
+  // Will be called when add_pending_event is used to queue an event
+  // (often when using Threads), because a clone is queued. So copy the
+  // Wx C++ event, create a shallow (dup) of the Ruby event object, and
+  // add to the tracking hash so that it is GC-protected
+  virtual wxEvent* Clone() const {
+    wxRubyEvent* wx_ev = new wxRubyEvent( GetEventType(),
+                                          GetId(),
+                                          m_propagationLevel );
+
+    VALUE r_obj = SWIG_RubyInstanceFor((void *)this);
+    VALUE r_obj_dup = rb_obj_clone(r_obj);
+
+    DATA_PTR(r_obj_dup) = wx_ev;
+    wxRuby_AddTracking( (void*)wx_ev, r_obj_dup );
+    return wx_ev;
+  }
+};
+%}
+
+%extend wxRubyEvent {
   // This class method provides a guaranteed-unique event id that can be
   // used for custom event types.
   static VALUE new_event_type()
@@ -15,6 +66,40 @@ GC_MANAGE_AS_EVENT(wxEvent);
 	return INT2NUM(event_type_id );
   }
 }
+
+%import "include/wxObject.h"
+
+// Definition of the class to be parsed by SWIG
+class wxRubyEvent : public wxEvent
+{
+public:
+  wxRubyEvent(wxEventType commandType = wxEVT_NULL, 
+              int id = 0,
+              int propagation_level = wxEVENT_PROPAGATE_NONE);
+  virtual wxEvent* Clone() const;
+  virtual ~wxRubyEvent();
+  wxObject* GetEventObject() ;
+  WXTYPE GetEventType() ;
+  int GetId() ;
+  bool GetSkipped() ;
+  long GetTimestamp() ;
+  void SetEventObject(wxObject*  object ) ;
+  void SetEventType(WXTYPE  typ ) ;
+  void SetId(int  id ) ;
+  void SetTimestamp(long  timeStamp ) ;
+  void Skip(bool skip = true) ;
+
+  bool IsCommandEvent() const ;
+  bool ShouldPropagate() const ;
+  int StopPropagation() ;
+  void ResumePropagation(int propagationLevel) ;
+};
+
+
+
+// The rest of the file just provides the large number of standard
+// EVT_xxx constants for identifying event types in core Wx.
+
 
 // These includes are all required so that the wx EVT_XXX constants 
 // are all loaded
@@ -59,6 +144,15 @@ GC_MANAGE_AS_EVENT(wxEvent);
 #endif
 
 %}
+
+enum Propagation_state
+{
+    // don't propagate it at all
+    wxEVENT_PROPAGATE_NONE = 0,
+
+    // propagate it until it is processed
+    wxEVENT_PROPAGATE_MAX = INT_MAX
+};
 
 %constant const int wxEVT_NULL;// 0)
 %constant const int wxEVT_COMMAND_BUTTON_CLICKED;// 1)
@@ -395,10 +489,3 @@ GC_MANAGE_AS_EVENT(wxEvent);
 %constant const int wxEVT_COMMAND_RICHTEXT_CONTENT_DELETED;
 %constant const int wxEVT_COMMAND_RICHTEXT_STYLE_CHANGED;
 %constant const int wxEVT_COMMAND_RICHTEXT_SELECTION_CHANGED;
-
-%import "include/wxObject.h"
-%include "include/wxEvent.h"
-
-
-
-
