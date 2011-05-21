@@ -36,19 +36,19 @@ class Outputter
 		new_string = ''
 		
 		if one_per_line
-			str.each(',') do | x |
-				new_string << x
+			str.split(',').each do | x |
+                new_string << "#{x},"
 				new_string << "\n" + " " * (start_len-2)        
 			end
 		else			
 			wanted_length = 72
 			current_line_length = start_len
-			str.each(',') do |x|
+			str.split(',').each do | x |
 				if (current_line_length + x.length) > wanted_length
 					new_string << "\n" + " " * (start_len-2)
 					current_line_length = start_len
 				end
-				new_string << x
+                new_string << "#{x},"
 				current_line_length += x.length      
 			end 
 		end
