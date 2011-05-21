@@ -250,24 +250,20 @@
 
 ##############################################################
 
-%typemap(in) wxArrayInt (wxArrayInt tmp){
- 
+%typemap(in) wxArrayInt, wxArrayInt& (wxArrayInt tmp) {
   if (($input == Qnil) || (TYPE($input) != T_ARRAY))
   {
     $1 = &tmp;
   }
   else
   {
-    
     for (int i = 0; i < RARRAY_LEN($input); i++)
     {
       int item = NUM2INT(rb_ary_entry($input,i));
       tmp.Add(item);
     }
-    
     $1 = &tmp;
   }
-
 }
 
 %typemap(out) wxArrayInt {
@@ -278,7 +274,15 @@
   }
 }
 
-%typemap(typecheck) wxArrayInt
+%typemap(out) wxArrayInt& {
+  $result = rb_ary_new();
+  for (size_t i = 0; i < $1->GetCount(); i++)
+  {
+    rb_ary_push($result,INT2NUM( $1->Item(i) ) );
+  }
+}
+
+%typemap(typecheck) wxArrayInt, wxArrayInt&
 {
    $1 = (TYPE($input) == T_ARRAY);
 }
