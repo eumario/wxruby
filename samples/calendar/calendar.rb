@@ -24,6 +24,8 @@ Calendar_DatePicker_AllowNone = 303
 Calendar_DatePicker_StartWithNone = 304
 
 class MyCalendar < CalendarCtrl
+  attr_reader :date
+
   def initialize(parent, display_frame, initial_date, calendar_flags)
     super( parent, 
            :date  => initial_date, 
@@ -38,6 +40,7 @@ class MyCalendar < CalendarCtrl
     evt_calendar_year self, :on_cal_year_change
     evt_calendar_sel_changed self, :on_calendar_change
     evt_calendar_weekday_clicked self, :on_calendar_weekday_click
+    evt_right_down :on_hit_test
   end
 
   def on_calendar(event)
@@ -61,8 +64,18 @@ class MyCalendar < CalendarCtrl
     wday = event.week_day
     log_status("Clicked on #{@weekday_names[wday]}")
   end
-  
-  attr_reader :date
+
+  def on_hit_test(event)
+    hit = hit_test(event.position)
+    case hit
+    when Time, DateTime
+      log_status("Hit-test: date #{hit}")
+    when Fixnum
+      log_status("Hit-test: weekday header #{hit}")
+    when NilClass
+      log_status("Hit-test: Nothing")      
+    end
+  end
 end
 
 class MyFrame < Frame

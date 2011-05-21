@@ -318,11 +318,13 @@ $1$).
 
 h3(#CalendarCtrl_hittest). CalendarCtrl#hit_test
 
- "CalendarHitTestResult":calendarhittestresult.html *hit_test*(%(arg-type)"Point":point.html% pos, 
-                                  %(arg-type)"DateTime":datetime.html% date = nil, 
-                                  %(arg-type)DateTime::WeekDay% wd = nil)
+ Object *hit_test*(%(arg-type)"Point":point.html% pos)
 
-Returns one of @CAL_HITTEST_XXX@ 
-"constants":calendarctrl.html and fills either _date_ or 
-_wd_ pointer with the corresponding value depending on the hit test code.
+Tests what is displayed at the position @pos@ within the
+CalendarCtrl. The class of the returned Object will vary depending on
+what is hit. If the point corresponds to a day within the Calendar, it
+will be a Ruby Time object. If the point corresponds to one of the
+weekday names within the header, a Integer will be returned with the day
+of the week (Sunday = 0). If neither a header label nor a specific date
+is hit, @nil@ will be returned.
 
