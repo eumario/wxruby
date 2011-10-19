@@ -64,7 +64,8 @@ scintilla_lib = File.join( $WXLIBDIR,
 if File.exists?(scintilla_lib)
   windows_libs << scintilla_lib 
 else
-  $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+  WxRubyFeatureInfo.exclude_class('StyledTextCtrl')
+  WxRubyFeatureInfo.exclude_class('StyledTextEvent')
 end
 
 # Test for presence of OpenGL library; link it in if
@@ -73,7 +74,8 @@ gl_lib = File.join( $WXLIBDIR, "wxmsw#{$WXVERSION}#{$POSTFIX}_gl.lib" )
 if File.exists?(gl_lib)
   windows_libs << gl_lib 
 else
-  $excluded_classes += %w|GLCanvas GLContext|
+  WxRubyFeatureInfo.exclude_class('GLCanvas')
+  WxRubyFeatureInfo.exclude_class('GLContext')
 end
 
 # Glue them all together into an argument passed to the linker

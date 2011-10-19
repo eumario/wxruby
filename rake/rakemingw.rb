@@ -79,7 +79,8 @@ scintilla_lib = File.join( $WXLIBDIR,
 if File.exists?(scintilla_lib)
   windows_libs << scintilla_lib 
 else
-  $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+  WxRubyFeatureInfo.exclude_class('StyledTextCtrl')
+  WxRubyFeatureInfo.exclude_class('StyledTextEvent')
 end
 
 # Test for presence of OpenGL library; link it in if present, skip that
@@ -90,7 +91,8 @@ if File.exists?(gl_lib)
   windows_libs << gl_lib 
   WINDOWS_SYS_LIBS << 'opengl32'
 else
-  $excluded_classes += %w|GLCanvas GLContext|
+  WxRubyFeatureInfo.exclude_class('GLCanvas')
+  WxRubyFeatureInfo.exclude_class('GLContext')
 end
 
 # If either of the above classes are in use, we need to add the contrib

@@ -95,14 +95,16 @@ if $dynamic_build
   if $macosx
     stc_lib = $wx_libs[/\S+wx_mac\S+_stc\S+/]
     if stc_lib.nil? or ( stc_lib !~ /^-l/ and not File.exists?(stc_lib) )
-      $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+      WxRubyFeatureInfo.exclude_class('StyledTextCtrl')
+      WxRubyFeatureInfo.exclude_class('StyledTextEvent')
     else
       libs_str << ',stc'
     end
   else
     stc_lib = $wx_libs[/\S+wx_gtk\S+_stc\S+/]
     if stc_lib.nil?
-      $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+      WxRubyFeatureInfo.exclude_class('StyledTextCtrl')
+      WxRubyFeatureInfo.exclude_class('StyledTextEvent')
     else
       libs_str << ',stc'
     end
@@ -110,7 +112,8 @@ if $dynamic_build
 else
   stc_lib = $wx_libs[/\S+libwx\S+_stc\S+/]
   if stc_lib.nil? or not File.exists?(stc_lib)
-    $excluded_classes += %w|StyledTextCtrl StyledTextEvent|
+    WxRubyFeatureInfo.exclude_class('StyledTextCtrl')
+    WxRubyFeatureInfo.exclude_class('StyledTextEvent')
   else
     libs_str << ',stc'
   end
@@ -122,14 +125,14 @@ if $dynamic_build
   if $macosx
     gl_lib = $wx_libs[/\S+wx_mac\S+_gl\S+/]
     if gl_lib.nil? or ( gl_lib !~ /^-l/ and not File.exists?(gl_lib) )
-      $excluded_classes << 'GLCanvas'
+      WxRubyFeatureInfo.exclude_class('GLCanvas')
     else
       libs_str << ',gl'
     end
   else
     gl_lib = $wx_libs[/\S+wx_gtk\S+_gl\S+/]
     if gl_lib.nil?
-      $excluded_classes << 'GLCanvas'
+      WxRubyFeatureInfo.exclude_class('GLCanvas')
     else
       libs_str << ',gl'
     end
@@ -137,7 +140,7 @@ if $dynamic_build
 else
   gl_lib = $wx_libs[/\S+libwx\S+_gl\S+/]
   if gl_lib.nil? or not File.exists?(gl_lib)
-    $excluded_classes << 'GLCanvas'
+    WxRubyFeatureInfo.exclude_class('GLCanvas')
   else
     libs_str << ',gl'
   end
@@ -147,7 +150,7 @@ end
 # 1) we have a dynamic build (esp Linux, non-monolithic)
 # 2) we have a non-monolithic static build (identified by linkdeps)
 # PRobably not 100% correct but deals with the common cases..
-if not $excluded_classes.include?('MediaCtrl') 
+if not WxRubyFeatureInfo.excluded_class?(WXWIDGETS_SETUP_H, 'MediaCtrl') 
   if $dynamic_build or
      wx_config('--linkdeps std') != wx_config('--linkdeps std,media') # 2)
     libs_str << ',media'

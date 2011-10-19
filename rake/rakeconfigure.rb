@@ -24,10 +24,6 @@ $static_build  = ENV['WXRUBY_STATIC'] ? true : false
 # case anyone is using it
 $unicode_build = ENV['WXRUBY_NO_UNICODE'] ? false : true
 
-# Exclude certian classes from being built, even if they are present
-# in the configuration of wxWidgets.
-$excluded_classes = ENV['WXRUBY_EXCLUDED'] ? ENV['WXRUBY_EXCLUDED'].split(",") : []
-
 # SECOND: get a series of settings from rbconfig; these may be overridden
 # in the platform-specific rakefiles below
 # Get ruby's info on how it was built
@@ -57,9 +53,80 @@ $cpp_out_flag =  "-o "
 $link_output_flag = "-o "
 OBJ_EXT = Config::CONFIG["OBJEXT"]
 
-# This is now set with the detection of WXRUBY_EXCLUDED
-# some classes are not implemented by WxWidgets on all platforms
-# $excluded_classes = []
+class WxRubyFeatureInfo
+  @explicit_excluded_classes = []
+  
+  # Testing the relevant wxWidgets setup.h file to see what
+  # features are supported. Note that the presence of OpenGL (for
+  # GLCanvas) and Scintilla (for StyledTextCtrl) is tested for in the
+  # platform-specific rakefiles.
+
+  # The wxWidgets setup.h file contains a series of definitions like
+  # #define wxUSE_FOO 1. The location of the file should be set
+  # by the platform-specific rakefile. Parse it into a ruby hash:
+  def self.features(wxwidgets_setup_h)
+    if !@features
+      @features = _retrieve_features(wxwidgets_setup_h)
+    end
+
+    @features
+  end
+
+  def self.excluded_class?(wxwidgets_setup_h, class_name)
+    excluded_classes(wxwidgets_setup_h).include?(class_name)
+  end
+  
+  def self.excluded_classes(wxwidgets_setup_h)
+    if !@excluded_classes
+      @excluded_classes = _calculate_excluded_classes(wxwidgets_setup_h)
+    end
+
+    @excluded_classes
+  end
+
+  def self.exclude_class(class_name)
+    @explicit_excluded_classes << class_name
+    @excluded_classes = nil
+  end
+  
+  def self._calculate_excluded_classes(wxwidgets_setup_h)
+    excluded_classes = []
+
+    # MediaCtrl is not always included or easily built, esp on Linux
+    unless features(wxwidgets_setup_h)['wxUSE_MEDIACTRL']
+      excluded_classes += %w|MediaCtrl MediaEvent|
+    end
+
+    # GraphicsContext is not enabled by default on some platforms
+    unless features(wxwidgets_setup_h)['wxUSE_GRAPHICS_CONTEXT']
+      excluded_classes += %w|GCDC GraphicsBrush GraphicsContext GraphicsFont
+                          GraphicsMatrix GraphicsObject GraphicsPath GraphicsPen|
+    end
+
+    if not excluded_classes.empty?
+      puts "The following wxWidgets features are not available and will be skipped:"
+      puts "  " + excluded_classes.sort.join("\n  ")  
+    end
+
+    excluded_classes + @explicit_excluded_classes
+  end
+  
+  def self._retrieve_features(wxwidgets_setup_h)
+    features = {}
+
+    File.read(wxwidgets_setup_h).scan(/^#define\s+(\w+)\s+([01])/) do | define |
+      features[$1] = $2.to_i.zero? ? false : true
+    end
+
+    features
+  end
+end
+
+# Exclude certian classes from being built, even if they are present
+# in the configuration of wxWidgets.
+if ENV['WXRUBY_EXCLUDED']
+  ENV['WXRUBY_EXCLUDED'].split(",").each { |classname| WxRubyFeatureInfo.exclude_class(classname) }
+end
 
 # THIRD: load the platform-specific rakefiles; these can extend or
 # override many of the previously set options. These variables are set
@@ -101,36 +168,6 @@ if $verbose_debug
   $verbose_flag = ' -DwxDEBUG=1 '
 else
   $verbose_flag = ''
-end
-
-# FIFTH: Testing the relevant wxWidgets setup.h file to see what
-# features are supported. Note that the presence of OpenGL (for
-# GLCanvas) and Scintilla (for StyledTextCtrl) is tested for in the
-# platform-specific rakefiles.
-
-# The wxWidgets setup.h file contains a series of definitions like
-# #define wxUSE_FOO 1. The location of the file should be set
-# by the platform-specific rakefile. Parse it into a ruby hash:
-WX_FEATURES = {}
-
-File.read(WXWIDGETS_SETUP_H).scan(/^#define\s+(\w+)\s+([01])/) do | define |
-  WX_FEATURES[$1] = $2.to_i.zero? ? false : true
-end
-
-# MediaCtrl is not always included or easily built, esp on Linux
-unless WX_FEATURES['wxUSE_MEDIACTRL']
-  $excluded_classes += %w|MediaCtrl MediaEvent|
-end
-
-# GraphicsContext is not enabled by default on some platforms
-unless WX_FEATURES['wxUSE_GRAPHICS_CONTEXT']
-  $excluded_classes += %w|GCDC GraphicsBrush GraphicsContext GraphicsFont
-                          GraphicsMatrix GraphicsObject GraphicsPath GraphicsPen|
-end
-
-if not $excluded_classes.empty?
-  puts "The following wxWidgets features are not available and will be skipped:"
-  puts "  " + $excluded_classes.sort.join("\n  ")  
 end
 
 # SIXTH: Putting it all together

@@ -53,7 +53,7 @@ end
 
 # The plain names of all normal Wx classes to be built
 def all_build_classes
-  ALL_CLASSES - $excluded_classes
+  ALL_CLASSES - WxRubyFeatureInfo.excluded_classes(WXWIDGETS_SETUP_H)
 end
 
 # The plain module names of every SWIG module (in an .i file) to be built

@@ -14,7 +14,7 @@ $extra_cppflags = '-Wno-unused-function '
 $extra_ldflags = '-shared'
 
 # This class is not available on WXGTK
-$excluded_classes << 'PrinterDC'
+WxRubyFeatureInfo.exclude_class('PrinterDC')
 
 # Extra libraries that are required on Linux
 $extra_libs = "-Wl,-Bdynamic -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 " + 
